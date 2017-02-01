@@ -35,7 +35,7 @@
 
         </div>
 
-        <button class="btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
+        <button class="btn btn-icn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
              tooltip-placement="top" uib-tooltip="Remove" tabindex="22">
           <i class="icn-sm icn-remove-token-light"></i>
         </button>
@@ -82,12 +82,12 @@
 
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
-          <button cns-if class="btn btn-primary has-tooltip pull-right"
+          <button cns-if class="btn btn-icn btn-primary has-tooltip pull-right"
                tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()" tabindex="{{ 22 + $index * 3 }}">
             <i class="icn-sm icn-plus"></i>
           </button>
 
-          <button cns-else class="btn btn-primary has-tooltip pull-right" tabindex="{{ 23 + $index * 3 }}"
+          <button cns-else class="btn btn-icn btn-primary has-tooltip pull-right" tabindex="{{ 23 + $index * 3 }}"
                tooltip-placement="top" title="" uib-tooltip="Remove" ng-click="removePhoneNumber($index)">
             <i class="icn-sm icn-remove-token-light"></i>
           </button>

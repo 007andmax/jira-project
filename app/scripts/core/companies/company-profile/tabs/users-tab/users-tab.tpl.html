@@ -163,18 +163,18 @@
         <div class="col-5">
           <div class="list-actions text-right">
 
-            <div class="btn btn-default  has-tooltip" create-new-entity="user" item="user"
+            <div class="btn  btn-icn btn-default  has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
                  tooltip-placement="top" uib-tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
             </div>
 
-            <div class="btn btn-default btn-user-mail  has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
+            <div class="btn btn-icn btn-default btn-user-mail  has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-default  has-tooltip" ng-click="archiveUser()"
+            <div class="btn btn-icn btn-default  has-tooltip" ng-click="archiveUser()"
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User">

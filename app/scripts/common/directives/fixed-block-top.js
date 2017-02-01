@@ -26,7 +26,8 @@
         }
 
         function onScroll() {
-          if (element.css('display') !== 'none') {
+          var etsSlider = element.closest('[ets-slider]');
+          if (element.css('display') !== 'none' && (!etsSlider.length || etsSlider.css('display') !== 'none')) {
             var elementScreenTop = element[0].getBoundingClientRect().top - (scope.offsetTop || 78), //78 - header height
               elementCssTop = parseInt(element.css('top')),
               top = 0;
@@ -38,12 +39,10 @@
             //todo: allow to adjust styles
             if (top > 0) {
               element.css({
-                'background-color': scope.backgroundColor || 'rgba(255, 255, 255, 1)',
                 'z-index': 999
               });
             } else {
               element.css({
-                'background-color': scope.backgroundColor || 'rgba(255, 255, 255, 1)',
                 'z-index': 'initial'
               });
             }

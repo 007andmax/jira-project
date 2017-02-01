@@ -42,7 +42,7 @@
                                                  ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i></span>
 
               </div>
-              <div class="head-point" style="padding: 0;">
+              <div class="head-point" style="padding: 3px;">
                 <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
                      ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
                      qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"

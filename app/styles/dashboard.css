@@ -1,33 +1,33 @@
 .bg-yellow {
-  background-color: #ffb55c;
+  background-color: #ffb937;
 }
 
 .font-yellow {
-  color: #ffb55c;
+  color: #ffb937;
 }
 
 .bg-green {
-  background-color: #00bf8e;
+  background-color: #2bc7c6;
 }
 
 .font-green {
-  color: #00bf8e;
+  color: #2bc7c6;
 }
 
 .bg-light-green {
-  background-color: #86db5e;
+  background-color: #90c56b;
 }
 
 .font-light-green {
-  color: #86db5e;
+  color: #90c56b;
 }
 
 .bg-red {
-  background-color: #ff7877;
+  background-color: #d84a3c;
 }
 
 .font-red {
-  color: #ff7877;
+  color: #d84a3c;
 }
 
 .no-data-message {
@@ -38,7 +38,7 @@
   max-height: 182px;
   font-size: 18px;
   padding: 0 10px;
-  color: #27c1e3;
+  color: #16a4fa;
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
@@ -59,52 +59,52 @@
 
 .responsive-time {
   display: block;
-  color: #00bf8e;
+  color: #2bc7c6;
 }
 
 .outliers {
   display: block;
-  color: #ff7877;
+  color: #d84a3c;
 }
 
 .bg-deep-blue {
-  background-color: #00a4b5;
+  background-color: #0d79ba;
 }
 
 .font-deep-blue {
-  color: #00a4b5;
+  color: #0d79ba;
 }
 
 .bg-blue-steel {
-  background-color: #759df5;
+  background-color: #7c77cb;
 }
 
 .font-blue-steel {
-  color: #759df5;
+  color: #7c77cb;
 }
 
 .bg-purple {
-  background-color: #8849ae;
+  background-color: #7c77cb;
 }
 
 .font-purple {
-  color: #8849ae;
+  color: #7c77cb;
 }
 
 .bg-light-purple {
-  background-color: #a677b1;
+  background-color: #7c77cb;
 }
 
 .font-light-purple {
-  color: #a677b1;
+  color: #7c77cb;
 }
 
 .bg-light-blue {
-  background-color: #27c1e3;
+  background-color: #7c77cb;
 }
 
 .font-light-blue {
-  color: #27c1e3;
+  color: #7c77cb;
 }
 
 .tickets-dashboard .container-fluid,
@@ -206,6 +206,7 @@ header .calendar-top input {
 }
 
 .dashboard-main .stats {
+  background-color: #fff;
   height: 450px;
   margin-bottom: 30px;
   position: relative;

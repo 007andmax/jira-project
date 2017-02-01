@@ -31,21 +31,21 @@
           <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
                  qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
                  name="serviceData" ng-required="true">
-          <div class="btn btn-primary">
+          <div class="btn-icn btn btn-primary">
             <img src="images/input-icons/calendar.svg" width="100%" height="100%" alt="">
           </div>
         </div>
       </div>
       <div style="width: 100px">
         <div class="col-5" ng-if="ticketUpdate.services.length > 1" style="float: left;">
-              <span class="btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
+              <span class="btn-icn btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
                     ng-click="removeService()">
                 <i class="icn-sm icn-remove-token-light"></i>
               </span>
         </div>
 
         <div style="float: left;" ng-if="$last">
-          <div class="btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Service" tooltip-placement="top"
+          <div class="btn-icn btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Service" tooltip-placement="top"
                ng-click="addService()">
             <i class="icn-sm icn-plus"></i>
           </div>

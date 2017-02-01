@@ -7,7 +7,7 @@
 
     <div class="dropdown pull-right" ng-controller="quicktech.core.taxRates.taxMovingCtrl">
 
-      <div class="btn btn-primary has-tooltip" data-toggle="dropdown" ng-click="openDropdown()"
+      <div class="btn btn-icn btn-primary has-tooltip" data-toggle="dropdown" ng-click="openDropdown()"
            aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
            uib-tooltip="Move Tax Rate(s) to..."
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
@@ -55,7 +55,7 @@
     <div ng-include="'/html/scripts/core/tax-rates/tax-rates-list.tpl.html'"></div>
 
     <div class="add-tax-rate-btn-wrapper">
-      <div class="btn btn-primary has-tooltip"
+      <div class="btn btn-icn btn-primary has-tooltip"
            ng-click="showEditTaxForm('create_new')"
            custom-disabled="{{ showCreateTax }}"
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Tax Rate">

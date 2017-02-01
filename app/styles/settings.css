@@ -35,10 +35,10 @@
 }
 
 .custom-phone-type.no-label {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 .create-user-container .custom-phone-type.no-label .pull-left.dropdown{
-  width: 78%;
+  width: 70%;
 }
 
 @-moz-document url-prefix() {
@@ -864,6 +864,7 @@ input.default-invoice-terms {
 }
 
 .settings-wrapper__trow--td {
+  background-color: #fff;
   padding: 10px;
   padding-bottom: 0;
   text-align: center;
@@ -873,6 +874,9 @@ input.default-invoice-terms {
   height: 162px;
   border: 1px solid;
   border-color: #eee;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, 0);
   transition: all .3s;
 }

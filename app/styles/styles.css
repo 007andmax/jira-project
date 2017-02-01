@@ -803,7 +803,7 @@ hr {
 .services-content {
   float: left;
   width: 100%;
-  padding: 31px 10px 30px;
+  padding: 31px 0 30px;
 }
 .devices-content,
 .receipt-archive-content {
@@ -3653,70 +3653,7 @@ _:-ms-fullscreen,
 :root input {
   line-height: 0;
 }
-/*.btn {*/
-  /*display: inline-block;*/
-  /*margin-bottom: 0;*/
-  /*font-weight: normal;*/
-  /*text-align: center;*/
-  /*vertical-align: middle;*/
-  /*touch-action: manipulation;*/
-  /*cursor: pointer;*/
-  /*height: 38px;*/
-  /*min-width: 38px;*/
-  /*position: relative;*/
-  /*background-image: none;*/
-  /*border: 2px solid transparent;*/
-  /*white-space: nowrap;*/
-  /*outline: none;*/
-  /*padding: 0 7px;*/
-  /*font-size: 14px;*/
-  /*line-height: 20px;*/
-  /*border-radius: 2px;*/
-  /*-webkit-user-select: none;*/
-  /*-moz-user-select: none;*/
-  /*-ms-user-select: none;*/
-  /*user-select: none;*/
-  /*-webkit-transition: all 0.3s ease-out;*/
-  /*-moz-transition: all 0.3s ease-out;*/
-  /*-o-transition: all 0.3s ease-out;*/
-  /*-ms-ransition: all 0.3s ease-out;*/
-  /*transition: all 0.3s ease-out;*/
-/*}*/
-/*.btn:hover,*/
-/*.btn:focus,*/
-/*.btn.focus,*/
-/*.btn:active,*/
-/*.btn.active {*/
-  /*color: #4c5c6f;*/
-  /*text-decoration: none;*/
-  /*outline-color: transparent;*/
-  /*outline-style: none;*/
-/*}*/
 
-
-
-/*.btn.disabled,*/
-/*.btn[disabled],*/
-/*fieldset[disabled] .btn {*/
-  /*-webkit-box-shadow: none;*/
-  /*box-shadow: none;*/
-/*}*/
-/*a.btn.disabled,*/
-/*fieldset[disabled] a.btn {*/
-  /*pointer-events: none;*/
-  /*transition: none;*/
-/*}*/
-.btn > i {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-.btn > i.icn-remove-token {
-  margin-left: 10px;
-}
 .btn.connected {
   background-color: #e7ecf2;
 }
@@ -9140,6 +9077,19 @@ button.close {
   top: 0;
   right: 0;
 }
+
+.payment-receive-fixed{
+  background-color: #fff;
+}
+
+
+
+.products-content .fixed-block-top,
+.company-profile-content .fixed-block-top,
+.services-content .fixed-block-top{
+  background-color: #fff;
+}
+
 .payment-receive-fixed .btn {
   margin: 16px 30px 0 0;
   line-height: 34px;

@@ -250,7 +250,7 @@
 
     <div class="pull-right for-network-tab" tooltip-placement="top" tooltip-append-to-body="true"
          uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
-      <div class="btn btn-primary has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
+      <div class="btn-icn btn btn-primary has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
            custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}"
            data-toggle="dropdown" aria-expanded="false">
         <i class="icn-sm icn-scan-network"></i>
@@ -259,7 +259,7 @@
 
     <div class="pull-right for-network-tab hide" uib-dropdown is-open="isDropdownOpen">
 
-      <div class="btn btn-primary has-tooltip" style="width: 94px;margin-right: 10px;" uib-dropdown-toggle
+      <div class="btn-icn btn btn-primary has-tooltip" style="width: 94px;margin-right: 10px;" uib-dropdown-toggle
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="modify logon info">
         <i class="icn-sm icn-modify-logon"></i>
       </div>

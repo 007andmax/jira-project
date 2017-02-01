@@ -87,19 +87,8 @@
    background-color: transparent;
    content: '';
  }
-/*.ticket:hover:before {*/
-  /*left: 0;*/
-  /*background-color: #e7ecf2;*/
-/*}*/
-/*.ticket:hover:after {*/
-  /*right: 0;*/
-  /*background-color: #e7ecf2;*/
-/*}*/
-/*Ticket Hover - End*/
-
-/*Ticket Hover Action Ellipse - Start*/
 .ticket .ticket-meta .ticket-list-header p.ellipsis {
-  width: calc(100% - 90px);
+  width: calc(100% - 80px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -135,33 +124,6 @@
   white-space: nowrap;
 }
 
-
-/*.ticket:hover .ticket-meta .ticket-title p.ellipsis {*/
-  /*width: calc(100% - 166px);*/
-/*}*/
-
-/*.ticket.no-action:hover .ticket-meta .ticket-title p.ellipsis {*/
-  /*width: calc(100% - 20px);;*/
-/*}*/
-
-/*.ticket.one-action:hover .ticket-meta .ticket-title p.ellipsis{*/
-  /*width: calc(100% - 50px);*/
-/*}*/
-
-/*.ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{*/
-  /*width: calc(100% - 100px);*/
-/*}*/
-
-/*.ticket.three-actions:hover .ticket-meta .ticket-title p.ellipsis{*/
-  /*width: calc(100% - 120px);*/
-/*}*/
-
-/*.ticket.four-actions:hover .ticket-meta .ticket-title p.ellipsis {*/
-  /*width: calc(100% - 136px);*/
-/*}*/
-
-/*Ticket Action Hover*/
-
 .ticket:hover .ticket-meta .ticket-title .ticket-actions {
   display: block;
 }
@@ -171,7 +133,6 @@
   cursor: default;
 }
 
-/*Ticket Hover Action Ellipse - End*/
 
 
 .ticket .ticket-checkbox{

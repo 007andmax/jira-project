@@ -77,9 +77,7 @@
 }
 
 .qt-list > li + li {
-  /*height: 71px;*/
-
-  border-top: 1px solid #f1f5fa;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .qt-list > li:before, .qt-list > li:after {
@@ -104,6 +102,7 @@
 .qt-list li.list-heading {
   height: auto;
   padding: 18px 15px;
+  background-color: #fff;
 
   cursor: auto !important;
 }
@@ -1360,9 +1359,6 @@ Devices tab
   padding: 25px 0;
 }
 
-.qt-invoices > li:nth-child(even) {
-  background-color: #e9f5fb;
-}
 
 .qt-invoices > li + li {
   height: auto;
@@ -1866,6 +1862,10 @@ Devices tab
   text-align: left;
 
   color: #94a4b8;
+}
+
+.qt-list.qt-receivable{
+  padding-top: 20px;
 }
 
 @media only screen and (min-width: 2000px) {
@@ -2694,14 +2694,6 @@ Devices tab
   cursor: pointer;
 }
 
-.services-content .qt-default-services > li:nth-child(even) {
-  background-color: #e9f5fb;
-}
-
-.qt-receipt-number > li:nth-child(even) {
-  background-color: #e9f5fb;
-}
-
 .qt-default-services > li:before {
   left: -56px;
 }
@@ -2999,17 +2991,17 @@ Devices tab
   }
 }
 
-.qt-users li:nth-child(even) {
-  background-color: #e9f5fb;
-}
+/*.qt-users li:nth-child(odd) {*/
+  /*background-color: #fff;*/
+/*}*/
 
-.list-company-row:nth-child(even) {
-  background-color: #e9f5fb;
-}
+/*.list-company-row:nth-child(odd) {*/
+  /*background-color: #fff;*/
+/*}*/
 
-.qt-product-list > li:nth-child(even) {
-  background-color: #e9f5fb;
-}
+/*.qt-product-list > li:nth-child(odd) {*/
+  /*background-color: #fff;*/
+/*}*/
 
 /**Devices**/
 .qt-devices {

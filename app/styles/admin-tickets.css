@@ -76,7 +76,10 @@
 
 .main-container {
   padding-top: 78px;
+  background-color: #edf2f6;
+  min-height: 100vh;
 }
+
 @-moz-document url-prefix() {
   .main-container > .row {
     min-width: 1000px;
