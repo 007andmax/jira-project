@@ -114,11 +114,11 @@
           <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
             <div class="pull-left ticket-edit-actions"
                  ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
-              <div class="btn btn-default pull-left" ng-if="editingTicket" ng-disabled="disabledSaveButton"
+              <div class="btn btn-icn btn-default pull-left" ng-if="editingTicket" ng-disabled="disabledSaveButton"
                    uib-tooltip="Save" tooltip-placement="top" ng-click="saveEditedTicket(editTicketForm)">
                 <i class="icn-sm icn-label-save"></i>
               </div>
-              <div class="btn btn-default pull-left"
+              <div class="btn btn-icn btn-default pull-left"
                    uib-tooltip="{{ editingTicket ? 'Cancel' : 'Edit subject & note' }}"
                    tooltip-placement="top" ng-click="setEditingTicket(!editingTicket)">
                 <i class="icn-sm {{ editingTicket ? 'icn-label-cancel' : 'icn-edit' }}"></i>
@@ -126,13 +126,13 @@
             </div>
             <div class="pull-left" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
 
-              <div class="btn btn-default pull-left has-tooltip"
+              <div class="btn btn-icn btn-default pull-left has-tooltip"
                    ng-if="(ticketAgent.type !== 'workstation') && ticketAgent.online"
                    ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
 
-              <div class="btn btn-default pull-left has-tooltip"
+              <div class="btn btn-icn btn-default pull-left has-tooltip"
                    ng-if="(ticketAgent.type === 'workstation') && ticketAgent.online"
                    tooltip-placement="top" uib-tooltip="Remote Access"
                    aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
@@ -152,7 +152,7 @@
               </ul>
             </div>
             <div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">
-              <div class="btn btn-default pull-left has-tooltip"
+              <div class="btn  btn-icn btn-default pull-left has-tooltip"
                    aria-haspopup="true" aria-expanded="false"
                    ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
                    uib-dropdown-toggle uib-tooltip="Settings" tooltip-placement="top">
@@ -371,7 +371,7 @@
         <div class="attachment-meta clearfix">
           <span class="attachments-count pull-left">{{ ticketDetails.attachments.length }} Attachments</span>
           <div class="download-all pull-right">
-            <div class="btn btn-default pull-right has-tooltip"
+            <div class="btn btn-icn btn-default pull-right has-tooltip"
                  uib-tooltip="download all attachments" tooltip-append-to-body="true"
                  tooltip-placement="top" ng-click="downloadAllAttachments()">
               <i class="icn-sm icn-attachments-download"></i>
@@ -430,7 +430,7 @@
               </div>
             </li>
             <li>
-              <div class="btn pull-left btn-primary has-tooltip"
+              <div class="btn btn-icn pull-left btn-primary has-tooltip"
                    uib-tooltip="Hide All" data-placement="top" ng-click="toggleFullSharedUsers()">
                 <i class="icn-sm icn-remove-token-light"></i>
               </div>
@@ -586,7 +586,7 @@
                         <img alt="..." class="avatar-26 img-circle"
                              ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                       </div>
-                      <div class="btn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
+                      <div class="btn btn-icn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
                            uib-tooltip="Show Fewer" data-placement="top">
                         <i class="icn-sm icn-remove-token-light"></i>
                       </div>

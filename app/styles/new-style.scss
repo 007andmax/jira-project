@@ -50,7 +50,7 @@ $green-active: #5f8643;
   touch-action: manipulation;
   cursor: pointer;
   height: 36px;
-  min-width: 36px;
+  min-width: 60px;
   position: relative;
   border: 2px solid transparent;
   white-space: nowrap;
@@ -68,7 +68,9 @@ $green-active: #5f8643;
   -o-transition: all 0.3s ease-out;
   -ms-ransition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-  min-width: 60px;
+  &-icn{
+    min-width: 0;
+  }
   &:focus,
   &:hover,
   &:active,
@@ -97,7 +99,6 @@ $green-active: #5f8643;
       background-color: $primary-active;
       border-color: $primary-active;
     }
-
   }
   &-success{
     background-color: $green;
@@ -109,6 +110,18 @@ $green-active: #5f8643;
     &.active{
       background-color: $green-active;
       border-color: $green-active;
+    }
+  }
+  &-default{
+    background-color: transparent;
+    border-color: transparent;
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active{
+      background-color: transparent;
+      border-color: transparent;
     }
   }
 }

@@ -34,7 +34,7 @@
 
           <div uib-dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
 
-            <div class="btn btn-default has-tooltip"
+            <div class="btn-icn btn btn-default has-tooltip"
                  tooltip-placement="bottom" uib-tooltip="assign ticket to..."
                  aria-haspopup="true" uib-dropdown-toggle ng-click="isShowAssignUser = true">
               <i class="icn-sm icn-user"></i>
@@ -50,7 +50,7 @@
           <div uib-dropdown
                ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
 
-            <div class="btn btn-default has-tooltip"
+            <div class="btn-icn btn btn-default has-tooltip"
                  tooltip-placement="bottom" uib-tooltip="Change Priority to..."
                  aria-haspopup="true" uib-dropdown-toggle>
               <i class="icn-sm icn-ticket-flag"></i>
@@ -158,7 +158,7 @@
           </div>
 
           <div ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketsSharedState.selectedTickets)"
-               class="btn btn-default has-tooltip"
+               class="btn-icn btn btn-default has-tooltip"
                tooltip-placement="bottom" uib-tooltip="Delete Forever"
                ng-click="deleteForever()">
             <i class="icn-sm icn-delete"></i>
@@ -166,7 +166,7 @@
         </div>
         <div ng-if="isShowDraftsBulkAction()" class="topNavbar-filter"
              ng-controller="quicktech.core.header.draftsBulkCtrl">
-          <div class="btn btn-default has-tooltip" tooltip-placement="bottom" uib-tooltip="delete forever"
+          <div class="btn-icn btn btn-default has-tooltip" tooltip-placement="bottom" uib-tooltip="delete forever"
                ng-click="deleteForever()">
             <i class="icn-sm icn-delete"></i>
           </div>
@@ -179,7 +179,7 @@
     </div>
     <div class="">
       <div class="topNavbar-create">
-        <div class="btn btn-success has-tooltip" ng-if="applicationLoaded" create-new-entity>
+        <div class="btn-icn btn btn-success has-tooltip" ng-if="applicationLoaded" create-new-entity>
           <div class="create-new-wrap">
             <span class="create-new-label">Create New</span>
             <i class="icn-sm icn-plus"></i>

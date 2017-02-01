@@ -1,7 +1,7 @@
 .icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator{
   background-image: url('../images/sprites-s76c759f188.png');
   background-repeat: no-repeat;
-  display: block;
+  display: inline-block;
   margin: auto;
 }
 

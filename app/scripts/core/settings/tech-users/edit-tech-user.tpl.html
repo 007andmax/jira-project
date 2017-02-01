@@ -98,13 +98,13 @@
 
         <div class="form-row clearfix" style="padding: 0 15px;">
 
-          <div class="btn btn-lg btn-success pull-right"
+          <div class="btn btn-success pull-right"
                custom-disabled="{{ !editUserForm.$valid || editUserForm.$pristine || savingInProcess }}"
                ng-click="save(editUserForm)">
             {{ editUser.id ? 'Save' : 'Create' }}
           </div>
 
-          <div class="btn btn-lg btn-primary   pull-right" style="margin-right: 10px"
+          <div class="btn btn-primary pull-right" style="margin-right: 10px"
                ng-click="openEditUser()">
             Cancel
           </div>
