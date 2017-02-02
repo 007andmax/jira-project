@@ -17,6 +17,33 @@ body {
   min-width: 768px;
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(54, 70, 86, .8);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(54, 70, 86, .4);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+
 article,
 aside,
 details,
