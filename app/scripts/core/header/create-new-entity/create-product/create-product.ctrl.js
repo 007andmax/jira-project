@@ -41,7 +41,7 @@
 
       } else if (savedState.type === 'category' && savedState.item) {
         $scope.editCategory = angular.copy(savedState.item);
-
+        $scope.editProduct = {};
       } else {
         $scope.editProduct = {};
         $scope.editCategory = {};
@@ -134,7 +134,7 @@
       };
 
       $scope.validateCategory = function (category, form) {
-        form.editProductCategory.$setValidity('nonexistentCategory', !!category && typeof category !== 'string');
+        form.editProductCategory.$setValidity('nonexistentCategory', !category || typeof category !== 'string');
       };
 
       $scope.getValidationMessage = function (form) {

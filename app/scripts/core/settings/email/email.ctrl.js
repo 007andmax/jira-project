@@ -46,7 +46,10 @@
           label: 'Outlook'
         }];
 
-        $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
+        $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix', function (host) {
+          $scope.currentHost = host;
+        });
+
         $scope.domainPattern = /^(((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?))|((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/;
         $scope.smtp = {};
         $scope.smtpHintMessage = 'This section allows you to choose server for sending email notifications.\n' +
