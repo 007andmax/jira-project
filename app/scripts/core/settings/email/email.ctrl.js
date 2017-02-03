@@ -46,6 +46,9 @@
           label: 'Outlook'
         }];
 
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
+        $scope.saveInboxEnabled = CompaniesService.saveInboxEnabled;
+
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix', function (host) {
           $scope.currentHost = host;
         });
@@ -151,16 +154,6 @@
           if (formField.$valid) {
             CompaniesService.saveEmailAlias(emailAlias);
           }
-        };
-
-        $scope.saveInboxEnabled = function (isEnabled) {
-          if (inboxEnabledPromise) {
-            $timeout.cancel(inboxEnabledPromise);
-          }
-
-          inboxEnabledPromise = $timeout(function () {
-            CompaniesService.saveInboxEnabled(isEnabled);
-          })
         };
 
         function setDomain(value) {
