@@ -13,8 +13,11 @@
         <input style="text-align: center; user-select: all;" class="form-control" value="{{ supportMailBox + '@' + currentHost }}" type="text" readonly/>
       </div>
       <label style="margin: 10px;" class="control checkbox pull-left">
-        <input type="checkbox" ng-model="currentCompany.inboxEnabled" ng-change="saveInboxEnabled(currentCompany.inboxEnabled)">
-        <span class="control-indicator"></span> only create tickets for specified domains in client lists.
+        <input type="checkbox" ng-model="currentCompany.inboxEnabled"
+               ng-change="saveInboxEnabled(currentCompany.inboxEnabled)">
+        <span class="control-indicator"></span>
+        {{ currentCompany.inboxEnabled ? "inbox on: create tickets for all incoming emails."
+        : "inbox off: create tickets only for specified domains in client lists." }}
       </label>
     </div>
 
