@@ -207,24 +207,17 @@
           Vendors
         </div>
         <div class="filter-block">
-          <div class="center-category__category filter" uib-dropdown>
+          <div class="center-category__category filter">
             <div>
               <p>By Industry</p>
-              <div style="position: relative;">
-                <input type="text" class="form-control has-dropdown readonly-normal"
-                       value="{{ companiesSharedState.filter.industry || '' }}" uib-dropdown-toggle readonly>
-                <i class="icn-sm icn-caret-gray" ng-show="!companiesSharedState.filter.industry"></i>
-                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
-                   ng-show="companiesSharedState.filter.industry" ng-click="filterCompanies('byIndustry')"
-                   uib-tooltip="clear" tooltip-placement="top"></i>
-              </div>
+              <input type="text" class="form-control has-dropdown"
+                     autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"
+                     uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="companiesSharedState.filter.industry"></div>
             </div>
-            <ul class="dropdown-menu">
-              <li ng-repeat="industry in industries | orderBy: 'toString()'"
-                  ng-click="filterCompanies('byIndustry', industry)">
-                {{ industry }}
-              </li>
-            </ul>
           </div>
           <div class="center-category__category filter">
             <div>
@@ -269,45 +262,32 @@
           Leads
         </div>
         <div class="filter-block">
-          <div class="center-category__category filter" uib-dropdown>
+          <div class="center-category__category filter">
             <div>
               <p>By Industry</p>
-              <div style="position: relative;">
-                <input type="text" class="form-control has-dropdown readonly-normal"
-                       value="{{ usersSharedState.filter.industry || '' }}" uib-dropdown-toggle readonly>
-                <i class="icn-sm icn-caret-gray" ng-show="!usersSharedState.filter.industry"></i>
-                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
-                   ng-show="usersSharedState.filter.industry" ng-click="filterUsers('byIndustry')"
-                   uib-tooltip="clear" tooltip-placement="top"></i>
-              </div>
+              <input type="text" class="form-control has-dropdown"
+                     autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"
+                     uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="usersSharedState.filter.industry"></div>
             </div>
-            <ul class="dropdown-menu">
-              <li ng-repeat="industry in industries | orderBy: 'toString()'"
-                  ng-click="filterUsers('byIndustry', industry)">
-                {{ industry }}
-              </li>
-            </ul>
+
           </div>
-          <div class="center-category__category filter" uib-dropdown>
+          <div class="center-category__category filter">
             <div>
               <p>By Company</p>
-              <div style="position: relative;">
-                <input type="text" class="form-control has-dropdown readonly-normal"
-                       value="{{ getCompanyName(usersSharedState.filter.companyId) || '' }}" uib-dropdown-toggle
-                       readonly>
-                <i class="icn-sm icn-caret-gray" ng-show="!usersSharedState.filter.companyId"></i>
-                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
-                   ng-show="usersSharedState.filter.companyId" ng-click="filterUsers('byCompany')"
-                   uib-tooltip="clear" tooltip-placement="top"></i>
-              </div>
+
+              <input type="text" class="form-control has-dropdown"
+                     autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
+                     typeahead-input-formatter="getCompanyName($model)"
+                     uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="usersSharedState.filter.companyId"></div>
             </div>
-            <ul class="dropdown-menu">
-              <li
-                ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id"
-                ng-click="filterUsers('byCompany', company.id)">
-                {{ company.name }}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -376,63 +356,46 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div style="padding-left: 20px; padding-right: 20px;">
-          <div class="center-category__category filter" uib-dropdown>
+          <div class="center-category__category filter">
             <div>
               <p>By Company</p>
-              <div style="position: relative;">
-                <input type="text" class="form-control has-dropdown readonly-normal"
-                       value="{{ getCompanyName(passwordSharedState.filter.companyId) || '' }}" uib-dropdown-toggle
-                       readonly>
-                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.companyId"></i>
-                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
-                   ng-show="passwordSharedState.filter.companyId" ng-click="filterPasswords('byCompany')"
-                   uib-tooltip="clear" tooltip-placement="top"></i>
-              </div>
+              <input type="text" class="form-control has-dropdown"
+                     autocomplete="off" ng-model="passwordSharedState.filter.companyId" typeahead-editable="false"
+                     typeahead-input-formatter="getCompanyName($model)"
+                     uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="passwordSharedState.filter.companyId"></div>
             </div>
-            <ul class="dropdown-menu">
-              <li ng-click="filterPasswords('byCompany', company.id)"
-                ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id">
-                {{ company.name }}
-              </li>
-            </ul>
           </div>
-          <div class="center-category__category filter" uib-dropdown>
+          <div class="center-category__category filter">
             <div>
               <p>By Device</p>
-              <div style="position: relative;">
-                <input type="text" class="form-control has-dropdown readonly-normal" uib-dropdown-toggle readonly
-                       value="{{ getDeviceNameByAgentId(passwordSharedState.filter.agentId) || '' }}">
-                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.agentId"></i>
-                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
-                   ng-show="passwordSharedState.filter.agentId" ng-click="filterPasswords('byDevice')"
-                   uib-tooltip="clear" tooltip-placement="top"></i>
-              </div>
+              <input type="text" class="form-control has-dropdown"
+                     autocomplete="off" ng-model="passwordSharedState.filter.agentId" typeahead-editable="false"
+                     typeahead-input-formatter="getDeviceNameByAgentId($model)"
+                     uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="passwordSharedState.filter.agentId"></div>
+
             </div>
-            <ul class="dropdown-menu">
-              <li ng-repeat="device in devices | filter: {companyId: passwordSharedState.filter.companyId} | orderBy: 'hostName'"
-                  ng-click="filterPasswords('byDevice', device.agentId)">
-                {{ device.hostName || device.ip }}
-              </li>
-            </ul>
           </div>
-          <div class="center-category__category filter" uib-dropdown>
+          <div class="center-category__category filter">
             <div>
               <p>By Type</p>
-              <div style="position: relative;">
-                <input type="text" class="form-control has-dropdown readonly-normal" uib-dropdown-toggle readonly
-                       value="{{ userReadable(passwordSharedState.filter.template) }}">
-                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.template"></i>
-                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
-                   ng-show="passwordSharedState.filter.template" ng-click="filterPasswords('byType')"
-                   uib-tooltip="clear" tooltip-placement="top"></i>
-              </div>
+
+              <input type="text" class="form-control has-dropdown"
+                     autocomplete="off" ng-model="passwordSharedState.filter.template" typeahead-editable="false"
+                     typeahead-input-formatter="userReadable($model)"
+                     uib-typeahead="template as userReadable(template) for template in templates | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="passwordSharedState.filter.template"></div>
             </div>
-            <ul class="dropdown-menu">
-              <li ng-repeat="template in templates | orderBy: 'toString()'"
-                  ng-click="filterPasswords('byType', template)">
-                {{ userReadable(template) }}
-              </li>
-            </ul>
           </div>
           <div class="center-category__category filter">
             <div>
