@@ -4453,6 +4453,7 @@ tbody.collapse.in {
 .dropdown-assign-ticket .label-add-btn .btn {
   width: 30px !important;
   min-width: 0;
+  line-height: 1.5;
   height: 30px;
   padding: 8px 0;
 }
