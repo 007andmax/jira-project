@@ -27,17 +27,17 @@
 
   <div class="company-profile-content companies-list not-charts-companies-page" style="background: #f4f4f4">
     <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'">
-      <div class="card-wrapper"
+      <div class="card-wrapper clickable"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: 'name')) track by company.id"
-           ng-controller="quicktech.core.companies.companyCtrl">
+           ng-controller="quicktech.core.companies.companyCtrl"
+           ui-sref="companyProfile({ companyId: company.id })">
         <div class="card">
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt"
                  create-new-entity="company" item="company" stop-propagation="click"></div>
             <i class="icn-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
 
-            <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"
-                 ng-click="openCompany(company)"></div>
+            <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
             <p class="ellipsis name"
                uib-tooltip="{{ company.name }}" tooltip-placement="bottom" trimmed-tooltip-checker="company.name">
             </p>
@@ -71,7 +71,7 @@
               <p>{{ location }}</p>
             </div>
           </div>
-          <div class="card__stats clearfix" ng-click="openCompany(company)">
+          <div class="card__stats clearfix">
             <div>
               <p>Tickets</p>
               <p><strong>{{ company.companyStatistic.ticketsSubmitted || '0' }}</strong></p>
