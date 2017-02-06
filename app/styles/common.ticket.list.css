@@ -67,9 +67,7 @@
 /*Tickets and Ticket List Setting - End*/
 
 /*Ticket States - Start*/
-.ticket.closed{
-  background-color: #f1f5fa;
-}
+
 .ticket.active{
   border: 1px solid #08a8dd;
 }

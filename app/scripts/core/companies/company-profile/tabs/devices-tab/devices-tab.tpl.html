@@ -181,7 +181,7 @@
       <div class="col-6">
         <div class="list-actions pull-right">
 
-          <div class="btn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
+          <div class="btn btn-icn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
                url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
                tooltip-placement="top" uib-tooltip="Open Report" ng-click="getDeviceReport(agent)">
             <i class="icn-sm icn-description"></i>
@@ -203,13 +203,13 @@
           </div>
 
           <div class="pull-right" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
-            <div class="btn btn-default pull-left has-tooltip"
+            <div class="btn btn-icn btn-default pull-left has-tooltip"
                  ng-if="(agent.type !== 'workstation') && agent.online"
                  ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">
               <i class="icn-sm icn-remote-access"></i>
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip"
+            <div class="btn btn-icn btn-default pull-left has-tooltip"
                  ng-if="(agent.type === 'workstation') && agent.online"
                  tooltip-placement="top" uib-tooltip="Remote Access"
                  aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
@@ -229,12 +229,12 @@
             </ul>
           </div>
 
-          <div class="btn btn-default pull-left has-tooltip" tooltip-placement="top" ng-show="agentDeprecated"
+          <div class="btn btn-icn btn-default pull-left has-tooltip" tooltip-placement="top" ng-show="agentDeprecated"
                uib-tooltip="Update Agent" ng-click="updateAgent()">
             <i class="icn-sm icn-attachments-download"></i>
           </div>
 
-          <div class="btn btn-default has-tooltip pull-right" ng-click="remove()"
+          <div class="btn btn-icn btn-default has-tooltip pull-right" ng-click="remove()"
                ng-if="!agent.online && PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
                tooltip-placement="top" uib-tooltip="Remove">
             <i class="icn-sm icn-remove-token"></i>

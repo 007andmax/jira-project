@@ -1,14 +1,8 @@
 .topNavbar {
-  background-color: #FFF !important;
-/*  border-radius: 0px;
-  border: none !important;
-  height: 78px;*/
 }
 
 .topNavbar-content {
-/*  height: 78px;
-  padding: 20px 0px;
-  margin: 0 30px 0 28px;*/
+
 }
 
 .topNavbar-title {
@@ -278,14 +272,10 @@
 }
 
 .topNavbarLeft > p {
-  /*padding-left: 2px;*/
-  /*padding-top: 7px;*/
   font-size: 17px;
   text-overflow: ellipsis;
   overflow: hidden;
-  /*line-height: 2.2em;*/
-  /*margin-right: 30px;*/
-  color: #4c5c6f;
+  color: #fff;
   text-align: center;
 }
 .topNavbarLeft > p strong {

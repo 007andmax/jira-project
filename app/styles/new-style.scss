@@ -1,9 +1,9 @@
 //COLORS=================================================
-$primary-color: #16a4fa;
+$primary-color: #4ba9df;
 $global-color: #364656;
 
 $light-gray: #edf2f6;
-$gray: #4f5f79;
+$gray: #8e9598;
 $deep-gray: #404b5f;
 $green-mint: #2bc7c6;
 $purple: #7c77cb;
@@ -11,8 +11,8 @@ $green: #90c56b;
 $yellow: #ffb937;
 $red: #d84a3c;
 
-$primary-active: #0d79ba;
-$green-active: #5f8643;
+$primary-active: #3D7BA7;
+$green-active: #668C4D;
 //COLORS-END=============================================
 
 .onhold-ticket {
@@ -71,6 +71,7 @@ $green-active: #5f8643;
   &-icn{
     min-width: 0;
     line-height: 3;
+    border: none;
   }
   &:focus,
   &:hover,
@@ -84,10 +85,10 @@ $green-active: #5f8643;
   &[disabled],
   &.disabled{
     box-shadow: none;
-    background-color: $gray;
+    background-color: transparent;
     border-color: $gray;
+    color: $gray;
     pointer-events: none;
-    opacity: .5;
   }
   &-primary{
     background-color: $primary-color;

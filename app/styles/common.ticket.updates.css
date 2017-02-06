@@ -310,11 +310,9 @@
   height: 52px;
   border-right: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .table-wrapper .table-content .col-1 {
-  width: 163px; /*  width: 193px;*/
+  width: 163px;
   float: left;
   border: 0;
 }
@@ -331,7 +329,7 @@
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: 40%;
+  width: 45%;
   float: left;
 }
 
@@ -357,7 +355,7 @@
 
 .table-wrapper .table-content .col-3 {
   /*new*/
-  width: 20%;
+  width: 25%;
   float: left;
 }
 .table-wrapper .service-table .col-2 {
@@ -366,7 +364,7 @@
 
 .table-wrapper .table-content .col-4 {
   /*.table-wrapper .table-content .col-3 {*/
-  width: 20%;
+  width: 15%;
   float: right;
 }
 .table-wrapper .service-table .col-3 {
@@ -384,7 +382,7 @@
 
 .table-wrapper .table-content .col-5 {
   /*.table-wrapper .table-content .col-4 {*/
-  width: 20%;
+  width: 15%;
   float: right;
 }
 .table-wrapper .service-table .col-4 {

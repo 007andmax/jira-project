@@ -80,7 +80,7 @@
               } else if (errorKey === 'zero') {
                 return 'Product Quantity can not be 0';
               } else if (errorKey === 'maxLengthWord') {
-                return 'Words in description should not be more than 30 characters';
+                return 'Words in description should not be more than 100 characters';
               }
             }
           };

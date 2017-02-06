@@ -9,13 +9,13 @@
     top: 0;
     right: 0;
     left: 0;
-
+    color: #474f60;
     width: calc(100% - 316px);
     height: 78px;
     margin-left: 316px;
     padding: 20px 30px;
 
-    background: white;
+    background: #474f60;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
   .left-panel-closed .top-bar {
@@ -30,7 +30,6 @@
     margin-left: 76px;
     padding: 20px 30px;
 
-    background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
 }
@@ -76,7 +75,7 @@
 
 .main-container {
   padding-top: 78px;
-  background-color: #edf2f6;
+  background-color: #fff;
   min-height: 100vh;
 }
 

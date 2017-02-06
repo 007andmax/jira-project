@@ -167,7 +167,7 @@
 .inv-modal .icn{
   background-image: url('../images/sprites-s76c759f188.png');
   background-repeat: no-repeat;
-  display: block;
+  display: inline-block;
 }
 
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),

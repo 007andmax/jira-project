@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div style="background: #edf2f6" ng-if="usersView === 'grid'">
+  <div style="background: #f4f4f4" ng-if="usersView === 'grid'">
     <div ui-view></div>
 
     <div class="card-view-wrapper clearfix">
@@ -294,19 +294,19 @@
         <div class="col-lg-2 col-xs-1 buttons-col">
           <div class="list-actions pull-right">
 
-            <div class="btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
+            <div class="btn-icn btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"
                  tooltip-placement="top" uib-tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
             </div>
 
-            <div class="btn btn-default btn-user-mail pull-left has-tooltip"
+            <div class="btn btn-icn btn-default btn-user-mail pull-left has-tooltip"
                  custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+            <div class="btn btn-icn btn-default pull-left has-tooltip" ng-click="archiveUser()"
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">

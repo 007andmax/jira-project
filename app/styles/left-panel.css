@@ -176,7 +176,7 @@
   top: 0;
 }
 .slider-pos i{
-  transform: translateY(15px);
+  transform: translateY(5px);
 }
 .category-expanded{
   width: 100%;

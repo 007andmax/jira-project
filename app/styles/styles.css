@@ -2884,8 +2884,8 @@ _:-ms-fullscreen,
   font-size: 14px;
   line-height: 20px;
   color: #4c5c6f;
-  background-color: #fcfdfd;
-  border: 1px solid #e2e6e6;
+  background-color: #f7f7f7;
+  border: 1px solid #B4B4B4;
   border-radius: 4px;
 }
 .form-control.center-align {
@@ -3068,7 +3068,7 @@ textarea.form-control-search {
   padding: 13px 0 13px 13px;
   font-size: 14px;
   line-height: 20px;
-  color: #4c5c6f;
+  color: #fff;
   background-color: #FFF;
   background-position: 11px center;
   background-repeat: no-repeat;
@@ -5884,7 +5884,7 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   vertical-align: middle;
 }
 .input-group-addon-search {
-  padding: 11px 12px 11px 10px;
+  padding: 11px 12px 10px 10px;
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
@@ -5920,6 +5920,8 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 .input-group-btn-search:last-child > .btn-group:not(:last-child) > .btn-search {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  color: #364656;
+  background-color: #eeeeee;
 }
 .input-group-addon-search:first-child {
   border-right: 0;
@@ -5940,7 +5942,7 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  background-color: #FFF;
+  background-color: #eeeeee;
 }
 .input-group-btn-search {
   position: relative;
@@ -7536,8 +7538,8 @@ a.thumbnail.active {
   color: #2b542c;
 }
 .alert-info {
-  background-color: #f2f9ff;
-  border-color: #e2f1fd;
+  background-color: #f2f2f2;
+  border-color: #CBCBCB;
   color: #94a4b8;
 }
 .alert-info hr {
@@ -8562,7 +8564,6 @@ button.close {
   height: auto;
   color: #ffffff;
   text-align: center;
-  word-break: break-all;
   background-color: #151e29;
   border-radius: 4px;
   max-width: 500px;
@@ -9279,7 +9280,7 @@ button.close {
 .change-view-actions{
   text-align: right;
   padding: 10px;
-  background-color: #edf2f6;
+  background-color: #fff;
 }
 .change-view-actions .view-change-btn{
   width: 30px;
@@ -9341,7 +9342,7 @@ button.close {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #fff;
+  background-color: #eee;
   border-radius: 4px;
 }
 
@@ -9391,9 +9392,9 @@ button.close {
   cursor: pointer;
 }
 
-.switch input:checked ~ label {
-  background: #fff;
-}
+/*.switch input:checked ~ label {*/
+  /*background: #fff;*/
+/*}*/
 
 .switch input:checked ~ label i {
   left: auto;
