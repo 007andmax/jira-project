@@ -637,12 +637,12 @@
   </div>
   <footer class="clearfix btn-bottom">
     <div class="col-xs-6 pull-right btns-container">
-      <button class="btn btn-primary  " ng-click="save(companyForm)"
+      <button class="btn btn-primary" ng-click="nextStep(companyForm)" custom-disabled="{{ currentStep === 'agent' }}">
+        Next Step
+      </button>
+      <button class="btn btn-success" ng-click="save(companyForm)"
               custom-disabled="{{ savingInProcess }}">
         {{ editCompany.id ? 'Save' : 'Create' }}
-      </button>
-      <button class="btn btn-success pull-right" ng-click="nextStep(companyForm)" custom-disabled="{{ currentStep === 'agent' }}">
-        Next Step
       </button>
     </div>
   </footer>

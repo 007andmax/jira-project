@@ -19,6 +19,7 @@
   color: #000000 !important;
 }
 .pass-man-popup .close-btn,
+.modal-customer-report .close-btn,
 .create-window .close-btn {
   position: absolute;
   right: 10px;
@@ -336,6 +337,7 @@
 
 .create-window .general footer .btns-container {
   width: 50%;
+  text-align: right;
 }
 
 .create-window .general footer .btns-container button {
