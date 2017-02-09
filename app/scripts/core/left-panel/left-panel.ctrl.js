@@ -270,19 +270,26 @@
 
         $scope.filterDevice = function (inputValue) {
 
-          if (!inputValue)
+          if (!$scope.passwordSharedState.filter.companyId && !inputValue)
             return noFilter;
 
           var keyword = inputValue.toLowerCase().trim();
 
-          if (keyword.length === 0 || keyword === "[$empty$]" || keyword === "undefined")
+          if (!$scope.passwordSharedState.filter.companyId &&
+            (keyword.length === 0 || keyword === "[$empty$]" || keyword === "undefined"))
             return noFilter;
 
           return function (device) {
 
-            return device.companyId == $scope.passwordSharedState.filter.companyId
-              || (device.hostName && device.hostName.toLowerCase().indexOf(keyword) >= 0)
-              || (device.ip && device.ip.toLowerCase().indexOf(keyword) >= 0);
+            if ($scope.passwordSharedState.filter.companyId
+              && device.companyId != $scope.passwordSharedState.filter.companyId)
+              return false;
+
+            if(keyword.length === 0 || keyword === "[$empty$]" || keyword === "undefined")
+              return true;
+
+            return ((device.hostName && device.hostName.toLowerCase().indexOf(keyword) >= 0)
+            || (device.ip && device.ip.toLowerCase().indexOf(keyword) >= 0));
           };
 
           function noFilter() {
