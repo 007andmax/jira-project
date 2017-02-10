@@ -301,7 +301,7 @@
 }
 
 .create-window .general .company-window .custom-phone-type .pull-left.dropdown{
-  width: 60%;
+  width: 65%;
 }
 
 .create-window .general .choose-file {
@@ -340,7 +340,7 @@
   text-align: right;
 }
 
-.create-window .general footer .btns-container button {
+.create-window .general footer .btns-container .btn {
   width: 48%;
   font-weight: normal;
 }
@@ -406,6 +406,10 @@
 
 .modal-customer-report .modal-dialog{
   margin-top: -175px;
+}
+
+.create-window .general .create-user-form .btn{
+  width: 40px;
 }
 
 /*# sourceMappingURL=modal-popup.css.map */

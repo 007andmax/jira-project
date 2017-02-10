@@ -284,8 +284,8 @@
 .card .set-privileges span.plus-card{
   width: 13px;
   height: 13px;
-  background: url("../images/input-icons/plus-new1.png");
-  transform: rotate(45deg);
+  background: url("../images/input-icons/accept.png");
+  background-size: cover;
   float: right;
   margin-top: -5px;
   cursor: pointer;
