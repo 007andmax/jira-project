@@ -648,23 +648,40 @@
           function getDefaultSharedList() {
             var result = [];
 
+            // add reporter user
             if ($scope.user) {
-              result.push({ user: $scope.user, notify: false });
+              addUserToResult($scope.user);
             }
 
-            if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
-              result.push({ user: $scope.assignedUser, notify: false });
+            // ad assigned user
+            if ($scope.assignedUser) {
+              addUserToResult($scope.assignedUser);
             }
 
-            var manager = UsersService.getAllByCompanyId($scope.ticketDetails.company.id).find(function (client) {
-              return client.subscription && client.subscription.ticketManager;
-            });
+            // add ticket managers and ticket update subscribers
+            var usersFromTicketCompany = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
 
-            if (manager) {
-              result.push({ user: manager, notify: false });
+            for(var i = 0; i < usersFromTicketCompany.length; i++){
+              var user = usersFromTicketCompany[i];
+
+              if(user.subscription && (user.subscription.ticketManager || user.subscription.ticket))
+                addUserToResult(user);
             }
 
             return result;
+
+            function addUserToResult(user) {
+
+              var duplicate = result.find(function (item) {
+                return item.user && item.user.id === user.id;
+              });
+
+              if (duplicate)
+                return;
+
+              result.push({user: user, notify: false});
+            }
+
           }
 
           var condition = 'ticketUpdate.note' +

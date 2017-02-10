@@ -115,7 +115,7 @@
     $rootScope.numberCounterDelimiter = '-';
 
   }]);
-  
+
   services.factory('$exceptionHandler', ['$log', function($log) {
     return function myExceptionHandler(exception, cause) {
       //todo: send errors to the backend (need endpoint)
@@ -422,6 +422,18 @@
       return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
     }
 
+   function removeFromArrayByCondition(array, condition) {
+     var i = 0;
+     while (i < array.length) {
+       if (condition(array[i], i)) {
+         array.splice(i, 1);
+       }
+       else {
+         ++i;
+       }
+     }
+   }
+
     return {
       customizeObj: customizeObj,
       customizeArray: customizeArray,
@@ -433,7 +445,8 @@
       getListByUrl: getListByUrl,
       getFormattedNumber: getFormattedNumber,
       getComparatorBy: getComparatorBy,
-      formatDate: formatDate
+      formatDate: formatDate,
+      removeFromArrayByCondition: removeFromArrayByCondition
     }
   }]);
 

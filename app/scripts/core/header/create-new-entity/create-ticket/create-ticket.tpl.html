@@ -392,7 +392,7 @@
         </div>
 
       </li>
-      <li>
+      <li ng-show="ticketCompany">
         <div class="pull-left" style="width: 100%;">
           <div style="font-weight: bold;">Notify</div>
           <div>The people you select will get an email when you create this ticket.</div>
@@ -411,14 +411,6 @@
               <input type="checkbox" ng-model="sharedUser.notify">
               <span class="control-indicator"></span>
               <span style="text-transform: none">{{ getUserName(sharedUser.user) }}</span>
-            </label>
-
-            <label class="control checkbox pull-left"
-                   ng-if="ticket.ticketAssignTo && ticket.ticketAssignTo.id && ticket.ticketAssignTo.id !== currentUser.id && !isAlreadyInShares(ticket.ticketAssignTo)"
-                   ng-init="ticket.notifyTicketAssignedUser = true">
-              <input type="checkbox" ng-model="ticket.notifyTicketAssignedUser">
-              <span class="control-indicator"></span>
-              <span style="text-transform: none">{{ getUserName(ticket.ticketAssignTo) }}</span>
             </label>
           </div>
         </div>

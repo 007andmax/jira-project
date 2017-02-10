@@ -24,6 +24,15 @@
             });
           });
 
+          $scope.$watch('ticketSharedUsersList.length', function (value) {
+            $scope.selectUpdateSharedUser = {};
+
+            $scope.ticketSharedUsersList.forEach(function (item) {
+              if (item.user)
+                $scope.selectUpdateSharedUser[item.user.id] = true;
+            })
+          });
+
           $scope.openAddUserTab = function (mode) {
 
             $scope.searchFilter = {};
@@ -41,38 +50,6 @@
           };
 
           $scope.filterUpdateUser = function (item) {
-            var isCurrentUser = item.id === $scope.currentUser.id,
-              isAssignedUser = false,
-              isCreatedUser = false,
-              isAlreadyShared = false,
-              isManager = false;
-
-            if ($scope.ticketDetails) {
-              var shares = $scope.ticketDetails.shares || [];
-
-              isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id;
-              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
-              isAlreadyShared = shares.find(function (shared) {
-                return shared.user.id === item.id;
-              });
-              isManager = item.subscription && item.subscription.ticketManager;
-            } else if ($scope.ticket) {
-              var assignedUserId;
-
-              if ($scope.ticket.ticketAssignTo && $scope.ticket.ticketAssignTo.id) {
-                assignedUserId = $scope.ticket.ticketAssignTo.id;
-              }
-
-              isAssignedUser = assignedUserId && item.id === assignedUserId;
-              isCreatedUser = isCurrentUser;
-              isManager = item.subscription && item.subscription.ticketManager;
-            } else {
-              isCurrentUser = false;
-            }
-
-            if (isCurrentUser || isAssignedUser || isCreatedUser || isAlreadyShared || isManager) {
-              return false;
-            }
 
             if ($scope.searchFilter.user && $scope.searchFilter.user.length > 0) {
               var searchFild = item.firstName + ' ' + item.lastName + ' ' + (item.primaryEmail && item.primaryEmail.length > 0) ? item.primaryEmail : '';
@@ -87,7 +64,7 @@
 
             if ($scope.selectUpdateSharedUser[user.id]) {
 
-              $scope.ticketSharedUsersList.push({ user: user, notify: false });
+              $scope.ticketSharedUsersList.push({ user: user, notify: true });
 
             } else {
 

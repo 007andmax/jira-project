@@ -6,8 +6,10 @@
     ['$scope', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService', '$rootScope',
       'quicktech.common.services.UserNotificationService', 'ServicesService', '$timeout', '$state',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.UserConfirmationsService',
+      'Utils',
       function ($scope, TicketsService, FilesService, CompaniesService, UsersService, DevicesService, $rootScope,
-                UserNotificationService, ServicesService, $timeout, $state, TicketsPermissionsService, UserConfirmationsService) {
+                UserNotificationService, ServicesService, $timeout, $state, TicketsPermissionsService, UserConfirmationsService,
+        Utils) {
 
         var agentsByCompany = [];
 
@@ -202,17 +204,6 @@
               $scope.filteredAgentList = agentsByCompany[val.id];
             }
             $scope.clients = UsersService.getAllByCompanyId(val.id);
-
-            var manager = $scope.clients.find(function (client) {
-              return client.subscription && client.subscription.ticketManager;
-            });
-
-            if (manager) {
-              $scope.ticketSharedUsersList.push({
-                user: manager,
-                notify: false
-              });
-            }
 
             resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
@@ -596,6 +587,20 @@
 
         });
 
+        $scope.$watch('ticket.ticketAssignTo.id', function (newId, oldId) {
+
+          Utils.removeFromArrayByCondition($scope.ticketSharedUsersList, function (item) {
+            return item.user && item.user.id === oldId;
+          });
+
+          if ($scope.ticket.ticketAssignTo) {
+            $scope.ticketSharedUsersList.push({
+              user: $scope.ticket.ticketAssignTo,
+              notify: true
+            });
+          }
+        });
+
         $scope.clearTicketCompany = function () {
           $scope.ticketCompany = undefined;
           if ($scope.ticketCreatedUser && $scope.ticketCreatedUser.id) {
@@ -691,6 +696,7 @@
         }
 
         function resetSharedUsers(company) {
+          //remove users from other companies
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
@@ -703,6 +709,31 @@
               $scope.selectUpdateSharedUser[shares.user.id] = false;
               i--;
             }
+          }
+
+          // add to shared all users subscribed on ticket updates or Ticket Manager
+          if (company) {
+            var clients = UsersService.getAllByCompanyId(company.id);
+
+            for(var i = 0; i < clients.length; i++){
+              var user = clients[i];
+
+              if(user.subscription && (user.subscription.ticketManager || user.subscription.ticket))
+                addUserToResult(user);
+              $scope.selectUpdateSharedUser[user.id] = true;
+            }
+          }
+
+          function addUserToResult(user) {
+
+            var duplicate = $scope.ticketSharedUsersList.find(function (item) {
+              return item.user && item.user.id === user.id;
+            });
+
+            if (duplicate)
+              return;
+
+            $scope.ticketSharedUsersList.push({user: user, notify: false});
           }
         }
 
