@@ -185,9 +185,10 @@
                   </a>
                 </li>
 
-                <li ng-if="isCreation || !isLastUserWithInvoiceSubscription(editUser)">
+                <li>
                   <a href="javascript:void(0)"
-                     qt-checkbox ng-model="editUser.subscription.invoice">
+                     qt-checkbox ng-model="editUser.subscription.invoice"
+                     custom-disabled="{{ !isCreation && isLastUserWithInvoiceSubscription(editUser) }}">
 
                     <div class="clearfix">
                       <label class="control checkbox pull-left">
