@@ -13,9 +13,9 @@
       <div class="col-2" uib-dropdown is-open="addServiceDropdown.isOpen" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
         {{ services.length || 0 }} services
         <span class="control-indicator pull-left plus-circle" style="z-index: 5" uib-dropdown-toggle ng-click="initAddServiceDropdown()"
-              uib-tooltip="Add Services" tooltip-placement="top"></span>
+              uib-tooltip="Add Services" tooltip-placement="top" tooltip-append-to-body="true"></span>
 
-        <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
+        <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click" style="overflow: hidden;">
 
           <div class="move-services">
 
@@ -23,7 +23,7 @@
               <label>Add Services</label>
             </div>
 
-            <div class="custom-scroll" style="max-height: 250px">
+            <div class="custom-scroll" style="max-height: 190px">
 
               <div ng-repeat="service in servicesData.default | orderBy: 'name'">
                 <label class="control ellipsis checkbox">

@@ -46,10 +46,10 @@
   color: #ffffff;
 }
 .left-panel__category:hover {
-  background-color: #4f5f79;
+  background-color: #474f60;
 }
 .left-panel .active {
-  background-color: #4f5f79;
+  background-color: #474f60;
 }
 .left-panel-full {
   position: fixed;
@@ -97,7 +97,7 @@
 }
 
 .center-category__category:hover {
-  background-color: #4f5f79;
+  background-color: #474f60;
 }
 
 .filter.center-category__category:hover {
@@ -141,7 +141,7 @@
 }
 .center-category .active {
   color: #edf2f6;
-  background: #4f5f79;
+  background: #474f60;
 }
 .icon-pos {
   position: absolute;

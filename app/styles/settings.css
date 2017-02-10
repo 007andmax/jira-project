@@ -38,7 +38,11 @@
   margin-top: 24px;
 }
 .create-user-container .custom-phone-type.no-label .pull-left.dropdown{
-  width: 70%;
+  width: 65%;
+}
+
+.create-popup .create-user-container .custom-phone-type.no-label .pull-left.dropdown{
+  width: 85%;
 }
 
 @-moz-document url-prefix() {
@@ -141,8 +145,13 @@
   padding-top: 25px;
 }
 
-.settings-main-wrapper.permission-settings{
+.settings-main-wrapper.permission-settings,
+.settings-main-wrapper.activity-history{
   width: 700px;
+}
+
+.activity-map{
+  width: 700px !important;
 }
 
 .settings-main-wrapper textarea {

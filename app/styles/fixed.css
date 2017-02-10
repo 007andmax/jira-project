@@ -1589,3 +1589,7 @@ span.sort-span {
 .inbox .well-message{
   font-weight: 600;
 }
+
+.custom-phone-type .phone-btn{
+  width: 30%;
+}
