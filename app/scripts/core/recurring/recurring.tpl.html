@@ -17,7 +17,7 @@
               </div>
               <div class="head-point">Order Title</div>
               <div class="head-point" ng-click="setOrderForProducts('startDate')">
-                <span class="sort-span">Start Date<i class="icn-sm sort-icon icn-sort"
+                <span class="sort-span">Next Generation Date<i class="icn-sm sort-icon icn-sort"
                                                      ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'startDate'}"></i></span>
 
               </div>
@@ -127,6 +127,11 @@
                 <div class="ticket-add-amount pull-right">
                   <span class="text-muted">Total </span>
                   <strong>{{ invoice.total | currency:'$':2 }}</strong>
+                </div>
+
+                <div class="ticket-add-amount pull-right">
+                  <span class="text-muted">Start date </span>
+                  <strong>{{ parseDate(invoice.startDate) | date:'dd MMM yyyy' }}</strong>
                 </div>
 
               </div>
