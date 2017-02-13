@@ -9,9 +9,11 @@
         var initialized = false;
         window.onhashchange = preventHashChange;
 
-        var unbind = $scope.$on('$destroy', function () {
-          window.onhashchange = undefined;
-          unbind();
+        var unbind = $scope.$on('$destroy', function (info) {
+          if (info.targetScope && info.targetScope.$id === $scope.$id) {
+            window.onhashchange = undefined;
+            unbind();
+          }
         });
 
         function preventHashChange() {
