@@ -637,13 +637,13 @@
   </div>
   <footer class="clearfix btn-bottom">
     <div class="col-xs-6 pull-right btns-container">
-      <button class="btn btn-primary" ng-click="nextStep(companyForm)" custom-disabled="{{ currentStep === 'agent' }}">
+      <button class="btn btn-primary" ng-click="nextStep(companyForm)"
+              custom-disabled="{{ currentStep === 'agent' || savingInProcess }}">
         Next Step
       </button>
-      <button class="btn btn-success" ng-click="save(companyForm)"
-              custom-disabled="{{ savingInProcess }}">
-        {{ editCompany.id ? 'Save' : 'Create' }}
-      </button>
+      <button-with-loading-indicator class="btn btn-success" ng-click="save(companyForm)"
+                                     loading="savingInProcess" label="{{ editCompany.id ? 'Save' : 'Create' }}">
+      </button-with-loading-indicator>
     </div>
   </footer>
 </div>

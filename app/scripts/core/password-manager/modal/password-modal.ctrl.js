@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  
+
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordModalCtrl',
     [
       '$scope', '$uibModalInstance', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
@@ -49,7 +49,7 @@
               resp.filter(function (gadget) {
                 return !gadget.deletedAt;
               });
-            
+
             var links = $scope.password.links;
             if (isEdit && links && links.length && links[0] && links[0].gadgetId) {
               $scope.password.firstLinkName = getLinkName(links[0], $scope.password.companyId);
@@ -58,14 +58,14 @@
             $scope.gadgets = [];
           }
         });
-        
+
         $scope.password = { links: [], selectionMap: {} };
         $scope.openedTab = 'user';
         $scope.userTabDisabled = false;
         $scope.deviceTabDisabled = false;
         $scope.generateRandomPassword = PasswordManagerService.generateRandomPassword;
         $scope.getLinkName = getLinkName;
-        
+
         if (isEdit) {
           var template = $scope.editedPassword.template;
           $scope.editedPassword.template = template.charAt(0) + template.slice(1).toLowerCase().split('_').join(' ');
@@ -73,7 +73,7 @@
           PasswordManagerService.getPasswordByRecord($scope.editedPassword.id, function (resp) {
             $scope.editedPassword.password = resp.password;
           });
-          
+
           var links = $scope.editedPassword.links;
           $scope.password.links = links.concat([]);
           for (var i = 0; i < links.length; i++) {
@@ -96,40 +96,40 @@
             template: 'Office 365 account'
           }
         }
-        
+
         $scope.setOpenedTab = function (tab, isEnabled, event) {
           if (isEnabled) {
             $scope.openedTab = tab;
           }
           event.stopPropagation();
         };
-        
+
         $scope.toggleCreationGadget = function (isOpen, event) {
           $scope.addingGadget = isOpen;
           event && event.stopPropagation();
         };
-        
+
         $scope.toggleLock = function () {
           $scope.password.onlyForMe = !$scope.password.onlyForMe;
           if (!$scope.password.onlyForMe) {
             $scope.password.managedBy = '';
           }
         };
-        
+
         $scope.onSelectDate = function (dates) {
           $scope.editedPassword.expiredDate = dates[0];
         };
-        
+
         $scope.validateLinks = function (type, itemId, companyId) {
           var password = $scope.password;
           var firstLink = password.links[0];
-          
+
           if (companyId && (!firstLink || !$scope.editedPasswordCompany)) {
             $scope.editedPasswordCompany = CompaniesService.getOneById(companyId);
             $scope.editedPassword.companyId = companyId;
             $scope.password.companyId = companyId;
           }
-          
+
           if (password.selectionMap[itemId]) {
             if (firstLink) {
               if (firstLink.userId && type !== 'user' || firstLink.agentId && type !== 'agent' || firstLink.gadgetId && type !== 'gadget') {
@@ -137,7 +137,7 @@
                 password.selectionMap[itemId] = true;
               }
             }
-            
+
             var newLink = {};
             newLink[type + 'Id'] = itemId;
             password.links.push(newLink);
@@ -150,10 +150,10 @@
               }
             }
           }
-          
+
           $scope.password.firstLinkName = getLinkName(password.links[0], companyId);
         };
-        
+
         $scope.closeWindowWithConfirm = function (form) {
           var message = 'Do you want to close this window? All entered information will be lost.';
           if (isDataChanged(form)) {
@@ -164,13 +164,13 @@
             $uibModalInstance.dismiss();
           }
         };
-        
+
         $scope.setTemplate = function (template, form) {
           $scope.editedPassword.template = template;
           $scope.userTabDisabled = false;
           $scope.deviceTabDisabled = false;
           $scope.triedToSavePassword = false;
-          
+
           if (template === 'Device' || template === 'Wifi network') {
             $scope.userTabDisabled = true;
             clearLinks();
@@ -180,10 +180,10 @@
             clearLinks();
             $scope.openedTab = 'user';
           }
-          
+
           form.$setPristine();
         };
-        
+
         $scope.setCompanyId = function () {
           if ($scope.editedPasswordCompany && $scope.editedPasswordCompany.id) {
             if ($scope.editedPasswordCompany.id !== $scope.editedPassword.companyId) {
@@ -195,16 +195,16 @@
             clearLinks();
           }
         };
-        
+
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSavePassword || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
-        
+
         $scope.getFormError = function (form) {
           if (form.$invalid) {
             var errors = Object.keys(form.$error),
               primaryError;
-            
+
             for (var i = 0, len = errors.length; i < len; i++) {
               var error = errors[i];
               if (error === 'pattern' || error === 'number' || error === 'min' || error === 'max') {
@@ -212,7 +212,7 @@
                 break;
               }
             }
-            
+
             if (primaryError === 'pattern') {
               return form.ip && from.ip.$invalid ? 'IP address has invalid format' : 'Link has invalid format';
             } else if (primaryError === 'number') {
@@ -226,7 +226,7 @@
             }
           }
         };
-        
+
         $scope.removeGadget = function (id, event) {
           toggleGadget(false, id);
           var gadgets = $scope.gadgets;
@@ -240,7 +240,7 @@
           DevicesService.removeGadget(id);
           event.stopPropagation();
         };
-        
+
         $scope.addNewGadget = function (name, event) {
           if (name) {
             var gadgets = $scope.gadgets;
@@ -252,7 +252,7 @@
                 return;
               }
             }
-            
+
             DevicesService.saveGadget(name, function (resp) {
               $scope.gadgets.push({
                 id: resp.id,
@@ -266,25 +266,27 @@
           }
           event.stopPropagation();
         };
-        
+
         $scope.save = function (form) {
           if (form.$valid) {
+            $scope.loadingInProgress = true;
             $scope.editedPassword.links = angular.copy($scope.password.links);
             $scope.editedPassword.onlyForMe = $scope.password.onlyForMe;
             var toSave = buildDto($scope.editedPassword);
             PasswordManagerService.save(toSave, function () {
+              $scope.loadingInProgress = false;
               $uibModalInstance.dismiss();
             })
           } else {
             $scope.triedToSavePassword = true;
           }
         };
-        
+
         function getLinkName(link, companyId) {
           if (!link) {
             return '';
           }
-          
+
           if (link.userId) {
             var user = UsersService.getOneById(link.userId);
             if (user) {
@@ -309,7 +311,7 @@
             }
           }
         }
-        
+
         function buildDto(password) {
           var dto = {
             id: password.id,
@@ -319,11 +321,11 @@
             password: password.password,
             expiredDate: formatDate(new Date(password.expiredDate))
           };
-          
+
           if (password.onlyForMe) {
             dto.managedById = $scope.currentUser.id;
           }
-          
+
           switch (dto.template) {
             case 'OFFICE_365_ACCOUNT': {
               dto.key = password.key;
@@ -371,33 +373,33 @@
               break;
             }
           }
-          
+
           return dto;
         }
-        
+
         function formatDate(date) {
           if (!date || !date.getTime()) {
             return null;
           }
           return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
         }
-        
+
         function toggleGadget(isSelected, id) {
           $scope.password.selectionMap[id] = isSelected;
           $scope.validateLinks('gadget', id);
         }
-        
+
         function isDataChanged(form) {
           var data = $scope.editedPassword;
           return (data.username || data.password || data.description) && (!data.id || form.$dirty);
         }
-        
+
         function existInPassword(gadgetId, password) {
           var links = password.links;
           if (!links || !links.length || !links[0] || !links[0].gadgetId) {
             return false;
           }
-          
+
           for (var i = 0; i < links.length; i++) {
             var link = links[i];
             if (link.gadgetId === gadgetId) {
@@ -405,19 +407,19 @@
             }
           }
         }
-        
+
         function getDeviceName(device) {
           return device.hostName || device.ip || device.ipAddress;
         }
-        
+
         function clearLinks() {
           var password = $scope.password;
           password.links = [];
           password.selectionMap = {};
           password.firstLinkName = '';
         }
-        
+
       }
     ]);
-  
+
 }());

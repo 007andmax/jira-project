@@ -419,16 +419,18 @@
       <li class="btn-bottom" style="margin-right: 10px;">
         <div></div>
         <div style="padding-top: 10px;">
-          <div class="btn btn-lg btn-primary pull-right" ng-click="saveTicket(ticketForm, true)"
-               style="margin-left: 7px; width: 190px; font-weight: normal;"
-               custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
-            Create and Open
-          </div>
+          <button-with-loading-indicator class="btn btn-lg btn-primary pull-right"
+                                         ng-click="saveTicket(ticketForm, true)"
+                                         style="margin-left: 7px; width: 190px; font-weight: normal;"
+                                         loading="openingInProcess" label="Create and Open"
+                                         custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
+          </button-with-loading-indicator>
 
-          <div class="btn btn-success btn-create   pull-right" ng-click="saveTicket(ticketForm)"
-               custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
-            Create
-          </div>
+          <button-with-loading-indicator class="btn btn-success btn-create   pull-right"
+                                         ng-click="saveTicket(ticketForm)"
+                                         loading="savingInProcess" label="Create"
+                                         custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
+          </button-with-loading-indicator>
         </div>
       </li>
     </ul>
