@@ -241,14 +241,13 @@
 
       <div class="ticket-update-edit-actions">
 
-        <div class="btn btn-lg btn-primary " ng-click="toogleEditForm(false)">
+        <div class="btn btn-lg btn-primary " ng-click="toogleEditForm(false)" custom-disabled="{{ hardDisabledSave }}">
           Cancel
         </div>
 
-        <div class="btn btn-lg btn-success " ng-click="saveInvoice(editInvoiceForm)"
-             custom-disabled="{{ hardDisabledSave }}">
-          {{ editInvoice.id ? 'Save' : 'Create' }}
-        </div>
+        <button-with-loading-indicator class="btn btn-lg btn-success " ng-click="saveInvoice(editInvoiceForm)"
+                                       loading="hardDisabledSave" label="{{ editInvoice.id ? 'Save' : 'Create' }}">
+        </button-with-loading-indicator>
 
       </div>
     </fieldset>

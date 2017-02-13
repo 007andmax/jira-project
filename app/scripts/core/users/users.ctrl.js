@@ -50,7 +50,7 @@
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
           var result = true;
-  
+
           if ($scope.archivedShown) {
             return value.deletedAt;
           } else {
@@ -98,6 +98,9 @@
         };
 
         $scope.subscribeUser = function (user, nameSubscription) {
+          if ($scope.disabledCheckbox || $scope.isLastUserWithInvoiceSubscription(user)) {
+            return;
+          }
 
           $scope.disabledCheckbox = true;
 

@@ -178,7 +178,7 @@
         }
 
         TicketsService.getActualNumber($scope, function (number) {
-          if (!$scope.savingInProcess) {
+          if (!$scope.savingInProcess && !$scope.openingInProcess) {
             $scope.ticketNumber = number;
           }
         });
@@ -416,7 +416,8 @@
         $scope.saveTicket = function (form, isOpenAfterCreation) {
 
           if (form.$valid || $scope.isTicketFormValid(form)) {
-            $scope.savingInProcess = true;
+            $scope.savingInProcess = !isOpenAfterCreation;
+            $scope.openingInProcess = isOpenAfterCreation;
 
             $scope.ticket.attachFileIds = [];
 
@@ -467,6 +468,7 @@
 
             TicketsService.createTicket($scope.ticket, function (resp) {
               $scope.savingInProcess = false;
+              $scope.openingInProcess = false;
               $scope.closeWindow();
 
               if (resp.code >= 400) {

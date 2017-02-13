@@ -32,6 +32,10 @@
         };
 
         $scope.changeUserSubscription = function (subsc) {
+          if ($scope.disabledSubscr || $scope.isInvoiceSubscriptionForbidden()) {
+            return;
+          }
+
           $scope.disabledSubscr = true;
           $scope.usersSbscr[subsc] = !$scope.usersSbscr[subsc];
           SubscriptionsService.changeSubscriptionsForUsers($scope.selectUsersIds, subsc, $scope.usersSbscr[subsc], function () {

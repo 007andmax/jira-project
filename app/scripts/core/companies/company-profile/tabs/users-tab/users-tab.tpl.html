@@ -139,11 +139,12 @@
               </a>
             </li>
 
-            <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
+            <li>
               <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
-                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice"
+                           ng-disabled="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
                     <span class="control-indicator"></span> Invoice Updates
                   </label>
                 </div>
