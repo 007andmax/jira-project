@@ -121,7 +121,7 @@
               <div class="btn btn-icn btn-default pull-left"
                    uib-tooltip="{{ editingTicket ? 'Cancel' : 'Edit subject & note' }}"
                    tooltip-placement="top" ng-click="setEditingTicket(!editingTicket)">
-                <i class="icn-sm {{ editingTicket ? 'icn-label-cancel' : 'icn-edit' }}"></i>
+                <i class=" {{ editingTicket ? 'icn-sm icn-label-cancel' : 'icon-sm edit-icon' }}"></i>
               </div>
             </div>
             <div class="pull-left" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
@@ -152,11 +152,11 @@
               </ul>
             </div>
             <div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">
-              <div class="btn  btn-icn btn-default pull-left has-tooltip"
+              <div class="btn btn-icn btn-default pull-left has-tooltip"
                    aria-haspopup="true" aria-expanded="false"
                    ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
                    uib-dropdown-toggle uib-tooltip="Settings" tooltip-placement="top">
-                <i class="icn-sm icn-settings"></i>
+                <i class="icon-sm settings-icon"></i>
               </div>
               <ul class="dropdown-menu dropdown-menu-right" style="width: 185px; overflow: visible;" role="menu">
                 <li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
