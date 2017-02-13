@@ -100,7 +100,8 @@
             </div>
             <div>
               <label class="control checkbox" ng-click="subscribeUser(user, 'invoice')">
-                <input type="checkbox" ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
+                <input type="checkbox" ng-checked="user.subscription.invoice"
+                       ng-disabled="disabledCheckbox || isLastUserWithInvoiceSubscription(user)">
                 <span class="control-indicator"></span>
                 <span>Invoice Updates</span>
               </label>
@@ -270,11 +271,12 @@
               </a>
             </li>
 
-            <li ng-if="!isLastUserWithInvoiceSubscription(user)">
+            <li>
               <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
-                    <input type="checkbox" ng-checked="user.subscription.invoice">
+                    <input type="checkbox" ng-checked="user.subscription.invoice"
+                           ng-disabled="isLastUserWithInvoiceSubscription(user)">
                     <span class="control-indicator"></span> Invoice Updates
                   </label>
                 </div>

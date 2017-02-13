@@ -11,6 +11,9 @@
         };
 
         $scope.changeUserSubscription = function (nameSubscription) {
+          if ($scope.users.length === 1 || $scope.isLastUserWithInvoiceSubscription($scope.user.id)) {
+            return;
+          }
 
           var subscription = $scope.userSubscriptionsByCompanyId[$scope.user.id];
 
@@ -29,10 +32,10 @@
 
         $scope.archiveUser = function () {
           var user = UsersService.getOneById($scope.user.id);
-          var confirmMesage = 'Do you want to archive ' + $scope.getUserName(user);
+          var confirmMessage = 'Do you want to archive ' + $scope.getUserName(user);
           var confirmButton = 'Yes';
 
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             try {
               UsersService.archiveUser($scope.user.id, function () {
                 if (delete $scope.selectedUsers[$scope.user.id]) {
