@@ -74,10 +74,10 @@
             <img class="pull-right" ng-click="popupOpened = true"
                  src="images/company/more.png" alt="">
           </div>
-          <div class="set-privileges" ng-class="{'open': popupOpened}">
+          <form name="fakeForm" class="set-privileges" ng-class="{'open': popupOpened}" ng-click="fakeForm.$setDirty()">
             <p><strong>Set privileges</strong></p>
             <div>
-              <label class="control checkbox" ng-click="changeUserRole(user.id, 'USER');">
+              <label class="control checkbox" ng-click="changeUserRole(user.id, 'USER')">
                 <input type="checkbox" ng-checked="user.role === 'USER'" ng-disabled="user.role === 'USER'">
                 <span class="control-indicator"></span>
                 <span>User</span>
@@ -118,8 +118,9 @@
                ng-click="archiveUser()">
               Archive Contact
             </a>
-            <span class="plus-card" ng-click="popupOpened = false"></span>
-          </div>
+            <span class="{{ fakeForm.$dirty ? 'check-mark-card' : 'plus-card' }}"
+                  ng-click="popupOpened = false; fakeForm.$setPristine();" stop-propagation="click"></span>
+          </form>
         </div>
       </div>
     </div>
