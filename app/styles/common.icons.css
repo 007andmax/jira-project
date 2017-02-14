@@ -5,6 +5,25 @@
   margin: auto;
 }
 
+.icon-sm, .icon-lg{
+  display: inline-block;
+  margin: auto;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.icon-sm{
+  width: 12px;
+  height: 12px;
+}
+
+.icon-lg{
+  width: 20px;
+  height: 20px;
+}
+
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
@@ -443,6 +462,13 @@ a.ha-24{
   background-position: -3380px 0;
 }
 
+.settings-icon{
+  background-image: url("../images/new-icons/settings-na.png");
+}
+:hover > .settings-icon, :active > .settings-icon, :focus:hover > .settings-icon, :focus:active > .settings-icon, :hover:active > .settings-icon, .active > .settings-icon, .open .settings-icon, .open > .btn:hover .settings-icon {
+  background-image: url("../images/new-icons/settings.png");
+}
+
 .icn-report-spam{
   background-position: -2448px -100px;
 }
@@ -563,6 +589,15 @@ a.ha-24{
   background-position: -86px 0;
   height: 14px;
 }
+
+.attachment{
+  background-image: url("../images/new-icons/paper-clip-na.png");
+}
+.attachment:hover{
+  background-image: url("../images/new-icons/paper-clip.png");
+
+}
+
 :hover > .icn-attachment, :active > .icn-attachment, :focus:hover > .icn-attachment, :focus:active > .icn-attachment, :hover:active > .icn-attachment, .active > .icn-attachment, .open .icn-attachment, .open > .btn:hover .icn-attachment{
   background-position: -64px 0;
 }
@@ -629,6 +664,15 @@ a.ha-24{
 :hover > .icn-edit, :active > .icn-edit, :focus:hover > .icn-edit, :focus:active > .icn-edit, :hover:active > .icn-edit, .active > .icn-edit, .open .icn-edit, .open > .btn:hover .icn-edit {
   background-position: -998px 0;
 }
+
+.edit-icon {
+  background-image: url("../images/new-icons/edit-na.png");
+}
+:hover > .edit-icon, :active > .edit-icon, :focus:hover > .edit-icon, :focus:active > .edit-icon, :hover:active > .edit-icon, .active > .edit-icon, .open .edit-icon, .open > .btn:hover .edit-icon {
+  background-image: url("../images/new-icons/edit.png");
+}
+
+
 
 .icn-edit-white {
   background-position: -1042px 0;
@@ -1362,49 +1406,87 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
 }
 
 /* wysiwyg icons */
-.icn-wysiwyg-ol{
-  background-position: -86px -100px;
-  height: 10px;
+/*.icn-wysiwyg-ol{*/
+  /*background-position: -86px -100px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-ol, :active > .icn-wysiwyg-ol, :focus:hover > .icn-wysiwyg-ol, :focus:active > .icn-wysiwyg-ol, :hover:active > .icn-wysiwyg-ol, .active > .icn-wysiwyg-ol, .open .icn-wysiwyg-ol, .open > .btn:hover .icn-wysiwyg-ol {*/
+  /*background-position: -108px -100px;*/
+/*}*/
+/*.icn-wysiwyg-ol.active, .active > .icn-wysiwyg-ol{*/
+  /*background-position: -64px -100px;*/
+/*}*/
+
+.wysiwyg-ol{
+  background-image: url("../images/new-icons/text-italic-na.png");
 }
-:hover > .icn-wysiwyg-ol, :active > .icn-wysiwyg-ol, :focus:hover > .icn-wysiwyg-ol, :focus:active > .icn-wysiwyg-ol, :hover:active > .icn-wysiwyg-ol, .active > .icn-wysiwyg-ol, .open .icn-wysiwyg-ol, .open > .btn:hover .icn-wysiwyg-ol {
-  background-position: -108px -100px;
+:hover > .wysiwyg-ol, :active > .wysiwyg-ol, :focus:hover > .wysiwyg-ol, :focus:active > .wysiwyg-ol, :hover:active > .wysiwyg-ol, .active > .wysiwyg-ol, .open .wysiwyg-ol, .open > .btn:hover .wysiwyg-ol {
+  background-image: url("../images/new-icons/text-italic.png");
 }
-.icn-wysiwyg-ol.active, .active > .icn-wysiwyg-ol{
-  background-position: -64px -100px;
+.wysiwyg-ol.active, .active > .wysiwyg-ol{
+  background-image: url("../images/new-icons/text-italic.png");
 }
 
-.icn-wysiwyg-bold{
-  background-position: -147px -100px;
-  width: 7px;
-  height: 10px;
+/*.icn-wysiwyg-bold{*/
+  /*background-position: -147px -100px;*/
+  /*width: 7px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-bold, :active > .icn-wysiwyg-bold, :focus:hover > .icn-wysiwyg-bold, :focus:active > .icn-wysiwyg-bold, :hover:active > .icn-wysiwyg-bold, .active > .icn-wysiwyg-bold, .open .icn-wysiwyg-bold, .open > .btn:hover .icn-wysiwyg-bold {*/
+  /*background-position: -164px -100px;*/
+/*}*/
+/*.icn-wysiwyg-bold.active, .active > .icn-wysiwyg-bold{*/
+  /*background-position: -130px -100px;*/
+/*}*/
+.wysiwyg-bold{
+  background-image: url("../images/new-icons/bold-na.png");
+
 }
-:hover > .icn-wysiwyg-bold, :active > .icn-wysiwyg-bold, :focus:hover > .icn-wysiwyg-bold, :focus:active > .icn-wysiwyg-bold, :hover:active > .icn-wysiwyg-bold, .active > .icn-wysiwyg-bold, .open .icn-wysiwyg-bold, .open > .btn:hover .icn-wysiwyg-bold {
-  background-position: -164px -100px;
+:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {
+  background-image: url("../images/new-icons/bold.png");
 }
-.icn-wysiwyg-bold.active, .active > .icn-wysiwyg-bold{
-  background-position: -130px -100px;
+.wysiwyg-bold.active, .active > .wysiwyg-bold{
+  background-image: url("../images/new-icons/bold.png");
 }
 
-.icn-wysiwyg-ul{
-  background-position: -203px -100px;
-  height: 10px;
+/*.icn-wysiwyg-ul{*/
+  /*background-position: -203px -100px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-ul, :active > .icn-wysiwyg-ul, :focus:hover > .icn-wysiwyg-ul, :focus:active > .icn-wysiwyg-ul, :hover:active > .icn-wysiwyg-ul, .active > .icn-wysiwyg-ul, .open .icn-wysiwyg-ul, .open > .btn:hover .icn-wysiwyg-ul {*/
+  /*background-position: -225px -100px;*/
+/*}*/
+/*.icn-wysiwyg-ul.active, .active > .icn-wysiwyg-ul{*/
+  /*background-position: -181px -100px;*/
+/*}*/
+
+.wysiwyg-ul{
+  background-image: url("../images/new-icons/list-bullets-na.png");
 }
-:hover > .icn-wysiwyg-ul, :active > .icn-wysiwyg-ul, :focus:hover > .icn-wysiwyg-ul, :focus:active > .icn-wysiwyg-ul, :hover:active > .icn-wysiwyg-ul, .active > .icn-wysiwyg-ul, .open .icn-wysiwyg-ul, .open > .btn:hover .icn-wysiwyg-ul {
-  background-position: -225px -100px;
+:hover > .wysiwyg-ul, :active > .wysiwyg-ul, :focus:hover > .wysiwyg-ul, :focus:active > .wysiwyg-ul, :hover:active > .wysiwyg-ul, .active > .wysiwyg-ul, .open .wysiwyg-ul, .open > .btn:hover .wysiwyg-ul {
+  background-image: url("../images/new-icons/list-bullets.png");
 }
-.icn-wysiwyg-ul.active, .active > .icn-wysiwyg-ul{
-  background-position: -181px -100px;
+.wysiwyg-ul.active, .active > .wysiwyg-ul{
+  background-image: url("../images/new-icons/list-bullets.png");
 }
 
-.icn-wysiwyg-unindent{
-  background-position: -247px -100px;
-  width: 10px;
-  height: 10px;
+/*.icn-wysiwyg-unindent{*/
+  /*background-position: -247px -100px;*/
+  /*width: 10px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-unindent, :active > .icn-wysiwyg-unindent, :focus:hover > .icn-wysiwyg-unindent, :focus:active > .icn-wysiwyg-unindent, :hover:active > .icn-wysiwyg-unindent, .active > .icn-wysiwyg-unindent, .open .icn-wysiwyg-unindent, .open > .btn:hover .icn-wysiwyg-unindent {*/
+  /*background-position: -267px -100px;*/
+/*}*/
+
+.wysiwyg-unindent{
+  background-image: url("../images/new-icons/indent-left-na.png");
 }
-:hover > .icn-wysiwyg-unindent, :active > .icn-wysiwyg-unindent, :focus:hover > .icn-wysiwyg-unindent, :focus:active > .icn-wysiwyg-unindent, :hover:active > .icn-wysiwyg-unindent, .active > .icn-wysiwyg-unindent, .open .icn-wysiwyg-unindent, .open > .btn:hover .icn-wysiwyg-unindent {
-  background-position: -267px -100px;
+:hover > .wysiwyg-unindent, :active > .wysiwyg-unindent, :focus:hover > .wysiwyg-unindent, :focus:active > .wysiwyg-unindent, :hover:active > .wysiwyg-unindent, .active > .wysiwyg-unindent, .open .wysiwyg-unindent, .open > .btn:hover .wysiwyg-unindent {
+  background-image: url("../images/new-icons/indent-left.png");
 }
 
+/*
 .icn-wysiwyg-indent{
   background-position: -287px -100px;
   width: 10px;
@@ -1412,39 +1494,73 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
 }
 :hover > .icn-wysiwyg-indent, :active > .icn-wysiwyg-indent, :focus:hover > .icn-wysiwyg-indent, :focus:active > .icn-wysiwyg-indent, :hover:active > .icn-wysiwyg-indent, .active > .icn-wysiwyg-indent, .open .icn-wysiwyg-indent, .open > .btn:hover .icn-wysiwyg-indent {
   background-position: -307px -100px;
+*/
+/*}*/
+
+.wysiwyg-indent{
+  background-image: url("../images/new-icons/indent-right-na.png");
+}
+:hover > .wysiwyg-indent, :active > .wysiwyg-indent, :focus:hover > .wysiwyg-indent, :focus:active > .wysiwyg-indent, :hover:active > .wysiwyg-indent, .active > .wysiwyg-indent, .open .wysiwyg-indent, .open > .btn:hover .wysiwyg-indent {
+  background-image: url("../images/new-icons/indent-right.png");
 }
 
-.icn-wysiwyg-italic{
-  background-position: -343px -100px;
-  width: 6px;
-  height: 10px;
+/*.icn-wysiwyg-italic{*/
+  /*background-position: -343px -100px;*/
+  /*width: 6px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-italic, :active > .icn-wysiwyg-italic, :focus:hover > .icn-wysiwyg-italic, :focus:active > .icn-wysiwyg-italic, :hover:active > .icn-wysiwyg-italic, .active > .icn-wysiwyg-italic, .open .icn-wysiwyg-italic, .open > .btn:hover .icn-wysiwyg-italic {*/
+  /*background-position: -359px -100px;*/
+/*}*/
+/*.icn-wysiwyg-italic.active, .active > .icn-wysiwyg-italic{*/
+  /*background-position: -327px -100px;*/
+/*}*/
+
+.wysiwyg-italic{
+  background-image: url("../images/new-icons/text-italic-na.png");
 }
-:hover > .icn-wysiwyg-italic, :active > .icn-wysiwyg-italic, :focus:hover > .icn-wysiwyg-italic, :focus:active > .icn-wysiwyg-italic, :hover:active > .icn-wysiwyg-italic, .active > .icn-wysiwyg-italic, .open .icn-wysiwyg-italic, .open > .btn:hover .icn-wysiwyg-italic {
-  background-position: -359px -100px;
+:hover > .wysiwyg-italic, :active > .wysiwyg-italic, :focus:hover > .wysiwyg-italic, :focus:active > .wysiwyg-italic, :hover:active > .wysiwyg-italic, .active > .wysiwyg-italic, .open .wysiwyg-italic, .open > .btn:hover .wysiwyg-italic {
+  background-image: url("../images/new-icons/text-italic.png");
 }
-.icn-wysiwyg-italic.active, .active > .icn-wysiwyg-italic{
-  background-position: -327px -100px;
+.wysiwyg-italic.active, .active > .wysiwyg-italic{
+  background-image: url("../images/new-icons/text-italic.png");
 }
 
-.icn-wysiwyg-quote{
-  background-position: -375px -100px;
-  width: 14px;
-  height: 10px;
+/*.icn-wysiwyg-quote{*/
+  /*background-position: -375px -100px;*/
+  /*width: 14px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-quote, :active > .icn-wysiwyg-quote, :focus:hover > .icn-wysiwyg-quote, :focus:active > .icn-wysiwyg-quote, :hover:active > .icn-wysiwyg-quote, .active > .icn-wysiwyg-quote, .open .icn-wysiwyg-quote, .open > .btn:hover .icn-wysiwyg-quote {*/
+  /*background-position: -399px -100px;*/
+/*}*/
+.wysiwyg-quote{
+  background-image: url("../images/new-icons/quotes-na.png");
 }
-:hover > .icn-wysiwyg-quote, :active > .icn-wysiwyg-quote, :focus:hover > .icn-wysiwyg-quote, :focus:active > .icn-wysiwyg-quote, :hover:active > .icn-wysiwyg-quote, .active > .icn-wysiwyg-quote, .open .icn-wysiwyg-quote, .open > .btn:hover .icn-wysiwyg-quote {
-  background-position: -399px -100px;
+:hover > .wysiwyg-quote, :active > .wysiwyg-quote, :focus:hover > .wysiwyg-quote, :focus:active > .wysiwyg-quote, :hover:active > .wysiwyg-quote, .active > .wysiwyg-quote, .open .wysiwyg-quote, .open > .btn:hover .wysiwyg-quote {
+  background-image: url("../images/new-icons/quotes.png");
 }
 
-.icn-wysiwyg-reset{
-  background-position: -424px -100px;
-  width: 14px;
-  height: 10px;
+/*.icn-wysiwyg-reset{*/
+  /*background-position: -424px -100px;*/
+  /*width: 14px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-reset, :active > .icn-wysiwyg-reset, :focus:hover > .icn-wysiwyg-reset, :focus:active > .icn-wysiwyg-reset, :hover:active > .icn-wysiwyg-reset, .active > .icn-wysiwyg-reset, .open .icn-wysiwyg-reset, .open > .btn:hover .icn-wysiwyg-reset {*/
+  /*background-position: -474px -100px;*/
+/*}*/
+/*.icn-wysiwyg-reset.disabled, .disabled .icn-wysiwyg-reset{*/
+  /*background-position: -449px -100px;*/
+/*}*/
+
+.wysiwyg-reset{
+  background-image: url("../images/new-icons/refresh-na.png");
 }
-:hover > .icn-wysiwyg-reset, :active > .icn-wysiwyg-reset, :focus:hover > .icn-wysiwyg-reset, :focus:active > .icn-wysiwyg-reset, :hover:active > .icn-wysiwyg-reset, .active > .icn-wysiwyg-reset, .open .icn-wysiwyg-reset, .open > .btn:hover .icn-wysiwyg-reset {
-  background-position: -474px -100px;
+:hover > .wysiwyg-reset, :active > .wysiwyg-reset, :focus:hover > .wysiwyg-reset, :focus:active > .wysiwyg-reset, :hover:active > .wysiwyg-reset, .active > .wysiwyg-reset, .open .wysiwyg-reset, .open > .btn:hover .wysiwyg-reset {
+  background-image: url("../images/new-icons/refresh.png");
 }
-.icn-wysiwyg-reset.disabled, .disabled .icn-wysiwyg-reset{
-  background-position: -449px -100px;
+.wysiwyg-reset.disabled, .disabled .wysiwyg-reset{
+  background-image: url("../images/new-icons/refresh-na.png");
 }
 
 .icn-wysiwyg-align-center{
@@ -1458,6 +1574,16 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
 .icn-wysiwyg-align-center.active, .active > .icn-wysiwyg-align-center{
   background-position: -498px -100px;
 }
+
+/*.wysiwyg-align-center{*/
+  /*background-image: url("../images/new-icons/.png");*/
+/*}*/
+/*:hover > .wysiwyg-align-center, :active > .wysiwyg-align-center, :focus:hover > .wysiwyg-align-center, :focus:active > .wysiwyg-align-center, :hover:active > .wysiwyg-align-center, .active > .wysiwyg-align-center, .open .wysiwyg-align-center, .open > .btn:hover .wysiwyg-align-center {*/
+  /*background-image: url("../images/new-icons/refresh-na.png");*/
+/*}*/
+/*.wysiwyg-align-center.active, .active > .wysiwyg-align-center{*/
+  /*background-image: url("../images/new-icons/refresh-na.png");*/
+/*}*/
 
 .icn-wysiwyg-align-left{
   background-position: -578px -100px;
@@ -1483,25 +1609,42 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
   background-position: -618px -100px;
 }
 
-.icn-wysiwyg-underline{
-  background-position: -740px -100px;
-  width: 8px;
-  height: 10px;
+/*.icn-wysiwyg-underline{*/
+  /*background-position: -740px -100px;*/
+  /*width: 8px;*/
+  /*height: 10px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-underline, :active > .icn-wysiwyg-underline, :focus:hover > .icn-wysiwyg-underline, :focus:active > .icn-wysiwyg-underline, :hover:active > .icn-wysiwyg-underline, .active > .icn-wysiwyg-underline, .open .icn-wysiwyg-underline, .open > .btn:hover .icn-wysiwyg-underline {*/
+  /*background-position: -758px -100px;*/
+/*}*/
+/*.icn-wysiwyg-underline.active, .active > .icn-wysiwyg-underline{*/
+  /*background-position: -722px -100px;*/
+/*}*/
+
+.wysiwyg-underline{
+  background-image: url("../images/new-icons/underline-na.png");
 }
-:hover > .icn-wysiwyg-underline, :active > .icn-wysiwyg-underline, :focus:hover > .icn-wysiwyg-underline, :focus:active > .icn-wysiwyg-underline, :hover:active > .icn-wysiwyg-underline, .active > .icn-wysiwyg-underline, .open .icn-wysiwyg-underline, .open > .btn:hover .icn-wysiwyg-underline {
-  background-position: -758px -100px;
+:hover > .wysiwyg-underline, :active > .wysiwyg-underline, :focus:hover > .wysiwyg-underline, :focus:active > .wysiwyg-underline, :hover:active > .wysiwyg-underline, .active > .wysiwyg-underline, .open .wysiwyg-underline, .open > .btn:hover .wysiwyg-underline {
+  background-image: url("../images/new-icons/underline.png");
 }
-.icn-wysiwyg-underline.active, .active > .icn-wysiwyg-underline{
-  background-position: -722px -100px;
+.wysiwyg-underline.active, .active > .wysiwyg-underline{
+  background-image: url("../images/new-icons/underline.png");
 }
 
-.icn-wysiwyg-link{
-  background-position: -1926px -100px;
-  width: 15px;
-  height: 8px;
+/*.icn-wysiwyg-link{*/
+  /*background-position: -1926px -100px;*/
+  /*width: 15px;*/
+  /*height: 8px;*/
+/*}*/
+/*:hover > .icn-wysiwyg-link, :active > .icn-wysiwyg-link, :focus:hover > .icn-wysiwyg-link, :focus:active > .icn-wysiwyg-link, :hover:active > .icn-wysiwyg-link, .active > .icn-wysiwyg-link, .open .icn-wysiwyg-link, .open > .btn:hover .icn-wysiwyg-link {*/
+  /*background-position: -1951px -100px;*/
+/*}*/
+
+.wysiwyg-link{
+  background-image: url("../images/new-icons/link-na.png");
 }
-:hover > .icn-wysiwyg-link, :active > .icn-wysiwyg-link, :focus:hover > .icn-wysiwyg-link, :focus:active > .icn-wysiwyg-link, :hover:active > .icn-wysiwyg-link, .active > .icn-wysiwyg-link, .open .icn-wysiwyg-link, .open > .btn:hover .icn-wysiwyg-link {
-  background-position: -1951px -100px;
+:hover > .wysiwyg-link, :active > .wysiwyg-link, :focus:hover > .wysiwyg-link, :focus:active > .wysiwyg-link, :hover:active > .wysiwyg-link, .active > .wysiwyg-link, .open .wysiwyg-link, .open > .btn:hover .wysiwyg-link {
+  background-image: url("../images/new-icons/link.png");
 }
 
 

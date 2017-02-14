@@ -3624,6 +3624,12 @@ select[multiple].input-lg {
   background-color: #90c56b;
   border-color: #90c56b;
 }
+
+.control input[disabled] ~ .control-indicator {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
 .control input:checked ~ .control-indicator.alternate:after {
   position: absolute;
   top: 6px;
