@@ -98,7 +98,7 @@
         };
 
         $scope.subscribeUser = function (user, nameSubscription) {
-          if ($scope.disabledCheckbox || $scope.isLastUserWithInvoiceSubscription(user)) {
+          if ($scope.disabledCheckbox || (nameSubscription === 'invoice' && $scope.isLastUserWithInvoiceSubscription(user))) {
             return;
           }
 

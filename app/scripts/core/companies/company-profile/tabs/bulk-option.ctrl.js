@@ -32,7 +32,7 @@
         };
 
         $scope.changeUserSubscription = function (subsc) {
-          if ($scope.disabledSubscr || $scope.isInvoiceSubscriptionForbidden()) {
+          if ($scope.disabledSubscr || (subsc === 'invoice' && $scope.isInvoiceSubscriptionForbidden())) {
             return;
           }
 
