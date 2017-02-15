@@ -1479,13 +1479,12 @@ span.sort-span {
 .currency-icons .force-create .windows8 {
   margin-top: 10px;
 }
-.qt-invoices .resend-button,
 .qt-receivable-number .resend-button {
   width: 16px;
   height: 16px;
   margin-top: 4px;
 }
-.qt-invoices .resend-button .green-checkmark,
+
 .qt-receivable-number .resend-button .green-checkmark {
   position: absolute;
   top: 10px;
