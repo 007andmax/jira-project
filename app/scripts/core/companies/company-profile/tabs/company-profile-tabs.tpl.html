@@ -106,7 +106,7 @@
                   <li ng-click="changeUserSubscription('invoice')">
                     <a tabindex="-1" href="javascript:void(0)">
                       <div class="clearfix">
-                        <label class="control checkbox pull-left">
+                        <label class="control checkbox pull-left" ng-disabled="disabledSubscr || isInvoiceSubscriptionForbidden()">
                           <input type="checkbox" ng-checked="usersSbscr['invoice']"
                                  ng-disabled="disabledSubscr || isInvoiceSubscriptionForbidden()">
                           <span class="control-indicator"></span> Invoice Updates
