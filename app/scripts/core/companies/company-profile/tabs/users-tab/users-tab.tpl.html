@@ -167,12 +167,12 @@
             <div class="btn btn-icn btn-default  has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
                  tooltip-placement="top" uib-tooltip="Edit">
-              <i class="icn-sm icn-edit"></i>
+              <i class="icon-sm edit-icon"></i>
             </div>
 
             <div class="btn btn-icn btn-default btn-user-mail  has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
-              <i class="icn-sm icn-user-mail"></i>
+              <i class="icon-sm icn-user-mail"></i>
             </div>
 
             <div class="btn btn-icn btn-default  has-tooltip" ng-click="archiveUser()"

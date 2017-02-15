@@ -461,7 +461,7 @@
                    tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"
                    ng-click="deleteUpdate()"
                    custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
-                  <i class="icn-sm icn-delete"></i>
+                  <i class="icon-sm icn-delete"></i>
                 </a>
               </div>
               <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE'" ng-bind-html="getUpdateNote()"></p>

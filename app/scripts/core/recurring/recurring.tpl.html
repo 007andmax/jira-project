@@ -101,13 +101,13 @@
                       </a>
 
                       <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE') && !isCurrentCompanyAddressEmpty">
-                        <i class="icn-sm icn-edit" uib-tooltip="edit" tooltip-placement="top"
+                        <i class="icon-sm edit-icon" uib-tooltip="edit" tooltip-placement="top"
                            tooltip-append-to-body="true"
                            ng-click="toogleEditForm(invoice.id)"></i>
                       </a>
 
                       <a custom-disabled="{{ disabledDelete }}">
-                        <i class="icn-sm icn-delete"
+                        <i class="icon-sm icn-delete"
                            uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
                            ng-click="deleteRecurringInvoice()"></i></a>
                     </div>
