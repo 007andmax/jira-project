@@ -5260,6 +5260,7 @@ tbody.collapse.in {
 /*Avator DropDown - End*/
 .dropup .dropdown-menu {
   padding: 0;
+  width: auto;
 }
 .add-link-form {
   width: 310px;

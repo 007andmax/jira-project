@@ -2166,6 +2166,10 @@ Devices tab
   padding: 30px 10px;
 }
 
+.products-content .qt-products{
+  padding-top: 10px;
+}
+
 .qt-products > li {
   height: auto;
   cursor: pointer;
