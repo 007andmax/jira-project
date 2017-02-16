@@ -300,20 +300,20 @@
             <div class="btn-icn btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"
                  tooltip-placement="top" uib-tooltip="Edit">
-              <i class="icn-sm icn-edit"></i>
+              <i class="icon-sm edit-icon"></i>
             </div>
 
             <div class="btn btn-icn btn-default btn-user-mail pull-left has-tooltip"
                  custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
-              <i class="icn-sm icn-user-mail"></i>
+              <i class="icon-sm icn-user-mail"></i>
             </div>
 
             <div class="btn btn-icn btn-default pull-left has-tooltip" ng-click="archiveUser()"
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">
-              <i class="icn-sm icn-delete"></i>
+              <i class="icon-sm icn-delete"></i>
             </div>
 
             <div class="btn btn-default pull-left has-tooltip" ng-if="user.deletedAt">

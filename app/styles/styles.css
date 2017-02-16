@@ -3630,13 +3630,18 @@ select[multiple].input-lg {
   cursor: not-allowed;
 }
 
-.control[disabled]{
+.dropdown-subscribe .control[disabled]{
   background-color: #eee;
 }
 
-.control input:checked[disabled] ~ .control-indicator {
+.dropdown-subscribe .control input:checked[disabled] ~ .control-indicator {
   background-color: rgba(107, 146, 76, 0.41);
   cursor: not-allowed;
+}
+
+.create-window .windows8{
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .control input:checked ~ .control-indicator.alternate:after {

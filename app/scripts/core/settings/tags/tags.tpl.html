@@ -89,7 +89,7 @@
           ng-form="updateTagForm">
           <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
             {{ tag.word }}
-            <i class="icn-sm icn-edit pull-right" uib-tooltip="Edit" tooltip-placement="top"
+            <i class="icon-sm edit-icon pull-right" uib-tooltip="Edit" tooltip-placement="top"
                tooltip-append-to-body="true"></i>
           </div>
           <div class="col-1 form-group" ng-if="editingId === tag.id"
@@ -121,7 +121,7 @@
 
           <div class="col-4" ng-click="remove(tag.id)" ng-if="editingId !== tag.id"
                uib-tooltip="Delete" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-delete"></i>
+            <i class="icon-sm icn-delete"></i>
           </div>
           <div class="col-4" uib-dropdown is-open="replaceDropdown[tag.id].isOpen"
                uib-tooltip="Replace with..." tooltip-placement="top" tooltip-append-to-body="true"

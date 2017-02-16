@@ -641,11 +641,11 @@ a.ha-24 {
 }
 
 .icn-delete {
-  background-position: -1614px 0;
+  background-image: url("../images/new-icons/delete.png");
 }
 
 :hover > .icn-delete, :active > .icn-delete, :focus:hover > .icn-delete, :focus:active > .icn-delete, :hover:active > .icn-delete, .active > .icn-delete, .open .icn-delete, .open > .btn:hover .icn-delete {
-  background-position: -1592px 0;
+  background-image: url("../images/new-icons/delete-na.png");
 }
 
 .icn-message {
@@ -684,21 +684,20 @@ a.ha-24 {
   width: 14px;
 }
 
-.icn-ticket-flag {
-  background-position: -2408px -100px;
-  width: 10px;
+.icon-ticket-flag {
+  background-image: url("../images/new-icons/flag-gray.png");
 }
 
-:hover > .icn-ticket-flag, :active > .icn-ticket-flag, :focus:hover > .icn-ticket-flag, :focus:active > .icn-ticket-flag, :hover:active > .icn-ticket-flag, .active > .icn-ticket-flag, .open .icn-ticket-flag, .open > .btn:hover .icn-ticket-flag {
-  background-position: -2428px -100px;
+:hover > .icon-ticket-flag, :active > .icon-ticket-flag, :focus:hover > .icon-ticket-flag, :focus:active > .icon-ticket-flag, :hover:active > .icon-ticket-flag, .active > .icon-ticket-flag, .open .icon-ticket-flag, .open > .btn:hover .icon-ticket-flag {
+  background-image: url("../images/new-icons/flag-white.png");
 }
 
-.icn-user {
-  background-position: -1758px 0;
+.icon-user {
+  background-image: url("../images/new-icons/user-circle-gray.png");
 }
 
-:hover > .icn-user, :active > .icn-user, :focus:hover > .icn-user, :focus:active > .icn-user, :hover:active > .icn-user, .active > .icn-user, .open .icn-user, .open > .btn:hover .icn-user {
-  background-position: -1736px 0;
+:hover > .icon-user, :active > .icon-user, :focus:hover > .icon-user, :focus:active > .icon-user, :hover:active > .icon-user, .active > .icon-user, .open .icon-user, .open > .btn:hover .icon-user {
+  background-image: url("../images/new-icons/user-circle-white.png");
 }
 
 .icn-priority {
@@ -1869,16 +1868,16 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-user-mail {
-  background-position: -458px -206px;
+  background-image: url("../images/new-icons/email.png");
 }
 
 .disabled .icn-user-mail,
 .disabled .icn-user-mail:hover {
-  background-position: -458px -227px;
+  background-image: url("../images/new-icons/email-na.png");
 }
 
 :hover > .icn-user-mail, :active > .icn-user-mail, :focus:hover > .icn-user-mail, :focus:active > .icn-user-mail, :hover:active > .icn-user-mail, .active > .icn-user-mail, .open > .icn-user-mail, .open .icn-user-mail {
-  background-position: -480px -206px;
+  background-image: url("../images/new-icons/email.png");
 }
 
 .icn-user-chat {
