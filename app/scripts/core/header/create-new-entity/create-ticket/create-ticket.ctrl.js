@@ -670,6 +670,7 @@
           if (isTicketChanged) {
             $scope.savedState.types.unshift('ticket');
             $scope.savedState.items.unshift($scope.ticket);
+            $scope.savedState.originItems.unshift({});
           }
         }
 
@@ -688,10 +689,12 @@
           $scope.ticket.selectUpdateSharedUser = angular.copy($scope.selectUpdateSharedUser);
           $scope.savedState.types.unshift('ticket');
           $scope.savedState.items.unshift($scope.ticket);
+          $scope.savedState.originItems.unshift({});
 
           if ($scope.ticket.draftId) {
             $scope.savedState.types.unshift('company');
             $scope.savedState.items.unshift(userFromDraft);
+            $scope.savedState.originItems.unshift({});
           }
 
           $scope.setOpenedTab(type);

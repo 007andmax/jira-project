@@ -8,8 +8,9 @@
 
         var savedState = $scope.getLastSavedState('service');
 
-        if (savedState.type === 'service' && savedState.item) {
-          $scope.editService = angular.copy(savedState.item);
+        var origin = savedState.item;
+        if (savedState.type === 'service' && origin) {
+          $scope.editService = angular.copy(origin);
         } else {
           $scope.editService = {
             taxable: true,
@@ -87,7 +88,13 @@
 
         function createNewWindowClosing() {
           var service = $scope.editService;
-          var isServiceChanged = service.name || service.rate;
+          var isServiceChanged;
+
+          if (origin) {
+            isServiceChanged = service.name !== origin.name || service.rate !== origin.rate;
+          } else {
+            isServiceChanged = service.name || service.rate;
+          }
 
           if (isServiceChanged) {
             $scope.savedState.types.unshift('service');

@@ -12,8 +12,17 @@
           action;
 
         var savedState = $scope.getLastSavedState('user');
-        if (savedState.type === 'user' && savedState.item) {
-          $scope.editUser = angular.copy(savedState.item);
+        var origin = savedState.item;
+        if (savedState.type === 'user' && origin) {
+          $scope.editUser = angular.copy(origin);
+
+          if ($scope.editUser.phoneNumbers.length == 0) {
+            $scope.editUser.phoneNumbers.push({
+              typeNumber: 'OFFICE'
+            });
+          }
+
+          $scope.editUserOrigin = angular.copy($scope.editUser);
           $timeout(function () {
             if ($scope.editUser.company && !$scope.editUser.company.isDefault) {
               var companyId = $scope.editUser.company.id;
@@ -56,13 +65,22 @@
           $scope.isCreation = true;
           $scope.editUser = $scope.editUser || {
             role: 'USER',
-            phoneNumbers: [],
+            phoneNumbers: [{
+              typeNumber: 'OFFICE'
+            }],
             subscription: { ticket: true },
             welcomeEmail: true,
             avatar: {
               scale: 50
             }
           };
+
+          if ($scope.editUser.phoneNumbers.length == 0)
+            $scope.editUser.phoneNumbers.push({
+              typeNumber: 'OFFICE'
+            });
+
+          $scope.editUserOrigin = angular.copy($scope.editUser);
 
           action = 'CREATE_USERS';
         } else {
@@ -220,8 +238,20 @@
 
         function createNewWindowClosing() {
           var user = $scope.editUser;
-          var isUserChanged = user.firstName || user.lastName || $scope.userCompany || user.primaryEmail ||
-            user.designation || $scope.editUser.avatar.cropped;
+          var isUserChanged = false;
+          var originCompany = origin.company && CompaniesService.getOneById(origin.company.id);
+
+          if (origin) {
+            isUserChanged = user.firstName !== origin.firstName
+              || user.lastName !== origin.lastName
+              || !angular.equals($scope.userCompany, originCompany)
+              || user.primaryEmail !== origin.primaryEmail
+              || user.designation !== origin.designation
+              || !angular.equals($scope.editUser.avatar.cropped, origin.avatar.cropped);
+          } else {
+            isUserChanged = user.firstName || user.lastName || $scope.userCompany || user.primaryEmail ||
+              user.designation || $scope.editUser.avatar.cropped;
+          }
 
           if (isUserChanged) {
             $scope.savedState.types.unshift('user');

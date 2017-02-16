@@ -19,8 +19,9 @@
         var savedState = $scope.getLastSavedState('company');
         var action = 'CREATE_COMPANIES';
 
-        if (savedState.type === 'company' && savedState.item && savedState.item.id) {
-          var companyId = savedState.item.id,
+        var origin = savedState.item;
+        if (savedState.type === 'company' && origin && origin.id) {
+          var companyId = origin.id,
             company = CompaniesService.getOneById(companyId);
 
           action = 'EDIT_COMPANIES';
@@ -86,16 +87,17 @@
               }
             });
 
+            origin = angular.copy($scope.editCompany);
           });
 
-        } else if (savedState.item) {
+        } else if (origin) {
           $scope.isLastInvoiceSubsciption = true;
           $scope.editCompany = {
             addresses: [{ isPrimary: true }],
             contacts: [{
-              firstName: savedState.item.firstName,
-              lastName: savedState.item.lastName,
-              primaryEmail: savedState.item.source,
+              firstName: origin.firstName,
+              lastName: origin.lastName,
+              primaryEmail: origin.source,
               subscription: { ticket: true, invoice: true },
               avatar: {
                 scale: 50
@@ -186,6 +188,8 @@
                   $scope.editCompany.services.push(service);
                   $scope.selectedServices[service.versionedId.id] = true;
                 }
+
+                onModelInitializationComplete();
               }
             });
           }
@@ -512,14 +516,39 @@
 
         function createNewWindowClosing() {
           var company = $scope.editCompany;
-          var hasClientType = company.clientType && company.clientType.trim();
-          var hasAddress = company.addresses && company.addresses.length && company.addresses[0].address;
-          var hasContact = company.contacts && company.contacts.length && (
-              company.contacts[0].firstName || company.contacts[0].lastName || company.contacts[0].primaryEmail ||
-              company.contacts[0].designation || company.contacts[0].avatar.cropped
-            );
-          var isCompanyChanged = company.name || company.domain || hasClientType || company.logo ||
-            company.accountNumber || company.description || hasAddress || hasContact || company.login || company.password;
+          var isCompanyChanged, hasClientType, hasAddress, hasContact;
+
+          if (origin) {
+            var user = company.contacts[0];
+            var originUser = origin.contacts[0];
+            hasContact = user.firstName !== originUser.firstName
+              || user.lastName !== originUser.lastName
+              || user.primaryEmail !== originUser.primaryEmail
+              || user.designation !== originUser.designation
+              || !angular.equals(user.avatar.cropped, originUser.avatar.cropped);
+
+            isCompanyChanged = company.name !== origin.name
+              || company.domain !== origin.domain
+              || company.clientType.trim() !== origin.clientType.trim()
+              || !angular.equals(company.logo.cropped, origin.logo.cropped)
+              || company.accountNumber !== origin.accountNumber
+              || company.description !== origin.description
+              || !angular.equals(company.address, origin.address)
+              || hasContact
+              || company.login !== origin.login
+              || company.password !== origin.password;
+
+          } else {
+            hasClientType = company.clientType && company.clientType.trim();
+            hasAddress = company.addresses && company.addresses.length && company.addresses[0].address;
+            hasContact = company.contacts && company.contacts.length && (
+                company.contacts[0].firstName || company.contacts[0].lastName || company.contacts[0].primaryEmail ||
+                company.contacts[0].designation || company.contacts[0].avatar.cropped
+              );
+
+            isCompanyChanged = company.name || company.domain || hasClientType || company.logo ||
+              company.accountNumber || company.description || hasAddress || hasContact || company.login || company.password;
+          }
 
           if (isCompanyChanged) {
             $scope.savedState.types.unshift('company');

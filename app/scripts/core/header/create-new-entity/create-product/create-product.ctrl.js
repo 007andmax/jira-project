@@ -23,12 +23,13 @@
         savedState = $scope.getLastSavedState('category');
       }
 
-      if (savedState.type === 'product' && savedState.item) {
-        if (savedState.item.name) {
-          savedState.item = { category: savedState.item };
+      var origin = savedState.item;
+      if (savedState.type === 'product' && origin) {
+        if (origin.name) {
+          savedState.item = { category: origin };
         }
 
-        $scope.editProduct = angular.copy(savedState.item);
+        $scope.editProduct = angular.copy(origin);
         var company = $scope.editProduct.company;
 
         if ($scope.editProduct.category && $scope.editProduct.category.default) {
@@ -39,8 +40,8 @@
           $scope.editProduct.company = company.clientType.toLowerCase() === 'vendor' ? company : undefined;
         }
 
-      } else if (savedState.type === 'category' && savedState.item) {
-        $scope.editCategory = angular.copy(savedState.item);
+      } else if (savedState.type === 'category' && origin) {
+        $scope.editCategory = angular.copy(origin);
         $scope.editProduct = {};
       } else {
         $scope.editProduct = {};
@@ -195,10 +196,30 @@
 
       function createNewWindowClosing() {
         var product = $scope.editProduct;
-        var isProductChanged = product.description || product.cost || product.sale || product.ilc ||
-          product.manufacture || (product.category && product.category.id) || (product.company && product.company.id);
+        var isProductChanged;
 
-        if (isProductChanged || $scope.editCategory.name) {
+        if (savedState.type === 'product') {
+          if (origin) {
+            isProductChanged = product.description !== origin.description
+              || product.cost !== origin.cost
+              || product.sale !== origin.sale
+              || product.ilc !== origin.ilc
+              || product.manufacture !== origin.manufacture
+              || (origin.category ? !product.category || product.category.id !== origin.category.id : product.category)
+              || (origin.company ? !product.company || product.company.id !== origin.company.id : product.company);
+          } else {
+            isProductChanged = product.description || product.cost || product.sale || product.ilc ||
+              product.manufacture || (product.category && product.category.id) || (product.company && product.company.id);
+          }
+        } else {
+          if (origin) {
+            isProductChanged = $scope.editCategory.name !== origin.name;
+          } else {
+            isProductChanged = $scope.editCategory.name;
+          }
+        }
+
+        if (isProductChanged) {
           $scope.savedState.types.unshift('product');
           $scope.savedState.items.unshift($scope.editProduct);
         }
