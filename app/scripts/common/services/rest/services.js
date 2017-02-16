@@ -308,6 +308,11 @@
         }
       }
 
+      function isNameUnique(name, modelId, callback) {
+        var future = $http.get('/services/isServiceNameUnique?name=' + name + (modelId ? '&id=' + modelId : ''));
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         search: search,
         getAllByCompany: getAllByCompany,
@@ -320,7 +325,8 @@
         deleteCompany: deleteCompany,
         move: move,
         getActualMapping: getActualMapping,
-        changeBillableStatus: changeBillableStatus
+        changeBillableStatus: changeBillableStatus,
+        isNameUnique: isNameUnique
       }
 
     }]);

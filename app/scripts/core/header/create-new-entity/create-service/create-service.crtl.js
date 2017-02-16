@@ -37,21 +37,14 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
-        $scope.validateServiceName = function (ngModelCtrl, modelId) {
-          var uniqueNameCount = 0;
-
-          if ($scope.services) {
-            for (var i = 0; i < $scope.services.length; i++) {
-              if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.services[i].name.toLowerCase()) && (modelId !== $scope.services[i].versionedId.id)) {
-                uniqueNameCount++;
-              }
-            }
-          }
-
-          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
+        $scope.validateServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
+          ServicesService.isNameUnique($scope.editService.name, modelId, function (resp) {
+            ngModelCtrl.$setValidity('unique', resp.valid);
+            afterValidationCallback();
+          });
         };
 
         $scope.getValidationMessage = function (form) {

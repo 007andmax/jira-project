@@ -12,7 +12,7 @@
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.newTaxRate = {};
 
-        $scope.validateTaxRateCode = function (ngModelCtrl) {
+        $scope.validateTaxRateCode = function (ngModelCtrl, modelId, afterValidationCallback) {
 
           var taxRateCount = 0;
 
@@ -23,12 +23,8 @@
           }
 
           ngModelCtrl.$setDirty();
-
-          if (taxRateCount > 1) {
-            ngModelCtrl.$setValidity('unique', false);
-          } else {
-            ngModelCtrl.$setValidity('unique', true);
-          }
+          ngModelCtrl.$setValidity('unique', taxRateCount <= 1);
+          afterValidationCallback();
         };
 
         $scope.validateNewTaxRate = function (form) {

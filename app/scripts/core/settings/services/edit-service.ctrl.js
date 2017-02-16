@@ -8,7 +8,6 @@
 
         if ($scope.service) {
           $scope.editService = angular.copy($scope.service);
-          $scope.editService.timeBlock = $scope.editService.timeBlock * 60;
         } else {
           $scope.editService = {
             taxable: true,
@@ -39,24 +38,11 @@
           return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.validateServiceName = function (ngModelCtrl) {
-          var uniqueNameCount = 0;
-          for (var i = 0; i < $scope.services.length; i++) {
-            if (ngModelCtrl.$viewValue.toLowerCase() === $scope.services[i].name.toLowerCase()) {
-              uniqueNameCount++;
-            }
-          }
-          ngModelCtrl.$setValidity('unique', setvalidityName());
-
-          function setvalidityName() {
-
-            if ($scope.service) {
-              return uniqueNameCount < 1 || $scope.service.name === $scope.editService.name;
-            } else {
-              return uniqueNameCount < 1;
-            }
-
-          }
+        $scope.validateServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
+          ServicesService.isNameUnique($scope.editService.name, modelId, function (resp) {
+            ngModelCtrl.$setValidity('unique', resp.valid);
+            afterValidationCallback();
+          });
         };
 
         $scope.getValidationMessage = function (form) {

@@ -34,6 +34,7 @@
 
           function modalController($scope, $state, $uibModalInstance, UsersService, $rootScope) {
             var startPageMap = {
+              ALL: 'all',
               UNASSIGNED: 'unassigned',
               MY_TICKETS: 'user',
               SHARED: 'shared',
@@ -44,6 +45,7 @@
             };
 
             $scope.pageMapping = {
+              'ALL': 'All Tickets',
               'UNASSIGNED': 'Unassigned',
               'MY_TICKETS': 'My Tickets',
               'SHARED': 'Shared',

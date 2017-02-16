@@ -56,7 +56,7 @@
         return form[fieldName] && ($scope.triedToSaveCategory || (form[fieldName].$dirty && !form[fieldName].$error['required'])) && !form[fieldName].$valid;
       };
 
-      $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
+      $scope.isUniqueCategoryName = function (ngModelCtrl, modelId, afterValidationCallback) {
         var categories = $scope.categories;
         if (!categories) {
           return;
@@ -70,6 +70,7 @@
           }
         }
         ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
+        afterValidationCallback();
       };
 
       $scope.$watch('editProduct.company', function (value) {
@@ -113,15 +114,17 @@
         }
       };
 
-      $scope.validateProductIls = function (ngModelCtrl, modelId) {
+      $scope.validateProductIls = function (ngModelCtrl, modelId, afterValidationCallback) {
         var validationResult = ProductsService.isILCUnique(ngModelCtrl.$viewValue, modelId || '', function () {
           ngModelCtrl.$setValidity('unique', validationResult.value);
+          afterValidationCallback();
         });
       };
 
-      $scope.validateProductMnf = function (ngModelCtrl, modelId) {
+      $scope.validateProductMnf = function (ngModelCtrl, modelId, afterValidationCallback) {
         var validationResult = ProductsService.isMfgUnique(ngModelCtrl.$viewValue, modelId || '', function () {
           ngModelCtrl.$setValidity('unique', validationResult.value);
+          afterValidationCallback();
         });
       };
 

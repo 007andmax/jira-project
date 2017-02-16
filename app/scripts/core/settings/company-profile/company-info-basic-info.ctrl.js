@@ -6,9 +6,10 @@
     ['$scope', 'CompaniesService',
       function ($scope, CompaniesService) {
 
-        $scope.validateCompanyName = function (ngModelCtrl) {
+        $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
           });
         };
 

@@ -177,9 +177,10 @@
           return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
-        $scope.validateUserEmail = function (ngModelCtrl) {
+        $scope.validateUserEmail = function (ngModelCtrl, modelId, afterValidationCallback) {
           var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id || '', false, function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
           });
         };
 

@@ -600,6 +600,7 @@
 
     var defaultTicketsPage,
       startPageMap = {
+        ALL: 'all',
         UNASSIGNED: 'unassigned',
         MY_TICKETS: 'user',
         SHARED: 'shared',
@@ -621,7 +622,7 @@
       return '/tickets/' + defaultTicketsPage;
     }
 
-    return '/tickets/unassigned';
+    return '/tickets/all';
   }
 
 }());

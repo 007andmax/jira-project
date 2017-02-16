@@ -32,7 +32,7 @@
           }
         };
 
-        $scope.validateTaxCode = function (ngModelCtrl, modelId) {
+        $scope.validateTaxCode = function (ngModelCtrl, modelId, afterValidationCallback) {
           var uniqueNameCount = 0;
 
           if ($scope.taxRates) {
@@ -44,6 +44,7 @@
           }
 
           ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
+          afterValidationCallback();
         };
 
         $scope.getValidationMessage = function (form) {

@@ -29,9 +29,12 @@
           }
 
           function setValidationTimeout() {
+            ngModelCtrl.$$parentForm.$setValidity('pending', false);
             return $timeout(function () {
               if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique) && scope.validationFunc) {
-                scope.validationFunc(ngModelCtrl, scope.modelId);
+                scope.validationFunc(ngModelCtrl, scope.modelId, function () {
+                  ngModelCtrl.$$parentForm.$setValidity('pending', true);
+                });
               }
             }, 500);
           }

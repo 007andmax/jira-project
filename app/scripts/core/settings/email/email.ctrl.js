@@ -87,11 +87,10 @@
           }
         });
 
-        $scope.checkSMTPLoginUnique = function (model) {
-          $scope.checkLoginUniqueInProgress = true;
+        $scope.checkSMTPLoginUnique = function (model, modelId, afterValidationCallback) {
           CompaniesService.checkSMTPLoginUnique(model.$viewValue, function (resp) {
             $scope.smtpForm.login.$setValidity('unique', !!resp);
-            $scope.checkLoginUniqueInProgress = false;
+            afterValidationCallback();
           })
         };
 

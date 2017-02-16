@@ -296,7 +296,7 @@
           return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 
-        $scope.validateCompanyName = function (ngModelCtrl) {
+        $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
 
           if ($scope.currentUser.accountType === "ROOT") {
             ngModelCtrl.$setValidity('unique', true);
@@ -305,16 +305,18 @@
 
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
           });
         };
 
-        $scope.validateCompanyDomain = function (ngModelCtrl) {
+        $scope.validateCompanyDomain = function (ngModelCtrl, modelId, afterValidationCallback) {
           var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
           });
         };
 
-        $scope.validateContactEmail = function (ngModelCtrl, contactId) {
+        $scope.validateContactEmail = function (ngModelCtrl, contactId, afterValidationCallback) {
 
           var emailsCount = 0;
 
@@ -326,14 +328,16 @@
 
           if (emailsCount > 1) {
             ngModelCtrl.$setValidity('unique', false);
+            afterValidationCallback();
           } else {
             var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', false, function () {
               ngModelCtrl.$setValidity('unique', validationResult.value);
+              afterValidationCallback()
             });
           }
         };
 
-        $scope.validateTaxRateCode = function (ngModelCtrl, modelId) {
+        $scope.validateTaxRateCode = function (ngModelCtrl, modelId, afterValidationCallback) {
 
           var taxRateCount = 0;
 
@@ -343,11 +347,8 @@
             }
           }
 
-          if (taxRateCount > 1) {
-            ngModelCtrl.$setValidity('unique', false);
-          } else {
-            ngModelCtrl.$setValidity('unique', true);
-          }
+          ngModelCtrl.$setValidity('unique', taxRateCount <= 1);
+          afterValidationCallback();
         };
 
         $scope.changePrimaryAddress = function (location) {
@@ -440,7 +441,7 @@
 
         };
 
-        $scope.validateServiceName = function (ngModelCtrl) {
+        $scope.validateServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
           var defaultDuplicates = 0,
             newServicesDuplicates = 0;
 
@@ -461,6 +462,7 @@
           }
 
           ngModelCtrl.$setValidity('unique', newServicesDuplicates < 2 && defaultDuplicates < 1);
+          afterValidationCallback();
         };
 
         $scope.movingTax = function (originTax, form) {
