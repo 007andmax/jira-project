@@ -700,6 +700,14 @@ a.ha-24 {
   background-image: url("../images/new-icons/user-circle-white.png");
 }
 
+.icon-user-black {
+  background-image: url("../images/new-icons/user-circle-na.png");
+}
+
+:hover > .icon-user-black, :active > .icon-user-black, :focus:hover > .icon-user-black, :focus:active > .icon-user-black, :hover:active > .icon-user-black, .active > .icon-user-black, .open .icon-user-black, .open > .btn:hover .icon-user-black {
+  background-image: url("../images/new-icons/user-circle.png");
+}
+
 .icn-priority {
   background-position: -818px -100px;
   width: 6px;
@@ -775,19 +783,19 @@ a.ha-24 {
 }
 
 .icn-remote-access {
-  background-position: -1908px 0;
+  background-image: url("../images/new-icons/network-desktop.png");
 }
 
 :hover > .icn-remote-access, :active > .icn-remote-access, :focus:hover > .icn-remote-access, :focus:active > .icn-remote-access, :hover:active > .icn-remote-access, .active > .icn-remote-access, .open .icn-remote-access, .open > .btn:hover .icn-remote-access {
-  background-position: -1884px 0;
+  background-image: url("../images/new-icons/network-desktop-na.png");
 }
 
 .icn-remote-access.disabled, .disabled .icn-remote-access {
-  background-position: -1932px 0;
+  background-image: url("../images/new-icons/network-desktop.png");
 }
 
 .connected > .icn-remote-access {
-  background-position: -1860px 0 !important;
+  background-image: url("../images/new-icons/network-desktop.png");
 }
 
 /*Extra Small Icons*/
@@ -829,15 +837,15 @@ li:hover > a > .icn-dashboard, li.active > a > .icn-dashboard {
 }
 
 .icn-unassigned {
-  background-position: -1001px -100px;
+  background-image: url("../images/new-icons/bookmark-na.png");
 }
 
 li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
-  background-position: -1025px -100px;
+  background-image: url("../images/new-icons/bookmark.png");
 }
 
 :hover > .icn-unassigned, div.active.icn-unassigned {
-  background-position: -1025px -100px;
+  background-image: url("../images/new-icons/bookmark.png");
 }
 
 .icn-gs-tickets {
@@ -1237,11 +1245,11 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-remove-token, .icn-remove-token:focus {
-  background-position: -694px 1px;
+  background-image: url("../images/new-icons/cancel-circle.png");
 }
 
 :hover > .icn-remove-token, :active > .icn-remove-token, :focus:hover > .icn-remove-token, :focus:active > .icn-remove-token, :hover:active > .icn-remove-token, .active > .icn-remove-token, .open .icn-remove-token, .open > .btn:hover .icn-remove-token {
-  background-position: -734px 1px;
+  background-image: url("../images/new-icons/cancel-circle-na.png");
 }
 
 .icn-remove-token-white, .icn-remove-token-white:focus {
@@ -1457,27 +1465,22 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-user-privilege {
-  background-position: -713px -51px;
+  background-image: url("../images/new-icons/medal-na.png");
 }
 
 :hover > .icn-user-privilege, :active > .icn-user-privilege, :focus:hover > .icn-user-privilege, :focus:active > .icn-user-privilege, :hover:active > .icn-user-privilege, .active > .icn-user-privilege, .open .icn-user-privilege, .open > .btn:hover .icn-user-privilege {
-  background-position: -733px -51px;
+  background-image: url("../images/new-icons/medal.png");
 }
 
 .icn-user-subscription {
-  background-position: -754px -51px;
+  background-image: url("../images/new-icons/signal-na.png");
 }
 
 :hover > .icn-user-subscription, :active > .icn-user-subscription, :focus:hover > .icn-user-subscription, :focus:active > .icn-user-subscription, :hover:active > .icn-user-subscription, .active > .icn-user-subscription, .open .icn-user-subscription, .open > .btn:hover .icn-user-subscription {
-  background-position: -776px -51px;
+  background-image: url("../images/new-icons/signal.png");
 }
 
 /**Inside Button**/
-.btn > i.icn-user-subscription {
-  background-position: -754px -51px;
-  top: -2px;
-  right: -1px;
-}
 
 /***/
 
@@ -1893,15 +1896,15 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-user-fax {
-  background-position: -652px -206px;
+ background-image: url("../images/new-icons/printer-na.png");
 }
 
 .icn-user-phone {
-  background-position: -674px -206px;
+  background-image: url("../images/new-icons/call.png");
 }
 
 .icn-user-company {
-  background-position: -695px -206px;
+  background-image: url("../images/new-icons/building.png");
 }
 
 /***/

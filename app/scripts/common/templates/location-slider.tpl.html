@@ -22,7 +22,7 @@
     </div>
 
     <div class="location-contact-no" ng-repeat="phoneNumber in currentLocation.phoneNumbers | orderBy: 'priority'">
-      <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+      <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
                                    'icn-user-fax': phoneNumber.typeNumber === 'FAX',
                                    'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
       {{ phoneNumber.number }}

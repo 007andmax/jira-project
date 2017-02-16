@@ -13,7 +13,7 @@
       </div>
 
       <div style="display: inline-flex;" ng-if="companyAddress.phoneNumbers && companyAddress.phoneNumbers.length && companyPhoneNumber">
-        <i style="margin: 4px 5px 0 0 ; float: left;" class="icn-sm" ng-class="{'icn-iphone': companyAddress.phoneNumbers[0].typeNumber === 'MOBILE',
+        <i style="margin: 4px 5px 0 0 ; float: left;" class="icon-sm" ng-class="{'icn-iphone': companyAddress.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': companyAddress.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': companyAddress.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
         <strong>Phone: &nbsp;</strong> <span style="white-space: nowrap;">{{ companyPhoneNumber }}</span>
