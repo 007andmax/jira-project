@@ -69,7 +69,7 @@
         <div class="col-2">
           <div class="clearfix text-center">
           <span class="user-contact-no ellipsis" ng-repeat="phoneNumber in user.phoneNumbers">
-            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+            <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
             'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
             {{ phoneNumber.number }}
@@ -179,7 +179,7 @@
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User">
-              <i class="icn-sm icn-remove-token"></i>
+              <i class="icon-sm icn-remove-token"></i>
             </div>
           </div>
         </div>

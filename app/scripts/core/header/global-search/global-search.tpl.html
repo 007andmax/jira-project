@@ -55,7 +55,7 @@
               <div uib-dropdown stop-propagation="click" dropdown-append-to-body="true"
                    ng-if="items.type === 'DEVICES' && getDeviceById(item.id, item.extraInfo).online && PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
                 <div uib-dropdown-toggle style="display: inline-block;">
-                  <i class="icn-sm icn-remote-access" style="display: inline-block;"></i>
+                  <i class="icon-sm icn-remote-access" style="display: inline-block;"></i>
                 </div>
 
                 <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 9999;">
@@ -102,7 +102,7 @@
       <span class="input-group-addon-search">
         <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-show="!globalSearch.searchValue"></i>
 
-        <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
+        <i class="icon-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
            ng-show="globalSearch.searchValue" ng-click="globalSearch.searchValue = ''"
            uib-tooltip="clear" tooltip-placement="top"></i>
       </span>

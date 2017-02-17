@@ -56,7 +56,7 @@
           </div>
 
           <div class="company-phone-number" ng-repeat="phoneNumber in currentUser.phoneNumbers">
-            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+            <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
                            'icn-user-fax': phoneNumber.typeNumber === 'FAX',
                            'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
             {{ phoneNumber.number }}
@@ -133,7 +133,7 @@
 
               <a href="javascript:void(0)" stop-propagation="click" ng-show="currentOpenCompany === companyData.company.id"
                  class="close hit-area" tabindex="-1" ng-click="openCompanyInfo()">
-                <i class="icn-sm icn-remove-token"></i>
+                <i class="icon-sm icn-remove-token"></i>
               </a>
 
             </div>

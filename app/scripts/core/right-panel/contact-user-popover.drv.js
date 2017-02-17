@@ -57,7 +57,7 @@
                     phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-user-fax pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
 
                   } else {
-                    phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-user-phone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                    phoneTemplateHtml = '<div class="user-no"> <i class="icon-sm icn-user-phone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
                   }
                 }
 

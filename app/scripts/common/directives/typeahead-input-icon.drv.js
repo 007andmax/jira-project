@@ -7,7 +7,7 @@
       return {
         restrict: 'A',
         template: '<span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">' +
-        '<i class="icn-sm icn-remove-token"' +
+        '<i class="icon-sm icn-remove-token"' +
         ' ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
         '</span>' +
         '<span class="x-mark" ng-hide="showClearIcon">' +
