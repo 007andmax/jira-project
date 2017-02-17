@@ -3967,17 +3967,17 @@ input[type="button"].btn-block {
   width: 100%;
 }
 /*.btn-primary.disabled {*/
-  /*color: #b2becd;*/
-  /*background-color: #e7ecf2;*/
-  /*border-color: #e7ecf2;*/
-  /*pointer-events: none;*/
+/*color: #b2becd;*/
+/*background-color: #e7ecf2;*/
+/*border-color: #e7ecf2;*/
+/*pointer-events: none;*/
 /*}*/
 /*.btn-update.closed,*/
 /*.btn-update.closed:hover {*/
-  /*background: #e7ecf2;*/
-  /*border-color: #e7ecf2;*/
-  /*border-radius: 19px;*/
-  /*cursor: default;*/
+/*background: #e7ecf2;*/
+/*border-color: #e7ecf2;*/
+/*border-radius: 19px;*/
+/*cursor: default;*/
 /*}*/
 .btn-load-more.loading:hover {
   background-color: #e7ecf2;
@@ -9415,7 +9415,7 @@ button.close {
 }
 
 /*.switch input:checked ~ label {*/
-  /*background: #fff;*/
+/*background: #fff;*/
 /*}*/
 
 .switch input:checked ~ label i {
@@ -9429,3 +9429,17 @@ button.close {
   right: 115%;
 }
 /*=============================================*/
+
+.discount table{
+  width: 100%;
+}
+
+.discount thead{
+  border-bottom: 1px solid;
+  font-weight: 900;
+}
+
+.discount tbody tr{
+  height: 50px;
+  border-bottom: 1px solid #eee;
+}

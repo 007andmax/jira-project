@@ -1,0 +1,42 @@
+<div class="service-form-wrapper edit-form-checkbox" ng-form="editDiscountForm"
+     ng-controller="quicktech.createDiscountCtrl">
+  <h4 class="modal-title title-services">Create new Discount</h4>
+  <p class="services-description">Discount description here</p>
+  <div class="col-1" ng-class="{'has-error': isShowingErrors(editDiscountForm, 'editDiscountName')}">
+
+    <input type="text" class="form-control" placeholder="Discount Name" ng-model="editDiscount.name"
+           name="editDiscountName" required ng-maxlength="100" ng-minlength="3">
+  </div>
+
+  <div class="col-2" ng-class="{'has-error': isShowingErrors(editDiscountForm, 'editDiscountAmount')}">
+    <input type="text" class="form-control" placeholder="Amount" required
+           ng-model="editDiscount.amount" qt-to-fixed="2" name="editDiscountRate"
+           hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+    <span>{{ editDiscount.discountType === 'FIXED' ? '$' : '%' }}</span>
+  </div>
+
+  <div class="col-3" uib-dropdown keyboard-nav="true"
+       ng-class="{'has-error': isShowingErrors(editDiscountForm, 'editDiscountAmount')}">
+    <input type="text" class="form-control" name="editDiscountType"
+           ng-value="editDiscount.discountType && editDiscount.discountType[0] + editDiscount.discountType.slice(1).toLowerCase()"
+           uib-dropdown-toggle readonly required>
+    <ul uib-dropdown-menu>
+      <li>
+        <a href="javascript:void(0)" ng-click="editDiscount.discountType = 'FIXED'">Fixed ($)</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" ng-click="editDiscount.discountType = 'PERCENT'">Percent (%)</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="qt-form-actions btn-bottom" style="margin-right: 10px;">
+    <div class="pull-left text-error">{{ getValidationMessage(editDiscountForm) }}</div>
+
+    <button-with-loading-indicator class="btn btn-lg btn-create btn-success pull-right"
+                                   ng-click="save(editDiscountForm)" loading="loadingInProgress"
+                                   label="{{ editDiscount.id ? 'Save' : 'Create' }}">
+    </button-with-loading-indicator>
+
+  </div>
+</div>

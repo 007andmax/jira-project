@@ -1,0 +1,24 @@
+<div class="settings-main-wrapper">
+  <div class="discount">
+    <h3>Discount</h3>
+    <table>
+      <thead>
+      <tr>
+        <td>Name</td>
+        <td>Amount</td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="discount in discounts track by discount.id">
+        <td>{{ discount.name }}</td>
+        <td>{{ discount.amount + (discount.discountType === 'FIXED' ? '$' : '%') }}</td>
+        <td>
+          <i class="icon-sm edit-icon" create-new-entity="discount" item="discount"></i>
+          <i class="icon-sm icn-delete" ng-click="remove(discount.id)"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
