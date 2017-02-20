@@ -558,7 +558,6 @@ body.modal-open {
 .icon-render{
   display: inline-block;
   margin: 0 5px;
-  float: left;
 }
 
 /*device*/
@@ -1482,7 +1481,6 @@ span.sort-span {
 .qt-receivable-number .resend-button {
   width: 16px;
   height: 16px;
-  margin-top: 4px;
 }
 
 .qt-receivable-number .resend-button .green-checkmark {

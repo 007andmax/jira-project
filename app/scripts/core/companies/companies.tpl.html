@@ -35,7 +35,7 @@
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt"
                  create-new-entity="company" item="company" stop-propagation="click"></div>
-            <i class="icn-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
+            <i class="icon-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
             <p class="ellipsis name"

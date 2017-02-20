@@ -63,7 +63,7 @@
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
                               'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
-              <i class="icn-sm icn-picker"></i>
+              <i class="icon-sm icn-picker"></i>
             </span>
 
             <ul class="dropdown-menu dropdown-tag-colors">
@@ -89,7 +89,7 @@
           ng-form="updateTagForm">
           <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
             {{ tag.word }}
-            <i class="icon-sm edit-icon pull-right" uib-tooltip="Edit" tooltip-placement="top"
+            <i class="icon-sm edit-icon" uib-tooltip="Edit" tooltip-placement="top"
                tooltip-append-to-body="true"></i>
           </div>
           <div class="col-1 form-group" ng-if="editingId === tag.id"
@@ -103,7 +103,7 @@
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
                               'border-color': tagColors[tag.colorCode].borderColor}"></span>
-              <i class="icn-sm icn-picker"></i>
+              <i class="icon-sm icn-picker"></i>
             </span>
 
             <ul class="dropdown-menu dropdown-tag-colors">

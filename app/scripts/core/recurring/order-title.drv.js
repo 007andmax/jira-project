@@ -12,7 +12,7 @@
         },
         link: function (scope, element) {
 
-          var titleIcon = $compile("<i class='icn-sm  icn-description' popover='{{ orderTitle }}' popover-placement='bottom' popover-trigger='mouseenter'></i>")(scope);
+          var titleIcon = $compile("<i class='icon-sm  icn-description' popover='{{ orderTitle }}' popover-placement='bottom' popover-trigger='mouseenter'></i>")(scope);
           var titleText = $compile("<span trimmed-popover trimmed-popover-content='orderTitle'>{{ orderTitle }}</span>")(scope);
 
           var isIconAppend = element.width() > 100;
