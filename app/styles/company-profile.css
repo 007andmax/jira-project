@@ -100,67 +100,38 @@
   width: 20px;
   height: 20px;
   display: inline-block;
-  float: left;
-  margin-right: 15px;
   cursor: pointer;
+  margin: auto 0;
+  margin-right: 10px;
+  vertical-align: text-bottom;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 }
 
 .btns-block .icn-create-ticket{
-  background: url("../images/input-icons/tickets-createnew.png") no-repeat;
-  margin-left: -2px;
-  background-size: cover;
+  background-image: url("../images/new-icons/plus-circle-white.png") ;
 }
 .btns-block .icn-agent-download{
-  background: url("../images/input-icons/download-agent.png") no-repeat;
-  background-size: cover;
+  background-image: url("../images/new-icons/download-white.png") ;
 }
 .btns-block .icn-camera{
-  background: url("../images/input-icons/photo-camera.png") no-repeat;
-  width: 22px;
-  height: 22px;
-  margin-right: 12px;
-  transform: translateY(-1px);
-  background-size: cover;
-
+  background-image: url("../images/new-icons/camera-white.png") ;
 }
 .btns-block .icn-address{
-  background: url("../images/input-icons/placeholder-white.png") no-repeat;
-  width: 18px;
-  height: 18px;
-  margin-right: 9px;
-  transform: translateY(1px);
-  background-size: cover;
-
+  background-image: url("../images/new-icons/location-white.png") ;
 }
 .btns-block .icn-edit-new{
-  background: url("../images/input-icons/edit.png") no-repeat;
-  width: 16px;
-  height: 16px;
-  background-size: cover;
-  transform: translateY(2px);
-  margin-right: 10px;
+  background-image: url("../images/new-icons/edit-white.png") ;
 }
-
 .btns-block .icn-archive-usr{
-  background: url("../images/input-icons/archive-user.png") no-repeat;
-  background-size: cover;
-  width: 19px;
-  height: 19px;
+  background-image: url("../images/new-icons/delete-white.png") ;
 }
-
 .btns-block .icn-note{
-  background: url("../images/input-icons/note.png") no-repeat;
-  background-size: cover;
-  width: 19px;
-  height: 19px;
-  margin-right: 0;
+  background-image: url("../images/new-icons/message-white.png") ;
 }
-
 .btns-block .icn-add-new-user{
-  background: url("../images/company/user-add.png") no-repeat;
-  background-size: cover;
-  width: 19px;
-  height: 19px;
+  background-image: url("../images/new-icons/user-male-add-white.png") ;
 }
 
 .company-profile-header .company-new-cover-wrapper .background-layer {
