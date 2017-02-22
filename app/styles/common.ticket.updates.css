@@ -137,10 +137,10 @@
   margin: 2px 10px;
 }
 .ticket-update-meta .avatar-tooltip .tooltip-inner, .shared-users-list li:not(:last-child) .tooltip-inner {
-  height: 35px;
   padding: 18px 20px;
   text-align: left;
   line-height: 12px;
+  white-space: nowrap;
 }
 .ticket-update-meta .tooltip-name, .shared-users-list .tooltip-name {
   color: #fff;
