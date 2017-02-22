@@ -1703,7 +1703,7 @@ Devices tab
 }
 
 .qt-receivable .qt-invoices > li {
-  padding: 15px;
+  padding: 15px 0;
 
   cursor: pointer;
 }
