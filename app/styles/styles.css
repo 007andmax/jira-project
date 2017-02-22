@@ -2880,7 +2880,7 @@ _:-ms-fullscreen,
   display: block;
   width: 100%;
   height: 36px;
-  padding: 13px;
+  padding: 0 13px;
   font-size: 14px;
   line-height: 20px;
   color: #4c5c6f;
