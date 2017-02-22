@@ -177,9 +177,17 @@
 }
 
 .qt-list.qt-users > li > [class*='col-']:not(:first-child) {
-  text-align: center;
+  text-align: left;
 }
 
+.qt-list.qt-users > li > [class*='col-']:not(:first-child).subscribe-col,
+.qt-list.qt-users > li > [class*='col-']:not(:first-child).tickets-col{
+  text-align: center;
+  padding: 0 10px;
+}
+.qt-list.qt-users > li > .users-list-wrapper .tickets-col{
+  text-align: center;
+}
 
 .qt-list > li > [class*='col-']:after {
   display: table;
