@@ -807,6 +807,7 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   padding: 5px 20px;
   line-height: 20px;
   color: #4c5c6f;
+  font-size: 13px;
 }
 
 .context-menu.rp-user-popover > li > a i, .rightbar-context-menu > li > a i{
