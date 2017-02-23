@@ -1241,6 +1241,7 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 
 .icn-remove-token, .icn-remove-token:focus {
   background-image: url("../images/new-icons/cancel-circle.png");
+  background-size: inherit;
 }
 
 :hover > .icn-remove-token, :active > .icn-remove-token, :focus:hover > .icn-remove-token, :focus:active > .icn-remove-token, :hover:active > .icn-remove-token, .active > .icn-remove-token, .open .icn-remove-token, .open > .btn:hover .icn-remove-token {
