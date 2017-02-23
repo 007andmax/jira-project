@@ -7,8 +7,7 @@
 .card-wrapper {
   padding: 15px;
   display: inline-block;
-  float: left;
-  min-height: 365px;}
+  float: left;}
   .card-wrapper .card {
     position: relative;
     box-sizing: border-box;
