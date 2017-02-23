@@ -600,9 +600,6 @@
     .ticket-update-content .attachments {
         margin-top: 11px;
     }
-    .table-wrapper > .table-content [class^="col-"] {
-        line-height: 51px;
-    }
     .updater-name a.hit-area {
         margin-top: 3px;
     }
