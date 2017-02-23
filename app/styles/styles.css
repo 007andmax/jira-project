@@ -7108,6 +7108,10 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   float: left;
   cursor: inherit;
 }
+.ticket .ticket-list-header .label {
+  margin-left: 15px;
+  float: none;
+}
 a.label:hover,
 a.label:focus {
   color: #ffffff;
