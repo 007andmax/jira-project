@@ -188,6 +188,9 @@
   margin-bottom: 8px;
   font-family:'Graphik Medium', sans-serif;
 }
+_::-webkit-:host:not(:root:root), .card-wrapper .card .card-header .name {
+  font-family:'Graphik Regular', sans-serif;
+}
 
 .badge-default{
   background-color: #e9eef5;
@@ -312,7 +315,7 @@
 
 @media (max-width: 1600px) {
   .card-view-wrapper{
-    width: 1200px;
+    width: 1065px;
   }
 }
 @media (max-width: 1440px) {

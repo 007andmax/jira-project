@@ -312,6 +312,15 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
+_::-webkit-:host:not(:root:root), body .left-panel-full {
+  font-family: 'Graphik Medium', sans-serif;
+}
+_::-webkit-:host:not(:root:root), body .topNavbar {
+  font-family: 'Graphik Medium', sans-serif;
+}
+_::-webkit-:host:not(:root:root), body .topNavbar strong span {
+  font-family: 'Graphik Medium', sans-serif;
+}
 input,
 button,
 select,
@@ -1486,6 +1495,11 @@ p {
   line-height: 24px;
   font-family: 'Graphik Regular', sans-serif;
 }
+_::-webkit-:host:not(:root:root), p {
+  font-family: 'Graphik Light', sans-serif;
+  font-weight: 600;
+}
+
 p.list {
   line-height: 16px;
 }
@@ -1523,7 +1537,7 @@ mark,
   text-align: right;
 }
 .text-center {
-  text-align: left;
+  text-align: center;
 }
 .text-justify {
   text-align: justify;
