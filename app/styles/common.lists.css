@@ -2898,8 +2898,10 @@ Devices tab
 .qt-services > li {
   height: auto;
   padding: 15px;
-
   cursor: pointer;
+}
+.qt-services > li:last-child{
+  margin-bottom: 250px;
 }
 
 /*.qt-services > li:nth-child(even) {*/
