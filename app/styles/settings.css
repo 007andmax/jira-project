@@ -230,15 +230,6 @@
   border-left: 0;
 }
 
-.create-user-form .company-url-addon {
-  position: absolute;
-  top: 30px;
-  color: #4c5c6f;
-  border-left: none;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .email-addon span {
   color: #4c5c6f;
   -webkit-user-select: auto;
