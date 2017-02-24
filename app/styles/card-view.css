@@ -154,6 +154,8 @@
   margin: auto;
   cursor: pointer;
   opacity: 0.8;
+  width: 14px;
+  height: 14px;
 }
 .card-wrapper .card .card-header .icn-restore,
 .card-wrapper .card .card-header .edit-icn:hover {
