@@ -49,7 +49,7 @@
       <span class="text-muted ellipsis">{{ ticket.previewNote || '&nbsp;' }}</span>
     </div>
 
-    <div class="ticket-labels clearfix"
+    <div class="ticket-labels"
          ng-init="dropdowns[ticket.id] = {}; dropdowns[ticket.id]['priority'] = false; dropdowns[ticket.id]['status'] = false;">
 
       <div class="pull-left" uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
@@ -126,10 +126,10 @@
       </div>
 
       <div class="text-muted ellipsis"
-           ng-if="ticket.assignedUserId" style="max-width: 40%;">{{ getUserName(getUserById(ticket.assignedUserId)) }}
+           ng-if="ticket.assignedUserId" style="width: 40%;vertical-align: top;">{{ getUserName(getUserById(ticket.assignedUserId)) }}
       </div>
 
-      <span class="text-muted ellipsis" style="float: right; margin-right: 0;max-width: 35%;">
+      <span class="text-muted ellipsis" style="float: right; margin-right: 0;width: 38%; text-align: right;vertical-align: top; ">
         {{ userReadable(ticket.ticketSource) }}
         <span ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
           &nbsp;({{ ticket.sourceName }})

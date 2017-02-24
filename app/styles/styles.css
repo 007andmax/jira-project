@@ -312,14 +312,45 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
-_::-webkit-:host:not(:root:root), body .left-panel-full {
+_::-webkit-:host:not(:root:root),
+body .left-panel-full {
   font-family: 'Graphik Medium', sans-serif;
 }
-_::-webkit-:host:not(:root:root), body .topNavbar {
+body .topNavbar {
   font-family: 'Graphik Medium', sans-serif;
 }
-_::-webkit-:host:not(:root:root), body .topNavbar strong span {
+body .topNavbar strong span {
   font-family: 'Graphik Medium', sans-serif;
+}
+.center-category p {
+  font-family: 'Graphik Regular', sans-serif;
+}
+.company-new-cover-wrapper p, strong {
+  font-family:'Graphik Medium', sans-serif;
+}
+.btn {
+  font-family:'Graphik Regular', sans-serif;
+  font-weight: 600;
+}
+_::-webkit-:not(:root:root),
+body .left-panel-full {
+  font-family: 'Graphik Medium', sans-serif;
+}
+body .topNavbar {
+  font-family: 'Graphik Medium', sans-serif;
+}
+body .topNavbar strong span {
+  font-family: 'Graphik Medium', sans-serif;
+}
+.center-category p {
+  font-family: 'Graphik Regular', sans-serif;
+}
+.company-new-cover-wrapper p, strong {
+  font-family:'Graphik Medium', sans-serif;
+}
+.btn {
+  font-family:'Graphik Regular', sans-serif;
+  font-weight: 600;
 }
 input,
 button,
@@ -1495,11 +1526,16 @@ p {
   line-height: 24px;
   font-family: 'Graphik Regular', sans-serif;
 }
-_::-webkit-:host:not(:root:root), p {
+_::-webkit-:host:not(:root:root),
+p {
   font-family: 'Graphik Light', sans-serif;
   font-weight: 600;
 }
-
+_::-webkit-:not(:root:root),
+p {
+  font-family: 'Graphik Light', sans-serif;
+  font-weight: 600;
+}
 p.list {
   line-height: 16px;
 }
