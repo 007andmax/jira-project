@@ -851,6 +851,9 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
+.billable-content .tabs-container .nav .btn.disabled {
+  background-color: #fff;
+}
 .receipt-archive-content {
   padding-top: 30px;
 }
