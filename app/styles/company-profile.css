@@ -48,7 +48,6 @@
 }
 
 .first-of-type{
-  width: 308px;
   border-top: 1px solid #eee;
 }
 
@@ -94,6 +93,7 @@
   padding: 8px 0;
   position: absolute;
   bottom: 0;
+  font-size: 0;
 }
 
 .btns-block .icn{
@@ -103,7 +103,7 @@
   cursor: pointer;
   margin: auto 0;
   margin-right: 10px;
-  vertical-align: text-bottom;
+  vertical-align: middle;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;

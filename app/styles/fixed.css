@@ -346,11 +346,6 @@ body.non-body-scroll::-webkit-scrollbar {
   cursor: pointer;
 }
 
-@-moz-document url-prefix() {
-  .dropdown-user-parent > .dropdown-menu > li {
-    padding: 9px 20px 11px;
-  }
-}
 
 .dropdown-user-parent > .dropdown-menu > li:hover {
   background-color: #e7ecf2;
@@ -363,6 +358,9 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .dropdown-user-parent > .dropdown-menu > li .user-name {
   margin-top: 3px;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 .dropdown-user-parent > .dropdown-menu > li .user-name a {
