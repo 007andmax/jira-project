@@ -61,13 +61,13 @@
         </div>
 
         <div class="col-1-1">
-          <p class="ellipsis text-center" uib-tooltip="{{ user.primaryEmail }}"
+          <p class="ellipsis" uib-tooltip="{{ user.primaryEmail }}"
              trimmed-tooltip-checker="user.primaryEmail">
           </p>
         </div>
 
         <div class="col-2">
-          <div class="clearfix text-center">
+          <div class="clearfix">
           <span class="user-contact-no ellipsis" ng-repeat="phoneNumber in user.phoneNumbers">
             <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
@@ -80,7 +80,7 @@
         <div class="col-3">
           <div class="user-account-type" uib-dropdown>
 
-            <div class="text-center" aria-expanded="false" uib-dropdown-toggle>
+            <div aria-expanded="false" uib-dropdown-toggle>
             <span>
               {{ user.role }}
             </span>

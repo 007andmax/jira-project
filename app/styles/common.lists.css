@@ -175,6 +175,9 @@
 .qt-list.qt-users > li > [class*='col-'] {
   padding: 0 15px;
 }
+.users-list-wrapper [class*='col-'] {
+  padding: 0 15px;
+}
 
 .qt-list.qt-users > li > [class*='col-']:not(:first-child) {
   text-align: left;

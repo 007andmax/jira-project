@@ -56,9 +56,9 @@
 }
 
 .global-search .dropdown-menu .category .category-name {
-/*  padding-left: 10px;
-  padding-top: 0;
-  padding-bottom: 5px;*/
+  /*  padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 5px;*/
   cursor: pointer;
 }
 
@@ -72,10 +72,11 @@
 
 .global-search .dropdown-menu .category .item {
   display: none;
-  padding:0 10px;
+  padding: 0 10px;
   cursor: pointer;
 }
-.local-search-header{
+
+.local-search-header {
   border-bottom: 2px solid rgba(0, 0, 0, 0.40);
 }
 
@@ -109,8 +110,9 @@
   display: flex;
   line-height: 2em;
 }
-.one-string{
-      transform: translateY(40%);
+
+.one-string {
+  transform: translateY(40%);
 }
 
 .global-search .dropdown-menu .category .item-name > span {
@@ -126,9 +128,11 @@
   margin-left: 5px;
   vertical-align: middle;
 }
-.global-search .dropdown-menu .category .item-name .icn-sm:hover{
+
+.global-search .dropdown-menu .category .item-name .icn-sm:hover {
   opacity: .8;
 }
+
 .global-search .filter-by-type .list-head {
   margin-bottom: 5px;
 }
@@ -157,7 +161,6 @@
   cursor: pointer;
 }
 
-
 .global-search .filter-by-type .list-head .filter-subheader {
   margin-left: 10px;
 }
@@ -176,6 +179,7 @@
   padding: 5px 40px;
   cursor: pointer;
 }
+
 /*@media only screen and (max-width: 1100px) {
   .form-control-top-search {
     width: 270px !important;
@@ -190,15 +194,14 @@
 
 @media only screen and (max-width: 1315px) {
   /*.topNavbarLeft {*/
-    /*padding-right: 320px;*/
+  /*padding-right: 320px;*/
   /*}*/
-
   .topNavbar-user {
     margin-right: 30px;
   }
 
   .form-control-top-search {
-    width: 270px ;
+    width: 270px;
   }
 
   .topNavbar-logo .logo {
@@ -216,13 +219,16 @@
   margin-top: 1px;
   margin-left: -16px;
 }
-.search-block{
+
+.search-block {
   width: 40%;
 }
-.form-control-top-search-icn{
+
+.form-control-top-search-icn {
   float: right;
   margin-right: 10%;
 }
+
 .topNavbar-content {
   display: flex;
   justify-content: space-between;
@@ -243,21 +249,25 @@
   color: white !important;
   margin: auto 10px auto 0;
 }
-@media only screen and (min-width: 1025px) and (max-width: 1200px){
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
   .topNavbar-create .create-new-label {
     display: none;
+  }
 }
-}
-@media only screen and (min-width: 1025px) and (max-width: 1200px){
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
   .left-panel-closed .topNavbar-create .create-new-label {
     display: inline-block;
   }
 }
-@media screen and (max-width: 990px){
+
+@media screen and (max-width: 990px) {
   .topNavbar-create .create-new-label {
     display: none;
   }
 }
+
 .topNavbar-create .dropdown-menu {
   min-width: 121px;
 }
@@ -267,8 +277,8 @@
 }
 
 .topNavbarLeft-Left {
-/*  display: flex;
-  display: -webkit-flex;*/
+  /*  display: flex;
+    display: -webkit-flex;*/
 }
 
 .topNavbarLeft > p {
@@ -278,6 +288,19 @@
   color: #fff;
   text-align: center;
 }
+
+@media (max-width: 1280px) {
+  .topNavbar-content .topNavbarLeft > p {
+    text-align: left;
+    width: 95px;
+    font-size: 14px;
+  }
+  .topNavbar-content .topNavbarRight .nickname-wrap .nickname{
+    font-size: 14px;
+    font-family: 'Graphik Light', sans-serif;
+  }
+}
+
 .topNavbarLeft > p strong {
   font-weight: 400;
 }
@@ -329,10 +352,10 @@
   -ms-flex: 1;
   flex: 1;
 }
-.topNavbar-filter > div{
+
+.topNavbar-filter > div {
   float: left;
 }
-
 
 .topNavbar-filter button {
   margin-right: 10px;
@@ -387,6 +410,7 @@
   float: right;
   /*margin: 0 40px;*/
 }
+
 .topNavbarRight .nickname-wrap > i {
   transform: translateY(20%);
 }
@@ -405,18 +429,22 @@
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
   .topNavbarRight .nickname-wrap .nickname {
     margin: 0px;
   }
+
   .topNavbarRight {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+
   .left-panel-closed .topNavbarRight .nickname-wrap .nickname {
     margin: 0px 10px;
   }
 }
+
 .topNavbarRight .nickname-wrap .on,
 .topNavbarRight .nickname-wrap .busy {
   display: inline-block;
@@ -424,9 +452,11 @@
   height: 10px;
   border-radius: 50%;
 }
+
 .button-container > i {
   cursor: pointer;
 }
+
 .company-short-info > div > i {
   cursor: pointer;
 }
@@ -454,7 +484,8 @@
 .topNavbarRight .open > .dropdown-menu li {
   padding: 10px;
 }
-.head-list{
+
+.head-list {
   font-size: larger;
   padding: 0 10px;
   line-height: 2.6em;
