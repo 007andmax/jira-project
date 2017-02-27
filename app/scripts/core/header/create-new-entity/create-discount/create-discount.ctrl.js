@@ -68,7 +68,7 @@
             || discount.amount !== origin.amount
             || discount.discountType !== origin.discountType;
         } else {
-          isDiscountChanged = discount.name || discount.amount || discount.discountType;
+          isDiscountChanged = discount.name || discount.amount;
         }
 
         if (isDiscountChanged) {

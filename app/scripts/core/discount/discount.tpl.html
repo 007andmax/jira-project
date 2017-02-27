@@ -12,7 +12,7 @@
       <tbody>
       <tr ng-repeat="discount in discounts track by discount.id">
         <td>{{ discount.name }}</td>
-        <td>{{ discount.amount + (discount.discountType === 'FIXED' ? '$' : '%') }}</td>
+        <td>{{ getAmount(discount) }}</td>
         <td>
           <i class="icon-sm edit-icon" create-new-entity="discount" item="discount"></i>
           <i class="icon-sm icn-delete" ng-click="remove(discount.id)"></i>

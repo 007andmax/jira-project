@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  angular.module('main.services').factory('DiscountsService', ['$http', 'Utils', 'RealTimeService',
-    function ($http, Utils, RealTimeService) {
+  angular.module('main.services').factory('DiscountsService', ['$http', 'Utils', 'RealTimeService', '$filter',
+    function ($http, Utils, RealTimeService, $filter) {
 
     function getAll($scope, callback) {
       var discounts = [];
@@ -35,10 +35,19 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getAmount(discount) {
+      if (discount.discountType === 'FIXED') {
+        return $filter('currency')(discount.amount, '$', 2);
+      } else {
+        return discount.amount + '%';
+      }
+    }
+
     return {
       getAll: getAll,
       save: save,
-      remove: remove
+      remove: remove,
+      getAmount: getAmount
     };
 
   }]);

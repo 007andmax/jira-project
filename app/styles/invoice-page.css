@@ -291,7 +291,10 @@
 
 .invoice-page .ticket-amount .updates {
   float: left;
-  padding: 18px 20px 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
 }
 
 .invoice-page .update {
@@ -311,17 +314,8 @@
 
 .invoice-page .update .amount {
   color: #1f2a37;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: normal;
-}
-
-.invoice-page .updates .plus {
-  font-size: 36px;
-  float: left;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-top: 6px;
-  color: #1f2a37;
 }
 
 .invoice-page .ticket-amount.inv-total {

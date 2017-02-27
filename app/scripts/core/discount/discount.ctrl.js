@@ -7,6 +7,7 @@
         $scope.discounts = resp;
       });
 
+      $scope.getAmount = DiscountsService.getAmount;
       $scope.remove = DiscountsService.remove;
     }]);
 

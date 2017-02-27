@@ -128,7 +128,10 @@
                 </div>
               </div>
             </div>
-            <p style="text-align: right; margin: 5px 0;" ng-if="ticket.techUserId">
+            <p style="float: left; margin: 5px 0;" ng-if="ticket.discount">
+              <strong>Discount: </strong> {{ getAmount(ticket.discount) }}
+            </p>
+            <p style="float: right; margin: 5px 0;" ng-if="ticket.techUserId">
               <strong>Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}
             </p>
           </div>
