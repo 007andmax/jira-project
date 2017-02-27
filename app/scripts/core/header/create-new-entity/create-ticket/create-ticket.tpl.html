@@ -328,8 +328,14 @@
                    typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
 
-            <div typeahead-input-icon-sm="ticketCompany,ticketCreatedUser"></div>
-
+            <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icon-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear" tooltip-placement="top"></i>
+            </span>
+              <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -346,9 +352,17 @@
                    qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': '180px'}">
 
-            <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
+            <!--<input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">-->
 
             <div typeahead-input-icon-sm="ticketCreatedUser"></div>
+            <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icon-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear" tooltip-placement="top"></i>
+            </span>
+              <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
 
           </div>
         </div>
@@ -371,6 +385,15 @@
                    custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '360px'}">
 
             <div typeahead-input-icon-sm="ticketAssignTo"></div>
+
+            <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icon-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear" tooltip-placement="top"></i>
+            </span>
+              <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
 
           </div>
         </div>

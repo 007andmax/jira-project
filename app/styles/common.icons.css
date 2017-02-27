@@ -1262,6 +1262,10 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
   background-position: -715px 1px;
 }
 
+.icn-remove-old{
+  background-position: -696px 0px;
+}
+
 .icn-cusers {
   background-position: -3647px 0;
 }
