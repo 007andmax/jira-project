@@ -7302,11 +7302,8 @@ a.label-icn-lg:focus {
   display: inline-block;
   width: 16px;
   height: 16px;
-  padding-top: 4px;
   text-align: center;
   border-radius: 9px;
-  /*line-height: 18px;*/
-  float: left;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   -o-border-radius: 9px;
@@ -7340,14 +7337,14 @@ a.label-icn-sm:focus {
 .label-icn-sm > div,
 .label-icn-sm label {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: text-top;
   width: 8px;
   height: 8px;
+  margin-bottom: 0;
 }
 .label-icn-sm > div.priority-flag,
 .label-icn-sm label.priority-flag {
-  padding-top: 1px;
-  padding-left: 1px;
+  font-size: 0;
 }
 .label-icn-sm > div.status-progress,
 .label-icn-sm label.status-progress {
@@ -9337,6 +9334,16 @@ button.close {
     display: none;
   }
 }
+
+@media screen and (max-width: 1366px){
+  .ticket-labels .progress-big-size{
+    display: none;
+  }
+  .ticket-labels .progress-small-size{
+    display: block;
+  }
+}
+
 .bold {
   font-weight: 700;
 }
