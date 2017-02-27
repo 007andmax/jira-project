@@ -27,6 +27,10 @@
            href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('product')"
            ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">Product</a>
       </li>
+      <li class="navigation__list--category">
+        <a ng-class="{'checked': openedTab === 'discount'}" tabindex="-1"
+           href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('discount')">Discount</a>
+      </li>
     </ul>
   </aside>
   <section class="general">
@@ -45,6 +49,9 @@
       </div>
       <div ng-switch-when="service">
         <div ng-include="'/html/scripts/core/header/create-new-entity/create-service/create-service.tpl.html'"></div>
+      </div>
+      <div ng-switch-when="discount">
+        <div ng-include="'/html/scripts/core/header/create-new-entity/create-discount/create-discount.tpl.html'"></div>
       </div>
     </div>
   </section>

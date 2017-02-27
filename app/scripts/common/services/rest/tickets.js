@@ -427,6 +427,11 @@
         changeTicket('linkedAgent', ticketId, agentId, callback);
       }
 
+      function updateDiscount(ticketId, discountId, callback) {
+        var ticketIds = Array.isArray(ticketId) ? ticketId : [ticketId];
+        changeTicket('updateDiscount', ticketIds, discountId || '', callback);
+      }
+
       function changeTicket(action, id, value, callback, recipientsIds) {
         var url, data = { value: value };
 
@@ -643,7 +648,7 @@
 
         } else if (newChange.action === 'TICKET_INVOICED') {
           if (ticketById) {
-            Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.hasInvoice);
+            Utils.defineReadOnlyProperty(ticketById, 'hasInvoice', newChange.data.hasInvoice);
           }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'hasInvoice', newChange.data.hasInvoice);
@@ -665,6 +670,13 @@
               } else {
                 Utils.defineReadOnlyProperty(storage.openedTicket, 'agent', null);
               }
+            }
+          }
+        } else if (newChange.action === 'DISCOUNT_CHANGED') {
+          for (var i = 0; i < newChange.data.length; i++) {
+            var data = newChange.data[i];
+            if (storage.openedTicket && data.ticketId === storage.openedTicket.id) {
+              Utils.defineReadOnlyProperty(storage.openedTicket, 'discount', data.discount);
             }
           }
         }
@@ -917,7 +929,8 @@
         markUpdateAsRead: markUpdateAsRead,
         updateExpenseInTicketUpdate: updateExpenseInTicketUpdate,
         changeLinkedAgent: changeLinkedAgent,
-        save: saveEditedTicket
+        save: saveEditedTicket,
+        updateDiscount: updateDiscount
       }
 
     }

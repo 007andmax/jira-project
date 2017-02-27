@@ -26,6 +26,22 @@
       </a>
     </li>
 
+    <li class="pull-right" uib-dropdown keyboard-nav="true">
+      <div class="btn btn-primary" uib-dropdown-toggle>
+        {{ ticketDetails.discount ? getDiscountLabel(ticketDetails.discount) : 'Discount' }}
+        <i class="icon-sm icn-delete" ng-if="ticketDetails.discount"
+           ng-click="updateDiscount()" stop-propagation="click"></i>
+        <i class="icon-sm icn-caret-gray" ng-if="!ticketDetails.discount"></i>
+      </div>
+      <ul uib-dropdown-menu>
+        <li ng-repeat="discount in discounts | orderBy: 'name' track by discount.id">
+          <a href="javascript:void(0)" ng-click="updateDiscount(discount.id)">
+            {{ getDiscountLabel(discount) }}
+          </a>
+        </li>
+      </ul>
+    </li>
+
   </ul>
 
   <div class="tab-content"

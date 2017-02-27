@@ -18,6 +18,7 @@
       'quicktech.core.recurring',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
+      'quicktech.core.discount',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
@@ -143,6 +144,11 @@
           url: '/accounting/receipt-archive/:mode',
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
+        }))
+        .state('discount', waitForServices({
+          url: '/accounting/discount',
+          templateUrl: '/html/scripts/core/discount/discount.tpl.html',
+          controller: 'quicktech.core.discount.discountCtrl'
         }))
         .state('settings', waitForServices({
           url: '/settings',
