@@ -851,7 +851,7 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-.billable-content .tabs-container .nav .btn.disabled {
+.billable-content .tabs-container .nav .bt.disabled {
   background-color: #fff;
 }
 .receipt-archive-content {
@@ -1528,6 +1528,11 @@ p {
   margin: 0;
   line-height: 24px;
   font-family: 'Graphik Regular', sans-serif;
+}
+@media (max-width: 1366px){
+  .support-session-content .support-session-info p{
+    font-size: 12px;
+  }
 }
 _::-webkit-:host:not(:root:root),
 p {
@@ -9383,6 +9388,11 @@ button.close {
   overflow: visible;
   white-space: normal;
   word-break: break-all;
+}
+.container-ticket-content .table-wrapper .table-content .col-3.service-descr{
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu{

@@ -142,6 +142,10 @@
   background-color: black;
   content: '';
 }
+_::-webkit-:not(:root:root), .create-window .general .company-window .company-steps__list:before  {
+  width: calc(100% - 190px);
+}
+
 
 .create-window .general .company-window .company-steps__list--point {
   font-size: 18px;

@@ -76,11 +76,11 @@
 
   <div class="support-session-graph-content pull-right">
 
-    <div class="avatar pull-left">
+    <div class="avatar avatar-width pull-left">
       <img ng-src="{{ getUserAvatarUrl(remoteSession.performer) }}"
            alt="..." class="img-circle avatar-120">
 
-      <p>{{ getUserName(remoteSession.performer) }}</p>
+      <p class="ellipsis">{{ getUserName(remoteSession.performer) }}</p>
     </div>
 
     <span class="label label-primary admin-to-comp"
