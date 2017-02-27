@@ -1,4 +1,4 @@
-<div class="service-form-wrapper edit-form-checkbox" ng-form="editDiscountForm"
+<div class="service-form-wrapper discount-modal edit-form-checkbox" ng-form="editDiscountForm"
      ng-controller="quicktech.createDiscountCtrl">
   <h4 class="modal-title title-services">Create new Discount</h4>
   <p class="services-description">Discount description here</p>
@@ -12,7 +12,7 @@
     <input type="text" class="form-control" placeholder="Amount" required
            ng-model="editDiscount.amount" qt-to-fixed="2" name="editDiscountRate"
            hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
-    <span>{{ editDiscount.discountType === 'FIXED' ? '$' : '%' }}</span>
+    <span class="discount-value">{{ editDiscount.discountType === 'FIXED' ? '$' : '%' }}</span>
   </div>
 
   <div class="col-3" uib-dropdown keyboard-nav="true"
