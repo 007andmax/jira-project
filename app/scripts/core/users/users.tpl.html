@@ -192,11 +192,11 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2 ellipsis text-center">
+        <div class="col-lg-2 col-xs-2 ellipsis">
           {{ getUserCompanyName(user) }}
         </div>
 
-        <div class="col-lg-2 col-xs-2 text-center">
+        <div class="col-lg-2 col-xs-2">
           <div class="clearfix">
           <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
             <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
@@ -207,7 +207,7 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-1 type-col text-center">
+        <div class="col-lg-1 col-xs-1 type-col">
           <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
