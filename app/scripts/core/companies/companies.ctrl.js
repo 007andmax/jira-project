@@ -22,7 +22,7 @@
 
         $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
-        
+
         $scope.companies = CompaniesService.getAllCompanies();
         $scope.archivedCompanies = CompaniesService.getArchivedCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
@@ -47,7 +47,7 @@
         $scope.$watch('companiesCtrl.shownCompanies.length', function (value) {
           globalSearch.count = value;
         });
-  
+
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
             $state.go('companyProfile', { companyId: company.id, tabName: tabName });
@@ -57,13 +57,7 @@
         $scope.filterCompanies = function (value) {
           var filter = headerSharedState.filter;
           var clientType = value.clientType;
-          var result = true;
-          
-          if ($scope.archivedShown) {
-            return value.deletedAt;
-          } else {
-            result = result && !value.deletedAt;
-          }
+          var result = !value.deletedAt && !$scope.archivedShown || $scope.archivedShown && value.deletedAt;
 
           if (value.isDefault || value.default) {
             return false;
@@ -136,12 +130,12 @@
           }
 
         };
-  
+
         $scope.dearchiveCompany = function (company) {
           var name = company.name;
           var confirmMesage = 'Do you want to restore ' + name + '?';
           var confirmButton = 'Yes';
-  
+
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             CompaniesService.dearchive(company.id, function (resp) {
               UserNotificationService.show('The company ' + name + ' has successfully restored.', true);
