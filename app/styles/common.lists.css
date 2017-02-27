@@ -969,13 +969,13 @@ Devices tab
 
 .qt-list > li.billable-main > .col-1,
 .qt-billable-sub > li > .col-1 {
-  width: calc(100% - 98px);
+  width: calc(100% - 120px);
   white-space: nowrap;
 }
 
 .qt-list > li.billable-main > .col-2,
 .qt-billable-sub > li > .col-2 {
-  width: 98px;
+  width: 120px;
   padding-right: 0;
   text-align: right;
 }
