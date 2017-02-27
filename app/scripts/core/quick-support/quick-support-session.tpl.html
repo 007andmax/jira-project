@@ -76,18 +76,18 @@
 
   <div class="support-session-graph-content pull-right">
 
-    <div class="avatar pull-left">
+    <div class="avatar avatar-width pull-left">
       <img ng-src="{{ getUserAvatarUrl(remoteSession.performer) }}"
            alt="..." class="img-circle avatar-120">
 
-      <p>{{ getUserName(remoteSession.performer) }}</p>
+      <p class="ellipsis">{{ getUserName(remoteSession.performer) }}</p>
     </div>
 
     <span class="label label-primary admin-to-comp"
           ng-class="{'connected-success': remoteSession.status === 'CONNECTED'}"></span>
 
     <div class="device-type-icons">
-      <i class="icn-lg icn-computer has-tooltip"
+      <i class="icon-lg icn-computer has-tooltip"
          data-placement="top" uib-tooltip="Computer"></i>
       <span class="session-status">{{ statusMap[remoteSession.status] }}</span>
     </div>

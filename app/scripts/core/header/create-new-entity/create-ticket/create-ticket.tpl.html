@@ -328,8 +328,15 @@
                    typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
 
-            <div typeahead-input-icon-sm="ticketCompany,ticketCreatedUser"></div>
-
+            <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+                   tooltip-placement="top"></i>
+            </span>
+              <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -346,9 +353,18 @@
                    qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': '180px'}">
 
-            <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
+            <!--<input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">-->
 
             <div typeahead-input-icon-sm="ticketCreatedUser"></div>
+            <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+                   tooltip-placement="top"></i>
+            </span>
+              <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
 
           </div>
         </div>
@@ -371,6 +387,16 @@
                    custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '360px'}">
 
             <div typeahead-input-icon-sm="ticketAssignTo"></div>
+
+            <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+                   tooltip-placement="top"></i>
+            </span>
+              <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
 
           </div>
         </div>
@@ -415,25 +441,23 @@
           </div>
         </div>
       </li>
-
-      <li class="btn-bottom" style="margin-right: 10px;">
-        <div></div>
-        <div style="padding-top: 10px;">
-          <button-with-loading-indicator class="btn btn-lg btn-success pull-right"
-                                         ng-click="saveTicket(ticketForm, true)"
-                                         style="margin-left: 7px; width: 190px; font-weight: normal;"
-                                         loading="openingInProcess" label="Create and Open"
-                                         custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
-          </button-with-loading-indicator>
-
-          <button-with-loading-indicator class="btn btn-primary btn-create  pull-right"
-                                         ng-click="saveTicket(ticketForm)"
-                                         loading="savingInProcess" label="Create"
-                                         custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
-          </button-with-loading-indicator>
-        </div>
-      </li>
     </ul>
+    <div class="btn-bottom" style="margin-right: 10px;">
+      <div style="padding-top: 10px;">
+        <button-with-loading-indicator class="btn btn-lg btn-success pull-right"
+                                       ng-click="saveTicket(ticketForm, true)"
+                                       style="margin-left: 7px; width: 190px; font-weight: normal;"
+                                       loading="openingInProcess" label="Create and Open"
+                                       custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
+        </button-with-loading-indicator>
+
+        <button-with-loading-indicator class="btn btn-primary btn-create  pull-right"
+                                       ng-click="saveTicket(ticketForm)"
+                                       loading="savingInProcess" label="Create"
+                                       custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
+        </button-with-loading-indicator>
+      </div>
+    </div>
   </div>
 </form>
 

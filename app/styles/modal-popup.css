@@ -142,6 +142,10 @@
   background-color: black;
   content: '';
 }
+_::-webkit-:not(:root:root), .create-window .general .company-window .company-steps__list:before  {
+  width: calc(100% - 190px);
+}
+
 
 .create-window .general .company-window .company-steps__list--point {
   font-size: 18px;
@@ -344,6 +348,14 @@
   width: 48%;
   font-weight: normal;
 }
+_::-webkit-:host:not(:root:root),
+.create-window .general footer .btns-container .btn {
+  font-weight: 600;
+}
+_::-webkit-:not(:root:root),
+.create-window .general footer .btns-container .btn {
+  font-weight: 600;
+}
 
 .create-window .create-new-user .custom-phone-type,
 .create-window .create-new-user .custom-phone-number {
@@ -402,6 +414,7 @@
   right: 15px;
   padding: 10px;
   cursor: pointer;
+  line-height: 1.3;
 }
 
 .modal-customer-report .modal-dialog{

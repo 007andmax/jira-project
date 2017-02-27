@@ -346,11 +346,6 @@ body.non-body-scroll::-webkit-scrollbar {
   cursor: pointer;
 }
 
-@-moz-document url-prefix() {
-  .dropdown-user-parent > .dropdown-menu > li {
-    padding: 9px 20px 11px;
-  }
-}
 
 .dropdown-user-parent > .dropdown-menu > li:hover {
   background-color: #e7ecf2;
@@ -363,6 +358,9 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .dropdown-user-parent > .dropdown-menu > li .user-name {
   margin-top: 3px;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 .dropdown-user-parent > .dropdown-menu > li .user-name a {
@@ -558,7 +556,6 @@ body.modal-open {
 .icon-render{
   display: inline-block;
   margin: 0 5px;
-  float: left;
 }
 
 /*device*/
@@ -1377,7 +1374,7 @@ span.sort-span {
 }
 .tech-company-logo .create-user-avatar .avatar img {
   max-width: 450px;
-  width: 100%;
+  width: 200px;
   height: 100%;
 }
 .tech-company-logo .create-user-avatar .avatar .no-avatar {
@@ -1482,7 +1479,6 @@ span.sort-span {
 .qt-receivable-number .resend-button {
   width: 16px;
   height: 16px;
-  margin-top: 4px;
 }
 
 .qt-receivable-number .resend-button .green-checkmark {

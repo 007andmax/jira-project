@@ -128,6 +128,7 @@
 }
 .tags-management .qt-list .col-2 .colored-circle{
   display: inline-block;
+  vertical-align: middle;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -136,8 +137,7 @@
   margin-right: 5px;
 }
 .tags-management .qt-list .col-2 .icn-picker{
-  display: inline-block;
-  background: url("../images/sprites-s76c759f188.png") -1077px -1px no-repeat;
+  background-image: url("../images/new-icons/eyedropper-na.png");
 }
 .tags-management .qt-list .col-4 {
   cursor: pointer;
@@ -153,21 +153,12 @@
   height: 14px;
   margin-top: 14px;
 }
-.tags-management .qt-list .col-4 .icn-delete{
-  margin-top: 14px;
-}
 .tags-management .qt-list .col-4 .icn-replace:hover{
   background-position: -474px -98px;
 }
 .tags-management .tag-add{
   display: inline-block;
   color: #1586E4;
-}
-.tags-management .qt-list .col-4 .icn-product-save{
-  margin-top: 14px;
-}
-.tags-management .qt-list .col-4 .icn-remove-token{
-  margin-top: 14px;
 }
 .tags-management .qt-list .col-4 .move-services .custom-scroll label{
   font-size: 15px;

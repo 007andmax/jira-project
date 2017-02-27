@@ -130,6 +130,15 @@
   text-align: center;
   font-size: 20px;
 }
+_::-webkit-:host:not(:root:root),
+.third-part .board-head {
+  font-weight: 100;
+}
+_::-webkit-:not(:root:root),
+.third-part .board-head {
+  font-weight: 100;
+}
+
 
 .helper {
   border: 1px solid #000;

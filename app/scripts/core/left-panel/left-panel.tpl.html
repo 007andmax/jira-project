@@ -8,9 +8,9 @@
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
            ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
         <img class="menu-img" ng-if="openedCategory !== 'quick-support'"
-             src="images/new-icons/24-7-support-gray.png">
+             src="images/new-icons/network-desktop-gray.png">
         <img class="menu-img" ng-if="openedCategory === 'quick-support'"
-             src="images/new-icons/24-7-support-white.png">
+             src="images/new-icons/network-desktop-white.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
@@ -22,9 +22,9 @@
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
            ng-click="toggleLeftPanel('companies')" ui-sref="companies"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
-        <img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/new-icons/home-white.png">
+        <img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/new-icons/building-white.png">
         <img class="menu-img" ng-if="openedCategory === 'companies'"
-             src="images/new-icons/home-gray.png">
+             src="images/new-icons/building-gray.png">
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
@@ -37,9 +37,9 @@
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
            ng-click="toggleLeftPanel('billing')" ui-sref="accounting.billable"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
-        <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/new-icons/article-gray.png">
+        <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/new-icons/USD-circle-gray.png">
         <img class="menu-img" ng-if="openedCategory === 'billing'"
-             src="images/new-icons/article-white.png">
+             src="images/new-icons/USD-circle-white.png">
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"

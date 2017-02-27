@@ -58,7 +58,7 @@
                  ng-if="PermissionsService.isAllowed('CREATE_USERS')"></div>
             <div
               qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
-              qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}" class="icn">
+              qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}" style="display: inline-block;">
               <div class="icn icn-agent-download" qt-popover-trigger tooltip-placement="top"
                    uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></div>
             </div>
@@ -82,10 +82,9 @@
             <div class="icn icn-address" ng-click="chartHidden = !chartHidden"
                  uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>
 
-            <div ng-show="companyData.description"
-                 style="margin-right: 10px;"
+            <div ng-show="companyData.description" class="icn icn-note"
                  qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"
-                 qt-popover-position="bottom-left-align" class="icn">
+                 qt-popover-position="bottom-left-align">
               <div class="icn icn-note" qt-popover-trigger="mouseenter"></div>
             </div>
 

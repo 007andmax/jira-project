@@ -73,6 +73,21 @@
 .quick-support-list .quick-support-session .support-session-content .avatar p {
   text-align: center;
 }
+@media (max-width: 1600px){
+  .quick-support-list .quick-support-session .support-session-content .avatar-width {
+    width: 200px;
+  }
+}
+@media (max-width: 1366px){
+  .quick-support-list .quick-support-session .support-session-content .avatar-width {
+    width: 140px;
+  }
+}
+@media (max-width: 1280px){
+  .quick-support-list .quick-support-session .support-session-content .avatar-width {
+    width: 120px;
+  }
+}
 .quick-support-list .quick-support-session .support-session-content .avatar p a {
   font-weight: bold;
 }

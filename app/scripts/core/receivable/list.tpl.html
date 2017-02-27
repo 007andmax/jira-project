@@ -90,14 +90,14 @@
       <div class="col-sm-1">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
       <div class="col-sm-1 group-btns">
 
-        <div uib-tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
+        <span uib-tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
              tooltip-placement="top" ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">
-          <i class="icn-sm icn-restore icon-render"></i>
-        </div>
-        <div uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+          <i class="icon-sm icn-restore icon-render"></i>
+        </span>
+        <span uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
              ng-click="deleteInvoice(invoice)">
           <i class="icon-sm icn-delete icon-render"></i>
-        </div>
+        </span>
       </div>
     </li>
 

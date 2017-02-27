@@ -451,7 +451,7 @@ a.ha-24 {
 .icn-ticket-completed {
   background-position: -861px -100px;
   width: 8px;
-  height: 6px;
+  height: 10px;
 }
 
 /*.icn-remove-token {
@@ -540,19 +540,16 @@ a.ha-24 {
 }
 
 .icn-restore {
-  background-position: -2492px -100px;
-  width: 14px;
-  left: -1px !important;
+  background-image: url("../images/new-icons/history-na.png");
 }
 
 :hover > .icn-restore, :focus:hover > .icn-restore, .active > .icn-restore, .open .icn-restore, .open > .btn:hover .icn-restore {
-  background-position: -2516px -100px;
+  background-image: url("../images/new-icons/history.png");
 }
 
 [disabled] .icn-restore, .disabled .icn-restore, .icn-restore[disabled] {
-  background-position: -2492px -127px;
-  width: 14px;
-  left: -1px !important;
+  background-image: url("../images/new-icons/history-na.png");
+  opacity: 0.6;
 }
 
 .icn-mail {
@@ -592,12 +589,11 @@ a.ha-24 {
 }
 
 .icn-create-invoice {
-  background-position: -3416px -100px;
-  width: 18px;
+  background-image: url("../images/new-icons/article.png");
 }
 
 .icn-create-invoice.disabled, .disabled > .icn-create-invoice {
-  background-position: -3444px -100px;
+  background-image: url("../images/new-icons/article.png");
 }
 
 .icn-add-company {
@@ -610,7 +606,7 @@ a.ha-24 {
 }
 
 .icn-add-company-light {
-  background-position: -3415px -100px;
+  background-image: url("../images/new-icons/article-white.png");
 }
 
 .icn-minimize {
@@ -622,14 +618,13 @@ a.ha-24 {
 }
 
 .icn-download {
-  background-position: -412px 0;
+  background-image: url("../images/new-icons/download.png");
 }
 
 .icn-download-white {
-  background-position: -3760px -206px;
-  width: 12px;
-  height: 14px;
+  background-image: url("../images/new-icons/download-white.png");
 }
+
 
 .icn-loading {
   background-position: -1358px 0;
@@ -1246,6 +1241,7 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 
 .icn-remove-token, .icn-remove-token:focus {
   background-image: url("../images/new-icons/cancel-circle.png");
+  background-size: inherit;
 }
 
 :hover > .icn-remove-token, :active > .icn-remove-token, :focus:hover > .icn-remove-token, :focus:active > .icn-remove-token, :hover:active > .icn-remove-token, .active > .icn-remove-token, .open .icn-remove-token, .open > .btn:hover .icn-remove-token {
@@ -1266,6 +1262,10 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
   background-position: -715px 1px;
 }
 
+.icn-remove-old{
+  background-position: -696px 0px;
+}
+
 .icn-cusers {
   background-position: -3647px 0;
 }
@@ -1283,7 +1283,7 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-tablet {
-  background-position: -3255px 0;
+  background-image: url("../images/new-icons/smartphone-tablet-na.png");
 }
 
 .icn-generic-device {
@@ -1291,19 +1291,19 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-server {
-  background-position: -2389px 0;
+  background-image: url("../images/new-icons/network-na.png");
 }
 
 .icn-printer {
-  background-position: -1805px 0;
+  background-image: url("../images/new-icons/printer-na.png");
 }
 
 .icn-computer {
-  background-position: -795px 0;
+  background-image: url("../images/new-icons/monitor-na.png");
 }
 
 .icn-mobile {
-  background-position: -1505px 0;
+  background-image: url("../images/new-icons/smartphone-tablet-na.png");
 }
 
 .icn-fax {
@@ -1974,11 +1974,11 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-settings-restore-default {
-  background-position: -240px -51px;
+  background-image: url("../images/new-icons/history.png");
 }
 
 .icn-settings-restore-default:hover, :hover > .icn-settings-restore-default, .icn-settings-restore-default:active, :active > .icn-settings-restore-default {
-  background-position: -262px -51px;
+  background-image: url("../images/new-icons/history-na.png");
 }
 
 .icn-show-password {
@@ -2132,13 +2132,11 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-description {
-  width: 10px;
-  height: 12px;
-  background-position: -780px -206px;
+  background-image: url("../images/new-icons/article.png");
 }
 
-:hover > .icn-description, :active > .icn-description, :focus:hover > .icn-description, :focus:active > .icn-description, :hover:active > .icn-description, .active > .icn-description, .open > .icn-description, .open .icn-description {
-  background-position: -800px -206px;
+:hover > .icn-description, :active > .icn-description, :focus:hover > .icn-description, :focus:active > .icn-description, :hover:active > .icn-description, .active > .icn-description, .open > .icn-description, .open .icn-description {  background-image: url("../images/new-icons/article.png");
+  background-image: url("../images/new-icons/article.png");
 }
 
 .icn-description-white {

@@ -7,7 +7,8 @@
 .card-wrapper {
   padding: 15px;
   display: inline-block;
-  float: left; }
+  float: left;
+  min-height: 365px;}
   .card-wrapper .card {
     position: relative;
     box-sizing: border-box;
@@ -153,6 +154,8 @@
   margin: auto;
   cursor: pointer;
   opacity: 0.8;
+  width: 14px;
+  height: 14px;
 }
 .card-wrapper .card .card-header .icn-restore,
 .card-wrapper .card .card-header .edit-icn:hover {
@@ -187,7 +190,14 @@
   margin-bottom: 8px;
   font-family:'Graphik Medium', sans-serif;
 }
-
+_::-webkit-:host:not(:root:root),
+.card-wrapper .card .card-header .name {
+  font-family:'Graphik Regular', sans-serif;
+}
+_::-webkit-:not(:root:root),
+.card-wrapper .card .card-header .name {
+  font-family:'Graphik Regular', sans-serif;
+}
 .badge-default{
   background-color: #e9eef5;
   border: 1px solid #bbc2ce;
@@ -311,7 +321,7 @@
 
 @media (max-width: 1600px) {
   .card-view-wrapper{
-    width: 1200px;
+    width: 1065px;
   }
 }
 @media (max-width: 1440px) {

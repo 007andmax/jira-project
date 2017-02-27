@@ -30,7 +30,7 @@
         <div class="card">
           <div class="card-header">
             <div class="edit-icn" ng-if="!user.deletedAt" create-new-entity="user" item="user"></div>
-            <i class="icn-sm icn-restore" ng-if="user.deletedAt" ng-click="dearchiveUser(user)"></i>
+            <i class="icon-sm icn-restore" ng-if="user.deletedAt" ng-click="dearchiveUser(user)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
             <p class="ellipsis name" uib-tooltip="{{ getUserName(user) }}" tooltip-placement="bottom"
@@ -163,7 +163,7 @@
 
       <div class="col-lg-1 col-xs-2 subscribe-col">Subscription</div>
 
-      <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('ticket')">
+      <div class="col-lg-1 col-xs-1 tickets-col" ng-click="setOrderByUsers('ticket')">
         <span class="sort-span">
           Tickets
           <i class="icn-sm sort-icon icn-sort"
@@ -288,7 +288,7 @@
 
         </div>
 
-        <div class="col-lg-1 col-xs-1 text-center tickets-col">
+        <div class="col-lg-1 col-xs-1 tickets-col">
         <span class="user-submitted-tickets">
           {{ user.userStatistic.ticketsSubmitted || '0' }}
         </span>
@@ -316,8 +316,8 @@
               <i class="icon-sm icn-delete"></i>
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip" ng-if="user.deletedAt">
-              <i class="icn-sm icn-restore" ng-click="dearchiveUser(user)"></i>
+            <div class="btn btn-icn btn-default pull-left has-tooltip" ng-if="user.deletedAt">
+              <i class="icon-sm icn-restore" ng-click="dearchiveUser(user)"></i>
             </div>
 
           </div>

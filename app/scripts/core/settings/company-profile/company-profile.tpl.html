@@ -51,10 +51,7 @@
 
                 <label class="control-label">Company URL</label>
 
-                <input class="form-control" type="text" readonly>
-                <span class="company-url-addon">
-                  {{ companyForSettingPage.supportMailBox + '.' + currentUrl }}
-                </span>
+                <input class="form-control text-center" style="user-select: all" type="text" readonly value="{{ companyForSettingPage.supportMailBox + '.' + currentUrl }}">
               </div>
             </div>
           </div>

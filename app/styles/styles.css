@@ -312,6 +312,46 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
+_::-webkit-:host:not(:root:root),
+body .left-panel-full {
+  font-family: 'Graphik Medium', sans-serif;
+}
+body .topNavbar {
+  font-family: 'Graphik Medium', sans-serif;
+}
+body .topNavbar strong span {
+  font-family: 'Graphik Medium', sans-serif;
+}
+.center-category p {
+  font-family: 'Graphik Regular', sans-serif;
+}
+.company-new-cover-wrapper p, strong {
+  font-family:'Graphik Medium', sans-serif;
+}
+.btn {
+  font-family:'Graphik Regular', sans-serif;
+  font-weight: 600;
+}
+_::-webkit-:not(:root:root),
+body .left-panel-full {
+  font-family: 'Graphik Medium', sans-serif;
+}
+body .topNavbar {
+  font-family: 'Graphik Medium', sans-serif;
+}
+body .topNavbar strong span {
+  font-family: 'Graphik Medium', sans-serif;
+}
+.center-category p {
+  font-family: 'Graphik Regular', sans-serif;
+}
+.company-new-cover-wrapper p, strong {
+  font-family:'Graphik Medium', sans-serif;
+}
+.btn {
+  font-family:'Graphik Regular', sans-serif;
+  font-weight: 600;
+}
 input,
 button,
 select,
@@ -810,6 +850,9 @@ hr {
   float: left;
   width: 100%;
   padding-bottom: 30px;
+}
+.billable-content .tabs-container .nav .bt.disabled {
+  background-color: #fff;
 }
 .receipt-archive-content {
   padding-top: 30px;
@@ -1485,6 +1528,21 @@ p {
   margin: 0;
   line-height: 24px;
   font-family: 'Graphik Regular', sans-serif;
+}
+@media (max-width: 1366px){
+  .support-session-content .support-session-info p{
+    font-size: 12px;
+  }
+}
+_::-webkit-:host:not(:root:root),
+p {
+  font-family: 'Graphik Light', sans-serif;
+  font-weight: 600;
+}
+_::-webkit-:not(:root:root),
+p {
+  font-family: 'Graphik Light', sans-serif;
+  font-weight: 600;
 }
 p.list {
   line-height: 16px;
@@ -2880,7 +2938,7 @@ _:-ms-fullscreen,
   display: block;
   width: 100%;
   height: 36px;
-  padding: 13px;
+  padding: 0 13px;
   font-size: 14px;
   line-height: 20px;
   color: #4c5c6f;
@@ -7108,6 +7166,10 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   float: left;
   cursor: inherit;
 }
+.ticket .ticket-list-header .label {
+  margin-left: 15px;
+  float: none;
+}
 a.label:hover,
 a.label:focus {
   color: #ffffff;
@@ -7245,11 +7307,8 @@ a.label-icn-lg:focus {
   display: inline-block;
   width: 16px;
   height: 16px;
-  padding-top: 4px;
   text-align: center;
   border-radius: 9px;
-  /*line-height: 18px;*/
-  float: left;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   -o-border-radius: 9px;
@@ -7283,14 +7342,14 @@ a.label-icn-sm:focus {
 .label-icn-sm > div,
 .label-icn-sm label {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: text-top;
   width: 8px;
   height: 8px;
+  margin-bottom: 0;
 }
 .label-icn-sm > div.priority-flag,
 .label-icn-sm label.priority-flag {
-  padding-top: 1px;
-  padding-left: 1px;
+  font-size: 0;
 }
 .label-icn-sm > div.status-progress,
 .label-icn-sm label.status-progress {
@@ -9280,6 +9339,16 @@ button.close {
     display: none;
   }
 }
+
+@media screen and (max-width: 1366px){
+  .ticket-labels .progress-big-size{
+    display: none;
+  }
+  .ticket-labels .progress-small-size{
+    display: block;
+  }
+}
+
 .bold {
   font-weight: 700;
 }
@@ -9319,6 +9388,11 @@ button.close {
   overflow: visible;
   white-space: normal;
   word-break: break-all;
+}
+.container-ticket-content .table-wrapper .table-content .col-3.service-descr{
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu{
