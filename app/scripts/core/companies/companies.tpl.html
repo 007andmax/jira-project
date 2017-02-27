@@ -30,7 +30,7 @@
       <div class="card-wrapper clickable"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: 'name')) track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl"
-           ui-sref="companyProfile({ companyId: company.id })">
+           ng-click="openCompany(company)">
         <div class="card">
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt"
