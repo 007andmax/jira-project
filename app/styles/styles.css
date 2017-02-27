@@ -9517,3 +9517,13 @@ button.close {
   height: 50px;
   border-bottom: 1px solid #eee;
 }
+
+.discount-modal .col-2{
+  position: relative;
+}
+
+.discount-modal .col-2 .discount-value{
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
