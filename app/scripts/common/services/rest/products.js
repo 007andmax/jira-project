@@ -60,11 +60,6 @@
           RealTimeService.subscribe('/product', scope, function (newChange) {
             if (newChange.action === 'PRODUCT_SAVED') {
               var category = Utils.findById(categories, newChange.data.category.id);
-
-              if (!category) {
-                throw 'Attempt to add product to nonexistent category!!!';
-              }
-
               var product = Utils.findById(category.products, newChange.data.versionedId.id);
 
               if (product) {

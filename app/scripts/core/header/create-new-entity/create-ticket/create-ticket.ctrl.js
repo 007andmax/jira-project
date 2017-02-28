@@ -243,7 +243,10 @@
           }
         });
 
-        $scope.$watch('ticketCreatedUser', function (val) {
+        $scope.$watch('ticketCreatedUser', function (val, prevValue) {
+          if (val === prevValue) {
+            return;
+          }
 
           if (val && (typeof val === 'object') && val.id) {
             $scope.ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);

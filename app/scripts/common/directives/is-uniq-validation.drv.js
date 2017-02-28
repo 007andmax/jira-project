@@ -21,11 +21,13 @@
             return ngModelCtrl.$viewValue;
           }, validate);
 
-          function validate() {
-            if (timeoutId) {
-              $timeout.cancel(timeoutId);
+          function validate(newValue, prevValue) {
+            if (newValue !== prevValue) {
+              if (timeoutId) {
+                $timeout.cancel(timeoutId);
+              }
+              timeoutId = setValidationTimeout();
             }
-            timeoutId = setValidationTimeout();
           }
 
           function setValidationTimeout() {
