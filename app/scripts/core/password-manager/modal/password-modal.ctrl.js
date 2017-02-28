@@ -65,6 +65,7 @@
         $scope.deviceTabDisabled = false;
         $scope.generateRandomPassword = PasswordManagerService.generateRandomPassword;
         $scope.getLinkName = getLinkName;
+        $scope.getCompanyById = CompaniesService.getOneById;
 
         if (isEdit) {
           var template = $scope.editedPassword.template;
@@ -105,6 +106,9 @@
         };
 
         $scope.toggleCreationGadget = function (isOpen, event) {
+          if (!isOpen) {
+            $scope.password.newGadgetName = '';
+          }
           $scope.addingGadget = isOpen;
           event && event.stopPropagation();
         };
@@ -124,15 +128,9 @@
           var password = $scope.password;
           var firstLink = password.links[0];
 
-          if (companyId && (!firstLink || !$scope.editedPasswordCompany)) {
-            $scope.editedPasswordCompany = CompaniesService.getOneById(companyId);
-            $scope.editedPassword.companyId = companyId;
-            $scope.password.companyId = companyId;
-          }
-
           if (password.selectionMap[itemId]) {
             if (firstLink) {
-              if (firstLink.userId && type !== 'user' || firstLink.agentId && type !== 'agent' || firstLink.gadgetId && type !== 'gadget') {
+              if (firstLink.userId && type !== 'user' || firstLink.agentId && type !== 'agent' || firstLink.gadgetId && type !== 'gadget' || companyId !== $scope.password.companyId) {
                 clearLinks();
                 password.selectionMap[itemId] = true;
               }
@@ -149,6 +147,12 @@
                 break;
               }
             }
+          }
+
+          if (companyId && (!firstLink || !$scope.editedPasswordCompany)) {
+            $scope.editedPasswordCompany = CompaniesService.getOneById(companyId);
+            $scope.editedPassword.companyId = companyId;
+            $scope.password.companyId = companyId;
           }
 
           $scope.password.firstLinkName = getLinkName(password.links[0], companyId);
@@ -241,24 +245,25 @@
           event.stopPropagation();
         };
 
-        $scope.addNewGadget = function (name, event) {
-          if (name) {
+        $scope.addNewGadget = function (name, companyId, event) {
+          if (name && companyId) {
             var gadgets = $scope.gadgets;
             var selectionMap = $scope.password.selectionMap;
             for (var i = 0; i < gadgets.length; i++) {
               var gadget = gadgets[i];
-              if (gadget.name === name && !selectionMap[gadget.id]) {
-                toggleGadget(true, gadget.id);
+              if (gadget.name === name && gadget.clientCompanyId === companyId) {
+                if (!selectionMap[gadget.id]) {
+                  toggleGadget(true, gadget.id, gadget.clientCompanyId);
+                }
+                $scope.toggleCreationGadget(false);
+                event.stopPropagation();
                 return;
               }
             }
 
-            DevicesService.saveGadget(name, function (resp) {
-              $scope.gadgets.push({
-                id: resp.id,
-                name: name
-              });
-              toggleGadget(true, resp.id);
+            DevicesService.saveGadget(name, companyId, function (resp) {
+              $scope.gadgets.push(resp);
+              toggleGadget(true, resp.id, resp.clientCompanyId);
               $scope.toggleCreationGadget(false);
             });
           } else {
@@ -384,9 +389,9 @@
           return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
         }
 
-        function toggleGadget(isSelected, id) {
+        function toggleGadget(isSelected, id, clientCompanyId) {
           $scope.password.selectionMap[id] = isSelected;
-          $scope.validateLinks('gadget', id);
+          $scope.validateLinks('gadget', id, clientCompanyId);
         }
 
         function isDataChanged(form) {
