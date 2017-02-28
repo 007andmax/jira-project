@@ -13,7 +13,7 @@
           link: function (scope, element, attrs) {
             var $body = angular.element(document.body), image;
             var isTechLogo = scope.$eval(scope.isTechLogo);
-            
+
             //delete image
             var restoreDefaultButton = element.find('[restore-default-button]');
             if (restoreDefaultButton.length) {
@@ -27,18 +27,18 @@
                     scope.model[attrs.modelImagePath] = null;
                   });
                 }
-                
+
                 $body.click();
                 scope.$apply();
               });
             }
-            
+
             //reposition
             var repositionButton = element.find('[reposition-button]');
             if (repositionButton.length) {
               repositionButton.on('click', function (e) {
                 $body.click();
-                
+
                 var image = scope.model[attrs.modelImagePath];
                 if (image) {
                   image.id = scope.model.id;
@@ -46,7 +46,7 @@
                 }
               });
             }
-            
+
             //load image and show crop modal
             element.find('[crop-image-button]').fileUploader({
               uploadUrl: '/file?isAvatar=true&ratio=' + (isTechLogo ? 2.25 : 1),
@@ -56,7 +56,7 @@
               allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
               minImageWidth: 1,
               minImageHeight: 1,
-              
+
               onStart: function () {
                 image = {};
                 if (scope.model) {
@@ -76,7 +76,7 @@
                 console.error(message);
               }
             });
-            
+
             function showCropper(image) {
               $uibModal.open({
                 animation: true,
@@ -108,17 +108,17 @@
                 }
               })
             }
-            
+
             function cropperCtrl($scope, $timeout, $uibModalInstance, Cropper, source, isTechLogo, saveImage) {
               var blob, timeout;
-  
+
               $scope.source = source ? angular.copy(source) : {};
               $scope.options = {
                 maximize: true,
                 aspectRatio: isTechLogo ? 450 / 200 : 1,
                 crop: getCroppedImage
               };
-              
+
               if (source.cropped) {
                 $scope.options.data = {
                   x: source.x,
@@ -127,7 +127,7 @@
                   height: source.h
                 };
               }
-              
+
               if (source.origin.base64) {
                 blob = Cropper.decode(source.origin.base64);
                 $timeout(function () { $scope.$broadcast('show.cropper');});
@@ -140,13 +140,13 @@
                   });
                 });
               }
-              
+
               $scope.crop = function () {
                 $scope.source.origin.base64 = undefined;
                 $scope.source.base64 = $scope.preview;
                 saveImage($scope.source, $scope.source.id, $scope.close);
               };
-              
+
               $scope.close = function (resp) {
                 if (timeout) {
                   $timeout.cancel(timeout);
@@ -154,53 +154,52 @@
                 $scope.$broadcast('hide.cropper');
                 $uibModalInstance.close(resp);
               };
-  
+
               $scope.$on('show.cropper', function () {
                 $timeout(function () {
                   $scope.cropperReady = true;
                 }, 50);
               });
-              
+
               function getCroppedImage(dataNew) {
                 if (timeout) {
                   $timeout.cancel(timeout);
                 }
-  
+
                 timeout = $timeout(function () {
                   $scope.source.x = dataNew.x;
                   $scope.source.y = dataNew.y;
                   $scope.source.w = dataNew.width;
                   $scope.source.h = dataNew.height;
-  
+
                   Cropper.crop(blob, dataNew).then(Cropper.encode).then(function (base64) {
                     $scope.preview = base64;
                   });
                 }, 250);
               }
-  
+
               function getBase64FromImageUrl(url, callback) {
                 var img = new Image();
-                img.setAttribute('crossOrigin', 'anonymous');
-    
+
                 img.onload = function () {
                   var canvas = document.createElement("canvas");
-                  canvas.width =this.width;
-                  canvas.height =this.height;
-      
+                  canvas.width = this.width;
+                  canvas.height = this.height;
+
                   var ctx = canvas.getContext("2d");
                   ctx.drawImage(this, 0, 0);
-      
+
                   var dataURL = canvas.toDataURL("image/png");
                   callback(dataURL);
                 };
-    
+
                 img.src = url;
               }
-              
+
             }
-            
+
           }
         }
       }]);
-  
+
 })();

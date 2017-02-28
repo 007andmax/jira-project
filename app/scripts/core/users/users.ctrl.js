@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
-    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService',
+    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$timeout',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
       'localStorageService',
-      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService,
+      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, $timeout,
                 SharedStateService, PermissionsService, $state, localStorageService) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
@@ -121,12 +121,15 @@
         };
 
         $scope.goToUserTickets = function (user) {
-          $state.go('tickets', { listType: 'all' }).then(function () {
-            $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
-            $scope.sharedState.searchFilter.companyId = '';
-            $scope.sharedState.searchFilter.userId = user.id;
-            globalSearch.preventClearing = true;
-            globalSearch.searchValue = $scope.getUserName(user);
+          globalSearch.searchValue = '';
+          $timeout(function () {
+            $state.go('tickets', { listType: 'all' }).then(function () {
+              $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
+              $scope.sharedState.searchFilter.companyId = '';
+              $scope.sharedState.searchFilter.userId = user.id;
+              globalSearch.preventClearing = true;
+              globalSearch.searchValue = $scope.getUserName(user);
+            });
           });
         };
 
