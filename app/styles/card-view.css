@@ -323,6 +323,9 @@ _::-webkit-:not(:root:root),
   .card-view-wrapper{
     width: 1065px;
   }
+  .left-panel-closed .card-view-wrapper{
+    width: 1420px;
+  }
 }
 @media (max-width: 1440px) {
   .card-view-wrapper{

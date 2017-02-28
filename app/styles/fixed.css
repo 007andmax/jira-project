@@ -122,7 +122,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
-  left: 50px;
+  left: 25px;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -207,8 +207,7 @@ body.non-body-scroll::-webkit-scrollbar {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 30px;
   }
-
-  .qt-product-list > li > .intermediate-parent-elem > .col-2 {
+    .qt-product-list > li > .intermediate-parent-elem > .col-2 {
     width: calc(100% - 670px);
   }
 
@@ -237,6 +236,11 @@ body.non-body-scroll::-webkit-scrollbar {
 
   .qt-product-list > li > .intermediate-parent-elem > .col-6 {
     width: 84px;
+  }
+}
+@media (max-width: 1600px) {
+  .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
+    left: 20px;
   }
 }
 

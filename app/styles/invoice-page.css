@@ -297,11 +297,6 @@
   padding: 15px 20px;
 }
 
-.invoice-page .update {
-  float: left;
-  min-width: 65px;
-}
-
 .invoice-page .update h4 {
   color: black;
   text-transform: uppercase;
