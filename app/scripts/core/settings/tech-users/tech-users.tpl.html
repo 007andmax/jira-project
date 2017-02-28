@@ -31,7 +31,7 @@
             <div class="user-info">
 
               <div class="avatar" ng-if="!user.requestToChangePassword && user.isEmailVerified">
-                <img ng-if="user.avatar" ng-src="{{ getContactAvatarUrl(user) }}"
+                <img ng-if="user.avatar" ng-src="{{ getUserAvatarUrl(user) }}"
                      alt="..." class="img-circle">
                 <img ng-if="!user.avatar" src="images/settings-icon/tech-user.png" alt="..." class="img-circle">
               </div>
