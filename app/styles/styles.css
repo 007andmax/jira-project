@@ -312,6 +312,11 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
+@media (max-width: 1366px){
+  body {
+    font-size: 12px;
+  }
+}
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
   font-family: 'Graphik Medium', sans-serif;

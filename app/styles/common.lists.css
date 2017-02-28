@@ -139,10 +139,15 @@
 .qt-list li.list-heading > [class*='col-'] {
   font-size: 14px;
   line-height: 14px;
-
   text-transform: capitalize;
-
   color: #000 !important;
+  text-align: left;
+  height: 30px;
+}
+@media (max-width: 1366px){
+  .qt-list li.list-heading > [class*='col-']{
+    height: 15px;
+  }
 }
 
 @-moz-document url-prefix() {
@@ -175,12 +180,36 @@
 .qt-list.qt-users > li > [class*='col-'] {
   padding: 0 15px;
 }
+
+@media (max-width: 1366px){
+  .qt-list.qt-users > li > [class*='col-'] {
+    padding: 0;
+  }
+}
+
 .users-list-wrapper [class*='col-'] {
   padding: 0 15px;
+}
+.users-list-wrapper [class*='col-4']{
+  padding: 0 35px;
+  text-align: left;
+}
+@media (max-width: 1366px){
+  .users-list-wrapper [class*='col-'] {
+    padding: 0 5px;
+  }
 }
 
 .qt-list.qt-users > li > [class*='col-']:not(:first-child) {
   text-align: left;
+}
+.qt-list.qt-users > li > [class*='col-3-2']:not(:first-child){
+  padding: 0 30px;
+}
+@media (max-width: 1600px){
+  .qt-list.qt-users > li > [class*='col-3-2']:not(:first-child){
+    padding: 0 15px;
+  }
 }
 
 .qt-list.qt-users > li > [class*='col-']:not(:first-child).subscribe-col,
@@ -188,8 +217,25 @@
   text-align: center;
   padding: 0 10px;
 }
+@media (max-width: 1366px){
+  .qt-list.qt-users > li > [class*='col-']:not(:first-child).subscribe-col,
+  .qt-list.qt-users > li > [class*='col-']:not(:first-child).tickets-col{
+    padding: 0 5px;
+  }
+}
+@media (max-width: 1280px){
+  .qt-list.qt-users > li > [class*='col-']:not(:first-child).subscribe-col,
+  .qt-list.qt-users > li > [class*='col-']:not(:first-child).tickets-col{
+    padding: 0;
+  }
+}
 .qt-list.qt-users > li > .users-list-wrapper .tickets-col{
   text-align: center;
+}
+@media (max-width: 1366px){
+  .qt-list.qt-users > li > .users-list-wrapper .tickets-col{
+    text-align: right;
+  }
 }
 
 .qt-list > li > [class*='col-']:after {
@@ -301,6 +347,11 @@
   .qt-users .col-4 {
     width: 100px;
   }
+  @media (max-width: 1280px){
+    .qt-users .col-4{
+      padding: 0 20px;
+    }
+  }
 
   .qt-users .col-5 {
     width: 161px;
@@ -345,6 +396,11 @@
 
   .qt-users .col-4 {
     width: 100px;
+  }
+  @media (max-width: 1366px){
+    .qt-users .col-4{
+      padding: 0 20px;
+    }
   }
 
   .qt-users .col-5 {

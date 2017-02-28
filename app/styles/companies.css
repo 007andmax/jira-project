@@ -1356,6 +1356,11 @@
   align-items: center;
   cursor: pointer;
 }
+@media (max-width: 1600px) {
+  .list-company-row{
+    align-items: flex-start;
+  }
+}
 .qwe {
   width: 38px;
   float: left;

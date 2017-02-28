@@ -671,13 +671,13 @@
               addUserToResult($scope.assignedUser);
             }
 
-            // add ticket managers and ticket update subscribers
+            // add ticket managers
             var usersFromTicketCompany = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
 
             for(var i = 0; i < usersFromTicketCompany.length; i++){
               var user = usersFromTicketCompany[i];
 
-              if(user.subscription && (user.subscription.ticketManager || user.subscription.ticket))
+              if(user.subscription && user.subscription.ticketManager)
                 addUserToResult(user);
             }
 
