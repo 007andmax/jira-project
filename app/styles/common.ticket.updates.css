@@ -305,7 +305,6 @@
 
 .table-wrapper .table-content {
     width: calc(100% - 30px);
-    height: 54px;
     margin: 0;
     padding: 0;
     position: relative;
@@ -468,6 +467,7 @@
     width: 32px;
     position: absolute;
     right: -32px;
+    top: 0;
 }
 
 .table-wrapper .table-content-action a.hit-area {

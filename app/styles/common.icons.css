@@ -643,6 +643,10 @@ a.ha-24 {
   background-image: url("../images/new-icons/delete-na.png");
 }
 
+.icn-delete-white{
+  background-image: url("../images/new-icons/delete-white.png");
+}
+
 .icn-message {
   background-position: -3598px 0;
 }
@@ -712,7 +716,7 @@ a.ha-24 {
 .icn-ticket-progress {
   background-position: -834px -100px;
   width: 5px;
-  height: 6px;
+  height: 10px;
 }
 
 .icn-update-message {
@@ -1237,6 +1241,13 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
   width: 4px;
   height: 6px;
   background-position: -3699px 0;
+}
+
+.icn-caret-light{
+  width: 4px;
+  height: 6px;
+  background-position: -3699px 0;
+  transform: rotate(90deg);
 }
 
 .icn-remove-token, .icn-remove-token:focus {

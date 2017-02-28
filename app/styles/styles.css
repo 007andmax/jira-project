@@ -9341,10 +9341,12 @@ button.close {
 }
 
 @media screen and (max-width: 1366px){
-  .ticket-labels .progress-big-size{
+  .ticket-labels .progress-big-size,
+  .ticket-labels .priority-big-size{
     display: none;
   }
-  .ticket-labels .progress-small-size{
+  .ticket-labels .progress-small-size,
+  .ticket-labels .priority-small-size{
     display: block;
   }
 }
