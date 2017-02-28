@@ -53,6 +53,7 @@ body.non-body-scroll::-webkit-scrollbar {
   padding: 0 5px;
   vertical-align: top;
   position: relative;
+  text-align: left;
 }
 
 /*.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {*/
