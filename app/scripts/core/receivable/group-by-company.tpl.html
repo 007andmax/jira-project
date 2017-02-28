@@ -57,10 +57,10 @@
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'dueDate'}"></i></span>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-1">
               status
             </div>
-            <div class="col-sm-1" ng-click="setOrderForInvoices('amount')">
+            <div class="col-sm-2" ng-click="setOrderForInvoices('amount')">
               <span class="sort-span">
                 amount
                 <i class="icn-sm sort-icon icn-sort"
@@ -102,7 +102,7 @@
               </span>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-1">
               <span class="send-again-txt">{{ invoice.status === 'SENT' ? 'Sent' : 'Resent' }}</span>
 
               <button-with-loading-indicator class="pull-left has-tooltip resend-button"
@@ -111,7 +111,7 @@
                                              loading="sending[invoice.id]"></button-with-loading-indicator>
             </div>
 
-            <div class="col-sm-1 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
+            <div class="col-sm-2 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
             <div class="col-sm-1 group-btns" style="margin-top: 3px;">
 
               <span uib-tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
