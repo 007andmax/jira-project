@@ -139,10 +139,10 @@
 .qt-list li.list-heading > [class*='col-'] {
   font-size: 14px;
   line-height: 14px;
-
   text-transform: capitalize;
-
   color: #000 !important;
+  text-align: left;
+  height: 30px;
 }
 
 @-moz-document url-prefix() {
