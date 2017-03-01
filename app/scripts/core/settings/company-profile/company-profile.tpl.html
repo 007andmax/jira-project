@@ -51,7 +51,8 @@
 
                 <label class="control-label">Company URL</label>
 
-                <input class="form-control text-center" style="user-select: all" type="text" readonly value="{{ companyForSettingPage.supportMailBox + '.' + currentUrl }}">
+                <input class="form-control text-center" style="user-select: all" type="text" readonly
+                       value="{{ companyForSettingPage.supportMailBox + '.' + currentUrl }}">
               </div>
             </div>
           </div>
@@ -73,16 +74,99 @@
           <div>
             <div class="create-user-form">
 
-              <div address-autocomplete template-page="settings" save-func="saveContactInfo" is-address-required="isAddressRequired"
+              <div address-autocomplete template-page="settings" save-func="saveContactInfo"
+                   is-address-required="isAddressRequired"
                    ng-model="address" show-validation-messages="isTryToSave" focus-address="isAddressFocused"></div>
 
-              <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave" is-first-required="isFromWelcomeWizard"
+              <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
+                   is-first-required="isFromWelcomeWizard"
                    country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>
 
               <div class="form-row clearfix" style="margin-top: 13px;">
-                <time-zone-autocomplete address="address" time-zones="timeZones" save-func="saveContactInfo"></time-zone-autocomplete>
+                <time-zone-autocomplete address="address" time-zones="timeZones"
+                                        save-func="saveContactInfo"></time-zone-autocomplete>
               </div>
 
+            </div>
+          </div>
+        </div>
+        <div class="ar-department">
+          <div class="create-user-container">
+
+            <div class="create-user-header clearfix">
+              <h3 class="pull-left">AR-Department</h3>
+            </div>
+            <div class="create-user-form">
+
+              <div class="form-row clearfix">
+
+                <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'firstName')}">
+
+                  <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'firstName')}">
+                    First Name
+                  </label>
+
+                  <input type="text" class="form-control" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
+                         name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur
+                         execute-when-outfocused="saveBasicInfo(basicInfoForm)">
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'lastName')}">
+
+                  <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'lastName')}">
+                    Last Name
+                  </label>
+
+                  <input type="text" class="form-control" aria-expanded="true" ng-maxlength="15"
+                         name="lastName" ng-model="editUser.lastName" make-dirty-on-blur
+                         execute-when-outfocused="saveBasicInfo(basicInfoForm)">
+                </div>
+              </div>
+
+              <div class="form-row clearfix">
+
+                <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'designation')}">
+
+                  <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'designation')}">
+                    Designation
+                  </label>
+
+                  <div ng-messages="basicInfoForm.designation.$error"
+                       ng-class="{'hide': !isShowingErrors(basicInfoForm, 'designation')}">
+                    <label class="control-label" ng-message="maxlength">Designation is too large</label>
+                    <label class="control-label" ng-message="minlength">Designation is too short</label>
+                  </div>
+
+                  <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
+                         ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30"
+                         execute-when-outfocused="saveBasicInfo(basicInfoForm)">
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'primaryEmail')}">
+
+                  <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'primaryEmail')}">
+                    Email
+                  </label>
+
+                  <div ng-messages="basicInfoForm.primaryEmail.$error"
+                       ng-class="{'hide': !isShowingErrors(basicInfoForm, 'primaryEmail')}">
+                    <label class="control-label" ng-message="required">Email field cannot be left empty.</label>
+                    <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
+                    <label class="control-label" ng-message="unique">This email already occupied.</label>
+                    <label class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</label>
+                  </div>
+
+                  <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                         ng-model="editUser.primaryEmail" ng-required="true" ng-pattern="emailPattern"
+                         is-uniq-validation validation-func="validateUserEmail" ng-maxlength="128"
+                         execute-when-outfocused="saveBasicInfo(basicInfoForm)">
+                </div>
+
+              </div>
+
+              <div class="form-row clearfix" phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
+                   is-first-required="isFromWelcomeWizard"
+                   country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>
             </div>
           </div>
         </div>
@@ -154,9 +238,11 @@
                   </label>
                 </div>
 
-                <input type="text" class="form-control" placeholder="from 00:00 to 23:59" name="workingHours{{ day.dayOfWeek }}"
+                <input type="text" class="form-control" placeholder="from 00:00 to 23:59"
+                       name="workingHours{{ day.dayOfWeek }}"
                        format-working-hours from="day.startTime" to="day.endTime" ng-disabled="!day.isSelected"
-                       ng-model="day.workingHours" execute-when-outfocused="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
+                       ng-model="day.workingHours"
+                       execute-when-outfocused="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
               </div>
             </div>
 

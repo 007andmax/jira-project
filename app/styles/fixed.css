@@ -502,7 +502,13 @@ i.off {
 .shoose-current-address-icn.active {
   color: rgb(21, 134, 228);
 }
-
+.ar-department{
+  padding: 37px 0 0 0;
+}
+.ar-department .form-row .form-group.no-label{
+  margin-top: 24px;
+  padding-left: 0;
+}
 .create-new-user.settings-basic-info .company-address-list {
   box-shadow: none;
   padding: 37px 0;
