@@ -258,7 +258,8 @@ body.non-body-scroll::-webkit-scrollbar {
     width: 84px;
   }
 }
-@media (max-width: 1600px) {
+
+@media (max-width: 1680px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 20px;
   }
