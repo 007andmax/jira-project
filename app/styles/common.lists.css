@@ -201,7 +201,7 @@
 .qt-list.qt-users > li > [class*='col-3-2']:not(:first-child){
   padding: 0 30px;
 }
-@media (max-width: 1600px){
+@media (max-width: 1680px){
   .qt-list.qt-users > li > [class*='col-3-2']:not(:first-child){
     padding: 0 15px;
   }
