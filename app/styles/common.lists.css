@@ -105,7 +105,7 @@
   height: auto;
   padding: 18px 15px;
   background-color: #fff;
-
+  height: 50px;
   cursor: auto !important;
 }
 
@@ -143,11 +143,6 @@
   color: #000 !important;
   text-align: left;
   height: 30px;
-}
-@media (max-width: 1366px){
-  .qt-list li.list-heading > [class*='col-']{
-    height: 15px;
-  }
 }
 
 @-moz-document url-prefix() {
@@ -206,7 +201,7 @@
 .qt-list.qt-users > li > [class*='col-3-2']:not(:first-child){
   padding: 0 30px;
 }
-@media (max-width: 1600px){
+@media (max-width: 1680px){
   .qt-list.qt-users > li > [class*='col-3-2']:not(:first-child){
     padding: 0 15px;
   }
@@ -235,6 +230,7 @@
 @media (max-width: 1366px){
   .qt-list.qt-users > li > .users-list-wrapper .tickets-col{
     text-align: right;
+    padding: 0 15px;
   }
 }
 
@@ -514,8 +510,13 @@
   .qt-users .col-3-2 {
     width: 10%;
   }
+  @media screen and (min-width: 2048px) {
+    .qt-users .col-3-2 {
+      width: 9%;
+    }
+  }
 
-  .qt-users .col-4 {
+    .qt-users .col-4 {
     width: 10%;
   }
 
@@ -2158,9 +2159,6 @@ Devices tab
 .qt-receipt-number > li > .col-5 {
   width: 86px;
   padding-right: 0;
-
-  text-align: right;
-
 }
 
 @media only screen and (min-width: 2000px) {
@@ -4131,4 +4129,9 @@ Devices tab
 
 .service-form-wrapper.edit-form-checkbox .col-1 {
   width: calc(100% - 320px);
+}
+@media (min-width: 2048px) {
+  .service-form-wrapper.edit-form-checkbox .col-1 {
+    width: calc(100% - 320px);
+  }
 }

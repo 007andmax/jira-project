@@ -85,6 +85,18 @@ body.non-body-scroll::-webkit-scrollbar {
   text-align: left;
 }
 
+@media (min-width: 1920px){
+  .products-content .qt-product-list > li > .intermediate-parent-elem > .col-2 {
+    width: calc(100% - 1105px);
+  }
+}
+
+@media (min-width: 2048px){
+  .products-content .qt-product-list > li > .intermediate-parent-elem > .col-2 {
+    width: calc(100% - 1170px);
+  }
+}
+
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2 {
   width: calc(100% - 1010px);
 }
@@ -122,7 +134,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
-  left: 25px;
+  left: 20px;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -164,13 +176,17 @@ body.non-body-scroll::-webkit-scrollbar {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 80px;
   }
+  @media only screen and (min-width: 2048px){
+    .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
+      left: 20px;
+    }
+  }
   .slide-category-content .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 95px;
   }
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
     width: 294px;
   }
-
   .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 185px;
   }
@@ -181,7 +197,11 @@ body.non-body-scroll::-webkit-scrollbar {
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 105px;
   }
-
+  @media only screen and (min-width: 2048px){
+    .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
+      width: 115px;
+    }
+  }
   .qt-product-list > li > .intermediate-parent-elem > .col-5 {
     width: 106px;
   }
@@ -238,7 +258,8 @@ body.non-body-scroll::-webkit-scrollbar {
     width: 84px;
   }
 }
-@media (max-width: 1600px) {
+
+@media (max-width: 1680px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 20px;
   }
@@ -302,6 +323,11 @@ body.non-body-scroll::-webkit-scrollbar {
   width: calc(100% - 277px);
   /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
+@media (min-width: 2048px){
+  .qt-services-list > li > .intermediate-parent-elem > .col-1 {
+    width: calc(100% - 445px);
+   }
+}
 
 .qt-services-list > li > .intermediate-parent-elem > .col-5 {
   width: 60px;
@@ -309,6 +335,11 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-services-list > li > .intermediate-parent-elem > .col-2 {
   width: 133px;
+}
+@media (min-width: 2048px){
+  .qt-services-list > li > .intermediate-parent-elem > .col-2 {
+    width: 260px;
+  }
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-3 {

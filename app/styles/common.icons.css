@@ -1277,6 +1277,10 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
   background-position: -696px 0px;
 }
 
+.company-profile-content .tab-content .pad-top{
+  padding-top: 4px;
+}
+
 .icn-cusers {
   background-position: -3647px 0;
 }
