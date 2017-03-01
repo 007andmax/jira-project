@@ -208,7 +208,7 @@
 }
 
 .change-password-wrapper .create-user-form, .contact-info-wrapper .create-user-form, .misc-info-wrapper .create-user-form {
-  margin-top: 17px;
+  margin-top: 10px;
 }
 
 .create-user-form .email-addon {
