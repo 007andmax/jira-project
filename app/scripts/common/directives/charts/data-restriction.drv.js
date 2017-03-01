@@ -22,15 +22,17 @@
             }
           });
           $window.on('resize', recropData);
-  
-          $scope.$on('$destroy', function () {
-            $window.off('resize', recropData);
+
+          $scope.$on('$destroy', function (info) {
+            if (info.targetScope && info.targetScope.$id === $scope.$id) {
+              $window.off('resize', recropData);
+            }
           });
-          
+
           function recropData() {
             setChartData(handledData);
           }
-          
+
           function getParams() {
             var arr = [];
             for (var prop in attrs) {
@@ -60,8 +62,13 @@
 
           function setChartData(data) {
             var canBeShown = Math.floor(getShownCounts('[chart-wrap]'));
-            
+
             if (!lastCanBeShown || lastCanBeShown !== canBeShown) {
+              if (lastCanBeShown) {
+                data.shift();
+                data.pop();
+              }
+
               if (canBeShown < data.length - 2) {
                 $scope.chartData = addExtremeValues(data.slice(data.length - canBeShown + 2));
               } else {
@@ -69,7 +76,7 @@
               }
               $scope.chartTicks = $scope.parseDate($scope.chartData);
             }
-            
+
             lastCanBeShown = canBeShown;
           }
 

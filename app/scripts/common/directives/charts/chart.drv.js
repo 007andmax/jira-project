@@ -108,7 +108,7 @@
                   element = ref[i];
                   results.push(element.redraw(data));
                 }
-  
+
                 $scope.onFinishRendering && $timeout(function () {
                   $scope.onFinishRendering('chart');
                 }, 300);
@@ -125,8 +125,13 @@
             $scope.$watch('data', this.redraw);
           }
 
-          $scope.$watch(updateSize);
-          $scope.$watch('isLeftPanelHidden', updateSize);
+          // cpu killer
+          // $scope.$watch(updateSize);
+          $rootScope.$watch('isLeftPanelHidden', function (nextValue, oldValue) {
+            if (oldValue !== nextValue) {
+              $timeout(updateSize, 220);
+            }
+          });
           updateSize();
         }
       ]
