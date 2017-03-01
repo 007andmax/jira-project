@@ -319,7 +319,7 @@
                 </div>
 
                 <input type="{{ showOldPasswoprd ? 'text' : 'password' }}" class="form-control show-password"
-                       ng-model="password.oldPassword" name="oldPassword"
+                       ng-model="password.oldPassword" name="oldPassword" replace-whitespace
                        ng-change="enableOnChange(passwordForm.oldPassword)">
 
                 <a ng-class="{'hide': !showOldPasswoprd}" href="javascript:void(0)"
@@ -353,7 +353,7 @@
                 </div>
 
                 <input type="{{ showNewPasswoprd ? 'text' : 'password' }}" class="form-control show-password"
-                       ng-model="password.newPassword" name="newPassword" ng-minlength="4"
+                       ng-model="password.newPassword" name="newPassword" ng-minlength="4" replace-whitespace
                        ng-change="validateConfirmPassword(password.newPassword, password.confirmNewPassword, passwordForm.confirmNewPassword)">
 
                 <a ng-class="{'hide': !showNewPasswoprd}" href="javascript:void(0)"
@@ -387,7 +387,7 @@
                 </div>
 
                 <input class="form-control show-password" type="{{ showConfirmNewPasswoprd ? 'text' : 'password' }}"
-                       ng-model="password.confirmNewPassword" name="confirmNewPassword" required
+                       ng-model="password.confirmNewPassword" name="confirmNewPassword" required replace-whitespace
                        ng-change="validateConfirmPassword(password.newPassword, password.confirmNewPassword, passwordForm.confirmNewPassword)">
 
                 <a ng-class="{'hide': !showConfirmNewPasswoprd}" href="javascript:void(0)"
