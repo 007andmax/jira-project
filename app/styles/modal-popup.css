@@ -142,6 +142,11 @@
   background-color: black;
   content: '';
 }
+_:-moz-any-link, :root .create-window .general .company-window .company-steps__list:before  {
+  left: 120px;
+  width: calc(100% - 250px);
+}
+
 _::-webkit-:not(:root:root), .create-window .general .company-window .company-steps__list:before  {
   width: calc(100% - 190px);
 }

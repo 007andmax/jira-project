@@ -312,11 +312,6 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
-@media (max-width: 1366px){
-  body {
-    font-size: 12px;
-  }
-}
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
   font-family: 'Graphik Medium', sans-serif;
@@ -8365,7 +8360,7 @@ button.close {
 }
 @-moz-document url-prefix() {
   .modal-create-ticket .modal-body .form-control {
-    padding: 14px 30px 16px;
+    padding: 0 30px ;
   }
 }
 .modal-create-ticket .modal-body textarea.form-control {
@@ -8418,7 +8413,7 @@ button.close {
 }
 @-moz-document url-prefix() {
   .modal-create-ticket label {
-    margin-top: -1px;
+    /*margin-top: -1px;*/
     margin-bottom: 5px;
   }
 }
@@ -9514,7 +9509,6 @@ button.close {
 .discount table{
   width: 100%;
 }
-
 .discount thead{
   border-bottom: 1px solid;
   font-weight: 900;

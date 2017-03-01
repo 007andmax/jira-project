@@ -509,6 +509,11 @@ i.off {
   margin-top: 24px;
   padding-left: 0;
 }
+@-moz-document url-prefix() {
+  .ar-department .form-row .form-group.no-label{
+    margin-top: 6px;
+  }
+}
 .create-new-user.settings-basic-info .company-address-list {
   box-shadow: none;
   padding: 27px 0;

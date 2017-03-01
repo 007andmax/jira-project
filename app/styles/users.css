@@ -660,11 +660,11 @@
   text-transform: none;
 }
 
-@-moz-document url-prefix() {
-  .create-user-form label {
-    margin-bottom: 5px;
-  }
-}
+/*@-moz-document url-prefix() {*/
+  /*.create-user-form label {*/
+    /*margin-bottom: 5px;*/
+  /*}*/
+/*}*/
 
 .create-user-form .form-control-number.has-dropdown + i {
   right: 17px;

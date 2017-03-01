@@ -144,6 +144,9 @@
   text-align: left;
   height: 30px;
 }
+.password-manager-wrapper .pass-list li.list-heading > [class*='col-']{
+  height: auto;
+}
 
 @-moz-document url-prefix() {
   .qt-list li.list-heading > [class*='col-'] {
@@ -2037,7 +2040,7 @@ Devices tab
 }
 
 .qt-receipt-archive > li > .col-1 {
-  width: calc(100% - 98px);
+  width: calc(100% - 140px);
 }
 
 .qt-receipt-archive > li > .col-2 {
