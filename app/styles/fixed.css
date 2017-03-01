@@ -911,6 +911,9 @@ aside#left div.nav-title {
 .tech-user-templates-wrapper .tech-user .tech-action a {
   margin: 3px;
 }
+.tech-user-templates-wrapper .tech-user .tech-action .pad-top{
+  margin-top: 4px;
+}
 
 .tech-user-templates-wrapper .tech-user-item {
   background-color: white;

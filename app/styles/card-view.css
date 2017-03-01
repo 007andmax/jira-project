@@ -324,7 +324,7 @@ _::-webkit-:not(:root:root),
   margin-bottom: 8px;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1680px) {
   .card-view-wrapper{
     width: 1065px;
   }
