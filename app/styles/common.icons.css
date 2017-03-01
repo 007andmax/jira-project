@@ -1225,8 +1225,7 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-iphone {
-  background-position: -1283px 0;
-  height: 14px;
+  background-image: url("../images/input-icons/smartphone.png");
 }
 
 .icn-caret-gray {

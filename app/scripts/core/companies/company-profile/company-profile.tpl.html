@@ -20,7 +20,7 @@
             <p style="line-height: 1.7;">{{ currentLocation.phoneNumbers[0].number }}</p>
           </div>
           <div class="company-info-type clearfix" style="padding-bottom: 5px; width: 235px;">
-            <img src="images/input-icons/placeholder-white.png" style="top: -3px;" alt="">
+            <img src="images/new-icons/location-white.png" style="top: -3px;" alt="">
             <p style="line-height: 1.2;">{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>
           </div>
           <div class="company-service-type" ng-show="companyData.serviceType">
@@ -82,7 +82,7 @@
             <div class="icn icn-address" ng-click="chartHidden = !chartHidden"
                  uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>
 
-            <div ng-show="companyData.description" class="icn icn-note"
+            <div ng-show="companyData.description" class="icn"
                  qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"
                  qt-popover-position="bottom-left-align">
               <div class="icn icn-note" qt-popover-trigger="mouseenter"></div>
