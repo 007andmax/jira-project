@@ -16,10 +16,22 @@
   color: #f7f7f7;
   font-family: "Graphik Regular", sans-serif;
 }
+.company-new-cover-wrapper .company-name-header{
+  width: 75%;
+}
+.company-new-cover-wrapper .company-info-type{
+  padding: 10px 0;
+  width: 100%;
+}
+.company-new-cover-wrapper .company-contact-type .company-p-style{
+  display: inline-block;
+  width: 200px;
+  font-family: 'Graphik Regular', sans-serif;
+}
 .company-new-cover-wrapper .company-logo{
   position: absolute;
-  right: 10px;
-  top: 9px;
+  right: 20px;
+  top: 10px;
   width: 75px;
   height: 75px;
 }
@@ -35,16 +47,11 @@
 
 .company-new-cover-wrapper .company-name-header p{
   font-size: 24px;
-  line-height: 1;
-  padding: 9px 0px;
-}
-
-.company-new-cover-wrapper .company-info-type{
-  padding: 3px 0 9px;
+  padding: 10px 0px;
 }
 
 .company-service-type{
-  padding: 2px 0 8px;
+  padding: 0 0 10px;
 }
 
 .first-of-type{
@@ -69,7 +76,6 @@
   float: left;
   margin-right: 10px;
   position: relative;
-  top: -1px;
 }
 
 .company-contact-type .ellipsis{
@@ -227,7 +233,7 @@
 }
 .company-profile-header .company-new-cover-wrapper .company-info {
   width: 100%;
-  padding: 9px 10px 9px 23px;
+  padding: 10px 20px;
   height: 100%;
   position: relative;
 }
@@ -318,7 +324,14 @@
 }
 
 .company-profile-content .bulk-option .topNavbarLeft-Left {
-  width: 260px;
+  width: 230px;
+}
+.company-profile-content .bulk-option .topNavbarLeft-Left .topNavbar-filter .dropdown{
+  display: inline-block;
+  margin-right: 10px;
+}
+.company-profile-content .bulk-option .topNavbarLeft-Left .topNavbar-filter .pad-top{
+  padding-top: 4px;
 }
 
 .company-profile-content .bulk-option .dropdown-menu {

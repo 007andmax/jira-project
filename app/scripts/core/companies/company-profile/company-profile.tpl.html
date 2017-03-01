@@ -9,19 +9,19 @@
           <div class="company-logo">
             <img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">
           </div>
-          <div class="company-name-header" style="width: 240px;">
+          <div class="company-name-header">
             <p class="ellipsis" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"
                trimmed-tooltip-checker="company.name">
             </p>
           </div>
-          <div class="company-info-type clearfix"
+          <div class="company-info-type clearfix ellipsis"
                ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
             <img src="images/input-icons/phone-number.png" alt="">
-            <p style="line-height: 1.7;">{{ currentLocation.phoneNumbers[0].number }}</p>
+            <p>{{ currentLocation.phoneNumbers[0].number }}</p>
           </div>
-          <div class="company-info-type clearfix" style="padding-bottom: 5px; width: 235px;">
-            <img src="images/new-icons/location-white.png" style="top: -3px;" alt="">
-            <p style="line-height: 1.2;">{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>
+          <div class="company-info-type clearfix ellipsis">
+            <img src="images/new-icons/location-white.png" alt="">
+            <p>{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>
           </div>
           <div class="company-service-type" ng-show="companyData.serviceType">
             <p><strong>Service Type:</strong>{{ userReadable(companyData.serviceType) }}</p>
@@ -35,20 +35,23 @@
           <div class="company-contact-type first-of-type">
             <div class="ellipsis">
               <strong>Primary contact:</strong>
-              <p class="ellipsis" style="display: inline-block; width: 200px;" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-placement="bottom"
+              <p class="ellipsis company-p-style" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-placement="bottom"
                     trimmed-tooltip-checker="getUserName(currentContact)"></p>
             </div>
           </div>
           <div class="company-contact-type" ng-show="currentContact.primaryEmail">
             <div class="ellipsis">
               <strong>Contact email:</strong>
-              <p style="display: inline-block; width: 210px;" class="ellipsis" uib-tooltip="{{ currentContact.primaryEmail }}" tooltip-placement="bottom"
+              <p class="ellipsis company-p-style" uib-tooltip="{{ currentContact.primaryEmail }}" tooltip-placement="bottom"
                     trimmed-tooltip-checker="currentContact.primaryEmail"></p>
             </div>
           </div>
           <div class="company-contact-type"
                ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
-            <p><strong>Contact phone:</strong>{{ currentContact.phoneNumbers[0].number }}</p>
+            <div class="ellipsis">
+              <strong>Contact phone:</strong>
+            <p class="ellipsis company-p-style">{{ currentContact.phoneNumbers[0].number }}</p>
+            </div>
           </div>
           <div class="btns-block clearfix">
             <div class="icn icn-create-ticket" create-new-entity="ticket" company-id="{{ company.id }}"
