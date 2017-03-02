@@ -5,7 +5,9 @@
   angular.module("quicktech.core.rightPanel").directive('customPopoverMenu',
     ['$timeout', '$templateRequest', '$compile', 'UsersService', 'SubscriptionsService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
-      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService, UserConfirmationsService, PermissionsService) {
+      'quicktech.common.services.UserNotificationService',
+      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService, UserConfirmationsService,
+                PermissionsService, UserNotificationService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
@@ -90,6 +92,22 @@
 
             });
 
+            scope.isLastUserWithInvoiceSubscription = function (targetUser) {
+              var users = UsersService.getAllByCompanyId(targetUser.company.id);
+
+              for (var id in users) {
+                var user = users[id];
+                if (user.id === targetUser.id) {
+                  continue;
+                }
+
+                if (user.subscription && user.subscription.invoice) {
+                  return false;
+                }
+              }
+              return true;
+            };
+
             scope.sendEmail = function () {
               if (scope.selectedCompanyUsers && Object.keys(scope.selectedCompanyUsers).length !== 0) {
 
@@ -122,34 +140,55 @@
               var confirmMesage = 'Do you want to archive ',
                 confirmButton = 'Yes';
 
-              if (scope.selectedCompanyUsers && Object.keys(scope.selectedCompanyUsers).length !== 0) {
+              if (scope.selectedUsers && Object.keys(scope.selectedUsers).length !== 0) {
 
                 var usersIds = [];
 
-                for (var userId in scope.selectedCompanyUsers) {
-                  if (scope.selectedCompanyUsers[userId]) {
+                for (var userId in scope.selectedUsers) {
+                  if (scope.selectedUsers[userId]) {
                     usersIds.push(userId)
                   }
                 }
-                for (var index in scope.companyData.users) {
-                  var user = scope.companyData.users[index];
+                for (var i = 0; i < usersIds.length; i++) {
+                  var user = UsersService.getOneById(usersIds[i]);
                   confirmMesage += user.firstName + ' ' + user.lastName;
-                  confirmMesage += (index < scope.companyData.users.length - 1) ? ', ' : '?';
+                  confirmMesage += (i < usersIds.length - 1) ? ', ' : '?';
                 }
                 UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-                  console.log('archive users ' + usersIds);
+                  try {
+                    UsersService.archiveUser(usersIds, function () {
+                      UserNotificationService.show('Selected users were successfully archived');
+                      for (var i = 0; i < usersIds.length; i++) {
+                        var id = usersIds[i];
+                        delete scope.selectedUsers[id];
+                      }
+                    });
+                  } catch(err) {
+                    confirmButton = 'Ok';
+                    UserConfirmationsService.show(err, confirmButton, true);
+                  }
                 });
                 hideThisPopover();
                 return;
               }
               confirmMesage += scope.user.firstName + ' ' + scope.user.lastName  + '?';
               UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-                console.log('archive ' + scope.user.id);
+                try {
+                  UsersService.archiveUser(scope.user.id, function () {
+                    UserNotificationService.show('User was successfully archived');
+                  });
+                } catch(err) {
+                  confirmButton = 'Ok';
+                  UserConfirmationsService.show(err, confirmButton, true);
+                }
               });
               hideThisPopover();
             };
 
             scope.subscribeUser = function (userId, nameSubscription) {
+              if (scope.disabledUpdateCheckbox || (nameSubscription === 'invoice' && scope.isLastUserWithInvoiceSubscription(scope.user))) {
+                return;
+              }
 
               scope.disabledUpdateCheckbox = true;
 

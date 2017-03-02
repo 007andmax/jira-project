@@ -64,8 +64,20 @@
             <div class="clearfix">
               <label class="control checkbox pull-left">
                 <input type="checkbox" ng-checked="user.subscription.invoice"
-                       ng-disabled="disabledUpdateCheckbox">
+                       ng-disabled="disabledUpdateCheckbox || isLastUserWithInvoiceSubscription(user)">
                 <span class="control-indicator"></span> Invoice Updates
+              </label>
+            </div>
+          </a>
+        </li>
+
+        <li ng-class="{'checked': user.subscriptions[user.id].ticketManager}">
+          <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user.id, 'ticketManager')">
+            <div class="clearfix">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-checked="user.subscription.ticketManager"
+                       ng-disabled="disabledUpdateCheckbox">
+                <span class="control-indicator"></span> Ticket Manager
               </label>
             </div>
           </a>
