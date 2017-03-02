@@ -272,21 +272,14 @@
   min-width: 121px;
 }
 
-.topNavbarRight {
-
-}
-
-.topNavbarLeft-Left {
-  /*  display: flex;
-    display: -webkit-flex;*/
-}
-
 .topNavbarLeft > p {
   font-size: 17px;
   text-overflow: ellipsis;
   overflow: hidden;
   color: #fff;
   text-align: center;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @media (max-width: 1280px) {
@@ -347,31 +340,10 @@
 }
 
 .topNavbar-filter {
-  padding-right: 30px;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  display: inline-block;
+  margin-left: 30px;
 }
 
-.topNavbar-filter > div {
-  float: left;
-}
-
-.topNavbar-filter button {
-  margin-right: 10px;
-}
-
-.topNavbar-search {
-  /*position: relative;
-  padding-right: 30px;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;*/
-}
-
-.topNavbar-filter .btn {
-  margin-right: 10px;
-}
 
 .topNavbar-filter .dropdown.more {
   cursor: pointer;

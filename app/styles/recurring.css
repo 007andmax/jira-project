@@ -356,16 +356,21 @@
   font-family: inherit;
   font-size: 14px;
   font-weight: 400;
-
   display: inline-block;
   float: left;
-
   width: 12%;
   margin-right: 0.5%;
-
   text-align: center;
-
 }
+@media (max-width: 1366px){
+  .billable-content .invoice-table .table-invoice-item div .currency-invoice{
+    font-style: 12;
+  }
+  .billable-content .invoice-table .table-invoice-item div{
+    font-size: 12px;
+  }
+}
+
 li.invoice-table {
   cursor: auto;
 }

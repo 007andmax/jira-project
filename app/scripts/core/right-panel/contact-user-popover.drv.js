@@ -51,7 +51,7 @@
                   countPriority = scope.userInfo.phoneNumbers[i].priority;
 
                   if (scope.userInfo.phoneNumbers[i].typeNumber === 'MOBILE') {
-                    phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                    phoneTemplateHtml = '<div class="user-no"> <i class="icon-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
 
                   } else if (scope.userInfo.phoneNumbers[i].typeNumber === 'FAX') {
                     phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-user-fax pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
@@ -78,7 +78,7 @@
                 </div>\
                 \
                 <h3 class="popover-title pull-left"></h3>\
-                <i style="margin-left:9px;margin-top:4px;" class="pull-left icn-sm persistent-tooltip ' + icnSubscription + ' " data-placement="top"></i>\
+                <i style="margin-left:9px;margin-top:2px;" class="pull-left icn-sm persistent-tooltip ' + icnSubscription + ' " data-placement="top"></i>\
               </div>\
               ' + (contactDesignation ? '<div class="label" style="height:20px">' + contactDesignation + '</div>' : '<div style="height:20px"></div>') +
               '<div class="popover-content"></div>\

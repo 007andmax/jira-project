@@ -32,7 +32,7 @@
           <span ng-if="device.current || device.lastAccessDate" class="current">
             last seen: {{ device.current ? 'now' : (device.lastAccessDate | date) }}
           </span>
-            <i class="icon-sm icn-remove-token unlog" ng-click="closeSession($event, device)"
+            <i class="icn-sm icn-remove-old unlog" ng-click="closeSession($event, device)"
                ng-if="!device.current"></i>
           </p>
         </div>

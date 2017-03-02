@@ -230,7 +230,7 @@
                 <i class="icn-sm icn-caret-gray"
                    ng-show="!(companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length)">
                 </i>
-                <i class="icon-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
+                <i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"
                    ng-show="companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length"
                    ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>
               </div>
@@ -422,7 +422,7 @@
                        date-range-picker="onExpireDateChange" position="right bottom">
                 <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.expiredDate">
                 </i>
-                <i class="icon-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;" ng-show="passwordSharedState.filter.expiredDate"
+                <i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;" ng-show="passwordSharedState.filter.expiredDate"
                    ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>
               </div>
             </div>

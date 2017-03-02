@@ -144,6 +144,13 @@
   width: 500px;
   padding-top: 25px;
 }
+.settings-main-wrapper .discount td{
+  width: 44%;
+}
+.settings-main-wrapper .discount .icon-margin {
+  margin-right: 15px;
+  cursor: pointer;
+}
 
 .settings-main-wrapper.permission-settings,
 .settings-main-wrapper.activity-history{
@@ -208,7 +215,7 @@
 }
 
 .change-password-wrapper .create-user-form, .contact-info-wrapper .create-user-form, .misc-info-wrapper .create-user-form {
-  margin-top: 17px;
+  margin-top: 10px;
 }
 
 .create-user-form .email-addon {

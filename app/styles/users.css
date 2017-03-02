@@ -318,7 +318,7 @@
 
 .contact-info-wrapper .create-user-header h3 {
   width: 100%;
-  margin-bottom: 18px;
+  /*margin-bottom: 18px;*/
 }
 
 .contact-info-wrapper .company-create-agent + .company-create-agent .create-user-header h3 {
@@ -452,8 +452,9 @@
 }
 
 .create-user-form {
-  margin-top: 23px;
+  margin-top: 10px;
 }
+
 
 @-moz-document url-prefix() {
   .create-user-form {
@@ -659,11 +660,11 @@
   text-transform: none;
 }
 
-@-moz-document url-prefix() {
-  .create-user-form label {
-    margin-bottom: 5px;
-  }
-}
+/*@-moz-document url-prefix() {*/
+  /*.create-user-form label {*/
+    /*margin-bottom: 5px;*/
+  /*}*/
+/*}*/
 
 .create-user-form .form-control-number.has-dropdown + i {
   right: 17px;
