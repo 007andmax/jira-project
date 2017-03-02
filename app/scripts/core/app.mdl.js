@@ -318,30 +318,30 @@
 
         $rootScope.getUserAvatarUrl = function (user) {
           if (!(user && user.avatar)) {
-            return '/users/default/image'
+            return '/users/default/image' + '.jpg'
           }
-          return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '');
+          return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
         };
 
         $rootScope.getContactAvatarUrl = function (contact) {
           if (!(contact && contact.avatar)) {
-            return '/contacts/default/image'
+            return '/contacts/default/image' + '.jpg'
           }
-          return '/contacts/' + (contact.id || 'default') + '/image' + (contact.avatar ? '?t=' + contact.avatar.updatedAt : '');
+          return '/contacts/' + (contact.id || 'default') + '/image' + (contact.avatar ? '.jpg?t=' + contact.avatar.updatedAt : '');
         };
 
         $rootScope.getCompanyCoverUrl = function (company) {
           if (!(company && company.cover)) {
-            return '/company/default/cover'
+            return '/company/default/cover' + '.jpg'
           }
-          return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '');
+          return '/company/' + (company.id || 'default') + '/cover.jpg?t=' + (company.cover ? company.cover.updatedAt : '');
         };
 
         $rootScope.getCompanyLogoUrl = function (company) {
           if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
-            return '/company/default/logo'
+            return '/company/default/logo' + '.jpg'
           }
-          return '/file/' + company.logo.cropped.id + '?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
+          return '/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
         };
 
         $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
