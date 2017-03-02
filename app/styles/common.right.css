@@ -231,7 +231,7 @@ aside#right .recent-activities-by .time-ago {
   margin-top: -2px;
   padding: 0;
   margin-bottom: 4px;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 24px;
   font-weight: normal;
   color: #1f2a37;
@@ -239,6 +239,7 @@ aside#right .recent-activities-by .time-ago {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  width: 90%;
 }
 @-moz-document url-prefix() {
   .popover-userinfo .popover-title {
@@ -248,7 +249,7 @@ aside#right .recent-activities-by .time-ago {
 }
 .popover-userinfo .btn-primary {
   position: absolute;
-  top: 32px;
+  top: 50px;
   right: 30px;
 }
 .popover-userinfo .label {
@@ -259,6 +260,7 @@ aside#right .recent-activities-by .time-ago {
   position: relative;
   background-color: #e7ecf2;
   text-transform: uppercase;
+  margin-top: 7px;
 }
 .popover-userinfo .popover-content{
   clear: both;
