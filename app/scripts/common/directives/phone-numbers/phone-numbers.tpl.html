@@ -14,14 +14,15 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{ countryCode }}"
-               execute-when-outfocused="onLostFocus()" tabindex="20"
+               execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
                ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
       </div>
 
       <div class="form-group custom-phone-type col-xs-6 no-label">
         <div class="pull-left" uib-dropdown keyboard-nav="true">
 
-          <button class="form-control form-control-number has-dropdown" tabindex="21" uib-dropdown-toggle>
+          <button class="form-control form-control-number has-dropdown" tabindex="21"
+                  uib-dropdown-toggle ng-disabled="$eval(disabled)">
             {{ phoneNumberTypes[phoneNumber.typeNumber] }}
           </button>
 
@@ -36,7 +37,7 @@
         </div>
 
         <button class="btn btn-icn phone-btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
-             tooltip-placement="top" uib-tooltip="Remove" tabindex="22">
+                tooltip-placement="top" uib-tooltip="Remove" tabindex="22" ng-disabled="$eval(disabled)">
           <i class="icn-sm icn-remove-token-light"></i>
         </button>
 
@@ -57,7 +58,7 @@
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               ng-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()"
+               ng-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()" ng-disabled="$eval(disabled)"
                hard-phone-number-pattern country="{{ countryCode }}" tabindex="{{ 20 + $index * 3 }}"
                ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
       </div>
@@ -66,7 +67,7 @@
         <div class="pull-left " uib-dropdown keyboard-nav="true">
 
           <button class="form-control form-control-number has-dropdown" tabindex="{{ 21 + $index * 3 }}"
-                  uib-dropdown-toggle>
+                  uib-dropdown-toggle ng-disabled="$eval(disabled)">
             {{ phoneNumberTypes[phoneNumber.typeNumber] }}
           </button>
 
@@ -82,13 +83,16 @@
 
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
-          <button cns-if class="btn phone-btn btn-icn btn-primary has-tooltip pull-right"
-               tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()" tabindex="{{ 22 + $index * 3 }}">
+          <button cns-if class="btn phone-btn btn-icn btn-primary has-tooltip pull-right" ng-disabled="$eval(disabled)"
+                  tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()"
+                  tabindex="{{ 22 + $index * 3 }}">
             <i class="icn-sm icn-plus"></i>
           </button>
 
-          <button cns-else class="btn phone-btn btn-icn btn-primary has-tooltip pull-right" tabindex="{{ 23 + $index * 3 }}"
-               tooltip-placement="top" title="" uib-tooltip="Remove" ng-click="removePhoneNumber($index)">
+          <button cns-else class="btn phone-btn btn-icn btn-primary has-tooltip pull-right"
+                  tabindex="{{ 23 + $index * 3 }}"
+                  tooltip-placement="top" title="" uib-tooltip="Remove"
+                  ng-click="removePhoneNumber($index)" ng-disabled="$eval(disabled)">
             <i class="icn-sm icn-remove-token-light"></i>
           </button>
 

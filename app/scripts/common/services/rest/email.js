@@ -166,6 +166,21 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getInvoiceContact(callback) {
+      var future = $http.get('/settings/emailPages/invoiceContact');
+      Utils.handleCallback(future, callback);
+    }
+
+    function saveInvoiceContact(data, callback) {
+      var future = $http.put('/settings/emailPages/invoiceContact', data);
+      Utils.handleCallback(future, callback);
+    }
+
+    function toggleInvoiceContact(data, callback) {
+      var future = $http.put('/settings/emailPages/toggleInvoiceContact', data);
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       saveNumberForm: saveNumberForm,
       getCompanyEmailNotification: getCompanyEmailNotification,
@@ -174,7 +189,10 @@
       setToDefaultTemplate: setToDefaultTemplate,
       getTemplate: getTemplate,
       saveEmailTemplate: saveEmailTemplate,
-      getHtmlForPreview: getHtmlForPreview
+      getHtmlForPreview: getHtmlForPreview,
+      getInvoiceContact: getInvoiceContact,
+      saveInvoiceContact: saveInvoiceContact,
+      toggleInvoiceContact: toggleInvoiceContact
     }
   }
   ]);

@@ -13,6 +13,7 @@
           isFirstRequired: '=isFirstRequired',
           isTryToSave: '=isTryToSave',
           countryCode: '@?',
+          disabled: '@?',
           onLostFocus: '=?'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
