@@ -51,7 +51,7 @@
                   countPriority = scope.userInfo.phoneNumbers[i].priority;
 
                   if (scope.userInfo.phoneNumbers[i].typeNumber === 'MOBILE') {
-                    phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                    phoneTemplateHtml = '<div class="user-no"> <i class="icon-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
 
                   } else if (scope.userInfo.phoneNumbers[i].typeNumber === 'FAX') {
                     phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-user-fax pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
