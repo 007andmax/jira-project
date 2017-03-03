@@ -60,7 +60,7 @@
               $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
                 return { user: share.user, notify: true };
               });
-    
+
               for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
                 var share = $scope.ticketSharedUsersList[i];
                 $scope.selectUpdateSharedUser[share.user.id] = true;
@@ -115,7 +115,7 @@
           TicketsService.getActualNumber($scope, function (number) {
             $scope.actualInvoiceNumber = number;
           });
-  
+
           var tomorrow = $filter('date')(new Date(Date.now() + day), 'dd MMM yyyy');
           $scope.editInvoice = {
             autoCreate: true,
@@ -182,7 +182,7 @@
         $scope.chooseCompany = function (company) {
           $scope.clients.splice(0, $scope.clients.length);
           resetSharedUsers(company);
-  
+
           var today = $filter('date')(new Date(), 'dd MMM yyyy');
           if (!company) {
             delete $scope.editInvoice.company;
@@ -479,7 +479,7 @@
               if (!$scope.paramInvocie.repeatingInvoice && $scope.savedRepeatingInvoice) {
                 $scope.paramInvocie.repeatingInvoice = $scope.savedRepeatingInvoice;
               }
-              
+
               if ($scope.paramInvocie.remainGenerations != null) {
                 editInvoice.remainGenerations = $scope.paramInvocie.remainGenerations;
               }
@@ -606,12 +606,14 @@
         };
 
         $scope.$on('createNewEntity', function (event, type) {
-          var unsubscribe = $scope.$on('new' + type.charAt(0).toUpperCase() + type.slice(1) + 'HasBeenCreated',
-            function (e, id) {
-              var company = CompaniesService.getOneById(id) || {};
-              $scope.searchCompany = company.name;
-              unsubscribe();
-            });
+          if (type.toString().toLowerCase() === 'company') {
+            var unsubscribe = $scope.$on('newCompanyHasBeenCreated',
+              function (e, id) {
+                var company = CompaniesService.getOneById(id) || {};
+                $scope.searchCompany = company.name;
+                unsubscribe();
+              });
+          }
         });
 
         function resetSharedUsers(company) {

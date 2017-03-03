@@ -5108,7 +5108,7 @@ tbody.collapse.in {
   text-decoration: none;
 }
 
-.open > .dropdown-menu {
+.open > .dropdown-menu, .open > .service-list-container > .uib-dropdown-menu {
   display: block;
   width: 100%;
 }

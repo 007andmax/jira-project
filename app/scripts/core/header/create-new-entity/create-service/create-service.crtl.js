@@ -26,7 +26,7 @@
             ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;
 
-              $rootScope.$broadcast('newProductHasBeenCreated', resp.id);
+              $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
               if (!$scope.savedState.items.length) {
                 $scope.closeWindow();
               }
