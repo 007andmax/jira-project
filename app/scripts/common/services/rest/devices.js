@@ -715,17 +715,17 @@
         var future = $http.get('/devices/report/showPassword?agentId=' + agentId + '&companyId=' + companyId);
         Utils.handleCallback(future, callback);
       }
-      
+
       function getGadgets(callback) {
         var future = $http.get('/gadgets');
         Utils.handleCallback(future, callback);
       }
-      
-      function saveGadget(name, callback) {
-        var future = $http.post('/gadgets', { name: name });
+
+      function saveGadget(name, companyId, callback) {
+        var future = $http.post('/gadgets', { name: name, clientCompanyId: companyId });
         Utils.handleCallback(future, callback);
       }
-      
+
       function removeGadget(id, callback) {
         var future = $http.delete('/gadgets/' + id);
         Utils.handleCallback(future, callback);
