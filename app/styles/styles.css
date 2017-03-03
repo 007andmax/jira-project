@@ -11098,11 +11098,12 @@ button.close {
   display: inline-block;
   width: calc(100% - 413px);
 }
-.ticket-add-content .ticket-add-product .qt-table li .col-1.discount-input {
+.col-1.discount-input {
   display: inline-block;
-  width: calc(100% - 417px);
+  width: calc(100% - 437px);
+  padding-left: 20px;
 }
-.ticket-add-content .ticket-add-product .qt-table li .col-1.discount-input .has-dropdown ~ i{
+.col-1.discount-input .has-dropdown ~ i{
   pointer-events: auto;
   cursor: pointer;
 }
