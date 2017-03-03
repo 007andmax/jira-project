@@ -424,7 +424,7 @@
           <ul class="shared-users-list clearfix" ng-show="isFullSharedUserShow === true">
             <li ng-repeat="share in shares">
               <div class="pull-left avatar persistent-tooltip"
-                   tooltip-placement="top"
+                   tooltip-placement="top" tooltip-append-to-body="true"
                    uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/shared-user-popup.tpl.html'">
                 <img ng-src="{{ share.avatarUrl }}" alt="..." class="img-circle avatar-38">
               </div>
