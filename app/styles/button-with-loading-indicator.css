@@ -350,4 +350,5 @@
 
 .green-checkmark {
   color: green;
+  display: inline-block;
 }

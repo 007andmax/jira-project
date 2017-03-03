@@ -83,7 +83,7 @@
 }
 
 @media (max-width: 1366px) {
-  .qt-list > li + li {
+  .qt-list > li + li, .qt-list > li {
     font-size: 12px;
   }
 }
@@ -113,12 +113,6 @@
   background-color: #fff;
   height: 50px;
   cursor: auto !important;
-}
-
-@-moz-document url-prefix() {
-  .qt-list li.list-heading {
-    margin-top: 25px;
-  }
 }
 
 .qt-list .list-heading .sort-icon.icn-collapse {
@@ -186,9 +180,18 @@
 
 .qt-list > li > [class*='col-'] {
   position: relative;
+
   float: left;
+
   padding: 0 5px;
+
   vertical-align: top;
+}
+
+@media (max-width: 1366px) {
+  .qt-list > li > [class*='col-'] {
+    font-size: 12px;
+  }
 }
 
 .qt-list.qt-users > li > [class*='col-'] {
@@ -198,10 +201,6 @@
 @media (max-width: 1366px) {
   .qt-list.qt-users > li > [class*='col-'] {
     padding: 0;
-  }
-
-  .qt-list > li > [class*='col-'] {
-    font-size: 12px;
   }
 }
 
@@ -285,13 +284,14 @@
   padding-left: 5px;
 }
 
-.qt-list > li > [class*='col-']:last-child {
+.receivable-content .qt-list > li > [class*='col-']:last-child {
   padding-right: 0;
+  padding-left: 25px;
 }
 
-@media (max-width: 1366px) {
+@media (min-width: 1920px) {
   .qt-list > li > [class*='col-']:last-child {
-    padding-left: 20px;;
+    padding-left: 5px;
   }
 }
 
@@ -634,12 +634,6 @@
 .users-list-wrapper {
   display: flex;
   align-items: center;
-}
-
-@media (max-width: 1366px) {
-  .users-list-wrapper {
-    font-size: 12px;
-  }
 }
 
 .qt-list .label-light {
@@ -2076,6 +2070,7 @@ Devices tab
 
 .qt-receivable-number li.list-heading [class*='col-'] {
   padding-top: 0;
+  padding-left: 0;
 }
 
 /****/
@@ -2085,7 +2080,7 @@ Devices tab
 }
 
 .qt-receipt-archive > li > .col-1 {
-  width: calc(100% - 140px);
+  width: calc(100% - 155px);
 }
 
 .qt-receipt-archive > li > .col-2 {
@@ -2318,15 +2313,16 @@ Devices tab
   padding: 0 10px;
 }
 
-.no-items {
-  padding-top: 9px;
-}
+/*.no-items {*/
+/*padding-top: 9px;*/
+/*}*/
 
 @-moz-document url-prefix() {
   .category-name,
   .no-items {
     line-height: 19px;
-    padding-top: 0;
+
+    padding-bottom: 1px;
   }
 }
 
@@ -2568,7 +2564,7 @@ Devices tab
   }
 
   .qt-product-list > li > .col-2 {
-    width: calc(100% - 670px);
+    width: calc(100% - 770px);
   }
 
   .with-category .qt-product-list > li > .col-2 {
@@ -2580,7 +2576,7 @@ Devices tab
   }
 
   .qt-product-list > li > .col-4 {
-    width: 85px;
+    width: 135px;
   }
 
   .qt-user-product-list > li > .col-4 {
@@ -2597,6 +2593,12 @@ Devices tab
 
   .qt-product-list > li > .col-6 {
     width: 64px;
+  }
+}
+
+@media only screen and (max-width: 1680px) {
+  .with-category .qt-product-list > li > .col-4 {
+    width: 105px;
   }
 }
 
@@ -3030,14 +3032,8 @@ Devices tab
 
 .qt-services-list {
   padding: 0 0 30px 30px;
-
+  margin-top: 20px;
   cursor: auto;
-}
-
-@-moz-document url-prefix() {
-  .qt-services-list {
-    padding: 1px 0 0 30px;
-  }
 }
 
 .qt-services-list .checkbox-caption {
@@ -4144,15 +4140,15 @@ Devices tab
   padding: 20px 0;
 }
 
-@media screen and (max-width: 1440px) {
-  .with-category .qt-product-list > li > .col-2 {
-    width: calc(100% - 715px);
-  }
+/*@media screen and (max-width: 1440px) {*/
+/*.with-category .qt-product-list > li > .col-2 {*/
+/*width: calc(100% - 715px);*/
+/*}*/
 
-  .with-category .qt-product-list > li > .col-1 {
-    width: 95px;
-  }
-}
+/*.with-category .qt-product-list > li > .col-1 {*/
+/*width: 95px;*/
+/*}*/
+/*}*/
 
 @media screen and (max-width: 1050px) {
   .with-category .qt-product-list > li > .col-2 {
