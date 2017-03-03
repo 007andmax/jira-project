@@ -73,7 +73,7 @@
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
                 </div>
-                <div class="col-1" ng-click="setOrderForProducts('ilc')">
+                <div class="col-1" style="padding-left: 20px;" ng-click="setOrderForProducts('ilc')">
                   <span class="sort-span">ilc<i class="icn-sm sort-icon icn-sort"
                                                 ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
 
@@ -111,11 +111,11 @@
 
                   <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
 
-                  <div class="col-1" style="height: 18px;">
+                  <div class="col-1" style="height: 18px; padding-left: 20px;">
                     {{ product.ilc}}
                   </div>
 
-                  <div class="col-1">
+                  <div class="col-1" >
                     {{ product.manufacture}}
                   </div>
 

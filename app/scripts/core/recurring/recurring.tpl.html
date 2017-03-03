@@ -81,7 +81,7 @@
                     {{ parseDate(invoice.endDate) | date:'dd MMM yyyy' }}
                   </span>
                 </div>
-                <div>{{ invoice.generatedCount }}</div>
+                <div style="padding-left: 50px;">{{ invoice.generatedCount }}</div>
                 <div style="display: flex; align-items: center">
                   <span class="currency-invoice">
                     {{ invoice.total | currency:'$':2 }}

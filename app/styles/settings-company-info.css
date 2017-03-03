@@ -101,8 +101,11 @@
   cursor: pointer !important;
 }
 .tags-management .qt-list .col-1, .tags-management .qt-list .col-2, .tags-management .qt-list .col-3{
-  text-align: center;
+  text-align: left;
   width: 30%;
+}
+.tags-management .qt-list>li + li .col-3{
+  padding-left: 20px;
 }
 .tags-management .qt-list .col-1{
   text-align: left;
