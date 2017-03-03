@@ -406,9 +406,18 @@
                   $scope.$broadcast('setCreateUpdateFormToDefault');
                 }
               });
-            } else {
+            } else if (!$scope.ticketUpdate.selectedDiscount) {
               $scope.triedToSaveUpdate = true;
               return true;
+            }
+
+            if ($scope.ticketUpdate.selectedDiscount && $scope.currentOpenTab === 'PRODUCT') {
+              $scope.isSavingUpdate = true;
+              $scope.triedToSaveUpdate = false;
+              TicketsService.updateDiscount($scope.ticketDetails.id, $scope.ticketUpdate.selectedDiscount.id, function () {
+                $scope.isSavingUpdate = false;
+                $scope.ticketUpdate.selectedDiscount = null;
+              });
             }
           };
 
@@ -598,11 +607,17 @@
             }
           };
 
-          $scope.updateDiscount = function (discountId) {
-            TicketsService.updateDiscount($scope.ticketDetails.id, discountId);
+          $scope.updateDiscount = function (discount) {
+            $scope.ticketUpdate.selectedDiscount = discount;
+            if ($scope.ticketDetails.discount && !discount) {
+              TicketsService.updateDiscount($scope.ticketDetails.id, '');
+            }
           };
 
           $scope.getDiscountLabel = function (discount) {
+            if (!discount) {
+              return '';
+            }
             return discount.name + ' ' + $scope.getDiscountAmount(discount);
           };
 
@@ -632,11 +647,12 @@
 
           function hasUnsavedUpdate(update) {
             return (
-              !!update.note ||
-              (update.products && update.products.length > 1) ||
-              (update.services && update.services.length > 1) ||
-              isNotEmpty(update.products) ||
-              isNotEmpty(update.services)
+              !!update.note
+              || update.selectedDiscount
+              || (update.products && update.products.length > 1)
+              || (update.services && update.services.length > 1)
+              || isNotEmpty(update.products)
+              || isNotEmpty(update.services)
             );
           }
 
@@ -674,11 +690,12 @@
             // add ticket managers
             var usersFromTicketCompany = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
 
-            for(var i = 0; i < usersFromTicketCompany.length; i++){
+            for (var i = 0; i < usersFromTicketCompany.length; i++) {
               var user = usersFromTicketCompany[i];
 
-              if(user.subscription && user.subscription.ticketManager)
+              if (user.subscription && user.subscription.ticketManager) {
                 addUserToResult(user);
+              }
             }
 
             return result;
@@ -689,10 +706,11 @@
                 return item.user && item.user.id === user.id;
               });
 
-              if (duplicate)
+              if (duplicate) {
                 return;
+              }
 
-              result.push({user: user, notify: false});
+              result.push({ user: user, notify: false });
             }
 
           }

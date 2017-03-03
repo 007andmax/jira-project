@@ -1,75 +1,92 @@
-<form name="addProductForm" class="ticket-add-product">
-  <ul class="qt-table">
+<div>
+  <form name="addProductForm" class="ticket-add-product">
+    <ul class="qt-table">
 
-    <li>
+      <li>
 
-      <div class="col-1" style="float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
-        <div products-list id="product-list-cont"
-             click-outside="closeDropdown()" outside-if-not="product-list-cont">
+        <div class="col-1" style="float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
+          <div products-list id="product-list-cont"
+               click-outside="closeDropdown()" outside-if-not="product-list-cont">
 
-          <div>
+            <div>
 
-            <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
-                   placeholder="Product" autocomplete="off">
+              <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+                     placeholder="Product" autocomplete="off">
 
-            <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
-                   placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
+              <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
+                     placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
 
-            <i class="icn-sm icn-caret-gray"></i>
+              <i class="icn-sm icn-caret-gray"></i>
+            </div>
+
+            <input type="hidden" name="product" ng-model="productExpense.item.description" ng-required="true">
+
+            <div class="nano dropdown-menu custom-product-list" pl-conteiner
+                 ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+
           </div>
-
-          <input type="hidden" name="product" ng-model="productExpense.item.description" ng-required="true">
-
-          <div class="nano dropdown-menu custom-product-list" pl-conteiner
-               ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
-
         </div>
-      </div>
 
-      <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
-           style="width: 140px; float: left;">
+        <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
+             style="width: 140px; float: left;">
 
-        <input type="text" class="form-control" name="productSerialNumber"
-               placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="25"
-               uib-tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
-      </div>
-
-      <div class="col-4" style="width: 70px; float: left;"
-           ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
-
-        <input type="text" class="form-control" placeholder="Qty" maxlength="4"
-               name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
-               ng-model="productExpense.quantity" ng-maxlength="10"
-               hard-reset-pattern="quantityPattern">
-      </div>
-
-      <div class="col-5" style="width: 100px; float: left;"
-           ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
-
-        <input type="text" class="form-control" placeholder="Price" qt-to-fixed="2"
-               ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
-               name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
-               hard-reset-pattern="pricePattern" hard-reset-required="true"/>
-      </div>
-
-      <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
-        <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
-             ng-click="removeProduct()">
-          <i class="icn-sm icn-remove-token-light"></i>
+          <input type="text" class="form-control" name="productSerialNumber"
+                 placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="25"
+                 uib-tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
         </div>
-      </div>
 
-      <div style="float: left;" ng-if="$last">
-        <div class="btn-icn btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Product" tooltip-placement="top"
-             ng-click="addProduct()">
-          <i class="icn-sm icn-plus"></i>
+        <div class="col-4" style="width: 70px; float: left;"
+             ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+
+          <input type="text" class="form-control" placeholder="Qty" maxlength="4"
+                 name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
+                 ng-model="productExpense.quantity" ng-maxlength="10"
+                 hard-reset-pattern="quantityPattern">
         </div>
-      </div>
+
+        <div class="col-5" style="width: 100px; float: left;"
+             ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
+
+          <input type="text" class="form-control" placeholder="Price" qt-to-fixed="2"
+                 ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
+                 name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
+                 hard-reset-pattern="pricePattern" hard-reset-required="true"/>
+        </div>
+
+        <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
+          <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
+               ng-click="removeProduct()">
+            <i class="icn-sm icn-remove-token-light"></i>
+          </div>
+        </div>
+
+        <div style="float: left;" ng-if="$last">
+          <div class="btn-icn btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Product" tooltip-placement="top"
+               ng-click="addProduct()">
+            <i class="icn-sm icn-plus"></i>
+          </div>
+        </div>
 
 
-    </li>
+      </li>
 
-  </ul>
-</form>
-
-
+    </ul>
+  </form>
+  <div uib-dropdown keyboard-nav="true">
+    <div class="form-group">
+      <input type="text" class="form-control" uib-dropdown-toggle readonly
+             value="Discount: {{ ticketDetails.discount ? getDiscountLabel(ticketDetails.discount) : getDiscountLabel(ticketUpdate.selectedDiscount) }}"
+             placeholder="{{ 'Select discount...' }}"/>
+      <i class="icn-sm icn-remove-old" ng-show="ticketUpdate.selectedDiscount || ticketDetails.discount" ng-click="updateDiscount()"
+         uib-tooltip="remove discount" tooltip-placement="top"></i>
+      <i class="icn-sm icn-caret-gray" ng-hide="ticketUpdate.selectedDiscount || ticketDetails.discount"></i>
+    </div>
+    <ul uib-dropdown-menu>
+      <li ng-repeat="discount in discounts | orderBy: 'name' track by discount.id">
+        <a href="javascript:void(0)" ng-click="updateDiscount(discount)">
+          {{ getDiscountLabel(discount) }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
