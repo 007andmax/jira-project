@@ -10,14 +10,17 @@ aside#right {
   background-color: #fff;
   z-index: 1000;
 }
+
 aside#right.collapsed {
   width: 77px;
   box-shadow: none;
 }
-@media only screen and (max-width: 1320px){
+
+@media only screen and (max-width: 1320px) {
   aside#right {
     box-shadow: 0 0 26px 0 rgba(10, 45, 89, .1);
   }
+
   @-moz-document url-prefix() {
     aside#right {
       box-shadow: 0 0 16px 0 rgba(10, 45, 89, .1);
@@ -30,9 +33,11 @@ aside#right .tab-content {
   margin-top: 98px;
   height: calc(100% - 98px);
 }
+
 aside#right.collapsed .tab-content {
   display: none;
 }
+
 aside#right .nav-sb-tabs {
   list-style: none;
   margin: 0;
@@ -49,21 +54,23 @@ aside#right.collapsed .nav-sb-tabs {
   padding: 0;
   top: 78px;
 }
+
 aside#right .nav-sb-tabs > li {
   float: left;
   padding: 30px 40px;
 }
+
 aside#right .nav-sb-tabs > li:first-child {
   padding-left: 30px;
 }
+
 aside#right .nav-sb-tabs > li:last-child {
   padding-right: 30px;
 }
+
 aside#right.collapsed .nav-sb-tabs > li {
   padding: 40px 28px !important;
 }
-
-
 
 aside#right .sb-heading {
   float: left;
@@ -75,6 +82,7 @@ aside#right .sb-heading {
   color: #b2becd;
   text-transform: uppercase;
 }
+
 aside#right .sb-heading.about-heading {
   padding-bottom: 22px;
 }
@@ -84,29 +92,35 @@ aside#right .billing-address {
   width: 100%;
   padding: 0 18px 0 30px;
 }
+
 aside#right .billing-address > .post-address {
   font-weight: bold;
   color: #4c5c6f;
   float: left;
 }
+
 aside#right .billing-address .about-company {
   color: #94a4b8;
   margin-bottom: 53px;
   margin-top: 10px;
   float: left;
 }
-aside#right .billing-address .about-company > div{
+
+aside#right .billing-address .about-company > div {
   float: left;
   width: 100%;
 }
+
 aside#right .billing-address .icn-sm {
   float: left;
   margin-right: 10px;
   margin-top: 3px;
 }
+
 aside#right .billing-address .icn-clock {
   margin-top: 4px;
 }
+
 aside#right .sidebar-company .recent-activities-by {
   float: left;
   width: 100%;
@@ -114,9 +128,11 @@ aside#right .sidebar-company .recent-activities-by {
   margin-bottom: 10px;
   padding-left: 0;
 }
-aside#right .sidebar-company .tab-info .recent-activities-by{
+
+aside#right .sidebar-company .tab-info .recent-activities-by {
   margin-bottom: 48px;
 }
+
 aside#right .list-users {
   padding: 16px 40px;
   border: none;
@@ -124,16 +140,19 @@ aside#right .list-users {
   display: block;
   background-color: #fff;
 }
+
 aside#right .sidebar-company .recent-activities-by .list-users {
   padding: 9px 30px 7px;
   float: left;
   width: 100%;
 }
+
 aside#right .list-users:hover, aside#right .list-devices:hover {
   background-color: #e9f5fb;
   cursor: pointer;
 }
-aside#right .context-menu, .rightbar-context-menu{
+
+aside#right .context-menu, .rightbar-context-menu {
   position: absolute;
   top: 26px;
   left: 60px;
@@ -143,68 +162,82 @@ aside#right .context-menu, .rightbar-context-menu{
   /*display: none;*/
   background-color: #fff;
   border-radius: 3px;
-  box-shadow: 0 4px 20px 0 rgba(10,45,89,.1);
+  box-shadow: 0 4px 20px 0 rgba(10, 45, 89, .1);
   z-index: 1000;
 }
-aside#right .list-devices .context-menu > li, aside#right .list-users .context-menu > li, aside#right .list-users .dropdown-privilege > li, aside#right .list-users .dropdown-subscribe > li{
+
+aside#right .list-devices .context-menu > li, aside#right .list-users .context-menu > li, aside#right .list-users .dropdown-privilege > li, aside#right .list-users .dropdown-subscribe > li {
   padding: 0;
 }
-aside#right .context-menu > li > a, .rightbar-context-menu > li > a{
+
+aside#right .context-menu > li > a, .rightbar-context-menu > li > a {
   display: block;
   padding: 5px 20px;
   line-height: 20px;
   color: #4c5c6f;
 }
-aside#right .context-menu > li > a i, .rightbar-context-menu > li > a i{
+
+aside#right .context-menu > li > a i, .rightbar-context-menu > li > a i {
   margin-top: 4px;
   margin-right: 10px;
 }
-aside#right .context-menu > li > a:hover, .rightbar-context-menu > li > a:hover{
+
+aside#right .context-menu > li > a:hover, .rightbar-context-menu > li > a:hover {
   text-decoration: none;
   background-color: #e7ecf2;
 }
+
 @-moz-document url-prefix() {
-  aside#right .context-menu, .rightbar-context-menu{
-    box-shadow: 0 3px 12px 0 rgba(10,45,89,.1);
+  aside#right .context-menu, .rightbar-context-menu {
+    box-shadow: 0 3px 12px 0 rgba(10, 45, 89, .1);
   }
-  aside#right .context-menu > li > a, .rightbar-context-menu > li > a{
+  aside#right .context-menu > li > a, .rightbar-context-menu > li > a {
     line-height: 19px;
     padding: 5px 20px 6px;
   }
 }
 
-.list-users:hover .avatar > i{
+.list-users:hover .avatar > i {
   border-color: #e7ecf2;
 }
+
 aside#right .list-users .avatar, aside#right .list-devices .avatar {
   margin-right: 10px;
   margin-top: 1px;
 }
+
 aside#right .list-devices .avatar {
   margin-top: 4px;
 }
+
 aside#right .sidebar-company .company-devices .avatar {
   margin-top: 10px;
 }
+
 aside#right .recent-activities-by .user-name {
   color: #94a4b8;
   margin-left: 50px;
 }
+
 aside#right .sidebar-company .company-users .user-name {
   margin-top: 3px;
 }
+
 aside#right .sidebar-company .company-users .control {
   margin-top: 5px;
 }
+
 aside#right .recent-activities-by .user-name strong {
   font-weight: bold;
   color: #4c5c6f;
 }
+
 aside#right .list-users .ticket-number, aside#right .list-devices .ticket-number {
   color: #4c5c6f;
   display: inline-block;
 }
-aside#right .list-users .company-name{
+
+aside#right .list-users .company-name {
   color: #4c5c6f;
 }
 
@@ -216,17 +249,20 @@ aside#right .recent-activities-by .time-ago {
   line-height: 15px;
   color: #94A4B8;
 }
+
 /* Popover styling start */
 .popover-userinfo.left {
   min-width: 300px;
   padding: 26px 30px 25px;
   margin-left: -7px;
 }
+
 @-moz-document url-prefix() {
-    aside#right {
-      box-shadow: 0 0 16px 0 rgba(10, 45, 89, .1);
-    }
+  aside#right {
+    box-shadow: 0 0 16px 0 rgba(10, 45, 89, .1);
   }
+}
+
 .popover-userinfo .popover-title {
   margin-top: -2px;
   padding: 0;
@@ -241,17 +277,20 @@ aside#right .recent-activities-by .time-ago {
   white-space: nowrap;
   width: 90%;
 }
+
 @-moz-document url-prefix() {
   .popover-userinfo .popover-title {
     line-height: 23px;
     padding-bottom: 1px;
   }
 }
+
 .popover-userinfo .btn-primary {
   position: absolute;
   top: 50px;
   right: 30px;
 }
+
 .popover-userinfo .label {
   padding: 4px 12px;
   color: #94a4b8;
@@ -262,30 +301,38 @@ aside#right .recent-activities-by .time-ago {
   text-transform: uppercase;
   margin-top: 7px;
 }
-.popover-userinfo .popover-content{
+
+.popover-userinfo .popover-content {
   clear: both;
   padding: 0;
 }
-.popover-userinfo .popover-content .icn-sm{
+
+.popover-userinfo .popover-content .icn-sm {
   margin-right: 10px;
 }
-.popover-userinfo .popover-content .icn-at{
+
+.popover-userinfo .popover-content .icn-at {
   margin-top: 4px;
 }
-.popover-userinfo .popover-content .icn-iphone{
+
+.popover-userinfo .popover-content .icn-iphone {
   margin-top: 3px;
 }
-.popover-userinfo .popover-content .icn-user-phone{
+
+.popover-userinfo .popover-content .icn-user-phone {
   margin-top: 4px;
 }
-.popover-userinfo .popover-content .icn-user-fax{
+
+.popover-userinfo .popover-content .icn-user-fax {
   margin-top: 4px;
 }
+
 .popover-userinfo .user-email, .popover-userinfo .user-no {
   color: #94a4b8;
 }
+
 @-moz-document url-prefix() {
-  .popover-userinfo .user-email, .popover-userinfo .user-no{
+  .popover-userinfo .user-email, .popover-userinfo .user-no {
     line-height: 19px;
     padding-bottom: 1px;
   }
@@ -297,67 +344,81 @@ aside#right .recent-activities-by .time-ago {
   margin-left: -7px;
   margin-top: 0px;
 }
+
 .popover-deviceinfo .popover-title {
   padding: 0;
   font-size: 17px;
   margin-top: -1px;
 }
+
 .popover-deviceinfo .popover-content {
   margin-top: -1px;
   padding: 0;
 }
+
 .popover-deviceinfo .icn-lg {
   float: left;
   margin-left: 20px;
   margin-top: 2px;
 }
+
 /* Popover styling end */
 
-aside#right .sidebar-company .primary-contacts{
+aside#right .sidebar-company .primary-contacts {
   float: left;
   width: 100%;
   margin-top: 7px;
   margin-bottom: 10px;
   padding-left: 0;
 }
+
 aside#right .sidebar-company .primary-contacts .list-users {
   padding: 10px 30px;
 }
+
 aside#right .sidebar-company .primary-contacts .list-users:hover {
   cursor: pointer;
 }
+
 aside#right .sidebar-company .primary-contacts .list-users .avatar {
   margin-top: 0;
 }
+
 aside#right .primary-contacts {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
+
 aside#right .primary-contacts .user-name {
   float: left;
   font-weight: 400;
   margin-top: 10px;
 }
+
 aside#right .sidebar-company .primary-contacts .user-name {
   margin-top: 9px;
 }
-aside#right .user-name a{
+
+aside#right .user-name a {
   color: #4c5c6f;
   text-decoration: none;
 }
+
 aside#right .sidebar-company .primary-contacts .user-title {
   font-size: 13px;
   line-height: 15px;
   display: inline-block;
   margin-top: 4px;
 }
+
 aside#right .navbar-form-search {
   margin-bottom: 12px;
   margin-top: 0;
   padding: 2px 30px 16px 30px;
 }
+
 /*aside#right .tab-activities .navbar-form-search .form-group, aside#right .tab-activities .navbar-form-search .form-control-search {
   width: 100%;
 }*/
@@ -365,14 +426,16 @@ aside#right .navbar-form-search .form-group {
   position: relative;
   width: 100%;
 }
+
 /** Third tab **/
 /*aside#right .navbar-form-search .form-control-search {
     width: 172px;
 }*/
-aside#right .sb-heading span{
+aside#right .sb-heading span {
   font-weight: normal;
 }
-aside#right .companies-list-wrapper{
+
+aside#right .companies-list-wrapper {
   float: left;
   width: 100%;
   list-style: none;
@@ -384,12 +447,15 @@ aside#right .companies-list-wrapper{
   -ms-user-select: none;
   user-select: none;
 }
+
 aside#right .companies-list-wrapper > li {
   padding: 8px 0 13px;
 }
+
 aside#right .companies-list-wrapper > li:hover {
   background-color: #e7ecf2;
 }
+
 aside#right .companies-list-wrapper > li.opened-list {
   margin-top: 13px;
   padding: 21px 0 0;
@@ -398,17 +464,21 @@ aside#right .companies-list-wrapper > li.opened-list {
   border-bottom: 1px solid #e7ecf2;
   margin-bottom: 13px;
 }
+
 aside#right .lists-wrapper {
   margin-top: 13px;
 }
+
 aside#right .companies-list-wrapper > li .company-title {
   padding: 0 30px;
   font-weight: bold;
   color: #4c5c6f;
 }
+
 aside#right .companies-list-wrapper > li .company-numbers {
   padding: 0 30px;
 }
+
 aside#right .companies-list-wrapper > li .company-numbers > div {
   float: left;
   min-width: 100px;
@@ -419,40 +489,50 @@ aside#right .companies-list-wrapper > li .company-numbers > div {
   color: #94a4b8;
   cursor: pointer;
 }
+
 aside#right .companies-list-wrapper > li .company-numbers > div:hover, aside#right .companies-list-wrapper > li .company-numbers > div.active {
   color: #4c5c6f;
 }
+
 aside#right .companies-list-wrapper > li .company-numbers > div > .icn-sm {
   float: left;
   margin-right: 6px;
 }
-aside#right .company-devices{
+
+aside#right .company-devices {
   margin-bottom: 13px;
   padding-left: 0;
 }
-aside#right .company-users{
+
+aside#right .company-users {
   margin-bottom: 16px;
   padding-top: 3px;
   padding-left: 0;
 }
+
 aside#right .company-devices li, aside#right .company-users li {
   background: none;
   padding: 10px 30px;
 }
+
 aside#right .company-devices li {
   padding: 7px 30px;
   position: relative;
   display: block;
 }
+
 aside#right .company-devices .avatar {
   position: static;
 }
+
 aside#right .company-users .avatar {
   margin-top: 0;
 }
-aside#right .company-devices .avatar > .icn{
+
+aside#right .company-devices .avatar > .icn {
   margin-top: 6px;
 }
+
 aside#right .company-users .avatar > i {
   top: 16px;
   left: 16px;
@@ -460,6 +540,7 @@ aside#right .company-users .avatar > i {
   height: 10px;
   border-color: #f1f5fa;
 }
+
 aside#right .company-devices .avatar > i.right {
   top: 21px;
   left: 10px;
@@ -468,6 +549,7 @@ aside#right .company-devices .avatar > i.right {
   border: 0;
   border-color: #f1f5fa;
 }
+
 /*aside#right .avatar > i {
 
 }*/
@@ -475,14 +557,17 @@ aside#right .companies-list-wrapper > li.opened-list .company-users .avatar > i 
   width: 10px;
   height: 10px;
 }
+
 aside#right .company-devices .checkbox {
   margin-top: 12px;
   padding-left: 16px;
   display: none;
 }
-aside#right .list-devices:hover .checkbox, aside#right .list-users:hover .checkbox, aside#right .list-devices.checked .checkbox, aside#right .list-users.checked .checkbox{
+
+aside#right .list-devices:hover .checkbox, aside#right .list-users:hover .checkbox, aside#right .list-devices.checked .checkbox, aside#right .list-users.checked .checkbox {
   display: inline-block;
 }
+
 /*aside#right .company-devices .control-indicator {
   top: 19px;
   left: auto;
@@ -493,13 +578,16 @@ aside#right .companies-list-wrapper > li.opened-list .company-users .checkbox {
   padding-left: 16px;
   display: none;
 }
+
 aside#right .companies-list-wrapper > li.opened-list .company-users .list-users:hover .checkbox, aside#right .companies-list-wrapper > li.opened-list .company-users .list-users.checked .checkbox {
   display: inline-block;
 }
+
 aside#right .companies-list-wrapper > li.opened-list .company-users .user-name {
   margin-top: 3px;
   color: #4c5c6f;
 }
+
 aside#right .companies-list-wrapper > li.opened-list .company-devices .user-name {
   display: inline-block;
   color: #4c5c6f;
@@ -507,12 +595,14 @@ aside#right .companies-list-wrapper > li.opened-list .company-devices .user-name
   margin-top: 1px;
   margin-bottom: 1px;
 }
+
 aside#right .list-devices .user-title {
   font-size: 13px;
   line-height: 15px;
   display: block;
   margin-bottom: 3px;
 }
+
 /*aside#right .sidebar-company .company-devices .user-name {
   margin-top: 1px;
   margin-bottom: -2px;
@@ -522,11 +612,12 @@ aside#right .list-devices .user-title {
 }*/
 
 /***General right sidebar***/
-aside#right .company-detail{
+aside#right .company-detail {
   padding: 0 30px 20px;
   float: left;
 }
-aside#right .company-detail > h4{
+
+aside#right .company-detail > h4 {
   float: left;
   color: #4c5c6f;
   font-size: 17px;
@@ -534,15 +625,19 @@ aside#right .company-detail > h4{
   margin-top: -2px;
   margin-bottom: 6px;
 }
-aside#right .company-detail .rating{
+
+aside#right .company-detail .rating {
   float: left;
 }
+
 aside#right .company-detail .rating > li {
   margin-right: 4px;
 }
-aside#right .sb-heading.billing-heading{
+
+aside#right .sb-heading.billing-heading {
   padding-bottom: 22px;
 }
+
 aside#right .sidebar-general .primary-contacts {
   float: left;
   width: 100%;
@@ -550,38 +645,47 @@ aside#right .sidebar-general .primary-contacts {
   margin-bottom: 48px;
   padding-left: 0;
 }
-aside#right .tab-company-info .billing-address > .post-address{
+
+aside#right .tab-company-info .billing-address > .post-address {
   margin-bottom: 10px;
 }
-aside#right .sidebar-general .site-ref{
+
+aside#right .sidebar-general .site-ref {
   position: relative;
   float: left;
   margin-bottom: 2px;
 }
-aside#right .billing-address > .site-ref > .btn-location{
+
+aside#right .billing-address > .site-ref > .btn-location {
   float: left;
   color: #4c5c6f;
   cursor: pointer;
 }
-aside#right .billing-address > .site-ref > .btn-location:hover{
+
+aside#right .billing-address > .site-ref > .btn-location:hover {
   color: #1586e4;
 }
+
 aside#right .billing-address > .site-ref > .btn-location > .icn-sb-location {
   margin-top: 4px;
   margin-right: 10px;
 }
+
 aside#right .tab-company-info .about-company {
   margin-top: 8px;
   float: left;
 }
-aside#right .tab-company-info .list-users{
+
+aside#right .tab-company-info .list-users {
   padding: 9px 30px 10px;
 }
+
 /*2nd tab*/
 aside#right .sb-heading.devices-heading {
   padding-bottom: 14px;
 }
-aside#right .general-devices{
+
+aside#right .general-devices {
   float: left;
   width: 100%;
   margin-bottom: 13px;
@@ -591,6 +695,7 @@ aside#right .general-devices{
   -ms-user-select: none;
   user-select: none;
 }
+
 aside#right .general-devices li {
   display: block;
   position: relative;
@@ -598,11 +703,13 @@ aside#right .general-devices li {
   background: none;
   padding: 7px 30px;
 }
-aside#right .general-devices li .user-name{
+
+aside#right .general-devices li .user-name {
   margin-top: 1px;
   margin-bottom: -2px;
 }
-aside#right .sidebar-general .general-devices li .user-name{
+
+aside#right .sidebar-general .general-devices li .user-name {
   margin-top: 1px;
   margin-bottom: 1px;
 }
@@ -611,9 +718,11 @@ aside#right .general-devices .avatar {
   position: static;
   margin-top: 10px;
 }
-aside#right .general-devices .avatar > .icn{
+
+aside#right .general-devices .avatar > .icn {
   margin-top: 6px;
 }
+
 aside#right .general-devices .avatar > i.right {
   top: 21px;
   left: 10px;
@@ -621,25 +730,31 @@ aside#right .general-devices .avatar > i.right {
   height: 6px;
   border: 0;
 }
+
 aside#right .general-devices .checkbox {
   margin-top: 12px;
   padding-left: 16px;
   display: none;
 }
-aside#right .list-devices.checked, aside#right .list-users.checked{
+
+aside#right .list-devices.checked, aside#right .list-users.checked {
   background-color: #e2f1fd;
 }
-aside#right .list-devices:hover .avatar > i, aside#right .list-users:hover .avatar > i{
+
+aside#right .list-devices:hover .avatar > i, aside#right .list-users:hover .avatar > i {
   border-color: #e7ecf2;
 }
-aside#right .list-devices.checked .avatar > i, aside#right .list-users.checked .avatar > i{
+
+aside#right .list-devices.checked .avatar > i, aside#right .list-users.checked .avatar > i {
   border-color: #e2f1fd;
 }
+
 /*3rd tab*/
-aside#right .sb-heading.users-heading{
+aside#right .sb-heading.users-heading {
   padding-bottom: 17px;
 }
-aside#right .general-users{
+
+aside#right .general-users {
   float: left;
   width: 100%;
   margin-bottom: 10px;
@@ -649,6 +764,7 @@ aside#right .general-users{
   -ms-user-select: none;
   user-select: none;
 }
+
 aside#right .general-users li {
   display: block;
   position: relative;
@@ -656,18 +772,20 @@ aside#right .general-users li {
   background: none;
   padding: 9px 30px 10px;
 }
+
 aside#right .general-users .user-name {
   margin-top: 10px;
 }
+
 aside#right .general-users .checkbox {
   margin-top: 12px;
   padding-left: 16px;
   display: none;
 }
+
 aside#right .companies-list-wrapper > li.opened-list .close {
   top: 13px;
 }
-
 
 @-moz-document url-prefix() {
   aside#right .sb-heading {
@@ -679,7 +797,7 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   aside#right .list-users .avatar {
     margin-top: 2px;
   }
-  aside#right .sidebar-general .list-users .avatar, aside#right .sb-heading.recent-heading, aside#right .sb-heading.primary-contact-heading{
+  aside#right .sidebar-general .list-users .avatar, aside#right .sb-heading.recent-heading, aside#right .sb-heading.primary-contact-heading {
     margin-top: 1px;
   }
   aside#right .sidebar-company .recent-activities-by .list-users {
@@ -706,7 +824,7 @@ aside#right .companies-list-wrapper > li.opened-list .close {
     margin-bottom: 4px;
   }
   /* right bar 2*/
-  aside#right .company-detail > h4{
+  aside#right .company-detail > h4 {
     margin-top: -3px;
     margin-bottom: 7px;
   }
@@ -717,6 +835,7 @@ aside#right .companies-list-wrapper > li.opened-list .close {
     margin-top: 8px;
   }
 }
+
 /*@-moz-document url-prefix() {
   aside#right .sb-heading {
     line-height: 11px;
@@ -798,13 +917,13 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   }
 }*/
 
-.context-menu.rp-user-popover{
+.context-menu.rp-user-popover {
   padding: 11px 0;
   margin-bottom: 0;
   list-style: none;
 }
 
-.context-menu.rp-user-popover > li > a, .rightbar-context-menu > li > a{
+.context-menu.rp-user-popover > li > a, .rightbar-context-menu > li > a {
   display: block;
   padding: 5px 20px;
   line-height: 20px;
@@ -812,22 +931,22 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   font-size: 13px;
 }
 
-.context-menu.rp-user-popover > li > a i, .rightbar-context-menu > li > a i{
+.context-menu.rp-user-popover > li > a i, .rightbar-context-menu > li > a i {
   margin-top: 4px;
   margin-right: 10px;
 }
 
-.device-context-menu{
+.device-context-menu {
   margin: 0;
   list-style: none;
   padding: 11px 0;
   background-color: #fff;
   border-radius: 3px;
-  box-shadow: 0 4px 20px 0 rgba(10,45,89,.1);
+  box-shadow: 0 4px 20px 0 rgba(10, 45, 89, .1);
   z-index: 1000;
 }
 
-.device-context-menu li{
+.device-context-menu li {
   padding: 0;
   display: block;
   position: relative;
@@ -840,18 +959,18 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   top: -17px;
 }
 
-.device-context-menu li > a{
+.device-context-menu li > a {
   display: block;
   padding: 5px 20px;
   line-height: 20px;
   color: #4c5c6f;
 }
 
-.device-context-menu li > a > i.icn-sm{
-  margin-top: 4px;
+.device-context-menu li > a > i.icn-sm, .device-context-menu li > a > i.icon-sm {
+  margin-top: 3px;
   margin-right: 10px;
 }
 
-aside#right .sidebar-general .general-devices li .user-name.not-user-name{
+aside#right .sidebar-general .general-devices li .user-name.not-user-name {
   margin-top: 7px;
 }

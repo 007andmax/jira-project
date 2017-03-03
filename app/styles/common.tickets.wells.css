@@ -14,7 +14,7 @@
 }
 .well-message,.well-actions{
     text-align: center;
-    margin-top: 25px;
+    margin-top: -25px;
     padding: 0 20px;
 }
 .well-actions .btn{

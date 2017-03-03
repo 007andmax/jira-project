@@ -1577,7 +1577,8 @@ a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab
 }
 
 .icn-msg-open {
-  background-position: -3196px -100px;
+  background-image: url("../images/new-icons/cancel-circle-na.png");
+  background-size: cover;
 }
 
 .icn-reupload {
