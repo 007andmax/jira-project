@@ -11103,6 +11103,9 @@ button.close {
   width: calc(100% - 437px);
   padding-left: 20px;
 }
+.col-1.discount-input .dropdown-menu{
+  width: calc(100% - 20px);
+}
 .col-1.discount-input .has-dropdown ~ i{
   pointer-events: auto;
   cursor: pointer;
