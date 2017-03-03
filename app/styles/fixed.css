@@ -1139,15 +1139,6 @@ aside#left div.nav-title {
 
 }
 
-/*@media screen and (max-width: 1440px) {*/
-  /*.with-category .qt-product-list > li > .intermediate-parent-elem > .col-2 {*/
-    /*width: calc(100% - 715px);*/
-  /*}*/
-
-  /*.with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {*/
-    /*width: 95px;*/
-  /*}*/
-/*}*/
 
 @media screen and (max-width: 1050px) {
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2 {
@@ -1535,11 +1526,6 @@ span.sort-span {
 .qt-receivable-number .resend-button {
   width: 16px;
   height: 16px;
-}
-
-.qt-receivable-number .resend-button .green-checkmark {
-  position: absolute;
-  top: 10px;
 }
 .image-preview-tpl,
 .email-preview-tpl {
