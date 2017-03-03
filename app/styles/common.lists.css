@@ -279,6 +279,9 @@
 .qt-list.qt-users > li > [class*='col-']:first-child {
   padding-left: 0px;
 }
+.qt-receivable-number.qt-list .col-sm-1-1{
+  width: 100px;
+}
 
 .qt-list.rates__list > li > [class*='col-']:first-child {
   padding-left: 5px;
@@ -2080,7 +2083,7 @@ Devices tab
 }
 
 .qt-receipt-archive > li > .col-1 {
-  width: calc(100% - 155px);
+  width: calc(100% - 180px);
 }
 
 .qt-receipt-archive > li > .col-2 {

@@ -350,6 +350,7 @@
   line-height: 0;
   margin-left: 8px;
   margin-right: 8px;
+  display: inline-block;
 }
 
 .topNavbarRight .dropdown .dropdown-menu > li {

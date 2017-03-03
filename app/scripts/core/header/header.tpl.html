@@ -32,31 +32,31 @@
         <div ng-if="isShowTicketsBulkAction()" class="topNavbar-filter"
              ng-controller="quicktech.core.header.ticketsBulkCtrl">
 
-          <div uib-dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
+          <div style="display: inline-block;" uib-dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
 
             <div class="btn-icn btn btn-default has-tooltip"
                  tooltip-placement="bottom" uib-tooltip="assign ticket to..."
                  aria-haspopup="true" uib-dropdown-toggle ng-click="isShowAssignUser = true">
-              <i class="icon-sm icon-user"></i>
+              <i class="icon-sm icon-user" style="margin-top: -30px;"></i>
             </div>
 
-            <div class="dropdown-assign-ticket dropdown-menu" style="width: auto;"
+            <div class="dropdown-assign-ticket dropdown-menu" style="width: auto; margin-top: -10px;"
                  stop-propagation="click" ng-if="isShowAssignUser" assign-user-button
                  aub-ticket-id="ticketsSharedState.checkedTicketsIds" ticket-assigned-user-id="ticket.assignedUser.id"
                  aub-is-bulk-operation="true"
                  aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
           </div>
 
-          <div uib-dropdown
+          <div style="display: inline-block;" uib-dropdown
                ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
 
             <div class="btn-icn btn btn-default has-tooltip"
                  tooltip-placement="bottom" uib-tooltip="Change Priority to..."
                  aria-haspopup="true" uib-dropdown-toggle>
-              <i class="icon-sm icon-ticket-flag"></i>
+              <i class="icon-sm icon-ticket-flag" style="margin-top: -30px;"></i>
             </div>
 
-            <ul class="dropdown-menu dropdown-priority" role="menu">
+            <ul class="dropdown-menu dropdown-priority" style="margin-top: -10px;" role="menu">
 
               <li ng-click="changeTicketPriority('LOW')">
                 <a tabindex="-1" href="javascript:void(0)">
@@ -161,14 +161,14 @@
                class="btn-icn btn btn-default has-tooltip"
                tooltip-placement="bottom" uib-tooltip="Delete Forever"
                ng-click="deleteForever()">
-            <i class="icon-sm icn-delete"></i>
+            <i class="icon-sm icn-delete-white" style="margin-top: -35px;"></i>
           </div>
         </div>
         <div ng-if="isShowDraftsBulkAction()" class="topNavbar-filter"
              ng-controller="quicktech.core.header.draftsBulkCtrl">
           <div class="btn-icn btn btn-default has-tooltip" tooltip-placement="bottom" uib-tooltip="delete forever"
                ng-click="deleteForever()">
-            <i class="icon-sm icn-delete"></i>
+            <i class="icon-sm icn-delete-white"></i>
           </div>
         </div>
       </div>
