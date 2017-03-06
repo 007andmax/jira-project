@@ -1,4 +1,4 @@
-<form name="ticketForm" ng-controller="quicktech.createTicketCtrl" class="create-ticket-form">
+<div ng-form="ticketForm" ng-controller="quicktech.createTicketCtrl" class="create-ticket-form">
 
   <div class="modal-header create-ticket-header clearfix">
 
@@ -353,7 +353,7 @@
                    qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': '180px'}">
 
-            <!--<input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">-->
+            <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
 
             <div typeahead-input-icon-sm="ticketCreatedUser"></div>
             <div class="ng-scope" typeahead-input-icon="userCompany">
@@ -459,5 +459,5 @@
       </div>
     </div>
   </div>
-</form>
+</div>
 
