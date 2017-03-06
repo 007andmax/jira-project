@@ -4023,11 +4023,23 @@ Devices tab
   padding: 0 30px;
 
   border-top: 1px solid #e7ecf2;
-  background-color: #f1f5fa;
 }
 
 .invoice-list-heading {
   padding: 0 30px;
+}
+
+.modal-receive-payment textarea.form-control{
+  height: 70px;
+  padding-top: 10px;
+}
+
+.qt-list.invoice-list-heading li.list-heading{
+  padding: 15px 0;
+}
+
+.qt-list.invoice-list-heading li.list-heading > .col-3{
+  text-align: right;
 }
 
 .receive-payment-list > li:before,

@@ -3,6 +3,7 @@
   margin: auto;
   transition: width .3s;
   min-height: 100vh;
+  margin-top: 50px;
 }
 .card-wrapper {
   padding: 15px;

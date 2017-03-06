@@ -11203,6 +11203,14 @@ button.close {
   text-align: right;
   padding: 10px;
   background-color: #fff;
+  position: fixed;
+  top: 77px;
+  z-index: 99;
+  width: calc(100% - 316px);
+}
+
+.left-panel-closed .change-view-actions{
+  width: calc(100% - 76px);
 }
 
 .change-view-actions .view-change-btn {
