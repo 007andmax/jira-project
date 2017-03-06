@@ -236,7 +236,8 @@
           var selectUsersIds = [];
           var selectUsersSbscr = {
             invoice: 0,
-            ticket: 0
+            ticket: 0,
+            ticketManager: 0
           };
 
           for (var userId in selectedUsers) {
@@ -255,13 +256,17 @@
               if (user.subscription.ticket) {
                 selectUsersSbscr.ticket++;
               }
+              if (user.subscription.ticketManager) {
+                selectUsersSbscr.ticketManager++;
+              }
 
             }
           }
 
           $scope.companyProfileHeader.selectUsersSubscr = {
             invoice: selectUsersSbscr.invoice === selectUsersIds.length,
-            ticket: selectUsersSbscr.ticket === selectUsersIds.length
+            ticket: selectUsersSbscr.ticket === selectUsersIds.length,
+            ticketManager: selectUsersSbscr.ticketManager === selectUsersIds.length
           };
 
           $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
@@ -309,7 +314,7 @@
 
           $scope.changeSelectDevices();
         };
-        
+
         $scope.filterDeleted = function (users) {
           return !users.deletedAt;
         };
