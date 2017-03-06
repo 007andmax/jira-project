@@ -1,12 +1,12 @@
-<div class="email-preview-tpl" prevent-hash-change="close()" ng-show="data">
+<div class="email-preview-tpl" prevent-hash-change="close()" ng-show="data" ng-click="close()">
   <div class="email-preview-header">
-    <div class="email-preview-close-btn pull-right" ng-click="close()"
+    <div class="email-preview-close-btn pull-right"
          uib-tooltip="Close" tooltip-placement="bottom" append-to-body="true">
       <i class="icn-sm icn-remove-old"></i>
     </div>
   </div>
 
-  <div class="email-preview-body">
+  <div class="email-preview-body" stop-propagation="click">
     <div ng-bind-html="data"></div>
   </div>
 </div>
