@@ -63,7 +63,7 @@
               <div class="billable-amount bold">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
             </div>
 
-            <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
+            <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets" qt-scroll-to="top"
                 ng-controller="quicktech.core.billable.companyTicketsCtrl">
 
               <li class="inventory-details"
