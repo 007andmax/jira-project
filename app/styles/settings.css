@@ -148,8 +148,11 @@
   width: 44%;
 }
 .settings-main-wrapper .discount .icon-margin {
-  margin-right: 15px;
+  margin-right: 10px;
   cursor: pointer;
+}
+.settings-main-wrapper td {
+  padding: 0 5px;
 }
 
 .settings-main-wrapper.permission-settings,

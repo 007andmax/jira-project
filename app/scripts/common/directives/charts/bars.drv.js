@@ -107,7 +107,7 @@
             var postion = angular.element(this).offset();
             return tooltip.html(
               '<div class="tooltip-inner ' + options.chartTooltip + '-tooltip">' +
-              (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipPostfix || '') + '<br>' +
+              (options.tooltipPreffix || '') + d[options.y].toFixed(2) + ' ' + (options.tooltipPostfix || '') + '<br>' +
               (d[options.additionalTooltipField] !== undefined ? d[options.additionalTooltipField] : '') +
               '</div>')
               .attr('class', 'tooltip')

@@ -37,7 +37,7 @@
             var arr = [];
             for (var prop in attrs) {
               if (prop.indexOf('param') > -1) {
-                arr.push($scope[attrs[prop]]);
+                arr[parseInt(prop.replace('param', ''))] = $scope[attrs[prop]];
               }
             }
             return arr;

@@ -21,6 +21,7 @@
             $scope.currentInvoice.tickets = [{
               productExpenses: $scope.currentInvoice.productExpenses,
               serviceExpenses: $scope.currentInvoice.serviceExpenses,
+              discountSum: $scope.currentInvoice.discountSum,
               totalSum: $scope.currentInvoice.productsSum + $scope.currentInvoice.servicesSum
             }];
           }

@@ -22,7 +22,7 @@
           }, validate);
 
           function validate(newValue, prevValue) {
-            if (newValue !== prevValue) {
+            if (newValue && newValue !== prevValue) {
               if (timeoutId) {
                 $timeout.cancel(timeoutId);
               }

@@ -10,14 +10,6 @@
 
 
         $scope.ticketTemplates = {
-          'TU_ADDED': {
-            title: 'A new Ticket Update is added',
-            recipient: 'All persons added to Ticket Update',
-            description: 'This message will be sent when a person is added to the Ticket Update.',
-            requiredKeywords: ['$Ticket_Number'],
-            requiredKeywordsRegExp: /\$Ticket_Number/,
-            showPreview: true
-          },
           //'TU_EDITED': {
           //  title: 'A Ticket Update is edited',
           //  recipient: 'All persons added to Ticket Update',
@@ -51,6 +43,14 @@
             title: 'A Ticket is closed',
             recipient: 'User',
             description: 'This message will be sent to inform client user that ticket has been closed.',
+            requiredKeywords: ['$Ticket_Number'],
+            requiredKeywordsRegExp: /\$Ticket_Number/,
+            showPreview: true
+          },
+          'TU_ADDED': {
+            title: 'A new Ticket Update is added',
+            recipient: 'All persons added to Ticket Update',
+            description: 'This message will be sent when a person is added to the Ticket Update.',
             requiredKeywords: ['$Ticket_Number'],
             requiredKeywordsRegExp: /\$Ticket_Number/,
             showPreview: true
@@ -241,12 +241,12 @@
             description: "This message will be sent when an invoice is re-sent.",
             showPreview: true
           },
-          'COMPANY_OVERDUE_INV_SENT': {
-            title: "An Overdue Invoice is sent",
-            recipient: "Company’s First Primary Contact",
-            description: "This message will be sent when an overdue invoice is re-sent.",
-            showPreview: true
-          },
+          // 'COMPANY_OVERDUE_INV_SENT': {
+          //   title: "An Overdue Invoice is sent",
+          //   recipient: "Company’s First Primary Contact",
+          //   description: "This message will be sent when an overdue invoice is re-sent.",
+          //   showPreview: true
+          // },
           'COMPANY_PAYMENT_RECEIVED': {
             title: "A payment is received",
             recipient: "Company’s First Primary Contact",

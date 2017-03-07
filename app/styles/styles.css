@@ -369,6 +369,9 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
+body input::-ms-clear {
+  display: none;
+}
 
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
@@ -9976,12 +9979,6 @@ button.close {
   border-width: 1px 0;
   height: 52px;
   padding: 15px 30px;
-}
-
-@-moz-document url-prefix() {
-  .modal-create-ticket .modal-body .form-control {
-    padding: 0 30px;
-  }
 }
 
 .modal-create-ticket .modal-body textarea.form-control {

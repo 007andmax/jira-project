@@ -49,12 +49,10 @@
           var filter = headerSharedState.filter;
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
-          var result = true;
+          var result = !value.deletedAt && !$scope.archivedShown || $scope.archivedShown && value.deletedAt;
 
-          if ($scope.archivedShown) {
-            return value.deletedAt;
-          } else {
-            result = result && !value.deletedAt;
+          if (value.isDefault || value.default) {
+            return false;
           }
 
           if (filter.userId) {
