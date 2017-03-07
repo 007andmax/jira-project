@@ -726,7 +726,7 @@
             for(var i = 0; i < clients.length; i++){
               var user = clients[i];
 
-              if(user.subscription && (user.subscription.ticketManager || user.subscription.ticket))
+              if(user.subscription && user.subscription.ticketManager && !user.deletedAt)
                 addUserToResult(user);
               $scope.selectUpdateSharedUser[user.id] = true;
             }
