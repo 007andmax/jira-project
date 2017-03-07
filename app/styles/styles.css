@@ -9981,12 +9981,6 @@ button.close {
   padding: 15px 30px;
 }
 
-@-moz-document url-prefix() {
-  .modal-create-ticket .modal-body .form-control {
-    padding: 0 30px;
-  }
-}
-
 .modal-create-ticket .modal-body textarea.form-control {
   resize: none;
   border-width: 0 0 1px 0;
