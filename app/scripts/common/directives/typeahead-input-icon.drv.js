@@ -10,8 +10,8 @@
         '<i class="icn-sm icn-remove-old"' +
         ' ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
         '</span>' +
-        '<span class="x-mark" ng-hide="showClearIcon">' +
-        '<i class="icn-sm icn-caret-gray"></i>' +
+        '<span class="x-mark" ng-hide="showClearIcon" style="pointer-events: none">' +
+        '<i class="icn-sm icn-caret-gray" ></i>' +
         '</span>' +
         '',
         scope: true,
