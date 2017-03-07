@@ -183,11 +183,11 @@
               break;
             case 'byIndustry':
               sharedFilter.industry = value;
-              sharedFilter.companyId = false;
+              sharedFilter.companyId = '';
               break;
             case 'byCompany':
               sharedFilter.companyId = value;
-              sharedFilter.industry = false;
+              sharedFilter.industry = '';
               break;
             default:
               clearFilter(sharedFilter);
@@ -328,7 +328,7 @@
 
         function clearFilter(sharedFilter) {
           for (var prop in sharedFilter) {
-            sharedFilter[prop] = false;
+            sharedFilter[prop] = '';
           }
 
           if ($scope.clearDateRange) {
