@@ -11384,3 +11384,8 @@ button.close {
   top: 5px;
   right: 15px;
 }
+
+.tooltip-inner {
+  white-space:nowrap;
+  max-width:none;
+}
