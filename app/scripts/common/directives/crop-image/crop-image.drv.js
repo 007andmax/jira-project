@@ -132,7 +132,7 @@
                 blob = Cropper.decode(source.origin.base64);
                 $timeout(function () { $scope.$broadcast('show.cropper');});
               } else {
-                getBase64FromImageUrl('/file/' + source.origin.id, function (base64) {
+                getBase64FromImageUrl('/file/' + source.origin.id + '.jpg', function (base64) {
                   $timeout(function () {
                     $scope.source.origin.base64 = base64;
                     blob = Cropper.decode($scope.source.origin.base64);
