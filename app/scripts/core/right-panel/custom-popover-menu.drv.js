@@ -39,6 +39,7 @@
 
               element.popover({
                 trigger: 'manual',
+                placement: 'left',
                 html: true,
                 content: template,
                 container: 'body'
@@ -53,35 +54,7 @@
                 // Hide already opened
                 hideOtherPopovers();
 
-                var customPopover;
-                var offset = {left: 0, top: 0};
-                // if( typeof(settings.relativeTo) != 'undefined' ) {
-                //     offset = $(settings.relativeTo).offset();
-                // }
 
-                element.one('shown.bs.popover', function(){
-                  customPopover = $('.popover.fade');
-                  customPopover.find('.popover-content').css('padding', 0);
-                  customPopover.css({
-                    'padding': 0,
-                    'margin': 0,
-                    // 'margin-top': attrs.customPopoverMenuMarginTop,
-                    'width': 190,
-                    'visibility': 'hidden'
-                  });
-                  customPopover.on('click', function(e){
-                    e.stopPropagation();
-                  });
-
-                  var left = getMenuPosition(customPopover, (e.clientX-offset.left), 'width', 'scrollLeft');
-                  var top = getMenuPosition(customPopover, (e.clientY-offset.top), 'height', 'scrollTop');
-                  customPopover.css({
-                        visibility: 'visible',
-                        position: "fixed",
-                        left: left,
-                        top: top
-                    });
-                });
 
                 element.popover('show');
 
