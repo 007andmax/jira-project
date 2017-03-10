@@ -3,12 +3,12 @@
 /* Services */
 
 (function (window, $, undefined) {
-  
+
   var services = angular.module('main.services');
-  
+
   services.factory('UsersService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService', 'localStorageService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService, localStorageService) {
-      
+
       var serviceScope = $rootScope.$new(),
         initListeners = [],
         initialized = false,
@@ -19,19 +19,19 @@
           deleted: [],
           usersByCompanies: {}
         };
-      
+
       Utils.customizeObj(storage);
-      
+
       CompaniesService._addInitListener(init);
-      
+
       function init() {
-        
+
         if (initializingStarted) {
           return;
         }
-        
+
         initializingStarted = true;
-        
+
         $http.get('/users').then(function (resp) {
             Utils.customizeArray(resp.data, storage.users);
             for (var i = 0; i < storage.users.length; i++) {
@@ -59,25 +59,25 @@
             console.error(resp);
             throw 'Cannot initialize CompaniesService!';
           });
-        
+
         RealTimeService.subscribe('/user', serviceScope, function (newChange) {
-          
+
           if (!initialized) {
             return;
           }
           if (newChange.action == 'USER_SAVED') {
-            
+
             var currentUser = getCurrentUser();
             if (currentUser.id === newChange.data.id) {
               Utils.customizeObj(newChange.data, currentUser);
               return;
             }
-            
+
             if (newChange.data.company.id !== currentUser.company.id) {
               addOrUpdateClientUser(newChange.data);
             } else {
               var techUser = Utils.findById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
-              
+
               if (techUser) {
                 Utils.customizeObj(newChange.data, techUser);
               } else {
@@ -118,54 +118,54 @@
             newChange.data.forEach(addOrUpdateClientUser);
           }
         });
-        
+
         RealTimeService.subscribe('/userSubmittedTicket', serviceScope, function (newChange) {
-          
+
           if (newChange.action === 'USER_SUBMITTED_TICKET') {
             var user = getOneById(newChange.data);
-            
+
             var prevValue = user.userStatistic.ticketsSubmitted || 0;
             Utils.defineReadOnlyProperty(user.userStatistic, 'ticketsSubmitted', prevValue + 1);
           }
         });
-        
+
         RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
-          
+
           if (!newChange.data.user) {
             return;
           }
-          
+
           var user = Utils.findById(storage.users, newChange.data.user.id);
-          
+
           if (user) {
-            
+
             if (newChange.action == 'SUBSCRIPTION_SAVED') {
               Utils.defineReadOnlyProperty(user, 'subscription', Utils.customizeObj(newChange.data));
             } else if (newChange.action == 'SUBSCRIPTION_DELETED') {
               delete user.subscription;
             }
           }
-          
+
         });
-        
+
         RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
           if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
             $rootScope.showLockModal();
           }
         });
       }
-      
+
       function getCookie(name) {
         var matches = document.cookie.match(new RegExp(
           "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
       }
-      
+
       function addOrUpdateClientUser(updUser) {
         var user = Utils.findById(storage.users, updUser.id);
         Utils.deleteById(storage.deleted, updUser.id);
-        
+
         if (user) {
           Utils.customizeObj(updUser, user);
           if ($rootScope.currentUser.id === user.id) {
@@ -177,74 +177,74 @@
           if (newUser.company.id !== CompaniesService.getCurrentCompany().id) {
             storage.clientUsers.push(newUser);
           }
-          
+
           generateInitials(newUser);
-          
+
           if (!storage.usersByCompanies[newUser.company.id]) {
             storage.usersByCompanies[newUser.company.id] = [];
           }
-  
+
           if (!Utils.findById(storage.usersByCompanies[newUser.company.id], newUser.id)) {
             storage.usersByCompanies[newUser.company.id].push(newUser);
           }
         }
       }
-      
+
       function addInitListener(callback) {
         if (!callback) {
           throw "callback is required!"
         }
-        
+
         if (initialized) {
           callback();
         } else {
           initListeners.push(callback);
         }
-        
+
       }
-      
+
       function generateInitials(user) {
         var initials = [user.firstName, user.lastName].map(function (s) {
           return s.charAt(0).toUpperCase();
         }).join('');
         Utils.defineReadOnlyProperty(user, 'initials', initials);
       }
-      
+
       function getAllUsers() {
         return storage.users;
       }
-      
+
       function getClientUsers() {
         return storage.clientUsers;
       }
-      
+
       function getCurrentUser() {
         if (!$rootScope.currentUser) {
           return {};
         }
         return $rootScope.currentUser;
       }
-      
+
       function getAllByCompanyId(companyId) {
         return storage.usersByCompanies[companyId] || [];
       }
-      
+
       function getTechUsers() {
         if (!$rootScope.currentUser) {
           return [];
         }
-        
+
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
       }
-      
+
       function getArchivedUsers() {
         return storage.deleted;
       }
-      
+
       function getOneById(userId) {
         return Utils.findById(storage.users, userId) || Utils.findById(storage.deleted, userId);
       }
-      
+
       function getUnassignedUser(companyId) {
         var unassignedCompanyUsers = storage.usersByCompanies[companyId];
         for (var i = 0; i < unassignedCompanyUsers.length; i++) {
@@ -253,137 +253,137 @@
           }
         }
       }
-      
+
       function searchByAllUsers(keyword) {
         return search(keyword, true)
       }
-      
+
       function searchByClientUsers(keyword) {
         return search(keyword, false)
       }
-      
+
       function searchByUsersFromCompany(keyword, companyId) {
         return search(keyword, false, companyId)
       }
-      
+
       function search(keyword, includeCurrentCompany, companyId) {
-        
+
         if (!keyword) {
           throw 'Keyword is required!'
         }
-        
+
         var searchUsers,
           searchResult = [],
           keywordLowerCase = keyword.toLowerCase();
-        
+
         if (companyId) {
           searchUsers = storage.usersByCompanies[companyId] || [];
         } else {
           searchUsers = storage.users;
         }
-        
+
         for (var i = 0; i < searchUsers.length; i++) {
-          
+
           var user = searchUsers[i];
           if (!includeCurrentCompany && getCurrentUser().company.id === user.company.id) {
             continue;
           }
-          
+
           if ((user.firstName + ' ' + user.lastName).toLowerCase().indexOf(keywordLowerCase) > -1) {
             searchResult.push(user);
           }
         }
-        
+
         return searchResult;
       }
-      
+
       function changeUserRole(userId, roleName, callback) {
-        
+
         if (!userId) {
           throw 'userId is required!'
         }
-        
+
         if (!roleName) {
           throw 'roleName is required!'
         }
-        
+
         var future = $http({
           url: '/users/updateRole/' + userId + '?role=' + roleName.toUpperCase(),
           method: 'PUT'
         });
-        
+
         Utils.handleCallback(future, callback);
       }
-      
+
       function changeUsersRoles(userIds, role, callback) {
-        
+
         if (!userIds) {
           throw 'userIds is required!'
         }
         if (role.toLowerCase() !== 'admin' && role.toLowerCase() !== 'user') {
           throw 'role is required and must be admin or user!'
         }
-        
+
         var future = $http({
           url: '/users/updateRoles?role=' + role,
           method: 'PUT',
           data: userIds
         });
-        
+
         Utils.handleCallback(future, callback);
       }
-      
+
       function save(user, callback) {
-        
+
         if (!user) {
           throw 'user is required!';
         }
-        
+
         var url = '/users',
           method = 'POST';
-        
+
         if (user.id) {
           method = 'PUT';
           url = url + '/' + user.id;
-          
+
         }
-        
+
         var future = $http({
           url: url,
           method: method,
           data: user
         });
-        
+
         Utils.handleCallback(future, callback);
       }
-      
+
       function saveUserSettingsDto(userDto, callback) {
-        
+
         if (!userDto) {
           throw 'userDto is required!';
         }
-        
+
         var future = $http({
           url: '/settings/userProfile/',
           method: 'PUT',
           data: userDto
         });
-        
+
         Utils.handleCallback(future, callback);
       }
-      
+
       function saveForUserProfile(data, toUpdate, callback) {
-        
+
         if (!data) {
           throw 'data is required!';
         }
         if (!toUpdate) {
           throw 'toUpdate is required!';
         }
-        
+
         var url = '/settings/userProfile/' + toUpdate.toLowerCase(),
           method = 'PUT';
-        
+
         var future = $http({
           url: url,
           method: method,
@@ -391,18 +391,18 @@
         });
         Utils.handleCallback(future, callback);
       }
-      
+
       function getUserProfile(callback) {
-        
+
         var info = {};
-        
+
         $http.get('/settings/userProfile/').then(function (resp) {
           Utils.customizeObj(resp.data, info);
-          
+
           if (callback) {
             callback(resp.data);
           }
-          
+
         }, function (resp) {
           if (callback) {
             callback(resp.data);
@@ -410,18 +410,18 @@
         });
         return info;
       }
-      
+
       function getUserEmailNotifications(callback) {
-        
+
         var info = {};
-        
+
         $http.get('/settings/userProfile/emailNotifications').then(function (resp) {
           Utils.customizeObj(resp.data, info);
-          
+
           if (callback) {
             callback(resp.data);
           }
-          
+
         }, function (resp) {
           if (callback) {
             callback(resp.data);
@@ -429,22 +429,22 @@
         });
         return info;
       }
-      
+
       function isEmailUnique(email, id, isTechUser, callback) {
-        
+
         if (!email) {
           throw 'email is required!'
         }
-        
+
         var info = Utils.customizeObj({});
-        
+
         $http.get('/users/isEmailUnique?email=' + email + '&id=' + id + '&isTechUser=' + isTechUser).then(function (resp) {
           Utils.customizeObj(resp.data, info);
-          
+
           if (callback) {
             callback(resp.data);
           }
-          
+
         }, function (resp) {
           if (callback) {
             callback(resp.data);
@@ -452,70 +452,65 @@
         });
         return info;
       }
-      
+
       function archiveUser(ids, callback) {
         if (!Array.isArray(ids)) {
           ids = [ids];
         }
-        
+
         if (getOneById(ids[0]).accountType !== 'TECH') {
           var errorMessage = isArchiveUsersAllowed(ids);
-          
+
           if (errorMessage) {
             throw errorMessage;
           }
         }
-        
+
         var future = $http.post('/users/archive', { ids: ids });
         Utils.handleCallback(future, callback);
       }
-      
+
       function dearchiveUser(ids, callback) {
         if (!Array.isArray(ids)) {
           ids = [ids];
         }
-        
+
         var future = $http.post('/users/dearchive', { ids: ids });
         Utils.handleCallback(future, callback);
       }
-      
+
       function deleteAvatar(userId, callback) {
-        
-        if (!userId) {
-          throw 'companyId is required!';
-        }
-        
         var future = $http({
           url: '/users/' + userId + '/avatar',
           method: 'DELETE'
         });
-        
+
         Utils.handleCallback(future, callback);
       }
-      
+
       function saveAvatar(model, userId, callback) {
         var future = $http.post('/users/' + userId + '/avatar', model);
         Utils.handleCallback(future, callback);
       }
-      
+
       function isArchiveUsersAllowed(ids) {
         var companyId = getOneById(ids[0]).company.id,
           users = storage.usersByCompanies[companyId],
           errorMessage = '';
-        
+
         var isAllUsersSelected = ids.length === users.length;
-        
+
         var isPrimaryContactSelected = ids.filter(function (id) {
           return getOneById(id).isContact;
         }).length;
-        
+
         var isAllWithInvoiceSubscriptionSelected =
           users.filter(function (user) {
             return user.subscription.invoice;
           }).length === ids.filter(function (id) {
             return getOneById(id).subscription.invoice;
           }).length;
-        
+
         if (isAllUsersSelected) {
           errorMessage = 'U can\'t archive all users. At least one must remain.';
         } else if (isPrimaryContactSelected) {
@@ -523,44 +518,44 @@
         } else if (isAllWithInvoiceSubscriptionSelected) {
           errorMessage = 'U can\'t archive all user with invoice subscription. At least one must remain.';
         }
-        
+
         return errorMessage;
       }
-      
+
       function getActivityHistory(callback) {
         var future = $http.get('/settings/userProfile/device');
         Utils.handleCallback(future, callback);
       }
-      
+
       function closeSessions(ids, callback) {
         var future = $http.post('/settings/userProfile/device', ids);
         Utils.handleCallback(future, callback);
       }
-      
+
       function get2FA(callback) {
         var future = $http.get('/users/twoFactorAuth');
         Utils.handleCallback(future, callback);
       }
-      
+
       function toggle2FA(isEnabled, callback) {
         var future = $http.post('/users/twoFactorAuth?enable=' + isEnabled, {});
         Utils.handleCallback(future, callback);
       }
-      
+
       function deactivateAccount(note) {
         $http.post('/users/deactivate', { note: note });
       }
-      
+
       function restoreUser(userId, callback) {
         var future = $http.post('/users/restore', { userId: userId });
         Utils.handleCallback(future, callback);
       }
-      
+
       function requestToChangePassword(userId, callback) {
         var future = $http.post('/users/changePasswordRequest', { userId: userId });
         Utils.handleCallback(future, callback);
       }
-      
+
       function updateWelcomeWizard(state, dontShowThisAgain) {
         var dto = $rootScope.currentUser.wizardTracker || {};
         switch (state.split('.').pop()) {
@@ -580,10 +575,10 @@
             dto.setupClient = true;
             break;
         }
-        
+
         $http.put('/settings/userProfile/updateWizard' + (dontShowThisAgain ? '?dontShowThisAgain=' + dontShowThisAgain : ''), dto);
       }
-      
+
       function changePassword(oldPass, newPass, callback) {
         $http.post('/resetPassword', { oldPass: hex_md5(oldPass), newPass: hex_md5(newPass) }).then(function (resp) {
           if (callback) {
@@ -595,7 +590,7 @@
           }
         });
       }
-      
+
       return {
         _addInitListener: addInitListener,
         getAllUsers: getAllUsers,
@@ -630,7 +625,7 @@
         updateWelcomeWizard: updateWelcomeWizard,
         changePassword: changePassword
       }
-      
+
     }]);
-  
+
 })(window, jQuery);

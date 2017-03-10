@@ -135,13 +135,13 @@
       }
 
       function isUpdateAllowed(ticket) {
-        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && (ticket.assignedUserId || ticket.assignedUserId) && isTicketOpen(ticket)) {
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket)) {
           return true;
         }
 
         return isTicketOpen(ticket) &&
-          (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) ) ||
-          (ticket.assignedUserId && ticket.assignedUserId === $rootScope.currentUser.id) ||
+          (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
+          (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
           isSharedToCurrentUser(ticket));
       }
 

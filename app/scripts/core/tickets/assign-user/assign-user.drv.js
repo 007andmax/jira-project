@@ -80,7 +80,8 @@
                       </a>';
             },
             calculateWidth: function (result, suggestion) {
-              var width = $.Autocomplete.getHtmlWidth('<a href="#"><img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26"><span>' + result + ' "' + suggestion.data.primaryEmail + '"</span></a>');
+              var avatarUrl = getUserAvatarUrl(suggestion.data);
+              var width = $.Autocomplete.getHtmlWidth('<a href="#"><img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"><span>' + result + ' "' + suggestion.data.primaryEmail + '"</span></a>');
               return width + 65;
             },
             preserveLastSelected: true,

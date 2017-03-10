@@ -126,7 +126,8 @@
       </div>
 
       <div class="text-muted ellipsis"
-           ng-if="ticket.assignedUserId" style="width: 40%;vertical-align: top;">{{ getUserName(getUserById(ticket.assignedUserId)) }}
+           ng-if="ticket.assignedUser && ticket.assignedUser.id" style="width: 40%;vertical-align: top;">
+        {{ getUserName(getUserById(ticket.assignedUser.id)) }}
       </div>
 
       <span class="text-muted ellipsis" style="float: right; margin-right: 0;width: 38%; text-align: right;vertical-align: top; ">

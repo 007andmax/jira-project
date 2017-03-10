@@ -19,13 +19,21 @@
             if (restoreDefaultButton.length) {
               restoreDefaultButton.on('click', function () {
                 if (attrs.modelImagePath === 'avatar') {
-                  UsersService.deleteAvatar(scope.model.id, function () {
+                  if (scope.model.id) {
+                    UsersService.deleteAvatar(scope.model.id, function () {
+                      scope.model[attrs.modelImagePath] = null;
+                    });
+                  } else {
                     scope.model[attrs.modelImagePath] = null;
-                  });
+                  }
                 } else if (attrs.modelImagePath === 'logo') {
-                  CompaniesService.deleteLogo(scope.model.id, function () {
+                  if (scope.model.id) {
+                    CompaniesService.deleteLogo(scope.model.id, function () {
+                      scope.model[attrs.modelImagePath] = null;
+                    });
+                  } else {
                     scope.model[attrs.modelImagePath] = null;
-                  });
+                  }
                 }
 
                 $body.click();
