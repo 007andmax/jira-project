@@ -41,6 +41,7 @@
           tryToAddService: false
         };
         $scope.selectUpdateSharedUser = {};
+        $scope.minSentOnDate = $filter('date')(new Date(Date.now() + day), 'dd MMM yyyy');
 
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
@@ -51,7 +52,6 @@
 
           $scope.searchCompany = CompaniesService.getOneById($scope.invoice.company.id).name;
           $scope.actualInvoiceNumber = $scope.invoice.number;
-          $scope.minSentOnDate = new Date($scope.invoice.nextGenerationAt);
           $scope.minEndDate = new Date($scope.invoice.endDate);
           $scope.ticketSharedUsersList = [];
 
@@ -103,13 +103,17 @@
 
           $timeout(function () {
             $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms === 0 ? $scope.invoice.paymentTerms : ($scope.invoice.paymentTerms + ' days');
+            $timeout(function () {
+              $scope.editInvoice.nextGenerationAt = $filter('date')(new Date($scope.invoice.nextGenerationAt), 'dd MMM yyyy');
+              $scope.editInvoice.endDate = $filter('date')(new Date($scope.invoice.endDate), 'dd MMM yyyy');
+              $scope.paramInvocie.remainGenerations = $scope.invoice.remainGenerations;
+            });
           });
 
         } else {
 
           $scope.ticketSharedUsersList = [];
 
-          $scope.minSentOnDate = new Date(Date.now() + day);
           $scope.minEndDate = new Date(Date.now() + day);
 
           TicketsService.getActualNumber($scope, function (number) {
