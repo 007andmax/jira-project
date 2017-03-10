@@ -61,7 +61,25 @@
   width: 100%;
   padding-bottom: 110px;
 }
-
+.settings-main-wrapper .ticket-and-invoice-wrapper h3 {
+  margin: 15px 0 10px;
+}
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper{
+  padding-top: 0;
+  padding-bottom: 25px;
+}
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .ar-department{
+  padding-top: 25px;
+}
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .form-group.full-width label.control{
+  margin: 0;
+}
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .create-user-form{
+  margin-top: 0;
+}
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .form-row .row{
+  margin-bottom: 13px;
+}
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
   padding-top: 0;
 }
