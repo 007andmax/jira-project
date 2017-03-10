@@ -11,7 +11,6 @@
 
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
           var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/gi;
-
           var pressOnElement, inited = false;
           var editor = element.find('[te-editor]'),
             wysiwyg = editor.wysiwyg({
@@ -55,7 +54,7 @@
                 return '<a target="' + x + '" href="'+x+'">'+x+'</a>';
               });
               editor.html(newValue);
-              inited = true
+              inited = true;
             }
           });
 
