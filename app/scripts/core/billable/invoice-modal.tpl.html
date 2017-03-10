@@ -187,10 +187,10 @@
     </div>
 
     <div class="ticket-amount" ng-repeat-end>
-      <div class="totals">
-        <span class="label">DISCOUNT </span>
-        <span class="value">{{ ticket.discountSum | currency: '$' :2 }}</span>
-      </div>
+      <!--<div class="totals">-->
+        <!--<span class="label">DISCOUNT </span>-->
+        <!--<span class="value">{{ ticket.discountSum | currency: '$' :2 }}</span>-->
+      <!--</div>-->
       <div class="totals">
         <span class="label">SUB TOTAL </span>
         <span class="value">{{ ticket.totalSum | currency: '$' :2 }}</span>
@@ -243,14 +243,14 @@
           <div class="amount">{{ currentInvoice.servicesSum | currency: '$':2 }}</div>
         </div>
 
-        <div class="plus">
-          <img src="../images/invoice/invoice-minus.png" width="20" height="20" alt="-"/>
-        </div>
+        <!--<div class="plus">-->
+          <!--<img src="../images/invoice/invoice-minus.png" width="20" height="20" alt="-"/>-->
+        <!--</div>-->
 
-        <div class="update">
-          <h4>DISCOUNT</h4>
-          <div class="amount">{{ currentInvoice.discountSum | currency: '$':2 }}</div>
-        </div>
+        <!--<div class="update">-->
+          <!--<h4>DISCOUNT</h4>-->
+          <!--<div class="amount">{{ currentInvoice.discountSum | currency: '$':2 }}</div>-->
+        <!--</div>-->
 
         <div class="plus">
           <img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>
