@@ -22,3 +22,4 @@ NOTE: Do not commit node_modules, bower_components, .tmp, dist folders and app/i
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+ 
