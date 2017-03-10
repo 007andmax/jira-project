@@ -28,8 +28,7 @@
               }
             });
 
-
-         /* $scope.$watch(function () {
+         $scope.$watch(function () {
             return attrs.teInitialValue;
           }, function (value) {
             if (typeof attrs.teInitialValue === 'string' && (!inited || !value)) {
@@ -37,31 +36,11 @@
               inited = true
             }
           });
-*/
-          /*scope.$watch('ngModel', function (value) {
-            var html = value.replace(urlPattern, '<a target="' + scope.props.target + '" href="$&">$&</a>') + " | " + scope.props.otherProp;
-            element.html(html);
-
-            //var html1 = value.replace(urlPattern, '<a target="' + attrs.teInitialValue.target + '" href="$&">$&</a>');
-          });
-*/
-
-          $scope.$watch(function () {
-            return attrs.teInitialValue;
-          }, function (value) {
-            if (typeof attrs.teInitialValue === 'string' && (!inited || !value)) {
-              var newValue = value.replace(urlPattern, function(x){
-                return '<a target="' + x + '" href="'+x+'">'+x+'</a>';
-              });
-              editor.html(newValue);
-              inited = true;
-            }
-          });
-
           validateRequired();
 
           editor.on('DOMSubtreeModified', function () {
             var html = wysiwyg.html();
+
             ctrl.$setViewValue(html);
 
             $timeout(function () {
@@ -114,7 +93,10 @@
           element.on('paste', function (e) {
             e.preventDefault();
             var cleanText = e.originalEvent.clipboardData.getData("text/plain");
-            document.execCommand('insertText', false, cleanText);
+            var newValue = cleanText.replace(urlPattern, function(x){
+              return '<a target="' + x + '" href="'+x+'">'+x+'</a>';
+            });
+            document.execCommand('insertHTML', false, newValue);
             $timeout(validateRequired);
           });
 
