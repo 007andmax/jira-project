@@ -668,11 +668,12 @@
 
         function createNewWindowClosing() {
           var ticket = $scope.ticket;
-          var isTicketChanged = ticket.subject || ticket.note || $scope.ticketAttachments.length;
+          var subject = ticket.subject && ticket.subject.trim();
+          var note = ticket.note && ticket.note.trim().replace(/<.+?>/gm, '');
+          var isTicketChanged = subject || note || $scope.ticketAttachments.length;
           if (isTicketChanged) {
             $scope.savedState.types.unshift('ticket');
             $scope.savedState.items.unshift($scope.ticket);
-            $scope.savedState.originItems.unshift({});
           }
         }
 
@@ -691,12 +692,10 @@
           $scope.ticket.selectUpdateSharedUser = angular.copy($scope.selectUpdateSharedUser);
           $scope.savedState.types.unshift('ticket');
           $scope.savedState.items.unshift($scope.ticket);
-          $scope.savedState.originItems.unshift({});
 
           if ($scope.ticket.draftId) {
             $scope.savedState.types.unshift('company');
             $scope.savedState.items.unshift(userFromDraft);
-            $scope.savedState.originItems.unshift({});
           }
 
           $scope.setOpenedTab(type);

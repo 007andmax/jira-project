@@ -240,9 +240,9 @@
         function createNewWindowClosing() {
           var user = $scope.editUser;
           var isUserChanged = false;
-          var originCompany = origin.company && CompaniesService.getOneById(origin.company.id);
 
           if (origin) {
+            var originCompany = origin.company && CompaniesService.getOneById(origin.company.id);
             isUserChanged = user.firstName !== origin.firstName
               || user.lastName !== origin.lastName
               || !angular.equals($scope.userCompany, originCompany)

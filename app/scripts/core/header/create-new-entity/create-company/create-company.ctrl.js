@@ -188,8 +188,6 @@
                   $scope.editCompany.services.push(service);
                   $scope.selectedServices[service.versionedId.id] = true;
                 }
-
-                onModelInitializationComplete();
               }
             });
           }

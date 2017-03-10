@@ -175,7 +175,7 @@
 
         $scope.formatOffset = function (offset) {
           var minutesOffset = offset / 60000,
-            sign = Math.sign(offset) === -1 ? '-' : '+',
+            sign = +offset < 0 ? '-' : '+',
             hours = Math.abs(Math.floor(minutesOffset / 60)) || '00',
             minutes = Math.abs(minutesOffset % 60) || '00';
 
