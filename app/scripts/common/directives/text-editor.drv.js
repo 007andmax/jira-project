@@ -12,7 +12,7 @@
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
           //URLs starting with http:// or https:// before it
           var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/gi;
-          //URLs starting with www. (without // before it
+          //URLs starting with www. Without // before it
           var urlPattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
 
           var pressOnElement, inited = false;
