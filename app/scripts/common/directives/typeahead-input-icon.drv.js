@@ -29,7 +29,6 @@
             scope.showClearIcon = !!input.val();
           });
 
-
           scope.clearInput = function (e) {
             e.stopPropagation();
 
