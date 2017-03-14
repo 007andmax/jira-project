@@ -2,7 +2,7 @@
   <div class="template-usage-indicator"
        ng-show="emailSettingPageDto.activeAndNotDefault[template].isActive"></div>
 
-  <div class="clearfix">
+  <div class="clearfix" >
 
     <h4 class="template-title">{{ templateInfo.title }}</h4>
 
@@ -20,8 +20,8 @@
       <i class="icn-sm icn-remove-old"></i>
     </a>
 
-    <div class="template-details pull-left" ng-if="template === currentOpenTemplate">
-      <div class="recepients">
+    <div class="template-details pull-left" ng-if="template === currentOpenTemplate" >
+      <div class="recepients" >
         <span class="pull-right email-preview-btn" ng-click="emailPreview(template)" ng-if="templateInfo.showPreview"
               disable-if="{{ !gettingEmailTemplatePreview }}"
               append-html-to-body url="/html/scripts/core/settings/email-templates/email-preview.tpl.html"
@@ -30,14 +30,14 @@
       </div>
       <form name="templateForm" insert-keyword>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}" >
 
-          <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+          <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}" >
             Subject
           </label>
 
           <div ng-messages="templateForm.templateSubject.$error"
-               ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+               ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}" >
             <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
             <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
             <label class="control-label" ng-message="pattern" for="">subject require keywords: {{ templateInfo.requiredKeywords.join(', ') }}</label>
@@ -45,12 +45,12 @@
 
           <input id="template-subject" class="form-control insert-field"
                  name="templateSubject" ng-model="templatesData.subject" ng-pattern="templateInfo.requiredKeywordsRegExp"
-                 required ng-maxlength="150" make-dirty-on-blur>
+                 required ng-maxlength="150" make-dirty-on-blur >
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-          <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+          <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}" qt-scroll-to="top">
             Email
           </label>
 
@@ -69,7 +69,7 @@
 
           <button class="btn pull-left btn-lg btn-primary"
                   custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
-                  ng-click="saveEmailTemplate(template, templateForm)">Save</button>
+                  ng-click="saveEmailTemplate(template, templateForm)" >Save</button>
 
           <button class="btn pull-left btn-lg btn-primary  "
                   ng-click="openEmailTemplate('CLOSE', $event)">Cancel
