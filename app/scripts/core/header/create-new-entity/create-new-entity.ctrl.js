@@ -12,9 +12,9 @@
         $scope.openedTab = resolvedOpenedTab || 'ticket';
 
         if (resolvedExistedItem) {
-          $scope.savedState = { types: [$scope.openedTab], items: [angular.copy(resolvedExistedItem)] };
+          $scope.savedState = {types: [$scope.openedTab], items: [angular.copy(resolvedExistedItem)]};
         } else {
-          $scope.savedState = { types: [], items: [] };
+          $scope.savedState = {types: [], items: []};
         }
 
         if ($scope.openedTab === 'category') {
@@ -29,16 +29,37 @@
         $scope.resolvedCompanyId = resolvedCompanyId;
         $scope.resolvedCreatedUserId = resolvedUserId;
         $scope.closeWindow = $uibModalInstance.dismiss;
+        var alreadyPushCloseButton = false;
 
         $scope.closeWindowWithConfirm = function () {
+          alreadyPushCloseButton = true;
           $scope.$broadcast('createNewWindowClosing');
           var message = 'Do you want to close this window? All entered information will be lost.';
           confirmation(message, $uibModalInstance.dismiss, function () {
+            alreadyPushCloseButton = false;
+          }, function () {
             var type = $scope.savedState.types.shift();
             var item = $scope.savedState.items.shift();
             return type && item;
           });
         };
+
+        $scope.$on('modal.closing', function (event) {
+          if (!alreadyPushCloseButton) {
+            event.preventDefault();
+            alreadyPushCloseButton = true;
+            $scope.$broadcast('createNewWindowClosing');
+            var message = 'Do you want to close this window? All entered information will be lost.';
+            confirmation(message, $uibModalInstance.dismiss, function () {
+              alreadyPushCloseButton = false;
+            }, function () {
+              var type = $scope.savedState.types.shift();
+              var item = $scope.savedState.items.shift();
+              return type && item;
+            });
+          }
+        });
+
 
         $scope.setOpenedTab = function (tabName) {
           $scope.openedTab = tabName;
@@ -47,7 +68,7 @@
         $scope.setOpenedTabWithConfirm = function (tabName) {
           $scope.$broadcast('createNewWindowClosing');
           var message = 'Do you want to leave this tab? All entered information will be lost.';
-          confirmation(message, $scope.setOpenedTab.bind($scope, tabName), function () {
+          confirmation(message, $scope.setOpenedTab.bind($scope, tabName), angular.noop, function () {
             var type = $scope.savedState.types[0];
             if (type === $scope.openedTab) {
               $scope.savedState.types.shift();
@@ -88,7 +109,7 @@
                   $scope.resolvedDeviceId = undefined;
                 }
               } else if ((savedState.types[0] === 'user' || savedState.types[0] === 'product') && type === 'company') {
-                savedItem.company = { id: id };
+                savedItem.company = {id: id};
               }
 
               $scope.setOpenedTab(savedState.types[0]);
@@ -97,10 +118,10 @@
             });
         });
 
-        function confirmation(message, onSuccess, predicate) {
+        function confirmation(message, onSuccess, onReject, predicate) {
           $timeout(function () {
             if (predicate()) {
-              UserConfirmationsService.show(message, 'Yes').then(onSuccess);
+              UserConfirmationsService.show(message, 'Yes').then(onSuccess, onReject);
             } else {
               onSuccess();
             }
