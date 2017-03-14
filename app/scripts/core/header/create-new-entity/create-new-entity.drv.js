@@ -28,7 +28,7 @@
                 templateUrl: '/html/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
                 controller: 'createNewEntityCtrl',
                 windowClass: 'create-popup modal-create-ticket',
-                backdrop: 'static',
+                backdrop: true,
                 animation: true,
                 resolve: {
                   sessionId: false,
