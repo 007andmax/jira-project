@@ -4,17 +4,15 @@
 
   angular.module('quicktech').controller('quicktech.createCompanyCtrl',
     [
-      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService',
-      'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
-      'quicktech.common.services.SharedStateService', '$state', '$timeout', '$rootScope',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService,
-                TaxRatesService, AddressesService, ServicesService, PhoneFormats,
-                SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
+      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
+      'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService', '$state', '$timeout',
+      '$rootScope', 'quicktech.common.services.PermissionsService',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, AddressesService, ServicesService,
+                PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
         $scope.descriptionMaxLength = 300;
 
-        var newServiceCounter = 0, newTaxCounter = 0;
+        var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
         var savedState = $scope.getLastSavedState('company');
         var action = 'CREATE_COMPANIES';
@@ -79,14 +77,6 @@
               $scope.editCompany.password = '';
             }
 
-            TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
-              $scope.techCompanyTax = angular.copy(resp);
-
-              for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-                $scope.selectedTax[$scope.editCompany.taxRates[i].code] = true;
-              }
-            });
-
             origin = angular.copy($scope.editCompany);
           });
 
@@ -112,20 +102,6 @@
             removeOfflineTime: 30
           };
           $scope.contact = $scope.editCompany.contacts[0];
-
-          TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
-            $scope.techCompanyTax = angular.copy(resp);
-
-            if ($scope.editCompany.taxRates) {
-              return;
-            }
-
-            $scope.editCompany.taxRates = [];
-            for (var i = 0; i < resp.length; i++) {
-              $scope.editCompany.taxRates.push(resp[i]);
-              $scope.selectedTax[resp[i].code] = true;
-            }
-          });
         } else {
           $scope.isLastInvoiceSubsciption = true;
           $scope.editCompany = {
@@ -140,20 +116,6 @@
             removeOfflineTime: 30
           };
           $scope.contact = $scope.editCompany.contacts[0];
-
-          TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
-            $scope.techCompanyTax = angular.copy(resp);
-
-            if ($scope.editCompany.taxRates) {
-              return;
-            }
-
-            $scope.editCompany.taxRates = [];
-            for (var i = 0; i < resp.length; i++) {
-              $scope.editCompany.taxRates.push(resp[i]);
-              $scope.selectedTax[resp[i].code] = true;
-            }
-          });
         }
 
         $scope.$watch('currentUser.permissions', function (permissions) {
@@ -166,10 +128,7 @@
         $scope.currentStep = 'info';
         $scope.PermissionsService = PermissionsService;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.selectedServices = {};
-        $scope.selectedTax = {};
-        $scope.techCompanyTax = [];
 
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
@@ -335,65 +294,11 @@
           }
         };
 
-        $scope.validateTaxRateCode = function (ngModelCtrl, modelId, afterValidationCallback) {
-
-          var taxRateCount = 0;
-
-          for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if (($scope.editCompany.taxRates[i].code).toLowerCase() === (ngModelCtrl.$viewValue).toLowerCase()) {
-              taxRateCount++;
-            }
-          }
-
-          ngModelCtrl.$setValidity('unique', taxRateCount <= 1);
-          afterValidationCallback();
-        };
-
         $scope.changePrimaryAddress = function (location) {
           angular.forEach($scope.editCompany.addresses, function (address) {
             address.isPrimary = false;
           });
           location.isPrimary = true;
-        };
-
-        $scope.validateNewTaxRate = function (form) {
-
-          var code = $scope.newTaxRate.code,
-            rate = $scope.newTaxRate.rate;
-
-          form.validation = {
-            code: {
-              required: !code,
-              maxlength: !!code && code.length > 30
-            },
-            rate: {
-              required: !rate,
-              number: !$.isNumeric(rate)
-            }
-          };
-
-          var taxRateCount = 0;
-
-          for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if (($scope.editCompany.taxRates[i].code).toLowerCase() === (form.code.$viewValue).toLowerCase()) {
-              taxRateCount++;
-            }
-          }
-
-          for (var i = 0; i < $scope.techCompanyTax.length; i++) {
-            if (($scope.techCompanyTax[i].code).toLowerCase() === (form.code.$viewValue).toLowerCase()) {
-              taxRateCount++;
-            }
-          }
-
-          if (taxRateCount >= 1) {
-            form.validation.code.unique = true;
-          }
-
-          form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
-          form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
-
-          form.invalid = form.validation.rate.invalid || form.validation.code.invalid;
         };
 
         $scope.movingService = function (originService, form) {
@@ -461,42 +366,6 @@
 
           ngModelCtrl.$setValidity('unique', newServicesDuplicates < 2 && defaultDuplicates < 1);
           afterValidationCallback();
-        };
-
-        $scope.movingTax = function (originTax, form) {
-
-          if (originTax === 'new-tax-rate') {
-            var newTaxRate = {
-              new: true,
-              newId: newTaxCounter++,
-              code: '',
-              rate: 0
-            };
-
-            $scope.editCompany.taxRates.push(newTaxRate);
-            form.$setPristine();
-
-          } else {
-            var tax = angular.copy(originTax);
-
-            if ($scope.selectedTax[tax.code]) {
-              $scope.editCompany.taxRates.push(tax);
-            } else {
-              $scope.deleteTaxRate(tax.code);
-            }
-          }
-        };
-
-        $scope.deleteTaxRate = function (taxCode) {
-          for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if ($scope.editCompany.taxRates[i].code === taxCode ||
-              (taxCode && $scope.editCompany.taxRates[i].code.toLowerCase() === taxCode.toLowerCase())) {
-
-              $scope.editCompany.taxRates.splice(i, 1);
-              $scope.selectedTax[taxCode] = false;
-              return;
-            }
-          }
         };
 
         $scope.nextStep = function (form) {
