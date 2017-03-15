@@ -204,11 +204,6 @@
           templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
           controller: 'quicktech.core.settings.emailCtrl'
         }))
-        .state('settings.services', waitForServices({
-          url: '/services',
-          templateUrl: '/html/scripts/core/settings/services/services.tpl.html',
-          controller: 'quicktech.core.settings.servicesCtrl'
-        }))
         .state('settings.taxRates', waitForServices({
           url: '/taxRates',
           templateUrl: '/html/scripts/core/settings/tax-rates/tax-rates.tpl.html',
