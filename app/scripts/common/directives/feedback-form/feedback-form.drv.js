@@ -48,7 +48,7 @@
               BUG: 'Bug',
               FEATURE: 'Feature',
               USABILITY: 'Usability Problem',
-              PERFORMANCE: 'Performance Problem',
+              PERFORMANCE: 'Performance',
               COSMETICS: 'Cosmetics',
               OTHER: 'Other'
             };

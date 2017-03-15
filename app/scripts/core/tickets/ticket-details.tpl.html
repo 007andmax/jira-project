@@ -574,8 +574,8 @@
                            ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                     </div>
                     <span class="pull-left label label-light btn-more-users" ng-click="showAllSharedUsers = true"
-                          ng-class="{'hide': (ticketUpdate.shares.length < 6) || showAllSharedUsers}">
-                      {{ ticketUpdate.shares.length - 5 }} More
+                          ng-class="{'hide': (getLengthSharedUsers(ticketUpdate.shares) < 6) || showAllSharedUsers}">
+                      {{ getLengthSharedUsers(ticketUpdate.shares) - 5 }} More
                     </span>
                     <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}"
                          style="margin-left: 0px;">
