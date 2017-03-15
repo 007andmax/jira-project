@@ -60,7 +60,6 @@
           }
         });
 
-
         $scope.setOpenedTab = function (tabName) {
           $scope.openedTab = tabName;
         };
