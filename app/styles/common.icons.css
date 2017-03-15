@@ -527,9 +527,9 @@ a.ha-24 {
   background-image: url("../images/new-icons/settings-na.png");
 }
 
-:hover > .settings-icon, :active > .settings-icon, :focus:hover > .settings-icon, :focus:active > .settings-icon, :hover:active > .settings-icon, .active > .settings-icon, .open .settings-icon, .open > .btn:hover .settings-icon {
-  background-image: url("../images/new-icons/settings.png");
-}
+/*:hover > .settings-icon, :active > .settings-icon, :focus:hover > .settings-icon, :focus:active > .settings-icon, :hover:active > .settings-icon, .active > .settings-icon, .open .settings-icon, .open > .btn:hover .settings-icon {*/
+  /*background-image: url("../images/new-icons/settings.png");*/
+/*}*/
 
 .icn-report-spam {
   background-position: -2448px -100px;
@@ -684,20 +684,13 @@ a.ha-24 {
 }
 
 .icon-ticket-flag {
-  background-image: url("../images/new-icons/flag-gray.png");
-}
-
-:hover > .icon-ticket-flag, :active > .icon-ticket-flag, :focus:hover > .icon-ticket-flag, :focus:active > .icon-ticket-flag, :hover:active > .icon-ticket-flag, .active > .icon-ticket-flag, .open .icon-ticket-flag, .open > .btn:hover .icon-ticket-flag {
   background-image: url("../images/new-icons/flag-white.png");
 }
 
 .icon-user {
-  background-image: url("../images/new-icons/user-circle-gray.png");
-}
-
-:hover > .icon-user, :active > .icon-user, :focus:hover > .icon-user, :focus:active > .icon-user, :hover:active > .icon-user, .active > .icon-user, .open .icon-user, .open > .btn:hover .icon-user {
   background-image: url("../images/new-icons/user-circle-white.png");
 }
+
 
 .icon-user-black {
   background-image: url("../images/new-icons/user-circle-na.png");
@@ -747,9 +740,9 @@ a.ha-24 {
   background-image: url("../images/new-icons/edit-na.png");
 }
 
-:hover > .edit-icon, :active > .edit-icon, :focus:hover > .edit-icon, :focus:active > .edit-icon, :hover:active > .edit-icon, .active > .edit-icon, .open .edit-icon, .open > .btn:hover .edit-icon {
-  background-image: url("../images/new-icons/edit.png");
-}
+/*:hover > .edit-icon, :active > .edit-icon, :focus:hover > .edit-icon, :focus:active > .edit-icon, :hover:active > .edit-icon, .active > .edit-icon, .open .edit-icon, .open > .btn:hover .edit-icon {*/
+  /*background-image: url("../images/new-icons/edit.png");*/
+/*}*/
 
 .icn-edit-white {
   background-position: -1042px 0;
@@ -1198,9 +1191,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*li:hover .icn-tab-devices,*/
-a:hover > .icon-tab-devices, a:active > .icon-tab-devices, li.active > a > .icon-tab-devices, .icon-tab-devices.active {
-  background-image: url("../images/new-icons/smartphone-tablet-desktop.png");
-}
+/*a:hover > .icon-tab-devices, a:active > .icon-tab-devices, li.active > a > .icon-tab-devices, .icon-tab-devices.active {*/
+  /*background-image: url("../images/new-icons/smartphone-tablet-desktop.png");*/
+/*}*/
 
 .icon-tab-users {
   background-image: url("../images/new-icons/users-male-na.png");
@@ -1211,9 +1204,9 @@ a:hover > .icon-tab-devices, a:active > .icon-tab-devices, li.active > a > .icon
 }
 
 /*li:hover .icn-tab-users,*/
-a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab-users {
-  background-image: url("../images/new-icons/users-male.png");
-}
+/*a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab-users {*/
+  /*background-image: url("../images/new-icons/users-male.png");*/
+/*}*/
 
 .icn-load-gray {
   background-position: -1336px 0;
