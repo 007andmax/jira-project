@@ -31,16 +31,6 @@
         number: $scope.invoiceConfig ? $scope.invoiceConfig.count : '0001',
         date: 1460552903659,
         dueDate: 1461762503659,
-        "taxRates": [{
-          "rate": 10,
-          "code": "Preview tax 1",
-          "sum": 13.75
-        }, {
-          "rate": 20,
-          "code": "Preview tax 2",
-          "sum": 27.5
-        }],
-        "taxRatesSum": 41.25,
         sum: 1162.75,
         productsSum: 984,
         servicesSum: 137.5,
@@ -63,8 +53,7 @@
               sale: 450,
               ilc: '66613-21-0',
               manufacture: 'MZ-75E250B',
-              description: 'Samsung 850 EVO MZ-75E250B',
-              taxable: true
+              description: 'Samsung 850 EVO MZ-75E250B'
             },
             billable: true,
             discountSum: 0,
@@ -82,8 +71,7 @@
               sale: 84,
               ilc: '1225-8u54445-0',
               manufacture: 'SP064GBSTXBU1V20-SP',
-              description: 'Silicon Power 64 GB microSDXC Class 10 UHS-I Elite Color + SD adapter',
-              taxable: false
+              description: 'Silicon Power 64 GB microSDXC Class 10 UHS-I Elite Color + SD adapter'
             },
             serialNumber: 'serial_number',
             billable: true,
@@ -103,7 +91,6 @@
               "name": "Onsite Consulting",
               "timeBlock": 2.5,
               "rate": 55,
-              "taxable": true,
               "billable": true,
               "isDefault": false
             },

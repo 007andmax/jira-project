@@ -59,6 +59,7 @@
             if (product.quantity && product.item && product.item.sale) {
               subtotal += +product.quantity * +product.item.sale;
 
+              //todo: change calculating tax logic
               if (product.item.taxable) {
                 tax += (+product.quantity * +product.item.sale) * $scope.taxRatesCoef;
               }
@@ -71,6 +72,7 @@
             if (service.quantity && service.item && service.item.rate) {
               subtotal += service.item.rate * (service.quantity / 60);
 
+              //todo: change calculating tax logic
               if (service.item.taxable) {
                 tax += (service.item.rate * (service.quantity / 60)) * $scope.taxRatesCoef;
               }

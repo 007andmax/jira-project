@@ -123,13 +123,6 @@
           <span class="detail-sub">{{ currentInvoice.dueDate | date: 'dd MMM yyyy' }}</span>
         </div>
 
-        <div class="detail" ng-repeat="taxRate in currentInvoice.taxRates">
-          {{ taxRate.code }}
-          <span class="detail-sub">
-            {{ taxRate.rate }}%
-          </span>
-        </div>
-
         <div class="detail amount">Amount Due
           <span class="detail-sub">{{ currentInvoice.sum | currency: '$':2 }}</span>
         </div>
@@ -252,43 +245,12 @@
           <!--<div class="amount">{{ currentInvoice.discountSum | currency: '$':2 }}</div>-->
         <!--</div>-->
 
-        <div class="plus">
-          <img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>
-        </div>
-
-        <div class="update">
-          <h4>TAX</h4>
-          <div class="amount">{{ currentInvoice.taxRatesSum | currency: '$':2 }}</div>
-        </div>
-
       </div>
 
       <div class="total-amount">
         <div class="amount">{{ currentInvoice.sum | currency: '$':2 }}</div>
       </div>
 
-      <!--<div style="padding: 0 20px;">-->
-
-        <!--<div class="update">-->
-          <!--<h4>subtotal</h4>-->
-
-          <!--<div class="amount">{{ currentInvoice.sumWithoutTaxRates | currency: '$':2 }}</div>-->
-        <!--</div>-->
-
-        <!--<div class="plus" ng-show="currentInvoice.hasTaxRates">-->
-          <!--<img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+">-->
-        <!--</div>-->
-
-        <!--<div class="update">-->
-          <!--<h4>TAX</h4>-->
-
-          <!--<div class="amount">{{ currentInvoice.taxRatesSum | currency: '$':2 }}</div>-->
-        <!--</div>-->
-
-        <!--<div class="amount-due">Amount Due <span class="amount">{{ currentInvoice.sum | currency: '$':2 }}</span>-->
-        <!--</div>-->
-
-      <!--</div>-->
     </div>
 
     <div class="footer" ng-if="currentInvoice.termsAndConditions">

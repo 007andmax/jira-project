@@ -127,8 +127,6 @@
             return item.cost;
           } else if ($scope.orderProducts.field === 'sale') {
             return item.sale;
-          } else if ($scope.orderProducts.field === 'taxable') {
-            return item.taxable;
           }
 
         };

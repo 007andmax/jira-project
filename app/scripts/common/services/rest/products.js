@@ -279,47 +279,6 @@
         Utils.handleCallback(future, callback);
       }
 
-      //function getAllByCategory(scope, categoryId, callback, detailed) {
-      //
-      //    if (!scope || !scope.$id) {
-      //        throw 'First argument must be Angularjs scope!'
-      //    }
-      //
-      //    if (!categoryId) {
-      //        throw 'categoryId is required argument!'
-      //    }
-      //
-      //    var url = '/products?categoryId=' + categoryId;
-      //
-      //    if (detailed) {
-      //        url = '/products/full?categoryId=' + categoryId;
-      //    }
-      //
-      //    return Utils.getListByUrl(url, callback, function (list) {
-      //
-      //        RealTimeService.subscribe('/product?targetId=' + categoryId, scope, function (newChange) {
-      //
-      //            console.log(newChange);
-      //
-      //            if (newChange.action == 'PRODUCT_SAVED') {
-      //
-      //                var product = Utils.findById(list, newChange.data.versionedId.id);
-      //
-      //                if (product) {
-      //                    Utils.customizeObj(newChange.data, product);
-      //                } else {
-      //                    list.push(Utils.customizeObj(newChange.data));
-      //                }
-      //            } else if (newChange.action == 'PRODUCT_DELETED') {
-      //                Utils.deleteById(list, newChange.data.versionedId.id);
-      //                scope.$broadcast("product_deleted", newChange.data);
-      //            } else if (newChange.action == 'PRODUCT_MOVED') {
-      //                Utils.deleteById(list, newChange.data.versionedId.id);
-      //            }
-      //        });
-      //    });
-      //}
-
       function saveProduct(product, callback) {
 
         if (!product) throw 'product is required!';
@@ -335,22 +294,6 @@
           url: url,
           method: method,
           data: product
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
-      function changeTaxableStatus(ids, toTaxable, callback) {
-
-        if (!ids) throw 'ids is required argument!';
-        if (toTaxable === undefined) throw 'toTaxable is required argument!';
-
-        if (!Array.isArray(ids)) ids = [ids];
-
-        var future = $http({
-          url: '/products/changeTaxableStatus?toTaxable=' + !!toTaxable,
-          method: 'POST',
-          data: ids
         });
 
         Utils.handleCallback(future, callback);
@@ -473,9 +416,7 @@
         getCategories: getCategories,
         saveCategory: saveCategory,
         deleteCategory: deleteCategory,
-        //getAllByCategory: getAllByCategory,
         saveProduct: saveProduct,
-        changeTaxableStatus: changeTaxableStatus,
         deleteProduct: deleteProduct,
         isILCUnique: isILCUnique,
         isMfgUnique: isMfgUnique,

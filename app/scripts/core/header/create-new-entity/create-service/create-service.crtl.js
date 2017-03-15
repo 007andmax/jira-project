@@ -13,7 +13,6 @@
           $scope.editService = angular.copy(origin);
         } else {
           $scope.editService = {
-            taxable: true,
             billable: true,
             isDefault: true
           };
