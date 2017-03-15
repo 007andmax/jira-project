@@ -80,6 +80,13 @@
                ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
                is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       </div>
+      <!--Discount amount-->
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+        <input type="number" class="form-control" placeholder="Discount Amount" name="editProductDA"
+               ng-model="editProduct.discountAmount" ng-maxlength="50" min="0"
+               is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
+      </div>
+
 
     </div>
     <div class="col-xs-6">
@@ -109,6 +116,24 @@
                is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
       </div>
 
+      <!--Discount type-->
+      <div class="form-group">
+        <div uib-dropdown keyboard-nav="true" ng-show="editProduct.discountAmount > 0">
+
+          <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                  uib-dropdown-toggle aria-expanded="true" tabindex="32">
+            {{editProduct.discountType }} <b ng-hide="editProduct.discountType" style="color: rgba(76, 92, 111, 0.36)">Choose discount type</b>
+          </button>
+          <i class="icn-sm icn-caret-gray"></i>
+
+          <ul class="dropdown-menu dropdown-account-type">
+            <li ng-repeat="type in ['PERCENT', 'FIXED']" ng-click="editProduct.discountType = type">
+              <a href="javascript:void(0)"> {{ type }} </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
 
     </div>
     <div class="col-xs-12 qt-form-actions btn-bottom" style="margin-right: -5px;">
