@@ -109,6 +109,7 @@
               $scope.closeWindow();
             }
           });
+          unsubscribeClosingEvent();
         } else {
           $scope.triedToSaveProduct = true;
         }
@@ -195,7 +196,7 @@
         $scope.setOpenedTab(type);
       });
 
-      $scope.$on('createNewWindowClosing', createNewWindowClosing);
+      var unsubscribeClosingEvent = $scope.$on('createNewWindowClosing', createNewWindowClosing);
 
       function createNewWindowClosing() {
         var product = $scope.editProduct;

@@ -167,7 +167,8 @@
                 }
                 $rootScope.$broadcast('show-after-save-' + userId);
               });
-            })
+            });
+            unsubscribeClosingEvent();
           } else {
             $scope.triedToSave = true;
           }
@@ -235,7 +236,7 @@
           $scope.setOpenedTab(type);
         });
 
-        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+        var unsubscribeClosingEvent = $scope.$on('createNewWindowClosing', createNewWindowClosing);
 
         function createNewWindowClosing() {
           var user = $scope.editUser;

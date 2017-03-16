@@ -485,6 +485,7 @@
                 }
               }
             });
+            unsubscribeClosingEvent();
 
           } else {
             $scope.triedToSaveTicket = true;
@@ -664,7 +665,7 @@
         };
 
         $scope.$on('createNewEntity', archiveTicketState);
-        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+        var unsubscribeClosingEvent = $scope.$on('createNewWindowClosing', createNewWindowClosing);
 
         function createNewWindowClosing() {
           var ticket = $scope.ticket;

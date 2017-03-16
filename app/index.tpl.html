@@ -68,27 +68,6 @@
   <link rel='stylesheet' href='styles/new-style.css'/>
    <!-- endbuild -->
 
-  <script src="../configs.js"></script>
-
-  <!--<link rel="stylesheet" href="/bower_components/nanoscroller/bin/css/nanoscroller.css"/>-->
-
-  <!--<script type="text/javascript">-->
-  <!--if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {-->
-  <!--document.querySelector('[href*="styles/firefox."]').remove();-->
-  <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
-  <!--document.querySelector('[href*="styles/ie."]').remove();-->
-
-  <!--} else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);-->
-  <!--document.querySelector('[href*="styles/firefox."]').remove();-->
-  <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
-  <!--} else if (!(window.ActiveXObject || "ActiveXObject" in window)) {-->
-  <!--document.querySelector('[href*="styles/ie."]').remove();-->
-  <!--}-->
-  <!--</script>-->
-
-  <style type="text/css">
-  </style>
-
 </head>
 <body ng-app="quicktech" ng-class="{'left-panel-closed': isLeftPanelHidden, 'right-panel-closed': isRightPanelHidden}">
 
@@ -115,33 +94,6 @@
 <div feedback-form ng-if="applicationLoaded"></div>
 <div welcome-wizard ng-if="applicationLoaded && currentUser && currentUser.isOwner"></div>
 
-<!--&lt;!&ndash;[if lt IE 7]>-->
-<!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade-->
-<!--your browser</a> to improve your experience.</p>-->
-<!--<![endif]&ndash;&gt;-->
-<!--<div id="loading" class="alert-wrapper" user-notification>-->
-<!--<center class="animator stop">-->
-<!--<div class="alert alert-yellow" ng-bind="message">Loading ...</div>-->
-<!--</center>-->
-<!--</div>-->
-
-<!--<nav class="navbar navbar-default navbar-fixed-top navbar-main"-->
-<!--ng-include="'/html/scripts/core/header/header.tpl.html'">-->
-<!--</nav>-->
-<!--<div class="main-container ">-->
-<!--<div class="row">-->
-<!--<aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>-->
-<!--<aside id="rightPanelElement" class="right scroll-pane"-->
-<!--ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'" qt-scroll-pane></aside>-->
-<!--<div id="content" class="content-container">-->
-<!--<div class="content-wrapper">-->
-<!--<div ui-view></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
 <!-- build:js({.,app}) scripts/vendor.js -->
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
@@ -166,7 +118,6 @@
 <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="/bower_components/d3/d3.js"></script>
 <script src="/bower_components/ng-cropper/dist/ngCropper.all.js"></script>
-<!--<script src="/bower_components/quicktech-angularjs-services/rest-services.js"></script>-->
 <script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
 <script src="scripts/js/vendors/modernizr.js"></script>
 <script src="scripts/js/vendors/editor/jquery.hotkeys.js"></script>
