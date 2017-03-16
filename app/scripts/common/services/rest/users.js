@@ -565,7 +565,7 @@
           case 'email':
             dto.emailSettings = true;
             break;
-          case 'taxRates':
+          case 'taxes':
             dto.rates = true;
             break;
           case 'companyProfile':

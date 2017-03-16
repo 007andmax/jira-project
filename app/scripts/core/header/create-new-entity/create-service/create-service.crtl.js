@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.editServiceCtrl',
-    ['$scope', '$rootScope', 'ServicesService',
-      function ($scope, $rootScope, ServicesService) {
+    ['$scope', '$rootScope', 'ServicesService', 'TaxesService',
+      function ($scope, $rootScope, ServicesService, TaxesService) {
 
         var savedState = $scope.getLastSavedState('service');
 
@@ -18,10 +18,15 @@
           };
         }
 
+        TaxesService.getAll($scope, function (resp) {
+          $scope.taxes = resp;
+        });
+
         $scope.saveEditService = function (form) {
           if (form.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
+
             ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;
 

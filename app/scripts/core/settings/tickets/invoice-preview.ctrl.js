@@ -34,8 +34,6 @@
         sum: 1162.75,
         productsSum: 984,
         servicesSum: 137.5,
-        sumWithoutTaxRates: 1121.5,
-        hasTaxRates: false,
         termsAndConditions: $scope.invoiceConfig ? $scope.invoiceConfig.termsAndConditions : '',
         tickets: [{
           number: '0000',

@@ -24,7 +24,6 @@
       'quicktech.core.settings',
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
-      'quicktech.core.taxRates',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -204,10 +203,10 @@
           templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
           controller: 'quicktech.core.settings.emailCtrl'
         }))
-        .state('settings.taxRates', waitForServices({
-          url: '/taxRates',
-          templateUrl: '/html/scripts/core/settings/tax-rates/tax-rates.tpl.html',
-          controller: 'quicktech.core.settings.taxRatesCtrl'
+        .state('settings.taxes', waitForServices({
+          url: '/taxes',
+          templateUrl: '/html/scripts/core/settings/taxes/taxes.tpl.html',
+          controller: 'quicktech.core.settings.taxesCtrl'
         }))
         .state('settings.tickets', waitForServices({
           url: '/tickets',

@@ -4,12 +4,17 @@
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService) {
+      'TaxesService',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService) {
 
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
           $scope.closeWindow();
         }
+      });
+
+      TaxesService.getAll($scope, function (resp) {
+        $scope.taxes = resp;
       });
 
       ProductsService.getCategories($scope, function (resp) {
