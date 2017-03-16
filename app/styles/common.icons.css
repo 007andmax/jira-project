@@ -1267,6 +1267,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 .icn-remove-old{
   background-position: -696px 0px;
+  vertical-align: middle;
 }
 
 .company-profile-content .tab-content .pad-top{
