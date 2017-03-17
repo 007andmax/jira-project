@@ -18,6 +18,11 @@
             isDefault: true
           };
         }
+        $scope.discountAmountMsxLength;
+        $scope.discountTypes={
+          FIXED: "Fixed",
+          PERCENT: "Percent"
+        };
 
         $scope.saveEditService = function (form) {
           if (form.$valid) {
@@ -58,6 +63,22 @@
           }
 
           if (form.editServiceName && form.editServiceName.$error) {
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.required) {
+              return "Please select a Discount Amount!";
+            }
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.min) {
+              return "Discount amount mustn't be less then 0!";
+            }
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.max) {
+              return "Percent amount mustn't be greater then 100!";
+            }
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.pattern) {
+              return "Only numbers allowed in Discount Amount!";
+            }
 
             if (form.editServiceName.$error.maxlength) {
               return 'Service name exceeds maximum length.';
