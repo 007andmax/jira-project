@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService',
-      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService',
+      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService, TaxesService) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -17,6 +17,8 @@
             globalSearch.count = value || 0;
           });
         });
+
+        $scope.taxes = TaxesService.getAll();
 
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
@@ -185,6 +187,10 @@
             }
           }
         }, true);
+
+        $scope.saveTaxes = function (entity, entityType) {
+          TaxesService.linkWithEntity(entity.id, entityType, entity.taxes);
+        };
 
       }]);
 

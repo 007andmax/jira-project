@@ -6,9 +6,7 @@
     ['$scope', 'TaxesService',
       function ($scope, TaxesService) {
 
-        TaxesService.getAll($scope, function (resp) {
-          $scope.taxes = angular.copy(resp);
-        });
+        $scope.taxes = TaxesService.getAll();
 
         $scope.newTax = {
           name: '',

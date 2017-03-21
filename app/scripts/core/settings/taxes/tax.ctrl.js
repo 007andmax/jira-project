@@ -8,6 +8,7 @@
 
         $scope.editTax = function (form) {
           $scope.currentTax = {
+            id: $scope.tax.id,
             rate: $scope.tax.rate,
             name: $scope.tax.name
           };
@@ -17,13 +18,14 @@
 
         $scope.saveTax = function () {
           $scope.isEditing = false;
-          TaxesService.save($scope.tax);
+          TaxesService.save($scope.currentTax, function () {
+            $scope.currentTax = {};
+          });
         };
 
         $scope.cancelTax = function () {
           $scope.isEditing = false;
-          $scope.tax.rate = $scope.currentTax.rate;
-          $scope.tax.name = $scope.currentTax.name;
+          $scope.currentTax = {};
         };
 
         $scope.deleteTax = function () {

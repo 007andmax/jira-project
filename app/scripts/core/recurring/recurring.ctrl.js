@@ -4,17 +4,20 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
     ['$scope', 'RecurringService', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
-      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService, PermissionsService) {
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', 'TaxesService',
+      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService,
+                PermissionsService, TaxesService) {
 
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
+
+        $scope.taxes = TaxesService.getAll();
 
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
           $scope.$watch('companyData.addresses[0].address', function (address) {
             $scope.isCurrentCompanyAddressEmpty = !address;
           });
         });
-  
+
         $scope.parseDate = Date.parse.bind(Date);
 
         $scope.PermissionsService = PermissionsService;
@@ -101,6 +104,10 @@
 
         $scope.filterInvoicesByCompany = function (invoice) {
           return !headerSharedState.filter.companyId || invoice.company.id === headerSharedState.filter.companyId;
+        };
+
+        $scope.saveTaxes = function (entity, entityType) {
+          TaxesService.linkWithEntity(entity.id, entityType, entity.taxes);
         };
 
       }]);

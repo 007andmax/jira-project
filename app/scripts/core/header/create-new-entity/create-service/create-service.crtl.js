@@ -18,9 +18,7 @@
           };
         }
 
-        TaxesService.getAll($scope, function (resp) {
-          $scope.taxes = resp;
-        });
+        $scope.taxes = TaxesService.getAll();
 
         $scope.saveEditService = function (form) {
           if (form.$valid) {

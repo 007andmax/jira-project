@@ -7,16 +7,17 @@
     bindings: {
       taxes: '=',
       entity: '=',
+      entityType: '@?',
       onClose: '=?'
     },
     controller: selectTaxesCtrl
   });
 
-  selectTaxesCtrl.$inject = ['$scope'];
-  function selectTaxesCtrl($scope) {
+  function selectTaxesCtrl() {
     var $ctrl = this;
     this.updateEntityTaxList = updateEntityTaxList;
     this.getSelectedTaxNames = getSelectedTaxNames;
+    this.onDropdownToggle = onDropdownToggle;
 
     $ctrl.searchTax = '';
 
@@ -25,25 +26,6 @@
     } else {
       $ctrl.selectedTaxes = {};
       $ctrl.entity.taxes = $ctrl.entity.taxes || [];
-    }
-
-    $scope.$watchCollection(function () {
-      return $ctrl.taxes && $ctrl.taxes.map(function (tax) {
-          return tax.id;
-        }) || [];
-    }, filterEntityTaxes);
-
-    function filterEntityTaxes(newValue, oldValue) {
-      if (newValue !== oldValue && newValue.length < oldValue.length) {
-        var entityTaxes = $ctrl.entity.taxes;
-        for (var i = 0; i < entityTaxes.length; i++) {
-          var tax = entityTaxes[i];
-          if (newValue.indexOf(tax.id) === -1) {
-            entityTaxes.splice(i, 1);
-            i--;
-          }
-        }
-      }
     }
 
     function updateEntityTaxList(changedTax) {
@@ -62,7 +44,7 @@
       return $ctrl.taxes && $ctrl.taxes.filter(function (tax) {
           return $ctrl.selectedTaxes[tax.id];
         }).map(function (tax) {
-          return tax.name;
+          return tax.name + ' ' + tax.rate + '%';
         }).join(', ') || '';
     }
 
@@ -73,6 +55,12 @@
         selectedTaxes[tax.original.id] = true;
       }
       return selectedTaxes;
+    }
+
+    function onDropdownToggle(isOpen) {
+      if (!isOpen) {
+        $ctrl.onClose($ctrl.entity, $ctrl.entityType);
+      }
     }
   }
 

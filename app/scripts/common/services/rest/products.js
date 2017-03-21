@@ -139,6 +139,24 @@
               callback(Utils.customizeObj(data));
             }
 
+            var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
+              updateTaxes(originalTax, data.list, function (tax) {
+                tax.name = originalTax.name;
+                tax.rate = originalTax.rate;
+              })
+            });
+
+            var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
+              updateTaxes(originalTax, data.list, function (tax, taxList) {
+                taxList.splice(taxList.indexOf(tax), 1);
+              });
+            });
+
+            scope.$on('$destroy', function () {
+              unsubscribeUpdatedTaxEvent();
+              unsubscribeDeletedTaxEvent();
+            });
+
             RealTimeService.subscribe('/product', scope, function (newChange) {
 
               if (newChange.action == 'PRODUCT_SAVED') {
@@ -379,6 +397,24 @@
 
           data = resp.data;
 
+          var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
+            updateTaxes(originalTax, data, function (tax) {
+              tax.name = originalTax.name;
+              tax.rate = originalTax.rate;
+            })
+          });
+
+          var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
+            updateTaxes(originalTax, data, function (tax, taxList) {
+              taxList.splice(taxList.indexOf(tax), 1);
+            });
+          });
+
+          scope.$on('$destroy', function () {
+            unsubscribeUpdatedTaxEvent();
+            unsubscribeDeletedTaxEvent();
+          });
+
           if (callback) {
             callback(Utils.customizeObj(data));
           }
@@ -408,6 +444,22 @@
             callback(resp.data);
           }
         });
+      }
+
+      function updateTaxes(originalTax, entities, updateFunc) {
+        for (var i = 0; i < entities.length; i++) {
+          var product = entities[i];
+          var taxes = product.taxes;
+          if (taxes && taxes.length) {
+            for (var j = 0; j < taxes.length; j++) {
+              var tax = taxes[j];
+              if (tax.original && tax.original.id === originalTax.id) {
+                updateFunc(tax, taxes);
+                break;
+              }
+            }
+          }
+        }
       }
 
       return {

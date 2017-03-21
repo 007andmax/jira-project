@@ -25,4 +25,8 @@
     <span class="model">Qty {{ product.billableQuantity }}</span>
   </div>
 
+  <div>
+    <select-taxes taxes="taxes" entity="product" entity-type="product" on-close="saveTaxes"></select-taxes>
+  </div>
+
 </div>

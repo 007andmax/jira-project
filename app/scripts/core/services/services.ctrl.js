@@ -107,6 +107,12 @@
 
         };
 
+        $scope.getSelectedTaxNames = function(taxes) {
+          return taxes && taxes.map(function (tax) {
+              return tax.name + ' ' + tax.rate + '%';
+            }).join(', ') || '';
+        };
+
         function loadingFinished(list) {
           $scope.loadingInProgress[list] = false;
           if (!$scope.loadingInProgress.default && !$scope.loadingInProgress.companies) {

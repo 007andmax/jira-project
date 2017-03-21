@@ -106,7 +106,7 @@
                 </label>
               </div>
 
-              <input type="text" class="form-control" ng-model="tax.code" name="name" required placeholder="Name">
+              <input type="text" class="form-control" ng-model="currentTax.name" name="name" required placeholder="Name">
             </div>
 
             <div class="col-1" ng-class="{'has-error': isShowingErrors(editTaxForm, 'rate')}">
@@ -125,7 +125,7 @@
                 </label>
               </div>
 
-              <input type="number" class="form-control" ng-model="tax.rate" name="rate"
+              <input type="number" class="form-control" ng-model="currentTax.rate" name="rate"
                      required min="1" max="99">
             </div>
 

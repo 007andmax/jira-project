@@ -37,6 +37,9 @@
                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
 
       </div>
+      <div class="col-1">
+        <span class="sort-span">taxes</span>
+      </div>
       <div class="col-6">&nbsp;</div>
     </li>
 
@@ -71,6 +74,10 @@
 
         <div class="col-1">
           {{ product.manufacture}}
+        </div>
+
+        <div class="col-1">
+          {{ getSelectedTaxNames(product.taxes) }}
         </div>
 
         <div class="col-6 pull-right" uib-dropdown dropdown-append-to-body="true" keyboard-nav="true"

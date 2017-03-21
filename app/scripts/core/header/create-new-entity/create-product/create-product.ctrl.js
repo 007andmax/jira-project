@@ -13,9 +13,7 @@
         }
       });
 
-      TaxesService.getAll($scope, function (resp) {
-        $scope.taxes = resp;
-      });
+      $scope.taxes = TaxesService.getAll();
 
       ProductsService.getCategories($scope, function (resp) {
         $scope.categories = resp;

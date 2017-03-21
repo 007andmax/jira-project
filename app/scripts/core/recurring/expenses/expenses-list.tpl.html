@@ -14,6 +14,10 @@
 
       <div class="col-sm-2 pull-right">{{ service.sum | currency: '$': 2 }}</div>
 
+      <div stop-propagation="click">
+        <select-taxes taxes="taxes" entity="service" entity-type="service" on-close="saveTaxes"></select-taxes>
+      </div>
+
     </div>
 
   </div>
@@ -46,6 +50,10 @@
 
       <div class="col-sm-2">{{ product.price | currency: '$': 2 }}
         <span class="model">Qty {{ product.quantity }}</span>
+      </div>
+
+      <div stop-propagation="click">
+        <select-taxes taxes="taxes" entity="product" entity-type="product" on-close="saveTaxes"></select-taxes>
       </div>
 
     </div>

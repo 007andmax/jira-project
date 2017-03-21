@@ -8,25 +8,32 @@
 
   services.factory('TaxesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, Utils) {
 
-    function getAll($scope, callback) {
-      var taxes = [];
-      $http.get('/taxes').then(function (resp) {
-        taxes = taxes.concat(resp.data);
-        callback && callback(taxes);
-      });
+    var taxes = [],
+      $serviceScope = $rootScope.$new();
 
-      RealTimeService.subscribe('/taxes', $scope, function (newChange) {
-        var action = newChange.action;
-        if (action === 'TAX_CREATED') {
-          taxes.push(newChange.data);
-        } else if (action === 'TAX_UPDATED') {
-          var taxById = Utils.findById(taxes, newChange.data.id);
-          Utils.customizeObj(newChange.data, taxById);
-        } else if (action === 'TAX_DELETED') {
-          Utils.deleteById(taxes, newChange.data.id);
-        }
-        callback && callback(taxes);
-      });
+    $http.get('/taxes').then(function (resp) {
+      taxes = Utils.customizeArray(resp.data, taxes);
+    });
+
+    RealTimeService.subscribe('/taxes', $serviceScope, function (newChange) {
+      var action = newChange.action;
+      var taxById = Utils.findById(taxes, newChange.data.id);
+
+      if (action === 'TAX_CREATED') {
+        taxes.push(newChange.data);
+      } else if (action === 'TAX_UPDATED') {
+        Utils.customizeObj(newChange.data, taxById);
+      } else if (action === 'TAX_DELETED') {
+        Utils.deleteById(taxes, newChange.data.id);
+      }
+
+      //update or delete related taxes in products, services and expenses
+      $rootScope.$broadcast(action.toLowerCase() + '_original', taxById);
+    });
+
+    function getAll(callback) {
+      callback && callback(taxes);
+      return taxes;
     }
 
     function create(tax, callback) {
@@ -52,10 +59,20 @@
       Utils.handleCallback(future, callback);
     }
 
+    function linkWithEntity(entityId, entityType, entityTaxes, callback) {
+      var future = $http.post('/taxes/linkToExpense', {
+        expenseId: entityId,
+        expenseType: entityType.toUpperCase(),
+        taxes: entityTaxes
+      });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       getAll: getAll,
       save: save,
-      remove: remove
+      remove: remove,
+      linkWithEntity: linkWithEntity
     };
 
   }]);
