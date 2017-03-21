@@ -7,6 +7,8 @@
       'TaxesService',
     function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService) {
 
+      $scope.discountAmountMsxLength;
+
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
           $scope.closeWindow();
@@ -151,6 +153,21 @@
               return 'Please fill in the required field(s).';
             }
           }
+        }
+        if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.required) {
+          return "Please select a Discount Amount!";
+        }
+
+        if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.min) {
+          return "Discount amount mustn't be less then 0!";
+        }
+
+        if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.max) {
+          return "Percent amount mustn't be greater then 100!";
+        }
+
+        if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.pattern) {
+          return "Only numbers allowed in Discount Amount!";
         }
 
         if (form.editProductILC && form.editProductILC.$error && form.editProductILC.$error.unique) {

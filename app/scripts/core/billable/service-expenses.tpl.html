@@ -10,6 +10,10 @@
   <div class="col-3" trimmed-popover trimmed-popover-content="service.description">
     {{ service.description }}
   </div>
+  <!--DISOCUNT-->
+  <div ng-if="service.discount">
+    Discount: {{ service.discount}} <b ng-if="service.disocunt =='PERCENT' ">%</b>
+  </div>
 
   <div>
     <select-taxes taxes="taxes" entity="service" entity-type="service" on-close="saveTaxes"></select-taxes>

@@ -8,6 +8,7 @@
       function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService,
                 PermissionsService, TaxesService) {
 
+        $scope.discountAmountMsxLength;
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
 
         $scope.taxes = TaxesService.getAll();
@@ -43,6 +44,15 @@
             $scope.loadingInProgress = false;
           }
         });
+
+        $scope.addDiscountInRecurring = function (expenseId, discAmount, discType) {
+          console.log("execWhenOut");
+          console.log(expenseId, discAmount, discType)
+          if(expenseId, discAmount, discType) {
+            //code for service send
+
+          };
+        };
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
           $scope.last30DaysValue = 0;

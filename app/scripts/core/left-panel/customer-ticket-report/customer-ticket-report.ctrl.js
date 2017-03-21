@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.customerTicketReportCtrl',
-    ['$scope', 'CompaniesService', 'UsersService', '$rootScope', '$sce', '$filter', 'DiscountsService',
-      function ($scope, CompaniesService, UsersService, $rootScope, $sce, $filter, DiscountsService) {
+    ['$scope', 'CompaniesService', 'UsersService', '$rootScope', '$sce', '$filter',
+      function ($scope, CompaniesService, UsersService, $rootScope, $sce, $filter) {
         var renderFinished = {
           tickets: false,
           chart: false
@@ -13,7 +13,7 @@
         $scope.dateFormat = '%d %b';
         $scope.frequency = 'DAILY';
 
-        $scope.getAmount = DiscountsService.getAmount;
+
         $scope.getCompanyById = CompaniesService.getOneById;
         $scope.getUserById = UsersService.getOneById;
         $scope.getUserName = $rootScope.getUserName;
