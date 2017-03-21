@@ -52,6 +52,54 @@
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                  hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
         </div>
+        <!--DISCOUNT-->
+        <div>
+          <div >
+            <!--Discount amount-->
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
+              <input type="number"
+                     class="form-control"
+                     placeholder="Discount Amount"
+                     name="discountAmount"
+                     ng-model="editProduct.discountAmount"
+                     ng-max="discountAmountMsxLength"
+                     ng-min="0"
+                     hard-reset-pattern="pricePattern"
+                     ng-required="editProduct.discountType == 'PERCENT' || editProduct.discountType == 'FIXED'"
+                     ng-disabled="!editProduct.discountType">
+            </div>
+          </div>
+          <div >
+            <!--Discount type-->
+            <div class="form-group">
+              <div uib-dropdown keyboard-nav="true">
+
+                <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                        uib-dropdown-toggle aria-expanded="true"
+                        tabindex="32">
+                  {{discountTypes[editProduct.discountType]}} <b ng-hide="editProduct.discountType"
+                                                                    style="color: rgba(76, 92, 111, 0.36)">Choose
+                  Discount Type </b>
+                </button>
+                <i class="icn-sm icn-caret-gray"></i>
+
+                <ul class="dropdown-menu dropdown-account-type">
+                  <li ng-click="editProduct.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                    <a href="javascript:void(0)"> Percent</a>
+                  </li>
+                  <li ng-click="editProduct.discountType = 'FIXED'; discountAmountMsxLength = null">
+                    <a href="javascript:void(0)"> Fixed </a>
+                  </li>
+                  <li
+                    ng-click="editProduct.discountType = ''; discountAmountMsxLength = ''; editProduct.discountAmount = null">
+                    <a href="javascript:void(0)"> No Discount </a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
       </li>
     </ul>

@@ -24,5 +24,11 @@
   <div class="col-sm-2">{{ product.price | currency: '$': 2 }}
     <span class="model">Qty {{ product.billableQuantity }}</span>
   </div>
+  <!--DISCOUNT-->
+  <div ng-if="product.discount">
+    Discount: {{ product.discount}} <b ng-if="product.disocunt =='PERCENT' ">%</b>
+  </div>
+
+
 
 </div>

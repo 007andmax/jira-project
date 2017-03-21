@@ -13,6 +13,10 @@
       <div class="col-sm-2">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
 
       <div class="col-sm-2 pull-right">{{ service.sum | currency: '$': 2 }}</div>
+      <!--Discount-->
+      <div ng-if="service.discount">
+        Discount: {{ service.discount}} <b ng-if="service.disocunt =='PERCENT' ">%</b>
+      </div>
 
     </div>
 
@@ -48,7 +52,67 @@
         <span class="model">Qty {{ product.quantity }}</span>
       </div>
 
+      <!--Discount-->
+      <div ng-if="product.discount">
+        Discount: {{product.discount}} <b ng-if="product.disocunt =='PERCENT' ">%</b>
+      </div>
+      <div>
+        <form name="billableEditDiscountForm"
+              stop-propagation="click">
+          <!--DISCOUNTS-->
+          <!--Discount amount-->
+          <div class="form-group">
+            <input type="number"
+                   class="form-control"
+                   placeholder="Discount Amount"
+                   name="discountAmount"
+                   ng-model="product.discountAmount"
+                   ng-max="discountAmountMsxLength"
+                   ng-min="0"
+                   ng-pattern="decimalNumberPattern"
+                   ng-required="product.discountType == 'PERCENT' || product.discountType == 'FIXED'"
+                   ng-disabled="!product.discountType"
+                   execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType)">
+          </div>
+          <div>
+            <!--Discount type-->
+            <div class="form-group">
+              <div uib-dropdown keyboard-nav="true" dropdown-append-to-body="true">
+
+                <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                        uib-dropdown-toggle aria-expanded="true"
+                        tabindex="32"
+                        execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType)">
+                  {{discountTypes[product.discountType]}}
+                  <b ng-hide="product.discountType" style="color: rgba(76, 92, 111, 0.36)">
+                    Choose Discount Type
+                  </b>
+                </button>
+                <i class="icn-sm icn-caret-gray"></i>
+
+                <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
+                  <li ng-click="product.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                    <a href="javascript:void(0)"> Percent</a>
+                  </li>
+                  <li ng-click="product.discountType = 'FIXED'; discountAmountMsxLength = null">
+                    <a href="javascript:void(0)"> Fixed </a>
+                  </li>
+                  <li
+                    ng-click="product.discountType = ''; discountAmountMsxLength = ''; product.discountAmount = null">
+                    <a href="javascript:void(0)"> No Discount </a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
     </div>
 
   </div>
 </div>
+
+

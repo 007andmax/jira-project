@@ -18,7 +18,6 @@
       'quicktech.core.recurring',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
-      'quicktech.core.discount',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
@@ -144,11 +143,6 @@
           url: '/accounting/receipt-archive/:mode',
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
-        }))
-        .state('discount', waitForServices({
-          url: '/accounting/discount',
-          templateUrl: '/html/scripts/core/discount/discount.tpl.html',
-          controller: 'quicktech.core.discount.discountCtrl'
         }))
         .state('settings', waitForServices({
           url: '/settings',
@@ -597,6 +591,12 @@
         $rootScope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $rootScope.urlPattern = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
         $rootScope.ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+        $rootScope.discountTypes = {
+          FIXED: "Fixed",
+          PERCENT: "Percent"
+        };
+
 
         $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
 

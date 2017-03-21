@@ -6,11 +6,11 @@
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-        'quicktech.common.services.TicketsPermissionsService', 'DevicesService', 'DiscountsService',
+        'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
         'quicktech.common.services.RemoteAccessService', 'ServicesService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, DiscountsService, RemoteAccessService, ServicesService) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
@@ -22,7 +22,6 @@
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
-          $scope.getDiscountAmount = DiscountsService.getAmount;
 
           var params = $state.params.remoteParams;
           var isFromRemote = params && (params.deviceId || params.companyId || params.connectionDuration);
@@ -116,10 +115,6 @@
                   return agent.id === $scope.ticketDetails.agent.deviceId;
                 });
               }
-            });
-
-            DiscountsService.getAll($scope, function (resp) {
-              $scope.discounts = resp;
             });
 
             $timeout(function () {

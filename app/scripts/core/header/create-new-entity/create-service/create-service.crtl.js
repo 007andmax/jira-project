@@ -19,11 +19,6 @@
           };
         }
         $scope.discountAmountMsxLength;
-        $scope.discountTypes={
-          FIXED: "Fixed",
-          PERCENT: "Percent"
-        };
-
         $scope.saveEditService = function (form) {
           if (form.$valid) {
             $scope.disabledSaveButton = true;

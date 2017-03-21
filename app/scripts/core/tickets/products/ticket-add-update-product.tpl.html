@@ -53,6 +53,55 @@
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
         </div>
 
+        <!--DISCOUNTS-->
+        <div>
+          <div >
+            <!--Discount amount-->
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
+              <input type="number"
+                     class="form-control"
+                     placeholder="Discount Amount"
+                     name="discountAmount"
+                     ng-model="productExpense.discountAmount"
+                     ng-max="discountAmountMsxLength"
+                     ng-min="0"
+                     hard-reset-pattern="pricePattern"
+                     ng-required="productExpense.discountType == 'PERCENT' || productExpense.discountType == 'FIXED'"
+                     ng-disabled="!productExpense.discountType">
+            </div>
+          </div>
+          <div >
+            <!--Discount type-->
+            <div class="form-group">
+              <div uib-dropdown keyboard-nav="true">
+
+                <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                        uib-dropdown-toggle aria-expanded="true"
+                        tabindex="32">
+                  {{discountTypes[productExpense.discountType]}} <b ng-hide="productExpense.discountType"
+                                                                    style="color: rgba(76, 92, 111, 0.36)">Choose
+                  Discount Type </b>
+                </button>
+                <i class="icn-sm icn-caret-gray"></i>
+
+                <ul class="dropdown-menu dropdown-account-type">
+                  <li ng-click="productExpense.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                    <a href="javascript:void(0)"> Percent</a>
+                  </li>
+                  <li ng-click="productExpense.discountType = 'FIXED'; discountAmountMsxLength = null">
+                    <a href="javascript:void(0)"> Fixed </a>
+                  </li>
+                  <li
+                    ng-click="productExpense.discountType = ''; discountAmountMsxLength = ''; productExpense.discountAmount = null">
+                    <a href="javascript:void(0)"> No Discount </a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
           <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
                ng-click="removeProduct()">

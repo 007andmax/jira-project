@@ -67,7 +67,6 @@
               taxable: true
             },
             billable: true,
-            discountSum: 0,
             price: 450,
             editedExpense: false,
             serviceExpense: false
@@ -87,7 +86,6 @@
             },
             serialNumber: 'serial_number',
             billable: true,
-            discountSum: 0,
             price: 84,
             editedExpense: false,
             serviceExpense: false
@@ -115,7 +113,6 @@
           }],
           productsSum: 984,
           servicesSum: 137.5,
-          discountSum: 0,
           totalSum: 1121.5
         }]
       };

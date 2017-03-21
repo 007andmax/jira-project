@@ -7,6 +7,7 @@
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
       function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService, PermissionsService) {
 
+        $scope.discountAmountMsxLength;
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
 
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
@@ -14,7 +15,7 @@
             $scope.isCurrentCompanyAddressEmpty = !address;
           });
         });
-  
+
         $scope.parseDate = Date.parse.bind(Date);
 
         $scope.PermissionsService = PermissionsService;
@@ -40,6 +41,15 @@
             $scope.loadingInProgress = false;
           }
         });
+
+        $scope.addDiscountInRecurring = function (expenseId, discAmount, discType) {
+          console.log("execWhenOut");
+          console.log(expenseId, discAmount, discType)
+          if(expenseId, discAmount, discType) {
+            //code for service send
+
+          };
+        };
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
           $scope.last30DaysValue = 0;

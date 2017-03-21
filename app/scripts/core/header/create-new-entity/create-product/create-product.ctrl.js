@@ -7,10 +7,6 @@
     function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService) {
 
       $scope.discountAmountMsxLength;
-      $scope.discountTypes={
-        FIXED: "Fixed",
-        PERCENT: "Percent"
-      };
 
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
