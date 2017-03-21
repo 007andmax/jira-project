@@ -81,19 +81,7 @@
                is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       </div>
 
-      <!--Discount amount-->
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'discountAmount')}">
-        <input type="number"
-               class="form-control"
-               placeholder="Discount Amount"
-               name="discountAmount"
-               ng-model="editProduct.discountAmount"
-               ng-max="discountAmountMsxLength"
-               ng-min="0"
-               ng-pattern="decimalNumberPattern"
-               ng-required="editProduct.discountType == 'PERCENT' || editProduct.discountType == 'FIXED'"
-               ng-disabled="!editProduct.discountType">
-      </div>
+
 
     </div>
     <div class="col-xs-6">
@@ -123,7 +111,29 @@
                is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
       </div>
 
+
+
+    </div>
+
+
+
+    <!--Discount amount-->
+    <div class="col-xs-4">
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'discountAmount')}">
+        <input type="number"
+               class="form-control"
+               placeholder="Discount Amount"
+               name="discountAmount"
+               ng-model="editProduct.discountAmount"
+               ng-max="discountAmountMsxLength"
+               ng-min="0"
+               ng-pattern="decimalNumberPattern"
+               ng-required="editProduct.discountType == 'PERCENT' || editProduct.discountType == 'FIXED'"
+               ng-disabled="!editProduct.discountType">
+      </div>
+    </div>
       <!--Discount type-->
+    <div class="col-xs-2">
       <div class="form-group">
         <div uib-dropdown keyboard-nav="true">
 
@@ -131,12 +141,11 @@
                   uib-dropdown-toggle aria-expanded="true"
                   tabindex="32">
             {{discountTypes[editProduct.discountType]}} <b ng-hide="editProduct.discountType"
-                                                           style="color: rgba(76, 92, 111, 0.36)">Choose
-            Discount Type </b>
+                                                           style="color: rgba(76, 92, 111, 0.36)">Type</b>
           </button>
           <i class="icn-sm icn-caret-gray"></i>
 
-          <ul class="dropdown-menu dropdown-account-type">
+          <ul class="dropdown-menu dropdown-account-type" style="margin-top: 0;">
             <li ng-click="editProduct.discountType = 'PERCENT'; discountAmountMsxLength = 100">
               <a href="javascript:void(0)"> Percent</a>
             </li>
@@ -153,9 +162,16 @@
       </div>
 
     </div>
+
+
+
     <div class="col-xs-6">
       <select-taxes taxes="taxes" entity="editProduct"></select-taxes>
     </div>
+
+
+
+
     <div class="col-xs-12 qt-form-actions btn-bottom" style="margin-right: -5px;">
 
       <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
@@ -167,6 +183,7 @@
       </button-with-loading-indicator>
 
     </div>
+
 
   </div>
 </div>

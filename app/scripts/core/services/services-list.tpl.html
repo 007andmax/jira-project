@@ -14,7 +14,7 @@
       <span class="sort-span">Is Billable<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
     </div>
-    <div class="col-1">
+    <div class="col-4">
       <span class="sort-span">taxes</span>
     </div>
   </li>
@@ -34,9 +34,6 @@
         {{ service.rate | currency: '$': 2 }}
       </div>
 
-      <div class="col-1">
-        {{ getSelectedTaxNames(service.taxes) }}
-      </div>
 
       <div class="col-5 is-billable">
         <label class="control checkbox pull-left" style="margin-top: 4px;left:25px">
@@ -47,7 +44,11 @@
         </label>
       </div>
 
-      <div class="col-4" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+      <div class="col-4">
+        {{ getSelectedTaxNames(service.taxes) }}
+      </div>
+
+      <div class="col-5" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
            ng-click="deleteService()"

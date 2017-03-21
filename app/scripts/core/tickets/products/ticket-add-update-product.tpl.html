@@ -54,8 +54,7 @@
         </div>
 
         <!--DISCOUNTS-->
-        <div>
-          <div >
+          <div class="col-3" style="width: 170px; float: left;">
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
               <input type="number"
@@ -70,7 +69,7 @@
                      ng-disabled="!productExpense.discountType">
             </div>
           </div>
-          <div >
+          <div class="col-4" style="width: 100px; float: left;">
             <!--Discount type-->
             <div class="form-group">
               <div uib-dropdown keyboard-nav="true">
@@ -79,8 +78,7 @@
                         uib-dropdown-toggle aria-expanded="true"
                         tabindex="32">
                   {{discountTypes[productExpense.discountType]}} <b ng-hide="productExpense.discountType"
-                                                                    style="color: rgba(76, 92, 111, 0.36)">Choose
-                  Discount Type </b>
+                                                                    style="color: rgba(76, 92, 111, 0.36)">Type </b>
                 </button>
                 <i class="icn-sm icn-caret-gray"></i>
 
@@ -100,7 +98,6 @@
               </div>
             </div>
           </div>
-        </div>
 
         <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
           <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
