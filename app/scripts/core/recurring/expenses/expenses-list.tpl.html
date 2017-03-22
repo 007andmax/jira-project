@@ -1,6 +1,5 @@
 <div>
   <div class="table-wrapper clearfix" ng-repeat="service in invoice.services | orderBy: 'sum' track by service.id">
-
     <div class="table-content pull-left">
       <i class="icn icn-sm icn-update-service"></i>
 
@@ -13,10 +12,57 @@
       <div class="col-sm-2">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
 
       <div class="col-sm-2 pull-right">{{ service.sum | currency: '$': 2 }}</div>
-      <!--Discount-->
-      <div ng-if="service.discount">
-        Discount: {{ service.discount}} <b ng-if="service.disocunt =='PERCENT' ">%</b>
-      </div>
+
+      <form name="billableEditDiscountForm"
+            stop-propagation="click">
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Discount Amount"
+                 name="discountAmount"
+                 ng-model="service.discountAmount"
+                 ng-max="discountAmountMsxLength"
+                 ng-min="0"
+                 ng-required="service.discountType == 'PERCENT' || service.discountType == 'FIXED'"
+                 ng-disabled="!service.discountType"
+                 execute-when-outfocused="addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false)"
+                 qt-to-fixed="2"
+                 hard-reset-pattern="decimalNumberPattern">
+        </div>
+        <div>
+          <!--Discount type-->
+          <div class="form-group">
+            <div uib-dropdown keyboard-nav="true" dropdown-append-to-body="true">
+
+              <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                      uib-dropdown-toggle aria-expanded="true"
+                      tabindex="32">
+                {{discountTypes[service.discountType]}}
+                <b ng-hide="service.discountType" style="color: rgba(76, 92, 111, 0.36)">
+                  Choose Discount Type
+                </b>
+              </button>
+              <i class="icn-sm icn-caret-gray"></i>
+
+              <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
+                <li
+                  ng-click="service.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false)">
+                  <a href="javascript:void(0)"> Percent</a>
+                </li>
+                <li
+                  ng-click="service.discountType = 'FIXED'; discountAmountMsxLength = null; addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false)">
+                  <a href="javascript:void(0)"> Fixed </a>
+                </li>
+                <li
+                  ng-click="service.discountType = ''; discountAmountMsxLength = ''; service.discountAmount = null; addDiscountInRecurring(service.id, service.discountAmount, service.discountType, true)">
+                  <a href="javascript:void(0)"> No Discount </a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </form>
 
       <div stop-propagation="click">
         <select-taxes taxes="taxes" entity="service" entity-type="service" on-close="saveTaxes"></select-taxes>
@@ -60,27 +106,22 @@
         <select-taxes taxes="taxes" entity="product" entity-type="product" on-close="saveTaxes"></select-taxes>
       </div>
 
-      <!--Discount-->
-      <div ng-if="product.discount">
-        Discount: {{product.discount}} <b ng-if="product.disocunt =='PERCENT' ">%</b>
-      </div>
       <div>
-        <form name="billableEditDiscountForm"
+        <form name="reccuringEditDiscountForm"
               stop-propagation="click">
-          <!--DISCOUNTS-->
-          <!--Discount amount-->
           <div class="form-group">
-            <input type="number"
+            <input type="text"
                    class="form-control"
                    placeholder="Discount Amount"
                    name="discountAmount"
                    ng-model="product.discountAmount"
                    ng-max="discountAmountMsxLength"
                    ng-min="0"
-                   ng-pattern="decimalNumberPattern"
                    ng-required="product.discountType == 'PERCENT' || product.discountType == 'FIXED'"
                    ng-disabled="!product.discountType"
-                   execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType)">
+                   execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false)"
+                   qt-to-fixed="2"
+                   hard-reset-pattern="decimalNumberPattern">
           </div>
           <div>
             <!--Discount type-->
@@ -89,8 +130,7 @@
 
                 <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
                         uib-dropdown-toggle aria-expanded="true"
-                        tabindex="32"
-                        execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType)">
+                        tabindex="32">
                   {{discountTypes[product.discountType]}}
                   <b ng-hide="product.discountType" style="color: rgba(76, 92, 111, 0.36)">
                     Choose Discount Type
@@ -99,14 +139,16 @@
                 <i class="icn-sm icn-caret-gray"></i>
 
                 <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
-                  <li ng-click="product.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                  <li
+                    ng-click="product.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false)">
                     <a href="javascript:void(0)"> Percent</a>
                   </li>
-                  <li ng-click="product.discountType = 'FIXED'; discountAmountMsxLength = null">
+                  <li
+                    ng-click="product.discountType = 'FIXED'; discountAmountMsxLength = null; addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false)">
                     <a href="javascript:void(0)"> Fixed </a>
                   </li>
                   <li
-                    ng-click="product.discountType = ''; discountAmountMsxLength = ''; product.discountAmount = null">
+                    ng-click="product.discountType = ''; discountAmountMsxLength = ''; product.discountAmount = null; addDiscountInRecurring(product.id, product.discountAmount, product.discountType, true)">
                     <a href="javascript:void(0)"> No Discount </a>
                   </li>
                 </ul>

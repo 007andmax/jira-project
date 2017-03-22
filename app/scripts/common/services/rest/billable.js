@@ -189,6 +189,16 @@
         return info;
       }
 
+      function saveBillableDiscount(dataWithDiscount, callback) {
+        var sentDiscount = $http({
+          url: '/billable/changeDiscount',
+          method: 'POST',
+          data: dataWithDiscount
+        });
+
+        Utils.handleCallback(sentDiscount, callback);
+      }
+
       function createInvoice(lockId, isSend, contact, address, callback) {
         if (!lockId) {
           throw 'lockId is required!'
@@ -311,7 +321,8 @@
         unlockTicketIds: unlockTicketIds,
         getExistTimeByLockId: getExistTimeByLockId,
         lockTicketsByCompany: lockTicketsByCompany,
-        getBillablePageDto: getBillablePageDto
+        getBillablePageDto: getBillablePageDto,
+        saveBillableDiscount: saveBillableDiscount
       }
 
     }]);

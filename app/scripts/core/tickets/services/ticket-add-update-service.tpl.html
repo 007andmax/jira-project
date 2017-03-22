@@ -36,6 +36,56 @@
           </div>
         </div>
       </div>
+      <!--DISCOUNTS-->
+      <div>
+        <div >
+          <!--Discount amount-->
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Discount Amount"
+                   name="discountAmount"
+                   ng-model="serviceExpense.discountAmount"
+                   ng-max="discountAmountMsxLength"
+                   ng-min="0"
+                   hard-reset-pattern="pricePattern"
+                   ng-required="serviceExpense.discountType == 'PERCENT' || serviceExpense.discountType == 'FIXED'"
+                   ng-disabled="!serviceExpense.discountType"
+                   qt-to-fixed="2">
+          </div>
+        </div>
+        <div >
+          <!--Discount type-->
+          <div class="form-group">
+            <div uib-dropdown keyboard-nav="true">
+
+              <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                      uib-dropdown-toggle aria-expanded="true"
+                      tabindex="32">
+                {{discountTypes[serviceExpense.discountType]}} <b ng-hide="serviceExpense.discountType"
+                                                                  style="color: rgba(76, 92, 111, 0.36)">Choose
+                Discount Type </b>
+              </button>
+              <i class="icn-sm icn-caret-gray"></i>
+
+              <ul class="dropdown-menu dropdown-account-type">
+                <li ng-click="serviceExpense.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                  <a href="javascript:void(0)"> Percent</a>
+                </li>
+                <li ng-click="serviceExpense.discountType = 'FIXED'; discountAmountMsxLength = null">
+                  <a href="javascript:void(0)"> Fixed </a>
+                </li>
+                <li
+                  ng-click="serviceExpense.discountType = ''; discountAmountMsxLength = ''; serviceExpense.discountAmount = null">
+                  <a href="javascript:void(0)"> No Discount </a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div style="width: 100px">
         <div class="col-5" ng-if="ticketUpdate.services.length > 1" style="float: left;">
               <span class="btn-icn btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"

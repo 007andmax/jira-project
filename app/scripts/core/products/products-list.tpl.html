@@ -7,9 +7,14 @@
                                               ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'description'}"></i></span>
 
       </div>
-      <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+      <div class="col-3" ng-click="setOrderForProducts('cost')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
         <span class="sort-span">cost<i class="icn-sm sort-icon icn-sort"
                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('discountAmount')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'discountAmount'}"></i></span>
 
       </div>
       <div class="col-4" ng-click="setOrderForProducts('sale')">
@@ -56,8 +61,12 @@
              trimmed-tooltip-checker="product.description">
         </div>
 
-        <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <div class="col-3" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
           {{ product.cost | currency: '$': 2 }}
+        </div>
+
+        <div class="col-1" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+          <b ng-if="product.discountType =='FIXED' ">$</b> {{product.discountAmount | currency: '': 2 }} <b ng-if="product.discountType =='PERCENT' ">%</b>
         </div>
 
         <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>

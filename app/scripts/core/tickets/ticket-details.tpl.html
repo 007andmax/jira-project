@@ -505,6 +505,10 @@
                            >P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>
+                  <!--Discount-->
+                  <div  ng-if="product.discountAmount>0">
+                    Discount: <b ng-if="product.discountType =='FIXED' ">$</b>{{product.discountAmount | currency : '': 2 }}<b ng-if="product.discountType =='PERCENT' ">%</b>
+                  </div>
                   <div class="col-3" ng-if="product.serialNumber" uib-tooltip="{{ product.serialNumber }}"
                        trimmed-tooltip-checker="product.serialNumber">
                   </div>
@@ -516,6 +520,8 @@
                        uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
                        trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
                   </div>
+
+
                   <div class="col-4" >
                     <span uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
                           trimmed-tooltip-checker="product.item.sale | currency:'$':2">
@@ -545,6 +551,9 @@
                   </div>
                   <div class="col-3 service-descr">
                     {{ service.description ? service.description : '&nbsp;' }}
+                  </div>
+                  <div  ng-if="service.discountAmount>0">
+                    Discount: <b ng-if="service.discountType =='FIXED' ">$</b>{{service.discountAmount | currency : '': 2 }}<b ng-if="service.discountType =='PERCENT' ">%</b>
                   </div>
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"

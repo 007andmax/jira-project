@@ -45,13 +45,29 @@
           }
         });
 
-        $scope.addDiscountInRecurring = function (expenseId, discAmount, discType) {
-          console.log("execWhenOut");
-          console.log(expenseId, discAmount, discType)
-          if(expenseId, discAmount, discType) {
-            //code for service send
+        $scope.addDiscountInRecurring = function (expenseId, discountAmount, discountType, isDelete) {
+          var data = {};
+          if(expenseId && discountAmount > 0 && discountType) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: discountAmount,
+              discountType: discountType
+            };
+            RecurringService.saveRecurringDiscount(data, function(resp){
+              console.log(resp)
+            })
+          }
+          if(isDelete) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: null,
+              discountType: null
+            };
+            RecurringService.saveRecurringDiscount(data, function(resp){
+              console.log(resp)
+            })
+          }
 
-          };
         };
 
         $scope.loadingFinished = function () {
