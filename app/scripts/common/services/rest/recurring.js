@@ -138,6 +138,17 @@
 
     }
 
+    function saveRecurringDiscount(dataWithDiscount, callback) {
+      var sentDiscount = $http({
+        url: '/billable/changeDiscount',
+        method: 'POST',
+        data: dataWithDiscount
+      });
+
+      Utils.handleCallback(sentDiscount, callback);
+    }
+
+
     function saveRecurringOrder(order, callback) {
       if (!order) {
         throw 'order must be!';
@@ -425,7 +436,8 @@
       deleteServiceExpenseFromRecInv: deleteServiceExpenseFromRecInv,
       search: search,
       addCompany: addCompany,
-      forceCreate: forceCreate
+      forceCreate: forceCreate,
+      saveRecurringDiscount: saveRecurringDiscount
     }
   }]);
 

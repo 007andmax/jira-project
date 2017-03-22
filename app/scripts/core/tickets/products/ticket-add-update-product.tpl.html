@@ -58,7 +58,7 @@
           <div >
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
-              <input type="number"
+              <input type="text"
                      class="form-control"
                      placeholder="Discount Amount"
                      name="discountAmount"
@@ -67,7 +67,8 @@
                      ng-min="0"
                      hard-reset-pattern="pricePattern"
                      ng-required="productExpense.discountType == 'PERCENT' || productExpense.discountType == 'FIXED'"
-                     ng-disabled="!productExpense.discountType">
+                     ng-disabled="!productExpense.discountType"
+                     qt-to-fixed="2">
             </div>
           </div>
           <div >

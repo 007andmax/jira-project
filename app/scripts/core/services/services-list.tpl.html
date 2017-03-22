@@ -7,6 +7,12 @@
 
     </div>
 
+    <div class="col-2" ng-click="setOrderForServices('discountAmount')">
+      <span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"
+                                         ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'discountAmount'}"></i></span>
+
+    </div>
+
     <div class="col-2" ng-click="setOrderForServices('rate')">
       <span class="sort-span">Per Hour<i class="icn-sm sort-icon icn-sort"
                                          ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i></span>
@@ -28,6 +34,10 @@
 
       <div class="col-1">
         <div>{{ service.name }}</div>
+      </div>
+
+      <div class="col-2">
+        <b ng-if="service.discountType =='FIXED' ">$</b> {{service.discountAmount | currency: '': 2 }} <b ng-if="service.discountType =='PERCENT' ">%</b>
       </div>
 
       <div class="col-2">

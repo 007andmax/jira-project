@@ -80,6 +80,31 @@
           }
         });
 
+        $scope.addDiscountInBillable = function (expenseId, discountAmount, discountType, isDelete) {
+          var data = {};
+          if(expenseId && discountAmount > 0 && discountType) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: discountAmount,
+              discountType: discountType
+            };
+            BillableService.saveBillableDiscount(data, function(resp){
+              console.log(resp)
+            })
+          };
+          if(isDelete) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: null,
+              discountType: null
+            };
+            BillableService.saveBillableDiscount(data, function(resp){
+              console.log(resp)
+            })
+          };
+
+        };
+
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
         };

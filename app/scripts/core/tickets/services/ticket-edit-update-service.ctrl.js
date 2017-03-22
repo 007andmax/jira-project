@@ -22,8 +22,10 @@
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
               var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
               var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
+              var isDescountAmountChange = $scope.service.discountAmount != $scope.editService.discountAmount;
+              var isDiscountTypeChange = $scope.service.discountType != $scope.editService.discountType;
 
-              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange)) {
+              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange || isDescountAmountChange || isDiscountTypeChange)) {
                 $scope.setEditExpenseId();
                 return;
               }
@@ -41,7 +43,9 @@
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: $scope.editService.description,
                   quantity: $scope.editService.quantity / 60,
-                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate())
+                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                  discountAmount: $scope.editService.discountAmount,
+                  discountType: $scope.editService.discountType
 
                 }
               }, function () {
