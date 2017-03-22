@@ -150,16 +150,16 @@
   text-align: left;
   height: 30px;
 }
-@media (max-width: 1366px){
-  .receivable-content .qt-list li.list-heading .col-sm-2-1{
+
+@media (max-width: 1366px) {
+  .receivable-content .qt-list li.list-heading .col-sm-2-1 {
     width: 125px;
   }
-  .receivable-content .qt-list li .col-sm-2-1{
+
+  .receivable-content .qt-list li .col-sm-2-1 {
     width: 125px;
   }
 }
-
-
 
 .password-manager-wrapper .pass-list li.list-heading > [class*='col-'] {
   height: auto;
@@ -289,7 +289,8 @@
 .qt-list.qt-users > li > [class*='col-']:first-child {
   padding-left: 0px;
 }
-.qt-receivable-number.qt-list .col-sm-1-1{
+
+.qt-receivable-number.qt-list .col-sm-1-1 {
   width: 100px;
 }
 
@@ -2470,7 +2471,7 @@ Devices tab
 }
 
 .qt-product-list > li > .col-2 {
-  width: calc(100% - 1105px);
+  width: calc(100% - 1155px);
 
   text-align: left;
 
@@ -2581,7 +2582,7 @@ Devices tab
   }
 
   .with-category .qt-product-list > li > .col-2 {
-    width: calc(100% - 760px);
+    width: calc(100% - 800px);
   }
 
   .qt-product-list > li > .col-3 {
@@ -2614,7 +2615,11 @@ Devices tab
     width: 105px;
   }
 }
-
+@media only screen and (max-width: 1366px){
+  .qt-product-list > li > .col-4{
+    width: 100px;
+  }
+}
 .clickable-layer {
   height: 100%;
   max-height: 67px;
@@ -2828,7 +2833,7 @@ Devices tab
 }
 
 .qt-default-services > li > .col-1 {
-  width: calc(100% - 277px);
+  width: calc(100% - 450px);
 }
 
 .qt-default-services > li > .col-2 {
@@ -2946,6 +2951,7 @@ Devices tab
 
   width: calc(100% - 127px);
   padding-right: 5px;
+  margin-bottom: 20px;
 }
 
 .service-form-wrapper .col-2 {
@@ -2953,6 +2959,7 @@ Devices tab
 
   width: 127px;
   padding: 0 5px;
+  margin-bottom: 20px;
 }
 
 .service-form-wrapper .col-3 {
@@ -2986,6 +2993,10 @@ Devices tab
 .add-service-btn-wrapper .btn {
   float: right;
   margin-right: 20px;
+}
+.add-service-btn-wrapper .btn .icn-sm {
+  width: 12px;
+  height: 12px;
 }
 
 .all-companies-heading {
@@ -3063,7 +3074,7 @@ Devices tab
 }
 
 .qt-services-list > li > .col-1 {
-  width: calc(100% - 277px);
+  width: calc(100% - 433px);
 }
 
 .qt-services-list > li > .col-5 {
@@ -3093,9 +3104,9 @@ Devices tab
     width: calc(100% - 449px);
   }
 
-  .qt-services-list > li > .col-2 {
-    width: 263px;
-  }
+  /*.qt-services-list > li > .col-2 {*/
+    /*width: 263px;*/
+  /*}*/
 }
 
 .qt-services-list > li > .col-4 > .hit-area {
@@ -4029,16 +4040,16 @@ Devices tab
   padding: 0 30px;
 }
 
-.modal-receive-payment textarea.form-control{
+.modal-receive-payment textarea.form-control {
   height: 70px;
   padding-top: 10px;
 }
 
-.qt-list.invoice-list-heading li.list-heading{
+.qt-list.invoice-list-heading li.list-heading {
   padding: 15px 0;
 }
 
-.qt-list.invoice-list-heading li.list-heading > .col-3{
+.qt-list.invoice-list-heading li.list-heading > .col-3 {
   text-align: right;
 }
 

@@ -5,7 +5,7 @@
     professional fees. These default services can be assigned to any or all customers. You can modify the service rate
     per customer once you have assigned the service to them. If you bill for this service then check the billable box,
     if you only want to track the time this service is used then uncheck the billable box.</p>
-  <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+  <div class="col-1"  ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
     <input type="text" class="form-control" placeholder="Service Name"
            ng-model="editService.name"
@@ -31,7 +31,7 @@
 
   <!--DISCOUNTS-->
   <div>
-    <div class="col-1">
+    <div class="col-1" style="width: calc(100% - 448px);">
       <!--Discount amount-->
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editServiceForm, 'discountAmount')}">
         <input type="number"
@@ -55,8 +55,7 @@
                   uib-dropdown-toggle aria-expanded="true"
                   tabindex="32">
             {{discountTypes[editService.discountType]}} <b ng-hide="editService.discountType"
-                                                           style="color: rgba(76, 92, 111, 0.36)">Choose
-            Discount Type </b>
+                                                           style="color: rgba(76, 92, 111, 0.36)">Type</b>
           </button>
           <i class="icn-sm icn-caret-gray"></i>
 
@@ -76,11 +75,12 @@
         </div>
       </div>
     </div>
+    <div class="col-3">
+      <select-taxes taxes="taxes" entity="editService"></select-taxes>
+    </div>
   </div>
 
-  <div class="col-xs-6">
-    <select-taxes taxes="taxes" entity="editService"></select-taxes>
-  </div>
+
 
   <div class="qt-form-actions btn-bottom" style="margin-right: 10px;">
     <div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>
