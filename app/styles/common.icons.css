@@ -528,7 +528,7 @@ a.ha-24 {
 }
 
 /*:hover > .settings-icon, :active > .settings-icon, :focus:hover > .settings-icon, :focus:active > .settings-icon, :hover:active > .settings-icon, .active > .settings-icon, .open .settings-icon, .open > .btn:hover .settings-icon {*/
-  /*background-image: url("../images/new-icons/settings.png");*/
+/*background-image: url("../images/new-icons/settings.png");*/
 /*}*/
 
 .icn-report-spam {
@@ -625,7 +625,6 @@ a.ha-24 {
   background-image: url("../images/new-icons/download-white.png");
 }
 
-
 .icn-loading {
   background-position: -1358px 0;
   height: 14px;
@@ -643,7 +642,7 @@ a.ha-24 {
   background-image: url("../images/new-icons/delete-na.png");
 }
 
-.icn-delete-white{
+.icn-delete-white {
   background-image: url("../images/new-icons/delete-white.png");
 }
 
@@ -690,7 +689,6 @@ a.ha-24 {
 .icon-user {
   background-image: url("../images/new-icons/user-circle-white.png");
 }
-
 
 .icon-user-black {
   background-image: url("../images/new-icons/user-circle-na.png");
@@ -741,7 +739,7 @@ a.ha-24 {
 }
 
 /*:hover > .edit-icon, :active > .edit-icon, :focus:hover > .edit-icon, :focus:active > .edit-icon, :hover:active > .edit-icon, .active > .edit-icon, .open .edit-icon, .open > .btn:hover .edit-icon {*/
-  /*background-image: url("../images/new-icons/edit.png");*/
+/*background-image: url("../images/new-icons/edit.png");*/
 /*}*/
 
 .icn-edit-white {
@@ -776,10 +774,6 @@ a.ha-24 {
 
 .icn-remote-access {
   background-image: url("../images/new-icons/network-desktop.png");
-}
-
-:hover > .icn-remote-access, :active > .icn-remote-access, :focus:hover > .icn-remote-access, :focus:active > .icn-remote-access, :hover:active > .icn-remote-access, .active > .icn-remote-access, .open .icn-remote-access, .open > .btn:hover .icn-remote-access {
-  background-image: url("../images/new-icons/network-desktop-na.png");
 }
 
 .icn-remote-access.disabled, .disabled .icn-remote-access {
@@ -1141,6 +1135,7 @@ a:hover > .icn-label-save, a:active > .icn-label-save {
 a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-position: -716px 0;
 }
+
 /* Left bar icons end */
 
 /* Right bar icons */
@@ -1192,7 +1187,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 /*li:hover .icn-tab-devices,*/
 /*a:hover > .icon-tab-devices, a:active > .icon-tab-devices, li.active > a > .icon-tab-devices, .icon-tab-devices.active {*/
-  /*background-image: url("../images/new-icons/smartphone-tablet-desktop.png");*/
+/*background-image: url("../images/new-icons/smartphone-tablet-desktop.png");*/
 /*}*/
 
 .icon-tab-users {
@@ -1205,7 +1200,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 /*li:hover .icn-tab-users,*/
 /*a:hover > .icon-tab-users, a:active > .icon-tab-users, li.active > a > .icon-tab-users {*/
-  /*background-image: url("../images/new-icons/users-male.png");*/
+/*background-image: url("../images/new-icons/users-male.png");*/
 /*}*/
 
 .icn-load-gray {
@@ -1235,7 +1230,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -3699px 0;
 }
 
-.icn-caret-light{
+.icn-caret-light {
   width: 4px;
   height: 6px;
   background-position: -3699px 0;
@@ -1265,12 +1260,12 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -715px 1px;
 }
 
-.icn-remove-old{
+.icn-remove-old {
   background-position: -696px 0px;
   vertical-align: middle;
 }
 
-.company-profile-content .tab-content .pad-top{
+.company-profile-content .tab-content .pad-top {
   padding-top: 4px;
 }
 
@@ -1905,7 +1900,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 .icn-user-fax {
- background-image: url("../images/new-icons/printer-na.png");
+  background-image: url("../images/new-icons/printer-na.png");
 }
 
 .icn-user-phone {
@@ -2144,7 +2139,8 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/article.png");
 }
 
-:hover > .icn-description, :active > .icn-description, :focus:hover > .icn-description, :focus:active > .icn-description, :hover:active > .icn-description, .active > .icn-description, .open > .icn-description, .open .icn-description {  background-image: url("../images/new-icons/article.png");
+:hover > .icn-description, :active > .icn-description, :focus:hover > .icn-description, :focus:active > .icn-description, :hover:active > .icn-description, .active > .icn-description, .open > .icn-description, .open .icn-description {
+  background-image: url("../images/new-icons/article.png");
   background-image: url("../images/new-icons/article.png");
 }
 
