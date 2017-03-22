@@ -303,12 +303,6 @@
   padding-left: 25px;
 }
 
-@media (min-width: 1920px) {
-  .qt-list > li > [class*='col-']:last-child {
-    padding-left: 5px;
-  }
-}
-
 .qt-users,
 .qt-company-devices,
 .qt-assc-vendors {
@@ -2471,7 +2465,7 @@ Devices tab
 }
 
 .qt-product-list > li > .col-2 {
-  width: calc(100% - 1155px);
+  width: calc(100% - 1063px);
 
   text-align: left;
 
@@ -2479,7 +2473,7 @@ Devices tab
 }
 
 .with-category .qt-product-list > li > .col-2 {
-  width: calc(100% - 1010px);
+  width: calc(100% - 1038px);
 }
 
 .qt-product-list > li > .col-3 {
@@ -2833,7 +2827,7 @@ Devices tab
 }
 
 .qt-default-services > li > .col-1 {
-  width: calc(100% - 450px);
+  width: calc(100% - 490px);
 }
 
 .qt-default-services > li > .col-2 {
@@ -2844,10 +2838,9 @@ Devices tab
 }
 
 .qt-default-services > li > .col-3 {
-  width: 122px;
-  padding-top: 9px;
+  width: 160px;
 
-  text-align: right;
+  text-align: left;
 
   color: #94a4b8;
 }
@@ -3074,7 +3067,7 @@ Devices tab
 }
 
 .qt-services-list > li > .col-1 {
-  width: calc(100% - 433px);
+  width: calc(100% - 473px);
 }
 
 .qt-services-list > li > .col-5 {
@@ -3088,7 +3081,7 @@ Devices tab
 }
 
 .qt-services-list > li > .col-3 {
-  width: 122px;
+  width: 160px;
 
   text-align: right;
 

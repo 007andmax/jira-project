@@ -68,7 +68,7 @@
                                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i></span>
 
                 </div>
-                <div class="col-1" ng-click="setOrderForProducts('vendor')">
+                <div class="col-4" ng-click="setOrderForProducts('vendor')">
                   <span class="sort-span">vendor/supplier<i class="icn-sm sort-icon icn-sort"
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
@@ -78,7 +78,7 @@
                                                 ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
 
                 </div>
-                <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+                <div class="col-4" ng-click="setOrderForProducts('manufacture')">
                   <span class="sort-span">mfg#<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
 
@@ -107,17 +107,17 @@
 
                   <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
 
-                  <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
+                  <div class="col-4">{{ getCompanyById(product.company.id).name}}</div>
 
                   <div class="col-1" style="height: 18px; padding-left: 20px;">
                     {{ product.ilc}}
                   </div>
 
-                  <div class="col-1" >
+                  <div class="col-4" >
                     {{ product.manufacture}}
                   </div>
 
-                  <div class="col-4 taxes-width">
+                  <div class="col-1">
                     {{ getSelectedTaxNames(product.taxes) }}
                   </div>
 

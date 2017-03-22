@@ -11,7 +11,7 @@
                                          ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i></span>
     </div>
 
-    <div class="col-4">
+    <div class="col-3">
       <span class="sort-span">taxes</span>
     </div>
 
@@ -36,12 +36,12 @@
         {{ service.rate | currency: '$': 2 }}
       </div>
 
-      <div class="col-4">
+      <div class="col-3">
         {{ getSelectedTaxNames(service.taxes) }}
       </div>
 
       <div class="col-5 is-billable">
-        <label class="control checkbox pull-left" style="margin-top: 4px;left:25px">
+        <label class="control checkbox pull-left" style="left:15px">
           <input type="checkbox" ng-checked="service.billable"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
                  ng-click="onChangeBillable()">

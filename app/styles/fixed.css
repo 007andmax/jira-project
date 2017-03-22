@@ -71,12 +71,12 @@ body.non-body-scroll::-webkit-scrollbar {
 /*}*/
 
 .qt-product-list > li > .intermediate-parent-elem > .col-1 {
-  height: 18px;
+  height: auto;
   width: 200px;
   overflow: hidden;
-  white-space: nowrap;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  min-height: 1px;
 }
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
@@ -85,7 +85,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
   width: calc(100% - 1090px);
-  white-space: nowrap;
+  /*white-space: nowrap;*/
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: left;
@@ -93,7 +93,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 @media (min-width: 1920px) {
   .products-content .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-    width: calc(100% - 1155px);
+    width: calc(100% - 1063px);
   }
 }
 
@@ -104,7 +104,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-  width: calc(100% - 1010px);
+  width: calc(100% - 1038px);
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-3 {
@@ -230,7 +230,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 @media only screen and (max-width: 1700px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
-    height: 18px;
+    height: auto;
     width: 114px;
   }
 
@@ -300,7 +300,7 @@ body.non-body-scroll::-webkit-scrollbar {
     width: calc(100% - 730px);
   }
   .qt-product-list > li > .intermediate-parent-elem > .col-2, .qt-product-list > li > .col-2{
-    width: calc(100% - 730px);
+    width: calc(100% - 713px);
   }
 }
 
@@ -312,10 +312,16 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
   margin-right: 16px;
 }
+@media only screen and (min-width: 1366px){
+  .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area{
+    margin-right: 6px;
+  }
+
+}
 
 /*service page*/
 .qt-default-services > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 450px);
+  width: calc(100% - 490px);
   /*width: calc(100% - 319px); TODO hide timeAllotment*/
 }
 
@@ -332,10 +338,10 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-default-services > li > .intermediate-parent-elem > .col-3 {
-  width: 122px;
-  text-align: right;
-  color: #94a4b8;
-  padding-top: 9px;
+  width: 160px;
+  text-align: left;
+  color: #404b5f;
+  min-height: 1px;
 }
 
 .qt-default-services > li > .intermediate-parent-elem > .col-4 {
@@ -364,7 +370,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 433px);
+  width: calc(100% - 473px);
   /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
 
@@ -389,9 +395,10 @@ body.non-body-scroll::-webkit-scrollbar {
 /*}*/
 
 .qt-services-list > li > .intermediate-parent-elem > .col-3 {
-  width: 122px;
-  text-align: right;
-  color: #94a4b8;
+  width: 160px;
+  text-align: left;
+  color: #404b5f;
+  min-height: 1px;
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-4 {
@@ -1193,6 +1200,7 @@ aside#left div.nav-title {
 
 .qt-list li.list-heading > .is-billable {
   width: 90px;
+  padding-left: 0;
 }
 
 .qt-default-services li .intermediate-parent-elem .is-billable label {
