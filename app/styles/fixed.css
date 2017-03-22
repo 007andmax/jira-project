@@ -285,7 +285,7 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-2, .qt-product-list > li > .col-2 {
-    width: calc(100% - 832px);
+    width: calc(100% - 853px);
   }
 
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {

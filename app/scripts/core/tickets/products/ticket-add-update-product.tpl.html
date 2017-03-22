@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
+        <div class="col-3" style="margin-bottom: 10px; float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
              style="width: 140px; float: left;">
 
           <input type="text" class="form-control" name="productSerialNumber"
@@ -44,7 +44,7 @@
                  hard-reset-pattern="quantityPattern">
         </div>
 
-        <div class="col-5" style="width: 100px; float: left;"
+        <div class="col-3 price-width" style="width: 115px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
           <input type="text" class="form-control" placeholder="Price" qt-to-fixed="2"
@@ -54,7 +54,7 @@
         </div>
 
         <!--DISCOUNTS-->
-          <div class="col-3" style="width: 170px; float: left;">
+          <div class="col-4" style="width: 170px; float: left;">
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
               <input type="text"
@@ -70,7 +70,7 @@
                      qt-to-fixed="2">
             </div>
           </div>
-          <div class="col-4" style="width: 100px; float: left;">
+          <div class="col-4" style="width: 105px; float: left; padding-left: 5px;">
             <!--Discount type-->
             <div class="form-group">
               <div uib-dropdown keyboard-nav="true">
