@@ -55,7 +55,7 @@
     }
 
     function remove(taxId, callback) {
-      var future = $http.delete('/taxes', { id: taxId });
+      var future = $http.delete('/taxes/' + taxId);
       Utils.handleCallback(future, callback);
     }
 
@@ -68,11 +68,17 @@
       Utils.handleCallback(future, callback);
     }
 
+    function isUniqueName(name, id, callback) {
+      var future = $http.get('/taxes/isUniqueName', { params: { name: name, taxId: id } });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       getAll: getAll,
       save: save,
       remove: remove,
-      linkWithEntity: linkWithEntity
+      linkWithEntity: linkWithEntity,
+      isUniqueName: isUniqueName
     };
 
   }]);

@@ -45,7 +45,7 @@
           return $ctrl.selectedTaxes[tax.id];
         }).map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
-        }).join(', ') || '';
+        }).join(', ') || 'No taxes selected';
     }
 
     function createSelectedTaxes(taxes) {

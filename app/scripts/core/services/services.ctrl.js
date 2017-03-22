@@ -110,7 +110,7 @@
         $scope.getSelectedTaxNames = function(taxes) {
           return taxes && taxes.map(function (tax) {
               return tax.name + ' ' + tax.rate + '%';
-            }).join(', ') || '';
+            }).join(', ') || 'No taxes';
         };
 
         function loadingFinished(list) {
