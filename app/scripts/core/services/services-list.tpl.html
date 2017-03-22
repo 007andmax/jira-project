@@ -10,12 +10,14 @@
       <span class="sort-span">Per Hour<i class="icn-sm sort-icon icn-sort"
                                          ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i></span>
     </div>
+
+    <div class="col-4">
+      <span class="sort-span">taxes</span>
+    </div>
+
     <div class="col-5 is-billable" ng-click="setOrderForServices('billable')">
       <span class="sort-span">Is Billable<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
-    </div>
-    <div class="col-4">
-      <span class="sort-span">taxes</span>
     </div>
   </li>
 
@@ -34,6 +36,9 @@
         {{ service.rate | currency: '$': 2 }}
       </div>
 
+      <div class="col-4">
+        {{ getSelectedTaxNames(service.taxes) }}
+      </div>
 
       <div class="col-5 is-billable">
         <label class="control checkbox pull-left" style="margin-top: 4px;left:25px">
@@ -42,10 +47,6 @@
                  ng-click="onChangeBillable()">
           <span class="control-indicator"></span>
         </label>
-      </div>
-
-      <div class="col-4">
-        {{ getSelectedTaxNames(service.taxes) }}
       </div>
 
       <div class="col-5" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">

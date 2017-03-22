@@ -146,6 +146,7 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
   width: 145px;
   height: auto;
+  min-height: 1px;
 }
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -284,7 +285,7 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-2, .qt-product-list > li > .col-2 {
-    width: calc(100% - 831px);
+    width: calc(100% - 832px);
   }
 
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
