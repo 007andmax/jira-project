@@ -104,29 +104,30 @@
         </div>
       </div>
 
-      <div class="tab-pane in active" id="Service"
-           ng-if="currentOpenTab === 'SERVICE' && TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)"
-           ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl">
+    </div>
 
-        <div class="ticket-add clearfix" ng-form="addServicesForm">
+    <div class="tab-pane in active" id="Service"
+         ng-if="currentOpenTab === 'SERVICE' && TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)"
+         ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl">
 
-          <div class="ticket-add-content clearfix">
+      <div class="ticket-add clearfix" ng-form="addServicesForm">
 
-            <div>
-              <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
+        <div class="ticket-add-content clearfix">
 
-                <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl"
-                     ng-include="'/html/scripts/core/tickets/services/ticket-add-update-service.tpl.html'"></div>
+          <div>
+            <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
 
-              </div>
+              <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl"
+                   ng-include="'/html/scripts/core/tickets/services/ticket-add-update-service.tpl.html'"></div>
+
             </div>
-
           </div>
 
-          <div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>
         </div>
 
+        <div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>
       </div>
+
     </div>
   </div>
 </div>
