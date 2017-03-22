@@ -2837,7 +2837,7 @@ Devices tab
 }
 
 .qt-default-services > li > .col-2 {
-  width: 133px;
+  width: 120px;
   padding-top: 9px;
 
   color: #94a4b8;
@@ -2853,7 +2853,7 @@ Devices tab
 }
 
 .qt-default-services > li > .col-4 {
-  width: 64px;
+  width: 130px;
   padding-top: 9px;
 }
 
@@ -3096,7 +3096,7 @@ Devices tab
 }
 
 .qt-services-list > li > .col-4 {
-  width: 64px;
+  width: 120px;
 }
 
 @media only screen and (min-width: 2000px) {
