@@ -14,7 +14,7 @@
     <div class="list-container">
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
         <div class="checkbox-dd-item"
-             ng-repeat="tax in $ctrl.taxes | filter: { name: $ctrl.searchTax } track by tax.id">
+             ng-repeat="tax in $ctrl.taxes | filter: { name: $ctrl.searchTax } | orderBy: 'name' track by tax.id">
           <label class="control checkbox">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
                    ng-change="$ctrl.updateEntityTaxList(tax)">

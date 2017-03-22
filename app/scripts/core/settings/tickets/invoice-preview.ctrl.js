@@ -31,16 +31,20 @@
         number: $scope.invoiceConfig ? $scope.invoiceConfig.count : '0001',
         date: 1460552903659,
         dueDate: 1461762503659,
-        sum: 1162.75,
         productsSum: 984,
         servicesSum: 137.5,
+        discountSum: 0,
+        taxSum: 0,
+        totalSum: 1162.75,
         termsAndConditions: $scope.invoiceConfig ? $scope.invoiceConfig.termsAndConditions : '',
         tickets: [{
           number: '0000',
           subject: 'Ticket subject',
           closedAt: 1460552886511,
           productExpenses: [{
-            sum: 900,
+            totalSum: 900,
+            discountSum: 0,
+            taxSum: 0,
             quantity: 2,
             billableQuantity: 2,
             createdAt: 1460552783790,
@@ -58,7 +62,9 @@
             editedExpense: false,
             serviceExpense: false
           }, {
-            sum: 84,
+            totalSum: 84,
+            discountSum: 0,
+            taxSum: 0,
             quantity: 1,
             billableQuantity: 1,
             itemOrder: 1,
@@ -76,28 +82,32 @@
             editedExpense: false,
             serviceExpense: false
           }],
-          "serviceExpenses": [{
-            "sum": 137.5,
-            "quantity": 2.5,
-            "billableQuantity": 2.5,
-            "description": "service description",
-            "itemOrder": 0,
-            "isServiceExpense": true,
-            "item": {
-              "name": "Onsite Consulting",
-              "timeBlock": 2.5,
-              "rate": 55,
-              "billable": true,
-              "isDefault": false
+          serviceExpenses: [{
+            totalSum: 137.5,
+            discountSum: 0,
+            taxSum: 0,
+            quantity: 2.5,
+            billableQuantity: 2.5,
+            description: 'service description',
+            itemOrder: 0,
+            isServiceExpense: true,
+            item: {
+              name: 'Onsite Consulting',
+              timeBlock: 2.5,
+              rate: 55,
+              billable: true,
+              isDefault: false
             },
-            "date": 1460494800000,
-            "billable": true,
-            "price": 55,
-            "serviceExpense": true,
-            "editedExpense": false
+            date: 1460494800000,
+            billable: true,
+            price: 55,
+            serviceExpense: true,
+            editedExpense: false
           }],
           productsSum: 984,
           servicesSum: 137.5,
+          discountSum: 0,
+          taxSum: 0,
           totalSum: 1121.5
         }]
       };

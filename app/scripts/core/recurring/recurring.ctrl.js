@@ -54,14 +54,6 @@
           };
         };
 
-        $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
-          $scope.last30DaysValue = 0;
-
-          for (var i = 0; i < $scope.recurringGraphData.length; i++) {
-            $scope.last30DaysValue += $scope.recurringGraphData[i].sum;
-          }
-        });
-
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
         };

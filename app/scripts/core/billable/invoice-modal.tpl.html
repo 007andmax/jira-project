@@ -124,7 +124,7 @@
         </div>
 
         <div class="detail amount">Amount Due
-          <span class="detail-sub">{{ currentInvoice.sum | currency: '$':2 }}</span>
+          <span class="detail-sub">{{ currentInvoice.totalSum | currency: '$':2 }}</span>
         </div>
 
       </div>
@@ -145,6 +145,8 @@
         <div class="col-1" style="width: 492px">ITEM</div>
         <div class="col-3">quantity</div>
         <div class="col-4">UNIT price</div>
+        <div class="col-4">Discount</div>
+        <div class="col-4">Tax</div>
         <div class="col-5">total</div>
       </div>
 
@@ -162,7 +164,9 @@
 
       <div class="col-3">{{ productExpense.billableQuantity }}</div>
       <div class="col-4">{{ productExpense.item.sale | currency: '$':2 }}</div>
-      <div class="col-5">{{ productExpense.sum | currency: '$':2 }}</div>
+      <div class="col-4">{{ productExpense.discountSum | currency: '$':2 }}</div>
+      <div class="col-4">{{ productExpense.taxSum | currency: '$':2 }}</div>
+      <div class="col-5">{{ productExpense.totalSum | currency: '$':2 }}</div>
 
     </div>
 
@@ -175,7 +179,9 @@
       <div class="col-2">{{ serviceExpense.description }}</div>
       <div class="col-3">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
       <div class="col-4">{{ serviceExpense.item.rate | currency: '$':2 }}/hr</div>
-      <div class="col-5">{{ serviceExpense.sum | currency: '$':2 }}</div>
+      <div class="col-4">{{ productExpense.discountSum | currency: '$':2 }}</div>
+      <div class="col-4">{{ productExpense.taxSum | currency: '$':2 }}</div>
+      <div class="col-5">{{ productExpense.totalSum | currency: '$':2 }}</div>
 
     </div>
 
@@ -233,14 +239,28 @@
           <div class="amount">{{ currentInvoice.servicesSum | currency: '$':2 }}</div>
         </div>
 
-        <!--<div class="plus">-->
-          <!--<img src="../images/invoice/invoice-minus.png" width="20" height="20" alt="-"/>-->
-        <!--</div>-->
+        <div class="plus">
+          <img src="../images/invoice/invoice-minus.png" width="20" height="20" alt="-"/>
+        </div>
+
+        <div class="update">
+          <h4>DISCOUNT</h4>
+          <div class="amount">{{ currentInvoice.discountSum | currency: '$':2 }}</div>
+        </div>
+
+        <div class="plus">
+          <img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>
+        </div>
+
+        <div class="update">
+          <h4>TAX</h4>
+          <div class="amount">{{ currentInvoice.taxSum | currency: '$':2 }}</div>
+        </div>
 
       </div>
 
       <div class="total-amount">
-        <div class="amount">{{ currentInvoice.sum | currency: '$':2 }}</div>
+        <div class="amount">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
       </div>
 
     </div>

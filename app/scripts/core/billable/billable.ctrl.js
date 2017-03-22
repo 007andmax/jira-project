@@ -25,8 +25,6 @@
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
-        $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
-
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
           $scope.$watch('companyData.addresses[0].address', function (address) {
             $scope.isCurrentCompanyAddressEmpty = !address;
@@ -85,35 +83,6 @@
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
         };
-
-        $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
-
-          if ($scope.billableChartData.length < 30) {
-            var quantityMissingDays = 30 - $scope.billableChartData.length;
-
-            for (var j = 0; j < quantityMissingDays; j++) {
-              $scope.billableChartData.unshift({
-                sum: undefined,
-                date: getOneDateAgo($scope.billableChartData[0].date)
-              })
-            }
-          }
-
-          $scope.$watch('billableChartData', function () {
-            $scope.billedAmountLast30Days = 0;
-            for (var i = 0; i < $scope.billableChartData.length; i++) {
-              $scope.billedAmountLast30Days += $scope.billableChartData[i].sum || 0;
-            }
-          });
-
-          function getOneDateAgo(dateString) {
-            var date = new Date(dateString);
-            var dateCopy = new Date(dateString);
-
-            dateCopy.setDate(date.getDate() - 1);
-            return dateCopy;
-          }
-        });
 
         $scope.anotherCompanySelected = function (companyId) {
           if ($scope.ticketsSelection[companyId] && $scope.ticketsSelection[companyId].checked) {

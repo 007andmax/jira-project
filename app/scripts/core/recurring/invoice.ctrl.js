@@ -10,6 +10,27 @@
 
         $scope.companyOfInvocie = CompaniesService.getOneById($scope.invoice.company.id);
 
+        $scope.getTotal = function () {
+          var total = 0;
+          var expenses = $scope.invoice.services.concat($scope.invoice.products);
+          for (var i = 0, len = expenses.length; i < len; i++) {
+            var expense = expenses[i];
+            total += expense.totalSum;
+          }
+
+          return total;
+        };
+
+        $scope.getSubTotal = function () {
+          var subtotal = 0;
+          var expenses = $scope.invoice.services.concat($scope.invoice.products);
+          for (var i = 0, len = expenses.length; i < len; i++) {
+            var expense = expenses[i];
+            subtotal += expense.sum;
+          }
+          return subtotal;
+        };
+
         $scope.deleteRecurringInvoice = function () {
           $scope.disabledDelete = true;
           var confirmMesage = 'Do you want to delete order?',

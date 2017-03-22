@@ -50,19 +50,13 @@
         $scope.$watch('taxRatesCoef', calculateTotal);
 
         function calculateTotal() {
-          var subtotal = 0;
-          var tax = 0;
+          var total = 0;
 
           for (var i = 0, len = $scope.editInvoice.products.length; i < len; i++) {
             var product = $scope.editInvoice.products[i];
 
             if (product.quantity && product.item && product.item.sale) {
-              subtotal += +product.quantity * +product.item.sale;
-
-              //todo: change calculating tax logic
-              if (product.item.taxable) {
-                tax += (+product.quantity * +product.item.sale) * $scope.taxRatesCoef;
-              }
+              total += +product.quantity * +product.item.sale;
             }
           }
 
@@ -70,18 +64,10 @@
             var service = $scope.editInvoice.services[i];
 
             if (service.quantity && service.item && service.item.rate) {
-              subtotal += service.item.rate * (service.quantity / 60);
-
-              //todo: change calculating tax logic
-              if (service.item.taxable) {
-                tax += (service.item.rate * (service.quantity / 60)) * $scope.taxRatesCoef;
-              }
+              total += service.item.rate * (service.quantity / 60);
             }
           }
-
-          $scope.subtotal = subtotal;
-          $scope.tax = tax;
-          $scope.total = subtotal + tax;
+          $scope.total = total;
 
           $scope.setDisabledSaveInvoice($scope.total === 0);
 
