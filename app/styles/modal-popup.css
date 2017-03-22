@@ -150,6 +150,11 @@ _:-moz-any-link, :root .create-window .general .company-window .company-steps__l
 _::-webkit-:not(:root:root), .create-window .general .company-window .company-steps__list:before  {
   width: calc(100% - 190px);
 }
+_:-ms-lang(x), .create-window .general .company-window .company-steps__list:before {
+  left: 120px;
+  width: calc(100% - 250px);
+}
+
 
 
 .create-window .general .company-window .company-steps__list--point {

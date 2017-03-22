@@ -33,6 +33,7 @@
                 $scope.closeWindow();
               }
             });
+            unsubscribeClosingEvent();
           } else {
             $scope.triedToSaveService = true;
           }
@@ -95,7 +96,7 @@
           }
         };
 
-        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+        var unsubscribeClosingEvent = $scope.$on('createNewWindowClosing', createNewWindowClosing);
 
         function createNewWindowClosing() {
           var service = $scope.editService;

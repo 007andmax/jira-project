@@ -216,7 +216,8 @@
               if (!$scope.savedState.items.length) {
                 $scope.closeWindow();
               }
-            })
+            });
+            unsubscribeClosingEvent();
           } else {
             $scope.triedToSave = true;
 
@@ -381,7 +382,7 @@
           $scope.currentStep = step;
         };
 
-        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+        var unsubscribeClosingEvent = $scope.$on('createNewWindowClosing', createNewWindowClosing);
 
         function createNewWindowClosing() {
           var company = $scope.editCompany;
