@@ -433,7 +433,7 @@
 }
 
 .table-wrapper .service-table .col-3 {
-  width: calc(100% - 409px);
+  width: calc(100% - 419px);
 }
 
 .inventory-details .table-wrapper .service-table .col-3 {
@@ -455,7 +455,7 @@
 }
 
 .table-wrapper .service-table .col-4 {
-  width: 140px;
+  width: 150px;
 }
 
 .inventory-details .table-wrapper .service-table .col-5 {
@@ -552,19 +552,19 @@
   width: 90px;
 }
 
-.ticket-update-product-edit .edit-col6 {
+.ticket-update-product-edit .edit-col6, .ticket-update-service-edit .edit-col6 {
   width: 12.5%;
 }
 
-.ticket-update-product-edit .edit-col7 {
+.ticket-update-product-edit .edit-col7, .ticket-update-service-edit .edit-col7 {
   width: 7%;
 }
 
-.opened-ticket-list .ticket-update-product-edit .edit-col6 {
+.opened-ticket-list .ticket-update-product-edit .edit-col6, .opened-ticket-list .ticket-update-service-edit .edit-col6 {
   width: 20%;
 }
 
-.opened-ticket-list .ticket-update-product-edit .edit-col7 {
+.opened-ticket-list .ticket-update-product-edit .edit-col7, .opened-ticket-list .ticket-update-service-edit .edit-col7  {
   width: 9%;
 }
 

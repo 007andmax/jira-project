@@ -58,8 +58,8 @@
         </div>
 
         <!--DISCOUNT-->
-        <div>
-          <div >
+
+          <div class="edit-col6">
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(updateTicketService, 'discountAmount')}">
               <input type="number"
@@ -74,7 +74,7 @@
                      ng-disabled="!editService.discountType">
             </div>
           </div>
-          <div >
+          <div class="edit-col7">
             <!--Discount type-->
             <div class="form-group">
               <div uib-dropdown keyboard-nav="true">
@@ -83,8 +83,7 @@
                         uib-dropdown-toggle aria-expanded="true"
                         tabindex="32">
                   {{discountTypes[editService.discountType]}} <b ng-hide="editService.discountType"
-                                                                 style="color: rgba(76, 92, 111, 0.36)">Choose
-                  Discount Type </b>
+                                                                 style="color: rgba(76, 92, 111, 0.36)">Type</b>
                 </button>
                 <i class="icn-sm icn-caret-gray"></i>
 
@@ -104,7 +103,7 @@
               </div>
             </div>
           </div>
-        </div>
+
 
       </li>
     </ul>

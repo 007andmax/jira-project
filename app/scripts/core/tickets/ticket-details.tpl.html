@@ -35,9 +35,9 @@
                   tooltip-append-to-body="true" uib-dropdown-toggle>
                   <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
                 </span>
-                <span
-                  class="label label-primary priority-big-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }}"
-                  uib-dropdown-toggle> {{ userReadable(ticketDetails.priorityLevel) }} </span>
+                  <span
+                    class="label label-primary priority-big-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }}"
+                    uib-dropdown-toggle> {{ userReadable(ticketDetails.priorityLevel) }} </span>
                   <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
                       ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)">
                     <li>
@@ -71,9 +71,10 @@
                   </label>
                 </span>
 
-                <span
-                  class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
-                  ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)" uib-dropdown-toggle>
+                  <span
+                    class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+                    ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
+                    uib-dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
                 </span>
                   <ul class="dropdown-menu dropdown-priority"
@@ -124,7 +125,8 @@
                 <i class=" {{ editingTicket ? 'icn-sm icn-label-cancel' : 'icon-sm edit-icon' }}"></i>
               </div>
             </div>
-            <div class="pull-left" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
+            <div class="pull-left" uib-dropdown
+                 ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
 
               <div class="btn btn-icn btn-default pull-left has-tooltip"
                    ng-if="(ticketAgent.type !== 'workstation') && ticketAgent.online"
@@ -415,8 +417,8 @@
           <span class="pull-left ticket-update-title">Ticket Updates
             <span class="light-cl">{{ ticketDetails.updates.length + ticketDetails.unloadedUpdates }}</span>
           </span>
-          <span class="pull-left label shared-with" ng-style="{'cursor': shares.length ? 'pointer' : 'default'}"
-                style="cursor: pointer" ng-click="toggleFullSharedUsers()">
+            <span class="pull-left label shared-with" ng-style="{'cursor': shares.length ? 'pointer' : 'default'}"
+                  style="cursor: pointer" ng-click="toggleFullSharedUsers()">
             SHARED WITH {{ shares.length }}
           </span>
           </h4>
@@ -498,16 +500,17 @@
                   <div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
                     <span class="ellipsis" uib-tooltip="{{ product.item.description }}"
-                           trimmed-tooltip-checker="product.item.description"></span>
+                          trimmed-tooltip-checker="product.item.description"></span>
                     <div style="color:#b2becd;position: absolute;top: 16px;font-size: 13px;">
                       <span ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span>
                       <span ng-show="product.item.manufacture && product.item.manufacture.length > 0"
-                           >P/N: {{ product.item.manufacture }}</span>
+                      >P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>
                   <!--Discount-->
-                  <div  ng-if="product.discountAmount>0">
-                    Discount: <b ng-if="product.discountType =='FIXED' ">$</b>{{product.discountAmount | currency : '': 2 }}<b ng-if="product.discountType =='PERCENT' ">%</b>
+                  <div ng-if="product.discountAmount>0">
+                    Discount: <b ng-if="product.discountType =='FIXED' ">$</b>{{product.discountAmount | currency : '':
+                    2 }}<b ng-if="product.discountType =='PERCENT' ">%</b>
                   </div>
                   <div class="col-3" ng-if="product.serialNumber" uib-tooltip="{{ product.serialNumber }}"
                        trimmed-tooltip-checker="product.serialNumber">
@@ -522,7 +525,7 @@
                   </div>
 
 
-                  <div class="col-4" >
+                  <div class="col-4">
                     <span uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
                           trimmed-tooltip-checker="product.item.sale | currency:'$':2">
                     </span>
@@ -548,13 +551,15 @@
                   <div class="col-2">{{ service.item.name }}</div>
                   <div class="col-4">Duration
                     <span class="model">{{ service.quantity | durationFilter }}</span>
+                    <div ng-if="service.discountAmount>0">
+                      Discount: <b ng-if="service.discountType =='FIXED' ">$</b>{{service.discountAmount | currency :
+                      '': 2 }}<b ng-if="service.discountType =='PERCENT' ">%</b>
+                    </div>
                   </div>
                   <div class="col-3 service-descr">
                     {{ service.description ? service.description : '&nbsp;' }}
                   </div>
-                  <div  ng-if="service.discountAmount>0">
-                    Discount: <b ng-if="service.discountType =='FIXED' ">$</b>{{service.discountAmount | currency : '': 2 }}<b ng-if="service.discountType =='PERCENT' ">%</b>
-                  </div>
+
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
