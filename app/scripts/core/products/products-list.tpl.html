@@ -1,5 +1,5 @@
 <div class="with-category" ng-controller="quicktech.core.products.productsListCtrl">
-  <ul class="qt-list qt-product-list">
+  <ul class="qt-product-list qt-list ">
 
     <li class="list-heading" ng-show="productsData.list.length > 0" style="cursor: pointer !important;" fixed-block-top offset-top="148">
       <div class="col-2" ng-click="setOrderForProducts('description')">
@@ -42,7 +42,7 @@
                                            ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'discountAmount'}"></i></span>
 
       </div>
-      <div class="col-1">
+      <div class="col-4">
         <span class="sort-span">taxes</span>
       </div>
       <div class="col-6">&nbsp;</div>
@@ -85,7 +85,7 @@
           <b ng-if="product.discountType =='FIXED' ">$</b> {{product.discountAmount | currency: '': 2 }} <b ng-if="product.discountType =='PERCENT' ">%</b>
         </div>
 
-        <div class="col-1">
+        <div class="col-4">
           {{ getSelectedTaxNames(product.taxes) }}
         </div>
 

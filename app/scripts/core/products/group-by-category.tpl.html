@@ -88,7 +88,7 @@
                                                      ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'discountAmount'}"></i></span>
 
                 </div>
-                <div class="col-1">
+                <div class="col-4">
                   <span class="sort-span">taxes</span>
                 </div>
                 <div class="col-6">&nbsp;</div>
@@ -126,7 +126,7 @@
                     <b ng-if="product.discountType =='FIXED' ">$</b> {{product.discountAmount | currency: '': 2 }} <b ng-if="product.discountType =='PERCENT' ">%</b>
                   </div>
 
-                  <div class="col-1">
+                  <div class="col-4">
                     {{ getSelectedTaxNames(product.taxes) }}
                   </div>
 

@@ -2464,22 +2464,11 @@ Devices tab
   width: 145px;
 }
 
-.qt-product-list > li > .col-2 {
-  width: calc(100% - 1108px);
-
-  text-align: left;
-
-  color: #94a4b8;
+.with-category .qt-product-list > li > .col-2 {
+  width: calc(100% - 1053px);
 }
 .qt-list > li > .col-2 {
-  width: calc(100% - 1108px);
-}
-.with-category .qt-list > li > .col-2 {
-  width: calc(100% - 1108px);
-}
-
-.with-category .qt-product-list > li > .col-2 {
-  width: calc(100% - 1183px);
+  width: calc(100% - 1053px);
 }
 
 @media screen and (max-width: 1600px) {
@@ -2545,7 +2534,7 @@ Devices tab
     width: 145px;
   }
 
-  .qt-product-list > li > .col-2{
+  .qt-product-list > li > .col-2 {
     width: calc(100% - 1293px);
   }
 
