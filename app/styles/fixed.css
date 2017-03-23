@@ -351,7 +351,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 /*service page*/
 .qt-default-services > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 490px);
+  width: calc(100% - 610px);
   /*width: calc(100% - 319px); TODO hide timeAllotment*/
 }
 
@@ -402,7 +402,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 473px);
+  width: calc(100% - 613px);
   /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
 
@@ -418,6 +418,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-services-list > li > .intermediate-parent-elem > .col-2 {
   width: 133px;
+  min-height: 1px;
 }
 
 /*@media (min-width: 2048px) {*/

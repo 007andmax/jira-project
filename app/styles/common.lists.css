@@ -2824,7 +2824,7 @@ Devices tab
 }
 
 .qt-default-services > li > .col-1 {
-  width: calc(100% - 490px);
+  width: calc(100% - 610px);
 }
 
 .qt-default-services > li > .col-2 {
@@ -3065,7 +3065,7 @@ Devices tab
 }
 
 .qt-services-list > li > .col-1 {
-  width: calc(100% - 473px);
+  width: calc(100% - 613px);
 }
 
 .qt-services-list > li > .col-5 {
