@@ -53,8 +53,8 @@
                  hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
         </div>
         <!--DISCOUNT-->
-        <div>
-          <div >
+
+          <div class="edit-col6">
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
               <input type="number"
@@ -69,7 +69,7 @@
                      ng-disabled="!editProduct.discountType">
             </div>
           </div>
-          <div >
+          <div class="edit-col7">
             <!--Discount type-->
             <div class="form-group">
               <div uib-dropdown keyboard-nav="true">
@@ -78,8 +78,7 @@
                         uib-dropdown-toggle aria-expanded="true"
                         tabindex="32">
                   {{discountTypes[editProduct.discountType]}} <b ng-hide="editProduct.discountType"
-                                                                    style="color: rgba(76, 92, 111, 0.36)">Choose
-                  Discount Type </b>
+                                                                    style="color: rgba(76, 92, 111, 0.36)"> Type </b>
                 </button>
                 <i class="icn-sm icn-caret-gray"></i>
 
@@ -99,7 +98,6 @@
               </div>
             </div>
           </div>
-        </div>
 
       </li>
     </ul>
