@@ -349,6 +349,47 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 }
 
+.tax-recurring{
+  width: 50px;
+}
+.tax-recurring input, .discount-recurring input, .discount-recurring button{
+  height: 25px;
+  border-radius: 0;
+  background-color: #F1F5FA;
+}
+.tax-recurring .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control,
+.discount-recurring .form-control:focus, .discount-recurring input:-webkit-autofill {
+  background-color: #F1F5FA;
+}
+.discount-recurring{
+  display: inline-block;
+}
+.discount-recurring input{
+  width: 143px;
+}
+.discount-recurring button{
+  width: 66px;
+}
+.discount-recurring button.has-dropdown ~ i{
+  top: 7px;
+  right: 7px;
+}
+.discount-recurring .dropdown-account-type{
+  width: 7%;
+}
+.tax-recurring input{
+  width: 213px;
+}
+.tax-recurring .checkbox .control-indicator.plus-circle{
+  top: 10px;
+}
+
+
+
+
+
+
+
 /*service page*/
 .qt-default-services > li > .intermediate-parent-elem > .col-1 {
   width: calc(100% - 610px);

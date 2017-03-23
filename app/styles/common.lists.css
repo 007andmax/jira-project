@@ -2467,7 +2467,7 @@ Devices tab
 .with-category .qt-product-list > li > .col-2 {
   width: calc(100% - 1053px);
 }
-.qt-list > li > .col-2 {
+.slide-category-content .qt-list > li > .col-2 {
   width: calc(100% - 1053px);
 }
 
