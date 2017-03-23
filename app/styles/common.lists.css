@@ -2465,15 +2465,33 @@ Devices tab
 }
 
 .qt-product-list > li > .col-2 {
-  width: calc(100% - 1063px);
+  width: calc(100% - 1108px);
 
   text-align: left;
 
   color: #94a4b8;
 }
+.qt-list > li > .col-2 {
+  width: calc(100% - 1108px);
+}
+.with-category .qt-list > li > .col-2 {
+  width: calc(100% - 1108px);
+}
 
 .with-category .qt-product-list > li > .col-2 {
-  width: calc(100% - 1038px);
+  width: calc(100% - 1183px);
+}
+
+@media screen and (max-width: 1600px) {
+  .with-category .qt-product-list > li > .col-2 {
+    width: calc(100% - 873px);
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .with-category .qt-product-list > li > .col-2 {
+    width: calc(100% - 833px);
+  }
 }
 
 .qt-product-list > li > .col-3 {
@@ -2527,8 +2545,8 @@ Devices tab
     width: 145px;
   }
 
-  .qt-product-list > li > .col-2 {
-    width: calc(100% - 1170px);
+  .qt-product-list > li > .col-2{
+    width: calc(100% - 1293px);
   }
 
   .qt-product-list > li > .col-3 {
@@ -2556,7 +2574,7 @@ Devices tab
   }
 }
 
-@media only screen and (max-width: 1700px) {
+@media (max-width: 1700px) {
   .qt-product-list > li > .col-1 {
     width: 114px;
     height: 18px;
@@ -2568,15 +2586,7 @@ Devices tab
   }
 
   .with-category .qt-product-list > li > .col-1 {
-    width: 100px;
-  }
-
-  .qt-product-list > li > .col-2 {
-    width: calc(100% - 770px);
-  }
-
-  .with-category .qt-product-list > li > .col-2 {
-    width: calc(100% - 800px);
+    width: 95px;
   }
 
   .qt-product-list > li > .col-3 {
@@ -2591,10 +2601,6 @@ Devices tab
     width: 110px;
   }
 
-  .with-category .qt-product-list > li > .col-4 {
-    width: 85px;
-  }
-
   .qt-product-list > li > .col-5 {
     width: 86px;
   }
@@ -2606,14 +2612,16 @@ Devices tab
 
 @media only screen and (max-width: 1680px) {
   .with-category .qt-product-list > li > .col-4 {
-    width: 105px;
-  }
-}
-@media only screen and (max-width: 1366px){
-  .qt-product-list > li > .col-4{
     width: 100px;
   }
 }
+
+@media only screen and (max-width: 1366px) {
+  .qt-product-list > li > .col-4 {
+    width: 100px;
+  }
+}
+
 .clickable-layer {
   height: 100%;
   max-height: 67px;
@@ -2987,6 +2995,7 @@ Devices tab
   float: right;
   margin-right: 20px;
 }
+
 .add-service-btn-wrapper .btn .icn-sm {
   width: 12px;
   height: 12px;
@@ -3098,7 +3107,7 @@ Devices tab
   }
 
   /*.qt-services-list > li > .col-2 {*/
-    /*width: 263px;*/
+  /*width: 263px;*/
   /*}*/
 }
 

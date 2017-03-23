@@ -20,26 +20,16 @@
                autocomplete="off" aria-expanded="true"/>
         <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime" ng-required="true"/>
       </div>
-      <div class="col-3" style="max-width: 333px;"
+      <div class="col-3""
            ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
         <input type="text" class="form-control" placeholder="Description"
                ng-model="serviceExpense.description" ng-maxlength="2000"
                name="serviceDescription" max-length-word="100"/>
       </div>
-      <div class="col-5" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
-        <div>
-          <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
-                 qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
-                 name="serviceData" ng-required="true">
-          <div class="btn-icn btn btn-primary">
-            <img src="images/input-icons/calendar.svg" width="100%" height="100%" alt="">
-          </div>
-        </div>
-      </div>
+
       <!--DISCOUNTS-->
-      <div>
-        <div >
-          <!--Discount amount-->
+      <!--Discount amount-->
+        <div class="col-1" style="min-width: 153px;">
           <div class="form-group" ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
             <input type="text"
                    class="form-control"
@@ -54,8 +44,8 @@
                    qt-to-fixed="2">
           </div>
         </div>
-        <div >
-          <!--Discount type-->
+      <!--Discount type-->
+        <div class="col-1" style="width: 105px;">
           <div class="form-group">
             <div uib-dropdown keyboard-nav="true">
 
@@ -63,8 +53,7 @@
                       uib-dropdown-toggle aria-expanded="true"
                       tabindex="32">
                 {{discountTypes[serviceExpense.discountType]}} <b ng-hide="serviceExpense.discountType"
-                                                                  style="color: rgba(76, 92, 111, 0.36)">Choose
-                Discount Type </b>
+                                                                  style="color: rgba(76, 92, 111, 0.36)">Type</b>
               </button>
               <i class="icn-sm icn-caret-gray"></i>
 
@@ -84,10 +73,20 @@
             </div>
           </div>
         </div>
+
+      <div style="width: 43px;" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+        <div>
+          <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
+                 qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
+                 name="serviceData" ng-required="true">
+          <div class="btn-icn btn btn-primary">
+            <img src="images/input-icons/calendar.svg" width="100%" height="100%" alt="">
+          </div>
+        </div>
       </div>
 
       <div style="width: 100px">
-        <div class="col-5" ng-if="ticketUpdate.services.length > 1" style="float: left;">
+        <div class="col-5" ng-if="ticketUpdate.services.length > 1" style="float: left; width: 36px;">
               <span class="btn-icn btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
                     ng-click="removeService()">
                 <i class="icn-sm icn-remove-token-light"></i>
