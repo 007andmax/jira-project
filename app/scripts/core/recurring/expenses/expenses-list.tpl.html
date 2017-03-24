@@ -27,7 +27,7 @@
                  ng-disabled="!service.discountType"
                  execute-when-outfocused="addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false)"
                  qt-to-fixed="2"
-                 hard-reset-pattern="decimalNumberPattern">
+                 hard-reset-pattern="{{service.discountType}}">
         </div>
         <div>
           <!--Discount type-->
@@ -46,7 +46,7 @@
 
               <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
                 <li
-                  ng-click="service.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false)">
+                  ng-click="service.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false); service.discountAmount>100 ? service.discountAmount=null : true ">
                   <a href="javascript:void(0)"> Percent</a>
                 </li>
                 <li
@@ -112,7 +112,7 @@
                      ng-disabled="!product.discountType"
                      execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false)"
                      qt-to-fixed="2"
-                     hard-reset-pattern="decimalNumberPattern">
+                     hard-reset-pattern="{{product.discountType}}">
             </div>
             <div style="display: inline-block;">
               <!--Discount type-->
@@ -131,7 +131,7 @@
 
                   <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
                     <li
-                      ng-click="product.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false)">
+                      ng-click="product.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false);  product.discountAmount>1000 ? product.discountAmount=null : true ">
                       <a href="javascript:void(0)"> Percent</a>
                     </li>
                     <li

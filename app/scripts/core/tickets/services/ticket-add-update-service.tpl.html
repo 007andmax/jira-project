@@ -38,10 +38,10 @@
                    ng-model="serviceExpense.discountAmount"
                    ng-max="discountAmountMsxLength"
                    ng-min="0"
-                   hard-reset-pattern="pricePattern"
                    ng-required="serviceExpense.discountType == 'PERCENT' || serviceExpense.discountType == 'FIXED'"
                    ng-disabled="!serviceExpense.discountType"
-                   qt-to-fixed="2">
+                   qt-to-fixed="2"
+                   hard-reset-pattern="{{serviceExpense.discountType}}">
           </div>
         </div>
       <!--Discount type-->
@@ -58,7 +58,7 @@
               <i class="icn-sm icn-caret-gray"></i>
 
               <ul class="dropdown-menu dropdown-account-type">
-                <li ng-click="serviceExpense.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                <li ng-click="serviceExpense.discountType = 'PERCENT'; discountAmountMsxLength = 100; serviceExpense.discountAmount>1000 ? serviceExpense.discountAmount=null : true ">
                   <a href="javascript:void(0)"> Percent</a>
                 </li>
                 <li ng-click="serviceExpense.discountType = 'FIXED'; discountAmountMsxLength = null">

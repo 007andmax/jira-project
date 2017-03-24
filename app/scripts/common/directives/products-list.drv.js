@@ -23,7 +23,6 @@
           scope.closeDropdown = hideDropdown;
 
           scope.chooseProductItem = function (product) {
-            console.log(product)
             if (product && product.description) {
               productInput.val(product.description);
             } else {

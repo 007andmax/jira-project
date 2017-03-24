@@ -13,6 +13,10 @@
           };
 
           $scope.selectProduct = function (product) {
+            if(product.discountAmount && product.discountType) {
+              $scope.productExpense.discountAmount = product.discountAmount;
+              $scope.productExpense.discountType = product.discountType;
+            }
             $scope.productExpense.item = angular.copy(product);
           };
 

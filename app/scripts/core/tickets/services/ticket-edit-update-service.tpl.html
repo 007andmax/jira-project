@@ -69,9 +69,9 @@
                      ng-model="editService.discountAmount"
                      ng-max="discountAmountMsxLength"
                      ng-min="0"
-                     hard-reset-pattern="pricePattern"
                      ng-required="editService.discountType == 'PERCENT' || editService.discountType == 'FIXED'"
-                     ng-disabled="!editService.discountType">
+                     ng-disabled="!editService.discountType"
+                     hard-reset-pattern="{{serviceExpense.discountType}}">
             </div>
           </div>
           <div class="edit-col7">
@@ -88,7 +88,7 @@
                 <i class="icn-sm icn-caret-gray"></i>
 
                 <ul class="dropdown-menu dropdown-account-type">
-                  <li ng-click="editService.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                  <li ng-click="editService.discountType = 'PERCENT'; discountAmountMsxLength = 100; editService.discountAmount>100 ? editService.discountAmount=null : true ">
                     <a href="javascript:void(0)"> Percent</a>
                   </li>
                   <li ng-click="editService.discountType = 'FIXED'; discountAmountMsxLength = null">

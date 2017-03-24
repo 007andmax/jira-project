@@ -61,13 +61,13 @@
                      class="form-control"
                      placeholder="Discount"
                      name="discountAmount"
-                     ng-model="productExpense.item.discountAmount"
+                     ng-model="productExpense.discountAmount"
                      ng-max="discountAmountMsxLength"
                      ng-min="0"
-                     hard-reset-pattern="pricePattern"
-                     ng-required="productExpense.item.discountType == 'PERCENT' || productExpense.item.discountType == 'FIXED'"
-                     ng-disabled="!productExpense.item.discountType"
-                     qt-to-fixed="2">
+                     ng-required="productExpense.discountType == 'PERCENT' || productExpense.discountType == 'FIXED'"
+                     ng-disabled="!productExpense.discountType"
+                     qt-to-fixed="2"
+                     hard-reset-pattern="{{productExpense.discountType}}">
             </div>
           </div>
           <div class="col-4" style="width: 85px; float: left; padding-left: 5px;">
@@ -78,20 +78,20 @@
                 <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
                         uib-dropdown-toggle aria-expanded="true"
                         tabindex="32">
-                  {{discountTypes[productExpense.item.discountType]}} <b ng-hide="productExpense.item.discountType"
+                  {{discountTypes[productExpense.discountType]}} <b ng-hide="productExpense.discountType"
                                                                     style="color: rgba(76, 92, 111, 0.36)">Type </b>
                 </button>
                 <i class="icn-sm icn-caret-gray"></i>
 
                 <ul class="dropdown-menu dropdown-account-type">
-                  <li ng-click="productExpense.item.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                  <li ng-click="productExpense.discountType = 'PERCENT'; discountAmountMsxLength = 100; productExpense.discountAmount>100 ? productExpense.discountAmount=null : true ">
                     <a href="javascript:void(0)"> Percent</a>
                   </li>
-                  <li ng-click="productExpense.item.discountType = 'FIXED'; discountAmountMsxLength = null">
+                  <li ng-click="productExpense.discountType = 'FIXED'; discountAmountMsxLength = null">
                     <a href="javascript:void(0)"> Fixed </a>
                   </li>
                   <li
-                    ng-click="productExpense.item.discountType = ''; discountAmountMsxLength = ''; productExpense.item.discountAmount = null">
+                    ng-click="productExpense.discountType = ''; discountAmountMsxLength = ''; productExpense.discountAmount = null">
                     <a href="javascript:void(0)"> No Discount </a>
                   </li>
                 </ul>

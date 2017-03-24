@@ -25,7 +25,7 @@
                ng-disabled="!service.discountType"
                execute-when-outfocused="addDiscountInBillable(service.id, service.discountAmount, service.discountType, false)"
                qt-to-fixed="2"
-               hard-reset-pattern="decimalNumberPattern">
+               hard-reset-pattern="{{service.discountType}}">
 
         <div class="form-group " style="display: inline-block;">
           <div uib-dropdown keyboard-nav="true" dropdown-append-to-body="true">
@@ -42,7 +42,7 @@
 
             <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
               <li
-                ng-click="service.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInBillable(service.id, service.discountAmount, service.discountType, false)">
+                ng-click="service.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInBillable(service.id, service.discountAmount, service.discountType, false); service.discountAmount>100 ? service.discountAmount=null : true ">
                 <a href="javascript:void(0)"> Percent</a>
               </li>
               <li
