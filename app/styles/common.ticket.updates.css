@@ -392,7 +392,7 @@
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: 45%;
+  width: 38%;
   float: left;
 }
 
@@ -450,8 +450,9 @@
 
 .table-wrapper .table-content .col-5 {
   /*.table-wrapper .table-content .col-4 {*/
-  width: 15%;
+  width: 22%;
   float: right;
+  white-space: nowrap;
 }
 
 .table-wrapper .service-table .col-4 {
@@ -466,13 +467,9 @@
 .discount-ticket{
   position: absolute;
   bottom: 13px;
-}
-.opened-ticket .discount-ticket{
-  right: 93px;
-}
-.opened-ticket-list .discount-ticket{
   right: 13px;
 }
+
 
 .table-wrapper .table-content-action {
   width: 32px;
