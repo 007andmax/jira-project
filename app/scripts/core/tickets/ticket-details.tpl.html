@@ -511,7 +511,7 @@
                        trimmed-tooltip-checker="product.serialNumber">
                   </div>
                   <!--Discount-->
-                  <div class="discount-ticket col-5" style="padding-left: 20px;" ng-if="product.discountAmount>0">
+                  <div class="discount-ticket col-5" style="padding-left: 20px; position: absolute; bottom: 5px;" ng-if="product.discountAmount>0">
                     Discount: <b ng-if="product.discountType =='FIXED' ">$</b>
                     {{product.discountAmount | currency :
                     '':
