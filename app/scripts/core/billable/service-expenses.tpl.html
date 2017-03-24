@@ -4,12 +4,12 @@
 
   <div class="col-1">{{ service.createdAt | date:'dd MMM yyyy' }}</div>
   <div class="col-2">{{ service.item.name }}</div>
-  <div class="col-5">{{ service.sum | currency: '$': 2 }}
+  <div class="col-sm-2" style="float: right;" >{{ service.sum | currency: '$': 2 }}
     <div class="tax-recurring">
       <select-taxes taxes="taxes" entity="service" entity-type="service" on-close="saveTaxes"></select-taxes>
     </div>
   </div>
-  <div class="col-4">Duration <span class="model">{{ service.billableQuantity | durationFilter }}</span>
+  <div class="col-sm-2" style="float: right;" >Duration <span class="model">{{ service.billableQuantity | durationFilter }}</span>
     <form name="billableEditDiscountForm"
           stop-propagation="click">
 

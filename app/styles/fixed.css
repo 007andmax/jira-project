@@ -359,7 +359,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 
 .tax-recurring{
-  width: 50px;
+  width: 100%;
 }
 .tax-recurring input, .discount-recurring input, .discount-recurring button{
   height: 25px;
@@ -378,7 +378,14 @@ body.non-body-scroll::-webkit-scrollbar {
   display: inline-block;
 }
 .qt-billable-clients .discount-recurring input{
-  width: 162px;
+  width: calc(100% - 70px);
+}
+@media screen and (max-width: 1366px){
+  .qt-billable-clients .discount-recurring input{
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+  }
 }
 .discount-recurring button{
   width: 66px;
@@ -390,11 +397,8 @@ body.non-body-scroll::-webkit-scrollbar {
 .discount-recurring .dropdown-account-type{
   width: 7%;
 }
-.tax-recurring input{
-  width: 213px;
-}
 .qt-billable-clients .tax-recurring input{
-  width: 233px;
+  width: 100%;
 }
 .tax-recurring .checkbox .control-indicator.plus-circle{
   top: 10px;

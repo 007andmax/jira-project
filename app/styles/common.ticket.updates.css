@@ -365,10 +365,13 @@
 /*}*/
 .table-wrapper .table-content [class^="col-"] {
   border-left: 1px solid #e7ecf2;
-  padding: 5px 5px 0;
-  height: 65px;
+  padding: 5px;
+  height: auto;
   border-right: 0;
   /*overflow: hidden;*/
+}
+.table-wrapper .table-content .form-group{
+  margin-bottom: 0;
 }
 .qt-recurring-invoices .table-wrapper .table-content .col-sm-4{
   width: 20.333333%;
@@ -444,7 +447,12 @@
 }
 
 .inventory-details .table-wrapper .service-table .col-3 {
-  width: calc(100% - 755px);
+  width: calc(100% - 801px);
+}
+@media screen and (max-width: 1600px){
+  .inventory-details .table-wrapper .service-table .col-3 {
+    width: calc(100% - 651px);
+  }
 }
 
 .inventory-details .table-wrapper:last-child .table-content {
