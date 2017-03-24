@@ -533,7 +533,7 @@
                     </span>
                     <span class="model">Qty {{ product.quantity }}</span>
                   </div>
-                  <div class="table-content-action pull-right">
+                  <div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
                        ng-click="setEditExpenseId(product.id)"
