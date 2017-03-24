@@ -14,7 +14,7 @@
     {{ product.item.description }}
   </div>
 
-  <div class="col-sm-2" ng-show="product.serialNumber && (product.serialNumber.length > 0)"
+  <div class="col-sm-2 ellipsis" ng-show="product.serialNumber && (product.serialNumber.length > 0)"
        trimmed-popover trimmed-popover-content="product.serialNumber">
     {{ product.serialNumber }}
   </div>

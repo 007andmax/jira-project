@@ -96,7 +96,14 @@
         {{ product.serialNumber }}
       </div>
 
-      <div class="col-sm-2">{{ product.sum | currency: '$': 2 }} <br>
+      <div class="col-sm-2" style="float: right;">{{ product.price | currency: '$': 2 }}
+        <span class="model">Qty {{ product.quantity }}</span>
+        <div class="tax-recurring" stop-propagation="click">
+          <select-taxes taxes="taxes" entity="product" entity-type="product" on-close="saveTaxes"></select-taxes>
+        </div>
+      </div>
+
+      <div class="col-sm-2" style="float: right;">{{ product.sum | currency: '$': 2 }} <br>
         <div class="discount-recurring">
           <form name="reccuringEditDiscountForm"
                 stop-propagation="click">
@@ -150,14 +157,6 @@
           </form>
         </div>
       </div>
-
-      <div class="col-sm-2">{{ product.price | currency: '$': 2 }}
-        <span class="model">Qty {{ product.quantity }}</span>
-        <div class="tax-recurring" stop-propagation="click">
-          <select-taxes taxes="taxes" entity="product" entity-type="product" on-close="saveTaxes"></select-taxes>
-        </div>
-      </div>
-
 
       <!--<div class="col-sm-4" style="float: right;">-->
 
