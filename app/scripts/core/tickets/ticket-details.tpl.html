@@ -551,7 +551,7 @@
                 <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
                   <div class="col-1">{{ service.date | date:'dd MMM yyyy'}}</div>
                   <div class="col-2">{{ service.item.name }}</div>
-                  <div class="col-4">Duration
+                  <div class="col-5">Duration
                     <span class="model">{{ service.quantity | durationFilter }}</span>
                     <div ng-if="service.discountAmount>0">
                       Discount: <b ng-if="service.discountType =='FIXED' ">$</b>{{service.discountAmount | currency :
