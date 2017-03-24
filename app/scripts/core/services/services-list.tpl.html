@@ -4,18 +4,26 @@
     <div class="col-1" ng-click="setOrderForServices('name')">
       <span class="sort-span">Service Name<i class="icn-sm sort-icon icn-sort"
                                              ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'name'}"></i></span>
-
     </div>
 
     <div class="col-2" ng-click="setOrderForServices('rate')">
       <span class="sort-span">Per Hour<i class="icn-sm sort-icon icn-sort"
                                          ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i></span>
+    </div>
+
+    <div class="col-2" ng-click="setOrderForServices('discountAmount')">
+      <span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"
+                                         ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'discountAmount'}"></i></span>
 
     </div>
+
+    <div class="col-3">
+      <span class="sort-span">taxes</span>
+    </div>
+
     <div class="col-5 is-billable" ng-click="setOrderForServices('billable')">
       <span class="sort-span">Is Billable<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
-
     </div>
   </li>
 
@@ -33,8 +41,17 @@
       <div class="col-2">
         {{ service.rate | currency: '$': 2 }}
       </div>
+
+      <div class="col-2">
+        <b ng-if="service.discountType =='FIXED' ">$</b> {{service.discountAmount | currency: '': 2 }} <b ng-if="service.discountType =='PERCENT' ">%</b>
+      </div>
+
+      <div class="col-3">
+        {{ getSelectedTaxNames(service.taxes) }}
+      </div>
+
       <div class="col-5 is-billable">
-        <label class="control checkbox pull-left" style="margin-top: 4px;left:25px">
+        <label class="control checkbox pull-left" style="left:15px">
           <input type="checkbox" ng-checked="service.billable"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
                  ng-click="onChangeBillable()">
@@ -42,7 +59,7 @@
         </label>
       </div>
 
-      <div class="col-4" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+      <div class="col-5" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
            ng-click="deleteService()"

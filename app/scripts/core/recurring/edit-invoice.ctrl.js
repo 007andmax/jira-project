@@ -4,10 +4,10 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
     ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter', 'UsersService',
-      'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService', 'Utils',
+      'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'Utils',
       'quicktech.common.services.UserConfirmationsService',
       function ($scope, RecurringService, CompaniesService, ServicesService, $filter, UsersService,
-                ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils,
+                ProductsService, EmailSettingsService, $timeout, TicketsService, Utils,
                 UserConfirmationsService) {
 
         var day = 1000 * 60 * 60 * 24, form,
@@ -24,7 +24,6 @@
         };
         $scope.openTab = 'product';
 
-        $scope.taxRatesCoef = 0;
         $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Month)?(Year)?$/;
         $scope.numToGeneratePattern = /^\d{0,3}$/;
         $scope.savedRepeatingInvoice = '';
@@ -191,7 +190,6 @@
           if (!company) {
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
-            $scope.taxRatesCoef = 0;
             $scope.editInvoice.services = [{ date: today }];
             Utils.customizeArray(allClientUsers, $scope.clients);
             return;
@@ -220,17 +218,6 @@
           } else {
             $scope.editInvoice.services = [{ date: today }];
           }
-
-          TaxRatesService.getAllByCompany(company.id, $scope, function (resp) {
-            var taxRatesCopy = angular.copy(resp);
-            $scope.taxRatesCoef = 0;
-
-            if (taxRatesCopy && taxRatesCopy.length > 0) {
-              for (var i = 0, len = taxRatesCopy.length; i < len; i++) {
-                $scope.taxRatesCoef += (taxRatesCopy[i].rate / 100);
-              }
-            }
-          });
 
           $scope.companyServices = ServicesService.getAllByCompany($scope, company.id);
         };

@@ -369,6 +369,7 @@ body {
   color: #404b5f;
   background-color: #ffffff;
 }
+
 body input::-ms-clear {
   display: none;
 }
@@ -3571,7 +3572,6 @@ _:-ms-fullscreen,
   border-radius: 4px;
 }
 
-
 .form-control.center-align {
   width: 46%;
   float: left;
@@ -3973,6 +3973,10 @@ input[type="search"] {
 .form-group {
   margin-bottom: 15px;
   position: relative;
+}
+
+#Service .col-1 .form-group {
+  margin-bottom: 0;
 }
 
 .radio,
@@ -6480,7 +6484,7 @@ tbody.collapse.in {
 }
 
 .dropdown-account-type {
-  width: 100%;
+  width: 7%;
 }
 
 .pass-man-popup .dropdown-account-type {
@@ -7038,7 +7042,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   display: table;
   border-collapse: separate;
 }
-.input-group-search .input-group-addon-search .icn-remove-old{
+
+.input-group-search .input-group-addon-search .icn-remove-old {
   margin-right: -13px;
   margin-bottom: -3px;
 }
@@ -11028,6 +11033,10 @@ button.close {
   overflow: hidden;
 }
 
+.qt-table>li.service-add-width{
+  width: 102%;
+}
+
 .available-keywords-wrap .available-keyword {
   cursor: pointer;
 }
@@ -11097,20 +11106,34 @@ button.close {
 
 .ticket-add-content .ticket-add-product .qt-table li .col-1 {
   display: inline-block;
-  width: calc(100% - 413px);
+  width: calc(100% - 627px);
 }
+
+.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+  width: calc(100% - 577px);
+}
+
+@media (min-width: 2048px) {
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 667px);
+  }
+}
+
 .col-1.discount-input {
   display: inline-block;
   width: calc(100% - 437px);
   padding-left: 20px;
 }
-.col-1.discount-input .dropdown-menu{
+
+.col-1.discount-input .dropdown-menu {
   width: calc(100% - 20px);
 }
-.col-1.discount-input .has-dropdown ~ i{
+
+.col-1.discount-input .has-dropdown ~ i {
   pointer-events: auto;
   cursor: pointer;
 }
+
 .col-1.discount-input .icn-caret-gray {
   right: 7px;
 }
@@ -11119,6 +11142,43 @@ button.close {
 .ticket-add-content .ticket-add-product .qt-table li .col-4,
 .ticket-add-content .ticket-add-product .qt-table li .col-5 {
   display: inline-block;
+}
+
+.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3 {
+  width: 140px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 177px);
+    margin-bottom: 10px;
+  }
+
+  .opened-ticket .col-3 {
+    width: 140px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3 {
+    width: 177px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
+    width: 148px !important;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-4 {
+    padding: 0 5px 0 0;
+  }
+
+  .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 667px);
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
+    width: 118px !important;
+  }
 }
 
 #companyInfoContactInfo {
@@ -11210,7 +11270,7 @@ button.close {
   width: calc(100% - 316px);
 }
 
-.left-panel-closed .change-view-actions{
+.left-panel-closed .change-view-actions {
   width: calc(100% - 76px);
 }
 
@@ -11384,8 +11444,8 @@ button.close {
 }
 
 .tooltip-inner {
-  white-space:nowrap;
-  max-width:none;
+  white-space: nowrap;
+  max-width: none;
 }
 
 .scrollable-menu {

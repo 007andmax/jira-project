@@ -37,7 +37,7 @@
 }
 
 .ticket-add .qt-table {
-  margin: 20px 20px;
+  margin: 20px;
 }
 
 .ticket-add .avator {
@@ -200,8 +200,8 @@
 }
 
 /*.ticket-add-footer .btn-primary.disabled {*/
-  /*background-color: #e7ecf2;*/
-  /*border-color: #e7ecf2;*/
+/*background-color: #e7ecf2;*/
+/*border-color: #e7ecf2;*/
 /*}*/
 
 .btn-update {
@@ -210,28 +210,15 @@
 }
 
 /* Add Product tab */
-#Product .col-1 {
-  /*width: 165px;*/
-  /*width: 195px;*/
-}
 
-#Product .col-3 {
-  /*new*/
-  width: 124px;
-}
 
 #Product .col-4, #Product .col-5 {
-  /*increment 3 4 5*/
   width: 124px;
 }
-
-/*#Product .col-6 {*/
-/*width: 30px;*/
-/*}*/
 
 /* Add Service tab */
 #Service .col-1 {
-  width: 145px;
+  width: 175px;
 }
 
 #Service .col-2 {

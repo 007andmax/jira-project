@@ -330,11 +330,6 @@
              ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
           Receipt Archive
         </div>
-        <!--<div class="center-category__category"
-             ng-class="{active: $state.includes('discount')}"
-             ng-click="stateGo($event, 'discount')">
-          Discount
-        </div>-->
       </div>
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'inventory' && !isLeftPanelHidden">
@@ -501,43 +496,31 @@
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
              ng-class="{active: $state.is('settings.techUsers')}" ng-if="currentUser.isOwner">
-          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/admin-with-cogwheels.svg">-->
           Tech Users
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
              ng-class="{active: $state.is('settings.email')}" ng-if="currentUser.isOwner">
-          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/email-settings.svg">-->
           Email Settings
         </div>
 
-        <!--<div class="center-category__category" ng-click="stateGo($event, 'settings.services')"-->
-             <!--ng-class="{active: $state.is('settings.services')}" ng-if="currentUser.isOwner">-->
-          <!--&lt;!&ndash;<img class="icon-pos nav-icon icn-lg" src="images/input-icons/open-wrench-tool-silhouette.svg">&ndash;&gt;-->
-          <!--Services-->
-        <!--</div>-->
-
-        <div class="center-category__category" ng-click="stateGo($event, 'settings.taxRates')"
-             ng-class="{active: $state.is('settings.taxRates')}" ng-if="currentUser.isOwner">
-          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/dollar-symbol.svg">-->
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.taxes')"
+             ng-class="{active: $state.is('settings.taxes')}" ng-if="currentUser.isOwner">
           Taxes
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
              ng-class="{active: $state.is('settings.tickets')}" ng-if="currentUser.isOwner">
-          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/concert-ticket.svg">-->
           Ticket and Invoice
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
              ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner">
-          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/permission.svg">-->
           Permission Management
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
              ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
-          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/mail.svg">-->
           Email Templates
         </div>
       </div>

@@ -1,5 +1,5 @@
 <div class="with-category" ng-controller="quicktech.core.products.productsListCtrl">
-  <ul class="qt-list qt-product-list">
+  <ul class="qt-product-list qt-list ">
 
     <li class="list-heading" ng-show="productsData.list.length > 0" style="cursor: pointer !important;" fixed-block-top offset-top="148">
       <div class="col-2" ng-click="setOrderForProducts('description')">
@@ -17,30 +17,33 @@
                                              ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i></span>
 
       </div>
-      <div class="col-1" ng-click="setOrderForProducts('category')">
+      <div class="col-4" ng-click="setOrderForProducts('category')">
         <span class="sort-span">category<i class="icn-sm sort-icon icn-sort"
                                            ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'category'}"></i></span>
 
       </div>
-      <div class="col-1" ng-click="setOrderForProducts('vendor')">
+      <div class="col-4" ng-click="setOrderForProducts('vendor')">
         <span class="sort-span">vendor/supplier<i class="icn-sm sort-icon icn-sort"
                                                    ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
       </div>
-      <div class="col-1" style="padding-left: 20px;" ng-click="setOrderForProducts('ilc')">
+      <div class="col-4" style="padding-left: 20px;" ng-click="setOrderForProducts('ilc')">
         <span class="sort-span">ilc<i class="icn-sm sort-icon icn-sort"
                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
 
       </div>
-      <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+      <div class="col-4" ng-click="setOrderForProducts('manufacture')">
         <span class="sort-span">mfg#<i class="icn-sm sort-icon icn-sort"
                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
 
       </div>
-      <div class="col-4" ng-click="setOrderForProducts('taxable')">
-        <span class="sort-span">taxable<i class="icn-sm sort-icon icn-sort"
-                                          ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'taxable'}"></i></span>
+      <div class="col-4" ng-click="setOrderForProducts('discountAmount')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"
+                                           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'discountAmount'}"></i></span>
 
+      </div>
+      <div class="col-4">
+        <span class="sort-span">taxes</span>
       </div>
       <div class="col-6">&nbsp;</div>
     </li>
@@ -64,26 +67,26 @@
 
         <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
 
-        <div class="col-1">
+        <div class="col-4">
           {{ product.category.default ? '' : product.category.name}}
         </div>
 
-        <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
+        <div class="col-4" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
 
-        <div class="col-1" style="height: 18px; padding-left: 20px;">
+        <div class="col-4 ellipsis" style="height: 18px; padding-left: 20px;">
           {{ product.ilc}}
         </div>
 
-        <div class="col-1">
+        <div class="col-4">
           {{ product.manufacture}}
         </div>
 
-        <div class="col-4" style="width: 50px">
-          <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
-            <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                   custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_PRODUCTS') }}">
-            <span class="control-indicator"></span>
-          </label>
+        <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+          <b ng-if="product.discountType =='FIXED' ">$</b> {{product.discountAmount | currency: '': 2 }} <b ng-if="product.discountType =='PERCENT' ">%</b>
+        </div>
+
+        <div class="col-4">
+          {{ getSelectedTaxNames(product.taxes) }}
         </div>
 
         <div class="col-6 pull-right" uib-dropdown dropdown-append-to-body="true" keyboard-nav="true"

@@ -8,65 +8,6 @@
 
   services.factory('RecurringService', ['$http', '$rootScope', 'RealTimeService', 'CompaniesService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, CompaniesService, Utils) {
 
-    function getRecurringGraphData(scope, callback) {
-
-      var types = ["WEEKLY", "MONTHLY", "YEARLY"];
-
-      var result = Utils.customizeArray([]);
-
-      $http.get("/recurringInvoice/billed/lastDays").then(function (resp) {
-
-        Utils.customizeArray(resp.data, result);
-
-        RealTimeService.subscribe('/recurringChart', scope, function (newChange) {
-
-          if (newChange.action === 'RECURRING_CHART') {
-
-            checkPoints(new Date(newChange.data.date));
-
-            var typeIndex = types.indexOf(newChange.data.type),
-              points = result[typeIndex];
-
-            var lastPoint = points[points.length - 1];
-
-            Utils.defineReadOnlyProperty(lastPoint, "sum", newChange.data.sum);
-
-          }
-
-          function checkPoints(date) {
-            for (var i = 0; i < result.length; i++) {
-              var points = result[i];
-              var lastPoint = points[points.length - 1],
-                lastPointDate = new Date(lastPoint.date);
-
-              if (lastPointDate.getFullYear() === date.getFullYear()
-                && lastPointDate.getMonth() === date.getMonth()
-                && lastPointDate.getDate() + 1 === date.getDate()) {
-
-                points.push(Utils.customizeObj({
-                  date: Utils.formatDate(date),
-                  sum: 0
-                }));
-                points.splice(0, 1);
-                i--;
-              }
-            }
-          }
-        });
-
-        if (callback) {
-          callback(resp.data);
-        }
-      }, function (response) {
-
-        if (callback) {
-          callback(response.data);
-        }
-      });
-
-      return result;
-    }
-
     function getRecurringCompanies(scope, callback) {
 
       if (!scope || !scope.$id) {
@@ -114,15 +55,6 @@
 
             }
           }
-          /*else if (newChange.action == 'COMPANY_ARCHIVED') {
-
-           for (var i = 0; i < recurring.length; i++) {
-           if (recurring[i].company.id === newChange.data.id) {
-           recurring.splice(i, 1);
-           i--
-           }
-           }
-           }*/
         });
 
         if (callback) {
@@ -137,6 +69,17 @@
       return recurring;
 
     }
+
+    function saveRecurringDiscount(dataWithDiscount, callback) {
+      var sentDiscount = $http({
+        url: '/billable/changeDiscount',
+        method: 'POST',
+        data: dataWithDiscount
+      });
+
+      Utils.handleCallback(sentDiscount, callback);
+    }
+
 
     function saveRecurringOrder(order, callback) {
       if (!order) {
@@ -371,35 +314,6 @@
 
     }
 
-    function search(keyword) {
-
-      if (!keyword) {
-        throw 'Keyword is required!'
-      }
-
-      return $http.get("/recurringInvoice/search?keyword=" + keyword.toLowerCase()).then(function (response) {
-        return response.data;
-      });
-
-    }
-
-    function addCompany(recurring, companyId) {
-
-      if (!recurring) {
-        throw 'recurring is required!'
-      }
-      if (!companyId) {
-        throw 'companyId is required!'
-      }
-      for (var i = 0; i < recurring.length; i++) {
-        if (recurring[i].company.id === companyId) {
-          return;
-        }
-      }
-
-      recurring.push({ company: CompaniesService.getOneById(companyId), total: 0, ticketsCount: 0 });
-    }
-
     function forceCreate(id, callback) {
       if (!id) {
         throw 'Id of the invoice required!'
@@ -411,7 +325,6 @@
     }
 
     return {
-      getRecurringGraphData: getRecurringGraphData,
       getRecurringCompanies: getRecurringCompanies,
       getCompanyRecurringInvoices: getCompanyRecurringInvoices,
       getAll: getAll,
@@ -423,9 +336,8 @@
       saveRecInvServiceExpense: saveRecInvServiceExpense,
       deleteProductExpenseFromRecInv: deleteProductExpenseFromRecInv,
       deleteServiceExpenseFromRecInv: deleteServiceExpenseFromRecInv,
-      search: search,
-      addCompany: addCompany,
-      forceCreate: forceCreate
+      forceCreate: forceCreate,
+      saveRecurringDiscount: saveRecurringDiscount
     }
   }]);
 

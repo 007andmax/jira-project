@@ -226,21 +226,21 @@
 }
 
 .invoice-page .ticket-item .col-1 {
-  width: 164px;
+  width: 130px;
   color: #4c5c6f;
 }
 
 .invoice-page .ticket-item .col-2 {
-  width: 328px;
+  width: 208px;
 }
 
 .invoice-page .ticket-item .col-3 {
-  width: 111px;
+  width: 85px;
   text-align: right;
 }
 
 .invoice-page .ticket-item .col-4 {
-  width: 105px;
+  width: 95px;
   text-align: right;
 }
 

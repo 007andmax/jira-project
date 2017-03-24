@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.editServiceCtrl',
-    ['$scope', '$rootScope', 'ServicesService',
-      function ($scope, $rootScope, ServicesService) {
+    ['$scope', '$rootScope', 'ServicesService', 'TaxesService',
+      function ($scope, $rootScope, ServicesService, TaxesService) {
 
         var savedState = $scope.getLastSavedState('service');
 
@@ -13,16 +13,18 @@
           $scope.editService = angular.copy(origin);
         } else {
           $scope.editService = {
-            taxable: true,
             billable: true,
             isDefault: true
           };
         }
 
+        $scope.taxes = TaxesService.getAll();
+
         $scope.saveEditService = function (form) {
           if (form.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
+
             ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;
 
@@ -59,6 +61,22 @@
           }
 
           if (form.editServiceName && form.editServiceName.$error) {
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.required) {
+              return "Please select a Discount Amount!";
+            }
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.min) {
+              return "Discount amount mustn't be less then 0!";
+            }
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.max) {
+              return "Percent amount mustn't be greater then 100!";
+            }
+
+            if (form.discountAmount && form.discountAmount.$error && form.discountAmount.$error.pattern) {
+              return "Only numbers allowed in Discount Amount!";
+            }
 
             if (form.editServiceName.$error.maxlength) {
               return 'Service name exceeds maximum length.';

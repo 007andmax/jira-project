@@ -250,7 +250,7 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
 
 .create-window .general .company-window__billing .rates__list {
   padding: 0px 0;
-  max-height: 155px;
+  max-height: 350px;
   overflow: auto;
   margin-bottom: 15px;
 }

@@ -24,8 +24,10 @@
               var isQuantityChange = $scope.product.quantity != $scope.editProduct.quantity;
               var isSerialNumberQuantity = $scope.product.serialNumber != $scope.editProduct.serialNumber;
               var isPriceChange = $scope.product.item.sale != $scope.editProduct.item.sale;
+              var isDiscountAmountChange = $scope.product.discountAmount != $scope.editProduct.discountAmount;
+              var isDiscounttypeChange = $scope.product.discountType != $scope.editProduct.discountType;
 
-              if (!(isProductItemChange || isQuantityChange || isSerialNumberQuantity || isPriceChange)) {
+              if (!(isProductItemChange || isQuantityChange || isSerialNumberQuantity || isPriceChange || isDiscountAmountChange || isDiscounttypeChange)) {
                 $scope.setEditExpenseId();
                 return;
               }
@@ -44,7 +46,9 @@
                   },
                   serialNumber: $scope.editProduct.serialNumber,
                   quantity: $scope.editProduct.quantity,
-                  date: $scope.editProduct.date
+                  date: $scope.editProduct.date,
+                  discountAmount: $scope.editProduct.discountAmount,
+                  discountType: $scope.editProduct.discountType
 
                 }
               }, function () {

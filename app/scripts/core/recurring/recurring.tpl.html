@@ -65,8 +65,8 @@
               ng-controller="quicktech.core.recurring.invoiceCtrl"
               on-finish-render="loadingFinished()">
 
-            <div qt-ts-toggler ng-hide="editInvoiceId === invoice.id">
-              <div class="table-invoice-item clearfix">
+            <div ng-hide="editInvoiceId === invoice.id">
+              <div qt-ts-toggler class="table-invoice-item clearfix">
 
                 <div class="ellipsis">{{ companyOfInvocie.name }}</div>
 
@@ -84,7 +84,7 @@
                 <div style="padding-left: 50px;">{{ invoice.generatedCount }}</div>
                 <div style="display: flex; align-items: center">
                   <span class="currency-invoice">
-                    {{ invoice.total | currency:'$':2 }}
+                    {{ getTotal() | currency:'$':2 }}
                   </span>
 
                   <div class="currency-icons" stop-propagation="click">
@@ -120,13 +120,13 @@
                 <div ng-include="'/html/scripts/core/recurring/expenses/expenses-list.tpl.html'"></div>
 
                 <div class="ticket-add-amount pull-right">
-                  <span class="text-muted">Subtotal </span>
-                  <strong>{{ invoice.subtotal | currency:'$':2 }}</strong>
+                  <span class="text-muted">Total </span>
+                  <strong>{{ getTotal() | currency:'$':2 }}</strong>
                 </div>
 
                 <div class="ticket-add-amount pull-right">
-                  <span class="text-muted">Total </span>
-                  <strong>{{ invoice.total | currency:'$':2 }}</strong>
+                  <span class="text-muted">Subtotal </span>
+                  <strong>{{ getSubTotal() | currency:'$':2 }}</strong>
                 </div>
 
                 <div class="ticket-add-amount pull-right">

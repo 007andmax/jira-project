@@ -6,6 +6,7 @@
       ['$scope', 'ProductsService',
         function ($scope, ProductsService) {
 
+          $scope.discountAmountMsxLength;
           $scope.isValidNewExpenseOrNote = false;
 
           setTicketUpdateToDefault();

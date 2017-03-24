@@ -127,8 +127,6 @@
             return item.cost;
           } else if ($scope.orderProducts.field === 'sale') {
             return item.sale;
-          } else if ($scope.orderProducts.field === 'taxable') {
-            return item.taxable;
           }
 
         };
@@ -143,6 +141,12 @@
 
         $scope.setShowingCategory = function (id) {
           $scope.showCategory = id;
+        };
+
+        $scope.getSelectedTaxNames = function(taxes) {
+          return taxes && taxes.map(function (tax) {
+              return tax.name + ' ' + tax.rate + '%';
+            }).join(', ') || 'No taxes';
         };
 
       }]);

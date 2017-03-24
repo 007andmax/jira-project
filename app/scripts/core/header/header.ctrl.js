@@ -84,8 +84,6 @@
             return 'company-devices';
           } else if ($state.includes("quickSupport")) {
             return 'quick-support';
-          } else if ($state.includes("taxRates")) {
-            return 'Tax Rates';
           } else if ($state.current.url.indexOf('dashboard') > -1) {
             return 'Dashboard';
           }

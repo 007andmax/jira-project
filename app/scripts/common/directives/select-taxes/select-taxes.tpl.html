@@ -1,0 +1,29 @@
+<div class="select-taxes-drv" uib-dropdown dropdown-appent-to-body="true" on-toggle="$ctrl.onDropdownToggle(open)">
+  <input type="text" class="form-control ellipsis" ng-value="$ctrl.getSelectedTaxNames()" placeholder="Choose Tax" readonly uib-dropdown-toggle>
+
+  <div class="dropdown-menu dropdown-menu-left checkbox-dropdown" uib-dropdown-menu stop-propagation="click">
+
+    <div role="presentation" class="checkbox-dropdown-header">
+      <div class="form-group" style="float: none; max-width: 100%">
+        <input type="text" class="form-control-filter"
+               placeholder="Search..." ng-model="$ctrl.searchTax">
+        <i class="icn-sm icn-search-input" tabindex="-1"></i>
+      </div>
+    </div>
+
+    <div class="list-container">
+      <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
+        <div class="checkbox-dd-item"
+             ng-repeat="tax in $ctrl.taxes | filter: { name: $ctrl.searchTax } | orderBy: 'name' track by tax.id">
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
+                   ng-change="$ctrl.updateEntityTaxList(tax)">
+            <span class="control-indicator pull-left plus-circle"></span>
+            {{ tax.name }}&nbsp;{{ tax.rate }}%
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

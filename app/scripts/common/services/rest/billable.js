@@ -12,21 +12,36 @@
       function recalculateTotalSumForCompany(company) {
         company.totalSum = 0;
         for (var i = 0; i < company.tickets.length; i++) {
+          var ticket = company.tickets[i];
+          ticket.sum = 0;
+
+          if (ticket.productExpense && ticket.productExpense.length) {
+            for (var k = 0; k < ticket.productExpense.length; k++) {
+              var productExpense = ticket.productExpense[k];
+              ticket.sum += productExpense.totalSum;
+            }
+          }
+
+          if (ticket.serviceExpense && ticket.serviceExpense.length) {
+            for (var j = 0; j < ticket.serviceExpense.length; j++) {
+              var serviceExpense = ticket.serviceExpense[j];
+              ticket.sum += serviceExpense.totalSum;
+            }
+          }
           company.totalSum += company.tickets[i].sum;
         }
       }
 
-      function calculateTotalSumForAllCompanies(info) {
+      function calculateTotalSums(info) {
         for (var key in info) {
           if (key === 'staticCopy') {
             continue;
           }
 
-          info[key].totalSum = 0;
+          var company = info[key];
+          company.totalSum = 0;
 
-          for (var i = 0; i < info[key].tickets.length; i++) {
-            info[key].totalSum += info[key].tickets[i].sum;
-          }
+          recalculateTotalSumForCompany(company);
         }
       }
 
@@ -50,18 +65,6 @@
         }
       }
 
-      //function saveRegularOrder(order, callback) {
-      //  if (!order)throw 'order must be!';
-      //
-      //  var future = $http({
-      //    url: '/billable/saveRegularOrder',
-      //    method: 'POST',
-      //    data: order
-      //  });
-      //
-      //  Utils.handleCallback(future, callback);
-      //}
-
       function getBillablePageDto(scope, callback) {
 
         if (!scope || !scope.$id) {
@@ -73,7 +76,7 @@
         $http.get('/billable/billablePageInfo').then(function (resp) {
 
           Utils.customizeObj(resp.data, info);
-          calculateTotalSumForAllCompanies(info);
+          calculateTotalSums(info);
           setLockTypeForCompanies(info);
 
           RealTimeService.subscribe('/billablePage', scope, function (newChange) {
@@ -158,129 +161,43 @@
                 callback(info);
               }
             }
-            //else if (newChange.action == 'COMPANY_ARCHIVED') {
-            //    delete info[newChange.data.id];
-            //    if (callback) {
-            //        callback(info);
-            //    }
-            //}
           });
+
           if (callback) {
             callback(info);
           }
         });
 
+        var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
+          updateTaxes(originalTax, info, function (tax) {
+            tax.name = originalTax.name;
+            tax.rate = originalTax.rate;
+          })
+        });
+
+        var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
+          updateTaxes(originalTax, info, function (tax, taxList) {
+            taxList.splice(taxList.indexOf(tax), 1);
+          });
+        });
+
+        scope.$on('$destroy', function () {
+          unsubscribeUpdatedTaxEvent();
+          unsubscribeDeletedTaxEvent();
+        });
+
         return info;
       }
 
-      function getTotalBilledAmount(scope, callback) {
-
-        var result = Utils.customizeObj({});
-
-        $http.get("/billable/totalBilled").then(function (resp) {
-
-          Utils.customizeObj(resp.data, result);
-
-          RealTimeService.subscribe('/billedTicketsSumAdded', scope, function (newChange) {
-
-            if (newChange.action === 'BILLED_TICKETS_SUM_ADDED') {
-              Utils.defineReadOnlyProperty(result, "value", result.value + newChange.data);
-            }
-          });
-
-          if (callback) {
-            callback(resp.data);
-          }
-        }, function (response) {
-
-          if (callback) {
-            callback(response.data);
-          }
+      function saveBillableDiscount(dataWithDiscount, callback) {
+        var sentDiscount = $http({
+          url: '/billable/changeDiscount',
+          method: 'POST',
+          data: dataWithDiscount
         });
 
-        return result;
+        Utils.handleCallback(sentDiscount, callback);
       }
-
-      function getBillableChartData(scope, callback) {
-        var resultsList = Utils.customizeArray([]);
-
-        $http.get('/billable/billed/lastDays').then(function (resp) {
-
-          Utils.customizeArray(resp.data, resultsList);
-
-          RealTimeService.subscribe('/billedTicketsSumAdded', scope, function (newChange) {
-
-            if (newChange.action === 'BILLED_TICKETS_SUM_ADDED') {
-              var lastPoint = resultsList[resultsList.length - 1];
-              Utils.defineReadOnlyProperty(lastPoint, "sum", lastPoint.sum + newChange.data);
-            }
-          });
-
-          if (callback) {
-            callback(resultsList);
-          }
-        }, function (response) {
-
-          if (callback) {
-            callback(response.data);
-          }
-        });
-
-        return resultsList;
-      }
-
-      //function getCompanyBillableTickets(companyId, scope, callback) {
-      //
-      //    if (!companyId) {
-      //        throw 'companyId is required!'
-      //    }
-      //
-      //    if (!scope || !scope.$id) {
-      //        throw 'Second argument must be Angularjs scope!'
-      //    }
-      //
-      //    var tickets = [];
-      //
-      //    $http.get('/billable/expenses/' + companyId).then(function (resp) {
-      //
-      //        Utils.customizeArray(resp.data, tickets);
-      //
-      //        RealTimeService.subscribe('/billableExpense?targetId=' + companyId, scope, function (newChange) {
-      //
-      //            console.log(newChange);
-      //
-      //            if (newChange.action == 'BILLABLE_EXPENSE_ADDED') {
-      //
-      //                var ticket = Utils.findById(tickets, newChange.data.id);
-      //
-      //                if (!ticket) {
-      //                    ticket = {};
-      //                    tickets.push(ticket);
-      //                }
-      //
-      //                Utils.customizeObj(newChange.data, ticket);
-      //
-      //            } else if (newChange.action == 'BILLABLE_EXPENSE_REMOVED') {
-      //
-      //                var index = Utils.indexOfId(tickets, newChange.data);
-      //
-      //                if (index > -1) {
-      //                    tickets.splice(index, 1);
-      //                }
-      //            }
-      //        });
-      //
-      //        if (callback) {
-      //            callback(resp.data);
-      //        }
-      //    }, function (resp) {
-      //        if (callback) {
-      //            callback(resp.data);
-      //        }
-      //    });
-      //
-      //    return tickets;
-      //}
 
       function createInvoice(lockId, isSend, contact, address, callback) {
         if (!lockId) {
@@ -371,31 +288,41 @@
         });
       }
 
-      function search(keyword) {
-
-        if (!keyword) {
-          throw 'Keyword is required!'
+      function updateTaxes(originalTax, billableDto, updateFunc) {
+        for (var companyId in billableDto) {
+          var tickets = billableDto[companyId].tickets;
+          for (var i = 0; i < tickets.length; i++) {
+            var ticket = tickets[i];
+            var expenses = (ticket.productExpense || []).concat((ticket.serviceExpense || []));
+            if (expenses.length) {
+              for (var k = 0; k < expenses.length; k++) {
+                var expense = expenses[k];
+                var taxes = expense.taxes;
+                if (taxes && taxes.length) {
+                  for (var j = 0; j < taxes.length; j++) {
+                    var tax = taxes[j];
+                    if (tax.original && tax.original.id === originalTax.id) {
+                      updateFunc(tax, taxes);
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-
-        return $http.get("/billable/search?keyword=" + keyword.toLowerCase()).then(function (response) {
-          return response.data;
-        });
-
       }
 
       return {
-        getTotalBilledAmount: getTotalBilledAmount,
-        getBillableChartData: getBillableChartData,
         createInvoice: createInvoice,
-        //saveRegularOrder: saveRegularOrder,
         getActualInvoiceNumber: getActualInvoiceNumber,
-        search: search,
         getLockedTicketIds: getLockedTicketIds,
         lockTicketIds: lockTicketIds,
         unlockTicketIds: unlockTicketIds,
         getExistTimeByLockId: getExistTimeByLockId,
         lockTicketsByCompany: lockTicketsByCompany,
-        getBillablePageDto: getBillablePageDto
+        getBillablePageDto: getBillablePageDto,
+        saveBillableDiscount: saveBillableDiscount
       }
 
     }]);

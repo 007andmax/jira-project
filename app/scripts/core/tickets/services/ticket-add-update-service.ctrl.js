@@ -6,6 +6,7 @@
       ['$scope', 'ServicesService',
         function ($scope, ServicesService) {
 
+          $scope.discountAmountMsxLength;
           $scope.maxServiceDate = new Date();
 
           $scope.setNewService = function (service) {

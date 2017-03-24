@@ -139,6 +139,24 @@
               callback(Utils.customizeObj(data));
             }
 
+            var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
+              updateTaxes(originalTax, data.list, function (tax) {
+                tax.name = originalTax.name;
+                tax.rate = originalTax.rate;
+              })
+            });
+
+            var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
+              updateTaxes(originalTax, data.list, function (tax, taxList) {
+                taxList.splice(taxList.indexOf(tax), 1);
+              });
+            });
+
+            scope.$on('$destroy', function () {
+              unsubscribeUpdatedTaxEvent();
+              unsubscribeDeletedTaxEvent();
+            });
+
             RealTimeService.subscribe('/product', scope, function (newChange) {
 
               if (newChange.action == 'PRODUCT_SAVED') {
@@ -279,47 +297,6 @@
         Utils.handleCallback(future, callback);
       }
 
-      //function getAllByCategory(scope, categoryId, callback, detailed) {
-      //
-      //    if (!scope || !scope.$id) {
-      //        throw 'First argument must be Angularjs scope!'
-      //    }
-      //
-      //    if (!categoryId) {
-      //        throw 'categoryId is required argument!'
-      //    }
-      //
-      //    var url = '/products?categoryId=' + categoryId;
-      //
-      //    if (detailed) {
-      //        url = '/products/full?categoryId=' + categoryId;
-      //    }
-      //
-      //    return Utils.getListByUrl(url, callback, function (list) {
-      //
-      //        RealTimeService.subscribe('/product?targetId=' + categoryId, scope, function (newChange) {
-      //
-      //            console.log(newChange);
-      //
-      //            if (newChange.action == 'PRODUCT_SAVED') {
-      //
-      //                var product = Utils.findById(list, newChange.data.versionedId.id);
-      //
-      //                if (product) {
-      //                    Utils.customizeObj(newChange.data, product);
-      //                } else {
-      //                    list.push(Utils.customizeObj(newChange.data));
-      //                }
-      //            } else if (newChange.action == 'PRODUCT_DELETED') {
-      //                Utils.deleteById(list, newChange.data.versionedId.id);
-      //                scope.$broadcast("product_deleted", newChange.data);
-      //            } else if (newChange.action == 'PRODUCT_MOVED') {
-      //                Utils.deleteById(list, newChange.data.versionedId.id);
-      //            }
-      //        });
-      //    });
-      //}
-
       function saveProduct(product, callback) {
 
         if (!product) throw 'product is required!';
@@ -335,22 +312,6 @@
           url: url,
           method: method,
           data: product
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
-      function changeTaxableStatus(ids, toTaxable, callback) {
-
-        if (!ids) throw 'ids is required argument!';
-        if (toTaxable === undefined) throw 'toTaxable is required argument!';
-
-        if (!Array.isArray(ids)) ids = [ids];
-
-        var future = $http({
-          url: '/products/changeTaxableStatus?toTaxable=' + !!toTaxable,
-          method: 'POST',
-          data: ids
         });
 
         Utils.handleCallback(future, callback);
@@ -436,6 +397,24 @@
 
           data = resp.data;
 
+          var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
+            updateTaxes(originalTax, data, function (tax) {
+              tax.name = originalTax.name;
+              tax.rate = originalTax.rate;
+            })
+          });
+
+          var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
+            updateTaxes(originalTax, data, function (tax, taxList) {
+              taxList.splice(taxList.indexOf(tax), 1);
+            });
+          });
+
+          scope.$on('$destroy', function () {
+            unsubscribeUpdatedTaxEvent();
+            unsubscribeDeletedTaxEvent();
+          });
+
           if (callback) {
             callback(Utils.customizeObj(data));
           }
@@ -467,15 +446,29 @@
         });
       }
 
+      function updateTaxes(originalTax, entities, updateFunc) {
+        for (var i = 0; i < entities.length; i++) {
+          var product = entities[i];
+          var taxes = product.taxes;
+          if (taxes && taxes.length) {
+            for (var j = 0; j < taxes.length; j++) {
+              var tax = taxes[j];
+              if (tax.original && tax.original.id === originalTax.id) {
+                updateFunc(tax, taxes);
+                break;
+              }
+            }
+          }
+        }
+      }
+
       return {
         search: search,
         getFullListForAutocomplete: getFullListForAutocomplete,
         getCategories: getCategories,
         saveCategory: saveCategory,
         deleteCategory: deleteCategory,
-        //getAllByCategory: getAllByCategory,
         saveProduct: saveProduct,
-        changeTaxableStatus: changeTaxableStatus,
         deleteProduct: deleteProduct,
         isILCUnique: isILCUnique,
         isMfgUnique: isMfgUnique,

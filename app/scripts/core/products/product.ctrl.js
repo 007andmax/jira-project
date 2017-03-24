@@ -35,13 +35,6 @@
           });
         };
 
-        $scope.onChangeTaxable = function () {
-          $scope.disabledCheckbox = true;
-          ProductsService.changeTaxableStatus($scope.product.versionedId.id, !$scope.product.taxable, function () {
-            $scope.disabledCheckbox = false;
-          })
-        };
-
         function findCategoryById(id) {
           for (var i = 0, len = $scope.productsData.categories.length; i < len; i++) {
             var category = $scope.productsData.categories[i];

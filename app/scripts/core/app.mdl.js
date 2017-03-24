@@ -18,13 +18,11 @@
       'quicktech.core.recurring',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
-      'quicktech.core.discount',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
-      'quicktech.core.taxRates',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -145,11 +143,6 @@
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
         }))
-        .state('discount', waitForServices({
-          url: '/accounting/discount',
-          templateUrl: '/html/scripts/core/discount/discount.tpl.html',
-          controller: 'quicktech.core.discount.discountCtrl'
-        }))
         .state('settings', waitForServices({
           url: '/settings',
           templateUrl: '/html/scripts/core/settings/settings.tpl.html',
@@ -204,15 +197,10 @@
           templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
           controller: 'quicktech.core.settings.emailCtrl'
         }))
-        .state('settings.services', waitForServices({
-          url: '/services',
-          templateUrl: '/html/scripts/core/settings/services/services.tpl.html',
-          controller: 'quicktech.core.settings.servicesCtrl'
-        }))
-        .state('settings.taxRates', waitForServices({
-          url: '/taxRates',
-          templateUrl: '/html/scripts/core/settings/tax-rates/tax-rates.tpl.html',
-          controller: 'quicktech.core.settings.taxRatesCtrl'
+        .state('settings.taxes', waitForServices({
+          url: '/taxes',
+          templateUrl: '/html/scripts/core/settings/taxes/taxes.tpl.html',
+          controller: 'quicktech.core.settings.taxesCtrl'
         }))
         .state('settings.tickets', waitForServices({
           url: '/tickets',
@@ -597,6 +585,12 @@
         $rootScope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $rootScope.urlPattern = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
         $rootScope.ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+        $rootScope.discountTypes = {
+          FIXED: "$",
+          PERCENT: "%"
+        };
+
 
         $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
 

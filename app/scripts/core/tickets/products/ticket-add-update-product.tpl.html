@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
+        <div class="col-3" style="margin-bottom: 10px; float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
              style="width: 140px; float: left;">
 
           <input type="text" class="form-control" name="productSerialNumber"
@@ -44,7 +44,7 @@
                  hard-reset-pattern="quantityPattern">
         </div>
 
-        <div class="col-5" style="width: 100px; float: left;"
+        <div class="col-3 price-width" style="width: 115px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
           <input type="text" class="form-control" placeholder="Price" qt-to-fixed="2"
@@ -52,6 +52,53 @@
                  name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
         </div>
+
+        <!--DISCOUNTS-->
+          <div class="col-4" style="width: 100px; float: left;">
+            <!--Discount amount-->
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
+              <input type="text"
+                     class="form-control"
+                     placeholder="Discount"
+                     name="discountAmount"
+                     ng-model="productExpense.item.discountAmount"
+                     ng-max="discountAmountMsxLength"
+                     ng-min="0"
+                     hard-reset-pattern="pricePattern"
+                     ng-required="productExpense.item.discountType == 'PERCENT' || productExpense.item.discountType == 'FIXED'"
+                     ng-disabled="!productExpense.item.discountType"
+                     qt-to-fixed="2">
+            </div>
+          </div>
+          <div class="col-4" style="width: 85px; float: left; padding-left: 5px;">
+            <!--Discount type-->
+            <div class="form-group">
+              <div uib-dropdown keyboard-nav="true">
+
+                <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                        uib-dropdown-toggle aria-expanded="true"
+                        tabindex="32">
+                  {{discountTypes[productExpense.item.discountType]}} <b ng-hide="productExpense.item.discountType"
+                                                                    style="color: rgba(76, 92, 111, 0.36)">Type </b>
+                </button>
+                <i class="icn-sm icn-caret-gray"></i>
+
+                <ul class="dropdown-menu dropdown-account-type">
+                  <li ng-click="productExpense.item.discountType = 'PERCENT'; discountAmountMsxLength = 100">
+                    <a href="javascript:void(0)"> Percent</a>
+                  </li>
+                  <li ng-click="productExpense.item.discountType = 'FIXED'; discountAmountMsxLength = null">
+                    <a href="javascript:void(0)"> Fixed </a>
+                  </li>
+                  <li
+                    ng-click="productExpense.item.discountType = ''; discountAmountMsxLength = ''; productExpense.item.discountAmount = null">
+                    <a href="javascript:void(0)"> No Discount </a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
 
         <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
           <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"

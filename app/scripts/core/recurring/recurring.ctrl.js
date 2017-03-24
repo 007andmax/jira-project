@@ -4,17 +4,21 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
     ['$scope', 'RecurringService', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
-      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService, PermissionsService) {
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', 'TaxesService',
+      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService,
+                PermissionsService, TaxesService) {
 
+        $scope.discountAmountMsxLength;
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
+
+        $scope.taxes = TaxesService.getAll();
 
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
           $scope.$watch('companyData.addresses[0].address', function (address) {
             $scope.isCurrentCompanyAddressEmpty = !address;
           });
         });
-  
+
         $scope.parseDate = Date.parse.bind(Date);
 
         $scope.PermissionsService = PermissionsService;
@@ -41,13 +45,30 @@
           }
         });
 
-        $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
-          $scope.last30DaysValue = 0;
-
-          for (var i = 0; i < $scope.recurringGraphData.length; i++) {
-            $scope.last30DaysValue += $scope.recurringGraphData[i].sum;
+        $scope.addDiscountInRecurring = function (expenseId, discountAmount, discountType, isDelete) {
+          var data = {};
+          if(expenseId && discountAmount > 0 && discountType) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: discountAmount,
+              discountType: discountType
+            };
+            RecurringService.saveRecurringDiscount(data, function(resp){
+              console.log(resp)
+            })
           }
-        });
+          if(isDelete) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: null,
+              discountType: null
+            };
+            RecurringService.saveRecurringDiscount(data, function(resp){
+              console.log(resp)
+            })
+          }
+
+        };
 
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
@@ -101,6 +122,10 @@
 
         $scope.filterInvoicesByCompany = function (invoice) {
           return !headerSharedState.filter.companyId || invoice.company.id === headerSharedState.filter.companyId;
+        };
+
+        $scope.saveTaxes = function (entity, entityType) {
+          TaxesService.linkWithEntity(entity.id, entityType, entity.taxes);
         };
 
       }]);

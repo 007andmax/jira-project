@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService',
-      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService',
+      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService, TaxesService) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -18,12 +18,12 @@
           });
         });
 
+        $scope.taxes = TaxesService.getAll();
+
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
-
-        $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
           $scope.$watch('companyData.addresses[0].address', function (address) {
@@ -80,38 +80,34 @@
           }
         });
 
+        $scope.addDiscountInBillable = function (expenseId, discountAmount, discountType, isDelete) {
+          var data = {};
+          if(expenseId && discountAmount > 0 && discountType) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: discountAmount,
+              discountType: discountType
+            };
+            BillableService.saveBillableDiscount(data, function(resp){
+              console.log(resp)
+            })
+          };
+          if(isDelete) {
+            data= {
+              expenseId: expenseId,
+              discountAmount: null,
+              discountType: null
+            };
+            BillableService.saveBillableDiscount(data, function(resp){
+              console.log(resp)
+            })
+          };
+
+        };
+
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
         };
-
-        $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
-
-          if ($scope.billableChartData.length < 30) {
-            var quantityMissingDays = 30 - $scope.billableChartData.length;
-
-            for (var j = 0; j < quantityMissingDays; j++) {
-              $scope.billableChartData.unshift({
-                sum: undefined,
-                date: getOneDateAgo($scope.billableChartData[0].date)
-              })
-            }
-          }
-
-          $scope.$watch('billableChartData', function () {
-            $scope.billedAmountLast30Days = 0;
-            for (var i = 0; i < $scope.billableChartData.length; i++) {
-              $scope.billedAmountLast30Days += $scope.billableChartData[i].sum || 0;
-            }
-          });
-
-          function getOneDateAgo(dateString) {
-            var date = new Date(dateString);
-            var dateCopy = new Date(dateString);
-
-            dateCopy.setDate(date.getDate() - 1);
-            return dateCopy;
-          }
-        });
 
         $scope.anotherCompanySelected = function (companyId) {
           if ($scope.ticketsSelection[companyId] && $scope.ticketsSelection[companyId].checked) {
@@ -185,6 +181,10 @@
             }
           }
         }, true);
+
+        $scope.saveTaxes = function (entity, entityType) {
+          TaxesService.linkWithEntity(entity.id, entityType, entity.taxes);
+        };
 
       }]);
 
