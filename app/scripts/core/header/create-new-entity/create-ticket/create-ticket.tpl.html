@@ -407,6 +407,16 @@
 
           <div typeahead-input-icon-sm="ticketAgent"></div>
 
+          <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+                   tooltip-placement="top"></i>
+            </span>
+            <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+          </div>
+
         </div>
 
       </li>
