@@ -65,8 +65,8 @@
               ng-controller="quicktech.core.recurring.invoiceCtrl"
               on-finish-render="loadingFinished()">
 
-            <div qt-ts-toggler ng-hide="editInvoiceId === invoice.id">
-              <div class="table-invoice-item clearfix">
+            <div ng-hide="editInvoiceId === invoice.id">
+              <div qt-ts-toggler class="table-invoice-item clearfix">
 
                 <div class="ellipsis">{{ companyOfInvocie.name }}</div>
 
