@@ -370,6 +370,13 @@
   border-right: 0;
   /*overflow: hidden;*/
 }
+.qt-recurring-invoices .table-wrapper .table-content .col-sm-4{
+  width: 20.333333%;
+  height: auto;
+}
+.qt-recurring-invoices .table-wrapper .table-content .col-3{
+  width: 13%;
+}
 
 .table-wrapper .table-content .col-1 {
   width: 163px;
