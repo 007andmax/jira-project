@@ -54,12 +54,12 @@
         </div>
 
         <!--DISCOUNTS-->
-          <div class="col-4" style="width: 170px; float: left;">
+          <div class="col-4" style="width: 100px; float: left;">
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
               <input type="text"
                      class="form-control"
-                     placeholder="Discount Amount"
+                     placeholder="Discount"
                      name="discountAmount"
                      ng-model="productExpense.discountAmount"
                      ng-max="discountAmountMsxLength"
@@ -70,7 +70,7 @@
                      qt-to-fixed="2">
             </div>
           </div>
-          <div class="col-4" style="width: 105px; float: left; padding-left: 5px;">
+          <div class="col-4" style="width: 85px; float: left; padding-left: 5px;">
             <!--Discount type-->
             <div class="form-group">
               <div uib-dropdown keyboard-nav="true">

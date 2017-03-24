@@ -3975,7 +3975,7 @@ input[type="search"] {
   position: relative;
 }
 
-#Service .col-1 .form-group{
+#Service .col-1 .form-group {
   margin-bottom: 0;
 }
 
@@ -11033,6 +11033,10 @@ button.close {
   overflow: hidden;
 }
 
+.qt-table>li.service-add-width{
+  width: 102%;
+}
+
 .available-keywords-wrap .available-keyword {
   cursor: pointer;
 }
@@ -11102,15 +11106,15 @@ button.close {
 
 .ticket-add-content .ticket-add-product .qt-table li .col-1 {
   display: inline-block;
-  width: calc(100% - 717px);
+  width: calc(100% - 627px);
 }
-@media only screen and (max-width: 1920px){
+
+.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+  width: calc(100% - 577px);
+}
+
+@media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-    width: calc(100% - 667px);
-  }
-}
-@media only screen and (max-width: 2048px){
-  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1{
     width: calc(100% - 667px);
   }
 }
@@ -11139,33 +11143,40 @@ button.close {
 .ticket-add-content .ticket-add-product .qt-table li .col-5 {
   display: inline-block;
 }
-.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3{
+
+.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3 {
   width: 140px;
 }
+
 @media only screen and (max-width: 1600px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 177px);
     margin-bottom: 10px;
   }
-  .opened-ticket .col-3{
+
+  .opened-ticket .col-3 {
     width: 140px;
   }
+
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3 {
     width: 177px;
   }
 
-  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width{
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 148px !important;
   }
+
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-4 {
     padding: 0 5px 0 0;
   }
-  .ticket-add-content .ticket-add-product .qt-table li .col-1{
+
+  .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 667px);
   }
 }
-@media only screen and (max-width: 1366px){
-  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width{
+
+@media only screen and (max-width: 1366px) {
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 118px !important;
   }
 }
