@@ -2479,7 +2479,7 @@ Devices tab
 
 @media screen and (max-width: 1366px) {
   .with-category .qt-product-list > li > .col-2 {
-    width: calc(100% - 833px);
+    width: calc(100% - 863px);
   }
 }
 
@@ -2534,7 +2534,7 @@ Devices tab
     width: 145px;
   }
 
-  .qt-product-list > li > .col-2 {
+  .slide-category-content .qt-list > li > .col-2 {
     width: calc(100% - 1293px);
   }
 
