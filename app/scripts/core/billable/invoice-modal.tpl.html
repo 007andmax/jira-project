@@ -154,11 +154,11 @@
 
     <div class="ticket-item" ng-repeat="productExpense in ticket.productExpenses">
 
-      <div class="col-1" style="width: 492px">
+      <div class="col-1" style="width: 338px">
         <span class="name">{{ productExpense.item.description }}</span>
         <br>
-        <span ng-show="productExpense.item.manufacture">P/N: {{ productExpense.item.manufacture }}</span>
-        <span style="margin-left: 15px;" ng-show="productExpense.serialNumber">S/N: {{ productExpense.serialNumber }}</span>
+        <span ng-show="productExpense.item.manufacture">P/N: {{ productExpense.item.manufacture }}</span> <br>
+        <span ng-show="productExpense.serialNumber">S/N: {{ productExpense.serialNumber }}</span>
 
       </div>
 
