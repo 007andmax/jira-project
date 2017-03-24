@@ -366,6 +366,10 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 .discount-recurring input{
   width: 143px;
+  display: inline-block;
+}
+.qt-billable-clients .discount-recurring input{
+  width: 162px;
 }
 .discount-recurring button{
   width: 66px;
@@ -380,8 +384,14 @@ body.non-body-scroll::-webkit-scrollbar {
 .tax-recurring input{
   width: 213px;
 }
+.qt-billable-clients .tax-recurring input{
+  width: 233px;
+}
 .tax-recurring .checkbox .control-indicator.plus-circle{
   top: 10px;
+}
+.inventory-details .table-wrapper .service-table .form-group{
+  margin-bottom: 0;
 }
 
 

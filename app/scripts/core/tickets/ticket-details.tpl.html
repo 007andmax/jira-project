@@ -507,13 +507,14 @@
                       >P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>
-                  <!--Discount-->
-                  <div ng-if="product.discountAmount>0">
-                    Discount: <b ng-if="product.discountType =='FIXED' ">$</b>{{product.discountAmount | currency : '':
-                    2 }}<b ng-if="product.discountType =='PERCENT' ">%</b>
-                  </div>
                   <div class="col-3" ng-if="product.serialNumber" uib-tooltip="{{ product.serialNumber }}"
                        trimmed-tooltip-checker="product.serialNumber">
+                  </div>
+                  <!--Discount-->
+                  <div class="discount-ticket" ng-if="product.discountAmount>0">
+                    Discount: <b ng-if="product.discountType =='FIXED' ">$</b>{{product.discountAmount | currency :
+                    '':
+                    2 }}<b ng-if="product.discountType =='PERCENT' ">%</b>
                   </div>
                   <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'"
                        uib-tooltip="{{ product.sum | currency :'$':2 }}"

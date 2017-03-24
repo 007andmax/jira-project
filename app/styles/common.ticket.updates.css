@@ -437,7 +437,7 @@
 }
 
 .inventory-details .table-wrapper .service-table .col-3 {
-  width: calc(100% - 507px);
+  width: calc(100% - 755px);
 }
 
 .inventory-details .table-wrapper:last-child .table-content {
@@ -455,12 +455,23 @@
 }
 
 .table-wrapper .service-table .col-4 {
-  width: 150px;
+  width: 243px;
+  height: auto;
 }
 
 .inventory-details .table-wrapper .service-table .col-5 {
-  width: 98px;
+  width: 243px;
   float: right;
+}
+.discount-ticket{
+  position: absolute;
+  bottom: 13px;
+}
+.opened-ticket .discount-ticket{
+  right: 93px;
+}
+.opened-ticket-list .discount-ticket{
+  right: 13px;
 }
 
 .table-wrapper .table-content-action {
