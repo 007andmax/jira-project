@@ -164,7 +164,12 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
   margin-right: 16px;
 }
-
+.qt-default-services li .intermediate-parent-elem .is-billable label{
+  left: 10px;
+}
+.qt-services li .intermediate-parent-elem .is-billable label{
+  left: 15px;
+}
 @media only screen and (min-width: 2000px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     height: 18px;
@@ -302,9 +307,6 @@ body.non-body-scroll::-webkit-scrollbar {
     width: calc(100% - 863px);
   }
 
-  .qt-list > li > .col-2 {
-    width: calc(100% - 758px);
-  }
   .qt-list > li > .intermediate-parent-elem > .col-2, .slide-category-content .qt-list > li > .col-2 {
     width: calc(100% - 763px);
   }
@@ -350,7 +352,11 @@ body.non-body-scroll::-webkit-scrollbar {
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 90px;
   }
+  .qt-default-services li .intermediate-parent-elem .is-billable label{
+    left: 0;
+  }
 }
+
 
 .tax-recurring{
   width: 50px;
@@ -460,11 +466,6 @@ body.non-body-scroll::-webkit-scrollbar {
   /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
 
-@media (min-width: 2048px) {
-  .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-    width: calc(100% - 445px);
-  }
-}
 
 .qt-services-list > li > .intermediate-parent-elem > .col-5 {
   width: 90px;
