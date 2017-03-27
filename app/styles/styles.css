@@ -11296,6 +11296,7 @@ button.close {
   overflow: hidden;
   white-space: normal;
   word-break: break-word;
+  height: auto;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
