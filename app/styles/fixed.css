@@ -366,6 +366,7 @@ body.non-body-scroll::-webkit-scrollbar {
   border-radius: 0;
   background-color: #F1F5FA;
   border: 1px solid #F1F5FA;
+  cursor: pointer;
 }
 .tax-recurring input:hover, .discount-recurring input:hover, .discount-recurring button:hover {
   border: 1px solid #B4B4B4;
