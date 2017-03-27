@@ -25,6 +25,16 @@
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
+        $scope.isDisocuntForIcon = function(billalbleCompany){
+          var isDiscount=false;
+          for(var t = 0; t < billalbleCompany.tickets.length; t++) {
+            if(billalbleCompany.tickets[t].discountSum > 0) {
+              isDiscount = true;
+            }
+          }
+          return isDiscount;
+        };
+
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
           $scope.$watch('companyData.addresses[0].address', function (address) {
             $scope.isCurrentCompanyAddressEmpty = !address;
