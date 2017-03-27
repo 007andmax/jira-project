@@ -57,10 +57,19 @@
 
               <div class="checkbox-caption bold">{{ company.name }}</div>
               <span class="label label-light">{{ billableCompany.tickets.length }}</span>
+
             </div>
 
             <div class="col-2">
-              <div class="billable-amount bold">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
+
+              <div ng-if="isDisocuntForIcon(billableCompany)"">
+                <i class="icon-sm sale-icon-for-isDicount"></i>
+              </div>
+
+              <div class="billable-amount bold">
+                {{ billableCompany.totalSum | currency: '$': 2 }}
+              </div>
+
             </div>
 
             <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets" qt-scroll-to="top"

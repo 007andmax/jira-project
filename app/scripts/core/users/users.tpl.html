@@ -19,6 +19,55 @@
         </div>
       </div>
     </div>
+    <div ng-if="usersView === 'list'">
+      <ul class="qt-list qt-users" style="margin-bottom: 1px;">
+        <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
+          <div class="col-lg-3 col-xs-3" style="padding-left: 15px;" ng-click="setOrderByUsers('name')">
+        <span class="sort-span">
+          Name
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'name'}"></i>
+        </span>
+          </div>
+
+          <div class="col-lg-2 col-xs-2" ng-click="setOrderByUsers('company')">
+        <span class="sort-span">
+          Company
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'company'}"></i>
+        </span>
+          </div>
+
+          <div class="col-lg-2 col-xs-2" ng-click="setOrderByUsers('phone')">
+        <span class="sort-span">
+          Contact No.
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'phone'}"></i>
+        </span>
+          </div>
+
+          <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('type')">
+        <span class="sort-span">
+          Type
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'type'}"></i>
+        </span>
+          </div>
+
+          <div class="col-lg-1 col-xs-2 subscribe-col">Subscription</div>
+
+          <div class="col-lg-1 col-xs-1 tickets-col" ng-click="setOrderByUsers('ticket')">
+        <span class="sort-span">
+          Tickets
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'ticket'}"></i>
+        </span>
+          </div>
+
+          <div class="col-lg-2 col-xs-1 buttons-col"></div>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div style="background: #f4f4f4" ng-if="usersView === 'grid'">
@@ -126,53 +175,7 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-users" ng-if="usersView === 'list'">
-
-    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
-      <div class="col-lg-3 col-xs-3" style="padding-left: 15px;" ng-click="setOrderByUsers('name')">
-        <span class="sort-span">
-          Name
-          <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'name'}"></i>
-        </span>
-      </div>
-
-      <div class="col-lg-2 col-xs-2" ng-click="setOrderByUsers('company')">
-        <span class="sort-span">
-          Company
-          <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'company'}"></i>
-        </span>
-      </div>
-
-      <div class="col-lg-2 col-xs-2" ng-click="setOrderByUsers('phone')">
-        <span class="sort-span">
-          Contact No.
-          <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'phone'}"></i>
-        </span>
-      </div>
-
-      <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('type')">
-        <span class="sort-span">
-          Type
-          <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'type'}"></i>
-        </span>
-      </div>
-
-      <div class="col-lg-1 col-xs-2 subscribe-col">Subscription</div>
-
-      <div class="col-lg-1 col-xs-1 tickets-col" ng-click="setOrderByUsers('ticket')">
-        <span class="sort-span">
-          Tickets
-          <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'ticket'}"></i>
-        </span>
-      </div>
-
-      <div class="col-lg-2 col-xs-1 buttons-col"></div>
-    </li>
+  <ul class="qt-list qt-users" ng-if="usersView === 'list'" style="margin-top: 70px;">
 
     <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
         ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id">
