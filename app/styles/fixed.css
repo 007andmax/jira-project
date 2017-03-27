@@ -377,7 +377,7 @@ body.non-body-scroll::-webkit-scrollbar {
   width: 143px;
   display: inline-block;
 }
-.qt-billable-clients .discount-recurring {
+.qt-billable-clients .discount-recurring input {
   width: calc(100% - 70px);
 }
 @media screen and (max-width: 1366px){
