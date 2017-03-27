@@ -365,6 +365,10 @@ body.non-body-scroll::-webkit-scrollbar {
   height: 25px;
   border-radius: 0;
   background-color: #F1F5FA;
+  border: 1px solid #F1F5FA;
+}
+.tax-recurring input:hover, .discount-recurring input:hover, .discount-recurring button:hover {
+  border: 1px solid #B4B4B4;
 }
 .tax-recurring .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control,
 .discount-recurring .form-control:focus, .discount-recurring input:-webkit-autofill {
