@@ -384,6 +384,18 @@ body.non-body-scroll::-webkit-scrollbar {
 .discount-recurring input {
   width: calc(100% - 70px);
 }
+@media screen and (max-width: 1600px){
+  .discount-recurring input, .discount-recurring div{
+    display: block;
+}
+  .discount-recurring input{
+    width: 100%;
+  }
+  .discount-recurring .form-group div{
+    width: 70px;
+  }
+}
+
 @media screen and (max-width: 1366px){
   .qt-billable-clients .discount-recurring input{
     width: 100%;
