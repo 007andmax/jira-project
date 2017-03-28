@@ -510,14 +510,15 @@
                   <div class="col-3" ng-if="product.serialNumber" uib-tooltip="{{ product.serialNumber }}"
                        trimmed-tooltip-checker="product.serialNumber">
                   </div>
-                  <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'"
-                       uib-tooltip="{{ product.sum | currency :'$':2 }}"
-                       trimmed-tooltip-checker="product.sum | currency:'$':2">
-                  </div>
+
                   <div class="col-5">
                     <div ng-show="ticketDetails.status !== 'COMPLETED'"
                          uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
                          trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
+                    </div>
+                    <div ng-show="ticketDetails.status === 'COMPLETED'"
+                         uib-tooltip="{{ product.sum | currency :'$':2 }}"
+                         trimmed-tooltip-checker="product.sum | currency:'$':2">
                     </div>
                     <div class="discount-ticket" ng-if="product.discountAmount>0">
                       Discount: <b ng-if="product.discountType =='FIXED' ">$</b>
