@@ -376,13 +376,12 @@ body.non-body-scroll::-webkit-scrollbar {
   background-color: #F1F5FA;
 }
 .discount-recurring{
+  display: block;
+}
+.discount-recurring input, .discount-recurring div{
   display: inline-block;
 }
-.discount-recurring input{
-  width: 143px;
-  display: inline-block;
-}
-.qt-billable-clients .discount-recurring input {
+.discount-recurring input {
   width: calc(100% - 70px);
 }
 @media screen and (max-width: 1366px){
