@@ -1,77 +1,94 @@
 /*Tickets Edit List*/
 
-.qt-table{ /* Apply on UL*/
-    padding: 0;
-    margin: 0;
-    list-style: none;
+.qt-table { /* Apply on UL*/
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-.qt-table>li{
-    display: table;
-    width: 100%;
-}
-.qt-table>li+li{
-    margin-top: 10px;
+.qt-table > li {
+  display: table;
+  width: 100%;
 }
 
-.qt-table>li>div{
-    display: table-cell;
-    padding: 0 5px;
-    vertical-align: top;
-    position: relative;
+.qt-table > li + li {
+  margin-top: 10px;
 }
+
+.qt-table > li > div {
+  display: table-cell;
+  padding: 0 5px;
+  vertical-align: top;
+  position: relative;
+}
+
 .qt-table > li.service-add-width > div {
   display: inline-block;
 }
-.opened-ticket .qt-table > li.service-add-width > .col-3{
+
+.opened-ticket .qt-table > li.service-add-width > .col-3 {
   width: 56%;
 }
-.opened-ticket-list .qt-table > li.service-add-width > .col-3{
+
+.opened-ticket-list .qt-table > li.service-add-width > .col-3 {
   width: 29.7%;
 }
+
 _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
   width: 54%;
 }
+
 _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
   width: 24.7%;
 }
-@media screen and (min-width: 2048px){
-  .opened-ticket .qt-table > li.service-add-width > .col-3{
+
+@media screen and (min-width: 2048px) {
+  .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 60%;
   }
-  .opened-ticket-list .qt-table > li.service-add-width > .col-3{
+
+  .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 39%;
   }
+
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 59%;
   }
+
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 26.7%;
   }
 }
-@media screen and (max-width: 1600px){
-  .opened-ticket .qt-table > li.service-add-width > .col-3{
+
+@media screen and (max-width: 1600px) {
+  .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 44.3%;
   }
-  .opened-ticket-list .qt-table > li.service-add-width > .col-3{
+
+  .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 47%;
     margin-bottom: 10px;
   }
+
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 42%;
   }
+
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 46.7%;
   }
-  .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(4){
+
+  .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(4) {
     padding-left: 0;
-    width: 92px!important;
+    width: 92px !important;
   }
-  .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(5){
-    width: 84px!important;
+
+  .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(5) {
+    width: 84px !important;
   }
 
 }
+
 @media screen and (max-width: 1366px) {
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 29%;
@@ -80,31 +97,36 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 44%;
   }
+
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 26%;
   }
+
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 42.7%;
   }
 }
+
 @media screen and (max-width: 1280px) {
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 21%;
   }
+
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 18%;
   }
 }
 
-.qt-table>li>div:first-child{
-	padding-left: 0;
-}
-.qt-table>li>div:last-child{
-	padding-right: 0;
+.qt-table > li > div:first-child {
+  padding-left: 0;
 }
 
-.qt-table>li>div>input{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.qt-table > li > div:last-child {
+  padding-right: 0;
+}
+
+.qt-table > li > div > input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -405,7 +405,7 @@
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: 63%;
+  width: 38%;
   float: left;
 }
 
@@ -429,7 +429,7 @@
   float: left;
 }
 
-.table-wrapper .table-content .col-3 {
+.table-wrapper .table-content .serial-width {
   /*new*/
   width: 25%;
   float: left;
@@ -445,9 +445,13 @@
   float: right;
 }
 
-.table-wrapper .service-table .col-3 {
-  width: calc(100% - 573px);
-}
+/*.table-wrapper .service-table .col-3 {*/
+  /*width: calc(100% - 575px);*/
+/*}*/
+/*.table-wrapper .table-content .col-3{*/
+  /*width: calc(100% - 758px);*/
+/*}*/
+
 .qt-recurring-invoices .table-wrapper .table-content .col-sm-4{
   width: 33.333333%;
 }
@@ -474,7 +478,7 @@
   }
 
   .inventory-details .table-wrapper .service-table .col-3 {
-    width: calc(100% - 726px);
+    width: calc(100% - 390px);
   }
 
   .table-wrapper .table-content .discount-ticket {
@@ -494,16 +498,13 @@
     width: calc(100% - 464px);
   }
   .inventory-details .table-wrapper .service-table .col-3{
-    width: calc(100% - 601px);
+    width: calc(100% - 305px);
   }
 
-  .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: 34%;
-  }
 }
 @media screen and (max-width: 1280px){
   .inventory-details .table-wrapper .service-table .col-3{
-    width: calc(100% - 555px);
+    width: calc(100% - 280px);
   }
 }
 

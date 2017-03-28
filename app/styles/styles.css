@@ -3583,7 +3583,7 @@ _:-ms-fullscreen,
 .form-control:focus {
   border-color: #2c9fdd;
   outline: 0;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 .form-control::-moz-placeholder {
@@ -3602,7 +3602,7 @@ _:-ms-fullscreen,
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #fcfdfd;
+  /*background-color: #fcfdfd;*/
   opacity: 1;
 }
 
@@ -3972,7 +3972,7 @@ input[type="search"] {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   position: relative;
 }
 
