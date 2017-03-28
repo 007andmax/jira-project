@@ -111,6 +111,9 @@
   top        : 13px;
   bottom     : 90px;
 }
+_:-moz-tree-row(hover), .container-ticket-content > .nano-pane  {
+  display: none!important;
+}
 .container-ticket-content > .nano-pane > .nano-slider {
   margin: 0 12px;
 }
