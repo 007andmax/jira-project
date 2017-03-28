@@ -62,7 +62,7 @@
 
             <div class="col-2">
 
-              <div ng-if="isDisocuntForIcon(billableCompany)"">
+              <div ng-if="isDisocuntForIcon(billableCompany)">
                 <i class="icon-sm sale-icon-for-isDicount"></i>
               </div>
 
@@ -107,6 +107,10 @@
                       Tkt# {{ ticket.ticketNumber }}
                     </a>
                   </div>
+                </div>
+
+                <div ng-if="ticket.discountSum > 0">
+                  <i class="icon-sm sale-icon-for-isDicount"></i>
                 </div>
 
                 <div class="col-2">

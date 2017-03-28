@@ -271,6 +271,7 @@
 
           $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
           $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
+
         };
 
         $scope.selectAllUsers = function (isSelectAllUsers) {

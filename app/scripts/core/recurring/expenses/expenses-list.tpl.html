@@ -27,7 +27,9 @@
                  ng-disabled="!service.discountType"
                  execute-when-outfocused="addDiscountInRecurring(service.id, service.discountAmount, service.discountType, false)"
                  qt-to-fixed="2"
-                 hard-reset-pattern="{{service.discountType}}">
+                 hard-reset-pattern="{{service.discountType}}"
+                 ng-keydown="$event.which === 13 && $event.preventDefault()"
+                 >
         </div>
         <div>
           <!--Discount type-->
@@ -112,7 +114,8 @@
                      ng-disabled="!product.discountType"
                      execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount, product.discountType, false)"
                      qt-to-fixed="2"
-                     hard-reset-pattern="{{product.discountType}}">
+                     hard-reset-pattern="{{product.discountType}}"
+                     ng-keydown="$event.which === 13 && $event.preventDefault()">
             </div>
             <div style="display: inline-block;">
               <!--Discount type-->

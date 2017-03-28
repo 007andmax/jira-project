@@ -62,7 +62,7 @@
                      placeholder="Discount Amount"
                      name="discountAmount"
                      ng-model="editProduct.discountAmount"
-                     ng-max="discountAmountMsxLength"
+                     ng-max="editProduct.discountType == 'FIXED' ? editProduct.quantity*editProduct.item.sale : 100"
                      ng-min="0"
                      ng-required="editProduct.discountType == 'PERCENT' || editProduct.discountType == 'FIXED'"
                      ng-disabled="!editProduct.discountType"

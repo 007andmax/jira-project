@@ -57,12 +57,12 @@
           <div class="col-4" style="width: 100px; float: left;">
             <!--Discount amount-->
             <div class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
-              <input type="text"
+              <input type="number"
                      class="form-control"
                      placeholder="Discount"
                      name="discountAmount"
                      ng-model="productExpense.discountAmount"
-                     ng-max="discountAmountMsxLength"
+                     ng-max="productExpense.discountType == 'FIXED' ? productExpense.quantity*productExpense.item.sale : 100"
                      ng-min="0"
                      ng-required="productExpense.discountType == 'PERCENT' || productExpense.discountType == 'FIXED'"
                      ng-disabled="!productExpense.discountType"

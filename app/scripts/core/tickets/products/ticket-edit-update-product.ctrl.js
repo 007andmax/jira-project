@@ -8,6 +8,14 @@
 
           $scope.editProduct = $scope.product.staticCopy();
 
+          $scope.discountAmountMsxLength;
+          $scope.changeDiscountMaxLength = function(){
+            if($scope.product.discountType === "FIXED") {
+              $scope.discountAmountMsxLength = $scope.editProduct.item.sale * $scope.editProduct.quantity;
+            }
+          };
+
+
           $scope.loadProductByCategory = function (categoryId) {
             $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
           };

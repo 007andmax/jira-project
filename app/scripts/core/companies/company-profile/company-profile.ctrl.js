@@ -71,7 +71,7 @@
           var company = CompaniesService.getOneById($scope.company.id);
           var confirmMessage = 'Do you want to archive ' + company.name + '?';
           var confirmButton = 'Yes';
-  
+
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             CompaniesService.archive(company.id, function (resp) {
               if (resp.data && resp.data.code == 403) {

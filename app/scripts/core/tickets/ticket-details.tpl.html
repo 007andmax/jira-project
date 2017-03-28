@@ -562,7 +562,7 @@
                     {{ service.description ? service.description : '&nbsp;' }}
                   </div>
 
-                  <div class="table-content-action pull-right">
+                  <div class="table-content-action pull-right" ng-show="ticketDetails.status != 'COMPLETED'">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
                        ng-click="setEditExpenseId(service.id)"

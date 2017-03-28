@@ -25,7 +25,8 @@
                ng-disabled="!service.discountType"
                execute-when-outfocused="addDiscountInBillable(service.id, service.discountAmount, service.discountType, false)"
                qt-to-fixed="2"
-               hard-reset-pattern="{{service.discountType}}">
+               hard-reset-pattern="{{service.discountType}}"
+               ng-keydown="$event.which === 13 && $event.preventDefault()">
 
         <div class="form-group " style="display: inline-block;">
           <div uib-dropdown keyboard-nav="true" dropdown-append-to-body="true">
