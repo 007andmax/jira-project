@@ -11149,11 +11149,6 @@ button.close {
 }
 
 @media only screen and (max-width: 1600px) {
-  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-    width: calc(100% - 177px);
-    margin-bottom: 10px;
-  }
-
   .opened-ticket .col-3 {
     width: 140px;
   }
@@ -11173,11 +11168,21 @@ button.close {
   .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 667px);
   }
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 569px);
+  }
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 177px);
+    margin-bottom: 10px;
+  }
 }
 
 @media only screen and (max-width: 1366px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
-    width: 118px !important;
+    width: 106px !important;
+  }
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-4{
+    padding: 0 5px;
   }
 }
 
