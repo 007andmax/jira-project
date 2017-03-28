@@ -111,7 +111,7 @@
             <div class="col-1"
                  ng-class="{'has-error': isShowingErrors(editTaxForm, 'name')}">
 
-              <div ng-messages="editTaxForm.name.$error" style="position: absolute;margin-top: -19px;"
+              <div ng-messages="editTaxForm.name.$error"
                    ng-class="{'hide': !isShowingErrors(editTaxForm, 'name')}">
 
                 <label class="control-label" ng-message="required">
@@ -136,8 +136,7 @@
                      ng-minlength="2" ng-maxlength="30">
             </div>
 
-            <div class="col-1" ng-class="{'has-error': isShowingErrors(editTaxForm, 'rate')}"
-                 style="position: absolute;margin-top: -19px;">
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(editTaxForm, 'rate')}">
               <div ng-messages="editTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(editTaxForm, 'rate')}">
                 <label style="white-space: nowrap;" class="control-label" ng-message="required">
                   Rate is required.
