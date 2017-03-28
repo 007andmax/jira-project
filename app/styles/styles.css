@@ -11115,7 +11115,7 @@ button.close {
 
 @media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-    width: calc(100% - 667px);
+    width: calc(100% - 577px);
   }
 }
 
@@ -11163,7 +11163,7 @@ button.close {
   }
 
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
-    width: 148px !important;
+    width: 140px !important;
   }
 
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-4 {
