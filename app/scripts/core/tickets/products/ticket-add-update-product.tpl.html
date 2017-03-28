@@ -87,7 +87,7 @@
                   <li ng-click="productExpense.discountType = 'PERCENT'; discountAmountMsxLength = 100; productExpense.discountAmount>100 ? productExpense.discountAmount=null : true ">
                     <a href="javascript:void(0)"> Percent</a>
                   </li>
-                  <li ng-click="productExpense.discountType = 'FIXED'; discountAmountMsxLength = null">
+                  <li ng-click="productExpense.discountType = 'FIXED'; discountAmountMsxLength = null; productExpense.quantity * productExpense.item.sale < productExpense.discountAmount ? productExpense.discountAmount = null : true">
                     <a href="javascript:void(0)"> Fixed </a>
                   </li>
                   <li
