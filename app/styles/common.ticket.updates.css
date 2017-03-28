@@ -370,14 +370,17 @@
   border-right: 0;
   /*overflow: hidden;*/
 }
-.table-wrapper .table-content .form-group{
+
+.table-wrapper .table-content .form-group {
   margin-bottom: 0;
 }
-.qt-recurring-invoices .table-wrapper .table-content .col-sm-4{
+
+.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
   width: 20.333333%;
   height: auto;
 }
-.qt-recurring-invoices .table-wrapper .table-content .col-3{
+
+.qt-recurring-invoices .table-wrapper .table-content .col-3 {
   width: 13%;
 }
 
@@ -443,15 +446,49 @@
 }
 
 .table-wrapper .service-table .col-3 {
-  width: calc(100% - 573px);
+  width: calc(100% - 603px);
 }
 
-.inventory-details .table-wrapper .service-table .col-3 {
-  width: calc(100% - 801px);
-}
-@media screen and (max-width: 1600px){
+@media screen and (max-width: 1600px) {
+  .table-wrapper .service-table .col-3{
+    width: calc(100% - 563px);
+  }
+
+  .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: 36%;
+  }
+
+  .opened-ticket-list .table-wrapper .service-table .col-5 div {
+    white-space: normal;
+  }
+
+  .inventory-details .table-wrapper .service-table .col-3 {
+    width: calc(100% - 801px);
+  }
+
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 651px);
+  }
+
+  .table-wrapper .table-content .discount-ticket {
+    white-space: normal;
+  }
+
+  .table-wrapper .service-table .col-2 {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .table-wrapper .table-content .discount-ticket {
+    word-wrap: break-word;
+  }
+  .table-wrapper .service-table .col-3{
+    width: calc(100% - 464px);
+  }
+
+  .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: 34%;
   }
 }
 
@@ -479,12 +516,12 @@
   width: 243px;
   float: right;
 }
-.discount-ticket{
-  position: absolute;
-  bottom: 13px;
-  right: 13px;
-}
 
+/*.discount-ticket{*/
+/*position: absolute;*/
+/*bottom: 13px;*/
+/*right: 13px;*/
+/*}*/
 
 .table-wrapper .table-content-action {
   width: 32px;
@@ -587,7 +624,7 @@
   width: 20%;
 }
 
-.opened-ticket-list .ticket-update-product-edit .edit-col7, .opened-ticket-list .ticket-update-service-edit .edit-col7  {
+.opened-ticket-list .ticket-update-product-edit .edit-col7, .opened-ticket-list .ticket-update-service-edit .edit-col7 {
   width: 9%;
 }
 
