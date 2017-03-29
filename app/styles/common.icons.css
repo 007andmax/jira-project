@@ -529,6 +529,11 @@ a.ha-24 {
 .sale-icon-for-isDicount {
   background-image: url("../images/new-icons/discount-icon.svg");
 }
+.ticket-add-content .sale-icon-for-isDicount{
+  width: 30px;
+  height: 30px;
+  margin: 5px 0 0 10px;
+}
 
 /*:hover > .settings-icon, :active > .settings-icon, :focus:hover > .settings-icon, :focus:active > .settings-icon, :hover:active > .settings-icon, .active > .settings-icon, .open .settings-icon, .open > .btn:hover .settings-icon {*/
 /*background-image: url("../images/new-icons/settings.png");*/

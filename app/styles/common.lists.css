@@ -2407,6 +2407,12 @@ Devices tab
 .qt-product-edit .row .col-1 .select-taxes-drv {
   width: 290px !important;
 }
+.qt-product-edit .category-caret {
+  position: absolute;
+  top: -17px;
+  right: 320px;
+  z-index: 1;
+}
 
 .qt-product-edit .qt-form-actions.btn-bottom {
   bottom: 0 !important;
@@ -2426,6 +2432,7 @@ Devices tab
 
 .qt-product-edit .form-group {
   margin-bottom: 15px;
+  position: relative;
 }
 
 .qt-product-edit .form-group .dropdown-menu {

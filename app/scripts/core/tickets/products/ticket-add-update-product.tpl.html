@@ -53,14 +53,15 @@
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
 
         </div>
-        <div class="col-4" style="width: 96px; float: left;">
+        <div class="col-4" style="width: 60px; float: left;">
           <div>
             <div  ng-hide="isShowInputField || productExpense.discountAmount != null">
               <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowInputField = !isShowInputField" uib-tooltip="Click to choose Discount"></i>
             </div>
 
-            <div ng-show="isShowInputField || productExpense.discountAmount != null" class="form-group" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
-              <input type="number"
+            <div ng-show="isShowInputField || productExpense.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
+              <input maxlength="3"
+                     type="text"
                      class="form-control"
                      placeholder="Discount Amount"
                      name="discountAmount"

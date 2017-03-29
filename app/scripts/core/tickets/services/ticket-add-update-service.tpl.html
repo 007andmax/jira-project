@@ -27,16 +27,16 @@
                name="serviceDescription" max-length-word="100"/>
       </div>
 
-      <div class="col-4" style="width: 100px;">
+      <div class="col-4" style="width: 60px;">
         <div>
           <div  ng-hide="isShowServiceDiscountInputField || serviceExpense.discountAmount != null">
             <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowServiceDiscountInputField = !isShowServiceDiscountInputField" uib-tooltip="Click to choose Discount"></i>
           </div>
 
-          <div ng-show="isShowServiceDiscountInputField || serviceExpense.discountAmount != null" class="form-group" ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
-            <input type="number"
+          <div ng-show="isShowServiceDiscountInputField || serviceExpense.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
+            <input maxlength="3"
+                   type="text"
                    class="form-control"
-                   placeholder="Discount Amount"
                    name="discountAmount"
                    ng-model="serviceExpense.discountAmount"
                    ng-max="100"
