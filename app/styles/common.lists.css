@@ -2409,9 +2409,9 @@ Devices tab
 }
 .qt-product-edit .category-caret {
   position: absolute;
-  top: -17px;
-  right: 320px;
+  right: 335px;
   z-index: 1;
+  top: 0;
 }
 
 .qt-product-edit .qt-form-actions.btn-bottom {

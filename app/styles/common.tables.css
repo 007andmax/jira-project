@@ -27,11 +27,11 @@
 }
 
 .opened-ticket .qt-table > li.service-add-width > .col-3 {
-  width: 56%;
+  width: 65%;
 }
 
 .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-  width: 29.7%;
+  width: 43.7%;
 }
 
 _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {

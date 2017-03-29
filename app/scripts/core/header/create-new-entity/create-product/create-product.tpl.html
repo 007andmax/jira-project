@@ -70,7 +70,6 @@
 
         <div class="form-group"
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
-          <div class="category-caret" typeahead-input-icon></div>
           <div class="dropdown">
             <label>Category</label>
             <input type="text" class="form-control has-dropdown" placeholder="Category"
@@ -85,29 +84,23 @@
                    qt-typeahead-show-on-focus
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-            <div class="col-1"
-                 style="position: absolute;
-                  right: 0;
-                  top: 20px;
-                  width: 100px;">
-              <div class="product-actions">
+            <div class="product-actions category-caret">
 
-                <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
-                   custom-disabled="{{ newCategoryNameForm.$invalid }}"
-                   ng-show="editCategory.name"
-                   ng-click="addCategory(newCategoryNameForm)">
-                  <i class="icn-sm icn-product-save"></i>
-                </a>
+              <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+                 custom-disabled="{{ newCategoryNameForm.$invalid }}"
+                 ng-show="editCategory.name"
+                 ng-click="addCategory(newCategoryNameForm)">
+                <i class="icn-sm icn-product-save"></i>
+              </a>
 
-                <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-                   ng-show="editCategory.name"
-                   ng-click="editCategory = {}">
-                  <i class="icn-sm icn-product-cancel"></i>
-                </a>
+              <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+                 ng-show="editCategory.name"
+                 ng-click="editCategory = {}">
+                <i class="icn-sm icn-product-cancel"></i>
+              </a>
 
-              </div>
             </div>
           </div>
         </div>
