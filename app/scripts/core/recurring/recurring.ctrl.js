@@ -45,19 +45,19 @@
           }
         });
 
-        $scope.addDiscountInRecurring = function (expenseId, discountAmount, discountType, isDelete) {
+        $scope.addDiscountInRecurring = function (expenseId, discountAmount) {
           var data = {};
-          if(expenseId && discountAmount > 0 && discountType) {
+          if(expenseId && discountAmount) {
             data= {
               expenseId: expenseId,
               discountAmount: discountAmount,
-              discountType: discountType
+              discountType: 'PERCENT'
             };
             RecurringService.saveRecurringDiscount(data, function(resp){
               console.log(resp)
             })
           }
-          if(isDelete) {
+          else {
             data= {
               expenseId: expenseId,
               discountAmount: null,

@@ -118,7 +118,7 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             host: 'localhost',
-            port: 8080,
+            port: 8081,
             https: false,
             xforward: false,
             headers: {
