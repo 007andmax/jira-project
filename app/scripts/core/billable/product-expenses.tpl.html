@@ -14,59 +14,53 @@
     {{ product.item.description }}
   </div>
 
-  <div class="col-sm-2" ng-show="product.serialNumber && (product.serialNumber.length > 0)"
+  <div class="col-sm-2 ellipsis" ng-show="product.serialNumber && (product.serialNumber.length > 0)"
        trimmed-popover trimmed-popover-content="product.serialNumber">
     {{ product.serialNumber }}
   </div>
+
+  <!--<div class="col-4" style="width: 100px;">-->
+    <!--<div>-->
+      <!--<div  ng-hide="isShowServiceEditDiscountInputField || editService.discountAmount != null">-->
+        <!--<i class="icon-sm sale-icon-for-isDicount" ng-click="isShowServiceEditDiscountInputField = !isShowServiceEditDiscountInputField" uib-tooltip="Click to choose Discount"></i>-->
+      <!--</div>-->
+
+      <!--<div ng-show="isShowServiceEditDiscountInputField || editService.discountAmount != null" class="form-group">-->
+        <!--<input type="number"-->
+               <!--class="form-control"-->
+               <!--placeholder="Discount Amount"-->
+               <!--name="discountAmount"-->
+               <!--ng-model="editService.discountAmount"-->
+               <!--ng-max="100"-->
+               <!--ng-min="0"-->
+               <!--qt-to-fixed="2"-->
+               <!--hard-reset-pattern="{{editService.discountType}}"-->
+               <!--ng-keydown="$event.which === 13 && $event.preventDefault()">-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 
   <div class="col-sm-2">{{ product.sum | currency: '$': 2 }}
     <form name="billableEditDiscountForm"
           stop-propagation="click">
       <!--DISCOUNTS-->
       <!--Discount amount-->
-      <div class="form-group discount-recurring">
+      <div  ng-hide="isShowBillableDiscountInput || product.discountAmount != null">
+        <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowBillableDiscountInput = !isShowBillableDiscountInput" uib-tooltip="Click to choose Discount"></i>
+      </div>
+      <div class="form-group discount-recurring" ng-show="isShowBillableDiscountInput || product.discountAmount != null">
         <input type="text"
                class="form-control"
                placeholder="Discount Amount"
                name="discountAmount"
                ng-model="product.discountAmount"
-               ng-max="discountAmountMsxLength"
+               ng-max=100"
                ng-min="0"
-               ng-required="product.discountType == 'PERCENT' || product.discountType == 'FIXED'"
-               ng-disabled="!product.discountType"
-               execute-when-outfocused="addDiscountInBillable(product.id, product.discountAmount, product.discountType, false)"
+               execute-when-outfocused="addDiscountInBillable(product.id, product.discountAmount)"
                qt-to-fixed="2"
                hard-reset-pattern="{{service.discountType}}"
                ng-keydown="$event.which === 13 && $event.preventDefault()">
 
-        <div class="form-group" style="display: inline-block;">
-          <div uib-dropdown keyboard-nav="true" dropdown-append-to-body="true">
-
-            <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
-                    uib-dropdown-toggle aria-expanded="true"
-                    tabindex="32">
-              {{discountTypes[product.discountType]}}
-              <b ng-hide="product.discountType" style="color: rgba(76, 92, 111, 0.36)">
-                Type
-              </b>
-            </button>
-            <i class="icn-sm icn-caret-gray"></i>
-
-            <ul class="dropdown-menu dropdown-account-type" uib-dropdown-menu>
-              <li ng-click="product.discountType = 'PERCENT'; discountAmountMsxLength = 100; addDiscountInBillable(product.id, product.discountAmount, product.discountType, false); product.discountAmount>100 ? product.discountAmount=null : true ">
-                <a href="javascript:void(0)"> Percent</a>
-              </li>
-              <li ng-click="product.discountType = 'FIXED'; discountAmountMsxLength = null; addDiscountInBillable(product.id, product.discountAmount, product.discountType, false)">
-                <a href="javascript:void(0)"> Fixed </a>
-              </li>
-              <li
-                ng-click="product.discountType = ''; discountAmountMsxLength = ''; product.discountAmount = null; addDiscountInBillable(product.id, product.discountAmount, product.discountType, true)">
-                <a href="javascript:void(0)"> No Discount </a>
-              </li>
-            </ul>
-
-          </div>
-        </div>
       </div>
     </form>
   </div>

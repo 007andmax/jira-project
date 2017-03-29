@@ -51,7 +51,7 @@
       </div>
 
       <div class="col-5 is-billable">
-        <label class="control checkbox pull-left" style="left:15px">
+        <label class="control checkbox pull-left">
           <input type="checkbox" ng-checked="service.billable"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
                  ng-click="onChangeBillable()">

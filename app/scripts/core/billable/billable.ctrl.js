@@ -90,19 +90,19 @@
           }
         });
 
-        $scope.addDiscountInBillable = function (expenseId, discountAmount, discountType, isDelete) {
+        $scope.addDiscountInBillable = function (expenseId, discountAmount) {
           var data = {};
-          if(expenseId && discountAmount > 0 && discountType) {
+          if(expenseId && discountAmount) {
             data= {
               expenseId: expenseId,
               discountAmount: discountAmount,
-              discountType: discountType
+              discountType: 'PERCENT'
             };
             BillableService.saveBillableDiscount(data, function(resp){
               console.log(resp)
             })
-          };
-          if(isDelete) {
+          }
+          else {
             data= {
               expenseId: expenseId,
               discountAmount: null,
@@ -111,7 +111,7 @@
             BillableService.saveBillableDiscount(data, function(resp){
               console.log(resp)
             })
-          };
+          }
 
         };
 

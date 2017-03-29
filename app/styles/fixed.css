@@ -164,7 +164,12 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
   margin-right: 16px;
 }
-
+.qt-default-services li .intermediate-parent-elem .is-billable label{
+  left: 10px;
+}
+.qt-services li .intermediate-parent-elem .is-billable label{
+  left: 15px;
+}
 @media only screen and (min-width: 2000px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     height: 18px;
@@ -288,7 +293,7 @@ body.non-body-scroll::-webkit-scrollbar {
     width: calc(100% - 833px);
   }
 
-  .qt-list > li > .intermediate-parent-elem > .col-2, .qt-list > li > .col-2 {
+  .qt-list > li > .intermediate-parent-elem > .col-2, .slide-category-content .qt-list > li > .col-2 {
     width: calc(100% - 758px);
   }
 }
@@ -299,11 +304,11 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2, .qt-product-list > li > .col-2 {
-    width: calc(100% - 833px);
+    width: calc(100% - 863px);
   }
 
-  .qt-list > li > .col-2 {
-    width: calc(100% - 758px);
+  .qt-list > li > .intermediate-parent-elem > .col-2, .slide-category-content .qt-list > li > .col-2 {
+    width: calc(100% - 763px);
   }
 }
 
@@ -332,7 +337,7 @@ body.non-body-scroll::-webkit-scrollbar {
     width: calc(100% - 788px)
   }
 
-  .qt-list > li > .intermediate-parent-elem > .col-2, .qt-list > li > .col-2 {
+  .qt-list > li > .intermediate-parent-elem > .col-2, .slide-category-content .qt-list > li > .col-2 {
     width: calc(100% - 727px)
   }
 
@@ -347,29 +352,57 @@ body.non-body-scroll::-webkit-scrollbar {
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 90px;
   }
+  .qt-default-services li .intermediate-parent-elem .is-billable label{
+    left: 0;
+  }
 }
 
+
 .tax-recurring{
-  width: 50px;
+  width: 100%;
 }
 .tax-recurring input, .discount-recurring input, .discount-recurring button{
   height: 25px;
   border-radius: 0;
   background-color: #F1F5FA;
+  border: 1px solid #F1F5FA;
+  cursor: pointer;
+}
+.tax-recurring input:hover, .discount-recurring input:hover, .discount-recurring button:hover {
+  border: 1px solid #B4B4B4;
 }
 .tax-recurring .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control,
 .discount-recurring .form-control:focus, .discount-recurring input:-webkit-autofill {
   background-color: #F1F5FA;
 }
 .discount-recurring{
+  display: block;
+}
+.discount-recurring input, .discount-recurring div{
   display: inline-block;
 }
-.discount-recurring input{
-  width: 143px;
-  display: inline-block;
+.discount-recurring input {
+  width: calc(100% - 70px);
+  vertical-align: top;
 }
-.qt-billable-clients .discount-recurring input{
-  width: 162px;
+@media screen and (max-width: 1600px){
+  .discount-recurring input, .discount-recurring div{
+    display: block;
+}
+  .discount-recurring input{
+    width: 100%;
+  }
+  .discount-recurring .form-group div{
+    width: 70px;
+  }
+}
+
+@media screen and (max-width: 1366px){
+  .qt-billable-clients .discount-recurring input{
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+  }
 }
 .discount-recurring button{
   width: 66px;
@@ -381,11 +414,8 @@ body.non-body-scroll::-webkit-scrollbar {
 .discount-recurring .dropdown-account-type{
   width: 7%;
 }
-.tax-recurring input{
-  width: 213px;
-}
 .qt-billable-clients .tax-recurring input{
-  width: 233px;
+  width: 100%;
 }
 .tax-recurring .checkbox .control-indicator.plus-circle{
   top: 10px;
@@ -457,11 +487,6 @@ body.non-body-scroll::-webkit-scrollbar {
   /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
 
-@media (min-width: 2048px) {
-  .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-    width: calc(100% - 445px);
-  }
-}
 
 .qt-services-list > li > .intermediate-parent-elem > .col-5 {
   width: 90px;

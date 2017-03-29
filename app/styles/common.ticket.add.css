@@ -177,8 +177,7 @@
 }
 
 .ticket-add-footer {
-  /*margin-left: 48px;*/
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .ticket-add-footer .checkbox {
