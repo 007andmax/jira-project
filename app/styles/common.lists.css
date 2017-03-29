@@ -1083,7 +1083,12 @@ Devices tab
   width: calc(100% - 120px);
   white-space: nowrap;
 }
-
+.qt-billable-clients .col-2 div{
+  display: inline-block;
+}
+.qt-billable-clients .col-2 div:last-child{
+  width: 99px;
+}
 .qt-list > li.billable-main > .col-2,
 .qt-billable-sub > li > .col-2 {
   width: 120px;

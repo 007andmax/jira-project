@@ -1,7 +1,7 @@
 <div>
-  <div class="billable-content" >
-    <div class="tabs-container" >
-      <div class="fixed-block-top"  style="width: auto; height: 55px; right: -20px;" fixed-block-top>
+  <div class="billable-content">
+    <div class="tabs-container">
+      <div class="fixed-block-top" style="width: auto; height: 55px; right: -20px;" fixed-block-top>
 
         <ul class="nav nav-qt" role="tablist">
 
@@ -102,18 +102,19 @@
                     </label>
 
                     <div class="checkbox-caption">{{ ticket.subject }}</div>
-                    <a class="label label-primary" stop-propagation="click" style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
-                          ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
+                    <a class="label label-primary" stop-propagation="click"
+                       style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
+                       ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
                       Tkt# {{ ticket.ticketNumber }}
                     </a>
                   </div>
                 </div>
 
-                <div ng-if="ticket.discountSum > 0">
-                  <i class="icon-sm sale-icon-for-isDicount"></i>
-                </div>
 
                 <div class="col-2">
+                  <div ng-if="ticket.discountSum > 0">
+                    <i class="icon-sm sale-icon-for-isDicount"></i>
+                  </div>
                   <div class="billable-amount bold">{{ ticket.sum | currency: '$': 2 }}</div>
                 </div>
 
