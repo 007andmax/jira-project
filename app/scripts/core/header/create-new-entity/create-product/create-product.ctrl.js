@@ -89,9 +89,10 @@
       };
 
       $scope.addCategory = function (form) {
-        if (form.$valid) {
-          ProductsService.saveCategory($scope.editCategory, function () {
-            $scope.editCategory = {};
+        var keys = Object.keys(form.$error);
+        if (form.$valid || (keys.length === 1 && keys[0] === 'nonexistentCategory')) {
+          ProductsService.saveCategory({ name: $scope.editProduct.category }, function (category) {
+            $scope.editProduct.category = category;
             form.$setPristine();
           });
         } else {

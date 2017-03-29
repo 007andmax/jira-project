@@ -73,8 +73,7 @@
           <div class="dropdown">
             <label>Category</label>
             <input type="text" class="form-control has-dropdown" placeholder="Category"
-                   ng-model="editCategory.name"
-                   ng-required="true" ng-maxlength="100"
+                   required ng-maxlength="100"
                    autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
                    typeahead-editable="true"
                    typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
@@ -88,16 +87,15 @@
 
               <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
-                 custom-disabled="{{ newCategoryNameForm.$invalid }}"
-                 ng-show="editCategory.name"
-                 ng-click="addCategory(newCategoryNameForm)">
+                 ng-show="editProduct.category && !editProduct.category.id"
+                 ng-click="addCategory(editProductForm.editProductCategory)">
                 <i class="icn-sm icn-product-save"></i>
               </a>
 
               <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-                 ng-show="editCategory.name"
-                 ng-click="editCategory = {}">
+                 ng-show="editProduct.category && !editProduct.category.id"
+                 ng-click="editProduct.category = ''">
                 <i class="icn-sm icn-product-cancel"></i>
               </a>
 
