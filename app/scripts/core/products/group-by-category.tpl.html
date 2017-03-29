@@ -83,11 +83,11 @@
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
 
                 </div>
-                <div class="col-4" style="width: 100px;" ng-click="setOrderForProducts('discountAmount')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-                  <span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"
-                                                     ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'discountAmount'}"></i></span>
+                <!--<div class="col-4" style="width: 100px;" ng-click="setOrderForProducts('discountAmount')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">-->
+                  <!--<span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"-->
+                                                     <!--ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'discountAmount'}"></i></span>-->
 
-                </div>
+                <!--</div>-->
                 <div class="col-4">
                   <span class="sort-span">taxes</span>
                 </div>
@@ -122,9 +122,9 @@
                     {{ product.manufacture}}
                   </div>
 
-                  <div class="col-4" style="width: 100px;" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-                    <b ng-if="product.discountType =='FIXED' ">$</b> {{product.discountAmount | currency: '': 2 }} <b ng-if="product.discountType =='PERCENT' ">%</b>
-                  </div>
+                  <!--<div class="col-4" style="width: 100px;" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">-->
+                    <!--<b ng-if="product.discountType =='FIXED' ">$</b> {{product.discountAmount | currency: '': 2 }} <b ng-if="product.discountType =='PERCENT' ">%</b>-->
+                  <!--</div>-->
 
                   <div class="col-4">
                     {{ getSelectedTaxNames(product.taxes) }}
