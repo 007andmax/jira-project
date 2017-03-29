@@ -29,56 +29,11 @@
     </label>
   </div>
 
-  <!--DISCOUNTS-->
-  <div>
-    <div class="col-1" style="width: calc(100% - 448px);">
-      <!--Discount amount-->
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editServiceForm, 'discountAmount')}">
-        <input type="number"
-               class="form-control"
-               placeholder="Discount Amount"
-               name="discountAmount"
-               ng-model="editService.discountAmount"
-               ng-max="discountAmountMsxLength"
-               ng-min="0"
-               ng-pattern="decimalNumberPattern"
-               ng-required="editService.discountType == 'PERCENT' || editService.discountType == 'FIXED'"
-               ng-disabled="!editService.discountType">
-      </div>
-    </div>
-    <div class="col-2">
-      <!--Discount type-->
-      <div class="form-group">
-        <div uib-dropdown keyboard-nav="true">
 
-          <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
-                  uib-dropdown-toggle aria-expanded="true"
-                  tabindex="32">
-            {{discountTypes[editService.discountType]}} <b ng-hide="editService.discountType"
-                                                           style="color: rgba(76, 92, 111, 0.36)">Type</b>
-          </button>
-          <i class="icn-sm icn-caret-gray"></i>
-
-          <ul class="dropdown-menu dropdown-account-type">
-            <li ng-click="editService.discountType = 'PERCENT'; discountAmountMsxLength = 100">
-              <a href="javascript:void(0)"> Percent</a>
-            </li>
-            <li ng-click="editService.discountType = 'FIXED'; discountAmountMsxLength = null">
-              <a href="javascript:void(0)"> Fixed </a>
-            </li>
-            <li
-              ng-click="editService.discountType = ''; discountAmountMsxLength = ''; editService.discountAmount = null">
-              <a href="javascript:void(0)"> No Discount </a>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-    </div>
-    <div class="col-3" style="width: 230px;">
+    <div class="col-3" style="width: 260px; padding-left: 0;">
       <select-taxes taxes="taxes" entity="editService"></select-taxes>
     </div>
-  </div>
+
 
 
 
