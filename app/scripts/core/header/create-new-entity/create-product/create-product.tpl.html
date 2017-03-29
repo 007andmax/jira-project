@@ -4,37 +4,37 @@
        style="margin: 15px;position: relative; margin-top: 0;"
        ng-class="{'has-error': isShowingCreateCategoryError(newCategoryNameForm, 'newCategoryName')}">
     <h4 class="modal-title title-services">{{ editProduct.versionedId.id ? "Edit Product" : "Create new Product" }}</h4>
-    <div class="col-1">
-      <input type="text" class="form-control" placeholder="Category name..."
-             style="margin-top: 10px;" ng-model="editCategory.name"
-             name="newCategoryName" ng-required="true" ng-maxlength="100"
-             is-uniq-validation validation-func="isUniqueCategoryName">
-    </div>
+    <!--<div class="col-1">-->
+    <!--<input type="text" class="form-control" placeholder="Category name..."-->
+    <!--style="margin-top: 10px;" ng-model="editCategory.name"-->
+    <!--name="newCategoryName" ng-required="true" ng-maxlength="100"-->
+    <!--is-uniq-validation validation-func="isUniqueCategoryName">-->
+    <!--</div>-->
 
-    <div class="col-2"
-         style="position: absolute;
-       right: 0;
-       top: 20px;
-       width: 100px;">
-      <div class="product-actions">
+    <!--<div class="col-1"-->
+    <!--style="position: absolute;-->
+    <!--right: 0;-->
+    <!--top: 20px;-->
+    <!--width: 100px;">-->
+    <!--<div class="product-actions">-->
 
-        <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
-           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
-           custom-disabled="{{ newCategoryNameForm.$invalid }}"
-           ng-show="editCategory.name"
-           ng-click="addCategory(newCategoryNameForm)">
-          <i class="icn-sm icn-product-save"></i>
-        </a>
+    <!--<a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"-->
+    <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"-->
+    <!--custom-disabled="{{ newCategoryNameForm.$invalid }}"-->
+    <!--ng-show="editCategory.name"-->
+    <!--ng-click="addCategory(newCategoryNameForm)">-->
+    <!--<i class="icn-sm icn-product-save"></i>-->
+    <!--</a>-->
 
-        <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
-           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-           ng-show="editCategory.name"
-           ng-click="editCategory = {}">
-          <i class="icn-sm icn-product-cancel"></i>
-        </a>
+    <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"-->
+    <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"-->
+    <!--ng-show="editCategory.name"-->
+    <!--ng-click="editCategory = {}">-->
+    <!--<i class="icn-sm icn-product-cancel"></i>-->
+    <!--</a>-->
 
-      </div>
-    </div>
+    <!--</div>-->
+    <!--</div>-->
 
     <div ng-messages="newCategoryNameForm.newCategoryName.$error"
          ng-if="isShowingCreateCategoryError(newCategoryNameForm, 'newCategoryName')">
@@ -42,150 +42,147 @@
       <div class="error-msg" ng-message="maxlength">Name is too large.</div>
       <div class="error-msg" ng-message="unique">Name already occupied.</div>
     </div>
+    <div class="row" ng-form="editProductForm">
+      <div class="col-1">
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+          <label>Mfg/Item number</label>
+          <input type="text" class="form-control" name="editProductMfg"
+                 ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
+                 is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
+        </div>
 
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+          <label>Description</label>
+          <input style="height: 120px; vertical-align: top;" type="text" class="form-control"
+                 ng-model="editProduct.description" ng-required="true"
+                 ng-maxlength="500" name="editProductDescription" tabindex="1">
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
+          <div class="dropdown">
+            <label>Category</label>
+            <input type="text" class="form-control has-dropdown"
+                   autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
+                   typeahead-editable="true"
+                   typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
+                   ng-change="validateCategory(editProduct.category, editProductForm)"
+                   typeahead-input-formatter="getItemName($model)" tabindex="4"
+                   uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+            <div typeahead-input-icon="editProduct.category" class="input-top-4"></div>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
+             ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+          <label>Cost</label>
+          <input type="text" class="form-control" ng-model="editProduct.cost"
+                 name="cost" ng-change="validateSaleAndCost(editProductForm)"
+                 hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" tabindex="2">
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
+          <label>Price</label>
+          <input type="text" class="form-control" ng-model="editProduct.sale"
+                 name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
+                 hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" tabindex="3">
+        </div>
+
+        <div class="form-group">
+          <label>Tax</label>
+          <select-taxes taxes="taxes" entity="editProduct"></select-taxes>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+          <label>ILC</label>
+          <input type="text" class="form-control" name="editProductILC"
+                 ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
+                 is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+          <div class="dropdown" add-create-new-button="company">
+            <label>Vendor/Supplier</label>
+            <input type="text" class="form-control has-dropdown"
+                   autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
+                   typeahead-input-formatter="getItemName($model)" tabindex="5"
+                   uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+            <div typeahead-input-icon="editProduct.company" class="input-top-4"></div>
+
+          </div>
+        </div>
+
+        <div class="qt-form-actions btn-bottom">
+          <button-with-loading-indicator class="btn btn-lg btn-success btn-create pull-right"
+                                         ng-click="saveChangeProduct(editProductForm)"
+                                         loading="disabledSaveChangeButton"
+                                         label="{{ editProduct.versionedId && editProduct.versionedId.id ? 'Save' : 'Create' }}">
+          </button-with-loading-indicator>
+
+          <div class="text-error">{{ getValidationMessage(editProductForm) }}</div>
+        </div>
+
+
+        <!--Discount amount-->
+        <!--<div class="col-xs-4">-->
+        <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'discountAmount')}">-->
+        <!--<input type="number"-->
+        <!--class="form-control"-->
+        <!--placeholder="Discount Amount"-->
+        <!--name="discountAmount"-->
+        <!--ng-model="editProduct.discountAmount"-->
+        <!--ng-max="discountAmountMsxLength"-->
+        <!--ng-min="0"-->
+        <!--ng-pattern="decimalNumberPattern"-->
+        <!--ng-required="editProduct.discountType == 'PERCENT' || editProduct.discountType == 'FIXED'"-->
+        <!--ng-disabled="!editProduct.discountType">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--Discount type-->
+        <!--<div class="col-xs-2">-->
+        <!--<div class="form-group">-->
+        <!--<div uib-dropdown keyboard-nav="true">-->
+
+        <!--<button class="form-control form-control-dropdown account-type no-cursor has-dropdown"-->
+        <!--uib-dropdown-toggle aria-expanded="true"-->
+        <!--tabindex="32">-->
+        <!--{{discountTypes[editProduct.discountType]}} <b ng-hide="editProduct.discountType"-->
+        <!--style="color: rgba(76, 92, 111, 0.36)">Type</b>-->
+        <!--</button>-->
+        <!--<i class="icn-sm icn-caret-gray"></i>-->
+
+        <!--<ul class="dropdown-menu dropdown-account-type" style="margin-top: 0;">-->
+        <!--<li ng-click="editProduct.discountType = 'PERCENT'; discountAmountMsxLength = 100">-->
+        <!--<a href="javascript:void(0)"> Percent</a>-->
+        <!--</li>-->
+        <!--<li ng-click="editProduct.discountType = 'FIXED'; discountAmountMsxLength = null">-->
+        <!--<a href="javascript:void(0)"> Fixed </a>-->
+        <!--</li>-->
+        <!--<li-->
+        <!--ng-click="editProduct.discountType = ''; discountAmountMsxLength = ''; editProduct.discountAmount = null">-->
+        <!--<a href="javascript:void(0)"> No Discount </a>-->
+        <!--</li>-->
+        <!--</ul>-->
+
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+
+
+      </div>
+    </div>
   </div>
 
-  <div class="row" ng-form="editProductForm">
 
-    <div class="col-xs-12 form-group"
-         ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
-      <input type="text" class="form-control" placeholder="Description"
-             ng-model="editProduct.description" ng-required="true"
-             ng-maxlength="500" name="editProductDescription" tabindex="1">
-    </div>
-
-    <div class="col-xs-6">
-
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
-           ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-        <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
-               name="cost" ng-change="validateSaleAndCost(editProductForm)"
-               hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" tabindex="2">
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
-        <div class="dropdown">
-          <input type="text" class="form-control has-dropdown" placeholder="Category"
-                 autocomplete="off" ng-model="editProduct.category" name="editProductCategory" typeahead-editable="true"
-                 typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
-                 ng-change="validateCategory(editProduct.category, editProductForm)"
-                 typeahead-input-formatter="getItemName($model)" tabindex="4"
-                 uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
-                 qt-typeahead-show-on-focus custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-
-          <div typeahead-input-icon="editProduct.category" class="input-top-4"></div>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
-        <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
-               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
-               is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
-      </div>
-
-
-
-    </div>
-    <div class="col-xs-6">
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
-        <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
-               name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
-               hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" tabindex="3">
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
-        <div class="dropdown" add-create-new-button="company">
-
-          <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
-                 autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
-                 typeahead-input-formatter="getItemName($model)" tabindex="5"
-                 uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
-                 qt-typeahead-show-on-focus custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
-
-          <div typeahead-input-icon="editProduct.company" class="input-top-4"></div>
-
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
-        <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
-               ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
-               is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
-      </div>
-
-
-
-    </div>
-
-
-
-    <!--Discount amount-->
-    <div class="col-xs-4">
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'discountAmount')}">
-        <input type="number"
-               class="form-control"
-               placeholder="Discount Amount"
-               name="discountAmount"
-               ng-model="editProduct.discountAmount"
-               ng-max="discountAmountMsxLength"
-               ng-min="0"
-               ng-pattern="decimalNumberPattern"
-               ng-required="editProduct.discountType == 'PERCENT' || editProduct.discountType == 'FIXED'"
-               ng-disabled="!editProduct.discountType">
-      </div>
-    </div>
-      <!--Discount type-->
-    <div class="col-xs-2">
-      <div class="form-group">
-        <div uib-dropdown keyboard-nav="true">
-
-          <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
-                  uib-dropdown-toggle aria-expanded="true"
-                  tabindex="32">
-            {{discountTypes[editProduct.discountType]}} <b ng-hide="editProduct.discountType"
-                                                           style="color: rgba(76, 92, 111, 0.36)">Type</b>
-          </button>
-          <i class="icn-sm icn-caret-gray"></i>
-
-          <ul class="dropdown-menu dropdown-account-type" style="margin-top: 0;">
-            <li ng-click="editProduct.discountType = 'PERCENT'; discountAmountMsxLength = 100">
-              <a href="javascript:void(0)"> Percent</a>
-            </li>
-            <li ng-click="editProduct.discountType = 'FIXED'; discountAmountMsxLength = null">
-              <a href="javascript:void(0)"> Fixed </a>
-            </li>
-            <li
-              ng-click="editProduct.discountType = ''; discountAmountMsxLength = ''; editProduct.discountAmount = null">
-              <a href="javascript:void(0)"> No Discount </a>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-
-    </div>
-
-
-
-    <div class="col-xs-6">
-      <select-taxes taxes="taxes" entity="editProduct"></select-taxes>
-    </div>
-
-
-
-
-    <div class="col-xs-12 qt-form-actions btn-bottom" style="margin-right: -5px;">
-
-      <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
-
-      <button-with-loading-indicator class="btn btn-lg btn-success btn-create pull-right"
-                                     ng-click="saveChangeProduct(editProductForm)"
-                                     loading="disabledSaveChangeButton"
-                                     label="{{ editProduct.versionedId && editProduct.versionedId.id ? 'Save' : 'Create' }}">
-      </button-with-loading-indicator>
-
-    </div>
-
-
-  </div>
 </div>
