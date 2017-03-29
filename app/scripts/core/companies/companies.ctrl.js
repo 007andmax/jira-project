@@ -143,6 +143,12 @@
           });
         };
 
+        $scope.filterArchived = function (users) {
+          return users.filter(function (user) {
+            return !user.deletedAt;
+          })
+        };
+
         $scope.attachEvents = function (element) {
           $('.popover').on('mouseenter', function () {
             $rootScope.insidePopover = true;
