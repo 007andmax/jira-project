@@ -13,21 +13,23 @@
         <div class="discount-recurring">
           <form name="billableEditDiscountForm"
                 stop-propagation="click">
-            <div  ng-hide="isShowBillableDiscountInput || service.discountAmount != null">
-              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowBillableDiscountInput = !isShowBillableDiscountInput" uib-tooltip="Click to choose Discount"></i>
+            <div ng-hide="isShowBillableDiscountInput || service.discountAmount != null">
+              <i class="icon-sm sale-icon-for-isDicount"
+                 ng-click="isShowBillableDiscountInput = !isShowBillableDiscountInput"
+                 uib-tooltip="Click to choose Discount"></i>
             </div>
-            <div class="form-group discount-recurring" ng-show="isShowBillableDiscountInput || service.discountAmount != null">
+            <div class="form-group discount-recurring"
+                 ng-show="isShowBillableDiscountInput || service.discountAmount != null">
               <input type="text"
                      class="form-control"
-                     placeholder="Discount Amount"
                      name="discountAmount"
                      ng-model="service.discountAmount"
                      ng-max=100"
                      ng-min="0"
                      execute-when-outfocused="addDiscountInRecurring(service.id, service.discountAmount)"
-                     qt-to-fixed="2"
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
+              <p>%</p>
 
             </div>
           </form>
@@ -79,22 +81,23 @@
         <div class="discount-recurring">
           <form name="reccuringEditDiscountForm"
                 stop-propagation="click">
-            <div  ng-hide="isShowBillableDiscountInput || product.discountAmount != null">
-              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowBillableDiscountInput = !isShowBillableDiscountInput" uib-tooltip="Click to choose Discount"></i>
+            <div ng-hide="isShowBillableDiscountInput || product.discountAmount != null">
+              <i class="icon-sm sale-icon-for-isDicount"
+                 ng-click="isShowBillableDiscountInput = !isShowBillableDiscountInput"
+                 uib-tooltip="Click to choose Discount"></i>
             </div>
-            <div class="form-group discount-recurring" ng-show="isShowBillableDiscountInput || product.discountAmount != null">
+            <div class="form-group discount-recurring"
+                 ng-show="isShowBillableDiscountInput || product.discountAmount != null">
               <input type="text"
                      class="form-control"
-                     placeholder="Discount Amount"
                      name="discountAmount"
                      ng-model="product.discountAmount"
                      ng-max=100"
                      ng-min="0"
                      execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount)"
-                     qt-to-fixed="2"
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
-
+              <p>%</p>
             </div>
           </form>
         </div>

@@ -528,6 +528,7 @@ a.ha-24 {
 }
 .sale-icon-for-isDicount {
   background-image: url("../images/new-icons/discount-icon.svg");
+  cursor: pointer;
 }
 .ticket-add-content .sale-icon-for-isDicount{
   width: 30px;

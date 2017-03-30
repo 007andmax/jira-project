@@ -361,6 +361,9 @@ body.non-body-scroll::-webkit-scrollbar {
 .tax-recurring{
   width: 100%;
 }
+.tax-recurring .list-container .icn-label-save{
+  right: 10px;
+}
 .tax-recurring input, .discount-recurring input, .discount-recurring button{
   height: 25px;
   border-radius: 0;
@@ -384,7 +387,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 .discount-recurring input {
   width: 37px;
-  vertical-align: top;
+  padding: 0 5px;
 }
 @media screen and (max-width: 1600px){
   .discount-recurring input, .discount-recurring div{
