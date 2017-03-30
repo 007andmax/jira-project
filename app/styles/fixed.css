@@ -388,7 +388,7 @@ body.non-body-scroll::-webkit-scrollbar {
 @media screen and (max-width: 1600px){
   .discount-recurring input, .discount-recurring div{
     display: block;
-}
+  }
   .discount-recurring input{
     width: 100%;
   }
