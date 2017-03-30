@@ -176,9 +176,9 @@
 
           for (var i = 0, len = $scope.agents.length; i < len; i++) {
             if ($scope.agents[i].online) {
-              $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
+              $scope.selectDevices[$scope.agents[i].id] = $scope.isSelectAllDevices;
             } else {
-              $scope.selectDevices[$scope.agents[i].agentId] = false
+              $scope.selectDevices[$scope.agents[i].id] = false
             }
           }
 
