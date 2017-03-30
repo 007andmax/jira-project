@@ -2389,6 +2389,69 @@ Devices tab
   cursor: auto !important;
 }
 
+.qt-product-edit .row .col-1 {
+  width: 100%;
+  position: relative;
+  margin: 15px 0 0 102px;
+}
+
+.qt-product-edit .row .col-1 .select-taxes-drv {
+  width: 290px !important;
+}
+
+.qt-product-edit .category-caret {
+  position: absolute;
+  right: 335px;
+  z-index: 1;
+  top: 0;
+}
+
+.qt-product-edit .qt-form-actions.btn-bottom {
+  bottom: 0 !important;
+  left: 0 !important;
+  margin-top: 15px !important;
+  width: 190px !important;
+  position: relative !important;
+  margin-left: 149px;
+}
+
+.qt-product-edit .btn-bottom .text-error {
+  position: absolute;
+  white-space: nowrap;
+  bottom: -65px;
+  left: -255px;
+}
+
+.qt-product-edit .form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.qt-product-edit .form-group .dropdown-menu {
+  width: 38% !important;
+}
+
+.qt-product-edit .form-group .dropdown-menu-left {
+  width: auto !important;
+}
+
+.qt-product-edit .form-group label {
+  display: inline-block;
+  margin-right: 25px;
+  width: 120px;
+  text-align: right;
+}
+
+.qt-product-edit .form-group input {
+  width: 290px;
+  display: inline-block;
+}
+
+.qt-product-edit:before,
+.qt-product-edit:after {
+  display: none !important;
+}
+
 .qt-product-edit:before,
 .qt-product-edit:after {
   display: none !important;
