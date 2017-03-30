@@ -60,14 +60,14 @@
             </div>
 
             <div ng-show="isShowDiscountProductInputField || editProduct.discountAmount != null" class="form-group" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
-              <input type="number"
+              <input type="text"
                      class="form-control"
                      placeholder="Discount Amount"
                      name="discountAmount"
                      ng-model="editProduct.discountAmount"
                      ng-max="100"
                      ng-min="0"
-                     qt-to-fixed="2"
+                     qt-to-fixed=
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
             </div>

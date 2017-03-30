@@ -15,6 +15,7 @@
             $scope.usersSbscr = angular.copy(val.selectUsersSubscr);
 
           } else if (val.selectDevicesIds.length > 0) {
+            console.log(val);
 
             $scope.bulkOptionMode = 'devices';
             $scope.selectDevicesIds = val.selectDevicesIds;

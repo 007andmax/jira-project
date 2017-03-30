@@ -521,10 +521,8 @@
                          trimmed-tooltip-checker="product.sum | currency:'$':2">
                     </div>
                     <div class="discount-ticket" ng-if="product.discountAmount>0">
-                      Discount: <b ng-if="product.discountType =='FIXED' ">$</b>
-                      {{product.discountAmount | currency :
-                      '':
-                      2 }}<b ng-if="product.discountType =='PERCENT' ">%</b>
+                      Discount:
+                      {{product.discountAmount}} %
                     </div>
                   </div>
 
@@ -557,8 +555,7 @@
                   <div class="col-5">Duration
                     <span class="model">{{ service.quantity | durationFilter }}</span>
                     <div ng-if="service.discountAmount>0">
-                      Discount: <b ng-if="service.discountType =='FIXED' ">$</b>{{service.discountAmount | currency :
-                      '': 2 }}<b ng-if="service.discountType =='PERCENT' ">%</b>
+                      Discount: {{service.discountAmount}} %
                     </div>
                   </div>
                   <div class="col-3 service-descr">
