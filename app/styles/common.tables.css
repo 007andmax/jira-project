@@ -46,9 +46,14 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 60%;
   }
-
+  .opened-ticket #Service .col-1 {
+    width: 306px;
+  }
+  .opened-ticket-list #Service .col-1 {
+    width: 175px;
+  }
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 39%;
+    width: 51%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
@@ -61,12 +66,19 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 }
 
 @media screen and (max-width: 1600px) {
+  .opened-ticket-list .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
+    right: -255px!important;
+  }
+  .opened-ticket .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
+    right: 0!important;
+  }
+
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 44.3%;
+    width: 55.3%;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 47%;
+    width: 37%;
     margin-bottom: 10px;
   }
 
@@ -80,7 +92,6 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 
   .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(4) {
     padding-left: 0;
-    width: 92px !important;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(5) {
@@ -91,11 +102,11 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 
 @media screen and (max-width: 1366px) {
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 29%;
+    width: 43%;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 44%;
+    width: 33%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
@@ -108,8 +119,11 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 }
 
 @media screen and (max-width: 1280px) {
+  .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
+    right: 0!important;
+  }
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 21%;
+    width: 37%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
