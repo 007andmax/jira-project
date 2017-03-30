@@ -30,7 +30,7 @@
 
         </div>
 
-        <div class="edit-col3" style="width: 74px;"
+        <div class="edit-col3" style="width: 150px;"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}">
           <input type="text" class="form-control" placeholder="Serial Number"
                  name="productSerialNumber" ng-maxlength="25"
@@ -45,7 +45,7 @@
                  hard-reset-pattern="numberPattern">
         </div>
 
-        <div class="edit-col5" style="width: 74px;"
+        <div class="edit-col5" style="width: 150px;"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}">
           <input type="text" class="form-control" placeholder="Price" name="productPrice"
                  ng-required="true" ng-model="editProduct.item.sale" qt-to-fixed="2"
@@ -53,7 +53,7 @@
                  hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
         </div>
         <!--DISCOUNT-->
-        <div class="col-4" style="width: 96px; float: left;">
+        <div class="col-4" style="width: 52px; float: left;">
           <div>
             <div  ng-hide="isShowDiscountProductInputField || editProduct.discountAmount != null">
               <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowDiscountProductInputField = !isShowDiscountProductInputField" uib-tooltip="Click to edit Discount"></i>
@@ -67,7 +67,7 @@
                      ng-model="editProduct.discountAmount"
                      ng-max="100"
                      ng-min="0"
-                     qt-to-fixed=
+                     qt-to-fixed
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
             </div>

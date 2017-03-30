@@ -217,10 +217,13 @@
 #Product .col-4 .discount-input, #Service .col-4 .discount-input{
   position: relative;
 }
-#Product .col-4 input, #Service .col-4 input{
+#Product .col-4 input, #Service .col-4 input, .ticket-update-service-edit .col-4 input, .ticket-update-product-edit .col-4 input{
   padding: 0 5px;
 }
-#Product .col-4 .discount-input:after, #Service .col-4 .discount-input:after {
+#Product .col-4 .discount-input:after,
+#Service .col-4 .discount-input:after,
+.ticket-update-service-edit .col-4 .discount-input:after,
+.ticket-update-product-edit .col-4 .discount-input:after  {
   content: "%";
   position: absolute;
   top: 5px;

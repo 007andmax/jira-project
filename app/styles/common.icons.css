@@ -539,11 +539,14 @@ a.ha-24 {
   background-image: url("../images/new-icons/discount-icon.svg");
   cursor: pointer;
 }
-.ticket-add-content .sale-icon-for-isDicount{
+.ticket-add-content .sale-icon-for-isDicount, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount{
   width: 30px;
   height: 30px;
   margin: 5px 0 0 10px;
   cursor: pointer;
+}
+.ticket-update-service-edit .sale-icon-for-isDicount{
+  margin: 5px 0 0;
 }
 
 .icn-report-spam {
