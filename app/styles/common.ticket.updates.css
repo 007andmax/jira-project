@@ -375,6 +375,7 @@
   margin-bottom: 0;
 }
 
+
 .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
   width: 20.333333%;
   height: auto;
@@ -478,7 +479,7 @@
   }
 
   .inventory-details .table-wrapper .service-table .col-3 {
-    width: calc(100% - 390px);
+    width: calc(100% - 290px);
   }
 
   .table-wrapper .table-content .discount-ticket {
@@ -491,6 +492,12 @@
 }
 
 @media screen and (max-width: 1366px) {
+  .table-wrapper .table-content .form-group input{
+    font-size: 12px;
+  }
+  .tax-recurring input {
+    font-size: 12px;
+  }
   .table-wrapper .table-content .discount-ticket {
     word-wrap: break-word;
   }
@@ -498,13 +505,13 @@
     width: calc(100% - 464px);
   }
   .inventory-details .table-wrapper .service-table .col-3{
-    width: calc(100% - 305px);
+    width: calc(100% - 230px);
   }
 
 }
 @media screen and (max-width: 1280px){
   .inventory-details .table-wrapper .service-table .col-3{
-    width: calc(100% - 280px);
+    width: calc(100% - 210px);
   }
 }
 
