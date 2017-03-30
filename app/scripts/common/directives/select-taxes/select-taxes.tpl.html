@@ -10,7 +10,7 @@
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
                    ng-change="$ctrl.updateEntityTaxList(tax)">
             {{ tax.name }}&nbsp;{{ tax.rate }}%
-            <span class="control-indicator plus-circle" ng-show="$ctrl.selectedTaxes[tax.id]"></span>
+            <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]"></i>
           </label>
         </div>
       </div>

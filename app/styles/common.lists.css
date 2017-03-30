@@ -2436,18 +2436,20 @@ Devices tab
 }
 
 .qt-product-edit .form-group .dropdown-menu {
-  width: 38% !important;
+  width: 290px!important;
 }
 
-.qt-product-edit .form-group .dropdown-menu-left {
-  width: auto !important;
-}
 
 .qt-product-edit .form-group label {
   display: inline-block;
   margin-right: 25px;
   width: 120px;
   text-align: right;
+}
+.checkbox-dropdown .list-container label{
+  padding: 13px 15px;
+  text-align: left;
+  margin: 0;
 }
 
 .qt-product-edit .form-group input {
@@ -4253,6 +4255,13 @@ Devices tab
   left: 39px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.service-form-wrapper.edit-form-checkbox .col-3 .checkbox-dropdown label{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.service-form-wrapper.edit-form-checkbox .col-3 .checkbox-dropdown .list-container .icn-label-save{
+  right: 12px;
 }
 
 .service-form-wrapper.edit-form-checkbox .col-1 {

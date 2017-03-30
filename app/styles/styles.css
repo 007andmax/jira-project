@@ -6609,6 +6609,10 @@ tbody.collapse.in {
 
 .checkbox-dd-item:hover, .checkbox-dd-item.selected {
   background-color: #e7ecf2;
+  /*position: relative;*/
+}
+.checkbox-dd-item{
+  position: relative;
 }
 
 .checkbox-dd-item.create-custom {

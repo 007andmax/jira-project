@@ -533,11 +533,8 @@ a.ha-24 {
   width: 30px;
   height: 30px;
   margin: 5px 0 0 10px;
+  cursor: pointer;
 }
-
-/*:hover > .settings-icon, :active > .settings-icon, :focus:hover > .settings-icon, :focus:active > .settings-icon, :hover:active > .settings-icon, .active > .settings-icon, .open .settings-icon, .open > .btn:hover .settings-icon {*/
-/*background-image: url("../images/new-icons/settings.png");*/
-/*}*/
 
 .icn-report-spam {
   background-position: -2448px -100px;
@@ -1124,6 +1121,11 @@ a:hover > .icn-label-delete, a:active > .icn-label-delete {
   background-position: -1720px -100px;
   width: 14px;
   height: 10px;
+}
+.list-container .icn-label-save{
+  position: absolute;
+  right: -35px;
+  top: 17px;
 }
 
 a:hover > .icn-label-save, a:active > .icn-label-save {
