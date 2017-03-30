@@ -1083,12 +1083,7 @@ Devices tab
   width: calc(100% - 120px);
   white-space: nowrap;
 }
-.qt-billable-clients .col-2 div{
-  display: inline-block;
-}
-.qt-billable-clients .col-2 div:last-child{
-  width: 99px;
-}
+
 .qt-list > li.billable-main > .col-2,
 .qt-billable-sub > li > .col-2 {
   width: 120px;
@@ -2385,10 +2380,6 @@ Devices tab
   margin-left: 17px;
 }
 
-.service-form-wrapper .select-taxes-drv {
-  width: 100%;
-}
-
 .qt-product-edit {
   z-index: 2;
 
@@ -2396,63 +2387,6 @@ Devices tab
   padding: 0 !important;
 
   cursor: auto !important;
-}
-
-.qt-product-edit .row .col-1 {
-  width: 100%;
-  position: relative;
-  margin: 15px 0 0 102px;
-}
-
-.qt-product-edit .row .col-1 .select-taxes-drv {
-  width: 290px !important;
-}
-.qt-product-edit .category-caret {
-  position: absolute;
-  right: 335px;
-  z-index: 1;
-  top: 0;
-}
-
-.qt-product-edit .qt-form-actions.btn-bottom {
-  bottom: 0 !important;
-  left: 0 !important;
-  margin-top: 15px !important;
-  width: 190px !important;
-  position: relative !important;
-  margin-left: 149px;
-}
-
-.qt-product-edit .btn-bottom .text-error {
-  position: absolute;
-  white-space: nowrap;
-  bottom: -65px;
-  left: -255px;
-}
-
-.qt-product-edit .form-group {
-  margin-bottom: 15px;
-  position: relative;
-}
-
-.qt-product-edit .form-group .dropdown-menu {
-  width: 38% !important;
-}
-
-.qt-product-edit .form-group .dropdown-menu-left {
-  width: auto !important;
-}
-
-.qt-product-edit .form-group label {
-  display: inline-block;
-  margin-right: 25px;
-  width: 120px;
-  text-align: right;
-}
-
-.qt-product-edit .form-group input {
-  width: 290px;
-  display: inline-block;
 }
 
 .qt-product-edit:before,
@@ -2530,23 +2464,29 @@ Devices tab
   width: 145px;
 }
 
-.with-category .qt-product-list > li > .col-2 {
-  width: calc(100% - 1053px);
+.with-category .qt-list > li > .col-2 {
+  width: calc(100% - 888px);
 }
 
-.slide-category-content .qt-list > li > .col-2 {
-  width: calc(100% - 1053px);
+.slide-category-content .qt-list.qt-product-list > li > .col-2 {
+  width: calc(100% - 953px);
 }
 
 @media screen and (max-width: 1600px) {
-  .with-category .qt-product-list > li > .col-2 {
-    width: calc(100% - 873px);
+  .with-category .qt-list > li > .col-2 {
+    width: calc(100% - 763px);
   }
 }
 
 @media screen and (max-width: 1366px) {
   .with-category .qt-product-list > li > .col-2 {
-    width: calc(100% - 863px);
+    width: calc(100% - 693px);
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .with-category .qt-product-list > li > .col-2 {
+    width: calc(100% - 693px);
   }
 }
 
@@ -2601,8 +2541,8 @@ Devices tab
     width: 145px;
   }
 
-  .slide-category-content .qt-list > li > .col-2 {
-    width: calc(100% - 1293px);
+  .products-content .slide-category-content .qt-list > li > .col-2 {
+    width: calc(100% - 1194px);
   }
 
   .qt-product-list > li > .col-3 {
@@ -2891,7 +2831,7 @@ Devices tab
 }
 
 .qt-default-services > li > .col-1 {
-  width: calc(100% - 610px);
+  width: calc(100% - 490px);
 }
 
 .qt-default-services > li > .col-2 {
@@ -3132,7 +3072,7 @@ Devices tab
 }
 
 .qt-services-list > li > .col-1 {
-  width: calc(100% - 613px);
+  width: calc(100% - 473px);
 }
 
 .qt-services-list > li > .col-5 {
