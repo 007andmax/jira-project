@@ -53,16 +53,15 @@
                  hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
         </div>
         <!--DISCOUNT-->
-        <div class="col-4" style="width: 52px; float: left;">
+        <div class="col-4" style="width: 60px; float: left;">
           <div>
             <div  ng-hide="isShowDiscountProductInputField || editProduct.discountAmount != null">
               <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowDiscountProductInputField = !isShowDiscountProductInputField" uib-tooltip="Click to edit Discount"></i>
             </div>
 
-            <div ng-show="isShowDiscountProductInputField || editProduct.discountAmount != null" class="form-group" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
+            <div ng-show="isShowDiscountProductInputField || editProduct.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
               <input type="text"
                      class="form-control"
-                     placeholder="Discount Amount"
                      name="discountAmount"
                      ng-model="editProduct.discountAmount"
                      ng-max="100"
@@ -70,6 +69,7 @@
                      qt-to-fixed
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
+              <!--<p>%</p>-->
             </div>
           </div>
         </div>
