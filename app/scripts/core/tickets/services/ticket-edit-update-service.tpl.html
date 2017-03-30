@@ -58,21 +58,22 @@
         </div>
 
         <!--DISCOUNT-->
-        <div class="col-4" style="width: 100px;">
+        <div class="col-4" style="width: 52px;">
           <div>
-            <div  ng-hide="isShowServiceEditDiscountInputField || editService.discountAmount != null">
-              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowServiceEditDiscountInputField = !isShowServiceEditDiscountInputField" uib-tooltip="Click to choose Discount"></i>
+            <div ng-hide="isShowServiceEditDiscountInputField || editService.discountAmount != null">
+              <i class="icon-sm sale-icon-for-isDicount"
+                 ng-click="isShowServiceEditDiscountInputField = !isShowServiceEditDiscountInputField"
+                 uib-tooltip="Click to choose Discount"></i>
             </div>
 
-            <div ng-show="isShowServiceEditDiscountInputField || editService.discountAmount != null" class="form-group" ng-class="{'has-error': isShowingErrors(updateTicketService, 'discountAmount')}">
-              <input type="number"
+            <div ng-show="isShowServiceEditDiscountInputField || editService.discountAmount != null" class="form-group discount-input"
+                 ng-class="{'has-error': isShowingErrors(updateTicketService, 'discountAmount')}">
+              <input type="text"
                      class="form-control"
-                     placeholder="Discount Amount"
                      name="discountAmount"
                      ng-model="editService.discountAmount"
                      ng-max="100"
                      ng-min="0"
-                     qt-to-fixed="2"
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
             </div>
