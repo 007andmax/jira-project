@@ -2396,6 +2396,9 @@ Devices tab
 
   cursor: auto !important;
 }
+.qt-product-edit [class*="form-group"]:nth-child(7) input{
+  padding-right: 50px;
+}
 
 .qt-product-edit .row .col-1 {
   width: 100%;
