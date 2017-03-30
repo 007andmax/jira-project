@@ -402,6 +402,7 @@ body.non-body-scroll::-webkit-scrollbar {
 .discount-recurring input {
   width: 37px;
   padding: 0 5px;
+  text-align: right;
 }
 
 @media screen and (max-width: 1600px) {

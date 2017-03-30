@@ -526,6 +526,15 @@ a.ha-24 {
 .settings-icon {
   background-image: url("../images/new-icons/settings-na.png");
 }
+.barcode-icon{
+  background-image: url("../images/new-icons/barcode.svg");
+  width: 35px;
+  height: 20px;
+  position: absolute;
+  background-size: contain;
+  right: 330px;
+  top: 8px;
+}
 .sale-icon-for-isDicount {
   background-image: url("../images/new-icons/discount-icon.svg");
   cursor: pointer;

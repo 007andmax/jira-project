@@ -2434,7 +2434,9 @@ Devices tab
   margin-bottom: 15px;
   position: relative;
 }
-
+.qt-product-edit .form-group input:nth-child(7){
+  padding-right: 50px;
+}
 .qt-product-edit .form-group .dropdown-menu {
   width: 290px!important;
 }
