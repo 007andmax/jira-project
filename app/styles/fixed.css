@@ -377,12 +377,13 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 .discount-recurring{
   display: block;
+  position: relative;
 }
 .discount-recurring input, .discount-recurring div{
   display: inline-block;
 }
 .discount-recurring input {
-  width: calc(100% - 70px);
+  width: 37px;
   vertical-align: top;
 }
 @media screen and (max-width: 1600px){
@@ -413,6 +414,11 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 .discount-recurring .dropdown-account-type{
   width: 7%;
+}
+.discount-recurring p{
+  position: absolute;
+  left: 40px;
+  top: 0;
 }
 .qt-billable-clients .tax-recurring input{
   width: 100%;

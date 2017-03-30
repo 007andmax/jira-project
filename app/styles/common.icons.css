@@ -1124,7 +1124,7 @@ a:hover > .icn-label-delete, a:active > .icn-label-delete {
 }
 .list-container .icn-label-save{
   position: absolute;
-  right: -35px;
+  right: -65px;
   top: 17px;
 }
 
