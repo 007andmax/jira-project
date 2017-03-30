@@ -79,7 +79,7 @@
           $scope.password.links = links.concat([]);
           for (var i = 0; i < links.length; i++) {
             var link = links[i];
-            $scope.password.selectionMap[link.agentId || link.userId || link.gadgetId] = true;
+            $scope.password.selectionMap[link.deviceId || link.userId || link.gadgetId] = true;
           }
           $scope.password.companyId = $scope.editedPasswordCompany.id;
           $scope.password.firstLinkName = getLinkName($scope.password.links[0], $scope.password.companyId);
@@ -130,19 +130,19 @@
 
           if (password.selectionMap[itemId]) {
             if (firstLink) {
-              if (firstLink.userId && type !== 'user' || firstLink.agentId && type !== 'agent' || firstLink.gadgetId && type !== 'gadget' || companyId !== $scope.password.companyId) {
+              if (firstLink.userId && type !== 'user' || firstLink.deviceId && type !== 'agent' || firstLink.gadgetId && type !== 'gadget' || companyId !== $scope.password.companyId) {
                 clearLinks();
                 password.selectionMap[itemId] = true;
               }
             }
 
             var newLink = {};
-            newLink[type + 'Id'] = itemId;
+            newLink[getKeyByType(type)] = itemId;
             password.links.push(newLink);
           } else {
             for (var i = 0; i < password.links.length; i++) {
               var link = password.links[i];
-              if (link[type + 'Id'] === itemId) {
+              if (link[getKeyByType(type)] === itemId) {
                 password.links.splice(i, 1);
                 break;
               }
@@ -287,6 +287,15 @@
           }
         };
 
+        function getKeyByType(type) {
+          switch (type) {
+            case 'user': return 'userId';
+            case 'agent': return 'deviceId';
+            case 'gadget': return 'gadgetId';
+            default: throw new Error('Unresolved link type!')
+          }
+        }
+
         function getLinkName(link, companyId) {
           if (!link) {
             return '';
@@ -297,8 +306,8 @@
             if (user) {
               return $scope.getUserName(user);
             }
-          } else if (link.agentId) {
-            var device = DevicesService.getOneByAgentId(link.agentId, companyId);
+          } else if (link.deviceId) {
+            var device = DevicesService.getOneByDeviceId(link.deviceId, companyId);
             if (device) {
               return getDeviceName(device);
             }
