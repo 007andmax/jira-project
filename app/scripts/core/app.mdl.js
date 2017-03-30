@@ -585,7 +585,7 @@
         $rootScope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $rootScope.urlPattern = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
         $rootScope.ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        $rootScope.PERCENT = /^100$|^\s*(\d{0,2})((\.|\,)(\d*))?\s*\%?\s*$/;
+        $rootScope.PERCENT = /^[1-9][0-9]?$|^100$/;
 
         $rootScope.discountTypes = {
           FIXED: "$",

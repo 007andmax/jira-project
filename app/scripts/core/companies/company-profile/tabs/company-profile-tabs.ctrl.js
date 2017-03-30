@@ -269,15 +269,20 @@
             ticketManager: selectUsersSbscr.ticketManager === selectUsersIds.length
           };
 
-          $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
+          $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.filter(function (user) {
+              return !user.deletedAt;
+            }).length);
           $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
 
         };
 
         $scope.selectAllUsers = function (isSelectAllUsers) {
 
-          for (var i = 0, len = $scope.users.length; i < len; i++) {
-            $scope.selectedUsers[$scope.users[i].id] = isSelectAllUsers;
+          var users = $scope.users.filter(function (user) {
+            return !user.deletedAt;
+          });
+          for (var i = 0, len = users.length; i < len; i++) {
+            $scope.selectedUsers[users[i].id] = isSelectAllUsers;
           }
 
           $scope.changeSelectedUsers($scope.selectedUsers);
