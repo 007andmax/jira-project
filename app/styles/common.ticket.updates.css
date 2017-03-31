@@ -691,9 +691,11 @@
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 485px);
   }
+
   _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 488px);
   }
+
   .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
     width: 33.333333%;
   }
@@ -703,18 +705,25 @@
   .ticket-update-service-edit {
     padding: 30px 40px 30px 50px;
   }
+
   .ticket-update-product-edit {
     padding: 30px 40px 30px 50px;
   }
-  .ticket-update-edit .icon-edit{
+
+  .ticket-update-edit .icon-edit {
     left: 30px;
   }
+
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 563px);
   }
 
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 36%;
+  }
+
+  _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: 35%;
   }
 
   .opened-ticket-list .table-wrapper .service-table .col-5 div {
@@ -754,6 +763,7 @@
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 230px);
   }
+
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 75%;
   }

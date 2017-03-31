@@ -46,12 +46,15 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 60%;
   }
+
   .opened-ticket #Service .col-1 {
     width: 306px;
   }
+
   .opened-ticket-list #Service .col-1 {
     width: 175px;
   }
+
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 51%;
   }
@@ -66,16 +69,21 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 }
 
 @media screen and (max-width: 1600px) {
-  .opened-ticket-list .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
-    left: 205px!important;
-    right: 0!important;
+  .opened-ticket-list .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    left: 205px !important;
+    right: 0 !important;
   }
-  .opened-ticket .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
-    right: 0!important;
+
+  .opened-ticket .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    right: 0 !important;
   }
 
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 55.3%;
+  }
+
+  _::-webkit-:not(:root:root), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 54.3%;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
@@ -120,9 +128,10 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 }
 
 @media screen and (max-width: 1280px) {
-  .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
-    right: 0!important;
+  .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    right: 0 !important;
   }
+
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 37%;
   }
@@ -130,6 +139,11 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
     width: 34%;
   }
+
+  _::-webkit-:not(:root:root), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 36%;
+  }
+
 }
 
 .qt-table > li > div:first-child {
