@@ -330,7 +330,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .tax-recurring .list-container .icn-label-save {
-  right: 10px;
+  right: 20px;
 }
 
 .tax-recurring input, .discount-recurring input, .discount-recurring button {
@@ -1860,11 +1860,6 @@ span.sort-span {
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4, .qt-list > li > .intermediate-parent-elem > .col-4, .qt-product-list > li > .col-4 {
     width: 100px;
   }
-
-  /*.with-category .qt-product-list > li > .intermediate-parent-elem > .col-1, .qt-list > li > .intermediate-parent-elem > .col-1, .qt-product-list > li > .col-1 {*/
-    /*width: 95px;*/
-    /*height: auto;*/
-  /*}*/
 
   .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
     margin-right: 6px;

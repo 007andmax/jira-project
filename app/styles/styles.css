@@ -11113,6 +11113,9 @@ button.close {
   display: inline-block;
   width: calc(100% - 502px);
 }
+_:-ms-lang(x), .ticket-add-content .ticket-add-product .qt-table li .col-1{
+  width: calc(100% - 505px);
+}
 
 _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .col-1 {
   width: calc(100% - 510px);
