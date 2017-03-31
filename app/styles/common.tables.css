@@ -57,11 +57,11 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 59%;
+    width: 58%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 36.7%;
+    width: 48.7%;
   }
 }
 

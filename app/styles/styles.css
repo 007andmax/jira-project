@@ -11115,7 +11115,7 @@ button.close {
 }
 
 _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-  width: calc(100% - 631px);
+  width: calc(100% - 510px);
 }
 
 .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {

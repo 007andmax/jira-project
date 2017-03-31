@@ -691,7 +691,9 @@
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 485px);
   }
-
+  _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: calc(100% - 488px);
+  }
   .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
     width: 33.333333%;
   }
