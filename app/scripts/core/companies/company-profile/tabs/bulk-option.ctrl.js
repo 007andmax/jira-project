@@ -15,7 +15,6 @@
             $scope.usersSbscr = angular.copy(val.selectUsersSubscr);
 
           } else if (val.selectDevicesIds.length > 0) {
-            console.log(val);
 
             $scope.bulkOptionMode = 'devices';
             $scope.selectDevicesIds = val.selectDevicesIds;
@@ -64,8 +63,18 @@
         };
 
         $scope.removeDevices = function () {
-          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.selectDevicesIds);
-          $scope.companyProfileHeader.unCheckAll();
+          var confirmMessage = 'Do you want to remove ',
+            confirmButton = 'Yes';
+          confirmMessage += $scope.selectDevicesIds.length === 1 ? '1 device' : $scope.selectUsersIds.length + ' devices';
+
+          function UncheckAllAndRemoveFromList() {
+            $scope.companyProfileHeader.unCheckAll();
+            $scope.companyProfileHeader.removeDeviceFromPage($scope.selectDevicesIds);
+          }
+
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function(){
+            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.selectDevicesIds, UncheckAllAndRemoveFromList());
+          });
         };
 
         $scope.shutdownDevices = function () {
