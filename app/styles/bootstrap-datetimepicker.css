@@ -4,8 +4,8 @@
   bottom: auto !important;
   width: 298px;
   background: #fff;
-  right: 0 !important;
-  left: auto !important;
+  right: 0;
+  left: auto;
 }
 
 .bootstrap-datetimepicker-widget .list-unstyled {

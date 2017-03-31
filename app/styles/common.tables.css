@@ -67,7 +67,8 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 
 @media screen and (max-width: 1600px) {
   .opened-ticket-list .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
-    right: -255px!important;
+    left: 205px!important;
+    right: 0!important;
   }
   .opened-ticket .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu{
     right: 0!important;
