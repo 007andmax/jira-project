@@ -755,7 +755,7 @@
     width: calc(100% - 230px);
   }
   .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: 34%;
+    width: 75%;
   }
 
 }

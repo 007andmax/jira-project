@@ -35,11 +35,11 @@
 }
 
 _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-  width: 54%;
+  width: 64%;
 }
 
 _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-  width: 24.7%;
+  width: 41.7%;
 }
 
 @media screen and (min-width: 2048px) {
@@ -84,7 +84,7 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 42%;
+    width: 53%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
@@ -111,7 +111,7 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 26%;
+    width: 41%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
@@ -128,7 +128,7 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 18%;
+    width: 34%;
   }
 }
 
