@@ -34,12 +34,20 @@
   width: 43.7%;
 }
 
+_:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+  width: 64%;
+}
+
+_:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+  width: 41.7%;
+}
+
 _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-  width: 54%;
+  width: 64%;
 }
 
 _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-  width: 24.7%;
+  width: 41.7%;
 }
 
 @media screen and (min-width: 2048px) {
@@ -47,31 +55,68 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
     width: 60%;
   }
 
+  .opened-ticket #Service .col-1 {
+    width: 306px;
+  }
+
+  .opened-ticket-list #Service .col-1 {
+    width: 175px;
+  }
+
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 39%;
+    width: 51%;
+  }
+
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 58%;
+  }
+
+  _:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 48.7%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 59%;
+    width: 58%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 36.7%;
+    width: 48.7%;
   }
 }
 
 @media screen and (max-width: 1600px) {
+  .opened-ticket-list .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    left: 205px !important;
+    right: 0 !important;
+  }
+
+  .opened-ticket .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    right: 0 !important;
+  }
+
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 44.3%;
+    width: 55.3%;
+  }
+
+  _::-webkit-:not(:root:root), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 54.3%;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 47%;
+    width: 37%;
     margin-bottom: 10px;
   }
 
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 53%;
+  }
+
+  _:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 45.7%;
+  }
+
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 42%;
+    width: 53%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
@@ -80,7 +125,6 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 
   .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(4) {
     padding-left: 0;
-    width: 92px !important;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(5) {
@@ -91,15 +135,23 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 
 @media screen and (max-width: 1366px) {
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 29%;
+    width: 43%;
   }
 
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
-    width: 44%;
+    width: 33%;
+  }
+
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 41%;
+  }
+
+  _:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 42.7%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 26%;
+    width: 41%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
@@ -108,13 +160,26 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
 }
 
 @media screen and (max-width: 1280px) {
+  .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    right: 0 !important;
+  }
+
   .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 21%;
+    width: 37%;
+  }
+
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 34%;
   }
 
   _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
-    width: 18%;
+    width: 34%;
   }
+
+  _::-webkit-:not(:root:root), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 36%;
+  }
+
 }
 
 .qt-table > li > div:first-child {

@@ -5,11 +5,11 @@
 
       <div class="col-sm-2">{{ service.item.name }}</div>
 
-      <div class="col-sm-6" trimmed-popover trimmed-popover-content="service.description">
+      <div class="col-sm-7" trimmed-popover trimmed-popover-content="service.description">
         {{ service.description }}
       </div>
 
-      <div class="col-sm-2">{{ service.sum | currency: '$': 2 }}
+      <div class="col-sm-1">{{ service.sum | currency: '$': 2 }}
         <div class="discount-recurring">
           <form name="billableEditDiscountForm"
                 stop-propagation="click">
@@ -59,7 +59,7 @@
         P/N: <span class="model">#{{ product.item.manufacture }}</span>
       </div>
 
-      <div class="col-sm-4"
+      <div class="col-sm-5"
            ng-class="{'col-2-has-serial-number': product.serialNumber && (product.serialNumber.length > 0)}"
            trimmed-popover trimmed-popover-content="product.item.description">
         {{ product.item.description }}
@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <div class="col-sm-2" style="float: right;">{{ product.sum | currency: '$': 2 }} <br>
+      <div class="col-sm-1" style="float: right;">{{ product.sum | currency: '$': 2 }} <br>
         <div class="discount-recurring">
           <form name="reccuringEditDiscountForm"
                 stop-propagation="click">
