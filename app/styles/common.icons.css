@@ -652,9 +652,9 @@ a.ha-24 {
   background-image: url("../images/new-icons/delete.png");
 }
 
-:hover > .icn-delete, :active > .icn-delete, :focus:hover > .icn-delete, :focus:active > .icn-delete, :hover:active > .icn-delete, .active > .icn-delete, .open .icn-delete, .open > .btn:hover .icn-delete {
-  background-image: url("../images/new-icons/delete-na.png");
-}
+/*:hover > .icn-delete, :active > .icn-delete, :focus:hover > .icn-delete, :focus:active > .icn-delete, :hover:active > .icn-delete, .active > .icn-delete, .open .icn-delete, .open > .btn:hover .icn-delete {*/
+  /*background-image: url("../images/new-icons/delete-na.png");*/
+/*}*/
 
 .icn-delete-white {
   background-image: url("../images/new-icons/delete-white.png");
@@ -673,10 +673,7 @@ a.ha-24 {
   background-image: url("../images/new-icons/paper-clip-na.png");
 }
 
-.attachment:hover {
-  background-image: url("../images/new-icons/paper-clip.png");
-
-}
+/*icon-user-black*/
 
 :hover > .icn-attachment, :active > .icn-attachment, :focus:hover > .icn-attachment, :focus:active > .icn-attachment, :hover:active > .icn-attachment, .active > .icn-attachment, .open .icn-attachment, .open > .btn:hover .icn-attachment {
   background-position: -64px 0;
@@ -708,9 +705,9 @@ a.ha-24 {
   background-image: url("../images/new-icons/user-circle-na.png");
 }
 
-:hover > .icon-user-black, :active > .icon-user-black, :focus:hover > .icon-user-black, :focus:active > .icon-user-black, :hover:active > .icon-user-black, .active > .icon-user-black, .open .icon-user-black, .open > .btn:hover .icon-user-black {
-  background-image: url("../images/new-icons/user-circle.png");
-}
+/*:hover > .icon-user-black, :active > .icon-user-black, :focus:hover > .icon-user-black, :focus:active > .icon-user-black, :hover:active > .icon-user-black, .active > .icon-user-black, .open .icon-user-black, .open > .btn:hover .icon-user-black {*/
+  /*background-image: url("../images/new-icons/user-circle.png");*/
+/*}*/
 
 .icn-priority {
   background-position: -818px -100px;
@@ -844,9 +841,9 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   background-image: url("../images/new-icons/bookmark.png");
 }
 
-:hover > .icn-unassigned, div.active.icn-unassigned {
-  background-image: url("../images/new-icons/bookmark.png");
-}
+/*:hover > .icn-unassigned, div.active.icn-unassigned {*/
+  /*background-image: url("../images/new-icons/bookmark.png");*/
+/*}*/
 
 .icn-gs-tickets {
   background-position: -1052px -128px;
@@ -1490,17 +1487,17 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/medal-na.png");
 }
 
-:hover > .icn-user-privilege, :active > .icn-user-privilege, :focus:hover > .icn-user-privilege, :focus:active > .icn-user-privilege, :hover:active > .icn-user-privilege, .active > .icn-user-privilege, .open .icn-user-privilege, .open > .btn:hover .icn-user-privilege {
-  background-image: url("../images/new-icons/medal.png");
-}
+/*:hover > .icn-user-privilege, :active > .icn-user-privilege, :focus:hover > .icn-user-privilege, :focus:active > .icn-user-privilege, :hover:active > .icn-user-privilege, .active > .icn-user-privilege, .open .icn-user-privilege, .open > .btn:hover .icn-user-privilege {*/
+  /*background-image: url("../images/new-icons/medal.png");*/
+/*}*/
 
 .icn-user-subscription {
   background-image: url("../images/new-icons/signal-na.png");
 }
 
-:hover > .icn-user-subscription, :active > .icn-user-subscription, :focus:hover > .icn-user-subscription, :focus:active > .icn-user-subscription, :hover:active > .icn-user-subscription, .active > .icn-user-subscription, .open .icn-user-subscription, .open > .btn:hover .icn-user-subscription {
-  background-image: url("../images/new-icons/signal.png");
-}
+/*:hover > .icn-user-subscription, :active > .icn-user-subscription, :focus:hover > .icn-user-subscription, :focus:active > .icn-user-subscription, :hover:active > .icn-user-subscription, .active > .icn-user-subscription, .open .icn-user-subscription, .open > .btn:hover .icn-user-subscription {*/
+  /*background-image: url("../images/new-icons/signal.png");*/
+/*}*/
 
 /**Inside Button**/
 
@@ -1628,9 +1625,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/text-italic-na.png");
 }
 
-:hover > .wysiwyg-ol, :active > .wysiwyg-ol, :focus:hover > .wysiwyg-ol, :focus:active > .wysiwyg-ol, :hover:active > .wysiwyg-ol, .active > .wysiwyg-ol, .open .wysiwyg-ol, .open > .btn:hover .wysiwyg-ol {
-  background-image: url("../images/new-icons/text-italic.png");
-}
+/*:hover > .wysiwyg-ol, :active > .wysiwyg-ol, :focus:hover > .wysiwyg-ol, :focus:active > .wysiwyg-ol, :hover:active > .wysiwyg-ol, .active > .wysiwyg-ol, .open .wysiwyg-ol, .open > .btn:hover .wysiwyg-ol {*/
+  /*background-image: url("../images/new-icons/text-italic.png");*/
+/*}*/
 
 .wysiwyg-ol.active, .active > .wysiwyg-ol {
   background-image: url("../images/new-icons/text-italic.png");
@@ -1652,9 +1649,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 }
 
-:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {
-  background-image: url("../images/new-icons/bold.png");
-}
+/*:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {*/
+  /*background-image: url("../images/new-icons/bold.png");*/
+/*}*/
 
 .wysiwyg-bold.active, .active > .wysiwyg-bold {
   background-image: url("../images/new-icons/bold.png");
@@ -1675,9 +1672,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/list-bullets-na.png");
 }
 
-:hover > .wysiwyg-ul, :active > .wysiwyg-ul, :focus:hover > .wysiwyg-ul, :focus:active > .wysiwyg-ul, :hover:active > .wysiwyg-ul, .active > .wysiwyg-ul, .open .wysiwyg-ul, .open > .btn:hover .wysiwyg-ul {
-  background-image: url("../images/new-icons/list-bullets.png");
-}
+/*:hover > .wysiwyg-ul, :active > .wysiwyg-ul, :focus:hover > .wysiwyg-ul, :focus:active > .wysiwyg-ul, :hover:active > .wysiwyg-ul, .active > .wysiwyg-ul, .open .wysiwyg-ul, .open > .btn:hover .wysiwyg-ul {*/
+  /*background-image: url("../images/new-icons/list-bullets.png");*/
+/*}*/
 
 .wysiwyg-ul.active, .active > .wysiwyg-ul {
   background-image: url("../images/new-icons/list-bullets.png");
@@ -1696,9 +1693,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/indent-left-na.png");
 }
 
-:hover > .wysiwyg-unindent, :active > .wysiwyg-unindent, :focus:hover > .wysiwyg-unindent, :focus:active > .wysiwyg-unindent, :hover:active > .wysiwyg-unindent, .active > .wysiwyg-unindent, .open .wysiwyg-unindent, .open > .btn:hover .wysiwyg-unindent {
-  background-image: url("../images/new-icons/indent-left.png");
-}
+/*:hover > .wysiwyg-unindent, :active > .wysiwyg-unindent, :focus:hover > .wysiwyg-unindent, :focus:active > .wysiwyg-unindent, :hover:active > .wysiwyg-unindent, .active > .wysiwyg-unindent, .open .wysiwyg-unindent, .open > .btn:hover .wysiwyg-unindent {*/
+  /*background-image: url("../images/new-icons/indent-left.png");*/
+/*}*/
 
 /*
 .icn-wysiwyg-indent{
@@ -1715,9 +1712,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/indent-right-na.png");
 }
 
-:hover > .wysiwyg-indent, :active > .wysiwyg-indent, :focus:hover > .wysiwyg-indent, :focus:active > .wysiwyg-indent, :hover:active > .wysiwyg-indent, .active > .wysiwyg-indent, .open .wysiwyg-indent, .open > .btn:hover .wysiwyg-indent {
-  background-image: url("../images/new-icons/indent-right.png");
-}
+/*:hover > .wysiwyg-indent, :active > .wysiwyg-indent, :focus:hover > .wysiwyg-indent, :focus:active > .wysiwyg-indent, :hover:active > .wysiwyg-indent, .active > .wysiwyg-indent, .open .wysiwyg-indent, .open > .btn:hover .wysiwyg-indent {*/
+  /*background-image: url("../images/new-icons/indent-right.png");*/
+/*}*/
 
 /*.icn-wysiwyg-italic{*/
 /*background-position: -343px -100px;*/
@@ -1735,9 +1732,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/text-italic-na.png");
 }
 
-:hover > .wysiwyg-italic, :active > .wysiwyg-italic, :focus:hover > .wysiwyg-italic, :focus:active > .wysiwyg-italic, :hover:active > .wysiwyg-italic, .active > .wysiwyg-italic, .open .wysiwyg-italic, .open > .btn:hover .wysiwyg-italic {
-  background-image: url("../images/new-icons/text-italic.png");
-}
+/*:hover > .wysiwyg-italic, :active > .wysiwyg-italic, :focus:hover > .wysiwyg-italic, :focus:active > .wysiwyg-italic, :hover:active > .wysiwyg-italic, .active > .wysiwyg-italic, .open .wysiwyg-italic, .open > .btn:hover .wysiwyg-italic {*/
+  /*background-image: url("../images/new-icons/text-italic.png");*/
+/*}*/
 
 .wysiwyg-italic.active, .active > .wysiwyg-italic {
   background-image: url("../images/new-icons/text-italic.png");
@@ -1755,9 +1752,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/quotes-na.png");
 }
 
-:hover > .wysiwyg-quote, :active > .wysiwyg-quote, :focus:hover > .wysiwyg-quote, :focus:active > .wysiwyg-quote, :hover:active > .wysiwyg-quote, .active > .wysiwyg-quote, .open .wysiwyg-quote, .open > .btn:hover .wysiwyg-quote {
-  background-image: url("../images/new-icons/quotes.png");
-}
+/*:hover > .wysiwyg-quote, :active > .wysiwyg-quote, :focus:hover > .wysiwyg-quote, :focus:active > .wysiwyg-quote, :hover:active > .wysiwyg-quote, .active > .wysiwyg-quote, .open .wysiwyg-quote, .open > .btn:hover .wysiwyg-quote {*/
+  /*background-image: url("../images/new-icons/quotes.png");*/
+/*}*/
 
 /*.icn-wysiwyg-reset{*/
 /*background-position: -424px -100px;*/
@@ -1775,9 +1772,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/refresh-na.png");
 }
 
-:hover > .wysiwyg-reset, :active > .wysiwyg-reset, :focus:hover > .wysiwyg-reset, :focus:active > .wysiwyg-reset, :hover:active > .wysiwyg-reset, .active > .wysiwyg-reset, .open .wysiwyg-reset, .open > .btn:hover .wysiwyg-reset {
-  background-image: url("../images/new-icons/refresh.png");
-}
+/*:hover > .wysiwyg-reset, :active > .wysiwyg-reset, :focus:hover > .wysiwyg-reset, :focus:active > .wysiwyg-reset, :hover:active > .wysiwyg-reset, .active > .wysiwyg-reset, .open .wysiwyg-reset, .open > .btn:hover .wysiwyg-reset {*/
+  /*background-image: url("../images/new-icons/refresh.png");*/
+/*}*/
 
 .wysiwyg-reset.disabled, .disabled .wysiwyg-reset {
   background-image: url("../images/new-icons/refresh-na.png");
@@ -1789,9 +1786,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   height: 10px;
 }
 
-:hover > .icn-wysiwyg-align-center, :active > .icn-wysiwyg-align-center, :focus:hover > .icn-wysiwyg-align-center, :focus:active > .icn-wysiwyg-align-center, :hover:active > .icn-wysiwyg-align-center, .active > .icn-wysiwyg-align-center, .open .icn-wysiwyg-align-center, .open > .btn:hover .icn-wysiwyg-align-center {
-  background-position: -538px -100px;
-}
+/*:hover > .icn-wysiwyg-align-center, :active > .icn-wysiwyg-align-center, :focus:hover > .icn-wysiwyg-align-center, :focus:active > .icn-wysiwyg-align-center, :hover:active > .icn-wysiwyg-align-center, .active > .icn-wysiwyg-align-center, .open .icn-wysiwyg-align-center, .open > .btn:hover .icn-wysiwyg-align-center {*/
+  /*background-position: -538px -100px;*/
+/*}*/
 
 .icn-wysiwyg-align-center.active, .active > .icn-wysiwyg-align-center {
   background-position: -498px -100px;
@@ -1813,9 +1810,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   height: 10px;
 }
 
-:hover > .icn-wysiwyg-align-left, :active > .icn-wysiwyg-align-left, :focus:hover > .icn-wysiwyg-align-left, :focus:active > .icn-wysiwyg-align-left, :hover:active > .icn-wysiwyg-align-left, .active > .icn-wysiwyg-align-left, .open .icn-wysiwyg-align-left, .open > .btn:hover .icn-wysiwyg-align-left {
-  background-position: -598px -100px;
-}
+/*:hover > .icn-wysiwyg-align-left, :active > .icn-wysiwyg-align-left, :focus:hover > .icn-wysiwyg-align-left, :focus:active > .icn-wysiwyg-align-left, :hover:active > .icn-wysiwyg-align-left, .active > .icn-wysiwyg-align-left, .open .icn-wysiwyg-align-left, .open > .btn:hover .icn-wysiwyg-align-left {*/
+  /*background-position: -598px -100px;*/
+/*}*/
 
 .icn-wysiwyg-align-left.active, .active > .icn-wysiwyg-align-left {
   background-position: -558px -100px;
@@ -1827,9 +1824,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   height: 10px;
 }
 
-:hover > .icn-wysiwyg-align-right, :active > .icn-wysiwyg-align-right, :focus:hover > .icn-wysiwyg-align-right, :focus:active > .icn-wysiwyg-align-right, :hover:active > .icn-wysiwyg-align-right, .active > .icn-wysiwyg-align-right, .open .icn-wysiwyg-align-right, .open > .btn:hover .icn-wysiwyg-align-right {
-  background-position: -658px -100px;
-}
+/*:hover > .icn-wysiwyg-align-right, :active > .icn-wysiwyg-align-right, :focus:hover > .icn-wysiwyg-align-right, :focus:active > .icn-wysiwyg-align-right, :hover:active > .icn-wysiwyg-align-right, .active > .icn-wysiwyg-align-right, .open .icn-wysiwyg-align-right, .open > .btn:hover .icn-wysiwyg-align-right {*/
+  /*background-position: -658px -100px;*/
+/*}*/
 
 .icn-wysiwyg-align-right.active, .active > .icn-wysiwyg-align-right {
   background-position: -618px -100px;
@@ -1851,9 +1848,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/underline-na.png");
 }
 
-:hover > .wysiwyg-underline, :active > .wysiwyg-underline, :focus:hover > .wysiwyg-underline, :focus:active > .wysiwyg-underline, :hover:active > .wysiwyg-underline, .active > .wysiwyg-underline, .open .wysiwyg-underline, .open > .btn:hover .wysiwyg-underline {
-  background-image: url("../images/new-icons/underline.png");
-}
+/*:hover > .wysiwyg-underline, :active > .wysiwyg-underline, :focus:hover > .wysiwyg-underline, :focus:active > .wysiwyg-underline, :hover:active > .wysiwyg-underline, .active > .wysiwyg-underline, .open .wysiwyg-underline, .open > .btn:hover .wysiwyg-underline {*/
+  /*background-image: url("../images/new-icons/underline.png");*/
+/*}*/
 
 .wysiwyg-underline.active, .active > .wysiwyg-underline {
   background-image: url("../images/new-icons/underline.png");
@@ -1872,9 +1869,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/link-na.png");
 }
 
-:hover > .wysiwyg-link, :active > .wysiwyg-link, :focus:hover > .wysiwyg-link, :focus:active > .wysiwyg-link, :hover:active > .wysiwyg-link, .active > .wysiwyg-link, .open .wysiwyg-link, .open > .btn:hover .wysiwyg-link {
-  background-image: url("../images/new-icons/link.png");
-}
+/*:hover > .wysiwyg-link, :active > .wysiwyg-link, :focus:hover > .wysiwyg-link, :focus:active > .wysiwyg-link, :hover:active > .wysiwyg-link, .active > .wysiwyg-link, .open .wysiwyg-link, .open > .btn:hover .wysiwyg-link {*/
+  /*background-image: url("../images/new-icons/link.png");*/
+/*}*/
 
 /***/
 .icn-user-devices {
@@ -1897,14 +1894,14 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/email.png");
 }
 
-.disabled .icn-user-mail,
-.disabled .icn-user-mail:hover {
-  background-image: url("../images/new-icons/email-na.png");
-}
+/*.disabled .icn-user-mail,*/
+/*.disabled .icn-user-mail:hover {*/
+  /*background-image: url("../images/new-icons/email-na.png");*/
+/*}*/
 
-:hover > .icn-user-mail, :active > .icn-user-mail, :focus:hover > .icn-user-mail, :focus:active > .icn-user-mail, :hover:active > .icn-user-mail, .active > .icn-user-mail, .open > .icn-user-mail, .open .icn-user-mail {
-  background-image: url("../images/new-icons/email.png");
-}
+/*:hover > .icn-user-mail, :active > .icn-user-mail, :focus:hover > .icn-user-mail, :focus:active > .icn-user-mail, :hover:active > .icn-user-mail, .active > .icn-user-mail, .open > .icn-user-mail, .open .icn-user-mail {*/
+  /*background-image: url("../images/new-icons/email.png");*/
+/*}*/
 
 .icn-user-chat {
   background-position: -512px -206px;
