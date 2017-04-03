@@ -178,7 +178,7 @@
             if ($scope.agents[i].online) {
               $scope.selectDevices[$scope.agents[i].id] = $scope.isSelectAllDevices;
             } else {
-              $scope.selectDevices[$scope.agents[i].id] = false
+              $scope.selectDevices[$scope.agents[i].id] = false;
             }
           }
 
@@ -294,9 +294,14 @@
 
           for (var deviceId in $scope.selectDevices) {
             if ($scope.selectDevices[deviceId]) {
-              selectDevicesIds.push(deviceId)
+              for(var j = 0, le = $scope.agents.length; j<le; j++) {
+                if($scope.agents[j].agentId === deviceId) {
+                  selectDevicesIds.push($scope.agents[j].id);
+                }
+              }
             }
           }
+          console.log(selectDevicesIds);
 
           if ($scope.agents) {
             for (var i = 0, len = $scope.agents.length; i < len; i++) {
@@ -331,6 +336,18 @@
           $scope.changeSelectedUsers();
           $scope.changeSelectDevices();
         };
+
+        $scope.companyProfileHeader.removeDeviceFromPage = function(idForRemove) {
+          for(var i = 0; i < idForRemove.length; i++) {
+            for(var j = 0; j < $scope.agents.length; j++) {
+              if($scope.agents[j].id === idForRemove[i]) {
+                $scope.agents.splice(j, 1);
+                console.log("REMOVE");
+                console.log($scope.agents[j])
+              }
+            }
+          }
+        }
 
       }]);
 }());
