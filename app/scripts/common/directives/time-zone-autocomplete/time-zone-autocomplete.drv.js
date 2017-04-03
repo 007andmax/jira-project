@@ -220,7 +220,7 @@
             $scope.address.fromGoogle = false;
           }
 
-          $scope.preventDropDownOpening = $scope.address.fromGoogle;
+          $scope.preventDropDownOpening = $scope.address && $scope.address.fromGoogle;
         });
 
         $scope.showDropDown = function () {

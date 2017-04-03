@@ -319,12 +319,12 @@
         Utils.customizeObj(resp.data, companyDto);
 
         if (callback) {
-          callback(resp.data);
+          callback(companyDto);
         }
 
       }, function (resp) {
         if (callback) {
-          callback(resp.data);
+          callback(resp);
         }
       });
 
@@ -358,12 +358,12 @@
         Utils.customizeObj(resp.data, companyDto);
 
         if (callback) {
-          callback(resp.data);
+          callback(companyDto);
         }
 
       }, function (resp) {
         if (callback) {
-          callback(resp.data);
+          callback(resp);
         }
       });
 
@@ -374,6 +374,10 @@
           var data = JSON.parse(newChange.data);
           if (data[companyId]) {
             Utils.customizeObj(data[companyId], companyDto);
+
+            if (callback) {
+              callback(companyDto);
+            }
           }
         }
       });
@@ -382,6 +386,10 @@
         if (newChange.action === 'USER_SAVED') {
           if (newChange.data.id === companyDto.contacts[0].id) {
             Utils.customizeObj(newChange.data, companyDto.contacts[0]);
+
+            if (callback) {
+              callback(companyDto);
+            }
           }
         }
       });

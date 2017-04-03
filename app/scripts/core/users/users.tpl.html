@@ -1,4 +1,4 @@
-<div class="users-content" qt-scroll-to>
+<div class="users-content">
   <div class="change-view-actions">
     <div class="action-wrap clearfix">
       <div class="archived-change">
@@ -70,12 +70,12 @@
     </div>
   </div>
 
-  <div style="background: #f4f4f4" ng-if="usersView === 'grid'">
+  <div style="background: #f4f4f4" ng-if="usersView === 'grid'" qt-scroll-to="top" offset="49">
     <div ui-view></div>
 
-    <div class="card-view-wrapper clearfix">
+    <div class="card-view-wrapper clearfix" scroll-pagination>
       <div class="card-wrapper" ng-controller="quicktech.core.users.userCtrl"
-           ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) track by user.id">
+           ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) | limitTo: displayLimit track by user.id">
         <div class="card">
           <div class="card-header">
             <div class="edit-icn" ng-if="!user.deletedAt" create-new-entity="user" item="user"></div>
@@ -175,10 +175,10 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-users" ng-if="usersView === 'list'" style="margin-top: 70px;">
+  <ul class="qt-list qt-users" ng-if="usersView === 'list'" style="margin-top: 70px;" scroll-pagination qt-scroll-to="top" offset="83">
 
     <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
-        ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id">
+        ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) | limitTo: displayLimit track by user.id">
 
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3">
