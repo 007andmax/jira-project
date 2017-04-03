@@ -587,6 +587,9 @@
         $rootScope.ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         $rootScope.PERCENT = /^[1-9][0-9]?$|^100$/;
 
+        //display limit for infinity-scroll-pagination
+        $rootScope.displayLimit = 20;
+
         $rootScope.discountTypes = {
           FIXED: "$",
           PERCENT: "%"
