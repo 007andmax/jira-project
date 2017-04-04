@@ -236,7 +236,7 @@
 
 
 
-
+/*Reports page (Report)*/
 .product-list-report{
   width: 870px;
   margin: 0 auto ;
@@ -267,10 +267,6 @@
   padding: 0;
   margin-bottom: 0;
 }
-.product-list-ticket li.top-product-list-ticket{
-  height: 50px;
-  line-height: 50px;
-}
 .product-list-ticket li.content-product-list-ticket{
   line-height: 15px;
 }
@@ -278,7 +274,7 @@
   height: auto;
 }
 .product-list-ticket [class*=col-md-]{
-  padding: 0 6px 15px 6px;
+  padding: 15px 6px;
 }
 .product-list-ticket .col-md-3{
   width: 24%;
@@ -289,9 +285,9 @@
 .product-list-ticket .col-md-1{
   width: 10%;
 }
-.product-report-total-sales{
+.product-report-total-sales,
+.product-report-taxes{
   border-bottom: 1px solid #bbb;
-  height: 50px;
 }
 .product-report-total-sales p{
   float: right;
@@ -317,13 +313,18 @@
   height: 16px;
   margin: 0;
 }
-.radio-buttons-product-report .radio, .radio-buttons-product-report label {
+.radio-buttons-product-report .radio,
+.radio-buttons-product-report label {
   cursor: pointer;
   display: inline-block;
 }
 .radio-buttons-product-report label{
   font-size: 20px;
   color: #404B5F;
+}
+.report-title{
+  font-size: 20px;
+  padding: 20px 0;
 }
 .radio-buttons-product-report .radio:not(checked) {
   position: absolute;
@@ -378,7 +379,8 @@
   padding-bottom: 10px;
   position: relative;
 }
-.run-report-content .content p{
+.run-report-content .content p,
+.run-report-content .device-report p{
   font-size: 18px;
   margin-bottom: 10px;
 }
@@ -400,4 +402,119 @@
 }
 .run-report-content p{
   width: 295px;
+}
+
+/*Reports page (all reports)*/
+.reports-all{
+  padding:60px 0 60px 70px;
+}
+.reports-all .col-sm-4{
+  width: 38%;
+}
+.reports-all ul{
+  list-style: none;
+  border: 1px solid #C8CBCA;
+  border-radius: 3px;
+  padding: 0;
+  border-bottom: none;
+}
+.reports-all li{
+  height: 45px;
+  border-bottom: 1px solid #C8CBCA;
+
+}
+.reports-all p{
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px 0;
+}
+.reports-all li.content-report,
+.reports-all li.content-report-button{
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #fff;
+  cursor: pointer;
+  line-height: 45px;
+  padding:0 50px;
+}
+.reports-all li.content-report:hover,
+.reports-all li.content-report-button:hover{
+  background-color: #F5FAFE;
+}
+.reports-all li.content-report-button button{
+  color: #4BA9DF;
+  border: none;
+  background-color: transparent;
+  height: 45px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+}
+
+.run-report-content-device .device-report{
+  width: 150px;
+  margin-right: 20px;
+  display: inline-block;
+  position: relative;
+}
+.run-report-content-device .content{
+  margin-right: 20px;
+  width: 236px;
+}
+.summary-radio-device{
+  width: 255px;
+}
+.run-report-content .sales-by-customer{
+  display: inline-block;
+  width: 50px;
+  font-size: 18px;
+  text-align: center;
+}
+.content-sales-by-customer input{
+  width: 220px;
+}
+.content-sales-by-customer{
+  display: inline-block;
+  padding-right: 70px;
+  padding-bottom: 15px;
+}
+.radio-sales-by-customer{
+  width: 360px;
+}
+.top-product-list-ticket-sales-by-customer .col-md-3,
+.total-sales-by-customer .col-md-3{
+  width: 39%;
+}
+.top-product-list-ticket-sales-by-customer .col-md-2,
+.total-sales-by-customer .col-md-2{
+  width: 20.3%;
+}
+.content-sales-by-customer{
+  position: relative;
+}
+.content-sales-by-customer i{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: 80px;
+  top: 10px;
+  cursor: text;
+}
+
+
+/*Reports - TAX Detail*/
+.product-list-ticket-taxes .col-md-3{
+  width: 23%;
+}
+.product-report-taxes .col-md-2{
+  width: 15.3%;
+}
+.product-report-taxes .col-md-3{
+  width: 38%;
+}
+/*Reports - TAX Summary*/
+.top-product-list-ticket-tax-summary .col-md-3,
+.content-product-list-ticket-tax-summary .col-md-3,
+.product-report-taxes-summary .col-md-3{
+  width: 69%;
 }
