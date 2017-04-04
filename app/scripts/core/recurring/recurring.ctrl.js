@@ -8,7 +8,9 @@
       function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService,
                 PermissionsService, TaxesService) {
 
-        $scope.discountAmountMsxLength;
+
+        // $scope.isShowRecurringDiscountInputProduct;
+        // $scope.isShowRecurringDiscountInputService;
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
 
         $scope.taxes = TaxesService.getAll();
@@ -65,9 +67,8 @@
             };
             RecurringService.saveRecurringDiscount(data, function(resp){
               console.log(resp)
-            })
+            });
           }
-
         };
 
         $scope.loadingFinished = function () {
