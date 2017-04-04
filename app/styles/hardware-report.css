@@ -363,7 +363,7 @@
 }
 .run-report-content button{
   display: inline-block;
-  background-color: #fff;
+  background-color: #F1F5FA;
   border: 1px solid #BEBEBE;
   border-radius: 3px;
   height: 45px;
@@ -389,6 +389,9 @@
   border: 2px solid #BEBEBE;
   padding: 0 40px 0 10px;
   width: 100%;
+}
+.run-report-content .content:first-child input{
+  background-color: #F1F5FA;
 }
 .run-report-content i{
   position: absolute;
