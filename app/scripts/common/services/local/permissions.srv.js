@@ -28,6 +28,8 @@
           $state.includes("settings.tickets") && permissions.indexOf('VIEW_TICKET_AND_INVOICE') === -1;
       }
 
+
+
     }]);
 
 })();
