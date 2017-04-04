@@ -24,8 +24,11 @@
           $state.includes("companyProfile", { tabName: 'network-scan' }) && permissions.indexOf('NETWORK_SCAN_CLIENTS') === -1 ||
           ($state.current.url + ' ' + $state.current.name).indexOf("accounting") > -1 && permissions.indexOf('VIEW_ACCOUNTING') === -1 ||
           $state.includes("quickSupport") && permissions.indexOf('ALLOW_QUICK_CONNECT') === -1 ||
-          $state.includes("permission-management") && permissions.indexOf('VIEW_PASSWORD_SECTION') === -1;
+          $state.includes("permission-management") && permissions.indexOf('VIEW_PASSWORD_SECTION') === -1 ||
+          $state.includes("settings.tickets") && permissions.indexOf('VIEW_TICKET_AND_INVOICE') === -1;
       }
+
+
 
     }]);
 
