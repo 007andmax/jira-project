@@ -104,6 +104,12 @@
           document.title = 'Settings';
         };
 
+        $scope.onClickReports = function() {
+          $rootScope.isLeftPanelHidden = true;
+          $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+          document.title = 'Reports'
+        };
+
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
@@ -357,6 +363,8 @@
             return 'inventory';
           } else if (url.indexOf('password-manager') > -1) {
             return 'password-manager';
+          } else if (url.indexOf('reports') > -1) {
+            return 'reports';
           } else {
             return undefined;
           }

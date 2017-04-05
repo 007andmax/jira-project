@@ -57,6 +57,17 @@
         <img class="menu-img" ng-if="openedCategory === 'password-manager'"
              src="images/new-icons/lock-white.png">
       </div>
+      <!--REPORTS-->
+      <div class="left-panel__category"
+           ng-class="{'active': openedCategory === 'reports'}"
+           ng-click="onClickReports()"
+           ui-sref="reports">
+        <img class="menu-img" ng-if="openedCategory !== 'reports'"
+             src="images/new-icons/lock-gray.png">
+        <img class="menu-img" ng-if="openedCategory === 'reports'"
+             src="images/new-icons/lock-white.png">
+      </div>
+
       <div class="left-panel__category settings-left-bar">
         <!--<div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"-->
              <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->

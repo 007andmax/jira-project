@@ -23,6 +23,7 @@
       'quicktech.core.settings',
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
+      'quicktech.core.reports',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -30,7 +31,7 @@
       'ngMessages',
       'ngAnimate',
       'LocalStorageModule',
-      'ngCropper'
+      'ngCropper',
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
@@ -221,6 +222,11 @@
           url: '/quickSupport',
           templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
           controller: 'quicktech.core.quickSupport.quickSupportCtrl'
+        }))
+        .state('reports', waitForServices({
+          url: '/reports',
+          templateUrl: '/html/scripts/core/reports/reports.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
       function waitForServices(conf) {
