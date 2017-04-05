@@ -43,6 +43,10 @@
   width: 40%;
   display: inline-block;
 }
+.main-info--gadget span{
+  width: 182px;
+  text-align: right;
+}
 .main-info--user{
   width: 50%;
   display: inline-block;

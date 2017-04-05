@@ -39,33 +39,33 @@
         <div class="main-info">
           <div class="main-info--gadget">
             <h2><strong>{{ currentAgent ? (currentAgent.hostName || currentAgent.ip) : 'Unknown' }}</strong></h2>
-            <p style="float: right;">
+            <p>
               <strong>Manufacturer:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
-              <input style="margin-left: 8px;" class="form-control hw-input" ng-if="showEdit" type="text"
+              <span class="pull-right ellipsis" ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
+              <input class="form-control hw-input pull-right" ng-if="showEdit" type="text"
                      ng-model="dto.manufacturer">
             </p>
-            <p style="float: right;">
+            <p>
               <strong>Model:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.model }}</span>
-              <input style="margin-left: 54px;" class="form-control hw-input" ng-if="showEdit" type="text"
+              <span class="pull-right ellipsis" ng-if="!showEdit">&nbsp;{{ dto.model }}</span>
+              <input class="form-control hw-input pull-right" ng-if="showEdit" type="text"
                      ng-model="dto.model">
             </p>
-            <p style="float: right;">
+            <p>
               <strong>Serial Number:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.serialNumber }}</span>
-              <input style="margin-left: 5px;" class="form-control hw-input" ng-if="showEdit" type="text"
+              <span class="pull-right ellipsis" ng-if="!showEdit">&nbsp;{{ dto.serialNumber }}</span>
+              <input class="form-control hw-input pull-right" ng-if="showEdit" type="text"
                      ng-model="dto.serialNumber">
             </p>
-            <p style="float: right;">
+            <p>
               <strong>Asset Tag:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.assetTag }}</span>
-              <input style="margin-left: 35px;" class="form-control hw-input" ng-if="showEdit" type="text"
+              <span class="pull-right ellipsis" ng-if="!showEdit">&nbsp;{{ dto.assetTag }}</span>
+              <input class="form-control hw-input pull-right" ng-if="showEdit" type="text"
                      ng-model="dto.assetTag">
             </p>
             <div class="date">
               <strong>Install Date:</strong>
-              <span ng-if="!showEdit">
+              <span class="pull-right" ng-if="!showEdit">
                 {{ isInstallDateChanged || report.editableFields.installDate ? ((dto.installDate || '') | date: 'dd MMM yyyy') : '' }}
               </span>
               <div ng-if="showEdit" style="display: inline-block; position: relative; margin-left: 23px; float: right;">
@@ -80,7 +80,7 @@
             </div>
             <div class="date">
               <strong>Warranty Date:</strong>
-              <span ng-if="!showEdit">
+              <span class="pull-right" ng-if="!showEdit">
                 {{ isWarrantyDateChanged || report.editableFields.warrantyDate ? ((dto.warrantyDate || '') | date: 'dd MMM yyyy') : '' }}
               </span>
               <div ng-if="showEdit" style="display: inline-block; margin-left: 4px; float: right;" class="dropdown">
