@@ -62,7 +62,7 @@
           Choose master agent
           <select class="select-master-id" ng-model="settings.masterAgentId" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
                   ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
-                  ng-options="agent.agentId as {{ 'agent.hostName' || 'agent.ip' }} for agent in agents"></select>
+                  ng-options="agent.agentId as {{ 'agent.hostName' || 'agent.ip' }} for agent in agents | filter: { agentId: '' }"></select>
         </label>
       </li>
     </ul>

@@ -60,7 +60,7 @@
           <i class="device-status" ng-class="{'on': agent.online, 'off': !agent.online}"></i>
 
           <label class="control checkbox pull-left">
-            <input type="checkbox" ng-model="selectDevices[agent.agentId]" ng-change="changeSelectDevices()">
+            <input type="checkbox" ng-model="selectDevices[agent.id]" ng-change="changeSelectDevices()">
             <span class="control-indicator"></span>
           </label>
 
@@ -181,7 +181,8 @@
       <div class="col-6">
         <div class="list-actions pull-right">
 
-          <div class="btn btn-icn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
+          <div class="btn btn-icn btn-default has-tooltip pull-left"
+               append-html-to-body data="deviceReport" ng-if="agent.agentId"
                url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
                tooltip-placement="top" uib-tooltip="Open Report" ng-click="getDeviceReport(agent)">
             <i class="icon-lg icn-description"></i>

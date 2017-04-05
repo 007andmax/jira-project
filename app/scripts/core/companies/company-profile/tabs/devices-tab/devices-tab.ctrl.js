@@ -91,7 +91,7 @@
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
-              if (delete $scope.selectDevices[$scope.agent.agentId]) {
+              if (delete $scope.selectDevices[$scope.agent.id]) {
                 $scope.changeSelectDevices();
               }
             });
