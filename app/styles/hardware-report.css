@@ -247,6 +247,7 @@
   padding: 30px 15px;
   height: 100vh;
   border: 1px solid #bbb;
+  box-shadow: 0px 0px 30px -8px rgba(0,0,0,0.24);
 }
 .header-product-list-ticket{
   text-align: center;
@@ -373,9 +374,9 @@
   outline: none;
 }
 .run-report-content .content{
-  width: 295px;
+  width: 323px;
   display: inline-block;
-  margin-right: 48px;
+  margin-right: 20px;
   padding-bottom: 10px;
   position: relative;
 }

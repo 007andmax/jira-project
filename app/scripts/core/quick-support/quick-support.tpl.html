@@ -1,33 +1,104 @@
-<div class="quick-support-wrapper">
-<div class="empty-page-helper" ng-if="!loadingInProgress && !remoteSessions.length">
-<p style="opacity: 0.57">There are no active requests</p>
-<div class="btn btn-success add-session-button has-tooltip" ng-click="createOneTimeRemoteSession()">
-<p style="padding: 6px 0;">Create Request</p>
-</div>
-</div>
-<ul class="quick-support-list">
-<li class="quick-support-session ng-hide"
-ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true track by remoteSession.id"
-ng-show="(showAllSession || remoteSession.performer.id === currentUser.id) && remoteSession.id !== lastDeletedId">
-<div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
-</li>
-</ul>
-</div>
-<script>
-(function (i, s, o, g, r, a, m) {
-i['GoogleAnalyticsObject'] = r;
-i[r] = i[r] || function () {
-(i[r].q = i[r].q || []).push(arguments)
-}, i[r].l = 1 * new Date();
-a = s.createElement(o),
-m = s.getElementsByTagName(o)[0];
-a.async = 1;
-a.src = g;
-m.parentNode.insertBefore(a, m)
-})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+<!--<div class="quick-support-wrapper">-->
+  <!--<div class="empty-page-helper" ng-if="!loadingInProgress && !remoteSessions.length">-->
+    <!--<p style="opacity: 0.57">There are no active requests</p>-->
+    <!--<div class="btn btn-success add-session-button has-tooltip" ng-click="createOneTimeRemoteSession()">-->
+      <!--<p style="padding: 6px 0;">Create Request</p>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<ul class="quick-support-list">-->
+    <!--<li class="quick-support-session ng-hide"-->
+        <!--ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true track by remoteSession.id"-->
+        <!--ng-show="(showAllSession || remoteSession.performer.id === currentUser.id) && remoteSession.id !== lastDeletedId">-->
+      <!--<div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</div>-->
+<!--<script>-->
+  <!--(function (i, s, o, g, r, a, m) {-->
+    <!--i['GoogleAnalyticsObject'] = r;-->
+    <!--i[r] = i[r] || function () {-->
+        <!--(i[r].q = i[r].q || []).push(arguments)-->
+      <!--}, i[r].l = 1 * new Date();-->
+    <!--a = s.createElement(o),-->
+      <!--m = s.getElementsByTagName(o)[0];-->
+    <!--a.async = 1;-->
+    <!--a.src = g;-->
+    <!--m.parentNode.insertBefore(a, m)-->
+  <!--})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');-->
 
-ga('create', 'UA-93441341-1', 'auto');
-ga('send', 'pageview');
+  <!--ga('create', 'UA-93441341-1', 'auto');-->
+  <!--ga('send', 'pageview');-->
 
-</script>
+<!--</script>-->
+
+<div class="product-list-report">
+  <p class="report-title">Sales Report</p>
+  <div class="run-report-content">
+    <div class="content">
+      <p>Date range</p>
+      <input type="text">
+
+    </div>
+    <div class="content">
+      <p>Customer names</p>
+      <input type="text">
+      <i class="icn-sm icn-caret-gray"></i>
+    </div>
+    <button>Run Report</button>
+  </div>
+  <div class="radio-buttons-product-report">
+    <div class="summary-radio">
+      <input type="radio" name="l1" class="radio" id="summary"/>
+      <label for="summary">Summary</label>
+    </div>
+    <div class="detailed-radio">
+      <input type="radio" name="l1" class="radio" id="detailed"/>
+      <label for="detailed">Detailed</label>
+    </div>
+  </div>
+  <div class="product-list-report-btn clearfix">
+    <div class="product-report-btn">
+      <img src="images/new-icons/message-icon.png" alt="">
+    </div>
+    <div class="product-report-btn">
+      <img src="images/new-icons/printer-icon.png" alt="">
+    </div>
+    <div class="product-report-btn">
+      <img src="images/new-icons/export-icon.png" alt="">
+    </div>
+  </div>
+  <div class="product-list-ticket">
+    <div class="header-product-list-ticket">
+      <h3>Company Name</h3>
+      <h3>Detailed sales for <span>Customer</span></h3>
+      <h3><span>jan 1,2017</span> to <span>jan 31, 2017</span></h3>
+    </div>
+    <ul>
+      <li class="top-product-list-ticket clearfix">
+        <div class="col-md-3"><strong>Product</strong></div>
+        <div class="col-md-2"><strong>Category</strong></div>
+        <div class="col-md-2"><strong>MFG#</strong></div>
+        <div class="col-md-2"><strong>ILC</strong></div>
+        <div class="col-md-1"><strong>Cost</strong></div>
+        <div class="col-md-1"><strong>Sale Price</strong></div>
+        <!--<div class="col-md-1"><strong>Count</strong></div>-->
+        <div class="col-md-1"><strong>Tax</strong></div>
+      </li>
+      <li class="content-product-list-ticket clearfix">
+        <div class="col-md-3">Core i7-6900K Processor, 3.2 GHz w/20MB cashe</div>
+        <div class="col-md-2">Processors</div>
+        <div class="col-md-2 ellipsis">BX80671I76900K</div>
+        <div class="col-md-2 ellipsis">BX80671I76900K</div>
+        <div class="col-md-1">$450.34</div>
+        <div class="col-md-1">$21.46</div>
+        <!--<div class="col-md-1">31</div>-->
+        <div class="col-md-1">GTS</div>
+      </li>
+    </ul>
+    <div class="product-report-total-sales clearfix">
+      <p><strong>Total Sales: <span>$22664.94</span></strong></p>
+    </div>
+  </div>
+</div>
+
 
