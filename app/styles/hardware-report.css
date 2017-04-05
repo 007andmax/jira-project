@@ -347,7 +347,54 @@
   margin: 0;
   padding-bottom: 20px;
 }
-
+.header-tech-report h3{
+  text-align: left;
+}
+.header-tech-report p{
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  color: #c5c5c5;
+  margin-right: 20px;
+}
+.buttons-right p:last-child{
+  margin-right: 0;
+}
+.header-tech-report p:hover{
+  color: #000;
+  border-bottom: 2px solid #0094d0;
+}
+.buttons-left, .buttons-right{
+  padding-bottom: 15px;
+}
+.buttons-right p{
+  font-size: 16px;
+}
+.tech-report-total,
+.tech-report-tickets-total{
+  float: right;
+  text-align: right;
+  border-top: 1px solid #bbb;
+  width: 100%;
+  font-weight: bold;
+}
+.tech-report-tickets-total p{
+  display: inline-block;
+  padding-right: 50px;
+  padding-top: 15px;
+}
+.tech-report-tickets-total{
+text-align: center;
+  margin-left: 50px;
+}
+.tech-report-total p:last-child{
+  font-size: 16px;
+  padding-top: 10px;
+  font-weight: bold;
+}
+.tech-report-total span{
+  padding-left: 20px;
+}
 .top-product-list-ticket {
   border-bottom: 1px solid #bbb;
 }
