@@ -679,16 +679,16 @@
         return Utils.findById(storage.devices[companyId], id);
       }
 
-      function getOneByAgentId(agentId, companyId) {
+      function getOneByDeviceId(deviceId, companyId) {
         var devices = storage.devices[companyId] || storage.devices;
 
         if (companyId) {
-          return _getDeviceByAgentId(devices, agentId);
+          return _getDeviceByDeviceId(devices, deviceId);
         } else {
           for (var companyId in devices) {
             if (companyId !== 'staticCopy') {
               var devicesByCompany = devices[companyId];
-              var device = _getDeviceByAgentId(devicesByCompany, agentId);
+              var device = _getDeviceByDeviceId(devicesByCompany, deviceId);
               if (device) {
                 return device;
               }
@@ -697,10 +697,10 @@
         }
       }
 
-      function _getDeviceByAgentId(devices, agentId) {
+      function _getDeviceByDeviceId(devices, agentId) {
         for (var i = 0; i < devices.length; i++) {
           var device = devices[i];
-          if (device.agentId === agentId) {
+          if (device.id === agentId) {
             return device;
           }
         }
@@ -757,7 +757,7 @@
         getDeviceReports: getDeviceReports,
         getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
-        getOneByAgentId: getOneByAgentId,
+        getOneByDeviceId: getOneByDeviceId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
         getGadgets: getGadgets,
