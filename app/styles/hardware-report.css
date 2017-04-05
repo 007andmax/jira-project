@@ -469,14 +469,15 @@
   display: inline-block;
   width: 50px;
   font-size: 18px;
-  text-align: center;
+  text-align: right;
+  padding-right: 5px;
 }
 .content-sales-by-customer input{
-  width: 220px;
+  width: 270px;
 }
 .content-sales-by-customer{
   display: inline-block;
-  padding-right: 70px;
+  padding-right: 20px;
   padding-bottom: 15px;
 }
 .radio-sales-by-customer{
@@ -497,7 +498,7 @@
   position: absolute;
   width: 25px;
   height: 25px;
-  right: 80px;
+  right: 30px;
   top: 10px;
   cursor: text;
 }
@@ -511,7 +512,7 @@
   width: 15.3%;
 }
 .product-report-taxes .col-md-3{
-  width: 38%;
+  width: 38.4%;
 }
 /*Reports - TAX Summary*/
 .top-product-list-ticket-tax-summary .col-md-3,
