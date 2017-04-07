@@ -20,7 +20,7 @@
 
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
-            if (!$state.is('settings')) {
+            if (!$state.is('settings') && !$state.is('reports') ) {
               $rootScope.isLeftPanelHidden = windowWidth <= 1024;
 
               if ($rootScope.isLeftPanelHidden) {

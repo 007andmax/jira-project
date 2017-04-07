@@ -36,7 +36,7 @@
                ng-model="product.discountAmount"
                ng-max="100"
                ng-min="0"
-               execute-when-outfocused="addDiscountInBillable(product.id, product.discountAmount)"
+               execute-when-outfocused="addDiscountInBillable(product.id, product.discountAmount); isShowBillableDiscountInput = false"
                hard-reset-pattern="PERCENT"
                ng-keydown="$event.which === 13 && $event.preventDefault()">
         <p>%</p>

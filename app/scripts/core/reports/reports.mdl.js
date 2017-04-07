@@ -2,6 +2,6 @@
 
 (function () {
 
-  var reports = angular.module("quicktech.core.reports", []);
+  var reports = angular.module("quicktech.core.reports", ['main.services']);
 
 }());

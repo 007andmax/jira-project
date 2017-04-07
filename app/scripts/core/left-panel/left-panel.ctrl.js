@@ -43,6 +43,7 @@
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 
+
         $scope.qSHistory = DevicesService.getOneTimeHistory();
         DevicesService.getDevicesCount($scope, function (resp) {
           $scope.devices = [];
@@ -74,7 +75,7 @@
               document.title = 'Settings';
             }
 
-            if (!$scope.openedCategory) {
+            if (!$scope.openedCategory || $scope.openedCategory === 'reports') {
               $rootScope.isLeftPanelHidden = true;
             } else if ($scope.openedCategory === 'settings') {
               $rootScope.isLeftPanelHidden = false;
