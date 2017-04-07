@@ -38,6 +38,7 @@
         <input type="text"
                name="reportCompany"
                ng-model="reportSetting.company"
+               ng-disabled="reportType === 'SUMMARY'"
                autocomplete="off"
                tabindex="3"
                class="form-control form-control-dropdown dropdown-toggle"

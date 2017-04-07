@@ -24,7 +24,6 @@
         return n < 10 ? '0' + n : '' + n;
       }
 
-      console.log("dates: ", dates);
       if(dates && dates.length && dates.length > 1) {
 
         var startMonth = dates[0].getMonth() + 1;
@@ -36,7 +35,6 @@
     }
 
     function sendReportRequest(reportSettings){
-      console.log("data in form: ", reportSettings);
       var dataToSend = {
         startDate: $scope.startDate,
         endDate: $scope.endDate,
@@ -44,7 +42,6 @@
         deviceId: reportSettings.device.id,
         type: $scope.reportType
       };
-      console.log("Data in child Ctrl ", dataToSend);
       $scope.$emit("requestReportData", dataToSend)
     }
 
@@ -52,20 +49,12 @@
 
     DevicesService.getDevicesCount($scope, function (agents) {
       agentsByCompany = agents;
-      console.log("agents: ", agents);
 
       var agentsList = [];
       for (var companyId in agents) {
         if (companyId !== 'staticCopy') {
           agentsList = agentsList.concat(agents[companyId].map(function (agent) {
             agent.companyId = companyId;
-
-            if ($scope.resolvedCompanyId === companyId && $scope.resolvedDeviceId === agent.id) {
-              $timeout(function () {
-                $scope.ticketAgent = agent;
-              })
-            }
-
             return agent;
           }));
         }
@@ -74,7 +63,6 @@
     });
 
     $scope.$watch("reportSetting.company", function(val){
-      console.log("val: ", val);
       $scope.filteredAgentList = $scope.agentsList;
       if (val && typeof val === 'object') {
         $scope.ticketCompanyChoosen = true;

@@ -228,9 +228,9 @@
           templateUrl: '/html/scripts/core/reports/reports.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('reportRemoteAccess', waitForServices({
-          url: '/reports/reportRemoteAccess',
-          templateUrl: '/html/scripts/core/reports/reportsTemplates/RemoteAccessSummary.tpl.html',
+        .state('remoteAccess', waitForServices({
+          url: '/reports/remoteAccess',
+          templateUrl: '/html/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
