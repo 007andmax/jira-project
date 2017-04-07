@@ -11342,8 +11342,13 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 .center-vertically {
   display: table-cell;
   vertical-align: middle;
+  position: relative;
 }
-
+.feed-back-form .center-vertically i{
+  position: absolute;
+  top: 10px;
+  right: -20px;
+}
 .company-item:hover {
   background-color: #e9f5fb;
 }
