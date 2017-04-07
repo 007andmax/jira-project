@@ -27,15 +27,16 @@
           }
         });
 
-        $scope.pageTab = $stateParams.tabName;
         $scope.expandedCategoryId = '';
         $scope.showCategory = '';
 
         $scope.$watch(function () {
-          return $stateParams.tabName;
+          return $state.params.tabName;
         }, function (tab) {
-          if (tab && availableTabs.indexOf(tab) !== -1) {
-            $scope.pageTab = tab;
+          if (availableTabs.indexOf(tab) < 0) {
+            $scope.currentOpenTab = availableTabs[0];
+          } else {
+            $scope.currentOpenTab = tab;
           }
         });
 
