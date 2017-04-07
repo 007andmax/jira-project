@@ -424,6 +424,8 @@
           } else {
             callback(resp.data);
           }
+        }, function (resp) {
+          callback(resp.data);
         });
       } else {
         Utils.handleCallback(future, callback);

@@ -119,6 +119,7 @@
         });
 
         $scope.save = function (form) {
+          $scope.isSaveFailed = false;
           if (form.$valid) {
 
             var editUser = angular.copy($scope.editUser);
@@ -156,17 +157,21 @@
             }
 
             UsersService.save(editUser, function (resp) {
-              var userId = resp.id;
               $scope.savingInProcess = false;
-              $scope.disablePreventingLocationChange = true;
+              if (!resp.code || resp.code === 200) {
+                var userId = resp.id;
+                $scope.disablePreventingLocationChange = true;
 
-              $timeout(function () {
-                $rootScope.$broadcast('newUserHasBeenCreated', resp.id);
-                if (!$scope.savedState.items.length) {
-                  $scope.closeWindow();
-                }
-                $rootScope.$broadcast('show-after-save-' + userId);
-              });
+                $timeout(function () {
+                  $rootScope.$broadcast('newUserHasBeenCreated', resp.id);
+                  if (!$scope.savedState.items.length) {
+                    $scope.closeWindow();
+                  }
+                  $rootScope.$broadcast('show-after-save-' + userId);
+                });
+              } else {
+                $scope.isSaveFailed = true;
+              }
             });
             unsubscribeClosingEvent();
           } else {

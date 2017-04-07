@@ -161,6 +161,7 @@
         };
 
         $scope.save = function (form) {
+          $scope.isSaveFailed = false;
 
           if (form.$valid) {
             $scope.savingInProcess = true;
@@ -210,11 +211,15 @@
 
             CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $scope.disablePreventingLocationChange = true;
+              if (!resp.code || resp.code === 200) {
+                $scope.disablePreventingLocationChange = true;
 
-              $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
-              if (!$scope.savedState.items.length) {
-                $scope.closeWindow();
+                $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
+                if (!$scope.savedState.items.length) {
+                  $scope.closeWindow();
+                }
+              } else {
+                $scope.isSaveFailed = true;
               }
             });
             unsubscribeClosingEvent();

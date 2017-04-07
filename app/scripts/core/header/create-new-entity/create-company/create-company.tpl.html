@@ -507,6 +507,11 @@
     </div>
   </div>
   <footer class="clearfix btn-bottom">
+    <div class="col-xs-6 pull-left" ng-if="isSaveFailed">
+      <p style="line-height: 36px;color: #e53935;">
+        {{ editCompany.id ? 'Sav' : 'Creat' }}ing company was failed. Server is unavailable.
+      </p>
+    </div>
     <div class="col-xs-6 pull-right btns-container">
       <button class="btn btn-primary" ng-click="nextStep(companyForm)"
               custom-disabled="{{ currentStep === 'agent' || savingInProcess }}">
