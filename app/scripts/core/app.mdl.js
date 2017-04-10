@@ -232,6 +232,11 @@
           url: '/reports/remoteAccess',
           templateUrl: '/html/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('byCustomers', waitForServices({
+          url: '/reports/byCustomers',
+          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
       function waitForServices(conf) {

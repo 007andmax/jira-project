@@ -9,9 +9,9 @@
   services.factory('ReportsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
     function ($http, $rootScope, RealTimeService, Utils) {
 
-      var urlForReportsByTaxes = "/salesReports/byTaxes";
-      var urlForReportsByCustomers = "/salesReports/byCustomers";
-      var urlForReportsByProducts = "/salesReports/byProducts";
+      var urlForReportsByTaxes = "/reports/sales/byTaxes";
+      var urlForReportsByCustomers = "/reports/sales/byCustomers";
+      var urlForReportsByProducts = "/reports/sales/byProducts";
       var urlForReportByTechSold = "/reports/sales/byTechSold";
       var urlForReportRemoteAccess = "/reports/remoteAccess";
 

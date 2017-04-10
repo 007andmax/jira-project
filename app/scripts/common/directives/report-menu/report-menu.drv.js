@@ -4,7 +4,10 @@
 
   angular.module("quicktech.common.directives").component("reportMenu", {
     templateUrl: '/html/scripts/common/directives/report-menu/report-menu.tpl.html',
-    bindings: {},
+    bindings: {
+      className: '@',
+      isDeviceHidden: '@?'
+    },
     controller: reportMenuCtrl
   });
 
@@ -13,16 +16,13 @@
     this.sendReportRequest = sendReportRequest;
     this.onDateRangeChangeReport = onDateRangeChangeReport;
 
+    $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $scope.maxDateForDateRangeInputField = Date.now();
     $scope.reportType = "SUMMARY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
 
     /*function for reaching date from DATE RANGE form in template*/
     function onDateRangeChangeReport(dates) {
-
-      function addZeroIfNeed(n){
-        return n < 10 ? '0' + n : '' + n;
-      }
 
       if(dates && dates.length && dates.length > 1) {
 
@@ -32,6 +32,10 @@
         $scope.startDate = dates[0].getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(dates[0].getDate());
         $scope.endDate = dates[1].getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(dates[1].getDate());
       }
+    }
+
+    function addZeroIfNeed(n){
+      return n < 10 ? '0' + n : '' + n;
     }
 
     function sendReportRequest(reportSettings){

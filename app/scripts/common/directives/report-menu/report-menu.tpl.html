@@ -1,5 +1,5 @@
 <form name="reportSettingForm">
-  <div class="run-report-content run-report-content-device">
+  <div class="run-report-content {{ className || '' }}">
 
     <div class="content form-group">
       <div>
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="device-report form-group"
+    <div class="device-report form-group" ng-if="!$ctrl.isDeviceHidden"
          ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}">
       <label>Device</label>
       <input type="text"

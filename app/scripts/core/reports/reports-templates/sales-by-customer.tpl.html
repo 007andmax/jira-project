@@ -1,0 +1,83 @@
+<div class="product-list-report detail-customer">
+  <p class="report-title">Sales Report</p>
+  <div>
+    <report-menu class-name="run-report-content-by-customer" is-device-hidden="true"></report-menu>
+  </div>
+  <div class="product-list-report-btn clearfix">
+    <div class="product-report-btn">
+      <img src="images/new-icons/message-icon.png" alt="">
+    </div>
+    <div class="product-report-btn">
+      <img src="images/new-icons/printer-icon.png" alt="">
+    </div>
+    <div class="product-report-btn">
+      <img src="images/new-icons/export-icon.png" alt="">
+    </div>
+  </div>
+  <div class="product-list-ticket">
+    <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
+      <h3>{{ reportByCustomers.techCompanyName }}</h3>
+      <h3 ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
+        Detailed sales for <span>{{ reportByCustomers.clientCompanyName }}</span>
+      </h3>
+      <h3><span>{{ parseDate(reportByCustomers.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByCustomers.endDate) | date: 'dd MMM yyyy' }}</span>
+      </h3>
+    </div>
+    <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
+      <ul>
+        <li class="top-product-list-ticket top-product-list-ticket-detail-customer clearfix">
+          <div class="col-md-2"><strong>Date</strong></div>
+          <div class="col-md-2"><strong>Invoice</strong></div>
+          <div class="col-md-3"><strong>Product/Service</strong></div>
+          <div class="col-md-2"><strong>Serial #</strong></div>
+          <div class="col-md-2"><strong>Qty</strong></div>
+          <div class="col-md-2"><strong>Sale price</strong></div>
+          <div class="col-md-2"><strong>Discount</strong></div>
+          <div class="col-md-2"><strong>Total</strong></div>
+        </li>
+        <li class="content-product-list-ticket content-product-list-ticket-detail-customer clearfix"
+            ng-repeat="line in reportByCustomers.lines">
+
+          <div class="col-md-2">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-2">#{{ line.invoiceNumber }}</div>
+          <div class="col-md-3">{{ line.itemName }}</div>
+          <div class="col-md-2">{{ line.serial }}</div>
+          <div class="col-md-2">{{ line.quantity }}</div>
+          <div class="col-md-2">{{ line.sale | currency: '$': 2 }}</div>
+          <div class="col-md-2">{{ line.discountAmount || 0 }}%</div>
+          <div class="col-md-2">{{ line.totalSum | currency: '$': 2 }}</div>
+        </li>
+      </ul>
+      <div class="product-report-detail-customer clearfix" ng-if="reportByCustomers && reportByCustomers.type">
+        <div class="col-md-3 pull-right">
+          <strong>Total Sales: <span>{{ reportByCustomers.totalSum | currency: '$': 2 }}</span></strong>
+        </div>
+      </div>
+    </div>
+    <div ng-if="reportByCustomers && reportByCustomers.type === 'SUMMARY'">
+      <ul>
+        <li class="top-product-list-ticket top-product-list-ticket-sales-by-customer clearfix">
+          <div class="col-md-3"><strong>Customer</strong></div>
+          <div class="col-md-2"><strong>Product Sales</strong></div>
+          <div class="col-md-2"><strong>Service Sales</strong></div>
+          <div class="col-md-2"><strong>Total</strong></div>
+        </li>
+        <li class="content-product-list-ticket top-product-list-ticket-sales-by-customer clearfix"
+            ng-repeat="line in reportByCustomers.lines">
+          <div class="col-md-3">{{ line.companyName }}</div>
+          <div class="col-md-2">{{ line.productsSum }}</div>
+          <div class="col-md-2">{{ line.servicesSum }}</div>
+          <div class="col-md-2">{{ line.totalSum }}</div>
+        </li>
+      </ul>
+      <div class="product-report-total-sales clearfix">
+        <div class="total-sales-by-customer">
+          <div class="col-md-3"></div>
+          <div class="col-md-2"><strong>{{ reportByCustomers.productsSum }}</strong></div>
+          <div class="col-md-2"><strong>{{ reportByCustomers.servicesSum }}</strong></div>
+          <div class="col-md-2"><strong>{{ reportByCustomers.totalSum }}</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

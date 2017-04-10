@@ -5,34 +5,36 @@
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
     ['$scope', 'ReportsService', function ($scope, ReportsService) {
 
+      $scope.parseDate = Date.parse.bind(Date);
+
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
       $scope.reportByProducts = {};
       $scope.reportByTechSold = {};
       $scope.reportRemoteAccess = {};
 
-      function getReportsByTaxes(data) {
+      function getReportByTaxes(data) {
         ReportsService.getReportByTaxes(data, function (resp) {
             console.log("Resp from service: ", resp);
             $scope.reportByTaxes = resp;
           });
       }
 
-      function getReportsByCustomers(data) {
+      function getReportByCustomers(data) {
         ReportsService.getReportByCustomers(data, function(resp) {
           console.log("Resp from service: ", resp);
           $scope.reportByCustomers = resp;
         });
       }
 
-      function getReportsByProducts(data) {
+      function getReportByProducts(data) {
         ReportsService.getReportByProducts(data, function(resp) {
           console.log("Resp from service: ", resp);
           $scope.reportByProducts = resp;
         });
       }
 
-      function getReportsByTechSold(data) {
+      function getReportByTechSold(data) {
         ReportsService.getReportByTechSold(data, function(resp) {
           console.log("Resp from service: ", resp);
           $scope.reportByTechSold = resp;
@@ -62,13 +64,13 @@
               getReportByTaxes(data);
               break;
             case('/reports/byCustomers'):
-              getReportsByCustomers(data);
+              getReportByCustomers(data);
               break;
             case('/reports/byProducts'):
-              getReportsByProducts(data);
+              getReportByProducts(data);
               break;
             case('/reports/byTechSold'):
-              getReportsByTechSold(data);
+              getReportByTechSold(data);
               break;
             default:
               console.log("wrong location")
