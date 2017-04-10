@@ -3,9 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', function ($scope, ReportsService) {
-
-      $scope.parseDate = Date.parse.bind(Date);
+    ['$scope', '$timeout', 'ReportsService', function ($scope, $timeout, ReportsService) {
 
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
@@ -13,50 +11,55 @@
       $scope.reportByTechSold = {};
       $scope.reportRemoteAccess = {};
 
+      $scope.reportType = {
+        SUMMARY: 'Summary',
+        DETAILED: 'Detailed'
+      };
+
       function getReportByTaxes(data) {
         ReportsService.getReportByTaxes(data, function (resp) {
-            console.log("Resp from service: ", resp);
-            $scope.reportByTaxes = resp;
-          });
+          console.log("Resp from service: ", resp);
+          $scope.reportByTaxes = resp;
+        });
       }
 
       function getReportByCustomers(data) {
-        ReportsService.getReportByCustomers(data, function(resp) {
+        ReportsService.getReportByCustomers(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.reportByCustomers = resp;
         });
       }
 
       function getReportByProducts(data) {
-        ReportsService.getReportByProducts(data, function(resp) {
+        ReportsService.getReportByProducts(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.reportByProducts = resp;
         });
       }
 
       function getReportByTechSold(data) {
-        ReportsService.getReportByTechSold(data, function(resp) {
+        ReportsService.getReportByTechSold(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.reportByTechSold = resp;
         });
       }
 
       function getReportRemoteAccess(data) {
-        ReportsService.getReportRemoteAccess(data, function(resp) {
+        ReportsService.getReportRemoteAccess(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.reportRemoteAccess = resp;
         });
       }
 
 
-      $scope.changeReportPageView = function(reportType) {
+      $scope.changeReportPageView = function (reportType) {
         $scope.reportPageType = reportType;
       };
 
-      $scope.$on("requestReportData", function(event, data, location) {
+      $scope.$on("requestReportData", function (event, data, location) {
         console.log("parent ctrl: ", data);
-        if(location) {
-          switch(location) {
+        if (location) {
+          switch (location) {
             case('/reports/remoteAccess') :
               getReportRemoteAccess(data);
               break;

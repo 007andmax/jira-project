@@ -29,6 +29,7 @@
                name="reportCompany"
                ng-model="reportSetting.company"
                ng-disabled="reportType === 'SUMMARY'"
+               ng-required="reportType === 'DETAILED'"
                autocomplete="off"
                tabindex="3"
                class="form-control form-control-dropdown dropdown-toggle"
@@ -64,7 +65,7 @@
     </div>
 
 
-    <button ng-click="$ctrl.sendReportRequest(reportSetting)">Run Report</button>
+    <button ng-click="$ctrl.sendReportRequest(reportSetting)" ng-disabled="reportSettingForm.$invalid" >Run Report</button>
   </div>
   <div class="radio-buttons-product-report form-group">
     <div class="summary-radio summary-radio-device">
