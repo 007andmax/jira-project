@@ -37,6 +37,7 @@
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', true);
+                  Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
@@ -44,6 +45,7 @@
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', false);
+                  Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
