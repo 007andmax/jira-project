@@ -8,7 +8,7 @@
     controller: reportMenuCtrl
   });
 
-  function reportMenuCtrl($scope, CompaniesService, DevicesService) {
+  function reportMenuCtrl($scope, CompaniesService, DevicesService, $location) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.onDateRangeChangeReport = onDateRangeChangeReport;
@@ -20,7 +20,7 @@
     /*function for reaching date from DATE RANGE form in template*/
     function onDateRangeChangeReport(dates) {
 
-      function addZ(n){
+      function addZeroIfNeed(n){
         return n < 10 ? '0' + n : '' + n;
       }
 
@@ -29,8 +29,8 @@
         var startMonth = dates[0].getMonth() + 1;
         var endMonth = dates[1].getMonth() + 1;
 
-        $scope.startDate = dates[0].getFullYear() + "/" + addZ(startMonth) + "/" + addZ(dates[0].getDate());
-        $scope.endDate = dates[1].getFullYear() + "/" + addZ(endMonth) + "/" + addZ(dates[1].getDate());
+        $scope.startDate = dates[0].getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(dates[0].getDate());
+        $scope.endDate = dates[1].getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(dates[1].getDate());
       }
     }
 
@@ -38,11 +38,18 @@
       var dataToSend = {
         startDate: $scope.startDate,
         endDate: $scope.endDate,
-        companyId: reportSettings.company.id,
-        deviceId: reportSettings.device.id,
         type: $scope.reportType
       };
-      $scope.$emit("requestReportData", dataToSend)
+      if($scope.reportType === "DETAILED") {
+        if(reportSettings.company) {
+          dataToSend.companyId = reportSettings.company.id;
+        }
+        if(reportSettings.device) {
+          dataToSend.DeviceId = reportSettings.device.id;
+        }
+      }
+      var location = $location.url();
+      $scope.$emit("requestReportData", dataToSend, location)
     }
 
     var agentsByCompany = [];
