@@ -5,6 +5,8 @@
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
     ['$scope', '$timeout', 'ReportsService', function ($scope, $timeout, ReportsService) {
 
+      $scope.parseDate = Date.parse.bind(Date);
+
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
       $scope.reportByProducts = {};
