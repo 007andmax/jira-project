@@ -17,7 +17,8 @@
     $scope.reportType = "SUMMARY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-    /*function for reaching date from DATE RANGE form in template*/
+    var location = $location.url();
+
     function onDateRangeChangeReport(dates) {
 
       function addZeroIfNeed(n){
@@ -45,10 +46,9 @@
           dataToSend.companyId = reportSettings.company.id;
         }
         if(reportSettings.device) {
-          dataToSend.DeviceId = reportSettings.device.id;
+          dataToSend.deviceId = reportSettings.device.id;
         }
       }
-      var location = $location.url();
       $scope.$emit("requestReportData", dataToSend, location)
     }
 
