@@ -50,12 +50,14 @@
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_INSTALLED') {
+              var parsedData = JSON.parse(newChange.data.value);
+              parsedData.device.userName = newChange.data.userName;
               if (!devices[newChange.data.clientCompanyId]) {
                 var companyId = newChange.data.clientCompanyId;
                 devices[companyId] = [];
-                devices[companyId].push(JSON.parse(newChange.data.value).device);
+                devices[companyId].push(parsedData.device);
               } else {
-                devices[newChange.data.clientCompanyId].push(Utils.customizeObj(JSON.parse(newChange.data.value).device));
+                devices[newChange.data.clientCompanyId].push(Utils.customizeObj(parsedData.device));
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_UNINSTALLED') {
