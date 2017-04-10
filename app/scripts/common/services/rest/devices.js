@@ -38,6 +38,7 @@
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', true);
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
+                  break;
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
@@ -46,6 +47,7 @@
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', false);
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
+                  break;
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
@@ -57,15 +59,12 @@
                 devices[companyId] = [];
                 devices[companyId].push(parsedData.device);
               } else {
-                devices[newChange.data.clientCompanyId].push(Utils.customizeObj(parsedData.device));
+                var deviceById = Utils.findById(devices[newChange.data.clientCompanyId], parsedData.device.id);
+                Utils.customizeObj(parsedData.device, deviceById);
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_UNINSTALLED') {
-              for (var i in devices[newChange.data.clientCompanyId]) {
-                if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
-                  devices[newChange.data.clientCompanyId].splice(i, 1);
-                }
-              }
+              Utils.deleteById(devices[newChange.data.clientCompanyId], newChange.data.value);
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'REMOTE_CONNECTION') {
               if (callbackForRemoteConnection[newChange.data.sessionId]) {
