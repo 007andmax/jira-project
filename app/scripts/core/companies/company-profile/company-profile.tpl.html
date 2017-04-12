@@ -14,14 +14,14 @@
                trimmed-tooltip-checker="company.name">
             </p>
           </div>
-          <div class="company-info-type clearfix ellipsis"
+          <div class="company-info-type clearfix"
                ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
             <img src="images/input-icons/phone-number.png" alt="">
-            <p>{{ currentLocation.phoneNumbers[0].number }}</p>
+            <p class="ellipsis">{{ currentLocation.phoneNumbers[0].number }}</p>
           </div>
-          <div class="company-info-type clearfix ellipsis">
+          <div class="company-info-type clearfix">
             <img src="images/new-icons/location-white.png" alt="">
-            <p>{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>
+            <p class="ellipsis">{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>
           </div>
           <div class="company-service-type" ng-show="companyData.serviceType">
             <p><strong>Service Type:</strong>{{ userReadable(companyData.serviceType) }}</p>

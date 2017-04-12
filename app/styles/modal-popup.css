@@ -260,6 +260,9 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
   display: flex;
   align-items: center;
 }
+.create-window .general .company-window__billing .checkbox-dropdown .list-container label{
+  padding-left: 55px;
+}
 
 .new-tax {
   width: 100%;
