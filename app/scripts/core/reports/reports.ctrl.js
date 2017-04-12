@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', '$timeout', 'ReportsService', function ($scope, $timeout, ReportsService) {
+    ['$scope', 'ReportsService', function ($scope, ReportsService) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
