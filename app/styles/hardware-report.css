@@ -430,6 +430,9 @@ text-align: center;
 .product-list-ticket .col-md-3 {
   width: 24%;
 }
+.product-list-ticket-deposit .col-md-3 {
+  width: 34%;
+}
 .remote-desktop-connections .col-md-3 {
   width: 20%;
 }
@@ -559,8 +562,14 @@ text-align: center;
 .radio-buttons-product-report-detail-customer .summary-radio-customer {
   width: 170px;
 }
+.product-list-ticket button{
+  width: 230px;
+  float: right;
+  margin-top: 20px;
+}
 
-.run-report-content button {
+.run-report-content button,
+button{
   display: inline-block;
   background-color: #F1F5FA;
   border: 1px solid #BEBEBE;
@@ -570,7 +579,6 @@ text-align: center;
   font-size: 20px;
   outline: none;
 }
-
 .run-report-content .content {
   width: 323px;
   display: inline-block;
@@ -579,6 +587,17 @@ text-align: center;
   position: relative;
 }
 
+.content-product-list-ticket label{
+  vertical-align: inherit;
+}
+.top-product-list-ticket col-md-2,
+.top-product-list-ticket col-md-1{
+  position: relative;
+}
+.top-product-list-ticket i{
+  position: absolute;
+  top: 20px;
+}
 .run-report-content .content p,
 .run-report-content .device-report p {
   font-size: 18px;
@@ -610,6 +629,9 @@ text-align: center;
   right: 15px;
   top: 17px;
   cursor: pointer;
+}
+.run-report-content-deposit i{
+  top: 50px;
 }
 
 .run-report-content-device .icon-calendar-dark,
