@@ -708,12 +708,17 @@ button{
   display: inline-block;
   position: relative;
 }
+.run-report-content-device .device-report .icn-sm.icn-caret-gray{
+  top: 53px;
+}
 
 .run-report-content-device .content {
   margin-right: 20px;
   width: 236px;
 }
-
+.run-report-content-device .text-error{
+  left: 0!important;
+}
 .summary-radio-device {
   width: 255px;
 }
