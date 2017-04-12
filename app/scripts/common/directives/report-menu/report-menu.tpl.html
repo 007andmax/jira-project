@@ -1,5 +1,5 @@
-<form name="reportSettingForm">
-  <div class="run-report-content {{ className || '' }}">
+<div ng-form="reportSettingForm">
+  <div class="run-report-content {{ $ctrl.className || '' }}">
 
     <div class="content form-group">
       <div>
@@ -13,17 +13,20 @@
                  range max-date="{{ maxDateForDateRangeInputField }}"
                  ng-model="reportSetting.dateRange">
           <!--<i class="icn-sm icn-caret-gray"-->
-             <!--ng-show="!(companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length)">-->
+          <!--ng-show="!(companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length)">-->
           <!--</i>-->
           <!--<i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"-->
-             <!--ng-show="companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length"-->
-             <!--ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>-->
+          <!--ng-show="companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length"-->
+          <!--ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>-->
         </div>
       </div>
     </div>
 
-    <div class="form-group content">
-      <label class="control-label">Customer Name</label>
+    <div class="form-group content" ng-if="!$ctrl.isCustomerHidden">
+      <label class="control-label"><p>Customer Name</p></label>
+      <div ng-messages="reportSettingForm.reportCompany.$error">
+        <div class="text-error" ng-message="required">Please select the company name</div>
+      </div>
       <div uib-dropdown>
         <input type="text"
                name="reportCompany"
@@ -34,15 +37,19 @@
                tabindex="3"
                class="form-control form-control-dropdown dropdown-toggle"
                uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-               qt-typeahead-show-on-focus name="userCompany"
+               qt-typeahead-show-on-focus
                custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
         <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+        <!--<div ng-message="reportSettingForm.reportCompany.$error"-->
+        <!--ng-if="">-->
+        <!--<div class="error-msg" ng-message="required">Customer Name is required</div>-->
+        <!--</div>-->
       </div>
+
     </div>
 
-    <div class="device-report form-group" ng-if="!$ctrl.isDeviceHidden"
-         ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}">
-      <label>Device</label>
+    <div class="device-report form-group" ng-if="!$ctrl.isDeviceHidden">
+      <label class="control-label"><p>Device</p></label>
       <input type="text"
              class="form-control has-dropdown-with-label"
              autocomplete="off"
@@ -52,21 +59,23 @@
              uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
              qt-typeahead-show-on-focus
              custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
-      <div typeahead-input-icon-sm="ticketAgent"></div>
+      <div typeahead-input-icon-sm="reportAgent"></div>
       <div class="ng-scope" typeahead-input-icon="userCompany">
-              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
-                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+        <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+          <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
                    tooltip-placement="top"></i>
-            </span>
+        </span>
         <span class="x-mark ng-hide" ng-hide="showClearIcon">
-                <i class="icn-sm icn-caret-gray"></i>
-              </span>
+          <i class="icn-sm icn-caret-gray"></i>
+        </span>
       </div>
     </div>
 
 
-    <button ng-click="$ctrl.sendReportRequest(reportSetting)" ng-disabled="reportSettingForm.$invalid" >Run Report</button>
+    <button ng-click="$ctrl.sendReportRequest(reportSetting)" ng-disabled="reportSettingForm.$invalid">Run Report
+    </button>
   </div>
+
   <div class="radio-buttons-product-report form-group">
     <div class="summary-radio summary-radio-device">
       <input type="radio" name="l1" class="radio" id="summary" ng-model="reportType" value="SUMMARY">
@@ -77,5 +86,5 @@
       <label for="detailed">Detailed</label>
     </div>
   </div>
-</form>
+</div>
 

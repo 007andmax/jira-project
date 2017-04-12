@@ -6,7 +6,8 @@
     templateUrl: '/html/scripts/common/directives/report-menu/report-menu.tpl.html',
     bindings: {
       className: '@',
-      isDeviceHidden: '@?'
+      isDeviceHidden: '@?',
+      isCustomerHidden: '@?'
     },
     controller: reportMenuCtrl
   });
@@ -17,6 +18,7 @@
     this.onDateRangeChangeReport = onDateRangeChangeReport;
 
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
+    $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
     $scope.maxDateForDateRangeInputField = Date.now();
     $scope.reportType = "SUMMARY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
@@ -40,6 +42,7 @@
     }
 
     function sendReportRequest(reportSettings){
+      console.log("data from form: ", reportSettings);
       var dataToSend = {
         startDate: $scope.startDate,
         endDate: $scope.endDate,
@@ -71,6 +74,7 @@
         }
       }
       $scope.agentsList = angular.copy(agentsList);
+      //console.log("$scope.clientCompanies: ", $scope.clientCompanies);
     });
 
     $scope.$watch("reportSetting.company", function(val){
@@ -81,7 +85,7 @@
           $scope.filteredAgentList = agentsByCompany[val.id];
         }
       }
-    })
+    });
 
   }
 

@@ -14,32 +14,36 @@
       <img src="images/new-icons/export-icon.png" alt="">
     </div>
   </div>
-  <div class="product-list-ticket">
-    <div class="header-product-list-ticket">
+  <div class="product-list-ticket" >
+    <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
       <h3>{{reportRemoteAccess.techCompanyName}}</h3>
-      <h3><span>{{reportType[reportRemoteAccess.type]}}</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span></h3>
-      <h3><span>{{reportRemoteAccess.startDate}}</span> to <span>{{reportRemoteAccess.endDate}}</span></h3>
+      <h3 ng-if="reportRemoteAccess.type === 'SUMMARY'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>
+      </h3>
+      <h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd MMM yyyy' }}</span>
+      </h3>
     </div>
-    <ul>
-      <li class="top-product-list-ticket clearfix">
-        <div class="col-md-3"><strong>Date</strong></div>
-        <div class="col-md-2"><strong>Device</strong></div>
-        <div class="col-md-2"><strong>Tech</strong></div>
-        <div class="col-md-1"><strong>Ticket</strong></div>
-        <div class="col-md-2"><strong>Viewer IP</strong></div>
-        <div class="col-md-1"><strong>Start time</strong></div>
-        <div class="col-md-1"><strong>Duration</strong></div>
-      </li>
-      <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines">
-        <div class="col-md-3">{{line.date}}</div>
-        <div class="col-md-2">{{line.deviceName}}</div>
-        <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
-        <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
-        <div class="col-md-2 ellipsis">Viewer IP</div>
-        <div class="col-md-1">{{line.startTime}}</div>
-        <div class="col-md-1">{{line.duration}}</div>
-      </li>
-    </ul>
+    <div >
+      <ul>
+        <li class="top-product-list-ticket clearfix">
+          <div class="col-md-3"><strong>Date</strong></div>
+          <div class="col-md-2"><strong>Device</strong></div>
+          <div class="col-md-2"><strong>Tech</strong></div>
+          <div class="col-md-1"><strong>Ticket</strong></div>
+          <div class="col-md-2"><strong>Viewer IP</strong></div>
+          <div class="col-md-1"><strong>Start time</strong></div>
+          <div class="col-md-1"><strong>Duration</strong></div>
+        </li>
+        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines">
+          <div class="col-md-3">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-2">{{line.deviceName}}</div>
+          <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
+          <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
+          <div class="col-md-2 ellipsis">Viewer IP</div>
+          <div class="col-md-1">{{ parseDate(line.startDate) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-1">{{line.duration}}</div>
+        </li>
+      </ul>
+    </div>
     <div class="product-report-total-sales clearfix">
       <p><strong>Total Duration: <span>{{reportRemoteAccess.totalDuration}}</span></strong></p>
     </div>

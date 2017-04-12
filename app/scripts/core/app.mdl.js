@@ -237,6 +237,16 @@
           url: '/reports/byCustomers',
           templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('byProducts', waitForServices({
+          url: '/reports/byProducts',
+          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('byTaxes', waitForServices({
+          url: '/reports/byTaxes',
+          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
       function waitForServices(conf) {
