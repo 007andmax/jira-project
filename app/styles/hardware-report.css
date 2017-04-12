@@ -608,7 +608,8 @@ text-align: center;
 .run-report-content i {
   position: absolute;
   right: 15px;
-  top: 50px;
+  top: 17px;
+  cursor: pointer;
 }
 
 .run-report-content-device .icon-calendar-dark,

@@ -25,7 +25,7 @@
     <div class="form-group content" ng-if="!$ctrl.isCustomerHidden">
       <label class="control-label"><p>Customer Name</p></label>
       <div ng-messages="reportSettingForm.reportCompany.$error">
-        <div class="text-error" ng-message="required">Please select the company name</div>
+        <div class="text-error" style="position: absolute;bottom: -15px;right: 0;" ng-message="required">Please select the company name</div>
       </div>
       <div uib-dropdown>
         <input type="text"
