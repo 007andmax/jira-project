@@ -330,7 +330,7 @@
 .product-list-ticket {
   margin: 0 auto;
   padding: 30px 15px;
-  height: 100vh;
+  /*height: 100vh;*/
   border: 1px solid #bbb;
   box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
 }
