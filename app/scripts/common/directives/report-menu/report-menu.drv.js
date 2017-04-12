@@ -26,12 +26,9 @@
     var location = $location.url();
 
     function onDateRangeChangeReport(dates) {
-
       if(dates && dates.length && dates.length > 1) {
-
         var startMonth = dates[0].getMonth() + 1;
         var endMonth = dates[1].getMonth() + 1;
-
         $scope.startDate = dates[0].getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(dates[0].getDate());
         $scope.endDate = dates[1].getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(dates[1].getDate());
       }
@@ -48,7 +45,7 @@
         endDate: $scope.endDate,
         type: $scope.reportType
       };
-      if($scope.reportType === "DETAILED") {
+      if($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
         if(reportSettings.company) {
           dataToSend.companyId = reportSettings.company.id;
         }
@@ -63,7 +60,6 @@
 
     DevicesService.getDevicesCount($scope, function (agents) {
       agentsByCompany = agents;
-
       var agentsList = [];
       for (var companyId in agents) {
         if (companyId !== 'staticCopy') {

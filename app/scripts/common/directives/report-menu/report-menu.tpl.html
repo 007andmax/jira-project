@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="form-group content" ng-if="!$ctrl.isCustomerHidden">
+    <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
       <label class="control-label"><p>Customer Name</p></label>
       <div ng-messages="reportSettingForm.reportCompany.$error">
         <div class="text-error" style="position: absolute;bottom: -15px;right: 0;" ng-message="required">Please select the company name</div>
@@ -45,10 +45,9 @@
         <!--<div class="error-msg" ng-message="required">Customer Name is required</div>-->
         <!--</div>-->
       </div>
-
     </div>
 
-    <div class="device-report form-group" ng-if="!$ctrl.isDeviceHidden">
+    <div class="device-report form-group" ng-hide="$ctrl.isDeviceHidden">
       <label class="control-label"><p>Device</p></label>
       <input type="text"
              class="form-control has-dropdown-with-label"
@@ -72,7 +71,7 @@
     </div>
 
 
-    <button ng-click="$ctrl.sendReportRequest(reportSetting)" ng-disabled="reportSettingForm.$invalid">Run Report
+    <button ng-click="$ctrl.sendReportRequest(reportSetting)" ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden">Run Report
     </button>
   </div>
 

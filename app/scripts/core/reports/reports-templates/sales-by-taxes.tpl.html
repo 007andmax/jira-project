@@ -31,21 +31,17 @@
           <div class="col-md-2"><strong>Tax2 8%</strong></div>
           <div class="col-md-2"><strong>Tax3 2%</strong></div>
         </li>
-        <li class="content-product-list-ticket clearfix" >
-          <div class="col-md-3">#324234</div>
-          <div class="col-md-2">01/01/2017</div>
-          <div class="col-md-2">$23423423</div>
-          <div class="col-md-2">$12587</div>
-          <div class="col-md-2">$12587</div>
-          <div class="col-md-2">$12587</div>
+        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportByTaxes.lines">
+          <div class="col-md-3">#{{line.invoiceNumber}}</div>
+          <div class="col-md-2">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-2">{{line.invoiceSum | currency: '$': 2 }}</div>
+          <div class="col-md-2" ng-repeat="taxe in line.taxes">{{taxe}}</div>
         </li>
       </ul>
       <div class="product-report-taxes clearfix">
         <div class="col-md-3"></div>
-        <div class="col-md-2"><strong>$12587</strong></div>
-        <div class="col-md-2"><strong>$12587</strong></div>
-        <div class="col-md-2"><strong>$12587</strong></div>
-        <div class="col-md-2"><strong>$12587</strong></div>
+        <div class="col-md-2"><strong>{{reportByTaxes.totalSaleSum | currency: '$': 2 }}</strong></div>
+        <div class="col-md-2" ng-repeat="reducedTaxe in reportByTaxes.reducedTaxes">{{reducedTaxe | currency: '$': 2 }}</div>
       </div>
     </div>
     <div ng-if="reportByTaxes.type === 'SUMMARY'">
