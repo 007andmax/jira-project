@@ -13,13 +13,13 @@
         <div class="discount-recurring">
           <form name="reccuringEditDiscountFormService"
                 stop-propagation="click">
-            <div ng-hide="isShowRecurringDiscountInputService || service.discountAmount != null">
+            <div ng-hide="isShowRecurringDiscountInputService || service.discountAmount !== null">
               <i class="icon-sm sale-icon-for-isDicount"
                  ng-click="isShowRecurringDiscountInputService = !isShowRecurringDiscountInputService"
                  uib-tooltip="Click to choose Discount"></i>
             </div>
             <div class="form-group discount-recurring"
-                 ng-show="isShowRecurringDiscountInputService || service.discountAmount != null">
+                 ng-show="isShowRecurringDiscountInputService || service.discountAmount !== null">
               <input type="text"
                      class="form-control"
                      name="discountAmount"
@@ -94,7 +94,7 @@
                      ng-model="product.discountAmount"
                      ng-max="100"
                      ng-min="0"
-                     execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount)"
+                     execute-when-outfocused="addDiscountInRecurring(product.id, product.discountAmount); isShowRecurringDiscountInputProduct = false"
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
               <p>%</p>
