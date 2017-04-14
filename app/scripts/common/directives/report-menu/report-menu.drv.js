@@ -11,7 +11,8 @@
       openInPdf: '=?',
       downloadAsPdf: '=?',
       sendToMail: '=?',
-      getUserName: '=?'
+      getUserName: '=?',
+      emailPattern: '=?'
     },
     controller: reportMenuCtrl
   });
@@ -29,6 +30,7 @@
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
 
     $ctrl.notifySelectionMap = {};
+    $ctrl.tempUsers = [];
     $scope.maxDateForDateRangeInputField = Date.now();
     $scope.reportType = "SUMMARY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
@@ -37,9 +39,12 @@
     var location = $location.url(),
       lastSentData;
 
-    function addEmailToNotify(email) {
-      if (email) {
+    function addEmailToNotify(email, sendMailForm) {
+      if (email && $ctrl.emailPattern.test(email)) {
         $ctrl.notifySelectionMap[email] = true;
+        $ctrl.tempUsers.push({ primaryEmail: email });
+        $ctrl.emailToNotify = '';
+        sendMailForm.$setPristine();
       }
     }
 
@@ -51,6 +56,7 @@
 
     function emailSent() {
       $ctrl.notifySelectionMap = {};
+      $ctrl.tempUsers = [];
     }
 
     function onDateRangeChangeReport(dates) {

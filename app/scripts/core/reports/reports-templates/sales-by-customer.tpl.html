@@ -3,7 +3,8 @@
   <p class="report-title">Sales Report</p>
   <div>
     <report-menu class-name="run-report-content-by-customer" is-device-hidden="true" get-user-name="getUserName"
-                 open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" send-to-mail="sendToMail"></report-menu>
+                 open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"
+                 send-to-mail="sendToMail"></report-menu>
   </div>
   <div class="product-list-ticket">
     <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
