@@ -81,12 +81,16 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
   width: 145px;
+  word-break: break-all;
 }
 
 .qt-product-list.qt-list > li > .intermediate-parent-elem > .col-2 {
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: left;
+}
+.vendor-products-width > li > .intermediate-parent-elem > .col-2{
+  width: calc(100% - 893px);
 }
 
 .left-list .col-2 {
@@ -151,6 +155,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
   width: 115px;
+  word-break: break-word;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-5 {
@@ -1298,6 +1303,9 @@ aside#left div.nav-title {
 
 .move-services {
   padding: 15px;
+}
+.move-services .checkbox{
+  line-height: 18px;
 }
 
 .move-services .control {

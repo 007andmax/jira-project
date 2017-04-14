@@ -4421,7 +4421,9 @@ select[multiple].input-lg {
 .checkbox .control-indicator {
   border-radius: 1px;
 }
-
+.device-field .checkbox .control-indicator{
+  margin: 14px 0 0 15px;
+}
 .checkbox .control-indicator.plus-circle {
   border-radius: 50%;
 }
@@ -4431,7 +4433,9 @@ select[multiple].input-lg {
   background-color: #90c56b;
   border-color: #90c56b;
 }
-
+.device-field .control input:checked ~ .control-indicator{
+  margin: 14px 0 0 15px;
+}
 .control input:checked ~ .control-indicator.plus-circle {
   background-position: -772px 4px;
 }
@@ -6465,7 +6469,6 @@ tbody.collapse.in {
 .dropdown-menu > li:hover {
   background-color: #edf2f6;
 }
-
 .dropdown-tag-colors li {
   float: left;
   width: 28px;
