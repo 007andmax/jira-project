@@ -1,18 +1,9 @@
-<div class="product-list-report remote-access-summary">
+<div class="product-list-report remote-access-summary" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
+     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Sales Report</p>
   <div>
-    <report-menu class-name="run-report-content-device"></report-menu>
-  </div>
-  <div class="product-list-report-btn clearfix">
-    <div class="product-report-btn" uib-tooltip="Email">
-      <img src="images/new-icons/message-icon.png" alt="">
-    </div>
-    <div class="product-report-btn" uib-tooltip="Print">
-      <img src="images/new-icons/printer-icon.png" alt="">
-    </div>
-    <div class="product-report-btn" uib-tooltip="Export">
-      <img src="images/new-icons/export-icon.png" alt="">
-    </div>
+    <report-menu class-name="run-report-content-device" open-in-pdf="openInPdf" get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail"></report-menu>
   </div>
   <div class="product-list-ticket" >
     <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">

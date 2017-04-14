@@ -64,26 +64,34 @@
           switch (location) {
             case('/reports/remoteAccess') :
               getReportRemoteAccess(data);
+              $scope.reportName = 'remote_access_report';
               break;
             case('/reports/byTaxes'):
               getReportByTaxes(data);
+              $scope.reportName = 'taxes_report';
               break;
             case('/reports/byCustomers'):
               getReportByCustomers(data);
+              $scope.reportName = 'sales_report';
               break;
             case('/reports/byProducts'):
               getReportByProducts(data);
+              $scope.reportName = 'products_report';
               break;
             case('/reports/byTechSold'):
               getReportByTechSold(data);
+              $scope.reportName = 'tech_sold_report';
               break;
             default:
               console.log("wrong location")
           }
         }
 
-      })
+      });
 
+      $scope.buildPdf = function () {
+        $scope.$broadcast('buildPdf-' + $scope.reportName);
+      };
 
     }])
 

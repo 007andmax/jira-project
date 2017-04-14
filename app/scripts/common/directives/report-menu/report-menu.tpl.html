@@ -85,5 +85,46 @@
       <label for="detailed">Detailed</label>
     </div>
   </div>
+  <div class="product-list-report-btn clearfix">
+    <div class="product-report-btn" uib-dropdown keyboard-nav="true">
+      <img src="images/new-icons/export-icon.png" alt="export" uib-dropdown-toggle>
+      <ul uib-dropdown-menu>
+        <li class="open-pdf-btn" ng-click="$ctrl.downloadAsPdf()" disabled="disabled">PDF</li>
+        <li ng-click="$ctrl.exportFileToCsv()">CSV</li>
+      </ul>
+    </div>
+    <div class="product-report-btn">
+      <img src="images/new-icons/printer-icon.png" ng-click="$ctrl.openInPdf()" alt="print">
+    </div>
+    <div class="product-report-btn" uib-dropdown>
+      <img src="images/new-icons/message-icon.png" uib-dropdown-toggle alt="send mail to">
+      <ul uib-dropdown-menu ng-form="sendMailForm">
+        <li class="clearfix add-gadget" ng-class="{'has-error': sendMailForm.$dirty && sendMailForm.$invalid}"
+            stop-propagation="click">
+          <input class="form-control" type="text" ng-model="$ctrl.emailToNotify"
+                 ng-pattern="emailPattern" ng-maxlength="128" name="email">
+          <div class="pull-left">
+            <i class="icn-sm icn-label-save" ng-click="$ctrl.addEmailToNotify($ctrl.emailToNotify)"
+               custom-disabled="{{ sendMailForm.$invalid }}"></i>
+            <i class="icn-sm icn-remove-old" ng-click="$ctrl.emailToNotify = ''"></i>
+          </div>
+        </li>
+        <li class="clearfix" ng-if="user.primaryEmail && !user.deletedAt"
+            ng-repeat="user in clientUsers | orderBy: 'firstName' track by user.id">
+          <label class="control checkbox pull-left ng-scope" stop-propagation="click">
+            <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]">
+            <span class="control-indicator"></span>
+            {{ $ctrl.getUserName(user, true) }}
+          </label>
+        </li>
+        <div>
+          <button type="button"
+                  ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)">
+            Send
+          </button>
+        </div>
+      </ul>
+    </div>
+  </div>
 </div>
 

@@ -590,8 +590,8 @@ button{
 .content-product-list-ticket label{
   vertical-align: inherit;
 }
-.top-product-list-ticket col-md-2,
-.top-product-list-ticket col-md-1{
+.top-product-list-ticket .col-md-2,
+.top-product-list-ticket .col-md-1{
   position: relative;
 }
 .top-product-list-ticket i{

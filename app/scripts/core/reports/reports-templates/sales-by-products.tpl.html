@@ -1,19 +1,9 @@
-<div class="product-list-report product-list">
+<div class="product-list-report product-list" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
+     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Sales Report</p>
   <div>
-    <report-menu is-device-hidden="true"></report-menu>
-  </div>
-
-  <div class="product-list-report-btn clearfix">
-    <div class="product-report-btn">
-      <img src="images/new-icons/message-icon.png" alt="">
-    </div>
-    <div class="product-report-btn">
-      <img src="images/new-icons/printer-icon.png" alt="">
-    </div>
-    <div class="product-report-btn">
-      <img src="images/new-icons/export-icon.png" alt="">
-    </div>
+    <report-menu is-device-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail"></report-menu>
   </div>
   <div class="product-list-ticket" style="height: 100%">
     <div class="header-product-list-ticket" ng-if="reportByProducts.products">

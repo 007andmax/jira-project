@@ -1,18 +1,9 @@
-<div class="product-list-report detail-customer">
+<div class="product-list-report detail-customer" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
+     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Sales Report</p>
   <div>
-    <report-menu class-name="run-report-content-by-customer" is-device-hidden="true"></report-menu>
-  </div>
-  <div class="product-list-report-btn clearfix">
-    <div class="product-report-btn">
-      <img src="images/new-icons/message-icon.png" alt="">
-    </div>
-    <div class="product-report-btn">
-      <img src="images/new-icons/printer-icon.png" alt="">
-    </div>
-    <div class="product-report-btn">
-      <img src="images/new-icons/export-icon.png" alt="">
-    </div>
+    <report-menu class-name="run-report-content-by-customer" is-device-hidden="true" get-user-name="getUserName"
+                 open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" send-to-mail="sendToMail"></report-menu>
   </div>
   <div class="product-list-ticket">
     <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
@@ -36,7 +27,7 @@
           <div class="col-md-2"><strong>Total</strong></div>
         </li>
         <li class="content-product-list-ticket content-product-list-ticket-detail-customer clearfix"
-            ng-repeat="line in reportByCustomers.lines">
+            ng-repeat="line in reportByCustomers.lines" on-finish-render="buildPdf()">
 
           <div class="col-md-2">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
           <div class="col-md-2">#{{ line.invoiceNumber }}</div>
@@ -63,7 +54,7 @@
           <div class="col-md-2"><strong>Total</strong></div>
         </li>
         <li class="content-product-list-ticket top-product-list-ticket-sales-by-customer clearfix"
-            ng-repeat="line in reportByCustomers.lines">
+            ng-repeat="line in reportByCustomers.lines" on-finish-render="buildPdf()">
           <div class="col-md-3">{{ line.companyName }}</div>
           <div class="col-md-2">{{ line.productsSum }}</div>
           <div class="col-md-2">{{ line.servicesSum }}</div>

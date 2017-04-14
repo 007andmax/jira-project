@@ -25,6 +25,33 @@
         Utils.handleCallback(future, callback)
       }
 
+      function exportCsv(url, data, callback) {
+        $http.post(url + '/csv', data).then(function (resp) {
+          var blob = new Blob([resp.data]);
+          var link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+
+          var filename = "";
+          var disposition = resp.headers('Content-Disposition');
+          if (disposition && disposition.indexOf('attachment') !== -1) {
+            var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            var matches = filenameRegex.exec(disposition);
+            if (matches != null && matches[1]) {
+              filename = matches[1].replace(/['"]|(UTF-8)/g, '');
+            }
+          }
+
+          link.download = filename;
+          link.click();
+          window.URL.revokeObjectURL(link.href);
+          callback && callback(resp);
+        })
+      }
+
+      function exportPdf(reportType, callback) {
+        var future = $http.get(reportType);
+        Utils.handleCallback(future, callback);
+      }
 
       function getReportByTaxes(data, callback) {
         return getReport(urlForReportsByTaxes, data, callback);
@@ -46,15 +73,39 @@
         return getReport(urlForReportRemoteAccess, data, callback);
       }
 
+      function exportCsvByTaxes(data, callback) {
+        return exportCsv(urlForReportsByTaxes, data, callback);
+      }
+
+      function exportCsvByCustomers(data, callback) {
+        return exportCsv(urlForReportsByCustomers, data, callback);
+      }
+
+      function exportCsvByProducts(data, callback) {
+        return exportCsv(urlForReportsByProducts, data, callback);
+      }
+
+      function exportCsvByTechSold(data, callback) {
+        return exportCsv(urlForReportByTechSold, data, callback);
+      }
+
+      function exportCsvRemoteAccess(data, callback) {
+        return exportCsv(urlForReportRemoteAccess, data, callback);
+      }
 
       return {
         getReportByTaxes: getReportByTaxes,
         getReportByCustomers: getReportByCustomers,
         getReportByProducts: getReportByProducts,
         getReportByTechSold: getReportByTechSold,
-        getReportRemoteAccess: getReportRemoteAccess
+        getReportRemoteAccess: getReportRemoteAccess,
+        exportCsvByTaxes: exportCsvByTaxes,
+        exportCsvByCustomers: exportCsvByCustomers,
+        exportCsvByProducts: exportCsvByProducts,
+        exportCsvByTechSold: exportCsvByTechSold,
+        exportCsvRemoteAccess: exportCsvRemoteAccess
       }
 
     }])
 
-})();
+})(window);
