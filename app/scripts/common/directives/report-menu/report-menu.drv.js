@@ -12,7 +12,8 @@
       downloadAsPdf: '=?',
       sendToMail: '=?',
       getUserName: '=?',
-      emailPattern: '=?'
+      emailPattern: '=?',
+      isTechReport: "@?"
     },
     controller: reportMenuCtrl
   });
@@ -25,14 +26,18 @@
     this.onDateRangeChangeReport = onDateRangeChangeReport;
     this.getEmailsArray = getEmailsArray;
     this.emailSent = emailSent;
+    this.setTechReportDateType = setTechReportDateType;
 
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
+    $ctrl.isTechReport = $scope.$eval($ctrl.isTechReport);
     $scope.maxDateForDateRangeInputField = Date.now();
     $scope.reportType = "SUMMARY";
+    $scope.techReportType = "BILLED_TIME";
+    $scope.techReportDateType = "TODAY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
     $scope.clientUsers = UsersService.getClientUsers();
 
@@ -59,7 +64,13 @@
       $ctrl.tempUsers = [];
     }
 
+    function setTechReportDateType(type) {
+      $scope.techReportDateType = type;
+      console.log("$scope.techReportDateType: ", $scope.techReportDateType);
+    }
+
     function onDateRangeChangeReport(dates) {
+      console.log("dates: ", dates);
       if (dates && dates.length && dates.length > 1) {
         var startMonth = dates[0].getMonth() + 1;
         var endMonth = dates[1].getMonth() + 1;
@@ -73,23 +84,39 @@
     }
 
     function sendReportRequest(reportSettings) {
-      console.log("data from form: ", reportSettings);
-      var dataToSend = {
-        startDate: $scope.startDate,
-        endDate: $scope.endDate,
-        type: $scope.reportType
-      };
-      if ($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
-        if (reportSettings.company) {
-          dataToSend.companyId = reportSettings.company.id;
+      if(!$ctrl.isTechReport){
+        console.log("data from form: ", reportSettings);
+        var dataToSend = {
+          startDate: $scope.startDate,
+          endDate: $scope.endDate,
+          type: $scope.reportType
+        };
+        if ($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
+          if (reportSettings.company) {
+            dataToSend.companyId = reportSettings.company.id;
+          }
+          if (reportSettings.device) {
+            dataToSend.deviceId = reportSettings.device.id;
+          }
         }
-        if (reportSettings.device) {
-          dataToSend.deviceId = reportSettings.device.id;
+        lastSentData = dataToSend;
+        $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+      }  else {
+        console.log("data from form: ", reportSettings);
+        var techDataToSend = {
+          dateRangeType: $scope.techReportDateType,
+          type: $scope.techReportType
+        };
+        if($scope.techReportDateType === "CUSTOM") {
+          techDataToSend.startDate = $scope.startDate;
+          techDataToSend.endDate = $scope.endDate;
         }
+        lastSentData = techDataToSend;
+        $scope.$emit("requestReportData", techDataToSend, location, $scope.techReportType)
       }
 
-      lastSentData = dataToSend;
-      $scope.$emit("requestReportData", dataToSend, location)
+      //lastSentData = dataToSend;
+      //$scope.$emit("requestReportData", dataToSend, location)
     }
 
     function exportFileToCsv() {

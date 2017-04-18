@@ -24,7 +24,8 @@
           <!--<div class="col-md-1"><strong>Count</strong></div>-->
           <div class="col-md-1"><strong>Tax</strong></div>
         </li>
-        <li class="content-product-list-ticket clearfix" ng-repeat="product in reportByProducts.products">
+        <li class="content-product-list-ticket clearfix" ng-repeat="product in reportByProducts.products"
+            on-finish-render="buildPdf()">
           <div class="col-md-3">{{product.name}}</div>
           <div class="col-md-2">{{product.categoryName}}</div>
           <div class="col-md-2 ellipsis">{{product.mfg}}</div>
@@ -38,7 +39,7 @@
         </li>
       </ul>
     </div>
-    <div class="product-report-total-sales clearfix">
+    <div class="product-report-total-sales clearfix" ng-if="reportByProducts.products">
       <p><strong>Total Sales: <span>{{reportByProducts.totalSum}}</span></strong></p>
     </div>
   </div>

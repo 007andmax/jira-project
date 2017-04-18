@@ -17,11 +17,11 @@
           <div class="col-md-3"><strong>Invoice</strong></div>
           <div class="col-md-2"><strong>Date</strong></div>
           <div class="col-md-2"><strong>Total Sales</strong></div>
-          <div class="col-md-2"><strong>GTS 5%</strong></div>
-          <div class="col-md-2"><strong>Tax2 8%</strong></div>
-          <div class="col-md-2"><strong>Tax3 2%</strong></div>
+          <div class="col-md-2" ng-repeat="label in taxesLabels"><strong>{{label}}</strong></div>
+
         </li>
-        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportByTaxes.lines">
+        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportByTaxes.lines"
+            on-finish-render="buildPdf('lines')">
           <div class="col-md-3">#{{line.invoiceNumber}}</div>
           <div class="col-md-2">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
           <div class="col-md-2">{{line.invoiceSum | currency: '$': 2 }}</div>
@@ -31,7 +31,8 @@
       <div class="product-report-taxes clearfix">
         <div class="col-md-3"></div>
         <div class="col-md-2"><strong>{{reportByTaxes.totalSaleSum | currency: '$': 2 }}</strong></div>
-        <div class="col-md-2" ng-repeat="reducedTax in reportByTaxes.reducedTaxes">{{reducedTax | currency: '$': 2 }}</div>
+        <div class="col-md-2" ng-repeat="reducedTax in reportByTaxes.reducedTaxes"
+             on-finish-render="buildPdf('columns')">{{reducedTax | currency: '$': 2 }}</div>
       </div>
     </div>
     <div ng-if="reportByTaxes.type === 'SUMMARY'">
@@ -41,7 +42,8 @@
           <div class="col-md-2"><strong>Taxable Amount</strong></div>
           <div class="col-md-2"><strong>Tax</strong></div>
         </li>
-        <li class="content-product-list-ticket content-product-list-ticket-tax-summary clearfix" ng-repeat="line in reportByTaxes.lines">
+        <li class="content-product-list-ticket content-product-list-ticket-tax-summary clearfix"
+            ng-repeat="line in reportByTaxes.lines" on-finish-render="buildPdf()">
           <div class="col-md-3">{{line.name}}</div>
           <div class="col-md-2">{{line.taxableSum}}</div>
           <div class="col-md-2">{{line.taxSum}}</div>

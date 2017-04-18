@@ -1,88 +1,135 @@
-<div ng-form="reportSettingForm">
-  <div class="run-report-content {{ $ctrl.className || '' }}">
+<!--MENU FOR NON-TECH REPORTS-->
+<div ng-show="!$ctrl.isTechReport">
+  <div ng-form="reportSettingForm">
+    <div class="run-report-content {{ $ctrl.className || '' }}">
 
-    <div class="content form-group">
-      <div>
-        <p>Date Range</p>
-        <div style="position: relative;">
-          <input type="text"
-                 class="form-control has-dropdown readonly-normal"
-                 name="reportDateRange"
-                 readonly
-                 date-range-picker="$ctrl.onDateRangeChangeReport"
-                 range max-date="{{ maxDateForDateRangeInputField }}"
-                 ng-model="reportSetting.dateRange">
-          <!--<i class="icn-sm icn-caret-gray"-->
-          <!--ng-show="!(companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length)">-->
-          <!--</i>-->
-          <!--<i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"-->
-          <!--ng-show="companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length"-->
-          <!--ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>-->
+      <div class="content form-group">
+        <div>
+          <p>Date Range</p>
+          <div style="position: relative;">
+            <input type="text"
+                   class="form-control has-dropdown readonly-normal"
+                   name="reportDateRange"
+                   readonly
+                   date-range-picker="$ctrl.onDateRangeChangeReport"
+                   range max-date="{{ maxDateForDateRangeInputField }}"
+                   ng-model="reportSetting.dateRange">
+            <!--<i class="icn-sm icn-caret-gray"-->
+            <!--ng-show="!(companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length)">-->
+            <!--</i>-->
+            <!--<i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"-->
+            <!--ng-show="companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length"-->
+            <!--ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>-->
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
-      <label class="control-label"><p>Customer Name</p></label>
-      <div ng-messages="reportSettingForm.reportCompany.$error">
-        <div class="text-error" style="position: absolute;bottom: -15px;right: 0;" ng-message="required">Please select the company name</div>
+      <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
+        <label class="control-label"><p>Customer Name</p></label>
+        <div ng-messages="reportSettingForm.reportCompany.$error">
+          <div class="text-error" style="position: absolute;bottom: -15px;right: 0;" ng-message="required">Please select
+            the company name
+          </div>
+        </div>
+        <div uib-dropdown>
+          <input type="text"
+                 name="reportCompany"
+                 ng-model="reportSetting.company"
+                 ng-disabled="reportType === 'SUMMARY'"
+                 ng-required="reportType === 'DETAILED'"
+                 autocomplete="off"
+                 tabindex="3"
+                 class="form-control form-control-dropdown dropdown-toggle"
+                 uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                 qt-typeahead-show-on-focus
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+          <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+          <!--<div ng-message="reportSettingForm.reportCompany.$error"-->
+          <!--ng-if="">-->
+          <!--<div class="error-msg" ng-message="required">Customer Name is required</div>-->
+          <!--</div>-->
+        </div>
       </div>
-      <div uib-dropdown>
+
+      <div class="device-report form-group" ng-hide="$ctrl.isDeviceHidden">
+        <label class="control-label"><p>Device</p></label>
         <input type="text"
-               name="reportCompany"
-               ng-model="reportSetting.company"
-               ng-disabled="reportType === 'SUMMARY'"
-               ng-required="reportType === 'DETAILED'"
+               class="form-control has-dropdown-with-label"
                autocomplete="off"
-               tabindex="3"
-               class="form-control form-control-dropdown dropdown-toggle"
-               uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+               ng-model="reportSetting.device"
+               name="reportAgent"
+               ng-disabled="!reportSetting.company"
+               uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
                qt-typeahead-show-on-focus
-               custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-        <div class="input-top-4" typeahead-input-icon="userCompany"></div>
-        <!--<div ng-message="reportSettingForm.reportCompany.$error"-->
-        <!--ng-if="">-->
-        <!--<div class="error-msg" ng-message="required">Customer Name is required</div>-->
-        <!--</div>-->
-      </div>
-    </div>
-
-    <div class="device-report form-group" ng-hide="$ctrl.isDeviceHidden">
-      <label class="control-label"><p>Device</p></label>
-      <input type="text"
-             class="form-control has-dropdown-with-label"
-             autocomplete="off"
-             ng-model="reportSetting.device"
-             name="reportAgent"
-             ng-disabled="!reportSetting.company"
-             uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
-             qt-typeahead-show-on-focus
-             custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
-      <div typeahead-input-icon-sm="reportAgent"></div>
-      <div class="ng-scope" typeahead-input-icon="userCompany">
+               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
+        <div typeahead-input-icon-sm="reportAgent"></div>
+        <div class="ng-scope" typeahead-input-icon="userCompany">
         <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
           <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
-                   tooltip-placement="top"></i>
+             tooltip-placement="top"></i>
         </span>
-        <span class="x-mark ng-hide" ng-hide="showClearIcon">
+          <span class="x-mark ng-hide" ng-hide="showClearIcon">
           <i class="icn-sm icn-caret-gray"></i>
         </span>
+        </div>
+      </div>
+
+
+      <button ng-click="$ctrl.sendReportRequest(reportSetting)"
+              ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden">Run Report
+      </button>
+    </div>
+
+    <div class="radio-buttons-product-report form-group">
+      <div class="summary-radio summary-radio-device">
+        <input type="radio" name="l1" class="radio" id="summary" ng-model="reportType" value="SUMMARY">
+        <label for="summary">Summary</label>
+      </div>
+      <div class="detailed-radio summary-radio-device">
+        <input type="radio" name="l1" class="radio" id="detailed" ng-model="reportType" value="DETAILED">
+        <label for="detailed">Detailed</label>
       </div>
     </div>
-
-
-    <button ng-click="$ctrl.sendReportRequest(reportSetting)" ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden">Run Report
-    </button>
   </div>
+</div>
+<!--MENU FOR TECH REPORTS-->
+<div>
+  <div class="chart-header-controls" ng-form="techReportForm" ng-show="$ctrl.isTechReport">
 
-  <div class="radio-buttons-product-report form-group">
-    <div class="summary-radio summary-radio-device">
-      <input type="radio" name="l1" class="radio" id="summary" ng-model="reportType" value="SUMMARY">
-      <label for="summary">Summary</label>
-    </div>
-    <div class="detailed-radio summary-radio-device">
-      <input type="radio" name="l1" class="radio" id="detailed" ng-model="reportType" value="DETAILED">
-      <label for="detailed">Detailed</label>
+    <div class="chart-header">
+      <!--<div class="chart-header-name">-->
+      <!--<button>Billed Time</button>-->
+      <!--<button ng-click="">Product Sales</button>-->
+      <!--</div>-->
+      <div class="radio-buttons-product-report form-group">
+        <div class="summary-radio summary-radio-device">
+          <input type="radio" name="l1" class="radio" id="billedTime" ng-model="techReportType" value="BILLED_TIME">
+          <label for="billedTime">Billed Time</label>
+        </div>
+        <div class="detailed-radio summary-radio-device">
+          <input type="radio" name="l1" class="radio" id="productSales" ng-model="techReportType" value="PRODUCT_SOLD">
+          <label for="productSales">Product Sales</label>
+        </div>
+      </div>
+
+      <div class="chart-header-controls">
+        <p ng-click="$ctrl.setTechReportDateType('TODAY')" ng-class="{'choosen': techReportDateType === 'TODAY'}">Daily</p>
+        <p ng-click="$ctrl.setTechReportDateType('WEEK')" ng-class="{'choosen': techReportDateType === 'WEEK'}">Week</p>
+        <p ng-click="$ctrl.setTechReportDateType('MONTH')" ng-class="{'choosen': techReportDateType === 'MONTH'}">Month</p>
+        <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">Custom</p>
+        <div ng-show="techReportDateType==='CUSTOM'">
+          <input type="text"
+                    class="form-control has-dropdown readonly-normal"
+                    name="reportDateRange"
+                    readonly
+                    date-range-picker="$ctrl.onDateRangeChangeReport"
+                    range max-date="{{ maxDateForDateRangeInputField }}"
+                    ng-model="reportSetting.dateRange">
+        </div>
+      </div>
+      <button ng-click="$ctrl.sendReportRequest(techReportSetting)"
+              ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden">Run Report
+      </button>
     </div>
   </div>
   <div class="product-list-report-btn clearfix">

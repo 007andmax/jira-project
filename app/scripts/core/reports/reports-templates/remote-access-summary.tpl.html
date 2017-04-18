@@ -13,7 +13,7 @@
       <h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>
-    <div >
+    <div ng-if="reportRemoteAccess.lines">
       <ul>
         <li class="top-product-list-ticket clearfix">
           <div class="col-md-3"><strong>Date</strong></div>
@@ -24,18 +24,19 @@
           <div class="col-md-1"><strong>Start time</strong></div>
           <div class="col-md-1"><strong>Duration</strong></div>
         </li>
-        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines">
+        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
+            on-finish-render="buildPdf()">
           <div class="col-md-3">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
           <div class="col-md-2">{{line.deviceName}}</div>
           <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
           <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
           <div class="col-md-2 ellipsis">Viewer IP</div>
-          <div class="col-md-1">{{ parseDate(line.startDate) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-1">{{ line.startTime }}</div>
           <div class="col-md-1">{{line.duration}}</div>
         </li>
       </ul>
     </div>
-    <div class="product-report-total-sales clearfix">
+    <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
       <p><strong>Total Duration: <span>{{reportRemoteAccess.totalDuration}}</span></strong></p>
     </div>
   </div>

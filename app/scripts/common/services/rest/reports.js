@@ -14,6 +14,8 @@
       var urlForReportsByProducts = "/reports/sales/byProducts";
       var urlForReportByTechSold = "/reports/sales/byTechSold";
       var urlForReportRemoteAccess = "/reports/remoteAccess";
+      var urlForReportCreatedVsClosedTickets = "/reports/techTickets";
+      var urlForReportProductSoldVsQuotedProjects = "/reports/sales/byTechSold";
 
       function getReport(url, data, callback) {
         var future = $http({
@@ -93,6 +95,15 @@
         return exportCsv(urlForReportRemoteAccess, data, callback);
       }
 
+      function getTechReportTicketCreated(data, callback) {
+        return getReport(urlForReportCreatedVsClosedTickets, data, callback);
+      }
+
+      function getTechReportProductSales(data, callback) {
+        return getReport(urlForReportProductSoldVsQuotedProjects, data, callback);
+      }
+
+
       return {
         getReportByTaxes: getReportByTaxes,
         getReportByCustomers: getReportByCustomers,
@@ -103,7 +114,9 @@
         exportCsvByCustomers: exportCsvByCustomers,
         exportCsvByProducts: exportCsvByProducts,
         exportCsvByTechSold: exportCsvByTechSold,
-        exportCsvRemoteAccess: exportCsvRemoteAccess
+        exportCsvRemoteAccess: exportCsvRemoteAccess,
+        getTechReportTicketCreated: getTechReportTicketCreated,
+        getTechReportProductSales: getTechReportProductSales
       }
 
     }])

@@ -32,6 +32,7 @@
       'ngAnimate',
       'LocalStorageModule',
       'ngCropper',
+      'nvd3'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
@@ -246,6 +247,16 @@
         .state('byTaxes', waitForServices({
           url: '/reports/byTaxes',
           templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('techReport-TicketCreated', waitForServices({
+          url: '/reports/techReport-TicketCreated',
+          templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('techReport-ProductSales', waitForServices({
+          url: '/reports/techReport-ProductSales',
+          templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
