@@ -13,7 +13,8 @@
       sendToMail: '=?',
       getUserName: '=?',
       emailPattern: '=?',
-      isTechReport: "@?"
+      isTechReport: "@?",
+      isRadioButtonHidden: "@?"
     },
     controller: reportMenuCtrl
   });
@@ -30,6 +31,7 @@
 
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
+    $ctrl.isRadioButtonHidden = $scope.$eval($ctrl.isRadioButtonHidden);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -47,7 +49,7 @@
     function addEmailToNotify(email, sendMailForm) {
       if (email && $ctrl.emailPattern.test(email)) {
         $ctrl.notifySelectionMap[email] = true;
-        $ctrl.tempUsers.push({ primaryEmail: email });
+        $ctrl.tempUsers.push({primaryEmail: email});
         $ctrl.emailToNotify = '';
         sendMailForm.$setPristine();
       }
@@ -84,7 +86,9 @@
     }
 
     function sendReportRequest(reportSettings) {
-      if(!$ctrl.isTechReport){
+
+      if (!$ctrl.isTechReport) {
+
         console.log("data from form: ", reportSettings);
         var dataToSend = {
           startDate: $scope.startDate,
@@ -101,13 +105,15 @@
         }
         lastSentData = dataToSend;
         $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
-      }  else {
+
+      } else {
+
         console.log("data from form: ", reportSettings);
         var techDataToSend = {
           dateRangeType: $scope.techReportDateType,
           type: $scope.techReportType
         };
-        if($scope.techReportDateType === "CUSTOM") {
+        if ($scope.techReportDateType === "CUSTOM") {
           techDataToSend.startDate = $scope.startDate;
           techDataToSend.endDate = $scope.endDate;
         }
@@ -133,6 +139,9 @@
             break;
           case('/reports/byProducts'):
             ReportsService.exportCsvByProducts(lastSentData);
+            break;
+          case('/reports/accountsReceivable'):
+            ReportsService.exportCsvAccountsReceivable(lastSentData);
             break;
           case('/reports/byTechSold'):
             ReportsService.exportCsvByTechSold(lastSentData);

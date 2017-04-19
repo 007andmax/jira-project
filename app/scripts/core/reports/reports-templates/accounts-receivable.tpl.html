@@ -1,0 +1,55 @@
+<div class="product-list-report product-list"
+     convert-to-pdf="/reports/fpd"
+     email-endpoint="/reports/email"
+     selector=".product-list-ticket"
+     disable-selector=".open-pdf-btn"
+     file-name="{{ reportName }}">
+  <p class="report-title">Remote Desctop connections</p>
+  <div>
+    <report-menu is-device-hidden="true" is-radio-button-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern">
+
+    </report-menu>
+  </div>
+  <div class="product-list-ticket" style="height: 100%">
+    <div class="header-product-list-ticket" ng-if="reportAccountsReceivable.lines">
+      <!--HEADER-->
+      <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
+      <h3 ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></h3>
+      <h3><span>{{ parseDate(reportAccountsReceivable.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportAccountsReceivable.endDate) | date: 'dd MMM yyyy' }}</span></h3>
+    </div>
+    <div ng-if="reportAccountsReceivable.lines">
+      <!--REPORT-->
+      <ul>
+        <li class="top-product-list-ticket clearfix">
+          <div class="col-md-3"><strong>Company Name</strong></div>
+          <div class="col-md-2"><strong>Current</strong></div>
+          <div class="col-md-2"><strong><1 month#</strong></div>
+          <div class="col-md-2"><strong><2 month</strong></div>
+          <div class="col-md-1"><strong><3 month</strong></div>
+          <div class="col-md-1"><strong>Older</strong></div>
+          <div class="col-md-1"><strong>Total</strong></div>
+        </li>
+        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportAccountsReceivable.lines"  on-finish-render="buildPdf()">
+          <div class="col-md-3">{{line.clientCompanyName}}</div>
+          <div class="col-md-2">{{line.currentSum | currency: '$': 2 }}</div>
+          <div class="col-md-2">{{line.month1Sum | currency: '$': 2 }}</div>
+          <div class="col-md-2">{{line.month2Sum | currency: '$': 2 }}</div>
+          <div class="col-md-1">{{line.month3Sum | currency: '$': 2 }}</div>
+          <div class="col-md-1">{{line.olderSum | currency: '$': 2 }}</div>
+          <div class="col-md-1">{{line.totalSum | currency: '$': 2 }}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="product-report-total-sales clearfix" ng-if="reportAccountsReceivable.lines">
+      <!--SUMMARY-->
+      <div class="col-md-3">Total</div>
+      <div class="col-md-2">{{reportAccountsReceivable.totalCurrenSum | currency: '$': 2 }}</div>
+      <div class="col-md-2">{{reportAccountsReceivable.total1MonthSum | currency: '$': 2 }}</div>
+      <div class="col-md-2">{{reportAccountsReceivable.total2MonthSum | currency: '$': 2 }}</div>
+      <div class="col-md-1">{{reportAccountsReceivable.total3MonthSum | currency: '$': 2 }}</div>
+      <div class="col-md-1">{{reportAccountsReceivable.totalOlderSum | currency: '$': 2 }}</div>
+      <div class="col-md-1">{{reportAccountsReceivable.totalSum | currency: '$': 2 }}</div>
+    </div>
+  </div>
+</div>

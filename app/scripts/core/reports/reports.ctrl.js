@@ -14,8 +14,9 @@
       $scope.reportRemoteAccess = {};
       $scope.techReportTicketCreated = {};
       $scope.techReportProductSales = {};
+      $scope.reportAccountsReceivable = {};
 
-      $scope.taxesLabels;
+      $scope.taxesLabels=[];
 
       var techReportTypeForChart;
       var renderFinished = {
@@ -91,6 +92,13 @@
         })
       }
 
+      function getReportAccountsReceivable(data) {
+        ReportsService.getReportAccountsReceivable(data, function(resp) {
+          console.log("Resp from service: ", resp);
+          $scope.reportAccountsReceivable = resp;
+        })
+      }
+
 
       $scope.changeReportPageView = function (reportType) {
         $scope.reportPageType = reportType;
@@ -128,6 +136,10 @@
             case('/reports/techReport-ProductSales'):
               getTechReportProductSales(data);
               techReportTypeForChart = techReportType;
+              break;
+            case('/reports/accountsReceivable'):
+              getReportAccountsReceivable(data);
+              $scope.reportName = 'accounts_receivable';
               break;
             default:
               console.log("wrong location")
