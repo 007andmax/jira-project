@@ -616,12 +616,18 @@ button{
   font-size: 20px;
   outline: none;
 }
+.run-report-content button{
+  margin-bottom: 20px;
+  vertical-align: bottom;
+}
+
 .run-report-content .content {
   width: 323px;
   display: inline-block;
   margin-right: 20px;
   padding-bottom: 10px;
   position: relative;
+  vertical-align: middle;
 }
 
 .content-product-list-ticket label{
@@ -747,6 +753,7 @@ button{
   margin-right: 20px;
   display: inline-block;
   position: relative;
+  vertical-align: top;
 }
 .run-report-content-device .device-report .icn-sm.icn-caret-gray{
   top: 53px;
