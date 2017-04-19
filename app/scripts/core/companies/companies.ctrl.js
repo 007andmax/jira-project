@@ -143,9 +143,10 @@
           });
         };
 
-        $scope.filterArchived = function (users) {
+        $scope.filterArchived = function (users, company) {
           return users.filter(function (user) {
-            return !user.deletedAt;
+            var isArchived = user.deletedAt || company.deletedAt;
+            return !isArchived && !$scope.archivedShown || $scope.archivedShown && isArchived;
           })
         };
 

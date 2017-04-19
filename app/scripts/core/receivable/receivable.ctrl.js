@@ -33,8 +33,6 @@
         $scope.loadingInProgress = true;
         $scope.sending = [];
 
-        $scope.receivedAmountAllTime = ReceivableService.getReceivedPaymentsSumByCompany(CompaniesService.getCurrentCompany().id, $scope);
-
         $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
           $scope.totalCollectedLast30Days = 0;
           for (var i = 0; i < $scope.receivableGraphData.length; i++) {
@@ -227,13 +225,13 @@
 
           return result;
         };
-  
+
         $scope.resendSelectedInvoices = function () {
           var invoiceIds = [],
             invoiceList = $scope.receivableInvoicesData.list;
-          
+
           $scope.sendingInvoices = true;
-          
+
           if ($stateParams.mode === 'list') {
             for (var i = 0; i < invoiceList.length; i++) {
               if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
@@ -244,7 +242,7 @@
           } else {
             for (var companyId in $scope.invoiceToSent) {
               var invoices = $scope.invoiceToSent[companyId].invoices;
-      
+
               for (var i = 0; i < invoiceList.length; i++) {
                 if (invoices[invoiceList[i].number]) {
                   invoiceIds.push(invoiceList[i].id);
@@ -253,7 +251,7 @@
               }
             }
           }
-  
+
           ReceivableService.resendInvoices(invoiceIds, function () {
             $scope.sendingInvoices = false;
           });

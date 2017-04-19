@@ -642,7 +642,7 @@
           }
 
         } else if (newChange.action === 'TICKET_DELETED') {
-          if (ticketIndex) {
+          if (ticketIndex != null) {
             storage.tickets.splice(ticketIndex, 1);
 
             if (newChange.data.trash || newChange.data.spam) {
