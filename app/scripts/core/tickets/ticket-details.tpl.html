@@ -322,35 +322,6 @@
                         <i class="icon-sm wysiwyg-quote"></i>
                       </a>
 
-                      <div class="dropup pull-left" uib-dropdown>
-
-                        <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                           uib-dropdown-toggle data-container="body" data-placement="top"
-                           uib-tooltip="Add or Remove Link">
-                          <i class="icon-sm wysiwyg-link"></i>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                          <li stop-propagation="click">
-                            <div class="add-link-form">
-
-                              <div class="form-group">
-                                <input type="text" placeholder="http://" class="form-control"
-                                       data-edit="createLink" ng-model="ticketEditorLink"
-                                       ng-change="validateLink(ticketEditorLink)">
-                              </div>
-
-                              <div class="form-group">
-                                <div class="btn btn-lg btn-primary" custom-disabled="{{ validLink.pattern }}">Add</div>
-                                <div class="btn btn-lg btn-primary" data-edit="unlink">Cancel</div>
-                              </div>
-
-                            </div>
-                          </li>
-                        </ul>
-
-                      </div>
-
                     </div>
                   </div>
 
@@ -411,7 +382,7 @@
            ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
       <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
       <div class="ticket-updates clearfix">
-        <div ng-if="ticketDetails.updates.length > 0"
+        <div ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates"
              class="ticket-update-header clearfix">
           <h4>
           <span class="pull-left ticket-update-title">Ticket Updates
@@ -439,7 +410,7 @@
             </li>
           </ul>
         </div>
-        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.updates && ticketDetails.updates.length">
+        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates">
           <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
                ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
                ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}" ng-init="updateIndex = $index;">

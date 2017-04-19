@@ -20,7 +20,8 @@
       </li>
       <li class="navigation__list--category">
         <a ng-class="{'checked': openedTab === 'service'}" tabindex="-1"
-           href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('service')">Service</a>
+           href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('service')"
+           ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">Service</a>
       </li>
       <li class="navigation__list--category">
         <a ng-class="{'checked': openedTab === 'product'}" tabindex="-1"

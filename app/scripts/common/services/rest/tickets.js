@@ -544,20 +544,16 @@
 
       function loadRemainingTicketUpdates(ticket, callback) {
 
-        if (!ticket.id || !ticket.updates) {
-          throw 'You can load updates only for detailed ticket!';
-        }
-        if (ticket.updates.length == 0) {
-          throw 'There is no updates';
-        }
-
         var loadedIds = [];
 
-        for (var i = 0; i < ticket.updates.length; i++) {
-          loadedIds.push(ticket.updates[i].id)
+        if (ticket.updates) {
+          for (var i = 0; i < ticket.updates.length; i++) {
+            loadedIds.push(ticket.updates[i].id)
+          }
         }
 
         $http.post('/v2/tickets/' + ticket.id + '/updates/fetch', loadedIds).then(function (resp) {
+          ticket.updates = ticket.updates || [];
           Utils.customizeArray(resp.data, ticket.updates);
           Utils.defineReadOnlyProperty(ticket, 'unloadedUpdates', 0);
 

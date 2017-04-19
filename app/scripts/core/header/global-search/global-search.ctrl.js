@@ -34,8 +34,10 @@
           }
 
           if (!$scope.globalSearch.preventClearing) {
+            $scope.preventDropDownOpening = true;
             $scope.clearLocalFilter && $scope.clearLocalFilter();
           } else {
+            $scope.preventDropDownOpening = true;
             $scope.globalSearch.preventClearing = false;
           }
 
