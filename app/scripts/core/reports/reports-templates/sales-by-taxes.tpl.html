@@ -25,7 +25,7 @@
           <div class="col-md-3">#{{line.invoiceNumber}}</div>
           <div class="col-md-2">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
           <div class="col-md-2">{{line.invoiceSum | currency: '$': 2 }}</div>
-          <div class="col-md-2" ng-repeat="taxe in line.taxes">{{taxe}}</div>
+          <div class="col-md-2" ng-repeat="label in taxesLabels">{{line.taxes[label] | currency: '$': 2 }}</div>
         </li>
       </ul>
       <div class="product-report-taxes clearfix">
@@ -45,14 +45,14 @@
         <li class="content-product-list-ticket content-product-list-ticket-tax-summary clearfix"
             ng-repeat="line in reportByTaxes.lines" on-finish-render="buildPdf()">
           <div class="col-md-3">{{line.name}}</div>
-          <div class="col-md-2">{{line.taxableSum}}</div>
-          <div class="col-md-2">{{line.taxSum}}</div>
+          <div class="col-md-2">{{line.taxableSum | currency: '$': 2 }}</div>
+          <div class="col-md-2">{{line.taxSum | currency: '$': 2 }}</div>
         </li>
       </ul>
       <div class="product-report-taxes product-report-taxes-summary clearfix">
         <div class="col-md-3"></div>
-        <div class="col-md-2"><strong>{{reportByTaxes.totalTaxableSum}}</strong></div>
-        <div class="col-md-2"><strong>{{reportByTaxes.totalTaxSum}}</strong></div>
+        <div class="col-md-2"><strong>{{reportByTaxes.totalTaxableSum | currency: '$': 2 }}</strong></div>
+        <div class="col-md-2"><strong>{{reportByTaxes.totalTaxSum | currency: '$': 2 }}</strong></div>
       </div>
     </div>
 

@@ -57,17 +57,17 @@
         <li class="content-product-list-ticket top-product-list-ticket-sales-by-customer clearfix"
             ng-repeat="line in reportByCustomers.lines" on-finish-render="buildPdf()">
           <div class="col-md-3">{{ line.companyName }}</div>
-          <div class="col-md-2">{{ line.productsSum }}</div>
-          <div class="col-md-2">{{ line.servicesSum }}</div>
-          <div class="col-md-2">{{ line.totalSum }}</div>
+          <div class="col-md-2">{{ line.productsSum | currency: '$': 2  }}</div>
+          <div class="col-md-2">{{ line.servicesSum | currency: '$': 2  }}</div>
+          <div class="col-md-2">{{ line.totalSum | currency: '$': 2  }}</div>
         </li>
       </ul>
       <div class="product-report-total-sales clearfix">
         <div class="total-sales-by-customer">
           <div class="col-md-3"></div>
-          <div class="col-md-2"><strong>{{ reportByCustomers.productsSum }}</strong></div>
-          <div class="col-md-2"><strong>{{ reportByCustomers.servicesSum }}</strong></div>
-          <div class="col-md-2"><strong>{{ reportByCustomers.totalSum }}</strong></div>
+          <div class="col-md-2"><strong>{{ reportByCustomers.productsSum  | currency: '$': 2 }}</strong></div>
+          <div class="col-md-2"><strong>{{ reportByCustomers.servicesSum  | currency: '$': 2 }}</strong></div>
+          <div class="col-md-2"><strong>{{ reportByCustomers.totalSum  | currency: '$': 2 }}</strong></div>
         </div>
       </div>
     </div>
