@@ -478,7 +478,44 @@ text-align: center;
 .product-report-btn img {
   width: 25px;
 }
+.product-report-btn .dropdown-menu {
+  min-width: 100px;
+}
+.product-report-btn .dropdown-menu li {
+  padding: 10px 20px;
+}
+.product-report-btn.dropdown-email .dropdown-menu li{
+  padding: 0;
+}
+.product-report-btn.dropdown-email .dropdown-menu li:first-child{
+  padding: 10px 20px;
+  position: relative;
+}
+.product-report-btn.dropdown-email .dropdown-menu li:first-child input{
+  padding-right: 60px;
+}
 
+.product-report-btn.dropdown-email .dropdown-menu li:first-child div{
+  position: absolute;
+  top: 17px;
+  right: 30px;
+}
+.product-report-btn.dropdown-email .dropdown-menu li:first-child div .icn-remove-old{
+  margin-left: 10px;
+}
+.product-report-btn.dropdown-email .dropdown-menu{
+  min-width: 300px;
+  max-width: 455px;
+  width: 455px;
+}
+.product-report-btn.dropdown-email .dropdown-menu label{
+  margin: 0;
+  padding: 15px 0 15px 50px;
+}
+.product-report-btn.dropdown-email .dropdown-menu label span{
+  top: 15px;
+  left: 20px;
+}
 .radio-buttons-product-report .radio {
   width: 18px;
   height: 16px;
