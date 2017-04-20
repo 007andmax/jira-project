@@ -19,6 +19,7 @@
     controller: reportMenuCtrl
   });
 
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService'];
   function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
