@@ -101,7 +101,7 @@
       <!--<button>Billed Time</button>-->
       <!--<button ng-click="">Product Sales</button>-->
       <!--</div>-->
-      <div class="radio-buttons-product-report form-group">
+      <div class="radio-buttons-product-report form-group" ng-hide="locationTechReport === '/reports/techReport-TicketCreated'">
         <div class="summary-radio summary-radio-device">
           <input type="radio" name="l2" class="radio" id="billedTime" ng-model="techReportType" value="BILLED_TIME">
           <label for="billedTime">Billed Time</label>
