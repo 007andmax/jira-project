@@ -8,7 +8,7 @@
   <div class="product-list-ticket" style="height: 100%">
     <div class="header-product-list-ticket" ng-if="reportByProducts.products">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
-      <h3>Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></h3>
+      <h3 ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></h3>
       <h3><span>{{ parseDate(reportByProducts.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>
