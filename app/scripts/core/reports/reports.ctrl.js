@@ -179,7 +179,7 @@
           yAxis: {
             tickFormat: function (d) {
               return d3.format('')(d);
-            }
+            },
           },
           multibar: {
             dispatch: {
