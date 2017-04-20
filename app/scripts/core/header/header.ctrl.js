@@ -87,6 +87,9 @@
           } else if ($state.current.url.indexOf('dashboard') > -1) {
             return 'Dashboard';
           }
+          else if ($state.current.url.indexOf('reports') > -1) {
+            return 'Reports';
+          }
         };
 
         $scope.$watch(function () {

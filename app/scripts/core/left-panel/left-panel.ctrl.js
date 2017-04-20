@@ -43,6 +43,7 @@
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 
+
         $scope.qSHistory = DevicesService.getOneTimeHistory();
         DevicesService.getDevicesCount($scope, function (resp) {
           $scope.devices = [];
@@ -74,7 +75,7 @@
               document.title = 'Settings';
             }
 
-            if (!$scope.openedCategory) {
+            if (!$scope.openedCategory || $scope.openedCategory === 'reports') {
               $rootScope.isLeftPanelHidden = true;
             } else if ($scope.openedCategory === 'settings') {
               $rootScope.isLeftPanelHidden = false;
@@ -102,6 +103,12 @@
           }
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
           document.title = 'Settings';
+        };
+
+        $scope.onClickReports = function() {
+          $rootScope.isLeftPanelHidden = true;
+          $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+          document.title = 'Reports'
         };
 
         $scope.addQuickSession = function () {
@@ -357,6 +364,8 @@
             return 'inventory';
           } else if (url.indexOf('password-manager') > -1) {
             return 'password-manager';
+          } else if (url.indexOf('reports') > -1) {
+            return 'reports';
           } else {
             return undefined;
           }

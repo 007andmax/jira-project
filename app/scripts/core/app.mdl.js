@@ -23,6 +23,7 @@
       'quicktech.core.settings',
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
+      'quicktech.core.reports',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -30,7 +31,8 @@
       'ngMessages',
       'ngAnimate',
       'LocalStorageModule',
-      'ngCropper'
+      'ngCropper',
+      'nvd3'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
@@ -225,6 +227,46 @@
           url: '/quickSupport',
           templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
           controller: 'quicktech.core.quickSupport.quickSupportCtrl'
+        }))
+        .state('reports', waitForServices({
+          url: '/reports',
+          templateUrl: '/html/scripts/core/reports/reports.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('remoteAccess', waitForServices({
+          url: '/reports/remoteAccess',
+          templateUrl: '/html/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('byCustomers', waitForServices({
+          url: '/reports/byCustomers',
+          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('byProducts', waitForServices({
+          url: '/reports/byProducts',
+          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('byTaxes', waitForServices({
+          url: '/reports/byTaxes',
+          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('techReport-TicketCreated', waitForServices({
+          url: '/reports/techReport-TicketCreated',
+          templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('techReport-ProductSales', waitForServices({
+          url: '/reports/techReport-ProductSales',
+          templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('accountsReceivable', waitForServices({
+          url: '/reports/accountsReceivable',
+          templateUrl: '/html/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
       function waitForServices(conf) {

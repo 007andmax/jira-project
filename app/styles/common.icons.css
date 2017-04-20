@@ -845,6 +845,10 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   /*background-image: url("../images/new-icons/bookmark.png");*/
 /*}*/
 
+.icon-calendar-dark{
+  background-image: url("../images/new-icons/calendar-dark.png");
+  background-size: cover;
+}
 .icn-gs-tickets {
   background-position: -1052px -128px;
 }

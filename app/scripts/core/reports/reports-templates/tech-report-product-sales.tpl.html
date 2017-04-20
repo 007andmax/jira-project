@@ -1,0 +1,18 @@
+<div class="product-list-report" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
+     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
+  <p class="report-title">Tech Sales Report </p>
+
+  <div class="tech-button">
+    <report-menu is-tech-report="true" send-to-mail="sendToMail" get-user-name="getUserName"
+                 open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>
+  </div>
+  <div class="product-list-ticket">
+    <div class="header-product-list-ticket" ng-if="techReportProductSales.lines">
+      <h4>Product Sold Revenue vs Quoted Projects</h4>
+    </div>
+    <nvd3 options="options" data="data" ng-if="responseSuccess"></nvd3>
+    <div class="clearfix" ng-if="techReportProductSales.lines">
+      <div>Protential Revenue: <span>{{techReportProductSales.total}}</span></div>
+    </div>
+  </div>
+</div>

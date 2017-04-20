@@ -57,6 +57,17 @@
         <img class="menu-img" ng-if="openedCategory === 'password-manager'"
              src="images/new-icons/lock-white.png">
       </div>
+      <!--REPORTS-->
+      <div class="left-panel__category"
+           ng-class="{'active': openedCategory === 'reports'}"
+           ng-click="onClickReports()"
+           ui-sref="reports">
+        <img class="menu-img" ng-if="openedCategory !== 'reports'"
+             src="images/new-icons/report-icon.png">
+        <img class="menu-img" ng-if="openedCategory === 'reports'"
+             src="images/new-icons/report-icon.png">
+      </div>
+
       <div class="left-panel__category settings-left-bar">
         <!--<div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"-->
              <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->
@@ -326,6 +337,11 @@
           Receivable
         </div>
         <div class="center-category__category"
+             ng-class="{active: $state.includes('payments')}"
+             ng-click="stateGo($event, 'payments')">
+          Payments
+        </div>
+        <div class="center-category__category"
              ng-class="{active: $state.includes('receipt-archive')}"
              ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
           Receipt Archive
@@ -536,5 +552,4 @@
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');
-
 </script>
