@@ -162,7 +162,7 @@
             {{ user.primaryEmail }} ({{ $ctrl.getUserName(user) || '' }})
           </label>
         </li>
-        <div>
+        <div style="padding: 10px 0;text-align: center;position: fixed;top: 643px;right: 153px;background-color: #fff;width: 455px;cursor: default;box-shadow: 0 9px 20px 0 rgba(10, 45, 89, 0.1);">
           <button ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)"
                   type="button">
             Send

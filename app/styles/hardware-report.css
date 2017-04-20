@@ -516,6 +516,12 @@ text-align: center;
   top: 15px;
   left: 20px;
 }
+.tech-button .dropdown-menu div{
+  top: 618px!important;
+}
+.tax-button .dropdown-menu div{
+  top: 641px!important;
+}
 .radio-buttons-product-report .radio {
   width: 18px;
   height: 16px;
