@@ -6,13 +6,12 @@
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>
   </div>
   <div class="product-list-ticket product-list-ticket-taxes">
-    <div ng-hide="!reportByTaxes.reducedTaxes">
     <div class="header-product-list-ticket" ng-if="reportByTaxes.lines">
       <h3>{{reportByTaxes.techCompanyName}}</h3>
       <h3>Sales Tax report <span>{{reporttype[reportByTaxes.type]}}</span></h3>
       <h3><span>{{ parseDate(reportByTaxes.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByTaxes.endDate) | date: 'dd MMM yyyy' }}</span></h3>
     </div>
-    <div ng-if="reportByTaxes.type === 'DETAILED'">
+    <div ng-if="reportByTaxes.type === 'DETAILED' && reportByTaxes.reducedTaxes">
       <ul>
         <li class="top-product-list-ticket clearfix">
           <div class="col-md-1"><strong>Invoice</strong></div>
@@ -56,7 +55,6 @@
         <div class="col-md-2"><strong>{{reportByTaxes.totalTaxableSum | currency: '$': 2 }}</strong></div>
         <div class="col-md-2"><strong>{{reportByTaxes.totalTaxSum | currency: '$': 2 }}</strong></div>
       </div>
-    </div>
     </div>
   </div>
 </div>
