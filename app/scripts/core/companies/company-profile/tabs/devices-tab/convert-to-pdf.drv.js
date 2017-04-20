@@ -70,11 +70,14 @@
 
               svg.attr('width', width);
               svg.attr('height', height);
+              var styles = svg.attr('style');
+              svg.attr('style', '');
 
               canvg(canvas, svg[0].outerHTML);
 
               svg.attr('width', '100%');
               svg.attr('height', '100%');
+              svg.attr('style', styles);
 
               img.src = canvas.toDataURL();
               img.style.width = width;

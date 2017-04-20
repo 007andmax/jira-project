@@ -1,5 +1,5 @@
 <div class="product-list-report product-list"
-     convert-to-pdf="/reports/fpd"
+     convert-to-pdf="/reports/pdf"
      email-endpoint="/reports/email"
      selector=".product-list-ticket"
      disable-selector=".open-pdf-btn"
@@ -32,12 +32,12 @@
         </li>
         <li class="content-product-list-ticket clearfix" ng-repeat="line in reportAccountsReceivable.lines"  on-finish-render="buildPdf()">
           <div class="col-md-3">{{line.clientCompanyName}}</div>
-          <div class="col-md-2">{{line.currentSum | currency: '$': 2 }}</div>
-          <div class="col-md-2">{{line.month1Sum | currency: '$': 2 }}</div>
-          <div class="col-md-2">{{line.month2Sum | currency: '$': 2 }}</div>
-          <div class="col-md-1">{{line.month3Sum | currency: '$': 2 }}</div>
-          <div class="col-md-1">{{line.olderSum | currency: '$': 2 }}</div>
-          <div class="col-md-1">{{line.totalSum | currency: '$': 2 }}</div>
+          <div class="col-md-2"><div ng-show="line.currentSum > 0">{{line.currentSum | currency: '$': 2 }}</div></div>
+          <div class="col-md-2"><div ng-show="line.month1Sum > 0">{{line.month1Sum | currency: '$': 2 }}</div></div>
+          <div class="col-md-2"><div ng-show="line.month2Sum > 0">{{line.month2Sum | currency: '$': 2 }}</div></div>
+          <div class="col-md-1"><div ng-show="line.month3Sum > 0">{{line.month3Sum | currency: '$': 2 }}</div></div>
+          <div class="col-md-1"><div ng-show="line.olderSum > 0">{{line.olderSum | currency: '$': 2 }}</div></div>
+          <div class="col-md-1"><div ng-show="line.totalSum > 0">{{line.totalSum | currency: '$': 2 }}</div></div>
         </li>
       </ul>
     </div>

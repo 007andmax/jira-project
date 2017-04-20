@@ -146,6 +146,12 @@
           case('/reports/byTechSold'):
             ReportsService.exportCsvByTechSold(lastSentData);
             break;
+          case('/reports/techReport-TicketCreated'):
+            ReportsService.exportCsvByTechTicketCreated(lastSentData);
+            break;
+          case('/reports/techReport-ProductSales'):
+            ReportsService.exportCsvByTechProductSold(lastSentData);
+            break;
           default:
             console.log("wrong location")
         }

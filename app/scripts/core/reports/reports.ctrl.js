@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', function ($scope, ReportsService) {
+    ['$scope', 'ReportsService', '$timeout', function ($scope, ReportsService, $timeout) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -16,7 +16,7 @@
       $scope.techReportProductSales = {};
       $scope.reportAccountsReceivable = {};
 
-      $scope.taxesLabels=[];
+      $scope.taxesLabels = [];
 
       var techReportTypeForChart;
       var renderFinished = {
@@ -30,13 +30,13 @@
       };
 
       function getTaxesLabels() {
-        if($scope.reportByTaxes.type === "DETAILED") {
+        if ($scope.reportByTaxes.type === "DETAILED") {
           var labels = [];
-          Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function(key) {
+          Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function (key) {
             labels.push(key);
           });
           $scope.taxesLabels = labels;
-          console.log(" $scope.taxesLabels: ",  $scope.taxesLabels);
+          console.log(" $scope.taxesLabels: ", $scope.taxesLabels);
         }
       }
 
@@ -77,23 +77,27 @@
       }
 
       function getTechReportTickedCreated(data) {
-        ReportsService.getTechReportTicketCreated(data, function(resp) {
+        $scope.responseSuccess = false;
+        ReportsService.getTechReportTicketCreated(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.techReportTicketCreated = resp;
+          $scope.responseSuccess = true;
           addDataToChartForTicketCreated($scope.techReportTicketCreated);
         })
       }
 
       function getTechReportProductSales(data) {
-        ReportsService.getTechReportProductSales(data, function(resp){
+        $scope.responseSuccess = false;
+        ReportsService.getTechReportProductSales(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.techReportProductSales = resp;
+          $scope.responseSuccess = true;
           addDataToChartForProductSales($scope.techReportProductSales);
         })
       }
 
       function getReportAccountsReceivable(data) {
-        ReportsService.getReportAccountsReceivable(data, function(resp) {
+        ReportsService.getReportAccountsReceivable(data, function (resp) {
           console.log("Resp from service: ", resp);
           $scope.reportAccountsReceivable = resp;
         })
@@ -132,10 +136,12 @@
             case('/reports/techReport-TicketCreated'):
               getTechReportTickedCreated(data);
               techReportTypeForChart = techReportType;
+              $scope.reportName = 'ticket_created';
               break;
             case('/reports/techReport-ProductSales'):
               getTechReportProductSales(data);
               techReportTypeForChart = techReportType;
+              $scope.reportName = 'product_sold';
               break;
             case('/reports/accountsReceivable'):
               getReportAccountsReceivable(data);
@@ -147,36 +153,51 @@
         }
       });
 
+      var chartHeight = 400;
+      function chartHeightChange() {
+          chartHeight =  30 * ($scope.data[0].values.length + 5);
+          console.log("height: ", chartHeight);
+      }
+
       $scope.options = {
         chart: {
           type: 'multiBarHorizontalChart',
-          height: 400,
-          margin: {left:150},
-          x: function(d){return d.label;},
-          y: function(d){return d.value;},
+          height: chartHeight,
+          margin: {left: 150},
+          x: function (d) {
+            return d.label;
+          },
+          y: function (d) {
+            return d.value;
+          },
           showControls: false,
           showValues: true,
           duration: 500,
           xAxis: {
-            showMaxMin: false,
+            showMaxMin: false
           },
           yAxis: {
-            tickFormat: function(d){
+            tickFormat: function (d) {
               return d3.format('')(d);
+            }
+          },
+          multibar: {
+            dispatch: {
+              renderEnd: function () {
+                $timeout($scope.buildPdf);
+              }
             }
           }
         }
       };
-      // it might be good to add function to change $scope.options.height
-      // height: changeHeight();
 
       $scope.data = [];
 
       function addDataToChartForTicketCreated(reportData) {
         $scope.data = [];
-        if(reportData && reportData.lines) {
+        if (reportData && reportData.lines) {
           var valueClosed = [];
-          for(var i=0; i<reportData.lines.length; i++) {
+          for (var i = 0; i < reportData.lines.length; i++) {
             var nameAndData = {
               "label": reportData.lines[i].fullName,
               "value": reportData.lines[i].closed
@@ -190,7 +211,7 @@
           };
 
           var valueCreated = [];
-          for(var i=0; i<reportData.lines.length; i++) {
+          for (var i = 0; i < reportData.lines.length; i++) {
             var nameAndData2 = {
               "label": reportData.lines[i].fullName,
               "value": reportData.lines[i].created
@@ -205,15 +226,16 @@
 
           $scope.data.push(object1);
           $scope.data.push(object2);
+          chartHeightChange();
         }
       }
 
-      function addDataToChartForProductSales (reportData) {
+      function addDataToChartForProductSales(reportData) {
         $scope.data = [];
-        if(reportData && reportData.lines) {
-          if(techReportTypeForChart === "BILLED_TIME") {
+        if (reportData && reportData.lines) {
+          if (techReportTypeForChart === "BILLED_TIME") {
             var billedTime = [];
-            for(var i=0; i<reportData.lines.length; i++) {
+            for (var i = 0; i < reportData.lines.length; i++) {
               var nameAndData = {
                 "label": reportData.lines[i].fullName,
                 "value": reportData.lines[i].billedTime
@@ -226,11 +248,12 @@
               "values": billedTime
             };
             $scope.data.push(object1);
+            chartHeightChange();
             /*IN CASE OF SECOND PARAMETER EXIST - ADD IT*/
 
           } else if (techReportTypeForChart === "PRODUCT_SOLD") {
             var totalSum = [];
-            for(var i=0; i<reportData.lines.length; i++) {
+            for (var i = 0; i < reportData.lines.length; i++) {
               var nameAndData = {
                 "label": reportData.lines[i].fullName,
                 "value": reportData.lines[i].totalSum
@@ -243,6 +266,7 @@
               "values": totalSum
             };
             $scope.data.push(object1);
+            chartHeightChange();
             /*IN CASE OF SECOND PARAMETER EXIST - ADD IT*/
 
           }

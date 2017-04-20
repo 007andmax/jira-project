@@ -16,7 +16,7 @@
       var urlForReportRemoteAccess = "/reports/remoteAccess";
       var urlForReportCreatedVsClosedTickets = "/reports/techTickets";
       var urlForReportProductSoldVsQuotedProjects = "/reports/sales/byTechSold";
-      var urlForReportAccountRecaivable = "/reports/sales/byReceivable";
+      var urlForReportAccountReceivable = "/reports/sales/byReceivable";
 
       function getReport(url, data, callback) {
         var future = $http({
@@ -77,11 +77,11 @@
       }
 
       function getReportAccountsReceivable(data, callback) {
-        return getReport(urlForReportAccountRecaivable, data, callback);
+        return getReport(urlForReportAccountReceivable, data, callback);
       }
 
       function exportCsvAccountsReceivable(data, callback) {
-        return exportCsv(urlForReportAccountRecaivable, data, callback);
+        return exportCsv(urlForReportAccountReceivable, data, callback);
       }
 
       function exportCsvByTaxes(data, callback) {
@@ -98,6 +98,14 @@
 
       function exportCsvByTechSold(data, callback) {
         return exportCsv(urlForReportByTechSold, data, callback);
+      }
+
+      function exportCsvByTechTicketCreated(data, callback) {
+        return exportCsv(urlForReportCreatedVsClosedTickets, data, callback);
+      }
+
+      function exportCsvByTechProductSold(data, callback) {
+        return exportCsv(urlForReportProductSoldVsQuotedProjects, data, callback);
       }
 
       function exportCsvRemoteAccess(data, callback) {
@@ -127,7 +135,9 @@
         getTechReportTicketCreated: getTechReportTicketCreated,
         getTechReportProductSales: getTechReportProductSales,
         getReportAccountsReceivable: getReportAccountsReceivable,
-        exportCsvAccountsReceivable: exportCsvAccountsReceivable
+        exportCsvAccountsReceivable: exportCsvAccountsReceivable,
+        exportCsvByTechTicketCreated: exportCsvByTechTicketCreated,
+        exportCsvByTechProductSold: exportCsvByTechProductSold
       }
 
     }])
