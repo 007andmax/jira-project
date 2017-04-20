@@ -36,13 +36,11 @@
             labels.push(key);
           });
           $scope.taxesLabels = labels;
-          console.log(" $scope.taxesLabels: ", $scope.taxesLabels);
         }
       }
 
       function getReportByTaxes(data) {
         ReportsService.getReportByTaxes(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.reportByTaxes = resp;
           getTaxesLabels();
         });
@@ -50,28 +48,24 @@
 
       function getReportByCustomers(data) {
         ReportsService.getReportByCustomers(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.reportByCustomers = resp;
         });
       }
 
       function getReportByProducts(data) {
         ReportsService.getReportByProducts(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.reportByProducts = resp;
         });
       }
 
       function getReportByTechSold(data) {
         ReportsService.getReportByTechSold(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.reportByTechSold = resp;
         });
       }
 
       function getReportRemoteAccess(data) {
         ReportsService.getReportRemoteAccess(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.reportRemoteAccess = resp;
         });
       }
@@ -79,7 +73,6 @@
       function getTechReportTickedCreated(data) {
         $scope.responseSuccess = false;
         ReportsService.getTechReportTicketCreated(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.techReportTicketCreated = resp;
           $scope.responseSuccess = true;
           addDataToChartForTicketCreated($scope.techReportTicketCreated);
@@ -89,7 +82,6 @@
       function getTechReportProductSales(data) {
         $scope.responseSuccess = false;
         ReportsService.getTechReportProductSales(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.techReportProductSales = resp;
           $scope.responseSuccess = true;
           addDataToChartForProductSales($scope.techReportProductSales);
@@ -98,7 +90,6 @@
 
       function getReportAccountsReceivable(data) {
         ReportsService.getReportAccountsReceivable(data, function (resp) {
-          console.log("Resp from service: ", resp);
           $scope.reportAccountsReceivable = resp;
         })
       }
@@ -109,8 +100,6 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
-        console.log("parent ctrl data: ", data);
-        console.log("parent ctrl techReportType: ", techReportType);
         if (location) {
           switch (location) {
             case('/reports/remoteAccess') :
@@ -156,7 +145,6 @@
       var chartHeight = 400;
       function chartHeightChange() {
           chartHeight =  30 * ($scope.data[0].values.length + 5);
-          console.log("height: ", chartHeight);
       }
 
       $scope.options = {
@@ -179,7 +167,7 @@
           yAxis: {
             tickFormat: function (d) {
               return d3.format('')(d);
-            },
+            }
           },
           multibar: {
             dispatch: {

@@ -68,11 +68,9 @@
 
     function setTechReportDateType(type) {
       $scope.techReportDateType = type;
-      console.log("$scope.techReportDateType: ", $scope.techReportDateType);
     }
 
     function onDateRangeChangeReport(dates) {
-      console.log("dates: ", dates);
       if (dates && dates.length && dates.length > 1) {
         var startMonth = dates[0].getMonth() + 1;
         var endMonth = dates[1].getMonth() + 1;
@@ -89,7 +87,6 @@
 
       if (!$ctrl.isTechReport) {
 
-        console.log("data from form: ", reportSettings);
         var dataToSend = {
           startDate: $scope.startDate,
           endDate: $scope.endDate,
@@ -108,7 +105,6 @@
 
       } else {
 
-        console.log("data from form: ", reportSettings);
         var techDataToSend = {
           dateRangeType: $scope.techReportDateType,
           type: $scope.techReportType
@@ -172,7 +168,6 @@
         }
       }
       $scope.agentsList = angular.copy(agentsList);
-      //console.log("$scope.clientCompanies: ", $scope.clientCompanies);
     });
 
     $scope.$watch("reportSetting.company", function (val) {
