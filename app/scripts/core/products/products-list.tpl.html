@@ -73,7 +73,7 @@
 
         <div class="col-4">{{ getCompanyById(product.company.id).name}}</div>
 
-        <div class="col-4 ellipsis" style="height: 18px; padding-left: 20px;">
+        <div class="col-4" style="padding-left: 20px;">
           {{ product.ilc}}
         </div>
 
@@ -113,7 +113,7 @@
           <ul class="dropdown-menu move-prod" role="menu" uib-dropdown-menu>
 
             <li ng-repeat="category in productsData.categories | orderBy: 'name'"
-                ng-if="!category.default && product.category.id !== category.id">
+                ng-hide="category.default || product.category.id === category.id">
               <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
                 {{ category.name }}
               </a>

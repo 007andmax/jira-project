@@ -43,6 +43,7 @@
     $scope.techReportDateType = "TODAY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
     $scope.clientUsers = UsersService.getClientUsers();
+    $scope.locationTechReport = $location.url();
 
     var location = $location.url(),
       lastSentData;

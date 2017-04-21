@@ -1,6 +1,6 @@
 <div class="product-list-report product-list" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
      selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
-  <p class="report-title">Sales Report</p>
+  <p class="report-title">Product Sales Report</p>
   <div>
     <report-menu is-device-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName"
                  download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern"></report-menu>
@@ -8,7 +8,7 @@
   <div class="product-list-ticket" style="height: 100%">
     <div class="header-product-list-ticket" ng-if="reportByProducts.products">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
-      <h3>Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></h3>
+      <h3 ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></h3>
       <h3><span>{{ parseDate(reportByProducts.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>

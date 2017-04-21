@@ -78,7 +78,7 @@
            ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) | limitTo: displayLimit track by user.id">
         <div class="card">
           <div class="card-header">
-            <div class="edit-icn" ng-if="!user.deletedAt" create-new-entity="user" item="user"></div>
+            <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')" create-new-entity="user" item="user"></div>
             <i class="icon-sm icn-restore" ng-if="user.deletedAt" ng-click="dearchiveUser(user)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
@@ -116,7 +116,7 @@
               <span style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></span>
             </div>
           </div>
-          <div class="card-footer clearfix" ng-hide="user.deletedAt">
+          <div class="card-footer clearfix" ng-hide="user.deletedAt || !PermissionsService.isAllowed('EDIT_USERS')">
             <button class="btn btn-default" create-new-entity="ticket" user-id="{{ user.id }}">
               <span class="plus-card"></span>New Ticket
             </button>
@@ -239,7 +239,7 @@
         <div class="col-lg-1 col-xs-2  subscribe-col" uib-dropdown>
 
           <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" tooltip-placement="top"
-               uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
+               uib-dropdown-toggle custom-disabled="{{ user.deletedAt || !PermissionsService.isAllowed('EDIT_USERS') }}">
             <img src="images/input-icons/ticket-update-green.png" alt=""
                  ng-if="user.subscription.ticket" uib-tooltip="Ticket Updates">
             <img src="images/input-icons/invoice-update-orange.png" alt=""

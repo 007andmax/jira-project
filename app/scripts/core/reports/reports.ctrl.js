@@ -32,9 +32,11 @@
       function getTaxesLabels() {
         if ($scope.reportByTaxes.type === "DETAILED") {
           var labels = [];
-          Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function (key) {
-            labels.push(key);
-          });
+          if($scope.reportByTaxes.reducedTaxes) {
+            Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function (key) {
+              labels.push(key);
+            });
+          }
           $scope.taxesLabels = labels;
         }
       }

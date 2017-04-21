@@ -89,7 +89,7 @@
            ng-click="openCompany(company)">
         <div class="card">
           <div class="card-header clearfix">
-            <div class="edit-icn" ng-if="!company.deletedAt"
+            <div class="edit-icn" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
                  create-new-entity="company" item="company" stop-propagation="click"></div>
             <i class="icon-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
 
@@ -134,7 +134,7 @@
             </div>
             <div>
               <p>Users</p>
-              <p><strong>{{ filterArchived(companyComponentsCount.users).length || '0' }}</strong></p>
+              <p><strong>{{ filterArchived(companyComponentsCount.users, company).length || '0' }}</strong></p>
             </div>
             <div>
               <p>Devices</p>
@@ -189,15 +189,14 @@
              style="display: inline-block;margin-left: 15px;" stop-propagation="click">
           <span><i class="nav-icon icon-lg icon-user-black" style="margin: 0;"></i></span>
           <span class="badge badge-primary-outline list-company-badge">
-            {{ filterArchived(companyComponentsCount.users).length || '0' }}
+            {{ filterArchived(companyComponentsCount.users, company).length || '0' }}
           </span>
         </div>
       </div>
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
-           ng-click="dearchiveCompany(company)"></img>
+           ng-click="dearchiveCompany(company)" />
     </li>
   </ul>
-</div>
 </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

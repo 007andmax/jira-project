@@ -118,13 +118,37 @@
             }
 
             function cropperCtrl($scope, $timeout, $uibModalInstance, Cropper, source, isTechLogo, saveImage) {
-              var blob, timeout;
+              var blob, timeout, preventZoom, zoomCounter = 20;
 
+              $scope.cropper = {};
+              $scope.cropperProxy = 'cropper.func';
               $scope.source = source ? angular.copy(source) : {};
               $scope.options = {
                 maximize: true,
                 aspectRatio: isTechLogo ? 450 / 200 : 1,
-                crop: getCroppedImage
+                crop: getCroppedImage,
+                zoomin: function (e) {
+                  if (preventZoom) {
+                    preventZoom = false;
+                  } else {
+                    if (zoomCounter) {
+                      preventZoom = true;
+                      zoomCounter && zoomCounter--;
+                      $scope.cropper.func('zoom', 0.1);
+                    }
+                    e.preventDefault();
+                  }
+                },
+                zoomout: function (e) {
+                  if (preventZoom) {
+                    preventZoom = false;
+                  } else {
+                    preventZoom = true;
+                    zoomCounter < 20 && zoomCounter++;
+                    $scope.cropper.func('zoom', -0.1);
+                    e.preventDefault();
+                  }
+                }
               };
 
               if (source.cropped) {

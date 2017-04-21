@@ -37,6 +37,8 @@
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', true);
+                  Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
+                  break;
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
@@ -44,24 +46,25 @@
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', false);
+                  Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
+                  break;
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_INSTALLED') {
+              var parsedData = JSON.parse(newChange.data.value);
+              parsedData.device.userName = newChange.data.userName;
               if (!devices[newChange.data.clientCompanyId]) {
                 var companyId = newChange.data.clientCompanyId;
                 devices[companyId] = [];
-                devices[companyId].push(JSON.parse(newChange.data.value).device);
+                devices[companyId].push(parsedData.device);
               } else {
-                devices[newChange.data.clientCompanyId].push(Utils.customizeObj(JSON.parse(newChange.data.value).device));
+                var deviceById = Utils.findById(devices[newChange.data.clientCompanyId], parsedData.device.id);
+                Utils.customizeObj(parsedData.device, deviceById);
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_UNINSTALLED') {
-              for (var i in devices[newChange.data.clientCompanyId]) {
-                if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
-                  devices[newChange.data.clientCompanyId].splice(i, 1);
-                }
-              }
+              Utils.deleteById(devices[newChange.data.clientCompanyId], newChange.data.value);
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'REMOTE_CONNECTION') {
               if (callbackForRemoteConnection[newChange.data.sessionId]) {
@@ -679,16 +682,16 @@
         return Utils.findById(storage.devices[companyId], id);
       }
 
-      function getOneByAgentId(agentId, companyId) {
+      function getOneByDeviceId(deviceId, companyId) {
         var devices = storage.devices[companyId] || storage.devices;
 
         if (companyId) {
-          return _getDeviceByAgentId(devices, agentId);
+          return _getDeviceByDeviceId(devices, deviceId);
         } else {
           for (var companyId in devices) {
             if (companyId !== 'staticCopy') {
               var devicesByCompany = devices[companyId];
-              var device = _getDeviceByAgentId(devicesByCompany, agentId);
+              var device = _getDeviceByDeviceId(devicesByCompany, deviceId);
               if (device) {
                 return device;
               }
@@ -697,10 +700,10 @@
         }
       }
 
-      function _getDeviceByAgentId(devices, agentId) {
+      function _getDeviceByDeviceId(devices, agentId) {
         for (var i = 0; i < devices.length; i++) {
           var device = devices[i];
-          if (device.agentId === agentId) {
+          if (device.id === agentId) {
             return device;
           }
         }
@@ -757,7 +760,7 @@
         getDeviceReports: getDeviceReports,
         getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
-        getOneByAgentId: getOneByAgentId,
+        getOneByDeviceId: getOneByDeviceId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
         getGadgets: getGadgets,

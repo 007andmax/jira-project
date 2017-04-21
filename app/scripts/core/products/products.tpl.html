@@ -5,11 +5,11 @@
       <div class="fixed-block-top" style="" fixed-block-top>
         <ul class="nav nav-qt" role="tablist" style="margin-left: 20px">
 
-          <li role="presentation" ng-class="{'active': pageTab === 'category'}">
+          <li role="presentation" ng-class="{'active': currentOpenTab === 'category'}">
             <a ui-sref="products({ tabName: 'category' })">Product by Category</a>
           </li>
 
-          <li role="presentation" ng-class="{'active': pageTab === 'list'}">
+          <li role="presentation" ng-class="{'active': currentOpenTab === 'list'}">
             <a ui-sref="products({ tabName: 'list' })">Products List</a>
           </li>
 
@@ -20,7 +20,8 @@
 
     <div ng-hide="loadingInProgress" style="width: 100%; display: inline-block; margin-top: 39px;">
 
-      <div ng-include="'/html/scripts/core/products/' + (pageTab === 'list' ? 'products-' : 'group-by-') + pageTab + '.tpl.html'"></div>
+      <div ng-show="currentOpenTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>
+      <div ng-show="currentOpenTab === 'category'" ng-include="'/html/scripts/core/products/group-by-category.tpl.html'"></div>
 
     </div>
 

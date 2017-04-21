@@ -96,11 +96,6 @@
           config.callback(newChange);
         }
       }
-
-      if (newChange.action === 'COMPANY_ARCHIVED'
-        || newChange.action === 'COMPANY_DEARCHIVED') {
-        $rootScope.$broadcast(newChange.action.toLowerCase(), newChange.data.id);
-      }
     }
 
     function addSubscription(url, scope, callback) {

@@ -88,16 +88,17 @@
               }
             }
           } else if (newChange.action == 'USER_ARCHIVED') {
-            var user = Utils.findById(storage.users, newChange.data.id);
-            Utils.customizeObj(newChange.data, user);
+            var user = Utils.findById(storage.deleted, newChange.data.id);
             if (user) {
-              storage.deleted.push(user);
+              Utils.customizeObj(newChange.data, user);
+            } else {
+              storage.deleted.push(newChange.data);
             }
             Utils.deleteById(storage.users, newChange.data.id);
             Utils.deleteById(storage.clientUsers, newChange.data.id);
-            if (storage.usersByCompanies[newChange.data.company.id]) {
-              Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
-            }
+            // if (storage.usersByCompanies[newChange.data.company.id]) {
+            //   Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
+            // }
           } else if (newChange.action == 'USER_ONLINE') {
             var user = Utils.findById(storage.users, newChange.data.id);
             if (user) {
@@ -107,7 +108,11 @@
             for (var i = 0; i < storage.users.length; i++) {
               var user = storage.users[i];
               if (user.company.id === newChange.data.id) {
-                storage.deleted.push(user);
+                var archivedUser = Utils.findById(storage.deleted, user.id);
+                if (!archivedUser) {
+                  user.deletedAt = Date.now();
+                  storage.deleted.push(user);
+                }
                 storage.users.splice(i, 1);
                 storage.clientUsers.splice(storage.clientUsers.indexOf(user), 1);
                 i--;
@@ -184,8 +189,11 @@
             storage.usersByCompanies[newUser.company.id] = [];
           }
 
-          if (!Utils.findById(storage.usersByCompanies[newUser.company.id], newUser.id)) {
+          var userFromByCompanyStorage = Utils.findById(storage.usersByCompanies[newUser.company.id], newUser.id);
+          if (!userFromByCompanyStorage) {
             storage.usersByCompanies[newUser.company.id].push(newUser);
+          } else {
+            Utils.customizeObj(newUser, userFromByCompanyStorage);
           }
         }
       }

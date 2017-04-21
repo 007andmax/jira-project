@@ -322,6 +322,11 @@
     </div>
   </form>
   <div class="form-row user-btn-create clearfix btn-bottom">
+    <div class="pull-left" ng-if="isSaveFailed">
+      <p style="line-height: 36px;color: #e53935;">
+        {{ editCompany.id ? 'Sav' : 'Creat' }}ing user was failed. Server is unavailable.
+      </p>
+    </div>
     <button-with-loading-indicator class="btn btn-lg btn-create user-create btn-success pull-right" tabindex="33"
                                    ng-click="save(userForm)" loading="savingInProcess"
                                    label="{{ isCreation ? 'Create' : 'Save' }}">

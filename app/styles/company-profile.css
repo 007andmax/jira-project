@@ -23,7 +23,7 @@
 
 .company-new-cover-wrapper .company-info-type {
   padding: 5px 0;
-  width: 100%;
+  width: 230px;
 }
 @media (max-width: 1366px) {
   .company-new-cover-wrapper .company-info-type {
@@ -102,7 +102,7 @@
   font-weight: 100;
 }
 
-.company-contact-type:nth-child(8) {
+.company-contact-type.first-of-type {
   padding-top: 9px;
 }
 

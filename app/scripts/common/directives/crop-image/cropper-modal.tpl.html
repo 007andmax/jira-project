@@ -5,6 +5,7 @@
   <div class="img-crop">
     <img ng-src="{{ source.origin.base64 }}" ng-hide="!cropperReady"
          ng-cropper
+         ng-cropper-proxy="cropperProxy"
          ng-cropper-show="'show.cropper'"
          ng-cropper-hide="'hide.cropper'"
          ng-cropper-options="options">

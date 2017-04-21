@@ -56,7 +56,7 @@
           <div class="col-1 form-group"
                ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
             <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
-                   required>
+                   ng-maxlength="16" required>
           </div>
           <div class="col-2" uib-dropdown>
             <span uib-dropdown-toggle>

@@ -85,11 +85,11 @@
           <!--</div>-->
         <!--</div>-->
       </div>
-      <div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}"
-           ng-click="toggleLeftPanel('tutorial')">
-        <img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/new-icons/question-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/new-icons/question-white.png">
-      </div>
+      <!--<div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}"-->
+           <!--ng-click="toggleLeftPanel('tutorial')">-->
+        <!--<img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/new-icons/question-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/new-icons/question-white.png">-->
+      <!--</div>-->
     </div>
   </div>
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
@@ -383,7 +383,7 @@
              <div class="x-mark-wrapper">
                <input type="text" class="form-control has-dropdown"
                       autocomplete="off" ng-model="passwordSharedState.filter.companyId" typeahead-editable="false"
-                      ng-change="passwordSharedState.filter.agentId = undefined"
+                      ng-change="passwordSharedState.filter.deviceId = undefined"
                       typeahead-input-formatter="getCompanyName($model)"
                       uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                       qt-typeahead-show-on-focus
@@ -397,13 +397,13 @@
               <p>By Device</p>
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown"
-                       autocomplete="off" ng-model="passwordSharedState.filter.agentId" typeahead-editable="false"
-                       typeahead-input-formatter="getDeviceNameByAgentId($model)"
-                       uib-typeahead="device.agentId as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
+                       autocomplete="off" ng-model="passwordSharedState.filter.deviceId" typeahead-editable="false"
+                       typeahead-input-formatter="getDeviceNameById($model)"
+                       uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
                        qt-typeahead-show-on-focus
                        custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-                <div typeahead-input-icon="passwordSharedState.filter.agentId"></div>
+                <div typeahead-input-icon="passwordSharedState.filter.deviceId"></div>
               </div>
 
             </div>

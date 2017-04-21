@@ -653,7 +653,7 @@
 
           function isNotEmpty(object) {
             for (var prop in object) {
-              if (object.hasOwnProperty(prop) && prop !== 'itemOrder' && prop !== '$$hashKey') {
+              if (object.hasOwnProperty(prop) && prop !== 'itemOrder' && prop !== '$$hashKey' && prop !== 'discountType') {
                 var item = object[prop];
 
                 if (typeof item === 'object') {

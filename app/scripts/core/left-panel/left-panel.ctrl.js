@@ -209,7 +209,7 @@
               sharedFilter.companyId = value;
               break;
             case 'byDevice':
-              sharedFilter.agentId = value;
+              sharedFilter.deviceId = value;
               break;
             case 'byType':
               sharedFilter.template = value;
@@ -235,8 +235,8 @@
           }
         };
 
-        $scope.getDeviceNameByAgentId = function (agentId) {
-          var device = DevicesService.getOneByAgentId(agentId);
+        $scope.getDeviceNameById = function (deviceId) {
+          var device = DevicesService.getOneByDeviceId(deviceId);
           return device ? device.hostName || device.ip : '';
         };
 

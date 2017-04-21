@@ -12,7 +12,6 @@
       $scope.tagColors = TagsService.getColors();
       $scope.replaceDropdown = {};
       $scope.allowCreateTags = CompaniesService.getCurrentCompany().allowCreateTags;
-      $scope.remove = TagsService.remove;
       $scope.removeAndReplace = TagsService.removeAndReplace;
       $scope.saveAllowingCreateCustomTags = CompaniesService.saveAllowingCreateCustomTags;
 
@@ -55,6 +54,15 @@
           }
         } else {
           $scope.triedToSave = true;
+        }
+      };
+
+      $scope.remove = function (tagId) {
+        if (!$scope.removeInProgress) {
+          $scope.removeInProgress = true;
+          TagsService.remove(tagId, function () {
+            $scope.removeInProgress = false;
+          });
         }
       };
 

@@ -8,48 +8,6 @@
 
   services.factory('ReceivableService', ['$http', '$rootScope', 'RealTimeService', 'CompaniesService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, CompaniesService, Utils) {
 
-    function getReceivedPaymentsSumByCompany(companyId, scope, callback) {
-
-      if (!companyId) {
-        throw 'companyId is required!'
-      }
-
-      if (!scope || !scope.$id) {
-        throw 'Second argument must be Angularjs scope!'
-      }
-
-      var result = Utils.customizeObj({});
-
-      $http.get('/receivable/paymentSum/' + companyId).then(function (resp) {
-
-        Utils.customizeObj(resp.data, result);
-
-        RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
-
-          if (newChange.action === 'COMPANY_PAYMENT_RECEIVED') {
-            Utils.defineReadOnlyProperty(result, 'value', result.value + newChange.data);
-            if (callback) {
-              callback(result);
-            }
-          } else if (newChange.action === 'RECEIVED_PAYMENTS_SUM') {
-            Utils.defineReadOnlyProperty(result, 'value', newChange.data);
-          }
-
-        });
-
-        if (callback) {
-          callback(resp.data);
-        }
-      }, function (response) {
-
-        if (callback) {
-          callback(response.data);
-        }
-      });
-
-      return result;
-    }
-
     function getReceivableGraphData(scope, callback) {
 
       var result = Utils.customizeArray([]);
@@ -297,7 +255,6 @@
     }
 
     return {
-      getReceivedPaymentsSumByCompany: getReceivedPaymentsSumByCompany,
       getReceivableGraphData: getReceivableGraphData,
       getReceivableInvoicesData: getReceivableInvoicesData,
       getInvoiceDataForPreview: getInvoiceDataForPreview,

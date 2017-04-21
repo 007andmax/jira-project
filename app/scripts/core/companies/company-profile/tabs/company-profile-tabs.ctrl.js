@@ -295,7 +295,7 @@
           for (var deviceId in $scope.selectDevices) {
             if ($scope.selectDevices[deviceId]) {
               for(var j = 0, le = $scope.agents.length; j<le; j++) {
-                if($scope.agents[j].agentId === deviceId) {
+                if($scope.agents[j].id === deviceId) {
                   selectDevicesIds.push($scope.agents[j].id);
                 }
               }
@@ -320,7 +320,7 @@
           $scope.isSelectAllDevices = !$scope.isSelectAllDevices;
 
           for (var i = 0, len = $scope.agents.length; i < len; i++) {
-            $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
+            $scope.selectDevices[$scope.agents[i].id] = $scope.isSelectAllDevices;
           }
 
           $scope.changeSelectDevices();

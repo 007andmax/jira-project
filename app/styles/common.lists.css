@@ -283,7 +283,9 @@
 .qt-list > li > [class*='col-']:first-child {
   padding-left: 15px;
 }
-
+.vendor-products-width > li > [class*='col-']:first-child {
+  width: calc(100% - 893px);
+}
 .qt-receivable-number.qt-list > li > [class*='col-']:first-child,
 .qt-list.qt-users > li > [class*='col-']:first-child {
   padding-left: 0px;
@@ -2487,7 +2489,11 @@ Devices tab
 .qt-product-edit .product-actions .hit-area {
   margin-top: 12px;
 }
-
+.qt-product-edit textarea{
+  width: 290px;
+  display: inline-block;
+  padding: 7px 12px;
+}
 .qt-product-edit .form-control {
   /*height: 70px;*/
   /*padding-left: 0;*/
