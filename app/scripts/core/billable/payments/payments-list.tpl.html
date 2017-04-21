@@ -1,4 +1,4 @@
-<div class="product-list-report deposit-create">
+<div class="deposit-create">
   <p class="report-title">Create Deposit Slip</p>
   <div class="product-list-ticket clearfix">
     <ul>
@@ -14,7 +14,7 @@
       <li class="content-product-list-ticket clearfix" ng-repeat = "payment in payments | orderBy: orderType">
         <div class="col-md-3">
           <label class="control checkbox pull-left ng-scope">
-            <input type="checkbox" ng-model="idMap[payment.id].isChecked">
+            <input type="checkbox" ng-model="idMap[payment.id]">
             <span class="control-indicator"></span>
           </label>
           {{payment.createdAt}}</div>

@@ -9,7 +9,7 @@
       $scope.mode = availableMods[0];
       $scope.payments = [];
       $scope.orderType = 'createdAt';
-      $scope.idMap = [];
+      $scope.idDictionary = [];
 
       $scope.changeOrder = function (type) {
         if ($scope.orderType === type) {
@@ -35,20 +35,19 @@
         }
       });
 
+      // $scope.showInfo = function(t) {
+      //   console.log("CHECKED: ", t);
+      // };
+
       PaymentsService.getPaymentsData(function(resp) {
 
         $scope.payments = resp;
         for(var i=0; i<$scope.payments.length; i++) {
-          var obj = {
-            id: $scope.payments[i].id,
-            isChecked: false
-          };
-          // var obj= {
-          //   $scope.payments[i].id:  false
-          // }
-          $scope.idMap.push(obj);
+          var newObj = {};
+          newObj[$scope.payments[i].id] = false;
+          $scope.idDictionary.push(newObj);
         }
-        console.log("idMap: ", $scope.idMap);
+        console.log("idDictionary: ", $scope.idDictionary);
         console.log("resp: ", $scope.payments);
       });
 
