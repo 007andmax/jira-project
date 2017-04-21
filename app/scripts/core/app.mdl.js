@@ -145,9 +145,9 @@
           controller: 'quicktech.core.receivable.receivableCtrl'
         }))
         .state('payments', waitForServices({
-          url: '/accounting/payments',
+          url: '/accounting/payments/:mode',
           templateUrl: '/html/scripts/core/billable/payments/payments.tpl.html',
-          controller: 'quicktech.core.billable.paymentsCtrl'
+          controller: 'quicktech.core.payments.paymentsCtrl'
         }))
         .state('receipt-archive', waitForServices({
           url: '/accounting/receipt-archive/:mode',
