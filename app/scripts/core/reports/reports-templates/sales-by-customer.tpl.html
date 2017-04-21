@@ -20,9 +20,9 @@
         <li class="top-product-list-ticket top-product-list-ticket-detail-customer clearfix">
           <div class="col-md-2"><strong>Date</strong></div>
           <div class="col-md-2"><strong>Invoice</strong></div>
-          <div class="col-md-3" style="width: 28%;" ><strong>Product/Service</strong></div>
+          <div class="col-md-3" ><strong>Product/Service</strong></div>
           <div class="col-md-2"><strong>Serial #</strong></div>
-          <div class="col-md-2" style="width: 6%;" ><strong>Qty</strong></div>
+          <div class="col-md-2" ><strong>Qty</strong></div>
           <div class="col-md-2"><strong>Sale price</strong></div>
           <div class="col-md-2"><strong>Discount</strong></div>
           <div class="col-md-2"><strong>Total</strong></div>
@@ -32,9 +32,9 @@
 
           <div class="col-md-2" style="white-space: nowrap">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
           <div class="col-md-2">#{{ line.invoiceNumber }}</div>
-          <div class="col-md-3" style="width: 28%;" >{{ line.itemName }}</div>
+          <div class="col-md-3">{{ line.itemName }}</div>
           <div class="col-md-2">{{ line.serial }}</div>
-          <div class="col-md-2" style="width: 6%;" >{{ line.quantity }}</div>
+          <div class="col-md-2">{{ line.quantity }}</div>
           <div class="col-md-2">{{ line.sale | currency: '$': 2 }}</div>
           <div class="col-md-2">{{ line.discountAmount || 0 }}%</div>
           <div class="col-md-2">{{ line.totalSum | currency: '$': 2 }}</div>

@@ -444,6 +444,10 @@
 .product-list-ticket .col-md-3 {
   width: 24%;
 }
+.content-product-list-ticket-detail-customer .col-md-3,
+.top-product-list-ticket-detail-customer .col-md-3{
+  width: 23%;
+}
 
 .product-list-ticket-deposit .col-md-3 {
   width: 34%;
