@@ -12,6 +12,7 @@
       <h3><span>{{ parseDate(reportByProducts.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportByProducts.products">
       <ul class="customer-det-col">
         <li class="top-product-list-ticket clearfix">
@@ -33,8 +34,8 @@
           <div class="col-md-1">{{product.cost | currency: '$': 2 }}</div>
           <div class="col-md-1">{{product.sale | currency: '$': 2 }}</div>
           <!--<div class="col-md-1">{{product.count}}</div>-->
-          <div class="col-md-1">
-            <span ng-repeat="taxe in product.taxes">{{taxe}} </span>
+          <div class="col-md-1" >
+            <span ng-repeat="taxe in product.taxes" on-finish-render="hideLoadingIndicator()">{{taxe}} </span>
           </div>
         </li>
       </ul>

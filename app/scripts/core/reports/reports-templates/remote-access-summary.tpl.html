@@ -13,6 +13,7 @@
       <h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportRemoteAccess.lines">
       <ul class="con-col">
         <li class="top-product-list-ticket clearfix">
@@ -32,7 +33,7 @@
           <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
           <div class="col-md-2 ellipsis">Viewer IP</div>
           <div class="col-md-1">{{ line.startTime }}</div>
-          <div class="col-md-1">{{line.duration}}</div>
+          <div class="col-md-1" on-finish-render="hideLoadingIndicator()">{{line.duration}}</div>
         </li>
       </ul>
     </div>

@@ -15,6 +15,7 @@
       <h3><span>{{ parseDate(reportByCustomers.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByCustomers.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
       <ul>
         <li class="top-product-list-ticket top-product-list-ticket-detail-customer clearfix">
@@ -37,7 +38,7 @@
           <div class="col-md-2">{{ line.quantity }}</div>
           <div class="col-md-2">{{ line.sale | currency: '$': 2 }}</div>
           <div class="col-md-2">{{ line.discountAmount || 0 }}%</div>
-          <div class="col-md-2">{{ line.totalSum | currency: '$': 2 }}</div>
+          <div class="col-md-2" on-finish-render="hideLoadingIndicator()">{{ line.totalSum | currency: '$': 2 }}</div>
         </li>
       </ul>
       <div class="product-report-detail-customer clearfix" ng-if="reportByCustomers && reportByCustomers.type">
@@ -59,7 +60,7 @@
           <div class="col-md-3">{{ line.companyName }}</div>
           <div class="col-md-2">{{ line.productsSum | currency: '$': 2  }}</div>
           <div class="col-md-2">{{ line.servicesSum | currency: '$': 2  }}</div>
-          <div class="col-md-2">{{ line.totalSum | currency: '$': 2  }}</div>
+          <div class="col-md-2" on-finish-render="hideLoadingIndicator()">{{ line.totalSum | currency: '$': 2  }}</div>
         </li>
       </ul>
       <div class="product-report-total-sales clearfix">
