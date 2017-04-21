@@ -1,33 +1,34 @@
 'use strict';
 
-(function (window, $, undefined){
+/*Payments*/
+
+(function (window, $, undefined) {
 
   var services = angular.module('main.services');
 
-  services.factory('PaymentsService', ['http', '$rootScope', 'RealTimeService', 'Utils',
-  function($http, $rootScope, RealTimeService, Utils){
+  services.factory('PaymentsService', ['$http', 'RealTimeService', 'Utils',
+    function ($http, RealTimeService, Utils) {
 
-    var urlForPayments = '/payments';
+      var urlForPayments = '/payments';
 
-    function getPaymentr(url, callback) {
-      var future = $http({
-        url: url,
-        method: 'GET'
-      });
+      function getPaymentr(url, callback) {
+        var future = $http({
+          url: url,
+          method: 'GET'
+        });
 
-      Utils.handleCallback(future, callback)
-    }
+        Utils.handleCallback(future, callback)
+      }
 
-    function getPaymentsData(callback) {
-       return getPaymentr(urlForPayments, callback);
-    }
+      function getPaymentsData(callback) {
+        return getPaymentr(urlForPayments, callback);
+      }
 
-    return {
-      getPaymentsData: getPaymentsData
-    }
+      return {
+        getPaymentsData: getPaymentsData
+      }
 
 
+    }])
 
-  }])
-
-})();
+})(window);
