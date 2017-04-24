@@ -19,13 +19,13 @@
           </label>
           {{payment.createdAt}}</div>
         <div class="col-md-2">{{payment.clientCompanyName}}</div>
-        <div class="col-md-2 ellipsis">{{payment.invoiceNumbers}}</div>
+        <div class="col-md-2 ellipsis"><div ng-repeat="invoice in payment.invoiceNumbers">{{invoice}} </div></div>
         <div class="col-md-2">{{payment.note}}</div>
         <div class="col-md-1">{{payment.paymentMethod}}</div>
         <div class="col-md-1"> -status-</div>
         <div class="col-md-1">{{payment.totalSum}}</div>
       </li>
     </ul>
-    <button>Create Deposit Slip</button>
+    <button ng-click="openDepositModal()">Create Deposit Slip</button>
   </div>
 </div>

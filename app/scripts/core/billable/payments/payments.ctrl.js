@@ -2,7 +2,7 @@
 
 (function () {
   angular.module('quicktech.core.billable').controller('quicktech.core.payments.paymentsCtrl',
-    ['$scope', '$stateParams', '$http', 'PaymentsService', function ($scope, $stateParams, $http, PaymentsService) {
+    ['$scope', '$stateParams', '$http', 'PaymentsService', '$uibModal', function ($scope, $stateParams, $http, PaymentsService, $uibModal) {
 
       var availableMods = ['payments-list', 'deposit-slips'];
 
@@ -40,16 +40,46 @@
       // };
 
       PaymentsService.getPaymentsData(function(resp) {
-
         $scope.payments = resp;
-        for(var i=0; i<$scope.payments.length; i++) {
+        createDictionary($scope.payments);
+        console.log("resp: ", $scope.payments);
+      });
+
+      function createDictionary(data) {
+        for(var i=0; i<data.length; i++) {
           var newObj = {};
-          newObj[$scope.payments[i].id] = false;
+          newObj[data[i].id] = false;
           $scope.idDictionary.push(newObj);
         }
         console.log("idDictionary: ", $scope.idDictionary);
-        console.log("resp: ", $scope.payments);
-      });
+      }
+
+      $scope.clearDictionary = function() {
+        for(var id in $scope.idDictionary) {
+          id = false;
+        }
+      };
+
+      $scope.depositModal;
+      $scope.openDepositModal = function() {
+        $scope.depositModal = $uibModal.open({
+          templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
+          animation: true,
+          backdrop : true,
+          size: 'sm'
+        })
+      };
+
+      $scope.closeModal = function() {
+        $scope.depositModal.close()
+      };
+
+
+      $scope.createDepositSlip = function(data) {
+
+      }
+
+
 
 
 
