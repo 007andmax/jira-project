@@ -155,7 +155,7 @@
           $scope.remoteAccess = function (connectionType) {
             DevicesService.createRemoteSession($scope.ticketAgent.id, $scope.company.id, connectionType, function (resp) {
               RemoteAccessService.connectRemoteAccess(resp.sessionId, connectionType);
-            });
+            }, $scope.ticketDetails.id);
           };
 
           $scope.toggleTicketsList = function () {

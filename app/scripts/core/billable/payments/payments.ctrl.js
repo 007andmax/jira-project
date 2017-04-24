@@ -65,8 +65,9 @@
         $scope.depositModal = $uibModal.open({
           templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
           animation: true,
-          backdrop : true,
-          size: 'sm'
+          backdrop : false,
+          size: 'sm',
+          controller: 'modalCtrl'
         })
       };
 
@@ -120,5 +121,10 @@
       // }
 
 
+    }])
+    .controller("modalCtrl", ['$scope', '$uibModalInstance', function($scope, $uibModalInstance){
+      $scope.closeModal = function(){
+        $uibModalInstance.close()
+      }
     }])
 })();
