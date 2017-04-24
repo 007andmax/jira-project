@@ -20,7 +20,8 @@
         'Accounting': ['VIEW_ACCOUNTING', 'CREATE_INVOICE', 'MANAGE_PRODUCTS', 'VIEW_PRODUCT_COST', 'MANAGE_SERVICES', 'VIEW_TICKET_AND_INVOICE'],
         'Devices': ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS'],
         'Passwords': ['VIEW_PASSWORD_SECTION', 'VIEW_PASSWORD', 'CREATE_PASSWORD', 'EDIT_PASSWORD', 'DELETE_PASSWORD'],
-        'Quick Support': ['ALLOW_QUICK_CONNECT']
+        'Quick Support': ['ALLOW_QUICK_CONNECT'],
+        'Reports': ['Sales', 'Performance', 'Remote Access', 'Financial', 'Taxes']
       };
 
       CompaniesService.getPermissions(function (resp) {
