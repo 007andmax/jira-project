@@ -21,7 +21,7 @@
         'Devices': ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS'],
         'Passwords': ['VIEW_PASSWORD_SECTION', 'VIEW_PASSWORD', 'CREATE_PASSWORD', 'EDIT_PASSWORD', 'DELETE_PASSWORD'],
         'Quick Support': ['ALLOW_QUICK_CONNECT'],
-        'Reports': ['Sales', 'Performance', 'Remote Access', 'Financial', 'Taxes']
+        'Reports': ['VIEW_SALES_REPORT', 'VIEW_FINANCIAL_REPORT', 'VIEW_PERFORMANCE_REPORT', 'VIEW_REMOTE_ACCESS_REPORT', 'VIEW_TAXES_REPORT']
       };
 
       CompaniesService.getPermissions(function (resp) {

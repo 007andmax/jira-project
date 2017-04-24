@@ -3,9 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', function ($scope, ReportsService, $timeout) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', function ($scope, ReportsService, $timeout, PermissionsService) {
 
       $scope.parseDate = Date.parse.bind(Date);
+
+      $scope.PermissionsService = PermissionsService;
 
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
