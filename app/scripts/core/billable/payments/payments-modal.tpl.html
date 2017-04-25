@@ -2,7 +2,19 @@
   <p>Deposit slip description</p>
   <i class="icn-sm icn-remove-old" ng-click="closeModal()"></i>
   <ng-form name="depositModalForm">
-    <textarea ng-model="depositNote">Note:</textarea>
-    <button ng-click="createDepositSlipNote()">Save Deposit Slip</button>
+    <div class="form-group" ng-class="{'has-error': depositModalForm.$dirty && depositModalForm.$invalid}">
+
+      <label class="control-label" style="color: white;"
+             ng-class="{'hide': depositModalForm.$dirty && depositModalForm.$invalid}">
+        Note
+      </label>
+
+      <div ng-messages="depositModalForm.depositNote.$error" ng-show="depositModalForm.$dirty && depositModalForm.$invalid">
+        <div class="control-label" ng-message="maxlength" style="color: white;">Note is too large.</div>
+      </div>
+
+      <textarea name="depositNote" ng-model="depositNote" ng-maxlength="500">Note:</textarea>
+    </div>
+    <button ng-click="createDepositSlipNote()" ng-disabled="disableButton || depositModalForm.$invalid">Save Deposit Slip</button>
   </ng-form>
 </div>
