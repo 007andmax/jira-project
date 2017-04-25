@@ -11,6 +11,8 @@
       $scope.orderType = 'createdAt';
       $scope.idDictionary = [];
 
+      $scope.depositSlips = [];
+
       $scope.changeOrder = function (type) {
         if ($scope.orderType === type) {
           $scope.orderType = !$scope.orderType
@@ -45,6 +47,11 @@
         console.log("resp: ", $scope.payments);
       });
 
+      PaymentsService.getDepositSlipsData(function(resp) {
+        $scope.depositSlips = resp;
+        console.log("deposit slips: ", $scope.depositSlips);
+      });
+
       function createDictionary(data) {
         for(var i=0; i<data.length; i++) {
           var newObj = {};
@@ -76,7 +83,7 @@
       };
 
 
-      $scope.createDepositSlip = function(data) {
+      $scope.createDepositSlipNote = function(form) {
 
       }
 
