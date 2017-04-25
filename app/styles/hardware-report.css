@@ -883,7 +883,7 @@ button {
 .top-product-list-ticket-tax-summary .col-md-3,
 .content-product-list-ticket-tax-summary .col-md-3,
 .product-report-taxes-summary .col-md-3 {
-  width: 69%;
+  width: 70%;
 }
 
 .top-product-list-ticket-detail-customer .col-md-2,
@@ -937,9 +937,7 @@ button {
 .detail-tax .col-md-2{
   width: 34%;
 }
-.top-product-list-ticket-tax-summary .col-md-3,
-.content-product-list-ticket-tax-summary .col-md-3,
-.product-report-taxes-summary .col-md-3{
+.top-product-list-ticket-tax-summary .col-md-3{
   width: 70%;
 }
 .top-product-list-ticket-tax-summary .col-md-2,
