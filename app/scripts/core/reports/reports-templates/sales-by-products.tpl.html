@@ -41,7 +41,7 @@
       </ul>
     </div>
     <div class="product-report-total-sales clearfix" ng-if="reportByProducts.products">
-      <p><strong>Total Sales: <span>{{reportByProducts.totalSum}}</span></strong></p>
+      <p><strong>Total Sales: <span>{{reportByProducts.totalSum | currency: '$': 2}}</span></strong></p>
     </div>
   </div>
 </div>
