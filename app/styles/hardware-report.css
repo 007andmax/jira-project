@@ -519,12 +519,6 @@ text-align: center;
   top: 15px;
   left: 20px;
 }
-.tech-button .dropdown-menu div{
-  top: 618px!important;
-}
-.tax-button .dropdown-menu div{
-  top: 641px!important;
-}
 .radio-buttons-product-report .radio {
   width: 18px;
   height: 16px;
@@ -885,5 +879,31 @@ button{
   float: right;
   width: 180px;
   font-size: 18px;
+}
+.detail-tax .col-md-1{
+  width: 10%;
+}
+.detail-tax .col-md-2{
+  width: 40%;
+}
+.top-product-list-ticket-tax-summary .col-md-3,
+.content-product-list-ticket-tax-summary .col-md-3,
+.product-report-taxes-summary .col-md-3{
+  width: 70%;
+}
+.top-product-list-ticket-tax-summary .col-md-2,
+.content-product-list-ticket-tax-summary .col-md-2,
+.product-report-taxes-summary .col-md-2{
+  width: 15%;
+}
 
+@media screen and (max-width: 1600px){
+  .product-report-btn.dropdown-email .dropdown-menu{
+    left: -10px;
+  }
+}
+@media screen and (max-width: 1366px) {
+  .product-report-btn.dropdown-email .dropdown-menu{
+    left: -170px;
+  }
 }
