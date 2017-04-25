@@ -2,14 +2,16 @@
 
 (function () {
   angular.module('quicktech.core.billable').controller('quicktech.core.payments.paymentsCtrl',
-    ['$scope', '$stateParams', '$http', 'PaymentsService', '$uibModal', function ($scope, $stateParams, $http, PaymentsService, $uibModal) {
+    ['$scope', '$rootScope', '$stateParams', '$http', 'PaymentsService', '$uibModal', function ($scope, $rootScope, $stateParams, $http, PaymentsService, $uibModal) {
 
       var availableMods = ['payments-list', 'deposit-slips'];
+
+      $scope.parseDate = Date.parse.bind(Date);
 
       $scope.mode = availableMods[0];
       $scope.payments = [];
       $scope.orderType = 'createdAt';
-      $scope.idDictionary = [];
+      $scope.idDictionary = {};
 
       $scope.depositSlips = [];
 
@@ -37,14 +39,10 @@
         }
       });
 
-      // $scope.showInfo = function(t) {
-      //   console.log("CHECKED: ", t);
-      // };
-
       PaymentsService.getPaymentsData(function(resp) {
         $scope.payments = resp;
-        createDictionary($scope.payments);
-        console.log("resp: ", $scope.payments);
+        //createDictionary($scope.payments);
+        console.log("payments list: ", $scope.payments);
       });
 
       PaymentsService.getDepositSlipsData(function(resp) {
@@ -52,20 +50,9 @@
         console.log("deposit slips: ", $scope.depositSlips);
       });
 
-      function createDictionary(data) {
-        for(var i=0; i<data.length; i++) {
-          var newObj = {};
-          newObj[data[i].id] = false;
-          $scope.idDictionary.push(newObj);
-        }
-        console.log("idDictionary: ", $scope.idDictionary);
+      function clearDictionary() {
+        $scope.idDictionary = {};
       }
-
-      $scope.clearDictionary = function() {
-        for(var id in $scope.idDictionary) {
-          id = false;
-        }
-      };
 
       $scope.depositModal;
       $scope.openDepositModal = function() {
@@ -78,60 +65,49 @@
         })
       };
 
-      $scope.closeModal = function() {
-        $scope.depositModal.close()
-      };
-
-
-      $scope.createDepositSlipNote = function(form) {
-
+      function checkPaymentsType() {
+        var type = null;
+        var keys = Object.keys($scope.idDictionary);
+        for( var key in keys) {
+          if(type === null) {
+            type = $scope.payments[key].paymentMethod;
+          } else if(type !== $scope.payments[key].paymentMethod) {
+            type = 'MIX';
+          }
+        }
+        return type;
       }
 
 
-
-
-
-
-      // $http({
-      //   url: '/payments',
-      //   method: 'GET'
-      // }).then(function (resp) {
-      //   //$scope.payments = resp.data;
-      //   // for( var object in resp.data) {
-      //   //   for(var k in object) {
-      //   //     var dublicateObject = {};
-      //   //     dublicateObject[k] = object[k];
-      //   //     dublicateObject.checked = false;
-      //   //     $scope.payments.push(dublicateObject);
-      //   //   }
-      //   // }
-      //   var data = resp.data;
-      //   for (var payment in data) {
-      //
-      //     var newObject = angular.copy(payment);
-      //     newObject.isChecked = false;
-      //     console.log("newObject: ", newObject);
-      //     $scope.payments.push(newObject);
-      //
-      //   }
-      //   console.log($scope.payments)
-      // });
-
-      // map - id - ischecked
-
-
-      //
-      // $scope.paymentsFOrSlipList = [];
-      // $scope.addToSlipList = function (payment) {
-      //   console.log("payment: ", payment);
-      //   $scope.paymentsFOrSlipList.push(payment);
-      // }
-
-
+      $rootScope.$on('depositSlipNote', function(event, data){
+        var note = data;
+        var keysToSend = Object.keys($scope.idDictionary);
+        console.log("scope on: ", note);
+        //checkPaymentsType();
+        var dataToSend = {
+          note: note,
+          type: checkPaymentsType(),
+          paymentIds: keysToSend
+        };
+        PaymentsService.postNewDepositSlip(dataToSend, function(resp) {
+          console.log("resp for post ", resp);
+        });
+        clearDictionary();
+      })
     }])
-    .controller("modalCtrl", ['$scope', '$uibModalInstance', function($scope, $uibModalInstance){
+
+    .controller("modalCtrl", ['$scope', '$rootScope', '$uibModalInstance', function($scope, $rootScope, $uibModalInstance){
+
       $scope.closeModal = function(){
         $uibModalInstance.close()
-      }
+      };
+
+      $scope.createDepositSlipNote = function() {
+        console.log("note: ", $scope.depositNote);
+        var note = $scope.depositNote;
+        $rootScope.$broadcast('depositSlipNote', note);
+        $uibModalInstance.close();
+      };
+
     }])
 })();

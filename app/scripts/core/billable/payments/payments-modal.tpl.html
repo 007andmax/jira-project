@@ -1,6 +1,8 @@
 <div class="deposit-slip-modal clearfix">
   <p>Deposit slip description</p>
   <i class="icn-sm icn-remove-old" ng-click="closeModal()"></i>
-  <textarea>Note:</textarea>
-  <button>Save Deposit Slip</button>
+  <ng-form name="depositModalForm">
+    <textarea ng-model="depositNote">Note:</textarea>
+    <button ng-click="createDepositSlipNote()">Save Deposit Slip</button>
+  </ng-form>
 </div>
