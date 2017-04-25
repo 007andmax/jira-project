@@ -13,6 +13,7 @@
       var urlForGetDepositSlips = '/payments/deposits';
       var urlForPostNewDepositSlip = ' /payments/deposits';
 
+
       function getData(url, callback) {
         var getFuture = $http({
           url: url,
@@ -31,18 +32,47 @@
         Utils.handleCallback(postFuture, callback)
       }
 
-      function getPaymentsData(callback) {
-        return getData(urlForGetPayments, callback);
+      function getPaymentsData(scope, callback) {
+        var payments = [];
+        getData(urlForGetPayments, function(resp) {
+          payments = resp;
+          callback && callback(payments);
+        });
+
+        RealTimeService.subscribe('/payments', scope,  function(newChange) {
+          if(newChange.action === 'PAYMENT_CREATED') {
+            payments.push(newChange.data);
+          } else if ( newChange.action === 'PAYMENTS_DELETED') {
+            for (var i = 0; i < newChange.data.length; i++) {
+              var paymentId = newChange.data[i];
+              Utils.deleteById(payments, paymentId);
+            }
+          }
+        });
       }
 
-      function getDepositSlipsData(callback) {
-        return getData(urlForGetDepositSlips, callback);
+      function getDepositSlipsData(scope, callback) {
+        var depositSlips = [];
+        getData(urlForGetDepositSlips, function(resp) {
+          depositSlips = resp;
+          callback && callback(depositSlips);
+        });
+
+        RealTimeService.subscribe('/deposits', scope, function(newChange) {
+          if(newChange.action === 'DEPOSIT_CREATED') {
+            depositSlips.push(newChange.data);
+          } else if ( newChange.action === 'DEPOSIT_DELETED') {
+            for (var i = 0; i < newChange.data.length; i++) {
+              var depositSlipId = newChange.data[i];
+              Utils.deleteById(depositSlips, depositSlipId);
+            }
+          }
+        })
       }
 
       function postNewDepositSlip(data, callback) {
         return postData(urlForPostNewDepositSlip, data, callback)
       }
-
 
 
       return {

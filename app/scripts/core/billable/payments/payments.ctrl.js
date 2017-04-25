@@ -17,7 +17,7 @@
 
       $scope.changeOrder = function (type) {
         if ($scope.orderType === type) {
-          $scope.orderType = !$scope.orderType
+          $scope.orderType = $scope.orderType[0] === '-' ? $scope.orderType.slice(1) : '-' + $scope.orderType;
         } else {
           $scope.orderType = type;
         }
@@ -39,74 +39,46 @@
         }
       });
 
-      PaymentsService.getPaymentsData(function(resp) {
-        $scope.payments = resp;
-        //createDictionary($scope.payments);
-        console.log("payments list: ", $scope.payments);
-      });
-
-      PaymentsService.getDepositSlipsData(function(resp) {
-        $scope.depositSlips = resp;
-        console.log("deposit slips: ", $scope.depositSlips);
-      });
-
-      function clearDictionary() {
-        $scope.idDictionary = {};
+      if ($scope.mode === 'payments-list') {
+        PaymentsService.getPaymentsData($scope, function (resp) {
+          $scope.payments = resp;
+        });
+      } else if ($scope.mode === 'deposit-slips') {
+        PaymentsService.getDepositSlipsData($scope, function (resp) {
+          $scope.depositSlips = resp;
+        });
       }
 
-      $scope.depositModal;
-      $scope.openDepositModal = function() {
-        $scope.depositModal = $uibModal.open({
+
+      $scope.openDepositModal = function () {
+        $uibModal.open({
           templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
           animation: true,
-          backdrop : false,
+          backdrop: false,
           size: 'sm',
-          controller: 'modalCtrl'
-        })
-      };
-
-      function checkPaymentsType() {
-        var type = null;
-        var keys = Object.keys($scope.idDictionary);
-        for( var key in keys) {
-          if(type === null) {
-            type = $scope.payments[key].paymentMethod;
-          } else if(type !== $scope.payments[key].paymentMethod) {
-            type = 'MIX';
+          controller: 'modalCtrl',
+          resolve: {
+            paymentIds: function () {
+              return Object.keys($scope.idDictionary);
+            }
           }
-        }
-        return type;
-      }
-
-
-      $rootScope.$on('depositSlipNote', function(event, data){
-        var note = data;
-        var keysToSend = Object.keys($scope.idDictionary);
-        console.log("scope on: ", note);
-        //checkPaymentsType();
-        var dataToSend = {
-          note: note,
-          type: checkPaymentsType(),
-          paymentIds: keysToSend
-        };
-        PaymentsService.postNewDepositSlip(dataToSend, function(resp) {
-          console.log("resp for post ", resp);
         });
-        clearDictionary();
-      })
-    }])
+      };
+    }]).controller("modalCtrl", ['$scope', 'PaymentsService', '$uibModalInstance', 'paymentIds',
+    function ($scope, PaymentsService, $uibModalInstance, paymentIds) {
 
-    .controller("modalCtrl", ['$scope', '$rootScope', '$uibModalInstance', function($scope, $rootScope, $uibModalInstance){
-
-      $scope.closeModal = function(){
-        $uibModalInstance.close()
+      $scope.closeModal = function () {
+        $uibModalInstance.close();
       };
 
-      $scope.createDepositSlipNote = function() {
-        console.log("note: ", $scope.depositNote);
-        var note = $scope.depositNote;
-        $rootScope.$broadcast('depositSlipNote', note);
-        $uibModalInstance.close();
+      $scope.createDepositSlipNote = function () {
+        $scope.disableButton = true;
+        PaymentsService.postNewDepositSlip({
+          paymentIds: paymentIds,
+          note: $scope.depositNote
+        }, function () {
+          $uibModalInstance.close();
+        });
       };
 
     }])
