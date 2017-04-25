@@ -15,14 +15,15 @@
       <h3><span>{{ parseDate(reportByCustomers.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByCustomers.endDate) | date: 'dd MMM yyyy' }}</span>
       </h3>
     </div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
       <ul>
         <li class="top-product-list-ticket top-product-list-ticket-detail-customer clearfix">
           <div class="col-md-2"><strong>Date</strong></div>
           <div class="col-md-2"><strong>Invoice</strong></div>
-          <div class="col-md-3" style="width: 28%;" ><strong>Product/Service</strong></div>
+          <div class="col-md-3" ><strong>Product/Service</strong></div>
           <div class="col-md-2"><strong>Serial #</strong></div>
-          <div class="col-md-2" style="width: 6%;" ><strong>Qty</strong></div>
+          <div class="col-md-2" ><strong>Qty</strong></div>
           <div class="col-md-2"><strong>Sale price</strong></div>
           <div class="col-md-2"><strong>Discount</strong></div>
           <div class="col-md-2"><strong>Total</strong></div>
@@ -30,14 +31,14 @@
         <li class="content-product-list-ticket content-product-list-ticket-detail-customer clearfix"
             ng-repeat="line in reportByCustomers.lines" on-finish-render="buildPdf()">
 
-          <div class="col-md-2">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-2" style="white-space: nowrap">{{ parseDate(line.date) | date: 'dd.MM.yy' }}</div>
           <div class="col-md-2">#{{ line.invoiceNumber }}</div>
-          <div class="col-md-3" style="width: 28%;" >{{ line.itemName }}</div>
+          <div class="col-md-3">{{ line.itemName }}</div>
           <div class="col-md-2">{{ line.serial }}</div>
-          <div class="col-md-2" style="width: 6%;" >{{ line.quantity }}</div>
+          <div class="col-md-2">{{ line.quantity }}</div>
           <div class="col-md-2">{{ line.sale | currency: '$': 2 }}</div>
           <div class="col-md-2">{{ line.discountAmount || 0 }}%</div>
-          <div class="col-md-2">{{ line.totalSum | currency: '$': 2 }}</div>
+          <div class="col-md-2" on-finish-render="hideLoadingIndicator()">{{ line.totalSum | currency: '$': 2 }}</div>
         </li>
       </ul>
       <div class="product-report-detail-customer clearfix" ng-if="reportByCustomers && reportByCustomers.type">
@@ -59,7 +60,7 @@
           <div class="col-md-3">{{ line.companyName }}</div>
           <div class="col-md-2">{{ line.productsSum | currency: '$': 2  }}</div>
           <div class="col-md-2">{{ line.servicesSum | currency: '$': 2  }}</div>
-          <div class="col-md-2">{{ line.totalSum | currency: '$': 2  }}</div>
+          <div class="col-md-2" on-finish-render="hideLoadingIndicator()">{{ line.totalSum | currency: '$': 2  }}</div>
         </li>
       </ul>
       <div class="product-report-total-sales clearfix">

@@ -11,16 +11,17 @@
 
     </report-menu>
   </div>
-  <div class="product-list-ticket" style="height: 100%">
+  <div class="product-list-ticket acc-col" style="height: 100%">
     <div class="header-product-list-ticket" ng-if="reportAccountsReceivable.lines">
       <!--HEADER-->
       <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
       <h3 ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></h3>
       <h3><span>{{ parseDate(reportAccountsReceivable.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportAccountsReceivable.endDate) | date: 'dd MMM yyyy' }}</span></h3>
     </div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportAccountsReceivable.lines">
       <!--REPORT-->
-      <ul>
+      <ul class="acc-col">
         <li class="top-product-list-ticket clearfix">
           <div class="col-md-3"><strong>Company Name</strong></div>
           <div class="col-md-2"><strong>Current</strong></div>
@@ -37,11 +38,11 @@
           <div class="col-md-2"><div ng-show="line.month2Sum > 0">{{line.month2Sum | currency: '$': 2 }}</div></div>
           <div class="col-md-1"><div ng-show="line.month3Sum > 0">{{line.month3Sum | currency: '$': 2 }}</div></div>
           <div class="col-md-1"><div ng-show="line.olderSum > 0">{{line.olderSum | currency: '$': 2 }}</div></div>
-          <div class="col-md-1"><div ng-show="line.totalSum > 0">{{line.totalSum | currency: '$': 2 }}</div></div>
+          <div class="col-md-1" on-finish-render="hideLoadingIndicator()"><div ng-show="line.totalSum > 0">{{line.totalSum | currency: '$': 2 }}</div></div>
         </li>
       </ul>
     </div>
-    <div class="product-report-total-sales clearfix" ng-if="reportAccountsReceivable.lines">
+    <div class="product-report-total-sales acc-col clearfix" ng-if="reportAccountsReceivable.lines">
       <!--SUMMARY-->
       <div class="col-md-3"><strong>Total</strong></div>
       <div class="col-md-2"><strong>{{reportAccountsReceivable.totalCurrenSum | currency: '$': 2 }}</strong></div>

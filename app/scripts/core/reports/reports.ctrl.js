@@ -3,9 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', function ($scope, ReportsService, $timeout) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', function ($scope, ReportsService, $timeout, PermissionsService) {
 
       $scope.parseDate = Date.parse.bind(Date);
+
+      $scope.PermissionsService = PermissionsService;
 
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
@@ -15,6 +17,8 @@
       $scope.techReportTicketCreated = {};
       $scope.techReportProductSales = {};
       $scope.reportAccountsReceivable = {};
+
+      $scope.loadingInProgress = false;
 
       $scope.taxesLabels = [];
 
@@ -32,7 +36,7 @@
       function getTaxesLabels() {
         if ($scope.reportByTaxes.type === "DETAILED") {
           var labels = [];
-          if($scope.reportByTaxes.reducedTaxes) {
+          if ($scope.reportByTaxes.reducedTaxes) {
             Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function (key) {
               labels.push(key);
             });
@@ -41,38 +45,60 @@
         }
       }
 
+      $scope.hideLoadingIndicator = function () {
+        $scope.loadingInProgress = false;
+      };
+
       function getReportByTaxes(data) {
+        $scope.loadingInProgress = true;
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
           getTaxesLabels();
+          if (resp.lines === null || !resp.lines.length) {
+            $scope.loadingInProgress = false;
+          }
         });
       }
 
       function getReportByCustomers(data) {
+        $scope.loadingInProgress = true;
         ReportsService.getReportByCustomers(data, function (resp) {
           $scope.reportByCustomers = resp;
+          if (resp.lines === null || !resp.lines.length) {
+            $scope.loadingInProgress = false;
+          }
         });
       }
 
       function getReportByProducts(data) {
+        $scope.loadingInProgress = true;
         ReportsService.getReportByProducts(data, function (resp) {
           $scope.reportByProducts = resp;
+          if (resp.products === null || !resp.products.length) {
+            $scope.loadingInProgress = false;
+          }
         });
       }
 
       function getReportByTechSold(data) {
+        $scope.loadingInProgress = true;
         ReportsService.getReportByTechSold(data, function (resp) {
           $scope.reportByTechSold = resp;
         });
       }
 
       function getReportRemoteAccess(data) {
+        $scope.loadingInProgress = true;
         ReportsService.getReportRemoteAccess(data, function (resp) {
           $scope.reportRemoteAccess = resp;
+          if (resp.lines === null || !resp.lines.length) {
+            $scope.loadingInProgress = false;
+          }
         });
       }
 
       function getTechReportTickedCreated(data) {
+        $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
         ReportsService.getTechReportTicketCreated(data, function (resp) {
           $scope.techReportTicketCreated = resp;
@@ -82,6 +108,7 @@
       }
 
       function getTechReportProductSales(data) {
+        $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
         ReportsService.getTechReportProductSales(data, function (resp) {
           $scope.techReportProductSales = resp;
@@ -91,8 +118,12 @@
       }
 
       function getReportAccountsReceivable(data) {
+        $scope.loadingInProgress = true;
         ReportsService.getReportAccountsReceivable(data, function (resp) {
           $scope.reportAccountsReceivable = resp;
+          if (resp.lines === null) {
+            $scope.loadingInProgress = false;
+          }
         })
       }
 
@@ -145,8 +176,9 @@
       });
 
       var chartHeight = 400;
+
       function chartHeightChange() {
-          chartHeight =  30 * ($scope.data[0].values.length + 5);
+        chartHeight = 30 * ($scope.data[0].values.length + 5);
       }
 
       $scope.options = {
