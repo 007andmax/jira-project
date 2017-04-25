@@ -17,7 +17,7 @@
             <input type="checkbox" ng-model="idDictionary[payment.id]">
             <span class="control-indicator"></span>
           </label>
-          {{payment.createdAt}}</div>
+          {{ parseDate(payment.createdAt) | date: 'dd.MM.yy' }}</div>
         <div class="col-md-2">{{payment.clientCompanyName}}</div>
         <div class="col-md-2 ellipsis"><div ng-repeat="invoice in payment.invoiceNumbers">{{invoice}} </div></div>
         <div class="col-md-2">{{payment.note}}</div>
