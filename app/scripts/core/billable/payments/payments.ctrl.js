@@ -39,15 +39,25 @@
         }
       });
 
-      if ($scope.mode === 'payments-list') {
-        PaymentsService.getPaymentsData($scope, function (resp) {
-          $scope.payments = resp;
-        });
-      } else if ($scope.mode === 'deposit-slips') {
-        PaymentsService.getDepositSlipsData($scope, function (resp) {
-          $scope.depositSlips = resp;
-        });
-      }
+      // if ($scope.mode === 'payments-list') {
+      //   PaymentsService.getPaymentsData($scope, function (resp) {
+      //     $scope.payments = resp;
+      //   });
+      // } else  {
+      //   PaymentsService.getDepositSlipsData($scope, function (resp) {
+      //     $scope.depositSlips = resp;
+      //     console.log("sdfsdfsdfsdfsd");
+      //     console.log(resp);
+      //   });
+      // }
+      PaymentsService.getPaymentsData($scope, function (resp) {
+        $scope.payments = resp;
+      });
+      PaymentsService.getDepositSlipsData($scope, function (resp) {
+        $scope.depositSlips = resp;
+        console.log("sdfsdfsdfsdfsd");
+        console.log(resp);
+      });
 
 
       $scope.openDepositModal = function () {
