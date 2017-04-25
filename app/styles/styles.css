@@ -5032,7 +5032,7 @@ tbody.collapse.in {
   top: -2px;
 }
 
-.dropdown-menu.scrollable {
+.scrollable {
   max-height: 170px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -5053,17 +5053,17 @@ tbody.collapse.in {
 }
 
 /* Scrollbar styling for Chrome, Opera and Safari */
-.dropdown-menu.scrollable::-webkit-scrollbar {
+.scrollable::-webkit-scrollbar {
   width: 11px;
 }
 
-.dropdown-menu.scrollable::-webkit-scrollbar-thumb {
+.scrollable::-webkit-scrollbar-thumb {
   background-color: #d2dae4;
   border: 3px solid #fff;
   border-radius: 10px;
 }
 
-.dropdown-menu.scrollable::-webkit-scrollbar-thumb:hover {
+.scrollable::-webkit-scrollbar-thumb:hover {
   background-color: #b2becd;
 }
 
