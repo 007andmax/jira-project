@@ -157,7 +157,7 @@
             <i class="icn-sm icn-remove-old" ng-click="$ctrl.emailToNotify = ''"></i>
           </div>
         </div>
-        <ul class="scrollable" style="list-style: none;padding: 0;height: 170px;overflow: auto;">
+        <ul class="scrollable">
           <li class="clearfix" ng-if="user.primaryEmail && !user.deletedAt" style="padding: 0"
               ng-repeat="user in (clientUsers.concat($ctrl.tempUsers)) | orderBy: 'firstName'">
             <label class="control checkbox pull-left ng-scope" stop-propagation="click">
@@ -167,7 +167,7 @@
             </label>
           </li>
         </ul>
-        <div style="cursor: default;text-align: center;padding: 10px 0;">
+        <div class="fix-btn-report">
           <button ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)"
                   type="button">
             Send

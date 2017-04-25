@@ -556,6 +556,12 @@
   top: 15px;
   left: 20px;
 }
+.dropdown-email .scrollable{
+  list-style: none;
+  padding: 0;
+  height: 170px;
+  overflow: auto;
+}
 .radio-buttons-product-report .radio {
   width: 18px;
   height: 16px;
@@ -944,6 +950,11 @@ button {
 .content-product-list-ticket-tax-summary .col-md-2,
 .product-report-taxes-summary .col-md-2{
   width: 15%;
+}
+.fix-btn-report{
+  cursor: default;
+  text-align: center;
+  padding: 10px 0;
 }
 
 @media screen and (max-width: 1600px){

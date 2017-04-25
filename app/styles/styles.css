@@ -1016,7 +1016,31 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-
+.receivable-content .product-list-ticket{
+  box-shadow: none;
+  border: none;
+}
+.receivable-content .top-product-list-ticket {
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+.receivable-content .product-list-ticket li.content-product-list-ticket{
+  border-bottom: 1px solid #eee;
+}
+.receivable-content .top-product-list-ticket-deposit [class*="col-md-"]{
+  cursor: pointer;
+}
+.receivable-content .report-title {
+  text-align: center;
+  margin: 0;
+  padding-top: 0;
+}
+.receivable-content .product-list-ticket{
+  padding:0 15px;
+}
+.receivable-content .payment-receive-fixed {
+  height: 58px;
+}
 .billable-content .tabs-container .nav .btn.disabled {
   background-color: #fff;
 }
