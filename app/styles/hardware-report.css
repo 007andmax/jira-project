@@ -340,7 +340,6 @@
 
 .header-product-list-ticket {
   text-align: center;
-  border-bottom: 1px solid #bbb;
   padding: 0;
   width: 100%;
   color: #404b5f;
@@ -419,6 +418,7 @@
 
 .top-product-list-ticket {
   border-bottom: 1px solid #bbb;
+  border-top: 1px solid #bbb;
 }
 
 .product-list-ticket ul {
@@ -522,22 +522,22 @@
   padding: 0;
 }
 
-.product-report-btn.dropdown-email .dropdown-menu li:first-child {
+.product-report-btn.dropdown-email .dropdown-menu .add-gadget {
   padding: 10px 20px;
   position: relative;
 }
 
-.product-report-btn.dropdown-email .dropdown-menu li:first-child input {
+.product-report-btn.dropdown-email .dropdown-menu .add-gadget input {
   padding-right: 60px;
 }
 
-.product-report-btn.dropdown-email .dropdown-menu li:first-child div {
+.product-report-btn.dropdown-email .dropdown-menu .add-gadget div {
   position: absolute;
   top: 17px;
   right: 30px;
 }
 
-.product-report-btn.dropdown-email .dropdown-menu li:first-child div .icn-remove-old {
+.product-report-btn.dropdown-email .dropdown-menu .add-gadget div .icn-remove-old {
   margin-left: 10px;
 }
 
@@ -932,10 +932,10 @@ button {
   font-size: 18px;
 }
 .detail-tax .col-md-1{
-  width: 10%;
+  width: 11%;
 }
 .detail-tax .col-md-2{
-  width: 40%;
+  width: 34%;
 }
 .top-product-list-ticket-tax-summary .col-md-3,
 .content-product-list-ticket-tax-summary .col-md-3,
