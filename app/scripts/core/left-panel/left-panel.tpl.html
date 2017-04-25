@@ -61,7 +61,8 @@
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'reports'}"
            ng-click="onClickReports()"
-           ui-sref="reports">
+           ui-sref="reports"
+           ng-if="showReportsPage()">
         <img class="menu-img" ng-if="openedCategory !== 'reports'"
              src="images/new-icons/report-icon.png">
         <img class="menu-img" ng-if="openedCategory === 'reports'"
@@ -338,7 +339,7 @@
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('payments')}"
-             ng-click="stateGo($event, 'payments')">
+             ng-click="stateGo($event, 'payments', {mode: 'payments-list'})">
           Payments
         </div>
         <div class="center-category__category"

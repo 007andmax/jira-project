@@ -43,6 +43,13 @@
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 
+        $scope.showReportsPage = function() {
+          return PermissionsService.isAllowed('VIEW_SALES_REPORT') ||
+            PermissionsService.isAllowed('VIEW_FINANCIAL_REPORT') ||
+            PermissionsService.isAllowed('VIEW_PERFORMANCE_REPORT') ||
+            PermissionsService.isAllowed('VIEW_REMOTE_ACCESS_REPORT') ||
+            PermissionsService.isAllowed('VIEW_TAXES_REPORT')
+        };
 
         $scope.qSHistory = DevicesService.getOneTimeHistory();
         DevicesService.getDevicesCount($scope, function (resp) {

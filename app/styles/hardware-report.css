@@ -346,7 +346,8 @@
   color: #404b5f;
   position: relative;
 }
-.header-product-list-ticket p{
+
+.header-product-list-ticket p {
   position: absolute;
   right: 100px;
   bottom: 5px;
@@ -356,54 +357,66 @@
   margin: 0;
   padding-bottom: 20px;
 }
-.header-tech-report h3{
+
+.header-tech-report h3 {
   text-align: left;
 }
-.header-tech-report p{
+
+.header-tech-report p {
   display: inline-block;
   font-size: 20px;
   cursor: pointer;
   color: #c5c5c5;
   margin-right: 20px;
 }
-.buttons-right p:last-child{
+
+.buttons-right p:last-child {
   margin-right: 0;
 }
-.header-tech-report p:hover{
+
+.header-tech-report p:hover {
   color: #000;
   border-bottom: 2px solid #0094d0;
 }
-.buttons-left, .buttons-right{
+
+.buttons-left, .buttons-right {
   padding-bottom: 15px;
 }
-.buttons-right p{
+
+.buttons-right p {
   font-size: 16px;
 }
+
 .tech-report-total,
-.tech-report-tickets-total{
+.tech-report-tickets-total {
   float: right;
   text-align: right;
   border-top: 1px solid #bbb;
   width: 100%;
   font-weight: bold;
 }
-.tech-report-tickets-total p{
+
+.tech-report-tickets-total p {
   display: inline-block;
   padding-right: 50px;
   padding-top: 15px;
 }
-.tech-report-tickets-total{
-text-align: center;
+
+.tech-report-tickets-total {
+  text-align: center;
   margin-left: 50px;
 }
-.tech-report-total p:last-child{
+
+.tech-report-total p:last-child {
   font-size: 16px;
   padding-top: 10px;
   font-weight: bold;
 }
-.tech-report-total span{
+
+.tech-report-total span {
   padding-left: 20px;
 }
+
 .top-product-list-ticket {
   border-bottom: 1px solid #bbb;
 }
@@ -422,6 +435,7 @@ text-align: center;
   height: auto;
   word-wrap: break-word;
 }
+
 .product-list-ticket li.remote-desktop-connections [class*=col-md-] {
   word-wrap: normal;
 }
@@ -433,9 +447,15 @@ text-align: center;
 .product-list-ticket .col-md-3 {
   width: 24%;
 }
+.content-product-list-ticket-detail-customer .col-md-3,
+.top-product-list-ticket-detail-customer .col-md-3{
+  width: 23%;
+}
+
 .product-list-ticket-deposit .col-md-3 {
   width: 34%;
 }
+
 .remote-desktop-connections .col-md-3 {
   width: 20%;
 }
@@ -447,11 +467,19 @@ text-align: center;
 .product-list-ticket .col-md-1 {
   width: 10%;
 }
+
 .remote-desktop-connections .col-md-1 {
   width: 11.4%;
 }
-.product-report-total-sales.remote-desktop-connections{
+
+.product-report-total-sales.remote-desktop-connections {
   font-weight: bold;
+}
+.tax-det-col .col-md-2{
+  width: 28%;
+}
+.tax-det-col .col-md-1{
+  width: 12%;
 }
 .product-report-total-sales,
 .product-report-taxes,
@@ -481,41 +509,50 @@ text-align: center;
 .product-report-btn img {
   width: 25px;
 }
+
 .product-report-btn .dropdown-menu {
   min-width: 100px;
 }
+
 .product-report-btn .dropdown-menu li {
   padding: 10px 20px;
 }
-.product-report-btn.dropdown-email .dropdown-menu li{
+
+.product-report-btn.dropdown-email .dropdown-menu li {
   padding: 0;
 }
-.product-report-btn.dropdown-email .dropdown-menu li:first-child{
+
+.product-report-btn.dropdown-email .dropdown-menu li:first-child {
   padding: 10px 20px;
   position: relative;
 }
-.product-report-btn.dropdown-email .dropdown-menu li:first-child input{
+
+.product-report-btn.dropdown-email .dropdown-menu li:first-child input {
   padding-right: 60px;
 }
 
-.product-report-btn.dropdown-email .dropdown-menu li:first-child div{
+.product-report-btn.dropdown-email .dropdown-menu li:first-child div {
   position: absolute;
   top: 17px;
   right: 30px;
 }
-.product-report-btn.dropdown-email .dropdown-menu li:first-child div .icn-remove-old{
+
+.product-report-btn.dropdown-email .dropdown-menu li:first-child div .icn-remove-old {
   margin-left: 10px;
 }
-.product-report-btn.dropdown-email .dropdown-menu{
+
+.product-report-btn.dropdown-email .dropdown-menu {
   min-width: 300px;
   max-width: 455px;
   width: 455px;
 }
-.product-report-btn.dropdown-email .dropdown-menu label{
+
+.product-report-btn.dropdown-email .dropdown-menu label {
   margin: 0;
   padding: 15px 0 15px 50px;
 }
-.product-report-btn.dropdown-email .dropdown-menu label span{
+
+.product-report-btn.dropdown-email .dropdown-menu label span {
   top: 15px;
   left: 20px;
 }
@@ -602,14 +639,15 @@ text-align: center;
 .radio-buttons-product-report-detail-customer .summary-radio-customer {
   width: 170px;
 }
-.product-list-ticket button{
+
+.product-list-ticket button {
   width: 230px;
   float: right;
   margin-top: 20px;
 }
 
 .run-report-content button,
-button{
+button {
   display: inline-block;
   background-color: #F1F5FA;
   border: 1px solid #BEBEBE;
@@ -619,7 +657,8 @@ button{
   font-size: 20px;
   outline: none;
 }
-.run-report-content button{
+
+.run-report-content button {
   margin-bottom: 20px;
   vertical-align: bottom;
 }
@@ -633,20 +672,24 @@ button{
   vertical-align: middle;
 }
 
-.content-product-list-ticket label{
+.content-product-list-ticket label {
   vertical-align: inherit;
 }
-.content-product-list-ticket .checkbox .control-indicator{
+
+.content-product-list-ticket .checkbox .control-indicator {
   top: -2px;
 }
+
 .top-product-list-ticket .col-md-2,
-.top-product-list-ticket .col-md-1{
+.top-product-list-ticket .col-md-1 {
   position: relative;
 }
-.top-product-list-ticket i{
+
+.top-product-list-ticket i {
   position: absolute;
   top: 20px;
 }
+
 .run-report-content .content p,
 .run-report-content .device-report p {
   font-size: 18px;
@@ -679,7 +722,8 @@ button{
   top: 17px;
   cursor: pointer;
 }
-.run-report-content-deposit i{
+
+.run-report-content-deposit i {
   top: 50px;
 }
 
@@ -758,7 +802,8 @@ button{
   position: relative;
   vertical-align: top;
 }
-.run-report-content-device .device-report .icn-sm.icn-caret-gray{
+
+.run-report-content-device .device-report .icn-sm.icn-caret-gray {
   top: 53px;
 }
 
@@ -766,9 +811,11 @@ button{
   margin-right: 20px;
   width: 236px;
 }
-.run-report-content-device .text-error{
-  left: 0!important;
+
+.run-report-content-device .text-error {
+  left: 0 !important;
 }
+
 .summary-radio-device {
   width: 255px;
 }
@@ -844,9 +891,7 @@ button{
   width: 11%;
 }
 
-
-
-.deposit-slip-modal{
+.deposit-slip-modal {
   width: 400px;
   height: 250px;
   padding: 15px;
@@ -855,27 +900,33 @@ button{
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   background-clip: padding-box;
 }
+
 .deposit-slip-modal p,
-.deposit-slip-modal i{
+.deposit-slip-modal i {
   display: inline-block;
 }
-.deposit-slip-modal p{
+
+.deposit-slip-modal p {
   color: #fff;
   padding-bottom: 15px;
 }
-.deposit-slip-modal i{
+
+.deposit-slip-modal i {
   cursor: pointer;
   float: right;
 }
-.deposit-slip-modal .icn-remove-old:hover{
+
+.deposit-slip-modal .icn-remove-old:hover {
   background-position: -716px 0px;
 }
-.deposit-slip-modal textarea{
+
+.deposit-slip-modal textarea {
   width: 100%;
   margin-bottom: 15px;
   height: 105px;
 }
-.deposit-slip-modal button{
+
+.deposit-slip-modal button {
   float: right;
   width: 180px;
   font-size: 18px;
