@@ -1016,31 +1016,39 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-.receivable-content .product-list-ticket{
+
+.receivable-content .product-list-ticket {
   box-shadow: none;
   border: none;
 }
+
 .receivable-content .top-product-list-ticket {
   border-bottom: 1px solid #eee;
   border-top: 1px solid #eee;
 }
-.receivable-content .product-list-ticket li.content-product-list-ticket{
+
+.receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
 }
-.receivable-content .top-product-list-ticket-deposit [class*="col-md-"]{
+
+.receivable-content .top-product-list-ticket-deposit [class*="col-md-"] {
   cursor: pointer;
 }
+
 .receivable-content .report-title {
   text-align: center;
   margin: 0;
   padding-top: 0;
 }
-.receivable-content .product-list-ticket{
-  padding:0 15px;
+
+.receivable-content .product-list-ticket {
+  padding: 0 15px;
 }
+
 .receivable-content .payment-receive-fixed {
   height: 58px;
 }
+
 .billable-content .tabs-container .nav .btn.disabled {
   background-color: #fff;
 }
@@ -3947,8 +3955,9 @@ textarea.form-control-filter {
   right: 13px;
   top: 9px;
 }
+
 /*_:-moz-tree-row(hover), .form-control-filter + i.icn-search-input  {*/
-  /*top: 9px;*/
+/*top: 9px;*/
 /*}*/
 
 .form-control-filter + i.icn-search-input:focus {
@@ -4445,9 +4454,11 @@ select[multiple].input-lg {
 .checkbox .control-indicator {
   border-radius: 1px;
 }
-.device-field .checkbox .control-indicator{
+
+.device-field .checkbox .control-indicator {
   margin: 14px 0 0 15px;
 }
+
 .checkbox .control-indicator.plus-circle {
   border-radius: 50%;
 }
@@ -4457,9 +4468,11 @@ select[multiple].input-lg {
   background-color: #90c56b;
   border-color: #90c56b;
 }
-.device-field .control input:checked ~ .control-indicator{
+
+.device-field .control input:checked ~ .control-indicator {
   margin: 14px 0 0 15px;
 }
+
 .control input:checked ~ .control-indicator.plus-circle {
   background-position: -772px 4px;
 }
@@ -6493,6 +6506,7 @@ tbody.collapse.in {
 .dropdown-menu > li:hover {
   background-color: #edf2f6;
 }
+
 .dropdown-tag-colors li {
   float: left;
   width: 28px;
@@ -6638,7 +6652,8 @@ tbody.collapse.in {
   background-color: #e7ecf2;
   /*position: relative;*/
 }
-.checkbox-dd-item{
+
+.checkbox-dd-item {
   position: relative;
 }
 
@@ -11140,7 +11155,8 @@ button.close {
   display: inline-block;
   width: calc(100% - 502px);
 }
-_:-ms-lang(x), .ticket-add-content .ticket-add-product .qt-table li .col-1{
+
+_:-ms-lang(x), .ticket-add-content .ticket-add-product .qt-table li .col-1 {
   width: calc(100% - 505px);
 }
 
@@ -11235,6 +11251,9 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     padding: 0 5px;
   }
 
+  .receivable-content .product-list-ticket {
+    font-size: 12px;
+  }
 }
 
 #companyInfoContactInfo {
@@ -11371,11 +11390,13 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   vertical-align: middle;
   position: relative;
 }
-.feed-back-form .center-vertically i{
+
+.feed-back-form .center-vertically i {
   position: absolute;
   top: 10px;
   right: -20px;
 }
+
 .company-item:hover {
   background-color: #e9f5fb;
 }

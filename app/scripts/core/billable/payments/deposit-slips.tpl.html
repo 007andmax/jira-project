@@ -9,13 +9,13 @@
       <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix">
         <div class="col-md-3"><strong>Date</strong><i class="icn-sm icn-caret-gray"></i></div>
         <div class="col-md-3"><strong>Note</strong></div>
-        <div class="col-md-1"><strong>Type</strong><i class="icn-sm icn-caret-gray"></i></div>
+        <div class="col-md-2"><strong>Type</strong><i class="icn-sm icn-caret-gray"></i></div>
         <div class="col-md-2"><strong>Total</strong></div>
       </li>
       <li class="content-product-list-ticket clearfix" ng-repeat="slip in depositSlips">
         <div class="col-md-3">{{slip.createdAt }}</div>
         <div class="col-md-3">{{slip.note}}</div>
-        <div class="col-md-1">{{slip.type}}</div>
+        <div class="col-md-2">{{slip.type}}</div>
         <div class="col-md-2">{{slip.totalSum | currency: '$': 2 }}</div>
       </li>
     </ul>
