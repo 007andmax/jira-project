@@ -144,6 +144,11 @@
           templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
           controller: 'quicktech.core.receivable.receivableCtrl'
         }))
+        .state('payments', waitForServices({
+          url: '/accounting/payments/:mode',
+          templateUrl: '/html/scripts/core/billable/payments/payments.tpl.html',
+          controller: 'quicktech.core.payments.paymentsCtrl'
+        }))
         .state('receipt-archive', waitForServices({
           url: '/accounting/receipt-archive/:mode',
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
