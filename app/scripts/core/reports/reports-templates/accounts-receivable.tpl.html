@@ -16,7 +16,6 @@
       <!--HEADER-->
       <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
       <h3 ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></h3>
-      <h3><span>{{ parseDate(reportAccountsReceivable.startDate) | date: 'dd.MM yyyy' }}</span> to <span>{{ parseDate(reportAccountsReceivable.endDate) | date: 'dd.MM yyyy' }}</span></h3>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportAccountsReceivable.lines">
