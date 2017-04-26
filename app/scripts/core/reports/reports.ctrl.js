@@ -50,9 +50,11 @@
       };
 
       function getReportByTaxes(data) {
+        $scope.reportByTaxes = {};
         $scope.loadingInProgress = true;
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
+          console.log(resp);
           getTaxesLabels();
           if (resp.lines === null || !resp.lines.length) {
             $scope.loadingInProgress = false;
@@ -61,6 +63,7 @@
       }
 
       function getReportByCustomers(data) {
+        $scope.reportByCustomers = {};
         $scope.loadingInProgress = true;
         ReportsService.getReportByCustomers(data, function (resp) {
           $scope.reportByCustomers = resp;
@@ -71,6 +74,7 @@
       }
 
       function getReportByProducts(data) {
+        $scope.reportByProducts = {};
         $scope.loadingInProgress = true;
         ReportsService.getReportByProducts(data, function (resp) {
           $scope.reportByProducts = resp;
@@ -81,6 +85,7 @@
       }
 
       function getReportByTechSold(data) {
+        $scope.reportByTechSold={};
         $scope.loadingInProgress = true;
         ReportsService.getReportByTechSold(data, function (resp) {
           $scope.reportByTechSold = resp;
@@ -88,6 +93,7 @@
       }
 
       function getReportRemoteAccess(data) {
+        $scope.reportRemoteAccess = {};
         $scope.loadingInProgress = true;
         ReportsService.getReportRemoteAccess(data, function (resp) {
           $scope.reportRemoteAccess = resp;
@@ -118,6 +124,7 @@
       }
 
       function getReportAccountsReceivable(data) {
+        $scope.reportAccountsReceivable = {};
         $scope.loadingInProgress = true;
         ReportsService.getReportAccountsReceivable(data, function (resp) {
           $scope.reportAccountsReceivable = resp;
