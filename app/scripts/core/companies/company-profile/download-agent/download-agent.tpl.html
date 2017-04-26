@@ -65,22 +65,14 @@
             </div>
 
             <input type="text" class="form-control" name="agentName" ng-model="downloadAgentUser.agentName"
-                   placeholder="Admin Name" ng-required="!downloadAgentUser.agentName && downloadAgentUser.agentPassword">
+                   placeholder="Admin Name" ng-required="!!downloadAgentUser.agentPassword">
           </div>
         </div>
         <div class="col-md-12">
-          <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'agentPassword')}">
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'agentPassword')}">
-              Password
-            </label>
-
-            <div ng-messages="downloadAgentForm.agentPassword.$error"
-                 ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'agentPassword')}">
-              <label class="control-label" ng-message="required">Password can't be left empty</label>
-            </div>
-
+          <div class="form-group">
+            <label class="control-label">Password</label>
             <input type="text" class="form-control" name="agentPassword" ng-model="downloadAgentUser.agentPassword"
-                   placeholder="Admin Password" ng-required="!downloadAgentUser.agentPassword && downloadAgentUser.agentName">
+                   placeholder="Admin Password">
           </div>
         </div>
       </div>
