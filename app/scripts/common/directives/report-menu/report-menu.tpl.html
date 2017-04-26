@@ -6,6 +6,9 @@
       <div class="content form-group" ng-hide="$ctrl.isDateRangeHidden">
         <div>
           <p>Date Range</p>
+          <div class="text-error" style="position: absolute;bottom: -15px;right: 0;" ng-hide="errorNassageForDate">Please select
+            the dates
+          </div>
           <div style="position: relative;">
             <input type="text"
                    class="form-control has-dropdown readonly-normal"

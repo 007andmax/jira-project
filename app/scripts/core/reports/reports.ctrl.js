@@ -126,7 +126,15 @@
       function getReportAccountsReceivable(data) {
         $scope.reportAccountsReceivable = {};
         $scope.loadingInProgress = true;
-        ReportsService.getReportAccountsReceivable(data, function (resp) {
+        var dataToSend;
+        if(data.type === 'SUMMARY') {
+          dataToSend = {}
+        } else {
+          dataToSend = {
+            companyId: data.companyId
+          }
+        }
+        ReportsService.getReportAccountsReceivable(dataToSend, function (resp) {
           $scope.reportAccountsReceivable = resp;
           if (resp.lines === null || !resp.lines.length) {
             $scope.loadingInProgress = false;
@@ -184,10 +192,10 @@
 
       var chartHeight = 400;
 
-      function chartHeightChange() {
+      function chartHeightChange(techData) {
         var calculatedHeight;
-        if($scope.data) {
-          calculatedHeight = 30 * ($scope.data[0].values.length + 5);
+        if(techData) {
+          calculatedHeight = 30 * (techData.lines.length + 5);
         } else {
           calculatedHeight = 400;
         }
@@ -259,10 +267,9 @@
             "color": "#1f77b4",
             "values": valueCreated
           };
-
+          chartHeightChange(reportData);
           $scope.data.push(object1);
           $scope.data.push(object2);
-          chartHeightChange();
         }
       }
 
@@ -283,8 +290,8 @@
               "color": "#d62728",
               "values": billedTime
             };
+            chartHeightChange(reportData);
             $scope.data.push(object1);
-            chartHeightChange();
             /*IN CASE OF SECOND PARAMETER EXIST - ADD IT*/
 
           } else if (techReportTypeForChart === "PRODUCT_SOLD") {
@@ -301,8 +308,9 @@
               "color": "#d62728",
               "values": totalSum
             };
+            chartHeightChange(reportData);
             $scope.data.push(object1);
-            chartHeightChange();
+
             /*IN CASE OF SECOND PARAMETER EXIST - ADD IT*/
 
           }
