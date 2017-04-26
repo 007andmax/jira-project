@@ -449,7 +449,7 @@
 }
 .content-product-list-ticket-detail-customer .col-md-3,
 .top-product-list-ticket-detail-customer .col-md-3{
-  width: 23%;
+  width: 30%;
 }
 
 .product-list-ticket-deposit .col-md-3 {
@@ -894,9 +894,20 @@ button {
 
 .top-product-list-ticket-detail-customer .col-md-2,
 .content-product-list-ticket-detail-customer .col-md-2 {
-  width: 11%;
+  width: 10%;
 }
-
+.detail-customer{
+  width: 1180px;
+}
+.detail-customer .report-title,
+.detail-customer .run-report-content-by-customer,
+.detail-customer .radio-buttons-product-report {
+  margin: 0 auto;
+  width: 870px;
+}
+.list-ticket-detail-customer {
+  width: 1180px;
+}
 .deposit-slip-modal {
   width: 400px;
   height: 270px;
