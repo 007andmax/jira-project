@@ -939,6 +939,7 @@ button {
 }
 .detail-tax .col-md-1{
   width: 11%;
+  float: right;
 }
 .detail-tax .col-md-2{
   width: 34%;
