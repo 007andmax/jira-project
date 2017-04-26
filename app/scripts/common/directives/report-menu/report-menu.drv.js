@@ -47,7 +47,7 @@
     $scope.clientUsers = UsersService.getClientUsers();
     $scope.locationTechReport = $location.url();
 
-    $scope.errorNassageForDate = false;
+    $scope.errorNassageForDate = true;
 
     var location = $location.url(),
       lastSentData;
@@ -138,7 +138,7 @@
           lastSentData = dataToSend;
           $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
         } else {
-          $scope.errorNassageForDate = true;
+          $scope.errorNassageForDate = false;
         }
 
 
