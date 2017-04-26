@@ -6,7 +6,7 @@
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"
                  send-to-mail="sendToMail"></report-menu>
   </div>
-  <div class="product-list-ticket">
+  <div class="product-list-ticket" ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '870' : '1180'}">
     <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
       <h3>{{ reportByCustomers.techCompanyName }}</h3>
       <h3 ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
@@ -16,7 +16,7 @@
       </h3>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
-    <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
+    <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'" >
       <ul>
         <li class="top-product-list-ticket top-product-list-ticket-detail-customer clearfix">
           <div class="col-md-2"><strong>Date</strong></div>
