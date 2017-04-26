@@ -1,5 +1,6 @@
 <div class="product-list-report detail-customer" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
-     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
+     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}"
+     orientation="{{ reportByCustomers.type === 'DETAILED' ? 'LANDSCAPE' : 'PORTRAIT' }}">
   <p class="report-title">Customer Sales Report</p>
   <div>
     <report-menu class-name="run-report-content-by-customer" is-device-hidden="true" get-user-name="getUserName"

@@ -53,7 +53,7 @@
     function addEmailToNotify(email, sendMailForm) {
       if (email && $ctrl.emailPattern.test(email)) {
         $ctrl.notifySelectionMap[email] = true;
-        $ctrl.tempUsers.push({primaryEmail: email});
+        $ctrl.tempUsers.unshift({primaryEmail: email});
         $ctrl.emailToNotify = '';
         sendMailForm.$setPristine();
       }

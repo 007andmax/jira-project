@@ -559,7 +559,7 @@
 .dropdown-email .scrollable{
   list-style: none;
   padding: 0;
-  height: 170px;
+  max-height: 170px;
   overflow: auto;
 }
 .radio-buttons-product-report .radio {

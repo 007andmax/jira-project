@@ -164,7 +164,7 @@
             <label class="control checkbox pull-left ng-scope" stop-propagation="click">
               <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]">
               <span class="control-indicator"></span>
-              {{ user.primaryEmail }} ({{ $ctrl.getUserName(user) || '' }})
+              {{ user.primaryEmail || '' }} ({{ $ctrl.getUserName(user) || 'custom email' }})
             </label>
           </li>
         </ul>

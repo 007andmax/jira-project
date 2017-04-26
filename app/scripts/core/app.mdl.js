@@ -397,7 +397,7 @@
         };
 
         $rootScope.getUserName = function (user, includeImail) {
-          if (user) {
+          if (user && user.firstName) {
             var username = user.firstName + (user.lastName ? ' ' + user.lastName : '');
 
             if (includeImail && user.primaryEmail && user.primaryEmail) {

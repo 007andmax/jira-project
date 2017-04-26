@@ -33,7 +33,12 @@
 
         scope.sendToMail = function (emails, callback) {
           if (emails && emails.length) {
-            var dto = { content: selectedHtml, emails: emails, reportName: attrs.fileName };
+            var dto = {
+              content: selectedHtml,
+              emails: emails,
+              reportName: attrs.fileName,
+              orientation: attrs.orientation || 'PORTRAIT'
+            };
             $http.post(attrs.emailEndpoint, dto).then(function () {
               UserNotificationService.show('Report was sent successfully.', true);
               callback && callback();
@@ -90,18 +95,23 @@
           if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
             selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
           }
-          $http.post(attrs.convertToPdf, { fileName: attrs.fileName, content: selectedHtml, id: attrs.id })
-            .then(function (resp) {
-              if (resp.data) {
-                url = resp.data.url || 'data:application/pdf;base64,' + resp.data;
+          var dto = {
+            fileName: attrs.fileName,
+            content: selectedHtml,
+            id: attrs.id,
+            orientation: attrs.orientation || 'PORTRAIT'
+          };
+          $http.post(attrs.convertToPdf, dto).then(function (resp) {
+            if (resp.data) {
+              url = resp.data.url || 'data:application/pdf;base64,' + resp.data;
 
-                disableElement = angular.element(document).find(attrs.disableSelector);
-                if (disableElement.length) {
-                  disableElement.attr('disabled', null);
-                  disableElement.removeClass('disabled');
-                }
+              disableElement = angular.element(document).find(attrs.disableSelector);
+              if (disableElement.length) {
+                disableElement.attr('disabled', null);
+                disableElement.removeClass('disabled');
               }
-            });
+            }
+          });
         }
       }
     }
