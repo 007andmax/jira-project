@@ -47,6 +47,8 @@
     $scope.clientUsers = UsersService.getClientUsers();
     $scope.locationTechReport = $location.url();
 
+    $scope.errorNassageForDate = false;
+
     var location = $location.url(),
       lastSentData;
 
@@ -72,6 +74,7 @@
 
     function setTechReportDateType(type) {
       $scope.techReportDateType = type;
+      sendTechDataRequest();
     }
 
     function onDateRangeChangeReport(dates) {
@@ -80,6 +83,7 @@
         var endMonth = dates[1].getMonth() + 1;
         $scope.startDate = dates[0].getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(dates[0].getDate());
         $scope.endDate = dates[1].getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(dates[1].getDate());
+        $scope.errorNassageForDate = true;
       }
     }
 
@@ -87,40 +91,59 @@
       return n < 10 ? '0' + n : '' + n;
     }
 
+    function sendTechDataRequest() {
+      var techDataToSend = {
+        dateRangeType: $scope.techReportDateType,
+        type: $scope.techReportType
+      };
+      if ($scope.techReportDateType === "CUSTOM") {
+        techDataToSend.startDate = $scope.startDate;
+        techDataToSend.endDate = $scope.endDate;
+      }
+      lastSentData = techDataToSend;
+      $scope.$emit("requestReportData", techDataToSend, location, $scope.techReportType)
+    }
+
+
     function sendReportRequest(reportSettings) {
 
       if (!$ctrl.isTechReport) {
-
-        var dataToSend = {
-          type: $scope.reportType
-        };
-        if(!$ctrl.isDateRangeHidden) {
-          dataToSend.startDate = $scope.startDate;
-          dataToSend.endDate = $scope.endDate;
-        }
-        if ($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
-          if (reportSettings.company) {
+        if($ctrl.isRadioButtonHidden) {
+          var dataToSend = {
+            type: $scope.reportType
+          };
+          if(reportSettings.company.id) {
             dataToSend.companyId = reportSettings.company.id;
           }
-          if (reportSettings.device) {
-            dataToSend.deviceId = reportSettings.device.id;
+          lastSentData = dataToSend;
+          $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+        }
+
+        if($scope.startDate && $scope.endDate) {
+          var dataToSend = {
+            type: $scope.reportType
+          };
+          if(!$ctrl.isDateRangeHidden) {
+            dataToSend.startDate = $scope.startDate;
+            dataToSend.endDate = $scope.endDate;
           }
+          if ($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
+            if (reportSettings.company) {
+              dataToSend.companyId = reportSettings.company.id;
+            }
+            if (reportSettings.device) {
+              dataToSend.deviceId = reportSettings.device.id;
+            }
+          }
+          lastSentData = dataToSend;
+          $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+        } else {
+          $scope.errorNassageForDate = true;
         }
-        lastSentData = dataToSend;
-        $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
 
-      }   else {
 
-        var techDataToSend = {
-          dateRangeType: $scope.techReportDateType,
-          type: $scope.techReportType
-        };
-        if ($scope.techReportDateType === "CUSTOM") {
-          techDataToSend.startDate = $scope.startDate;
-          techDataToSend.endDate = $scope.endDate;
-        }
-        lastSentData = techDataToSend;
-        $scope.$emit("requestReportData", techDataToSend, location, $scope.techReportType)
+      }  else {
+          sendTechDataRequest();
       }
 
       //lastSentData = dataToSend;
