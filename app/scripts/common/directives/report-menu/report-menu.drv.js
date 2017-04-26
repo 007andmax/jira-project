@@ -14,7 +14,8 @@
       getUserName: '=?',
       emailPattern: '=?',
       isTechReport: "@?",
-      isRadioButtonHidden: "@?"
+      isRadioButtonHidden: "@?",
+      isDateRangeHidden: "@?"
     },
     controller: reportMenuCtrl
   });
@@ -33,6 +34,7 @@
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
     $ctrl.isRadioButtonHidden = $scope.$eval($ctrl.isRadioButtonHidden);
+    $ctrl.isDateRangeHidden = $scope.$eval($ctrl.isDateRangeHidden);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -90,10 +92,12 @@
       if (!$ctrl.isTechReport) {
 
         var dataToSend = {
-          startDate: $scope.startDate,
-          endDate: $scope.endDate,
           type: $scope.reportType
         };
+        if(!$ctrl.isDateRangeHidden) {
+          dataToSend.startDate = $scope.startDate;
+          dataToSend.endDate = $scope.endDate;
+        }
         if ($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
           if (reportSettings.company) {
             dataToSend.companyId = reportSettings.company.id;
@@ -105,7 +109,7 @@
         lastSentData = dataToSend;
         $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
 
-      } else {
+      }   else {
 
         var techDataToSend = {
           dateRangeType: $scope.techReportDateType,

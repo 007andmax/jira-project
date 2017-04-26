@@ -121,7 +121,7 @@
         $scope.loadingInProgress = true;
         ReportsService.getReportAccountsReceivable(data, function (resp) {
           $scope.reportAccountsReceivable = resp;
-          if (resp.lines === null) {
+          if (resp.lines === null || !resp.lines.length) {
             $scope.loadingInProgress = false;
           }
         })
@@ -178,7 +178,14 @@
       var chartHeight = 400;
 
       function chartHeightChange() {
-        chartHeight = 30 * ($scope.data[0].values.length + 5);
+        var calculatedHeight;
+        if($scope.data) {
+          calculatedHeight = 30 * ($scope.data[0].values.length + 5);
+        } else {
+          calculatedHeight = 400;
+        }
+        console.log("calculatedHeight ", calculatedHeight);
+        chartHeight =  calculatedHeight;
       }
 
       $scope.options = {

@@ -10,7 +10,7 @@
       <h3>{{reportRemoteAccess.techCompanyName}}</h3>
       <h3 ng-if="reportRemoteAccess.type === 'DETAILED'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>
       </h3>
-      <h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd MMM yyyy' }}</span>
+      <h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd.MM.yyyy' }}</span>
       </h3>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
@@ -27,7 +27,7 @@
         </li>
         <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
             on-finish-render="buildPdf()">
-          <div class="col-md-3">{{ parseDate(line.date) | date: 'dd MMM yyyy' }}</div>
+          <div class="col-md-3">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
           <div class="col-md-2">{{line.deviceName}}</div>
           <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
           <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
@@ -38,7 +38,7 @@
       </ul>
     </div>
     <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
-      <p><strong>Total Duration: <span>{{reportRemoteAccess.totalDuration}}</span></strong></p>
+      <p><strong>Total Duration: <span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@
     <div class="header-product-list-ticket" ng-if="reportByProducts.products">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
       <h3 ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></h3>
-      <h3><span>{{ parseDate(reportByProducts.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd MMM yyyy' }}</span>
+      <h3><span>{{ parseDate(reportByProducts.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd.MM.yyyy' }}</span>
       </h3>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
