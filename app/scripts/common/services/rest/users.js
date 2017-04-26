@@ -601,6 +601,7 @@
 
       return {
         _addInitListener: addInitListener,
+        getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,

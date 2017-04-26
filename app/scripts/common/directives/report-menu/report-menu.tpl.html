@@ -107,11 +107,13 @@
       <div class="radio-buttons-product-report form-group"
            ng-hide="locationTechReport === '/reports/techReport-TicketCreated'">
         <div class="summary-radio summary-radio-device">
-          <input type="radio" name="l2" class="radio" id="billedTime" ng-model="techReportType" value="BILLED_TIME">
+          <input type="radio" name="l2" class="radio" id="billedTime" ng-change="$ctrl.sendTechDataRequest()"
+                 ng-model="techReportType" value="BILLED_TIME">
           <label for="billedTime">Billed Time</label>
         </div>
         <div class="detailed-radio summary-radio-device">
-          <input type="radio" name="l2" class="radio" id="productSales" ng-model="techReportType" value="PRODUCT_SOLD">
+          <input type="radio" name="l2" class="radio" id="productSales"
+                 ng-model="techReportType" value="PRODUCT_SOLD" ng-change="$ctrl.sendTechDataRequest()">
           <label for="productSales">Product Sales</label>
         </div>
       </div>
@@ -130,13 +132,11 @@
                  name="reportDateRange"
                  readonly
                  date-range-picker="$ctrl.onDateRangeChangeReport"
+                 on-hide="$ctrl.setTechReportDateType"
                  range max-date="{{ maxDateForDateRangeInputField }}"
                  ng-model="reportSetting.dateRange">
         </div>
       </div>
-      <button ng-click="$ctrl.sendReportRequest(techReportSetting)"
-              ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden">Run Report
-      </button>
     </div>
   </div>
   <div class="product-list-report-btn product-list-report-btn-ticket clearfix">
@@ -163,9 +163,10 @@
         </div>
         <ul class="scrollable">
           <li class="clearfix" ng-if="user.primaryEmail && !user.deletedAt" style="padding: 0"
-              ng-repeat="user in (clientUsers.concat($ctrl.tempUsers)) | orderBy: 'firstName'">
+              ng-repeat="user in ($ctrl.tempUsers.concat(users)) | filter: {id: '!' + $ctrl.currentUser.id} | orderBy: ['custom', 'firstName']">
             <label class="control checkbox pull-left ng-scope" stop-propagation="click">
-              <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]">
+              <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]"
+                     placeholder="Add custom email">
               <span class="control-indicator"></span>
               {{ user.primaryEmail || '' }} ({{ $ctrl.getUserName(user) || 'custom email' }})
             </label>

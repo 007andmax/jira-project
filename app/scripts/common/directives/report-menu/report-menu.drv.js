@@ -30,6 +30,7 @@
     this.getEmailsArray = getEmailsArray;
     this.emailSent = emailSent;
     this.setTechReportDateType = setTechReportDateType;
+    this.sendTechDataRequest = sendTechDataRequest;
 
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
@@ -39,12 +40,13 @@
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
     $ctrl.isTechReport = $scope.$eval($ctrl.isTechReport);
+    $ctrl.currentUser = UsersService.getCurrentUser();
+
     $scope.maxDateForDateRangeInputField = Date.now();
     $scope.reportType = "SUMMARY";
     $scope.techReportType = "BILLED_TIME";
-    $scope.techReportDateType = "TODAY";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
-    $scope.clientUsers = UsersService.getClientUsers();
+    $scope.users = UsersService.getAllUsers();
     $scope.locationTechReport = $location.url();
 
     $scope.errorNassageForDate = true;
@@ -52,10 +54,12 @@
     var location = $location.url(),
       lastSentData;
 
+    setTechReportDateType("TODAY");
+
     function addEmailToNotify(email, sendMailForm) {
       if (email && $ctrl.emailPattern.test(email)) {
         $ctrl.notifySelectionMap[email] = true;
-        $ctrl.tempUsers.unshift({primaryEmail: email});
+        $ctrl.tempUsers.unshift({ primaryEmail: email, custom: true });
         $ctrl.emailToNotify = '';
         sendMailForm.$setPristine();
       }
@@ -73,7 +77,7 @@
     }
 
     function setTechReportDateType(type) {
-      $scope.techReportDateType = type;
+      $scope.techReportDateType = typeof type === 'string' ? type : 'CUSTOM';
       sendTechDataRequest();
     }
 
