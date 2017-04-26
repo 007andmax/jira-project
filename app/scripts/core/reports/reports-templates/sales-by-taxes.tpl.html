@@ -9,7 +9,7 @@
     <div  class="header-product-list-ticket" ng-if="reportByTaxes.lines">
       <h3>{{reportByTaxes.techCompanyName}}</h3>
       <h3>Sales Tax report <span>{{reporttype[reportByTaxes.type]}}</span></h3>
-      <h3><span>{{ parseDate(reportByTaxes.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportByTaxes.endDate) | date: 'dd MMM yyyy' }}</span></h3>
+      <h3><span>{{ parseDate(reportByTaxes.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByTaxes.endDate) | date: 'dd.MM.yyyy' }}</span></h3>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
       <div ng-if="reportByTaxes.type === 'DETAILED'&& reportByTaxes.reducedTaxes">

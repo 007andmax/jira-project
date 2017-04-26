@@ -7,7 +7,7 @@
   <p class="report-title">Accounts Receivable</p>
   <div>
     <report-menu is-device-hidden="true" is-radio-button-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName"
-                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern">
+                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern" is-date-range-hidden="true">
 
     </report-menu>
   </div>
@@ -16,7 +16,7 @@
       <!--HEADER-->
       <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
       <h3 ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></h3>
-      <h3><span>{{ parseDate(reportAccountsReceivable.startDate) | date: 'dd MMM yyyy' }}</span> to <span>{{ parseDate(reportAccountsReceivable.endDate) | date: 'dd MMM yyyy' }}</span></h3>
+      <h3><span>{{ parseDate(reportAccountsReceivable.startDate) | date: 'dd.MM yyyy' }}</span> to <span>{{ parseDate(reportAccountsReceivable.endDate) | date: 'dd.MM yyyy' }}</span></h3>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportAccountsReceivable.lines">
