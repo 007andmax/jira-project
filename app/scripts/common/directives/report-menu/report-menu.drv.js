@@ -55,6 +55,23 @@
 
     $scope.errorNassageForDate = true;
 
+    $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'SUMMARY';
+
+    // $scope.checkForCustomerRequired = function() {
+    //   if(!$ctrl.isRadioButtonHidden ) {
+    //     if(!$scope.reportType === 'SUMMARY') {
+    //       return true
+    //     } else {
+    //       return false;
+    //     }
+    //   } else {
+    //     return true;
+    //   }
+    // }
+    if($ctrl.isRadioButtonHidden) {
+      $scope.reportType = 'DETAILED';
+    }
+
     var location = $location.url(),
       lastSentData;
 
@@ -122,7 +139,7 @@
           var dataToSend = {
             type: $scope.reportType
           };
-          if(reportSettings.company.id) {
+          if(reportSettings && reportSettings.company) {
             dataToSend.companyId = reportSettings.company.id;
           }
           lastSentData = dataToSend;

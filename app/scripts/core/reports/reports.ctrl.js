@@ -54,7 +54,7 @@
         $scope.loadingInProgress = true;
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
-          console.log(resp);
+          //console.log(resp);
           getTaxesLabels();
           $scope.loadingInProgress = false;
         });
@@ -287,7 +287,7 @@
           } else if (techReportTypeForChart === "PRODUCT_SOLD") {
             var totalSum = [];
             for (var i = 0; i < reportData.lines.length; i++) {
-            //var sum = new String(reportData.lines[i].totalSum + '$');
+            //var sum = reportData.lines[i].totalSum + '$';
               var nameAndData = {
                 "label": reportData.lines[i].fullName,
                 "value": reportData.lines[i].totalSum
@@ -295,7 +295,7 @@
               totalSum.push(nameAndData)
             }
             var object1 = {
-              "key": "total sum",
+              "key": "total sum, $",
               "color": "#d62728",
               "values": totalSum
             };

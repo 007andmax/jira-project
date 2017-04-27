@@ -55,8 +55,7 @@
       });
       PaymentsService.getDepositSlipsData($scope, function (resp) {
         $scope.depositSlips = resp;
-        console.log("sdfsdfsdfsdfsd");
-        console.log(resp);
+        //console.log(resp);
       });
 
 
