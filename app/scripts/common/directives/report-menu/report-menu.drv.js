@@ -140,7 +140,7 @@
             }
           }
           lastSentData = dataToSend;
-          $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+          $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType);
         } else {
           $scope.errorNassageForDate = false;
         }
