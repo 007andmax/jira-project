@@ -56,9 +56,7 @@
           $scope.reportByTaxes = resp;
           console.log(resp);
           getTaxesLabels();
-          if (resp.lines === null || !resp.lines.length) {
-            $scope.loadingInProgress = false;
-          }
+          $scope.loadingInProgress = false;
         });
       }
 
@@ -67,9 +65,7 @@
         $scope.loadingInProgress = true;
         ReportsService.getReportByCustomers(data, function (resp) {
           $scope.reportByCustomers = resp;
-          if (resp.lines === null || !resp.lines.length) {
-            $scope.loadingInProgress = false;
-          }
+          $scope.loadingInProgress = false;
         });
       }
 
@@ -78,9 +74,7 @@
         $scope.loadingInProgress = true;
         ReportsService.getReportByProducts(data, function (resp) {
           $scope.reportByProducts = resp;
-          if (resp.products === null || !resp.products.length) {
-            $scope.loadingInProgress = false;
-          }
+          $scope.loadingInProgress = false;
         });
       }
 
@@ -97,9 +91,7 @@
         $scope.loadingInProgress = true;
         ReportsService.getReportRemoteAccess(data, function (resp) {
           $scope.reportRemoteAccess = resp;
-          if (resp.lines === null || !resp.lines.length) {
-            $scope.loadingInProgress = false;
-          }
+          $scope.loadingInProgress = false;
         });
       }
 
@@ -136,9 +128,7 @@
         }
         ReportsService.getReportAccountsReceivable(dataToSend, function (resp) {
           $scope.reportAccountsReceivable = resp;
-          if (resp.lines === null || !resp.lines.length) {
-            $scope.loadingInProgress = false;
-          }
+          $scope.loadingInProgress = false;
         })
       }
 
@@ -297,6 +287,7 @@
           } else if (techReportTypeForChart === "PRODUCT_SOLD") {
             var totalSum = [];
             for (var i = 0; i < reportData.lines.length; i++) {
+            //var sum = new String(reportData.lines[i].totalSum + '$');
               var nameAndData = {
                 "label": reportData.lines[i].fullName,
                 "value": reportData.lines[i].totalSum
