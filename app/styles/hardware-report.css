@@ -826,6 +826,13 @@ button {
 }
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu{
   left: -210px!important;
+  max-height: 144px!important;
+}
+.run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a{
+  padding: 10px;
+}
+.run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a .avatar{
+  margin-right: 10px;
 }
 .summary-radio-device {
   width: 255px;
