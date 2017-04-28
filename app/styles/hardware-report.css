@@ -821,6 +821,9 @@ button {
 .run-report-content-device .text-error {
   left: 0 !important;
 }
+.run-report-content-device .device-report .icn-remove-old {
+  top: 53px;
+}
 
 .summary-radio-device {
   width: 255px;
