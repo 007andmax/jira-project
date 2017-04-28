@@ -792,7 +792,7 @@ module.exports = function (grunt) {
     'copy:temp_sass',
     'clean:server',
     'includeSource',
-    'wiredep',
+    'wiredep:app',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
