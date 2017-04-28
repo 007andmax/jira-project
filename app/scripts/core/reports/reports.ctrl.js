@@ -141,6 +141,7 @@
         if (location) {
           switch (location) {
             case('/reports/remoteAccess') :
+              console.log("request: ", data);
               getReportRemoteAccess(data);
               $scope.reportName = 'remote_access_report';
               break;

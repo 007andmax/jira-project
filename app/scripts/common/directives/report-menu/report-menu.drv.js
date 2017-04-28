@@ -57,17 +57,7 @@
 
     $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'SUMMARY';
 
-    // $scope.checkForCustomerRequired = function() {
-    //   if(!$ctrl.isRadioButtonHidden ) {
-    //     if(!$scope.reportType === 'SUMMARY') {
-    //       return true
-    //     } else {
-    //       return false;
-    //     }
-    //   } else {
-    //     return true;
-    //   }
-    // }
+
     if($ctrl.isRadioButtonHidden) {
       $scope.reportType = 'DETAILED';
     }
