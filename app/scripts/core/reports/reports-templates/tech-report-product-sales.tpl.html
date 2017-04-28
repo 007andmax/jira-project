@@ -13,7 +13,8 @@
     </div>
     <nvd3 options="options" data="data" ng-if="responseSuccess"></nvd3>
     <div class="clearfix" ng-if="techReportProductSales.lines">
-      <div>Total Hours: <span>{{techReportProductSales.total}} hours</span></div>
+      <div ng-show="techReportProductSales.type == 'BILLED_TIME'">Total Hours: <span>{{techReportProductSales.total}} hours</span></div>
+      <div ng-show="techReportProductSales.type == 'PRODUCT_SOLD'">Potential revenue: <span>{{techReportProductSales.total}} $</span></div>
     </div>
   </div>
 </div>
