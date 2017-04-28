@@ -8,11 +8,12 @@
   </div>
   <div class="product-list-ticket">
     <div class="header-product-list-ticket" ng-if="techReportProductSales.lines">
-      <h4>Product Sold Revenue vs Quoted Projects</h4>
+      <h4 ng-show="techReportProductSales.type =='BILLED_TIME'">Billed Time</h4>
+      <h4 ng-show="techReportProductSales.type =='PRODUCT_SOLD'">Products Sold</h4>
     </div>
     <nvd3 options="options" data="data" ng-if="responseSuccess"></nvd3>
     <div class="clearfix" ng-if="techReportProductSales.lines">
-      <div>Potential Revenue: <span>{{techReportProductSales.total}} $</span></div>
+      <div>Total Hours: <span>{{techReportProductSales.total}} hours</span></div>
     </div>
   </div>
 </div>

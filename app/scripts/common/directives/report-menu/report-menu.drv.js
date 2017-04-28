@@ -65,6 +65,10 @@
     var location = $location.url(),
       lastSentData;
 
+    if(location === '/reports/accountsReceivable') {
+      sendReportRequest();
+    }
+
     if ($ctrl.isTechReport) {
       setTechReportDateType("TODAY");
     }
