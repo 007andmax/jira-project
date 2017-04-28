@@ -824,7 +824,9 @@ button {
 .run-report-content-device .device-report .icn-remove-old {
   top: 53px;
 }
-
+.run-report-content-device .dropdown-remote-report-tech .dropdown-menu{
+  left: -210px!important;
+}
 .summary-radio-device {
   width: 255px;
 }
