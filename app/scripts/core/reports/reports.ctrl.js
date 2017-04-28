@@ -54,7 +54,6 @@
         $scope.loadingInProgress = true;
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
-          //console.log(resp);
           getTaxesLabels();
           $scope.loadingInProgress = false;
         });
@@ -141,7 +140,6 @@
         if (location) {
           switch (location) {
             case('/reports/remoteAccess') :
-              console.log("request: ", data);
               getReportRemoteAccess(data);
               $scope.reportName = 'remote_access_report';
               break;
