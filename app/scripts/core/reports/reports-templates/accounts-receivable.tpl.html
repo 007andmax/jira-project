@@ -24,20 +24,20 @@
         <li class="top-product-list-ticket clearfix">
           <div class="col-md-3"><strong>Company Name</strong></div>
           <div class="col-md-2"><strong>Current</strong></div>
-          <div class="col-md-2"><strong>&lt;1 month</strong></div>
-          <div class="col-md-2"><strong>&lt;2 month</strong></div>
+          <div class="col-md-1"><strong>&lt;1 month</strong></div>
+          <div class="col-md-1"><strong>&lt;2 month</strong></div>
           <div class="col-md-1"><strong>&lt;3 month</strong></div>
           <div class="col-md-1"><strong>Older</strong></div>
-          <div class="col-md-1"><strong>Total</strong></div>
+          <div class="col-md-2"><strong>Total</strong></div>
         </li>
         <li class="content-product-list-ticket clearfix" ng-repeat="line in reportAccountsReceivable.lines"  on-finish-render="buildPdf()">
           <div class="col-md-3">{{line.clientCompanyName}}</div>
           <div class="col-md-2">{{ (line.currentSum || 0) | currency: '$': 2 }}</div>
-          <div class="col-md-2">{{ (line.month1Sum || 0) | currency: '$': 2 }}</div>
-          <div class="col-md-2">{{ (line.month2Sum || 0) | currency: '$': 2 }}</div>
+          <div class="col-md-1">{{ (line.month1Sum || 0) | currency: '$': 2 }}</div>
+          <div class="col-md-1">{{ (line.month2Sum || 0) | currency: '$': 2 }}</div>
           <div class="col-md-1">{{ (line.month3Sum || 0) | currency: '$': 2 }}</div>
           <div class="col-md-1">{{ (line.olderSum || 0) | currency: '$': 2 }}</div>
-          <div class="col-md-1" on-finish-render="hideLoadingIndicator()"><div ng-show="line.totalSum > 0">{{ (line.totalSum || 0) | currency: '$': 2 }}</div></div>
+          <div class="col-md-2" on-finish-render="hideLoadingIndicator()"><div ng-show="line.totalSum > 0">{{ (line.totalSum || 0) | currency: '$': 2 }}</div></div>
         </li>
       </ul>
     </div>
@@ -45,11 +45,11 @@
       <!--SUMMARY-->
       <div class="col-md-3"><strong>Total</strong></div>
       <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalCurrentSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.total1MonthSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.total2MonthSum || 0) | currency: '$': 2 }}</strong></div>
+      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total1MonthSum || 0) | currency: '$': 2 }}</strong></div>
+      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total2MonthSum || 0) | currency: '$': 2 }}</strong></div>
       <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total3MonthSum || 0) | currency: '$': 2 }}</strong></div>
       <div class="col-md-1"><strong>{{ (reportAccountsReceivable.totalOlderSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.totalSum || 0) | currency: '$': 2 }}</strong></div>
+      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalSum || 0) | currency: '$': 2 }}</strong></div>
     </div>
   </div>
 </div>
