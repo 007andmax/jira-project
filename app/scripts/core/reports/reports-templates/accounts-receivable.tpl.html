@@ -44,7 +44,7 @@
     <div class="product-report-total-sales acc-col clearfix" ng-if="reportAccountsReceivable.lines">
       <!--SUMMARY-->
       <div class="col-md-3"><strong>Total</strong></div>
-      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalCurrenSum || 0) | currency: '$': 2 }}</strong></div>
+      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalCurrentSum || 0) | currency: '$': 2 }}</strong></div>
       <div class="col-md-2"><strong>{{ (reportAccountsReceivable.total1MonthSum || 0) | currency: '$': 2 }}</strong></div>
       <div class="col-md-2"><strong>{{ (reportAccountsReceivable.total2MonthSum || 0) | currency: '$': 2 }}</strong></div>
       <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total3MonthSum || 0) | currency: '$': 2 }}</strong></div>
