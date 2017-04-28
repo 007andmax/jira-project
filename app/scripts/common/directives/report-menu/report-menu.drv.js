@@ -118,7 +118,9 @@
         techDataToSend.endDate = $scope.endDate;
       }
       lastSentData = techDataToSend;
-      $scope.$emit("requestReportData", techDataToSend, location, $scope.techReportType)
+      $scope.$emit("requestReportData", techDataToSend, location, $scope.techReportType);
+      // $scope.startDate = null;
+      // techDataToSend.endDate = null;
     }
 
 
