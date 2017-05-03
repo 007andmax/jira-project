@@ -10,13 +10,13 @@
         <div class="col-md-1"><strong>Date</strong></div>
         <div class="col-md-3"><strong>Note</strong></div>
         <div class="col-md-2"><strong>Type</strong></div>
-        <div class="col-md-2"><strong>Total</strong></div>
+        <div class="col-md-2" style="text-align: right"><strong>Total</strong></div>
       </li>
       <li class="content-product-list-ticket clearfix" ng-repeat="slip in depositSlips">
         <div class="col-md-1">{{ parseDate(slip.createdAt) | date: 'dd.MM.yy' }}</div>
         <div class="col-md-3">{{slip.note}}</div>
         <div class="col-md-2">{{slip.type}}</div>
-        <div class="col-md-2">{{slip.totalSum | currency: '$': 2 }}</div>
+        <div class="col-md-2" style="text-align: right">{{slip.totalSum | currency: '$': 2 }}</div>
       </li>
     </ul>
     <!--<div class="product-report-total-sales clearfix">-->
