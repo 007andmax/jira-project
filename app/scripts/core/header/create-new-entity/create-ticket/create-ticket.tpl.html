@@ -66,8 +66,7 @@
 
       <div text-editor ng-model="ticket.note" name="note" te-maxlength="5000" te-initial-value="{{ ticket.note }}">
         <label>Description</label>
-        <div te-editor class="form-control editor description-area" contenteditable="true"
-             style="min-height: 92px;height: auto;"></div>
+        <div te-editor class="form-control editor description-area ticket-textarea" contenteditable="true"></div>
 
         <div class="form-group">
           <ul class="upload-attachments"><!--
@@ -299,7 +298,7 @@
                    ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                    uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                    typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
-                   custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
+                   custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}">
 
             <div typeahead-input-icon="userCompany" ></div>
           </div>
@@ -316,7 +315,7 @@
                    typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                    uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
                    qt-typeahead-show-on-focus ng-trim="false"
-                   custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': '180px'}">
+                   custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
 
             <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
 
@@ -349,7 +348,7 @@
                    typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                    uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
                    qt-typeahead-show-on-focus ng-required="false"
-                   custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '360px'}">
+                   custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '360px'}">
 
             <div typeahead-input-icon-sm="ticketAssignTo"></div>
 

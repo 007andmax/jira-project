@@ -141,14 +141,14 @@
   text-overflow: ellipsis;
 }
 
-.qt-list.qt-users .no-subscribe{
+.qt-list.qt-users .no-subscribe {
   width: 20px;
   height: 20px;
   margin: 0 5px;
   position: relative;
 }
 
-.qt-list.qt-users .no-subscribe:before{
+.qt-list.qt-users .no-subscribe:before {
   display: block;
   position: absolute;
   top: 9px;
@@ -195,7 +195,6 @@
 }
 
 @media only screen and (min-width: 1380px) and (max-width: 1500px) {
-
 
   .users-list .user-actions .btn-user-chat {
     display: none;
@@ -455,7 +454,6 @@
   margin-top: 10px;
 }
 
-
 @-moz-document url-prefix() {
   .create-user-form {
     margin-top: 22px;
@@ -619,6 +617,11 @@
   height: 38px;
 }
 
+.create-ticket-form .modal-body .ticket-textarea {
+  height: 92px;
+  overflow-y: scroll;
+}
+
 .del-tax {
   margin-top: 11px;
 }
@@ -661,9 +664,9 @@
 }
 
 /*@-moz-document url-prefix() {*/
-  /*.create-user-form label {*/
-    /*margin-bottom: 5px;*/
-  /*}*/
+/*.create-user-form label {*/
+/*margin-bottom: 5px;*/
+/*}*/
 /*}*/
 
 .create-user-form .form-control-number.has-dropdown + i {

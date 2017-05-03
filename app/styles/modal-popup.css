@@ -80,7 +80,7 @@
 
 .create-window .general .create-ticket-form .modal-footer .qt-table {
   text-align: left;
-  padding: 15px;
+  /*padding: 10px 15px;*/
 }
 
 .create-window .general .btn-bottom {

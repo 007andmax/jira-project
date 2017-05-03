@@ -17,7 +17,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .modal-create-ticket .dropdown-menu {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   width: auto;
 }
 
@@ -511,11 +511,9 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .dropdown-user-parent > .dropdown-menu > li .avatar {
   margin-right: 7px !important;
-  margin-top: 3px;
 }
 
 .dropdown-user-parent > .dropdown-menu > li .user-name {
-  margin-top: 3px;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
