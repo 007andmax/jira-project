@@ -43,6 +43,8 @@
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 
+        $scope.ticketsCounter;
+
         $scope.showReportsPage = function() {
           return PermissionsService.isAllowed('VIEW_SALES_REPORT') ||
             PermissionsService.isAllowed('VIEW_FINANCIAL_REPORT') ||
@@ -66,9 +68,10 @@
           }
         });
 
-        // TicketsService.getAllCounts( function(resp) {
-        //   console.log(resp);
-        // });
+        TicketsService.getAllCounts( function(resp) {
+          console.log(resp);
+          $scope.ticketsCounter = resp;
+        });
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;

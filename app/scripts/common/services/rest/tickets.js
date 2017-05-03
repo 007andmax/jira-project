@@ -391,8 +391,7 @@
 
       function getAllCounts(callback) {
 
-
-        $http.post('/v2/tickets/count', listOfAllFilters).then(function (resp) {
+        $http.post('/v2/tickets/counts', queries).then(function (resp) {
           storage.ticketsQuantity = resp.data;
 
           if (callback) {
