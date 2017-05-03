@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
-      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService', '$uibModal',
+      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService', '$uibModal', 'TicketsService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal) {
+                TutorialsService, $uibModal, TicketsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -65,6 +65,10 @@
             }
           }
         });
+
+        // TicketsService.getAllCounts( function(resp) {
+        //   console.log(resp);
+        // });
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;

@@ -389,6 +389,22 @@
         });
       }
 
+      function getAllCounts(callback) {
+
+
+        $http.post('/v2/tickets/count', listOfAllFilters).then(function (resp) {
+          storage.ticketsQuantity = resp.data;
+
+          if (callback) {
+            callback(storage.ticketsQuantity);
+          }
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+      }
+
       function changePriority(ticketId, priority, callback) {
         if (!ticketId || !priority) {
           throw 'ticketId and priority is required arguments!';
@@ -966,7 +982,8 @@
         updateExpenseInTicketUpdate: updateExpenseInTicketUpdate,
         changeLinkedAgent: changeLinkedAgent,
         save: saveEditedTicket,
-        updateDiscount: updateDiscount
+        updateDiscount: updateDiscount,
+        getAllCounts: getAllCounts
       }
 
     }
