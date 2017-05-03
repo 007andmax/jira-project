@@ -144,7 +144,7 @@
   color: #edf2f6;
   background: #474f60;
 }
-.center-category span{
+.tickets-left-panel .center-category__category span{
   position: absolute;
   right: 20px;
   top: 7px;
