@@ -144,6 +144,17 @@
   color: #edf2f6;
   background: #474f60;
 }
+.center-category span{
+  position: absolute;
+  right: 20px;
+  top: 7px;
+  background-color: #a7afb9;
+  color: #323742;
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 30px;
+}
 .icon-pos {
   position: absolute;
   top: 15px;
