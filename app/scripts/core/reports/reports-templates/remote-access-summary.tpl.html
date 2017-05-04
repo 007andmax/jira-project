@@ -2,8 +2,14 @@
      selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Remote Connection Report</p>
   <div>
-    <report-menu class-name="run-report-content-device" open-in-pdf="openInPdf" get-user-name="getUserName"
-                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern" is-show-tech-select-field="true"></report-menu>
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 is-show-tech-select-field="true"
+                 is-radio-button-hidden="true"></report-menu>
   </div>
   <div class="product-list-ticket" >
     <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
