@@ -69,6 +69,10 @@
       sendReportRequest();
     }
 
+    if(location === '/reports/remoteAccess') {
+      $scope.reportType = 'DETAILED';
+    }
+
     if ($ctrl.isTechReport) {
       setTechReportDateType("TODAY");
     }
@@ -132,17 +136,38 @@
 
       if (!$ctrl.isTechReport) {
         if($ctrl.isRadioButtonHidden) {
-          var dataToSend = {
-            type: $scope.reportType
-          };
-          if(reportSettings && reportSettings.company) {
-            dataToSend.companyId = reportSettings.company.id;
+          if(location === '/reports/remoteAccess') {
+            var dataToSend = {
+              type: 'SUMMARY'
+            };
+            if(!$ctrl.isDateRangeHidden) {
+              dataToSend.startDate = $scope.startDate;
+              dataToSend.endDate = $scope.endDate;
+            }
+            if(reportSettings && reportSettings.company) {
+              dataToSend.type = 'DETAILED';
+              dataToSend.companyId = reportSettings.company.id;
+            }
+            if (reportSettings && reportSettings.device) {
+              dataToSend.deviceId = reportSettings.device.id;
+            }
+            if($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+              dataToSend.userId = reportSettings.techUser.id
+            }
+            lastSentData = dataToSend;
+            $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+          } else {
+            var dataToSend = {
+              type: $scope.reportType
+            };
+            if(reportSettings && reportSettings.company) {
+              dataToSend.companyId = reportSettings.company.id;
+            }
+            lastSentData = dataToSend;
+            $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
           }
-          lastSentData = dataToSend;
-          $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
-        }
 
-        if($scope.startDate && $scope.endDate) {
+        } else if($scope.startDate && $scope.endDate) {
           var dataToSend = {
             type: $scope.reportType
           };
