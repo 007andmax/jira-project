@@ -3,18 +3,16 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("textEditor",
-    ['$timeout', function ($timeout) {
+    [
+      '$timeout', '$sce', function ($timeout, $sce) {
       return {
         restrict: 'A',
         require: 'ngModel',
         link: function ($scope, element, attrs, ctrl) {
 
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
-          //URLs starting with http:// or https:// before it
-          var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/gi;
-          //URLs starting with www. Without // before it
-          var urlPattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-
+          var urlPattern = /(\b(www\.\S+\b))|(\b(http|ftp|https):\/\/(www\.)?[\w-]+(\.[\w-]+)+\b([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/gim;
+          var htmlTagsWhitelist = /<\s*(?!b|blockquote|br|caption|cite|code|col|colgroup|dd|div|dl|dt|em|h1|h2|h3|h4|h5|h6|i|img|li|ol|p|pre|q|small|strike|strong|sub|sup|table|tbody|td|tfoot|th|thead|tr|u|ul|span).*?\s*?>/gm;
           var pressOnElement, inited = false;
           var editor = element.find('[te-editor]'),
             wysiwyg = editor.wysiwyg({
@@ -32,7 +30,7 @@
               }
             });
 
-         $scope.$watch(function () {
+          $scope.$watch(function () {
             return attrs.teInitialValue;
           }, function (value) {
             if (typeof attrs.teInitialValue === 'string' && (!inited || !value)) {
@@ -96,13 +94,21 @@
 
           element.on('paste', function (e) {
             e.preventDefault();
-            var cleanText = e.originalEvent.clipboardData.getData("text/plain");
-            var linkCreate = cleanText.replace(urlPattern, function(x){
-              return '<a target="' + x + '" href="'+x+'">'+x+'</a>';
-            }).replace(urlPattern2, function(x){
-                return '<a target="' + x + '" href="'+x+'">'+x+'</a>';
-              });
-            document.execCommand('insertHTML', false, linkCreate);
+            var clipboardData = e.originalEvent.clipboardData,
+            html = '';
+
+            if (clipboardData.types.indexOf('text/html') > -1) {
+              html = clipboardData.getData("text/html");
+              html = html.replace(htmlTagsWhitelist, '');
+            } else {
+              html = clipboardData.getData('text/plain');
+            }
+
+            html = html.replace(urlPattern, function (url) {
+              var trimmedUrl = url.replace(/\s+/g, '');
+              return '<a target="_blank" href="' + trimmedUrl + '">' + trimmedUrl + '</a>';
+            });
+            document.execCommand('insertHTML', false, html);
             $timeout(validateRequired);
           });
 
@@ -113,7 +119,7 @@
           }
         }
       }
-    }]
-  )
+    }
+    ]);
 
 })();
