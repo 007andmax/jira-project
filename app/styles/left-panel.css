@@ -150,10 +150,12 @@
   top: 7px;
   background-color: #a7afb9;
   color: #323742;
-  width: 40px;
+  min-width: 40px;
   text-align: center;
   font-weight: bold;
   border-radius: 30px;
+  max-width: 65px;
+  padding: 0 5px;
 }
 .icon-pos {
   position: absolute;
@@ -341,21 +343,52 @@
   padding: 5px;
   line-height: 1;
 }
-.company-circle{
-  width: 15px;
-  height: 15px;
+.user-company-circle{
+  width: 12px;
+  height: 12px;
   position: absolute;
   right: 50px;
   border-radius: 50%;
   top: 7px;
   box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.50);
 }
-.red-circle{
-  background-color: #C00000;
-}
-.green-circle{
-  background-color: #5EA226;
-}
-.blue-circle{
-  background-color: #16a4fa;
-}
+/*.red-circle{*/
+  /*background-color: #EFB2B0;*/
+  /*border: 2px solid #f15348;*/
+/*}*/
+/*.green-circle{*/
+  /*background-color: #BED9A1;*/
+  /*border: 2px solid #7cb342;*/
+/*}*/
+/*.rose-circle{*/
+  /*background-color: #f7b2ca;*/
+  /*border: 2px solid #ea3d78;*/
+/*}*/
+/*.violet-circle{*/
+  /*background-color: #d6bdff;*/
+  /*border: 2px solid #985dff;*/
+/*}*/
+/*.green-circle{*/
+  /*background-color: #9ef2de;*/
+  /*border: 2px solid #0cdeaa;*/
+/*}*/
+/*.pink-circle{*/
+  /*background-color: #f3b3fe;*/
+  /*border: 2px solid #e040fb;*/
+/*}*/
+/*.yellow-circle{*/
+  /*background-color: #fef2ba;*/
+  /*border: 2px solid #fcdd52;*/
+/*}*/
+/*.orange-circle{*/
+  /*background-color: #fad0a5;*/
+  /*border: 2px solid #f3891c;*/
+/*}*/
+/*.lightblue-circle{*/
+  /*background-color: #b8edf3;*/
+  /*border: 2px solid #4dd0e1;*/
+/*}*/
+/*.blue-circle{*/
+  /*background-color: #b4dbfb;*/
+  /*border: 2px solid #42a5f5;*/
+/*}*/

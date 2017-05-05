@@ -23,11 +23,25 @@
     box-shadow: 2px 4px 20px 0 transparent;
     transition: all .3s }
   .card-wrapper .red-border{
-    border-left: 3px solid #C00000; }
+    border-left: 3px solid #f15348; }
   .card-wrapper .green-border{
-    border-left: 3px solid #5EA226; }
+    border-left: 3px solid #7cb342; }
   .card-wrapper .blue-border{
-    border-left: 3px solid #16a4fa; }
+    border-left: 3px solid #42a5f5; }
+  .card-wrapper .rose-border{
+    border-left: 3px solid #ea3d78; }
+  .card-wrapper .violet-border{
+    border-left: 3px solid #985dff; }
+  .card-wrapper .lightgreen-border{
+    border-left: 3px solid #0cdeaa; }
+  .card-wrapper .pink-border{
+    border-left: 3px solid #e040fb; }
+  .card-wrapper .yellow-border{
+    border-left: 3px solid #fcdd52; }
+  .card-wrapper .orange-border{
+    border-left: 3px solid #f3891c; }
+  .card-wrapper .lightblue-border{
+    border-left: 3px solid #4dd0e1; }
     .card-wrapper .card:hover {
       box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4); }
     .card-wrapper .card__cover {
