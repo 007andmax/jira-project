@@ -5,9 +5,9 @@
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$timeout',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
-      'localStorageService',
+      'localStorageService', 'ColorsService', 'TagsService',
       function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, $timeout,
-                SharedStateService, PermissionsService, $state, localStorageService) {
+                SharedStateService, PermissionsService, $state, localStorageService, ColorsService, TagsService) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
           $state.go('tickets');
@@ -30,6 +30,13 @@
         $scope.users = UsersService.getClientUsers();
         $scope.archivedUsers = UsersService.getArchivedUsers();
 
+        $scope.tagColors = TagsService.getColors();
+
+        ColorsService.getUserColors($scope, function(resp) {
+          $scope.usersColors = resp;
+          console.log("color resp:", $scope.usersColors);
+        });
+
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
             $scope.usersView = view;
@@ -43,6 +50,18 @@
 
         $scope.getUserCompanyName = function (user) {
           return user.company.isDefault ? '' : CompaniesService.getOneById(user.company.id).name;
+        };
+
+        $scope.getUserType = function(user) {
+          var filter = headerSharedState.filter;
+          if(filter.isContact) {
+            return 'MANAGER';
+          }else {
+            var company = CompaniesService.getOneById(user.company.id);
+            var type = company.clientType;
+            return type;
+          }
+
         };
 
         $scope.usersFilter = function (value) {

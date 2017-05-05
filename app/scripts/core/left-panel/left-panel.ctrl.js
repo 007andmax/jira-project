@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
-      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService', '$uibModal', 'TicketsService',
+      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService', '$uibModal', 'TicketsService', 'ColorsService', 'TagsService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal, TicketsService) {
+                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -33,6 +33,44 @@
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
+
+        $scope.tagColors = TagsService.getColors();
+
+
+
+        $scope.changeCompanyColor = function(type, colorCode) {
+          console.log("colorCode: ", colorCode);
+          console.log("type: ", type);
+          var dataToSend = {
+            type: type,
+            colorCode: colorCode
+          };
+          ColorsService.putCompaniesColors(dataToSend, function(resp) {
+            console.log(resp);
+          })
+        };
+
+        ColorsService.getCompaniesColors($scope, function(resp) {
+          $scope.companiesColors = resp;
+        });
+
+        $scope.changeUserColor = function(type, colorCode) {
+          console.log("colorCode: ", colorCode);
+          console.log("type: ", type);
+          var dataToSend = {
+            type: type,
+            colorCode: colorCode
+          };
+          ColorsService.putUsersColors(dataToSend, function(resp) {
+            console.log(resp);
+          })
+        };
+
+        ColorsService.getUserColors($scope, function(resp) {
+          $scope.usersColors = resp;
+        });
+
+
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
         TutorialsService.getTypes(function (resp) {
@@ -69,7 +107,6 @@
         });
 
         TicketsService.getAllCounts( function(resp) {
-          console.log(resp);
           $scope.ticketsCounter = resp;
         });
 
