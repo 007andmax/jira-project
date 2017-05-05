@@ -1027,12 +1027,11 @@ hr {
   border-top: 1px solid #eee;
   padding-top: 50px;
 }
-.receivable-content .payment-receive-fixed div{
-  text-align: center;
-  background-color: #fff;
-}
+
 .receivable-content .payment-receive-fixed div  h3{
   margin: 0;
+  text-align: center;
+  background-color: #fff;
 }
 .receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
