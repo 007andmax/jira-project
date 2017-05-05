@@ -36,7 +36,7 @@
             var dto = {
               content: selectedHtml,
               emails: emails,
-              reportName: attrs.fileName,
+              fileName: attrs.fileName,
               orientation: attrs.orientation || 'PORTRAIT'
             };
             $http.post(attrs.emailEndpoint, dto).then(function () {
