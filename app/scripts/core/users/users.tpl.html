@@ -76,7 +76,7 @@
     <div class="card-view-wrapper clearfix" scroll-pagination>
       <div class="card-wrapper" ng-controller="quicktech.core.users.userCtrl"
            ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) | limitTo: displayLimit track by user.id">
-        <div class="card">
+        <div class="card" ng-style="{'border-left-color': tagColors[usersColors[getUserType(user)]].backgroundColor}">
           <div class="card-header">
             <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')" create-new-entity="user" item="user"></div>
             <i class="icon-sm icn-restore" ng-if="user.deletedAt" ng-click="dearchiveUser(user)"></i>

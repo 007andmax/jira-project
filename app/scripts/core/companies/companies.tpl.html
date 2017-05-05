@@ -87,7 +87,7 @@
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: 'name')) | limitTo: displayLimit track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl"
            ng-click="openCompany(company)">
-        <div class="card">
+        <div class="card" ng-style="{'border-left-color': tagColors[companiesColors[company.clientType]].backgroundColor}">
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
                  create-new-entity="company" item="company" stop-propagation="click"></div>
