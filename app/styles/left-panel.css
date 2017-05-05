@@ -341,21 +341,3 @@
   padding: 5px;
   line-height: 1;
 }
-.company-circle{
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  right: 50px;
-  border-radius: 50%;
-  top: 7px;
-  box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.50);
-}
-.red-circle{
-  background-color: #C00000;
-}
-.green-circle{
-  background-color: #5EA226;
-}
-.blue-circle{
-  background-color: #16a4fa;
-}
