@@ -481,6 +481,12 @@
 .tax-det-col .col-md-1{
   width: 12%;
 }
+.con-col .col-md-2 {
+  width: 16%;
+}
+.con-col .col-md-1 {
+  width: 10%;
+}
 .product-report-total-sales,
 .product-report-taxes,
 .product-report-detail-customer {
