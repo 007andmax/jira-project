@@ -311,7 +311,7 @@
 }
 
 .qt-users > li {
-  cursor: pointer;
+  cursor: auto;
 }
 
 .qt-users .col-1 {
@@ -689,6 +689,7 @@
   width: 20px;
   height: 20px;
   margin: 0 5px;
+  cursor: pointer;
 }
 
 @-moz-document url-prefix() {
@@ -3228,7 +3229,6 @@ Devices tab
 }
 
 .qt-devices > li {
-  cursor: pointer;
   display: flex;
   align-items: center;
 }
@@ -3422,7 +3422,9 @@ Devices tab
 .qt-devices > li:hover .device-desc .hit-area {
   display: block;
 }
-
+.qt-devices p{
+  cursor: text;
+}
 /**Agents**/
 .qt-agents {
   padding: 60px 0 0;
