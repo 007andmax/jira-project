@@ -31,12 +31,17 @@
             }
 
             if (scope.defaultDate) {
-              options.defaultDate = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
+              var defaultDate = new Date(scope.defaultDate);
+              if (defaultDate.getTime() < Date.now()) {
+                defaultDate = Date.now();
+              }
+              options.defaultDate = $filter('date')(defaultDate, 'dd MMM yyyy');
             }
 
             $timeout(function () {
               element.datetimepicker(options);
-            }, 0);
+              ctrl.$setPristine();
+            });
 
             //element.on('shown.bs.dropdown', function(){
             //  var dropdown = element.find('.dropdown-menu');

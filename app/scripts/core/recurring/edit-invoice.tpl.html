@@ -80,8 +80,16 @@
         <textarea class="form-control" ng-model="editInvoice.memo" name="memo" ng-maxlength="250"></textarea>
       </div>
       <div class="row col-sm-12">
-        <div class="form-group col-sm-3">
-          <label>{{ editInvoice && editInvoice.id ? 'Next generation at' : 'Starting date' }}</label>
+        <div class="form-group col-sm-3"
+             ng-class="{'has-error': (editInvoiceForm.sentOn.$dirty || triedToSaveInvoice) && !isStartDateValid()}">
+          <label class="control-label"
+                 ng-show="!(editInvoiceForm.sentOn.$dirty || triedToSaveInvoice) || isStartDateValid()">
+            {{ editInvoice && editInvoice.id ? 'Next generation at' : 'Starting date' }}
+          </label>
+          <label class="control-label"
+                 ng-hide="!(editInvoiceForm.sentOn.$dirty || triedToSaveInvoice) || isStartDateValid()">
+            Date must be after today
+          </label>
           <input class="form-control" type="text" ng-model="editInvoice.nextGenerationAt" placeholder="../../.."
                  readonly ng-change="changeStartDate()" name="sentOn"
                  qt-data-time-picker default-date="editInvoice.nextGenerationAt" min-date="minSentOnDate">
@@ -245,10 +253,17 @@
   </form>
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

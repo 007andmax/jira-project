@@ -3,7 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter', 'UsersService',
+    [
+      '$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter', 'UsersService',
       'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'Utils',
       'quicktech.common.services.UserConfirmationsService',
       function ($scope, RecurringService, CompaniesService, ServicesService, $filter, UsersService,
@@ -66,6 +67,7 @@
               }
             }
           });
+          $scope.minSentOnDate = $filter('date')(new Date($scope.invoice.nextGenerationAt), 'dd MMM yyyy');
 
           $scope.editInvoice = {
             id: $scope.invoice.id,
@@ -104,6 +106,7 @@
             $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms === 0 ? $scope.invoice.paymentTerms : ($scope.invoice.paymentTerms + ' days');
             $timeout(function () {
               $scope.editInvoice.nextGenerationAt = $filter('date')(new Date($scope.invoice.nextGenerationAt), 'dd MMM yyyy');
+              $scope.minSentOnDate = $filter('date')(new Date($scope.invoice.nextGenerationAt), 'dd MMM yyyy');
               $scope.editInvoice.endDate = $filter('date')(new Date($scope.invoice.endDate), 'dd MMM yyyy');
               $scope.paramInvocie.remainGenerations = $scope.invoice.remainGenerations;
             });
@@ -449,7 +452,6 @@
 
         $scope.saveInvoice = function (form) {
           var productsEmpty = false, servicesEmpty = false;
-          $scope.hardDisabledSave = true;
 
           if ($scope.editInvoice.services.length === 1 && isEmpty($scope.editInvoice.services[0])) {
             $scope.editInvoice.services.splice(0, 1);
@@ -462,8 +464,9 @@
           }
 
           $timeout(function () {
-            if (form.$valid && !$scope.disabledSaveInvoice &&
+            if (form.$valid && !$scope.disabledSaveInvoice && $scope.isStartDateValid() &&
               (!$scope.editInvoice.autoCreate || $scope.hasNotifyRecipients($scope.ticketSharedUsersList))) {
+              $scope.hardDisabledSave = true;
 
               var editInvoice = angular.copy($scope.editInvoice);
 
@@ -596,6 +599,11 @@
           }
         };
 
+        $scope.isStartDateValid = function () {
+          var nextGenerationAt = new Date($scope.editInvoice.nextGenerationAt).getTime();
+          return nextGenerationAt > Date.now();
+        };
+
         $scope.$on('createNewEntity', function (event, type) {
           if (type.toString().toLowerCase() === 'company') {
             var unsubscribe = $scope.$on('newCompanyHasBeenCreated',
@@ -651,6 +659,7 @@
           return true;
         }
 
-      }]);
+      }
+    ]);
 
 }());
