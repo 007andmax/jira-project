@@ -23,20 +23,20 @@
     <div ng-if="reportRemoteAccess.lines">
       <ul class="con-col">
         <li class="top-product-list-ticket clearfix">
-          <div class="col-md-3"><strong>Date</strong></div>
+          <div class="col-md-2"><strong>Date</strong></div>
           <div class="col-md-2"><strong>Device</strong></div>
           <div class="col-md-2"><strong>Tech</strong></div>
-          <div class="col-md-1"><strong>Ticket</strong></div>
+          <div class="col-md-2"><strong>Ticket</strong></div>
           <div class="col-md-2"><strong>Viewer IP</strong></div>
           <div class="col-md-1"><strong>Start time</strong></div>
           <div class="col-md-1"><strong>Duration</strong></div>
         </li>
         <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
             on-finish-render="buildPdf()">
-          <div class="col-md-3">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
+          <div class="col-md-2">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
           <div class="col-md-2">{{line.deviceName}}</div>
           <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
-          <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
+          <div class="col-md-2 ellipsis">{{line.ticketNumber}}</div>
           <div class="col-md-2 ellipsis">{{line.viewerIp}}</div>
           <div class="col-md-1">{{ line.startTime }}</div>
           <div class="col-md-1" on-finish-render="hideLoadingIndicator()">{{line.duration}} min</div>
