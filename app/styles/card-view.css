@@ -22,12 +22,6 @@
     border-radius: 3px;
     box-shadow: 2px 4px 20px 0 transparent;
     transition: all .3s }
-  .card-wrapper .red-border{
-    border-left: 3px solid #C00000; }
-  .card-wrapper .green-border{
-    border-left: 3px solid #5EA226; }
-  .card-wrapper .blue-border{
-    border-left: 3px solid #16a4fa; }
     .card-wrapper .card:hover {
       box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4); }
     .card-wrapper .card__cover {
