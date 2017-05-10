@@ -60,11 +60,17 @@
                 devices[companyId].push(parsedData.device);
               } else {
                 var deviceById = Utils.findById(devices[newChange.data.clientCompanyId], parsedData.device.id);
+                Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
                 Utils.customizeObj(parsedData.device, deviceById);
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_UNINSTALLED') {
-              Utils.deleteById(devices[newChange.data.clientCompanyId], newChange.data.value);
+              if (newChange.data.uninstalledAt) {
+                var device = Utils.findById(devices[newChange.data.clientCompanyId], newChange.data.value);
+                Utils.defineReadOnlyProperty(device, 'uninstalledAt', newChange.data.uninstalledAt);
+              } else {
+                Utils.deleteById(devices[newChange.data.clientCompanyId], newChange.data.value);
+              }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'REMOTE_CONNECTION') {
               if (callbackForRemoteConnection[newChange.data.sessionId]) {
