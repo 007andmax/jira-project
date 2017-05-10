@@ -25,6 +25,8 @@
       Utils.handleCallback(future, callback)
     }
 
+
+
     function getUserColors(scope, callback) {
       var userColor = {};
 
@@ -33,7 +35,7 @@
         callback && callback(userColor)
       });
 
-      RealTimeService.subscribe('/users', scope, function(newChange) {
+      RealTimeService.subscribe('/user', scope, function(newChange) {
         if(newChange.action === 'USER_COLOR_CHANGED' ) {
           userColor = newChange.data;
         }
@@ -50,6 +52,7 @@
         companiesColors = resp;
         callback && callback(companiesColors)
       });
+
       RealTimeService.subscribe('/company', scope, function(newChange) {
         if(newChange.action === 'COMPANY_COLOR_CHANGED' ) {
           companiesColors = newChange.data;

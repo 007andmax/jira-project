@@ -35,7 +35,7 @@
 
         ColorsService.getCompaniesColors($scope, function(resp) {
           $scope.companiesColors = resp;
-          console.log("color resp:", $scope.companiesColors);
+          //console.log("color resp:", $scope.companiesColors);
         });
 
 
