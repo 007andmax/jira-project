@@ -12,7 +12,13 @@
 
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
           var urlPattern = /(\b(www\.\S+\b))|(\b(http|ftp|https):\/\/(www\.)?[\w-]+(\.[\w-]+)+\b([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/gim;
-          var htmlTagsWhitelist = /<\s*(?!b|blockquote|br|caption|cite|code|col|colgroup|dd|div|dl|dt|em|h1|h2|h3|h4|h5|h6|i|img|li|ol|p|pre|q|small|strike|strong|sub|sup|table|tbody|td|tfoot|th|thead|tr|u|ul|span).*?\s*?>/gm;
+          var htmlTagsWhitelist = new RegExp('<\\s\*\(\?!b\(>\|\\s\)\|blockquote\|br\|caption\|cite\|code\|col\|' +
+            'colgroup\|dd\|div\|dl\|dt\|em\|h1\|h2\|h3\|h4\|h5\|h6\|i\|img\|li\|ol\|p\|pre\|q\|small\|strike\|' +
+            'strong\|sub\|sup\|table\|tbody\|td\|tfoot\|th\|thead\|tr\|u\|ul\|span\|\\/b\(>\|\\s\)\|\\/' +
+            'blockquote\|\\/br\|\\/caption\|\\/cite\|\\/code\|\\/col\|\\/colgroup\|\\/dd\|\\/div\|\\/dl\|\\/' +
+            'dt\|\\/em\|\\/h1\|\\/h2\|\\/h3\|\\/h4\|\\/h5\|\\/h6\|\\/i\|\\/img\|\\/li\|\\/ol\|\\/p\|\\/pre\|\\/' +
+            'q\|\\/small\|\\/strike\|\\/strong\|\\/sub\|\\/sup\|\\/table\|\\/tbody\|\\/td\|\\/tfoot\|\\/th\|\\/' +
+            'thead\|\\/tr\|\\/u\|\\/ul\|\\/span\)\.\*\?\\s\*\?>', 'gm');
           var pressOnElement, inited = false;
           var editor = element.find('[te-editor]'),
             wysiwyg = editor.wysiwyg({
@@ -42,12 +48,17 @@
 
           editor.on('DOMSubtreeModified', function () {
             var html = wysiwyg.html();
+            var text = wysiwyg.text();
 
             ctrl.$setViewValue(html);
 
             $timeout(function () {
-              if (attrs.teMaxlength) {
-                ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
+              var valid = html.length <= attrs.teHtmlMaxlength;
+              if (attrs.teHtmlMaxlength) {
+                ctrl.$setValidity('maxlength', valid);
+              }
+              if (attrs.teTextMaxlength) {
+                ctrl.$setValidity('maxlength', valid && text.length <= attrs.teTextMaxlength);
               }
 
               validateRequired();
@@ -95,11 +106,11 @@
           element.on('paste', function (e) {
             e.preventDefault();
             var clipboardData = e.originalEvent.clipboardData,
-            html = '';
+              html = '';
 
             if (clipboardData.types.indexOf('text/html') > -1) {
               html = clipboardData.getData("text/html");
-              html = html.replace(htmlTagsWhitelist, '');
+              html = html.replace(htmlTagsWhitelist, '').trim();
             } else {
               html = clipboardData.getData('text/plain');
             }

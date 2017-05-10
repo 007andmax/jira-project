@@ -130,7 +130,8 @@
             <div class="form-row clearfix" ng-if="loadUserProfile">
 
               <div class="form-group full-width" text-editor ng-model="userProfile.signature.content"
-                   te-initial-value="{{ userProfile.signature.content }}" te-maxlength="5000" name="signature"
+                   te-initial-value="{{ userProfile.signature.content }}"
+                   te-text-maxlength="5000" te-html-maxlength="50000"  name="signature"
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'signature')}">
 
                 <label class="control-label" ng-hide="isShowingErrors(basicInfoForm, 'signature')">

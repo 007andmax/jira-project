@@ -35,7 +35,7 @@ module.exports = function(config) {
       'bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js',
       'bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js',
       'bower_components/moment/moment.js',
-      'bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022.js',
+      'bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js',
       'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
       'bower_components/jquery-mousewheel/jquery.mousewheel.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',

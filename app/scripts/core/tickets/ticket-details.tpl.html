@@ -247,7 +247,7 @@
               </div>
 
               <div text-editor te-initial-value="{{ editedTicket.note }}"
-                   ng-model="editedTicket.note" name="note" te-maxlength="5000">
+                   ng-model="editedTicket.note" name="note" te-text-maxlength="5000" te-html-maxlength="50000" >
 
                 <div te-editor class="form-control editor" contenteditable="true"
                      style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
