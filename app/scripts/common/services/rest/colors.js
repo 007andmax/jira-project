@@ -31,13 +31,13 @@
       var userColor = {};
 
       getColors(urlForUsersColors, function(resp) {
-        userColor = resp;
+        Utils.customizeObj(resp, userColor);
         callback && callback(userColor)
       });
 
       RealTimeService.subscribe('/user', scope, function(newChange) {
         if(newChange.action === 'USER_COLOR_CHANGED' ) {
-          userColor = newChange.data;
+          Utils.customizeObj(newChange.data, userColor);
         }
       })
     }
@@ -49,13 +49,13 @@
     function getCompaniesColors(scope, callback) {
       var companiesColors = {};
       getColors(urlForCompaniesColors, function(resp) {
-        companiesColors = resp;
+        Utils.customizeObj(resp, companiesColors);
         callback && callback(companiesColors)
       });
 
       RealTimeService.subscribe('/company', scope, function(newChange) {
         if(newChange.action === 'COMPANY_COLOR_CHANGED' ) {
-          companiesColors = newChange.data;
+          Utils.customizeObj(newChange.data, companiesColors);
         }
       })
 
