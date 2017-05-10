@@ -150,10 +150,12 @@
   top: 7px;
   background-color: #a7afb9;
   color: #323742;
-  width: 40px;
+  min-width: 40px;
   text-align: center;
   font-weight: bold;
   border-radius: 30px;
+  max-width: 65px;
+  padding: 0 5px;
 }
 .icon-pos {
   position: absolute;
@@ -340,4 +342,20 @@
   top: 8px;
   padding: 5px;
   line-height: 1;
+}
+.user-company-circle{
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 50px;
+  border-radius: 50%;
+  top: 10px;
+  box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.50);
+}
+.user-company-circle .colored-circle{
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  border: 2px solid transparent;
 }
