@@ -71,25 +71,25 @@
 
       <div class="left-panel__category settings-left-bar">
         <!--<div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"-->
-             <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->
-          <!--<div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">-->
-            <div class="left-panel__category" ui-sref="settings" ng-click="onClickSettings()"
-                 ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
-                 style="width: calc(100% + 10px)">
-              <img class="menu-img"
-                   ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"
-                   src="images/new-icons/settings-gray.png">
-              <img class="menu-img"
-                   ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"
-                   src="images/new-icons/settings-white.png">
-            </div>
-          <!--</div>-->
+        <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->
+        <!--<div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">-->
+        <div class="left-panel__category" ui-sref="settings" ng-click="onClickSettings()"
+             ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
+             style="width: calc(100% + 10px)">
+          <img class="menu-img"
+               ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"
+               src="images/new-icons/settings-gray.png">
+          <img class="menu-img"
+               ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"
+               src="images/new-icons/settings-white.png">
+        </div>
+        <!--</div>-->
         <!--</div>-->
       </div>
       <!--<div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}"-->
-           <!--ng-click="toggleLeftPanel('tutorial')">-->
-        <!--<img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/new-icons/question-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/new-icons/question-white.png">-->
+      <!--ng-click="toggleLeftPanel('tutorial')">-->
+      <!--<img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/new-icons/question-gray.png">-->
+      <!--<img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/new-icons/question-white.png">-->
       <!--</div>-->
     </div>
   </div>
@@ -106,7 +106,8 @@
              style="padding-left: 55px;"
              ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')"
              ng-click="stateGo($event, 'quickSupport');">
-          <div class="btn btn-success add-session-button has-tooltip icon-pos" style="top: 0px; left: -30px;line-height: 2.4;"
+          <div class="btn btn-success add-session-button has-tooltip icon-pos"
+               style="top: 0px; left: -30px;line-height: 2.4;"
                ng-click="addQuickSession()"
                tooltip-placement="top" uib-tooltip="Create">
             <i class="icn-sm icn-plus"></i>
@@ -209,14 +210,68 @@
         <div class="center-category__category sked" ng-click="filterCompanies('clients')"
              ng-class="{'active': companiesSharedState.filter.isClient}">
           Clients
+
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
+                              'border-color': tagColors[companiesColors['CLIENT']].borderColor}"></span>
+            </div>
+
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': companiesColors['CLIENT'] === $index}"
+                  ng-click="changeCompanyColor('CLIENT', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('leads')"
              ng-class="{'active': companiesSharedState.filter.isLead}">
           Leads
+
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[companiesColors['LEAD']].backgroundColor,
+                              'border-color': tagColors[companiesColors['LEAD']].borderColor}"></span>
+            </div>
+
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': companiesColors['LEAD'] === $index}"
+                  ng-click="changeCompanyColor('LEAD', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('vendors')"
              ng-class="{'active': companiesSharedState.filter.isVendor}">
           Vendors
+
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[companiesColors['VENDOR']].backgroundColor,
+                              'border-color': tagColors[companiesColors['VENDOR']].borderColor}"></span>
+            </div>
+
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': companiesColors['VENDOR'] === $index}"
+                  ng-click="changeCompanyColor('VENDOR', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="filter-block">
           <div class="center-category__category filter">
@@ -229,7 +284,7 @@
                        qt-typeahead-show-on-focus
                        custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-                <div typeahead-input-icon="companiesSharedState.filter.industry" ></div>
+                <div typeahead-input-icon="companiesSharedState.filter.industry"></div>
               </div>
             </div>
           </div>
@@ -266,14 +321,68 @@
         <div class="center-category__category" ng-click="filterUsers('managers')"
              ng-class="{'active': usersSharedState.filter.isContact}">
           Managers
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[usersColors['MANAGER']].backgroundColor,
+                              'border-color': tagColors[usersColors['MANAGER']].borderColor}"></span>
+              <div class="green-circle company-circle"></div>
+            </div>
+
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': usersColors['MANAGER'] === $index}"
+                  ng-click="changeUserColor('MANAGER', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="center-category__category" ng-click="filterUsers('clients')"
              ng-class="{'active': usersSharedState.filter.isClient}">
           Clients
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[usersColors['CLIENT']].backgroundColor,
+                              'border-color': tagColors[usersColors['CLIENT']].borderColor}"></span>
+              <div class="green-circle company-circle"></div>
+            </div>
+
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': usersColors['CLIENT'] === $index}"
+                  ng-click="changeUserColor('CLIENT', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="center-category__category" ng-click="filterUsers('leads')"
              ng-class="{'active': usersSharedState.filter.isLead}">
           Leads
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[usersColors['LEAD']].backgroundColor,
+                              'border-color': tagColors[usersColors['LEAD']].borderColor}"></span>
+              <div class="green-circle company-circle"></div>
+            </div>
+
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': usersColors['LEAD'] === $index}"
+                  ng-click="changeUserColor('LEAD', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="filter-block">
           <div class="center-category__category filter">
@@ -327,7 +436,7 @@
              ng-click="stateGo($event, 'accounting.billable')">
           Billable
         </div>
-       <div class="center-category__category"
+        <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.recurring')}"
              ng-click="stateGo($event, 'accounting.recurring')">
           Recurring
@@ -381,16 +490,16 @@
           <div class="center-category__category filter">
             <div>
               <p>By Company</p>
-             <div class="x-mark-wrapper">
-               <input type="text" class="form-control has-dropdown"
-                      autocomplete="off" ng-model="passwordSharedState.filter.companyId" typeahead-editable="false"
-                      ng-change="passwordSharedState.filter.deviceId = undefined"
-                      typeahead-input-formatter="getCompanyName($model)"
-                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
-                      qt-typeahead-show-on-focus
-                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" >
-               <div typeahead-input-icon="passwordSharedState.filter.companyId"></div>
-             </div>
+              <div class="x-mark-wrapper">
+                <input type="text" class="form-control has-dropdown"
+                       autocomplete="off" ng-model="passwordSharedState.filter.companyId" typeahead-editable="false"
+                       ng-change="passwordSharedState.filter.deviceId = undefined"
+                       typeahead-input-formatter="getCompanyName($model)"
+                       uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                       qt-typeahead-show-on-focus
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                <div typeahead-input-icon="passwordSharedState.filter.companyId"></div>
+              </div>
             </div>
           </div>
           <div class="center-category__category filter">
@@ -433,7 +542,8 @@
                        date-range-picker="onExpireDateChange" position="right bottom">
                 <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.expiredDate">
                 </i>
-                <i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;" ng-show="passwordSharedState.filter.expiredDate"
+                <i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"
+                   ng-show="passwordSharedState.filter.expiredDate"
                    ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>
               </div>
             </div>
@@ -470,9 +580,12 @@
           <div ng-if="$state.is('settings.myProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change Password</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change
+              Password
+            </div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info</div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount">Deactivate Account</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount">Deactivate Account
+            </div>
           </div>
         </div>
 
@@ -506,7 +619,8 @@
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
             </div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#responseTimeSettings">Response Time Settings
+            <div class="category-expanded-paragraph subsettings" navigate-to="#responseTimeSettings">Response Time
+              Settings
             </div>
           </div>
         </div>
@@ -527,7 +641,8 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
-             ng-class="{active: $state.is('settings.tickets')}" ng-if="PermissionsService.isAllowed('VIEW_TICKET_AND_INVOICE_SETTINGS')">
+             ng-class="{active: $state.is('settings.tickets')}"
+             ng-if="PermissionsService.isAllowed('VIEW_TICKET_AND_INVOICE')">
           Ticket and Invoice
         </div>
 
@@ -546,10 +661,17 @@
   </div>
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

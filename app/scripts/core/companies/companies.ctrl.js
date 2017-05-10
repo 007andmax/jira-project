@@ -5,10 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'ColorsService', 'TagsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 SharedStateService, DevicesService, PermissionsService, localStorageService, UserConfirmationsService,
-                UserNotificationService) {
+                UserNotificationService, ColorsService, TagsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -29,6 +29,16 @@
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
         $scope.archivedShown = false;
+
+
+        $scope.tagColors = TagsService.getColors();
+
+        ColorsService.getCompaniesColors($scope, function(resp) {
+          $scope.companiesColors = resp;
+          //console.log("color resp:", $scope.companiesColors);
+        });
+
+
 
         $scope.companiesCtrl = {};
 

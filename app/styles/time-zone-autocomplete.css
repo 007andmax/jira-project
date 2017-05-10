@@ -67,9 +67,9 @@
 .clickable {
   cursor: pointer;
 }
-.clickable:hover {
-  background-color:#e9f5fb;
-}
+/*.clickable:hover {*/
+  /*background-color:#e9f5fb;*/
+/*}*/
 .clickable.time-zone-focused {
   background-color: #e9f5fb;
 }

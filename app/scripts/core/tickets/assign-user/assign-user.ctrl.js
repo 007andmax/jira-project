@@ -12,6 +12,7 @@
 
         $scope.setUserToAssign = function (user) {
           $scope.userToAssign = user;
+          $scope.assignUserToTicket();
         };
 
         $scope.filterAssignUser = function (item) {
