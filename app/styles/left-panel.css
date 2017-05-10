@@ -349,46 +349,13 @@
   position: absolute;
   right: 50px;
   border-radius: 50%;
-  top: 7px;
+  top: 10px;
   box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.50);
 }
-/*.red-circle{*/
-  /*background-color: #EFB2B0;*/
-  /*border: 2px solid #f15348;*/
-/*}*/
-/*.green-circle{*/
-  /*background-color: #BED9A1;*/
-  /*border: 2px solid #7cb342;*/
-/*}*/
-/*.rose-circle{*/
-  /*background-color: #f7b2ca;*/
-  /*border: 2px solid #ea3d78;*/
-/*}*/
-/*.violet-circle{*/
-  /*background-color: #d6bdff;*/
-  /*border: 2px solid #985dff;*/
-/*}*/
-/*.green-circle{*/
-  /*background-color: #9ef2de;*/
-  /*border: 2px solid #0cdeaa;*/
-/*}*/
-/*.pink-circle{*/
-  /*background-color: #f3b3fe;*/
-  /*border: 2px solid #e040fb;*/
-/*}*/
-/*.yellow-circle{*/
-  /*background-color: #fef2ba;*/
-  /*border: 2px solid #fcdd52;*/
-/*}*/
-/*.orange-circle{*/
-  /*background-color: #fad0a5;*/
-  /*border: 2px solid #f3891c;*/
-/*}*/
-/*.lightblue-circle{*/
-  /*background-color: #b8edf3;*/
-  /*border: 2px solid #4dd0e1;*/
-/*}*/
-/*.blue-circle{*/
-  /*background-color: #b4dbfb;*/
-  /*border: 2px solid #42a5f5;*/
-/*}*/
+.user-company-circle .colored-circle{
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
