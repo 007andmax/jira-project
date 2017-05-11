@@ -487,6 +487,11 @@
 .con-col .col-md-1 {
   width: 10%;
 }
+.payment-rollback{
+  display: inline-block;
+  padding: 13px;
+  cursor: pointer;
+}
 .product-report-total-sales,
 .product-report-taxes,
 .product-report-detail-customer {

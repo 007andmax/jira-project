@@ -1024,8 +1024,7 @@ hr {
 
 .receivable-content .top-product-list-ticket {
   border-bottom: 1px solid #eee;
-  border-top: 1px solid #eee;
-  padding-top: 50px;
+  border-top: none;
 }
 
 .receivable-content .payment-receive-fixed div  h3{
@@ -1044,7 +1043,7 @@ hr {
 .receivable-content .report-title {
   text-align: center;
   margin: 0;
-  padding-top: 0;
+  padding: 0;
 }
 
 .receivable-content .product-list-ticket {

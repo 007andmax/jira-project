@@ -7,9 +7,9 @@
         <div class="col-md-3" ng-click="changeOrder('clientCompanyName')"><strong>Company</strong><i class="icn-sm icn-caret-gray"></i></div>
         <div class="col-md-1" ng-click="changeOrder('invoiceNumbers')"><strong>Invoice</strong><i class="icn-sm icn-caret-gray"></i></div>
         <div class="col-md-3"><strong>Note</strong></div>
-        <div class="col-md-2" ng-click="changeOrder('paymentMethod')"><strong>Type</strong><i class="icn-sm icn-caret-gray"></i></div>
+        <div class="col-md-1" ng-click="changeOrder('paymentMethod')"><strong>Type</strong><i class="icn-sm icn-caret-gray"></i></div>
         <!--<div class="col-md-2"><strong>Status</strong><i class="icn-sm icn-caret-gray"></i></div>-->
-        <div class="col-md-2" style="text-align: right" ng-click="changeOrder('totalSum')"><strong>Total</strong></div>
+        <div class="col-md-2" style="text-align: right; width: 18%;" ng-click="changeOrder('totalSum')"><strong>Total</strong></div>
       </li>
       <li class="content-product-list-ticket clearfix" ng-repeat = "payment in payments | orderBy: orderType">
         <div class="col-md-1">
@@ -21,9 +21,13 @@
         <div class="col-md-3">{{payment.clientCompanyName}}</div>
         <div class="col-md-1 ellipsis"><div ng-repeat="invoice in payment.invoiceNumbers">{{invoice}} </div></div>
         <div class="col-md-3">{{payment.note}}</div>
-        <div class="col-md-2">{{payment.paymentMethod}}</div>
+        <div class="col-md-1">{{payment.paymentMethod}}</div>
         <!--<div class="col-md-2"> -status-</div>-->
-        <div class="col-md-2" style="text-align: right">{{payment.totalSum | currency: '$': 2 }}</div>
+        <div class="col-md-2" style="text-align: right; width: 18%;">{{payment.totalSum | currency: '$': 2 }}</div>
+        <div class="payment-rollback">
+          <span uib-tooltip="rollback" tooltip-placement="top" ng-click="rollbackInvoice(invoice)" custom-disabled="" ng-disabled="false">
+            <i class="icon-sm icn-restore icon-render"></i>
+          </span></div>
       </li>
     </ul>
     <button ng-click="openDepositModal()" class="btn btn-primary">Create Deposit Slip</button>
