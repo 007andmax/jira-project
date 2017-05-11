@@ -35,7 +35,7 @@
           <div class="col-md-1" ng-repeat="reducedTax in reportByTaxes.reducedTaxes"
                on-finish-render="buildPdf('columns'); hideLoadingIndicator()">{{reducedTax | currency: '$': 2 }}
           </div>
-          <div class="col-md-1"><strong>{{reportByTaxes.totalSaleSum | currency: '$': 2 }}</strong></div>
+          <div class="col-md-1"><strong>{{reportByTaxes.totalTaxableSum | currency: '$': 2 }}</strong></div>
         </div>
       </div>
       <div ng-if="reportByTaxes.type === 'SUMMARY'">
