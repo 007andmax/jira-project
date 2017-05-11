@@ -96,6 +96,10 @@
         $uibModalInstance.close();
       };
 
+      PaymentsService.getDepositNumber(function (data) {
+        $scope.depositNumber = data;
+      });
+
       $scope.createDepositSlipNote = function () {
         $scope.disableButton = true;
         PaymentsService.postNewDepositSlip({

@@ -12,6 +12,7 @@
       var urlForGetPayments = '/payments';
       var urlForGetDepositSlips = '/payments/deposits';
       var urlForPostNewDepositSlip = ' /payments/deposits';
+      var urlForGetDepositNumber = '/data/actualNumber?type=DEPOSIT';
 
 
       function getData(url, callback) {
@@ -79,11 +80,20 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getDepositNumber(callback) {
+        var depositNumber;
+        getData(urlForGetDepositNumber, function(resp) {
+          depositNumber = resp;
+          callback && callback(depositNumber);
+        })
+      }
+
       return {
         getPaymentsData: getPaymentsData,
         getDepositSlipsData: getDepositSlipsData,
         postNewDepositSlip: postNewDepositSlip,
-        rollback: rollback
+        rollback: rollback,
+        getDepositNumber: getDepositNumber
       }
 
 
