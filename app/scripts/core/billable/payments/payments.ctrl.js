@@ -2,77 +2,94 @@
 
 (function () {
   angular.module('quicktech.core.billable').controller('quicktech.core.payments.paymentsCtrl',
-    ['$scope', '$rootScope', '$stateParams', '$http', 'PaymentsService', '$uibModal', function ($scope, $rootScope, $stateParams, $http, PaymentsService, $uibModal) {
+    [
+      '$scope', '$rootScope', '$stateParams', '$http', 'PaymentsService', '$uibModal',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, $rootScope, $stateParams, $http, PaymentsService, $uibModal, UserConfirmationsService,
+                UserNotificationService) {
 
-      var availableMods = ['payments-list', 'deposit-slips'];
+        var availableMods = ['payments-list', 'deposit-slips'];
 
-      $scope.parseDate = Date.parse.bind(Date);
+        $scope.parseDate = Date.parse.bind(Date);
 
-      $scope.mode = availableMods[0];
-      $scope.payments = [];
-      $scope.orderType = 'createdAt';
-      $scope.idDictionary = {};
+        $scope.mode = availableMods[0];
+        $scope.payments = [];
+        $scope.orderType = 'createdAt';
+        $scope.idDictionary = {};
 
-      $scope.depositSlips = [];
+        $scope.depositSlips = [];
 
-      $scope.changeOrder = function (type) {
-        if ($scope.orderType === type) {
-          $scope.orderType = $scope.orderType[0] === '-' ? $scope.orderType.slice(1) : '-' + $scope.orderType;
-        } else {
-          $scope.orderType = type;
-        }
-      };
+        $scope.changeOrder = function (type) {
+          if ($scope.orderType === type) {
+            $scope.orderType = $scope.orderType[0] === '-' ? $scope.orderType.slice(1) : '-' + $scope.orderType;
+          } else {
+            $scope.orderType = type;
+          }
+        };
 
-      $scope.changeMode = function (mode) {
-        $scope.mode = mode;
-      };
-
-      $scope.$watch(function () {
-        return $stateParams.mode;
-      }, function (mode) {
-        if (availableMods.indexOf(mode) < 0) {
-          $state.go('payments', {
-            mode: availableMods[0]
-          });
-        } else {
+        $scope.changeMode = function (mode) {
           $scope.mode = mode;
-        }
-      });
+        };
 
-      // if ($scope.mode === 'payments-list') {
-      //   PaymentsService.getPaymentsData($scope, function (resp) {
-      //     $scope.payments = resp;
-      //   });
-      // } else  {
-      //   PaymentsService.getDepositSlipsData($scope, function (resp) {
-      //     $scope.depositSlips = resp;
-      //     console.log("sdfsdfsdfsdfsd");
-      //     console.log(resp);
-      //   });
-      // }
-      PaymentsService.getPaymentsData($scope, function (resp) {
-        $scope.payments = resp;
-      });
-      PaymentsService.getDepositSlipsData($scope, function (resp) {
-        $scope.depositSlips = resp;
-      });
-
-
-      $scope.openDepositModal = function () {
-        $uibModal.open({
-          templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
-          animation: true,
-          backdrop: false,
-          size: 'sm',
-          controller: 'modalCtrl',
-          resolve: {
-            paymentIds: function () {
-              return Object.keys($scope.idDictionary);
-            }
+        $scope.$watch(function () {
+          return $stateParams.mode;
+        }, function (mode) {
+          if (availableMods.indexOf(mode) < 0) {
+            $state.go('payments', {
+              mode: availableMods[0]
+            });
+          } else {
+            $scope.mode = mode;
           }
         });
-      };
-    }]).controller("modalCtrl", ['$scope', 'PaymentsService', '$uibModalInstance', 'paymentIds',
+
+        // if ($scope.mode === 'payments-list') {
+        //   PaymentsService.getPaymentsData($scope, function (resp) {
+        //     $scope.payments = resp;
+        //   });
+        // } else  {
+        //   PaymentsService.getDepositSlipsData($scope, function (resp) {
+        //     $scope.depositSlips = resp;
+        //     console.log("sdfsdfsdfsdfsd");
+        //     console.log(resp);
+        //   });
+        // }
+        PaymentsService.getPaymentsData($scope, function (resp) {
+          $scope.payments = resp;
+        });
+        PaymentsService.getDepositSlipsData($scope, function (resp) {
+          $scope.depositSlips = resp;
+        });
+
+        $scope.rollbackPayment = function (payment) {
+          if (!$scope.rollbackInProgress) {
+            $scope.rollbackInProgress = true;
+            UserConfirmationsService.show('Do you really want to rollback this payment?', 'Yes').then(function () {
+              PaymentsService.rollback(payment.id, function () {
+                UserNotificationService.show('Payment successfully rolled back', true);
+                $scope.rollbackInProgress = false;
+              });
+            });
+          }
+        };
+
+        $scope.openDepositModal = function () {
+          $uibModal.open({
+            templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
+            animation: true,
+            backdrop: false,
+            size: 'sm',
+            controller: 'modalCtrl',
+            resolve: {
+              paymentIds: function () {
+                return Object.keys($scope.idDictionary);
+              }
+            }
+          });
+        };
+      }
+    ]).controller("modalCtrl", [
+    '$scope', 'PaymentsService', '$uibModalInstance', 'paymentIds',
     function ($scope, PaymentsService, $uibModalInstance, paymentIds) {
 
       $scope.closeModal = function () {
@@ -89,5 +106,6 @@
         });
       };
 
-    }])
+    }
+  ])
 })();

@@ -25,9 +25,11 @@
         <!--<div class="col-md-2"> -status-</div>-->
         <div class="col-md-2" style="text-align: right; width: 18%;">{{payment.totalSum | currency: '$': 2 }}</div>
         <div class="payment-rollback">
-          <span uib-tooltip="rollback" tooltip-placement="top" ng-click="rollbackInvoice(invoice)" custom-disabled="" ng-disabled="false">
+          <span uib-tooltip="rollback" tooltip-placement="top"
+                ng-click="rollbackPayment(payment)" custom-disabled="{{ rollbackInProgress }}">
             <i class="icon-sm icn-restore icon-render"></i>
-          </span></div>
+          </span>
+        </div>
       </li>
     </ul>
     <button ng-click="openDepositModal()" class="btn btn-primary">Create Deposit Slip</button>
