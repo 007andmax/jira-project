@@ -211,7 +211,7 @@
              ng-class="{'active': companiesSharedState.filter.isClient}">
           Clients
 
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
@@ -233,7 +233,7 @@
              ng-class="{'active': companiesSharedState.filter.isLead}">
           Leads
 
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[companiesColors['LEAD']].backgroundColor,
@@ -255,7 +255,7 @@
              ng-class="{'active': companiesSharedState.filter.isVendor}">
           Vendors
 
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[companiesColors['VENDOR']].backgroundColor,
@@ -321,7 +321,7 @@
         <div class="center-category__category" ng-click="filterUsers('managers')"
              ng-class="{'active': usersSharedState.filter.isContact}">
           Managers
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[usersColors['MANAGER']].backgroundColor,
@@ -343,7 +343,7 @@
         <div class="center-category__category" ng-click="filterUsers('clients')"
              ng-class="{'active': usersSharedState.filter.isClient}">
           Clients
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[usersColors['CLIENT']].backgroundColor,
@@ -365,7 +365,7 @@
         <div class="center-category__category" ng-click="filterUsers('leads')"
              ng-class="{'active': usersSharedState.filter.isLead}">
           Leads
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true">
+          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[usersColors['LEAD']].backgroundColor,
