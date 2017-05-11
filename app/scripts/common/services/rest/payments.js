@@ -74,11 +74,16 @@
         return postData(urlForPostNewDepositSlip, data, callback)
       }
 
+      function rollback(paymentId, callback) {
+        var future = $http.put('/payments/rollback?paymentId=' + paymentId, {});
+        Utils.handleCallback(future, callback);
+      }
 
       return {
         getPaymentsData: getPaymentsData,
         getDepositSlipsData: getDepositSlipsData,
-        postNewDepositSlip: postNewDepositSlip
+        postNewDepositSlip: postNewDepositSlip,
+        rollback: rollback
       }
 
 
