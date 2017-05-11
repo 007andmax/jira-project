@@ -17,12 +17,13 @@
           var autocompleteServiceList;
 
           $scope.$watch('serviceList.length', function () {
-            autocompleteServiceList = [];
+            var listBeforeSorting = [];
             if ($scope.serviceList && $scope.serviceList.length) {
               for (var i = 0; i < $scope.serviceList.length; i++) {
-                autocompleteServiceList.push({ 'value': $scope.serviceList[i].name, 'data': $scope.serviceList[i] });
+                listBeforeSorting.push({ 'value': $scope.serviceList[i].name, 'data': $scope.serviceList[i] });
               }
             }
+            autocompleteServiceList = listBeforeSorting.sort();
 
             $(element).autocomplete({
               lookup: autocompleteServiceList,
