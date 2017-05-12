@@ -7,17 +7,19 @@
       return {
         x: 0,
         y: 1,
-        width: 15
+        width: 15,
+        toFixed: 2
       };
     };
     return {
       restrict: 'E',
       require: '^d3chart',
       link: function (scope, el, attrs, chartController) {
-        var barsElements, height, options, redraw, width, x, y, tooltip, shadowBars;
+        var barsElements, height, options, redraw, width, x, y, toFixed, tooltip, shadowBars;
         options = angular.extend(defaults(), attrs);
         x = chartController.getScale(options.xscale || options.x);
         y = chartController.getScale(options.yscale || options.y);
+        toFixed = options.toFixed;
         tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
 
         height = chartController.innerHeight;
@@ -107,7 +109,7 @@
             var postion = angular.element(this).offset();
             return tooltip.html(
               '<div class="tooltip-inner ' + options.chartTooltip + '-tooltip">' +
-              (options.tooltipPreffix || '') + d[options.y].toFixed(2) + ' ' + (options.tooltipPostfix || '') + '<br>' +
+              (options.tooltipPreffix || '') + d[options.y].toFixed(toFixed) + ' ' + (options.tooltipPostfix || '') + '<br>' +
               (d[options.additionalTooltipField] !== undefined ? d[options.additionalTooltipField] : '') +
               '</div>')
               .attr('class', 'tooltip')
