@@ -15,6 +15,7 @@
           var inputElement = element.find('input');
           var parentMenu = element.parents('ul.dropdown-menu');
           var actionElement = inputElement.parents('.form-group').find('div.label-add-btn > div');
+          var mainMenu = element.parents('div.dropdown');
 
           var refreshAssignTicket = function () {
 
@@ -122,6 +123,8 @@
 
               inputElement.data('autocomplete').container.focus();
               $scope.setUserToAssign(selection.data);
+              console.log(mainMenu);
+              mainMenu.removeClass('open'); //close dropdown-menu after reassign..
             },
             onDoubleEnter: function () {
               // Idea: use the callback return value to decide if the execution should continue or not
