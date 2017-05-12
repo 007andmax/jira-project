@@ -1032,6 +1032,10 @@ hr {
   text-align: center;
   background-color: #fff;
 }
+.receivable-content .payment-receive-fixed div{
+  display: inline-block;
+  width: 100%;
+}
 .receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
 }

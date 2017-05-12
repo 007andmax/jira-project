@@ -657,10 +657,10 @@
   width: 170px;
 }
 
-.product-list-ticket button {
-  width: 230px;
+.receivable-content .payment-receive-fixed button {
   float: right;
-  margin-top: 20px;
+  display: inline-block;
+  margin-top: -35px;
 }
 
 .run-report-content button,
