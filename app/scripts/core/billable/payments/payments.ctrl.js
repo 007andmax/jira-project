@@ -73,6 +73,15 @@
           }
         };
 
+        $scope.isAnyPaymentSelected = function () {
+          for (var id in $scope.idDictionary) {
+            if ($scope.idDictionary[id]) {
+              return true;
+            }
+          }
+          return false;
+        };
+
         $scope.openDepositModal = function () {
           $uibModal.open({
             templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
@@ -82,7 +91,14 @@
             controller: 'modalCtrl',
             resolve: {
               paymentIds: function () {
-                return Object.keys($scope.idDictionary);
+                var paymentIds = [];
+                for (var id in $scope.idDictionary) {
+                  if ($scope.idDictionary[id]) {
+                    paymentIds.push(id);
+                  }
+                }
+                $scope.idDictionary = {};
+                return paymentIds;
               }
             }
           });

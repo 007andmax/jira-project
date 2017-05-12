@@ -20,7 +20,10 @@
         <div>
           <h3>{{ mode === 'payments-list' ? 'Payments' : 'Deposit Slips' }}</h3>
         </div>
-        <button ng-click="openDepositModal()" class="btn btn-primary">Create Deposit Slip</button>
+        <button ng-click="openDepositModal()" ng-show="mode === 'payments-list'" class="btn btn-primary"
+                custom-disabled="{{ !isAnyPaymentSelected() }}">
+          Create Deposit Slip
+        </button>
       </div>
     </div>
 
