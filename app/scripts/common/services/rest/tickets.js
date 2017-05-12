@@ -392,10 +392,10 @@
       function getAllCounts(callback) {
 
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
-          storage.ticketsQuantity = resp.data;
+          storage.ticketsQuantityMap = resp.data;
 
           if (callback) {
-            callback(storage.ticketsQuantity);
+            callback(storage.ticketsQuantityMap);
           }
         }, function (resp) {
           if (callback) {

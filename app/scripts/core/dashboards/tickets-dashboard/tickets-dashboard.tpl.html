@@ -27,7 +27,7 @@
                   <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
                           ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
                   <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
-                  <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"></d3bars>
+                  <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart" to-fixed="0"></d3bars>
                 </div>
 
               </div>
