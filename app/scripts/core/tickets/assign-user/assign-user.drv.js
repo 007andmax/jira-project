@@ -125,7 +125,7 @@
               $scope.setUserToAssign(selection.data);
               setTimeout(function() {
                 mainDropdown.removeClass('open');
-              }, 1000)
+              }, 500)
             },
             onDoubleEnter: function () {
               // Idea: use the callback return value to decide if the execution should continue or not
