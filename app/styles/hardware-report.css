@@ -771,56 +771,82 @@ button {
 
 /*Reports page (all reports)*/
 .reports-all {
-  padding: 60px 0 60px 70px;
+  padding: 45px 30px;
+  color: #404b5f;
+  height: 100vh;
+  background-color: #F4F4F4;
 }
 
-.reports-all .col-sm-4 {
-  width: 38%;
-}
-
-.reports-all ul {
-  list-style: none;
-  border: 1px solid #C8CBCA;
-  border-radius: 3px;
-  padding: 0;
-  border-bottom: none;
-}
-
-.reports-all li {
-  height: 45px;
-  border-bottom: 1px solid #C8CBCA;
-
-}
-
-.reports-all p {
-  font-size: 18px;
-  font-weight: bold;
-  padding: 20px 0;
-}
-
-.reports-all li.content-report,
-.reports-all li.content-report-button {
-  font-size: 16px;
-  font-weight: bold;
+.reports-all .col-sm-4 .report {
   background-color: #fff;
-  cursor: pointer;
-  line-height: 45px;
-  padding: 0 50px;
-}
-
-.reports-all li.content-report:hover,
-.reports-all li.content-report-button:hover {
-  background-color: #F5FAFE;
-}
-
-.reports-all li.content-report-button button {
-  color: #4BA9DF;
-  border: none;
-  background-color: transparent;
-  height: 45px;
+  border-radius: 2px 3px 3px 2px;
+  margin: 0 30px 30px 0;
   width: 100%;
-  text-align: left;
-  outline: none;
+  height: 186px;
+  padding: 30px 30px;
+  transition: all .3s;
+  position: relative;
+}
+
+.reports-all .col-sm-4 .report:hover {
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.reports-all .report p {
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.reports-all .report p:after {
+  width: 44px;
+  height: 2px;
+  background-color: #4BA9DF;
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+}
+
+.reports-all .col-sm-4:last-child .report {
+  margin-right: 0;
+}
+
+.reports-all .report img {
+  position: absolute;
+  right: 22px;
+  top: 23px;
+}
+
+.reports-all .report ul {
+  list-style: none;
+  padding: 0 0 0 30px;
+  margin: 0;
+}
+
+.reports-all .report ul li {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.reports-all .report ul li:hover:before {
+  border-color: #4BA9DF;
+}
+
+.reports-all .report ul li:before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 2px solid #c2c5cb;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  left: -30px;
+  top: 5px;
 }
 
 .run-report-content-device .device-report {
@@ -1028,12 +1054,14 @@ button {
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -170px;
   }
-  .deposit-create .col-md-2{
+
+  .deposit-create .col-md-2 {
     width: 17% !important;
   }
 }
+
 @media screen and (max-width: 1280px) {
-  .deposit-create .col-md-2{
+  .deposit-create .col-md-2 {
     width: 16% !important;
   }
 }
