@@ -8,8 +8,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
-    function ($http, $rootScope, RealTimeService, Utils) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'UsersService',
+    function ($http, $rootScope, RealTimeService, Utils, UsersService) {
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
@@ -63,12 +63,17 @@
         leftPanelCounters: {}
       };
 
+      var userId;
+
       var unwatch = $rootScope.$watch('currentUser.id', function (currentUserId) {
         if (currentUserId) {
+          userId = currentUserId;
           queries = getQueries(currentUserId);
           unwatch();
         }
       });
+
+      //var currentUser = UsersService.getCurrentUser();
 
       function getQueries(currentUserId) {
         return {
@@ -592,7 +597,62 @@
         Utils.handleCallback(future, callback);
       }
 
+      function changeTicketsCounts(newChange) {
+        console.log("userId: ", userId);
+        console.log("realtime mewChange: ", newChange);
+        console.log("storage.ticketsQuantityMap: ", storage.ticketsQuantityMap);
+
+
+        //var ticketChangedActions =
+        // ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH',
+        // 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE',
+        // 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+
+        //storage.ticketsQuantityMap
+
+        switch(newChange.action) {
+          case('CREATED_TICKET'):
+            storage.ticketsQuantityMap.ALL++;
+            break;
+          case('ASSIGNED_USER'):
+            storage.ticketsQuantityMap.UNASSIGNED--;
+            storage.ticketsQuantityMap.OPEN++;
+            if(newChange.data.assignedUser.id === userId) {
+              storage.ticketsQuantityMap.USER++;
+            }
+            break;
+          case('PRIORITY_CHANGED'):
+            break;
+          case('STATUS'):
+            break;
+          case('TRASH'):
+            if(newChange.data.trash === true) {
+              storage.ticketsQuantityMap.TRASH++;
+
+            } else if (newChange.data.trash === false) {
+              storage.ticketsQuantityMap.TRASH--;
+
+            }
+            break;
+          case('REPORT_AS_SPAM'):
+            break;
+          case('RESTORE_FROM_SPAM'):
+            break;
+          case('TICKET_SHARE'):
+            break;
+          case('MARKED_AS_SPAM'):
+            break;
+          case('EDITED_TICKET'):
+            break;
+          default:
+            console.log('wrong action');
+        }
+        console.log("NEW storage.ticketsQuantityMap: ", storage.ticketsQuantityMap);
+      }
+
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
+
+        changeTicketsCounts(newChange); //realtime ticket counts change
 
         if (newChange.data && newChange.data.number) {
           newChange.data.number = numberPrefix + newChange.data.number;
