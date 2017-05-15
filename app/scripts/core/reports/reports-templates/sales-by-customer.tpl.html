@@ -7,15 +7,15 @@
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"
                  send-to-mail="sendToMail"></report-menu>
   </div>
-  <div class="product-list-ticket" ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '870' : '1180'}">
-    <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
-      <h3>{{ reportByCustomers.techCompanyName }}</h3>
-      <h3 ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
-        Detailed sales for <span>{{ reportByCustomers.clientCompanyName }}</span>
-      </h3>
-      <h3><span>{{ parseDate(reportByCustomers.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByCustomers.endDate) | date: 'dd.MM.yyyy' }}</span>
-      </h3>
-    </div>
+  <div class="product-list-ticket" ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '940' : '1180'}">
+    <!--<div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">-->
+      <!--<h3>{{ reportByCustomers.techCompanyName }}</h3>-->
+      <!--<h3 ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">-->
+        <!--Detailed sales for <span>{{ reportByCustomers.clientCompanyName }}</span>-->
+      <!--</h3>-->
+      <!--<h3><span>{{ parseDate(reportByCustomers.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByCustomers.endDate) | date: 'dd.MM.yyyy' }}</span>-->
+      <!--</h3>-->
+    <!--</div>-->
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'" >
       <ul>

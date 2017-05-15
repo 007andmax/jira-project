@@ -12,13 +12,13 @@
                  is-radio-button-hidden="true"></report-menu>
   </div>
   <div class="product-list-ticket" >
-    <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
-      <h3>{{reportRemoteAccess.techCompanyName}}</h3>
-      <h3 ng-if="reportRemoteAccess.type === 'DETAILED'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>
-      </h3>
-      <h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd.MM.yyyy' }}</span>
-      </h3>
-    </div>
+    <!--<div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">-->
+      <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
+      <!--<h3 ng-if="reportRemoteAccess.type === 'DETAILED'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>-->
+      <!--</h3>-->
+      <!--<h3><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd.MM.yyyy' }}</span>-->
+      <!--</h3>-->
+    <!--</div>-->
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportRemoteAccess.lines">
       <ul class="con-col">
@@ -44,7 +44,7 @@
       </ul>
     </div>
     <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
-      <p><strong>Total Duration: <span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
     </div>
   </div>
 </div>

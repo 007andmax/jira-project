@@ -4017,6 +4017,16 @@ input[type="search"] {
   margin-bottom: 10px;
   position: relative;
 }
+.tech-button .chart-header-controls .form-group{
+  display: inline-block;
+  margin-right: 20px;
+  width: 250px;
+  float: left;
+  margin-bottom: 0;
+}
+.tech-button .chart-header .chart-header-controls p{
+  margin: 5px 10px 0 10px;
+}
 
 #Service .col-1 .form-group {
   margin-bottom: 0;

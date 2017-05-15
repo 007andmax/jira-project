@@ -7,10 +7,10 @@
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>
   </div>
   <div class="product-list-ticket">
-    <div class="header-product-list-ticket" ng-if="techReportProductSales.lines">
-      <h4 ng-show="techReportProductSales.type =='BILLED_TIME'">Billed Time</h4>
-      <h4 ng-show="techReportProductSales.type =='PRODUCT_SOLD'">Products Sold</h4>
-    </div>
+    <!--<div class="header-product-list-ticket" ng-if="techReportProductSales.lines">-->
+      <!--<h4 ng-show="techReportProductSales.type =='BILLED_TIME'">Billed Time</h4>-->
+      <!--<h4 ng-show="techReportProductSales.type =='PRODUCT_SOLD'">Products Sold</h4>-->
+    <!--</div>-->
     <nvd3 options="options" data="data" ng-if="responseSuccess"></nvd3>
     <div class="clearfix" ng-if="techReportProductSales.lines">
       <div ng-show="techReportProductSales.type == 'BILLED_TIME'">Total Hours: <span>{{techReportProductSales.total}} hours</span></div>

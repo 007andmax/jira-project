@@ -327,35 +327,40 @@
 
 /*Reports page (Report)*/
 .product-list-report {
-  width: 870px;
-  margin: 0 auto;
-  padding: 15px 0;
+  padding: 30px 30px 30px;
+  height: 100%;
+  background-color: #F4F4F4;
+  min-height: 100vh;
+}
+.product-list-report .report-title{
+  position: absolute;
+  top: 35px;
 }
 
 .product-list-ticket {
   margin: 0 auto;
-  padding: 30px 15px;
-  /*height: 100vh;*/
+  padding: 0 15px 30px;
   border: 1px solid #bbb;
   box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
+  width: 940px;
+  background-color: #fff;
+  min-height: 40px;
+}
+
+.product-list-report-btn {
+  width: 940px;
+  margin: 0 auto;
 }
 
 .header-product-list-ticket {
-  text-align: center;
-  padding: 0;
-  width: 100%;
-  color: #404b5f;
-  position: relative;
+  float: left;
+  padding: 25px 0;
 }
 
-.header-product-list-ticket p {
-  position: absolute;
-  right: 100px;
-  bottom: 5px;
-}
-
-.header-product-list-ticket h3 {
+.header-product-list-ticket h4 {
   margin: 0;
+  font-size: 16px;
+  font-weight: 500;
   padding-bottom: 20px;
 }
 
@@ -419,8 +424,9 @@
 }
 
 .top-product-list-ticket {
-  border-bottom: 1px solid #bbb;
-  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #d3d8e1;
+  height: 65px;
+  text-transform: uppercase;
 }
 
 .product-list-ticket ul {
@@ -431,6 +437,8 @@
 
 .product-list-ticket li.content-product-list-ticket {
   line-height: 15px;
+  min-height: 65px;
+  border-bottom: 1px solid #d3d8e1;
 }
 
 .product-list-ticket li.content-product-list-ticket [class*=col-md-] {
@@ -443,7 +451,12 @@
 }
 
 .product-list-ticket [class*=col-md-] {
-  padding: 15px 6px;
+  padding: 17px 6px;
+  line-height: 30px;
+}
+
+.top-product-list-ticket [class*=col-md-] {
+  padding: 10px 6px 17px;
 }
 
 .product-list-ticket .col-md-3 {
@@ -501,33 +514,47 @@
   cursor: pointer;
 }
 
-.product-report-total-sales,
-.product-report-taxes,
-.product-report-detail-customer {
-  border-bottom: 1px solid #bbb;
-  border-top: 1px solid #bbb;
-}
+/*.product-report-total-sales,*/
+/*.product-report-taxes,*/
+/*.product-report-detail-customer {*/
+/*border-bottom: 1px solid #bbb;*/
+/*border-top: 1px solid #bbb;*/
+/*}*/
 
 .product-report-total-sales p {
   float: right;
   font-size: 16px;
   padding: 15px 0;
+  text-align: right;
 }
 
-.product-list-report-btn {
-  width: 870px;
-  margin: 0 auto;
+.product-report-total-sales p span {
+  font-size: 22px;
 }
 
 .product-report-btn {
   display: inline-block;
-  margin: 10px;
+  margin: 45px 5px 0;
   float: right;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #d1dbec;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: all .3s;
+
+}
+
+.product-report-btn:hover {
+  background-color: #0094d0;
+  border-color: #0094d0;
 }
 
 .product-report-btn img {
-  width: 25px;
+  width: 13px;
+  margin-top: 6px;
+  margin-left: 8px;
 }
 
 .product-report-btn .dropdown-menu {
@@ -603,7 +630,12 @@
 
 .report-title {
   font-size: 20px;
-  padding: 20px 0;
+}
+
+.report-title .chart-header-controls .form-group {
+  display: inline-block;
+  margin-right: 20px;
+  width: 250px;
 }
 
 .radio-buttons-product-report .radio:not(checked) {
@@ -674,28 +706,26 @@
   margin-top: -38px;
 }
 
-.run-report-content button,
-button {
-  display: inline-block;
-  background-color: #F1F5FA;
-  border: 1px solid #BEBEBE;
-  border-radius: 3px;
-  height: 45px;
-  width: 175px;
-  font-size: 20px;
-  outline: none;
+.run-report-content {
+  border-bottom: 1px solid #d3d8e1;
 }
 
-.run-report-content button {
+.run-report-content .form-group {
+  float: right;
+}
+
+.run-report-content .btn {
   margin-bottom: 20px;
   vertical-align: bottom;
+  background-color: #90C56B;
+  width: 100px;
 }
 
 .run-report-content .content {
-  width: 323px;
+  width: 250px;
   display: inline-block;
-  margin-right: 20px;
-  padding-bottom: 10px;
+  margin-right: 10px;
+  padding-bottom: 15px;
   position: relative;
   vertical-align: middle;
 }
@@ -706,6 +736,10 @@ button {
 
 .content-product-list-ticket .checkbox .control-indicator {
   top: -2px;
+}
+
+.top-product-list-ticket {
+  font-size: 13px;
 }
 
 .top-product-list-ticket .col-md-2,
@@ -726,12 +760,17 @@ button {
 
 .run-report-content input,
 .detailed-radio .customer-names {
-  height: 45px;
   outline: none;
-  border-radius: 5px;
-  border: 2px solid #BEBEBE;
   padding: 0 40px 0 10px;
   width: 100%;
+  height: 36px;
+  border-radius: 4px 3px 3px 4px;
+  border: 1px solid #d3d8e1;
+  background-color: #ffffff;
+}
+
+.run-report-content input::-webkit-input-placeholder {
+  color: #666f7f;
 }
 
 .detailed-radio .customer-names {
@@ -747,7 +786,7 @@ button {
 .run-report-content i {
   position: absolute;
   right: 15px;
-  top: 17px;
+  top: 15px;
   cursor: pointer;
 }
 
@@ -850,20 +889,15 @@ button {
 }
 
 .run-report-content-device .device-report {
-  width: 150px;
-  margin-right: 20px;
+  margin-right: 10px;
   display: inline-block;
   position: relative;
   vertical-align: top;
+  max-width: 250px;
 }
 
 .run-report-content-device .device-report .icn-sm.icn-caret-gray {
   top: 53px;
-}
-
-.run-report-content-device .content {
-  margin-right: 20px;
-  width: 236px;
 }
 
 .run-report-content-device .text-error {
@@ -875,7 +909,7 @@ button {
 }
 
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu {
-  left: -210px !important;
+  left: -156px !important;
   max-height: 144px !important;
 }
 
@@ -962,16 +996,12 @@ button {
   width: 10%;
 }
 
-.detail-customer {
-  width: 1180px;
-}
-
-.detail-customer .report-title,
-.detail-customer .run-report-content-by-customer,
-.detail-customer .radio-buttons-product-report {
-  margin: 0 auto;
-  width: 870px;
-}
+/*.detail-customer .report-title,*/
+/*.detail-customer .run-report-content-by-customer,*/
+/*.detail-customer .radio-buttons-product-report {*/
+/*margin: 0 auto;*/
+/*width: 870px;*/
+/*}*/
 
 .list-ticket-detail-customer {
   width: 1180px;
@@ -1044,6 +1074,20 @@ button {
   padding: 10px 0;
 }
 
+.report-caret-icon {
+  width: 10px;
+  height: 6px;
+  background: url("../images/new-icons/report-caret.png");
+}
+
+.report-calendar {
+  width: 12px;
+  height: 12px;
+  background: url("../images/new-icons/report-calendar.png");
+  right: 15px;
+  top: 12px !important;
+}
+
 @media screen and (max-width: 1600px) {
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -10px;
@@ -1053,6 +1097,12 @@ button {
 @media screen and (max-width: 1366px) {
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -170px;
+  }
+  .run-report-content .content{
+    max-width: 160px;
+  }
+  .run-report-content-device .device-report{
+    max-width: 125px;
   }
 
   .deposit-create .col-md-2 {
