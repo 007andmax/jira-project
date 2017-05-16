@@ -3,9 +3,9 @@
 (function () {
   angular.module('quicktech.core.billable').controller('quicktech.core.payments.paymentsCtrl',
     [
-      '$scope', '$rootScope', '$stateParams', '$http', 'PaymentsService', '$uibModal',
+      '$scope', '$rootScope', '$stateParams', '$http', 'PaymentsService', '$uibModal', '$timeout',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, $rootScope, $stateParams, $http, PaymentsService, $uibModal, UserConfirmationsService,
+      function ($scope, $rootScope, $stateParams, $http, PaymentsService, $uibModal, $timeout, UserConfirmationsService,
                 UserNotificationService) {
 
         var availableMods = ['payments-list', 'deposit-slips'];
@@ -80,6 +80,10 @@
             }
           }
           return false;
+        };
+
+        $scope.toggleDeposit = function (depositId) {
+          $scope.$broadcast('toggleDepositSlip-' + depositId);
         };
 
         $scope.openDepositModal = function () {
