@@ -22,7 +22,10 @@
       <!--REPORT-->
       <ul class="acc-col">
         <li class="top-product-list-ticket clearfix">
-          <div class="col-md-3"><strong>Company Name</strong></div>
+          <div class="col-md-3">
+            <strong ng-if="reportAccountsReceivable.type ==='SUMMARY' ">Company Name</strong>
+            <strong ng-if="reportAccountsReceivable.type ==='DETAILED' ">Invoice</strong>
+          </div>
           <div class="col-md-2"><strong>Current</strong></div>
           <div class="col-md-1"><strong>&lt;1 month</strong></div>
           <div class="col-md-1"><strong>&lt;2 month</strong></div>
@@ -31,7 +34,10 @@
           <div class="col-md-2"><strong>Total</strong></div>
         </li>
         <li class="content-product-list-ticket clearfix" ng-repeat="line in reportAccountsReceivable.lines"  on-finish-render="buildPdf()">
-          <div class="col-md-3">{{line.clientCompanyName}}</div>
+          <div class="col-md-3">
+            <div ng-if="reportAccountsReceivable.type ==='SUMMARY' ">{{line.clientCompanyName}}</div>
+            <div ng-if="reportAccountsReceivable.type ==='DETAILED' ">{{line.invoiceNumber}}</div>
+          </div>
           <div class="col-md-2">{{ (line.currentSum || 0) | currency: '$': 2 }}</div>
           <div class="col-md-1">{{ (line.month1Sum || 0) | currency: '$': 2 }}</div>
           <div class="col-md-1">{{ (line.month2Sum || 0) | currency: '$': 2 }}</div>

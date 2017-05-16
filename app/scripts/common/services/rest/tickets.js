@@ -734,7 +734,7 @@
         //     } else if( newChange.data.assignedUser === null) {
         //       storage.ticketsQuantityMap.UNASSIGNED--;
         //     }
-        //     break
+        //     break;
         //
         //   case('EDITED_TICKET'):
         //     break;
