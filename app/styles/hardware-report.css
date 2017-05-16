@@ -332,7 +332,8 @@
   background-color: #F4F4F4;
   min-height: 100vh;
 }
-.product-list-report .report-title{
+
+.product-list-report .report-title {
   position: absolute;
   top: 35px;
 }
@@ -790,6 +791,11 @@
   cursor: pointer;
 }
 
+.run-report-content .icn-remove-old{
+  top: 13px;
+  right: 13px;
+}
+
 .run-report-content-deposit i {
   top: 50px;
 }
@@ -902,10 +908,6 @@
 
 .run-report-content-device .text-error {
   left: 0 !important;
-}
-
-.run-report-content-device .device-report .icn-remove-old {
-  top: 53px;
 }
 
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu {
@@ -1098,10 +1100,12 @@
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -170px;
   }
-  .run-report-content .content{
+
+  .run-report-content .content {
     max-width: 160px;
   }
-  .run-report-content-device .device-report{
+
+  .run-report-content-device .device-report {
     max-width: 125px;
   }
 
