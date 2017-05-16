@@ -597,62 +597,155 @@
         Utils.handleCallback(future, callback);
       }
 
-      function changeTicketsCounts(newChange) {
-        console.log("userId: ", userId);
-        console.log("realtime mewChange: ", newChange);
-        console.log("storage.ticketsQuantityMap: ", storage.ticketsQuantityMap);
+      function changeTicketsCounts() {
 
+        $http.post('/v2/tickets/counts', queries).then(function (resp) {
+          angular.copy(resp.data, storage.ticketsQuantityMap);
+        })
 
-        //var ticketChangedActions =
-        // ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH',
-        // 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE',
-        // 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+        // In case of slow working - below is pure front-end decision (the only problem is reassign action ('ASSIGNED_USER) )
+        //
+        //
 
-        //storage.ticketsQuantityMap
-
-        switch(newChange.action) {
-          case('CREATED_TICKET'):
-            storage.ticketsQuantityMap.ALL++;
-            break;
-          case('ASSIGNED_USER'):
-            storage.ticketsQuantityMap.UNASSIGNED--;
-            storage.ticketsQuantityMap.OPEN++;
-            if(newChange.data.assignedUser.id === userId) {
-              storage.ticketsQuantityMap.USER++;
-            }
-            break;
-          case('PRIORITY_CHANGED'):
-            break;
-          case('STATUS'):
-            break;
-          case('TRASH'):
-            if(newChange.data.trash === true) {
-              storage.ticketsQuantityMap.TRASH++;
-
-            } else if (newChange.data.trash === false) {
-              storage.ticketsQuantityMap.TRASH--;
-
-            }
-            break;
-          case('REPORT_AS_SPAM'):
-            break;
-          case('RESTORE_FROM_SPAM'):
-            break;
-          case('TICKET_SHARE'):
-            break;
-          case('MARKED_AS_SPAM'):
-            break;
-          case('EDITED_TICKET'):
-            break;
-          default:
-            console.log('wrong action');
-        }
-        console.log("NEW storage.ticketsQuantityMap: ", storage.ticketsQuantityMap);
+        // console.log("userId: ", userId);
+        // console.log("realtime mewChange: ", newChange);
+        // console.log("storage.ticketsQuantityMap: ", storage.ticketsQuantityMap);
+        //
+        // function isMyTicket() {
+        //   if(newChange.data.assignedUserId === userId) {
+        //     return true;
+        //   } else {
+        //     return false;
+        //   }
+        // }
+        //
+        // function isTicketAssigned() {
+        //   if(newChange.data.assignedUser !== null && newChange.data.assignedUserId !== null) {
+        //     return true;
+        //   } else {
+        //     return false;
+        //   }
+        // }
+        // switch(newChange.action) {
+        //
+        //   case('CREATED_TICKET'):
+        //
+        //     storage.ticketsQuantityMap.ALL++;
+        //     if(isTicketAssigned()) {
+        //       isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
+        //     } else if( newChange.data.assignedUser === null) {
+        //       storage.ticketsQuantityMap.UNASSIGNED++;
+        //     }
+        //     break;
+        //
+        //   case('TICKET_DELETED'):
+        //
+        //     if(newChange.data.spam) {storage.ticketsQuantityMap.SPAM--}
+        //     if(newChange.data.trash) {storage.ticketsQuantityMap.TRASH--}
+        //     break;
+        //
+        //   case('ASSIGNED_USER'):
+        //
+        //     if(newChange.data.reassigned) {
+        //       if(newChange.data.assignPerformer.id === userId) {
+        //         storage.ticketsQuantityMap.USER--;
+        //       } else if(newChange.data.assignPerformer !== null && newChange.data.assignedUser.id === userId) {
+        //         storage.ticketsQuantityMap.USER++;
+        //       }
+        //     } else {
+        //       storage.ticketsQuantityMap.OPEN++;
+        //       storage.ticketsQuantityMap.UNASSIGNED--;
+        //       isMyTicket() ? storage.ticketsQuantityMap.USER++ : false;
+        //     }
+        //     break;
+        //
+        //   case('PRIORITY_CHANGED'):
+        //
+        //     break;
+        //
+        //   case('STATUS'):
+        //
+        //     if(newChange.data.status === 'COMPLETED') {
+        //       storage.ticketsQuantityMap.CLOSED++;
+        //       if(isTicketAssigned()) {
+        //         isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
+        //       }
+        //     } else if (newChange.data.status === 'IN_PROGRESS') {
+        //       storage.ticketsQuantityMap.CLOSED--;
+        //       if(isTicketAssigned()) {
+        //         isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
+        //       }
+        //     }
+        //     break;
+        //
+        //   case('TRASH'):
+        //
+        //     if(newChange.data.trash === true) {
+        //       storage.ticketsQuantityMap.ALL--;
+        //       storage.ticketsQuantityMap.TRASH++;
+        //         if(isTicketAssigned()) {
+        //           isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
+        //         } else if( newChange.data.assignedUser === null) {
+        //           storage.ticketsQuantityMap.UNASSIGNED--;
+        //         }
+        //     } else if (newChange.data.trash === false) {
+        //       storage.ticketsQuantityMap.ALL++;
+        //       storage.ticketsQuantityMap.TRASH--;
+        //       if(isTicketAssigned()) {
+        //         isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
+        //       } else if( newChange.data.assignedUser === null) {
+        //         storage.ticketsQuantityMap.UNASSIGNED++;
+        //       }
+        //     }
+        //     break;
+        //
+        //   case('REPORT_AS_SPAM'):
+        //     //not sure - need to check
+        //     storage.ticketsQuantityMap.SPAM++;
+        //     if(isTicketAssigned()) {
+        //       isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
+        //     } else if( newChange.data.assignedUser === null) {
+        //       storage.ticketsQuantityMap.UNASSIGNED--;
+        //     }
+        //     break;
+        //
+        //   case('RESTORE_FROM_SPAM'):
+        //
+        //     storage.ticketsQuantityMap.ALL++;
+        //     storage.ticketsQuantityMap.SPAM--;
+        //     if(isTicketAssigned()) {
+        //       isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
+        //     } else if( newChange.data.assignedUser === null) {
+        //       storage.ticketsQuantityMap.UNASSIGNED++;
+        //     }
+        //     break;
+        //
+        //   case('TICKET_SHARE'):
+        //
+        //     storage.ticketsQuantityMap.SHARE++;
+        //     break;
+        //
+        //   case('MARKED_AS_SPAM'):
+        //
+        //     storage.ticketsQuantityMap.ALL--;
+        //     storage.ticketsQuantityMap.SPAM++;
+        //     if(isTicketAssigned()) {
+        //       isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
+        //     } else if( newChange.data.assignedUser === null) {
+        //       storage.ticketsQuantityMap.UNASSIGNED--;
+        //     }
+        //     break
+        //
+        //   case('EDITED_TICKET'):
+        //     break;
+        //   default:
+        //     console.log('wrong action');
+        // }
       }
 
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
 
-        changeTicketsCounts(newChange); //realtime ticket counts change
+        changeTicketsCounts(); //realtime ticket counts change
 
         if (newChange.data && newChange.data.number) {
           newChange.data.number = numberPrefix + newChange.data.number;
