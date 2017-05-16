@@ -706,7 +706,34 @@
   display: inline-block;
   margin-top: -38px;
 }
-
+.receivable-content .product-list-ticket{
+  width: 100%;
+}
+.receivable-content .top-product-list-ticket-deposit{
+  text-transform: capitalize;
+  font-size: 14px;
+}
+/*.receivable-content .product-list-ticket [class*="col-md-"]{*/
+  /*padding: 15px 0;*/
+/*}*/
+.receivable-content .content-product-list-ticket label{
+  margin-top: 8px;
+}
+.receivable-content .payment-rollback{
+  padding: 22px 13px;
+}
+.receivable-content .deposit-split [class*=col-md-]{
+  padding: 0 6px;
+}
+.deposit-split .product-list-ticket li{
+  padding: 15px 0;
+}
+.receivable-content .top-product-list-ticket{
+  height: auto;
+}
+.receivable-content .deposit-create .top-product-list-ticket [class*=col-md-]{
+  padding: 0 6px 15px;
+}
 .run-report-content {
   border-bottom: 1px solid #d3d8e1;
 }
@@ -750,7 +777,7 @@
 
 .top-product-list-ticket i {
   position: absolute;
-  top: 20px;
+  top: 10px;
 }
 
 .run-report-content .content p,
