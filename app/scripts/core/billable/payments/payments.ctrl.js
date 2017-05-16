@@ -86,6 +86,10 @@
           $scope.$broadcast('toggleDepositSlip-' + depositId);
         };
 
+        $scope.parseType = function (type) {
+          return type.split('_').join(' ');
+        };
+
         $scope.openDepositModal = function () {
           $uibModal.open({
             templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
