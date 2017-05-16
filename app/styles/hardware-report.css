@@ -820,8 +820,12 @@
   color: #404b5f;
   height: 100vh;
   background-color: #F4F4F4;
+  display: flex;
+  justify-content: center;
 }
-
+.reports-all .col-sm-4{
+  width: 300px;
+}
 .reports-all .col-sm-4 .report {
   background-color: #fff;
   border-radius: 2px 3px 3px 2px;
@@ -1098,7 +1102,7 @@
 
 @media screen and (max-width: 1366px) {
   .product-report-btn.dropdown-email .dropdown-menu {
-    left: -170px;
+    left: -210px;
   }
 
   .run-report-content .content {
