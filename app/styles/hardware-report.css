@@ -330,12 +330,13 @@
   padding: 30px 30px 30px;
   height: 100%;
   background-color: #F4F4F4;
-  min-height: 100vh;
+  min-height: 92vh;
 }
 
 .product-list-report .report-title {
   position: absolute;
   top: 35px;
+  left: 65px;
 }
 
 .product-list-ticket {
@@ -348,12 +349,15 @@
   min-height: 40px;
   position: relative;
 }
-.product-list-ticket-tech .header-product-list-ticket{
+
+.product-list-ticket-tech .header-product-list-ticket {
   position: static;
 }
-.product-list-ticket-tech .header-product-list-ticket h4{
+
+.product-list-ticket-tech .header-product-list-ticket h4 {
   padding-top: 20px;
 }
+
 .product-list-report-btn {
   width: 940px;
   margin: 0 auto;
@@ -373,7 +377,8 @@
   font-weight: 500;
   padding-bottom: 20px;
 }
-.header-product-list-ticket p{
+
+.header-product-list-ticket p {
   font-size: 16px;
 }
 
@@ -468,6 +473,14 @@
 .product-list-ticket [class*=col-md-] {
   padding: 19px 6px;
   line-height: 30px;
+}
+
+.deposit-create .product-list-ticket [class*=col-md-] {
+  padding: 0 6px;
+}
+
+.deposit-create .product-list-ticket li.content-product-list-ticket {
+  min-height: 0px;
 }
 
 .top-product-list-ticket [class*=col-md-] {
@@ -720,34 +733,48 @@
   display: inline-block;
   margin-top: -38px;
 }
-.receivable-content .product-list-ticket{
+
+.receivable-content .product-list-ticket {
   width: 100%;
 }
-.receivable-content .top-product-list-ticket-deposit{
+
+.receivable-content .top-product-list-ticket-deposit {
   text-transform: capitalize;
   font-size: 14px;
 }
+
 /*.receivable-content .product-list-ticket [class*="col-md-"]{*/
-  /*padding: 15px 0;*/
+/*padding: 15px 0;*/
 /*}*/
-.receivable-content .content-product-list-ticket label{
+.receivable-content .content-product-list-ticket label {
   margin-top: 8px;
 }
-.receivable-content .payment-rollback{
-  padding: 22px 13px;
+
+.receivable-content .payment-rollback {
+  padding: 8px 13px;
 }
-.receivable-content .deposit-split [class*=col-md-]{
+
+.receivable-content .deposit-split [class*=col-md-] {
   padding: 0 6px;
 }
-.deposit-split .product-list-ticket li{
+
+.deposit-split .top-product-list-ticket {
+  padding: 0 0 15px 0;
+}
+
+.deposit-split .product-list-ticket li.content-product-list-ticket {
+  min-height: 0;
   padding: 15px 0;
 }
-.receivable-content .top-product-list-ticket{
+
+.receivable-content .top-product-list-ticket {
   height: auto;
 }
-.receivable-content .deposit-create .top-product-list-ticket [class*=col-md-]{
+
+.receivable-content .deposit-create .top-product-list-ticket [class*=col-md-] {
   padding: 0 6px 15px;
 }
+
 .run-report-content {
   border-bottom: 1px solid #d3d8e1;
 }
@@ -832,7 +859,7 @@
   cursor: pointer;
 }
 
-.run-report-content .icn-remove-old{
+.run-report-content .icn-remove-old {
   top: 13px;
   right: 13px;
 }
@@ -859,14 +886,16 @@
 .reports-all {
   padding: 45px 30px;
   color: #404b5f;
-  height: 100vh;
+  height: 92vh;
   background-color: #F4F4F4;
   display: flex;
   justify-content: center;
 }
-.reports-all .col-sm-4{
+
+.reports-all .col-sm-4 {
   width: 300px;
 }
+
 .reports-all .col-sm-4 .report {
   background-color: #fff;
   border-radius: 2px 3px 3px 2px;
@@ -1022,12 +1051,7 @@
 .product-list-ticket-taxes .col-md-3 {
   width: 23%;
 }
-.product-list-ticket-taxes .header-product-list-ticket p{
-  padding-bottom: 10px;
-}
-.product-list-ticket-taxes .header-product-list-ticket{
-  top: -125px;
-}
+
 .product-report-taxes .col-md-2 {
   width: 15.3%;
 }
@@ -1140,19 +1164,34 @@
   top: 12px !important;
 }
 
+.back-page {
+  background: url("../images/new-icons/report-back-page.png") no-repeat;
+  width: 18px;
+  height: 25px;
+  position: absolute;
+  top: 35px;
+  cursor: pointer;
+}
+
 .deposit-printer {
   background: url("../images/new-icons/printer-deposit-slips.png") no-repeat;
   width: 13px;
   height: 13px;
   display: inline-block;
   cursor: pointer;
-  margin: 18px 0 18px 15px;
+  margin: 7px 15px;
+}
+
+.sub-wrapper {
+  display: none;
+  padding-top: 20px;
 }
 
 .deposit-split .sub-wrapper ul {
   padding: 0 10px 10px 15px;
 }
-.deposit-split .sub-wrapper .product-list-ticket li{
+
+.deposit-split .sub-wrapper .product-list-ticket li {
   cursor: auto;
 }
 
@@ -1179,8 +1218,10 @@
   text-align: center;
   border-radius: 1px;
 }
-.deposit-create .product-list-ticket li.content-product-list-ticket{
+
+.deposit-create .product-list-ticket li.content-product-list-ticket {
   cursor: auto;
+  padding: 15px 0;
 }
 
 @media screen and (max-width: 1600px) {
@@ -1193,13 +1234,16 @@
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -210px;
   }
-.run-report-content .content {
+
+  .run-report-content .content {
     max-width: 160px;
   }
 
   .run-report-content-device .device-report {
     max-width: 125px;
-  }  .deposit-create .col-md-2{
+  }
+
+  .deposit-create .col-md-2 {
     width: 17% !important;
   }
 }
