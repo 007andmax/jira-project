@@ -110,7 +110,7 @@
 
             if (clipboardData.types.indexOf('text/html') > -1) {
               html = clipboardData.getData("text/html");
-              html = html.replace(/<style.*?<\/style>/gs, '');
+              html = html.replace(/<style(.|\s|\n)*?<\/style>/g, '');
               html = html.replace(htmlTagsWhitelist, '').trim();
             } else {
               html = clipboardData.getData('text/plain');
