@@ -1015,7 +1015,7 @@ button {
 }
 
 .fix-btn-report {
-  cursor: default;
+  cursor: auto;
   text-align: center;
   padding: 10px 0;
 }
@@ -1031,6 +1031,9 @@ button {
 
 .deposit-split .sub-wrapper ul {
   padding: 0 10px 10px 15px;
+}
+.deposit-split .sub-wrapper .product-list-ticket li{
+  cursor: auto;
 }
 
 .deposit-split .sub-wrapper .payment-list-heading {
@@ -1055,6 +1058,9 @@ button {
   text-transform: uppercase;
   text-align: center;
   border-radius: 1px;
+}
+.deposit-create .product-list-ticket li.content-product-list-ticket{
+  cursor: auto;
 }
 
 @media screen and (max-width: 1600px) {
