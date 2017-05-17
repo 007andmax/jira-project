@@ -5,9 +5,12 @@
      disable-selector=".open-pdf-btn"
      file-name="{{ reportName }}">
   <p class="report-title">Accounts Receivable</p>
+  <i class="back-page"></i>
   <div>
-    <report-menu is-device-hidden="true" is-radio-button-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName"
-                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern" is-date-range-hidden="true" is-radio-button-hidden="true">
+    <report-menu is-device-hidden="true" is-radio-button-hidden="true" open-in-pdf="openInPdf"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern"
+                 is-date-range-hidden="true" is-radio-button-hidden="true">
 
     </report-menu>
   </div>
@@ -15,7 +18,8 @@
     <div class="header-product-list-ticket" ng-if="reportAccountsReceivable.lines">
       <!--HEADER-->
       <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
-      <p ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></p>
+      <p ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span>
+      </p>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportAccountsReceivable.lines">
@@ -33,7 +37,8 @@
           <div class="col-md-2"><strong>Older</strong></div>
           <div class="col-md-2"><strong>Total</strong></div>
         </li>
-        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportAccountsReceivable.lines"  on-finish-render="buildPdf()">
+        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportAccountsReceivable.lines"
+            on-finish-render="buildPdf()">
           <div class="col-md-3">
             <div ng-if="reportAccountsReceivable.type ==='SUMMARY' ">{{line.clientCompanyName}}</div>
             <div ng-if="reportAccountsReceivable.type ==='DETAILED' ">{{line.invoiceNumber}}</div>
@@ -43,18 +48,25 @@
           <div class="col-md-1">{{ (line.month2Sum || 0) | currency: '$': 2 }}</div>
           <div class="col-md-1">{{ (line.month3Sum || 0) | currency: '$': 2 }}</div>
           <div class="col-md-2">{{ (line.olderSum || 0) | currency: '$': 2 }}</div>
-          <div class="col-md-2" on-finish-render="hideLoadingIndicator()"><div ng-show="line.totalSum > 0">{{ (line.totalSum || 0) | currency: '$': 2 }}</div></div>
+          <div class="col-md-2" on-finish-render="hideLoadingIndicator()">
+            <div ng-show="line.totalSum > 0">{{ (line.totalSum || 0) | currency: '$': 2 }}</div>
+          </div>
         </li>
       </ul>
     </div>
     <div class="product-report-total-sales acc-col clearfix" ng-if="reportAccountsReceivable.lines">
       <!--SUMMARY-->
       <div class="col-md-3"><strong>Total</strong></div>
-      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalCurrentSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total1MonthSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total2MonthSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total3MonthSum || 0) | currency: '$': 2 }}</strong></div>
-      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalOlderSum || 0) | currency: '$': 2 }}</strong></div>
+      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalCurrentSum || 0) | currency: '$': 2 }}</strong>
+      </div>
+      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total1MonthSum || 0) | currency: '$': 2 }}</strong>
+      </div>
+      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total2MonthSum || 0) | currency: '$': 2 }}</strong>
+      </div>
+      <div class="col-md-1"><strong>{{ (reportAccountsReceivable.total3MonthSum || 0) | currency: '$': 2 }}</strong>
+      </div>
+      <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalOlderSum || 0) | currency: '$': 2 }}</strong>
+      </div>
       <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalSum || 0) | currency: '$': 2 }}</strong></div>
     </div>
   </div>

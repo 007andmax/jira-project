@@ -1,7 +1,7 @@
 <div class="product-list-report" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
      selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Tech Sales Report </p>
-
+  <i class="back-page"></i>
   <div class="tech-button">
     <report-menu is-tech-report="true" send-to-mail="sendToMail" get-user-name="getUserName"
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>
@@ -13,8 +13,10 @@
     </div>
     <nvd3 options="options" data="data" ng-if="responseSuccess"></nvd3>
     <div class="clearfix" ng-if="techReportProductSales.lines">
-      <div ng-show="techReportProductSales.type == 'BILLED_TIME'">Total Hours: <span>{{techReportProductSales.total}} hours</span></div>
-      <div ng-show="techReportProductSales.type == 'PRODUCT_SOLD'">Potential revenue: <span>${{techReportProductSales.total}}</span></div>
+      <div ng-show="techReportProductSales.type == 'BILLED_TIME'">Total Hours: <span>{{techReportProductSales.total}} hours</span>
+      </div>
+      <div ng-show="techReportProductSales.type == 'PRODUCT_SOLD'">Potential revenue: <span>${{techReportProductSales.total}}</span>
+      </div>
     </div>
   </div>
 </div>
