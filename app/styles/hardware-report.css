@@ -469,7 +469,12 @@
   padding: 19px 6px;
   line-height: 30px;
 }
-
+.deposit-create .product-list-ticket [class*=col-md-]{
+  padding: 0 6px;
+}
+.deposit-create .product-list-ticket li.content-product-list-ticket{
+  min-height: 0px;
+}
 .top-product-list-ticket [class*=col-md-] {
   padding: 10px 6px 17px;
 }
@@ -734,12 +739,16 @@
   margin-top: 8px;
 }
 .receivable-content .payment-rollback{
-  padding: 22px 13px;
+  padding: 8px 13px;
 }
 .receivable-content .deposit-split [class*=col-md-]{
   padding: 0 6px;
 }
-.deposit-split .product-list-ticket li{
+.deposit-split .top-product-list-ticket{
+  padding: 0 0 15px 0;
+}
+.deposit-split .product-list-ticket li.content-product-list-ticket{
+  min-height: 0;
   padding: 15px 0;
 }
 .receivable-content .top-product-list-ticket{
@@ -1022,12 +1031,7 @@
 .product-list-ticket-taxes .col-md-3 {
   width: 23%;
 }
-.product-list-ticket-taxes .header-product-list-ticket p{
-  padding-bottom: 10px;
-}
-.product-list-ticket-taxes .header-product-list-ticket{
-  top: -125px;
-}
+
 .product-report-taxes .col-md-2 {
   width: 15.3%;
 }
@@ -1146,7 +1150,7 @@
   height: 13px;
   display: inline-block;
   cursor: pointer;
-  margin: 18px 0 18px 15px;
+  margin: 7px 15px;
 }
 
 .deposit-split .sub-wrapper ul {
@@ -1181,6 +1185,7 @@
 }
 .deposit-create .product-list-ticket li.content-product-list-ticket{
   cursor: auto;
+  padding: 15px 0;
 }
 
 @media screen and (max-width: 1600px) {
