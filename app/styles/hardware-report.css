@@ -431,6 +431,8 @@
 
 .product-list-ticket li.content-product-list-ticket {
   line-height: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .product-list-ticket li.content-product-list-ticket [class*=col-md-] {
@@ -443,7 +445,7 @@
 }
 
 .product-list-ticket [class*=col-md-] {
-  padding: 15px 6px;
+  padding: 19px 6px;
 }
 
 .product-list-ticket .col-md-3 {
@@ -456,7 +458,7 @@
 }
 
 .product-list-ticket-deposit .col-md-3 {
-  width: 59%;
+  width: 46%;
 }
 
 .remote-desktop-connections .col-md-3 {
@@ -1013,9 +1015,52 @@ button {
 }
 
 .fix-btn-report {
-  cursor: default;
+  cursor: auto;
   text-align: center;
   padding: 10px 0;
+}
+
+.deposit-printer {
+  background: url("../images/new-icons/printer-deposit-slips.png") no-repeat;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  cursor: pointer;
+  margin: 18px 0 18px 15px;
+}
+
+.deposit-split .sub-wrapper ul {
+  padding: 0 10px 10px 15px;
+}
+.deposit-split .sub-wrapper .product-list-ticket li{
+  cursor: auto;
+}
+
+.deposit-split .sub-wrapper .payment-list-heading {
+  color: #000;
+  font-weight: bold;
+}
+
+.receivable-content .product-list-ticket li.content-product-list-ticket:last-child {
+  border-bottom: none;
+}
+
+.deposit-split .sub-wrapper .col-md-3 {
+  width: 26%;
+}
+
+.payment-type {
+  color: #94a4b8;
+  background-color: #e7ecf2;
+  padding: 5px 11px;
+  font-weight: 400;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 1px;
+}
+.deposit-create .product-list-ticket li.content-product-list-ticket{
+  cursor: auto;
 }
 
 @media screen and (max-width: 1600px) {
@@ -1028,12 +1073,14 @@ button {
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -170px;
   }
-  .deposit-create .col-md-2{
+
+  .deposit-create .col-md-2 {
     width: 17% !important;
   }
 }
+
 @media screen and (max-width: 1280px) {
-  .deposit-create .col-md-2{
+  .deposit-create .col-md-2 {
     width: 16% !important;
   }
 }
