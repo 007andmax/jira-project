@@ -1,7 +1,7 @@
 <div class="product-list-report" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email" orientation="LANDSCAPE"
      selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Tech Ticket Report</p>
-  <i class="back-page"></i>
+  <i class="back-page" ui-sref="reports"></i>
   <div class="tech-button">
     <report-menu is-tech-report="true" send-to-mail="sendToMail" get-user-name="getUserName"
                  is-radio-button-hidden="true" open-in-pdf="openInPdf"

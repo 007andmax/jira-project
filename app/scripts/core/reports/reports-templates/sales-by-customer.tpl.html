@@ -2,7 +2,7 @@
      selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}"
      orientation="{{ reportByCustomers.type === 'DETAILED' ? 'LANDSCAPE' : 'PORTRAIT' }}">
   <p class="report-title">Customer Sales Report</p>
-  <i class="back-page"></i>
+  <i class="back-page" ui-sref="reports"></i>
   <div>
     <report-menu class-name="run-report-content-by-customer" is-device-hidden="true" get-user-name="getUserName"
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"

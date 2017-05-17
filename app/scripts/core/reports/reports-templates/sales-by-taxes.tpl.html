@@ -1,7 +1,7 @@
 <div class="product-list-report detail-tax" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
      selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Tax Report</p>
-  <i class="back-page"></i>
+  <i class="back-page" ui-sref="reports"></i>
   <div class="tax-button">
     <report-menu is-device-hidden="true" is-customer-hidden="true" send-to-mail="sendToMail" get-user-name="getUserName"
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>

@@ -128,7 +128,6 @@
         ReportsService.getReportAccountsReceivable(dataToSend, function (resp) {
           $scope.reportAccountsReceivable = resp;
           $scope.loadingInProgress = false;
-          console.log("acc receivable: ", resp);
         })
       }
 

@@ -603,13 +603,11 @@
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
 
-        // In case of slow working - below is pure front-end decision (the only problem is reassign action ('ASSIGNED_USER) )
-        //
+
+        // In case of slow working - below is pure front-end decision
+        // (the only problem is reassign action ('ASSIGNED_USER) )
         //
 
-        // console.log("userId: ", userId);
-        // console.log("realtime mewChange: ", newChange);
-        // console.log("storage.ticketsQuantityMap: ", storage.ticketsQuantityMap);
         //
         // function isMyTicket() {
         //   if(newChange.data.assignedUserId === userId) {
