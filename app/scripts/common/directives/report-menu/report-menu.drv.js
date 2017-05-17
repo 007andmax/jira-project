@@ -45,8 +45,10 @@
     $ctrl.currentUser = UsersService.getCurrentUser();
 
     $scope.maxDateForDateRangeInputField = Date.now();
-    $scope.reportType = "SUMMARY";
-    $scope.techReportType = "BILLED_TIME";
+    $scope.reportTypes = ['Summary', 'Detailed'];
+    $scope.reportType = "Summary";
+    $scope.techReportTypes = ['Billed time', 'Product sold'];
+    $scope.techReportType = "Billed time";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
     $scope.users = UsersService.getAllUsers();
     $scope.locationTechReport = $location.url();
@@ -55,11 +57,11 @@
 
     $scope.errorNassageForDate = true;
 
-    $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'SUMMARY';
+    $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'Summary';
 
 
     if($ctrl.isRadioButtonHidden) {
-      $scope.reportType = 'DETAILED';
+      $scope.reportType = 'Detailed';
     }
 
     var location = $location.url(),
@@ -70,7 +72,7 @@
     }
 
     if(location === '/reports/remoteAccess') {
-      $scope.reportType = 'DETAILED';
+      $scope.reportType = 'Detailed';
     }
 
     if ($ctrl.isTechReport) {
@@ -117,16 +119,17 @@
     }
 
     function sendTechDataRequest() {
+      var type = $scope.techReportType.split(' ').join('_').toUpperCase();
       var techDataToSend = {
         dateRangeType: $scope.techReportDateType,
-        type: $scope.techReportType
+        type: type
       };
       if ($scope.techReportDateType === "CUSTOM") {
         techDataToSend.startDate = $scope.startDate;
         techDataToSend.endDate = $scope.endDate;
       }
       lastSentData = techDataToSend;
-      $scope.$emit("requestReportData", techDataToSend, location, $scope.techReportType);
+      $scope.$emit("requestReportData", techDataToSend, location, type);
       // $scope.startDate = null;
       // techDataToSend.endDate = null;
     }
@@ -135,6 +138,8 @@
     function sendReportRequest(reportSettings) {
 
       if (!$ctrl.isTechReport) {
+        var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
+        var type = $scope.reportType.toUpperCase();
         if($ctrl.isRadioButtonHidden) {
           if(location === '/reports/remoteAccess') {
             var dataToSend = {
@@ -155,28 +160,28 @@
               dataToSend.userId = reportSettings.techUser.id
             }
             lastSentData = dataToSend;
-            $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+            $scope.$emit("requestReportData", dataToSend, location, techType)
           } else {
             var dataToSend = {
-              type: $scope.reportType
+              type: type
             };
             if(reportSettings && reportSettings.company) {
               dataToSend.companyId = reportSettings.company.id;
             }
             lastSentData = dataToSend;
-            $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType)
+            $scope.$emit("requestReportData", dataToSend, location, techType)
           }
 
         } else if($scope.startDate && $scope.endDate) {
           var dataToSend = {
-            type: $scope.reportType
+            type: type
           };
           if(!$ctrl.isDateRangeHidden) {
             dataToSend.startDate = $scope.startDate;
             dataToSend.endDate = $scope.endDate;
           }
 
-          if ($scope.reportType === "DETAILED" && !$ctrl.isCustomerHidden) {
+          if (type === "DETAILED" && !$ctrl.isCustomerHidden) {
             if (reportSettings.company) {
               dataToSend.companyId = reportSettings.company.id;
             }
@@ -188,7 +193,7 @@
             }
           }
           lastSentData = dataToSend;
-          $scope.$emit("requestReportData", dataToSend, location, $scope.techReportType);
+          $scope.$emit("requestReportData", dataToSend, location, techType);
         } else {
           $scope.errorNassageForDate = false;
         }
