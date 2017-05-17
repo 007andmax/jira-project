@@ -6,11 +6,11 @@
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>
   </div>
   <div class="product-list-ticket tax-det-col product-list-ticket-taxes">
-    <!--<div  class="header-product-list-ticket" ng-if="reportByTaxes.lines">-->
-      <!--<h3>{{reportByTaxes.techCompanyName}}</h3>-->
-      <!--<h3>Sales Tax report <span>{{reporttype[reportByTaxes.type]}}</span></h3>-->
-      <!--<h3><span>{{ parseDate(reportByTaxes.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByTaxes.endDate) | date: 'dd.MM.yyyy' }}</span></h3>-->
-    <!--</div>-->
+    <div  class="header-product-list-ticket" ng-if="reportByTaxes.lines">
+      <h3>{{reportByTaxes.techCompanyName}}</h3>
+      <p>Sales Tax report <span>{{reporttype[reportByTaxes.type]}}</span></p>
+      <p><span>{{ parseDate(reportByTaxes.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByTaxes.endDate) | date: 'dd.MM.yyyy' }}</span></p>
+    </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
       <div ng-if="reportByTaxes.type === 'DETAILED'&& reportByTaxes.reducedTaxes">
       <ul>

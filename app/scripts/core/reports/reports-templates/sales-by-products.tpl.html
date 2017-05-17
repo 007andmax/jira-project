@@ -6,12 +6,12 @@
                  download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern"></report-menu>
   </div>
   <div class="product-list-ticket">
-    <!--<div class="header-product-list-ticket" ng-if="reportByProducts.products">-->
-      <!--<h3>{{ reportByProducts.techCompanyName }}</h3>-->
-      <!--<h3 ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></h3>-->
-      <!--<h3><span>{{ parseDate(reportByProducts.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd.MM.yyyy' }}</span>-->
-      <!--</h3>-->
-    <!--</div>-->
+    <div class="header-product-list-ticket" ng-if="reportByProducts.products">
+      <h3>{{ reportByProducts.techCompanyName }}</h3>
+      <p ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></p>
+      <p><span>{{ parseDate(reportByProducts.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd.MM.yyyy' }}</span>
+      </p>
+    </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportByProducts.products">
       <ul class="customer-det-col">

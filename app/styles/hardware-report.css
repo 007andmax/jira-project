@@ -346,16 +346,25 @@
   width: 940px;
   background-color: #fff;
   min-height: 40px;
+  position: relative;
 }
-
+.product-list-ticket-tech .header-product-list-ticket{
+  position: static;
+}
+.product-list-ticket-tech .header-product-list-ticket h4{
+  padding-top: 20px;
+}
 .product-list-report-btn {
   width: 940px;
   margin: 0 auto;
+  padding: 40px 0;
 }
 
 .header-product-list-ticket {
-  float: left;
-  padding: 25px 0;
+  text-align: left;
+  position: absolute;
+  top: -110px;
+  left: 0;
 }
 
 .header-product-list-ticket h4 {
@@ -363,6 +372,9 @@
   font-size: 16px;
   font-weight: 500;
   padding-bottom: 20px;
+}
+.header-product-list-ticket p{
+  font-size: 16px;
 }
 
 .header-tech-report h3 {
@@ -535,7 +547,7 @@
 
 .product-report-btn {
   display: inline-block;
-  margin: 45px 5px 0;
+  margin: 0 5px;
   float: right;
   cursor: pointer;
   width: 32px;
@@ -1008,7 +1020,12 @@
 .product-list-ticket-taxes .col-md-3 {
   width: 23%;
 }
-
+.product-list-ticket-taxes .header-product-list-ticket p{
+  padding-bottom: 10px;
+}
+.product-list-ticket-taxes .header-product-list-ticket{
+  top: -125px;
+}
 .product-report-taxes .col-md-2 {
   width: 15.3%;
 }
