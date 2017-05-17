@@ -1152,7 +1152,10 @@
   cursor: pointer;
   margin: 7px 15px;
 }
-
+.sub-wrapper {
+  display: none;
+  padding-top: 20px;
+}
 .deposit-split .sub-wrapper ul {
   padding: 0 10px 10px 15px;
 }
