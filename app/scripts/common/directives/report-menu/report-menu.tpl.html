@@ -14,7 +14,6 @@
                autocomplete="off"
                ng-model="reportSetting.techUser"
                name="ticketAssignTo"
-               typeahead-on-select="userAssigned(ticketAssignTo)"
                typeahead-editable="false"
                typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                placeholder="Tech"
@@ -93,6 +92,8 @@
         <div uib-dropdown>
           <input type="text"
                  name="reportCompany"
+                 ng-disabled="reportType.toUpperCase() === 'SUMMARY'"
+                 ng-required="reportType.toUpperCase() === 'DETAILED'"
                  ng-model="reportSetting.company"
                  autocomplete="off"
                  tabindex="3"
