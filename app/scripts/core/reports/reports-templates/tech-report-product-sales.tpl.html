@@ -6,10 +6,10 @@
     <report-menu is-tech-report="true" send-to-mail="sendToMail" get-user-name="getUserName"
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"></report-menu>
   </div>
-  <div class="product-list-ticket">
+  <div class="product-list-ticket product-list-ticket-tech">
     <div class="header-product-list-ticket" ng-if="techReportProductSales.lines">
       <h4 ng-show="techReportProductSales.type =='BILLED_TIME'">Billed Time</h4>
-      <h4 ng-show="techReportProductSales.type =='PRODUCT_SOLD'">Products Sold</h4>
+      <p ng-show="techReportProductSales.type =='PRODUCT_SOLD'">Products Sold</p>
     </div>
     <nvd3 options="options" data="data" ng-if="responseSuccess"></nvd3>
     <div class="clearfix" ng-if="techReportProductSales.lines">

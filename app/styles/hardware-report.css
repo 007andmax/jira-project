@@ -327,36 +327,54 @@
 
 /*Reports page (Report)*/
 .product-list-report {
-  width: 870px;
-  margin: 0 auto;
-  padding: 15px 0;
+  padding: 30px 30px 30px;
+  height: 100%;
+  background-color: #F4F4F4;
+  min-height: 100vh;
+}
+
+.product-list-report .report-title {
+  position: absolute;
+  top: 35px;
 }
 
 .product-list-ticket {
   margin: 0 auto;
-  padding: 30px 15px;
-  /*height: 100vh;*/
+  padding: 0 15px 30px;
   border: 1px solid #bbb;
   box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
+  width: 940px;
+  background-color: #fff;
+  min-height: 40px;
+  position: relative;
+}
+.product-list-ticket-tech .header-product-list-ticket{
+  position: static;
+}
+.product-list-ticket-tech .header-product-list-ticket h4{
+  padding-top: 20px;
+}
+.product-list-report-btn {
+  width: 940px;
+  margin: 0 auto;
+  padding: 40px 0;
 }
 
 .header-product-list-ticket {
-  text-align: center;
-  padding: 0;
-  width: 100%;
-  color: #404b5f;
-  position: relative;
-}
-
-.header-product-list-ticket p {
+  text-align: left;
   position: absolute;
-  right: 100px;
-  bottom: 5px;
+  top: -110px;
+  left: 0;
 }
 
-.header-product-list-ticket h3 {
+.header-product-list-ticket h4 {
   margin: 0;
+  font-size: 16px;
+  font-weight: 500;
   padding-bottom: 20px;
+}
+.header-product-list-ticket p{
+  font-size: 16px;
 }
 
 .header-tech-report h3 {
@@ -419,8 +437,9 @@
 }
 
 .top-product-list-ticket {
-  border-bottom: 1px solid #bbb;
-  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #d3d8e1;
+  height: 65px;
+  text-transform: uppercase;
 }
 
 .product-list-ticket ul {
@@ -433,6 +452,8 @@
   line-height: 15px;
   font-weight: 600;
   cursor: pointer;
+  min-height: 65px;
+  border-bottom: 1px solid #d3d8e1;
 }
 
 .product-list-ticket li.content-product-list-ticket [class*=col-md-] {
@@ -446,6 +467,11 @@
 
 .product-list-ticket [class*=col-md-] {
   padding: 19px 6px;
+  line-height: 30px;
+}
+
+.top-product-list-ticket [class*=col-md-] {
+  padding: 10px 6px 17px;
 }
 
 .product-list-ticket .col-md-3 {
@@ -503,33 +529,47 @@
   cursor: pointer;
 }
 
-.product-report-total-sales,
-.product-report-taxes,
-.product-report-detail-customer {
-  border-bottom: 1px solid #bbb;
-  border-top: 1px solid #bbb;
-}
+/*.product-report-total-sales,*/
+/*.product-report-taxes,*/
+/*.product-report-detail-customer {*/
+/*border-bottom: 1px solid #bbb;*/
+/*border-top: 1px solid #bbb;*/
+/*}*/
 
 .product-report-total-sales p {
   float: right;
   font-size: 16px;
   padding: 15px 0;
+  text-align: right;
 }
 
-.product-list-report-btn {
-  width: 870px;
-  margin: 0 auto;
+.product-report-total-sales p span {
+  font-size: 22px;
 }
 
 .product-report-btn {
   display: inline-block;
-  margin: 10px;
+  margin: 0 5px;
   float: right;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #d1dbec;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: all .3s;
+
+}
+
+.product-report-btn:hover {
+  background-color: #0094d0;
+  border-color: #0094d0;
 }
 
 .product-report-btn img {
-  width: 25px;
+  width: 13px;
+  margin-top: 6px;
+  margin-left: 8px;
 }
 
 .product-report-btn .dropdown-menu {
@@ -605,7 +645,12 @@
 
 .report-title {
   font-size: 20px;
-  padding: 20px 0;
+}
+
+.report-title .chart-header-controls .form-group {
+  display: inline-block;
+  margin-right: 20px;
+  width: 250px;
 }
 
 .radio-buttons-product-report .radio:not(checked) {
@@ -675,29 +720,54 @@
   display: inline-block;
   margin-top: -38px;
 }
-
-.run-report-content button,
-button {
-  display: inline-block;
-  background-color: #F1F5FA;
-  border: 1px solid #BEBEBE;
-  border-radius: 3px;
-  height: 45px;
-  width: 175px;
-  font-size: 20px;
-  outline: none;
+.receivable-content .product-list-ticket{
+  width: 100%;
+}
+.receivable-content .top-product-list-ticket-deposit{
+  text-transform: capitalize;
+  font-size: 14px;
+}
+/*.receivable-content .product-list-ticket [class*="col-md-"]{*/
+  /*padding: 15px 0;*/
+/*}*/
+.receivable-content .content-product-list-ticket label{
+  margin-top: 8px;
+}
+.receivable-content .payment-rollback{
+  padding: 22px 13px;
+}
+.receivable-content .deposit-split [class*=col-md-]{
+  padding: 0 6px;
+}
+.deposit-split .product-list-ticket li{
+  padding: 15px 0;
+}
+.receivable-content .top-product-list-ticket{
+  height: auto;
+}
+.receivable-content .deposit-create .top-product-list-ticket [class*=col-md-]{
+  padding: 0 6px 15px;
+}
+.run-report-content {
+  border-bottom: 1px solid #d3d8e1;
 }
 
-.run-report-content button {
+.run-report-content .form-group {
+  float: right;
+}
+
+.run-report-content .btn {
   margin-bottom: 20px;
   vertical-align: bottom;
+  background-color: #90C56B;
+  width: 100px;
 }
 
 .run-report-content .content {
-  width: 323px;
+  width: 250px;
   display: inline-block;
-  margin-right: 20px;
-  padding-bottom: 10px;
+  margin-right: 10px;
+  padding-bottom: 15px;
   position: relative;
   vertical-align: middle;
 }
@@ -710,6 +780,10 @@ button {
   top: -2px;
 }
 
+.top-product-list-ticket {
+  font-size: 13px;
+}
+
 .top-product-list-ticket .col-md-2,
 .top-product-list-ticket .col-md-1 {
   position: relative;
@@ -717,7 +791,7 @@ button {
 
 .top-product-list-ticket i {
   position: absolute;
-  top: 20px;
+  top: 10px;
 }
 
 .run-report-content .content p,
@@ -728,12 +802,17 @@ button {
 
 .run-report-content input,
 .detailed-radio .customer-names {
-  height: 45px;
   outline: none;
-  border-radius: 5px;
-  border: 2px solid #BEBEBE;
   padding: 0 40px 0 10px;
   width: 100%;
+  height: 36px;
+  border-radius: 4px 3px 3px 4px;
+  border: 1px solid #d3d8e1;
+  background-color: #ffffff;
+}
+
+.run-report-content input::-webkit-input-placeholder {
+  color: #666f7f;
 }
 
 .detailed-radio .customer-names {
@@ -749,8 +828,13 @@ button {
 .run-report-content i {
   position: absolute;
   right: 15px;
-  top: 17px;
+  top: 15px;
   cursor: pointer;
+}
+
+.run-report-content .icn-remove-old{
+  top: 13px;
+  right: 13px;
 }
 
 .run-report-content-deposit i {
@@ -773,85 +857,106 @@ button {
 
 /*Reports page (all reports)*/
 .reports-all {
-  padding: 60px 0 60px 70px;
+  padding: 45px 30px;
+  color: #404b5f;
+  height: 100vh;
+  background-color: #F4F4F4;
+  display: flex;
+  justify-content: center;
 }
-
-.reports-all .col-sm-4 {
-  width: 38%;
+.reports-all .col-sm-4{
+  width: 300px;
 }
-
-.reports-all ul {
-  list-style: none;
-  border: 1px solid #C8CBCA;
-  border-radius: 3px;
-  padding: 0;
-  border-bottom: none;
-}
-
-.reports-all li {
-  height: 45px;
-  border-bottom: 1px solid #C8CBCA;
-
-}
-
-.reports-all p {
-  font-size: 18px;
-  font-weight: bold;
-  padding: 20px 0;
-}
-
-.reports-all li.content-report,
-.reports-all li.content-report-button {
-  font-size: 16px;
-  font-weight: bold;
+.reports-all .col-sm-4 .report {
   background-color: #fff;
-  cursor: pointer;
-  line-height: 45px;
-  padding: 0 50px;
-}
-
-.reports-all li.content-report:hover,
-.reports-all li.content-report-button:hover {
-  background-color: #F5FAFE;
-}
-
-.reports-all li.content-report-button button {
-  color: #4BA9DF;
-  border: none;
-  background-color: transparent;
-  height: 45px;
+  border-radius: 2px 3px 3px 2px;
+  margin: 0 30px 30px 0;
   width: 100%;
-  text-align: left;
-  outline: none;
+  height: 186px;
+  padding: 30px 30px;
+  transition: all .3s;
+  position: relative;
+}
+
+.reports-all .col-sm-4 .report:hover {
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.reports-all .report p {
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.reports-all .report p:after {
+  width: 44px;
+  height: 2px;
+  background-color: #4BA9DF;
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+}
+
+.reports-all .col-sm-4:last-child .report {
+  margin-right: 0;
+}
+
+.reports-all .report img {
+  position: absolute;
+  right: 22px;
+  top: 23px;
+}
+
+.reports-all .report ul {
+  list-style: none;
+  padding: 0 0 0 25px;
+  margin: 0;
+}
+
+.reports-all .report ul li {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.reports-all .report ul li:hover:before {
+  border-color: #4BA9DF;
+}
+
+.reports-all .report ul li:before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 2px solid #c2c5cb;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  left: -25px;
+  top: 5px;
 }
 
 .run-report-content-device .device-report {
-  width: 150px;
-  margin-right: 20px;
+  margin-right: 10px;
   display: inline-block;
   position: relative;
   vertical-align: top;
+  max-width: 250px;
 }
 
 .run-report-content-device .device-report .icn-sm.icn-caret-gray {
   top: 53px;
 }
 
-.run-report-content-device .content {
-  margin-right: 20px;
-  width: 236px;
-}
-
 .run-report-content-device .text-error {
   left: 0 !important;
 }
 
-.run-report-content-device .device-report .icn-remove-old {
-  top: 53px;
-}
-
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu {
-  left: -210px !important;
+  left: -156px !important;
   max-height: 144px !important;
 }
 
@@ -917,7 +1022,12 @@ button {
 .product-list-ticket-taxes .col-md-3 {
   width: 23%;
 }
-
+.product-list-ticket-taxes .header-product-list-ticket p{
+  padding-bottom: 10px;
+}
+.product-list-ticket-taxes .header-product-list-ticket{
+  top: -125px;
+}
 .product-report-taxes .col-md-2 {
   width: 15.3%;
 }
@@ -938,16 +1048,12 @@ button {
   width: 10%;
 }
 
-.detail-customer {
-  width: 1180px;
-}
-
-.detail-customer .report-title,
-.detail-customer .run-report-content-by-customer,
-.detail-customer .radio-buttons-product-report {
-  margin: 0 auto;
-  width: 870px;
-}
+/*.detail-customer .report-title,*/
+/*.detail-customer .run-report-content-by-customer,*/
+/*.detail-customer .radio-buttons-product-report {*/
+/*margin: 0 auto;*/
+/*width: 870px;*/
+/*}*/
 
 .list-ticket-detail-customer {
   width: 1180px;
@@ -1020,6 +1126,20 @@ button {
   padding: 10px 0;
 }
 
+.report-caret-icon {
+  width: 10px;
+  height: 6px;
+  background: url("../images/new-icons/report-caret.png");
+}
+
+.report-calendar {
+  width: 12px;
+  height: 12px;
+  background: url("../images/new-icons/report-calendar.png");
+  right: 15px;
+  top: 12px !important;
+}
+
 .deposit-printer {
   background: url("../images/new-icons/printer-deposit-slips.png") no-repeat;
   width: 13px;
@@ -1071,10 +1191,15 @@ button {
 
 @media screen and (max-width: 1366px) {
   .product-report-btn.dropdown-email .dropdown-menu {
-    left: -170px;
+    left: -210px;
+  }
+.run-report-content .content {
+    max-width: 160px;
   }
 
-  .deposit-create .col-md-2 {
+  .run-report-content-device .device-report {
+    max-width: 125px;
+  }  .deposit-create .col-md-2{
     width: 17% !important;
   }
 }

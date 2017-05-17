@@ -11,7 +11,7 @@
         ' ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
         '</span>' +
         '<span class="x-mark" ng-hide="showClearIcon" ng-click="toggleDropdown($event)">' +
-        '<i class="icn-sm icn-caret-gray"></i>' +
+        '<i class="report-caret-icon"></i>' +
         '</span>' +
         '',
         scope: true,

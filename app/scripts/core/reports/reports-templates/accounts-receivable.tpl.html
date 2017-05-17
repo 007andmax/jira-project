@@ -15,7 +15,7 @@
     <div class="header-product-list-ticket" ng-if="reportAccountsReceivable.lines">
       <!--HEADER-->
       <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
-      <h3 ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></h3>
+      <p ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span></p>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportAccountsReceivable.lines">
