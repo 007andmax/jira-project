@@ -18,7 +18,7 @@
       var initListeners = [],
         initialized = false;
 
-      var scannedDevices = Utils.customizeObj({});
+      var scannedDevices = {};
 
       Utils.customizeObj(storage);
 

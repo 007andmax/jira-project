@@ -493,29 +493,6 @@
       return info;
     }
 
-    function changeUserAndPass(user, password, id, callback) {
-
-      if (!id) {
-        throw 'id is required!'
-      }
-
-      var info = Utils.customizeObj({});
-
-      $http.get('/company/' + id + '/changeUserAndPass?userName=' + user + '&password=' + password).then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-      return info;
-    }
-
     function isNameUnique(name, id, callback) {
 
       if (!name) {
@@ -780,7 +757,6 @@
       isNameUnique: isNameUnique,
       isDomainUnique: isDomainUnique,
       isCompanyInboxUnique: isCompanyInboxUnique,
-      changeUserAndPass: changeUserAndPass,
       saveCover: saveCover,
       saveLogo: saveLogo,
       deleteCover: deleteCover,

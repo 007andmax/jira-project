@@ -54,17 +54,9 @@
 
       <div class="col-2">
         <div class="agent-username" ng-class="{'no-value': !agent.login}">
-
           <span>
             {{ agent.login }}
           </span>
-
-          <!--<a href="javascript:void(0)" class="hit-area has-tooltip pull-right">-->
-            <!--<i class="icn-sm icn-password-key"></i>-->
-            <!--<i class="icn-sm icn-password-key-unique"></i>-->
-          <!--</a>-->
-
-
         </div>
       </div>
 
@@ -111,72 +103,11 @@
             <i class="icn-sm icn-attachments-download"></i>
           </div>
 
-          <!--<div class="pull-right for-network-tab" uib-dropdown is-open="isLogOnDrpdwnOpen">-->
-
-          <!--<div class="btn btn-primary has-tooltip" style="width: 38px;margin-right: 10px;" dropdown-toggle-->
-          <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="modify logon info">-->
-          <!--<i class="icn-sm icn-modify-logon"></i>-->
-          <!--</div>-->
-
-          <!--<div class="dropdown-menu dropdown-menu-right" dropdown-menu>-->
-          <!--<div class="dropdown-header caption-heading">Modify Logon Info</div>-->
-          <!--<div class="modify-logon-form" ng-init="isShowPass = false">-->
-          <!--<form name="changeCredentialForm">-->
-
-          <!--<div class="form-group">-->
-          <!--<input type="text" class="form-control" autocomplete="off"-->
-          <!--placeholder="Domain/Username" ng-model="credential.name">-->
-          <!--</div>-->
-
-          <!--<div class="form-group">-->
-
-          <!--<input type="{{ isShowPass ? 'text' : 'password' }}"-->
-          <!--class="form-control show-password" autocomplete="new-password"-->
-          <!--placeholder="Password" ng-model="credential.pass">-->
-
-          <!--<a href="javascript:void(0)"-->
-          <!--class="show-password-hit hit-area ha-18 has-tooltip" ng-click="isShowPass = !isShowPass"-->
-          <!--tooltip-placement="top" uib-tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"-->
-          <!--tooltip-append-to-body="true">-->
-          <!--<i class="icn-sm icn-{{ isShowPass ? 'hide' : 'show' }}-password"></i>-->
-          <!--</a>-->
-
-          <!--</div>-->
-
-          <!--<div class="qt-form-actions">-->
-
-          <!--<div class="btn btn-primary btn-lg" ng-click="saveNewCredentional(false)"-->
-          <!--custom-disabled="{{ savingCredentional }}">Reset-->
-          <!--</div>-->
-
-          <!--<span>or</span>-->
-
-          <!--<a href="javascript:void(0)" ng-class="{'hide': savingCredentional}"-->
-          <!--ng-click="saveNewCredentional(true)">-->
-          <!--Verify Password-->
-          <!--</a>-->
-
-          <!--<div class="device-management installing-agent"-->
-          <!--style="position: absolute;top: 196px;left: 150px;"-->
-          <!--ng-class="{'hide': !savingCredentional}">-->
-          <!--<div class="loader"></div>-->
-          <!--</div>-->
-
-          <!--</div>-->
-
-          <!--</form>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-
         </div>
       </div>
     </li>
 
   </ul>
-  <!--<div class="qt-list-loading">-->
-  <!--<div class="loader"></div>-->
-  <!--</div>-->
 </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -11,20 +11,15 @@
                 Utils, PermissionsService, ProductsService) {
 
         var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings', 'products'],
-          devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
-          lastMasterAgentId;
+          devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
-        $scope.isCollapsedGraph = true;
-        $scope.isScanDevicesLoad = false; // change in services
         if (tabs.indexOf($stateParams.tabName) === -1) {
           $state.go('companyProfile', { tabName: 'devices' });
         }
-        $scope.orderScanBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
         $scope.currentOpenTab = $stateParams.tabName || 'devices';
-
 
         $scope.credential = {
           name: '',
@@ -55,17 +50,6 @@
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
 
-        $scope.runScanDevices = function () {
-          $scope.isScanDevicesLoad = true;
-          $scope.scanDevices = {};
-          DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
-            $scope.masterAgentOffline = resp.code === 400;
-            if ($scope.masterAgentOffline) {
-              $scope.isScanDevicesLoad = false;
-            }
-          });
-        };
-
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           $scope.agents = resp;
 
@@ -84,24 +68,6 @@
 
         });
 
-        DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
-          $scope.allowAgentInstall = resp.allowAgentInstall;
-          if (resp.masterAgentId !== lastMasterAgentId) {
-            lastMasterAgentId = resp.masterAgentId;
-
-            if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
-              DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
-                $scope.scanDevices = $scope.scanDevices || {};
-                $scope.scanDevices.devices = resp[$scope.company.id];
-                $scope.scanDevices.status = resp.status;
-              });
-            } else {
-              $scope.scanDevices = undefined;
-              $scope.isScanDevicesLoad = false;
-            }
-          }
-        });
-
         $scope.$watch('agents.length', function (val) {
           if (val && (val > 0)) {
             $scope.isHasDevices = true;
@@ -114,14 +80,6 @@
             }
 
           }
-        });
-
-        $scope.$watch(function () {
-          if ($scope.scanDevices) {
-            return $scope.scanDevices.status;
-          }
-        }, function (val) {
-          $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished';
         });
 
         $scope.$watch(function () {
@@ -161,16 +119,6 @@
           });
         };
 
-        $scope.toggleCollapsed = function () {
-          $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
-        };
-
-        $scope.saveDescription = function (deviceId, description) {
-          if (deviceId && description) {
-            // console.log('save ' + description + '; devicesId =  ' + deviceId);
-          }
-        };
-
         $scope.selectAllDevices = function () {
           $scope.isSelectAllDevices = !$scope.isSelectAllDevices;
 
@@ -195,29 +143,6 @@
           }
 
           devicesHeaderState.checkedDevicesId = selectDevicesIds;
-        };
-
-        $scope.saveNewCredentional = function () {
-          $scope.savingCredentional = true;
-          CompaniesService.changeUserAndPass($scope.credential.name, $scope.credential.pass, $scope.company.id, function () {
-            $scope.credential = {
-              name: '',
-              pass: ''
-            };
-            $scope.savingCredentional = false;
-          })
-        };
-
-        $scope.sortNetworkScan = function (option) {
-          if (option === $scope.orderScanBy) {
-            if (option[0] === '-') {
-              $scope.orderScanBy = $scope.orderScanBy.substring(1);
-            } else {
-              $scope.orderScanBy = '-' + $scope.orderScanBy;
-            }
-          } else {
-            $scope.orderScanBy = option;
-          }
         };
 
         $scope.sortDevicesTab = function (option) {
@@ -342,8 +267,6 @@
             for(var j = 0; j < $scope.agents.length; j++) {
               if($scope.agents[j].id === idForRemove[i]) {
                 $scope.agents.splice(j, 1);
-                console.log("REMOVE");
-                console.log($scope.agents[j])
               }
             }
           }
