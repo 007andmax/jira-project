@@ -39,6 +39,7 @@
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             RecurringService.deleteRecurringInvoice($scope.invoice.id);
           });
+          $scope.disabledDelete = false;
         };
 
       }]);
