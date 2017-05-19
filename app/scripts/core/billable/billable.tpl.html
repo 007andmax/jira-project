@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="col-2">
-                  <div ng-if="ticket.discountSum > 0">
+                  <div ng-if="isDiscountForIconTicket(ticket)">
                     <i class="icon-sm sale-icon-for-isDicount"></i>
                   </div>
                   <div class="billable-amount bold">{{ ticket.sum | currency: '$': 2 }}</div>
