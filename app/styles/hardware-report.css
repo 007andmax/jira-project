@@ -371,6 +371,10 @@
   left: 0;
 }
 
+.header-product-list-ticket h3 {
+  margin-bottom: 5px;
+}
+
 .header-product-list-ticket h4 {
   margin: 0;
   font-size: 16px;
@@ -1185,6 +1189,7 @@
 .sub-wrapper {
   display: none;
   padding-top: 20px;
+  width: 100%;
 }
 
 .deposit-split .sub-wrapper ul {
@@ -1217,6 +1222,7 @@
   text-transform: uppercase;
   text-align: center;
   border-radius: 1px;
+  white-space: nowrap;
 }
 
 .deposit-create .product-list-ticket li.content-product-list-ticket {
@@ -1224,19 +1230,34 @@
   padding: 15px 0;
 }
 
+.grey-btn-report {
+  border-radius: 4px;
+  width: 170px;
+  height: 35px;
+  outline: navajowhite;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #DDDDDD;
+  transition: all .3s;
+}
+
+.grey-btn-report:hover {
+  background-color: #cac9c9;
+}
+
 @media screen and (max-width: 1600px) {
   .product-report-btn.dropdown-email .dropdown-menu {
-    left: -10px;
+    left: -60px;
+  }
+  .product-list-ticket-deposit .col-md-3{
+    width: 45%;
   }
 }
 
 @media screen and (max-width: 1366px) {
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -210px;
-  }
-
-  .run-report-content .content {
-    max-width: 160px;
   }
 
   .run-report-content-device .device-report {
@@ -1251,5 +1272,12 @@
 @media screen and (max-width: 1280px) {
   .deposit-create .col-md-2 {
     width: 16% !important;
+  }
+
+  .run-report-content .content {
+    max-width: 160px;
+  }
+  .product-list-ticket-deposit .col-md-3{
+    width: 44%;
   }
 }
