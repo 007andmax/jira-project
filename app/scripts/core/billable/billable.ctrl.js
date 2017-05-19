@@ -25,14 +25,50 @@
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
-        $scope.isDisocuntForIcon = function(billalbleCompany){
+        $scope.isDisocuntForIcon = function(billableCompany){
           var isDiscount=false;
-          for(var t = 0; t < billalbleCompany.tickets.length; t++) {
-            if(billalbleCompany.tickets[t].discountSum > 0) {
+          for(var t = 0; t < billableCompany.tickets.length; t++) {
+            if(billableCompany.tickets[t].discountSum > 0) {
               isDiscount = true;
+            }
+            if(billableCompany.tickets[t].productExpense) {
+              for(var m=0; m < billableCompany.tickets[t].productExpense.length; m++) {
+                if(billableCompany.tickets[t].productExpense[m].discountSum > 0) {
+                  isDiscount = true;
+                }
+              }
+            }
+            if(billableCompany.tickets[t].serviceExpense) {
+              for(var n=0; n < billableCompany.tickets[t].serviceExpense.length; n++) {
+                if(billableCompany.tickets[t].serviceExpense[n].discountSum > 0) {
+                  isDiscount = true;
+                }
+              }
             }
           }
           return isDiscount;
+        };
+
+        $scope.isDiscountForIconTicket = function(ticket) {
+          var isTicketDiscount = false;
+          if(ticket.discountSum > 0) {
+            isTicketDiscount = true;
+          }
+          if(ticket.productExpense) {
+            for(var e=0; e < ticket.productExpense.length; e++) {
+              if(ticket.productExpense[e].discountSum > 0) {
+                isTicketDiscount = true;
+              }
+            }
+          }
+          if(ticket.serviceExpense) {
+            for(var w=0; w < ticket.serviceExpense.length; w++) {
+              if(ticket.serviceExpense[w].discountSum > 0) {
+                isTicketDiscount = true;
+              }
+            }
+          }
+          return isTicketDiscount;
         };
 
         $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
@@ -42,7 +78,7 @@
         });
 
         $scope.billableData = BillableService.getBillablePageDto($scope, function (respData) {
-
+          console.log("respData: ", respData);
           $scope.billableData = respData;
 
           var companyIds = Object.keys(respData).filter(function (id) {
@@ -99,7 +135,7 @@
               discountType: 'PERCENT'
             };
             BillableService.saveBillableDiscount(data, function(resp){
-              console.log(resp)
+              console.log("saveBillableDiscount: ", resp)
             })
           }
           else {
