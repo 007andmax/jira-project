@@ -1191,7 +1191,16 @@
   padding-top: 20px;
   width: 100%;
 }
-
+.click-content-deposit-slips{
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+.deposit-split .clickable-layer{
+  max-height: none;
+  min-height: 62px;
+  top: -15px;
+}
 .deposit-split .sub-wrapper ul {
   padding: 0 10px 10px 15px;
 }

@@ -112,7 +112,7 @@
             </div>
 
             <div class="col-sm-2 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
-            <div class="col-sm-1 group-btns" style="margin-top: 3px;">
+            <div class="col-sm-1 group-btns" style="margin-top: 3px;padding-left: 0;">
 
               <span uib-tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
                    tooltip-placement="top"

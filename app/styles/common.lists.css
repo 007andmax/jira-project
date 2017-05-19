@@ -283,9 +283,11 @@
 .qt-list > li > [class*='col-']:first-child {
   padding-left: 15px;
 }
+
 .vendor-products-width > li > [class*='col-']:first-child {
   width: calc(100% - 893px);
 }
+
 .qt-receivable-number.qt-list > li > [class*='col-']:first-child,
 .qt-list.qt-users > li > [class*='col-']:first-child {
   padding-left: 0px;
@@ -1085,12 +1087,15 @@ Devices tab
   width: calc(100% - 120px);
   white-space: nowrap;
 }
-.qt-billable-clients .col-2 div{
+
+.qt-billable-clients .col-2 div {
   display: inline-block;
 }
-.qt-billable-clients .col-2 div:last-child{
+
+.qt-billable-clients .col-2 div:last-child {
   width: 99px;
 }
+
 .qt-list > li.billable-main > .col-2,
 .qt-billable-sub > li > .col-2 {
   width: 120px;
@@ -2399,7 +2404,8 @@ Devices tab
 
   cursor: auto !important;
 }
-.qt-product-edit [class*="form-group"]:nth-child(7) input{
+
+.qt-product-edit [class*="form-group"]:nth-child(7) input {
   padding-right: 50px;
 }
 
@@ -2412,6 +2418,7 @@ Devices tab
 .qt-product-edit .row .col-1 .select-taxes-drv {
   width: 290px !important;
 }
+
 .qt-product-edit .category-caret {
   position: absolute;
   right: 335px;
@@ -2439,13 +2446,14 @@ Devices tab
   margin-bottom: 15px;
   position: relative;
 }
-.qt-product-edit .form-group input:nth-child(7){
+
+.qt-product-edit .form-group input:nth-child(7) {
   padding-right: 50px;
 }
-.qt-product-edit .form-group .dropdown-menu {
-  width: 290px!important;
-}
 
+.qt-product-edit .form-group .dropdown-menu {
+  width: 290px !important;
+}
 
 .qt-product-edit .form-group label {
   display: inline-block;
@@ -2453,7 +2461,8 @@ Devices tab
   width: 120px;
   text-align: right;
 }
-.checkbox-dropdown .list-container label{
+
+.checkbox-dropdown .list-container label {
   padding: 13px 15px;
   text-align: left;
   margin: 0;
@@ -2490,11 +2499,13 @@ Devices tab
 .qt-product-edit .product-actions .hit-area {
   margin-top: 12px;
 }
-.qt-product-edit textarea{
+
+.qt-product-edit textarea {
   width: 290px;
   display: inline-block;
   padding: 7px 12px;
 }
+
 .qt-product-edit .form-control {
   /*height: 70px;*/
   /*padding-left: 0;*/
@@ -3422,9 +3433,11 @@ Devices tab
 .qt-devices > li:hover .device-desc .hit-area {
   display: block;
 }
-.qt-devices p{
+
+.qt-devices p {
   cursor: text;
 }
+
 /**Agents**/
 .qt-agents {
   padding: 60px 0 0;
@@ -4248,11 +4261,13 @@ Devices tab
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.service-form-wrapper.edit-form-checkbox .col-3 .checkbox-dropdown label{
+
+.service-form-wrapper.edit-form-checkbox .col-3 .checkbox-dropdown label {
   margin-top: 0;
   margin-bottom: 0;
 }
-.service-form-wrapper.edit-form-checkbox .col-3 .checkbox-dropdown .list-container .icn-label-save{
+
+.service-form-wrapper.edit-form-checkbox .col-3 .checkbox-dropdown .list-container .icn-label-save {
   right: 20px;
 }
 

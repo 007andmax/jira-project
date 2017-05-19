@@ -52,6 +52,7 @@ body.non-body-scroll::-webkit-scrollbar {
   float: left;
   width: 100%;
   cursor: auto;
+  padding-top: 0;
 }
 
 .qt-list > li > .intermediate-parent-elem > [class*="col-"] {
