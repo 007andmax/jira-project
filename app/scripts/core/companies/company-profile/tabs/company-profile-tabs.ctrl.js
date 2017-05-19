@@ -10,7 +10,7 @@
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
                 Utils, PermissionsService, ProductsService) {
 
-        var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings', 'products'],
+        var tabs = ['users', 'devices', 'agents', 'network-scan', 'products'/*, 'settings'*/],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
         $scope.PermissionsService = PermissionsService;
@@ -38,7 +38,7 @@
             if ($scope.isHasDevices) {
               $state.go('companyProfile', { tabName: 'devices' });
             } else {
-              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
+              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'network-scan' });
             }
           });
 
@@ -90,23 +90,8 @@
           } else {
             $scope.currentOpenTab = tabName;
 
-            if ((tabName === 'devices' || tabName === 'network-scan') && !$scope.isHasDevices) {
+            if (tabName === 'devices' && !$scope.isHasDevices) {
               $scope.currentOpenTab = prevTab;
-            }
-
-            if (tabName === 'network-scan' && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
-              DevicesService.getAgentSettingsByCompany($scope.company.id, function (resp) {
-                var isAutoRescanEnable = resp.autoScanNetwork;
-
-                $scope.masterAgentOffline = false;
-                if (isAutoRescanEnable && !$scope.isScanDevicesLoad) {
-                  $scope.isScanDevicesLoad = true;
-                  $scope.scanDevices = {};
-                  DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
-                    $scope.masterAgentOffline = resp.code === 400;
-                  });
-                }
-              });
             }
           }
 
