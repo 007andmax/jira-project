@@ -11,7 +11,7 @@
       <li class="content-product-list-ticket clearfix" style="position: relative;" ng-repeat="slip in depositSlips"
           ng-init="payments = slip.payments" event-toggle-slider="{{ 'toggleDepositSlip-' + slip.id }}">
         <div class="click-content-deposit-slips">
-          <div ng-click="toggleDeposit(slip.id)" style="width: 97%" class="clickable-layer"></div>
+          <div ng-click="toggleDeposit(slip.id)" class="clickable-layer"></div>
           <div class="col-md-1">{{ parseDate(slip.createdAt) | date: 'dd.MM.yy' }}</div>
           <div class="col-md-1">{{ slip.number }}</div>
           <div class="col-md-3">{{slip.note}}</div>
