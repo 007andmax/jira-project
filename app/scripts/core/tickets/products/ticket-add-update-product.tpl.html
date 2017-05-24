@@ -56,7 +56,7 @@
         <div class="col-4" style="width: 60px; float: left;">
           <div>
             <div  ng-hide="isShowInputField || productExpense.discountAmount != null">
-              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowInputField = !isShowInputField" uib-tooltip="Click to choose Discount"></i>
+              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowInputField = !isShowInputField" uib-tooltip="Discount"></i>
             </div>
 
             <div ng-show="isShowInputField || productExpense.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
@@ -70,12 +70,12 @@
                      hard-reset-pattern="PERCENT"
                      ng-keydown="$event.which === 13 && $event.preventDefault()">
             </div>
-            <div ng-show="false">
-              <select ng-model="productExpense.discountType = 'PERCENT'">
-                <option value="PERCENT" selected>PERCENT</option>
-                <option value="null">null</option>
-              </select>
-            </div>
+            <!--<div ng-show="false">-->
+              <!--<select ng-model="productExpense.discountType = 'PERCENT'">-->
+                <!--<option value="PERCENT" selected>PERCENT</option>-->
+                <!--<option value="null">null</option>-->
+              <!--</select>-->
+            <!--</div>-->
           </div>
         </div>
 

@@ -96,6 +96,7 @@
             $scope.validateCategory($scope.editProduct.category, form.$$parentForm);
             form.$setPristine();
           });
+          $scope.createNewCategory = true;
         } else {
           $scope.triedToSaveCategory = true;
         }
