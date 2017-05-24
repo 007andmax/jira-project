@@ -15,6 +15,7 @@
                ng-model="reportSetting.techUser"
                name="ticketAssignTo"
                typeahead-editable="false"
+               ng-disabled="!reportSetting.company"
                typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                placeholder="Tech"
                uib-typeahead="user as $ctrl.getUserName(user) for user in usersCurrentCompany | orderBy:'firstName'"
@@ -84,10 +85,14 @@
         </div>
       </div>
       <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
-        <div ng-messages="reportSettingForm.reportCompany.$error" ng-show="!$ctrl.isRadioButtonHidden">
-          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-message="required">
-            Please select the company name
-          </div>
+        <!--<div ng-messages="reportSettingForm.reportCompany.$error" ng-show="!$ctrl.isRadioButtonHidden">-->
+          <!--<div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-message="required">-->
+            <!--Please select the company name-->
+          <!--</div>-->
+        <!--</div>-->
+        <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForCompany">
+          Please select
+          the company name
         </div>
         <div uib-dropdown>
           <input type="text"

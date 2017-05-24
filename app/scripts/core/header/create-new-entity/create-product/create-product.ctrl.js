@@ -95,6 +95,7 @@
             $scope.editProduct.category = category;
             form.$setPristine();
           });
+          $scope.createNewCategory = true;
         } else {
           $scope.triedToSaveCategory = true;
         }

@@ -56,7 +56,7 @@
         <div class="col-4" style="width: 60px; float: left;">
           <div>
             <div  ng-hide="isShowDiscountProductInputField || editProduct.discountAmount != null">
-              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowDiscountProductInputField = !isShowDiscountProductInputField" uib-tooltip="Click to edit Discount"></i>
+              <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowDiscountProductInputField = !isShowDiscountProductInputField" uib-tooltip="Edit discount"></i>
             </div>
 
             <div ng-show="isShowDiscountProductInputField || editProduct.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">

@@ -56,24 +56,39 @@
     $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
     $scope.errorNassageForDate = true;
+    $scope.errorNassageForCompany = true;
 
     $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'Summary';
 
 
-    if($ctrl.isRadioButtonHidden) {
+    if ($ctrl.isRadioButtonHidden) {
       $scope.reportType = 'Detailed';
     }
 
     var location = $location.url(),
       lastSentData;
 
-    if(location === '/reports/accountsReceivable') {
+    if (location === '/reports/accountsReceivable') {
       sendReportRequest();
     }
 
-    if(location === '/reports/remoteAccess') {
+    if (location === '/reports/remoteAccess') {
       $scope.reportType = 'Detailed';
     }
+
+    $scope.reportSetting = {
+      company: ''
+    };
+
+    // to clear company input field when report type changed to Summary
+    $scope.$watch('reportType', function(){
+      if (location === '/reports/byProducts' || location === '/reports/byCustomers') {
+        if ($scope.reportType === 'Summary') {
+          $scope.reportSetting.company = null;
+        }
+      }
+    });
+
 
     if ($ctrl.isTechReport) {
       setTechReportDateType("TODAY");
@@ -82,7 +97,7 @@
     function addEmailToNotify(email, sendMailForm) {
       if (email && $ctrl.emailPattern.test(email)) {
         $ctrl.notifySelectionMap[email] = true;
-        $ctrl.tempUsers.unshift({ primaryEmail: email, custom: true });
+        $ctrl.tempUsers.unshift({primaryEmail: email, custom: true});
         $ctrl.emailToNotify = '';
         sendMailForm.$setPristine();
       }
@@ -105,6 +120,8 @@
     }
 
     function onDateRangeChangeReport(dates) {
+      $scope.startDate = null;
+      $scope.endDate = null;
       if (dates && dates.length && dates.length > 1) {
         var startMonth = dates[0].getMonth() + 1;
         var endMonth = dates[1].getMonth() + 1;
@@ -140,43 +157,85 @@
       if (!$ctrl.isTechReport) {
         var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
         var type = $scope.reportType.toUpperCase();
-        if($ctrl.isRadioButtonHidden) {
-          if(location === '/reports/remoteAccess') {
+        if ($ctrl.isRadioButtonHidden) {
+          if (location === '/reports/remoteAccess') {
             var dataToSend = {
               type: 'SUMMARY'
             };
-            if(!$ctrl.isDateRangeHidden) {
-              dataToSend.startDate = $scope.startDate;
-              dataToSend.endDate = $scope.endDate;
-            }
-            if(reportSettings && reportSettings.company) {
+
+            if (reportSettings && reportSettings.company) {
               dataToSend.type = 'DETAILED';
               dataToSend.companyId = reportSettings.company.id;
             }
             if (reportSettings && reportSettings.device) {
               dataToSend.deviceId = reportSettings.device.id;
             }
-            if($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+            if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
               dataToSend.userId = reportSettings.techUser.id
             }
-            lastSentData = dataToSend;
-            $scope.$emit("requestReportData", dataToSend, location, techType)
+            if (!$ctrl.isDateRangeHidden) {
+              if ($scope.startDate && $scope.endDate) {
+                dataToSend.startDate = $scope.startDate;
+                dataToSend.endDate = $scope.endDate;
+
+                lastSentData = dataToSend;
+                $scope.$emit("requestReportData", dataToSend, location, techType)
+              } else {
+                $scope.errorNassageForDate = false;
+              }
+            }
           } else {
             var dataToSend = {
               type: type
             };
-            if(reportSettings && reportSettings.company) {
+            if (reportSettings && reportSettings.company) {
               dataToSend.companyId = reportSettings.company.id;
             }
             lastSentData = dataToSend;
             $scope.$emit("requestReportData", dataToSend, location, techType)
           }
 
-        } else if($scope.startDate && $scope.endDate) {
+        } else if (location === '/reports/byProducts' || location === '/reports/byCustomers') {
+
+          if (type === "SUMMARY") {
+            if ($scope.startDate && $scope.endDate) {
+              var dataToSend = {
+                type: type
+              };
+              dataToSend.startDate = $scope.startDate;
+              dataToSend.endDate = $scope.endDate;
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+            } else {
+              $scope.errorNassageForDate = false;
+            }
+          }
+          if (type === "DETAILED") {
+            if ($scope.startDate && $scope.endDate) {
+              var dataToSend = {
+                type: type
+              };
+              dataToSend.startDate = $scope.startDate;
+              dataToSend.endDate = $scope.endDate;
+              if (reportSettings.company) {
+                dataToSend.companyId = reportSettings.company.id;
+                lastSentData = dataToSend;
+                $scope.$emit("requestReportData", dataToSend, location, techType);
+              } else {
+                $scope.errorNassageForCompany = false;
+              }
+
+            } else {
+              $scope.errorNassageForDate = false;
+            }
+          }
+
+
+        } else if ($scope.startDate && $scope.endDate) {
           var dataToSend = {
             type: type
           };
-          if(!$ctrl.isDateRangeHidden) {
+          if (!$ctrl.isDateRangeHidden) {
             dataToSend.startDate = $scope.startDate;
             dataToSend.endDate = $scope.endDate;
           }
@@ -188,7 +247,7 @@
             if (reportSettings.device) {
               dataToSend.deviceId = reportSettings.device.id;
             }
-            if($ctrl.isShowTechSelectField && reportSettings.techUser) {
+            if ($ctrl.isShowTechSelectField && reportSettings.techUser) {
               dataToSend.userId = reportSettings.techUser.id
             }
           }
@@ -199,8 +258,8 @@
         }
 
 
-      }  else {
-          sendTechDataRequest();
+      } else {
+        sendTechDataRequest();
       }
 
       //lastSentData = dataToSend;

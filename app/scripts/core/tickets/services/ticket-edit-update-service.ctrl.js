@@ -45,7 +45,7 @@
                   quantity: $scope.editService.quantity / 60,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: $scope.editService.discountAmount,
-                  discountType: $scope.editService.discountType
+                  discountType: "PERCENT"
 
                 }
               }, function () {

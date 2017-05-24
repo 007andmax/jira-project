@@ -78,7 +78,6 @@
         });
 
         $scope.billableData = BillableService.getBillablePageDto($scope, function (respData) {
-          console.log("respData: ", respData);
           $scope.billableData = respData;
 
           var companyIds = Object.keys(respData).filter(function (id) {

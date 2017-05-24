@@ -76,10 +76,15 @@
       <textarea name="message" cols="30" rows="4" class="form-control"
                 ng-maxlength="5000" ng-model="feedbackDto.message"></textarea>
     </div>
-    <div class="col-sm-12">
-      <p>Problematic page</p>
-      <input type="text" class="form-control" ng-model="feedbackDto.page">
+
+    <div class="col-sm-12 form-group" ng-class="{'has-error': isShowingErrors(feedbackForm, 'problematicPage')}">
+      <p ng-hide="isShowingErrors(feedbackForm, 'problematicPage')">Problematic page</p>
+      <div ng-messages="feedbackForm.subject.$error" ng-show="isShowingErrors(feedbackForm, 'problematicPage')">
+        <p>Page is too long</p>
+      </div>
+      <input type="text" name="problematicPage" class="form-control" ng-model="feedbackDto.page" ng-maxlength="200">
     </div>
+
     <div class="col-sm-6">
       <p>OS</p>
       <input type="text" class="form-control" ng-model="feedbackDto.os">
