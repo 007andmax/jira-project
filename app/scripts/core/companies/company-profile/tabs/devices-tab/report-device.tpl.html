@@ -281,11 +281,11 @@
                   </span>
                   <br>
                   <strong>Last install:</strong>
-                  <span ng-if="!report.wuAgent">
+                  <span ng-if="!report.wuAgent || !report.wuAgent.last_install || !report.wuAgent.version">
                     &nbsp;no security installed
                   </span>
                   <br>
-                  <span ng-if="report.wuAgent">
+                  <span ng-if="report.wuAgent && report.wuAgent.last_install && report.wuAgent.version">
                     {{ parseDate(report.wuAgent.last_install) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
                     Hotfixies from Microsoft Update
                     (agent version {{ report.wuAgent.version }})

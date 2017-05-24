@@ -1,8 +1,7 @@
 <div class="ticket-update-note">
 
-  <input type="hidden" ng-model="ticketUpdate.note" ng-required="true" ng-maxlength="65000" name="updateNote"/>
-
-  <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note" name="note">
+  <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note"
+       name="note" te-text-maxlength="5000" te-html-maxlength="50000" te-required="true">
 
     <div te-editor class="form-control editor" contenteditable="true"
          style="min-height: 92px;height: auto;border: none;" data-text="Click here to respond to the Ticket"></div>

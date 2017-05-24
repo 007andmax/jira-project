@@ -65,7 +65,7 @@
           if (!initialized) {
             return;
           }
-          if (newChange.action == 'USER_SAVED') {
+          if (newChange.action === 'USER_SAVED') {
 
             var currentUser = getCurrentUser();
             if (currentUser.id === newChange.data.id) {
@@ -87,11 +87,15 @@
                 storage.users.push(Utils.customizeObj(newChange.data));
               }
             }
-          } else if (newChange.action == 'USER_ARCHIVED') {
+          } else if (newChange.action === 'USER_ARCHIVED') {
             var user = Utils.findById(storage.deleted, newChange.data.id);
             if (user) {
               Utils.customizeObj(newChange.data, user);
             } else {
+              user = Utils.findById(storage.users, newChange.data.id);
+              if (user) {
+                Utils.customizeObj(newChange.data, user);
+              }
               storage.deleted.push(newChange.data);
             }
             Utils.deleteById(storage.users, newChange.data.id);
@@ -99,12 +103,12 @@
             // if (storage.usersByCompanies[newChange.data.company.id]) {
             //   Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
             // }
-          } else if (newChange.action == 'USER_ONLINE') {
+          } else if (newChange.action === 'USER_ONLINE') {
             var user = Utils.findById(storage.users, newChange.data.id);
             if (user) {
               Utils.defineReadOnlyProperty(user, 'online', !!newChange.data.online);
             }
-          } else if (newChange.action == 'COMPANY_ARCHIVED') {
+          } else if (newChange.action === 'COMPANY_ARCHIVED') {
             for (var i = 0; i < storage.users.length; i++) {
               var user = storage.users[i];
               if (user.company.id === newChange.data.id) {
@@ -119,7 +123,7 @@
               }
             }
             // delete storage.usersByCompanies[newChange.data.id];
-          } else if (newChange.action == 'USERS_DEARCHIVED') {
+          } else if (newChange.action === 'USERS_DEARCHIVED') {
             newChange.data.forEach(addOrUpdateClientUser);
           }
         });

@@ -71,7 +71,7 @@
           var isUserDeleted = value.deletedAt || company.deletedAt;
           var result = !isUserDeleted && !$scope.archivedShown || $scope.archivedShown && isUserDeleted;
 
-          if (value.isDefault || value.default) {
+          if (value.isDefault || value.default || value.accountType === 'TECH') {
             return false;
           }
 

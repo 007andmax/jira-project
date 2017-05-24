@@ -79,7 +79,7 @@
         <div class="card" ng-style="{'border-left-color': tagColors[usersColors[getUserType(user)]].backgroundColor}">
           <div class="card-header">
             <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')" create-new-entity="user" item="user"></div>
-            <i class="icon-sm icn-restore" ng-if="user.deletedAt" ng-click="dearchiveUser(user)"></i>
+            <i class="icon-sm icn-restore" ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')" ng-click="dearchiveUser(user)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
             <p class="ellipsis name" uib-tooltip="{{ getUserName(user) }}" tooltip-placement="bottom"
@@ -116,7 +116,7 @@
               <span style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></span>
             </div>
           </div>
-          <div class="card-footer clearfix" ng-hide="user.deletedAt || !PermissionsService.isAllowed('EDIT_USERS')">
+          <div class="card-footer clearfix" ng-hide="user.deletedAt">
             <button class="btn btn-default" create-new-entity="ticket" user-id="{{ user.id }}">
               <span class="plus-card"></span>New Ticket
             </button>
@@ -319,7 +319,8 @@
               <i class="icon-sm icn-delete"></i>
             </div>
 
-            <div class="btn btn-icn btn-default pull-left has-tooltip" ng-if="user.deletedAt">
+            <div class="btn btn-icn btn-default pull-left has-tooltip"
+                 ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')">
               <i class="icon-sm icn-restore" ng-click="dearchiveUser(user)"></i>
             </div>
 

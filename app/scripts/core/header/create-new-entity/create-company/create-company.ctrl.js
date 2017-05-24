@@ -84,15 +84,17 @@
           $scope.isLastInvoiceSubsciption = true;
           $scope.editCompany = {
             addresses: [{ isPrimary: true }],
-            contacts: [{
-              firstName: origin.firstName,
-              lastName: origin.lastName,
-              primaryEmail: origin.source,
-              subscription: { ticket: true, invoice: true },
-              avatar: {
-                scale: 50
+            contacts: [
+              {
+                firstName: origin.firstName,
+                lastName: origin.lastName,
+                primaryEmail: origin.source,
+                subscription: { ticket: true, invoice: true },
+                avatar: {
+                  scale: 50
+                }
               }
-            }],
+            ],
             services: [],
             clientIndustry: {},
             defaultPaymentMethod: '',
@@ -333,15 +335,19 @@
 
         $scope.deleteService = function (service) {
 
-          if (service.versionedId && $scope.selectedServices[service.versionedId.id]) {
+          if (service.originService && $scope.selectedServices[service.originService.versionedId.id]) {
+            $scope.selectedServices[service.originService.versionedId.id] = false;
+          } else if (service.versionedId && $scope.selectedServices[service.versionedId.id]) {
             $scope.selectedServices[service.versionedId.id] = false;
           }
 
           for (var i = 0; i < $scope.editCompany.services.length; i++) {
             var companyService = $scope.editCompany.services[i].originService || $scope.editCompany.services[i];
 
-            if (service.new && service.newId === companyService.newId ||
-              service.versionedId && service.versionedId.id === companyService.versionedId.id
+            if (
+              service.new && service.newId === companyService.newId ||
+              service.versionedId && service.versionedId.id === companyService.versionedId.id ||
+              service.originService && service.originService.versionedId.id === companyService.versionedId.id
             ) {
               $scope.editCompany.services.splice(i, 1);
               return;

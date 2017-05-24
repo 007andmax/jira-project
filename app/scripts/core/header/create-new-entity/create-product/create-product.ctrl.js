@@ -93,6 +93,7 @@
         if (form.$valid || (keys.length === 1 && keys[0] === 'nonexistentCategory')) {
           ProductsService.saveCategory({ name: $scope.editProduct.category }, function (category) {
             $scope.editProduct.category = category;
+            $scope.validateCategory($scope.editProduct.category, form.$$parentForm);
             form.$setPristine();
           });
         } else {

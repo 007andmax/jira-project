@@ -488,7 +488,8 @@
               editInvoice.nextGenerationAt = $filter('date')(new Date(editInvoice.nextGenerationAt), 'yyyy/MM/dd');
 
               for (var i = 0, len = editInvoice.services.length; i < len; i++) {
-                editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)
+                editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60);
+                editInvoice.services[i].date = Date.parse(editInvoice.services[i].date);
               }
 
               editInvoice.shares = [];
