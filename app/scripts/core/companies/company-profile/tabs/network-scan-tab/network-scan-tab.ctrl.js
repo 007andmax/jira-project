@@ -4,11 +4,14 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.networkScanTabCtrl',
     [
-      '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService) {
+      '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService', 'Utils',
+      function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService, Utils) {
         var lastMasterAgentId;
 
+        $scope.testCredentialsModel = {};
         $scope.downloadAgentModel = {};
+        $scope.isAllSelected = false;
+        $scope.selectedDevices = {};
         $scope.isScanDevicesLoad = false;
         $scope.orderScanBy = 'hostName';
         $scope.usersWithEmails = UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
@@ -17,9 +20,13 @@
 
         DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
           $scope.allowAgentInstall = resp.allowAgentInstall;
-          if (resp.masterAgentId !== lastMasterAgentId) {
+          if (resp.masterAgentId !== lastMasterAgentId) { // this check is needed when realtime comes
             lastMasterAgentId = resp.masterAgentId;
+            $scope.discoveredByAgentId = lastMasterAgentId;
 
+            if (lastMasterAgentId) {
+              $scope.masterAgent = DevicesService.getOneByAgentId(lastMasterAgentId, $scope.company.id);
+            }
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = $scope.scanDevices || {};
@@ -64,7 +71,7 @@
               $scope.triedToDownload = false;
               $scope.savingInProcess = true;
               DevicesService.downloadAgent($scope.company.id, $scope.downloadAgentModel.username,
-                $scope.downloadAgentModel.password, function () {
+                $scope.downloadAgentModel.password, $scope.downloadAgentModel.autoInstall, function () {
                   $scope.savingInProcess = false;
                   form.$setPristine();
                 });
@@ -84,7 +91,8 @@
                 agentName: $scope.downloadAgentModel.username,
                 agentPassword: $scope.downloadAgentModel.password,
                 companyId: $scope.company.id,
-                email: $scope.downloadAgentModel.email
+                email: $scope.downloadAgentModel.email,
+                autoGlobalRemoteInstall: $scope.downloadAgentModel.autoInstall
               };
 
               if ($scope.downloadAgentModel.user && $scope.downloadAgentModel.user.primaryEmail) {
@@ -105,9 +113,104 @@
           $scope.downloadAgentModel.email = '';
         };
 
+        $scope.toggleAll = function () {
+          var devices = $scope.scanDevices.devices;
+          for (var i = 0; i < devices.length; i++) {
+            var device = devices[i];
+            $scope.selectedDevices[device.id] = $scope.isAllSelected;
+          }
+        };
+
+        $scope.checkSelection = function () {
+          var values = Object.values($scope.selectedDevices);
+          var devices = $scope.scanDevices.devices;
+          if (values.length === devices.length) {
+            $scope.isAllSelected = values.each(function (value) {
+              return value;
+            });
+          } else {
+            $scope.isAllSelected = false;
+          }
+        };
+
+        $scope.isDeviceSelected = function () {
+          var values = Object.values($scope.selectedDevices);
+          return values.length && values.some(function (value) {
+              return value;
+            });
+        };
+
+        $scope.isAnyHasPassword = function () {
+          for (var deviceId in $scope.selectedDevices) {
+            if ($scope.selectedDevices[deviceId]) {
+              var device = Utils.findById($scope.scanDevices.devices, deviceId);
+              if (device.agentPassword) {
+                return true;
+              }
+            }
+          }
+        };
+
+        $scope.testCredentials = function (form) {
+          if (form.$valid) {
+            $scope.isTestInProgress = true;
+            var deviceIds = [];
+            for (var deviceId in $scope.selectedDevices) {
+              if ($scope.selectedDevices[deviceId]) {
+                deviceIds.push(deviceId);
+                $scope.selectedDevices[deviceId] = false;
+              }
+            }
+
+            if (deviceIds.length) {
+              var dto = {
+                login: $scope.testCredentialsModel.agentName,
+                password: $scope.testCredentialsModel.agentPassword,
+                companyId: $scope.company.id,
+                discoveredByAgentId: $scope.discoveredByAgentId,
+                deviceIds: deviceIds
+              };
+              DevicesService.testCredentials(dto, function () {
+                $scope.isTestInProgress = false;
+              });
+            }
+          }
+        };
+
+        $scope.installAgents = function () {
+          $scope.isInstallInProgress = true;
+
+          var deviceIds = [];
+          for (var deviceId in $scope.selectedDevices) {
+            if ($scope.selectedDevices[deviceId]) {
+              deviceIds.push(deviceId);
+              $scope.selectedDevices[deviceId] = false;
+            }
+          }
+
+          var dto = {
+            companyId: $scope.company.id,
+            deviceIds: deviceIds,
+            discoveredByAgentId: $scope.discoveredByAgentId
+          };
+          DevicesService.sendInstallAgentRequests(dto, function () {
+            $scope.isInstallInProgress = false;
+          });
+        };
+
+        $scope.saveMasterAgent = function () {
+          if (!$scope.saveMasterAgentInProgress) {
+            $scope.saveMasterAgentInProgress = true;
+            DevicesService.saveMasterAgent($scope.company.id, $scope.masterAgent.id, function () {
+              $scope.saveMasterAgentInProgress = false;
+            });
+          }
+        };
+
         $scope.runScanDevices = function () {
           $scope.isScanDevicesLoad = true;
           $scope.scanDevices = {};
+          $scope.discoveredByAgentId = $scope.masterAgent.id;
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
             $scope.masterAgentOffline = resp.code === 400;
             if ($scope.masterAgentOffline) {

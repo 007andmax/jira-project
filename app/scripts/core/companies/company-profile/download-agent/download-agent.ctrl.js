@@ -111,7 +111,7 @@
             $scope.triedToDownload = false;
             $scope.savingInProcess = true;
             DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.agentName,
-              $scope.downloadAgentUser.agentPassword, function () {
+              $scope.downloadAgentUser.agentPassword, false, function () {
                 $scope.hidePopover();
                 $scope.savingInProcess = false;
                 form.$setPristine();

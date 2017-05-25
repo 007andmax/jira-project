@@ -1,355 +1,347 @@
 <div class="tab-pane active" ng-controller="quicktech.core.devices.networkScanTabCtrl" style="margin-top: 385px;">
-  <div ng-if="!agents || !agents.length">
-    <div class="company-steps clearfix">
-      <ul class="company-steps__list clearfix">
-        <li class="company-steps__list--point">Windows Credentials</li>
-        <!--<li class="company-steps__list&#45;&#45;point">SNMP Devices</li>-->
-        <li class="company-steps__list--point">Create Agent</li>
-      </ul>
-    </div>
+  <div>
+    <div ng-if="!agents || !agents.length">
+      <div ng-form="downloadAgentForm">
+        <div class="col-md-12">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(downloadAgentForm, 'agentLogin')}">
+            <label class="control-label" ng-hide="isShowingErrors(downloadAgentForm, 'agentLogin')">
+              Username
+            </label>
 
-    <div ng-form="downloadAgentForm">
-      <div class="col-md-12">
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(downloadAgentForm, 'agentLogin')}">
-          <label class="control-label" ng-hide="isShowingErrors(downloadAgentForm, 'agentLogin')">
-            Username
-          </label>
+            <div ng-messages="downloadAgentForm.agentLogin.$error"
+                 ng-hide="!isShowingErrors(downloadAgentForm, 'agentLogin')">
+              <label class="control-label" ng-message="required">Username can't be left empty</label>
+            </div>
 
-          <div ng-messages="downloadAgentForm.agentLogin.$error"
-               ng-hide="!isShowingErrors(downloadAgentForm, 'agentLogin')">
-            <label class="control-label" ng-message="required">Username can't be left empty</label>
+            <input type="text" class="form-control" name="agentLogin" ng-model="downloadAgentModel.username"
+                   placeholder="Username" ng-required="!!downloadAgentModel.password" autocomplete="new-username">
           </div>
-
-          <input type="text" class="form-control" name="agentLogin" ng-model="downloadAgentModel.username"
-                 placeholder="Username" ng-required="!!downloadAgentModel.password" autocomplete="new-username">
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="control-label">Password</label>
+            <input type="password" class="form-control" name="agentPassword" ng-model="downloadAgentModel.password"
+                   placeholder="Password" autocomplete="new-password">
+          </div>
         </div>
       </div>
-      <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label">Password</label>
-          <input type="password" class="form-control" name="agentPassword" ng-model="downloadAgentModel.password"
-                 placeholder="Password" autocomplete="new-password">
+
+      <!--<div class="snmp-devices">-->
+      <!--</div>-->
+
+      <div>
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="downloadAgentModel.autoInstall">
+          <span class="control-indicator"></span>
+          Automatically install agents
+        </label>
+        <div ng-click="downloadAgent(downloadAgentForm)">
+          <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
+               alt="download">
+        </div>
+        <div ng-click="showSendMailForm = true" ng-hide="showSendMailForm">
+          <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
+        </div>
+        <div ng-show="showSendMailForm" ng-form="sendMailForm">
+          <h3>Email Agent</h3>
+          <div class="form-group">
+            <label class="control-label">User</label>
+
+            <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                   qt-typeahead-show-on-focus
+                   ng-model="downloadAgentModel.user" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                   typeahead-on-select="clearEmail()" ng-disabled="!usersWithEmails || !usersWithEmails.length"
+                   uib-typeahead="user as getUserName(user) for user in usersWithEmails | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
+                   custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}"
+                   placeholder="Select user">
+            <input type="hidden" ng-model="downloadAgentModel.user" name="user" required>
+
+            <div typeahead-input-icon="downloadAgentModel.user"
+                 style="position: absolute;top: 28px;right: 13px;"></div>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error': isShowingMailFormErrors(sendMailForm, 'email')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingMailFormErrors(sendMailForm, 'email')}">
+              or Email Address
+            </label>
+
+            <div ng-messages="sendMailForm.email.$error"
+                 ng-class="{ 'hide': !isShowingMailFormErrors(sendMailForm, 'email')}">
+              <label class="control-label" ng-message="required">Enter email or select user</label>
+              <label class="control-label" ng-message="pattern">Email should be valid</label>
+              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+            </div>
+
+            <input type="text" class="form-control" placeholder="Email" ng-model="downloadAgentModel.email"
+                   name="email" ng-pattern="emailPattern" ng-required="true" ng-maxlength="128"
+                   ng-disabled="downloadAgentModel.user && downloadAgentModel.user.primaryEmail">
+          </div>
+          <div>
+            <button type="button" ng-click="sendEmailWithAgent(sendMailForm)">Send</button>
+          </div>
         </div>
       </div>
     </div>
+    <div ng-if="agents && agents.length">
+      <div>
+        <p>Run network scan</p>
+        <div class="btn btn-primary has-tooltip" ng-click="runScanDevices()" tooltip-placement="top"
+             tooltip-append-to-body="true" tooltip-enable="{{ masterAgentOffline || isScanDevicesLoad }}"
+             uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}"
+             custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">
+          Run Scan
+        </div>
+      </div>
+      <div ng-form="credentialsForm">
+        <p>Enter Credentials</p>
+        <div class="form-container">
+          <div class="form-group" ng-class="{ 'has-error': isShowingErrors(credentialsForm, 'agentName')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(credentialsForm, 'agentName')}">
+              Login
+            </label>
 
-    <!--<div class="snmp-devices">-->
-    <!--</div>-->
+            <div ng-messages="credentialsForm.agentName.$error"
+                 ng-class="{'hide': !isShowingErrors(credentialsForm, 'agentName')}">
+              <label class="control-label" ng-message="required">Login can't be left empty</label>
+            </div>
+
+            <input type="text" class="form-control" name="agentName" ng-model="testCredentialsModel.agentName"
+                   placeholder="Login" ng-required="!!testCredentialsModel.agentPassword">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Password</label>
+            <input type="password" class="form-control" name="agentPassword"
+                   ng-model="testCredentialsModel.agentPassword" autocomplete="new-password"
+                   placeholder="Password">
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Test Credentials</p>
+        <div class="btn btn-primary has-tooltip" ng-click="testCredentials(credentialsForm)"
+             custom-disabled="{{ isTestInProgress || !isDeviceSelected() }}">
+          {{ isAnyHasPassword() ? 'Update' : 'Test' }}
+        </div>
+      </div>
+      <div>
+        <p>Install Agents</p>
+        <div class="btn btn-primary has-tooltip" ng-click="remoteInstall(credentialsForm)"
+             custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">
+          Install
+        </div>
+      </div>
+    </div>
 
     <div>
-      <label class="control checkbox">
-        <input type="checkbox" ng-model="downloadAgentModel.autoInstall">
-        <span class="control-indicator"></span>
-        Automatically install agents
-      </label>
-      <div ng-click="downloadAgent(downloadAgentForm)">
-        <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
-             alt="download">
-      </div>
-      <div ng-click="showSendMailForm = true" ng-hide="showSendMailForm">
-        <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
-      </div>
-      <div ng-show="showSendMailForm" ng-form="sendMailForm">
-        <h3>Email Agent</h3>
-        <div class="form-group">
-          <label class="control-label">User</label>
-
-          <input type="text" class="form-control has-dropdown-with-label" autocomplete="off" qt-typeahead-show-on-focus
-                 ng-model="downloadAgentModel.user" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                 typeahead-on-select="clearEmail()" ng-disabled="!usersWithEmails || !usersWithEmails.length"
-                 uib-typeahead="user as getUserName(user) for user in usersWithEmails | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
-                 custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}"
-                 placeholder="Select user">
-          <input type="hidden" ng-model="downloadAgentModel.user" name="user" required>
-
-          <div typeahead-input-icon="downloadAgentModel.user"
-               style="position: absolute;top: 28px;right: 13px;"></div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': isShowingMailFormErrors(sendMailForm, 'email')}">
-          <label class="control-label" ng-class="{ 'hide': isShowingMailFormErrors(sendMailForm, 'email')}">
-            or Email Address
-          </label>
-
-          <div ng-messages="sendMailForm.email.$error"
-               ng-class="{ 'hide': !isShowingMailFormErrors(sendMailForm, 'email')}">
-            <label class="control-label" ng-message="required">Enter email or select user</label>
-            <label class="control-label" ng-message="pattern">Email should be valid</label>
-            <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
-          </div>
-
-          <input type="text" class="form-control" placeholder="Email" ng-model="downloadAgentModel.email"
-                 name="email" ng-pattern="emailPattern" ng-required="true" ng-maxlength="128"
-                 ng-disabled="downloadAgentModel.user && downloadAgentModel.user.primaryEmail">
-        </div>
-        <div>
-          <button type="button" ng-click="sendEmailWithAgent(sendMailForm)">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div ng-if="agents && agents.length">
-    <!--<div class="pull-right for-network-tab" tooltip-placement="top" tooltip-append-to-body="true"-->
-         <!--uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">-->
-      <!--<div class="btn btn-primary has-tooltip" style="width: 62px;" ng-click="runScanDevices()"-->
-           <!--custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">-->
-        <!--<i class="icn-sm icn-scan-network"></i>-->
-      <!--</div>-->
-    <!--</div>-->
-    <div class="network-scan-results"
-         ng-show="(!scanDevices.devices || scanDevices.devices.length < 1) && !isScanDevicesLoad">
-      <div>
-        <i class="icn-lg icn-network-scan-lg"></i>
-
-        <p class="text-center result-heading">No devices to show</p>
+      <div class="form-group">
+        <select class="form-control" ng-model="masterAgent" ng-change="saveMasterAgent()"
+                ng-options="agent as agent.hostName for agent in agents | filter: { agentId: '' }: stateComparator"
+                ng-disabled="saveMasterAgentInProgress"></select>
       </div>
     </div>
 
-    <div class="master-agent-offline-message"
-         ng-if="masterAgentOffline">
-      <p class="text-center">
-        Network scan and remote install is available only when master agent is online.
-      </p>
-    </div>
+    <div>
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
+        <div class="loader"></div>
+      </div>
 
-    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
-      <div class="loader"></div>
-    </div>
+      <ul class="qt-list qt-network-scan"
+          ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : '94px'}">
 
-    <ul class="qt-list qt-network-scan"
-        ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : '94px'}"
-        ng-if="scanDevices.devices && scanDevices.devices.length > 0">
+        <li class="list-heading" fixed-block-top offset-top="148">
 
-      <li class="list-heading" fixed-block-top offset-top="148">
-
-        <div class="col-1" ng-click="sortNetworkScan('hostName')">
+          <div class="col-1" ng-click="sortNetworkScan('hostName')">
+            <label class="control checkbox pull-left">
+              <input type="checkbox" ng-model="isAllSelected" ng-change="toggleAll()"
+                     custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
+              <span class="control-indicator"></span>
+            </label>
             <span class="sort-span">DEVICE
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-hostName', 'active': orderScanBy.indexOf('hostName') > -1}"></i>
             </span>
-        </div>
+          </div>
 
-        <div class="col-desc"><span>DESCRIPTION</span></div>
+          <div class="col-desc"><span>DESCRIPTION</span></div>
+          <div class="col-2"><span class="sort-span">USERNAME</span></div>
+          <div class="col-2"><span class="sort-span">PASSWORD</span></div>
 
-        <div class="col-3" ng-click="sortNetworkScan('ipAddress')">
+          <div class="col-3" ng-click="sortNetworkScan('ipAddress')">
             <span class="sort-span">LAN IP
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i>
             </span>
-        </div>
+          </div>
 
-        <div class="col-4" ng-click="sortNetworkScan('manufacturer')">
+          <div class="col-4" ng-click="sortNetworkScan('manufacturer')">
             <span class="sort-span">MANUFACTURER
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i>
             </span>
-        </div>
+          </div>
 
-        <div class="col-5" ng-click="sortNetworkScan('macAddress')">
+          <div class="col-5" ng-click="sortNetworkScan('macAddress')">
             <span class="sort-span">MAC ADDRESS
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
             </span>
-        </div>
+          </div>
 
-        <div class="col-2" ng-click="sortNetworkScan('agentStatus')" style="text-align: center;">
+          <div class="col-2" ng-click="sortNetworkScan('agentStatus')" style="text-align: center;">
             <span class="sort-span">Agent Status
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
             </span>
-        </div>
+          </div>
 
-        <div class="col-7" ng-click="sortNetworkScan('updatedAt')" style="text-align: center;">
+          <div class="col-7" ng-click="sortNetworkScan('updatedAt')" style="text-align: center;">
             <span class="sort-span">LAST SEEN DATE
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-updatedAt', 'active': orderScanBy.indexOf('updatedAt') > -1}"></i>
             </span>
+          </div>
+
+          <div class="col-6">&nbsp;</div>
+
+        </li>
+
+        <div class="network-scan-results"
+             ng-show="(!scanDevices.devices || !scanDevices.devices.length) && !isScanDevicesLoad">
+          <i class="icn-lg icn-network-scan-lg"></i>
+          <p class="text-center result-heading">No devices to show</p>
         </div>
 
-        <div class="col-6">&nbsp;</div>
+        <div class="master-agent-offline-message" ng-if="masterAgentOffline">
+          <p class="text-center">Network scan and remote install is available only when master agent is online.</p>
+        </div>
 
-      </li>
+        <li ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
+            ng-controller="quicktech.core.devices.networkScanItemCtrl">
 
-      <li ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
-          ng-controller="quicktech.core.devices.networkScanItemCtrl">
+          <div class="col-1">
+            <div class="device-name">
 
-        <div class="col-1">
-          <div class="device-name">
+              <!--<i class="device-status" ng-class="{'on' : deviceStatus.online, 'off': !deviceStatus.online}"></i>-->
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-model="selectedDevices[device.id]" ng-change="checkSelection()">
+                <span class="control-indicator"></span>
+              </label>
 
-            <i class="device-status" ng-class="{'on' : deviceStatus.online, 'off': !deviceStatus.online}"></i>
+              <div class="checkbox-caption">
 
-            <div class="checkbox-caption">
+                <span uib-tooltip="{{ (device.hostName | unknownFilter) || device.ipAddress }}"
+                      trimmed-tooltip-checker="(device.hostName | unknownFilter) || device.ipAddress">
+                </span>
 
-            <span uib-tooltip="{{ (device.hostName | unknownFilter) || device.ipAddress }}"
-                  trimmed-tooltip-checker="(device.hostName | unknownFilter) || device.ipAddress">
-            </span>
-
-              <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
-                 uib-popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
-                <i class="icon-sm icn-description"></i>
-              </a>
-
-              <div class="dropdown" uib-dropdown is-open="isOpenEditDescrDrpdwn"
-                   ng-show="(device.description | unknownFilter)">
-
-                <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true"
-                   uib-tooltip="Edit Description" uib-dropdown-toggle>
-                  <i class="icon-sm edit-icon"></i>
+                <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
+                   uib-popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
+                  <i class="icon-sm icn-description"></i>
                 </a>
 
-                <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
+                <div class="dropdown" uib-dropdown is-open="isOpenEditDescrDrpdwn"
+                     ng-show="(device.description | unknownFilter)">
+
+                  <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
+                     tooltip-placement="top" tooltip-append-to-body="true"
+                     uib-tooltip="Edit Description" uib-dropdown-toggle>
+                    <i class="icon-sm edit-icon"></i>
+                  </a>
+
+                  <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
                     <textarea class="form-control autosize" rows="1" ng-model="deviceEditDescription"
                               hard-reset-pattern="patternMax40"
                               placeholder="Edit device description"></textarea>
 
-                  <div class="qt-form-actions">
-                    <div class="btn btn-lg btn-primary pull-left" ng-click="saveEditDescription()"
-                         custom-disabled="{{ disableEditSaveDescr }}">
-                      Save
+                    <div class="qt-form-actions">
+                      <div class="btn btn-lg btn-primary pull-left" ng-click="saveEditDescription()"
+                           custom-disabled="{{ disableEditSaveDescr }}">
+                        Save
+                      </div>
+
+                      <div class="btn btn-lg btn-primary   pull-left" ng-click="saveEditDescription('close')">
+                        Cancel
+                      </div>
+
+                      <div class="word-count pull-right">{{ 40 - deviceEditDescription.length }}</div>
                     </div>
-
-                    <div class="btn btn-lg btn-primary   pull-left" ng-click="saveEditDescription('close')">Cancel</div>
-
-                    <div class="word-count pull-right">{{ 40 - deviceEditDescription.length }}</div>
                   </div>
                 </div>
-              </div>
 
-              <div class="dropdown" uib-dropdown is-open="isOpenDescrDrpdwn"
-                   ng-hide="(device.description | unknownFilter)">
+                <div class="dropdown" uib-dropdown is-open="isOpenDescrDrpdwn"
+                     ng-hide="(device.description | unknownFilter)">
 
-                <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true"
-                   uib-tooltip="Add Description" uib-dropdown-toggle>
-                  <i class="icn-sm icn-add-description"></i>
-                </a>
+                  <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
+                     tooltip-placement="top" tooltip-append-to-body="true"
+                     uib-tooltip="Add Description" uib-dropdown-toggle>
+                    <i class="icn-sm icn-add-description"></i>
+                  </a>
 
-                <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
+                  <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
                     <textarea class="form-control autosize" rows="1" ng-model="deviceDescription"
                               hard-reset-pattern="patternMax40"
                               placeholder="Add device description"></textarea>
 
-                  <div class="qt-form-actions">
-                    <div class="btn btn-lg btn-primary pull-left" ng-click="saveDescription()"
-                         custom-disabled="{{ disableSaveDescr }}">
-                      Save
+                    <div class="qt-form-actions">
+                      <div class="btn btn-lg btn-primary pull-left" ng-click="saveDescription()"
+                           custom-disabled="{{ disableSaveDescr }}">
+                        Save
+                      </div>
+
+                      <div class="btn btn-lg btn-primary   pull-left" ng-click="saveDescription('close')">Cancel</div>
+
+                      <div class="word-count pull-right">{{ 40 - deviceDescription.length }}</div>
                     </div>
-
-                    <div class="btn btn-lg btn-primary   pull-left" ng-click="saveDescription('close')">Cancel</div>
-
-                    <div class="word-count pull-right">{{ 40 - deviceDescription.length }}</div>
                   </div>
                 </div>
+
               </div>
-
             </div>
           </div>
-        </div>
 
-        <div class="col-desc">
-          <div class="device-desc">
-            <span ng-hide="(device.description | unknownFilter)">No description available</span>
-            <span ng-show="(device.description | unknownFilter)">{{ device.description }}</span>
+          <div class="col-desc">
+            <div class="device-desc">
+              <span ng-hide="(device.description | unknownFilter)">No description available</span>
+              <span ng-show="(device.description | unknownFilter)">{{ device.description }}</span>
+            </div>
           </div>
-        </div>
+          <div class="col-2">{{ device.agentPassword.login }}</div>
+          <div class="col-2">{{ device.agentPassword.password ? '********' : '' }}</div>
 
-        <div class="col-3">
-          <div class="device-lan-ip">{{ device.ipAddress }}</div>
-        </div>
-
-        <div class="col-4">
-          <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
-               trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
+          <div class="col-3">
+            <div class="device-lan-ip">{{ device.ipAddress }}</div>
           </div>
-        </div>
 
-        <div class="col-5">
-          <div class="device-mac-address">{{ device.macAddress }}</div>
-        </div>
-
-        <div class="col-2" style="text-align: center">
-          <div class="device-mac-address">{{ userReadable(device.agentStatus) }}</div>
-        </div>
-
-        <div class="col-7 last-seen-date" style="text-align: center">{{ device.updatedAt | date: 'dd MMM yyyy' }}</div>
-
-        <div class="col-6" style="height: 9px;">
-          <div class="list-actions pull-right" ng-show="device.hostName !== 'unknown'">
-
-            <div class="device-management"
-                 ng-class="{'hide': !(deviceStatus.status === 'success' && !changingStatus) || !allowAgentInstall}">
-
-              <label>
-                <input type="checkbox" ng-model="deviceStatus.statusValue" ng-click="changeAgentStatus()">
-                <span class="toggle-bg"></span>
-                <span class="toggle-indicator"></span>
-              </label>
+          <div class="col-4">
+            <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
+                 trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
             </div>
-
-            <div class="device-management installing-agent"
-                 ng-class="{'hide': !changingStatus}" style="margin-right: 12px;">
-              <div class="loader"></div>
-            </div>
-
-            <div class="device-management installation-error"
-                 ng-class="{'hide': !(deviceStatus.status === 'error' && !changingStatus) && allowAgentInstall}">
-
-              <label>
-                <input type="checkbox" ng-model="deviceStatus.statusValue"
-                       custom-disabled="{{ !allowAgentInstall }}"
-                       ng-click="changeAgentStatus()">
-                <span class="toggle-bg"
-                      uib-tooltip="{{ allowAgentInstall ? device.message : 'Maximum installed agent amount reached'}}"
-                      tooltip-placement="left" tooltip-append-to-body></span>
-                <span class="toggle-indicator"></span>
-              </label>
-
-              <!--<a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"-->
-              <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="locked">-->
-              <!--<i class="icn-sm icn-error-locked"></i>-->
-              <!--</a>-->
-
-            </div>
-
-            <div class="device-management installation-error" ng-show="false">
-
-              <label>
-                <input type="checkbox">
-                <span class="toggle-bg"></span>
-                <span class="toggle-indicator"></span>
-              </label>
-
-              <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
-                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Firewall">
-                <i class="icn-sm icn-error-firewall"></i>
-              </a>
-
-            </div>
-
-            <div class="device-management installation-error" ng-show="false">
-              <label>
-                <input type="checkbox">
-                <span class="toggle-bg"></span>
-                <span class="toggle-indicator"></span>
-              </label>
-
-              <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
-                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="power/internet or unknown problem">
-                <i class="icn-sm icn-error-power"></i>
-              </a>
-
-            </div>
-
           </div>
-        </div>
 
-      </li>
+          <div class="col-5">
+            <div class="device-mac-address">{{ device.macAddress }}</div>
+          </div>
 
-    </ul>
+          <div class="col-2" style="text-align: center">
+            <div class="device-mac-address">{{ device.status.message }}</div>
+          </div>
 
-    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
-      <div class="loader"></div>
+          <div class="col-7 last-seen-date" style="text-align: center">{{ device.updatedAt | date: 'dd MMM yyyy' }}
+          </div>
+
+          <div class="col-6" style="height: 9px;">
+            <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip" uib-tooltip="Remove Agent"
+               ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
+               ng-if="device.status.statusValue">
+              <i class="icon-sm icn-delete"></i>
+            </a>
+          </div>
+
+        </li>
+
+      </ul>
+
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
+        <div class="loader"></div>
+      </div>
     </div>
   </div>
   <script>

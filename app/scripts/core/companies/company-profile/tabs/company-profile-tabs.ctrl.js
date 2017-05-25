@@ -52,20 +52,6 @@
 
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           $scope.agents = resp;
-
-          if (resp && resp.length) {
-            DevicesService.getAllAgentsAndLogin($scope.company.id, function (logins) {
-              for (var i = 0; i < $scope.agents.length; i++) {
-                var agent = $scope.agents[i];
-                for (var id in logins) {
-                  if (agent.id === id) {
-                    agent.login = logins[id];
-                  }
-                }
-              }
-            });
-          }
-
         });
 
         $scope.$watch('agents.length', function (val) {

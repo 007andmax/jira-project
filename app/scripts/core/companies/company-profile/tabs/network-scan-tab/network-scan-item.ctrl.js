@@ -6,19 +6,14 @@
     ['$scope', 'CompaniesService', 'DevicesService',
       function ($scope, CompaniesService, DevicesService) {
 
-        $scope.deviceStatus = {};
         $scope.deviceDescription = '';
         $scope.deviceEditDescription = $scope.device.description;
         $scope.isOpenDescrDrpdwn = false;
         $scope.patternMax40 = /^.{0,40}$/;
 
-        $scope.changeAgentStatus = function () {
-          $scope.changingStatus = true;
-
-          if ($scope.deviceStatus.statusValue) {
-            DevicesService.sendInstallAgentRequest($scope.company.id, $scope.device.discoveredByAgentId, $scope.device.id)
-          } else {
-            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.device.deviceId)
+        $scope.uninstallAgent = function () {
+          if ($scope.device.status.statusValue) {
+            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.device.deviceId);
           }
         };
 
@@ -60,35 +55,46 @@
           })
         };
 
-        $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
+        $scope.$watchGroup(['device.agentStatus', 'device.agentPassword.status'], function () {
+          $scope.device.status = $scope.device.status || {};
 
           if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {
 
-            $scope.changingStatus = false;
+            $scope.device.changingStatus = false;
 
-            $scope.deviceStatus.status = 'success';
-            $scope.deviceStatus.statusValue = true;
-            $scope.deviceStatus.online = true;
+            $scope.device.status.message = 'Managed';
+            $scope.device.status.statusValue = true;
+            $scope.device.status.online = true;
+
+          } else if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'FAIL') {
+
+            $scope.device.changingStatus = false;
+            $scope.device.status.message = 'Incorrect';
 
           } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'loginError') {
 
-            $scope.changingStatus = false;
+            $scope.device.changingStatus = false;
 
-            $scope.deviceStatus.status = 'error';
-            $scope.deviceStatus.statusValue = false;
-            $scope.deviceStatus.online = false;
+            $scope.device.status.message = 'Error';
+            $scope.device.status.statusValue = false;
+            $scope.device.status.online = false;
 
-          } else if ($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress') {
+          } else if ($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress'
+            || ($scope.device.agentPassword && $scope.device.agentPassword.status === 'PROCEED')) {
 
-            $scope.changingStatus = true;
+            $scope.device.changingStatus = true;
 
           } else {
 
-            $scope.changingStatus = false;
+            $scope.device.changingStatus = false;
 
-            $scope.deviceStatus.status = 'success';
-            $scope.deviceStatus.statusValue = false;
-            $scope.deviceStatus.online = false;
+            if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'SUCCESS') {
+              $scope.device.status.message = 'Correct';
+            } else {
+              $scope.device.status.message = 'Unknown';
+            }
+            $scope.device.status.statusValue = false;
+            $scope.device.status.online = false;
 
           }
         });

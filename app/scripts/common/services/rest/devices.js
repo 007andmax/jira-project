@@ -164,12 +164,14 @@
         callCallbacks();
       }
 
-      function downloadAgent(companyId, userName, userPassword, callback) {
+      function downloadAgent(companyId, userName, userPassword, globalAutoInstall, callback) {
         if (!companyId) {
           throw "CompanyId is required!"
         }
 
-        return $http.get("/data/prepareDownloadAgent?companyId=" + companyId + "&userName=" + userName + "&userPassword=" + userPassword).then(function (response) {
+        var url = "/data/prepareDownloadAgent?companyId=" + companyId + "&userName=" + userName +
+          "&userPassword=" + userPassword + "&autoGlobalRemoteInstall=" + globalAutoInstall;
+        return $http.get(url).then(function (response) {
           if (callback) {
             callback(response.data);
           }
@@ -324,6 +326,11 @@
           method: 'POST',
           data: devicesIds
         });
+      }
+
+      function sendInstallAgentRequests(dto, callback) {
+        var future = $http.post('/devices/remoteInstall', dto);
+        Utils.handleCallback(future, callback);
       }
 
       function sendUninstallAgentRequest(companyId, devicesIds, callback) {
@@ -555,6 +562,13 @@
               if (uninstallCall && typeof uninstallCall === "function") {
                 uninstallCall();
               }
+            } else if (newChange.action === 'AGENT_PASSWORDS_CHANGED') {
+              for (var i = 0; i < newChange.data.length; i++) {
+                var agentPassword = newChange.data[i];
+                var device = Utils.findById(scannedDevices[companyId], agentPassword.deviceId);
+                device.agentPassword = device.agentPassword || {};
+                Utils.customizeObj(agentPassword, device.agentPassword);
+              }
             }
             if (callback) {
               callback(scannedDevices);
@@ -619,19 +633,6 @@
         }
 
         return agentSettings;
-      }
-
-      function getAllAgentsAndLogin(companyId, callback) {
-
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        var future = $http({
-          url: '/devices/getAllAgentsAndLogin?companyId=' + companyId,
-          method: 'GET'
-        });
-        Utils.handleCallback(future, callback);
       }
 
       function getSomeInfoForDevices(companyId, callback) {
@@ -715,6 +716,33 @@
         }
       }
 
+      function getOneByAgentId(agentId, companyId) {
+        var devices = storage.devices[companyId] || storage.devices;
+
+        if (companyId) {
+          return _getDeviceByAgentId(devices, agentId);
+        } else {
+          for (var companyId in devices) {
+            if (companyId !== 'staticCopy') {
+              var devicesByCompany = devices[companyId];
+              var device = _getDeviceByAgentId(devicesByCompany, agentId);
+              if (device) {
+                return device;
+              }
+            }
+          }
+        }
+      }
+
+      function _getDeviceByAgentId(devices, agentId) {
+        for (var i = 0; i < devices.length; i++) {
+          var device = devices[i];
+          if (device.agentId === agentId) {
+            return device;
+          }
+        }
+      }
+
       function saveReportEditedFields(dto, callback) {
         var future = $http.post('/devices/report/edit', dto);
         Utils.handleCallback(future, callback);
@@ -740,6 +768,16 @@
         Utils.handleCallback(future, callback);
       }
 
+      function saveMasterAgent(companyId, agentId, callback) {
+        var future = $http.post('/devices/updateMasterAgent', { masterAgentId: agentId, clientCompanyId: companyId });
+        Utils.handleCallback(future, callback);
+      }
+
+      function testCredentials(dto, callback) {
+        var future = $http.post('/devices/updateAndTestAgentPassword', dto);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -747,9 +785,9 @@
         runScanDevices: runScanDevices,
         getDevicesCount: getDevicesCount,
         getAgentsByCompany: getAgentsByCompany,
-        getAllAgentsAndLogin: getAllAgentsAndLogin,
         getLastScanDevices: getLastScanDevices,
         sendInstallAgentRequest: sendInstallAgentRequest,
+        sendInstallAgentRequests: sendInstallAgentRequests,
         sendUninstallAgentRequest: sendUninstallAgentRequest,
         sendDescription: sendDescription,
         sendAgentUpdateRequest: sendAgentUpdateRequest,
@@ -767,11 +805,14 @@
         getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,
+        getOneByAgentId: getOneByAgentId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
         getGadgets: getGadgets,
         saveGadget: saveGadget,
         removeGadget: removeGadget,
+        saveMasterAgent: saveMasterAgent,
+        testCredentials: testCredentials,
         _addInitListener: _addInitListener
       }
     }

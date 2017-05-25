@@ -29,7 +29,7 @@
         };
 
         $scope.downloadAgent = function () {
-          DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.name, $scope.downloadAgentUser.password, function () {
+          DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.name, $scope.downloadAgentUser.password, false, function () {
             $scope.isCompanyHasUserNameAndPass = true;
           })
         };
