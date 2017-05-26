@@ -10,7 +10,7 @@
       </label>
 
       <div ng-messages="depositModalForm.depositNote.$error" ng-show="depositModalForm.$dirty && depositModalForm.$invalid">
-        <div class="control-label" ng-message="maxlength" style="color: white;">Note is too large.</div>
+        <div class="control-label" ng-message="maxlength" style="color: #D75A4A;margin: 6px 0;">Note is too large</div>
       </div>
 
       <textarea name="depositNote" ng-model="depositNote" ng-maxlength="500">Note:</textarea>

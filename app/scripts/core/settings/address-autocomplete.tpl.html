@@ -9,7 +9,7 @@
 
     <div ng-messages="addressForm.suiteNumber.$error"
          ng-class="{'hide': !isShowingErrors(addressForm, 'suiteNumber')}">
-      <div class="control-label" ng-message="maxlength">too large</div>
+      <div style="padding-top: 4px;padding-bottom: 4px;" class="control-label" ng-message="maxlength">too large</div>
     </div>
 
     <input class="form-control" type="text" name="suiteNumber" autocomplete="off"

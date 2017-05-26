@@ -312,7 +312,7 @@
               <i class="icon-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-icn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+            <div class="btn btn-icn btn-default pull-left has-tooltip " ng-click="archiveUser()"
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">

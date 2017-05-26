@@ -2396,6 +2396,16 @@ Devices tab
   width: 100%;
 }
 
+.qt-product-edit .col-1 .select-taxes-drv .checkbox-dropdown .checkbox {
+  width: 245px;
+}
+
+.qt-product-edit .list-container .icn-label-save {
+  right: -30px;
+}
+.topNavbar .dropdown-menu.tag-list{
+  font-size: 15px;
+}
 .qt-product-edit {
   z-index: 2;
 
@@ -2916,6 +2926,10 @@ Devices tab
 .qt-default-services > li > .col-4 {
   width: 130px;
   padding-top: 9px;
+}
+
+.col-lg-2.buttons-col {
+  width: 16%;
 }
 
 /*@media only screen and (min-width: 2000px) {*/

@@ -18,6 +18,7 @@
 .create-window .checked {
   color: #000000 !important;
 }
+
 .pass-man-popup .close-btn,
 .modal-customer-report .close-btn,
 .create-window .close-btn {
@@ -62,7 +63,6 @@
 
 .create-window .general .create-ticket-form {
   height: 550px;
-  overflow: auto;
 }
 
 .create-window .general .create-ticket-form .services-in-create-tkt {
@@ -142,20 +142,20 @@
   background-color: black;
   content: '';
 }
-_:-moz-any-link, :root .create-window .general .company-window .company-steps__list:before  {
+
+_:-moz-any-link, :root .create-window .general .company-window .company-steps__list:before {
   left: 120px;
   width: calc(100% - 250px);
 }
 
-_::-webkit-:not(:root:root), .create-window .general .company-window .company-steps__list:before  {
+_::-webkit-:not(:root:root), .create-window .general .company-window .company-steps__list:before {
   width: calc(100% - 190px);
 }
+
 _:-ms-lang(x), .create-window .general .company-window .company-steps__list:before {
   left: 120px;
   width: calc(100% - 250px);
 }
-
-
 
 .create-window .general .company-window .company-steps__list--point {
   font-size: 18px;
@@ -260,7 +260,8 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
   display: flex;
   align-items: center;
 }
-.create-window .general .company-window__billing .checkbox-dropdown .list-container label{
+
+.create-window .general .company-window__billing .checkbox-dropdown .list-container label {
   padding-left: 55px;
 }
 
@@ -317,7 +318,7 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
   width: 40%;
 }
 
-.create-window .general .company-window .custom-phone-type .pull-left.dropdown{
+.create-window .general .company-window .custom-phone-type .pull-left.dropdown {
   width: 65%;
 }
 
@@ -361,10 +362,12 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
   width: 48%;
   font-weight: normal;
 }
+
 _::-webkit-:host:not(:root:root),
 .create-window .general footer .btns-container .btn {
   font-weight: 600;
 }
+
 _::-webkit-:not(:root:root),
 .create-window .general footer .btns-container .btn {
   font-weight: 600;
@@ -408,7 +411,7 @@ _::-webkit-:not(:root:root),
   line-height: 1;
 }
 
-.create-window .input-top-4 .x-mark{
+.create-window .input-top-4 .x-mark {
   top: 4px;
 }
 
@@ -430,11 +433,11 @@ _::-webkit-:not(:root:root),
   line-height: 1.3;
 }
 
-.modal-customer-report .modal-dialog{
+.modal-customer-report .modal-dialog {
   margin-top: -175px;
 }
 
-.create-window .general .create-user-form .btn{
+.create-window .general .create-user-form .btn {
   width: 40px;
 }
 

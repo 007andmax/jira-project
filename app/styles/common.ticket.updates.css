@@ -683,7 +683,16 @@
   padding-left: 0;
 }
 
+.table-content.service-table .col-3 {
+  width: 75%;
+  padding-left: 268px;
+}
+
 @media screen and (min-width: 2048px) {
+  .table-content.service-table .col-3 {
+    width: 75%;
+  }
+
   .opened-ticket .table-wrapper .service-table .col-3 {
     width: calc(100% - 605px);
   }
@@ -702,6 +711,10 @@
 }
 
 @media screen and (max-width: 1600px) {
+  .table-content.service-table .col-3 {
+    padding-left: 342px;
+  }
+
   .ticket-update-service-edit {
     padding: 30px 40px 30px 50px;
   }
@@ -744,6 +757,10 @@
 }
 
 @media screen and (max-width: 1366px) {
+  .table-content.service-table .col-3 {
+    padding-left: 295px;
+  }
+
   .table-wrapper .table-content .form-group input {
     font-size: 12px;
   }
@@ -773,5 +790,9 @@
 @media screen and (max-width: 1280px) {
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 210px);
+  }
+
+  .table-content.service-table .col-3 {
+    padding-left: 278px;
   }
 }

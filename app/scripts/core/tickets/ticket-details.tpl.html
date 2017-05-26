@@ -483,11 +483,11 @@
                   </div>
 
                   <div class="col-5">
-                    <div ng-show="ticketDetails.status !== 'COMPLETED'"
+                    <div class="ellipsis" ng-show="ticketDetails.status !== 'COMPLETED'"
                          uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
                          trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
                     </div>
-                    <div ng-show="ticketDetails.status === 'COMPLETED'"
+                    <div class="ellipsis" ng-show="ticketDetails.status === 'COMPLETED'"
                          uib-tooltip="{{ product.sum | currency :'$':2 }}"
                          trimmed-tooltip-checker="product.sum | currency:'$':2">
                     </div>
@@ -500,7 +500,7 @@
 
 
                   <div class="col-4">
-                    <span uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
+                    <span class="ellipsis" uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
                           trimmed-tooltip-checker="product.item.sale | currency:'$':2">
                     </span>
                     <span class="model">Qty {{ product.quantity }}</span>
@@ -524,7 +524,7 @@
                   <div class="col-1">{{ service.date | date:'dd MMM yyyy'}}</div>
                   <div class="col-2">{{ service.item.name }}</div>
                   <div class="col-5">Duration
-                    <span class="model">{{ service.quantity | durationFilter }}</span>
+                    <span class="model ">{{ service.quantity | durationFilter }}</span>
                     <div ng-if="service.discountAmount>0">
                       Discount: {{service.discountAmount}}&nbsp;%
                     </div>
