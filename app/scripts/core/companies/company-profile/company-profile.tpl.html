@@ -67,7 +67,7 @@
             </div>
 
             <div class="icn icn-camera" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
-                 uib-tooltip="Change Logo" tooltip-placement="top">
+                 uib-tooltip="Change Logo" tooltip-placement="top" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
               <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
                   crop-image="companyData" model-image-path="logo">
                 <li crop-image-button stop-propagation="click">
@@ -138,7 +138,7 @@
                 ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
         <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
         <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"
-                tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}"></d3bars>
+                tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}" to-fixed="0"></d3bars>
       </div>
 
     </div>
