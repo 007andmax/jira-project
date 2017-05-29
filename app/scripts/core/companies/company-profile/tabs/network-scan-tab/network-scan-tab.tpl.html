@@ -228,8 +228,8 @@
 
               <div class="checkbox-caption">
 
-                <span uib-tooltip="{{ (device.hostName | unknownFilter) || device.ipAddress }}"
-                      trimmed-tooltip-checker="(device.hostName | unknownFilter) || device.ipAddress">
+                <span uib-tooltip="{{ ((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
+                      trimmed-tooltip-checker="((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
                 </span>
 
                 <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
