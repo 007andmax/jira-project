@@ -4,13 +4,14 @@
     </h3>
 
     <p style="margin-bottom: 10px;">Incoming emails sent to your default address will automaticly create a new ticket.
-    If you have a support email already setup with your existing domain then you should forward it to the email
-    address below</p>
+      If you have a support email already setup with your existing domain then you should forward it to the email
+      address below</p>
 
     <div class="form-row clearfix">
       <div class="form-group full-width">
 
-        <input style="text-align: center; user-select: all;" class="form-control" value="{{ supportMailBox + '@' + currentHost }}" type="text" readonly/>
+        <input style="text-align: center; user-select: all;" class="form-control"
+               value="{{ supportMailBox + '@' + currentHost }}" type="text" readonly/>
       </div>
       <label style="margin: 10px;" class="control checkbox pull-left">
         <input type="checkbox" ng-model="currentCompany.inboxEnabled"
@@ -22,13 +23,15 @@
     </div>
 
     <h3 style="border-top: 1px solid #eee; padding-top: 20px; position: relative;">Outgoing email
-      <span class="helper" style="line-height: 1.1; padding: 1px 5px; height: 16px;margin-top: 7px;" tooltip-class="hint-tooltip" tooltip-placement="bottom"
+      <span class="helper" style="line-height: 1.3; padding: 1px 5px; height: 16px;margin-top: 7px;"
+            tooltip-class="hint-tooltip" tooltip-placement="bottom"
             uib-tooltip="{{ smtpHintMessage }}">?</span>
     </h3>
 
-    <p style="margin-bottom: 10px;">You can specify a custom outgoing email service if you prefer to use your own, or you can use
-    our quicktech email servers. If you select customer mails servers this is only for outgoing, you still
-    need to forward your email to the above incoming email address.</p>
+    <p style="margin-bottom: 10px;">You can specify a custom outgoing email service if you prefer to use your own, or
+      you can use
+      our quicktech email servers. If you select customer mails servers this is only for outgoing, you still
+      need to forward your email to the above incoming email address.</p>
 
     <div>
 

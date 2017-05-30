@@ -20,7 +20,9 @@ body.non-body-scroll::-webkit-scrollbar {
   /*margin-bottom: 20px;*/
   width: auto;
 }
-
+.modal-create-ticket .col-xs-12 .dropdown-menu{
+  width: 100%;
+}
 .modal-create-ticket select-taxes .dropdown-menu.dropdown-menu-right {
   width: 100%;
 }

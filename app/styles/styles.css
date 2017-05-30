@@ -1027,15 +1027,17 @@ hr {
   border-top: none;
 }
 
-.receivable-content .payment-receive-fixed div  h3{
+.receivable-content .payment-receive-fixed div h3 {
   margin: 0;
   text-align: center;
   background-color: #fff;
 }
-.receivable-content .payment-receive-fixed h3{
+
+.receivable-content .payment-receive-fixed h3 {
   display: inline-block;
   width: 100%;
 }
+
 .receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
 }
@@ -4017,14 +4019,16 @@ input[type="search"] {
   margin-bottom: 10px;
   position: relative;
 }
-.tech-button .chart-header-controls .form-group{
+
+.tech-button .chart-header-controls .form-group {
   display: inline-block;
   margin-right: 20px;
   width: 250px;
   float: right;
   margin-bottom: 0;
 }
-.tech-button .chart-header .chart-header-controls p{
+
+.tech-button .chart-header .chart-header-controls p {
   margin: 5px 10px 0 10px;
 }
 
@@ -11223,6 +11227,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1600px) {
+  .invoices-header .dropdown-menu > li > a {
+    padding: 4px 20px;
+  }
+
   .opened-ticket .col-3 {
     width: 140px;
   }

@@ -41,23 +41,23 @@
 
       <div class="users-list-wrapper">
         <div class="col-1 column-name">
-            <label class="control checkbox ">
-              <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
-              <span class="control-indicator"></span>
-            </label>
+          <label class="control checkbox ">
+            <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
+            <span class="control-indicator"></span>
+          </label>
 
-            <div style="display: flex; overflow: hidden;">
-              <div class=" avatar">
-                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
-                <i class="on bottom"></i>
-              </div>
-                <div style="width: 90%;">
-                  <p style="padding-right: 10px;" class="user-name" uib-tooltip="{{ getUserName(user) }}"
-                     trimmed-tooltip-checker="getUserName(user)">
-                  </p>
-                  <p class="label label-light">{{ user.designation }}</p>
-                </div>
+          <div style="display: flex; overflow: hidden;">
+            <div class=" avatar">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+              <i class="on bottom"></i>
             </div>
+            <div style="width: 90%;">
+              <p style="padding-right: 10px;" class="user-name" uib-tooltip="{{ getUserName(user) }}"
+                 trimmed-tooltip-checker="getUserName(user)">
+              </p>
+              <p class="label label-light">{{ user.designation }}</p>
+            </div>
+          </div>
         </div>
 
         <div class="col-1-1">
@@ -107,20 +107,24 @@
 
         <div class="col-3-2" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle tooltip-placement="top">
-            <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket" uib-tooltip="Ticket Updates">
-            <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice" uib-tooltip="Invoice Updates">
-            <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager" uib-tooltip="Ticket Manager">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
+               tooltip-placement="top">
+            <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket"
+                 uib-tooltip="Ticket Updates">
+            <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice"
+                 uib-tooltip="Invoice Updates">
+            <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager"
+                 uib-tooltip="Ticket Manager">
             <div class="no-subscribe" uib-tooltip="No Subscriptions"
                  ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager"></div>
           </div>
 
-          <ul class="dropdown-menu dropdown-subscribe">
+          <ul class="dropdown-menu dropdown-subscribe" style="width: 105%;">
 
             <li>
               <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
                 <div class="clearfix">
-                  <label class="control checkbox pull-left" >
+                  <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
                     <span class="control-indicator"></span> Ticket Updates
                   </label>
@@ -142,7 +146,8 @@
             <li>
               <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
                 <div class="clearfix">
-                  <label class="control checkbox pull-left" ng-disabled="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
+                  <label class="control checkbox pull-left"
+                         ng-disabled="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
                     <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice"
                            ng-disabled="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
                     <span class="control-indicator"></span> Invoice Updates
@@ -162,7 +167,7 @@
         </div>
 
         <div class="col-5">
-          <div class="list-actions text-right">
+          <div class="list-actions text-right right-align-tooltip">
 
             <div class="btn btn-icn btn-default  has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
@@ -190,10 +195,17 @@
 </div>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');
