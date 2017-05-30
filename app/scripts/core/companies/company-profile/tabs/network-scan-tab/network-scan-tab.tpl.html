@@ -67,6 +67,7 @@
         </label>
       </div>
     </div>
+
     <div class="run-scan" ng-if="agents && agents.length">
       <div class="network-scan-item-1">
         <p>Run network scan</p>
@@ -115,14 +116,9 @@
         </div>
       </div>
     </div>
-
-    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
-      <div class="loader"></div>
-    </div>
   </div>
 
-
-  <div class="master-agent">
+  <div class="master-agent" ng-if="agents && agents.length">
     <select ng-model="masterAgent" ng-change="saveMasterAgent()"
             ng-options="agent as agent.hostName for agent in agents | filter: { agentId: '' }: stateComparator"
             ng-disabled="saveMasterAgentInProgress"></select>
@@ -183,6 +179,10 @@
 
       <div class="master-agent-offline-message" ng-if="masterAgentOffline">
         <p class="text-center">Network scan and remote install is available only when master agent is online.</p>
+      </div>
+
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
+        <div class="loader"></div>
       </div>
 
       <li class="list-content" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
