@@ -94,6 +94,7 @@
         .card-wrapper .card__cover--name.user-type .label {
           clear: left; }
     .card-wrapper .card__info {
+      position: relative;
       height: 200px;
       overflow: hidden;
     }

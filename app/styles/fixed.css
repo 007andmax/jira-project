@@ -1916,3 +1916,7 @@ span.sort-span {
   width: 30%;
 }
 
+.right-align-tooltip .tooltip {
+  right: 0 !important;
+  left: initial !important;
+}
