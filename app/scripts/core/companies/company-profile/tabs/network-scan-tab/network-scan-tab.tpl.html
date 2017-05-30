@@ -43,37 +43,20 @@
           <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
         </div>
         <div ng-show="showSendMailForm" ng-form="sendMailForm">
-          <h3>Email Agent</h3>
-          <div class="form-group">
-            <label class="control-label">User</label>
-
-            <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                   qt-typeahead-show-on-focus
-                   ng-model="downloadAgentModel.user" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                   typeahead-on-select="clearEmail()" ng-disabled="!usersWithEmails || !usersWithEmails.length"
-                   uib-typeahead="user as getUserName(user) for user in usersWithEmails | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
-                   custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}"
-                   placeholder="Select user">
-            <input type="hidden" ng-model="downloadAgentModel.user" name="user" required>
-
-            <div typeahead-input-icon="downloadAgentModel.user"
-                 style="position: absolute;top: 28px;right: 13px;"></div>
-          </div>
           <div class="form-group" ng-class="{ 'has-error': isShowingMailFormErrors(sendMailForm, 'email')}">
             <label class="control-label" ng-class="{ 'hide': isShowingMailFormErrors(sendMailForm, 'email')}">
-              or Email Address
+              Email Address
             </label>
 
             <div ng-messages="sendMailForm.email.$error"
                  ng-class="{ 'hide': !isShowingMailFormErrors(sendMailForm, 'email')}">
-              <label class="control-label" ng-message="required">Enter email or select user</label>
+              <label class="control-label" ng-message="required">Enter email address</label>
               <label class="control-label" ng-message="pattern">Email should be valid</label>
               <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
             </div>
 
-            <input type="text" class="form-control" placeholder="Email" ng-model="downloadAgentModel.email"
-                   name="email" ng-pattern="emailPattern" ng-required="true" ng-maxlength="128"
-                   ng-disabled="downloadAgentModel.user && downloadAgentModel.user.primaryEmail">
+            <input type="text" class="form-control" placeholder="Email address" ng-model="downloadAgentModel.email"
+                   name="email" ng-pattern="emailPattern" required ng-maxlength="128">
           </div>
           <div>
             <button type="button" ng-click="sendEmailWithAgent(sendMailForm)">Send</button>

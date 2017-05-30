@@ -45,15 +45,7 @@
         };
 
         $scope.isShowingMailFormErrors = function (form, fieldName) {
-          if (form[fieldName] && ($scope.triedToSendMail || form[fieldName].$dirty) && form[fieldName].$invalid) {
-            if (form[fieldName].$error.required) {
-              if (fieldName === 'email' && !$scope.downloadAgentModel.user) {
-                return true
-              }
-            } else {
-              return true;
-            }
-          }
+          return form[fieldName] && ($scope.triedToSendMail || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.filterUserFullName = function (value) {
@@ -94,10 +86,6 @@
                 email: $scope.downloadAgentModel.email,
                 autoGlobalRemoteInstall: $scope.downloadAgentModel.autoInstall
               };
-
-              if ($scope.downloadAgentModel.user && $scope.downloadAgentModel.user.primaryEmail) {
-                dto.email = $scope.downloadAgentModel.user.primaryEmail;
-              }
 
               DevicesService.sendDownloadAgentLink(dto, function () {
                 $scope.savingInProcess = false;
