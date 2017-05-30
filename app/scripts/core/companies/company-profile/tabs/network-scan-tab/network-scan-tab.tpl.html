@@ -1,4 +1,4 @@
-<div class="tab-pane active" ng-controller="quicktech.core.devices.networkScanTabCtrl" style="margin-top: 385px;">
+<div class="tab-pane network-scan active" ng-controller="quicktech.core.devices.networkScanTabCtrl">
   <div class="network-scan-header">
 
     <div ng-if="!agents || !agents.length">
@@ -124,133 +124,131 @@
             ng-disabled="saveMasterAgentInProgress"></select>
   </div>
 
-  <div>
-    <ul class="qt-list qt-network-scan">
-      <!--ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : '94px'}">-->
+  <ul class="qt-list qt-network-scan">
+    <!--ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : '94px'}">-->
 
-      <li class="list-heading" fixed-block-top offset-top="148">
+    <li class="list-heading" fixed-block-top offset-top="148">
 
-        <div class="col-1" ng-click="sortNetworkScan('hostName')">
-          <label class="control checkbox pull-left">
-            <input type="checkbox" ng-model="isAllSelected" ng-change="toggleAll()"
-                   custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
-            <span class="control-indicator"></span>
-          </label>
-          <span class="sort-span">DEVICE
+      <div class="col-1" ng-click="sortNetworkScan('hostName')">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="isAllSelected" ng-change="toggleAll()"
+                 custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
+          <span class="control-indicator"></span>
+        </label>
+        <span class="sort-span">DEVICE
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-hostName', 'active': orderScanBy.indexOf('hostName') > -1}"></i>
             </span>
-        </div>
-        <div class="col-1" ng-click="sortNetworkScan('ipAddress')">
+      </div>
+      <div class="col-1" ng-click="sortNetworkScan('ipAddress')">
             <span class="sort-span">LAN IP
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i>
             </span>
-        </div>
-        <!--<div class="col-1"><span>DESCRIPTION</span></div>-->
-        <div class="col-1"><span class="sort-span">USERNAME</span></div>
-        <div class="col-1"><span class="sort-span">PASSWORD</span></div>
-        <div class="col-1" ng-click="sortNetworkScan('manufacturer')">
+      </div>
+      <!--<div class="col-1"><span>DESCRIPTION</span></div>-->
+      <div class="col-1"><span class="sort-span">USERNAME</span></div>
+      <div class="col-1"><span class="sort-span">PASSWORD</span></div>
+      <div class="col-1" ng-click="sortNetworkScan('manufacturer')">
             <span class="sort-span">MANUFACTURER
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i>
             </span>
-        </div>
-        <div class="col-1" ng-click="sortNetworkScan('macAddress')">
+      </div>
+      <div class="col-1" ng-click="sortNetworkScan('macAddress')">
             <span class="sort-span">MAC ADDRESS
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
             </span>
-        </div>
-        <div class="col-1" ng-click="sortNetworkScan('agentStatus')" style="text-align: center;">
+      </div>
+      <div class="col-1" ng-click="sortNetworkScan('agentStatus')">
             <span class="sort-span">Agent Status
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
             </span>
-        </div>
-
-      </li>
-
-      <div class="network-scan-results"
-           ng-show="(!scanDevices.devices || !scanDevices.devices.length) && !isScanDevicesLoad">
-        <i class="icn-lg icn-network-scan-lg"></i>
-        <p class="text-center result-heading">No devices to show</p>
       </div>
 
-      <div class="master-agent-offline-message" ng-if="masterAgentOffline">
-        <p class="text-center">Network scan and remote install is available only when master agent is online.</p>
-      </div>
+    </li>
 
-      <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
-        <div class="loader"></div>
-      </div>
+    <div class="network-scan-results"
+         ng-show="(!scanDevices.devices || !scanDevices.devices.length) && !isScanDevicesLoad">
+      <i class="icn-lg icn-network-scan-lg"></i>
+      <p class="text-center result-heading">No agent install</p>
+    </div>
 
-      <li class="list-content" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
-          ng-controller="quicktech.core.devices.networkScanItemCtrl">
+    <div class="master-agent-offline-message" ng-if="masterAgentOffline">
+      <p class="text-center">Network scan and remote install is available only when master agent is online.</p>
+    </div>
 
-        <div class="col-1">
-          <div class="device-name">
+    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
+      <div class="loader"></div>
+    </div>
 
-            <!--<i class="device-status" ng-class="{'on' : deviceStatus.online, 'off': !deviceStatus.online}"></i>-->
-            <label class="control checkbox pull-left">
-              <input type="checkbox" ng-model="selectedDevices[device.id]" ng-change="checkSelection()">
-              <span class="control-indicator"></span>
-            </label>
+    <li class="list-content" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
+        ng-controller="quicktech.core.devices.networkScanItemCtrl">
 
-            <div class="checkbox-caption">
+      <div class="col-1">
+        <div class="device-name">
+
+          <!--<i class="device-status" ng-class="{'on' : deviceStatus.online, 'off': !deviceStatus.online}"></i>-->
+          <label class="control checkbox pull-left">
+            <input type="checkbox" ng-model="selectedDevices[device.id]" ng-change="checkSelection()">
+            <span class="control-indicator"></span>
+          </label>
+
+          <div class="checkbox-caption">
               <span
                 uib-tooltip="{{ ((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
                 trimmed-tooltip-checker="((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
               </span>
-            </div>
           </div>
         </div>
-        <div class="col-1">
-          <div class="device-lan-ip">{{ device.ipAddress }}</div>
+      </div>
+      <div class="col-1">
+        <div class="device-lan-ip">{{ device.ipAddress }}</div>
+      </div>
+      <div class="col-1">{{ device.agentPassword.login }}</div>
+      <div class="col-1">{{ device.agentPassword.password ? '********' : '' }}</div>
+      <div class="col-1">
+        <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
+             trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
         </div>
-        <div class="col-1">{{ device.agentPassword.login }}</div>
-        <div class="col-1">{{ device.agentPassword.password ? '********' : '' }}</div>
-        <div class="col-1">
-          <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
-               trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
-          </div>
-        </div>
-        <div class="col-1">
-          <div class="device-mac-address">{{ device.macAddress }}</div>
-        </div>
-        <div class="col-1">{{ device.status.message }}</div>
-         <div class="col-1">
-          <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip" uib-tooltip="Remove Agent"
-             ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
-             ng-if="device.status.statusValue">
-            <i class="icon-sm icn-delete"></i>
-          </a>
-        </div>
-      </li>
+      </div>
+      <div class="col-1">
+        <div class="device-mac-address">{{ device.macAddress }}</div>
+      </div>
+      <div class="col-1">{{ device.status.message }}</div>
+      <div class="col-2">
+        <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip" uib-tooltip="Remove Agent"
+           ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
+           ng-if="device.status.statusValue">
+          <i class="icon-sm icn-delete"></i>
+        </a>
+      </div>
+    </li>
 
-    </ul>
+  </ul>
 
-    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
-      <div class="loader"></div>
-    </div>
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
+    <div class="loader"></div>
   </div>
 
-
-  <script>
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-93441341-1', 'auto');
-    ga('send', 'pageview');
-
-  </script>
 </div>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+

@@ -3679,10 +3679,13 @@ Devices tab
 }
 
 /***Network**/
-.tab-pane {
-  padding: 15px 60px;
+.network-scan {
+  margin: 400px 60px 0;
 }
-
+.network-scan .network-scan-results{
+  margin-top: 65px;
+  min-height: 150px;
+}
 .network-scan-header {
   border-radius: 3px;
   background-color: #ffffff;
@@ -3690,7 +3693,14 @@ Devices tab
   color: #404b5f;
   font-size: 14px;
   font-weight: 500;
+  transition: all .3s;
+  border: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
+.network-scan-header:hover {
   box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
+
 }
 
 .run-scan {
@@ -3741,7 +3751,7 @@ Devices tab
   content: '5';
 }
 
-.run-scan [class*=network-scan-item-] .btn{
+.run-scan [class*=network-scan-item-] .btn {
   width: 133px;
   height: 36px;
   font-size: 14px;
@@ -3751,43 +3761,55 @@ Devices tab
   position: absolute;
   top: -20px;
 }
-.run-scan [class*=network-scan-item-] input{
+
+.run-scan [class*=network-scan-item-] input {
   width: 100%;
   border-radius: 4px 3px 3px 4px;
   border: 1px solid #d3d8e1;
   background-color: #ffffff;
   margin-bottom: 10px;
+  transition: all .3s;
+}
+
+.network-scan input:focus {
+  border-color: #4BA9DF;
+  outline: none;
 }
 
 .run-scan .network-scan-item-3 .btn-primary,
-.run-scan .network-scan-item-4 .btn-primary{
+.run-scan .network-scan-item-4 .btn-primary {
   background-color: #90C56B;
   border-color: #90C56B;
 }
+
 .run-scan .network-scan-item-3 .btn-primary.disabled,
-.run-scan .network-scan-item-4 .btn-primary.disabled{
+.run-scan .network-scan-item-4 .btn-primary.disabled {
   background-color: #fff;
   border-color: #8E9598;
 }
 
-.master-agent{
+.master-agent {
   float: right;
-  padding: 30px 0 20px;
+  padding-bottom: 20px;
 
 }
-.master-agent select{
+
+.master-agent select {
   width: 158px;
   height: 26px;
   border: 1px solid #c2c5cb;
   border-radius: 13px;
   padding: 0 15px;
   outline: none;
+  cursor: pointer;
 }
-.tab-pane .qt-network-scan{
+
+.network-scan .qt-network-scan {
   padding: 0;
   font-size: 0;
 }
-.tab-pane .qt-network-scan .list-heading{
+
+.network-scan .qt-network-scan .list-heading {
   height: 60px;
   background-color: #d8e4e6;
   font-weight: 600;
@@ -3795,22 +3817,66 @@ Devices tab
   font-size: 14px;
 }
 
-.tab-pane .qt-network-scan .col-1{
-  width: 14.2%;
+.network-scan .qt-list.qt-network-scan .col-1 {
+  width: 14.1%;
   display: inline-block;
+  min-height: 40px;
 }
-.tab-pane .qt-network-scan .list-content:hover{
+
+.network-scan .qt-list.qt-network-scan .col-1 .device-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.network-scan .qt-list.qt-network-scan .list-heading .col-1 {
+  line-height: 25px;
+}
+
+.network-scan .qt-list.qt-network-scan .list-content .col-1,
+.network-scan .qt-list.qt-network-scan .list-content .col-2 {
+  padding-top: 9px;
+}
+
+.network-scan .qt-network-scan .col-2 {
+  width: 0;
+}
+
+.network-scan .qt-list > li > [class*='col-']:first-child {
+  padding-left: 0;
+}
+
+.network-scan .qt-network-scan .list-content:hover {
   box-shadow: 0 10px 35px rgba(150, 166, 169, 0.5);
+  z-index: 1;
+  transition: all .3s;
 }
-.tab-pane .qt-network-scan .list-heading .col-1 span{
+
+.network-scan .qt-list .checkbox {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+.network-scan .qt-network-scan .checkbox-caption {
+  margin: 0;
+}
+
+.network-scan .device-name {
+  padding-left: 0;
+}
+
+.network-scan .qt-network-scan .list-heading .col-1 span {
   text-transform: uppercase;
 }
-.tab-pane .qt-network-scan{
-  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
+
+.network-scan .qt-network-scan {
+  border-radius: 3px;
+  border: 1px solid #eee;
 }
 
-
-
+.network-scan .control-indicator {
+  background-color: #fff;
+}
 
 .qt-network-scan {
   padding: 30px 0 0;
