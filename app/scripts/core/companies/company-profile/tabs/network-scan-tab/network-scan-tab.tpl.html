@@ -172,13 +172,6 @@
                  ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
             </span>
         </div>
-        <!--<div class="col-1" ng-click="sortNetworkScan('updatedAt')" style="text-align: center;">-->
-        <!--<span class="sort-span">LAST SEEN DATE-->
-        <!--<i class="icn-sm sort-icon icn-sort"-->
-        <!--ng-class="{'rotate': orderScanBy === '-updatedAt', 'active': orderScanBy.indexOf('updatedAt') > -1}"></i>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-1">&nbsp;</div>-->
 
       </li>
 
@@ -205,82 +198,13 @@
             </label>
 
             <div class="checkbox-caption">
-
-                <span
-                  uib-tooltip="{{ ((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
-                  trimmed-tooltip-checker="((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
-                </span>
-
-              <!--<a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"-->
-                 <!--uib-popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">-->
-                <!--<i class="icon-sm icn-description"></i>-->
-              <!--</a>-->
-
-              <!--<div class="dropdown" uib-dropdown is-open="isOpenEditDescrDrpdwn"-->
-                   <!--ng-show="(device.description | unknownFilter)">-->
-
-                <!--<a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"-->
-                   <!--tooltip-placement="top" tooltip-append-to-body="true"-->
-                   <!--uib-tooltip="Edit Description" uib-dropdown-toggle>-->
-                  <!--<i class="icon-sm edit-icon"></i>-->
-                <!--</a>-->
-
-                <!--<div class="dropdown-menu add-description-form clearfix" stop-propagation="click">-->
-                    <!--<textarea class="form-control autosize" rows="1" ng-model="deviceEditDescription"-->
-                              <!--hard-reset-pattern="patternMax40"-->
-                              <!--placeholder="Edit device description"></textarea>-->
-
-                  <!--<div class="qt-form-actions">-->
-                    <!--<div class="btn btn-lg btn-primary pull-left" ng-click="saveEditDescription()"-->
-                         <!--custom-disabled="{{ disableEditSaveDescr }}">-->
-                      <!--Save-->
-                    <!--</div>-->
-
-                    <!--<div class="btn btn-lg btn-primary   pull-left" ng-click="saveEditDescription('close')">-->
-                      <!--Cancel-->
-                    <!--</div>-->
-
-                    <!--<div class="word-count pull-right">{{ 40 - deviceEditDescription.length }}</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-
-              <!--<div class="dropdown" uib-dropdown is-open="isOpenDescrDrpdwn"-->
-                   <!--ng-hide="(device.description | unknownFilter)">-->
-
-                <!--<a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"-->
-                   <!--tooltip-placement="top" tooltip-append-to-body="true"-->
-                   <!--uib-tooltip="Add Description" uib-dropdown-toggle>-->
-                  <!--<i class="icn-sm icn-add-description"></i>-->
-                <!--</a>-->
-
-                <!--<div class="dropdown-menu add-description-form clearfix" stop-propagation="click">-->
-                    <!--<textarea class="form-control autosize" rows="1" ng-model="deviceDescription"-->
-                              <!--hard-reset-pattern="patternMax40"-->
-                              <!--placeholder="Add device description"></textarea>-->
-
-                  <!--<div class="qt-form-actions">-->
-                    <!--<div class="btn btn-lg btn-primary pull-left" ng-click="saveDescription()"-->
-                         <!--custom-disabled="{{ disableSaveDescr }}">-->
-                      <!--Save-->
-                    <!--</div>-->
-
-                    <!--<div class="btn btn-lg btn-primary   pull-left" ng-click="saveDescription('close')">Cancel</div>-->
-
-                    <!--<div class="word-count pull-right">{{ 40 - deviceDescription.length }}</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-
+              <span
+                uib-tooltip="{{ ((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
+                trimmed-tooltip-checker="((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
+              </span>
             </div>
           </div>
         </div>
-        <!--<div class="col-1">-->
-          <!--<div class="device-desc">-->
-            <!--<span ng-hide="(device.description | unknownFilter)">No description available</span>-->
-            <!--<span ng-show="(device.description | unknownFilter)">{{ device.description }}</span>-->
-          <!--</div>-->
-        <!--</div>-->
         <div class="col-1">
           <div class="device-lan-ip">{{ device.ipAddress }}</div>
         </div>
@@ -294,10 +218,7 @@
         <div class="col-1">
           <div class="device-mac-address">{{ device.macAddress }}</div>
         </div>
-        <div class="col-1">
-          <div class="device-mac-address">{{ device.status.message }}</div>
-        </div>
-        <!--<div class="col-1 last-seen-date" >{{ device.updatedAt | date: 'dd MMM yyyy' }}</div>-->
+        <div class="col-1">{{ device.status.message }}</div>
          <div class="col-1">
           <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip" uib-tooltip="Remove Agent"
              ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
