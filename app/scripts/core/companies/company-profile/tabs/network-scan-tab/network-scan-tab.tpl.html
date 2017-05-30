@@ -30,17 +30,13 @@
       <!--</div>-->
 
       <div>
-        <label class="control checkbox">
-          <input type="checkbox" ng-model="downloadAgentModel.autoInstall">
-          <span class="control-indicator"></span>
-          Automatically install agents
-        </label>
-        <div ng-click="downloadAgent(downloadAgentForm)">
-          <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
-               alt="download">
-        </div>
-        <div ng-click="showSendMailForm = true" ng-hide="showSendMailForm">
-          <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
+        <div ng-hide="showSendMailForm">
+          <div ng-click="showSendMailForm = true">
+            Send by email
+          </div>
+          <div ng-click="downloadAgent(downloadAgentForm)">
+            Download
+          </div>
         </div>
         <div ng-show="showSendMailForm" ng-form="sendMailForm">
           <div class="form-group" ng-class="{ 'has-error': isShowingMailFormErrors(sendMailForm, 'email')}">
@@ -62,6 +58,12 @@
             <button type="button" ng-click="sendEmailWithAgent(sendMailForm)">Send</button>
           </div>
         </div>
+
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="downloadAgentModel.autoInstall">
+          <span class="control-indicator"></span>
+          Automatically install agents
+        </label>
       </div>
     </div>
     <div ng-if="agents && agents.length">
