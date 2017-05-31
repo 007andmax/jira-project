@@ -174,7 +174,7 @@
     <div class="network-scan-results"
          ng-show="(!scanDevices.devices || !scanDevices.devices.length) && !isScanDevicesLoad">
       <i class="icn-lg icn-network-scan-lg"></i>
-      <p class="text-center result-heading">No agent install</p>
+      <p class="text-center result-heading">{{ agents && agents.length ? 'Nothing was found' : 'No agent installed' }}</p>
     </div>
 
     <div class="master-agent-offline-message" ng-if="masterAgentOffline">
