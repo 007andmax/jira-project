@@ -221,7 +221,7 @@
       <div class="col-1">
         <div class="device-mac-address">{{ device.macAddress }}</div>
       </div>
-      <div class="col-1 {{ getStatusClass() }}">{{ device.status.message }}</div>
+      <div class="col-1"><p class="{{ getStatusClass() }}">{{ device.status.message }}</p></div>
       <div class="col-2">
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip" uib-tooltip="Remove Agent"
            ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"

@@ -770,7 +770,7 @@ Devices tab
 .device-manufacturer,
 .device-mac-address,
 .last-seen-date {
-  color: #94a4b8;
+  color: #404b5f;
 }
 
 .device-manufacturer {
@@ -3712,7 +3712,7 @@ Devices tab
 
 .run-scan [class*=network-scan-item-],
 .no-agent [class*=network-scan-item-] {
-  width: 20%;
+  width: 25%;
   display: inline-block;
   font-size: 14px;
   vertical-align: top;
@@ -3771,7 +3771,7 @@ Devices tab
 }
 
 .run-scan [class*=network-scan-item-] input,
-.no-agent [class*=network-scan-item-] input{
+.no-agent [class*=network-scan-item-] input {
   width: 100%;
   border-radius: 4px 3px 3px 4px;
   border: 1px solid #d3d8e1;
@@ -3786,11 +3786,12 @@ Devices tab
 
 .run-scan .network-scan-item-3 .btn-primary,
 .run-scan .network-scan-item-4 .btn-primary,
-.no-agent .network-scan-item-3 .btn-primary{
+.no-agent .network-scan-item-3 .btn-primary {
   background-color: #90C56B;
   border-color: #90C56B;
 }
-.no-agent .network-scan-item-3 .btn-primary{
+
+.no-agent .network-scan-item-3 .btn-primary {
   width: 75px;
   margin-bottom: 16px;
   font-size: 14px;
@@ -3798,7 +3799,7 @@ Devices tab
 
 .run-scan .network-scan-item-3 .btn-primary.disabled,
 .run-scan .network-scan-item-4 .btn-primary.disabled,
-.no-agent .network-scan-item-3 .btn-primary.disabled{
+.no-agent .network-scan-item-3 .btn-primary.disabled {
   background-color: #fff;
   border-color: #8E9598;
 }
@@ -3851,8 +3852,11 @@ Devices tab
 .network-scan .qt-list.qt-network-scan .list-content .col-1,
 .network-scan .qt-list.qt-network-scan .list-content .col-2 {
   padding-top: 9px;
+  font-size: 14px;
 }
-
+.network-scan .qt-list.qt-network-scan .list-content{
+  cursor: default;
+}
 .network-scan .qt-network-scan .col-2 {
   width: 0;
 }
@@ -3893,18 +3897,18 @@ Devices tab
   border: 1px solid #ECF3F4;
 }
 
-
-
-.no-agent .send-by-email{
-  padding: 0 0 20px 25px;
+.no-agent .send-by-email {
+  padding: 0 0 10px 25px;
 }
-.no-agent .send-by-email div{
+
+.no-agent .send-by-email div {
   margin-bottom: 15px;
   cursor: pointer;
   position: relative;
 }
+
 .no-agent .send-by-email div:first-child::before,
-.no-agent .send-by-email div:last-child::before{
+.no-agent .send-by-email div:last-child::before {
   content: '';
   position: absolute;
   background: url("../images/new-icons/email-new.png") no-repeat;
@@ -3913,16 +3917,73 @@ Devices tab
   left: -25px;
   top: 6px;
 }
-.no-agent .send-by-email div:last-child::before{
+
+.no-agent .send-by-email div:last-child::before {
   background: url("../images/new-icons/download-new.png") no-repeat;
   width: 16px;
   height: 17px;
   top: -1px;
 }
+
 .no-agent input {
-  max-width: 220px;
+  max-width: 250px;
 }
 
+.changing-status,
+.success-status,
+.error-status {
+  width: 110px;
+  height: 26px;
+  border: 1px solid #8d9090;
+  background-color: #eee;
+  text-align: right;
+  padding: 0 10px;
+  border-radius: 13px;
+  color: #8d9090;
+  position: relative;
+}
+
+.changing-status:before {
+  content: '';
+  background: url("../images/new-icons/changing-status.png") no-repeat;
+  position: absolute;
+  width: 14px;
+  height: 3px;
+  top: 10px;
+  left: 10px;
+}
+
+.success-status {
+  border: 1px solid #53b257;
+  background-color: #deffdf;
+  color: #4caf50;
+}
+
+.success-status:before {
+  content: '';
+  background: url("../images/new-icons/success-status.png") no-repeat;
+  position: absolute;
+  width: 12px;
+  height: 9px;
+  top: 7px;
+  left: 14px;
+}
+
+.error-status {
+  border: 1px solid #d84d3f;
+  background-color: #ffdfdc;
+  color: #d84a3c;
+}
+
+.error-status:before {
+  content: '';
+  background: url("../images/new-icons/error-status.png") no-repeat;
+  position: absolute;
+  width: 12px;
+  height: 9px;
+  top: 7px;
+  left: 14px;
+}
 
 
 

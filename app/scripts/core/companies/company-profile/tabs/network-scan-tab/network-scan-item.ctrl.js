@@ -94,7 +94,7 @@
           } else if ($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress'
             || ($scope.device.agentPassword && $scope.device.agentPassword.status === 'PROCEED')) {
 
-            $scope.device.status.message = 'Changing...';
+            $scope.device.status.message = 'Changing';
             $scope.device.changingStatus = true;
 
           } else {
