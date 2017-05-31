@@ -120,8 +120,9 @@
   </div>
 
   <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
-    <input type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
+    <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
            ng-disabled="saveMasterAgentInProgress">
+    <i class="report-caret-icon"></i>
     <ul uib-dropdown-menu>
       <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
           ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>
