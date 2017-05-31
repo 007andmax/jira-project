@@ -2391,9 +2391,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 .icn-network-scan-lg {
-  width: 66px;
-  height: 34px;
-  background-position: -2293px -206px;
+  width: 37px;
+  height: 48px;
+  background: url("../images/new-icons/no-agent-install.png") no-repeat;
 }
 
 .icn-locked {

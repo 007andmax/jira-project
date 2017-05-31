@@ -1,37 +1,38 @@
 <div class="tab-pane network-scan active" ng-controller="quicktech.core.devices.networkScanTabCtrl">
   <div class="network-scan-header">
 
-    <div ng-if="!agents || !agents.length">
-      <div ng-form="downloadAgentForm">
-        <div class="col-md-1">
-          <div class="form-group" ng-class="{'has-error': isShowingErrors(downloadAgentForm, 'agentLogin')}">
-            <label class="control-label" ng-hide="isShowingErrors(downloadAgentForm, 'agentLogin')">
-              Username
-            </label>
+    <div class="no-agent" ng-if="!agents || !agents.length">
 
-            <div ng-messages="downloadAgentForm.agentLogin.$error"
-                 ng-hide="!isShowingErrors(downloadAgentForm, 'agentLogin')">
-              <label class="control-label" ng-message="required">Username can't be left empty</label>
-            </div>
 
-            <input type="text" class="form-control" name="agentLogin" ng-model="downloadAgentModel.username"
-                   placeholder="Username" ng-required="!!downloadAgentModel.password" autocomplete="new-username">
+      <div class="network-scan-item-1" ng-form="downloadAgentForm">
+        <p>Window Credentials</p>
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(downloadAgentForm, 'agentLogin')}">
+          <!--<label class="control-label" ng-hide="isShowingErrors(downloadAgentForm, 'agentLogin')">-->
+            <!--Username-->
+          <!--</label>-->
+
+          <div ng-messages="downloadAgentForm.agentLogin.$error"
+               ng-hide="!isShowingErrors(downloadAgentForm, 'agentLogin')">
+            <label class="control-label" ng-message="required">Username can't be left empty</label>
           </div>
+
+          <input type="text" class="form-control" name="agentLogin" ng-model="downloadAgentModel.username"
+                 placeholder="Username" ng-required="!!downloadAgentModel.password" autocomplete="new-username">
         </div>
-        <div class="col-md-1">
-          <div class="form-group">
-            <label class="control-label">Password</label>
-            <input type="password" class="form-control" name="agentPassword" ng-model="downloadAgentModel.password"
-                   placeholder="Password" autocomplete="new-password">
-          </div>
+        <div class="form-group">
+          <!--<label class="control-label">Password</label>-->
+          <input type="password" class="form-control" name="agentPassword" ng-model="downloadAgentModel.password"
+                 placeholder="Password" autocomplete="new-password">
         </div>
       </div>
 
-      <!--<div class="snmp-devices">-->
-      <!--</div>-->
+      <div class="network-scan-item-2">
+        <p>SNMP Devices</p>
+      </div>
 
-      <div>
-        <div ng-hide="showSendMailForm">
+      <div class="network-scan-item-3">
+        <p>Create Agent</p>
+        <div class="send-by-email" ng-hide="showSendMailForm">
           <div ng-click="showSendMailForm = true">
             Send by email
           </div>
@@ -39,11 +40,11 @@
             Download
           </div>
         </div>
-        <div ng-show="showSendMailForm" ng-form="sendMailForm">
+        <div class="show-mail" ng-show="showSendMailForm" ng-form="sendMailForm">
           <div class="form-group" ng-class="{ 'has-error': isShowingMailFormErrors(sendMailForm, 'email')}">
-            <label class="control-label" ng-class="{ 'hide': isShowingMailFormErrors(sendMailForm, 'email')}">
-              Email Address
-            </label>
+            <!--<label class="control-label" ng-class="{ 'hide': isShowingMailFormErrors(sendMailForm, 'email')}">-->
+              <!--Email Address-->
+            <!--</label>-->
 
             <div ng-messages="sendMailForm.email.$error"
                  ng-class="{ 'hide': !isShowingMailFormErrors(sendMailForm, 'email')}">
@@ -56,7 +57,7 @@
                    name="email" ng-pattern="emailPattern" required ng-maxlength="128">
           </div>
           <div>
-            <button type="button" ng-click="sendEmailWithAgent(sendMailForm)">Send</button>
+            <button class="btn btn-primary has-tooltip" type="button" ng-click="sendEmailWithAgent(sendMailForm)">Send</button>
           </div>
         </div>
 

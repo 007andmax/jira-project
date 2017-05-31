@@ -3682,10 +3682,12 @@ Devices tab
 .network-scan {
   margin: 400px 60px 0;
 }
-.network-scan .network-scan-results{
+
+.network-scan .network-scan-results {
   margin-top: 65px;
   min-height: 150px;
 }
+
 .network-scan-header {
   border-radius: 3px;
   background-color: #ffffff;
@@ -3694,20 +3696,22 @@ Devices tab
   font-size: 14px;
   font-weight: 500;
   transition: all .3s;
-  border: 1px solid #eee;
+  border: 1px solid #ECF3F4;
   margin-bottom: 30px;
 }
 
-.network-scan-header:hover {
-  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
+/*.network-scan-header:hover {*/
+/*box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);*/
 
-}
+/*}*/
 
-.run-scan {
+.run-scan,
+.no-agent {
   font-size: 0;
 }
 
-.run-scan [class*=network-scan-item-] {
+.run-scan [class*=network-scan-item-],
+.no-agent [class*=network-scan-item-] {
   width: 20%;
   display: inline-block;
   font-size: 14px;
@@ -3716,12 +3720,18 @@ Devices tab
   position: relative;
 }
 
-.run-scan [class*=network-scan-item-] p {
+.no-agent [class*=network-scan-item-] {
+  width: 33.3%;
+}
+
+.run-scan [class*=network-scan-item-] p,
+.no-agent [class*=network-scan-item-] p {
   padding-bottom: 20px;
   font-weight: 600;
 }
 
-.run-scan [class*=network-scan-item-]:before {
+.run-scan [class*=network-scan-item-]:before,
+.no-agent [class*=network-scan-item-]:before {
   width: 38px;
   height: 38px;
   position: absolute;
@@ -3735,20 +3745,18 @@ Devices tab
   left: 20px;
 }
 
-.run-scan .network-scan-item-2:before {
+.run-scan .network-scan-item-2:before,
+.no-agent .network-scan-item-2:before {
   content: '2';
 }
 
-.run-scan .network-scan-item-3:before {
+.run-scan .network-scan-item-3:before,
+.no-agent .network-scan-item-3:before {
   content: '3';
 }
 
 .run-scan .network-scan-item-4:before {
   content: '4';
-}
-
-.run-scan .network-scan-item-5:before {
-  content: '5';
 }
 
 .run-scan [class*=network-scan-item-] .btn {
@@ -3762,12 +3770,12 @@ Devices tab
   top: -20px;
 }
 
-.run-scan [class*=network-scan-item-] input {
+.run-scan [class*=network-scan-item-] input,
+.no-agent [class*=network-scan-item-] input{
   width: 100%;
   border-radius: 4px 3px 3px 4px;
   border: 1px solid #d3d8e1;
   background-color: #ffffff;
-  margin-bottom: 10px;
   transition: all .3s;
 }
 
@@ -3777,13 +3785,20 @@ Devices tab
 }
 
 .run-scan .network-scan-item-3 .btn-primary,
-.run-scan .network-scan-item-4 .btn-primary {
+.run-scan .network-scan-item-4 .btn-primary,
+.no-agent .network-scan-item-3 .btn-primary{
   background-color: #90C56B;
   border-color: #90C56B;
 }
+.no-agent .network-scan-item-3 .btn-primary{
+  width: 75px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
 
 .run-scan .network-scan-item-3 .btn-primary.disabled,
-.run-scan .network-scan-item-4 .btn-primary.disabled {
+.run-scan .network-scan-item-4 .btn-primary.disabled,
+.no-agent .network-scan-item-3 .btn-primary.disabled{
   background-color: #fff;
   border-color: #8E9598;
 }
@@ -3869,10 +3884,51 @@ Devices tab
   text-transform: uppercase;
 }
 
+.network-scan .qt-network-scan .col-1 p {
+  white-space: normal;
+}
+
 .network-scan .qt-network-scan {
   border-radius: 3px;
-  border: 1px solid #eee;
+  border: 1px solid #ECF3F4;
 }
+
+
+
+.no-agent .send-by-email{
+  padding: 0 0 20px 25px;
+}
+.no-agent .send-by-email div{
+  margin-bottom: 15px;
+  cursor: pointer;
+  position: relative;
+}
+.no-agent .send-by-email div:first-child::before,
+.no-agent .send-by-email div:last-child::before{
+  content: '';
+  position: absolute;
+  background: url("../images/new-icons/email-new.png") no-repeat;
+  width: 15px;
+  height: 12px;
+  left: -25px;
+  top: 6px;
+}
+.no-agent .send-by-email div:last-child::before{
+  background: url("../images/new-icons/download-new.png") no-repeat;
+  width: 16px;
+  height: 17px;
+  top: -1px;
+}
+.no-agent input {
+  max-width: 220px;
+}
+
+
+
+
+
+
+
 
 .network-scan .control-indicator {
   background-color: #fff;
