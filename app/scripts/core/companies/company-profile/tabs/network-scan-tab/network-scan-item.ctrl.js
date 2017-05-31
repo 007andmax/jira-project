@@ -58,7 +58,7 @@
         $scope.getStatusClass = function () {
           if ($scope.device.changingStatus) {
             return 'changing-status';
-          } else if ($scope.device.status.statusValue || $scope.device.status.message === 'Correct') {
+          } else if ($scope.device.status && ($scope.device.status.statusValue || $scope.device.status.message === 'Correct')) {
             return 'success-status';
           } else {
             return 'error-status';

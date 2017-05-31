@@ -139,6 +139,17 @@
           }
         };
 
+        $scope.isAnyHasValidPassword = function () {
+          for (var deviceId in $scope.selectedDevices) {
+            if ($scope.selectedDevices[deviceId]) {
+              var device = Utils.findById($scope.scanDevices.devices, deviceId);
+              if (device.agentPassword && device.agentPassword.status === 'SUCCESS') {
+                return true;
+              }
+            }
+          }
+        };
+
         $scope.testCredentials = function (form) {
           if (form.$valid) {
             $scope.isTestInProgress = true;
@@ -160,6 +171,7 @@
               };
               DevicesService.testCredentials(dto, function () {
                 $scope.isTestInProgress = false;
+                $scope.testCredentialsModel = {};
               });
             }
           }
@@ -186,10 +198,10 @@
           });
         };
 
-        $scope.saveMasterAgent = function () {
+        $scope.saveMasterAgent = function (masterAgent) {
           if (!$scope.saveMasterAgentInProgress) {
             $scope.saveMasterAgentInProgress = true;
-            DevicesService.saveMasterAgent($scope.company.id, $scope.masterAgent.id, function () {
+            DevicesService.saveMasterAgent($scope.company.id, masterAgent.agentId, function () {
               $scope.saveMasterAgentInProgress = false;
             });
           }

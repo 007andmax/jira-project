@@ -112,17 +112,20 @@
       <div class="network-scan-item-4">
         <p>Install Agents</p>
         <div class="btn btn-primary has-tooltip" ng-click="remoteInstall(credentialsForm)"
-             custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">
+             custom-disabled="{{ isInstallInProgress || !isDeviceSelected() || !isAnyHasValidPassword() }}">
           Install
         </div>
       </div>
     </div>
   </div>
 
-  <div class="master-agent" ng-if="agents && agents.length">
-    <select ng-model="masterAgent" ng-change="saveMasterAgent()"
-            ng-options="agent as agent.hostName for agent in agents | filter: { agentId: '' }: stateComparator"
-            ng-disabled="saveMasterAgentInProgress"></select>
+  <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
+    <input type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
+           ng-disabled="saveMasterAgentInProgress">
+    <ul uib-dropdown-menu>
+      <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
+          ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>
+    </ul>
   </div>
 
   <ul class="qt-list qt-network-scan">
