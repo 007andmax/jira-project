@@ -55,6 +55,16 @@
           })
         };
 
+        $scope.getStatusClass = function () {
+          if ($scope.device.changingStatus) {
+            return 'changing-status';
+          } else if ($scope.device.status.statusValue || $scope.device.status.message === 'Correct') {
+            return 'success-status';
+          } else {
+            return 'error-status';
+          }
+        };
+
         $scope.$watchGroup(['device.agentStatus', 'device.agentPassword.status'], function () {
           $scope.device.status = $scope.device.status || {};
 
@@ -70,6 +80,8 @@
 
             $scope.device.changingStatus = false;
             $scope.device.status.message = 'Incorrect';
+            $scope.device.status.statusValue = false;
+            $scope.device.status.online = false;
 
           } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'loginError') {
 
