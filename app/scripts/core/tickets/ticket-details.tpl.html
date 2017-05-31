@@ -12,7 +12,7 @@
             <div class="pull-left ticket-header-avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
-            <div class="clearfix pull-left" style="width: calc(100% - 255px);">
+            <div class="clearfix pull-left" style="width: calc(100% - 170px);">
               <div class="ticket-header-username pull-left">
                 <strong qt-popover-position="bottom"
                         custom-disabled="{{ user.company.isDefault }}"
@@ -473,8 +473,8 @@
                     <span class="ellipsis" uib-tooltip="{{ product.item.description }}"
                           trimmed-tooltip-checker="product.item.description"></span>
                     <div style="color:#b2becd;font-size: 13px; line-height: 20px;">
-                      <span ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>
-                      <span ng-show="product.item.manufacture && product.item.manufacture.length > 0"
+                      <span style="word-break: break-all" ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>
+                      <span style="word-break: break-all" ng-show="product.item.manufacture && product.item.manufacture.length > 0"
                       >P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>

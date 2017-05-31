@@ -291,6 +291,10 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1600px) {
+  .vendor-products-width > li > .intermediate-parent-elem > .col-2,
+  .vendor-products-width > li > [class*='col-']:first-child{
+    width: calc(100% - 644px);
+  }
   .qt-billable-clients .tax-recurring input {
     width: 100%;
   }
@@ -1171,8 +1175,10 @@ aside#left div.nav-title {
   font-size: 12px;
   color: #000;
   display: inline-block;
-  width: 85%;
+  width: 100%;
   word-break: break-all;
+  max-height: 50px;
+  overflow: hidden;
 }
 
 .custom-product-list .product-list-container > li div .total-count {
@@ -1182,6 +1188,7 @@ aside#left div.nav-title {
 .custom-product-list .product-list-container > li div div span {
   color: #748498;
   font-size: 12px;
+  word-break: break-all;
 }
 
 .custom-product-list .product-list-container > li:hover {

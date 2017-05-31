@@ -224,6 +224,9 @@
   width: 40%;
 }
 
+.search-block .dropdown-menu.dropdown-priority{
+  font-size: 15px;
+}
 .form-control-top-search-icn {
   float: right;
   margin-right: 10%;

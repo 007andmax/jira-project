@@ -2540,9 +2540,10 @@ Devices tab
   text-align: center;
 }
 
-.qt-product-list.left-list .intermediate-parent-elem .col-4{
+.qt-product-list.left-list .intermediate-parent-elem .col-4 {
   word-break: break-all;
 }
+
 @-moz-document url-prefix() {
   .qt-product-list {
     line-height: 19px;
@@ -2693,11 +2694,18 @@ Devices tab
   .with-category .qt-product-list > li > .col-4 {
     width: 100px;
   }
+
 }
 
 @media only screen and (max-width: 1366px) {
   .qt-product-list > li > .col-4 {
     width: 100px;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .vendor-products-width.qt-product-list > li > .col-4 {
+    width: 90px;
   }
 }
 
