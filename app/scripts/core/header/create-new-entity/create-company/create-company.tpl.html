@@ -447,7 +447,7 @@
 
     </div>
 
-    <div class="company-window__deploy-agents row" ng-show="currentStep === 'agent'" ng-form="agentForm">
+    <div class="company-window__deploy-agents row ng-hide" ng-show="currentStep === 'agent'" ng-form="agentForm">
       <div class="col-xs-6" ng-init="isShowPass = false">
         <h3>Agent Credentials</h3>
 
@@ -514,7 +514,7 @@
     </div>
     <div class="col-xs-6 pull-right btns-container">
       <button class="btn btn-primary" ng-click="nextStep(companyForm)"
-              custom-disabled="{{ currentStep === 'agent' || savingInProcess }}">
+              custom-disabled="{{ currentStep === 'billing' || savingInProcess }}">
         Next Step
       </button>
       <button-with-loading-indicator class="btn btn-success" ng-click="save(companyForm)"
