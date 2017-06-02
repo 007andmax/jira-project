@@ -96,7 +96,7 @@
     .card-wrapper .card__info {
       position: relative;
       height: 200px;
-      overflow: hidden;
+      overflow: visible;
     }
       .card-wrapper .card__info div {
         padding: 5px 0px; }

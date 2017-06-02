@@ -214,7 +214,9 @@
 .ticket .ticket-meta .ticket-labels {
   height: 20px;
 }
-
+.ticket .ticket-meta .ticket-labels .icn-ticket-onhold{
+  height: 10px;
+}
 .ticket .ticket-meta .ticket-labels span{
   margin-right: 10px;
   height: 20px;

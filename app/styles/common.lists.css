@@ -931,6 +931,10 @@ Devices tab
 }
 
 @media only screen and (max-width: 1600px) {
+  .users-list-wrapper .col-3-2.dropdown.open .dropdown-subscribe {
+    width: 140% !important;
+  }
+
   .qt-assc-vendors .col-1 {
     width: calc(100% - 630px);
   }
@@ -2403,9 +2407,11 @@ Devices tab
 .qt-product-edit .list-container .icn-label-save {
   right: -30px;
 }
-.topNavbar .dropdown-menu.tag-list{
+
+.topNavbar .dropdown-menu.tag-list {
   font-size: 15px;
 }
+
 .qt-product-edit {
   z-index: 2;
 
@@ -2532,6 +2538,10 @@ Devices tab
 
   cursor: auto;
   text-align: center;
+}
+
+.qt-product-list.left-list .intermediate-parent-elem .col-4 {
+  word-break: break-all;
 }
 
 @-moz-document url-prefix() {
@@ -2684,11 +2694,18 @@ Devices tab
   .with-category .qt-product-list > li > .col-4 {
     width: 100px;
   }
+
 }
 
 @media only screen and (max-width: 1366px) {
   .qt-product-list > li > .col-4 {
     width: 100px;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .vendor-products-width.qt-product-list > li > .col-4 {
+    width: 90px;
   }
 }
 

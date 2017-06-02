@@ -355,7 +355,7 @@
             </div>
 
             <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
-                 style="margin-top: -8px;">
+                 style="margin-top: -8px;width: 50%;">
 
               <div role="presentation" class="checkbox-dropdown-header">
                 <div class="form-group" style="float: none; max-width: 100%">
@@ -370,7 +370,7 @@
 
                   <div class="checkbox-dd-item"
                        ng-repeat="defaultService in servicesData.default | filter: { name: searchService }">
-                    <label class="control checkbox">
+                    <label class="control checkbox ellipsis">
                       <input type="checkbox" ng-model="selectedServices[defaultService.versionedId.id]"
                              ng-change="movingService(defaultService)">
                       <span class="control-indicator pull-left plus-circle"></span>
@@ -397,7 +397,7 @@
             <li class="rates__list--point list-heading" ng-if="editCompany.services.length > 0">
               <div class="col-xs-6">Service Name</div>
               <div class="col-xs-3">Per Hour</div>
-              <div class="col-xs-3 text-center">Is Billable</div>
+              <div class="col-xs-3" style="text-align: center;">Is Billable</div>
             </li>
             <li class="rates__list--point" ng-repeat="service in editCompany.services | orderBy: ['newId', 'name']">
               <div class="col-xs-6 ellipsis" ng-if="service.versionedId">{{ service.name }}</div>
@@ -406,13 +406,13 @@
 
                 <div ng-messages="servicesForm['serviceName' + $index].$error" style="text-align: center; margin-top: -20px"
                      ng-class="{'hide': !(servicesForm['serviceName' + $index].$dirty || triedToSave) || !isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
-                  <label class="control-label" ng-message="required">Cannot be left empty.</label>
-                  <label class="control-label" ng-message="maxlength">Is too large.</label>
-                  <label class="control-label" ng-message="minlength">Is too small.</label>
-                  <label class="control-label" ng-message="unique">Already occupied.</label>
+                  <label style="margin-bottom: 8px;" class="control-label" ng-message="required">Cannot be left empty.</label>
+                  <label style="margin-bottom: 8px;" class="control-label" ng-message="maxlength">Is too large.</label>
+                  <label style="margin-bottom: 8px;" class="control-label" ng-message="minlength">Is too small.</label>
+                  <label style="margin-bottom: 8px;" class="control-label" ng-message="unique">Already occupied.</label>
                 </div>
 
-                <input type="text" class="form-control"
+                <input style="outline: none;" type="text" class="form-control"
                        ng-model="service.name" placeholder="Name"
                        name="{{'serviceName' + $index}}" ng-required="true"
                        is-uniq-validation validation-func="validateServiceName"
@@ -425,7 +425,7 @@
                        ng-model="service.rate" ng-required="true" name="{{'editServiceRate' + $index}}"
                        ng-readonly="!PermissionsService.isAllowed('MANAGE_SERVICES')"
                        hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
-                <span class="days" style="top: 9px;">$</span>
+                <span class="days" style="top: 6px;">$</span>
               </div>
 
               <div class="col-xs-3 ">
