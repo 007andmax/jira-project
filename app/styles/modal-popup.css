@@ -134,9 +134,9 @@
 
 .create-window .general .company-window .company-steps__list:before {
   position: absolute;
-  width: calc(100% - 215px);
+  width: calc(100% - 250px);
   bottom: 0;
-  left: 75px;
+  left: 90px;
   height: 2px;
   opacity: .3;
   background-color: black;
@@ -144,7 +144,7 @@
 }
 
 _:-moz-any-link, :root .create-window .general .company-window .company-steps__list:before {
-  left: 120px;
+  left: 90px;
   width: calc(100% - 250px);
 }
 
@@ -153,7 +153,7 @@ _::-webkit-:not(:root:root), .create-window .general .company-window .company-st
 }
 
 _:-ms-lang(x), .create-window .general .company-window .company-steps__list:before {
-  left: 120px;
+  left: 90px;
   width: calc(100% - 250px);
 }
 
