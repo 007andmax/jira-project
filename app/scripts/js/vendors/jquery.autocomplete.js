@@ -971,17 +971,19 @@
 
             if (that.options.useCustomScroller) {
                 container.closest('.dropdown-menu, .uib-dropdown-menu').css('display', 'block');
-                container.find('.'+that.classes.suggestion).each(function(){
+                setTimeout(function () {
+                  container.find('.'+that.classes.suggestion).each(function(){
                     contentHeight += $(this).outerHeight();
-                });
-                container.closest('.dropdown-menu, .uib-dropdown-menu').css('display', '');
+                  });
+                  container.closest('.dropdown-menu, .uib-dropdown-menu').css('display', '');
 
-                if( contentHeight < that.options.maxHeight ) {
+                  if( contentHeight < that.options.maxHeight ) {
                     container.css('height', contentHeight);
-                } else {
+                  } else {
                     container.css('height', that.options.maxHeight);
-                }
-                that.scrollElement = container.find("."+that.classes.nano).nanoScroller({flashDelay: 1000, tabIndex: -1});
+                  }
+                  that.scrollElement = container.find("."+that.classes.nano).nanoScroller({flashDelay: 1000, tabIndex: -1});
+                }, 0);
             }
 
             if( that.options.preserveLastSelected && that.lastSelectedIndex !== -1 && (value == '' || showAll ) ) {
