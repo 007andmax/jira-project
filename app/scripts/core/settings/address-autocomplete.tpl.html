@@ -39,7 +39,7 @@
   <div class="form-group zipcode-field">
     <label class="control-label">Zip</label>
     <input class="form-control" type="text" ng-model="model.postalCode"
-           execute-when-outfocused="saveFunc(addressForm)">
+           execute-when-outfocused="saveFunc(addressForm)" maxlength="15">
   </div>
 
   <div class="map-container">
