@@ -174,7 +174,7 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             // TO CHANGE PORT 80-81 etc when on serveDev
-            host: '192.168.1.118',
+            host: '25.36.157.12',
             port: 8080,
             https: false,
             xforward: false,
@@ -792,7 +792,7 @@ module.exports = function (grunt) {
     'copy:temp_sass',
     'clean:server',
     'includeSource',
-    'wiredep:app',
+    'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

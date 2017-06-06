@@ -10,21 +10,16 @@
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
                 Utils, PermissionsService, ProductsService) {
 
-        var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings', 'products'],
-          devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
-          lastMasterAgentId;
+        var tabs = ['users', 'devices', 'agents', 'network-scan', 'products'/*, 'settings'*/],
+          devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
-        $scope.isCollapsedGraph = true;
-        $scope.isScanDevicesLoad = false; // change in services
         if (tabs.indexOf($stateParams.tabName) === -1) {
           $state.go('companyProfile', { tabName: 'devices' });
         }
-        $scope.orderScanBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
         $scope.currentOpenTab = $stateParams.tabName || 'devices';
-
 
         $scope.credential = {
           name: '',
@@ -43,7 +38,7 @@
             if ($scope.isHasDevices) {
               $state.go('companyProfile', { tabName: 'devices' });
             } else {
-              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
+              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'network-scan' });
             }
           });
 
@@ -55,51 +50,8 @@
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
 
-        $scope.runScanDevices = function () {
-          $scope.isScanDevicesLoad = true;
-          $scope.scanDevices = {};
-          DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
-            $scope.masterAgentOffline = resp.code === 400;
-            if ($scope.masterAgentOffline) {
-              $scope.isScanDevicesLoad = false;
-            }
-          });
-        };
-
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           $scope.agents = resp;
-
-          if (resp && resp.length) {
-            DevicesService.getAllAgentsAndLogin($scope.company.id, function (logins) {
-              for (var i = 0; i < $scope.agents.length; i++) {
-                var agent = $scope.agents[i];
-                for (var id in logins) {
-                  if (agent.id === id) {
-                    agent.login = logins[id];
-                  }
-                }
-              }
-            });
-          }
-
-        });
-
-        DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
-          $scope.allowAgentInstall = resp.allowAgentInstall;
-          if (resp.masterAgentId !== lastMasterAgentId) {
-            lastMasterAgentId = resp.masterAgentId;
-
-            if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
-              DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
-                $scope.scanDevices = $scope.scanDevices || {};
-                $scope.scanDevices.devices = resp[$scope.company.id];
-                $scope.scanDevices.status = resp.status;
-              });
-            } else {
-              $scope.scanDevices = undefined;
-              $scope.isScanDevicesLoad = false;
-            }
-          }
         });
 
         $scope.$watch('agents.length', function (val) {
@@ -117,14 +69,6 @@
         });
 
         $scope.$watch(function () {
-          if ($scope.scanDevices) {
-            return $scope.scanDevices.status;
-          }
-        }, function (val) {
-          $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished';
-        });
-
-        $scope.$watch(function () {
           return $stateParams.tabName;
         }, function (tabName, prevTab) {
           if (tabs.indexOf(tabName) < 0) {
@@ -132,23 +76,8 @@
           } else {
             $scope.currentOpenTab = tabName;
 
-            if ((tabName === 'devices' || tabName === 'network-scan') && !$scope.isHasDevices) {
+            if (tabName === 'devices' && !$scope.isHasDevices) {
               $scope.currentOpenTab = prevTab;
-            }
-
-            if (tabName === 'network-scan' && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
-              DevicesService.getAgentSettingsByCompany($scope.company.id, function (resp) {
-                var isAutoRescanEnable = resp.autoScanNetwork;
-
-                $scope.masterAgentOffline = false;
-                if (isAutoRescanEnable && !$scope.isScanDevicesLoad) {
-                  $scope.isScanDevicesLoad = true;
-                  $scope.scanDevices = {};
-                  DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
-                    $scope.masterAgentOffline = resp.code === 400;
-                  });
-                }
-              });
             }
           }
 
@@ -159,16 +88,6 @@
           return UsersService.getAllByCompanyId(companyId).find(function (user) {
             return user.isContact;
           });
-        };
-
-        $scope.toggleCollapsed = function () {
-          $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
-        };
-
-        $scope.saveDescription = function (deviceId, description) {
-          if (deviceId && description) {
-            // console.log('save ' + description + '; devicesId =  ' + deviceId);
-          }
         };
 
         $scope.selectAllDevices = function () {
@@ -195,29 +114,6 @@
           }
 
           devicesHeaderState.checkedDevicesId = selectDevicesIds;
-        };
-
-        $scope.saveNewCredentional = function () {
-          $scope.savingCredentional = true;
-          CompaniesService.changeUserAndPass($scope.credential.name, $scope.credential.pass, $scope.company.id, function () {
-            $scope.credential = {
-              name: '',
-              pass: ''
-            };
-            $scope.savingCredentional = false;
-          })
-        };
-
-        $scope.sortNetworkScan = function (option) {
-          if (option === $scope.orderScanBy) {
-            if (option[0] === '-') {
-              $scope.orderScanBy = $scope.orderScanBy.substring(1);
-            } else {
-              $scope.orderScanBy = '-' + $scope.orderScanBy;
-            }
-          } else {
-            $scope.orderScanBy = option;
-          }
         };
 
         $scope.sortDevicesTab = function (option) {
@@ -342,8 +238,6 @@
             for(var j = 0; j < $scope.agents.length; j++) {
               if($scope.agents[j].id === idForRemove[i]) {
                 $scope.agents.splice(j, 1);
-                console.log("REMOVE");
-                console.log($scope.agents[j])
               }
             }
           }

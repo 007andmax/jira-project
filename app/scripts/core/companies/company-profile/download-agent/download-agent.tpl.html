@@ -56,22 +56,22 @@
         <div class="col-md-12">
           <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'agentName')}">
             <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'agentName')}">
-              Admin Name
+              Login
             </label>
 
             <div ng-messages="downloadAgentForm.agentName.$error"
                  ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'agentName')}">
-              <label class="control-label" ng-message="required">Admin name can't be left empty</label>
+              <label class="control-label" ng-message="required">Login can't be left empty</label>
             </div>
 
             <input type="text" class="form-control" name="agentName" ng-model="downloadAgentUser.agentName"
-                   placeholder="Admin Name" ng-required="!!downloadAgentUser.agentPassword">
+                   placeholder="Login" ng-required="!!downloadAgentUser.agentPassword">
           </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">Password</label>
-            <input type="text" class="form-control" name="agentPassword" ng-model="downloadAgentUser.agentPassword"
+            <input type="password" class="form-control" name="agentPassword" ng-model="downloadAgentUser.agentPassword"
                    placeholder="Admin Password">
           </div>
         </div>
