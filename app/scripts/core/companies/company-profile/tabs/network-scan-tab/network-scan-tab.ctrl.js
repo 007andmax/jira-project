@@ -210,7 +210,7 @@
         $scope.runScanDevices = function () {
           $scope.isScanDevicesLoad = true;
           $scope.scanDevices = {};
-          $scope.discoveredByAgentId = $scope.masterAgent.id;
+          $scope.discoveredByAgentId = $scope.masterAgent.agentId;
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
             $scope.masterAgentOffline = resp.code === 400;
             if ($scope.masterAgentOffline) {
