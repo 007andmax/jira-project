@@ -132,7 +132,7 @@
           for (var deviceId in $scope.selectedDevices) {
             if ($scope.selectedDevices[deviceId]) {
               var device = Utils.findById($scope.scanDevices.devices, deviceId);
-              if (device.agentPassword) {
+              if (device && device.agentPassword) {
                 return true;
               }
             }
@@ -143,7 +143,7 @@
           for (var deviceId in $scope.selectedDevices) {
             if ($scope.selectedDevices[deviceId]) {
               var device = Utils.findById($scope.scanDevices.devices, deviceId);
-              if (device.agentPassword && device.agentPassword.status === 'SUCCESS') {
+              if (device && device.agentPassword && device.agentPassword.status === 'SUCCESS') {
                 return true;
               }
             }
@@ -208,14 +208,15 @@
         };
 
         $scope.runScanDevices = function () {
-          $scope.isScanDevicesLoad = true;
+          $scope.runScan = true;
           $scope.scanDevices = {};
-          $scope.discoveredByAgentId = $scope.masterAgent.agentId;
+          $scope.discoveredByAgentId = $scope.masterAgent && $scope.masterAgent.agentId;
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
             $scope.masterAgentOffline = resp.code === 400;
             if ($scope.masterAgentOffline) {
               $scope.isScanDevicesLoad = false;
             }
+            $scope.runScan = false;
           });
         };
 
@@ -236,7 +237,7 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
-          $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished';
+          $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
         });
 
       }
