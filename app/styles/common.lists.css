@@ -3694,13 +3694,13 @@ Devices tab
 .network-scan-header {
   border-radius: 3px;
   background-color: #ffffff;
-  padding: 25px 25px 25px;
+  padding: 25px 25px 0;
   color: #404b5f;
   font-size: 14px;
   font-weight: 500;
   transition: all .3s;
   border: 1px solid #ECF3F4;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 /*.network-scan-header:hover {*/
