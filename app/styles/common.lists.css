@@ -3714,7 +3714,8 @@ Devices tab
 
 /***Network**/
 .network-scan {
-  margin: 400px 60px 0;
+  margin: 100px 60px 0;
+  transition: margin-top linear 0.5s
 }
 
 .network-scan .network-scan-results {
@@ -4056,19 +4057,13 @@ Devices tab
   left: 14px;
 }
 
-
-
-
-
-
-
 .network-scan .control-indicator {
   background-color: #fff;
 }
 
 .qt-network-scan {
   padding: 30px 0 0;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
 }
 
 .qt-network-scan .list-heading > div[ng-click] {

@@ -18,10 +18,10 @@
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
+        $scope.tabName = $state.params.tabName;
         $scope.PermissionsService = PermissionsService;
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
-        $scope.mode = 'user';
         $scope.isCollapsed = true;
         $scope.locationIndex = 0;
         $scope.contactIndex = 0;
@@ -65,6 +65,12 @@
         DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
           $scope.isDomainPresent = resp.domainPresent;
           $scope.allowAgentInstall = resp.allowAgentInstall;
+        });
+
+        $scope.$watch(function () {
+          return $state.params.tabName;
+        }, function (tabName, prevTab) {
+          $scope.tabName = tabName;
         });
 
         $scope.archiveCompany = function () {

@@ -157,7 +157,6 @@
             for (var deviceId in $scope.selectedDevices) {
               if ($scope.selectedDevices[deviceId]) {
                 deviceIds.push(deviceId);
-                $scope.selectedDevices[deviceId] = false;
               }
             }
 

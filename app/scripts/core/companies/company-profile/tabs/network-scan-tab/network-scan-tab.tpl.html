@@ -1,4 +1,5 @@
-<div class="tab-pane network-scan active" ng-controller="quicktech.core.devices.networkScanTabCtrl">
+<div class="tab-pane network-scan active" ng-controller="quicktech.core.devices.networkScanTabCtrl"
+     ng-style="{'margin-top': currentOpenTab === 'network-scan' ? '100px' : '400px'}">
   <div class="network-scan-header">
 
     <div class="no-agent" ng-if="!agents || !agents.length">
@@ -185,7 +186,7 @@
       <p class="text-center">Network scan and remote install is available only when master agent is online.</p>
     </div>
 
-    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
+    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
       <div class="loader"></div>
     </div>
 

@@ -6,6 +6,8 @@
   background-size: cover;
   position: relative;
   padding: 10px;
+  opacity: 1;
+  transition: height linear 0.5s, opacity linear 0.7s;
 }
 
 .company-profile-header .company-new-cover-wrapper {

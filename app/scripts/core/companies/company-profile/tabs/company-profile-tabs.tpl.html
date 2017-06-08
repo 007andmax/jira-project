@@ -1,8 +1,8 @@
 <div ng-controller="quicktech.core.companies.companyProfileTabsCtrl">
 
   <div class="tabs-container">
-    <div class="fixed-block-top" fixed-block-top
-         style="margin-top: 310px">
+    <div class="fixed-block-top" fixed-block-top style="transition: margin-top linear 0.5s; z-index: 999"
+         ng-style="{'margin-top': currentOpenTab === 'network-scan' ? '10px' : '310px'}">
       <ul class="nav nav-qt clearfix" style="padding: 0 30px;" company-bulk-option>
 
         <!--<li class="activity-tab active">-->
