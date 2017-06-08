@@ -25,7 +25,7 @@
 
 .qt-inv-container .inner-wrapper {
   width: 790px;
-  height: 1100px;
+  min-height: 1100px;
   display: block;
   position: relative;
   margin: 0 auto;
