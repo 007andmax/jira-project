@@ -13,12 +13,12 @@
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
           var urlPattern = /(\b(www\.\S+\b))|(\b(http|ftp|https):\/\/(www\.)?[\w-]+(\.[\w-]+)+\b([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/gim;
           var htmlTagsWhitelist = new RegExp('<\\s\*\(\?!b\(>\|\\s\)\|blockquote\|br\|caption\|cite\|code\|col\|' +
-            'colgroup\|dd\|div\|dl\|dt\|em\|h1\|h2\|h3\|h4\|h5\|h6\|i\|img\|li\|ol\|p\|pre\|q\|small\|strike\|' +
-            'strong\|sub\|sup\|table\|tbody\|td\|tfoot\|th\|thead\|tr\|u\|ul\|span\|\\/b\(>\|\\s\)\|\\/' +
+            'colgroup\|dd\|div\|dl\|dt\|em(>\|\\s\)\|h1\|h2\|h3\|h4\|h5\|h6\|i(>\|\\s\)\|li\|ol\|p(>\|\\s\)\|pre\|q(>\|\\s\)\|small\|strike\|' +
+            'strong\|sub\|sup\|table\|tbody\|td\|tfoot\|th\|thead\|tr\|u(>\|\\s\)\|ul\|span\|\\/b\(>\|\\s\)\|\\/' +
             'blockquote\|\\/br\|\\/caption\|\\/cite\|\\/code\|\\/col\|\\/colgroup\|\\/dd\|\\/div\|\\/dl\|\\/' +
-            'dt\|\\/em\|\\/h1\|\\/h2\|\\/h3\|\\/h4\|\\/h5\|\\/h6\|\\/i\|\\/img\|\\/li\|\\/ol\|\\/p\|\\/pre\|\\/' +
-            'q\|\\/small\|\\/strike\|\\/strong\|\\/sub\|\\/sup\|\\/table\|\\/tbody\|\\/td\|\\/tfoot\|\\/th\|\\/' +
-            'thead\|\\/tr\|\\/u\|\\/ul\|\\/span\)\.\*\?\\s\*\?>', 'gm');
+            'dt\|\\/em(>\|\\s\)\|\\/h1\|\\/h2\|\\/h3\|\\/h4\|\\/h5\|\\/h6\|\\/i(>\|\\s\)\|\\/li\|\\/ol\|\\/p(>\|\\s\)\|\\/pre\|\\/' +
+            '\\/q(>\|\\s\)\|\\/small\|\\/strike\|\\/strong\|\\/sub\|\\/sup\|\\/table\|\\/tbody\|\\/td\|\\/tfoot\|\\/th\|' +
+            'thead\|\\/tr\|\\/u(>\|\\s\)\|\\/ul\|\\/span\)\.\*\?\\s\*\?>', 'gm');
           var pressOnElement, inited = false;
           var editor = element.find('[te-editor]'),
             wysiwyg = editor.wysiwyg({
@@ -114,12 +114,12 @@
               html = html.replace(htmlTagsWhitelist, '').trim();
             } else {
               html = clipboardData.getData('text/plain');
+              html = html.replace(urlPattern, function (url) {
+                var trimmedUrl = url.replace(/\s+/g, '');
+                return '<a target="_blank" href="' + trimmedUrl + '">' + trimmedUrl + '</a>';
+              });
             }
 
-            html = html.replace(urlPattern, function (url) {
-              var trimmedUrl = url.replace(/\s+/g, '');
-              return '<a target="_blank" href="' + trimmedUrl + '">' + trimmedUrl + '</a>';
-            });
             document.execCommand('insertHTML', false, html);
             $timeout(validateRequired);
           });
