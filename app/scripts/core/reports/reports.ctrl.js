@@ -28,6 +28,7 @@
         columns: false
       };
 
+
       $scope.reportType = {
         SUMMARY: 'Summary',
         DETAILED: 'Detailed'
