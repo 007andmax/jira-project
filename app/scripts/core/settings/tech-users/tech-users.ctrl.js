@@ -27,8 +27,21 @@
         }, function () {
           $timeout(function () {
             $scope.users = angular.copy(users);
+            removeArchivedUsers()
           }, 1000);
         }, true);
+
+        function removeArchivedUsers() {
+          //remove tech archived users from $scope.users
+          for(var i=0; i<$scope.users.length; i++) {
+            for(var m=0; m<$scope.archivedUsers.length; m++) {
+              if($scope.users[i].id === $scope.archivedUsers[m].id) {
+                $scope.users.splice(i, 1);
+              }
+            }
+          }
+        }
+
 
         $scope.highlightTechUser = function () {
           if (globalSearch.techUserFilter) {
