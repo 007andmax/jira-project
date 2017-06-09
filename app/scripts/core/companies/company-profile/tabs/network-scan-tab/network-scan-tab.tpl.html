@@ -152,12 +152,6 @@
                  ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i>
             </span>
       </div>
-      <div class="col-3" ng-click="sortNetworkScan('agentStatus')">
-            <span class="sort-span">Agent Status
-              <i class="icn-sm sort-icon icn-sort"
-                 ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
-            </span>
-      </div>
       <!--<div class="col-1"><span>DESCRIPTION</span></div>-->
       <div class="col-1"><span class="sort-span">USERNAME</span></div>
       <div class="col-1"><span class="sort-span">PASSWORD</span></div>
@@ -171,6 +165,12 @@
             <span class="sort-span">MAC ADDRESS
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
+            </span>
+      </div>
+      <div class="col-3" ng-click="sortNetworkScan('agentStatus')">
+            <span class="sort-span">Agent Status
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
             </span>
       </div>
 
@@ -213,7 +213,6 @@
       <div class="col-3">
         <div class="device-lan-ip">{{ device.ipAddress }}</div>
       </div>
-      <div class="col-3"><p class="{{ getStatusClass() }}">{{ device.status.message }}</p></div>
       <div class="col-1">{{ device.agentPassword.login }}</div>
       <div class="col-1">{{ device.agentPassword.password ? '********' : '' }}</div>
       <div class="col-1">
@@ -222,8 +221,9 @@
         </div>
       </div>
       <div class="col-3">
-        <div class="device-mac-address">{{ device.macAddress }}</div>
+        <div class="device-mac-address ellipsis">{{ device.macAddress }}</div>
       </div>
+      <div class="col-3"><p class="{{ getStatusClass() }}">{{ device.status.message }}</p></div>
       <div class="col-2">
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip" uib-tooltip="Remove Agent"
            ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"

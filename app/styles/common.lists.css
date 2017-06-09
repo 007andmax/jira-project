@@ -3587,9 +3587,10 @@ Devices tab
 }
 
 @media only screen and (max-width: 1600px) {
-  .network-scan .qt-list.qt-network-scan .list-content .col-2{
+  .network-scan .qt-list.qt-network-scan .list-content .col-2 {
     margin-left: 0;
   }
+
   .qt-agents > li > .col-1 {
     width: calc(100% - 629px);
   }
@@ -3844,11 +3845,13 @@ Devices tab
   padding-bottom: 20px;
   position: relative;
 }
-.master-agent i{
+
+.master-agent i {
   position: absolute;
   right: 13px;
   top: 9px;
 }
+
 .master-agent input {
   width: 200px;
   height: 26px;
@@ -3859,16 +3862,18 @@ Devices tab
   cursor: pointer;
 }
 
-.master-agent ul{
+.master-agent ul {
   margin-top: -25px;
   border: 1px solid #c2c5cb;
   border-radius: 13px;
   cursor: pointer;
 }
+
 .master-agent ul li {
   padding: 5px 15px;
   text-align: center;
 }
+
 .network-scan .qt-network-scan {
   padding: 0;
   font-size: 0;
@@ -3900,47 +3905,48 @@ Devices tab
 
 .network-scan .qt-list.qt-network-scan .list-content .col-1,
 .network-scan .qt-list.qt-network-scan .list-content .col-2,
-.network-scan .qt-list.qt-network-scan .list-content .col-3{
+.network-scan .qt-list.qt-network-scan .list-content .col-3 {
   padding-top: 9px;
   font-size: 14px;
   word-break: break-word;
 }
-.network-scan .qt-list.qt-network-scan .list-content .col-3{
+
+.network-scan .qt-list.qt-network-scan .list-content .col-3 {
   word-break: break-all;
 }
+
 .network-scan .qt-list li.list-heading .col-1,
 .network-scan .qt-list li.list-heading .col-2,
-.network-scan .qt-list li.list-heading .col-3{
+.network-scan .qt-list li.list-heading .col-3 {
   line-height: 25px;
   text-transform: uppercase;
 }
+
 .network-scan .qt-list.qt-network-scan .list-content .col-1,
-.network-scan .qt-list li.list-heading .col-1{
+.network-scan .qt-list li.list-heading .col-1 {
   width: 18.3%;
 }
-.network-scan .qt-list.qt-network-scan .list-content .col-2{
+
+.network-scan .qt-list.qt-network-scan .list-content .col-2 {
   margin-top: 2px;
   margin-left: 30px;
 }
+
 .network-scan .qt-list.qt-network-scan .list-content .col-3,
-.network-scan .qt-list li.list-heading .col-3{
+.network-scan .qt-list li.list-heading .col-3 {
   width: 8%;
 }
-.network-scan .qt-list.qt-network-scan .list-content{
+
+.network-scan .qt-list.qt-network-scan .list-content {
   cursor: default;
 }
+
 .network-scan .qt-network-scan .col-2 {
   width: 0;
 }
 
 .network-scan .qt-list > li > [class*='col-']:first-child {
   padding-left: 0;
-}
-
-.network-scan .qt-network-scan .list-content:hover {
-  box-shadow: 0 10px 35px rgba(150, 166, 169, 0.5);
-  z-index: 1;
-  transition: all .3s;
 }
 
 .network-scan .qt-list .checkbox {
@@ -4662,33 +4668,40 @@ Devices tab
     width: calc(100% - 320px);
   }
 }
+
 @media only screen and (max-width: 1600px) {
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 10%;
   }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 16.6%;
   }
 }
-@media only screen and (max-width: 1366px){
+
+@media only screen and (max-width: 1366px) {
   .network-scan .qt-list li.list-heading > [class*='col-'],
   .network-scan .qt-list.qt-network-scan .list-content .col-1,
   .network-scan .qt-list.qt-network-scan .list-content .col-2,
   .network-scan .qt-list.qt-network-scan .list-content .col-3,
-  .network-scan .qt-network-scan .col-1 p{
+  .network-scan .qt-network-scan .col-1 p {
     font-size: 12px;
   }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 11%;
   }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 15.6%;
   }
 }
-@media only screen and (max-width: 1280px){
+
+@media only screen and (max-width: 1280px) {
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 12%;
   }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 14.6%;
   }
