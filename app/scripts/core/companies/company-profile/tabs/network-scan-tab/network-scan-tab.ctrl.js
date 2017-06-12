@@ -110,11 +110,11 @@
         };
 
         $scope.checkSelection = function () {
-          var values = Object.values($scope.selectedDevices);
+          var keys = Object.keys($scope.selectedDevices);
           var devices = $scope.scanDevices.devices;
-          if (values.length === devices.length) {
-            $scope.isAllSelected = values.each(function (value) {
-              return value;
+          if (keys.length === devices.length) {
+            $scope.isAllSelected = keys.each(function (key) {
+              return $scope.selectedDevices[key];
             });
           } else {
             $scope.isAllSelected = false;
@@ -122,9 +122,9 @@
         };
 
         $scope.isDeviceSelected = function () {
-          var values = Object.values($scope.selectedDevices);
-          return values.length && values.some(function (value) {
-              return value;
+          var keys = Object.keys($scope.selectedDevices);
+          return keys.length && keys.some(function (key) {
+              return $scope.selectedDevices[key];
             });
         };
 

@@ -286,12 +286,14 @@
     }
 
     function defineProperty(obj, prop, value) {
-      Object.defineProperty(obj, prop, {
-        value: value,
-        writable: true,
-        enumerable: true,
-        configurable: true
-      })
+      if (obj && prop != null) {
+        Object.defineProperty(obj, prop, {
+          value: value,
+          writable: true,
+          enumerable: true,
+          configurable: true
+        })
+      }
     }
 
     function findById(arrayObj, id) {

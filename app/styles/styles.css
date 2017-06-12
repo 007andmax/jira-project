@@ -933,7 +933,7 @@ hr {
 .loader {
   text-align: center;
   position: relative;
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 
 .loader:before,

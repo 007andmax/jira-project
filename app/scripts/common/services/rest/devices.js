@@ -139,8 +139,7 @@
             continue;
           }
 
-          if (storage.devices[companyId].length == 0) {
-            delete storage.devices[companyId];
+          if (!storage.devices[companyId].length) {
             delete storage.deviceCounter[companyId];
             callCallbacks();
             return;
