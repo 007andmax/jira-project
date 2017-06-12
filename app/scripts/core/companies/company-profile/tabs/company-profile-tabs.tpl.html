@@ -2,7 +2,7 @@
 
   <div class="tabs-container">
     <div class="fixed-block-top" fixed-block-top style="transition: margin-top linear 0.5s; z-index: 999"
-         ng-style="{'margin-top': currentOpenTab === 'network-scan' ? '10px' : '310px'}">
+         ng-style="{'margin-top': currentOpenTab !== 'dashboard' ? '10px' : '310px'}">
       <ul class="nav nav-qt clearfix" style="padding: 0 30px;" company-bulk-option>
 
         <!--<li class="activity-tab active">-->
@@ -13,6 +13,13 @@
         <!--<a href="javascript:void(0)" class="monthly">Month</a>-->
         <!--</div>-->
         <!--</li>-->
+
+        <li ng-class="{'active': currentOpenTab === 'dashboard'}" style="cursor: pointer;"
+            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
+          <a ui-sref="companyProfile({ tabName: 'dashboard' })">
+            Dashboard
+          </a>
+        </li>
 
         <li ng-class="{'active': currentOpenTab === 'users'}" style="cursor: pointer;"
             ng-if="PermissionsService.isAllowed('VIEW_USERS')">
@@ -180,7 +187,7 @@
   </div>
 
   <div class="tab-content clearfix"
-       ng-include="'/html/scripts/core/companies/company-profile/tabs/'  + currentOpenTab + '-tab/' + currentOpenTab + '-tab.tpl.html'"></div>
+       ng-include="getTabTemplateUrl(currentOpenTab)"></div>
 
 </div>
 <script>

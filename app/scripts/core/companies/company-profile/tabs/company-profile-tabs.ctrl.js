@@ -10,7 +10,7 @@
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
                 Utils, PermissionsService, ProductsService) {
 
-        var tabs = ['users', 'devices', 'agents', 'network-scan', 'products'/*, 'settings'*/],
+        var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
         $scope.PermissionsService = PermissionsService;
@@ -38,7 +38,7 @@
             if ($scope.isHasDevices) {
               $state.go('companyProfile', { tabName: 'devices' });
             } else {
-              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'network-scan' });
+              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan' });
             }
           });
 
@@ -59,9 +59,9 @@
             $scope.isHasDevices = true;
           } else {
             $scope.isHasDevices = false;
-            if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings' && $scope.currentOpenTab !== 'products') {
+            if ($scope.currentOpenTab === 'devices') {
               $state.go('companyProfile', {
-                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings'
+                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
               });
             }
 
@@ -75,10 +75,6 @@
             $scope.currentOpenTab = tabs[0];
           } else {
             $scope.currentOpenTab = tabName;
-
-            if (tabName === 'devices' && !$scope.isHasDevices) {
-              $scope.currentOpenTab = prevTab;
-            }
           }
 
           $scope.companyProfileHeader.unCheckAll();
@@ -224,6 +220,14 @@
 
         $scope.filterDeleted = function (users) {
           return !users.deletedAt;
+        };
+
+        $scope.getTabTemplateUrl = function (tab) {
+          if (tab === 'dashboard') {
+            return '/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
+          } else {
+            return '/html/scripts/core/companies/company-profile/tabs/'  + tab + '-tab/' + tab + '-tab.tpl.html';
+          }
         };
 
         $scope.companyProfileHeader.unCheckAll = function () {
