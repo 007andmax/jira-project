@@ -3719,6 +3719,10 @@ Devices tab
   transition: margin-top linear 0.5s
 }
 
+.network-scan .open > .dropdown-menu {
+  width: 189px;
+}
+
 .network-scan .network-scan-results {
   margin-top: 65px;
   min-height: 150px;
@@ -3748,12 +3752,13 @@ Devices tab
 
 .run-scan [class*=network-scan-item-],
 .no-agent [class*=network-scan-item-] {
-  width: 25%;
+  width: 20%;
   display: inline-block;
   font-size: 14px;
   vertical-align: top;
-  padding: 15px 20px;
+  padding: 15px 0;
   position: relative;
+  text-align: center;
 }
 
 .no-agent [class*=network-scan-item-] {
@@ -3778,7 +3783,7 @@ Devices tab
   border-radius: 50%;
   text-align: center;
   top: -45px;
-  left: 20px;
+  left: 43%;
 }
 
 .run-scan .network-scan-item-2:before,
@@ -3793,6 +3798,10 @@ Devices tab
 
 .run-scan .network-scan-item-4:before {
   content: '4';
+}
+
+.run-scan .network-scan-item-5:before {
+  content: '5';
 }
 
 .run-scan [class*=network-scan-item-] .btn {
@@ -3841,36 +3850,37 @@ Devices tab
 }
 
 .master-agent {
-  float: right;
-  padding-bottom: 20px;
+  padding: 20px 0 10px;
   position: relative;
 }
 
 .master-agent i {
   position: absolute;
-  right: 13px;
-  top: 9px;
+  left: 260px;
+  top: 29px;
 }
 
-.master-agent input {
-  width: 200px;
+.run-scan [class*=network-scan-item-]  .master-agent input {
+  width: 189px;
   height: 26px;
   border: 1px solid #c2c5cb;
   border-radius: 13px;
   padding: 0 30px 0 15px;
   outline: none;
   cursor: pointer;
+  display: inline-block;
 }
 
-.master-agent ul {
-  margin-top: -25px;
+.run-scan [class*=network-scan-item-]  .master-agent ul {
+  margin-top: -15px;
   border: 1px solid #c2c5cb;
   border-radius: 13px;
   cursor: pointer;
+  position: absolute;
+  left: 95px;
 }
 
 .master-agent ul li {
-  padding: 5px 15px;
   text-align: center;
 }
 
@@ -3976,7 +3986,8 @@ Devices tab
 }
 
 .no-agent .send-by-email {
-  padding: 0 0 10px 25px;
+  padding: 0 0 10px 160px;
+  text-align: left;
 }
 
 .no-agent .send-by-email div {
@@ -3992,7 +4003,7 @@ Devices tab
   background: url("../images/new-icons/email-new.png") no-repeat;
   width: 15px;
   height: 12px;
-  left: -25px;
+  left: -26px;
   top: 6px;
 }
 
@@ -4005,6 +4016,7 @@ Devices tab
 
 .no-agent input {
   max-width: 250px;
+  margin: 0 auto;
 }
 
 .changing-status,
@@ -4667,6 +4679,10 @@ Devices tab
   .service-form-wrapper.edit-form-checkbox .col-1 {
     width: calc(100% - 320px);
   }
+
+  .no-agent .send-by-email {
+    padding: 0 0 10px 183px;
+  }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -4674,8 +4690,22 @@ Devices tab
     width: 10%;
   }
 
+  .no-agent .send-by-email {
+    padding: 0 0 10px 109px;
+  }
+
+  .master-agent i {
+    left: 183px;
+    top: 53px;
+  }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 16.6%;
+  }
+
+  .run-scan [class*=network-scan-item-]:before,
+  .no-agent [class*=network-scan-item-]:before {
+    left: 42%;
   }
 }
 
@@ -4688,6 +4718,10 @@ Devices tab
     font-size: 12px;
   }
 
+  .no-agent .send-by-email {
+    padding: 0 0 10px 70px;
+  }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 11%;
   }
@@ -4695,11 +4729,35 @@ Devices tab
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 15.6%;
   }
+
+  .master-agent i {
+    left: 165px;
+    top: 53px;
+  }
+
+  .run-scan [class*=network-scan-item-]:before,
+  .no-agent [class*=network-scan-item-]:before {
+    left: 39%;
+  }
 }
 
 @media only screen and (max-width: 1280px) {
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
-    width: 12%;
+    width: 12% !important;
+  }
+
+  .no-agent .send-by-email {
+    padding: 0 0 10px 56px;
+  }
+
+  .master-agent i {
+    left: 165px;
+    top: 54px;
+  }
+
+  .run-scan [class*=network-scan-item-]:before,
+  .no-agent [class*=network-scan-item-]:before {
+    left: 38%;
   }
 
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {

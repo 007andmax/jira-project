@@ -79,8 +79,23 @@
              custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">
           Run Scan
         </div>
+
+        <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
+          <p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>
+          <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
+                 ng-disabled="saveMasterAgentInProgress">
+          <i class="report-caret-icon"></i>
+          <ul uib-dropdown-menu>
+            <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
+                ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>
+          </ul>
+        </div>
       </div>
-      <div class="network-scan-item-2" ng-form="credentialsForm">
+      <div class="network-scan-item-2">
+        <p>Select Devices</p>
+        <img src="images/new-icons/networkscan-step-2.png" alt="">
+      </div>
+      <div class="network-scan-item-3" ng-form="credentialsForm">
         <p>Enter Credentials</p>
         <div class="form-container">
           <div class="form-group" ng-class="{ 'has-error': isShowingErrors(credentialsForm, 'agentName')}">
@@ -103,14 +118,14 @@
           </div>
         </div>
       </div>
-      <div class="network-scan-item-3">
+      <div class="network-scan-item-4">
         <p>Test Credentials</p>
         <div class="btn btn-primary has-tooltip" ng-click="testCredentials(credentialsForm)"
              custom-disabled="{{ isTestInProgress || !isDeviceSelected() }}">
           {{ isAnyHasPassword() ? 'Update' : 'Test' }}
         </div>
       </div>
-      <div class="network-scan-item-4">
+      <div class="network-scan-item-5">
         <p>Install Agents</p>
         <div class="btn btn-primary has-tooltip" ng-click="installAgents(credentialsForm)"
              custom-disabled="{{ isInstallInProgress || !isDeviceSelected() || !isAnyHasValidPassword() }}">
@@ -120,15 +135,6 @@
     </div>
   </div>
 
-  <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
-    <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
-           ng-disabled="saveMasterAgentInProgress">
-    <i class="report-caret-icon"></i>
-    <ul uib-dropdown-menu>
-      <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
-          ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>
-    </ul>
-  </div>
 
   <ul class="qt-list qt-network-scan">
     <!--ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : '94px'}">-->
@@ -153,15 +159,15 @@
             </span>
       </div>
       <!--<div class="col-1"><span>DESCRIPTION</span></div>-->
-      <div class="col-1"><span class="sort-span">USERNAME</span></div>
-      <div class="col-1"><span class="sort-span">PASSWORD</span></div>
+      <div class="col-1" style="width: 16%;"><span class="sort-span">USERNAME</span></div>
+      <div class="col-1" style="width: 16%;"><span class="sort-span">PASSWORD</span></div>
       <div class="col-1" ng-click="sortNetworkScan('manufacturer')">
             <span class="sort-span">MANUFACTURER
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i>
             </span>
       </div>
-      <div class="col-3" ng-click="sortNetworkScan('macAddress')">
+      <div class="col-3" style="width: 11.5%;" ng-click="sortNetworkScan('macAddress')">
             <span class="sort-span">MAC ADDRESS
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
@@ -213,15 +219,15 @@
       <div class="col-3">
         <div class="device-lan-ip">{{ device.ipAddress }}</div>
       </div>
-      <div class="col-1">{{ device.agentPassword.login }}</div>
-      <div class="col-1">{{ device.agentPassword.password ? '********' : '' }}</div>
+      <div class="col-1" style="width: 16%;">{{ device.agentPassword.login }}</div>
+      <div class="col-1" style="width: 16%;">{{ device.agentPassword.password ? '********' : '' }}</div>
       <div class="col-1">
         <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
              trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
         </div>
       </div>
-      <div class="col-3">
-        <div class="device-mac-address ellipsis">{{ device.macAddress }}</div>
+      <div class="col-3" style="width: 11.5%;">
+        <div class="device-mac-address">{{ device.macAddress }}</div>
       </div>
       <div class="col-3"><p class="{{ getStatusClass() }}">{{ device.status.message }}</p></div>
       <div class="col-2">
