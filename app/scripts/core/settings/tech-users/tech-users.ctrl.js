@@ -27,11 +27,11 @@
         }, function () {
           $timeout(function () {
             $scope.users = angular.copy(users);
-            removeArchivedUsers()
+            removeArchivedUser()
           }, 1000);
         }, true);
 
-        function removeArchivedUsers() {
+        function removeArchivedUser() {
           //remove tech archived users from $scope.users
           for(var i=0; i<$scope.users.length; i++) {
             for(var m=0; m<$scope.archivedUsers.length; m++) {
@@ -113,7 +113,15 @@
           user.loadingInProgress = true;
           UsersService.restoreUser(user.id, function () {
             user.loadingInProgress = false;
+            $scope.users.push(user);
+            for(var i=0; i<$scope.archivedUsers.length; i++) {
+              if($scope.archivedUsers[i].id === user.id) {
+                $scope.archivedUsers.splice(i, 1);
+              }
+            }
           });
+
+
         };
 
         $scope.changePasswordRequired = function (user) {
