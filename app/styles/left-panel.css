@@ -5,8 +5,9 @@
 
   flex-flow: row wrap;
   -ms-align-content: flex-start;
-      align-content: flex-start;
+  align-content: flex-start;
 }
+
 .left-panel-head {
   position: relative;
   width: 100%;
@@ -16,7 +17,8 @@
   z-index: 2;
   justify-content: center;
 }
-.left-panel-head:after{
+
+.left-panel-head:after {
   position: absolute;
   width: 41px;
   height: 13px;
@@ -31,9 +33,11 @@
 
   content: 'Beta';
 }
+
 .left-panel__category-wrap {
   padding-top: 78px;
 }
+
 .left-panel__category {
   display: flex;
   justify-content: center;
@@ -58,13 +62,15 @@
   transition: .2s ease-in width .0s;
 
 }
+
 @media only screen and (max-width: 1024px) {
   .left-panel-full {
-    -webkit-box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
-       -moz-box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
-            box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
+    -webkit-box-shadow: 7px 7px 10px 0 rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 7px 7px 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 7px 7px 10px 0 rgba(0, 0, 0, 0.5);
   }
 }
+
 .center-category__category {
   position: relative;
 
@@ -83,8 +89,8 @@
   transition: all .3s;
 }
 
-.center-category__category.cust-report{
-  border-top: 1px solid rgba(255,255,255,.12);
+.center-category__category.cust-report {
+  border-top: 1px solid rgba(255, 255, 255, .12);
   padding-top: 10px;
   padding-bottom: 10px;
   position: absolute;
@@ -92,7 +98,8 @@
   left: 0;
   transition: all .3s;
 }
-.center-category__category.cust-report:hover{
+
+.center-category__category.cust-report:hover {
   color: #fff;
 }
 
@@ -106,10 +113,10 @@
 
 .left-panel-full__head {
   display: -webkit-flex;
-  display:    -moz-flex;
-  display:     -ms-flex;
-  display:      -o-flex;
-  display:         flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
 
   width: 100%;
   height: 78px;
@@ -124,6 +131,7 @@
   position: relative;
   z-index: 2;
 }
+
 .center-category {
   display: flex;
 
@@ -135,15 +143,18 @@
 
   padding-top: 78px;
 }
+
 .left-panel-full__head--header {
   font-size: 1.6em;
   line-height: 1em;
 }
+
 .center-category .active {
   color: #edf2f6;
   background: #474f60;
 }
-.tickets-left-panel .center-category__category span{
+
+.tickets-left-panel .center-category__category span {
   position: absolute;
   right: 20px;
   top: 7px;
@@ -153,52 +164,62 @@
   max-width: 65px;
   padding: 0 5px;
 }
+
 .icon-pos {
   position: absolute;
   top: 15px;
   left: 15px;
   cursor: pointer;
 }
+
 .left-panel-full-wrapper {
   width: 100%;
   overflow: hidden;
 }
+
 .badge-pos {
   position: absolute;
   top: 15px;
   right: 20px;
 }
-.badge-red{
+
+.badge-red {
   font-weight: bold;
   color: white;
   background-color: #e53935;
 }
-.badge-orange{
+
+.badge-orange {
   font-weight: bold;
   color: white;
   background-color: #FFC107;
 }
-.slider-pos{
+
+.slider-pos {
   width: 50px;
   height: 100%;
   position: absolute;
   right: 0;
   top: 0;
 }
-.slider-pos i{
+
+.slider-pos i {
   transform: translateY(5px);
 }
-.category-expanded{
+
+.category-expanded {
   width: 100%;
   transition: 0.4s all linear;
   max-height: 100%;
   height: auto;
   overflow: hidden;
 }
+
 .category-expanded.ng-hide {
   max-height: 0;
 }
-.category-expanded-paragraph{
+
+.category-expanded-paragraph {
   cursor: pointer;
   color: #94a4b8;
   line-height: 2.5em;
@@ -207,18 +228,31 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.category-expanded-paragraph:hover{
+
+.category-expanded-paragraph:hover {
   color: #fff;
 }
-.settings-left-bar{
+
+.settings-left-bar {
   position: absolute;
   bottom: 0;
   left: 25px;
+  background: url("../images/new-icons/settings-grey.png");
+  width: 25px;
+  height: 25px;
+  background-size: cover;
 }
-.tutorial-left-bar{
+
+.settings-left-bar:hover {
+  background: url("../images/new-icons/settings-white.png");
+  background-size: cover;
+}
+
+.tutorial-left-bar {
   position: absolute;
   bottom: 50px;
 }
+
 .svg-icn-settings {
   width: 40%;
   height: 100%;
@@ -227,12 +261,14 @@
   background-size: contain;
   background-position: 50%;
 }
+
 .left-panel__category:hover .svg-icn-settings,
-.active .svg-icn-settings{
+.active .svg-icn-settings {
   background: url('../images/input-icons/settings-gears-active.svg') no-repeat;
   background-size: contain;
   background-position: 50%;
 }
+
 .svg-icn-tutorial {
   width: 40%;
   height: 100%;
@@ -241,22 +277,25 @@
   background-size: contain;
   background-position: 50%;
 }
+
 .left-panel__category:hover .svg-icn-tutorial,
-.active .svg-icn-tutorial{
+.active .svg-icn-tutorial {
   background: url('../images/input-icons/man-with-a-question-in-speech-bubble-active.svg') no-repeat;
   background-size: contain;
   background-position: 50%;
 }
-.subsettings{
+
+.subsettings {
   height: 35px;
   padding-left: 50px;
   position: relative;
 }
 
-.center-category .active.subsettings{
+.center-category .active.subsettings {
   background: unset;
 }
-.subsettings:before{
+
+.subsettings:before {
   position: absolute;
   left: 30px;
   top: 41%;
@@ -268,7 +307,8 @@
 
   content: '';
 }
-.menu-img{
+
+.menu-img {
   width: auto;
   height: auto;
   max-width: 100%;
@@ -276,29 +316,34 @@
 }
 
 .subsettings:hover:before,
-.active.subsettings:before{
+.active.subsettings:before {
   background-color: #fff;
 }
-.filter-block{
+
+.filter-block {
   margin-left: auto;
   margin-right: auto;
   margin-top: 60px;
   border-top: 1px solid #7c8999;
 }
-.filter{
+
+.filter {
   display: block;
   padding-left: 0;
   width: 100%;
   height: auto;
 }
-.filter:hover{
+
+.filter:hover {
   color: #edf2f6;
 }
-.filter p{
+
+.filter p {
   padding: 10px 0 5px 0;
   cursor: default;
 }
-.filter .dropdown-menu{
+
+.filter .dropdown-menu {
   overflow: auto;
   color: #364656;
   padding: 0;
@@ -306,133 +351,158 @@
   top: 46px !important;
   background-color: #fff;
 }
-.filter .form-control.readonly-normal{
+
+.filter .form-control.readonly-normal {
   border: transparent;
   border-radius: 2px;
   background: #edf2f6;
 }
+
 .filter .form-control.readonly-normal:focus,
 .filter .form-control.readonly-normal:active {
   background: #edf2f6;
-  box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
+  box-shadow: inset 3px 3px 10px 0px rgba(0, 0, 0, 0.35);
 }
+
 .filter .dropdown-menu li {
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
+
 .filter .dropdown-menu li:hover {
   background-color: #edf2f6 !important;
 }
-.logo-head{
+
+.logo-head {
   width: 50%;
   height: 50%;
   margin-top: 15px;
 }
 
-.filter .x-mark-wrapper{
+.filter .x-mark-wrapper {
   position: relative;
 }
-.filter .x-mark-wrapper .x-mark{
+
+.filter .x-mark-wrapper .x-mark {
   position: absolute;
   right: 7px;
   top: 8px;
   padding: 5px;
   line-height: 1;
 }
-.user-company-circle{
+
+.user-company-circle {
   width: 12px;
   height: 12px;
   position: absolute;
   right: 50px;
   border-radius: 50%;
   top: 10px;
-  box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.50);
+  box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.50);
 }
-.user-company-circle .colored-circle{
+
+.user-company-circle .colored-circle {
   position: absolute;
   height: 12px;
   width: 12px;
   border-radius: 50%;
   border: 2px solid transparent;
 }
-.left-panel-icons-remote{
+
+.left-panel-icons-remote {
   background: url("../images/left-panel-icons-x1.png") 211px 2px;
 }
-.left-panel-icons-remote:hover{
+
+.left-panel-icons-remote:hover {
   background: url("../images/left-panel-icons-x1.png") 211px 23px;
 }
+
 .left-panel .left-panel-icons-remote.active {
   background: url("../images/left-panel-icons-x1.png") 211px 23px;
 }
 
-.left-panel-icons-tickets{
+.left-panel-icons-tickets {
   background: url("../images/left-panel-icons-x1.png") 185px 2px;
 }
-.left-panel-icons-tickets:hover{
+
+.left-panel-icons-tickets:hover {
   background: url("../images/left-panel-icons-x1.png") 185px 25px;
 }
+
 .left-panel .left-panel-icons-tickets.active {
   background: url("../images/left-panel-icons-x1.png") 185px 25px;
 }
 
-.left-panel-icons-companies{
+.left-panel-icons-companies {
   background: url("../images/left-panel-icons-x1.png") 133px 2px;
 }
-.left-panel-icons-companies:hover{
+
+.left-panel-icons-companies:hover {
   background: url("../images/left-panel-icons-x1.png") 133px 25px;
 }
+
 .left-panel .left-panel-icons-companies.active {
   background: url("../images/left-panel-icons-x1.png") 133px 25px;
 }
 
-.left-panel-icons-users{
+.left-panel-icons-users {
   background: url("../images/left-panel-icons-x1.png") 159px 2px;
 }
-.left-panel-icons-users:hover{
+
+.left-panel-icons-users:hover {
   background: url("../images/left-panel-icons-x1.png") 159px 25px;
 }
+
 .left-panel .left-panel-icons-users.active {
   background: url("../images/left-panel-icons-x1.png") 159px 25px;
 }
 
-.left-panel-icons-billing{
+.left-panel-icons-billing {
   background: url("../images/left-panel-icons-x1.png") 108px 2px;
 }
-.left-panel-icons-billing:hover{
+
+.left-panel-icons-billing:hover {
   background: url("../images/left-panel-icons-x1.png") 108px 25px;
 }
+
 .left-panel .left-panel-icons-billing.active {
   background: url("../images/left-panel-icons-x1.png") 108px 25px;
 }
 
-.left-panel-icons-inventory{
+.left-panel-icons-inventory {
   background: url("../images/left-panel-icons-x1.png") 81px 0px;
   height: 23px;
 }
-.left-panel-icons-inventory:hover{
+
+.left-panel-icons-inventory:hover {
   background: url("../images/left-panel-icons-x1.png") 81px 22px;
 }
+
 .left-panel .left-panel-icons-inventory.active {
   background: url("../images/left-panel-icons-x1.png") 81px 22px;
 }
 
-.left-panel-icons-password-manager{
+.left-panel-icons-password-manager {
   background: url("../images/left-panel-icons-x1.png") 52px 0px;
 }
-.left-panel-icons-password-manager:hover{
+
+.left-panel-icons-password-manager:hover {
   background: url("../images/left-panel-icons-x1.png") 52px 24px;
 }
+
 .left-panel .left-panel-icons-password-manager.active {
   background: url("../images/left-panel-icons-x1.png") 52px 24px;
 }
 
-.left-panel-icons-reports{
+.left-panel-icons-reports {
   background: url("../images/left-panel-icons-x1.png") 27px 0px;
 }
-.left-panel-icons-reports:hover{
+
+.left-panel-icons-reports:hover {
   background: url("../images/left-panel-icons-x1.png") 27px 24px;
 }
+
 .left-panel .left-panel-icons-reports.active {
   background: url("../images/left-panel-icons-x1.png") 27px 24px;
 }
