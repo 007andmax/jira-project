@@ -66,9 +66,11 @@
           };
 
           $scope.validationMessage = function () {
-
             if (!$scope.editService.item.versionedId.id) {
+              $scope.disabledSave = true;
               return 'Choose Service from dropdown or type full name'
+            } else {
+              $scope.disabledSave = false;
             }
 
             if ($scope.updateTicketService.$valid) {
