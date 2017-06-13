@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.networkScanItemCtrl',
-    ['$scope', 'CompaniesService', 'DevicesService',
-      function ($scope, CompaniesService, DevicesService) {
+    ['$scope', 'CompaniesService', 'DevicesService', '$filter',
+      function ($scope, CompaniesService, DevicesService, $filter) {
 
-        $scope.deviceDescription = '';
+        $scope.deviceDescription = $filter('unknownFilter')($scope.device.description);
         $scope.deviceEditDescription = $scope.device.description;
         $scope.isOpenDescrDrpdwn = false;
         $scope.patternMax40 = /^.{0,40}$/;
@@ -17,37 +17,16 @@
           }
         };
 
-        $scope.saveDescription = function (option) {
-          if (option === 'close') {
-            $scope.deviceDescription = '';
-            $scope.isOpenDescrDrpdwn = false;
-            return;
-          }
-
-          $scope.disableSaveDescr = true;
-
-          DevicesService.sendDescription($scope.company.id, $scope.device.id, $scope.deviceDescription, function () {
-            $scope.device.description = $scope.deviceDescription;
-            $scope.disableSaveDescr = false;
-            $scope.isOpenDescrDrpdwn = false;
+        $scope.saveDescription = function (deviceDescription) {
+          DevicesService.sendDescription($scope.company.id, $scope.device.id, deviceDescription, function () {
+            $scope.device.description = deviceDescription;
+            $scope.isEditDescrOpened = false;
           })
         };
 
-        $scope.saveEditDescription = function (option) {
-          if (option === 'close') {
-            $scope.deviceEditDescription = $scope.device.description;
-            $scope.isOpenEditDescrDrpdwn = false;
-            return;
-          }
-
-          $scope.disableEditSaveDescr = true;
-
-          DevicesService.sendDescription($scope.company.id, $scope.device.id, $scope.deviceEditDescription, function () {
-            $scope.device.description = $scope.deviceEditDescription;
-            $scope.disableEditSaveDescr = false;
-            $scope.isOpenEditDescrDrpdwn = false;
-          })
-        };
+        $scope.$on('toggleEditDeviceDescription', function (event, deviceId) {
+          $scope.isEditDescrOpened = $scope.device.id === deviceId;
+        });
 
         $scope.userReadable = function (str) {
           return str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {

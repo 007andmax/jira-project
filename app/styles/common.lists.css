@@ -764,6 +764,18 @@ Devices tab
   -ms-text-overflow: ellipsis;
 }
 
+.device-name .host-name {
+  cursor: pointer;
+}
+
+.device-name .host-name .edit-icon {
+  display: none;
+}
+
+.device-name .host-name:hover .edit-icon {
+  display: inline-block;
+}
+
 .device-lan-ip,
 .device-user-name,
 .device-desc,

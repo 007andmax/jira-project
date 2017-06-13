@@ -93,7 +93,7 @@
       </div>
       <div class="network-scan-item-2">
         <p>Select Devices</p>
-        <img src="images/new-icons/networkscan-step-2.png" alt="">
+        <img src="images/new-icons/networkscan-step-2.png" alt="" width="36px">
       </div>
       <div class="network-scan-item-3" ng-form="credentialsForm">
         <p>Enter Credentials</p>
@@ -209,10 +209,16 @@
           </label>
 
           <div class="checkbox-caption">
-              <span
-                uib-tooltip="{{ ((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
-                trimmed-tooltip-checker="((device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
+            <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
+              <span style="display: inline-block"
+                    uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
+                    trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
               </span>
+              <i class="icon-sm edit-icon"></i>
+              <p ng-if="device.description | unknownFilter">{{ device.hostName | unknownFilter }}</p>
+            </div>
+            <input class="control" ng-if="isEditDescrOpened" ng-model="deviceDescription"
+                   execute-when-outfocused="saveDescription(deviceDescription)" focus-on/>
           </div>
         </div>
       </div>
