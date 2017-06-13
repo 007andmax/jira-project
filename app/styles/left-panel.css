@@ -237,15 +237,13 @@
   position: absolute;
   bottom: 0;
   left: 25px;
-  background: url("../images/new-icons/settings-grey.png");
+  background: url("../images/new-icons/settings-icon.png");
   width: 25px;
   height: 25px;
-  background-size: cover;
 }
 
 .settings-left-bar:hover {
-  background: url("../images/new-icons/settings-white.png");
-  background-size: cover;
+  background: url("../images/new-icons/settings-icon.png") 25px 0px;
 }
 
 .tutorial-left-bar {
