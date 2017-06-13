@@ -231,6 +231,11 @@
           }
         };
 
+        $scope.toggleDescription = function (deviceId) {
+          $scope.isEditDescrOpened = true;
+          $scope.$broadcast('toggleEditDeviceDescription', deviceId);
+        };
+
         $scope.$watch(function () {
           if ($scope.scanDevices) {
             return $scope.scanDevices.status;

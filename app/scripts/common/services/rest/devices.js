@@ -568,6 +568,9 @@
                 device.agentPassword = device.agentPassword || {};
                 Utils.customizeObj(agentPassword, device.agentPassword);
               }
+            } else if (newChange.action === 'NETWORK_DEVICE_DESCRIPTON') {
+              var device = Utils.findById(scannedDevices[companyId], newChange.data.deviceId);
+              device.description = newChange.data.description;
             }
             if (callback) {
               callback(scannedDevices);
