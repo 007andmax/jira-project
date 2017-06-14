@@ -3,6 +3,35 @@
     <ul class="qt-table">
 
       <li>
+        <div class="col-3" style="margin-bottom: 10px; float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
+             style="width: 140px; float: left;" ng-show="isShowBarcotInputField">
+
+          <input type="text"
+                 class="form-control"
+                 name="productSerialNumber"
+                 placeholder="Barcode"
+                 ng-model="productExpense.serialNumber"
+                 ng-maxlength="55"
+                 execute-when-outfocused="isShowBarcotInputField = false"
+                 uib-tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
+        </div>
+
+        <div ng-show="isShowInputField" class=" col-3 form-group discount-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
+          <input maxlength="3"
+                 type="text"
+                 placeholder="Discount"
+                 class="form-control"
+                 name="discountAmount"
+                 ng-model="productExpense.discountAmount"
+                 ng-max="100"
+                 ng-min="0"
+                 hard-reset-pattern="PERCENT"
+                 execute-when-outfocused = "isShowInputField = false"
+                 ng-keydown="$event.which === 13 && $event.preventDefault()">
+        </div>
+      </li>
+
+      <li>
 
         <div class="col-1" style="float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
           <div products-list id="product-list-cont"
@@ -30,9 +59,15 @@
         <div class="col-3" style="margin-bottom: 10px; float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
              style="width: 140px; float: left;">
 
-          <input type="text" class="form-control" name="productSerialNumber"
-                 placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="25"
-                 uib-tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
+          <input type="text"
+                 class="form-control"
+                 name="productCost"
+                 qt-to-fixed="2"
+                 hard-reset-pattern="pricePattern"
+                 placeholder="Cost"
+                 ng-maxlength="55"
+                 ng-model="productExpense.item.cost"
+                 tooltip-append-to-body="true"/>
         </div>
 
         <div class="col-4" style="width: 70px; float: left;"
@@ -51,32 +86,18 @@
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                  name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
-
         </div>
+
         <div class="col-4" style="width: 60px; float: left;">
           <div>
-            <div  ng-hide="isShowInputField || productExpense.discountAmount != null">
+            <div>
               <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowInputField = !isShowInputField" uib-tooltip="Discount"></i>
             </div>
-
-            <div ng-show="isShowInputField || productExpense.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
-              <input maxlength="3"
-                     type="text"
-                     class="form-control"
-                     name="discountAmount"
-                     ng-model="productExpense.discountAmount"
-                     ng-max="100"
-                     ng-min="0"
-                     hard-reset-pattern="PERCENT"
-                     ng-keydown="$event.which === 13 && $event.preventDefault()">
-            </div>
-            <!--<div ng-show="false">-->
-              <!--<select ng-model="productExpense.discountType = 'PERCENT'">-->
-                <!--<option value="PERCENT" selected>PERCENT</option>-->
-                <!--<option value="null">null</option>-->
-              <!--</select>-->
-            <!--</div>-->
           </div>
+        </div>
+
+        <div class="col-4">
+          <i class="icon-sm sale-icon-for-isDicount" uib-tooltip="barcode" ng-click="isShowBarcotInputField = !isShowBarcotInputField"></i>
         </div>
 
 
