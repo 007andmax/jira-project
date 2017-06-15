@@ -11191,18 +11191,12 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   width: calc(100% - 512px);
 }
 
-.discount-barcode {
-  position: absolute;
-  top: 35px;
-  right: 92px;
-  width: 295px !important;
-}
-
 .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
 .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
   width: 295px;
   float: right;
   padding: 0;
+  margin-right: 72px;
 }
 
 @media (min-width: 2048px) {
@@ -11273,14 +11267,6 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: calc(100% - 508px);
   }
 
-  .opened-ticket-list.opened-ticket .discount-barcode {
-    right: 25px;
-  }
-
-  .opened-ticket .discount-barcode {
-    right: 100px;
-  }
-
   .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     width: 285px;
   }
@@ -11292,6 +11278,15 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 177px);
     margin-bottom: 10px;
+  }
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3{
+    margin-right: 78px;
+  }
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3{
+    margin-right: 0;
+  }
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 5px;
   }
 }
 
@@ -11316,9 +11311,6 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: 240px;
   }
 
-  .opened-ticket-list .discount-barcode {
-    right: 25px;
-  }
 }
 
 @media only screen and (max-width: 1280px) {
@@ -11326,13 +11318,12 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: calc(100% - 500px);
   }
 
-  .opened-ticket .discount-barcode {
-    right: 92px;
-  }
-
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
   .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     width: 285px;
+  }
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 70px;
   }
 }
 
