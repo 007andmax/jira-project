@@ -13,10 +13,12 @@
                  ng-model="productExpense.serialNumber"
                  ng-maxlength="55"
                  execute-when-outfocused="isShowBarcotInputField = false"
-                 uib-tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
+                 uib-tooltip="{{ productExpense.serialNumber }}"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true"/>
         </div>
 
-        <div ng-show="isShowInputField" class=" col-3 form-group discount-input"
+        <div ng-show="isShowInputField" class="col-3 form-group discount-input"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
           <input maxlength="3"
                  type="text"
@@ -91,17 +93,15 @@
         </div>
 
         <div class="col-4" style="width: 60px; float: left;">
-          <div>
-            <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowInputField = !isShowInputField; isShowBarcotInputField = fasle"
-               uib-tooltip="Discount"></i>
-          </div>
+          <i class="icon-sm" ng-class="isDiscountIconGreen(productExpense) ? 'sale-icon-for-isDicount-green' : 'sale-icon-for-isDicount' "
+             ng-click="isShowInputField = !isShowInputField; isShowBarcotInputField = fasle"
+             uib-tooltip="Discount"></i>
         </div>
 
         <div class="col-4" style="width: 60px;float: left;padding-top: 6px; cursor: pointer;">
-          <i class="icon-sm barcode-icon" uib-tooltip="barcode"
+          <i class="icon-sm" uib-tooltip="barcode" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
-
 
         <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
           <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
