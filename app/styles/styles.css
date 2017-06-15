@@ -11176,7 +11176,7 @@ button.close {
 
 .ticket-add-content .ticket-add-product .qt-table li .col-1 {
   display: inline-block;
-  width: calc(100% - 502px);
+  width: calc(100% - 562px);
 }
 
 _:-ms-lang(x), .ticket-add-content .ticket-add-product .qt-table li .col-1 {
@@ -11188,12 +11188,20 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-  width: calc(100% - 452px);
+  width: calc(100% - 512px);
+}
+
+.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
+.ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+  width: 295px;
+  float: right;
+  padding: 0;
+  margin: 0 72px 0 0;
 }
 
 @media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-    width: calc(100% - 452px);
+    width: calc(100% - 512px);
   }
 }
 
@@ -11256,12 +11264,29 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   }
 
   .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
-    width: calc(100% - 448px);
+    width: calc(100% - 508px);
+  }
+
+  .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 285px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 240px;
   }
 
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 177px);
     margin-bottom: 10px;
+  }
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3{
+    margin-right: 78px;
+  }
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3{
+    margin-right: 0;
+  }
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 5px;
   }
 }
 
@@ -11280,6 +11305,25 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 
   .receivable-content .product-list-ticket {
     font-size: 12px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 240px;
+  }
+
+}
+
+@media only screen and (max-width: 1280px) {
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 500px);
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
+  .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 285px;
+  }
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 70px;
   }
 }
 
