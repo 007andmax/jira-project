@@ -11196,7 +11196,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   width: 295px;
   float: right;
   padding: 0;
-  margin-right: 72px;
+  margin: 0 72px 0 0;
 }
 
 @media (min-width: 2048px) {
