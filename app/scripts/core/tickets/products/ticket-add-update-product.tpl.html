@@ -60,16 +60,16 @@
         </div>
 
         <div class="col-3" style="margin-bottom: 10px; float: left;"
-             ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
+             ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}"
              style="width: 140px; float: left;">
 
-          <input type="text"
+          <input type="number"
                  class="form-control"
                  name="productCost"
                  qt-to-fixed="2"
                  hard-reset-pattern="pricePattern"
                  placeholder="Cost"
-                 ng-maxlength="55"
+                 ng-max="productExpense.item.sale"
                  ng-model="productExpense.item.cost"
                  tooltip-append-to-body="true"/>
         </div>
