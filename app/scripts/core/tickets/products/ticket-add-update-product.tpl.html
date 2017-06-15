@@ -2,9 +2,9 @@
   <form name="addProductForm" class="ticket-add-product">
     <ul class="qt-table">
 
-      <li>
-        <div class="col-3" style="margin-bottom: 10px; float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
-             style="width: 140px; float: left;" ng-show="isShowBarcotInputField">
+      <li class="discount-barcode">
+        <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
+             ng-show="isShowBarcotInputField">
 
           <input type="text"
                  class="form-control"
@@ -96,7 +96,7 @@
           </div>
         </div>
 
-        <div class="col-4">
+        <div class="col-4" style="width: 60px;float: left;padding-top: 6px; cursor: pointer;" >
           <i class="icon-sm barcode-icon" uib-tooltip="barcode" ng-click="isShowBarcotInputField = !isShowBarcotInputField"></i>
         </div>
 
