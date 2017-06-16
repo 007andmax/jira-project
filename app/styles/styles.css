@@ -11279,14 +11279,26 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: calc(100% - 177px);
     margin-bottom: 10px;
   }
-  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3{
+
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     margin-right: 78px;
   }
-  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3{
+
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     margin-right: 0;
   }
+
   .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     margin-right: 5px;
+  }
+  .discount-barcode{
+    position: relative;
+  }
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    position: absolute;
+    right: 0;
+    width: 157px;
+    top: 56px;
   }
 }
 
@@ -11322,6 +11334,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     width: 285px;
   }
+
   .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     margin-right: 70px;
   }
