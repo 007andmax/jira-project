@@ -9,7 +9,7 @@
           <input type="text"
                  class="form-control"
                  name="productSerialNumber"
-                 placeholder="Barcode"
+                 placeholder="Serial number"
                  ng-model="productExpense.serialNumber"
                  ng-maxlength="55"
                  execute-when-outfocused="isShowBarcotInputField = false"
@@ -99,7 +99,7 @@
         </div>
 
         <div class="col-4" style="width: 60px;float: left;padding-top: 6px; cursor: pointer;">
-          <i class="icon-sm" uib-tooltip="barcode" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
+          <i class="icon-sm" uib-tooltip="Serial number" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
 
