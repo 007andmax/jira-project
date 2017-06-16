@@ -10,7 +10,7 @@
 
             <input type="text" value="Onsite" class="form-control has-dropdown" placeholder="Service"
                    name="serviceName" placeholder="Service" uib-dropdown-toggle aria-expanded="false"
-                   ng-model="editService.item.name">
+                   ng-model="editService.item.name" required>
             <i class="icn-sm icn-caret-gray"></i>
 
             <ul class="dropdown-menu dropdown-menu-services">
@@ -93,7 +93,7 @@
       </div>
 
       <div class="btn btn-success"
-           custom-disabled="{{ disabledSave || updateTicketService.$invalid }}"
+           custom-disabled="{{ disabledSave || updateTicketService.$invalid}}"
            ng-click="saveUpdateService(updateTicketService)">
         Save
       </div>

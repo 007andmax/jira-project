@@ -3797,7 +3797,9 @@ Devices tab
   top: -45px;
   left: 43%;
 }
-
+.no-agent [class*=network-scan-item-]:before{
+  left: 46%;
+}
 .run-scan .network-scan-item-2:before,
 .no-agent .network-scan-item-2:before {
   content: '2';
@@ -3824,7 +3826,8 @@ Devices tab
 
 .network-scan-header .control-label {
   position: absolute;
-  top: -20px;
+  top: -17px;
+  left: 115px;
 }
 
 .run-scan [class*=network-scan-item-] input,

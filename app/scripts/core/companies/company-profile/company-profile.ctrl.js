@@ -75,7 +75,7 @@
 
         $scope.archiveCompany = function () {
           var company = CompaniesService.getOneById($scope.company.id);
-          var confirmMessage = 'Do you want to archive ' + company.name + '?';
+          var confirmMessage = 'Do you want to archive ' + company.name + '? All users will be archived and all agents will be uninstalled.';
           var confirmButton = 'Yes';
 
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {

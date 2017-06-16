@@ -5,83 +5,85 @@
     </div>
 
     <div class="left-panel__category-wrap nano-content">
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
+      <div class="left-panel__category left-panel-icons-remote"
+           ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
            ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
-        <img class="menu-img" ng-if="openedCategory !== 'quick-support'"
-             src="images/new-icons/network-desktop-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'quick-support'"
-             src="images/new-icons/network-desktop-white.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'quick-support'"-->
+        <!--src="images/new-icons/network-desktop-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'quick-support'"-->
+        <!--src="images/new-icons/network-desktop-white.png">-->
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
+      <div class="left-panel__category left-panel-icons-tickets" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
            ng-click="toggleLeftPanel('tickets')">
-        <img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/new-icons/newspaper-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'tickets'"
-             src="images/new-icons/newspaper-white.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/new-icons/newspaper-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'tickets'"-->
+        <!--src="images/new-icons/newspaper-white.png">-->
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
+      <div class="left-panel__category left-panel-icons-companies" ng-class="{'active': openedCategory === 'companies'}"
            ng-click="toggleLeftPanel('companies')" ui-sref="companies"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
-        <img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/new-icons/building-white.png">
-        <img class="menu-img" ng-if="openedCategory === 'companies'"
-             src="images/new-icons/building-gray.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/new-icons/building-white.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'companies'"-->
+        <!--src="images/new-icons/building-gray.png">-->
 
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
+      <div class="left-panel__category left-panel-icons-users" ng-class="{'active': openedCategory === 'users'}"
            ng-click="toggleLeftPanel('users')" ui-sref="users"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
-        <img class="menu-img" ng-if="openedCategory !== 'users'" src="images/new-icons/users-male-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'users'" src="images/new-icons/users-male-white.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'users'" src="images/new-icons/users-male-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'users'" src="images/new-icons/users-male-white.png">-->
 
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
+      <div class="left-panel__category left-panel-icons-billing" ng-class="{'active': openedCategory === 'billing'}"
            ng-click="toggleLeftPanel('billing')" ui-sref="accounting.billable"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
-        <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/new-icons/USD-circle-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'billing'"
-             src="images/new-icons/USD-circle-white.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/new-icons/USD-circle-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'billing'"-->
+        <!--src="images/new-icons/USD-circle-white.png">-->
 
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
+      <div class="left-panel__category left-panel-icons-inventory" ng-class="{'active': openedCategory === 'inventory'}"
            ng-click="toggleLeftPanel('inventory')" ui-sref="products({ tabName: 'category' })">
-        <img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/new-icons/briefcase-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'inventory'"
-             src="images/new-icons/briefcase-white.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/new-icons/briefcase-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'inventory'"-->
+        <!--src="images/new-icons/briefcase-white.png">-->
 
       </div>
-      <div class="left-panel__category" ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
+      <div class="left-panel__category left-panel-icons-password-manager"
+           ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
            ng-click="toggleLeftPanel('password-manager')" ui-sref="password-manager">
-        <img class="menu-img" ng-if="openedCategory !== 'password-manager'"
-             src="images/new-icons/lock-gray.png">
-        <img class="menu-img" ng-if="openedCategory === 'password-manager'"
-             src="images/new-icons/lock-white.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'password-manager'"-->
+        <!--src="images/new-icons/lock-gray.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'password-manager'"-->
+        <!--src="images/new-icons/lock-white.png">-->
       </div>
       <!--REPORTS-->
-      <div class="left-panel__category"
+      <div class="left-panel__category left-panel-icons-reports"
            ng-class="{'active': openedCategory === 'reports'}"
            ng-click="onClickReports()"
            ui-sref="reports"
            ng-if="showReportsPage()">
-        <img class="menu-img" ng-if="openedCategory !== 'reports'"
-             src="images/new-icons/report-icon.png">
-        <img class="menu-img" ng-if="openedCategory === 'reports'"
-             src="images/new-icons/report-icon.png">
+        <!--<img class="menu-img" ng-if="openedCategory !== 'reports'"-->
+        <!--src="images/new-icons/report-icon.png">-->
+        <!--<img class="menu-img" ng-if="openedCategory === 'reports'"-->
+        <!--src="images/new-icons/report-icon.png">-->
       </div>
 
       <div class="left-panel__category settings-left-bar">
         <!--<div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"-->
         <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->
         <!--<div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">-->
-        <div class="left-panel__category" ui-sref="settings" ng-click="onClickSettings()"
+        <div class="left-panel__category " ui-sref="settings" ng-click="onClickSettings()"
              ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
              style="width: calc(100% + 10px)">
-          <img class="menu-img"
-               ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"
-               src="images/new-icons/settings-gray.png">
-          <img class="menu-img"
-               ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"
-               src="images/new-icons/settings-white.png">
+          <!--<img class="menu-img"-->
+          <!--ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"-->
+          <!--src="images/new-icons/settings-grey.png">-->
+          <!--<img class="menu-img"-->
+          <!--ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"-->
+          <!--src="images/new-icons/settings-grey.png">-->
         </div>
         <!--</div>-->
         <!--</div>-->

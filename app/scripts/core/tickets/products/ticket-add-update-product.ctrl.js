@@ -28,6 +28,22 @@
             form.productQty.$setValidity('zero', +$scope.productExpense.quantity !== 0);
           };
 
+          $scope.isBarcodeIconGreen = function(productExpense) {
+            if(productExpense.serialNumber === null || productExpense.serialNumber === undefined || productExpense.serialNumber === "") {
+              return false
+            } else {
+              return true
+            }
+          };
+
+          $scope.isDiscountIconGreen = function(productExpense) {
+            if(productExpense.discountAmount === null || productExpense.discountAmount === undefined || productExpense.discountAmount === "") {
+              return false
+            } else {
+              return true
+            }
+          };
+
         }]);
   }()
 );
