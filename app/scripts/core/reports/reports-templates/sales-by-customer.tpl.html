@@ -6,7 +6,7 @@
   <div>
     <report-menu class-name="run-report-content-by-customer" is-device-hidden="true" get-user-name="getUserName"
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern"
-                 send-to-mail="sendToMail"></report-menu>
+                 send-to-mail="sendToMail" is-report-available="isReportAvailable"></report-menu>
   </div>
   <div class="product-list-ticket" ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '940' : '1180'}">
     <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">

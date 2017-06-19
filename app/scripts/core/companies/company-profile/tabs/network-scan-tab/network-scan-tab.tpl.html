@@ -33,15 +33,15 @@
 
       <div class="network-scan-item-3">
         <p>Create Agent</p>
-        <div class="send-by-email" ng-hide="showSendMailForm">
-          <div ng-click="showSendMailForm = true">
+        <div class="send-by-email" ng-hide="downloadAgentModel.showSendMailForm">
+          <div ng-click="downloadAgentModel.showSendMailForm = true">
             Send by email
           </div>
           <div ng-click="downloadAgent(downloadAgentForm)">
             Download
           </div>
         </div>
-        <div class="show-mail" ng-show="showSendMailForm" ng-form="sendMailForm">
+        <div class="show-mail" ng-show="downloadAgentModel.showSendMailForm" ng-form="sendMailForm">
           <div class="form-group" ng-class="{ 'has-error': isShowingMailFormErrors(sendMailForm, 'email')}">
             <!--<label class="control-label" ng-class="{ 'hide': isShowingMailFormErrors(sendMailForm, 'email')}">-->
               <!--Email Address-->

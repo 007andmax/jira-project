@@ -87,9 +87,14 @@
           }
         });
 
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
+        };
+
         $scope.checkSMTPLoginUnique = function (model, modelId, afterValidationCallback) {
           CompaniesService.checkSMTPLoginUnique(model.$viewValue, function (resp) {
             $scope.smtpForm.login.$setValidity('unique', !!resp);
+            // $scope.smtpForm.login.$setDirty();
             afterValidationCallback();
           })
         };
@@ -141,10 +146,12 @@
                     }
                   }
                 }
-                smtpPromise = undefined;
               });
             }, 500);
           } else if (!$scope.smtp.useSMTP) {
+            $scope.smtp.login = '';
+            $scope.smtp.password = '';
+            form.$setPristine();
             CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings');
           }
         };

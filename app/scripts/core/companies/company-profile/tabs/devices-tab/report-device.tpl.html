@@ -8,9 +8,9 @@
         <p>Print</p>
       </div>
       <div class="hardware__control-panel--btn" ng-click="toggleEdit()">
-        <img ng-if="!showEdit" src="images/new-icons/edit.png" alt="">
-        <img ng-if="showEdit" src="images/new-icons/cancel-circle.png" alt="">
-        <p>Edit</p>
+        <img ng-show="!showEdit" src="images/new-icons/edit.png" alt="">
+        <img ng-show="showEdit" src="images/new-icons/cancel-circle.png" alt="">
+        <p>{{ !showEdit ? 'Edit' : 'Cancel' }}</p>
       </div>
       <div ng-if="showEdit" class="hardware__control-panel--btn" ng-click="saveEditedFields()"
            custom-disabled="{{ saveInProgress }}">

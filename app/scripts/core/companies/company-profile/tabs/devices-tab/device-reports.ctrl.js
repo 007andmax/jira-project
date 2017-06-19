@@ -78,6 +78,8 @@
             dto.warrantyDate = dto.warrantyDate.getFullYear() + '/' + dto.warrantyDate.getMonth() + '/' + dto.warrantyDate.getDate();
           }
 
+          $scope.toggleEdit();
+
           DevicesService.saveReportEditedFields(dto, function () {
             $scope.saveInProgress = false;
             dto.installDate = new Date(dto.installDate);
@@ -88,7 +90,6 @@
               $scope.passwordShown = !$scope.passwordShown;
             }
 
-            $scope.toggleEdit();
             $timeout(function () {
               $scope.buildPdf();
             })
@@ -172,7 +173,7 @@
             $scope.dto.warrantyDate = dates[0];
           }
         };
-  
+
         $scope.buildPdf = function () {
           var currentAgent = $scope.currentAgent;
           $scope.$broadcast('buildPdf-' + (currentAgent ? (currentAgent.hostName || currentAgent.ip) : ''));

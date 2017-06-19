@@ -1253,7 +1253,7 @@
   transition: all .3s;
 }
 
-.grey-btn-report:hover {
+.grey-btn-report:hover:not([disabled]) {
   background-color: #cac9c9;
 }
 
