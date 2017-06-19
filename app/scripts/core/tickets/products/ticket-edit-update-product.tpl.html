@@ -64,9 +64,11 @@
 
         <div class="edit-col3" style="width: 150px;"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productCost')}">
-          <input type="number" class="form-control" placeholder="Cost"
-                 name="productCost" ng-max="editProduct.item.sale"
-                 ng-model="editProduct.item.cost" qt-to-fixed="2" hard-reset-pattern="pricePattern">
+          <input type="number" class="form-control" placeholder="Cost" name="productCost"
+                 ng-required="true" ng-model="editProduct.item.cost" qt-to-fixed="2"
+                 ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
+                 ng-max="editProduct.item.sale"
+                 hard-reset-pattern="pricePattern" hard-reset-required="true">
         </div>
 
         <div class="edit-col4" style="width: 74px;"
@@ -79,10 +81,10 @@
 
         <div class="edit-col5" style="width: 150px;"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}">
-          <input type="text" class="form-control" placeholder="Price" name="productPrice"
+          <input type="number" class="form-control" placeholder="Price" name="productPrice"
                  ng-required="true" ng-model="editProduct.item.sale" qt-to-fixed="2"
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
-                 hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+                 hard-reset-pattern="pricePattern" hard-reset-required="true">
         </div>
 
         <div class="col-4" style="width: 60px; float: left;">
