@@ -3,18 +3,18 @@
   <p class="report-title">Product Sales Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
-    <report-menu is-device-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName"
+    <report-menu is-device-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName" is-report-available="isReportAvailable"
                  download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern"></report-menu>
   </div>
   <div class="product-list-ticket">
-    <div class="header-product-list-ticket" ng-if="reportByProducts.products">
+    <div class="header-product-list-ticket" ng-if="reportByProducts.lines">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
       <p ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></p>
       <p><span>{{ parseDate(reportByProducts.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd.MM.yyyy' }}</span>
       </p>
     </div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
-    <div ng-if="reportByProducts.products">
+    <div ng-if="reportByProducts.lines">
       <ul class="customer-det-col">
         <li class="top-product-list-ticket clearfix">
           <div class="col-md-3"><strong>Product</strong></div>
@@ -26,7 +26,7 @@
           <!--<div class="col-md-1"><strong>Count</strong></div>-->
           <div class="col-md-1"><strong>Tax</strong></div>
         </li>
-        <li class="content-product-list-ticket clearfix" ng-repeat="product in reportByProducts.products"
+        <li class="content-product-list-ticket clearfix" ng-repeat="product in reportByProducts.lines"
             on-finish-render="buildPdf()">
           <div class="col-md-3">{{product.name}}</div>
           <div class="col-md-2">{{product.categoryName}}</div>
@@ -36,12 +36,12 @@
           <div class="col-md-1">{{product.sale | currency: '$': 2 }}</div>
           <!--<div class="col-md-1">{{product.count}}</div>-->
           <div class="col-md-1" >
-            <span ng-repeat="taxe in product.taxes" on-finish-render="hideLoadingIndicator()">{{taxe}} </span>
+            <span ng-repeat="tax in product.taxes" on-finish-render="hideLoadingIndicator()">{{tax}} </span>
           </div>
         </li>
       </ul>
     </div>
-    <div class="product-report-total-sales clearfix" ng-if="reportByProducts.products">
+    <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
       <p>Total Sales: <br> <strong><span>{{reportByProducts.totalSum | currency: '$': 2}}</span></strong></p>
     </div>
   </div>

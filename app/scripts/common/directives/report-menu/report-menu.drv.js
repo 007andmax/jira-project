@@ -13,10 +13,11 @@
       sendToMail: '=?',
       getUserName: '=?',
       emailPattern: '=?',
-      isTechReport: "@?",
-      isRadioButtonHidden: "@?",
-      isDateRangeHidden: "@?",
-      isShowTechSelectField: "@?"
+      isTechReport: '@?',
+      isRadioButtonHidden: '@?',
+      isDateRangeHidden: '@?',
+      isShowTechSelectField: '@?',
+      isReportAvailable: '='
     },
     controller: reportMenuCtrl
   });
@@ -144,6 +145,9 @@
       if ($scope.techReportDateType === "CUSTOM") {
         techDataToSend.startDate = $scope.startDate;
         techDataToSend.endDate = $scope.endDate;
+        if (!$scope.startDate || !$scope.endDate) {
+          return;
+        }
       }
       lastSentData = techDataToSend;
       $scope.$emit("requestReportData", techDataToSend, location, type);

@@ -19,6 +19,7 @@
       $scope.reportAccountsReceivable = {};
 
       $scope.loadingInProgress = false;
+      $scope.isReportAvailable = false;
 
       $scope.taxesLabels = [];
 
@@ -53,8 +54,10 @@
       function getReportByTaxes(data) {
         $scope.reportByTaxes = {};
         $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           getTaxesLabels();
           $scope.loadingInProgress = false;
         });
@@ -63,8 +66,10 @@
       function getReportByCustomers(data) {
         $scope.reportByCustomers = {};
         $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
         ReportsService.getReportByCustomers(data, function (resp) {
           $scope.reportByCustomers = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
         });
       }
@@ -72,8 +77,10 @@
       function getReportByProducts(data) {
         $scope.reportByProducts = {};
         $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
         ReportsService.getReportByProducts(data, function (resp) {
           $scope.reportByProducts = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
         });
       }
@@ -81,16 +88,20 @@
       function getReportByTechSold(data) {
         $scope.reportByTechSold={};
         $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
         ReportsService.getReportByTechSold(data, function (resp) {
           $scope.reportByTechSold = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
         });
       }
 
       function getReportRemoteAccess(data) {
         $scope.reportRemoteAccess = {};
         $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
         ReportsService.getReportRemoteAccess(data, function (resp) {
           $scope.reportRemoteAccess = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
         });
       }
@@ -98,8 +109,10 @@
       function getTechReportTickedCreated(data) {
         $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
+        $scope.isReportAvailable = false;
         ReportsService.getTechReportTicketCreated(data, function (resp) {
           $scope.techReportTicketCreated = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.responseSuccess = true;
           addDataToChartForTicketCreated($scope.techReportTicketCreated);
         })
@@ -108,8 +121,10 @@
       function getTechReportProductSales(data) {
         $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
+        $scope.isReportAvailable = false;
         ReportsService.getTechReportProductSales(data, function (resp) {
           $scope.techReportProductSales = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.responseSuccess = true;
           addDataToChartForProductSales($scope.techReportProductSales);
         })
@@ -118,6 +133,7 @@
       function getReportAccountsReceivable(data) {
         $scope.reportAccountsReceivable = {};
         $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
         var dataToSend;
         if(data.type === 'SUMMARY') {
           dataToSend = {}
@@ -128,6 +144,7 @@
         }
         ReportsService.getReportAccountsReceivable(dataToSend, function (resp) {
           $scope.reportAccountsReceivable = resp;
+          $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
         })
       }

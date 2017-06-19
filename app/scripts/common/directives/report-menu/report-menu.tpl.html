@@ -261,7 +261,7 @@
         </ul>
         <div class="fix-btn-report">
           <button class="grey-btn-report" ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)"
-                  type="button">
+                  type="button" custom-disabled="{{ !$ctrl.isReportAvailable }}">
             Send
           </button>
         </div>

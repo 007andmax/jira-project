@@ -11,7 +11,7 @@
         };
 
         $scope.changeUserSubscription = function (nameSubscription) {
-          if ($scope.users.length === 1 || (nameSubscription === 'invoice' && $scope.isLastUserWithInvoiceSubscription($scope.user.id))) {
+          if (nameSubscription === 'invoice' && $scope.isLastUserWithInvoiceSubscription($scope.user.id)) {
             return;
           }
 
