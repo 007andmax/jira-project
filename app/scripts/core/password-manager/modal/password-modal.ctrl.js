@@ -245,7 +245,11 @@
           event.stopPropagation();
         };
 
-        $scope.addNewGadget = function (name, companyId, event) {
+        $scope.addNewGadget = function (companyId, event) {
+          var name = $scope.password.newGadgetName;
+          if (name && name.length > 30) {
+            name = name.slice(0, 30);
+          }
           if (name && companyId) {
             var gadgets = $scope.gadgets;
             var selectionMap = $scope.password.selectionMap;
