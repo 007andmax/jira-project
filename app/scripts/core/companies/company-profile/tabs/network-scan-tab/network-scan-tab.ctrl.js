@@ -4,8 +4,9 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.networkScanTabCtrl',
     [
-      '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService', 'Utils',
-      function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService, Utils) {
+      '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.UserNotificationService', 'Utils',
+      function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService, UserNotificationService, Utils) {
         var lastMasterAgentId;
 
         $scope.testCredentialsModel = {};
@@ -90,6 +91,9 @@
 
               DevicesService.sendDownloadAgentLink(dto, function () {
                 $scope.savingInProcess = false;
+                $scope.downloadAgentModel.email = '';
+                $scope.downloadAgentModel.showSendMailForm = false;
+                UserNotificationService.show('Email was successfully sent!', true);
                 form.$setPristine();
               });
             }
