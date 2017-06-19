@@ -64,8 +64,8 @@
             if (!$scope.savingInProcess) {
               $scope.triedToDownload = false;
               $scope.savingInProcess = true;
-              DevicesService.downloadAgent($scope.company.id, $scope.downloadAgentModel.username,
-                $scope.downloadAgentModel.password, $scope.downloadAgentModel.autoInstall, function () {
+              DevicesService.downloadAgent($scope.company.id, $scope.downloadAgentModel.username || '',
+                $scope.downloadAgentModel.password || '', !!$scope.downloadAgentModel.autoInstall, function () {
                   $scope.savingInProcess = false;
                   form.$setPristine();
                 });
@@ -82,11 +82,11 @@
               $scope.savingInProcess = true;
 
               var dto = {
-                agentName: $scope.downloadAgentModel.username,
-                agentPassword: $scope.downloadAgentModel.password,
+                agentName: $scope.downloadAgentModel.username || '',
+                agentPassword: $scope.downloadAgentModel.password || '',
                 companyId: $scope.company.id,
                 email: $scope.downloadAgentModel.email,
-                autoGlobalRemoteInstall: $scope.downloadAgentModel.autoInstall
+                autoGlobalRemoteInstall: !!$scope.downloadAgentModel.autoInstall
               };
 
               DevicesService.sendDownloadAgentLink(dto, function () {
