@@ -526,7 +526,8 @@ a.ha-24 {
 .settings-icon {
   background-image: url("../images/new-icons/settings-na.png");
 }
-.barcode-icon{
+
+.barcode-icon {
   background-image: url("../images/new-icons/barcode.svg");
   width: 35px;
   height: 20px;
@@ -535,22 +536,26 @@ a.ha-24 {
   right: 330px;
   top: 8px;
 }
-.barcode-icon-green{
+
+.barcode-icon-green {
   background-image: url("../images/new-icons/barcode-green.png");
   width: 35px;
   height: 20px;
-  position: absolute;
   background-size: contain;
   right: 330px;
   top: 8px;
 }
 
-#Product .barcode-icon{
+#Product .barcode-icon,
+.ticket-update-edit .barcode-icon {
   position: static;
 }
-#Product .barcode-icon-green{
+
+#Product .barcode-icon-green,
+.ticket-update-edit .barcode-icon-green {
   position: static;
 }
+
 .sale-icon-for-isDicount {
   background-image: url("../images/new-icons/discount-icon.svg");
   cursor: pointer;
@@ -560,13 +565,15 @@ a.ha-24 {
   background-image: url("../images/new-icons/discount-icon-green.png");
   cursor: pointer;
 }
-.ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount{
+
+.ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
   width: 30px;
   height: 30px;
   margin: 5px 0 0 10px;
   cursor: pointer;
 }
-.ticket-update-service-edit .sale-icon-for-isDicount{
+
+.ticket-update-service-edit .sale-icon-for-isDicount {
   margin: 5px 0 0;
 }
 
@@ -674,7 +681,7 @@ a.ha-24 {
 }
 
 /*:hover > .icn-delete, :active > .icn-delete, :focus:hover > .icn-delete, :focus:active > .icn-delete, :hover:active > .icn-delete, .active > .icn-delete, .open .icn-delete, .open > .btn:hover .icn-delete {*/
-  /*background-image: url("../images/new-icons/delete-na.png");*/
+/*background-image: url("../images/new-icons/delete-na.png");*/
 /*}*/
 
 .icn-delete-white {
@@ -727,7 +734,7 @@ a.ha-24 {
 }
 
 /*:hover > .icon-user-black, :active > .icon-user-black, :focus:hover > .icon-user-black, :focus:active > .icon-user-black, :hover:active > .icon-user-black, .active > .icon-user-black, .open .icon-user-black, .open > .btn:hover .icon-user-black {*/
-  /*background-image: url("../images/new-icons/user-circle.png");*/
+/*background-image: url("../images/new-icons/user-circle.png");*/
 /*}*/
 
 .icn-priority {
@@ -863,13 +870,14 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
 }
 
 /*:hover > .icn-unassigned, div.active.icn-unassigned {*/
-  /*background-image: url("../images/new-icons/bookmark.png");*/
+/*background-image: url("../images/new-icons/bookmark.png");*/
 /*}*/
 
-.icon-calendar-dark{
+.icon-calendar-dark {
   background-image: url("../images/new-icons/calendar-dark.png");
   background-size: cover;
 }
+
 .icn-gs-tickets {
   background-position: -1052px -128px;
 }
@@ -1157,7 +1165,8 @@ a:hover > .icn-label-delete, a:active > .icn-label-delete {
   width: 14px;
   height: 10px;
 }
-.list-container .icn-label-save{
+
+.list-container .icn-label-save {
   position: absolute;
   right: -65px;
   top: 17px;
@@ -1513,7 +1522,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .icn-user-privilege, :active > .icn-user-privilege, :focus:hover > .icn-user-privilege, :focus:active > .icn-user-privilege, :hover:active > .icn-user-privilege, .active > .icn-user-privilege, .open .icn-user-privilege, .open > .btn:hover .icn-user-privilege {*/
-  /*background-image: url("../images/new-icons/medal.png");*/
+/*background-image: url("../images/new-icons/medal.png");*/
 /*}*/
 
 .icn-user-subscription {
@@ -1521,7 +1530,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .icn-user-subscription, :active > .icn-user-subscription, :focus:hover > .icn-user-subscription, :focus:active > .icn-user-subscription, :hover:active > .icn-user-subscription, .active > .icn-user-subscription, .open .icn-user-subscription, .open > .btn:hover .icn-user-subscription {*/
-  /*background-image: url("../images/new-icons/signal.png");*/
+/*background-image: url("../images/new-icons/signal.png");*/
 /*}*/
 
 /**Inside Button**/
@@ -1651,7 +1660,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-ol, :active > .wysiwyg-ol, :focus:hover > .wysiwyg-ol, :focus:active > .wysiwyg-ol, :hover:active > .wysiwyg-ol, .active > .wysiwyg-ol, .open .wysiwyg-ol, .open > .btn:hover .wysiwyg-ol {*/
-  /*background-image: url("../images/new-icons/text-italic.png");*/
+/*background-image: url("../images/new-icons/text-italic.png");*/
 /*}*/
 
 .wysiwyg-ol.active, .active > .wysiwyg-ol {
@@ -1675,7 +1684,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {*/
-  /*background-image: url("../images/new-icons/bold.png");*/
+/*background-image: url("../images/new-icons/bold.png");*/
 /*}*/
 
 .wysiwyg-bold.active, .active > .wysiwyg-bold {
@@ -1698,7 +1707,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-ul, :active > .wysiwyg-ul, :focus:hover > .wysiwyg-ul, :focus:active > .wysiwyg-ul, :hover:active > .wysiwyg-ul, .active > .wysiwyg-ul, .open .wysiwyg-ul, .open > .btn:hover .wysiwyg-ul {*/
-  /*background-image: url("../images/new-icons/list-bullets.png");*/
+/*background-image: url("../images/new-icons/list-bullets.png");*/
 /*}*/
 
 .wysiwyg-ul.active, .active > .wysiwyg-ul {
@@ -1719,7 +1728,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-unindent, :active > .wysiwyg-unindent, :focus:hover > .wysiwyg-unindent, :focus:active > .wysiwyg-unindent, :hover:active > .wysiwyg-unindent, .active > .wysiwyg-unindent, .open .wysiwyg-unindent, .open > .btn:hover .wysiwyg-unindent {*/
-  /*background-image: url("../images/new-icons/indent-left.png");*/
+/*background-image: url("../images/new-icons/indent-left.png");*/
 /*}*/
 
 /*
@@ -1738,7 +1747,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-indent, :active > .wysiwyg-indent, :focus:hover > .wysiwyg-indent, :focus:active > .wysiwyg-indent, :hover:active > .wysiwyg-indent, .active > .wysiwyg-indent, .open .wysiwyg-indent, .open > .btn:hover .wysiwyg-indent {*/
-  /*background-image: url("../images/new-icons/indent-right.png");*/
+/*background-image: url("../images/new-icons/indent-right.png");*/
 /*}*/
 
 /*.icn-wysiwyg-italic{*/
@@ -1758,7 +1767,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-italic, :active > .wysiwyg-italic, :focus:hover > .wysiwyg-italic, :focus:active > .wysiwyg-italic, :hover:active > .wysiwyg-italic, .active > .wysiwyg-italic, .open .wysiwyg-italic, .open > .btn:hover .wysiwyg-italic {*/
-  /*background-image: url("../images/new-icons/text-italic.png");*/
+/*background-image: url("../images/new-icons/text-italic.png");*/
 /*}*/
 
 .wysiwyg-italic.active, .active > .wysiwyg-italic {
@@ -1778,7 +1787,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-quote, :active > .wysiwyg-quote, :focus:hover > .wysiwyg-quote, :focus:active > .wysiwyg-quote, :hover:active > .wysiwyg-quote, .active > .wysiwyg-quote, .open .wysiwyg-quote, .open > .btn:hover .wysiwyg-quote {*/
-  /*background-image: url("../images/new-icons/quotes.png");*/
+/*background-image: url("../images/new-icons/quotes.png");*/
 /*}*/
 
 /*.icn-wysiwyg-reset{*/
@@ -1798,7 +1807,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-reset, :active > .wysiwyg-reset, :focus:hover > .wysiwyg-reset, :focus:active > .wysiwyg-reset, :hover:active > .wysiwyg-reset, .active > .wysiwyg-reset, .open .wysiwyg-reset, .open > .btn:hover .wysiwyg-reset {*/
-  /*background-image: url("../images/new-icons/refresh.png");*/
+/*background-image: url("../images/new-icons/refresh.png");*/
 /*}*/
 
 .wysiwyg-reset.disabled, .disabled .wysiwyg-reset {
@@ -1812,7 +1821,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .icn-wysiwyg-align-center, :active > .icn-wysiwyg-align-center, :focus:hover > .icn-wysiwyg-align-center, :focus:active > .icn-wysiwyg-align-center, :hover:active > .icn-wysiwyg-align-center, .active > .icn-wysiwyg-align-center, .open .icn-wysiwyg-align-center, .open > .btn:hover .icn-wysiwyg-align-center {*/
-  /*background-position: -538px -100px;*/
+/*background-position: -538px -100px;*/
 /*}*/
 
 .icn-wysiwyg-align-center.active, .active > .icn-wysiwyg-align-center {
@@ -1836,7 +1845,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .icn-wysiwyg-align-left, :active > .icn-wysiwyg-align-left, :focus:hover > .icn-wysiwyg-align-left, :focus:active > .icn-wysiwyg-align-left, :hover:active > .icn-wysiwyg-align-left, .active > .icn-wysiwyg-align-left, .open .icn-wysiwyg-align-left, .open > .btn:hover .icn-wysiwyg-align-left {*/
-  /*background-position: -598px -100px;*/
+/*background-position: -598px -100px;*/
 /*}*/
 
 .icn-wysiwyg-align-left.active, .active > .icn-wysiwyg-align-left {
@@ -1850,7 +1859,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .icn-wysiwyg-align-right, :active > .icn-wysiwyg-align-right, :focus:hover > .icn-wysiwyg-align-right, :focus:active > .icn-wysiwyg-align-right, :hover:active > .icn-wysiwyg-align-right, .active > .icn-wysiwyg-align-right, .open .icn-wysiwyg-align-right, .open > .btn:hover .icn-wysiwyg-align-right {*/
-  /*background-position: -658px -100px;*/
+/*background-position: -658px -100px;*/
 /*}*/
 
 .icn-wysiwyg-align-right.active, .active > .icn-wysiwyg-align-right {
@@ -1874,7 +1883,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-underline, :active > .wysiwyg-underline, :focus:hover > .wysiwyg-underline, :focus:active > .wysiwyg-underline, :hover:active > .wysiwyg-underline, .active > .wysiwyg-underline, .open .wysiwyg-underline, .open > .btn:hover .wysiwyg-underline {*/
-  /*background-image: url("../images/new-icons/underline.png");*/
+/*background-image: url("../images/new-icons/underline.png");*/
 /*}*/
 
 .wysiwyg-underline.active, .active > .wysiwyg-underline {
@@ -1895,7 +1904,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 /*:hover > .wysiwyg-link, :active > .wysiwyg-link, :focus:hover > .wysiwyg-link, :focus:active > .wysiwyg-link, :hover:active > .wysiwyg-link, .active > .wysiwyg-link, .open .wysiwyg-link, .open > .btn:hover .wysiwyg-link {*/
-  /*background-image: url("../images/new-icons/link.png");*/
+/*background-image: url("../images/new-icons/link.png");*/
 /*}*/
 
 /***/
@@ -1921,11 +1930,11 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 /*.disabled .icn-user-mail,*/
 /*.disabled .icn-user-mail:hover {*/
-  /*background-image: url("../images/new-icons/email-na.png");*/
+/*background-image: url("../images/new-icons/email-na.png");*/
 /*}*/
 
 /*:hover > .icn-user-mail, :active > .icn-user-mail, :focus:hover > .icn-user-mail, :focus:active > .icn-user-mail, :hover:active > .icn-user-mail, .active > .icn-user-mail, .open > .icn-user-mail, .open .icn-user-mail {*/
-  /*background-image: url("../images/new-icons/email.png");*/
+/*background-image: url("../images/new-icons/email.png");*/
 /*}*/
 
 .icn-user-chat {

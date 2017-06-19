@@ -3,9 +3,9 @@
 
   <form name="updateTicketProduct">
     <ul class="qt-table">
-      <li>
+      <li class="discount-barcode">
 
-        <div class="col-3" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}"
+        <div class="col-3" style="padding: 0;" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}"
              ng-show="isShowBarcotInputField">
 
           <input type="text"
@@ -20,7 +20,7 @@
                  tooltip-append-to-body="true"/>
         </div>
 
-        <div ng-show="isShowDiscountProductInputField" class="form-group discount-input"
+        <div ng-show="isShowDiscountProductInputField" class="form-group discount-input" style="padding: 0;"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
           <input type="text"
                  class="form-control"
@@ -85,14 +85,14 @@
                  hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
         </div>
 
-        <div class="col-4" style="width: 60px; float: left;">
+        <div class="col-4" style="width: 60px;">
           <i class="icon-sm"
              ng-class="isDiscountIconGreen(editProduct) ? 'sale-icon-for-isDicount-green' : 'sale-icon-for-isDicount' "
              ng-click="isShowDiscountProductInputField = !isShowDiscountProductInputField; isShowBarcotInputField = false"
              uib-tooltip="Edit discount"></i>
         </div>
 
-        <div class="col-4" style="width: 60px;float: left;padding-top: 6px; cursor: pointer;">
+        <div class="col-4" style="width: 60px;padding-top: 6px; cursor: pointer;">
           <i class="icon-sm"
              ng-class="isBarcodeIconGreen(editProduct) ? 'barcode-icon-green' : 'barcode-icon' "
              uib-tooltip="Serial number"
