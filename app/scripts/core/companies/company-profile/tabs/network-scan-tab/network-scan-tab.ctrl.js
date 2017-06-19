@@ -26,6 +26,7 @@
 
             if (lastMasterAgentId) {
               $scope.masterAgent = DevicesService.getOneByAgentId(lastMasterAgentId, $scope.company.id);
+              $scope.lastMasterAgent = $scope.masterAgent;
             }
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
@@ -153,6 +154,7 @@
         $scope.testCredentials = function (form) {
           if (form.$valid) {
             $scope.isTestInProgress = true;
+            $scope.triedToDownload = false;
             var deviceIds = [];
             for (var deviceId in $scope.selectedDevices) {
               if ($scope.selectedDevices[deviceId]) {
@@ -171,8 +173,11 @@
               DevicesService.testCredentials(dto, function () {
                 $scope.isTestInProgress = false;
                 $scope.testCredentialsModel = {};
+                form.$setPristine();
               });
             }
+          } else {
+            $scope.triedToDownload = true;
           }
         };
 
@@ -210,6 +215,7 @@
           $scope.runScan = true;
           $scope.scanDevices = {};
           $scope.discoveredByAgentId = $scope.masterAgent && $scope.masterAgent.agentId;
+          $scope.lastMasterAgent = $scope.masterAgent;
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
             $scope.masterAgentOffline = resp.code === 400;
             if ($scope.masterAgentOffline) {

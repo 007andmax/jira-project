@@ -535,11 +535,32 @@ a.ha-24 {
   right: 330px;
   top: 8px;
 }
+.barcode-icon-green{
+  background-image: url("../images/new-icons/barcode-green.png");
+  width: 35px;
+  height: 20px;
+  position: absolute;
+  background-size: contain;
+  right: 330px;
+  top: 8px;
+}
+
+#Product .barcode-icon{
+  position: static;
+}
+#Product .barcode-icon-green{
+  position: static;
+}
 .sale-icon-for-isDicount {
   background-image: url("../images/new-icons/discount-icon.svg");
   cursor: pointer;
 }
-.ticket-add-content .sale-icon-for-isDicount, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount{
+
+.sale-icon-for-isDicount-green {
+  background-image: url("../images/new-icons/discount-icon-green.png");
+  cursor: pointer;
+}
+.ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount{
   width: 30px;
   height: 30px;
   margin: 5px 0 0 10px;

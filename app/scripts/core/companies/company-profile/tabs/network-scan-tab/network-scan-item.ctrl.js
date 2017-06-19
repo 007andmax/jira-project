@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.networkScanItemCtrl',
-    ['$scope', 'CompaniesService', 'DevicesService', '$filter',
-      function ($scope, CompaniesService, DevicesService, $filter) {
+    [
+      '$scope', 'CompaniesService', 'DevicesService', '$filter', '$uibModal',
+      function ($scope, CompaniesService, DevicesService, $filter, $uibModal) {
 
         $scope.deviceDescription = $filter('unknownFilter')($scope.device.description);
         $scope.deviceEditDescription = $scope.device.description;
@@ -59,8 +60,6 @@
 
             $scope.device.changingStatus = false;
             $scope.device.status.message = 'Incorrect';
-            $scope.device.status.statusValue = false;
-            $scope.device.status.online = false;
 
           } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'loginError') {
 
@@ -91,6 +90,81 @@
           }
         });
 
-      }]);
+        var unsubscribe = $scope.$on('masterAgentWrongCredentials-' + $scope.device.deviceId, function () {
+          if (!$scope.modalInstance) {
+            $scope.modalInstance = openChangeMasterAgentCredentialsModal($scope.device.deviceId);
+          }
+        });
+
+        $scope.$on('$destroy', function () {
+          unsubscribe();
+        });
+
+        function openChangeMasterAgentCredentialsModal(deviceId) {
+          var modalInstance = $uibModal.open({
+            templateUrl: '/html/scripts/core/companies/company-profile/tabs/network-scan-tab/change-credentials-modal.tpl.html',
+            controller: [
+              '$scope', '$uibModalInstance', 'companyId', 'discoveredByAgentId', 'deviceIds', 'DevicesService',
+              function ($scope, $uibModalInstance, companyId, discoveredByAgentId, deviceIds, DevicesService) {
+                $scope.dto = {
+                  login: '',
+                  password: '',
+                  companyId: companyId,
+                  discoveredByAgentId: discoveredByAgentId,
+                  deviceIds: deviceIds
+                };
+                $scope.close = $uibModalInstance.dismiss;
+
+                $scope.isShowingErrors = function (form, fieldName) {
+                  return form[fieldName] && ($scope.triedToUpdate || form[fieldName].$dirty) && form[fieldName].$invalid;
+                };
+
+                $scope.testAndUpdateCredentials = function (form) {
+                  if (form.$valid) {
+                    $scope.isUpdateInProgress = true;
+                    $scope.triedToUpdate = false;
+                    DevicesService.testCredentials($scope.dto, function () {
+                      $uibModalInstance.dismiss();
+                      $scope.isUpdateInProgress = false;
+                    });
+                  } else {
+                    $scope.triedToUpdate = true;
+                  }
+                };
+              }
+            ],
+            windowClass: 'wrong-credentials-modal',
+            backdrop: true,
+            animation: true,
+            resolve: {
+              companyId: function () {
+                return $scope.company.id;
+              },
+              discoveredByAgentId: function () {
+                return $scope.discoveredByAgentId;
+              },
+              deviceIds: function () {
+                return [deviceId];
+              },
+              testAndUpdateCredentials: function () {
+                return $scope.testCredentials;
+              }
+            }
+          });
+
+          modalInstance.opened.then(function () {
+            $('body').addClass('non-body-scroll');
+          });
+
+          modalInstance.result.finally(function () {
+            $('body').removeClass('non-body-scroll');
+            $scope.modalInstance = null;
+          });
+
+          return modalInstance;
+        }
+
+      }
+    ]);
 
 }());

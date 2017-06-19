@@ -76,6 +76,16 @@
               if (callbackForRemoteConnection[newChange.data.sessionId]) {
                 callbackForRemoteConnection[newChange.data.sessionId]();
               }
+            } else if (newChange.action === 'TEST_CREDENTIALS') {
+              if (scannedDevices[newChange.data.companyId]) {
+                var device = _getDeviceByAgentId(devices[newChange.data.companyId], newChange.data.agentId);
+                if (device) {
+                  device = _getNetScanByDeviceId(scannedDevices[newChange.data.companyId], device.id);
+                  if (device && newChange.data.testResult.toUpperCase() === 'FAIL') {
+                    $rootScope.$broadcast('masterAgentWrongCredentials-' + device.deviceId);
+                  }
+                }
+              }
             }
           });
 
@@ -565,6 +575,9 @@
               for (var i = 0; i < newChange.data.length; i++) {
                 var agentPassword = newChange.data[i];
                 var device = Utils.findById(scannedDevices[companyId], agentPassword.deviceId);
+                if (!device) {
+                  device = _getNetScanByDeviceId(scannedDevices[companyId], agentPassword.deviceId);
+                }
                 device.agentPassword = device.agentPassword || {};
                 Utils.customizeObj(agentPassword, device.agentPassword);
               }
@@ -713,6 +726,15 @@
         for (var i = 0; i < devices.length; i++) {
           var device = devices[i];
           if (device.id === agentId) {
+            return device;
+          }
+        }
+      }
+
+      function _getNetScanByDeviceId(devices, deviceId) {
+        for (var i = 0; i < devices.length; i++) {
+          var device = devices[i];
+          if (device.deviceId === deviceId) {
             return device;
           }
         }

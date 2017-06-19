@@ -56,7 +56,7 @@
                   quantity: $scope.editProduct.quantity,
                   date: $scope.editProduct.date,
                   discountAmount: $scope.editProduct.discountAmount,
-                  discountType: $scope.editProduct.discountType
+                  discountType: 'PERCENT'
 
                 }
               }, function () {

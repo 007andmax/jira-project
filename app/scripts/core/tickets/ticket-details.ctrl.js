@@ -326,9 +326,17 @@
 
               if ($scope.ticketUpdate.products) {
 
+                for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
+                  $scope.ticketUpdate.products[i].discountType = 'PERCENT';
+                }
+
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
 
               } else if ($scope.ticketUpdate.services) {
+
+                for(var i=0; i<$scope.ticketUpdate.services.length; i++) {
+                  $scope.ticketUpdate.services[i].discountType = 'PERCENT';
+                }
 
                 ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
 
