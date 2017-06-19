@@ -4655,6 +4655,10 @@ Devices tab
 /*width: 95px;*/
 /*}*/
 /*}*/
+.wrong-credentials-modal .modal-content{
+  width: 420px;
+  border-radius: 10px;
+}
 .network-scan-modal{
   padding: 30px;
   border-radius: 56px;
