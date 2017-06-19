@@ -19,6 +19,9 @@
         };
 
         $scope.saveDescription = function (deviceDescription) {
+          if (deviceDescription && deviceDescription.length > 30) {
+            deviceDescription = deviceDescription.slice(0, 30);
+          }
           DevicesService.sendDescription($scope.company.id, $scope.device.id, deviceDescription, function () {
             $scope.device.description = deviceDescription;
             $scope.isEditDescrOpened = false;
