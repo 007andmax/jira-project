@@ -58,9 +58,7 @@
                   quantity: $scope.editProduct.quantity,
                   date: $scope.editProduct.date,
                   discountAmount: $scope.editProduct.discountAmount,
-                  discountType: 'PERCENT',
-
-
+                  discountType: 'PERCENT'
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a product has been modified', true);
