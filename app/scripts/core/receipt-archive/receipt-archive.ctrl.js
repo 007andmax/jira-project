@@ -59,7 +59,10 @@
                 sumByCompany = 0;
 
               for (var j = 0; j < invoices.length; j++) {
-                sumByCompany += invoices[j].sum;
+                var invoice = invoices[j];
+                if (!invoice.deletedAt) {
+                  sumByCompany += invoice.sum;
+                }
               }
 
               $scope.totalCompanySum[companyId] = sumByCompany;
@@ -76,21 +79,21 @@
             $scope.loadingInProgress = false;
           }
         });
-  
+
         $scope.$watch('invoiceToSent', function () {
-    
+
           $scope.selectedInvoiceCount = 0;
           var disabledCount = 0,
             invoices;
-    
+
           if ($stateParams.mode === 'group-by-company') {
-      
+
             for (var companyId in $scope.invoiceToSent) {
               var invoiceToSent = $scope.invoiceToSent[companyId],
                 companyChecked = invoiceToSent.checked;
-        
+
               invoices = invoiceToSent.invoices;
-        
+
               if (invoices) {
                 for (var invoiceId in invoices) {
                   if (invoices[invoiceId]) {
@@ -102,21 +105,21 @@
                   }
                 }
               }
-        
+
               if (companyChecked) {
                 disabledCount++;
                 $scope.selectableCompanyId = companyId;
               }
             }
-      
+
           } else {
-      
+
             if (!$scope.invoiceToSent) {
               return;
             }
-      
+
             invoices = $scope.invoiceToSent.invoices;
-      
+
             for (var invoiceId in invoices) {
               if (invoices[invoiceId]) {
                 $scope.selectedInvoiceCount++;
@@ -129,9 +132,9 @@
                 }
               }
             }
-      
+
           }
-    
+
           if (disabledCount === 0) {
             $scope.selectableCompanyId = undefined;
           }
@@ -167,35 +170,35 @@
         $scope.filterByCompany = function (invoice) {
           return !$scope.headerSharedState.filter.companyId || invoice.company.id === $scope.headerSharedState.filter.companyId;
         };
-  
+
         $scope.changeCompanyCheckbox = function (companyId) {
-    
+
           var invoiceToSentData = $scope.invoiceToSent[companyId];
-    
+
           if (invoiceToSentData) {
-      
+
             var invoices = $scope.receiptArchiveData.companies[companyId];
-      
+
             for (var j = 0; j < invoices.length; j++) {
               invoiceToSentData.invoices[invoices[j].id] = invoiceToSentData.checked;
             }
           }
         };
-  
+
         $scope.resendSelectedInvoices = function () {
           var invoiceIds = getSelectedInvoices($scope.invoiceToSent);
-  
+
           $scope.sendingInvoices = true;
           ReceiptArchiveService.resendInvoices(invoiceIds, function () {
             $scope.sendingInvoices = false;
           });
         };
-  
+
         $scope.deleteSelectedInvoices = function () {
           var invoiceIds = getSelectedInvoices($scope.invoiceToSent);
           ReceiptArchiveService.deleteInvoices(invoiceIds);
         };
-        
+
         function getSelectedInvoices(invoiceToSent) {
           var invoiceIds = [];
           if ($stateParams.mode === 'list') {
@@ -208,7 +211,7 @@
           } else {
             for (var companyId in invoiceToSent) {
               var invoices = invoiceToSent[companyId].invoices;
-      
+
               for (var invoiceId in invoices) {
                 if (invoices[invoiceId]) {
                   invoiceIds.push(invoiceId);
