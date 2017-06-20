@@ -121,10 +121,13 @@
             </li>
           </ul>
         </div>
-        <div class="form-group col-sm-3">
-          <label>{{ editInvoice && editInvoice.id ? 'Remain generations' : 'Num. to generate' }}</label>
+        <div class="form-group col-sm-3" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'numToGenerate')}">
+          <label class="control-label">
+            {{ editInvoice && editInvoice.id ? 'Remain generations' : 'Num. to generate' }}
+          </label>
+
           <input class="form-control" type="text" ng-model="paramInvocie.remainGenerations" placeholder="&infin;"
-                 custom-disabled="{{ disabledEndAndNum }}" name="numToGenerate"
+                 custom-disabled="{{ disabledEndAndNum }}" name="numToGenerate" hard-reset-required="true"
                  ng-change="changeNumToGenerate()" hard-reset-pattern="numToGeneratePattern">
         </div>
         <div class="form-group col-sm-3">
