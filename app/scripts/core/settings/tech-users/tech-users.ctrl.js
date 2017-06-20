@@ -56,7 +56,7 @@
             $scope.editUserId = 'new_user';
           } else if (user) {
             $scope.editUserId = user.id;
-            $scope.editUser = user.staticCopy();
+            $scope.editUser = angular.copy(user);
           } else {
             $scope.editUserId = '';
             $scope.editUser = null;

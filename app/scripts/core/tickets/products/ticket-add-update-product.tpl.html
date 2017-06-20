@@ -9,7 +9,7 @@
           <input type="text"
                  class="form-control"
                  name="productSerialNumber"
-                 placeholder="Barcode"
+                 placeholder="Serial number"
                  ng-model="productExpense.serialNumber"
                  ng-maxlength="55"
                  execute-when-outfocused="isShowBarcotInputField = false"
@@ -71,7 +71,8 @@
                  placeholder="Cost"
                  ng-max="productExpense.item.sale"
                  ng-model="productExpense.item.cost"
-                 tooltip-append-to-body="true"/>
+                 tooltip-append-to-body="true"
+                 ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"/>
         </div>
 
         <div class="col-4" style="width: 70px; float: left;"
@@ -86,7 +87,7 @@
         <div class="col-3 price-width" style="width: 115px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
-          <input type="text" class="form-control" placeholder="Price" qt-to-fixed="2"
+          <input type="number" class="form-control" placeholder="Price" qt-to-fixed="2"
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                  name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
@@ -99,7 +100,7 @@
         </div>
 
         <div class="col-4" style="width: 60px;float: left;padding-top: 6px; cursor: pointer;">
-          <i class="icon-sm" uib-tooltip="barcode" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
+          <i class="icon-sm" uib-tooltip="Serial number" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
 
