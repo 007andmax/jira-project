@@ -31,7 +31,7 @@
       <span custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.companySettings }}"
             class="confirm-arrow"></span>
     </div>
-    <div class="setup-point" create-new-entity="company" ng-click="subscribeOnCreatingCompany()">
+    <div class="setup-point" create-new-entity="company" ng-click="closeModal()">
       <img src="images/input-icons/group.png" alt="">
       <p>Setup Client</p>
       <span custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.setupClient }}"

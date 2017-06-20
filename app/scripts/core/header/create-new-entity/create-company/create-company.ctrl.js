@@ -215,7 +215,9 @@
               $scope.savingInProcess = false;
               if (!resp.code || resp.code === 200) {
                 $scope.disablePreventingLocationChange = true;
-
+                if (!$scope.currentUser.wizardTracker || !$scope.currentUser.wizardTracker.setupClient) {
+                  UsersService.updateWelcomeWizard('setupClient');
+                }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
                 if (!$scope.savedState.items.length) {
                   $scope.closeWindow();

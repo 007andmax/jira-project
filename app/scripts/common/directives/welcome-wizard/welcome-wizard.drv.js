@@ -86,11 +86,8 @@
               });
             };
 
-            $scope.subscribeOnCreatingCompany = function () {
-              $rootScope.$on('newCompanyHasBeenCreated', function () {
-                UsersService.updateWelcomeWizard('setupClient', $scope.dontShowThisAgain);
-              });
-              $uibModalInstance.dismiss()
+            $scope.closeModal = function () {
+              $uibModalInstance.dismiss();
             };
           }
         }
