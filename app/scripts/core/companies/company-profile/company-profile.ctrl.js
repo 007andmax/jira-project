@@ -49,7 +49,6 @@
           return;
         }
 
-        globalSearch.openedItemName = $scope.company.name;
         rightPanelSharedState.companyId = $scope.company.id;
 
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
@@ -71,6 +70,12 @@
           return $state.params.tabName;
         }, function (tabName, prevTab) {
           $scope.tabName = tabName;
+        });
+
+        $scope.$watch('company.name', function (companyName) {
+          if (companyName) {
+            globalSearch.openedItemName = companyName;
+          }
         });
 
         $scope.archiveCompany = function () {
