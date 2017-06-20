@@ -110,7 +110,7 @@
           var devices = $scope.scanDevices.devices;
           for (var i = 0; i < devices.length; i++) {
             var device = devices[i];
-            $scope.selectedDevices[device.id] = $scope.isAllSelected;
+            $scope.selectedDevices[device.status.statusValue ? device.deviceId : device.id] = $scope.isAllSelected;
           }
         };
 
@@ -118,7 +118,7 @@
           var keys = Object.keys($scope.selectedDevices);
           var devices = $scope.scanDevices.devices;
           if (keys.length === devices.length) {
-            $scope.isAllSelected = keys.each(function (key) {
+            $scope.isAllSelected = keys.every(function (key) {
               return $scope.selectedDevices[key];
             });
           } else {
