@@ -69,7 +69,9 @@
 
             var currentUser = getCurrentUser();
             if (currentUser.id === newChange.data.id) {
+              var permissions = currentUser.permissions;
               Utils.customizeObj(newChange.data, currentUser);
+              currentUser.permissions = permissions;
               return;
             }
 
