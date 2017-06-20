@@ -6,7 +6,7 @@
 
   var services = angular.module('main.services');
 
-  services.factory('EmailSettingsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, Utils) {
+  services.factory('EmailSettingsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
 
     function saveNumberForm(data, type, callback) {
 

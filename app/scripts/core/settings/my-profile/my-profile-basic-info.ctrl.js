@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.myProfileBasicInfoCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'UsersService',
-      function ($scope, $state, $stateParams, $location, UsersService) {
+    ['$scope', '$state', '$stateParams', '$location', 'UsersService', '$timeout',
+      function ($scope, $state, $stateParams, $location, UsersService, $timeout) {
 
         $scope.editUser = angular.copy($scope.currentUser);
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -35,9 +35,7 @@
         });
 
         $scope.saveBasicInfo = function (form) {
-
           if (form.$valid) {
-
             var userObjToSend = {
               avatar: $scope.editUser.avatar,
               firstName: $scope.editUser.firstName,
@@ -49,7 +47,7 @@
               }
             };
 
-            if (($scope.editUser.secondaryEmail != undefined) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
+            if (($scope.editUser.secondaryEmail != null) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
               userObjToSend.secondaryEmail = undefined;
             } else {
               userObjToSend.secondaryEmail = $scope.editUser.secondaryEmail;
@@ -59,8 +57,13 @@
               form.$setPristine();
             })
           }
+        };
 
-        }
+        $scope.saveBasicInfoWithTimeout = function (form) {
+          $timeout(function () {
+            $scope.saveBasicInfo(form);
+          }, 150);
+        };
 
       }]);
 

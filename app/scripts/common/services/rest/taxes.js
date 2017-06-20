@@ -6,7 +6,7 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TaxesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, Utils) {
+  services.factory('TaxesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
 
     var taxes = [],
       $serviceScope = $rootScope.$new();

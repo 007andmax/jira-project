@@ -8,8 +8,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'UsersService',
-    function ($http, $rootScope, RealTimeService, Utils, UsersService) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
+    function ($http, $rootScope, RealTimeService, Utils) {
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];

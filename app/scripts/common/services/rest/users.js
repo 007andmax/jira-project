@@ -6,8 +6,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('UsersService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService', 'localStorageService',
-    function ($http, $rootScope, RealTimeService, Utils, CompaniesService, localStorageService) {
+  services.factory('UsersService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
+    function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
 
       var serviceScope = $rootScope.$new(),
         initListeners = [],

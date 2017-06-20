@@ -6,8 +6,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('ProductsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
-    function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
+  services.factory('ProductsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
+    function ($http, $rootScope, RealTimeService, Utils) {
 
       function search(keyword) {
 

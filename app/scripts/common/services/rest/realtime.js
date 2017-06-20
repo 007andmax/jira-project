@@ -67,21 +67,23 @@
         return;
       }
 
-      var subscription = stompClient.subscribe(
-        "/user/watch" + config.url,
-        function (message) {
-          var newChange = JSON.parse(message.body);
-          console.log(newChange);
-          config.callback(newChange);
-          config.scope.$apply();
-        });
+      if (stompClient) {
+        var subscription = stompClient.subscribe(
+          "/user/watch" + config.url,
+          function (message) {
+            var newChange = JSON.parse(message.body);
+            console.log(newChange);
+            config.callback(newChange);
+            config.scope.$apply();
+          });
 
-      config.scope.$on('$destroy', function (info) {
-        if (info.targetScope && info.targetScope.$id === config.scope.$id) {
-          subscription.unsubscribe();
-          delete subscriptionConfigs[config.id];
-        }
-      });
+        config.scope.$on('$destroy', function (info) {
+          if (info.targetScope && info.targetScope.$id === config.scope.$id) {
+            subscription.unsubscribe();
+            delete subscriptionConfigs[config.id];
+          }
+        });
+      }
 
     }
 

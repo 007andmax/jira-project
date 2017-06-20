@@ -6,7 +6,7 @@
 
   var services = angular.module('main.services');
 
-  services.factory('RecurringService', ['$http', '$rootScope', 'RealTimeService', 'CompaniesService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, CompaniesService, Utils) {
+  services.factory('RecurringService', ['$http', '$rootScope', 'RealTimeService', 'CompaniesService', 'Utils', function ($http, $rootScope, RealTimeService, CompaniesService, Utils) {
 
     function getRecurringCompanies(scope, callback) {
 

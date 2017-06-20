@@ -131,7 +131,7 @@
 
               <div class="form-group full-width" text-editor ng-model="userProfile.signature.content"
                    te-initial-value="{{ userProfile.signature.content }}"
-                   te-text-maxlength="5000" te-html-maxlength="50000" name="signature"
+                   te-text-maxlength="5000" te-html-maxlength="5000" name="signature"
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'signature')}">
 
                 <label class="control-label" ng-hide="isShowingErrors(basicInfoForm, 'signature')">
@@ -146,7 +146,7 @@
 
                 <div id="editor" class="form-control editor" contenteditable="true"
                      te-editor contenteditable="true" placeholder="Type your message..."
-                     execute-when-outfocused="saveBasicInfo(basicInfoForm)"></div>
+                     execute-when-outfocused="saveBasicInfoWithTimeout(basicInfoForm)"></div>
 
                 <div class="wysiwyg-controls-wrapper clearfix">
 
@@ -173,55 +173,6 @@
                         <i class="icon-sm wysiwyg-underline"></i>
                       </a>
 
-                    </div>
-
-                    <div class="quote-link pull-left">
-                      <div class="dropup pull-left" uib-dropdown>
-
-                        <a class="hit-area ha-19-14 pull-left has-tooltip"
-                           uib-dropdown-toggle
-                           uib-tooltip="Add Link" tooltip-placement="top" tooltip-append-to-body="true"
-                           tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
-                          <i class="icon-sm wysiwyg-link"></i>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                          <li>
-                            <div class="add-link-form clearfix">
-
-                              <div class="form-group" ng-class="{'has-error': validLink.required || validLink.pattern}">
-
-                                <div class="form-group clearfix">
-                                  <label class="control-label" ng-show="validLink.required">Link is required.</label>
-                                  <label class="control-label" ng-show="validLink.pattern && !validLink.required">
-                                    Please enter a valid link.
-                                  </label>
-                                </div>
-
-                                <input type="text" class="form-control"
-                                       data-edit="createLink" placeholder="http://"
-                                       ng-model="editorLink" ng-change="validateLink(editorLink)">
-                              </div>
-
-                              <div class="form-group">
-
-                                <div class="btn btn-lg btn-primary pull-left"
-                                     custom-disabled="{{ validLink.pattern }}">
-                                  Add
-                                </div>
-
-                                <div class="btn btn-lg btn-primary pull-left"
-                                     data-edit="unlink">
-                                  Cancel
-                                </div>
-
-                              </div>
-
-                            </div>
-                          </li>
-                        </ul>
-
-                      </div>
                     </div>
                   </div>
 

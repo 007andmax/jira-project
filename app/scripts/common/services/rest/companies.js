@@ -6,7 +6,7 @@
 
   var services = angular.module('main.services');
 
-  services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, Utils) {
+  services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
 
     var serviceScope = $rootScope.$new(),
       initialized = false,
