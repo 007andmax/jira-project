@@ -152,7 +152,7 @@
     <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
-        ui-sref="companyProfile({ companyId: company.id })">
+        ng-click="openCompany(company)">
       <div class="col-xs-3">
         <div style="min-height: 38px; display: inline-block; float: left;"><img
           ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
