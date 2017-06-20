@@ -11199,6 +11199,14 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   margin: 0 72px 0 0;
 }
 
+.ticket-update-product-edit .discount-barcode {
+  width: 242px;
+  padding: 0;
+  position: absolute;
+  right: 252px;
+  top: 106px;
+}
+
 @media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 512px);
@@ -11237,6 +11245,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 @media only screen and (max-width: 1600px) {
   .invoices-header .dropdown-menu > li > a {
     padding: 4px 20px;
+  }
+
+  .ticket-update-product-edit .discount-barcode {
+    right: 208px;
   }
 
   .opened-ticket .col-3 {
@@ -11291,9 +11303,11 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     margin-right: 5px;
   }
-  .discount-barcode{
+
+  .discount-barcode {
     position: relative;
   }
+
   .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
     position: absolute;
     right: 0;

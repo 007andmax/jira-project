@@ -34,8 +34,9 @@
               var isPriceChange = $scope.product.item.sale != $scope.editProduct.item.sale;
               var isDiscountAmountChange = $scope.product.discountAmount != $scope.editProduct.discountAmount;
               var isDiscounttypeChange = $scope.product.discountType != $scope.editProduct.discountType;
+              var isCostChange = $scope.product.item.cost != $scope.editProduct.item.cost;
 
-              if (!(isProductItemChange || isQuantityChange || isSerialNumberQuantity || isPriceChange || isDiscountAmountChange || isDiscounttypeChange)) {
+              if (!(isProductItemChange || isQuantityChange || isSerialNumberQuantity || isPriceChange || isDiscountAmountChange || isDiscounttypeChange || isCostChange)) {
                 $scope.setEditExpenseId();
                 return;
               }
@@ -50,14 +51,14 @@
                   id: $scope.editProduct.id,
                   item: {
                     sale: $scope.editProduct.item.sale,
-                    versionedId: { id: editVersionedId.id, version: editVersionedId.version }
+                    versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                    cost: $scope.editProduct.item.cost
                   },
                   serialNumber: $scope.editProduct.serialNumber,
                   quantity: $scope.editProduct.quantity,
                   date: $scope.editProduct.date,
                   discountAmount: $scope.editProduct.discountAmount,
                   discountType: 'PERCENT'
-
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a product has been modified', true);
@@ -94,6 +95,22 @@
               } else if (errorKey === 'maxLengthWord') {
                 return 'Words in description should not be more than 100 characters';
               }
+            }
+          };
+
+          $scope.isDiscountIconGreen = function(editProduct) {
+            if(editProduct.discountAmount === null || editProduct.discountAmount === undefined || editProduct.discountAmount === "") {
+              return false
+            } else {
+              return true
+            }
+          };
+
+          $scope.isBarcodeIconGreen = function(editProduct) {
+            if(editProduct.serialNumber === null || editProduct.serialNumber === undefined || editProduct.serialNumber === "") {
+              return false
+            } else {
+              return true
             }
           };
 
