@@ -90,7 +90,9 @@
                       if (finish.code === 400 || finish.code === 500) {
                         onFileError(finish.message.split(';')[0], file);
                       } else {
-                        file.shown = true;
+                        $timeout(function () {
+                          file.shown = true;
+                        });
                       }
 
                       file.id = finish.id;
