@@ -175,7 +175,7 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-users" ng-if="usersView === 'list'" style="margin-top: 70px;" scroll-pagination qt-scroll-to="top" offset="83">
+  <ul class="qt-list qt-users" ng-if="usersView === 'list'" style="margin-top: 70px;margin-bottom: 100px;" scroll-pagination qt-scroll-to="top" offset="83">
 
     <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
         ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) | limitTo: displayLimit track by user.id">

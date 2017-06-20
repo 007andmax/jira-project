@@ -3981,6 +3981,12 @@ Devices tab
 
 .network-scan .qt-network-scan .checkbox-caption {
   margin: 0;
+  display: inline-block;
+  width: 84%;
+}
+.network-scan .qt-network-scan .checkbox-caption input{
+  width: 100%;
+  padding: 0;
 }
 
 .network-scan .device-name {
@@ -4721,13 +4727,18 @@ Devices tab
   .no-agent .send-by-email {
     padding: 0 0 10px 183px;
   }
+  .run-scan [class*=network-scan-item-]  .master-agent ul{
+    left: 108px;
+  }
 }
 
 @media only screen and (max-width: 1600px) {
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 10%;
   }
-
+  .run-scan [class*=network-scan-item-]  .master-agent ul{
+    left: 17px;
+  }
   .no-agent .send-by-email {
     padding: 0 0 10px 109px;
   }
@@ -4755,7 +4766,12 @@ Devices tab
   .network-scan .qt-network-scan .col-1 p {
     font-size: 12px;
   }
-
+  .network-scan .qt-network-scan .checkbox-caption{
+    width: 78%;
+  }
+  .run-scan [class*=network-scan-item-]  .master-agent ul{
+    left: 0;
+  }
   .no-agent .send-by-email {
     padding: 0 0 10px 70px;
   }
@@ -4783,7 +4799,9 @@ Devices tab
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 12% !important;
   }
-
+  .network-scan .qt-network-scan .checkbox-caption input{
+    width: 96%;
+  }
   .no-agent .send-by-email {
     padding: 0 0 10px 56px;
   }

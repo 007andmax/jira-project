@@ -1360,6 +1360,9 @@
   .list-company-row{
     align-items: flex-start;
   }
+  .restore{
+    top: 20px;
+  }
 }
 .qwe {
   width: 38px;

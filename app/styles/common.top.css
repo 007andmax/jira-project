@@ -1,8 +1,8 @@
 .topNavbar {
 }
 
-.topNavbar-content {
-
+.topNavbar-content div{
+  margin-right: 5px;
 }
 
 .topNavbar-title {
@@ -18,6 +18,7 @@
   -ms-align-items: center;
   align-items: center;
   height: 40px;
+  white-space: normal;
 }
 
 .topNavbarLeft .searchField {

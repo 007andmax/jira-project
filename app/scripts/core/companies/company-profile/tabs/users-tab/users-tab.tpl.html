@@ -167,7 +167,7 @@
         </div>
 
         <div class="col-5">
-          <div class="list-actions text-right right-align-tooltip">
+          <div class="list-actions text-right">
 
             <div class="btn btn-icn btn-default  has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
@@ -180,12 +180,15 @@
               <i class="icon-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-icn btn-default pad-top has-tooltip" ng-click="archiveUser()"
-                 custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
+            <div class="right-align-tooltip">
+              <div class="btn btn-icn btn-default pad-top has-tooltip" ng-click="archiveUser()"
+                   custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"
-                 tooltip-placement="top" uib-tooltip="Archive this User">
-              <i class="icn-sm icn-remove-old"></i>
+                   tooltip-placement="top" uib-tooltip="Archive this User">
+                <i class="icn-sm icn-remove-old"></i>
+              </div>
             </div>
+
           </div>
         </div>
       </div>

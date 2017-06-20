@@ -6,7 +6,7 @@
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxes | orderBy: 'name' track by tax.id">
-          <label class="control checkbox">
+          <label class="control checkbox ellipsis">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
                    ng-change="$ctrl.updateEntityTaxList(tax)">
             {{ tax.name }}&nbsp;{{ tax.rate }}%

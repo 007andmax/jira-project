@@ -38,7 +38,7 @@
 
         <button class="btn btn-icn phone-btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
                 tooltip-placement="top" uib-tooltip="Remove" tabindex="22" ng-disabled="$eval(disabled)">
-          <i class="icn-sm icn-remove-token-light"></i>
+          <i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
         </button>
 
       </div>
@@ -86,14 +86,14 @@
           <button cns-if class="btn phone-btn btn-icn btn-primary has-tooltip pull-right" ng-disabled="$eval(disabled)"
                   tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()"
                   tabindex="{{ 22 + $index * 3 }}">
-            <i class="icn-sm icn-plus"></i>
+            <i style="margin-top: 12px;" class="icn-sm icn-plus"></i>
           </button>
 
           <button cns-else class="btn phone-btn btn-icn btn-primary has-tooltip pull-right"
                   tabindex="{{ 23 + $index * 3 }}"
                   tooltip-placement="top" title="" uib-tooltip="Remove"
                   ng-click="removePhoneNumber($index)" ng-disabled="$eval(disabled)">
-            <i class="icn-sm icn-remove-token-light"></i>
+            <i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
           </button>
 
         </div>

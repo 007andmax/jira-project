@@ -1016,7 +1016,10 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-
+.billable-content .bootstrap-datetimepicker-widget.dropdown-menu{
+  right: 0 !important;
+  left: auto!important;
+}
 .receivable-content .product-list-ticket {
   box-shadow: none;
   border: none;
@@ -11072,6 +11075,7 @@ button.close {
 
 .assign-ticket {
   min-width: 200px;
+  font-size: 14.1px;
 }
 
 .free-number-link {

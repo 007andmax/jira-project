@@ -111,7 +111,7 @@
             <div class="col-1"
                  ng-class="{'has-error': isShowingErrors(editTaxForm, 'name')}">
 
-              <div ng-messages="editTaxForm.name.$error"
+              <div ng-messages="editTaxForm.name.$error" style="position: absolute;top: -25px;left: 5px;"
                    ng-class="{'hide': !isShowingErrors(editTaxForm, 'name')}">
 
                 <label class="control-label" ng-message="required">

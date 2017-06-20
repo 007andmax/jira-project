@@ -19,6 +19,10 @@ body.non-body-scroll::-webkit-scrollbar {
 .modal-create-ticket .dropdown-menu {
   /*margin-bottom: 20px;*/
   width: auto;
+  max-width: 260px;
+}
+.modal-create-ticket .checkbox-dropdown .list-container label{
+  padding: 13px 40px 13px 15px;
 }
 .modal-create-ticket .col-xs-12 .dropdown-menu{
   width: 100%;
@@ -1928,4 +1932,7 @@ span.sort-span {
 .right-align-tooltip .tooltip {
   right: 0 !important;
   left: initial !important;
+}
+.right-align-tooltip{
+  display: inline-block;
 }
