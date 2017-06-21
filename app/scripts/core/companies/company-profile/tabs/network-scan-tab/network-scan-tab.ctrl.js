@@ -176,7 +176,6 @@
               };
               DevicesService.testCredentials(dto, function () {
                 $scope.isTestInProgress = false;
-                $scope.testCredentialsModel = {};
                 form.$setPristine();
               });
             }
@@ -185,25 +184,32 @@
           }
         };
 
-        $scope.installAgents = function () {
-          $scope.isInstallInProgress = true;
+        $scope.installAgents = function (form) {
+          if (form.$valid) {
+            $scope.isInstallInProgress = true;
+            $scope.triedToDownload = false;
 
-          var deviceIds = [];
-          for (var deviceId in $scope.selectedDevices) {
-            if ($scope.selectedDevices[deviceId]) {
-              deviceIds.push(deviceId);
-              $scope.selectedDevices[deviceId] = false;
+            var deviceIds = [];
+            for (var deviceId in $scope.selectedDevices) {
+              if ($scope.selectedDevices[deviceId]) {
+                deviceIds.push(deviceId);
+              }
             }
+            if (deviceIds.length) {
+              var dto = {
+                login: $scope.testCredentialsModel.agentName,
+                password: $scope.testCredentialsModel.agentPassword,
+                companyId: $scope.company.id,
+                deviceIds: deviceIds,
+                discoveredByAgentId: $scope.discoveredByAgentId
+              };
+              DevicesService.sendInstallAgentRequests(dto, function () {
+                $scope.isInstallInProgress = false;
+              });
+            }
+          } else {
+            $scope.triedToDownload = true;
           }
-
-          var dto = {
-            companyId: $scope.company.id,
-            deviceIds: deviceIds,
-            discoveredByAgentId: $scope.discoveredByAgentId
-          };
-          DevicesService.sendInstallAgentRequests(dto, function () {
-            $scope.isInstallInProgress = false;
-          });
         };
 
         $scope.saveMasterAgent = function (masterAgent) {
