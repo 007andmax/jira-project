@@ -586,7 +586,9 @@
               Password
             </div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info</div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount">Deactivate Account
+            <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount"
+                 ng-if="currentUser.isOwner">
+              Deactivate Account
             </div>
           </div>
         </div>
