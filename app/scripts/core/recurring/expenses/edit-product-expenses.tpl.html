@@ -31,7 +31,7 @@
        ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productQty')}">
 
     <input type="text" class="form-control" placeholder="Qty"
-           ng-model="product.quantity" ng-maxlength="10"
+           ng-model="product.quantity" ng-maxlength="4" required
            name="productQty" hard-reset-required="true"
            ng-change="controlProductQty(editInvoiceForm[updateInvoiceProduct])"
            hard-reset-pattern="numberPattern">
@@ -43,7 +43,7 @@
     <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
            ng-required="true" ng-model="product.item.sale"
            ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
-           hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+           hard-reset-pattern="decimalNumberPatternLow" hard-reset-required="true">
   </div>
 
   <div class="col-sm-1">
