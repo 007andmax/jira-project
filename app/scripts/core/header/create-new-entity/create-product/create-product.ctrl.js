@@ -40,6 +40,8 @@
 
         if ($scope.editProduct.category && $scope.editProduct.category.default) {
           $scope.editProduct.category.name = null;
+        } else {
+          $scope.editProduct.category = angular.copy($scope.savedCategory);
         }
         if (company) {
           company = CompaniesService.getOneById(company.id);

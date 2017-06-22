@@ -7,12 +7,22 @@
       return {
         restrict: 'A',
         scope: {
-          item: '=?'
+          item: '=?',
+          categoryForModal: '=?'
         },
         link: function ($scope, element, attrs) {
           var existingItem = false;
+          var existingCategory = false;
           if ($scope.item || attrs.item) {
-            existingItem = function () { return $scope.item; };
+            existingItem = function () {
+              return $scope.item;
+            };
+          }
+
+          if($scope.categoryForModal || attrs.categoryForModal) {
+            existingCategory = function() {
+              return $scope.categoryForModal;
+            }
           }
 
           element.click(function () {
@@ -43,7 +53,8 @@
                   resolvedOpenedTab: function () {
                     return attrs.createNewEntity;
                   },
-                  resolvedExistedItem: existingItem
+                  resolvedExistedItem: existingItem,
+                  resolveExistingCategory: existingCategory
                 }
               });
 

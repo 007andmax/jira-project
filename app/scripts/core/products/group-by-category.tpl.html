@@ -25,7 +25,7 @@
 
           <div class="product-actions" ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
 
-            <div class="btn btn-primary has-tooltip" create-new-entity="product" item="category"
+            <div class="btn btn-primary has-tooltip" create-new-entity="product" item="category" category-for-modal="category"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Product">
               <i class="icn-sm icn-product-add"></i>
             </div>
