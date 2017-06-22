@@ -25,7 +25,7 @@
         };
         $scope.openTab = 'product';
 
-        $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Month)?(Year)?$/;
+        $scope.repeatingPattern = /^(\d?[0-9]{0,2})?(Month)?(Year)?$/;
         $scope.numToGeneratePattern = /^\d{0,3}$/;
         $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
@@ -299,7 +299,7 @@
           $scope.disabledEndAndNum = false;
 
           var repeat = val[0];
-          var startDay = val[1];
+          var startDay = new Date(val[1]);
           var numToGenerate = ($scope.paramInvocie.remainGenerations || 1) - 1;
           var endDay = new Date(startDay);
 
