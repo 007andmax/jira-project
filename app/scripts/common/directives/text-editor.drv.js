@@ -12,13 +12,15 @@
 
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
           var urlPattern = /(\b(www\.\S+\b))|(\b(http|ftp|https):\/\/(www\.)?[\w-]+(\.[\w-]+)+\b([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/gim;
-          var htmlTagsWhitelist = new RegExp('<\\s\*\(\?!b\(>\|\\s\)\|blockquote\|br\|caption\|cite\|code\|col\|' +
-            'colgroup\|dd\|div\|dl\|dt\|em(>\|\\s\)\|h1\|h2\|h3\|h4\|h5\|h6\|i(>\|\\s\)\|li\|ol\|p(>\|\\s\)\|pre\|q(>\|\\s\)\|small\|strike\|' +
-            'strong\|sub\|sup\|table\|tbody\|td\|tfoot\|th\|thead\|tr\|u(>\|\\s\)\|ul\|span\|\\/b\(>\|\\s\)\|\\/' +
-            'blockquote\|\\/br\|\\/caption\|\\/cite\|\\/code\|\\/col\|\\/colgroup\|\\/dd\|\\/div\|\\/dl\|\\/' +
-            'dt\|\\/em(>\|\\s\)\|\\/h1\|\\/h2\|\\/h3\|\\/h4\|\\/h5\|\\/h6\|\\/i(>\|\\s\)\|\\/li\|\\/ol\|\\/p(>\|\\s\)\|\\/pre\|\\/' +
-            '\\/q(>\|\\s\)\|\\/small\|\\/strike\|\\/strong\|\\/sub\|\\/sup\|\\/table\|\\/tbody\|\\/td\|\\/tfoot\|\\/th\|' +
-            'thead\|\\/tr\|\\/u(>\|\\s\)\|\\/ul\|\\/span\)\.\*\?\\s\*\?>', 'gm');
+          var htmlTagsWhitelist = new RegExp('\(\?:<' +
+            'head\(\?:\.\*\?\\s\*\?\)\+\?<\/head>\)\|\(\?:<\\s\*\(\?!b\(\?:>\|\\s\)\|blockquote\|br\|caption\|cite\|' +
+            'code\|col\|colgroup\|dd\|div\|dl\|dt\|em\(\?:>\|\\s\)\|h1\|h2\|h3\|h4\|h5\|h6\|i\(\?:>\|\\s\)\|li\|ol\|p' +
+            '\(\?:>\|\\s\)\|pre\|q\(\?:>\|\\s\)\|small\|strike\|strong\|sub\|sup\|table\|tbody\|td\|tfoot\|th\|thead' +
+            '\|tr\|u\(\?:>\|\\s\)\|ul\|span\|\/b\(\?:>\|\\s\)\|\/blockquote\|\/br\|\/caption\|\/cite\|\/code\|\/col\|' +
+            '\/colgroup\|\/dd\|\/div\|\/dl\|\/dt\|\/em\(\?:>\|\\s\)\|\/h1\|\/h2\|\/h3\|\/h4\|\/h5\|\/h6\|\/i\(\?:>\|' +
+            '\\s\)\|\/li\|\/ol\|\/p\(\?:>\|\\s\)\|\/pre\|\/\/q\(\?:>\|\\s\)\|\/small\|\/strike\|\/strong\|\/sub\|\/' +
+            'sup\|\/table\|\/tbody\|\/td\|\/tfoot\|\/th\|thead\|\/tr\|\/u\(\?:>\|\\s\)\|\/ul\|\/span\)\(\?:\.\*\?\\s' +
+            '\*\?\)\*\?>\)', 'gm');
           var pressOnElement, inited = false;
           var editor = element.find('[te-editor]'),
             wysiwyg = editor.wysiwyg({
@@ -110,7 +112,6 @@
 
             if (clipboardData.types.indexOf('text/html') > -1) {
               html = clipboardData.getData("text/html");
-              html = html.replace(/<style(.|\s|\n)*?<\/style>/g, '');
               html = html.replace(htmlTagsWhitelist, '').trim();
             } else {
               html = clipboardData.getData('text/plain');
