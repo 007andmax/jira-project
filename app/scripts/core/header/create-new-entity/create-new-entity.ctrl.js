@@ -3,10 +3,10 @@
 (function () {
 
   angular.module("quicktech").controller("createNewEntityCtrl",
-    ['$scope', 'resolvedExistedItem', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedUserId',
+    ['$scope', 'resolvedExistedItem', 'resolveExistingCategory', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedUserId',
       'resolvedOpenedTab', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
       'quicktech.common.services.UserConfirmationsService',
-      function ($scope, resolvedExistedItem, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedUserId,
+      function ($scope, resolvedExistedItem, resolveExistingCategory, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedUserId,
                 resolvedOpenedTab, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService) {
 
         $scope.openedTab = resolvedOpenedTab || 'ticket';
@@ -15,6 +15,12 @@
           $scope.savedState = {types: [$scope.openedTab], items: [angular.copy(resolvedExistedItem)]};
         } else {
           $scope.savedState = {types: [], items: []};
+        }
+
+        if(resolveExistingCategory) {
+          $scope.savedCategory = angular.copy(resolveExistingCategory);
+        } else {
+          $scope.savedCategory = {types: [], items: []};
         }
 
         if ($scope.openedTab === 'category') {
