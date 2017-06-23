@@ -3671,7 +3671,7 @@ fieldset[disabled] .form-control {
 }
 
 textarea.form-control {
-  height: auto;
+  min-height: 150px;
 }
 
 .has-error .form-control {
