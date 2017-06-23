@@ -43,10 +43,28 @@ module.exports = function (grunt) {
       },
       myTarget: {
         files: {
-          'app/index.html': 'app/index.tpl.html'
+          'app/index.html': 'app/index.tpl.html',
+          'app-admin/index-admin.html': 'app-admin/index-admin.tpl.html'
         }
       }
     },
+
+    // includeSourceAdminPanel: {
+    //   options: {
+    //     basePath: 'app-admin',
+    //     templates: {
+    //       html: {
+    //         js: '<script src="{filePath}"></script>',
+    //         css: '<link rel="stylesheet" type="text/css" href="{filePath}" />'
+    //       }
+    //     }
+    //   },
+    //   myTarget: {
+    //     files: {
+    //       'app-admin/index-admin.html': 'app-admin/index-admin.tpl.html'
+    //     }
+    //   }
+    // },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -79,6 +97,13 @@ module.exports = function (grunt) {
         ],
         tasks: ['includeSource']
       },
+      // includeSourceAdminPanel: {
+      //   files: [
+      //     '<%= yeoman.app %>/{,*/}index-admin.tpl.html',
+      //     '<%= yeoman.app %>/scripts/{,*/}*.js'
+      //   ],
+      //   tasks: ['includeSourceAdminPanel']
+      // },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -710,6 +735,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'includeSource',
+      // 'includeSourceAdminPanel',
       'wiredep',
       'configureProxies:localServer',
       'concurrent:server',
@@ -727,6 +753,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'includeSource',
+      // 'includeSourceAdminPanel',
       'wiredep',
       'configureProxies:devServer',
       'concurrent:server',
@@ -744,6 +771,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'includeSource',
+      // 'includeSourceAdminPanel',
       'wiredep',
       'configureProxies:localDevServer',
       'copy:sass_temp',
@@ -792,6 +820,7 @@ module.exports = function (grunt) {
     'copy:temp_sass',
     'clean:server',
     'includeSource',
+    // 'includeSourceAdminPanel',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
