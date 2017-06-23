@@ -116,7 +116,8 @@
   display: inline-block;
 }
 
-.chart-header p{
+.chart-header p,
+.customer-filter p{
   font-size: 16px;
 }
 
@@ -129,19 +130,22 @@
   float: right;
 }
 
-.chart-header .chart-header-controls p{
+.chart-header .chart-header-controls p,
+.customer-filter p{
   float: left;
   cursor: pointer;
   margin: 0px 10px 20px 10px;
   color: #c5c5c5;
 }
 
-.chart-header .chart-header-controls p:hover{
+.chart-header .chart-header-controls p:hover,
+.customer-filter p:hover{
   color: #000;
   border-bottom: 2px solid #0094d0;
 }
 
-.chart-header .chart-header-controls p.choosen{
+.chart-header .chart-header-controls p.choosen,
+.customer-filter p.choosen{
   color: #000;
   border-bottom: 2px solid #0094d0;
 }
