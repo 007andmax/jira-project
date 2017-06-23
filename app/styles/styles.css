@@ -8899,13 +8899,16 @@ a.label-icn-sm:focus {
 }
 
 .label-info {
-  background-color: #1586e4;
+  background-color: #fff;
+  color: #1586e4!important;
+  border: 1px solid #1586e4;
+  border-radius: 4px;
 }
 
-.label-info[href]:hover,
-.label-info[href]:focus {
-  background-color: #116bb5;
-}
+/*.label-info[href]:hover,*/
+/*.label-info[href]:focus {*/
+  /*background-color: #116bb5;*/
+/*}*/
 
 .label-warning {
   background-color: #ffa726;
@@ -8926,31 +8929,40 @@ a.label-icn-sm:focus {
 }
 
 .label-priority-low {
-  background-color: #4caf50;
+  background-color: #fff;
+  color: #4caf50!important;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
 }
 
-.label-priority-low[href]:hover,
-.label-priority-low[href]:focus {
-  background-color: #f29000;
-}
+/*.label-priority-low[href]:hover,*/
+/*.label-priority-low[href]:focus {*/
+  /*background-color: #f29000;*/
+/*}*/
 
 .label-priority-medium {
-  background-color: #FFC107;
+  background-color: #fff;
+  color: #FFC107!important;
+  border: 1px solid #FFC107;
+  border-radius: 4px;
 }
 
-.label-priority-medium[href]:hover,
-.label-priority-medium[href]:focus {
-  background-color: #bc5500;
-}
+/*.label-priority-medium[href]:hover,*/
+/*.label-priority-medium[href]:focus {*/
+  /*background-color: #bc5500;*/
+/*}*/
 
 .label-priority-high {
-  background-color: #e53935;
+  background-color: #fff;
+  color: #e53935!important;
+  border: 1px solid #e53935;
+  border-radius: 4px;
 }
 
-.label-priority-high[href]:hover,
-.label-priority-high[href]:focus {
-  background-color: #cd1e1a;
-}
+/*.label-priority-high[href]:hover,*/
+/*.label-priority-high[href]:focus {*/
+  /*background-color: #cd1e1a;*/
+/*}*/
 
 @-moz-document url-prefix() {
   .label {
