@@ -832,7 +832,8 @@
 }
 
 .run-report-content input,
-.detailed-radio .customer-names {
+.detailed-radio .customer-names,
+.customer-list-header input {
   outline: none;
   padding: 0 40px 0 10px;
   width: 100%;
@@ -1191,18 +1192,21 @@
   padding-top: 20px;
   width: 100%;
 }
-.click-content-deposit-slips{
+
+.click-content-deposit-slips {
   display: inline-block;
   position: relative;
   width: 100%;
 }
-.deposit-split .clickable-layer{
+
+.deposit-split .clickable-layer {
   max-height: none;
   min-height: 62px;
   top: -15px;
   height: 110%;
   width: 97%;
 }
+
 .deposit-split .sub-wrapper ul {
   padding: 0 10px 10px 15px;
 }
@@ -1261,7 +1265,8 @@
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -60px;
   }
-  .product-list-ticket-deposit .col-md-3{
+
+  .product-list-ticket-deposit .col-md-3 {
     width: 45%;
   }
 }
@@ -1288,7 +1293,8 @@
   .run-report-content .content {
     max-width: 160px;
   }
-  .product-list-ticket-deposit .col-md-3{
+
+  .product-list-ticket-deposit .col-md-3 {
     width: 44%;
   }
 }
