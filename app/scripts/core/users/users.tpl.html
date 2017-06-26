@@ -111,6 +111,12 @@
                  trimmed-tooltip-checker="user.primaryEmail">
               </p>
             </div>
+            <div class="clearfix" ng-if="user.secondaryEmail">
+              <img src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
+              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}" tooltip-placement="bottom"
+                 trimmed-tooltip-checker="user.secondaryEmail">
+              </p>
+            </div>
             <div class="clearfix">
               <span class="ticket-count">{{ user.userStatistic.ticketsSubmitted || 0 }}</span>
               <span style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></span>

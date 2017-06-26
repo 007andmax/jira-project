@@ -21,6 +21,59 @@
                    name="firstName" ng-model="editUser.firstName" ng-required="true" make-dirty-on-blur tabindex="1">
 
           </div>
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
+
+            <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'primaryEmail')}">Email</label>
+
+            <div ng-messages="userForm.primaryEmail.$error"
+                 ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
+              <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+              <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+              <div class="control-label" ng-message="unique">This email already occupied.</div>
+              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+            </div>
+
+            <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                   ng-model="editUser.primaryEmail" ng-pattern="emailPattern" ng-maxlength="128"
+                   is-uniq-validation validation-func="validateUserEmail" tabindex="3">
+
+          </div>
+        </div>
+
+        <div class="col-xs-6">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'lastName')}">
+
+            <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'lastName')}">Last Name</label>
+
+            <div ng-messages="userForm.lastName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
+              <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+            </div>
+
+            <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                   name="lastName" ng-model="editUser.lastName" make-dirty-on-blur tabindex="2">
+
+          </div>
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'secondaryEmail')}">
+
+            <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'secondaryEmail')}">
+              Secondary email
+            </label>
+
+            <div ng-messages="userForm.secondaryEmail.$error"
+                 ng-class="{'hide': !isShowingErrors(userForm, 'secondaryEmail')}">
+              <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+              <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+              <!--<div class="control-label" ng-message="unique">This email already occupied.</div>-->
+              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+            </div>
+
+            <input class="form-control" type="text" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur
+                   ng-model="editUser.secondaryEmail" ng-pattern="emailPattern" ng-maxlength="128" tabindex="4">
+
+          </div>
+        </div>
+
+        <div class="col-xs-6">
           <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'userCompany')}">
 
             <label class="control-label"
@@ -36,7 +89,7 @@
 
             <div uib-dropdown ng-show="isCreation" add-create-new-button="company">
 
-              <input type="text" ng-model="userCompany" autocomplete="off" tabindex="3"
+              <input type="text" ng-model="userCompany" autocomplete="off" tabindex="5"
                      class="form-control form-control-dropdown dropdown-toggle"
                      uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      qt-typeahead-show-on-focus name="userCompany" ng-required="isCreation"
@@ -46,70 +99,13 @@
 
             </div>
           </div>
-
-
-        </div>
-        <div class="col-xs-6">
-          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'lastName')}">
-
-            <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'lastName')}">Last Name</label>
-
-            <div ng-messages="userForm.lastName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
-              <div class="control-label" ng-message="maxlength">Last name is too large.</div>
-            </div>
-
-            <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-                   name="lastName" ng-model="editUser.lastName" make-dirty-on-blur tabindex="2">
-
-          </div>
-          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
-
-            <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'primaryEmail')}">Email</label>
-
-            <div ng-messages="userForm.primaryEmail.$error"
-                 ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
-              <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
-              <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-              <div class="control-label" ng-message="unique">This email already occupied.</div>
-              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
-            </div>
-
-            <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-                   ng-model="editUser.primaryEmail" ng-pattern="emailPattern" ng-maxlength="128"
-                   is-uniq-validation validation-func="validateUserEmail" tabindex="4">
-
-          </div>
-        </div>
-
-
-        <div ng-hide="isTechUser" phone-numbers-edit is-try-to-save="triedToSave"
-             country-code="{{ userCompanyCountryCode }}" ng-model="editUser.phoneNumbers"></div>
-
-        <div class="col-xs-6">
-
-          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'designation')}">
-
-            <label class="control-label"
-                   ng-class="{'hide': isShowingErrors(userForm, 'designation')}">Designation</label>
-
-            <div ng-messages="userForm.designation.$error"
-                 ng-class="{'hide': !isShowingErrors(userForm, 'designation')}">
-              <div class="control-label" ng-message="maxlength">Designation is too large</div>
-              <div class="control-label" ng-message="minlength">Designation is too short</div>
-            </div>
-
-            <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
-                   ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30" tabindex="30">
-
-          </div>
-
           <div class="form-group">
 
             <label class="control-label">Account Type</label>
             <div uib-dropdown keyboard-nav="true">
 
               <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
-                      uib-dropdown-toggle aria-expanded="true" tabindex="32">
+                      uib-dropdown-toggle aria-expanded="true" tabindex="7">
                 {{ roles[editUser.role] }}
               </button>
               <i class="icn-sm icn-caret-gray"></i>
@@ -122,18 +118,31 @@
             </div>
 
           </div>
-
-
         </div>
 
-        <div class="clearfix" ng-hide="isTechUser">
 
-          <div class="form-group col-xs-6">
+        <div class="clearfix col-xs-6" ng-hide="isTechUser">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'designation')}">
+
+            <label class="control-label"
+                   ng-class="{'hide': isShowingErrors(userForm, 'designation')}">Designation</label>
+
+            <div ng-messages="userForm.designation.$error"
+                 ng-class="{'hide': !isShowingErrors(userForm, 'designation')}">
+              <div class="control-label" ng-message="maxlength">Designation is too large</div>
+              <div class="control-label" ng-message="minlength">Designation is too short</div>
+            </div>
+
+            <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
+                   ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30" tabindex="6">
+
+          </div>
+          <div class="form-group">
             <label class="control-label">Subscribe to</label>
 
             <div uib-dropdown keyboard-nav="true">
               <button class="form-control has-dropdown subscribe-dropdown"
-                      tabindex="31" uib-dropdown-toggle aria-expanded="false"></button>
+                      tabindex="8" uib-dropdown-toggle aria-expanded="false"></button>
               <i class="icn-sm icn-caret-gray"></i>
 
               <div class="subscribe-tokens">
@@ -204,6 +213,9 @@
             </div>
           </div>
         </div>
+
+        <div ng-hide="isTechUser" phone-numbers-edit is-try-to-save="triedToSave"
+             country-code="{{ userCompanyCountryCode }}" ng-model="editUser.phoneNumbers"></div>
 
         <div class="col-xs-6 clearfix" ng-if="isCreation">
           <label class="control checkbox pull-left">
