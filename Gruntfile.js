@@ -44,7 +44,7 @@ module.exports = function (grunt) {
       myTarget: {
         files: {
           'app/index.html': 'app/index.tpl.html',
-          'app-admin/index-admin.html': 'app-admin/index-admin.tpl.html'
+          'app/index-admin.html': 'app/index-admin.tpl.html'
         }
       }
     },
@@ -199,7 +199,7 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             // TO CHANGE PORT 80-81 etc when on serveDev
-            host: '25.36.157.12',
+            host: '25.35.19.59',
             port: 8080,
             https: false,
             xforward: false,
