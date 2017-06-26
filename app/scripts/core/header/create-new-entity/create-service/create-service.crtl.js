@@ -8,17 +8,26 @@
 
         var savedState = $scope.getLastSavedState('service');
 
+        $scope.taxes = TaxesService.getAll();
+
         var origin = savedState.item;
         if (savedState.type === 'service' && origin) {
           $scope.editService = angular.copy(origin);
         } else {
           $scope.editService = {
             billable: true,
-            isDefault: true
+            isDefault: true,
+            taxes: []
           };
-        }
 
-        $scope.taxes = TaxesService.getAll();
+          var length = $scope.taxes.length;
+          for (var i = 0; i < length; i++) {
+            var tax = $scope.taxes[i];
+            if (tax.isDefault) {
+              $scope.editService.taxes.push(tax);
+            }
+          }
+        }
 
         $scope.saveEditService = function (form) {
           if (form.$valid) {

@@ -32,6 +32,16 @@
           TaxesService.remove($scope.tax.id);
         };
 
+        $scope.onChangeDefault = function () {
+          $scope.disabledCheckbox = true;
+          var taxToSave = angular.copy($scope.tax);
+          taxToSave.isDefault = !taxToSave.isDefault;
+          TaxesService.save(taxToSave.isDefault, function () {
+            $scope.tax.isDefault = taxToSave.isDefault;
+            $scope.disabledCheckbox = false;
+          });
+        };
+
 
       }]);
 
