@@ -24,6 +24,12 @@ module.exports = function (grunt) {
     buildDate: Date.now()
   };
 
+  var adminConfig = {
+    app: require('./bower.json').appPath || 'admin',
+    dist: 'dist',
+    buildDate: Date.now()
+  };
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -43,28 +49,14 @@ module.exports = function (grunt) {
       },
       myTarget: {
         files: {
-          'app/index.html': 'app/index.tpl.html',
-          'app/index-admin.html': 'app/index-admin.tpl.html'
+          'app/index.html': 'app/index.tpl.html'
         }
       }
     },
 
-    // includeSourceAdminPanel: {
-    //   options: {
-    //     basePath: 'app-admin',
-    //     templates: {
-    //       html: {
-    //         js: '<script src="{filePath}"></script>',
-    //         css: '<link rel="stylesheet" type="text/css" href="{filePath}" />'
-    //       }
-    //     }
-    //   },
-    //   myTarget: {
-    //     files: {
-    //       'app-admin/index-admin.html': 'app-admin/index-admin.tpl.html'
-    //     }
-    //   }
-    // },
+
+
+
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -97,13 +89,6 @@ module.exports = function (grunt) {
         ],
         tasks: ['includeSource']
       },
-      // includeSourceAdminPanel: {
-      //   files: [
-      //     '<%= yeoman.app %>/{,*/}index-admin.tpl.html',
-      //     '<%= yeoman.app %>/scripts/{,*/}*.js'
-      //   ],
-      //   tasks: ['includeSourceAdminPanel']
-      // },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
