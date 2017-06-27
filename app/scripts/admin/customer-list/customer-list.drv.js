@@ -11,6 +11,12 @@
   customerListCtrl.$inject = ['$scope', 'CustomerListService'];
   function customerListCtrl($scope, CustomerListService) {
 
+    $scope.customerList;
+
+    CustomerListService.getCustomerList($scope, function(resp){
+      console.log("resp ", resp);
+      $scope.customerList = resp;
+    })
 
   }
 

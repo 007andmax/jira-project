@@ -30,31 +30,21 @@
             <div class="col-2">Last logon</div>
             <div class="col-2">Status</div>
         </li>
-        <li class="customer-list-content-body">
-            <div class="col-2">12.12.2017</div>
-            <div class="col-1"> Company name Company name</div>
-            <div class="col-1">Shortname Shortname</div>
-            <div class="col-1">Primary contact name</div>
-            <div class="col-1"> +38 012 345 67 89</div>
-            <div class="col-1 ellipsis">E-mailaddresssssss@gmail.com</div>
-            <div class="col-1">Helpdesk</div>
-            <div class="col-2">999</div>
-            <div class="col-2">12.12.2017</div>
-            <div class="col-2"><p class="active-status">Active</p></div>
+        <li class="customer-list-content-body" ng-repeat="customer in customerList">
+            <div class="col-2">{{customer.createDate}}</div>
+            <div class="col-1"> {{customer.companyName}}</div>
+            <div class="col-1">{{customer.shortName}}</div>
+            <div class="col-1">{{customer.primaryContactName}}</div>
+            <div class="col-1"> {{customer.phoneNumbers[1]}}</div>
+            <div class="col-1 ellipsis">{{customer.email}}</div>
+            <div class="col-1">{{customer.subscription}}</div>
+            <div class="col-2">{{customer.agentCount}}</div>
+            <div class="col-2">{{customer.lastLogon}}</div>
+            <div class="col-2"><p class="active-status">{{customer.status}}</p></div>
             <a><i class="icon-sm icn-delete"></i></a>
         </li>
-        <li class="customer-list-content-body">
-            <div class="col-2">12.12.2017</div>
-            <div class="col-1"> Company name Company name</div>
-            <div class="col-1">Shortname Shortname</div>
-            <div class="col-1">Primary contact name</div>
-            <div class="col-1"> +38 012 345 67 89</div>
-            <div class="col-1 ellipsis">E-mailaddresssssss@gmail.com</div>
-            <div class="col-1">Helpdesk</div>
-            <div class="col-2">999</div>
-            <div class="col-2">12.12.2017</div>
-            <div class="col-2"><p class="unactive-status">Unactive</p></div>
-            <a><i class="icon-sm icn-delete"></i></a>
-        </li>
+
     </ul>
 </div>
+
+
