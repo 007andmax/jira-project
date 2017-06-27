@@ -3,7 +3,7 @@
 (function(){
 
   angular.module('admin.directives', []).component("customerList",{
-    templateUrl: '/html/scripts/admin/customer-list/customer-list.tpl.html',
+    templateUrl: '/app/scripts/admin/customer-list/customer-list.html',
     bindings: {},
     controller: customerListCtrl
   });
@@ -15,3 +15,4 @@
   }
 
 })();
+
