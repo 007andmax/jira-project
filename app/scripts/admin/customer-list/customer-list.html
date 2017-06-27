@@ -14,7 +14,7 @@
         </div>
         <div class="customer-search">
             <p>Search</p>
-            <input type="text">
+            <input type="text" ng-model="filterKeyWord">
         </div>
     </div>
     <ul class="customer-list-content">
@@ -30,7 +30,7 @@
             <div class="col-2">Last logon</div>
             <div class="col-2">Status</div>
         </li>
-        <li class="customer-list-content-body" ng-repeat="customer in customerList">
+        <li class="customer-list-content-body" ng-repeat="customer in customerList | orderBy: sortType | filter: filterKeyWord">
             <div class="col-2">{{customer.createDate}}</div>
             <div class="col-1"> {{customer.companyName}}</div>
             <div class="col-1">{{customer.shortName}}</div>
