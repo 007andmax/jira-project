@@ -2,14 +2,10 @@
 
 (function(){
 
-  var app = angular.module("quicktech.admin",
+  var appAdmin = angular.module("quicktech.admin",
     [
-      'quicktech.admin.customerListCtrl',
-      'admin.services'
+      'admin.services',
+      'admin.directives'
     ]);
 
-  app.config(['$stateProvider', function($stateProvider){
-
-
-  }])
 })();
