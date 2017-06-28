@@ -8,7 +8,7 @@
     function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService) {
 
       $scope.discountAmountMsxLength;
-      $scope.newCategoryNamePattern = /^[0-9A-Za-z!@\.;:'"?-]{1,100}$/;
+      $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.;:'"?\-\s]{1,100}$/;
 
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
@@ -88,7 +88,7 @@
       });
 
       $scope.getItemName = function (model) {
-        return model ? model.name : '';
+        return model && model.name ? model.name : model;
       };
 
       $scope.addCategory = function (form) {
@@ -150,7 +150,7 @@
       };
 
       $scope.validateCategory = function (category, form) {
-        form.editProductCategory.$setValidity('nonexistentCategory', !category || typeof category !== 'string');
+        form.editProductCategory.$setValidity('nonexistentCategory', !category || typeof category !== 'string' || !category.trim());
       };
 
       $scope.getValidationMessage = function (form) {
