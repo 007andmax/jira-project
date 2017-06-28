@@ -100,7 +100,7 @@
 
             <div>
               <label class="control checkbox pull-left">
-                <input type="checkbox" ng-checked="newTax.isDefault"
+                <input type="checkbox" ng-checked="tax.isDefault"
                        custom-disabled="{{ disabledCheckbox }}"
                        ng-click="onChangeDefault()">
                 <span class="control-indicator"></span>
@@ -175,7 +175,7 @@
 
             <div>
               <label class="control checkbox pull-left">
-                <input type="checkbox" ng-model="newTax.isDefault">
+                <input type="checkbox" ng-model="currentTax.isDefault">
                 <span class="control-indicator"></span>
                 default
               </label>

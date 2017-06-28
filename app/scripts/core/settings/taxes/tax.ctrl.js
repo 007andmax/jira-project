@@ -10,7 +10,8 @@
           $scope.currentTax = {
             id: $scope.tax.id,
             rate: $scope.tax.rate,
-            name: $scope.tax.name
+            name: $scope.tax.name,
+            isDefault: $scope.tax.isDefault
           };
           $scope.isEditing = true;
           form.$setPristine();
@@ -36,7 +37,7 @@
           $scope.disabledCheckbox = true;
           var taxToSave = angular.copy($scope.tax);
           taxToSave.isDefault = !taxToSave.isDefault;
-          TaxesService.save(taxToSave.isDefault, function () {
+          TaxesService.save(taxToSave, function () {
             $scope.tax.isDefault = taxToSave.isDefault;
             $scope.disabledCheckbox = false;
           });
