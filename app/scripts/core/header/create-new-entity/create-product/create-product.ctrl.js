@@ -50,10 +50,12 @@
 
       } else if (savedState.type === 'category' && origin) {
         $scope.editCategory = angular.copy(origin);
-        $scope.editProduct = {};
+        $scope.editProduct = { taxes: [] };
+        initDefaultTaxes();
       } else {
-        $scope.editProduct = {};
         $scope.editCategory = {};
+        $scope.editProduct = { taxes: [] };
+        initDefaultTaxes();
       }
 
       $scope.isShowingErrors = function (form, fieldName) {
@@ -252,6 +254,16 @@
         if (isProductChanged) {
           $scope.savedState.types.unshift('product');
           $scope.savedState.items.unshift($scope.editProduct);
+        }
+      }
+
+      function initDefaultTaxes() {
+        var length = $scope.taxes.length;
+        for (var i = 0; i < length; i++) {
+          var tax = $scope.taxes[i];
+          if (tax.isDefault) {
+            $scope.editProduct.taxes.push(tax);
+          }
         }
       }
 
