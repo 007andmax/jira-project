@@ -12,11 +12,35 @@
   function customerListCtrl($scope, CustomerListService) {
 
     $scope.customerList;
+    $scope.customerListOrder = 'createDate';
+
+    $scope.parseDate = Date.parse.bind(Date);
+
+    $scope.availableOrder = [
+      {name: 'Create Date', value: 'createDate'},
+      {name: 'Company name', value: 'companyName'},
+      {name: 'Short name', value: 'shortName'},
+      {name: 'Primary contact', value: 'primaryContactName'},
+      {name: 'E-mail', value: 'email'},
+      {name: 'Subscription', value: 'subscription'},
+      {name: 'Agents', value: 'agentCount'},
+      {name: 'Last logon', value: 'lastLogon'},
+      {name: 'Status', value: 'status'}
+    ];
 
     CustomerListService.getCustomerList($scope, function(resp){
       console.log("resp ", resp);
       $scope.customerList = resp;
-    })
+    });
+
+    $scope.removeCustomer = function(customer) {
+
+    };
+
+    // $scope.changeOrder = function(order) {
+    //   $scope.customerListOrder = order;
+    //   console.log($scope.customerListOrder);
+    // }
 
   }
 

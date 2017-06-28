@@ -10,7 +10,9 @@
         </div>
         <div class="customer-sort">
             <p>Sort by</p>
-            <input type="text">
+            <select name="orderSelect" ng-model="customerListOrder">
+              <option ng-repeat="option in availableOrder" value="{{option.value}}">{{option.name}}</option>
+            </select>
         </div>
         <div class="customer-search">
             <p>Search</p>
@@ -30,8 +32,8 @@
             <div class="col-2">Last logon</div>
             <div class="col-2">Status</div>
         </li>
-        <li class="customer-list-content-body" ng-repeat="customer in customerList | orderBy: sortType | filter: filterKeyWord">
-            <div class="col-2">{{customer.createDate}}</div>
+        <li class="customer-list-content-body" ng-repeat="customer in customerList | orderBy: customerListOrder |filter: filterKeyWord">
+            <div class="col-2">{{parseDate(customer.createDate) | date: 'dd.MM.yy'}}</div>
             <div class="col-1"> {{customer.companyName}}</div>
             <div class="col-1">{{customer.shortName}}</div>
             <div class="col-1">{{customer.primaryContactName}}</div>
@@ -39,9 +41,9 @@
             <div class="col-1 ellipsis">{{customer.email}}</div>
             <div class="col-1">{{customer.subscription}}</div>
             <div class="col-2">{{customer.agentCount}}</div>
-            <div class="col-2">{{customer.lastLogon}}</div>
+            <div class="col-2">{{parseDate(customer.lastLogon) | date: 'dd.MM.yy'}}</div>
             <div class="col-2"><p class="active-status">{{customer.status}}</p></div>
-            <a><i class="icon-sm icn-delete"></i></a>
+            <a><i class="icon-sm icn-delete" ng-click="removeCustomer(customer)"></i></a>
         </li>
 
     </ul>
