@@ -49,7 +49,8 @@ module.exports = function (grunt) {
       },
       myTarget: {
         files: {
-          'app/index.html': 'app/index.tpl.html'
+          'app/index.html': 'app/index.tpl.html',
+          'app/index-admin.html': 'app/index-admin.tpl.html'
         }
       }
     },

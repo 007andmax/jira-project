@@ -3,7 +3,7 @@
 (function(){
 
   angular.module('admin.directives', []).component("customerList",{
-    templateUrl: '/app/scripts/admin/customer-list/customer-list.html',
+    templateUrl: '/html/scripts/admin/customer-list/customer-list.html',
     bindings: {},
     controller: customerListCtrl
   });
@@ -15,6 +15,8 @@
     $scope.customerListOrder = 'createDate';
 
     $scope.parseDate = Date.parse.bind(Date);
+
+    $scope.customerListDateRange = 'TOTAL';
 
     $scope.availableOrder = [
       {name: 'Create Date', value: 'createDate'},
@@ -33,8 +35,12 @@
       $scope.customerList = resp;
     });
 
-    $scope.removeCustomer = function(customer) {
+    // $scope.removeCustomer = function(customer) {
+    //
+    // };
 
+    $scope.changeCustomerListDateRange = function(range) {
+      $scope.customerListDateRange = range;
     };
 
     // $scope.changeOrder = function(order) {

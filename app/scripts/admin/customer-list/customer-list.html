@@ -3,10 +3,10 @@
     <h2>Customer List</h2>
     <div class="customer-list-header clearfix">
         <div class="customer-filter">
-            <p>Signups today</p>
-            <p>Signups week</p>
-            <p>Signups month</p>
-            <p>Signups total</p>
+            <p ng-click="changeCustomerListDateRange('TODAY')" ng-class="{'choosen': customerListDateRange === 'TODAY'}">Signups today</p>
+            <p ng-click="changeCustomerListDateRange('WEEK')" ng-class="{'choosen': customerListDateRange === 'WEEK'}">Signups week</p>
+            <p ng-click="changeCustomerListDateRange('MONTH')" ng-class="{'choosen': customerListDateRange === 'MONTH'}">Signups month</p>
+            <p ng-click="changeCustomerListDateRange('TOTAL')" ng-class="{'choosen': customerListDateRange === 'TOTAL'}">Signups total</p>
         </div>
         <div class="customer-sort">
             <p>Sort by</p>
