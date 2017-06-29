@@ -3601,9 +3601,6 @@ Devices tab
 }
 
 @media only screen and (max-width: 1600px) {
-  .network-scan .qt-list.qt-network-scan .list-content .col-2 {
-    margin-left: 0;
-  }
 
   .qt-agents > li > .col-1 {
     width: calc(100% - 629px);
@@ -4045,7 +4042,7 @@ Devices tab
 .changing-status,
 .success-status,
 .error-status {
-  width: 110px;
+  width: 100px;
   height: 26px;
   border: 1px solid #8d9090;
   background-color: #eee;
@@ -4763,7 +4760,7 @@ Devices tab
   }
 
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
-    width: 16.6%;
+    width: 15.6%;
   }
 
   .run-scan [class*=network-scan-item-]:before,
@@ -4795,7 +4792,7 @@ Devices tab
   }
 
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
-    width: 15.6%;
+    width: 14.6%;
   }
 
   .master-agent i {
@@ -4831,6 +4828,6 @@ Devices tab
   }
 
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
-    width: 14.6%;
+    width: 13.5%;
   }
 }
