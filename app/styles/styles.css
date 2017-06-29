@@ -1016,12 +1016,10 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-
-.billable-content .bootstrap-datetimepicker-widget.dropdown-menu {
+.billable-content .bootstrap-datetimepicker-widget.dropdown-menu{
   right: 0 !important;
-  left: auto !important;
+  left: auto!important;
 }
-
 .receivable-content .product-list-ticket {
   box-shadow: none;
   border: none;
@@ -3672,9 +3670,9 @@ fieldset[disabled] .form-control {
   cursor: default;
 }
 
-/*textarea.form-control {*/
-  /*min-height: 150px;*/
-/*}*/
+textarea.form-control {
+  height: auto;
+}
 
 .has-error .form-control {
   background-color: #fff2f2;
@@ -11228,6 +11226,12 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   top: 106px;
 }
 
+@media (min-width: 2048px) {
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 512px);
+  }
+}
+
 .col-1.discount-input {
   display: inline-block;
   width: calc(100% - 437px);
@@ -11255,6 +11259,178 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 
 .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3 {
   width: 140px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .invoices-header .dropdown-menu > li > a {
+    padding: 4px 20px;
+  }
+
+  .ticket-update-product-edit .discount-barcode {
+    right: 208px;
+  }
+
+  .opened-ticket .col-3 {
+    width: 140px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-3 {
+    width: 177px;
+  }
+
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .price-width {
+    width: 111px !important;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
+    width: 136px !important;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li [class*="col-"]:nth-child(3) {
+    padding: 0 5px 0 0;
+  }
+
+  .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 667px);
+  }
+
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 508px);
+  }
+
+  .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 285px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 240px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 177px);
+    margin-bottom: 10px;
+  }
+
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 78px;
+  }
+
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 0;
+  }
+
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 5px;
+  }
+
+  .discount-barcode {
+    position: relative;
+  }
+
+  .opened-ticket.opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    position: absolute;
+    right: 0;
+    width: 157px;
+    top: 56px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
+    width: 106px !important;
+  }
+
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .price-width {
+    width: 103px !important;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-4 {
+    padding: 0 5px;
+  }
+
+  .receivable-content .product-list-ticket {
+    font-size: 12px;
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 240px;
+  }
+
+}
+
+@media only screen and (max-width: 1280px) {
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
+    width: calc(100% - 500px);
+  }
+
+  .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
+  .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    width: 285px;
+  }
+
+  .opened-ticket .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+    margin-right: 70px;
+  }
+}
+
+#companyInfoContactInfo {
+  display: inline-block;
+}
+
+.template-details .email-preview-btn {
+  padding-left: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.ui {
+  padding: 0 5px;
+}
+
+.half-3-col {
+  width: 13%;
+}
+
+@media screen and (max-width: 768px) {
+  .half-3-col {
+    width: inherit;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .priority-big-size {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1026px) {
+  .priority-small-size {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .progress-big-size {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1026px) {
+  .progress-small-size {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .ticket-labels .progress-big-size,
+  .ticket-labels .priority-big-size {
+    display: none;
+  }
+
+  .ticket-labels .progress-small-size,
+  .ticket-labels .priority-small-size {
+    display: block;
+  }
 }
 
 .bold {
@@ -11300,6 +11476,12 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 
 .change-view-actions .svg-icn {
   width: 70%;
+}
+
+.table-wrapper .table-content .col-3.service-descr {
+  overflow: visible;
+  white-space: normal;
+  word-break: break-all;
 }
 
 .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
@@ -11678,3 +11860,75 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 
+
+.customer-list {
+  padding: 45px 30px;
+}
+
+.customer-list ul,
+.customer-list li {
+  list-style: none;
+  margin: 0;
+}
+
+.customer-list-header div,
+.customer-list-header div p,
+.customer-list-header div input {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.customer-filter p {
+  margin-bottom: 2px;
+}
+
+.customer-list-header div input {
+  width: 80%;
+}
+
+.customer-list-header .customer-search p,
+.customer-list-header .customer-sort p {
+  padding-right: 5px;
+}
+
+.customer-search,
+.customer-sort {
+  width: 300px;
+  float: right;
+}
+
+.customer-list-content [class*=col-] {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.customer-list-content-header {
+  font-weight: 700;
+}
+
+.customer-list-content li {
+  padding: 14.5px 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.customer-list-content {
+  padding: 20px 0;
+}
+
+.customer-list-content .col-1 {
+  width: 12.5%;
+}
+
+.customer-list-content .col-2 {
+  width: 5%;
+}
+
+.customer-list-content-body a {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.chart-header .chart-header-controls p.choosen, .chart-header .chart-header-controls p:hover {
+  color: #000;
+  border-bottom: 2px solid #0094d0
+}

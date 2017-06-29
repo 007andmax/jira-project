@@ -43,10 +43,15 @@ module.exports = function (grunt) {
       },
       myTarget: {
         files: {
-          'app/index.html': 'app/index.tpl.html'
+          'app/index.html': 'app/index.tpl.html',
+          'app/index-admin.html': 'app/index-admin.tpl.html'
         }
       }
     },
+
+
+
+
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -174,7 +179,7 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             // TO CHANGE PORT 80-81 etc when on serveDev
-            host: '25.36.157.12',
+            host: '25.35.19.59',
             port: 8080,
             https: false,
             xforward: false,
@@ -710,6 +715,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'includeSource',
+      // 'includeSourceAdminPanel',
       'wiredep',
       'configureProxies:localServer',
       'concurrent:server',
@@ -727,6 +733,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'includeSource',
+      // 'includeSourceAdminPanel',
       'wiredep',
       'configureProxies:devServer',
       'concurrent:server',
@@ -744,6 +751,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'includeSource',
+      // 'includeSourceAdminPanel',
       'wiredep',
       'configureProxies:localDevServer',
       'copy:sass_temp',
@@ -792,6 +800,7 @@ module.exports = function (grunt) {
     'copy:temp_sass',
     'clean:server',
     'includeSource',
+    // 'includeSourceAdminPanel',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
