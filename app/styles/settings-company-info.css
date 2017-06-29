@@ -54,8 +54,11 @@
 .settings-main-wrapper .default-tax-wrapper .list-heading{
   padding: 0;
   padding-bottom: 10px;
+  font-size: 0;
 }
-
+.settings-main-wrapper .default-tax-wrapper .list-heading div{
+  font-size: 14px;
+}
 .settings-main-wrapper .ticket-and-invoice-wrapper {
   float: left;
   width: 100%;

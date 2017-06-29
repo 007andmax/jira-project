@@ -9,7 +9,7 @@
 
           <div class="helping-additional-class">
 
-            <div class="col-1" style="width: 325px;" ng-class="{'has-error': isShowingErrors(newTaxForm, 'name')}">
+            <div class="col-1" style="width: 293px;" ng-class="{'has-error': isShowingErrors(newTaxForm, 'name')}">
 
               <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxForm, 'name')}">
                 Name
@@ -49,16 +49,16 @@
 
               <div ng-messages="newTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(newTaxForm, 'rate')}">
                 <label style="white-space: nowrap;" class="control-label" ng-message="required">
-                  Rate is required.
+                  Required.
                 </label>
                 <label style="white-space: nowrap;" class="control-label" ng-message="number">
-                  Only numbers are allowed.
+                  Only numbers.
                 </label>
                 <label style="white-space: nowrap;" class="control-label" ng-message="min">
-                  Rate mustn't be less then 0.01.
+                  To small.
                 </label>
                 <label style="white-space: nowrap;" class="control-label" ng-message="max">
-                  Rate mustn't be greater then 99.
+                  To large.
                 </label>
               </div>
 
@@ -66,26 +66,26 @@
                      required min="0.01" max="99">
             </div>
 
-            <div>
-              <label class="control checkbox pull-left">
+            <div class="default-tax">
+              <div>Default</div>
+              <label class="control checkbox pull-left" style="margin: 10px 0 0 13px;">
                 <input type="checkbox" ng-model="newTax.isDefault">
                 <span class="control-indicator"></span>
-                default
               </label>
             </div>
+            <div class="btn btn-lg btn-success pull-right"
+                 style="transform: translateY(65%)"
+                 ng-click="saveNewTax(newTaxForm)"
+                 custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">
+              Add
+            </div>
           </div>
-          <div class="btn btn-lg btn-success pull-right"
-               style="transform: translateY(65%)"
-               ng-click="saveNewTax(newTaxForm)"
-               custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">
-            Add
-          </div>
-
         </li>
 
         <li class="list-heading" style="border-top: none;" ng-show="taxes.length > 0">
-          <div style="padding-left: 5px;" class="col-xs-6">Name</div>
-          <div class="col-xs-6">Rate (%)</div>
+          <div style="padding-left: 5px; width: 40%;display: inline-block;">Name</div>
+          <div style="width: 39%;display: inline-block;">Rate (%)</div>
+          <div style="width: 20%;display: inline-block;">Default</div>
         </li>
 
         <li class="tax-list" ng-repeat="tax in taxes | orderBy: 'name' track by tax.id" ng-class="{'new-tax': isEditing}"
@@ -94,7 +94,7 @@
 
           <div class="helping-additional-class" ng-if="!isEditing">
 
-            <div class="col-xs-6">{{ tax.name }}</div>
+            <div style="width: 40%;" class="col-xs-6">{{ tax.name }}</div>
 
             <div class="col-xs-5">{{ tax.rate }}%</div>
 
@@ -174,10 +174,9 @@
             </div>
 
             <div>
-              <label class="control checkbox pull-left">
+              <label style="margin: 10px 0 0 13px;" class="control checkbox pull-left">
                 <input type="checkbox" ng-model="currentTax.isDefault">
                 <span class="control-indicator"></span>
-                default
               </label>
             </div>
 
