@@ -43,6 +43,10 @@
       $scope.customerListDateRange = range;
     };
 
+
+
+
+
     // $scope.changeOrder = function(order) {
     //   $scope.customerListOrder = order;
     //   console.log($scope.customerListOrder);

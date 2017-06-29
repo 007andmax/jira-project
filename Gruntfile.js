@@ -24,12 +24,6 @@ module.exports = function (grunt) {
     buildDate: Date.now()
   };
 
-  var adminConfig = {
-    app: require('./bower.json').appPath || 'admin',
-    dist: 'dist',
-    buildDate: Date.now()
-  };
-
   // Define the configuration for all the tasks
   grunt.initConfig({
 
