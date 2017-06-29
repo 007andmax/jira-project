@@ -11705,3 +11705,8 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   cursor: pointer;
   margin-left: 20px;
 }
+
+.chart-header .chart-header-controls p.choosen, .chart-header .chart-header-controls p:hover {
+  color: #000;
+  border-bottom: 2px solid #0094d0
+}

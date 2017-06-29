@@ -1,23 +1,39 @@
-
+<style>
+  .chart-p.choosen, .chart-p:hover {
+    color: #000;
+    border-bottom: 2px solid #0094d0
+  }
+  .chart-p{
+    float: left;
+    cursor: pointer;
+    margin: 0px 10px 20px 10px;
+    color: #c5c5c5;
+    font-size: 16px;
+  }
+</style>
 <div class="customer-list">
     <h2>Customer List</h2>
-    <div class="customer-list-header clearfix">
-        <div class="customer-filter">
-            <p ng-click="changeCustomerListDateRange('TODAY')" ng-class="{'choosen': customerListDateRange === 'TODAY'}">Signups today</p>
-            <p ng-click="changeCustomerListDateRange('WEEK')" ng-class="{'choosen': customerListDateRange === 'WEEK'}">Signups week</p>
-            <p ng-click="changeCustomerListDateRange('MONTH')" ng-class="{'choosen': customerListDateRange === 'MONTH'}">Signups month</p>
-            <p ng-click="changeCustomerListDateRange('TOTAL')" ng-class="{'choosen': customerListDateRange === 'TOTAL'}">Signups total</p>
+    <div class="customer-list-header clearfix" >
+        <div class="customer-filter" style="margin-bottom: 2px">
+            <p class="chart-p" ng-click="changeCustomerListDateRange('TODAY')" ng-class="{'choosen': customerListDateRange === 'TODAY'}" >Signups today</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('WEEK')" ng-class="{'choosen': customerListDateRange === 'WEEK'}" >Signups week</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('MONTH')" ng-class="{'choosen': customerListDateRange === 'MONTH'}" >Signups month</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('TOTAL')" ng-class="{'choosen': customerListDateRange === 'TOTAL'}" >Signups total</p>
         </div>
         <div class="customer-sort">
             <p>Sort by</p>
-            <select name="orderSelect" ng-model="customerListOrder">
+            <select name="orderSelect" ng-model="customerListOrder" style="height: 30px">
               <option ng-repeat="option in availableOrder" value="{{option.value}}">{{option.name}}</option>
             </select>
+
+
+
         </div>
         <div class="customer-search">
             <p>Search</p>
-            <input type="text" ng-model="filterKeyWord">
+            <input type="text" ng-model="filterKeyWord" style="height: 30px">
         </div>
+
     </div>
     <ul class="customer-list-content">
         <li class="customer-list-content-header">
@@ -32,7 +48,7 @@
             <div class="col-2">Last logon</div>
             <div class="col-2">Status</div>
         </li>
-        <li class="customer-list-content-body" ng-repeat="customer in customerList | orderBy: customerListOrder |filter: filterKeyWord">
+        <li class="customer-list-content-body" ng-repeat="customer in customerList | orderBy: customerListOrder |filter: filterKeyWord | filter: dateRangeFilter('createdDate') ">
             <div class="col-2">{{parseDate(customer.createDate) | date: 'dd.MM.yy'}}</div>
             <div class="col-1"> {{customer.companyName}}</div>
             <div class="col-1">{{customer.shortName}}</div>
@@ -48,5 +64,7 @@
 
     </ul>
 </div>
+
+
 
 
