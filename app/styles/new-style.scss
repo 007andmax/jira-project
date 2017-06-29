@@ -139,6 +139,20 @@ $green-active: #668C4D;
     }
   }
 }
+@media screen and (max-width: 1366px){
+  .progress-small-size.Unclaimed-ticket{
+    border: none;
+    background-color: #4ba9df;
+  }
+  .progress-small-size.progress-ticket{
+    border: none;
+    background-color: #ffb937;
+  }
+  .progress-small-size.completed-ticket{
+    border: none;
+    background-color: #90c56b;
+  }
+}
 //BUTTONS-END============================================
 
 
