@@ -95,15 +95,15 @@
       background-color: transparent;
       border-color: transparent; }
 @media screen and (max-width: 1366px){
-  .Unclaimed-ticket{
+  .progress-small-size.Unclaimed-ticket{
     border: none;
     background-color: #4ba9df;
   }
-  .progress-ticket{
+  .progress-small-size.progress-ticket{
     border: none;
     background-color: #ffb937;
   }
-  .completed-ticket{
+  .progress-small-size.completed-ticket{
     border: none;
     background-color: #90c56b;
   }
