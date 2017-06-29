@@ -52,13 +52,13 @@
       var selectedTaxes = {};
       for (var i = 0; i < taxes.length; i++) {
         var tax = taxes[i];
-        selectedTaxes[tax.original.id] = true;
+        selectedTaxes[tax.original ? tax.original.id : tax.id] = true;
       }
       return selectedTaxes;
     }
 
     function onDropdownToggle(isOpen) {
-      if (!isOpen) {
+      if (!isOpen && $ctrl.onClose) {
         $ctrl.onClose($ctrl.entity, $ctrl.entityType);
       }
     }

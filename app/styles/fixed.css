@@ -641,7 +641,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .default-tax-list > li > .helping-additional-class > .col-1 {
-  width: calc(100% - 250px);
+  width: calc(100% - 303px);
 }
 
 .qt-list > li > .helping-additional-class > [class*="col-"] {

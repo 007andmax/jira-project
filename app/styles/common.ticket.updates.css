@@ -535,10 +535,12 @@
 
 .ticket-update-edit .icon-edit {
   position: absolute;
-  top: 50px;
+  top: 43px;
   left: 63px;
 }
-
+.ticket-update-edit .icon-edit.icn-update-product{
+  top: 50px;
+}
 .ticket-update-product-edit {
   position: absolute;
   left: -20px;

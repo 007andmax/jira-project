@@ -207,7 +207,7 @@
 
           <div ng-messages="contactForm.primaryEmail.$error"
                ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
-            <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+            <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
             <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
             <div class="control-label" ng-message="unique">This email already occupied.</div>
             <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
@@ -219,6 +219,26 @@
                  contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
                  model-id="contact.id">
         </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'secondaryEmail')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'secondaryEmail')}">
+            Secondary email
+          </label>
+
+          <div ng-messages="contactForm.secondaryEmail.$error"
+               ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'secondaryEmail')}">
+            <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+            <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+            <!--<div class="control-label" ng-message="unique">This email already occupied.</div>-->
+            <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+          </div>
+
+          <input class="form-control" type="text" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur
+                 ng-model="contact.secondaryEmail" ng-pattern="emailPattern" ng-maxlength="128">
+
+        </div>
+
         <div class="form-group">
 
           <label class="control-label">Subscribe to</label>

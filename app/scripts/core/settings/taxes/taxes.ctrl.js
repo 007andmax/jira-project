@@ -10,7 +10,8 @@
 
         $scope.newTax = {
           name: '',
-          rate: ''
+          rate: '',
+          isDefault: false
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
@@ -27,7 +28,11 @@
         $scope.saveNewTax = function (form) {
           if (form.$valid) {
             TaxesService.save($scope.newTax, function () {
-              $scope.newTax = {};
+              $scope.newTax = {
+                name: '',
+                rate: '',
+                isDefault: false
+              };
               form.$setPristine();
             });
           }
