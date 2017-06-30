@@ -37,12 +37,15 @@
 .customer-list-content [class*=col-] {
   display: inline-block;
   vertical-align: top;
+  word-break: break-all;
 }
 
 .customer-list-content-header {
   font-weight: 700;
 }
-
+.customer-list-content-header [class*=col-]{
+  word-break: normal;
+}
 .customer-list-content li {
   padding: 14.5px 5px;
   border-bottom: 1px solid #eee;

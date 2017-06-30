@@ -1956,7 +1956,10 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .icn-user-phone {
   background-image: url("../images/new-icons/call.png");
 }
-
+.icn-home-phone{
+  background: url("../images/new-icons/home-admin-panel.png");
+  background-size: cover;
+}
 .icn-user-company {
   background-image: url("../images/new-icons/building.png");
 }

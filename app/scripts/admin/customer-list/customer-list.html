@@ -10,10 +10,37 @@
     color: #c5c5c5;
     font-size: 16px;
   }
+  .customer-sort select{
+    outline: none;
+    padding: 0 40px 0 10px;
+    width: 80%;
+    height: 30px;
+    border-radius: 4px 3px 3px 4px;
+    border: 1px solid #d3d8e1;
+    background-color: #ffffff;
+  }
+  .log-out-btn{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+  }
+  .log-out-btn input{
+    background-color: transparent;
+    color: #8e9598;
+    border: 2px solid #8e9598;
+    border-radius: 4px;
+    outline: none;
+    transition: all .3s;
+    width: 100px;
+  }
+  .log-out-btn input:hover{
+    color: #FFF;
+    background-color: #8e9598;
+  }
 </style>
 <div class="customer-list">
     <h2>Customer List</h2>
-  <div>
+  <div class="log-out-btn">
     <form action="../logout">
       <input type="submit" value="Log out">
     </form>
@@ -27,7 +54,7 @@
         </div>
         <div class="customer-sort">
             <p>Sort by</p>
-            <select name="orderSelect" ng-model="customerListOrder" style="height: 30px">
+            <select name="orderSelect" ng-model="customerListOrder">
               <option ng-repeat="option in availableOrder" value="{{option.value}}">{{option.name}}</option>
             </select>
 
@@ -61,7 +88,7 @@
             <div class="col-1">{{customer.primaryContactName}}</div>
             <div class="col-1">
                 <div ng-repeat="phone in customer.phoneNumbers">
-                  {{phone.number}} <i class="" ng-show="phone.typeNumber === 'OFFICE'"></i> <i class="" ng-show="phone.typeNumber === 'HOME' "></i>
+                  {{phone.number}} <i class="icon-sm icn-user-phone" ng-show="phone.typeNumber === 'OFFICE'"></i> <i class="icon-sm icn-home-phone" ng-show="phone.typeNumber === 'HOME' "></i>
                 </div>
             </div>
             <div class="col-1 ellipsis">{{customer.email}}</div>
