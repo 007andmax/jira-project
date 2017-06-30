@@ -13,12 +13,17 @@
 </style>
 <div class="customer-list">
     <h2>Customer List</h2>
+  <div>
+    <form action="../logout">
+      <input type="submit" value="Log out">
+    </form>
+  </div>
     <div class="customer-list-header clearfix" >
         <div class="customer-filter" style="margin-bottom: 2px">
-            <p class="chart-p" ng-click="changeCustomerListDateRange('TODAY')" ng-class="{'choosen': customerListDateRange === 'TODAY'}" >Signups today</p>
-            <p class="chart-p" ng-click="changeCustomerListDateRange('WEEK')" ng-class="{'choosen': customerListDateRange === 'WEEK'}" >Signups week</p>
-            <p class="chart-p" ng-click="changeCustomerListDateRange('MONTH')" ng-class="{'choosen': customerListDateRange === 'MONTH'}" >Signups month</p>
-            <p class="chart-p" ng-click="changeCustomerListDateRange('TOTAL')" ng-class="{'choosen': customerListDateRange === 'TOTAL'}" >Signups total</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('TODAY')" ng-class="{'choosen': customerListLastDate === 'TODAY'}" >Signups today</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('WEEK')" ng-class="{'choosen': customerListLastDate === 'WEEK'}" >Signups week</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('MONTH')" ng-class="{'choosen': customerListLastDate === 'MONTH'}" >Signups month</p>
+            <p class="chart-p" ng-click="changeCustomerListDateRange('TOTAL')" ng-class="{'choosen': customerListLastDate === 'TOTAL'}" >Signups total</p>
         </div>
         <div class="customer-sort">
             <p>Sort by</p>
@@ -33,6 +38,7 @@
             <p>Search</p>
             <input type="text" ng-model="filterKeyWord" style="height: 30px">
         </div>
+
 
     </div>
     <ul class="customer-list-content">
@@ -53,13 +59,17 @@
             <div class="col-1"> {{customer.companyName}}</div>
             <div class="col-1">{{customer.shortName}}</div>
             <div class="col-1">{{customer.primaryContactName}}</div>
-            <div class="col-1"> {{customer.phoneNumbers[1]}}</div>
+            <div class="col-1">
+                <div ng-repeat="phone in customer.phoneNumbers">
+                  {{phone.number}} <i class="" ng-show="phone.typeNumber === 'OFFICE'"></i> <i class="" ng-show="phone.typeNumber === 'HOME' "></i>
+                </div>
+            </div>
             <div class="col-1 ellipsis">{{customer.email}}</div>
             <div class="col-1">{{customer.subscription}}</div>
             <div class="col-2">{{customer.agentCount}}</div>
             <div class="col-2">{{parseDate(customer.lastLogon) | date: 'dd.MM.yy'}}</div>
             <div class="col-2"><p class="active-status">{{customer.status}}</p></div>
-            <a><i class="icon-sm icn-delete" ng-click="removeCustomer(customer)"></i></a>
+            <!--<a><i class="icon-sm icn-delete" ng-click="removeCustomer(customer)"></i></a>-->
         </li>
 
     </ul>
