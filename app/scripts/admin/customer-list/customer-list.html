@@ -88,7 +88,7 @@
             <div class="col-1">{{customer.primaryContactName}}</div>
             <div class="col-1">
                 <div ng-repeat="phone in customer.phoneNumbers">
-                  {{phone.number}} <i class="icon-sm icn-user-phone" ng-show="phone.typeNumber === 'OFFICE'"></i> <i class="icon-sm icn-home-phone" ng-show="phone.typeNumber === 'HOME' "></i>
+                  <i class="icon-sm icn-user-phone" ng-show="phone.typeNumber === 'OFFICE'" uib-tooltip="office"></i> <i class="icon-sm icn-user-fax" ng-show="phone.typeNumber === 'FAX' "></i> {{phone.number}}
                 </div>
             </div>
             <div class="col-1 ellipsis">{{customer.email}}</div>
