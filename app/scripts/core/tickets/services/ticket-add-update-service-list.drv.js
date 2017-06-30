@@ -23,7 +23,16 @@
                 listBeforeSorting.push({ 'value': $scope.serviceList[i].name, 'data': $scope.serviceList[i] });
               }
             }
-            autocompleteServiceList = listBeforeSorting.sort();
+            autocompleteServiceList = listBeforeSorting.sort(function (a, b) {
+              if (a.value > b.value) {
+                return 1;
+              }
+              if (a.value < b.value) {
+                return -1;
+              }
+
+              return 0;
+            });
 
             $(element).autocomplete({
               lookup: autocompleteServiceList,
