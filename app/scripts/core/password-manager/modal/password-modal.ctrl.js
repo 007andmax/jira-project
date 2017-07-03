@@ -343,6 +343,9 @@
           if (password.onlyForMe) {
             dto.managedById = $scope.currentUser.id;
           }
+          if(password.note) {
+            dto.note = password.note;
+          }
 
           switch (dto.template) {
             case 'OFFICE_365_ACCOUNT': {
