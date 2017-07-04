@@ -8,7 +8,7 @@
     function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService) {
 
       $scope.discountAmountMsxLength;
-      $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.;:'"?\-\s]{1,100}$/;
+      $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.,;:-='"?&\-\s ]{1,100}$/;
 
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
