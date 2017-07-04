@@ -4931,6 +4931,9 @@ Devices tab
   width: 100%;
   padding-bottom: 15px;
 }
+.contracts .service-bill-content .service-bill-hide-content{
+  padding-left: 0;
+}
 .contacts-details-content{
   border: 1px solid #E2E6E6;
   border-radius: 5px;
@@ -4946,4 +4949,7 @@ Devices tab
 }
 .contacts-details-content .btn{
   margin: 0 auto;
+}
+.btn-create-margin{
+  margin: 20px 30px;
 }
