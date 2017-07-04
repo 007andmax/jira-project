@@ -4871,9 +4871,7 @@ Devices tab
 .service-form-wrapper .form-control {
   display: inline-block;
   vertical-align: middle;
-  padding-top: 4px;
 }
-
 .service-contract-details p {
   margin: 15px 0;
 }
@@ -4922,7 +4920,30 @@ Devices tab
   margin-right: 5px;
   margin-top: 25px;
 }
+.contracts .add-remove-service .btn-primary.btn-margin{
+  margin-top: 0;
+}
 .add-remove-service .icn-plus,
 .add-remove-service .icn-remove-token-light{
   margin-top: 12px;
+}
+.contracts .contacts-details-content p{
+  width: 100%;
+  padding-bottom: 15px;
+}
+.contacts-details-content{
+  border: 1px solid #E2E6E6;
+  border-radius: 5px;
+  text-align: center;
+}
+.contacts-details-content-price{
+  font-size: 20px;
+  font-weight: bold;
+  padding: 30px 0;
+  border: 1px solid #eee;
+  margin: 30px 0;
+  border-radius: 5px;
+}
+.contacts-details-content .btn{
+  margin: 0 auto;
 }
