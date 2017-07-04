@@ -3,10 +3,12 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateProductCtrl',
-      ['$scope', 'ProductsService',
-        function ($scope, ProductsService) {
+      ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService',
+        function ($scope, ProductsService, PermissionsService) {
           $scope.quantityPattern = /^\d{0,4}$/;
           $scope.pricePattern = /^\d{0,6}(\.\d{0,2})?$/;
+
+          $scope.PermissionsService = PermissionsService;
 
           $scope.loadProductByCategory = function (categoryId) {
             $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
