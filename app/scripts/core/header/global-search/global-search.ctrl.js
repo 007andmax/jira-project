@@ -27,6 +27,11 @@
           if (preventSearch) {
             preventSearch = false;
             $scope.searchResult = {};
+
+            $scope.searchResultTickets = {};
+            $scope.searchResultWoTickets = [];
+            $scope.listOFItemsForSearchWoTickets ={};
+
             $scope.localSearchResult = [];
             $scope.resultCount = 0;
             $scope.filterResultCount = 0;
@@ -84,6 +89,23 @@
             GlobalSearch.search(word, function (resp) {
               $scope.searchResult = resp;
               $scope.resultCount += resp.length;
+              var resultWoTickets = [];
+              var listOFItemsForSearchWoTickets = [];
+              for(var i=0; i< $scope.searchResult.length; i++) {
+
+                if($scope.searchResult[i].type === "TICKETS") {
+                  $scope.searchResultTickets = $scope.searchResult[i];
+                } else {
+                  resultWoTickets.push($scope.searchResult[i]);
+                  for(var m=0; m<$scope.searchResult[i].list.length; m++ ) {
+                    listOFItemsForSearchWoTickets.push($scope.searchResult[i].list[m]);
+                  }
+                }
+              }
+              $scope.searchResultWoTickets = resultWoTickets;
+              $scope.listOFItemsForSearchWoTickets = listOFItemsForSearchWoTickets;
+
+
 
               $scope.select = selectItem;
               $scope.$broadcast('refreshNavigationDirective');
