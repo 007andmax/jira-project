@@ -55,7 +55,7 @@
           <div ng-repeat="item in searchResultTickets.list track by item.id" class="item focusable" ng-click="select(item)">
             <div class="item-name" ng-class="{'one-string': !item.info}">
               <span highlight-text="{{ item.name }}" substring="{{ globalSearch.searchValue }}"></span>
-              <div style="display: inline-block;" ng-if="items.type === 'COMPANIES'" ng-click="filterByType(item, $event)"
+              <div style="display: inline-block;position: absolute;right: -15px;" ng-if="items.type === 'COMPANIES'" ng-click="filterByType(item, $event)"
                    uib-tooltip="Filter by {{ item.name }} {{ item.type }}"  tooltip-append-to-body="true">
                 <i class="icn-sm icn-ticket-filter" style="display: inline-block;"></i>
               </div>
@@ -92,7 +92,7 @@
               <span highlight-text="{{ item.name }}" substring="{{ globalSearch.searchValue }}"></span>
               <span class="item-info" >{{item.type}}</span>
 
-              <div style="display: inline-block;" ng-if="items.type === 'COMPANIES'"
+              <div style="display: inline-block;position: absolute;right: -15px;" ng-if="items.type === 'COMPANIES'"
                    ng-click="filterByType(item, $event)"
                    uib-tooltip="Filter by {{ item.name }} {{ item.type }}" tooltip-append-to-body="true">
                 <i class="icn-sm icn-ticket-filter" style="display: inline-block;"></i>
