@@ -4903,6 +4903,9 @@ Devices tab
   width: 100px;
   display: inline-block;
 }
+.hourly .service-bill-hide-content{
+  padding-left: 0;
+}
 .service-bill-hide-content{
   padding-left: 25px;
 }
