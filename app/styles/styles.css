@@ -1016,10 +1016,12 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-.billable-content .bootstrap-datetimepicker-widget.dropdown-menu{
+
+.billable-content .bootstrap-datetimepicker-widget.dropdown-menu {
   right: 0 !important;
-  left: auto!important;
+  left: auto !important;
 }
+
 .receivable-content .product-list-ticket {
   box-shadow: none;
   border: none;
@@ -4498,8 +4500,9 @@ select[multiple].input-lg {
 .device-field .control input:checked ~ .control-indicator {
   margin: 14px 0 0 15px;
 }
-.device-field .dropdown-margin .control  .control-indicator{
-  margin: 0!important;
+
+.device-field .dropdown-margin .control .control-indicator {
+  margin: 0 !important;
 }
 
 .control input:checked ~ .control-indicator.plus-circle {
@@ -11664,16 +11667,20 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   max-height: 200px;
   overflow-x: hidden;
 }
-.dropdown-width .dropdown-menu.dropdown-menu-left.checkbox-dropdown{
+
+.dropdown-width .dropdown-menu.dropdown-menu-left.checkbox-dropdown {
   width: 100% !important;
   max-width: 100% !important;
 }
-.qt-product-edit .col-1 .dropdown-width .select-taxes-drv .checkbox-dropdown .checkbox{
+
+.qt-product-edit .col-1 .dropdown-width .select-taxes-drv .checkbox-dropdown .checkbox {
   width: 100%;
 }
-.qt-product-edit .dropdown-width .icn-label-save{
+
+.qt-product-edit .dropdown-width .icn-label-save {
   right: 13px;
 }
+
 #companyInfoContactInfo {
   display: inline-block;
 }
@@ -11692,6 +11699,44 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   width: 13%;
 }
 
+.billing-type-content {
+  padding: 0 15px;
+}
+
+.billing-type-content h5,
+.billing-type-content .col-xs-4 h5 {
+  margin: 5px;
+}
+
+.billing-type-content img {
+  width: 100px;
+}
+
+.billing-type-content .col-xs-4 {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: all .3s;
+  border: 2px solid #fff;
+  border-radius: 5px;
+}
+
+.billing-type-content .col-xs-4:hover {
+  border-color: #90C56B;
+  background-color: #F7F7F7;
+}
+
+.billing-type-content .col-xs-4 p {
+  text-align: left;
+  border: 1px solid #B3B3B3;
+  min-height: 166px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff!important;
+}
+.company-window__billing .col-xs-12{
+  padding: 15px 20px;
+}
 @media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 512px);
@@ -11700,6 +11745,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   .opened-ticket .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
     width: 60%;
   }
+
   .opened-ticket.opened-ticket-list .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
     width: 50%;
   }
@@ -11858,8 +11904,6 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     display: block;
   }
 }
-
-
 
 .customer-list {
   padding: 45px 30px;
