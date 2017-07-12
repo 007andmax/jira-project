@@ -15,6 +15,9 @@
           };
 
         $scope.currentCompany = CompaniesService.getCurrentCompany();
+
+        $scope.companyPaymentInfo = CompaniesService.getCompanyPaymentInfo();
+
         $scope.editCompany = $scope.currentCompany.staticCopy();
         $scope.currentAddressIndex = 0;
         AddressesService.getLocales(true, function (response) {
@@ -30,6 +33,12 @@
           $scope.isTryToSave = true;
           $scope.isFromWelcomeWizard = $stateParams.fromWelcomeWizard;
         }
+
+        $scope.changeCompanyPaymentInfo = function() {
+          CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
+            console.log(resp);
+          })
+        };
 
         $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {
 

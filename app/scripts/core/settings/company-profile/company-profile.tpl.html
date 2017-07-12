@@ -68,23 +68,23 @@
     <div class="form-row">
       <div class="form-group">
         <label for="">Paypal</label>
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.paypalClientId" uib-tooltip="PayPal Client Id" execute-when-outfocused="changeCompanyPaymentInfo()">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.paypalSecretId" uib-tooltip="PayPal Secret Id" execute-when-outfocused="changeCompanyPaymentInfo()">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label for="">Stripe</label>
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.stripePublicKey" uib-tooltip="Stripe Public Key" execute-when-outfocused="changeCompanyPaymentInfo()">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.stripeSecretKey" uib-tooltip="Stripe Secret Key" execute-when-outfocused="changeCompanyPaymentInfo()">
       </div>
     </div>
   </div>
