@@ -61,6 +61,34 @@
     </div>
   </div>
 
+  <div class="payments-info">
+    <div class="create-user-header">
+      <h3 class="pull-left">Payments info</h3>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="">Paypal</label>
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.paypalClientId" uib-tooltip="PayPal Client Id" execute-when-outfocused="changeCompanyPaymentInfo()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.paypalSecretId" uib-tooltip="PayPal Secret Id" execute-when-outfocused="changeCompanyPaymentInfo()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="">Stripe</label>
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.stripePublicKey" uib-tooltip="Stripe Public Key" execute-when-outfocused="changeCompanyPaymentInfo()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input class="form-control" type="text" ng-model="companyPaymentInfo.stripeSecretKey" uib-tooltip="Stripe Secret Key" execute-when-outfocused="changeCompanyPaymentInfo()">
+      </div>
+    </div>
+  </div>
+
   <div class="contact-info-wrapper" id="companyInfoContactInfo">
     <div class="create-new-user settings-basic-info clearfix"
          ng-if="companyForSettingLoad" ng-form="addressesWrapForm"
@@ -175,10 +203,17 @@
 
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

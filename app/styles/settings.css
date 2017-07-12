@@ -908,19 +908,26 @@ input.default-invoice-terms {
   opacity: 0.87;
 }
 
-.response-time-settings-wrapper .form-row {
+.response-time-settings-wrapper .form-row,
+.payments-info .form-row{
   display: table;
   width: 100%;
   margin-bottom: 10px;
 }
 
-.response-time-settings-wrapper .form-row .form-group {
+.response-time-settings-wrapper .form-row .form-group,
+.payments-info .form-row .form-group{
   display: table-cell;
   width: 50%;
   vertical-align: middle;
   float: none;
 }
-
+.payments-info h3{
+  margin-bottom: 13px;
+}
+.payments-info{
+  padding-top: 17px;
+}
 @media screen and (max-width: 1024px) {
   .settings-wrapper__trow--td .svg-icn-full {
     width: 60px;

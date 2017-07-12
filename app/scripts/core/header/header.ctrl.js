@@ -48,7 +48,6 @@
 
             return result;
           }
-
         };
 
         $scope.getPageNameByState = function () {
