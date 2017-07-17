@@ -117,6 +117,22 @@
           $scope.filterResultCount = 0;
         });
 
+        //
+        // function to open tickets for search
+        //
+        // $scope.goToUserTickets = function (user) {
+        //   globalSearch.searchValue = '';
+        //   $timeout(function () {
+        //     $state.go('tickets', { listType: 'all' }).then(function () {
+        //       $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
+        //       $scope.sharedState.searchFilter.companyId = '';
+        //       $scope.sharedState.searchFilter.userId = user.id;
+        //       globalSearch.preventClearing = true;
+        //       globalSearch.searchValue = $scope.getUserName(user);
+        //     });
+        //   });
+        // };
+
         $scope.dropDownRendered = function (eventName) {
           $scope.$broadcast(eventName);
         };
