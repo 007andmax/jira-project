@@ -19,8 +19,8 @@
           deleted: [],
           usersByCompanies: {}
         };
-
       Utils.customizeObj(storage);
+
 
       CompaniesService._addInitListener(init);
 
