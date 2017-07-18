@@ -61,55 +61,42 @@
 
 
 <div class="service-form-wrapper">
-  <div class="service-header">
-    <h4 class="title-services">Create new Service</h4>
-    <p>Managed Service based contract are when you bill your customers a monthly fee based on the amount of users or
-      devices the customer has, you can still bill customers extra if needed</p>
-  </div>
 
   <div class="block-time clearfix">
+    <div class="service-header">
+      <h4 class="title-services">Block Time Billing</h4>
+      <p>Sell your cusotmer a block of time, that you bill against each month, this can be carried over if not useds.
+        You can still create custom Services for projects or after hours support</p>
+    </div>
     <div class="service-contract-details clearfix">
-      <h5>Contract Details:</h5>
-      <div class="col-md-4">
-        <div class="form-group">
-          Service Type
-          <select name="" id="" class="form-control">
-            <option value="">Block Time</option>
-            <option value="">Contract</option>
-            <option value="">Hourly</option>
-          </select>
-        </div>
-      </div>
       <div class="col-md-8">
         <div class="form-group">
           Description
-          <input type="text" class="form-control">
+          <input placeholder="Description" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-12"></div>
+      <div class="col-md-3">
+        <div class="form-group">
+          Select Date:
+          <input placeholder="Start Date" type="" class="form-control">
+          <i class="report-calendar"></i>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          Start Date:
-          <input type="" class="form-control">
+          <input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">
           <i class="report-calendar"></i>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
           Interval:
-          <select name="" id="" class="form-control">
-            <option value="">Daily</option>
-            <option value="">Weekly</option>
-            <option value="">Monthly</option>
-          </select>
+          <input type="text" placeholder="Select Interval" class="form-control">
+          <i class="icn-sm icn-caret-gray"></i>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          End Date:
-          <input type="" class="form-control">
-          <i class="report-calendar"></i>
-        </div>
-      </div>
+      <div class="col-md-12"></div>
       <div class="col-md-1">
         <label class="control checkbox">
           <input>
@@ -118,33 +105,33 @@
         </label>
       </div>
       <div class="col-md-12">
-        <p>Block Time Contracts are based on preselling a block of time your customer</p>
+        <p class="info-block">Block Time Contracts are based on preselling a block of time your customer</p>
       </div>
     </div>
     <div class="service-bill clearfix">
-      <h5>Select how you bill your customer</h5>
+      <h4>Select how you bill your customer</h4>
       <div class="col-md-4">
         <div class="form-group">
           Included hours:
-          <input type="text" class="form-control">
+          <input placeholder="Hours" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group before-icon">
+          Block Rate:
+          <input placeholder="Rate per hr" type="text" class="form-control">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          Block Rate per hr:
-          <input type="text" class="form-control">
+          Total Hours:
+          <input placeholder="Total" type="text" class="form-control">
         </div>
       </div>
       <div class="col-md-4">
-        <div class="form-group">
-          Total for Block:
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          Rate per hour over Block Time:
-          <input type="text" class="form-control">
+        <div class="form-group before-icon">
+          Rate exceding block time:
+          <input placeholder="Rate per hr" type="text" class="form-control">
         </div>
       </div>
       <div class="service-bill-content">
@@ -153,24 +140,12 @@
           <span class="control-indicator"></span>
           Enable Time Rollover of unused hours
         </label>
-          <div class="service-bill-hide-content">
-            <div class="form-group">
-              Rate per hour:
-              <input type="text" class="form-control hour-rate">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12"><label class="control checkbox">
-          <input>
-          <span class="control-indicator"></span>
-          After Hours Included
-        </label>
-          <div class="service-bill-hide-content">
-            <div class="form-group">
-              After Hours Rate per hour:
-              <input type="text" class="form-control hour-rate">
-            </div>
-          </div>
+          <!--<div class="service-bill-hide-content">-->
+          <!--<div class="form-group">-->
+          <!--Rate per hour:-->
+          <!--<input type="text" class="form-control hour-rate">-->
+          <!--</div>-->
+          <!--</div>-->
         </div>
         <div class="col-md-12">
           <label class="control checkbox">
@@ -179,51 +154,51 @@
             We will bill our customers for additional services
           </label>
           <div class="service-bill-hide-content clearfix">
-            <div class="col-md-5 form-group">
-              Service name
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3 fourm-group">
-              Per hour
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-2 fourm-group">
-              Is billable
-              <label class="control checkbox">
-                <input>
-                <span class="control-indicator"></span>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
-                <div class="btn-icn btn btn-primary add-expense-btn">
-                  <i class="icn-sm icn-plus"></i>
+            <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
+              contract time</p>
+            <div class="col-md-5">Service name</div>
+            <div class="col-md-3">Per hour</div>
+            <div class="col-md-2">Make Billable</div>
+            <div class="col-md-2">Action</div>
+            <div class="bill-hide-content-item clearfix">
+              <div class="col-md-5 form-group">
+                <input placeholder="Service Name" type="text" class="form-control">
+              </div>
+              <div class="col-md-3 fourm-group before-icon">
+                <input placeholder="0.00" type="text" class="form-control">
+              </div>
+              <div class="col-md-2 fourm-group">
+                <label class="control checkbox">
+                  <input>
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <div class="col-md-2 fourm-group">
+                <div class="add-remove-service">
+                  <div>
+                    <i class="icon-sm icn-delete"></i>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="service-bill-hide-content clearfix" class="add-remove-service">
-            <div class="col-md-5 form-group">
-              Service name
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3 fourm-group">
-              Per hour
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-2 fourm-group">
-              Is billable
-              <label class="control checkbox">
-                <input>
-                <span class="control-indicator"></span>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
-                <div class="btn-icn btn btn-primary add-expense-btn">
-                  <i class="icn-sm icn-plus"></i>
-                </div>
-
-                <div class="btn-icn btn btn-primary">
-                  <i class="icn-sm icn-remove-token-light"></i>
+            <div class="bill-hide-content-item clearfix">
+              <div class="col-md-5 form-group">
+                <input placeholder="Service Name" type="text" class="form-control">
+              </div>
+              <div class="col-md-3 fourm-group before-icon">
+                <input placeholder="0.00" type="text" class="form-control">
+              </div>
+              <div class="col-md-2 fourm-group">
+                <label class="control checkbox">
+                  <input>
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <div class="col-md-2 fourm-group">
+                <div class="add-remove-service">
+                  <div>
+                    <i class="icon-sm icn-add-action"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -255,52 +230,67 @@
         </div>
       </div>
     </div>
-    <div class="btn btn-lg btn-success btn-create pull-right btn-create-margin col-md-12">Create</div>
-  </div>
-
-  <div class="contracts clearfix">
-    <div class="service-contract-details clearfix">
-      <h5>Contract Details:</h5>
-      <div class="col-md-4">
-        <div class="form-group">
-          Service Type
-          <select name="" id="" class="form-control">
-            <option value="">Block Time</option>
-            <option value="">Contract</option>
-            <option value="">Hourly</option>
-          </select>
+    <div class="contacts-details">
+      <h5>Details</h5>
+      <div class="contacts-details-content clearfix">
+        <div class="col-md-8">
+          <p class="col-md-12">Vereburn - Monthly Block Time</p>
+          <div class="col-md-6">
+            <p>Rollover: <span>Yes</span></p>
+            <p>Included After Hours: <span>No</span></p>
+            <p>Renewal Notice: <span>Yes</span></p>
+          </div>
+          <div class="col-md-6">
+            <p>Start Date: <span>06/30/17</span></p>
+            <p>Expire Date: <span>07/29/17</span></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contacts-details-content-price">
+            $1875.00/mo
+          </div>
+          <div class="btn btn-lg btn-success btn-create">Create</div>
         </div>
       </div>
+    </div>
+  </div>
+
+
+  <div class="contracts clearfix">
+    <div class="service-header">
+      <h4 class="title-services">Service Contracts</h4>
+      <p>Manage service based contract are when you will your customers a monthly fee based on the
+        amount of users or devic the customer has, you can still bill customers extra if needed.</p>
+    </div>
+    <div class="service-contract-details clearfix">
       <div class="col-md-8">
         <div class="form-group">
           Description
-          <input type="text" class="form-control">
+          <input placeholder="Description" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-12"></div>
+      <div class="col-md-3">
+        <div class="form-group">
+          Select Date:
+          <input placeholder="Start Date" type="" class="form-control">
+          <i class="report-calendar"></i>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          Start Date:
-          <input type="" class="form-control">
+          <input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">
           <i class="report-calendar"></i>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
           Interval:
-          <select name="" id="" class="form-control">
-            <option value="">Daily</option>
-            <option value="">Weekly</option>
-            <option value="">Monthly</option>
-          </select>
+          <input type="text" placeholder="Select Interval" class="form-control">
+          <i class="icn-sm icn-caret-gray"></i>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          End Date:
-          <input type="" class="form-control">
-          <i class="report-calendar"></i>
-        </div>
-      </div>
+      <div class="col-md-12"></div>
       <div class="col-md-1">
         <label class="control checkbox">
           <input>
@@ -309,69 +299,55 @@
         </label>
       </div>
       <div class="col-md-12">
-        <p>Contract time can be used on the amount of users or devices. These number generated automatically</p>
+        <p class="info-block">Contact time cab be based on the amount of users or devices, these number generated
+          automaticaly</p>
       </div>
     </div>
     <div class="service-bill clearfix">
-      <h5>Select how you bill your customer. Managed Services will be added to Service items</h5>
-      <div class="col-md-3 form-group">
-        <label class="control checkbox">
-          <input>
-          <span class="control-indicator"></span>
-          By User
-        </label>
-      </div>
-      <div class="col-md-3 form-group">
-        <label class="control checkbox">
-          <input>
-          <span class="control-indicator"></span>
-          By Device
-        </label>
-      </div>
-      <div class="col-md-12 service-bill-hide-content clearfix">
-        <div class="col-md-2 form-group">
-          <input type="text" class="form-control">
+      <h4>Select how you bill your customer. Managed Services will be added to Service time</h4>
+      <div class="col-md-3">
+        <div class="form-group">
+          Service Bill Type:
+          <input type="text" placeholder="Select Bill Type" class="form-control">
+          <i class="icn-sm icn-caret-gray"></i>
         </div>
+      </div>
+      <div class="col-md-12"></div>
+      <div class="bill-hide-content-item clearfix">
         <div class="col-md-5 form-group">
-          <input type="text" class="form-control">
+          <input placeholder="Device Name" type="text" class="form-control">
         </div>
-        <div class="col-md-3 form-group">
-          <input type="text" class="form-control">
+        <div class="col-md-3 fourm-group">
+          <input placeholder="No.Device" type="text" class="form-control">
         </div>
-        <div class="col-md-2 fourm-group">
+        <div class="col-md-3 fourm-group before-icon">
+          <input placeholder="0.00" type="text" class="form-control">
+        </div>
+        <div class="col-md-1 fourm-group">
           <div class="add-remove-service">
-            <div class="btn-icn btn btn-primary add-expense-btn btn-margin">
-              <i class="icn-sm icn-plus"></i>
+            <div>
+              <i class="icon-sm icn-delete"></i>
             </div>
-
-            <!--<div class="btn-icn btn btn-primary">-->
-            <!--<i class="icn-sm icn-remove-token-light"></i>-->
-            <!--</div>-->
           </div>
         </div>
       </div>
-      <div class="col-md-12 service-bill-hide-content clearfix">
-        <div class="col-md-2 form-group">
-          <input type="text" class="form-control">
-        </div>
+      <div class="bill-hide-content-item clearfix">
         <div class="col-md-5 form-group">
-          <input type="text" class="form-control">
+          <input placeholder="Device Name" type="text" class="form-control">
         </div>
-        <div class="col-md-3 form-group">
-          <input type="text" class="form-control">
+        <div class="col-md-3 fourm-group">
+          <input placeholder="No.Device" type="text" class="form-control">
         </div>
-        <div class="col-md-2 fourm-group">
+        <div class="col-md-3 fourm-group before-icon">
+          <input placeholder="0.00" type="text" class="form-control">
+        </div>
+        <div class="col-md-1 fourm-group">
           <div class="add-remove-service">
-            <div class="btn-icn btn btn-primary add-expense-btn btn-margin">
-              <i class="icn-sm icn-plus"></i>
-            </div>
-
-            <div class="btn-icn btn btn-primary btn-margin">
-              <i class="icn-sm icn-remove-token-light"></i>
+            <div>
+              <i class="icon-sm icn-add-action"></i>
             </div>
           </div>
         </div>
-
       </div>
       <div class="service-bill-content">
         <div class="col-md-12">
@@ -381,51 +357,51 @@
             We will bill our customers for additional services
           </label>
           <div class="service-bill-hide-content clearfix">
-            <div class="col-md-5 form-group">
-              Service name
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3 fourm-group">
-              Per hour
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-2 fourm-group">
-              Is billable
-              <label class="control checkbox">
-                <input>
-                <span class="control-indicator"></span>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
-                <div class="btn-icn btn btn-primary add-expense-btn">
-                  <i class="icn-sm icn-plus"></i>
+            <!--<p style="padding-bottom: 15px;">All services that did not make as billable will be included in this-->
+              <!--contract time</p>-->
+            <div class="col-md-5">Service name</div>
+            <div class="col-md-3">Per hour</div>
+            <div class="col-md-2">Make Billable</div>
+            <div class="col-md-2">Action</div>
+            <div class="bill-hide-content-item clearfix">
+              <div class="col-md-5 form-group">
+                <input placeholder="Service Name" type="text" class="form-control">
+              </div>
+              <div class="col-md-3 fourm-group before-icon">
+                <input placeholder="0.00" type="text" class="form-control">
+              </div>
+              <div class="col-md-2 fourm-group">
+                <label class="control checkbox">
+                  <input>
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <div class="col-md-2 fourm-group">
+                <div class="add-remove-service">
+                  <div>
+                    <i class="icon-sm icn-delete"></i>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="service-bill-hide-content clearfix" class="add-remove-service">
-            <div class="col-md-5 form-group">
-              Service name
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3 fourm-group">
-              Per hour
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-2 fourm-group">
-              Is billable
-              <label class="control checkbox">
-                <input>
-                <span class="control-indicator"></span>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
-                <div class="btn-icn btn btn-primary add-expense-btn">
-                  <i class="icn-sm icn-plus"></i>
-                </div>
-
-                <div class="btn-icn btn btn-primary">
-                  <i class="icn-sm icn-remove-token-light"></i>
+            <div class="bill-hide-content-item clearfix">
+              <div class="col-md-5 form-group">
+                <input placeholder="Service Name" type="text" class="form-control">
+              </div>
+              <div class="col-md-3 fourm-group before-icon">
+                <input placeholder="0.00" type="text" class="form-control">
+              </div>
+              <div class="col-md-2 fourm-group">
+                <label class="control checkbox">
+                  <input>
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <div class="col-md-2 fourm-group">
+                <div class="add-remove-service">
+                  <div>
+                    <i class="icon-sm icn-add-action"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -441,10 +417,9 @@
           <div class="col-md-6">
             <p>Rollover: <span>Yes</span></p>
             <p>Included After Hours: <span>No</span></p>
+            <p>Renewal Notice: <span>Yes</span></p>
           </div>
           <div class="col-md-6">
-
-            <p>Renewal Notice: <span>Yes</span></p>
             <p>Start Date: <span>06/30/17</span></p>
             <p>Expire Date: <span>07/29/17</span></p>
           </div>
@@ -459,76 +434,87 @@
     </div>
   </div>
 
-  <div class="hourly clearfix">
-    <div class="service-contract-details clearfix">
-      <h5>Contract Details:</h5>
-      <div class="col-md-4">
-        <div class="form-group">
-          Service Type
-          <select name="" id="" class="form-control">
-            <option value="">Block Time</option>
-            <option value="">Contract</option>
-            <option value="">Hourly</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="service-bill clearfix">
-      <div class="service-bill-content">
-        <div class="col-md-12">
-          <div class="service-bill-hide-content clearfix">
-            <div class="col-md-5 form-group">
-              Service name
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3 fourm-group">
-              Per hour
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-2 fourm-group">
-              Is billable
-              <label class="control checkbox">
-                <input>
-                <span class="control-indicator"></span>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
-                <div class="btn-icn btn btn-primary add-expense-btn">
-                  <i class="icn-sm icn-plus"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="service-bill-hide-content clearfix" class="add-remove-service">
-            <div class="col-md-5 form-group">
-              Service name
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3 fourm-group">
-              Per hour
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-2 fourm-group">
-              Is billable
-              <label class="control checkbox">
-                <input>
-                <span class="control-indicator"></span>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
-                <div class="btn-icn btn btn-primary add-expense-btn">
-                  <i class="icn-sm icn-plus"></i>
-                </div>
 
-                <div class="btn-icn btn btn-primary">
-                  <i class="icn-sm icn-remove-token-light"></i>
-                </div>
-              </div>
+  <div class="hourly clearfix">
+    <div class="not-yet-hourly">
+      <img src="images/hourly.svg" alt="">
+      <div class="btn btn-primary">Create Service</div>
+      <p>No hourly services added yet,<br>
+        Click on button to add Hourly services for customers</p>
+    </div>
+    <div class="service-header">
+      <h4 class="title-services">Hourly Service</h4>
+    </div>
+    <div class="service-bill-hide-content clearfix">
+      <div class="col-md-5">Service name</div>
+      <div class="col-md-3">Per hour</div>
+      <div class="col-md-2">Make Billable</div>
+      <div class="col-md-2">Action</div>
+      <div class="bill-hide-content-item clearfix">
+        <div class="col-md-5 form-group">
+          <input placeholder="Service Name" type="text" class="form-control">
+        </div>
+        <div class="col-md-3 fourm-group before-icon">
+          <input placeholder="0.00" type="text" class="form-control">
+        </div>
+        <div class="col-md-2 fourm-group">
+          <label class="control checkbox">
+            <input>
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <div class="col-md-2 fourm-group">
+          <div class="add-remove-service">
+            <div>
+              <i class="icon-sm icn-delete"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bill-hide-content-item clearfix">
+        <div class="col-md-5 form-group">
+          <input placeholder="Service Name" type="text" class="form-control">
+        </div>
+        <div class="col-md-3 fourm-group before-icon">
+          <input placeholder="0.00" type="text" class="form-control">
+        </div>
+        <div class="col-md-2 fourm-group">
+          <label class="control checkbox">
+            <input>
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <div class="col-md-2 fourm-group">
+          <div class="add-remove-service">
+            <div>
+              <i class="icon-sm icn-add-action"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="btn btn-lg btn-success btn-create pull-right btn-create-margin col-md-12">Create</div>
+    <div class="contacts-details">
+      <h5>Details</h5>
+      <div class="contacts-details-content clearfix">
+        <div class="col-md-8">
+          <p class="col-md-12">Vereburn - Monthly Block Time</p>
+          <div class="col-md-6">
+            <p>Rollover: <span>Yes</span></p>
+            <p>Included After Hours: <span>No</span></p>
+            <p>Renewal Notice: <span>Yes</span></p>
+          </div>
+          <div class="col-md-6">
+            <p>Start Date: <span>06/30/17</span></p>
+            <p>Expire Date: <span>07/29/17</span></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contacts-details-content-price">
+            $1875.00/mo
+          </div>
+          <div class="btn btn-lg btn-success btn-create">Create</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
