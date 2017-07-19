@@ -656,8 +656,13 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
-             ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
-          Email Templates
+                   ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
+        Email Templates
+      </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.accept-credit-card-payments')"
+             ng-class="{active: $state.is('settings.accept-credit-card-payments')}">
+          Accept Credit Card Payments
         </div>
       </div>
 
