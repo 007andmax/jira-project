@@ -18,7 +18,7 @@
         <input class="form-control" type="text" placeholder="PayPal Secret Id" ng-model="companyPaymentInfo.paypalSecretId" execute-when-outfocused="changeCompanyPaymentInfo()">
       </div>
     </div>
-    <div class="btn btn-success">Save</div>
+    <div class="btn btn-success" ng-click="changeCompanyPaymentInfo()">Save</div>
     <div class="form-row">
       <div class="form-group">
         <label>Stripe</label>
@@ -30,7 +30,7 @@
         <input class="form-control" type="text" placeholder="Stripe Secret Key" ng-model="companyPaymentInfo.stripeSecretKey" execute-when-outfocused="changeCompanyPaymentInfo()">
       </div>
     </div>
-    <div class="btn btn-success">Save</div>
+    <div class="btn btn-success" ng-click="changeCompanyPaymentInfo()">Save</div>
   </div>
   <div class="credit-card-info">
 <div class="credit-card-content">
