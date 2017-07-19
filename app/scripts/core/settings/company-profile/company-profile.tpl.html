@@ -61,34 +61,6 @@
     </div>
   </div>
 
-  <div class="payments-info">
-    <div class="create-user-header">
-      <h3 class="pull-left">Payments info</h3>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label for="">Paypal</label>
-        <input class="form-control" type="text" ng-model="companyPaymentInfo.paypalClientId" uib-tooltip="PayPal Client Id" execute-when-outfocused="changeCompanyPaymentInfo()">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <input class="form-control" type="text" ng-model="companyPaymentInfo.paypalSecretId" uib-tooltip="PayPal Secret Id" execute-when-outfocused="changeCompanyPaymentInfo()">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label for="">Stripe</label>
-        <input class="form-control" type="text" ng-model="companyPaymentInfo.stripePublicKey" uib-tooltip="Stripe Public Key" execute-when-outfocused="changeCompanyPaymentInfo()">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <input class="form-control" type="text" ng-model="companyPaymentInfo.stripeSecretKey" uib-tooltip="Stripe Secret Key" execute-when-outfocused="changeCompanyPaymentInfo()">
-      </div>
-    </div>
-  </div>
-
   <div class="contact-info-wrapper" id="companyInfoContactInfo">
     <div class="create-new-user settings-basic-info clearfix"
          ng-if="companyForSettingLoad" ng-form="addressesWrapForm"
