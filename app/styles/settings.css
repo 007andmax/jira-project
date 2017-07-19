@@ -870,6 +870,10 @@ input.default-invoice-terms {
 .settings-wrapper__trow:first-child {
   margin-top: 10px;
 }
+.settings-wrapper__trow h3{
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
 
 .settings-wrapper__trow--td {
   background-color: #fff;
