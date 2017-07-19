@@ -184,9 +184,9 @@
           templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl'
         }))
-        .state('settings.accept-credit-card-payments', waitForServices({
-          url: '/accept-credit-card-payments',
-          templateUrl: '/html/scripts/core/settings/accept-credit-card-payments/accept-credit-card-payments.tpl.html',
+        .state('settings.credit-card', waitForServices({
+          url: '/credit-card',
+          templateUrl: '/html/scripts/core/settings/credit-card/credit-card.tpl.html',
           controller: 'quicktech.core.settings.creditCardCtrl'
         }))
         .state('settings.activityHistory', waitForServices({
