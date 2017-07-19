@@ -15,7 +15,6 @@
           };
 
         $scope.currentCompany = CompaniesService.getCurrentCompany();
-
         $scope.editCompany = $scope.currentCompany.staticCopy();
         $scope.currentAddressIndex = 0;
         AddressesService.getLocales(true, function (response) {
