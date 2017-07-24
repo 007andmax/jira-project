@@ -15,6 +15,17 @@
   border-radius: 10px;
 }
 
+.contracts.create-window{
+  height: 700px;
+  overflow-y: scroll;
+  padding: 20px 30px;
+}
+.contracts.create-window .service-bill-hide-content label{
+  margin-left: 10%;
+}
+.contracts.create-window .icn-add-action:before{
+  top: -4px;
+}
 .create-window .checked {
   color: #000000 !important;
 }

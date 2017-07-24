@@ -451,6 +451,19 @@
   text-transform: uppercase;
 }
 
+.service-agreements ul {
+  list-style: none;
+  padding: 20px;
+}
+
+.service-agreements ul li [class*='col-md-'] {
+  padding: 15px;
+}
+
+.service-agreements ul li:first-child {
+  border-bottom: 1px solid #eee;
+}
+
 .product-list-ticket ul {
   list-style: none;
   padding: 0;
