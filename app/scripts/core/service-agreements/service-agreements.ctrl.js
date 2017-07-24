@@ -7,7 +7,7 @@
 
     $scope.openAgreementsModal = function() {
       $uibModal.open({
-        templateUrl:'/html/scripts/core/service-agreements/service-agreements-modal.tpl.html',
+        templateUrl:'/html/scripts/core/service-agreements/service-contract-modal.tpl.html',
         animation: true,
         backdrop: false,
         size: 'lg',
@@ -28,7 +28,7 @@
         byDevice: 'By Device',
         byUsers: 'By Users'
       };
-      $scope.serviceContracts.contractType ='byDevice';
+      $scope.serviceContracts.contractType ='';
 
       $scope.changeCOntractType = function(type) {
         $scope.serviceContracts.contractType = type;
@@ -61,7 +61,34 @@
             break;
           }
         }
+      };
+
+      $scope.deviceServiceList=[];
+      createNewDevice();
+
+      function createNewDevice() {
+        var device ={
+          deviceName: null,
+          deviceNumber: null,
+          deviceCost: null
+        };
+        $scope.deviceServiceList.push(device);
       }
+      $scope.addNewDevice = function() {
+        createNewDevice();
+      };
+
+      $scope.deleteDevice = function(device){
+        for(var i=0; i<$scope.deviceServiceList.length; i++) {
+          if($scope.deviceServiceList[i] == device) {
+            $scope.deviceServiceList.splice(i, 1);
+            break;
+          }
+        }
+      };
+
+
+
 
 
 

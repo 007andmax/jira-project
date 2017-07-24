@@ -1,0 +1,252 @@
+<!--<div class="pass-man-popup">-->
+<!--<div class="close-btn btn" ng-click="closeModal()" tabindex="1">-->
+<!--<i class="icn-sm icn-remove-old"></i>-->
+<!--</div>-->
+<!--<p>Service Contracts</p>-->
+<!--<form name="serviceContractForm">-->
+<!--<div class="container">-->
+
+<!--<div class="form-group">-->
+<!--<label class="control-label">Service Bill type</label>-->
+<!--<div uib-dropdown keyboard-nav="true">-->
+<!--<button class="form-control form-control-dropdown account-type no-cursor has-dropdown"-->
+<!--uib-dropdown-toggle aria-expanded="true">-->
+<!--{{serviceBillType[serviceContracts.contractType]}}-->
+<!--</button>-->
+<!--<i class="icn-sm icn-caret-gray"></i>-->
+<!--<ul class="dropdown-menu dropdown-account-type">-->
+<!--<li ng-repeat="(role, label) in serviceBillType" ng-click="changeCOntractType(role)">-->
+<!--<a href="javascript:void(0)"> {{ label }} </a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="form-group panel">-->
+<!--<div class="col-xs-6 clearfix">-->
+<!--<label class="control checkbox pull-left">-->
+<!--<input type="checkbox" ng-model="serviceContracts.isAdditionalServices">-->
+<!--<span class="control-indicator"></span>-->
+<!--We will our customers for additional services-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="form-group col-md-12">-->
+<!--<ul>-->
+<!--<li>-->
+<!--<div class="col-md-4">Service Name</div>-->
+<!--<div class="col-md-3">Per Houe</div>-->
+<!--<div class="col-md-3">Make billable</div>-->
+<!--<div class="col-md-2">Action</div>-->
+<!--</li>-->
+<!--<li ng-repeat="service in contactServiceList">-->
+<!--<div class="col-md-3">-->
+<!--<form name="inputServiceForm"><input type="text" ng-model="service.serviceName"></form>-->
+<!--</div>-->
+<!--<div class="col-md-3">-->
+<!--<input type="number" ng-model="service.perHour">-->
+<!--</div>-->
+<!--<div class="col-md-3">-->
+
+<!--<div class="col-xs-6 clearfix">-->
+<!--<label class="control checkbox pull-left">-->
+<!--<input type="checkbox" ng-model="service.isBillable">-->
+<!--<span class="control-indicator"></span>-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-2">-->
+<!--<div class="col-6" style="float: left;" ng-if="contactServiceList.length > 1 && !$last">-->
+<!--<div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"-->
+<!--ng-click="deleteService(service)">-->
+<!--<i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div style="float: left;" ng-if="$last">-->
+<!--<div class="btn-icn btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Product"-->
+<!--tooltip-placement="top"-->
+<!--ng-click="addNewService()">-->
+<!--<i class="icn-sm icn-plus" style="margin-top: 12px;"></i>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
+<!--</div>-->
+<!--</form>-->
+
+<!--</div>-->
+
+
+<div class="contracts clearfix">
+  <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+    <i class="icn-sm icn-remove-old"></i>
+  </div>
+  <div class="service-header">
+    <h4 class="title-services">Service Contracts</h4>
+    <p>Manage service based contract are when you will your customers a monthly fee based on the
+      amount of users or devic the customer has, you can still bill customers extra if needed.</p>
+  </div>
+  <div class="service-contract-details clearfix">
+    <div class="col-md-8">
+      <div class="form-group">
+        Description
+        <input placeholder="Description" type="text" class="form-control" ng-model="serviceContracts.description">
+      </div>
+    </div>
+    <div class="col-md-12"></div>
+    <div class="col-md-3">
+      <div class="form-group">
+        Select Date:
+        <input placeholder="Start Date" type="" class="form-control">
+        <i class="report-calendar"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">
+        <i class="report-calendar"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        Interval:
+        <input type="text" placeholder="Select Interval" class="form-control">
+        <i class="icn-sm icn-caret-gray"></i>
+      </div>
+    </div>
+    <div class="col-md-12"></div>
+    <div class="col-md-1">
+      <label class="control checkbox">
+        <input ng-model="serviceContracts.isAutoRenew" type="checkbox">
+        <span class="control-indicator"></span>
+        Auto Renew
+      </label>
+    </div>
+    <div class="col-md-12">
+      <p class="info-block">Contact time cab be based on the amount of users or devices, these number generated
+        automaticaly</p>
+    </div>
+  </div>
+  <div class="service-bill clearfix">
+    <h4>Select how you bill your customer. Managed Services will be added to Service time</h4>
+    <div class="col-md-3">
+      <div class="form-group">
+        Service Bill Type:
+        <!--<input type="text" placeholder="Select Bill Type" class="form-control">-->
+        <!--<i class="icn-sm icn-caret-gray"></i>-->
+
+        <div class="form-group">
+
+          <div uib-dropdown keyboard-nav="true">
+            <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                    uib-dropdown-toggle aria-expanded="true">
+              {{serviceBillType[serviceContracts.contractType]}}
+            </button>
+            <i class="icn-sm icn-caret-gray"></i>
+            <ul class="dropdown-menu dropdown-account-type">
+              <li ng-repeat="(role, label) in serviceBillType" ng-click="changeCOntractType(role)">
+                <a href="javascript:void(0)"> {{ label }} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12"></div>
+    <div class="bill-hide-content-item clearfix" ng-repeat="device in deviceServiceList" ng-show="serviceContracts.contractType === 'byDevice'">
+      <div class="col-md-5 form-group">
+        <input placeholder="Device Name" type="text" class="form-control" ng-model="device.deviceName">
+      </div>
+      <div class="col-md-3 fourm-group">
+        <input placeholder="No.Device" type="text" class="form-control" ng-model="device.deviceNumber">
+      </div>
+      <div class="col-md-3 fourm-group before-icon">
+        <input placeholder="0.00" type="text" class="form-control" ng-model="deviceCost">
+      </div>
+      <div class="col-md-1 fourm-group">
+        <div class="add-remove-service">
+          <div ng-if="deviceServiceList.length>1 && !$last" ng-click="deleteDevice(device)">
+            <i class="icon-sm icn-delete"></i>
+          </div>
+          <div ng-if="$last" ng-click="addNewDevice()">
+            <i class="icon-sm icn-add-action"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-bill-content">
+      <div class="col-md-12">
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="serviceContracts.isAdditionalServices">
+          <span class="control-indicator"></span>
+          We will our customers for additional services
+        </label>
+        <div class="service-bill-hide-content clearfix">
+          <!--<p style="padding-bottom: 15px;">All services that did not make as billable will be included in this-->
+          <!--contract time</p>-->
+          <div class="col-md-5">Service name</div>
+          <div class="col-md-3">Per hour</div>
+          <div class="col-md-2">Make Billable</div>
+          <div class="col-md-2">Action</div>
+          <div class="bill-hide-content-item clearfix" ng-repeat="service in contactServiceList">
+            <div class="col-md-5 form-group">
+              <input placeholder="Service Name" type="text" class="form-control" ng-model="service.serviceName">
+            </div>
+            <div class="col-md-3 fourm-group before-icon">
+              <input placeholder="0.00" type="text" class="form-control" ng-model="service.perHour">
+            </div>
+            <div class="col-md-2 fourm-group">
+              <label class="control checkbox">
+                <input ng-model="service.isBillable" type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+            <div class="col-md-2 fourm-group">
+              <div class="add-remove-service" ng-if="contactServiceList.length>1 && !$last">
+                <div ng-click="deleteService(service)">
+                  <i class="icon-sm icn-delete"></i>
+                </div>
+              </div>
+              <div class="add-remove-service" ng-if="$last">
+                <div ng-click="addNewService()">
+                  <i class="icon-sm icn-add-action"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contacts-details">
+    <h5>Details</h5>
+    <div class="contacts-details-content clearfix">
+      <div class="col-md-8">
+        <p class="col-md-12">Vereburn - Monthly Block Time</p>
+        <div class="col-md-6">
+          <p>Rollover: <span>Yes</span></p>
+          <p>Included After Hours: <span>No</span></p>
+          <p>Renewal Notice: <span>Yes</span></p>
+        </div>
+        <div class="col-md-6">
+          <p>Start Date: <span>06/30/17</span></p>
+          <p>Expire Date: <span>07/29/17</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contacts-details-content-price">
+          $1875.00/mo
+        </div>
+        <div class="btn btn-lg btn-success btn-create">Create</div>
+      </div>
+    </div>
+  </div>
+</div>
