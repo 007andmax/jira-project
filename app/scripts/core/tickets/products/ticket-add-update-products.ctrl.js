@@ -3,11 +3,13 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateProductsCtrl',
-      ['$scope', 'ProductsService',
-        function ($scope, ProductsService) {
+      ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService',
+        function ($scope, ProductsService, PermissionsService) {
 
           $scope.discountAmountMsxLength;
           $scope.isValidNewExpenseOrNote = false;
+
+          $scope.PermissionsService = PermissionsService;
 
           setTicketUpdateToDefault();
 

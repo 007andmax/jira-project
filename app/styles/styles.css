@@ -1970,8 +1970,20 @@ mark,
 
 .topNavbar-search .item-info {
   float: none;
+  position: absolute;
+  right: 20px;
 }
-
+.topNavbar-search .item-info.text-muted{
+  position: static;
+}
+.topNavbar-search  .focusable{
+  cursor: pointer;
+  min-height: 48px;
+  padding: 0 10px;
+}
+.topNavbar-search  .focusable:hover{
+  background-color: #e7ecf2;
+}
 .text-primary {
   color: #e7ecf2;
 }

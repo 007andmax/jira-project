@@ -24,6 +24,7 @@
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
+      "quicktech.core.serviceAgreements",
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -154,6 +155,11 @@
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
         }))
+        .state('service-agreements', waitForServices({
+          url: '/accounting/service-agreements',
+          templateUrl: '/html/scripts/core/service-agreements/service-agreements.tpl.html',
+          controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
+        }))
         .state('settings', waitForServices({
           url: '/settings',
           templateUrl: '/html/scripts/core/settings/settings.tpl.html',
@@ -183,6 +189,11 @@
           url: '/tags',
           templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl'
+        }))
+        .state('settings.credit-card', waitForServices({
+          url: '/credit-card',
+          templateUrl: '/html/scripts/core/settings/credit-card/credit-card.tpl.html',
+          controller: 'quicktech.core.settings.creditCardCtrl'
         }))
         .state('settings.activityHistory', waitForServices({
           url: '/activityHistory',

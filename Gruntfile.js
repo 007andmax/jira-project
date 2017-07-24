@@ -49,10 +49,6 @@ module.exports = function (grunt) {
       }
     },
 
-
-
-
-
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -179,7 +175,7 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             // TO CHANGE PORT 80-81 etc when on serveDev
-            host: '25.35.19.59',
+            host: '25.36.111.113',
             port: 8080,
             https: false,
             xforward: false,

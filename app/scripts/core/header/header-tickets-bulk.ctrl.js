@@ -9,7 +9,8 @@
       function ($scope, SharedStateService, $timeout, UsersService,
                 CompaniesService, TicketsService, $rootScope, UserConfirmationsService, UserNotificationService) {
 
-        $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+        $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
+
         $scope.ticketStatus = {
           IN_PROGRESS: 'IN PROGRESS',
           ON_HOLD: 'ON HOLD',

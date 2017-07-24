@@ -121,7 +121,7 @@
       <div class="network-scan-item-4">
         <p>Test Credentials</p>
         <div class="btn btn-primary has-tooltip" ng-click="testCredentials(credentialsForm)"
-             custom-disabled="{{ isTestInProgress || !isDeviceSelected() }}">
+             custom-disabled="{{ isTestInProgress || !isDeviceSelected() || discoveredByAgentId === 'undefined'}}">
           {{ isAnyHasPassword() ? 'Update' : 'Test' }}
         </div>
       </div>

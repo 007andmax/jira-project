@@ -33,19 +33,21 @@
         };
 
         $scope.userReadable = function (text) {
-          var words = text.split(/[\-_]/),
-            result = '';
+          if(text) {
+            var words = text.split(/[\-_]/),
+              result = '';
 
-          for (var i = 0, len = words.length; i < len; i++) {
-            var word = words[i];
-            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+            for (var i = 0, len = words.length; i < len; i++) {
+              var word = words[i];
+              result += word[0].toUpperCase() + word.slice(1).toLowerCase();
 
-            if (i !== len - 1) {
-              result += ' ';
+              if (i !== len - 1) {
+                result += ' ';
+              }
             }
-          }
 
-          return result;
+            return result;
+          }
         };
 
         $scope.getPageNameByState = function () {
@@ -69,9 +71,13 @@
             return 'recurring';
           } else if ($state.includes("receivable")) {
             return 'receivable';
+          } else if ($state.includes("payments")) {
+            return 'payments';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
-          } else if ($state.includes("settings")) {
+          } else if ($state.includes("service-agreements")) {
+            return 'service-agreements';
+          }else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';
             } else {

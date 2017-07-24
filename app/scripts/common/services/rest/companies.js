@@ -20,7 +20,9 @@
         currentCompany: {}
       },
       callbackForArchive,
-      callbackForSavedCompanies = {};
+      callbackForSavedCompanies = {},
+      companyPaymentInfo = {};
+
 
     Utils.customizeObj(storage);
 
@@ -47,6 +49,16 @@
       function (resp) {
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
+      });
+
+    $http.get('/ps/tokens').then(function(resp) {
+      //console.log('payment info: ', resp.data);
+      Utils.customizeObj(resp.data, companyPaymentInfo);
+      checkInit();
+    },
+      function(resp) {
+        console.error(resp);
+        throw 'Cannot initialize CompanyPaymentInfo!';
       });
 
     $http.get('/company/current').then(function (resp) {
@@ -163,6 +175,10 @@
 
     function getVendors() {
       return storage.vendors;
+    }
+
+    function getCompanyPaymentInfo() {
+      return companyPaymentInfo;
     }
 
     function getUnassignedCompany() {
@@ -677,6 +693,19 @@
       $http.put('/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
     }
 
+    function saveCompanyPaymentInfo(data, callback) {
+      if (data === undefined) {
+        throw 'First parameter required!'
+      }
+      var future = $http({
+        url: '/ps/tokens',
+        method: 'PUT',
+        data: data
+      });
+
+      Utils.handleCallback(future, callback);
+    }
+
     function getCompanySMTPSettings(callback) {
       var future = $http.get('/settings/companyProfile/SMTPSettings');
       Utils.handleCallback(future, callback);
@@ -773,7 +802,9 @@
       getIndustries: getIndustries,
       changeCompanyStatusToActive: changeCompanyStatusToActive,
       isVendorHasProducts: isVendorHasProducts,
-      saveInboxEnabled: saveInboxEnabled
+      saveInboxEnabled: saveInboxEnabled,
+      getCompanyPaymentInfo: getCompanyPaymentInfo,
+      saveCompanyPaymentInfo: saveCompanyPaymentInfo
     }
 
   }]);

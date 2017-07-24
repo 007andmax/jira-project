@@ -870,6 +870,10 @@ input.default-invoice-terms {
 .settings-wrapper__trow:first-child {
   margin-top: 10px;
 }
+.settings-wrapper__trow h3{
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
 
 .settings-wrapper__trow--td {
   background-color: #fff;
@@ -908,19 +912,79 @@ input.default-invoice-terms {
   opacity: 0.87;
 }
 
-.response-time-settings-wrapper .form-row {
+.response-time-settings-wrapper .form-row,
+.payments-info .form-row{
   display: table;
   width: 100%;
   margin-bottom: 10px;
 }
-
-.response-time-settings-wrapper .form-row .form-group {
+.accept-credit-card-payments{
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 0;
+}
+.response-time-settings-wrapper .form-row .form-group,
+.payments-info .form-row .form-group{
   display: table-cell;
   width: 50%;
   vertical-align: middle;
   float: none;
 }
-
+.payments-info h3{
+  margin-bottom: 13px;
+}
+.payments-info,
+.credit-card-info{
+  padding-top: 20px;
+  display: inline-block;
+  width: 490px;
+  vertical-align: top;
+}
+.credit-card-header{
+  text-align: center;
+}
+.credit-card-header p{
+  color: #4ba9df;
+  font-size: 20px;
+}
+.credit-card-info{
+  background-color: #EAECEE;
+  margin-left: 20px;
+  margin-top: 80px;
+  height: 287px;
+  border-radius: 10px;
+  padding-top: 50px;
+}
+.credit-card-info .credit-card-content p{
+  position: relative;
+  padding: 0 0 15px 45px;
+  font-size: 16px;
+  color: #848484;
+}
+.credit-card-info .credit-card-content p:before{
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  background: url(../images/input-icons/accept.png);
+  background-size: cover;
+}
+.credit-card-footer{
+  color: #b3aeae;
+  padding-left: 17px;
+  font-style: italic;
+}
+.credit-card-footer img{
+  width: 55px;
+  margin: 0 2px;
+  border-radius: 4px;
+}
+.payments-info .btn{
+  float: right;
+  width: 190px;
+}
 @media screen and (max-width: 1024px) {
   .settings-wrapper__trow--td .svg-icn-full {
     width: 60px;

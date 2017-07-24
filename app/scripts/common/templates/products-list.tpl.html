@@ -1,6 +1,6 @@
 <ul class="category-list-container qt-table nano-content">
 
-  <li class="create-product" create-new-entity="product">
+  <li class="create-product" create-new-entity="product" ng-show="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
     <div class="create-product-cont" ng-click="chooseProductItem()">
       <span>Create Product</span>
     </div>

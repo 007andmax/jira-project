@@ -211,7 +211,7 @@
       function getOneCompanyGroupedData(companyId) {
         return {
           company: CompaniesService.getOneById(companyId),
-          users: UsersService.getAllByCompanyId(companyId),
+          users: UsersService.getAllByCompanyIdNonArchived(companyId),
           devices: DevicesService.getAgentsByCompany(scope, companyId)
         }
       }

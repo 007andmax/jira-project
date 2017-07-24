@@ -454,9 +454,14 @@
           Payments
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes('receipt-archive')}"
-             ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
-          Receipt Archive
+                   ng-class="{active: $state.includes('receipt-archive')}"
+                   ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
+        Receipt Archive
+      </div>
+        <div class="center-category__category"
+             ng-class="{active: $state.includes('service-agreements')}"
+             ng-click="stateGo($event, 'service-agreements')">
+          Service Agreements
         </div>
       </div>
     </div>
@@ -656,8 +661,13 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
-             ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
-          Email Templates
+                   ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
+        Email Templates
+      </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.credit-card')"
+             ng-class="{active: $state.is('settings.credit-card')}">
+          Credit Card
         </div>
       </div>
 

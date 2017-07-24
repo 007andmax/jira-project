@@ -19,8 +19,8 @@
           deleted: [],
           usersByCompanies: {}
         };
-
       Utils.customizeObj(storage);
+
 
       CompaniesService._addInitListener(init);
 
@@ -241,6 +241,19 @@
 
       function getAllByCompanyId(companyId) {
         return storage.usersByCompanies[companyId] || [];
+      }
+
+      function getAllByCompanyIdNonArchived(companyId) {
+        var companyUsers =  storage.usersByCompanies[companyId] || [];
+        var nonArchivedUsers = [];
+        if(companyUsers.length > 0) {
+          for(var i=0; i<companyUsers.length; i++) {
+            if(companyUsers[i].userEnabled === true) {
+              nonArchivedUsers.push(companyUsers[i]);
+            }
+          }
+        }
+        return nonArchivedUsers;
       }
 
       function getTechUsers() {
@@ -613,6 +626,7 @@
         getTechUsers: getTechUsers,
         getArchivedUsers: getArchivedUsers,
         getAllByCompanyId: getAllByCompanyId,
+        getAllByCompanyIdNonArchived: getAllByCompanyIdNonArchived,
         getOneById: getOneById,
         getUserProfile: getUserProfile,
         getUserEmailNotifications: getUserEmailNotifications,
