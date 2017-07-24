@@ -9,7 +9,7 @@
       $uibModal.open({
         templateUrl:'/html/scripts/core/service-agreements/service-contract-modal.tpl.html',
         animation: true,
-        backdrop: false,
+        backdrop: true,
         size: 'lg',
         controller: 'serviceAgreementsModalCtrl',
         windowTopClass: 'margin-top-modal-dialog'
