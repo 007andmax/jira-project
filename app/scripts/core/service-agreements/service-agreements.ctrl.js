@@ -11,7 +11,8 @@
         animation: true,
         backdrop: false,
         size: 'lg',
-        controller: 'serviceAgreementsModalCtrl'
+        controller: 'serviceAgreementsModalCtrl',
+        windowTopClass: 'margin-top-modal-dialog'
 
       });
     };
