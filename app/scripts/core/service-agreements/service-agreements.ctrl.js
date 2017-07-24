@@ -12,7 +12,7 @@
         backdrop: true,
         size: 'lg',
         controller: 'serviceAgreementsModalCtrl',
-        windowTopClass: 'margin-top-modal-dialog'
+        windowClass: 'create-popup margin-top-modal-dialog',
 
       });
     };
