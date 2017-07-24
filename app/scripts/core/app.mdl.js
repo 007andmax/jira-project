@@ -24,6 +24,7 @@
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
+      "quicktech.core.serviceAgreements",
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -153,6 +154,11 @@
           url: '/accounting/receipt-archive/:mode',
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
+        }))
+        .state('service-agreements', waitForServices({
+          url: '/accounting/service-agreements',
+          templateUrl: '/html/scripts/core/service-agreements/service-agreements.tpl.html',
+          controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
         }))
         .state('settings', waitForServices({
           url: '/settings',

@@ -71,9 +71,13 @@
             return 'recurring';
           } else if ($state.includes("receivable")) {
             return 'receivable';
+          } else if ($state.includes("payments")) {
+            return 'payments';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
-          } else if ($state.includes("settings")) {
+          } else if ($state.includes("service-agreements")) {
+            return 'service-agreements';
+          }else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';
             } else {
