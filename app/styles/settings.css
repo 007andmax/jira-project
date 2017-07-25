@@ -930,6 +930,33 @@ input.default-invoice-terms {
   vertical-align: middle;
   float: none;
 }
+.turn-on-content{
+  background-color: #EAECEE;
+  font-size: 0;
+  margin-top: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+.turn-on-content .credit-card-info{
+  width: 55%;
+  margin: 0;
+}
+.turn-on-content .left-image{
+  width: 45%;
+}
+.triangle-bottom{
+  position: absolute;
+  border: 60px solid transparent;
+  border-top: 40px solid #EAECEE;
+  left: calc(50% - 60px);
+}
+.turn-on-content .btn-success{
+  display: block;
+}
+.left-image,
+.credit-card-info{
+  display: inline-block;
+}
 .payments-info h3{
   margin-bottom: 13px;
 }
@@ -942,6 +969,15 @@ input.default-invoice-terms {
 }
 .credit-card-header{
   text-align: center;
+}
+.credit-card-turn-off .btn-primary,
+.credit-card-turn-on .btn-success{
+  height: 50px;
+  width: 460px;
+  font-size: 22px;
+  margin: 50px auto 0;
+  display: inherit;
+  padding-top: 7px;
 }
 .credit-card-header p{
   color: #4ba9df;
