@@ -51,8 +51,8 @@
         throw 'Cannot initialize CompaniesService!';
       });
 
-    $http.get('/ps/tokens').then(function(resp) {
-      //console.log('payment info: ', resp.data);
+    $http.get('/ps/settings').then(function(resp) {
+      console.log('payment info: ', resp.data);
       Utils.customizeObj(resp.data, companyPaymentInfo);
       checkInit();
     },
@@ -179,6 +179,7 @@
 
     function getCompanyPaymentInfo() {
       return companyPaymentInfo;
+
     }
 
     function getUnassignedCompany() {
@@ -698,7 +699,7 @@
         throw 'First parameter required!'
       }
       var future = $http({
-        url: '/ps/tokens',
+        url: '/ps/settings',
         method: 'PUT',
         data: data
       });

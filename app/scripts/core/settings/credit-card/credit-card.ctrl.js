@@ -13,6 +13,21 @@
         })
       };
 
+      $scope.turnOnCreditCard = function(){
+        $scope.companyPaymentInfo.enabled = true;
+        CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
+          console.log(resp);
+        })
+      };
+
+      $scope.turnOffCreditCard = function() {
+        $scope.companyPaymentInfo.enabled = false;
+        CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
+          console.log(resp);
+        })
+      }
+
     }]);
+
 
 }());
