@@ -933,13 +933,14 @@ input.default-invoice-terms {
 .turn-on-content{
   background-color: #EAECEE;
   font-size: 0;
-  margin-top: 20px;
+  margin-top: 80px;
   border-radius: 10px;
   position: relative;
 }
 .turn-on-content .credit-card-info{
   width: 55%;
   margin: 0;
+  padding-left: 60px;
 }
 .turn-on-content .left-image{
   width: 45%;
@@ -970,6 +971,7 @@ input.default-invoice-terms {
 .credit-card-header{
   text-align: center;
 }
+
 .credit-card-turn-off .btn-primary,
 .credit-card-turn-on .btn-success{
   height: 50px;
