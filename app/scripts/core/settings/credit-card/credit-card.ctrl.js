@@ -9,21 +9,21 @@
 
       $scope.changeCompanyPaymentInfo = function() {
         CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
-          console.log(resp);
+          //console.log(resp);
         })
       };
 
       $scope.turnOnCreditCard = function(){
-        $scope.companyPaymentInfo.enabled = true;
+        $scope.companyPaymentInfo.paymentsEnabled = true;
         CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
-          console.log(resp);
+          //console.log(resp);
         })
       };
 
       $scope.turnOffCreditCard = function() {
-        $scope.companyPaymentInfo.enabled = false;
+        $scope.companyPaymentInfo.paymentsEnabled = false;
         CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
-          console.log(resp);
+          //console.log(resp);
         })
       }
 

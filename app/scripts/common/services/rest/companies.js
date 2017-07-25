@@ -52,7 +52,7 @@
       });
 
     $http.get('/ps/settings').then(function(resp) {
-      console.log('payment info: ', resp.data);
+      //console.log('payment info: ', resp.data);
       Utils.customizeObj(resp.data, companyPaymentInfo);
       checkInit();
     },

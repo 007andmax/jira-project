@@ -3,7 +3,7 @@
     <h2>Get your invoices paid online</h2>
     <p>Accept customer credit cards on your Wave invoices</p>
   </div>
-  <div class="credit-card-turn-on" ng-show="companyPaymentInfo.enabled === false">
+  <div class="credit-card-turn-on" ng-show="companyPaymentInfo.paymentsEnabled === false">
     <div class="turn-on-content">
       <div class="left-image">13412321321</div>
       <div class="credit-card-info">
@@ -27,7 +27,7 @@
     </div>
     <div class="btn btn-success" ng-click="turnOnCreditCard()">Turn on credit card payments</div>
   </div>
-  <div class="credit-card-turn-off" ng-show="companyPaymentInfo.enabled === true">
+  <div class="credit-card-turn-off" ng-show="companyPaymentInfo.paymentsEnabled === true">
     <div class="payments-info">
       <div class="create-user-header">
         <h3 class="pull-left">Payments info</h3>
