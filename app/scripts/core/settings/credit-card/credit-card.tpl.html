@@ -36,13 +36,13 @@
         <div class="form-group">
           <label>Paypal</label>
           <input class="form-control" placeholder="PayPal Client Id" type="text"
-                 ng-model="companyPaymentInfo.paypalClientId" execute-when-outfocused="changeCompanyPaymentInfo()">
+                 ng-model="companyPaymentInfo.paypalClientId" >
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <input class="form-control" type="text" placeholder="PayPal Secret Id"
-                 ng-model="companyPaymentInfo.paypalSecretId" execute-when-outfocused="changeCompanyPaymentInfo()">
+                 ng-model="companyPaymentInfo.paypalSecretId" >
         </div>
       </div>
       <div class="btn btn-success" ng-click="changeCompanyPaymentInfo()">Save</div>
@@ -50,13 +50,13 @@
         <div class="form-group">
           <label>Stripe</label>
           <input class="form-control" type="text" placeholder="Stripe Public Key"
-                 ng-model="companyPaymentInfo.stripePublicKey" execute-when-outfocused="changeCompanyPaymentInfo()">
+                 ng-model="companyPaymentInfo.stripePublicKey" >
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <input class="form-control" type="text" placeholder="Stripe Secret Key"
-                 ng-model="companyPaymentInfo.stripeSecretKey" execute-when-outfocused="changeCompanyPaymentInfo()">
+                 ng-model="companyPaymentInfo.stripeSecretKey" >
         </div>
       </div>
       <div class="btn btn-success" ng-click="changeCompanyPaymentInfo()">Save</div>
