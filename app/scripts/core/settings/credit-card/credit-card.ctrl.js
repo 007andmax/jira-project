@@ -15,7 +15,7 @@
 
       $scope.changeCompanyPaymentInfo = function() {
         if(!$scope.companyPaymentInfo.paypalClientId && !$scope.companyPaymentInfo.paypalSecretId && !$scope.companyPaymentInfo.stripePublicKey && !$scope.companyPaymentInfo.stripeSecretKey) {
-          console.log('sdfsdfsdfsdf');
+
           var confirmMesage = 'Changes would be cancelled and credit card accepting switched off',
             confirmButton = 'OK';
 
@@ -23,8 +23,9 @@
             $scope.companyPaymentInfo.paymentsEnabled = false;
             sendNewDataToSerever();
           });
+        } else {
+          sendNewDataToSerever()
         }
-        sendNewDataToSerever()
       };
 
       $scope.turnOnCreditCard = function(){
