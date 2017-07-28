@@ -11720,7 +11720,11 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 .billing-type-content {
   padding: 0 15px;
 }
-
+.service-agreements-popup .btn-primary{
+  width: 190px;
+  float: right;
+  margin-top: 15px;
+}
 .billing-type-content .col-xs-12{
   margin-bottom: 10px;
   background-color: #F6F8FA;
