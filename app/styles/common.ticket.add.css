@@ -217,8 +217,11 @@
 #Product .col-4 .discount-input, #Service .col-4 .discount-input{
   position: relative;
 }
-#Product .col-4 input, #Service .col-4 input, .ticket-update-service-edit .col-4 input, .ticket-update-product-edit .col-4 input{
-  padding: 0 5px;
+#Product .icn-delete{
+  margin-top: 15px;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
 }
 #Product .col-4 .discount-input:after,
 #Service .col-4 .discount-input:after,
@@ -232,7 +235,7 @@
 
 /* Add Service tab */
 #Service .col-1 {
-  width: 175px;
+  width: 240px;
 }
 
 #Service .col-2 {
@@ -253,4 +256,9 @@
 
 .shared-user-add .checkbox {
   margin-left: 10px;
+}
+@media screen and (max-width: 1600px){
+  #Service .col-1 {
+    width: 237px;
+  }
 }
