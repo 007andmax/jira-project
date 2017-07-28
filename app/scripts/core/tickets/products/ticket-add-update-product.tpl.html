@@ -104,7 +104,7 @@
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
 
-        <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
+        <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1 && !$last">
           <div class="has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
                ng-click="removeProduct()">
             <i class="icon-sm icn-delete"></i>

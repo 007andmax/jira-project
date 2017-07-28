@@ -9,17 +9,17 @@
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
 
-      function search(keyword) {
-
-        if (!keyword) {
-          throw 'Keyword is required!';
-        }
-
-        return $http.get("/services/search?keyword=" + keyword.toLowerCase()).then(function (response) {
-          return response.data;
-        });
-
-      }
+      // function search(keyword) {
+      //
+      //   if (!keyword) {
+      //     throw 'Keyword is required!';
+      //   }
+      //
+      //   return $http.get("/services/search?keyword=" + keyword.toLowerCase()).then(function (response) {
+      //     return response.data;
+      //   });
+      //
+      // }
 
       function getAllByCompany(scope, companyId, callback) {
 
@@ -85,7 +85,7 @@
 
         var data = Utils.customizeObj({});
 
-        var url = '/services';
+        var url = '/services/getDefaultServices';
 
         if (isOnlyDefault) {
           url = url + '/getDefaultServices';
@@ -187,23 +187,23 @@
         delete data[companyId];
       }
 
-      function saveList(services, companyId, callback) {
-
-        if (!services) {
-          throw 'services is required!';
-        }
-
-        if (!companyId) throw 'companyId is required!';
-
-        var future = $http({
-          url: '/services/saveList/' + companyId,
-          method: 'POST',
-          data: { serviceDtoList: services }
-        });
-
-        Utils.handleCallback(future, callback);
-
-      }
+      // function saveList(services, companyId, callback) {
+      //
+      //   if (!services) {
+      //     throw 'services is required!';
+      //   }
+      //
+      //   if (!companyId) throw 'companyId is required!';
+      //
+      //   var future = $http({
+      //     url: '/services/saveList/' + companyId,
+      //     method: 'POST',
+      //     data: { serviceDtoList: services }
+      //   });
+      //
+      //   Utils.handleCallback(future, callback);
+      //
+      // }
 
       function save(service, callback) {
 
@@ -366,11 +366,10 @@
       }
 
       return {
-        search: search,
+
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         save: save,
-        saveList: saveList,
         addCompanyToServiceData: addCompanyToServiceData,
         deleteCompanyFromServiceData: deleteCompanyFromServiceData,
         deleteService: deleteService,
