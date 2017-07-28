@@ -4968,9 +4968,24 @@ Devices tab
   margin-top: 15px;
   cursor: pointer;
 }
+.service-add-width .icn-delete{
+  cursor: pointer;
+  margin-top: 13px;
+  width: 14px;
+  height: 14px;
+}
+.service-add-width .report-calendar{
+  margin-top: 14px;
+  display: inline-block;
+}
+.service-add-width .sale-icon-for-isDicount{
+  width: 18px;
+  height: 18px;
+  margin-top: 10px;
+}
 .icn-add-action{
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   background-color: #90C56B;
   position: relative;
   cursor: pointer;
@@ -4981,7 +4996,7 @@ Devices tab
   content: '+';
   color: #fff;
   left: 4px;
-  top: -5px;
+  top: -4px;
   font-family: Graphik Bold;
   font-weight: bold;
   font-style: normal;

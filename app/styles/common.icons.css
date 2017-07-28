@@ -547,13 +547,12 @@ a.ha-24 {
 }
 
 #Product .barcode-icon,
-.ticket-update-edit .barcode-icon {
-  position: static;
-}
-
+.ticket-update-edit .barcode-icon,
 #Product .barcode-icon-green,
-.ticket-update-edit .barcode-icon-green {
+.ticket-update-edit .barcode-icon-green{
   position: static;
+  width: 18px;
+  height: 18px;
 }
 
 .sale-icon-for-isDicount {
@@ -567,9 +566,9 @@ a.ha-24 {
 }
 
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
-  width: 30px;
-  height: 30px;
-  margin: 5px 0 0 10px;
+  width: 18px;
+  height: 18px;
+  margin: 10px 0 0 10px;
   cursor: pointer;
 }
 
