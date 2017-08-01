@@ -607,6 +607,9 @@
   margin: 0;
   padding: 15px 0;
 }
+.hourly .service-header .title-services{
+  margin-bottom: 15px;
+}
 .service-header p{
   padding: 15px 0;
 }
