@@ -121,20 +121,9 @@
 
           if (newChange.action == 'SERVICE_SAVED') {
             serviceSaved(newChange.data);
-          } else if (newChange.action == 'SERVICE_LIST_SAVED') {
-
-            for (var i = 0; i < newChange.data.length; i++) {
-              serviceSaved(newChange.data[i]);
-            }
-
-          } else if (newChange.action == 'SERVICES_MOVED') {
-            for (var i = 0; i < newChange.data.length; i++) {
-              addServiceData(data, newChange.data[i])
-            }
-
           } else if (newChange.action == 'COMPANY_SERVICES_DELETED') {
             delete data[newChange.data.id];
-          } else if (newChange.action == 'SERVICES_DELETED') {
+          } else if (newChange.action == 'SERVICE_DELETED') {
             for (var i = 0; i < newChange.data.length; i++) {
               serviceDeleted(newChange.data[i].versionedId.id, data);
             }
@@ -266,7 +255,7 @@
         if (!ids) throw 'ids is required argument!';
         if (toBillable === undefined) throw 'toBillable is required argument!';
 
-        if (!Array.isArray(ids)) ids = [ids];
+        //if (!Array.isArray(ids)) ids = [ids];
 
         var future = $http({
           url: '/services/changeBillableStatus?toBillable=' + !!toBillable,

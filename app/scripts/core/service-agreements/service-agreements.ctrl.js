@@ -7,9 +7,9 @@
 
     $scope.openAgreementsModal = function() {
       $uibModal.open({
-        templateUrl:'/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html',
+        templateUrl:'/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html',
         animation: true,
-        backdrop: true,
+        backdrop: false,
         size: 'lg',
         controller: 'serviceAgreementsModalCtrl',
         windowClass: 'create-popup margin-top-modal-dialog',
@@ -18,16 +18,28 @@
         }
 
       });
+
     };
 
     }]).controller('serviceAgreementsModalCtrl', [
-      '$scope', '$uibModalInstance', 'companyInfo', '$state', function($scope, $uibModalInstance, companyInfo, $state){
+      '$scope', '$uibModalInstance', 'companyInfo', '$state', 'ServicesService',
+    function($scope, $uibModalInstance, companyInfo, $state, ServicesService){
 
       //$scope.serviceBillType = ['By Device', 'By Users'];
 
       $scope.serviceContracts={};
 
       $scope.companyInfo = companyInfo;
+      $scope.contactServiceList=[];
+
+      ServicesService.getServicesData($scope, false, function(data) {
+
+        for(var i=0; i<data.length; i++) {
+          $scope.contactServiceList.push(data[i]);
+        }
+        $scope.companyId = data[0].company.id;
+
+      });
 
       $scope.serviceBillType = {
         byDevice: 'By Device',
@@ -41,25 +53,36 @@
 
       $scope.closeModal = function () {
         $uibModalInstance.close();
-        // if(!$state.includes('service-agreements')) {
-        //   $state.go('service-agreements');
-        // }
+        if(!$state.includes('service-agreements')) {
+          $state.go('service-agreements');
+        }
       };
 
-      $scope.contactServiceList=[];
-      createNewServiceItem();
 
-      function createNewServiceItem() {
-        var item ={
-          serviceName: null,
-          perHour: null,
-          isBillable: false
-        };
-        $scope.contactServiceList.push(item);
-      }
+      // createNewServiceItem();
+      //
+      // function createNewServiceItem() {
+      //   var item ={
+      //     serviceName: null,
+      //     perHour: null,
+      //     isBillable: false
+      //   };
+      //   $scope.contactServiceList.push(item);
+      // }
 
-      $scope.addNewService = function() {
-        createNewServiceItem();
+      $scope.addNewService = function(form,  editService) {
+        if(form.$valid) {
+          var newSerice ={
+            name: editService.name,
+            rate: editService.rate || 0.00,
+            billable: editService.billable || false
+          };
+          console.log(newSerice);
+          $scope.editService = {};
+          $scope.contactServiceList.push(newSerice);
+        }
+        //console.log(editService);
+
       };
 
       $scope.deleteService = function(service){

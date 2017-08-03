@@ -319,16 +319,44 @@
     <div class="company-window__billing row clearfix" ng-show="currentStep === 'billing'" ng-form="billingForm">
       <div class="billing-payment clearfix">
         <div class="col-xs-4">
-          <div class="form-group">
-            <p>Payment Terms<input type="text" class="form-control"></p>
-            <i class="icn-sm icn-caret-gray"></i>
+
+
+          <div class="form-group " style="padding-right: 0;" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorPaymentTerms')}">
+
+            <label class="control-label" ng-hide="isShowingErrors(infoForm, 'vendorPaymentTerms')">
+              Payment Terms
+            </label>
+
+            <div class="error-vendor-form-message" ng-messages="infoForm.vendorPaymentTerms.$error"
+                 ng-class="{'hide': !isShowingErrors(infoForm, 'vendorPaymentTerms')}">
+              <label class="control-label" ng-message="required">Payment terms is required.</label>
+              <label class="control-label" ng-message="maxlength">Payment terms must be less then 1000.</label>
+            </div>
+
+            <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.paymentTerms"
+                   uib-typeahead="paymentTerm for paymentTerm in paymentTerms"
+                   qt-typeahead-async-show-on-focus readonly>
+            <div typeahead-input-icon="editCompany.paymentTerms"
+            ></div>
           </div>
+
         </div>
         <div class="col-xs-4">
-          <div class="form-group">
-            <p>Default Payment Method<input type="text" class="form-control"></p>
-            <i class="icn-sm icn-caret-gray"></i>
+
+
+          <div class="form-group " style="padding-right: 0;" >
+
+            <label class="control-label">Default Payment Method</label>
+
+            <input type="text" class="form-control" ng-model="editCompany.defaultPaymentMethod"
+                   name="defaultPaymentMethod"
+                   custom-style="{'width':'100%'}"
+                   uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
+                   readonly qt-typeahead-async-show-on-focus>
+            <div typeahead-input-icon="editCompany.defaultPaymentMethod"
+            ></div>
           </div>
+
         </div>
       </div>
       <div class="billing-type-content clearfix">

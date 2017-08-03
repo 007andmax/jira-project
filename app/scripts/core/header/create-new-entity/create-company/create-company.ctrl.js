@@ -279,7 +279,7 @@
           var template;
           switch (contractType) {
             case('HOURLY_BILLING'):
-              template = '';
+              template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
             case('BLOCK_TIME_BILLING'):
               template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
@@ -293,7 +293,7 @@
           $uibModal.open({
             templateUrl: template,
             animation: true,
-            backdrop: true,
+            backdrop: false,
             size: 'lg',
             controller: 'serviceAgreementsModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
