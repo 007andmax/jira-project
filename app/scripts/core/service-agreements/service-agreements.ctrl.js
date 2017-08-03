@@ -7,23 +7,27 @@
 
     $scope.openAgreementsModal = function() {
       $uibModal.open({
-        templateUrl:'/html/scripts/core/service-agreements/service-contract-modal.tpl.html',
+        templateUrl:'/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html',
         animation: true,
         backdrop: true,
         size: 'lg',
         controller: 'serviceAgreementsModalCtrl',
         windowClass: 'create-popup margin-top-modal-dialog',
+        resolve: {
+          companyInfo: {}
+        }
 
       });
     };
 
-
     }]).controller('serviceAgreementsModalCtrl', [
-      '$scope', '$uibModalInstance', function($scope, $uibModalInstance){
+      '$scope', '$uibModalInstance', 'companyInfo', '$state', function($scope, $uibModalInstance, companyInfo, $state){
 
       //$scope.serviceBillType = ['By Device', 'By Users'];
 
       $scope.serviceContracts={};
+
+      $scope.companyInfo = companyInfo;
 
       $scope.serviceBillType = {
         byDevice: 'By Device',
@@ -37,6 +41,9 @@
 
       $scope.closeModal = function () {
         $uibModalInstance.close();
+        // if(!$state.includes('service-agreements')) {
+        //   $state.go('service-agreements');
+        // }
       };
 
       $scope.contactServiceList=[];
@@ -88,7 +95,12 @@
         }
       };
 
+      $uibModalInstance.closed.then(function(){
 
+        if(!$state.includes('service-agreements')) {
+          $state.go('service-agreements');
+        }
+      });
 
 
 

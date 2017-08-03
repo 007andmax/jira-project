@@ -330,7 +330,12 @@
             globalSearch.selectedItemsCount = undefined;
           }
 
+          //change filter
           globalSearch.openedItemName = undefined;
+          // clear search field
+          // if(toState.name === 'tickets.details' && globalSearch.searchValue === undefined) {
+          //   globalSearch.searchValue = '';
+          // }
           globalSearch.searchValue = '';
 
           if (toState.name === 'tickets' || (toState.name === 'tickets.details' && globalSearch.selectedItemsCount)) {
