@@ -4884,7 +4884,9 @@ Devices tab
   display: inline-block;
   margin-bottom: 15px;
 }
-
+.service-contract-details .col-md-3 input{
+  cursor: pointer;
+}
 .service-form-wrapper .report-calendar,
 .service-form-wrapper .icn-caret-gray {
   position: absolute;
