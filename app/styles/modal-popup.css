@@ -32,7 +32,8 @@
 
 .pass-man-popup .close-btn,
 .modal-customer-report .close-btn,
-.create-window .close-btn {
+.create-window .close-btn,
+.hourly .close-btn{
   position: absolute;
   right: 10px;
   top: 10px;
@@ -70,6 +71,12 @@
   padding: 30px;
   width: calc(100% - 145px);
   height: 100%;
+}
+.service-agreement-modal{
+  position: relative;
+  padding: 30px;
+  height: 100%;
+  max-height: 750px;
 }
 
 .create-window .general .create-ticket-form {
