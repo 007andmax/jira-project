@@ -4952,17 +4952,19 @@ Devices tab
 
 .service-bill-hide-content label {
   margin-top: 12px;
-  margin-left: 40%;
+  margin-left: 5%;
 }
 
 .service-bill-hide-content .col-md-2 {
   text-align: center;
 }
 
-.service-bill-hide-content .add-remove-service {
+.bill-hide-content-item .add-remove-service {
   text-align: center;
 }
-
+.col-md-12.service-bill-hide-content p{
+  margin-bottom: 10px;
+}
 .add-remove-service .btn-primary {
   margin-right: 5px;
   margin-top: 25px;
