@@ -4945,7 +4945,10 @@ Devices tab
 .hourly .service-bill-hide-content {
   padding-left: 0;
 }
-
+.block-time .service-bill-hide-content .before-icon:before{
+  top: 5px;
+  left: 108px;
+}
 .service-bill-hide-content {
   padding-left: 25px;
 }
