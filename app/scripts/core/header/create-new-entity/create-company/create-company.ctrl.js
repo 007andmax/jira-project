@@ -222,28 +222,49 @@
             }
 
 
-            if(isCreateContract && $scope.selectedContractType) {
+            // if(isCreateContract && $scope.selectedContractType) {
+            //   $scope.savingInProcess = false;
+            //   $scope.closeWindowWithoutConfirmation();
+            //   openCreateContractModal(editCompany, $scope.selectedContractType);
+            // } else {
+            //   CompaniesService.save(editCompany, function (resp) {
+            //     $scope.savingInProcess = false;
+            //     if (!resp.code || resp.code === 200) {
+            //       $scope.disablePreventingLocationChange = true;
+            //       if (!$scope.currentUser.wizardTracker || !$scope.currentUser.wizardTracker.setupClient) {
+            //         UsersService.updateWelcomeWizard('setupClient');
+            //       }
+            //       $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
+            //       if (!$scope.savedState.items.length) {
+            //         $scope.closeWindow();
+            //         openCreateContractModal(editCompany)
+            //       }
+            //     } else {
+            //       $scope.isSaveFailed = true;
+            //     }
+            //   });
+            // }
+            CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $scope.closeWindowWithoutConfirmation();
-              openCreateContractModal(editCompany, $scope.selectedContractType);
-            } else {
-              CompaniesService.save(editCompany, function (resp) {
-                $scope.savingInProcess = false;
-                if (!resp.code || resp.code === 200) {
-                  $scope.disablePreventingLocationChange = true;
-                  if (!$scope.currentUser.wizardTracker || !$scope.currentUser.wizardTracker.setupClient) {
-                    UsersService.updateWelcomeWizard('setupClient');
-                  }
-                  $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
-                  if (!$scope.savedState.items.length) {
+              if (!resp.code || resp.code === 200) {
+                $scope.disablePreventingLocationChange = true;
+                if (!$scope.currentUser.wizardTracker || !$scope.currentUser.wizardTracker.setupClient) {
+                  UsersService.updateWelcomeWizard('setupClient');
+                }
+                $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
+                if (!$scope.savedState.items.length) {
+                  if(isCreateContract && $scope.selectedContractType) {
+                    $scope.closeWindowWithoutConfirmation();
+                    openCreateContractModal(editCompany, $scope.selectedContractType, resp);
+                  } else {
                     $scope.closeWindow();
                     openCreateContractModal(editCompany)
                   }
-                } else {
-                  $scope.isSaveFailed = true;
                 }
-              });
-            }
+              } else {
+                $scope.isSaveFailed = true;
+              }
+            });
 
 
             unsubscribeClosingEvent();
@@ -275,7 +296,7 @@
 
         };
 
-        function openCreateContractModal(companyInfo, contractType) {
+        function openCreateContractModal(companyInfo, contractType, companyId) {
           var template;
           switch (contractType) {
             case('HOURLY_BILLING'):
@@ -298,7 +319,8 @@
             controller: 'serviceAgreementsModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
             resolve: {
-              companyInfo: companyInfo
+              companyInfo: companyInfo,
+              companyId: companyId
             }
 
           });

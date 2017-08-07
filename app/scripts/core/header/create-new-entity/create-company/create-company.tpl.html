@@ -606,7 +606,7 @@
     </button>
       <button class="btn btn-primary" ng-show="currentStep === 'billing'"
               ng-click="save(companyForm, true)" custom-disabled="{{!selectedContractType}}">
-        Add contract
+        Create & Add contract
       </button>
       <button-with-loading-indicator class="btn btn-success" ng-click="save(companyForm, false)"
                                      loading="savingInProcess" label="{{ editCompany.id ? 'Save' : 'Create' }}">

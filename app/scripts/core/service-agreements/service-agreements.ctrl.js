@@ -3,41 +3,71 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('quicktech.core.serviceAgreements.serviceAgreementsCtrl',
-    ['$scope', '$uibModal', function ($scope, $uibModal) {
+    ['$scope', '$uibModal', 'AgreementsService',
+      function ($scope, $uibModal, AgreementsService) {
 
-    $scope.openAgreementsModal = function() {
-      $uibModal.open({
-        templateUrl:'/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html',
-        animation: true,
-        backdrop: false,
-        size: 'lg',
-        controller: 'serviceAgreementsModalCtrl',
-        windowClass: 'create-popup margin-top-modal-dialog',
-        resolve: {
-          companyInfo: {}
-        }
+        AgreementsService.getAllServiceAgreements(function (data) {
+          $scope.agreementsList = data;
+        });
 
-      });
+        $scope.openAgreementsModal = function (contractType) {
+          var template;
+          switch (contractType) {
+            case('CREATE_NEW'):
+              template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+              break;
+            case('HOURLY_BILLING'):
+              template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+              break;
+            case('BLOCK_TIME_BILLING'):
+              template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+              break;
+            case('PER_USER/DEVICE_BILLING'):
+              template = '';
+              break;
+            default:
+              console.log('no contract type selected');
+          }
+          $uibModal.open({
+            templateUrl: template,
+            animation: true,
+            backdrop: false,
+            size: 'lg',
+            controller: 'serviceAgreementsModalCtrl',
+            windowClass: 'create-popup margin-top-modal-dialog',
+            resolve: {
+              companyInfo: {},
+              companyId: {}
+            }
 
-    };
+          });
 
-    }]).controller('serviceAgreementsModalCtrl', [
-      '$scope', '$uibModalInstance', 'companyInfo', '$state', 'ServicesService',
-    function($scope, $uibModalInstance, companyInfo, $state, ServicesService){
+        };
 
-      //$scope.serviceBillType = ['By Device', 'By Users'];
+      }]).controller('serviceAgreementsModalCtrl', [
+    '$scope', '$uibModalInstance', 'companyInfo', 'companyId', '$state', 'ServicesService', 'CompaniesService',
+    function ($scope, $uibModalInstance, companyInfo, companyId, $state, ServicesService, CompaniesService) {
 
-      $scope.serviceContracts={};
 
+      $scope.serviceContracts = {};
+
+      $scope.companyId = companyId;
       $scope.companyInfo = companyInfo;
-      $scope.contactServiceList=[];
+      $scope.contractServiceList = [];
+      $scope.companiesList = CompaniesService.getClientCompanies();
+      $scope.serviceContracts.contractType = '';
+      $scope.selectedContractType;
 
-      ServicesService.getServicesData($scope, false, function(data) {
+      ServicesService.getServicesData($scope, false, function (data) {
 
-        for(var i=0; i<data.length; i++) {
-          $scope.contactServiceList.push(data[i]);
+        for (var i = 0; i < data.length; i++) {
+          var serv = {
+            name: data[i].name,
+            rate: data[i].rate,
+            billable: data[i].billable
+          };
+          $scope.contractServiceList.push(serv);
         }
-        $scope.companyId = data[0].company.id;
 
       });
 
@@ -45,87 +75,89 @@
         byDevice: 'By Device',
         byUsers: 'By Users'
       };
-      $scope.serviceContracts.contractType ='';
 
-      $scope.changeCOntractType = function(type) {
+      $scope.selectContractType = function(type) {
+        if($scope.selectedContractType === type) {
+          $scope.selectedContractType = '';
+        }else {
+          $scope.selectedContractType = type;
+        }
+      };
+
+      $scope.changeContractType = function (type) {
         $scope.serviceContracts.contractType = type;
       };
 
       $scope.closeModal = function () {
         $uibModalInstance.close();
-        if(!$state.includes('service-agreements')) {
+        if (!$state.includes('service-agreements')) {
           $state.go('service-agreements');
         }
       };
 
-
-      // createNewServiceItem();
-      //
-      // function createNewServiceItem() {
-      //   var item ={
-      //     serviceName: null,
-      //     perHour: null,
-      //     isBillable: false
-      //   };
-      //   $scope.contactServiceList.push(item);
-      // }
-
-      $scope.addNewService = function(form,  editService) {
-        if(form.$valid) {
-          var newSerice ={
+      $scope.addNewService = function (form, editService) {
+        if (form.$valid) {
+          var newSerice = {
             name: editService.name,
             rate: editService.rate || 0.00,
             billable: editService.billable || false
           };
-          console.log(newSerice);
+          //console.log(newSerice);
           $scope.editService = {};
-          $scope.contactServiceList.push(newSerice);
+          $scope.contractServiceList.push(newSerice);
         }
-        //console.log(editService);
-
       };
 
-      $scope.deleteService = function(service){
-        for(var i=0; i<$scope.contactServiceList.length; i++) {
-          if($scope.contactServiceList[i] == service) {
-            $scope.contactServiceList.splice(i, 1);
+      $scope.validateServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
+        ServicesService.isNameUnique($scope.editService.name, modelId, function (resp) {
+          ngModelCtrl.$setValidity('unique', resp.valid);
+          afterValidationCallback();
+        });
+      };
+
+      $scope.isShowingErrors = function (form, fieldName) {
+        return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
+      };
+
+      $scope.deleteService = function (service) {
+        for (var i = 0; i < $scope.contractServiceList.length; i++) {
+          if ($scope.contractServiceList[i] == service) {
+            $scope.contractServiceList.splice(i, 1);
             break;
           }
         }
       };
 
-      $scope.deviceServiceList=[];
-      createNewDevice();
+      // $scope.deviceServiceList=[];
+      // createNewDevice();
+      //
+      // function createNewDevice() {
+      //   var device ={
+      //     deviceName: null,
+      //     deviceNumber: null,
+      //     deviceCost: null
+      //   };
+      //   $scope.deviceServiceList.push(device);
+      // }
+      // $scope.addNewDevice = function() {
+      //   createNewDevice();
+      // };
 
-      function createNewDevice() {
-        var device ={
-          deviceName: null,
-          deviceNumber: null,
-          deviceCost: null
-        };
-        $scope.deviceServiceList.push(device);
-      }
-      $scope.addNewDevice = function() {
-        createNewDevice();
-      };
+      // $scope.deleteDevice = function(device){
+      //   for(var i=0; i<$scope.deviceServiceList.length; i++) {
+      //     if($scope.deviceServiceList[i] == device) {
+      //       $scope.deviceServiceList.splice(i, 1);
+      //       break;
+      //     }
+      //   }
+      // };
 
-      $scope.deleteDevice = function(device){
-        for(var i=0; i<$scope.deviceServiceList.length; i++) {
-          if($scope.deviceServiceList[i] == device) {
-            $scope.deviceServiceList.splice(i, 1);
-            break;
-          }
-        }
-      };
+      $uibModalInstance.closed.then(function () {
 
-      $uibModalInstance.closed.then(function(){
-
-        if(!$state.includes('service-agreements')) {
+        if (!$state.includes('service-agreements')) {
           $state.go('service-agreements');
         }
       });
-
-
 
 
     }

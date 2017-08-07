@@ -37,7 +37,7 @@
     <!--<div class="col-md-3">Per hour</div>-->
     <!--<div class="col-md-2">Make Billable</div>-->
     <!--<div class="col-md-2">Action</div>-->
-    <!--<div class="bill-hide-content-item clearfix" ng-repeat="service in contactServiceList">-->
+    <!--<div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">-->
       <!--<div class="col-md-5 form-group">-->
         <!--<input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">-->
       <!--</div>-->
@@ -123,7 +123,11 @@
         <div class="col-md-8">
           <div class="form-group">
             Description
-            <input placeholder="Description" type="text" class="form-control" ng-model="serviceContracts.description">
+            <input placeholder="Description"
+                   type="text"
+                   class="form-control"
+                   ng-model="serviceContracts.description"
+                   ng-maxlength="255">
           </div>
         </div>
         <div class="col-md-12"></div>
@@ -141,13 +145,14 @@
           </div>
         </div>
       </div>
+
       <div class="service-bill-hide-content clearfix">
 
         <div class="col-md-5">Service name</div>
         <div class="col-md-3">Per hour</div>
         <div class="col-md-2">Make Billable</div>
         <div class="col-md-2">Action</div>
-        <div class="bill-hide-content-item clearfix" ng-repeat="service in contactServiceList">
+        <div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">
           <div class="col-md-5 form-group">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">
           </div>
@@ -170,13 +175,17 @@
           </div>
         </div>
 
+        Create new Service
+
         <div class="bill-hide-content-item clearfix" ng-form="newServiceForm">
-          <div class="col-md-5 form-group">
+          <div class="col-md-5 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
             <input placeholder="New Service Name"
                    type="text"
+                   name="editServiceName"
                    class="form-control"
                    ng-model="editService.name"
-                   required>
+                   required
+                   is-uniq-validation validation-func="validateServiceName">
           </div>
           <div class="col-md-3 fourm-group before-icon">
             <input placeholder="0.00"
@@ -191,7 +200,7 @@
             </label>
           </div>
           <div class="col-md-2 fourm-group">
-            <div class="add-remove-service">
+            <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
               <div ng-click="addNewService(newServiceForm, editService)">
                 <i class="icon-sm icn-add-action"></i>
               </div>
