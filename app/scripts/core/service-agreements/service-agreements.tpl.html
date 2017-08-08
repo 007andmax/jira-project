@@ -12,38 +12,16 @@
         <div class="col-md-1"><strong>Review Date</strong></div>
         <div class="col-md-1"><strong>Amount</strong></div>
       </li>
-      <li class="content-product-list-ticket clearfix">
-        <div class="col-md-2">Company1Company1</div>
-        <div class="col-md-3">Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1</div>
-        <div class="col-md-2 clickable" ng-click="openAgreementsModal('HOURLY_BILLING')">Contract-Devices</div>
-        <div class="col-md-1">Current</div>
-        <div class="col-md-1">12.12.12</div>
-        <div class="col-md-1">21.21.21</div>
-        <div class="col-md-1">23.13.13</div>
-        <div class="col-md-1">99999</div>
 
-      </li>
-      <li class="content-product-list-ticket clearfix">
-        <div class="col-md-2">Company1Company1</div>
-        <div class="col-md-3"> Discriptiob1 Discriptiob1 Discriptiob1</div>
-        <div class="col-md-2 clickable" ng-click="openAgreementsModal('HOURLY_BILLING')">Contract-Devices</div>
-        <div class="col-md-1">Current</div>
-        <div class="col-md-1">12.12.12</div>
-        <div class="col-md-1">21.21.21</div>
-        <div class="col-md-1">23.13.13</div>
-        <div class="col-md-1">99999</div>
-
-      </li>
-      <li class="content-product-list-ticket clearfix">
-        <div class="col-md-2">Company1Company1</div>
-        <div class="col-md-3">Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1 Discriptiob1</div>
-        <div class="col-md-2 clickable" ng-click="openAgreementsModal('HOURLY_BILLING')">Contract-Devices</div>
-        <div class="col-md-1">Current</div>
-        <div class="col-md-1">12.12.12</div>
-        <div class="col-md-1">21.21.21</div>
-        <div class="col-md-1">23.13.13</div>
-        <div class="col-md-1">99999</div>
-
+      <li ng-repeat="agreement in agreementsList" class="content-product-list-ticket clearfix">
+        <div class="col-md-2">{{agreement.company.id}}</div>
+        <div class="col-md-3">{{agreement.description}}</div>
+        <div class="col-md-2 clickable" ng-click="openAgreementsModal('HOURLY_BILLING')">{{agreement.type}}</div>
+        <div class="col-md-1">{{agreement.status}}</div>
+        <div class="col-md-1">{{agreement.startDate}}</div>
+        <div class="col-md-1">{{agreement.endDate}}</div>
+        <div class="col-md-1">{{agreement.reviewDate}}</div>
+        <div class="col-md-1">{{agreement.amount}}</div>
       </li>
 
     </ul>

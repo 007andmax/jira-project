@@ -298,8 +298,14 @@
             controller: 'serviceAgreementsModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
             resolve: {
-              companyInfo: companyInfo,
-              companyId: companyId
+              companyData: {
+                companyInfo: companyInfo,
+                companyId: companyId,
+                type:  contractType
+              }
+              // companyInfo: companyInfo,
+              // companyId: companyId,
+              // type:  contractType
             }
 
           });

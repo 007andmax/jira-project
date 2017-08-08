@@ -6,6 +6,8 @@
     ['$scope', '$uibModal', 'AgreementsService',
       function ($scope, $uibModal, AgreementsService) {
 
+        $scope.parseDate = Date.parse.bind(Date);
+
         AgreementsService.getAllServiceAgreements(function (data) {
           $scope.agreementsList = data;
         });
@@ -36,8 +38,7 @@
             controller: 'serviceAgreementsModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
             resolve: {
-              companyInfo: {},
-              companyId: {}
+              companyData: {}
             }
 
           });
@@ -45,14 +46,15 @@
         };
 
       }]).controller('serviceAgreementsModalCtrl', [
-    '$scope', '$uibModalInstance', 'companyInfo', 'companyId', '$state', 'ServicesService', 'CompaniesService', 'TaxesService',
-    function ($scope, $uibModalInstance, companyInfo, companyId, $state, ServicesService, CompaniesService, TaxesService) {
+    '$scope', '$uibModalInstance', 'companyData', '$state',
+    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService',
+    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService) {
 
 
       $scope.serviceContracts = {};
 
-      $scope.companyId = companyId;
-      $scope.companyInfo = companyInfo;
+      $scope.companyId = companyData.companyId;
+      $scope.companyInfo = companyData.companyInfo;
       $scope.contractServiceList = [];
       $scope.companiesList = CompaniesService.getClientCompanies();
       $scope.taxes = TaxesService.getAll();
@@ -64,7 +66,9 @@
         rate: null,
         billable: false,
         taxes: []
-      }
+      };
+
+
 
       ServicesService.getServicesData($scope, false, function (data) {
 
@@ -164,10 +168,27 @@
       };
 
       $scope.createContract = function() {
-        $scope.serviceContracts.companyId = $scope.contractCompany.id;
+        // if($scope.contractCompany) {
+        //   $scope.serviceContracts.companyId = $scope.contractCompany.id;
+        // } else if($scope.companyId) {
+        //
+        //   $scope.serviceContracts.companyId = $scope.companyId
+        // }
+        $scope.serviceContracts.companyId = companyData.companyId ||  $scope.contractCompany.id;
+
         $scope.serviceContracts.services = $scope.contractServiceList;
-        $scope.serviceContracts.type = $scope.modlToShow;
-        console.log($scope.serviceContracts)
+        // if(companyData && companyData.length) {
+        //   $scope.serviceContracts.type = companyData.type;
+        // } else {
+        //   $scope.serviceContracts.type = $scope.modlToShow;
+        // }
+        $scope.serviceContracts.type = companyData.type || $scope.modlToShow;
+
+        console.log($scope.serviceContracts);
+        AgreementsService.createContract($scope.serviceContracts, function(resp) {
+          console.log(resp);
+          $scope.closeModal();
+        })
       };
 
       // $scope.deviceServiceList=[];

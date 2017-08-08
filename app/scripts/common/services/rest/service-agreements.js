@@ -9,6 +9,7 @@
     function ($http, $rootScope, RealTimeService, Utils) {
 
     var urlForGetAllServiceAgreements = '/serviceAgreements';
+    var urlForContractCreat = '/serviceAgreements'
 
     function getAllServiceAgreements(callback) {
       var future = $http({
@@ -19,13 +20,23 @@
       Utils.handleCallback(future, callback);
     }
 
+    function createContract(data, callback) {
+      var future = $http({
+        url: urlForContractCreat,
+        method: 'POST',
+        data: data
+      });
+      Utils.handleCallback(future, callback);
+    }
+
 
 
 
 
 
     return {
-      getAllServiceAgreements: getAllServiceAgreements
+      getAllServiceAgreements: getAllServiceAgreements,
+      createContract: createContract
     }
 
 

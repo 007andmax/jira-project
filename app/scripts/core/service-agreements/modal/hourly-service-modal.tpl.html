@@ -163,7 +163,7 @@
 
         <div class="col-md-5">Service name</div>
         <div class="col-md-3">Per hour</div>
-        <div class="col-md-2">Make Billable</div>
+        <div class="col-md-1">Make Billable</div>
         <div class="col-md-1">Tax</div>
         <div class="col-md-1">Action</div>
         <div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">
@@ -182,7 +182,8 @@
           <div class="col-md-1 fourm-group">
             <div>
               <div>
-                <select-taxes taxes="taxes" entity="service" ></select-taxes>
+                <!--<i class="icn-sm icn-tax"> </i>-->
+                <select-taxes taxes="taxes" entity="service" is-icon="true"></select-taxes>
                 <p>{{service.taxes.length}}</p>
               </div>
             </div>
@@ -223,7 +224,7 @@
           <div class="col-md-1 fourm-group">
             <div class="" ng-hide="contractServiceList.length > 19">
               <div>
-                <select-taxes taxes="taxes" entity="editService"></select-taxes>
+                <select-taxes taxes="taxes" entity="editService" is-icon="true"></select-taxes>
                 <p>{{editService.taxes.length}}</p>
               </div>
             </div>
