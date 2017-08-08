@@ -222,28 +222,7 @@
             }
 
 
-            // if(isCreateContract && $scope.selectedContractType) {
-            //   $scope.savingInProcess = false;
-            //   $scope.closeWindowWithoutConfirmation();
-            //   openCreateContractModal(editCompany, $scope.selectedContractType);
-            // } else {
-            //   CompaniesService.save(editCompany, function (resp) {
-            //     $scope.savingInProcess = false;
-            //     if (!resp.code || resp.code === 200) {
-            //       $scope.disablePreventingLocationChange = true;
-            //       if (!$scope.currentUser.wizardTracker || !$scope.currentUser.wizardTracker.setupClient) {
-            //         UsersService.updateWelcomeWizard('setupClient');
-            //       }
-            //       $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
-            //       if (!$scope.savedState.items.length) {
-            //         $scope.closeWindow();
-            //         openCreateContractModal(editCompany)
-            //       }
-            //     } else {
-            //       $scope.isSaveFailed = true;
-            //     }
-            //   });
-            // }
+
             CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
               if (!resp.code || resp.code === 200) {

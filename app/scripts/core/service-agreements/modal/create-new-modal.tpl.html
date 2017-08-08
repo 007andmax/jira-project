@@ -1,4 +1,4 @@
-<div class="service-agreements-popup">
+<div class="service-agreements-popup" ng-show="modlToShow === 'CREATE_NEW'">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
   </div>
@@ -37,5 +37,9 @@
       <p>Per user or Device billing, Track time with custom services or create services for projects</p>
     </div>
   </div>
-  <div class="btn btn-primary" custom-disabled="{{!selectedContractType || !contractCompany}}">Create</div>
+  <div class="btn btn-primary" custom-disabled="{{!selectedContractType || !contractCompany}}" ng-click="changeModalToShow()">Create</div>
+</div>
+
+<div  ng-show="modlToShow === 'HOURLY_BILLING'">
+  <div ng-include="'/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html'"></div>
 </div>

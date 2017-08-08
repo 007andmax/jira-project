@@ -63,7 +63,7 @@
       var future = $http.post('/taxes/linkToExpense', {
         expenseId: entityId,
         expenseType: entityType.toUpperCase(),
-        taxes: entityTaxes
+        taxIds: entityTaxes
       });
       Utils.handleCallback(future, callback);
     }

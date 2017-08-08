@@ -57,7 +57,8 @@
       $scope.contractServiceList = [];
       $scope.companiesList = CompaniesService.getClientCompanies();
       $scope.serviceContracts.contractType = '';
-      $scope.selectedContractType;
+      $scope.selectedContractType = 'CREATE_NEW';
+      $scope.modlToShow = 'CREATE_NEW';
 
       ServicesService.getServicesData($scope, false, function (data) {
 
@@ -75,6 +76,19 @@
       $scope.serviceBillType = {
         byDevice: 'By Device',
         byUsers: 'By Users'
+      };
+
+      $scope.startDatePicker = function(date) {
+        console.log(date);
+      };
+
+      $scope.endDatePicker = function(date) {
+        console.log(date)
+      };
+
+
+      $scope.changeModalToShow = function() {
+        $scope.modlToShow = $scope.selectedContractType
       };
 
       $scope.selectContractType = function(type) {
