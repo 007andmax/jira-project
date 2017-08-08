@@ -33,7 +33,8 @@
 .pass-man-popup .close-btn,
 .modal-customer-report .close-btn,
 .create-window .close-btn,
-.hourly .close-btn{
+.hourly .close-btn,
+.service-form-wrapper .close-btn{
   position: absolute;
   right: 10px;
   top: 10px;
@@ -420,7 +421,8 @@ _::-webkit-:not(:root:root),
   padding: 50px 100px;
 }
 
-.create-window .x-mark {
+.create-window .x-mark,
+.service-form-wrapper .x-mark{
   position: absolute;
   top: 19px;
   right: 3px;
@@ -428,7 +430,10 @@ _::-webkit-:not(:root:root),
   cursor: pointer;
   line-height: 1;
 }
-
+.service-form-wrapper .x-mark{
+  top: 1px;
+  right: 0;
+}
 .create-window .input-top-4 .x-mark {
   top: 4px;
 }

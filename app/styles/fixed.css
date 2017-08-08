@@ -19,7 +19,6 @@ body.non-body-scroll::-webkit-scrollbar {
 .modal-create-ticket .dropdown-menu {
   /*margin-bottom: 20px;*/
   width: auto;
-  max-width: 260px;
 }
 .modal-create-ticket .checkbox-dropdown .list-container label{
   padding: 13px 40px 13px 15px;
