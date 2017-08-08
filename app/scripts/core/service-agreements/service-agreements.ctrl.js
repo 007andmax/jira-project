@@ -7,7 +7,6 @@
       function ($scope, $uibModal, AgreementsService) {
 
         AgreementsService.getAllServiceAgreements(function (data) {
-          //console.log(data);
           $scope.agreementsList = data;
         });
 
@@ -46,8 +45,8 @@
         };
 
       }]).controller('serviceAgreementsModalCtrl', [
-    '$scope', '$uibModalInstance', 'companyInfo', 'companyId', '$state', 'ServicesService', 'CompaniesService',
-    function ($scope, $uibModalInstance, companyInfo, companyId, $state, ServicesService, CompaniesService) {
+    '$scope', '$uibModalInstance', 'companyInfo', 'companyId', '$state', 'ServicesService', 'CompaniesService', 'TaxesService',
+    function ($scope, $uibModalInstance, companyInfo, companyId, $state, ServicesService, CompaniesService, TaxesService) {
 
 
       $scope.serviceContracts = {};
@@ -56,9 +55,16 @@
       $scope.companyInfo = companyInfo;
       $scope.contractServiceList = [];
       $scope.companiesList = CompaniesService.getClientCompanies();
-      $scope.serviceContracts.contractType = '';
+      $scope.taxes = TaxesService.getAll();
       $scope.selectedContractType = 'CREATE_NEW';
       $scope.modlToShow = 'CREATE_NEW';
+
+      $scope.editService={
+        name: '',
+        rate: null,
+        billable: false,
+        taxes: []
+      }
 
       ServicesService.getServicesData($scope, false, function (data) {
 
@@ -66,7 +72,8 @@
           var serv = {
             name: data[i].name,
             rate: data[i].rate,
-            billable: data[i].billable
+            billable: data[i].billable,
+            taxes: data[i].taxes || []
           };
           $scope.contractServiceList.push(serv);
         }
@@ -79,12 +86,24 @@
       };
 
       $scope.startDatePicker = function(date) {
-        console.log(date);
+        var startDate = new Date(date);
+        if (startDate) {
+          var startMonth = startDate.getMonth() + 1;
+          $scope.serviceContracts.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
+        }
       };
 
       $scope.endDatePicker = function(date) {
-        console.log(date)
+        var endDate = new Date(date);
+        if (endDate) {
+          var endMonth = endDate.getMonth() + 1;
+          $scope.serviceContracts.endDate = endDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(endDate.getDate());
+        }
       };
+
+      function addZeroIfNeed(n) {
+        return n < 10 ? '0' + n : '' + n;
+      }
 
 
       $scope.changeModalToShow = function() {
@@ -115,16 +134,17 @@
           var newSerice = {
             name: editService.name,
             rate: editService.rate || 0.00,
-            billable: editService.billable || false
+            billable: editService.billable || false,
+            taxes: editService.taxes || []
           };
-          //console.log(newSerice);
-          $scope.editService = {};
           $scope.contractServiceList.push(newSerice);
+          $scope.editService = {};
         }
       };
 
+
       $scope.validateServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
-        ServicesService.isNameUnique($scope.editService.name, modelId, function (resp) {
+        ServicesService.isNameUnique(ngModelCtrl.$viewValue, modelId, function (resp) {
           ngModelCtrl.$setValidity('unique', resp.valid);
           afterValidationCallback();
         });
@@ -141,6 +161,13 @@
             break;
           }
         }
+      };
+
+      $scope.createContract = function() {
+        $scope.serviceContracts.companyId = $scope.contractCompany.id;
+        $scope.serviceContracts.services = $scope.contractServiceList;
+        $scope.serviceContracts.type = $scope.modlToShow;
+        console.log($scope.serviceContracts)
       };
 
       // $scope.deviceServiceList=[];

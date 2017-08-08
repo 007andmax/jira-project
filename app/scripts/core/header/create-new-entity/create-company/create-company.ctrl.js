@@ -278,7 +278,7 @@
         function openCreateContractModal(companyInfo, contractType, companyId) {
           var template;
           switch (contractType) {
-            case('HOURLY_BILLING'):
+            case('HOURLY'):
               template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
             case('BLOCK_TIME_BILLING'):

@@ -150,7 +150,7 @@
                    name="reportDateRange"
                    readonly
                    date-format="dd/mm/yy"
-                   date-range-picker="$ctrl.onDateRangeChangeReport"
+                   date-range-picker="endDatePicker"
                    max-date=""
                    ng-model="endDate"
                    placeholder="End Date">
@@ -182,8 +182,8 @@
           <div class="col-md-1 fourm-group">
             <div>
               <div>
-                <i class="icn-sm icn-tax"></i>
-                <p>1</p>
+                <select-taxes taxes="taxes" entity="service" ></select-taxes>
+                <p>{{service.taxes.length}}</p>
               </div>
             </div>
           </div>
@@ -223,8 +223,8 @@
           <div class="col-md-1 fourm-group">
             <div class="" ng-hide="contractServiceList.length > 19">
               <div>
-                <i class="icn-sm icn-tax"></i>
-                <p>1</p>
+                <select-taxes taxes="taxes" entity="editService"></select-taxes>
+                <p>{{editService.taxes.length}}</p>
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@
 
       </div>
       <div class="col-md-12">
-        <div class="btn btn-success btn-create">Create</div>
+        <div class="btn btn-success btn-create" ng-click="createContract()">Create</div>
         <div class="btn btn-primary btn-create">Terminate</div>
       </div>
     </div>
