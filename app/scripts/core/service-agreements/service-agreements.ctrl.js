@@ -7,6 +7,7 @@
       function ($scope, $uibModal, AgreementsService) {
 
         AgreementsService.getAllServiceAgreements(function (data) {
+          //console.log(data);
           $scope.agreementsList = data;
         });
 
