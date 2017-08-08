@@ -5024,6 +5024,9 @@ Devices tab
   top: 4px;
   left: 25px;
 }
+.bill-hide-content-item .col-md-1 p{
+  display: inline-block;
+}
 .before-icon input {
   padding-left: 25px;
 }

@@ -997,7 +997,14 @@ li:hover > a > .icn-devices, li.active > a > .icn-devices {
 li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
   background-position: -1606px -100px;
 }
-
+.icn-tax{
+  background: url("../images/new-icons/tax.png");
+  width: 12px;
+  height: 14px;
+  cursor: pointer;
+  background-size: cover;
+  margin: 13px 0 0 8px;
+}
 .icn-leads {
   background-position: -2779px -206px;
   height: 16px;

@@ -1,112 +1,108 @@
 <!--<div class="contracts create-window clearfix">-->
-  <!--<div class="close-btn btn" ng-click="closeModal()" tabindex="1">-->
-    <!--<i class="icn-sm icn-remove-old"></i>-->
-  <!--</div>-->
+<!--<div class="close-btn btn" ng-click="closeModal()" tabindex="1">-->
+<!--<i class="icn-sm icn-remove-old"></i>-->
+<!--</div>-->
 
-  <!--<div class="service-header">-->
-    <!--<h4 class="title-services">Hourly Service</h4>-->
-    <!--<p>Sell your customer a block of time, that you bill against each month, this can be carried-->
-      <!--over if not used. You can still create custom Services for projects or after hours support.</p>-->
-  <!--</div>-->
-  <!--<div class="service-contract-details clearfix">-->
-    <!--<div class="col-md-8">-->
-      <!--<div class="form-group">-->
-        <!--Description-->
-        <!--<input placeholder="Description" type="text" class="form-control" ng-model="serviceContracts.description">-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-12"></div>-->
-    <!--<div class="col-md-3">-->
-      <!--<div class="form-group">-->
-        <!--Select Date:-->
-        <!--<input placeholder="Start Date" type="" class="form-control">-->
-        <!--<i class="report-calendar"></i>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-3">-->
-      <!--<div class="form-group">-->
-        <!--<input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">-->
-        <!--<i class="report-calendar"></i>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div class="service-header">-->
+<!--<h4 class="title-services">Hourly Service</h4>-->
+<!--<p>Sell your customer a block of time, that you bill against each month, this can be carried-->
+<!--over if not used. You can still create custom Services for projects or after hours support.</p>-->
+<!--</div>-->
+<!--<div class="service-contract-details clearfix">-->
+<!--<div class="col-md-8">-->
+<!--<div class="form-group">-->
+<!--Description-->
+<!--<input placeholder="Description" type="text" class="form-control" ng-model="serviceContracts.description">-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-12"></div>-->
+<!--<div class="col-md-3">-->
+<!--<div class="form-group">-->
+<!--Select Date:-->
+<!--<input placeholder="Start Date" type="" class="form-control">-->
+<!--<i class="report-calendar"></i>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-3">-->
+<!--<div class="form-group">-->
+<!--<input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">-->
+<!--<i class="report-calendar"></i>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-  <!--<div class="service-bill-hide-content clearfix">-->
+<!--<div class="service-bill-hide-content clearfix">-->
 
-    <!--<div class="col-md-5">Service name</div>-->
-    <!--<div class="col-md-3">Per hour</div>-->
-    <!--<div class="col-md-2">Make Billable</div>-->
-    <!--<div class="col-md-2">Action</div>-->
-    <!--<div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">-->
-      <!--<div class="col-md-5 form-group">-->
-        <!--<input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">-->
-      <!--</div>-->
-      <!--<div class="col-md-3 fourm-group before-icon">-->
-        <!--<input placeholder="0.00" type="text" class="form-control" ng-model="service.rate">-->
-      <!--</div>-->
-      <!--<div class="col-md-2 fourm-group">-->
-        <!--<label class="control checkbox">-->
-          <!--<input ng-model="service.billable" type="checkbox">-->
-          <!--<span class="control-indicator"></span>-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="col-md-2 fourm-group">-->
-        <!--<div class="add-remove-service">-->
-          <!--<div ng-click="deleteService(service)">-->
-            <!--<i class="icon-sm icn-delete"></i>-->
-          <!--</div>-->
-        <!--</div>-->
+<!--<div class="col-md-5">Service name</div>-->
+<!--<div class="col-md-3">Per hour</div>-->
+<!--<div class="col-md-2">Make Billable</div>-->
+<!--<div class="col-md-2">Action</div>-->
+<!--<div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">-->
+<!--<div class="col-md-5 form-group">-->
+<!--<input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">-->
+<!--</div>-->
+<!--<div class="col-md-3 fourm-group before-icon">-->
+<!--<input placeholder="0.00" type="text" class="form-control" ng-model="service.rate">-->
+<!--</div>-->
+<!--<div class="col-md-2 fourm-group">-->
+<!--<label class="control checkbox">-->
+<!--<input ng-model="service.billable" type="checkbox">-->
+<!--<span class="control-indicator"></span>-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="col-md-2 fourm-group">-->
+<!--<div class="add-remove-service">-->
+<!--<div ng-click="deleteService(service)">-->
+<!--<i class="icon-sm icn-delete"></i>-->
+<!--</div>-->
+<!--</div>-->
 
-      <!--</div>-->
-    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-    <!--<div class="bill-hide-content-item clearfix" ng-form="newServiceForm">-->
-      <!--<div class="col-md-5 form-group">-->
-        <!--<input placeholder="New Service Name"-->
-               <!--type="text"-->
-               <!--class="form-control"-->
-               <!--ng-model="editService.name"-->
-               <!--required>-->
-      <!--</div>-->
-      <!--<div class="col-md-3 fourm-group before-icon">-->
-        <!--<input placeholder="0.00"-->
-               <!--type="text"-->
-               <!--class="form-control"-->
-               <!--ng-model="editService.rate">-->
-      <!--</div>-->
-      <!--<div class="col-md-2 fourm-group">-->
-        <!--<label class="control checkbox">-->
-          <!--<input type="checkbox" ng-model="editService.billable">-->
-          <!--<span class="control-indicator"></span>-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="col-md-2 fourm-group">-->
-        <!--<div class="add-remove-service">-->
-          <!--<div ng-click="addNewService(newServiceForm, editService)">-->
-            <!--<i class="icon-sm icn-add-action"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+<!--<div class="bill-hide-content-item clearfix" ng-form="newServiceForm">-->
+<!--<div class="col-md-5 form-group">-->
+<!--<input placeholder="New Service Name"-->
+<!--type="text"-->
+<!--class="form-control"-->
+<!--ng-model="editService.name"-->
+<!--required>-->
+<!--</div>-->
+<!--<div class="col-md-3 fourm-group before-icon">-->
+<!--<input placeholder="0.00"-->
+<!--type="text"-->
+<!--class="form-control"-->
+<!--ng-model="editService.rate">-->
+<!--</div>-->
+<!--<div class="col-md-2 fourm-group">-->
+<!--<label class="control checkbox">-->
+<!--<input type="checkbox" ng-model="editService.billable">-->
+<!--<span class="control-indicator"></span>-->
+<!--</label>-->
+<!--</div>-->
+<!--<div class="col-md-2 fourm-group">-->
+<!--<div class="add-remove-service">-->
+<!--<div ng-click="addNewService(newServiceForm, editService)">-->
+<!--<i class="icon-sm icn-add-action"></i>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-    <!--</div>-->
-
-  <!--</div>-->
-
-
-  <!--<div class="contacts-details">-->
-    <!--<div class="contacts-details-content clearfix">-->
-      <!--<div class="col-md-8"></div>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="btn btn-lg btn-success btn-create">Create</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--</div>-->
 
 <!--</div>-->
 
 
+<!--<div class="contacts-details">-->
+<!--<div class="contacts-details-content clearfix">-->
+<!--<div class="col-md-8"></div>-->
+<!--<div class="col-md-4">-->
+<!--<div class="btn btn-lg btn-success btn-create">Create</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-
+<!--</div>-->
 
 
 <div class="service-agreement-modal">
@@ -151,7 +147,8 @@
         <div class="col-md-5">Service name</div>
         <div class="col-md-3">Per hour</div>
         <div class="col-md-2">Make Billable</div>
-        <div class="col-md-2">Action</div>
+        <div class="col-md-1">Tax</div>
+        <div class="col-md-1">Action</div>
         <div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">
           <div class="col-md-5 form-group">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">
@@ -165,17 +162,24 @@
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-md-2 fourm-group">
+          <div class="col-md-1 fourm-group">
+            <div>
+              <div>
+                <i class="icn-sm icn-tax"></i>
+                <p>1</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 fourm-group">
             <div class="add-remove-service">
               <div ng-click="deleteService(service)">
                 <i class="icon-sm icn-delete"></i>
               </div>
             </div>
-
           </div>
         </div>
 
-        Create new Service
+        <p style="padding-left: 15px;">Create new Service</p>
 
         <div class="bill-hide-content-item clearfix" ng-form="newServiceForm">
           <div class="col-md-5 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
@@ -199,14 +203,21 @@
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-md-2 fourm-group">
+          <div class="col-md-1 fourm-group">
+            <div class="" ng-hide="contractServiceList.length > 19">
+              <div>
+                <i class="icn-sm icn-tax"></i>
+                <p>1</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 fourm-group">
             <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
               <div ng-click="addNewService(newServiceForm, editService)">
                 <i class="icon-sm icn-add-action"></i>
               </div>
             </div>
           </div>
-
         </div>
 
       </div>
