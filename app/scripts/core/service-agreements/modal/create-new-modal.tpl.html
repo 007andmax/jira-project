@@ -47,7 +47,7 @@
         <p>Per user or Device billing, Track time with custom services or create services for projects</p>
       </div>
     </div>
-    <div class="btn btn-success btn-create pull-right" custom-disabled="{{!selectedContractType || !contractCompany}}"
+    <div class="btn btn-success btn-create pull-right" custom-disabled="{{selectedContractType === 'CREATE_NEW' || !contractCompany}}"
          ng-click="changeModalToShow()">Create
     </div>
   </div>

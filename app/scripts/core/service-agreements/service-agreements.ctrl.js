@@ -117,6 +117,9 @@
 
             if(resp.HOURLY > 0) {
               $scope.blockHourlyChoice = true;
+              if($scope.selectedContractType === 'HOURLY') {
+                $scope.selectedContractType = 'CREATE_NEW';
+              }
             }
           })
         }
@@ -168,7 +171,7 @@
 
       $scope.selectContractType = function(type) {
         if($scope.selectedContractType === type) {
-          $scope.selectedContractType = '';
+          $scope.selectedContractType = 'CREATE_NEW';
         }else {
           $scope.selectedContractType = type;
         }
