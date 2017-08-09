@@ -549,7 +549,7 @@ a.ha-24 {
 #Product .barcode-icon,
 .ticket-update-edit .barcode-icon,
 #Product .barcode-icon-green,
-.ticket-update-edit .barcode-icon-green{
+.ticket-update-edit .barcode-icon-green {
   position: static;
   width: 18px;
   height: 18px;
@@ -997,7 +997,8 @@ li:hover > a > .icn-devices, li.active > a > .icn-devices {
 li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
   background-position: -1606px -100px;
 }
-.icn-tax{
+
+.icn-tax {
   background: url("../images/new-icons/tax.png");
   width: 12px;
   height: 14px;
@@ -1005,6 +1006,7 @@ li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
   background-size: cover;
   margin: 13px 0 0 8px;
 }
+
 .icn-leads {
   background-position: -2779px -206px;
   height: 16px;
@@ -1279,6 +1281,14 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 :hover > .icn-caret-gray, :active > .icn-caret-gray, :focus:hover > .icn-caret-gray, :focus:active > .icn-caret-gray, :hover:active > .icn-caret-gray, .active > .icn-caret-gray, .open > .btn:hover .icn-caret-gray {
   background-position: -463px 4px;
+}
+
+.icn-rotate-caret-gray {
+  background-position: -479px -4px;
+}
+
+:hover > .icn-rotate-caret-gray, :active > .icn-rotate-caret-gray, :focus:hover > .icn-rotate-caret-gray, :focus:active > .icn-rotate-caret-gray, :hover:active > .icn-rotate-caret-gray, .active > .icn-rotate-caret-gray, .open > .btn:hover .icn-rotate-caret-gray {
+  background-position: -463px -4px;
 }
 
 .icn-caret-right {
@@ -1963,10 +1973,12 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .icn-user-phone {
   background-image: url("../images/new-icons/call.png");
 }
-.icn-home-phone{
+
+.icn-home-phone {
   background: url("../images/new-icons/home-admin-panel.png");
   background-size: cover;
 }
+
 .icn-user-company {
   background-image: url("../images/new-icons/building.png");
 }

@@ -3,14 +3,38 @@
   <div class="service-agreements-lists">
     <ul>
       <li class="clearfix">
-        <div class="col-md-2"><strong ng-click="changeFilterType('company.name')">Company</strong></div>
-        <div class="col-md-3"><strong ng-click="changeFilterType('description')">Contract Discription</strong></div>
-        <div class="col-md-2"><strong ng-click="changeFilterType('type')">Contract Type</strong></div>
-        <div class="col-md-1"><strong ng-click="changeFilterType('status')">Status</strong></div>
-        <div class="col-md-1"><strong ng-click="changeFilterType('startDate')">Start Date</strong></div>
-        <div class="col-md-1"><strong ng-click="changeFilterType('endDate')">End Date</strong></div>
-        <div class="col-md-1"><strong ng-click="changeFilterType('reviewDate')">Review Date</strong></div>
-        <div class="col-md-1"><strong ng-click="changeFilterType('amount')">Amount</strong></div>
+        <div class="col-md-2"><strong ng-click="changeFilterType('company.name')">Company</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-3"><strong ng-click="changeFilterType('description')">Contract Discription</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-2"><strong ng-click="changeFilterType('type')">Contract Type</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('status')">Status</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('startDate')">Start Date</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('endDate')">End Date</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('reviewDate')">Review Date</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('amount')">Amount</strong>
+          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
       </li>
 
       <li ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix">

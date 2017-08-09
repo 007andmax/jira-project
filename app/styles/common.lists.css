@@ -3043,79 +3043,79 @@ Devices tab
   display: none !important;
 }
 
-/*.service-form-wrapper {*/
-/*padding: 30px;*/
-/*box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;*/
-/*}*/
+.service-form-wrapper {
+padding: 30px;
+box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
+}
 
-/*.service-form-wrapper .qt-form-actions {*/
-/*float: right;*/
+.service-form-wrapper .qt-form-actions {
+float: right;
 
-/*width: 100%;*/
-/*}*/
+width: 100%;
+}
 
-/*.service-form-wrapper .col-1 {*/
-/*float: left;*/
+.service-form-wrapper .col-1 {
+float: left;
 
-/*width: calc(100% - 127px);*/
-/*padding-right: 5px;*/
-/*margin-bottom: 20px;*/
-/*}*/
+width: calc(100% - 127px);
+padding-right: 5px;
+margin-bottom: 20px;
+}
 
-/*.service-form-wrapper .col-2 {*/
-/*float: left;*/
+.service-form-wrapper .col-2 {
+float: left;
 
-/*width: 127px;*/
-/*padding: 0 5px;*/
-/*margin-bottom: 20px;*/
-/*}*/
+width: 127px;
+padding: 0 5px;
+margin-bottom: 20px;
+}
 
-/*.service-form-wrapper .col-3 {*/
-/*float: left;*/
+.service-form-wrapper .col-3 {
+float: left;
 
-/*width: 173px;*/
-/*padding-left: 5px;*/
-/*}*/
+width: 173px;
+padding-left: 5px;
+}
 
-/*@media only screen and (min-width: 2000px) {*/
-/*.service-form-wrapper .col-1 {*/
-/*width: calc(100% - 380px);*/
-/*}*/
+@media only screen and (min-width: 2000px) {
+.service-form-wrapper .col-1 {
+width: calc(100% - 380px);
+}
 
-/*.service-form-wrapper .col-2 {*/
-/*width: 192px;*/
-/*}*/
+.service-form-wrapper .col-2 {
+width: 192px;
+}
 
-/*.service-form-wrapper .col-3 {*/
-/*width: 188px;*/
-/*}*/
-/*}*/
+.service-form-wrapper .col-3 {
+width: 188px;
+}
+}
 
-/*.add-service-btn-wrapper {*/
-/*float: left;*/
+.add-service-btn-wrapper {
+float: left;
 
-/*width: 100%;*/
-/*margin-bottom: 60px;*/
-/*}*/
+width: 100%;
+margin-bottom: 60px;
+}
 
-/*.add-service-btn-wrapper .btn {*/
-/*float: right;*/
-/*margin-right: 20px;*/
-/*}*/
+.add-service-btn-wrapper .btn {
+float: right;
+margin-right: 20px;
+}
 
-/*.add-service-btn-wrapper .btn .icn-sm {*/
-/*width: 12px;*/
-/*height: 12px;*/
-/*}*/
+.add-service-btn-wrapper .btn .icn-sm {
+width: 12px;
+height: 12px;
+}
 
-/*.all-companies-heading {*/
-/*float: left;*/
+.all-companies-heading {
+float: left;
 
-/*width: 100%;*/
-/*padding-top: 55px;*/
+width: 100%;
+padding-top: 55px;
 
-/*border-top: 1px solid #f1f5fa;*/
-/*}*/
+border-top: 1px solid #f1f5fa;
+}
 
 @-moz-document url-prefix() {
   .all-companies-heading {
@@ -5026,6 +5026,15 @@ Devices tab
 }
 .bill-hide-content-item .col-md-1 p{
   display: inline-block;
+}
+.bill-hide-content-item select-taxes{
+  display: inline-block;
+}
+.bill-hide-content-item .dropdown-menu-left{
+  left: -125px;
+}
+.bill-hide-content-item .icn-label-save{
+  right: 10px;
 }
 .before-icon input {
   padding-left: 25px;
