@@ -3043,10 +3043,10 @@ Devices tab
   display: none !important;
 }
 
-.service-form-wrapper {
-padding: 30px;
-box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
-}
+/*.service-form-wrapper {*/
+/*padding: 30px;*/
+/*box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;*/
+/*}*/
 
 .service-form-wrapper .qt-form-actions {
 float: right;
@@ -5031,7 +5031,14 @@ border-top: 1px solid #f1f5fa;
   display: inline-block;
 }
 .bill-hide-content-item .dropdown-menu-left{
-  left: -125px;
+  left: -45px;
+}
+.bill-hide-content-item .dropdown-menu-left label{
+  min-width: 130px;
+  padding: 13px 15px;
+}
+.bill-hide-content-item .checkbox-dropdown{
+  min-width: 130px;
 }
 .bill-hide-content-item .icn-label-save{
   right: 10px;
