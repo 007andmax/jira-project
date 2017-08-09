@@ -7,7 +7,7 @@
     <div class="billing-payment clearfix">
       <div class="col-xs-6">
         <div class="form-group">
-          <p>Company</p>
+          <p>Select Company</p>
           <div class="form-group">
             <input type="text" class="form-control has-dropdown" next-after-text-editor
                    ng-model="contractCompany" name="contractCompany" autocomplete="off"
@@ -23,11 +23,18 @@
     </div>
     <div class="billing-type-content clearfix">
       <strong><h4>Select your type for this customer</h4></strong>
-      <div class="col-xs-12" ng-click="selectContractType('HOURLY')"
+
+      <div ng-show="!blockHourlyChoice" class="col-xs-12" ng-click="selectContractType('HOURLY')"
            ng-class="{'active': selectedContractType === 'HOURLY'}">
         <h5>Hourly Billing</h5>
         <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
       </div>
+
+      <div ng-show="blockHourlyChoice" class="col-xs-12">
+        <h5>Hourly Billing</h5>
+        <p>This company already has one hourly billing contract</p>
+      </div>
+
       <div class="col-xs-12" ng-click="selectContractType('BLOCK_TIME_BILLING')"
            ng-class="{'active': selectedContractType === 'BLOCK_TIME_BILLING'}">
         <h5>Block Time Billing</h5>

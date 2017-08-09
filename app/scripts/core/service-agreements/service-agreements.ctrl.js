@@ -57,7 +57,7 @@
             case('CREATE_NEW'):
               template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
               break;
-            case('HOURLY_BILLING'):
+            case('HOURLY'):
               template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
             case('BLOCK_TIME_BILLING'):
@@ -99,6 +99,7 @@
       $scope.taxes = TaxesService.getAll();
       $scope.selectedContractType = 'CREATE_NEW';
       $scope.modlToShow = 'CREATE_NEW';
+      $scope.blockHourlyChoice = false;
 
       $scope.editService={
         name: '',
@@ -107,7 +108,19 @@
         taxes: []
       };
 
+      $scope.$watch(function () {
+        return $scope.contractCompany;
+      }, function (company) {
+        $scope.blockHourlyChoice = false;
+        if(company) {
+          AgreementsService.getAgreementCountByType(company.id, 'HOURLY', function(resp) {
 
+            if(resp.HOURLY > 0) {
+              $scope.blockHourlyChoice = true;
+            }
+          })
+        }
+      });
 
       ServicesService.getServicesData($scope, false, function (data) {
 

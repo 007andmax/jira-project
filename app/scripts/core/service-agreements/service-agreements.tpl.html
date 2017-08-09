@@ -5,7 +5,7 @@
       <li class="clearfix">
         <div class="col-md-2"><strong ng-click="changeFilterType('company.name')">Company</strong>
           <i ng-show="filterType === 'company.name'" class="icn-sm icn-caret-gray"></i>
-          <i ng-show="filterType === '-company.name'"class="icn-sm icn-rotate-caret-gray"></i>
+          <i ng-show="filterType === '-company.name'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
         <div class="col-md-3"><strong ng-click="changeFilterType('description')">Contract Discription</strong>
           <i ng-show="filterType === 'description'" class="icn-sm icn-caret-gray"></i>
@@ -37,10 +37,10 @@
         </div>
       </li>
 
-      <li ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix">
+      <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="openAgreementsModal(agreement.type)">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3">{{agreement.description}}</div>
-        <div class="col-md-2 clickable" ng-click="openAgreementsModal('HOURLY_BILLING')">{{agreement.type}}</div>
+        <div class="col-md-2">{{agreement.type}}</div>
         <div class="col-md-1">{{agreement.status}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>

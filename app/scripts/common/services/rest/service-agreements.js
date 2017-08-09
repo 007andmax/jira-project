@@ -9,7 +9,8 @@
     function ($http, $rootScope, RealTimeService, Utils) {
 
     var urlForGetAllServiceAgreements = '/serviceAgreements';
-    var urlForContractCreat = '/serviceAgreements'
+    var urlForContractCreat = '/serviceAgreements';
+
 
     function getAllServiceAgreements(callback) {
       var future = $http({
@@ -29,6 +30,14 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getAgreementCountByType(id, type, callback) {
+      var future = $http({
+        method: 'GET',
+        url: '/serviceAgreements/countCurrentAgreements' + '?companyId='+id+'&types='+type
+      });
+      Utils.handleCallback(future, callback)
+
+    }
 
 
 
@@ -36,7 +45,8 @@
 
     return {
       getAllServiceAgreements: getAllServiceAgreements,
-      createContract: createContract
+      createContract: createContract,
+      getAgreementCountByType: getAgreementCountByType
     }
 
 
