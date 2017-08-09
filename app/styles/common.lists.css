@@ -4941,10 +4941,11 @@ border-top: 1px solid #f1f5fa;
 }
 .hourly .service-bill-hide-content{
   padding-top: 15px;
-}
-.hourly .service-bill-hide-content {
   padding-left: 0;
+  overflow: auto;
+  max-height: 340px;
 }
+
 .block-time .service-bill-hide-content .before-icon:before{
   top: 5px;
   left: 108px;
