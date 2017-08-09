@@ -3,14 +3,53 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('quicktech.core.serviceAgreements.serviceAgreementsCtrl',
-    ['$scope', '$uibModal', 'AgreementsService',
-      function ($scope, $uibModal, AgreementsService) {
+    ['$scope', '$uibModal', 'AgreementsService','CompaniesService',
+      function ($scope, $uibModal, AgreementsService, CompaniesService) {
 
         $scope.parseDate = Date.parse.bind(Date);
+        $scope.filterType = 'company.name';
 
         AgreementsService.getAllServiceAgreements(function (data) {
-          $scope.agreementsList = data;
+          $scope.agreementsList = [];
+          for(var i=0; i<data.length; i++) {
+            var agreement = data[i];
+            agreement.company.name = getCompanyName(data[i].company.id);
+            $scope.agreementsList.push(agreement)
+          }
+
         });
+
+        $scope.allCompnaies = CompaniesService.getAllCompanies();
+
+        function getCompanyName(id) {
+          for(var i=0; i<$scope.allCompnaies.length; i++) {
+            if($scope.allCompnaies[i].id === id) {
+              return $scope.allCompnaies[i].name;
+            }
+          }
+        }
+
+        $scope.changeFilterType = function(type) {
+          if($scope.filterType === type) {
+            $scope.filterType = "-"+$scope.filterType;
+          } else {
+            $scope.filterType = type;
+          }
+        };
+
+        $scope.getDateInCorrectFormat = function(date) {
+          var newDate = new Date(date);
+          if (newDate) {
+            var endMonth = newDate.getMonth() + 1;
+            var correctDate = newDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(newDate.getDate());
+          }
+          return correctDate;
+        };
+
+        function addZeroIfNeed(n) {
+          return n < 10 ? '0' + n : '' + n;
+        }
+
 
         $scope.openAgreementsModal = function (contractType) {
           var template;
@@ -168,20 +207,9 @@
       };
 
       $scope.createContract = function() {
-        // if($scope.contractCompany) {
-        //   $scope.serviceContracts.companyId = $scope.contractCompany.id;
-        // } else if($scope.companyId) {
-        //
-        //   $scope.serviceContracts.companyId = $scope.companyId
-        // }
         $scope.serviceContracts.companyId = companyData.companyId ||  $scope.contractCompany.id;
 
         $scope.serviceContracts.services = $scope.contractServiceList;
-        // if(companyData && companyData.length) {
-        //   $scope.serviceContracts.type = companyData.type;
-        // } else {
-        //   $scope.serviceContracts.type = $scope.modlToShow;
-        // }
         $scope.serviceContracts.type = companyData.type || $scope.modlToShow;
 
         console.log($scope.serviceContracts);

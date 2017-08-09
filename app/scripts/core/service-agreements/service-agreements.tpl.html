@@ -3,24 +3,24 @@
   <div class="service-agreements-lists">
     <ul>
       <li class="clearfix">
-        <div class="col-md-2"><strong>Company</strong></div>
-        <div class="col-md-3"><strong>Contract Discription</strong></div>
-        <div class="col-md-2"><strong>Contract Type</strong></div>
-        <div class="col-md-1"><strong>Status</strong></div>
-        <div class="col-md-1"><strong>Start Date</strong></div>
-        <div class="col-md-1"><strong>End Date</strong></div>
-        <div class="col-md-1"><strong>Review Date</strong></div>
-        <div class="col-md-1"><strong>Amount</strong></div>
+        <div class="col-md-2"><strong ng-click="changeFilterType('company.name')">Company</strong></div>
+        <div class="col-md-3"><strong ng-click="changeFilterType('description')">Contract Discription</strong></div>
+        <div class="col-md-2"><strong ng-click="changeFilterType('type')">Contract Type</strong></div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('status')">Status</strong></div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('startDate')">Start Date</strong></div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('endDate')">End Date</strong></div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('reviewDate')">Review Date</strong></div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('amount')">Amount</strong></div>
       </li>
 
-      <li ng-repeat="agreement in agreementsList" class="content-product-list-ticket clearfix">
-        <div class="col-md-2">{{agreement.company.id}}</div>
+      <li ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix">
+        <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3">{{agreement.description}}</div>
         <div class="col-md-2 clickable" ng-click="openAgreementsModal('HOURLY_BILLING')">{{agreement.type}}</div>
         <div class="col-md-1">{{agreement.status}}</div>
-        <div class="col-md-1">{{agreement.startDate}}</div>
-        <div class="col-md-1">{{agreement.endDate}}</div>
-        <div class="col-md-1">{{agreement.reviewDate}}</div>
+        <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
+        <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
+        <div class="col-md-1">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
         <div class="col-md-1">{{agreement.amount}}</div>
       </li>
 
