@@ -41,7 +41,7 @@
           var newDate = new Date(date);
           if (newDate) {
             var endMonth = newDate.getMonth() + 1;
-            var correctDate = newDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(newDate.getDate());
+            var correctDate = addZeroIfNeed(newDate.getDate()) + "/"+ addZeroIfNeed(endMonth) +"/"+ newDate.getFullYear();
           }
           return correctDate;
         };
@@ -101,6 +101,9 @@
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;
 
+      $scope.today = Date.now();
+      $scope.minDateForEndDatePicker;
+
       $scope.editService={
         name: '',
         rate: null,
@@ -144,12 +147,19 @@
         byUsers: 'By Users'
       };
 
+      function setMiNDateForEndDate(date) {
+        var d = new Date(date);
+        d.setDate(d.getDate() + 30);
+        $scope.minDateForEndDatePicker = d.getTime();
+      }
+
       $scope.startDatePicker = function(date) {
         var startDate = new Date(date);
         if (startDate) {
           var startMonth = startDate.getMonth() + 1;
           $scope.serviceContracts.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
         }
+        setMiNDateForEndDate(date);
       };
 
       $scope.endDatePicker = function(date) {
