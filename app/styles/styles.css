@@ -828,7 +828,7 @@ hr {
 }
 
 .wysiwyg-controls-wrapper .control-wrappers {
-  margin-top: 12px;
+  margin-top: 7px;
   margin-left: 18px;
 }
 
@@ -870,7 +870,7 @@ hr {
 }
 
 .wysiwyg-controls-wrapper > a {
-  margin-top: 12px;
+  margin-top: 7px;
   margin-right: 10px;
 }
 
@@ -1016,10 +1016,12 @@ hr {
   width: 100%;
   padding-bottom: 30px;
 }
-.billable-content .bootstrap-datetimepicker-widget.dropdown-menu{
+
+.billable-content .bootstrap-datetimepicker-widget.dropdown-menu {
   right: 0 !important;
-  left: auto!important;
+  left: auto !important;
 }
+
 .receivable-content .product-list-ticket {
   box-shadow: none;
   border: none;
@@ -1971,17 +1973,21 @@ mark,
   position: absolute;
   right: 20px;
 }
-.topNavbar-search .item-info.text-muted{
+
+.topNavbar-search .item-info.text-muted {
   position: static;
 }
-.topNavbar-search  .focusable{
+
+.topNavbar-search .focusable {
   cursor: pointer;
   min-height: 48px;
   padding: 0 10px;
 }
-.topNavbar-search  .focusable:hover{
+
+.topNavbar-search .focusable:hover {
   background-color: #e7ecf2;
 }
+
 .text-primary {
   color: #e7ecf2;
 }
@@ -4510,8 +4516,9 @@ select[multiple].input-lg {
 .device-field .control input:checked ~ .control-indicator {
   margin: 14px 0 0 15px;
 }
-.device-field .dropdown-margin .control  .control-indicator{
-  margin: 0!important;
+
+.device-field .dropdown-margin .control .control-indicator {
+  margin: 0 !important;
 }
 
 .control input:checked ~ .control-indicator.plus-circle {
@@ -11676,16 +11683,20 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   max-height: 200px;
   overflow-x: hidden;
 }
-.dropdown-width .dropdown-menu.dropdown-menu-left.checkbox-dropdown{
+
+.dropdown-width .dropdown-menu.dropdown-menu-left.checkbox-dropdown {
   width: 100% !important;
   max-width: 100% !important;
 }
-.qt-product-edit .col-1 .dropdown-width .select-taxes-drv .checkbox-dropdown .checkbox{
+
+.qt-product-edit .col-1 .dropdown-width .select-taxes-drv .checkbox-dropdown .checkbox {
   width: 100%;
 }
-.qt-product-edit .dropdown-width .icn-label-save{
+
+.qt-product-edit .dropdown-width .icn-label-save {
   right: 13px;
 }
+
 #companyInfoContactInfo {
   display: inline-block;
 }
@@ -11704,6 +11715,89 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   width: 13%;
 }
 
+.billing-payment .icn-caret-gray {
+  top: 35px;
+  position: absolute;
+  right: 10px;
+}
+
+.billing-payment input {
+  cursor: pointer;
+}
+
+.billing-type-content {
+  padding: 0 15px;
+}
+
+.service-agreements-popup .btn-primary {
+  width: 190px;
+  float: right;
+  margin-top: 15px;
+}
+
+.billing-type-content .col-xs-12.hourly-not-active {
+  background-color: #d6d6d6;
+  border: 1px solid #F73D3D;
+  cursor: default;
+}
+
+.billing-type-content .col-xs-12.hourly-not-active h5:before {
+  display: none;
+}
+
+.billing-type-content .col-xs-12.hourly-not-active:hover {
+  background-color: #d6d6d6;
+  border: 1px solid #F73D3D;
+}
+
+.billing-type-content .col-xs-12.hourly-not-active:hover h5:before {
+  display: none;
+}
+
+.billing-type-content .col-xs-12 {
+  margin-bottom: 10px;
+  background-color: #F6F8FA;
+  min-height: 97px;
+  padding: 10px 20px 10px 60px;
+  cursor: pointer;
+  transition: all .3s;
+  border: 1px solid #F6F8FA;
+  border-radius: 4px;
+}
+
+.billing-type-content .col-xs-12 h5 {
+  margin: 0 0 5px 0;
+  position: relative;
+}
+
+.billing-type-content .col-xs-12 h5:before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border: solid 1px #c4cbd5;
+  border-radius: 50%;
+  left: -37px;
+  top: 3px;
+  transition: all .3s;
+}
+
+.billing-type-content .col-xs-12:hover,
+.billing-type-content .col-xs-12.active {
+  background-color: #fff;
+  border: 1px solid #2c9fdd;
+}
+
+.billing-type-content .col-xs-12:hover h5:before,
+.billing-type-content .col-xs-12.active h5:before {
+  border: 4px solid #4CAF50;
+}
+
+.billing-type-content img {
+  width: 100px;
+}
+
 @media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 512px);
@@ -11712,6 +11806,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   .opened-ticket .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
     width: 60%;
   }
+
   .opened-ticket.opened-ticket-list .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
     width: 50%;
   }
@@ -11870,8 +11965,6 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     display: block;
   }
 }
-
-
 
 .customer-list {
   padding: 45px 30px;

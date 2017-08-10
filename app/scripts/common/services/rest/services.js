@@ -9,17 +9,17 @@
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
 
-      function search(keyword) {
-
-        if (!keyword) {
-          throw 'Keyword is required!';
-        }
-
-        return $http.get("/services/search?keyword=" + keyword.toLowerCase()).then(function (response) {
-          return response.data;
-        });
-
-      }
+      // function search(keyword) {
+      //
+      //   if (!keyword) {
+      //     throw 'Keyword is required!';
+      //   }
+      //
+      //   return $http.get("/services/search?keyword=" + keyword.toLowerCase()).then(function (response) {
+      //     return response.data;
+      //   });
+      //
+      // }
 
       function getAllByCompany(scope, companyId, callback) {
 
@@ -85,7 +85,7 @@
 
         var data = Utils.customizeObj({});
 
-        var url = '/services';
+        var url = '/services/getDefaultServices';
 
         if (isOnlyDefault) {
           url = url + '/getDefaultServices';
@@ -121,20 +121,9 @@
 
           if (newChange.action == 'SERVICE_SAVED') {
             serviceSaved(newChange.data);
-          } else if (newChange.action == 'SERVICE_LIST_SAVED') {
-
-            for (var i = 0; i < newChange.data.length; i++) {
-              serviceSaved(newChange.data[i]);
-            }
-
-          } else if (newChange.action == 'SERVICES_MOVED') {
-            for (var i = 0; i < newChange.data.length; i++) {
-              addServiceData(data, newChange.data[i])
-            }
-
           } else if (newChange.action == 'COMPANY_SERVICES_DELETED') {
             delete data[newChange.data.id];
-          } else if (newChange.action == 'SERVICES_DELETED') {
+          } else if (newChange.action == 'SERVICE_DELETED') {
             for (var i = 0; i < newChange.data.length; i++) {
               serviceDeleted(newChange.data[i].versionedId.id, data);
             }
@@ -187,23 +176,23 @@
         delete data[companyId];
       }
 
-      function saveList(services, companyId, callback) {
-
-        if (!services) {
-          throw 'services is required!';
-        }
-
-        if (!companyId) throw 'companyId is required!';
-
-        var future = $http({
-          url: '/services/saveList/' + companyId,
-          method: 'POST',
-          data: { serviceDtoList: services }
-        });
-
-        Utils.handleCallback(future, callback);
-
-      }
+      // function saveList(services, companyId, callback) {
+      //
+      //   if (!services) {
+      //     throw 'services is required!';
+      //   }
+      //
+      //   if (!companyId) throw 'companyId is required!';
+      //
+      //   var future = $http({
+      //     url: '/services/saveList/' + companyId,
+      //     method: 'POST',
+      //     data: { serviceDtoList: services }
+      //   });
+      //
+      //   Utils.handleCallback(future, callback);
+      //
+      // }
 
       function save(service, callback) {
 
@@ -266,7 +255,7 @@
         if (!ids) throw 'ids is required argument!';
         if (toBillable === undefined) throw 'toBillable is required argument!';
 
-        if (!Array.isArray(ids)) ids = [ids];
+        //if (!Array.isArray(ids)) ids = [ids];
 
         var future = $http({
           url: '/services/changeBillableStatus?toBillable=' + !!toBillable,
@@ -366,11 +355,10 @@
       }
 
       return {
-        search: search,
+
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         save: save,
-        saveList: saveList,
         addCompanyToServiceData: addCompanyToServiceData,
         deleteCompanyFromServiceData: deleteCompanyFromServiceData,
         deleteService: deleteService,

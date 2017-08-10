@@ -602,6 +602,26 @@
   width: 100%;
 }
 
+.service-header .title-services {
+  font-size: 20px;
+  border-bottom: 1px solid #edf2f6;
+  margin: 0;
+  padding: 15px 0;
+}
+
+.hourly .service-header .title-services {
+  margin-bottom: 15px;
+}
+
+.hourly .btn.btn-create {
+  float: right;
+  margin: 20px 10px 0 0;
+}
+
+.service-header p {
+  padding: 15px 0;
+}
+
 .description-area {
   border: 1px solid #e2e6e6;
 }

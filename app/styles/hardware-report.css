@@ -450,6 +450,40 @@
   height: 65px;
   text-transform: uppercase;
 }
+.service-agreements{
+  text-align: right;
+}
+.service-agreements .btn-primary{
+  width: 190px;
+  margin: 20px 20px 0 0;
+}
+.service-agreements-lists{
+  text-align: left;
+}
+.service-agreements-lists li{
+  cursor: pointer;
+}
+.service-agreements-lists .content-product-list-ticket{
+  border-bottom: 1px solid #e7ecf2;
+  border-right: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+.service-agreements-lists .content-product-list-ticket:hover{
+  border-right: 3px solid #e7ecf2;
+  border-left: 3px solid #e7ecf2;
+}
+.service-agreements ul {
+  list-style: none;
+  padding: 20px;
+}
+
+.service-agreements ul li [class*='col-md-'] {
+  padding: 15px;
+}
+
+.service-agreements ul li:first-child {
+  border-bottom: 1px solid #eee;
+}
 
 .product-list-ticket ul {
   list-style: none;

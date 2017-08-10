@@ -4,10 +4,10 @@
 
   angular.module('quicktech').controller('quicktech.createCompanyCtrl',
     [
-      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
+      '$scope', '$uibModal','UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService', '$state', '$timeout',
       '$rootScope', 'quicktech.common.services.PermissionsService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, AddressesService, ServicesService,
+      function ($scope, $uibModal, UsersService, SubscriptionsService, CompaniesService, AddressesService, ServicesService,
                 PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
         $scope.descriptionMaxLength = 300;
@@ -140,6 +140,16 @@
           $scope.industries = resp;
         });
 
+        $scope.selectedContractType;
+        $scope.selectContractType = function(type) {
+          if($scope.selectedContractType === type) {
+            $scope.selectedContractType = '';
+          }else {
+            $scope.selectedContractType = type;
+          }
+          //console.log('$scope.selectedContractType: ', $scope.selectedContractType);
+        };
+
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!savedState.item || !savedState.item.id) {
             $timeout(function () {
@@ -162,7 +172,7 @@
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
-        $scope.save = function (form) {
+        $scope.save = function (form, isCreateContract) {
           $scope.isSaveFailed = false;
 
           if (form.$valid) {
@@ -211,6 +221,8 @@
               editCompany.agentLinkToEmail = null;
             }
 
+
+
             CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
               if (!resp.code || resp.code === 200) {
@@ -220,12 +232,20 @@
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
                 if (!$scope.savedState.items.length) {
-                  $scope.closeWindow();
+                  if(isCreateContract && $scope.selectedContractType) {
+                    $scope.closeWindowWithoutConfirmation();
+                    openCreateContractModal(editCompany, $scope.selectedContractType, resp);
+                  } else {
+                    $scope.closeWindow();
+                    openCreateContractModal(editCompany)
+                  }
                 }
               } else {
                 $scope.isSaveFailed = true;
               }
             });
+
+
             unsubscribeClosingEvent();
           } else {
             $scope.triedToSave = true;
@@ -254,6 +274,42 @@
           }
 
         };
+
+        function openCreateContractModal(companyInfo, contractType, companyId) {
+          var template;
+          switch (contractType) {
+            case('HOURLY'):
+              template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+              break;
+            case('BLOCK_TIME_BILLING'):
+              template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+              break;
+            case('PER_USER/DEVICE_BILLING'):
+              template = '';
+              break;
+            default:
+              console.log('no contract type selected');
+          }
+          $uibModal.open({
+            templateUrl: template,
+            animation: true,
+            backdrop: false,
+            size: 'lg',
+            controller: 'serviceAgreementsModalCtrl',
+            windowClass: 'create-popup margin-top-modal-dialog',
+            resolve: {
+              companyData: {
+                companyInfo: companyInfo,
+                companyId: companyId,
+                type:  contractType
+              }
+              // companyInfo: companyInfo,
+              // companyId: companyId,
+              // type:  contractType
+            }
+
+          });
+        }
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;

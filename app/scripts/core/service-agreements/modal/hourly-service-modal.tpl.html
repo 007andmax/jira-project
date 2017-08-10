@@ -1,0 +1,143 @@
+
+<div class="service-agreement-modal">
+  <div class="service-form-wrapper">
+    <div class="hourly clearfix">
+      <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+        <i class="icn-sm icn-remove-old"></i>
+      </div>
+
+      <div class="service-header">
+        <h4 class="title-services">Hourly Service</h4>
+      </div>
+      <div class="service-contract-details clearfix">
+        <div class="col-md-8">
+          <div class="form-group">
+            Description
+            <input placeholder="Description"
+                   type="text"
+                   class="form-control"
+                   ng-model="serviceContracts.description"
+                   ng-maxlength="255">
+          </div>
+        </div>
+        <div class="col-md-12"></div>
+        <div class="col-md-3">
+          <div class="form-group">
+            Select Date:
+              <input type="text"
+                     class="form-control has-dropdown readonly-normal"
+                     name="StartDate"
+                     readonly
+                     date-format="dd/mm/yy"
+                     date-range-picker="startDatePicker"
+                     min-date="{{today}}"
+                     ng-model="startDate"
+                     placeholder="Start Date">
+              <i class="report-calendar"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <input style="margin-top: 25px;"
+                   type="text"
+                   class="form-control has-dropdown readonly-normal"
+                   name="EndDate"
+                   readonly
+                   date-format="dd/mm/yy"
+                   date-range-picker="endDatePicker"
+                   min-date="{{minDateForEndDatePicker}}"
+                   ng-model="endDate"
+                   placeholder="End Date">
+            <i class="report-calendar"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-bill-hide-content clearfix">
+
+        <div class="col-md-5">Service name</div>
+        <div class="col-md-3">Per hour</div>
+        <div class="col-md-2">Make Billable</div>
+        <div class="col-md-1">Tax</div>
+        <div class="col-md-1">Action</div>
+        <div class="bill-hide-content-item clearfix" ng-repeat="service in contractServiceList">
+          <div class="col-md-5 form-group">
+            <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">
+          </div>
+          <div class="col-md-3 fourm-group before-icon">
+            <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate">
+          </div>
+          <div class="col-md-2 fourm-group">
+            <label class="control checkbox">
+              <input ng-model="service.billable" type="checkbox">
+              <span class="control-indicator"></span>
+            </label>
+          </div>
+          <div class="col-md-1 fourm-group">
+            <div>
+              <div>
+                <!--<i class="icn-sm icn-tax"> </i>-->
+                <select-taxes taxes="taxes" entity="service" is-icon="true"></select-taxes>
+                <p>{{service.taxes.length}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 fourm-group">
+            <div class="add-remove-service">
+              <div ng-click="deleteService(service)">
+                <i class="icon-sm icn-delete"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="padding-left: 15px;">Create new Service</p>
+
+        <div class="bill-hide-content-item clearfix" ng-form="newServiceForm">
+          <div class="col-md-5 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
+            <input placeholder="New Service Name"
+                   type="text"
+                   name="editServiceName"
+                   class="form-control"
+                   ng-model="editService.name"
+                   required
+                   is-uniq-validation validation-func="validateServiceName">
+          </div>
+          <div class="col-md-3 fourm-group before-icon">
+            <input placeholder="0.00"
+                   type="text"
+                   class="form-control"
+                   ng-model="editService.rate">
+          </div>
+          <div class="col-md-2 fourm-group">
+            <label class="control checkbox">
+              <input type="checkbox" ng-model="editService.billable">
+              <span class="control-indicator"></span>
+            </label>
+          </div>
+          <div class="col-md-1 fourm-group">
+            <div class="" ng-hide="contractServiceList.length > 19">
+              <div>
+                <select-taxes taxes="taxes" entity="editService" is-icon="true"></select-taxes>
+                <p>{{editService.taxes.length}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 fourm-group">
+            <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
+              <div ng-click="addNewService(newServiceForm, editService)">
+                <i class="icon-sm icn-add-action"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-12">
+        <div class="btn btn-success btn-create" ng-click="createContract()">Create</div>
+        <div class="btn btn-primary btn-create">Terminate</div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -70,6 +70,7 @@
 
       return {
         getSharedState: function (name) {
+
           return sharedStates[name];
         },
         updateState: function (name, state) {

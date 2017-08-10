@@ -547,13 +547,13 @@ a.ha-24 {
 }
 
 #Product .barcode-icon,
-.ticket-update-edit .barcode-icon {
-  position: static;
-}
-
+.ticket-update-edit .barcode-icon,
 #Product .barcode-icon-green,
 .ticket-update-edit .barcode-icon-green {
   position: static;
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
 }
 
 .sale-icon-for-isDicount {
@@ -567,9 +567,9 @@ a.ha-24 {
 }
 
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
-  width: 30px;
-  height: 30px;
-  margin: 5px 0 0 10px;
+  width: 18px;
+  height: 18px;
+  margin: 10px 0 0 10px;
   cursor: pointer;
 }
 
@@ -998,6 +998,15 @@ li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
   background-position: -1606px -100px;
 }
 
+.icn-tax {
+  background: url("../images/new-icons/tax.png");
+  width: 12px;
+  height: 14px;
+  cursor: pointer;
+  background-size: cover;
+  margin: 13px 0 0 8px;
+}
+
 .icn-leads {
   background-position: -2779px -206px;
   height: 16px;
@@ -1272,6 +1281,14 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 :hover > .icn-caret-gray, :active > .icn-caret-gray, :focus:hover > .icn-caret-gray, :focus:active > .icn-caret-gray, :hover:active > .icn-caret-gray, .active > .icn-caret-gray, .open > .btn:hover .icn-caret-gray {
   background-position: -463px 4px;
+}
+
+.icn-rotate-caret-gray {
+  background-position: -479px -4px;
+}
+
+:hover > .icn-rotate-caret-gray, :active > .icn-rotate-caret-gray, :focus:hover > .icn-rotate-caret-gray, :focus:active > .icn-rotate-caret-gray, :hover:active > .icn-rotate-caret-gray, .active > .icn-rotate-caret-gray, .open > .btn:hover .icn-rotate-caret-gray {
+  background-position: -463px -4px;
 }
 
 .icn-caret-right {
@@ -1956,10 +1973,12 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .icn-user-phone {
   background-image: url("../images/new-icons/call.png");
 }
-.icn-home-phone{
+
+.icn-home-phone {
   background: url("../images/new-icons/home-admin-panel.png");
   background-size: cover;
 }
+
 .icn-user-company {
   background-image: url("../images/new-icons/building.png");
 }

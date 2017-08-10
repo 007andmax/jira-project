@@ -75,7 +75,7 @@
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"/>
         </div>
 
-        <div class="col-4" style="width: 70px; float: left;"
+        <div class="col-4" style="width: 115px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
           <input type="text" class="form-control" placeholder="Qty" maxlength="4"
@@ -84,7 +84,7 @@
                  hard-reset-pattern="quantityPattern">
         </div>
 
-        <div class="col-3 price-width" style="width: 115px; float: left;"
+        <div class="col-3 price-width" style="width: 125px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
           <input type="number" class="form-control" placeholder="Price" qt-to-fixed="2"
@@ -99,23 +99,23 @@
              uib-tooltip="Discount"></i>
         </div>
 
-        <div class="col-4" style="width: 60px;float: left;padding-top: 6px; cursor: pointer;">
+        <div class="col-4" style="width: 50px;float: left;padding-top: 6px; cursor: pointer;">
           <i class="icon-sm" uib-tooltip="Serial number" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
 
-        <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
-          <div class="btn-icn btn btn-primary has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
+        <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1 && !$last">
+          <div class="has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
                ng-click="removeProduct()">
-            <i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
+            <i class="icon-sm icn-delete"></i>
           </div>
         </div>
 
         <div style="float: left;" ng-if="$last">
-          <div class="btn-icn btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Product"
+          <div class="has-tooltip add-expense-btn" uib-tooltip="Add Product"
                tooltip-placement="top"
                ng-click="addProduct()">
-            <i class="icn-sm icn-plus" style="margin-top: 12px;"></i>
+            <i class="icon-sm icn-add-action"></i>
           </div>
         </div>
       </li>

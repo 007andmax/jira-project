@@ -59,24 +59,24 @@
           <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
                  qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
                  name="serviceData" ng-required="true">
-          <div class="btn-icn btn btn-primary">
-            <img src="images/input-icons/calendar.svg" width="100%" height="100%" alt="">
+          <div>
+            <i class="report-calendar"></i>
           </div>
         </div>
       </div>
 
-      <div style="width: 100px">
-        <div class="col-5" ng-if="ticketUpdate.services.length > 1" style="float: left; width: 36px;">
-              <span class="btn-icn btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
+      <div style="width: 25px">
+        <div class="col-5" ng-if="ticketUpdate.services.length > 1 && !$last" style="float: left; width: 36px;">
+              <span class="has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
                     ng-click="removeService()">
-                <i class="icn-sm icn-remove-token-light"></i>
+                <i class="icon-sm icn-delete"></i>
               </span>
         </div>
 
         <div style="float: left;" ng-if="$last">
-          <div class="btn-icn btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Service" tooltip-placement="top"
+          <div class="has-tooltip add-expense-btn" uib-tooltip="Add Service" tooltip-placement="top"
                ng-click="addService()">
-            <i class="icn-sm icn-plus"></i>
+            <i class="icon-sm icn-add-action"></i>
           </div>
         </div>
       </div>

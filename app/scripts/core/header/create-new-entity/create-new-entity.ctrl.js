@@ -29,13 +29,20 @@
           $scope.openedTab = 'ticket';
         }
 
+        var alreadyPushCloseButton = false;
+
         $scope.sessionId = sessionId;
         $scope.sessionTime = sessionTime;
         $scope.resolvedDeviceId = resolvedDeviceId;
         $scope.resolvedCompanyId = resolvedCompanyId;
         $scope.resolvedCreatedUserId = resolvedUserId;
         $scope.closeWindow = $uibModalInstance.dismiss;
-        var alreadyPushCloseButton = false;
+        $scope.closeWindowWithoutConfirmation = function(){
+          alreadyPushCloseButton = true;
+          $scope.closeWindow();
+          alreadyPushCloseButton = false;
+        }
+
 
         $scope.closeWindowWithConfirm = function () {
           alreadyPushCloseButton = true;

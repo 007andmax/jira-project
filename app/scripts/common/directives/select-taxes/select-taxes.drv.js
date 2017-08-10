@@ -8,16 +8,19 @@
       taxes: '=',
       entity: '=',
       entityType: '@?',
-      onClose: '=?'
+      onClose: '=?',
+      isIcon: '@?'
     },
     controller: selectTaxesCtrl
   });
-
-  function selectTaxesCtrl() {
+  selectTaxesCtrl.$inject=['$scope'];
+  function selectTaxesCtrl($scope) {
     var $ctrl = this;
     this.updateEntityTaxList = updateEntityTaxList;
     this.getSelectedTaxNames = getSelectedTaxNames;
     this.onDropdownToggle = onDropdownToggle;
+
+    $ctrl.isIcon = $scope.$eval($ctrl.isIcon);
 
     $ctrl.searchTax = '';
 

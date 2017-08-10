@@ -24,6 +24,7 @@
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
+      "quicktech.core.serviceAgreements",
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -153,6 +154,11 @@
           url: '/accounting/receipt-archive/:mode',
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
+        }))
+        .state('service-agreements', waitForServices({
+          url: '/accounting/service-agreements',
+          templateUrl: '/html/scripts/core/service-agreements/service-agreements.tpl.html',
+          controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
         }))
         .state('settings', waitForServices({
           url: '/settings',
@@ -324,7 +330,12 @@
             globalSearch.selectedItemsCount = undefined;
           }
 
+          //change filter
           globalSearch.openedItemName = undefined;
+          // clear search field
+          // if(toState.name === 'tickets.details' && globalSearch.searchValue === undefined) {
+          //   globalSearch.searchValue = '';
+          // }
           globalSearch.searchValue = '';
 
           if (toState.name === 'tickets' || (toState.name === 'tickets.details' && globalSearch.selectedItemsCount)) {
