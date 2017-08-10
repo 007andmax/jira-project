@@ -40,10 +40,10 @@
                 return user.subscription.invoice;
               }).length <= 1;
 
-            for (var k = 0; k < companyData.services.length; k++) {
-              var service = companyData.services[k].originService || companyData.services[k];
-              $scope.selectedServices[service.versionedId.id] = true;
-            }
+            // for (var k = 0; k < companyData.services.length; k++) {
+            //   var service = companyData.services[k].originService || companyData.services[k];
+            //   $scope.selectedServices[service.versionedId.id] = true;
+            // }
 
             $scope.editCompany = companyData.staticCopy();
             $scope.contact = $scope.editCompany.contacts[0];
