@@ -36,7 +36,14 @@
         url: '/serviceAgreements/countCurrentAgreements' + '?companyId='+id+'&types='+type
       });
       Utils.handleCallback(future, callback)
+    }
 
+    function getAgreement(id, callback) {
+      var future=$http({
+        method: 'GET',
+        url: '/serviceAgreements/'+id
+      })
+      Utils.handleCallback(future, callback)
     }
 
 
@@ -46,7 +53,8 @@
     return {
       getAllServiceAgreements: getAllServiceAgreements,
       createContract: createContract,
-      getAgreementCountByType: getAgreementCountByType
+      getAgreementCountByType: getAgreementCountByType,
+      getAgreement: getAgreement
     }
 
 

@@ -301,7 +301,8 @@
               companyData: {
                 companyInfo: companyInfo,
                 companyId: companyId,
-                type:  contractType
+                type:  contractType,
+                editMode: true
               }
               // companyInfo: companyInfo,
               // companyId: companyId,

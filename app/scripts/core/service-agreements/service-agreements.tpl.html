@@ -1,5 +1,5 @@
 <div class="deposit-create service-agreements clearfix">
-  <div class="btn btn-primary" ng-click="openAgreementsModal('CREATE_NEW')">New Contract</div>
+  <div class="btn btn-primary" ng-click="openAgreementsModal('CREATE_NEW', true, null)">New Contract</div>
   <div class="service-agreements-lists">
     <ul>
       <li class="clearfix">
@@ -37,7 +37,7 @@
         </div>
       </li>
 
-      <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="openAgreementsModal(agreement.type)">
+      <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3">{{agreement.description}}</div>
         <div class="col-md-2">{{agreement.type}}</div>

@@ -51,36 +51,53 @@
         }
 
 
-        $scope.openAgreementsModal = function (contractType) {
-          var template;
-          switch (contractType) {
-            case('CREATE_NEW'):
-              template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
-              break;
-            case('HOURLY'):
-              template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
-              break;
-            case('BLOCK_TIME_BILLING'):
-              template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
-              break;
-            case('PER_USER/DEVICE_BILLING'):
-              template = '';
-              break;
-            default:
-              console.log('no contract type selected');
+        $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
+          var companyForReadOnlyMode = {};
+          if(agreementId) {
+            AgreementsService.getAgreement(agreementId, function(resp) {
+              console.log(resp);
+              companyForReadOnlyMode = resp;
+              openModal(contractType, editMode, companyForReadOnlyMode)
+            })
+          } else {
+            openModal(contractType, editMode, companyForReadOnlyMode)
           }
-          $uibModal.open({
-            templateUrl: template,
-            animation: true,
-            backdrop: false,
-            size: 'lg',
-            controller: 'serviceAgreementsModalCtrl',
-            windowClass: 'create-popup margin-top-modal-dialog',
-            resolve: {
-              companyData: {}
-            }
 
-          });
+          function openModal(contractType, editMode, companyForReadOnlyMode) {
+            var template;
+            switch (contractType) {
+              case('CREATE_NEW'):
+                template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+                break;
+              case('HOURLY'):
+                template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+                break;
+              case('BLOCK_TIME_BILLING'):
+                template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                break;
+              case('PER_USER/DEVICE_BILLING'):
+                template = '';
+                break;
+              default:
+                console.log('no contract type selected');
+            }
+            $uibModal.open({
+              templateUrl: template,
+              animation: true,
+              backdrop: false,
+              size: 'lg',
+              controller: 'serviceAgreementsModalCtrl',
+              windowClass: 'create-popup margin-top-modal-dialog',
+              resolve: {
+                companyData: {
+                  editMode: editMode,
+                  companyForReadOnlyMode: companyForReadOnlyMode
+                }
+              }
+
+            });
+          }
+
 
         };
 
@@ -89,12 +106,30 @@
     'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService',
     function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService) {
 
+      if(companyData.editMode) {
+        $scope.editContract = {};
+        $scope.editContract.services = [];
+        ServicesService.getServicesData($scope, false, function (data) {
 
-      $scope.serviceContracts = {};
+          for (var i = 0; i < data.length; i++) {
+            var serv = {
+              name: data[i].name,
+              rate: data[i].rate,
+              billable: data[i].billable,
+              taxes: data[i].taxes || []
+            };
+            $scope.editContract.services.push(serv);
+          }
+
+        });
+      } else {
+        console.log(companyData);
+        $scope.editContract = companyData.companyForReadOnlyMode;
+      }
+
 
       $scope.companyId = companyData.companyId;
       $scope.companyInfo = companyData.companyInfo;
-      $scope.contractServiceList = [];
       $scope.companiesList = CompaniesService.getClientCompanies();
       $scope.taxes = TaxesService.getAll();
       $scope.selectedContractType = 'CREATE_NEW';
@@ -103,6 +138,12 @@
 
       $scope.today = Date.now();
       $scope.minDateForEndDatePicker;
+
+      $scope.editMode = true;
+
+      if(companyData.editMode === false) {
+        $scope.editMode = false;
+      }
 
       $scope.editService={
         name: '',
@@ -128,19 +169,7 @@
         }
       });
 
-      ServicesService.getServicesData($scope, false, function (data) {
 
-        for (var i = 0; i < data.length; i++) {
-          var serv = {
-            name: data[i].name,
-            rate: data[i].rate,
-            billable: data[i].billable,
-            taxes: data[i].taxes || []
-          };
-          $scope.contractServiceList.push(serv);
-        }
-
-      });
 
       $scope.serviceBillType = {
         byDevice: 'By Device',
@@ -157,7 +186,7 @@
         var startDate = new Date(date);
         if (startDate) {
           var startMonth = startDate.getMonth() + 1;
-          $scope.serviceContracts.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
+          $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
         }
         setMiNDateForEndDate(date);
       };
@@ -166,7 +195,7 @@
         var endDate = new Date(date);
         if (endDate) {
           var endMonth = endDate.getMonth() + 1;
-          $scope.serviceContracts.endDate = endDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(endDate.getDate());
+          $scope.editContract.endDate = endDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(endDate.getDate());
         }
       };
 
@@ -187,9 +216,9 @@
         }
       };
 
-      $scope.changeContractType = function (type) {
-        $scope.serviceContracts.contractType = type;
-      };
+      // $scope.changeContractType = function (type) {
+      //   $scope.serviceContracts.contractType = type;
+      // };
 
       $scope.closeModal = function () {
         $uibModalInstance.close();
@@ -206,8 +235,17 @@
             billable: editService.billable || false,
             taxes: editService.taxes || []
           };
-          $scope.contractServiceList.push(newSerice);
+          $scope.editContract.services.push(newSerice);
           $scope.editService = {};
+        }
+      };
+
+      $scope.deleteService = function (service) {
+        for (var i = 0; i < $scope.editContract.services.length; i++) {
+          if ($scope.editContract.services[i] == service) {
+            $scope.editContract.services.splice(i, 1);
+            break;
+          }
         }
       };
 
@@ -223,23 +261,19 @@
         return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
       };
 
-      $scope.deleteService = function (service) {
-        for (var i = 0; i < $scope.contractServiceList.length; i++) {
-          if ($scope.contractServiceList[i] == service) {
-            $scope.contractServiceList.splice(i, 1);
-            break;
-          }
-        }
-      };
 
       $scope.createContract = function() {
-        $scope.serviceContracts.companyId = companyData.companyId ||  $scope.contractCompany.id;
+        var companyContractInfo = {
+          description: $scope.editContract.description,
+          startDate: $scope.editContract.startDate,
+          endDate: $scope.editContract.endDate,
+          companyId: companyData.companyId ||  $scope.contractCompany.id,
+          services: $scope.editContract.services,
+          type: companyData.type || $scope.modlToShow
+        };
 
-        $scope.serviceContracts.services = $scope.contractServiceList;
-        $scope.serviceContracts.type = companyData.type || $scope.modlToShow;
-
-        console.log($scope.serviceContracts);
-        AgreementsService.createContract($scope.serviceContracts, function(resp) {
+        console.log(companyContractInfo);
+        AgreementsService.createContract(companyContractInfo, function(resp) {
           console.log(resp);
           $scope.closeModal();
         })
