@@ -8,13 +8,11 @@
   services.factory('AgreementsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
     function ($http, $rootScope, RealTimeService, Utils) {
 
-    var urlForGetAllServiceAgreements = '/serviceAgreements';
-    var urlForContractCreat = '/serviceAgreements';
 
 
     function getAllServiceAgreements(callback) {
       var future = $http({
-        url: urlForGetAllServiceAgreements,
+        url: '/serviceAgreements',
         method: 'GET'
       });
 
@@ -23,7 +21,7 @@
 
     function createContract(data, callback) {
       var future = $http({
-        url: urlForContractCreat,
+        url: '/serviceAgreements',
         method: 'POST',
         data: data
       });
@@ -42,7 +40,15 @@
       var future=$http({
         method: 'GET',
         url: '/serviceAgreements/'+id
-      })
+      });
+      Utils.handleCallback(future, callback)
+    }
+
+    function terminate(id, callback) {
+      var future = $http({
+        method: 'PUT',
+        url: '/serviceAgreements/terminate/'+id
+      });
       Utils.handleCallback(future, callback)
     }
 
@@ -54,7 +60,8 @@
       getAllServiceAgreements: getAllServiceAgreements,
       createContract: createContract,
       getAgreementCountByType: getAgreementCountByType,
-      getAgreement: getAgreement
+      getAgreement: getAgreement,
+      terminate: terminate
     }
 
 

@@ -267,7 +267,7 @@
           description: $scope.editContract.description,
           startDate: $scope.editContract.startDate,
           endDate: $scope.editContract.endDate,
-          companyId: companyData.companyId ||  $scope.contractCompany.id,
+          companyId: $scope.editContract.companyId || companyData.companyId ||  $scope.contractCompany.id,
           services: $scope.editContract.services,
           type: companyData.type || $scope.modlToShow
         };
@@ -276,6 +276,20 @@
         AgreementsService.createContract(companyContractInfo, function(resp) {
           console.log(resp);
           $scope.closeModal();
+        })
+      };
+
+      $scope.terminateContract = function() {
+        AgreementsService.terminate($scope.editContract.id, function(resp) {
+          $scope.closeModal()
+        })
+      };
+
+      $scope.terminateAndCopy = function() {
+        AgreementsService.terminate($scope.editContract.id, function(resp) {
+          $scope.editContract.description =$scope.editContract.description +' COPY';
+          $scope.modlToShow = $scope.editContract.type;
+          $scope.editMode = true;
         })
       };
 
