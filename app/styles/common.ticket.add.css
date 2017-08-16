@@ -232,7 +232,19 @@
   top: 5px;
   right: 5px;
 }
-
+#Service .service-not-yet{
+  text-align: center;
+}
+#Service .service-not-yet p{
+  text-align: left;
+}
+#Service .service-not-yet img,
+#Service .service-not-yet p,
+#Service .service-not-yet .btn{
+  display: inline-block;
+  margin: 40px;
+  vertical-align: middle;
+}
 /* Add Service tab */
 #Service .col-1 {
   width: 240px;

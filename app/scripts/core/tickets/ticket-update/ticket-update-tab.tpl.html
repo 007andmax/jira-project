@@ -111,6 +111,12 @@
          ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl">
 
       <div class="ticket-add clearfix" ng-form="addServicesForm">
+        <div class="service-not-yet">
+          <img src="images/hourly.svg" alt="">
+          <p>No service Set up yet, <br>
+            click on button to set up service</p>
+          <div class="btn btn-primary btn-create">Setup Service</div>
+        </div>
 
         <div class="ticket-add-content clearfix">
 
@@ -133,10 +139,17 @@
   </div>
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');
