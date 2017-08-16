@@ -65,7 +65,9 @@
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name">
           </div>
           <div class="col-md-3 fourm-group before-icon">
-            <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate">
+            <input placeholder="0.00" type="text" class="form-control"
+                   ng-model="service.rate"
+                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
           </div>
           <div class="col-md-2 fourm-group">
             <label class="control checkbox">
@@ -107,7 +109,8 @@
             <input placeholder="0.00"
                    type="text"
                    class="form-control"
-                   ng-model="editService.rate">
+                   ng-model="editService.rate"
+                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
           </div>
           <div class="col-md-2 fourm-group">
             <label class="control checkbox">
@@ -219,7 +222,7 @@
               <div>
                 <!--<i class="icn-sm icn-tax"> </i>-->
                 <!--<select-taxes taxes="taxes" entity="service" is-icon="true"></select-taxes>-->
-                <p>{{service.taxes.length}}</p>
+                <p>{{service.taxIds.length}}</p>
               </div>
             </div>
           </div>

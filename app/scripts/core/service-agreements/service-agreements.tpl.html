@@ -41,10 +41,10 @@
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3">{{agreement.description}}</div>
         <div class="col-md-2">{{agreement.type}}</div>
-        <div class="col-md-1">{{agreement.status}}</div>
+        <div class="col-md-1" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{agreement.status}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
-        <div class="col-md-1">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
+        <div class="col-md-1"><div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div></div>
         <div class="col-md-1" style="text-align: center">{{agreement.amount}}</div>
       </li>
 

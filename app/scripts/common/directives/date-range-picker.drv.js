@@ -41,7 +41,12 @@
             }
           }
         }).data('datepicker');
-  
+
+        // attrs.$observe('minDate', function(value) {
+        //   datepicker.minDate = value ? new Date(+scope.minDate) : '';
+        //   datepicker.minDate(value);
+        // });
+
         if (scope.$parent.clearDateRange) {
           var savePreviousClearFunc = scope.$parent.clearDateRange;
           scope.$parent.clearDateRange = function () {

@@ -106,6 +106,22 @@
     'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService',
     function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService) {
 
+      $scope.taxes = TaxesService.getAll();
+      $scope.companyId = companyData.companyId;
+      $scope.companyInfo = companyData.companyInfo;
+      $scope.companiesList = CompaniesService.getClientCompanies();
+
+      $scope.selectedContractType = 'CREATE_NEW';
+      $scope.modlToShow = 'CREATE_NEW';
+      $scope.blockHourlyChoice = false;
+
+      $scope.today = Date.now();
+
+      $scope.minDateForEndDatePicker;
+      setMiNDateForEndDate($scope.today);
+
+      $scope.editMode = true;
+
       if(companyData.editMode) {
         $scope.editContract = {};
         $scope.editContract.services = [];
@@ -116,8 +132,14 @@
               name: data[i].name,
               rate: data[i].rate,
               billable: data[i].billable,
-              taxes: data[i].taxes || []
+              taxes: data[i].taxes || [],
+              taxIds: data[i].taxIds || []
             };
+            if(data[i].taxIds && data[i].taxIds.length) {
+              for(var m=0; m<data[i].taxIds.length; m++) {
+                serv.taxIds.push(data[i].taxes[m].id)
+              }
+            }
             $scope.editContract.services.push(serv);
           }
 
@@ -125,21 +147,21 @@
       } else {
         console.log(companyData);
         $scope.editContract = companyData.companyForReadOnlyMode;
+        for(var e=0; e<$scope.editContract.services.length; e++) {
+          for(var i=0; i<$scope.editContract.services[e].taxIds.length; i++) {
+            for(var m=0; m<$scope.taxes.length; m++) {
+              if($scope.editCompany.services[e].taxIds[i] === $scope.taxes[m].id) {
+                $scope.editCompany.services[e].taxes.push($scope.taxes[m].id);
+              }
+            }
+          }
+        }
+
+
       }
 
 
-      $scope.companyId = companyData.companyId;
-      $scope.companyInfo = companyData.companyInfo;
-      $scope.companiesList = CompaniesService.getClientCompanies();
-      $scope.taxes = TaxesService.getAll();
-      $scope.selectedContractType = 'CREATE_NEW';
-      $scope.modlToShow = 'CREATE_NEW';
-      $scope.blockHourlyChoice = false;
 
-      $scope.today = Date.now();
-      $scope.minDateForEndDatePicker;
-
-      $scope.editMode = true;
 
       if(companyData.editMode === false) {
         $scope.editMode = false;
@@ -180,7 +202,9 @@
         var d = new Date(date);
         d.setDate(d.getDate() + 30);
         $scope.minDateForEndDatePicker = d.getTime();
+        console.log($scope.minDateForEndDatePicker);
       }
+
 
       $scope.startDatePicker = function(date) {
         var startDate = new Date(date);
@@ -188,7 +212,9 @@
           var startMonth = startDate.getMonth() + 1;
           $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
         }
-        setMiNDateForEndDate(date);
+        var f = new Date(date);
+
+        setMiNDateForEndDate(f.getTime());
       };
 
       $scope.endDatePicker = function(date) {
@@ -229,14 +255,27 @@
 
       $scope.addNewService = function (form, editService) {
         if (form.$valid) {
-          var newSerice = {
+          var newService = {
             name: editService.name,
             rate: editService.rate || 0.00,
             billable: editService.billable || false,
-            taxes: editService.taxes || []
+            taxes: editService.taxes || [],
+            taxIds: []
           };
-          $scope.editContract.services.push(newSerice);
-          $scope.editService = {};
+          if(editService.taxes.length) {
+            for(var i=0; i<editService.taxes.length; i++) {
+              newService.taxIds.push(editService.taxes[i].id)
+            }
+          }
+
+          $scope.editContract.services.push(newService);
+          $scope.editService = {
+            name: '',
+            rate: null,
+            billable: false,
+            taxes: []
+          };
+
         }
       };
 
@@ -263,12 +302,28 @@
 
 
       $scope.createContract = function() {
+        var servicesWithTaxIds = [];
+        for(var i=0; i<$scope.editContract.services.length; i++) {
+          var correctService = {
+            name: $scope.editContract.services[i].name,
+            rate: $scope.editContract.services[i].rate,
+            billable: $scope.editContract.services[i].billable,
+            taxIds: []
+          };
+          if($scope.editContract.services[i].taxes.length) {
+            for(var n=0; n<$scope.editContract.services[i].taxes.length; n++) {
+              correctService.taxIds.push($scope.editContract.services[i].taxes[n].id)
+            }
+          }
+          servicesWithTaxIds.push(correctService);
+        }
+
         var companyContractInfo = {
           description: $scope.editContract.description,
           startDate: $scope.editContract.startDate,
           endDate: $scope.editContract.endDate,
           companyId: $scope.editContract.companyId || companyData.companyId ||  $scope.contractCompany.id,
-          services: $scope.editContract.services,
+          services: servicesWithTaxIds,
           type: companyData.type || $scope.modlToShow
         };
 
@@ -287,7 +342,7 @@
 
       $scope.terminateAndCopy = function() {
         AgreementsService.terminate($scope.editContract.id, function(resp) {
-          $scope.editContract.description =$scope.editContract.description +' COPY';
+          $scope.editContract.description = $scope.editContract.description +' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;
         })
