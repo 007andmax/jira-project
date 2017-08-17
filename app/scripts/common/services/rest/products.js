@@ -29,7 +29,7 @@
 
         var categories = [];
 
-        $http.get("/products/fullList").then(function (response) {
+        $http.get("/products/autocompleteList").then(function (response) {
           response.data.forEach(function (c) {
             categories.push(c)
           });
