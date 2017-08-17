@@ -114,7 +114,24 @@
 
           $scope.disabledSaveChangeButton = true;
 
-          ProductsService.saveProduct($scope.editProduct, function (resp) {
+          var changedProduct = {
+            versionedId: null,
+            cost: $scope.editProduct.cost,
+            sale: $scope.editProduct.sale,
+            ilc: $scope.editProduct.ilc,
+            manufacture: $scope.editProduct.manufacturer,
+            description: $scope.editProduct.description,
+            companyId: $scope.editProduct.company.id,
+            taxIds: [],
+            categoryId: $scope.editProduct.category.id
+          };
+          for(var i=0; i<$scope.editProduct.taxes.length; i++) {
+            changedProduct.taxIds.push($scope.editProduct.taxes[i].id)
+          }
+
+
+
+          ProductsService.saveProduct(changedProduct, function (resp) {
             $scope.disabledSaveChangeButton = false;
 
             $rootScope.$broadcast('newProductHasBeenCreated', resp.id);
