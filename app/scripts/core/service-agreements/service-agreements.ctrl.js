@@ -147,11 +147,15 @@
       } else {
         console.log(companyData);
         $scope.editContract = companyData.companyForReadOnlyMode;
+
+        //create tax object by comparing taxIds and array of taxes
         for(var e=0; e<$scope.editContract.services.length; e++) {
+          $scope.editContract.services[e].taxes = [];
           for(var i=0; i<$scope.editContract.services[e].taxIds.length; i++) {
             for(var m=0; m<$scope.taxes.length; m++) {
-              if($scope.editCompany.services[e].taxIds[i] === $scope.taxes[m].id) {
-                $scope.editCompany.services[e].taxes.push($scope.taxes[m].id);
+              if($scope.editContract.services[e].taxIds[i] === $scope.taxes[m].id) {
+                $scope.editContract.services[e].taxes.push($scope.taxes[m]);
+                console.log($scope.editContract.services[e])
               }
             }
           }
@@ -384,3 +388,9 @@
   ])
 
 }());
+
+
+
+// у таксов нету origin
+// recurring выпилить
+// discount на биллабле переделать.

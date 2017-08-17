@@ -1,6 +1,6 @@
 <div class="select-taxes-drv" style="display: inline-block;" uib-dropdown dropdown-appent-to-body="true" on-toggle="$ctrl.onDropdownToggle(open)">
-  <input ng-show="!$ctrl.isIcon" type="text" class="form-control ellipsis" ng-value="$ctrl.getSelectedTaxNames()" placeholder="Choose Tax" readonly uib-dropdown-toggle>
-  <i ng-show="$ctrl.isIcon" class="icn-sm icn-tax" uib-dropdown-toggle> </i>
+  <input ng-if="!$ctrl.showIcon" type="text" class="form-control ellipsis" ng-value="$ctrl.getSelectedTaxNames()" placeholder="Choose Tax" readonly uib-dropdown-toggle>
+  <i ng-if="$ctrl.showIcon" class="icn-sm icn-tax" uib-dropdown-toggle> </i>
   <div class="dropdown-menu dropdown-menu-left checkbox-dropdown" uib-dropdown-menu stop-propagation="click">
     <div class="list-container">
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">

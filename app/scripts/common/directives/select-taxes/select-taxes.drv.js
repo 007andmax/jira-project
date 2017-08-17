@@ -20,7 +20,8 @@
     this.getSelectedTaxNames = getSelectedTaxNames;
     this.onDropdownToggle = onDropdownToggle;
 
-    $ctrl.isIcon = $scope.$eval($ctrl.isIcon);
+    //$ctrl.isIcon = $scope.$eval($ctrl.isIcon);
+    this.showIcon = $ctrl.isIcon ? true : false;
 
     $ctrl.searchTax = '';
 
