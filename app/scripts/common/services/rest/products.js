@@ -126,7 +126,7 @@
             data.categories.push(categories[i]);
           }
 
-          $http.get('/products/full').then(function (resp) {
+          $http.get('/products/').then(function (resp) {
 
             data.list = resp.data;
 
