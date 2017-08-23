@@ -37,7 +37,7 @@
         </div>
       </li>
 
-      <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
+      <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3">{{agreement.description}}</div>
         <div class="col-md-2">{{agreement.type}}</div>

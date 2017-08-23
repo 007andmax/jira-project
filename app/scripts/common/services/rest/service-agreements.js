@@ -10,13 +10,26 @@
 
 
 
-    function getAllServiceAgreements(callback) {
+    function getServiceAgreements(callback) {
       var future = $http({
         url: '/serviceAgreements',
         method: 'GET'
       });
 
       Utils.handleCallback(future, callback);
+    }
+
+    function getAllServiceAgreements(scope, callback) {
+      var agreements = [];
+      getServiceAgreements(function(resp){
+        agreements = resp;
+        callback && callback(agreements);
+      });
+
+      RealTimeService.subscribe('/serviceAgreements', scope, function(newChange){
+        console.log(newChange);
+        // add logic
+      })
     }
 
     function createContract(data, callback) {

@@ -9,7 +9,7 @@
         $scope.parseDate = Date.parse.bind(Date);
         $scope.filterType = 'company.name';
 
-        AgreementsService.getAllServiceAgreements(function (data) {
+        AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = [];
           for(var i=0; i<data.length; i++) {
             var agreement = data[i];
@@ -73,7 +73,7 @@
                 template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
                 break;
               case('BLOCK_TIME_BILLING'):
-                template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                 break;
               case('PER_USER/DEVICE_BILLING'):
                 template = '';
@@ -123,10 +123,11 @@
       $scope.editMode = true;
 
       if(companyData.editMode) {
+
         $scope.editContract = {};
         $scope.editContract.services = [];
-        ServicesService.getServicesData($scope, false, function (data) {
 
+        ServicesService.getServicesData($scope, false, function (data) {
           for (var i = 0; i < data.length; i++) {
             var serv = {
               name: data[i].name,
@@ -142,8 +143,8 @@
             }
             $scope.editContract.services.push(serv);
           }
-
         });
+
       } else {
         console.log(companyData);
         $scope.editContract = companyData.companyForReadOnlyMode;
@@ -160,11 +161,7 @@
             }
           }
         }
-
-
       }
-
-
 
 
       if(companyData.editMode === false) {
@@ -194,7 +191,6 @@
           })
         }
       });
-
 
 
       $scope.serviceBillType = {
