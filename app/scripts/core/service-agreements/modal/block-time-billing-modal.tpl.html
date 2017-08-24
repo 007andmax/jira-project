@@ -9,6 +9,7 @@
         <p>Sell your cusotmer a block of time, that you bill against each month, this can be carried over if not useds.
           You can still create custom Services for projects or after hours support</p>
       </div>
+<<<<<<< Updated upstream
       <div class="service-contract-details clearfix">
         <div class="col-md-8">
           <div class="form-group">
@@ -24,6 +25,48 @@
         <div class="col-md-3">
           <div class="form-group">
             Select Date:
+=======
+    </div>
+    <div class="col-md-12 service-bill-hide-content">
+      <p>Create customer services to track your time spent with this block time contract</p>
+      <div class="col-md-7">Service name</div>
+      <div class="col-md-2">Action</div>
+
+
+      <div class="bill-hide-content-item clearfix" ng-repeat="blockTimeService in blockTimeServices">
+        <div class="col-md-7 form-group">
+          <input placeholder="Service Name" type="text" class="form-control" ng-model="blockTimeService.name">
+          <!--<div uib-dropdown>-->
+          <!--<input type="text" class="form-control has-dropdown"-->
+          <!--name="serviceName" autocomplete="off"-->
+          <!--placeholder="Service" autocomplete-service-item="defaultServices"-->
+          <!--ng-model="serviceExpense.item.name" service-list="defaultServices"-->
+          <!--autocomplete-service-list uib-dropdown-toggle/>-->
+          <!--<i class="icn-sm icn-caret-gray"></i>-->
+          <!--<div class="service-list-container"></div>-->
+          <!--<input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id">-->
+          <!--</div>-->
+        </div>
+        <div class="col-md-2 fourm-group">
+          <div class="add-remove-service">
+            <div ng-click="deleteBlockTimeService(blockTimeService)">
+              <i class="icon-sm icn-delete"></i>
+            </div>
+            <!--<div ng-show="$last" ng-click="addNewBlockTimeService(blockTimeService)">-->
+            <!--<i class="icon-sm icn-add-action"></i>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="bill-hide-content-item clearfix" ng-form="newBlockTimeServiceForm">
+
+        <div class="form-group col-md-7"
+             ng-class="{'has-error': isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName')}">
+
+          <div uib-dropdown>
+>>>>>>> Stashed changes
             <input type="text"
                    class="form-control has-dropdown readonly-normal"
                    name="StartDate"
@@ -74,6 +117,7 @@
           <p class="info-block">Block Time Contracts are based on preselling a block of time your customer</p>
         </div>
       </div>
+<<<<<<< Updated upstream
       <div class="service-bill clearfix">
         <h4>Select how you bill your customer</h4>
         <div class="col-md-4">
@@ -86,6 +130,20 @@
           </div>
         </div>
         <div class="col-md-4">
+=======
+
+
+    </div>
+    <div class="service-bill-content">
+      <div class="col-md-12">
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="blockTimeContract.enableTimeRollover">
+          <span class="control-indicator"></span>
+
+          Enable Time Rollover of unused hours
+        </label>
+        <div class="service-bill-hide-content">
+>>>>>>> Stashed changes
           <div class="form-group before-icon">
             Block Rate:
             <input placeholder="0.00"
@@ -146,6 +204,7 @@
             </div>
           </div>
 
+<<<<<<< Updated upstream
 
           <div class="bill-hide-content-item clearfix" ng-form="newBlockTimeServiceForm">
 
@@ -168,6 +227,31 @@
                        invalid-when="!isNameUnique(newBlockTimeService)">
 
                 <div class="input-top-4" typeahead-input-icon="newBlockTimeService.name"></div>
+=======
+          <div class="bill-hide-content-item clearfix" ng-form="newContractServiceForm">
+            <div class="col-md-5 form-group"
+                 ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName')}">
+
+
+              <div uib-dropdown>
+                <input type="text"
+                       name="newContractServiceName"
+                       ng-model="newContractService.name"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       tabindex="5"
+                       placeholder="New Block Time Service"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
+                       qt-typeahead-show-on-focus
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                       value="service.name"
+                       invalid-when="!isNameUnique(newContractService)">
+
+                <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+
+              </div>
+>>>>>>> Stashed changes
 
               </div>
             </div>
@@ -216,6 +300,7 @@
               <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
                 contract time</p>
 
+<<<<<<< Updated upstream
               <div class="col-md-5">Service name</div>
               <div class="col-md-3">Per hour</div>
               <div class="col-md-2">Make Billable</div>
@@ -341,6 +426,27 @@
             <!--</label>-->
             <!--</div>-->
             <!--</div>-->
+=======
+
+        <div class="service-bill-hide-content ticket-add-footer">
+          <div class="ticket-add-content-actions-dropdown pull-left"
+               ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
+
+          <div class="pull-left shared-user-add">
+            <div class="notify-select">
+              <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select None</span>
+            </div>
+
+            <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"
+                   ng-mousedown="validateNotifying(sharedUser, $event)">
+              <input type="checkbox" ng-model="sharedUser.notify">
+              <span class="control-indicator"></span>
+              {{ getUserName(sharedUser.user) }}
+            </label>
+          </div>
+        </div>
+
+>>>>>>> Stashed changes
 
           </div>
         </div>
@@ -370,6 +476,13 @@
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
+=======
+        <div class="btn btn-lg btn-success btn-create"
+             ng-click="createBlockTimeContract(blockTimeContractFormForm, blockTimeContract)"
+             ng-disabled="blockTimeContractFormForm.$invalid">Create
+        </div>
+>>>>>>> Stashed changes
       </div>
     </div>
   </div>

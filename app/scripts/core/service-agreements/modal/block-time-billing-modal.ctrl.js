@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
-      function ($scope, AgreementsService, CompaniesService, ServicesService) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService',
+      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY'];
 
@@ -18,6 +18,17 @@
           billable: false,
           taxes: []
         };
+
+        $scope.clients = [];
+        $scope.getClients = function() {
+          if($scope.companyId) {
+            $scope.clients = UsersService.getAllByCompanyId($scope.companyId);
+          } else if($scope.contractCompany.id) {
+            $scope.clients = UsersService.getAllByCompanyId($scope.contractCompany.id);
+          }
+        };
+
+
 
         ServicesService.getServicesData($scope, false, function (data) {
           for (var i = 0; i < data.length; i++) {
@@ -73,7 +84,10 @@
               return true;
             }
             var name = service;
-            if(service.name && service.name.name.length) {
+            if(service.name
+              && service.name !== "undefined"
+              && service.name.name
+              && service.name.name.length) {
               name = service.name;
             }
             return (checkUniqueServiceName($scope.defaultServices, name) &&
