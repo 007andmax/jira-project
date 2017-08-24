@@ -38,50 +38,6 @@
 
 }
 
-.icn-retina {
-  background-image: url('../images/sprites-retina-s9f68249a71.png');
-  background-repeat: no-repeat;
-  -webkit-background-size: 8000px 1600px;
-  background-size: 8000px 1600px;
-  display: block;
-}
-
-.new-ticket {
-  background-position: -7689px -223px;
-  width: 32px;
-  height: 25px;
-}
-
-.new-ticket:hover {
-  background-position: -7655px -223px;
-  width: 32px;
-  height: 25px;
-}
-
-.new-user {
-  background-position: -7615px -223px;
-  width: 32px;
-  height: 25px;
-}
-
-.new-user:hover {
-  background-position: -7583px -223px;
-  width: 32px;
-  height: 25px;
-}
-
-.save-download {
-  background-position: -7757px -223px;
-  width: 13px;
-  height: 22px;
-}
-
-.save-download:hover {
-  background-position: -7729px -223px;
-  width: 13px;
-  height: 22px;
-}
-
 /* Hit Area Start */
 
 a.hit-area {
@@ -186,7 +142,7 @@ a.ha-24 {
 
 /*Icon Disabled Class - End*/
 
-.label-icn .icn {
+.icn {
   display: inline-block;
 }
 
@@ -218,30 +174,10 @@ a.ha-24 {
   width: 32px;
 }
 
-.common-icon-activity {
-  background-position: -2871px 0;
-}
-
-.common-icon-company {
-  background-position: -2935px 0;
-}
-
 /*Large Icons*/
 
 .icon-add-note {
   background-image: url("../images/new-icons/message-quote-na.png");
-}
-
-.icn-user-lg, .icn-gs-tech-users {
-  background-position: -3159px 0;
-}
-
-:hover > .icn-user-lg, .active .icn-user-lg {
-  background-position: -3159px -33px;
-}
-
-.icn-url {
-  background-position: -1665px -206px;
 }
 
 .icon-add-product {
@@ -260,24 +196,6 @@ a.ha-24 {
   background-image: url("../images/new-icons/wrench.png");
 }
 
-.icn-slider-start {
-  background-position: -2595px 0;
-  height: 16px;
-  width: 19px;
-}
-
-.icn-slider-center {
-  background-position: -2490px 0;
-  height: 16px;
-  width: 22px;
-}
-
-.icn-slider-end {
-  background-position: -2522px 0;
-  height: 16px;
-  width: 19px;
-}
-
 .icn-add-update, :focus > .icn-add-update {
   background-position: -322px 0;
 }
@@ -294,93 +212,9 @@ a.ha-24 {
   background-position: -2147px -100px;
 }
 
-.icn-send-chat {
-  background-position: -2720px 0;
-}
-
-:hover > .icn-send-chat, :active > .icn-send-chat, :focus:hover > .icn-send-chat, :focus:active > .icn-send-chat, :hover:active > .icn-send-chat, .active > .icn-send-chat, .open > .icn-send-chat {
-  background-position: -2742px 0;
-}
-
-.icn-send-chat.disabled {
-  background-position: -2147px -100px !important;
-}
-
-.icn-reset-devices {
-  background-position: -1664px 0;
-  height: 4px;
-  width: 18px;
-}
-
-:hover > .icn-reset-devices, :active > .icn-reset-devices, :focus:hover > .icn-reset-devices, :focus:active > .icn-reset-devices, :hover:active > .icn-reset-devices, .active > .icn-reset-devices, .open > .icn-reset-devices {
-  background-position: -2140px 0;
-}
-
-.icn-close-server {
-  background-position: -1972px 0;
-  height: 8px;
-  width: 8px;
-  display: inline-block;
-}
-
-:hover > .icn-close-server, :active > .icn-close-server, :focus:hover > .icn-close-server, :focus:active > .icn-close-server, :hover:active > .icn-close-server, .active > .icn-close-server, .open > .icn-close-server {
-  background-position: -776px 0;
-}
-
-.icn-close-sm {
-  background-position: -1972px 0;
-  height: 8px;
-  width: 8px;
-}
-
-:hover > .icn-close-sm, :active > .icn-close-sm, :focus:hover > .icn-close-sm, :focus:active > .icn-close-sm, :hover:active > .icn-close-sm, .active > .icn-close-sm, .open > .icn-close-sm {
-  background-position: -1990px 0;
-}
-
-.icn-x {
-  background-position: -776px 0;
-  width: 8px;
-  height: 8px;
-}
-
 /*Medium Icons*/
 
-.icn-logout {
-  background-position: -1452px 0;
-}
-
-:hover > .icn-logout, :active > .icn-logout, :focus:hover > .icn-logout, :focus:active > .icn-logout, :hover:active > .icn-logout, .active > .icn-logout, .open > .icn-logout {
-  background-position: -1478px 0;
-}
-
 /*Small Icons*/
-
-.icn-search-old {
-  background-image: url('../images/input-icons/icn-input-search.png');
-  height: 14px;
-  width: 14px;
-}
-
-.icn-ticket-claim-small {
-  background-position: -2540px -100px;
-  width: 16px;
-}
-
-:hover > .icn-ticket-claim-small, :active > .icn-ticket-claim-small, :focus:hover > .icn-ticket-claim-small, :focus:active > .icn-ticket-claim-small, :hover:active > .icn-ticket-claim-small, .active > .icn-ticket-claim-small, .open > .icn-ticket-claim-small {
-  background-position: -549px 0;
-}
-
-.icn-label {
-  background-position: -1714px 0;
-}
-
-:hover > .icn-label, :active > .icn-label, :focus:hover > .icn-label, :focus:active > .icn-label, :hover:active > .icn-label, .active > .icn-label, .open .icn-label {
-  background-position: -1692px 0;
-}
-
-.icn-label-static {
-  background-position: -1714px 0;
-}
 
 .icn-more {
   background-position: -2140px 0px;
@@ -389,26 +223,6 @@ a.ha-24 {
 }
 
 :hover > .icn-more, :active > .icn-more, :focus:hover > .icn-more, :focus:active > .icn-more, :hover:active > .icn-more, .active > .icn-more, .open .icn-more {
-  background-position: -2140px 0px;
-}
-
-.icn-more-users {
-  background-position: -1664px 0px;
-  width: 18px;
-  height: 4px;
-}
-
-:hover > .icn-more-users, .icn-more-users:hover {
-  background-position: -1636px 0px;
-}
-
-.icn-more-white {
-  background-position: -1664px 0px;
-  width: 18px;
-  height: 4px;
-}
-
-:hover > .icn-more-white, :active > .icn-more-white, :focus:hover > .icn-more-white, :focus:active > .icn-more-white, :hover:active > .icn-more-white, .active > .icn-more-white, .open > .icn-more-white {
   background-position: -2140px 0px;
 }
 
@@ -426,32 +240,12 @@ a.ha-24 {
   cursor: default;
 }
 
-.icn-search-remove {
-  background-position: -696px 0 !important;
-  width: 10px;
-  height: 10px;
-}
-
 .icn-search-input {
   background-position: -2018px 0;
 }
 
 :hover > .icn-search-input, :active > .icn-search-input, :active > .icn-search-input, :focus:hover > .icn-search-input, :focus:active > .icn-search-input, :hover:active > .icn-search-input, .active > .icn-search-input, .open > .icn-search-input, :focus + .icn-search-input {
   background-position: -2084px 0;
-}
-
-.icn-download-agent {
-  background-position: -3373px -206px;
-  width: 22px;
-  height: 19px;
-  margin-top: 4px !important;
-  left: -4px !important;
-}
-
-.icn-ticket-completed {
-  background-position: -861px -100px;
-  width: 8px;
-  height: 10px;
 }
 
 /*.icn-remove-token {
@@ -467,18 +261,6 @@ a.ha-24 {
   background-position: -1890px -100px;
 }
 
-.icn-load-update {
-  background-position: -2069px -100px;
-}
-
-:hover > .icn-load-update, :active > .icn-load-update, :focus:hover > .icn-load-update, :focus:active > .icn-load-update, :hover:active > .icn-load-update, .active > .icn-load-update, .open > .icn-load-update {
-  background-position: -2091px -100px;
-}
-
-.loading .icn-load-update {
-  background-position: -2616px -100px !important;
-}
-
 .icn-plus {
   background-position: -345px 0px;
 }
@@ -489,15 +271,6 @@ a.ha-24 {
 
 :hover > .icn-plus-dark {
   background-position: -300px 0px;
-}
-
-.icn-filter {
-  background-position: -1820px -100px;
-  height: 10px;
-}
-
-:hover > .icn-filter, :active > .icn-filter, :focus:hover > .icn-filter, :focus:active > .icn-filter, :hover:active > .icn-filter, .active > .icn-filter, .open > .icn-filter {
-  background-position: -1842px -100px;
 }
 
 .icn-ticket-filter {
@@ -512,15 +285,6 @@ a.ha-24 {
 
 .icn-flag {
   background-position: -873px -95px;
-}
-
-.icn-settings {
-  background-position: -3406px 0px;
-  height: 14px;
-}
-
-:hover > .icn-settings, :active > .icn-settings, :focus:hover > .icn-settings, :focus:active > .icn-settings, :hover:active > .icn-settings, .active > .icn-settings, .open .icn-settings, .open > .btn:hover .icn-settings {
-  background-position: -3380px 0;
 }
 
 .settings-icon {
@@ -577,14 +341,6 @@ a.ha-24 {
   margin: 5px 0 0;
 }
 
-.icn-report-spam {
-  background-position: -2448px -100px;
-}
-
-:hover > .icn-report-spam, :active > .icn-report-spam, :focus:hover > .icn-report-spam, :focus:active > .icn-report-spam, :hover:active > .icn-report-spam, .active > .icn-report-spam, .open .icn-report-spam, .open > .btn:hover .icn-report-spam {
-  background-position: -2470px -100px;
-}
-
 .icn-restore {
   background-image: url("../images/new-icons/history-na.png");
 }
@@ -592,42 +348,6 @@ a.ha-24 {
 [disabled] .icn-restore, .disabled .icn-restore, .icn-restore[disabled] {
   background-image: url("../images/new-icons/history-na.png");
   opacity: 0.6;
-}
-
-.icn-mail {
-  background-position: -1611px -206px;
-}
-
-.icn-chat {
-  background-position: -512px -206px;
-}
-
-.icn-tick {
-  background-position: -3286px 0;
-  width: 14px;
-  height: 10px;
-}
-
-.closed .icn-tick, .disabled .icn-tick {
-  background-position: -2592px -100px;
-}
-
-.icn-tick-blue {
-  background-position: -2592px -100px;
-  width: 14px;
-  height: 10px;
-}
-
-.icn-msg {
-  background-position: -458px -206px;
-}
-
-.icn-service {
-  background-position: -64px -206px;
-}
-
-.icn-add-service {
-  background-position: -164px -206px;
 }
 
 .icn-create-invoice {
@@ -638,38 +358,8 @@ a.ha-24 {
   background-image: url("../images/new-icons/article.png");
 }
 
-.icn-add-company {
-  background-position: -3350px -100px;
-  width: 18px;
-}
-
-:hover > .icn-add-company, :active > .icn-add-company, :focus > .icn-add-company, :focus:hover > .icn-add-company, :focus:active > .icn-add-company, :hover:active > .icn-add-company, .active > .icn-add-company, .open > .icn-add-company {
-  background-position: -3378px -100px;
-}
-
-.icn-add-company-light {
-  background-image: url("../images/new-icons/article-white.png");
-}
-
-.icn-minimize {
-  background-position: -3356px 5px;
-}
-
-:hover > .icn-minimize, :active > .icn-minimize, :focus > .icn-minimize, :focus:hover > .icn-minimize, :focus:active > .icn-minimize, :hover:active > .icn-minimize, .active > .icn-minimize, .open > .icn-minimize {
-  background-position: -3334px 5px;
-}
-
-.icn-download {
-  background-image: url("../images/new-icons/download.png");
-}
-
 .icn-download-white {
   background-image: url("../images/new-icons/download-white.png");
-}
-
-.icn-loading {
-  background-position: -1358px 0;
-  height: 14px;
 }
 
 .icn-delete.disabled, .disabled .icn-delete {
@@ -686,10 +376,6 @@ a.ha-24 {
 
 .icn-delete-white {
   background-image: url("../images/new-icons/delete-white.png");
-}
-
-.icn-message {
-  background-position: -3598px 0;
 }
 
 .icn-attachment {
@@ -722,10 +408,12 @@ a.ha-24 {
 }
 
 .icon-ticket-flag {
+
   background-image: url("../images/new-icons/flag-white.png");
 }
 
 .icon-user {
+
   background-image: url("../images/new-icons/user-circle-white.png");
 }
 
@@ -743,34 +431,8 @@ a.ha-24 {
   height: 8px;
 }
 
-.icn-ticket-progress {
-  background-position: -834px -100px;
-  width: 5px;
-  height: 10px;
-}
-
-.icn-update-message {
-  background-position: -3598px 0;
-}
-
 .icn-update-product {
   background-position: -938px -100px;
-}
-
-.icn-nav-delete {
-  background-position: -1614px 0;
-}
-
-:hover > .icn-nav-delete, :active > .icn-nav-delete, :focus:hover > .icn-nav-delete, :focus:active > .icn-nav-delete, :hover:active > .icn-nav-delete, .active > .icn-nav-delete, .open .icn-nav-delete, .open > .btn:hover .icn-nav-delete {
-  background-position: -1592px 0;
-}
-
-.icn-edit {
-  background-position: -1042px 0;
-}
-
-:hover > .icn-edit, :active > .icn-edit, :focus:hover > .icn-edit, :focus:active > .icn-edit, :hover:active > .icn-edit, .active > .icn-edit, .open .icn-edit, .open > .btn:hover .icn-edit {
-  background-position: -998px 0;
 }
 
 .edit-icon {
@@ -781,34 +443,8 @@ a.ha-24 {
 /*background-image: url("../images/new-icons/edit.png");*/
 /*}*/
 
-.icn-edit-white {
-  background-position: -1042px 0;
-}
-
-.icn-edit-light {
-  background-position: -976px 0;
-}
-
-:hover > .icn-edit-white, :active > .icn-edit-white, :focus:hover > .icn-edit-white, :focus:active > .icn-edit-white, :hover:active > .icn-edit-white, .active > .icn-edit-white, .open .icn-edit-white, .open > .btn:hover .icn-edit-white {
-  background-position: -1020px 0;
-}
-
-:hover > .icn-edit-light, :active > .icn-edit-light, :focus:hover > .icn-edit-light, :focus:active > .icn-edit-light, :hover:active > .icn-edit-light, .active > .icn-edit-light, .open .icn-edit-light, .open > .btn:hover .icn-edit-light {
-  background-position: -1020px 0;
-}
-
-.icn-edit.disabled, .disabled > .icn-edit {
-  background-position: -976px 0;
-}
-
 .icn-update-service {
   background-position: -960px -100px;
-}
-
-.icn-update-attach {
-  background-position: -982px -100px;
-  height: 14px;
-  width: 12px;
 }
 
 .icn-remote-access {
@@ -830,36 +466,7 @@ a.ha-24 {
   width: 5px;
 }
 
-.icn-ticket-onhold, .icn-onhold {
-  background-position: -849px -100px;
-  width: 2px;
-  height: 8px;
-}
-
-.icn-progress {
-  background-position: -894px -100px;
-  width: 4px;
-  height: 5px;
-}
-
-.icn-remove-user {
-  background-position: -776px 0;
-  height: 8px;
-  width: 8px;
-}
-
 /* Left navigation icons */
-.icn-toggle-menu {
-  background-position: -3570px 0;
-}
-
-.icn-dashboard {
-  background-position: -903px 0;
-}
-
-li:hover > a > .icn-dashboard, li.active > a > .icn-dashboard {
-  background-position: -871px 0;
-}
 
 .icn-unassigned {
   background-image: url("../images/new-icons/bookmark-na.png");
@@ -873,131 +480,6 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
 /*background-image: url("../images/new-icons/bookmark.png");*/
 /*}*/
 
-.icon-calendar-dark {
-  background-image: url("../images/new-icons/calendar-dark.png");
-  background-size: cover;
-}
-
-.icn-gs-tickets {
-  background-position: -1052px -128px;
-}
-
-.icn-tickets {
-  background-position: -1052px -100px;
-}
-
-:hover > .icn-tickets, div.active .icn-tickets {
-  background-position: -1082px -100px;
-}
-
-li:hover > a > .icn-tickets, li.active > a > .icn-tickets {
-  background-position: -1082px -100px;
-}
-
-.icn-shared {
-  background-position: -1111px -100px;
-}
-
-:hover > .icn-shared, div.active .icn-shared {
-  background-position: -1137px -100px;
-}
-
-li:hover > a > .icn-shared, li.active > a > .icn-shared {
-  background-position: -1137px -100px;
-}
-
-.icn-open {
-  background-position: -1166px -100px;
-}
-
-:hover > .icn-open, div.active .icn-open {
-  background-position: -1196px -100px;
-}
-
-li:hover > a > .icn-open, li.active > a > .icn-open {
-  background-position: -1196px -100px;
-}
-
-.icn-closed {
-  background-position: -1226px -100px;
-}
-
-li:hover > a > .icn-closed, li.active > a > .icn-closed {
-  background-position: -1256px -100px;
-}
-
-:hover > .icn-closed, div.active .icn-closed {
-  background-position: -1256px -100px;
-}
-
-.icn-trash {
-  background-position: -1283px -100px;
-}
-
-li:hover > a > .icn-trash, li.active > a > .icn-trash {
-  background-position: -1309px -100px;
-}
-
-:hover > .icn-trash, div.active .icn-trash {
-  background-position: -1309px -100px;
-}
-
-.icn-spam {
-  background-position: -1336px -100px;
-}
-
-li:hover > a > .icn-spam, li.active > a > .icn-spam {
-  background-position: -1366px -100px;
-}
-
-:hover > .icn-spam, div.active .icn-spam {
-  background-position: -1366px -100px;
-}
-
-.icn-companies {
-  background-position: -1396px -100px;
-}
-
-li:hover > a > .icn-companies, li.active > a > .icn-companies {
-  background-position: -1426px -100px;
-}
-
-:hover > .icn-companies, div.active .icn-companies {
-  background-position: -1426px -100px;
-}
-
-.icn-users {
-  background-position: -1456px -100px;
-}
-
-li:hover > a > .icn-users, li.active > a > .icn-users {
-  background-position: -1486px -100px;
-}
-
-:hover > .icn-users, div.active .icn-users {
-  background-position: -1486px -100px;
-}
-
-.icn-devices {
-  background-position: -1516px -100px;
-}
-
-li:hover > a > .icn-devices, li.active > a > .icn-devices {
-  background-position: -1546px -100px;
-}
-
-:hover > .icn-devices, div.active .icn-devices {
-  background-position: -1546px -100px;
-}
-
-.icn-tax-retes {
-  background-position: -1576px -100px;
-}
-
-li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
-  background-position: -1606px -100px;
-}
-
 .icn-tax {
   background: url("../images/new-icons/tax.png");
   width: 12px;
@@ -1007,165 +489,12 @@ li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
   margin: 13px 0 0 8px;
 }
 
-.icn-leads {
-  background-position: -2779px -206px;
-  height: 16px;
-}
-
-li:hover > a > .icn-leads, li.active > a > .icn-leads {
-  background-position: -2809px -206px;
-}
-
-:hover > .icn-leads, div.active .icn-leads {
-  background-position: -2809px -206px;
-}
-
-.icn-billable {
-  background-position: -2839px -206px;
-  height: 18px;
-}
-
-li:hover > a > .icn-billable, li.active > a > .icn-billable {
-  background-position: -2869px -206px;
-}
-
-:hover > .icn-billable, div.active .icn-billable {
-  background-position: -2869px -206px;
-}
-
-.icn-receivable {
-  background-position: -2899px -206px;
-}
-
-li:hover > a > .icn-receivable, li.active > a > .icn-receivable {
-  background-position: -2929px -206px;
-}
-
-:hover > .icn-receivable, div.active .icn-receivable {
-  background-position: -2929px -206px;
-}
-
-.icn-receipt-archive {
-  background-position: -2957px -206px;
-}
-
-li:hover > a > .icn-receipt-archive, li.active > a > .icn-receipt-archive {
-  background-position: -2983px -206px;
-}
-
-:hover > .icn-receipt-archive, div.active .icn-receipt-archive {
-  background-position: -2983px -206px;
-}
-
-.icn-gs-vendors {
-  background-position: -3011px -236px;
-}
-
-.icn-vendors {
-  background-position: -3011px -206px;
-  height: 16px;
-}
-
-li:hover > a > .icn-vendors, li.active > a > .icn-vendors {
-  background-position: -3041px -206px;
-}
-
-:hover > .icn-vendors, div.active .icn-vendors {
-  background-position: -3041px -206px;
-}
-
-.icn-gs-products {
-  background-position: -3071px -236px;
-}
-
-.icn-products {
-  background-position: -3071px -206px;
-}
-
-li:hover > a > .icn-products, li.active > a > .icn-products {
-  background-position: -3101px -206px;
-}
-
-:hover > .icn-products, div.active .icn-products {
-  background-position: -3101px -206px;
-}
-
-.icn-gs-services {
-  background-position: -3131px -236px;
-}
-
-.icn-services {
-  background-position: -3131px -206px;
-}
-
-li:hover > a > .icn-services, li.active > a > .icn-services {
-  background-position: -3161px -206px;
-}
-
-:hover > .icn-services, div.active .icn-services {
-  background-position: -3161px -206px;
-}
-
-/*.icn-reports, li > a:focus > .icn-reports {*/
-.icn-reports {
-  background-position: -1576px -100px;
-}
-
-li:hover > a > .icn-reports, li.active > a > .icn-reports {
-  background-position: -1606px -100px;
-}
-
-.icn-archive {
-  background-position: -3191px -206px;
-  height: 18px;
-}
-
-li:hover > a > .icn-archive, li.active > a > .icn-archive {
-  background-position: -3221px -206px;
-}
-
-.icn-help {
-  background-position: -3251px -206px;
-}
-
-li:hover > a > .icn-help, li.active > a > .icn-help {
-  background-position: -3281px -206px;
-}
-
-.icn-add-new {
-  background-position: -1768px -100px;
-}
-
-li:hover > a > .icn-add-new, li.active > a > .icn-add-new {
-  background-position: -1794px -100px;
-}
-
-/*.no-icon {
-    background: #0e141c;
-    border-radius: 50%;
-}*/
-
 .icn-edit-tag {
   background-position: -1040px 6px;
 }
 
 .icn-edit-tag:hover, .icn-edit-tag:active {
   background-position: -1018px 6px;
-}
-
-.icn-edit-tag.companies-new:hover, .icn-edit-tag:active {
-  background-position: -1040px 2px;
-}
-
-/*.icn-label-delete, a:focus > .icn-label-delete {*/
-.icn-label-delete {
-  background-position: -1614px 0;
-  width: 12px;
-  height: 12px;
-}
-
-a:hover > .icn-label-delete, a:active > .icn-label-delete {
-  background-position: -1658px -100px;
 }
 
 /*.icn-label-save, a:focus > .icn-label-save {*/
@@ -1191,10 +520,6 @@ a:hover > .icn-label-save, a:active > .icn-label-save {
   height: 10px;
 }
 
-a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
-  background-position: -716px 0;
-}
-
 /* Left bar icons end */
 
 /* Right bar icons */
@@ -1216,20 +541,8 @@ a:hover > .icn-tab-activities, a:active > .icn-tab-activities, li.active > a > .
   background-position: -2871px 0;
 }
 
-.icn-tab-companies, .icn-gs-companies {
-  background-position: -2967px 0;
-}
-
 a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .icn-tab-companies {
   background-position: -2935px 0;
-}
-
-.icn-company-info {
-  background-position: -3031px -34px;
-}
-
-:hover > .icn-company-info {
-  background-position: -2999px -34px;
 }
 
 .icon-tab-company-info {
@@ -1240,7 +553,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/building1.png");
 }
 
-.icon-tab-devices, .icn-gs-devices {
+.icon-tab-devices {
   background-image: url("../images/new-icons/smartphone-tablet-desktop-na.png");
 }
 
@@ -1251,10 +564,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 .icon-tab-users {
   background-image: url("../images/new-icons/users-male-na.png");
-}
-
-.icn-gs-users {
-  background-position: -3223px 0;
 }
 
 /*li:hover .icn-tab-users,*/
@@ -1291,19 +600,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -463px -4px;
 }
 
-.icn-caret-right {
-  width: 4px;
-  height: 6px;
-  background-position: -3699px 0;
-}
-
-.icn-caret-light {
-  width: 4px;
-  height: 6px;
-  background-position: -3699px 0;
-  transform: rotate(90deg);
-}
-
 .icn-remove-token, .icn-remove-token:focus {
   background-image: url("../images/new-icons/cancel-circle.png");
   background-size: inherit;
@@ -1311,16 +607,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 :hover > .icn-remove-token, :active > .icn-remove-token, :focus:hover > .icn-remove-token, :focus:active > .icn-remove-token, :hover:active > .icn-remove-token, .active > .icn-remove-token, .open .icn-remove-token, .open > .btn:hover .icn-remove-token {
   background-image: url("../images/new-icons/cancel-circle-na.png");
-}
-
-.icn-remove-token-white, .icn-remove-token-white:focus {
-  background-position: -696px 0px;
-  width: 10px;
-  height: 10px;
-}
-
-:hover > .icn-remove-token-white, :active > .icn-remove-token-white, :focus:hover > .icn-remove-token-white, :focus:active > .icn-remove-token-white, :hover:active > .icn-remove-token-white, .active > .icn-remove-token-white, .open .icn-remove-token-white, .open > .btn:hover .icn-remove-token-white {
-  background-position: -716px 0px;
 }
 
 .icn-remove-token-light {
@@ -1356,10 +642,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url("../images/new-icons/smartphone-tablet-na.png");
 }
 
-.icn-generic-device {
-  background-position: -1177px 0;
-}
-
 .icn-server {
   background-image: url("../images/new-icons/network-na.png");
 }
@@ -1374,10 +656,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 .icn-mobile {
   background-image: url("../images/new-icons/smartphone-tablet-na.png");
-}
-
-.icn-fax {
-  background-position: -1145px 0;
 }
 
 /* Star Rating Icons */
@@ -1397,26 +675,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 .icn-sb-location {
   background-position: -2315px 0;
-}
-
-.icn-location-white {
-  background-position: -947px -206px;
-}
-
-.icn-response-time {
-  background-position: -912px -206px;
-  width: 16px;
-  height: 20px;
-}
-
-.icn-contact, .icn-contact:focus {
-  width: 14px;
-  background-position: -480px -227px;
-}
-
-.icn-contact-email, .icn-contact-email:focus {
-  width: 14px;
-  background-position: -458px -227px;
 }
 
 .icn-email, .icn-email:focus {
@@ -1554,14 +812,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 /***/
 
-.icn-archive-user {
-  background-position: -798px -50px;
-}
-
-:hover > .icn-archive-user, :active > .icn-archive-user, :focus:hover > .icn-archive-user, :focus:active > .icn-archive-user, :hover:active > .icn-archive-user, .active > .icn-archive-user, .open .icn-archive-user, .open > .btn:hover .icn-archive-user {
-  background-position: -820px -50px;
-}
-
 .icn-archive-company {
   background-position: -798px -50px;
 }
@@ -1603,14 +853,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   width: 40px;
 }
 
-.icn-add-service {
-  background-position: -269px 0;
-}
-
-.icn-add-service-white {
-  background-position: -1164px -206px;
-}
-
 /* Tips and Messages Icons */
 .icn-msg-spam {
   background-position: -3274px -100px;
@@ -1625,11 +867,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .icn-msg-delete {
   background-position: -3314px -100px;
   width: 16px;
-}
-
-.icn-msg-closed {
-  background-position: -3236px -100px;
-  width: 18px;
 }
 
 .icn-msg-open {
@@ -1648,17 +885,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /* Tips and Messages Icons End */
 
 /* Alerts Icons */
-.icn-connection-error {
-  background-position: -3471px -206px;
-  width: 66px;
-  height: 66px;
-}
-
-.icn-write-new-msg {
-  background-position: -3415px -206px;
-  width: 16px;
-  height: 13px;
-}
 
 /* wysiwyg icons */
 /*.icn-wysiwyg-ol{*/
@@ -1912,34 +1138,8 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*width: 15px;*/
 /*height: 8px;*/
 /*}*/
-/*:hover > .icn-wysiwyg-link, :active > .icn-wysiwyg-link, :focus:hover > .icn-wysiwyg-link, :focus:active > .icn-wysiwyg-link, :hover:active > .icn-wysiwyg-link, .active > .icn-wysiwyg-link, .open .icn-wysiwyg-link, .open > .btn:hover .icn-wysiwyg-link {*/
-/*background-position: -1951px -100px;*/
-/*}*/
-
-.wysiwyg-link {
-  background-image: url("../images/new-icons/link-na.png");
-}
-
-/*:hover > .wysiwyg-link, :active > .wysiwyg-link, :focus:hover > .wysiwyg-link, :focus:active > .wysiwyg-link, :hover:active > .wysiwyg-link, .active > .wysiwyg-link, .open .wysiwyg-link, .open > .btn:hover .wysiwyg-link {*/
-/*background-image: url("../images/new-icons/link.png");*/
-/*}*/
 
 /***/
-.icn-user-devices {
-  background-position: -522px 0;
-}
-
-:hover > .icn-user-devices, :active > .icn-user-devices, :focus:hover > .icn-user-devices, :focus:active > .icn-user-devices, :hover:active > .icn-user-devices, .active > .icn-user-devices, .open > .icn-user-devices, .open .icn-user-devices {
-  background-position: -404px -206px;
-}
-
-.icn-user-devices.disabled, .disabled .icn-user-devices {
-  background-position: -382px -206px !important;
-}
-
-.icn-user-devices.connected, .connected .icn-user-devices {
-  background-position: -426px -206px !important;
-}
 
 .icn-user-mail {
   background-image: url("../images/new-icons/email.png");
@@ -1954,14 +1154,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*background-image: url("../images/new-icons/email.png");*/
 /*}*/
 
-.icn-user-chat {
-  background-position: -512px -206px;
-}
-
-:hover > .icn-user-chat, :active > .icn-user-chat, :focus:hover > .icn-user-chat, :focus:active > .icn-user-chat, :hover:active > .icn-user-chat, .active > .icn-user-chat, .open > .icn-user-chat, .open .icn-user-chat {
-  background-position: -534px -206px;
-}
-
 .icn-user-tickets {
   background-position: -620px -206px;
 }
@@ -1972,15 +1164,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 .icn-user-phone {
   background-image: url("../images/new-icons/call.png");
-}
-
-.icn-home-phone {
-  background: url("../images/new-icons/home-admin-panel.png");
-  background-size: cover;
-}
-
-.icn-user-company {
-  background-image: url("../images/new-icons/building.png");
 }
 
 /***/
@@ -2004,50 +1187,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -2211px -100px;
 }
 
-.icn-plus-sm {
-  width: 10px;
-  height: 10px;
-  background-position: -2171px -100px;
-}
-
-.icn-plus-sm.disabled, .disabled > .icn-plus-sm {
-  background-position: -2291px -100px;
-}
-
 /**Settings pages**/
-.icn-settings-profile {
-  background-position: -64px -51px;
-  width: 14px;
-}
-
-.icn-settings-profile:hover, :hover > .icn-settings-profile, .icn-settings-profile:active, :active > .icn-settings-profile, :not(.collapsed) > .icn-settings-profile {
-  background-position: -88px -51px;
-}
-
-.icn-settings-company-info {
-  background-position: -112px -51px;
-}
-
-.icn-settings-company-info:hover, :hover > .icn-settings-company-info, .icn-settings-company-info:active, :active > .icn-settings-company-info, :not(.collapsed) > .icn-settings-company-info {
-  background-position: -134px -51px;
-}
-
-.icn-settings-email-templates {
-  background-position: -156px -51px;
-  width: 10px;
-}
-
-.icn-settings-email-templates:hover, :hover > .icn-settings-email-templates, .icn-settings-email-templates:active, :active > .icn-settings-email-templates, :not(.collapsed) > .icn-settings-email-templates {
-  background-position: -176px -51px;
-}
-
-.icn-settings-deactivate {
-  background-position: -196px -51px;
-}
-
-.icn-settings-deactivate:hover, :hover > .icn-settings-deactivate, .icn-settings-deactivate:active, :active > .icn-settings-deactivate {
-  background-position: -218px -51px;
-}
 
 .icn-settings-restore-default {
   background-image: url("../images/new-icons/history.png");
@@ -2077,18 +1217,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -1523px -206px;
 }
 
-.icn-move-service {
-  background-position: -64px -206px;
-}
-
-:hover > .icn-move-service, :active > .icn-move-service, :focus:hover > .icn-move-service, :focus:active > .icn-move-service, :hover:active > .icn-move-service, .active > .icn-move-service, .open > .icn-move-service, .open .icn-move-service {
-  background-position: -86px -206px;
-}
-
-.icn-move-service.disabled, .disabled > .icn-move-service {
-  background-position: -108px -206px !important;
-}
-
 /*****/
 .icn-file-server {
   background-position: -1276px -206px;
@@ -2114,30 +1242,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   height: 20px;
 }
 
-.icn-database-server {
-  background-position: -1368px -206px;
-  width: 13px;
-  height: 20px;
-}
-
 /****/
-.icn-recurring-weekly {
-  background-position: -3584px -100px;
-  width: 14px;
-  height: 14px;
-}
-
-.icn-recurring-monthly {
-  background-position: -3560px -100px;
-  width: 14px;
-  height: 14px;
-}
-
-.icn-recurring-yearly {
-  background-position: -3536px -100px;
-  width: 14px;
-  height: 14px;
-}
 
 .icn-send-statement {
   background-position: -3699px -206px;
@@ -2155,26 +1260,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 
 :hover > .icn-send-again, :active > .icn-send-again, :focus:hover > .icn-send-again, :focus:active > .icn-send-again, :hover:active > .icn-send-again, .active > .icn-send-again, .open > .icn-send-again, .open .icn-send-again {
   background-position: -3504px -100px;
-}
-
-.icn-export-excel {
-  background-position: -3652px -100px;
-  width: 14px;
-  height: 12px;
-}
-
-:hover > .icn-export-excel, :active > .icn-export-excel, :focus:hover > .icn-export-excel, :focus:active > .icn-export-excel, :hover:active > .icn-export-excel, .active > .icn-export-excel, .open > .icn-export-excel, .open .icn-export-excel {
-  background-position: -3676px -100px;
-}
-
-.icn-add-category {
-  background-position: -198px -206px;
-  width: 18px;
-  height: 12px;
-}
-
-.icn-add-category.disabled, .disabled > .icn-add-category {
-  background-position: -226px -206px;
 }
 
 .icn-product-add {
@@ -2226,32 +1311,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -820px -206px;
 }
 
-:hover > .icn-description-white.companies-new, :active > .icn-description-white, :focus:hover > .icn-description-white, :focus:active > .icn-description-white, :hover:active > .icn-description-white, .active > .icn-description-white, .open > .icn-description-white, .open .icn-description-white {
-  background-position: -780px -206px;
-}
-
-.icn-add-services {
-  background-position: -64px -206px;
-}
-
-:hover > .icn-add-services, :active > .icn-add-services, :focus:hover > .icn-add-services, :focus:active > .icn-add-services, :hover:active > .icn-add-services, .active > .icn-add-services, .open > .icn-add-services, .open .icn-add-services {
-  background-position: -86px -206px;
-}
-
-.icn-add-services.disabled, .disabled > .icn-add-services {
-  background-position: -108px -206px;
-}
-
-.icn-service-add {
-  background-position: -140px -206px;
-  width: 14px;
-  height: 14px;
-}
-
-.icn-service-add.disabled, .disabled > .icn-service-add {
-  background-position: -164px -206px;
-}
-
 /***/
 .icn-add-description {
   background-position: -1697px -206px;
@@ -2263,32 +1322,12 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -1719px -206px;
 }
 
-.icn-permissions-key {
-  background-position: -1801px -232px;
-  width: 15px;
-  height: 14px;
-}
-
-:hover > .icn-permissions-key {
-  background-position: -1801px -206px;
-}
-
 .icn-password-key {
   background-position: -1751px -206px;
   width: 15px;
   height: 14px;
 }
 
-/*:hover > .icn-password-key, :active > .icn-password-key, :focus:hover > .icn-password-key, :focus:active > .icn-password-key, :hover:active > .icn-password-key, .active > .icn-password-key, .open > .icn-password-key, .open .icn-password-key{
-    background-position: -1801px -206px;
-}*/
-.icn-password-key-unique {
-  background-position: -1776px -206px;
-  width: 15px;
-  height: 14px;
-}
-
-/***/
 .icn-agent-version-updated {
   background-position: -1836px -206px;
 }
@@ -2378,30 +1417,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .icn-sort.active.rotate {
   transform: rotate(180deg);
   background-position: -1314px -62px;
-}
-
-.icn-arrow-next {
-  background-position: -1074px -206px;
-}
-
-.icn-arrow-next:hover, .icn-arrow-next:active, .icn-arrow-next:focus, .icn-arrow-next:focus:hover, .icn-arrow-next:focus:active, .icn-arrow-next:hover:active {
-  background-position: -1091px -206px;
-}
-
-.icn-arrow-next.disabled, .disabled > .icn-arrow-next {
-  background-position: -1057px -206px !important;
-}
-
-.icn-arrow-previous {
-  background-position: -1022px -206px;
-}
-
-.icn-arrow-previous:hover, .icn-arrow-previous:active, .icn-arrow-previous:focus, .icn-arrow-previous:focus:hover, .icn-arrow-previous:focus:active, .icn-arrow-previous:hover:active {
-  background-position: -1039px -206px;
-}
-
-.icn-arrow-previous.disabled, .disabled > .icn-arrow-previous {
-  background-position: -1005px -206px !important;
 }
 
 /***/
@@ -2509,11 +1524,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   border-radius: 50%;
 }
 
-.tag-color-lg {
-  width: 16px;
-  height: 16px;
-}
-
 .tag-color-md {
   width: 12px;
   height: 12px;
@@ -2550,18 +1560,6 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-position: -368px -51px;
 }
 
-.badge-admin {
-  background-position: -304px -51px;
-  height: 12px;
-  width: 10px;
-}
-
-.badge-super-admin {
-  background-position: -284px -51px;
-  height: 12px;
-  width: 10px;
-}
-
 .line-sep {
   width: 1px;
   height: 16px;
@@ -2569,6 +1567,18 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   margin-right: 7px;
   margin-left: 7px;
   background-color: #e7ecf2;
+}
+
+.icn-ticket-completed {
+  background-position: -861px -100px;
+  width: 8px;
+  height: 10px;
+}
+
+.icn-ticket-progress {
+  background-position: -834px -100px;
+  width: 5px;
+  height: 10px;
 }
 
 .icn-ticket-Unclaimed:before {
@@ -2579,12 +1589,4 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   position: absolute;
   left: 33%;
   top: 25%;
-}
-
-.icn-increase {
-  background-position: -2844px 0;
-}
-
-.icn-decrease {
-  background-position: -2816px 0;
 }

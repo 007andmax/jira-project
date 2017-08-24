@@ -6048,6 +6048,7 @@ tbody.collapse.in {
   margin-top: 7px;
   color: #4c5c6f;
   float: left;
+  max-width: 300px;
 }
 
 .dropdown-menu-tabs .users-list .hovered {

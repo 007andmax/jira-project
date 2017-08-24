@@ -61,7 +61,7 @@
 						  <a href="" class="pull-left avatar"> \
 							<img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"> \
 						  </a> \
-						<span class="user-name"><b>' + typeUsers.getName(user) + '</b> “' + typeUsers.getEmail(user) + '”</span> \
+						<span class="user-name ellipsis"><b>' + typeUsers.getName(user) + '</b> “' + typeUsers.getEmail(user) + '”</span> \
 						</label>\
 					  </div>');
               if (width >= maxProductWidth) {
@@ -117,7 +117,7 @@
                 if (!user.deletedAt) {
                   if ($scope.filterUpdateUser(user)) {
                     var name = users.getName(user);
-    
+
                     if (name.toLowerCase().indexOf(queryLowerCase) !== -1) {
                       data.suggestions.push({ value: name, data: user })
                     }
@@ -152,7 +152,7 @@
 						  <a href="" class="pull-left avatar"> \
 							<img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"> \
 						  </a> \
-						<span class="user-name"><b>' + result + '</b> “' + users.getEmail(suggestion.data) + '”</span> \
+						<span class="user-name ellipsis"><b>' + result + '</b> “' + users.getEmail(suggestion.data) + '”</span> \
 						</label>\
 					  </div>');
               return width;

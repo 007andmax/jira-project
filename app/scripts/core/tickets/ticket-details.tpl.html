@@ -213,7 +213,7 @@
         </div>
         <div class="ticket-detail">
           <div ng-if="!editingTicket">
-            <h2>{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
+            <h2 class="ellipsis">{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
             <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
           </div>
 
