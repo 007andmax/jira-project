@@ -5021,7 +5021,7 @@ border-top: 1px solid #f1f5fa;
 .contracts .bill-hide-content-item .col-md-1{
   text-align: center;
 }
-.bill-hide-content-item .before-icon:before{
+.bill-hide-content-item .col-md-3.before-icon:before{
   top: 4px;
   left: 25px;
 }
