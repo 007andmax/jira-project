@@ -83,7 +83,7 @@
 <!--</div>-->
 
 
-<div class="contracts create-window clearfix" >
+<div class="contracts create-window clearfix" ng-controller="serviceContractCtrl" ng-form="serviceContractForm">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
   </div>
@@ -96,27 +96,58 @@
     <div class="col-md-8">
       <div class="form-group">
         Description
-        <input placeholder="Description" type="text" class="form-control" ng-model="serviceContracts.description">
+
+        <input placeholder="Description"
+               type="text"
+               class="form-control"
+               ng-model="serviceContract.description"
+               ng-maxlength="255">
       </div>
     </div>
     <div class="col-md-12"></div>
     <div class="col-md-3">
       <div class="form-group">
         Select Date:
-        <input placeholder="Start Date" type="" class="form-control">
+        <!--<input placeholder="Start Date" type="" class="form-control">-->
+        <!--<i class="report-calendar"></i>-->
+        <input type="text"
+               class="form-control has-dropdown readonly-normal"
+               name="StartDate"
+               readonly
+               date-format="dd/mm/yy"
+               date-range-picker="startDatePicker"
+               min-date="{{today}}"
+               ng-model="serviceContract.startDate"
+               placeholder="Start Date">
         <i class="report-calendar"></i>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">
+        <!--<input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">-->
+        <!--<i class="report-calendar"></i>-->
+        <input style="margin-top: 25px;"
+               type="text"
+               class="form-control has-dropdown readonly-normal"
+               name="EndDate"
+               readonly
+               date-format="dd/mm/yy"
+               date-range-picker="endDatePicker"
+               min-date="{{minDateForEndDatePicker}}"
+               ng-model="serviceContract.endDate"
+               placeholder="End Date">
         <i class="report-calendar"></i>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
         Interval:
-        <input type="text" placeholder="Select Interval" class="form-control">
+        <!--<input type="text" placeholder="Select Interval" class="form-control">-->
+        <!--<i class="icn-sm icn-caret-gray"></i>-->
+        <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="serviceContract.interval"
+               uib-typeahead="interval for interval in intervals"
+               qt-typeahead-async-show-on-focus readonly>
+        <div typeahead-input-icon="serviceContracts.interval"></div>
         <i class="icn-sm icn-caret-gray"></i>
       </div>
     </div>
@@ -146,7 +177,7 @@
           <div uib-dropdown keyboard-nav="true">
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
                     uib-dropdown-toggle aria-expanded="true">
-              {{serviceBillType[serviceContracts.contractType]}}
+              {{serviceBillType[serviceContract.contractType]}}
             </button>
             <i class="icn-sm icn-caret-gray"></i>
             <ul class="dropdown-menu dropdown-account-type">
@@ -159,7 +190,7 @@
       </div>
     </div>
     <div class="col-md-12"></div>
-    <div class="bill-hide-content-item clearfix" ng-repeat="device in deviceServiceList" ng-show="serviceContracts.contractType === 'byDevice'">
+    <div class="bill-hide-content-item clearfix" ng-repeat="device in deviceServiceList" ng-show="serviceContract.contractType === 'byDevice'">
       <div class="col-md-5 form-group">
         <input placeholder="Device Name" type="text" class="form-control" ng-model="device.deviceName">
       </div>
@@ -188,41 +219,41 @@
           <span class="control-indicator"></span>
           We will our customers for additional services
         </label>
-        <div class="service-bill-hide-content clearfix">
-          <!--<p style="padding-bottom: 15px;">All services that did not make as billable will be included in this-->
-          <!--contract time</p>-->
-          <div class="col-md-5">Service name</div>
-          <div class="col-md-3">Per hour</div>
-          <div class="col-md-2">Make Billable</div>
-          <div class="col-md-2">Action</div>
-          <div class="bill-hide-content-item clearfix" ng-repeat="service in contactServiceList">
-            <div class="col-md-5 form-group">
-              <input placeholder="Service Name" type="text" class="form-control" ng-model="service.serviceName">
-            </div>
-            <div class="col-md-3 fourm-group before-icon">
-              <input placeholder="0.00" type="text" class="form-control" ng-model="service.perHour">
-            </div>
-            <div class="col-md-2 fourm-group">
-              <label class="control checkbox">
-                <input ng-model="service.isBillable" type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-            </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service" ng-if="contactServiceList.length>1 && !$last">
-                <div ng-click="deleteService(service)">
-                  <i class="icon-sm icn-delete"></i>
-                </div>
-              </div>
-              <div class="add-remove-service" ng-if="$last">
-                <div ng-click="addNewService()">
-                  <i class="icon-sm icn-add-action"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!--<div class="service-bill-hide-content clearfix">-->
+          <!--&lt;!&ndash;<p style="padding-bottom: 15px;">All services that did not make as billable will be included in this&ndash;&gt;-->
+          <!--&lt;!&ndash;contract time</p>&ndash;&gt;-->
+          <!--<div class="col-md-5">Service name</div>-->
+          <!--<div class="col-md-3">Per hour</div>-->
+          <!--<div class="col-md-2">Make Billable</div>-->
+          <!--<div class="col-md-2">Action</div>-->
+          <!--<div class="bill-hide-content-item clearfix" ng-repeat="service in contactServiceList">-->
+            <!--<div class="col-md-5 form-group">-->
+              <!--<input placeholder="Service Name" type="text" class="form-control" ng-model="service.serviceName">-->
+            <!--</div>-->
+            <!--<div class="col-md-3 fourm-group before-icon">-->
+              <!--<input placeholder="0.00" type="text" class="form-control" ng-model="service.perHour">-->
+            <!--</div>-->
+            <!--<div class="col-md-2 fourm-group">-->
+              <!--<label class="control checkbox">-->
+                <!--<input ng-model="service.isBillable" type="checkbox">-->
+                <!--<span class="control-indicator"></span>-->
+              <!--</label>-->
+            <!--</div>-->
+            <!--<div class="col-md-2 fourm-group">-->
+              <!--<div class="add-remove-service" ng-if="contactServiceList.length>1 && !$last">-->
+                <!--<div ng-click="deleteService(service)">-->
+                  <!--<i class="icon-sm icn-delete"></i>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="add-remove-service" ng-if="$last">-->
+                <!--<div ng-click="addNewService()">-->
+                  <!--<i class="icon-sm icn-add-action"></i>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
-        </div>
+        <!--</div>-->
       </div>
     </div>
   </div>

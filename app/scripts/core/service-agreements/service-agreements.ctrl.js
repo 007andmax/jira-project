@@ -76,7 +76,7 @@
                 template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                 break;
               case('PER_USER/DEVICE_BILLING'):
-                template = '';
+                template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
                 break;
               default:
                 console.log('no contract type selected');
@@ -193,10 +193,10 @@
       });
 
 
-      $scope.serviceBillType = {
-        byDevice: 'By Device',
-        byUsers: 'By Users'
-      };
+      // $scope.serviceBillType = {
+      //   byDevice: 'By Device',
+      //   byUsers: 'By Users'
+      // };
 
       function setMiNDateForEndDate(date) {
         var d = new Date(date);
@@ -211,6 +211,7 @@
         if (startDate) {
           var startMonth = startDate.getMonth() + 1;
           $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
+          $scope.startDate =  $scope.editContract.startDate;
         }
         var f = new Date(date);
 
@@ -222,6 +223,7 @@
         if (endDate) {
           var endMonth = endDate.getMonth() + 1;
           $scope.editContract.endDate = endDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(endDate.getDate());
+          $scope.endDate = $scope.editContract.endDate;
         }
       };
 
@@ -297,7 +299,7 @@
       };
 
       $scope.isShowingErrors = function (form, fieldName) {
-        return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
+        return form[fieldName] &&  form[fieldName].$dirty && form[fieldName].$invalid;
       };
 
 

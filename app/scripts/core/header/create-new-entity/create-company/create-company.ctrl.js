@@ -282,10 +282,10 @@
               template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
             case('BLOCK_TIME_BILLING'):
-              template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+              template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
               break;
             case('PER_USER/DEVICE_BILLING'):
-              template = '';
+              template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
               break;
             default:
               console.log('no contract type selected');

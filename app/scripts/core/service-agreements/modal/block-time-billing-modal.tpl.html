@@ -1,4 +1,4 @@
-<div class="block-time clearfix" ng-controller="blockTimeBillingCtrl" ng-form="blockTimeForm">
+<div class="block-time clearfix" ng-controller="blockTimeBillingCtrl" ng-form="blockTimeContractFormForm">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
   </div>
@@ -76,7 +76,10 @@
     <div class="col-md-4">
       <div class="form-group">
         Included hours:
-        <input placeholder="Hours" type="text" class="form-control">
+        <input placeholder="Hours"
+               type="number"
+               class="form-control"
+               ng-model="blockTimeContract.includedHours">
       </div>
     </div>
     <div class="col-md-4">
@@ -92,7 +95,10 @@
     <div class="col-md-4">
       <div class="form-group before-icon">
         Total Hours:
-        <input placeholder="Total" type="text" class="form-control">
+        <input placeholder="Total"
+               type="number"
+               class="form-control"
+               ng-model="blockTimeContract.totalHours">
       </div>
     </div>
     <div class="col-md-4">
@@ -140,9 +146,29 @@
 
 
       <div class="bill-hide-content-item clearfix" ng-form="newBlockTimeServiceForm">
-        <div class="col-md-7 form-group">
-          <input placeholder="Service Name" type="text" class="form-control" ng-model="newBlockTimeService.name" required>
+
+        <div class="form-group col-md-7" ng-class="{'has-error': isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName')}">
+
+          <div uib-dropdown>
+            <input type="text"
+                   name="newBlockTimeServiceName"
+                   ng-model="newBlockTimeService.name"
+                   ng-minlength="1"
+                   autocomplete="off"
+                   tabindex="5"
+                   placeholder="New Block Time Service"
+                   class="form-control form-control-dropdown dropdown-toggle"
+                   uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                   value="service.name"
+                   invalid-when="!isNameUnique(newBlockTimeService)">
+
+            <div class="input-top-4" typeahead-input-icon="newBlockTimeService.name"></div>
+
+          </div>
         </div>
+
         <div class="col-md-2 fourm-group">
           <div class="add-remove-service">
             <div ng-click="addNewBlockTimeService(newBlockTimeServiceForm, newBlockTimeService)">
@@ -171,7 +197,7 @@
                    style="width: 130px;"
                    class="form-control hour-rate"
                    ng-model="blockTimeContract.ratePerHour"
-                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
           </div>
         </div>
       </div>
@@ -183,55 +209,104 @@
         </label>
 
 
-        <div class="service-bill-hide-content clearfix">
+        <div class="service-bill-hide-content clearfix" ng-show="blockTimeContract.billForAdditionalService">
           <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
             contract time</p>
+
           <div class="col-md-5">Service name</div>
           <div class="col-md-3">Per hour</div>
           <div class="col-md-2">Make Billable</div>
-          <div class="col-md-2">Action</div>
-          <div class="bill-hide-content-item clearfix">
+          <div class="col-md-1">Tax</div>
+          <div class="col-md-1">Action</div>
+
+          <div class="bill-hide-content-item clearfix" ng-repeat="contractService in contractServices">
             <div class="col-md-5 form-group">
-              <input placeholder="Service Name" type="text" class="form-control">
+              <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name">
             </div>
             <div class="col-md-3 fourm-group before-icon">
-              <input placeholder="0.00" type="text" class="form-control">
+              <input placeholder="0.00" type="text" class="form-control"
+                     ng-model="contractService.rate"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
             </div>
-            <div class="col-md-2 fourm-group">
+            <div class="col-md-2 form-group">
               <label class="control checkbox">
-                <input>
+                <input ng-model="contractService.billable" type="checkbox">
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
+            <div class="col-md-1 form-group">
+              <div>
                 <div>
+                  <!--<i class="icn-sm icn-tax"> </i>-->
+                  <select-taxes taxes="taxes" entity="contractService" is-icon="true"></select-taxes>
+                  <p>{{contractService.taxes.length}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 form-group">
+              <div class="add-remove-service">
+                <div ng-click="deleteContractService(contractService)">
                   <i class="icon-sm icn-delete"></i>
                 </div>
               </div>
             </div>
           </div>
-          <div class="bill-hide-content-item clearfix">
-            <div class="col-md-5 form-group">
-              <input placeholder="Service Name" type="text" class="form-control">
+
+          <div class="bill-hide-content-item clearfix" ng-form="newContractServiceForm">
+            <div class="col-md-5 form-group" ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName')}">
+
+
+                <div uib-dropdown>
+                  <input type="text"
+                         name="newContractServiceName"
+                         ng-model="newContractService.name"
+                         ng-minlength="1"
+                         autocomplete="off"
+                         tabindex="5"
+                         placeholder="New Block Time Service"
+                         class="form-control form-control-dropdown dropdown-toggle"
+                         uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
+                         qt-typeahead-show-on-focus
+                         custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                         value="service.name"
+                         invalid-when="!isNameUnique(newContractService)">
+
+                  <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+
+                </div>
+
             </div>
             <div class="col-md-3 fourm-group before-icon">
-              <input placeholder="0.00" type="text" class="form-control">
+              <input placeholder="0.00"
+                     type="text"
+                     class="form-control"
+                     ng-model="newContractService.rate"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
             </div>
             <div class="col-md-2 fourm-group">
               <label class="control checkbox">
-                <input>
+                <input type="checkbox" ng-model="newContractService.billable">
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
+            <div class="col-md-1 fourm-group">
+              <div class="" ng-hide="contractServiceList.length > 19">
                 <div>
+                  <select-taxes taxes="taxes" entity="newContractService" is-icon="true"></select-taxes>
+                  <p>{{newContractService.taxes.length}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 fourm-group">
+              <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
+                <div ng-click="addContractService(newContractServiceForm, newContractService)">
                   <i class="icon-sm icn-add-action"></i>
                 </div>
               </div>
             </div>
           </div>
+
+
         </div>
 
 
@@ -244,6 +319,7 @@
           <span class="control-indicator"></span>
           Notify when block time has been used
         </label>
+
         <!--<div class="service-bill-hide-content ticket-add-footer">-->
           <!--<div class="ticket-add-content-actions-dropdown pull-left"-->
                <!--ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>-->
@@ -261,6 +337,7 @@
             <!--</label>-->
           <!--</div>-->
         <!--</div>-->
+
       </div>
     </div>
   </div>
@@ -283,7 +360,7 @@
         <div class="contacts-details-content-price">
           $1875.00/mo
         </div>
-        <div class="btn btn-lg btn-success btn-create" ng-click="createBlockTimeContract(blockTimeContract)">Create</div>
+        <div class="btn btn-lg btn-success btn-create" ng-click="createBlockTimeContract(blockTimeContractFormForm, blockTimeContract)" ng-disabled="blockTimeContractFormForm.$invalid">Create</div>
       </div>
     </div>
   </div>
