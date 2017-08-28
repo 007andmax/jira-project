@@ -26,9 +26,15 @@
         callback && callback(agreements);
       });
 
-      RealTimeService.subscribe('/serviceAgreements', scope, function(newChange){
-        console.log(newChange);
-        // add logic
+      RealTimeService.subscribe('/serviceAgreement', scope, function(newChange){
+        if(newChange.action === 'SERVICE_AGREEMENT_SAVED') {
+          agreements.push(newChange.data);
+        } else if(newChange.action === 'SERVICE_AGREEMENT_DELETED') {
+          for (var i = 0; i < newChange.data.length; i++) {
+            var agreementId = newChange.data[i];
+            Utils.deleteById(agreements, agreementId);
+          }
+        }
       })
     }
 
