@@ -43,6 +43,10 @@
           }
         };
 
+        $scope.createServiceContract = function(form, serviceContract) {
+
+        }
+
 
       }])
 
