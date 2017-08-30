@@ -23,36 +23,6 @@
         <div class="col-md-12"></div>
         <div class="col-md-3">
           <div class="form-group">
-            Select Date:
-            <input type="text"
-                   class="form-control has-dropdown readonly-normal"
-                   name="StartDate"
-                   readonly
-                   date-format="dd/mm/yy"
-                   date-range-picker="startDatePicker"
-                   min-date="{{today}}"
-                   ng-model="blockTimeContract.startDate"
-                   placeholder="Start Date">
-            <i class="report-calendar"></i>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <input style="margin-top: 25px;"
-                   type="text"
-                   class="form-control has-dropdown readonly-normal"
-                   name="EndDate"
-                   readonly
-                   date-format="dd/mm/yy"
-                   date-range-picker="endDatePicker"
-                   min-date="{{minDateForEndDatePicker}}"
-                   ng-model="blockTimeContract.endDate"
-                   placeholder="End Date">
-            <i class="report-calendar"></i>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
             Interval:
             <input custom-style="{'width':'100%'}" type="text" class="form-control"
                    ng-model="blockTimeContract.interval"
@@ -62,6 +32,49 @@
             <i class="icn-sm icn-caret-gray"></i>
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            Select Date:
+            <!--<input type="text"-->
+                   <!--class="form-control has-dropdown readonly-normal"-->
+                   <!--name="StartDate"-->
+                   <!--readonly-->
+                   <!--date-format="dd/mm/yy"-->
+                   <!--date-range-picker="startDatePicker"-->
+                   <!--min-date="{{today}}"-->
+                   <!--ng-model="blockTimeContract.startDate"-->
+                   <!--placeholder="Start Date">-->
+            <!--<i class="report-calendar"></i>-->
+
+            <input class="form-control" type="text" ng-model="blockTimeContract.startDate" placeholder="../../.."
+                   readonly ng-change="changeStartDate()" name="startDate"
+                   qt-data-time-picker  min-date="blockTimeContract.minStartDate">
+            <i class="icn-sm calendar"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <!--<input style="margin-top: 25px;"-->
+                   <!--type="text"-->
+                   <!--class="form-control has-dropdown readonly-normal"-->
+                   <!--name="EndDate"-->
+                   <!--readonly-->
+                   <!--date-format="dd/mm/yy"-->
+                   <!--date-range-picker="endDatePicker"-->
+                   <!--min-date="{{minDateForEndDatePicker}}"-->
+                   <!--ng-model="blockTimeContract.endDate"-->
+                   <!--placeholder="End Date">-->
+            <!--<i class="report-calendar"></i>-->
+
+            <input style="margin-top: 25px;" type="text" placeholder="../../.."  readonly ng-change="changeEndDate()"
+                    ng-model="blockTimeContract.endDate"
+                   class="form-control" date-time-picker-with-period name="endDate"
+                   default-date="blockTimeContract.endDate" min-date="blockTimeContract.minEndDate" period="blockTimeContract.period">
+
+            <i class="icn-sm calendar"></i>
+          </div>
+        </div>
+
         <div class="col-md-12"></div>
         <!--<div class="col-md-1">-->
         <!--<label class="control checkbox">-->

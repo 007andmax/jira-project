@@ -415,12 +415,12 @@
           return count
 
           function setCount() {
-            sentOn = new Date(sentOn.setMonth(sentOn.getMonth() + 1));
+              sentOn = new Date(sentOn.setMonth(sentOn.getMonth() + 1));
 
-            if (+sentOn <= +endDate) {
-              count++;
-              setCount();
-            }
+              if (+sentOn <= +endDate) {
+                count++;
+                setCount();
+              }
           }
         }
 

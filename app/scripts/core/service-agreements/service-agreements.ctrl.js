@@ -192,12 +192,6 @@
         }
       });
 
-
-      // $scope.serviceBillType = {
-      //   byDevice: 'By Device',
-      //   byUsers: 'By Users'
-      // };
-
       function setMiNDateForEndDate(date) {
         var d = new Date(date);
         d.setDate(d.getDate() + 30);
@@ -244,9 +238,6 @@
         }
       };
 
-      // $scope.changeContractType = function (type) {
-      //   $scope.serviceContracts.contractType = type;
-      // };
 
       $scope.closeModal = function () {
         $uibModalInstance.close();
@@ -351,29 +342,6 @@
         })
       };
 
-      // $scope.deviceServiceList=[];
-      // createNewDevice();
-      //
-      // function createNewDevice() {
-      //   var device ={
-      //     deviceName: null,
-      //     deviceNumber: null,
-      //     deviceCost: null
-      //   };
-      //   $scope.deviceServiceList.push(device);
-      // }
-      // $scope.addNewDevice = function() {
-      //   createNewDevice();
-      // };
-
-      // $scope.deleteDevice = function(device){
-      //   for(var i=0; i<$scope.deviceServiceList.length; i++) {
-      //     if($scope.deviceServiceList[i] == device) {
-      //       $scope.deviceServiceList.splice(i, 1);
-      //       break;
-      //     }
-      //   }
-      // };
 
       $uibModalInstance.closed.then(function () {
 

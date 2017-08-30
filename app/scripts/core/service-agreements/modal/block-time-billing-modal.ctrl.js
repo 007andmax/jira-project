@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService',
-      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter',
+      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY'];
 
@@ -21,21 +21,39 @@
           taxes: []
         };
 
+        var day = 1000 * 60 * 60 * 24;
+        var month = 30*day;
+
         $scope.blockTimeContract = {
+          minStartDate: Date.now(),
           includedHours: null,
-          blockRate: null
+          blockRate: null,
+          interval: "MONTHLY"
         };
+
+        $scope.blockTimeContract.minEndDate = Date.now() + month;
+        $scope.blockTimeContract.endDate = Date.now() + month;
+
+
+        $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
 
         $scope.clients = [];
         $scope.getClients = function() {
           var companyId = $scope.companyId || $scope.contractCompany.id;
           $scope.clients = UsersService.getAllByCompanyId(companyId);
-          // if($scope.companyId) {
-          //   $scope.clients = UsersService.getAllByCompanyId($scope.companyId);
-          // } else if($scope.contractCompany.id) {
-          //   $scope.clients = UsersService.getAllByCompanyId($scope.contractCompany.id);
-          // }
+
         };
+
+        $scope.changeStartDate = function(){
+          var date = $scope.blockTimeContract.startDate;
+          var endDate = new Date(date);
+
+          endDate.setDate(endDate.getMonth() + 1);
+
+          console.log(endDate);
+
+          $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+        }
 
 
 
@@ -57,6 +75,12 @@
             $scope.defaultServices.push(serv);
           }
         });
+
+        $scope.$watch(function (){
+          return $scope.blockTimeContract.interval;
+        }, function(interval){
+          $scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+        })
 
         $scope.calculateTotalAmount = function() {
           if($scope.blockTimeContract.includedHours && $scope.blockTimeContract.blockRate ) {

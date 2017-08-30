@@ -19,7 +19,12 @@
               keepOpen: true,
               format: 'DD MMM YYYY',
               defaultDate: $filter('date')(Date.now(), 'dd MMM yyyy'),
-              ignoreReadonly: true
+              ignoreReadonly: true,
+              sideBySide: true,
+              widgetPositioning: {
+                horizontal: 'right',
+                vertical: 'auto'
+              }
             };
 
             if (scope.minDate) {
