@@ -12,6 +12,8 @@
         $scope.blockTimeServices = [];
         $scope.contractServices = [];
 
+        $scope.ticketSharedUsersList = [];
+
         $scope.newContractService = {
           name: '',
           rate: null,
@@ -19,13 +21,20 @@
           taxes: []
         };
 
+        $scope.blockTimeContract = {
+          includedHours: null,
+          blockRate: null
+        };
+
         $scope.clients = [];
         $scope.getClients = function() {
-          if($scope.companyId) {
-            $scope.clients = UsersService.getAllByCompanyId($scope.companyId);
-          } else if($scope.contractCompany.id) {
-            $scope.clients = UsersService.getAllByCompanyId($scope.contractCompany.id);
-          }
+          var companyId = $scope.companyId || $scope.contractCompany.id;
+          $scope.clients = UsersService.getAllByCompanyId(companyId);
+          // if($scope.companyId) {
+          //   $scope.clients = UsersService.getAllByCompanyId($scope.companyId);
+          // } else if($scope.contractCompany.id) {
+          //   $scope.clients = UsersService.getAllByCompanyId($scope.contractCompany.id);
+          // }
         };
 
 
@@ -48,6 +57,14 @@
             $scope.defaultServices.push(serv);
           }
         });
+
+        $scope.calculateTotalAmount = function() {
+          if($scope.blockTimeContract.includedHours && $scope.blockTimeContract.blockRate ) {
+            return $scope.blockTimeContract.includedHours * $scope.blockTimeContract.blockRate;
+          } else {
+            return null;
+          }
+        };
 
         function pickDefaultService(service) {
           for (var i = 0; i < $scope.defaultServices.length; i++) {
@@ -88,12 +105,33 @@
               && service.name !== "undefined"
               && service.name.name
               && service.name.name.length) {
+
               name = service.name;
             }
             return (checkUniqueServiceName($scope.defaultServices, name) &&
             checkUniqueServiceName($scope.blockTimeServices, name) &&
             checkUniqueServiceName($scope.contractServices, name))
           }
+        };
+
+        $scope.toggleAllShared = function(isNotifyAll) {
+          var sharesWithoutSubscription = [];
+          for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+            var share = $scope.ticketSharedUsersList[i];
+            if (!isNotifyAll) {
+              share.notify = isNotifyAll;
+            } else {
+              if ((share.user.subscription && share.user.subscription.ticket) || share.user.accountType === 'TECH') {
+                share.notify = isNotifyAll;
+              } else {
+                sharesWithoutSubscription.push(share);
+              }
+            }
+          }
+        };
+
+        $scope.getUserById = function (userId) {
+          return UsersService.getOneById(userId);
         };
 
 
@@ -171,9 +209,9 @@
 
         $scope.createBlockTimeContract = function (form, contractData) {
           if(form.$valid) {
-            //console.log(contractData);
 
             var blockContract = {
+              id: null,
               description: contractData.description,
               type: 'BLOCK_TIME',
               startDate: $scope.startDate,
@@ -189,6 +227,7 @@
               services: [],
               blockTimeServices: [],
               enableTimeRollover: contractData.enableTimeRollover || false,
+              maxRolloverHours: null,
               shares: [],
               taxIds: []
             };
@@ -216,13 +255,21 @@
               blockContract.services.push(cs);
             }
 
+            for(var u=0; u<$scope.ticketSharedUsersList.length; u++) {
+              if($scope.ticketSharedUsersList[u].notify) {
+                var user = {
+                  userId: $scope.ticketSharedUsersList[u].user.id,
+                  date: null,
+                  itemOrder: 0
+                };
+                blockContract.shares.push(user)
+              }
+            }
+
             AgreementsService.createContract(blockContract, function(resp) {
               console.log(resp);
               $scope.closeModal();
             })
-
-
-
           }
         }
 

@@ -101,7 +101,7 @@
                type="text"
                class="form-control"
                ng-model="serviceContract.description"
-               ng-maxlength="255">
+               ng-maxlength="255" required>
       </div>
     </div>
     <div class="col-md-12"></div>
@@ -117,8 +117,8 @@
                date-format="dd/mm/yy"
                date-range-picker="startDatePicker"
                min-date="{{today}}"
-               ng-model="serviceContract.startDate"
-               placeholder="Start Date">
+               ng-model="startDate"
+               placeholder="Start Date" required>
         <i class="report-calendar"></i>
       </div>
     </div>
@@ -134,8 +134,8 @@
                date-format="dd/mm/yy"
                date-range-picker="endDatePicker"
                min-date="{{minDateForEndDatePicker}}"
-               ng-model="serviceContract.endDate"
-               placeholder="End Date">
+               ng-model="endDate"
+               placeholder="End Date" required>
         <i class="report-calendar"></i>
       </div>
     </div>
@@ -177,11 +177,11 @@
           <div uib-dropdown keyboard-nav="true">
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
                     uib-dropdown-toggle aria-expanded="true">
-              {{serviceBillType[serviceContract.contractType]}}
+              {{serviceContractType[serviceContract.contractType]}}
             </button>
             <i class="icn-sm icn-caret-gray"></i>
             <ul class="dropdown-menu dropdown-account-type">
-              <li ng-repeat="(role, label) in serviceBillType" ng-click="changeContractType(role)">
+              <li ng-repeat="(role, label) in serviceContractType" ng-click="changeContractType(role)">
                 <a href="javascript:void(0)"> {{ label }} </a>
               </li>
             </ul>
@@ -190,7 +190,7 @@
       </div>
     </div>
     <div class="col-md-12"></div>
-    <div class="bill-hide-content-item clearfix" ng-repeat="device in deviceServiceList" ng-show="serviceContract.contractType === 'byDevice'">
+    <div class="bill-hide-content-item clearfix" ng-repeat="device in deviceServiceList" ng-show="serviceContract.contractType === 'DEVICE'">
       <div class="col-md-5 form-group">
         <input placeholder="Device Name" type="text" class="form-control" ng-model="device.deviceName">
       </div>
@@ -198,7 +198,7 @@
         <input placeholder="No.Device" type="text" class="form-control" ng-model="device.deviceNumber">
       </div>
       <div class="col-md-3 fourm-group before-icon">
-        <input placeholder="0.00" type="text" class="form-control" ng-model="deviceCost">
+        <input placeholder="0.00" type="text" class="form-control" ng-model="device.deviceCost">
       </div>
       <div class="col-md-1 fourm-group">
         <div class="add-remove-service">
@@ -210,6 +210,92 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="bill-hide-content-item clearfix" ng-repeat="user in usersServiceList" ng-show="serviceContract.contractType === 'USER'">
+      <div class="col-md-5 form-group">
+        <input placeholder="User Name" type="text" class="form-control" ng-model="user.userName">
+      </div>
+      <div class="col-md-3 fourm-group">
+        <input placeholder="No.User" type="text" class="form-control" ng-model="user.userNumber">
+      </div>
+      <div class="col-md-3 fourm-group before-icon">
+        <input placeholder="0.00" type="text" class="form-control" ng-model="user.userCost">
+      </div>
+      <div class="col-md-1 fourm-group">
+        <div class="add-remove-service">
+          <div ng-if="usersServiceList.length>1 && !$last" ng-click="deleteUser(device)">
+            <i class="icon-sm icn-delete"></i>
+          </div>
+          <div ng-if="$last" ng-click="addNewUser()">
+            <i class="icon-sm icn-add-action"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div  class="bill-hide-content-item clearfix col-md-12" ng-show="serviceContract.contractType === 'OTHER'">
+      <div class="invoice-update">
+
+        <ul class="nav nav-ticket-add invoice-ticket-add">
+
+          <li class="invoice-update-btns" ng-click="setOpenedTab('product')">
+            <a href="javascript:void(0)">
+              <i class="icon-lg icon-add-product"></i>Product
+            </a>
+          </li>
+
+          <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
+            <a href="javascript:void(0)">
+              <i class="icon-lg icon-add-service"></i>Service
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="update-content">
+
+          <div class="tab-pane in active" ng-show="isTabOpened('product')">
+            <ul class="qt-table">
+
+              <li
+                ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
+                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+
+                <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
+
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-pane in active" ng-show="isTabOpened('service')">
+            <ul class="qt-table">
+
+              <li
+                ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
+                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+
+                <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
+
+              </li>
+            </ul>
+          </div>
+
+          <div class="clearfix">
+            <div class="ticket-add-amount has-error" style="position: absolute;">
+              <span class="control-label">{{ getErrorMessage(editInvoiceForm) }}</span>
+            </div>
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Total </span>
+              <strong>{{ total | currency:'$':2 }}</strong>
+            </div>
+          </div>
+
+          </ul>
+        </div>
+
+      </div>
+
     </div>
 
 
@@ -263,22 +349,22 @@
     <h5>Details</h5>
     <div class="contacts-details-content clearfix">
       <div class="col-md-8">
-        <p class="col-md-12">Vereburn - Monthly Block Time</p>
+        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
         <div class="col-md-6">
-          <p>Rollover: <span>Yes</span></p>
-          <p>Included After Hours: <span>No</span></p>
-          <p>Renewal Notice: <span>Yes</span></p>
+          <!--<p>Rollover: <span>Yes</span></p>-->
+          <!--<p>Included After Hours: <span>No</span></p>-->
+          <!--<p>Renewal Notice: <span>Yes</span></p>-->
         </div>
         <div class="col-md-6">
-          <p>Start Date: <span>06/30/17</span></p>
-          <p>Expire Date: <span>07/29/17</span></p>
+          <!--<p>Start Date: <span>06/30/17</span></p>-->
+          <!--<p>Expire Date: <span>07/29/17</span></p>-->
         </div>
       </div>
       <div class="col-md-4">
-        <div class="contacts-details-content-price">
-          $1875.00/mo
-        </div>
-        <div class="btn btn-lg btn-success btn-create">Create</div>
+        <!--<div class="contacts-details-content-price">-->
+          <!--$1875.00/mo-->
+        <!--</div>-->
+        <div class="btn btn-lg btn-success btn-create" ng-disabled="serviceContractForm.$invalid">Create</div>
       </div>
     </div>
   </div>

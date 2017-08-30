@@ -326,7 +326,8 @@
           endDate: $scope.editContract.endDate,
           companyId: $scope.editContract.companyId || companyData.companyId ||  $scope.contractCompany.id,
           services: servicesWithTaxIds,
-          type: companyData.type || $scope.modlToShow
+          // type: companyData.type || $scope.modlToShow
+          type: 'HOURLY'
         };
 
         console.log(companyContractInfo);

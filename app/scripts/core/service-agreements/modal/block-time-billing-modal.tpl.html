@@ -97,11 +97,11 @@
         </div>
         <div class="col-md-4">
           <div class="form-group before-icon">
-            Total Hours:
+            Total Amount:
             <input placeholder="Total"
                    type="number"
                    class="form-control"
-                   ng-model="blockTimeContract.totalHours">
+                   ng-model="calculateTotalAmount()" readonly>
           </div>
         </div>
         <div class="col-md-4">
@@ -123,25 +123,13 @@
           <div class="bill-hide-content-item clearfix" ng-repeat="blockTimeService in blockTimeServices">
             <div class="col-md-7 form-group">
               <input placeholder="Service Name" type="text" class="form-control" ng-model="blockTimeService.name">
-              <!--<div uib-dropdown>-->
-              <!--<input type="text" class="form-control has-dropdown"-->
-              <!--name="serviceName" autocomplete="off"-->
-              <!--placeholder="Service" autocomplete-service-item="defaultServices"-->
-              <!--ng-model="serviceExpense.item.name" service-list="defaultServices"-->
-              <!--autocomplete-service-list uib-dropdown-toggle/>-->
-              <!--<i class="icn-sm icn-caret-gray"></i>-->
-              <!--<div class="service-list-container"></div>-->
-              <!--<input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id">-->
-              <!--</div>-->
+
             </div>
             <div class="col-md-2 fourm-group">
               <div class="add-remove-service">
                 <div ng-click="deleteBlockTimeService(blockTimeService)">
                   <i class="icon-sm icn-delete"></i>
                 </div>
-                <!--<div ng-show="$last" ng-click="addNewBlockTimeService(blockTimeService)">-->
-                <!--<i class="icon-sm icn-add-action"></i>-->
-                <!--</div>-->
               </div>
             </div>
           </div>
@@ -324,23 +312,24 @@
               Notify when block time has been used
             </label>
 
-            <!--<div class="service-bill-hide-content ticket-add-footer">-->
-            <!--<div class="ticket-add-content-actions-dropdown pull-left"-->
-            <!--ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>-->
+            <div class="service-bill-hide-content ticket-add-footer">
+              <div class="ticket-add-content-actions-dropdown pull-left"
+                   ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
-            <!--<div class="pull-left shared-user-add">-->
-            <!--<div class="notify-select">-->
-            <!--<span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select None</span>-->
-            <!--</div>-->
+              <div class="pull-left shared-user-add">
+                <div class="notify-select">
+                  <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span
+                  ng-click="toggleAllShared(false)">Select None</span>
+                </div>
 
-            <!--<label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"-->
-            <!--ng-mousedown="validateNotifying(sharedUser, $event)">-->
-            <!--<input type="checkbox" ng-model="sharedUser.notify">-->
-            <!--<span class="control-indicator"></span>-->
-            <!--{{ getUserName(sharedUser.user) }}-->
-            <!--</label>-->
-            <!--</div>-->
-            <!--</div>-->
+                <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"
+                       ng-mousedown="validateNotifying(sharedUser, $event)">
+                  <input type="checkbox" ng-model="sharedUser.notify">
+                  <span class="control-indicator"></span>
+                  {{ getUserName(sharedUser.user) }}
+                </label>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -351,18 +340,18 @@
           <div class="col-md-8">
             <p class="col-md-12">Vereburn - Monthly Block Time</p>
             <div class="col-md-6">
-              <p>Rollover: <span>Yes</span></p>
+              <p>Rollover: <span>{{blockTimeContract.enableTimeRollover}}</span></p>
               <p>Included After Hours: <span>No</span></p>
-              <p>Renewal Notice: <span>Yes</span></p>
+              <p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>
             </div>
             <div class="col-md-6">
-              <p>Start Date: <span>06/30/17</span></p>
-              <p>Expire Date: <span>07/29/17</span></p>
+              <p>Start Date: <span>{{startDate}}</span></p>
+              <p>Expire Date: <span>{{endDate}}</span></p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="contacts-details-content-price">
-              $1875.00/mo
+              $ {{calculateTotalAmount()}}/mo
             </div>
             <div class="btn btn-lg btn-success btn-create"
                  ng-click="createBlockTimeContract(blockTimeContractFormForm, blockTimeContract)"
