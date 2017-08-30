@@ -137,7 +137,7 @@
 						<a href="" class="pull-left avatar"> \
 						  <img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"> \
 						</a> \
-						<span class="user-name">' + result + ' “' + users.getEmail(suggestion.data) + '”</span> \
+						<span class="user-name ellipsis">' + result + ' “' + users.getEmail(suggestion.data) + '”</span> \
 					</label>';
             },
             calculateWidth: function (result, suggestion) {

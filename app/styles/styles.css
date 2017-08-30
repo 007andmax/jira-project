@@ -5916,7 +5916,7 @@ tbody.collapse.in {
 
 /* Tab content */
 .dropdown-menu-tabs .form-group {
-  padding: 20px;
+  padding: 10px 20px;
   margin-bottom: 0;
   position: absolute;
   width: 100%;
@@ -5939,7 +5939,7 @@ tbody.collapse.in {
 .dropdown-menu-tabs .scroll-pane {
   margin-top: 48px;
   background: #f1f5fa;
-  margin-bottom: 78px;
+  margin-bottom: 48px;
 }
 
 .dropdown-menu-tabs.single-tab .custom-scroll {
@@ -5952,7 +5952,7 @@ tbody.collapse.in {
 
 .dropdown-menu-tabs i.icn-search-input {
   right: 33px;
-  top: 33px;
+  top: 23px;
 }
 
 .dropdown-menu-tabs .users-list {
