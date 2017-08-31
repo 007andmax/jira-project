@@ -40,8 +40,8 @@
           interval: "MONTHLY"
         };
 
-        $scope.blockTimeContract.minEndDate = Date.now() + month;
-        $scope.blockTimeContract.endDate = Date.now() + month;
+        $scope.blockTimeContract.minEndDate = $scope.blockTimeContract.minStartDate + month;
+        $scope.blockTimeContract.endDate = $scope.blockTimeContract.minStartDate + month;
 
 
         $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
@@ -57,11 +57,11 @@
 
         function changeStartDate(){
           var date = $scope.blockTimeContract.startDate;
-          var endDate = new Date(date);
-          console.log('endDate.getMonth() ', date.getMonth());
-          endDate.setDate(date.getMonth() + 1);
+          //var endDate = new Date(date);
+          //console.log('endDate.getMonth() ', date.getMonth());
+          date.setMonth(date.getMonth() + 1);
 
-          console.log(date);
+          //console.log(date);
 
           $scope.blockTimeContract.endDate = $filter('date')(date, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(date, 'dd MMM yyyy');
