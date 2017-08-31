@@ -3,14 +3,16 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter',
-      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter', '$timeout',
+      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter, $timeout) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY'];
 
         $scope.defaultServices = [];
         $scope.blockTimeServices = [];
         $scope.contractServices = [];
+
+        $scope.reInitEndDate = true;
 
         $scope.ticketSharedUsersList = [];
 
@@ -54,6 +56,14 @@
 
           $scope.blockTimeContract.endDate = $filter('date')(date, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(date, 'dd MMM yyyy');
+          reInitEndDate()
+        }
+
+        function reInitEndDate() {
+          $scope.reInitEndDate = false;
+          $timeout(function () {
+            $scope.reInitEndDate = true;
+          }, 0);
         }
 
         $scope.$watch(function (){
