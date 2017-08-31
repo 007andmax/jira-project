@@ -44,16 +44,29 @@
 
         };
 
-        $scope.changeStartDate = function(){
+        function changeStartDate(){
           var date = $scope.blockTimeContract.startDate;
           var endDate = new Date(date);
+          console.log('endDate.getMonth() ', date.getMonth());
+          endDate.setDate(date.getMonth() + 1);
 
-          endDate.setDate(endDate.getMonth() + 1);
+          console.log(date);
 
-          console.log(endDate);
-
-          $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+          $scope.blockTimeContract.endDate = $filter('date')(date, 'dd MMM yyyy');
+          $scope.blockTimeContract.minEndDate = $filter('date')(date, 'dd MMM yyyy');
         }
+
+        $scope.$watch(function (){
+          return $scope.blockTimeContract.interval;
+        }, function(interval){
+          $scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+        });
+
+        $scope.$watch(function () {
+          return $scope.blockTimeContract.startDate;
+        }, function(){
+          changeStartDate()
+        });
 
 
 
@@ -76,11 +89,7 @@
           }
         });
 
-        $scope.$watch(function (){
-          return $scope.blockTimeContract.interval;
-        }, function(interval){
-          $scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
-        })
+
 
         $scope.calculateTotalAmount = function() {
           if($scope.blockTimeContract.includedHours && $scope.blockTimeContract.blockRate ) {
