@@ -8,6 +8,12 @@
 
         $scope.intervals = ['YEARLY', 'MONTHLY'];
 
+        var preSettupServiceList = [
+          {name: 'On site service'},
+          {name: 'Remote service'}
+        ];
+
+
         $scope.defaultServices = [];
         $scope.blockTimeServices = [];
         $scope.contractServices = [];
@@ -15,6 +21,7 @@
         $scope.reInitEndDate = true;
 
         $scope.ticketSharedUsersList = [];
+
 
         $scope.newContractService = {
           name: '',
@@ -45,6 +52,8 @@
           $scope.clients = UsersService.getAllByCompanyId(companyId);
 
         };
+
+
 
         function changeStartDate(){
           var date = $scope.blockTimeContract.startDate;
@@ -97,6 +106,7 @@
             }
             $scope.defaultServices.push(serv);
           }
+          preSettupBlockTimeService(preSettupServiceList);
         });
 
 
@@ -113,6 +123,7 @@
           for (var i = 0; i < $scope.defaultServices.length; i++) {
             if (service.name === $scope.defaultServices[i].name) {
               $scope.defaultServices[i].picked = true;
+              break;
             }
           }
         }
@@ -121,6 +132,7 @@
           for (var i = 0; i < $scope.defaultServices.length; i++) {
             if (service.name === $scope.defaultServices[i].name) {
               $scope.defaultServices[i].picked = false;
+              break;
             }
           }
         }
@@ -197,6 +209,18 @@
 
           }
         };
+
+        function preSettupBlockTimeService(preSettupServiceList) {
+          if(preSettupServiceList && preSettupServiceList.length) {
+            for(var i=0; i<preSettupServiceList.length; i++) {
+              var setService = {
+                name: preSettupServiceList[i].name
+              };
+              pickDefaultService(setService);
+              $scope.blockTimeServices.push(setService);
+            }
+          }
+        }
 
         $scope.deleteBlockTimeService = function (blockTimeService) {
           for (var i = 0; i < $scope.blockTimeServices.length; i++) {
