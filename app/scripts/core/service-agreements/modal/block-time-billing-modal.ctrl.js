@@ -57,14 +57,14 @@
 
         function changeStartDate(){
           var date = $scope.blockTimeContract.startDate;
-          //var endDate = new Date(date);
+          var endDate = new Date(date);
           //console.log('endDate.getMonth() ', date.getMonth());
-          date.setMonth(date.getMonth() + 1);
+          endDate.setMonth(endDate.getMonth() + 1);
 
           //console.log(date);
 
-          $scope.blockTimeContract.endDate = $filter('date')(date, 'dd MMM yyyy');
-          $scope.blockTimeContract.minEndDate = $filter('date')(date, 'dd MMM yyyy');
+          $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+          $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()
         }
 
@@ -281,8 +281,8 @@
               id: null,
               description: contractData.description,
               type: 'BLOCK_TIME',
-              startDate: $scope.startDate,
-              endDate: $scope.endDate,
+              startDate: $filter('date')(new Date(contractData.startDate), 'yyyy/MM/dd'),
+              endDate: $filter('date')(new Date(contractData.endDate), 'yyyy/MM/dd'),
               interval: contractData.interval ,
               customInterval: null,
               billType: null,
