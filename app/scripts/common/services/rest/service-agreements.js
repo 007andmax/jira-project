@@ -27,6 +27,7 @@
       });
 
       RealTimeService.subscribe('/serviceAgreement', scope, function(newChange){
+        console.log('newChange ', newChange);
         if(newChange.action === 'SERVICE_AGREEMENT_SAVED') {
           agreements.push(newChange.data);
         } else if(newChange.action === 'SERVICE_AGREEMENT_DELETED') {
@@ -71,7 +72,21 @@
       Utils.handleCallback(future, callback)
     }
 
+    function deleteAgreement(id, callback) {
+      var future = $http({
+        method: 'DELETE',
+        url: '/serviceAgreements/'+id
+      });
+      Utils.handleCallback(future, callback)
+    }
 
+    function validateCrossingDatesHourly(startDate, endDate, companyId, callback) {
+      var future = $http({
+        method: 'GET',
+        url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId + '&startDate=' + startDate + '&endDate=' + endDate
+      });
+      Utils.handleCallback(future, callback)
+    }
 
 
 
@@ -80,7 +95,9 @@
       createContract: createContract,
       getAgreementCountByType: getAgreementCountByType,
       getAgreement: getAgreement,
-      terminate: terminate
+      terminate: terminate,
+      deleteAgreement: deleteAgreement,
+      validateCrossingDatesHourly: validateCrossingDatesHourly
     }
 
 

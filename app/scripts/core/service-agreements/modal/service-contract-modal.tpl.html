@@ -105,52 +105,42 @@
       </div>
     </div>
     <div class="col-md-12"></div>
-    <div class="col-md-3">
-      <div class="form-group">
-        Select Date:
-        <!--<input placeholder="Start Date" type="" class="form-control">-->
-        <!--<i class="report-calendar"></i>-->
-        <input type="text"
-               class="form-control has-dropdown readonly-normal"
-               name="StartDate"
-               readonly
-               date-format="dd/mm/yy"
-               date-range-picker="startDatePicker"
-               min-date="{{today}}"
-               ng-model="startDate"
-               placeholder="Start Date" required>
-        <i class="report-calendar"></i>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="form-group">
-        <!--<input placeholder="End Date" style="margin-top: 24px;" type="" class="form-control">-->
-        <!--<i class="report-calendar"></i>-->
-        <input style="margin-top: 25px;"
-               type="text"
-               class="form-control has-dropdown readonly-normal"
-               name="EndDate"
-               readonly
-               date-format="dd/mm/yy"
-               date-range-picker="endDatePicker"
-               min-date="{{minDateForEndDatePicker}}"
-               ng-model="endDate"
-               placeholder="End Date" required>
-        <i class="report-calendar"></i>
-      </div>
-    </div>
+
+
     <div class="col-md-3">
       <div class="form-group">
         Interval:
-        <!--<input type="text" placeholder="Select Interval" class="form-control">-->
-        <!--<i class="icn-sm icn-caret-gray"></i>-->
-        <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="serviceContract.interval"
+        <input custom-style="{'width':'100%'}" type="text" class="form-control"
+               ng-model="serviceContract.interval"
                uib-typeahead="interval for interval in intervals"
-               qt-typeahead-async-show-on-focus readonly>
-        <div typeahead-input-icon="serviceContracts.interval"></div>
+               qt-typeahead-async-show-on-focus readonly required>
+        <div typeahead-input-icon="serviceContract.interval"></div>
         <i class="icn-sm icn-caret-gray"></i>
       </div>
     </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        Select Date:
+
+        <input class="form-control" type="text" ng-model="serviceContract.startDate" placeholder="../../.."
+               readonly ng-change="changeStartDate()" name="startDate"
+               qt-data-time-picker  min-date="serviceContract.minStartDate">
+        <i class="icn-sm calendar"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+
+        <input style="margin-top: 25px;" type="text" placeholder="../../.."  readonly ng-if="reInitEndDate"
+               ng-model="serviceContract.endDate"
+               class="form-control" date-time-picker-with-period name="endDate"
+               default-date="serviceContract.endDate" min-date="serviceContract.minEndDate" period="serviceContract.period">
+
+        <i class="icn-sm calendar"></i>
+      </div>
+    </div>
+
+
     <div class="col-md-12"></div>
     <div class="col-md-1">
       <label class="control checkbox">
@@ -190,7 +180,7 @@
       </div>
     </div>
     <div class="col-md-12"></div>
-    <div class="bill-hide-content-item clearfix" ng-repeat="device in deviceServiceList" ng-show="serviceContract.contractType === 'DEVICE'">
+    <div class="bill-hide-content-item clearfix" ng-repeat="device in serviceContract.deviceServiceList" ng-show="serviceContract.contractType === 'DEVICE'">
       <div class="col-md-5 form-group">
         <input placeholder="Device Name" type="text" class="form-control" ng-model="device.deviceName">
       </div>
@@ -212,7 +202,7 @@
       </div>
     </div>
 
-    <div class="bill-hide-content-item clearfix" ng-repeat="user in usersServiceList" ng-show="serviceContract.contractType === 'USER'">
+    <div class="bill-hide-content-item clearfix" ng-repeat="user in serviceContract.usersServiceList" ng-show="serviceContract.contractType === 'USER'">
       <div class="col-md-5 form-group">
         <input placeholder="User Name" type="text" class="form-control" ng-model="user.userName">
       </div>
@@ -259,12 +249,58 @@
             <ul class="qt-table">
 
               <li
-                ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
-                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+                ng-repeat="product in serviceContract.productExpences track by (product.item ? product.item.versionedId.id + $index : $index)">
 
-                <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
+                <!--<div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>-->
+                <div>
+                  <div class="col-sm-7">
+                    <div uib-dropdown>
+                      <input type="text"
+                             name="productName"
+                             ng-model="product.name"
+                             ng-minlength="1"
+                             autocomplete="off"
+                             tabindex="5"
+                             placeholder="New Product"
+                             class="form-control form-control-dropdown dropdown-toggle"
+                             uib-typeahead="product.name for product in defaultProducts |  orderBy:'name'"
+                             qt-typeahead-show-on-focus
+                             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                             value="product">
+
+                      <div class="input-top-4" typeahead-input-icon="productName"></div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="Qty"
+                           ng-model="product.quantity" ng-maxlength="4" required
+                           name="productQty" hard-reset-required="true"
+
+                           hard-reset-pattern="numberPattern">
+                  </div>
+
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
+                           ng-required="true" ng-model="product.salePrice"
+                           hard-reset-pattern="decimalNumberPatternLow" hard-reset-required="true">
+                  </div>
+
+                  <div class="col-sm-1">
+                    <a class="hit-area  order-add-product has-tooltip"
+                       ng-click="addProductExpense()" tooltip-placement="top" uib-tooltip="Add Product" ng-show="$last">
+                      <i class="icn-sm icn-plus-dark"></i>
+                    </a>
+                    <a class="hit-area  has-tooltip" tooltip-placement="top" uib-tooltip="Delete" ng-show="!$last"
+                       ng-click="deleteProductExpense(product)">
+                      <i class="icon-sm icn-delete"></i>
+                    </a>
+                  </div>
+                </div>
 
               </li>
+
             </ul>
           </div>
 
@@ -272,12 +308,73 @@
             <ul class="qt-table">
 
               <li
-                ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
-                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+                ng-repeat="service in serviceContract.serviceExpences track by (service.item ? service.item.versionedId.id + $index : $index)">
 
-                <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
+                <!--<div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>-->
+                <div>
 
+                  <div class="col-sm-3">
+                    <div uib-dropdown>
+                      <input type="text"
+                             name="serviceName"
+                             ng-model="service.name"
+                             ng-minlength="1"
+                             autocomplete="off"
+                             tabindex="5"
+                             placeholder="Choose Service Expense"
+                             class="form-control form-control-dropdown dropdown-toggle"
+                             uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
+                             qt-typeahead-show-on-focus
+                             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                             value="service.name">
+
+                      <div class="input-top-4" typeahead-input-icon="newBlockTimeService.name"></div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2" service-quantity-picker="service.quantity" sqp-is-show-format="false">
+                    <input id="service-quantity-picker" type="text" class="form-control"
+                           placeholder="Hr(s) : Min(s)" sqp-input
+                           autocomplete="off" aria-expanded="true"/>
+
+                    <input type="hidden" name="serviceTime" ng-model="service.quantity" ng-required="true"/>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control service-description" placeholder="Description"
+                           ng-model="service.description" max-length-word="100"
+                           name="serviceDescription" ng-maxlength="2000">
+                  </div>
+
+                  <div class="col-sm-2">
+                    <div class="dropdown">
+                      <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                      <input type="text" qt-data-time-picker min-date="serviceContract.minStartDate"
+                             class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
+                             placeholder="Date" ng-model="service.date"
+                             name="serviceDate" ng-required="true">
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-1">
+                    <a class="hit-area  order-add-product has-tooltip"
+                       ng-click="addServiceExpense()" tooltip-placement="top" ng-show="$last"
+                       uib-tooltip="Add Service">
+                      <i class="icn-sm icn-plus-dark"></i>
+                    </a>
+                    <a class="hit-area  has-tooltip" tooltip-placement="top" uib-tooltip="Delete"  ng-show="!$last"
+                       ng-click="deleteServiceExpense(service)">
+                      <i class="icon-sm icn-delete"></i>
+                    </a>
+                  </div>
+
+
+                </div>
               </li>
+
+
             </ul>
           </div>
 

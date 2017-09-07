@@ -117,7 +117,7 @@
           }
         }
 
-        RealTimeService.subscribe('/service', scope, function (newChange) {
+        RealTimeService.subscribe('/services/getDefaultServices', scope, function (newChange) {
 
           if (newChange.action == 'SERVICE_SAVED') {
             serviceSaved(newChange.data);
@@ -334,7 +334,7 @@
       }
 
       function isNameUnique(name, modelId, callback) {
-        var future = $http.get('/services/isServiceNameUnique?name=' + name + (modelId ? '&id=' + modelId : ''));
+        var future = $http.get('/isDefaultServiceNameUnique?' + name + (modelId ? '&id=' + modelId : ''));
         Utils.handleCallback(future, callback);
       }
 
@@ -354,6 +354,15 @@
         }
       }
 
+      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, callback) {
+        var future = $http({
+          method: 'POST',
+          url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId,
+          data: serviceNamesList
+        });
+        Utils.handleCallback(future, callback);
+      }
+
       return {
 
         getAllByCompany: getAllByCompany,
@@ -366,7 +375,8 @@
         move: move,
         getActualMapping: getActualMapping,
         changeBillableStatus: changeBillableStatus,
-        isNameUnique: isNameUnique
+        isNameUnique: isNameUnique,
+        searchDuplicatedServiceNames: searchDuplicatedServiceNames
       }
 
     }]);

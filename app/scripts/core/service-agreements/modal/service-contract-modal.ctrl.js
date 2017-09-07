@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('serviceContractCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'ProductsService',
-      function ($scope, AgreementsService, CompaniesService, ServicesService, ProductsService) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'ProductsService', '$filter', '$timeout',
+      function ($scope, AgreementsService, CompaniesService, ServicesService, ProductsService, $filter, $timeout) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY'];
         $scope.serviceContractType = {
@@ -13,16 +13,66 @@
           OTHER: 'Other'
         };
         $scope.serviceContract = {
-          contractType: ''
+          contractType: '',
+          minStartDate: Date.now(),
+          includedHours: null,
+          blockRate: null,
+          interval: "MONTHLY",
+          deviceServiceList: [],
+          usersServiceList: [],
+          serviceExpences: [],
+          productExpences: []
         };
+        $scope.reInitEndDate = true;
 
-        $scope.deviceServiceList = [];
-        $scope.usersServiceList = [];
+        // $scope.deviceServiceList = [];
+        // $scope.usersServiceList = [];
 
         $scope.defaultServices = [];
         $scope.defaultProducts = [];
 
         $scope.openedTab = 'product';
+
+        var day = 1000 * 60 * 60 * 24;
+        var month = 30*day;
+
+        $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
+        $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+
+
+        $scope.serviceContract.period = $scope.serviceContract.interval === 'MONTHLY' ? 'Month' : 'Year';
+
+        function changeStartDate(){
+          var date = $scope.serviceContract.startDate;
+          var endDate = new Date(date);
+          //console.log('endDate.getMonth() ', date.getMonth());
+          endDate.setMonth(endDate.getMonth() + 1);
+
+          //console.log(date);
+
+          $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+          $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
+          reInitEndDate()
+        }
+
+        function reInitEndDate() {
+          $scope.reInitEndDate = false;
+          $timeout(function () {
+            $scope.reInitEndDate = true;
+          }, 0);
+        }
+
+        $scope.$watch(function (){
+          return $scope.serviceContract.interval;
+        }, function(interval){
+          $scope.serviceContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+        });
+
+        $scope.$watch(function () {
+          return $scope.serviceContract.startDate;
+        }, function(){
+          changeStartDate()
+        });
 
 
         ServicesService.getServicesData($scope, false, function (data) {
@@ -75,7 +125,7 @@
             deviceNumber: null,
             deviceCost: null
           };
-          $scope.deviceServiceList.push(device);
+          $scope.serviceContract.deviceServiceList.push(device);
         }
 
         $scope.addNewDevice = function () {
@@ -83,9 +133,9 @@
         };
 
         $scope.deleteDevice = function (device) {
-          for (var i = 0; i < $scope.deviceServiceList.length; i++) {
-            if ($scope.deviceServiceList[i] == device) {
-              $scope.deviceServiceList.splice(i, 1);
+          for (var i = 0; i < $scope.serviceContract.deviceServiceList.length; i++) {
+            if ($scope.serviceContract.deviceServiceList[i] == device) {
+              $scope.serviceContract.deviceServiceList.splice(i, 1);
               break;
             }
           }
@@ -100,7 +150,7 @@
             userNumber: null,
             userCost: null
           };
-          $scope.usersServiceList.push(device);
+          $scope.serviceContract.usersServiceList.push(device);
         }
 
         $scope.addNewUser = function () {
@@ -108,9 +158,9 @@
         };
 
         $scope.deleteUser = function (user) {
-          for (var i = 0; i < $scope.usersServiceList.length; i++) {
-            if ($scope.usersServiceList[i] == user) {
-              $scope.usersServiceList.splice(i, 1);
+          for (var i = 0; i < $scope.serviceContract.usersServiceList.length; i++) {
+            if ($scope.serviceContract.usersServiceList[i] == user) {
+              $scope.serviceContract.usersServiceList.splice(i, 1);
               break;
             }
           }
@@ -124,6 +174,39 @@
         $scope.isTabOpened = function(tab) {
           return $scope.openedTab === tab
         };
+
+        $scope.addServiceExpense = function() {
+          var newServiceExpense = {};
+          $scope.serviceContract.serviceExpences.push(newServiceExpense);
+        };
+
+        $scope.addServiceExpense();
+
+        $scope.deleteServiceExpense = function(service) {
+          for (var i = 0; i < $scope.serviceContract.serviceExpences.length; i++) {
+            if ($scope.serviceContract.serviceExpences[i] == service) {
+              $scope.serviceContract.serviceExpences.splice(i, 1);
+              break;
+            }
+          }
+        };
+
+        $scope.addProductExpense = function() {
+          var newProductExpense = {};
+          $scope.serviceContract.productExpences.push(newProductExpense);
+        };
+
+        $scope.addProductExpense();
+
+        $scope.deleteProductExpense = function(product) {
+          for (var i = 0; i < $scope.serviceContract.productExpences.length; i++) {
+            if ($scope.serviceContract.productExpences[i] == product) {
+              $scope.serviceContract.productExpences.splice(i, 1);
+              break;
+            }
+          }
+        };
+
 
         $scope.createServiceContract = function (form, serviceContract) {
           if (form.$valid) {

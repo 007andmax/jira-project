@@ -3,15 +3,18 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('quicktech.core.serviceAgreements.serviceAgreementsCtrl',
-    ['$scope', '$uibModal', 'AgreementsService','CompaniesService',
-      function ($scope, $uibModal, AgreementsService, CompaniesService) {
+    ['$scope', '$uibModal', 'AgreementsService', 'CompaniesService',
+      'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.UserNotificationService',
+      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService) {
 
         $scope.parseDate = Date.parse.bind(Date);
         $scope.filterType = 'company.name';
+        $scope.agreementsList = [];
 
         AgreementsService.getAllServiceAgreements($scope, function (data) {
-          $scope.agreementsList = [];
-          for(var i=0; i<data.length; i++) {
+
+          for (var i = 0; i < data.length; i++) {
             var agreement = data[i];
             agreement.company.name = getCompanyName(data[i].company.id);
             $scope.agreementsList.push(agreement)
@@ -22,26 +25,26 @@
         $scope.allCompnaies = CompaniesService.getAllCompanies();
 
         function getCompanyName(id) {
-          for(var i=0; i<$scope.allCompnaies.length; i++) {
-            if($scope.allCompnaies[i].id === id) {
+          for (var i = 0; i < $scope.allCompnaies.length; i++) {
+            if ($scope.allCompnaies[i].id === id) {
               return $scope.allCompnaies[i].name;
             }
           }
         }
 
-        $scope.changeFilterType = function(type) {
-          if($scope.filterType === type) {
-            $scope.filterType = "-"+$scope.filterType;
+        $scope.changeFilterType = function (type) {
+          if ($scope.filterType === type) {
+            $scope.filterType = "-" + $scope.filterType;
           } else {
             $scope.filterType = type;
           }
         };
 
-        $scope.getDateInCorrectFormat = function(date) {
+        $scope.getDateInCorrectFormat = function (date) {
           var newDate = new Date(date);
           if (newDate) {
             var endMonth = newDate.getMonth() + 1;
-            var correctDate = addZeroIfNeed(newDate.getDate()) + "/"+ addZeroIfNeed(endMonth) +"/"+ newDate.getFullYear();
+            var correctDate = addZeroIfNeed(newDate.getDate()) + "/" + addZeroIfNeed(endMonth) + "/" + newDate.getFullYear();
           }
           return correctDate;
         };
@@ -50,11 +53,29 @@
           return n < 10 ? '0' + n : '' + n;
         }
 
+        $scope.deleteAgreemenet = function (agreement) {
+          if (agreement && agreement.id) {
+            var confirmMessage = 'Are you sure you want to delete agreement?';
+            var confirmButton = 'Delete';
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              AgreementsService.deleteAgreement(agreement.id, function (resp) {
+                UserNotificationService.show('Agreement deleted', true);
+                console.log('Agreement delete', resp);
+              })
+            });
+
+          }
+        };
+
+        // $scope.divideButtons = function($event, action) {
+        //   $event.stopPropagation();
+        // }
+
 
         $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
           var companyForReadOnlyMode = {};
-          if(agreementId) {
-            AgreementsService.getAgreement(agreementId, function(resp) {
+          if (agreementId) {
+            AgreementsService.getAgreement(agreementId, function (resp) {
               console.log(resp);
               companyForReadOnlyMode = resp;
               openModal(contractType, editMode, companyForReadOnlyMode)
@@ -72,7 +93,7 @@
               case('HOURLY'):
                 template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
                 break;
-              case('BLOCK_TIME_BILLING'):
+              case('BLOCK_TIME'):
                 template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                 break;
               case('PER_USER/DEVICE_BILLING'):
@@ -91,7 +112,8 @@
               resolve: {
                 companyData: {
                   editMode: editMode,
-                  companyForReadOnlyMode: companyForReadOnlyMode
+                  companyForReadOnlyMode: companyForReadOnlyMode,
+                  contractType: contractType
                 }
               }
 
@@ -103,8 +125,8 @@
 
       }]).controller('serviceAgreementsModalCtrl', [
     '$scope', '$uibModalInstance', 'companyData', '$state',
-    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService',
-    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService) {
+    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService', '$filter', '$q',
+    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService, $filter, $q) {
 
       $scope.taxes = TaxesService.getAll();
       $scope.companyId = companyData.companyId;
@@ -115,6 +137,9 @@
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;
 
+      $scope.showErrorInHourlyContract = false;
+      $scope.errorMessage = '';
+
       $scope.today = Date.now();
 
       $scope.minDateForEndDatePicker;
@@ -122,7 +147,7 @@
 
       $scope.editMode = true;
 
-      if(companyData.editMode) {
+      if (companyData.editMode) {
 
         $scope.editContract = {};
         $scope.editContract.services = [];
@@ -136,8 +161,8 @@
               taxes: data[i].taxes || [],
               taxIds: data[i].taxIds || []
             };
-            if(data[i].taxIds && data[i].taxIds.length) {
-              for(var m=0; m<data[i].taxIds.length; m++) {
+            if (data[i].taxIds && data[i].taxIds.length) {
+              for (var m = 0; m < data[i].taxIds.length; m++) {
                 serv.taxIds.push(data[i].taxes[m].id)
               }
             }
@@ -150,11 +175,11 @@
         $scope.editContract = companyData.companyForReadOnlyMode;
 
         //create tax object by comparing taxIds and array of taxes
-        for(var e=0; e<$scope.editContract.services.length; e++) {
+        for (var e = 0; e < $scope.editContract.services.length; e++) {
           $scope.editContract.services[e].taxes = [];
-          for(var i=0; i<$scope.editContract.services[e].taxIds.length; i++) {
-            for(var m=0; m<$scope.taxes.length; m++) {
-              if($scope.editContract.services[e].taxIds[i] === $scope.taxes[m].id) {
+          for (var i = 0; i < $scope.editContract.services[e].taxIds.length; i++) {
+            for (var m = 0; m < $scope.taxes.length; m++) {
+              if ($scope.editContract.services[e].taxIds[i] === $scope.taxes[m].id) {
                 $scope.editContract.services[e].taxes.push($scope.taxes[m]);
                 console.log($scope.editContract.services[e])
               }
@@ -164,33 +189,33 @@
       }
 
 
-      if(companyData.editMode === false) {
+      if (companyData.editMode === false) {
         $scope.editMode = false;
       }
 
-      $scope.editService={
+      $scope.editService = {
         name: '',
         rate: null,
         billable: false,
         taxes: []
       };
 
-      $scope.$watch(function () {
-        return $scope.contractCompany;
-      }, function (company) {
-        $scope.blockHourlyChoice = false;
-        if(company) {
-          AgreementsService.getAgreementCountByType(company.id, 'HOURLY', function(resp) {
-
-            if(resp.HOURLY > 0) {
-              $scope.blockHourlyChoice = true;
-              if($scope.selectedContractType === 'HOURLY') {
-                $scope.selectedContractType = 'CREATE_NEW';
-              }
-            }
-          })
-        }
-      });
+      // $scope.$watch(function () {
+      //   return $scope.contractCompany;
+      // }, function (company) {
+      //   $scope.blockHourlyChoice = false;
+      //   if (company) {
+      //     AgreementsService.getAgreementCountByType(company.id, 'HOURLY', function (resp) {
+      //
+      //       if (resp.HOURLY > 0) {
+      //         $scope.blockHourlyChoice = true;
+      //         if ($scope.selectedContractType === 'HOURLY') {
+      //           $scope.selectedContractType = 'CREATE_NEW';
+      //         }
+      //       }
+      //     })
+      //   }
+      // });
 
       function setMiNDateForEndDate(date) {
         var d = new Date(date);
@@ -199,20 +224,24 @@
         console.log($scope.minDateForEndDatePicker);
       }
 
+      $scope.dateFilter = function (date) {
+        return $filter('date')(date, 'dd MMM yyyy');
+      };
 
-      $scope.startDatePicker = function(date) {
+
+      $scope.startDatePicker = function (date) {
         var startDate = new Date(date);
         if (startDate) {
           var startMonth = startDate.getMonth() + 1;
           $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
-          $scope.startDate =  $scope.editContract.startDate;
+          $scope.startDate = $scope.editContract.startDate;
         }
         var f = new Date(date);
 
         setMiNDateForEndDate(f.getTime());
       };
 
-      $scope.endDatePicker = function(date) {
+      $scope.endDatePicker = function (date) {
         var endDate = new Date(date);
         if (endDate) {
           var endMonth = endDate.getMonth() + 1;
@@ -226,14 +255,14 @@
       }
 
 
-      $scope.changeModalToShow = function() {
+      $scope.changeModalToShow = function () {
         $scope.modlToShow = $scope.selectedContractType
       };
 
-      $scope.selectContractType = function(type) {
-        if($scope.selectedContractType === type) {
+      $scope.selectContractType = function (type) {
+        if ($scope.selectedContractType === type) {
           $scope.selectedContractType = 'CREATE_NEW';
-        }else {
+        } else {
           $scope.selectedContractType = type;
         }
       };
@@ -255,8 +284,8 @@
             taxes: editService.taxes || [],
             taxIds: []
           };
-          if(editService.taxes.length) {
-            for(var i=0; i<editService.taxes.length; i++) {
+          if (editService.taxes.length) {
+            for (var i = 0; i < editService.taxes.length; i++) {
               newService.taxIds.push(editService.taxes[i].id)
             }
           }
@@ -290,21 +319,67 @@
       };
 
       $scope.isShowingErrors = function (form, fieldName) {
-        return form[fieldName] &&  form[fieldName].$dirty && form[fieldName].$invalid;
+        return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
       };
 
 
-      $scope.createContract = function() {
-        var servicesWithTaxIds = [];
+
+      function validateCrossingDatesHourly() {
+
+        var deferred = $q.defer();
+
+        var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+        AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
+          console.log('validateCrossingDatesHourly ',resp.valid);
+          if(resp.valid == true) {
+            deferred.resolve(resp)
+          } else {
+            $scope.showErrorInHourlyContract = true;
+            $scope.errorMessage = 'Not valid Dates';
+            deferred.reject();
+          }
+
+        });
+        return deferred.promise;
+      }
+
+      function checkForDuplicateServiceNames() {
+
+        var deferred = $q.defer();
+
+        var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+        var serviceNamesList = [];
         for(var i=0; i<$scope.editContract.services.length; i++) {
+          serviceNamesList.push($scope.editContract.services[i].name);
+        }
+        ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, function(resp) {
+          if(Object.keys(resp).length === 0) {
+            console.log(' searchDuplicatedServiceNames true');
+            deferred.resolve(resp);
+          } else {
+            console.log(' searchDuplicatedServiceNames false');
+            $scope.showErrorInHourlyContract = true;
+            $scope.errorMessage = 'Duplicates in services list';
+            deferred.reject();
+
+          }
+        });
+        return deferred.promise;
+      }
+
+
+
+      function createHourlyContract() {
+        var servicesWithTaxIds = [];
+        for (var i = 0; i < $scope.editContract.services.length; i++) {
           var correctService = {
             name: $scope.editContract.services[i].name,
             rate: $scope.editContract.services[i].rate,
             billable: $scope.editContract.services[i].billable,
             taxIds: []
           };
-          if($scope.editContract.services[i].taxes.length) {
-            for(var n=0; n<$scope.editContract.services[i].taxes.length; n++) {
+          if ($scope.editContract.services[i].taxes.length) {
+            for (var n = 0; n < $scope.editContract.services[i].taxes.length; n++) {
               correctService.taxIds.push($scope.editContract.services[i].taxes[n].id)
             }
           }
@@ -313,30 +388,58 @@
 
         var companyContractInfo = {
           description: $scope.editContract.description,
-          startDate: $scope.editContract.startDate,
-          endDate: $scope.editContract.endDate,
-          companyId: $scope.editContract.companyId || companyData.companyId ||  $scope.contractCompany.id,
+          startDate: new Date($scope.editContract.startDate).getTime(),
+          endDate: new Date($scope.editContract.endDate).getTime(),
+          companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id,
           services: servicesWithTaxIds,
           // type: companyData.type || $scope.modlToShow
           type: 'HOURLY'
         };
 
         console.log(companyContractInfo);
-        AgreementsService.createContract(companyContractInfo, function(resp) {
+        AgreementsService.createContract(companyContractInfo, function (resp) {
           console.log(resp);
           $scope.closeModal();
         })
+      }
+
+      $scope.validateAndCreateHourlyContract = function() {
+
+        validateCrossingDatesHourly().then(function(resp) {
+          //console.log('1 ', resp);
+          if(resp){
+            checkForDuplicateServiceNames().then(function(resp){
+              //console.log('2 ', resp);
+              if(resp){
+                createHourlyContract();
+              }
+            })
+          }
+        });
       };
 
-      $scope.terminateContract = function() {
-        AgreementsService.terminate($scope.editContract.id, function(resp) {
+      $scope.dissableHourlyCreateButton = function() {
+        if($scope.editContract.startDate &&
+          $scope.editContract.endDate &&
+          $scope.editContract.description &&
+          $scope.editContract.services.length > 0) {
+            return false
+        } else {
+          return true
+        }
+      };
+
+
+
+      $scope.terminateContract = function () {
+        AgreementsService.terminate($scope.editContract.id, function (resp) {
           $scope.closeModal()
         })
       };
 
-      $scope.terminateAndCopy = function() {
-        AgreementsService.terminate($scope.editContract.id, function(resp) {
-          $scope.editContract.description = $scope.editContract.description +' COPY';
+      $scope.terminateAndCopy = function () {
+        AgreementsService.terminate($scope.editContract.id, function (resp) {
+          $scope.editContract.description = $scope.editContract.description + ' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;
         })
@@ -355,7 +458,6 @@
   ])
 
 }());
-
 
 
 // у таксов нету origin

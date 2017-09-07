@@ -11,7 +11,7 @@
           <i ng-show="filterType === 'description'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-description'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
-        <div class="col-md-2"><strong ng-click="changeFilterType('type')">Contract Type</strong>
+        <div class="col-md-1"><strong ng-click="changeFilterType('type')">Contract Type</strong>
           <i ng-show="filterType === 'type'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-type'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
@@ -35,17 +35,21 @@
           <i ng-show="filterType === 'amount'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-amount'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
+        <div class="col-md-1" style="text-align: center">
+          <strong ng-click="changeFilterType('amount')">Action</strong>
+        </div>
       </li>
 
       <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3">{{agreement.description}}</div>
-        <div class="col-md-2">{{agreement.type}}</div>
+        <div class="col-md-1">{{agreement.type}}</div>
         <div class="col-md-1" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{agreement.status}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
         <div class="col-md-1"><div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div></div>
         <div class="col-md-1" style="text-align: center">{{agreement.amount}}</div>
+        <div class="col-md-1" style="text-align: center"> <i class="icon-sm icn-delete" ng-click="deleteAgreemenet(agreement); $event.stopPropagation();"></i> </div>
       </li>
 
     </ul>
