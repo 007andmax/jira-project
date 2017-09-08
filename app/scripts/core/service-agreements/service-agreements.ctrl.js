@@ -390,7 +390,7 @@
           description: $scope.editContract.description,
           startDate: new Date($scope.editContract.startDate).getTime(),
           endDate: new Date($scope.editContract.endDate).getTime(),
-          companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id,
+          companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id || $scope.companyId,
           services: servicesWithTaxIds,
           // type: companyData.type || $scope.modlToShow
           type: 'HOURLY'

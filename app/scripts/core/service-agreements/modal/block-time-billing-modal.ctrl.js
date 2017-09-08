@@ -58,7 +58,7 @@
 
         $scope.clients = [];
         $scope.getClients = function() {
-          var companyId = $scope.companyId || $scope.contractCompany.id;
+          var companyId = returnCompanyId();
           $scope.clients = UsersService.getAllByCompanyId(companyId);
 
         };
@@ -293,13 +293,25 @@
           }
         };
 
+        function returnCompanyId() {
+          var id;
+          if($scope.blockTimeContract.companyId) {
+            id = $scope.blockTimeContract.companyId
+          } else if ($scope.contractCompany && $scope.contractCompany.id) {
+            id = $scope.contractCompany.id
+          } else  {
+            id = $scope.companyId;
+          }
+          return id;
+        }
+
         function checkForDuplicateServiceNames(serviceList) {
 
           var deferred = $q.defer();
           var startDate = $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
           var endDate = $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
 
-          var companyId = $scope.blockTimeContract.companyId || $scope.contractCompany.id || companyData.companyId;
+          var companyId = returnCompanyId();
           var serviceNamesList = [];
           for(var i=0; i<serviceList.length; i++) {
             serviceNamesList.push(serviceList[i].name);
@@ -336,7 +348,7 @@
               totalHours: contractData.totalHours,
               blockRate: contractData.blockRate,
               rateExceeding: contractData.rateExceeding,
-              companyId: $scope.companyId || $scope.contractCompany.id,
+              companyId: returnCompanyId(),
               services: [],
               blockTimeServices: [],
               enableTimeRollover: contractData.enableTimeRollover || false,

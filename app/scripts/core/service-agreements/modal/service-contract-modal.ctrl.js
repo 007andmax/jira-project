@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('serviceContractCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'ProductsService', '$filter', '$timeout',
-      function ($scope, AgreementsService, CompaniesService, ServicesService, ProductsService, $filter, $timeout) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
+      'ProductsService', '$filter', '$timeout', 'TaxesService',
+      function ($scope, AgreementsService, CompaniesService, ServicesService, ProductsService, $filter, $timeout, TaxesService) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY'];
         $scope.serviceContractType = {
@@ -12,21 +13,20 @@
           USER: 'By Users',
           OTHER: 'Other'
         };
+
+        $scope.taxes = TaxesService.getAll();
         $scope.serviceContract = {
-          contractType: '',
+          billType: '',
           minStartDate: Date.now(),
           includedHours: null,
           blockRate: null,
           interval: "MONTHLY",
-          deviceServiceList: [],
-          usersServiceList: [],
-          serviceExpences: [],
-          productExpences: []
+          serviceContractServices: [],
+          services: [],
+          serviceExpenses: [],
+          productExpenses: []
         };
         $scope.reInitEndDate = true;
-
-        // $scope.deviceServiceList = [];
-        // $scope.usersServiceList = [];
 
         $scope.defaultServices = [];
         $scope.defaultProducts = [];
@@ -45,11 +45,7 @@
         function changeStartDate(){
           var date = $scope.serviceContract.startDate;
           var endDate = new Date(date);
-          //console.log('endDate.getMonth() ', date.getMonth());
           endDate.setMonth(endDate.getMonth() + 1);
-
-          //console.log(date);
-
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()
@@ -113,7 +109,7 @@
 
 
         $scope.changeContractType = function (type) {
-          $scope.serviceContract.contractType = type;
+          $scope.serviceContract.billType = type;
         };
 
 
@@ -121,11 +117,13 @@
 
         function createNewDevice() {
           var device = {
-            deviceName: null,
-            deviceNumber: null,
-            deviceCost: null
+            name: null,
+            count: null,
+            rate: null,
+            taxIds: [],
+            taxes: []
           };
-          $scope.serviceContract.deviceServiceList.push(device);
+          $scope.serviceContract.serviceContractServices.push(device);
         }
 
         $scope.addNewDevice = function () {
@@ -133,9 +131,9 @@
         };
 
         $scope.deleteDevice = function (device) {
-          for (var i = 0; i < $scope.serviceContract.deviceServiceList.length; i++) {
-            if ($scope.serviceContract.deviceServiceList[i] == device) {
-              $scope.serviceContract.deviceServiceList.splice(i, 1);
+          for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
+            if ($scope.serviceContract.serviceContractServices[i] == device) {
+              $scope.serviceContract.serviceContractServices.splice(i, 1);
               break;
             }
           }
@@ -146,11 +144,13 @@
 
         function createNewUser() {
           var device = {
-            userName: null,
-            userNumber: null,
-            userCost: null
+            name: null,
+            rate: null,
+            billable: false,
+            taxIds: [],
+            taxes: []
           };
-          $scope.serviceContract.usersServiceList.push(device);
+          $scope.serviceContract.services.push(device);
         }
 
         $scope.addNewUser = function () {
@@ -158,9 +158,9 @@
         };
 
         $scope.deleteUser = function (user) {
-          for (var i = 0; i < $scope.serviceContract.usersServiceList.length; i++) {
-            if ($scope.serviceContract.usersServiceList[i] == user) {
-              $scope.serviceContract.usersServiceList.splice(i, 1);
+          for (var i = 0; i < $scope.serviceContract.services.length; i++) {
+            if ($scope.serviceContract.services[i] == user) {
+              $scope.serviceContract.services.splice(i, 1);
               break;
             }
           }
@@ -177,15 +177,15 @@
 
         $scope.addServiceExpense = function() {
           var newServiceExpense = {};
-          $scope.serviceContract.serviceExpences.push(newServiceExpense);
+          $scope.serviceContract.serviceExpenses.push(newServiceExpense);
         };
 
         $scope.addServiceExpense();
 
         $scope.deleteServiceExpense = function(service) {
-          for (var i = 0; i < $scope.serviceContract.serviceExpences.length; i++) {
-            if ($scope.serviceContract.serviceExpences[i] == service) {
-              $scope.serviceContract.serviceExpences.splice(i, 1);
+          for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
+            if ($scope.serviceContract.serviceExpenses[i] == service) {
+              $scope.serviceContract.serviceExpenses.splice(i, 1);
               break;
             }
           }
@@ -193,15 +193,15 @@
 
         $scope.addProductExpense = function() {
           var newProductExpense = {};
-          $scope.serviceContract.productExpences.push(newProductExpense);
+          $scope.serviceContract.productExpenses.push(newProductExpense);
         };
 
         $scope.addProductExpense();
 
         $scope.deleteProductExpense = function(product) {
-          for (var i = 0; i < $scope.serviceContract.productExpences.length; i++) {
-            if ($scope.serviceContract.productExpences[i] == product) {
-              $scope.serviceContract.productExpences.splice(i, 1);
+          for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
+            if ($scope.serviceContract.productExpenses[i] == product) {
+              $scope.serviceContract.productExpenses.splice(i, 1);
               break;
             }
           }
@@ -219,12 +219,70 @@
               interval: serviceContract.interval,
               customInterval: null,
               billType: serviceContract.contractType,
-              companyId: $scope.companyId || $scope.contractCompany.id,
+              companyId: $scope.companyId || $scope.contractCompany.id || $scope.serviceContract.companyId,
               services: [],
               serviceContractServices: [],
               serviceExpenses: [],
               productExpenses: []
             };
+            if(serviceContract.services && serviceContract.services.length) {
+              for(var i=0; i<serviceContract.services.length; i++) {
+                var serv = {
+                  name: serviceContract.services[i].name,
+                  rate: serviceContract.services[i].rate,
+                  billable: serviceContract.services[i].billable,
+                  taxIds: []
+                };
+                if(serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
+                  for(var n=0; n<serviceContract.services[i].taxes.length; n++) {
+                    serv.taxIds.push(serviceContract.services[i].taxes[n].id);
+                  }
+                }
+                servContract.services.push(serv);
+              }
+            }
+
+            if(serviceContract.serviceContractServices && serviceContract.serviceContractServices.length) {
+              for(var m=0; m<serviceContract.serviceContractServices.length; m++) {
+                var scs = {
+                  name: serviceContract.serviceContractServices[m].name,
+                  rate: serviceContract.serviceContractServices[m].rate,
+                  count: serviceContract.serviceContractServices[m].count,
+                  taxIds: []
+                };
+                if(serviceContract.serviceContractServices[m].taxes && serviceContract.serviceContractServices[m].taxes.length) {
+                  for(var j=0; j<serviceContract.serviceContractServices[m].taxes.length; j++) {
+                    scs.taxIds.push(serviceContract.serviceContractServices[m].taxes[j].id);
+                  }
+                }
+                servContract.services.push(scs);
+              }
+            }
+
+            if(serviceContract.serviceExpenses && serviceContract.serviceExpenses.length) {
+              for(var u=0; u<serviceContract.serviceExpenses.length; u++) {
+                var servExp = {
+                  serviceId: serviceContract.serviceExpeses[u].name.serviceId,
+                  quantity: serviceContract.serviceExpeses[u].quantuty,
+                  description: serviceContract.serviceExpeses[u].description,
+                  date: new Date(serviceContract.serviceExpeses[u].date).getTime()
+                };
+                servContract.serviceExpenses.push(servExp);
+              }
+            }
+
+            if(serviceContract.productExpenses && serviceContract.productExpenses.length) {
+              for(var t=0; t<serviceContract.productExpenses.length; t++) {
+                var prodExp = {
+                  productId: serviceContract.productExpenses[t].name.productId,
+                  quantity: serviceContract.productExpenses[t].quantity,
+                  salePrice: serviceContract.productExpenses[t].salePrice
+                };
+                servContract.productExpenses.push(prodExp);
+              }
+            }
+
+            console.log(servContract);
 
 
             AgreementsService.createContract(servContract, function (resp) {
