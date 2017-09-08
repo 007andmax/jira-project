@@ -6,7 +6,7 @@
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter', '$timeout', '$q',
       function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter, $timeout, $q) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30days', '15 days', '7 days'];
 
         $scope.parseDate = Date.parse.bind(Date);
 
@@ -85,7 +85,19 @@
         $scope.$watch(function (){
           return $scope.blockTimeContract.interval;
         }, function(interval){
-          $scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+          //$scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+          if(interval === 'Monthly') {
+            $scope.blockTimeContract.period = 'Month';
+          } else if (interval === 'TEarly') {
+            $scope.blockTimeContract.period = 'Year';
+          } else if(interval === '30 days') {
+            $scope.blockTimeContract.period = 30;
+          } else if(interval === '15 days') {
+            $scope.blockTimeContract.period = 15;
+          } else if (interval === '7 days') {
+            $scope.blockTimeContract.period = 7;
+          }
+          reInitEndDate()
         });
 
         $scope.$watch(function () {
