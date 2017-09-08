@@ -173,6 +173,8 @@
       } else {
         console.log(companyData);
         $scope.editContract = companyData.companyForReadOnlyMode;
+        $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'yyyy/MM/dd');
+        $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'yyyy/MM/dd');
 
         //create tax object by comparing taxIds and array of taxes
         for (var e = 0; e < $scope.editContract.services.length; e++) {
