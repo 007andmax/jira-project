@@ -86,9 +86,9 @@
           return $scope.blockTimeContract.interval;
         }, function(interval){
           //$scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
-          if(interval === 'Monthly') {
+          if(interval === 'MONTHLY') {
             $scope.blockTimeContract.period = 'Month';
-          } else if (interval === 'TEarly') {
+          } else if (interval === 'YEARLY') {
             $scope.blockTimeContract.period = 'Year';
           } else if(interval === '30 days') {
             $scope.blockTimeContract.period = 30;
