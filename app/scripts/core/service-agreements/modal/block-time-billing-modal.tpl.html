@@ -221,7 +221,7 @@
               <div class="col-md-1">Tax</div>
               <div class="col-md-1">Action</div>
 
-              <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.contractServices">
+              <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <div class="col-md-5 form-group">
                   <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name">
                 </div>
@@ -344,8 +344,8 @@
             <p class="col-md-12">Vereburn - Monthly Block Time</p>
             <div class="col-md-6">
               <p>Rollover: <span>{{blockTimeContract.enableTimeRollover}}</span></p>
-              <p>Included After Hours: <span>No</span></p>
-              <p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>
+              <!--<p>Included After Hours: <span>No</span></p>-->
+              <!--<p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>-->
             </div>
             <div class="col-md-6">
               <p>Start Date: <span>{{dateFilter(blockTimeContract.startDate)}}</span></p>
@@ -579,8 +579,8 @@
             <p class="col-md-12">Vereburn - Monthly Block Time</p>
             <div class="col-md-6">
               <p>Rollover: <span>{{blockTimeContract.enableTimeRollover}}</span></p>
-              <p>Included After Hours: <span>No</span></p>
-              <p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>
+              <!--<p>Included After Hours: <span>No</span></p>-->
+              <!--<p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>-->
             </div>
             <div class="col-md-6">
               <p>Start Date: <span>{{dateFilter(blockTimeContract.startDate)}}</span></p>

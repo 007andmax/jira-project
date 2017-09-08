@@ -18,7 +18,7 @@
 
         $scope.defaultServices = [];
         $scope.blockTimeServices = [];
-        $scope.contractServices = [];
+        $scope.services = [];
 
         $scope.reInitEndDate = true;
 
@@ -42,10 +42,11 @@
             blockRate: null,
             interval: "MONTHLY",
             blockTimeServices: [],
-            contractServices: []
+            services: []
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
+          $scope.blockTimeContract = $scope.blockTimeContract + 'COPY';
           $scope.blockTimeContract.minStartDate = Date.now();
         }
 
@@ -173,7 +174,7 @@
             }
             var unDefServ = checkUniqueServiceName($scope.defaultServices, name);
             var unBlockTimeServ = checkUniqueServiceName($scope.blockTimeContract.blockTimeServices, name);
-            var unContractServ = checkUniqueServiceName($scope.blockTimeContract.contractServices, name);
+            var unContractServ = checkUniqueServiceName($scope.blockTimeContract.services, name);
             return (unDefServ && unBlockTimeServ && unContractServ)
           }
         };
@@ -247,7 +248,7 @@
                   billable: service.billable,
                   taxes: service.taxes
                 };
-                $scope.blockTimeContract.contractServices.push(ns);
+                $scope.blockTimeContract.services.push(ns);
                 pickDefaultService(ns);
                 $scope.newContractService = {
                   name: '',
@@ -257,7 +258,7 @@
                 };
               } else {
 
-                $scope.blockTimeContract.contractServices.push(service);
+                $scope.blockTimeContract.services.push(service);
                 pickDefaultService(service);
                 $scope.newContractService = {
                   name: '',
@@ -271,9 +272,9 @@
         };
 
         $scope.deleteContractService = function (contractService) {
-          for (var i = 0; i < $scope.blockTimeContract.contractServices.length; i++) {
-            if ($scope.blockTimeContract.contractServices[i].name === contractService.name) {
-              $scope.blockTimeContract.contractServices.splice(i, 1);
+          for (var i = 0; i < $scope.blockTimeContract.services.length; i++) {
+            if ($scope.blockTimeContract.services[i].name === contractService.name) {
+              $scope.blockTimeContract.services.splice(i, 1);
               unpickDefaultService(contractService);
             }
           }
@@ -365,16 +366,16 @@
               blockContract.blockTimeServices.push(bs);
             }
 
-            for(var m=0; m<$scope.blockTimeContract.contractServices.length; m++) {
+            for(var m=0; m<$scope.blockTimeContract.services.length; m++) {
               var cs = {
-                name: $scope.blockTimeContract.contractServices[m].name,
-                rate: $scope.blockTimeContract.contractServices[m].rate,
-                billable: $scope.blockTimeContract.contractServices[m].billable,
+                name: $scope.blockTimeContract.services[m].name,
+                rate: $scope.blockTimeContract.services[m].rate,
+                billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: []
               };
-              if($scope.blockTimeContract.contractServices[m].taxes.length) {
-                for(var n=0; n<$scope.blockTimeContract.contractServices[m].taxes.length; n++) {
-                  cs.taxIds.push($scope.blockTimeContract.contractServices[m].taxes[n].id)
+              if($scope.blockTimeContract.services[m].taxes.length) {
+                for(var n=0; n<$scope.blockTimeContract.services[m].taxes.length; n++) {
+                  cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
                 }
               }
               blockContract.services.push(cs);
@@ -401,7 +402,7 @@
         $scope.validateAndCreteBlockTimeContract = function(blockTimeContract) {
           checkForDuplicateServiceNames(blockTimeContract.blockTimeServices).then(function(resp){
             if(resp) {
-              checkForDuplicateServiceNames(blockTimeContract.contractServices).then(function(resp){
+              checkForDuplicateServiceNames(blockTimeContract.services).then(function(resp){
                 if(resp) {
                   createBlockTimeContract(blockTimeContract)
                 }
