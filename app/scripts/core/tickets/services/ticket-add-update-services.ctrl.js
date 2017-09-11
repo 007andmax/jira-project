@@ -3,11 +3,10 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateServicesCtrl',
-      ['$scope', 'ServicesService',
-        function ($scope, ServicesService) {
+      ['$scope',
+        function ($scope) {
 
           $scope.isValidNewExpenseOrNote = false;
-          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id);
 
           if (!($scope.ticketUpdate && $scope.ticketUpdate.services && $scope.ticketUpdate.services.length)) {
             setTicketUpdateToDefault();

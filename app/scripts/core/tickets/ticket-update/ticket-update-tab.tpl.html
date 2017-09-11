@@ -1,4 +1,5 @@
-<div class="ticket-post-update-wrapper" ng-form="ticketUpdateForm">
+<div class="ticket-post-update-wrapper" ng-form="ticketUpdateForm"
+  ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
 
   <!--<div class="btn btn-primary pull-right has-tooltip" custom-disabled="{{ true }}"-->
   <!--tooltip-placement="top" uib-tooltip="Remote Access" style="width: 92px;">-->
@@ -114,7 +115,7 @@
 
 
 
-        <div class="service-not-yet" ng-show="false">
+        <div class="service-not-yet" ng-show="serviceList.length === 0">
           <img src="images/hourly.svg" alt="">
           <p>No service Set up yet, <br>
             click on button to set up service</p>
@@ -123,7 +124,7 @@
 
 
 
-        <div class="ticket-add-content clearfix">
+        <div class="ticket-add-content clearfix" ng-if="serviceList.length">
 
           <div>
             <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
