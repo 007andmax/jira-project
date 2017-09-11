@@ -6,7 +6,7 @@
   var services = angular.module('main.services');
 
   services.factory('AgreementsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
-    function ($http, $rootScope, RealTimeService, Utils ) {
+    function ($http, $rootScope, RealTimeService, Utils) {
 
 
       function getServiceAgreements(callback) {

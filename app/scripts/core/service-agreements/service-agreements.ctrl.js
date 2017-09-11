@@ -393,13 +393,25 @@
 
         var companyContractInfo = {
           description: $scope.editContract.description,
-          startDate: new Date($scope.editContract.startDate).getTime(),
-          endDate: new Date($scope.editContract.endDate).getTime(),
           companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id || $scope.companyId,
           services: servicesWithTaxIds,
           // type: companyData.type || $scope.modlToShow
           type: 'HOURLY'
         };
+
+        var sd = new Date($scope.editContract.startDate);
+        sd.setHours(0,0,0,0);
+        sd.setSeconds(0);
+        sd.setMilliseconds(0);
+        console.log(sd);
+        companyContractInfo.startDate = sd.getTime();
+
+        var ed = new Date($scope.editContract.endDate);
+        ed.setHours(23,59,0,0);
+        ed.setSeconds(0);
+        ed.setMilliseconds(0);
+        console.log(ed);
+        companyContractInfo.endDate = ed.getTime();
 
         console.log(companyContractInfo);
         AgreementsService.createContract(companyContractInfo, function (resp) {
