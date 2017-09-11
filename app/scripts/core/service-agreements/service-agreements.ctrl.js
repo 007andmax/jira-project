@@ -155,6 +155,7 @@
 
       if (companyData.editMode) {
 
+
         $scope.editContract = {};
         $scope.editContract.services = [];
 

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter', '$timeout', '$q',
-      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter, $timeout, $q) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter', '$timeout', '$q', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter, $timeout, $q, UserConfirmationsService) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30days', '15 days', '7 days'];
 
@@ -33,8 +33,15 @@
           taxes: []
         };
 
+        $scope.showNewBlockTimeServiceError = false;
+        $scope.showNewServiceError = false;
+        $scope.newBlockTimeServiceErrorMessage = '';
+        $scope.newServiceErrorMessage = '';
+
         var day = 1000 * 60 * 60 * 24;
         var month = 30*day;
+
+
 
         if($scope.editMode) {
           $scope.blockTimeContract = {
@@ -50,6 +57,13 @@
           //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
           $scope.blockTimeContract.minStartDate = Date.now();
         }
+
+        $scope.newContractService = {
+          name: '',
+          rate: 0,
+          billable: false,
+          taxes: []
+        };
 
 
         $scope.blockTimeContract.minEndDate = $scope.blockTimeContract.minStartDate + month;
@@ -220,20 +234,31 @@
         };
 
         $scope.addNewBlockTimeService = function (form, service) {
+          $scope.showNewBlockTimeServiceError = false;
           if (form.$valid && service.name) {
-            if (service.name.name && service.name.name.length) {
-              var ns = {
-                name: service.name.name
-              };
-              $scope.blockTimeContract.blockTimeServices.push(ns);
-              pickDefaultService(ns);
-              $scope.newBlockTimeService = {};
+            if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+              $scope.showNewBlockTimeServiceError = true;
+              $scope.newBlockTimeServiceErrorMessage = 'Please enter start and end date to check service name';
             } else {
+              validateNewServiceName(service, 'block').then(function(resp) {
+                if(resp) {
+                  if (service.name.name && service.name.name.length) {
+                    var ns = {
+                      name: service.name.name
+                    };
+                    $scope.blockTimeContract.blockTimeServices.push(ns);
+                    pickDefaultService(ns);
+                    $scope.newBlockTimeService = {};
+                  } else {
 
-              $scope.blockTimeContract.blockTimeServices.push(service);
-              pickDefaultService(service);
-              $scope.newBlockTimeService = {};
+                    $scope.blockTimeContract.blockTimeServices.push(service);
+                    pickDefaultService(service);
+                    $scope.newBlockTimeService = {};
+                  }
+                }
+              })
             }
+
           }
         };
 
@@ -260,36 +285,47 @@
 
 
         $scope.addContractService = function (form, service) {
+          $scope.showNewServiceError = false;
             if(form.$valid && service.name) {
-              if (service.name.name && service.name.name.length) {
-                var ns = {
-                  name: service.name.name,
-                  rate: service.rate,
-                  billable: service.billable,
-                  taxes: service.taxes
-                };
-                $scope.blockTimeContract.services.push(ns);
-                pickDefaultService(ns);
-                $scope.newContractService = {
-                  name: '',
-                  rate: 0,
-                  billable: false,
-                  taxes: []
-                };
-                reInitServiceForm()
+              if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+                $scope.showNewServiceError = true;
+                $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
               } else {
+                validateNewServiceName(service, 'service').then(function(resp) {
+                  if(resp) {
+                    if (service.name.name && service.name.name.length) {
+                      var ns = {
+                        name: service.name.name,
+                        rate: service.rate,
+                        billable: service.billable,
+                        taxes: service.taxes
+                      };
+                      $scope.blockTimeContract.services.push(ns);
+                      pickDefaultService(ns);
+                      $scope.newContractService = {
+                        name: '',
+                        rate: 0,
+                        billable: false,
+                        taxes: []
+                      };
+                      reInitServiceForm()
+                    } else {
 
-                $scope.blockTimeContract.services.push(service);
-                pickDefaultService(service);
-                $scope.newContractService = {
-                  name: '',
-                  rate: 0,
-                  billable: false,
-                  taxes: []
-                };
-                reInitServiceForm()
+                      $scope.blockTimeContract.services.push(service);
+                      pickDefaultService(service);
+                      $scope.newContractService = {
+                        name: '',
+                        rate: 0,
+                        billable: false,
+                        taxes: []
+                      };
+                      reInitServiceForm()
 
+                    }
+                  }
+                })
               }
+
             }
         };
 
@@ -351,6 +387,36 @@
 
             }
           });
+          return deferred.promise;
+        }
+
+        function validateNewServiceName(newService, serviceType) {
+          $scope.showNewBlockTimeServiceError = false;
+          $scope.showNewServiceError = false;
+          var deferred = $q.defer();
+          if(newService && newService.name) {
+
+            var companyId = returnCompanyId();
+            var name = [];
+            name.push(newService.name);
+
+            var startDate = $filter('date')($scope.blockTimeContract.startDate, 'yyyy/MM/dd');
+            var endDate = $filter('date')($scope.blockTimeContract.endDate, 'yyyy/MM/dd');
+            ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function(resp) {
+              if(Object.keys(resp).length === 0) {
+                deferred.resolve(resp);
+              } else {
+                deferred.reject();
+                if(serviceType ==='block') {
+                  $scope.showNewBlockTimeServiceError = true;
+                  $scope.newBlockTimeServiceErrorMessage = 'Service name is duplicate';
+                } else {
+                  $scope.showNewServiceError = true;
+                  $scope.newServiceErrorMessage = 'Service name is duplicate';
+                }
+              }
+            });
+          }
           return deferred.promise;
         }
 
@@ -431,16 +497,37 @@
           }
         }
 
-        $scope.validateAndCreteBlockTimeContract = function(blockTimeContract) {
-          checkForDuplicateServiceNames(blockTimeContract.blockTimeServices).then(function(resp){
-            if(resp) {
-              checkForDuplicateServiceNames(blockTimeContract.services).then(function(resp){
-                if(resp) {
+        $scope.validateAndCreteBlockTimeContract = function(blockTimeContract, newBlockTimeService, newService) {
+          var emptyServices = true;
+          if((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)){
+            emptyServices = false;
+            var confirmMessage = 'You have filled service name field but didnt added it to contract service list. Are you sure you want to create contract ?';
+            var confirmButton = 'Yes, create';
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              emptyServices = true;
+              validateAndCreate(blockTimeContract);
+            });
+          } else {
+            validateAndCreate(blockTimeContract);
+          }
+
+          function validateAndCreate(blockTimeContract) {
+            checkForDuplicateServiceNames(blockTimeContract.blockTimeServices).then(function(resp){
+              if(resp) {
+                if(blockTimeContract.services && blockTimeContract.services.length) {
+                  checkForDuplicateServiceNames(blockTimeContract.services).then(function(resp){
+                    if(resp) {
+                      createBlockTimeContract(blockTimeContract)
+                    }
+                  })
+                } else {
                   createBlockTimeContract(blockTimeContract)
                 }
-              })
-            }
-          })
+
+              }
+            })
+          }
+
         }
 
       }])

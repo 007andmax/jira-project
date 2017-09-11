@@ -11,9 +11,11 @@
       </div>
       <div class="service-contract-details clearfix">
         <div class="col-md-8">
-          <div class="form-group">
+          <div class="form-group"
+               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'description')}">
             Description
             <input placeholder="Description"
+                   name="description"
                    type="text"
                    class="form-control"
                    ng-model="blockTimeContract.description"
@@ -90,18 +92,22 @@
       <div class="service-bill clearfix">
         <h4>Select how you bill your customer</h4>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group"
+               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'includedHours')}">
             Included hours:
             <input placeholder="Hours"
+                   name="includedHours"
                    type="number"
                    class="form-control"
                    ng-model="blockTimeContract.includedHours" required>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group before-icon">
+          <div class="form-group before-icon"
+               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'blockRate')}">
             Block Rate:
             <input placeholder="0.00"
+                   name="blockRate"
                    type="text"
                    class="form-control"
                    ng-model="blockTimeContract.blockRate"
@@ -118,9 +124,11 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group before-icon">
+          <div class="form-group before-icon"
+               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'rateExceeding')}">
             Rate exceding block time:
             <input placeholder="0.00"
+                   name="rateExceeding"
                    type="text"
                    class="form-control"
                    ng-model="blockTimeContract.rateExceeding"
@@ -153,7 +161,9 @@
 
 
           <div class="bill-hide-content-item clearfix" ng-form="newBlockTimeServiceForm">
-
+            <div ng-show="showNewBlockTimeServiceError">
+              <p style="color: red">{{newBlockTimeServiceErrorMessage}}</p>
+            </div>
             <div class="form-group col-md-7"
                  ng-class="{'has-error': isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName')}">
 
@@ -191,11 +201,13 @@
               Enable Time Rollover of unused hours
             </label>
             <div class="service-bill-hide-content">
-              <div class="form-group before-icon">
+              <div class="form-group before-icon"
+                   ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'ratePerHour')}">
                 Rate per hour:
                 <!--<input style="width: 130px;" type="text" placeholder="Rate per hr" class="form-control hour-rate">-->
                 <input placeholder="0.00"
                        type="text"
+                       name="ratePerHour"
                        style="width: 130px;"
                        class="form-control hour-rate"
                        ng-model="blockTimeContract.ratePerHour"
@@ -255,6 +267,9 @@
               </div>
 
               <div class="bill-hide-content-item clearfix" ng-form="newContractServiceForm" ng-if="reInitServiceForm">
+                <div ng-show="showNewServiceError">
+                  <p style="color: red">{{newServiceErrorMessage}}</p>
+                </div>
                 <div class="col-md-5 form-group"
                      ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName')}">
 
@@ -357,7 +372,7 @@
               $ {{calculateTotalAmount()}}/mo
             </div>
             <div class="btn btn-lg btn-success btn-create"
-                 ng-click="validateAndCreteBlockTimeContract(blockTimeContract)"
+                 ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)"
                  ng-disabled="disableBloctCreateButton()">Create
             </div>
           </div>
