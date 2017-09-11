@@ -453,6 +453,12 @@
 .service-agreements{
   text-align: right;
 }
+.service-agreements-lists .col-width-1{
+  width: 9.1%;
+}
+.service-agreements-lists .col-width-3{
+  width: 24.2%;
+}
 .service-agreements .btn-primary{
   width: 190px;
   margin: 20px 20px 0 0;
@@ -1303,6 +1309,7 @@
   .product-list-ticket-deposit .col-md-3 {
     width: 45%;
   }
+
 }
 
 @media screen and (max-width: 1366px) {
@@ -1316,6 +1323,12 @@
 
   .deposit-create .col-md-2 {
     width: 17% !important;
+  }
+  .service-agreements-lists{
+    font-size: 12px;
+  }
+  .service-agreements-lists .col-width-1{
+    width: 8.33333333%;
   }
 }
 

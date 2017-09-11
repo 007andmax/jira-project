@@ -4959,10 +4959,6 @@ border-top: 1px solid #f1f5fa;
   margin-left: 5%;
 }
 
-.service-bill-hide-content .col-md-2 {
-  text-align: center;
-}
-
 .bill-hide-content-item .add-remove-service {
   text-align: center;
 }
@@ -5017,6 +5013,10 @@ border-top: 1px solid #f1f5fa;
   top: 29px;
   left: 10px;
   font-weight: 700;
+}
+.hourly .before-icon:before{
+  top: 5px;
+  left: 25px;
 }
 .contracts .bill-hide-content-item .col-md-1{
   text-align: center;
