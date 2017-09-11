@@ -6,7 +6,7 @@
   var services = angular.module('main.services');
 
   services.factory('AgreementsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
-    function ($http, $rootScope, RealTimeService, Utils) {
+    function ($http, $rootScope, RealTimeService, Utils ) {
 
 
       function getServiceAgreements(callback) {
@@ -30,10 +30,11 @@
           if (newChange.action === 'SERVICE_AGREEMENT_SAVED') {
             agreements.push(newChange.data);
           } else if (newChange.action === 'SERVICE_AGREEMENT_DELETED') {
-            for (var i = 0; i < newChange.data.length; i++) {
-              var agreementId = newChange.data[i].id;
-              Utils.deleteById(agreements, agreementId);
-            }
+            // for (var i = 0; i < newChange.data.length; i++) {
+            //   var agreementId = newChange.data[i].id;
+            //   Utils.deleteById(agreements, agreementId);
+            // }
+            Utils.deleteById(agreements, newChange.data.id);
           }
         })
       }
