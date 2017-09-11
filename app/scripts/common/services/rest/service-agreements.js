@@ -38,9 +38,7 @@
 
 
           }
-          if(callback){
-            callback(agreements);
-          }
+          callback && callback(agreements);
         })
       }
 
