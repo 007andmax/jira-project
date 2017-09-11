@@ -466,7 +466,7 @@
 .service-agreements-lists{
   text-align: left;
 }
-.service-agreements-lists li{
+.service-agreements-lists li.pointer{
   cursor: pointer;
 }
 .service-agreements-lists .content-product-list-ticket{
