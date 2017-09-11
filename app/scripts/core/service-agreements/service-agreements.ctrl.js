@@ -69,9 +69,6 @@
           }
         };
 
-        // $scope.divideButtons = function($event, action) {
-        //   $event.stopPropagation();
-        // }
 
 
         $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
@@ -422,7 +419,7 @@
           });
         }
         return deferred.promise;
-      };
+      }
 
 
 
