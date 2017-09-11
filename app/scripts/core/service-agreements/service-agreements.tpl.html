@@ -35,12 +35,15 @@
           <i ng-show="filterType === 'amount'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-amount'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
-        <div class="col-md-1 text-center" style="cursor: default;">
-          <strong ng-click="changeFilterType('amount')">Action</strong>
+        <div class="col-md-1 text-center">
+          <strong>Action</strong>
         </div>
       </li>
 
-      <li  ng-repeat="agreement in agreementsList | orderBy: filterType" class="content-product-list-ticket clearfix" ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)">
+      <li  ng-repeat="agreement in agreementsList | orderBy: filterType"
+           class="content-product-list-ticket clearfix"
+           ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)"
+      ng-class="{'pointer': agreement.status !== 'TERMINATED'}">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3 col-width-3">{{agreement.description}}</div>
         <div class="col-md-1 col-width-1">{{agreement.type}}</div>

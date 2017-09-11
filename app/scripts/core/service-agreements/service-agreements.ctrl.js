@@ -150,14 +150,6 @@
 
       $scope.reinitNewServiceForm = true;
 
-      function reInitServiceForm() {
-        $scope.reinitNewServiceForm = false;
-        $timeout(function () {
-          $scope.reinitNewServiceForm = true;
-        }, 0);
-      }
-
-
       $scope.editMode = true;
 
       if (companyData.editMode) {
@@ -231,6 +223,14 @@
       //     })
       //   }
       // });
+
+      function reInitServiceForm() {
+        $scope.reinitNewServiceForm = false;
+        $timeout(function () {
+          $scope.reinitNewServiceForm = true;
+        }, 0);
+      }
+
 
       function setMiNDateForEndDate(date) {
         var d = new Date(date);
@@ -351,7 +351,7 @@
             deferred.resolve(resp)
           } else {
             $scope.showErrorInHourlyContract = true;
-            $scope.errorMessage = 'Not valid Dates';
+            $scope.errorMessage = 'There is another hourly agreement in this company with overlapping dates';
             deferred.reject();
           }
 
@@ -461,12 +461,14 @@
 
       $scope.terminateContract = function () {
         AgreementsService.terminate($scope.editContract.id, function (resp) {
+          console.log(resp);
           $scope.closeModal()
         })
       };
 
       $scope.terminateAndCopy = function () {
         AgreementsService.terminate($scope.editContract.id, function (resp) {
+          console.log(resp);
           $scope.editContract.description = $scope.editContract.description + ' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;

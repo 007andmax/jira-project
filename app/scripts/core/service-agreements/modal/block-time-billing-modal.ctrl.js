@@ -21,6 +21,7 @@
         $scope.services = [];
 
         $scope.reInitEndDate = true;
+        $scope.reInitServiceForm = true;
 
         $scope.ticketSharedUsersList = [];
 
@@ -79,6 +80,13 @@
           $scope.reInitEndDate = false;
           $timeout(function () {
             $scope.reInitEndDate = true;
+          }, 0);
+        }
+
+        function reInitServiceForm() {
+          $scope.reInitServiceForm = false;
+          $timeout(function () {
+            $scope.reInitServiceForm = true;
           }, 0);
         }
 
@@ -264,20 +272,22 @@
                 pickDefaultService(ns);
                 $scope.newContractService = {
                   name: '',
-                  rate: null,
+                  rate: 0,
                   billable: false,
                   taxes: []
                 };
+                reInitServiceForm()
               } else {
 
                 $scope.blockTimeContract.services.push(service);
                 pickDefaultService(service);
                 $scope.newContractService = {
                   name: '',
-                  rate: null,
+                  rate: 0,
                   billable: false,
                   taxes: []
                 };
+                reInitServiceForm()
 
               }
             }
