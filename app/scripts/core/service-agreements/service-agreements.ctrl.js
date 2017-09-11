@@ -128,8 +128,8 @@
 
       }]).controller('serviceAgreementsModalCtrl', [
     '$scope', '$uibModalInstance', 'companyData', '$state',
-    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService', '$filter', '$q',
-    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService, $filter, $q) {
+    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService', '$filter', '$q', '$timeout',
+    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout) {
 
       $scope.taxes = TaxesService.getAll();
       $scope.companyId = companyData.companyId;
@@ -147,6 +147,16 @@
 
       $scope.minDateForEndDatePicker;
       setMiNDateForEndDate($scope.today);
+
+      $scope.reinitNewServiceForm = true;
+
+      function reInitServiceForm() {
+        $scope.reinitNewServiceForm = false;
+        $timeout(function () {
+          $scope.reinitNewServiceForm = true;
+        }, 0);
+      }
+
 
       $scope.editMode = true;
 
@@ -302,6 +312,7 @@
             billable: false,
             taxes: []
           };
+          reInitServiceForm();
 
         }
       };
