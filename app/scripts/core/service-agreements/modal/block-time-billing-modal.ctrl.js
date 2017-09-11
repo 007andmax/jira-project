@@ -46,7 +46,7 @@
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
-          $scope.blockTimeContract = $scope.blockTimeContract + 'COPY';
+          //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
           $scope.blockTimeContract.minStartDate = Date.now();
         }
 
@@ -352,8 +352,6 @@
               id: null,
               description: contractData.description,
               type: 'BLOCK_TIME',
-              startDate: new Date(contractData.startDate).getTime(),
-              endDate: new Date(contractData.endDate).getTime(),
               interval: contractData.interval ,
               customInterval: null,
               billType: null,
@@ -369,6 +367,18 @@
               shares: [],
               taxIds: []
             };
+
+            var sd = new Date(contractData.startDate);
+            sd.setHours(0,0,0,0);
+            sd.setSeconds(0);
+            sd.setMilliseconds(0);
+            blockContract.startDate = sd.getTime();
+
+            var ed = new Date(contractData.endDate);
+            ed.setHours(0,0,0,0);
+            ed.setSeconds(0);
+            ed.setMilliseconds(0);
+            blockContract.endDate = ed.getTime();
 
             for(var i=0; i<$scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {

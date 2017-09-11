@@ -12,12 +12,12 @@
         $scope.filterType = 'company.name';
         $scope.agreementsList = [];
 
-        AgreementsService.getAllServiceAgreements($scope, function (data) {
 
-          for (var i = 0; i < data.length; i++) {
-            var agreement = data[i];
-            agreement.company.name = getCompanyName(data[i].company.id);
-            $scope.agreementsList.push(agreement)
+        AgreementsService.getAllServiceAgreements($scope, function (data) {
+          $scope.agreementsList = data;
+
+          for(var i=0; i<$scope.agreementsList.length; i++) {
+            $scope.agreementsList[i].company.name = getCompanyName($scope.agreementsList[i].company.id);
           }
 
         });
@@ -59,8 +59,10 @@
             var confirmButton = 'Delete';
             UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
               AgreementsService.deleteAgreement(agreement.id, function (resp) {
-                UserNotificationService.show('Agreement deleted', true);
-                console.log('Agreement delete', resp);
+                if(resp) {
+                  UserNotificationService.show('Agreement deleted', true);
+                  console.log('Agreement delete', resp);
+                }
               })
             });
 
@@ -118,6 +120,7 @@
               }
 
             });
+
           }
 
 
@@ -125,8 +128,8 @@
 
       }]).controller('serviceAgreementsModalCtrl', [
     '$scope', '$uibModalInstance', 'companyData', '$state',
-    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService', '$filter', '$q',
-    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService, $filter, $q) {
+    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService', '$filter', '$q', '$timeout',
+    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout) {
 
       $scope.taxes = TaxesService.getAll();
       $scope.companyId = companyData.companyId;
@@ -144,6 +147,16 @@
 
       $scope.minDateForEndDatePicker;
       setMiNDateForEndDate($scope.today);
+
+      $scope.reinitNewServiceForm = true;
+
+      function reInitServiceForm() {
+        $scope.reinitNewServiceForm = false;
+        $timeout(function () {
+          $scope.reinitNewServiceForm = true;
+        }, 0);
+      }
+
 
       $scope.editMode = true;
 
@@ -299,6 +312,7 @@
             billable: false,
             taxes: []
           };
+          reInitServiceForm();
 
         }
       };
@@ -390,13 +404,25 @@
 
         var companyContractInfo = {
           description: $scope.editContract.description,
-          startDate: new Date($scope.editContract.startDate).getTime(),
-          endDate: new Date($scope.editContract.endDate).getTime(),
           companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id || $scope.companyId,
           services: servicesWithTaxIds,
           // type: companyData.type || $scope.modlToShow
           type: 'HOURLY'
         };
+
+        var sd = new Date($scope.editContract.startDate);
+        sd.setHours(0,0,0,0);
+        sd.setSeconds(0);
+        sd.setMilliseconds(0);
+        console.log(sd);
+        companyContractInfo.startDate = sd.getTime();
+
+        var ed = new Date($scope.editContract.endDate);
+        ed.setHours(23,59,0,0);
+        ed.setSeconds(0);
+        ed.setMilliseconds(0);
+        console.log(ed);
+        companyContractInfo.endDate = ed.getTime();
 
         console.log(companyContractInfo);
         AgreementsService.createContract(companyContractInfo, function (resp) {
