@@ -128,8 +128,10 @@
 
       }]).controller('serviceAgreementsModalCtrl', [
     '$scope', '$uibModalInstance', 'companyData', '$state',
-    'ServicesService', 'CompaniesService', 'TaxesService', 'AgreementsService', '$filter', '$q', '$timeout',
-    function ($scope, $uibModalInstance, companyData, $state, ServicesService, CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout) {
+    'ServicesService', 'CompaniesService', 'TaxesService',
+    'AgreementsService', '$filter', '$q', '$timeout', 'quicktech.common.services.UserConfirmationsService',
+    function ($scope, $uibModalInstance, companyData, $state, ServicesService,
+              CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout, UserConfirmationsService) {
 
       $scope.taxes = TaxesService.getAll();
       $scope.companyId = companyData.companyId;
@@ -383,6 +385,14 @@
         return deferred.promise;
       }
 
+      // $scope.validateNewServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
+      //   var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+      //   ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, ngModelCtrl, function (resp) {
+      //     ngModelCtrl.$setValidity('unique', resp.valid);
+      //     afterValidationCallback();
+      //   });
+      // };
+
 
 
       function createHourlyContract() {
@@ -406,7 +416,6 @@
           description: $scope.editContract.description,
           companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id || $scope.companyId,
           services: servicesWithTaxIds,
-          // type: companyData.type || $scope.modlToShow
           type: 'HOURLY'
         };
 
@@ -431,19 +440,43 @@
         })
       }
 
-      $scope.validateAndCreateHourlyContract = function() {
+      $scope.validateAndCreateHourlyContract = function(editService) {
+        var emptyNewService = true;
+        if(editService && editService.name && editService.name.length) {
+          emptyNewService = false;
+          var confirmMessage = 'You have filled service name field but didnt added it to contract service list. Are you sure you want to create contract ?';
+          var confirmButton = 'Yes, create';
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+            emptyNewService = true;
+            if(emptyNewService) {
+              validateCrossingDatesHourly().then(function(resp) {
+                //console.log('1 ', resp);
+                if(resp){
+                  checkForDuplicateServiceNames().then(function(resp){
+                    //console.log('2 ', resp);
+                    if(resp){
+                      createHourlyContract();
+                    }
+                  })
+                }
+              });
+            }
+          });
+        }
+        if(emptyNewService) {
+          validateCrossingDatesHourly().then(function(resp) {
+            //console.log('1 ', resp);
+            if(resp){
+              checkForDuplicateServiceNames().then(function(resp){
+                //console.log('2 ', resp);
+                if(resp){
+                  createHourlyContract();
+                }
+              })
+            }
+          });
+        }
 
-        validateCrossingDatesHourly().then(function(resp) {
-          //console.log('1 ', resp);
-          if(resp){
-            checkForDuplicateServiceNames().then(function(resp){
-              //console.log('2 ', resp);
-              if(resp){
-                createHourlyContract();
-              }
-            })
-          }
-        });
       };
 
       $scope.dissableHourlyCreateButton = function() {
