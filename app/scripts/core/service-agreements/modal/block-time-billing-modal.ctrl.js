@@ -46,7 +46,7 @@
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
-          $scope.blockTimeContract = $scope.blockTimeContract + 'COPY';
+          //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
           $scope.blockTimeContract.minStartDate = Date.now();
         }
 

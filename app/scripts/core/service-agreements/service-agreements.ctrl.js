@@ -12,12 +12,12 @@
         $scope.filterType = 'company.name';
         $scope.agreementsList = [];
 
-        AgreementsService.getAllServiceAgreements($scope, function (data) {
 
-          for (var i = 0; i < data.length; i++) {
-            var agreement = data[i];
-            agreement.company.name = getCompanyName(data[i].company.id);
-            $scope.agreementsList.push(agreement)
+        AgreementsService.getAllServiceAgreements($scope, function (data) {
+          $scope.agreementsList = data;
+
+          for(var i=0; i<$scope.agreementsList.length; i++) {
+            $scope.agreementsList[i].company.name = getCompanyName($scope.agreementsList[i].company.id);
           }
 
         });
@@ -59,8 +59,10 @@
             var confirmButton = 'Delete';
             UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
               AgreementsService.deleteAgreement(agreement.id, function (resp) {
-                UserNotificationService.show('Agreement deleted', true);
-                console.log('Agreement delete', resp);
+                if(resp) {
+                  UserNotificationService.show('Agreement deleted', true);
+                  console.log('Agreement delete', resp);
+                }
               })
             });
 
@@ -118,6 +120,7 @@
               }
 
             });
+
           }
 
 
