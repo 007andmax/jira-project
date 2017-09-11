@@ -472,7 +472,9 @@
 .service-agreements-lists .pointer{
   cursor: pointer;
 }
-
+.service-agreements-lists .icn-delete{
+  cursor: pointer;
+}
 .service-agreements-lists .content-product-list-ticket{
   border-bottom: 1px solid #e7ecf2;
   border-right: 3px solid #fff;

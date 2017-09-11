@@ -49,7 +49,7 @@
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
         <div class="col-md-1"><div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div></div>
         <div class="col-md-1 text-center">{{agreement.amount}}</div>
-        <div class="col-md-1 text-center" ng-hide="agreement.status === 'CURRENT'"> <i class="icon-sm icn-delete" ng-click="deleteAgreemenet(agreement); $event.stopPropagation();"></i> </div>
+        <div class="col-md-1 text-center" ng-hide="agreement.status === 'CURRENT'"> <i class="icon-sm icn-delete" uib-tooltip="delete" ng-click="deleteAgreemenet(agreement); $event.stopPropagation();"></i> </div>
       </li>
 
     </ul>
