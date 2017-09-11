@@ -35,6 +35,11 @@
             //   Utils.deleteById(agreements, agreementId);
             // }
             Utils.deleteById(agreements, newChange.data.id);
+
+
+          }
+          if(callback){
+            callback(agreements);
           }
         })
       }
