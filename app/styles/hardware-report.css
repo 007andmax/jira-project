@@ -466,9 +466,13 @@
 .service-agreements-lists{
   text-align: left;
 }
-.service-agreements-lists li.pointer{
+.service-agreements-lists li:first-child [class*='col-md-']{
   cursor: pointer;
 }
+.service-agreements-lists .pointer{
+  cursor: pointer;
+}
+
 .service-agreements-lists .content-product-list-ticket{
   border-bottom: 1px solid #e7ecf2;
   border-right: 3px solid #fff;
