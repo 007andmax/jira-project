@@ -96,7 +96,11 @@
         <p style="padding-left: 15px;">Create new Service</p>
 
         <div class="bill-hide-content-item clearfix" ng-form="newServiceForm" ng-if="reinitNewServiceForm">
+          <div ng-show="newServiceNameIsError">
+            <p style="color: red">{{newServiceNameErrorMessage}}</p>
+          </div>
           <div class="col-md-6 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
+
             <input placeholder="New Service Name"
                    type="text"
                    name="editServiceName"

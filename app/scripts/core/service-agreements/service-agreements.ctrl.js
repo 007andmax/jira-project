@@ -144,6 +144,8 @@
 
       $scope.showErrorInHourlyContract = false;
       $scope.errorMessage = '';
+      $scope.newServiceNameIsError = false;
+      $scope.newServiceNameErrorMessage = '';
 
       $scope.today = Date.now();
 
@@ -293,28 +295,37 @@
       };
 
       $scope.addNewService = function (form, editService) {
+        $scope.newServiceNameIsError = false;
         if (form.$valid) {
-          var newService = {
-            name: editService.name,
-            rate: editService.rate || 0.00,
-            billable: editService.billable || false,
-            taxes: editService.taxes || [],
-            taxIds: []
-          };
-          if (editService.taxes.length) {
-            for (var i = 0; i < editService.taxes.length; i++) {
-              newService.taxIds.push(editService.taxes[i].id)
-            }
+          if(!$scope.editContract.startDate || !$scope.editContract.startDate) {
+            $scope.newServiceNameIsError = true;
+            $scope.newServiceNameErrorMessage = 'Please enter start and end date to check service name';
+          } else {
+            validateNewServiceName(editService).then(function(resp) {
+              if(resp) {
+                var newService = {
+                  name: editService.name,
+                  rate: editService.rate || 0.00,
+                  billable: editService.billable || false,
+                  taxes: editService.taxes || [],
+                  taxIds: []
+                };
+                if (editService.taxes.length) {
+                  for (var i = 0; i < editService.taxes.length; i++) {
+                    newService.taxIds.push(editService.taxes[i].id)
+                  }
+                }
+                $scope.editContract.services.push(newService);
+                $scope.editService = {
+                  name: '',
+                  rate: null,
+                  billable: false,
+                  taxes: []
+                };
+                reInitServiceForm();
+              }
+            })
           }
-
-          $scope.editContract.services.push(newService);
-          $scope.editService = {
-            name: '',
-            rate: null,
-            billable: false,
-            taxes: []
-          };
-          reInitServiceForm();
 
         }
       };
@@ -392,6 +403,26 @@
       //     afterValidationCallback();
       //   });
       // };
+      function validateNewServiceName(editService) {
+        $scope.newServiceNameIsError=false;
+        var deferred = $q.defer();
+        if(editService && editService.name) {
+
+          var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+          var name = [];
+          name.push(editService.name);
+          ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name, function(resp) {
+            if(Object.keys(resp).length === 0) {
+              deferred.resolve(resp);
+            } else {
+              deferred.reject();
+              $scope.newServiceNameIsError = true;
+              $scope.newServiceNameErrorMessage = 'Service name is duplicate';
+            }
+          });
+        }
+        return deferred.promise;
+      };
 
 
 
@@ -441,6 +472,7 @@
       }
 
       $scope.validateAndCreateHourlyContract = function(editService) {
+
         var emptyNewService = true;
         if(editService && editService.name && editService.name.length) {
           emptyNewService = false;
@@ -448,33 +480,25 @@
           var confirmButton = 'Yes, create';
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             emptyNewService = true;
-            if(emptyNewService) {
-              validateCrossingDatesHourly().then(function(resp) {
-                //console.log('1 ', resp);
-                if(resp){
-                  checkForDuplicateServiceNames().then(function(resp){
-                    //console.log('2 ', resp);
-                    if(resp){
-                      createHourlyContract();
-                    }
-                  })
-                }
-              });
-            }
+            validateAndCreate();
           });
         }
-        if(emptyNewService) {
-          validateCrossingDatesHourly().then(function(resp) {
-            //console.log('1 ', resp);
-            if(resp){
-              checkForDuplicateServiceNames().then(function(resp){
-                //console.log('2 ', resp);
-                if(resp){
-                  createHourlyContract();
-                }
-              })
-            }
-          });
+        validateAndCreate();
+
+        function validateAndCreate() {
+          if(emptyNewService) {
+            validateCrossingDatesHourly().then(function(resp) {
+              //console.log('1 ', resp);
+              if(resp){
+                checkForDuplicateServiceNames().then(function(resp){
+                  //console.log('2 ', resp);
+                  if(resp){
+                    createHourlyContract();
+                  }
+                })
+              }
+            });
+          }
         }
 
       };
