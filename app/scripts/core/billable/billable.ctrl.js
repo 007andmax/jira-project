@@ -25,22 +25,22 @@
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
-        $scope.isDisocuntForIcon = function(billableCompany){
-          var isDiscount=false;
-          for(var t = 0; t < billableCompany.tickets.length; t++) {
-            if(billableCompany.tickets[t].discountSum > 0) {
+        $scope.isDisocuntForIcon = function (billableCompany) {
+          var isDiscount = false;
+          for (var t = 0; t < billableCompany.tickets.length; t++) {
+            if (billableCompany.tickets[t].discountSum > 0) {
               isDiscount = true;
             }
-            if(billableCompany.tickets[t].productExpense) {
-              for(var m=0; m < billableCompany.tickets[t].productExpense.length; m++) {
-                if(billableCompany.tickets[t].productExpense[m].discountSum > 0) {
+            if (billableCompany.tickets[t].productExpense) {
+              for (var m = 0; m < billableCompany.tickets[t].productExpense.length; m++) {
+                if (billableCompany.tickets[t].productExpense[m].discountSum > 0) {
                   isDiscount = true;
                 }
               }
             }
-            if(billableCompany.tickets[t].serviceExpense) {
-              for(var n=0; n < billableCompany.tickets[t].serviceExpense.length; n++) {
-                if(billableCompany.tickets[t].serviceExpense[n].discountSum > 0) {
+            if (billableCompany.tickets[t].serviceExpense) {
+              for (var n = 0; n < billableCompany.tickets[t].serviceExpense.length; n++) {
+                if (billableCompany.tickets[t].serviceExpense[n].discountSum > 0) {
                   isDiscount = true;
                 }
               }
@@ -49,21 +49,21 @@
           return isDiscount;
         };
 
-        $scope.isDiscountForIconTicket = function(ticket) {
+        $scope.isDiscountForIconTicket = function (ticket) {
           var isTicketDiscount = false;
-          if(ticket.discountSum > 0) {
+          if (ticket.discountSum > 0) {
             isTicketDiscount = true;
           }
-          if(ticket.productExpense) {
-            for(var e=0; e < ticket.productExpense.length; e++) {
-              if(ticket.productExpense[e].discountSum > 0) {
+          if (ticket.productExpense) {
+            for (var e = 0; e < ticket.productExpense.length; e++) {
+              if (ticket.productExpense[e].discountSum > 0) {
                 isTicketDiscount = true;
               }
             }
           }
-          if(ticket.serviceExpense) {
-            for(var w=0; w < ticket.serviceExpense.length; w++) {
-              if(ticket.serviceExpense[w].discountSum > 0) {
+          if (ticket.serviceExpense) {
+            for (var w = 0; w < ticket.serviceExpense.length; w++) {
+              if (ticket.serviceExpense[w].discountSum > 0) {
                 isTicketDiscount = true;
               }
             }
@@ -127,23 +127,23 @@
 
         $scope.addDiscountInBillable = function (expenseId, discountAmount) {
           var data = {};
-          if(expenseId && discountAmount) {
-            data= {
+          if (expenseId && discountAmount) {
+            data = {
               expenseId: expenseId,
               discountAmount: discountAmount,
               discountType: 'PERCENT'
             };
-            BillableService.saveBillableDiscount(data, function(resp){
+            BillableService.saveBillableDiscount(data, function (resp) {
               console.log("saveBillableDiscount: ", resp)
             })
           }
           else {
-            data= {
+            data = {
               expenseId: expenseId,
               discountAmount: null,
               discountType: null
             };
-            BillableService.saveBillableDiscount(data, function(resp){
+            BillableService.saveBillableDiscount(data, function (resp) {
               console.log(resp)
             })
           }
@@ -228,7 +228,10 @@
         }, true);
 
         $scope.saveTaxes = function (entity, entityType) {
-          TaxesService.linkWithEntity(entity.id, entityType, entity.taxes);
+          var taxIds = entity.taxes.map(function (tax) {
+            return tax.id
+          });
+          TaxesService.linkWithEntity(entity.id, entityType, taxIds);
         };
 
       }]);
