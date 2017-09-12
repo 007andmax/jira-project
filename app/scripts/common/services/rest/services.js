@@ -33,24 +33,6 @@
 
         return Utils.getListByUrl('/services/' + companyId, callback, function (list) {
 
-          var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
-            updateTaxes(originalTax, list, function (tax) {
-              tax.name = originalTax.name;
-              tax.rate = originalTax.rate;
-            })
-          });
-
-          var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
-            updateTaxes(originalTax, list, function (tax, taxList) {
-              taxList.splice(taxList.indexOf(tax), 1);
-            });
-          });
-
-          scope.$on('$destroy', function () {
-            unsubscribeUpdatedTaxEvent();
-            unsubscribeDeletedTaxEvent();
-          });
-
           RealTimeService.subscribe('/service', scope, function (newChange) {
 
             var services = newChange.data;
@@ -131,24 +113,6 @@
           /* else if (newChange.action == 'COMPANY_ARCHIVED') {
            delete data[newChange.data.id];
            }*/
-        });
-
-        var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
-          updateTaxes(originalTax, data, function (tax) {
-            tax.name = originalTax.name;
-            tax.rate = originalTax.rate;
-          })
-        });
-
-        var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
-          updateTaxes(originalTax, data, function (tax, taxList) {
-            taxList.splice(taxList.indexOf(tax), 1);
-          });
-        });
-
-        scope.$on('$destroy', function () {
-          unsubscribeUpdatedTaxEvent();
-          unsubscribeDeletedTaxEvent();
         });
 
         return data;
@@ -336,22 +300,6 @@
       function isNameUnique(name, modelId, callback) {
         var future = $http.get('/isDefaultServiceNameUnique?' + name + (modelId ? '&id=' + modelId : ''));
         Utils.handleCallback(future, callback);
-      }
-
-      function updateTaxes(originalTax, entities, updateFunc) {
-        for (var i = 0; i < entities.length; i++) {
-          var product = entities[i];
-          var taxes = product.taxes;
-          if (taxes && taxes.length) {
-            for (var j = 0; j < taxes.length; j++) {
-              var tax = taxes[j];
-              if (tax.original && tax.original.id === originalTax.id) {
-                updateFunc(tax, taxes);
-                break;
-              }
-            }
-          }
-        }
       }
 
       function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, callback) {

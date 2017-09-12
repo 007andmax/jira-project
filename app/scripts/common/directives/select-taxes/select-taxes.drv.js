@@ -13,7 +13,7 @@
     },
     controller: selectTaxesCtrl
   });
-  selectTaxesCtrl.$inject=['$scope'];
+  selectTaxesCtrl.$inject = ['$scope'];
   function selectTaxesCtrl($scope) {
     var $ctrl = this;
     this.updateEntityTaxList = updateEntityTaxList;
@@ -32,11 +32,27 @@
       $ctrl.entity.taxes = $ctrl.entity.taxes || [];
     }
 
+    //  add taxes to the list from entity
+    //  it's needed to make it possible to manage related taxes even when original is deleted
+    $ctrl.taxes = $ctrl.taxes.staticCopy();
+    for(var i = 0; i < $ctrl.entity.taxes.length; i++){
+      var entityTax = $ctrl.entity.taxes[i];
+      var sameOriginalTax = $ctrl.taxes.find(function(tax){
+        return tax.name === entityTax.name && tax.rate === entityTax.rate;
+      });
+
+      if(sameOriginalTax){
+        sameOriginalTax.id = entityTax.id;
+      }else{
+        $ctrl.taxes.push(entityTax);
+      }
+    }
+
     function updateEntityTaxList(changedTax) {
       var entityTaxes = $ctrl.entity.taxes;
       for (var i = 0; i < entityTaxes.length; i++) {
         var entityTax = entityTaxes[i];
-        if (entityTax.original && entityTax.original.id === changedTax.id || entityTax.id === changedTax.id) {
+        if (entityTax.id === changedTax.id) {
           entityTaxes.splice(i, 1);
           return;
         }
@@ -45,9 +61,7 @@
     }
 
     function getSelectedTaxNames() {
-      return $ctrl.taxes && $ctrl.taxes.filter(function (tax) {
-          return $ctrl.selectedTaxes[tax.id];
-        }).map(function (tax) {
+      return $ctrl.entity.taxes.map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
         }).join(', ') || 'No taxes selected';
     }
@@ -56,7 +70,7 @@
       var selectedTaxes = {};
       for (var i = 0; i < taxes.length; i++) {
         var tax = taxes[i];
-        selectedTaxes[tax.original ? tax.original.id : tax.id] = true;
+        selectedTaxes[tax.id] = true;
       }
       return selectedTaxes;
     }

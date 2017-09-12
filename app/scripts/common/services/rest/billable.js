@@ -168,24 +168,6 @@
           }
         });
 
-        var unsubscribeUpdatedTaxEvent = scope.$on('updated_tax_original', function (event, originalTax) {
-          updateTaxes(originalTax, info, function (tax) {
-            tax.name = originalTax.name;
-            tax.rate = originalTax.rate;
-          })
-        });
-
-        var unsubscribeDeletedTaxEvent = scope.$on('deleted_tax_original', function (event, originalTax) {
-          updateTaxes(originalTax, info, function (tax, taxList) {
-            taxList.splice(taxList.indexOf(tax), 1);
-          });
-        });
-
-        scope.$on('$destroy', function () {
-          unsubscribeUpdatedTaxEvent();
-          unsubscribeDeletedTaxEvent();
-        });
-
         return info;
       }
 
@@ -286,31 +268,6 @@
             callback(Utils.getFormattedNumber(change.data, false));
           }
         });
-      }
-
-      function updateTaxes(originalTax, billableDto, updateFunc) {
-        for (var companyId in billableDto) {
-          var tickets = billableDto[companyId].tickets;
-          for (var i = 0; i < tickets.length; i++) {
-            var ticket = tickets[i];
-            var expenses = (ticket.productExpense || []).concat((ticket.serviceExpense || []));
-            if (expenses.length) {
-              for (var k = 0; k < expenses.length; k++) {
-                var expense = expenses[k];
-                var taxes = expense.taxes;
-                if (taxes && taxes.length) {
-                  for (var j = 0; j < taxes.length; j++) {
-                    var tax = taxes[j];
-                    if (tax.original && tax.original.id === originalTax.id) {
-                      updateFunc(tax, taxes);
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
       }
 
       return {

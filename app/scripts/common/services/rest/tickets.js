@@ -287,24 +287,6 @@
           }
         });
 
-        var unsubscribeUpdatedTaxEvent = targetScope.$on('updated_tax_original', function (event, originalTax) {
-          updateTaxes(originalTax, ticket.updates, function (tax) {
-            tax.name = originalTax.name;
-            tax.rate = originalTax.rate;
-          })
-        });
-
-        var unsubscribeDeletedTaxEvent = targetScope.$on('deleted_tax_original', function (event, originalTax) {
-          updateTaxes(originalTax, ticket.updates, function (tax, taxList) {
-            taxList.splice(taxList.indexOf(tax), 1);
-          });
-        });
-
-        targetScope.$on('$destroy', function () {
-          unsubscribeUpdatedTaxEvent();
-          unsubscribeDeletedTaxEvent();
-        });
-
         RealTimeService.subscribe('/ticketUpdates/' + ticket.id, targetScope, function (newChange) {
 
           if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
@@ -1082,28 +1064,6 @@
       function saveEditedTicket(ticket, callback) {
         var future = $http.put('/v2/tickets/edit', ticket);
         Utils.handleCallback(future, callback);
-      }
-
-      function updateTaxes(originalTax, updates, updateFunc) {
-        for (var i = 0; i < updates.length; i++) {
-          var update = updates[i];
-          var expenses = (update.products || []).concat((update.services || []));
-          if (expenses.length) {
-            for (var k = 0; k < expenses.length; k++) {
-              var expense = expenses[k];
-              var taxes = expense.taxes;
-              if (taxes && taxes.length) {
-                for (var j = 0; j < taxes.length; j++) {
-                  var tax = taxes[j];
-                  if (tax.original && tax.original.id === originalTax.id) {
-                    updateFunc(tax, taxes);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
       }
 
       return {
