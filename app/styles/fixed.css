@@ -1420,7 +1420,9 @@ span.sort-span {
   position: relative;
   cursor: pointer;
 }
-
+.qt-default-services span.sort-span{
+  padding-top: 10px;
+}
 .avatar-error-message {
   float: left;
   width: 100%;
