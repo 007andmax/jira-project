@@ -7,7 +7,8 @@
           <i ng-show="filterType === 'company.name'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-company.name'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
-        <div class="col-md-3 col-width-3"><strong ng-click="changeFilterType('description')">Contract Discription</strong>
+        <div class="col-md-3 col-width-3"><strong ng-click="changeFilterType('description')">Contract
+          Discription</strong>
           <i ng-show="filterType === 'description'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-description'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
@@ -35,24 +36,29 @@
           <i ng-show="filterType === 'amount'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-amount'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
-        <div class="col-md-1 text-center" style="cursor: default;">
+        <div class="col-md-1 text-center" style="cursor: default;" ng-show="canDeleteAgreements">
           <strong>Action</strong>
         </div>
       </li>
 
-      <li  ng-repeat="agreement in agreementsList | orderBy: filterType"
-           class="content-product-list-ticket clearfix"
-           ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)"
-      ng-class="{'pointer': agreement.status !== 'TERMINATED'}">
+      <li ng-repeat="agreement in agreementsList | orderBy: filterType"
+          class="content-product-list-ticket clearfix"
+          ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)"
+          ng-class="{'pointer': agreement.status !== 'TERMINATED'}">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3 col-width-3">{{agreement.description}}</div>
         <div class="col-md-1 col-width-1">{{agreement.type}}</div>
         <div class="col-md-1" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{agreement.status}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
-        <div class="col-md-1"><div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div></div>
+        <div class="col-md-1">
+          <div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
+        </div>
         <div class="col-md-1 text-center">{{agreement.amount}}</div>
-        <div class="col-md-1 text-center" ng-hide="agreement.status === 'CURRENT'"> <i class="icon-sm icn-delete" uib-tooltip="delete" ng-click="deleteAgreemenet(agreement); $event.stopPropagation();"></i> </div>
+        <div class="col-md-1 text-center" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">
+          <i class="icon-sm icn-delete" uib-tooltip="delete"
+             ng-click="deleteAgreemenet(agreement); $event.stopPropagation();"></i>
+        </div>
       </li>
 
     </ul>

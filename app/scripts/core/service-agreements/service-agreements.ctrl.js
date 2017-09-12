@@ -6,11 +6,13 @@
     ['$scope', '$uibModal', 'AgreementsService', 'CompaniesService',
       'quicktech.common.services.UserConfirmationsService',
       'quicktech.common.services.UserNotificationService',
-      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService, PermissionsService) {
 
         $scope.parseDate = Date.parse.bind(Date);
         $scope.filterType = 'company.name';
         $scope.agreementsList = [];
+        $scope.canDeleteAgreements = PermissionsService.isAllowed('DELETE_SERVICE_AGREEMENTS');
 
 
         AgreementsService.getAllServiceAgreements($scope, function (data) {
