@@ -195,7 +195,6 @@
               <li
                 ng-repeat="product in serviceContract.productExpenses track by (product.item ? product.item.versionedId.id + $index : $index)">
 
-                <!--<div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>-->
                 <div>
                   <div class="col-sm-7">
                     <div uib-dropdown>
@@ -254,7 +253,6 @@
               <li
                 ng-repeat="service in serviceContract.serviceExpenses track by (service.item ? service.item.versionedId.id + $index : $index)">
 
-                <!--<div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>-->
                 <div>
 
                   <div class="col-sm-3">

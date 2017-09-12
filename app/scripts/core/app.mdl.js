@@ -15,7 +15,6 @@
       'quicktech.core.services',
       'quicktech.core.passwordManager',
       'quicktech.core.billable',
-      'quicktech.core.recurring',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
       'quicktech.core.leftPanel',
@@ -134,11 +133,6 @@
           url: '/billable',
           templateUrl: '/html/scripts/core/billable/billable.tpl.html',
           controller: 'quicktech.core.billable.billableCtrl'
-        }))
-        .state('accounting.recurring', waitForServices({
-          url: '/recurring',
-          templateUrl: '/html/scripts/core/recurring/recurring.tpl.html',
-          controller: 'quicktech.core.recurring.recurringCtrl'
         }))
         .state('receivable', waitForServices({
           url: '/accounting/receivable/:mode',

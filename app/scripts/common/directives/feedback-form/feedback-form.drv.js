@@ -212,8 +212,6 @@
             return 'Services';
           } else if ($state.includes("accounting.billable")) {
             return 'Billable';
-          } else if ($state.includes("accounting.recurring")) {
-            return 'Recurring';
           } else if ($state.includes("receivable")) {
             return 'Receivable';
           } else if ($state.includes("receipt-archive")) {
