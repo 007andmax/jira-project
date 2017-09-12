@@ -3,20 +3,25 @@
   <i ng-if="$ctrl.showIcon" class="icn-sm icn-tax" uib-dropdown-toggle> </i>
   <div class="dropdown-menu dropdown-menu-left checkbox-dropdown" uib-dropdown-menu stop-propagation="click">
     <div class="list-container">
-      <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
+      <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;" ng-if="!$ctrl.previewMode">
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxes | orderBy: 'name' track by tax.id">
-          <label class="control checkbox ellipsis" ng-if="!$ctrl.previewMode">
+          <label class="control checkbox ellipsis">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
                    ng-change="$ctrl.updateEntityTaxList(tax)">
             {{ tax.name }}&nbsp;{{ tax.rate }}%
             <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]"></i>
           </label>
+        </div>
+      </div>
 
-          <label class="control checkbox ellipsis" ng-if="$ctrl.previewMode" onclick="return false">
+      <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;" ng-if="$ctrl.previewMode">
+        <div class="checkbox-dd-item"
+             ng-repeat="tax in $ctrl.taxes | orderBy: 'name' track by tax.id" ng-show="$ctrl.selectedTaxes[tax.id]">
+          <label class="control checkbox ellipsis" onclick="return false">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]">
-            {{:: tax.name }}&nbsp;{{:: tax.rate }}%
-            <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]"></i>
+            {{ tax.name }}&nbsp;{{ tax.rate }}%
+
           </label>
         </div>
       </div>
