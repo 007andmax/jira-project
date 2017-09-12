@@ -36,30 +36,30 @@
           RealTimeService.subscribe('/service', scope, function (newChange) {
 
             var services = newChange.data;
-            if (newChange.action == 'SERVICES_MOVED') {
+            if (newChange.action === 'SERVICES_MOVED') {
 
-               for (var i = 0; i < services.length; i++) {
-                 var movedService = services[i],
-                   service = Utils.findById(list, movedService.versionedId.id);
+              for (var i = 0; i < services.length; i++) {
+                var movedService = services[i],
+                  service = Utils.findById(list, movedService.versionedId.id);
 
-                 if (service) {
-                   Utils.customizeObj(movedService, service);
-                 } else if (movedService.company && movedService.company.id === companyId) {
-                   list.push(Utils.customizeObj(movedService));
-                 }
-               }
-             } else if (newChange.action == 'SERVICES_DELETED') {
+                if (service) {
+                  Utils.customizeObj(movedService, service);
+                } else if (movedService.company && movedService.company.id === companyId) {
+                  list.push(Utils.customizeObj(movedService));
+                }
+              }
+            } else if (newChange.action === 'SERVICES_DELETED') {
               for (var i = 0; i < services.length; i++) {
                 var deletedService = services[i];
                 Utils.deleteById(list, deletedService.versionedId.id);
               }
-             }
+            }
           });
 
         });
       }
 
-      function getServicesData(scope, isOnlyDefault, callback) {
+      function getServicesData(scope, callback) {
 
         if (!scope || !scope.$id) {
           throw 'First argument must be Angularjs scope!'
@@ -67,13 +67,7 @@
 
         var data = Utils.customizeObj({});
 
-        var url = '/services/getDefaultServices';
-
-        if (isOnlyDefault) {
-          url = url + '/getDefaultServices';
-        }
-
-        $http.get(url).then(function (resp) {
+        $http.get('/services/getDefaultServices').then(function (resp) {
 
           for (var i = 0; i < resp.data.length; i++) {
             addServiceData(data, resp.data[i])
@@ -99,20 +93,24 @@
           }
         }
 
-        RealTimeService.subscribe('/services/getDefaultServices', scope, function (newChange) {
+        function serviceDeleted(serviceId, data) {
+
+          var index = Utils.indexOfId(data.default, serviceId);
+
+          if (index > -1) {
+            data.default.splice(index, 1);
+          }
+        }
+
+        RealTimeService.subscribe('/service', scope, function (newChange) {
 
           if (newChange.action == 'SERVICE_SAVED') {
-            serviceSaved(newChange.data);
-          } else if (newChange.action == 'COMPANY_SERVICES_DELETED') {
-            delete data[newChange.data.id];
+            if (newChange.data.isDefault)
+              serviceSaved(newChange.data);
           } else if (newChange.action == 'SERVICE_DELETED') {
-            for (var i = 0; i < newChange.data.length; i++) {
-              serviceDeleted(newChange.data[i].versionedId.id, data);
-            }
+            serviceDeleted(newChange.data.versionedId.id, data);
           }
-          /* else if (newChange.action == 'COMPANY_ARCHIVED') {
-           delete data[newChange.data.id];
-           }*/
+
         });
 
         return data;
@@ -139,24 +137,6 @@
 
         delete data[companyId];
       }
-
-      // function saveList(services, companyId, callback) {
-      //
-      //   if (!services) {
-      //     throw 'services is required!';
-      //   }
-      //
-      //   if (!companyId) throw 'companyId is required!';
-      //
-      //   var future = $http({
-      //     url: '/services/saveList/' + companyId,
-      //     method: 'POST',
-      //     data: { serviceDtoList: services }
-      //   });
-      //
-      //   Utils.handleCallback(future, callback);
-      //
-      // }
 
       function save(service, callback) {
 
@@ -286,19 +266,8 @@
 
       }
 
-      function serviceDeleted(serviceId, data) {
-
-        for (var key in data) {
-          var index = Utils.indexOfId(data[key], serviceId);
-
-          if (index > -1) {
-            data[key].splice(index, 1);
-          }
-        }
-      }
-
       function isNameUnique(name, modelId, callback) {
-        var future = $http.get('/isDefaultServiceNameUnique?' + name + (modelId ? '&id=' + modelId : ''));
+        var future = $http.get('/services/isDefaultServiceNameUnique?name=' + name + (modelId ? '&id=' + modelId : ''));
         Utils.handleCallback(future, callback);
       }
 

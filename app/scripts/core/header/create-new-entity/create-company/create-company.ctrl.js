@@ -150,7 +150,7 @@
           //console.log('$scope.selectedContractType: ', $scope.selectedContractType);
         };
 
-        $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
+        $scope.servicesData = ServicesService.getServicesData($scope, function () {
           if (!savedState.item || !savedState.item.id) {
             $timeout(function () {
               if ($scope.servicesData && $scope.servicesData.default) {

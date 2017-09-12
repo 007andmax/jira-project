@@ -33,6 +33,10 @@
           if (form.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
+            saveService.taxIds = saveService.taxes.map(function (tax) {
+              return tax.id;
+            });
+            saveService.taxes = undefined;
 
             ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;

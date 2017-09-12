@@ -34,7 +34,7 @@
           loadingFinished('companies');
         }
 
-        $scope.servicesData = ServicesService.getServicesData($scope, false, function (data) {
+        $scope.servicesData = ServicesService.getServicesData($scope, function (data) {
           loadingFinished('default');
         });
 

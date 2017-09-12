@@ -59,11 +59,11 @@
       Utils.handleCallback(future, callback);
     }
 
-    function linkWithEntity(entityId, entityType, entityTaxes, callback) {
+    function linkWithEntity(entityId, entityType, taxIds, callback) {
       var future = $http.post('/taxes/linkToExpense', {
         expenseId: entityId,
         expenseType: entityType.toUpperCase(),
-        taxIds: entityTaxes
+        taxIds: taxIds
       });
       Utils.handleCallback(future, callback);
     }

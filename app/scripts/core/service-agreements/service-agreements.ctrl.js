@@ -158,7 +158,7 @@
         $scope.editContract = {};
         $scope.editContract.services = [];
 
-        ServicesService.getServicesData($scope, false, function (data) {
+        ServicesService.getServicesData($scope, function (data) {
           for (var i = 0; i < data.length; i++) {
             var serv = {
               name: data[i].name,
