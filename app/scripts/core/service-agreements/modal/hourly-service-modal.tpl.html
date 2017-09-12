@@ -214,7 +214,7 @@
         <div class="col-md-1 text-center">Action</div>
         <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
           <div class="col-md-5 form-group">
-            <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly>
+            <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly ng-maxlength="30">
           </div>
           <div class="col-md-2 fourm-group before-icon">
             <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly>

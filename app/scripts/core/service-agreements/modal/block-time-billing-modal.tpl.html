@@ -158,7 +158,7 @@
                      type="text" class="form-control"
                      ng-model="blockTimeService.name"
                      invalid-when="!isNameUnique(newBlockTimeService)"
-                     is-uniq-validation validation-func="validateServiceName">
+                     is-uniq-validation validation-func="validateServiceName" ng-maxlength="30">
 
             </div>
             <div class="col-md-2 fourm-group">
@@ -186,6 +186,7 @@
                      ng-model="newBlockTimeService.name"
                      required
                      ng-minlength="1"
+                     ng-maxlength="30"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      invalid-when="!isNameUnique(newBlockTimeService)"
               >
@@ -246,7 +247,8 @@
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <div class="col-md-5 form-group">
-                  <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name">
+                  <input placeholder="Service Name" type="text"
+                         class="form-control" ng-model="contractService.name" ng-maxlength="30">
                 </div>
                 <div class="col-md-3 fourm-group before-icon">
                   <input placeholder="0.00" type="text" class="form-control"
@@ -292,6 +294,7 @@
                          ng-model="newContractService.name"
                          required
                          ng-minlength="1"
+                         ng-maxlength="30"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                          invalid-when="!isNameUnique(newContractService)"
                   >
@@ -431,7 +434,7 @@
 
             <input class="form-control" type="text"
                    readonly name="startDate"
-                   onclick="return false" value="{{dateFilter(blockTimeContract.startDate)}}">
+                   onclick="return false" ng-model="blockTimeContract.startDate">
             <i class="icn-sm calendar"></i>
           </div>
         </div>
@@ -619,7 +622,7 @@
               <!--<p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>-->
             </div>
             <div class="col-md-6">
-              <p>Start Date: <span>{{dateFilter(blockTimeContract.startDate)}}</span></p>
+              <p>Start Date: <span>{{blockTimeContract.startDate}}</span></p>
               <p>Expire Date: <span>{{blockTimeContract.endDate}}</span></p>
             </div>
           </div>

@@ -3,8 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
-    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService', 'UsersService', '$filter', '$timeout', '$q', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, AgreementsService, CompaniesService, ServicesService, UsersService, $filter, $timeout, $q, UserConfirmationsService) {
+    ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
+      'UsersService', '$filter', '$timeout', '$q',
+      'quicktech.common.services.UserConfirmationsService', 'TaxesService',
+      function ($scope, AgreementsService, CompaniesService, ServicesService,
+                UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30days', '15 days', '7 days'];
 
@@ -14,6 +17,7 @@
           {name: 'On site service pre-settup'},
           {name: 'Remote service pre-settup'}
         ];
+        $scope.taxes = TaxesService.getAll();
 
 
         $scope.defaultServices = [];
