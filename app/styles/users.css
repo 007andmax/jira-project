@@ -617,12 +617,11 @@
 .hourly .btn.btn-create {
   float: right;
 }
-.agreement-fixed-button{
+
+.agreement-fixed-button {
   padding: 10px;
 }
-/*.agreement-fixed-button .btn{*/
-  /*float: right;*/
-/*}*/
+
 .service-header p {
   padding: 15px 0;
 }
