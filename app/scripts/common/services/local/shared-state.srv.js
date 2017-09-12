@@ -32,11 +32,6 @@
             companyId: ''
           }
         },
-        recurringHeader: {
-          filter: {
-            companyId: ''
-          }
-        },
         receivableHeader: {
           filter: {
             companyId: ''

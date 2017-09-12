@@ -67,8 +67,6 @@
             return 'password-manager';
           } else if ($state.includes("accounting.billable")) {
             return 'billable';
-          } else if ($state.includes("accounting.recurring")) {
-            return 'recurring';
           } else if ($state.includes("receivable")) {
             return 'receivable';
           } else if ($state.includes("payments")) {

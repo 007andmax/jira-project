@@ -306,15 +306,6 @@
                       $scope.clearLocalFilter = clearLocalFilter;
                     });
                     break;
-                  case 'RECURRING_ORDERS':
-                    $state.go('accounting.recurring').then(function () {
-                      $scope.sharedState = SharedStateService.getSharedState('recurringHeader');
-                      $scope.sharedState.filter.companyId = item.id;
-                      $scope.globalSearch.searchValue = item.name;
-                      preventSearch = true;
-                      $scope.clearLocalFilter = clearLocalFilter;
-                    });
-                    break;
                   case 'RECEIVABLE_INVOICES':
                     $state.go('receivable', { mode: 'group-by-company' }).then(function () {
                       $scope.sharedState = SharedStateService.getSharedState('receivableHeader');
@@ -390,8 +381,6 @@
             return setLocalFilterByCompany(word, 'servicesHeader');
           } else if ($state.includes("accounting.billable")) {
             return setLocalFilterByCompany(word, 'billableHeader');
-          } else if ($state.includes("accounting.recurring")) {
-            return setLocalFilterByCompany(word, 'recurringHeader');
           } else if ($state.includes("receivable")) {
             return setLocalFilterByCompany(word, 'receivableHeader');
           } else if ($state.includes("receipt-archive")) {
