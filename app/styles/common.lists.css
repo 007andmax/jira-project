@@ -4934,6 +4934,13 @@ border-top: 1px solid #f1f5fa;
   text-align: center;
   padding: 90px 0;
 }
+.hourly .bill-hide-content-item .col-md-2 .dropdown-menu{
+  top: -145px;
+  left: -135px;
+}
+.hourly .bill-hide-content-item .col-md-2 .dropdown-menu label .icn-label-save{
+  right: 85px!important;
+}
 .hourly .not-yet-hourly .btn{
   display: block;
   width: 190px;
