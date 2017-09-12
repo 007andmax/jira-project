@@ -20,12 +20,15 @@ body.non-body-scroll::-webkit-scrollbar {
   /*margin-bottom: 20px;*/
   width: auto;
 }
-.modal-create-ticket .checkbox-dropdown .list-container label{
+
+.modal-create-ticket .checkbox-dropdown .list-container label {
   padding: 13px 40px 13px 15px;
 }
-.modal-create-ticket .col-xs-12 .dropdown-menu{
+
+.modal-create-ticket .col-xs-12 .dropdown-menu {
   width: 100%;
 }
+
 .modal-create-ticket select-taxes .dropdown-menu.dropdown-menu-right {
   width: 100%;
 }
@@ -295,9 +298,10 @@ body.non-body-scroll::-webkit-scrollbar {
 
 @media screen and (max-width: 1600px) {
   .vendor-products-width > li > .intermediate-parent-elem > .col-2,
-  .vendor-products-width > li > [class*='col-']:first-child{
+  .vendor-products-width > li > [class*='col-']:first-child {
     width: calc(100% - 644px);
   }
+
   .qt-billable-clients .tax-recurring input {
     width: 100%;
   }
@@ -1711,6 +1715,26 @@ span.sort-span {
   width: 175px;
 }
 
+.invoice-update .update-content .qt-table a.hit-area i {
+  top: 20px;
+}
+
+.nav-ticket-add > li.invoice-update-btns {
+  display: inline-block;
+  float: none;
+}
+
+.invoice-update .update-content .ticket-add-amount {
+  display: block;
+  width: 100%;
+  margin-right: 33px;
+  text-align: right;
+}
+
+.invoice-update .update-content .ticket-add-amount.has-error span.control-label {
+  float: left;
+}
+
 @media only screen and (min-width: 2000px) {
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-desc {
     width: calc(100% - 1150px);
@@ -1932,6 +1956,7 @@ span.sort-span {
   right: 0 !important;
   left: initial !important;
 }
-.right-align-tooltip{
+
+.right-align-tooltip {
   display: inline-block;
 }
