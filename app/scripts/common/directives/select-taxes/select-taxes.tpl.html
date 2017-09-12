@@ -6,10 +6,16 @@
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxes | orderBy: 'name' track by tax.id">
-          <label class="control checkbox ellipsis">
+          <label class="control checkbox ellipsis" ng-if="!$ctrl.previewMode">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
                    ng-change="$ctrl.updateEntityTaxList(tax)">
             {{ tax.name }}&nbsp;{{ tax.rate }}%
+            <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]"></i>
+          </label>
+
+          <label class="control checkbox ellipsis" ng-if="$ctrl.previewMode" onclick="return false">
+            <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]">
+            {{:: tax.name }}&nbsp;{{:: tax.rate }}%
             <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]"></i>
           </label>
         </div>

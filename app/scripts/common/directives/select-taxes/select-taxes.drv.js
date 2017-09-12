@@ -9,7 +9,8 @@
       entity: '=',
       entityType: '@?',
       onClose: '=?',
-      isIcon: '@?'
+      isIcon: '@?',
+      isPreviewMode: '@?'
     },
     controller: selectTaxesCtrl
   });
@@ -22,6 +23,7 @@
 
     //$ctrl.isIcon = $scope.$eval($ctrl.isIcon);
     this.showIcon = $ctrl.isIcon ? true : false;
+    this.previewMode = $ctrl.isPreviewMode ? true : false;
 
     $ctrl.searchTax = '';
 
