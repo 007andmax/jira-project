@@ -4857,7 +4857,7 @@ border-top: 1px solid #f1f5fa;
 .service-form-wrapper {
   overflow-y: scroll;
   overflow-x: hidden !important;
-  max-height: 680px;
+  max-height: 650px;
 }
 
 .service-form-wrapper .form-group {
@@ -4942,8 +4942,6 @@ border-top: 1px solid #f1f5fa;
 .hourly .service-bill-hide-content{
   padding-top: 15px;
   padding-left: 0;
-  overflow: auto;
-  max-height: 340px;
 }
 
 .block-time .service-bill-hide-content .before-icon:before{
@@ -5025,15 +5023,13 @@ border-top: 1px solid #f1f5fa;
   top: 4px;
   left: 25px;
 }
-.bill-hide-content-item .col-md-1 p{
+.bill-hide-content-item .col-md-2 p{
   display: inline-block;
 }
 .bill-hide-content-item select-taxes{
   display: inline-block;
 }
-.bill-hide-content-item .dropdown-menu-left{
-  left: -45px;
-}
+
 .bill-hide-content-item .dropdown-menu-left label{
   min-width: 130px;
   padding: 13px 15px;
@@ -5042,7 +5038,7 @@ border-top: 1px solid #f1f5fa;
   min-width: 130px;
 }
 .bill-hide-content-item .icn-label-save{
-  right: 12px;
+  right: 85px;
 }
 .before-icon input {
   padding-left: 25px;
