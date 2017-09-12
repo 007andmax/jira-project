@@ -38,40 +38,41 @@
           <div class="form-group">
             Select Date:
             <!--<input type="text"-->
-                   <!--class="form-control has-dropdown readonly-normal"-->
-                   <!--name="StartDate"-->
-                   <!--readonly-->
-                   <!--date-format="dd/mm/yy"-->
-                   <!--date-range-picker="startDatePicker"-->
-                   <!--min-date="{{today}}"-->
-                   <!--ng-model="blockTimeContract.startDate"-->
-                   <!--placeholder="Start Date">-->
+            <!--class="form-control has-dropdown readonly-normal"-->
+            <!--name="StartDate"-->
+            <!--readonly-->
+            <!--date-format="dd/mm/yy"-->
+            <!--date-range-picker="startDatePicker"-->
+            <!--min-date="{{today}}"-->
+            <!--ng-model="blockTimeContract.startDate"-->
+            <!--placeholder="Start Date">-->
             <!--<i class="report-calendar"></i>-->
 
             <input class="form-control" type="text" ng-model="blockTimeContract.startDate" placeholder="../../.."
                    readonly ng-change="changeStartDate()" name="startDate"
-                   qt-data-time-picker  min-date="blockTimeContract.minStartDate">
+                   qt-data-time-picker min-date="blockTimeContract.minStartDate">
             <i class="icn-sm calendar"></i>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             <!--<input style="margin-top: 25px;"-->
-                   <!--type="text"-->
-                   <!--class="form-control has-dropdown readonly-normal"-->
-                   <!--name="EndDate"-->
-                   <!--readonly-->
-                   <!--date-format="dd/mm/yy"-->
-                   <!--date-range-picker="endDatePicker"-->
-                   <!--min-date="{{minDateForEndDatePicker}}"-->
-                   <!--ng-model="blockTimeContract.endDate"-->
-                   <!--placeholder="End Date">-->
+            <!--type="text"-->
+            <!--class="form-control has-dropdown readonly-normal"-->
+            <!--name="EndDate"-->
+            <!--readonly-->
+            <!--date-format="dd/mm/yy"-->
+            <!--date-range-picker="endDatePicker"-->
+            <!--min-date="{{minDateForEndDatePicker}}"-->
+            <!--ng-model="blockTimeContract.endDate"-->
+            <!--placeholder="End Date">-->
             <!--<i class="report-calendar"></i>-->
 
-            <input style="margin-top: 25px;" type="text" placeholder="../../.."  readonly ng-if="reInitEndDate"
-                    ng-model="blockTimeContract.endDate"
+            <input style="margin-top: 25px;" type="text" placeholder="../../.." readonly ng-if="reInitEndDate"
+                   ng-model="blockTimeContract.endDate"
                    class="form-control" date-time-picker-with-period name="endDate"
-                   default-date="blockTimeContract.endDate" min-date="blockTimeContract.minEndDate" period="blockTimeContract.period">
+                   default-date="blockTimeContract.endDate" min-date="blockTimeContract.minEndDate"
+                   period="blockTimeContract.period">
 
             <i class="icn-sm calendar"></i>
           </div>
@@ -135,13 +136,23 @@
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
           </div>
         </div>
+        <div class="col-md-4 form-group">
+          <div>
+            Select taxes
+            <!--<i class="icn-sm icn-tax"> </i>-->
+            <select-taxes taxes="taxes" entity="blockTimeContract"></select-taxes>
+            <!--<p>{{blockTimeContract.taxes.length}}</p>-->
+          </div>
+
+        </div>
         <div class="col-md-12 service-bill-hide-content">
           <p>Create customer services to track your time spent with this block time contract</p>
           <div class="col-md-7">Service name</div>
           <div class="col-md-2">Action</div>
 
 
-          <div class="bill-hide-content-item clearfix" ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
+          <div class="bill-hide-content-item clearfix"
+               ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
             <div class="col-md-7 form-group">
               <input placeholder="Service Name"
                      type="text" class="form-control"
@@ -177,7 +188,7 @@
                      ng-minlength="1"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      invalid-when="!isNameUnique(newBlockTimeService)"
-                     >
+              >
               <!--is-uniq-validation validation-func="validateServiceName"-->
             </div>
 
@@ -200,20 +211,20 @@
 
               Enable Time Rollover of unused hours
             </label>
-            <div class="service-bill-hide-content">
-              <div class="form-group before-icon"
-                   ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'ratePerHour')}">
-                Rate per hour:
-                <!--<input style="width: 130px;" type="text" placeholder="Rate per hr" class="form-control hour-rate">-->
-                <input placeholder="0.00"
-                       type="text"
-                       name="ratePerHour"
-                       style="width: 130px;"
-                       class="form-control hour-rate"
-                       ng-model="blockTimeContract.ratePerHour"
-                       hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
-              </div>
-            </div>
+            <!--<div class="service-bill-hide-content">-->
+              <!--<div class="form-group before-icon"-->
+                   <!--ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'ratePerHour')}">-->
+                <!--Rate per hour:-->
+                <!--&lt;!&ndash;<input style="width: 130px;" type="text" placeholder="Rate per hr" class="form-control hour-rate">&ndash;&gt;-->
+                <!--<input placeholder="0.00"-->
+                       <!--type="text"-->
+                       <!--name="ratePerHour"-->
+                       <!--style="width: 130px;"-->
+                       <!--class="form-control hour-rate"-->
+                       <!--ng-model="blockTimeContract.ratePerHour"-->
+                       <!--hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
           <div class="col-md-12">
             <label class="control checkbox">
@@ -283,7 +294,7 @@
                          ng-minlength="1"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                          invalid-when="!isNameUnique(newContractService)"
-                         >
+                  >
 
                 </div>
                 <div class="col-md-3 fourm-group before-icon">
@@ -383,8 +394,6 @@
 </div>
 
 
-
-
 <div class="service-agreement-modal" ng-show="!editMode">
   <div class="service-form-wrapper">
     <div class="block-time clearfix" ng-controller="blockTimeBillingCtrl" ng-form="blockTimeContractForm2">
@@ -413,7 +422,7 @@
             Interval:
             <input custom-style="{'width':'100%'}" type="text" class="form-control"
                    ng-model="blockTimeContract.interval"
-                    readonly onclick="return false">
+                   readonly onclick="return false">
           </div>
         </div>
         <div class="col-md-3">
@@ -421,7 +430,7 @@
             Select Date:
 
             <input class="form-control" type="text"
-                   readonly  name="startDate"
+                   readonly name="startDate"
                    onclick="return false" value="{{dateFilter(blockTimeContract.startDate)}}">
             <i class="icn-sm calendar"></i>
           </div>
@@ -429,7 +438,7 @@
         <div class="col-md-3">
           <div class="form-group">
 
-            <input style="margin-top: 25px;" type="text"  readonly ng-if="reInitEndDate"
+            <input style="margin-top: 25px;" type="text" readonly ng-if="reInitEndDate"
                    ng-model="blockTimeContract.endDate"
                    class="form-control" onclick="return false">
 
@@ -483,13 +492,23 @@
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required readonly>
           </div>
         </div>
+        <div class="col-md-4 form-group">
+          <div>
+            Select taxes
+            <!--<i class="icn-sm icn-tax"> </i>-->
+            <select-taxes taxes="taxes" entity="blockTimeContract" is-preview-mode="true"></select-taxes>
+            <!--<p>{{blockTimeContract.taxes.length}}</p>-->
+          </div>
+
+        </div>
         <div class="col-md-12 service-bill-hide-content">
           <p>Create customer services to track your time spent with this block time contract</p>
           <div class="col-md-7">Service name</div>
           <div class="col-md-2">Action</div>
 
 
-          <div class="bill-hide-content-item clearfix" ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
+          <div class="bill-hide-content-item clearfix"
+               ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
             <div class="col-md-7 form-group">
               <input placeholder="Service Name"
                      type="text" class="form-control"
@@ -509,17 +528,17 @@
 
               Enable Time Rollover of unused hours
             </label>
-            <div class="service-bill-hide-content">
-              <div class="form-group before-icon">
-                Rate per hour:
-                <input placeholder="0.00"
-                       type="text"
-                       style="width: 130px;"
-                       class="form-control hour-rate"
-                       ng-model="blockTimeContract.blockTimeServices[0].rate"
-                       hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required readonly>
-              </div>
-            </div>
+            <!--<div class="service-bill-hide-content">-->
+              <!--<div class="form-group before-icon">-->
+                <!--Rate per hour:-->
+                <!--<input placeholder="0.00"-->
+                       <!--type="text"-->
+                       <!--style="width: 130px;"-->
+                       <!--class="form-control hour-rate"-->
+                       <!--ng-model="blockTimeContract.blockTimeServices[0].rate"-->
+                       <!--hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required readonly>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
           <div class="col-md-12">
             <label class="control checkbox">
@@ -541,7 +560,8 @@
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <div class="col-md-5 form-group">
-                  <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name"readonly>
+                  <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name"
+                         readonly>
                 </div>
                 <div class="col-md-3 fourm-group before-icon">
                   <input placeholder="0.00" type="text" class="form-control"
@@ -557,6 +577,7 @@
                 <div class="col-md-1 form-group">
                   <div>
                     <div>
+                      <select-taxes taxes="taxes" entity="contractService" is-icon="true" is-preview-mode="true"></select-taxes>
                       <p>{{contractService.taxes.length}}</p>
                     </div>
                   </div>
