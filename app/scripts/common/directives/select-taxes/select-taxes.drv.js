@@ -36,7 +36,8 @@
 
     //  add taxes to the list from entity
     //  it's needed to make it possible to manage related taxes even when original is deleted
-    $ctrl.taxes = $ctrl.taxes.staticCopy();
+    // $ctrl.taxes = $ctrl.taxes.staticCopy();
+    $ctrl.taxes = angular.copy($ctrl.taxes);
     for(var i = 0; i < $ctrl.entity.taxes.length; i++){
       var entityTax = $ctrl.entity.taxes[i];
       var sameOriginalTax = $ctrl.taxes.find(function(tax){

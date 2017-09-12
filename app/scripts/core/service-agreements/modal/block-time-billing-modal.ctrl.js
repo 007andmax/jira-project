@@ -50,12 +50,23 @@
             blockRate: null,
             interval: "MONTHLY",
             blockTimeServices: [],
-            services: []
+            services: [],
+            taxIds: [],
+            taxes: []
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
           //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
           $scope.blockTimeContract.minStartDate = Date.now();
+          $scope.blockTimeContract.taxes = [];
+
+          for(var i=0; i< $scope.blockTimeContract.taxIds.length; i++) {
+            for(var j=0; j<$scope.taxes.length; j++) {
+              if($scope.blockTimeContract.taxIds[i] === $scope.taxes[j].id) {
+                $scope.blockTimeContract.taxes.push($scope.taxes[j]);
+              }
+            }
+          }
         }
 
         $scope.newContractService = {
@@ -342,7 +353,6 @@
           if($scope.blockTimeContract.description &&
           $scope.blockTimeContract.startDate &&
           $scope.blockTimeContract.endDate &&
-          $scope.blockTimeContract.ratePerHour &&
           $scope.blockTimeContract.blockTimeServices.length>0 &&
           $scope.blockTimeContract.includedHours &&
           $scope.blockTimeContract.blockRate) {
@@ -459,7 +469,7 @@
             for(var i=0; i<$scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {
                 name: $scope.blockTimeContract.blockTimeServices[i].name,
-                rate: contractData.ratePerHour
+                rate: contractData.rateExceeding,
               };
               blockContract.blockTimeServices.push(bs);
             }
@@ -487,6 +497,11 @@
                   itemOrder: 0
                 };
                 blockContract.shares.push(user)
+              }
+            }
+            if($scope.blockTimeContract.taxes && $scope.blockTimeContract.taxes.length) {
+              for(var r=0; r<$scope.blockTimeContract.taxes.length; r++) {
+                blockContract.taxIds.push($scope.blockTimeContract.taxes[r].id);
               }
             }
 
