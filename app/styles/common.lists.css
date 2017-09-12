@@ -4941,6 +4941,9 @@ border-top: 1px solid #f1f5fa;
 .hourly .bill-hide-content-item .col-md-2 .dropdown-menu label .icn-label-save{
   right: 85px!important;
 }
+.hourly.read-only .bill-hide-content-item .col-md-2 .dropdown-menu{
+  top: -65px;
+}
 .hourly .not-yet-hourly .btn{
   display: block;
   width: 190px;
