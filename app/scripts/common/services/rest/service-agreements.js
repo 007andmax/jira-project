@@ -6,7 +6,7 @@
   var services = angular.module('main.services');
 
   services.factory('AgreementsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
-    function ($http, $rootScope, RealTimeService, Utils ) {
+    function ($http, $rootScope, RealTimeService, Utils) {
 
 
       function getServiceAgreements(callback) {
@@ -26,9 +26,15 @@
         });
 
         RealTimeService.subscribe('/serviceAgreement', scope, function (newChange) {
-          console.log('newChange ', newChange);
           if (newChange.action === 'SERVICE_AGREEMENT_SAVED') {
-            agreements.push(newChange.data);
+            var agreementToUpdate = Utils.findById(agreements, newChange.data.id);
+
+            if (agreementToUpdate) {
+              Utils.customizeObj(newChange.data, agreementToUpdate);
+            } else {
+              agreements.push(Utils.customizeObj(newChange.data));
+            }
+
           } else if (newChange.action === 'SERVICE_AGREEMENT_DELETED') {
             Utils.deleteById(agreements, newChange.data.id);
           }
