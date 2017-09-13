@@ -4868,7 +4868,15 @@ border-top: 1px solid #f1f5fa;
   display: inline-block;
   vertical-align: middle;
 }
-
+.service-contract-details .col-md-3 .icn-remove-old{
+  top: 36px;
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+.service-contract-details .col-md-3 .icn-caret-gray{
+  right: 15px;
+}
 .service-contract-details p {
   margin: 15px 0;
 }
