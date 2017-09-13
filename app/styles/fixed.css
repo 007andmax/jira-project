@@ -152,7 +152,46 @@ body.non-body-scroll::-webkit-scrollbar {
   overflow-y: scroll;
   margin-left: -150px;
 }
-
+.qt-product-list .new-intermediate-parent-elem [class*='col-md-'],
+.qt-product-list .new-list-heading [class*='col-md-']{
+  padding: 0 5px;
+  text-align: left;
+  word-wrap: break-word;
+}
+.qt-product-list .new-intermediate-parent-elem,
+.qt-product-list .new-list-heading{
+  padding: 15px;
+  min-height: 55px;
+}
+.qt-product-list .new-intermediate-parent-elem{
+  border-top: 1px solid #eee;
+  float: left;
+}
+.qt-product-list .new-intermediate-parent-elem .col-md-1,
+.qt-product-list .new-list-heading .col-md-1{
+  width: 7.29%;
+}
+.qt-product-list .new-list-heading {
+  text-transform: capitalize;
+  width: 99.5%;
+  cursor: pointer!important;
+  font-weight: bold;
+}
+.qt-product-list .new-intermediate-parent-elem{
+  width: 100%;
+}
+.product-list-btn a{
+  margin-right: 16px;
+}
+.product-list-btn a:first-child{
+  margin-right: 0;
+}
+.qt-list .new-list-heading .sort-icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
 .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
   left: 20px;
 }

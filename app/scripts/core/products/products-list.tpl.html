@@ -3,7 +3,7 @@
 
     <div ng-include="'/html/scripts/core/products/products-table-header.tpl.html'"></div>
 
-    <div vs-repeat="55" style="height: 500px; overflow: scroll">
+    <div vs-repeat="55" style="height: 500px; overflow: scroll; width: 100%;">
       <div
         ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
         ng-controller="quicktech.core.products.productCtrl"

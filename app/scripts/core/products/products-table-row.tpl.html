@@ -1,35 +1,35 @@
-<div class="intermediate-parent-elem">
+<div class="new-intermediate-parent-elem clearfix">
 
-  <div class="col-2" ng-class="{'product-description': category.default}"
+  <div class="col-md-5" ng-class="{'product-description': category.default}"
        uib-tooltip="{{ product.description }}"
        trimmed-tooltip-checker="product.description">
   </div>
 
-  <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+  <div class="col-md-1" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
     {{ product.cost | currency: '$': 2 }}
   </div>
 
-  <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
+  <div class="col-md-1">{{ product.sale | currency: '$': 2 }}</div>
 
-  <div class="col-4" ng-if="showCategory">
+  <div class="col-md-1" ng-if="showCategory">
     {{ product.category.default ? '' : product.category.name}}
   </div>
 
-  <div class="col-4">{{ getCompanyById(product.company.id).name}}</div>
+  <div class="col-md-1">{{ getCompanyById(product.company.id).name}}</div>
 
-  <div class="col-4" style="padding-left: 20px;">
+  <div class="col-md-1">
     {{ product.ilc}}
   </div>
 
-  <div class="col-4">
+  <div class="col-md-1">
     {{ product.manufacture}}
   </div>
 
-  <div class="col-4">
+  <div class="col-md-1">
     {{ getSelectedTaxNames(product.taxes) }}
   </div>
 
-  <div class="col-6 pull-right" uib-dropdown dropdown-append-to-body="true" keyboard-nav="true"
+  <div class="col-md-1 product-list-btn pull-right" uib-dropdown dropdown-append-to-body="true" keyboard-nav="true"
        ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
 
     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
