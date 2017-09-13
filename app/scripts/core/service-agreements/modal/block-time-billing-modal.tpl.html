@@ -148,7 +148,7 @@
         <div class="col-md-12 service-bill-hide-content">
           <p>Create customer services to track your time spent with this block time contract</p>
           <div class="col-md-7">Service name</div>
-          <div class="col-md-2">Action</div>
+          <div class="col-md-2 text-center">Action</div>
 
 
           <div class="bill-hide-content-item clearfix"
@@ -241,9 +241,9 @@
 
               <div class="col-md-5">Service name</div>
               <div class="col-md-3">Per hour</div>
-              <div class="col-md-2">Make Billable</div>
-              <div class="col-md-1">Tax</div>
-              <div class="col-md-1">Action</div>
+              <div class="col-md-2 text-center">Make Billable</div>
+              <div class="col-md-1 text-center">Tax</div>
+              <div class="col-md-1 text-center">Action</div>
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <div class="col-md-5 form-group">
@@ -255,22 +255,22 @@
                          ng-model="contractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
-                <div class="col-md-2 form-group">
+                <div class="col-md-2 form-group text-center">
                   <label class="control checkbox">
                     <input ng-model="contractService.billable" type="checkbox">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="col-md-1 form-group">
+                <div class="col-md-1 form-group text-center">
                   <div>
                     <div>
                       <!--<i class="icn-sm icn-tax"> </i>-->
                       <select-taxes taxes="taxes" entity="contractService" is-icon="true"></select-taxes>
-                      <p>{{contractService.taxes.length}}</p>
+                      <p style="display: inline-block;">{{contractService.taxes.length}}</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-1 form-group">
+                <div class="col-md-1 form-group text-center">
                   <div class="add-remove-service">
                     <div ng-click="deleteContractService(contractService)">
                       <i class="icon-sm icn-delete"></i>
@@ -307,21 +307,21 @@
                          ng-model="newContractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
-                <div class="col-md-2 fourm-group">
+                <div class="col-md-2 fourm-group text-center">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="newContractService.billable">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="col-md-1 fourm-group">
+                <div class="col-md-1 fourm-group text-center">
                   <div class="" ng-hide="contractServiceList.length > 19">
                     <div>
                       <select-taxes taxes="taxes" entity="newContractService" is-icon="true"></select-taxes>
-                      <p>{{newContractService.taxes.length}}</p>
+                      <p style="display: inline-block;">{{newContractService.taxes.length}}</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-1 fourm-group">
+                <div class="col-md-1 fourm-group text-center">
                   <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
                     <div ng-click="addContractService(newContractServiceForm, newContractService)">
                       <i class="icon-sm icn-add-action"></i>
@@ -366,7 +366,7 @@
           </div>
         </div>
       </div>
-      <div class="contacts-details">
+      <div class="contacts-details col-md-12">
         <h5>Details</h5>
         <div class="contacts-details-content clearfix">
           <div class="col-md-8">
@@ -557,9 +557,9 @@
 
               <div class="col-md-5">Service name</div>
               <div class="col-md-3">Per hour</div>
-              <div class="col-md-2">Make Billable</div>
-              <div class="col-md-1">Tax</div>
-              <div class="col-md-1">Action</div>
+              <div class="col-md-2 text-center">Make Billable</div>
+              <div class="col-md-1 text-center">Tax</div>
+              <div class="col-md-1 text-center">Action</div>
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <div class="col-md-5 form-group">
@@ -571,21 +571,21 @@
                          ng-model="contractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
                 </div>
-                <div class="col-md-2 form-group">
+                <div class="col-md-2 form-group text-center">
                   <label class="control checkbox">
                     <input ng-model="contractService.billable" type="checkbox" onclick="return false">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="col-md-1 form-group">
+                <div class="col-md-1 form-group text-center">
                   <div>
                     <div>
                       <select-taxes taxes="taxes" entity="contractService" is-icon="true" is-preview-mode="true"></select-taxes>
-                      <p>{{contractService.taxes.length}}</p>
+                      <p style="display: inline-block;">{{contractService.taxes.length}}</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-1 form-group"></div>
+                <div class="col-md-1 form-group text-center"></div>
               </div>
             </div>
 
@@ -611,7 +611,7 @@
           </div>
         </div>
       </div>
-      <div class="contacts-details">
+      <div class="contacts-details col-md-12">
         <h5>Details</h5>
         <div class="contacts-details-content clearfix">
           <div class="col-md-8">

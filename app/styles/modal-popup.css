@@ -434,6 +434,9 @@ _::-webkit-:not(:root:root),
   top: 1px;
   right: 0;
 }
+.service-form-wrapper .block-time .x-mark{
+  top: 24px;
+}
 .create-window .input-top-4 .x-mark {
   top: 4px;
 }
