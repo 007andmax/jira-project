@@ -30,8 +30,14 @@
                    ng-model="blockTimeContract.interval"
                    uib-typeahead="interval for interval in intervals"
                    qt-typeahead-async-show-on-focus readonly>
-            <div typeahead-input-icon="blockTimeContract.interval"></div>
-            <i class="icn-sm icn-caret-gray"></i>
+            <!--<div typeahead-input-icon="blockTimeContract.interval"></div>-->
+            <!--<i class="icn-sm icn-caret-gray"></i>-->
+            <div>
+              <i class="icn-sm icn-caret-gray" ng-show="!blockTimeContract.interval"></i>
+              <i class="icn-sm icn-remove-old"
+                 ng-show="blockTimeContract.interval"
+                 uib-tooltip="clear" tooltip-placement="top" ng-click="blockTimeContract.interval = ''"></i>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -580,7 +586,9 @@
                 <div class="col-md-1 form-group text-center">
                   <div>
                     <div>
-                      <select-taxes taxes="taxes" entity="contractService" is-icon="true" is-preview-mode="true"></select-taxes>
+                      <i class="icn-sm icn-tax" ng-hide="contractService.taxes.length > 0"> </i>
+                      <select-taxes ng-show="contractService.taxes.length > 0" taxes="taxes" entity="contractService"
+                                    is-icon="true" is-preview-mode="true"></select-taxes>
                       <p style="display: inline-block;">{{contractService.taxes.length}}</p>
                     </div>
                   </div>
