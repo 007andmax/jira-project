@@ -128,9 +128,9 @@
       }]).controller('serviceAgreementsModalCtrl', [
     '$scope', '$uibModalInstance', 'companyData', '$state',
     'ServicesService', 'CompaniesService', 'TaxesService',
-    'AgreementsService', '$filter', '$q', '$timeout', 'quicktech.common.services.UserConfirmationsService',
+    'AgreementsService', '$filter', '$q', '$timeout', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
     function ($scope, $uibModalInstance, companyData, $state, ServicesService,
-              CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout, UserConfirmationsService) {
+              CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout, UserConfirmationsService, UserNotificationService) {
 
       $scope.taxes = TaxesService.getAll();
       $scope.companyId = companyData.companyId;
@@ -176,7 +176,12 @@
             }
             $scope.editContract.services.push(serv);
           }
+          for(var s=0; s<$scope.editContract.services.length; s++) {
+            //$scope.addDefaultTaxes($scope.editContract.services[s]);
+            $scope.editContract.services[s].taxes = $scope.addDefaultTaxes()
+          }
         });
+
 
       } else {
         console.log(companyData);
@@ -241,6 +246,16 @@
         $scope.minDateForEndDatePicker = d.getTime();
         console.log($scope.minDateForEndDatePicker);
       }
+
+      $scope.addDefaultTaxes = function() {
+        var defaultTaxList=[];
+        for(var i=0; i<$scope.taxes.length; i++) {
+          if($scope.taxes[i].isDefault) {
+            defaultTaxList.push($scope.taxes[i])
+          }
+        }
+        return defaultTaxList;
+      };
 
       $scope.dateFilter = function (date) {
         return $filter('date')(date, 'dd MMM yyyy');
@@ -395,13 +410,6 @@
         return deferred.promise;
       }
 
-      // $scope.validateNewServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
-      //   var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
-      //   ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, ngModelCtrl, function (resp) {
-      //     ngModelCtrl.$setValidity('unique', resp.valid);
-      //     afterValidationCallback();
-      //   });
-      // };
       function validateNewServiceName(editService) {
         $scope.newServiceNameIsError=false;
         var deferred = $q.defer();
@@ -466,7 +474,13 @@
         console.log(companyContractInfo);
         AgreementsService.createContract(companyContractInfo, function (resp) {
           console.log(resp);
-          $scope.closeModal();
+          if(resp.message === 'Validation failed') {
+            $scope.showErrorInHourlyContract = true;
+            $scope.errorMessage = 'Something went wrong, please try again later and contact administrator';
+          } else {
+            $scope.closeModal();
+          }
+
         })
       }
 

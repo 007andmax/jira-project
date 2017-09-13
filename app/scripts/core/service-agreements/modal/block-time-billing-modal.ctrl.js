@@ -9,7 +9,7 @@
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY', '30days', '15 days', '7 days'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
 
         $scope.parseDate = Date.parse.bind(Date);
 
@@ -56,7 +56,7 @@
             blockTimeServices: [],
             services: [],
             taxIds: [],
-            taxes: []
+            taxes: $scope.addDefaultTaxes()
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
@@ -77,7 +77,7 @@
           name: '',
           rate: 0,
           billable: false,
-          taxes: []
+          taxes: $scope.addDefaultTaxes()
         };
 
 
@@ -321,7 +321,7 @@
                         name: '',
                         rate: 0,
                         billable: false,
-                        taxes: []
+                        taxes: $scope.addDefaultTaxes()
                       };
                       reInitServiceForm()
                     } else {
@@ -332,7 +332,7 @@
                         name: '',
                         rate: 0,
                         billable: false,
-                        taxes: []
+                        taxes: $scope.addDefaultTaxes()
                       };
                       reInitServiceForm()
 

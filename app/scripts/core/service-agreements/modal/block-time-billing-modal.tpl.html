@@ -350,7 +350,7 @@
               Notify when block time has been used
             </label>
 
-            <div class="service-bill-hide-content ticket-add-footer">
+            <div class="service-bill-hide-content ticket-add-footer" ng-show="blockTimeContract.notifyBlockTimeUsed">
               <div class="ticket-add-content-actions-dropdown pull-left"
                    ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
@@ -505,7 +505,8 @@
           <div>
             Select taxes
             <!--<i class="icn-sm icn-tax"> </i>-->
-            <select-taxes taxes="taxes" entity="blockTimeContract" is-preview-mode="true"></select-taxes>
+            <select-taxes taxes="taxes" entity="blockTimeContract" is-preview-mode="true" ng-show="blockTimeContract.taxIds.length > 0"></select-taxes>
+            <input placeholder="No taxes selected" readonly type="text" class="form-control" ng-hide="blockTimeContract.taxIds.length > 0">
             <!--<p>{{blockTimeContract.taxes.length}}</p>-->
           </div>
 
@@ -557,7 +558,7 @@
             </label>
 
 
-            <div class="service-bill-hide-content clearfix" ng-show="blockTimeContract.billForAdditionalService">
+            <div class="service-bill-hide-content clearfix" ng-show="blockTimeContract.services.length>0">
               <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
                 contract time</p>
 
