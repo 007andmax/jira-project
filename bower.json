@@ -27,7 +27,8 @@
     "d3": "3.5.9",
     "ng-cropper": "0.4.1",
     "nvd3": "^1.8.5",
-    "angular-nvd3": "^1.0.9"
+    "angular-nvd3": "^1.0.9",
+    "angular-vs-repeat": "^1.1.7"
   },
   "resolutions": {
     "angular": "1.5.3",

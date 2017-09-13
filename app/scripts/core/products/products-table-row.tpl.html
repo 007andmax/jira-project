@@ -1,0 +1,65 @@
+<div class="intermediate-parent-elem">
+
+  <div class="col-2" ng-class="{'product-description': category.default}"
+       uib-tooltip="{{ product.description }}"
+       trimmed-tooltip-checker="product.description">
+  </div>
+
+  <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+    {{ product.cost | currency: '$': 2 }}
+  </div>
+
+  <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
+
+  <div class="col-4" ng-if="showCategory">
+    {{ product.category.default ? '' : product.category.name}}
+  </div>
+
+  <div class="col-4">{{ getCompanyById(product.company.id).name}}</div>
+
+  <div class="col-4" style="padding-left: 20px;">
+    {{ product.ilc}}
+  </div>
+
+  <div class="col-4">
+    {{ product.manufacture}}
+  </div>
+
+  <div class="col-4">
+    {{ getSelectedTaxNames(product.taxes) }}
+  </div>
+
+  <div class="col-6 pull-right" uib-dropdown dropdown-append-to-body="true" keyboard-nav="true"
+       ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
+
+    <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+       ng-click="deleteProduct()"
+       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+      <i class="icon-sm icn-delete"></i>
+    </a>
+
+    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+       create-new-entity="product" item="product"
+       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
+      <i class="icon-sm edit-icon"></i>
+    </a>
+
+    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+       aria-expanded="false" uib-dropdown-toggle
+       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="move to other category">
+      <i class="icn-sm icn-send-again"></i>
+    </a>
+
+    <ul class="dropdown-menu move-prod" role="menu" uib-dropdown-menu>
+
+      <li ng-repeat="category in productsData.categories | orderBy: 'name'"
+          ng-hide="category.default || product.category.id === category.id">
+        <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
+          {{ category.name }}
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+</div>

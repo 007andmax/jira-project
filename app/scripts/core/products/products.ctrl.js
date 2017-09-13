@@ -28,7 +28,6 @@
         });
 
         $scope.expandedCategoryId = '';
-        $scope.showCategory = '';
 
         $scope.$watch(function () {
           return $state.params.tabName;
@@ -65,10 +64,6 @@
               }, 2000);
             });
           }
-        });
-
-        $scope.$on('showAllCategories', function (event) {
-          $scope.setShowingCategory('');
         });
 
         $scope.getCompanyById = function (companyId) {
@@ -138,10 +133,6 @@
           } else {
             $scope.expandedCategoryId = id;
           }
-        };
-
-        $scope.setShowingCategory = function (id) {
-          $scope.showCategory = id;
         };
 
         $scope.getSelectedTaxNames = function(taxes) {

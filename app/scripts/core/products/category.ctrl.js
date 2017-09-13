@@ -23,13 +23,6 @@
           $scope.setHighlightProductId(productId);
         });
 
-        $scope.$on('showCategory', function (event, categoryId) {
-          $scope.setShowingCategory(categoryId);
-          if (categoryId !== $scope.expandedCategoryId && $scope.category.productsList.length > 0) {
-            $scope.setExpandedCategoryId(categoryId);
-          }
-        });
-
       }]);
 
 }());

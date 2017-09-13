@@ -32,7 +32,8 @@
       'ngAnimate',
       'LocalStorageModule',
       'ngCropper',
-      'nvd3'
+      'nvd3',
+      'vs-repeat'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
