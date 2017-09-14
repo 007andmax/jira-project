@@ -1874,8 +1874,7 @@ span.sort-span {
 }
 
 .product-list-scroll {
-  min-height: 500px;
+  min-height: 75vh;
   overflow: scroll;
   width: 100%;
-  height: 100%;
 }
