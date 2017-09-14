@@ -374,6 +374,9 @@
       </div>
       <div class="contacts-details col-md-12">
         <h5>Details</h5>
+        <div ng-show="showBlockTimeContractCreateMessageError">
+          <p style="color: red">{{BlockTimeContractCreateMessage}}</p>
+        </div>
         <div class="contacts-details-content clearfix">
           <div class="col-md-8">
             <p class="col-md-12">Vereburn - Monthly Block Time</p>
@@ -440,7 +443,7 @@
 
             <input class="form-control" type="text"
                    readonly name="startDate"
-                   onclick="return false" ng-model="blockTimeContract.startDate">
+                   onclick="return false" value="{{parseDate(blockTimeContract.startDate) | date: 'yyyy/MM/dd' }}">
             <i class="icn-sm calendar"></i>
           </div>
         </div>
@@ -448,7 +451,7 @@
           <div class="form-group">
 
             <input style="margin-top: 25px;" type="text" readonly ng-if="reInitEndDate"
-                   ng-model="blockTimeContract.endDate"
+                   value="{{parseDate(blockTimeContract.endDate) | date: 'yyyy/MM/dd' }}"
                    class="form-control" onclick="return false">
 
             <i class="icn-sm calendar"></i>
@@ -631,8 +634,8 @@
               <!--<p>Renewal Notice: <span>{{blockTimeContract.notifyBlockTimeUsed}}</span></p>-->
             </div>
             <div class="col-md-6">
-              <p>Start Date: <span>{{blockTimeContract.startDate}}</span></p>
-              <p>Expire Date: <span>{{blockTimeContract.endDate}}</span></p>
+              <p>Start Date: <span>{{parseDate(blockTimeContract.startDate) | date: 'yyyy/MM/dd' }}</span></p>
+              <p>Expire Date: <span>{{parseDate(blockTimeContract.endDate) | date: 'yyyy/MM/dd' }}</span></p>
             </div>
           </div>
           <div class="col-md-4">
