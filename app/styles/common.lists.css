@@ -2636,9 +2636,7 @@ Devices tab
 }
 
 .qt-product-form {
-  /*height: 214px !important;*/
   padding: 0 !important;
-
   border: none !important;
 }
 
@@ -2652,7 +2650,7 @@ Devices tab
 }
 
 .product-form-wrapper {
-  height: 166px; /*height: 214px;*/
+  height: 166px;
   padding: 30px 129px 30px 86px;
 
   box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
@@ -2678,14 +2676,14 @@ Devices tab
 .product-form-wrapper .col-2 {
   float: left;
 
-  width: 233px; /*  width: calc(100% - 642px);*/
+  width: 233px;
   padding: 0 5px;
 }
 
 .product-form-wrapper .col-3 {
   float: left;
 
-  width: 203px; /* width: 233px;*/
+  width: 203px;
   padding: 0 5px;
 }
 
@@ -2704,9 +2702,9 @@ Devices tab
 }
 
 .product-form-wrapper .col-desc {
-  float: left; /*float: right;*/
+  float: left;
 
-  width: calc(100% - 845px); /* width: calc(100% - 183px);*/
+  width: calc(100% - 845px);
   padding-left: 5px;
 }
 
@@ -2720,11 +2718,11 @@ Devices tab
   }
 
   .product-form-wrapper .col-2 {
-    width: 323px; /*width: calc(100% - 822px);*/
+    width: 323px;
   }
 
   .product-form-wrapper .col-3 {
-    width: 263px; /* width: 293px;*/
+    width: 263px;
   }
 
   .product-form-wrapper .col-4 {
@@ -2736,7 +2734,7 @@ Devices tab
   }
 
   .product-form-wrapper .col-desc {
-    width: calc(100% - 1115px); /*width: calc(100% - 243px);*/
+    width: calc(100% - 1115px);
   }
 }
 
@@ -2750,11 +2748,11 @@ Devices tab
   }
 
   .product-form-wrapper .col-2 {
-    width: 213px; /*width: calc(100% - 432px);*/
+    width: 213px;
   }
 
   .product-form-wrapper .col-3 {
-    width: 153px; /*width: 163px;*/
+    width: 153px;
   }
 
   .product-form-wrapper .col-4 {
@@ -2766,7 +2764,7 @@ Devices tab
   }
 
   .product-form-wrapper .col-desc {
-    width: calc(100% - 635px); /*  width: calc(100% - 113px);*/
+    width: calc(100% - 635px);
   }
 }
 
@@ -2794,10 +2792,6 @@ Devices tab
 
 .qt-default-services {
   padding: 0 0 26px;
-}
-
-.qt-default-services > li {
-  cursor: pointer;
 }
 
 .qt-default-services > li:before {
@@ -2831,16 +2825,6 @@ Devices tab
 .col-lg-2.buttons-col {
   width: 16%;
 }
-
-/*@media only screen and (min-width: 2000px) {*/
-/*.qt-default-services > li > .col-1 {*/
-/*width: calc(100% - 449px);*/
-/*}*/
-
-/*.qt-default-services > li > .col-2 {*/
-/*width: 263px;*/
-/*}*/
-/*}*/
 
 @-moz-document url-prefix() {
   .qt-default-services > li > .col-2,
@@ -2901,19 +2885,10 @@ Devices tab
   border: none !important;
 }
 
-.qt-services-list > li:last-child.qt-service-form {
-  margin-bottom: 35px;
-}
-
 .qt-service-form:before,
 .qt-service-form:after {
   display: none !important;
 }
-
-/*.service-form-wrapper {*/
-/*padding: 30px;*/
-/*box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;*/
-/*}*/
 
 .service-form-wrapper .qt-form-actions {
   float: right;
@@ -2991,121 +2966,6 @@ Devices tab
     padding-bottom: 1px;
   }
 }
-
-.qt-services {
-  padding: 25px 0 0;
-}
-
-@-moz-document url-prefix() {
-  .qt-services {
-    line-height: 19px;
-  }
-}
-
-.qt-services > li {
-  height: auto;
-  padding: 15px;
-  cursor: pointer;
-}
-
-.qt-services > li:last-child {
-  margin-bottom: 250px;
-}
-
-/*.qt-services > li:nth-child(even) {*/
-/*background-color: #e9f5fb;*/
-/*}*/
-.qt-services > li + li {
-  height: auto;
-}
-
-.qt-services > li > .col-1 {
-  width: calc(100% - 98px);
-}
-
-.qt-services > li > .col-2 {
-  width: 98px;
-  padding-right: 0;
-
-  text-align: right;
-}
-
-.qt-services-list {
-  padding: 0 0 30px 30px;
-  margin-top: 20px;
-  cursor: auto;
-}
-
-.qt-services-list .checkbox-caption {
-  cursor: auto;
-}
-
-.qt-services-list > li {
-  padding: 15px;
-}
-
-.qt-services-list > li:before,
-.qt-services-list > li:after {
-  display: none !important;
-}
-
-.qt-services-list > li > .col-1 {
-  width: calc(100% - 473px);
-}
-
-.qt-services-list > li > .col-5 {
-  width: 80px;
-}
-
-.qt-services-list > li > .col-2 {
-  width: 133px;
-
-  color: #94a4b8;
-}
-
-.qt-services-list > li > .col-3 {
-  width: 160px;
-
-  text-align: right;
-
-  color: #94a4b8;
-}
-
-.qt-services-list > li > .col-4 {
-  width: 120px;
-}
-
-.qt-services-list > li > .col-4 > .hit-area {
-  margin-top: 2px;
-  margin-right: -2px;
-}
-
-.qt-services-list > li > .col-4 > .hit-area + .hit-area {
-  margin-right: 16px;
-}
-
-@-moz-document url-prefix() {
-  .qt-services-list > li > .col-2,
-  .qt-services-list > li > .col-3 {
-    line-height: 19px;
-  }
-  .qt-services-list > li.list-heading > .col-2,
-  .qt-services-list > li.list-heading > .col-3 {
-    line-height: 11px;
-  }
-}
-
-/*.qt-users li:nth-child(odd) {*/
-/*background-color: #fff;*/
-/*}*/
-
-/*.list-company-row:nth-child(odd) {*/
-/*background-color: #fff;*/
-/*}*/
-
-/*.qt-product-list > li:nth-child(odd) {*/
-/*background-color: #fff;*/
-/*}*/
 
 /**Devices**/
 .qt-devices {
