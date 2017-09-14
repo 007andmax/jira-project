@@ -1874,7 +1874,28 @@ span.sort-span {
 }
 
 .product-list-scroll {
-  max-height: 75vh;
+  max-height: 790px;
   overflow: scroll;
   width: 100%;
+}
+
+@media (min-width: 2048px) {
+  .product-list-scroll {
+    max-height: 900vh;
+  }
+}
+@media (min-width: 1600px) {
+  .product-list-scroll {
+    max-height: 650vh;
+  }
+}
+@media (min-width: 1366px) {
+  .product-list-scroll {
+    max-height: 515vh;
+  }
+}
+@media (min-width: 1280px) {
+  .product-list-scroll {
+    max-height: 460vh;
+  }
 }
