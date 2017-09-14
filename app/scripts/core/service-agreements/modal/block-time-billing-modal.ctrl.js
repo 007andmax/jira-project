@@ -53,7 +53,7 @@
             includedHours: null,
             blockRate: null,
             interval: "MONTHLY",
-            blockTimeServices: [],
+            blockTimeServices: preSettupServiceList,
             services: [],
             taxIds: [],
             taxes: $scope.addDefaultTaxes()

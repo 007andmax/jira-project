@@ -177,7 +177,6 @@
             $scope.editContract.services.push(serv);
           }
           for(var s=0; s<$scope.editContract.services.length; s++) {
-            //$scope.addDefaultTaxes($scope.editContract.services[s]);
             $scope.editContract.services[s].taxes = $scope.addDefaultTaxes()
           }
         });
@@ -321,7 +320,7 @@
                   name: editService.name,
                   rate: editService.rate || 0.00,
                   billable: editService.billable || false,
-                  taxes: editService.taxes || [],
+                  taxes: editService.taxes || $scope.addDefaultTaxes(),
                   taxIds: []
                 };
                 if (editService.taxes.length) {
@@ -334,7 +333,7 @@
                   name: '',
                   rate: null,
                   billable: false,
-                  taxes: []
+                  taxes: $scope.addDefaultTaxes()
                 };
                 reInitServiceForm();
               }
