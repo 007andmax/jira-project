@@ -98,12 +98,9 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media (min-width: 2048px) {
-  .left-list > li > .intermediate-parent-elem > .col-2 {
-    width: calc(100% - 1194px);
-  }
-
-  .right-list > li > .intermediate-parent-elem > .col-2, .right-list .col-2 {
-    width: calc(100% - 889px);
+  .qt-product-list.left-list .new-intermediate-parent-elem .col-md-1,
+  .qt-product-list.left-list .new-list-heading .col-md-1 {
+    width: 8.3%;
   }
 }
 
@@ -246,8 +243,33 @@ body.non-body-scroll::-webkit-scrollbar {
     width: 70px;
   }
 
-  .left-list > li > .intermediate-parent-elem > .col-2, .slide-category-content .left-list > li > .col-2 {
-    width: calc(100% - 664px);
+  .product-list-btn a {
+    margin-right: 5px;
+  }
+
+  .qt-product-list.left-list .new-intermediate-parent-elem .col-md-1,
+  .qt-product-list.left-list .new-list-heading .col-md-1 {
+    width: 11.1%;
+  }
+
+  .qt-product-list.left-list .new-intermediate-parent-elem .col-md-5,
+  .qt-product-list.left-list .new-list-heading .col-md-5 {
+    width: 25.7%;
+  }
+
+  .qt-product-list.right-list .new-intermediate-parent-elem .col-md-1,
+  .qt-product-list.right-list .new-list-heading .col-md-1 {
+    width: 9.5%;
+  }
+
+  .qt-product-list.right-list .new-intermediate-parent-elem .col-md-5,
+  .qt-product-list.right-list .new-list-heading .col-md-5 {
+    width: 25.8%;
+  }
+
+  .qt-product-list .new-intermediate-parent-elem .col-md-1.product-list-btn,
+  .qt-product-list .new-list-heading .col-md-1.product-list-btn {
+    width: 7.7%;
   }
 }
 
@@ -272,6 +294,11 @@ body.non-body-scroll::-webkit-scrollbar {
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 198px;
   }
+
+  .qt-product-list,
+  .qt-product-list p {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 1280px) {
@@ -292,16 +319,17 @@ body.non-body-scroll::-webkit-scrollbar {
     font-size: 12px;
   }
 
-  .left-list > li > .intermediate-parent-elem > .col-2, .slide-category-content .left-list > li > .col-2 {
-    width: calc(100% - 603px)
-  }
-
   .qt-list > li > .intermediate-parent-elem > .col-4, .qt-list > li > .col-4 {
     width: 90px;
   }
 
   .qt-default-services li .intermediate-parent-elem .is-billable label {
     left: 0;
+  }
+
+  .qt-product-list,
+  .qt-product-list p {
+    font-size: 11px;
   }
 }
 
@@ -1844,7 +1872,8 @@ span.sort-span {
 .right-align-tooltip {
   display: inline-block;
 }
-.product-list-scroll{
+
+.product-list-scroll {
   min-height: 500px;
   overflow: scroll;
   width: 100%;
