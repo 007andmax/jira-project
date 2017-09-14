@@ -163,6 +163,7 @@
               <input placeholder="Service Name"
                      type="text" class="form-control"
                      ng-model="blockTimeService.name"
+                     required
                      invalid-when="!isNameUnique(newBlockTimeService)"
                      is-uniq-validation validation-func="validateServiceName" ng-maxlength="30">
 
@@ -190,8 +191,6 @@
                      name="newBlockTimeServiceName"
                      class="form-control"
                      ng-model="newBlockTimeService.name"
-                     required
-                     ng-minlength="1"
                      ng-maxlength="30"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      invalid-when="!isNameUnique(newBlockTimeService)"
@@ -290,7 +289,7 @@
                   <p style="color: red">{{newServiceErrorMessage}}</p>
                 </div>
                 <div class="col-md-5 form-group"
-                     ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName')}">
+                     ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName') }">
 
 
                   <input placeholder="New Additional Service name"
@@ -298,8 +297,6 @@
                          name="newContractServiceName"
                          class="form-control"
                          ng-model="newContractService.name"
-                         required
-                         ng-minlength="1"
                          ng-maxlength="30"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                          invalid-when="!isNameUnique(newContractService)"
