@@ -4651,7 +4651,9 @@ Devices tab
   width: 100px;
   display: inline-block;
 }
-
+.hourly{
+  margin-bottom: 75px;
+}
 .hourly .not-yet-hourly {
   text-align: center;
   padding: 90px 0;
