@@ -1879,23 +1879,32 @@ span.sort-span {
   width: 100%;
 }
 
-@media (min-width: 2048px) {
+@media (max-height: 1152px) {
   .product-list-scroll {
-    max-height: 900vh;
+    max-height: 900px;
   }
 }
-@media (min-width: 1600px) {
+
+@media (max-height: 1024px) {
   .product-list-scroll {
-    max-height: 650vh;
+    max-height: 765px;
   }
 }
-@media (min-width: 1366px) {
+
+@media (max-height: 900px) {
   .product-list-scroll {
-    max-height: 515vh;
+    max-height: 650px;
   }
 }
-@media (min-width: 1280px) {
+
+@media (max-height: 768px) {
   .product-list-scroll {
-    max-height: 460vh;
+    max-height: 515px;
+  }
+}
+
+@media (max-height: 720px) {
+  .product-list-scroll {
+    max-height: 460px;
   }
 }
