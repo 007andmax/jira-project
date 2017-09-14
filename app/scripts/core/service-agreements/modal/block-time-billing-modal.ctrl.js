@@ -37,6 +37,9 @@
           taxes: []
         };
 
+        $scope.showBlockTimeContractCreateMessageError = false;
+        $scope.BlockTimeContractCreateMessage = '';
+
         $scope.showNewBlockTimeServiceError = false;
         $scope.showNewServiceError = false;
         $scope.newBlockTimeServiceErrorMessage = '';
@@ -511,7 +514,12 @@
 
             AgreementsService.createContract(blockContract, function(resp) {
               console.log(resp);
-              $scope.closeModal();
+              if(resp.message === 'Validation failed') {
+                $scope.showBlockTimeContractCreateMessageError = true;
+                $scope.BlockTimeContractCreateMessage = 'Something went wrong, please try again later and contact administrator';
+              } else {
+                $scope.closeModal();
+              }
             })
           }
         }

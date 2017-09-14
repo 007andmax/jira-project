@@ -146,6 +146,8 @@
       $scope.newServiceNameIsError = false;
       $scope.newServiceNameErrorMessage = '';
 
+      $scope.parseDate = Date.parse.bind(Date);
+
       $scope.today = Date.now();
 
       $scope.minDateForEndDatePicker;
