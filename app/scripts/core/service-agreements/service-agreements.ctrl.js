@@ -214,22 +214,6 @@
         taxes: []
       };
 
-      // $scope.$watch(function () {
-      //   return $scope.contractCompany;
-      // }, function (company) {
-      //   $scope.blockHourlyChoice = false;
-      //   if (company) {
-      //     AgreementsService.getAgreementCountByType(company.id, 'HOURLY', function (resp) {
-      //
-      //       if (resp.HOURLY > 0) {
-      //         $scope.blockHourlyChoice = true;
-      //         if ($scope.selectedContractType === 'HOURLY') {
-      //           $scope.selectedContractType = 'CREATE_NEW';
-      //         }
-      //       }
-      //     })
-      //   }
-      // });
 
       function reInitServiceForm() {
         $scope.reinitNewServiceForm = false;
