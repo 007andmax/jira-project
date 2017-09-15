@@ -115,13 +115,13 @@
           $scope.disabledSaveChangeButton = true;
 
           var changedProduct = {
-            versionedId: null,
+            versionedId: $scope.editProduct.versionedId,
             cost: $scope.editProduct.cost,
             sale: $scope.editProduct.sale,
             ilc: $scope.editProduct.ilc,
-            manufacture: $scope.editProduct.manufacturer,
+            manufacture: $scope.editProduct.manufacture,
             description: $scope.editProduct.description,
-            companyId: $scope.editProduct.company.id,
+            companyId: $scope.editProduct.company ? $scope.editProduct.company.id : undefined,
             taxIds: [],
             categoryId: $scope.editProduct.category.id
           };

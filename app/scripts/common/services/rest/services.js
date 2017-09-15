@@ -177,17 +177,14 @@
         Utils.handleCallback(future, callback);
       }
 
-      function changeBillableStatus(ids, toBillable, callback) {
+      function changeBillableStatus(id, toBillable, callback) {
 
-        if (!ids) throw 'ids is required argument!';
+        if (!id) throw 'ids is required argument!';
         if (toBillable === undefined) throw 'toBillable is required argument!';
 
-        //if (!Array.isArray(ids)) ids = [ids];
-
         var future = $http({
-          url: '/services/changeBillableStatus?toBillable=' + !!toBillable,
-          method: 'POST',
-          data: ids
+          url: '/services/changeBillableStatus?id=' + id + '&toBillable=' + !!toBillable,
+          method: 'POST'
         });
 
         Utils.handleCallback(future, callback);
