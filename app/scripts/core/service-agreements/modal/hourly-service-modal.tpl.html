@@ -16,7 +16,7 @@
                    type="text"
                    class="form-control"
                    ng-model="editContract.description"
-                   ng-maxlength="255" required>
+                   hard-reset-pattern="descriptionPattern" required>
           </div>
         </div>
         <div class="col-md-12"></div>
@@ -62,7 +62,7 @@
         <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
           <div class="col-md-5 form-group">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name"
-                   ng-maxlength="30">
+                   hard-reset-pattern="serviceNamePattern">
           </div>
           <div class="col-md-2 form-group before-icon">
             <input placeholder="0.00" type="text" class="form-control"
@@ -106,7 +106,7 @@
                    name="editServiceName"
                    class="form-control"
                    ng-model="editService.name"
-                   required ng-maxlength="30">
+                   required hard-reset-pattern="serviceNamePattern">
           </div>
           <div class="col-md-2 fourm-group before-icon">
             <input placeholder="0.00"

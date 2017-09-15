@@ -136,6 +136,9 @@
       $scope.companyInfo = companyData.companyInfo;
       $scope.companiesList = CompaniesService.getClientCompanies();
 
+      $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;
+      $scope.serviceNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/;
+
       $scope.selectedContractType = 'CREATE_NEW';
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;

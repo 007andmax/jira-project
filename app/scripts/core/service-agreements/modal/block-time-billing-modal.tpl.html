@@ -19,7 +19,7 @@
                    type="text"
                    class="form-control"
                    ng-model="blockTimeContract.description"
-                   ng-maxlength="255" required>
+                   hard-reset-pattern="descriptionPattern" required>
           </div>
         </div>
         <div class="col-md-12"></div>
@@ -85,13 +85,6 @@
         </div>
 
         <div class="col-md-12"></div>
-        <!--<div class="col-md-1">-->
-        <!--<label class="control checkbox">-->
-        <!--<input>-->
-        <!--<span class="control-indicator"></span>-->
-        <!--Auto Renew-->
-        <!--</label>-->
-        <!--</div>-->
         <div class="col-md-12">
           <p class="info-block">Block Time Contracts are based on preselling a block of time your customer</p>
         </div>
@@ -105,9 +98,10 @@
               Included hours:
               <input placeholder="Hours"
                      name="includedHours"
-                     type="number"
+                     type="text"
                      class="form-control"
-                     ng-model="blockTimeContract.includedHours" required>
+                     ng-model="blockTimeContract.includedHours"
+                     hard-reset-pattern="decimalNumberPattern" required>
             </div>
           </div>
           <div class="col-md-2">
@@ -169,7 +163,7 @@
                      ng-model="blockTimeService.name"
                      required
                      invalid-when="!isNameUnique(newBlockTimeService)"
-                     is-uniq-validation validation-func="validateServiceName" ng-maxlength="30">
+                     is-uniq-validation validation-func="validateServiceName" hard-reset-pattern="serviceNamePattern">
 
             </div>
             <div class="col-md-2 fourm-group">
@@ -195,7 +189,7 @@
                      name="newBlockTimeServiceName"
                      class="form-control"
                      ng-model="newBlockTimeService.name"
-                     ng-maxlength="30"
+                     hard-reset-pattern="serviceNamePattern"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      invalid-when="!isNameUnique(newBlockTimeService)"
               >
@@ -257,7 +251,7 @@
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <div class="col-md-5 form-group">
                   <input placeholder="Service Name" type="text"
-                         class="form-control" ng-model="contractService.name" ng-maxlength="30">
+                         class="form-control" ng-model="contractService.name" hard-reset-pattern="serviceNamePattern">
                 </div>
                 <div class="col-md-2 fourm-group before-icon">
                   <input placeholder="0.00" type="text" class="form-control"
@@ -301,7 +295,7 @@
                          name="newContractServiceName"
                          class="form-control"
                          ng-model="newContractService.name"
-                         ng-maxlength="30"
+                         hard-reset-pattern="serviceNamePattern"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                          invalid-when="!isNameUnique(newContractService)"
                   >
