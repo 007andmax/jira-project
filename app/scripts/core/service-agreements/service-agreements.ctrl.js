@@ -477,7 +477,11 @@
           console.log(resp);
           if (resp.message === 'Validation failed') {
             $scope.showErrorInHourlyContract = true;
-            $scope.errorMessage = 'Something went wrong, please try again later and contact administrator';
+            if(resp.validationResults && resp.validationResults.serviceAgreementDto) {
+              $scope.errorMessage = resp.validationResults.serviceAgreementDto;
+            } else {
+              $scope.errorMessage = 'Something went wrong, please try again later and contact administrator';
+            }
           } else {
             $scope.closeModal();
           }
@@ -542,6 +546,11 @@
           $scope.editContract.description = $scope.editContract.description + ' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;
+          var d = new Date($scope.editContract.startDate);
+          if(d.getTime() < $scope.today) {
+            $scope.editContract.startDate = '';
+            $scope.editContract.endDate = '';
+          }
         })
       };
 

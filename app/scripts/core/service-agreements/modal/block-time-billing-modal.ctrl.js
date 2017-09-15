@@ -406,10 +406,8 @@
           }
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, function(resp) {
             if(Object.keys(resp).length === 0) {
-              console.log(' searchDuplicatedServiceNames true');
               deferred.resolve(resp);
             } else {
-              console.log(' searchDuplicatedServiceNames false');
               $scope.showErrorInHourlyContract = true;
               $scope.errorMessage = 'Duplicates in services list';
               deferred.reject();

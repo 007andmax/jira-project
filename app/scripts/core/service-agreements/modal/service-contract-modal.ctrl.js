@@ -220,6 +220,7 @@
         };
 
 
+
         $scope.createServiceContract = function (form, serviceContract) {
           if (form.$valid) {
             var servContract = {
@@ -237,6 +238,19 @@
               serviceExpenses: [],
               productExpenses: []
             };
+
+            var sd = new Date($scope.serviceContract.startDate);
+            sd.setHours(0,0,0,0);
+            sd.setSeconds(0);
+            sd.setMilliseconds(0);
+            servContract.startDate = sd.getTime();
+
+            var ed = new Date($scope.serviceContract.endDate);
+            ed.setHours(0,0,0,0);
+            ed.setSeconds(0);
+            ed.setMilliseconds(0);
+            servContract.endDate = ed.getTime();
+
             if(serviceContract.services && serviceContract.services.length) {
               for(var i=0; i<serviceContract.services.length; i++) {
                 var serv = {
