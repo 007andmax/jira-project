@@ -18,7 +18,7 @@
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;
 
-          for(var i=0; i<$scope.agreementsList.length; i++) {
+          for (var i = 0; i < $scope.agreementsList.length; i++) {
             $scope.agreementsList[i].company.name = getCompanyName($scope.agreementsList[i].company.id);
           }
 
@@ -61,7 +61,7 @@
             var confirmButton = 'Delete';
             UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
               AgreementsService.deleteAgreement(agreement.id, function (resp) {
-                if(resp) {
+                if (resp) {
                   UserNotificationService.show('Agreement deleted', true);
                   console.log('Agreement delete', resp);
                 }
@@ -70,7 +70,6 @@
 
           }
         };
-
 
 
         $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
@@ -178,7 +177,7 @@
             }
             $scope.editContract.services.push(serv);
           }
-          for(var s=0; s<$scope.editContract.services.length; s++) {
+          for (var s = 0; s < $scope.editContract.services.length; s++) {
             $scope.editContract.services[s].taxes = $scope.addDefaultTaxes()
           }
         });
@@ -232,10 +231,10 @@
         console.log($scope.minDateForEndDatePicker);
       }
 
-      $scope.addDefaultTaxes = function() {
-        var defaultTaxList=[];
-        for(var i=0; i<$scope.taxes.length; i++) {
-          if($scope.taxes[i].isDefault) {
+      $scope.addDefaultTaxes = function () {
+        var defaultTaxList = [];
+        for (var i = 0; i < $scope.taxes.length; i++) {
+          if ($scope.taxes[i].isDefault) {
             defaultTaxList.push($scope.taxes[i])
           }
         }
@@ -248,24 +247,29 @@
 
 
       $scope.startDatePicker = function (date) {
-        var startDate = new Date(date);
-        if (startDate) {
+        if (date && date.length > 0) {
+          var startDate = new Date(date);
+
           var startMonth = startDate.getMonth() + 1;
           $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
           $scope.startDate = $scope.editContract.startDate;
+          var endDate = new Date(date);
+          endDate.setMonth(endDate.getMonth() + 1);
+          $scope.editContract.endDate = $filter('date')(endDate, 'yyyy/MM/dd');
+          var f = new Date(date);
+          setMiNDateForEndDate(f.getTime());
         }
-        var f = new Date(date);
 
-        setMiNDateForEndDate(f.getTime());
       };
 
       $scope.endDatePicker = function (date) {
-        var endDate = new Date(date);
-        if (endDate) {
+        if(date && date.length>0) {
+          var endDate = new Date(date);
           var endMonth = endDate.getMonth() + 1;
-          $scope.editContract.endDate = endDate.getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(endDate.getDate());
+          $scope.editContract.endDate = $filter('date')(endDate, 'yyyy/MM/dd');
           $scope.endDate = $scope.editContract.endDate;
         }
+
       };
 
       function addZeroIfNeed(n) {
@@ -296,12 +300,12 @@
       $scope.addNewService = function (form, editService) {
         $scope.newServiceNameIsError = false;
         if (form.$valid) {
-          if(!$scope.editContract.startDate || !$scope.editContract.startDate) {
+          if (!$scope.editContract.startDate || !$scope.editContract.startDate) {
             $scope.newServiceNameIsError = true;
             $scope.newServiceNameErrorMessage = 'Please enter start and end date to check service name';
           } else {
-            validateNewServiceName(editService).then(function(resp) {
-              if(resp) {
+            validateNewServiceName(editService).then(function (resp) {
+              if (resp) {
                 var newService = {
                   name: editService.name,
                   rate: editService.rate || 0.00,
@@ -351,15 +355,14 @@
       };
 
 
-
       function validateCrossingDatesHourly() {
 
         var deferred = $q.defer();
 
-        var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+        var companyId = $scope.editContract.companyId || companyData.companyId.id || $scope.contractCompany.id || $scope.companyId.id;
         AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
-          console.log('validateCrossingDatesHourly ',resp.valid);
-          if(resp.valid == true) {
+          console.log('validateCrossingDatesHourly ', resp.valid);
+          if (resp.valid == true) {
             deferred.resolve(resp)
           } else {
             $scope.showErrorInHourlyContract = true;
@@ -377,11 +380,11 @@
 
         var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
         var serviceNamesList = [];
-        for(var i=0; i<$scope.editContract.services.length; i++) {
+        for (var i = 0; i < $scope.editContract.services.length; i++) {
           serviceNamesList.push($scope.editContract.services[i].name);
         }
-        ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, function(resp) {
-          if(Object.keys(resp).length === 0) {
+        ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, function (resp) {
+          if (Object.keys(resp).length === 0) {
             console.log(' searchDuplicatedServiceNames true');
             deferred.resolve(resp);
           } else {
@@ -396,15 +399,15 @@
       }
 
       function validateNewServiceName(editService) {
-        $scope.newServiceNameIsError=false;
+        $scope.newServiceNameIsError = false;
         var deferred = $q.defer();
-        if(editService && editService.name) {
+        if (editService && editService.name) {
 
           var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
           var name = [];
           name.push(editService.name);
-          ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name, function(resp) {
-            if(Object.keys(resp).length === 0) {
+          ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name, function (resp) {
+            if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);
             } else {
               deferred.reject();
@@ -415,7 +418,6 @@
         }
         return deferred.promise;
       }
-
 
 
       function createHourlyContract() {
@@ -443,14 +445,14 @@
         };
 
         var sd = new Date($scope.editContract.startDate);
-        sd.setHours(0,0,0,0);
+        sd.setHours(0, 0, 0, 0);
         sd.setSeconds(0);
         sd.setMilliseconds(0);
         console.log(sd);
         companyContractInfo.startDate = sd.getTime();
 
         var ed = new Date($scope.editContract.endDate);
-        ed.setHours(23,59,0,0);
+        ed.setHours(23, 59, 0, 0);
         ed.setSeconds(0);
         ed.setMilliseconds(0);
         console.log(ed);
@@ -459,7 +461,7 @@
         console.log(companyContractInfo);
         AgreementsService.createContract(companyContractInfo, function (resp) {
           console.log(resp);
-          if(resp.message === 'Validation failed') {
+          if (resp.message === 'Validation failed') {
             $scope.showErrorInHourlyContract = true;
             $scope.errorMessage = 'Something went wrong, please try again later and contact administrator';
           } else {
@@ -469,10 +471,10 @@
         })
       }
 
-      $scope.validateAndCreateHourlyContract = function(editService) {
+      $scope.validateAndCreateHourlyContract = function (editService) {
 
         var emptyNewService = true;
-        if(editService && editService.name && editService.name.length) {
+        if (editService && editService.name && editService.name.length) {
           emptyNewService = false;
           var confirmMessage = 'You have filled service name field but didnt added it to contract service list. Are you sure you want to create contract ?';
           var confirmButton = 'Yes, create';
@@ -484,13 +486,13 @@
         validateAndCreate();
 
         function validateAndCreate() {
-          if(emptyNewService) {
-            validateCrossingDatesHourly().then(function(resp) {
+          if (emptyNewService) {
+            validateCrossingDatesHourly().then(function (resp) {
               //console.log('1 ', resp);
-              if(resp){
-                checkForDuplicateServiceNames().then(function(resp){
+              if (resp) {
+                checkForDuplicateServiceNames().then(function (resp) {
                   //console.log('2 ', resp);
-                  if(resp){
+                  if (resp) {
                     createHourlyContract();
                   }
                 })
@@ -501,17 +503,16 @@
 
       };
 
-      $scope.dissableHourlyCreateButton = function() {
-        if($scope.editContract.startDate &&
+      $scope.dissableHourlyCreateButton = function () {
+        if ($scope.editContract.startDate &&
           $scope.editContract.endDate &&
           $scope.editContract.description &&
           $scope.editContract.services.length > 0) {
-            return false
+          return false
         } else {
           return true
         }
       };
-
 
 
       $scope.terminateContract = function () {
