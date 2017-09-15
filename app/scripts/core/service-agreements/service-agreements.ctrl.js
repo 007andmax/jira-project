@@ -354,12 +354,26 @@
         return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
       };
 
+      function returnCompanyId() {
+        var id;
+        if($scope.editContract.companyId) {
+          id = $scope.editContract.companyId
+        } else if ($scope.contractCompany && $scope.contractCompany.id) {
+          id = $scope.contractCompany.id
+        } else  if($scope.companyId && $scope.companyId.id) {
+          id = $scope.companyId.id;
+        } else {
+          id = $scope.companyId;
+        }
+        return id;
+      }
+
 
       function validateCrossingDatesHourly() {
 
         var deferred = $q.defer();
 
-        var companyId = $scope.editContract.companyId || companyData.companyId.id || $scope.contractCompany.id || $scope.companyId.id;
+        var companyId = returnCompanyId();
         AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
           console.log('validateCrossingDatesHourly ', resp.valid);
           if (resp.valid == true) {
@@ -378,7 +392,7 @@
 
         var deferred = $q.defer();
 
-        var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+        var companyId = returnCompanyId();
         var serviceNamesList = [];
         for (var i = 0; i < $scope.editContract.services.length; i++) {
           serviceNamesList.push($scope.editContract.services[i].name);
@@ -403,7 +417,7 @@
         var deferred = $q.defer();
         if (editService && editService.name) {
 
-          var companyId = $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id;
+          var companyId = returnCompanyId();
           var name = [];
           name.push(editService.name);
           ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name, function (resp) {
@@ -439,7 +453,7 @@
 
         var companyContractInfo = {
           description: $scope.editContract.description,
-          companyId: $scope.editContract.companyId || companyData.companyId || $scope.contractCompany.id || $scope.companyId,
+          companyId: returnCompanyId(),
           services: servicesWithTaxIds,
           type: 'HOURLY'
         };
