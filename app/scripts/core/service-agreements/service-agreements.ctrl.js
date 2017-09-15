@@ -146,6 +146,8 @@
       $scope.newServiceNameIsError = false;
       $scope.newServiceNameErrorMessage = '';
 
+      $scope.parseDate = Date.parse.bind(Date);
+
       $scope.today = Date.now();
 
       $scope.minDateForEndDatePicker;
@@ -177,7 +179,6 @@
             $scope.editContract.services.push(serv);
           }
           for(var s=0; s<$scope.editContract.services.length; s++) {
-            //$scope.addDefaultTaxes($scope.editContract.services[s]);
             $scope.editContract.services[s].taxes = $scope.addDefaultTaxes()
           }
         });
@@ -215,22 +216,6 @@
         taxes: []
       };
 
-      // $scope.$watch(function () {
-      //   return $scope.contractCompany;
-      // }, function (company) {
-      //   $scope.blockHourlyChoice = false;
-      //   if (company) {
-      //     AgreementsService.getAgreementCountByType(company.id, 'HOURLY', function (resp) {
-      //
-      //       if (resp.HOURLY > 0) {
-      //         $scope.blockHourlyChoice = true;
-      //         if ($scope.selectedContractType === 'HOURLY') {
-      //           $scope.selectedContractType = 'CREATE_NEW';
-      //         }
-      //       }
-      //     })
-      //   }
-      // });
 
       function reInitServiceForm() {
         $scope.reinitNewServiceForm = false;
@@ -321,7 +306,7 @@
                   name: editService.name,
                   rate: editService.rate || 0.00,
                   billable: editService.billable || false,
-                  taxes: editService.taxes || [],
+                  taxes: editService.taxes || $scope.addDefaultTaxes(),
                   taxIds: []
                 };
                 if (editService.taxes.length) {
@@ -334,7 +319,7 @@
                   name: '',
                   rate: null,
                   billable: false,
-                  taxes: []
+                  taxes: $scope.addDefaultTaxes()
                 };
                 reInitServiceForm();
               }

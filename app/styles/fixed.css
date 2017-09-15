@@ -181,9 +181,7 @@ body.non-body-scroll::-webkit-scrollbar {
   left: 10px;
 }
 
-.qt-services li .intermediate-parent-elem .is-billable label {
-  left: 15px;
-}
+
 
 @media only screen and (min-width: 2000px) {
 
@@ -449,47 +447,6 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-default-services > li > .intermediate-parent-elem > .col-4 > .hit-area + .hit-area {
-  margin-right: 16px;
-}
-
-.qt-services-list > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 473px);
-  /*width: calc(100% - 399px); TODO hide timeAllotment*/
-}
-
-.qt-services-list > li > .intermediate-parent-elem > .col-5 {
-  width: 90px;
-}
-
-.qt-services-list > li > .intermediate-parent-elem > .col-2 {
-  width: 133px;
-  min-height: 1px;
-}
-
-/*@media (min-width: 2048px) {*/
-/*.qt-services-list > li > .intermediate-parent-elem > .col-2 {*/
-/*width: 260px;*/
-/*}*/
-/*}*/
-
-.qt-services-list > li > .intermediate-parent-elem > .col-3 {
-  width: 160px;
-  text-align: left;
-  color: #404b5f;
-  min-height: 1px;
-}
-
-.qt-services-list > li > .intermediate-parent-elem > .col-4 {
-  width: 120px;
-  min-height: 1px;
-}
-
-.qt-services-list > li > .intermediate-parent-elem > .col-4 > .hit-area {
-  margin-right: -2px;
-  margin-top: 2px;
-}
-
-.qt-services-list > li > .intermediate-parent-elem > .col-5 > .hit-area + .hit-area {
   margin-right: 16px;
 }
 

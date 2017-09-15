@@ -31,8 +31,14 @@
                ng-model="serviceContract.interval"
                uib-typeahead="interval for interval in intervals"
                qt-typeahead-async-show-on-focus readonly required>
-        <div typeahead-input-icon="serviceContract.interval"></div>
-        <i class="icn-sm icn-caret-gray"></i>
+        <!--<div typeahead-input-icon="serviceContract.interval"></div>-->
+        <!--<i class="icn-sm icn-caret-gray"></i>-->
+        <div>
+          <i class="icn-sm icn-caret-gray" ng-show="!serviceContract.interval"></i>
+          <i class="icn-sm icn-remove-old"
+             ng-show="serviceContract.interval"
+             uib-tooltip="clear" tooltip-placement="top" ng-click="serviceContract.interval = ''"></i>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
