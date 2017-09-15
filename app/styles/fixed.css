@@ -1831,37 +1831,38 @@ span.sort-span {
 }
 
 .product-list-scroll {
-  max-height: 790px;
+  /*max-height: 790px;*/
+  max-height: calc(100vh - 250px);
   overflow: scroll;
   width: 100%;
 }
 
-@media (max-height: 1152px) {
-  .product-list-scroll {
-    max-height: 900px;
-  }
-}
+/*@media (max-height: 1152px) {*/
+  /*.product-list-scroll {*/
+    /*max-height: 900px;*/
+  /*}*/
+/*}*/
 
-@media (max-height: 1024px) {
-  .product-list-scroll {
-    max-height: 765px;
-  }
-}
+/*@media (max-height: 1024px) {*/
+  /*.product-list-scroll {*/
+    /*max-height: 765px;*/
+  /*}*/
+/*}*/
 
-@media (max-height: 900px) {
-  .product-list-scroll {
-    max-height: 650px;
-  }
-}
+/*@media (max-height: 900px) {*/
+  /*.product-list-scroll {*/
+    /*max-height: 650px;*/
+  /*}*/
+/*}*/
 
-@media (max-height: 768px) {
-  .product-list-scroll {
-    max-height: 515px;
-  }
-}
+/*@media (max-height: 768px) {*/
+  /*.product-list-scroll {*/
+    /*max-height: 515px;*/
+  /*}*/
+/*}*/
 
-@media (max-height: 720px) {
-  .product-list-scroll {
-    max-height: 460px;
-  }
-}
+/*@media (max-height: 720px) {*/
+  /*.product-list-scroll {*/
+    /*max-height: 460px;*/
+  /*}*/
+/*}*/
