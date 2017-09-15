@@ -31,8 +31,14 @@
                ng-model="serviceContract.interval"
                uib-typeahead="interval for interval in intervals"
                qt-typeahead-async-show-on-focus readonly required>
-        <div typeahead-input-icon="serviceContract.interval"></div>
-        <i class="icn-sm icn-caret-gray"></i>
+        <!--<div typeahead-input-icon="serviceContract.interval"></div>-->
+        <!--<i class="icn-sm icn-caret-gray"></i>-->
+        <div>
+          <i class="icn-sm icn-caret-gray" ng-show="!serviceContract.interval"></i>
+          <i class="icn-sm icn-remove-old"
+             ng-show="serviceContract.interval"
+             uib-tooltip="clear" tooltip-placement="top" ng-click="serviceContract.interval = ''"></i>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
@@ -99,7 +105,7 @@
     <div class="col-md-12"></div>
     <div class="bill-hide-content-item clearfix"
          ng-repeat="device in serviceContract.serviceContractServices"
-         ng-show="serviceContract.billType === 'DEVICE'">
+         ng-if="serviceContract.billType === 'DEVICE'">
       <div class="col-md-5 form-group" ng-class="{'has-error': !device.name}">
         <input placeholder="Device Name" type="text" class="form-control" ng-model="device.name" required ng-minlength="1">
       </div>
@@ -132,7 +138,7 @@
 
     <div class="bill-hide-content-item clearfix"
          ng-repeat="user in serviceContract.services"
-         ng-show="serviceContract.billType === 'USER'">
+         ng-if="serviceContract.billType === 'USER'">
       <div class="col-md-5 form-group" ng-class="{'has-error': !user.name}">
         <input placeholder="User Name" name="newUserServiceName" type="text" class="form-control" ng-model="user.name" ng-minlength="1" required>
       </div>
@@ -168,7 +174,7 @@
       </div>
     </div>
 
-    <div  class="bill-hide-content-item clearfix col-md-12" ng-show="serviceContract.billType === 'OTHER'">
+    <div  class="bill-hide-content-item clearfix col-md-12" ng-if="serviceContract.billType === 'OTHER'">
       <div class="invoice-update">
 
         <ul class="nav nav-ticket-add invoice-ticket-add">
@@ -403,7 +409,7 @@
         <!--<div class="contacts-details-content-price">-->
           <!--$1875.00/mo-->
         <!--</div>-->
-        <div class="btn btn-lg btn-success btn-create">Create</div>
+        <div class="btn btn-lg btn-success btn-create" ng-disabled="serviceContractForm.$invalid" ng-click="createServiceContract(serviceContractForm, serviceContract)">Create</div>
       </div>
     </div>
   </div>

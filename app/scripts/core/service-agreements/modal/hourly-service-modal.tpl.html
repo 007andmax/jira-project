@@ -27,7 +27,7 @@
                    class="form-control has-dropdown readonly-normal"
                    name="StartDate"
                    readonly
-                   date-format="dd/mm/yy"
+                   date-format="yyyy/mm/dd"
                    date-range-picker="startDatePicker"
                    min-date="{{today}}"
                    ng-model="editContract.startDate"
@@ -42,7 +42,7 @@
                    class="form-control has-dropdown readonly-normal"
                    name="EndDate"
                    readonly
-                   date-format="dd/mm/yy"
+                   date-format="yyyy/mm/dd"
                    date-range-picker="endDatePicker"
                    min-date="{{minDateForEndDatePicker}}"
                    ng-model="editContract.endDate"
@@ -139,12 +139,13 @@
         </div>
 
       </div>
-      <div ng-show="showErrorInHourlyContract">
-        <p style="color: red">{{errorMessage}}</p>
-      </div>
+
     </div>
   </div>
   <div class="col-md-12 agreement-fixed-button text-right">
+    <div class="col-md-8" ng-show="showErrorInHourlyContract">
+      <p style="color: red">{{errorMessage}}</p>
+    </div>
     <div class="btn btn-success btn-create" ng-click="validateAndCreateHourlyContract(editService)"
          ng-disabled="dissableHourlyCreateButton()">Create
     </div>

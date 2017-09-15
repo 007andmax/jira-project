@@ -253,29 +253,35 @@
 
         $scope.addNewBlockTimeService = function (form, service) {
           $scope.showNewBlockTimeServiceError = false;
-          if (form.$valid && service.name) {
-            if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+          if (form.$valid ) {
+            if(!service.name) {
               $scope.showNewBlockTimeServiceError = true;
-              $scope.newBlockTimeServiceErrorMessage = 'Please enter start and end date to check service name';
+              $scope.newBlockTimeServiceErrorMessage = 'Please enter the service name';
             } else {
-              validateNewServiceName(service, 'block').then(function(resp) {
-                if(resp) {
-                  if (service.name.name && service.name.name.length) {
-                    var ns = {
-                      name: service.name.name
-                    };
-                    $scope.blockTimeContract.blockTimeServices.push(ns);
-                    pickDefaultService(ns);
-                    $scope.newBlockTimeService = {};
-                  } else {
+              if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+                $scope.showNewBlockTimeServiceError = true;
+                $scope.newBlockTimeServiceErrorMessage = 'Please enter start and end date to check service name';
+              } else {
+                validateNewServiceName(service, 'block').then(function(resp) {
+                  if(resp) {
+                    if (service.name.name && service.name.name.length) {
+                      var ns = {
+                        name: service.name.name
+                      };
+                      $scope.blockTimeContract.blockTimeServices.push(ns);
+                      pickDefaultService(ns);
+                      $scope.newBlockTimeService = {};
+                    } else {
 
-                    $scope.blockTimeContract.blockTimeServices.push(service);
-                    pickDefaultService(service);
-                    $scope.newBlockTimeService = {};
+                      $scope.blockTimeContract.blockTimeServices.push(service);
+                      pickDefaultService(service);
+                      $scope.newBlockTimeService = {};
+                    }
                   }
-                }
-              })
+                })
+              }
             }
+
 
           }
         };
@@ -304,45 +310,51 @@
 
         $scope.addContractService = function (form, service) {
           $scope.showNewServiceError = false;
-            if(form.$valid && service.name) {
-              if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+            if(form.$valid) {
+              if(!service.name) {
                 $scope.showNewServiceError = true;
-                $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
+                $scope.newServiceErrorMessage = 'Please enter the service name';
               } else {
-                validateNewServiceName(service, 'service').then(function(resp) {
-                  if(resp) {
-                    if (service.name.name && service.name.name.length) {
-                      var ns = {
-                        name: service.name.name,
-                        rate: service.rate,
-                        billable: service.billable,
-                        taxes: service.taxes
-                      };
-                      $scope.blockTimeContract.services.push(ns);
-                      pickDefaultService(ns);
-                      $scope.newContractService = {
-                        name: '',
-                        rate: 0,
-                        billable: false,
-                        taxes: $scope.addDefaultTaxes()
-                      };
-                      reInitServiceForm()
-                    } else {
+                if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+                  $scope.showNewServiceError = true;
+                  $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
+                } else {
+                  validateNewServiceName(service, 'service').then(function(resp) {
+                    if(resp) {
+                      if (service.name.name && service.name.name.length) {
+                        var ns = {
+                          name: service.name.name,
+                          rate: service.rate,
+                          billable: service.billable,
+                          taxes: service.taxes
+                        };
+                        $scope.blockTimeContract.services.push(ns);
+                        pickDefaultService(ns);
+                        $scope.newContractService = {
+                          name: '',
+                          rate: 0,
+                          billable: false,
+                          taxes: $scope.addDefaultTaxes()
+                        };
+                        reInitServiceForm()
+                      } else {
 
-                      $scope.blockTimeContract.services.push(service);
-                      pickDefaultService(service);
-                      $scope.newContractService = {
-                        name: '',
-                        rate: 0,
-                        billable: false,
-                        taxes: $scope.addDefaultTaxes()
-                      };
-                      reInitServiceForm()
+                        $scope.blockTimeContract.services.push(service);
+                        pickDefaultService(service);
+                        $scope.newContractService = {
+                          name: '',
+                          rate: 0,
+                          billable: false,
+                          taxes: $scope.addDefaultTaxes()
+                        };
+                        reInitServiceForm()
 
+                      }
                     }
-                  }
-                })
+                  })
+                }
               }
+
 
             }
         };
@@ -394,10 +406,8 @@
           }
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, function(resp) {
             if(Object.keys(resp).length === 0) {
-              console.log(' searchDuplicatedServiceNames true');
               deferred.resolve(resp);
             } else {
-              console.log(' searchDuplicatedServiceNames false');
               $scope.showErrorInHourlyContract = true;
               $scope.errorMessage = 'Duplicates in services list';
               deferred.reject();

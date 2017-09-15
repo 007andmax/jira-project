@@ -7,7 +7,7 @@
       'ProductsService', '$filter', '$timeout', 'TaxesService',
       function ($scope, AgreementsService, CompaniesService, ServicesService, ProductsService, $filter, $timeout, TaxesService) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
           USER: 'By Users',
@@ -61,7 +61,19 @@
         $scope.$watch(function (){
           return $scope.serviceContract.interval;
         }, function(interval){
-          $scope.serviceContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+          //$scope.serviceContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
+          if(interval === 'MONTHLY') {
+            $scope.serviceContract.period = 'Month';
+          } else if (interval === 'YEARLY') {
+            $scope.serviceContract.period = 'Year';
+          } else if(interval === '30 days') {
+            $scope.serviceContract.period = 30;
+          } else if(interval === '15 days') {
+            $scope.serviceContract.period = 15;
+          } else if (interval === '7 days') {
+            $scope.serviceContract.period = 7;
+          }
+          reInitEndDate()
         });
 
         $scope.$watch(function () {
@@ -208,6 +220,7 @@
         };
 
 
+
         $scope.createServiceContract = function (form, serviceContract) {
           if (form.$valid) {
             var servContract = {
@@ -225,6 +238,19 @@
               serviceExpenses: [],
               productExpenses: []
             };
+
+            var sd = new Date($scope.serviceContract.startDate);
+            sd.setHours(0,0,0,0);
+            sd.setSeconds(0);
+            sd.setMilliseconds(0);
+            servContract.startDate = sd.getTime();
+
+            var ed = new Date($scope.serviceContract.endDate);
+            ed.setHours(0,0,0,0);
+            ed.setSeconds(0);
+            ed.setMilliseconds(0);
+            servContract.endDate = ed.getTime();
+
             if(serviceContract.services && serviceContract.services.length) {
               for(var i=0; i<serviceContract.services.length; i++) {
                 var serv = {
