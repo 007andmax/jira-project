@@ -15,17 +15,24 @@
   border-radius: 10px;
 }
 
-.contracts.create-window{
+.contracts.create-window {
   height: 700px;
   overflow-y: scroll;
   padding: 20px 30px;
 }
-.contracts.create-window .service-bill-hide-content label{
+
+.contracts.create-window .service-bill-hide-content label {
   margin-left: 10%;
 }
-.contracts.create-window .icn-add-action:before{
+
+.block-time .service-bill .col-md-12.service-bill-hide-content {
+  padding-left: 25px;
+}
+
+.contracts.create-window .icn-add-action:before {
   top: -4px;
 }
+
 .create-window .checked {
   color: #000000 !important;
 }
@@ -34,7 +41,7 @@
 .modal-customer-report .close-btn,
 .create-window .close-btn,
 .hourly .close-btn,
-.service-form-wrapper .close-btn{
+.service-form-wrapper .close-btn {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -73,7 +80,8 @@
   width: calc(100% - 145px);
   height: 100%;
 }
-.service-agreement-modal{
+
+.service-agreement-modal {
   position: relative;
   padding: 40px 37px 60px;
   height: 100%;
@@ -422,7 +430,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-window .x-mark,
-.service-form-wrapper .x-mark{
+.service-form-wrapper .x-mark {
   position: absolute;
   top: 19px;
   right: 3px;
@@ -430,13 +438,16 @@ _::-webkit-:not(:root:root),
   cursor: pointer;
   line-height: 1;
 }
-.service-form-wrapper .x-mark{
+
+.service-form-wrapper .x-mark {
   top: 1px;
   right: 0;
 }
-.service-form-wrapper .block-time .x-mark{
+
+.service-form-wrapper .block-time .x-mark {
   top: 24px;
 }
+
 .create-window .input-top-4 .x-mark {
   top: 4px;
 }

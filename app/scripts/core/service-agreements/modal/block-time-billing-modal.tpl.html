@@ -98,63 +98,67 @@
       </div>
       <div class="service-bill clearfix">
         <h4>Select how you bill your customer</h4>
-        <div class="col-md-4">
-          <div class="form-group"
-               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'includedHours')}">
-            Included hours:
-            <input placeholder="Hours"
-                   name="includedHours"
-                   type="number"
-                   class="form-control"
-                   ng-model="blockTimeContract.includedHours" required>
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <div class="form-group"
+                 ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'includedHours')}">
+              Included hours:
+              <input placeholder="Hours"
+                     name="includedHours"
+                     type="number"
+                     class="form-control"
+                     ng-model="blockTimeContract.includedHours" required>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group before-icon"
+                 ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'blockRate')}">
+              Block Rate:
+              <input placeholder="0.00"
+                     name="blockRate"
+                     type="text"
+                     class="form-control"
+                     ng-model="blockTimeContract.blockRate"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group before-icon">
+              Total Amount:
+              <input placeholder="Total"
+                     type="number"
+                     class="form-control"
+                     ng-model="calculateTotalAmount()" readonly>
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-group before-icon"
-               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'blockRate')}">
-            Block Rate:
-            <input placeholder="0.00"
-                   name="blockRate"
-                   type="text"
-                   class="form-control"
-                   ng-model="blockTimeContract.blockRate"
-                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
+        <div class="col-md-12">
+          <div class="col-md-4">
+            <div class="form-group before-icon"
+                 ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'rateExceeding')}">
+              Rate exceding block time:
+              <input placeholder="0.00"
+                     name="rateExceeding"
+                     type="text"
+                     class="form-control"
+                     ng-model="blockTimeContract.rateExceeding"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group before-icon">
-            Total Amount:
-            <input placeholder="Total"
-                   type="number"
-                   class="form-control"
-                   ng-model="calculateTotalAmount()" readonly>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group before-icon"
-               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'rateExceeding')}">
-            Rate exceding block time:
-            <input placeholder="0.00"
-                   name="rateExceeding"
-                   type="text"
-                   class="form-control"
-                   ng-model="blockTimeContract.rateExceeding"
-                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
-          </div>
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4 form-group">
-          <div>
-            Select taxes
-            <!--<i class="icn-sm icn-tax"> </i>-->
-            <select-taxes taxes="taxes" entity="blockTimeContract"></select-taxes>
-            <!--<p>{{blockTimeContract.taxes.length}}</p>-->
-          </div>
+          <div class="col-md-4 form-group">
+            <div>
+              Select taxes
+              <!--<i class="icn-sm icn-tax"> </i>-->
+              <select-taxes taxes="taxes" entity="blockTimeContract"></select-taxes>
+              <!--<p>{{blockTimeContract.taxes.length}}</p>-->
+            </div>
 
+          </div>
         </div>
+
         <div class="col-md-12 service-bill-hide-content">
           <p>Create customer services to track your time spent with this block time contract</p>
-          <div class="col-md-5">Service name</div>
+          <div class="col-md-5" style="padding-left: 30px;">Service name</div>
           <div class="col-md-2 text-center">Action</div>
 
           <div class="bill-hide-content-item clearfix col-md-12"
@@ -515,13 +519,13 @@
         </div>
         <div class="col-md-12 service-bill-hide-content">
           <p>Create customer services to track your time spent with this block time contract</p>
-          <div class="col-md-7">Service name</div>
+          <div class="col-md-5" style="padding-left: 30px;">Service name</div>
           <div class="col-md-2">Action</div>
 
 
           <div class="bill-hide-content-item clearfix"
                ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
-            <div class="col-md-7 form-group">
+            <div class="col-md-5 form-group">
               <input placeholder="Service Name"
                      type="text" class="form-control"
                      ng-model="blockTimeService.name"
