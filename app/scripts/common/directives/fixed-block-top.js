@@ -36,6 +36,7 @@
               top = elementCssTop - elementScreenTop;
             }
 
+
             //todo: allow to adjust styles
             if (top > 0) {
               element.css({
