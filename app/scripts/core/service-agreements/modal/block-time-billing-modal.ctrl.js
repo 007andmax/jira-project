@@ -543,7 +543,7 @@
           var emptyServices = true;
           if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)) {
             emptyServices = false;
-            var confirmMessage = 'You have filled service name field but didnt added it to contract service list. Are you sure you want to create contract ?';
+            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
             var confirmButton = 'Yes, create';
             UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
               emptyServices = true;
