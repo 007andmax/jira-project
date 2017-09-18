@@ -46,11 +46,10 @@
         $scope.newServiceErrorMessage = '';
 
         var day = 1000 * 60 * 60 * 24;
-        var month = 30*day;
+        var month = 30 * day;
 
 
-
-        if($scope.editMode) {
+        if ($scope.editMode) {
           $scope.blockTimeContract = {
             minStartDate: Date.now(),
             includedHours: null,
@@ -67,9 +66,9 @@
           $scope.blockTimeContract.minStartDate = Date.now();
           $scope.blockTimeContract.taxes = [];
 
-          for(var i=0; i< $scope.blockTimeContract.taxIds.length; i++) {
-            for(var j=0; j<$scope.taxes.length; j++) {
-              if($scope.blockTimeContract.taxIds[i] === $scope.taxes[j].id) {
+          for (var i = 0; i < $scope.blockTimeContract.taxIds.length; i++) {
+            for (var j = 0; j < $scope.taxes.length; j++) {
+              if ($scope.blockTimeContract.taxIds[i] === $scope.taxes[j].id) {
                 $scope.blockTimeContract.taxes.push($scope.taxes[j]);
               }
             }
@@ -91,15 +90,14 @@
         $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
 
         $scope.clients = [];
-        $scope.getClients = function() {
+        $scope.getClients = function () {
           var companyId = returnCompanyId();
           $scope.clients = UsersService.getAllByCompanyId(companyId);
 
         };
 
 
-
-        function changeStartDate(){
+        function changeStartDate() {
           var date = $scope.blockTimeContract.startDate;
           var endDate = new Date(date);
           endDate.setMonth(endDate.getMonth() + 1);
@@ -122,17 +120,17 @@
           }, 0);
         }
 
-        $scope.$watch(function (){
+        $scope.$watch(function () {
           return $scope.blockTimeContract.interval;
-        }, function(interval){
+        }, function (interval) {
           //$scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
-          if(interval === 'MONTHLY') {
+          if (interval === 'MONTHLY') {
             $scope.blockTimeContract.period = 'Month';
           } else if (interval === 'YEARLY') {
             $scope.blockTimeContract.period = 'Year';
-          } else if(interval === '30 days') {
+          } else if (interval === '30 days') {
             $scope.blockTimeContract.period = 30;
-          } else if(interval === '15 days') {
+          } else if (interval === '15 days') {
             $scope.blockTimeContract.period = 15;
           } else if (interval === '7 days') {
             $scope.blockTimeContract.period = 7;
@@ -142,11 +140,9 @@
 
         $scope.$watch(function () {
           return $scope.blockTimeContract.startDate;
-        }, function(){
+        }, function () {
           changeStartDate()
         });
-
-
 
 
         ServicesService.getServicesData($scope, function (data) {
@@ -169,9 +165,8 @@
         });
 
 
-
-        $scope.calculateTotalAmount = function() {
-          if($scope.blockTimeContract.includedHours && $scope.blockTimeContract.blockRate ) {
+        $scope.calculateTotalAmount = function () {
+          if ($scope.blockTimeContract.includedHours && $scope.blockTimeContract.blockRate) {
             return $scope.blockTimeContract.includedHours * $scope.blockTimeContract.blockRate;
           } else {
             return null;
@@ -197,7 +192,7 @@
         }
 
         function checkUniqueServiceName(serviceList, service) {
-          if(serviceList && service) {
+          if (serviceList && service) {
             var unique = true;
             for (var i = 0; i < serviceList.length; i++) {
               if (serviceList[i].name === service.name) {
@@ -212,12 +207,12 @@
         }
 
         $scope.isNameUnique = function (service) {
-          if(service) {
-            if(service.name && service.name.name) {
+          if (service) {
+            if (service.name && service.name.name) {
               return true;
             }
             var name = service;
-            if(service.name
+            if (service.name
               && service.name !== "undefined"
               && service.name.name
               && service.name.name.length) {
@@ -231,7 +226,7 @@
           }
         };
 
-        $scope.toggleAllShared = function(isNotifyAll) {
+        $scope.toggleAllShared = function (isNotifyAll) {
           var sharesWithoutSubscription = [];
           for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
             var share = $scope.ticketSharedUsersList[i];
@@ -253,17 +248,17 @@
 
         $scope.addNewBlockTimeService = function (form, service) {
           $scope.showNewBlockTimeServiceError = false;
-          if (form.$valid ) {
-            if(!service.name) {
+          if (form.$valid) {
+            if (!service.name) {
               $scope.showNewBlockTimeServiceError = true;
               $scope.newBlockTimeServiceErrorMessage = 'Please enter the service name';
             } else {
-              if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
+              if (!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
                 $scope.showNewBlockTimeServiceError = true;
                 $scope.newBlockTimeServiceErrorMessage = 'Please enter start and end date to check service name';
               } else {
-                validateNewServiceName(service, 'block').then(function(resp) {
-                  if(resp) {
+                validateNewServiceName(service, 'block').then(function (resp) {
+                  if (resp) {
                     if (service.name.name && service.name.name.length) {
                       var ns = {
                         name: service.name.name
@@ -287,8 +282,8 @@
         };
 
         function preSettupBlockTimeService(preSettupServiceList) {
-          if(preSettupServiceList && preSettupServiceList.length) {
-            for(var i=0; i<preSettupServiceList.length; i++) {
+          if (preSettupServiceList && preSettupServiceList.length) {
+            for (var i = 0; i < preSettupServiceList.length; i++) {
               var setService = {
                 name: preSettupServiceList[i].name
               };
@@ -310,53 +305,53 @@
 
         $scope.addContractService = function (form, service) {
           $scope.showNewServiceError = false;
-            if(form.$valid) {
-              if(!service.name) {
+          if (form.$valid) {
+            if (!service.name) {
+              $scope.showNewServiceError = true;
+              $scope.newServiceErrorMessage = 'Please enter the service name';
+            } else {
+              if (!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
                 $scope.showNewServiceError = true;
-                $scope.newServiceErrorMessage = 'Please enter the service name';
+                $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
               } else {
-                if(!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
-                  $scope.showNewServiceError = true;
-                  $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
-                } else {
-                  validateNewServiceName(service, 'service').then(function(resp) {
-                    if(resp) {
-                      if (service.name.name && service.name.name.length) {
-                        var ns = {
-                          name: service.name.name,
-                          rate: service.rate,
-                          billable: service.billable,
-                          taxes: service.taxes
-                        };
-                        $scope.blockTimeContract.services.push(ns);
-                        pickDefaultService(ns);
-                        $scope.newContractService = {
-                          name: '',
-                          rate: 0,
-                          billable: false,
-                          taxes: $scope.addDefaultTaxes()
-                        };
-                        reInitServiceForm()
-                      } else {
+                validateNewServiceName(service, 'service').then(function (resp) {
+                  if (resp) {
+                    if (service.name.name && service.name.name.length) {
+                      var ns = {
+                        name: service.name.name,
+                        rate: service.rate,
+                        billable: service.billable,
+                        taxes: service.taxes
+                      };
+                      $scope.blockTimeContract.services.push(ns);
+                      pickDefaultService(ns);
+                      $scope.newContractService = {
+                        name: '',
+                        rate: 0,
+                        billable: false,
+                        taxes: $scope.addDefaultTaxes()
+                      };
+                      reInitServiceForm()
+                    } else {
 
-                        $scope.blockTimeContract.services.push(service);
-                        pickDefaultService(service);
-                        $scope.newContractService = {
-                          name: '',
-                          rate: 0,
-                          billable: false,
-                          taxes: $scope.addDefaultTaxes()
-                        };
-                        reInitServiceForm()
+                      $scope.blockTimeContract.services.push(service);
+                      pickDefaultService(service);
+                      $scope.newContractService = {
+                        name: '',
+                        rate: 0,
+                        billable: false,
+                        taxes: $scope.addDefaultTaxes()
+                      };
+                      reInitServiceForm()
 
-                      }
                     }
-                  })
-                }
+                  }
+                })
               }
-
-
             }
+
+
+          }
         };
 
         $scope.deleteContractService = function (contractService) {
@@ -368,13 +363,13 @@
           }
         };
 
-        $scope.disableBloctCreateButton = function() {
-          if($scope.blockTimeContract.description &&
-          $scope.blockTimeContract.startDate &&
-          $scope.blockTimeContract.endDate &&
-          $scope.blockTimeContract.blockTimeServices.length>0 &&
-          $scope.blockTimeContract.includedHours &&
-          $scope.blockTimeContract.blockRate) {
+        $scope.disableBloctCreateButton = function () {
+          if ($scope.blockTimeContract.description &&
+            $scope.blockTimeContract.startDate &&
+            $scope.blockTimeContract.endDate &&
+            $scope.blockTimeContract.blockTimeServices.length > 0 &&
+            $scope.blockTimeContract.includedHours &&
+            $scope.blockTimeContract.blockRate) {
             return false
           } else {
             return true
@@ -383,11 +378,11 @@
 
         function returnCompanyId() {
           var id;
-          if($scope.blockTimeContract.companyId) {
+          if ($scope.blockTimeContract.companyId) {
             id = $scope.blockTimeContract.companyId
           } else if ($scope.contractCompany && $scope.contractCompany.id) {
             id = $scope.contractCompany.id
-          } else  {
+          } else {
             id = $scope.companyId;
           }
           return id;
@@ -401,19 +396,29 @@
 
           var companyId = returnCompanyId();
           var serviceNamesList = [];
-          for(var i=0; i<serviceList.length; i++) {
+          for (var i = 0; i < serviceList.length; i++) {
+            // if (serviceList[i].name == null) {
+            //   $scope.showBlockTimeContractCreateMessageError = true;
+            //   $scope.BlockTimeContractCreateMessage = 'Service name is required';
+            //   break;
+            // } else {
+            //   serviceNamesList.push(serviceList[i].name);
+            // }
             serviceNamesList.push(serviceList[i].name);
           }
-          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, function(resp) {
-            if(Object.keys(resp).length === 0) {
+
+          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, function (resp) {
+            if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);
             } else {
-              $scope.showErrorInHourlyContract = true;
-              $scope.errorMessage = 'Duplicates in services list';
+              $scope.showBlockTimeContractCreateMessageError = true;
+              $scope.BlockTimeContractCreateMessage = 'Duplicates in services list';
               deferred.reject();
 
             }
           });
+
+
           return deferred.promise;
         }
 
@@ -421,7 +426,7 @@
           $scope.showNewBlockTimeServiceError = false;
           $scope.showNewServiceError = false;
           var deferred = $q.defer();
-          if(newService && newService.name) {
+          if (newService && newService.name) {
 
             var companyId = returnCompanyId();
             var name = [];
@@ -429,12 +434,12 @@
 
             var startDate = $filter('date')($scope.blockTimeContract.startDate, 'yyyy/MM/dd');
             var endDate = $filter('date')($scope.blockTimeContract.endDate, 'yyyy/MM/dd');
-            ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function(resp) {
-              if(Object.keys(resp).length === 0) {
+            ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function (resp) {
+              if (Object.keys(resp).length === 0) {
                 deferred.resolve(resp);
               } else {
                 deferred.reject();
-                if(serviceType ==='block') {
+                if (serviceType === 'block') {
                   $scope.showNewBlockTimeServiceError = true;
                   $scope.newBlockTimeServiceErrorMessage = 'Service name is duplicate';
                 } else {
@@ -449,13 +454,13 @@
 
 
         function createBlockTimeContract(contractData) {
-          if(contractData) {
+          if (contractData) {
 
             var blockContract = {
               id: null,
               description: contractData.description,
               type: 'BLOCK_TIME',
-              interval: contractData.interval ,
+              interval: contractData.interval,
               customInterval: null,
               billType: null,
               includedHours: contractData.includedHours,
@@ -472,18 +477,18 @@
             };
 
             var sd = new Date(contractData.startDate);
-            sd.setHours(0,0,0,0);
+            sd.setHours(0, 0, 0, 0);
             sd.setSeconds(0);
             sd.setMilliseconds(0);
             blockContract.startDate = sd.getTime();
 
             var ed = new Date(contractData.endDate);
-            ed.setHours(0,0,0,0);
+            ed.setHours(0, 0, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
             blockContract.endDate = ed.getTime();
 
-            for(var i=0; i<$scope.blockTimeContract.blockTimeServices.length; i++) {
+            for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {
                 name: $scope.blockTimeContract.blockTimeServices[i].name,
                 rate: contractData.rateExceeding,
@@ -491,23 +496,23 @@
               blockContract.blockTimeServices.push(bs);
             }
 
-            for(var m=0; m<$scope.blockTimeContract.services.length; m++) {
+            for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
               var cs = {
                 name: $scope.blockTimeContract.services[m].name,
                 rate: $scope.blockTimeContract.services[m].rate,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: []
               };
-              if($scope.blockTimeContract.services[m].taxes.length) {
-                for(var n=0; n<$scope.blockTimeContract.services[m].taxes.length; n++) {
+              if ($scope.blockTimeContract.services[m].taxes.length) {
+                for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
                   cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
                 }
               }
               blockContract.services.push(cs);
             }
 
-            for(var u=0; u<$scope.ticketSharedUsersList.length; u++) {
-              if($scope.ticketSharedUsersList[u].notify) {
+            for (var u = 0; u < $scope.ticketSharedUsersList.length; u++) {
+              if ($scope.ticketSharedUsersList[u].notify) {
                 var user = {
                   userId: $scope.ticketSharedUsersList[u].user.id,
                   date: null,
@@ -516,15 +521,15 @@
                 blockContract.shares.push(user)
               }
             }
-            if($scope.blockTimeContract.taxes && $scope.blockTimeContract.taxes.length) {
-              for(var r=0; r<$scope.blockTimeContract.taxes.length; r++) {
+            if ($scope.blockTimeContract.taxes && $scope.blockTimeContract.taxes.length) {
+              for (var r = 0; r < $scope.blockTimeContract.taxes.length; r++) {
                 blockContract.taxIds.push($scope.blockTimeContract.taxes[r].id);
               }
             }
 
-            AgreementsService.createContract(blockContract, function(resp) {
+            AgreementsService.createContract(blockContract, function (resp) {
               console.log(resp);
-              if(resp.message === 'Validation failed') {
+              if (resp.message === 'Validation failed') {
                 $scope.showBlockTimeContractCreateMessageError = true;
                 $scope.BlockTimeContractCreateMessage = 'Something went wrong, please try again later and contact administrator';
               } else {
@@ -534,9 +539,9 @@
           }
         }
 
-        $scope.validateAndCreteBlockTimeContract = function(blockTimeContract, newBlockTimeService, newService) {
+        $scope.validateAndCreteBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
           var emptyServices = true;
-          if((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)){
+          if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)) {
             emptyServices = false;
             var confirmMessage = 'You have filled service name field but didnt added it to contract service list. Are you sure you want to create contract ?';
             var confirmButton = 'Yes, create';
@@ -549,11 +554,11 @@
           }
 
           function validateAndCreate(blockTimeContract) {
-            checkForDuplicateServiceNames(blockTimeContract.blockTimeServices).then(function(resp){
-              if(resp) {
-                if(blockTimeContract.services && blockTimeContract.services.length) {
-                  checkForDuplicateServiceNames(blockTimeContract.services).then(function(resp){
-                    if(resp) {
+            checkForDuplicateServiceNames(blockTimeContract.blockTimeServices).then(function (resp) {
+              if (resp) {
+                if (blockTimeContract.services && blockTimeContract.services.length) {
+                  checkForDuplicateServiceNames(blockTimeContract.services).then(function (resp) {
+                    if (resp) {
                       createBlockTimeContract(blockTimeContract)
                     }
                   })

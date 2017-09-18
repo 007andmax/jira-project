@@ -62,7 +62,7 @@
         <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
           <div class="col-md-5 form-group">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name"
-                   hard-reset-pattern="serviceNamePattern">
+                   hard-reset-pattern="serviceNamePattern" required>
           </div>
           <div class="col-md-2 form-group before-icon">
             <input placeholder="0.00" type="text" class="form-control"
