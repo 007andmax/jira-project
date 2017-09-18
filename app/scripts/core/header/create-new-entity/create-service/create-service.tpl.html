@@ -9,12 +9,12 @@
   <div class="col-md-12">
     <div class="col-md-5" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
-      <input type="text" class="form-control" placeholder="Service Name"
-             ng-model="editService.name"
-             name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
-             is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
-             ng-maxlength="100" ng-minlength="3">
-    </div>
+    <input type="text" class="form-control" placeholder="Service Name"
+           ng-model="editService.name"
+           name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
+           is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
+           ng-maxlength="30" ng-minlength="3">
+  </div>
 
     <div class="col-2"
 

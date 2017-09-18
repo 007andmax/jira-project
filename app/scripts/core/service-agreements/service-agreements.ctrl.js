@@ -497,7 +497,7 @@
         var emptyNewService = true;
         if (editService && editService.name && editService.name.length) {
           emptyNewService = false;
-          var confirmMessage = 'You have filled service name field but didnt added it to contract service list. Are you sure you want to create contract ?';
+          var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
           var confirmButton = 'Yes, create';
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             emptyNewService = true;
