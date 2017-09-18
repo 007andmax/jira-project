@@ -457,11 +457,11 @@
   word-wrap: break-word;
 }
 .service-agreements-lists .col-width-1{
-  width: 9.1%;
+  width: 9.4%;
 }
 
 .service-agreements-lists .col-width-3{
-  width: 24.2%;
+  width: 22.8%;
 }
 .service-agreements .btn-primary{
   width: 190px;
@@ -490,7 +490,7 @@
 }
 .service-agreements ul {
   list-style: none;
-  padding: 20px;
+  padding: 0;
 }
 
 .service-agreements ul li [class*='col-md-'] {
@@ -1319,7 +1319,9 @@
   .product-list-ticket-deposit .col-md-3 {
     width: 45%;
   }
-
+  .service-agreements ul li [class*='col-md-']{
+    padding: 15px 5px;
+  }
 }
 
 @media screen and (max-width: 1366px) {
@@ -1338,7 +1340,10 @@
     font-size: 12px;
   }
   .service-agreements-lists .col-width-1{
-    width: 8.33333333%;
+    width: 10.3%;
+  }
+  .service-agreements-lists .col-width-3{
+    width: 20.7%;
   }
 }
 
@@ -1353,5 +1358,8 @@
 
   .product-list-ticket-deposit .col-md-3 {
     width: 44%;
+  }
+  .service-agreements-lists{
+    font-size: 11px;
   }
 }

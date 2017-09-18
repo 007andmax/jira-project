@@ -28,7 +28,7 @@
           <i ng-show="filterType === 'endDate'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-endDate'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
-        <div class="col-md-1"><strong ng-click="changeFilterType('reviewDate')">Review Date</strong>
+        <div class="col-md-1 col-width-1"><strong ng-click="changeFilterType('reviewDate')">Review Date</strong>
           <i ng-show="filterType === 'reviewDate'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-reviewDate'" class="icn-sm icn-rotate-caret-gray"></i>
         </div>
@@ -51,7 +51,7 @@
         <div class="col-md-1" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{agreement.status}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
-        <div class="col-md-1">
+        <div class="col-md-1 col-width-1">
           <div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
         </div>
         <div class="col-md-1 text-center">{{agreement.amount}}</div>
