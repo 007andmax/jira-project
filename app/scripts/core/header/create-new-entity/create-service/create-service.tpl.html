@@ -5,33 +5,36 @@
     professional fees. These default services can be assigned to any or all customers. You can modify the service rate
     per customer once you have assigned the service to them. If you bill for this service then check the billable box,
     if you only want to track the time this service is used then uncheck the billable box.</p>
-  <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
-    <input type="text" class="form-control" placeholder="Service Name"
-           ng-model="editService.name"
-           name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
-           is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
-           ng-maxlength="100" ng-minlength="3">
+  <div class="col-md-12">
+    <div class="col-md-5" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+
+      <input type="text" class="form-control" placeholder="Service Name"
+             ng-model="editService.name"
+             name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
+             is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
+             ng-maxlength="100" ng-minlength="3">
+    </div>
+
+    <div class="col-2"
+
+         ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+      <input type="text" class="form-control" placeholder="Per Hour"
+             ng-model="editService.rate" qt-to-fixed="2"
+             name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+    </div>
+
+    <div class="col-3">
+      <label class="control checkbox pull-left" uib-tooltip="Is Billable" toltip-placement="top">
+        <input type="checkbox" ng-model="editService.billable">
+        <span class="control-indicator"></span> &nbsp; Is Billable
+      </label>
+    </div>
   </div>
-
-  <div class="col-2"
-
-       ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
-    <input type="text" class="form-control" placeholder="Per Hour"
-           ng-model="editService.rate" qt-to-fixed="2"
-           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
-  </div>
-
-  <div class="col-3">
-    <label class="control checkbox pull-left" uib-tooltip="Is Billable" toltip-placement="top">
-      <input type="checkbox" ng-model="editService.billable">
-      <span class="control-indicator"></span> &nbsp; Is Billable
-    </label>
-  </div>
-
-
-  <div class="col-3" style="width: 260px; padding-left: 0;">
-    <select-taxes taxes="taxes" entity="editService"></select-taxes>
+  <div class="col-md-12">
+    <div class="col-md-5">
+      <select-taxes taxes="taxes" entity="editService"></select-taxes>
+    </div>
   </div>
 
 
