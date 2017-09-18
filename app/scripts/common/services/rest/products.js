@@ -23,7 +23,7 @@
 
       function getFullListForAutocomplete(scope, callback) {
 
-        if (!scope || ! scope.$id) {
+        if (!scope || !scope.$id) {
           throw 'First argument must be Angularjs scope!';
         }
 
@@ -156,8 +156,9 @@
                   Utils.customizeObj(newChange.data, product);
                 } else {
                   var sourceCategory = Utils.findById(data.categories, newChange.data.category.id);
-                  sourceCategory.productsList.push(newChange.data);
-                  data.list.push(newChange.data);
+                  var product = Utils.customizeObj(newChange.data);
+                  sourceCategory.productsList.push(product);
+                  data.list.push(product);
                 }
 
               } else if (newChange.action == 'PRODUCT_DELETED') {

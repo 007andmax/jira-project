@@ -2554,8 +2554,14 @@ Devices tab
 
   cursor: auto;
   text-align: center;
-}
 
+}
+.qt-product-list.left-list{
+  margin-top: 70px;
+}
+.qt-product-list.left-list .new-list-heading{
+  margin-top: -70px;
+}
 .qt-product-list.left-list .intermediate-parent-elem .col-4 {
   word-break: break-all;
 }

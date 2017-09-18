@@ -137,7 +137,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-product-list .new-intermediate-parent-elem,
 .qt-product-list .new-list-heading {
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   min-height: 55px;
 }
 
@@ -180,8 +180,6 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-default-services li .intermediate-parent-elem .is-billable label {
   left: 10px;
 }
-
-
 
 @media only screen and (min-width: 2000px) {
 
@@ -1831,8 +1829,8 @@ span.sort-span {
 }
 
 .product-list-scroll {
-  min-height: 500px;
+  max-height: calc(100vh - 240px);
   overflow: scroll;
   width: 100%;
-  height: 100%;
+  margin-top: 70px;
 }
