@@ -391,6 +391,43 @@
         return deferred.promise;
       }
 
+      function checkHourlyExistingNamesDuplicates(name) {
+        var duplicate = false;
+        var names = [];
+        for(var i=0; i<$scope.editContract.services.length; i++) {
+          names.push($scope.editContract.services[i].name)
+        }
+        var sortedNames = names.slice().sort();
+        if(name) {
+          for(var t=0; t<sortedNames.length-1; t++) {
+            if(sortedNames[t+1] == sortedNames[t] && sortedNames[t] == name) {
+              duplicate = true;
+            }
+          }
+        } else {
+          for(var t=0; t<sortedNames.length-1; t++) {
+            if(sortedNames[t+1] == sortedNames[t]) {
+              duplicate = true;
+            }
+          }
+        }
+        if(duplicate) {
+          $scope.showErrorInHourlyContract = true;
+          $scope.errorMessage = 'You have duplicates services name';
+        } else {
+          $scope.showErrorInHourlyContract = false;
+        }
+        return duplicate;
+      }
+
+      $scope.checkHourlyServiceErrorForm = function(service) {
+        if(service.name && !checkHourlyExistingNamesDuplicates(service.name)) {
+          return false;
+        } else {
+          return true;
+        }
+      };
+
       function checkForDuplicateServiceNames() {
 
         var deferred = $q.defer();
@@ -541,11 +578,13 @@
       }
 
       $scope.dissableHourlyCreateButton = function () {
+
         if ($scope.editContract.startDate &&
           $scope.editContract.endDate &&
           $scope.editContract.description &&
           $scope.editContract.services.length > 0 &&
-          checkServiceNameLength()) {
+          checkServiceNameLength() &&
+          !checkHourlyExistingNamesDuplicates()) {
           return false
         } else {
           return true

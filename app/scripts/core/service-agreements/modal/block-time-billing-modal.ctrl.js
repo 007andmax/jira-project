@@ -123,7 +123,6 @@
         $scope.$watch(function () {
           return $scope.blockTimeContract.interval;
         }, function (interval) {
-          //$scope.blockTimeContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
           if (interval === 'MONTHLY') {
             $scope.blockTimeContract.period = 'Month';
           } else if (interval === 'YEARLY') {
@@ -281,17 +280,17 @@
           }
         };
 
-        function preSettupBlockTimeService(preSettupServiceList) {
-          if (preSettupServiceList && preSettupServiceList.length) {
-            for (var i = 0; i < preSettupServiceList.length; i++) {
-              var setService = {
-                name: preSettupServiceList[i].name
-              };
-              pickDefaultService(setService);
-              $scope.blockTimeContract.blockTimeServices.push(setService);
-            }
-          }
-        }
+        // function preSettupBlockTimeService(preSettupServiceList) {
+        //   if (preSettupServiceList && preSettupServiceList.length) {
+        //     for (var i = 0; i < preSettupServiceList.length; i++) {
+        //       var setService = {
+        //         name: preSettupServiceList[i].name
+        //       };
+        //       pickDefaultService(setService);
+        //       $scope.blockTimeContract.blockTimeServices.push(setService);
+        //     }
+        //   }
+        // }
 
         $scope.deleteBlockTimeService = function (blockTimeService) {
           for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
@@ -363,16 +362,70 @@
           }
         };
 
+        function checkBlockTimeContractServicesNameLengths(){
+          var check = true;
+          for(var i=0; i<$scope.blockTimeContract.blockTimeServices.length; i++) {
+            if($scope.blockTimeContract.blockTimeServices[i].name == undefined) {
+              check = false;
+            }
+          }
+          for(var t=0; t<$scope.blockTimeContract.services.length; t++) {
+            if($scope.blockTimeContract.services[t].name == undefined || $scope.blockTimeContract.services[t].name.length == 0) {
+              check = false;
+            }
+          }
+          if(!check) {
+            $scope.showBlockTimeContractCreateMessageError = true;
+            $scope.BlockTimeContractCreateMessage = 'You have an empty services names';
+          } else {
+            $scope.showBlockTimeContractCreateMessageError = false;
+          }
+          return check;
+        }
+
         $scope.disableBloctCreateButton = function () {
           if ($scope.blockTimeContract.description &&
             $scope.blockTimeContract.startDate &&
             $scope.blockTimeContract.endDate &&
             $scope.blockTimeContract.blockTimeServices.length > 0 &&
             $scope.blockTimeContract.includedHours &&
-            $scope.blockTimeContract.blockRate) {
+            $scope.blockTimeContract.blockRate &&
+            checkBlockTimeContractServicesNameLengths()) {
             return false
           } else {
             return true
+          }
+        };
+
+        function checkForExistingNameDuplicates(name) {
+          var duplicate = false;
+          var names = [];
+          for(var i=0; i<$scope.blockTimeContract.blockTimeServices.length; i++) {
+            names.push($scope.blockTimeContract.blockTimeServices[i].name)
+          }
+          for(var j=0; j<$scope.blockTimeContract.services.length; j++) {
+            names.push($scope.blockTimeContract.services[j].name)
+          }
+          var sortedNames = names.slice().sort();
+          for(var t=0; t<sortedNames.length-1; t++) {
+            if(sortedNames[t+1] == sortedNames[t] && sortedNames[t] == name) {
+              duplicate = true;
+            }
+          }
+          if(duplicate) {
+            $scope.showBlockTimeContractCreateMessageError = true;
+            $scope.BlockTimeContractCreateMessage = 'You have duplicates services name';
+          } else {
+            $scope.showBlockTimeContractCreateMessageError = false;
+          }
+          return duplicate;
+        }
+
+        $scope.checkBlockTimeServiceErrorForm = function(service) {
+          if(service.name && !checkForExistingNameDuplicates(service.name)) {
+            return false;
+          } else {
+            return true;
           }
         };
 
@@ -417,8 +470,6 @@
 
             }
           });
-
-
           return deferred.promise;
         }
 

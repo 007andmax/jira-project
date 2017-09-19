@@ -157,12 +157,13 @@
 
           <div class="bill-hide-content-item clearfix col-md-12"
                ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
-            <div class="col-md-5 form-group">
+            <div class="col-md-5 form-group"
+                 ng-class="{'has-error': checkBlockTimeServiceErrorForm(blockTimeService)}">
               <input placeholder="Service Name"
                      type="text" class="form-control"
                      ng-model="blockTimeService.name"
                      required
-                     invalid-when="!isNameUnique(newBlockTimeService)"
+                     invalid-when="!isNameUnique(blockTimeService)"
                      is-uniq-validation validation-func="validateServiceName" hard-reset-pattern="serviceNamePattern">
 
             </div>
@@ -249,7 +250,8 @@
               <div class="col-md-1 text-center">Action</div>
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
-                <div class="col-md-5 form-group">
+                <div class="col-md-5 form-group"
+                     ng-class="{'has-error': checkBlockTimeServiceErrorForm(contractService)}">
                   <input placeholder="Service Name" type="text"
                          class="form-control" ng-model="contractService.name" hard-reset-pattern="serviceNamePattern">
                 </div>
