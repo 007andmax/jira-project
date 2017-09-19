@@ -15,7 +15,13 @@
                    typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}" required>
 
-            <div typeahead-input-icon="contractCompany"></div>
+            <!--<div typeahead-input-icon="contractCompany"></div>-->
+            <div>
+              <i class="icn-sm icn-caret-gray" ng-show="!showClearIcon()"></i>
+              <i class="icn-sm icn-remove-old"
+                 ng-show="showClearIcon()"
+                 uib-tooltip="clear" tooltip-placement="top" ng-click="contractCompany = undefined"></i>
+            </div>
           </div>
         </div>
       </div>

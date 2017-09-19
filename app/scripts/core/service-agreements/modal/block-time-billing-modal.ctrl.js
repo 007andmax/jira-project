@@ -14,8 +14,8 @@
         $scope.parseDate = Date.parse.bind(Date);
 
         var preSettupServiceList = [
-          {name: 'On site service pre-settup'},
-          {name: 'Remote service pre-settup'}
+          {name: 'On site block time service'},
+          {name: 'Remote block time service'}
         ];
         $scope.taxes = TaxesService.getAll();
 

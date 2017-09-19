@@ -218,11 +218,19 @@
         taxes: []
       };
 
-      $scope.disabledCreateButtonInCreateNewModal = function() {
+      $scope.showClearIcon = function () {
+        if ($scope.contractCompany) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      $scope.disabledCreateButtonInCreateNewModal = function () {
         var disable = false;
-        if($scope.contractCompany) {
-          for(var i=0; i<$scope.companiesList.length; i++) {
-            if($scope.companiesList[i].name == $scope.contractCompany.name) {
+        if ($scope.contractCompany) {
+          for (var i = 0; i < $scope.companiesList.length; i++) {
+            if ($scope.companiesList[i].name == $scope.contractCompany.name) {
               disable = false;
               break;
             } else {
@@ -283,7 +291,7 @@
       };
 
       $scope.endDatePicker = function (date) {
-        if(date && date.length>0) {
+        if (date && date.length > 0) {
           var endDate = new Date(date);
           var endMonth = endDate.getMonth() + 1;
           $scope.editContract.endDate = $filter('date')(endDate, 'yyyy/MM/dd');
@@ -376,11 +384,11 @@
 
       function returnCompanyId() {
         var id;
-        if($scope.editContract.companyId) {
+        if ($scope.editContract.companyId) {
           id = $scope.editContract.companyId
         } else if ($scope.contractCompany && $scope.contractCompany.id) {
           id = $scope.contractCompany.id
-        } else  if($scope.companyId && $scope.companyId.id) {
+        } else if ($scope.companyId && $scope.companyId.id) {
           id = $scope.companyId.id;
         } else {
           id = $scope.companyId;
@@ -411,24 +419,24 @@
       function checkHourlyExistingNamesDuplicates(name) {
         var duplicate = false;
         var names = [];
-        for(var i=0; i<$scope.editContract.services.length; i++) {
+        for (var i = 0; i < $scope.editContract.services.length; i++) {
           names.push($scope.editContract.services[i].name)
         }
         var sortedNames = names.slice().sort();
-        if(name) {
-          for(var t=0; t<sortedNames.length-1; t++) {
-            if(sortedNames[t+1] == sortedNames[t] && sortedNames[t] == name) {
+        if (name) {
+          for (var t = 0; t < sortedNames.length - 1; t++) {
+            if (sortedNames[t + 1] == sortedNames[t] && sortedNames[t] == name) {
               duplicate = true;
             }
           }
         } else {
-          for(var t=0; t<sortedNames.length-1; t++) {
-            if(sortedNames[t+1] == sortedNames[t]) {
+          for (var t = 0; t < sortedNames.length - 1; t++) {
+            if (sortedNames[t + 1] == sortedNames[t]) {
               duplicate = true;
             }
           }
         }
-        if(duplicate) {
+        if (duplicate) {
           $scope.showErrorInHourlyContract = true;
           $scope.errorMessage = 'You have duplicates services name';
         } else {
@@ -437,8 +445,8 @@
         return duplicate;
       }
 
-      $scope.checkHourlyServiceErrorForm = function(service) {
-        if(service.name && !checkHourlyExistingNamesDuplicates(service.name)) {
+      $scope.checkHourlyServiceErrorForm = function (service) {
+        if (service.name && !checkHourlyExistingNamesDuplicates(service.name)) {
           return false;
         } else {
           return true;
@@ -534,7 +542,7 @@
           console.log(resp);
           if (resp.message === 'Validation failed') {
             $scope.showErrorInHourlyContract = true;
-            if(resp.validationResults && resp.validationResults.serviceAgreementDto) {
+            if (resp.validationResults && resp.validationResults.serviceAgreementDto) {
               $scope.errorMessage = resp.validationResults.serviceAgreementDto;
             } else {
               $scope.errorMessage = 'Something went wrong, please try again later and contact administrator';
@@ -580,12 +588,12 @@
 
       function checkServiceNameLength() {
         var check = true;
-        for(var i=0; i<$scope.editContract.services.length; i++) {
-          if($scope.editContract.services[i].name == undefined) {
+        for (var i = 0; i < $scope.editContract.services.length; i++) {
+          if ($scope.editContract.services[i].name == undefined) {
             check = false;
           }
         }
-        if(!check) {
+        if (!check) {
           $scope.showErrorInHourlyContract = true;
           $scope.errorMessage = 'You have an empty services names'
         } else {
@@ -600,8 +608,7 @@
           $scope.editContract.endDate &&
           $scope.editContract.description &&
           $scope.editContract.services.length > 0 &&
-          checkServiceNameLength() &&
-          !checkHourlyExistingNamesDuplicates()) {
+          checkServiceNameLength() && !checkHourlyExistingNamesDuplicates()) {
           return false
         } else {
           return true
@@ -623,7 +630,7 @@
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;
           var d = new Date($scope.editContract.startDate);
-          if(d.getTime() < $scope.today) {
+          if (d.getTime() < $scope.today) {
             $scope.editContract.startDate = '';
             $scope.editContract.endDate = '';
           }
