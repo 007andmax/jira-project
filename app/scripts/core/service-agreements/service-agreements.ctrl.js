@@ -218,6 +218,23 @@
         taxes: []
       };
 
+      $scope.disabledCreateButtonInCreateNewModal = function() {
+        var disable = false;
+        if($scope.contractCompany) {
+          for(var i=0; i<$scope.companiesList.length; i++) {
+            if($scope.companiesList[i].name == $scope.contractCompany.name) {
+              disable = false;
+              break;
+            } else {
+              disable = true;
+            }
+          }
+        } else {
+          var disable = true;
+        }
+        return disable;
+      };
+
 
       function reInitServiceForm() {
         $scope.reinitNewServiceForm = false;
