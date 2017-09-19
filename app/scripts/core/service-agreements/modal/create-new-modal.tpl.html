@@ -9,7 +9,7 @@
         <div class="form-group">
           <p>Select Company</p>
           <div class="form-group">
-            <input type="text" class="form-control has-dropdown" next-after-text-editor
+            <input readonly type="text" class="form-control has-dropdown" next-after-text-editor
                    ng-model="contractCompany" name="contractCompany" autocomplete="off"
                    uib-typeahead="company as company.name for company in companiesList | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                    typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
