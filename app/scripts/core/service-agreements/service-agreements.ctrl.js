@@ -55,7 +55,7 @@
           return n < 10 ? '0' + n : '' + n;
         }
 
-        $scope.deleteAgreemenet = function (agreement) {
+        $scope.deleteAgreement = function (agreement) {
           if (agreement && agreement.id) {
             var confirmMessage = 'Are you sure you want to delete agreement?';
             var confirmButton = 'Delete';
@@ -524,11 +524,28 @@
 
       };
 
+      function checkServiceNameLength() {
+        var check = true;
+        for(var i=0; i<$scope.editContract.services.length; i++) {
+          if($scope.editContract.services[i].name == undefined) {
+            check = false;
+          }
+        }
+        if(!check) {
+          $scope.showErrorInHourlyContract = true;
+          $scope.errorMessage = 'You have an empty services names'
+        } else {
+          $scope.showErrorInHourlyContract = false;
+        }
+        return check;
+      }
+
       $scope.dissableHourlyCreateButton = function () {
         if ($scope.editContract.startDate &&
           $scope.editContract.endDate &&
           $scope.editContract.description &&
-          $scope.editContract.services.length > 0) {
+          $scope.editContract.services.length > 0 &&
+          checkServiceNameLength()) {
           return false
         } else {
           return true
@@ -570,6 +587,3 @@
   ])
 
 }());
-
-
-// discount на биллабле переделать.

@@ -57,7 +57,7 @@
         <div class="col-md-1 text-center">{{agreement.amount}}</div>
         <div class="col-md-1 text-center" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">
           <i class="icon-sm icn-delete" uib-tooltip="delete"
-             ng-click="deleteAgreemenet(agreement); $event.stopPropagation();"></i>
+             ng-click="deleteAgreement(agreement); $event.stopPropagation();"></i>
         </div>
       </li>
 
