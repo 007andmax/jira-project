@@ -21,7 +21,11 @@
                 keepOpen: true,
                 format: 'DD MMM YYYY',
                 defaultDate: $filter('date')(Date.now(), 'dd MMM yyyy'),
-                ignoreReadonly: true
+                ignoreReadonly: true,
+                widgetPositioning: {
+                  horizontal: 'right',
+                  vertical: 'top'
+                }
               }, dp,
               enabledDates = [],
               lastDate = '';
