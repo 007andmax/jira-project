@@ -470,7 +470,7 @@
 .service-agreements-lists{
   text-align: left;
 }
-.service-agreements-lists li:first-child [class*='col-md-']{
+.service-agreements-lists li:first-child [class*='col-md-'] strong{
   cursor: pointer;
 }
 .service-agreements-lists .pointer{
