@@ -178,7 +178,7 @@
 
           <div class="bill-hide-content-item clearfix col-md-12" ng-form="newBlockTimeServiceForm">
             <div ng-show="showNewBlockTimeServiceError">
-              <p style="color: red">{{newBlockTimeServiceErrorMessage}}</p>
+              <p style="color: red;padding-left: 15px;">{{newBlockTimeServiceErrorMessage}}</p>
             </div>
             <div class="form-group col-md-5"
                  ng-class="{'has-error': isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName')}">
@@ -284,7 +284,7 @@
 
               <div class="bill-hide-content-item clearfix" ng-form="newContractServiceForm" ng-if="reInitServiceForm">
                 <div ng-show="showNewServiceError">
-                  <p style="color: red">{{newServiceErrorMessage}}</p>
+                  <p style="color: red;padding-left: 15px;">{{newServiceErrorMessage}}</p>
                 </div>
                 <div class="col-md-5 form-group"
                      ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName') }">

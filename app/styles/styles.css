@@ -9878,8 +9878,15 @@ button.close {
   box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4);
   background-clip: padding-box;
   outline: 0;
+  margin-bottom: 50px;
 }
-
+.modal-open .modal::-webkit-scrollbar { width: 0; }
+.modal-open .modal{ -ms-overflow-style: none; }
+.modal-open .modal{
+  margin-right: -16px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 @-moz-document url-prefix() {
   .modal-content {
     -webkit-box-shadow: 0 6px 15px 0 rgba(21, 30, 41, 0.4);

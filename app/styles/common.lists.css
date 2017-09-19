@@ -2556,12 +2556,15 @@ Devices tab
   text-align: center;
 
 }
-.qt-product-list.left-list{
+
+.qt-product-list.left-list {
   margin-top: 70px;
 }
-.qt-product-list.left-list .new-list-heading{
+
+.qt-product-list.left-list .new-list-heading {
   margin-top: -70px;
 }
+
 .qt-product-list.left-list .intermediate-parent-elem .col-4 {
   word-break: break-all;
 }
@@ -4568,9 +4571,9 @@ Devices tab
 }
 
 .service-form-wrapper {
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden !important;
-  max-height: 650px;
+  /*max-height: 650px;*/
 }
 
 .service-form-wrapper .form-group {
@@ -4657,9 +4660,11 @@ Devices tab
   width: 100px;
   display: inline-block;
 }
-.hourly{
+
+.hourly {
   margin-bottom: 75px;
 }
+
 .hourly .not-yet-hourly {
   text-align: center;
   padding: 90px 0;
