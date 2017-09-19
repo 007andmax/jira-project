@@ -15,7 +15,6 @@
 
         UserNotificationService.show('Loading...');
 
-        var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.tabName = $state.params.tabName;
@@ -48,8 +47,6 @@
           $state.go('companies');
           return;
         }
-
-        rightPanelSharedState.companyId = $scope.company.id;
 
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
@@ -164,10 +161,6 @@
             $scope.isShowErrorMessage = false;
             $scope.messageError = '';
           }, 3000)
-        });
-
-        $scope.$on('$destroy', function () {
-          rightPanelSharedState.companyId = undefined;
         });
 
         $scope.setOrderByUsers = function (option) {

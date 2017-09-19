@@ -5,15 +5,6 @@
          ng-style="{'margin-top': currentOpenTab !== 'dashboard' ? '10px' : '310px'}">
       <ul class="nav nav-qt clearfix" style="padding: 0 30px;" company-bulk-option>
 
-        <!--<li class="activity-tab active">-->
-        <!--<a data-toggle="tab" href="javascript:void(0)">Activity</a>-->
-        <!--<div class="activity-nav">-->
-        <!--<a href="javascript:void(0)" class="hourly active">Hour</a>-->
-        <!--<a href="javascript:void(0)" class="weekly">Week</a>-->
-        <!--<a href="javascript:void(0)" class="monthly">Month</a>-->
-        <!--</div>-->
-        <!--</li>-->
-
         <li ng-class="{'active': currentOpenTab === 'dashboard'}" style="cursor: pointer;"
             ng-if="PermissionsService.isAllowed('VIEW_USERS')">
           <a ui-sref="companyProfile({ tabName: 'dashboard' })">
@@ -44,25 +35,12 @@
           </a>
         </li>
 
-        <!--<li ng-class="{'active': currentOpenTab === 'settings'}" style="cursor: pointer;">-->
-        <!--<a ui-sref="companyProfile({ tabName: 'settings' })">-->
-        <!--Device Settings-->
-        <!--</a>-->
-        <!--</li>-->
-
         <li ng-class="{'active': currentOpenTab === 'products'}" style="cursor: pointer;"
             ng-if="company.clientType.toLowerCase() === 'vendor' && (company.hasProducts || productsData.length)">
           <a ui-sref="companyProfile({ tabName: 'products' })">
             Products
           </a>
         </li>
-
-        <!--<li ng-class="{active: mode === 'vendors'}">-->
-        <!--<a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'vendors'">-->
-        <!--Assc. Vendors-->
-        <!--<span class="text-muted">{{ companyData.companyAssociations.length }}</span>-->
-        <!--</a>-->
-        <!--</li>-->
 
         <li class="bulk-option" bulk-option-content
             ng-class="{'hide': !(bulkOptionMode === 'users') && !(bulkOptionMode === 'devices')}"

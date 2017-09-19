@@ -12,7 +12,6 @@
       var scope = $rootScope.$new(),
         storage = {
           lists: {},
-          recentActivities: {},
           groupedData: []
         };
 
@@ -37,152 +36,6 @@
         }
 
       }
-
-      function getActivities(scope, params, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        var list = Utils.customizeObj([]),
-          isNotSubscribed = !storage.lists[scope.$id];
-
-        storage.lists[scope.$id] = {
-          params: params,
-          scope: scope,
-          list: list
-        };
-
-        loadMoreActivities(scope, function (resp) {
-          if (isNotSubscribed) {
-            RealTimeService.subscribe('/activity', scope, function (newChange) {
-
-              if (newChange.action == 'ACTIVITY_CREATED') {
-                storage.lists[scope.$id].list.unshift(Utils.customizeObj(newChange.data));
-              }
-            });
-          }
-          if (callback) {
-            callback(resp);
-          }
-        });
-
-        scope.$on('$destroy', function () {
-          delete storage.lists[scope.$id];
-        });
-        return list;
-      }
-
-      function loadMoreActivities(scope, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        var listData = storage.lists[scope.$id];
-
-        if (!listData) {
-          throw 'There is no activities list for scope ' + scope.$id;
-        }
-
-        if (listData.loadingInProcess) {
-          return;
-        }
-
-        if (listData.list.length > 0) {
-          listData.params.createdAt = listData.list[listData.list.length - 1].createdAt
-        }
-
-        listData.loadingInProcess = true;
-
-        $http({
-          method: 'GET',
-          url: '/activity/',
-          params: listData.params
-        }).then(function (response) {
-
-          if (response) {
-
-            Utils.customizeArray(response.data, listData.list);
-
-            listData.loadingInProcess = false;
-
-            if (callback) {
-              callback(response.data);
-            }
-          }
-          listData.loadingInProcess = false;
-        }, function (response) {
-          listData.loadingInProcess = false;
-          if (callback) {
-            callback(response.data);
-          }
-        });
-      }
-
-      function getRecentActivities(scope, params, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        params.keyword = "";
-
-        var list = Utils.customizeObj([]);
-
-        storage.recentActivities[scope.$id] = {
-          params: params,
-          scope: scope,
-          list: list
-        };
-
-        $http({
-          method: 'GET',
-          url: '/activity/',
-          params: params
-        }).then(function (response) {
-
-          if (response) {
-
-            Utils.customizeArray(response.data, list);
-            if (callback) {
-              callback(response.data);
-            }
-          }
-        }, function (response) {
-          if (callback) {
-            callback(response.data);
-          }
-        });
-
-        RealTimeService.subscribe('/activity', scope, function (newChange) {
-
-          if (newChange.action == 'ACTIVITY_CREATED') {
-            list.unshift(Utils.customizeObj(newChange.data));
-            list.pop();
-          }
-        });
-        scope.$on('$destroy', function () {
-          delete storage.lists[scope.$id];
-        });
-        return list;
-      }
-
-      //function getRecentActivities() {
-      //
-      //    if (storage.recentActivities.length < recentActivitiesAmount) {
-      //        $http({
-      //            method: 'GET',
-      //            url: '/activities'
-      //        }).then(function (resp) {
-      //
-      //            Utils.customizeArray(resp.data, storage.recentActivities);
-      //            storage.recentActivities.splice(recentActivitiesAmount, storage.recentActivities.length);
-      //        });
-      //    }
-      //
-      //    return storage.recentActivities;
-      //}
 
       function getClientCompaniesGroupedData(callback) {
 
@@ -284,9 +137,6 @@
       }
 
       return {
-        getActivities: getActivities,
-        getRecentActivities: getRecentActivities,
-        loadMoreActivities: loadMoreActivities,
         getClientCompaniesGroupedData: getClientCompaniesGroupedData,
         getOneCompanyGroupedData: getOneCompanyGroupedData,
         getCurrentUserInfo: getCurrentUserInfo,
