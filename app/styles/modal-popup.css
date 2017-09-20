@@ -88,6 +88,10 @@
   /*max-height: 750px;*/
 }
 
+.service-agreement-modal .report-calendar {
+  pointer-events: none;
+}
+
 .create-window .general .create-ticket-form {
   height: 550px;
 }

@@ -450,44 +450,55 @@
   height: 65px;
   text-transform: uppercase;
 }
-.service-agreements{
+
+.service-agreements {
   text-align: right;
 }
-.service-agreements-lists li [class*='col-md-']{
+
+.service-agreements-lists li [class*='col-md-'] {
   word-wrap: break-word;
 }
-.service-agreements-lists .col-width-1{
+
+.service-agreements-lists .col-width-1 {
   width: 9.4%;
 }
 
-.service-agreements-lists .col-width-3{
+.service-agreements-lists .col-width-3 {
   width: 22.8%;
 }
-.service-agreements .btn-primary{
+
+.service-agreements .btn-primary {
   width: 190px;
   margin: 20px 20px 0 0;
 }
-.service-agreements-lists{
+
+.service-agreements-lists {
   text-align: left;
 }
-.service-agreements-lists li:first-child [class*='col-md-'] strong{
+
+.service-agreements-lists li:first-child [class*='col-md-'] strong {
   cursor: pointer;
 }
-.service-agreements-lists .pointer{
+
+.service-agreements-lists .pointer {
   cursor: pointer;
 }
-.service-agreements-lists .icn-delete{
+
+.service-agreements-lists .icn-delete {
   cursor: pointer;
 }
-.service-agreements-lists .content-product-list-ticket{
+
+.service-agreements-lists .content-product-list-ticket {
   border-bottom: 1px solid #e7ecf2;
   border-right: 3px solid #fff;
   border-left: 3px solid #fff;
 }
-.service-agreements-lists .content-product-list-ticket:hover{
+
+.service-agreements-lists .content-product-list-ticket:hover {
   border-right: 3px solid #e7ecf2;
   border-left: 3px solid #e7ecf2;
 }
+
 .service-agreements ul {
   list-style: none;
   padding: 0;
@@ -1319,7 +1330,8 @@
   .product-list-ticket-deposit .col-md-3 {
     width: 45%;
   }
-  .service-agreements ul li [class*='col-md-']{
+
+  .service-agreements ul li [class*='col-md-'] {
     padding: 15px 5px;
   }
 }
@@ -1336,13 +1348,16 @@
   .deposit-create .col-md-2 {
     width: 17% !important;
   }
-  .service-agreements-lists{
+
+  .service-agreements-lists {
     font-size: 12px;
   }
-  .service-agreements-lists .col-width-1{
+
+  .service-agreements-lists .col-width-1 {
     width: 10.3%;
   }
-  .service-agreements-lists .col-width-3{
+
+  .service-agreements-lists .col-width-3 {
     width: 20.7%;
   }
 }
@@ -1359,7 +1374,8 @@
   .product-list-ticket-deposit .col-md-3 {
     width: 44%;
   }
-  .service-agreements-lists{
+
+  .service-agreements-lists {
     font-size: 11px;
   }
 }
