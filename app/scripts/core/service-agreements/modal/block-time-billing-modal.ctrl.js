@@ -9,7 +9,7 @@
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
 
         $scope.parseDate = Date.parse.bind(Date);
 
@@ -133,6 +133,8 @@
             $scope.blockTimeContract.period = 15;
           } else if (interval === '7 days') {
             $scope.blockTimeContract.period = 7;
+          } else if(interval === '1 day') {
+            $scope.blockTimeContract.period = 1;
           }
           reInitEndDate()
         });

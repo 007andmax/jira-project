@@ -7,7 +7,7 @@
       'ProductsService', '$filter', '$timeout', 'TaxesService',
       function ($scope, AgreementsService, CompaniesService, ServicesService, ProductsService, $filter, $timeout, TaxesService) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
           USER: 'By Users',
@@ -72,6 +72,8 @@
             $scope.serviceContract.period = 15;
           } else if (interval === '7 days') {
             $scope.serviceContract.period = 7;
+          } else if(interval === '1 day') {
+            $scope.blockTimeContract.period = 1;
           }
           reInitEndDate()
         });
