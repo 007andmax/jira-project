@@ -192,9 +192,10 @@
 
               Enable Time Rollover of unused hours
             </label>
-            <div class="service-bill-hide-content">
+            <div class="service-bill-hide-content" ng-show="blockTimeContract.enableTimeRollover">
                 <div class="form-group col-md-2">
-                  <input class="form-control" type="text" placeholder="Max Hours">
+                  <input class="form-control" type="text"
+                         placeholder="Max Hours" ng-model="blockTimeContract.maxRolloverHours">
               </div>
             </div>
 
