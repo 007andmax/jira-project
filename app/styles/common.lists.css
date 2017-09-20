@@ -4807,7 +4807,10 @@ Devices tab
 .bill-hide-content-item .icn-label-save {
   right: 85px !important;
 }
-
+.service-agreement-modal input.default-cursor,
+.service-agreement-modal label.default-cursor{
+  cursor: default;
+}
 .before-icon input {
   padding-left: 25px;
 }

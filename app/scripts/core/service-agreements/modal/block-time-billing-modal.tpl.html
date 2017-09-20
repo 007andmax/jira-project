@@ -393,7 +393,7 @@
         <div class="col-md-3">
           <div class="form-group">
             Interval:
-            <input custom-style="{'width':'100%'}" type="text" class="form-control"
+            <input custom-style="{'width':'100%'}" type="text" class="form-control default-cursor"
                    ng-model="blockTimeContract.interval"
                    readonly onclick="return false">
           </div>
@@ -402,7 +402,7 @@
           <div class="form-group">
             Select Date:
 
-            <input class="form-control" type="text"
+            <input class="form-control default-cursor" type="text"
                    readonly name="startDate"
                    onclick="return false" value="{{parseDate(blockTimeContract.startDate) | date: 'yyyy/MM/dd' }}">
             <i class="report-calendar"></i>
@@ -414,7 +414,7 @@
 
             <input type="text" readonly ng-if="reInitEndDate"
                    value="{{parseDate(blockTimeContract.endDate) | date: 'yyyy/MM/dd' }}"
-                   class="form-control" onclick="return false">
+                   class="form-control default-cursor" onclick="return false">
 
             <i class="report-calendar"></i>
           </div>
@@ -497,7 +497,7 @@
         </div>
         <div class="service-bill-content">
           <div class="col-md-12">
-            <label class="control checkbox">
+            <label class="control checkbox default-cursor">
               <input type="checkbox" ng-model="blockTimeContract.enableTimeRollover" onclick="return false">
               <span class="control-indicator"></span>
 
@@ -506,7 +506,7 @@
 
           </div>
           <div class="col-md-12">
-            <label class="control checkbox">
+            <label class="control checkbox default-cursor">
               <input type="checkbox" ng-model="blockTimeContract.billForAdditionalService" onclick="return false">
               <span class="control-indicator"></span>
               We will bill our customers for additional services
@@ -534,7 +534,7 @@
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
                 </div>
                 <div class="col-md-2 form-group text-center">
-                  <label class="control checkbox">
+                  <label class="control checkbox default-cursor">
                     <input ng-model="contractService.billable" type="checkbox" onclick="return false">
                     <span class="control-indicator"></span>
                   </label>
@@ -556,7 +556,7 @@
 
           </div>
           <div class="col-md-12">
-            <label class="control checkbox">
+            <label class="control checkbox default-cursor">
               <input type="checkbox" ng-model="blockTimeContract.notifyBlockTimeUsed" onclick="return false">
               <span class="control-indicator"></span>
               Notify when block time has been used

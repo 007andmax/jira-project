@@ -185,7 +185,7 @@
           <div class="form-group">
             Select Date:
             <input type="text"
-                   class="form-control has-dropdown readonly-normal"
+                   class="form-control has-dropdown readonly-normal default-cursor"
                    name="StartDate"
                    value="{{dateFilter(editContract.startDate)}}"
                    readonly
@@ -197,7 +197,7 @@
           <div class="form-group">
             <input style="margin-top: 25px;"
                    type="text"
-                   class="form-control has-dropdown readonly-normal"
+                   class="form-control has-dropdown readonly-normal default-cursor"
                    name="EndDate"
                    readonly
                    value="{{dateFilter(editContract.endDate)}}"
@@ -213,7 +213,7 @@
         <div class="col-md-2">Per hour</div>
         <div class="col-md-2 text-center">Make Billable</div>
         <div class="col-md-2 text-center">Tax</div>
-        <div class="col-md-1 text-center">Action</div>
+        <!--<div class="col-md-1 text-center">Action</div>-->
         <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
           <div class="col-md-5 form-group">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly ng-maxlength="30">
@@ -222,7 +222,7 @@
             <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly>
           </div>
           <div class="col-md-2 fourm-group text-center">
-            <label class="control checkbox">
+            <label class="control checkbox default-cursor">
               <input ng-show="service.billable" ng-model="service.billable" type="checkbox" onclick="return false;">
               <!--<input ng-show="!service.billable" type="checkbox" onclick="return false;">-->
               <span class="control-indicator"></span>
@@ -238,11 +238,11 @@
             </div>
           </div>
           <div class="col-md-1 fourm-group text-center">
-            <div class="add-remove-service">
+            <!--<div class="add-remove-service">-->
               <!--<div ng-click="deleteService(service)">-->
-              <i class="icon-sm icn-delete"></i>
-            </div>
-          </div>
+              <!--<i class="icon-sm icn-delete"></i>-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
       </div>
 
