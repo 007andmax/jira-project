@@ -1005,7 +1005,11 @@ aside#left div.nav-title {
   background-color: white;
   margin-bottom: 10px;
   padding-top: 0;
-  cursor: inherit;
+  cursor: default;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .tech-user-templates-wrapper .tech-user-item.new-tech-user {
