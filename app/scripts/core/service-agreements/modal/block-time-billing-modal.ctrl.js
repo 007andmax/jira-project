@@ -577,7 +577,7 @@
               shares: [],
               taxIds: []
             };
-            if(contractData.interval == 'MONTHLE' || contractData.interval == 'YEARLY') {
+            if($scope.blockTimeContract.interval == 'MONTHLY' || $scope.blockTimeContract.interval == 'YEARLY') {
               blockContract.interval = contractData.interval;
             } else {
               blockContract.interval = null;
@@ -598,7 +598,7 @@
             for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {
                 name: $scope.blockTimeContract.blockTimeServices[i].name,
-                rate: contractData.rateExceeding,
+                rate: contractData.rateExceeding
               };
               blockContract.blockTimeServices.push(bs);
             }
