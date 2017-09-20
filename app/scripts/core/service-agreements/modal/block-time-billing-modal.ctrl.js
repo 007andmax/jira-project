@@ -85,6 +85,7 @@
 
         $scope.blockTimeContract.minEndDate = $scope.blockTimeContract.minStartDate + month;
         $scope.blockTimeContract.endDate = $scope.blockTimeContract.minStartDate + month;
+        // changeMinEndDate($scope.blockTimeContract.interval);
 
 
         $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
@@ -100,7 +101,38 @@
         function changeStartDate() {
           var date = $scope.blockTimeContract.startDate;
           var endDate = new Date(date);
-          endDate.setMonth(endDate.getMonth() + 1);
+          //endDate.setMonth(endDate.getMonth() + 1);
+          $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+          $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
+          reInitEndDate()
+          //changeMinEndDate($scope.blockTimeContract.interval)
+        }
+
+        function changeMinEndDate(interval) {
+          var date = $scope.blockTimeContract.startDate;
+          var endDate = new Date(date);
+          switch(interval) {
+            case('Year'):
+              endDate.setMonth(endDate.getMonth() + 1);
+              break;
+            case('Month'):
+              endDate.setFullYear(endDate.getFullYear()+1);
+              break;
+            case('15 days'):
+              endDate.setDate(endDate.getTime()+ day*15);
+              break;
+            case('30 days'):
+              endDate.setDate(endDate.getTime()+ day*30);
+              break;
+            case('7 days') :
+              endDate.setDate(endDate.getTime()+ day*7);
+              break;
+            case('1 day'):
+              endDate.setDate(endDate.getTime()+ day);
+              break;
+            default:
+              console.log('smth wrong with period');
+          }
           $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()
@@ -125,16 +157,24 @@
         }, function (interval) {
           if (interval === 'MONTHLY') {
             $scope.blockTimeContract.period = 'Month';
+            $scope.blockTimeContract.interval = 'Month';
+            $scope.blockTimeContract.customInterval = null;
           } else if (interval === 'YEARLY') {
             $scope.blockTimeContract.period = 'Year';
+            $scope.blockTimeContract.interval = 'Year';
+            $scope.blockTimeContract.customInterval = null;
           } else if (interval === '30 days') {
             $scope.blockTimeContract.period = 30;
+            $scope.blockTimeContract.customInterval = 30;
           } else if (interval === '15 days') {
             $scope.blockTimeContract.period = 15;
+            $scope.blockTimeContract.customInterval = 15;
           } else if (interval === '7 days') {
             $scope.blockTimeContract.period = 7;
+            $scope.blockTimeContract.customInterval = 7;
           } else if(interval === '1 day') {
             $scope.blockTimeContract.period = 1;
+            $scope.blockTimeContract.customInterval = 1;
           }
           reInitEndDate()
         });
@@ -397,6 +437,7 @@
           if ($scope.blockTimeContract.description &&
             $scope.blockTimeContract.startDate &&
             $scope.blockTimeContract.endDate &&
+            $scope.blockTimeContract.rateExceeding &&
             $scope.blockTimeContract.blockTimeServices.length > 0 &&
             $scope.blockTimeContract.includedHours &&
             $scope.blockTimeContract.blockRate &&
@@ -523,8 +564,7 @@
               id: null,
               description: contractData.description,
               type: 'BLOCK_TIME',
-              interval: contractData.interval,
-              customInterval: null,
+              customInterval: contractData.customInterval,
               billType: null,
               includedHours: contractData.includedHours,
               totalHours: contractData.totalHours,
@@ -534,10 +574,15 @@
               services: [],
               blockTimeServices: [],
               enableTimeRollover: contractData.enableTimeRollover || false,
-              maxRolloverHours: null,
+              maxRolloverHours: contractData.maxRolloverHours,
               shares: [],
               taxIds: []
             };
+            if(contractData.interval == 'Month' || contractData.interval == 'Year') {
+              blockContract.interval = contractData.interval;
+            } else {
+              blockContract.interval = null;
+            }
 
             var sd = new Date(contractData.startDate);
             sd.setHours(0, 0, 0, 0);
