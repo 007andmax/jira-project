@@ -306,7 +306,7 @@
               Notify when block time has been used
             </label>
 
-            <div class="service-bill-hide-content ticket-add-footer" ng-show="blockTimeContract.notifyBlockTimeUsed">
+            <div class="service-bill-hide-content ticket-add-footer" ng-if="blockTimeContract.notifyBlockTimeUsed">
               <div class="ticket-add-content-actions-dropdown pull-left"
                    ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
