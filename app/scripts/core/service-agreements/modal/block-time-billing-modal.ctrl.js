@@ -1,5 +1,9 @@
 'use strict';
 
+
+
+console.log(Messages.errorMessage);
+
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
@@ -58,7 +62,8 @@
             blockTimeServices: preSettupServiceList,
             services: [],
             taxIds: [],
-            taxes: $scope.addDefaultTaxes()
+            taxes: $scope.addDefaultTaxes(),
+            period: 'Month'
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
@@ -83,9 +88,12 @@
         };
 
 
-        $scope.blockTimeContract.minEndDate = $scope.blockTimeContract.minStartDate + month;
-        $scope.blockTimeContract.endDate = $scope.blockTimeContract.minStartDate + month;
-        // changeMinEndDate($scope.blockTimeContract.interval);
+        // $scope.blockTimeContract.minEndDate = $scope.blockTimeContract.minStartDate + month;
+        // $scope.blockTimeContract.endDate = $scope.blockTimeContract.minStartDate + month;
+        if($scope.blockTimeContract.startDate) {
+          changeMinEndDate($scope.blockTimeContract.period);
+        }
+
 
 
         $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
@@ -99,40 +107,30 @@
 
 
         function changeStartDate() {
-          var date = $scope.blockTimeContract.startDate;
-          var endDate = new Date(date);
-          //endDate.setMonth(endDate.getMonth() + 1);
-          $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
-          $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
-          reInitEndDate()
-          //changeMinEndDate($scope.blockTimeContract.interval)
+          // var date = $scope.blockTimeContract.startDate;
+          // var endDate = new Date(date);
+          // //endDate.setMonth(endDate.getMonth() + 1);
+          // $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+          // $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
+          // reInitEndDate()
+          changeMinEndDate($scope.blockTimeContract.period);
         }
 
-        function changeMinEndDate(interval) {
+        function changeMinEndDate(period) {
           var date = $scope.blockTimeContract.startDate;
           var endDate = new Date(date);
-          switch(interval) {
-            case('Year'):
+          switch(period) {
+            case('Month'):
               endDate.setMonth(endDate.getMonth() + 1);
               break;
-            case('Month'):
+            case('Year'):
               endDate.setFullYear(endDate.getFullYear()+1);
               break;
-            case('15 days'):
-              endDate.setDate(endDate.getTime()+ day*15);
-              break;
-            case('30 days'):
-              endDate.setDate(endDate.getTime()+ day*30);
-              break;
-            case('7 days') :
-              endDate.setDate(endDate.getTime()+ day*7);
-              break;
-            case('1 day'):
-              endDate.setDate(endDate.getTime()+ day);
-              break;
             default:
-              console.log('smth wrong with period');
+              endDate.setTime(endDate.getTime()+ day*period);
           }
+
+
           $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()
@@ -175,7 +173,9 @@
           } else if(interval === '1 day') {
             $scope.blockTimeContract.period = 1;
             $scope.blockTimeContract.customInterval = 1;
+
           }
+          changeMinEndDate($scope.blockTimeContract.period);
           reInitEndDate()
         });
 
