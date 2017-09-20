@@ -135,8 +135,6 @@
             $scope.blockTimeContract.period = 7;
           } else if(interval === '1 day') {
             $scope.blockTimeContract.period = 1;
-          } else {
-            $scope.blockTimeContract.period = interval;
           }
           reInitEndDate()
         });
@@ -225,7 +223,9 @@
             var unDefServ = checkUniqueServiceName($scope.defaultServices, name);
             var unBlockTimeServ = checkUniqueServiceName($scope.blockTimeContract.blockTimeServices, name);
             var unContractServ = checkUniqueServiceName($scope.blockTimeContract.services, name);
-            return (unDefServ && unBlockTimeServ && unContractServ)
+            var check = unDefServ && unBlockTimeServ && unContractServ;
+
+            return check;
           }
         };
 
@@ -251,6 +251,7 @@
 
         $scope.addNewBlockTimeService = function (form, service) {
           $scope.showNewBlockTimeServiceError = false;
+          console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError)
           if (form.$valid) {
             if (!service.name) {
               $scope.showNewBlockTimeServiceError = true;
@@ -483,10 +484,12 @@
         }
 
         function validateNewServiceName(newService, serviceType) {
-          $scope.showNewBlockTimeServiceError = false;
-          $scope.showNewServiceError = false;
+
           var deferred = $q.defer();
           if (newService && newService.name) {
+            $scope.showNewBlockTimeServiceError = false;
+            $scope.showNewServiceError = false;
+            console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError)
 
             var companyId = returnCompanyId();
             var name = [];

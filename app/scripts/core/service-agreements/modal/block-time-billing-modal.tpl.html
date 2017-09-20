@@ -29,14 +29,14 @@
             <input custom-style="{'width':'100%'}" type="text" class="form-control"
                    ng-model="blockTimeContract.interval"
                    uib-typeahead="interval for interval in intervals"
-                   qt-typeahead-async-show-on-focus>
+                   qt-typeahead-async-show-on-focus readonly>
 
-            <!--<div>-->
-            <!--<i class="icn-sm icn-caret-gray" ng-show="!blockTimeContract.interval" style="pointer-events: none"></i>-->
-            <!--<i class="icn-sm icn-remove-old"-->
-            <!--ng-show="blockTimeContract.interval"-->
-            <!--uib-tooltip="clear" tooltip-placement="top" ng-click="blockTimeContract.interval = ''"></i>-->
-            <!--</div>-->
+            <div>
+              <i class="icn-sm icn-caret-gray" ng-show="!blockTimeContract.interval" style="pointer-events: none"></i>
+              <i class="icn-sm icn-remove-old"
+                 ng-show="blockTimeContract.interval"
+                 uib-tooltip="clear" tooltip-placement="top" ng-click="blockTimeContract.interval = ''"></i>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
