@@ -135,6 +135,8 @@
             $scope.blockTimeContract.period = 7;
           } else if(interval === '1 day') {
             $scope.blockTimeContract.period = 1;
+          } else {
+            $scope.blockTimeContract.period = interval;
           }
           reInitEndDate()
         });
