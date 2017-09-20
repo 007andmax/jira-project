@@ -277,6 +277,11 @@
             }
 
 
+          } else {
+            if (!service || service == undefined) {
+              $scope.showNewBlockTimeServiceError = true;
+              $scope.newBlockTimeServiceErrorMessage = 'Please enter the service name';
+            }
           }
         };
 
