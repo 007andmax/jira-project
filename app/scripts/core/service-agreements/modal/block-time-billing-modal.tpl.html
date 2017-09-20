@@ -193,9 +193,12 @@
               Enable Time Rollover of unused hours
             </label>
             <div class="service-bill-hide-content" ng-show="blockTimeContract.enableTimeRollover">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2"
+                     ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'maxHours')}">
                   <input class="form-control" type="text"
-                         placeholder="Max Hours" ng-model="blockTimeContract.maxRolloverHours">
+                         placeholder="Max Hours" name="maxHours"
+                         ng-model="blockTimeContract.maxRolloverHours"
+                         hard-reset-pattern="decimalNumberPattern" required>
               </div>
             </div>
 
@@ -339,6 +342,12 @@
         <h5>Details</h5>
         <div ng-show="showBlockTimeContractCreateMessageError">
           <p style="color: red">{{BlockTimeContractCreateMessage}}</p>
+        </div>
+        <div ng-show="showDuplicatesErrorMessage">
+          <p style="color: red">An agreement with current services already using for current company</p>
+        </div>
+        <div ng-show="showValidationFailMessage">
+          <p style="color: red">Something went wrong, please try again later and contact administrator</p>
         </div>
         <div class="contacts-details-content clearfix">
           <div class="col-md-8">
@@ -497,12 +506,20 @@
         </div>
         <div class="service-bill-content">
           <div class="col-md-12">
-            <label class="control checkbox default-cursor">
+            <label class="control checkbox">
               <input type="checkbox" ng-model="blockTimeContract.enableTimeRollover" onclick="return false">
               <span class="control-indicator"></span>
 
               Enable Time Rollover of unused hours
             </label>
+            <div class="service-bill-hide-content" ng-show="blockTimeContract.enableTimeRollover">
+              <div class="form-group col-md-2">
+                <input class="form-control" type="text"
+                       placeholder="Max Hours"
+                       ng-model="blockTimeContract.maxRolloverHours"
+                       hard-reset-pattern="decimalNumberPattern" readonly>
+              </div>
+            </div>
 
           </div>
           <div class="col-md-12">

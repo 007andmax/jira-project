@@ -1,9 +1,6 @@
 'use strict';
 
 
-
-console.log(Messages.errorMessage);
-
 (function () {
 
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
@@ -43,6 +40,9 @@ console.log(Messages.errorMessage);
 
         $scope.showBlockTimeContractCreateMessageError = false;
         $scope.BlockTimeContractCreateMessage = '';
+
+        $scope.showDuplicatesErrorMessage = false;
+        $scope.showValidationFailMessage = false;
 
         $scope.showNewBlockTimeServiceError = false;
         $scope.showNewServiceError = false;
@@ -155,11 +155,11 @@ console.log(Messages.errorMessage);
         }, function (interval) {
           if (interval === 'MONTHLY') {
             $scope.blockTimeContract.period = 'Month';
-            $scope.blockTimeContract.interval = 'Month';
+            $scope.blockTimeContract.interval = 'MONTHLY';
             $scope.blockTimeContract.customInterval = null;
           } else if (interval === 'YEARLY') {
             $scope.blockTimeContract.period = 'Year';
-            $scope.blockTimeContract.interval = 'Year';
+            $scope.blockTimeContract.interval = 'YEARLY';
             $scope.blockTimeContract.customInterval = null;
           } else if (interval === '30 days') {
             $scope.blockTimeContract.period = 30;
@@ -441,7 +441,8 @@ console.log(Messages.errorMessage);
             $scope.blockTimeContract.blockTimeServices.length > 0 &&
             $scope.blockTimeContract.includedHours &&
             $scope.blockTimeContract.blockRate &&
-            checkBlockTimeContractServicesNameLengths()) {
+            checkBlockTimeContractServicesNameLengths() &&
+            (($scope.blockTimeContract.enableTimeRollover && $scope.blockTimeContract.maxRolloverHours) || (!$scope.blockTimeContract.enableTimeRollover && !$scope.blockTimeContract.maxRolloverHours))) {
             return false
           } else {
             return true
@@ -493,7 +494,7 @@ console.log(Messages.errorMessage);
         }
 
         function checkForDuplicateServiceNames(serviceList) {
-
+          $scope.showDuplicatesErrorMessage = false;
           var deferred = $q.defer();
           var startDate = $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
           var endDate = $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
@@ -515,10 +516,8 @@ console.log(Messages.errorMessage);
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);
             } else {
-              $scope.showBlockTimeContractCreateMessageError = true;
-              $scope.BlockTimeContractCreateMessage = 'Duplicates in services list';
+              $scope.showDuplicatesErrorMessage = true;
               deferred.reject();
-
             }
           });
           return deferred.promise;
@@ -578,7 +577,7 @@ console.log(Messages.errorMessage);
               shares: [],
               taxIds: []
             };
-            if(contractData.interval == 'Month' || contractData.interval == 'Year') {
+            if(contractData.interval == 'MONTHLE' || contractData.interval == 'YEARLY') {
               blockContract.interval = contractData.interval;
             } else {
               blockContract.interval = null;
@@ -638,7 +637,7 @@ console.log(Messages.errorMessage);
             AgreementsService.createContract(blockContract, function (resp) {
               console.log(resp);
               if (resp.message === 'Validation failed') {
-                $scope.showBlockTimeContractCreateMessageError = true;
+                $scope.showValidationFailMessage = true;
                 $scope.BlockTimeContractCreateMessage = 'Something went wrong, please try again later and contact administrator';
               } else {
                 $scope.closeModal();
