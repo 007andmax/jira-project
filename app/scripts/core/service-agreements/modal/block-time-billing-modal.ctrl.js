@@ -43,6 +43,7 @@
 
         $scope.showDuplicatesErrorMessage = false;
         $scope.showValidationFailMessage = false;
+        $scope.showUniqueServiceNameError = false;
 
         $scope.showNewBlockTimeServiceError = false;
         $scope.showNewServiceError = false;
@@ -62,12 +63,13 @@
             blockTimeServices: preSettupServiceList,
             services: [],
             taxIds: [],
-            taxes: $scope.addDefaultTaxes(),
-            period: 'Month'
+            taxes: $scope.addDefaultTaxes()
           };
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
           //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
+          $scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
+          $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.minStartDate = Date.now();
           $scope.blockTimeContract.taxes = [];
 
@@ -87,16 +89,37 @@
           taxes: $scope.addDefaultTaxes()
         };
 
-
-        // $scope.blockTimeContract.minEndDate = $scope.blockTimeContract.minStartDate + month;
-        // $scope.blockTimeContract.endDate = $scope.blockTimeContract.minStartDate + month;
         if($scope.blockTimeContract.startDate) {
           changeMinEndDate($scope.blockTimeContract.period);
         }
+        // var periodsName = {
+        //   MONTHLY: 'Month',
+        //   YEARLY: 'Year',
+        //   '30 days': '30',
+        //   '15 days': '15',
+        //   '7 days': '7',
+        //   '1 day': '1'
+        // };
 
+        presettupPeriod();
+        // $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
+        // $scope.blockTimeContract.period = periodsName[$scope.blockTimeContract.interval];
+        function presettupPeriod() {
+          if($scope.blockTimeContract.interval === 'MONTHLY') {
+            $scope.blockTimeContract.period = 'Month';
+          } else if($scope.blockTimeContract.interval === 'YEARLY') {
+            $scope.blockTimeContract.period = 'Year';
+          } else if($scope.blockTimeContract.customInterval === 30) {
+            $scope.blockTimeContract.period = 30;
+          } else if($scope.blockTimeContract.customInterval === 15) {
+            $scope.blockTimeContract.period = 15;
+          } else if($scope.blockTimeContract.customInterval === 7) {
+            $scope.blockTimeContract.period = 7;
+          } else if($scope.blockTimeContract.customInterval === 1) {
+            $scope.blockTimeContract.period = 1;
+          }
+        }
 
-
-        $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
 
         $scope.clients = [];
         $scope.getClients = function () {
@@ -107,12 +130,6 @@
 
 
         function changeStartDate() {
-          // var date = $scope.blockTimeContract.startDate;
-          // var endDate = new Date(date);
-          // //endDate.setMonth(endDate.getMonth() + 1);
-          // $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
-          // $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
-          // reInitEndDate()
           changeMinEndDate($scope.blockTimeContract.period);
         }
 
@@ -129,8 +146,6 @@
             default:
               endDate.setTime(endDate.getTime()+ day*period);
           }
-
-
           $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()
@@ -330,18 +345,6 @@
           }
         };
 
-        // function preSettupBlockTimeService(preSettupServiceList) {
-        //   if (preSettupServiceList && preSettupServiceList.length) {
-        //     for (var i = 0; i < preSettupServiceList.length; i++) {
-        //       var setService = {
-        //         name: preSettupServiceList[i].name
-        //       };
-        //       pickDefaultService(setService);
-        //       $scope.blockTimeContract.blockTimeServices.push(setService);
-        //     }
-        //   }
-        // }
-
         $scope.deleteBlockTimeService = function (blockTimeService) {
           for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
             if ($scope.blockTimeContract.blockTimeServices[i].name === blockTimeService.name) {
@@ -350,7 +353,6 @@
             }
           }
         };
-
 
         $scope.addContractService = function (form, service) {
           $scope.showNewServiceError = false;
@@ -398,8 +400,6 @@
                 })
               }
             }
-
-
           }
         };
 
@@ -502,13 +502,6 @@
           var companyId = returnCompanyId();
           var serviceNamesList = [];
           for (var i = 0; i < serviceList.length; i++) {
-            // if (serviceList[i].name == null) {
-            //   $scope.showBlockTimeContractCreateMessageError = true;
-            //   $scope.BlockTimeContractCreateMessage = 'Service name is required';
-            //   break;
-            // } else {
-            //   serviceNamesList.push(serviceList[i].name);
-            // }
             serviceNamesList.push(serviceList[i].name);
           }
 

@@ -403,7 +403,7 @@
           <div class="form-group">
             Interval:
             <input custom-style="{'width':'100%'}" type="text" class="form-control default-cursor"
-                   ng-model="blockTimeContract.interval"
+                   ng-model="blockTimeContract.customInterval"
                    readonly onclick="return false">
           </div>
         </div>
@@ -413,7 +413,7 @@
 
             <input class="form-control default-cursor" type="text"
                    readonly name="startDate"
-                   onclick="return false" value="{{parseDate(blockTimeContract.startDate) | date: 'yyyy/MM/dd' }}">
+                   onclick="return false" value="{{parseDate(blockTimeContract.startDatePreview) | date: 'yyyy/MM/dd' }}">
             <i class="report-calendar"></i>
           </div>
         </div>
@@ -422,7 +422,7 @@
             End Date:
 
             <input type="text" readonly ng-if="reInitEndDate"
-                   value="{{parseDate(blockTimeContract.endDate) | date: 'yyyy/MM/dd' }}"
+                   value="{{parseDate(blockTimeContract.endDatePreview) | date: 'yyyy/MM/dd' }}"
                    class="form-control default-cursor" onclick="return false">
 
             <i class="report-calendar"></i>
@@ -601,8 +601,8 @@
               <p>Rollover: <span>{{blockTimeContract.enableTimeRollover}}</span></p>
             </div>
             <div class="col-md-6">
-              <p>Start Date: <span>{{parseDate(blockTimeContract.startDate) | date: 'yyyy/MM/dd' }}</span></p>
-              <p>Expire Date: <span>{{parseDate(blockTimeContract.endDate) | date: 'yyyy/MM/dd' }}</span></p>
+              <p>Start Date: <span>{{parseDate(blockTimeContract.endDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+              <p>Expire Date: <span>{{parseDate(blockTimeContract.endDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
             </div>
           </div>
           <div class="col-md-4">
