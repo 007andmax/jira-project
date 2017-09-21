@@ -199,7 +199,6 @@
             for (var m = 0; m < $scope.taxes.length; m++) {
               if ($scope.editContract.services[e].taxIds[i] === $scope.taxes[m].id) {
                 $scope.editContract.services[e].taxes.push($scope.taxes[m]);
-                console.log($scope.editContract.services[e])
               }
             }
           }

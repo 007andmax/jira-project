@@ -45,6 +45,9 @@
         $scope.showValidationFailMessage = false;
         $scope.showUniqueServiceNameError = false;
 
+        $scope.showUniqueNameBlockError = false;
+        $scope.showUniqueNameServiceError = false;
+
         $scope.showNewBlockTimeServiceError = false;
         $scope.showNewServiceError = false;
         $scope.newBlockTimeServiceErrorMessage = '';
@@ -109,20 +112,14 @@
             $scope.blockTimeContract.period = 'Month';
           } else if($scope.blockTimeContract.interval === 'YEARLY') {
             $scope.blockTimeContract.period = 'Year';
-          } else if($scope.blockTimeContract.customInterval === 30) {
-            $scope.blockTimeContract.period = 30;
-          } else if($scope.blockTimeContract.customInterval === 15) {
-            $scope.blockTimeContract.period = 15;
-          } else if($scope.blockTimeContract.customInterval === 7) {
-            $scope.blockTimeContract.period = 7;
-          } else if($scope.blockTimeContract.customInterval === 1) {
-            $scope.blockTimeContract.period = 1;
+          }  else {
+            $scope.blockTimeContract.period = $scope.blockTimeContract.customInterval;
           }
         }
 
         $scope.previewInterval = function() {
           return $scope.blockTimeContract.customInterval || $scope.blockTimeContract.interval;
-        }
+        };
 
 
 
@@ -267,7 +264,9 @@
           }
         }
 
-        $scope.isNameUnique = function (service) {
+
+
+        $scope.isNameUnique = function (service, isBlockTimeService) {
           if (service) {
             if (service.name && service.name.name) {
               return true;
