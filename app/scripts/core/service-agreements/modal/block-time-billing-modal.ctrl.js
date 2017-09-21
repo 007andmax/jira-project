@@ -120,6 +120,11 @@
           }
         }
 
+        $scope.previewInterval = function() {
+          return $scope.blockTimeContract.customInterval || $scope.blockTimeContract.interval;
+        }
+
+
 
         $scope.clients = [];
         $scope.getClients = function () {
