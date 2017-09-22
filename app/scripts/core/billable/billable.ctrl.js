@@ -49,6 +49,18 @@
           return isDiscount;
         };
 
+        $scope.checkAgreementTypeToShowDiscount = function(serviceExpense) {
+          if(serviceExpense.item && serviceExpense.item.name) {
+            if(serviceExpense.item.blockTimeServiceAgreementId == null &&
+              serviceExpense.item.serviceContractServiceAgreementId == null &&
+              serviceExpense.item.serviceAgreementId !== null) {
+              return true
+            } else {
+              return false;
+            }
+          }
+        };
+
         $scope.isDiscountForIconTicket = function (ticket) {
           var isTicketDiscount = false;
           if (ticket.discountSum > 0) {
