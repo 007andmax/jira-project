@@ -57,6 +57,7 @@
             }
           };
 
+
           $scope.isShowingErrors = function (form, fieldName) {
             return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
           };

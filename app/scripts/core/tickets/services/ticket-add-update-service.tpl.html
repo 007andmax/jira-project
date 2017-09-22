@@ -2,7 +2,7 @@
   <ul class="qt-table">
     <li class="discount-barcode">
 
-      <div ng-show="isShowServiceDiscountInputField" class="col-3 form-group discount-input"
+      <div ng-show="isShowServiceDiscountInputField && checkAgreementTypeToShowDiscount(serviceExpense)" class="col-3 form-group discount-input"
            ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
         <input maxlength="3"
                type="text"
