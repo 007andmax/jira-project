@@ -1,5 +1,22 @@
 <form name="addServiceForm">
   <ul class="qt-table">
+    <li class="discount-barcode">
+
+      <div ng-show="isShowServiceDiscountInputField" class="col-3 form-group discount-input"
+           ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
+        <input maxlength="3"
+               type="text"
+               placeholder="Discount"
+               class="form-control"
+               name="discountAmount"
+               ng-model="serviceExpense.discountAmount"
+               ng-max="100"
+               ng-min="0"
+               hard-reset-pattern="PERCENT"
+               execute-when-outfocused="isShowInputField = false"
+               ng-keydown="$event.which === 13 && $event.preventDefault()">
+      </div>
+    </li>
     <li class="service-add-width">
       <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
         <div uib-dropdown>
@@ -29,21 +46,22 @@
 
       <div class="col-4" style="width: 60px;">
         <div>
-          <div  ng-hide="isShowServiceDiscountInputField || serviceExpense.discountAmount != null">
-            <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowServiceDiscountInputField = !isShowServiceDiscountInputField" uib-tooltip="Discount"></i>
+          <div>
+            <i class="icon-sm sale-icon-for-isDicount" ng-click="isShowServiceDiscountInputField = !isShowServiceDiscountInputField"
+               ng-show="checkAgreementTypeToShowDiscount(serviceExpense)" uib-tooltip="Discount"></i>
           </div>
 
-          <div ng-show="isShowServiceDiscountInputField || serviceExpense.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">
-            <input maxlength="3"
-                   type="text"
-                   class="form-control"
-                   name="discountAmount"
-                   ng-model="serviceExpense.discountAmount"
-                   ng-max="100"
-                   ng-min="0"
-                   hard-reset-pattern="PERCENT"
-                   ng-keydown="$event.which === 13 && $event.preventDefault()">
-          </div>
+          <!--<div ng-show="isShowServiceDiscountInputField || serviceExpense.discountAmount != null" class="form-group discount-input" ng-class="{'has-error': isShowingErrors(addServiceForm, 'discountAmount')}">-->
+            <!--<input maxlength="3"-->
+                   <!--type="text"-->
+                   <!--class="form-control"-->
+                   <!--name="discountAmount"-->
+                   <!--ng-model="serviceExpense.discountAmount"-->
+                   <!--ng-max="100"-->
+                   <!--ng-min="0"-->
+                   <!--hard-reset-pattern="PERCENT"-->
+                   <!--ng-keydown="$event.which === 13 && $event.preventDefault()">-->
+          <!--</div>-->
           <!--<div ng-show="false">-->
             <!--<select ng-model="serviceExpense.discountType = 'PERCENT'">-->
               <!--<option value="PERCENT" selected>PERCENT</option>-->
