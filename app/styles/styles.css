@@ -9880,13 +9880,21 @@ button.close {
   outline: 0;
   margin-bottom: 50px;
 }
-.modal-open .modal::-webkit-scrollbar { width: 0; }
-.modal-open .modal{ -ms-overflow-style: none; }
-.modal-open .modal{
+
+.modal-open .modal::-webkit-scrollbar {
+  width: 0;
+}
+
+.modal-open .modal {
+  -ms-overflow-style: none;
+}
+
+.modal-open .modal {
   margin-right: -16px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
 @-moz-document url-prefix() {
   .modal-content {
     -webkit-box-shadow: 0 6px 15px 0 rgba(21, 30, 41, 0.4);
@@ -11236,7 +11244,9 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
-.ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3 {
+.ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
+.ticket-add-content .discount-input,
+.opened-ticket-list .discount-input {
   width: 295px;
   float: right;
   padding: 0;
@@ -11726,15 +11736,18 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   position: absolute;
   right: 10px;
 }
-.billing-payment .col-xs-6 .icn-caret-gray{
-  top: 12px!important;
+
+.billing-payment .col-xs-6 .icn-caret-gray {
+  top: 12px !important;
 }
-.billing-payment .col-xs-6 .icn-remove-old{
+
+.billing-payment .col-xs-6 .icn-remove-old {
   position: absolute;
   right: 10px;
   top: 13px;
   cursor: pointer;
 }
+
 .billing-payment input {
   cursor: pointer;
 }
@@ -11898,9 +11911,22 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: 157px;
     top: 56px;
   }
+  .opened-ticket.opened-ticket-list .discount-input {
+    position: absolute;
+    right: 136px;
+    width: 200px;
+    top: 56px;
+  }
+
 }
 
 @media only screen and (max-width: 1366px) {
+  .opened-ticket.opened-ticket-list .discount-input {
+    position: absolute;
+    right: 102px;
+    width: 200px;
+    top: 56px;
+  }
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 106px !important;
   }
