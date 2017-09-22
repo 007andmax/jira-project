@@ -150,6 +150,44 @@
   height: 30px;
 }
 
+.with-category .qt-product-list > li > .col-1 {
+  width: 145px;
+}
+
+.with-category .qt-product-list > li > .col-4 {
+  width: 115px;
+}
+
+.qt-product-list > li > .col-6 {
+  width: 64px;
+  padding-right: 0;
+}
+
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
+  width: 115px;
+  word-break: break-word;
+}
+
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
+  width: 145px;
+  word-break: break-all;
+}
+
+.qt-product-list > li > .intermediate-parent-elem > .col-6 {
+  width: 83px;
+  text-align: right !important;
+  padding-right: 0 !important;
+}
+
+.qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
+  margin-right: 16px;
+}
+
+.qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area {
+  margin-right: -2px;
+  margin-top: 2px;
+}
+
 @media (max-width: 1366px) {
   .receivable-content .qt-list li.list-heading .col-sm-2-1 {
     width: 125px;
@@ -4475,6 +4513,35 @@ Devices tab
 }
 
 @media only screen and (max-width: 1600px) {
+  .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
+    margin-right: 6px;
+  }
+
+  .qt-product-list > li > .intermediate-parent-elem > .col-6 {
+    width: 63px;
+  }
+
+  .with-category .qt-list > li > .intermediate-parent-elem > .col-1, .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
+    width: 95px;
+    height: auto;
+  }
+
+  .qt-list > li > .intermediate-parent-elem > .col-4, .qt-product-list > li > .col-4, .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
+    width: 100px;
+  }
+
+  .vendor-products-width > li > .intermediate-parent-elem > .col-2, .vendor-products-width > li > [class*=col-]:first-child {
+    width: calc(100% - 644px);
+  }
+
+  .with-category .qt-product-list > li > .col-4 {
+    width: 100px;
+  }
+
+  .with-category .qt-product-list > li > .col-1 {
+    width: 95px;
+  }
+
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 10%;
   }
@@ -4807,10 +4874,12 @@ Devices tab
 .bill-hide-content-item .icn-label-save {
   right: 85px !important;
 }
+
 .service-agreement-modal input.default-cursor,
-.service-agreement-modal label.default-cursor{
+.service-agreement-modal label.default-cursor {
   cursor: default;
 }
+
 .before-icon input {
   padding-left: 25px;
 }
