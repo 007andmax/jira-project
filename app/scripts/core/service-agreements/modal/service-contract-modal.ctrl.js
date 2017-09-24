@@ -277,9 +277,14 @@
               companyId: $scope.companyId || $scope.contractCompany.id || $scope.serviceContract.companyId,
               services: [],
               serviceContractServices: [],
-              serviceExpenses: [],
-              productExpenses: []
+              serviceExpenses: null,
+              productExpenses: null
             };
+
+            if(servContract.billType == 'OTHER') {
+              servContract.serviceExpenses = [];
+              servContract.productExpenses = []
+            }
 
             if($scope.serviceContract.interval == 'MONTHLY' || $scope.serviceContract.interval == 'YEARLY') {
               servContract.interval = serviceContract.interval;
