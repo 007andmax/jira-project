@@ -15,17 +15,7 @@
         };
 
         $scope.taxes = TaxesService.getAll();
-        $scope.serviceContract = {
-          billType: '',
-          minStartDate: Date.now(),
-          includedHours: null,
-          blockRate: null,
-          interval: "MONTHLY",
-          serviceContractServices: [],
-          services: [],
-          serviceExpenses: [],
-          productExpenses: []
-        };
+
         $scope.reInitEndDate = true;
 
         $scope.defaultServices = [];
@@ -36,16 +26,56 @@
         var day = 1000 * 60 * 60 * 24;
         var month = 30*day;
 
+        if($scope.editMode) {
+          $scope.serviceContract = {
+            billType: '',
+            minStartDate: Date.now(),
+            includedHours: null,
+            blockRate: null,
+            interval: "MONTHLY",
+            serviceContractServices: [],
+            services: [],
+            serviceExpenses: [],
+            productExpenses: []
+          };
+        } else {
+          $scope.serviceContract = angular.copy($scope.editContract);
+        }
+
         $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
         $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
 
 
-        $scope.serviceContract.period = $scope.serviceContract.interval === 'MONTHLY' ? 'Month' : 'Year';
+        // $scope.serviceContract.period = $scope.serviceContract.interval === 'MONTHLY' ? 'Month' : 'Year';
+        presettupPeriod();
+
+        function presettupPeriod() {
+          if($scope.serviceContract.interval === 'MONTHLY') {
+            $scope.serviceContract.period = 'Month';
+          } else if($scope.serviceContract.interval === 'YEARLY') {
+            $scope.serviceContract.period = 'Year';
+          }  else {
+            $scope.serviceContract.period = $scope.serviceContract.customInterval;
+          }
+        }
 
         function changeStartDate(){
+          changeMinEndDate($scope.serviceContract.period);
+        }
+
+        function changeMinEndDate(period) {
           var date = $scope.serviceContract.startDate;
           var endDate = new Date(date);
-          endDate.setMonth(endDate.getMonth() + 1);
+          switch(period) {
+            case('Month'):
+              endDate.setMonth(endDate.getMonth() + 1);
+              break;
+            case('Year'):
+              endDate.setFullYear(endDate.getFullYear()+1);
+              break;
+            default:
+              endDate.setTime(endDate.getTime()+ day*period);
+          }
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()
@@ -58,23 +88,34 @@
           }, 0);
         }
 
+
+
         $scope.$watch(function (){
           return $scope.serviceContract.interval;
         }, function(interval){
-          //$scope.serviceContract.period = interval === 'MONTHLY' ? 'Month' : 'Year';
-          if(interval === 'MONTHLY') {
+
+          if (interval === 'MONTHLY') {
             $scope.serviceContract.period = 'Month';
+            $scope.serviceContract.interval = 'MONTHLY';
+            $scope.serviceContract.customInterval = null;
           } else if (interval === 'YEARLY') {
             $scope.serviceContract.period = 'Year';
-          } else if(interval === '30 days') {
+            $scope.serviceContract.interval = 'YEARLY';
+            $scope.serviceContract.customInterval = null;
+          } else if (interval === '30 days') {
             $scope.serviceContract.period = 30;
-          } else if(interval === '15 days') {
+            $scope.serviceContract.customInterval = 30;
+          } else if (interval === '15 days') {
             $scope.serviceContract.period = 15;
+            $scope.serviceContract.customInterval = 15;
           } else if (interval === '7 days') {
             $scope.serviceContract.period = 7;
+            $scope.serviceContract.customInterval = 7;
           } else if(interval === '1 day') {
-            $scope.blockTimeContract.period = 1;
+            $scope.serviceContract.period = 1;
+            $scope.serviceContract.customInterval = 1;
           }
+          changeMinEndDate($scope.serviceContract.period);
           reInitEndDate()
         });
 
@@ -231,8 +272,7 @@
               type: "SERVICE_CONTRACT",
               startDate: $scope.startDate,
               endDate: $scope.endDate,
-              interval: serviceContract.interval,
-              customInterval: null,
+              customInterval: serviceContract.customInterval,
               billType: serviceContract.contractType,
               companyId: $scope.companyId || $scope.contractCompany.id || $scope.serviceContract.companyId,
               services: [],
@@ -240,6 +280,12 @@
               serviceExpenses: [],
               productExpenses: []
             };
+
+            if($scope.serviceContract.interval == 'MONTHLY' || $scope.serviceContract.interval == 'YEARLY') {
+              servContract.interval = serviceContract.interval;
+            } else {
+              servContract.interval = null;
+            }
 
             var sd = new Date($scope.serviceContract.startDate);
             sd.setHours(0,0,0,0);

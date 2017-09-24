@@ -65,15 +65,15 @@
 
 
     <div class="col-md-12"></div>
-    <div class="col-md-1">
-      <label class="control checkbox">
-        <input ng-model="serviceContracts.isAutoRenew" type="checkbox">
-        <span class="control-indicator"></span>
-        Auto Renew
-      </label>
-    </div>
+    <!--<div class="col-md-1">-->
+      <!--<label class="control checkbox">-->
+        <!--<input ng-model="serviceContracts.isAutoRenew" type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+        <!--Auto Renew-->
+      <!--</label>-->
+    <!--</div>-->
     <div class="col-md-12">
-      <p class="info-block">Contact time cab be based on the amount of users or devices, these number generated
+      <p class="info-block">Contact time can be based on the amount of users or devices, these number generated
         automaticaly</p>
     </div>
   </div>
@@ -300,7 +300,8 @@
                   <div class="col-sm-2">
                     <div class="dropdown">
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-                      <input type="text" qt-data-time-picker min-date="serviceContract.minStartDate"
+                      <input type="text" qt-data-time-picker min-date="serviceContract.minStartDate" ng-if="reInitEndDate"
+                             max-date="serviceContract.endDate"
                              class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
                              placeholder="Date" ng-model="service.date"
                              name="serviceDate" ng-required="true">
