@@ -273,7 +273,7 @@
               startDate: $scope.startDate,
               endDate: $scope.endDate,
               customInterval: serviceContract.customInterval,
-              billType: serviceContract.contractType,
+              billType: serviceContract.billType,
               companyId: $scope.companyId || $scope.contractCompany.id || $scope.serviceContract.companyId,
               services: [],
               serviceContractServices: [],
@@ -329,30 +329,34 @@
                     scs.taxIds.push(serviceContract.serviceContractServices[m].taxes[j].id);
                   }
                 }
-                servContract.services.push(scs);
+                servContract.serviceContractServices.push(scs);
               }
             }
 
             if(serviceContract.serviceExpenses && serviceContract.serviceExpenses.length) {
               for(var u=0; u<serviceContract.serviceExpenses.length; u++) {
-                var servExp = {
-                  serviceId: serviceContract.serviceExpeses[u].name.serviceId,
-                  quantity: serviceContract.serviceExpeses[u].quantuty,
-                  description: serviceContract.serviceExpeses[u].description,
-                  date: new Date(serviceContract.serviceExpeses[u].date).getTime()
-                };
-                servContract.serviceExpenses.push(servExp);
+                if(serviceContract.serviceExpenses[u] && serviceContract.serviceExpenses[u].name) {
+                  var servExp = {
+                    serviceId: serviceContract.serviceExpeses[u].name.serviceId,
+                    quantity: serviceContract.serviceExpeses[u].quantuty,
+                    description: serviceContract.serviceExpeses[u].description,
+                    date: new Date(serviceContract.serviceExpeses[u].date).getTime()
+                  };
+                  servContract.serviceExpenses.push(servExp);
+                }
               }
             }
 
             if(serviceContract.productExpenses && serviceContract.productExpenses.length) {
               for(var t=0; t<serviceContract.productExpenses.length; t++) {
-                var prodExp = {
-                  productId: serviceContract.productExpenses[t].name.productId,
-                  quantity: serviceContract.productExpenses[t].quantity,
-                  salePrice: serviceContract.productExpenses[t].salePrice
-                };
-                servContract.productExpenses.push(prodExp);
+                if(serviceContract.productExpenses[u] && serviceContract.productExpenses[u].name) {
+                  var prodExp = {
+                    productId: serviceContract.productExpenses[t].name.productId,
+                    quantity: serviceContract.productExpenses[t].quantity,
+                    salePrice: serviceContract.productExpenses[t].salePrice
+                  };
+                  servContract.productExpenses.push(prodExp);
+                }
               }
             }
 
