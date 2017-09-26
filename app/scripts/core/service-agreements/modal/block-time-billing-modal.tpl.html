@@ -99,9 +99,9 @@
             <div class="form-group before-icon">
               Total Amount:
               <input placeholder="Total"
-                     type="number"
+                     type="text"
                      class="form-control"
-                     ng-model="calculateTotalAmount()" readonly>
+                     ng-model="calculateTotalAmount()" hard-reset-pattern="decimalNumberPattern" readonly qt-to-fixed="2">
             </div>
           </div>
         </div>

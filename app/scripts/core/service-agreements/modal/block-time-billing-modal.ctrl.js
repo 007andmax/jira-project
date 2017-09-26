@@ -310,7 +310,7 @@
 
         $scope.addNewBlockTimeService = function (form, service) {
           $scope.showNewBlockTimeServiceError = false;
-          console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError)
+          console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError);
           if (form.$valid) {
             if (!service.name) {
               $scope.showNewBlockTimeServiceError = true;
