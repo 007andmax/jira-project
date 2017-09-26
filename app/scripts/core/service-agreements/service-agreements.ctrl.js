@@ -96,7 +96,7 @@
               case('BLOCK_TIME'):
                 template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                 break;
-              case('PER_USER/DEVICE_BILLING'):
+              case('SERVICE_CONTRACT'):
                 template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
                 break;
               default:

@@ -35,6 +35,8 @@
         var day = 1000 * 60 * 60 * 24;
         var month = 30*day;
 
+
+
         if($scope.editMode) {
           $scope.serviceContract = {
             billType: 'DEVICE',
@@ -50,6 +52,39 @@
           };
         } else {
           $scope.serviceContract = angular.copy($scope.editContract);
+          $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
+          $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
+          $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length>0;
+          $scope.serviceContract.minStartDate = Date.now();
+
+          for(var i=0; i<$scope.serviceContract.serviceContractServices.length; i++) {
+            $scope.serviceContract.serviceContractServices[i].taxes = [];
+            if($scope.serviceContract.serviceContractServices[i].taxIds.length > 0) {
+              for(var j=0; j<$scope.serviceContract.serviceContractServices[i].taxIds.length; j++) {
+                for(var n=0; n<$scope.taxes.length; n++) {
+                  if($scope.serviceContract.serviceContractServices[i].taxIds[j] === $scope.taxes[n].id) {
+                    $scope.serviceContract.serviceContractServices[i].taxes.push($scope.taxes[n]);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+
+          for(var i=0; i<$scope.serviceContract.services.length; i++) {
+            $scope.serviceContract.services[i].taxes = [];
+            if($scope.serviceContract.services[i].taxIds.length > 0) {
+              for(var j=0; j<$scope.serviceContract.services[i].taxIds.length; j++) {
+                for(var n=0; n<$scope.taxes.length; n++) {
+                  if($scope.serviceContract.services[i].taxIds[j] === $scope.taxes[n].id) {
+                    $scope.serviceContract.services[i].taxes.push($scope.taxes[n]);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+
         }
 
         $scope.NewServiceContractServices = {
@@ -81,6 +116,11 @@
           taxes: $scope.addDefaultTaxes()
         };
 
+        $scope.formattingDateForServiceExpenses = function(date) {
+          var d = new Date(date);
+          return d;
+        };
+
         $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
         $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
 
@@ -95,6 +135,10 @@
             $scope.serviceContract.period = $scope.serviceContract.customInterval;
           }
         }
+
+        $scope.previewInterval = function() {
+          return $scope.serviceContract.customInterval || $scope.serviceContract.interval;
+        };
 
         function changeStartDate(){
           changeMinEndDate($scope.serviceContract.period);
@@ -183,8 +227,19 @@
             }
             $scope.defaultServices.push(serv);
           }
-        });
 
+          if($scope.serviceContract.serviceExpenses.length > 0) {
+            for(var i=0; i<$scope.serviceContract.serviceExpenses.length; i++) {
+              for(var j=0; j<$scope.defaultServices.length; j++) {
+                if($scope.serviceContract.serviceExpenses[i].serviceId === $scope.defaultServices[j].serviceId) {
+                  $scope.serviceContract.serviceExpenses[i].name = $scope.defaultServices[j];
+                  $scope.defaultServices[j].picked = true;
+                  break;
+                }
+              }
+            }
+          }
+        });
 
         ProductsService.getProductsByCompany($scope, returnCompanyId(), function (data) {
           console.log('products ', data);
@@ -198,6 +253,18 @@
             };
 
             $scope.defaultProducts.push(prod);
+          }
+
+          if($scope.serviceContract.productExpenses.length > 0) {
+            for(var i=0; i<$scope.serviceContract.productExpenses.length; i++) {
+              for(var j=0; j<$scope.defaultProducts.length; j++) {
+                if($scope.serviceContract.productExpenses[i].serviceId === $scope.defaultProducts[j].serviceId) {
+                  $scope.serviceContract.productExpenses[i].name = $scope.defaultProducts[j];
+                  $scope.defaultProducts[j].picked = true;
+                  break;
+                }
+              }
+            }
           }
         });
 
@@ -504,12 +571,12 @@
 
         function returnCompanyId() {
           var id;
-          if($scope.companyId) {
-            id = $scope.companyId;
-          } else if ( $scope.contractCompany.id) {
-            id = $scope.contractCompany.id;
-          } else if($scope.serviceContract.companyId) {
+          if($scope.serviceContract.companyId) {
             id = $scope.serviceContract.companyId;
+          } else if ( $scope.contractCompany && $scope.contractCompany.id) {
+            id = $scope.contractCompany.id;
+          } else if($scope.companyId) {
+            id = $scope.companyId;
           }
           return id;
         }

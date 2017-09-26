@@ -488,7 +488,7 @@
         function returnCompanyId() {
           var id;
           if ($scope.blockTimeContract.companyId) {
-            id = $scope.blockTimeContract.companyId
+            id = $scope.blockTimeContract.companyId;
           } else if ($scope.contractCompany && $scope.contractCompany.id) {
             id = $scope.contractCompany.id
           } else {

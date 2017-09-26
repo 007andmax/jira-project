@@ -1,6 +1,6 @@
 
 
-<div class="contracts create-window clearfix" ng-controller="serviceContractCtrl" ng-form="serviceContractForm">
+<div class="contracts create-window clearfix" ng-show="editMode" ng-controller="serviceContractCtrl" ng-form="serviceContractForm">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
   </div>
@@ -632,3 +632,8 @@
     </div>
   </div>
 </div>
+
+<div class="service-agreement-modal" ng-show="!editMode">
+  <div ng-include="'/html/scripts/core/service-agreements/modal/service-contract-preview-modal.tpl.html'"></div>
+</div>
+
