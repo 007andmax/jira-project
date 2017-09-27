@@ -382,13 +382,13 @@
                     <input type="hidden" name="serviceTime" ng-model="service.quantity" ng-required="true"/>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="serviceExpense.description" max-length-word="100"
                            name="serviceDescription" ng-maxlength="2000" required>
                   </div>
 
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                     <div class="dropdown">
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
                       <input type="text" qt-data-time-picker min-date="serviceContract.minStartDate"
@@ -448,13 +448,13 @@
                     <input type="hidden" name="serviceTime" ng-model="newServiceExpense.quantity" ng-required="true"/>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="newServiceExpense.description" max-length-word="100"
                            name="serviceDescription" ng-maxlength="2000" required>
                   </div>
 
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                     <div class="dropdown">
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
                       <input style="cursor: pointer;"
@@ -608,32 +608,32 @@
       </div>
     </div>
   </div>
-  <div class="contacts-details">
-    <h5>Details</h5>
-    <div ng-show="showValidationFailMessage">
-      <p style="color: red">{{createValidationFailedMessage}}</p>
-    </div>
-    <div class="contacts-details-content clearfix">
-      <div class="col-md-8">
-        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
-        <div class="col-md-6">
-          <!--<p>Rollover: <span>Yes</span></p>-->
-          <!--<p>Included After Hours: <span>No</span></p>-->
-          <!--<p>Renewal Notice: <span>Yes</span></p>-->
-        </div>
-        <div class="col-md-6">
-          <p>Start Date: <span>{{dateFilter(serviceContract.startDate)}}</span></p>
-          <p>Expire Date: <span>{{dateFilter(serviceContract.endDate)}}</span></p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="contacts-details-content-price">
-          Total: ${{total}}
-        </div>
+  <!--<div class="contacts-details">-->
+    <!--<h5>Details</h5>-->
+    <!--<div ng-show="showValidationFailMessage">-->
+      <!--<p style="color: red">{{createValidationFailedMessage}}</p>-->
+    <!--</div>-->
+    <!--<div class="contacts-details-content clearfix">-->
+      <!--<div class="col-md-8">-->
+        <!--&lt;!&ndash;<p class="col-md-12">Vereburn - Monthly Block Time</p>&ndash;&gt;-->
+        <!--<div class="col-md-6">-->
+          <!--&lt;!&ndash;<p>Rollover: <span>Yes</span></p>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p>Included After Hours: <span>No</span></p>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p>Renewal Notice: <span>Yes</span></p>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="col-md-6">-->
+          <!--<p>Start Date: <span>{{dateFilter(serviceContract.startDate)}}</span></p>-->
+          <!--<p>Expire Date: <span>{{dateFilter(serviceContract.endDate)}}</span></p>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-4">-->
+        <!--<div class="contacts-details-content-price">-->
+          <!--Total: ${{total}}-->
+        <!--</div>-->
 
-      </div>
-    </div>
-  </div>
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 
   <div style="float: right; margin-top: 135px;" class="btn btn-lg btn-success btn-create" ng-disabled="!disableCreateButton()"
        ng-click="validateAndCreateServiceContract( serviceContract)">Create
