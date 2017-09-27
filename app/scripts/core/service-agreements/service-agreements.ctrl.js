@@ -14,6 +14,12 @@
         $scope.agreementsList = [];
         $scope.canDeleteAgreements = PermissionsService.isAllowed('DELETE_SERVICE_AGREEMENTS');
 
+        $scope.contractTypeDictionary = {
+          HOURLY: 'Hourly',
+          BLOCK_TIME: 'Block Time',
+          SERVICE_CONTRACT: 'Service Contract'
+        };
+
 
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;

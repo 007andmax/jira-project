@@ -47,7 +47,7 @@
           ng-class="{'pointer': agreement.status !== 'TERMINATED'}">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3 col-width-3">{{agreement.description}}</div>
-        <div class="col-md-1 col-width-1">{{agreement.type}}</div>
+        <div class="col-md-1 col-width-1">{{contractTypeDictionary[agreement.type]}}</div>
         <div class="col-md-1" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{agreement.status}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
