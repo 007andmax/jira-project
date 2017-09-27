@@ -54,13 +54,13 @@
 
       <div class="service-bill-hide-content clearfix">
 
-        <div class="col-md-5">Service name</div>
+        <div class="col-md-4">Service name</div>
         <div class="col-md-2">Per hour</div>
         <div class="col-md-2 text-center">Make Billable</div>
-        <div class="col-md-2 text-center">Tax</div>
+        <div class="col-md-3 text-center">Tax</div>
         <div class="col-md-1 text-center">Action</div>
         <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
-          <div class="col-md-5 form-group"
+          <div class="col-md-4 form-group"
                ng-class="{'has-error': checkHourlyServiceErrorForm(service)}">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name"
                    hard-reset-pattern="serviceNamePattern" required>
@@ -76,7 +76,7 @@
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-md-2 form-group text-center">
+          <div class="col-md-3 form-group text-center">
             <div>
               <div>
                 <!--<i class="icn-sm icn-tax"> </i>-->
@@ -100,7 +100,7 @@
           <div ng-show="newServiceNameIsError">
             <p style="color: red;padding-left: 15px;">{{newServiceNameErrorMessage}}</p>
           </div>
-          <div class="col-md-5 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
+          <div class="col-md-4 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
 
             <input placeholder="New Service Name"
                    type="text"
@@ -122,7 +122,7 @@
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-md-2 fourm-group text-center">
+          <div class="col-md-3 fourm-group text-center">
             <div class="" ng-hide="editContract.services.length > 19">
               <div>
                 <select-taxes taxes="taxes" entity="editService" ></select-taxes>

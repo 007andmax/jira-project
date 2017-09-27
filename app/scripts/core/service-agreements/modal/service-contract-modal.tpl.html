@@ -100,38 +100,38 @@
     </div>
     <div class="col-md-12"></div>
     <div ng-if="serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER'">
-    <div class="bill-hide-content-item clearfix"
-               ng-repeat="serviceContractServices in serviceContract.serviceContractServices">
-    <div class="col-md-5 form-group">
-      <input placeholder="Enter the Name" type="text" class="form-control"
-             ng-model="serviceContractServices.name"
-             required
-             ng-minlength="1"
-             hard-reset-pattern="serviceNamePattern"
-             invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
-    </div>
-    <div class="col-md-3 fourm-group">
-      <input placeholder="Count" type="text" class="form-control" ng-model="serviceContractServices.count" required>
-    </div>
-    <div class="col-md-2 fourm-group before-icon">
-      <input placeholder="0.00" type="text" class="form-control" ng-model="serviceContractServices.rate" required>
-    </div>
-    <div class="col-md-1 fourm-group">
-      <div class="">
-        <div>
-          <select-taxes taxes="taxes" entity="serviceContractServices" ></select-taxes>
-          <!--<p>{{serviceContractServices.taxes.length}}</p>-->
+      <div class="bill-hide-content-item clearfix"
+           ng-repeat="serviceContractServices in serviceContract.serviceContractServices">
+        <div class="col-md-5 form-group">
+          <input placeholder="Enter the Name" type="text" class="form-control"
+                 ng-model="serviceContractServices.name"
+                 required
+                 ng-minlength="1"
+                 hard-reset-pattern="serviceNamePattern"
+                 invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
+        </div>
+        <div class="col-md-3 fourm-group">
+          <input placeholder="Count" type="text" class="form-control"  ng-model="serviceContractServices.count" required>
+        </div>
+        <div class="col-md-2 fourm-group before-icon">
+          <input placeholder="0.00" type="text" class="form-control"  ng-model="serviceContractServices.rate" required>
+        </div>
+        <div class="col-md-1 fourm-group">
+          <div class="">
+            <div>
+              <select-taxes taxes="taxes" entity="serviceContractServices"></select-taxes>
+              <!--<p>{{serviceContractServices.taxes.length}}</p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 fourm-group">
+          <div class="add-remove-service">
+            <div ng-click="deleteServiceContractService(serviceContractServices)">
+              <i class="icon-sm icn-delete"uib-tooltip="Delete"></i>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-1 fourm-group">
-      <div class="add-remove-service">
-        <div ng-click="deleteServiceContractService(serviceContractServices)">
-          <i class="icon-sm icn-delete" uib-tooltip="Delete"></i>
-        </div>
-      </div>
-    </div>
-  </div>
 
     <div class="bill-hide-content-item clearfix" ng-form="newServiceContractServicesForm" ng-if="reInitServiceContractServicesForm">
       <div ng-show="!isNewServiceContractServiceNameUnique(NewServiceContractServices.name) && NewServiceContractServices.name">
@@ -284,6 +284,7 @@
                 </div>
 
               </li>
+
 
               <li>
 
@@ -625,9 +626,11 @@
       </div>
       <div class="col-md-4">
         <!--<div class="contacts-details-content-price">-->
-          <!--$1875.00/mo-->
+        <!--$1875.00/mo-->
         <!--</div>-->
-        <div class="btn btn-lg btn-success btn-create" ng-disabled="!disableCreateButton()" ng-click="validateAndCreateServiceContract( serviceContract)">Create</div>
+
+      <div class="btn btn-lg btn-success btn-create" ng-disabled="!disableCreateButton()"
+       ng-click="validateAndCreateServiceContract( serviceContract)">Create</div>
       </div>
     </div>
   </div>
