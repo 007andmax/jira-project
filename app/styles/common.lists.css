@@ -4776,7 +4776,9 @@ Devices tab
   padding-top: 15px;
   padding-left: 0;
 }
-
+.block-time.read-only label{
+  cursor: default;
+}
 .block-time .service-bill-hide-content .before-icon:before {
   top: 5px;
   left: 25px;

@@ -63,7 +63,9 @@
   </div>
 
   <div class="service-bill clearfix">
-    <h4>Select how you bill your customer. Managed Services will be added to Service time</h4>
+    <h4>
+      <!--Select how you bill your customer. Managed Services will be added to Service time-->
+    </h4>
     <div class="col-md-3">
       <div class="form-group">
         Service Bill Type:
@@ -98,7 +100,7 @@
         <div class="col-md-3 fourm-group">
           <div class="">
             <div>
-              <select-taxes taxes="taxes" entity="serviceContractServices" is-preview-mode="true"></select-taxes>
+              <select-taxes taxes="taxes" entity="serviceContractServices" is-preview-mode="true" style="cursor: pointer;"></select-taxes>
               <!--<p>{{serviceContractServices.taxes.length}}</p>-->
             </div>
           </div>
@@ -278,7 +280,7 @@
             <div class="col-md-3 form-group text-center">
               <div>
                 <div>
-                  <select-taxes taxes="taxes" entity="service" is-preview-mode="true"></select-taxes>
+                  <select-taxes taxes="taxes" entity="service" is-preview-mode="true" style="cursor: pointer;"></select-taxes>
                   <!--<p style="display: inline-block;">{{service.taxes.length}}</p>-->
                 </div>
               </div>
