@@ -33,11 +33,10 @@
         $scope.openedTab = 'product';
 
         var day = 1000 * 60 * 60 * 24;
-        var month = 30*day;
+        var month = 30 * day;
 
 
-
-        if($scope.editMode) {
+        if ($scope.editMode) {
           $scope.serviceContract = {
             billType: 'DEVICE',
             minStartDate: Date.now(),
@@ -54,15 +53,15 @@
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
-          $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length>0;
+          $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
 
-          for(var i=0; i<$scope.serviceContract.serviceContractServices.length; i++) {
+          for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
             $scope.serviceContract.serviceContractServices[i].taxes = [];
-            if($scope.serviceContract.serviceContractServices[i].taxIds.length > 0) {
-              for(var j=0; j<$scope.serviceContract.serviceContractServices[i].taxIds.length; j++) {
-                for(var n=0; n<$scope.taxes.length; n++) {
-                  if($scope.serviceContract.serviceContractServices[i].taxIds[j] === $scope.taxes[n].id) {
+            if ($scope.serviceContract.serviceContractServices[i].taxIds.length > 0) {
+              for (var j = 0; j < $scope.serviceContract.serviceContractServices[i].taxIds.length; j++) {
+                for (var n = 0; n < $scope.taxes.length; n++) {
+                  if ($scope.serviceContract.serviceContractServices[i].taxIds[j] === $scope.taxes[n].id) {
                     $scope.serviceContract.serviceContractServices[i].taxes.push($scope.taxes[n]);
                     break;
                   }
@@ -71,12 +70,12 @@
             }
           }
 
-          for(var i=0; i<$scope.serviceContract.services.length; i++) {
+          for (var i = 0; i < $scope.serviceContract.services.length; i++) {
             $scope.serviceContract.services[i].taxes = [];
-            if($scope.serviceContract.services[i].taxIds.length > 0) {
-              for(var j=0; j<$scope.serviceContract.services[i].taxIds.length; j++) {
-                for(var n=0; n<$scope.taxes.length; n++) {
-                  if($scope.serviceContract.services[i].taxIds[j] === $scope.taxes[n].id) {
+            if ($scope.serviceContract.services[i].taxIds.length > 0) {
+              for (var j = 0; j < $scope.serviceContract.services[i].taxIds.length; j++) {
+                for (var n = 0; n < $scope.taxes.length; n++) {
+                  if ($scope.serviceContract.services[i].taxIds[j] === $scope.taxes[n].id) {
                     $scope.serviceContract.services[i].taxes.push($scope.taxes[n]);
                     break;
                   }
@@ -98,7 +97,7 @@
         $scope.newProductExpense = {
           name: null,
           quantity: null,
-          salePrice:  null
+          salePrice: null
         };
 
         $scope.newServiceExpense = {
@@ -116,7 +115,7 @@
           taxes: $scope.addDefaultTaxes()
         };
 
-        $scope.formattingDateForServiceExpenses = function(date) {
+        $scope.formattingDateForServiceExpenses = function (date) {
           var d = new Date(date);
           return d;
         };
@@ -127,35 +126,35 @@
         presettupPeriod();
 
         function presettupPeriod() {
-          if($scope.serviceContract.interval === 'MONTHLY') {
+          if ($scope.serviceContract.interval === 'MONTHLY') {
             $scope.serviceContract.period = 'Month';
-          } else if($scope.serviceContract.interval === 'YEARLY') {
+          } else if ($scope.serviceContract.interval === 'YEARLY') {
             $scope.serviceContract.period = 'Year';
-          }  else {
+          } else {
             $scope.serviceContract.period = $scope.serviceContract.customInterval;
           }
         }
 
-        $scope.previewInterval = function() {
+        $scope.previewInterval = function () {
           return $scope.serviceContract.customInterval || $scope.serviceContract.interval;
         };
 
-        function changeStartDate(){
+        function changeStartDate() {
           changeMinEndDate($scope.serviceContract.period);
         }
 
         function changeMinEndDate(period) {
           var date = $scope.serviceContract.startDate;
           var endDate = new Date(date);
-          switch(period) {
+          switch (period) {
             case('Month'):
               endDate.setMonth(endDate.getMonth() + 1);
               break;
             case('Year'):
-              endDate.setFullYear(endDate.getFullYear()+1);
+              endDate.setFullYear(endDate.getFullYear() + 1);
               break;
             default:
-              endDate.setTime(endDate.getTime()+ day*period);
+              endDate.setTime(endDate.getTime() + day * period);
           }
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
@@ -171,10 +170,9 @@
         }
 
 
-
-        $scope.$watch(function (){
+        $scope.$watch(function () {
           return $scope.serviceContract.interval;
-        }, function(interval){
+        }, function (interval) {
 
           if (interval === 'MONTHLY') {
             $scope.serviceContract.period = 'Month';
@@ -193,7 +191,7 @@
           } else if (interval === '7 days') {
             $scope.serviceContract.period = 7;
             $scope.serviceContract.customInterval = 7;
-          } else if(interval === '1 day') {
+          } else if (interval === '1 day') {
             $scope.serviceContract.period = 1;
             $scope.serviceContract.customInterval = 1;
           }
@@ -203,7 +201,7 @@
 
         $scope.$watch(function () {
           return $scope.serviceContract.startDate;
-        }, function(){
+        }, function () {
           changeStartDate()
         });
 
@@ -228,10 +226,10 @@
             $scope.defaultServices.push(serv);
           }
 
-          if($scope.serviceContract.serviceExpenses.length > 0) {
-            for(var i=0; i<$scope.serviceContract.serviceExpenses.length; i++) {
-              for(var j=0; j<$scope.defaultServices.length; j++) {
-                if($scope.serviceContract.serviceExpenses[i].serviceId === $scope.defaultServices[j].serviceId) {
+          if ($scope.serviceContract.serviceExpenses.length > 0) {
+            for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
+              for (var j = 0; j < $scope.defaultServices.length; j++) {
+                if ($scope.serviceContract.serviceExpenses[i].serviceId === $scope.defaultServices[j].serviceId) {
                   $scope.serviceContract.serviceExpenses[i].name = $scope.defaultServices[j];
                   $scope.defaultServices[j].picked = true;
                   break;
@@ -255,10 +253,10 @@
             $scope.defaultProducts.push(prod);
           }
 
-          if($scope.serviceContract.productExpenses.length > 0) {
-            for(var i=0; i<$scope.serviceContract.productExpenses.length; i++) {
-              for(var j=0; j<$scope.defaultProducts.length; j++) {
-                if($scope.serviceContract.productExpenses[i].serviceId === $scope.defaultProducts[j].serviceId) {
+          if ($scope.serviceContract.productExpenses.length > 0) {
+            for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
+              for (var j = 0; j < $scope.defaultProducts.length; j++) {
+                if ($scope.serviceContract.productExpenses[i].serviceId === $scope.defaultProducts[j].serviceId) {
                   $scope.serviceContract.productExpenses[i].name = $scope.defaultProducts[j];
                   $scope.defaultProducts[j].picked = true;
                   break;
@@ -273,10 +271,10 @@
           $scope.serviceContract.billType = type;
         };
 
-        $scope.createNewServiceContractServices = function(form, NewServiceContractServices) {
-          if(form.$valid) {
-            validateNewServiceName(NewServiceContractServices.name).then(function(resp) {
-              if(resp) {
+        $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
+          if (form.$valid) {
+            validateNewServiceName(NewServiceContractServices.name).then(function (resp) {
+              if (resp) {
                 var serviceContractServices = {
                   name: NewServiceContractServices.name,
                   count: NewServiceContractServices.count,
@@ -322,55 +320,49 @@
         };
 
 
-        $scope.setOpenedTab = function(tab) {
+        $scope.setOpenedTab = function (tab) {
           $scope.openedTab = tab;
         };
 
-        $scope.isTabOpened = function(tab) {
+        $scope.isTabOpened = function (tab) {
           return $scope.openedTab === tab
         };
 
 
-
-        $scope.addServiceExpense = function(form, serviceExpense) {
+        $scope.addServiceExpense = function (form, serviceExpense) {
           $scope.showServiceExpenseError = false;
-          if(form.$valid) {
-
-            validateNewServiceName(serviceExpense.name.name).then(function(resp){
-              if(resp) {
-                var newServiceExpense = {
-                  name: serviceExpense.name,
-                  quantity: serviceExpense.quantity,
-                  description: serviceExpense.description,
-                  date: serviceExpense.date
-                };
-                $scope.serviceContract.serviceExpenses.push(newServiceExpense);
-                for(var i=0; i<$scope.defaultServices.length; i++) {
-                  if($scope.defaultServices[i] == serviceExpense.name) {
-                    $scope.defaultServices[i].picked = true;
-                  }
-                }
-                $scope.newServiceExpense = {
-                  name: null,
-                  quantity: null,
-                  description: null,
-                  date: null
-                };
+          if (form.$valid) {
+            var newServiceExpense = {
+              name: serviceExpense.name,
+              quantity: serviceExpense.quantity,
+              description: serviceExpense.description,
+              date: serviceExpense.date
+            };
+            $scope.serviceContract.serviceExpenses.push(newServiceExpense);
+            for (var i = 0; i < $scope.defaultServices.length; i++) {
+              if ($scope.defaultServices[i] == serviceExpense.name) {
+                $scope.defaultServices[i].picked = true;
               }
-            }, function() {
-              $scope.showServiceExpenseError = true;
-            });
+            }
+            $scope.newServiceExpense = {
+              name: null,
+              quantity: null,
+              description: null,
+              date: null
+            };
+
+
           }
         };
 
 
-        $scope.deleteServiceExpense = function(service) {
+        $scope.deleteServiceExpense = function (service) {
           for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
             if ($scope.serviceContract.serviceExpenses[i] == service) {
               $scope.serviceContract.serviceExpenses.splice(i, 1);
 
-              for(var j=0; j<$scope.defaultServices.length; j++) {
-                if($scope.defaultServices[j] == service.name) {
+              for (var j = 0; j < $scope.defaultServices.length; j++) {
+                if ($scope.defaultServices[j] == service.name) {
                   $scope.defaultServices[j].picked = false;
                 }
               }
@@ -381,45 +373,38 @@
         };
 
 
-
-        $scope.addProductExpense = function(form, productExpense) {
+        $scope.addProductExpense = function (form, productExpense) {
           $scope.showProductExpenseError = false;
-          if(form.$valid) {
+          if (form.$valid) {
 
-            validateNewServiceName(productExpense.name.name).then(function(resp){
-              if(resp) {
-                var newProductExpense = {
-                  name: productExpense.name,
-                  quantity: productExpense.quantity,
-                  salePrice:  productExpense.salePrice
-                };
-                $scope.serviceContract.productExpenses.push(newProductExpense);
+            var newProductExpense = {
+              name: productExpense.name,
+              quantity: productExpense.quantity,
+              salePrice: productExpense.salePrice
+            };
+            $scope.serviceContract.productExpenses.push(newProductExpense);
 
-                for(var i=0; i<$scope.defaultProducts.length; i++) {
-                  if($scope.defaultProducts[i] == productExpense.name) {
-                    $scope.defaultProducts[i].picked = true;
-                  }
-                }
-
-                $scope.newProductExpense = {
-                  name: null,
-                  quantity: null,
-                  salePrice:  null
-                };
+            for (var i = 0; i < $scope.defaultProducts.length; i++) {
+              if ($scope.defaultProducts[i] == productExpense.name) {
+                $scope.defaultProducts[i].picked = true;
               }
-            }, function() {
-              $scope.showProductExpenseError = true;
-            })
+            }
+
+            $scope.newProductExpense = {
+              name: null,
+              quantity: null,
+              salePrice: null
+            };
           }
         };
 
-        $scope.deleteProductExpense = function(product) {
+        $scope.deleteProductExpense = function (product) {
           for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
             if ($scope.serviceContract.productExpenses[i] == product) {
               $scope.serviceContract.productExpenses.splice(i, 1);
 
-              for(var j=0; j<$scope.defaultProducts.length; j++) {
-                if($scope.defaultProducts[j] == product.name) {
+              for (var j = 0; j < $scope.defaultProducts.length; j++) {
+                if ($scope.defaultProducts[j] == product.name) {
                   $scope.defaultProducts[j].picked = false;
                 }
               }
@@ -429,28 +414,28 @@
           }
         };
 
-        $scope.addNewService = function(form, service) {
+        $scope.addNewService = function (form, service) {
           $scope.showNewServiceError = false;
-          if(form.$valid) {
+          if (form.$valid) {
 
-              validateNewServiceName(service.name).then(function(resp) {
-                if(resp) {
-                  $scope.serviceContract.services.push(service);
-                  $scope.newService = {
-                    name: '',
-                    rate: 0,
-                    billable: false,
-                    taxes: $scope.addDefaultTaxes(),
-                    taxIds: []
-                  };
-                  reInitServiceForm()
-                }
-              })
+            validateNewServiceName(service.name).then(function (resp) {
+              if (resp) {
+                $scope.serviceContract.services.push(service);
+                $scope.newService = {
+                  name: '',
+                  rate: 0,
+                  billable: false,
+                  taxes: $scope.addDefaultTaxes(),
+                  taxIds: []
+                };
+                reInitServiceForm()
+              }
+            })
 
           }
         };
 
-        $scope.deleteService = function(service) {
+        $scope.deleteService = function (service) {
           for (var i = 0; i < $scope.serviceContract.services.length; i++) {
             if ($scope.serviceContract.services[i] == service) {
               $scope.serviceContract.services.splice(i, 1);
@@ -459,30 +444,30 @@
           }
         };
 
-        $scope.isAdditionalServiceNameUnique = function(name) {
+        $scope.isAdditionalServiceNameUnique = function (name) {
           var check = true;
-          if(name) {
-            if($scope.serviceContract.billType == 'OTHER') {
-              if($scope.serviceContract.serviceExpenses.length>0) {
-                for(var i=0; i<$scope.serviceContract.serviceExpenses.length; i++) {
-                  if($scope.serviceContract.serviceExpenses[i].name.name == name) {
+          if (name) {
+            if ($scope.serviceContract.billType == 'OTHER') {
+              if ($scope.serviceContract.serviceExpenses.length > 0) {
+                for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
+                  if ($scope.serviceContract.serviceExpenses[i].name.name == name) {
                     check = false;
                     break;
                   }
                 }
               }
-              if($scope.serviceContract.productExpenses.length>0) {
-                for(var j=0; j<$scope.serviceContract.productExpenses.length; j++) {
-                  if($scope.serviceContract.productExpenses[j].name.name == name) {
+              if ($scope.serviceContract.productExpenses.length > 0) {
+                for (var j = 0; j < $scope.serviceContract.productExpenses.length; j++) {
+                  if ($scope.serviceContract.productExpenses[j].name.name == name) {
                     check = false;
                     break;
                   }
                 }
               }
             } else {
-              if($scope.serviceContract.serviceContractServices.length>0) {
-                for(var n=0; n<$scope.serviceContract.serviceContractServices.length; n++) {
-                  if($scope.serviceContract.serviceContractServices[n].name == name) {
+              if ($scope.serviceContract.serviceContractServices.length > 0) {
+                for (var n = 0; n < $scope.serviceContract.serviceContractServices.length; n++) {
+                  if ($scope.serviceContract.serviceContractServices[n].name == name) {
                     check = false;
                     break;
                   }
@@ -490,8 +475,8 @@
               }
             }
           }
-          if($scope.serviceContract.services.length>0) {
-            for(var h=0; h<$scope.serviceContract.services.length; h++) {
+          if ($scope.serviceContract.services.length > 0) {
+            for (var h = 0; h < $scope.serviceContract.services.length; h++) {
               if ($scope.serviceContract.services[h].name == name) {
                 check = false;
                 break;
@@ -501,20 +486,20 @@
           return check;
         };
 
-        $scope.isNewServiceContractServiceNameUnique = function(name) {
+        $scope.isNewServiceContractServiceNameUnique = function (name) {
           var check = true;
-          if(name) {
-            if($scope.serviceContract.services.length>0) {
-              for(var i=0; i<$scope.serviceContract.services.length; i++) {
-                if($scope.serviceContract.services[i].name == name) {
+          if (name) {
+            if ($scope.serviceContract.services.length > 0) {
+              for (var i = 0; i < $scope.serviceContract.services.length; i++) {
+                if ($scope.serviceContract.services[i].name == name) {
                   check = false;
                   break;
                 }
               }
             }
-            if($scope.serviceContract.serviceContractServices.length>0) {
-              for(var j=0; j<$scope.serviceContract.serviceContractServices.length; j++) {
-                if($scope.serviceContract.serviceContractServices[j].name == name) {
+            if ($scope.serviceContract.serviceContractServices.length > 0) {
+              for (var j = 0; j < $scope.serviceContract.serviceContractServices.length; j++) {
+                if ($scope.serviceContract.serviceContractServices[j].name == name) {
                   check = false;
                   break;
                 }
@@ -525,11 +510,10 @@
         };
 
 
-
         function validateNewServiceName(serviceName) {
           var deferred = $q.defer();
           if (serviceName) {
-            if(!$scope.serviceContract.startDate || !$scope.serviceContract.endDate) {
+            if (!$scope.serviceContract.startDate || !$scope.serviceContract.endDate) {
               $scope.showNewServiceError = true;
               $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
               deferred.reject();
@@ -542,10 +526,10 @@
               var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
               ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function (resp) {
                 if (Object.keys(resp).length === 0) {
-                  console.log('service name '+serviceName+' is valid');
+                  console.log('service name ' + serviceName + ' is valid');
                   deferred.resolve(resp);
                 } else {
-                  console.log('service name '+serviceName+' is NOT valid');
+                  console.log('service name ' + serviceName + ' is NOT valid');
                   deferred.reject();
                 }
               });
@@ -559,7 +543,7 @@
           var companyId = returnCompanyId();
           var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
           var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
-          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames, function(resp) {
+          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames, function (resp) {
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);
             } else {
@@ -571,34 +555,48 @@
 
         function returnCompanyId() {
           var id;
-          if($scope.serviceContract.companyId) {
+          if ($scope.serviceContract.companyId) {
             id = $scope.serviceContract.companyId;
-          } else if ( $scope.contractCompany && $scope.contractCompany.id) {
+          } else if ($scope.contractCompany && $scope.contractCompany.id) {
             id = $scope.contractCompany.id;
-          } else if($scope.companyId) {
+          } else if ($scope.companyId) {
             id = $scope.companyId;
           }
           return id;
         }
 
-        $scope.disableCreateButton = function() {
+        $scope.disableCreateButton = function () {
           function formCheck() {
             return ($scope.serviceContract.description &&
-              $scope.serviceContract.startDate &&
-              $scope.serviceContract.endDate &&
-              $scope.serviceContract.billType);
+            $scope.serviceContract.startDate &&
+            $scope.serviceContract.endDate &&
+            $scope.serviceContract.billType);
           }
+
           function serviceCheck() {
-            if($scope.serviceContract.billType == 'DEVICE' || $scope.serviceContract.billType == 'USER') {
-              return $scope.serviceContract.serviceContractServices.length>0;
+            if ($scope.serviceContract.billType == 'DEVICE' || $scope.serviceContract.billType == 'USER') {
+              return $scope.serviceContract.serviceContractServices.length > 0;
             } else {
-              return ($scope.serviceContract.serviceExpenses.length>0 || $scope.serviceContract.productExpenses.length>0);
+              return ($scope.serviceContract.serviceExpenses.length > 0 || $scope.serviceContract.productExpenses.length > 0);
             }
           }
+
           return (formCheck() && serviceCheck());
         };
 
-        function createServiceContract( serviceContract) {
+        $scope.calculateTotalAmount = function () {
+          var rate = 0;
+          if ($scope.serviceContract.billType === 'OTHER') {
+            if ($scope.serviceContract.serviceExpenses.length > 0) {
+
+            }
+            if ($scope.serviceContract.productExpenses.length > 0) {
+
+            }
+          }
+        };
+
+        function createServiceContract(serviceContract) {
           $scope.showValidationFailMessage = false;
           if (serviceContract) {
             var servContract = {
@@ -616,39 +614,39 @@
               productExpenses: null
             };
 
-            if(servContract.billType == 'OTHER') {
+            if (servContract.billType == 'OTHER') {
               servContract.serviceExpenses = [];
               servContract.productExpenses = []
             }
 
-            if($scope.serviceContract.interval == 'MONTHLY' || $scope.serviceContract.interval == 'YEARLY') {
+            if ($scope.serviceContract.interval == 'MONTHLY' || $scope.serviceContract.interval == 'YEARLY') {
               servContract.interval = serviceContract.interval;
             } else {
               servContract.interval = null;
             }
 
             var sd = new Date($scope.serviceContract.startDate);
-            sd.setHours(0,0,0,0);
+            sd.setHours(0, 0, 0, 0);
             sd.setSeconds(0);
             sd.setMilliseconds(0);
             servContract.startDate = sd.getTime();
 
             var ed = new Date($scope.serviceContract.endDate);
-            ed.setHours(0,0,0,0);
+            ed.setHours(0, 0, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
             servContract.endDate = ed.getTime();
 
-            if(serviceContract.services && serviceContract.services.length) {
-              for(var i=0; i<serviceContract.services.length; i++) {
+            if (serviceContract.services && serviceContract.services.length) {
+              for (var i = 0; i < serviceContract.services.length; i++) {
                 var serv = {
                   name: serviceContract.services[i].name,
                   rate: serviceContract.services[i].rate,
                   billable: serviceContract.services[i].billable,
                   taxIds: []
                 };
-                if(serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
-                  for(var n=0; n<serviceContract.services[i].taxes.length; n++) {
+                if (serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
+                  for (var n = 0; n < serviceContract.services[i].taxes.length; n++) {
                     serv.taxIds.push(serviceContract.services[i].taxes[n].id);
                   }
                 }
@@ -656,16 +654,16 @@
               }
             }
 
-            if(serviceContract.serviceContractServices && serviceContract.serviceContractServices.length) {
-              for(var m=0; m<serviceContract.serviceContractServices.length; m++) {
+            if (serviceContract.serviceContractServices && serviceContract.serviceContractServices.length) {
+              for (var m = 0; m < serviceContract.serviceContractServices.length; m++) {
                 var scs = {
                   name: serviceContract.serviceContractServices[m].name,
                   rate: serviceContract.serviceContractServices[m].rate,
                   count: serviceContract.serviceContractServices[m].count,
                   taxIds: []
                 };
-                if(serviceContract.serviceContractServices[m].taxes && serviceContract.serviceContractServices[m].taxes.length) {
-                  for(var j=0; j<serviceContract.serviceContractServices[m].taxes.length; j++) {
+                if (serviceContract.serviceContractServices[m].taxes && serviceContract.serviceContractServices[m].taxes.length) {
+                  for (var j = 0; j < serviceContract.serviceContractServices[m].taxes.length; j++) {
                     scs.taxIds.push(serviceContract.serviceContractServices[m].taxes[j].id);
                   }
                 }
@@ -673,9 +671,9 @@
               }
             }
 
-            if(serviceContract.serviceExpenses && serviceContract.serviceExpenses.length) {
-              for(var u=0; u<serviceContract.serviceExpenses.length; u++) {
-                if(serviceContract.serviceExpenses[u] && serviceContract.serviceExpenses[u].name) {
+            if (serviceContract.serviceExpenses && serviceContract.serviceExpenses.length) {
+              for (var u = 0; u < serviceContract.serviceExpenses.length; u++) {
+                if (serviceContract.serviceExpenses[u] && serviceContract.serviceExpenses[u].name) {
                   var servExp = {
                     serviceId: serviceContract.serviceExpenses[u].name.serviceId,
                     quantity: serviceContract.serviceExpenses[u].quantity,
@@ -687,9 +685,9 @@
               }
             }
 
-            if(serviceContract.productExpenses && serviceContract.productExpenses.length) {
-              for(var t=0; t<serviceContract.productExpenses.length; t++) {
-                if(serviceContract.productExpenses[u] && serviceContract.productExpenses[u].name) {
+            if (serviceContract.productExpenses && serviceContract.productExpenses.length) {
+              for (var t = 0; t < serviceContract.productExpenses.length; t++) {
+                if (serviceContract.productExpenses[t] && serviceContract.productExpenses[t].name) {
                   var prodExp = {
                     productId: serviceContract.productExpenses[t].name.productId,
                     quantity: serviceContract.productExpenses[t].quantity,
@@ -715,44 +713,49 @@
         }
 
 
-
-        $scope.validateAndCreateServiceContract = function(serviceContract) {
+        $scope.validateAndCreateServiceContract = function (serviceContract) {
 
           validateServiceContractServices(serviceContract);
 
           function validateServiceContractServices(serviceContract) {
             var listOfNames = [];
             var listOfAdditionalServicesNames = [];
-            if(serviceContract.billType == 'DEVICE' || serviceContract.billType == 'USER') {
-              for(var i=0; i<serviceContract.serviceContractServices.length; i++) {
+            if (serviceContract.billType == 'DEVICE' || serviceContract.billType == 'USER') {
+              for (var i = 0; i < serviceContract.serviceContractServices.length; i++) {
                 listOfNames.push(serviceContract.serviceContractServices[i].name);
               }
-            } else {
-              for(var j=0; j<serviceContract.serviceExpenses.length; j++) {
-                listOfNames.push(serviceContract.serviceExpenses[j].name.name);
-              }
-              for(var m=0; m<serviceContract.productExpenses.length; m++) {
-                listOfNames.push(serviceContract.productExpenses[m].name.name);
-              }
             }
-              for(var n=0; n<serviceContract.services.length; n++) {
+            if(serviceContract.services.length>0) {
+              for (var n = 0; n < serviceContract.services.length; n++) {
                 listOfAdditionalServicesNames.push(serviceContract.services[n].name);
               }
+            }
 
-            validateListOfNames(listOfNames).then(function(resp) {
-              if(resp) {
-                if(serviceContract.services.length>0) {
-                  validateListOfNames(listOfAdditionalServicesNames).then(function(resp){
-                    if(resp) {
-                      createServiceContract(serviceContract);
-                    }
-                  })
-                } else {
-                  createServiceContract(serviceContract);
+            if(listOfNames.length > 0) {
+              validateListOfNames(listOfNames).then(function(resp) {
+                if(resp) {
+                  if (listOfAdditionalServicesNames.length>0) {
+                    validateListOfNames(listOfAdditionalServicesNames).then(function (resp) {
+                      if (resp) {
+                        createServiceContract(serviceContract);
+                      }
+                    })
+                  } else {
+                    createServiceContract(serviceContract);
+                  }
                 }
-
+              })
+            } else {
+              if(listOfAdditionalServicesNames.length>0) {
+                validateListOfNames(listOfAdditionalServicesNames).then(function (resp) {
+                  if (resp) {
+                    createServiceContract(serviceContract);
+                  }
+                })
+              } else {
+                createServiceContract(serviceContract);
               }
-            })
+            }
           }
         }
 
