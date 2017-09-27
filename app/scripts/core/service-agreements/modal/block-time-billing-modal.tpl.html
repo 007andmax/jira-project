@@ -218,14 +218,14 @@
               <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
                 contract time</p>
 
-              <div class="col-md-5">Service name</div>
+              <div class="col-md-4">Service name</div>
               <div class="col-md-2">Per hour</div>
               <div class="col-md-2 text-center">Make Billable</div>
-              <div class="col-md-2 text-center">Tax</div>
+              <div class="col-md-3 text-center">Tax</div>
               <div class="col-md-1 text-center">Action</div>
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
-                <div class="col-md-5 form-group"
+                <div class="col-md-4 form-group"
                      ng-class="{'has-error': checkBlockTimeServiceErrorForm(contractService)}">
                   <input placeholder="Service Name" type="text"
                          class="form-control" ng-model="contractService.name" hard-reset-pattern="serviceNamePattern">
@@ -241,11 +241,10 @@
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="col-md-2 form-group text-center">
+                <div class="col-md-3 form-group text-center">
                   <div>
                     <div>
-                      <select-taxes taxes="taxes" entity="contractService" is-icon="true"></select-taxes>
-                      <p style="display: inline-block;">{{contractService.taxes.length}}</p>
+                      <select-taxes taxes="taxes" entity="contractService" ></select-taxes>
                     </div>
                   </div>
                 </div>
@@ -265,7 +264,7 @@
                 <div ng-show="!isNameUnique(newContractService) && newContractService.name">
                   <p style="color: red;padding-left: 15px; margin-bottom: 0;">An agreement with current service name already using for current company</p>
                 </div>
-                <div class="col-md-5 form-group"
+                <div class="col-md-4 form-group"
                      ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName') }">
 
 
@@ -293,11 +292,11 @@
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="col-md-2 fourm-group text-center">
+                <div class="col-md-3 fourm-group text-center">
                   <div class="" ng-hide="contractServiceList.length > 19">
                     <div>
-                      <select-taxes taxes="taxes" entity="newContractService" is-icon="true"></select-taxes>
-                      <p style="display: inline-block;">{{newContractService.taxes.length}}</p>
+                      <select-taxes taxes="taxes" entity="newContractService" ></select-taxes>
+
                     </div>
                   </div>
                 </div>

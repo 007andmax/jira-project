@@ -51,7 +51,7 @@
       <div class="col-md-5">Service name</div>
       <div class="col-md-2">Per hour</div>
       <div class="col-md-2 text-center">Make Billable</div>
-      <div class="col-md-2 text-center">Tax</div>
+      <div class="col-md-3 text-center">Tax</div>
       <!--<div class="col-md-1 text-center">Action</div>-->
       <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
         <div class="col-md-5 form-group">
@@ -67,12 +67,12 @@
             <span class="control-indicator"></span>
           </label>
         </div>
-        <div class="col-md-2 fourm-group text-center">
+        <div class="col-md-3 fourm-group text-center">
           <div>
             <div>
               <i class="icn-sm icn-tax" ng-hide="service.taxes.length > 0"> </i>
-              <select-taxes ng-show="service.taxes.length > 0" taxes="taxes" entity="service" is-icon="true" is-preview-mode="true"></select-taxes>
-              <p>{{service.taxes.length}}</p>
+              <select-taxes ng-show="service.taxes.length > 0" taxes="taxes" entity="service"  is-preview-mode="true"></select-taxes>
+              <!--<p>{{service.taxes.length}}</p>-->
             </div>
           </div>
         </div>

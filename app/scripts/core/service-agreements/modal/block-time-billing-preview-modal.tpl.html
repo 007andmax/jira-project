@@ -158,7 +158,7 @@
             <div class="col-md-5">Service name</div>
             <div class="col-md-2">Per hour</div>
             <div class="col-md-2 text-center">Make Billable</div>
-            <div class="col-md-2 text-center">Tax</div>
+            <div class="col-md-3 text-center">Tax</div>
             <!--<div class="col-md-1 text-center">Action</div>-->
 
             <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
@@ -177,13 +177,12 @@
                   <span class="control-indicator"></span>
                 </label>
               </div>
-              <div class="col-md-2 form-group text-center">
+              <div class="col-md-3 form-group text-center">
                 <div>
                   <div>
                     <i class="icn-sm icn-tax" ng-hide="contractService.taxes.length > 0"> </i>
                     <select-taxes ng-show="contractService.taxes.length > 0" taxes="taxes" entity="contractService"
-                                  is-icon="true" is-preview-mode="true"></select-taxes>
-                    <p style="display: inline-block;">{{contractService.taxes.length}}</p>
+                                   is-preview-mode="true"></select-taxes>
                   </div>
                 </div>
               </div>

@@ -4743,7 +4743,7 @@ Devices tab
 }
 
 .hourly {
-  margin-bottom: 75px;
+  margin-bottom: 135px;
 }
 
 .hourly .not-yet-hourly {
@@ -4753,9 +4753,9 @@ Devices tab
 .contracts .bill-hide-content-item{
   padding: 0!important;
 }
-.hourly .bill-hide-content-item .col-md-2 .dropdown-menu {
-  top: -145px;
-  left: -135px;
+.hourly .bill-hide-content-item .col-md-3 .dropdown-menu {
+  top: -7px;
+  left: -185px;
 }
 
 .hourly .bill-hide-content-item .col-md-2 .dropdown-menu label .icn-label-save {
@@ -4779,7 +4779,7 @@ Devices tab
 
 .block-time .service-bill-hide-content .before-icon:before {
   top: 5px;
-  left: 108px;
+  left: 25px;
 }
 
 .service-bill-hide-content {
@@ -4908,7 +4908,7 @@ Devices tab
 }
 
 .contacts-details {
-  padding: 55px 10px;
+  padding: 55px 10px 0;
 }
 
 .contacts-details-content p {
