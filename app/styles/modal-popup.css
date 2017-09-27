@@ -15,14 +15,20 @@
   border-radius: 10px;
 }
 
+.contracts .nav-ticket-add > li > a {
+  padding: 15px 0 20px;
+}
+
 .contracts.create-window {
-  height: 700px;
-  overflow-y: scroll;
   padding: 20px 30px;
 }
 
-.contracts.create-window .service-bill-hide-content label {
-  margin-left: 10%;
+.contracts.create-window.readonly {
+  padding: 0;
+}
+
+.service-bill-hide-content {
+  padding: 0;
 }
 
 .block-time .service-bill .col-md-12.service-bill-hide-content {
@@ -83,7 +89,7 @@
 
 .service-agreement-modal {
   position: relative;
-  padding: 40px 37px 60px;
+  padding: 20px 30px;
   height: 100%;
   /*max-height: 750px;*/
 }

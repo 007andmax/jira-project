@@ -1,14 +1,15 @@
-
-
-<div class="contracts create-window clearfix" ng-controller="serviceContractCtrl" ng-form="serviceContractForm">
+<div class="contracts create-window readonly clearfix" ng-controller="serviceContractCtrl"
+     ng-form="serviceContractForm">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
   </div>
+
   <div class="service-header">
     <h4 class="title-services">Service Contracts</h4>
     <p>Manage service based contract are when you will your customers a monthly fee based on the
       amount of users or devic the customer has, you can still bill customers extra if needed.</p>
   </div>
+
   <div class="service-contract-details clearfix">
     <div class="col-md-8">
       <div class="form-group">
@@ -44,8 +45,9 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
+        End Date:
 
-        <input type="text" readonly style="margin-top: 25px;"
+        <input type="text" readonly
                value="{{parseDate(serviceContract.endDatePreview) | date: 'yyyy/MM/dd' }}"
                class="form-control default-cursor" onclick="return false">
         <i class="report-calendar"></i>
@@ -59,6 +61,7 @@
         automaticaly</p>
     </div>
   </div>
+
   <div class="service-bill clearfix">
     <h4>Select how you bill your customer. Managed Services will be added to Service time</h4>
     <div class="col-md-3">
@@ -66,7 +69,7 @@
         Service Bill Type:
         <div class="form-group">
           <div uib-dropdown>
-            <button class="form-control ">
+            <button class="form-control " style="cursor: default;text-align: left">
               {{serviceContractType[serviceContract.billType]}}
             </button>
           </div>
@@ -77,14 +80,14 @@
     <div ng-if="serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER'">
       <div class="bill-hide-content-item clearfix"
            ng-repeat="serviceContractServices in serviceContract.serviceContractServices">
-        <div class="col-md-5 form-group">
+        <div class="col-md-4 form-group">
           <input placeholder="Enter the Name" type="text" class="form-control"
                  ng-model="serviceContractServices.name"
                  required
                  ng-minlength="1"
                  hard-reset-pattern="serviceNamePattern" readonly>
         </div>
-        <div class="col-md-3 fourm-group">
+        <div class="col-md-2 fourm-group">
           <input placeholder="Count" type="text" class="form-control"
                  ng-model="serviceContractServices.count" required readonly>
         </div>
@@ -92,7 +95,7 @@
           <input placeholder="0.00" type="text" class="form-control"
                  ng-model="serviceContractServices.rate" required readonly>
         </div>
-        <div class="col-md-1 fourm-group">
+        <div class="col-md-3 fourm-group">
           <div class="">
             <div>
               <select-taxes taxes="taxes" entity="serviceContractServices" is-preview-mode="true"></select-taxes>
@@ -100,11 +103,10 @@
             </div>
           </div>
         </div>
-        <div class="col-md-1 fourm-group"></div>
       </div>
     </div>
 
-    <div  class="bill-hide-content-item clearfix col-md-12" ng-if="serviceContract.billType === 'OTHER'">
+    <div class="bill-hide-content-item clearfix col-md-12" ng-if="serviceContract.billType === 'OTHER'">
       <div class="invoice-update">
 
         <ul class="nav nav-ticket-add invoice-ticket-add">
@@ -157,7 +159,7 @@
                   <div class="col-sm-2">
                     <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
                            ng-required="true" ng-model="productExpense.salePrice"
-                           hard-reset-pattern="decimalNumberPatternLow" >
+                           hard-reset-pattern="decimalNumberPatternLow">
                   </div>
 
                   <div class="col-sm-1">
@@ -190,14 +192,15 @@
                              uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
                              qt-typeahead-show-on-focus
                              custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                             value="service.name" hard-reset-pattern="serviceNamePattern" readonly onclick="return false">
+                             value="service.name" hard-reset-pattern="serviceNamePattern" readonly
+                             onclick="return false">
                     </div>
                   </div>
 
                   <div class="col-sm-2" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false">
                     <input id="serviceExpense-quantity-picker" type="text" class="form-control"
                            placeholder="Hr(s) : Min(s)" sqp-input
-                            required readonly onclick="return false">
+                           required readonly onclick="return false">
 
                     <input type="hidden" name="serviceTime" ng-model="service.quantity" ng-required="true"/>
                   </div>
@@ -212,7 +215,8 @@
                     <div class="dropdown">
                       <input type="text"
                              class="form-control has-dropdown"
-                             placeholder="Date" value="{{parseDate(formattingDateForServiceExpenses(serviceExpense.date)) | date: 'yyyy/MM/dd' }}"
+                             placeholder="Date"
+                             value="{{parseDate(formattingDateForServiceExpenses(serviceExpense.date)) | date: 'yyyy/MM/dd' }}"
                              name="serviceDate" ng-required="true" readonly onclick="return false">
                     </div>
                   </div>
@@ -239,9 +243,8 @@
     </div>
 
 
-
     <div class="service-bill-content">
-      <div class="col-md-12">
+      <div class="col-md-12" style="padding: 0;">
         <label class="control checkbox">
           <input type="checkbox" ng-model="serviceContract.isAdditionalServices" onclick="return false">
           <span class="control-indicator"></span>
@@ -250,14 +253,13 @@
 
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.services.length>0">
 
-          <div class="col-md-5">Service name</div>
+          <div class="col-md-4">Service name</div>
           <div class="col-md-2">Per hour</div>
           <div class="col-md-2 text-center">Make Billable</div>
-          <div class="col-md-2 text-center">Tax</div>
-          <div class="col-md-1 text-center">Action</div>
+          <div class="col-md-3 text-center">Tax</div>
 
           <div class="bill-hide-content-item clearfix" ng-repeat="service in serviceContract.services">
-            <div class="col-md-5 form-group">
+            <div class="col-md-4 form-group">
               <input placeholder="Service Name" type="text"
                      class="form-control"
                      name="serviceName"
@@ -277,7 +279,7 @@
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="col-md-2 form-group text-center">
+            <div class="col-md-3 form-group text-center">
               <div>
                 <div>
                   <select-taxes taxes="taxes" entity="service" is-preview-mode="true"></select-taxes>
@@ -285,37 +287,16 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-1 form-group text-center"></div>
           </div>
-
 
 
         </div>
       </div>
     </div>
   </div>
-  <div class="contacts-details">
-    <h5>Details</h5>
-    <div ng-show="showValidationFailMessage">
-      <p style="color: red">{{createValidationFailedMessage}}</p>
-    </div>
-    <div class="contacts-details-content clearfix">
-      <div class="col-md-8">
-        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
-        <div class="col-md-6">
-          <!--<p>Rollover: <span>Yes</span></p>-->
-          <!--<p>Included After Hours: <span>No</span></p>-->
-          <!--<p>Renewal Notice: <span>Yes</span></p>-->
-        </div>
-        <div class="col-md-6">
-          <!--<p>Start Date: <span>06/30/17</span></p>-->
-          <!--<p>Expire Date: <span>07/29/17</span></p>-->
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="btn btn-primary btn-create" ng-click="terminateContract()">Terminate and close</div>
-        <div class="btn btn-primary btn-create" ng-click="terminateAndCopy()">Terminate and copy</div>
-        </div>
-    </div>
+
+  <div class="col-md-6" style="float: right;margin-top: 135px;">
+    <div style="float: right;" class="btn btn-primary btn-create" ng-click="terminateAndCopy()">Terminate and copy</div>
+    <div style="float: right;margin-right: 15px;" class="btn btn-primary btn-create" ng-click="terminateContract()">Terminate and close</div>
   </div>
 </div>

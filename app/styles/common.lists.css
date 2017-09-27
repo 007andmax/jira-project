@@ -2449,8 +2449,14 @@ Devices tab
   margin-right: -2px;
   margin-left: 17px;
 }
-
-.service-form-wrapper .select-taxes-drv {
+.contracts .update-content{
+  margin-bottom: 15px;
+}
+.contracts .update-content .x-mark{
+  top: 2px !important;
+}
+.service-form-wrapper .select-taxes-drv,
+.contracts .select-taxes-drv{
   width: 100%;
 }
 
@@ -4683,14 +4689,22 @@ Devices tab
 .service-contract-details .col-md-3 input {
   cursor: pointer;
 }
-
+.readonly .service-contract-details input,
+.readonly .service-contract-details label{
+  cursor: default;
+}
 .service-form-wrapper .report-calendar,
-.service-form-wrapper .icn-caret-gray {
+.service-form-wrapper .icn-caret-gray,
+.contracts .icn-caret-gray,
+.contracts .report-calendar{
   position: absolute;
   top: 35px !important;
   cursor: pointer;
+  pointer-events: none;
 }
-
+.contracts .service-bill .icn-caret-gray{
+  top: 12px!important;
+}
 .service-form-wrapper .icn-caret-gray {
   right: 10px;
 }
@@ -4736,7 +4750,9 @@ Devices tab
   text-align: center;
   padding: 90px 0;
 }
-
+.contracts .bill-hide-content-item{
+  padding: 0!important;
+}
 .hourly .bill-hide-content-item .col-md-2 .dropdown-menu {
   top: -145px;
   left: -135px;
@@ -4844,7 +4860,10 @@ Devices tab
   top: 5px;
   left: 25px;
 }
-
+.contracts .before-icon:before{
+  top: 6px;
+  left: 25px;
+}
 .contracts .bill-hide-content-item .col-md-1 {
   text-align: center;
 }
@@ -4861,7 +4880,9 @@ Devices tab
 .bill-hide-content-item select-taxes {
   display: inline-block;
 }
-
+.contracts .bill-hide-content-item select-taxes{
+  width: 100%;
+}
 .bill-hide-content-item .dropdown-menu-left label {
   min-width: 130px;
   padding: 13px 15px;
@@ -4874,7 +4895,9 @@ Devices tab
 .bill-hide-content-item .icn-label-save {
   right: 85px !important;
 }
-
+.contracts .bill-hide-content-item .icn-label-save{
+  right: 15px!important;
+}
 .service-agreement-modal input.default-cursor,
 .service-agreement-modal label.default-cursor {
   cursor: default;

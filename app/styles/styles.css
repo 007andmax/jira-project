@@ -6048,7 +6048,7 @@ tbody.collapse.in {
   margin-top: 7px;
   color: #4c5c6f;
   float: left;
-  max-width: 300px;
+  max-width: 298px;
 }
 
 .dropdown-menu-tabs .users-list .hovered {
@@ -7674,7 +7674,8 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 }
 
 .nav-ticket-add > li > a:hover,
-.nav-ticket-add > li > a:active {
+.nav-ticket-add > li > a:active,
+.nav-ticket-add > li > a.active{
   color: #1f2a37;
 }
 
