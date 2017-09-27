@@ -292,7 +292,8 @@
                   taxIds: [],
                   taxes: $scope.addDefaultTaxes()
                 };
-                reInitServiceContractServicesForm()
+                reInitServiceContractServicesForm();
+                $scope.calculateTotalAmount();
               }
             });
           }
@@ -319,6 +320,7 @@
               break;
             }
           }
+          $scope.calculateTotalAmount();
         };
 
 

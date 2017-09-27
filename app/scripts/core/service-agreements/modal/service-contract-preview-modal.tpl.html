@@ -111,13 +111,13 @@
 
         <ul class="nav nav-ticket-add invoice-ticket-add">
 
-          <li class="invoice-update-btns" ng-click="setOpenedTab('product')">
+          <li class="invoice-update-btns" ng-click="setOpenedTab('product')" ng-class="{'active': isTabOpened('product')}">
             <a href="javascript:void(0)">
               <i class="icon-lg icon-add-product"></i>Product
             </a>
           </li>
 
-          <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
+          <li class="invoice-update-btns" ng-click="setOpenedTab('service')" ng-class="{'active': isTabOpened('service')}">
             <a href="javascript:void(0)">
               <i class="icon-lg icon-add-service"></i>Service
             </a>
@@ -287,6 +287,33 @@
 
 
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contacts-details">
+    <h5>Details</h5>
+    <div ng-show="showValidationFailMessage">
+      <p style="color: red">{{createValidationFailedMessage}}</p>
+    </div>
+    <div class="contacts-details-content clearfix">
+      <div class="col-md-8">
+        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
+        <div class="col-md-6">
+          <!--<p>Rollover: <span>Yes</span></p>-->
+          <!--<p>Included After Hours: <span>No</span></p>-->
+          <!--<p>Renewal Notice: <span>Yes</span></p>-->
+        </div>
+        <div class="col-md-6">
+          <p>Start Date: <span>{{parseDate(serviceContract.startDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+          <p>Expire Date: <span>{{parseDate(serviceContract.endDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contacts-details-content-price">
+
+        </div>
+
       </div>
     </div>
   </div>

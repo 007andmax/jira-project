@@ -281,7 +281,7 @@
                   <div class="col-sm-1">
                     <div class="add-remove-service">
                       <div ng-click="deleteProductExpense(productExpense)">
-                        <i class="icon-sm icn-add-action"></i>
+                        <i class="icon-sm icn-delete"></i>
                       </div>
                     </div>
                   </div>
@@ -403,8 +403,8 @@
 
                   <div class="col-md-1 fourm-group">
                     <div class="add-remove-service">
-                      <div ng-click="addServiceExpense(newServiceExpenseForm, newServiceExpense)">
-                        <i class="icon-sm icn-add-action"></i>
+                      <div ng-click="deleteServiceExpense(serviceExpense)">
+                        <i class="icon-sm icn-delete"></i>
                       </div>
                     </div>
                   </div>
@@ -608,33 +608,33 @@
       </div>
     </div>
   </div>
-  <!--<div class="contacts-details">-->
-    <!--<h5>Details</h5>-->
-    <!--<div ng-show="showValidationFailMessage">-->
-      <!--<p style="color: red">{{createValidationFailedMessage}}</p>-->
-    <!--</div>-->
-    <!--<div class="contacts-details-content clearfix">-->
-      <!--<div class="col-md-8">-->
-        <!--&lt;!&ndash;<p class="col-md-12">Vereburn - Monthly Block Time</p>&ndash;&gt;-->
-        <!--<div class="col-md-6">-->
-          <!--&lt;!&ndash;<p>Rollover: <span>Yes</span></p>&ndash;&gt;-->
-          <!--&lt;!&ndash;<p>Included After Hours: <span>No</span></p>&ndash;&gt;-->
-          <!--&lt;!&ndash;<p>Renewal Notice: <span>Yes</span></p>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="col-md-6">-->
-          <!--&lt;!&ndash;<p>Start Date: <span>06/30/17</span></p>&ndash;&gt;-->
-          <!--&lt;!&ndash;<p>Expire Date: <span>07/29/17</span></p>&ndash;&gt;-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col-md-4">-->
-        <!--&lt;!&ndash;<div class="contacts-details-content-price">&ndash;&gt;-->
-        <!--&lt;!&ndash;$1875.00/mo&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <div class="contacts-details">
+    <h5>Details</h5>
+    <div ng-show="showValidationFailMessage">
+      <p style="color: red">{{createValidationFailedMessage}}</p>
+    </div>
+    <div class="contacts-details-content clearfix">
+      <div class="col-md-8">
+        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
+        <div class="col-md-6">
+          <!--<p>Rollover: <span>Yes</span></p>-->
+          <!--<p>Included After Hours: <span>No</span></p>-->
+          <!--<p>Renewal Notice: <span>Yes</span></p>-->
+        </div>
+        <div class="col-md-6">
+          <p>Start Date: <span>{{dateFilter(serviceContract.startDate)}}</span></p>
+          <p>Expire Date: <span>{{dateFilter(serviceContract.endDate)}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contacts-details-content-price">
+          Total: ${{total}}
+        </div>
 
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  Total: {{total}}
+      </div>
+    </div>
+  </div>
+
   <div style="float: right; margin-top: 135px;" class="btn btn-lg btn-success btn-create" ng-disabled="!disableCreateButton()"
        ng-click="validateAndCreateServiceContract( serviceContract)">Create
   </div>
