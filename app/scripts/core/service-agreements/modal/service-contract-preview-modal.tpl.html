@@ -154,14 +154,14 @@
                            type="text" class="form-control" placeholder="Qty"
                            ng-model="productExpense.quantity" ng-maxlength="4" required
                            name="productQty"
-                           hard-reset-pattern="numberPattern">
+                           hard-reset-pattern="numberPattern"  readonly>
                   </div>
 
                   <div class="col-sm-2">
                     <input style="cursor: default;"
                            type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
                            ng-required="true" ng-model="productExpense.salePrice"
-                           hard-reset-pattern="decimalNumberPatternLow">
+                           hard-reset-pattern="decimalNumberPatternLow" readonly>
                   </div>
 
                 </div>

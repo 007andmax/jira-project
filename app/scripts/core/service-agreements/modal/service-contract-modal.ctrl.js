@@ -35,6 +35,8 @@
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
 
+        $scope.totsl = 0;
+
 
         if ($scope.editMode) {
           $scope.serviceContract = {
@@ -330,7 +332,7 @@
 
 
         $scope.addServiceExpense = function (form, serviceExpense) {
-          $scope.showServiceExpenseError = false;
+
           if (form.$valid) {
             var newServiceExpense = {
               name: serviceExpense.name,
@@ -350,8 +352,7 @@
               description: null,
               date: null
             };
-
-
+            $scope.calculateTotalAmount();
           }
         };
 
@@ -370,11 +371,12 @@
               break;
             }
           }
+          $scope.calculateTotalAmount();
         };
 
 
         $scope.addProductExpense = function (form, productExpense) {
-          $scope.showProductExpenseError = false;
+
           if (form.$valid) {
 
             var newProductExpense = {
@@ -395,6 +397,7 @@
               quantity: null,
               salePrice: null
             };
+            $scope.calculateTotalAmount();
           }
         };
 
@@ -412,6 +415,7 @@
               break;
             }
           }
+          $scope.calculateTotalAmount();
         };
 
         $scope.addNewService = function (form, service) {
@@ -585,15 +589,30 @@
         };
 
         $scope.calculateTotalAmount = function () {
-          var rate = 0;
+          var totalAmount = 0;
           if ($scope.serviceContract.billType === 'OTHER') {
             if ($scope.serviceContract.serviceExpenses.length > 0) {
-
+              for(var j=0; j<$scope.serviceContract.serviceExpenses.length; j++) {
+                var servCost = $scope.serviceContract.serviceExpenses[j].quantity * ($scope.serviceContract.serviceExpenses[j].name.rate / 60);
+                totalAmount = totalAmount+servCost;
+              }
             }
             if ($scope.serviceContract.productExpenses.length > 0) {
-
+              for(var i=0; i<$scope.serviceContract.productExpenses.length; i++) {
+                var productCost = $scope.serviceContract.productExpenses[i].quantity * $scope.serviceContract.productExpenses[i].salePrice;
+                totalAmount = totalAmount+productCost;
+              }
+            }
+          } else {
+            if($scope.serviceContract.serviceContractServices.length>0) {
+              for(var t=0; t<$scope.serviceContract.serviceContractServices.length; t++) {
+                var scs = $scope.serviceContract.serviceContractServices[t].count * $scope.serviceContract.serviceContractServices[t].rate;
+                totalAmount = totalAmount+scs;
+              }
             }
           }
+
+          $scope.total = totalAmount;
         };
 
         function createServiceContract(serviceContract) {
