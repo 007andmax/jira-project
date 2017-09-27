@@ -221,13 +221,13 @@
 
         <ul class="nav nav-ticket-add invoice-ticket-add">
 
-          <li class="invoice-update-btns" ng-click="setOpenedTab('product')">
+          <li class="invoice-update-btns" ng-click="setOpenedTab('product')" ng-class="{'active': isTabOpened('product')}">
             <a href="javascript:void(0)">
               <i class="icon-lg icon-add-product"></i>Product
             </a>
           </li>
 
-          <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
+          <li class="invoice-update-btns" ng-click="setOpenedTab('service')" ng-class="{'active': isTabOpened('service')}">
             <a href="javascript:void(0)">
               <i class="icon-lg icon-add-service"></i>Service
             </a>
@@ -254,7 +254,7 @@
                              tabindex="5"
                              placeholder="New Product"
                              class="form-control form-control-dropdown dropdown-toggle"
-                             uib-typeahead="product.name for product in defaultProducts |  orderBy:'name'"
+                             uib-typeahead="product as product.name for product in defaultProducts |  orderBy:'name'"
                              qt-typeahead-show-on-focus
                              custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                              value="product" hard-reset-pattern="serviceNamePattern">
@@ -280,7 +280,7 @@
 
                   <div class="col-sm-1">
                     <div class="add-remove-service">
-                      <div ng-click="addNewBlockTimeService(newBlockTimeServiceForm, newBlockTimeService)">
+                      <div ng-click="deleteProductExpense(productExpense)">
                         <i class="icon-sm icn-add-action"></i>
                       </div>
                     </div>
@@ -305,7 +305,7 @@
                              tabindex="5"
                              placeholder="New Product"
                              class="form-control form-control-dropdown dropdown-toggle"
-                             uib-typeahead="product.name for product in defaultProducts |  orderBy:'name'"
+                             uib-typeahead="product as product.name for product in defaultProducts | filter:{'picked': false} | orderBy:'name'"
                              qt-typeahead-show-on-focus
                              custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                              value="product" hard-reset-pattern="serviceNamePattern">
@@ -331,7 +331,7 @@
 
                   <div class="col-sm-1">
                     <div class="add-remove-service">
-                      <div ng-click="addNewBlockTimeService(newBlockTimeServiceForm, newBlockTimeService)">
+                      <div ng-click="addProductExpense(newProductExpenseForm, newProductExpense)">
                         <i class="icon-sm icn-add-action"></i>
                       </div>
                     </div>

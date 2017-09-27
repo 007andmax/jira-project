@@ -598,6 +598,18 @@
           return (formCheck() && serviceCheck());
         };
 
+        $scope.calculateTotalAmount = function() {
+          var rate = 0;
+          if($scope.serviceContract.billType === 'OTHER') {
+            if($scope.serviceContract.serviceExpenses.length>0) {
+
+            }
+            if($scope.serviceContract.productExpenses.length>0) {
+
+            }
+          }
+        };
+
         function createServiceContract( serviceContract) {
           $scope.showValidationFailMessage = false;
           if (serviceContract) {
@@ -689,7 +701,7 @@
 
             if(serviceContract.productExpenses && serviceContract.productExpenses.length) {
               for(var t=0; t<serviceContract.productExpenses.length; t++) {
-                if(serviceContract.productExpenses[u] && serviceContract.productExpenses[u].name) {
+                if(serviceContract.productExpenses[t] && serviceContract.productExpenses[t].name) {
                   var prodExp = {
                     productId: serviceContract.productExpenses[t].name.productId,
                     quantity: serviceContract.productExpenses[t].quantity,
