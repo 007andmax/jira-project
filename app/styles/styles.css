@@ -7694,7 +7694,11 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   background-color: #FFF;
   border-bottom: #e7ecf2 1px solid;
 }
-
+.contracts .nav-ticket-add > li.active > a,
+.contracts .nav-ticket-add > li.active > a:hover,
+.contracts .nav-ticket-add > li.active > a:focus{
+  border-bottom: none;
+}
 @-moz-document url-prefix() {
   .nav-ticket-add > li > a {
     line-height: 19px;
