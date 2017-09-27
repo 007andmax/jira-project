@@ -18,6 +18,9 @@
 .contracts.readonly input{
   cursor: default;
 }
+.contracts.readonly .select-taxes-drv input{
+  cursor: pointer!important;
+}
 .contracts .nav-ticket-add > li > a {
   padding: 15px 0 20px;
 }
