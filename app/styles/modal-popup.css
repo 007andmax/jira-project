@@ -14,7 +14,10 @@
   background: #fff;
   border-radius: 10px;
 }
-
+.contracts.readonly label,
+.contracts.readonly input{
+  cursor: default;
+}
 .contracts .nav-ticket-add > li > a {
   padding: 15px 0 20px;
 }
@@ -89,7 +92,7 @@
 
 .service-agreement-modal {
   position: relative;
-  padding: 20px 30px;
+  padding: 20px 30px 65px;
   height: 100%;
   /*max-height: 750px;*/
 }
