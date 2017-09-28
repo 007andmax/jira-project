@@ -141,11 +141,11 @@
            ng-if="reInitServiceContractServicesForm">
         <div
           ng-show="!isNewServiceContractServiceNameUnique(NewServiceContractServices.name) && NewServiceContractServices.name">
-          <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate service name</p>
+          <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">Duplicate service name</p>
         </div>
         <div
           ng-show="showNewServiceContractServiceValidationError">
-          <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
+          <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">{{validationServiceError}}</p>
         </div>
         <div class="col-md-4 form-group"
              ng-class="{'has-error': isShowingErrors(newServiceContractServicesForm, 'newServiceContractServiceName') }">
