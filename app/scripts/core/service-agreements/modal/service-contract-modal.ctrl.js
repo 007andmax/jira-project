@@ -21,6 +21,8 @@
         $scope.reInitServiceContractServicesForm = true;
         $scope.reInitServiceForm = true;
 
+        $scope.showNewServiceContractServiceValidationError = false;
+        $scope.showNewServiceValidationError = false;
         $scope.showServiceExpenseError = false;
         $scope.showProductExpenseError = false;
         $scope.showValidationFailMessage = false;
@@ -296,6 +298,7 @@
         };
 
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
+          $scope.showNewServiceContractServiceValidationError = false;
           if (form.$valid) {
             validateNewServiceName(NewServiceContractServices.name).then(function (resp) {
               if (resp) {
@@ -317,6 +320,8 @@
                 reInitServiceContractServicesForm();
                 $scope.calculateTotalAmount();
               }
+            }, function() {
+              $scope.showNewServiceContractServiceValidationError = true;
             });
           }
         };
@@ -444,6 +449,7 @@
 
         $scope.addNewService = function (form, service) {
           $scope.showNewServiceError = false;
+          $scope.showNewServiceValidationError = false;
           if (form.$valid) {
 
             validateNewServiceName(service.name).then(function (resp) {
@@ -458,6 +464,8 @@
                 };
                 reInitServiceForm()
               }
+            }, function() {
+              $scope.showNewServiceValidationError = true;
             })
 
           }
