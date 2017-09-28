@@ -87,6 +87,10 @@
               }
             }
           }
+
+          for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
+            $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
+          }
           // $timeout(function () {
           //   $scope.calculateTotalAmount()
           // }, 100);
