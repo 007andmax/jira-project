@@ -509,6 +509,28 @@
         return deferred.promise;
       }
 
+      function checkUniqueServiceName(serviceList, serviceName) {
+        if (serviceList && serviceName) {
+          var unique = true;
+          for (var i = 0; i < serviceList.length; i++) {
+            if (serviceList[i].name === serviceName) {
+              unique = false;
+              break;
+            }
+          }
+          return unique;
+        } else {
+          return true;
+        }
+      }
+
+      $scope.isNameUnique = function(serviceName) {
+        if(serviceName) {
+          var check = checkUniqueServiceName( $scope.editContract.services, serviceName);
+          return check;
+        }
+      };
+
 
       function createHourlyContract() {
         var servicesWithTaxIds = [];

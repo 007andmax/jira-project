@@ -100,6 +100,9 @@
           <div ng-show="newServiceNameIsError">
             <p style="color: red;padding-left: 15px;">{{newServiceNameErrorMessage}}</p>
           </div>
+          <div ng-show="!isNameUnique(editService.name) && editService.name">
+            <p style="color: red;padding-left: 15px;">Duplicate name</p>
+          </div>
           <div class="col-md-4 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
 
             <input placeholder="New Service Name"
@@ -107,7 +110,8 @@
                    name="editServiceName"
                    class="form-control"
                    ng-model="editService.name"
-                   required hard-reset-pattern="serviceNamePattern">
+                   required hard-reset-pattern="serviceNamePattern"
+                   invalid-when="!isNameUnique(editService.name)">
           </div>
           <div class="col-md-2 fourm-group before-icon">
             <input placeholder="0.00"
