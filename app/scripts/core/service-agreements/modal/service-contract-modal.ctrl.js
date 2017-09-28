@@ -654,6 +654,13 @@
           $scope.total = totalAmount;
         };
 
+        function convertMinutesToHour(minutes) {
+          var hours = Math.floor(minutes/60);
+          var part = (minutes%60) / 60;
+          var result = hours + part;
+          return result;
+        }
+
         function createServiceContract(serviceContract) {
           $scope.showValidationFailMessage = false;
           if (serviceContract) {
@@ -734,7 +741,7 @@
                 if (serviceContract.serviceExpenses[u] && serviceContract.serviceExpenses[u].name) {
                   var servExp = {
                     serviceId: serviceContract.serviceExpenses[u].name.serviceId,
-                    quantity: serviceContract.serviceExpenses[u].quantity,
+                    quantity: convertMinutesToHour(serviceContract.serviceExpenses[u].quantity),
                     description: serviceContract.serviceExpenses[u].description,
                     date: new Date(serviceContract.serviceExpenses[u].date).getTime()
                   };
