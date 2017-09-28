@@ -151,8 +151,8 @@
 
         </div>
         <div class="col-md-12">
-          <label class="control checkbox default-cursor">
-            <input type="checkbox" ng-model="blockTimeContract.billForAdditionalService" onclick="return false">
+          <label class="control checkbox default-cursor" onclick="return false">
+            <input type="checkbox" ng-checked="blockTimeContract.services.length>0" onclick="return false">
             <span class="control-indicator"></span>
             We will bill our customers for additional services
           </label>

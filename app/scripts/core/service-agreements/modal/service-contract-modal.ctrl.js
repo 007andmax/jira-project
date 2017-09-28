@@ -145,6 +145,7 @@
 
         $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
         $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+        $scope.defaultDareForServiceExpense = Date.now() + day;
 
         presettupPeriod();
 
@@ -166,6 +167,24 @@
           changeMinEndDate($scope.serviceContract.period);
         }
 
+        function changeDefaultDateForServices() {
+          var servicePickDate = $scope.newServiceExpense.date;
+          var startDate = $scope.serviceContract.startDate;
+          var pickedDate = $scope.newServiceExpense.date;
+          if(servicePickDate.getTime() < startDate.getTime()) {
+            $scope.newServiceExpense.date = $scope.serviceContract.startDate;
+            $scope.defaultDareForServiceExpense = startDate.getTime();
+          } else {
+            $scope.defaultDareForServiceExpense = pickedDate.getTime();
+          }
+          for(var i=0; i<$scope.serviceContract.serviceExpenses.length; i++) {
+            var setDate = $scope.serviceContract.serviceExpenses[i].date;
+            if(setDate.getTime() < startDate.getTime()) {
+              $scope.serviceContract.serviceExpenses[i].date = $scope.serviceContract.startDate;
+            }
+          }
+        }
+
         function changeMinEndDate(period) {
           var date = $scope.serviceContract.startDate;
           var endDate = new Date(date);
@@ -181,7 +200,9 @@
           }
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
-          //$scope.serviceContract.minStartDate = $scope.serviceContract.startDate.getTime();
+          //$scope.serviceContract.minStartDate = date;
+          // $scope.newServiceExpense.date = date;
+          changeDefaultDateForServices();
           reInitEndDate();
         }
 
@@ -302,6 +323,8 @@
             if(!$scope.serviceContract.serviceContractServices.length>0) {
               $scope.NewServiceContractServices.name = 'Managed users';
             }
+          } else if($scope.serviceContract.billType === 'OTHER') {
+            $scope.NewServiceContractServices.name = '';
           }
         };
 
@@ -783,27 +806,24 @@
 
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
-          // var emptyServices = true;
-          // var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length);
-          // var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.length);
-          // var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.length);
-          // var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length);
-          // if(!checkServices) {
-          //   if(serviceContract.billType === 'OTHER') {
-          //
-          //   }
-          //   emptyServices = false;
-          //   var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
-          //   var confirmButton = 'Yes, create';
-          //   UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
-          //     emptyServices = true;
-          //     validateServiceContractServices(serviceContract);
-          //   })
-          // } else {
-          //   validateServiceContractServices(serviceContract);
-          // }
+          var emptyServices = true;
+          var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length);
+          var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.length);
+          var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.length);
+          var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length);
+          if(!checkServices && !checkSE && !checkPE && !checkSCS) {
+            emptyServices = false;
+            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
+            var confirmButton = 'Yes, create';
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
+              emptyServices = true;
+              validateServiceContractServices(serviceContract);
+            })
+          } else {
+            validateServiceContractServices(serviceContract);
+          }
 
-          validateServiceContractServices(serviceContract);
+
 
           function validateServiceContractServices(serviceContract) {
             var listOfNames = [];
