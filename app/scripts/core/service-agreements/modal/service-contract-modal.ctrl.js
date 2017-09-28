@@ -177,8 +177,9 @@
           }
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
+          $scope.serviceContract.minStartDate = date.getTime();
           //$scope.serviceContract.minStartDate = $scope.serviceContract.startDate.getTime();
-          reInitEndDate()
+          reInitEndDate();
         }
 
         function reInitEndDate() {
@@ -187,6 +188,8 @@
             $scope.reInitEndDate = true;
           }, 0);
         }
+
+
 
 
         $scope.$watch(function () {
