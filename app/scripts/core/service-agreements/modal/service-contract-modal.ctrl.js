@@ -87,7 +87,9 @@
               }
             }
           }
-
+          $timeout(function () {
+            $scope.calculateTotalAmount()
+          }, 100);
         }
 
         preCreateFirstServicesEntities();
@@ -765,21 +767,27 @@
 
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
-          var emptyServices = true;
-          if(($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length) ||
-            ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.length) ||
-            ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.length) ||
-            ($scope.newService && $scope.newService.name && $scope.newService.name.length)) {
-            emptyServices = false;
-            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
-            var confirmButton = 'Yes, create';
-            UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
-              emptyServices = true;
-              validateServiceContractServices(serviceContract);
-            })
-          } else {
-            validateServiceContractServices(serviceContract);
-          }
+          // var emptyServices = true;
+          // var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length);
+          // var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.length);
+          // var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.length);
+          // var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length);
+          // if(!checkServices) {
+          //   if(serviceContract.billType === 'OTHER') {
+          //
+          //   }
+          //   emptyServices = false;
+          //   var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
+          //   var confirmButton = 'Yes, create';
+          //   UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
+          //     emptyServices = true;
+          //     validateServiceContractServices(serviceContract);
+          //   })
+          // } else {
+          //   validateServiceContractServices(serviceContract);
+          // }
+
+          validateServiceContractServices(serviceContract);
 
           function validateServiceContractServices(serviceContract) {
             var listOfNames = [];
