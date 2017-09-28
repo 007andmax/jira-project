@@ -618,9 +618,9 @@
           <!--<p>Rollover: <span>Yes</span></p>-->
           <!--<p>Included After Hours: <span>No</span></p>-->
           <!--<p>Renewal Notice: <span>Yes</span></p>-->
+          <p>Start Date: <span>{{dateFilter(serviceContract.startDate)}}</span></p>
         </div>
         <div class="col-md-6">
-          <p>Start Date: <span>{{dateFilter(serviceContract.startDate)}}</span></p>
           <p>Expire Date: <span>{{dateFilter(serviceContract.endDate)}}</span></p>
         </div>
       </div>
@@ -628,14 +628,14 @@
         <div class="contacts-details-content-price">
           Total: ${{total}}
         </div>
-
+      </div>
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-disabled="!disableCreateButton()"
+           ng-click="validateAndCreateServiceContract( serviceContract)">Create
       </div>
     </div>
   </div>
 
-  <div style="float: right; margin-top: 135px;" class="btn btn-lg btn-success btn-create" ng-disabled="!disableCreateButton()"
-       ng-click="validateAndCreateServiceContract( serviceContract)">Create
-  </div>
+
 </div>
 
 <div class="service-agreement-modal" ng-show="!editMode">

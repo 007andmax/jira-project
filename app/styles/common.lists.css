@@ -4927,7 +4927,9 @@ Devices tab
   border-radius: 5px;
   text-align: center;
 }
-
+.contracts .contacts-details-content .col-md-8{
+  padding-top: 30px;
+}
 .contacts-details-content .col-md-8 .col-md-12 {
   padding-top: 15px;
 }
@@ -4941,8 +4943,9 @@ Devices tab
   border-radius: 5px;
 }
 
-.contacts-details-content .btn-primary.btn-create {
-  margin-bottom: 10px;
+.contacts-details-content .btn-primary.btn-create,
+.contacts-details-content .btn-success.btn-create{
+  margin: 0 15px 15px 0;
 }
 
 .contacts-details-content .btn {

@@ -1,5 +1,6 @@
 <div class="contracts create-window readonly clearfix" ng-controller="serviceContractCtrl"
      ng-form="serviceContractForm">
+
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
   </div>
@@ -23,15 +24,12 @@
       </div>
     </div>
     <div class="col-md-12"></div>
-
-
     <div class="col-md-3">
       <div class="form-group">
         Interval:
         <input custom-style="{'width':'100%'}" type="text" class="form-control"
                ng-model="previewInterval()"
                readonly onclick="return false">
-
       </div>
     </div>
     <div class="col-md-3">
@@ -53,8 +51,6 @@
         <i class="report-calendar"></i>
       </div>
     </div>
-
-
     <div class="col-md-12"></div>
     <div class="col-md-12">
       <p class="info-block">Contact time can be based on the amount of users or devices, these number generated
@@ -107,7 +103,6 @@
         </div>
       </div>
     </div>
-
     <div class="bill-hide-content-item clearfix col-md-12" ng-if="serviceContract.billType === 'OTHER'">
       <div class="invoice-update">
 
@@ -224,22 +219,14 @@
 
             </ul>
           </div>
-
           <div class="clearfix">
             <div class="ticket-add-amount has-error" style="position: absolute;">
               <span class="control-label">{{ getErrorMessage(editInvoiceForm) }}</span>
             </div>
-
           </div>
-
-          </ul>
         </div>
-
       </div>
-
     </div>
-
-
     <div class="service-bill-content">
       <div class="col-md-12" style="padding: 0;">
         <label class="control checkbox">
@@ -247,14 +234,11 @@
           <span class="control-indicator"></span>
           We will our customers for additional services
         </label>
-
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.services.length>0">
-
           <div class="col-md-4">Service name</div>
           <div class="col-md-2">Per hour</div>
           <div class="col-md-2 text-center">Make Billable</div>
           <div class="col-md-3 text-center">Tax</div>
-
           <div class="bill-hide-content-item clearfix" ng-repeat="service in serviceContract.services">
             <div class="col-md-4 form-group">
               <input placeholder="Service Name" type="text"
@@ -285,44 +269,40 @@
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
   </div>
 
-  <!--<div class="contacts-details">-->
-    <!--<h5>Details</h5>-->
-    <!--<div ng-show="showValidationFailMessage">-->
-      <!--<p style="color: red">{{createValidationFailedMessage}}</p>-->
-    <!--</div>-->
-    <!--<div class="contacts-details-content clearfix">-->
-      <!--<div class="col-md-8">-->
-        <!--&lt;!&ndash;<p class="col-md-12">Vereburn - Monthly Block Time</p>&ndash;&gt;-->
-        <!--<div class="col-md-6">-->
-          <!--&lt;!&ndash;<p>Rollover: <span>Yes</span></p>&ndash;&gt;-->
-          <!--&lt;!&ndash;<p>Included After Hours: <span>No</span></p>&ndash;&gt;-->
-          <!--&lt;!&ndash;<p>Renewal Notice: <span>Yes</span></p>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="col-md-6">-->
-          <!--<p>Start Date: <span>{{parseDate(serviceContract.startDatePreview) | date: 'yyyy/MM/dd' }}</span></p>-->
-          <!--<p>Expire Date: <span>{{parseDate(serviceContract.endDatePreview) | date: 'yyyy/MM/dd' }}</span></p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="contacts-details-content-price">-->
-
-        <!--</div>-->
-
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-  <div class="col-md-6" style="float: right;margin-top: 135px;">
-    <div style="float: right;" class="btn btn-primary btn-create" ng-click="terminateAndCopy()">Terminate and copy</div>
-    <div style="float: right;margin-right: 15px;" class="btn btn-primary btn-create" ng-click="terminateContract()">
-      Terminate and close
+  <div class="contacts-details">
+    <h5>Details</h5>
+    <div ng-show="showValidationFailMessage">
+      <p style="color: red">{{createValidationFailedMessage}}</p>
+    </div>
+    <div class="contacts-details-content clearfix">
+      <div class="col-md-8">
+        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
+        <div class="col-md-6">
+          <!--<p>Rollover: <span>Yes</span></p>-->
+          <!--<p>Included After Hours: <span>No</span></p>-->
+          <!--<p>Renewal Notice: <span>Yes</span></p>-->
+          <p>Start Date: <span>{{parseDate(serviceContract.startDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+        </div>
+        <div class="col-md-6">
+          <p>Expire Date: <span>{{parseDate(serviceContract.endDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contacts-details-content-price">
+        </div>
+      </div>
+      <div class="col-md-6 pull-right">
+        <div style="margin-right: 0;" class="pull-right btn btn-primary btn-create" ng-click="terminateAndCopy()">Terminate and copy</div>
+        <div class="pull-right btn btn-primary btn-create" ng-click="terminateContract()">
+          Terminate and close
+        </div>
+      </div>
     </div>
   </div>
+
 </div>
