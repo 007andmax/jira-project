@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.serviceAgreements').controller('serviceContractCtrl',
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
-      'ProductsService', '$filter', '$timeout', 'TaxesService', '$q',
+      'ProductsService', '$filter', '$timeout', 'TaxesService', '$q', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
-                ProductsService, $filter, $timeout, TaxesService, $q) {
+                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
         $scope.serviceContractType = {
@@ -88,34 +88,47 @@
 
         }
 
-        $scope.NewServiceContractServices = {
-          name: null,
-          count: null,
-          rate: null,
-          taxIds: [],
-          taxes: $scope.addDefaultTaxes()
-        };
+        preCreateFirstServicesEntities();
 
-        $scope.newProductExpense = {
-          name: null,
-          quantity: null,
-          salePrice: null
-        };
+        function preCreateFirstServicesEntities() {
 
-        $scope.newServiceExpense = {
-          name: null,
-          quantity: null,
-          description: null,
-          date: null
-        };
+          $scope.NewServiceContractServices = {
+            name: null,
+            count: null,
+            rate: null,
+            taxIds: [],
+            taxes: $scope.addDefaultTaxes()
+          };
 
-        $scope.newService = {
-          name: '',
-          rate: 0,
-          billable: false,
-          taxIds: [],
-          taxes: $scope.addDefaultTaxes()
-        };
+          if($scope.serviceContract.billType === 'DEVICE') {
+            $scope.NewServiceContractServices.name = 'Managed workstations';
+          } else if($scope.serviceContract.billType === 'USER') {
+            $scope.NewServiceContractServices.name = 'Managed users';
+          }
+
+          $scope.newProductExpense = {
+            name: null,
+            quantity: null,
+            salePrice: null
+          };
+
+          $scope.newServiceExpense = {
+            name: null,
+            quantity: null,
+            description: null,
+            date: null
+          };
+
+          $scope.newService = {
+            name: '',
+            rate: 0,
+            billable: false,
+            taxIds: [],
+            taxes: $scope.addDefaultTaxes()
+          };
+        }
+
+
 
         $scope.formattingDateForServiceExpenses = function (date) {
           var d = new Date(date);
@@ -271,6 +284,15 @@
 
         $scope.changeContractType = function (type) {
           $scope.serviceContract.billType = type;
+          if($scope.serviceContract.billType === 'DEVICE') {
+            if(!$scope.serviceContract.serviceContractServices.length>0) {
+              $scope.NewServiceContractServices.name = 'Managed workstations';
+            }
+          } else if($scope.serviceContract.billType === 'USER') {
+            if(!$scope.serviceContract.serviceContractServices.length>0) {
+              $scope.NewServiceContractServices.name = 'Managed users';
+            }
+          }
         };
 
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
@@ -735,8 +757,21 @@
 
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
-
-          validateServiceContractServices(serviceContract);
+          var emptyServices = true;
+          if(($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length) ||
+            ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.length) ||
+            ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.length) ||
+            ($scope.newService && $scope.newService.name && $scope.newService.name.length)) {
+            emptyServices = false;
+            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
+            var confirmButton = 'Yes, create';
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
+              emptyServices = true;
+              validateServiceContractServices(serviceContract);
+            })
+          } else {
+            validateServiceContractServices(serviceContract);
+          }
 
           function validateServiceContractServices(serviceContract) {
             var listOfNames = [];

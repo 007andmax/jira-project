@@ -20,6 +20,12 @@
           SERVICE_CONTRACT: 'Service Contract'
         };
 
+        $scope.contractStatusDictionary ={
+          CURRENT: 'Current',
+          PENDING: 'Pending',
+          TERMINATED: 'Terminated'
+        };
+
 
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;
