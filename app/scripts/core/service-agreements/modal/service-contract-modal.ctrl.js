@@ -38,6 +38,7 @@
         var month = 30 * day;
 
         $scope.totsl = 0;
+        $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
 
         if ($scope.editMode) {
@@ -100,6 +101,33 @@
 
         function preCreateFirstServicesEntities() {
 
+          $scope.presettupUsersServices = [
+            {
+              name: 'Managed users',
+              count: 0,
+              rate: 0,
+              taxIds: [],
+              taxes: $scope.addDefaultTaxes()
+            }
+          ];
+
+          $scope.presettupDeviceServices = [
+            {
+              name: 'Managed workstations',
+              count: 0,
+              rate: 0,
+              taxIds: [],
+              taxes: $scope.addDefaultTaxes()
+            },
+            {
+              name: 'Managed servers',
+              count: 0,
+              rate: 0,
+              taxIds: [],
+              taxes: $scope.addDefaultTaxes()
+            }
+          ];
+
           $scope.NewServiceContractServices = {
             name: null,
             count: null,
@@ -108,11 +136,11 @@
             taxes: $scope.addDefaultTaxes()
           };
 
-          if($scope.serviceContract.billType === 'DEVICE') {
-            $scope.NewServiceContractServices.name = 'Managed workstations';
-          } else if($scope.serviceContract.billType === 'USER') {
-            $scope.NewServiceContractServices.name = 'Managed users';
-          }
+          // if($scope.serviceContract.billType === 'DEVICE') {
+          //   $scope.NewServiceContractServices.name = 'Managed workstations';
+          // } else if($scope.serviceContract.billType === 'USER') {
+          //   $scope.NewServiceContractServices.name = 'Managed users';
+          // }
 
           $scope.newProductExpense = {
             name: null,
@@ -315,17 +343,17 @@
 
         $scope.changeContractType = function (type) {
           $scope.serviceContract.billType = type;
-          if($scope.serviceContract.billType === 'DEVICE') {
-            if(!$scope.serviceContract.serviceContractServices.length>0) {
-              $scope.NewServiceContractServices.name = 'Managed workstations';
-            }
-          } else if($scope.serviceContract.billType === 'USER') {
-            if(!$scope.serviceContract.serviceContractServices.length>0) {
-              $scope.NewServiceContractServices.name = 'Managed users';
-            }
-          } else if($scope.serviceContract.billType === 'OTHER') {
-            $scope.NewServiceContractServices.name = '';
-          }
+          // if($scope.serviceContract.billType === 'DEVICE') {
+          //   if(!$scope.serviceContract.serviceContractServices.length>0) {
+          //     $scope.NewServiceContractServices.name = 'Managed workstations';
+          //   }
+          // } else if($scope.serviceContract.billType === 'USER') {
+          //   if(!$scope.serviceContract.serviceContractServices.length>0) {
+          //     $scope.NewServiceContractServices.name = 'Managed users';
+          //   }
+          // } else if($scope.serviceContract.billType === 'OTHER') {
+          //   $scope.NewServiceContractServices.name = '';
+          // }
         };
 
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
@@ -388,6 +416,26 @@
 
         $scope.isTabOpened = function (tab) {
           return $scope.openedTab === tab
+        };
+
+        $scope.deletePresettupDeviceService = function(service) {
+          for (var i = 0; i < $scope.presettupDeviceServices.length; i++) {
+            if ($scope.presettupDeviceServices[i] == service) {
+              $scope.presettupDeviceServices.splice(i, 1);
+              break;
+            }
+          }
+          $scope.calculateTotalAmount();
+        };
+
+        $scope.deletePresettupUserService = function(service) {
+          for (var i = 0; i < $scope.presettupUsersServices.length; i++) {
+            if ($scope.presettupUsersServices[i] == service) {
+              $scope.presettupUsersServices.splice(i, 1);
+              break;
+            }
+          }
+          $scope.calculateTotalAmount();
         };
 
 
@@ -674,10 +722,27 @@
                   totalAmount = totalAmount+scs;
                 }
               }
+              if($scope.serviceContract.billType === 'USER') {
+                if($scope.presettupUsersServices.length>0) {
+                  for(var u=0; u<$scope.presettupUsersServices.length; u++) {
+                    if($scope.presettupUsersServices[u].count && $scope.presettupUsersServices[u].rate) {
+                      var ups = $scope.presettupUsersServices[u].count * $scope.presettupUsersServices[u].rate;
+                      totalAmount = totalAmount+ups;
+                    }
+                  }
+                }
+              } else if($scope.serviceContract.billType === 'DEVICE') {
+                if($scope.presettupDeviceServices.length>0) {
+                  for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
+                    if($scope.presettupDeviceServices[d].count && $scope.presettupDeviceServices[d].rate) {
+                      var dps = $scope.presettupDeviceServices[d].count * $scope.presettupDeviceServices[d].rate;
+                      totalAmount = totalAmount+dps;
+                    }
+                  }
+                }
+              }
             }
           }
-
-
           $scope.total = totalAmount;
         };
 
@@ -743,6 +808,40 @@
                   }
                 }
                 servContract.services.push(serv);
+              }
+            }
+
+            if(serviceContract.billType === 'DEVICE' && $scope.presettupDeviceServices.length>0) {
+              for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
+                var dServ = {
+                  name: $scope.presettupDeviceServices[d].name,
+                  rate: $scope.presettupDeviceServices[d].rate,
+                  count: $scope.presettupDeviceServices[d].count,
+                  taxIds: []
+                };
+                if ($scope.presettupDeviceServices[d].taxes && $scope.presettupDeviceServices[d].taxes.length) {
+                  for (var j = 0; j < $scope.presettupDeviceServices[d].taxes.length; j++) {
+                    dServ.taxIds.push($scope.presettupDeviceServices[d].taxes[j].id);
+                  }
+                }
+                servContract.serviceContractServices.push(dServ);
+              }
+            }
+
+            if(serviceContract.billType === 'USER' && $scope.presettupUsersServices.length>0) {
+              for(var d=0; d<$scope.presettupUsersServices.length; d++) {
+                var uServ = {
+                  name: $scope.presettupUsersServices[d].name,
+                  rate: $scope.presettupUsersServices[d].rate,
+                  count: $scope.presettupUsersServices[d].count,
+                  taxIds: []
+                };
+                if ($scope.presettupUsersServices[d].taxes && $scope.presettupUsersServices[d].taxes.length) {
+                  for (var j = 0; j < $scope.presettupUsersServices[d].taxes.length; j++) {
+                    uServ.taxIds.push($scope.presettupUsersServices[d].taxes[j].id);
+                  }
+                }
+                servContract.serviceContractServices.push(uServ);
               }
             }
 
