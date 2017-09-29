@@ -931,6 +931,20 @@
               for (var i = 0; i < serviceContract.serviceContractServices.length; i++) {
                 listOfNames.push(serviceContract.serviceContractServices[i].name);
               }
+              if(serviceContract.billType == 'DEVICE') {
+                if($scope.presettupDeviceServices.length>0) {
+                  for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
+                    listOfNames.push($scope.presettupDeviceServices[d].name);
+                  }
+                }
+
+              } else if(serviceContract.billType == 'USER') {
+                if($scope.presettupUsersServices.length>0) {
+                  for(var u=0; u<$scope.presettupUsersServices.length; u++) {
+                    listOfNames.push($scope.presettupUsersServices[u].name);
+                  }
+                }
+              }
             }
             if(serviceContract.services.length>0) {
               for (var n = 0; n < serviceContract.services.length; n++) {
