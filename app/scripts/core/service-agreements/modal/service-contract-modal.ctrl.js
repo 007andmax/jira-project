@@ -749,8 +749,7 @@
         function convertMinutesToHour(minutes) {
           var hours = Math.floor(minutes/60);
           var part = (minutes%60) / 60;
-          var result = hours + part;
-          return result;
+          return hours + part;
         }
 
         function createServiceContract(serviceContract) {

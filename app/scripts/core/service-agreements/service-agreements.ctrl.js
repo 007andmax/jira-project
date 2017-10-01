@@ -27,6 +27,7 @@
         };
 
 
+
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;
 
@@ -235,7 +236,7 @@
         } else {
           return false;
         }
-      }
+      };
 
       $scope.disabledCreateButtonInCreateNewModal = function () {
         var disable = false;

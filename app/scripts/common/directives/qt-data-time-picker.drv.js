@@ -27,6 +27,8 @@
               }
             };
 
+
+
             if (scope.minDate) {
               options.minDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
             }
@@ -59,7 +61,8 @@
 
 
             element.bind('dp.change', function (e) {
-              ctrl.$setViewValue(e.date._d);
+              var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
+              ctrl.$setViewValue(formattedDate);
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 
