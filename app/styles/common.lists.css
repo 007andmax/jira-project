@@ -4661,14 +4661,14 @@ Devices tab
   vertical-align: middle;
 }
 
-.service-contract-details .col-md-3 .icn-remove-old {
+.service-contract-details .interval-agreement .icn-remove-old {
   top: 36px;
   position: absolute;
   right: 15px;
   cursor: pointer;
 }
 
-.service-contract-details .col-md-3 .icn-caret-gray {
+.service-contract-details .interval-agreement .icn-caret-gray {
   right: 15px;
 }
 
@@ -4689,7 +4689,7 @@ Devices tab
   margin-bottom: 15px;
 }
 
-.service-contract-details .col-md-3 input {
+.service-contract-details .interval-agreement input {
   cursor: pointer;
 }
 
@@ -4706,6 +4706,9 @@ Devices tab
   top: 35px !important;
   cursor: pointer;
   pointer-events: none;
+}
+.block-time .report-calendar{
+  right: 10px;
 }
 
 .contracts .service-bill .icn-caret-gray {
@@ -4726,6 +4729,7 @@ Devices tab
   color: #16A4FA;
   position: relative;
   border-radius: 3px;
+  width: 84%;
 }
 
 .info-block:before {
@@ -4767,24 +4771,30 @@ Devices tab
   left: -165px;
 }
 
-.tax-agreement {
+.tax-agreement,
+.price-agreement,
+.interval-agreement,
+.service-name-agreement{
   display: inline-block;
-  width: 120px;
   float: left;
   padding: 0 15px;
   position: relative;
 }
+.tax-agreement {
+  width: 120px;
+}
 .price-agreement {
-  display: inline-block;
   width: 135px;
-  float: left;
-  padding: 0 15px;
-  position: relative;
+}
+.interval-agreement{
+  width: 157px;
 }
 .service-name-agreement {
   width: 335px !important;
 }
-
+.block-time .service-name-agreement{
+  width: 310px!important;
+}
 .hourly .not-yet-hourly .btn {
   display: block;
   width: 190px;
@@ -4917,7 +4927,7 @@ Devices tab
   padding: 13px 15px;
 }
 
-.bill-hide-content-item .checkbox-dropdown {
+.service-agreement-modal .checkbox-dropdown {
   min-width: 160px;
 }
 
@@ -4939,9 +4949,11 @@ Devices tab
 }
 
 .contacts-details {
-  padding: 55px 10px 0;
+  padding: 75px 10px 0;
 }
-
+.read-only .contacts-details{
+  padding-top: 0;
+}
 .contacts-details-content p {
   width: 100%;
   padding-bottom: 15px;

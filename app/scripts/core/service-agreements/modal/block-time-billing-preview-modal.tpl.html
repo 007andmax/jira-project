@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="col-md-12"></div>
-      <div class="col-md-3">
+      <div class="interval-agreement">
         <div class="form-group">
           Interval:
           <input custom-style="{'width':'100%'}" type="text" class="form-control default-cursor"
@@ -28,7 +28,7 @@
                  readonly onclick="return false">
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="interval-agreement">
         <div class="form-group">
           Select Date:
 
@@ -38,7 +38,7 @@
           <i class="report-calendar"></i>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="interval-agreement">
         <div class="form-group">
           End Date:
 
@@ -61,7 +61,7 @@
         <!--Select how you bill your customer-->
       </h4>
       <div class="col-md-12">
-        <div class="col-md-2">
+        <div class="interval-agreement">
           <div class="form-group">
             Included hours:
             <input placeholder="Hours"
@@ -70,7 +70,7 @@
                    ng-model="blockTimeContract.includedHours" readonly>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="interval-agreement">
           <div class="form-group before-icon">
             Block Rate:
             <input placeholder="0.00"
@@ -80,7 +80,7 @@
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="interval-agreement">
           <div class="form-group before-icon">
             Total Amount:
             <input placeholder="Total"
@@ -91,17 +91,18 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="col-md-4">
+        <div class="col-md-4" style="width: 193px;padding-right: 0;">
           <div class="form-group before-icon">
-            Rate exceding block time:
-            <input placeholder="0.00"
+            Rate exceeding block time:
+            <input style="width: 127px;"
+                   placeholder="0.00"
                    type="text"
                    class="form-control"
                    ng-model="blockTimeContract.rateExceeding"
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required readonly>
           </div>
         </div>
-        <div class="col-md-4 form-group">
+        <div class="tax-agreement form-group">
           <div>
             Select taxes
             <select-taxes taxes="taxes" entity="blockTimeContract" is-preview-mode="true"
@@ -121,7 +122,7 @@
 
         <div class="bill-hide-content-item clearfix"
              ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
-          <div class="col-md-5 form-group">
+          <div class="col-md-7 form-group">
             <input placeholder="Service Name"
                    type="text" class="form-control"
                    ng-model="blockTimeService.name"
@@ -140,8 +141,8 @@
 
             Enable Time Rollover of unused hours
           </label>
-          <div class="service-bill-hide-content" ng-show="blockTimeContract.enableTimeRollover">
-            <div class="form-group col-md-2">
+          <div class="service-bill-hide-content " ng-show="blockTimeContract.enableTimeRollover">
+            <div class="form-group price-agreement">
               <input class="form-control" type="text"
                      placeholder="Max Hours"
                      ng-model="blockTimeContract.maxRolloverHours"
@@ -162,29 +163,29 @@
             <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
               contract time</p>
 
-            <div class="col-md-5">Service name</div>
-            <div class="col-md-2">Per hour</div>
-            <div class="col-md-2 text-center">Make Billable</div>
-            <div class="col-md-3 text-center">Tax</div>
+            <div class="service-name-agreement">Service name</div>
+            <div class="price-agreement">Per hour</div>
+            <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+            <div class="tax-agreement text-center">Tax</div>
             <!--<div class="col-md-1 text-center">Action</div>-->
 
             <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
-              <div class="col-md-5 form-group">
+              <div class="service-name-agreement form-group">
                 <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name"
                        readonly>
               </div>
-              <div class="col-md-2 fourm-group before-icon">
+              <div class="price-agreement fourm-group before-icon">
                 <input placeholder="0.00" type="text" class="form-control"
                        ng-model="contractService.rate"
                        hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
               </div>
-              <div class="col-md-2 form-group text-center">
+              <div class="col-md-1 form-group text-center">
                 <label class="control checkbox default-cursor">
                   <input ng-model="contractService.billable" type="checkbox" onclick="return false">
                   <span class="control-indicator"></span>
                 </label>
               </div>
-              <div class="col-md-3 form-group text-center">
+              <div class="tax-agreement form-group text-center">
                 <div>
                   <div>
                     <select-taxes taxes="taxes" entity="contractService"
