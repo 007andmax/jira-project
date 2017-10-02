@@ -196,9 +196,9 @@
         }
 
         function changeDefaultDateForServices() {
-          var servicePickDate = $scope.newServiceExpense.date;
-          var startDate = $scope.serviceContract.startDate;
-          var pickedDate = $scope.newServiceExpense.date;
+          var servicePickDate = new Date($scope.newServiceExpense.date);
+          var startDate = new Date($scope.serviceContract.startDate);
+          var pickedDate = new Date($scope.newServiceExpense.date);
           if(servicePickDate.getTime() < startDate.getTime()) {
             $scope.newServiceExpense.date = $scope.serviceContract.startDate;
             $scope.defaultDareForServiceExpense = startDate.getTime();
