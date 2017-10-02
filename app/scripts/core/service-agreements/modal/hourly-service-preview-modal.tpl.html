@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="col-md-12"></div>
-      <div class="col-md-3" style="margin-right: 33px;">
+      <div class="col-md-3" style="margin-right: 25px;">
         <div class="form-group">
           Select Date:
           <input type="text"
@@ -48,26 +48,25 @@
 
     <div class="service-bill-hide-content clearfix">
 
-      <div class="col-md-5">Service name</div>
-      <div class="col-md-2">Per hour</div>
-      <div class="col-md-2 text-center">Make Billable</div>
-      <div class="col-md-3 text-center">Tax</div>
-      <!--<div class="col-md-1 text-center">Action</div>-->
+      <div class="col-md-6">Service name</div>
+      <div class="price-agreement">Per hour</div>
+      <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+      <div class="tax-agreement text-center">Tax</div>
       <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
-        <div class="col-md-5 form-group">
+        <div class="col-md-6 form-group">
           <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly ng-maxlength="30">
         </div>
-        <div class="col-md-2 fourm-group before-icon">
+        <div class="price-agreement fourm-group before-icon">
           <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly>
         </div>
-        <div class="col-md-2 fourm-group text-center">
+        <div class="col-md-1 fourm-group text-center">
           <label class="control checkbox default-cursor">
             <input ng-show="service.billable" ng-model="service.billable" type="checkbox" onclick="return false;">
             <!--<input ng-show="!service.billable" type="checkbox" onclick="return false;">-->
             <span class="control-indicator"></span>
           </label>
         </div>
-        <div class="col-md-3 fourm-group text-center">
+        <div class="tax-agreement fourm-group text-center">
           <div>
             <div>
               <!--<i class="icn-sm icn-tax" ng-hide="service.taxes.length > 0"> </i>-->

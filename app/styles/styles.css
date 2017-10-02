@@ -9996,7 +9996,11 @@ button.close {
     width: 900px;
   }
 }
-
+.modal-md{
+  width: 750px!important;
+  left: calc(50% - 375px)!important;
+  height: 100%;
+}
 .modal-spam .modal-dialog {
   width: 422px;
   top: 50%;

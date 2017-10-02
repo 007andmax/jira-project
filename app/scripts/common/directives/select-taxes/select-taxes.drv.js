@@ -72,7 +72,7 @@
     function getSelectedTaxNames() {
       return $ctrl.entity.taxes.map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
-        }).join(', ') || 'No taxes selected';
+        }).join(', ') || 'No taxes';
     }
 
     function createSelectedTaxes(taxes) {

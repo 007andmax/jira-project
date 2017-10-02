@@ -2449,14 +2449,17 @@ Devices tab
   margin-right: -2px;
   margin-left: 17px;
 }
-.contracts .update-content{
+
+.contracts .update-content {
   margin-bottom: 15px;
 }
-.contracts .update-content .x-mark{
+
+.contracts .update-content .x-mark {
   top: 2px !important;
 }
+
 .service-form-wrapper .select-taxes-drv,
-.contracts .select-taxes-drv{
+.contracts .select-taxes-drv {
   width: 100%;
 }
 
@@ -4689,22 +4692,26 @@ Devices tab
 .service-contract-details .col-md-3 input {
   cursor: pointer;
 }
+
 .readonly .service-contract-details input,
-.readonly .service-contract-details label{
+.readonly .service-contract-details label {
   cursor: default;
 }
+
 .service-form-wrapper .report-calendar,
 .service-form-wrapper .icn-caret-gray,
 .contracts .icn-caret-gray,
-.contracts .report-calendar{
+.contracts .report-calendar {
   position: absolute;
   top: 35px !important;
   cursor: pointer;
   pointer-events: none;
 }
-.contracts .service-bill .icn-caret-gray{
-  top: 12px!important;
+
+.contracts .service-bill .icn-caret-gray {
+  top: 12px !important;
 }
+
 .service-form-wrapper .icn-caret-gray {
   right: 10px;
 }
@@ -4750,20 +4757,32 @@ Devices tab
   text-align: center;
   padding: 90px 0;
 }
-.contracts .bill-hide-content-item{
-  padding: 0!important;
+
+.contracts .bill-hide-content-item {
+  padding: 0 !important;
 }
-.hourly .bill-hide-content-item .col-md-3 .dropdown-menu {
+
+.hourly .bill-hide-content-item .tax-agreement .dropdown-menu {
   top: -7px;
-  left: -185px;
+  left: -165px;
 }
 
-.hourly .bill-hide-content-item .col-md-2 .dropdown-menu label .icn-label-save {
-  right: 85px !important;
+.tax-agreement {
+  display: inline-block;
+  width: 120px;
+  float: left;
+  padding: 0 15px;
+  position: relative;
 }
-
-.hourly.read-only .bill-hide-content-item .col-md-2 .dropdown-menu {
-  top: -65px;
+.price-agreement {
+  display: inline-block;
+  width: 135px;
+  float: left;
+  padding: 0 15px;
+  position: relative;
+}
+.service-name-agreement {
+  width: 335px !important;
 }
 
 .hourly .not-yet-hourly .btn {
@@ -4776,9 +4795,11 @@ Devices tab
   padding-top: 15px;
   padding-left: 0;
 }
-.block-time.read-only label{
+
+.block-time.read-only label {
   cursor: default;
 }
+
 .block-time .service-bill-hide-content .before-icon:before {
   top: 5px;
   left: 25px;
@@ -4787,7 +4808,9 @@ Devices tab
 .service-bill-hide-content {
   padding-left: 25px;
 }
-
+.service-agreement-modal .service-bill-hide-content label{
+  margin: 6px;
+}
 .service-bill-hide-content label {
   margin-top: 12px;
   margin-left: 5%;
@@ -4862,10 +4885,12 @@ Devices tab
   top: 5px;
   left: 25px;
 }
-.contracts .before-icon:before{
+
+.contracts .before-icon:before {
   top: 6px;
   left: 25px;
 }
+
 .contracts .bill-hide-content-item .col-md-1 {
   text-align: center;
 }
@@ -4882,24 +4907,28 @@ Devices tab
 .bill-hide-content-item select-taxes {
   display: inline-block;
 }
-.contracts .bill-hide-content-item select-taxes{
+
+.contracts .bill-hide-content-item select-taxes {
   width: 100%;
 }
+
 .bill-hide-content-item .dropdown-menu-left label {
   min-width: 130px;
   padding: 13px 15px;
 }
 
 .bill-hide-content-item .checkbox-dropdown {
-  min-width: 130px;
+  min-width: 160px;
 }
 
 .bill-hide-content-item .icn-label-save {
-  right: 85px !important;
+  right: 65px !important;
 }
-.contracts .bill-hide-content-item .icn-label-save{
-  right: 15px!important;
+
+.contracts .bill-hide-content-item .icn-label-save {
+  right: 15px !important;
 }
+
 .service-agreement-modal input.default-cursor,
 .service-agreement-modal label.default-cursor {
   cursor: default;
@@ -4927,9 +4956,11 @@ Devices tab
   border-radius: 5px;
   text-align: center;
 }
-.contracts .contacts-details-content .col-md-8{
+
+.contracts .contacts-details-content .col-md-8 {
   padding-top: 30px;
 }
+
 .contacts-details-content .col-md-8 .col-md-12 {
   padding-top: 15px;
 }
@@ -4944,7 +4975,7 @@ Devices tab
 }
 
 .contacts-details-content .btn-primary.btn-create,
-.contacts-details-content .btn-success.btn-create{
+.contacts-details-content .btn-success.btn-create {
   margin: 0 15px 15px 0;
 }
 

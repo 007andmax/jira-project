@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="col-md-12"></div>
-        <div class="col-md-3" style="margin-right: 33px;">
+        <div class="col-md-3" style="margin-right: 26px;">
           <div class="form-group">
             Select Date:
             <input type="text"
@@ -54,29 +54,29 @@
 
       <div class="service-bill-hide-content clearfix">
 
-        <div class="col-md-4">Service name</div>
-        <div class="col-md-2">Per hour</div>
-        <div class="col-md-2 text-center">Make Billable</div>
-        <div class="col-md-3 text-center">Tax</div>
-        <div class="col-md-1 text-center">Action</div>
+        <div class="col-md-4 service-name-agreement">Service name</div>
+        <div class="price-agreement">Per hour</div>
+        <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+        <div class="tax-agreement text-center">Tax</div>
+        <div class="col-md-1 text-center" style="padding: 0;">Action</div>
         <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
-          <div class="col-md-4 form-group"
+          <div class="col-md-4 service-name-agreement form-group"
                ng-class="{'has-error': checkHourlyServiceErrorForm(service)}">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name"
                    hard-reset-pattern="serviceNamePattern" required>
           </div>
-          <div class="col-md-2 form-group before-icon">
+          <div class="price-agreement form-group before-icon">
             <input placeholder="0.00" type="text" class="form-control"
                    ng-model="service.rate"
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
           </div>
-          <div class="col-md-2 fourm-group text-center">
+          <div class="col-md-1 fourm-group text-center">
             <label class="control checkbox">
               <input ng-model="service.billable" type="checkbox">
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-md-3 form-group text-center">
+          <div class="tax-agreement form-group text-center">
             <div>
               <div>
                 <!--<i class="icn-sm icn-tax"> </i>-->
@@ -103,7 +103,7 @@
           <div ng-show="!isNameUnique(editService.name) && editService.name">
             <p style="color: red;padding-left: 15px;">Duplicate name</p>
           </div>
-          <div class="col-md-4 form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
+          <div class="col-md-4 service-name-agreement form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
 
             <input placeholder="New Service Name"
                    type="text"
@@ -113,20 +113,20 @@
                    required hard-reset-pattern="serviceNamePattern"
                    invalid-when="!isNameUnique(editService.name)">
           </div>
-          <div class="col-md-2 fourm-group before-icon">
+          <div class="price-agreement fourm-group before-icon">
             <input placeholder="0.00"
                    type="text"
                    class="form-control"
                    ng-model="editService.rate"
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
           </div>
-          <div class="col-md-2 fourm-group text-center">
+          <div class="col-md-1 fourm-group text-center">
             <label class="control checkbox">
               <input type="checkbox" ng-model="editService.billable">
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-md-3 fourm-group text-center">
+          <div class="tax-agreement fourm-group text-center">
             <div class="" ng-hide="editContract.services.length > 19">
               <div>
                 <select-taxes taxes="taxes" entity="editService" ></select-taxes>
