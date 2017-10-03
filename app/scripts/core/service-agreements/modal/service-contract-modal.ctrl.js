@@ -809,7 +809,7 @@
             servContract.startDate = sd.getTime();
 
             var ed = new Date($scope.serviceContract.endDate);
-            ed.setHours(0, 0, 0, 0);
+            ed.setHours(23, 59, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
             servContract.endDate = ed.getTime();

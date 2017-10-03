@@ -151,7 +151,7 @@
         <p style="color: red; text-align: left">{{errorMessage}}</p>
       </div>
       <div class="col-md-8" ng-show="showCreateHourlyContractValidationError">
-        <p style="color: red; text-align: left">{errorMessageCreateHourlyDuplicate}}</p>
+        <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
       </div>
       <div class="btn btn-success btn-create" ng-click="validateAndCreateHourlyContract(editService)"
            ng-disabled="dissableHourlyCreateButton()">Create
