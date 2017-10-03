@@ -2450,6 +2450,18 @@ Devices tab
   margin-left: 17px;
 }
 
+.contracts .update-content .interval-agreement {
+  padding: 0 5px;
+}
+
+.contracts .update-content [class*='col-sm-'] {
+  padding: 0 5px;
+}
+
+.contracts .update-content .form-control {
+  padding: 0 9px;
+}
+
 .contracts .update-content {
   margin-bottom: 15px;
 }
@@ -4707,7 +4719,9 @@ Devices tab
   cursor: pointer;
   pointer-events: none;
 }
-.block-time .report-calendar{
+
+.block-time .report-calendar,
+.contracts .report-calendar {
   right: 10px;
 }
 
@@ -4721,6 +4735,10 @@ Devices tab
 
 .service-contract-details p {
   margin: 0;
+}
+
+.contracts .info-block {
+  width: 100%;
 }
 
 .info-block {
@@ -4774,27 +4792,33 @@ Devices tab
 .tax-agreement,
 .price-agreement,
 .interval-agreement,
-.service-name-agreement{
+.service-name-agreement {
   display: inline-block;
   float: left;
   padding: 0 15px;
   position: relative;
 }
+
 .tax-agreement {
   width: 120px;
 }
+
 .price-agreement {
   width: 135px;
 }
-.interval-agreement{
+
+.interval-agreement {
   width: 157px;
 }
+
 .service-name-agreement {
   width: 335px !important;
 }
-.block-time .service-name-agreement{
-  width: 310px!important;
+
+.block-time .service-name-agreement {
+  width: 310px !important;
 }
+
 .hourly .not-yet-hourly .btn {
   display: block;
   width: 190px;
@@ -4818,9 +4842,11 @@ Devices tab
 .service-bill-hide-content {
   padding-left: 25px;
 }
-.service-agreement-modal .service-bill-hide-content label{
+
+.service-agreement-modal .service-bill-hide-content label {
   margin: 6px;
 }
+
 .service-bill-hide-content label {
   margin-top: 12px;
   margin-left: 5%;
@@ -4927,16 +4953,13 @@ Devices tab
   padding: 13px 15px;
 }
 
-.service-agreement-modal .checkbox-dropdown {
+.service-agreement-modal .checkbox-dropdown,
+.contracts .checkbox-dropdown {
   min-width: 160px;
 }
 
 .bill-hide-content-item .icn-label-save {
   right: 65px !important;
-}
-
-.contracts .bill-hide-content-item .icn-label-save {
-  right: 15px !important;
 }
 
 .service-agreement-modal input.default-cursor,
@@ -4948,12 +4971,18 @@ Devices tab
   padding-left: 25px;
 }
 
-.contacts-details {
+.block-time .contacts-details {
   padding: 75px 10px 0;
 }
-.read-only .contacts-details{
+
+.contacts-details {
+  padding: 0 10px;
+}
+
+.read-only .contacts-details {
   padding-top: 0;
 }
+
 .contacts-details-content p {
   width: 100%;
   padding-bottom: 15px;

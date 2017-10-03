@@ -25,7 +25,7 @@
     <div class="col-md-12"></div>
 
 
-    <div class="col-md-3">
+    <div class="interval-agreement">
       <div class="form-group">
         Interval:
         <input custom-style="{'width':'100%'}" type="text" class="form-control"
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="interval-agreement">
       <div class="form-group">
         Select Date:
 
@@ -50,7 +50,7 @@
         <i class="report-calendar"></i>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="interval-agreement">
       <div class="form-group">
         End Date:
 
@@ -103,11 +103,16 @@
       </div>
     </div>
     <div class="col-md-12"></div>
+    <div class="col-md-4" style="width: 259px;">Service name</div>
+    <div class="price-agreement">Count</div>
+    <div class="price-agreement">Price</div>
+    <div class="tax-agreement text-center">Tax</div>
+    <div class="col-md-1 text-center" style="padding: 0;">Action</div>
     <div ng-if="serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER'">
       <div ng-if="serviceContract.billType === 'DEVICE'">
         <div class="bill-hide-content-item clearfix"
              ng-repeat="presettupDeviceService in presettupDeviceServices">
-          <div class="col-md-4 form-group">
+          <div class="col-md-4 form-group" style="width: 259px;">
             <input placeholder="Enter the Name" type="text" class="form-control"
                    ng-model="presettupDeviceService.name"
                    required
@@ -115,15 +120,15 @@
                    hard-reset-pattern="serviceNamePattern"
                    invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
           </div>
-          <div class="col-md-2 fourm-group">
+          <div class="price-agreement fourm-group">
             <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
                    ng-model="presettupDeviceService.count" required ng-change="calculateTotalAmount()">
           </div>
-          <div class="col-md-2 fourm-group before-icon">
+          <div class="price-agreement fourm-group before-icon">
             <input placeholder="0.00" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
                    ng-model="presettupDeviceService.rate" required ng-change="calculateTotalAmount()">
           </div>
-          <div class="col-md-3 fourm-group">
+          <div class="tax-agreement fourm-group">
             <div class="">
               <div>
                 <select-taxes taxes="taxes" entity="presettupDeviceService"></select-taxes>
@@ -143,7 +148,7 @@
       <div ng-if="serviceContract.billType === 'USER'">
         <div class="bill-hide-content-item clearfix"
              ng-repeat="presettupUserService in presettupUsersServices">
-          <div class="col-md-4 form-group">
+          <div class="col-md-4 form-group" style="width: 259px;">
             <input placeholder="Enter the Name" type="text" class="form-control"
                    ng-model="presettupUserService.name"
                    required
@@ -151,15 +156,15 @@
                    hard-reset-pattern="serviceNamePattern"
                    invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
           </div>
-          <div class="col-md-2 fourm-group">
+          <div class="price-agreement fourm-group">
             <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
                    ng-model="presettupUserService.count" required ng-change="calculateTotalAmount()">
           </div>
-          <div class="col-md-2 fourm-group before-icon">
+          <div class="price-agreement fourm-group before-icon">
             <input placeholder="0.00" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
                    ng-model="presettupUserService.rate" required ng-change="calculateTotalAmount()">
           </div>
-          <div class="col-md-3 fourm-group">
+          <div class="tax-agreement fourm-group">
             <div class="">
               <div>
                 <select-taxes taxes="taxes" entity="presettupUserService"></select-taxes>
@@ -178,7 +183,7 @@
       </div>
       <div class="bill-hide-content-item clearfix"
            ng-repeat="serviceContractServices in serviceContract.serviceContractServices">
-        <div class="col-md-4 form-group">
+        <div class="col-md-4 form-group" style="width: 259px;">
           <input placeholder="Enter the Name" type="text" class="form-control"
                  ng-model="serviceContractServices.name"
                  required
@@ -186,15 +191,15 @@
                  hard-reset-pattern="serviceNamePattern"
                  invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
         </div>
-        <div class="col-md-2 fourm-group">
+        <div class="price-agreement fourm-group">
           <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
                  ng-model="serviceContractServices.count" required ng-change="calculateTotalAmount()">
         </div>
-        <div class="col-md-2 fourm-group before-icon">
+        <div class="price-agreement fourm-group before-icon">
           <input placeholder="0.00" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
                  ng-model="serviceContractServices.rate" required ng-change="calculateTotalAmount()">
         </div>
-        <div class="col-md-3 fourm-group">
+        <div class="tax-agreement fourm-group">
           <div class="">
             <div>
               <select-taxes taxes="taxes" entity="serviceContractServices"></select-taxes>
@@ -221,7 +226,7 @@
           ng-show="showNewServiceContractServiceValidationError">
           <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">{{validationServiceError}}</p>
         </div>
-        <div class="col-md-4 form-group"
+        <div class="col-md-4 form-group" style="width: 259px;"
              ng-class="{'has-error': isShowingErrors(newServiceContractServicesForm, 'newServiceContractServiceName') }">
           <input placeholder="Enter the Name" type="text" class="form-control"
                  ng-model="NewServiceContractServices.name"
@@ -231,15 +236,15 @@
                  hard-reset-pattern="serviceNamePattern"
                  invalid-when="!isNewServiceContractServiceNameUnique(NewServiceContractServices.name)">
         </div>
-        <div class="col-md-2 fourm-group">
+        <div class="price-agreement fourm-group">
           <input placeholder="Count" type="text" class="form-control"
                  ng-model="NewServiceContractServices.count" hard-reset-pattern="decimalNumberPattern" required>
         </div>
-        <div class="col-md-2 fourm-group before-icon">
+        <div class="price-agreement fourm-group before-icon">
           <input placeholder="0.00" type="text" class="form-control"
                  ng-model="NewServiceContractServices.rate" hard-reset-pattern="decimalNumberPattern" required>
         </div>
-        <div class="col-md-3 fourm-group">
+        <div class="tax-agreement fourm-group">
           <select-taxes taxes="taxes" entity="NewServiceContractServices"></select-taxes>
           <!--<p>{{NewServiceContractServices.taxes.length}}</p>-->
         </div>
@@ -316,8 +321,11 @@
         </ul>
 
         <div class="update-content">
-
           <div class="tab-pane in active" ng-show="isTabOpened('product')">
+            <div class="col-sm-7">New Product</div>
+            <div class="col-sm-2">Quantity</div>
+            <div class="col-sm-2">Price</div>
+            <div class="col-sm-1 text-center" style="padding: 0;">Action</div>
             <ul class="qt-table">
 
               <li
@@ -449,6 +457,11 @@
           </div>
 
           <div class="tab-pane in active" ng-show="isTabOpened('service')">
+            <div class="col-sm-3">Service Expense</div>
+            <div class="col-sm-2">Duration</div>
+            <div class="col-sm-3" style="width: 197px;">Description</div>
+            <div class="interval-agreement">Date</div>
+            <div class="col-sm-1 text-center" style="padding: 0;">Action</div>
             <ul class="qt-table">
 
               <li
@@ -464,7 +477,7 @@
                              ng-minlength="1"
                              autocomplete="off"
                              tabindex="5"
-                             placeholder="Choose Service Expense"
+                             placeholder="Service Expense"
                              class="form-control form-control-dropdown dropdown-toggle"
                              uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
                              qt-typeahead-show-on-focus
@@ -479,18 +492,18 @@
                   <div class="col-sm-2" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false">
                     <input id="serviceExpense-quantity-picker" type="text" class="form-control"
                            placeholder="Hr(s) : Min(s)" sqp-input
-                           autocomplete="off" aria-expanded="true" required >
+                           autocomplete="off" aria-expanded="true" required>
 
                     <input type="hidden" name="serviceTime" ng-model="service.quantity" ng-required="true"/>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="col-sm-3" style="width: 197px;">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="serviceExpense.description" max-length-word="100"
                            name="serviceDescription" ng-maxlength="2000" required>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="interval-agreement">
                     <div class="dropdown">
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
                       <input type="text" qt-data-time-picker min-date="serviceContract.startDate"
@@ -530,7 +543,7 @@
                              ng-minlength="1"
                              autocomplete="off"
                              tabindex="5"
-                             placeholder="Choose Service Expense"
+                             placeholder="Service Expense"
                              class="form-control form-control-dropdown dropdown-toggle"
                              uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
                              qt-typeahead-show-on-focus
@@ -550,13 +563,13 @@
                     <input type="hidden" name="serviceTime" ng-model="newServiceExpense.quantity" ng-required="true"/>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="col-sm-3" style="width: 197px;">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="newServiceExpense.description" max-length-word="100"
                            name="serviceDescription" ng-maxlength="2000" required>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="interval-agreement">
                     <div class="dropdown">
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
                       <input style="cursor: pointer;"
@@ -610,14 +623,14 @@
 
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.isAdditionalServices">
 
-          <div class="col-md-4">Service name</div>
-          <div class="col-md-2">Per hour</div>
-          <div class="col-md-2 text-center">Make Billable</div>
-          <div class="col-md-3 text-center">Tax</div>
-          <div class="col-md-1 text-center">Action</div>
+          <div class="service-name-agreement">Service name</div>
+          <div class="price-agreement">Per hour</div>
+          <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+          <div class="tax-agreement text-center">Tax</div>
+          <div class="col-md-1 text-center" style="padding: 0;">Action</div>
 
           <div class="bill-hide-content-item clearfix" ng-repeat="service in serviceContract.services">
-            <div class="col-md-4 form-group">
+            <div class="service-name-agreement form-group">
               <input placeholder="Service Name" type="text"
                      class="form-control"
                      name="serviceName"
@@ -626,18 +639,18 @@
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      invalid-when="!isAdditionalServiceNameUnique(service.name)">
             </div>
-            <div class="col-md-2 fourm-group before-icon">
+            <div class="price-agreement form-group before-icon">
               <input placeholder="0.00" type="text" class="form-control"
                      ng-model="service.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
             </div>
-            <div class="col-md-2 form-group text-center">
-              <label class="control checkbox">
+            <div class="col-md-1 form-group text-center">
+              <label class="control checkbox" style="margin: 6px;">
                 <input ng-model="service.billable" type="checkbox">
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="col-md-3 form-group text-center">
+            <div class="tax-agreement form-group text-center">
               <div>
                 <div>
                   <select-taxes taxes="taxes" entity="service"></select-taxes>
@@ -645,7 +658,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-1 form-group text-center">
+            <div class="col-md-1 form-group text-center" style="padding: 0;">
               <div class="add-remove-service">
                 <div ng-click="deleteService(service)">
                   <i class="icon-sm icn-delete"></i>
@@ -667,7 +680,7 @@
             <div ng-show="showNewServiceValidationError">
               <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
             </div>
-            <div class="col-md-4 form-group"
+            <div class="service-name-agreement form-group"
                  ng-class="{'has-error': isShowingErrors(newServiceForm, 'newServiceName') }">
               <input placeholder="New Additional Service name"
                      type="text"
@@ -679,20 +692,20 @@
                      invalid-when="!isAdditionalServiceNameUnique(newService.name)">
 
             </div>
-            <div class="col-md-2 fourm-group before-icon">
+            <div class="price-agreement fourm-group before-icon">
               <input placeholder="0.00"
                      type="text"
                      class="form-control"
                      ng-model="newService.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
             </div>
-            <div class="col-md-2 fourm-group text-center">
+            <div class="col-md-1 fourm-group text-center" style="padding: 0;">
               <label class="control checkbox">
                 <input type="checkbox" ng-model="newService.billable">
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="col-md-3 fourm-group text-center">
+            <div class="tax-agreement fourm-group text-center">
               <div class="">
                 <div>
                   <select-taxes taxes="taxes" entity="newService"></select-taxes>
@@ -700,7 +713,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-1 fourm-group text-center">
+            <div class="col-md-1 fourm-group text-center" style="padding: 0;">
               <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
                 <div ng-click="addNewService(newServiceForm, newService)">
                   <i class="icon-sm icn-add-action"></i>
