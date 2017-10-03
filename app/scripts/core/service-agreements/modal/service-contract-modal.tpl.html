@@ -127,7 +127,7 @@
           </div>
           <div class="price-agreement fourm-group before-icon">
             <input placeholder="0.00" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
-                   ng-model="presettupDeviceService.rate" required ng-change="calculateTotalAmount()">
+                   ng-model="presettupDeviceService.rate" required ng-change="calculateTotalAmount()" qt-to-fixed="2">
           </div>
           <div class="tax-agreement fourm-group">
             <div class="">
@@ -163,7 +163,7 @@
           </div>
           <div class="price-agreement fourm-group before-icon">
             <input placeholder="0.00" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
-                   ng-model="presettupUserService.rate" required ng-change="calculateTotalAmount()">
+                   ng-model="presettupUserService.rate" required ng-change="calculateTotalAmount()" qt-to-fixed="2">
           </div>
           <div class="tax-agreement fourm-group">
             <div class="">
@@ -198,7 +198,7 @@
         </div>
         <div class="price-agreement fourm-group before-icon">
           <input placeholder="0.00" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
-                 ng-model="serviceContractServices.rate" required ng-change="calculateTotalAmount()">
+                 ng-model="serviceContractServices.rate" required ng-change="calculateTotalAmount()" qt-to-fixed="2">
         </div>
         <div class="tax-agreement fourm-group">
           <div class="">
@@ -243,7 +243,7 @@
         </div>
         <div class="price-agreement fourm-group before-icon">
           <input placeholder="0.00" type="text" class="form-control"
-                 ng-model="NewServiceContractServices.rate" hard-reset-pattern="decimalNumberPattern" required>
+                 ng-model="NewServiceContractServices.rate" hard-reset-pattern="decimalNumberPattern" required qt-to-fixed="2">
         </div>
         <div class="tax-agreement fourm-group">
           <select-taxes taxes="taxes" entity="NewServiceContractServices"></select-taxes>

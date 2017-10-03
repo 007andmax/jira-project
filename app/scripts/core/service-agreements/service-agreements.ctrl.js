@@ -23,7 +23,8 @@
         $scope.contractStatusDictionary ={
           CURRENT: 'Current',
           PENDING: 'Pending',
-          TERMINATED: 'Terminated'
+          TERMINATED: 'Terminated',
+          EXPIRED: 'Expired'
         };
 
 
@@ -161,6 +162,7 @@
       $scope.newServiceNameIsError = false;
       $scope.newServiceNameErrorMessage = '';
       $scope.showCreateHourlyContractValidationError = false;
+      $scope.errorMessageCreateHourlyDuplicate = 'There is another hourly agreement in this company with overlapping dates';
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -421,7 +423,7 @@
             deferred.resolve(resp)
           } else {
             $scope.showCreateHourlyContractValidationError = true;
-            $scope.errorMessage = 'There is another hourly agreement in this company with overlapping dates';
+
             deferred.reject();
           }
 
