@@ -587,7 +587,7 @@
             blockContract.startDate = sd.getTime();
 
             var ed = new Date(contractData.endDate);
-            ed.setHours(0, 0, 0, 0);
+            ed.setHours(23, 59, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
             blockContract.endDate = ed.getTime();
