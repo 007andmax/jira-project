@@ -453,6 +453,7 @@
         }
         if (duplicate) {
           $scope.showErrorInHourlyContract = true;
+          $scope.showCreateHourlyContractValidationError = false;
           $scope.errorMessage = 'You have duplicates services name';
         } else {
           $scope.showErrorInHourlyContract = false;
