@@ -160,6 +160,7 @@
       $scope.errorMessage = '';
       $scope.newServiceNameIsError = false;
       $scope.newServiceNameErrorMessage = '';
+      $scope.showCreateHourlyContractValidationError = false;
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -410,7 +411,7 @@
 
 
       function validateCrossingDatesHourly() {
-
+        $scope.showCreateHourlyContractValidationError = false;
         var deferred = $q.defer();
 
         var companyId = returnCompanyId();
@@ -419,7 +420,7 @@
           if (resp.valid == true) {
             deferred.resolve(resp)
           } else {
-            $scope.showErrorInHourlyContract = true;
+            $scope.showCreateHourlyContractValidationError = true;
             $scope.errorMessage = 'There is another hourly agreement in this company with overlapping dates';
             deferred.reject();
           }

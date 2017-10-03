@@ -103,12 +103,13 @@
       </div>
     </div>
     <div class="col-md-12"></div>
-    <div class="col-md-4" style="width: 259px;">Service name</div>
-    <div class="price-agreement">Count</div>
-    <div class="price-agreement">Price</div>
-    <div class="tax-agreement text-center">Tax</div>
-    <div class="col-md-1 text-center" style="padding: 0;">Action</div>
+
     <div ng-if="serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER'">
+      <div class="col-md-4" style="width: 259px;">Service name</div>
+      <div class="price-agreement">Count</div>
+      <div class="price-agreement">Price</div>
+      <div class="tax-agreement text-center">Tax</div>
+      <div class="col-md-1 text-center" style="padding: 0;">Action</div>
       <div ng-if="serviceContract.billType === 'DEVICE'">
         <div class="bill-hide-content-item clearfix"
              ng-repeat="presettupDeviceService in presettupDeviceServices">
@@ -331,123 +332,17 @@
               <li
                 ng-repeat="productExpense in serviceContract.productExpenses track by (product.item ? product.item.versionedId.id + $index : $index)">
 
-                <div>
-                  <div class="col-sm-7">
-                    <div uib-dropdown>
-                      <input type="text"
-                             name="productName"
-                             ng-model="productExpense.name"
-                             ng-minlength="1"
-                             autocomplete="off"
-                             tabindex="5"
-                             placeholder="New Product"
-                             class="form-control form-control-dropdown dropdown-toggle"
-                             uib-typeahead="product as product.name for product in defaultProducts |  orderBy:'name'"
-                             qt-typeahead-show-on-focus
-                             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                             value="product" hard-reset-pattern="serviceNamePattern">
-
-                      <div class="input-top-4" typeahead-input-icon="productName"></div>
-
-                    </div>
-                  </div>
-
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="Qty"
-                           ng-model="productExpense.quantity" ng-maxlength="4" required
-                           name="productQty"
-                           ng-change="calculateTotalAmount()"
-                           hard-reset-pattern="numberPattern">
-                  </div>
-
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
-                           ng-required="true" ng-model="productExpense.salePrice"
-                           hard-reset-pattern="decimalNumberPatternLow" ng-change="calculateTotalAmount()">
-                  </div>
-
-                  <div class="col-sm-1">
-                    <div class="add-remove-service">
-                      <div ng-click="deleteProductExpense(productExpense)">
-                        <i class="icon-sm icn-delete"></i>
-                      </div>
-                    </div>
-                  </div>
+                <div
+                     ng-include="'/html/scripts/core/service-agreements/modal/service-contract-modal/product-expense-list.tpl.html'"></div>
 
               </li>
 
 
               <li>
 
-                <div ng-form="newProductExpenseForm">
-                  <div ng-show="showProductExpenseError">
-                    <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
-                  </div>
-                  <div class="col-sm-7">
-                    <div uib-dropdown>
-                      <input type="text"
-                             style="cursor: pointer;"
-                             name="productName"
-                             ng-model="newProductExpense.name"
-                             ng-minlength="1"
-                             autocomplete="off"
-                             tabindex="5"
-                             placeholder="New Product"
-                             class="form-control form-control-dropdown dropdown-toggle"
-                             uib-typeahead="product as product.name for product in defaultProducts | filter:{'picked': false} | orderBy:'name'"
-                             qt-typeahead-show-on-focus
-                             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                             value="product" hard-reset-pattern="serviceNamePattern">
+                <div
+                     ng-include="'/html/scripts/core/service-agreements/modal/service-contract-modal/new-product-expense.tpl.html'"></div>
 
-                      <div class="input-top-4" typeahead-input-icon="productName"></div>
-
-                      <!--<div products-list id="product-list-cont"-->
-                      <!--click-outside="closeDropdown()" outside-if-not="product-list-cont">-->
-
-                      <!--<div>-->
-
-                      <!--<input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input-->
-                      <!--placeholder="Product" autocomplete="off">-->
-
-                      <!--<input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input-->
-                      <!--placeholder="Search or Add Product" autocomplete="off" ng-model="newProductExpense.name">-->
-
-                      <!--<i class="icn-sm icn-caret-gray"></i>-->
-                      <!--</div>-->
-
-                      <!--<input type="hidden" name="product" ng-required="true">-->
-
-                      <!--<div class="nano dropdown-menu custom-product-list" pl-conteiner-->
-                      <!--ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>-->
-
-                      <!--</div>-->
-
-
-                    </div>
-                  </div>
-
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="Qty"
-                           ng-model="newProductExpense.quantity" ng-maxlength="4" required
-                           name="productQty"
-
-                           hard-reset-pattern="numberPattern">
-                  </div>
-
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
-                           ng-required="true" ng-model="newProductExpense.salePrice"
-                           hard-reset-pattern="decimalNumberPatternLow">
-                  </div>
-
-                  <div class="col-sm-1">
-                    <div class="add-remove-service">
-                      <div ng-click="addProductExpense(newProductExpenseForm, newProductExpense)">
-                        <i class="icon-sm icn-add-action"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
               </li>
 
@@ -744,7 +639,7 @@
       </div>
       <div class="col-md-4">
         <div class="contacts-details-content-price">
-          Total: ${{total}}
+          Total: {{ (total | currency: '$': 2) || '$0.00' }}
         </div>
       </div>
       <div class="btn btn-lg btn-success btn-create pull-right" ng-disabled="!disableCreateButton()"

@@ -34,6 +34,8 @@
 
         $scope.openedTab = 'product';
 
+
+
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
 
@@ -92,9 +94,25 @@
           for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
-          // $timeout(function () {
-          //   $scope.calculateTotalAmount()
-          // }, 100);
+
+          $timeout(function () {
+            if($scope.serviceContract.productExpenses.length>0) {
+              for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
+                for(var w=0; w<$scope.autocompleteData.length; w++) {
+                  for(var v=0; v<$scope.autocompleteData[w].products.length; v++) {
+                    //console.log($scope.autocompleteData[w].products[v].versionedId.id, $scope.serviceContract.productExpenses[p].productId);
+                    if($scope.autocompleteData[w].products[v].versionedId.id ==  $scope.serviceContract.productExpenses[p].productId) {
+                      $scope.serviceContract.productExpenses[p].name = $scope.autocompleteData[w].products[v].description;
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }, 1000);
+
+
+
         }
 
         preCreateFirstServicesEntities();
@@ -313,32 +331,32 @@
           }
         });
 
-        ProductsService.getProductsByCompany($scope, returnCompanyId(), function (data) {
-          console.log('products ', data);
-          for (var i = 0; i < data.length; i++) {
-            var prod = {
-              name: data[i].description,
-              productId: data[i].versionedId.id,
-              quantity: 0,
-              salePrice: 0,
-              picked: false
-            };
-
-            $scope.defaultProducts.push(prod);
-          }
-
-          if ($scope.serviceContract.productExpenses.length > 0) {
-            for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
-              for (var j = 0; j < $scope.defaultProducts.length; j++) {
-                if ($scope.serviceContract.productExpenses[i].serviceId === $scope.defaultProducts[j].serviceId) {
-                  $scope.serviceContract.productExpenses[i].name = $scope.defaultProducts[j];
-                  $scope.defaultProducts[j].picked = true;
-                  break;
-                }
-              }
-            }
-          }
-        });
+        // ProductsService.getProductsByCompany($scope, returnCompanyId(), function (data) {
+        //   console.log('products ', data);
+        //   for (var i = 0; i < data.length; i++) {
+        //     var prod = {
+        //       name: data[i].description,
+        //       productId: data[i].versionedId.id,
+        //       quantity: 0,
+        //       salePrice: 0,
+        //       picked: false
+        //     };
+        //
+        //     $scope.defaultProducts.push(prod);
+        //   }
+        //
+        //   if ($scope.serviceContract.productExpenses.length > 0) {
+        //     for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
+        //       for (var j = 0; j < $scope.defaultProducts.length; j++) {
+        //         if ($scope.serviceContract.productExpenses[i].serviceId === $scope.defaultProducts[j].serviceId) {
+        //           $scope.serviceContract.productExpenses[i].name = $scope.defaultProducts[j];
+        //           $scope.defaultProducts[j].picked = true;
+        //           break;
+        //         }
+        //       }
+        //     }
+        //   }
+        // });
 
 
         $scope.changeContractType = function (type) {
@@ -482,10 +500,13 @@
           $scope.calculateTotalAmount();
         };
 
+        $scope.selectProduct = function(product) {
+          $scope.newProductExpense.name = product;
+        };
 
         $scope.addProductExpense = function (form, productExpense) {
 
-          if (form.$valid) {
+          if (form.$valid && productExpense.name) {
 
             var newProductExpense = {
               name: productExpense.name,
@@ -879,7 +900,7 @@
               for (var t = 0; t < serviceContract.productExpenses.length; t++) {
                 if (serviceContract.productExpenses[t] && serviceContract.productExpenses[t].name) {
                   var prodExp = {
-                    productId: serviceContract.productExpenses[t].name.productId,
+                    productId: serviceContract.productExpenses[t].name.versionedId.id,
                     quantity: serviceContract.productExpenses[t].quantity,
                     salePrice: serviceContract.productExpenses[t].salePrice
                   };
