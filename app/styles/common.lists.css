@@ -2450,7 +2450,8 @@ Devices tab
   margin-left: 17px;
 }
 
-.contracts .update-content .interval-agreement {
+.contracts .update-content .interval-agreement,
+.contracts .update-content .price-agreement{
   padding: 0 5px;
 }
 
@@ -4814,7 +4815,9 @@ Devices tab
 .service-name-agreement {
   width: 335px !important;
 }
-
+.readonly .service-name-agreement{
+  width: 394px!important;
+}
 .block-time .service-name-agreement {
   width: 310px !important;
 }
@@ -5019,7 +5022,9 @@ Devices tab
 .contacts-details-content .btn-success.btn-create {
   margin: 0 15px 15px 0;
 }
-
+.contracts .contacts-details-content .btn-primary.btn-create{
+  margin: 0 0 15px;
+}
 .contacts-details-content .btn {
   margin: 0 auto;
 }

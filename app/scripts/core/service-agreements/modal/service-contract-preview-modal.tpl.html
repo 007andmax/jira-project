@@ -76,24 +76,28 @@
     </div>
     <div class="col-md-12"></div>
     <div ng-if="serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER'">
+      <div class="col-md-4" style="width: 318px;">Service name</div>
+      <div class="price-agreement">Count</div>
+      <div class="price-agreement">Price</div>
+      <div class="tax-agreement text-center">Tax</div>
       <div class="bill-hide-content-item clearfix"
            ng-repeat="serviceContractServices in serviceContract.serviceContractServices">
-        <div class="col-md-4 form-group">
+        <div class="col-md-4 form-group" style="width: 318px;">
           <input placeholder="Enter the Name" type="text" class="form-control"
                  ng-model="serviceContractServices.name"
                  required
                  ng-minlength="1"
                  hard-reset-pattern="serviceNamePattern" readonly>
         </div>
-        <div class="col-md-2 fourm-group">
+        <div class="price-agreement fourm-group">
           <input placeholder="Count" type="text" class="form-control"
                  ng-model="serviceContractServices.count" required readonly>
         </div>
-        <div class="col-md-2 fourm-group before-icon">
+        <div class="price-agreement fourm-group before-icon">
           <input placeholder="0.00" type="text" class="form-control"
                  ng-model="serviceContractServices.rate" required readonly>
         </div>
-        <div class="col-md-3 fourm-group">
+        <div class="tax-agreement fourm-group">
           <div class="">
             <div>
               <select-taxes taxes="taxes" entity="serviceContractServices" is-preview-mode="true" style="cursor: pointer;"></select-taxes>
@@ -124,12 +128,15 @@
 
         <div class="update-content">
           <div class="tab-pane in active" ng-show="isTabOpened('product')">
+            <div class="col-sm-7" style="width: 438px;">New Product</div>
+            <div class="price-agreement">Quantity</div>
+            <div class="price-agreement">Price</div>
             <ul class="qt-table">
               <li
                 ng-repeat="productExpense in serviceContract.productExpenses track by (product.item ? product.item.versionedId.id + $index : $index)">
 
                 <div>
-                  <div class="col-sm-7">
+                  <div class="col-sm-7" style="width: 438px;">
                     <div uib-dropdown>
                       <input type="text"
                              name="productName"
@@ -146,7 +153,7 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-2">
+                  <div class="price-agreement">
                     <input style="cursor: default;"
                            type="text" class="form-control" placeholder="Qty"
                            ng-model="productExpense.quantity" ng-maxlength="4" required
@@ -154,7 +161,7 @@
                            hard-reset-pattern="numberPattern"  readonly>
                   </div>
 
-                  <div class="col-sm-2">
+                  <div class="price-agreement">
                     <input style="cursor: default;"
                            type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
                            ng-required="true" ng-model="productExpense.salePrice"
@@ -167,6 +174,10 @@
           </div>
 
           <div class="tab-pane in active" ng-show="isTabOpened('service')">
+            <div class="col-sm-3">Service Expense</div>
+            <div class="col-sm-2">Duration</div>
+            <div class="col-sm-3" style="width: 256px;">Description</div>
+            <div class="interval-agreement">Date</div>
             <ul class="qt-table">
 
               <li
@@ -198,13 +209,13 @@
                     <input type="hidden" name="serviceTime" ng-model="service.quantity" ng-required="true"/>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="col-sm-3" style="width: 256px;">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="serviceExpense.description" max-length-word="100"
                            name="serviceDescription" ng-maxlength="2000" required readonly>
                   </div>
 
-                  <div class="col-sm-3">
+                  <div class="interval-agreement">
                     <div class="dropdown">
                       <input type="text"
                              class="form-control has-dropdown"
@@ -235,12 +246,12 @@
           We will our customers for additional services
         </label>
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.services.length>0">
-          <div class="col-md-4">Service name</div>
-          <div class="col-md-2">Per hour</div>
-          <div class="col-md-2 text-center">Make Billable</div>
-          <div class="col-md-3 text-center">Tax</div>
+          <div class="service-name-agreement">Service name</div>
+          <div class="price-agreement">Per hour</div>
+          <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+          <div class="tax-agreement text-center">Tax</div>
           <div class="bill-hide-content-item clearfix" ng-repeat="service in serviceContract.services">
-            <div class="col-md-4 form-group">
+            <div class="service-name-agreement form-group">
               <input placeholder="Service Name" type="text"
                      class="form-control"
                      name="serviceName"
@@ -249,18 +260,18 @@
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      readonly>
             </div>
-            <div class="col-md-2 fourm-group before-icon">
+            <div class="price-agreement fourm-group before-icon">
               <input placeholder="0.00" type="text" class="form-control"
                      ng-model="service.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
             </div>
-            <div class="col-md-2 form-group text-center">
+            <div class="col-md-1 form-group text-center">
               <label class="control checkbox default-cursor">
                 <input ng-model="service.billable" type="checkbox" onclick="return false">
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="col-md-3 form-group text-center">
+            <div class="tax-agreement form-group text-center">
               <div>
                 <div>
                   <select-taxes taxes="taxes" entity="service" is-preview-mode="true" style="cursor: pointer;"></select-taxes>
