@@ -148,7 +148,9 @@
             default:
               var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
                 endDate.getUTCHours(), endDate.getUTCMinutes(), endDate.getUTCSeconds(), endDate.getUTCMilliseconds());
-              endDate.setTime(utc_timestamp + day*period);
+              var calculatePlusDays = utc_timestamp + day*period;
+              var ddd = new Date(calculatePlusDays);
+              endDate.setTime(calculatePlusDays - (ddd.getTimezoneOffset()*60000))
           }
           $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');

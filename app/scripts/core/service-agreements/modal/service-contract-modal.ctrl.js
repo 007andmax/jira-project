@@ -238,7 +238,12 @@
               endDate.setFullYear(endDate.getFullYear() + 1);
               break;
             default:
-              endDate.setTime(endDate.getTime() + day * period);
+              //endDate.setTime(endDate.getTime() + day * period);
+              var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
+                endDate.getUTCHours(), endDate.getUTCMinutes(), endDate.getUTCSeconds(), endDate.getUTCMilliseconds());
+              var calculatePlusDays = utc_timestamp + day*period;
+              var ddd = new Date(calculatePlusDays);
+              endDate.setTime(calculatePlusDays - (ddd.getTimezoneOffset()*60000))
           }
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
