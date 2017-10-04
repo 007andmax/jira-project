@@ -15,6 +15,7 @@
           if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].item) {
             productInput.val(scope[attrs.productsList].item.description);
           }
+1.
           scope.filteredProducts = {};
           scope.categoryExpanded = {};
 

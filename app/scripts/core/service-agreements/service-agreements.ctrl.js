@@ -162,7 +162,7 @@
       $scope.newServiceNameIsError = false;
       $scope.newServiceNameErrorMessage = '';
       $scope.showCreateHourlyContractValidationError = false;
-      $scope.errorMessageCreateHourlyDuplicate = 'There is another hourly agreement in this company with overlapping dates';
+      $scope.errorMessageCreateHourlyDuplicate = 'The current company has a working hourly agreement for these dates';
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -569,7 +569,7 @@
         companyContractInfo.startDate = sd.getTime();
 
         var ed = new Date($scope.editContract.endDate);
-        ed.setHours(23, 59, 0, 0);
+        ed.setHours(0, 0, 0, 0);
         ed.setSeconds(0);
         ed.setMilliseconds(0);
         console.log(ed);

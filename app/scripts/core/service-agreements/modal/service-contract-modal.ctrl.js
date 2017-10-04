@@ -111,6 +111,8 @@
             }
           }, 1000);
 
+          $scope.total = $scope.serviceContract.amount;
+
 
 
         }
@@ -809,7 +811,7 @@
             servContract.startDate = sd.getTime();
 
             var ed = new Date($scope.serviceContract.endDate);
-            ed.setHours(23, 59, 0, 0);
+            ed.setHours(0, 0, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
             servContract.endDate = ed.getTime();
@@ -896,11 +898,12 @@
               }
             }
 
+
             if (serviceContract.productExpenses && serviceContract.productExpenses.length) {
               for (var t = 0; t < serviceContract.productExpenses.length; t++) {
                 if (serviceContract.productExpenses[t] && serviceContract.productExpenses[t].name) {
                   var prodExp = {
-                    productId: serviceContract.productExpenses[t].name.versionedId.id,
+                    productId: returnProductId(serviceContract.productExpenses[t]),
                     quantity: serviceContract.productExpenses[t].quantity,
                     salePrice: serviceContract.productExpenses[t].salePrice
                   };
@@ -920,6 +923,14 @@
                 $scope.closeModal();
               }
             })
+          }
+        }
+
+        function returnProductId(productExpenses) {
+          if(productExpenses.name && productExpenses.versionedId && productExpenses.versionedId.id) {
+            return productExpenses.versionedId.id
+          } else if(productExpenses.productId) {
+            return productExpenses.productId
           }
         }
 
