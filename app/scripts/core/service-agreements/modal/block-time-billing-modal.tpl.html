@@ -362,7 +362,7 @@
           <div class="col-md-8">
             <p class="col-md-12">Vereburn - Monthly Block Time</p>
             <div class="col-md-6">
-              <p>Rollover: <span>{{blockTimeContract.enableTimeRollover}}</span></p>
+              <p>Rollover: <span>{{blockTimeContract.enableTimeRollover ? 'yes' : 'no'}}</span></p>
             </div>
             <div class="col-md-6">
               <p>Start Date: <span>{{dateFilter(blockTimeContract.startDate)}}</span></p>
