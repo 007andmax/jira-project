@@ -927,8 +927,8 @@
         }
 
         function returnProductId(productExpenses) {
-          if(productExpenses.name && productExpenses.versionedId && productExpenses.versionedId.id) {
-            return productExpenses.versionedId.id
+          if(productExpenses.name && productExpenses.name.versionedId && productExpenses.name.versionedId.id) {
+            return productExpenses.name.versionedId.id
           } else if(productExpenses.productId) {
             return productExpenses.productId
           }
