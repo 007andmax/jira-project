@@ -109,7 +109,7 @@
                 }
               }
             }
-          }, 1000);
+          }, 1500);
 
           $scope.total = $scope.serviceContract.amount;
 
@@ -155,12 +155,6 @@
             taxIds: [],
             taxes: $scope.addDefaultTaxes()
           };
-
-          // if($scope.serviceContract.billType === 'DEVICE') {
-          //   $scope.NewServiceContractServices.name = 'Managed workstations';
-          // } else if($scope.serviceContract.billType === 'USER') {
-          //   $scope.NewServiceContractServices.name = 'Managed users';
-          // }
 
           $scope.newProductExpense = {
             name: null,

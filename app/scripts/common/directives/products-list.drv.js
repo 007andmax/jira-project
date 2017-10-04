@@ -16,6 +16,10 @@
             productInput.val(scope[attrs.productsList].item.description);
           }
 
+          // if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].name) {
+          //   productInput.val(scope[attrs.productsList].name);
+          // }
+
           scope.filteredProducts = {};
           scope.categoryExpanded = {};
 

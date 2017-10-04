@@ -146,7 +146,9 @@
               endDate.setFullYear(endDate.getFullYear()+1);
               break;
             default:
-              endDate.setTime(endDate.getTime()+ day*period);
+              var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
+                endDate.getUTCHours(), endDate.getUTCMinutes(), endDate.getUTCSeconds(), endDate.getUTCMilliseconds());
+              endDate.setTime(utc_timestamp + day*period);
           }
           $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
