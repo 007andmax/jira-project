@@ -92,7 +92,16 @@
   width: calc(100% - 145px);
   height: 100%;
 }
-
+.service-agreement-modal .dropdown-menu-tabs{
+  max-height: 310px;
+}
+.service-agreement-modal .dropdown-menu-tabs .scroll-pane{
+  margin-bottom: 60px;
+}
+.service-agreement-modal .dropdown-menu.dropdown-menu-tabs{
+  left: 27px;
+  top: -15px;
+}
 .service-agreement-modal {
   position: relative;
   padding: 15px 20px;
