@@ -1,8 +1,10 @@
 <div class="deposit-create service-agreements clearfix">
-  <div class="btn btn-primary" ng-click="openAgreementsModal('CREATE_NEW', true, null)">New Contract</div>
+  <div class="fixed-block-top" fixed-block-top style="background-color: white">
+    <div class="btn btn-primary" ng-click="openAgreementsModal('CREATE_NEW', true, null)">New Contract</div >
+  </div>
   <div class="service-agreements-lists">
     <ul>
-      <li class="clearfix">
+      <li class="clearfix fixed-block-top" fixed-block-top offset-top="130" style="background-color: white; margin-top: 70px">
         <div class="col-md-2"><strong ng-click="changeFilterType('company.name')">Company</strong>
           <i ng-show="filterType === 'company.name'" class="icn-sm icn-caret-gray"></i>
           <i ng-show="filterType === '-company.name'" class="icn-sm icn-rotate-caret-gray"></i>
@@ -40,7 +42,7 @@
           <strong>Action</strong>
         </div>
       </li>
-
+      <div style="margin-top: 130px;">
       <li ng-repeat="agreement in agreementsList | orderBy: filterType"
           class="content-product-list-ticket clearfix"
           ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)"
@@ -60,7 +62,7 @@
              ng-click="deleteAgreement(agreement); $event.stopPropagation();"></i>
         </div>
       </li>
-
+      </div>
     </ul>
   </div>
 </div>

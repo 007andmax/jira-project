@@ -6,6 +6,7 @@
     ['$timeout', 'quicktech.common.services.PermissionsService', function ($timeout, PermissionsService) {
       return {
         restrict: 'A',
+
         link: function (scope, element, attrs) {
 
           var dropdown;
@@ -19,6 +20,9 @@
           // if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].name) {
           //   productInput.val(scope[attrs.productsList].name);
           // }
+          if(scope.item && scope.item.name) {
+            productInput.val(scope.item.name);
+          }
 
           scope.filteredProducts = {};
           scope.categoryExpanded = {};

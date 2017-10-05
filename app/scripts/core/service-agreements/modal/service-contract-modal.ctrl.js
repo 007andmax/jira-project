@@ -242,13 +242,11 @@
               var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
                 endDate.getUTCHours(), endDate.getUTCMinutes(), endDate.getUTCSeconds(), endDate.getUTCMilliseconds());
               var calculatePlusDays = utc_timestamp + day*period;
-              var ddd = new Date(calculatePlusDays);
-              endDate.setTime(calculatePlusDays - (ddd.getTimezoneOffset()*60000))
+              var nd = new Date(calculatePlusDays);
+              endDate.setTime(calculatePlusDays - (nd.getTimezoneOffset()*60000))
           }
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.serviceContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
-          //$scope.serviceContract.minStartDate = date;
-          // $scope.newServiceExpense.date = date;
           changeDefaultDateForServices();
           reInitEndDate();
         }
@@ -259,9 +257,6 @@
             $scope.reInitEndDate = true;
           }, 0);
         }
-
-
-
 
         $scope.$watch(function () {
           return $scope.serviceContract.interval;
@@ -501,52 +496,12 @@
           $scope.calculateTotalAmount();
         };
 
-        $scope.selectProduct = function(product) {
-          $scope.newProductExpense.name = product;
-        };
+        // $scope.selectProduct = function(product) {
+        //   $scope.newProductExpense.name = product;
+        // };
 
-        $scope.addProductExpense = function (form, productExpense) {
 
-          if (form.$valid && productExpense.name) {
 
-            var newProductExpense = {
-              name: productExpense.name,
-              quantity: productExpense.quantity,
-              salePrice: productExpense.salePrice
-            };
-            $scope.serviceContract.productExpenses.push(newProductExpense);
-
-            for (var i = 0; i < $scope.defaultProducts.length; i++) {
-              if ($scope.defaultProducts[i] == productExpense.name) {
-                $scope.defaultProducts[i].picked = true;
-              }
-            }
-
-            $scope.newProductExpense = {
-              name: null,
-              quantity: null,
-              salePrice: null
-            };
-            $scope.calculateTotalAmount();
-          }
-        };
-
-        $scope.deleteProductExpense = function (product) {
-          for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
-            if ($scope.serviceContract.productExpenses[i] == product) {
-              $scope.serviceContract.productExpenses.splice(i, 1);
-
-              for (var j = 0; j < $scope.defaultProducts.length; j++) {
-                if ($scope.defaultProducts[j] == product.name) {
-                  $scope.defaultProducts[j].picked = false;
-                }
-              }
-
-              break;
-            }
-          }
-          $scope.calculateTotalAmount();
-        };
 
         $scope.addNewService = function (form, service) {
           $scope.showNewServiceError = false;
