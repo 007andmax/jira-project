@@ -46,7 +46,7 @@
 
         if ($scope.editMode) {
           $scope.serviceContract = {
-            billType: 'DEVICE',
+            billType: null,
             minStartDate: Date.now(),
             isAdditionalServices: false,
             includedHours: null,

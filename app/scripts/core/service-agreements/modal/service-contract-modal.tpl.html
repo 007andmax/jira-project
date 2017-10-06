@@ -90,7 +90,7 @@
           <div uib-dropdown keyboard-nav="true">
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
                     uib-dropdown-toggle aria-expanded="true">
-              {{serviceContractType[serviceContract.billType]}}
+              {{serviceContractType[serviceContract.billType] || 'Select type'}}
             </button>
             <i class="icn-sm icn-caret-gray"></i>
             <ul class="dropdown-menu dropdown-account-type">
