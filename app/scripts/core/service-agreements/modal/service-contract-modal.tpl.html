@@ -13,7 +13,7 @@
   <div class="service-contract-details clearfix">
     <div class="col-md-8">
       <div class="form-group">
-        Description
+        Description*
 
         <input placeholder="Description"
                type="text"
@@ -27,7 +27,7 @@
 
     <div class="interval-agreement">
       <div class="form-group">
-        Interval:
+        Interval*
         <input custom-style="{'width':'100%'}" type="text" class="form-control"
                ng-model="serviceContract.interval"
                uib-typeahead="interval for interval in intervals"
@@ -42,7 +42,7 @@
     </div>
     <div class="interval-agreement">
       <div class="form-group">
-        Select Date:
+        Select Date*
 
         <input class="form-control" type="text" ng-model="serviceContract.startDate" placeholder="../../.."
                readonly ng-change="changeStartDate()" name="startDate"
@@ -52,7 +52,7 @@
     </div>
     <div class="interval-agreement">
       <div class="form-group">
-        End Date:
+        End Date*
 
         <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate"
                ng-model="serviceContract.endDate"
@@ -83,7 +83,7 @@
     <h4>Select how you bill your customer. Managed Services will be added to Service time</h4>
     <div class="col-md-3">
       <div class="form-group">
-        Service Bill Type:
+        Service Bill Type*
 
         <div class="form-group">
 

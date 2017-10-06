@@ -95,15 +95,6 @@
         if($scope.blockTimeContract.startDate) {
           changeMinEndDate($scope.blockTimeContract.period);
         }
-        // var periodsName = {
-        //   MONTHLY: 'Month',
-        //   YEARLY: 'Year',
-        //   '30 days': '30',
-        //   '15 days': '15',
-        //   '7 days': '7',
-        //   '1 day': '1'
-        // };
-
         presettupPeriod();
         // $scope.blockTimeContract.period = $scope.blockTimeContract.interval === 'MONTHLY' ? 'Month' : 'Year';
         // $scope.blockTimeContract.period = periodsName[$scope.blockTimeContract.interval];
@@ -228,12 +219,23 @@
 
 
         $scope.calculateTotalAmount = function () {
+          var sum = null;
           if ($scope.blockTimeContract.includedHours && $scope.blockTimeContract.blockRate) {
-            return $scope.blockTimeContract.includedHours * $scope.blockTimeContract.blockRate;
+            sum =  $scope.blockTimeContract.includedHours * $scope.blockTimeContract.blockRate;
           } else {
-            return null;
+            sum =  null;
           }
+          return sum;
         };
+
+        $scope.returnTotal = function() {
+          if($scope.blockTimeContract.total && $scope.blockTimeContract.total !== null) {
+            return $scope.blockTimeContract.total;
+          } else {
+            return 0;
+          }
+        }
+
 
         function pickDefaultService(service) {
           for (var i = 0; i < $scope.defaultServices.length; i++) {

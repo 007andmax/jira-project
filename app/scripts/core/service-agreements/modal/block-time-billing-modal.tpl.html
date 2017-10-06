@@ -13,7 +13,7 @@
         <div class="col-md-8">
           <div class="form-group"
                ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'description')}">
-            Description
+            Description*
             <input placeholder="Description"
                    name="description"
                    type="text"
@@ -25,7 +25,7 @@
         <div class="col-md-12"></div>
         <div class="interval-agreement">
           <div class="form-group">
-            Interval:
+            Interval*
             <input custom-style="{'width':'100%'}" type="text" class="form-control"
                    ng-model="blockTimeContract.interval"
                    uib-typeahead="interval for interval in intervals"
@@ -41,7 +41,7 @@
         </div>
         <div class="interval-agreement">
           <div class="form-group">
-            Select Date:
+            Select Date*
 
             <input class="form-control" type="text" ng-model="blockTimeContract.startDate"
                    placeholder="Select Start Date"
@@ -52,7 +52,7 @@
         </div>
         <div class="interval-agreement">
           <div class="form-group">
-            End Date:
+            End Date*
 
             <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate"
                    ng-model="blockTimeContract.endDate"
@@ -74,7 +74,7 @@
           <div class="interval-agreement">
             <div class="form-group"
                  ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'includedHours')}">
-              Included hours:
+              Included hours*
               <input placeholder="Hours"
                      name="includedHours"
                      type="text"
@@ -86,7 +86,7 @@
           <div class="interval-agreement">
             <div class="form-group before-icon"
                  ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'blockRate')}">
-              Block Rate:
+              Block Rate*
               <input placeholder="0.00"
                      name="blockRate"
                      type="text"
@@ -101,7 +101,7 @@
               <input placeholder="Total"
                      type="text"
                      class="form-control"
-                     ng-model="calculateTotalAmount()" hard-reset-pattern="decimalNumberPattern" readonly
+                     ng-model="(calculateTotalAmount() | currency: '': 2) " hard-reset-pattern="decimalNumberPattern" readonly
                      qt-to-fixed="2">
             </div>
           </div>
@@ -110,7 +110,7 @@
           <div class="col-md-4" style="width: 193px;padding-right: 0;">
             <div class="form-group before-icon"
                  ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'rateExceeding')}">
-              Rate exceding block time:
+              Rate exceding block time*
               <input style="width: 127px;"
                      placeholder="0.00"
                      name="rateExceeding"
@@ -371,7 +371,7 @@
           </div>
           <div class="col-md-4">
             <div class="contacts-details-content-price">
-              $ {{calculateTotalAmount()}}/mo
+              {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
             </div>
             <div class="btn btn-lg btn-success btn-create"
                  ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)"
