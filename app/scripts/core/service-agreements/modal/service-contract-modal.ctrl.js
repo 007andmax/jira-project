@@ -921,7 +921,6 @@
             }
           }
 
-
           if(!emptyServices) {
             var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
             var confirmButton = 'Yes, create';

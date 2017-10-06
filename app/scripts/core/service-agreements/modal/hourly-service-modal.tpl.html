@@ -136,7 +136,7 @@
           </div>
           <div class="col-md-1 fourm-group text-center">
             <div class="add-remove-service" ng-hide="editContract.services.length > 19">
-              <div ng-click="addNewService(newServiceForm, editService)">
+              <div ng-if="showAddServiceButton" ng-click="addNewService(newServiceForm, editService)">
                 <i class="icon-sm icn-add-action"></i>
               </div>
             </div>

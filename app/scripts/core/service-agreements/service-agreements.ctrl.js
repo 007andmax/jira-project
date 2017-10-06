@@ -157,6 +157,7 @@
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;
 
+      $scope.showAddServiceButton = true;
       $scope.showErrorInHourlyContract = false;
       $scope.errorMessage = '';
       $scope.newServiceNameIsError = false;
@@ -340,12 +341,15 @@
         }
       };
 
+
       $scope.addNewService = function (form, editService) {
+        $scope.showAddServiceButton = false;
         $scope.newServiceNameIsError = false;
         if (form.$valid) {
           if (!$scope.editContract.startDate || !$scope.editContract.startDate) {
             $scope.newServiceNameIsError = true;
             $scope.newServiceNameErrorMessage = 'Please enter start and end date to check service name';
+            $scope.showAddServiceButton = true;
           } else {
             validateNewServiceName(editService).then(function (resp) {
               if (resp) {
@@ -369,6 +373,7 @@
                   taxes: $scope.addDefaultTaxes()
                 };
                 reInitServiceForm();
+                $scope.showAddServiceButton = true;
               }
             })
           }
