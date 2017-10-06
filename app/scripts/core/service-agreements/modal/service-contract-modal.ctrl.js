@@ -897,12 +897,32 @@
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
           var emptyServices = true;
-          var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length);
-          var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.length);
-          var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.length);
-          var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length);
-          if(!checkServices && !checkSE && !checkPE && !checkSCS) {
-            emptyServices = false;
+          var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
+          var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
+          var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
+          var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length>0);
+          if($scope.serviceContract.billType == 'OTHER') {
+            if(checkPE || checkSE) {
+              emptyServices = false;
+            }
+            if($scope.serviceContract.isAdditionalServices) {
+              if(checkServices) {
+                emptyServices = false;
+              }
+            }
+          } else {
+            if(checkSCS) {
+              emptyServices = false;
+            }
+            if($scope.serviceContract.isAdditionalServices) {
+              if(checkServices) {
+                emptyServices = false;
+              }
+            }
+          }
+
+
+          if(!emptyServices) {
             var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
             var confirmButton = 'Yes, create';
             UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {

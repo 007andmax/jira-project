@@ -371,7 +371,7 @@
           </div>
           <div class="col-md-4">
             <div class="contacts-details-content-price">
-              {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
+              Total: {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
             </div>
             <div class="btn btn-lg btn-success btn-create"
                  ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)"
