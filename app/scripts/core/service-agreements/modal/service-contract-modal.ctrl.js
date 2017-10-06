@@ -20,6 +20,7 @@
         $scope.reInitEndDate = true;
         $scope.reInitServiceContractServicesForm = true;
         $scope.reInitServiceForm = true;
+        $scope.reInitPrpductsExpenseNameField = false;
 
         $scope.showNewServiceContractServiceValidationError = false;
         $scope.showNewServiceValidationError = false;
@@ -56,8 +57,10 @@
             serviceExpenses: [],
             productExpenses: []
           };
+          $scope.reInitPrpductsExpenseNameField = true;
         } else {
           $scope.serviceContract = angular.copy($scope.editContract);
+          $scope.reInitPrpductsExpenseNameField = false;
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
@@ -95,21 +98,24 @@
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
 
-          $timeout(function () {
+          ProductsService.getFullListForAutocomplete($scope, function(resp) {
+            var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
-                for(var w=0; w<$scope.autocompleteData.length; w++) {
-                  for(var v=0; v<$scope.autocompleteData[w].products.length; v++) {
+                for(var w=0; w<productsData.length; w++) {
+                  for(var v=0; v<productsData[w].products.length; v++) {
                     //console.log($scope.autocompleteData[w].products[v].versionedId.id, $scope.serviceContract.productExpenses[p].productId);
-                    if($scope.autocompleteData[w].products[v].versionedId.id ==  $scope.serviceContract.productExpenses[p].productId) {
-                      $scope.serviceContract.productExpenses[p].name = $scope.autocompleteData[w].products[v].description;
+                    if(productsData[w].products[v].versionedId.id ==  $scope.serviceContract.productExpenses[p].productId) {
+                      $scope.serviceContract.productExpenses[p].name = {};
+                      $scope.serviceContract.productExpenses[p].name.description = productsData[w].products[v].description;
                       break;
                     }
                   }
                 }
               }
             }
-          }, 1500);
+            $scope.reInitPrpductsExpenseNameField = true;
+          });
 
           $scope.total = $scope.serviceContract.amount;
 

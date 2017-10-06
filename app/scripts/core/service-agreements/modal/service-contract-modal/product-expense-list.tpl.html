@@ -16,7 +16,7 @@
 
       <!--<div class="input-top-4" typeahead-input-icon="productName"></div>-->
 
-      <div products-list="productExpense" id="product-list-cont-prev"
+      <div products-list="productExpense" id="product-list-cont-prev" ng-if="reInitPrpductsExpenseNameField"
            click-outside="closeDropdown()" outside-if-not="product-list-cont">
         <div>
           <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input

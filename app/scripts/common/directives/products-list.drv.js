@@ -17,13 +17,9 @@
             productInput.val(scope[attrs.productsList].item.description);
           }
 
-          // if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].name) {
-          //   productInput.val(scope[attrs.productsList].name);
-          // }
-          if(scope.item && scope.item.name) {
-            productInput.val(scope.item.name);
+          if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].name) {
+            productInput.val(scope[attrs.productsList].name.description);
           }
-
           scope.filteredProducts = {};
           scope.categoryExpanded = {};
 
