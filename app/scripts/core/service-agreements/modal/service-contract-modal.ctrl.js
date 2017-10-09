@@ -17,6 +17,7 @@
 
         $scope.taxes = TaxesService.getAll();
 
+        $scope.reInitStartDate = true;
         $scope.reInitEndDate = true;
         $scope.reInitServiceContractServicesForm = true;
         $scope.reInitServiceForm = true;
@@ -257,6 +258,13 @@
           reInitEndDate();
         }
 
+        function reInitStartDate() {
+          $scope.reInitStartDate = false;
+          $timeout(function () {
+            $scope.reInitStartDate = true;
+          }, 0);
+        }
+
         function reInitEndDate() {
           $scope.reInitEndDate = false;
           $timeout(function () {
@@ -267,30 +275,46 @@
         $scope.$watch(function () {
           return $scope.serviceContract.interval;
         }, function (interval) {
-
+          var newMinStartDate;
+          var now = Date.now();
+          var n = new Date(now);
           if (interval === 'MONTHLY') {
             $scope.serviceContract.period = 'Month';
             $scope.serviceContract.interval = 'MONTHLY';
             $scope.serviceContract.customInterval = null;
+            n.setMonth(n.getMonth() - 1);
+            newMinStartDate = n.getTime() + day;
+
           } else if (interval === 'YEARLY') {
             $scope.serviceContract.period = 'Year';
             $scope.serviceContract.interval = 'YEARLY';
             $scope.serviceContract.customInterval = null;
+            n.setFullYear(n.getFullYear() - 1);
+            newMinStartDate = n.getTime() + day;
+
           } else if (interval === '30 days') {
             $scope.serviceContract.period = 30;
             $scope.serviceContract.customInterval = 30;
+            newMinStartDate = now - (29*day);
+
           } else if (interval === '15 days') {
             $scope.serviceContract.period = 15;
             $scope.serviceContract.customInterval = 15;
+            newMinStartDate = now - (14*day);
+
           } else if (interval === '7 days') {
             $scope.serviceContract.period = 7;
             $scope.serviceContract.customInterval = 7;
+            newMinStartDate = now - (6*day);
+
           } else if (interval === '1 day') {
             $scope.serviceContract.period = 1;
             $scope.serviceContract.customInterval = 1;
           }
+          $scope.serviceContract.minStartDate = newMinStartDate;
           changeMinEndDate($scope.serviceContract.period);
-          reInitEndDate()
+          reInitStartDate();
+          reInitEndDate();
         });
 
         $scope.$watch(function () {

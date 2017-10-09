@@ -44,7 +44,7 @@
       <div class="form-group">
         Select Date*
 
-        <input class="form-control" type="text" ng-model="serviceContract.startDate" placeholder="../../.."
+        <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="serviceContract.startDate" placeholder="../../.."
                readonly ng-change="changeStartDate()" name="startDate"
                qt-data-time-picker min-date="serviceContract.minStartDate">
         <i class="report-calendar"></i>

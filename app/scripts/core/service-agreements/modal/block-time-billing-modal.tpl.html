@@ -43,7 +43,7 @@
           <div class="form-group">
             Select Date*
 
-            <input class="form-control" type="text" ng-model="blockTimeContract.startDate"
+            <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="blockTimeContract.startDate"
                    placeholder="Select Start Date"
                    readonly ng-change="changeStartDate()" name="startDate"
                    qt-data-time-picker min-date="blockTimeContract.minStartDate">

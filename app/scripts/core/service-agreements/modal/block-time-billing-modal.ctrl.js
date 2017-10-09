@@ -25,6 +25,7 @@
         $scope.blockTimeServices = [];
         $scope.services = [];
 
+        $scope.reInitStartDate = true;
         $scope.reInitEndDate = true;
         $scope.reInitServiceForm = true;
 
@@ -148,12 +149,20 @@
           reInitEndDate()
         }
 
+        function reInitStartDate() {
+          $scope.reInitStartDate = false;
+          $timeout(function () {
+            $scope.reInitStartDate = true;
+          }, 0);
+        }
+
         function reInitEndDate() {
           $scope.reInitEndDate = false;
           $timeout(function () {
             $scope.reInitEndDate = true;
           }, 0);
         }
+
 
         function reInitServiceForm() {
           $scope.reInitServiceForm = false;
@@ -165,29 +174,45 @@
         $scope.$watch(function () {
           return $scope.blockTimeContract.interval;
         }, function (interval) {
+          var newMinStartDate;
+          var now = Date.now();
+          var n = new Date(now);
           if (interval === 'MONTHLY') {
             $scope.blockTimeContract.period = 'Month';
             $scope.blockTimeContract.interval = 'MONTHLY';
             $scope.blockTimeContract.customInterval = null;
+            n.setMonth(n.getMonth() - 1);
+            newMinStartDate = n.getTime() + day;
+
           } else if (interval === 'YEARLY') {
             $scope.blockTimeContract.period = 'Year';
             $scope.blockTimeContract.interval = 'YEARLY';
             $scope.blockTimeContract.customInterval = null;
+            n.setFullYear(n.getFullYear() - 1);
+            newMinStartDate = n.getTime() + day;
+
           } else if (interval === '30 days') {
             $scope.blockTimeContract.period = 30;
             $scope.blockTimeContract.customInterval = 30;
+            newMinStartDate = now - (29*day);
+
           } else if (interval === '15 days') {
             $scope.blockTimeContract.period = 15;
             $scope.blockTimeContract.customInterval = 15;
+            newMinStartDate = now - (14*day);
+
           } else if (interval === '7 days') {
             $scope.blockTimeContract.period = 7;
             $scope.blockTimeContract.customInterval = 7;
+            newMinStartDate = now - (6*day);
+
           } else if(interval === '1 day') {
             $scope.blockTimeContract.period = 1;
             $scope.blockTimeContract.customInterval = 1;
-
           }
+          $scope.blockTimeContract.minStartDate = newMinStartDate;
           changeMinEndDate($scope.blockTimeContract.period);
+          reInitStartDate();
           reInitEndDate()
         });
 
