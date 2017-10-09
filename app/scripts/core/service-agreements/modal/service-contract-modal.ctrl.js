@@ -23,6 +23,9 @@
         $scope.reInitServiceForm = true;
         $scope.reInitPrpductsExpenseNameField = false;
 
+        $scope.showRequiredFieldError = false;
+        $scope.showServiceLengthCheckError = false;
+
         $scope.showNewServiceContractServiceValidationError = false;
         $scope.showNewServiceValidationError = false;
         $scope.showServiceExpenseError = false;
@@ -59,6 +62,8 @@
             productExpenses: []
           };
           $scope.reInitPrpductsExpenseNameField = true;
+          preCreateFirstServicesEntities();
+          createDefaultServices();
         } else {
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
@@ -119,41 +124,44 @@
           });
 
           $scope.total = $scope.serviceContract.amount;
-
-
-
+          preCreateFirstServicesEntities();
         }
 
-        preCreateFirstServicesEntities();
+
+
+        function createDefaultServices(){
+          var managedUsers = {
+            name: 'Managed users',
+            count: 0,
+            rate: 0,
+            taxIds: [],
+            taxes: $scope.addDefaultTaxes()
+          };
+          $scope.presettupUsersServices.push(managedUsers);
+          var managedWorkstation = {
+            name: 'Managed workstations',
+            count: 0,
+            rate: 0,
+            taxIds: [],
+            taxes: $scope.addDefaultTaxes()
+          };
+          var managedServers = {
+            name: 'Managed servers',
+            count: 0,
+            rate: 0,
+            taxIds: [],
+            taxes: $scope.addDefaultTaxes()
+          };
+          $scope.presettupDeviceServices.push(managedWorkstation);
+          $scope.presettupDeviceServices.push(managedServers);
+        }
+
 
         function preCreateFirstServicesEntities() {
 
-          $scope.presettupUsersServices = [
-            {
-              name: 'Managed users',
-              count: 0,
-              rate: 0,
-              taxIds: [],
-              taxes: $scope.addDefaultTaxes()
-            }
-          ];
+          $scope.presettupUsersServices = [];
 
-          $scope.presettupDeviceServices = [
-            {
-              name: 'Managed workstations',
-              count: 0,
-              rate: 0,
-              taxIds: [],
-              taxes: $scope.addDefaultTaxes()
-            },
-            {
-              name: 'Managed servers',
-              count: 0,
-              rate: 0,
-              taxIds: [],
-              taxes: $scope.addDefaultTaxes()
-            }
-          ];
+          $scope.presettupDeviceServices = [];
 
           $scope.NewServiceContractServices = {
             name: null,
@@ -526,13 +534,6 @@
           $scope.calculateTotalAmount();
         };
 
-        // $scope.selectProduct = function(product) {
-        //   $scope.newProductExpense.name = product;
-        // };
-
-
-
-
         $scope.addNewService = function (form, service) {
           $scope.showNewServiceError = false;
           $scope.showNewServiceValidationError = false;
@@ -687,7 +688,7 @@
           return id;
         }
 
-        $scope.disableCreateButton = function () {
+        function checkForInvalidFields() {
           function formCheck() {
             return ($scope.serviceContract.description &&
             $scope.serviceContract.startDate &&
@@ -696,14 +697,25 @@
           }
 
           function serviceCheck() {
-            if ($scope.serviceContract.billType == 'DEVICE' || $scope.serviceContract.billType == 'USER') {
-              return $scope.serviceContract.serviceContractServices.length > 0;
-            } else {
+            if ($scope.serviceContract.billType == 'DEVICE') {
+              var deviceCheck =  $scope.serviceContract.serviceContractServices.length > 0;
+              var presetupCheck = $scope.presettupDeviceServices.length > 0;
+              return (deviceCheck || presetupCheck)
+            } else if($scope.serviceContract.billType == 'USER'){
+              var userCheck =  $scope.serviceContract.serviceContractServices.length > 0;
+              var presetupCheck  =  $scope.presettupUsersServices.length > 0;
+              return (userCheck || presetupCheck)
+            }else if($scope.serviceContract.billType == 'OTHER'){
               return ($scope.serviceContract.serviceExpenses.length > 0 || $scope.serviceContract.productExpenses.length > 0);
             }
           }
-
+          $scope.showRequiredFieldError = !formCheck();
+          $scope.showServiceLengthCheckError = !serviceCheck();
           return (formCheck() && serviceCheck());
+        }
+
+        $scope.isShowingErrorsServiceContract = function (form, fieldName) {
+          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldError) && !form[fieldName].$valid;
         };
 
         $scope.calculateTotalAmount = function () {
@@ -920,43 +932,43 @@
 
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
-          var emptyServices = true;
-          var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
-          var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
-          var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
-          var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length>0);
-          if($scope.serviceContract.billType == 'OTHER') {
-            if(checkPE || checkSE) {
-              emptyServices = false;
-            }
-            if($scope.serviceContract.isAdditionalServices) {
-              if(checkServices) {
+          if(checkForInvalidFields()) {
+            var emptyServices = true;
+            var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
+            var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
+            var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
+            var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length>0);
+            if($scope.serviceContract.billType == 'OTHER') {
+              if(checkPE || checkSE) {
                 emptyServices = false;
               }
-            }
-          } else {
-            if(checkSCS) {
-              emptyServices = false;
-            }
-            if($scope.serviceContract.isAdditionalServices) {
-              if(checkServices) {
+              if($scope.serviceContract.isAdditionalServices) {
+                if(checkServices) {
+                  emptyServices = false;
+                }
+              }
+            } else {
+              if(checkSCS) {
                 emptyServices = false;
               }
+              if($scope.serviceContract.isAdditionalServices) {
+                if(checkServices) {
+                  emptyServices = false;
+                }
+              }
             }
-          }
 
-          if(!emptyServices) {
-            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
-            var confirmButton = 'Yes, create';
-            UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
-              emptyServices = true;
+            if(!emptyServices) {
+              var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
+              var confirmButton = 'Yes, create';
+              UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
+                emptyServices = true;
+                validateServiceContractServices(serviceContract);
+              })
+            } else {
               validateServiceContractServices(serviceContract);
-            })
-          } else {
-            validateServiceContractServices(serviceContract);
+            }
           }
-
-
 
           function validateServiceContractServices(serviceContract) {
             var listOfNames = [];

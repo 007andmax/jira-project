@@ -12,7 +12,7 @@
       <div class="service-contract-details clearfix">
         <div class="col-md-8">
           <div class="form-group"
-               ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'description')}">
+               ng-class="{'has-error': isShowingErrorsBlock(blockTimeContractForm, 'description')}">
             Description*
             <input placeholder="Description"
                    name="description"
@@ -42,11 +42,13 @@
         <div class="interval-agreement">
           <div class="form-group">
             Select Date*
-
+            <div ng-class="{'hide': !isShowingErrorsBlock(blockTimeContractForm, 'startDate')}">
+              <label class="control-label" style="color: red; text-align: left">Dates are required</label>
+            </div>
             <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="blockTimeContract.startDate"
-                   placeholder="Select Start Date"
+                   placeholder="Select Start Date" name="startDate"
                    readonly ng-change="changeStartDate()" name="startDate"
-                   qt-data-time-picker min-date="blockTimeContract.minStartDate">
+                   qt-data-time-picker min-date="blockTimeContract.minStartDate" required>
             <i class="report-calendar"></i>
           </div>
         </div>
@@ -73,7 +75,7 @@
         <div class="col-md-12">
           <div class="interval-agreement">
             <div class="form-group"
-                 ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'includedHours')}">
+                 ng-class="{'has-error': isShowingErrorsBlock(blockTimeContractForm, 'includedHours')}">
               Included hours*
               <input placeholder="Hours"
                      name="includedHours"
@@ -85,7 +87,7 @@
           </div>
           <div class="interval-agreement">
             <div class="form-group before-icon"
-                 ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'blockRate')}">
+                 ng-class="{'has-error': isShowingErrorsBlock(blockTimeContractForm, 'blockRate')}">
               Block Rate*
               <input placeholder="0.00"
                      name="blockRate"
@@ -109,7 +111,7 @@
         <div class="col-md-12">
           <div class="col-md-4" style="width: 193px;padding-right: 0;">
             <div class="form-group before-icon"
-                 ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'rateExceeding')}">
+                 ng-class="{'has-error': isShowingErrorsBlock(blockTimeContractForm, 'rateExceeding')}">
               Rate exceding block time*
               <input style="width: 127px;"
                      placeholder="0.00"
@@ -200,7 +202,7 @@
             </label>
             <div class="service-bill-hide-content" ng-show="blockTimeContract.enableTimeRollover">
               <div class="form-group price-agreement"
-                   ng-class="{'has-error': isShowingErrors(blockTimeContractForm, 'maxHours')}">
+                   ng-class="{'has-error': isShowingErrorsBlock(blockTimeContractForm, 'maxHours')}">
                 <input class="form-control" type="text"
                        placeholder="Max Hours" name="maxHours"
                        ng-model="blockTimeContract.maxRolloverHours"
@@ -374,8 +376,7 @@
               Total: {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
             </div>
             <div class="btn btn-lg btn-success btn-create"
-                 ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)"
-                 ng-disabled="disableBloctCreateButton()">Create
+                 ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">Create
             </div>
           </div>
         </div>

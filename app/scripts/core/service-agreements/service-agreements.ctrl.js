@@ -157,6 +157,7 @@
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;
 
+      $scope.showFieldsError = false;
       $scope.showAddServiceButton = true;
       $scope.showErrorInHourlyContract = false;
       $scope.errorMessage = '';
@@ -401,9 +402,6 @@
         });
       };
 
-      $scope.isShowingErrors = function (form, fieldName) {
-        return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
-      };
 
       function returnCompanyId() {
         var id;
@@ -601,18 +599,21 @@
       }
 
       $scope.validateAndCreateHourlyContract = function (editService) {
-
-        var emptyNewService = true;
-        if (editService && editService.name && editService.name.length) {
-          emptyNewService = false;
-          var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
-          var confirmButton = 'Yes, create';
-          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
-            emptyNewService = true;
+        if(!checkForInvalidFields()) {
+          var emptyNewService = true;
+          if (editService && editService.name && editService.name.length) {
+            emptyNewService = false;
+            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
+            var confirmButton = 'Yes, create';
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              emptyNewService = true;
+              validateAndCreate();
+            });
+          } else {
             validateAndCreate();
-          });
+          }
         }
-        validateAndCreate();
+
 
         function validateAndCreate() {
           if (emptyNewService) {
@@ -648,18 +649,30 @@
         return check;
       }
 
-      $scope.dissableHourlyCreateButton = function () {
-
-        if ($scope.editContract.startDate &&
-          $scope.editContract.endDate &&
-          $scope.editContract.description &&
-          $scope.editContract.services.length > 0 &&
-          checkServiceNameLength() && !checkHourlyExistingNamesDuplicates()) {
-          return false
-        } else {
-          return true
-        }
+      $scope.isShowingHourErrors = function (form, fieldName) {
+        return form[fieldName] && (form[fieldName].$dirty || $scope.showFieldsError) && !form[fieldName].$valid;
       };
+
+      $scope.isShowingHourNewFieldError = function(form, fieldName) {
+        return form[fieldName] && form[fieldName].$dirty && !form[fieldName].$valid;
+      };
+
+
+
+      function checkForInvalidFields() {
+
+        if (!$scope.editContract.startDate ||
+          !$scope.editContract.endDate ||
+          !$scope.editContract.description ||
+          !$scope.editContract.services.length > 0 ||
+          !checkServiceNameLength() || checkHourlyExistingNamesDuplicates()) {
+          $scope.showFieldsError = true;
+          return true;
+        } else {
+          $scope.showFieldsError =  false;
+          return false;
+        }
+      }
 
 
       $scope.terminateContract = function () {

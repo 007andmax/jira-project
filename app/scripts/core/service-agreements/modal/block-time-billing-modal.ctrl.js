@@ -468,20 +468,28 @@
           return check;
         }
 
-        $scope.disableBloctCreateButton = function () {
-          if ($scope.blockTimeContract.description &&
-            $scope.blockTimeContract.startDate &&
-            $scope.blockTimeContract.endDate &&
-            $scope.blockTimeContract.rateExceeding &&
-            $scope.blockTimeContract.blockTimeServices.length > 0 &&
-            $scope.blockTimeContract.includedHours &&
-            $scope.blockTimeContract.blockRate &&
-            checkBlockTimeContractServicesNameLengths() &&
-            (($scope.blockTimeContract.enableTimeRollover && $scope.blockTimeContract.maxRolloverHours) || (!$scope.blockTimeContract.enableTimeRollover && !$scope.blockTimeContract.maxRolloverHours))) {
-            return false
-          } else {
+        $scope.showBlockFieldsError = false;
+
+         function checkForInvalidFields() {
+          if (!$scope.blockTimeContract.description ||
+            !$scope.blockTimeContract.startDate ||
+            !$scope.blockTimeContract.endDate ||
+            !$scope.blockTimeContract.rateExceeding ||
+            !$scope.blockTimeContract.blockTimeServices.length > 0 ||
+            !$scope.blockTimeContract.includedHours ||
+            !$scope.blockTimeContract.blockRate ||
+            !checkBlockTimeContractServicesNameLengths() ||
+            !(($scope.blockTimeContract.enableTimeRollover && $scope.blockTimeContract.maxRolloverHours) || (!$scope.blockTimeContract.enableTimeRollover && !$scope.blockTimeContract.maxRolloverHours))) {
+            $scope.showBlockFieldsError = true;
             return true
+          } else {
+            $scope.showBlockFieldsError = false;
+            return false;
           }
+        }
+
+        $scope.isShowingErrorsBlock = function (form, fieldName) {
+          return form[fieldName] && (form[fieldName].$dirty || $scope.showBlockFieldsError) && !form[fieldName].$valid;
         };
 
         function checkForExistingNameDuplicates(name) {
@@ -675,18 +683,21 @@
         }
 
         $scope.validateAndCreteBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
-          var emptyServices = true;
-          if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)) {
-            emptyServices = false;
-            var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
-            var confirmButton = 'Yes, create';
-            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
-              emptyServices = true;
+          if(!checkForInvalidFields()) {
+            var emptyServices = true;
+            if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)) {
+              emptyServices = false;
+              var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
+              var confirmButton = 'Yes, create';
+              UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+                emptyServices = true;
+                validateAndCreate(blockTimeContract);
+              });
+            } else {
               validateAndCreate(blockTimeContract);
-            });
-          } else {
-            validateAndCreate(blockTimeContract);
+            }
           }
+
 
           function validateAndCreate(blockTimeContract) {
             checkForDuplicateServiceNames(blockTimeContract.blockTimeServices).then(function (resp) {

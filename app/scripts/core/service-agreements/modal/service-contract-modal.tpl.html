@@ -12,11 +12,13 @@
 
   <div class="service-contract-details clearfix">
     <div class="col-md-8">
-      <div class="form-group">
+      <div class="form-group"
+      ng-class="{'has-error': isShowingErrorsServiceContract(serviceContractForm, 'description')}">
         Description*
 
         <input placeholder="Description"
                type="text"
+               name="description"
                class="form-control"
                ng-model="serviceContract.description"
                hard-reset-pattern="descriptionPattern" required>
@@ -43,10 +45,12 @@
     <div class="interval-agreement">
       <div class="form-group">
         Select Date*
-
+        <div ng-class="{'hide': !isShowingErrorsServiceContract(serviceContractForm, 'startDate')}">
+          <label class="control-label" style="color: red; text-align: left">Dates are required</label>
+        </div>
         <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="serviceContract.startDate" placeholder="../../.."
                readonly ng-change="changeStartDate()" name="startDate"
-               qt-data-time-picker min-date="serviceContract.minStartDate">
+               qt-data-time-picker min-date="serviceContract.minStartDate" required>
         <i class="report-calendar"></i>
       </div>
     </div>
@@ -85,7 +89,7 @@
       <div class="form-group">
         Service Bill Type*
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': showRequiredFieldError && !serviceContract.billType}">
 
           <div uib-dropdown keyboard-nav="true">
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
@@ -636,7 +640,7 @@
           Total: {{ (total | currency: '$': 2) || '$0.00' }}
         </div>
       </div>
-      <div class="btn btn-lg btn-success btn-create pull-right" ng-disabled="!disableCreateButton()"
+      <div class="btn btn-lg btn-success btn-create pull-right"
            ng-click="validateAndCreateServiceContract( serviceContract)">Create
       </div>
     </div>

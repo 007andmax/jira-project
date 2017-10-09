@@ -10,9 +10,10 @@
       </div>
       <div class="service-contract-details clearfix">
         <div class="col-md-7">
-          <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-error': isShowingHourErrors(hourlyContractForm, 'description')}">
             Description*
             <input placeholder="Description"
+                   name="description"
                    type="text"
                    class="form-control"
                    ng-model="editContract.description"
@@ -23,6 +24,9 @@
         <div class="col-md-3" style="margin-right: 26px;">
           <div class="form-group">
             Select Date*:
+            <div ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
+              <label class="control-label" style="color: red; text-align: left">Dates are required</label>
+            </div>
             <input type="text"
                    class="form-control has-dropdown readonly-normal"
                    name="StartDate"
@@ -103,7 +107,7 @@
           <div ng-show="!isNameUnique(editService.name) && editService.name">
             <p style="color: red;padding-left: 15px;">Duplicate name</p>
           </div>
-          <div class="col-md-4 service-name-agreement form-group" ng-class="{'has-error': isShowingErrors(newServiceForm, 'editServiceName')}">
+          <div class="col-md-4 service-name-agreement form-group" ng-class="{'has-error': isShowingHourNewFieldError(newServiceForm, 'editServiceName')}">
 
             <input placeholder="New Service Name"
                    type="text"
@@ -153,8 +157,8 @@
       <div class="col-md-8" ng-show="showCreateHourlyContractValidationError">
         <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
       </div>
-      <div class="btn btn-success btn-create" ng-click="validateAndCreateHourlyContract(editService)"
-           ng-disabled="dissableHourlyCreateButton()">Create
+      <div class="btn btn-success btn-create" ng-click="validateAndCreateHourlyContract(editService)">
+        Create
       </div>
       <!--<div class="btn btn-primary btn-create">Terminate</div>-->
     </div>
