@@ -378,7 +378,10 @@
             })
           }
 
+        } else {
+          $scope.showAddServiceButton = true;
         }
+
       };
 
       $scope.deleteService = function (service) {
