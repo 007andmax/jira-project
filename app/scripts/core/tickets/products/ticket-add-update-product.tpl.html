@@ -33,7 +33,12 @@
                  ng-keydown="$event.which === 13 && $event.preventDefault()">
         </div>
       </li>
-
+      <!--<li>-->
+        <!--<div class="col-1">Product</div>-->
+        <!--<div class="col-3">Cost</div>-->
+        <!--<div class="col-4">Qty</div>-->
+        <!--<div class="col-3">Sale Price</div>-->
+      <!--</li>-->
       <li>
 
         <div class="col-1" style="float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
@@ -94,13 +99,15 @@
         </div>
 
         <div class="col-4" style="width: 60px; float: left;">
-          <i class="icon-sm" ng-class="isDiscountIconGreen(productExpense) ? 'sale-icon-for-isDicount-green' : 'sale-icon-for-isDicount' "
+          <i class="icon-sm"
+             ng-class="isDiscountIconGreen(productExpense) ? 'sale-icon-for-isDicount-green' : 'sale-icon-for-isDicount' "
              ng-click="isShowInputField = !isShowInputField; isShowBarcotInputField = fasle"
              uib-tooltip="Discount"></i>
         </div>
 
         <div class="col-4" style="width: 50px;float: left;padding-top: 6px; cursor: pointer;">
-          <i class="icon-sm" uib-tooltip="Serial number" ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
+          <i class="icon-sm" uib-tooltip="Serial number"
+             ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
 

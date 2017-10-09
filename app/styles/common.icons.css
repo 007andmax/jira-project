@@ -329,14 +329,18 @@ a.ha-24 {
   background-image: url("../images/new-icons/discount-icon-green.png");
   cursor: pointer;
 }
-
+.ticket-add-content [class*='col-']{
+  float: left;
+}
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
   width: 18px;
   height: 18px;
   margin: 10px 0 0 10px;
   cursor: pointer;
 }
-
+.service-add-width .sale-icon-for-isDicount{
+  margin-left: 20px;
+}
 .ticket-update-service-edit .sale-icon-for-isDicount {
   margin: 5px 0 0;
 }

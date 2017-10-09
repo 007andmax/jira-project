@@ -7675,7 +7675,7 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 
 .nav-ticket-add > li > a:hover,
 .nav-ticket-add > li > a:active,
-.nav-ticket-add > li > a.active{
+.nav-ticket-add > li > a.active {
   color: #1f2a37;
 }
 
@@ -7694,11 +7694,13 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   background-color: #FFF;
   border-bottom: #e7ecf2 1px solid;
 }
+
 .contracts .nav-ticket-add > li.active > a,
 .contracts .nav-ticket-add > li.active > a:hover,
-.contracts .nav-ticket-add > li.active > a:focus{
+.contracts .nav-ticket-add > li.active > a:focus {
   border-bottom: none;
 }
+
 @-moz-document url-prefix() {
   .nav-ticket-add > li > a {
     line-height: 19px;
@@ -9996,11 +9998,13 @@ button.close {
     width: 900px;
   }
 }
-.modal-md{
-  width: 750px!important;
-  left: calc(50% - 375px)!important;
+
+.modal-md {
+  width: 750px !important;
+  left: calc(50% - 375px) !important;
   height: 100%;
 }
+
 .modal-spam .modal-dialog {
   width: 422px;
   top: 50%;
@@ -11216,9 +11220,28 @@ button.close {
   cursor: pointer;
 }
 
-.image-preview-close-btn:hover,
 .email-preview-close-btn:hover {
   background-color: rgba(0, 0, 0, .4);
+}
+
+.image-preview-close-btn:hover {
+  background-color: #e6e5e5;
+}
+
+.close-btn {
+  margin: 20px 30px;
+  background-color: #fff;
+  padding: 7px 35px 7px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  position: relative;
+  transition: all .3s;
+}
+
+.close-btn .icn-remove-old {
+  position: absolute;
+  right: 13px;
+  top: 13px;
 }
 
 .image-preview-close-btn .icn-remove-token,
@@ -11920,6 +11943,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: 157px;
     top: 56px;
   }
+
   .opened-ticket.opened-ticket-list .discount-input {
     position: absolute;
     right: 136px;
@@ -11936,6 +11960,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     width: 200px;
     top: 56px;
   }
+
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 106px !important;
   }

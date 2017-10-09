@@ -80,7 +80,7 @@
 
       <div class="archived" ng-show="filteredArchivedUsers && filteredArchivedUsers.length">
 
-        <h2 class="text-center" style="font-weight: normal;">Achived tech-users</h2>
+        <h2 class="text-center" style="font-weight: normal;">Archived tech-users</h2>
 
         <li class="template-item tech-user-item"
             ng-repeat="user in (filteredArchivedUsers = (archivedUsers | filter: { accountType: 'TECH' }) | orderBy: getUserName) track by user.id"

@@ -4883,6 +4883,7 @@ Devices tab
 .service-add-width .report-calendar {
   margin-top: 14px;
   display: inline-block;
+  margin-left: 10px;
 }
 
 .service-add-width .sale-icon-for-isDicount {
