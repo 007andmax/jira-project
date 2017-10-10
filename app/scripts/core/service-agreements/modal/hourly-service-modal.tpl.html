@@ -23,8 +23,9 @@
         <div class="col-md-12"></div>
         <div class="col-md-3" style="margin-right: 26px;">
           <div class="form-group">
-            Select Date*:
-            <div style="position: absolute;top: 0;right: -45px;" ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
+            Start Date*:
+            <div style="position: absolute;top: 30px;right: -350px;"
+                 ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
             <input type="text"
@@ -41,8 +42,8 @@
         </div>
         <div class="col-md-3">
           <div class="form-group">
-            <input style="margin-top: 25px;"
-                   type="text"
+            End Date*:
+            <input type="text"
                    class="form-control has-dropdown readonly-normal"
                    name="EndDate"
                    readonly
@@ -107,7 +108,8 @@
           <div ng-show="!isNameUnique(editService.name) && editService.name">
             <p style="color: red;padding-left: 15px;">Duplicate name</p>
           </div>
-          <div class="col-md-4 service-name-agreement form-group" ng-class="{'has-error': isShowingHourNewFieldError(newServiceForm, 'editServiceName')}">
+          <div class="col-md-4 service-name-agreement form-group"
+               ng-class="{'has-error': isShowingHourNewFieldError(newServiceForm, 'editServiceName')}">
 
             <input placeholder="New Service Name"
                    type="text"
@@ -133,7 +135,7 @@
           <div class="tax-agreement fourm-group text-center">
             <div class="" ng-hide="editContract.services.length > 19">
               <div>
-                <select-taxes taxes="taxes" entity="editService" ></select-taxes>
+                <select-taxes taxes="taxes" entity="editService"></select-taxes>
                 <!--<p>{{editService.taxes.length}}</p>-->
               </div>
             </div>
@@ -170,7 +172,7 @@
 <!--READONLY MODE-->
 
 <div class="service-agreement-modal" ng-show="!editMode">
-  <div ng-include="'/html/scripts/core/service-agreements/modal/hourly-service-preview-modal.tpl.html'"> </div>
+  <div ng-include="'/html/scripts/core/service-agreements/modal/hourly-service-preview-modal.tpl.html'"></div>
 
 </div>
 
