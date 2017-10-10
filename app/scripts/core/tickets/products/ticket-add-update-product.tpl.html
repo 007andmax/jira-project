@@ -33,12 +33,12 @@
                  ng-keydown="$event.which === 13 && $event.preventDefault()">
         </div>
       </li>
-      <!--<li>-->
-        <!--<div class="col-1">Product</div>-->
-        <!--<div class="col-3">Cost</div>-->
-        <!--<div class="col-4">Qty</div>-->
-        <!--<div class="col-3">Sale Price</div>-->
-      <!--</li>-->
+      <li ng-hide="productExpense.itemOrder> 0">
+        <div class="col-1">Product</div>
+        <div class="col-3">Cost</div>
+        <div class="col-4">Qty</div>
+        <div class="col-3">Sale Price</div>
+      </li>
       <li>
 
         <div class="col-1" style="float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
