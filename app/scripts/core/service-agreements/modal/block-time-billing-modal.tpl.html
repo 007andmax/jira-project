@@ -42,7 +42,7 @@
         <div class="interval-agreement">
           <div class="form-group">
             Select Date*
-            <div ng-class="{'hide': !isShowingErrorsBlock(blockTimeContractForm, 'startDate')}">
+            <div style="position: absolute;right: -285px;top: 30px;" ng-class="{'hide': !isShowingErrorsBlock(blockTimeContractForm, 'startDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
             <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="blockTimeContract.startDate"
@@ -134,7 +134,7 @@
         <div class="col-md-12 service-bill-hide-content">
           <p>Create customer services to track your time spent with this block time contract</p>
           <div class="col-md-7" style="padding-left: 30px;">Service name</div>
-          <div class="col-md-2 text-center">Action</div>
+          <div class="col-md-2 text-center" style="padding-left: 0;">Action</div>
 
           <div class="bill-hide-content-item clearfix col-md-12"
                ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
