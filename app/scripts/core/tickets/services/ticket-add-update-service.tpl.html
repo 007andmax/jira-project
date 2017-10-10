@@ -18,11 +18,11 @@
                ng-keydown="$event.which === 13 && $event.preventDefault()">
       </div>
     </li>
-    <!--<li>-->
-    <!--<div class="col-1">Service</div>-->
-    <!--<div class="col-2">Hr(s) : Min(s)</div>-->
-    <!--<div class="col-3">Description</div>-->
-    <!--</li>-->
+    <li ng-hide="serviceExpense.itemOrder> 0">
+      <div class="col-1">Service</div>
+      <div class="col-2">Hr(s) : Min(s)</div>
+      <div class="col-3">Description</div>
+    </li>
     <li class="service-add-width">
       <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
         <div uib-dropdown>
