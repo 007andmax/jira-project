@@ -46,7 +46,7 @@
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
             <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="blockTimeContract.startDate"
-                   placeholder="Select Start Date" name="startDate"
+                   placeholder="Select Start Date"
                    readonly ng-change="changeStartDate()" name="startDate"
                    qt-data-time-picker min-date="blockTimeContract.minStartDate" required>
             <i class="report-calendar"></i>
