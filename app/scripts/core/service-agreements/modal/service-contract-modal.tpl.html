@@ -370,6 +370,7 @@
                              ng-minlength="1"
                              autocomplete="off"
                              tabindex="5"
+                             required
                              placeholder="Service Expense"
                              class="form-control form-control-dropdown dropdown-toggle"
                              uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
@@ -393,7 +394,8 @@
                   <div class="col-sm-3" style="width: 197px;">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="serviceExpense.description" max-length-word="100"
-                           name="serviceDescription" ng-maxlength="2000" required>
+                           name="serviceDescription" ng-maxlength="2000"
+                           hard-reset-pattern="descriptionPattern" required>
                   </div>
 
                   <div class="interval-agreement">
@@ -436,6 +438,7 @@
                              ng-minlength="1"
                              autocomplete="off"
                              tabindex="5"
+                             required
                              placeholder="Service Expense"
                              class="form-control form-control-dropdown dropdown-toggle"
                              uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
@@ -459,7 +462,8 @@
                   <div class="col-sm-3" style="width: 197px;">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="newServiceExpense.description" max-length-word="100"
-                           name="serviceDescription" ng-maxlength="2000" required>
+                           name="serviceDescription" ng-maxlength="2000"
+                           hard-reset-pattern="descriptionPattern" required>
                   </div>
 
                   <div class="interval-agreement">

@@ -235,7 +235,8 @@
             $scope.defaultDareForServiceExpense = pickedDate.getTime();
           }
           for(var i=0; i<$scope.serviceContract.serviceExpenses.length; i++) {
-            var setDate = $scope.serviceContract.serviceExpenses[i].date;
+            var setDate = new Date($scope.serviceContract.serviceExpenses[i].date);
+            console.log(setDate.getTime(), startDate.getTime() );
             if(setDate.getTime() < startDate.getTime()) {
               $scope.serviceContract.serviceExpenses[i].date = $scope.serviceContract.startDate;
             }
@@ -510,7 +511,7 @@
               name: null,
               quantity: null,
               description: null,
-              date: null
+              date: $filter('date')($scope.defaultDareForServiceExpense, 'dd MMM yyyy')
             };
             $scope.calculateTotalAmount();
           }
