@@ -194,7 +194,6 @@
         }
 
 
-
         $scope.formattingDateForServiceExpenses = function (date) {
           var d = new Date(date);
           return d;
