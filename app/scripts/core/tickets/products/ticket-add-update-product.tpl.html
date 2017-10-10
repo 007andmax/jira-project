@@ -33,19 +33,19 @@
                  ng-keydown="$event.which === 13 && $event.preventDefault()">
         </div>
       </li>
-      <li ng-hide="productExpense.itemOrder> 0">
-        <div class="col-1">Product</div>
-        <div class="col-3">Cost</div>
-        <div class="col-4">Qty</div>
-        <div class="col-3">Sale Price</div>
-      </li>
+      <!--<li ng-hide="productExpense.itemOrder> 0">-->
+      <!--<div class="col-1">Product</div>-->
+      <!--<div class="col-3">Cost</div>-->
+      <!--<div class="col-4">Qty</div>-->
+      <!--<div class="col-3">Sale Price</div>-->
+      <!--</li>-->
       <li>
 
         <div class="col-1" style="float: left;" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
           <div products-list id="product-list-cont"
                click-outside="closeDropdown()" outside-if-not="product-list-cont">
 
-            <div>
+            <div uib-tooltip="Product" tooltip-placement="top">
 
               <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
                      placeholder="Product" autocomplete="off">
@@ -68,7 +68,9 @@
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}"
              style="width: 140px; float: left;">
 
-          <input type="number"
+          <input uib-tooltip="Cost"
+                 tooltip-placement="top"
+                 type="number"
                  class="form-control"
                  name="productCost"
                  qt-to-fixed="2"
@@ -83,7 +85,8 @@
         <div class="col-4" style="width: 115px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
-          <input type="text" class="form-control" placeholder="Qty" maxlength="4"
+          <input uib-tooltip="Qty" tooltip-placement="top"
+                 type="text" class="form-control" placeholder="Qty" maxlength="4"
                  name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
                  ng-model="productExpense.quantity" ng-maxlength="10"
                  hard-reset-pattern="quantityPattern">
@@ -92,7 +95,8 @@
         <div class="col-3 price-width" style="width: 125px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
-          <input type="number" class="form-control" placeholder="Price" qt-to-fixed="2"
+          <input uib-tooltip="Product Sale Price" tooltip-placement="top"
+                 type="number" class="form-control" placeholder="Price" qt-to-fixed="2"
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                  name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
