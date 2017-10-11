@@ -1,4 +1,4 @@
-<div ng-form="newProductExpenseForm">
+<div ng-form="newProductExpenseForm" ng-if="reInitNewProductExpenseForm">
   <div ng-show="showProductExpenseError">
     <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
   </div>
@@ -21,12 +21,13 @@
       <!--<div class="input-top-4" typeahead-input-icon="productName"></div>-->
 
       <div products-list id="product-list-cont"
-           click-outside="closeDropdown()" outside-if-not="product-list-cont">
+           click-outside="closeDropdown()" outside-if-not="product-list-cont"
+           ng-class="{'has-error': isShowingErrorsNewProductExpenseeField(newProductExpenseForm, 'newProductExpenseName') }">
 
         <div>
 
-          <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
-                 placeholder="Product" autocomplete="off" ng-model="newProductExpense.name.description">
+          <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input name="newProductExpenseName"
+                 placeholder="Product" autocomplete="off" ng-model="newProductExpense.name.description" required>
 
           <input ng-show="isPLOpen" type="text" class="form-control has-dropdown"
                  pl-search-product-input
@@ -46,18 +47,20 @@
     </div>
   </div>
 
-  <div class="col-sm-2">
-    <input type="text" class="form-control" placeholder="Qty"
+  <div class="col-sm-2"
+       ng-class="{'has-error': isShowingErrorsNewProductExpenseeField(newProductExpenseForm, 'newProductExpenseQuantity') }">
+    <input type="text" class="form-control" placeholder="Qty" name="newProductExpenseQuantity"
            ng-model="newProductExpense.quantity" ng-maxlength="4" required
            name="productQty"
 
            hard-reset-pattern="numberPattern">
   </div>
 
-  <div class="col-sm-2">
-    <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
+  <div class="col-sm-2"
+       ng-class="{'has-error': isShowingErrorsNewProductExpenseeField(newProductExpenseForm, 'newProductExpensePrice') }">
+    <input type="text" class="form-control" placeholder="Price" name="newProductExpensePrice" qt-to-fixed="2"
            ng-required="true" ng-model="newProductExpense.salePrice"
-           hard-reset-pattern="decimalNumberPatternLow">
+           hard-reset-pattern="decimalNumberPatternLow" required>
   </div>
 
   <div class="col-sm-1">

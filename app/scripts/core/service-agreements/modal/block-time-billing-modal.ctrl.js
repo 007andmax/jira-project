@@ -136,7 +136,7 @@
               endDate = Utils.addNumberOfMonth(endDate, 1);
               break;
             case('Year'):
-              endDate.setFullYear(endDate.getFullYear() + 1);
+              endDate = Utils.addNumberOfMonth(endDate, 12);
               break;
             default:
               var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,

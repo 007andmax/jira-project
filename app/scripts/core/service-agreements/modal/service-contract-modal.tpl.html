@@ -232,7 +232,7 @@
           <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">{{validationServiceError}}</p>
         </div>
         <div class="col-md-4 form-group" style="width: 259px;"
-             ng-class="{'has-error': isShowingErrors(newServiceContractServicesForm, 'newServiceContractServiceName') }">
+             ng-class="{'has-error': isShowingErrorsNewSCSField(newServiceContractServicesForm, 'newServiceContractServiceName') }">
           <input placeholder="Enter the Name" type="text" class="form-control"
                  ng-model="NewServiceContractServices.name"
                  required
@@ -241,13 +241,26 @@
                  hard-reset-pattern="serviceNamePattern"
                  invalid-when="!isNewServiceContractServiceNameUnique(NewServiceContractServices.name)">
         </div>
-        <div class="price-agreement fourm-group">
-          <input placeholder="Count" type="text" class="form-control"
-                 ng-model="NewServiceContractServices.count" hard-reset-pattern="decimalNumberPattern" required>
+        <div class="price-agreement fourm-group"
+             ng-class="{'has-error': isShowingErrorsNewSCSField(newServiceContractServicesForm, 'newSCSCount') }">
+          <input placeholder="Count"
+                 name="newSCSCount"
+                 type="text"
+                 class="form-control"
+                 ng-model="NewServiceContractServices.count"
+                 hard-reset-pattern="decimalNumberPattern"
+                 required>
         </div>
-        <div class="price-agreement fourm-group before-icon">
-          <input placeholder="0.00" type="text" class="form-control"
-                 ng-model="NewServiceContractServices.rate" hard-reset-pattern="decimalNumberPattern" required qt-to-fixed="2">
+        <div class="price-agreement fourm-group before-icon"
+             ng-class="{'has-error': isShowingErrorsNewSCSField(newServiceContractServicesForm, 'newCSCRate') }">
+          <input placeholder="0.00"
+                 name="newCSCRate"
+                 type="text"
+                 class="form-control"
+                 ng-model="NewServiceContractServices.rate"
+                 hard-reset-pattern="decimalNumberPattern"
+                 required
+                 qt-to-fixed="2">
         </div>
         <div class="tax-agreement fourm-group">
           <select-taxes taxes="taxes" entity="NewServiceContractServices"></select-taxes>
@@ -425,15 +438,16 @@
 
               <li>
 
-                <div ng-form="newServiceExpenseForm">
+                <div ng-form="newServiceExpenseForm" ng-if="reInitNewServiceExpenseForm">
                   <div ng-show="showServiceExpenseError">
                     <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
                   </div>
                   <div class="col-sm-3">
-                    <div uib-dropdown>
+                    <div uib-dropdown
+                         ng-class="{'has-error': isShowingErrorsNewServicExpenseeField(newServiceExpenseForm, 'newServiceExpenseName') }">
                       <input type="text"
                              style="cursor: pointer;"
-                             name="serviceName"
+                             name="newServiceExpenseName"
                              ng-model="newServiceExpense.name"
                              ng-minlength="1"
                              autocomplete="off"
@@ -451,18 +465,20 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-2" service-quantity-picker="newServiceExpense.quantity" sqp-is-show-format="false">
+                  <div class="col-sm-2" service-quantity-picker="newServiceExpense.quantity" sqp-is-show-format="false"
+                       ng-class="{'has-error': !newServiceExpense.quantity &&  showRequiredFieldErrorServiceExpense}">
                     <input style="cursor: pointer;" id="service-quantity-picker" type="text" class="form-control"
-                           placeholder="Hr(s) : Min(s)" sqp-input
+                           placeholder="Hr(s) : Min(s)" sqp-input name="newServiceExpenseDuration"
                            autocomplete="off" aria-expanded="true" required>
 
                     <input type="hidden" name="serviceTime" ng-model="newServiceExpense.quantity" ng-required="true"/>
                   </div>
 
-                  <div class="col-sm-3" style="width: 197px;">
+                  <div class="col-sm-3" style="width: 197px;"
+                       ng-class="{'has-error': isShowingErrorsNewServicExpenseeField(newServiceExpenseForm, 'newServiceExpenseDescription') }">
                     <input type="text" class="form-control service-description" placeholder="Description"
                            ng-model="newServiceExpense.description" max-length-word="100"
-                           name="serviceDescription" ng-maxlength="2000"
+                            ng-maxlength="2000" name="newServiceExpenseDescription"
                            hard-reset-pattern="descriptionPattern" required>
                   </div>
 
@@ -578,7 +594,7 @@
               <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
             </div>
             <div class="service-name-agreement form-group"
-                 ng-class="{'has-error': isShowingErrors(newServiceForm, 'newServiceName') }">
+                 ng-class="{'has-error': isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') }">
               <input placeholder="New Additional Service name"
                      type="text"
                      name="newServiceName"
@@ -586,15 +602,18 @@
                      ng-model="newService.name"
                      hard-reset-pattern="serviceNamePattern"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                     invalid-when="!isAdditionalServiceNameUnique(newService.name)">
+                     invalid-when="!isAdditionalServiceNameUnique(newService.name)"
+                     required>
 
             </div>
-            <div class="price-agreement fourm-group before-icon">
+            <div class="price-agreement fourm-group before-icon"
+                 ng-class="{'has-error': isShowingErrorsNewServiceField(newServiceForm, 'newServiceRate') }">
               <input placeholder="0.00"
+                     name="newServiceRate"
                      type="text"
                      class="form-control"
                      ng-model="newService.rate"
-                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
             <div class="col-md-1 fourm-group text-center" style="padding: 0;">
               <label class="control checkbox">

@@ -436,7 +436,7 @@
      }
    }
 
-    function addNumberOfMonth(oldDate, amountOFMonth) {
+    function addNumberOfMonth(oldDate, amountOfMonth) {
       Date.isLeapYear = function (year) {
         return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0));
       };
@@ -462,7 +462,7 @@
       };
 
       var newDate = new Date(oldDate);
-      return newDate.addMonths(amountOFMonth);
+      return newDate.addMonths(amountOfMonth);
     }
 
     return {

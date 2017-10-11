@@ -251,7 +251,7 @@
               endDate = Utils.addNumberOfMonth(endDate, 1);
               break;
             case('Year'):
-              endDate.setFullYear(endDate.getFullYear() + 1);
+              endDate = Utils.addNumberOfMonth(endDate, 12);
               break;
             default:
               //endDate.setTime(endDate.getTime() + day * period);
@@ -278,6 +278,13 @@
           $scope.reInitEndDate = false;
           $timeout(function () {
             $scope.reInitEndDate = true;
+          }, 0);
+        }
+        $scope.reInitNewServiceExpenseForm = true;
+        function reInitNewServiceExpenseForm() {
+          $scope.reInitNewServiceExpenseForm = false;
+          $timeout(function () {
+            $scope.reInitNewServiceExpenseForm = true;
           }, 0);
         }
 
@@ -410,6 +417,7 @@
         };
 
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
+          $scope.showRequiredFieldErrorSCS =  false;
           $scope.showNewServiceContractServiceValidationError = false;
           if (form.$valid) {
             validateNewServiceName(NewServiceContractServices.name).then(function (resp) {
@@ -435,6 +443,8 @@
             }, function() {
               $scope.showNewServiceContractServiceValidationError = true;
             });
+          } else {
+            $scope.showRequiredFieldErrorSCS = true;
           }
         };
 
@@ -493,6 +503,7 @@
 
 
         $scope.addServiceExpense = function (form, serviceExpense) {
+          $scope.showRequiredFieldErrorServiceExpense = false;
 
           if (form.$valid) {
             var newServiceExpense = {
@@ -513,7 +524,10 @@
               description: null,
               date: $filter('date')($scope.defaultDareForServiceExpense, 'dd MMM yyyy')
             };
+            reInitNewServiceExpenseForm();
             $scope.calculateTotalAmount();
+          } else {
+            $scope.showRequiredFieldErrorServiceExpense = true;
           }
         };
 
@@ -536,6 +550,7 @@
         };
 
         $scope.addNewService = function (form, service) {
+          $scope.showRequiredFieldErrorService = false;
           $scope.showNewServiceError = false;
           $scope.showNewServiceValidationError = false;
           if (form.$valid) {
@@ -556,6 +571,8 @@
               $scope.showNewServiceValidationError = true;
             })
 
+          } else {
+            $scope.showRequiredFieldErrorService = true;
           }
         };
 
@@ -718,6 +735,26 @@
         $scope.isShowingErrorsServiceContract = function (form, fieldName) {
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldError) && !form[fieldName].$valid;
         };
+
+        $scope.showRequiredFieldErrorSCS = false;
+        $scope.showRequiredFieldErrorService = false;
+        $scope.showRequiredFieldErrorServiceExpense = false;
+
+        $scope.isShowingErrorsNewSCSField = function (form, fieldName) {
+          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorSCS) && !form[fieldName].$valid;
+        };
+
+
+        $scope.isShowingErrorsNewServiceField = function (form, fieldName) {
+          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorService) && !form[fieldName].$valid;
+        };
+
+        $scope.isShowingErrorsNewServicExpenseeField = function (form, fieldName) {
+          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorServiceExpense) && !form[fieldName].$valid;
+        };
+
+
+
 
         $scope.calculateTotalAmount = function () {
           var totalAmount = 0;
