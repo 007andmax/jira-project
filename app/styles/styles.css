@@ -6718,7 +6718,9 @@ tbody.collapse.in {
   white-space: nowrap;
   min-width: 200px;
 }
-
+.tax-agreement .checkbox-dd-item label{
+  min-width: 150px;
+}
 @-moz-document url-prefix() {
   .checkbox-dd-item label {
     padding: 11px 20px 13px 46px;
