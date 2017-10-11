@@ -11118,7 +11118,9 @@ button.close {
   top: 0;
   right: 0;
 }
-
+.fixed-block-top{
+  height: 54px;
+}
 .payment-receive-fixed {
   background-color: #fff;
 }

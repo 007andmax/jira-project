@@ -489,14 +489,8 @@
 }
 
 .service-agreements-lists .content-product-list-ticket {
-  border-bottom: 1px solid #e7ecf2;
-  border-right: 3px solid #fff;
-  border-left: 3px solid #fff;
-}
+  border-top: 1px solid #e7ecf2;
 
-.service-agreements-lists .content-product-list-ticket:hover {
-  border-right: 3px solid #e7ecf2;
-  border-left: 3px solid #e7ecf2;
 }
 
 .service-agreements ul {
@@ -506,10 +500,6 @@
 
 .service-agreements ul li [class*='col-md-'] {
   padding: 15px;
-}
-
-.service-agreements ul li:first-child {
-  border-bottom: 1px solid #eee;
 }
 
 .product-list-ticket ul {
