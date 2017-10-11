@@ -276,7 +276,6 @@
         d.setMonth(d.getMonth() + 1);
         var newDate = Utils.addNumberOfMonth(d, 1);
         $scope.minDateForEndDatePicker = newDate.getTime();
-        console.log($scope.minDateForEndDatePicker);
       }
 
 
@@ -304,10 +303,8 @@
           $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
           $scope.startDate = $scope.editContract.startDate;
           var endDate = new Date(date);
-          console.log(endDate);
           //endDate.setMonth(endDate.getMonth() + 1);
           var n = Utils.addNumberOfMonth(endDate, 1);
-          console.log('n', n);
           $scope.editContract.endDate = $filter('date')(n, 'yyyy/MM/dd');
           var f = new Date(date);
           setMiNDateForEndDate(f.getTime());

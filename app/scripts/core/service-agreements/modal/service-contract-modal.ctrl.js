@@ -23,9 +23,14 @@
         $scope.reInitServiceContractServicesForm = true;
         $scope.reInitServiceForm = true;
         $scope.reInitPrpductsExpenseNameField = false;
+        $scope.reInitNewServiceExpenseForm = true;
 
         $scope.showRequiredFieldError = false;
         $scope.showServiceLengthCheckError = false;
+
+        $scope.showRequiredFieldErrorSCS = false;
+        $scope.showRequiredFieldErrorService = false;
+        $scope.showRequiredFieldErrorServiceExpense = false;
 
         $scope.showNewServiceContractServiceValidationError = false;
         $scope.showNewServiceValidationError = false;
@@ -280,7 +285,7 @@
             $scope.reInitEndDate = true;
           }, 0);
         }
-        $scope.reInitNewServiceExpenseForm = true;
+
         function reInitNewServiceExpenseForm() {
           $scope.reInitNewServiceExpenseForm = false;
           $timeout(function () {
@@ -736,9 +741,7 @@
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldError) && !form[fieldName].$valid;
         };
 
-        $scope.showRequiredFieldErrorSCS = false;
-        $scope.showRequiredFieldErrorService = false;
-        $scope.showRequiredFieldErrorServiceExpense = false;
+
 
         $scope.isShowingErrorsNewSCSField = function (form, fieldName) {
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorSCS) && !form[fieldName].$valid;
