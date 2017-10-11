@@ -6718,9 +6718,11 @@ tbody.collapse.in {
   white-space: nowrap;
   min-width: 200px;
 }
-.tax-agreement .checkbox-dd-item label{
+
+.tax-agreement .checkbox-dd-item label {
   min-width: 150px;
 }
+
 @-moz-document url-prefix() {
   .checkbox-dd-item label {
     padding: 11px 20px 13px 46px;
@@ -11239,12 +11241,14 @@ button.close {
   position: relative;
   transition: all .3s;
 }
-.close-btn-new .icn-sm.icn-remove-old{
+
+.close-btn-new .icn-sm.icn-remove-old {
   position: absolute;
   right: 13px;
   top: 13px;
 }
-.close-btn.btn{
+
+.close-btn.btn {
   min-width: 0;
 }
 
@@ -11876,6 +11880,14 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1600px) {
+  .opened-ticket.opened-ticket-list .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
+    width: 36%;
+  }
+
+  .opened-ticket .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
+    width: 47%;
+  }
+
   .invoices-header .dropdown-menu > li > a {
     padding: 4px 20px;
   }
@@ -11958,6 +11970,14 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1366px) {
+  .opened-ticket.opened-ticket-list .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
+    width: 34%;
+  }
+
+  .opened-ticket .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
+    width: 44%;
+  }
+
   .opened-ticket.opened-ticket-list .discount-input {
     position: absolute;
     right: 102px;
@@ -11988,6 +12008,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1280px) {
+  .opened-ticket .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
+    width: 42%;
+  }
+
   .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 500px);
   }
