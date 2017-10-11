@@ -271,7 +271,7 @@
 
       function setMiNDateForEndDate(date) {
         var d = new Date(date);
-        d.setDate(d.getDate() + 30);
+        d.setMonth(d.getMonth() + 1);
         $scope.minDateForEndDatePicker = d.getTime();
         console.log($scope.minDateForEndDatePicker);
       }
