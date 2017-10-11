@@ -4,9 +4,10 @@
 
   angular.module('quicktech.core.serviceAgreements').controller('serviceContractCtrl',
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
-      'ProductsService', '$filter', '$timeout', 'TaxesService', '$q', 'quicktech.common.services.UserConfirmationsService',
+      'ProductsService', '$filter', '$timeout', 'TaxesService', '$q',
+      'quicktech.common.services.UserConfirmationsService', 'Utils',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
-                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService) {
+                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
         $scope.serviceContractType = {
@@ -247,7 +248,7 @@
           var endDate = new Date(date);
           switch (period) {
             case('Month'):
-              endDate.setMonth(endDate.getMonth() + 1);
+              endDate = Utils.addNumberOfMonth(endDate, 1);
               break;
             case('Year'):
               endDate.setFullYear(endDate.getFullYear() + 1);

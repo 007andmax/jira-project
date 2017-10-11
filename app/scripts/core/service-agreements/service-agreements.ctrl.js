@@ -141,9 +141,11 @@
       }]).controller('serviceAgreementsModalCtrl', [
     '$scope', '$uibModalInstance', 'companyData', '$state',
     'ServicesService', 'CompaniesService', 'TaxesService',
-    'AgreementsService', '$filter', '$q', '$timeout', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+    'AgreementsService', '$filter', '$q', '$timeout',
+    'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'Utils',
     function ($scope, $uibModalInstance, companyData, $state, ServicesService,
-              CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout, UserConfirmationsService, UserNotificationService) {
+              CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout,
+              UserConfirmationsService, UserNotificationService, Utils) {
 
       $scope.taxes = TaxesService.getAll();
       $scope.companyId = companyData.companyId;
@@ -268,13 +270,16 @@
         }, 0);
       }
 
-
       function setMiNDateForEndDate(date) {
+
         var d = new Date(date);
-        d.setDate(d.getDate() + 30);
-        $scope.minDateForEndDatePicker = d.getTime();
+        d.setMonth(d.getMonth() + 1);
+        var newDate = Utils.addNumberOfMonth(d, 1);
+        $scope.minDateForEndDatePicker = newDate.getTime();
         console.log($scope.minDateForEndDatePicker);
       }
+
+
 
       $scope.addDefaultTaxes = function () {
         var defaultTaxList = [];
@@ -299,8 +304,11 @@
           $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
           $scope.startDate = $scope.editContract.startDate;
           var endDate = new Date(date);
-          endDate.setMonth(endDate.getMonth() + 1);
-          $scope.editContract.endDate = $filter('date')(endDate, 'yyyy/MM/dd');
+          console.log(endDate);
+          //endDate.setMonth(endDate.getMonth() + 1);
+          var n = Utils.addNumberOfMonth(endDate, 1);
+          console.log('n', n);
+          $scope.editContract.endDate = $filter('date')(n, 'yyyy/MM/dd');
           var f = new Date(date);
           setMiNDateForEndDate(f.getTime());
         }

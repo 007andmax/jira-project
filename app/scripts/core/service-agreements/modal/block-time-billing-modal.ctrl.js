@@ -6,9 +6,9 @@
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
       'UsersService', '$filter', '$timeout', '$q',
-      'quicktech.common.services.UserConfirmationsService', 'TaxesService',
+      'quicktech.common.services.UserConfirmationsService', 'TaxesService', 'Utils',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
-                UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService) {
+                UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService, Utils) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
 
@@ -132,10 +132,11 @@
           var endDate = new Date(date);
           switch(period) {
             case('Month'):
-              endDate.setMonth(endDate.getMonth() + 1);
+              //endDate.setMonth(endDate.getMonth() + 1);
+              endDate = Utils.addNumberOfMonth(endDate, 1);
               break;
             case('Year'):
-              endDate.setFullYear(endDate.getFullYear()+1);
+              endDate.setFullYear(endDate.getFullYear() + 1);
               break;
             default:
               var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
