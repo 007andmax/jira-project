@@ -591,7 +591,6 @@
           return deferred.promise;
         }
 
-
         function createBlockTimeContract(contractData) {
           if (contractData) {
 
