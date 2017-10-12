@@ -135,8 +135,8 @@
               }
 
               if (period === 'Month') {
-                date.setMonth(date.getMonth() + 1);
-                dates.push($filter('date')(date, 'd MMM yyyy'));
+                // date.setMonth(date.getMonth() + 1);
+                // dates.push($filter('date')(date, 'd MMM yyyy'));
               } else if (period === 'Year') {
                 date.setFullYear(date.getFullYear() + 1);
                 dates.push($filter('date')(date, 'd MMM yyyy'));
