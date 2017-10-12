@@ -455,9 +455,15 @@
 
       Date.prototype.addMonths = function (value) {
         var n = this.getDate();
+        var ifLastDay = this.getDate() == this.getDaysInMonth();
         this.setDate(1);
         this.setMonth(this.getMonth() + value);
-        this.setDate(Math.min(n, this.getDaysInMonth()));
+        if(ifLastDay) {
+          this.setDate( this.getDaysInMonth());
+        } else {
+          this.setDate(Math.min(n, this.getDaysInMonth()));
+        }
+
         return this;
       };
 
