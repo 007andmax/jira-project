@@ -507,6 +507,8 @@
         };
 
 
+
+
         $scope.addServiceExpense = function (form, serviceExpense) {
           $scope.showRequiredFieldErrorServiceExpense = false;
 
@@ -971,6 +973,9 @@
           }
         }
 
+        $scope.refreshNewProductExpense = function(newServiceExpense) {
+          $scope.newProductExpense = newServiceExpense
+        };
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
           if(checkForInvalidFields()) {

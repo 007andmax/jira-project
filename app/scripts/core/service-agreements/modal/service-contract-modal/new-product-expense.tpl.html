@@ -50,10 +50,9 @@
   <div class="col-sm-2"
        ng-class="{'has-error': isShowingErrorsNewProductExpenseeField(newProductExpenseForm, 'newProductExpenseQuantity') }">
     <input type="text" class="form-control" placeholder="Qty" name="newProductExpenseQuantity"
-           ng-model="newProductExpense.quantity" ng-maxlength="4" required
-           name="productQty"
+           ng-model="newProductExpense.quantity" required
 
-           hard-reset-pattern="numberPattern">
+           hard-reset-pattern="quantityPattern">
   </div>
 
   <div class="col-sm-2"

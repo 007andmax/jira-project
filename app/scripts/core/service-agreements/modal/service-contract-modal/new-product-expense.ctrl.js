@@ -36,12 +36,19 @@
                 quantity: null,
                 salePrice: null
               };
+              //$scope.clearNewProductExpense();
               reInitNewProductExpenseForm();
               $scope.calculateTotalAmount();
             } else {
               $scope.showRequiredFieldErrorproductExpense = true;
             }
           };
+
+          $scope.$watch(function(){
+            return $scope.newProductExpense;
+          }, function(npx){
+            $scope.refreshNewProductExpense(npx);
+          });
 
           $scope.isShowingErrorsNewProductExpenseeField = function (form, fieldName) {
             return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorproductExpense) && !form[fieldName].$valid;
