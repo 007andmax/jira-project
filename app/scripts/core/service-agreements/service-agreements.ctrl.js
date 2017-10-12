@@ -148,6 +148,7 @@
               UserConfirmationsService, UserNotificationService, Utils) {
 
       $scope.taxes = TaxesService.getAll();
+
       $scope.companyId = companyData.companyId;
       $scope.companyInfo = companyData.companyInfo;
       $scope.companiesList = CompaniesService.getClientCompanies();
@@ -186,6 +187,7 @@
         $scope.editContract.services = [];
 
         ServicesService.getServicesData($scope, function (data) {
+          console.log(data);
           for (var i = 0; i < data.length; i++) {
             var serv = {
               name: data[i].name,
@@ -201,11 +203,16 @@
             }
             $scope.editContract.services.push(serv);
           }
-          for (var s = 0; s < $scope.editContract.services.length; s++) {
-            $scope.editContract.services[s].taxes = $scope.addDefaultTaxes()
-          }
         });
 
+        $timeout(function () {
+          $scope.editService = {
+            name: '',
+            rate: null,
+            billable: false,
+            taxes: addDefaultTaxes()
+          };
+        }, 1000);
 
       } else {
         console.log(companyData);
@@ -224,6 +231,7 @@
             }
           }
         }
+
       }
 
 
@@ -231,12 +239,6 @@
         $scope.editMode = false;
       }
 
-      $scope.editService = {
-        name: '',
-        rate: null,
-        billable: false,
-        taxes: []
-      };
 
       $scope.showClearIcon = function () {
         if ($scope.contractCompany) {
@@ -289,6 +291,15 @@
         }
         return defaultTaxList;
       };
+      function addDefaultTaxes(){
+        var defaultTaxList = [];
+        for (var i = 0; i < $scope.taxes.length; i++) {
+          if ($scope.taxes[i].isDefault) {
+            defaultTaxList.push($scope.taxes[i])
+          }
+        }
+        return defaultTaxList;
+      }
 
       $scope.dateFilter = function (date) {
         return $filter('date')(date, 'dd MMM yyyy');
@@ -623,10 +634,8 @@
         function validateAndCreate() {
           if (emptyNewService) {
             validateCrossingDatesHourly().then(function (resp) {
-              //console.log('1 ', resp);
               if (resp) {
                 checkForDuplicateServiceNames().then(function (resp) {
-                  //console.log('2 ', resp);
                   if (resp) {
                     createHourlyContract();
                   }

@@ -36,7 +36,6 @@
                 quantity: null,
                 salePrice: null
               };
-              //$scope.clearNewProductExpense();
               reInitNewProductExpenseForm();
               $scope.calculateTotalAmount();
             } else {
