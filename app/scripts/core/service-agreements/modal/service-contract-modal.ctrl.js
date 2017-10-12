@@ -845,13 +845,13 @@
             sd.setHours(0, 0, 0, 0);
             sd.setSeconds(0);
             sd.setMilliseconds(0);
-            servContract.startDate = sd.getTime();
+            servContract.startDate = $filter('date')(sd, 'yyyy/MM/dd');
 
             var ed = new Date($scope.serviceContract.endDate);
             ed.setHours(0, 0, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
-            servContract.endDate = ed.getTime();
+            servContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
             if (serviceContract.services && serviceContract.services.length) {
               for (var i = 0; i < serviceContract.services.length; i++) {

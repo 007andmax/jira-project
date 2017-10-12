@@ -4,8 +4,8 @@
 
   angular.module("quicktech.common.directives").directive('dateTimePickerWithPeriod',
     [
-      '$timeout', '$filter',
-      function ($timeout, $filter) {
+      '$timeout', '$filter', 'Utils',
+      function ($timeout, $filter, Utils) {
         return {
           restrict: 'A',
           require: 'ngModel',
@@ -13,7 +13,8 @@
             minDate: '=',
             maxDate: '=',
             period: '=',
-            defaultDate: '='
+            defaultDate: '=',
+            startDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
 
@@ -28,7 +29,8 @@
                 }
               }, dp,
               enabledDates = [],
-              lastDate = '';
+              lastDate = '',
+              sd='';
 
             if (scope.minDate) {
               options.minDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
@@ -42,8 +44,18 @@
               options.defaultDate = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
             }
 
+            if (scope.startDate) {
+              sd = $filter('date')(scope.startDate, 'dd MMM yyyy');
+            }
+
             if (scope.period) {
-              enabledDates = getEnabledDates(scope.minDate, scope.period);
+              if(scope.period === 'Month') {
+                enabledDates = [];
+                enabledDates.push(scope.minDate);
+              } else {
+                enabledDates = getEnabledDates(scope.minDate, scope.period);
+
+              }
               enabledDates.unshift(scope.minDate);
               lastDate = enabledDates[enabledDates.length - 1];
               options.enabledDates = enabledDates;
@@ -69,7 +81,14 @@
                     lastDate = enabledDates[enabledDates.length - 1];
                     data.enabledDates(enabledDates);
                   }
-                } else {
+                } else if(scope.period === 'Month'){
+                  var d = new Date(sd);
+                  d = Utils.addNumberOfMonth(d, enabledDates.length);
+                  //enabledDates.push($filter('date')(d, 'd MMM yyyy'));
+                  enabledDates = enabledDates.concat($filter('date')(d, 'd MMM yyyy'));
+                  data.enabledDates(enabledDates);
+
+                }else {
                   enabledDates = enabledDates.concat(getEnabledDates(lastDate, scope.period));
                   lastDate = enabledDates[enabledDates.length - 1];
                   data.enabledDates(enabledDates);
@@ -88,7 +107,13 @@
 
             element.bind('dp.hide', function (e) {
               if (scope.period) {
-                enabledDates = getEnabledDates(scope.minDate, scope.period);
+                if(scope.period === 'Month') {
+                  enabledDates = [];
+                  enabledDates.push(scope.minDate);
+                } else {
+                  enabledDates = getEnabledDates(scope.minDate, scope.period);
+
+                }
                 enabledDates.unshift(scope.minDate);
                 lastDate = enabledDates[enabledDates.length - 1];
                 dp.data("DateTimePicker").enabledDates(enabledDates);

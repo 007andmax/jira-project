@@ -623,13 +623,13 @@
             sd.setHours(0, 0, 0, 0);
             sd.setSeconds(0);
             sd.setMilliseconds(0);
-            blockContract.startDate = sd.getTime();
+            blockContract.startDate = $filter('date')(sd, 'yyyy/MM/dd');
 
             var ed = new Date(contractData.endDate);
             ed.setHours(0, 0, 0, 0);
             ed.setSeconds(0);
             ed.setMilliseconds(0);
-            blockContract.endDate = ed.getTime();
+            blockContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
             for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {
