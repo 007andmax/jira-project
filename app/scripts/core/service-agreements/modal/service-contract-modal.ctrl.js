@@ -695,7 +695,6 @@
             }
           }
           $scope.showRequiredFieldError = !formCheck();
-          //$scope.showServiceLengthCheckError = !serviceCheck();
           if(!serviceCheck()) {
             errorTimeOut()
           }
@@ -947,7 +946,17 @@
           $scope.newProductExpense = newServiceExpense
         };
 
+        function disableCreateButtonTimeout() {
+          $scope.dissableCreateButton = true;
+          $timeout(function () {
+            $scope.dissableCreateButton = false;
+          }, 2000);
+        }
+
+        $scope.dissableCreateButton = false;
+
         $scope.validateAndCreateServiceContract = function (serviceContract) {
+          disableCreateButtonTimeout();
           if(checkForInvalidFields()) {
             var emptyServices = true;
             var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
