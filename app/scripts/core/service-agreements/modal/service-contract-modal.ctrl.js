@@ -18,6 +18,8 @@
 
         $scope.taxes = TaxesService.getAll();
 
+        $scope.dissableCreateButton = false;
+
         $scope.reInitStartDate = true;
         $scope.reInitEndDate = true;
         $scope.reInitServiceContractServicesForm = true;
@@ -953,7 +955,6 @@
           }, 2000);
         }
 
-        $scope.dissableCreateButton = false;
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
           disableCreateButtonTimeout();
