@@ -587,14 +587,12 @@
         sd.setHours(0, 0, 0, 0);
         sd.setSeconds(0);
         sd.setMilliseconds(0);
-        console.log(sd);
         companyContractInfo.startDate = $filter('date')(sd, 'yyyy/MM/dd');
 
         var ed = new Date($scope.editContract.endDate);
         ed.setHours(0, 0, 0, 0);
         ed.setSeconds(0);
         ed.setMilliseconds(0);
-        console.log(ed);
         companyContractInfo.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
         console.log(companyContractInfo);

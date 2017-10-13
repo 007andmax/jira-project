@@ -116,7 +116,6 @@
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
                 for(var w=0; w<productsData.length; w++) {
                   for(var v=0; v<productsData[w].products.length; v++) {
-                    //console.log($scope.autocompleteData[w].products[v].versionedId.id, $scope.serviceContract.productExpenses[p].productId);
                     if(productsData[w].products[v].versionedId.id ==  $scope.serviceContract.productExpenses[p].productId) {
                       $scope.serviceContract.productExpenses[p].name = {};
                       $scope.serviceContract.productExpenses[p].name.description = productsData[w].products[v].description;
@@ -241,7 +240,6 @@
           }
           for(var i=0; i<$scope.serviceContract.serviceExpenses.length; i++) {
             var setDate = new Date($scope.serviceContract.serviceExpenses[i].date);
-            console.log(setDate.getTime(), startDate.getTime() );
             if(setDate.getTime() < startDate.getTime()) {
               $scope.serviceContract.serviceExpenses[i].date = $scope.serviceContract.startDate;
             }
@@ -696,7 +694,6 @@
               return ($scope.serviceContract.serviceExpenses.length > 0 || $scope.serviceContract.productExpenses.length > 0);
             }
           }
-          console.log(serviceCheck());
           $scope.showRequiredFieldError = !formCheck();
           $scope.showServiceLengthCheckError = !serviceCheck();
           return (formCheck() && serviceCheck());
