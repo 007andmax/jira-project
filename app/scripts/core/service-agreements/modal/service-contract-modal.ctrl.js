@@ -378,47 +378,9 @@
           }
         });
 
-        // ProductsService.getProductsByCompany($scope, returnCompanyId(), function (data) {
-        //   console.log('products ', data);
-        //   for (var i = 0; i < data.length; i++) {
-        //     var prod = {
-        //       name: data[i].description,
-        //       productId: data[i].versionedId.id,
-        //       quantity: 0,
-        //       salePrice: 0,
-        //       picked: false
-        //     };
-        //
-        //     $scope.defaultProducts.push(prod);
-        //   }
-        //
-        //   if ($scope.serviceContract.productExpenses.length > 0) {
-        //     for (var i = 0; i < $scope.serviceContract.productExpenses.length; i++) {
-        //       for (var j = 0; j < $scope.defaultProducts.length; j++) {
-        //         if ($scope.serviceContract.productExpenses[i].serviceId === $scope.defaultProducts[j].serviceId) {
-        //           $scope.serviceContract.productExpenses[i].name = $scope.defaultProducts[j];
-        //           $scope.defaultProducts[j].picked = true;
-        //           break;
-        //         }
-        //       }
-        //     }
-        //   }
-        // });
-
 
         $scope.changeContractType = function (type) {
           $scope.serviceContract.billType = type;
-          // if($scope.serviceContract.billType === 'DEVICE') {
-          //   if(!$scope.serviceContract.serviceContractServices.length>0) {
-          //     $scope.NewServiceContractServices.name = 'Managed workstations';
-          //   }
-          // } else if($scope.serviceContract.billType === 'USER') {
-          //   if(!$scope.serviceContract.serviceContractServices.length>0) {
-          //     $scope.NewServiceContractServices.name = 'Managed users';
-          //   }
-          // } else if($scope.serviceContract.billType === 'OTHER') {
-          //   $scope.NewServiceContractServices.name = '';
-          // }
         };
 
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
@@ -734,6 +696,7 @@
               return ($scope.serviceContract.serviceExpenses.length > 0 || $scope.serviceContract.productExpenses.length > 0);
             }
           }
+          console.log(serviceCheck());
           $scope.showRequiredFieldError = !formCheck();
           $scope.showServiceLengthCheckError = !serviceCheck();
           return (formCheck() && serviceCheck());
