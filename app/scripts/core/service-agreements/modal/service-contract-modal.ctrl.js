@@ -695,8 +695,18 @@
             }
           }
           $scope.showRequiredFieldError = !formCheck();
-          $scope.showServiceLengthCheckError = !serviceCheck();
+          //$scope.showServiceLengthCheckError = !serviceCheck();
+          if(!serviceCheck()) {
+            errorTimeOut()
+          }
           return (formCheck() && serviceCheck());
+        }
+
+        function errorTimeOut() {
+          $scope.showServiceLengthCheckError = true;
+          $timeout(function () {
+            $scope.showServiceLengthCheckError = false;
+          }, 2000);
         }
 
         $scope.isShowingErrorsServiceContract = function (form, fieldName) {
