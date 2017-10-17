@@ -84,6 +84,7 @@
                 } else if(scope.period === 'Month'){
                   var d = new Date(sd);
                   d = Utils.addNumberOfMonth(d, enabledDates.length);
+                  d = Utils.minusDays(d, 1);
                   //enabledDates.push($filter('date')(d, 'd MMM yyyy'));
                   enabledDates = enabledDates.concat($filter('date')(d, 'd MMM yyyy'));
                   data.enabledDates(enabledDates);
