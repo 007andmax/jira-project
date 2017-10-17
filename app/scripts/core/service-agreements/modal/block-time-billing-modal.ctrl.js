@@ -145,6 +145,7 @@
               var nd = new Date(calculatePlusDays);
               endDate.setTime(calculatePlusDays - (nd.getTimezoneOffset()*60000))
           }
+          endDate = Utils.minusDays(endDate, 1);
           $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
           reInitEndDate()

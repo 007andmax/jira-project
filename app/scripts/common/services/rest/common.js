@@ -471,6 +471,12 @@
       return newDate.addMonths(amountOfMonth);
     }
 
+    function minusDays(date, amountOfDays) {
+      var temp = new Date(date);
+      temp.setDate(temp.getDate() - amountOfDays);
+      return temp;
+    }
+
     return {
       customizeObj: customizeObj,
       customizeArray: customizeArray,
@@ -484,7 +490,8 @@
       getComparatorBy: getComparatorBy,
       formatDate: formatDate,
       removeFromArrayByCondition: removeFromArrayByCondition,
-      addNumberOfMonth: addNumberOfMonth
+      addNumberOfMonth: addNumberOfMonth,
+      minusDays: minusDays
     }
   }]);
 
