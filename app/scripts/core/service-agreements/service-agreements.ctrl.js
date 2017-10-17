@@ -282,7 +282,6 @@
       }
 
 
-
       $scope.addDefaultTaxes = function () {
         var defaultTaxList = [];
         for (var i = 0; i < $scope.taxes.length; i++) {
