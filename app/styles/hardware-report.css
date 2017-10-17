@@ -454,7 +454,9 @@
 .service-agreements {
   text-align: right;
 }
-
+.deposit-create.service-agreements{
+  margin-bottom: 75px;
+}
 .service-agreements-lists li [class*='col-md-'] {
   word-wrap: break-word;
 }

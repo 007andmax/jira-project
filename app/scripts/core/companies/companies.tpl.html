@@ -148,7 +148,7 @@
     </div>
   </div>
 
-  <ul class="qt-list" style="margin-bottom: 150px; margin-top: 70px;" ng-if="companiesView === 'list'" qt-scroll-to="top" offset="83" scroll-pagination>
+  <ul class="qt-list" style="margin-bottom: 75px; margin-top: 70px;" ng-if="companiesView === 'list'" qt-scroll-to="top" offset="83" scroll-pagination>
     <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
