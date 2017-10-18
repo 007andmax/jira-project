@@ -672,7 +672,7 @@
               }
             }
 
-            if(checkDateForBillableItem(blockContract.startDate)) {
+            if(compareTodayAndDate(blockContract.startDate)) {
               askCreateBillableItemNow(blockContract)
             } else{
               sendContractCreateRequest(blockContract, false)
@@ -703,7 +703,7 @@
           }
         }
 
-        function checkDateForBillableItem(date) {
+        function compareTodayAndDate(date) {
           var d = new Date(date);
           var t = d.getTime();
           var now = Date.now();
