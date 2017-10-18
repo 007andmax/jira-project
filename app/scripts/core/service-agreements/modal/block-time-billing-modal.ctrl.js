@@ -593,6 +593,7 @@
           return deferred.promise;
         }
 
+
         function createBlockTimeContract(contractData) {
           if (contractData) {
 
@@ -671,7 +672,26 @@
               }
             }
 
-            AgreementsService.createContract(blockContract, function (resp) {
+            if(checkDateForBillableItem(blockContract.startDate)) {
+              askCreateBillableItemNow(blockContract)
+            } else{
+              sendContractCreateRequest(blockContract, false)
+            }
+          }
+          function askCreateBillableItemNow(blockContract) {
+            var answer = false;
+            var confirmMessage = 'Do we need to create the billable item now? ';
+            var confirmButton = 'Yes, create';
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function(){
+              answer = true;
+              sendContractCreateRequest(blockContract, true);
+            }, function() {
+              sendContractCreateRequest(blockContract, false)
+            })
+          }
+
+          function sendContractCreateRequest(blockContract, createBillableItem) {
+            AgreementsService.createContractWithBillableItem(blockContract, createBillableItem, function (resp) {
               console.log(resp);
               if (resp.message === 'Validation failed') {
                 $scope.showValidationFailMessage = true;
@@ -682,6 +702,14 @@
             })
           }
         }
+
+        function checkDateForBillableItem(date) {
+          var d = new Date(date);
+          var t = d.getTime();
+          var now = Date.now();
+          return (now > t);
+        }
+
 
         $scope.validateAndCreteBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
           if(!checkForInvalidFields()) {
