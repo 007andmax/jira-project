@@ -831,13 +831,16 @@
               for (var i = 0; i < serviceContract.services.length; i++) {
                 var serv = {
                   name: serviceContract.services[i].name,
-                  rate: serviceContract.services[i].rate,
+                  rate: 0,
                   billable: serviceContract.services[i].billable,
                   taxIds: []
                 };
-                if (serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
-                  for (var n = 0; n < serviceContract.services[i].taxes.length; n++) {
-                    serv.taxIds.push(serviceContract.services[i].taxes[n].id);
+                if(serviceContract.services[i].billable) {
+                  serv.rate = serviceContract.services[i].rate;
+                  if (serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
+                    for (var n = 0; n < serviceContract.services[i].taxes.length; n++) {
+                      serv.taxIds.push(serviceContract.services[i].taxes[n].id);
+                    }
                   }
                 }
                 servContract.services.push(serv);
@@ -926,7 +929,7 @@
             console.log(servContract);
 
 
-            AgreementsService.createContract(servContract, function (resp) {
+            AgreementsService.createContract(servContract, false, function (resp) {
               console.log(resp);
               if (resp.message === 'Validation failed') {
                 $scope.showValidationFailMessage = true;

@@ -599,7 +599,7 @@
         companyContractInfo.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
         console.log(companyContractInfo);
-        AgreementsService.createContract(companyContractInfo, function (resp) {
+        AgreementsService.createContract(companyContractInfo, false, function (resp) {
           console.log(resp);
           if (resp.message === 'Validation failed') {
             $scope.showErrorInHourlyContract = true;

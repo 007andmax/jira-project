@@ -537,8 +537,8 @@
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.isAdditionalServices">
 
           <div class="service-name-agreement">Service name</div>
-          <div class="price-agreement">Per hour</div>
           <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+          <div class="price-agreement">Per hour</div>
           <div class="tax-agreement text-center">Tax</div>
           <div class="col-md-1 text-center" style="padding: 0;">Action</div>
 
@@ -552,18 +552,18 @@
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      invalid-when="!isAdditionalServiceNameUnique(service.name)">
             </div>
-            <div class="price-agreement form-group before-icon">
-              <input placeholder="0.00" type="text" class="form-control"
-                     ng-model="service.rate"
-                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
-            </div>
             <div class="col-md-1 form-group text-center">
               <label class="control checkbox" style="margin: 6px;">
                 <input ng-model="service.billable" type="checkbox">
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="tax-agreement form-group text-center">
+            <div class="price-agreement form-group before-icon" ng-show="service.billable">
+              <input placeholder="0.00" type="text" class="form-control"
+                     ng-model="service.rate"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+            </div>
+            <div class="tax-agreement form-group text-center" ng-show="service.billable">
               <div>
                 <div>
                   <select-taxes taxes="taxes" entity="service"></select-taxes>
@@ -606,7 +606,13 @@
                      required>
 
             </div>
-            <div class="price-agreement fourm-group before-icon"
+            <div class="col-md-1 fourm-group text-center" style="padding: 0;">
+              <label class="control checkbox">
+                <input type="checkbox" ng-model="newService.billable">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+            <div class="price-agreement fourm-group before-icon" ng-show="newService.billable"
                  ng-class="{'has-error': isShowingErrorsNewServiceField(newServiceForm, 'newServiceRate') }">
               <input placeholder="0.00"
                      name="newServiceRate"
@@ -615,13 +621,7 @@
                      ng-model="newService.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
-            <div class="col-md-1 fourm-group text-center" style="padding: 0;">
-              <label class="control checkbox">
-                <input type="checkbox" ng-model="newService.billable">
-                <span class="control-indicator"></span>
-              </label>
-            </div>
-            <div class="tax-agreement fourm-group text-center">
+            <div class="tax-agreement fourm-group text-center" ng-show="newService.billable">
               <div class="">
                 <div>
                   <select-taxes taxes="taxes" entity="newService"></select-taxes>

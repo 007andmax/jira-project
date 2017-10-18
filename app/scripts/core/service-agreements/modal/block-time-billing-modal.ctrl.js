@@ -644,15 +644,19 @@
             for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
               var cs = {
                 name: $scope.blockTimeContract.services[m].name,
-                rate: $scope.blockTimeContract.services[m].rate,
                 billable: $scope.blockTimeContract.services[m].billable,
-                taxIds: []
+                taxIds: [],
+                rate: 0
               };
-              if ($scope.blockTimeContract.services[m].taxes.length) {
-                for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
-                  cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
+              if($scope.blockTimeContract.services[m].billable) {
+                cs.rate = $scope.blockTimeContract.services[m].rate;
+                if ($scope.blockTimeContract.services[m].taxes.length) {
+                  for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
+                    cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
+                  }
                 }
               }
+
               blockContract.services.push(cs);
             }
 
@@ -672,7 +676,7 @@
               }
             }
 
-            if(compareTodayAndDate(blockContract.startDate)) {
+            if(compareDateNowWithDate(blockContract.startDate)) {
               askCreateBillableItemNow(blockContract)
             } else{
               sendContractCreateRequest(blockContract, false)
@@ -691,7 +695,7 @@
           }
 
           function sendContractCreateRequest(blockContract, createBillableItem) {
-            AgreementsService.createContractWithBillableItem(blockContract, createBillableItem, function (resp) {
+            AgreementsService.createContract(blockContract, createBillableItem, function (resp) {
               console.log(resp);
               if (resp.message === 'Validation failed') {
                 $scope.showValidationFailMessage = true;
@@ -703,7 +707,7 @@
           }
         }
 
-        function compareTodayAndDate(date) {
+        function compareDateNowWithDate(date) {
           var d = new Date(date);
           var t = d.getTime();
           var now = Date.now();

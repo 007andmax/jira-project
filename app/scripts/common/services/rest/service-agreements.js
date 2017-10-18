@@ -42,16 +42,8 @@
         })
       }
 
-      function createContract(data, callback) {
-        var future = $http({
-          url: '/serviceAgreements',
-          method: 'POST',
-          data: data
-        });
-        Utils.handleCallback(future, callback);
-      }
 
-      function createContractWithBillableItem(data, createBillableItem, callback) {
+      function createContract(data, createBillableItem, callback) {
         var future = $http({
           url: '/serviceAgreements?'+'createBillableItem='+createBillableItem,
           method: 'POST',
@@ -104,7 +96,6 @@
       return {
         getAllServiceAgreements: getAllServiceAgreements,
         createContract: createContract,
-        createContractWithBillableItem:createContractWithBillableItem,
         getAgreementCountByType: getAgreementCountByType,
         getAgreement: getAgreement,
         terminate: terminate,

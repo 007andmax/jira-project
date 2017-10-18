@@ -224,8 +224,8 @@
                 contract time</p>
 
               <div class="service-name-agreement">Service name</div>
-              <div class="price-agreement">Per hour</div>
               <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+              <div class="price-agreement">Per hour</div>
               <div class="tax-agreement text-center">Tax</div>
               <div class="col-md-1 text-center" style="padding: 0;">Action</div>
 
@@ -235,18 +235,18 @@
                   <input placeholder="Service Name" type="text"
                          class="form-control" ng-model="contractService.name" hard-reset-pattern="serviceNamePattern">
                 </div>
-                <div class="price-agreement fourm-group before-icon">
-                  <input placeholder="0.00" type="text" class="form-control"
-                         ng-model="contractService.rate"
-                         hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
-                </div>
                 <div class="col-md-1 form-group text-center">
                   <label class="control checkbox">
                     <input ng-model="contractService.billable" type="checkbox">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="tax-agreement form-group text-center">
+                <div class="price-agreement fourm-group before-icon" ng-show="contractService.billable">
+                  <input placeholder="0.00" type="text" class="form-control"
+                         ng-model="contractService.rate"
+                         hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+                </div>
+                <div class="tax-agreement form-group text-center" ng-show="contractService.billable">
                   <div>
                     <div>
                       <select-taxes taxes="taxes" entity="contractService"></select-taxes>
@@ -285,20 +285,20 @@
                   >
 
                 </div>
-                <div class="price-agreement fourm-group before-icon">
-                  <input placeholder="0.00"
-                         type="text"
-                         class="form-control"
-                         ng-model="newContractService.rate"
-                         hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
-                </div>
                 <div class="col-md-1 fourm-group text-center">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="newContractService.billable">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="tax-agreement fourm-group text-center">
+                <div class="price-agreement fourm-group before-icon" ng-show="newContractService.billable">
+                  <input placeholder="0.00"
+                         type="text"
+                         class="form-control"
+                         ng-model="newContractService.rate"
+                         hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+                </div>
+                <div class="tax-agreement fourm-group text-center" ng-show="newContractService.billable">
                   <div class="" ng-hide="contractServiceList.length > 19">
                     <div>
                       <select-taxes taxes="taxes" entity="newContractService"></select-taxes>
