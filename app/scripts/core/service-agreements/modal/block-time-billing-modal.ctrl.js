@@ -76,6 +76,7 @@
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.minStartDate = Date.now();
           $scope.blockTimeContract.taxes = [];
+          $scope.blockTimeContract.billForAdditionalService = false;
 
           for (var i = 0; i < $scope.blockTimeContract.taxIds.length; i++) {
             for (var j = 0; j < $scope.taxes.length; j++) {
@@ -83,6 +84,9 @@
                 $scope.blockTimeContract.taxes.push($scope.taxes[j]);
               }
             }
+          }
+          if($scope.blockTimeContract.services.length > 0) {
+            $scope.blockTimeContract.billForAdditionalService = true;
           }
         }
 
@@ -752,7 +756,14 @@
             })
           }
 
-        }
+        };
+
+        $scope.terminateAndCopyBlockTime = function () {
+          $scope.terminateAndCopy();
+
+
+          //reInitStartDate();
+        };
 
       }])
 
