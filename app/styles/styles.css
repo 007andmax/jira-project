@@ -9965,7 +9965,9 @@ button.close {
   text-align: right;
   border-top: 1px solid #e7ecf2;
 }
-
+.modal-footer .btn-primary{
+  min-width: 130px;
+}
 .modal-footer .btn + .btn {
   margin-left: 7px;
   margin-bottom: 0;
