@@ -17,7 +17,7 @@
 
         this.preventMessage = 'Do you want to leave this page? All entered information will be lost.';
 
-        this.show = function (message, button, hideCancel) {
+        this.show = function (message, button, hideCancel, btnCancel) {
 
           modalParams.controller = (['$scope', '$uibModalInstance',
             function ($scope, $uibModalInstance) {
@@ -25,6 +25,10 @@
               $scope.messageConfirm = message;
               $scope.buttonConfirm = button;
               $scope.hideCancel = hideCancel;
+              $scope.btnCancel = 'No';
+              if(btnCancel) {
+                $scope.btnCancel = btnCancel;
+              }
 
               $scope.approveConfirm = function (result) {
                 $uibModalInstance.close(result);

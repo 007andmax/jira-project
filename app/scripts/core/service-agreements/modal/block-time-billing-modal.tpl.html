@@ -241,12 +241,12 @@
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="price-agreement fourm-group before-icon" ng-show="contractService.billable">
+                <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
                   <input placeholder="0.00" type="text" class="form-control"
                          ng-model="contractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
-                <div class="tax-agreement form-group text-center" ng-show="contractService.billable">
+                <div class="tax-agreement form-group text-center" ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
                   <div>
                     <div>
                       <select-taxes taxes="taxes" entity="contractService"></select-taxes>
@@ -291,14 +291,14 @@
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="price-agreement fourm-group before-icon" ng-show="newContractService.billable">
+                <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': newContractService.billable ? 'visible' : 'hidden'}">
                   <input placeholder="0.00"
                          type="text"
                          class="form-control"
                          ng-model="newContractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
-                <div class="tax-agreement fourm-group text-center" ng-show="newContractService.billable">
+                <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newContractService.billable ? 'visible' : 'hidden'}">
                   <div class="" ng-hide="contractServiceList.length > 19">
                     <div>
                       <select-taxes taxes="taxes" entity="newContractService"></select-taxes>

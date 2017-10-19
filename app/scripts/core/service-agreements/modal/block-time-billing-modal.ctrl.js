@@ -686,7 +686,7 @@
             var answer = false;
             var confirmMessage = 'Do we need to create the billable item now? ';
             var confirmButton = 'Yes, create';
-            UserConfirmationsService.show(confirmMessage, confirmButton).then(function(){
+            UserConfirmationsService.show(confirmMessage, confirmButton, false, 'No, do not create').then(function(){
               answer = true;
               sendContractCreateRequest(blockContract, true);
             }, function() {
