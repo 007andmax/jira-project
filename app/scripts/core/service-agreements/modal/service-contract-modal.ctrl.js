@@ -912,7 +912,6 @@
               }
             }
 
-
             if (serviceContract.productExpenses && serviceContract.productExpenses.length) {
               for (var t = 0; t < serviceContract.productExpenses.length; t++) {
                 if (serviceContract.productExpenses[t] && serviceContract.productExpenses[t].name) {
