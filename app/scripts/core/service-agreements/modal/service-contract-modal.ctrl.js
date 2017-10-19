@@ -194,7 +194,7 @@
           $scope.newService = {
             name: '',
             rate: 0,
-            billable: false,
+            billable: true,
             taxIds: [],
             taxes: $scope.addDefaultTaxes()
           };
@@ -531,7 +531,7 @@
                 $scope.newService = {
                   name: '',
                   rate: 0,
-                  billable: false,
+                  billable: true,
                   taxes: $scope.addDefaultTaxes(),
                   taxIds: []
                 };

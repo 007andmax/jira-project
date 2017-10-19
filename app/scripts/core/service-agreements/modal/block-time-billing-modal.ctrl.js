@@ -35,7 +35,7 @@
         $scope.newContractService = {
           name: '',
           rate: null,
-          billable: false,
+          billable: true,
           taxes: []
         };
 
@@ -89,7 +89,7 @@
         $scope.newContractService = {
           name: '',
           rate: 0,
-          billable: false,
+          billable: true,
           taxes: $scope.addDefaultTaxes()
         };
 
@@ -416,7 +416,7 @@
                       $scope.newContractService = {
                         name: '',
                         rate: 0,
-                        billable: false,
+                        billable: true,
                         taxes: $scope.addDefaultTaxes()
                       };
                       reInitServiceForm()
@@ -427,7 +427,7 @@
                       $scope.newContractService = {
                         name: '',
                         rate: 0,
-                        billable: false,
+                        billable: true,
                         taxes: $scope.addDefaultTaxes()
                       };
                       reInitServiceForm()

@@ -558,12 +558,12 @@
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="price-agreement form-group before-icon" ng-show="service.billable">
+            <div class="price-agreement form-group before-icon" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
               <input placeholder="0.00" type="text" class="form-control"
                      ng-model="service.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
             </div>
-            <div class="tax-agreement form-group text-center" ng-show="service.billable">
+            <div class="tax-agreement form-group text-center" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
               <div>
                 <div>
                   <select-taxes taxes="taxes" entity="service"></select-taxes>
@@ -612,7 +612,7 @@
                 <span class="control-indicator"></span>
               </label>
             </div>
-            <div class="price-agreement fourm-group before-icon" ng-show="newService.billable"
+            <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': newService.billable ? 'visible' : 'hidden'}"
                  ng-class="{'has-error': isShowingErrorsNewServiceField(newServiceForm, 'newServiceRate') }">
               <input placeholder="0.00"
                      name="newServiceRate"
@@ -621,7 +621,7 @@
                      ng-model="newService.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
-            <div class="tax-agreement fourm-group text-center" ng-show="newService.billable">
+            <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newService.billable ? 'visible' : 'hidden'}">
               <div class="">
                 <div>
                   <select-taxes taxes="taxes" entity="newService"></select-taxes>
