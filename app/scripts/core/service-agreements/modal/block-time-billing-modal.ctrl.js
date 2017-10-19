@@ -122,6 +122,16 @@
 
         };
 
+        $scope.showAdditionalServiceColumn = function() {
+          var show = false;
+          for(var i=0; i<$scope.blockTimeContract.services.length; i++) {
+            if($scope.blockTimeContract.services[i].billable) {
+              show = true;
+              break;
+            }
+          }
+          return show;
+        };
 
         function changeStartDate() {
           changeMinEndDate($scope.blockTimeContract.period);

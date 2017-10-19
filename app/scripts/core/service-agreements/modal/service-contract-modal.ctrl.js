@@ -200,6 +200,17 @@
           };
         }
 
+        $scope.showAdditionalServiceColumn = function() {
+          var show = false;
+          for(var i=0; i<$scope.serviceContract.serviceContractServices.length; i++) {
+            if($scope.serviceContract.serviceContractServices[i].billable) {
+              show = true;
+              break;
+            }
+          }
+          return show;
+        };
+
 
         $scope.formattingDateForServiceExpenses = function (date) {
           var d = new Date(date);
