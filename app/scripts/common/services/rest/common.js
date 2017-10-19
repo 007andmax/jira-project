@@ -477,6 +477,13 @@
       return temp;
     }
 
+    function compareDateNowWithDate(date) {
+      var d = new Date(date);
+      var t = d.getTime();
+      var now = Date.now();
+      return (now > t);
+    }
+
     return {
       customizeObj: customizeObj,
       customizeArray: customizeArray,
@@ -491,7 +498,8 @@
       formatDate: formatDate,
       removeFromArrayByCondition: removeFromArrayByCondition,
       addNumberOfMonth: addNumberOfMonth,
-      minusDays: minusDays
+      minusDays: minusDays,
+      compareDateNowWithDate: compareDateNowWithDate
     }
   }]);
 

@@ -928,8 +928,27 @@
 
             console.log(servContract);
 
+            if(Utils.compareDateNowWithDate(serviceContract.startDate)) {
+              askCreateBillableItemNow(servContract)
+            } else {
+              sendContractCreateRequest(servContract, false)
+            }
+          }
 
-            AgreementsService.createContract(servContract, false, function (resp) {
+          function askCreateBillableItemNow(servContract) {
+            var answer = false;
+            var confirmMessage = 'Do we need to create the billable item now? ';
+            var confirmButton = 'Yes, create';
+            UserConfirmationsService.show(confirmMessage, confirmButton, false, 'No, do not create').then(function(){
+              answer = true;
+              sendContractCreateRequest(servContract, true);
+            }, function() {
+              sendContractCreateRequest(servContract, false)
+            })
+          }
+
+          function sendContractCreateRequest(servContract, createBillableItem) {
+            AgreementsService.createContract(servContract, createBillableItem, function (resp) {
               console.log(resp);
               if (resp.message === 'Validation failed') {
                 $scope.showValidationFailMessage = true;

@@ -676,7 +676,7 @@
               }
             }
 
-            if(compareDateNowWithDate(blockContract.startDate)) {
+            if(Utils.compareDateNowWithDate(blockContract.startDate)) {
               askCreateBillableItemNow(blockContract)
             } else{
               sendContractCreateRequest(blockContract, false)
@@ -705,13 +705,6 @@
               }
             })
           }
-        }
-
-        function compareDateNowWithDate(date) {
-          var d = new Date(date);
-          var t = d.getTime();
-          var now = Date.now();
-          return (now > t);
         }
 
 
