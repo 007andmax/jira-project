@@ -209,7 +209,7 @@
           $scope.editService = {
             name: '',
             rate: null,
-            billable: false,
+            billable: true,
             taxes: addDefaultTaxes()
           };
         }, 1000);
@@ -263,6 +263,17 @@
           var disable = true;
         }
         return disable;
+      };
+
+      $scope.showServiceColumn = function() {
+        var show = false;
+        for(var i=0; i<$scope.editContract.services.length; i++) {
+          if($scope.editContract.services[i].billable) {
+            show = true;
+            break;
+          }
+        }
+        return show;
       };
 
 
@@ -389,7 +400,7 @@
                 $scope.editService = {
                   name: '',
                   rate: null,
-                  billable: false,
+                  billable: true,
                   taxes: $scope.addDefaultTaxes()
                 };
                 reInitServiceForm();
@@ -567,13 +578,16 @@
         for (var i = 0; i < $scope.editContract.services.length; i++) {
           var correctService = {
             name: $scope.editContract.services[i].name,
-            rate: $scope.editContract.services[i].rate,
+            rate: 0,
             billable: $scope.editContract.services[i].billable,
             taxIds: []
           };
-          if ($scope.editContract.services[i].taxes.length) {
-            for (var n = 0; n < $scope.editContract.services[i].taxes.length; n++) {
-              correctService.taxIds.push($scope.editContract.services[i].taxes[n].id)
+          if($scope.editContract.services[i].billable) {
+            correctService.rate =  $scope.editContract.services[i].rate;
+            if ($scope.editContract.services[i].taxes.length) {
+              for (var n = 0; n < $scope.editContract.services[i].taxes.length; n++) {
+                correctService.taxIds.push($scope.editContract.services[i].taxes[n].id)
+              }
             }
           }
           servicesWithTaxIds.push(correctService);

@@ -49,15 +49,12 @@
     <div class="service-bill-hide-content clearfix">
 
       <div class="col-md-6">Service name</div>
-      <div class="price-agreement">Per hour</div>
       <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
-      <div class="tax-agreement text-center">Tax</div>
+      <div class="price-agreement" ng-style="{'visibility': showServiceColumn() ? 'visible' : 'hidden'}">Per hour</div>
+      <div class="tax-agreement text-center" ng-style="{'visibility': showServiceColumn() ? 'visible' : 'hidden'}">Tax</div>
       <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
         <div class="col-md-6 form-group">
           <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly ng-maxlength="30">
-        </div>
-        <div class="price-agreement fourm-group before-icon">
-          <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly>
         </div>
         <div class="col-md-1 fourm-group text-center">
           <label class="control checkbox default-cursor">
@@ -66,7 +63,10 @@
             <span class="control-indicator"></span>
           </label>
         </div>
-        <div class="tax-agreement fourm-group text-center">
+        <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
+          <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly>
+        </div>
+        <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
           <div>
             <div>
               <!--<i class="icn-sm icn-tax" ng-hide="service.taxes.length > 0"> </i>-->
