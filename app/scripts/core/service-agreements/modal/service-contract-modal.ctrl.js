@@ -19,6 +19,7 @@
         $scope.taxes = TaxesService.getAll();
 
         $scope.dissableCreateButton = false;
+        $scope.showAddButtonNewService = true;
 
         $scope.reInitStartDate = true;
         $scope.reInitEndDate = true;

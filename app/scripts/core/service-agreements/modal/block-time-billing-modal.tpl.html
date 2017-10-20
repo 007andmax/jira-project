@@ -182,7 +182,7 @@
             </div>
 
             <div class="col-md-2 fourm-group">
-              <div class="add-remove-service">
+              <div class="add-remove-service" ng-show="showAddButtonNewBlockServices">
                 <div ng-click="addNewBlockTimeService(newBlockTimeServiceForm, newBlockTimeService)">
                   <i class="icon-sm icn-add-action"></i>
                 </div>
@@ -307,7 +307,7 @@
                   </div>
                 </div>
                 <div class="col-md-1 fourm-group text-center" style="padding: 0;">
-                  <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
+                  <div class="add-remove-service" ng-hide="contractServiceList.length > 19 || !showAddButtonNewService">
                     <div ng-click="addContractService(newContractServiceForm, newContractService)">
                       <i class="icon-sm icn-add-action"></i>
                     </div>
