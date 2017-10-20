@@ -426,17 +426,17 @@
 
         $scope.addContractService = function (form, service) {
           $scope.showNewServiceError = false;
-          timeOutAddButton();
+          $scope.showAddButtonNewService = false;
           if (form.$valid) {
             if (!service.name) {
               $scope.showNewServiceError = true;
               $scope.newServiceErrorMessage = 'Please enter the service name';
-
+              $scope.showAddButtonNewService = true;
             } else {
               if (!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
                 $scope.showNewServiceError = true;
                 $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
-
+                $scope.showAddButtonNewService = true;
               } else {
                 validateNewServiceName(service, 'service').then(function (resp) {
 
@@ -456,6 +456,7 @@
                         billable: true,
                         taxes: $scope.addDefaultTaxes()
                       };
+                      $scope.showAddButtonNewService = true;
                       reInitServiceForm()
                     } else {
 
@@ -467,6 +468,7 @@
                         billable: true,
                         taxes: $scope.addDefaultTaxes()
                       };
+                      $scope.showAddButtonNewService = true;
                       reInitServiceForm()
 
                     }
@@ -474,6 +476,8 @@
                 })
               }
             }
+          } else {
+            $scope.showAddButtonNewService = true;
           }
         };
 
