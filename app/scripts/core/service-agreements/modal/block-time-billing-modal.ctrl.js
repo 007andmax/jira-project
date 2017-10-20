@@ -21,7 +21,6 @@
         $scope.taxes = TaxesService.getAll();
 
 
-        $scope.defaultServices = [];
         $scope.blockTimeServices = [];
         $scope.services = [];
 
@@ -244,25 +243,6 @@
         });
 
 
-        ServicesService.getServicesData($scope, function (data) {
-          for (var i = 0; i < data.length; i++) {
-            var serv = {
-              name: data[i].name,
-              rate: data[i].rate,
-              billable: data[i].billable,
-              taxes: data[i].taxes || [],
-              taxIds: data[i].taxIds || [],
-              picked: false
-            };
-            if (data[i].taxIds && data[i].taxIds.length) {
-              for (var m = 0; m < data[i].taxIds.length; m++) {
-                serv.taxIds.push(data[i].taxes[m].id)
-              }
-            }
-            $scope.defaultServices.push(serv);
-          }
-        });
-
 
         $scope.calculateTotalAmount = function () {
           var sum = null;
@@ -280,26 +260,8 @@
           } else {
             return 0;
           }
-        }
+        };
 
-
-        function pickDefaultService(service) {
-          for (var i = 0; i < $scope.defaultServices.length; i++) {
-            if (service.name === $scope.defaultServices[i].name) {
-              $scope.defaultServices[i].picked = true;
-              break;
-            }
-          }
-        }
-
-        function unpickDefaultService(service) {
-          for (var i = 0; i < $scope.defaultServices.length; i++) {
-            if (service.name === $scope.defaultServices[i].name) {
-              $scope.defaultServices[i].picked = false;
-              break;
-            }
-          }
-        }
 
         function checkUniqueServiceName(serviceList, service) {
           if (serviceList && service) {
@@ -331,10 +293,9 @@
 
               name = service.name;
             }
-            var unDefServ = checkUniqueServiceName($scope.defaultServices, name);
             var unBlockTimeServ = checkUniqueServiceName($scope.blockTimeContract.blockTimeServices, name);
             var unContractServ = checkUniqueServiceName($scope.blockTimeContract.services, name);
-            var check = unDefServ && unBlockTimeServ && unContractServ;
+            var check =  unBlockTimeServ && unContractServ;
 
             return check;
           }
@@ -383,12 +344,10 @@
                         name: service.name.name
                       };
                       $scope.blockTimeContract.blockTimeServices.push(ns);
-                      pickDefaultService(ns);
                       $scope.newBlockTimeService = {};
                     } else {
 
                       $scope.blockTimeContract.blockTimeServices.push(service);
-                      pickDefaultService(service);
                       $scope.newBlockTimeService = {};
                     }
                   }
@@ -410,19 +369,10 @@
           for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
             if ($scope.blockTimeContract.blockTimeServices[i].name === blockTimeService.name) {
               $scope.blockTimeContract.blockTimeServices.splice(i, 1);
-              unpickDefaultService(blockTimeService);
             }
           }
         };
-        $scope.showAddButtonNewBlockServices = true;
-        $scope.showAddButtonNewService = true;
 
-        function timeOutAddButton() {
-          $scope.showAddButtonNewService = false;
-          $timeout(function () {
-            $scope.showAddButtonNewService = true;
-          }, 1500);
-        }
 
         $scope.addContractService = function (form, service) {
           $scope.showNewServiceError = false;
@@ -449,7 +399,6 @@
                         taxes: service.taxes
                       };
                       $scope.blockTimeContract.services.push(ns);
-                      pickDefaultService(ns);
                       $scope.newContractService = {
                         name: '',
                         rate: 0,
@@ -461,7 +410,6 @@
                     } else {
 
                       $scope.blockTimeContract.services.push(service);
-                      pickDefaultService(service);
                       $scope.newContractService = {
                         name: '',
                         rate: 0,
@@ -485,7 +433,7 @@
           for (var i = 0; i < $scope.blockTimeContract.services.length; i++) {
             if ($scope.blockTimeContract.services[i].name === contractService.name) {
               $scope.blockTimeContract.services.splice(i, 1);
-              unpickDefaultService(contractService);
+
             }
           }
         };
@@ -787,9 +735,6 @@
 
         $scope.terminateAndCopyBlockTime = function () {
           $scope.terminateAndCopy();
-          // $scope.blockTimeContract.startDate = '';
-          // $scope.blockTimeContract.endDate = '';
-          // console.log($scope.blockTimeContract);
         };
 
       }])

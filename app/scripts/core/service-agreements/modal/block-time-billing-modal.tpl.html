@@ -267,8 +267,7 @@
                   <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{newServiceErrorMessage}}</p>
                 </div>
                 <div ng-show="!isNameUnique(newContractService) && newContractService.name">
-                  <p style="color: red;padding-left: 15px; margin-bottom: 0;">An agreement with current service name
-                    already using for current company</p>
+                  <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate name</p>
                 </div>
                 <div class="service-name-agreement form-group"
                      ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName') }">
