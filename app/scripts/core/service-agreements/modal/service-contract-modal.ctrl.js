@@ -76,7 +76,9 @@
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
+          $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
+          $scope.serviceContract.startDate = '';
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
 

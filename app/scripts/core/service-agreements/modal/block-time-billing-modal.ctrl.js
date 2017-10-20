@@ -73,7 +73,9 @@
           $scope.blockTimeContract = angular.copy($scope.editContract);
           //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
           $scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
+          $scope.blockTimeContract.endDate = '';
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
+          $scope.blockTimeContract.startDate = '';
           $scope.blockTimeContract.minStartDate = Date.now();
           $scope.blockTimeContract.taxes = [];
           $scope.blockTimeContract.billForAdditionalService = false;
@@ -760,7 +762,9 @@
 
         $scope.terminateAndCopyBlockTime = function () {
           $scope.terminateAndCopy();
-
+          // $scope.blockTimeContract.startDate = '';
+          // $scope.blockTimeContract.endDate = '';
+          // console.log($scope.blockTimeContract);
         };
 
       }])
