@@ -1020,7 +1020,7 @@
             if(!emptyServices) {
               var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
               var confirmButton = 'Yes, create';
-              UserConfirmationsService.show(confirmMessage, confirmButton).then(function() {
+              UserConfirmationsService.show(confirmMessage, confirmButton, false, 'No, do not create').then(function() {
                 emptyServices = true;
                 validateServiceContractServices(serviceContract);
               })
