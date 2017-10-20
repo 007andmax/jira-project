@@ -417,22 +417,29 @@
         $scope.showAddButtonNewBlockServices = true;
         $scope.showAddButtonNewService = true;
 
+        function timeOutAddButton() {
+          $scope.showAddButtonNewService = false;
+          $timeout(function () {
+            $scope.showAddButtonNewService = true;
+          }, 1500);
+        }
+
         $scope.addContractService = function (form, service) {
           $scope.showNewServiceError = false;
-          $scope.showAddButtonNewService = false;
+          timeOutAddButton();
           if (form.$valid) {
             if (!service.name) {
               $scope.showNewServiceError = true;
               $scope.newServiceErrorMessage = 'Please enter the service name';
-              $scope.showAddButtonNewService = false;
+
             } else {
               if (!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
                 $scope.showNewServiceError = true;
                 $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
-                $scope.showAddButtonNewService = false;
+
               } else {
                 validateNewServiceName(service, 'service').then(function (resp) {
-                  $scope.showAddButtonNewService = false;
+
                   if (resp) {
                     if (service.name.name && service.name.name.length) {
                       var ns = {
@@ -468,7 +475,6 @@
               }
             }
           }
-          $scope.showAddButtonNewService = false;
         };
 
         $scope.deleteContractService = function (contractService) {
