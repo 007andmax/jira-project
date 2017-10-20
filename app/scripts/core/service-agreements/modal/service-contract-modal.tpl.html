@@ -630,7 +630,7 @@
               </div>
             </div>
             <div class="col-md-1 fourm-group text-center" style="padding: 0;">
-              <div class="add-remove-service" ng-hide="contractServiceList.length > 19">
+              <div class="add-remove-service" ng-hide="contractServiceList.length > 19 || !showAddButtonNewService">
                 <div ng-click="addNewService(newServiceForm, newService)">
                   <i class="icon-sm icn-add-action"></i>
                 </div>

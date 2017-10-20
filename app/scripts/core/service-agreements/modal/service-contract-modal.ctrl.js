@@ -532,7 +532,10 @@
           $scope.calculateTotalAmount();
         };
 
+        $scope.showAddButtonNewService = true;
+
         $scope.addNewService = function (form, service) {
+          $scope.showAddButtonNewService = false;
           $scope.showRequiredFieldErrorService = false;
           $scope.showNewServiceError = false;
           $scope.showNewServiceValidationError = false;
@@ -548,14 +551,17 @@
                   taxes: $scope.addDefaultTaxes(),
                   taxIds: []
                 };
-                reInitServiceForm()
+                reInitServiceForm();
+                $scope.showAddButtonNewService = true;
               }
             }, function() {
               $scope.showNewServiceValidationError = true;
+              $scope.showAddButtonNewService = true;
             })
 
           } else {
             $scope.showRequiredFieldErrorService = true;
+            $scope.showAddButtonNewService = true;
           }
         };
 
@@ -728,12 +734,9 @@
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldError) && !form[fieldName].$valid;
         };
 
-
-
         $scope.isShowingErrorsNewSCSField = function (form, fieldName) {
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorSCS) && !form[fieldName].$valid;
         };
-
 
         $scope.isShowingErrorsNewServiceField = function (form, fieldName) {
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorService) && !form[fieldName].$valid;
