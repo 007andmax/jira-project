@@ -4848,7 +4848,8 @@ Devices tab
   padding-left: 25px;
 }
 
-.service-agreement-modal .service-bill-hide-content .col-md-1 label {
+.service-agreement-modal .service-bill-hide-content .col-md-1 label,
+.contracts .service-bill-hide-content .col-md-1 label{
   margin: 6px;
 }
 
