@@ -279,7 +279,6 @@
         }
 
 
-
         $scope.isNameUnique = function (service, isBlockTimeService) {
           if (service) {
             if (service.name && service.name.name) {
