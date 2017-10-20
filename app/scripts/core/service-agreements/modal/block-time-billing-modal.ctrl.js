@@ -761,8 +761,6 @@
         $scope.terminateAndCopyBlockTime = function () {
           $scope.terminateAndCopy();
 
-
-          //reInitStartDate();
         };
 
       }])

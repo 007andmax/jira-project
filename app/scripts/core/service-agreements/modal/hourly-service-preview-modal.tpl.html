@@ -57,7 +57,7 @@
           <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly ng-maxlength="30">
         </div>
         <div class="col-md-1 fourm-group text-center">
-          <label class="control checkbox default-cursor">
+          <label class="control checkbox default-cursor" onclick="return false;">
             <input ng-show="service.billable" ng-model="service.billable" type="checkbox" onclick="return false;">
             <!--<input ng-show="!service.billable" type="checkbox" onclick="return false;">-->
             <span class="control-indicator"></span>
