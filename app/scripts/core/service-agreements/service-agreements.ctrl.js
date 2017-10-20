@@ -276,7 +276,6 @@
         return show;
       };
 
-
       function reInitServiceForm() {
         $scope.reinitNewServiceForm = false;
         $timeout(function () {
