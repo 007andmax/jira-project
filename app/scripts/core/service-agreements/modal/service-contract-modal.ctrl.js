@@ -1049,7 +1049,7 @@
             AgreementsService.createContract(servContract, createBillableItem, function (resp) {
               console.log(resp);
               if (resp.message === 'Validation failed') {
-                $scope.showValidationFailMessage = true;
+                showCreateErrorWithTimeout()
               } else {
                 $scope.closeModal();
               }
@@ -1068,6 +1068,13 @@
         $scope.refreshNewProductExpense = function(newServiceExpense) {
           $scope.newProductExpense = newServiceExpense
         };
+
+        function showCreateErrorWithTimeout() {
+          $scope.showValidationFailMessage = true;
+          $timeout(function () {
+            $scope.showValidationFailMessage = false;
+          }, 2000);
+        }
 
         function disableCreateButtonTimeout() {
           $scope.dissableCreateButton = true;
