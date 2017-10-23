@@ -525,7 +525,11 @@
 
     </div>
 
-    <div class="service-bill-content">
+
+    <div class="service-bill-content" ng-show="serviceContract.billType">
+      <div class="service-header">
+        <p>Track different services used by this contract. These hours are not billed to customer and only go towards contract amount.</p>
+      </div>
       <div class="col-md-12" style="padding: 0;">
 
 
@@ -593,7 +597,7 @@
         <label class="control checkbox">
           <input type="checkbox" ng-model="serviceContract.isAdditionalServices">
           <span class="control-indicator"></span>
-          We will our customers for additional services
+          Track and bill your customers for other services
         </label>
 
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.isAdditionalServices">
