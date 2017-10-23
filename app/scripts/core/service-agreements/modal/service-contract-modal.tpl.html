@@ -525,6 +525,68 @@
 
     </div>
 
+    <div class="service-bill-content">
+      <div class="col-md-12" style="padding: 0;">
+
+
+        <div class="service-bill-hide-content clearfix" >
+
+          <div class="service-name-agreement">Service name</div>
+          <div class="col-md-1 text-center" style="padding: 0;">Action</div>
+
+          <div class="bill-hide-content-item clearfix" ng-repeat="serviceContractServicesToTrack in serviceContract.serviceContractServicesToTrack">
+            <div class="service-name-agreement form-group">
+              <input placeholder="Service Name" type="text"
+                     class="form-control"
+                     name="serviceName"
+                     ng-model="serviceContractServicesToTrack.name"
+                     hard-reset-pattern="serviceNamePattern"
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                     invalid-when="!isAdditionalServiceNameUnique(serviceContractServicesToTrack.name)">
+            </div>
+
+            <div class="col-md-1 form-group text-center" style="padding: 0;">
+              <div class="add-remove-service">
+                <div ng-click="deleteServiceContractServicesToTrack(serviceContractServicesToTrack)">
+                  <i class="icon-sm icn-delete"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bill-hide-content-item clearfix" ng-form="newServiceContractServicesToTrackForm">
+            <div ng-show="!isAdditionalServiceNameUnique(newServiceContractServicesToTrack.name) && newServiceContractServicesToTrack.name">
+              <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate service name</p>
+            </div>
+            <div ng-show="showErrorSCSTTNameRequired && !newServiceContractServicesToTrack.name">
+              <p style="color: red;padding-left: 15px; margin-bottom: 0;">Name is required</p>
+            </div>
+            <div class="service-name-agreement form-group">
+              <input placeholder="New Service name"
+                     type="text"
+                     name="newServiceContractServicesToTrackName"
+                     class="form-control"
+                     ng-model="newServiceContractServicesToTrack.name"
+                     hard-reset-pattern="serviceNamePattern"
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                     invalid-when="!isAdditionalServiceNameUnique(newServiceContractServicesToTrack.name)"
+                     required>
+
+            </div>
+            <div class="col-md-1 fourm-group text-center" style="padding: 0;">
+              <div class="add-remove-service" ng-hide="contractServiceList.length > 19 || !showAddButtonNewService">
+                <div ng-show="serviceContract.serviceContractServicesToTrack.length<10 && showAddButtonNewSCSTT" ng-click="addServiceContractServicesToTrack(newServiceContractServicesToTrack)">
+                  <i class="icon-sm icn-add-action"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
 
     <div class="service-bill-content">
       <div class="col-md-12" style="padding: 0;">

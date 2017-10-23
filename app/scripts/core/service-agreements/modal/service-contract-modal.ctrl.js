@@ -20,6 +20,7 @@
 
         $scope.dissableCreateButton = false;
         $scope.showAddButtonNewService = true;
+        $scope.showAddButtonNewSCSTT = true;
 
         $scope.reInitStartDate = true;
         $scope.reInitEndDate = true;
@@ -68,11 +69,13 @@
             serviceContractServices: [],
             services: [],
             serviceExpenses: [],
-            productExpenses: []
+            productExpenses: [],
+            serviceContractServicesToTrack: []
           };
           $scope.reInitPrpductsExpenseNameField = true;
           preCreateFirstServicesEntities();
           createDefaultServices();
+          createDefaultServiceContractServicesToTrack();
         } else {
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
@@ -201,6 +204,21 @@
             taxIds: [],
             taxes: $scope.addDefaultTaxes()
           };
+
+          $scope.newServiceContractServicesToTrack = {
+            name: ''
+          }
+        }
+
+        function createDefaultServiceContractServicesToTrack() {
+          var scstt1 = {
+            name: 'Managed Services Onsite'
+          };
+          var scstt2 = {
+            name: 'Managed Services Remote'
+          };
+          $scope.serviceContract.serviceContractServicesToTrack.push(scstt1);
+          $scope.serviceContract.serviceContractServicesToTrack.push(scstt2);
         }
 
         $scope.showAdditionalServiceColumn = function() {
@@ -575,6 +593,42 @@
           }
         };
 
+        $scope.showErrorSCSTTNameRequired = false;
+        function errorSCSTTNameRequiredTimeOut() {
+          $scope.showErrorSCSTTNameRequired = true;
+          $timeout(function () {
+            $scope.showErrorSCSTTNameRequired = false;
+          }, 2000);
+        }
+
+
+        $scope.addServiceContractServicesToTrack = function(service) {
+          $scope.showAddButtonNewSCSTT = false;
+          if(service.name && service.name.length) {
+            validateNewServiceName(service.name).then(function(resp) {
+              if(resp) {
+                $scope.serviceContract.serviceContractServicesToTrack.push(service);
+                $scope.newServiceContractServicesToTrack = {
+                  name: ''
+                };
+                $scope.showAddButtonNewSCSTT = true;
+              }
+            })
+          } else {
+            errorSCSTTNameRequiredTimeOut();
+            $scope.showAddButtonNewSCSTT = true;
+          }
+        };
+
+        $scope.deleteServiceContractServicesToTrack = function(service) {
+          for (var i = 0; i < $scope.serviceContract.serviceContractServicesToTrack.length; i++) {
+            if ($scope.serviceContract.serviceContractServicesToTrack[i] == service) {
+              $scope.serviceContract.serviceContractServicesToTrack.splice(i, 1);
+              break;
+            }
+          }
+        };
+
         $scope.isAdditionalServiceNameUnique = function (name) {
           var check = true;
           if (name) {
@@ -614,6 +668,14 @@
               }
             }
           }
+          if ($scope.serviceContract.serviceContractServicesToTrack.length > 0) {
+            for (var m = 0; m < $scope.serviceContract.serviceContractServicesToTrack.length; m++) {
+              if ($scope.serviceContract.serviceContractServicesToTrack[m].name == name) {
+                check = false;
+                break;
+              }
+            }
+          }
           return check;
         };
 
@@ -631,6 +693,14 @@
             if ($scope.serviceContract.serviceContractServices.length > 0) {
               for (var j = 0; j < $scope.serviceContract.serviceContractServices.length; j++) {
                 if ($scope.serviceContract.serviceContractServices[j].name == name) {
+                  check = false;
+                  break;
+                }
+              }
+            }
+            if ($scope.serviceContract.serviceContractServicesToTrack.length > 0) {
+              for (var m = 0; m < $scope.serviceContract.serviceContractServicesToTrack.length; m++) {
+                if ($scope.serviceContract.serviceContractServicesToTrack[m].name == name) {
                   check = false;
                   break;
                 }
@@ -750,6 +820,7 @@
 
 
 
+
         $scope.calculateTotalAmount = function () {
           var totalAmount = 0;
           if($scope.editMode) {
@@ -818,7 +889,8 @@
               services: [],
               serviceContractServices: [],
               serviceExpenses: null,
-              productExpenses: null
+              productExpenses: null,
+              serviceContractServicesToTrack: []
             };
 
             if (servContract.billType == 'OTHER') {
@@ -843,6 +915,16 @@
             ed.setSeconds(0);
             ed.setMilliseconds(0);
             servContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
+
+            if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
+              for (var l=0; l<serviceContract.serviceContractServicesToTrack.length; l++) {
+                var scstt = {
+                  name: serviceContract.serviceContractServicesToTrack[l].name,
+                  rate: 0
+                };
+                servContract.serviceContractServicesToTrack.push(scstt);
+              }
+            }
 
             if (serviceContract.services && serviceContract.services.length) {
               for (var i = 0; i < serviceContract.services.length; i++) {
@@ -1003,6 +1085,7 @@
             var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
             var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
             var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length>0);
+            var checkSCSTT = ($scope.newServiceContractServicesToTrack && $scope.newServiceContractServicesToTrack.name && $scope.newServiceContractServicesToTrack.name.length)
             if($scope.serviceContract.billType == 'OTHER') {
               if(checkPE || checkSE) {
                 emptyServices = false;
@@ -1012,6 +1095,9 @@
                   emptyServices = false;
                 }
               }
+              if(checkSCSTT) {
+                emptyServices = false;
+              }
             } else {
               if(checkSCS) {
                 emptyServices = false;
@@ -1020,6 +1106,9 @@
                 if(checkServices) {
                   emptyServices = false;
                 }
+              }
+              if(checkSCSTT) {
+                emptyServices = false;
               }
             }
 
@@ -1060,6 +1149,11 @@
             if(serviceContract.services.length>0) {
               for (var n = 0; n < serviceContract.services.length; n++) {
                 listOfAdditionalServicesNames.push(serviceContract.services[n].name);
+              }
+            }
+            if(serviceContract.serviceContractServicesToTrack.length>0) {
+              for (var l = 0; l < serviceContract.serviceContractServicesToTrack.length; l++) {
+                listOfAdditionalServicesNames.push(serviceContract.serviceContractServicesToTrack[l].name);
               }
             }
 
