@@ -553,9 +553,15 @@
 
         $scope.showAddButtonNewService = true;
 
+        function showErrorNewServiceFieldsTimeOut() {
+          $scope.showRequiredFieldErrorService = true;
+          $timeout(function () {
+            $scope.showRequiredFieldErrorService = false;
+          }, 2000);
+        }
+
         $scope.addNewService = function (form, service) {
           $scope.showAddButtonNewService = false;
-          $scope.showRequiredFieldErrorService = false;
           $scope.showNewServiceError = false;
           $scope.showNewServiceValidationError = false;
           if (form.$valid) {
@@ -579,7 +585,7 @@
             })
 
           } else {
-            $scope.showRequiredFieldErrorService = true;
+            showErrorNewServiceFieldsTimeOut();
             $scope.showAddButtonNewService = true;
           }
         };
@@ -810,7 +816,7 @@
         };
 
         $scope.isShowingErrorsNewServiceField = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorService) && !form[fieldName].$valid;
+          return form[fieldName] &&  $scope.showRequiredFieldErrorService && !form[fieldName].$valid;
         };
 
         $scope.isShowingErrorsNewServicExpenseeField = function (form, fieldName) {
