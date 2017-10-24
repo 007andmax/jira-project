@@ -188,6 +188,7 @@
 
         ServicesService.getServicesData($scope, function (data) {
           console.log(data);
+          var listOfServices = [];
           for (var i = 0; i < data.length; i++) {
             var serv = {
               name: data[i].name,
@@ -201,7 +202,9 @@
                 serv.taxIds.push(data[i].taxes[m].id)
               }
             }
-            $scope.editContract.services.push(serv);
+            listOfServices.push(serv);
+            listOfServices.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} );
+            $scope.editContract.services = listOfServices;
           }
         });
 

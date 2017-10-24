@@ -35,6 +35,7 @@
         $scope.showRequiredFieldErrorSCS = false;
         $scope.showRequiredFieldErrorService = false;
         $scope.showRequiredFieldErrorServiceExpense = false;
+        $scope.showRequiredFieldErrorSCSTT = false;
 
         $scope.showNewServiceContractServiceValidationError = false;
         $scope.showNewServiceValidationError = false;
@@ -380,7 +381,6 @@
 
 
         ServicesService.getServicesData($scope, function (data) {
-          console.log('dataServices ', data);
           for (var i = 0; i < data.length; i++) {
             var serv = {
               serviceId: data[i].versionedId.id,
@@ -417,9 +417,18 @@
           $scope.serviceContract.billType = type;
         };
 
+        function showErrorNewSCSFieldsTimeOut() {
+          $scope.showRequiredFieldErrorSCS = true;
+          $timeout(function () {
+            $scope.showRequiredFieldErrorSCS = false;
+          }, 2000);
+        }
+        $scope.showAddButtonNewSCS = true;
+
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
           $scope.showRequiredFieldErrorSCS =  false;
           $scope.showNewServiceContractServiceValidationError = false;
+          $scope.showAddButtonNewSCS = false;
           if (form.$valid) {
             validateNewServiceName(NewServiceContractServices.name).then(function (resp) {
               if (resp) {
@@ -438,14 +447,17 @@
                   taxIds: [],
                   taxes: $scope.addDefaultTaxes()
                 };
+                $scope.showAddButtonNewSCS = true;
                 reInitServiceContractServicesForm();
                 $scope.calculateTotalAmount();
               }
             }, function() {
               $scope.showNewServiceContractServiceValidationError = true;
+              $scope.showAddButtonNewSCS = true;
             });
           } else {
-            $scope.showRequiredFieldErrorSCS = true;
+            showErrorNewSCSFieldsTimeOut();
+            $scope.showAddButtonNewSCS = true;
           }
         };
 
@@ -600,18 +612,17 @@
           }
         };
 
-        $scope.showErrorSCSTTNameRequired = false;
         function errorSCSTTNameRequiredTimeOut() {
-          $scope.showErrorSCSTTNameRequired = true;
+          $scope.showRequiredFieldErrorServiceExpense = true;
           $timeout(function () {
-            $scope.showErrorSCSTTNameRequired = false;
+            $scope.showRequiredFieldErrorServiceExpense = false;
           }, 2000);
         }
 
 
-        $scope.addServiceContractServicesToTrack = function(service) {
+        $scope.addServiceContractServicesToTrack = function(form, service) {
           $scope.showAddButtonNewSCSTT = false;
-          if(service.name && service.name.length) {
+          if(form.$valid) {
             validateNewServiceName(service.name).then(function(resp) {
               if(resp) {
                 $scope.serviceContract.serviceContractServicesToTrack.push(service);
@@ -665,6 +676,25 @@
                   }
                 }
               }
+              if($scope.serviceContract.billType == 'DEVICE') {
+                if ($scope.presettupDeviceServices.length > 0) {
+                  for (var d = 0; d < $scope.presettupDeviceServices.length; d++) {
+                    if ($scope.presettupDeviceServices[d].name == name) {
+                      check = false;
+                      break;
+                    }
+                  }
+                }
+              } else if($scope.serviceContract.billType == 'USER') {
+                if ($scope.presettupUsersServices.length > 0) {
+                  for (var u = 0; u < $scope.presettupUsersServices.length; u++) {
+                    if ($scope.presettupUsersServices[u].name == name) {
+                      check = false;
+                      break;
+                    }
+                  }
+                }
+              }
             }
           }
           if ($scope.serviceContract.services.length > 0) {
@@ -710,6 +740,25 @@
                 if ($scope.serviceContract.serviceContractServicesToTrack[m].name == name) {
                   check = false;
                   break;
+                }
+              }
+            }
+            if($scope.serviceContract.billType == 'DEVICE') {
+              if ($scope.presettupDeviceServices.length > 0) {
+                for (var d = 0; d < $scope.presettupDeviceServices.length; d++) {
+                  if ($scope.presettupDeviceServices[d].name == name) {
+                    check = false;
+                    break;
+                  }
+                }
+              }
+            } else if($scope.serviceContract.billType == 'USER') {
+              if ($scope.presettupUsersServices.length > 0) {
+                for (var u = 0; u < $scope.presettupUsersServices.length; u++) {
+                  if ($scope.presettupUsersServices[u].name == name) {
+                    check = false;
+                    break;
+                  }
                 }
               }
             }
@@ -813,7 +862,7 @@
         };
 
         $scope.isShowingErrorsNewSCSField = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorSCS) && !form[fieldName].$valid;
+          return form[fieldName] &&  $scope.showRequiredFieldErrorSCS && !form[fieldName].$valid;
         };
 
         $scope.isShowingErrorsNewServiceField = function (form, fieldName) {
@@ -823,6 +872,11 @@
         $scope.isShowingErrorsNewServicExpenseeField = function (form, fieldName) {
           return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorServiceExpense) && !form[fieldName].$valid;
         };
+
+        $scope.isShowingErrorsNewSCSTTField = function (form, fieldName) {
+          return form[fieldName] &&  $scope.showRequiredFieldErrorServiceExpense && !form[fieldName].$valid;
+        };
+
 
 
 

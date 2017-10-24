@@ -268,7 +268,7 @@
         </div>
         <div class="col-md-1 fourm-group">
           <div class="add-remove-service">
-            <div
+            <div ng-show="showAddButtonNewSCS"
               ng-click="createNewServiceContractServices(newServiceContractServicesForm, NewServiceContractServices)">
               <i class="icon-sm icn-add-action"></i>
             </div>
@@ -562,10 +562,11 @@
             <div ng-show="!isAdditionalServiceNameUnique(newServiceContractServicesToTrack.name) && newServiceContractServicesToTrack.name">
               <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate service name</p>
             </div>
-            <div ng-show="showErrorSCSTTNameRequired && !newServiceContractServicesToTrack.name">
-              <p style="color: red;padding-left: 15px; margin-bottom: 0;">Name is required</p>
-            </div>
-            <div class="service-name-agreement form-group">
+            <!--<div ng-show="showErrorSCSTTNameRequired && !newServiceContractServicesToTrack.name">-->
+              <!--<p style="color: red;padding-left: 15px; margin-bottom: 0;">Name is required</p>-->
+            <!--</div>-->
+            <div class="service-name-agreement form-group"
+                 ng-class="{'has-error': isShowingErrorsNewSCSTTField(newServiceContractServicesToTrackForm, 'newServiceContractServicesToTrackName') }">
               <input placeholder="New Service name"
                      type="text"
                      name="newServiceContractServicesToTrackName"
@@ -579,7 +580,8 @@
             </div>
             <div class="col-md-1 fourm-group text-center" style="padding: 0;">
               <div class="add-remove-service" ng-hide="contractServiceList.length > 19 || !showAddButtonNewService">
-                <div ng-show="serviceContract.serviceContractServicesToTrack.length<10 && showAddButtonNewSCSTT" ng-click="addServiceContractServicesToTrack(newServiceContractServicesToTrack)">
+                <div ng-show="serviceContract.serviceContractServicesToTrack.length<10 && showAddButtonNewSCSTT"
+                     ng-click="addServiceContractServicesToTrack(newServiceContractServicesToTrackForm, newServiceContractServicesToTrack)">
                   <i class="icon-sm icn-add-action"></i>
                 </div>
               </div>
