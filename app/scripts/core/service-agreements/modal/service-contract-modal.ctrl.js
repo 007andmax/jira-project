@@ -87,6 +87,10 @@
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
 
+          AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
+            $scope.contractStatus = data.status;
+          });
+
           for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
             $scope.serviceContract.serviceContractServices[i].taxes = [];
             if ($scope.serviceContract.serviceContractServices[i].taxIds.length > 0) {

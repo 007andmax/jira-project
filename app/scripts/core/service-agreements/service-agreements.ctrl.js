@@ -222,6 +222,9 @@
         $scope.editContract = companyData.companyForReadOnlyMode;
         $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'yyyy/MM/dd');
         $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'yyyy/MM/dd');
+        AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
+          $scope.contractStatus = data.status;
+        });
 
         //create tax object by comparing taxIds and array of taxes
         for (var e = 0; e < $scope.editContract.services.length; e++) {

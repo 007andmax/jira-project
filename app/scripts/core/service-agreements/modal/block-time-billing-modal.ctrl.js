@@ -82,6 +82,10 @@
           $scope.blockTimeContract.taxes = [];
           $scope.blockTimeContract.billForAdditionalService = false;
 
+          AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
+            $scope.contractStatus = data.status;
+          });
+
           for (var i = 0; i < $scope.blockTimeContract.taxIds.length; i++) {
             for (var j = 0; j < $scope.taxes.length; j++) {
               if ($scope.blockTimeContract.taxIds[i] === $scope.taxes[j].id) {

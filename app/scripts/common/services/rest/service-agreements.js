@@ -42,6 +42,14 @@
         })
       }
 
+      function getServiceAgreementById(id, callback) {
+        var future = $http({
+          url: '/serviceAgreements/'+ id,
+          method: 'GET'
+        });
+        Utils.handleCallback(future, callback);
+      }
+
 
       function createContract(data, createBillableItem, callback) {
         var future = $http({
@@ -95,6 +103,7 @@
 
       return {
         getAllServiceAgreements: getAllServiceAgreements,
+        getServiceAgreementById: getServiceAgreementById,
         createContract: createContract,
         getAgreementCountByType: getAgreementCountByType,
         getAgreement: getAgreement,

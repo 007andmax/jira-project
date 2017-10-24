@@ -45,9 +45,8 @@
       </li>
       <div style="margin-top: 110px;">
       <li ng-repeat="agreement in agreementsList | orderBy: filterType"
-          class="content-product-list-ticket clearfix"
-          ng-click="agreement.status !== 'TERMINATED' && openAgreementsModal(agreement.type, false, agreement.id)"
-          ng-class="{'pointer': agreement.status !== 'TERMINATED'}">
+          class="content-product-list-ticket pointer clearfix"
+          ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3 col-width-3">{{agreement.description}}</div>
         <div class="col-md-1 col-width-1" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}</div>
