@@ -21,7 +21,7 @@
               var newProductExpense = {
                 name: productExpense.name,
                 quantity: productExpense.quantity,
-                salePrice: productExpense.salePrice
+                salePrice: productExpense.name.sale
               };
               $scope.serviceContract.productExpenses.push(newProductExpense);
 

@@ -16,6 +16,7 @@
         companies: [],
         vendors: [],
         clientCompanies: [],
+        clientCompaniesWoVendorsAndLeads: [],
         deletedCompanies: [],
         currentCompany: {}
       },
@@ -33,6 +34,9 @@
             storage.deletedCompanies.push(custCompany);
           } else {
             if (!custCompany.isDefault && custCompany.clientType) {
+              if(custCompany.clientType === 'CLIENT') {
+                storage.clientCompaniesWoVendorsAndLeads.push(custCompany);
+              }
               if (custCompany.clientType.toLowerCase() !== 'vendor') {
                 storage.clientCompanies.push(custCompany);
               } else {
@@ -99,6 +103,9 @@
         } else if (newChange.data.accountType !== 'TECH') {
           var newClient = Utils.customizeObj(newChange.data);
           storage.companies.push(newClient);
+          if(custCompany.clientType === 'CLIENT') {
+            storage.clientCompaniesWoVendorsAndLeads.push(newClient);
+          }
           if (newClient.clientType.toLowerCase() !== 'vendor') {
             storage.clientCompanies.push(newClient);
           } else {
@@ -123,6 +130,7 @@
 
         Utils.deleteById(storage.companies, companyId);
         Utils.deleteById(storage.clientCompanies, companyId);
+        Utils.deleteById(storage.clientCompaniesWoVendorsAndLeads, companyId);
         Utils.deleteById(storage.vendors, companyId);
 
         if (callbackForArchive && (typeof callbackForArchive == 'function')) {
@@ -135,7 +143,9 @@
       } else if (newChange.action == 'COMPANY_DEARCHIVED') {
 
         var company = Utils.customizeObj(newChange.data);
-
+        if(company.clientType == ' CLIENT') {
+          storage.clientCompaniesWoVendorsAndLeads.push(company);
+        }
         if (company.clientType.toLowerCase() !== 'vendor') {
           storage.clientCompanies.push(company);
         } else {
@@ -163,6 +173,11 @@
     function getClientCompanies(callback) {
       addInitListener(callback);
       return storage.clientCompanies;
+    }
+
+    function getClientCompaniesWoClientsAndLeads(callback) {
+      addInitListener(callback);
+      return storage.clientCompaniesWoVendorsAndLeads;
     }
 
     function getAllCompanies() {
@@ -768,6 +783,7 @@
       getCurrentCompany: getCurrentCompany,
       getVendors: getVendors,
       getClientCompanies: getClientCompanies,
+      getClientCompaniesWoClientsAndLeads: getClientCompaniesWoClientsAndLeads,
       getAllCompanies: getAllCompanies,
       getArchivedCompanies: getArchivedCompanies,
       getOneById: getOneById,

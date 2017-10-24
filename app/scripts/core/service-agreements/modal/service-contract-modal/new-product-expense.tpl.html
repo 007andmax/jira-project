@@ -58,7 +58,7 @@
   <div class="col-sm-2"
        ng-class="{'has-error': isShowingErrorsNewProductExpenseeField(newProductExpenseForm, 'newProductExpensePrice') }">
     <input type="text" class="form-control" placeholder="Price" name="newProductExpensePrice" qt-to-fixed="2"
-           ng-required="true" ng-model="newProductExpense.salePrice"
+           ng-required="true" ng-model="newProductExpense.name.sale"
            hard-reset-pattern="decimalNumberPatternLow" required>
   </div>
 

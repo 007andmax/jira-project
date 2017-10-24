@@ -127,6 +127,7 @@
                     if(productsData[w].products[v].versionedId.id ==  $scope.serviceContract.productExpenses[p].productId) {
                       $scope.serviceContract.productExpenses[p].name = {};
                       $scope.serviceContract.productExpenses[p].name.description = productsData[w].products[v].description;
+                      $scope.serviceContract.productExpenses[p].name.sale = productsData[w].products[v].sale;
                       break;
                     }
                   }
@@ -922,13 +923,15 @@
             ed.setMilliseconds(0);
             servContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
-            if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
-              for (var l=0; l<serviceContract.serviceContractServicesToTrack.length; l++) {
-                var scstt = {
-                  name: serviceContract.serviceContractServicesToTrack[l].name,
-                  rate: 0
-                };
-                servContract.serviceContractServicesToTrack.push(scstt);
+            if(serviceContract.billType !== 'OTHER') {
+              if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
+                for (var l=0; l<serviceContract.serviceContractServicesToTrack.length; l++) {
+                  var scstt = {
+                    name: serviceContract.serviceContractServicesToTrack[l].name,
+                    rate: 0
+                  };
+                  servContract.serviceContractServicesToTrack.push(scstt);
+                }
               }
             }
 
@@ -1023,7 +1026,7 @@
                   var prodExp = {
                     productId: returnProductId(serviceContract.productExpenses[t]),
                     quantity: serviceContract.productExpenses[t].quantity,
-                    salePrice: serviceContract.productExpenses[t].salePrice
+                    salePrice: serviceContract.productExpenses[t].name.sale
                   };
                   servContract.productExpenses.push(prodExp);
                 }

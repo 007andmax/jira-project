@@ -151,7 +151,7 @@
 
       $scope.companyId = companyData.companyId;
       $scope.companyInfo = companyData.companyInfo;
-      $scope.companiesList = CompaniesService.getClientCompanies();
+      $scope.companiesList = CompaniesService.getClientCompaniesWoClientsAndLeads();
 
       $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;
       $scope.serviceNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/;
