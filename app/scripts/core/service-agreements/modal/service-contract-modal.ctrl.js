@@ -37,6 +37,12 @@
         $scope.showRequiredFieldErrorServiceExpense = false;
         $scope.showRequiredFieldErrorSCSTT = false;
 
+        $scope.notAddedAdditionalServiceError = false;
+        $scope.notAddedSCSError = false;
+        $scope.notAddedSCSTTError = false;
+        $scope.notAddedServiceExpenseError = false;
+        $scope.notAddedProductExpenseError = false;
+
         $scope.showNewServiceContractServiceValidationError = false;
         $scope.showNewServiceValidationError = false;
         $scope.showServiceExpenseError = false;
@@ -578,6 +584,7 @@
         }
 
         $scope.addNewService = function (form, service) {
+          $scope.notAddedAdditionalServiceError = false;
           $scope.showAddButtonNewService = false;
           $scope.showNewServiceError = false;
           $scope.showNewServiceValidationError = false;
@@ -881,8 +888,60 @@
           return form[fieldName] &&  $scope.showRequiredFieldErrorServiceExpense && !form[fieldName].$valid;
         };
 
+        $scope.notAddedAdditionalServiceError = false;
+        $scope.notAddedSCSError = false;
+        $scope.notAddedSCSTTError = false;
+        $scope.notAddedServiceExpenseError = false;
+        $scope.notAddedProductExpenseError = false;
+
+        $scope.showNotAddedAdditionalServiceError = function(service) {
+          return (service.name && service.name.length && $scope.notAddedAdditionalServiceError)
+        };
+        $scope.showNotAddedSCSServiceError = function(service) {
+          return (service.name && service.name.length && $scope.notAddedSCSError)
+        };
+        $scope.showNotAddedSCSTTServiceError = function(service) {
+          return (service.name && service.name.length && $scope.notAddedSCSTTError)
+        };
+        $scope.showNotAddedServiceExpenseError = function(service) {
+          return (service.name && service.name.name.length && $scope.notAddedServiceExpenseError)
+        };
+        $scope.showNotAddedProductExpenseError = function(service) {
+          return (service.name && service.name.description.length && $scope.notAddedProductExpenseError)
+        };
 
 
+        $scope.refreshNotAddedError = function(serviceType) {
+          switch(serviceType) {
+            case 'additional':
+              $scope.notAddedAdditionalServiceError = false;
+              break;
+            case 'SCS':
+              $scope.notAddedSCSError = false;
+              break;
+            case 'SCSTT' :
+              $scope.notAddedSCSTTError = false;
+              break;
+            case 'serviceExpense':
+              $scope.notAddedServiceExpenseError = false;
+              break;
+            case 'productExpense':
+              $scope.notAddedProductExpenseError = false;
+              break;
+            default:
+              console.log('wrong case of service number')
+          }
+        };
+
+        function activateNotAddedServiceErrors() {
+          $scope.notAddedAdditionalServiceError = true;
+          $scope.notAddedSCSError = true;
+          $scope.notAddedSCSTTError = true;
+          if($scope.serviceContract.billType == 'OTHER') {
+            $scope.notAddedServiceExpenseError = true;
+            $scope.notAddedProductExpenseError = true;
+          }
+        }
 
 
 
@@ -1154,6 +1213,7 @@
         $scope.validateAndCreateServiceContract = function (serviceContract) {
           disableCreateButtonTimeout();
           if(checkForInvalidFields()) {
+            $scope.notAddedServiceError = false;
             var emptyServices = true;
             var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
             var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
@@ -1187,6 +1247,7 @@
             }
 
             if(!emptyServices) {
+              activateNotAddedServiceErrors();
               var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
               var confirmButton = 'Yes, create';
               UserConfirmationsService.show(confirmMessage, confirmButton, false, 'No, do not create').then(function() {

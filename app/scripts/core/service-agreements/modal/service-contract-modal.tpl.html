@@ -232,9 +232,10 @@
           <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">{{validationServiceError}}</p>
         </div>
         <div class="col-md-4 form-group" style="width: 259px;"
-             ng-class="{'has-error': isShowingErrorsNewSCSField(newServiceContractServicesForm, 'newServiceContractServiceName') }">
+             ng-class="{'has-error': (isShowingErrorsNewSCSField(newServiceContractServicesForm, 'newServiceContractServiceName') || showNotAddedSCSServiceError(NewServiceContractServices)) }">
           <input placeholder="Enter the Name" type="text" class="form-control"
                  ng-model="NewServiceContractServices.name"
+                 ng-click="refreshNotAddedError('SCS')"
                  required
                  name="newServiceContractServiceName"
                  ng-minlength="1"
@@ -444,13 +445,14 @@
                   </div>
                   <div class="col-sm-3">
                     <div uib-dropdown
-                         ng-class="{'has-error': (newServiceExpense.name == null && showRequiredFieldErrorServiceExpense) }">
+                         ng-class="{'has-error': ((newServiceExpense.name == null && showRequiredFieldErrorServiceExpense) || showNotAddedServiceExpenseError(newServiceExpense)) }">
                       <input type="text"
                              style="cursor: pointer;"
                              name="newServiceExpenseName"
                              ng-model="newServiceExpense.name"
                              ng-minlength="1"
                              autocomplete="off"
+                             ng-click="refreshNotAddedError('serviceExpense')"
                              tabindex="5"
                              required
                              placeholder="Service Expense"
@@ -566,9 +568,10 @@
               <!--<p style="color: red;padding-left: 15px; margin-bottom: 0;">Name is required</p>-->
             <!--</div>-->
             <div class="service-name-agreement form-group"
-                 ng-class="{'has-error': isShowingErrorsNewSCSTTField(newServiceContractServicesToTrackForm, 'newServiceContractServicesToTrackName') }">
+                 ng-class="{'has-error': (isShowingErrorsNewSCSTTField(newServiceContractServicesToTrackForm, 'newServiceContractServicesToTrackName') || showNotAddedSCSTTServiceError(newServiceContractServicesToTrack)) }">
               <input placeholder="New Service name"
                      type="text"
+                     ng-click="refreshNotAddedError('SCSTT')"
                      name="newServiceContractServicesToTrackName"
                      class="form-control"
                      ng-model="newServiceContractServicesToTrack.name"
@@ -662,9 +665,10 @@
               <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
             </div>
             <div class="service-name-agreement form-group"
-                 ng-class="{'has-error': isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') }">
+                 ng-class="{'has-error': (isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') || showNotAddedAdditionalServiceError(newService)) }">
               <input placeholder="New Additional Service name"
                      type="text"
+                     ng-click="refreshNotAddedError('additional')"
                      name="newServiceName"
                      class="form-control"
                      ng-model="newService.name"
