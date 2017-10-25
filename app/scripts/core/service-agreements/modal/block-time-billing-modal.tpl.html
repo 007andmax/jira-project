@@ -45,10 +45,16 @@
             <div style="position: absolute;right: -285px;top: 30px;" ng-class="{'hide': !isShowingErrorsBlock(blockTimeContractForm, 'startDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
-            <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="blockTimeContract.startDate"
+            <input class="form-control"
+                   type="text" ng-if="reInitStartDate"
+                   ng-model="blockTimeContract.startDate"
                    placeholder="Select"
-                   readonly ng-change="changeStartDate()" name="startDate"
-                   qt-data-time-picker min-date="blockTimeContract.minStartDate" required>
+                   readonly
+                   ng-change="changeStartDate()"
+                   name="startDate"
+                   qt-data-time-picker
+                   min-date="blockTimeContract.minStartDate"
+                   required>
             <i class="report-calendar"></i>
           </div>
         </div>
@@ -56,11 +62,16 @@
           <div class="form-group">
             End Date*
 
-            <input type="text" placeholder="Select" readonly ng-if="reInitEndDate"
+            <input type="text" placeholder="Select"
+                   readonly ng-if="reInitEndDate"
                    ng-model="blockTimeContract.endDate"
-                   class="form-control" date-time-picker-with-period name="endDate"
-                   default-date="blockTimeContract.endDate" min-date="blockTimeContract.minEndDate"
-                   period="blockTimeContract.period" start-date="blockTimeContract.startDate">
+                   class="form-control"
+                   date-time-picker-with-period
+                   name="endDate"
+                   default-date="blockTimeContract.endDate"
+                   min-date="blockTimeContract.minEndDate"
+                   period="blockTimeContract.period"
+                   start-date="blockTimeContract.startDate">
             <i class="report-calendar"></i>
           </div>
         </div>
