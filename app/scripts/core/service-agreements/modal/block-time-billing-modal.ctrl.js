@@ -196,7 +196,6 @@
             $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           }
 
-          //reInitEndDate();
         }
 
 
