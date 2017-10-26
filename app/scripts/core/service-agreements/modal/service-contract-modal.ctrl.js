@@ -1275,15 +1275,15 @@
                   }
                 }
               }
+              if(serviceContract.serviceContractServicesToTrack.length>0) {
+                for (var l = 0; l < serviceContract.serviceContractServicesToTrack.length; l++) {
+                  listOfAdditionalServicesNames.push(serviceContract.serviceContractServicesToTrack[l].name);
+                }
+              }
             }
             if(serviceContract.services.length>0) {
               for (var n = 0; n < serviceContract.services.length; n++) {
                 listOfAdditionalServicesNames.push(serviceContract.services[n].name);
-              }
-            }
-            if(serviceContract.serviceContractServicesToTrack.length>0) {
-              for (var l = 0; l < serviceContract.serviceContractServicesToTrack.length; l++) {
-                listOfAdditionalServicesNames.push(serviceContract.serviceContractServicesToTrack[l].name);
               }
             }
 
