@@ -43,6 +43,7 @@
         $scope.notAddedServiceExpenseError = false;
         $scope.notAddedProductExpenseError = false;
 
+        $scope.showNewSCSTTValidationError = false;
         $scope.showNewServiceContractServiceValidationError = false;
         $scope.showNewServiceValidationError = false;
         $scope.showServiceExpenseError = false;
@@ -433,11 +434,17 @@
             $scope.showRequiredFieldErrorSCS = false;
           }, 2000);
         }
+
+        function showErrorNewSCSValidationTimeOut() {
+          $scope.showNewServiceContractServiceValidationError = true;
+          $timeout(function () {
+            $scope.showNewServiceContractServiceValidationError = false;
+          }, 2000);
+        }
         $scope.showAddButtonNewSCS = true;
 
         $scope.createNewServiceContractServices = function (form, NewServiceContractServices) {
           $scope.showRequiredFieldErrorSCS =  false;
-          $scope.showNewServiceContractServiceValidationError = false;
           $scope.showAddButtonNewSCS = false;
           if (form.$valid) {
             validateNewServiceName(NewServiceContractServices.name).then(function (resp) {
@@ -462,7 +469,7 @@
                 $scope.calculateTotalAmount();
               }
             }, function() {
-              $scope.showNewServiceContractServiceValidationError = true;
+              showErrorNewSCSValidationTimeOut();
               $scope.showAddButtonNewSCS = true;
             });
           } else {
@@ -583,11 +590,17 @@
           }, 2000);
         }
 
+        function showErrorNewServiceValidationTimeOut() {
+          $scope.showNewServiceValidationError = true;
+          $timeout(function () {
+            $scope.showNewServiceValidationError = false;
+          }, 2000);
+        }
+
         $scope.addNewService = function (form, service) {
           $scope.notAddedAdditionalServiceError = false;
           $scope.showAddButtonNewService = false;
           $scope.showNewServiceError = false;
-          $scope.showNewServiceValidationError = false;
           if (form.$valid) {
 
             validateNewServiceName(service.name).then(function (resp) {
@@ -604,7 +617,7 @@
                 $scope.showAddButtonNewService = true;
               }
             }, function() {
-              $scope.showNewServiceValidationError = true;
+              showErrorNewServiceValidationTimeOut();
               $scope.showAddButtonNewService = true;
             })
 
@@ -630,6 +643,14 @@
           }, 2000);
         }
 
+        function errorSCSTTValidationErrorTimeOut() {
+          $scope.showNewSCSTTValidationError = true;
+          $timeout(function () {
+            $scope.showNewSCSTTValidationError = false;
+          }, 2000);
+        }
+
+
 
         $scope.addServiceContractServicesToTrack = function(form, service) {
           $scope.showAddButtonNewSCSTT = false;
@@ -642,6 +663,9 @@
                 };
                 $scope.showAddButtonNewSCSTT = true;
               }
+            }, function() {
+              $scope.showAddButtonNewSCSTT = true;
+              errorSCSTTValidationErrorTimeOut();
             })
           } else {
             errorSCSTTNameRequiredTimeOut();
@@ -1195,7 +1219,7 @@
           $scope.showValidationFailMessage = true;
           $timeout(function () {
             $scope.showValidationFailMessage = false;
-          }, 2000);
+          }, 3000);
         }
 
         function disableCreateButtonTimeout() {

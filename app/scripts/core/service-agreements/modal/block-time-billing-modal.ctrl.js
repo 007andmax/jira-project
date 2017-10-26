@@ -327,6 +327,14 @@
           return UsersService.getOneById(userId);
         };
 
+        $scope.showNewBlockTimeServiceValidationError = false;
+        function showErrorNewBlockTimeServiceValidation() {
+          $scope.showNewBlockTimeServiceValidationError = true;
+          $timeout(function () {
+            $scope.showNewBlockTimeServiceValidationError = false;
+          }, 2000);
+        }
+
         $scope.addNewBlockTimeService = function (form, service) {
           $scope.showNewBlockTimeServiceError = false;
           console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError);
@@ -357,6 +365,9 @@
                       $scope.newBlockTimeService = {};
                     }
                   }
+                }, function() {
+                  $scope.showAddButtonNewBlockServices = true;
+                  showErrorNewBlockTimeServiceValidation();
                 })
               }
             }
@@ -378,6 +389,14 @@
             }
           }
         };
+
+        $scope.showNewContractServiceValidationError = false;
+        function showErrorNewServiceContractValidation() {
+          $scope.showNewContractServiceValidationError = true;
+          $timeout(function () {
+            $scope.showNewContractServiceValidationError = false;
+          }, 2000);
+        }
 
 
         $scope.addContractService = function (form, service) {
@@ -427,6 +446,9 @@
 
                     }
                   }
+                }, function() {
+                  $scope.showAddButtonNewService = true;
+                  showErrorNewServiceContractValidation();
                 })
               }
             }
