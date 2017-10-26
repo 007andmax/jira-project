@@ -77,6 +77,7 @@
             <input type="text" placeholder="Select"
                    readonly ng-if="reInitEndDate"
                    ng-model="blockTimeContract.endDate"
+                   ng-change="changeNumOfIntervals(blockTimeContract.endDate)"
                    class="form-control"
                    date-time-picker-with-period
                    name="endDate"
