@@ -888,11 +888,6 @@
           return form[fieldName] &&  $scope.showRequiredFieldErrorServiceExpense && !form[fieldName].$valid;
         };
 
-        $scope.notAddedAdditionalServiceError = false;
-        $scope.notAddedSCSError = false;
-        $scope.notAddedSCSTTError = false;
-        $scope.notAddedServiceExpenseError = false;
-        $scope.notAddedProductExpenseError = false;
 
         $scope.showNotAddedAdditionalServiceError = function(service) {
           return (service.name && service.name.length && $scope.notAddedAdditionalServiceError)

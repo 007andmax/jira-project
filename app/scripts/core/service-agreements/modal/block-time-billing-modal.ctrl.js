@@ -38,6 +38,9 @@
           taxes: []
         };
 
+        $scope.notAddedBlockTimeServiceError = false;
+        $scope.notAddedBlockAdditionalServiceError = false;
+
         $scope.showAddButtonNewBlockServices = true;
         $scope.showAddButtonNewService = true;
 
@@ -586,6 +589,38 @@
         }
 
 
+
+        $scope.showNotAddedBlockTimeServiceError = function(service) {
+          if(service) {
+            return (service.name && service.name.length && $scope.notAddedBlockTimeServiceError)
+          }
+        };
+        $scope.showNotAddedBlockAdditionalServiceError = function(service) {
+          if($scope.blockTimeContract.billForAdditionalService && service) {
+            return (service.name && service.name.length && $scope.notAddedBlockAdditionalServiceError)
+          }
+        };
+
+        $scope.refreshNotAddedError = function(serviceType) {
+          switch(serviceType) {
+            case 'blockTime':
+              $scope.notAddedBlockTimeServiceError = false;
+              break;
+            case 'additional':
+              $scope.notAddedBlockAdditionalServiceError = false;
+              break;
+            default:
+              console.log('wrong case of service number')
+          }
+        };
+        function activateNotAddedServiceErrors() {
+          $scope.notAddedBlockTimeServiceError = true;
+          if($scope.blockTimeContract.billForAdditionalService) {
+            $scope.notAddedBlockAdditionalServiceError = true;
+          }
+        }
+
+
         function createBlockTimeContract(contractData) {
           if (contractData) {
 
@@ -704,6 +739,7 @@
           if(!checkForInvalidFields()) {
             var emptyServices = true;
             if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)) {
+              activateNotAddedServiceErrors();
               emptyServices = false;
               var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
               var confirmButton = 'Yes, create';

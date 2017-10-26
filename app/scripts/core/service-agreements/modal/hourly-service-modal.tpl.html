@@ -108,10 +108,11 @@
             <p style="color: red;padding-left: 15px;">Duplicate name</p>
           </div>
           <div class="col-md-4 service-name-agreement form-group"
-               ng-class="{'has-error': isShowingHourNewFieldError(newServiceForm, 'editServiceName')}">
+               ng-class="{'has-error': (isShowingHourNewFieldError(newServiceForm, 'editServiceName') || showNotAddedHourlyServiceError(editService))}">
 
             <input placeholder="New Service Name"
                    type="text"
+                   ng-click="refreshNotAddedServiceErrorHourly()"
                    name="editServiceName"
                    class="form-control"
                    ng-model="editService.name"

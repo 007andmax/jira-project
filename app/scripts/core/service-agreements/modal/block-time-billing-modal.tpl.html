@@ -178,12 +178,13 @@
                 using for current company</p>
             </div>
             <div class="form-group col-md-7"
-                 ng-class="{'has-error': isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName')}">
+                 ng-class="{'has-error': (isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName') || showNotAddedBlockTimeServiceError(newBlockTimeService))}">
 
 
               <input placeholder="New Block Time Service Name"
                      type="text"
                      name="newBlockTimeServiceName"
+                     ng-click="refreshNotAddedError('blockTime')"
                      class="form-control"
                      ng-model="newBlockTimeService.name"
                      hard-reset-pattern="serviceNamePattern"
@@ -281,12 +282,13 @@
                   <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate name</p>
                 </div>
                 <div class="service-name-agreement form-group"
-                     ng-class="{'has-error': isShowingErrors(newContractServiceForm, 'newContractServiceName') }">
+                     ng-class="{'has-error': (isShowingErrors(newContractServiceForm, 'newContractServiceName') || showNotAddedBlockAdditionalServiceError(newContractService)) }">
 
 
                   <input placeholder="New Additional Service name"
                          type="text"
                          name="newContractServiceName"
+                         ng-click="refreshNotAddedError('additional')"
                          class="form-control"
                          ng-model="newContractService.name"
                          hard-reset-pattern="serviceNamePattern"

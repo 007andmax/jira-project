@@ -161,6 +161,8 @@
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;
 
+      $scope.notAddedHourlyServiceError = false;
+
       $scope.showFieldsError = false;
       $scope.showAddServiceButton = true;
       $scope.showErrorInHourlyContract = false;
@@ -638,6 +640,7 @@
         if(!checkForInvalidFields()) {
           var emptyNewService = true;
           if (editService && editService.name && editService.name.length) {
+            activateNotAddedServiceErrorHourly();
             emptyNewService = false;
             var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
             var confirmButton = 'Yes, create';
@@ -690,6 +693,19 @@
       $scope.isShowingHourNewFieldError = function(form, fieldName) {
         return form[fieldName] && form[fieldName].$dirty && !form[fieldName].$valid;
       };
+
+
+      $scope.showNotAddedHourlyServiceError = function(service) {
+        return (service.name && service.name.length && $scope.notAddedHourlyServiceError)
+      };
+
+      $scope.refreshNotAddedServiceErrorHourly = function() {
+        $scope.notAddedHourlyServiceError = false;
+      };
+
+      function activateNotAddedServiceErrorHourly() {
+        $scope.notAddedHourlyServiceError = true;
+      }
 
 
 
