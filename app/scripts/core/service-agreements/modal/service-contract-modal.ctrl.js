@@ -304,12 +304,8 @@
               endDate = Utils.addNumberOfMonth(endDate, 12);
               break;
             default:
-              //endDate.setTime(endDate.getTime() + day * period);
-              var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
-                endDate.getUTCHours(), endDate.getUTCMinutes(), endDate.getUTCSeconds(), endDate.getUTCMilliseconds());
-              var calculatePlusDays = utc_timestamp + day*period;
-              var nd = new Date(calculatePlusDays);
-              endDate.setTime(calculatePlusDays - (nd.getTimezoneOffset()*60000))
+              endDate = Utils.calculateDateWithTimeZoneAndPeriod(endDate, period);
+
           }
           endDate = Utils.minusDays(endDate, 1);
           $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');

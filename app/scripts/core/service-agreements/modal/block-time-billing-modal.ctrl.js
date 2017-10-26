@@ -19,6 +19,7 @@
           {name: 'Remote block time service'}
         ];
         $scope.taxes = TaxesService.getAll();
+        $scope.numOfIntervals = 1;
 
 
         $scope.blockTimeServices = [];
@@ -148,33 +149,110 @@
           return show;
         };
 
-        function changeStartDate() {
-          changeMinEndDate($scope.blockTimeContract.period);
-        }
+        $scope.changeStartDate = function() {
+          var intervals = parseInt($scope.numOfIntervals);
+          changeMinEndDate($scope.blockTimeContract.period, intervals);
+        };
 
-        function changeMinEndDate(period) {
+
+        function changeMinEndDate(period, numOfIntervals) {
           var date = $scope.blockTimeContract.startDate;
-          var endDate = new Date(date);
+          var minEndDate = new Date(date);
           switch(period) {
             case('Month'):
-              //endDate.setMonth(endDate.getMonth() + 1);
-              endDate = Utils.addNumberOfMonth(endDate, 1);
+              minEndDate = Utils.addNumberOfMonth(minEndDate, 1);
               break;
             case('Year'):
-              endDate = Utils.addNumberOfMonth(endDate, 12);
+              minEndDate = Utils.addNumberOfMonth(minEndDate, 12);
               break;
             default:
-              var utc_timestamp = Date.UTC(endDate.getUTCFullYear(),endDate.getUTCMonth(), endDate.getUTCDate() ,
-                endDate.getUTCHours(), endDate.getUTCMinutes(), endDate.getUTCSeconds(), endDate.getUTCMilliseconds());
-              var calculatePlusDays = utc_timestamp + day*period;
-              var nd = new Date(calculatePlusDays);
-              endDate.setTime(calculatePlusDays - (nd.getTimezoneOffset()*60000))
+              minEndDate = Utils.calculateDateWithTimeZoneAndPeriod(minEndDate, period);
           }
-          endDate = Utils.minusDays(endDate, 1);
-          $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
-          $scope.blockTimeContract.minEndDate = $filter('date')(endDate, 'dd MMM yyyy');
-          reInitEndDate()
+          minEndDate = Utils.minusDays(minEndDate, 1);
+          $scope.blockTimeContract.minEndDate = $filter('date')(minEndDate, 'dd MMM yyyy');
+          reInitEndDate();
+
+          $timeout(function () {
+            changeEndDate(period, numOfIntervals);
+          }, 50);
         }
+
+        function changeEndDate(period, numOfIntervals) {
+          if(numOfIntervals) {
+            var date = $scope.blockTimeContract.startDate;
+            var endDate = new Date(date);
+            switch(period) {
+              case('Month'):
+                //endDate.setMonth(endDate.getMonth() + 1);
+                endDate = Utils.addNumberOfMonth(endDate, 1*numOfIntervals);
+                break;
+              case('Year'):
+                endDate = Utils.addNumberOfMonth(endDate, 12*numOfIntervals);
+                break;
+              default:
+                endDate = Utils.calculateDateWithTimeZoneAndPeriod(endDate, period, numOfIntervals);
+            }
+            endDate = Utils.minusDays(endDate, 1);
+            $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+          }
+
+          //reInitEndDate();
+        }
+
+
+
+        $scope.$watch(function() {
+          return $scope.blockTimeContract.endDate;
+        }, function(oldEndDate) {
+          var startDate = new Date($scope.blockTimeContract.startDate);
+          //startDate = Utils.minusDays(startDate, 1);
+          var endDate = new Date(oldEndDate);
+          var interval = 1 ;
+          switch($scope.blockTimeContract.period) {
+            case('Month'):
+              for(var i=1; i<10000; i++) {
+                var s = startDate;
+                s = Utils.addNumberOfMonth(startDate, i);
+                s = Utils.minusDays(s, 1);
+                if(s.getTime() == endDate.getTime()) {
+                  interval = i;
+                  break;
+                }
+              }
+              break;
+            case('Year'):
+              for(var y=1; y<10000; y++) {
+                var sd = startDate;
+                sd = Utils.addNumberOfMonth(startDate, 12*y);
+                sd = Utils.minusDays(sd, 1);
+                if(sd.getTime() == endDate.getTime()) {
+                  interval = y;
+                  break;
+                }
+              }
+              break;
+            default:
+              for(var d=1; d<10000; d++) {
+                var sd = startDate;
+                sd = Utils.calculateDateWithTimeZoneAndPeriod(startDate, $scope.blockTimeContract.period, 1);
+                sd = Utils.minusDays(sd, 1);
+                var nt = sd;
+                nt.setHours(0, 0, 0, 0);
+                nt.setSeconds(0);
+                nt.setMilliseconds(0);
+                if(nt.getTime() == endDate.getTime()) {
+                  interval = d;
+                  break;
+                }
+              }
+          }
+          $scope.numOfIntervals = interval;
+        });
+
+        $scope.changeEndDateByNumToGenerate = function() {
+          var intervals = parseInt($scope.numOfIntervals);
+          changeEndDate($scope.blockTimeContract.period, intervals);
+        };
 
         function reInitStartDate() {
           $scope.reInitStartDate = false;
@@ -238,15 +316,16 @@
             $scope.blockTimeContract.customInterval = 1;
           }
           $scope.blockTimeContract.minStartDate = newMinStartDate;
-          changeMinEndDate($scope.blockTimeContract.period);
+          //changeMinEndDate($scope.blockTimeContract.period);
+          $scope.changeStartDate();
           reInitStartDate();
-          reInitEndDate()
+          //reInitEndDate()
         });
 
         $scope.$watch(function () {
           return $scope.blockTimeContract.startDate;
         }, function () {
-          changeStartDate()
+          $scope.changeStartDate()
         });
 
 

@@ -18,6 +18,7 @@
           },
           link: function (scope, element, attrs, ctrl) {
 
+
             var options = {
                 keepOpen: true,
                 format: 'DD MMM YYYY',
@@ -41,7 +42,19 @@
             }
 
             if (scope.defaultDate) {
-              options.defaultDate = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
+              var md = new Date(scope.minDate);
+              var dd;
+              if(scope.defaultDate instanceof String) {
+                dd = new Date(scope.defaultDate);
+              } else {
+                dd = new Date(scope.minDate);
+              }
+              if(dd.getTime() <= md.getTime()) {
+                options.defaultDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
+              } else {
+                options.defaultDate = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
+              }
+
             }
 
             if (scope.startDate) {

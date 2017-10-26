@@ -484,6 +484,18 @@
       return (now > t);
     }
 
+    function calculateDateWithTimeZoneAndPeriod(dateToChange, period, numOfIntervals) {
+      var nOfIntervals = numOfIntervals || 1;
+      var date = dateToChange;
+      var day = 1000 * 60 * 60 * 24;
+      var utc_timestamp = Date.UTC(date.getUTCFullYear(),date.getUTCMonth(), date.getUTCDate() ,
+        date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds());
+      var calculatePlusDays = utc_timestamp + day*period*nOfIntervals;
+      var nd = new Date(calculatePlusDays);
+      date.setTime(calculatePlusDays - (nd.getTimezoneOffset()*60000));
+      return date;
+    }
+
     return {
       customizeObj: customizeObj,
       customizeArray: customizeArray,
@@ -499,7 +511,8 @@
       removeFromArrayByCondition: removeFromArrayByCondition,
       addNumberOfMonth: addNumberOfMonth,
       minusDays: minusDays,
-      compareDateNowWithDate: compareDateNowWithDate
+      compareDateNowWithDate: compareDateNowWithDate,
+      calculateDateWithTimeZoneAndPeriod: calculateDateWithTimeZoneAndPeriod
     }
   }]);
 
