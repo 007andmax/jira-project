@@ -233,8 +233,11 @@
               break;
             default:
               for(var d=1; d<10000; d++) {
+                startDate.setHours(0, 0, 0, 0);
+                startDate.setSeconds(0);
+                startDate.setMilliseconds(0);
                 var sd = startDate;
-                sd = Utils.calculateDateWithTimeZoneAndPeriod(startDate, $scope.blockTimeContract.period, 1);
+                sd = Utils.calculateDateWithTimeZoneAndPeriod(sd, $scope.blockTimeContract.period, 1);
                 sd = Utils.minusDays(sd, 1);
                 var nt = sd;
                 nt.setHours(0, 0, 0, 0);
