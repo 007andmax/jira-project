@@ -568,14 +568,14 @@
           $scope.showRequiredFieldErrorSCS = true;
           $timeout(function () {
             $scope.showRequiredFieldErrorSCS = false;
-          }, 2000);
+          }, 4000);
         }
 
         function showErrorNewSCSValidationTimeOut() {
           $scope.showNewServiceContractServiceValidationError = true;
           $timeout(function () {
             $scope.showNewServiceContractServiceValidationError = false;
-          }, 2000);
+          }, 4000);
         }
         $scope.showAddButtonNewSCS = true;
 
@@ -723,14 +723,14 @@
           $scope.showRequiredFieldErrorService = true;
           $timeout(function () {
             $scope.showRequiredFieldErrorService = false;
-          }, 2000);
+          }, 4000);
         }
 
         function showErrorNewServiceValidationTimeOut() {
           $scope.showNewServiceValidationError = true;
           $timeout(function () {
             $scope.showNewServiceValidationError = false;
-          }, 2000);
+          }, 4000);
         }
 
         $scope.addNewService = function (form, service) {
@@ -778,14 +778,14 @@
           $scope.showRequiredFieldErrorServiceExpense = true;
           $timeout(function () {
             $scope.showRequiredFieldErrorServiceExpense = false;
-          }, 2000);
+          }, 4000);
         }
 
         function errorSCSTTValidationErrorTimeOut() {
           $scope.showNewSCSTTValidationError = true;
           $timeout(function () {
             $scope.showNewSCSTTValidationError = false;
-          }, 2000);
+          }, 4000);
         }
 
 
@@ -1028,7 +1028,7 @@
           $scope.showServiceLengthCheckError = true;
           $timeout(function () {
             $scope.showServiceLengthCheckError = false;
-          }, 2000);
+          }, 4000);
         }
 
         $scope.isShowingErrorsServiceContract = function (form, fieldName) {
@@ -1358,14 +1358,14 @@
           $scope.showValidationFailMessage = true;
           $timeout(function () {
             $scope.showValidationFailMessage = false;
-          }, 3000);
+          }, 4000);
         }
 
         function disableCreateButtonTimeout() {
           $scope.dissableCreateButton = true;
           $timeout(function () {
             $scope.dissableCreateButton = false;
-          }, 2000);
+          }, 4000);
         }
 
 

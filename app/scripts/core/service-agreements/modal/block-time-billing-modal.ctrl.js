@@ -475,7 +475,7 @@
           $scope.showNewBlockTimeServiceValidationError = true;
           $timeout(function () {
             $scope.showNewBlockTimeServiceValidationError = false;
-          }, 2000);
+          }, 4000);
         }
 
         $scope.addNewBlockTimeService = function (form, service) {
@@ -538,7 +538,7 @@
           $scope.showNewContractServiceValidationError = true;
           $timeout(function () {
             $scope.showNewContractServiceValidationError = false;
-          }, 2000);
+          }, 4000);
         }
 
 
@@ -704,7 +704,7 @@
           $scope.showDuplicatesErrorMessage = true;
           $timeout(function () {
             $scope.showDuplicatesErrorMessage = false;
-          }, 3000);
+          }, 4000);
         }
         function checkForDuplicateServiceNames(serviceList) {
           var deferred = $q.defer();
