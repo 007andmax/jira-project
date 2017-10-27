@@ -612,7 +612,7 @@
     </div>
 
 
-    <div class="service-bill-content">
+    <div class="service-bill-content" ng-show="serviceContract.billType == 'DEVICE' || serviceContract.billType == 'USER'">
       <div class="col-md-12" style="padding: 0;">
         <label class="control checkbox">
           <input type="checkbox" ng-model="serviceContract.isAdditionalServices">

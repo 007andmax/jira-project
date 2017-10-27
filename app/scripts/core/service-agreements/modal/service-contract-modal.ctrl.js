@@ -1208,27 +1208,28 @@
                   servContract.serviceContractServicesToTrack.push(scstt);
                 }
               }
-            }
-
-            if (serviceContract.services && serviceContract.services.length) {
-              for (var i = 0; i < serviceContract.services.length; i++) {
-                var serv = {
-                  name: serviceContract.services[i].name,
-                  rate: 0,
-                  billable: serviceContract.services[i].billable,
-                  taxIds: []
-                };
-                if(serviceContract.services[i].billable) {
-                  serv.rate = serviceContract.services[i].rate;
-                  if (serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
-                    for (var n = 0; n < serviceContract.services[i].taxes.length; n++) {
-                      serv.taxIds.push(serviceContract.services[i].taxes[n].id);
+              if (serviceContract.services && serviceContract.services.length) {
+                for (var i = 0; i < serviceContract.services.length; i++) {
+                  var serv = {
+                    name: serviceContract.services[i].name,
+                    rate: 0,
+                    billable: serviceContract.services[i].billable,
+                    taxIds: []
+                  };
+                  if(serviceContract.services[i].billable) {
+                    serv.rate = serviceContract.services[i].rate;
+                    if (serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
+                      for (var n = 0; n < serviceContract.services[i].taxes.length; n++) {
+                        serv.taxIds.push(serviceContract.services[i].taxes[n].id);
+                      }
                     }
                   }
+                  servContract.services.push(serv);
                 }
-                servContract.services.push(serv);
               }
             }
+
+
 
             if(serviceContract.billType === 'DEVICE' && $scope.presettupDeviceServices.length>0) {
               for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
@@ -1382,14 +1383,14 @@
               if(checkPE || checkSE) {
                 emptyServices = false;
               }
-              if($scope.serviceContract.isAdditionalServices) {
-                if(checkServices) {
-                  emptyServices = false;
-                }
-              }
-              if(checkSCSTT) {
-                emptyServices = false;
-              }
+              // if($scope.serviceContract.isAdditionalServices) {
+              //   if(checkServices) {
+              //     emptyServices = false;
+              //   }
+              // }
+              // if(checkSCSTT) {
+              //   emptyServices = false;
+              // }
             } else {
               if(checkSCS) {
                 emptyServices = false;
@@ -1443,12 +1444,13 @@
                   listOfAdditionalServicesNames.push(serviceContract.serviceContractServicesToTrack[l].name);
                 }
               }
-            }
-            if(serviceContract.services.length>0) {
-              for (var n = 0; n < serviceContract.services.length; n++) {
-                listOfAdditionalServicesNames.push(serviceContract.services[n].name);
+              if(serviceContract.services.length>0) {
+                for (var n = 0; n < serviceContract.services.length; n++) {
+                  listOfAdditionalServicesNames.push(serviceContract.services[n].name);
+                }
               }
             }
+
 
             if(listOfNames.length > 0) {
               validateListOfNames(listOfNames).then(function(resp) {
