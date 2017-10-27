@@ -14,13 +14,16 @@
   background: #fff;
   border-radius: 10px;
 }
+
 .contracts.readonly label,
-.contracts.readonly input{
+.contracts.readonly input {
   cursor: default;
 }
-.contracts.readonly .select-taxes-drv input{
-  cursor: pointer!important;
+
+.contracts.readonly .select-taxes-drv input {
+  cursor: pointer !important;
 }
+
 .contracts .nav-ticket-add > li > a {
   padding: 15px 0 20px;
 }
@@ -92,16 +95,20 @@
   width: calc(100% - 145px);
   height: 100%;
 }
-.service-agreement-modal .dropdown-menu-tabs{
+
+.service-agreement-modal .dropdown-menu-tabs {
   max-height: 310px;
 }
-.service-agreement-modal .dropdown-menu-tabs .scroll-pane{
+
+.service-agreement-modal .dropdown-menu-tabs .scroll-pane {
   margin-bottom: 60px;
 }
-.service-agreement-modal .dropdown-menu.dropdown-menu-tabs{
+
+.service-agreement-modal .dropdown-menu.dropdown-menu-tabs {
   left: 27px;
   top: -15px;
 }
+
 .service-agreement-modal {
   position: relative;
   padding: 15px 20px;
@@ -467,10 +474,6 @@ _::-webkit-:not(:root:root),
 .service-form-wrapper .x-mark {
   top: 1px;
   right: 0;
-}
-
-.service-form-wrapper .block-time .x-mark {
-  top: 24px;
 }
 
 .create-window .input-top-4 .x-mark {

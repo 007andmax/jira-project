@@ -4738,17 +4738,13 @@ Devices tab
   margin: 0;
 }
 
-.contracts .info-block {
-  width: 100%;
-}
-
 .info-block {
   padding: 10px 10px 10px 50px;
   background-color: #E7F5FE;
   color: #16A4FA;
   position: relative;
   border-radius: 3px;
-  width: 84%;
+  width: 88%;
 }
 
 .info-block:before {
@@ -4849,7 +4845,7 @@ Devices tab
 }
 
 .service-agreement-modal .service-bill-hide-content .col-md-1 label,
-.contracts .service-bill-hide-content .col-md-1 label{
+.contracts .service-bill-hide-content .col-md-1 label {
   margin: 6px;
 }
 
