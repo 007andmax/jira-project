@@ -82,10 +82,14 @@
           $scope.blockTimeContract.endDate = '';
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = '';
+          $scope.blockTimeContract.numOfIntervalsPreview;
           $scope.blockTimeContract.minStartDate = Date.now();
           $scope.blockTimeContract.taxes = [];
           $scope.blockTimeContract.billForAdditionalService = false;
-          //chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview);
+          $timeout(function () {
+            chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
+          }, 50);
+
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
@@ -211,7 +215,7 @@
         //   chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate)
         // }
 
-        function chnageNumOFIntervals(startDatee, endDatee) {
+        function chnageNumOFIntervals(startDatee, endDatee, ifForIntervals) {
           if(startDatee && endDatee) {
             var startDate = new Date(startDatee);
             var endDate = new Date(endDatee);
@@ -257,7 +261,11 @@
                   }
                 }
             }
-            $scope.numOfIntervals = interval;
+            if(ifForIntervals) {
+              $scope.blockTimeContract.numOfIntervalsPreview = interval
+            } else {
+              $scope.numOfIntervals = interval;
+            }
           }
         }
 

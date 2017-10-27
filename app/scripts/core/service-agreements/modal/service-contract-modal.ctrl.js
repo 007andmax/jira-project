@@ -93,8 +93,12 @@
           $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = '';
+          $scope.serviceContract.numOfIntervalsPreview;
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
+          $timeout(function () {
+            changeNumOfIntervals($scope.serviceContract.startDatePreview, $scope.serviceContract.endDatePreview, true);
+          }, 50);
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
@@ -344,52 +348,62 @@
         $scope.$watch(function() {
           return $scope.serviceContract.endDate;
         }, function(oldEndDate) {
-          var startDate = new Date($scope.serviceContract.startDate);
-          var endDate = new Date(oldEndDate);
-          var interval = 1 ;
-          switch($scope.serviceContract.period) {
-            case('Month'):
-              for(var i=1; i<10000; i++) {
-                var s = startDate;
-                s = Utils.addNumberOfMonth(startDate, i);
-                s = Utils.minusDays(s, 1);
-                if(s.getTime() == endDate.getTime()) {
-                  interval = i;
-                  break;
-                }
-              }
-              break;
-            case('Year'):
-              for(var y=1; y<10000; y++) {
-                var sd = startDate;
-                sd = Utils.addNumberOfMonth(startDate, 12*y);
-                sd = Utils.minusDays(sd, 1);
-                if(sd.getTime() == endDate.getTime()) {
-                  interval = y;
-                  break;
-                }
-              }
-              break;
-            default:
-              for(var d=1; d<10000; d++) {
-                startDate.setHours(0, 0, 0, 0);
-                startDate.setSeconds(0);
-                startDate.setMilliseconds(0);
-                var sd = startDate;
-                sd = Utils.calculateDateWithTimeZoneAndPeriod(sd, $scope.serviceContract.period, 1);
-                sd = Utils.minusDays(sd, 1);
-                var nt = sd;
-                nt.setHours(0, 0, 0, 0);
-                nt.setSeconds(0);
-                nt.setMilliseconds(0);
-                if(nt.getTime() == endDate.getTime()) {
-                  interval = d;
-                  break;
-                }
-              }
-          }
-          $scope.numOfIntervals = interval;
+          changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
         });
+
+        function changeNumOfIntervals(startDatee, endDatee, ifForIntervals ) {
+          if(startDatee && endDatee) {
+            var startDate = new Date(startDatee);
+            var endDate = new Date(endDatee);
+            var interval = 1 ;
+            switch($scope.serviceContract.period) {
+              case('Month'):
+                for(var i=1; i<10000; i++) {
+                  var s = startDate;
+                  s = Utils.addNumberOfMonth(startDate, i);
+                  s = Utils.minusDays(s, 1);
+                  if(s.getTime() == endDate.getTime()) {
+                    interval = i;
+                    break;
+                  }
+                }
+                break;
+              case('Year'):
+                for(var y=1; y<10000; y++) {
+                  var sd = startDate;
+                  sd = Utils.addNumberOfMonth(startDate, 12*y);
+                  sd = Utils.minusDays(sd, 1);
+                  if(sd.getTime() == endDate.getTime()) {
+                    interval = y;
+                    break;
+                  }
+                }
+                break;
+              default:
+                for(var d=1; d<10000; d++) {
+                  startDate.setHours(0, 0, 0, 0);
+                  startDate.setSeconds(0);
+                  startDate.setMilliseconds(0);
+                  var sd = startDate;
+                  sd = Utils.calculateDateWithTimeZoneAndPeriod(sd, $scope.serviceContract.period, 1);
+                  sd = Utils.minusDays(sd, 1);
+                  var nt = sd;
+                  nt.setHours(0, 0, 0, 0);
+                  nt.setSeconds(0);
+                  nt.setMilliseconds(0);
+                  if(nt.getTime() == endDate.getTime()) {
+                    interval = d;
+                    break;
+                  }
+                }
+            }
+            if(ifForIntervals) {
+              $scope.serviceContract.numOfIntervalsPreview = interval
+            } else {
+              $scope.numOfIntervals = interval;
+            }
+          }
+        }
 
         $scope.changeEndDateByNumToGenerate = function() {
           var intervals = parseInt($scope.numOfIntervals);

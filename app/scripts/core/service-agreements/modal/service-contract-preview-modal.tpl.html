@@ -41,6 +41,17 @@
         <i class="report-calendar"></i>
       </div>
     </div>
+    <div class="form-group col-sm-3" >
+      Num.of Intervals
+
+      <input class="form-control" type="text"
+             ng-model="serviceContract.numOfIntervalsPreview"
+             placeholder="&infin;"
+             custom-disabled="{{ disabledEndAndNum }}"
+             name="numToGenerate"
+             hard-reset-required="true"
+             hard-reset-pattern="decimalNumberPattern">
+    </div>
     <div class="interval-agreement">
       <div class="form-group">
         End Date:
@@ -240,10 +251,13 @@
     </div>
 
     <div class="service-bill-content" ng-show="serviceContract.serviceContractServicesToTrack.length>0">
+      <div class="service-header">
+        <p>Track different services used by this contract. These hours are not billed to customer and only go towards contract amount.</p>
+      </div>
       <div class="col-md-12" style="padding: 0;">
         <div class="service-bill-hide-content clearfix" >
           <div class="service-name-agreement">Service name</div>
-          <div class="col-md-1 text-center" style="padding: 0;">Action</div>
+
 
           <div class="bill-hide-content-item clearfix" ng-repeat="serviceContractServicesToTrack in serviceContract.serviceContractServicesToTrack">
             <div class="service-name-agreement form-group">
@@ -256,13 +270,7 @@
                      invalid-when="!isAdditionalServiceNameUnique(serviceContractServicesToTrack.name)">
             </div>
 
-            <div class="col-md-1 form-group text-center" style="padding: 0;">
-              <div class="add-remove-service">
-                <div ng-click="deleteServiceContractServicesToTrack(serviceContractServicesToTrack)">
-                  <i class="icon-sm icn-delete"></i>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -273,7 +281,7 @@
         <label class="control checkbox">
           <input type="checkbox" ng-model="serviceContract.isAdditionalServices" onclick="return false">
           <span class="control-indicator"></span>
-          We will our customers for additional services
+          Track and bill your customers for other services
         </label>
         <div class="service-bill-hide-content clearfix" ng-show="serviceContract.services.length>0">
           <div class="service-name-agreement">Service name</div>
