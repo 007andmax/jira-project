@@ -38,16 +38,16 @@
           <i class="report-calendar"></i>
         </div>
       </div>
-      <div class="form-group interval-agreement">
-        <p>Num.of Intervals</p>
+      <div class="form-group col-sm-3" >
+        Num.of Intervals
 
-        <input class="form-control default-cursor" type="text"
+        <input class="form-control" type="text"
                ng-model="blockTimeContract.numOfIntervalsPreview"
                placeholder="&infin;"
                custom-disabled="{{ disabledEndAndNum }}"
                name="numToGenerate"
                hard-reset-required="true"
-               hard-reset-pattern="decimalNumberPattern">
+               hard-reset-pattern="decimalNumberPattern" readonly>
       </div>
       <div class="interval-agreement">
         <div class="form-group">
@@ -166,12 +166,13 @@
           <label class="control checkbox default-cursor" onclick="return false">
             <input type="checkbox" ng-checked="blockTimeContract.services.length>0" onclick="return false">
             <span class="control-indicator"></span>
-            We will bill our customers for additional services
+            Track and bill your customers for other services
           </label>
 
 
           <div class="service-bill-hide-content clearfix" ng-show="blockTimeContract.services.length>0">
-            <p style="padding-bottom: 15px;">Track and bill your customers for other services</p>
+            <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
+              contract time</p>
 
             <div class="service-name-agreement">Service name</div>
             <div class="col-md-1 text-center" style="padding: 0;">Billable</div>

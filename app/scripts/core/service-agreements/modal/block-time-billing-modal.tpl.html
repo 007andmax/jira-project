@@ -58,8 +58,8 @@
             <i class="report-calendar"></i>
           </div>
         </div>
-        <div class="form-group interval-agreement" >
-          <p>Num.of Intervals</p>
+        <div class="form-group col-sm-3" >
+          Num.of Intervals
 
           <input class="form-control" type="text"
                  ng-model="numOfIntervals"
@@ -70,7 +70,6 @@
                  ng-change="changeEndDateByNumToGenerate()"
                  hard-reset-pattern="decimalNumberPattern">
         </div>
-
         <div class="interval-agreement">
           <div class="form-group">
             End Date*
@@ -245,12 +244,13 @@
             <label class="control checkbox">
               <input type="checkbox" ng-model="blockTimeContract.billForAdditionalService">
               <span class="control-indicator"></span>
-              We will bill our customers for additional services
+              Track and bill your customers for other services
             </label>
 
 
             <div class="service-bill-hide-content clearfix" ng-show="blockTimeContract.billForAdditionalService">
-              <p style="padding-bottom: 15px;">Track and bill your customers for other services</p>
+              <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
+                contract time</p>
 
               <div class="service-name-agreement">Service name</div>
               <div class="col-md-1 text-center" style="padding: 0;">Billable</div>

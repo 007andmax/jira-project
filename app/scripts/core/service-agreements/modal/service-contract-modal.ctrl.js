@@ -99,7 +99,7 @@
           $scope.serviceContract.minStartDate = Date.now();
           $timeout(function () {
             changeNumOfIntervals($scope.serviceContract.startDatePreview, $scope.serviceContract.endDatePreview, true);
-          }, 50);
+          }, 500);
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
