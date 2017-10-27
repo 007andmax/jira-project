@@ -629,14 +629,37 @@
           <div class="col-md-1 text-center" style="padding: 0;">Action</div>
 
           <div class="bill-hide-content-item clearfix" ng-repeat="service in serviceContract.services">
+            <!--<div class="service-name-agreement form-group">-->
+              <!--<input placeholder="Service Name" type="text"-->
+                     <!--class="form-control"-->
+                     <!--name="serviceName"-->
+                     <!--ng-model="service.name"-->
+                     <!--hard-reset-pattern="serviceNamePattern"-->
+                     <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+                     <!--invalid-when="!isAdditionalServiceNameUnique(service.name)">-->
+            <!--</div>-->
             <div class="service-name-agreement form-group">
-              <input placeholder="Service Name" type="text"
-                     class="form-control"
-                     name="serviceName"
-                     ng-model="service.name"
-                     hard-reset-pattern="serviceNamePattern"
-                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                     invalid-when="!isAdditionalServiceNameUnique(service.name)">
+              <div uib-dropdown>
+                <input type="text"
+                       style="cursor: pointer;"
+                       name="serviceName"
+                       ng-model="service.name"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       tabindex="5"
+                       ng-click="refreshNotAddedError('additional')"
+                       required
+                       placeholder="Service Expense"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service.name for service in defaultServicesAdditional | filter:{'picked': false} | orderBy:'name'"
+                       qt-typeahead-show-on-focus
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                       value="newService.name" hard-reset-pattern="serviceNamePattern"
+                       invalid-when="!isAdditionalServiceNameUnique(newService.name)">
+
+                <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+
+              </div>
             </div>
             <div class="col-md-1 form-group text-center">
               <label class="control checkbox" style="margin: 6px;">
@@ -679,19 +702,43 @@
             <div ng-show="showNewServiceValidationError">
               <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
             </div>
-            <div class="service-name-agreement form-group"
-                 ng-class="{'has-error': (isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') || showNotAddedAdditionalServiceError(newService)) }">
-              <input placeholder="New Additional Service name"
-                     type="text"
-                     ng-click="refreshNotAddedError('additional')"
-                     name="newServiceName"
-                     class="form-control"
-                     ng-model="newService.name"
-                     hard-reset-pattern="serviceNamePattern"
-                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                     invalid-when="!isAdditionalServiceNameUnique(newService.name)"
-                     required>
+            <!--<div class="service-name-agreement form-group"-->
+                 <!--ng-class="{'has-error': (isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') || showNotAddedAdditionalServiceError(newService)) }">-->
+              <!--<input placeholder="New Additional Service name"-->
+                     <!--type="text"-->
+                     <!--ng-click="refreshNotAddedError('additional')"-->
+                     <!--name="newServiceName"-->
+                     <!--class="form-control"-->
+                     <!--ng-model="newService.name"-->
+                     <!--hard-reset-pattern="serviceNamePattern"-->
+                     <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+                     <!--invalid-when="!isAdditionalServiceNameUnique(newService.name)"-->
+                     <!--required>-->
 
+            <!--</div>-->
+            <div class="service-name-agreement form-group">
+              <div uib-dropdown
+                   ng-class="{'has-error': (isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') || showNotAddedAdditionalServiceError(newService)) }">
+                <input type="text"
+                       style="cursor: pointer;"
+                       name="newServiceName"
+                       ng-model="newService.name"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       tabindex="5"
+                       ng-click="refreshNotAddedError('additional')"
+                       required
+                       placeholder="Service Expense"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service.name for service in defaultServicesAdditional | filter:{'picked': false} | orderBy:'name'"
+                       qt-typeahead-show-on-focus
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                       value="newService.name" hard-reset-pattern="serviceNamePattern"
+                       invalid-when="!isAdditionalServiceNameUnique(newService.name)">
+
+                <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+
+              </div>
             </div>
             <div class="col-md-1 fourm-group text-center">
               <label class="control checkbox">

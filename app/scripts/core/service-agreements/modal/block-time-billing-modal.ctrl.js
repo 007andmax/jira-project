@@ -20,7 +20,7 @@
         ];
         $scope.taxes = TaxesService.getAll();
         $scope.numOfIntervals = 1;
-
+        $scope.defaultServices = [];
 
         $scope.blockTimeServices = [];
         $scope.services = [];
@@ -104,6 +104,50 @@
           }
           if($scope.blockTimeContract.services.length > 0) {
             $scope.blockTimeContract.billForAdditionalService = true;
+
+          }
+        }
+
+
+        ServicesService.getServicesData($scope, function(resp){
+          if(resp) {
+            for(var i=0; i<resp.length; i++) {
+              var s = {
+                name: resp[i].name,
+                picked: false,
+                taxes: resp[i].taxes,
+                rate: resp[i].rate
+              };
+              $scope.defaultServices.push(s);
+            }
+            unpickExistingServices()
+          }
+        });
+
+        function pickService(serviceName) {
+          for(var i=0; i<$scope.defaultServices.length; i++) {
+            if($scope.defaultServices[i].name == serviceName) {
+              $scope.defaultServices[i].picked = true;
+              break;
+            }
+          }
+        }
+        function unpickExistingServices() {
+          for(var s=0; s<$scope.blockTimeContract.services.length; s++) {
+            for(var d=0; d< $scope.defaultServices.length; d++) {
+              if($scope.defaultServices[d].name == $scope.blockTimeContract.services[s].name) {
+                $scope.defaultServices[d].picked = true;
+              }
+            }
+          }
+        }
+
+        function unpickService(serviceName) {
+          for(var i=0; i<$scope.defaultServices.length; i++) {
+            if($scope.defaultServices[i].name == serviceName) {
+              $scope.defaultServices[i].picked = false;
+              break;
+            }
           }
         }
 
@@ -529,6 +573,7 @@
                         billable: true,
                         taxes: $scope.addDefaultTaxes()
                       };
+                      pickService(service.name.name);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
                     } else {
@@ -540,6 +585,7 @@
                         billable: true,
                         taxes: $scope.addDefaultTaxes()
                       };
+                      pickService(service.name);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
 
@@ -560,7 +606,7 @@
           for (var i = 0; i < $scope.blockTimeContract.services.length; i++) {
             if ($scope.blockTimeContract.services[i].name === contractService.name) {
               $scope.blockTimeContract.services.splice(i, 1);
-
+              unpickService(contractService.name)
             }
           }
         };
@@ -588,7 +634,7 @@
 
         $scope.showBlockFieldsError = false;
 
-         function checkForInvalidFields() {
+        function checkForInvalidFields() {
           if (!$scope.blockTimeContract.description ||
             !$scope.blockTimeContract.startDate ||
             !$scope.blockTimeContract.endDate ||
@@ -654,8 +700,13 @@
           return id;
         }
 
+        function showDuplicatesErrorMessageTimeout() {
+          $scope.showDuplicatesErrorMessage = true;
+          $timeout(function () {
+            $scope.showDuplicatesErrorMessage = false;
+          }, 3000);
+        }
         function checkForDuplicateServiceNames(serviceList) {
-          $scope.showDuplicatesErrorMessage = false;
           var deferred = $q.defer();
           var startDate = $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
           var endDate = $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
@@ -670,7 +721,7 @@
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);
             } else {
-              $scope.showDuplicatesErrorMessage = true;
+              showDuplicatesErrorMessageTimeout()
               deferred.reject();
             }
           });
@@ -699,10 +750,11 @@
                 if (serviceType === 'block') {
                   $scope.showNewBlockTimeServiceError = true;
                   $scope.newBlockTimeServiceErrorMessage = 'Service name is duplicate';
-                } else {
-                  $scope.showNewServiceError = true;
-                  $scope.newServiceErrorMessage = 'Service name is duplicate';
                 }
+                // else {
+                //   $scope.showNewServiceError = true;
+                //   $scope.newServiceErrorMessage = 'Service name is duplicate';
+                // }
               }
             });
           }

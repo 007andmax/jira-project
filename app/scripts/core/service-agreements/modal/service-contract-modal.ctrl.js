@@ -15,6 +15,7 @@
           USER: 'By Users',
           OTHER: 'Other'
         };
+        $scope.defaultServicesAdditional = [];
 
         $scope.numOfIntervals = 1;
 
@@ -157,6 +158,48 @@
 
           $scope.total = $scope.serviceContract.amount;
           preCreateFirstServicesEntities();
+        }
+
+        ServicesService.getServicesData($scope, function(resp){
+          if(resp) {
+            for(var i=0; i<resp.length; i++) {
+              var s = {
+                name: resp[i].name,
+                picked: false,
+                taxes: resp[i].taxes,
+                rate: resp[i].rate
+              };
+              $scope.defaultServicesAdditional.push(s);
+            }
+            unpickExistingServices()
+          }
+        });
+
+        function pickService(serviceName) {
+          for(var i=0; i<$scope.defaultServicesAdditional.length; i++) {
+            if($scope.defaultServicesAdditional[i].name == serviceName) {
+              $scope.defaultServicesAdditional[i].picked = true;
+              break;
+            }
+          }
+        }
+        function unpickExistingServices() {
+          for(var s=0; s<$scope.serviceContract.services.length; s++) {
+            for(var d=0; d< $scope.defaultServicesAdditional.length; d++) {
+              if($scope.defaultServicesAdditional[d].name == $scope.serviceContract.services[s].name) {
+                $scope.defaultServicesAdditional[d].picked = true;
+              }
+            }
+          }
+        }
+
+        function unpickService(serviceName) {
+          for(var i=0; i<$scope.defaultServicesAdditional.length; i++) {
+            if($scope.defaultServicesAdditional[i].name == serviceName) {
+              $scope.defaultServicesAdditional[i].picked = false;
+              break;
+            }
+          }
         }
 
 
@@ -708,6 +751,7 @@
                 };
                 reInitServiceForm();
                 $scope.showAddButtonNewService = true;
+                pickService(service.name);
               }
             }, function() {
               showErrorNewServiceValidationTimeOut();
@@ -724,6 +768,7 @@
           for (var i = 0; i < $scope.serviceContract.services.length; i++) {
             if ($scope.serviceContract.services[i] == service) {
               $scope.serviceContract.services.splice(i, 1);
+              unpickService(service.name);
               break;
             }
           }
