@@ -16,6 +16,7 @@
           OTHER: 'Other'
         };
         $scope.defaultServicesAdditional = [];
+        $scope.defaultServicesAdditionalForDropDown = [];
 
         $scope.numOfIntervals = 1;
 
@@ -170,24 +171,25 @@
                 rate: resp[i].rate
               };
               $scope.defaultServicesAdditional.push(s);
+              $scope.defaultServicesAdditionalForDropDown.push(s);
             }
             unpickExistingServices()
           }
         });
 
         function pickService(serviceName) {
-          for(var i=0; i<$scope.defaultServicesAdditional.length; i++) {
-            if($scope.defaultServicesAdditional[i].name == serviceName) {
-              $scope.defaultServicesAdditional[i].picked = true;
+          for(var i=0; i<$scope.defaultServicesAdditionalForDropDown.length; i++) {
+            if($scope.defaultServicesAdditionalForDropDown[i].name === serviceName) {
+              $scope.defaultServicesAdditionalForDropDown.splice(i, 1);
               break;
             }
           }
         }
         function unpickExistingServices() {
           for(var s=0; s<$scope.serviceContract.services.length; s++) {
-            for(var d=0; d< $scope.defaultServicesAdditional.length; d++) {
-              if($scope.defaultServicesAdditional[d].name == $scope.serviceContract.services[s].name) {
-                $scope.defaultServicesAdditional[d].picked = true;
+            for(var d=0; d< $scope.defaultServicesAdditionalForDropDown.length; d++) {
+              if($scope.defaultServicesAdditionalForDropDown[d].name === $scope.serviceContract.services[s].name) {
+                $scope.defaultServicesAdditionalForDropDown.splice(d, 1);
               }
             }
           }
@@ -196,7 +198,7 @@
         function unpickService(serviceName) {
           for(var i=0; i<$scope.defaultServicesAdditional.length; i++) {
             if($scope.defaultServicesAdditional[i].name == serviceName) {
-              $scope.defaultServicesAdditional[i].picked = false;
+              $scope.defaultServicesAdditionalForDropDown.push($scope.defaultServicesAdditional[i]);
               break;
             }
           }
@@ -264,7 +266,8 @@
             rate: 0,
             billable: true,
             taxIds: [],
-            taxes: $scope.addDefaultTaxes()
+            taxes: $scope.addDefaultTaxes(),
+            nameValue: ''
           };
 
           $scope.newServiceContractServicesToTrack = {
@@ -739,19 +742,27 @@
           $scope.showNewServiceError = false;
           if (form.$valid) {
 
-            validateNewServiceName(service.name).then(function (resp) {
+            validateNewServiceName(service.nameValue).then(function (resp) {
               if (resp) {
-                $scope.serviceContract.services.push(service);
+                var ns = {
+                  name: service.nameValue,
+                  rate: service.rate,
+                  billable: service.billable,
+                  taxes: service.taxes,
+                  nameValue: service.nameValue
+                };
+                $scope.serviceContract.services.push(ns);
                 $scope.newService = {
                   name: '',
                   rate: 0,
                   billable: true,
                   taxes: $scope.addDefaultTaxes(),
-                  taxIds: []
+                  taxIds: [],
+                  nameValue: ''
                 };
                 reInitServiceForm();
                 $scope.showAddButtonNewService = true;
-                pickService(service.name);
+                pickService(service.nameValue);
               }
             }, function() {
               showErrorNewServiceValidationTimeOut();
@@ -1211,7 +1222,7 @@
               if (serviceContract.services && serviceContract.services.length) {
                 for (var i = 0; i < serviceContract.services.length; i++) {
                   var serv = {
-                    name: serviceContract.services[i].name,
+                    name: serviceContract.services[i].nameValue,
                     rate: 0,
                     billable: serviceContract.services[i].billable,
                     taxIds: []

@@ -640,24 +640,40 @@
             <!--</div>-->
             <div class="service-name-agreement form-group">
               <div uib-dropdown>
-                <input type="text"
-                       style="cursor: pointer;"
-                       name="serviceName"
-                       ng-model="service.name"
-                       ng-minlength="1"
-                       autocomplete="off"
-                       tabindex="5"
-                       ng-click="refreshNotAddedError('additional')"
-                       required
-                       placeholder="Service Expense"
-                       class="form-control form-control-dropdown dropdown-toggle"
-                       uib-typeahead="service.name for service in defaultServicesAdditional | filter:{'picked': false} | orderBy:'name'"
-                       qt-typeahead-show-on-focus
-                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                       value="newService.name" hard-reset-pattern="serviceNamePattern"
-                       invalid-when="!isAdditionalServiceNameUnique(newService.name)">
+                <!--<input type="text"-->
+                       <!--style="cursor: pointer;"-->
+                       <!--name="serviceName"-->
+                       <!--ng-model="service.name"-->
+                       <!--ng-minlength="1"-->
+                       <!--autocomplete="off"-->
+                       <!--tabindex="5"-->
+                       <!--ng-click="refreshNotAddedError('additional')"-->
+                       <!--required-->
+                       <!--placeholder="Service Expense"-->
+                       <!--class="form-control form-control-dropdown dropdown-toggle"-->
+                       <!--uib-typeahead="service.name for service in defaultServicesAdditional | filter:{'picked': false} | orderBy:'name'"-->
+                       <!--qt-typeahead-show-on-focus-->
+                       <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+                       <!--value="newService.name" hard-reset-pattern="serviceNamePattern"-->
+                       <!--invalid-when="!isAdditionalServiceNameUnique(newService.name)">-->
 
-                <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+                <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
+
+                <input tooltip-placement="top"
+                       type="text"
+                       class="form-control has-dropdown"
+                       name="serviceName"
+                       autocomplete="off"
+                       autocomplete-service-item="service.name"
+                       ng-model="service.name"
+                       service-list="defaultServicesAdditionalForDropDown"
+                       autocomplete-service-list
+                       uib-dropdown-toggle
+                       entity="service.nameValue"
+                       hard-reset-pattern="descriptionPattern"
+                       invalid-when="!isAdditionalServiceNameUnique(service.name)"/>
+                <i class="icn-sm icn-caret-gray"></i>
+                <div class="service-list-container"></div>
 
               </div>
             </div>
@@ -719,24 +735,39 @@
             <div class="service-name-agreement form-group">
               <div uib-dropdown
                    ng-class="{'has-error': (isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') || showNotAddedAdditionalServiceError(newService)) }">
-                <input type="text"
-                       style="cursor: pointer;"
-                       name="newServiceName"
-                       ng-model="newService.name"
-                       ng-minlength="1"
-                       autocomplete="off"
-                       tabindex="5"
-                       ng-click="refreshNotAddedError('additional')"
-                       required
-                       placeholder="Service Expense"
-                       class="form-control form-control-dropdown dropdown-toggle"
-                       uib-typeahead="service.name for service in defaultServicesAdditional | filter:{'picked': false} | orderBy:'name'"
-                       qt-typeahead-show-on-focus
-                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                       value="newService.name" hard-reset-pattern="serviceNamePattern"
-                       invalid-when="!isAdditionalServiceNameUnique(newService.name)">
+                <!--<input type="text"-->
+                       <!--style="cursor: pointer;"-->
+                       <!--name="newServiceName"-->
+                       <!--ng-model="newService.name"-->
+                       <!--ng-minlength="1"-->
+                       <!--autocomplete="off"-->
+                       <!--tabindex="5"-->
+                       <!--ng-click="refreshNotAddedError('additional')"-->
+                       <!--required-->
+                       <!--placeholder="Service Expense"-->
+                       <!--class="form-control form-control-dropdown dropdown-toggle"-->
+                       <!--uib-typeahead="service.name for service in defaultServicesAdditional | filter:{'picked': false} | orderBy:'name'"-->
+                       <!--qt-typeahead-show-on-focus-->
+                       <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+                       <!--value="newService.name" hard-reset-pattern="serviceNamePattern"-->
+                       <!--invalid-when="!isAdditionalServiceNameUnique(newService.name)">-->
 
-                <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+                <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
+
+                <input uib-tooltip="Service" tooltip-placement="top"
+                       type="text"
+                       class="form-control has-dropdown"
+                       name="newServiceName"
+                       autocomplete="off"
+                       ng-click="refreshNotAddedError('additional')"
+                       autocomplete-service-item="newContractService.name"
+                       ng-model="newService.name.name"
+                       service-list="defaultServicesAdditionalForDropDown"
+                       autocomplete-service-list uib-dropdown-toggle
+                       entity="newService.nameValue"
+                       invalid-when="!isAdditionalServiceNameUnique(newService.name)"/>
+                <i class="icn-sm icn-caret-gray"></i>
+                <div class="service-list-container"></div>
 
               </div>
             </div>

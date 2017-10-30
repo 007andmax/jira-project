@@ -21,6 +21,7 @@
         $scope.taxes = TaxesService.getAll();
         $scope.numOfIntervals = 1;
         $scope.defaultServices = [];
+        $scope.defaultServicesForDropdown = [];
 
         $scope.blockTimeServices = [];
         $scope.services = [];
@@ -122,24 +123,25 @@
                 versionedId: resp[i].versionedId
               };
               $scope.defaultServices.push(s);
+              $scope.defaultServicesForDropdown.push(s);
             }
             unpickExistingServices()
           }
         });
 
         function pickService(serviceName) {
-          for(var i=0; i<$scope.defaultServices.length; i++) {
-            if($scope.defaultServices[i].name == serviceName) {
-              $scope.defaultServices[i].picked = true;
+          for(var i=0; i<$scope.defaultServicesForDropdown.length; i++) {
+            if($scope.defaultServicesForDropdown[i].name === serviceName) {
+              $scope.defaultServicesForDropdown.splice(i, 1);
               break;
             }
           }
         }
         function unpickExistingServices() {
           for(var s=0; s<$scope.blockTimeContract.services.length; s++) {
-            for(var d=0; d< $scope.defaultServices.length; d++) {
-              if($scope.defaultServices[d].name == $scope.blockTimeContract.services[s].name) {
-                $scope.defaultServices[d].picked = true;
+            for(var d=0; d< $scope.defaultServicesForDropdown.length; d++) {
+              if($scope.defaultServicesForDropdown[d].name === $scope.blockTimeContract.services[s].name) {
+                $scope.defaultServicesForDropdown.splice(d, 1);
               }
             }
           }
@@ -147,8 +149,8 @@
 
         function unpickService(serviceName) {
           for(var i=0; i<$scope.defaultServices.length; i++) {
-            if($scope.defaultServices[i].name == serviceName) {
-              $scope.defaultServices[i].picked = false;
+            if($scope.defaultServices[i].name === serviceName) {
+              $scope.defaultServicesForDropdown.push($scope.defaultServices[i]);
               break;
             }
           }
@@ -561,13 +563,10 @@
 
 
         $scope.addContractService = function (form, service) {
-          //$scope.showNewServiceError = false;
           $scope.showAddButtonNewService = false;
           if (form.$valid) {
             if (!service.name || service.nameValue.length < 1) {
-              //$scope.showNewServiceError = true;
               showNewServiceNameError();
-              //$scope.newServiceErrorMessage = 'Please enter the service name';
               $scope.showAddButtonNewService = true;
             } else {
               if (!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
@@ -584,7 +583,7 @@
                         rate: service.rate,
                         billable: service.billable,
                         taxes: service.taxes,
-                        nameValue: ''
+                        nameValue: service.nameValue
                       };
                       $scope.blockTimeContract.services.push(ns);
                       $scope.newContractService = {
@@ -594,7 +593,7 @@
                         taxes: $scope.addDefaultTaxes(),
                         nameValue: ''
                       };
-                      pickService(service.name.name);
+                      pickService(service.nameValue);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
                     } else {
@@ -623,6 +622,8 @@
             $scope.showAddButtonNewService = true;
           }
         };
+
+
 
         $scope.deleteContractService = function (contractService) {
           for (var i = 0; i < $scope.blockTimeContract.services.length; i++) {
@@ -865,7 +866,7 @@
 
             for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
               var cs = {
-                name: $scope.blockTimeContract.services[m].name,
+                name: $scope.blockTimeContract.services[m].nameValue,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
                 rate: 0
@@ -933,7 +934,7 @@
         $scope.validateAndCreteBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
           if(!checkForInvalidFields()) {
             var emptyServices = true;
-            if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.length)) {
+            if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.name.length)) {
               activateNotAddedServiceErrors();
               emptyServices = false;
               var confirmMessage = 'You have filled service name field but didn\'t add it to contract service list. Are you sure you want to create contract ?';
