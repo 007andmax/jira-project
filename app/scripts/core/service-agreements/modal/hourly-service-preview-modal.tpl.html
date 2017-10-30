@@ -52,7 +52,7 @@
       <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
       <div class="price-agreement" ng-style="{'visibility': showServiceColumn() ? 'visible' : 'hidden'}">Per hour</div>
       <div class="tax-agreement text-center" ng-style="{'visibility': showServiceColumn() ? 'visible' : 'hidden'}">Tax</div>
-      <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
+      <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services ">
         <div class="col-md-6 form-group">
           <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name" readonly ng-maxlength="30">
         </div>

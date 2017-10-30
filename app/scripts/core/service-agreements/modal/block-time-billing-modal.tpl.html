@@ -319,8 +319,8 @@
               </div>
 
               <div class="bill-hide-content-item clearfix" ng-form="newContractServiceForm" ng-if="reInitServiceForm">
-                <div ng-show="showNewServiceError && !newContractService.name">
-                  <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{newServiceErrorMessage}}</p>
+                <div ng-show="showNewServiceError && newContractService.nameValue.length<1">
+                  <p style="color: red;padding-left: 15px; margin-bottom: 0;">Please select service from the list</p>
                 </div>
                 <div ng-show="!isNameUnique(newContractService) && newContractService.name">
                   <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate name</p>
@@ -348,24 +348,34 @@
                 <div class="service-name-agreement form-group">
                   <div uib-dropdown
                        ng-class="{'has-error': (isShowingErrors(newContractServiceForm, 'newContractServiceName') || showNotAddedBlockAdditionalServiceError(newContractService)) }">
-                    <input type="text"
-                           style="cursor: pointer;"
-                           name="newContractServiceName"
-                           ng-model="newContractService.name"
-                           ng-minlength="1"
-                           autocomplete="off"
-                           tabindex="5"
-                           ng-click="refreshNotAddedError('additional')"
-                           required
-                           placeholder="Service Expense"
-                           class="form-control form-control-dropdown dropdown-toggle"
-                           uib-typeahead="service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
-                           qt-typeahead-show-on-focus
-                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                           value="newContractService.name" hard-reset-pattern="serviceNamePattern"
-                           invalid-when="!isNameUnique(newContractService)">
+                    <!--<input type="text"-->
+                           <!--style="cursor: pointer;"-->
+                           <!--name="newContractServiceName"-->
+                           <!--ng-model="newContractService.name"-->
+                           <!--ng-minlength="1"-->
+                           <!--autocomplete="off"-->
+                           <!--tabindex="5"-->
+                           <!--ng-click="refreshNotAddedError('additional')"-->
+                           <!--required-->
+                           <!--placeholder="Service Expense"-->
+                           <!--class="form-control form-control-dropdown dropdown-toggle"-->
+                           <!--uib-typeahead="service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"-->
+                           <!--qt-typeahead-show-on-focus-->
+                           <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+                           <!--value="newContractService.name" hard-reset-pattern="serviceNamePattern"-->
+                           <!--invalid-when="!isNameUnique(newContractService)">-->
 
-                    <div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>
+                    <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
+
+                    <input uib-tooltip="Service" tooltip-placement="top"
+                           type="text" class="form-control has-dropdown"
+                           name="newContractServiceName" autocomplete="off"
+                           placeholder="Service" autocomplete-service-item="newContractService.name"
+                           ng-model="newContractService.name.name" service-list="defaultServices"
+                           autocomplete-service-list uib-dropdown-toggle entity="newContractService.nameValue"/>
+                    <i class="icn-sm icn-caret-gray"></i>
+                    <div class="service-list-container"></div>
+                    <!--<input type="hidden" name="service" ng-model="newContractService.name.versionedId.id" ng-required="true">-->
 
                   </div>
                 </div>

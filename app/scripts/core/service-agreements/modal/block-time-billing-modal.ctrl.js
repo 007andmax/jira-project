@@ -36,7 +36,8 @@
           name: '',
           rate: null,
           billable: true,
-          taxes: []
+          taxes: [],
+          nameValue: ''
         };
 
         $scope.notAddedBlockTimeServiceError = false;
@@ -111,12 +112,14 @@
 
         ServicesService.getServicesData($scope, function(resp){
           if(resp) {
+            console.log(resp);
             for(var i=0; i<resp.length; i++) {
               var s = {
                 name: resp[i].name,
                 picked: false,
                 taxes: resp[i].taxes,
-                rate: resp[i].rate
+                rate: resp[i].rate,
+                versionedId: resp[i].versionedId
               };
               $scope.defaultServices.push(s);
             }
@@ -155,7 +158,8 @@
           name: '',
           rate: 0,
           billable: true,
-          taxes: $scope.addDefaultTaxes()
+          taxes: $scope.addDefaultTaxes(),
+          nameValue: ''
         };
 
         if($scope.blockTimeContract.startDate) {
@@ -493,7 +497,7 @@
                 $scope.newBlockTimeServiceErrorMessage = 'Please enter start and end date to check service name';
                 $scope.showAddButtonNewBlockServices = true;
               } else {
-                validateNewServiceName(service, 'block').then(function (resp) {
+                validateNewServiceName(service.name, 'block').then(function (resp) {
                   $scope.showAddButtonNewBlockServices = true;
                   if (resp) {
                     if (service.name.name && service.name.name.length) {
@@ -541,37 +545,54 @@
           }, 4000);
         }
 
+        // function autoCorrectionServiceName(name, serviceList) {
+        //   var nameLength = name.length;
+        //   var listOFSuggestionNames = [];
+        //   for(var i=0; i<serviceList.length; i++) {
+        //     listOFSuggestionNames.push(serviceList[i].name)
+        //   }
+        // }
+        function showNewServiceNameError() {
+          $scope.showNewServiceError = true;
+          $timeout(function () {
+            $scope.showNewServiceError = false;
+          }, 4000);
+        }
+
 
         $scope.addContractService = function (form, service) {
-          $scope.showNewServiceError = false;
+          //$scope.showNewServiceError = false;
           $scope.showAddButtonNewService = false;
           if (form.$valid) {
-            if (!service.name) {
-              $scope.showNewServiceError = true;
-              $scope.newServiceErrorMessage = 'Please enter the service name';
+            if (!service.name || service.nameValue.length < 1) {
+              //$scope.showNewServiceError = true;
+              showNewServiceNameError();
+              //$scope.newServiceErrorMessage = 'Please enter the service name';
               $scope.showAddButtonNewService = true;
             } else {
               if (!$scope.blockTimeContract.startDate || !$scope.blockTimeContract.endDate) {
-                $scope.showNewServiceError = true;
+                showNewServiceNameError();
                 $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
                 $scope.showAddButtonNewService = true;
               } else {
-                validateNewServiceName(service, 'service').then(function (resp) {
+                validateNewServiceName(service.nameValue, 'service').then(function (resp) {
 
                   if (resp) {
-                    if (service.name.name && service.name.name.length) {
+                    if (service.name.name && service.name.name.length && service.nameValue) {
                       var ns = {
-                        name: service.name.name,
+                        name: service.nameValue,
                         rate: service.rate,
                         billable: service.billable,
-                        taxes: service.taxes
+                        taxes: service.taxes,
+                        nameValue: ''
                       };
                       $scope.blockTimeContract.services.push(ns);
                       $scope.newContractService = {
                         name: '',
                         rate: 0,
                         billable: true,
-                        taxes: $scope.addDefaultTaxes()
+                        taxes: $scope.addDefaultTaxes(),
+                        nameValue: ''
                       };
                       pickService(service.name.name);
                       $scope.showAddButtonNewService = true;
@@ -583,9 +604,10 @@
                         name: '',
                         rate: 0,
                         billable: true,
-                        taxes: $scope.addDefaultTaxes()
+                        taxes: $scope.addDefaultTaxes(),
+                        nameValue: ''
                       };
-                      pickService(service.name);
+                      pickService(service.nameValue);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
 
@@ -731,14 +753,14 @@
         function validateNewServiceName(newService, serviceType) {
 
           var deferred = $q.defer();
-          if (newService && newService.name) {
+          if (newService ) {
             $scope.showNewBlockTimeServiceError = false;
             $scope.showNewServiceError = false;
             console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError)
 
             var companyId = returnCompanyId();
             var name = [];
-            name.push(newService.name);
+            name.push(newService);
 
             var startDate = $filter('date')($scope.blockTimeContract.startDate, 'yyyy/MM/dd');
             var endDate = $filter('date')($scope.blockTimeContract.endDate, 'yyyy/MM/dd');

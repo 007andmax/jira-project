@@ -8,7 +8,8 @@
         require: 'ngModel',
         scope: {
           serviceList: "=",
-          serviceItem: "=autocompleteServiceItem"
+          serviceItem: "=autocompleteServiceItem",
+          entity: '=?'
         },
         // scope: { simpleAutocompleteData: '=simpleAutocomplete' },
         link: function ($scope, element, attrs) {
@@ -40,6 +41,7 @@
               onSelect: function (suggestion) {
                 $scope.serviceItem = angular.copy(suggestion.data);
                 $('#selection').html('You selected: ' + suggestion.value);
+                $scope.entity = suggestion.value;
               },
               showNoSuggestionNotice: true,
               noSuggestionNotice: 'Sorry, no matching results',

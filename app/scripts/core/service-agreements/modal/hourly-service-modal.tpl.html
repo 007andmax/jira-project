@@ -63,7 +63,7 @@
         <div class="price-agreement">Per hour</div>
         <div class="tax-agreement text-center">Tax</div>
         <div class="col-md-1 text-center" style="padding: 0;">Action</div>
-        <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services">
+        <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services ">
           <div class="col-md-4 service-name-agreement form-group"
                ng-class="{'has-error': checkHourlyServiceErrorForm(service)}">
             <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name"
