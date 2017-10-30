@@ -42,7 +42,8 @@
         <div class="interval-agreement">
           <div class="form-group">
             Start Date*
-            <div style="position: absolute;right: -285px;top: 30px;" ng-class="{'hide': !isShowingErrorsBlock(blockTimeContractForm, 'startDate')}">
+            <div style="position: absolute;right: -285px;top: 30px;"
+                 ng-class="{'hide': !isShowingErrorsBlock(blockTimeContractForm, 'startDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
             <input class="form-control"
@@ -58,8 +59,8 @@
             <i class="report-calendar"></i>
           </div>
         </div>
-        <div class="form-group col-sm-3" >
-          Num.of Intervals
+        <div class="form-group interval-agreement">
+          <p>Num.of Intervals</p>
 
           <input class="form-control" type="text"
                  ng-model="numOfIntervals"
@@ -192,7 +193,8 @@
             </div>
             <div
               ng-show="showNewBlockTimeServiceValidationError">
-              <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">There are existing service name on another contract with the same dates. Please change service name or dates</p>
+              <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">There are existing service name on
+                another contract with the same dates. Please change service name or dates</p>
             </div>
             <div class="form-group col-md-7"
                  ng-class="{'has-error': (isShowingErrors(newBlockTimeServiceForm, 'newBlockTimeServiceName') || showNotAddedBlockTimeServiceError(newBlockTimeService))}">
@@ -260,9 +262,9 @@
 
               <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
                 <!--<div class="service-name-agreement form-group"-->
-                     <!--ng-class="{'has-error': checkBlockTimeServiceErrorForm(contractService)}">-->
-                  <!--<input placeholder="Service Name" type="text"-->
-                         <!--class="form-control" ng-model="contractService.name" hard-reset-pattern="serviceNamePattern">-->
+                <!--ng-class="{'has-error': checkBlockTimeServiceErrorForm(contractService)}">-->
+                <!--<input placeholder="Service Name" type="text"-->
+                <!--class="form-control" ng-model="contractService.name" hard-reset-pattern="serviceNamePattern">-->
                 <!--</div>-->
                 <div class="service-name-agreement form-group">
                   <div uib-dropdown
@@ -293,12 +295,14 @@
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
+                <div class="price-agreement fourm-group before-icon"
+                     ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
                   <input placeholder="0.00" type="text" class="form-control"
                          ng-model="contractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
-                <div class="tax-agreement form-group text-center" ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
+                <div class="tax-agreement form-group text-center"
+                     ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
                   <div>
                     <div>
                       <select-taxes taxes="taxes" entity="contractService"></select-taxes>
@@ -323,21 +327,22 @@
                 </div>
                 <div
                   ng-show="showNewContractServiceValidationError">
-                  <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">There are existing service name on another contract with the same dates. Please change service name or dates</p>
+                  <p style="color: red;padding-left: 15px; margin-bottom: 0;float: left;">There are existing service
+                    name on another contract with the same dates. Please change service name or dates</p>
                 </div>
                 <!--<div class="service-name-agreement form-group"-->
-                     <!--ng-class="{'has-error': (isShowingErrors(newContractServiceForm, 'newContractServiceName') || showNotAddedBlockAdditionalServiceError(newContractService)) }">-->
+                <!--ng-class="{'has-error': (isShowingErrors(newContractServiceForm, 'newContractServiceName') || showNotAddedBlockAdditionalServiceError(newContractService)) }">-->
 
 
-                  <!--<input placeholder="New Additional Service name"-->
-                         <!--type="text"-->
-                         <!--name="newContractServiceName"-->
-                         <!--ng-click="refreshNotAddedError('additional')"-->
-                         <!--class="form-control"-->
-                         <!--ng-model="newContractService.name"-->
-                         <!--hard-reset-pattern="serviceNamePattern"-->
-                         <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
-                         <!--invalid-when="!isNameUnique(newContractService)">-->
+                <!--<input placeholder="New Additional Service name"-->
+                <!--type="text"-->
+                <!--name="newContractServiceName"-->
+                <!--ng-click="refreshNotAddedError('additional')"-->
+                <!--class="form-control"-->
+                <!--ng-model="newContractService.name"-->
+                <!--hard-reset-pattern="serviceNamePattern"-->
+                <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+                <!--invalid-when="!isNameUnique(newContractService)">-->
 
                 <!--</div>-->
                 <div class="service-name-agreement form-group">
@@ -370,14 +375,16 @@
                     <span class="control-indicator"></span>
                   </label>
                 </div>
-                <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': newContractService.billable ? 'visible' : 'hidden'}">
+                <div class="price-agreement fourm-group before-icon"
+                     ng-style="{'visibility': newContractService.billable ? 'visible' : 'hidden'}">
                   <input placeholder="0.00"
                          type="text"
                          class="form-control"
                          ng-model="newContractService.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
-                <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newContractService.billable ? 'visible' : 'hidden'}">
+                <div class="tax-agreement fourm-group text-center"
+                     ng-style="{'visibility': newContractService.billable ? 'visible' : 'hidden'}">
                   <div class="" ng-hide="contractServiceList.length > 19">
                     <div>
                       <select-taxes taxes="taxes" entity="newContractService"></select-taxes>
@@ -455,7 +462,8 @@
               Total: {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
             </div>
             <div class="btn btn-lg btn-success btn-create"
-                 ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">Create
+                 ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">
+              Create
             </div>
           </div>
         </div>
