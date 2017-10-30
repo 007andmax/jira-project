@@ -4726,11 +4726,12 @@ Devices tab
   right: 10px;
 }
 
-.contracts .service-bill .icn-caret-gray {
+.contracts .service-bill .icn-caret-gray,
+.block-time .service-name-agreement .icn-caret-gray{
   top: 12px !important;
 }
 
-.service-form-wrapper .icn-caret-gray {
+.service-form-wrapper .icn-caret-gray{
   right: 10px;
 }
 
