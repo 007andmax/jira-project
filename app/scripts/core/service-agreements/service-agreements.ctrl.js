@@ -163,6 +163,8 @@
 
       $scope.notAddedHourlyServiceError = false;
 
+      $scope.showErrorValidationDuplicatesHourly = false;
+
       $scope.showFieldsError = false;
       $scope.showAddServiceButton = true;
       $scope.showErrorInHourlyContract = false;
@@ -476,6 +478,8 @@
         return deferred.promise;
       }
 
+
+
       function checkHourlyExistingNamesDuplicates(name) {
         var duplicate = false;
         var names = [];
@@ -514,6 +518,14 @@
         }
       };
 
+      function showErrorValidationDuplicatesHourlyTimeout() {
+        $scope.showErrorValidationDuplicatesHourly = true;
+        $timeout(function () {
+          $scope.showErrorValidationDuplicatesHourly = false;
+        }, 4000);
+      }
+
+
       function checkForDuplicateServiceNames() {
 
         var deferred = $q.defer();
@@ -529,8 +541,7 @@
             deferred.resolve(resp);
           } else {
             console.log(' searchDuplicatedServiceNames false');
-            $scope.showErrorInHourlyContract = true;
-            $scope.errorMessage = 'Duplicates in services list';
+            showErrorValidationDuplicatesHourlyTimeout();
             deferred.reject();
 
           }
