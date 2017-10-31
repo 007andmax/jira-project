@@ -793,7 +793,7 @@
         };
         $scope.showNotAddedBlockAdditionalServiceError = function(service) {
           if($scope.blockTimeContract.billForAdditionalService && service) {
-            return (service.name && service.name.length && $scope.notAddedBlockAdditionalServiceError)
+            return (service.name && service.name.name.length && $scope.notAddedBlockAdditionalServiceError)
           }
         };
 

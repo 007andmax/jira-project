@@ -754,13 +754,13 @@
 
                 <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
-                <input uib-tooltip="Service" tooltip-placement="top"
+                <input tooltip-placement="top"
                        type="text"
                        class="form-control has-dropdown"
                        name="newServiceName"
                        autocomplete="off"
                        ng-click="refreshNotAddedError('additional')"
-                       autocomplete-service-item="newContractService.name"
+                       autocomplete-service-item="newServiceName.name"
                        ng-model="newService.name.name"
                        service-list="defaultServicesAdditionalForDropDown"
                        autocomplete-service-list uib-dropdown-toggle

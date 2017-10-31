@@ -144,7 +144,7 @@
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
                 for(var w=0; w<productsData.length; w++) {
                   for(var v=0; v<productsData[w].products.length; v++) {
-                    if(productsData[w].products[v].versionedId.id ==  $scope.serviceContract.productExpenses[p].productId) {
+                    if(productsData[w].products[v].versionedId.id ===  $scope.serviceContract.productExpenses[p].productId) {
                       $scope.serviceContract.productExpenses[p].name = {};
                       $scope.serviceContract.productExpenses[p].name.description = productsData[w].products[v].description;
                       $scope.serviceContract.productExpenses[p].name.sale = productsData[w].products[v].sale;
@@ -197,7 +197,7 @@
 
         function unpickService(serviceName) {
           for(var i=0; i<$scope.defaultServicesAdditional.length; i++) {
-            if($scope.defaultServicesAdditional[i].name == serviceName) {
+            if($scope.defaultServicesAdditional[i].name === serviceName) {
               $scope.defaultServicesAdditionalForDropDown.push($scope.defaultServicesAdditional[i]);
               break;
             }
@@ -408,7 +408,7 @@
                   var s = startDate;
                   s = Utils.addNumberOfMonth(startDate, i);
                   s = Utils.minusDays(s, 1);
-                  if(s.getTime() == endDate.getTime()) {
+                  if(s.getTime() === endDate.getTime()) {
                     interval = i;
                     break;
                   }
@@ -419,7 +419,7 @@
                   var sd = startDate;
                   sd = Utils.addNumberOfMonth(startDate, 12*y);
                   sd = Utils.minusDays(sd, 1);
-                  if(sd.getTime() == endDate.getTime()) {
+                  if(sd.getTime() === endDate.getTime()) {
                     interval = y;
                     break;
                   }
@@ -437,7 +437,7 @@
                   nt.setHours(0, 0, 0, 0);
                   nt.setSeconds(0);
                   nt.setMilliseconds(0);
-                  if(nt.getTime() == endDate.getTime()) {
+                  if(nt.getTime() === endDate.getTime()) {
                     interval = d;
                     break;
                   }
@@ -633,7 +633,7 @@
 
         $scope.deleteServiceContractService = function (service) {
           for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
-            if ($scope.serviceContract.serviceContractServices[i] == service) {
+            if ($scope.serviceContract.serviceContractServices[i] === service) {
               $scope.serviceContract.serviceContractServices.splice(i, 1);
               break;
             }
@@ -652,7 +652,7 @@
 
         $scope.deletePresettupDeviceService = function(service) {
           for (var i = 0; i < $scope.presettupDeviceServices.length; i++) {
-            if ($scope.presettupDeviceServices[i] == service) {
+            if ($scope.presettupDeviceServices[i] === service) {
               $scope.presettupDeviceServices.splice(i, 1);
               break;
             }
@@ -662,7 +662,7 @@
 
         $scope.deletePresettupUserService = function(service) {
           for (var i = 0; i < $scope.presettupUsersServices.length; i++) {
-            if ($scope.presettupUsersServices[i] == service) {
+            if ($scope.presettupUsersServices[i] === service) {
               $scope.presettupUsersServices.splice(i, 1);
               break;
             }
@@ -685,7 +685,7 @@
             };
             $scope.serviceContract.serviceExpenses.push(newServiceExpense);
             for (var i = 0; i < $scope.defaultServices.length; i++) {
-              if ($scope.defaultServices[i] == serviceExpense.name) {
+              if ($scope.defaultServices[i] === serviceExpense.name) {
                 $scope.defaultServices[i].picked = true;
               }
             }
@@ -705,11 +705,11 @@
 
         $scope.deleteServiceExpense = function (service) {
           for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
-            if ($scope.serviceContract.serviceExpenses[i] == service) {
+            if ($scope.serviceContract.serviceExpenses[i] === service) {
               $scope.serviceContract.serviceExpenses.splice(i, 1);
 
               for (var j = 0; j < $scope.defaultServices.length; j++) {
-                if ($scope.defaultServices[j] == service.name) {
+                if ($scope.defaultServices[j] === service.name) {
                   $scope.defaultServices[j].picked = false;
                 }
               }
@@ -777,7 +777,7 @@
 
         $scope.deleteService = function (service) {
           for (var i = 0; i < $scope.serviceContract.services.length; i++) {
-            if ($scope.serviceContract.services[i] == service) {
+            if ($scope.serviceContract.services[i] === service) {
               $scope.serviceContract.services.splice(i, 1);
               unpickService(service.name);
               break;
@@ -824,7 +824,7 @@
 
         $scope.deleteServiceContractServicesToTrack = function(service) {
           for (var i = 0; i < $scope.serviceContract.serviceContractServicesToTrack.length; i++) {
-            if ($scope.serviceContract.serviceContractServicesToTrack[i] == service) {
+            if ($scope.serviceContract.serviceContractServicesToTrack[i] === service) {
               $scope.serviceContract.serviceContractServicesToTrack.splice(i, 1);
               break;
             }
@@ -834,10 +834,10 @@
         $scope.isAdditionalServiceNameUnique = function (name) {
           var check = true;
           if (name) {
-            if ($scope.serviceContract.billType == 'OTHER') {
+            if ($scope.serviceContract.billType === 'OTHER') {
               if ($scope.serviceContract.serviceExpenses.length > 0) {
                 for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
-                  if ($scope.serviceContract.serviceExpenses[i].name.name == name) {
+                  if ($scope.serviceContract.serviceExpenses[i].name.name === name) {
                     check = false;
                     break;
                   }
@@ -845,7 +845,7 @@
               }
               if ($scope.serviceContract.productExpenses.length > 0) {
                 for (var j = 0; j < $scope.serviceContract.productExpenses.length; j++) {
-                  if ($scope.serviceContract.productExpenses[j].name.name == name) {
+                  if ($scope.serviceContract.productExpenses[j].name.name === name) {
                     check = false;
                     break;
                   }
@@ -854,25 +854,25 @@
             } else {
               if ($scope.serviceContract.serviceContractServices.length > 0) {
                 for (var n = 0; n < $scope.serviceContract.serviceContractServices.length; n++) {
-                  if ($scope.serviceContract.serviceContractServices[n].name == name) {
+                  if ($scope.serviceContract.serviceContractServices[n].name === name) {
                     check = false;
                     break;
                   }
                 }
               }
-              if($scope.serviceContract.billType == 'DEVICE') {
+              if($scope.serviceContract.billType === 'DEVICE') {
                 if ($scope.presettupDeviceServices.length > 0) {
                   for (var d = 0; d < $scope.presettupDeviceServices.length; d++) {
-                    if ($scope.presettupDeviceServices[d].name == name) {
+                    if ($scope.presettupDeviceServices[d].name === name) {
                       check = false;
                       break;
                     }
                   }
                 }
-              } else if($scope.serviceContract.billType == 'USER') {
+              } else if($scope.serviceContract.billType === 'USER') {
                 if ($scope.presettupUsersServices.length > 0) {
                   for (var u = 0; u < $scope.presettupUsersServices.length; u++) {
-                    if ($scope.presettupUsersServices[u].name == name) {
+                    if ($scope.presettupUsersServices[u].name === name) {
                       check = false;
                       break;
                     }
@@ -883,7 +883,7 @@
           }
           if ($scope.serviceContract.services.length > 0) {
             for (var h = 0; h < $scope.serviceContract.services.length; h++) {
-              if ($scope.serviceContract.services[h].name == name) {
+              if ($scope.serviceContract.services[h].name === name) {
                 check = false;
                 break;
               }
@@ -891,7 +891,7 @@
           }
           if ($scope.serviceContract.serviceContractServicesToTrack.length > 0) {
             for (var m = 0; m < $scope.serviceContract.serviceContractServicesToTrack.length; m++) {
-              if ($scope.serviceContract.serviceContractServicesToTrack[m].name == name) {
+              if ($scope.serviceContract.serviceContractServicesToTrack[m].name === name) {
                 check = false;
                 break;
               }
@@ -905,7 +905,7 @@
           if (name) {
             if ($scope.serviceContract.services.length > 0) {
               for (var i = 0; i < $scope.serviceContract.services.length; i++) {
-                if ($scope.serviceContract.services[i].name == name) {
+                if ($scope.serviceContract.services[i].name === name) {
                   check = false;
                   break;
                 }
@@ -913,7 +913,7 @@
             }
             if ($scope.serviceContract.serviceContractServices.length > 0) {
               for (var j = 0; j < $scope.serviceContract.serviceContractServices.length; j++) {
-                if ($scope.serviceContract.serviceContractServices[j].name == name) {
+                if ($scope.serviceContract.serviceContractServices[j].name === name) {
                   check = false;
                   break;
                 }
@@ -921,25 +921,25 @@
             }
             if ($scope.serviceContract.serviceContractServicesToTrack.length > 0) {
               for (var m = 0; m < $scope.serviceContract.serviceContractServicesToTrack.length; m++) {
-                if ($scope.serviceContract.serviceContractServicesToTrack[m].name == name) {
+                if ($scope.serviceContract.serviceContractServicesToTrack[m].name === name) {
                   check = false;
                   break;
                 }
               }
             }
-            if($scope.serviceContract.billType == 'DEVICE') {
+            if($scope.serviceContract.billType === 'DEVICE') {
               if ($scope.presettupDeviceServices.length > 0) {
                 for (var d = 0; d < $scope.presettupDeviceServices.length; d++) {
-                  if ($scope.presettupDeviceServices[d].name == name) {
+                  if ($scope.presettupDeviceServices[d].name === name) {
                     check = false;
                     break;
                   }
                 }
               }
-            } else if($scope.serviceContract.billType == 'USER') {
+            } else if($scope.serviceContract.billType === 'USER') {
               if ($scope.presettupUsersServices.length > 0) {
                 for (var u = 0; u < $scope.presettupUsersServices.length; u++) {
-                  if ($scope.presettupUsersServices[u].name == name) {
+                  if ($scope.presettupUsersServices[u].name === name) {
                     check = false;
                     break;
                   }
@@ -1016,15 +1016,15 @@
           }
 
           function serviceCheck() {
-            if ($scope.serviceContract.billType == 'DEVICE') {
+            if ($scope.serviceContract.billType === 'DEVICE') {
               var deviceCheck =  $scope.serviceContract.serviceContractServices.length > 0;
               var presetupCheck = $scope.presettupDeviceServices.length > 0;
               return (deviceCheck || presetupCheck)
-            } else if($scope.serviceContract.billType == 'USER'){
+            } else if($scope.serviceContract.billType === 'USER'){
               var userCheck =  $scope.serviceContract.serviceContractServices.length > 0;
               var presetupCheck  =  $scope.presettupUsersServices.length > 0;
               return (userCheck || presetupCheck)
-            }else if($scope.serviceContract.billType == 'OTHER'){
+            }else if($scope.serviceContract.billType === 'OTHER'){
               return ($scope.serviceContract.serviceExpenses.length > 0 || $scope.serviceContract.productExpenses.length > 0);
             }
           }
@@ -1064,7 +1064,7 @@
 
 
         $scope.showNotAddedAdditionalServiceError = function(service) {
-          return (service.name && service.name.length && $scope.notAddedAdditionalServiceError)
+          return (service.nameValue && service.nameValue.length && $scope.notAddedAdditionalServiceError)
         };
         $scope.showNotAddedSCSServiceError = function(service) {
           return (service.name && service.name.length && $scope.notAddedSCSError)
@@ -1106,7 +1106,7 @@
           $scope.notAddedAdditionalServiceError = true;
           $scope.notAddedSCSError = true;
           $scope.notAddedSCSTTError = true;
-          if($scope.serviceContract.billType == 'OTHER') {
+          if($scope.serviceContract.billType === 'OTHER') {
             $scope.notAddedServiceExpenseError = true;
             $scope.notAddedProductExpenseError = true;
           }
@@ -1186,12 +1186,12 @@
               serviceContractServicesToTrack: []
             };
 
-            if (servContract.billType == 'OTHER') {
+            if (servContract.billType === 'OTHER') {
               servContract.serviceExpenses = [];
               servContract.productExpenses = []
             }
 
-            if ($scope.serviceContract.interval == 'MONTHLY' || $scope.serviceContract.interval == 'YEARLY') {
+            if ($scope.serviceContract.interval === 'MONTHLY' || $scope.serviceContract.interval === 'YEARLY') {
               servContract.interval = serviceContract.interval;
             } else {
               servContract.interval = null;
@@ -1388,9 +1388,9 @@
             var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
             var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
             var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
-            var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.length>0);
+            var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.name.length>0);
             var checkSCSTT = ($scope.newServiceContractServicesToTrack && $scope.newServiceContractServicesToTrack.name && $scope.newServiceContractServicesToTrack.name.length)
-            if($scope.serviceContract.billType == 'OTHER') {
+            if($scope.serviceContract.billType === 'OTHER') {
               if(checkPE || checkSE) {
                 emptyServices = false;
               }
@@ -1432,18 +1432,18 @@
           function validateServiceContractServices(serviceContract) {
             var listOfNames = [];
             var listOfAdditionalServicesNames = [];
-            if (serviceContract.billType == 'DEVICE' || serviceContract.billType == 'USER') {
+            if (serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER') {
               for (var i = 0; i < serviceContract.serviceContractServices.length; i++) {
                 listOfNames.push(serviceContract.serviceContractServices[i].name);
               }
-              if(serviceContract.billType == 'DEVICE') {
+              if(serviceContract.billType === 'DEVICE') {
                 if($scope.presettupDeviceServices.length>0) {
                   for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
                     listOfNames.push($scope.presettupDeviceServices[d].name);
                   }
                 }
 
-              } else if(serviceContract.billType == 'USER') {
+              } else if(serviceContract.billType === 'USER') {
                 if($scope.presettupUsersServices.length>0) {
                   for(var u=0; u<$scope.presettupUsersServices.length; u++) {
                     listOfNames.push($scope.presettupUsersServices[u].name);
