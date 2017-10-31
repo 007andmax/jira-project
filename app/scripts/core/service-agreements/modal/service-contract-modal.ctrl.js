@@ -1388,7 +1388,7 @@
             var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
             var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
             var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
-            var checkServices = ($scope.newService && $scope.newService.name && $scope.newService.name.name.length>0);
+            var checkServices = ($scope.newService && $scope.newService.nameValue && $scope.newService.nameValue.length>0);
             var checkSCSTT = ($scope.newServiceContractServicesToTrack && $scope.newServiceContractServicesToTrack.name && $scope.newServiceContractServicesToTrack.name.length)
             if($scope.serviceContract.billType === 'OTHER') {
               if(checkPE || checkSE) {
