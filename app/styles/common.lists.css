@@ -4772,6 +4772,9 @@ Devices tab
 .hourly {
   margin-bottom: 80px;
 }
+.hourly .bootstrap-datetimepicker-widget{
+  right: -134px!important;
+}
 
 .hourly .not-yet-hourly {
   text-align: center;
