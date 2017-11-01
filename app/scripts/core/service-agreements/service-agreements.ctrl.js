@@ -417,6 +417,8 @@
                 reInitServiceForm();
                 $scope.showAddServiceButton = true;
               }
+            }, function() {
+              $scope.showAddServiceButton = true;
             })
           }
 
