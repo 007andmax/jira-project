@@ -9965,9 +9965,11 @@ button.close {
   text-align: right;
   border-top: 1px solid #e7ecf2;
 }
-.modal-footer .btn-primary{
+
+.modal-footer .btn-primary {
   min-width: 130px;
 }
+
 .modal-footer .btn + .btn {
   margin-left: 7px;
   margin-bottom: 0;
@@ -11120,9 +11122,11 @@ button.close {
   top: 0;
   right: 0;
 }
-.fixed-block-top{
+
+.fixed-block-top {
   height: 54px;
 }
+
 .payment-receive-fixed {
   background-color: #fff;
 }
@@ -11804,6 +11808,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   width: 190px;
   float: right;
   margin-top: 15px;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .billing-type-content .col-xs-12.hourly-not-active {
