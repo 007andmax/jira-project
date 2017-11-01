@@ -160,7 +160,7 @@
       $scope.selectedContractType = 'CREATE_NEW';
       $scope.modlToShow = 'CREATE_NEW';
       $scope.blockHourlyChoice = false;
-
+      $scope.reInitEndDateHourly = true;
       $scope.notAddedHourlyServiceError = false;
 
       $scope.showErrorValidationDuplicatesHourly = false;
@@ -179,7 +179,7 @@
       $scope.today = Date.now();
 
       $scope.minDateForEndDatePicker;
-      setMiNDateForEndDate($scope.today);
+
 
       $scope.reinitNewServiceForm = true;
 
@@ -213,6 +213,7 @@
             $scope.editContract.services = listOfServices;
           }
         });
+        setMiNDateForEndDate($scope.today);
 
         $timeout(function () {
           $scope.editService = {
@@ -226,8 +227,8 @@
       } else {
         console.log(companyData);
         $scope.editContract = companyData.companyForReadOnlyMode;
-        $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'yyyy/MM/dd');
-        $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'yyyy/MM/dd');
+        $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
+        $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
         AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
           $scope.contractStatus = data.status;
         });
@@ -327,13 +328,20 @@
         return $filter('date')(date, 'dd MMM yyyy');
       };
 
+      function reInitEndDateHourly() {
+        $scope.reInitEndDateHourly = false;
+        $timeout(function () {
+          $scope.reInitEndDateHourly = true;
+        }, 0);
+      }
 
       $scope.startDatePicker = function (date) {
         if (date && date.length > 0) {
           var startDate = new Date(date);
 
           var startMonth = startDate.getMonth() + 1;
-          $scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
+          //$scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
+          $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
           $scope.startDate = $scope.editContract.startDate;
           var endDate = new Date(date);
           //endDate.setMonth(endDate.getMonth() + 1);
@@ -341,9 +349,10 @@
           var temp  = Utils.minusDays(n, 1);
           // var temp = new Date(n);
           // temp.setDate(temp.getDate()-1);
-          $scope.editContract.endDate = $filter('date')(temp, 'yyyy/MM/dd');
+          $scope.editContract.endDate = $filter('date')(temp, 'dd MMM yyyy');
           var f = new Date(date);
           setMiNDateForEndDate(f.getTime());
+          reInitEndDateHourly()
         }
 
       };
@@ -352,7 +361,7 @@
         if (date && date.length > 0) {
           var endDate = new Date(date);
           var endMonth = endDate.getMonth() + 1;
-          $scope.editContract.endDate = $filter('date')(endDate, 'yyyy/MM/dd');
+          $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.endDate = $scope.editContract.endDate;
         }
 
@@ -711,7 +720,9 @@
 
 
       $scope.showNotAddedHourlyServiceError = function(service) {
-        return (service.name && service.name.length && $scope.notAddedHourlyServiceError)
+        if(service) {
+          return (service.name && service.name.length && $scope.notAddedHourlyServiceError)
+        }
       };
 
       $scope.refreshNotAddedServiceErrorHourly = function() {

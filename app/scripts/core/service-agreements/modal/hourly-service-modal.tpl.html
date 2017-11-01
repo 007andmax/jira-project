@@ -28,30 +28,57 @@
                  ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
-            <input type="text"
-                   class="form-control has-dropdown readonly-normal"
-                   name="StartDate"
-                   readonly
-                   date-format="yyyy/mm/dd"
-                   date-range-picker="startDatePicker"
-                   min-date="{{today}}"
+            <!--<input type="text"-->
+                   <!--class="form-control has-dropdown readonly-normal"-->
+                   <!--name="StartDate"-->
+                   <!--readonly-->
+                   <!--date-format="yyyy/mm/dd"-->
+                   <!--date-range-picker="startDatePicker"-->
+                   <!--min-date="{{today}}"-->
+                   <!--ng-model="editContract.startDate"-->
+                   <!--placeholder="Start Date" required>-->
+            <!--<i class="report-calendar"></i>-->
+
+
+            <input class="form-control has-dropdown readonly-normal"
+                   type="text"
                    ng-model="editContract.startDate"
-                   placeholder="Start Date" required>
+                   placeholder="Select"
+                   readonly
+                   ng-change="startDatePicker(editContract.startDate)"
+                   name="startDate"
+                   qt-data-time-picker
+                   min-date="today"
+                   required>
             <i class="report-calendar"></i>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             End Date*:
-            <input type="text"
-                   class="form-control has-dropdown readonly-normal"
-                   name="EndDate"
-                   readonly
-                   date-format="yyyy/mm/dd"
-                   date-range-picker="endDatePicker"
-                   min-date="{{minDateForEndDatePicker}}"
+            <!--<input type="text"-->
+                   <!--class="form-control has-dropdown readonly-normal"-->
+                   <!--name="EndDate"-->
+                   <!--readonly-->
+                   <!--date-format="yyyy/mm/dd"-->
+                   <!--date-range-picker="endDatePicker"-->
+                   <!--min-date="{{minDateForEndDatePicker}}"-->
+                   <!--ng-model="editContract.endDate"-->
+                   <!--placeholder="End Date" required>-->
+            <!--<i class="report-calendar"></i>-->
+
+            <input class="form-control has-dropdown readonly-normal"
+                   ng-if="reInitEndDateHourly"
+                   type="text"
                    ng-model="editContract.endDate"
-                   placeholder="End Date" required>
+                   placeholder="Select"
+                   readonly
+                   ng-change="endDatePicker(editContract.endDate)"
+                   name="EndDate"
+                   qt-data-time-picker
+                   default-date="minDateForEndDatePicker"
+                   min-date="minDateForEndDatePicker"
+                   required>
             <i class="report-calendar"></i>
           </div>
         </div>
