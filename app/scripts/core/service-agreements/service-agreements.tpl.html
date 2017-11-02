@@ -49,7 +49,7 @@
           ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
         <div class="col-md-2">{{agreement.company.name}}</div>
         <div class="col-md-3 col-width-3">{{agreement.description}}</div>
-        <div class="col-md-1 col-width-1" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}</div>
+        <div class="col-md-1 col-width-1" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}} {{agreement.billType}}</div>
         <div class="col-md-1" style="padding-left: 10px;" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{contractStatusDictionary[agreement.status]}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
         <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
