@@ -21,9 +21,9 @@
         };
 
         $scope.billTypeDictionary = {
-          DEVICE: 'by device',
-          USER: 'by user',
-          OTHER: 'by other'
+          DEVICE: '/by device',
+          USER: '/by user',
+          OTHER: '/by other'
         };
 
         $scope.contractStatusDictionary ={
