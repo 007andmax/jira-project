@@ -20,6 +20,12 @@
           SERVICE_CONTRACT: 'Service Contract'
         };
 
+        $scope.billTypeDictionary = {
+          DEVICE: 'by device',
+          USER: 'by user',
+          OTHER: 'by other'
+        };
+
         $scope.contractStatusDictionary ={
           CURRENT: 'Current',
           PENDING: 'Pending',
