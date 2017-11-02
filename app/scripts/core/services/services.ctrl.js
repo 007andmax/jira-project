@@ -104,7 +104,6 @@
           } else if ($scope.orderServices.field === 'rate') {
             return item.rate;
           }
-
         };
 
         $scope.getSelectedTaxNames = function(taxes) {
