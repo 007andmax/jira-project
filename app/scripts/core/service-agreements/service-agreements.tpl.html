@@ -56,7 +56,7 @@
         <div class="col-md-1 col-width-1">
           <div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
         </div>
-        <div class="col-md-1 text-center">{{agreement.amount}}</div>
+        <div class="col-md-1 text-center">{{agreement.amount | number : 2}}</div>
         <div class="col-md-1 text-center" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">
           <i class="icon-sm icn-delete" uib-tooltip="delete"
              ng-click="deleteAgreement(agreement); $event.stopPropagation();"></i>
