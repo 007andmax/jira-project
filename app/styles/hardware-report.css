@@ -1325,6 +1325,12 @@
 }
 
 @media screen and (max-width: 1600px) {
+  .service-agreements-lists .col-width-3{
+    width: 22.2%;
+  }
+  .service-agreements-lists .col-width-4{
+    width: 14.3%;
+  }
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -60px;
   }
@@ -1348,7 +1354,7 @@
   }
 
   .service-agreements-lists .col-width-4 {
-    width: 13.7%;
+    width: 15.7%;
   }
 
   .product-report-btn.dropdown-email .dropdown-menu {
@@ -1368,7 +1374,7 @@
   }
 
   .service-agreements-lists .col-width-1 {
-    width: 10.3%;
+    width: 8.3%;
   }
 }
 
