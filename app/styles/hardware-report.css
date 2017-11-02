@@ -454,19 +454,29 @@
 .service-agreements {
   text-align: right;
 }
-.deposit-create.service-agreements{
+
+.deposit-create.service-agreements {
   margin-bottom: 75px;
 }
+
 .service-agreements-lists li [class*='col-md-'] {
   word-wrap: break-word;
 }
 
 .service-agreements-lists .col-width-1 {
-  width: 9.4%;
+  width: 8.4%;
+}
+
+.service-agreements-lists .col-width-2 {
+  width: 5%;
 }
 
 .service-agreements-lists .col-width-3 {
   width: 22.8%;
+}
+
+.service-agreements-lists .col-width-4 {
+  width: 13%;
 }
 
 .service-agreements .btn-primary {
@@ -1326,9 +1336,21 @@
   .service-agreements ul li [class*='col-md-'] {
     padding: 15px 5px;
   }
+
+  .service-agreements-lists .col-width-1 {
+    width: 8.5%;
+  }
 }
 
 @media screen and (max-width: 1366px) {
+  .service-agreements-lists .col-width-3 {
+    width: 20%;
+  }
+
+  .service-agreements-lists .col-width-4 {
+    width: 13.7%;
+  }
+
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -210px;
   }
@@ -1347,10 +1369,6 @@
 
   .service-agreements-lists .col-width-1 {
     width: 10.3%;
-  }
-
-  .service-agreements-lists .col-width-3 {
-    width: 20.7%;
   }
 }
 
