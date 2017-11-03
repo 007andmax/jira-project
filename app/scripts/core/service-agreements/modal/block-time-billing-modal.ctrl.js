@@ -560,7 +560,6 @@
           }, 4000);
         }
 
-
         $scope.addContractService = function (form, service) {
           $scope.showAddButtonNewService = false;
           if (form.$valid) {
