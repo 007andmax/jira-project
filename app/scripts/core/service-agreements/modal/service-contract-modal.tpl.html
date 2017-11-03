@@ -597,7 +597,7 @@
 
             </div>
             <div class="col-md-1 fourm-group text-center" style="padding: 0;">
-              <div class="add-remove-service" ng-hide="contractServiceList.length > 19 || !showAddButtonNewService">
+              <div class="add-remove-service">
                 <div ng-show="serviceContract.serviceContractServicesToTrack.length<10 && showAddButtonNewSCSTT"
                      ng-click="addServiceContractServicesToTrack(newServiceContractServicesToTrackForm, newServiceContractServicesToTrack)">
                   <i class="icon-sm icn-add-action"></i>
@@ -671,7 +671,7 @@
                        uib-dropdown-toggle
                        entity="service.nameValue"
                        hard-reset-pattern="descriptionPattern"
-                       invalid-when="!isAdditionalServiceNameUnique(service.name)"/>
+                       invalid-when="!isAdditionalServiceNameUnique(service.name)" required/>
                 <i class="icn-sm icn-caret-gray"></i>
                 <div class="service-list-container"></div>
 
@@ -717,6 +717,9 @@
             </div>
             <div ng-show="showNewServiceValidationError">
               <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
+            </div>
+            <div ng-show="showNewServiceNameError">
+              <p style="color: red;padding-left: 15px; margin-bottom: 0;">Please select service from the list</p>
             </div>
             <!--<div class="service-name-agreement form-group"-->
                  <!--ng-class="{'has-error': (isShowingErrorsNewServiceField(newServiceForm, 'newServiceName') || showNotAddedAdditionalServiceError(newService)) }">-->

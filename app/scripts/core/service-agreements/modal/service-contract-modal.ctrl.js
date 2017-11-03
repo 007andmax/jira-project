@@ -736,38 +736,51 @@
           }, 4000);
         }
 
+        $scope.showNewServiceNameError = false;
+        function showErrorNewServiceNameTimeOut() {
+          $scope.showNewServiceNameError = true;
+          $timeout(function () {
+            $scope.showNewServiceNameError = false;
+          }, 4000);
+        }
         $scope.addNewService = function (form, service) {
           $scope.notAddedAdditionalServiceError = false;
           $scope.showAddButtonNewService = false;
           $scope.showNewServiceError = false;
           if (form.$valid) {
-
-            validateNewServiceName(service.nameValue).then(function (resp) {
-              if (resp) {
-                var ns = {
-                  name: service.nameValue,
-                  rate: service.name.rate,
-                  billable: service.billable,
-                  taxes: service.taxes,
-                  nameValue: service.nameValue
-                };
-                $scope.serviceContract.services.push(ns);
-                $scope.newService = {
-                  name: '',
-                  rate: 0,
-                  billable: true,
-                  taxes: $scope.addDefaultTaxes(),
-                  taxIds: [],
-                  nameValue: ''
-                };
-                reInitServiceForm();
-                $scope.showAddButtonNewService = true;
-                pickService(service.nameValue);
-              }
-            }, function() {
-              showErrorNewServiceValidationTimeOut();
+            if(!service.name.name || service.nameValue.length < 1) {
+              showErrorNewServiceNameTimeOut();
               $scope.showAddButtonNewService = true;
-            })
+            } else {
+              validateNewServiceName(service.nameValue).then(function (resp) {
+                if (resp) {
+                  var ns = {
+                    name: service.nameValue,
+                    rate: service.name.rate,
+                    billable: service.billable,
+                    taxes: service.taxes,
+                    nameValue: service.nameValue
+                  };
+                  $scope.serviceContract.services.push(ns);
+                  $scope.newService = {
+                    name: '',
+                    rate: 0,
+                    billable: true,
+                    taxes: $scope.addDefaultTaxes(),
+                    taxIds: [],
+                    nameValue: ''
+                  };
+                  reInitServiceForm();
+                  $scope.showAddButtonNewService = true;
+                  pickService(service.nameValue);
+                }
+              }, function() {
+                showErrorNewServiceValidationTimeOut();
+                $scope.showAddButtonNewService = true;
+              })
+            }
+
+
 
           } else {
             showErrorNewServiceFieldsTimeOut();
