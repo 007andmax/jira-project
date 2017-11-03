@@ -128,7 +128,7 @@
               <input placeholder="Total"
                      type="text"
                      class="form-control"
-                     ng-model="calculateTotalAmount() " hard-reset-pattern="decimalNumberPattern" readonly
+                     ng-model="calculateTotalAmount() | number: 2 " hard-reset-pattern="decimalNumberPattern" readonly
                      qt-to-fixed="2">
             </div>
           </div>
@@ -409,7 +409,7 @@
                   <input placeholder="0.00"
                          type="text"
                          class="form-control"
-                         ng-model="newContractService.name.rate"
+                         ng-model="newContractService.name.rate | number: 2"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
                 <div class="tax-agreement fourm-group text-center"

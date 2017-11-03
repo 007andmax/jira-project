@@ -121,7 +121,10 @@
     <div class="col-md-12"></div>
 
     <div ng-if="serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER'">
-      <div class="col-md-4" style="width: 259px;">Service name</div>
+      <div class="col-md-4" style="width: 259px;">
+        <div ng-show="serviceContract.billType === 'DEVICE'">Device name </div>
+        <div ng-show="serviceContract.billType === 'USER'">Service name </div>
+      </div>
       <div class="price-agreement">Count</div>
       <div class="price-agreement">Price</div>
       <div class="tax-agreement text-center">Tax</div>
@@ -789,7 +792,7 @@
                      name="newServiceRate"
                      type="text"
                      class="form-control"
-                     ng-model="newService.name.rate"
+                     ng-model="newService.name.rate | number: 2"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
             <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newService.billable ? 'visible' : 'hidden'}">
