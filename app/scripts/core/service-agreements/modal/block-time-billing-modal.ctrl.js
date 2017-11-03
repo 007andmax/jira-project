@@ -10,7 +10,7 @@
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService, Utils) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
 
         $scope.parseDate = Date.parse.bind(Date);
 
@@ -183,7 +183,6 @@
         $scope.previewInterval = function() {
           return $scope.blockTimeContract.customInterval || $scope.blockTimeContract.interval;
         };
-
 
 
         $scope.clients = [];
@@ -710,6 +709,8 @@
             return true;
           }
         };
+
+        $scope.returnCompanyId = returnCompanyId();
 
         function returnCompanyId() {
           var id;

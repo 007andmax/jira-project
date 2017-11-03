@@ -11,6 +11,9 @@
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
           if ($scope.ticketDetails) {
             $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
+          } else if($scope.editMode) {
+
+            $scope.clients = UsersService.getAllByCompanyId($scope.returnCompanyId);
           }
 
           $scope.$watchCollection(function () {

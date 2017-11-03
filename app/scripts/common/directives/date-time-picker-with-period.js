@@ -31,7 +31,8 @@
               }, dp,
               enabledDates = [],
               lastDate = '',
-              sd='';
+              sd='',
+              pickedDate = '';
 
             if (scope.minDate) {
               options.minDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
@@ -76,6 +77,7 @@
               element.bind('dp.update', function (e) {
                 var data = dp.data("DateTimePicker"),
                   minDate = new Date(scope.minDate);
+                console.log(pickedDate);
 
                 if (e.viewDate._d.getMonth() === minDate.getMonth() &&
                   e.viewDate._d.getFullYear() === minDate.getFullYear()) {
@@ -116,6 +118,7 @@
 
             element.bind('dp.change', function (e) {
               ctrl.$setViewValue(e.date._d);
+              pickedDate = e.date._d;
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 

@@ -9,7 +9,7 @@
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils) {
 
-        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days', '1 day'];
+        $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
           USER: 'By Users',
