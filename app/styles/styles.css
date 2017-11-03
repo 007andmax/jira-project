@@ -7698,7 +7698,9 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   background-color: #FFF;
   border-bottom: #e7ecf2 1px solid;
 }
-
+.contracts .qt-table .col-sm-3 .dropdown-menu {
+  width: 165%!important;
+}
 .contracts .nav-ticket-add > li.active > a,
 .contracts .nav-ticket-add > li.active > a:hover,
 .contracts .nav-ticket-add > li.active > a:focus {
