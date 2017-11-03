@@ -1222,7 +1222,7 @@
               if (serviceContract.services && serviceContract.services.length) {
                 for (var i = 0; i < serviceContract.services.length; i++) {
                   var serv = {
-                    name: serviceContract.services[i].nameValue,
+                    name: serviceContract.services[i].nameValue || serviceContract.services[i].name,
                     rate: 0,
                     billable: serviceContract.services[i].billable,
                     taxIds: []
