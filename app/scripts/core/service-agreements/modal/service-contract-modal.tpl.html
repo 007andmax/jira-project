@@ -755,18 +755,20 @@
                 <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
                 <input tooltip-placement="top"
-                       placeholder="Service"
                        type="text"
                        class="form-control has-dropdown"
+                       placeholder="Service"
                        name="newServiceName"
                        autocomplete="off"
                        ng-click="refreshNotAddedError('additional')"
-                       autocomplete-service-item="newServiceName.name"
+                       autocomplete-service-item="newService.name"
                        ng-model="newService.name.name"
                        service-list="defaultServicesAdditionalForDropDown"
-                       autocomplete-service-list uib-dropdown-toggle
+                       autocomplete-service-list
+                       uib-dropdown-toggle
                        entity="newService.nameValue"
-                       invalid-when="!isAdditionalServiceNameUnique(newService.name)"/>
+                       invalid-when="!isAdditionalServiceNameUnique(newService.name)"
+                       hard-reset-pattern="descriptionPattern"/>
                 <i class="icn-sm icn-caret-gray"></i>
                 <div class="service-list-container"></div>
 
@@ -784,7 +786,7 @@
                      name="newServiceRate"
                      type="text"
                      class="form-control"
-                     ng-model="newService.rate"
+                     ng-model="newService.name.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
             <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newService.billable ? 'visible' : 'hidden'}">

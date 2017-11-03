@@ -379,14 +379,19 @@
                     <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
                     <input tooltip-placement="top"
-                           type="text" class="form-control has-dropdown"
+                           type="text"
+                           class="form-control has-dropdown"
                            placeholder="Service"
-                           name="newContractServiceName" autocomplete="off"
+                           name="newContractServiceName"
+                           autocomplete="off"
                            ng-click="refreshNotAddedError('additional')"
                            autocomplete-service-item="newContractService.name"
-                           ng-model="newContractService.name.name" service-list="defaultServicesForDropdown"
-                           autocomplete-service-list uib-dropdown-toggle
-                           entity="newContractService.nameValue" hard-reset-pattern="descriptionPattern"/>
+                           ng-model="newContractService.name.name"
+                           service-list="defaultServicesForDropdown"
+                           autocomplete-service-list
+                           uib-dropdown-toggle
+                           entity="newContractService.nameValue"
+                           hard-reset-pattern="descriptionPattern"/>
                     <i class="icn-sm icn-caret-gray"></i>
                     <div class="service-list-container"></div>
                     <!--<input type="hidden" name="service" ng-model="newContractService.name.versionedId.id" ng-required="true">-->
@@ -404,7 +409,7 @@
                   <input placeholder="0.00"
                          type="text"
                          class="form-control"
-                         ng-model="newContractService.rate"
+                         ng-model="newContractService.name.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
                 <div class="tax-agreement fourm-group text-center"

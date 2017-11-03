@@ -579,7 +579,7 @@
                     if (service.name.name && service.name.name.length && service.nameValue) {
                       var ns = {
                         name: service.nameValue,
-                        rate: service.rate,
+                        rate: service.name.rate,
                         billable: service.billable,
                         taxes: service.taxes,
                         nameValue: service.nameValue
