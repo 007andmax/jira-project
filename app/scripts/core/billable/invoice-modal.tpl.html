@@ -179,7 +179,7 @@
       <div class="col-2">{{ serviceExpense.description }}</div>
       <div class="col-3" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device'">{{ serviceExpense.billableQuantity  }} </div>
       <div class="col-3" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
-      <div class="col-4">{{ serviceExpense.item.rate | currency: '$':2 }} <b ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device'">/hr</b></div>
+      <div class="col-4">{{ serviceExpense.item.rate | currency: '$':2 }}<b ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device'">/hr</b></div>
       <div class="col-4">{{ serviceExpense.discountSum | currency: '$':2 }}</div>
       <div class="col-4">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
       <div class="col-5">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
