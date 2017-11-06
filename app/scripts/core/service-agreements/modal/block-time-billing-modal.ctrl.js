@@ -563,7 +563,7 @@
         $scope.addContractService = function (form, service) {
           $scope.showAddButtonNewService = false;
           if (form.$valid) {
-            if (!service.name || service.nameValue.length < 1) {
+            if (!service.name ||  service.nameValue.length < 1) {
               showNewServiceNameError();
               $scope.showAddButtonNewService = true;
             } else {
@@ -575,7 +575,7 @@
                 validateNewServiceName(service.nameValue, 'service').then(function (resp) {
 
                   if (resp) {
-                    if (service.name.name && service.name.name.length && service.nameValue) {
+
                       var ns = {
                         name: service.nameValue,
                         rate: service.name.rate,
@@ -594,21 +594,7 @@
                       pickService(service.nameValue);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
-                    } else {
 
-                      $scope.blockTimeContract.services.push(service);
-                      $scope.newContractService = {
-                        name: '',
-                        rate: 0,
-                        billable: true,
-                        taxes: $scope.addDefaultTaxes(),
-                        nameValue: ''
-                      };
-                      pickService(service.nameValue);
-                      $scope.showAddButtonNewService = true;
-                      reInitServiceForm()
-
-                    }
                   }
                 }, function() {
                   $scope.showAddButtonNewService = true;

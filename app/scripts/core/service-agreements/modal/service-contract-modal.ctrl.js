@@ -748,7 +748,7 @@
           $scope.showAddButtonNewService = false;
           $scope.showNewServiceError = false;
           if (form.$valid) {
-            if(!service.name.name || service.nameValue.length < 1) {
+            if( service.nameValue.length < 1) {
               showErrorNewServiceNameTimeOut();
               $scope.showAddButtonNewService = true;
             } else {
