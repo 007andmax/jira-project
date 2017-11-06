@@ -3,7 +3,7 @@
   <i class="icn icn-sm icn-update-service"></i>
 
   <div class="col-1">{{ service.createdAt | date:'dd MMM yyyy' }}</div>
-  <div class="col-2">-billType-</div>
+  <div class="col-2">{{service.description}}</div>
   <div class="col-sm-2" style="float: right;">{{ service.sum | currency: '$': 2 }}
     <div class="tax-recurring">
       <select-taxes taxes="taxes" entity="service" entity-type="service" on-close="saveTaxes"></select-taxes>
