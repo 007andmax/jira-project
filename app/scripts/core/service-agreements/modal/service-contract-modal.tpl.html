@@ -141,7 +141,7 @@
                    invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
           </div>
           <div class="price-agreement fourm-group">
-            <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
+            <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="quantityPattern"
                    ng-model="presettupDeviceService.count" required ng-change="calculateTotalAmount()">
           </div>
           <div class="price-agreement fourm-group before-icon">
@@ -177,7 +177,7 @@
                    invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
           </div>
           <div class="price-agreement fourm-group">
-            <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
+            <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="quantityPattern"
                    ng-model="presettupUserService.count" required ng-change="calculateTotalAmount()">
           </div>
           <div class="price-agreement fourm-group before-icon">
@@ -212,7 +212,7 @@
                  invalid-when="!isNewServiceContractServiceNameUnique(serviceContractServices.name)">
         </div>
         <div class="price-agreement fourm-group">
-          <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="decimalNumberPattern"
+          <input placeholder="Count" type="text" class="form-control" hard-reset-pattern="quantityPattern"
                  ng-model="serviceContractServices.count" required ng-change="calculateTotalAmount()">
         </div>
         <div class="price-agreement fourm-group before-icon">

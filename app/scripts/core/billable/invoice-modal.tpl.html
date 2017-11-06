@@ -177,7 +177,7 @@
       </div>
 
       <div class="col-2">{{ serviceExpense.description }}</div>
-      <div class="col-3">{{ serviceExpense.billableQuantity | durationFilter }} <div ng-hide="serviceExpense.description =='By User' || serviceExpense.description =='By Device'">hr(s)</div></div>
+      <div class="col-3">{{ serviceExpense.billableQuantity }} <b ng-hide="serviceExpense.description =='By User' || serviceExpense.description =='By Device'">hr(s)</b></div>
       <div class="col-4">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
       <div class="col-4">{{ serviceExpense.discountSum | currency: '$':2 }}</div>
       <div class="col-4">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
