@@ -34,7 +34,6 @@
         };
 
 
-
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;
 
