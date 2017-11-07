@@ -458,7 +458,12 @@
 .deposit-create.service-agreements {
   margin-bottom: 75px;
 }
-
+.agreement-list-dropdown{
+  min-width: 160px;
+  right: -5px;
+  top: 20px!important;
+  text-align: center;
+}
 .service-agreements-lists li [class*='col-md-'] {
   word-wrap: break-word;
 }
