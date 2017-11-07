@@ -94,6 +94,10 @@
             chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
           }, 50);
 
+          if($scope.blockTimeContract.interval == null) {
+            $scope.blockTimeContract.interval = $scope.blockTimeContract.customInterval + ' days';
+          }
+
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
@@ -116,7 +120,6 @@
 
         ServicesService.getServicesData($scope, function(resp){
           if(resp) {
-            console.log(resp);
             for(var i=0; i<resp.length; i++) {
               var s = {
                 name: resp[i].name,

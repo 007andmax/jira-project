@@ -106,6 +106,10 @@
             $scope.contractStatus = data.status;
           });
 
+          if($scope.serviceContract.interval == null) {
+            $scope.serviceContract.interval = $scope.serviceContract.customInterval + ' days';
+          }
+
           for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
             $scope.serviceContract.serviceContractServices[i].taxes = [];
             if ($scope.serviceContract.serviceContractServices[i].taxIds.length > 0) {
