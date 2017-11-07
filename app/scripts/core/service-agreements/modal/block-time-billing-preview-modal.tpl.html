@@ -221,7 +221,7 @@
             <div class="pull-left shared-user-add">
               <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"
                      ng-mousedown="validateNotifying(sharedUser, $event)">
-                <input type="checkbox" ng-model="sharedUser.notify">
+                <input type="checkbox" ng-model="sharedUser.notify" onclick="return false">
                 <span class="control-indicator"></span>
                 {{ getUserName(sharedUser.user) }}
               </label>

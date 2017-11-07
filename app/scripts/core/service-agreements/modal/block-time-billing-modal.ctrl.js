@@ -13,6 +13,7 @@
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
 
         $scope.parseDate = Date.parse.bind(Date);
+        $scope.allUsers = UsersService.getAllUsers();
 
         var preSettupServiceList = [
           {name: 'On site block time service'},
@@ -88,6 +89,7 @@
           $scope.blockTimeContract.minStartDate = Date.now();
           $scope.blockTimeContract.taxes = [];
           $scope.blockTimeContract.billForAdditionalService = false;
+          $scope.blockTimeContract.notifyBlockTimeUsed = $scope.blockTimeContract.shares.length>0;
           $timeout(function () {
             chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
           }, 50);
@@ -108,6 +110,7 @@
             $scope.blockTimeContract.billForAdditionalService = true;
 
           }
+          fillNotifyUsersList();
         }
 
 
@@ -177,6 +180,16 @@
             $scope.blockTimeContract.period = 'Year';
           }  else {
             $scope.blockTimeContract.period = $scope.blockTimeContract.customInterval;
+          }
+        }
+
+        function fillNotifyUsersList() {
+          for(var i=0; i<$scope.blockTimeContract.shares.length; i++) {
+            for(var u=0; u<$scope.allUsers.length; u++) {
+              if($scope.blockTimeContract.shares[i].userId === $scope.allUsers[u].id ) {
+                $scope.ticketSharedUsersList.push({ user: $scope.allUsers[u], notify: true });
+              }
+            }
           }
         }
 
@@ -563,7 +576,7 @@
         $scope.addContractService = function (form, service) {
           $scope.showAddButtonNewService = false;
           if (form.$valid) {
-            if (!service.name || service.nameValue.length < 1) {
+            if (!service.name ||  service.nameValue.length < 1) {
               showNewServiceNameError();
               $scope.showAddButtonNewService = true;
             } else {
@@ -575,7 +588,7 @@
                 validateNewServiceName(service.nameValue, 'service').then(function (resp) {
 
                   if (resp) {
-                    if (service.name.name && service.name.name.length && service.nameValue) {
+
                       var ns = {
                         name: service.nameValue,
                         rate: service.name.rate,
@@ -594,21 +607,7 @@
                       pickService(service.nameValue);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
-                    } else {
 
-                      $scope.blockTimeContract.services.push(service);
-                      $scope.newContractService = {
-                        name: '',
-                        rate: 0,
-                        billable: true,
-                        taxes: $scope.addDefaultTaxes(),
-                        nameValue: ''
-                      };
-                      pickService(service.nameValue);
-                      $scope.showAddButtonNewService = true;
-                      reInitServiceForm()
-
-                    }
                   }
                 }, function() {
                   $scope.showAddButtonNewService = true;
