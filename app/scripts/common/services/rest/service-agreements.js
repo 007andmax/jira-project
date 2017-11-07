@@ -92,6 +92,14 @@
         Utils.handleCallback(future, callback)
       }
 
+      function forceCreate(id, callback) {
+        var future = $http({
+          method: 'GET',
+          url: '/serviceAgreements/forceCreate?id=' + id
+        });
+        Utils.handleCallback(future, callback)
+      }
+
       function validateCrossingDatesHourly(startDate, endDate, companyId, callback) {
         var future = $http({
           method: 'GET',
@@ -109,6 +117,7 @@
         getAgreement: getAgreement,
         terminate: terminate,
         deleteAgreement: deleteAgreement,
+        forceCreate: forceCreate,
         validateCrossingDatesHourly: validateCrossingDatesHourly
       }
 

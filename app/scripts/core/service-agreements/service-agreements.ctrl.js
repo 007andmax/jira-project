@@ -91,6 +91,16 @@
           }
         };
 
+        $scope.forceCreate = function(agreement) {
+          if (agreement && agreement.id) {
+            AgreementsService.forceCreate(agreement.id, function(resp) {
+              UserNotificationService.show('Billable item created', true);
+              console.log('Billable item created', resp);
+
+            })
+          }
+        };
+
 
         $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
           var companyForReadOnlyMode = {};
