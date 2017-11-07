@@ -221,6 +221,11 @@ a.ha-24 {
   width: 18px;
   height: 4px;
 }
+.icn-more-grey{
+  background-position: -1636px 0;
+  width: 18px;
+  height: 4px;
+}
 
 :hover > .icn-more, :active > .icn-more, :focus:hover > .icn-more, :focus:active > .icn-more, :hover:active > .icn-more, .active > .icn-more, .open .icn-more {
   background-position: -2140px 0px;

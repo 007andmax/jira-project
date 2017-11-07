@@ -45,21 +45,33 @@
       </li>
       <div style="margin-top: 110px;">
       <li ng-repeat="agreement in agreementsList | orderBy: filterType"
-          class="content-product-list-ticket pointer clearfix"
-          ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
-        <div class="col-md-2">{{agreement.company.name}}</div>
-        <div class="col-md-3 col-width-3">{{agreement.description}}</div>
-        <div class="col-md-1 col-width-4" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}{{billTypeDictionary[agreement.billType]}}</div>
-        <div class="col-md-1" style="padding-left: 10px;" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{contractStatusDictionary[agreement.status]}}</div>
-        <div class="col-md-1">{{getDateInCorrectFormat(agreement.startDate)}}</div>
-        <div class="col-md-1">{{getDateInCorrectFormat(agreement.endDate)}}</div>
-        <div class="col-md-1 col-width-1">
+          class="content-product-list-ticket pointer clearfix">
+        <div class="col-md-2" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.company.name}}</div>
+        <div class="col-md-3 col-width-3" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.description}}</div>
+        <div class="col-md-1 col-width-4" ng-click="openAgreementsModal(agreement.type, false, agreement.id)" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}{{billTypeDictionary[agreement.billType]}}</div>
+        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)" style="padding-left: 10px;" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{contractStatusDictionary[agreement.status]}}</div>
+        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.startDate)}}</div>
+        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.endDate)}}</div>
+        <div class="col-md-1 col-width-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
           <div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
         </div>
         <div class="col-md-1 text-center">{{agreement.amount | number : 2}}</div>
-        <div class="col-md-1 text-center col-width-2" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">
-          <i class="icon-sm icn-delete" uib-tooltip="delete"
-             ng-click="deleteAgreement(agreement); $event.stopPropagation();"></i>
+        <div class="col-md-1 text-center col-width-2" uib-dropdown>
+          <!--<i class="icn-sm icn-more-grey" uib-tooltip="more"-->
+             <!--ng-click="deleteAgreement(agreement); $event.stopPropagation();"></i>-->
+          <a  class="hit-area ha-22-38 has-tooltip" tooltip-placement="top" uib-tooltip="More"
+             aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
+            <i class="icn-sm icn-more-grey"></i>
+          </a>
+          <ul class="dropdown-menu agreement-list-dropdown" role="menu" style="overflow: visible; font-size: 14.1px;">
+            <li>
+              <a tabindex="-1" href="javascript:void(0)" ng-click="deleteAgreement(agreement)" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">Delete agreement</a>
+            </li>
+            <li>
+              <a tabindex="-1" href="javascript:void(0)" ng-click="forceCreate(agreement)" ng-hide="agreement.status == 'TERMINATED' || agreement.status == 'EXPIRED' || agreement.type == 'HOURLY'" >Force create</a>
+            </li>
+          </ul>
+
         </div>
       </li>
       </div>

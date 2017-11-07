@@ -458,7 +458,12 @@
 .deposit-create.service-agreements {
   margin-bottom: 75px;
 }
-
+.agreement-list-dropdown{
+  min-width: 160px;
+  right: -5px;
+  top: 20px!important;
+  text-align: center;
+}
 .service-agreements-lists li [class*='col-md-'] {
   word-wrap: break-word;
 }
@@ -487,7 +492,9 @@
 .service-agreements-lists {
   text-align: left;
 }
-
+.service-agreements-lists a.ha-22-38{
+  height: 15px;
+}
 .service-agreements-lists li:first-child [class*='col-md-'] strong {
   cursor: pointer;
 }
