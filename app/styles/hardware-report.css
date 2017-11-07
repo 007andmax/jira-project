@@ -492,7 +492,9 @@
 .service-agreements-lists {
   text-align: left;
 }
-
+.service-agreements-lists a.ha-22-38{
+  height: 15px;
+}
 .service-agreements-lists li:first-child [class*='col-md-'] strong {
   cursor: pointer;
 }
