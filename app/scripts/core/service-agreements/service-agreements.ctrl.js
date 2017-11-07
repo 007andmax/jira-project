@@ -101,7 +101,6 @@
           }
         };
 
-
         $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
           var companyForReadOnlyMode = {};
           if (agreementId) {
