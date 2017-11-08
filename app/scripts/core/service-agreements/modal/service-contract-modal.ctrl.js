@@ -324,7 +324,11 @@
         }
 
         $scope.previewInterval = function () {
-          return $scope.serviceContract.customInterval || $scope.serviceContract.interval;
+          if($scope.serviceContract.customInterval) {
+            return $scope.serviceContract.customInterval + ' days';
+          } else {
+            return $scope.serviceContract.interval;
+          }
         };
 
         function changeStartDate() {

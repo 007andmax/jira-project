@@ -197,7 +197,11 @@
         }
 
         $scope.previewInterval = function() {
-          return $scope.blockTimeContract.customInterval || $scope.blockTimeContract.interval;
+          if($scope.blockTimeContract.customInterval) {
+            return $scope.blockTimeContract.customInterval + ' days';
+          } else {
+            return $scope.blockTimeContract.interval;
+          }
         };
 
 
