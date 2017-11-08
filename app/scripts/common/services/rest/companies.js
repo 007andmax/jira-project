@@ -775,6 +775,14 @@
       Utils.handleCallback(future, callback);
     }
 
+    function changePrimaryContact(id, callback) {
+      var future = $http({
+        method: 'GET',
+        url: '/company/resetPrimaryContact?userId='+id
+      });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -821,7 +829,8 @@
       isVendorHasProducts: isVendorHasProducts,
       saveInboxEnabled: saveInboxEnabled,
       getCompanyPaymentInfo: getCompanyPaymentInfo,
-      saveCompanyPaymentInfo: saveCompanyPaymentInfo
+      saveCompanyPaymentInfo: saveCompanyPaymentInfo,
+      changePrimaryContact: changePrimaryContact
     }
 
   }]);

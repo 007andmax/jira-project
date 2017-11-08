@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.usersTabCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, UsersService, SubscriptionsService, UserConfirmationsService) {
+    ['$scope', 'UsersService', 'SubscriptionsService',
+      'quicktech.common.services.UserConfirmationsService', 'CompaniesService',
+      function ($scope, UsersService, SubscriptionsService, UserConfirmationsService, CompaniesService) {
 
         $scope.changeUserRole = function (role) {
           UsersService.changeUserRole($scope.user.id, role)
@@ -28,6 +29,14 @@
           subscription[nameSubscription] = !subscription[nameSubscription];
 
           SubscriptionsService.saveUserSubscription(subscription);
+        };
+
+        $scope.changePrimaryContact = function(user) {
+          CompaniesService.changePrimaryContact(user.id, function(resp) {
+            if(resp) {
+              console.log(resp);
+            }
+          })
         };
 
         $scope.archiveUser = function () {
