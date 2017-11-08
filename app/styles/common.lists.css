@@ -147,6 +147,7 @@
   text-transform: capitalize;
   color: #000 !important;
   height: 30px;
+  text-align: left;
 }
 
 .with-category .qt-product-list > li > .col-1 {
