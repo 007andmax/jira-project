@@ -7564,6 +7564,15 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   background-color: #e2e6e6;
   transition: .2s all ease 0s;
 }
+.company-profile-content .nav-qt > li.active > a:after{
+  top: 87%;
+}
+.company-profile-content .nav-qt > li.active > a:before{
+  top: 95%;
+}
+.company-profile-content .nav-qt > li > a:before {
+  top: 95%;
+}
 
 .nav-qt > li > a:hover:before {
   background-color: #2c9fdd;
@@ -7698,9 +7707,11 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   background-color: #FFF;
   border-bottom: #e7ecf2 1px solid;
 }
+
 .contracts .qt-table .col-sm-3 .dropdown-menu {
-  width: 165%!important;
+  width: 165% !important;
 }
+
 .contracts .nav-ticket-add > li.active > a,
 .contracts .nav-ticket-add > li.active > a:hover,
 .contracts .nav-ticket-add > li.active > a:focus {

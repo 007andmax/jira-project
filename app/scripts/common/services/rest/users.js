@@ -618,6 +618,7 @@
         });
       }
 
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
