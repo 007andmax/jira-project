@@ -5,13 +5,30 @@
         <h4>Activity History</h4>
       </div>
 
-      <div class="clearfix" style="margin-bottom: 15px;">
-        <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="enableTwoFactorAuthentication"
-                 ng-change="toggle2FA(enableTwoFactorAuthentication)">
-          <span class="control-indicator"></span> two-factor authentication
-        </label>
-      </div>
+      <!--<div class="clearfix" style="margin-bottom: 15px;">-->
+        <!--<label class="control checkbox pull-left">-->
+          <!--<input type="checkbox" ng-model="enableTwoFactorAuthentication"-->
+                 <!--ng-change="toggle2FA(enableTwoFactorAuthentication)">-->
+          <!--<span class="control-indicator"></span> two-factor authentication-->
+        <!--</label>-->
+      <!--</div>-->
+
+
+        <div style="margin-bottom: 15px;">
+
+          <div uib-dropdown keyboard-nav="true">
+            <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                    uib-dropdown-toggle aria-expanded="true">
+              {{authenticationTypes[authenticationTypesType.value]}}
+            </button>
+            <i class="icn-sm icn-caret-gray"></i>
+            <ul class="dropdown-menu dropdown-account-type">
+              <li ng-repeat="(role, label) in authenticationTypes" ng-click="changeAuthenticationTypesType(role)">
+                <a href="javascript:void(0)"> {{ label }} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
       <div google-map class="activity-map" latitude="selectedDevice.latitude" longitude="selectedDevice.longitude"
            title="{{ (selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country }}"></div>

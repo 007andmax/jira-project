@@ -9,6 +9,12 @@
 
         $scope.selectedDevice = {};
 
+        $scope.authenticationTypes = {
+          DISABLED: 'No authentication',
+          BASIC: 'Basic two-factor authentication',
+          SECURE: 'Secure two-factor authentication'
+        };
+
         UsersService.getActivityHistory(function (resp) {
           $scope.activityHistory = resp;
           $scope.selectedDevice = currentDevice = resp.find(function (device) {
@@ -17,8 +23,18 @@
         });
 
         UsersService.get2FA(function (resp) {
-          $scope.enableTwoFactorAuthentication = resp;
+          $scope.authenticationTypesType = resp;
         });
+
+        $scope.changeAuthenticationTypesType = function(type) {
+          console.log(type);
+          if(type) {
+            $scope.authenticationTypesType.value = type;
+            UsersService.toggle2FA(type, function(resp) {
+              console.log(resp);
+            })
+          }
+        };
 
         $scope.closeSession = function (event, device) {
           var idsForDelete;
@@ -51,9 +67,9 @@
           $scope.selectedDevice = device;
         };
 
-        $scope.toggle2FA = function (isEnabled) {
-          UsersService.toggle2FA(isEnabled);
-        };
+        // $scope.toggle2FA = function (isEnabled) {
+        //   UsersService.toggle2FA(isEnabled);
+        // };
 
       }]);
 

@@ -564,8 +564,8 @@
         Utils.handleCallback(future, callback);
       }
 
-      function toggle2FA(isEnabled, callback) {
-        var future = $http.post('/users/twoFactorAuth?enable=' + isEnabled, {});
+      function toggle2FA(type, callback) {
+        var future = $http.post('/users/twoFactorAuth?type=' + type, {});
         Utils.handleCallback(future, callback);
       }
 
