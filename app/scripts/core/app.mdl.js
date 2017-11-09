@@ -274,8 +274,8 @@
           templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('tickets-report', waitForServices({
-          url: '/reports/tickets-report',
+        .state('ticket-report', waitForServices({
+          url: '/reports/ticket-report',
           templateUrl: '/html/scripts/core/reports/reports-templates/tickets-report.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))

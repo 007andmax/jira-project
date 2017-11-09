@@ -17,7 +17,8 @@
       isRadioButtonHidden: '@?',
       isDateRangeHidden: '@?',
       isShowTechSelectField: '@?',
-      isReportAvailable: '='
+      isReportAvailable: '=',
+      isCustomerTicketOptions: '@?'
     },
     controller: reportMenuCtrl
   });
@@ -39,6 +40,7 @@
     $ctrl.isRadioButtonHidden = $scope.$eval($ctrl.isRadioButtonHidden);
     $ctrl.isDateRangeHidden = $scope.$eval($ctrl.isDateRangeHidden);
     $ctrl.isShowTechSelectField = $scope.$eval($ctrl.isShowTechSelectField);
+    $ctrl.isCustomerTicketOptions = $scope.$eval($ctrl.isCustomerTicketOptions);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -46,6 +48,10 @@
     $ctrl.currentUser = UsersService.getCurrentUser();
 
     $scope.maxDateForDateRangeInputField = Date.now();
+    $scope.customerTicketWithTimeSpent = true;
+    $scope.customerTicketWithResponseTime = true;
+    $scope.customerTicketTypes = ['Simple report', 'Extended report'];
+    $scope.customerTicketType = 'Simple report';
     $scope.reportTypes = ['Summary', 'Detailed'];
     $scope.reportType = "Summary";
     $scope.techReportTypes = ['Billed time', 'Product sold'];
