@@ -20,8 +20,8 @@
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
                     uib-dropdown-toggle aria-expanded="true">
               {{authenticationTypes[authenticationTypesType.value]}}
+              <i class="icn-sm icn-caret-gray" style="position: absolute;top: 12px;right: 10px;"></i>
             </button>
-            <i class="icn-sm icn-caret-gray"></i>
             <ul class="dropdown-menu dropdown-account-type">
               <li ng-repeat="(role, label) in authenticationTypes" ng-click="changeAuthenticationTypesType(role)">
                 <a href="javascript:void(0)"> {{ label }} </a>
