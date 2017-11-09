@@ -8,6 +8,7 @@
               ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
         Report
       </button>
+
       <div class="device-report dropdown-remote-report-tech form-group" ng-show="$ctrl.isShowTechSelectField">
         <input type="text"
                class="form-control has-dropdown-with-label"
@@ -35,6 +36,7 @@
         </div>
 
       </div>
+
       <div class="device-report form-group" ng-hide="$ctrl.isDeviceHidden">
         <input type="text"
                class="form-control has-dropdown-with-label"
@@ -55,6 +57,38 @@
           <span class="x-mark ng-hide" ng-hide="showClearIcon">
             <i class="report-caret-icon"></i>
           </span>
+        </div>
+      </div>
+
+      <div class="form-group content" ng-hide="$ctrl.isRadioButtonHidden">
+        <div uib-dropdown>
+          <input type="text"
+                 name="reportType"
+                 ng-model="reportType"
+                 autocomplete="off"
+                 tabindex="3"
+                 class="form-control form-control-dropdown dropdown-toggle"
+                 uib-typeahead="type for type in reportTypes"
+                 qt-typeahead-async-show-on-focus
+                 readonly
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+        </div>
+      </div>
+
+      <div class="form-group content" ng-show="$ctrl.isCustomerTicketOptions">
+        <div uib-dropdown>
+          <input type="text"
+                 name="customerTicketType"
+                 ng-model="customerTicketType"
+                 autocomplete="off"
+                 tabindex="3"
+                 class="form-control form-control-dropdown dropdown-toggle"
+                 uib-typeahead="type for type in customerTicketTypes"
+                 qt-typeahead-async-show-on-focus
+                 readonly
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
         </div>
       </div>
 
@@ -103,53 +137,20 @@
 
         </div>
       </div>
-      <div class="form-group content" ng-hide="$ctrl.isRadioButtonHidden">
-        <div uib-dropdown>
-          <input type="text"
-                 name="reportType"
-                 ng-model="reportType"
-                 autocomplete="off"
-                 tabindex="3"
-                 class="form-control form-control-dropdown dropdown-toggle"
-                 uib-typeahead="type for type in reportTypes"
-                 qt-typeahead-async-show-on-focus
-                 readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-        </div>
-      </div>
-
-      <div class="form-group content" ng-show="$ctrl.isCustomerTicketOptions">
-        <div uib-dropdown>
-          <input type="text"
-                 name="customerTicketType"
-                 ng-model="customerTicketType"
-                 autocomplete="off"
-                 tabindex="3"
-                 class="form-control form-control-dropdown dropdown-toggle"
-                 uib-typeahead="type for type in customerTicketTypes"
-                 qt-typeahead-async-show-on-focus
-                 readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-
-        </div>
-      </div>
-
-      <div ng-show="$ctrl.isCustomerTicketOptions">
-        <p><strong>What to include</strong></p>
-        <div>
-          <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithTimeSpent">
-            <span class="control-indicator"></span>
-            Time spent
-          </label>
-        </div>
-        <div>
-          <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithResponseTime">
-            <span class="control-indicator"></span>
-            Average response time
-          </label>
+      <div ng-show="$ctrl.isCustomerTicketOptions" class="col-md-7">
+        <div class="include-ticket-report">
+          <p>What to include</p>
+            <label class="control checkbox">
+              <input type="checkbox" ng-model="customerTicketWithTimeSpent">
+              <span class="control-indicator"></span>
+              Time spent
+            </label>
+            <label class="control checkbox">
+              <input type="checkbox" ng-model="customerTicketWithResponseTime">
+              <span class="control-indicator"></span>
+              Average response time
+            </label>
         </div>
       </div>
     </div>
