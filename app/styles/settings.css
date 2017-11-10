@@ -159,7 +159,10 @@
 .settings-main-wrapper.activity-history{
   width: 700px;
 }
-
+.activity-history button,
+.activity-history .dropdown-menu{
+  width: 280px;
+}
 .activity-map{
   width: 700px !important;
 }
