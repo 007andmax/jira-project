@@ -263,6 +263,20 @@
           }
           lastSentData = dataToSend;
           $scope.$emit("requestReportData", dataToSend, location, techType);
+
+        } else if(location === '/reports/ticket-report') {
+          if (reportSettings.company) {
+            var dataToSend = {
+              company: reportSettings.company,
+              companyId: reportSettings.company.id
+              extendedReport: ($scope.customerTicketTypes === 'Extended report'),
+              withResponseTime: $scope.customerTicketWithResponseTime,
+              withTimeSpent: $scope.customerTicketWithTimeSpent
+            };
+
+          } else {
+            $scope.errorNassageForCompany = false;
+          }
         } else {
           $scope.errorNassageForDate = false;
         }
