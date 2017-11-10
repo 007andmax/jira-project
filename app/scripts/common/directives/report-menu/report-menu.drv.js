@@ -234,7 +234,6 @@
             }
           }
 
-
         } else if ($scope.startDate && $scope.endDate) {
           var dataToSend = {
             type: type
