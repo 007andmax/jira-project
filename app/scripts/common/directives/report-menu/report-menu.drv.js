@@ -268,7 +268,7 @@
           if (reportSettings.company) {
             var dataToSend = {
               company: reportSettings.company,
-              companyId: reportSettings.company.id
+              companyId: reportSettings.company.id,
               extendedReport: ($scope.customerTicketTypes === 'Extended report'),
               withResponseTime: $scope.customerTicketWithResponseTime,
               withTimeSpent: $scope.customerTicketWithTimeSpent
