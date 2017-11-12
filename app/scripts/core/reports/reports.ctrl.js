@@ -3,7 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', function ($scope, ReportsService, $timeout, PermissionsService) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService',
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -149,6 +150,30 @@
         })
       }
 
+      function gerReportTicketReport(data) {
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+        StatisticsService.getCustomerTicketReport(data, function (resp){
+          if(resp) {
+            $scope.ticketReport = resp;
+            if (resp.ticketsPerDate && resp.ticketsPerDate.length) {
+              $scope.reportChartData = [];
+              for (var i = 0; i < resp.ticketsPerDate.length; i++) {
+                var item = resp.ticketsPerDate[i];
+                if (item.ticketResolved) {
+                  $scope.reportChartData.push(item);
+                }
+              }
+            }
+
+            $scope.ticketReport.startDate = new Date(resp.startDate);
+            $scope.ticketReport.endDate = new Date(resp.endDate);
+            $scope.loadingInProgress = false;
+            $scope.isReportAvailable = true;
+          }
+        })
+      }
+
 
       $scope.changeReportPageView = function (reportType) {
         $scope.reportPageType = reportType;
@@ -191,6 +216,10 @@
             case('/reports/accountsReceivable'):
               getReportAccountsReceivable(data);
               $scope.reportName = 'accounts_receivable';
+              break;
+            case('/reports/ticket-report'):
+              console.log('/reports/ticket-report');
+              gerReportTicketReport(data);
               break;
             default:
               console.log("wrong location")

@@ -23,8 +23,8 @@
     controller: reportMenuCtrl
   });
 
-  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService'];
-  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService) {
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter'];
+  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.exportFileToCsv = exportFileToCsv;
@@ -34,6 +34,8 @@
     this.emailSent = emailSent;
     this.setTechReportDateType = setTechReportDateType;
     this.sendTechDataRequest = sendTechDataRequest;
+
+    var now = Date.now();
 
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
@@ -194,6 +196,23 @@
                 $scope.errorNassageForDate = false;
               }
             }
+          } else if(location === '/reports/ticket-report') {
+            if (reportSettings.company) {
+              var dataToSend = {
+                company: reportSettings.company,
+                companyId: reportSettings.company.id,
+                extendedReport: ($scope.customerTicketTypes === 'Extended report'),
+                withResponseTime: $scope.customerTicketWithResponseTime,
+                withTimeSpent: $scope.customerTicketWithTimeSpent,
+                startDate: $filter('date')(new Date(reportSettings.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date(reportSettings.endDate || now), 'yyyy/MM/dd')
+              };
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+
+            } else {
+              $scope.errorNassageForCompany = false;
+            }
           } else {
             var dataToSend = {
               type: type
@@ -264,19 +283,6 @@
           lastSentData = dataToSend;
           $scope.$emit("requestReportData", dataToSend, location, techType);
 
-        } else if(location === '/reports/ticket-report') {
-          if (reportSettings.company) {
-            var dataToSend = {
-              company: reportSettings.company,
-              companyId: reportSettings.company.id,
-              extendedReport: ($scope.customerTicketTypes === 'Extended report'),
-              withResponseTime: $scope.customerTicketWithResponseTime,
-              withTimeSpent: $scope.customerTicketWithTimeSpent
-            };
-
-          } else {
-            $scope.errorNassageForCompany = false;
-          }
         } else {
           $scope.errorNassageForDate = false;
         }
