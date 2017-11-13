@@ -201,7 +201,7 @@
               var dataToSend = {
                 company: reportSettings.company,
                 companyId: reportSettings.company.id,
-                extendedReport: ($scope.customerTicketTypes === 'Extended report'),
+                extendedReport: ($scope.customerTicketType === 'Extended report'),
                 withResponseTime: $scope.customerTicketWithResponseTime,
                 withTimeSpent: $scope.customerTicketWithTimeSpent,
                 startDate: $filter('date')(new Date(reportSettings.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
