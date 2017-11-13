@@ -1,5 +1,10 @@
-<div class="hardware-wrap" prevent-hash-change="close()" convert-to-pdf="/customerReport/pdf" id="{{ data.id }}"
-     selector=".customer-ticket__report" disable-selector=".open-pdf-btn" file-name="{{ getPdfName(data) }}"
+<div class="hardware-wrap"
+     prevent-hash-change="close()"
+     convert-to-pdf="/customerReport/pdf"
+     id="{{ data.id }}"
+     selector=".customer-ticket__report"
+     disable-selector=".open-pdf-btn"
+     file-name="{{ getPdfName(data) }}"
      ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
   <div class="hardware">
     <div class="hardware__control-panel" style="width: 150px;">
