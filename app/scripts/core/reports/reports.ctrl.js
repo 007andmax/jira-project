@@ -218,8 +218,8 @@
               $scope.reportName = 'accounts_receivable';
               break;
             case('/reports/ticket-report'):
-              console.log('/reports/ticket-report');
               gerReportTicketReport(data);
+              $scope.reportName = 'ticket-report';
               break;
             default:
               console.log("wrong location")

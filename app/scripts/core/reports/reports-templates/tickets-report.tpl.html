@@ -1,9 +1,10 @@
 <div class="product-list-report ticket-report"
-     convert-to-pdf="/reports//pdf"
+     convert-to-pdf="/customerReport/pdf"
      email-endpoint="/reports/email"
      selector=".customer-ticket__report"
      disable-selector=".open-pdf-btn"
-     file-name="{{ reportName }}">
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
   <p class="report-title">Tickets Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
