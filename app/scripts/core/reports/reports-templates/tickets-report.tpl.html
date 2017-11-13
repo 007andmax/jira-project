@@ -107,31 +107,35 @@
                 </p>
               </div>
             </div>
-            <div class="col-md-12" ng-if="ticket.description">
-              <p class="text-uppercase fz-13"><strong>Description</strong></p>
-              <p class="details-futures-info" ng-bind-html="getTrustedHtml(ticket.description)"></p>
+            <div ng-if="ticket.description">
+              <p class="text-uppercase fz-13" style="padding: 0 5px;"><strong>Description</strong></p>
+              <p class="details-futures-info">
+                <span class="col-md-12" ng-bind-html="getTrustedHtml(ticket.description)"></span>
+              </p>
             </div>
+
             <div ng-if="ticketReport.extendedReport">
               <div ng-repeat="update in ticket.updates">
                 <div ng-if="update.note">
-                  <p><strong>Notes:</strong></p>
+                  <p class="text-uppercase fz-13"><strong>Notes:</strong></p>
                   <p class="details-futures-info" ng-bind-html="getTrustedHtml(update.note)"></p>
                 </div>
-                <div class="dont-break" ng-repeat="expense in update.expenses"
+
+                <div class="extended-report" ng-repeat="expense in update.expenses"
                      ng-if="update.expenses && update.expenses.length">
-                  <p><strong>{{ update.type[0] + update.type.slice(1).toLowerCase() }}</strong></p>
+                  <p class="text-uppercase fz-13 col-md-4" style="padding-bottom: 0;"><strong>{{ update.type[0] + update.type.slice(1).toLowerCase() }}</strong></p>
+                  <p class="col-md-3" style="padding-bottom: 0;" ng-if="expense.ilc"><strong>ILC:</strong> {{ expense.ilc }}</p>
+                  <p class="col-md-3" style="padding-bottom: 0;" ng-if="expense.manufacture"><strong>P/N:</strong>{{ expense.manufacture }}</p>
                   <div class="details-futures-info" ng-if="update.type === 'PRODUCT'">
-                    <span ng-if="expense.ilc"><strong>ILC:</strong> {{ expense.ilc }}</span>
-                    <span ng-if="expense.manufacture"><strong>P/N:</strong> {{ expense.manufacture }}</span>
-                    <span><strong>Name:</strong> {{ expense.name }}</span>
-                    <span><strong>Quantity:</strong> {{ expense.quantity }}</span>
-                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
+                    <div class="col-md-4"><strong>Name:</strong> {{ expense.name }}</div>
+                    <div class="col-md-2"><strong>Quantity:</strong> {{ expense.quantity }}</div>
+                    <div class="col-md-3"><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</div>
                   </div>
 
                   <div class="details-futures-info" ng-if="update.type === 'SERVICE'">
-                    <span><strong>Name:</strong> {{ expense.name }}</span>
-                    <span><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</span>
-                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
+                    <div class="col-md-4"><strong>Name:</strong> {{ expense.name }}</div>
+                    <div class="col-md-2"><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</div>
+                    <div class="col-md-3"><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</div>
                   </div>
                 </div>
               </div>

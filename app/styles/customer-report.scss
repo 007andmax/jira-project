@@ -11,44 +11,35 @@
     &--details-plus {
       padding: 15px;
       border-bottom: 1px solid #bbb;
-      table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0 10px;
+    }
+  }
+  &--summary {
+    .summary-chart {
+      width: 75%;
+    }
+    .time-info {
+      border: 1px solid #eee;
+      text-align: center;
+      p {
+        margin: 5px 0;
       }
-      .details-futures-info {
-        border: 1px solid #eee;
-        min-height: 50px;
-        padding: 5px;
+      h4 {
+        margin: 10px 0;
       }
     }
-    &--summary {
-      .summary-chart {
-        width: 75%;
-      }
-      .time-info {
-        border: 1px solid #eee;
-        text-align: center;
-        p {
-          margin: 5px 0;
-        }
-        h4 {
-          margin: 10px 0;
-        }
-      }
-    }
-    &--details-plus {
-      border-bottom: none;
-    }
+  }
+  &--details-plus {
+    border-bottom: none;
   }
 }
 
 .customer-report-modal {
   padding: 15px;
-  h2.col-sm-12{
+  h2.col-sm-12 {
     margin-top: 0;
   }
 }
+
 
 .report-info-point {
   border-top: 1px solid #bbb;
