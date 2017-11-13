@@ -41,11 +41,6 @@
   top: 2px;
 }
 
-.hardware {
-  /*width: 80%;*/
-  margin: 20px auto;
-}
-
 .main-info--gadget {
   width: 40%;
   display: inline-block;
@@ -85,7 +80,7 @@
 
 .hardware__control-panel {
   width: 400px;
-  margin: auto;
+  margin: 0 auto 100px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -458,11 +453,13 @@
 .deposit-create.service-agreements {
   margin-bottom: 75px;
 }
-.agreement-list-dropdown{
+
+.agreement-list-dropdown {
   min-width: 160px;
   right: -5px;
-  top: 20px!important;
+  top: 20px !important;
 }
+
 .service-agreements-lists li [class*='col-md-'] {
   word-wrap: break-word;
 }
@@ -491,9 +488,11 @@
 .service-agreements-lists {
   text-align: left;
 }
-.service-agreements-lists a.ha-22-38{
+
+.service-agreements-lists a.ha-22-38 {
   height: 15px;
 }
+
 .service-agreements-lists li:first-child [class*='col-md-'] strong {
   cursor: pointer;
 }
@@ -893,21 +892,22 @@
   position: absolute;
   top: 10px;
 }
-.ticket-report .content{
-  padding-bottom: 0!important;
-}
+
 .run-report-content .content p,
 .run-report-content .device-report p {
   font-size: 18px;
   margin-bottom: 10px;
 }
-.include-ticket-report{
+
+.include-ticket-report {
   float: right;
   margin-right: 24px;
 }
-.include-ticket-report label{
+
+.include-ticket-report label {
   margin-right: 20px;
 }
+
 .run-report-content input,
 .detailed-radio .customer-names,
 .customer-list-header input {
@@ -1340,12 +1340,14 @@
 }
 
 @media screen and (max-width: 1600px) {
-  .service-agreements-lists .col-width-3{
+  .service-agreements-lists .col-width-3 {
     width: 22.2%;
   }
-  .service-agreements-lists .col-width-4{
+
+  .service-agreements-lists .col-width-4 {
     width: 14.3%;
   }
+
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -60px;
   }

@@ -1,20 +1,20 @@
-.customer-ticket {
-  width: 768px;
-  margin: 30px auto;
-  padding: 15px;
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35); }
+.customer-ticket{}
+  p{
+    font-weight: 600;
+  }
   .customer-ticket__report {
-    border: 1px solid #bbb;
     width: 100%; }
-    .customer-ticket__report--summary, .customer-ticket__report--details, .customer-ticket__report--details-plus {
+    .customer-ticket__report--details{
+      padding: 15px; }
+    .customer-ticket__report--summary, .customer-ticket__report--details-plus {
       padding: 15px;
-      border-bottom: 1px solid #bbb; }
+      border-bottom: 1px solid #d3d8e1; }
       .customer-ticket__report--summary table, .customer-ticket__report--details table, .customer-ticket__report--details-plus table {
         width: 100%;
         border-collapse: separate;
         border-spacing: 0 10px; }
-      .customer-ticket__report--summary .details-futures-info, .customer-ticket__report--details .details-futures-info, .customer-ticket__report--details-plus .details-futures-info {
-        border: 1px solid #eee;
+      .customer-ticket__report--summary .details-futures-info, .customer-ticket__report--details-plus .details-futures-info {
+        border: 1px solid #d3d8e1;
         min-height: 50px;
         padding: 5px; }
     .customer-ticket__report--summary .summary-chart {
@@ -35,11 +35,7 @@
     margin-top: 0; }
 
 .report-info-point {
-  border-top: 1px solid #bbb;
-  border-bottom: 1px solid #bbb;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 10px; }
+  border-bottom: 1px solid #d3d8e1; }
 
 .legend-customer {
   list-style-type: none;
@@ -54,5 +50,7 @@
       color: #4caf50; }
     .legend-customer li.unresolved:before {
       color: #0071bc; }
-
+.fz-13{
+  font-size: 13px;
+}
 /*# sourceMappingURL=customer-report.scss.map */
