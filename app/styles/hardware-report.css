@@ -11,7 +11,9 @@
     page-break-inside: avoid;
   }
 }
-
+.hardware{
+  margin-top: 20px;
+}
 .hardware-wrap {
   position: fixed;
   top: 0;
