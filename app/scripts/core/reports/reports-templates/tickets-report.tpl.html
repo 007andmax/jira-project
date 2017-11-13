@@ -1,5 +1,9 @@
-<div class="product-list-report ticket-report" convert-to-pdf="/reports//pdf" email-endpoint="/reports/email"
-     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/reports//pdf"
+     email-endpoint="/reports/email"
+     selector=".customer-ticket__report"
+     disable-selector=".open-pdf-btn"
+     file-name="{{ reportName }}">
   <p class="report-title">Tickets Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
@@ -13,7 +17,7 @@
                  is-show-tech-select-field="true"
                  is-radio-button-hidden="true"
                  is-device-hidden="true"
-    is-customer-ticket-options="true">
+                 is-customer-ticket-options="true">
 
     </report-menu>
   </div>

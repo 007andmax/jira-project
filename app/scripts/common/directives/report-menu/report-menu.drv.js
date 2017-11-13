@@ -36,6 +36,7 @@
     this.sendTechDataRequest = sendTechDataRequest;
 
     var now = Date.now();
+    var agentsByCompany = [];
 
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
@@ -165,6 +166,7 @@
 
 
     function sendReportRequest(reportSettings) {
+      $scope.errorNassageForCompany = true;
 
       if (!$ctrl.isTechReport) {
         var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
@@ -329,7 +331,6 @@
       }
     }
 
-    var agentsByCompany = [];
 
     DevicesService.getDevicesCount($scope, function (agents) {
       agentsByCompany = agents;
