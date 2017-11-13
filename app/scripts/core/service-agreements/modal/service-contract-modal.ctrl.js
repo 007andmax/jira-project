@@ -1210,6 +1210,8 @@
             if (servContract.billType === 'OTHER') {
               servContract.serviceExpenses = [];
               servContract.productExpenses = []
+            } else {
+              servContract.invoiceAsSingleItem = serviceContract.invoiceAsSingleItem;
             }
 
             if ($scope.serviceContract.interval === 'MONTHLY' || $scope.serviceContract.interval === 'YEARLY') {
