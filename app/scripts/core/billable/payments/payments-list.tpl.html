@@ -1,7 +1,8 @@
 <div class="deposit-create">
   <div class="product-list-ticket clearfix">
     <ul>
-      <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix">
+      <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix fixed-block-top"
+          fixed-block-top offset-top="160" style="background-color: white">
         <div class="col-md-1" ng-click="changeOrder('createdAt')"><strong>Date</strong></div>
         <div class="col-md-3" ng-click="changeOrder('clientCompanyName')"><strong>Company</strong></div>
         <div class="col-md-1" ng-click="changeOrder('invoiceNumbers')"><strong>Invoice</strong></div>
@@ -10,7 +11,9 @@
         <!--<div class="col-md-2"><strong>Status</strong><i class="icn-sm icn-caret-gray"></i></div>-->
         <div class="col-md-2" style="text-align: right; width: 18%;" ng-click="changeOrder('totalSum')"><strong>Total</strong></div>
       </li>
-      <li class="content-product-list-ticket clearfix" ng-repeat = "payment in payments | orderBy: orderType">
+      <div style="margin-top: 50px">
+      <li class="content-product-list-ticket clearfix"
+          ng-repeat="payment in payments | orderBy: orderType">
         <div class="col-md-1">
           <label class="control checkbox pull-left ng-scope" ng-hide="mode === 'deposit-slips'">
             <input type="checkbox" ng-model="idDictionary[payment.id]">
@@ -31,6 +34,7 @@
           </span>
         </div>
       </li>
+      </div>
     </ul>
   </div>
 </div>

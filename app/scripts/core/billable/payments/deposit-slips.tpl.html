@@ -1,13 +1,15 @@
 <div class="deposit-split">
   <div class="product-list-ticket product-list-ticket-deposit">
     <ul>
-      <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix">
+      <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix"
+          >
         <div class="col-md-1"><strong>Date</strong></div>
         <div class="col-md-1"><strong>Number</strong></div>
         <div class="col-md-3"><strong>Note</strong></div>
         <div class="col-md-2"><strong>Type</strong></div>
         <div class="col-md-2" style="text-align: right"><strong>Total Amount</strong></div>
       </li>
+      <div>
       <li class="content-product-list-ticket clearfix" style="position: relative;" ng-repeat="slip in depositSlips"
           ng-init="payments = slip.payments" event-toggle-slider="{{ 'toggleDepositSlip-' + slip.id }}">
         <div class="click-content-deposit-slips">
@@ -24,6 +26,7 @@
           <div ng-include="'/html/scripts/core/billable/payments/payments-list.tpl.html'"></div>
         </div>
       </li>
+      </div>
     </ul>
   </div>
 </div>
