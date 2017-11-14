@@ -18,6 +18,11 @@
         $scope.getUserById = UsersService.getOneById;
         $scope.getUserName = $rootScope.getUserName;
         $scope.dateParse = Date.parse.bind(Date);
+        // $scope.showTotalAmount = true;
+        //
+        // $scope.$on('changeShowTotalAmount', function(response){
+        //   $scope.showTotalAmount = response;
+        // });
 
         $scope.$watch('data', function (data) {
           if (data) {
@@ -35,6 +40,7 @@
             data.endDate = new Date(data.endDate);
           }
         });
+
 
         $scope.parseDate = function (values) {
           var result = [];

@@ -65,6 +65,13 @@
         Average response time
       </label>
     </div>
+    <div>
+      <label class="control checkbox">
+        <input type="checkbox" ng-model="dto.showTotalTicketAmount">
+        <span class="control-indicator"></span>
+        Total amount of tickets
+      </label>
+    </div>
     <button class="btn btn-lg btn-primary pull-right" append-html-to-body
             data="customerReport" custom-disabled="{{ customerReportForm.$invalid }}"
             url="/html/scripts/core/left-panel/customer-ticket-report/customer-ticket-report.tpl.html"

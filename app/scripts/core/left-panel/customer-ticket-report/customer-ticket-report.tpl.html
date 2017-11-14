@@ -23,6 +23,7 @@
               <span class="pull-right" style="font-size: 14px;min-width: 170px">
               {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
             </span>
+              <span ng-if="data.showTotalTicketAmount" class="pull-right" style="font-size: 14px;min-width: 170px">Total Amount: {{data.tickets.length  }}</span>
             </h4>
           </div>
           <table>
