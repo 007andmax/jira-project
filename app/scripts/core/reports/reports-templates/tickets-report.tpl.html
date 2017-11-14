@@ -28,7 +28,7 @@
     <div class="customer-ticket" ng-if="ticketReport && isReportAvailable">
       <div class="customer-ticket__report">
         <div class="customer-ticket__report--summary">
-          <h3>Resolved tickets</h3>
+          <h3>Resolved tickets</h3> <span ng-if="ticketReport.showTotalTicketAmount" class="pull-right"> Total amount: {{ticketReport.tickets.length}}</span>
           <div class="header-product-list-ticket">
             <h3>
               {{ getCompanyById(ticketReport.companyId).name + (ticketReport.userId ? ', ' + getUserName(getUserById(ticketReport.userId)) : '')

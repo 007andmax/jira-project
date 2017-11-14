@@ -53,6 +53,7 @@
     $scope.maxDateForDateRangeInputField = Date.now();
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
+    $scope.customerTicketShowTotalTicketAmount = true;
     $scope.customerTicketTypes = ['Simple report', 'Extended report'];
     $scope.customerTicketType = 'Simple report';
     $scope.reportTypes = ['Summary', 'Detailed'];
@@ -206,6 +207,7 @@
                 extendedReport: ($scope.customerTicketType === 'Extended report'),
                 withResponseTime: $scope.customerTicketWithResponseTime,
                 withTimeSpent: $scope.customerTicketWithTimeSpent,
+                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
                 startDate: $filter('date')(new Date(reportSettings.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date(reportSettings.endDate || now), 'yyyy/MM/dd')
               };

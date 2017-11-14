@@ -156,6 +156,7 @@
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
             $scope.ticketReport = resp;
+            $scope.ticketReport.showTotalTicketAmount = $scope.customerTicketShowTotalTicketAmount;
             if (resp.ticketsPerDate && resp.ticketsPerDate.length) {
               $scope.reportChartData = [];
               for (var i = 0; i < resp.ticketsPerDate.length; i++) {
@@ -219,6 +220,7 @@
               break;
             case('/reports/ticket-report'):
               gerReportTicketReport(data);
+              $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
               $scope.reportName = 'ticket-report';
               break;
             default:
