@@ -9,6 +9,9 @@
           restrict: 'A',
           link: function (scope, element) {
 
+            scope.taxIdPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/;
+            scope.taxIdDescriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/;
+
             var invoiceParams = {},
               numberInput = element.find('[ic-number-input]'),
               termsInput = element.find('[ic-terms-input]'),
@@ -18,6 +21,19 @@
               count: '',
               term: '',
               termsAndConditions: ''
+            };
+            scope.taxIdData = {
+              taxIdDescription: '',
+              taxId: ''
+            };
+            EmailSettingsService.getTaxNumber(function(resp) {
+              scope.taxIdData = resp;
+            });
+
+            scope.changeTaxIdData = function() {
+              EmailSettingsService.updateTaxNumber(scope.taxIdData, function(resp) {
+                console.log(resp);
+              })
             };
 
             EmailSettingsService.getTermsAndConditions(function (invoiceInfo) {

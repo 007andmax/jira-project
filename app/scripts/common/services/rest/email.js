@@ -181,6 +181,23 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getTaxNumber(callback) {
+      var future = $http({
+        method: 'GET',
+        url: '/settings/emailPages/taxNumber'
+      });
+      Utils.handleCallback(future, callback);
+    }
+
+    function updateTaxNumber(data, callback) {
+      var future = $http({
+        method: 'PUT',
+        url: '/settings/emailPages/taxNumber',
+        data: data
+      });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       saveNumberForm: saveNumberForm,
       getCompanyEmailNotification: getCompanyEmailNotification,
@@ -192,7 +209,9 @@
       getHtmlForPreview: getHtmlForPreview,
       getInvoiceContact: getInvoiceContact,
       saveInvoiceContact: saveInvoiceContact,
-      toggleInvoiceContact: toggleInvoiceContact
+      toggleInvoiceContact: toggleInvoiceContact,
+      getTaxNumber: getTaxNumber,
+      updateTaxNumber: updateTaxNumber
     }
   }
   ]);
