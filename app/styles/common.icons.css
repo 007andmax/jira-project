@@ -339,7 +339,11 @@ a.ha-24 {
 .ticket-add-content [class*='col-'] {
   float: left;
 }
-
+.ticket-add-content .service-add-width .absolute-stick-datepicker{
+  width: 14px;
+  height: 16px;
+  top: 12px;
+}
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
   width: 18px;
   height: 18px;
