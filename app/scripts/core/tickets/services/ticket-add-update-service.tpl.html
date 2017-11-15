@@ -53,7 +53,7 @@
                name="serviceDescription" max-length-word="100"/>
       </div>
 
-      <div class="col-4" style="width: 60px;">
+      <div class="col-4" style="width: 30px;">
         <div>
           <div>
             <i class="icon-sm sale-icon-for-isDicount"
@@ -82,7 +82,7 @@
       </div>
 
 
-      <div style="width: 43px;" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+      <div style="width: 35px; margin-left: 10px;" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
         <div>
           <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
                  qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
@@ -93,7 +93,7 @@
         </div>
       </div>
 
-      <div style="width: 25px">
+      <div style="width: 58px">
         <div class="col-5"  style="float: left; width: 36px;">
               <span class="has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
                     ng-click="removeService()">

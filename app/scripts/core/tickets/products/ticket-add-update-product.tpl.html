@@ -102,27 +102,27 @@
                  hard-reset-pattern="pricePattern" hard-reset-required="true"/>
         </div>
 
-        <div class="col-4" style="width: 60px; float: left;">
+        <div class="col-4" style="width: 32px; float: left;">
           <i class="icon-sm"
              ng-class="isDiscountIconGreen(productExpense) ? 'sale-icon-for-isDicount-green' : 'sale-icon-for-isDicount' "
              ng-click="isShowInputField = !isShowInputField; isShowBarcotInputField = fasle"
              uib-tooltip="Discount"></i>
         </div>
 
-        <div class="col-4" style="width: 50px;float: left;padding-top: 6px; cursor: pointer;">
+        <div class="col-4" style="width: 32px;float: left;padding-top: 6px; cursor: pointer;">
           <i class="icon-sm" uib-tooltip="Serial number"
              ng-class="isBarcodeIconGreen(productExpense) ? 'barcode-icon-green' : 'barcode-icon' "
              ng-click="isShowBarcotInputField = !isShowBarcotInputField; isShowInputField = false"></i>
         </div>
 
-        <div class="col-6" style="float: left;">
+        <div class="col-6" style="float: left; width: 32px;">
           <div class="has-tooltip" uib-tooltip="Remove" tooltip-placement="top"
                ng-click="removeProduct()">
             <i class="icon-sm icn-delete"></i>
           </div>
         </div>
 
-        <div style="float: left;" ng-if="$last">
+        <div style="float: left; width: 32px;" ng-if="$last">
           <div class="has-tooltip add-expense-btn" uib-tooltip="Add Product"
                tooltip-placement="top"
                ng-click="addProduct()">
