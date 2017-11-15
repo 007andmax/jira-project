@@ -17,6 +17,9 @@
 
           $scope.removeService = function () {
             $scope.ticketUpdate.services.splice($scope.$index, 1);
+            if($scope.ticketUpdate.services.length === 0) {
+              $scope.addService();
+            }
           };
 
           $scope.$watch('serviceExpense.item.name', function () {

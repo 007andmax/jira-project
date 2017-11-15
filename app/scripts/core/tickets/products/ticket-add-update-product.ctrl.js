@@ -24,6 +24,9 @@
 
           $scope.removeProduct = function () {
             $scope.ticketUpdate.products.splice($scope.$index, 1);
+            if($scope.ticketUpdate.products.length === 0) {
+              $scope.addProduct();
+            }
           };
 
           $scope.controlProductQty = function (form) {
