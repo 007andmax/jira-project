@@ -13,6 +13,7 @@
         $scope.filterType = 'company.name';
         $scope.agreementsList = [];
         $scope.canDeleteAgreements = PermissionsService.isAllowed('DELETE_SERVICE_AGREEMENTS');
+        $scope.allowToOpenAgreementModal = true;
 
         $scope.contractTypeDictionary = {
           HOURLY: 'Hourly',
@@ -113,39 +114,46 @@
           }
 
           function openModal(contractType, editMode, companyForReadOnlyMode) {
-            var template;
-            switch (contractType) {
-              case('CREATE_NEW'):
-                template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
-                break;
-              case('HOURLY'):
-                template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
-                break;
-              case('BLOCK_TIME'):
-                template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
-                break;
-              case('SERVICE_CONTRACT'):
-                template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
-                break;
-              default:
-                console.log('no contract type selected');
-            }
-            $uibModal.open({
-              templateUrl: template,
-              animation: true,
-              backdrop: false,
-              size: 'md',
-              controller: 'serviceAgreementsModalCtrl',
-              windowClass: 'create-popup margin-top-modal-dialog',
-              resolve: {
-                companyData: {
-                  editMode: editMode,
-                  companyForReadOnlyMode: companyForReadOnlyMode,
-                  contractType: contractType
-                }
+            if($scope.allowToOpenAgreementModal) {
+              var template;
+              switch (contractType) {
+                case('CREATE_NEW'):
+                  template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+                  break;
+                case('HOURLY'):
+                  template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+                  break;
+                case('BLOCK_TIME'):
+                  template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
+                  break;
+                case('SERVICE_CONTRACT'):
+                  template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                  break;
+                default:
+                  console.log('no contract type selected');
               }
+              $scope.allowToOpenAgreementModal = false;
+              var modalInstance = $uibModal.open({
+                templateUrl: template,
+                animation: true,
+                backdrop: false,
+                size: 'md',
+                controller: 'serviceAgreementsModalCtrl',
+                windowClass: 'create-popup margin-top-modal-dialog',
+                resolve: {
+                  companyData: {
+                    editMode: editMode,
+                    companyForReadOnlyMode: companyForReadOnlyMode,
+                    contractType: contractType
+                  }
+                }
 
-            });
+              });
+
+              modalInstance.opened.then(function () {
+                $scope.allowToOpenAgreementModal = true;
+              });
+            }
 
           }
 

@@ -29,6 +29,8 @@
 
             if (element.hasClass('disabled')) {
               return;
+            } else {
+              element.addClass('disabled');
             }
 
             $rootScope.$broadcast('createNewEntity', attrs.createNewEntity);
@@ -60,6 +62,7 @@
 
               modalInstance.opened.then(function () {
                 $('body').addClass('non-body-scroll');
+                element.removeClass('disabled');
               });
 
               modalInstance.result.finally(function () {
