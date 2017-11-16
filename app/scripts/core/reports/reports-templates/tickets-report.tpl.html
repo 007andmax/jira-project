@@ -1,4 +1,10 @@
-<div class="product-list-report ticket-report">
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/customerReport/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     selector=".customer-ticket__report"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
   <p class="report-title">Tickets Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
@@ -19,13 +25,7 @@
   <div class="product-list-ticket" ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
 
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
-    <div class="customer-ticket" ng-if="ticketReport && isReportAvailable"
-         convert-to-pdf="/customerReport/pdf"
-         email-endpoint="/reports/email"
-         selector=".customer-ticket__report"
-         disable-selector=".open-pdf-btn"
-         file-name="{{ reportName }}"
-         id="{{ ticketReport.id }}">
+    <div class="customer-ticket" ng-if="ticketReport && isReportAvailable">
       <div class="customer-ticket__report">
         <div class="customer-ticket__report--summary">
           <h3>Resolved tickets</h3> <span ng-if="ticketReport.showTotalTicketAmount" class="pull-right"> Total amount: {{ticketReport.tickets.length}}</span>
@@ -37,10 +37,6 @@
             <p>
               {{ (ticketReport.startDate | date: 'MM/dd/yyyy') + ' - ' + (ticketReport.endDate | date: 'MM/dd/yyyy') }}
             </p>
-          </div>
-          <div class="hardware__control-panel--btn open-pdf-btn" ng-click="openInPdf()">
-            <img src="images/new-icons/printer.png" alt="">
-            <p>Print</p>
           </div>
           <table>
             <tbody>

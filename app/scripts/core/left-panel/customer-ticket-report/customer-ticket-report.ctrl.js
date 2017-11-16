@@ -91,9 +91,9 @@
           renderFinished[part] = true;
           if (renderFinished['tickets'] && renderFinished['chart']){
             if($scope.ticketReport) {
-              $scope.$broadcast('buildPdf-' + $scope.getPdfName($scope.ticketReport))
+              $rootScope.$broadcast('buildPdf-' + $scope.getPdfName($scope.ticketReport))
             } else {
-              $scope.$broadcast('buildPdf-' + $scope.getPdfName($scope.data));
+              $rootScope.$broadcast('buildPdf-' + $scope.getPdfName($scope.data));
             }
           }
         };
