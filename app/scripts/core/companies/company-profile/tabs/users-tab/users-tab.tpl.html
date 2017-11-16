@@ -70,7 +70,7 @@
 
         <div class="col-md-2">
           <div class="clearfix">
-          <span class="user-contact-no ellipsis" ng-repeat="phoneNumber in user.phoneNumbers">
+          <span class="user-contact-no ellipsis" ng-repeat="phoneNumber in user.phoneNumbers | orderBy: 'priority'">
             <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
             'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
