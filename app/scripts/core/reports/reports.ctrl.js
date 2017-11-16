@@ -221,7 +221,7 @@
             case('/reports/ticket-report'):
               gerReportTicketReport(data);
               $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $scope.reportName = 'ticket-report';
+              $scope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');;
               break;
             default:
               console.log("wrong location")
