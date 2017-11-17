@@ -31,6 +31,7 @@
         $scope.archivedShown = false;
 
 
+
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function(resp) {
@@ -67,7 +68,7 @@
         $scope.filterCompanies = function (value) {
           var filter = headerSharedState.filter;
           var clientType = value.clientType;
-          var result = !value.deletedAt && !$scope.archivedShown || $scope.archivedShown && value.deletedAt;
+          var result = !value.deletedAt && !$rootScope.showArchivedCompanies || $rootScope.showArchivedCompanies && value.deletedAt;
 
           if (value.isDefault || value.default) {
             return false;

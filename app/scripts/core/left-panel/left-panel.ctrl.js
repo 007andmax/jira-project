@@ -188,8 +188,13 @@
           $scope.filterPasswords('byExpireDate', dates[0]);
         };
 
+        $scope.showArchivedCompanies = function() {
+          $rootScope.showArchivedCompanies = true;
+        }
+
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
+          $rootScope.showArchivedCompanies = false;
 
           if ($state.includes('companyProfile') && (filter !== 'dateRange' || value && value.length)) {
             $state.go('companies');

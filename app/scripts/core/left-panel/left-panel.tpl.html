@@ -211,7 +211,8 @@
           All Companies
           <i class="icn-sm icn-label-save-left-panel"></i>
         </div>
-        <div class="center-category__category sked">
+        <div class="center-category__category sked" ng-click="showArchivedCompanies()"
+        ng-class="{'active': (showArchivedCompanies === true)}">
           Archived
         </div>
         <div class="left-panel-title font-medium">
