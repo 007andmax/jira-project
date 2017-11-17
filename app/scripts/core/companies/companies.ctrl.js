@@ -31,7 +31,6 @@
         $scope.archivedShown = false;
 
 
-
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function(resp) {
