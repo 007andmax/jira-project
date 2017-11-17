@@ -111,15 +111,17 @@
 .filter.center-category__category:hover {
   background-color: transparent;
 }
-.left-panel-title{
+
+.left-panel-title {
   font-size: 14px;
   padding: 0 0 11px 0;
-  border-bottom: 2px solid rgba(79,95,121,0.5);
+  border-bottom: 2px solid rgba(79, 95, 121, 0.5);
   text-transform: uppercase;
-  margin: 20px 25px 10px 25px;
+  margin: 35px 25px 10px 25px;
   color: #586B8B;
   width: 100%;
 }
+
 .left-panel-full__head {
   display: -webkit-flex;
   display: -moz-flex;
@@ -398,32 +400,69 @@
   padding: 5px;
   line-height: 1;
 }
+.center-category .report-caret-icon {
+  top: 15px;
+  position: absolute;
+  right: 13px;
+  pointer-events: none;
+}
+.center-category .icn-remove-old{
+  top: 13px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+.x-mark-wrapper {
+  margin: 0 auto;
+  position: relative;
+}
+.recent-left-panel{
+  width: 100%;
+  padding: 10px 25px;
+  color: #586B8B;
+}
+.recent-left-panel h4{
+  font-size: 12px;
+  text-transform: uppercase;
+  margin: 0;
+  color: #586B8B
+}
+.recent-left-panel p{
+  cursor: pointer;
+  transition: all .3s;
+}
+.recent-left-panel p:hover,
+.recent-left-panel p.active-recent{
+  color: #fff;
+}
 
 .user-company-circle {
   width: 12px;
   height: 12px;
   position: absolute;
-  right: 50px;
+  right: 25px;
   border-radius: 50%;
   top: 10px;
   box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.50);
 }
 
 .user-company-circle .colored-circle,
-.ticket-circle .colored-circle.ticket-color{
+.ticket-circle .colored-circle.ticket-color {
   position: absolute;
   height: 12px;
   width: 12px;
   border-radius: 50%;
   border: 2px solid transparent;
 }
-.tickets-left-panel .center-category__category .colored-circle.ticket-color{
+
+.tickets-left-panel .center-category__category .colored-circle.ticket-color {
   right: 0;
   top: 0;
   min-width: 12px;
   padding: 0;
 }
-.ticket-circle{
+
+.ticket-circle {
   right: 25px;
   width: 12px;
   height: 12px;
@@ -433,6 +472,7 @@
   box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.50);
 
 }
+
 .left-panel-icons-remote {
   background: url("../images/left-panel-icons-x1.png") 211px 2px;
 }
