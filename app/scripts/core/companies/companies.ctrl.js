@@ -28,7 +28,7 @@
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
-        $scope.archivedShown = false;
+        //$scope.archivedShown = false;
 
 
         $scope.tagColors = TagsService.getColors();
@@ -156,7 +156,7 @@
         $scope.filterArchived = function (users, company) {
           return users.filter(function (user) {
             var isArchived = user.deletedAt || company.deletedAt;
-            return !isArchived && !$scope.archivedShown || $scope.archivedShown && isArchived;
+            return !isArchived && !$rootScope.showArchivedCompanies || $rootScope.showArchivedCompanies && isArchived;
           })
         };
 

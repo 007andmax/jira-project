@@ -208,13 +208,14 @@
 
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" ng-click="filterCompanies()"
-             ng-class="{'active': !(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))}">
+             ng-class="{'active': (!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()}">
           All Companies
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="(!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()"></i>
         </div>
         <div class="center-category__category sked" ng-click="showArchivedCompanies()"
-        ng-class="{'active': (showArchivedCompanies === true)}">
+        ng-class="{'active': isArchivedCompaniesToShow()}">
           Archived
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
         </div>
         <div class="left-panel-title font-medium">
           tags

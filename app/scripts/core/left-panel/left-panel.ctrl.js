@@ -190,7 +190,11 @@
 
         $scope.showArchivedCompanies = function() {
           $rootScope.showArchivedCompanies = true;
-        }
+        };
+
+        $scope.isArchivedCompaniesToShow = function() {
+          return $rootScope.showArchivedCompanies
+        };
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
