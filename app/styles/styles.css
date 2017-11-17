@@ -412,7 +412,9 @@ body .topNavbar {
 body .topNavbar strong span {
   font-family: 'Graphik Medium', sans-serif;
 }
-
+.font-medium{
+  font-family: 'Graphik Medium', sans-serif!important;
+}
 .center-category p {
   font-family: 'Graphik Regular', sans-serif;
 }
