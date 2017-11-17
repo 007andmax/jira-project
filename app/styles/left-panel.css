@@ -436,6 +436,48 @@
   color: #fff;
 }
 
+.center-category .report-caret-icon {
+  top: 15px;
+  position: absolute;
+  right: 13px;
+  pointer-events: none;
+}
+
+.center-category .icn-remove-old {
+  top: 13px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.x-mark-wrapper {
+  margin: 0 auto;
+  position: relative;
+}
+
+.recent-left-panel {
+  width: 100%;
+  padding: 10px 25px;
+  color: #586B8B;
+}
+
+.recent-left-panel h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  margin: 0;
+  color: #586B8B
+}
+
+.recent-left-panel p {
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.recent-left-panel p:hover,
+.recent-left-panel p.active-recent {
+  color: #fff;
+}
+
 .user-company-circle {
   width: 12px;
   height: 12px;
