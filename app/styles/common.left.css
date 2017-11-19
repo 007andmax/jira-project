@@ -5,17 +5,7 @@ aside#left {
   width: 76px;
   height: 100vh;
   z-index: 1060;
-  background-color: #232831;
-}
-aside#left:after {
-  position: absolute;
-  top: 0;
-  left: 75px;
-  width: 1px;
-  height: 100%;
-  background-color: rgba(148,164,184,0.35);
-
-  content: '';
+  background-color: #27303F;
 }
 
 aside#left.opened {
