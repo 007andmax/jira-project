@@ -30,8 +30,8 @@ p{
 
 .customer-report-modal {
   padding: 15px; }
-.customer-report-modal h2.col-sm-12 {
-  margin-top: 0; }
+  .customer-report-modal h2.col-sm-12 {
+    margin-top: 0; }
 .details-futures-info{
   border: 1px solid #D3D8E1;
   display: inline-block;
@@ -61,3 +61,5 @@ p{
 .fz-13{
   font-size: 13px;
 }
+
+/*# sourceMappingURL=customer-report.scss.map */
