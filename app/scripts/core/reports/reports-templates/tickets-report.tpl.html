@@ -144,7 +144,7 @@
             <p style="float: left; margin: 5px 0;" ng-if="ticket.discount">
               <strong>Discount: </strong> {{ getAmount(ticket.discount) }}
             </p>
-            <p style="float: right; margin: 5px 0;" ng-if="ticket.techUserId">
+            <p style="float: right; margin: 5px 0; white-space: nowrap;" ng-if="ticket.techUserId">
               <strong class="text-uppercase fz-13">Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}
             </p>
           </div>
