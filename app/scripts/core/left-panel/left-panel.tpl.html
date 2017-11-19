@@ -5,94 +5,55 @@
     </div>
 
     <div class="left-panel__category-wrap nano-content">
-      <div class="left-panel__category left-panel-icons-remote"
+      <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
            ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'quick-support'"-->
-        <!--src="images/new-icons/network-desktop-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'quick-support'"-->
-        <!--src="images/new-icons/network-desktop-white.png">-->
+        <div class="left-panel-icn left-panel-icons-remote"></div>
       </div>
-      <div class="left-panel__category left-panel-icons-tickets" ng-class="{'active': openedCategory === 'tickets'}"
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
            ng-click="toggleLeftPanel('tickets')">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/new-icons/newspaper-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'tickets'"-->
-        <!--src="images/new-icons/newspaper-white.png">-->
+        <div class="left-panel-icn left-panel-icons-tickets"></div>
       </div>
-      <div class="left-panel__category left-panel-icons-companies" ng-class="{'active': openedCategory === 'companies'}"
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
            ng-click="toggleLeftPanel('companies')" ui-sref="companies"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/new-icons/building-white.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'companies'"-->
-        <!--src="images/new-icons/building-gray.png">-->
-
+        <div class="left-panel-icn left-panel-icons-companies"></div>
       </div>
-      <div class="left-panel__category left-panel-icons-users" ng-class="{'active': openedCategory === 'users'}"
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
            ng-click="toggleLeftPanel('users')" ui-sref="users"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'users'" src="images/new-icons/users-male-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'users'" src="images/new-icons/users-male-white.png">-->
-
+        <div class="left-panel-icn left-panel-icons-users"></div>
       </div>
-      <div class="left-panel__category left-panel-icons-billing" ng-class="{'active': openedCategory === 'billing'}"
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
            ng-click="toggleLeftPanel('billing')" ui-sref="accounting.billable"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/new-icons/USD-circle-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'billing'"-->
-        <!--src="images/new-icons/USD-circle-white.png">-->
-
+        <div class="left-panel-icn left-panel-icons-billing"></div>
       </div>
-      <div class="left-panel__category left-panel-icons-inventory" ng-class="{'active': openedCategory === 'inventory'}"
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
            ng-click="toggleLeftPanel('inventory')" ui-sref="products({ tabName: 'category' })">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/new-icons/briefcase-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'inventory'"-->
-        <!--src="images/new-icons/briefcase-white.png">-->
-
+        <div class="left-panel-icn left-panel-icons-inventory"></div>
       </div>
-      <div class="left-panel__category left-panel-icons-password-manager"
+      <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
            ng-click="toggleLeftPanel('password-manager')" ui-sref="password-manager">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'password-manager'"-->
-        <!--src="images/new-icons/lock-gray.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'password-manager'"-->
-        <!--src="images/new-icons/lock-white.png">-->
+        <div class="left-panel-icn left-panel-icons-password-manager"></div>
       </div>
       <!--REPORTS-->
-      <div class="left-panel__category left-panel-icons-reports"
+      <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'reports'}"
            ng-click="onClickReports()"
            ui-sref="reports"
            ng-if="showReportsPage()">
-        <!--<img class="menu-img" ng-if="openedCategory !== 'reports'"-->
-        <!--src="images/new-icons/report-icon.png">-->
-        <!--<img class="menu-img" ng-if="openedCategory === 'reports'"-->
-        <!--src="images/new-icons/report-icon.png">-->
+        <div class="left-panel-icn left-panel-icons-reports"></div>
       </div>
 
-      <div class="left-panel__category settings-left-bar">
-        <!--<div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"-->
-        <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->
-        <!--<div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">-->
-        <div class="left-panel__category " ui-sref="settings" ng-click="onClickSettings()"
-             ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
-             style="width: calc(100% + 10px)">
-          <!--<img class="menu-img"-->
-          <!--ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"-->
-          <!--src="images/new-icons/settings-grey.png">-->
-          <!--<img class="menu-img"-->
-          <!--ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"-->
-          <!--src="images/new-icons/settings-grey.png">-->
-        </div>
-        <!--</div>-->
-        <!--</div>-->
+      <div ui-sref="settings" ng-click="onClickSettings()"
+           ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
+           style="width: calc(100% + 10px)">
+        <div class="settings-left-bar"></div>
       </div>
-      <!--<div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}"-->
-      <!--ng-click="toggleLeftPanel('tutorial')">-->
-      <!--<img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/new-icons/question-gray.png">-->
-      <!--<img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/new-icons/question-white.png">-->
-      <!--</div>-->
     </div>
   </div>
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
@@ -412,7 +373,7 @@
             <div>
               <p>By Industry</p>
               <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown"
+                <input type="text" class="form-control has-dropdown pointer"
                        autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"
                        uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
                        qt-typeahead-show-on-focus
@@ -427,7 +388,7 @@
             <div>
               <p>By Company</p>
               <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown"
+                <input type="text" class="form-control has-dropdown pointer"
                        autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
                        typeahead-input-formatter="getCompanyName($model)"
                        uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
@@ -514,7 +475,7 @@
             <div>
               <p>By Company</p>
               <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown"
+                <input type="text" class="form-control has-dropdown pointer"
                        autocomplete="off" ng-model="passwordSharedState.filter.companyId" typeahead-editable="false"
                        ng-change="passwordSharedState.filter.deviceId = undefined"
                        typeahead-input-formatter="getCompanyName($model)"
@@ -529,7 +490,7 @@
             <div>
               <p>By Device</p>
               <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown"
+                <input type="text" class="form-control has-dropdown pointer"
                        autocomplete="off" ng-model="passwordSharedState.filter.deviceId" typeahead-editable="false"
                        typeahead-input-formatter="getDeviceNameById($model)"
                        uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
@@ -546,7 +507,7 @@
               <p>By Type</p>
 
               <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown"
+                <input type="text" class="form-control has-dropdown pointer"
                        autocomplete="off" ng-model="passwordSharedState.filter.template" typeahead-editable="false"
                        typeahead-input-formatter="userReadable($model)"
                        uib-typeahead="template as userReadable(template) for template in templates | filter: $viewValue:stateComparator | orderBy:'toString()'"
@@ -560,10 +521,10 @@
           <div class="center-category__category filter">
             <div>
               <p>By Expire date</p>
-              <div style="position: relative;">
+              <div style="position: relative;" class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown readonly-normal" readonly
                        date-range-picker="onExpireDateChange" position="right bottom">
-                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.expiredDate">
+                <i class="icn-sm report-caret-icon" ng-show="!passwordSharedState.filter.expiredDate">
                 </i>
                 <i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"
                    ng-show="passwordSharedState.filter.expiredDate"
