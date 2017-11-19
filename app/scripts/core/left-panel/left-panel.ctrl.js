@@ -4,9 +4,10 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
-      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService', '$uibModal', 'TicketsService', 'ColorsService', 'TagsService',
+      'quicktech.common.services.PermissionsService',
+      'CompaniesService', 'TutorialsService', '$uibModal', 'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService) {
+                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService, CustomStorageService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -35,6 +36,37 @@
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.tagColors = TagsService.getColors();
+
+        CustomStorageService.getUserCustomStorageValue('userPageFilterByIndustryHistory', function(rest) {
+          $scope.industryFilterhistory = rest;
+        });
+
+        function sendNewPageFilterByIndustryHistoryItem(item) {
+          var newHistoryItemArray = [];
+          newHistoryItemArray.push(item);
+          if($scope.industryFilterhistory.length && $scope.industryFilterhistory.length>0) {
+            newHistoryItemArray.push($scope.industryFilterhistory[0]);
+            newHistoryItemArray.push($scope.industryFilterhistory[1]);
+          }
+          var jsonArray = JSON.stringify(newHistoryItemArray);
+          var itemToSend = {
+            customKey: "userPageFilterByIndustryHistory",
+            value: jsonArray
+          };
+
+          CustomStorageService.saveUserCustomStorageItem(itemToSend, function(resp) {
+            console.log(typeof resp.value);
+            console.log(JSON.parse(resp.value));
+            $scope.industryFilterhistory = JSON.parse(resp.value)
+          })
+        }
+
+        $scope.$watch('companiesSharedState.filter.industry', function (value) {
+          if (value ) {
+            console.log(value);
+            sendNewPageFilterByIndustryHistoryItem(value);
+          }
+        });
 
 
 
