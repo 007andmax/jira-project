@@ -91,6 +91,7 @@
             });
           }
 
+
           selectedHtml = target.wrap('div').parent().html();
           if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
             selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
