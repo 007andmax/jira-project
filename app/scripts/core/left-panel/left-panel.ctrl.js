@@ -55,15 +55,12 @@
           };
 
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function(resp) {
-            console.log(typeof resp.value);
-            console.log(JSON.parse(resp.value));
             $scope.industryFilterhistory = JSON.parse(resp.value)
           })
         }
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
           if (value ) {
-            console.log(value);
             sendNewPageFilterByIndustryHistoryItem(value);
           }
         });
