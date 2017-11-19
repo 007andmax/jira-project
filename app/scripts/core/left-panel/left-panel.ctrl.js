@@ -37,8 +37,8 @@
 
         $scope.tagColors = TagsService.getColors();
 
-        CustomStorageService.getUserCustomStorageValue('userPageFilterByIndustryHistory', function(rest) {
-          $scope.industryFilterhistory = rest;
+        CustomStorageService.getUserCustomStorageValue('userPageFilterByIndustryHistory', function(resp) {
+          $scope.industryFilterhistory = resp;
         });
 
         function sendNewPageFilterByIndustryHistoryItem(item) {
