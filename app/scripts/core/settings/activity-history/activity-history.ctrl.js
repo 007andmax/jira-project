@@ -26,11 +26,11 @@
           $scope.authenticationTypesType = resp;
         });
 
-        $scope.changeAuthenticationTypesType = function(type) {
+        $scope.changeAuthenticationTypesType = function (type) {
           console.log(type);
-          if(type) {
+          if (type) {
             $scope.authenticationTypesType.value = type;
-            UsersService.toggle2FA(type, function(resp) {
+            UsersService.toggle2FA(type, function (resp) {
               console.log(resp);
             })
           }

@@ -3,8 +3,14 @@
   <p class="report-title">Product Sales Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
-    <report-menu is-device-hidden="true" open-in-pdf="openInPdf" get-user-name="getUserName" is-report-available="isReportAvailable"
-                 download-as-pdf="downloadAsPdf" send-to-mail="sendToMail" email-pattern="emailPattern"></report-menu>
+    <report-menu is-device-hidden="true"
+                 open-in-pdf="openInPdf"
+                 get-user-name="getUserName"
+                 is-report-available="isReportAvailable"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern">
+    </report-menu>
   </div>
   <div class="product-list-ticket">
     <div class="header-product-list-ticket" ng-if="reportByProducts.lines">

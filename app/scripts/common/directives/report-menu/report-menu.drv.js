@@ -17,13 +17,14 @@
       isRadioButtonHidden: '@?',
       isDateRangeHidden: '@?',
       isShowTechSelectField: '@?',
-      isReportAvailable: '='
+      isReportAvailable: '=',
+      isCustomerTicketOptions: '@?'
     },
     controller: reportMenuCtrl
   });
 
-  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService'];
-  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService) {
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter'];
+  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.exportFileToCsv = exportFileToCsv;
@@ -34,11 +35,15 @@
     this.setTechReportDateType = setTechReportDateType;
     this.sendTechDataRequest = sendTechDataRequest;
 
+    var now = Date.now();
+    var agentsByCompany = [];
+
     $ctrl.isDeviceHidden = $scope.$eval($ctrl.isDeviceHidden);
     $ctrl.isCustomerHidden = $scope.$eval($ctrl.isCustomerHidden);
     $ctrl.isRadioButtonHidden = $scope.$eval($ctrl.isRadioButtonHidden);
     $ctrl.isDateRangeHidden = $scope.$eval($ctrl.isDateRangeHidden);
     $ctrl.isShowTechSelectField = $scope.$eval($ctrl.isShowTechSelectField);
+    $ctrl.isCustomerTicketOptions = $scope.$eval($ctrl.isCustomerTicketOptions);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -46,6 +51,11 @@
     $ctrl.currentUser = UsersService.getCurrentUser();
 
     $scope.maxDateForDateRangeInputField = Date.now();
+    $scope.customerTicketWithTimeSpent = true;
+    $scope.customerTicketWithResponseTime = true;
+    $scope.customerTicketShowTotalTicketAmount = true;
+    $scope.customerTicketTypes = ['Simple report', 'Extended report'];
+    $scope.customerTicketType = 'Simple report';
     $scope.reportTypes = ['Summary', 'Detailed'];
     $scope.reportType = "Summary";
     $scope.techReportTypes = ['Billed time', 'Product sold'];
@@ -157,6 +167,7 @@
 
 
     function sendReportRequest(reportSettings) {
+      $scope.errorNassageForCompany = true;
 
       if (!$ctrl.isTechReport) {
         var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
@@ -187,6 +198,24 @@
               } else {
                 $scope.errorNassageForDate = false;
               }
+            }
+          } else if(location === '/reports/ticket-report') {
+            if (reportSettings.company) {
+              var dataToSend = {
+                company: reportSettings.company,
+                companyId: reportSettings.company.id,
+                extendedReport: ($scope.customerTicketType === 'Extended report'),
+                withResponseTime: $scope.customerTicketWithResponseTime,
+                withTimeSpent: $scope.customerTicketWithTimeSpent,
+                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
+                startDate: $filter('date')(new Date(reportSettings.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date(reportSettings.endDate || now), 'yyyy/MM/dd')
+              };
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+
+            } else {
+              $scope.errorNassageForCompany = false;
             }
           } else {
             var dataToSend = {
@@ -256,6 +285,7 @@
           }
           lastSentData = dataToSend;
           $scope.$emit("requestReportData", dataToSend, location, techType);
+
         } else {
           $scope.errorNassageForDate = false;
         }
@@ -302,7 +332,6 @@
       }
     }
 
-    var agentsByCompany = [];
 
     DevicesService.getDevicesCount($scope, function (agents) {
       agentsByCompany = agents;
