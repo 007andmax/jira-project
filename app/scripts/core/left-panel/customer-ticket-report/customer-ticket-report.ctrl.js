@@ -96,7 +96,11 @@
         $scope.buildPdf = function (part) {
           renderFinished[part] = true;
           if (renderFinished['tickets'] && renderFinished['chart']){
-            $scope.$broadcast('buildPdf-' + $scope.getPdfName($scope.data));
+            if($scope.ticketReport) {
+              $rootScope.$broadcast('buildPdf-' + $scope.getPdfName($scope.ticketReport))
+            } else {
+              $rootScope.$broadcast('buildPdf-' + $scope.getPdfName($scope.data));
+            }
           }
         };
 
