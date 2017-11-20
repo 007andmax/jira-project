@@ -354,9 +354,9 @@ body.non-body-scroll::-webkit-scrollbar {
   border: 1px solid #B4B4B4;
 }
 
-.tax-recurring .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control,
+.tax-recurring .form-control[disabled], fieldset[disabled] .form-control,
 .discount-recurring .form-control:focus, .discount-recurring input:-webkit-autofill {
-  background-color: #F1F5FA;
+  background-color: #fcfdfd;
 }
 
 .discount-recurring {

@@ -3683,7 +3683,6 @@ _:-moz-tree-row(hover), .tax-recurring .form-control[readonly] {
 }
 
 .form-control.readonly-normal[readonly] {
-  background-color: #fcfdfd;
   opacity: 1;
 }
 
