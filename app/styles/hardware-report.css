@@ -11,10 +11,12 @@
     page-break-inside: avoid;
   }
 }
-.hardware{
+
+.hardware {
   padding-top: 20px;
   background: #F4F4F4;
 }
+
 .hardware-wrap {
   position: fixed;
   top: 0;
@@ -654,9 +656,11 @@
   background-color: #0094d0;
   border-color: #0094d0;
 }
-.ticket-report .product-report-btn ul .open-csv-btn{
+
+.ticket-report .product-report-btn ul .open-csv-btn {
   display: none;
 }
+
 .product-report-btn img {
   width: 13px;
   margin-top: 6px;

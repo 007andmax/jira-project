@@ -412,9 +412,11 @@ body .topNavbar {
 body .topNavbar strong span {
   font-family: 'Graphik Medium', sans-serif;
 }
-.font-medium{
-  font-family: 'Graphik Medium', sans-serif!important;
+
+.font-medium {
+  font-family: 'Graphik Medium', sans-serif !important;
 }
+
 .center-category p {
   font-family: 'Graphik Regular', sans-serif;
 }
@@ -1934,7 +1936,7 @@ mark,
 }
 
 .text-center {
-  text-align: center!important;
+  text-align: center !important;
 }
 
 .text-justify {
@@ -7566,12 +7568,15 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   background-color: #e2e6e6;
   transition: .2s all ease 0s;
 }
-.company-profile-content .nav-qt > li.active > a:after{
+
+.company-profile-content .nav-qt > li.active > a:after {
   top: 87%;
 }
-.company-profile-content .nav-qt > li.active > a:before{
+
+.company-profile-content .nav-qt > li.active > a:before {
   top: 95%;
 }
+
 .company-profile-content .nav-qt > li > a:before {
   top: 95%;
 }
