@@ -4,7 +4,7 @@
     <div class="run-report-content clearfix {{ $ctrl.className || '' }}">
 
 
-      <button class="form-group btn" ng-click="$ctrl.sendReportRequest(reportSetting)"
+      <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
               ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
         Report
       </button>
@@ -70,7 +70,6 @@
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="type for type in reportTypes"
                  qt-typeahead-async-show-on-focus
-                 readonly
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
         </div>
@@ -86,7 +85,6 @@
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="type for type in customerTicketTypes"
                  qt-typeahead-async-show-on-focus
-                 readonly
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
         </div>
@@ -154,7 +152,7 @@
           <label class="control checkbox">
             <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount">
             <span class="control-indicator"></span>
-            Show total ticket amount
+            Total ticket amount
           </label>
         </div>
       </div>
@@ -203,7 +201,6 @@
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="type for type in techReportTypes"
                  qt-typeahead-async-show-on-focus
-                 readonly
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
         </div>
@@ -218,7 +215,7 @@
       </div>
       <ul uib-dropdown-menu>
         <li class="open-pdf-btn " ng-click="$ctrl.downloadAsPdf()" disabled="disabled">PDF</li>
-        <li ng-click="$ctrl.exportFileToCsv()">CSV</li>
+        <li ng-click="$ctrl.exportFileToCsv()" class="open-csv-btn">CSV</li>
       </ul>
     </div>
     <div class="product-report-btn" uib-tooltip="print" tooltip-placement="top" ng-click="$ctrl.openInPdf()">

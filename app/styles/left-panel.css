@@ -391,9 +391,9 @@
   border: none;
 }
 
-.dropdown-menu > .active a,
-.dropdown-menu > .active a:hover,
-.dropdown-menu > .active a:focus {
+.left-panel-full-wrapper .dropdown-menu > .active a,
+.left-panel-full-wrapper .dropdown-menu > .active a:hover,
+.left-panel-full-wrapper .dropdown-menu > .active a:focus {
   background-color: #16A4FA;
   color: #fff;
 }

@@ -654,7 +654,9 @@
   background-color: #0094d0;
   border-color: #0094d0;
 }
-
+.ticket-report .product-report-btn ul .open-csv-btn{
+  display: none;
+}
 .product-report-btn img {
   width: 13px;
   margin-top: 6px;
@@ -905,7 +907,7 @@
 
 .include-ticket-report {
   float: right;
-  margin-right: 105px;
+  margin-right: 145px;
 }
 
 .include-ticket-report label {

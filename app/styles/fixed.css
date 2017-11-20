@@ -15,7 +15,10 @@ body.non-body-scroll {
 body.non-body-scroll::-webkit-scrollbar {
   display: none;
 }
-
+.dropdown > input{
+  cursor: pointer;
+  background-color: #FCFDFD;
+}
 .modal-create-ticket .dropdown-menu {
   /*margin-bottom: 20px;*/
   width: auto;
