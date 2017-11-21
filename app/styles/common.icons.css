@@ -1600,6 +1600,9 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   height: 10px;
 }
 
+.icn-ticket-onhold{
+  background-position: -846px -100px;
+}
 .icn-ticket-Unclaimed:before {
   content: "?";
   color: #fff;

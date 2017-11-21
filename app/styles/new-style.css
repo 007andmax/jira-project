@@ -104,6 +104,9 @@
     background-color: #ffb937; }
   .progress-small-size.completed-ticket {
     border: none;
-    background-color: #90c56b; } }
+    background-color: #90c56b; }
+  .progress-small-size.onhold-ticket {
+    border: none;
+    background-color: #d84a3c; } }
 
 /*# sourceMappingURL=new-style.scss.map */
