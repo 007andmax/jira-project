@@ -1,12 +1,19 @@
 .left-panel {
-  display: flex;
+  /*display: flex;*/
 
   height: 100%;
 
-  flex-flow: row wrap;
-  -ms-align-content: flex-start;
-  align-content: flex-start;
+  /*flex-flow: row wrap;*/
+  /*-ms-align-content: flex-start;*/
+  /*align-content: flex-start;*/
 }
+
+/*@media screen and (max-width: 1279px) {*/
+  /*.left-panel {*/
+    /*height: calc(100vh + 78px);*/
+    /*background: #27303F;*/
+  /*}*/
+/*}*/
 
 .left-panel-head {
   position: relative;

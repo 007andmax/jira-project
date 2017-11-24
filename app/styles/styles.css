@@ -15,8 +15,9 @@ html {
 
 body {
   margin: 0;
-  min-width: 1280px;
+  /*min-width: 1200px;*/
   overflow: hidden;
+
 }
 
 ::-webkit-scrollbar {
@@ -5189,7 +5190,9 @@ tbody.collapse.in {
   outline: 0;
   background-color: #e7ecf2;
 }
-
+.left-panel-full .dropdown-menu > li > a {
+  color: #9ca5b6;
+}
 .dropdown-menu > .disabled > a,
 .subdropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
