@@ -43,11 +43,16 @@
 
         function sendNewPageFilterByIndustryHistoryItem(item) {
           var newHistoryItemArray = [];
-          newHistoryItemArray.push(item);
-          if($scope.industryFilterhistory.length && $scope.industryFilterhistory.length>0) {
-            newHistoryItemArray.push($scope.industryFilterhistory[0]);
-            newHistoryItemArray.push($scope.industryFilterhistory[1]);
+          if(item === $scope.industryFilterhistory[0]) {
+            newHistoryItemArray = $scope.industryFilterhistory;
+          } else {
+            newHistoryItemArray.push(item);
+            if($scope.industryFilterhistory.length && $scope.industryFilterhistory.length>0) {
+              newHistoryItemArray.push($scope.industryFilterhistory[0]);
+              newHistoryItemArray.push($scope.industryFilterhistory[1]);
+            }
           }
+
           var jsonArray = JSON.stringify(newHistoryItemArray);
           var itemToSend = {
             customKey: "userPageFilterByIndustryHistory",
@@ -65,7 +70,21 @@
           }
         });
 
+        $scope.applyIndustryFilterFromHistoryList = function(value) {
+          companiesSharedState.filter.industry = value;
+        };
 
+
+        $scope.clientCompanies = CompaniesService.getClientCompanies;
+        TutorialsService.getTypes(function (resp) {
+          $scope.tutorialTypes = resp;
+        });
+
+        $scope.$state = $state;
+        $scope.PermissionsService = PermissionsService;
+        $rootScope.isLeftPanelHidden = false;
+
+        $scope.ticketsCounter;
 
         $scope.changeCompanyColor = function(type, colorCode) {
           console.log("colorCode: ", colorCode);
@@ -98,19 +117,6 @@
         ColorsService.getUserColors($scope, function(resp) {
           $scope.usersColors = resp;
         });
-
-
-
-        $scope.clientCompanies = CompaniesService.getClientCompanies;
-        TutorialsService.getTypes(function (resp) {
-          $scope.tutorialTypes = resp;
-        });
-
-        $scope.$state = $state;
-        $scope.PermissionsService = PermissionsService;
-        $rootScope.isLeftPanelHidden = false;
-
-        $scope.ticketsCounter;
 
         $scope.showReportsPage = function() {
           return PermissionsService.isAllowed('VIEW_SALES_REPORT') ||

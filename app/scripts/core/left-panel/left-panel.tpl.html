@@ -261,7 +261,7 @@
         </div>
         <div class="recent-left-panel">
           <h4 class="font-medium">recent</h4>
-          <p ng-repeat="item in industryFilterhistory track by $index">{{item}}</p>
+          <p ng-repeat="item in industryFilterhistory track by $index" ng-click="applyIndustryFilterFromHistoryList(item)">{{item}}</p>
 
         </div>
 
