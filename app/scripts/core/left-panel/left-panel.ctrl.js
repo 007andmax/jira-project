@@ -43,7 +43,14 @@
 
         function sendNewPageFilterByIndustryHistoryItem(item) {
           var newHistoryItemArray = [];
-          if(item === $scope.industryFilterhistory[0]) {
+          var ifItemAlreadyInTheList = false;
+          for(var i=0; i<$scope.industryFilterhistory.length; i++) {
+            if(item === $scope.industryFilterhistory[i]) {
+              ifItemAlreadyInTheList = true;
+              break;
+            }
+          }
+          if(ifItemAlreadyInTheList) {
             newHistoryItemArray = $scope.industryFilterhistory;
           } else {
             newHistoryItemArray.push(item);
