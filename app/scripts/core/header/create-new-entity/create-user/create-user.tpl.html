@@ -101,7 +101,7 @@
           </div>
           <div class="form-group">
 
-            <label class="control-label">Account Type</label>
+            <label class="control-label">Contract Type</label>
             <div uib-dropdown keyboard-nav="true">
 
               <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
@@ -125,12 +125,12 @@
           <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'designation')}">
 
             <label class="control-label"
-                   ng-class="{'hide': isShowingErrors(userForm, 'designation')}">Designation</label>
+                   ng-class="{'hide': isShowingErrors(userForm, 'designation')}">Title</label>
 
             <div ng-messages="userForm.designation.$error"
                  ng-class="{'hide': !isShowingErrors(userForm, 'designation')}">
-              <div class="control-label" ng-message="maxlength">Designation is too large</div>
-              <div class="control-label" ng-message="minlength">Designation is too short</div>
+              <div class="control-label" ng-message="maxlength">Title is too large</div>
+              <div class="control-label" ng-message="minlength">Title is too short</div>
             </div>
 
             <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur

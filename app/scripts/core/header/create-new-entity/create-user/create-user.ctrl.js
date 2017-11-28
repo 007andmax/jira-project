@@ -52,8 +52,8 @@
 
         $scope.typePasswordInput = $scope.typeConfPasswordInput = 'password';
         $scope.roles = {
-          USER: 'User',
-          ADMIN: 'Administrator'
+          USER: 'Standard user',
+          ADMIN: 'Manager'
         };
 
         if (currentUsersCompany.accountType === 'ROOT') {
