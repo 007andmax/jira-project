@@ -291,13 +291,7 @@
         }
 
         $scope.showAdditionalServiceColumn = function() {
-          var show = false;
-          for(var i=0; i<$scope.serviceContract.serviceContractServices.length; i++) {
-            if($scope.serviceContract.serviceContractServices[i].billable) {
-              show = true;
-              break;
-            }
-          }
+          var show =  $scope.serviceContract.serviceContractServices.some((s) => s.billable);
           return show;
         };
 

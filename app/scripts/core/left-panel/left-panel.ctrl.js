@@ -58,13 +58,7 @@
 
         function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
-          var ifItemAlreadyInTheList = false;
-          for(var i=0; i<recentArray.length; i++) {
-            if(item === recentArray[i]) {
-              ifItemAlreadyInTheList = true;
-              break;
-            }
-          }
+          var ifItemAlreadyInTheList = recentArray.some((s) => s === item);
           if(ifItemAlreadyInTheList) {
             newHistoryItemArray = recentArray;
           } else {
@@ -93,27 +87,13 @@
         }
 
         function getCompanyNameById(id) {
-          var clientCompanies = $scope.clientCompanies();
-          var name ='';
-          for(var i=0; i<clientCompanies.length; i++) {
-            if(clientCompanies[i].id === id) {
-              name = clientCompanies[i].name;
-              break;
-            }
-          }
-          return name;
+          var company = $scope.clientCompanies().find((c) => c.id === id);
+          return company ? company.name : '';
         }
 
         function getCompanyIdByCompanyName(name) {
-          var clientCompanies = $scope.clientCompanies();
-          var id ='';
-          for(var i=0; i<clientCompanies.length; i++) {
-            if(clientCompanies[i].name === name) {
-              id = clientCompanies[i].id;
-              break;
-            }
-          }
-          return id;
+          var company = $scope.clientCompanies().find((c) => c.name === name);
+          return company ? company.id : '';
         }
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
