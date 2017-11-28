@@ -52,7 +52,7 @@
 
         $scope.getUserType = function(user) {
           var filter = headerSharedState.filter;
-          if(user.isContact) {
+          if(user.role === 'ADMIN') {
             return 'MANAGER';
           }else {
             // var company = CompaniesService.getOneById(user.company.id);
