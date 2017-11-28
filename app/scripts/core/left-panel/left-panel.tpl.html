@@ -448,9 +448,9 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-click="filterUsers()"
-             ng-class="{'active': !(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
+             ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
           All Users
-          <i class="icn-sm icn-label-save-left-panel" ng-show="!(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="!( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)"></i>
         </div>
         <div class="center-category__category" ng-click="showArchivedUsers()"
              ng-class="{'active': isArchivedUsersToShow()}">
