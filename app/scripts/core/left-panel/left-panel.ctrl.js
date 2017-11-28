@@ -18,6 +18,7 @@
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
         $scope.passwordSharedState = passwordSharedState;
+        $scope.clientCompanies = CompaniesService.getClientCompanies;
         $scope.qSHistoryExpanded = false;
         $scope.maxDate = Date.now();
         $scope.templates = [
@@ -37,52 +38,109 @@
 
         $scope.tagColors = TagsService.getColors();
 
-        CustomStorageService.getUserCustomStorageValue('userPageFilterByIndustryHistory', function(resp) {
-          $scope.industryFilterhistory = resp;
+        CustomStorageService.getUserCustomStorageValue('companiesPageFilterByIndustryHistory', function(resp) {
+          $scope.industryFilterHistoryCompaniesPage = resp;
         });
 
-        function sendNewPageFilterByIndustryHistoryItem(item) {
+        CustomStorageService.getUserCustomStorageValue('userPageFilterByIndustryHistory', function(resp) {
+          $scope.industriesFilterHistoryUserPage = resp;
+        });
+
+        CustomStorageService.getUserCustomStorageValue('userPageFilterByCompanyHistory', function(resp) {
+          $scope.companiesFilterHistoryUserPage = resp;
+        });
+
+        function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
           var ifItemAlreadyInTheList = false;
-          for(var i=0; i<$scope.industryFilterhistory.length; i++) {
-            if(item === $scope.industryFilterhistory[i]) {
+          for(var i=0; i<recentArray.length; i++) {
+            if(item === recentArray[i]) {
               ifItemAlreadyInTheList = true;
               break;
             }
           }
           if(ifItemAlreadyInTheList) {
-            newHistoryItemArray = $scope.industryFilterhistory;
+            newHistoryItemArray = recentArray;
           } else {
             newHistoryItemArray.push(item);
-            if($scope.industryFilterhistory.length && $scope.industryFilterhistory.length>0) {
-              newHistoryItemArray.push($scope.industryFilterhistory[0]);
-              newHistoryItemArray.push($scope.industryFilterhistory[1]);
+            if(recentArray.length && recentArray.length>0) {
+              newHistoryItemArray.push(recentArray[0]);
+              newHistoryItemArray.push(recentArray[1]);
             }
           }
 
           var jsonArray = JSON.stringify(newHistoryItemArray);
           var itemToSend = {
-            customKey: "userPageFilterByIndustryHistory",
+            customKey: customerKey,
             value: jsonArray
           };
 
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function(resp) {
-            $scope.industryFilterhistory = JSON.parse(resp.value)
+            if(recentArray === $scope.industryFilterHistoryCompaniesPage) {
+              $scope.industryFilterHistoryCompaniesPage = JSON.parse(resp.value);
+            } else if(recentArray === $scope.industriesFilterHistoryUserPage) {
+              $scope.industriesFilterHistoryUserPage = JSON.parse(resp.value);
+            } else if (recentArray === $scope.companiesFilterHistoryUserPage) {
+              $scope.companiesFilterHistoryUserPage = JSON.parse(resp.value);
+            }
           })
+        }
+
+        function getCompanyNameById(id) {
+          var clientCompanies = $scope.clientCompanies();
+          var name ='';
+          for(var i=0; i<clientCompanies.length; i++) {
+            if(clientCompanies[i].id === id) {
+              name = clientCompanies[i].name;
+              break;
+            }
+          }
+          return name;
+        }
+
+        function getCompanyIdByCompanyName(name) {
+          var clientCompanies = $scope.clientCompanies();
+          var id ='';
+          for(var i=0; i<clientCompanies.length; i++) {
+            if(clientCompanies[i].name === name) {
+              id = clientCompanies[i].id;
+              break;
+            }
+          }
+          return id;
         }
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
           if (value ) {
-            sendNewPageFilterByIndustryHistoryItem(value);
+            sendNewFilterToStorage("companiesPageFilterByIndustryHistory", $scope.industryFilterHistoryCompaniesPage, value)
           }
         });
 
-        $scope.applyIndustryFilterFromHistoryList = function(value) {
+        $scope.$watch('usersSharedState.filter.industry', function (value) {
+          if (value ) {
+            sendNewFilterToStorage("userPageFilterByIndustryHistory", $scope.industriesFilterHistoryUserPage, value)
+          }
+        });
+
+        $scope.$watch('usersSharedState.filter.companyId', function (value) {
+          if (value ) {
+            sendNewFilterToStorage("userPageFilterByCompanyHistory", $scope.companiesFilterHistoryUserPage, getCompanyNameById(value))
+          }
+        });
+
+        $scope.applyIndustryFilterFromHistoryListCompanyPage = function(value) {
           companiesSharedState.filter.industry = value;
         };
 
+        $scope.applyIndustryFilterFromHistoryListUserPage = function(value) {
+          usersSharedState.filter.industry = value;
+        };
 
-        $scope.clientCompanies = CompaniesService.getClientCompanies;
+        $scope.applyCompanyFilterFromHistoryListUserPage = function(value) {
+          usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+        };
+
+
         TutorialsService.getTypes(function (resp) {
           $scope.tutorialTypes = resp;
         });
@@ -235,8 +293,10 @@
         };
 
         $scope.isArchivedCompaniesToShow = function() {
-          return $rootScope.showArchivedCompanies
+          return $rootScope.showArchivedCompanies;
         };
+
+
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
@@ -274,13 +334,27 @@
           }
         };
 
+        $scope.showArchivedUsers = function() {
+          $rootScope.showArchivedUsers = true;
+        };
+
+        $scope.isArchivedUsersToShow = function() {
+          return $rootScope.showArchivedUsers;
+        };
+
         $scope.filterUsers = function (filter, value) {
           var sharedFilter = usersSharedState.filter;
+          $rootScope.showArchivedUsers = false;
 
           switch (filter) {
             case 'managers':
-              clearFilter(sharedFilter);
+              //clearFilter(sharedFilter);
+              sharedFilter.isStandard = '';
               sharedFilter.isContact = true;
+              break;
+            case 'standard':
+              sharedFilter.isContact = '';
+              sharedFilter.isStandard = true;
               break;
             case 'leads':
               clearFilter(sharedFilter);

@@ -432,8 +432,8 @@
         </div>
         <div class="recent-left-panel">
           <h4 class="font-medium">recent</h4>
-          <p ng-repeat="item in industryFilterhistory track by $index"
-             ng-click="applyIndustryFilterFromHistoryList(item)">{{item}}</p>
+          <p ng-repeat="item in industryFilterHistoryCompaniesPage track by $index"
+             ng-click="applyIndustryFilterFromHistoryListCompanyPage(item)">{{item}}</p>
 
         </div>
       </div>
@@ -450,19 +450,22 @@
         <div class="center-category__category" ng-click="filterUsers()"
              ng-class="{'active': !(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
           All Users
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="!(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)"></i>
         </div>
-        <div class="center-category__category">
+        <div class="center-category__category" ng-click="showArchivedUsers()"
+             ng-class="{'active': isArchivedUsersToShow()}">
           Archived Users
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
         </div>
-        <div class="center-category__category">
+        <div class="center-category__category" ng-click="filterUsers('clients')"
+             ng-class="{'active': usersSharedState.filter.isClient}">
           Customer Users
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isClient"></i>
         </div>
-        <div class="center-category__category">
+        <div class="center-category__category" ng-click="filterUsers('leads')"
+             ng-class="{'active': usersSharedState.filter.isLead}">
           Lead Users
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isLead"></i>
         </div>
         <div class="left-panel-title font-medium">
           contact type
@@ -489,8 +492,8 @@
             </ul>
           </div>
         </div>
-        <div class="center-category__category" ng-click="filterUsers('clients')"
-             ng-class="{'active': usersSharedState.filter.isClient}">
+        <div class="center-category__category" ng-click="filterUsers('standard')"
+             ng-class="{'active': usersSharedState.filter.isStandard}">
           Standard User
           <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
@@ -527,9 +530,9 @@
             </div>
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
-              <p>Google</p>
-              <p>Apple</p>
-              <p>Facebook</p>
+              <p ng-repeat="item in industriesFilterHistoryUserPage track by $index"
+                 ng-click="applyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
+
             </div>
           </div>
           <div class="center-category__category filter">
@@ -546,9 +549,9 @@
             </div>
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
-              <p>Google</p>
-              <p>Apple</p>
-              <p>Facebook</p>
+              <p ng-repeat="item in companiesFilterHistoryUserPage track by $index"
+              ng-click="applyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
+
             </div>
           </div>
         </div>

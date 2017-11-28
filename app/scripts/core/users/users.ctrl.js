@@ -24,7 +24,6 @@
           field: 'name',
           reverse: false
         };
-        $scope.archivedShown = false;
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
@@ -34,7 +33,6 @@
 
         ColorsService.getUserColors($scope, function(resp) {
           $scope.usersColors = resp;
-          console.log("color resp:", $scope.usersColors);
         });
 
         $scope.changeView = function (view) {
@@ -69,7 +67,7 @@
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
           var isUserDeleted = value.deletedAt || company.deletedAt;
-          var result = !isUserDeleted && !$scope.archivedShown || $scope.archivedShown && isUserDeleted;
+          var result = !isUserDeleted && !$rootScope.showArchivedUsers || $rootScope.showArchivedUsers && isUserDeleted;
 
           if (value.isDefault || value.default || value.accountType === 'TECH') {
             return false;
@@ -87,6 +85,10 @@
             result = result && value.isContact;
           }
 
+          if(filter.isStandard) {
+            result = result && !value.isContact;
+          }
+
           if (filter.isLead) {
             result = result && clientType && clientType.toLowerCase() === 'lead';
           }
@@ -99,7 +101,6 @@
             var industryName = company.clientIndustry ? (company.clientIndustry.name || '') : '';
             result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
           }
-
           return result;
         };
 
