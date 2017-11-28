@@ -126,11 +126,9 @@
           usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
         };
 
-
         TutorialsService.getTypes(function (resp) {
           $scope.tutorialTypes = resp;
         });
-
 
         $scope.changeCompanyColor = function(type, colorCode) {
           console.log("colorCode: ", colorCode);
