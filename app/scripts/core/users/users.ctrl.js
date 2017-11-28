@@ -52,12 +52,13 @@
 
         $scope.getUserType = function(user) {
           var filter = headerSharedState.filter;
-          if(filter.isContact) {
+          if(user.isContact) {
             return 'MANAGER';
           }else {
-            var company = CompaniesService.getOneById(user.company.id);
-            var type = company.clientType;
-            return type;
+            // var company = CompaniesService.getOneById(user.company.id);
+            // var type = company.clientType;
+            // return type;
+            return 'CLIENT'
           }
 
         };
