@@ -32,6 +32,12 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        $scope.$state = $state;
+        $scope.PermissionsService = PermissionsService;
+        $rootScope.isLeftPanelHidden = false;
+
+        $scope.ticketsCounter;
+
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -145,11 +151,6 @@
           $scope.tutorialTypes = resp;
         });
 
-        $scope.$state = $state;
-        $scope.PermissionsService = PermissionsService;
-        $rootScope.isLeftPanelHidden = false;
-
-        $scope.ticketsCounter;
 
         $scope.changeCompanyColor = function(type, colorCode) {
           console.log("colorCode: ", colorCode);
