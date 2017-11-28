@@ -40,7 +40,8 @@
 }
 
 /*****/
-.inv-modal .topbar {
+.inv-modal .topbar,
+.hardware .topbar{
   position: fixed;
   top: 0;
   left: 0;
@@ -164,7 +165,8 @@
 }
 
 /****/
-.inv-modal .icn{
+.inv-modal .icn,
+.hardware .icn{
   background-image: url('../images/sprites-s76c759f188.png');
   background-repeat: no-repeat;
   display: inline-block;
@@ -174,7 +176,8 @@
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
-  .inv-modal .icn{
+  .inv-modal .icn,
+  .hardware .icn{
     background-image: url('../images/sprites-retina-s9f68249a71.png');
     background-repeat: no-repeat;
     -webkit-background-size: 4000px 800px;
@@ -182,7 +185,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     display: block;
   }
 }
-.inv-modal .icn-print{
+.inv-modal .icn-print,
+.hardware .icn-print{
   background-image: url("../images/new-icons/printer-white.png");
 }
 /*.inv-modal .icn-print:hover,.inv-modal .icn-print:active, .inv-modal :hover > .icn-print, .inv-modal :active > .icn-print{*/
@@ -234,23 +238,28 @@ only screen and (min-device-pixel-ratio: 1.5) {
   right: 0;
   top: 4px;
 }
-.inv-modal .invoice-actions{
+.inv-modal .invoice-actions,
+.hardware .invoice-actions{
   float: right;
 }
-.inv-modal .icn-send {
+.inv-modal .icn-send,
+.hardware .icn-send{
   background-position: -2365px 0;
   width: 12px;
   height: 12px;
 }
-.inv-modal .icn-close{
+.inv-modal .icn-close,
+.hardware .icn-close{
   background-position: -695px 1px;
   width: 12px;
   height: 12px;
 }
-.inv-modal .icn-close:hover, .inv-modal :hover > .icn-close{
+.inv-modal .icn-close:hover, .inv-modal :hover > .icn-close,
+.hardware .icn-close:hover, .hardware :hover > .icn-close{
   background-position: -735px 1px;
 }
-.inv-modal .close-icon{
+.inv-modal .close-icon,
+.hardware .close-icon{
   margin: 13px -1px 0 29px;
 }
 .inv-modal .company-dropdown .dropdown-menu{

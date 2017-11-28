@@ -13,10 +13,12 @@
 }
 
 .hardware {
-  padding-top: 20px;
+  padding: 20px 0;
   background: #F4F4F4;
 }
-
+.hardware-wrap::-webkit-scrollbar{
+  width: 0;
+}
 .hardware-wrap {
   position: fixed;
   top: 0;
@@ -26,7 +28,6 @@
   height: 100%;
   overflow: auto;
   background-color: #fff;
-  padding-bottom: 20px;
 }
 
 .hardware .password {

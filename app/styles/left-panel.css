@@ -160,7 +160,7 @@
   align-content: flex-start;
   flex-flow: row wrap;
 
-  padding-top: 78px;
+  padding: 78px 0 100px;
 }
 
 .left-panel-full__head--header {
@@ -475,7 +475,6 @@
   right: 25px;
   border-radius: 50%;
   top: 10px;
-  box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.50);
 }
 
 .user-company-circle .colored-circle,
