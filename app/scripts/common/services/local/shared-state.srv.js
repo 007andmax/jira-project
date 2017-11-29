@@ -14,7 +14,8 @@
         ticketsHeader: {
           searchFilter: {},
           checkedTicketsIds: [],
-          count: 0
+          count: 0,
+          filter: {}
         },
         draftsHeader: {
           selectedIds: []

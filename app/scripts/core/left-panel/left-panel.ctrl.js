@@ -5,20 +5,26 @@
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
-      'CompaniesService', 'TutorialsService', '$uibModal', 'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService',
+      'CompaniesService', 'TutorialsService', '$uibModal',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService, CustomStorageService) {
+                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService, CustomStorageService, UsersService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
           companiesSharedState = SharedStateService.getSharedState('companiesHeader'),
-          passwordSharedState = SharedStateService.getSharedState('passwordsHeader');
+          passwordSharedState = SharedStateService.getSharedState('passwordsHeader'),
+          ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
 
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
         $scope.passwordSharedState = passwordSharedState;
+        $scope.ticketsSharedState = ticketsSharedState;
         $scope.clientCompanies = CompaniesService.getClientCompanies;
+        $scope.allUsers = UsersService.getAllUsers;
+        $scope.clientUsers = UsersService.getClientUsers;
+        $scope.techUsers = UsersService.getTechUsers;
         $scope.qSHistoryExpanded = false;
         $scope.maxDate = Date.now();
         $scope.templates = [
@@ -56,9 +62,37 @@
           $scope.companiesFilterHistoryUserPage = resp;
         });
 
+        CustomStorageService.getUserCustomStorageValue('ticketPageFilterByCompanyHistory', function(resp) {
+          $scope.companiesFilterHistoryTicketsPage = resp;
+        });
+
+        CustomStorageService.getUserCustomStorageValue('ticketPageFilterByClientUsersHistory', function(resp) {
+          $scope.clientUsersFilterHistoryTicketsPage = resp;
+        });
+
+        CustomStorageService.getUserCustomStorageValue('ticketPageFilterByTechUsersHistory', function(resp) {
+          $scope.techUsersFilterHistoryTicketsPage = resp;
+        });
+
+        // $scope.getFullNameByClient = function(client){
+        //   var name = '';
+        //   if(client.lastName && client.firstname) {
+        //     name = client.firstName+' '+client.lastName;
+        //   } else  if (client.firstName && !client.lastName){
+        //     name = client.firstName
+        //   } else if(!client.firstName && client.lastName) {
+        //     name = client.lastName
+        //   }
+        //   return name;
+        // };
+
         function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
-          var ifItemAlreadyInTheList = recentArray.some((s) => s === item);
+          var ifItemAlreadyInTheList = false;
+          if(recentArray) {
+            ifItemAlreadyInTheList = recentArray.some((s) => s === item);
+          }
+
           if(ifItemAlreadyInTheList) {
             newHistoryItemArray = recentArray;
           } else {
@@ -82,6 +116,12 @@
               $scope.industriesFilterHistoryUserPage = JSON.parse(resp.value);
             } else if (recentArray === $scope.companiesFilterHistoryUserPage) {
               $scope.companiesFilterHistoryUserPage = JSON.parse(resp.value);
+            } else if (recentArray === $scope.companiesFilterHistoryTicketsPage) {
+              $scope.companiesFilterHistoryTicketsPage = JSON.parse(resp.value);
+            } else if (recentArray === $scope.clientUsersFilterHistoryTicketsPage) {
+              $scope.clientUsersFilterHistoryTicketsPage = JSON.parse(resp.value);
+            } else if (recentArray === $scope.techUsersFilterHistoryTicketsPage) {
+              $scope.techUsersFilterHistoryTicketsPage = JSON.parse(resp.value);
             }
           })
         }
@@ -95,6 +135,19 @@
           var company = $scope.clientCompanies().find((c) => c.name === name);
           return company ? company.id : '';
         }
+
+        function getUserIdByUserFullName(name) {
+          var user =  $scope.allUsers().find((user) => {
+            var fullName = user.firstName+' '+user.lastName;
+            return name === fullName;
+          });
+          return user.id;
+        }
+
+        // function getUserFullNameById(id) {
+        //   var user = $scope.allUsers().find((user) => user.id === id);
+        //   return user ? user.firstName+' '+user.lastName : '';
+        // }
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
           if (value ) {
@@ -114,6 +167,24 @@
           }
         });
 
+        $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
+          if (value ) {
+            sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value))
+          }
+        });
+
+        $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
+          if (value ) {
+            sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value))
+          }
+        });
+
+        $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
+          if (value ) {
+            sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value))
+          }
+        });
+
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function(value) {
           companiesSharedState.filter.industry = value;
         };
@@ -124,6 +195,18 @@
 
         $scope.applyCompanyFilterFromHistoryListUserPage = function(value) {
           usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+        };
+
+        $scope.applyCompanyFilterFromHistoryListTicketPage = function(value) {
+          ticketsSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+        };
+
+        $scope.applyClientUserFilterFromHistoryListTicketPage = function(value) {
+          ticketsSharedState.filter.clientUserId = getUserIdByUserFullName(value);
+        };
+
+        $scope.applyTechUserFilterFromHistoryListTicketPage = function(value) {
+          ticketsSharedState.filter.techUserId = getUserIdByUserFullName(value);
         };
 
         TutorialsService.getTypes(function (resp) {
@@ -246,6 +329,7 @@
         };
 
         $scope.stateGo = function (event, state, stateParams) {
+          clearFilter(ticketsSharedState.filter);
           if (event.button > 0) {
             var url = $state.href(state, stateParams, { absolute: true });
             window.open(url, '_blank');
@@ -275,7 +359,34 @@
           return $rootScope.showArchivedCompanies;
         };
 
+        $scope.ifTicketFilterEnable = function () {
+          return ticketsSharedState.filter.completed ||
+            ticketsSharedState.filter.inProgress ||
+            ticketsSharedState.filter.onHold;
+        };
 
+        $scope.filterTickets = function(filter, value) {
+          if(!$state.includes('tickets', {listType: 'all'})) {
+            $state.go('tickets', {listType: 'all'});
+          }
+          var sharedFilter = ticketsSharedState.filter;
+          switch(filter) {
+            case 'completed':
+              clearFilter(sharedFilter);
+              sharedFilter.completed = true;
+              break;
+            case 'inProgress':
+              clearFilter(sharedFilter);
+              sharedFilter.inProgress = true;
+              break;
+            case 'onHold':
+              clearFilter(sharedFilter);
+              sharedFilter.onHold = true;
+              break;
+            default:
+              clearFilter(sharedFilter);
+          }
+        };
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
@@ -468,6 +579,16 @@
 
           if(company)
             return company.name;
+        };
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            return user.firstName+' '+user.lastName;
+          }
         };
 
         //for one time popover
