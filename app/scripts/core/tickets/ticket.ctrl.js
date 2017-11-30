@@ -17,6 +17,20 @@
           $scope.agentList = resp;
         });
 
+        $scope.getTicketStatus = function(ticket) {
+          var status;
+          if(ticket.assignedUserId === null) {
+            status = 'unassigned';
+          } else if(ticket.status === 'COMPLETED') {
+            status = 'completed';
+          } else if(ticket.status === 'IN_PROGRESS') {
+            status = 'inProgress';
+          } else if(ticket.status === 'ON_HOLD') {
+            status = 'onHold';
+          }
+          return status;
+        };
+
         $scope.changeTicketPriority = function (priority, dropdowns) {
           TicketsService.changePriority($scope.ticket.id, priority, function () {
             UserNotificationService.show('The ticket “' + $scope.ticket.number + '” priority has been changed to ' + priority, true);

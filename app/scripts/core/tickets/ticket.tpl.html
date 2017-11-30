@@ -103,6 +103,7 @@
         </span>
 
         <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket"
+              ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor}"
               ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>

@@ -5,9 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      'quicktech.common.services.PermissionsService', 'DevicesService',
+      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService) {
 
         var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
@@ -17,6 +17,7 @@
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+        $scope.tagColors = TagsService.getColors();
         $scope.attachmentTypePattern = /[0-9a-z]+$/i;
         $scope.numberPattern = /^\+?[0-9]{0,19}$/;
         $scope.attachmentType = {
@@ -61,7 +62,7 @@
         $scope.ticketFilter = function(value) {
           var filter = ticketsHeaderState.filter;
           var result = true;
-          if(!filter.completed && !filter.inProgress && !filter.onHold && !filter.companyId && !filter.clientUserId && !filter.techUserId) {
+          if(!filter.completed && !filter.inProgress && !filter.onHold && !filter.onHoldTag && !filter.companyId && !filter.clientUserId && !filter.techUserId) {
             return result;
           }
 
@@ -84,6 +85,9 @@
             result = result && value.status === 'IN_PROGRESS';
           }
           if(filter.onHold) {
+            result = result && value.status === 'ON_HOLD';
+          }
+          if(filter.onHoldTag) {
             result = result && value.status === 'ON_HOLD';
           }
           return result;

@@ -176,7 +176,7 @@
         <div class="center-category__category"
              ng-click="filterTickets('onHold')"
              ng-class="{active: ticketsSharedState.filter.onHold}">
-          On Hold <span>123</span>
+          On Hold <span>{{ticketsCounter.ON_HOLD}}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
@@ -194,19 +194,19 @@
         <div class="center-category__category sked">
           <div ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
                ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-            Unnassigned
+            Unassigned
           </div>
 
           <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
-                              'border-color': tagColors[companiesColors['CLIENT']].borderColor}"></span>
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['unassigned']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['unassigned']].borderColor}"></span>
             </div>
             <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
               <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['CLIENT'] === $index}"
-                  ng-click="changeCompanyColor('CLIENT', $index)">
+                  ng-class="{'active': ticketsTagsColors['unassigned'] === $index}"
+                  ng-click="changeTicketsTagColor('unassigned', $index)">
                 <i class="tag-color tag-color-md"
                    ng-style="{'background-color': tagColor.backgroundColor,
                               'border-color': tagColor.borderColor}"></i>
@@ -223,13 +223,13 @@
           <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
-                              'border-color': tagColors[companiesColors['CLIENT']].borderColor}"></span>
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['completed']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['completed']].borderColor}"></span>
             </div>
             <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
               <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['CLIENT'] === $index}"
-                  ng-click="changeCompanyColor('CLIENT', $index)">
+                  ng-class="{'active': ticketsTagsColors['completed'] === $index}"
+                  ng-click="changeTicketsTagColor('completed', $index)">
                 <i class="tag-color tag-color-md"
                    ng-style="{'background-color': tagColor.backgroundColor,
                               'border-color': tagColor.borderColor}"></i>
@@ -246,13 +246,13 @@
           <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
-                              'border-color': tagColors[companiesColors['CLIENT']].borderColor}"></span>
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['inProgress']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['inProgress']].borderColor}"></span>
             </div>
             <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
               <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['CLIENT'] === $index}"
-                  ng-click="changeCompanyColor('CLIENT', $index)">
+                  ng-class="{'active': ticketsTagsColors['inProgress'] === $index}"
+                  ng-click="changeTicketsTagColor('inProgress', $index)">
                 <i class="tag-color tag-color-md"
                    ng-style="{'background-color': tagColor.backgroundColor,
                               'border-color': tagColor.borderColor}"></i>
@@ -261,21 +261,21 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-click="filterTickets('onHold')"
-               ng-class="{active: ticketsSharedState.filter.onHold}">
+          <div ng-click="filterTickets('onHoldTag')"
+               ng-class="{active: ticketsSharedState.filter.onHoldTag}">
             On Hold
           </div>
 
           <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
-                              'border-color': tagColors[companiesColors['CLIENT']].borderColor}"></span>
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['onHold']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['onHold']].borderColor}"></span>
             </div>
             <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
               <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['CLIENT'] === $index}"
-                  ng-click="changeCompanyColor('CLIENT', $index)">
+                  ng-class="{'active': ticketsTagsColors['onHold'] === $index}"
+                  ng-click="changeTicketsTagColor('onHold', $index)">
                 <i class="tag-color tag-color-md"
                    ng-style="{'background-color': tagColor.backgroundColor,
                               'border-color': tagColor.borderColor}"></i>

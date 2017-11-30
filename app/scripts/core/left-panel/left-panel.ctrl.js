@@ -50,6 +50,13 @@
 
         $scope.tagColors = TagsService.getColors();
 
+        $rootScope.ticketsTagsColors = {
+          unassigned: 0,
+          completed: 1,
+          inProgress: 2,
+          onHold: 9
+        };
+
         CustomStorageService.getUserCustomStorageValue('companiesPageFilterByIndustryHistory', function(resp) {
           $scope.industryFilterHistoryCompaniesPage = resp;
         });
@@ -73,6 +80,13 @@
         CustomStorageService.getUserCustomStorageValue('ticketPageFilterByTechUsersHistory', function(resp) {
           $scope.techUsersFilterHistoryTicketsPage = resp;
         });
+
+        CustomStorageService.getUserCustomStorageValue('ticketsTagsColors', function(resp) {
+          if(resp) {
+            $rootScope.ticketsTagsColors = resp;
+          }
+        });
+
 
         // $scope.getFullNameByClient = function(client){
         //   var name = '';
@@ -213,6 +227,22 @@
           $scope.tutorialTypes = resp;
         });
 
+
+        $scope.changeTicketsTagColor = function(type, colorCode) {
+          console.log("colorCode: ", colorCode);
+          console.log("type: ", type);
+          $scope.ticketsTagsColors[type] = colorCode;
+
+          var jsonObj = JSON.stringify($rootScope.ticketsTagsColors);
+          var itemToSend = {
+            customKey: 'ticketsTagsColors',
+            value: jsonObj
+          };
+          CustomStorageService.saveUserCustomStorageItem(itemToSend, function(resp) {
+            console.log(resp);
+          })
+        };
+
         $scope.changeCompanyColor = function(type, colorCode) {
           console.log("colorCode: ", colorCode);
           console.log("type: ", type);
@@ -270,6 +300,7 @@
 
         TicketsService.getAllCounts( function(resp) {
           $scope.ticketsCounter = resp;
+
         });
 
         CompaniesService.getIndustries(function (resp) {
@@ -362,7 +393,8 @@
         $scope.ifTicketFilterEnable = function () {
           return ticketsSharedState.filter.completed ||
             ticketsSharedState.filter.inProgress ||
-            ticketsSharedState.filter.onHold;
+            ticketsSharedState.filter.onHold ||
+            ticketsSharedState.filter.onHoldTag;
         };
 
         $scope.filterTickets = function(filter, value) {
@@ -382,6 +414,10 @@
             case 'onHold':
               clearFilter(sharedFilter);
               sharedFilter.onHold = true;
+              break;
+            case 'onHoldTag':
+              clearFilter(sharedFilter);
+              sharedFilter.onHoldTag = true;
               break;
             default:
               clearFilter(sharedFilter);

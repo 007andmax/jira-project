@@ -175,6 +175,16 @@
                 operator: 'NOT_NULL'
               }]
             }]
+          },
+          ON_HOLD: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'status',
+                operator: 'EQ',
+                values: ['ON_HOLD']
+              }]
+            }]
           }
         };
       }
