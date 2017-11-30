@@ -88,18 +88,6 @@
         });
 
 
-        // $scope.getFullNameByClient = function(client){
-        //   var name = '';
-        //   if(client.lastName && client.firstname) {
-        //     name = client.firstName+' '+client.lastName;
-        //   } else  if (client.firstName && !client.lastName){
-        //     name = client.firstName
-        //   } else if(!client.firstName && client.lastName) {
-        //     name = client.lastName
-        //   }
-        //   return name;
-        // };
-
         function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
           var ifItemAlreadyInTheList = false;
@@ -158,10 +146,6 @@
           return user.id;
         }
 
-        // function getUserFullNameById(id) {
-        //   var user = $scope.allUsers().find((user) => user.id === id);
-        //   return user ? user.firstName+' '+user.lastName : '';
-        // }
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
           if (value ) {
