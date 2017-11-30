@@ -461,6 +461,8 @@
         };
 
         $scope.showArchivedUsers = function() {
+          var sharedFilter = usersSharedState.filter;
+          clearFilter(sharedFilter);
           $rootScope.showArchivedUsers = true;
         };
 
@@ -474,7 +476,6 @@
 
           switch (filter) {
             case 'managers':
-              //clearFilter(sharedFilter);
               sharedFilter.isStandard = '';
               sharedFilter.isContact = true;
               break;
@@ -489,6 +490,10 @@
             case 'clients':
               clearFilter(sharedFilter);
               sharedFilter.isClient = true;
+              break;
+            case 'archived':
+              clearFilter(sharedFilter);
+              sharedFilter.isArchived = true;
               break;
             case 'byIndustry':
               sharedFilter.industry = value;

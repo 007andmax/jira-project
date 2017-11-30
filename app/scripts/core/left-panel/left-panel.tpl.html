@@ -478,10 +478,10 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-click="filterUsers()"
-             ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
+             ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())}">
           All Users
           <i class="icn-sm icn-label-save-left-panel"
-             ng-show="!( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)"></i>
+             ng-show="!( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())"></i>
         </div>
         <div class="center-category__category" ng-click="showArchivedUsers()"
              ng-class="{'active': isArchivedUsersToShow()}">
