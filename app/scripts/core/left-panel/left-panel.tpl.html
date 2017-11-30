@@ -308,16 +308,16 @@
 
 
 
-        <div class="left-panel-title font-medium">
+        <div class="left-panel-title font-medium" ng-show="ticketsSharedState.filter.companyId">
           by user
         </div>
-        <div class="filter-left-panel">
+        <div class="filter-left-panel" ng-show="ticketsSharedState.filter.companyId">
           <div class="x-mark-wrapper">
             <input type="text" class="form-control has-dropdown pointer"
                    placeholder="Select User"
                    typeahead-input-formatter="getUserByID($model)"
                    autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId" typeahead-editable="false"
-                   uib-typeahead="client.id as client.firstName+' '+client.lastName for client in clientUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   uib-typeahead="client.id as client.firstName+' '+client.lastName for client in clientsUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
                    qt-typeahead-show-on-focus
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
             <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
@@ -330,16 +330,16 @@
           </div>
         </div>
 
-        <div class="left-panel-title font-medium">
+        <div class="left-panel-title font-medium" ng-show="ticketsSharedState.filter.companyId">
           by tech team
         </div>
-        <div class="filter-left-panel" style="padding: 0 25px 80px;">
+        <div class="filter-left-panel" style="padding: 0 25px 80px;" ng-show="ticketsSharedState.filter.companyId">
           <div class="x-mark-wrapper">
             <input type="text" class="form-control has-dropdown pointer"
                    placeholder="Select User"
                    typeahead-input-formatter="getUserByID($model)"
                    autocomplete="off" ng-model="ticketsSharedState.filter.techUserId" typeahead-editable="false"
-                   uib-typeahead="client.id as client.firstName+' '+client.lastName for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   uib-typeahead="client.id as client.firstName+' '+client.lastName for client in techUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
                    qt-typeahead-show-on-focus
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
             <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>

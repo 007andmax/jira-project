@@ -183,7 +183,13 @@
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
           if (value ) {
-            sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value))
+            sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
+            console.log(value);
+            $scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
+            $scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
+          } else if (value === undefined) {
+            var sharedFilter = ticketsSharedState.filter;
+            clearFilter(sharedFilter);
           }
         });
 
