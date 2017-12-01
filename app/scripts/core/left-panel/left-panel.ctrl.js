@@ -478,7 +478,6 @@
 
         $scope.filterUsers = function (filter, value) {
           var sharedFilter = usersSharedState.filter;
-          $rootScope.showArchivedUsers = false;
 
           switch (filter) {
             case 'managers':
@@ -490,10 +489,12 @@
               sharedFilter.isStandard = true;
               break;
             case 'leads':
+              $rootScope.showArchivedUsers = false;
               clearFilter(sharedFilter);
               sharedFilter.isLead = true;
               break;
             case 'clients':
+              $rootScope.showArchivedUsers = false;
               clearFilter(sharedFilter);
               sharedFilter.isClient = true;
               break;
@@ -510,6 +511,7 @@
               sharedFilter.industry = '';
               break;
             default:
+              $rootScope.showArchivedUsers = false;
               clearFilter(sharedFilter);
           }
         };

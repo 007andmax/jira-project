@@ -483,11 +483,6 @@
           <i class="icn-sm icn-label-save-left-panel"
              ng-show="!( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())"></i>
         </div>
-        <div class="center-category__category" ng-click="showArchivedUsers()"
-             ng-class="{'active': isArchivedUsersToShow()}">
-          Archived Users
-          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
-        </div>
         <div class="center-category__category" ng-click="filterUsers('clients')"
              ng-class="{'active': usersSharedState.filter.isClient}">
           Customer Users
@@ -497,6 +492,11 @@
              ng-class="{'active': usersSharedState.filter.isLead}">
           Lead Users
           <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isLead"></i>
+        </div>
+        <div class="center-category__category" ng-click="showArchivedUsers()"
+             ng-class="{'active': isArchivedUsersToShow()}">
+          Archived Users
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
         </div>
         <div class="left-panel-title font-medium">
           contact type
@@ -525,7 +525,7 @@
         </div>
         <div class="center-category__category" ng-click="filterUsers('standard')"
              ng-class="{'active': usersSharedState.filter.isStandard}">
-          Standard User
+          Standard Users
           <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
