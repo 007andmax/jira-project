@@ -168,24 +168,42 @@
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
           if (value ) {
             sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
-            console.log(value);
+            ticketsSharedState.filter.completed = false;
+            ticketsSharedState.filter.inProgress = false;
+            ticketsSharedState.filter.onHold = false;
+            ticketsSharedState.filter.onHoldTag = false;
+            $scope.globalSearch.count = '';
             $scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
             $scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
           } else if (value === undefined) {
-            var sharedFilter = ticketsSharedState.filter;
-            clearFilter(sharedFilter);
+            //var sharedFilter = ticketsSharedState.filter;
+            clearFilter(ticketsSharedState.filter);
           }
         });
 
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
           if (value ) {
+            ticketsSharedState.filter.completed = false;
+            ticketsSharedState.filter.inProgress = false;
+            ticketsSharedState.filter.onHold = false;
+            ticketsSharedState.filter.onHoldTag = false;
+            $scope.globalSearch.count = '';
             sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value))
+          } else if(value === undefined) {
+            ticketsSharedState.filter.clientUserId = '';
           }
         });
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
           if (value ) {
+            ticketsSharedState.filter.completed = false;
+            ticketsSharedState.filter.inProgress = false;
+            ticketsSharedState.filter.onHold = false;
+            ticketsSharedState.filter.onHoldTag = false;
+            $scope.globalSearch.count = '';
             sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value))
+          } else if(value === undefined) {
+            ticketsSharedState.filter.techUserId = '';
           }
         });
 
@@ -219,8 +237,6 @@
 
 
         $scope.changeTicketsTagColor = function(type, colorCode) {
-          console.log("colorCode: ", colorCode);
-          console.log("type: ", type);
           $scope.ticketsTagsColors[type] = colorCode;
 
           var jsonObj = JSON.stringify($rootScope.ticketsTagsColors);
@@ -234,8 +250,6 @@
         };
 
         $scope.changeCompanyColor = function(type, colorCode) {
-          console.log("colorCode: ", colorCode);
-          console.log("type: ", type);
           var dataToSend = {
             type: type,
             colorCode: colorCode
@@ -388,26 +402,28 @@
         };
 
         $scope.filterTickets = function(filter, value) {
-          if(!$state.includes('tickets', {listType: 'all'})) {
-            $state.go('tickets', {listType: 'all'});
-          }
+          $state.go('tickets', {listType: 'all'});
           var sharedFilter = ticketsSharedState.filter;
           switch(filter) {
             case 'completed':
               clearFilter(sharedFilter);
               sharedFilter.completed = true;
+              $scope.globalSearch.count = $scope.ticketsCounter.COMPLETED;
               break;
             case 'inProgress':
               clearFilter(sharedFilter);
               sharedFilter.inProgress = true;
+              $scope.globalSearch.count = $scope.ticketsCounter.IN_PROGRESS;
               break;
             case 'onHold':
               clearFilter(sharedFilter);
               sharedFilter.onHold = true;
+              $scope.globalSearch.count = $scope.ticketsCounter.ON_HOLD;
               break;
             case 'onHoldTag':
               clearFilter(sharedFilter);
               sharedFilter.onHoldTag = true;
+              $scope.globalSearch.count = $scope.ticketsCounter.ON_HOLD;
               break;
             default:
               clearFilter(sharedFilter);

@@ -17,25 +17,25 @@ $green-active: #668C4D;
 
 .onhold-ticket {
   background-color: #fff;
-  color: $red!important;
+  color: $red;
   border: 1px solid $red;
   border-radius: 4px;
 }
 .completed-ticket {
   background-color: #fff;
-  color: $green!important;
+  color: $green;
   border: 1px solid $green;
   border-radius: 4px;
 }
 .progress-ticket {
   background-color: #fff;
-  color: $yellow!important;
+  color: $yellow;
   border: 1px solid $yellow;
   border-radius: 4px;
 }
 .Unclaimed-ticket{
   background: #fff;
-  color: $primary-color!important;
+  color: $primary-color;
   border: 1px solid $primary-color;
   border-radius: 4px;
 }

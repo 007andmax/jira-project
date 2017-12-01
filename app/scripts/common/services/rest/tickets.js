@@ -185,6 +185,26 @@
                 values: ['ON_HOLD']
               }]
             }]
+          },
+          IN_PROGRESS: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'status',
+                operator: 'EQ',
+                values: ['IN_PROGRESS']
+              }]
+            }]
+          },
+          COMPLETED: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'status',
+                operator: 'EQ',
+                values: ['COMPLETED']
+              }]
+            }]
           }
         };
       }

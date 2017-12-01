@@ -55,12 +55,49 @@
                 TicketsService.getCount(function (quantity) {
                   scope.globalSearch.count = quantity;
                 });
+                // var ticketFilter = ticketsHeaderState.filter;
+                // var result;
+                // var isAnyFilters = false;
+                // for(var prop in ticketFilter) {
+                //   if (ticketFilter.hasOwnProperty(prop)) {
+                //     isAnyFilters = true;
+                //     break;
+                //   }
+                // }
+                // if(isAnyFilters) {
+                //   if (ticketFilter.companyId) {
+                //     result = scope.tickets.filter((ticket) => ticket.company.id === ticketFilter.companyId)
+                //   }
+                //
+                //   if (ticketFilter.clientUserId) {
+                //     result = scope.tickets.filter((ticket) => ticket.createdUserId === ticketFilter.clientUserId)
+                //   }
+                //
+                //   if (ticketFilter.techUserId) {
+                //     result = scope.tickets.filter((ticket) => ticket.createdUserId === ticketFilter.techUserId)
+                //   }
+                //
+                //   if(ticketFilter.completed) {
+                //     result = scope.tickets.filter((ticket) => ticket.status === 'COMPLETED')
+                //   }
+                //   if(ticketFilter.inProgress) {
+                //     result = scope.tickets.filter((ticket) => ticket.status === 'IN_PROGRESS')
+                //   }
+                //   if(ticketFilter.onHold) {
+                //     result = scope.tickets.filter((ticket) => ticket.status === 'ON_HOLD')
+                //   }
+                //   if(ticketFilter.onHoldTag) {
+                //     result = scope.tickets.filter((ticket) => ticket.status === 'ON_HOLD')
+                //   }
+                //   scope.globalSearch.count = result.length;
+                // }
 
                 UserNotificationService.hide();
                 initScrollListener();
                 openTicketList();
               });
             }
+
 
             function initScrollListener() {
               $document.on('scroll', scrollHandler);
