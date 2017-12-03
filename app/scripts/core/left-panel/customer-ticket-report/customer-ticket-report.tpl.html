@@ -8,48 +8,48 @@
      ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
   <div class="hardware">
 
-    <!--<div class="hardware__control-panel" style="width: 150px;">-->
-      <!--<div class="hardware__control-panel&#45;&#45;btn open-pdf-btn" ng-click="openInPdf()">-->
-        <!--<img src="images/new-icons/printer.png" alt="">-->
-        <!--<p>Print</p>-->
-      <!--</div>-->
-      <!--<div class="hardware__control-panel&#45;&#45;btn" ng-click="close()">-->
-        <!--<img src="images/new-icons/cancel-circle.png" alt="">-->
-        <!--<p>Close</p>-->
-      <!--</div>-->
-    <!--</div>-->
-    <div class="topbar">
-      <div class="invoice-actions">
-
-        <div class="btn btn-primary pull-left" ng-if="!invoicePreview"
-             ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
-             ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
-             tooltip-placement="bottom" tooltip-append-to-body="true"
-             uib-tooltip="{{ receivablePreview ? 'Print Invoice' : 'Create and Print Invoice' }}">
-          <i class="icon-sm icn-print"></i>
-        </div>
-
-        <div style="margin-left: 10px;" class="btn  btn-primary pull-left" ng-if="!invoicePreview"
-             ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
-             ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
-             tooltip-placement="bottom" tooltip-append-to-body="true"
-             uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
-          <i class="icon-sm icn-download-white"></i>
-        </div>
-
-        <div style="margin-left: 10px;" class="btn  btn-primary pull-left" ng-if="!invoicePreview && !receivablePreview"
-             ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
-             ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
-             tooltip-placement="bottom" tooltip-append-to-body="true" uib-tooltip="Create and Send Invoice">
-          <i class="icn icn-send"></i>
-        </div>
-
-        <a href="javascript:void(0)" class="close-icon hit-area pull-left" ng-click="close()">
-          <i class="icn icn-close"></i>
-        </a>
-
+    <div class="hardware__control-panel" style="width: 150px;">
+      <div class="hardware__control-panel--btn open-pdf-btn" ng-click="openInPdf()">
+        <img src="images/new-icons/printer.png" alt="">
+        <p>Print</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="close()">
+        <img src="images/new-icons/cancel-circle.png" alt="">
+        <p>Close</p>
       </div>
     </div>
+    <!--<div class="topbar">-->
+      <!--<div class="invoice-actions">-->
+
+        <!--<div class="btn btn-primary pull-left" ng-if="!invoicePreview"-->
+             <!--ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"-->
+             <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
+             <!--tooltip-placement="bottom" tooltip-append-to-body="true"-->
+             <!--uib-tooltip="{{ receivablePreview ? 'Print Invoice' : 'Create and Print Invoice' }}">-->
+          <!--<i class="icon-sm icn-print"></i>-->
+        <!--</div>-->
+
+        <!--<div style="margin-left: 10px;" class="btn  btn-primary pull-left" ng-if="!invoicePreview"-->
+             <!--ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"-->
+             <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
+             <!--tooltip-placement="bottom" tooltip-append-to-body="true"-->
+             <!--uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">-->
+          <!--<i class="icon-sm icn-download-white"></i>-->
+        <!--</div>-->
+
+        <!--<div style="margin-left: 10px;" class="btn  btn-primary pull-left" ng-if="!invoicePreview && !receivablePreview"-->
+             <!--ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"-->
+             <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
+             <!--tooltip-placement="bottom" tooltip-append-to-body="true" uib-tooltip="Create and Send Invoice">-->
+          <!--<i class="icn icn-send"></i>-->
+        <!--</div>-->
+
+        <!--<a href="javascript:void(0)" class="close-icon hit-area pull-left" ng-click="close()">-->
+          <!--<i class="icn icn-close"></i>-->
+        <!--</a>-->
+
+      <!--</div>-->
+    <!--</div>-->
 
     <div class="product-list-ticket">
       <div class="customer-ticket" ng-if="data">
