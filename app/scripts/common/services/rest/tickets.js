@@ -226,13 +226,32 @@
             }]
           }
           loadMore(listType, callback);
-          getCompanyTicketCount(ticketsSharedState.filter.companyId);
+          getCompanyTicketCount(storage.lastParams);
         } else {
           var query = queries[listType.toUpperCase()];
 
           if (query) {
+            if(ticketsSharedState.filter.companyId) {
+              var groupedQuery = {
+                excludeTrashSpam: true,
+                groupFieldFilters: [{
+                  predicateRule: 'AND',
+                  fieldFilterDtos: [{
+                    path: 'companyId',
+                    operator: 'EQ',
+                    values: [ticketsSharedState.filter.companyId]
+                  },
+                    query.groupFieldFilters[0].fieldFilterDtos[0]
+                  ]
+                }]
+              };
+              storage.lastParams = angular.copy(groupedQuery);
+              getCompanyTicketCount(storage.lastParams);
+            } else {
+              storage.lastParams = angular.copy(query);
+            }
+
             storage.tickets = [];
-            storage.lastParams = angular.copy(query);
 
             if (userId) {
               storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
@@ -255,6 +274,7 @@
                 }]
               });
             }
+
             loadMore(listType, callback);
           }
         }
@@ -442,20 +462,9 @@
         });
       }
 
-      function getCompanyTicketCount(companyId) {
-        var query = {
-          BY_COMPANY : {
-            excludeTrashSpam: true,
-            groupFieldFilters: [{
-              fieldFilterDtos: [{
-                path: 'companyId',
-                operator: 'EQ',
-                values: [ticketsSharedState.filter.companyId]
-              }]
-            }]
-          }
-        }
-        $http.post('/v2/tickets/counts', query).then(function(resp) {
+      function getCompanyTicketCount(query) {
+
+        $http.post('/v2/tickets/counts', {BY_COMPANY: query}).then(function(resp) {
           if(resp) {
             globalSearch.count = resp.data.BY_COMPANY;
           }
