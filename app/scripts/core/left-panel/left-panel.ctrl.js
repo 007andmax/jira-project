@@ -186,8 +186,14 @@
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
             $scope.globalSearch.count = '';
-            $scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
-            $scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
+            //$scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
+            $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
+              return user.company.id === value;
+            });
+            //$scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
+            $scope.techUsersByCompany = $scope.techUsers().filter(function(user) {
+              return user.company.id === value;
+            });
           } else if (value === undefined) {
             //var sharedFilter = ticketsSharedState.filter;
             clearFilter(ticketsSharedState.filter);
