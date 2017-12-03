@@ -240,11 +240,14 @@
                     path: 'companyId',
                     operator: 'EQ',
                     values: [ticketsSharedState.filter.companyId]
-                  },
-                    query.groupFieldFilters[0].fieldFilterDtos[0]
+                  }
                   ]
                 }]
               };
+              if(query && query.groupFieldFilters) {
+                var t = query.groupFieldFilters[0].fieldFilterDtos[0]
+                groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(t)
+              }
               storage.lastParams = angular.copy(groupedQuery);
               getCompanyTicketCount(storage.lastParams);
             } else {
