@@ -388,15 +388,12 @@
         $scope.isOnHoldTag = false;
 
         $scope.stateGo = function (event, state, stateParams, isTag) {
-          // if(stateParams.listType !== 'by_company') {
-          //   clearFilter(ticketsSharedState.filter);
-          // }
+
           if(isTag) {
             $scope.isOnHoldTag = true;
           } else {
             $scope.isOnHoldTag = false;
           }
-          //clearFilter(ticketsSharedState.filter);
           if (event && event.button > 0) {
             var url = $state.href(state, stateParams, { absolute: true });
             window.open(url, '_blank');

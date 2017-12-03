@@ -224,7 +224,7 @@
                 values: [ticketsSharedState.filter.companyId]
               }]
             }]
-          }
+          };
           loadMore(listType, callback);
           getCompanyTicketCount(storage.lastParams);
         } else {
@@ -245,7 +245,7 @@
                 }]
               };
               if(query && query.groupFieldFilters) {
-                var t = query.groupFieldFilters[0].fieldFilterDtos[0]
+                var t = query.groupFieldFilters[0].fieldFilterDtos[0];
                 groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(t)
               }
               storage.lastParams = angular.copy(groupedQuery);
