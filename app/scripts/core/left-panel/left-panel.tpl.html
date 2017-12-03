@@ -173,9 +173,14 @@
              ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
           Closed <span>{{ticketsCounter.CLOSED}}</span>
         </div>
+        <!--<div class="center-category__category"-->
+             <!--ng-click="filterTickets('onHold')"-->
+             <!--ng-class="{active: ticketsSharedState.filter.onHold}">-->
+          <!--On Hold <span>{{ticketsCounter.ON_HOLD}}</span>-->
+        <!--</div>-->
         <div class="center-category__category"
-             ng-click="filterTickets('onHold')"
-             ng-class="{active: ticketsSharedState.filter.onHold}">
+             ng-class="{active: $state.includes('tickets', {listType: 'on_hold'})}"
+             ng-click="stateGo($event, 'tickets', {listType: 'on_hold'})">
           On Hold <span>{{ticketsCounter.ON_HOLD}}</span>
         </div>
         <div class="center-category__category"
@@ -215,8 +220,8 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-click="filterTickets('completed')"
-               ng-class="{active: ticketsSharedState.filter.completed}">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
+               ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
             Completed
           </div>
 
@@ -238,8 +243,8 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-click="filterTickets('inProgress')"
-               ng-class="{active: ticketsSharedState.filter.inProgress}">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
+               ng-click="stateGo($event, 'tickets', {listType: 'in_progress'})">
             In Progress
           </div>
 
@@ -261,8 +266,8 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-click="filterTickets('onHoldTag')"
-               ng-class="{active: ticketsSharedState.filter.onHoldTag}">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'on_hold'})}"
+               ng-click="stateGo($event, 'tickets', {listType: 'on_hold'})">
             On Hold
           </div>
 

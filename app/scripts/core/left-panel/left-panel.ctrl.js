@@ -185,18 +185,17 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            $scope.globalSearch.count = '';
-            //$scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
             $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
               return user.company.id === value;
             });
-            //$scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
             $scope.techUsersByCompany = $scope.techUsers().filter(function(user) {
               return user.company.id === value;
             });
+
+            $scope.stateGo(event, 'tickets', {listType: 'by_company'});
           } else if (value === undefined) {
-            //var sharedFilter = ticketsSharedState.filter;
             clearFilter(ticketsSharedState.filter);
+            $scope.stateGo(event, 'tickets', {listType: 'all'});
           }
         });
 
@@ -383,7 +382,9 @@
         };
 
         $scope.stateGo = function (event, state, stateParams) {
-          clearFilter(ticketsSharedState.filter);
+          if(!stateParams === 'by_company') {
+            clearFilter(ticketsSharedState.filter);
+          }
           if (event.button > 0) {
             var url = $state.href(state, stateParams, { absolute: true });
             window.open(url, '_blank');
