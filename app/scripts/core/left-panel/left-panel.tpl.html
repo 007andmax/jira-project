@@ -159,7 +159,7 @@
           Dashboard
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'all'}) && !ifTicketFilterEnable()}"
+             ng-class="{active: $state.includes('tickets', {listType: 'all'}) || $state.includes('tickets', {listType: 'by_company'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
           All Tickets <span>{{ticketsCounter.ALL}}</span>
         </div>
