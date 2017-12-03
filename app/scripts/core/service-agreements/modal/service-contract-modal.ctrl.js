@@ -291,7 +291,10 @@
         }
 
         $scope.showAdditionalServiceColumn = function() {
-          var show =  $scope.serviceContract.serviceContractServices.some((s) => s.billable);
+          //var show =  $scope.serviceContract.serviceContractServices.some((s) => s.billable);
+          var show =  $scope.serviceContract.serviceContractServices.some(function(s) {
+            return s.billable;
+          });
           return show;
         };
 
