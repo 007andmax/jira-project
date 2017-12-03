@@ -63,6 +63,8 @@
         leftPanelCounters: {}
       };
 
+      var globalSearch = SharedStateService.getSharedState('globalSearch');
+
       var userId;
 
       var unwatch = $rootScope.$watch('currentUser.id', function (currentUserId) {
@@ -224,6 +226,7 @@
             }]
           }
           loadMore(listType, callback);
+          getCompanyTicketCount(ticketsSharedState.filter.companyId);
         } else {
           var query = queries[listType.toUpperCase()];
 
@@ -264,6 +267,7 @@
         storage.lastParams.offset = storage.tickets.length;
 
         loadingInProcess = true;
+
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
 
@@ -436,6 +440,27 @@
             callback(resp.data);
           }
         });
+      }
+
+      function getCompanyTicketCount(companyId) {
+        var query = {
+          BY_COMPANY : {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'companyId',
+                operator: 'EQ',
+                values: [ticketsSharedState.filter.companyId]
+              }]
+            }]
+          }
+        }
+        $http.post('/v2/tickets/counts', query).then(function(resp) {
+          if(resp) {
+            globalSearch.count = resp.data.BY_COMPANY;
+          }
+        })
+
       }
 
       function changePriority(ticketId, priority, callback) {

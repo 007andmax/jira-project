@@ -179,7 +179,7 @@
           <!--On Hold <span>{{ticketsCounter.ON_HOLD}}</span>-->
         <!--</div>-->
         <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'on_hold'})}"
+             ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && !isOnHoldTag}"
              ng-click="stateGo($event, 'tickets', {listType: 'on_hold'})">
           On Hold <span>{{ticketsCounter.ON_HOLD}}</span>
         </div>
@@ -266,8 +266,8 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-class="{active: $state.includes('tickets', {listType: 'on_hold'})}"
-               ng-click="stateGo($event, 'tickets', {listType: 'on_hold'})">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
+               ng-click="stateGo($event, 'tickets', {listType: 'on_hold'}, true)">
             On Hold
           </div>
 

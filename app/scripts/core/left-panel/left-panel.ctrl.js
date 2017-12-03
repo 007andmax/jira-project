@@ -185,17 +185,21 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
+            //$scope.globalSearch.count = 0;
+            //$rootScope.ticketPageCompnayIdFilter = value;
+            //$scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
             $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
               return user.company.id === value;
             });
+            //$scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
             $scope.techUsersByCompany = $scope.techUsers().filter(function(user) {
               return user.company.id === value;
             });
 
-            $scope.stateGo(event, 'tickets', {listType: 'by_company'});
+            $scope.stateGo(null, 'tickets', {listType: 'by_company'});
           } else if (value === undefined) {
             clearFilter(ticketsSharedState.filter);
-            $scope.stateGo(event, 'tickets', {listType: 'all'});
+            $scope.stateGo(null, 'tickets', {listType: 'all'});
           }
         });
 
@@ -381,11 +385,19 @@
           sharedQuickSession.isCreateNew = true;
         };
 
-        $scope.stateGo = function (event, state, stateParams) {
-          if(!stateParams === 'by_company') {
+        $scope.isOnHoldTag = false;
+
+        $scope.stateGo = function (event, state, stateParams, isTag) {
+          if(stateParams.listType !== 'by_company') {
             clearFilter(ticketsSharedState.filter);
           }
-          if (event.button > 0) {
+          if(isTag) {
+            $scope.isOnHoldTag = true;
+          } else {
+            $scope.isOnHoldTag = false;
+          }
+          //clearFilter(ticketsSharedState.filter);
+          if (event && event.button > 0) {
             var url = $state.href(state, stateParams, { absolute: true });
             window.open(url, '_blank');
           } else {
