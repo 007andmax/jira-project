@@ -25,6 +25,11 @@
           reverse: false
         };
 
+        $scope.userRoles = {
+          USER: 'Standard user',
+          ADMIN: 'Manager'
+        };
+
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
         $scope.archivedUsers = UsersService.getArchivedUsers();
@@ -54,14 +59,19 @@
           var filter = headerSharedState.filter;
           if(user.role === 'ADMIN') {
             return 'MANAGER';
-          }else {
+          }else if(user.role === 'USER'){
             // var company = CompaniesService.getOneById(user.company.id);
             // var type = company.clientType;
             // return type;
             return 'CLIENT'
+          } else if(user.isContact) {
+            return 'MANAGER'
+          } else {
+            return 'CLIENT'
           }
 
         };
+
 
         $scope.usersFilter = function (value) {
           var filter = headerSharedState.filter;
@@ -83,11 +93,12 @@
           }
 
           if (filter.isContact) {
-            result = result && value.isContact;
+            //result = result && value.isContact;
+            result = result && $scope.getUserType(value) === 'MANAGER';
           }
 
           if(filter.isStandard) {
-            result = result && !value.isContact;
+            result = result && $scope.getUserType(value) === 'CLIENT';
           }
 
           if (filter.isLead) {

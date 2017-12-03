@@ -92,7 +92,10 @@
           var newHistoryItemArray = [];
           var ifItemAlreadyInTheList = false;
           if(recentArray) {
-            ifItemAlreadyInTheList = recentArray.some((s) => s === item);
+            //ifItemAlreadyInTheList = recentArray.some((s) => s === item);
+            ifItemAlreadyInTheList = recentArray.some(function(s) {
+              return s === item;
+            });
           }
 
           if(ifItemAlreadyInTheList) {
@@ -129,17 +132,27 @@
         }
 
         function getCompanyNameById(id) {
-          var company = $scope.clientCompanies().find((c) => c.id === id);
+          //var company = $scope.clientCompanies().find((c) => c.id === id);
+          var company = $scope.clientCompanies().find(function(c) {
+            return c.id === id;
+          });
           return company ? company.name : '';
         }
 
         function getCompanyIdByCompanyName(name) {
-          var company = $scope.clientCompanies().find((c) => c.name === name);
+          //var company = $scope.clientCompanies().find((c) => c.name === name);
+          var company = $scope.clientCompanies().find(function(c) {
+            return c.name === name;
+          });
           return company ? company.id : '';
         }
 
         function getUserIdByUserFullName(name) {
-          var user =  $scope.allUsers().find((user) => {
+          // var user =  $scope.allUsers().find((user) => {
+          //   var fullName = user.firstName+' '+user.lastName;
+          //   return name === fullName;
+          // });
+          var user =  $scope.allUsers().find(function(user) {
             var fullName = user.firstName+' '+user.lastName;
             return name === fullName;
           });
@@ -478,7 +491,6 @@
 
         $scope.filterUsers = function (filter, value) {
           var sharedFilter = usersSharedState.filter;
-          $rootScope.showArchivedUsers = false;
 
           switch (filter) {
             case 'managers':
@@ -490,10 +502,12 @@
               sharedFilter.isStandard = true;
               break;
             case 'leads':
+              $rootScope.showArchivedUsers = false;
               clearFilter(sharedFilter);
               sharedFilter.isLead = true;
               break;
             case 'clients':
+              $rootScope.showArchivedUsers = false;
               clearFilter(sharedFilter);
               sharedFilter.isClient = true;
               break;
@@ -510,6 +524,7 @@
               sharedFilter.industry = '';
               break;
             default:
+              $rootScope.showArchivedUsers = false;
               clearFilter(sharedFilter);
           }
         };
