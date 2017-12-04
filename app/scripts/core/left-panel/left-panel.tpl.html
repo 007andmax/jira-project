@@ -197,7 +197,7 @@
           tags
         </div>
         <div class="center-category__category sked">
-          <div ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
+          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
                ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
             Unassigned
           </div>
@@ -220,7 +220,7 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
+          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
                ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
             Completed
           </div>
@@ -243,7 +243,7 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
+          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
                ng-click="stateGo($event, 'tickets', {listType: 'in_progress'})">
             In Progress
           </div>
@@ -266,7 +266,7 @@
           </div>
         </div>
         <div class="center-category__category sked">
-          <div ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
+          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
                ng-click="stateGo($event, 'tickets', {listType: 'on_hold'}, true)">
             On Hold
           </div>
