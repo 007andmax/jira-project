@@ -9,7 +9,7 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService) {
 
-        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress', 'by_company'],
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress', 'by_company', 'by_company/by_user', 'by_user_tech'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
@@ -70,13 +70,13 @@
           //   result = result && filter.companyId === value.companyId;
           // }
 
-          if (filter.clientUserId) {
-            result = result && filter.clientUserId === value.createdUserId;
-          }
+          // if (filter.clientUserId) {
+          //   result = result && filter.clientUserId === value.createdUserId;
+          // }
 
-          if (filter.techUserId) {
-            result = result && filter.techUserId === value.createdUserId;
-          }
+          // if (filter.techUserId) {
+          //   result = result && filter.techUserId === value.createdUserId;
+          // }
 
           // if(filter.completed) {
           //   result = result && value.status === 'COMPLETED';

@@ -211,11 +211,12 @@
         };
       }
 
+
       function fetchTickets(listType, userId, companyId, callback) {
 
-        if(listType === 'BY_COMPANY') {
+        if(listType === 'BY_COMPANY' || listType === 'BY_COMPANY/BY_USER') {
           storage.tickets = [];
-          storage.lastParams = {
+          var groupedQuery = {
             excludeTrashSpam: true,
             groupFieldFilters: [{
               fieldFilterDtos: [{
@@ -225,13 +226,47 @@
               }]
             }]
           };
+
+
+          if(ticketsSharedState.filter.clientUserId) {
+            var userIdDtoQuery = {
+              path: 'createdUserId',
+              operator: 'EQ',
+              values: [ticketsSharedState.filter.clientUserId]
+            };
+            groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdDtoQuery);
+          }
+          // if(ticketsSharedState.filter.techUserId) {
+          //   var userTechIdDtoQuery = {
+          //     path: 'createdUserId',
+          //     operator: 'EQ',
+          //     values: [ticketsSharedState.filter.techUserId]
+          //   };
+          //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userTechIdDtoQuery);
+          // }
+          storage.lastParams = angular.copy(groupedQuery);
           loadMore(listType, callback);
           getCompanyTicketCount(storage.lastParams);
-        } else {
+        } else if(listType === 'BY_USER_TECH'){
+          storage.tickets = [];
+          var groupedQuery = {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'assignedUser.id',
+                operator: 'EQ',
+                values: [ticketsSharedState.filter.techUserId]
+              }]
+            }]
+          };
+          storage.lastParams = angular.copy(groupedQuery);
+          loadMore(listType, callback);
+          getCompanyTicketCount(storage.lastParams);
+        }else {
           var query = queries[listType.toUpperCase()];
 
           if (query) {
-            if(ticketsSharedState.filter.companyId) {
+            if(ticketsSharedState.filter.companyId && !ticketsSharedState.filter.techUserId) {
               var groupedQuery = {
                 excludeTrashSpam: true,
                 groupFieldFilters: [{
@@ -244,6 +279,29 @@
                   ]
                 }]
               };
+              if(ticketsSharedState.filter.clientUserId && !ticketsSharedState.filter.techUserId) {
+                var userIdDtoQuery = {
+                  path: 'createdUserId',
+                  operator: 'EQ',
+                  values: [ticketsSharedState.filter.clientUserId]
+                };
+                groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdDtoQuery)
+              }
+              if(ticketsSharedState.filter.techUserId) {
+                var groupedQuery = {
+                  excludeTrashSpam: true,
+                  groupFieldFilters: [{
+                    predicateRule: 'AND',
+                    fieldFilterDtos: [{
+                      path: 'assignedUser.id',
+                      operator: 'EQ',
+                      values: [ticketsSharedState.filter.techUserId]
+                    }
+                    ]
+                  }]
+                };
+
+              }
               if(query && query.groupFieldFilters) {
                 var t = query.groupFieldFilters[0].fieldFilterDtos[0];
                 groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(t)
