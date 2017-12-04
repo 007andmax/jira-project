@@ -32,6 +32,10 @@
               }
             }, getTicketsList, true);
 
+            // scope.$watch(function() {
+            //   return ticketsHeaderState.filter.clientUserId;
+            // }, getTicketsList , true);
+
             scope.onFinishRendering = function () {
               scope.loadingOrRendering = false;
             };

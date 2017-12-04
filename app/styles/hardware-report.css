@@ -116,6 +116,7 @@
   border: 1px solid #bbb;
   box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
   width: 940px;
+  background: #fff;
 }
 
 .hardware__wrapper--report {
