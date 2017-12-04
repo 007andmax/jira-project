@@ -47,10 +47,11 @@
 
             <div ng-messages="userForm.lastName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
               <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+              <div class="control-label" ng-message="required">Last name is required</div>
             </div>
 
             <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-                   name="lastName" ng-model="editUser.lastName" make-dirty-on-blur tabindex="2">
+                   name="lastName" ng-model="editUser.lastName" required make-dirty-on-blur tabindex="2">
 
           </div>
           <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'secondaryEmail')}">
