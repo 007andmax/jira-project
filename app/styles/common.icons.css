@@ -221,7 +221,11 @@ a.ha-24 {
   width: 18px;
   height: 4px;
 }
-
+.icn-more-users{
+  background-position: -1664px 0;
+  width: 18px;
+  height: 4px;
+}
 .icn-more-grey {
   background-position: -1636px 0;
   width: 18px;
