@@ -2,33 +2,33 @@
      convert-to-pdf="/devices/agentReport/pdf" selector=".hardware__wrapper" disable-selector=".open-pdf-btn"
      file-name="{{ currentAgent ? (currentAgent.hostName || currentAgent.ip) : '' }}" id="{{ currentAgent.agentId }}">
   <div class="hardware">
-    <div class="hardware__control-panel">
+    <div class="hardware__control-panel" style="width: 160px;">
       <div ng-hide="showEdit" class="hardware__control-panel--btn open-pdf-btn" ng-click="openInPdf()">
         <img src="images/new-icons/printer.png" alt="">
         <p>Print</p>
       </div>
-      <div class="hardware__control-panel--btn" ng-click="toggleEdit()">
-        <img ng-show="!showEdit" src="images/new-icons/edit.png" alt="">
-        <img ng-show="showEdit" src="images/new-icons/cancel-circle.png" alt="">
-        <p>{{ !showEdit ? 'Edit' : 'Cancel' }}</p>
-      </div>
-      <div ng-if="showEdit" class="hardware__control-panel--btn" ng-click="saveEditedFields()"
-           custom-disabled="{{ saveInProgress }}">
-        <img src="images/new-icons/check.png" alt="">
-        <p>Save</p>
-      </div>
-      <div class="hardware__control-panel--btn" ng-click="restart(currentAgent)">
-        <img src="images/new-icons/refresh.png" alt="">
-        <p>Restart</p>
-      </div>
-      <div class="hardware__control-panel--btn" ng-click="shutdown(currentAgent)">
-        <img src="images/new-icons/inside.png" alt="">
-        <p>Log out</p>
-      </div>
-      <div class="hardware__control-panel--btn" ng-click="remove(currentAgent)">
-        <img src="images/new-icons/delete.png" alt="">
-        <p>Delete</p>
-      </div>
+      <!--<div class="hardware__control-panel&#45;&#45;btn" ng-click="toggleEdit()">-->
+        <!--<img ng-show="!showEdit" src="images/new-icons/edit.png" alt="">-->
+        <!--<img ng-show="showEdit" src="images/new-icons/cancel-circle.png" alt="">-->
+        <!--<p>{{ !showEdit ? 'Edit' : 'Cancel' }}</p>-->
+      <!--</div>-->
+      <!--<div ng-if="showEdit" class="hardware__control-panel&#45;&#45;btn" ng-click="saveEditedFields()"-->
+           <!--custom-disabled="{{ saveInProgress }}">-->
+        <!--<img src="images/new-icons/check.png" alt="">-->
+        <!--<p>Save</p>-->
+      <!--</div>-->
+      <!--<div class="hardware__control-panel&#45;&#45;btn" ng-click="restart(currentAgent)">-->
+        <!--<img src="images/new-icons/refresh.png" alt="">-->
+        <!--<p>Restart</p>-->
+      <!--</div>-->
+      <!--<div class="hardware__control-panel&#45;&#45;btn" ng-click="shutdown(currentAgent)">-->
+        <!--<img src="images/new-icons/inside.png" alt="">-->
+        <!--<p>Log out</p>-->
+      <!--</div>-->
+      <!--<div class="hardware__control-panel&#45;&#45;btn" ng-click="remove(currentAgent)">-->
+        <!--<img src="images/new-icons/delete.png" alt="">-->
+        <!--<p>Delete</p>-->
+      <!--</div>-->
       <div class="hardware__control-panel--btn" ng-click="closeReport()">
         <img src="images/new-icons/cancel-circle.png" alt="">
         <p>Close</p>

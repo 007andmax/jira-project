@@ -1031,7 +1031,9 @@ hr {
   box-shadow: none;
   border: none;
 }
-
+.hardware .product-list-ticket{
+  margin-top: 175px;
+}
 .receivable-content .top-product-list-ticket {
   border-bottom: 1px solid #eee;
   border-top: none;

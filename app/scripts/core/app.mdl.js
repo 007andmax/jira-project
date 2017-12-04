@@ -678,7 +678,11 @@
         OPEN: 'open',
         CLOSED: 'closed',
         TRASH: 'trash',
-        SPAM: 'spam'
+        SPAM: 'spam',
+        ON_HOLD: 'on_hold',
+        COMPLETED: 'completed',
+        IN_PROGRESS: 'in_progress'
+
       };
 
     if (!!window.loggingOut || location.href === '/logout') {

@@ -103,30 +103,65 @@
         <span class="left-panel-full__head--header">Tickets</span>
       </div>
       <div class="center-category collapsed-nav nano-content tickets-left-panel">
-        <div class="center-category__category"
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets-dashboard')}"-->
+        <!--ng-click="stateGo($event, 'tickets-dashboard')">-->
+        <!--Dashboard-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'all'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'all'})">-->
+        <!--All Tickets <span>{{ticketsCounter.ALL}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">-->
+        <!--Unassigned <span>{{ticketsCounter.UNASSIGNED}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'user'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'user'})">-->
+        <!--My Tickets <span>{{ticketsCounter.USER}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'shared'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'shared'})">-->
+        <!--Shared <span>{{ticketsCounter.SHARED}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'open'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'open'})">-->
+        <!--Open <span>{{ticketsCounter.OPEN}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'closed'})">-->
+        <!--Closed <span>{{ticketsCounter.CLOSED}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'trash'})">-->
+        <!--Trash <span>{{ticketsCounter.TRASH}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('tickets', {listType: 'spam'})}"-->
+        <!--ng-click="stateGo($event, 'tickets', {listType: 'spam'})">-->
+        <!--Spam <span>{{ticketsCounter.SPAM}}</span>-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+        <!--ng-class="{active: $state.includes('drafts')}"-->
+        <!--ng-click="stateGo($event, 'drafts')">-->
+        <!--Inbox-->
+        <!--</div>-->
+        <div class="center-category__category font-medium"
              ng-class="{active: $state.includes('tickets-dashboard')}"
              ng-click="stateGo($event, 'tickets-dashboard')">
           Dashboard
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'all'})}"
+             ng-class="{active: $state.includes('tickets', {listType: 'all'}) || $state.includes('tickets', {listType: 'by_company'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
           All Tickets <span>{{ticketsCounter.ALL}}</span>
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
-             ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-          Unassigned <span>{{ticketsCounter.UNASSIGNED}}</span>
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
-             ng-click="stateGo($event, 'tickets', {listType: 'user'})">
-          My Tickets <span>{{ticketsCounter.USER}}</span>
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'shared'})}"
-             ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
-          Shared <span>{{ticketsCounter.SHARED}}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
@@ -138,6 +173,16 @@
              ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
           Closed <span>{{ticketsCounter.CLOSED}}</span>
         </div>
+        <!--<div class="center-category__category"-->
+             <!--ng-click="filterTickets('onHold')"-->
+             <!--ng-class="{active: ticketsSharedState.filter.onHold}">-->
+          <!--On Hold <span>{{ticketsCounter.ON_HOLD}}</span>-->
+        <!--</div>-->
+        <div class="center-category__category"
+             ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && !isOnHoldTag}"
+             ng-click="stateGo($event, 'tickets', {listType: 'on_hold'})">
+          On Hold <span>{{ticketsCounter.ON_HOLD}}</span>
+        </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
@@ -148,11 +193,170 @@
              ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
           Spam <span>{{ticketsCounter.SPAM}}</span>
         </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('drafts')}"
-             ng-click="stateGo($event, 'drafts')">
-          Inbox
+        <div class="left-panel-title font-medium">
+          tags
         </div>
+        <div class="center-category__category sked">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
+               ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
+            Unassigned
+          </div>
+
+          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle ticket-color"
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['unassigned']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['unassigned']].borderColor}"></span>
+            </div>
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': ticketsTagsColors['unassigned'] === $index}"
+                  ng-click="changeTicketsTagColor('unassigned', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="center-category__category sked">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
+               ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
+            Completed
+          </div>
+
+          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle ticket-color"
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['completed']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['completed']].borderColor}"></span>
+            </div>
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': ticketsTagsColors['completed'] === $index}"
+                  ng-click="changeTicketsTagColor('completed', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="center-category__category sked">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
+               ng-click="stateGo($event, 'tickets', {listType: 'in_progress'})">
+            In Progress
+          </div>
+
+          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle ticket-color"
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['inProgress']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['inProgress']].borderColor}"></span>
+            </div>
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': ticketsTagsColors['inProgress'] === $index}"
+                  ng-click="changeTicketsTagColor('inProgress', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="center-category__category sked">
+          <div ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
+               ng-click="stateGo($event, 'tickets', {listType: 'on_hold'}, true)">
+            On Hold
+          </div>
+
+          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+            <div uib-dropdown-toggle>
+              <span class="colored-circle ticket-color"
+                    ng-style="{'background-color': tagColors[ticketsTagsColors['onHold']].backgroundColor,
+                              'border-color': tagColors[ticketsTagsColors['onHold']].borderColor}"></span>
+            </div>
+            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': ticketsTagsColors['onHold'] === $index}"
+                  ng-click="changeTicketsTagColor('onHold', $index)">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="left-panel-title font-medium">
+          by company
+        </div>
+        <div class="filter-left-panel">
+          <div class="x-mark-wrapper">
+            <input type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select Company"
+                   typeahead-input-formatter="getCompanyName($model)"
+                   autocomplete="off" ng-model="ticketsSharedState.filter.companyId" typeahead-editable="false"
+                   uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
+          </div>
+          <div class="recent-left-panel">
+            <h4 class="font-medium">recent</h4>
+            <p ng-repeat="item in companiesFilterHistoryTicketsPage track by $index"
+               ng-click="applyCompanyFilterFromHistoryListTicketPage(item)">{{item}}</p>
+
+          </div>
+        </div>
+
+
+
+        <div class="left-panel-title font-medium" ng-show="ticketsSharedState.filter.companyId">
+          by user
+        </div>
+        <div class="filter-left-panel" ng-show="ticketsSharedState.filter.companyId">
+          <div class="x-mark-wrapper">
+            <input type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select User"
+                   typeahead-input-formatter="getUserByID($model)"
+                   autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId" typeahead-editable="false"
+                   uib-typeahead="client.id as client.firstName+' '+client.lastName for client in clientsUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
+          </div>
+          <div class="recent-left-panel">
+            <h4 class="font-medium">recent</h4>
+            <p ng-repeat="item in clientUsersFilterHistoryTicketsPage track by $index"
+               ng-click="applyClientUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
+
+          </div>
+        </div>
+
+        <div class="left-panel-title font-medium" ng-show="ticketsSharedState.filter.companyId">
+          by tech team
+        </div>
+        <div class="filter-left-panel" style="padding: 0 25px 80px;" ng-show="ticketsSharedState.filter.companyId">
+          <div class="x-mark-wrapper">
+            <input type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select User"
+                   typeahead-input-formatter="getUserByID($model)"
+                   autocomplete="off" ng-model="ticketsSharedState.filter.techUserId" typeahead-editable="false"
+                   uib-typeahead="client.id as client.firstName+' '+client.lastName for client in techUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
+          </div>
+          <div class="recent-left-panel">
+            <h4 class="font-medium">recent</h4>
+            <p ng-repeat="item in techUsersFilterHistoryTicketsPage track by $index"
+               ng-click="applyTechUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
+
+          </div>
+        </div>
+
 
         <div class="center-category__category cust-report" ng-click="openCreateCustomerReportModal()">
           Customer Ticket Report
@@ -171,10 +375,11 @@
         <div class="center-category__category sked" ng-click="filterCompanies()"
              ng-class="{'active': (!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()}">
           All Companies
-          <i class="icn-sm icn-label-save-left-panel" ng-show="(!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()"></i>
+          <i class="icn-sm icn-label-save-left-panel"
+             ng-show="(!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()"></i>
         </div>
         <div class="center-category__category sked" ng-click="showArchivedCompanies()"
-        ng-class="{'active': isArchivedCompaniesToShow()}">
+             ng-class="{'active': isArchivedCompaniesToShow()}">
           Archived
           <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
         </div>
@@ -250,43 +455,23 @@
         <div class="left-panel-title font-medium">
           by industry
         </div>
-        <div class="x-mark-wrapper">
-          <input type="text" class="form-control has-dropdown pointer"
-                 placeholder="Select Industry"
-                 autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"
-                 uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                 qt-typeahead-show-on-focus
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-          <div typeahead-input-icon="companiesSharedState.filter.industry"></div>
-        </div>
-        <div class="recent-left-panel">
-          <h4 class="font-medium">recent</h4>
-          <p ng-repeat="item in industryFilterhistory track by $index">{{item}}</p>
+        <div class="filter-left-panel">
+          <div class="x-mark-wrapper">
+            <input type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select Industry"
+                   autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"
+                   uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div typeahead-input-icon="companiesSharedState.filter.industry"></div>
+          </div>
+          <div class="recent-left-panel">
+            <h4 class="font-medium">recent</h4>
+            <p ng-repeat="item in industryFilterHistoryCompaniesPage track by $index"
+               ng-click="applyIndustryFilterFromHistoryListCompanyPage(item)">{{item}}</p>
 
+          </div>
         </div>
-
-        <!--<div class="filter-block">-->
-        <!--<div class="center-category__category filter">-->
-        <!--<div>-->
-        <!--<p>By Industry</p>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="center-category__category filter">-->
-        <!--<div>-->
-        <!--<p>Date Range</p>-->
-        <!--<div style="position: relative;">-->
-        <!--<input type="text" class="form-control has-dropdown readonly-normal" readonly-->
-        <!--date-range-picker="onDateRangeChange" position="right bottom" range max-date="{{ maxDate }}">-->
-        <!--<i class="icn-sm icn-caret-gray"-->
-        <!--ng-show="!(companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length)">-->
-        <!--</i>-->
-        <!--<i class="icn-sm icn-remove-old" style="cursor: pointer; pointer-events: auto;"-->
-        <!--ng-show="companiesSharedState.filter.dateRange && companiesSharedState.filter.dateRange.length"-->
-        <!--ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
       </div>
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'users' && !isLeftPanelHidden">
@@ -298,8 +483,28 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-click="filterUsers()"
-             ng-class="{'active': !(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
+             ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())}">
           All Users
+          <i class="icn-sm icn-label-save-left-panel"
+             ng-show="!( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())"></i>
+        </div>
+        <div class="center-category__category" ng-click="filterUsers('clients')"
+             ng-class="{'active': usersSharedState.filter.isClient}">
+          Customer Users
+          <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isClient"></i>
+        </div>
+        <div class="center-category__category" ng-click="filterUsers('leads')"
+             ng-class="{'active': usersSharedState.filter.isLead}">
+          Lead Users
+          <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isLead"></i>
+        </div>
+        <div class="center-category__category" ng-click="showArchivedUsers()"
+             ng-class="{'active': isArchivedUsersToShow()}">
+          Archived Users
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
+        </div>
+        <div class="left-panel-title font-medium">
+          contact type
         </div>
         <div class="center-category__category" ng-click="filterUsers('managers')"
              ng-class="{'active': usersSharedState.filter.isContact}">
@@ -323,9 +528,9 @@
             </ul>
           </div>
         </div>
-        <div class="center-category__category" ng-click="filterUsers('clients')"
-             ng-class="{'active': usersSharedState.filter.isClient}">
-          Clients
+        <div class="center-category__category" ng-click="filterUsers('standard')"
+             ng-class="{'active': usersSharedState.filter.isStandard}">
+          Standard Users
           <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
@@ -345,57 +550,44 @@
             </ul>
           </div>
         </div>
-        <div class="center-category__category" ng-click="filterUsers('leads')"
-             ng-class="{'active': usersSharedState.filter.isLead}">
-          Leads
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[usersColors['LEAD']].backgroundColor,
-                              'border-color': tagColors[usersColors['LEAD']].borderColor}"></span>
-              <div class="green-circle company-circle"></div>
-            </div>
 
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': usersColors['LEAD'] === $index}"
-                  ng-click="changeUserColor('LEAD', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="filter-block">
+
+        <div class="filter-left-panel">
           <div class="center-category__category filter">
-            <div>
-              <p>By Industry</p>
-              <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"
-                       uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                       qt-typeahead-show-on-focus
-                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div class="left-panel-title font-medium" style="margin-left: 0;">By Industry</div>
+            <div class="x-mark-wrapper">
+              <input type="text" class="form-control has-dropdown pointer"
+                     autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"
+                     uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-                <div typeahead-input-icon="usersSharedState.filter.industry"></div>
-              </div>
+              <div typeahead-input-icon="usersSharedState.filter.industry"></div>
             </div>
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in industriesFilterHistoryUserPage track by $index"
+                 ng-click="applyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
 
+            </div>
           </div>
           <div class="center-category__category filter">
-            <div>
-              <p>By Company</p>
-              <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
-                       typeahead-input-formatter="getCompanyName($model)"
-                       uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
-                       qt-typeahead-show-on-focus
-                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div class="left-panel-title font-medium" style="margin-left: 0;">By Company</div>
+            <div class="x-mark-wrapper">
+              <input type="text" class="form-control has-dropdown pointer"
+                     autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
+                     typeahead-input-formatter="getCompanyName($model)"
+                     uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-                <div typeahead-input-icon="usersSharedState.filter.companyId"></div>
-              </div>
+              <div typeahead-input-icon="usersSharedState.filter.companyId"></div>
+            </div>
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in companiesFilterHistoryUserPage track by $index"
+                 ng-click="applyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
+
             </div>
           </div>
         </div>
@@ -566,7 +758,8 @@
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change
               Password
             </div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info
+            </div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount"
                  ng-if="currentUser.isOwner">
               Deactivate Account
@@ -654,8 +847,8 @@
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;

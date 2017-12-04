@@ -52,15 +52,27 @@
                   scope.onFinishRendering();
                 }
 
-                TicketsService.getCount(function (quantity) {
-                  scope.globalSearch.count = quantity;
-                });
+                var ticketFilter = ticketsHeaderState.filter;
+                var isAnyFilters = false;
+                for(var prop in ticketFilter) {
+                  if (ticketFilter[prop]) {
+                    isAnyFilters = true;
+                    break;
+                  }
+                }
+                if(!isAnyFilters) {
+                  TicketsService.getCount(function (quantity) {
+                    scope.globalSearch.count = quantity;
+                  });
+                }
+
 
                 UserNotificationService.hide();
                 initScrollListener();
                 openTicketList();
               });
             }
+
 
             function initScrollListener() {
               $document.on('scroll', scrollHandler);

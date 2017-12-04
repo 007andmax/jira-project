@@ -8,8 +8,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
-    function ($http, $rootScope, RealTimeService, Utils) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService',
+    function ($http, $rootScope, RealTimeService, Utils, SharedStateService) {
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
@@ -63,6 +63,8 @@
         leftPanelCounters: {}
       };
 
+      var globalSearch = SharedStateService.getSharedState('globalSearch');
+
       var userId;
 
       var unwatch = $rootScope.$watch('currentUser.id', function (currentUserId) {
@@ -73,7 +75,7 @@
         }
       });
 
-      //var currentUser = UsersService.getCurrentUser();
+      var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
 
       function getQueries(currentUserId) {
         return {
@@ -175,40 +177,111 @@
                 operator: 'NOT_NULL'
               }]
             }]
+          },
+          ON_HOLD: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'status',
+                operator: 'EQ',
+                values: ['ON_HOLD']
+              }]
+            }]
+          },
+          IN_PROGRESS: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'status',
+                operator: 'EQ',
+                values: ['IN_PROGRESS']
+              }]
+            }]
+          },
+          COMPLETED: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'status',
+                operator: 'EQ',
+                values: ['COMPLETED']
+              }]
+            }]
           }
         };
       }
 
       function fetchTickets(listType, userId, companyId, callback) {
-        var query = queries[listType.toUpperCase()];
-        if (query) {
+
+        if(listType === 'BY_COMPANY') {
           storage.tickets = [];
-          storage.lastParams = angular.copy(query);
-
-          if (userId) {
-            storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
-            storage.lastParams.groupFieldFilters.push({
+          storage.lastParams = {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
               fieldFilterDtos: [{
-                path: 'createdUser.id',
+                path: 'companyId',
                 operator: 'EQ',
-                values: [userId]
+                values: [ticketsSharedState.filter.companyId]
               }]
-            });
-          }
-
-          if (companyId) {
-            storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
-            storage.lastParams.groupFieldFilters.push({
-              fieldFilterDtos: [{
-                path: 'company.id',
-                operator: 'EQ',
-                values: [companyId]
-              }]
-            });
-          }
-
+            }]
+          };
           loadMore(listType, callback);
+          getCompanyTicketCount(storage.lastParams);
+        } else {
+          var query = queries[listType.toUpperCase()];
+
+          if (query) {
+            if(ticketsSharedState.filter.companyId) {
+              var groupedQuery = {
+                excludeTrashSpam: true,
+                groupFieldFilters: [{
+                  predicateRule: 'AND',
+                  fieldFilterDtos: [{
+                    path: 'companyId',
+                    operator: 'EQ',
+                    values: [ticketsSharedState.filter.companyId]
+                  }
+                  ]
+                }]
+              };
+              if(query && query.groupFieldFilters) {
+                var t = query.groupFieldFilters[0].fieldFilterDtos[0];
+                groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(t)
+              }
+              storage.lastParams = angular.copy(groupedQuery);
+              getCompanyTicketCount(storage.lastParams);
+            } else {
+              storage.lastParams = angular.copy(query);
+            }
+
+            storage.tickets = [];
+
+            if (userId) {
+              storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
+              storage.lastParams.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                  path: 'createdUser.id',
+                  operator: 'EQ',
+                  values: [userId]
+                }]
+              });
+            }
+
+            if (companyId) {
+              storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
+              storage.lastParams.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                  path: 'company.id',
+                  operator: 'EQ',
+                  values: [companyId]
+                }]
+              });
+            }
+
+            loadMore(listType, callback);
+          }
         }
+
       }
 
       function loadMore(listType, callback) {
@@ -217,6 +290,7 @@
         storage.lastParams.offset = storage.tickets.length;
 
         loadingInProcess = true;
+
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
 
@@ -389,6 +463,16 @@
             callback(resp.data);
           }
         });
+      }
+
+      function getCompanyTicketCount(query) {
+
+        $http.post('/v2/tickets/counts', {BY_COMPANY: query}).then(function(resp) {
+          if(resp) {
+            globalSearch.count = resp.data.BY_COMPANY;
+          }
+        })
+
       }
 
       function changePriority(ticketId, priority, callback) {
