@@ -94,7 +94,7 @@
       </div>
 
       <div class="pull-left" uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
-        <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket"
+        <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
           uib-tooltip="{{ userReadable(ticket.status) || 'Unclaimed' }}" tooltip-placement="top" uib-dropdown-toggle>
           <label class="status-{{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}">
@@ -102,7 +102,8 @@
           </label>
         </span>
 
-        <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket"
+        <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
+              ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
               ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>

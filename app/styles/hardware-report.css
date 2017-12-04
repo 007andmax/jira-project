@@ -13,10 +13,12 @@
 }
 
 .hardware {
-  padding-top: 20px;
+  padding: 20px 0;
   background: #F4F4F4;
 }
-
+.hardware-wrap::-webkit-scrollbar{
+  width: 0;
+}
 .hardware-wrap {
   position: fixed;
   top: 0;
@@ -26,7 +28,6 @@
   height: 100%;
   overflow: auto;
   background-color: #fff;
-  padding-bottom: 20px;
 }
 
 .hardware .password {
@@ -110,15 +111,16 @@
 }
 
 .hardware__wrapper {
-  width: 768px;
   margin: 30px auto;
   padding: 15px;
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35);
+  border: 1px solid #bbb;
+  box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
+  width: 940px;
+  background: #fff;
 }
 
 .hardware__wrapper--report {
   width: 100%;
-  border: 1px solid #bbb;
 }
 
 .hardware__wrapper--report .main-info {

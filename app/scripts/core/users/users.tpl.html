@@ -1,13 +1,13 @@
 <div class="users-content">
   <div class="change-view-actions">
     <div class="action-wrap clearfix">
-      <div class="archived-change">
-        <span class="pull-left">Archived users</span>
-        <div class="switch">
-          <input type="checkbox" ng-model="archivedShown">
-          <label><i></i></label>
-        </div>
-      </div>
+      <!--<div class="archived-change">-->
+        <!--<span class="pull-left">Archived users</span>-->
+        <!--<div class="switch">-->
+          <!--<input type="checkbox" ng-model="archivedShown">-->
+          <!--<label><i></i></label>-->
+        <!--</div>-->
+      <!--</div>-->
       <div class="view-change">
         <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
           <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/tile-gray.svg">
@@ -135,14 +135,14 @@
               <label class="control checkbox" ng-click="changeUserRole(user.id, 'USER')">
                 <input type="checkbox" ng-checked="user.role === 'USER'" ng-disabled="user.role === 'USER'">
                 <span class="control-indicator"></span>
-                <span>User</span>
+                <span>Standard user</span>
               </label>
             </div>
             <div>
               <label class="control checkbox" ng-click="changeUserRole(user.id, 'ADMIN')">
                 <input type="checkbox" ng-checked="user.role === 'ADMIN'" ng-disabled="user.role === 'ADMIN'">
                 <span class="control-indicator"></span>
-                <span>Administrator</span>
+                <span>Manager</span>
               </label>
             </div>
             <p><strong>Subscribe</strong></p>
@@ -220,20 +220,20 @@
           <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
-              <span>{{ user.role }}</span>
+              <span>{{ user.isContact ? 'Manager' : 'Standard user' }}</span>
             </div>
 
             <ul class="dropdown-menu dropdown-privilege">
 
               <li ng-class="{'active': user.role === 'USER'}">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole(user.id, 'USER')">
-                  User
+                  Standard user
                 </a>
               </li>
 
               <li ng-class="{'active': user.role === 'ADMIN'}">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole(user.id, 'ADMIN')">
-                  Administrator
+                  Manager
                 </a>
               </li>
 

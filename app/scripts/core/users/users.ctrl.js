@@ -24,7 +24,11 @@
           field: 'name',
           reverse: false
         };
-        $scope.archivedShown = false;
+
+        $scope.userRoles = {
+          USER: 'Standard user',
+          ADMIN: 'Manager'
+        };
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
@@ -34,7 +38,6 @@
 
         ColorsService.getUserColors($scope, function(resp) {
           $scope.usersColors = resp;
-          console.log("color resp:", $scope.usersColors);
         });
 
         $scope.changeView = function (view) {
@@ -54,22 +57,28 @@
 
         $scope.getUserType = function(user) {
           var filter = headerSharedState.filter;
-          if(filter.isContact) {
+          if(user.role === 'ADMIN') {
             return 'MANAGER';
-          }else {
-            var company = CompaniesService.getOneById(user.company.id);
-            var type = company.clientType;
-            return type;
+          }else if(user.role === 'USER'){
+            // var company = CompaniesService.getOneById(user.company.id);
+            // var type = company.clientType;
+            // return type;
+            return 'CLIENT'
+          } else if(user.isContact) {
+            return 'MANAGER'
+          } else {
+            return 'CLIENT'
           }
 
         };
+
 
         $scope.usersFilter = function (value) {
           var filter = headerSharedState.filter;
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
           var isUserDeleted = value.deletedAt || company.deletedAt;
-          var result = !isUserDeleted && !$scope.archivedShown || $scope.archivedShown && isUserDeleted;
+          var result = !isUserDeleted && !$rootScope.showArchivedUsers || $rootScope.showArchivedUsers && isUserDeleted;
 
           if (value.isDefault || value.default || value.accountType === 'TECH') {
             return false;
@@ -84,7 +93,12 @@
           }
 
           if (filter.isContact) {
-            result = result && value.isContact;
+            //result = result && value.isContact;
+            result = result && $scope.getUserType(value) === 'MANAGER';
+          }
+
+          if(filter.isStandard) {
+            result = result && $scope.getUserType(value) === 'CLIENT';
           }
 
           if (filter.isLead) {
@@ -95,11 +109,15 @@
             result = result && clientType && clientType.toLowerCase() === 'client';
           }
 
+          // if(filter.isArchived) {
+          //   result = result && !value.userEnabled;
+          //   console.log(result && !value.userEnabled);
+          // }
+
           if (filter.industry) {
             var industryName = company.clientIndustry ? (company.clientIndustry.name || '') : '';
             result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
           }
-
           return result;
         };
 
