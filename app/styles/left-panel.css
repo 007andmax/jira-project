@@ -133,12 +133,13 @@
   margin: 35px 25px 10px 25px;
   color: #9ca5b6;
   width: 80%;
+}
+.left-panel-title-hover{
   position: relative;
   cursor: pointer;
   transition: all .3s;
 }
-
-.left-panel-title:hover{
+.left-panel-title-hover:hover{
   color: #fff;
 }
 
@@ -175,7 +176,7 @@
   align-content: flex-start;
   flex-flow: row wrap;
 
-  padding: 78px 0 0;
+  padding: 78px 0 15px;
 }
 
 .left-panel-full__head--header {
