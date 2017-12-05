@@ -447,9 +447,9 @@
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
-          $rootScope.showArchivedCompanies = false;
 
           if ($state.includes('companyProfile') && (filter !== 'dateRange' || value && value.length)) {
+            $rootScope.showArchivedCompanies = false;
             $state.go('companies');
           }
 
@@ -476,7 +476,12 @@
               }
               sharedFilter.dateRange = value;
               break;
+            case 'archived':
+              $scope.showArchivedCompanies();
+              clearFilter(sharedFilter);
+              break;
             default:
+              $rootScope.showArchivedCompanies = false;
               clearFilter(sharedFilter);
           }
         };
