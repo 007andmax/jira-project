@@ -220,7 +220,7 @@
           <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
-              <span>{{ user.isContact ? 'Manager' : 'Standard user' }}</span>
+              <span> {{getUserType(user) === 'MANAGER' ? 'Manager' : 'Standard user'}}</span>
             </div>
 
             <ul class="dropdown-menu dropdown-privilege">

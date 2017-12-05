@@ -44,6 +44,13 @@
 
         $scope.ticketsCounter;
 
+        $scope.dropdownByCompanyTicketPage = false;
+        $scope.dropdownByUserTicketPage = false;
+        $scope.dropdownByTechUserTicketPage = false;
+        $scope.dropdownByIndustryCompanyPage = false;
+        $scope.dropdownByIndustryUserPage = false;
+        $scope.dropdownByCompanyUserPage = false;
+
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -186,17 +193,9 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            //$scope.globalSearch.count = 0;
-            //$rootScope.ticketPageCompnayIdFilter = value;
-            //$scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
             $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
               return user.company.id === value;
             });
-            //$scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
-            // $scope.techUsersByCompany = $scope.techUsers().filter(function(user) {
-            //   return user.company.id === value;
-            // });
-
             $scope.stateGo(null, 'tickets', {listType: 'by_company'});
           } else if (value === undefined) {
             clearFilter(ticketsSharedState.filter);
@@ -211,7 +210,6 @@
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
             ticketsSharedState.filter.techUserId = '';
-            //$scope.globalSearch.count = '';
             sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
           } else if(value === undefined) {
@@ -231,7 +229,6 @@
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
             ticketsSharedState.filter.clientUserId = '';
-            //$scope.globalSearch.count = '';
             ticketsSharedState.filter.companyId = '';
             sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
@@ -446,34 +443,7 @@
             ticketsSharedState.filter.onHoldTag;
         };
 
-        $scope.filterTickets = function(filter, value) {
-          $state.go('tickets', {listType: 'all'});
-          var sharedFilter = ticketsSharedState.filter;
-          switch(filter) {
-            case 'completed':
-              clearFilter(sharedFilter);
-              sharedFilter.completed = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.COMPLETED;
-              break;
-            case 'inProgress':
-              clearFilter(sharedFilter);
-              sharedFilter.inProgress = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.IN_PROGRESS;
-              break;
-            case 'onHold':
-              clearFilter(sharedFilter);
-              sharedFilter.onHold = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.ON_HOLD;
-              break;
-            case 'onHoldTag':
-              clearFilter(sharedFilter);
-              sharedFilter.onHoldTag = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.ON_HOLD;
-              break;
-            default:
-              clearFilter(sharedFilter);
-          }
-        };
+
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;

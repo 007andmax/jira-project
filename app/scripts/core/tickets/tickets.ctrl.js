@@ -59,39 +59,7 @@
           }
         }, true);
 
-        $scope.ticketFilter = function(value) {
-          var filter = ticketsHeaderState.filter;
-          var result = true;
-          if(!filter.completed && !filter.inProgress && !filter.onHold && !filter.onHoldTag && !filter.companyId && !filter.clientUserId && !filter.techUserId) {
-            return result;
-          }
-          //
-          // if (filter.companyId) {
-          //   result = result && filter.companyId === value.companyId;
-          // }
 
-          // if (filter.clientUserId) {
-          //   result = result && filter.clientUserId === value.createdUserId;
-          // }
-
-          // if (filter.techUserId) {
-          //   result = result && filter.techUserId === value.createdUserId;
-          // }
-
-          // if(filter.completed) {
-          //   result = result && value.status === 'COMPLETED';
-          // }
-          // if(filter.inProgress) {
-          //   result = result && value.status === 'IN_PROGRESS';
-          // }
-          // if(filter.onHold) {
-          //   result = result && value.status === 'ON_HOLD';
-          // }
-          // if(filter.onHoldTag) {
-          //   result = result && value.status === 'ON_HOLD';
-          // }
-          return result;
-        };
 
         $scope.linkAgent = function (ticketId, agentId) {
           TicketsService.changeLinkedAgent(ticketId, agentId);
