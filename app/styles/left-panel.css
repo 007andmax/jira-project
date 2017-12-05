@@ -148,8 +148,7 @@
 
 .filter-left-panel {
   padding: 0 25px;
-  overflow: hidden;
-
+  height: 210px !important;
 }
 
 .left-panel-full__head {
