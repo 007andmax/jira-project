@@ -236,14 +236,7 @@
             };
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdDtoQuery);
           }
-          // if(ticketsSharedState.filter.techUserId) {
-          //   var userTechIdDtoQuery = {
-          //     path: 'createdUserId',
-          //     operator: 'EQ',
-          //     values: [ticketsSharedState.filter.techUserId]
-          //   };
-          //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userTechIdDtoQuery);
-          // }
+
           storage.lastParams = angular.copy(groupedQuery);
           loadMore(listType, callback);
           getCompanyTicketCount(storage.lastParams);
