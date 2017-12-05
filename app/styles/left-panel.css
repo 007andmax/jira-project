@@ -134,17 +134,22 @@
   color: #9ca5b6;
   width: 80%;
 }
-.left-panel-title-hover{
+
+.left-panel-title-hover {
   position: relative;
   cursor: pointer;
   transition: all .3s;
+  margin: 10px 25px;
 }
-.left-panel-title-hover:hover{
+
+.left-panel-title-hover:hover {
   color: #fff;
 }
 
 .filter-left-panel {
   padding: 0 25px;
+  overflow: hidden;
+
 }
 
 .left-panel-full__head {
@@ -420,14 +425,17 @@
   right: 13px;
   pointer-events: none;
 }
-.center-category .left-panel-title .report-caret-icon{
+
+.center-category .left-panel-title .report-caret-icon {
   right: 15px;
   top: 10px;
   transition: all .3s;
 }
-.center-category .left-panel-title .report-caret-icon.report-caret-icon-up{
+
+.center-category .left-panel-title .report-caret-icon.report-caret-icon-up {
   transform: rotate(180deg);
 }
+
 .center-category .icn-remove-old {
   top: 13px;
   position: absolute;
