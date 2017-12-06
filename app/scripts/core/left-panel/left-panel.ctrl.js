@@ -161,7 +161,7 @@
           //   return name === fullName;
           // });
           var user =  $scope.allUsers().find(function(user) {
-            var fullName = user.firstName+' '+user.lastName;
+            var fullName =   user.lastName ? user.firstName+' '+user.lastName : user.firstName;
             return name === fullName;
           });
           return user.id;
@@ -272,6 +272,8 @@
         TutorialsService.getTypes(function (resp) {
           $scope.tutorialTypes = resp;
         });
+
+
 
 
         $scope.changeTicketsTagColor = function(type, colorCode) {
@@ -673,7 +675,21 @@
           }
           var user = UsersService.getOneById(userId);
           if(user) {
-            return user.firstName+' '+user.lastName;
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.getFullName = function(client) {
+
+          var isAllSpaces = client.lastName === "    ";
+          if(client.lastName && !isAllSpaces) {
+            return client.firstName+' '+client.lastName;
+          } else {
+            return client.firstName;
           }
         };
 
