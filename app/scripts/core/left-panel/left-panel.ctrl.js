@@ -198,8 +198,10 @@
             });
             $scope.stateGo(null, 'tickets', {listType: 'by_company'});
           } else if (value === undefined) {
-            clearFilter(ticketsSharedState.filter);
-            $scope.stateGo(null, 'tickets', {listType: 'all'});
+            if($state.includes('tickets')) {
+              clearFilter(ticketsSharedState.filter);
+              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            }
           }
         });
 
@@ -213,12 +215,14 @@
             sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
           } else if(value === undefined) {
-            if(ticketsSharedState.filter.companyId) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-            } else {
-              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            if($state.includes('tickets')) {
+              if(ticketsSharedState.filter.companyId) {
+                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+              } else {
+                $scope.stateGo(null, 'tickets', {listType: 'all'});
+              }
+              ticketsSharedState.filter.clientUserId = '';
             }
-            ticketsSharedState.filter.clientUserId = '';
           }
         });
 
@@ -233,12 +237,14 @@
             sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
           } else if(value === undefined) {
-            if(ticketsSharedState.filter.companyId) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-            } else {
-              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            if($state.includes('tickets')) {
+              if(ticketsSharedState.filter.companyId) {
+                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+              } else {
+                $scope.stateGo(null, 'tickets', {listType: 'all'});
+              }
+              ticketsSharedState.filter.techUserId = '';
             }
-            ticketsSharedState.filter.techUserId = '';
           }
         });
 
@@ -443,7 +449,14 @@
             ticketsSharedState.filter.onHoldTag;
         };
 
+        $scope.clearTicketsFilters = function() {
+          clearFilter(ticketsSharedState.filter);
+        };
 
+        $scope.clearCompaniesFilters = function() {
+          clearFilter(companiesSharedState.filter);
+          $rootScope.showArchivedCompanies = false;
+        };
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
@@ -494,6 +507,11 @@
 
         $scope.isArchivedUsersToShow = function() {
           return $rootScope.showArchivedUsers;
+        };
+
+        $scope.clearUsersFilters = function() {
+          $rootScope.showArchivedUsers = false;
+          clearFilter(usersSharedState.filter);
         };
 
         $scope.filterUsers = function (filter, value) {

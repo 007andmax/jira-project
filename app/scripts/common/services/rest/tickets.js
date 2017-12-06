@@ -240,7 +240,7 @@
           storage.lastParams = angular.copy(groupedQuery);
           loadMore(listType, callback);
           getCompanyTicketCount(storage.lastParams);
-        } else if(listType === 'BY_USER_TECH'){
+        } else if(ticketsSharedState.filter.techUserId){
           storage.tickets = [];
           var groupedQuery = {
             excludeTrashSpam: true,
@@ -518,9 +518,9 @@
 
       function getCompanyTicketCount(query) {
 
-        $http.post('/v2/tickets/counts', {BY_COMPANY: query}).then(function(resp) {
+        $http.post('/v2/tickets/counts', {COUNT: query}).then(function(resp) {
           if(resp) {
-            globalSearch.count = resp.data.BY_COMPANY;
+            globalSearch.count = resp.data.COUNT;
           }
         })
 
