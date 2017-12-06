@@ -211,7 +211,6 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            ticketsSharedState.filter.techUserId = '';
             sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
           } else if(value === undefined) {
@@ -232,8 +231,6 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            ticketsSharedState.filter.clientUserId = '';
-            ticketsSharedState.filter.companyId = '';
             sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
           } else if(value === undefined) {
