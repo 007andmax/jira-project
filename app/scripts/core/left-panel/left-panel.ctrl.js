@@ -377,13 +377,15 @@
         });
 
         $scope.toggleLeftPanel = function (section) {
-          if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
-            $rootScope.isLeftPanelHidden = true;
-            $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
-          } else {
-            $scope.openedCategory = section;
-            $rootScope.isLeftPanelHidden = false;
-          }
+          // if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
+          //   $rootScope.isLeftPanelHidden = true;
+          //   $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+          // } else {
+          //   $scope.openedCategory = section;
+          //   $rootScope.isLeftPanelHidden = false;
+          // }
+          $scope.openedCategory = section;
+          $rootScope.isLeftPanelHidden = false;
         };
 
         $scope.onClickSettings = function () {

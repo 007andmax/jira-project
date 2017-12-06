@@ -12,32 +12,33 @@
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
-           ng-click="clearTicketsFilters()"
+           ng-click="clearTicketsFilters(); toggleLeftPanel('tickets')"
            >
         <div class="left-panel-icn left-panel-icons-tickets"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
-            ui-sref="companies" ng-click="clearCompaniesFilters()"
+            ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies')"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <div class="left-panel-icn left-panel-icons-companies"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
-            ui-sref="users" ng-click="clearUsersFilters()"
+            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users')"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
         <div class="left-panel-icn left-panel-icons-users"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-            ui-sref="accounting.billable"
+            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing')"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <div class="left-panel-icn left-panel-icons-billing"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
-            ui-sref="products({ tabName: 'category' })">
+            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory')">
         <div class="left-panel-icn left-panel-icons-inventory"></div>
       </div>
       <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
+           ng-click="toggleLeftPanel('password-manager')"
             ui-sref="password-manager">
         <div class="left-panel-icn left-panel-icons-password-manager"></div>
       </div>
