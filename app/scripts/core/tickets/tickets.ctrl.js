@@ -9,7 +9,7 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService) {
 
-        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress', 'by_company', 'by_company/by_user'],
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 

@@ -7,37 +7,39 @@
     <div class="left-panel__category-wrap nano-content">
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
-           ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
+            ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
         <div class="left-panel-icn left-panel-icons-remote"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
-           ng-click="toggleLeftPanel('tickets')">
+           ng-click="clearTicketsFilters(); toggleLeftPanel('tickets')"
+           >
         <div class="left-panel-icn left-panel-icons-tickets"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
-           ng-click="toggleLeftPanel('companies')" ui-sref="companies"
+            ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies')"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <div class="left-panel-icn left-panel-icons-companies"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
-           ng-click="toggleLeftPanel('users')" ui-sref="users"
+            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users')"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
         <div class="left-panel-icn left-panel-icons-users"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-           ng-click="toggleLeftPanel('billing')" ui-sref="accounting.billable"
+            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing')"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <div class="left-panel-icn left-panel-icons-billing"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
-           ng-click="toggleLeftPanel('inventory')" ui-sref="products({ tabName: 'category' })">
+            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory')">
         <div class="left-panel-icn left-panel-icons-inventory"></div>
       </div>
       <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
-           ng-click="toggleLeftPanel('password-manager')" ui-sref="password-manager">
+           ng-click="toggleLeftPanel('password-manager')"
+            ui-sref="password-manager">
         <div class="left-panel-icn left-panel-icons-password-manager"></div>
       </div>
       <!--REPORTS-->
@@ -307,6 +309,7 @@
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
             </div>
+
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
               <p ng-repeat="item in companiesFilterHistoryTicketsPage track by $index"
@@ -383,12 +386,12 @@
 
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" ng-click="filterCompanies()"
-             ng-class="{'active': (!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()}">
+             ng-class="{'active': !isArchivedCompaniesToShow()}">
           All Companies
           <i class="icn-sm icn-label-save-left-panel"
-             ng-show="(!(companiesSharedState.filter.isVendor || companiesSharedState.filter.isLead || companiesSharedState.filter.isClient || $state.includes('companyProfile'))) && !isArchivedCompaniesToShow()"></i>
+             ng-show="!isArchivedCompaniesToShow()"></i>
         </div>
-        <div class="center-category__category sked" ng-click="showArchivedCompanies()"
+        <div class="center-category__category sked" ng-click="filterCompanies('archived')"
              ng-class="{'active': isArchivedCompaniesToShow()}">
           Archived
           <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
