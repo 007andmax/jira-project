@@ -338,7 +338,7 @@
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
               <p ng-repeat="item in clientUsersFilterHistoryTicketsPage track by $index"
-                 ng-click="ticketsSharedState.filter.companyId && applyClientUserFilterFromHistoryListTicketPage(item)">
+                 ng-click="applyClientUserFilterFromHistoryListTicketPage(item)">
                 {{item}}</p>
 
             </div>

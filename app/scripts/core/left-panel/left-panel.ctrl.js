@@ -167,6 +167,18 @@
           return user.id;
         }
 
+        function getUserObjByUserFullName(name) {
+          // var user =  $scope.allUsers().find((user) => {
+          //   var fullName = user.firstName+' '+user.lastName;
+          //   return name === fullName;
+          // });
+          var user =  $scope.allUsers().find(function(user) {
+            var fullName =   user.lastName ? user.firstName+' '+user.lastName : user.firstName;
+            return name === fullName;
+          });
+          return user;
+        }
+
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
           if (value ) {
@@ -193,6 +205,7 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
+            ticketsSharedState.filter.clientUserId = '';
             $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
               return user.company.id === value;
             });
@@ -263,6 +276,14 @@
 
         $scope.applyClientUserFilterFromHistoryListTicketPage = function(value) {
           ticketsSharedState.filter.clientUserId = getUserIdByUserFullName(value);
+          var user = getUserObjByUserFullName(value);
+          if(ticketsSharedState.filter.companyId) {
+            if(user.company.id !== ticketsSharedState.filter.companyId) {
+              ticketsSharedState.filter.companyId = user.company.id
+            }
+          } else {
+            ticketsSharedState.filter.companyId = user.company.id;
+          }
         };
 
         $scope.applyTechUserFilterFromHistoryListTicketPage = function(value) {
@@ -690,6 +711,16 @@
             return client.firstName+' '+client.lastName;
           } else {
             return client.firstName;
+          }
+        };
+
+        $scope.getUserObjByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            return user;
           }
         };
 
