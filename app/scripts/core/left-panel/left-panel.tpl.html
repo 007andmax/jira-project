@@ -12,33 +12,33 @@
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
-           ng-click="clearTicketsFilters(); toggleLeftPanel('tickets')"
+           ng-click="clearTicketsFilters(); toggleLeftPanel('tickets', true)"
            >
         <div class="left-panel-icn left-panel-icons-tickets"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
-            ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies')"
+            ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies', true)"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <div class="left-panel-icn left-panel-icons-companies"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
-            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users')"
+            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users', true)"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
         <div class="left-panel-icn left-panel-icons-users"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing')"
+            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <div class="left-panel-icn left-panel-icons-billing"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
-            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory')">
+            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory', true)">
         <div class="left-panel-icn left-panel-icons-inventory"></div>
       </div>
       <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
-           ng-click="toggleLeftPanel('password-manager')"
+           ng-click="toggleLeftPanel('password-manager', true)"
             ui-sref="password-manager">
         <div class="left-panel-icn left-panel-icons-password-manager"></div>
       </div>
@@ -309,6 +309,21 @@
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
             </div>
+
+            <!--<div class="x-mark-wrapper">-->
+              <!--<div uib-dropdown>-->
+                <!--<input tooltip-placement="top"-->
+                       <!--placeholder="Select Company"-->
+                       <!--type="text" class="form-control has-dropdown pointer"-->
+                       <!--autocomplete="off"-->
+                       <!--autocomplete-service-item="clientCompanies()"-->
+                       <!--ng-model="ticketsSharedState.filter.companyId" service-list="clientCompanies()"-->
+                       <!--autocomplete-service-list uib-dropdown-toggle/>-->
+                <!--<i class="icn-sm icn-caret-gray"></i>-->
+                <!--<div class="service-list-container"></div>-->
+                <!--<input type="hidden" name="service" ng-model=ticketsSharedState.filter.companyId" ng-required="true">-->
+              <!--</div>-->
+            <!--</div>-->
 
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>

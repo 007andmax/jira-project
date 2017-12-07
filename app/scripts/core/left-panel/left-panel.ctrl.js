@@ -396,16 +396,22 @@
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
         });
 
-        $scope.toggleLeftPanel = function (section) {
-          // if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
-          //   $rootScope.isLeftPanelHidden = true;
-          //   $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
-          // } else {
-          //   $scope.openedCategory = section;
-          //   $rootScope.isLeftPanelHidden = false;
-          // }
-          $scope.openedCategory = section;
-          $rootScope.isLeftPanelHidden = false;
+        $scope.toggleLeftPanel = function (section, ifIconPart) {
+          if(ifIconPart) {
+            $scope.openedCategory = section;
+            $rootScope.isLeftPanelHidden = false;
+          } else {
+            if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
+              $rootScope.isLeftPanelHidden = true;
+              $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+            } else {
+              $scope.openedCategory = section;
+              $rootScope.isLeftPanelHidden = false;
+            }
+          }
+
+          // $scope.openedCategory = section;
+          // $rootScope.isLeftPanelHidden = false;
         };
 
         $scope.onClickSettings = function () {
