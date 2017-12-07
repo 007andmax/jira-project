@@ -247,7 +247,7 @@
             }
             if(ticketsSharedState.filter.techUserId) {
               var techUserIdUqery = {
-                path: 'assignedUser.id',
+                path: 'assignedUserId',
                 operator: 'EQ',
                 values: [ticketsSharedState.filter.techUserId]
               };
