@@ -18,13 +18,14 @@
       isDateRangeHidden: '@?',
       isShowTechSelectField: '@?',
       isReportAvailable: '=',
-      isCustomerTicketOptions: '@?'
+      isCustomerTicketOptions: '@?',
+      isProductOptions: '@?'
     },
     controller: reportMenuCtrl
   });
 
-  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter'];
-  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter) {
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService'];
+  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.exportFileToCsv = exportFileToCsv;
@@ -44,6 +45,7 @@
     $ctrl.isDateRangeHidden = $scope.$eval($ctrl.isDateRangeHidden);
     $ctrl.isShowTechSelectField = $scope.$eval($ctrl.isShowTechSelectField);
     $ctrl.isCustomerTicketOptions = $scope.$eval($ctrl.isCustomerTicketOptions);
+    $ctrl.isProductOptions = $scope.$eval($ctrl.isProductOptions);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -63,6 +65,14 @@
     $scope.clientCompanies = CompaniesService.getClientCompanies();
     $scope.users = UsersService.getAllUsers();
     $scope.locationTechReport = $location.url();
+
+    $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+    $scope.loadProductByCategory = function (categoryId) {
+      $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
+    };
+    $scope.selectProduct = function(product) {
+      $scope.selectedProduct = product;
+    };
 
     $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
@@ -238,6 +248,9 @@
               dataToSend.startDate = $scope.startDate;
               dataToSend.endDate = $scope.endDate;
               lastSentData = dataToSend;
+              if($scope.selectedProduct) {
+                dataToSend.productId = $scope.selectedProduct.versionedId.id
+              }
               $scope.$emit("requestReportData", dataToSend, location, techType);
             } else {
               $scope.errorNassageForDate = false;
@@ -250,6 +263,9 @@
               };
               dataToSend.startDate = $scope.startDate;
               dataToSend.endDate = $scope.endDate;
+              if($scope.selectedProduct) {
+                dataToSend.productId = $scope.selectedProduct.versionedId.id
+              }
               if (reportSettings.company) {
                 dataToSend.companyId = reportSettings.company.id;
                 lastSentData = dataToSend;

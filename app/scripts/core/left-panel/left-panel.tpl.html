@@ -302,6 +302,7 @@
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Company"
+                     next-after-text-editor ng-trim="false"
                      typeahead-input-formatter="getCompanyName($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.companyId" typeahead-editable="false"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
