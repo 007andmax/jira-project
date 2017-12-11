@@ -1455,4 +1455,7 @@
   .service-agreements-lists {
     font-size: 11px;
   }
+  .product-list-report{
+    padding: 30px 10px;
+  }
 }
