@@ -338,10 +338,6 @@
   min-height: 92vh;
 }
 
-.product-list-report.product-list .product-list-report-btn {
-  width: 1180px;
-}
-
 .product-list-report .report-title {
   position: absolute;
   top: 35px;
@@ -375,6 +371,10 @@
   width: 940px;
   margin: 0 auto;
   padding: 40px 0;
+}
+
+.product-list-report-btn-width {
+  width: 1180px;
 }
 
 .header-product-list-ticket {
