@@ -153,8 +153,9 @@
               <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
                      placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
 
-              <i class="icn-sm icn-caret-gray"></i>
+              <!--<i class="icn-sm icn-caret-gray"></i>-->
             </div>
+            <i class="icn-sm icn-remove-old" ng-click="clearInputField()" ng-show="selectedProduct" uib-tooltip="Clear product"></i>
 
             <input type="hidden" name="product" ng-model="productExpense.item.description" >
 

@@ -74,6 +74,10 @@
       $scope.selectedProduct = product;
     };
 
+    $scope.removeProduct = function() {
+      $scope.selectedProduct = undefined;
+    };
+
     $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
     $scope.errorNassageForDate = true;
