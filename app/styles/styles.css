@@ -1032,9 +1032,10 @@ hr {
   border: none;
 }
 
-.hardware .product-list-ticket{
+.hardware .product-list-ticket {
   margin-top: 175px;
 }
+
 .receivable-content .top-product-list-ticket {
   border-bottom: 1px solid #eee;
   border-top: none;
@@ -1054,9 +1055,11 @@ hr {
 .receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
 }
-.content-product-list-ticket{
+
+.content-product-list-ticket {
   font-size: 13px;
 }
+
 .receivable-content .top-product-list-ticket-deposit [class*="col-md-"] {
   cursor: pointer;
 }
@@ -5195,9 +5198,11 @@ tbody.collapse.in {
   outline: 0;
   background-color: #e7ecf2;
 }
+
 .left-panel-full .dropdown-menu > li > a {
   color: #9ca5b6;
 }
+
 .dropdown-menu > .disabled > a,
 .subdropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,

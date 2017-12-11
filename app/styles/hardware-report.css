@@ -337,9 +337,11 @@
   background-color: #F4F4F4;
   min-height: 92vh;
 }
-.product-list-report.product-list .product-list-report-btn{
+
+.product-list-report.product-list .product-list-report-btn {
   width: 1180px;
 }
+
 .product-list-report .report-title {
   position: absolute;
   top: 35px;
@@ -355,6 +357,10 @@
   background-color: #fff;
   min-height: 40px;
   position: relative;
+}
+
+.product-list-ticket-pdf {
+  width: 1180px;
 }
 
 .product-list-ticket-tech .header-product-list-ticket {
@@ -607,9 +613,11 @@
 .product-list-ticket .col-md-1 {
   width: 10%;
 }
-.product-list-ticket-grid .col-md-4{
+
+.product-list-ticket-grid .col-md-4 {
   width: 31%;
 }
+
 .remote-desktop-connections .col-md-1 {
   width: 11.4%;
 }
@@ -658,20 +666,25 @@
 .product-report-total-sales .col-md-2 span {
   font-size: 16px;
 }
+
 .product-report-total-sales .col-md-1,
-.product-report-total-sales .col-md-2{
+.product-report-total-sales .col-md-2 {
   float: right;
 }
+
 .product-report-total-sales .col-md-1,
-.product-report-total-sales .col-md-2{
+.product-report-total-sales .col-md-2 {
   line-height: 18px;
 }
-.product-report-total-sales .col-md-1{
+
+.product-report-total-sales .col-md-1 {
   width: 10%;
 }
-.product-report-total-sales .col-md-2{
+
+.product-report-total-sales .col-md-2 {
   width: 10.1%;
 }
+
 .product-report-btn {
   display: inline-block;
   margin: 0 5px;
@@ -1455,7 +1468,8 @@
   .service-agreements-lists {
     font-size: 11px;
   }
-  .product-list-report{
+
+  .product-list-report {
     padding: 30px 10px;
   }
 }
