@@ -115,6 +115,10 @@
             }
           }
 
+          scope.showDropdown = function() {
+            showDropdown()
+          };
+
           function hideDropdown() {
             if (scope.isPLOpen) {
               dropdown.hide();

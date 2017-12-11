@@ -31,9 +31,9 @@
           <div class="col-md-1"><strong>Ticket number</strong></div>
           <div class="col-md-1"><strong>Invoice number</strong></div>
           <!--<div class="col-md-1"><strong>Count</strong></div>-->
-          <div class="col-md-1"><strong>Product cost</strong></div>
+          <div class="col-md-1"><strong>Purchase cost</strong></div>
           <div class="col-md-1"><strong>Sale price</strong></div>
-          <div class="col-md-1"><strong>Discount</strong></div>
+          <div class="col-md-1"><strong>Discount(amount)</strong></div>
         </li>
         <li class="content-product-list-ticket clearfix" ng-repeat="product in reportByProducts.lines"
             on-finish-render="buildPdf()" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}">
@@ -44,14 +44,16 @@
           <div class="col-md-1">{{product.ticketNumber }}</div>
           <div class="col-md-1">{{product.invoiceNumber }}</div>
           <!--<div class="col-md-1">{{product.count}}</div>-->
-          <div class="col-md-1" >{{product.purchaseCost}}</div>
-          <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">{{product.salePrice}}</div>
-          <div class="col-md-1" style="color: red">{{product.discount}}</div>
+          <div class="col-md-1" >{{product.purchaseCost | currency: '$': 2}}</div>
+          <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">{{product.salePrice | currency: '$': 2}}</div>
+          <div class="col-md-1" style="color: red">{{product.discount | currency: '$': 2}}</div>
         </li>
       </ul>
     </div>
     <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
-      <p>Total Sales: <br> <strong><span>{{reportByProducts.totalSum | currency: '$': 2}}</span></strong></p>
+      <p><br> <strong><span>{{reportByProducts.purchaseCostSum | currency: '$': 2}}</span></strong></p>
+      <p><br> <strong><span>{{reportByProducts.salePriceSum | currency: '$': 2}}</span></strong></p>
+      <p><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong></p>
     </div>
   </div>
 </div>

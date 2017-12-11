@@ -145,17 +145,17 @@
           <div products-list id="product-list-cont"
                click-outside="closeDropdown()" outside-if-not="product-list-cont">
 
-            <div uib-tooltip="Product" tooltip-placement="top">
+            <div tooltip-placement="top">
 
               <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
                      placeholder="Product" autocomplete="off">
 
               <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
-                     placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
+                     placeholder="Search Product" autocomplete="off" ng-model="searchProduct">
 
               <!--<i class="icn-sm icn-caret-gray"></i>-->
             </div>
-            <i class="icn-sm icn-remove-old" ng-click="clearInputField()" ng-show="selectedProduct" uib-tooltip="Clear product"></i>
+            <i class="icn-sm icn-remove-old" ng-click="clearInputField(); showDropdown()" ng-show="selectedProduct"></i>
 
             <input type="hidden" name="product" ng-model="productExpense.item.description" >
 
