@@ -1031,6 +1031,7 @@ hr {
   box-shadow: none;
   border: none;
 }
+
 .hardware .product-list-ticket{
   margin-top: 175px;
 }
@@ -1053,7 +1054,9 @@ hr {
 .receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
 }
-
+.content-product-list-ticket{
+  font-size: 13px;
+}
 .receivable-content .top-product-list-ticket-deposit [class*="col-md-"] {
   cursor: pointer;
 }
