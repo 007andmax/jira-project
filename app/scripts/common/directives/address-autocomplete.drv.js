@@ -132,7 +132,10 @@
                 savedAddress === ngModelCtrl.$viewValue.address;
 
               if (ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address) {
-                inputCtrl.$setValidity('correct', !!hasMark);
+                //
+                // commented code to add ability of custom address (add address manually)
+                //
+                //inputCtrl.$setValidity('correct', !!hasMark);
               } else {
                 inputCtrl.$setValidity('correct', true);
               }
