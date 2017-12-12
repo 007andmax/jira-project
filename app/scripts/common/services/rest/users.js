@@ -264,6 +264,24 @@
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
       }
 
+      function getTechUsersEmailNotification(listOfTechUsers, callback) {
+        var future = $http({
+          url: '/settings/userProfile/getUsersEmailNotifications',
+          method: 'POST',
+          data: listOfTechUsers
+        });
+        Utils.handleCallback(future, callback)
+      }
+
+      function saveUsersEmailNotification(userId, data, callback) {
+        var future = $http({
+          method: 'PUT',
+          url: '/settings/userProfile/saveUsersEmailNotifications?userId='+userId,
+          data: data
+        });
+        Utils.handleCallback(future, callback)
+      }
+
       function getArchivedUsers() {
         return storage.deleted;
       }
@@ -625,6 +643,8 @@
         getAllUsers: getAllUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,
+        getTechUsersEmailNotification: getTechUsersEmailNotification,
+        saveUsersEmailNotification: saveUsersEmailNotification,
         getArchivedUsers: getArchivedUsers,
         getAllByCompanyId: getAllByCompanyId,
         getAllByCompanyIdNonArchived: getAllByCompanyIdNonArchived,

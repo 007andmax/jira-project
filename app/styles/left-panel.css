@@ -9,10 +9,10 @@
 }
 
 /*@media screen and (max-width: 1279px) {*/
-  /*.left-panel {*/
-    /*height: calc(100vh + 78px);*/
-    /*background: #27303F;*/
-  /*}*/
+/*.left-panel {*/
+/*height: calc(100vh + 78px);*/
+/*background: #27303F;*/
+/*}*/
 /*}*/
 
 .left-panel-head {
@@ -132,11 +132,23 @@
   text-transform: uppercase;
   margin: 35px 25px 10px 25px;
   color: #9ca5b6;
-  width: 100%;
+  width: 80%;
+}
+
+.left-panel-title-hover {
+  position: relative;
+  cursor: pointer;
+  transition: all .3s;
+  margin: 10px 25px;
+}
+
+.left-panel-title-hover:hover {
+  color: #fff;
 }
 
 .filter-left-panel {
   padding: 0 25px;
+  height: 210px !important;
 }
 
 .left-panel-full__head {
@@ -168,7 +180,7 @@
   align-content: flex-start;
   flex-flow: row wrap;
 
-  padding: 78px 0 100px;
+  padding: 78px 0 15px;
 }
 
 .left-panel-full__head--header {
@@ -413,6 +425,16 @@
   pointer-events: none;
 }
 
+.center-category .left-panel-title .report-caret-icon {
+  right: 15px;
+  top: 10px;
+  transition: all .3s;
+}
+
+.center-category .left-panel-title .report-caret-icon.report-caret-icon-up {
+  transform: rotate(180deg);
+}
+
 .center-category .icn-remove-old {
   top: 13px;
   position: absolute;
@@ -443,13 +465,6 @@
 .recent-left-panel p:hover,
 .recent-left-panel p.active-recent {
   color: #fff;
-}
-
-.center-category .report-caret-icon {
-  top: 15px;
-  position: absolute;
-  right: 13px;
-  pointer-events: none;
 }
 
 .x-mark-wrapper {

@@ -39,6 +39,11 @@
             hideDropdown();
           };
 
+          scope.clearInputField = function() {
+            productInput.val('');
+            scope.removeProduct();
+          };
+
           scope.$watch('categoryExpanded', function () {
             if (dropdown) {
               $timeout(function () {
@@ -109,6 +114,10 @@
 
             }
           }
+
+          scope.showDropdown = function() {
+            showDropdown()
+          };
 
           function hideDropdown() {
             if (scope.isPLOpen) {

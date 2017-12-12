@@ -310,7 +310,10 @@ aside#left .nav > li > a .badge {
   width: 28px;
   height: 28px;
 }
-
+.left-panel-hide-filter{
+  margin: 25px 0;
+  width: 100%;
+}
 .go-back-left-panel .icn-expand-back {
   transform: translateY(50%);
 }

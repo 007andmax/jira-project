@@ -52,6 +52,15 @@
                 <p>Send a request to change password</p>
               </div>
 
+              <div ng-if="currentUser.role === 'SUPER_TECH_ADMIN'">
+                <label class="control checkbox">
+                  <input type="checkbox" ng-model="usersEmailNotificationList[user.id].ticketCreated"
+                  ng-click="saveUserNewEmailNotificationSetting(user.id)">
+                  <span class="control-indicator"></span>
+                  Receive new ticket notification
+                </label>
+              </div>
+
             </div>
 
             <div class="tech-action">

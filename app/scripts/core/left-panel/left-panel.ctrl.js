@@ -44,6 +44,13 @@
 
         $scope.ticketsCounter;
 
+        $scope.dropdownByCompanyTicketPage = false;
+        $scope.dropdownByUserTicketPage = false;
+        $scope.dropdownByTechUserTicketPage = false;
+        $scope.dropdownByIndustryCompanyPage = false;
+        $scope.dropdownByIndustryUserPage = false;
+        $scope.dropdownByCompanyUserPage = false;
+
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -154,10 +161,22 @@
           //   return name === fullName;
           // });
           var user =  $scope.allUsers().find(function(user) {
-            var fullName = user.firstName+' '+user.lastName;
+            var fullName =   user.lastName ? user.firstName+' '+user.lastName : user.firstName;
             return name === fullName;
           });
           return user.id;
+        }
+
+        function getUserObjByUserFullName(name) {
+          // var user =  $scope.allUsers().find((user) => {
+          //   var fullName = user.firstName+' '+user.lastName;
+          //   return name === fullName;
+          // });
+          var user =  $scope.allUsers().find(function(user) {
+            var fullName =   user.lastName ? user.firstName+' '+user.lastName : user.firstName;
+            return name === fullName;
+          });
+          return user;
         }
 
 
@@ -186,21 +205,16 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            //$scope.globalSearch.count = 0;
-            //$rootScope.ticketPageCompnayIdFilter = value;
-            //$scope.clientsUsersByCompany = $scope.clientUsers().filter((user) => user.company.id === value);
+            ticketsSharedState.filter.clientUserId = '';
             $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
               return user.company.id === value;
             });
-            //$scope.techUsersByCompany = $scope.techUsers().filter((user) => user.company.id === value);
-            // $scope.techUsersByCompany = $scope.techUsers().filter(function(user) {
-            //   return user.company.id === value;
-            // });
-
             $scope.stateGo(null, 'tickets', {listType: 'by_company'});
           } else if (value === undefined) {
-            clearFilter(ticketsSharedState.filter);
-            $scope.stateGo(null, 'tickets', {listType: 'all'});
+            if($state.includes('tickets')) {
+              clearFilter(ticketsSharedState.filter);
+              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            }
           }
         });
 
@@ -210,17 +224,17 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            ticketsSharedState.filter.techUserId = '';
-            //$scope.globalSearch.count = '';
             sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
           } else if(value === undefined) {
-            if(ticketsSharedState.filter.companyId) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-            } else {
-              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            if($state.includes('tickets')) {
+              if(ticketsSharedState.filter.companyId) {
+                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+              } else {
+                $scope.stateGo(null, 'tickets', {listType: 'all'});
+              }
+              ticketsSharedState.filter.clientUserId = '';
             }
-            ticketsSharedState.filter.clientUserId = '';
           }
         });
 
@@ -230,18 +244,17 @@
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            ticketsSharedState.filter.clientUserId = '';
-            //$scope.globalSearch.count = '';
-            ticketsSharedState.filter.companyId = '';
             sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
           } else if(value === undefined) {
-            if(ticketsSharedState.filter.companyId) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-            } else {
-              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            if($state.includes('tickets')) {
+              if(ticketsSharedState.filter.companyId) {
+                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+              } else {
+                $scope.stateGo(null, 'tickets', {listType: 'all'});
+              }
+              ticketsSharedState.filter.techUserId = '';
             }
-            ticketsSharedState.filter.techUserId = '';
           }
         });
 
@@ -263,6 +276,14 @@
 
         $scope.applyClientUserFilterFromHistoryListTicketPage = function(value) {
           ticketsSharedState.filter.clientUserId = getUserIdByUserFullName(value);
+          var user = getUserObjByUserFullName(value);
+          if(ticketsSharedState.filter.companyId) {
+            if(user.company.id !== ticketsSharedState.filter.companyId) {
+              ticketsSharedState.filter.companyId = user.company.id
+            }
+          } else {
+            ticketsSharedState.filter.companyId = user.company.id;
+          }
         };
 
         $scope.applyTechUserFilterFromHistoryListTicketPage = function(value) {
@@ -272,6 +293,8 @@
         TutorialsService.getTypes(function (resp) {
           $scope.tutorialTypes = resp;
         });
+
+
 
 
         $scope.changeTicketsTagColor = function(type, colorCode) {
@@ -373,14 +396,22 @@
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
         });
 
-        $scope.toggleLeftPanel = function (section) {
-          if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
-            $rootScope.isLeftPanelHidden = true;
-            $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
-          } else {
+        $scope.toggleLeftPanel = function (section, ifIconPart) {
+          if(ifIconPart) {
             $scope.openedCategory = section;
             $rootScope.isLeftPanelHidden = false;
+          } else {
+            if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
+              $rootScope.isLeftPanelHidden = true;
+              $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+            } else {
+              $scope.openedCategory = section;
+              $rootScope.isLeftPanelHidden = false;
+            }
           }
+
+          // $scope.openedCategory = section;
+          // $rootScope.isLeftPanelHidden = false;
         };
 
         $scope.onClickSettings = function () {
@@ -446,40 +477,20 @@
             ticketsSharedState.filter.onHoldTag;
         };
 
-        $scope.filterTickets = function(filter, value) {
-          $state.go('tickets', {listType: 'all'});
-          var sharedFilter = ticketsSharedState.filter;
-          switch(filter) {
-            case 'completed':
-              clearFilter(sharedFilter);
-              sharedFilter.completed = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.COMPLETED;
-              break;
-            case 'inProgress':
-              clearFilter(sharedFilter);
-              sharedFilter.inProgress = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.IN_PROGRESS;
-              break;
-            case 'onHold':
-              clearFilter(sharedFilter);
-              sharedFilter.onHold = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.ON_HOLD;
-              break;
-            case 'onHoldTag':
-              clearFilter(sharedFilter);
-              sharedFilter.onHoldTag = true;
-              $scope.globalSearch.count = $scope.ticketsCounter.ON_HOLD;
-              break;
-            default:
-              clearFilter(sharedFilter);
-          }
+        $scope.clearTicketsFilters = function() {
+          clearFilter(ticketsSharedState.filter);
+        };
+
+        $scope.clearCompaniesFilters = function() {
+          clearFilter(companiesSharedState.filter);
+          $rootScope.showArchivedCompanies = false;
         };
 
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
-          $rootScope.showArchivedCompanies = false;
 
           if ($state.includes('companyProfile') && (filter !== 'dateRange' || value && value.length)) {
+            $rootScope.showArchivedCompanies = false;
             $state.go('companies');
           }
 
@@ -506,7 +517,12 @@
               }
               sharedFilter.dateRange = value;
               break;
+            case 'archived':
+              $scope.showArchivedCompanies();
+              clearFilter(sharedFilter);
+              break;
             default:
+              $rootScope.showArchivedCompanies = false;
               clearFilter(sharedFilter);
           }
         };
@@ -519,6 +535,11 @@
 
         $scope.isArchivedUsersToShow = function() {
           return $rootScope.showArchivedUsers;
+        };
+
+        $scope.clearUsersFilters = function() {
+          $rootScope.showArchivedUsers = false;
+          clearFilter(usersSharedState.filter);
         };
 
         $scope.filterUsers = function (filter, value) {
@@ -681,7 +702,31 @@
           }
           var user = UsersService.getOneById(userId);
           if(user) {
-            return user.firstName+' '+user.lastName;
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.getFullName = function(client) {
+
+          var isAllSpaces = client.lastName === "    ";
+          if(client.lastName && !isAllSpaces) {
+            return client.firstName+' '+client.lastName;
+          } else {
+            return client.firstName;
+          }
+        };
+
+        $scope.getUserObjByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            return user;
           }
         };
 

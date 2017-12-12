@@ -11,6 +11,8 @@
         var currentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
           action;
 
+        $scope.namePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;
+
         var savedState = $scope.getLastSavedState('user');
         var origin = savedState.item;
         if (savedState.type === 'user' && origin) {
