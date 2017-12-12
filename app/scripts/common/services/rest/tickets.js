@@ -246,12 +246,25 @@
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
             }
             if(ticketsSharedState.filter.techUserId) {
+              // var techUserIdUqery = {
+              //   path: 'assignedUserId',
+              //   operator: 'EQ',
+              //   values: [ticketsSharedState.filter.techUserId]
+              // };
+
               var techUserIdUqery = {
-                path: 'assignedUserId',
-                operator: 'EQ',
-                values: [ticketsSharedState.filter.techUserId]
+                predicateRule: 'OR',
+                fieldFilterDtos: [{
+                  path: 'assignedUserId',
+                  operator: 'EQ',
+                  values: [ticketsSharedState.filter.techUserId]
+                }, {
+                  path: 'assignedUser.id',
+                  operator: 'EQ',
+                  values: [ticketsSharedState.filter.techUserId]
+                }]
               };
-              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(techUserIdUqery);
+              groupedQuery.groupFieldFilters.push(techUserIdUqery);
             }
 
             if(query && query.groupFieldFilters) {
