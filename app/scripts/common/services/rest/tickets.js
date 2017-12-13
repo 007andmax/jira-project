@@ -246,11 +246,6 @@
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
             }
             if(ticketsSharedState.filter.techUserId) {
-              // var techUserIdUqery = {
-              //   path: 'assignedUserId',
-              //   operator: 'EQ',
-              //   values: [ticketsSharedState.filter.techUserId]
-              // };
 
               var techUserIdUqery = {
                 predicateRule: 'OR',

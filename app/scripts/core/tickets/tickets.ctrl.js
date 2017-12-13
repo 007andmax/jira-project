@@ -79,6 +79,16 @@
           return UsersService.getOneById(userId);
         };
 
+        $scope.getAssignedUserIDFromTicket = function(ticket) {
+          if(ticket) {
+            if(ticket.assignedUser && ticket.assignedUser.id) {
+              return ticket.assignedUser.id;
+            } else {
+              return ticket.assignedUserId;
+            }
+          }
+        };
+
         $scope.$watch('tickets', changeSelectedTickets);
 
         $scope.changeSelectedTickets = changeSelectedTickets;
