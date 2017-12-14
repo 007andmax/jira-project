@@ -246,18 +246,35 @@
             if(ticketsSharedState.filter.techUserId) {
 
               var techUserIdUqery = {
-                predicateRule: 'OR',
-                fieldFilterDtos: [{
-                  path: 'assignedUserId',
-                  operator: 'EQ',
-                  values: [ticketsSharedState.filter.techUserId]
-                }, {
-                  path: 'assignedUser.id',
-                  operator: 'EQ',
-                  values: [ticketsSharedState.filter.techUserId]
-                }]
+                path: 'assignedUser.id',
+                operator: 'EQ',
+                values: [ticketsSharedState.filter.techUserId]
+                // predicateRule: 'OR',
+                // fieldFilterDtos: [
+                //   {
+                //     // path: 'assignedUserId',
+                //     // operator: 'EQ',
+                //     // values: [ticketsSharedState.filter.techUserId]
+                //     // predicateRule: 'AND',
+                //     // fieldFilterDtos: [
+                //     //   {
+                //     //     path: 'assignedUserId',
+                //     //     operator: 'EQ',
+                //     //     values: [ticketsSharedState.filter.techUserId]
+                //     //   }, {
+                //     //     path: 'assignedUser',
+                //     //     operator: 'NULL'
+                //     //   }]
+                //   },
+                //   {
+                //     path: 'assignedUser.id',
+                //     operator: 'EQ',
+                //     values: [ticketsSharedState.filter.techUserId]
+                //   }
+                // ]
               };
-              groupedQuery.groupFieldFilters.push(techUserIdUqery);
+              //groupedQuery.groupFieldFilters.push(techUserIdUqery);
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(techUserIdUqery);
             }
 
             if(query && query.groupFieldFilters) {
@@ -294,9 +311,7 @@
               }]
             });
           }
-
           loadMore(listType, callback);
-
       }
 
       function loadMore(listType, callback) {
@@ -305,7 +320,6 @@
         storage.lastParams.offset = storage.tickets.length;
 
         loadingInProcess = true;
-
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
 
@@ -322,7 +336,6 @@
               } else {
                 storage.tickets.push(Utils.customizeObj(ticket));
               }
-
             }
 
             if (callback) {
