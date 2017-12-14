@@ -16,7 +16,7 @@
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
-        $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+        $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
         $scope.tagColors = TagsService.getColors();
         $scope.attachmentTypePattern = /[0-9a-z]+$/i;
         $scope.numberPattern = /^\+?[0-9]{0,19}$/;

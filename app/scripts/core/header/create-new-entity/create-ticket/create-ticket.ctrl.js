@@ -97,7 +97,7 @@
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+        $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
 
         DevicesService.getDevicesCount($scope, function (agents) {
           agentsByCompany = agents;
