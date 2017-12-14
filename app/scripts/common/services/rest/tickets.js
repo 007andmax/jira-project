@@ -235,6 +235,7 @@
               };
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(coompanyIdQuery);
             }
+
             if(ticketsSharedState.filter.clientUserId) {
               var userIdQuery = {
                 path: 'createdUserId',
@@ -243,38 +244,14 @@
               };
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
             }
-            if(ticketsSharedState.filter.techUserId) {
 
-              var techUserIdUqery = {
+            if(ticketsSharedState.filter.techUserId) {
+              var techUserIdQuery = {
                 path: 'assignedUser.id',
                 operator: 'EQ',
                 values: [ticketsSharedState.filter.techUserId]
-                // predicateRule: 'OR',
-                // fieldFilterDtos: [
-                //   {
-                //     // path: 'assignedUserId',
-                //     // operator: 'EQ',
-                //     // values: [ticketsSharedState.filter.techUserId]
-                //     // predicateRule: 'AND',
-                //     // fieldFilterDtos: [
-                //     //   {
-                //     //     path: 'assignedUserId',
-                //     //     operator: 'EQ',
-                //     //     values: [ticketsSharedState.filter.techUserId]
-                //     //   }, {
-                //     //     path: 'assignedUser',
-                //     //     operator: 'NULL'
-                //     //   }]
-                //   },
-                //   {
-                //     path: 'assignedUser.id',
-                //     operator: 'EQ',
-                //     values: [ticketsSharedState.filter.techUserId]
-                //   }
-                // ]
               };
-              //groupedQuery.groupFieldFilters.push(techUserIdUqery);
-              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(techUserIdUqery);
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(techUserIdQuery);
             }
 
             if(query && query.groupFieldFilters) {
