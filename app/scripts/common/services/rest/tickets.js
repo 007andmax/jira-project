@@ -218,9 +218,7 @@
 
           var query = queries[listType.toUpperCase()];
 
-          if(ticketsSharedState.filter.companyId ||
-            ticketsSharedState.filter.clientUserId ||
-            ticketsSharedState.filter.techUserId) {
+          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId) {
             var groupedQuery = {
               excludeTrashSpam: true,
               groupFieldFilters: [{
