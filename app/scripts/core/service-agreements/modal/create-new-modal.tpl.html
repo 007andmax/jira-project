@@ -12,15 +12,16 @@
             <input type="text" class="form-control has-dropdown" next-after-text-editor
                    ng-model="contractCompany" name="contractCompany" autocomplete="off"
                    uib-typeahead="company as company.name for company in companiesList | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                    qt-typeahead-show-on-focus ng-trim="false"
+                    qt-typeahead-async-show-on-focus="" ng-trim="false"
                    custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}" required>
 
-            <div>
-              <i class="icn-sm icn-caret-gray" ng-show="!showClearIcon()" style="pointer-events: none"></i>
-              <i class="icn-sm icn-remove-old"
-                 ng-show="showClearIcon()"
-                 uib-tooltip="clear" tooltip-placement="top" ng-click="contractCompany = undefined"></i>
-            </div>
+            <!--<div>-->
+              <!--<i class="icn-sm icn-caret-gray" ng-show="!showClearIcon()" style="pointer-events: none"></i>-->
+              <!--<i class="icn-sm icn-remove-old"-->
+                 <!--ng-show="showClearIcon()"-->
+                 <!--uib-tooltip="clear" tooltip-placement="top" ng-click="contractCompany = undefined"></i>-->
+            <!--</div>-->
+            <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
           </div>
         </div>
       </div>

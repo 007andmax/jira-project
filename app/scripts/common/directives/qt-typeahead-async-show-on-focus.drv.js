@@ -16,10 +16,7 @@
           function triggerFunc() {
             var prev = modelCtrl.$modelValue || '';
             if (prev) {
-              modelCtrl.$setViewValue('');
-              $timeout(function() {
-                modelCtrl.$setViewValue(prev);
-              });
+              modelCtrl.$setViewValue(null);
             } else {
               modelCtrl.$setViewValue(' ');
             }
