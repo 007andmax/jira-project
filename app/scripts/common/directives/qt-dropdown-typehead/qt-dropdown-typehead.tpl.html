@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div ng-show="$ctrl.isOpen">
+  <div class="dropdown-content" ng-show="$ctrl.isOpen">
     <ul>
       <li  ng-repeat="item in $ctrl.list " ng-click="$ctrl.selectItem(item)">
         {{$ctrl.getDisplayedProperty(item)}}
