@@ -21,7 +21,6 @@
     self.viewValueItem ='';
     self.lastCorrectSelecteditem = '';
     self.list = [];
-    self.showCaret = true;
 
     reInitList();
 
