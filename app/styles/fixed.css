@@ -24,6 +24,8 @@ body.non-body-scroll::-webkit-scrollbar {
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   background-color: #fff;
   width: 100%;
+  top: 40px;
+  border-radius: 4px;
 }
 #qtDropdown ul{
   list-style: none;
