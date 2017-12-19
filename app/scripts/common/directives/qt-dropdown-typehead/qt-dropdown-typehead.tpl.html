@@ -1,11 +1,20 @@
 
-<div deep-blur="$ctrl.changeDropdownState()">
+<div id="qtDropdown">
 
   <div>
     <input type="text" class="form-control has-dropdown"
            ng-model="$ctrl.viewValueItem"
            ng-click="$ctrl.changeDropdownState()"
-           ng-keyup="$ctrl.listFilterFunction()">
+           ng-keyup="$ctrl.listFilterFunction()" >
+    <div>
+          <span class="x-mark" ng-click="$ctrl.clearValueByIconClick()" ng-show="$ctrl.viewValueItem.length">
+            <i class="icn-sm icn-remove-old" tooltip="clear"
+               tooltip-placement="top"></i>
+          </span>
+          <span class="x-mark ng-hide" ng-hide="$ctrl.viewValueItem.length" ng-click="$ctrl.changeDropdownState()">
+            <i class="report-caret-icon"></i>
+          </span>
+    </div>
   </div>
 
   <div ng-show="$ctrl.isOpen">
