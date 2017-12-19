@@ -14,9 +14,13 @@
           element.bind('click', triggerFunc);
 
           function triggerFunc() {
-            var prev = modelCtrl.$modelValue || '';
+            var prev = modelCtrl.$modelValue || '' ;
             if (prev) {
-              modelCtrl.$setViewValue(null);
+              //modelCtrl.$setViewValue(null);
+              modelCtrl.$setViewValue('');
+              $timeout(function() {
+                modelCtrl.$setViewValue(' ');
+              });
             } else {
               modelCtrl.$setViewValue(' ');
             }
