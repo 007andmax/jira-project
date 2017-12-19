@@ -16,6 +16,7 @@
   function qtDropdownTypeheadCtrl($scope) {
 
     var self = this;
+
     self.isOpen = false;
     self.viewValueItem ='';
     self.lastCorrectSelecteditem = '';
