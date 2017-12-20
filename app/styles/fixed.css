@@ -16,7 +16,7 @@ body.non-body-scroll::-webkit-scrollbar {
   display: none;
 }
 
-#qtDropdown x-mark {
+#qtDropdown .x-mark {
   top: 3px;
 }
 
