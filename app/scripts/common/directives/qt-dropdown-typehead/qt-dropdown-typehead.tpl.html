@@ -20,7 +20,7 @@
   <div class="dropdown-content" ng-show="$ctrl.isOpen">
     <ul>
       <li  ng-repeat="item in $ctrl.list | orderBy: $ctrl.getAttributeForSorting(item) " ng-click="$ctrl.selectItem(item)">
-        {{$ctrl.getDisplayedProperty(item)}}
+        <span ng-bind-html="$ctrl.getDisplayedProperty(item) | highlightFilter: $ctrl.viewValueItem"></span>
 
       </li>
     </ul>
