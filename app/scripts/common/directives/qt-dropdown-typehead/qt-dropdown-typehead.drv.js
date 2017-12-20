@@ -7,34 +7,18 @@
       listForDropdown: '<',
       selectedItem: '=',
       displayProperty: '<?',
-      saveProperty: '<?'
+      saveProperty: '<?',
+      qtNgRequired: '<?',
+      qtNgMinlength: '<?',
+      qtNgMaxlength: '<?',
+      qtNgPattern: '<?',
+      qtCustomStyle: '<?',
+      qtNgClass: '<?',
+      qtName: '<?',
+      qtClass: '<?'
     },
     controller: qtDropdownTypeheadCtrl
-  }).filter('highlightFilter', ['$sce', '$injector', '$log', function($sce, $injector, $log) {
-    var isSanitizePresent;
-    isSanitizePresent = $injector.has('$sanitize');
-
-    function escapeRegexp(queryToEscape) {
-      // Regex: capture the whole query string and replace it with the string that will be used to match
-      // the results, for example if the capture is "a" the result will be \a
-      return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
-    }
-
-    function containsHtml(matchItem) {
-      return /<.*>/g.test(matchItem);
-    }
-
-    return function (matchItem, query) {
-      if (!isSanitizePresent && containsHtml(matchItem)) {
-        $log.warn('Unsafe use of typeahead please use ngSanitize'); // Warn the user about the danger
-      }
-      matchItem = query ? ('' + matchItem).replace(new RegExp(escapeRegexp(query), 'gi'), '<strong>$&</strong>') : matchItem; // Replaces the capture string with a the same string inside of a "strong" tag
-      if (!isSanitizePresent) {
-        matchItem = $sce.trustAsHtml(matchItem); // If $sanitize is not present we pack the string in a $sce object for the ng-bind-html directive
-      }
-      return matchItem;
-    };
-  }]);
+  });
 
   qtDropdownTypeheadCtrl.$inject = ['$scope'];
   function qtDropdownTypeheadCtrl($scope) {
@@ -46,7 +30,18 @@
     self.lastCorrectSelecteditem = '';
     self.list = [];
 
+    var inputAdditionalSettingsDictionary = {
+      'ng-required'  : self.qtNgRequired ? self.qtNgRequired : '',
+      'ng-minlength' : self.qtNgMinlength ? self.qtNgMinlength : '',
+      'ng-maxlength' : self.qtNgMaxlength ? self.qtNgMaxlength : '',
+      'ng-pattern'   : self.qtNgPattern ? self.qtNgPattern : '',
+      'custom-style' : self.qtCustomStyle ? self.qtCustomStyle : '',
+      'ng-class'     : self.qtNgClass ? self.qtNgClass : '',
+      'name'         : self.qtName ? self.qtName : '',
+    };
+
     reInitList();
+    addSettingToInput();
 
     function reInitList() {
       self.list = self.listForDropdown;
@@ -122,7 +117,49 @@
       }
     });
 
+    function addSettingToInput() {
+      var input = angular.element( document.querySelector( '#qtInput' ) );
+      console.log(input);
+
+      for (var property in inputAdditionalSettingsDictionary) {
+        if (inputAdditionalSettingsDictionary.hasOwnProperty(property) && inputAdditionalSettingsDictionary[property] !== '') {
+          console.log(property+' : '+ inputAdditionalSettingsDictionary[property]);
+          input.attr(property, inputAdditionalSettingsDictionary[property])
+        }
+      }
+
+      if(self.qtClass) {
+        input.addClass(self.qtClass);
+      }
+    }
+
   }
+
+  angular.module("quicktech.common.directives").filter('highlightFilter', ['$sce', '$injector', '$log', function($sce, $injector, $log) {
+    var isSanitizePresent;
+    isSanitizePresent = $injector.has('$sanitize');
+
+    function escapeRegexp(queryToEscape) {
+      // Regex: capture the whole query string and replace it with the string that will be used to match
+      // the results, for example if the capture is "a" the result will be \a
+      return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
+    }
+
+    function containsHtml(matchItem) {
+      return /<.*>/g.test(matchItem);
+    }
+
+    return function (matchItem, query) {
+      if (!isSanitizePresent && containsHtml(matchItem)) {
+        $log.warn('Unsafe use of typeahead please use ngSanitize'); // Warn the user about the danger
+      }
+      matchItem = query ? ('' + matchItem).replace(new RegExp(escapeRegexp(query), 'gi'), '<strong>$&</strong>') : matchItem; // Replaces the capture string with a the same string inside of a "strong" tag
+      if (!isSanitizePresent) {
+        matchItem = $sce.trustAsHtml(matchItem); // If $sanitize is not present we pack the string in a $sce object for the ng-bind-html directive
+      }
+      return matchItem;
+    };
+  }]);
 
 
 

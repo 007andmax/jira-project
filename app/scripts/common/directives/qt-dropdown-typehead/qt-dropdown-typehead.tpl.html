@@ -2,7 +2,7 @@
 <div id="qtDropdown">
 
   <div>
-    <input type="text" class="form-control has-dropdown"
+    <input type="text" class="form-control has-dropdown" id="qtInput"
            ng-model="$ctrl.viewValueItem"
            ng-click="$ctrl.changeDropdownState()"
            ng-keyup="$ctrl.listFilterFunction()" >
@@ -19,9 +19,8 @@
 
   <div class="dropdown-content" ng-show="$ctrl.isOpen">
     <ul>
-      <li  ng-repeat="item in $ctrl.list | orderBy: $ctrl.getAttributeForSorting(item) " ng-click="$ctrl.selectItem(item)">
+      <li ng-repeat="item in $ctrl.list | orderBy: $ctrl.getAttributeForSorting(item) " ng-click="$ctrl.selectItem(item)">
         <span ng-bind-html="$ctrl.getDisplayedProperty(item) | highlightFilter: $ctrl.viewValueItem"></span>
-
       </li>
     </ul>
   </div>
