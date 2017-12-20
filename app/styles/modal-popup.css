@@ -250,7 +250,9 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
   background-color: #4caf50;
   content: '';
 }
-
+.create-window .general .company-window__info .x-mark{
+  top: 2px;
+}
 .create-window .general .company-window__info .form-group.clearfix {
   margin-bottom: 10px;
 }
@@ -460,12 +462,16 @@ _::-webkit-:not(:root:root),
 .unlock-screen-wrapper {
   padding: 50px 100px;
 }
-
+.caret-mark{
+  right: 12px;
+  position: absolute;
+  top: 5px;
+}
 .create-window .x-mark,
 .service-form-wrapper .x-mark {
   position: absolute;
   top: 19px;
-  right: 3px;
+  right: 0;
   padding: 10px;
   cursor: pointer;
   line-height: 1;
