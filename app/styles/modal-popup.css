@@ -250,9 +250,7 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
   background-color: #4caf50;
   content: '';
 }
-.create-window .general .company-window__info .x-mark{
-  top: 2px;
-}
+
 .create-window .general .company-window__info .form-group.clearfix {
   margin-bottom: 10px;
 }

@@ -15,10 +15,16 @@ body.non-body-scroll {
 body.non-body-scroll::-webkit-scrollbar {
   display: none;
 }
-#qtDropdown{
+
+#qtDropdown x-mark {
+  top: 3px;
+}
+
+#qtDropdown {
   position: relative;
 }
-#qtDropdown .dropdown-content{
+
+#qtDropdown .dropdown-content {
   position: absolute;
   z-index: 1000;
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
@@ -27,21 +33,25 @@ body.non-body-scroll::-webkit-scrollbar {
   top: 40px;
   border-radius: 4px;
 }
-#qtDropdown ul{
+
+#qtDropdown ul {
   list-style: none;
   padding-left: 0;
   max-height: 190px;
   overflow-y: auto;
 
 }
-#qtDropdown ul li{
+
+#qtDropdown ul li {
   padding: 7px 20px;
   cursor: pointer;
 
 }
-#qtDropdown ul li:hover{
+
+#qtDropdown ul li:hover {
   background-color: #E7ECF2;
 }
+
 .dropdown > input {
   cursor: pointer;
   background-color: #FCFDFD;
