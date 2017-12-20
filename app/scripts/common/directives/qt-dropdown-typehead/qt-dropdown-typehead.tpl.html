@@ -19,7 +19,7 @@
 
   <div class="dropdown-content" ng-show="$ctrl.isOpen">
     <ul>
-      <li  ng-repeat="item in $ctrl.list " ng-click="$ctrl.selectItem(item)">
+      <li  ng-repeat="item in $ctrl.list | orderBy: $ctrl.getAttributeForSorting(item) " ng-click="$ctrl.selectItem(item)">
         {{$ctrl.getDisplayedProperty(item)}}
 
       </li>

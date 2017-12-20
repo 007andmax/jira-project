@@ -57,6 +57,10 @@
       return (self.displayProperty ? item[self.displayProperty] : item);
     };
 
+    self.getAttributeForSorting = function(item) {
+      return self.displayProperty ? self.displayProperty : item
+    };
+
     function changeSelectedItem(item) {
       if(self.saveProperty) {
         self.selectedItem = item[self.selectedItem]
@@ -68,13 +72,13 @@
     self.listFilterFunction = function() {
       self.isOpen = true;
       self.list =  self.listForDropdown.filter(function(item) {
-        return self.getDisplayedProperty(item).toString().indexOf(self.viewValueItem) > -1;
+        return self.getDisplayedProperty(item).toString().toLowerCase().indexOf(self.viewValueItem.toLowerCase()) > -1;
       });
     };
 
     self.checkIfViewValueMatched = function(inputValue) {
       return self.listForDropdown.some(function(item) {
-        return self.getDisplayedProperty(item) === inputValue
+        return self.getDisplayedProperty(item).toString().toLowerCase() === inputValue.toLowerCase()
       })
     };
 
