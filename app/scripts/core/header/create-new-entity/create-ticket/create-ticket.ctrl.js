@@ -234,8 +234,9 @@
               $scope.ticket.serviceExpenses[0].item = undefined;
               $scope.ticket.serviceExpenses.splice(1);
             }
-
-            $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
+            if($scope.ticketForm.ticketCompany) {
+              $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
+            }
             $scope.clients = UsersService.getClientUsers();
 
             $scope.ticketAgent = '';

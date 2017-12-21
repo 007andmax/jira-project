@@ -15,7 +15,8 @@
       qtCustomStyle: '<?',
       qtNgClass: '<?',
       qtName: '<?',
-      qtClass: '<?'
+      qtClass: '<?',
+      qtNgTrim: '<?'
     },
     controller: qtDropdownTypeheadCtrl
   });
@@ -37,6 +38,7 @@
       'custom-style' : self.qtCustomStyle ? self.qtCustomStyle : '',
       'ng-class'     : self.qtNgClass ? self.qtNgClass : '',
       'name'         : self.qtName ? self.qtName : '',
+      'ng-trim'      : self.qtNgTrim ? self.qtNgTrim : '',
     };
 
     reInitList();
