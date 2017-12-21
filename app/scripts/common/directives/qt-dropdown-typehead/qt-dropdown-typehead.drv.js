@@ -132,6 +132,10 @@
       }
     }
 
+    $scope.$on('createNewEntity', function (event, type) {
+      console.log('pidaru')
+    });
+
   }
 
   angular.module("quicktech.common.directives").filter('highlightFilter', ['$sce', '$injector', '$log', function($sce, $injector, $log) {
@@ -158,7 +162,8 @@
       }
       return matchItem;
     };
-  }]);
+  }])
+
 
 
 

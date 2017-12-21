@@ -72,13 +72,15 @@
                  <!--uib-typeahead="industry for industry in industries | orderBy: 'toString()'"-->
                  <!--autocomplete="off" qt-typeahead-show-on-focus>-->
 
-          <qt-dropdown-typehead list-for-dropdown="industries"
-                                selected-item="editCompany.clientIndustry.name"
-                                qt-ng-maxlength="40"
-                                qt-name="'industry'"
-                                qt-class="'form-control'" qt-custom-style="'{\'width\':\'100%\'}'">
+            <qt-dropdown-typehead list-for-dropdown="industries"
+                                  selected-item="editCompany.clientIndustry.name"
+                                  qt-ng-maxlength="40"
+                                  qt-name="'industry'"
+                                  qt-class="'form-control'" qt-custom-style="'{\'width\':\'100%\'}'">
 
-          </qt-dropdown-typehead>
+            </qt-dropdown-typehead>
+
+
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'clientType')}">

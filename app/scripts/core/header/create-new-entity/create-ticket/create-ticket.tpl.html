@@ -290,18 +290,27 @@
       <li>
 
         <div>
-          <div class="form-group" add-create-new-button="company"
+          <div class="form-group"
                ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCompany')}">
 
             <label>Company</label>
 
-            <input type="text" class="form-control has-dropdown" next-after-text-editor
-                   ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
-                   uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                   typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
-                   custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}">
+            <!--<input type="text" class="form-control has-dropdown" next-after-text-editor-->
+                   <!--ng-model="ticketCompany" name="ticketCompany" autocomplete="off"-->
+                   <!--uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"-->
+                   <!--typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"-->
+                   <!--custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}">-->
 
-            <div typeahead-input-icon="userCompany" ></div>
+            <!--<div typeahead-input-icon="userCompany" ></div>-->
+
+            <qt-dropdown-typehead list-for-dropdown="clientCompanies" qt-add-create-new-button="company"
+                                  selected-item="ticketCompany"
+                                  display-property="'name'"
+                                  qt-ng-minlength="40"
+                                  qt-name="'industry'"
+                                  qt-class="'form-control'" qt-custom-style="'{\'max-height\': \'190px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+
+            </qt-dropdown-typehead>
           </div>
         </div>
 
