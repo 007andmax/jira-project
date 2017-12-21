@@ -306,10 +306,12 @@
             <qt-dropdown-typehead list-for-dropdown="clientCompanies" qt-add-create-new-button="company"
                                   selected-item="ticketCompany"
                                   display-property="'name'"
+                                  filter-property="'name'"
                                   qt-ng-minlength="40"
                                   qt-ng-trim="'false'"
                                   qt-name="'ticketCompany'"
-                                  qt-class="'form-control'" qt-custom-style="'{\'max-height\': \'190px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+                                  qt-class="'form-control'"
+                                  qt-ng-style="'{\'max-height\': \'190px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
 
             </qt-dropdown-typehead>
           </div>
@@ -321,25 +323,38 @@
 
             <label>Created for</label>
 
-            <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                   ng-model="ticketCreatedUser"
-                   typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                   uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
-                   qt-typeahead-show-on-focus ng-trim="false"
-                   custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
+            <!--<input type="text" class="form-control has-dropdown-with-label" autocomplete="off"-->
+                   <!--ng-model="ticketCreatedUser"-->
+                   <!--typeahead-template-url="/html/partials/user-autocomplete.tpl.html"-->
+                   <!--uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"-->
+                   <!--qt-typeahead-show-on-focus ng-trim="false"-->
+                   <!--custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">-->
 
-            <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
+            <!--<input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">-->
 
-            <div typeahead-input-icon-sm="ticketCreatedUser"></div>
-            <div class="ng-scope" typeahead-input-icon="userCompany">
-              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
-                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
-                   tooltip-placement="top"></i>
-            </span>
-              <span class="x-mark ng-hide" ng-hide="showClearIcon">
-                <i class="icn-sm icn-caret-gray"></i>
-              </span>
-            </div>
+            <!--<div typeahead-input-icon-sm="ticketCreatedUser"></div>-->
+            <!--<div class="ng-scope" typeahead-input-icon="userCompany">-->
+              <!--<span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">-->
+                <!--<i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"-->
+                   <!--tooltip-placement="top"></i>-->
+            <!--</span>-->
+              <!--<span class="x-mark ng-hide" ng-hide="showClearIcon">-->
+                <!--<i class="icn-sm icn-caret-gray"></i>-->
+              <!--</span>-->
+            <!--</div>-->
+
+            <qt-dropdown-typehead list-for-dropdown="clients" qt-add-create-new-button="user"
+                                  selected-item="ticketCreatedUser"
+                                  display-property="'firstName'"
+                                  filter-property="'firstName'"
+                                  qt-ng-minlength="40"
+                                  qt-ng-trim="'false'"
+                                  qt-name="'ticketCreatedUser'"
+                                  qt-class="'form-control'"
+                                  qt-ng-style="'{\'overflow-y\': \'auto\', \'width\': \'100%\', \'max-height\': \'190px\'}'"
+                                  qt-template-url="'/html/partials/qt-user-autocomplete.tpl.html'">
+
+            </qt-dropdown-typehead>
 
           </div>
         </div>

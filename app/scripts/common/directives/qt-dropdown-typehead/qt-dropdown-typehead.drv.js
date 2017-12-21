@@ -6,17 +6,19 @@
     bindings: {
       listForDropdown: '<',
       selectedItem: '=',
+      filterProperty: '<?',
       displayProperty: '<?',
       saveProperty: '<?',
       qtNgRequired: '<?',
       qtNgMinlength: '<?',
       qtNgMaxlength: '<?',
       qtNgPattern: '<?',
-      qtCustomStyle: '<?',
+      qtNgStyle: '=?',
       qtNgClass: '<?',
       qtName: '<?',
       qtClass: '<?',
-      qtNgTrim: '<?'
+      qtNgTrim: '<?',
+      qtTemplateUrl: '<?'
     },
     controller: qtDropdownTypeheadCtrl
   });
@@ -35,7 +37,7 @@
       'ng-minlength' : self.qtNgMinlength ? self.qtNgMinlength : '',
       'ng-maxlength' : self.qtNgMaxlength ? self.qtNgMaxlength : '',
       'ng-pattern'   : self.qtNgPattern ? self.qtNgPattern : '',
-      'custom-style' : self.qtCustomStyle ? self.qtCustomStyle : '',
+      'ng-style'     : self.qtNgStyle ? self.qtNgStyle : '',
       'ng-class'     : self.qtNgClass ? self.qtNgClass : '',
       'name'         : self.qtName ? self.qtName : '',
       'ng-trim'      : self.qtNgTrim ? self.qtNgTrim : '',
@@ -63,8 +65,8 @@
     };
 
     self.selectItem = function(item) {
-      if(self.displayProperty) {
-        self.viewValueItem = item[self.displayProperty];
+      if(self.filterProperty) {
+        self.viewValueItem = item[self.filterProperty];
       } else {
         self.viewValueItem = item;
       }
@@ -77,8 +79,12 @@
       return (self.displayProperty ? item[self.displayProperty] : item);
     };
 
+    self.getFilterProperty = function(item) {
+      return (self.filterProperty ? item[self.filterProperty] : item);
+    };
+
     self.getAttributeForSorting = function(item) {
-      return self.displayProperty ? self.displayProperty : item
+      return self.filterProperty ? self.filterProperty : item
     };
 
     function changeSelectedItem(item) {
@@ -92,13 +98,13 @@
     self.listFilterFunction = function() {
       self.isOpen = true;
       self.list =  self.listForDropdown.filter(function(item) {
-        return self.getDisplayedProperty(item).toString().toLowerCase().indexOf(self.viewValueItem.toLowerCase()) > -1;
+        return self.getFilterProperty(item).toString().toLowerCase().indexOf(self.viewValueItem.toLowerCase()) > -1;
       });
     };
 
     self.checkIfViewValueMatched = function(inputValue) {
       return self.listForDropdown.some(function(item) {
-        return self.getDisplayedProperty(item).toString().toLowerCase() === inputValue.toLowerCase()
+        return self.getFilterProperty(item).toString().toLowerCase() === inputValue.toLowerCase()
       })
     };
 

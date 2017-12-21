@@ -150,6 +150,7 @@
 
       <div class="ticket-item items-header">
         <div class="col-1" style="width: 338px">ITEM</div>
+        <div class="col-4" ng-if="ticket.discountSum <= 0"></div>
         <div class="col-3">quantity</div>
         <div class="col-4">UNIT price</div>
         <div class="col-4" ng-if="ticket.discountSum > 0">Discount</div>
@@ -169,7 +170,8 @@
 
       </div>
 
-      <div class="col-3">{{ productExpense.billableQuantity }}</div>
+      <div class="col-4" ng-if="ticket.discountSum <= 0"></div>
+      <div class="col-3" >{{ productExpense.billableQuantity }}</div>
       <div class="col-4">{{ productExpense.item.sale | currency: '$':2 }}</div>
       <div class="col-4" ng-if="ticket.discountSum > 0">{{ productExpense.discountSum | currency: '$':2 }}</div>
       <div class="col-4">{{ productExpense.taxSum | currency: '$':2 }}</div>
@@ -184,6 +186,7 @@
       </div>
 
       <div class="col-2">{{ serviceExpense.description }}</div>
+      <div class="col-4" ng-if="ticket.discountSum <= 0"></div>
       <div class="col-3" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
       <div class="col-3" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
       <div class="col-4">{{ serviceExpense.item.rate | currency: '$':2 }}<span ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">/hr</span></div>
