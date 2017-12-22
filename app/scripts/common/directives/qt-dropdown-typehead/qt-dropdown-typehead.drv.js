@@ -18,19 +18,24 @@
       qtName: '<?',
       qtClass: '<?',
       qtNgTrim: '<?',
-      qtTemplateUrl: '<?'
+      qtTemplateUrl: '<?',
+      qtTabindex: '<?',
+      qtNgDisabled: '<?',
+      qtReadonly: '<?',
+      qtPlaceholder : '<?'
     },
     controller: qtDropdownTypeheadCtrl
   });
 
-  qtDropdownTypeheadCtrl.$inject = ['$scope'];
-  function qtDropdownTypeheadCtrl($scope) {
+  qtDropdownTypeheadCtrl.$inject = ['$scope', '$rootScope'];
+  function qtDropdownTypeheadCtrl($scope, $rootScope) {
 
     var self = this;
     self.isOpen = false;
     self.viewValueItem ='';
     self.lastCorrectSelecteditem = '';
     self.list = [];
+
 
     var inputAdditionalSettingsDictionary = {
       'ng-required'  : self.qtNgRequired ? self.qtNgRequired : '',
@@ -41,6 +46,9 @@
       'ng-class'     : self.qtNgClass ? self.qtNgClass : '',
       'name'         : self.qtName ? self.qtName : '',
       'ng-trim'      : self.qtNgTrim ? self.qtNgTrim : '',
+      'tabindex'     : self.qtTabindex ? self.qtTabindex : '',
+      'ng-disabled'  : self.qtNgDisabled ? self.qtNgDisabled : '',
+      'placeholder'  : self.qtPlaceholder ? self.qtPlaceholder : '',
     };
 
     reInitList();
@@ -103,9 +111,14 @@
     };
 
     self.checkIfViewValueMatched = function(inputValue) {
-      return self.listForDropdown.some(function(item) {
-        return self.getFilterProperty(item).toString().toLowerCase() === inputValue.toLowerCase()
-      })
+      if(inputValue) {
+        return self.listForDropdown.some(function(item) {
+          return self.getFilterProperty(item).toString().toLowerCase() === inputValue.toLowerCase()
+        })
+      } else {
+        return true;
+      }
+
     };
 
     self.clearValueByIconClick = function() {
@@ -120,7 +133,7 @@
       var parent = targetElement.closest("#qtDropdown");
       if(!parent){
         self.changeDropdownState(true);
-        $scope.$apply();
+        $rootScope.safeDigest()
       }
     });
 
@@ -138,6 +151,10 @@
       if(self.qtClass) {
         input.addClass(self.qtClass);
       }
+      if(self.qtReadonly) {
+        input.attr(self.qtReadonly);
+      }
+
     }
 
     $scope.$on('createNewEntity', function (event, type) {

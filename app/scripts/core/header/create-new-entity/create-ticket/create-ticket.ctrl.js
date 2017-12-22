@@ -341,7 +341,7 @@
               function (progress) {
                 $scope.fileLoadOrError = true;
                 file.progress = 100 * (progress.loaded / progress.total);
-                $scope.$apply();
+                $rootScope.safeDigest();
               }, function (finish) {
 
                 $scope.fileLoadOrError = false;
@@ -363,7 +363,7 @@
 
                 file.xhr = null;
                 file.id = finish.id;
-                $scope.$apply();
+                $rootScope.safeDigest();
               }, function (error) {});
           } else {
             $scope.fileLoadOrError = true;
@@ -377,7 +377,7 @@
             $scope.ticketForm.$setValidity('errorFile', false);
           }
 
-          $scope.$apply();
+          $rootScope.safeDigest();
         };
 
         $scope.removeAttachment = function (index, isErrorFile) {
@@ -405,13 +405,13 @@
             function (progress) {
               $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
-              $scope.$apply();
+              $rootScope.safeDigest();
             },
             function (finish) {
               $scope.fileLoadOrError = false;
               file.xhr = null;
               file.id = finish.id;
-              $scope.$apply();
+              $rootScope.safeDigest();
             }, function (error) {
             });
         };

@@ -647,6 +647,12 @@
           });
         };
 
+        $rootScope.safeDigest = function() {
+          if ($rootScope.$$phase !== "$apply" && $rootScope.$$phase !== "$digest") {
+            $rootScope.$digest();
+          }
+        };
+
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $rootScope.decimalNumberPatternLow = /^\d{1,6}(\.\d{0,2}){0,1}$/;
         $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
