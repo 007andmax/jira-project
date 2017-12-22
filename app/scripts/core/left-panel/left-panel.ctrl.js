@@ -199,7 +199,7 @@
         });
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
-          if (value ) {
+          if (value && value !== ' ' && $scope.checkCompanieValueMatched(value)) {
             sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
@@ -218,8 +218,18 @@
           }
         });
 
+        $scope.checkCompanieValueMatched = function(inputValue) {
+          if(inputValue) {
+            return  $scope.clientCompanies().some(function(item) {
+              return item.id.toLowerCase() === inputValue.toLowerCase()
+            })
+          } else {
+            return false
+          }
+        };
+
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
-          if (value ) {
+          if (value && value !== ' ' && $scope.checkClientValueMatched(value)) {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -238,8 +248,18 @@
           }
         });
 
+        $scope.checkClientValueMatched = function(inputValue) {
+          if(inputValue) {
+            return  $scope.clientsUsersByCompany.some(function(item) {
+              return item.id.toLowerCase() === inputValue.toLowerCase()
+            })
+          } else {
+            return false
+          }
+        };
+
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
-          if (value ) {
+          if (value && value !== ' ' && $scope.checkTechClientValueMatched(value)) {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -257,6 +277,16 @@
             }
           }
         });
+
+        $scope.checkTechClientValueMatched = function(inputValue) {
+          if(inputValue) {
+            return  $scope.techUsers().some(function(item) {
+              return item.id.toLowerCase() === inputValue.toLowerCase()
+            })
+          } else {
+            return false
+          }
+        };
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function(value) {
           companiesSharedState.filter.industry = value;
