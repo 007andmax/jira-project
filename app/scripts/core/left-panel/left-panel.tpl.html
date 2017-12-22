@@ -302,9 +302,11 @@
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Company"
-                     next-after-text-editor ng-trim="false"
+                     next-after-text-editor
+                     ng-trim="false"
                      typeahead-input-formatter="getCompanyName($model)"
-                     autocomplete="off" ng-model="ticketsSharedState.filter.companyId" typeahead-editable="false"
+                     autocomplete="off"
+                     ng-model="ticketsSharedState.filter.companyId"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                      qt-typeahead-async-show-on-focus
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
@@ -344,7 +346,7 @@
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select User"
                      typeahead-input-formatter="getUserByID($model)"
-                     autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId" typeahead-editable="false"
+                     autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId"
                      uib-typeahead="client.id as getFullName(client) for client in clientsUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
                      qt-typeahead-async-show-on-focus
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
@@ -372,7 +374,7 @@
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Tech User"
                      typeahead-input-formatter="getUserByID($model)"
-                     autocomplete="off" ng-model="ticketsSharedState.filter.techUserId" typeahead-editable="false"
+                     autocomplete="off" ng-model="ticketsSharedState.filter.techUserId"
                      uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
                      qt-typeahead-async-show-on-focus
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
@@ -603,7 +605,7 @@
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
                        placeholder="Select Company"
-                       autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
+                       autocomplete="off" ng-model="usersSharedState.filter.companyId"
                        typeahead-input-formatter="getCompanyName($model)"
                        uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                        qt-typeahead-async-show-on-focus
@@ -728,7 +730,7 @@
               <p>By Company</p>
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="passwordSharedState.filter.companyId" typeahead-editable="false"
+                       autocomplete="off" ng-model="passwordSharedState.filter.companyId"
                        ng-change="passwordSharedState.filter.deviceId = undefined"
                        typeahead-input-formatter="getCompanyName($model)"
                        uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
@@ -743,7 +745,7 @@
               <p>By Device</p>
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="passwordSharedState.filter.deviceId" typeahead-editable="false"
+                       autocomplete="off" ng-model="passwordSharedState.filter.deviceId"
                        typeahead-input-formatter="getDeviceNameById($model)"
                        uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
                        qt-typeahead-async-show-on-focus
@@ -760,7 +762,7 @@
 
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="passwordSharedState.filter.template" typeahead-editable="false"
+                       autocomplete="off" ng-model="passwordSharedState.filter.template"
                        typeahead-input-formatter="userReadable($model)"
                        uib-typeahead="template as userReadable(template) for template in templates | filter: $viewValue:stateComparator | orderBy:'toString()'"
                        qt-typeahead-async-show-on-focus

@@ -133,7 +133,7 @@
       var parent = targetElement.closest("#qtDropdown");
       if(!parent){
         self.changeDropdownState(true);
-        $rootScope.safeDigest()
+        $rootScope.safeDigest
       }
     });
 
