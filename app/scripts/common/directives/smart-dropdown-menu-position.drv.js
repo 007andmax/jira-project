@@ -11,20 +11,18 @@
 
         var input = element;
 
-        input.bind('click', function() {
+        setInterval(function() {
           var winHeight = $(window).height();
           var dropdownMenu = element.next();
           var position = element[0].getBoundingClientRect().top;
-          // console.log('position '+position+' ,buttonHeight: '+ buttonHeight);
-          // console.log('win height', win.height());
-          // console.log('newxt element:', dropdownMenu[0]);
-          if((winHeight - position) < 200) {
-            $(dropdownMenu[0]).css({'top': 'auto'});
-            $(dropdownMenu[0]).css({'bottom': '100%'});
+          var d = $(dropdownMenu[0]);
+          if((winHeight - position) < 250) {
+            d.css({'top': 'auto'});
+            d.css({'bottom': '100%'});
           } else {
-            $(dropdownMenu[0]).css({'bottom': ''});
+            d.css({'bottom': ''});
           }
-        })
+        }, 100)
 
 
       }
