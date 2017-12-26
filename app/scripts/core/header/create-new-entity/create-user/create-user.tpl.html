@@ -92,6 +92,7 @@
             <div uib-dropdown ng-show="isCreation" add-create-new-button="company">
 
               <input type="text" ng-model="userCompany" autocomplete="off" tabindex="5"
+                     smart-dropdown-menu-position
                      class="form-control form-control-dropdown dropdown-toggle"
                      uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      qt-typeahead-async-show-on-focus name="userCompany" ng-required="isCreation"

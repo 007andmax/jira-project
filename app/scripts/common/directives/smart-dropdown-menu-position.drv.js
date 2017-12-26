@@ -9,8 +9,6 @@
       },
       link: function (scope, element, attrs) {
 
-        var input = element;
-
         setInterval(function() {
           var winHeight = $(window).height();
           var dropdownMenu = element.next();

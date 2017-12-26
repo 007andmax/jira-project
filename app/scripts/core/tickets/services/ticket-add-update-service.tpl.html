@@ -31,7 +31,7 @@
                  name="serviceName" autocomplete="off" ng-disabled="!serviceList.length"
                  placeholder="Service" autocomplete-service-item="serviceExpense.item"
                  ng-model="serviceExpense.item.name" service-list="serviceList"
-                 autocomplete-service-list uib-dropdown-toggle/>
+                 autocomplete-service-list uib-dropdown-toggle smart-dropdown-menu-position=""/>
           <i class="icn-sm icn-caret-gray"></i>
           <div class="service-list-container"></div>
           <input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id" ng-required="true">

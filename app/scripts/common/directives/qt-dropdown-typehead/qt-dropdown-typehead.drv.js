@@ -139,11 +139,11 @@
 
     function addSettingToInput() {
       var input = angular.element( document.querySelector( '#qtInput' ) );
-      console.log(input);
+      //console.log(input);
 
       for (var property in inputAdditionalSettingsDictionary) {
         if (inputAdditionalSettingsDictionary.hasOwnProperty(property) && inputAdditionalSettingsDictionary[property] !== '') {
-          console.log(property+' : '+ inputAdditionalSettingsDictionary[property]);
+          //console.log(property+' : '+ inputAdditionalSettingsDictionary[property]);
           input.attr(property, inputAdditionalSettingsDictionary[property])
         }
       }
@@ -157,9 +157,9 @@
 
     }
 
-    $scope.$on('createNewEntity', function (event, type) {
-      console.log('pidaru')
-    });
+    // $scope.$on('createNewEntity', function (event, type) {
+    //
+    // });
 
   }
 

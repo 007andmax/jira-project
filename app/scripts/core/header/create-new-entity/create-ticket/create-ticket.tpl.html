@@ -295,7 +295,8 @@
 
             <label>Company</label>
 
-            <input type="text" class="form-control has-dropdown" smart-dropdown-menu-position
+            <input type="text" class="form-control has-dropdown"
+                   smart-dropdown-menu-position
                    next-after-text-editor
                    ng-model="ticketCompany"
                    name="ticketCompany"
@@ -312,7 +313,7 @@
                                   <!--selected-item="ticketCompany"-->
                                   <!--display-property="'name'"-->
                                   <!--filter-property="'name'"-->
-                                  <!--qt-ng-minlength="40"-->l
+                                  <!--qt-ng-minlength="40"-->
                                   <!--qt-ng-trim="'false'"-->
                                   <!--qt-name="'ticketCompany'"-->
                                   <!--qt-class="'form-control'"-->
@@ -329,6 +330,7 @@
             <label>Created for</label>
 
             <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                   smart-dropdown-menu-position
                    ng-model="ticketCreatedUser"
                    typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                    uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
@@ -373,7 +375,8 @@
 
             <label>Assign to</label>
 
-            <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+            <input type="text" class="form-control has-dropdown-with-label"
+                   smart-dropdown-menu-position autocomplete="off"
                    ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
                    typeahead-on-select="userAssigned(ticketAssignTo)"
                    typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
@@ -402,6 +405,7 @@
           <label>Agent</label>
 
           <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                 smart-dropdown-menu-position
                  ng-model="ticketAgent" name="ticketAgent"
                  ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
                  uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
