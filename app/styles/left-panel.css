@@ -405,7 +405,8 @@
   border: none;
 }
 
-.x-mark-wrapper .dropdown-menu {
+.x-mark-wrapper .dropdown-menu,
+.x-mark-wrapper .dropdown-content{
   background-color: #313A4D;
   color: #9ca5b6;
   border: none;
@@ -413,7 +414,10 @@
 
 .left-panel-full-wrapper .dropdown-menu > .active a,
 .left-panel-full-wrapper .dropdown-menu > .active a:hover,
-.left-panel-full-wrapper .dropdown-menu > .active a:focus {
+.left-panel-full-wrapper .dropdown-menu > .active a:focus,
+.left-panel-full-wrapper .dropdown-content > .active a,
+.left-panel-full-wrapper .dropdown-content > .active a:hover,
+.left-panel-full-wrapper .dropdown-content > .active a:focus{
   background-color: #16A4FA;
   color: #fff;
 }

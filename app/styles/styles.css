@@ -3610,8 +3610,8 @@ output {
 
 .form-control-number.has-dropdown ~ i, .account-type ~ i, .subscribe-dropdown ~ i {
   position: absolute;
-  top: 13px;
-  right: 13px;
+  top: 16px;
+  right: 16px;
   pointer-events: none;
 }
 
@@ -4588,7 +4588,7 @@ select[multiple].input-lg {
 
 .has-dropdown ~ i {
   position: absolute;
-  top: 13px;
+  top: 16px;
   right: 11px;
   pointer-events: none;
 }
@@ -9992,6 +9992,10 @@ button.close {
   padding: 15px;
 }
 
+.modal-footer input {
+  cursor: pointer;
+}
+
 .modal-footer {
   padding: 15px;
   text-align: right;
@@ -11787,6 +11791,15 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 
 .qt-product-edit .col-1 .dropdown-width .select-taxes-drv .checkbox-dropdown .checkbox {
   width: 100%;
+}
+
+.qt-product-edit qt-dropdown-typehead {
+  width: 290px;
+  display: inline-block;
+}
+
+.qt-product-edit qt-dropdown-typehead input {
+  cursor: pointer;
 }
 
 .qt-product-edit .dropdown-width .icn-label-save {

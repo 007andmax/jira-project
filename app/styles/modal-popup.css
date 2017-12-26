@@ -468,7 +468,7 @@ _::-webkit-:not(:root:root),
 .create-window .x-mark,
 .service-form-wrapper .x-mark {
   position: absolute;
-  top: 19px;
+  top: 17px;
   right: 0;
   padding: 10px;
   cursor: pointer;
@@ -481,7 +481,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-window .input-top-4 .x-mark {
-  top: 4px;
+  top: 2px;
 }
 
 .pass-man-popup .x-mark {
