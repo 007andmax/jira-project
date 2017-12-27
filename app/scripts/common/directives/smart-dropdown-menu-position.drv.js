@@ -18,21 +18,23 @@
           var parentElement = d.closest('.category-expanded');
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
-
-            var productListDropdownMenu = d.closest('.dropdown-menu');
-            if((winHeight - position) < 600) {
-              console.log(winHeight - position)
-              productListDropdownMenu.css({'top': 'auto'});
-              productListDropdownMenu.css({'bottom': '100%'});
+            var productInputPosition = element[0].getBoundingClientRect().top;
+            var productInput = $(element[0])
+            //var listContainer = element.next().next();
+            var productDropdownMenu = productInput.parent('div').parent('div').find('.nano');
+            console.log(winHeight - productInputPosition);
+            if((winHeight - productInputPosition) < 360) {
+              productDropdownMenu.css({'top': 'auto'});
+              productDropdownMenu.css({'bottom': '100%'});
             } else {
-              console.log(winHeight - position)
-              productListDropdownMenu.css({'bottom': ''});
+              productDropdownMenu.css({'bottom': ''});
             }
 
           } else if(attrs.smartDropdownMenuPosition === 'service-list'){
 
             var listContainer = element.next().next();
             var serviceDropdownMenu = listContainer.find('.uib-dropdown-menu');
+            //console.log(winHeight - position)
             if((winHeight - position) < 210) {
               serviceDropdownMenu.css({'top': 'auto'});
               serviceDropdownMenu.css({'bottom': '100%'});
