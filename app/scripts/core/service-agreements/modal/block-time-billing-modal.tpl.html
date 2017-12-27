@@ -292,7 +292,7 @@
                            name="newContractServiceName" autocomplete="off"
                            autocomplete-service-item="contractService.name"
                            ng-model="contractService.name" service-list="defaultServicesForDropdown"
-                           autocomplete-service-list uib-dropdown-toggle
+                           autocomplete-service-list uib-dropdown-toggle smart-dropdown-menu-position="service-list"
                            entity="contractService.nameValue" hard-reset-pattern="descriptionPattern"
                            invalid-when="!isNameUnique(contractService)"/>
                     <i class="icn-sm icn-caret-gray"></i>
@@ -388,7 +388,7 @@
                            autocomplete-service-item="newContractService.name"
                            ng-model="newContractService.name.name"
                            service-list="defaultServicesForDropdown"
-                           autocomplete-service-list
+                           autocomplete-service-list smart-dropdown-menu-position="service-list"
                            uib-dropdown-toggle
                            entity="newContractService.nameValue"
                            hard-reset-pattern="descriptionPattern"/>

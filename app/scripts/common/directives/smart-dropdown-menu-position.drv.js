@@ -5,8 +5,7 @@
   angular.module("quicktech.common.directives").directive('smartDropdownMenuPosition', ['$document', function ($document) {
     return {
       restrict: 'A',
-      scope: {
-      },
+
       link: function (scope, element, attrs) {
 
         //var etco = $document.find(attrs.elementToChangeOverflow);
@@ -19,6 +18,7 @@
           var parentElement = d.closest('.category-expanded');
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
+
             var productListDropdownMenu = d.closest('.dropdown-menu');
             if((winHeight - position) < 570) {
               productListDropdownMenu.css({'top': 'auto'});
@@ -26,6 +26,18 @@
             } else {
               productListDropdownMenu.css({'bottom': ''});
             }
+
+          } else if(attrs.smartDropdownMenuPosition === 'service-list'){
+
+            var listContainer = element.next().next();
+            var serviceDropdownMenu = listContainer.find('.uib-dropdown-menu');
+            if((winHeight - position) < 210) {
+              serviceDropdownMenu.css({'top': 'auto'});
+              serviceDropdownMenu.css({'bottom': '100%'});
+            } else {
+              serviceDropdownMenu.css({'bottom': ''});
+            }
+
           } else if(parentElement ) {
 
             if((winHeight - position) < 250) {
