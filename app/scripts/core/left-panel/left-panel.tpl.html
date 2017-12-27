@@ -602,7 +602,7 @@
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyUserPage">
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
-                     placeholder="Select Company"
+                     placeholder="Select Company" ng-trim="false"
                      autocomplete="off" ng-model="usersSharedState.filter.companyId"
                      typeahead-input-formatter="getCompanyName($model)"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"

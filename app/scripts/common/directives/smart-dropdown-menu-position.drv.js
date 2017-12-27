@@ -8,8 +8,6 @@
 
       link: function (scope, element, attrs) {
 
-        //var etco = $document.find(attrs.elementToChangeOverflow);
-
         setInterval(function() {
           var winHeight = $(window).height();
           var dropdownMenu = element.next();
@@ -19,10 +17,8 @@
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
             var productInputPosition = element[0].getBoundingClientRect().top;
-            var productInput = $(element[0])
-            //var listContainer = element.next().next();
+            var productInput = $(element[0]);
             var productDropdownMenu = productInput.parent('div').parent('div').find('.nano');
-            console.log(winHeight - productInputPosition);
             if((winHeight - productInputPosition) < 360) {
               productDropdownMenu.css({'top': 'auto'});
               productDropdownMenu.css({'bottom': '100%'});
@@ -34,7 +30,6 @@
 
             var listContainer = element.next().next();
             var serviceDropdownMenu = listContainer.find('.uib-dropdown-menu');
-            //console.log(winHeight - position)
             if((winHeight - position) < 210) {
               serviceDropdownMenu.css({'top': 'auto'});
               serviceDropdownMenu.css({'bottom': '100%'});
