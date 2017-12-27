@@ -23,10 +23,12 @@
           if(parentElement && parentElement.hasClass('category-expanded')) {
 
             if((winHeight - position) < 250) {
-              d.css({'top': '-170px'});
+              d.css({'top': 'auto'});
+              d.css({'bottom': '100%'});
               parentElement.css({'overflow': 'visible'});
             } else {
               d.css({'top': '36px'});
+              d.css({'bottom': ''});
               parentElement.css({'overflow': 'hidden'});
             }
           } else {
