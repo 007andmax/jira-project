@@ -248,6 +248,26 @@
           }
         });
 
+        $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
+          if (value && value !== ' ' && $scope.checkTechClientValueMatched(value)) {
+            ticketsSharedState.filter.completed = false;
+            ticketsSharedState.filter.inProgress = false;
+            ticketsSharedState.filter.onHold = false;
+            ticketsSharedState.filter.onHoldTag = false;
+            sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
+            $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
+          } else if(value === undefined) {
+            if($state.includes('tickets')) {
+              if(ticketsSharedState.filter.companyId) {
+                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+              } else {
+                $scope.stateGo(null, 'tickets', {listType: 'all'});
+              }
+              ticketsSharedState.filter.techUserId = '';
+            }
+          }
+        });
+
         $scope.checkCompanieValueMatched = function(inputValue) {
           if(inputValue) {
             return  $scope.clientCompanies().some(function(item) {
@@ -277,26 +297,6 @@
             return false
           }
         };
-
-        $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
-          if (value && value !== ' ' && $scope.checkTechClientValueMatched(value)) {
-            ticketsSharedState.filter.completed = false;
-            ticketsSharedState.filter.inProgress = false;
-            ticketsSharedState.filter.onHold = false;
-            ticketsSharedState.filter.onHoldTag = false;
-            sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
-            $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
-          } else if(value === undefined) {
-            if($state.includes('tickets')) {
-              if(ticketsSharedState.filter.companyId) {
-                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-              } else {
-                $scope.stateGo(null, 'tickets', {listType: 'all'});
-              }
-              ticketsSharedState.filter.techUserId = '';
-            }
-          }
-        });
 
         $scope.checkTechClientValueMatched = function(inputValue) {
           if(inputValue) {
