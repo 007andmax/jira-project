@@ -20,10 +20,12 @@
           if(attrs.smartDropdownMenuPosition === 'product-list') {
 
             var productListDropdownMenu = d.closest('.dropdown-menu');
-            if((winHeight - position) < 570) {
+            if((winHeight - position) < 600) {
+              console.log(winHeight - position)
               productListDropdownMenu.css({'top': 'auto'});
               productListDropdownMenu.css({'bottom': '100%'});
             } else {
+              console.log(winHeight - position)
               productListDropdownMenu.css({'bottom': ''});
             }
 

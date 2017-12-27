@@ -7,39 +7,39 @@
     <div class="left-panel__category-wrap nano-content">
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
-            ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
+           ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
         <div class="left-panel-icn left-panel-icons-remote"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
            ng-click="clearTicketsFilters(); toggleLeftPanel('tickets', true)"
-           >
+      >
         <div class="left-panel-icn left-panel-icons-tickets"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
-            ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies', true)"
+           ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies', true)"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <div class="left-panel-icn left-panel-icons-companies"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
-            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users', true)"
+           ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users', true)"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
         <div class="left-panel-icn left-panel-icons-users"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
+           ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <div class="left-panel-icn left-panel-icons-billing"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
-            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory', true)">
+           ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory', true)">
         <div class="left-panel-icn left-panel-icons-inventory"></div>
       </div>
       <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
            ng-click="toggleLeftPanel('password-manager', true)"
-            ui-sref="password-manager">
+           ui-sref="password-manager">
         <div class="left-panel-icn left-panel-icons-password-manager"></div>
       </div>
       <!--REPORTS-->
@@ -298,7 +298,7 @@
             by company
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByCompanyTicketPage}"></i>
           </div>
-          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyTicketPage" element-to-change-overflow>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyTicketPage">
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Company"
@@ -306,24 +306,24 @@
                      typeahead-input-formatter="getCompanyName($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.companyId" typeahead-editable="false"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus smart-dropdown-menu-position
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
             </div>
 
             <!--<div class="x-mark-wrapper">-->
-              <!--<div uib-dropdown>-->
-                <!--<input tooltip-placement="top"-->
-                       <!--placeholder="Select Company"-->
-                       <!--type="text" class="form-control has-dropdown pointer"-->
-                       <!--autocomplete="off"-->
-                       <!--autocomplete-service-item="clientCompanies()"-->
-                       <!--ng-model="ticketsSharedState.filter.companyId" service-list="clientCompanies()"-->
-                       <!--autocomplete-service-list uib-dropdown-toggle/>-->
-                <!--<i class="icn-sm icn-caret-gray"></i>-->
-                <!--<div class="service-list-container"></div>-->
-                <!--<input type="hidden" name="service" ng-model=ticketsSharedState.filter.companyId" ng-required="true">-->
-              <!--</div>-->
+            <!--<div uib-dropdown>-->
+            <!--<input tooltip-placement="top"-->
+            <!--placeholder="Select Company"-->
+            <!--type="text" class="form-control has-dropdown pointer"-->
+            <!--autocomplete="off"-->
+            <!--autocomplete-service-item="clientCompanies()"-->
+            <!--ng-model="ticketsSharedState.filter.companyId" service-list="clientCompanies()"-->
+            <!--autocomplete-service-list uib-dropdown-toggle/>-->
+            <!--<i class="icn-sm icn-caret-gray"></i>-->
+            <!--<div class="service-list-container"></div>-->
+            <!--<input type="hidden" name="service" ng-model=ticketsSharedState.filter.companyId" ng-required="true">-->
+            <!--</div>-->
             <!--</div>-->
 
             <div class="recent-left-panel">
@@ -339,14 +339,14 @@
             by user
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByUserTicketPage}"></i>
           </div>
-          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByUserTicketPage" element-to-change-overflow>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByUserTicketPage">
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select User"
                      typeahead-input-formatter="getUserByID($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId" typeahead-editable="false"
                      uib-typeahead="client.id as getFullName(client) for client in clientsUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-show-on-focus smart-dropdown-menu-position
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      ng-disabled="!ticketsSharedState.filter.companyId">
               <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
@@ -366,7 +366,7 @@
             by tech team
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByTechUserTicketPage}"></i>
           </div>
-          <div class="filter-left-panel category-expanded angular-animate" element-to-change-overflow
+          <div class="filter-left-panel category-expanded angular-animate"
                ng-show="dropdownByTechUserTicketPage">
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
@@ -374,7 +374,7 @@
                      typeahead-input-formatter="getUserByID($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.techUserId" typeahead-editable="false"
                      uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-show-on-focus smart-dropdown-menu-position
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
             </div>
@@ -489,13 +489,20 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
             <div class="x-mark-wrapper">
-              <input type="text" class="form-control has-dropdown pointer"
-                     placeholder="Select Industry" smart-dropdown-menu-position
-                     autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"
-                     uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-show-on-focus
-                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-              <div typeahead-input-icon="companiesSharedState.filter.industry"></div>
+              <!--<input type="text" class="form-control has-dropdown pointer"-->
+              <!--placeholder="Select Industry"-->
+              <!--autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"-->
+              <!--uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"-->
+              <!--qt-typeahead-show-on-focus-->
+              <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
+              <!--<div typeahead-input-icon="companiesSharedState.filter.industry"></div>-->
+
+              <qt-dropdown-typehead list-for-dropdown="industries"
+                                    selected-item="companiesSharedState.filter.industry"
+                                    qt-class="'form-control has-dropdown pointer'"
+                                    qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+
+              </qt-dropdown-typehead>
             </div>
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
@@ -587,54 +594,62 @@
 
         <div class="left-panel-hide-filter">
 
-            <div class="left-panel-title font-medium left-panel-title-hover"
-                 ng-click="dropdownByCompanyUserPage = !dropdownByCompanyUserPage">
-              By Company
-              <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByCompanyUserPage}"></i>
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="dropdownByCompanyUserPage = !dropdownByCompanyUserPage">
+            By Company
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByCompanyUserPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyUserPage">
+            <div class="x-mark-wrapper">
+              <input type="text" class="form-control has-dropdown pointer"
+                     placeholder="Select Company"
+                     autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
+                     typeahead-input-formatter="getCompanyName($model)"
+                     uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="usersSharedState.filter.companyId"></div>
             </div>
-            <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyUserPage">
-              <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown pointer"
-                       placeholder="Select Company" smart-dropdown-menu-position
-                       autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
-                       typeahead-input-formatter="getCompanyName($model)"
-                       uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
-                       qt-typeahead-show-on-focus
-                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in companiesFilterHistoryUserPage track by $index"
+                 ng-click="applyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
 
-                <div typeahead-input-icon="usersSharedState.filter.companyId"></div>
-              </div>
-              <div class="recent-left-panel">
-                <h4 class="font-medium">recent</h4>
-                <p ng-repeat="item in companiesFilterHistoryUserPage track by $index"
-                   ng-click="applyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
-
-              </div>
             </div>
+          </div>
 
-            <div class="left-panel-title font-medium left-panel-title-hover"
-                 ng-click="dropdownByIndustryUserPage = !dropdownByIndustryUserPage">
-              By Industry
-              <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryUserPage}"></i>
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="dropdownByIndustryUserPage = !dropdownByIndustryUserPage">
+            By Industry
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryUserPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
+            <div class="x-mark-wrapper">
+              <!--<input type="text" class="form-control has-dropdown pointer"-->
+              <!--placeholder="Select Industry"-->
+              <!--autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"-->
+              <!--uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"-->
+              <!--qt-typeahead-show-on-focus-->
+              <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
+
+              <!--<div typeahead-input-icon="usersSharedState.filter.industry"></div>-->
+
+              <qt-dropdown-typehead list-for-dropdown="industries"
+                                    selected-item="usersSharedState.filter.industry"
+                                    qt-class="'form-control has-dropdown pointer'"
+                                    qt-placeholder="'Select Industry'"
+                                    qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+
+              </qt-dropdown-typehead>
             </div>
-            <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
-              <div class="x-mark-wrapper">
-                <input type="text" class="form-control has-dropdown pointer"
-                       placeholder="Select Industry" smart-dropdown-menu-position
-                       autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"
-                       uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                       qt-typeahead-show-on-focus
-                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in industriesFilterHistoryUserPage track by $index"
+                 ng-click="applyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
 
-                <div typeahead-input-icon="usersSharedState.filter.industry"></div>
-              </div>
-              <div class="recent-left-panel">
-                <h4 class="font-medium">recent</h4>
-                <p ng-repeat="item in industriesFilterHistoryUserPage track by $index"
-                   ng-click="applyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
-
-              </div>
             </div>
+          </div>
 
         </div>
       </div>
@@ -717,7 +732,7 @@
                        ng-change="passwordSharedState.filter.deviceId = undefined"
                        typeahead-input-formatter="getCompanyName($model)"
                        uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
-                       qt-typeahead-show-on-focus
+                       qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                        custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
                 <div typeahead-input-icon="passwordSharedState.filter.companyId"></div>
               </div>
@@ -731,7 +746,7 @@
                        autocomplete="off" ng-model="passwordSharedState.filter.deviceId" typeahead-editable="false"
                        typeahead-input-formatter="getDeviceNameById($model)"
                        uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
-                       qt-typeahead-show-on-focus
+                       qt-typeahead-async-show-on-focus
                        custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
                 <div typeahead-input-icon="passwordSharedState.filter.deviceId"></div>
@@ -748,7 +763,7 @@
                        autocomplete="off" ng-model="passwordSharedState.filter.template" typeahead-editable="false"
                        typeahead-input-formatter="userReadable($model)"
                        uib-typeahead="template as userReadable(template) for template in templates | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                       qt-typeahead-show-on-focus
+                       qt-typeahead-async-show-on-focus
                        custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
                 <div typeahead-input-icon="passwordSharedState.filter.template"></div>
@@ -893,8 +908,8 @@
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
