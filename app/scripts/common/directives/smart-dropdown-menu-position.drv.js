@@ -16,11 +16,17 @@
           var dropdownMenu = element.next();
           var position = element[0].getBoundingClientRect().top;
           var d = $(dropdownMenu[0]);
+          var parentElement = d.closest('.category-expanded');
 
-          var parentElement = d.parent().parent();
-
-
-          if(parentElement && parentElement.hasClass('category-expanded')) {
+          if(attrs.smartDropdownMenuPosition === 'product-list') {
+            var productListDropdownMenu = d.closest('.dropdown-menu');
+            if((winHeight - position) < 570) {
+              productListDropdownMenu.css({'top': 'auto'});
+              productListDropdownMenu.css({'bottom': '100%'});
+            } else {
+              productListDropdownMenu.css({'bottom': ''});
+            }
+          } else if(parentElement ) {
 
             if((winHeight - position) < 250) {
               d.css({'top': 'auto'});
