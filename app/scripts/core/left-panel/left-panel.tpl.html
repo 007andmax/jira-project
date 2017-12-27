@@ -298,7 +298,7 @@
             by company
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByCompanyTicketPage}"></i>
           </div>
-          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyTicketPage">
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyTicketPage" element-to-change-overflow>
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Company"
@@ -306,7 +306,7 @@
                      typeahead-input-formatter="getCompanyName($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.companyId" typeahead-editable="false"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus
+                     qt-typeahead-show-on-focus smart-dropdown-menu-position
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
             </div>
@@ -339,14 +339,14 @@
             by user
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByUserTicketPage}"></i>
           </div>
-          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByUserTicketPage">
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByUserTicketPage" element-to-change-overflow>
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select User"
                      typeahead-input-formatter="getUserByID($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId" typeahead-editable="false"
                      uib-typeahead="client.id as getFullName(client) for client in clientsUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-show-on-focus
+                     qt-typeahead-show-on-focus smart-dropdown-menu-position
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                      ng-disabled="!ticketsSharedState.filter.companyId">
               <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
@@ -366,7 +366,7 @@
             by tech team
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByTechUserTicketPage}"></i>
           </div>
-          <div class="filter-left-panel category-expanded angular-animate"
+          <div class="filter-left-panel category-expanded angular-animate" element-to-change-overflow
                ng-show="dropdownByTechUserTicketPage">
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
@@ -374,7 +374,7 @@
                      typeahead-input-formatter="getUserByID($model)"
                      autocomplete="off" ng-model="ticketsSharedState.filter.techUserId" typeahead-editable="false"
                      uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-show-on-focus
+                     qt-typeahead-show-on-focus smart-dropdown-menu-position
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
             </div>
@@ -490,7 +490,7 @@
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
-                     placeholder="Select Industry"
+                     placeholder="Select Industry" smart-dropdown-menu-position
                      autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"
                      uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
                      qt-typeahead-show-on-focus
@@ -595,7 +595,7 @@
             <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyUserPage">
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       placeholder="Select Company"
+                       placeholder="Select Company" smart-dropdown-menu-position
                        autocomplete="off" ng-model="usersSharedState.filter.companyId" typeahead-editable="false"
                        typeahead-input-formatter="getCompanyName($model)"
                        uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
@@ -620,7 +620,7 @@
             <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       placeholder="Select Industry"
+                       placeholder="Select Industry" smart-dropdown-menu-position
                        autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"
                        uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"
                        qt-typeahead-show-on-focus
