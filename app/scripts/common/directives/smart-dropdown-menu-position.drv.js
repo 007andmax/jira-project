@@ -40,7 +40,7 @@
           } else if(parentElement ) {
             if(!d.hasClass('ng-hide')) {
               parentElement.css({'overflow': 'visible'});
-              console.log('open')
+              //console.log('open')
             } else {
               parentElement.css({'overflow': 'hidden'});
             }
@@ -50,7 +50,7 @@
               d.css({'bottom': '100%'});
               parentElement.css({'overflow': 'visible'});
             } else {
-              d.css({'top': '36px'});
+              d.css({'top': '50px'});
               d.css({'bottom': ''});
               //parentElement.css({'overflow': 'hidden'});
             }
