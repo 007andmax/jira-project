@@ -38,12 +38,12 @@
             }
 
           } else if(parentElement ) {
-            if(!d.hasClass('ng-hide')) {
-              parentElement.css({'overflow': 'visible'});
-              //console.log('open')
-            } else {
-              parentElement.css({'overflow': 'hidden'});
-            }
+            // if(!d.hasClass('ng-hide')) {
+            //   parentElement.css({'overflow': 'visible'});
+            //   //console.log('open')
+            // } else {
+            //   parentElement.css({'overflow': 'hidden'});
+            // }
 
             if((winHeight - position) < 250) {
               d.css({'top': 'auto'});
@@ -52,7 +52,7 @@
             } else {
               d.css({'top': '50px'});
               d.css({'bottom': ''});
-              //parentElement.css({'overflow': 'hidden'});
+              parentElement.css({'overflow': 'hidden'});
             }
           } else {
             if((winHeight - position) < 250) {

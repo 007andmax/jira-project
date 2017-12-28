@@ -227,7 +227,7 @@
               }]
             };
 
-            if(ticketsSharedState.filter.companyId) {
+            if(ticketsSharedState.filter.companyId && ticketsSharedState.filter.companyId !== '' && ticketsSharedState.filter.companyId !== ' ') {
               var coompanyIdQuery = {
                 path: 'companyId',
                 operator: 'EQ',

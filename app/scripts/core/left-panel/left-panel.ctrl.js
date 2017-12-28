@@ -190,26 +190,38 @@
 
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
-          if (value && value !== ' ' && $scope.checkIndustriesMatched(value) ) {
-            sendNewFilterToStorage("companiesPageFilterByIndustryHistory", $scope.industryFilterHistoryCompaniesPage, value)
+          if (value  ) {
+            if(value && $scope.checkIndustriesMatched(value)) {
+              sendNewFilterToStorage("companiesPageFilterByIndustryHistory", $scope.industryFilterHistoryCompaniesPage, value)
+            }
+
           }
         });
 
         $scope.$watch('usersSharedState.filter.industry', function (value) {
-          if (value && value !== ' ' && $scope.checkIndustriesMatched(value)) {
-            sendNewFilterToStorage("userPageFilterByIndustryHistory", $scope.industriesFilterHistoryUserPage, value)
+          if (value ) {
+            if(value && $scope.checkIndustriesMatched(value)) {
+              sendNewFilterToStorage("userPageFilterByIndustryHistory", $scope.industriesFilterHistoryUserPage, value)
+            }
+
           }
         });
 
         $scope.$watch('usersSharedState.filter.companyId', function (value) {
-          if (value && value !== ' ' && $scope.checkCompanieValueMatched(value) ) {
-            sendNewFilterToStorage("userPageFilterByCompanyHistory", $scope.companiesFilterHistoryUserPage, getCompanyNameById(value))
+          if (value ) {
+            if(value && $scope.checkCompanieValueMatched(value)) {
+              sendNewFilterToStorage("userPageFilterByCompanyHistory", $scope.companiesFilterHistoryUserPage, getCompanyNameById(value))
+            }
+
           }
         });
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
-          if (value && value !== ' ' && $scope.checkCompanieValueMatched(value)) {
-            sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
+          if (value ) {
+            if(value && $scope.checkCompanieValueMatched(value)) {
+              sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
+            }
+
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -229,12 +241,15 @@
 
 
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
-          if (value && value !== ' ' && $scope.checkClientValueMatched(value)) {
+          if (value ) {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
+            if(value && $scope.checkClientValueMatched(value) ) {
+              sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
+            }
+
             $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
           } else if(value === undefined) {
             if($state.includes('tickets')) {
@@ -249,12 +264,15 @@
         });
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
-          if (value && value !== ' ' && $scope.checkTechClientValueMatched(value)) {
+          if (value ) {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
             ticketsSharedState.filter.onHoldTag = false;
-            sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
+            if(value && $scope.checkTechClientValueMatched(value)) {
+              sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
+            }
+
             $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
           } else if(value === undefined) {
             if($state.includes('tickets')) {
