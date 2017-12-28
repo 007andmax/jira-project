@@ -215,6 +215,8 @@
               sendNewFilterToStorage("userPageFilterByCompanyHistory", $scope.companiesFilterHistoryUserPage, getCompanyNameById(value))
             }
 
+          } else if(value === '') {
+            usersSharedState.filter.companyId = ''
           }
         });
 
