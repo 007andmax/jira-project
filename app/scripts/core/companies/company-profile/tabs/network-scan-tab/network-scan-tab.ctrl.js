@@ -35,7 +35,7 @@
                 var devices = resp[$scope.company.id];
                 $scope.scanDevices.devices = devices.sort(function(a,b){
                   return a.ipAddress < b.ipAddress;
-                })
+                });
                 $scope.scanDevices.status = resp.status;
               });
             } else {

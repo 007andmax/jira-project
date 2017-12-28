@@ -603,7 +603,7 @@
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Company" ng-trim="false"
-                     autocomplete="off" ng-model="usersSharedState.filter.companyId"
+                     autocomplete="off" ng-model="userPageCompanyIdFilter"
                      typeahead-input-formatter="getCompanyName($model)"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                      qt-typeahead-async-show-on-focus smart-dropdown-menu-position

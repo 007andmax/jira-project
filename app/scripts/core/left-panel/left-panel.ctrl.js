@@ -207,8 +207,10 @@
           }
         });
 
-        $scope.$watch('usersSharedState.filter.companyId', function (value) {
-          if (value ) {
+        $scope.$watch('userPageCompanyIdFilter', function (value) {
+
+          if (value && value !== ' ') {
+            usersSharedState.filter.companyId = value;
             if(value && $scope.checkCompanieValueMatched(value)) {
               sendNewFilterToStorage("userPageFilterByCompanyHistory", $scope.companiesFilterHistoryUserPage, getCompanyNameById(value))
             }
