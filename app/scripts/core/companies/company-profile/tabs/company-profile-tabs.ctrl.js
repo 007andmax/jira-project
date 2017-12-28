@@ -51,7 +51,10 @@
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
 
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
-          $scope.agents = resp;
+          var agentsList = resp;
+          $scope.agents = agentsList.sort(function(a,b) {
+            return a.name < b.name
+          })
         });
 
         $scope.$watch('agents.length', function (val) {

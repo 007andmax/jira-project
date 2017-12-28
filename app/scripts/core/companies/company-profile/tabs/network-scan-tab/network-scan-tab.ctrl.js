@@ -32,7 +32,10 @@
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = $scope.scanDevices || {};
-                $scope.scanDevices.devices = resp[$scope.company.id];
+                var devices = resp[$scope.company.id];
+                $scope.scanDevices.devices = devices.sort(function(a,b){
+                  return a.ipAddress < b.ipAddress;
+                })
                 $scope.scanDevices.status = resp.status;
               });
             } else {
