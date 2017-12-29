@@ -208,7 +208,6 @@
         });
 
         $scope.$watch('userPageCompanyIdFilter', function (value) {
-
           if (value && value !== ' ') {
             usersSharedState.filter.companyId = value;
             if(value && $scope.checkCompanieValueMatched(value)) {
@@ -221,7 +220,7 @@
         });
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
-          if (value ) {
+          if (value !== "" && value !== " ") {
             if(value && $scope.checkCompanieValueMatched(value)) {
               sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
             }
@@ -329,6 +328,15 @@
             return false
           }
         };
+
+        $scope.$watch('passwordSharedStateFilterCompanyId', function(value) {
+            if(value !== '' && value !== ' ') {
+              console.log('passcompvalue', value);
+              passwordSharedState.filter.companyId = value;
+            }
+
+
+        });
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function(value) {
           companiesSharedState.filter.industry = value;

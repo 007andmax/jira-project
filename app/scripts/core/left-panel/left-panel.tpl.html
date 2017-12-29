@@ -728,7 +728,7 @@
               <p>By Company</p>
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="passwordSharedState.filter.companyId"
+                       autocomplete="off" ng-model="passwordSharedStateFilterCompanyId"
                        ng-change="passwordSharedState.filter.deviceId = undefined"
                        typeahead-input-formatter="getCompanyName($model)"
                        uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"

@@ -59,6 +59,7 @@
               d.css({'top': 'auto'});
               d.css({'bottom': '100%'});
             } else {
+              d.css({'top': '34px'});
               d.css({'bottom': ''});
             }
           }

@@ -41,8 +41,9 @@
             input.val('');
 
             var model = input.controller('ngModel');
+            model.testVar = true;
             if (model) {
-              model.$setViewValue('');
+              model.$setViewValue(undefined);
             }
 
             input.click();
