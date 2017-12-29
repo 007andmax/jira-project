@@ -190,7 +190,7 @@
 
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
-          if (value  ) {
+          if (value !== "" && value !== " "   ) {
             if(value && $scope.checkIndustriesMatched(value)) {
               sendNewFilterToStorage("companiesPageFilterByIndustryHistory", $scope.industryFilterHistoryCompaniesPage, value)
             }
@@ -199,7 +199,7 @@
         });
 
         $scope.$watch('usersSharedState.filter.industry', function (value) {
-          if (value ) {
+          if (value !== "" && value !== " "  ) {
             if(value && $scope.checkIndustriesMatched(value)) {
               sendNewFilterToStorage("userPageFilterByIndustryHistory", $scope.industriesFilterHistoryUserPage, value)
             }
@@ -208,7 +208,7 @@
         });
 
         $scope.$watch('userPageCompanyIdFilter', function (value) {
-          if (value && value !== ' ') {
+          if (value !== "" && value !== " " ) {
             usersSharedState.filter.companyId = value;
             if(value && $scope.checkCompanieValueMatched(value)) {
               sendNewFilterToStorage("userPageFilterByCompanyHistory", $scope.companiesFilterHistoryUserPage, getCompanyNameById(value))
@@ -244,7 +244,7 @@
 
 
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
-          if (value ) {
+          if (value !== "" && value !== " " ) {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -267,7 +267,7 @@
         });
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
-          if (value ) {
+          if (value !== "" && value !== " " ) {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
