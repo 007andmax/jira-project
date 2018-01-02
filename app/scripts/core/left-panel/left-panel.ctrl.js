@@ -6,9 +6,9 @@
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
-      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService, CustomStorageService, UsersService) {
+                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService, CustomStorageService, UsersService, $timeout) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -505,7 +505,16 @@
           document.title = 'Reports'
         };
 
+        $scope.disabledQuickSupportButton = false;
+        function initQuickSUpportButtonDissabled(){
+          $scope.disabledQuickSupportButton = true;
+          $timeout(function () {
+            $scope.disabledQuickSupportButton = false;
+          }, 4000);
+        }
+
         $scope.addQuickSession = function () {
+          initQuickSUpportButtonDissabled();
           sharedQuickSession.isCreateNew = true;
         };
 

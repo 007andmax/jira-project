@@ -73,7 +73,7 @@
              ng-click="stateGo($event, 'quickSupport');">
           <div class="btn btn-success add-session-button has-tooltip icon-pos"
                style="top: 0px; left: -30px;line-height: 2.4;"
-               ng-click="addQuickSession()"
+               ng-click="addQuickSession()" ng-disabled="disabledQuickSupportButton"
                tooltip-placement="top" uib-tooltip="Create">
             <i class="icn-sm icn-plus"></i>
           </div>
