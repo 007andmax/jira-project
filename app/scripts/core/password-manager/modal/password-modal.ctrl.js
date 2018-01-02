@@ -5,12 +5,18 @@
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordModalCtrl',
     [
       '$scope', '$uibModalInstance', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
-      'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem', 'isEditable',
+      'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem', 'isEditable', 'quicktech.common.services.SharedStateService',
       function ($scope, $uibModalInstance, PasswordManagerService, CompaniesService, UsersService, DevicesService,
-                UserConfirmationsService, resolvedExistedItem, isEditable) {
+                UserConfirmationsService, resolvedExistedItem, isEditable, SharedStateService) {
         $scope.editedPassword = angular.copy(resolvedExistedItem);
         var isEdit = resolvedExistedItem && resolvedExistedItem.id;
         $scope.isEditable = isEditable;
+
+        $scope.passwordSharedState = SharedStateService.getSharedState('passwordsHeader');
+        if($scope.passwordSharedState && $scope.passwordSharedState.filter && $scope.passwordSharedState.filter.companyId) {
+          $scope.editedPasswordCompany = CompaniesService.getOneById($scope.passwordSharedState.filter.companyId)
+
+        }
         $scope.templates = [
           'Office 365 account',
           'Microsoft account',

@@ -50,8 +50,12 @@
           };
 
           scope.toggleDropdown = function (e) {
-            if (input.parent().find('.dropdown-menu,.uib-dropdown-menu').hasClass('ng-hide')) {
-              e.stopPropagation();
+            var dm = input.parent().find('.dropdown-menu,.uib-dropdown-menu')
+            if (dm.hasClass('ng-hide')) {
+              if(e) {
+                e.stopPropagation();
+              }
+
               input.focus();
             }
           };

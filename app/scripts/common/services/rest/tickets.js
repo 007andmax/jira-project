@@ -294,8 +294,10 @@
       function loadMore(listType, callback) {
 
         lastListType = listType;
+        // if(storage && storage.lastParams) {
+        //   storage.lastParams.offset = storage.tickets.length;
+        // }
         storage.lastParams.offset = storage.tickets.length;
-
         loadingInProcess = true;
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {

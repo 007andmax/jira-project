@@ -78,7 +78,8 @@
       $scope.selectedProduct = undefined;
     };
 
-    $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+    $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
+    $scope.techUsers = UsersService.getTechUsers();
 
     $scope.errorNassageForDate = true;
     $scope.errorNassageForCompany = true;
@@ -180,8 +181,18 @@
     }
 
 
+
     function sendReportRequest(reportSettings) {
       $scope.errorNassageForCompany = true;
+
+      if(reportSettings.company) {
+        $scope.users = UsersService.getAllByCompanyIdNonArchived(reportSettings.company.id);
+      } else {
+        $scope.users = UsersService.getAllUsers();
+      }
+      if($scope.techUsers && $scope.techUsers.length >0) {
+        $scope.ysers = $scope.users.concat($scope.techUsers);
+      }
 
       if (!$ctrl.isTechReport) {
         var techType = $scope.techReportType.split(' ').join('_').toUpperCase();

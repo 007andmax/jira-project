@@ -222,20 +222,21 @@
         $scope.isTicketCompanyIdFieldEmpty = true;
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
-          if (value !== "" && value !== " " && value !== undefined) {
+          if (value !== "" && value !== " " ) {
             if(value && $scope.checkCompanieValueMatched(value)) {
               $scope.isTicketCompanyIdFieldEmpty = false;
               sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
-              ticketsSharedState.filter.completed = false;
-              ticketsSharedState.filter.inProgress = false;
-              ticketsSharedState.filter.onHold = false;
-              ticketsSharedState.filter.onHoldTag = false;
-              ticketsSharedState.filter.clientUserId = '';
-              $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
-                return user.company.id === value;
-              });
-              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+
             }
+            ticketsSharedState.filter.completed = false;
+            ticketsSharedState.filter.inProgress = false;
+            ticketsSharedState.filter.onHold = false;
+            ticketsSharedState.filter.onHoldTag = false;
+            ticketsSharedState.filter.clientUserId = '';
+            $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
+              return user.company.id === value;
+            });
+            $scope.stateGo(null, 'tickets', {listType: 'by_company'});
 
           } else if (value === undefined) {
             $scope.isTicketCompanyIdFieldEmpty = true;
