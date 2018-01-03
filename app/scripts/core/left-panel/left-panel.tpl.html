@@ -744,7 +744,7 @@
               <p>By Device</p>
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="passwordSharedState.filter.deviceId"
+                       autocomplete="off" ng-model="passwordSharedStateFilterDeviceId"
                        typeahead-input-formatter="getDeviceNameById($model)"
                        uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
                        qt-typeahead-async-show-on-focus smart-dropdown-menu-position
@@ -761,7 +761,7 @@
 
               <div class="x-mark-wrapper">
                 <input type="text" class="form-control has-dropdown pointer"
-                       autocomplete="off" ng-model="passwordSharedState.filter.template"
+                       autocomplete="off" ng-model="passwordSharedStateFilterTemplate"
                        typeahead-input-formatter="userReadable($model)"
                        uib-typeahead="template as userReadable(template) for template in templates | filter: $viewValue:stateComparator | orderBy:'toString()'"
                        qt-typeahead-async-show-on-focus smart-dropdown-menu-position

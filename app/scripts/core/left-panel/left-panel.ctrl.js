@@ -331,9 +331,21 @@
         };
 
         $scope.$watch('passwordSharedStateFilterCompanyId', function(value) {
-            if(value !== '' && value !== ' ') {
-              passwordSharedState.filter.companyId = value;
-            }
+          if(value !== '' && value !== ' ') {
+            passwordSharedState.filter.companyId = value;
+          }
+        });
+
+        $scope.$watch('passwordSharedStateFilterDeviceId', function(value) {
+          if(value !== '' && value !== ' ') {
+            passwordSharedState.filter.deviceId = value;
+          }
+        });
+
+        $scope.$watch('passwordSharedStateFilterTemplate', function(value) {
+          if(value !== '' && value !== ' ') {
+            passwordSharedState.filter.template = value;
+          }
         });
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function(value) {
