@@ -15,7 +15,6 @@
         $scope.passwordSharedState = SharedStateService.getSharedState('passwordsHeader');
         if($scope.passwordSharedState && $scope.passwordSharedState.filter && $scope.passwordSharedState.filter.companyId) {
           $scope.editedPasswordCompany = CompaniesService.getOneById($scope.passwordSharedState.filter.companyId)
-
         }
         $scope.templates = [
           'Office 365 account',
@@ -284,6 +283,9 @@
 
         $scope.save = function (form) {
           if (form.$valid) {
+            if($scope.editedPasswordCompany && !$scope.editedPassword.companyId) {
+              $scope.setCompanyId();
+            }
             $scope.loadingInProgress = true;
             $scope.editedPassword.links = angular.copy($scope.password.links);
             $scope.editedPassword.onlyForMe = $scope.password.onlyForMe;
