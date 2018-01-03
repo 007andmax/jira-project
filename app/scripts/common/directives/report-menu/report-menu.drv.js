@@ -186,7 +186,7 @@
     function sendReportRequest(reportSettings) {
       $scope.errorNassageForCompany = true;
 
-      if(reportSettings.company) {
+      if(reportSettings && reportSettings.company) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived(reportSettings.company.id);
         console.log($scope.users)
       } else {
