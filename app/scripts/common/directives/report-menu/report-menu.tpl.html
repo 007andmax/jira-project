@@ -286,7 +286,7 @@
           </div>
         </div>
         <ul class="scrollable">
-          <li class="clearfix" ng-if="user.primaryEmail && !user.deletedAt" style="padding: 0"
+          <li class="clearfix" ng-if="user.primaryEmail && user.userEnabled" style="padding: 0"
               ng-repeat="user in ($ctrl.tempUsers.concat(users)) | filter: {id: '!' + $ctrl.currentUser.id} | orderBy: ['custom', 'firstName']">
             <label class="control checkbox pull-left ng-scope" stop-propagation="click">
               <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]"
