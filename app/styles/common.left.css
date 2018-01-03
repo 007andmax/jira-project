@@ -314,6 +314,24 @@ aside#left .nav > li > a .badge {
   margin: 25px 0;
   width: 100%;
 }
+.left-panel-hide-filter #qtDropdown .caret-mark{
+  top: 0;
+  right: 0;
+}
+.left-panel-hide-filter #qtDropdown input{
+  cursor: pointer;
+}
+.left-panel-hide-filter #qtDropdown .dropdown-content{
+  max-height: 160px;
+  margin-top: 7px;
+  margin-bottom: 0;
+  background-color: #313A4D;
+}
+.left-panel-hide-filter #qtDropdown .dropdown-content li:hover,
+.left-panel-hide-filter #qtDropdown .dropdown-content li:active{
+  background-color: #16A4FA;
+  color: #fff;
+}
 .go-back-left-panel .icn-expand-back {
   transform: translateY(50%);
 }
