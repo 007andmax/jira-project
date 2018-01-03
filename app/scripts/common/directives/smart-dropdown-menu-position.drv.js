@@ -50,7 +50,7 @@
               d.css({'bottom': '100%'});
               parentElement.css({'overflow': 'visible'});
             } else {
-              d.css({'top': '34px'});
+              d.css({'top': 'auto'});
               d.css({'bottom': ''});
               parentElement.css({'overflow': 'hidden'});
             }

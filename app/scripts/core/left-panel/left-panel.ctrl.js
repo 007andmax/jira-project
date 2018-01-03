@@ -332,11 +332,8 @@
 
         $scope.$watch('passwordSharedStateFilterCompanyId', function(value) {
             if(value !== '' && value !== ' ') {
-              console.log('passcompvalue', value);
               passwordSharedState.filter.companyId = value;
             }
-
-
         });
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function(value) {
