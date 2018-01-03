@@ -48,10 +48,12 @@
             if((winHeight - position) < 250) {
               d.css({'top': 'auto'});
               d.css({'bottom': '100%'});
+              d.css({'max-height': '160px'});
               parentElement.css({'overflow': 'visible'});
             } else {
               d.css({'top': 'auto'});
               d.css({'bottom': ''});
+              d.css({'max-height': '160px'});
               parentElement.css({'overflow': 'hidden'});
             }
           } else {
