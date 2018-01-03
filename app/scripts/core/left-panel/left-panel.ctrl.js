@@ -165,10 +165,6 @@
         }
 
         function getUserIdByUserFullName(name) {
-          // var user =  $scope.allUsers().find((user) => {
-          //   var fullName = user.firstName+' '+user.lastName;
-          //   return name === fullName;
-          // });
           var user =  $scope.allUsers().find(function(user) {
             var fullName =   user.lastName ? user.firstName+' '+user.lastName : user.firstName;
             return name === fullName;
@@ -177,10 +173,6 @@
         }
 
         function getUserObjByUserFullName(name) {
-          // var user =  $scope.allUsers().find((user) => {
-          //   var fullName = user.firstName+' '+user.lastName;
-          //   return name === fullName;
-          // });
           var user =  $scope.allUsers().find(function(user) {
             var fullName =   user.lastName ? user.firstName+' '+user.lastName : user.firstName;
             return name === fullName;
@@ -236,7 +228,9 @@
             $scope.clientsUsersByCompany = $scope.clientUsers().filter(function(user) {
               return user.company.id === value;
             });
-            $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+            if($state.includes('tickets')) {
+              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+            }
 
           } else if (value === undefined) {
             $scope.isTicketCompanyIdFieldEmpty = true;
@@ -257,8 +251,9 @@
             if(value && $scope.checkClientValueMatched(value) ) {
               sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
-
-            $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
+            if($state.includes('tickets')) {
+              $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
+            }
           } else if(value === undefined) {
             if($state.includes('tickets')) {
               if(ticketsSharedState.filter.companyId) {
@@ -280,8 +275,9 @@
             if(value && $scope.checkTechClientValueMatched(value)) {
               sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
-
-            $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
+            if($state.includes('tickets')) {
+              $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
+            }
           } else if(value === undefined) {
             if($state.includes('tickets')) {
               if(ticketsSharedState.filter.companyId) {
@@ -510,7 +506,7 @@
           $scope.disabledQuickSupportButton = true;
           $timeout(function () {
             $scope.disabledQuickSupportButton = false;
-          }, 4000);
+          }, 1000);
         }
 
         $scope.addQuickSession = function () {

@@ -59,6 +59,7 @@
     $scope.customerTicketTypes = ['Simple report', 'Extended report'];
     $scope.customerTicketType = 'Simple report';
     $scope.reportTypes = ['Summary', 'Detailed'];
+    $scope.previousReportType = 'Summary';
     $scope.reportType = "Summary";
     $scope.techReportTypes = ['Billed time', 'Product sold'];
     $scope.techReportType = "Billed time";
@@ -331,6 +332,19 @@
       //lastSentData = dataToSend;
       //$scope.$emit("requestReportData", dataToSend, location)
     }
+
+    $scope.$watch('reportType', function(value) {
+      if(value) {
+        $scope.previousReportType = value;
+        $scope.reportType = value;
+        console.log('$scope.reportType', $scope.reportType)
+        console.log('$scope.previousReportType', $scope.previousReportType)
+      } else {
+        $scope.reportType = $scope.previousReportType;
+        console.log('$scope.reportType', $scope.reportType)
+        console.log('$scope.previousReportType', $scope.previousReportType)
+      }
+    })
 
     function exportFileToCsv() {
       if (lastSentData) {
