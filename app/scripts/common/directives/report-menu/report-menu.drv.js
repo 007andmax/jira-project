@@ -186,13 +186,12 @@
       $scope.errorNassageForCompany = true;
 
       if(reportSettings.company) {
-        $scope.users = UsersService.getAllByCompanyId(reportSettings.company.id);
+        $scope.users = UsersService.getAllByCompanyIdNonArchived(reportSettings.company.id);
         console.log($scope.users)
       } else {
         $scope.users = UsersService.getAllUsers();
       }
       if($scope.techUsers && $scope.techUsers.length >0) {
-        console.log($scope.users)
         $scope.users = $scope.users.concat($scope.techUsers);
         console.log($scope.users)
       }
