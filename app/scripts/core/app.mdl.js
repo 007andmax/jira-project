@@ -285,6 +285,7 @@
           controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
+
       function waitForServices(conf) {
         if (!conf.resolve) {
           conf.resolve = {};
