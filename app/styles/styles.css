@@ -1091,8 +1091,20 @@ hr {
 }
 
 .company-profile-content {
-  float: left;
-  width: 100%;
+  background-color: #F3F7F9;
+  padding: 25px;
+}
+
+.company-profile-content h3 {
+  font-size: 20px;
+  color: #364656;
+  margin: 0 0 7px 0;
+}
+
+.company-profile-content > p {
+  font-size: 13px;
+  color: #9ca5b6;
+  margin-bottom: 22px;
 }
 
 .company-profile-content.companies-list {
