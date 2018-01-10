@@ -103,7 +103,6 @@
           }
         });
 
-
         function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
           var ifItemAlreadyInTheList = false;
