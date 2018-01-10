@@ -43,6 +43,13 @@
           }
         });
 
+        CompaniesService.getCompanyInfo($scope.company.id, $scope, function(resp) {
+          if(resp) {
+            $scope.companiesInfo = resp;
+          }
+        });
+
+
         if (!$scope.company) {
           $state.go('companies');
           return;
@@ -242,6 +249,7 @@
             $scope.dateFormat = '%d %b';
           }
         };
+
 
       }]);
 

@@ -28,17 +28,12 @@
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
-        //$scope.archivedShown = false;
-
 
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function(resp) {
           $scope.companiesColors = resp;
-          //console.log("color resp:", $scope.companiesColors);
         });
-
-
 
         $scope.companiesCtrl = {};
 
