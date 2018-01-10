@@ -35,6 +35,7 @@
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
+        $scope.showEmailListAgents;
 
         var savedState = $scope.getLastSavedState('ticketFromDraft'),
           savedItem;
@@ -187,6 +188,8 @@
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
+
+
         $scope.$watch('ticketCompany', function (val) {
           $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
@@ -241,6 +244,9 @@
 
             $scope.ticketAgent = '';
           }
+          $timeout(function() {
+            $scope.showEmailListAgents = ($scope.ticketCompany && $scope.ticketCompany !== ' ') ? true : false;
+          }, 1000)
         });
 
         $scope.$watch('ticketCreatedUser', function (val, prevValue) {
