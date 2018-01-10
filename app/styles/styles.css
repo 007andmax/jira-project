@@ -1031,9 +1031,11 @@ hr {
   box-shadow: none;
   border: none;
 }
-.hardware .product-list-ticket{
+
+.hardware .product-list-ticket {
   margin-top: 175px;
 }
+
 .receivable-content .top-product-list-ticket {
   border-bottom: 1px solid #eee;
   border-top: none;
@@ -1052,6 +1054,10 @@ hr {
 
 .receivable-content .product-list-ticket li.content-product-list-ticket {
   border-bottom: 1px solid #eee;
+}
+
+.content-product-list-ticket {
+  font-size: 13px;
 }
 
 .receivable-content .top-product-list-ticket-deposit [class*="col-md-"] {
@@ -3604,8 +3610,8 @@ output {
 
 .form-control-number.has-dropdown ~ i, .account-type ~ i, .subscribe-dropdown ~ i {
   position: absolute;
-  top: 13px;
-  right: 13px;
+  top: 16px;
+  right: 16px;
   pointer-events: none;
 }
 
@@ -4582,7 +4588,7 @@ select[multiple].input-lg {
 
 .has-dropdown ~ i {
   position: absolute;
-  top: 13px;
+  top: 16px;
   right: 11px;
   pointer-events: none;
 }
@@ -5192,9 +5198,11 @@ tbody.collapse.in {
   outline: 0;
   background-color: #e7ecf2;
 }
+
 .left-panel-full .dropdown-menu > li > a {
   color: #9ca5b6;
 }
+
 .dropdown-menu > .disabled > a,
 .subdropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
@@ -9984,6 +9992,10 @@ button.close {
   padding: 15px;
 }
 
+.modal-footer input {
+  cursor: pointer;
+}
+
 .modal-footer {
   padding: 15px;
   text-align: right;
@@ -11779,6 +11791,15 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 
 .qt-product-edit .col-1 .dropdown-width .select-taxes-drv .checkbox-dropdown .checkbox {
   width: 100%;
+}
+
+.qt-product-edit qt-dropdown-typehead {
+  width: 290px;
+  display: inline-block;
+}
+
+.qt-product-edit qt-dropdown-typehead input {
+  cursor: pointer;
 }
 
 .qt-product-edit .dropdown-width .icn-label-save {

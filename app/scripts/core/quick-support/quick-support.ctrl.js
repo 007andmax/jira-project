@@ -4,15 +4,26 @@
 
   angular.module('quicktech.core.quickSupport').controller('quicktech.core.quickSupport.quickSupportCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.RemoteAccessService',
-      'DevicesService', 'ConstantsService', 'quicktech.common.services.UserNotificationService',
+      'DevicesService', 'ConstantsService', 'quicktech.common.services.UserNotificationService', '$timeout',
       function ($scope, SharedStateService, RemoteAccessService, DevicesService,
-                ConstantsService, UserNotificationService) {
+                ConstantsService, UserNotificationService, $timeout) {
 
         UserNotificationService.show('Loading...');
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
-        $scope.createOneTimeRemoteSession = DevicesService.createOneTimeRemoteSession;
+        $scope.createOneTimeRemoteSession = function() {
+          initQuickSUpportButtonDissabled();
+          DevicesService.createOneTimeRemoteSession();
+        };
+
+        $scope.createOneTimeRemoteSessionButtonDisable = false;
+        function initQuickSUpportButtonDissabled(){
+          $scope.createOneTimeRemoteSessionButtonDisable = true;
+          $timeout(function () {
+            $scope.createOneTimeRemoteSessionButtonDisable = false;
+          }, 4000);
+        }
 
         $scope.host = ConstantsService.getConstant('server.url', function (resp) {
           $scope.host = resp;

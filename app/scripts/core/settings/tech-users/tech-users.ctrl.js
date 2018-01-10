@@ -9,10 +9,35 @@
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var archivedUsers = UsersService.getArchivedUsers();
         var users = UsersService.getTechUsers();
+        $scope.usersEmailNotificationList = {};
 
         CompaniesService.getTechRoles(function (resp) {
           $scope.techRoles = resp;
         });
+
+        var usersIds = users.map(function(user){
+          return user.id;
+        });
+
+        UsersService.getTechUsersEmailNotification(usersIds, function(resp){
+          console.log('resp for notifications', resp);
+          $scope.usersEmailNotificationList = resp;
+        });
+
+       $scope.saveUserNewEmailNotificationSetting = function(userId) {
+         if(userId && $scope.currentUser.role === 'SUPER_TECH_ADMIN') {
+           var notificationSetting = {
+             newDevice:  $scope.usersEmailNotificationList[userId].newDevice,
+             scheduleChanged:  $scope.usersEmailNotificationList[userId].scheduleChanged,
+             clientCompanyUpdated:  $scope.usersEmailNotificationList[userId].clientCompanyUpdated,
+             ticketCreated:  $scope.usersEmailNotificationList[userId].ticketCreated,
+             myTicketUpdated:  $scope.usersEmailNotificationList[userId].myTicketUpdated
+           };
+           UsersService.saveUsersEmailNotification(userId, notificationSetting, function(resp) {
+             //console.log(resp);
+           })
+         }
+       };
 
         $scope.$watch(function () {
           return archivedUsers.length;

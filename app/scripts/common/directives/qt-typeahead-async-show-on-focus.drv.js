@@ -14,14 +14,22 @@
           element.bind('click', triggerFunc);
 
           function triggerFunc() {
+            if(modelCtrl.testVar) {
+              modelCtrl.testVar = false;
+              return;
+            }
+
             var prev = modelCtrl.$modelValue || '';
             if (prev) {
               modelCtrl.$setViewValue('');
-              $timeout(function() {
-                modelCtrl.$setViewValue(prev);
-              });
+              // $timeout(function() {
+              //   modelCtrl.$setViewValue(prev);
+              // });
             } else {
               modelCtrl.$setViewValue(' ');
+              setTimeout(function() {
+                modelCtrl.$setViewValue(prev);
+              });
             }
           }
 

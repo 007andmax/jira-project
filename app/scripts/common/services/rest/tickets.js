@@ -212,143 +212,93 @@
       }
 
 
+
+
       function fetchTickets(listType, userId, companyId, callback) {
 
-        if(listType === 'BY_COMPANY' || listType === 'BY_COMPANY/BY_USER') {
-          storage.tickets = [];
-          var groupedQuery = {
-            excludeTrashSpam: true,
-            groupFieldFilters: [{
-              fieldFilterDtos: [{
+          var query = queries[listType.toUpperCase()];
+
+          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId) {
+            var groupedQuery = {
+              excludeTrashSpam: true,
+              groupFieldFilters: [{
+                predicateRule: 'AND',
+                fieldFilterDtos: []
+              }]
+            };
+
+            if(ticketsSharedState.filter.companyId && ticketsSharedState.filter.companyId !== '' && ticketsSharedState.filter.companyId !== ' ') {
+              var coompanyIdQuery = {
                 path: 'companyId',
                 operator: 'EQ',
                 values: [ticketsSharedState.filter.companyId]
-              }]
-            }]
-          };
+              };
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(coompanyIdQuery);
+            }
 
+            if(ticketsSharedState.filter.clientUserId) {
+              var userIdQuery = {
+                path: 'createdUserId',
+                operator: 'EQ',
+                values: [ticketsSharedState.filter.clientUserId]
+              };
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
+            }
 
-          if(ticketsSharedState.filter.clientUserId) {
-            var userIdDtoQuery = {
-              path: 'createdUserId',
-              operator: 'EQ',
-              values: [ticketsSharedState.filter.clientUserId]
-            };
-            groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdDtoQuery);
-          }
-          // if(ticketsSharedState.filter.techUserId) {
-          //   var userTechIdDtoQuery = {
-          //     path: 'createdUserId',
-          //     operator: 'EQ',
-          //     values: [ticketsSharedState.filter.techUserId]
-          //   };
-          //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userTechIdDtoQuery);
-          // }
-          storage.lastParams = angular.copy(groupedQuery);
-          loadMore(listType, callback);
-          getCompanyTicketCount(storage.lastParams);
-        } else if(listType === 'BY_USER_TECH'){
-          storage.tickets = [];
-          var groupedQuery = {
-            excludeTrashSpam: true,
-            groupFieldFilters: [{
-              fieldFilterDtos: [{
+            if(ticketsSharedState.filter.techUserId) {
+              var techUserIdQuery = {
                 path: 'assignedUser.id',
                 operator: 'EQ',
                 values: [ticketsSharedState.filter.techUserId]
-              }]
-            }]
-          };
-          storage.lastParams = angular.copy(groupedQuery);
-          loadMore(listType, callback);
-          getCompanyTicketCount(storage.lastParams);
-        }else {
-          var query = queries[listType.toUpperCase()];
-
-          if (query) {
-            if(ticketsSharedState.filter.companyId && !ticketsSharedState.filter.techUserId) {
-              var groupedQuery = {
-                excludeTrashSpam: true,
-                groupFieldFilters: [{
-                  predicateRule: 'AND',
-                  fieldFilterDtos: [{
-                    path: 'companyId',
-                    operator: 'EQ',
-                    values: [ticketsSharedState.filter.companyId]
-                  }
-                  ]
-                }]
               };
-              if(ticketsSharedState.filter.clientUserId && !ticketsSharedState.filter.techUserId) {
-                var userIdDtoQuery = {
-                  path: 'createdUserId',
-                  operator: 'EQ',
-                  values: [ticketsSharedState.filter.clientUserId]
-                };
-                groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdDtoQuery)
-              }
-              if(ticketsSharedState.filter.techUserId) {
-                var groupedQuery = {
-                  excludeTrashSpam: true,
-                  groupFieldFilters: [{
-                    predicateRule: 'AND',
-                    fieldFilterDtos: [{
-                      path: 'assignedUser.id',
-                      operator: 'EQ',
-                      values: [ticketsSharedState.filter.techUserId]
-                    }
-                    ]
-                  }]
-                };
-
-              }
-              if(query && query.groupFieldFilters) {
-                var t = query.groupFieldFilters[0].fieldFilterDtos[0];
-                groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(t)
-              }
-              storage.lastParams = angular.copy(groupedQuery);
-              getCompanyTicketCount(storage.lastParams);
-            } else {
-              storage.lastParams = angular.copy(query);
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(techUserIdQuery);
             }
 
-            storage.tickets = [];
-
-            if (userId) {
-              storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
-              storage.lastParams.groupFieldFilters.push({
-                fieldFilterDtos: [{
-                  path: 'createdUser.id',
-                  operator: 'EQ',
-                  values: [userId]
-                }]
-              });
+            if(query && query.groupFieldFilters) {
+              var ticketFilterQuery = query.groupFieldFilters[0].fieldFilterDtos[0];
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(ticketFilterQuery)
             }
 
-            if (companyId) {
-              storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
-              storage.lastParams.groupFieldFilters.push({
-                fieldFilterDtos: [{
-                  path: 'company.id',
-                  operator: 'EQ',
-                  values: [companyId]
-                }]
-              });
-            }
-
-            loadMore(listType, callback);
+            storage.lastParams = angular.copy(groupedQuery);
+            getCompanyTicketCount(storage.lastParams);
+          } else {
+            storage.lastParams = angular.copy(query);
           }
-        }
 
+          storage.tickets = [];
+
+          if (userId) {
+            storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
+            storage.lastParams.groupFieldFilters.push({
+              fieldFilterDtos: [{
+                path: 'createdUser.id',
+                operator: 'EQ',
+                values: [userId]
+              }]
+            });
+          }
+
+          if (companyId) {
+            storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
+            storage.lastParams.groupFieldFilters.push({
+              fieldFilterDtos: [{
+                path: 'company.id',
+                operator: 'EQ',
+                values: [companyId]
+              }]
+            });
+          }
+          loadMore(listType, callback);
       }
 
       function loadMore(listType, callback) {
 
         lastListType = listType;
+        // if(storage && storage.lastParams) {
+        //   storage.lastParams.offset = storage.tickets.length;
+        // }
         storage.lastParams.offset = storage.tickets.length;
-
         loadingInProcess = true;
-
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
 
@@ -365,7 +315,6 @@
               } else {
                 storage.tickets.push(Utils.customizeObj(ticket));
               }
-
             }
 
             if (callback) {
@@ -525,9 +474,9 @@
 
       function getCompanyTicketCount(query) {
 
-        $http.post('/v2/tickets/counts', {BY_COMPANY: query}).then(function(resp) {
+        $http.post('/v2/tickets/counts', {COUNT: query}).then(function(resp) {
           if(resp) {
-            globalSearch.count = resp.data.BY_COMPANY;
+            globalSearch.count = resp.data.COUNT;
           }
         })
 

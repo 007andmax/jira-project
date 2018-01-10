@@ -285,6 +285,7 @@
           controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
+
       function waitForServices(conf) {
         if (!conf.resolve) {
           conf.resolve = {};
@@ -645,6 +646,12 @@
             }
             $rootScope.isUnlockShowed = false;
           });
+        };
+
+        $rootScope.safeDigest = function() {
+          if ($rootScope.$$phase !== "$apply" && $rootScope.$$phase !== "$digest") {
+            $rootScope.$digest();
+          }
         };
 
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;

@@ -1,0 +1,11 @@
+<a href="javascript:void(0)" class="clearfix">
+  <div href="javascript:void(0)" class="pull-left avatar" style="margin-right: 5px">
+    <img class="img-circle avatar-26"
+         ng-src="{{ '/users/' + (item.id || 'default') + '/image' + (item.avatar ? '.jpg?t=' + item.avatar.updatedAt : '') }}"
+         alt="...">
+  </div>
+
+  <div class="user-name"
+       ng-bind-html='(item.firstName + " " + item.lastName) + (item.primaryEmail && item.primaryEmail.length > 0 ? " \"" + item.primaryEmail + "\"" : "")'></div>
+
+</a>

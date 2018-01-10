@@ -5,9 +5,9 @@
   angular.module("quicktech").controller("createNewEntityCtrl",
     ['$scope', 'resolvedExistedItem', 'resolveExistingCategory', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedUserId',
       'resolvedOpenedTab', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
-      'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.UserConfirmationsService', '$rootScope',
       function ($scope, resolvedExistedItem, resolveExistingCategory, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedUserId,
-                resolvedOpenedTab, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService) {
+                resolvedOpenedTab, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService, $rootScope) {
 
         $scope.openedTab = resolvedOpenedTab || 'ticket';
 

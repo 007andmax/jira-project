@@ -66,11 +66,21 @@
             <label class="control-label" ng-message="maxlength">Industry is too large.</label>
           </div>
 
-          <input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"
-                 ng-maxlength="40"
-                 custom-style="{'width':'100%'}"
-                 uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
-                 autocomplete="off" qt-typeahead-show-on-focus>
+          <!--<input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"-->
+                 <!--ng-maxlength="40"-->
+                 <!--custom-style="{'width':'100%'}"-->
+                 <!--uib-typeahead="industry for industry in industries | orderBy: 'toString()'"-->
+                 <!--autocomplete="off" qt-typeahead-show-on-focus>-->
+
+            <qt-dropdown-typehead list-for-dropdown="industries"
+                                  selected-item="editCompany.clientIndustry.name"
+                                  qt-ng-maxlength="40"
+                                  qt-name="'industry'"
+                                  qt-class="'form-control'" qt-custom-style="'{\'width\':\'100%\'}'">
+
+            </qt-dropdown-typehead>
+
+
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'clientType')}">
@@ -247,7 +257,7 @@
 
             <input class="form-control has-dropdown" type="text" value="" uib-dropdown-toggle
                    aria-expanded="false" readonly="readonly">
-            <i class="icn-sm icn-caret-gray"></i>
+            <i class="icn-sm report-caret-icon"></i>
 
             <div class="subscribe-tokens">
               <div class="invoice-update-token" ng-show="contact.subscription.invoice">Inv. Updates</div>
@@ -537,7 +547,7 @@
       <div class="col-xs-6" ng-init="isShowPass = false">
         <h3>Agent Credentials</h3>
 
-        <div class="form-group">
+        <div class="form-group">f
           <label>Domain/Username</label>
           <input class="form-control" type="text" ng-model="editCompany.login">
         </div>

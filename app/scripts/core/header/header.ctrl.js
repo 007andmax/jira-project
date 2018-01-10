@@ -20,6 +20,16 @@
           sharedQuickSession.isCreateNew = true;
         };
 
+        $scope.getAssignUserId = function(ticket) {
+          if(ticket) {
+            if(ticket.assignedUser && ticket.assignedUser.id && ticket.assignedUser.id.length) {
+              return ticket.assignedUser.id;
+            } else {
+              return ticket.assignedUserId;
+            }
+          }
+        };
+
         $scope.getClientCompanies = function () {
           var clientCompanies = CompaniesService.getClientCompanies();
 

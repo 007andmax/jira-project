@@ -1549,7 +1549,12 @@ Devices tab
   margin-right: 64px;
   padding-top: 25px;
 }
-
+#product-list-cont .dropdown-menu{
+  top: 36px;
+}
+#product-list-cont .custom-product-list.nano{
+  width: 100%;
+}
 .qt-invoices .qt-table .ha-edit {
   position: absolute;
   top: 16px;

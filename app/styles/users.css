@@ -668,7 +668,7 @@
 }
 
 .ticket-drop.has-dropdown ~ i {
-  top: 10px;
+  top: 12px;
 }
 
 .create-ticket-form .priority-dot {

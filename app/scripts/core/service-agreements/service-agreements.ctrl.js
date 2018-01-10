@@ -389,9 +389,9 @@
 
       };
 
-      function addZeroIfNeed(n) {
-        return n < 10 ? '0' + n : '' + n;
-      }
+      // function addZeroIfNeed(n) {
+      //   return n < 10 ? '0' + n : '' + n;
+      // }
 
 
       $scope.changeModalToShow = function () {
@@ -522,13 +522,13 @@
         var sortedNames = names.slice().sort();
         if (name) {
           for (var t = 0; t < sortedNames.length - 1; t++) {
-            if (sortedNames[t + 1] == sortedNames[t] && sortedNames[t] == name) {
+            if (sortedNames[t + 1] === sortedNames[t] && sortedNames[t] === name) {
               duplicate = true;
             }
           }
         } else {
           for (var t = 0; t < sortedNames.length - 1; t++) {
-            if (sortedNames[t + 1] == sortedNames[t]) {
+            if (sortedNames[t + 1] === sortedNames[t]) {
               duplicate = true;
             }
           }

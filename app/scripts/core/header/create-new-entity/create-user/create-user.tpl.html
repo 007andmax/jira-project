@@ -18,7 +18,7 @@
             </div>
 
             <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
-                   name="firstName" ng-model="editUser.firstName" ng-required="true" make-dirty-on-blur tabindex="1">
+                   name="firstName" ng-model="editUser.firstName" ng-required="true" make-dirty-on-blur tabindex="1" hard-reset-pattern="namePattern">
 
           </div>
           <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
@@ -51,7 +51,8 @@
             </div>
 
             <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-                   name="lastName" ng-model="editUser.lastName" required make-dirty-on-blur tabindex="2">
+                   name="lastName" ng-model="editUser.lastName"
+                   required make-dirty-on-blur tabindex="2" hard-reset-pattern="namePattern">
 
           </div>
           <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'secondaryEmail')}">
@@ -91,9 +92,10 @@
             <div uib-dropdown ng-show="isCreation" add-create-new-button="company">
 
               <input type="text" ng-model="userCompany" autocomplete="off" tabindex="5"
+                     smart-dropdown-menu-position
                      class="form-control form-control-dropdown dropdown-toggle"
                      uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus name="userCompany" ng-required="isCreation"
+                     qt-typeahead-async-show-on-focus name="userCompany" ng-required="isCreation"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
               <div class="input-top-4" typeahead-input-icon="userCompany"></div>
@@ -109,7 +111,7 @@
                       uib-dropdown-toggle aria-expanded="true" tabindex="7">
                 {{ roles[editUser.role] }}
               </button>
-              <i class="icn-sm icn-caret-gray"></i>
+              <i class="icn-sm report-caret-icon"></i>
               <ul class="dropdown-menu dropdown-account-type">
                 <li ng-repeat="(role, label) in roles" ng-click="editUser.role = role">
                   <a href="javascript:void(0)"> {{ label }} </a>
@@ -144,7 +146,7 @@
             <div uib-dropdown keyboard-nav="true">
               <button class="form-control has-dropdown subscribe-dropdown"
                       tabindex="8" uib-dropdown-toggle aria-expanded="false"></button>
-              <i class="icn-sm icn-caret-gray"></i>
+              <i class="icn-sm report-caret-icon"></i>
 
               <div class="subscribe-tokens">
 

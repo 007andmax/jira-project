@@ -12,8 +12,10 @@
       link: function ($scope, $element) {
         $element.css({
           width: '100%',
-          height: '100%',
-          display: 'inline-block'
+          height: '70px',
+          display: 'block',
+          top: 'calc(50% - 45px)',
+          position: 'absolute'
         });
 
         $scope.$on('loadingFinished', function () {

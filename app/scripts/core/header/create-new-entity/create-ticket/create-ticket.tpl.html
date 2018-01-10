@@ -12,7 +12,7 @@
         <div uib-dropdown class="create-dropdown">
           <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
                  readonly>
-          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm report-caret-icon"></i>
 
           <ul class="dropdown-menu dropdown-priority" role="menu">
 
@@ -220,7 +220,7 @@
                        custom-disabled="{{ !ticketCompany || serviceList.length < 1 }}"
                        placeholder="Service" autocomplete-service-item="serviceExpense.item"
                        ng-model="serviceExpense.item.name" service-list="serviceList"
-                       autocomplete-service-list="autocompleteServiceList"/>
+                       autocomplete-service-list="autocompleteServiceList" smart-dropdown-menu-position="service-list"/>
                 <i class="icn-sm icn-caret-gray"></i>
 
                 <div class="service-list-container"></div>
@@ -291,17 +291,35 @@
 
         <div>
           <div class="form-group" add-create-new-button="company"
-               ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCompany')}">
+               >
 
             <label>Company</label>
 
-            <input type="text" class="form-control has-dropdown" next-after-text-editor
-                   ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
+            <input type="text" class="form-control has-dropdown"
+                   smart-dropdown-menu-position
+                   next-after-text-editor
+                   ng-model="ticketCompany"
+                   name="ticketCompany"
+                   autocomplete="off"
                    uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                   typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
+                   typeahead-min-length="0"
+                   qt-typeahead-async-show-on-focus
+                   ng-trim="false"
                    custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}">
 
             <div typeahead-input-icon="userCompany" ></div>
+
+            <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies" qt-add-create-new-button="company"-->
+                                  <!--selected-item="ticketCompany"-->
+                                  <!--display-property="'name'"-->
+                                  <!--filter-property="'name'"-->
+                                  <!--qt-ng-minlength="40"-->
+                                  <!--qt-ng-trim="'false'"-->
+                                  <!--qt-name="'ticketCompany'"-->
+                                  <!--qt-class="'form-control'"-->
+                                  <!--qt-ng-style="'{\'max-height\': \'190px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
+
+            <!--</qt-dropdown-typehead>-->
           </div>
         </div>
 
@@ -312,10 +330,11 @@
             <label>Created for</label>
 
             <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                   smart-dropdown-menu-position
                    ng-model="ticketCreatedUser"
                    typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                    uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
-                   qt-typeahead-show-on-focus ng-trim="false"
+                   qt-typeahead-async-show-on-focus ng-trim="false"
                    custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
 
             <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
@@ -331,6 +350,19 @@
               </span>
             </div>
 
+            <!--<qt-dropdown-typehead list-for-dropdown="clients" qt-add-create-new-button="user"-->
+                                  <!--selected-item="ticketCreatedUser"-->
+                                  <!--display-property="'firstName'"-->
+                                  <!--filter-property="'firstName'"-->
+                                  <!--qt-ng-minlength="40"-->
+                                  <!--qt-ng-trim="'false'"-->
+                                  <!--qt-name="'ticketCreatedUser'"-->
+                                  <!--qt-class="'form-control'"-->
+                                  <!--qt-ng-style="'{\'overflow-y\': \'auto\', \'width\': \'100%\', \'max-height\': \'190px\'}'"-->
+                                  <!--qt-template-url="'/html/partials/qt-user-autocomplete.tpl.html'">-->
+
+            <!--</qt-dropdown-typehead>-->
+
           </div>
         </div>
 
@@ -343,13 +375,14 @@
 
             <label>Assign to</label>
 
-            <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+            <input type="text" class="form-control has-dropdown-with-label"
+                   smart-dropdown-menu-position autocomplete="off"
                    ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
                    typeahead-on-select="userAssigned(ticketAssignTo)"
                    typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                    uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
-                   qt-typeahead-show-on-focus ng-required="false"
-                   custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '360px'}">
+                   qt-typeahead-async-show-on-focus ng-required="false"
+                   custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">
 
             <div typeahead-input-icon-sm="ticketAssignTo"></div>
 
@@ -372,10 +405,11 @@
           <label>Agent</label>
 
           <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                 smart-dropdown-menu-position
                  ng-model="ticketAgent" name="ticketAgent"
                  ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
                  uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
-                 qt-typeahead-show-on-focus
+                 qt-typeahead-async-show-on-focus
                  custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
 
           <div typeahead-input-icon-sm="ticketAgent"></div>
@@ -393,7 +427,7 @@
         </div>
 
       </li>
-      <li ng-if="ticketCompany">
+      <li ng-if="showEmailListAgents">
         <div class="pull-left" style="width: 100%;">
           <div style="font-weight: bold;">Notify</div>
           <div>The people you select will get an email when you create this ticket.</div>

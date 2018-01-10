@@ -16,9 +16,11 @@
   padding: 20px 0;
   background: #F4F4F4;
 }
-.hardware-wrap::-webkit-scrollbar{
+
+.hardware-wrap::-webkit-scrollbar {
   width: 0;
 }
+
 .hardware-wrap {
   position: fixed;
   top: 0;
@@ -353,6 +355,10 @@
   position: relative;
 }
 
+.product-list-ticket-pdf {
+  width: 1180px;
+}
+
 .product-list-ticket-tech .header-product-list-ticket {
   position: static;
 }
@@ -365,6 +371,10 @@
   width: 940px;
   margin: 0 auto;
   padding: 40px 0;
+}
+
+.product-list-report-btn-width {
+  width: 1180px;
 }
 
 .header-product-list-ticket {
@@ -576,6 +586,14 @@
   width: 30%;
 }
 
+.product-list-ticket-grid .col-md-3 {
+  width: 21%;
+}
+
+.product-list-ticket li.product-list-ticket-grid {
+  cursor: default;
+}
+
 .product-list-ticket-deposit .col-md-3 {
   width: 46%;
 }
@@ -588,8 +606,16 @@
   width: 15.3%;
 }
 
+.product-list-ticket-grid .col-md-2 {
+  width: 10.1%;
+}
+
 .product-list-ticket .col-md-1 {
   width: 10%;
+}
+
+.product-list-ticket-grid .col-md-4 {
+  width: 31%;
 }
 
 .remote-desktop-connections .col-md-1 {
@@ -636,8 +662,27 @@
   text-align: right;
 }
 
-.product-report-total-sales p span {
-  font-size: 22px;
+.product-report-total-sales .col-md-1 span,
+.product-report-total-sales .col-md-2 span {
+  font-size: 16px;
+}
+
+.product-report-total-sales .col-md-1,
+.product-report-total-sales .col-md-2 {
+  float: right;
+}
+
+.product-report-total-sales .col-md-1,
+.product-report-total-sales .col-md-2 {
+  line-height: 18px;
+}
+
+.product-report-total-sales .col-md-1 {
+  width: 10%;
+}
+
+.product-report-total-sales .col-md-2 {
+  width: 10.1%;
 }
 
 .product-report-btn {
@@ -892,7 +937,7 @@
 }
 
 .top-product-list-ticket {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .top-product-list-ticket .col-md-2,
@@ -1422,5 +1467,9 @@
 
   .service-agreements-lists {
     font-size: 11px;
+  }
+
+  .product-list-report {
+    padding: 30px 10px;
   }
 }

@@ -35,6 +35,7 @@
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
+        $scope.showEmailListAgents;
 
         var savedState = $scope.getLastSavedState('ticketFromDraft'),
           savedItem;
@@ -97,7 +98,7 @@
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+        $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
 
         DevicesService.getDevicesCount($scope, function (agents) {
           agentsByCompany = agents;
@@ -187,6 +188,8 @@
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
+
+
         $scope.$watch('ticketCompany', function (val) {
           $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
@@ -234,12 +237,16 @@
               $scope.ticket.serviceExpenses[0].item = undefined;
               $scope.ticket.serviceExpenses.splice(1);
             }
-
-            $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
+            if($scope.ticketForm.ticketCompany) {
+              $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
+            }
             $scope.clients = UsersService.getClientUsers();
 
             $scope.ticketAgent = '';
           }
+          $timeout(function() {
+            $scope.showEmailListAgents = ($scope.ticketCompany && $scope.ticketCompany !== ' ') ? true : false;
+          }, 1000)
         });
 
         $scope.$watch('ticketCreatedUser', function (val, prevValue) {
@@ -340,7 +347,7 @@
               function (progress) {
                 $scope.fileLoadOrError = true;
                 file.progress = 100 * (progress.loaded / progress.total);
-                $scope.$apply();
+                $rootScope.safeDigest();
               }, function (finish) {
 
                 $scope.fileLoadOrError = false;
@@ -362,7 +369,7 @@
 
                 file.xhr = null;
                 file.id = finish.id;
-                $scope.$apply();
+                $rootScope.safeDigest();
               }, function (error) {});
           } else {
             $scope.fileLoadOrError = true;
@@ -376,7 +383,7 @@
             $scope.ticketForm.$setValidity('errorFile', false);
           }
 
-          $scope.$apply();
+          $rootScope.safeDigest();
         };
 
         $scope.removeAttachment = function (index, isErrorFile) {
@@ -404,13 +411,13 @@
             function (progress) {
               $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
-              $scope.$apply();
+              $rootScope.safeDigest();
             },
             function (finish) {
               $scope.fileLoadOrError = false;
               file.xhr = null;
               file.id = finish.id;
-              $scope.$apply();
+              $rootScope.safeDigest();
             }, function (error) {
             });
         };

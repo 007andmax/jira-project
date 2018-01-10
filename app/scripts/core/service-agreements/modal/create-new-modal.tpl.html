@@ -8,20 +8,12 @@
       <div class="col-xs-6">
         <div class="form-group">
           <p>Select Company</p>
-          <div class="form-group">
-            <input type="text" class="form-control has-dropdown" next-after-text-editor
-                   ng-model="contractCompany" name="contractCompany" autocomplete="off"
-                   uib-typeahead="company as company.name for company in companiesList | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                    qt-typeahead-show-on-focus ng-trim="false"
-                   custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}" required>
+          <qt-dropdown-typehead list-for-dropdown="companiesList"
+                                selected-item="contractCompany"
+                                display-property="'name'"
+                                filter-property="'name'">
 
-            <div>
-              <i class="icn-sm icn-caret-gray" ng-show="!showClearIcon()" style="pointer-events: none"></i>
-              <i class="icn-sm icn-remove-old"
-                 ng-show="showClearIcon()"
-                 uib-tooltip="clear" tooltip-placement="top" ng-click="contractCompany = undefined"></i>
-            </div>
-          </div>
+          </qt-dropdown-typehead>
         </div>
       </div>
       <div class="col-xs-6"></div>

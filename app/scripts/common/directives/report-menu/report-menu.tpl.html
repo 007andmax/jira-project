@@ -16,12 +16,13 @@
                ng-model="reportSetting.techUser"
                name="ticketAssignTo"
                typeahead-editable="false"
+               smart-dropdown-menu-position
                ng-disabled="!reportSetting.company"
                typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                placeholder="Tech"
                uib-typeahead="user as $ctrl.getUserName(user) for user in usersCurrentCompany | orderBy:'firstName'"
-               qt-typeahead-show-on-focus
-               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '360px'}">
+               qt-typeahead-async-show-on-focus
+               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}">
 
         <div typeahead-input-icon-sm="userCompany"></div>
 
@@ -31,7 +32,7 @@
                tooltip-placement="top"></i>
           </span>
           <span class="x-mark ng-hide" ng-hide="showClearIcon">
-                <i class="report-caret-icon"></i>
+                <i class="icm-sm report-caret-icon"></i>
           </span>
         </div>
 
@@ -43,9 +44,10 @@
                autocomplete="off"
                ng-model="reportSetting.device"
                name="reportAgent"
+               smart-dropdown-menu-position
                ng-disabled="!reportSetting.company"
                uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
-               qt-typeahead-show-on-focus
+               qt-typeahead-async-show-on-focus
                placeholder="Device"
                custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
         <div typeahead-input-icon-sm="reportAgent"></div>
@@ -55,7 +57,7 @@
                tooltip-placement="top"></i>
           </span>
           <span class="x-mark ng-hide" ng-hide="showClearIcon">
-            <i class="report-caret-icon"></i>
+            <i class="icn-sm report-caret-icon"></i>
           </span>
         </div>
       </div>
@@ -67,9 +69,11 @@
                  ng-model="reportType"
                  autocomplete="off"
                  tabindex="3"
+                 smart-dropdown-menu-position
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="type for type in reportTypes"
                  qt-typeahead-async-show-on-focus
+                 ng-change="reportType ? (previousReportType = reportType) : (reportType = reportType || previousReportType)"
                  readonly
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
@@ -83,6 +87,7 @@
                  ng-model="customerTicketType"
                  autocomplete="off"
                  tabindex="3"
+                 smart-dropdown-menu-position
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="type for type in customerTicketTypes"
                  qt-typeahead-async-show-on-focus
@@ -123,19 +128,59 @@
         <div uib-dropdown>
           <input type="text"
                  name="reportCompany"
-                 ng-disabled="reportType.toUpperCase() === 'SUMMARY'"
-                 ng-required="reportType.toUpperCase() === 'DETAILED'"
+                 ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
                  ng-model="reportSetting.company"
                  autocomplete="off"
                  tabindex="3"
+                 smart-dropdown-menu-position
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                  placeholder="Company Name"
-                 qt-typeahead-show-on-focus
-                 readonly
+                 qt-typeahead-async-show-on-focus
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
           <div class="input-top-4" typeahead-input-icon="userCompany"></div>
 
+          <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies"-->
+                                <!--selected-item="reportSetting.company"-->
+                                <!--display-property="'name'"-->
+                                <!--filter-property="'name'"-->
+                                <!--qt-tabindex="'3'"-->
+                                <!--qt-ng-disabled="'reportType.toUpperCase() === \'SUMMARY\''"-->
+                                <!--qt-ng-required="'reportType.toUpperCase() === \'DETAILED\''"-->
+                                <!--qt-name="'reportCompany'"-->
+                                <!--qt-readonly-->
+                                <!--qt-class="'form-control'"-->
+                                <!--qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
+
+          <!--</qt-dropdown-typehead>-->
+
+        </div>
+      </div>
+
+      <div class="form-group content" ng-show="$ctrl.isProductOptions">
+
+        <div style="float: left;width: 100%;">
+          <div products-list id="product-list-cont"
+               click-outside="closeDropdown()" outside-if-not="product-list-cont">
+
+            <div tooltip-placement="top">
+
+              <input style="cursor: pointer;" ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+                     placeholder="Product" autocomplete="off">
+
+              <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
+                     placeholder="Search Product" autocomplete="off" ng-model="searchProduct">
+
+              <!--<i class="icn-sm icn-caret-gray"></i>-->
+            </div>
+            <i class="icn-sm icn-remove-old" ng-click="clearInputField(); showDropdown()" ng-show="selectedProduct"></i>
+
+            <input type="hidden" name="product" ng-model="productExpense.item.description">
+
+            <div class="nano dropdown-menu custom-product-list" pl-conteiner
+                 ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+
+          </div>
         </div>
       </div>
 
@@ -204,6 +249,7 @@
                  class="form-control form-control-dropdown dropdown-toggle"
                  uib-typeahead="type for type in techReportTypes"
                  qt-typeahead-async-show-on-focus
+                 smart-dropdown-menu-position
                  readonly
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 

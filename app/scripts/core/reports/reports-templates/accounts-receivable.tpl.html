@@ -20,14 +20,14 @@
 
     </report-menu>
   </div>
-  <div class="product-list-ticket acc-col" style="height: 100%">
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list-ticket acc-col" style="height: 100%" ng-show="!loadingInProgress">
     <div class="header-product-list-ticket" ng-if="reportAccountsReceivable.lines">
       <!--HEADER-->
       <h3>{{reportAccountsReceivable.techCompanyName}}</h3>
       <p ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span>{{reportAccountsReceivable.clientCompanyName}}</span>
       </p>
     </div>
-    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div ng-if="reportAccountsReceivable.lines">
       <!--REPORT-->
       <ul class="acc-col">

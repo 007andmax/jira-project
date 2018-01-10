@@ -11,7 +11,7 @@
         ' ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
         '</span>' +
         '<span class="x-mark" ng-hide="showClearIcon" ng-click="toggleDropdown($event)">' +
-        '<i class="report-caret-icon"></i>' +
+        '<i class="icn-sm report-caret-icon"></i>' +
         '</span>' +
         '',
         scope: true,
@@ -41,16 +41,21 @@
             input.val('');
 
             var model = input.controller('ngModel');
+            model.testVar = true;
             if (model) {
-              model.$setViewValue('');
+              model.$setViewValue(undefined);
             }
 
             input.click();
           };
 
           scope.toggleDropdown = function (e) {
-            if (input.parent().find('.dropdown-menu,.uib-dropdown-menu').hasClass('ng-hide')) {
-              e.stopPropagation();
+            var dm = input.parent().find('.dropdown-menu,.uib-dropdown-menu')
+            if (dm.hasClass('ng-hide')) {
+              if(e) {
+                e.stopPropagation();
+              }
+
               input.focus();
             }
           };
