@@ -13,14 +13,15 @@
                  is-product-options="true">
     </report-menu>
   </div>
-  <div class="product-list-ticket product-list-ticket-pdf">
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list-ticket product-list-ticket-pdf" ng-show="!loadingInProgress">
     <div class="header-product-list-ticket" ng-if="reportByProducts.lines">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
       <p ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></p>
       <p><span>{{ parseDate(reportByProducts.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByProducts.endDate) | date: 'dd.MM.yyyy' }}</span>
       </p>
     </div>
-    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+
     <div ng-if="reportByProducts.lines">
       <ul class="customer-det-col">
         <li class="top-product-list-ticket product-list-ticket-grid clearfix">

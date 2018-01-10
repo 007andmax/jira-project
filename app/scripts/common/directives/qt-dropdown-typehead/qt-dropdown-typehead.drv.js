@@ -108,6 +108,7 @@
       self.list =  self.listForDropdown.filter(function(item) {
         return self.getFilterProperty(item).toString().toLowerCase().indexOf(self.viewValueItem.toLowerCase()) > -1;
       });
+
     };
 
     self.checkIfViewValueMatched = function(inputValue) {
@@ -131,9 +132,10 @@
     document.addEventListener("click", function(e){
       var targetElement = e.target || document.activeElement;
       var parent = targetElement.closest("#qtDropdown");
-      if(!parent){
+      if(!parent || parent === null){
         self.changeDropdownState(true);
-        $rootScope.safeDigest
+        $rootScope.safeDigest();
+
       }
     });
 

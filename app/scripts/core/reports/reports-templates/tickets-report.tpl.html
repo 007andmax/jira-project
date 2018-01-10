@@ -22,9 +22,9 @@
 
     </report-menu>
   </div>
-  <div class="product-list-ticket" ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list-ticket" ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl" ng-show="!loadingInProgress">
 
-    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
     <div class="customer-ticket" ng-if="ticketReport && isReportAvailable">
       <div class="customer-ticket__report">
         <div class="customer-ticket__report--summary">

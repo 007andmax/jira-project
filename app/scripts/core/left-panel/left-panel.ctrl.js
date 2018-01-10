@@ -107,7 +107,6 @@
           var newHistoryItemArray = [];
           var ifItemAlreadyInTheList = false;
           if(recentArray) {
-            //ifItemAlreadyInTheList = recentArray.some((s) => s === item);
             ifItemAlreadyInTheList = recentArray.some(function(s) {
               return s === item;
             });

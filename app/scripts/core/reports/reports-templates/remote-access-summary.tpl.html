@@ -13,7 +13,8 @@
                  is-show-tech-select-field="true"
                  is-radio-button-hidden="true"></report-menu>
   </div>
-  <div class="product-list-ticket">
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list-ticket" ng-show="!loadingInProgress">
     <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
       <h3>{{reportRemoteAccess.techCompanyName}}</h3>
       <p ng-if="reportRemoteAccess.type === 'DETAILED'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>
@@ -21,7 +22,7 @@
       <p><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd.MM.yyyy' }}</span>
       </p>
     </div>
-    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+
     <div ng-if="reportRemoteAccess.lines">
       <ul class="con-col">
         <li class="top-product-list-ticket clearfix">
