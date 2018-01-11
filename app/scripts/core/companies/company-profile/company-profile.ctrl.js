@@ -101,6 +101,8 @@
             $scope.editCompany.login = '';
             $scope.editCompany.password = '';
           }
+
+          $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
         });
 
 

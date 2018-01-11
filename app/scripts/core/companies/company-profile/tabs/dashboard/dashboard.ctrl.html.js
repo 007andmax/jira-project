@@ -26,6 +26,11 @@
           }
         };
 
+        $scope.cancelEdit = function() {
+          closeEditFields();
+          $scope.companyInfo = angular.copy($scope.reservedCompanyInfo);
+        };
+
         $scope.save = function () {
 
           var editCompany = angular.copy($scope.companyInfo);
@@ -71,7 +76,9 @@
             editCompany.agentLinkToEmail = null;
           }
           CompaniesService.save(editCompany, function (resp) {
-            console.log(resp)
+            if(resp) {
+              $scope.reservedCompanyInfo = angular.copy(editCompany);
+            }
           });
           closeEditFields();
 
