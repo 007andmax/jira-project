@@ -43,11 +43,87 @@
           }
         });
 
-        CompaniesService.getCompanyInfo($scope.company.id, $scope, function(resp) {
-          if(resp) {
-            $scope.companiesInfo = resp;
+        // CompaniesService.getCompanyData($scope, $scope.company.id, function(resp) {
+        //   if(resp) {
+        //     $scope.companyInfo = resp;
+        //   }
+        // });
+
+        $scope.companyInfo = CompaniesService.getCompanyData($scope, $scope.company.id, function () {
+
+          if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
+            $scope.companyInfo.addresses = [{}];
+          }
+
+          if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
+            $scope.companyInfo.contacts = [getEmptyContact()];
+          }
+
+          $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
+            $scope.companyInfo.contacts[0].subscription.invoice &&
+            UsersService.getAllByCompanyId(companyId).filter(function (user) {
+              return user.subscription.invoice;
+            }).length <= 1;
+
+          // for (var k = 0; k < companyData.services.length; k++) {
+          //   var service = companyData.services[k].originService || companyData.services[k];
+          //   $scope.selectedServices[service.versionedId.id] = true;
+          // }
+
+          $scope.editCompany = $scope.companyInfo.staticCopy();
+          $scope.contact = $scope.editCompany.contacts[0];
+
+          if ($scope.editCompany.paymentTerms) {
+            $scope.editCompany.paymentTerms += ' days';
+          } else if ($scope.editCompany.paymentTerms === 0) {
+            $scope.editCompany.paymentTerms = 'COD';
+          }
+
+          if ($scope.editCompany.clientType === 'VENDOR') {
+            CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
+              $scope.editCompany.hasProducts = resp.isProductExist;
+            });
+          }
+
+          if ($scope.editCompany.clientType) {
+            $scope.editCompany.clientType = userReadable($scope.editCompany.clientType);
+          }
+
+          if ($scope.editCompany.serviceType) {
+            $scope.editCompany.serviceType = userReadable($scope.editCompany.serviceType);
+          }
+
+          if ($scope.company.defaultPaymentMethod) {
+            $scope.editCompany.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);
+          }
+
+          if (!$scope.editCompany.credential) {
+            $scope.editCompany.login = '';
+            $scope.editCompany.password = '';
           }
         });
+
+
+
+        function userReadable(text) {
+          if (!text) {
+            return '';
+          }
+
+          var words = text.split('_'),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        }
 
 
         if (!$scope.company) {
@@ -249,6 +325,12 @@
             $scope.dateFormat = '%d %b';
           }
         };
+
+        $scope.getOpenedTab = function() {
+
+          return $state.current.params.tabName;
+
+        }
 
 
       }]);

@@ -1,0 +1,116 @@
+<div class="company-profile-content clearfix" ng-controller="quicktech.core.companies.companyProfileDashboardCtrl">
+  <h3>Hi <span>Norman</span>,</h3>
+  <p>Welcome to Quicktech agent dashboard</p>
+  <div class="company-info-wrapper">
+    <div class="company-info-header clearfix">
+      <div class="col-md-9">
+        <div class="company-logo">
+          <!--<img src="images/bitmap@3x.png" alt="">-->
+          <div style="min-height: 38px; display: inline-block; float: left;"><img
+            ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
+        </div>
+        <!--<button class="company-logo-icn" uib-tooltip="change logo"></button>-->
+        <div class="company-logo-icn" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
+             uib-tooltip="Change Logo" tooltip-placement="top" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
+          <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
+              crop-image="companyData" model-image-path="logo">
+            <li crop-image-button stop-propagation="click">
+              <a tabindex="-1" href="javascript:void(0)">Change Image</a>
+            </li>
+            <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
+              <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
+            </li>
+            <li reposition-button stop-propagation="click" ng-show="companyData.logo">
+              <a tabindex="-1" href="javascript:void(0)">Reposition</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <button class="company-download-icn" uib-tooltip="download agent"></button>
+        <button class="company-edit-icn" uib-tooltip="edit"></button>
+        <button class="company-remove-icn" uib-tooltip="archive company"></button>
+      </div>
+    </div>
+    <div class="company-info-content clearfix">
+      <div class="col-md-3">
+        <div class="company-name">{{companyInfo.name}} <span>{{companyInfo.accountType}}</span></div>
+        <div class="company-rate">
+          <span>☆</span>
+          <span>☆</span>
+          <span>☆</span>
+          <span>☆</span>
+          <span>☆</span>
+        </div>
+        <div class="company-address">
+         {{companyInfo.addresses[0].addressWithSuitNumberAndPostalCode}}
+        </div>
+        <div class="company-location">
+          <a class="company-link" href="">Show Map</a>
+        </div>
+        <div class="company-schedule">
+          7AM - 5:30PM
+          <i class="icn-sm report-caret-icon"></i>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="company-info-subtitle" ng-mouseover="showPhoneEditButton = true" ng-mouseleave="showPhoneEditButton = false">Telephone
+              <i class="icon-sm edit-icon" ng-show="showPhoneEditButton && !showPhoneNumbersEditFields"
+                 ng-click="showPhoneNumbersEditFields = true">
+              </i>
+              <i class="icon-sm icn-add-action" ng-show="showPhoneNumbersEditFields" ng-click="save()">
+              </i>
+            </div>
+            <div ng-repeat="phone in companyInfo.addresses[0].phoneNumbers track by $index" ng-show="!showPhoneNumbersEditFields">
+              <p>{{phone.number}}</p>
+           </div>
+
+            <div phone-numbers-edit ng-model="companyInfo.addresses[0].phoneNumbers" is-try-to-save="triedToSave"
+                 country-code="{{companyInfo.addresses[0].countryCode}}" ng-show="showPhoneNumbersEditFields">
+            </div>
+
+            <div class="company-info-subtitle">Email Domain</div>
+            <p>{{companyInfo.domain|| 'none'}}</p>
+            <div class="company-info-subtitle">Industry</div>
+            <p>{{companyInfo.clientIndustry.name || 'none'}}</p>
+          </div>
+          <div class="col-md-4">
+            <div class="company-info-subtitle">service type</div>
+            <p> --none--</p>
+            <div class="company-info-subtitle">Contact person</div>
+            <p>{{companyInfo.contacts[0].firstName}} {{companyInfo.contacts[0].lastName}}</p>
+            <div class="company-info-subtitle">Lead by</div>
+            <p>--none--</p>
+          </div>
+          <div class="col-md-4">
+            <div class="company-info-subtitle">Notes</div>
+            <p class="company-notes"> {{ companyInfo.description}}</p>
+            <a class="company-link" href="">Add New Note</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

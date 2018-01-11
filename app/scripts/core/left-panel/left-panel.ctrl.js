@@ -51,6 +51,13 @@
         $scope.dropdownByIndustryUserPage = false;
         $scope.dropdownByCompanyUserPage = false;
 
+        $scope.CompanyProfileTicketsPage = false;
+        $scope.CompanyProfileUsersPage = false;
+        $scope.CompanyProfileDevicesPage = false;
+        $scope.CompanyProfilePasswordManagerPage = false;
+        $scope.CompanyProfileProductsPage = false;
+        $scope.CompanyProfileInvoicesPage = false;
+
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -860,9 +867,11 @@
             return 'tickets';
           } else if (url.indexOf('drafts') > -1) {
             return 'inbox';
-          } else if (url.indexOf('companies') > -1 || url.indexOf('companyProfile') > -1) {
+          } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('users') > -1) {
+          } else if ( url.indexOf('companyProfile') > -1) {
+            return 'companyProfile';
+          }else if (url.indexOf('users') > -1) {
             return 'users';
           } else if (url.indexOf('accounting') > -1) {
             return 'billing';
