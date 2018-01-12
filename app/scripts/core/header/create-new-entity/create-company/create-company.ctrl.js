@@ -129,7 +129,6 @@
         $scope.tryToSave = false;
         $scope.currentStep = 'info';
         $scope.PermissionsService = PermissionsService;
-        $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.selectedServices = {};
 
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];

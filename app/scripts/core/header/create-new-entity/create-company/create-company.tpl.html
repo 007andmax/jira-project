@@ -96,7 +96,7 @@
 
           <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
                  uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
-                 readonly qt-typeahead-show-on-focus required uib-tooltip="Current vendor has linked products"
+                 readonly qt-typeahead-async-show-on-focus required uib-tooltip="Current vendor has linked products"
                  ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
           <div typeahead-input-icon="editCompany.clientType" ></div>
         </div>

@@ -9,11 +9,33 @@
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
 
+        CompaniesService.getIndustries(function (resp) {
+          $scope.industries = resp;
+        });
+        $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
+
+        $scope.descriptionMaxLength = 300;
+
         $scope.showPhoneEditButton = false;
         $scope.showPhoneNumbersEditFields = false;
+        $scope.showDomainEditButton = false;
+        $scope.showDomainEditFields = false;
+        $scope.showIndustryEditDutton = false;
+        $scope.showIndustryEditFields = false;
+        $scope.showContactPersonEditButton = false;
+        $scope.showContactPersonEditFields = false;
+        $scope.showNoteEditButton = false;
+        $scope.showNoteEditField = false;
+        $scope.showCompanyNameEditButton = false;
+        $scope.showCompanyNameEditField = false;
 
         function closeEditFields() {
           $scope.showPhoneNumbersEditFields = false;
+          $scope.showDomainEditFields = false;
+          $scope.showIndustryEditFields = false;
+          $scope.showContactPersonEditFields = false;
+          $scope.showNoteEditField = false;
+          $scope.showCompanyNameEditField = false;
         }
 
         function toEnum(text) {
@@ -102,9 +124,35 @@
           }
         };
 
+        $scope.validateCompanyDomain = function (ngModelCtrl, modelId, afterValidationCallback) {
+          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.companyInfo.id || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
+          });
+        };
+
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
+        };
+
+        $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
+
+          if ($scope.currentUser.accountType === "ROOT") {
+            ngModelCtrl.$setValidity('unique', true);
+            return
+          }
+
+          var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.companyInfo.id || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
+          });
+        };
 
 
 
       }]);
 
 }());
+
+
+

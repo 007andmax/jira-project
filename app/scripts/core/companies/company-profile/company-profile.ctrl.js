@@ -7,7 +7,7 @@
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService ) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -43,12 +43,6 @@
           }
         });
 
-        // CompaniesService.getCompanyData($scope, $scope.company.id, function(resp) {
-        //   if(resp) {
-        //     $scope.companyInfo = resp;
-        //   }
-        // });
-
         $scope.companyInfo = CompaniesService.getCompanyData($scope, $scope.company.id, function () {
 
           if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
@@ -65,44 +59,41 @@
               return user.subscription.invoice;
             }).length <= 1;
 
-          // for (var k = 0; k < companyData.services.length; k++) {
-          //   var service = companyData.services[k].originService || companyData.services[k];
-          //   $scope.selectedServices[service.versionedId.id] = true;
-          // }
-
           $scope.editCompany = $scope.companyInfo.staticCopy();
           $scope.contact = $scope.editCompany.contacts[0];
 
-          if ($scope.editCompany.paymentTerms) {
-            $scope.editCompany.paymentTerms += ' days';
+          if ($scope.companyInfo.paymentTerms) {
+            $scope.companyInfo.paymentTerms += ' days';
           } else if ($scope.editCompany.paymentTerms === 0) {
-            $scope.editCompany.paymentTerms = 'COD';
+            $scope.companyInfo.paymentTerms = 'COD';
           }
 
-          if ($scope.editCompany.clientType === 'VENDOR') {
+          if ($scope.companyInfo.clientType === 'VENDOR') {
+            $scope.companyInfo.hasProducts = false;
             CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
-              $scope.editCompany.hasProducts = resp.isProductExist;
+              $scope.companyInfo.hasProducts = resp.isProductExist;
             });
           }
 
-          if ($scope.editCompany.clientType) {
-            $scope.editCompany.clientType = userReadable($scope.editCompany.clientType);
+          if ($scope.companyInfo.clientType) {
+            $scope.companyInfo.clientType = userReadable($scope.companyInfo.clientType);
           }
 
-          if ($scope.editCompany.serviceType) {
-            $scope.editCompany.serviceType = userReadable($scope.editCompany.serviceType);
+          if ($scope.companyInfo.serviceType) {
+            $scope.companyInfo.serviceType = userReadable($scope.companyInfo.serviceType);
           }
 
           if ($scope.company.defaultPaymentMethod) {
-            $scope.editCompany.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);
+            $scope.companyInfo.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);
           }
 
-          if (!$scope.editCompany.credential) {
-            $scope.editCompany.login = '';
-            $scope.editCompany.password = '';
+          if (!$scope.companyInfo.credential) {
+            $scope.companyInfo.login = '';
+            $scope.companyInfo.password = '';
           }
-
-          $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
+          $timeout(function() {
+            $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
+          }, 3000);
         });
 
 
