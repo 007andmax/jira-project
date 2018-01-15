@@ -83,9 +83,35 @@
           <div class="company-rate-dashboard"><i class="star-icn"></i></div>
           <div class="company-rate-dashboard"><i class="star-icn"></i></div>
         </div>
-        <div class="company-address">
-          {{companyInfo.addresses[0].addressWithSuitNumberAndPostalCode}}
+        <div class="company-address" ng-mouseover="showAddressEditButton = true"
+             ng-mouseleave="showAddressEditButton = false">
+          <p ng-show="!showAddressEditFields">
+            {{companyInfo.addresses[0].addressWithSuitNumberAndPostalCode}}
+          </p>
+          <i class="icon-sm edit-icon" ng-show="showAddressEditButton && !showAddressEditFields"
+             ng-click="showAddressEditFields = true" uib-tooltip="Edit">
+          </i>
+          <i class="icon-sm icn-add-action" ng-show="showAddressEditFields" ng-click="save()"
+             uib-tooltip="Save"></i>
+          <i class="icon-sm icn-restore" ng-show="showAddressEditFields" ng-click="cancelEdit()"
+             uib-tooltip="Cancel"></i>
         </div>
+
+        <div ng-show="showAddressEditFields">
+          <div >
+            <div class="form-group" style="margin-bottom: 0;" use-alternative-map="true"
+                 address-autocomplete template-page="header/create-new-entity/create-company"
+                 ng-model="companyInfo.addresses[0]" ></div>
+
+            <div style="margin-bottom: 0;" class="form-group clearfix">
+              <time-zone-autocomplete address="companyInfo.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
+            </div>
+
+
+          </div>
+        </div>
+
+
         <div class="company-location">
           <a class="company-link" href="">Show Map</a>
         </div>

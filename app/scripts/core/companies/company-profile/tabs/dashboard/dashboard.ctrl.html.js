@@ -33,6 +33,8 @@
         $scope.showServiceTypeEditField = false;
         $scope.showLedByEditButton = false;
         $scope.showLedByEditField = false;
+        $scope.showAddressEditButton = false;
+        $scope.showAddressEditFields = false;
 
         function closeEditFields() {
           $scope.showPhoneNumbersEditFields = false;
@@ -43,6 +45,7 @@
           $scope.showCompanyNameEditField = false;
           $scope.showServiceTypeEditField = false;
           $scope.showLedByEditField = false;
+          $scope.showAddressEditFields = false;
         }
 
         $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
