@@ -272,8 +272,9 @@
   .users-list-wrapper .list-actions .btn {
     padding: 0 5px;
   }
-  .qt-users .list-heading .sub-col{
-    padding: 0!important;
+
+  .qt-users .list-heading .sub-col {
+    padding: 0 !important;
   }
 }
 
@@ -323,19 +324,97 @@
   padding-left: 25px;
 }
 
-.qt-users,
 .qt-company-devices,
 .qt-assc-vendors {
   padding: 10px;
 }
 
+.qt-users {
+  padding: 25px;
+  background-color: #F3F7F9;
+  color: #364656 !important;
+  position: relative;
+}
+
+.qt-users li.list-heading {
+  background-color: #F3F7F9;
+}
+
+.qt-users li.list-heading [class*='col-md-'] {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-family: 'Graphik Medium', sans-serif;
+  color: #364656 !important;
+}
+
 .qt-users > li {
   cursor: auto;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
+  font-size: 13px !important;
+  min-height: 79px;
+}
+
+.users-list-wrapper [class*='col-md-'] {
+  display: flex;
+}
+
+.selected-users-edit {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
+}
+
+.selected-users-edit p {
+  display: inline-block;
+  color: #16a4fa;
+}
+
+.qt-users .checkbox {
+  margin: 14px 10px 0 0 !important;
+}
+
+.qt-users li.list-heading {
+  padding: 20px 15px 5px;
+  min-height: 1px;
+
+}
+
+.qt-users li.list-heading .checkbox {
+  margin: -2px 10px 3px 0 !important;
+}
+
+#has-invoice-updates1 .user-ticket-update {
+  display: inline-block;
+  margin-right: 2px;
+  background-color: #fff;
+  border-radius: 3px;
+  width: 58px;
+  text-align: center;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+#has-invoice-updates1 {
+  position: relative;
+  border-radius: 3px;
+  background-color: #E8F6FE;
+  padding: 4px 30px 4px 4px;
+}
+
+#has-invoice-updates1 i {
+  position: absolute;
+  right: 11px;
+  top: 13px;
 }
 
 .qt-users .col-1 {
   width: calc(100% - 931px);
-
   white-space: nowrap;
 }
 
@@ -675,6 +754,13 @@
   background-color: #e7ecf2;
 }
 
+.qt-users .label-light {
+  background-color: transparent;
+  color: #9ca5b6;
+  font-size: 12px;
+  padding: 0;
+}
+
 .qt-list .lock-icon {
   margin: 2px 10px 0 0;
 }
@@ -700,12 +786,6 @@
 
 .add-new-service {
   background: #fff !important;
-}
-
-.qt-users .persistent-tooltip {
-  display: flex;
-  justify-content: center;
-  align-self: center;
 }
 
 .qt-users #has-invoice-updates1.persistent-tooltip img {
@@ -1119,11 +1199,21 @@ Devices tab
   cursor: pointer;
 }
 
+.qt-users .dropdown-subscribe .checkbox {
+  margin: 0 !important;
+}
+
+.qt-users .dropdown-subscribe {
+  box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+  width: 221px !important;
+}
+
 .qt-list > li.billable-main > .col-1,
 .qt-billable-sub > li > .col-1 {
   width: calc(100% - 120px);
   white-space: nowrap;
 }
+
 
 .qt-billable-clients .col-2 div {
   display: inline-block;
@@ -1143,10 +1233,6 @@ Devices tab
 .qt-list .checkbox {
   margin-top: 2px;
   margin-right: 10px;
-}
-
-.qt-list .list-heading .checkbox {
-  margin-top: 0;
 }
 
 /*.qt-list .checkbox .control-indicator {*/
@@ -1549,12 +1635,15 @@ Devices tab
   margin-right: 64px;
   padding-top: 25px;
 }
-#product-list-cont .dropdown-menu{
+
+#product-list-cont .dropdown-menu {
   top: 36px;
 }
-#product-list-cont .custom-product-list.nano{
+
+#product-list-cont .custom-product-list.nano {
   width: 100%;
 }
+
 .qt-invoices .qt-table .ha-edit {
   position: absolute;
   top: 16px;

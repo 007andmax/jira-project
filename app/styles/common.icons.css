@@ -126,7 +126,10 @@ a.ha-22-38 {
   width: 22px;
   height: 38px;
 }
-
+a.ha-22-48 {
+  width: 22px;
+  height: 48px;
+}
 a.ha-24 {
   width: 24px;
   height: 24px;
@@ -224,6 +227,12 @@ a.ha-24 {
 
 .icn-more-grey {
   background-position: -1636px 0;
+  width: 18px;
+  height: 4px;
+}
+
+.icn-more-light-grey {
+  background-position: -1664px 0;
   width: 18px;
   height: 4px;
 }
@@ -339,11 +348,13 @@ a.ha-24 {
 .ticket-add-content [class*='col-'] {
   float: left;
 }
-.ticket-add-content .service-add-width .absolute-stick-datepicker{
+
+.ticket-add-content .service-add-width .absolute-stick-datepicker {
   width: 14px;
   height: 16px;
   top: 12px;
 }
+
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
   width: 18px;
   height: 18px;
@@ -517,12 +528,14 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   width: 14px;
   height: 10px;
 }
+
 .icn-label-save-left-panel {
   background-position: -1739px -100px;
   width: 14px;
   height: 10px;
   margin-right: 25px;
 }
+
 .list-container .icn-label-save {
   position: absolute;
   right: -65px;
@@ -1600,9 +1613,10 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   height: 10px;
 }
 
-.icn-ticket-onhold{
+.icn-ticket-onhold {
   background-position: -846px -100px;
 }
+
 .icn-ticket-Unclaimed:before {
   content: "?";
   color: #fff;
@@ -1611,4 +1625,26 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   position: absolute;
   left: 33%;
   top: 25%;
+}
+
+.user-previledge,
+.user-send-email,
+.user-remove {
+  width: 16px;
+  height: 16px;
+  margin-left: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.user-previledge {
+  background-image: url(../images/new-icons/user-previledge.svg);
+}
+
+.user-send-email {
+  background-image: url(../images/new-icons/user-send-email.svg);
+}
+
+.user-remove {
+  background-image: url(../images/new-icons/user-remove.svg);
 }
