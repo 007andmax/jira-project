@@ -97,8 +97,8 @@
              uib-tooltip="Cancel"></i>
         </div>
 
-        <div ng-show="showAddressEditFields">
-          <div >
+        <div ng-show="showAddressEditFields" class="company-window__location row">
+          <div>
             <div class="form-group" style="margin-bottom: 0;" use-alternative-map="true"
                  address-autocomplete template-page="header/create-new-entity/create-company"
                  ng-model="companyInfo.addresses[0]" ></div>
@@ -106,8 +106,6 @@
             <div style="margin-bottom: 0;" class="form-group clearfix">
               <time-zone-autocomplete address="companyInfo.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
             </div>
-
-
           </div>
         </div>
 
