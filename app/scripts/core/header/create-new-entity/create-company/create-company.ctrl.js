@@ -11,6 +11,7 @@
                 PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
         $scope.descriptionMaxLength = 300;
+        $scope.techUsers = UsersService.getTechUsers;
 
         var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
@@ -135,6 +136,14 @@
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
         $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
         $scope.paymentTerms = ['COD', '7 days', '15 days', '30 days'];
+        $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
+        $scope.serviceTypesMap = {
+          HOURLY: 'Hourly',
+          BLOCK_TIME: 'Block time',
+          SEMI_MANAGED: 'Semi managed',
+          FULLY_MANAGED: 'Fully managed'
+        };
+
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
@@ -219,6 +228,13 @@
             if (!editCompany.agentLinkToEmailEnabled) {
               editCompany.agentLinkToEmail = null;
             }
+
+            // if(editCompany.techLeadIds) {
+            //   var techIds = [];
+            //   techIds.push(editCompany.techLeadIds);
+            //   editCompany.techLeadIds = techIds;
+            //
+            // }
 
 
 
@@ -475,7 +491,8 @@
               || !angular.equals(company.address, origin.address)
               || hasContact
               || company.login !== origin.login
-              || company.password !== origin.password;
+              || company.password !== origin.password ||
+            company.techLeadIds !== origin.techLeadIds;
 
           } else {
             hasClientType = company.clientType && company.clientType.trim();
@@ -531,6 +548,30 @@
         function toEnum(text) {
           return text.trim().split(' ').join('_').toUpperCase();
         }
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.getFullName = function(client) {
+
+          var isAllSpaces = client.lastName === "    ";
+          if(client.lastName && !isAllSpaces) {
+            return client.firstName+' '+client.lastName;
+          } else {
+            return client.firstName;
+          }
+        };
       }
     ]);
 

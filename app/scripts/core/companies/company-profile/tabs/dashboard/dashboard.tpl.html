@@ -173,8 +173,29 @@
           </div>
           <div class="col-md-4">
 
-            <div class="company-info-subtitle">service type</div>
-            <p> --none--</p>
+            <div class="company-info-subtitle" ng-mouseover="showServiceTypeEditButton = true"
+                 ng-mouseleave="showServiceTypeEditButton = false">
+              Service type
+              <i class="icon-sm edit-icon" ng-show="showServiceTypeEditButton && !showServiceTypeEditField"
+                 ng-click="showServiceTypeEditField = true" uib-tooltip="Edit">
+              </i>
+              <i class="icon-sm icn-add-action" ng-show="showServiceTypeEditField"
+                 ng-click="save()" uib-tooltip="Save"></i>
+              <i class="icon-sm icn-restore" ng-show="showServiceTypeEditField" ng-click="cancelEdit()"
+                 uib-tooltip="Cancel"></i>
+            </div>
+            <p ng-show="!showServiceTypeEditField">{{companyInfo.serviceTypes || 'none'}}</p>
+            <div ng-show="showServiceTypeEditField">
+              <div class="form-group ">
+
+                <input type="text" class="form-control" ng-model="companyInfo.serviceType"
+                       name="serviceType"
+                       custom-style="{'width':'100%'}"
+                       uib-typeahead="serviceType as serviceTypesMap[serviceType] for serviceType in serviceTypes"
+                       readonly qt-typeahead-async-show-on-focus>
+                <div typeahead-input-icon="editCompany.serviceTypes"></div>
+              </div>
+            </div>
 
             <div class="company-info-subtitle" ng-mouseover="showContactPersonEditButton = true"
                  ng-mouseleave="showContactPersonEditButton = false">
@@ -202,8 +223,32 @@
             </div>
 
 
-            <div class="company-info-subtitle">Lead by</div>
-            <p>--none--</p>
+            <!--<div class="company-info-subtitle">Lead by</div>-->
+            <div class="company-info-subtitle" ng-mouseover="showLedByEditButton = true"
+                 ng-mouseleave="showServiceTypeEditButton = false">
+              Led By
+              <i class="icon-sm edit-icon" ng-show="showLedByEditButton && !showLedByEditField"
+                 ng-click="showLedByEditField = true" uib-tooltip="Edit">
+              </i>
+              <i class="icon-sm icn-add-action" ng-show="showLedByEditField"
+                 ng-click="save()" uib-tooltip="Save"></i>
+              <i class="icon-sm icn-restore" ng-show="showLedByEditField" ng-click="cancelEdit()"
+                 uib-tooltip="Cancel"></i>
+            </div>
+            <p ng-show="!showLedByEditField">{{companyInfo.techLeadId || 'none'}}</p>
+            <div ng-show="showLedByEditField">
+              <div class="form-group">
+              <input type="text" class="form-control has-dropdown"
+                     placeholder="Select Tech User"
+                     name="leadBy"
+                     typeahead-input-formatter="getUserByID($model)"
+                     autocomplete="off" ng-model="companyInfo.techLeadId"
+                     uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+              <div typeahead-input-icon="companyInfo.techLeadId" ></div>
+              </div>
+            </div>
 
           </div>
           <div class="col-md-4">

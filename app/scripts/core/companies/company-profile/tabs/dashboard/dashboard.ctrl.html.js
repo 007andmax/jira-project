@@ -5,14 +5,15 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileDashboardCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService) {
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
+        $scope.techUsers = UsersService.getTechUsers;
 
         $scope.descriptionMaxLength = 300;
 
@@ -28,6 +29,10 @@
         $scope.showNoteEditField = false;
         $scope.showCompanyNameEditButton = false;
         $scope.showCompanyNameEditField = false;
+        $scope.showServiceTypeEditButton = false;
+        $scope.showServiceTypeEditField = false;
+        $scope.showLedByEditButton = false;
+        $scope.showLedByEditField = false;
 
         function closeEditFields() {
           $scope.showPhoneNumbersEditFields = false;
@@ -36,7 +41,17 @@
           $scope.showContactPersonEditFields = false;
           $scope.showNoteEditField = false;
           $scope.showCompanyNameEditField = false;
+          $scope.showServiceTypeEditField = false;
+          $scope.showLedByEditField = false;
         }
+
+        $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
+        $scope.serviceTypesMap = {
+          HOURLY: 'Hourly',
+          BLOCK_TIME: 'Block time',
+          SEMI_MANAGED: 'Semi managed',
+          FULLY_MANAGED: 'Fully managed'
+        };
 
         function toEnum(text) {
           return text.trim().split(' ').join('_').toUpperCase();
@@ -146,6 +161,30 @@
             ngModelCtrl.$setValidity('unique', validationResult.value);
             afterValidationCallback();
           });
+        };
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.getFullName = function(client) {
+
+          var isAllSpaces = client.lastName === "    ";
+          if(client.lastName && !isAllSpaces) {
+            return client.firstName+' '+client.lastName;
+          } else {
+            return client.firstName;
+          }
         };
 
 
