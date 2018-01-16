@@ -94,6 +94,7 @@
           $timeout(function() {
             $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
           }, 3000);
+
         });
 
 

@@ -9,10 +9,31 @@
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal) {
 
+        var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+        $scope.daysOfWeekMap = {
+          MONDAY: 'Monday',
+          TUESDAY: 'Thursday',
+          WEDNESDAY: 'Wednesday',
+          THURSDAY: 'Thursday',
+          FRIDAY: 'Friday',
+          SATURDAY: 'Saturday',
+          SUNDAY: 'Sunday'
+        };
+
+        $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
+        $scope.serviceTypesMap = {
+          HOURLY: 'Hourly',
+          BLOCK_TIME: 'Block time',
+          SEMI_MANAGED: 'Semi managed',
+          FULLY_MANAGED: 'Fully managed'
+        };
+
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
+        $scope.timeFormat = ['AM', 'PM'];
+
         $scope.techUsers = UsersService.getTechUsers;
 
         $scope.descriptionMaxLength = 300;
@@ -35,6 +56,9 @@
         $scope.showLedByEditField = false;
         $scope.showAddressEditButton = false;
         $scope.showAddressEditFields = false;
+        $scope.showWorkingDaysEditButton = false;
+        $scope.showWorkingDaysEditFields = false;
+
 
         function closeEditFields() {
           $scope.showPhoneNumbersEditFields = false;
@@ -46,18 +70,97 @@
           $scope.showServiceTypeEditField = false;
           $scope.showLedByEditField = false;
           $scope.showAddressEditFields = false;
+
         }
 
-        $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
-        $scope.serviceTypesMap = {
-          HOURLY: 'Hourly',
-          BLOCK_TIME: 'Block time',
-          SEMI_MANAGED: 'Semi managed',
-          FULLY_MANAGED: 'Fully managed'
-        };
 
         function toEnum(text) {
           return text.trim().split(' ').join('_').toUpperCase();
+        }
+
+        $scope.openWorkingDayEditFields = function () {
+          $scope.showWorkingDaysEditFields = true;
+          getCorrectWorkingTime();
+        };
+
+        $scope.cancelWorkingDaysEdit = function () {
+          $scope.showWorkingDaysEditFields = false;
+          $scope.workingDays = angular.copy($scope.workingDayReserved);
+        };
+
+        $scope.saveWorkingHours = function () {
+          $scope.companyInfo.workingDays = [];
+          for (var i = 0; i < 7; i++) {
+            if($scope.workingDays[i].isDayOff || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+              var day = {
+                dayOfWeek: $scope.workingDays[i].dayOfWeek,
+                startTime: 0,
+                endTime: 0
+              }
+            } else {
+              var day = {
+                dayOfWeek: $scope.workingDays[i].dayOfWeek,
+                startTime: gotSecondFromTimeAndFormatObject($scope.workingDays[i].startTime, $scope.workingDays[i].startTimeFormat),
+                endTime: gotSecondFromTimeAndFormatObject($scope.workingDays[i].endTime, $scope.workingDays[i].endTimeFormat)
+              };
+            }
+
+            $scope.companyInfo.workingDays.push(day);
+          }
+          $scope.showWorkingDaysEditFields = false;
+          $scope.save();
+        };
+
+        function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
+          if (objectTime && objectTimeFormat) {
+            var separateTime = objectTime.split(':');
+            var hours = parseInt(separateTime[0]);
+            var minutes = parseInt(separateTime[1]);
+            return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
+          }
+        }
+
+        function getCorrectWorkingTime() {
+          $scope.workingDays = [];
+          for (var i = 0; i < 7; i++) {
+            var day = {
+              dayOfWeek: daysOfWeek[i],
+              startTime: timeFormatter($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
+              startTimeFormat: getTimeFormat($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
+              endTime: timeFormatter($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
+              endTimeFormat: getTimeFormat($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
+              isDayOff: ($scope.companyInfo.workingDays.length>0 && $scope.companyInfo.workingDays[i].startTime >0 && $scope.companyInfo.workingDays[i].endTime > 0) ? false : true
+            };
+            $scope.workingDays.push(day);
+            $scope.workingDayReserved = angular.copy($scope.workingDays);
+          }
+        }
+
+        function timeFormatter(time) {
+          if (time && time > 0) {
+            var seconds = time > 43200 ? time - 43200 : time;
+            var hours = Math.floor(seconds / 3600);
+            var hoursToReturn = hours.toString().length > 1 ? hours : '0' + hours;
+            var minutes = Math.floor((seconds - (hours * 3600)) / 60);
+            var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
+            return hoursToReturn + ':' + minutesToreturn;
+          } else {
+            return '00' + ':' + '00'
+          }
+        }
+
+        function getTimeFormat(time) {
+          if (time && time > 0) {
+
+            var timeInHour = time / 3600;
+            if (timeInHour < 12) {
+              return 'AM';
+            } else {
+              return 'PM';
+            }
+          } else {
+            return 'AM';
+          }
         }
 
         $scope.checkingFormAndSave = function (form) {
@@ -72,7 +175,6 @@
         };
 
         $scope.save = function () {
-
           var editCompany = angular.copy($scope.companyInfo);
           var contacts = editCompany.contacts,
             addresses = editCompany.addresses;
@@ -154,12 +256,10 @@
         };
 
         $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
-
           if ($scope.currentUser.accountType === "ROOT") {
             ngModelCtrl.$setValidity('unique', true);
             return
           }
-
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.companyInfo.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
             afterValidationCallback();
@@ -181,13 +281,23 @@
         };
 
         $scope.getFullName = function (client) {
-
           var isAllSpaces = client.lastName === "    ";
           if (client.lastName && !isAllSpaces) {
             return client.firstName + ' ' + client.lastName;
           } else {
             return client.firstName;
           }
+        };
+
+        $scope.checkCompanyReputationScore = function (value) {
+          return ($scope.companyInfo.reputation !== null &&
+            $scope.companyInfo.reputation &&
+            $scope.companyInfo.reputation > (value - 1) )
+        };
+
+        $scope.setCompanyReputation = function (value) {
+          $scope.companyInfo.reputation = value;
+          $scope.save();
         };
 
         $scope.openMapModal = function () {
@@ -202,11 +312,6 @@
               companyInfo: $scope.companyInfo
             }
           });
-
-
-          // mapModalInstance.opened.then(function () {
-          //   $scope.allowToOpenAgreementModal = true;
-          // });
         }
 
 

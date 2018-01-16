@@ -98,7 +98,7 @@
                  uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
                  readonly qt-typeahead-async-show-on-focus required uib-tooltip="Current vendor has linked products"
                  ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
-          <div typeahead-input-icon="editCompany.clientType" ></div>
+          <div typeahead-input-icon="editCompany.clientType" ng-if="!(editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts)"></div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'leadBy')}">
