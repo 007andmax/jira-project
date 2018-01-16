@@ -190,27 +190,21 @@
           }
         };
 
-        $scope.opemMapModal = function () {
+        $scope.openMapModal = function () {
           var mapModalInstance = $uibModal.open({
-            templateUrl: '/html/scripts/core/companies/modal/service-contract-modal.tpl.html',
+            templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
             animation: true,
-            backdrop: false,
+            backdrop: true,
             size: 'md',
-            controller: 'serviceAgreementsModalCtrl',
+            controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
-            resolve: {
-              companyData: {
-                editMode: editMode,
-                companyForReadOnlyMode: companyForReadOnlyMode,
-                contractType: contractType
-              }
-            }
-
+            resolve: {}
           });
 
-          mapModalInstance.opened.then(function () {
-            $scope.allowToOpenAgreementModal = true;
-          });
+
+          // mapModalInstance.opened.then(function () {
+          //   $scope.allowToOpenAgreementModal = true;
+          // });
         }
 
 
