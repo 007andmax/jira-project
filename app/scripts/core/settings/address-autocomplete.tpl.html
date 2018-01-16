@@ -31,7 +31,7 @@
       <label class="control-label" ng-message="correct">Please select address from autocomplete.</label>
     </div>
 
-    <input class="form-control" type="text" ng-required="isAddressRequired"
+    <input class="form-control pointer" type="text" ng-required="isAddressRequired"
            name="address" autocomplete="off" map-input focus-on="{{ focusAddress }}" delay="{{ focusAddress ? 500 : 0 }}"
            make-dirty-on-blur ng-model="model.address">
   </div>

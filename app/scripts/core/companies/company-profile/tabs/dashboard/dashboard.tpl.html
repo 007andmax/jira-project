@@ -27,84 +27,101 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div
-          qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
-          qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}"
-          style="display: inline-block;">
+       <div class="pull-right">
+         <div
+           qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+           qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}"
+           style="display: inline-block;">
 
-          <button class="company-download-icn"
-                  uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"
-                  qt-popover-trigger tooltip-placement="top">
+           <button class="company-download-icn"
+                   uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"
+                   qt-popover-trigger tooltip-placement="top">
 
-          </button>
+           </button>
+         </div>
+         <button class="company-edit-icn" uib-tooltip="edit"
+                 ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+                 create-new-entity="company" item="company" stop-propagation="click"></button>
+         <button class="company-remove-icn" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
+                 ng-click="archiveCompany()" uib-tooltip="Archive Company"
+                 tooltip-placement="top" tooltip-append-to-body="true"></button>
+
+       </div>
         </div>
-        <button class="company-edit-icn" uib-tooltip="edit"
-                ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-                create-new-entity="company" item="company" stop-propagation="click"></button>
-        <button class="company-remove-icn" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
-                ng-click="archiveCompany()" uib-tooltip="Archive Company"
-                tooltip-placement="top" tooltip-append-to-body="true"></button>
-      </div>
     </div>
     <div class="company-info-content clearfix">
       <div class="col-md-3">
-        <div class="company-name" ng-mouseover="showCompanyNameEditButton = true"
+        <div class="company-name clearfix" ng-mouseover="showCompanyNameEditButton = true"
              ng-mouseleave="showCompanyNameEditButton = false">
-          <div ng-show="!showCompanyNameEditField">{{companyInfo.name}}
-            <span>{{companyInfo.clientType}}</span> </div>
-          <i class="icon-sm edit-icon" ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
-             ng-click="showCompanyNameEditField = true" uib-tooltip="Edit">
-          </i>
-          <i class="icon-sm icn-add-action" ng-show="showCompanyNameEditField" ng-click="checkingFormAndSave(companyDashboardForm)"
-             uib-tooltip="Save"></i>
-          <i class="icon-sm icn-restore" ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
+          <div class="w-92" ng-show="!showCompanyNameEditField">
+            <div class="ellipsis">{{companyInfo.name}}</div>
+            <span>{{companyInfo.clientType}}</span>
+          </div>
+          <button class="company-edit-icn company-edit-icn-sm"
+                  ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
+                  ng-click="showCompanyNameEditField = true" uib-tooltip="Edit"></button>
+          <i class="icn-sm icn-remove-old pointer pull-right" ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
              uib-tooltip="Cancel"></i>
+          <i class="icn-sm icn-label-save pull-right" ng-show="showCompanyNameEditField"
+             ng-click="checkingFormAndSave(companyDashboardForm)"
+             uib-tooltip="Save"></i>
         </div>
-        <div class="form-group" ng-show="showCompanyNameEditField" ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'companyName')}">
+        <div class="form-group" ng-show="showCompanyNameEditField"
+             ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'companyName')}">
 
-          <input class="form-control" type="text" ng-model="companyInfo.name" aria-expanded="true"
+          <input class="form-control dashboard-edit-input" type="text" ng-model="companyInfo.name" aria-expanded="true"
                  ng-minlength="2" ng-maxlength="40" name="companyName" required="true"
                  is-uniq-validation validation-func="validateCompanyName">
 
         </div>
-        <div class="form-group" ng-show="showCompanyNameEditField" ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'clientType')}">
+        <div class="form-group" ng-show="showCompanyNameEditField"
+             ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'clientType')}">
 
-          <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="companyInfo.clientType" name="clientType"
+          <input custom-style="{'width':'100%'}" type="text" class="form-control dashboard-edit-input"
+                 ng-model="companyInfo.clientType" name="clientType"
                  uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="companyInfo.hasProducts"
                  readonly qt-typeahead-async-show-on-focus required uib-tooltip="Current vendor has linked products"
                  ng-disabled="companyInfo.clientType.toLowerCase() === 'vendor' && companyInfo.hasProducts">
-          <div typeahead-input-icon="editCompany.clientType" ng-if="companyInfo.clientType.toLowerCase() !== 'vendor'"></div>
+          <div typeahead-input-icon="editCompany.clientType"
+               ng-if="companyInfo.clientType.toLowerCase() !== 'vendor'"></div>
         </div>
 
         <div class="company-rate">
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(1)}" ng-click="setCompanyReputation(1)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(2)}" ng-click="setCompanyReputation(2)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(3)}" ng-click="setCompanyReputation(3)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(4)}" ng-click="setCompanyReputation(4)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(5)}" ng-click="setCompanyReputation(5)"></i></div>
+          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(1)}"
+                                                 ng-click="setCompanyReputation(1)"></i></div>
+          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(2)}"
+                                                 ng-click="setCompanyReputation(2)"></i></div>
+          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(3)}"
+                                                 ng-click="setCompanyReputation(3)"></i></div>
+          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(4)}"
+                                                 ng-click="setCompanyReputation(4)"></i></div>
+          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(5)}"
+                                                 ng-click="setCompanyReputation(5)"></i></div>
         </div>
-        <div class="company-address" ng-mouseover="showAddressEditButton = true"
+        <div class="company-address clearfix" ng-mouseover="showAddressEditButton = true"
              ng-mouseleave="showAddressEditButton = false">
-          <p ng-show="!showAddressEditFields">
+          <p class="w-92" ng-show="!showAddressEditFields">
             {{companyInfo.addresses[0].addressWithSuitNumberAndPostalCode}}
           </p>
-          <i class="icon-sm edit-icon" ng-show="showAddressEditButton && !showAddressEditFields"
-             ng-click="showAddressEditFields = true" uib-tooltip="Edit">
-          </i>
-          <i class="icon-sm icn-add-action" ng-show="showAddressEditFields" ng-click="save()"
-             uib-tooltip="Save"></i>
-          <i class="icon-sm icn-restore" ng-show="showAddressEditFields" ng-click="cancelEdit()"
+          <button class="company-edit-icn company-edit-icn-sm" ng-show="showAddressEditButton && !showAddressEditFields"
+                  ng-click="showAddressEditFields = true" uib-tooltip="Edit"></button>
+          <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showAddressEditFields"
+             ng-click="cancelEdit()"
              uib-tooltip="Cancel"></i>
+          <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showAddressEditFields"
+             ng-click="save()"
+             uib-tooltip="Save"></i>
         </div>
 
         <div ng-show="showAddressEditFields" class="company-window__location row">
           <div>
             <div class="form-group" style="margin-bottom: 0;" use-alternative-map="true"
                  address-autocomplete template-page="header/create-new-entity/create-company"
-                 ng-model="companyInfo.addresses[0]" ></div>
+                 ng-model="companyInfo.addresses[0]"></div>
 
             <div style="margin-bottom: 0;" class="form-group clearfix">
-              <time-zone-autocomplete address="companyInfo.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
+              <time-zone-autocomplete address="companyInfo.addresses[0]"
+                                      time-zones="timeZones"></time-zone-autocomplete>
             </div>
           </div>
         </div>
@@ -113,30 +130,34 @@
         <div class="company-location">
           <a class="company-link" href="" ng-click="openMapModal()">Show Map</a>
         </div>
-        <div class="company-schedule" ng-mouseover="showWorkingDaysEditButton = true"
+        <div class="company-schedule clearfix" ng-mouseover="showWorkingDaysEditButton = true"
              ng-mouseleave="showWorkingDaysEditButton = false">
-          7AM - 5:30PM
+          <p class="w-92">7AM - 5:30PM</p>
           <i class="icn-sm report-caret-icon"></i>
-          <i class="icon-sm edit-icon" ng-show="showWorkingDaysEditButton && !showWorkingDaysEditFields"
-             ng-click="openWorkingDayEditFields()" uib-tooltip="Edit">
-          </i>
-          <i class="icon-sm icn-add-action" ng-show="showWorkingDaysEditFields" ng-click="saveWorkingHours()"
-             uib-tooltip="Save"></i>
-          <i class="icon-sm icn-restore" ng-show="showWorkingDaysEditFields" ng-click="cancelWorkingDaysEdit()"
+          <button class="company-edit-icn company-edit-icn-sm"
+                  ng-show="showWorkingDaysEditButton && !showWorkingDaysEditFields"
+                  ng-click="openWorkingDayEditFields()" uib-tooltip="Edit">
+          </button>
+          <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+             ng-show="showWorkingDaysEditFields" ng-click="cancelWorkingDaysEdit()"
              uib-tooltip="Cancel"></i>
+          <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showWorkingDaysEditFields"
+             ng-click="saveWorkingHours()"
+             uib-tooltip="Save"></i>
+
           <div ng-show="showWorkingDaysEditFields">
             <div>
-              <ul>
+              <ul class="company-schedule-edit">
                 <li ng-repeat="day in workingDays">
-                  <div>
-                    {{daysOfWeekMap[day.dayOfWeek]}}
+                  <div class="mb">
+                    <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
                     <input placeholder="Hours"
                            name="startTime"
                            type="text"
                            class="form-control"
                            ng-model="day.startTime"
                            hard-reset-pattern="timeHoursAndMinutesPattern">
-                    <input type="text" class="form-control" name="startTimeFormat"
+                    <input type="text" class="form-control pointer text-center" name="startTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
                            uib-typeahead="time for time in timeFormat"
@@ -149,7 +170,7 @@
                            class="form-control"
                            ng-model="day.endTime"
                            hard-reset-pattern="timeHoursAndMinutesPattern">
-                    <input type="text" class="form-control" name="endTimeFormat"
+                    <input type="text" class="form-control pointer text-center" name="endTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
                            uib-typeahead="time for time in timeFormat"
@@ -172,14 +193,16 @@
           <div class="col-md-4">
             <div class="company-info-subtitle" ng-mouseover="showPhoneEditButton = true"
                  ng-mouseleave="showPhoneEditButton = false">
-              Telephone
-              <i class="icon-sm edit-icon" ng-show="showPhoneEditButton && !showPhoneNumbersEditFields"
-                 ng-click="showPhoneNumbersEditFields = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showPhoneNumbersEditFields" ng-click="save()"
-                 uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showPhoneNumbersEditFields" ng-click="cancelEdit()"
+              <div class="w-92">Telephone</div>
+              <button class="company-edit-icn company-edit-icn-sm"
+                      ng-show="showPhoneEditButton && !showPhoneNumbersEditFields"
+                      ng-click="showPhoneNumbersEditFields = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+                 ng-show="showPhoneNumbersEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class=" icn-sm icn-label-save pull-right"
+                 ng-show="showPhoneNumbersEditFields" ng-click="save()"
+                 uib-tooltip="Save"></i>
             </div>
             <div ng-repeat="phone in companyInfo.addresses[0].phoneNumbers track by $index"
                  ng-show="!showPhoneNumbersEditFields">
@@ -192,19 +215,18 @@
 
             <div class="company-info-subtitle" ng-mouseover="showDomainEditButton = true"
                  ng-mouseleave="showDomainEditButton = false">
-              Email Domain
-              <i class="icon-sm edit-icon" ng-show="showDomainEditButton && !showDomainEditFields"
-                 ng-click="showDomainEditFields = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showDomainEditFields"
-                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showDomainEditFields" ng-click="cancelEdit()"
+              <div class="w-92">Email Domain</div>
+              <button class="company-edit-icn company-edit-icn-sm" ng-show="showDomainEditButton && !showDomainEditFields"
+                      ng-click="showDomainEditFields = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showDomainEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showDomainEditFields"
+                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showDomainEditFields">{{companyInfo.domain|| 'none'}}</p>
 
             <div ng-show="showDomainEditFields"
-                 ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'companyDomain')}">
+                 ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'companyDomain')}" class="form-group">
               <div ng-messages="domainForm.companyDomain.$error"
                    ng-class="{'hide': !isShowingErrors(companyDashboardForm, 'companyDomain')}">
                 <label class="control-label" ng-message="unique">This domain already occupied.</label>
@@ -221,14 +243,15 @@
 
             <div class="company-info-subtitle" ng-mouseover="showIndustryEditDutton = true"
                  ng-mouseleave="showIndustryEditDutton = false">
-              Industry
-              <i class="icon-sm edit-icon" ng-show="showIndustryEditDutton && !showIndustryEditFields"
-                 ng-click="showIndustryEditFields = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showIndustryEditFields"
-                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showIndustryEditFields" ng-click="cancelEdit()"
+              <div class="w-92">Industry</div>
+              <button class="company-edit-icn company-edit-icn-sm"
+                      ng-show="showIndustryEditDutton && !showIndustryEditFields"
+                      ng-click="showIndustryEditFields = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showIndustryEditFields"
+                 ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showIndustryEditFields"
+                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showIndustryEditFields">{{companyInfo.clientIndustry.name || 'none'}}</p>
 
@@ -248,20 +271,19 @@
 
             <div class="company-info-subtitle" ng-mouseover="showServiceTypeEditButton = true"
                  ng-mouseleave="showServiceTypeEditButton = false">
-              Service type
-              <i class="icon-sm edit-icon" ng-show="showServiceTypeEditButton && !showServiceTypeEditField"
-                 ng-click="showServiceTypeEditField = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showServiceTypeEditField"
-                 ng-click="save()" uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showServiceTypeEditField" ng-click="cancelEdit()"
+              <div class="w-92">Service type</div>
+              <button class="company-edit-icn company-edit-icn-sm" ng-show="showServiceTypeEditButton && !showServiceTypeEditField"
+                      ng-click="showServiceTypeEditField = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showServiceTypeEditField" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showServiceTypeEditField"
+                 ng-click="save()" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showServiceTypeEditField">{{companyInfo.serviceTypes || 'none'}}</p>
             <div ng-show="showServiceTypeEditField">
               <div class="form-group ">
 
-                <input type="text" class="form-control" ng-model="companyInfo.serviceType"
+                <input type="text" class="form-control pointer" ng-model="companyInfo.serviceType"
                        name="serviceType"
                        custom-style="{'width':'100%'}"
                        uib-typeahead="serviceType as serviceTypesMap[serviceType] for serviceType in serviceTypes"
@@ -272,16 +294,17 @@
 
             <div class="company-info-subtitle" ng-mouseover="showContactPersonEditButton = true"
                  ng-mouseleave="showContactPersonEditButton = false">
-              Contact person
-              <i class="icon-sm edit-icon" ng-show="showContactPersonEditButton && !showContactPersonEditFields"
-                 ng-click="showContactPersonEditFields = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showContactPersonEditFields"
-                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showContactPersonEditFields" ng-click="cancelEdit()"
+              <div class="w-92">Contact person</div>
+              <button class="company-edit-icn company-edit-icn-sm" ng-show="showContactPersonEditButton && !showContactPersonEditFields"
+                      ng-click="showContactPersonEditFields = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showContactPersonEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showContactPersonEditFields"
+                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
+
             </div>
-            <p ng-show="!showContactPersonEditFields">{{companyInfo.contacts[0].firstName}} {{companyInfo.contacts[0].lastName}}</p>
+            <p ng-show="!showContactPersonEditFields">{{companyInfo.contacts[0].firstName}}
+              {{companyInfo.contacts[0].lastName}}</p>
 
             <div ng-show="showContactPersonEditFields">
               <div class="form-group" ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'firstName')}">
@@ -299,27 +322,26 @@
             <!--<div class="company-info-subtitle">Lead by</div>-->
             <div class="company-info-subtitle" ng-mouseover="showLedByEditButton = true"
                  ng-mouseleave="showServiceTypeEditButton = false">
-              Led By
-              <i class="icon-sm edit-icon" ng-show="showLedByEditButton && !showLedByEditField"
-                 ng-click="showLedByEditField = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showLedByEditField"
-                 ng-click="save()" uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showLedByEditField" ng-click="cancelEdit()"
+              <div class="w-92">Lead By</div>
+              <button class="company-edit-icn company-edit-icn-sm" ng-show="showLedByEditButton && !showLedByEditField"
+                      ng-click="showLedByEditField = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showLedByEditField" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showLedByEditField"
+                 ng-click="save()" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showLedByEditField">{{companyInfo.techLeadId || 'none'}}</p>
             <div ng-show="showLedByEditField">
               <div class="form-group">
-              <input type="text" class="form-control has-dropdown"
-                     placeholder="Select Tech User"
-                     name="leadBy"
-                     typeahead-input-formatter="getUserByID($model)"
-                     autocomplete="off" ng-model="companyInfo.techLeadId"
-                     uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
-                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-              <div typeahead-input-icon="companyInfo.techLeadId" ></div>
+                <input type="text" class="form-control has-dropdown pointer"
+                       placeholder="Select Tech User"
+                       name="leadBy"
+                       typeahead-input-formatter="getUserByID($model)"
+                       autocomplete="off" ng-model="companyInfo.techLeadId"
+                       uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                       qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                <div typeahead-input-icon="companyInfo.techLeadId"></div>
               </div>
             </div>
 
@@ -328,16 +350,17 @@
 
             <div class="company-info-subtitle" ng-mouseover="showNoteEditButton = true"
                  ng-mouseleave="showNoteEditButton = false">
-              Notes
-              <i class="icon-sm edit-icon" ng-show="showNoteEditButton && !showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0"
-                 ng-click="showNoteEditField = true" uib-tooltip="Edit">
-              </i>
-              <i class="icon-sm icn-add-action" ng-show="showNoteEditField"
-                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
-              <i class="icon-sm icn-restore" ng-show="showNoteEditField" ng-click="cancelEdit()"
+              <div class="w-92">Notes</div>
+              <button class="company-edit-icn company-edit-icn-sm" ng-show="showNoteEditButton && !showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0"
+                      ng-click="showNoteEditField = true" uib-tooltip="Edit"></button>
+              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showNoteEditField" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showNoteEditField"
+                 ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
             </div>
-            <p class="company-notes" ng-show="!showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0"> {{ companyInfo.description}}</p>
+            <p class="company-notes"
+               ng-show="!showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0">
+              {{ companyInfo.description}}</p>
             <div class="form-group company-notes" ng-show="showNoteEditField">
               <textarea class="form-control" ng-model="companyInfo.description" name="companyDescription"
                         maxlength="{{ descriptionMaxLength }}" ng-trim="false" make-dirty-on-blur></textarea>
@@ -345,7 +368,9 @@
               <div class="word-count">{{ descriptionMaxLength - companyInfo.description.length }}</div>
             </div>
 
-            <a class="company-link" href="" ng-click="showNoteEditField = true" ng-hide="(companyInfo.description && companyInfo.description.length && companyInfo.description.length>0) || showNoteEditField ">Add New Note</a>
+            <a class="company-link" href="" ng-click="showNoteEditField = true"
+               ng-hide="(companyInfo.description && companyInfo.description.length && companyInfo.description.length>0) || showNoteEditField ">Add
+              New Note</a>
           </div>
         </div>
       </div>
@@ -360,7 +385,7 @@
 
   <div chart-data-restriction fetch-func="getStatisticByCompany"
        margin="100" divider="50" chart-wrap param0="companyId" param1="frequency"
-       class="company-map-wrapper col-md-9" ng-if="!chartHidden">
+       class="company-map-wrapper col-md-9" ng-if="!chartHidden" style="background-color: #fff;height: 320px;">
 
     <div class="chart-header">
       <div class="chart-header-name">
@@ -381,7 +406,7 @@
     </div>
 
     <div d3chart data="chartData" margin="{ top: 20, right: 10, bottom: 40, left: 70}"
-         style="height: 229px" ng-if="!reloading">
+         style="height: 241px" ng-if="!reloading">
       <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
               ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
       <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
@@ -391,7 +416,7 @@
 
   </div>
 
-  <div class="company-work-info col-md-3">
+  <div class="company-work-info col-md-3" style="background: #fff;height: 320px;padding: 10px;">
     <table>
       <tbody ng-click="selectChart('countOfNewTickets')"
              ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">

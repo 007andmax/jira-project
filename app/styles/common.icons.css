@@ -517,11 +517,17 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   width: 14px;
   height: 10px;
 }
-.icn-label-save-left-panel {
+.icn-label-save-left-panel,
+.icn-label-save{
   background-position: -1739px -100px;
   width: 14px;
   height: 10px;
   margin-right: 25px;
+}
+.icn-label-save{
+  background-position: -1702px -100px;
+  margin: 0 10px 0 0;
+  cursor: pointer;
 }
 .list-container .icn-label-save {
   position: absolute;
