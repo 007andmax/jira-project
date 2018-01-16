@@ -5,9 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileDashboardCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService', '$uibModal',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal) {
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
@@ -66,7 +66,7 @@
           }
         };
 
-        $scope.cancelEdit = function() {
+        $scope.cancelEdit = function () {
           closeEditFields();
           $scope.companyInfo = angular.copy($scope.reservedCompanyInfo);
         };
@@ -116,7 +116,7 @@
             editCompany.agentLinkToEmail = null;
           }
           CompaniesService.save(editCompany, function (resp) {
-            if(resp) {
+            if (resp) {
               $scope.reservedCompanyInfo = angular.copy(editCompany);
             }
           });
@@ -166,30 +166,52 @@
           });
         };
 
-        $scope.getUserByID = function(userId) {
-          if(!userId) {
+        $scope.getUserByID = function (userId) {
+          if (!userId) {
             return
           }
           var user = UsersService.getOneById(userId);
-          if(user) {
-            if(user.lastName === '    ') {
+          if (user) {
+            if (user.lastName === '    ') {
               return user.firstName
             } else {
-              return user.firstName+' '+user.lastName;
+              return user.firstName + ' ' + user.lastName;
             }
           }
         };
 
-        $scope.getFullName = function(client) {
+        $scope.getFullName = function (client) {
 
           var isAllSpaces = client.lastName === "    ";
-          if(client.lastName && !isAllSpaces) {
-            return client.firstName+' '+client.lastName;
+          if (client.lastName && !isAllSpaces) {
+            return client.firstName + ' ' + client.lastName;
           } else {
             return client.firstName;
           }
         };
 
+        $scope.opemMapModal = function () {
+          var mapModalInstance = $uibModal.open({
+            templateUrl: '/html/scripts/core/companies/modal/service-contract-modal.tpl.html',
+            animation: true,
+            backdrop: false,
+            size: 'md',
+            controller: 'serviceAgreementsModalCtrl',
+            windowClass: 'create-popup margin-top-modal-dialog',
+            resolve: {
+              companyData: {
+                editMode: editMode,
+                companyForReadOnlyMode: companyForReadOnlyMode,
+                contractType: contractType
+              }
+            }
+
+          });
+
+          mapModalInstance.opened.then(function () {
+            $scope.allowToOpenAgreementModal = true;
+          });
+        }
 
 
       }]);
