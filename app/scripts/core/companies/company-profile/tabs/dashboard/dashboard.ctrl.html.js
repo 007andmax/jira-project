@@ -191,14 +191,16 @@
         };
 
         $scope.openMapModal = function () {
-          var mapModalInstance = $uibModal.open({
+          $uibModal.open({
             templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
             animation: true,
             backdrop: true,
             size: 'md',
             controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
-            resolve: {}
+            resolve: {
+              companyInfo: $scope.companyInfo
+            }
           });
 
 

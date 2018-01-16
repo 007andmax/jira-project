@@ -3,10 +3,14 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileMapModalCtrl',
-    ['$scope', '$state', '$stateParams',
-      function ($scope, $state, $stateParams) {
+    ['$scope','$uibModalInstance', 'companyInfo',
+      function ($scope, $uibModalInstance, companyInfo) {
 
+        $scope.companyInfo = companyInfo;
 
+        $scope.closeModal = function () {
+          $uibModalInstance.close();
+        };
 
       }]);
 
