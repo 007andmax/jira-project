@@ -193,15 +193,21 @@
   max-width: 74%;
 }
 
-.company-info-content .company-name span {
+.company-info-content .company-name .dropdown {
   font-size: 12px;
-  padding: 5px 10px;
   border-radius: 3px;
   background-color: #ffe3af;
   margin-left: 10px;
   vertical-align: middle;
+  display: inline-block;
+  padding: 0;
+  width: 54px;
 }
-
+.company-info-content .company-name .dropdown input{
+  border: none;
+  font-family: 'Graphik Regular', sans-serif;
+  text-align: center;
+}
 .company-info-content .company-rate {
   margin-bottom: 10px;
 }
@@ -324,11 +330,15 @@
   font-family: 'Graphik Medium', sans-serif;
 }
 
-.w-92 {
+.w-92,
+.w-91{
   display: inline-block;
   max-width: 92%;
   word-wrap: break-word;
   vertical-align: middle;
+}
+.w-91{
+  width: 91%;
 }
 
 .company-info-content .company-notes {
