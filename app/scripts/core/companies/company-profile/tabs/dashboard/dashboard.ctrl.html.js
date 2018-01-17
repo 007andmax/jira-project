@@ -78,6 +78,13 @@
           return text.trim().split(' ').join('_').toUpperCase();
         }
 
+        $scope.setClientType = function(type) {
+          if(type) {
+            $scope.companyInfo.clientType = type;
+            $scope.save()
+          }
+        };
+
         $scope.openWorkingDayEditFields = function () {
           $scope.showWorkingDaysEditFields = true;
           getCorrectWorkingTime();

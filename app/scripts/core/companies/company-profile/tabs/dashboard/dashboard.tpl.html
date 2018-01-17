@@ -55,7 +55,25 @@
              ng-mouseleave="showCompanyNameEditButton = false">
           <div class="w-92" ng-show="!showCompanyNameEditField">
             <div class="ellipsis">{{companyInfo.name}}</div>
-            <span>{{companyInfo.clientType}}</span>
+            <span>
+              <div uib-dropdown class="create-dropdown">
+              <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
+                     readonly ng-model="companyInfo.clientType">
+              <i class="icn-sm report-caret-icon"></i>
+
+              <ul class="dropdown-menu dropdown-priority" role="menu">
+
+                <li ng-repeat="type in clientTypes" ng-click="setClientType(type)">
+                  <a tabindex="-1" href="javascript:void(0)">
+                    {{ type }}
+                  </a>
+                </li>
+
+              </ul>
+
+            </div>
+            </span>
+
           </div>
           <button class="company-edit-icn company-edit-icn-sm"
                   ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
