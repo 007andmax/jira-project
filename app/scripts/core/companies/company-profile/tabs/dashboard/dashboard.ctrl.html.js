@@ -31,6 +31,13 @@
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
+
+
+        // $scope.techUsersForCompany = UsersService.getTechUsers().filter(function (user) {
+        //   return user.company.id === $scope.company.id;
+        // });
+        $scope.companyUsers = UsersService.getAllByCompanyId($scope.company.id);
+
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
         $scope.timeFormat = ['AM', 'PM'];
 
@@ -58,6 +65,7 @@
         $scope.showAddressEditFields = false;
         $scope.showWorkingDaysEditButton = false;
         $scope.showWorkingDaysEditFields = false;
+        $scope.showWorkingDaysSchedule = false;
 
 
         function closeEditFields() {
@@ -78,14 +86,20 @@
           return text.trim().split(' ').join('_').toUpperCase();
         }
 
-        $scope.setClientType = function(type) {
-          if(type) {
+        $scope.setClientType = function (type) {
+          if (type) {
             $scope.companyInfo.clientType = type;
             $scope.save()
           }
         };
 
+        $scope.openWorkingDaysSchedule = function() {
+          $scope.showWorkingDaysSchedule = !$scope.showWorkingDaysSchedule;
+          getCorrectWorkingTime();
+        };
+
         $scope.openWorkingDayEditFields = function () {
+          $scope.showWorkingDaysSchedule = false;
           $scope.showWorkingDaysEditFields = true;
           getCorrectWorkingTime();
         };
@@ -98,14 +112,15 @@
         $scope.saveWorkingHours = function () {
           $scope.companyInfo.workingDays = [];
           for (var i = 0; i < 7; i++) {
-            if($scope.workingDays[i].isDayOff || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
-              var day = {
+            var day = {};
+            if ($scope.workingDays[i].isDayOff || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+              day = {
                 dayOfWeek: $scope.workingDays[i].dayOfWeek,
                 startTime: 0,
                 endTime: 0
               }
             } else {
-              var day = {
+              day = {
                 dayOfWeek: $scope.workingDays[i].dayOfWeek,
                 startTime: gotSecondFromTimeAndFormatObject($scope.workingDays[i].startTime, $scope.workingDays[i].startTimeFormat),
                 endTime: gotSecondFromTimeAndFormatObject($scope.workingDays[i].endTime, $scope.workingDays[i].endTimeFormat)
@@ -136,7 +151,7 @@
               startTimeFormat: getTimeFormat($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
               endTime: timeFormatter($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
               endTimeFormat: getTimeFormat($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
-              isDayOff: ($scope.companyInfo.workingDays.length>0 && $scope.companyInfo.workingDays[i].startTime >0 && $scope.companyInfo.workingDays[i].endTime > 0) ? false : true
+              isDayOff: ($scope.companyInfo.workingDays.length > 0 && $scope.companyInfo.workingDays[i].startTime > 0 && $scope.companyInfo.workingDays[i].endTime > 0) ? false : true
             };
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
@@ -152,7 +167,7 @@
             var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
             return hoursToReturn + ':' + minutesToreturn;
           } else {
-            return '00' + ':' + '00'
+            return '00' + ':' + '00';
           }
         }
 
@@ -169,6 +184,19 @@
             return 'AM';
           }
         }
+
+        $scope.changePrimaryContact = function(user) {
+          CompaniesService.changePrimaryContact(user.id, function(resp) {
+            if(resp) {
+              console.log(resp);
+            }
+          })
+        };
+
+        $scope.saveNewPrimaryContact = function(user, form) {
+          $scope.changePrimaryContact(user);
+          $scope.checkingFormAndSave(form);
+        };
 
         $scope.checkingFormAndSave = function (form) {
           if (form.$valid) {
@@ -288,11 +316,13 @@
         };
 
         $scope.getFullName = function (client) {
-          var isAllSpaces = client.lastName === "    ";
-          if (client.lastName && !isAllSpaces) {
-            return client.firstName + ' ' + client.lastName;
-          } else {
-            return client.firstName;
+          if (client) {
+            var isAllSpaces = client.lastName === "    ";
+            if (client.lastName && !isAllSpaces) {
+              return client.firstName + ' ' + client.lastName;
+            } else {
+              return client.firstName;
+            }
           }
         };
 
@@ -305,6 +335,16 @@
         $scope.setCompanyReputation = function (value) {
           $scope.companyInfo.reputation = value;
           $scope.save();
+        };
+
+        $scope.getUserObjByID = function (userId) {
+          if (!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if (user) {
+            return user;
+          }
         };
 
         $scope.openMapModal = function () {
