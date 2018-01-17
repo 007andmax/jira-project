@@ -5,9 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService ) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService ) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -55,7 +55,7 @@
 
           $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
             $scope.companyInfo.contacts[0].subscription.invoice &&
-            UsersService.getAllByCompanyId(companyId).filter(function (user) {
+            UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
               return user.subscription.invoice;
             }).length <= 1;
 
