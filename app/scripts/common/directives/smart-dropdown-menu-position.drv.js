@@ -37,6 +37,14 @@
               serviceDropdownMenu.css({'bottom': ''});
             }
 
+          } else if(attrs.smartDropdownMenuPosition === 'user-notification'){
+            if((winHeight - position) < 250) {
+              d.css({'top': 'auto'});
+              d.css({'bottom': '100%'});
+            } else {
+              d.css({'top': ''});
+              d.css({'bottom': ''});
+            }
           } else if(parentElement ) {
             // if(!d.hasClass('ng-hide')) {
             //   parentElement.css({'overflow': 'visible'});
@@ -56,7 +64,7 @@
               d.css({'max-height': '160px'});
               parentElement.css({'overflow': 'hidden'});
             }
-          } else {
+          }  else {
             if((winHeight - position) < 250) {
               d.css({'top': 'auto'});
               d.css({'bottom': '100%'});
