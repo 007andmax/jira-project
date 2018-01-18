@@ -112,6 +112,7 @@
   padding: 18px 15px;
   background-color: #fff;
   cursor: auto !important;
+  position: relative;
 }
 
 .qt-list .list-heading .sort-icon.icn-collapse {
@@ -329,25 +330,29 @@
   padding: 10px;
 }
 
-.qt-users {
-  padding: 25px;
+.users-bg{
   background-color: #F3F7F9;
   color: #364656 !important;
-  position: relative;
+  padding: 10px 25px 70px;
+  min-height: calc(100vh - 78px);
 }
 
-.qt-users li.list-heading {
+.users-bg h3 {
+  margin: 0;
+}
+
+.users-bg li.list-heading {
   background-color: #F3F7F9;
 }
 
-.qt-users li.list-heading [class*='col-md-'] {
+.users-bg li.list-heading [class*='col-md-'] {
   text-transform: uppercase;
   font-size: 11px;
   font-family: 'Graphik Medium', sans-serif;
   color: #364656 !important;
 }
 
-.qt-users > li {
+.users-bg > li {
   cursor: auto;
   margin-bottom: 8px;
   border-radius: 5px;
@@ -366,8 +371,47 @@
   border-radius: 5px;
   position: absolute;
   right: 30px;
-  top: 30px;
   box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
+  z-index: 1;
+  top: 30px;
+}
+
+.user-list-more .dropdown-menu li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.user-list-more .dropdown-menu li:before {
+  position: absolute;
+  content: '';
+  width: 16px;
+  height: 16px;
+  left: 15px;
+  top: 10px;
+}
+
+.user-list-more .dropdown-menu li:first-child:before {
+  background-image: url(../images/new-icons/company-edit.svg);
+}
+
+.user-list-more .dropdown-menu li:nth-child(2):before {
+  background-image: url(../images/new-icons/user-send-email.svg);
+}
+
+.user-list-more .dropdown-menu li:nth-child(3):before {
+  background-image: url(../images/new-icons/archive-user.svg);
+}
+
+.user-list-more .dropdown-menu li:last-child:before {
+  background-image: url(../images/new-icons/primary-user.svg);
+}
+
+.user-primary {
+  background-image: url(../images/new-icons/primary-user.svg);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .selected-users-edit p {
@@ -382,7 +426,6 @@
 .qt-users li.list-heading {
   padding: 20px 15px 5px;
   min-height: 1px;
-
 }
 
 .qt-users li.list-heading .checkbox {
@@ -400,7 +443,7 @@
   cursor: pointer;
 }
 
-#has-invoice-updates1 {
+.users-bg #has-invoice-updates1 {
   position: relative;
   border-radius: 3px;
   background-color: #E8F6FE;
@@ -1213,7 +1256,6 @@ Devices tab
   width: calc(100% - 120px);
   white-space: nowrap;
 }
-
 
 .qt-billable-clients .col-2 div {
   display: inline-block;

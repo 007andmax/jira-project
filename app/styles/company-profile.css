@@ -1,8 +1,7 @@
 .company-info-wrapper {
   background-color: #fff;
   border-radius: 3px;
-  padding: 45px 30px;
-  margin-bottom: 25px;
+  padding: 15px 0 10px;
 }
 
 .company-info-wrapper input,
@@ -190,24 +189,25 @@
 .company-info-content .company-name div .ellipsis {
   display: inline-block;
   vertical-align: middle;
-  max-width: 74%;
+  max-width: 76%;
 }
 
 .company-info-content .company-name .dropdown {
   font-size: 12px;
   border-radius: 3px;
   background-color: #ffe3af;
-  margin-left: 10px;
   vertical-align: middle;
   display: inline-block;
   padding: 0;
   width: 54px;
 }
-.company-info-content .company-name .dropdown input{
+
+.company-info-content .company-name .dropdown input {
   border: none;
   font-family: 'Graphik Regular', sans-serif;
   text-align: center;
 }
+
 .company-info-content .company-rate {
   margin-bottom: 10px;
 }
@@ -251,15 +251,18 @@
   top: 3px;
 
 }
-.company-schedule-list{
+
+.company-schedule-list {
   list-style: none;
   padding: 0;
   margin-top: 10px;
 }
-.company-schedule-list li div{
+
+.company-schedule-list li div {
   width: 100px;
   display: inline-block;
 }
+
 .company-info-content a.company-link {
   color: #16A4FA;
   font-size: 12px;
@@ -324,6 +327,7 @@
   color: #9ca5b6;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin: 10px 0;
 }
 
 .company-info-content p {
@@ -331,13 +335,14 @@
 }
 
 .w-92,
-.w-91{
+.w-91 {
   display: inline-block;
   max-width: 92%;
   word-wrap: break-word;
   vertical-align: middle;
 }
-.w-91{
+
+.w-91 {
   width: 91%;
 }
 

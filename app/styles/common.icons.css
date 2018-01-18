@@ -542,7 +542,9 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   right: -65px;
   top: 17px;
 }
-
+.icn-label-save-dashboard{
+  background-position: -1702px -100px;
+}
 a:hover > .icn-label-save, a:active > .icn-label-save {
   background-position: -3286px 0;
 }
