@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" style="display: block" >
+<div role="tabpanel" class="tab-pane" style="display: block" ng-if="PermissionsService.isAllowed('VIEW_USERS')">
 
   <ul class="qt-list qt-users" style="margin-bottom: 75px; margin-top: 70px">
     <div class="selected-users-edit">
@@ -45,7 +45,7 @@
     </li>
 
     <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
-        ng-controller="quicktech.core.companies.usersTabCtrl"
+        ng-controller="quicktech.core.companies.usersTabCtrl" ng-if="!user.deletedAt"
         show-model-element="{{ 'show-user-on-save-' + user.id }}">
 
       <div class="users-list-wrapper">
@@ -238,6 +238,7 @@
   ga('send', 'pageview');
 
 </script>
+
 
 
 
