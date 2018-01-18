@@ -5,9 +5,11 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService',
+      'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.PermissionsService', 'UsersService', '$location',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService ) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
+                PermissionsService, UsersService, $location ) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -323,14 +325,15 @@
         };
 
         $scope.getOpenedTab = function() {
-          //return $state.current.params.tabName;
-          return companyProfileSharedState.tabName
+          return $location.search().tabName
         };
 
-        $scope.$watch('companyProfileSharedState.tabName', function(data) {
-          console.log(data);
-          $state.go('companyProfile', { companyId: $scope.company.id, tabName: data });
-        })
+
+
+        // $scope.$watch('companyProfileSharedState.tabName', function(data) {
+        //   console.log(data);
+        //   $state.go('companyProfile', { companyId: $scope.company.id, tabName: data });
+        // })
 
 
       }]);

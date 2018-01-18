@@ -550,11 +550,11 @@
 
         };
 
-        $scope.openCompanyProfileTab = function(tabName) {
-          if(tabName) {
-            companyProfileSharedState.tabName = tabName;
-          }
-        };
+        // $scope.openCompanyProfileTab = function(tabName) {
+        //   if(tabName) {
+        //     companyProfileSharedState.tabName = tabName;
+        //   }
+        // };
 
         $scope.openTutorial = function (type) {
           window.open('/tutorials/pdf/' + type + '.pdf');
