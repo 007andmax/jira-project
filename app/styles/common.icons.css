@@ -529,7 +529,8 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   height: 10px;
 }
 
-.icn-label-save-left-panel {
+.icn-label-save-left-panel,
+.icn-label-save{
   background-position: -1739px -100px;
   width: 14px;
   height: 10px;

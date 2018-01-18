@@ -515,6 +515,148 @@
         </div>
       </div>
     </div>
+
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'companyProfile' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
+        </div>
+        <span class="left-panel-full__head--header">Companies</span>
+      </div>
+
+      <div class="center-category collapsed-nav nano-content company-dashboard-left-panel">
+        <div class="left-panel-title font-medium" ui-sref="companyProfile({ tabName: 'dashboard' })">
+            Dashboard
+        </div>
+
+        <div class="left-panel-hide-filter">
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="CompanyProfileTicketsPage = !CompanyProfileTicketsPage">
+            Tickets
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileTicketsPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileTicketsPage">
+            <div class="center-category__category sked">
+              All tickets
+            </div>
+            <div class="center-category__category sked">
+              Unassigned
+            </div>
+            <div class="center-category__category sked">
+              In progress
+            </div>
+            <div class="center-category__category sked">
+              On Hold
+            </div>
+            <div class="center-category__category sked">
+              Completed
+            </div>
+            <div class="center-category__category sked">
+              By Users - search
+            </div>
+            <div class="center-category__category sked">
+              By Tech - search
+            </div>
+          </div>
+        </div>
+
+        <div class="left-panel-hide-filter border-bottom">
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ui-sref="companyProfile({ tabName: 'users' })">
+            Users
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileUsersPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileUsersPage">
+            <div class="center-category__category sked">
+              All users
+            </div>
+            <div class="center-category__category sked">
+             Managers
+            </div>
+            <div class="center-category__category sked">
+              Clients
+            </div>
+          </div>
+        </div>
+
+        <div class="left-panel-hide-filter">
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="CompanyProfileDevicesPage = !CompanyProfileDevicesPage">
+            Devices
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileDevicesPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileDevicesPage">
+            <div class="center-category__category sked">
+              All devices
+            </div>
+            <div class="center-category__category sked">
+              Workstations
+            </div>
+            <div class="center-category__category sked">
+              Servers
+            </div>
+            <div class="center-category__category sked">
+              Devices
+            </div>
+          </div>
+        </div>
+
+        <div class="left-panel-title font-medium" >
+          Network Scan
+        </div>
+
+        <div class="left-panel-hide-filter">
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="CompanyProfilePasswordManagerPage = !CompanyProfilePasswordManagerPage">
+            Password Manager
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfilePasswordManagerPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfilePasswordManagerPage">
+            <div class="center-category__category sked">
+              All Managed Passwords
+            </div>
+            <div class="center-category__category sked">
+              By Device - Search
+            </div>
+            <div class="center-category__category sked">
+              By User - Possible search or lis
+            </div>
+          </div>
+        </div>
+
+        <div class="left-panel-hide-filter">
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="CompanyProfileProductsPage = !CompanyProfileProductsPage">
+            Products
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileProductsPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileProductsPage">
+            <div class="center-category__category sked">
+              List of products sold
+            </div>
+          </div>
+        </div>
+
+        <div class="left-panel-hide-filter">
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="CompanyProfileInvoicesPage = !CompanyProfileInvoicesPage">
+            Invoices
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileInvoicesPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileInvoicesPage">
+            <div class="center-category__category sked">
+              List of invoices
+            </div>
+          </div>
+        </div>
+
+        <div class="left-panel-title font-medium" >
+          Contracts
+        </div>
+
+      </div>
+    </div>
+
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'users' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">

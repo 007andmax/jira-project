@@ -1,3 +1,310 @@
+.company-info-wrapper {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 45px 30px;
+  margin-bottom: 25px;
+}
+
+.company-info-wrapper input,
+.company-info-wrapper button.form-control-number {
+  height: 25px;
+  background-color: transparent;
+  font-size: 13px;
+  padding: 0 5px;
+}
+
+.company-logo {
+  max-width: 160px;
+  max-height: 160px;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.company-info-content .form-group {
+  position: relative;
+}
+
+.company-info-content .form-group .icn-remove-old,
+.company-info-content .form-group .report-caret-icon {
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  cursor: pointer;
+}
+
+.company-info-content .form-group .report-caret-icon {
+  right: 7px;
+  top: 9px;
+  pointer-events: none;
+}
+
+.company-info-content .form-row .form-group {
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.company-info-content .form-control-time-zone ~ .erase {
+  top: 0;
+  right: 5px;
+}
+
+.company-info-content .form-control-number {
+  padding: 0 20px 0 10px !important;
+}
+
+.company-info-content .phone-number-form .report-caret-icon {
+  right: 5px;
+  top: 10px;
+}
+
+.company-logo img {
+  width: 100%;
+}
+
+.company-profile-content .close-btn {
+  float: right;
+}
+
+.company-rate-dashboard {
+  display: inline-block;
+}
+
+.star-icn {
+  background: url("../images/new-icons/star-icn-sprite.png") no-repeat -15px 0;
+  width: 13px;
+  height: 13px;
+  display: block;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.star-icn:hover {
+  background-position: -30px 0;
+}
+
+.star-icn.active {
+  background-position: 0 0;
+
+}
+
+.company-logo-icn,
+.company-download-icn,
+.company-edit-icn,
+.company-remove-icn {
+  position: relative;
+  display: inline-block;
+  background-color: #EFF9FF;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  vertical-align: middle;
+}
+
+.company-download-icn,
+.company-edit-icn,
+.company-remove-icn {
+  width: 32px;
+  height: 32px;
+  margin-left: 15px;
+  transition: all .3s;
+}
+
+.company-edit-icn-sm,
+.company-remove-icn-sm {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.company-remove-icn-sm {
+  margin-left: 15px;
+}
+
+.company-download-icn:hover,
+.company-edit-icn:hover,
+.company-remove-icn:hover {
+  background-color: #9CC8E1;
+}
+
+.company-download-icn:after,
+.company-edit-icn:after,
+.company-remove-icn:after {
+  position: absolute;
+  content: "";
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  top: calc(50% - 8px);
+  left: calc(50% - 8px);
+}
+
+.company-download-icn:after {
+  background-image: url(../images/new-icons/company-download.svg);
+}
+
+.company-edit-icn:after {
+  background-image: url(../images/new-icons/company-edit.svg);
+}
+
+.company-remove-icn:after {
+  background-image: url(../images/new-icons/company-remove.svg);
+}
+
+.company-logo-icn {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.company-logo-icn:hover {
+  background-color: #9CC8E1;
+}
+
+.company-logo-icn:after {
+  position: absolute;
+  content: '';
+  background-image: url(../images/new-icons/company-dashboard-photo.svg);
+  left: 6px;
+  top: 6px;
+  width: 12px;
+  height: 11px;
+}
+
+.company-info-content {
+  margin-top: 25px;
+  color: #4f5f79;
+  font-size: 13px;
+}
+
+.company-info-content .company-name {
+  color: #364656;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: 'Graphik Medium', sans-serif;
+}
+
+.company-info-content .company-name div .ellipsis {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 74%;
+}
+
+.company-info-content .company-name .dropdown {
+  font-size: 12px;
+  border-radius: 3px;
+  background-color: #ffe3af;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  padding: 0;
+  width: 54px;
+}
+.company-info-content .company-name .dropdown input{
+  border: none;
+  font-family: 'Graphik Regular', sans-serif;
+  text-align: center;
+}
+.company-info-content .company-rate {
+  margin-bottom: 10px;
+}
+
+.company-info-content .company-rate span {
+  cursor: pointer;
+}
+
+.company-info-content .company-address {
+  font-family: 'Graphik Medium', sans-serif;
+  margin-bottom: 10px;
+}
+
+.company-info-content .company-location,
+.company-info-content .company-schedule {
+  padding-left: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.company-info-content .company-location:after,
+.company-info-content .company-schedule:after {
+  position: absolute;
+  content: '';
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+}
+
+.company-info-content .company-location:after {
+  background-image: url(../images/new-icons/company-map.svg);
+  width: 12px;
+  height: 15px;
+  top: 5px;
+}
+
+.company-info-content .company-schedule:after {
+  background-image: url(../images/new-icons/company-schedule.svg);
+  top: 3px;
+
+}
+.company-schedule-list{
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+.company-schedule-list li div{
+  width: 100px;
+  display: inline-block;
+}
+.company-info-content a.company-link {
+  color: #16A4FA;
+  font-size: 12px;
+  text-decoration: underline;
+  transition: all .3s
+}
+
+.company-info-content a.company-link:hover {
+  text-decoration: none;
+}
+
+.company-info-content .company-schedule i {
+  margin-bottom: 2px;
+}
+
+.company-schedule-edit {
+  padding: 0;
+  list-style: none;
+}
+
+.company-schedule-edit input {
+  display: inline-block;
+  width: 20%;
+}
+
+.company-schedule-edit .control {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.company-schedule-edit .dropdown-menu {
+  width: 18% !important;
+  min-width: 18%;
+  text-align: center;
+  font-size: 12px;
+}
+
+.company-schedule-edit .dropdown-menu a {
+  padding: 0 5px;
+}
+
+.mb {
+  margin-bottom: 10px;
+}
+
 .company-profile-content .company-profile-header {
   float: left;
   width: 100%;
@@ -8,6 +315,52 @@
   padding: 10px;
   opacity: 1;
   transition: height linear 0.5s, opacity linear 0.7s;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.company-profile-content .company-info-subtitle {
+  font-size: 10px;
+  color: #9ca5b6;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.company-info-content p {
+  font-family: 'Graphik Medium', sans-serif;
+}
+
+.w-92,
+.w-91{
+  display: inline-block;
+  max-width: 92%;
+  word-wrap: break-word;
+  vertical-align: middle;
+}
+.w-91{
+  width: 91%;
+}
+
+.company-info-content .company-notes {
+  font-family: 'Graphik Regular', sans-serif;
+  padding-left: 20px;
+  position: relative;
+}
+
+.company-info-content .company-notes textarea {
+  height: 120px;
+  background: transparent;
+  padding: 5px;
+}
+
+.company-info-content .company-notes:after {
+  position: absolute;
+  content: '';
+  width: 12px;
+  height: 15px;
+  top: 4px;
+  left: 0;
+  background-image: url(../images/new-icons/company-note.svg);
 }
 
 .company-profile-header .company-new-cover-wrapper {
@@ -27,6 +380,7 @@
   padding: 5px 0;
   width: 230px;
 }
+
 @media (max-width: 1366px) {
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
@@ -172,7 +526,7 @@
 }
 
 .company-profile-header .company-map-wrapper {
-  width: calc(100% - 550px);
+  width: calc(100% - 200px);
   height: 300px;
   float: left;
   position: relative;
@@ -434,6 +788,37 @@
   line-height: 0.2;
 }
 
-/*.settings-main-wrapper .company-address-list .create-user-container{*/
-/*margin-bottom: 100px;*/
-/*}*/
+.company-dashboard-left-panel .left-panel-title,
+.company-dashboard-left-panel .left-panel-hide-filter {
+  margin: 10px 25px;
+  padding: 0;
+  border: none;
+  text-transform: capitalize;
+  width: 100%;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.company-dashboard-left-panel .left-panel-title:hover {
+  color: #fff;
+}
+
+.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title {
+  margin: 0;
+}
+
+.company-dashboard-left-panel .filter-left-panel {
+  padding: 0;
+  height: auto !important;
+}
+
+.company-dashboard-left-panel .center-category__category {
+  padding: 0 0 0 10px;
+  height: auto !important;
+}
+
+.company-dashboard-left-panel .border-bottom {
+  border-bottom: 2px solid #424F66;
+  padding-bottom: 15px;
+}
+

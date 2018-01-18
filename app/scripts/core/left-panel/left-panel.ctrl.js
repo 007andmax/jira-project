@@ -14,13 +14,15 @@
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
           companiesSharedState = SharedStateService.getSharedState('companiesHeader'),
           passwordSharedState = SharedStateService.getSharedState('passwordsHeader'),
-          ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
+          ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
+          companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
         $scope.passwordSharedState = passwordSharedState;
         $scope.ticketsSharedState = ticketsSharedState;
+        $scope.companyProfileSharedState = companyProfileSharedState;
         $scope.clientCompanies = CompaniesService.getClientCompanies;
         $scope.allUsers = UsersService.getAllUsers;
         $scope.clientUsers = UsersService.getClientUsers;
@@ -50,6 +52,13 @@
         $scope.dropdownByIndustryCompanyPage = false;
         $scope.dropdownByIndustryUserPage = false;
         $scope.dropdownByCompanyUserPage = false;
+
+        $scope.CompanyProfileTicketsPage = false;
+        $scope.CompanyProfileUsersPage = false;
+        $scope.CompanyProfileDevicesPage = false;
+        $scope.CompanyProfilePasswordManagerPage = false;
+        $scope.CompanyProfileProductsPage = false;
+        $scope.CompanyProfileInvoicesPage = false;
 
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
@@ -539,6 +548,12 @@
 
         };
 
+        // $scope.openCompanyProfileTab = function(tabName) {
+        //   if(tabName) {
+        //     companyProfileSharedState.tabName = tabName;
+        //   }
+        // };
+
         $scope.openTutorial = function (type) {
           window.open('/tutorials/pdf/' + type + '.pdf');
         };
@@ -858,9 +873,11 @@
             return 'tickets';
           } else if (url.indexOf('drafts') > -1) {
             return 'inbox';
-          } else if (url.indexOf('companies') > -1 || url.indexOf('companyProfile') > -1) {
+          } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('users') > -1) {
+          } else if ( url.indexOf('companyProfile') > -1) {
+            return 'companyProfile';
+          }else if (url.indexOf('users') > -1) {
             return 'users';
           } else if (url.indexOf('accounting') > -1) {
             return 'billing';
