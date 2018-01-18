@@ -280,6 +280,7 @@
 
               <input type="text" class="form-control pointer" ng-model="companyInfo.clientIndustry.name" name="industry"
                      ng-maxlength="40"
+                     placeholder="Select Industry"
                      custom-style="{'width':'100%'}"
                      uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
                      autocomplete="off" qt-typeahead-async-show-on-focus>
