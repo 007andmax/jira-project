@@ -13,6 +13,7 @@
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var availableViews = ['list', 'grid'];
+        var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -55,7 +56,8 @@
 
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
-            $state.go('companyProfile', { companyId: company.id, tabName: tabName });
+            $state.go('companyProfile', { companyId: company.id, tabName: 'dashboadr' });
+            companyProfileSharedState.tabName = 'dashboard';
           }
         };
 

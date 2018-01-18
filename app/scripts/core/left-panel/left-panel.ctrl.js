@@ -14,13 +14,15 @@
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
           companiesSharedState = SharedStateService.getSharedState('companiesHeader'),
           passwordSharedState = SharedStateService.getSharedState('passwordsHeader'),
-          ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
+          ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
+          companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
         $scope.passwordSharedState = passwordSharedState;
         $scope.ticketsSharedState = ticketsSharedState;
+        $scope.companyProfileSharedState = companyProfileSharedState;
         $scope.clientCompanies = CompaniesService.getClientCompanies;
         $scope.allUsers = UsersService.getAllUsers;
         $scope.clientUsers = UsersService.getClientUsers;
@@ -546,6 +548,12 @@
             $state.go(state, stateParams);
           }
 
+        };
+
+        $scope.openCompanyProfileTab = function(tabName) {
+          if(tabName) {
+            companyProfileSharedState.tabName = tabName;
+          }
         };
 
         $scope.openTutorial = function (type) {

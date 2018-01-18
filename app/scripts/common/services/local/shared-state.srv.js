@@ -23,6 +23,9 @@
         companiesHeader: {
           filter: {}
         },
+        companyProfile: {
+          tabName: ''
+        },
         usersHeader: {
           filter: {
             companyId: ''

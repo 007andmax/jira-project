@@ -16,6 +16,8 @@
         UserNotificationService.show('Loading...');
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
+        $scope.companyProfileSharedState = companyProfileSharedState;
 
         $scope.tabName = $state.params.tabName;
         $scope.PermissionsService = PermissionsService;
@@ -321,10 +323,14 @@
         };
 
         $scope.getOpenedTab = function() {
+          //return $state.current.params.tabName;
+          return companyProfileSharedState.tabName
+        };
 
-          return $state.current.params.tabName;
-
-        }
+        $scope.$watch('companyProfileSharedState.tabName', function(data) {
+          console.log(data);
+          $state.go('companyProfile', { companyId: $scope.company.id, tabName: data });
+        })
 
 
       }]);
