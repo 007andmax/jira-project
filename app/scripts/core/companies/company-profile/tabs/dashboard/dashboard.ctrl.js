@@ -28,6 +28,7 @@
           FULLY_MANAGED: 'Fully managed'
         };
 
+
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });

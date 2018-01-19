@@ -112,7 +112,7 @@
         <div class="company-address clearfix" ng-mouseover="showAddressEditButton = true"
              ng-mouseleave="showAddressEditButton = false">
           <p class="w-92" ng-show="!showAddressEditFields">
-            {{companyInfo.addresses[0].addressWithSuitNumberAndPostalCode}}
+            {{companyInfo.addresses[0].address}}
           </p>
           <button style="vertical-align: top;" class="company-edit-icn company-edit-icn-sm" ng-show="showAddressEditButton && !showAddressEditFields"
                   ng-click="showAddressEditFields = true" uib-tooltip="Edit"></button>
