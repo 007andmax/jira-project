@@ -79,13 +79,13 @@
             });
           }
 
-          if ($scope.companyInfo.clientType) {
-            $scope.companyInfo.clientType = userReadable($scope.companyInfo.clientType);
-          }
+          // if ($scope.companyInfo.clientType) {
+          //   $scope.companyInfo.clientType = userReadable($scope.companyInfo.clientType);
+          // }
 
-          if ($scope.companyInfo.serviceType) {
-            $scope.companyInfo.serviceType = userReadable($scope.companyInfo.serviceType);
-          }
+          // if ($scope.companyInfo.serviceType) {
+          //   $scope.companyInfo.serviceType = userReadable($scope.companyInfo.serviceType);
+          // }
 
           if ($scope.company.defaultPaymentMethod) {
             $scope.companyInfo.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);

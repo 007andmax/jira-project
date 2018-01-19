@@ -10,6 +10,7 @@
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal) {
 
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+        $scope.daysOfWeek = daysOfWeek;
         $scope.daysOfWeekMap = {
           MONDAY: 'Monday',
           TUESDAY: 'Thursday',
@@ -28,6 +29,7 @@
           FULLY_MANAGED: 'Fully managed'
         };
 
+        $timeout(getCorrectWorkingTime(), 1000);
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
@@ -36,6 +38,11 @@
         $scope.companyUsers = UsersService.getAllByCompanyId($scope.company.id);
 
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
+        $scope.clientTypesMap = {
+          CLIENT: 'Client',
+          LEAD: 'Lead',
+          VENDOR: 'Vendor'
+        };
         $scope.timeFormat = ['AM', 'PM'];
 
         $scope.techUsers = UsersService.getTechUsers;
@@ -86,6 +93,11 @@
             $scope[key] = true;
             $scope.isAnyEditFormOpen = true;
           }
+        };
+
+        $scope.getTodayDayOfWeek = function() {
+          var d = new Date();
+          return d.getDay();
         };
 
         function toEnum(text) {
@@ -155,11 +167,11 @@
           for (var i = 0; i < 7; i++) {
             var day = {
               dayOfWeek: daysOfWeek[i],
-              startTime: timeFormatter($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
-              startTimeFormat: getTimeFormat($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
-              endTime: timeFormatter($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
-              endTimeFormat: getTimeFormat($scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
-              isDayOff: ($scope.companyInfo.workingDays.length > 0 && $scope.companyInfo.workingDays[i].startTime > 0 && $scope.companyInfo.workingDays[i].endTime > 0) ? false : true
+              startTime: timeFormatter($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
+              startTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
+              endTime: timeFormatter($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
+              endTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
+              isDayOff: ($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 && $scope.companyInfo.workingDays[i].startTime > 0 && $scope.companyInfo.workingDays[i].endTime > 0) ? false : true
             };
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
