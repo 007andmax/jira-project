@@ -57,7 +57,7 @@
             <div class="ellipsis" ng-show="!showCompanyNameEditField">{{companyInfo.name}}</div>
             <button class="company-edit-icn company-edit-icn-sm"
                     ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
-                    ng-click="showCompanyNameEditField = true" uib-tooltip="Edit"></button>
+                    ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"></button>
             <div uib-dropdown class="create-dropdown pull-right">
               <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
                      readonly ng-model="companyInfo.clientType"
@@ -115,7 +115,7 @@
             {{companyInfo.addresses[0].address}}
           </p>
           <button style="vertical-align: top;" class="company-edit-icn company-edit-icn-sm" ng-show="showAddressEditButton && !showAddressEditFields"
-                  ng-click="showAddressEditFields = true" uib-tooltip="Edit"></button>
+                  ng-click="openEditForm('showAddressEditFields')" uib-tooltip="Edit"></button>
           <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showAddressEditFields"
              ng-click="cancelEdit()"
              uib-tooltip="Cancel"></i>
@@ -213,7 +213,7 @@
               <div class="w-92">Telephone</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showPhoneEditButton && !showPhoneNumbersEditFields"
-                      ng-click="showPhoneNumbersEditFields = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showPhoneNumbersEditFields')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showPhoneNumbersEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
@@ -235,7 +235,7 @@
               <div class="w-92">Email Domain</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDomainEditButton && !showDomainEditFields"
-                      ng-click="showDomainEditFields = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showDomainEditFields')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showDomainEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
@@ -265,7 +265,7 @@
               <div class="w-92">Industry</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showIndustryEditDutton && !showIndustryEditFields"
-                      ng-click="showIndustryEditFields = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showIndustryEditFields')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showIndustryEditFields"
                  ng-click="cancelEdit()"
@@ -296,7 +296,7 @@
               <div class="w-92">Service type</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showServiceTypeEditButton && !showServiceTypeEditField"
-                      ng-click="showServiceTypeEditField = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showServiceTypeEditField')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showServiceTypeEditField" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
@@ -322,7 +322,7 @@
               <div class="w-92">Contact person</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showContactPersonEditButton && !showContactPersonEditFields"
-                      ng-click="showContactPersonEditFields = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showContactPersonEditFields')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showContactPersonEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
@@ -354,7 +354,7 @@
                  ng-mouseleave="showLedByEditButton = false">
               <div class="w-92">Lead By</div>
               <button class="company-edit-icn company-edit-icn-sm" ng-show="showLedByEditButton && !showLedByEditField"
-                      ng-click="showLedByEditField = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showLedByEditField')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showLedByEditField"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
@@ -384,7 +384,7 @@
               <div class="w-92">Notes</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showNoteEditButton && !showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0"
-                      ng-click="showNoteEditField = true" uib-tooltip="Edit"></button>
+                      ng-click="openEditForm('showNoteEditField')" uib-tooltip="Edit"></button>
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showNoteEditField"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
@@ -401,7 +401,7 @@
               <div class="word-count">{{ descriptionMaxLength - companyInfo.description.length }}</div>
             </div>
 
-            <a class="company-link" href="" ng-click="showNoteEditField = true"
+            <a class="company-link" href="" ng-click="openEditForm('showNoteEditField')"
                ng-hide="(companyInfo.description && companyInfo.description.length && companyInfo.description.length>0) || showNoteEditField ">Add
               New Note</a>
           </div>

@@ -33,10 +33,6 @@
           $scope.industries = resp;
         });
 
-
-        // $scope.techUsersForCompany = UsersService.getTechUsers().filter(function (user) {
-        //   return user.company.id === $scope.company.id;
-        // });
         $scope.companyUsers = UsersService.getAllByCompanyId($scope.company.id);
 
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
@@ -68,6 +64,8 @@
         $scope.showWorkingDaysEditFields = false;
         $scope.showWorkingDaysSchedule = false;
 
+        $scope.isAnyEditFormOpen = false;
+
 
         function closeEditFields() {
           $scope.showPhoneNumbersEditFields = false;
@@ -80,8 +78,15 @@
           $scope.showLedByEditField = false;
           $scope.showAddressEditFields = false;
 
+          $scope.isAnyEditFormOpen = false;
         }
 
+        $scope.openEditForm = function(key) {
+          if(!$scope.isAnyEditFormOpen) {
+            $scope[key] = true;
+            $scope.isAnyEditFormOpen = true;
+          }
+        };
 
         function toEnum(text) {
           return text.trim().split(' ').join('_').toUpperCase();
@@ -102,11 +107,13 @@
         $scope.openWorkingDayEditFields = function () {
           $scope.showWorkingDaysSchedule = false;
           $scope.showWorkingDaysEditFields = true;
+          $scope.isAnyEditFormOpen = true;
           getCorrectWorkingTime();
         };
 
         $scope.cancelWorkingDaysEdit = function () {
           $scope.showWorkingDaysEditFields = false;
+          $scope.isAnyEditFormOpen = false;
           $scope.workingDays = angular.copy($scope.workingDayReserved);
         };
 
