@@ -281,6 +281,7 @@
 .company-schedule-edit {
   padding: 0;
   list-style: none;
+  cursor: default;
 }
 
 .company-schedule-edit input {

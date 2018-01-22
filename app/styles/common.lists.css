@@ -448,6 +448,7 @@
   border-radius: 3px;
   background-color: #E8F6FE;
   padding: 4px 30px 4px 4px;
+  cursor: pointer;
 }
 
 #has-invoice-updates1 i {

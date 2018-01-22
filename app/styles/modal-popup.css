@@ -181,7 +181,17 @@
 .create-window .general .company-window .company-steps {
   margin-bottom: 30px;
 }
-
+.modal-create-ticket .create-window .general .company-window .company-schedule-edit{
+  margin-bottom: 20px;
+}
+.modal-create-ticket .create-window .general .company-window .company-schedule-edit .control{
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+.modal-create-ticket .create-window .general .company-window .company-schedule-edit .col-md-6{
+  padding: 0;
+}
 .create-window .general .company-window .company-steps__list {
   position: relative;
   display: flex;
