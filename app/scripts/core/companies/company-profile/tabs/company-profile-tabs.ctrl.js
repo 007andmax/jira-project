@@ -131,6 +131,7 @@
 
         $scope.changeSelectedUsers = function (selectedUsers) {
           var selectUsersIds = [];
+          var selectedUsersPrimaryEmails = [];
           var selectUsersSbscr = {
             invoice: 0,
             ticket: 0,
@@ -156,6 +157,9 @@
               if (user.subscription.ticketManager) {
                 selectUsersSbscr.ticketManager++;
               }
+              if(user.primaryEmail && user.primaryEmail.length) {
+                selectedUsersPrimaryEmails.push(user.primaryEmail);
+              }
 
             }
           }
@@ -170,6 +174,7 @@
               return !user.deletedAt;
             }).length);
           $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
+          $scope.companyProfileHeader.selectedUsersPrimaryEmails = selectedUsersPrimaryEmails;
 
         };
 
@@ -198,7 +203,6 @@
               }
             }
           }
-          console.log(selectDevicesIds);
 
           if ($scope.agents) {
             for (var i = 0, len = $scope.agents.length; i < len; i++) {

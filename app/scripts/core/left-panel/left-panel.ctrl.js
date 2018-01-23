@@ -6,9 +6,10 @@
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
-      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService, CustomStorageService, UsersService, $timeout) {
+                TutorialsService, $uibModal, TicketsService, ColorsService,TagsService,
+                CustomStorageService, UsersService, $timeout, $location) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -891,6 +892,10 @@
             return undefined;
           }
         }
+
+        $scope.getOpenedUsersTab = function() {
+          return $location.search().tabName
+        };
 
       }]);
 
