@@ -15,6 +15,7 @@
         $scope.showWorkingDaysEditButton = false;
         $scope.showWorkingDaysEditFields = false;
         $scope.showWorkingDaysSchedule = false;
+        $scope.selectedContractType;
 
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeekMap = {
@@ -63,6 +64,7 @@
             // }
 
             $scope.editCompany = companyData.staticCopy();
+            getCorrectWorkingTime();
             $scope.contact = $scope.editCompany.contacts[0];
 
             if ($scope.editCompany.paymentTerms) {
@@ -120,6 +122,7 @@
             maxAgents: 0,
             removeOfflineTime: 30
           };
+          getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         } else {
           $scope.isLastInvoiceSubsciption = true;
@@ -134,6 +137,7 @@
             maxAgents: 0,
             removeOfflineTime: 30
           };
+          getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         }
 
@@ -164,22 +168,6 @@
           $scope.industries = resp;
         });
 
-        $scope.openWorkingDaysSchedule = function() {
-          $scope.showWorkingDaysSchedule = !$scope.showWorkingDaysSchedule;
-          getCorrectWorkingTime();
-        };
-
-        $scope.openWorkingDayEditFields = function () {
-          $scope.showWorkingDaysSchedule = false;
-          $scope.showWorkingDaysEditFields = true;
-          getCorrectWorkingTime();
-        };
-
-        $scope.cancelWorkingDaysEdit = function () {
-          $scope.showWorkingDaysEditFields = false;
-          $scope.workingDays = angular.copy($scope.workingDayReserved);
-        };
-
         $scope.saveWorkingHours = function () {
           $scope.editCompany.workingDays = [];
           for (var i = 0; i < 7; i++) {
@@ -201,6 +189,7 @@
             $scope.editCompany.workingDays.push(day);
           }
           $scope.showWorkingDaysEditFields = false;
+
         };
 
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
@@ -255,14 +244,13 @@
           }
         }
 
-        $scope.selectedContractType;
+
         $scope.selectContractType = function(type) {
           if($scope.selectedContractType === type) {
             $scope.selectedContractType = '';
           }else {
             $scope.selectedContractType = type;
           }
-          //console.log('$scope.selectedContractType: ', $scope.selectedContractType);
         };
 
         $scope.servicesData = ServicesService.getServicesData($scope, function () {
@@ -292,6 +280,7 @@
 
           if (form.$valid) {
             $scope.savingInProcess = true;
+            $scope.saveWorkingHours();
 
             var editCompany = angular.copy($scope.editCompany);
             var contacts = editCompany.contacts,

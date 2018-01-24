@@ -58,7 +58,7 @@
             <button class="company-edit-icn company-edit-icn-sm"
                     ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
                     ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"></button>
-            <div uib-dropdown class="create-dropdown pull-right">
+            <div uib-dropdown class="create-dropdown pull-right" ng-show="!showCompanyNameEditField">
               <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
                      readonly  value="{{clientTypesMap[companyInfo.clientType]}}"
                      ng-disabled="companyInfo.clientType.toLowerCase() === 'vendor' && companyInfo.hasProducts">

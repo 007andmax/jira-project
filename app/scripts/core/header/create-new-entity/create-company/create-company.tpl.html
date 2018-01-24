@@ -186,27 +186,10 @@
         <div style="width: 100%; height: 250px; margin-top: 15px;" map alternative-map></div>
       </div>
       <div class="col-xs-12">
-        <div class="company-schedule clearfix" ng-mouseover="showWorkingDaysEditButton = true"
-             ng-mouseleave="showWorkingDaysEditButton = false">
-          <p class="w-92" ng-click="openWorkingDaysSchedule()">Working schedule</p>
-          <i class="icn-sm report-caret-icon" ng-click="openWorkingDaysSchedule()"></i>
-          <button class="company-edit-icn company-edit-icn-sm"
-                  ng-show="showWorkingDaysEditButton && !showWorkingDaysEditFields"
-                  ng-click="openWorkingDayEditFields()" uib-tooltip="Edit">
-          </button>
-          <ul class="company-schedule-list" ng-show="showWorkingDaysSchedule && !showWorkingDaysEditFields">
-            <li ng-repeat="day in workingDays">
-              <div>{{daysOfWeekMap[day.dayOfWeek]}}:</div><span ng-show="!day.isDayOff">{{day.startTime}}</span> <span ng-show="!day.isDayOff">{{day.startTimeFormat}}</span><span ng-show="!day.isDayOff">-</span><span ng-show="!day.isDayOff">{{day.endTime}}</span> <span ng-show="!day.isDayOff">{{day.endTimeFormat}}</span><span ng-show="day.isDayOff">Not working</span>
-            </li>
-          </ul>
-          <!--<i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"-->
-             <!--ng-show="showWorkingDaysEditFields" ng-click="cancelWorkingDaysEdit()"-->
-             <!--uib-tooltip="Cancel"></i>-->
-          <!--<i style="margin-top: 10px;" class="icn-sm icn-label-save pull-right" ng-show="showWorkingDaysEditFields"-->
-             <!--ng-click="saveWorkingHours()"-->
-             <!--uib-tooltip="Save"></i>-->
+        <div class="company-schedule clearfix">
+          <p class="w-92">Working schedule</p>
 
-          <div ng-show="showWorkingDaysEditFields">
+          <div>
             <div>
               <ul class="company-schedule-edit clearfix row">
                 <li class="col-md-6" ng-repeat="day in workingDays">
