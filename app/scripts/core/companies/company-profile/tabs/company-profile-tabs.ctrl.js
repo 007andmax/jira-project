@@ -74,7 +74,7 @@
             allUserNumber = $scope.users.filter(function(user) {
               return !user.deletedAt && (user.role === 'USER' || !user.role)
             });
-            usersInfo.name = 'Clients';
+            usersInfo.name = 'Users';
             usersInfo.number = allUserNumber.length;
           }
           return usersInfo;
