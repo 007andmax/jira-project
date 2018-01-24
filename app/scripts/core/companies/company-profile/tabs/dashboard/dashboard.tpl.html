@@ -51,19 +51,21 @@
     </div>
     <div class="company-info-content clearfix">
       <div class="col-md-3">
-        <div class="company-name clearfix" >
+        <div class="company-name clearfix">
           <div>
             <div ng-mouseover="showCompanyNameEditButton = true"
-                 ng-mouseleave="showCompanyNameEditButton = false">
-            <div class="ellipsis"
-                 ng-show="!showCompanyNameEditField" >{{companyInfo.name}}</div>
-            <button class="company-edit-icn company-edit-icn-sm"
-                    ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
-                    ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit" ></button>
+                 ng-mouseleave="showCompanyNameEditButton = false"
+                 style="display: inline-block;max-width: 84%;">
+              <div class="ellipsis"
+                   ng-show="!showCompanyNameEditField">{{companyInfo.name}}
+              </div>
+              <button class="company-edit-icn company-edit-icn-sm"
+                      ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
+                      ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"></button>
             </div>
             <div uib-dropdown class="create-dropdown pull-right" ng-show="!showCompanyNameEditField">
               <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
-                     readonly  value="{{clientTypesMap[companyInfo.clientType]}}"
+                     readonly value="{{clientTypesMap[companyInfo.clientType]}}"
                      ng-disabled="companyInfo.clientType.toLowerCase() === 'vendor' && companyInfo.hasProducts">
               <ul class="dropdown-menu dropdown-priority" role="menu">
                 <li ng-repeat="(key, value) in clientTypesMap" ng-click="setClientType(key)">
@@ -74,9 +76,11 @@
               </ul>
             </div>
           </div>
-          <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
+          <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+             ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
              uib-tooltip="Cancel"></i>
-          <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showCompanyNameEditField"
+          <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+             ng-show="showCompanyNameEditField"
              ng-click="checkingFormAndSave(companyDashboardForm)"
              uib-tooltip="Save"></i>
         </div>
@@ -117,12 +121,14 @@
           <p class="w-92" ng-show="!showAddressEditFields">
             {{companyInfo.addresses[0].address}}
           </p>
-          <button style="vertical-align: top;" class="company-edit-icn company-edit-icn-sm" ng-show="showAddressEditButton && !showAddressEditFields"
+          <button style="vertical-align: top;" class="company-edit-icn company-edit-icn-sm"
+                  ng-show="showAddressEditButton && !showAddressEditFields"
                   ng-click="openEditForm('showAddressEditFields')" uib-tooltip="Edit"></button>
           <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showAddressEditFields"
              ng-click="cancelEdit()"
              uib-tooltip="Cancel"></i>
-          <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showAddressEditFields"
+          <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+             ng-show="showAddressEditFields"
              ng-click="save()"
              uib-tooltip="Save"></i>
         </div>
@@ -144,9 +150,16 @@
         <div class="company-location">
           <a class="company-link" href="" ng-click="openMapModal()">Show Map</a>
         </div>
-        <div class="company-schedule clearfix" style="margin-bottom: 10px;" ng-mouseover="showWorkingDaysEditButton = true"
+        <div class="company-schedule clearfix" style="margin-bottom: 10px;"
+             ng-mouseover="showWorkingDaysEditButton = true"
              ng-mouseleave="showWorkingDaysEditButton = false">
-          <p class="w-92" ng-click="openWorkingDaysSchedule()">{{daysOfWeekMap[daysOfWeek[getTodayDayOfWeek()-1]]}} <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].startTime}}</span> <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].startTimeFormat}}</span><span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">-</span><span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].endTime}}</span> <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].endTimeFormat}}</span><span ng-show="workingDays[getTodayDayOfWeek()-1].isDayOff">Not working</span>
+          <p class="w-92" ng-click="openWorkingDaysSchedule()">{{daysOfWeekMap[daysOfWeek[getTodayDayOfWeek()-1]]}}
+            <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].startTime}}</span>
+            <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].startTimeFormat}}</span><span
+              ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">-</span><span
+              ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].endTime}}</span>
+            <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].endTimeFormat}}</span><span
+              ng-show="workingDays[getTodayDayOfWeek()-1].isDayOff">Not working</span>
             <i class="icn-sm report-caret-icon"></i>
           </p>
           <button class="company-edit-icn company-edit-icn-sm"
@@ -154,14 +167,19 @@
                   ng-click="openWorkingDayEditFields()" uib-tooltip="Edit">
           </button>
           <ul class="company-schedule-list" ng-show="showWorkingDaysSchedule && !showWorkingDaysEditFields">
-            <li ng-repeat="day in workingDays"  ng-style="{'font-weight': daysOfWeek[getTodayDayOfWeek()-1] === day.dayOfWeek ? 'bold' : ''}">
-                <div>{{daysOfWeekMap[day.dayOfWeek]}}:</div><span ng-show="!day.isDayOff">{{day.startTime}}</span> <span ng-show="!day.isDayOff">{{day.startTimeFormat}}</span><span ng-show="!day.isDayOff">-</span><span ng-show="!day.isDayOff">{{day.endTime}}</span> <span ng-show="!day.isDayOff">{{day.endTimeFormat}}</span><span ng-show="day.isDayOff">Not working</span>
+            <li ng-repeat="day in workingDays"
+                ng-style="{'font-weight': daysOfWeek[getTodayDayOfWeek()-1] === day.dayOfWeek ? 'bold' : ''}">
+              <div>{{daysOfWeekMap[day.dayOfWeek]}}:</div>
+              <span ng-show="!day.isDayOff">{{day.startTime}}</span> <span ng-show="!day.isDayOff">{{day.startTimeFormat}}</span><span
+              ng-show="!day.isDayOff">-</span><span ng-show="!day.isDayOff">{{day.endTime}}</span> <span
+              ng-show="!day.isDayOff">{{day.endTimeFormat}}</span><span ng-show="day.isDayOff">Not working</span>
             </li>
           </ul>
           <i class="icn-sm icn-remove-old pointer pull-right"
              ng-show="showWorkingDaysEditFields" ng-click="cancelWorkingDaysEdit()"
              uib-tooltip="Cancel"></i>
-          <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showWorkingDaysEditFields"
+          <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+             ng-show="showWorkingDaysEditFields"
              ng-click="saveWorkingHours()"
              uib-tooltip="Save"></i>
 
@@ -242,7 +260,8 @@
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showDomainEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showDomainEditFields"
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+                 ng-show="showDomainEditFields"
                  ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showDomainEditFields">{{companyInfo.domain|| 'none'}}</p>
@@ -273,7 +292,8 @@
                  ng-show="showIndustryEditFields"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showIndustryEditFields"
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+                 ng-show="showIndustryEditFields"
                  ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showIndustryEditFields">{{companyInfo.clientIndustry.name || 'none'}}</p>
@@ -303,7 +323,8 @@
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showServiceTypeEditField" ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showServiceTypeEditField"
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+                 ng-show="showServiceTypeEditField"
                  ng-click="save()" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showServiceTypeEditField">{{serviceTypesMap[companyInfo.serviceType]}}</p>
@@ -339,15 +360,15 @@
 
             <div ng-show="showContactPersonEditFields">
               <div class="form-group">
-              <input type="text" class="form-control has-dropdown pointer"
-                     placeholder="Select Tech User"
-                     name="contactPerson"
-                     typeahead-input-formatter="getFullName($model)"
-                     autocomplete="off" ng-model="companyInfo.contacts[0]"
-                     uib-typeahead="client as getFullName(client) for client in companyUsers | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
-                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" ng-required="true">
-              <div typeahead-input-icon="companyInfo.contacts[0]"></div>
+                <input type="text" class="form-control has-dropdown pointer"
+                       placeholder="Select Tech User"
+                       name="contactPerson"
+                       typeahead-input-formatter="getFullName($model)"
+                       autocomplete="off" ng-model="companyInfo.contacts[0]"
+                       uib-typeahead="client as getFullName(client) for client in companyUsers | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                       qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" ng-required="true">
+                <div typeahead-input-icon="companyInfo.contacts[0]"></div>
               </div>
             </div>
 
@@ -361,7 +382,8 @@
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showLedByEditField"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showLedByEditField"
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+                 ng-show="showLedByEditField"
                  ng-click="save()" uib-tooltip="Save"></i>
             </div>
             <p ng-show="!showLedByEditField">{{getFullName(getUserObjByID(companyInfo.techLeadId))}}</p>
@@ -391,7 +413,8 @@
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showNoteEditField"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right" ng-show="showNoteEditField"
+              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+                 ng-show="showNoteEditField"
                  ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save"></i>
             </div>
             <p class="company-notes"
