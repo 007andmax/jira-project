@@ -38,20 +38,13 @@
           } else if(filter === 'users-managers') {
             return value.role === 'ADMIN'
           } else if(filter === 'users-clients') {
-            return value.role === 'USER'
+            return (value.role === 'USER' || !value.role)
           }
         };
 
-        // $scope.returnUsersTabName = function() {
-        //   var tabName = $scope.getOpenedTab();
-        //   if(tabName === 'users-all') {
-        //     return 'ALL Users ';
-        //   } else if(tabName === 'users-managers') {
-        //     return 'Managers '
-        //   } else if(tabName === 'users-clients') {
-        //     return 'Clients '
-        //   }
-        // };
+
+
+
 
         $scope.changePrimaryContact = function(user) {
           CompaniesService.changePrimaryContact(user.id, function(resp) {

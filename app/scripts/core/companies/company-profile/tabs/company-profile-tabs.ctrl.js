@@ -50,6 +50,48 @@
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
 
+        $scope.getUsersNumber = function() {
+          var usersInfo = {
+            number: '',
+            name: ''
+          };
+          var allUserNumber = [];
+          var tabName = $scope.getOpenedTab();
+
+          if(tabName === 'users-all') {
+            allUserNumber = $scope.users.filter(function(user) {
+              return !user.deletedAt
+            });
+            usersInfo.name = 'All Users';
+            usersInfo.number = allUserNumber.length;
+          } else if(tabName === 'users-managers') {
+            allUserNumber = $scope.users.filter(function(user) {
+              return !user.deletedAt && user.role === 'ADMIN'
+            });
+            usersInfo.name = 'Managers';
+            usersInfo.number = allUserNumber.length;
+          } else if(tabName === 'users-clients') {
+            allUserNumber = $scope.users.filter(function(user) {
+              return !user.deletedAt && (user.role === 'USER' || !user.role)
+            });
+            usersInfo.name = 'Clients';
+            usersInfo.number = allUserNumber.length;
+          }
+          return usersInfo;
+
+        };
+
+        // $scope.returnUsersTabName = function() {
+        //   var tabName = $scope.getOpenedTab();
+        //   if(tabName === 'users-all') {
+        //     return 'ALL Users ';
+        //   } else if(tabName === 'users-managers') {
+        //     return 'Managers '
+        //   } else if(tabName === 'users-clients') {
+        //     return 'Clients '
+        //   }
+        // };
+
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           if(resp && resp.length) {
             var agentsList = resp;

@@ -51,13 +51,16 @@
     </div>
     <div class="company-info-content clearfix">
       <div class="col-md-3">
-        <div class="company-name clearfix" ng-mouseover="showCompanyNameEditButton = true"
-             ng-mouseleave="showCompanyNameEditButton = false">
+        <div class="company-name clearfix" >
           <div>
-            <div class="ellipsis" ng-show="!showCompanyNameEditField">{{companyInfo.name}}</div>
+            <div ng-mouseover="showCompanyNameEditButton = true"
+                 ng-mouseleave="showCompanyNameEditButton = false">
+            <div class="ellipsis"
+                 ng-show="!showCompanyNameEditField" >{{companyInfo.name}}</div>
             <button class="company-edit-icn company-edit-icn-sm"
                     ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
-                    ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"></button>
+                    ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit" ></button>
+            </div>
             <div uib-dropdown class="create-dropdown pull-right" ng-show="!showCompanyNameEditField">
               <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
                      readonly  value="{{clientTypesMap[companyInfo.clientType]}}"
