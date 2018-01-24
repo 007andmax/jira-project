@@ -260,6 +260,8 @@
             return item.role;
           } else if ($scope.orderUsersTab.field === 'ticket') {
             return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
+          } else if ($scope.orderUsersTab.field === 'primaryEmail') {
+            return item.primaryEmail;
           }
 
         };
