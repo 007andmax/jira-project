@@ -1094,7 +1094,9 @@ hr {
   background-color: #F3F7F9;
   padding: 10px 25px;
 }
-
+.company-profile-content .icn-remove-token-light{
+  display: none!important;
+}
 .company-profile-content h3 {
   font-size: 20px;
   color: #364656;

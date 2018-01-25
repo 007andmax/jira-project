@@ -21,7 +21,7 @@
       <div class="form-group custom-phone-type col-xs-6 no-label">
         <div class="pull-left" uib-dropdown keyboard-nav="true">
 
-          <button class="form-control form-control-number has-dropdown" tabindex="21"
+          <button class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="21"
                   uib-dropdown-toggle ng-disabled="$eval(disabled)">
             {{ phoneNumberTypes[phoneNumber.typeNumber] }}
           </button>
@@ -68,7 +68,7 @@
       <div class="form-group col-xs-6 custom-phone-type no-label">
         <div class="pull-left " uib-dropdown keyboard-nav="true">
 
-          <button class="form-control form-control-number has-dropdown" tabindex="{{ 21 + $index * 3 }}"
+          <button class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="{{ 21 + $index * 3 }}"
                   uib-dropdown-toggle ng-disabled="$eval(disabled)">
             {{ phoneNumberTypes[phoneNumber.typeNumber] }}
           </button>
@@ -86,7 +86,7 @@
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
           <button cns-if
-                  ng-class="{'company-remove-icn company-remove-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
+                  ng-class="{'company-add-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
                   ng-disabled="$eval(disabled)"
                   tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()"
                   tabindex="{{ 22 + $index * 3 }}">

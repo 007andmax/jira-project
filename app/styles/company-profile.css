@@ -90,7 +90,8 @@
 .company-logo-icn,
 .company-download-icn,
 .company-edit-icn,
-.company-remove-icn {
+.company-remove-icn,
+.company-add-icn-sm{
   position: relative;
   display: inline-block;
   background-color: #EFF9FF;
@@ -102,34 +103,37 @@
 
 .company-download-icn,
 .company-edit-icn,
-.company-remove-icn {
+.company-remove-icn{
   width: 32px;
   height: 32px;
   margin-left: 15px;
-  transition: all .3s;
 }
 
 .company-edit-icn-sm,
-.company-remove-icn-sm {
+.company-remove-icn-sm,
+.company-add-icn-sm{
   width: 22px;
   height: 22px;
   margin: 0;
   vertical-align: middle;
 }
 
-.company-remove-icn-sm {
+.company-remove-icn-sm,
+.company-add-icn-sm{
   margin-left: 15px;
 }
 
 .company-download-icn:hover,
 .company-edit-icn:hover,
-.company-remove-icn:hover {
+.company-remove-icn:hover,
+.company-add-icn-sm:hover{
   background-color: #9CC8E1;
 }
 
 .company-download-icn:after,
 .company-edit-icn:after,
-.company-remove-icn:after {
+.company-remove-icn:after,
+.company-add-icn-sm:after{
   position: absolute;
   content: "";
   background-size: cover;
@@ -149,6 +153,10 @@
 
 .company-remove-icn:after {
   background-image: url(../images/new-icons/company-remove.svg);
+}
+
+.company-add-icn-sm:after{
+  background: url(../images/sprites-s76c759f188.png) -298px -13px;
 }
 
 .company-logo-icn {
