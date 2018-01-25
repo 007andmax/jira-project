@@ -37,7 +37,18 @@
               serviceDropdownMenu.css({'bottom': ''});
             }
 
-          } else if(parentElement ) {
+          } else if(attrs.smartDropdownMenuPosition === 'dropdown-menu'){
+
+            var ulElement = $(element[0].children[1]);
+            if((winHeight - position) < 250) {
+              ulElement.css({'top': 'auto'});
+              ulElement.css({'bottom': '100%'});
+            } else {
+              ulElement.css({'top': ''});
+              ulElement.css({'bottom': ''});
+            }
+
+          }else if(parentElement ) {
             // if(!d.hasClass('ng-hide')) {
             //   parentElement.css({'overflow': 'visible'});
             //   //console.log('open')
