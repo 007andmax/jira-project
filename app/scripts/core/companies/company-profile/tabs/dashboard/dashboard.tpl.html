@@ -248,7 +248,8 @@
             </div>
 
             <div phone-numbers-edit ng-model="companyInfo.addresses[0].phoneNumbers" is-try-to-save="triedToSave"
-                 country-code="{{companyInfo.addresses[0].countryCode}}" ng-show="showPhoneNumbersEditFields">
+                 country-code="{{companyInfo.addresses[0].countryCode}}"
+                 ng-show="showPhoneNumbersEditFields" is-dashboard-style="true">
             </div>
 
             <div class="company-info-subtitle" ng-mouseover="showDomainEditButton = true"
