@@ -187,7 +187,7 @@
             var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
             return hoursToReturn + ':' + minutesToreturn;
           } else {
-            return '00' + ':' + '00';
+            return '12' + ':' + '00';
           }
         }
 
