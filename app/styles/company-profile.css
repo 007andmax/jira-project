@@ -91,7 +91,7 @@
 .company-download-icn,
 .company-edit-icn,
 .company-remove-icn,
-.company-add-icn-sm{
+.company-add-icn-sm {
   position: relative;
   display: inline-block;
   background-color: #EFF9FF;
@@ -103,7 +103,7 @@
 
 .company-download-icn,
 .company-edit-icn,
-.company-remove-icn{
+.company-remove-icn {
   width: 32px;
   height: 32px;
   margin-left: 15px;
@@ -111,7 +111,7 @@
 
 .company-edit-icn-sm,
 .company-remove-icn-sm,
-.company-add-icn-sm{
+.company-add-icn-sm {
   width: 22px;
   height: 22px;
   margin: 0;
@@ -119,21 +119,21 @@
 }
 
 .company-remove-icn-sm,
-.company-add-icn-sm{
+.company-add-icn-sm {
   margin-left: 15px;
 }
 
 .company-download-icn:hover,
 .company-edit-icn:hover,
 .company-remove-icn:hover,
-.company-add-icn-sm:hover{
+.company-add-icn-sm:hover {
   background-color: #9CC8E1;
 }
 
 .company-download-icn:after,
 .company-edit-icn:after,
 .company-remove-icn:after,
-.company-add-icn-sm:after{
+.company-add-icn-sm:after {
   position: absolute;
   content: "";
   background-size: cover;
@@ -155,7 +155,7 @@
   background-image: url(../images/new-icons/company-remove.svg);
 }
 
-.company-add-icn-sm:after{
+.company-add-icn-sm:after {
   background: url(../images/sprites-s76c759f188.png) -298px -13px;
 }
 
@@ -803,7 +803,7 @@
 
 .company-dashboard-left-panel .left-panel-title,
 .company-dashboard-left-panel .left-panel-hide-filter {
-  margin: 10px 25px;
+  margin: 10px 0 0 30px;
   padding: 0;
   border: none;
   text-transform: capitalize;
@@ -818,17 +818,37 @@
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title {
   margin: 0;
+  padding: 10px 20px;
 }
-
+.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title:hover{
+  background-color: #3C485E;
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title.left-panel-active{
+  background-color: #3C485E;
+}
+.company-dashboard-left-panel .left-panel-hide-filter{
+  margin: 0 10px;
+}
 .company-dashboard-left-panel .filter-left-panel {
   padding: 0;
   height: auto !important;
 }
 
 .company-dashboard-left-panel .center-category__category {
-  padding: 15px 0 0 10px;
+  padding: 15px 0 0 25px;
   height: auto !important;
 }
+
+.left-panel-full .center-category__category {
+  color: #fff;
+}
+
+.company-dashboard-left-panel .center-category__category {
+  color: #9ca5b6;
+}
+
 .company-dashboard-left-panel .center-category__category:last-child {
   padding-bottom: 15px;
   border-bottom: 2px solid #424F66;
