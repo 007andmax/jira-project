@@ -43,9 +43,11 @@
             if((winHeight - position) < 250) {
               ulElement.css({'top': 'auto'});
               ulElement.css({'bottom': '100%'});
+              ulElement.css({'margin': '0 0 15px 0'});
             } else {
               ulElement.css({'top': ''});
               ulElement.css({'bottom': ''});
+              ulElement.css({'margin': ''});
             }
 
           }else if(parentElement ) {

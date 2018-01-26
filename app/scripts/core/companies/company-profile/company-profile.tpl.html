@@ -6,6 +6,9 @@
   <div ng-if="getOpenedTab() === 'users-all' || getOpenedTab() === 'users-managers' || getOpenedTab() === 'users-clients'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'">
   </div>
+  <div ng-if="getOpenedTab() === 'all'"
+       ng-include="'/html/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.tpl.html'">
+  </div>
   <!--<h3>Hi <span>Norman</span>,</h3>-->
   <!--<p>Welcome to Quicktech agent dashboard</p>-->
   <!--<div class="company-info-wrapper">-->
