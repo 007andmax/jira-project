@@ -1683,9 +1683,9 @@ Devices tab
   top: 36px;
 }
 
-#product-list-cont .custom-product-list.nano {
-  width: 100%;
-}
+/*#product-list-cont .custom-product-list.nano {*/
+  /*width: 100%;*/
+/*}*/
 
 .qt-invoices .qt-table .ha-edit {
   position: absolute;
