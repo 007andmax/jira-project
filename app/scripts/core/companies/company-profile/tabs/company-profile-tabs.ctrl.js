@@ -19,7 +19,7 @@
           $state.go('companyProfile', { tabName: 'devices' });
         }
         $scope.orderDevicesBy = 'hostName';
-        $scope.currentOpenTab = $stateParams.tabName || 'devices';
+        $scope.currentOpenProfileTab = $stateParams.tabName || 'devices';
 
         $scope.credential = {
           name: '',
@@ -106,7 +106,7 @@
             $scope.isHasDevices = true;
           } else {
             $scope.isHasDevices = false;
-            if ($scope.currentOpenTab === 'devices') {
+            if ($scope.currentOpenProfileTab === 'devices') {
               $state.go('companyProfile', {
                 tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
               });
@@ -119,9 +119,9 @@
           return $stateParams.tabName;
         }, function (tabName, prevTab) {
           if (tabs.indexOf(tabName) < 0) {
-            $scope.currentOpenTab = tabs[0];
+            $scope.currentOpenProfileTab = tabs[0];
           } else {
-            $scope.currentOpenTab = tabName;
+            $scope.currentOpenProfileTab = tabName;
           }
 
           $scope.companyProfileHeader.unCheckAll();

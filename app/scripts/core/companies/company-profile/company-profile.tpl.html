@@ -6,7 +6,7 @@
   <div ng-if="getOpenedTab() === 'users-all' || getOpenedTab() === 'users-managers' || getOpenedTab() === 'users-clients'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'">
   </div>
-  <div ng-if="getOpenedTab() === 'all'"
+  <div ng-if="getOpenedTab() === 'tickets-all'|| getOpenedTab() === 'tickets-unassigned'|| getOpenedTab() === 'tickets-inProgress'|| getOpenedTab() === 'tickets-onHold' || getOpenedTab() === 'tickets-completed'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.tpl.html'">
   </div>
   <!--<h3>Hi <span>Norman</span>,</h3>-->

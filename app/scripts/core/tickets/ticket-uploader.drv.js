@@ -32,6 +32,15 @@
               }
             }, getTicketsList, true);
 
+            scope.$watch(function(){
+              return $stateParams.tabName
+            }, function(tabName) {
+              if(tabName) {
+                getTicketsList(ticketsHeaderState.searchFilter)
+              }
+            })
+
+
             // scope.$watch(function() {
             //   return ticketsHeaderState.filter.clientUserId;
             // }, getTicketsList , true);

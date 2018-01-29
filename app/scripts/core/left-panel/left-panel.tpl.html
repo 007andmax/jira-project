@@ -541,20 +541,28 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileTicketsPage">
             <div class="center-category__category sked"
-                 ui-sref="companyProfile({ tabName: 'all' })"
-                 ng-class="{'left-panel-active': getOpenedUsersTab() ==='all'}">
+                 ui-sref="companyProfile({ tabName: 'tickets-all' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='tickets-all'}">
               All tickets
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'tickets-unassigned' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='tickets-unassigned'}">
               Unassigned
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'tickets-inProgress' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='tickets-inProgress'}">
               In progress
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'tickets-onHold' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='tickets-onHold'}">
               On Hold
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'tickets-completed' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='tickets-completed'}">
               Completed
             </div>
             <div class="center-category__category sked">
