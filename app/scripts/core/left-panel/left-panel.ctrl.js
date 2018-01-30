@@ -46,6 +46,7 @@
         $rootScope.isLeftPanelHidden = false;
 
         $scope.ticketsCounter;
+        $scope.ticketsCounterByCompany;
 
         $scope.dropdownByCompanyTicketPage = false;
         $scope.dropdownByUserTicketPage = false;
@@ -916,6 +917,11 @@
         }, function(companyId){
           console.log(companyId);
           $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId)
+          TicketsService.getAllCountsByCompanyId(companyId, function(resp) {
+            $scope.ticketsCounterByCompany = resp;
+
+          })
+
         })
 
       }]);

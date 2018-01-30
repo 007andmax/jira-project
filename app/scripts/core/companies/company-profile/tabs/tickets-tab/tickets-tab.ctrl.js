@@ -5,9 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.ticketsTabCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$location',
+      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$location', '$timeout',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $location) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $location, $timeout) {
 
         var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress'],
           availableTabs = ['tickets-all', 'tickets-unassigned', 'tickets-inProgress', 'tickets-onHold', 'tickets-completed'],
@@ -219,9 +219,12 @@
 
         $scope.openTicketDetailsPage = false;
         $scope.openTicket = function(id) {
+          if(ticketsHeaderState.openTicketId !== id) {
+            $scope.openTicketDetailsPage = false;
+          }
           $scope.openTicketDetailsPage = true;
           ticketsHeaderState.openTicketId = id;
-        }
+        };
 
         $scope.$watch(function(){
           return $location.search().tabName

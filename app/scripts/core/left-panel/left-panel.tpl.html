@@ -543,27 +543,27 @@
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'tickets-all' })"
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-all'}">
-              All tickets
+              All tickets <span>{{ticketsCounterByCompany.ALL}}</span>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'tickets-unassigned' })"
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-unassigned'}">
-              Unassigned
+              Unassigned <span>{{ticketsCounterByCompany.UNASSIGNED}}</span>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'tickets-inProgress' })"
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-inProgress'}">
-              In progress
+              In progress <span>{{ticketsCounterByCompany.IN_PROGRESS}}</span>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'tickets-onHold' })"
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-onHold'}">
-              On Hold
+              On Hold <span>{{ticketsCounterByCompany.ON_HOLD}}</span>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'tickets-completed' })"
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-completed'}">
-              Completed
+              Completed <span>{{ticketsCounterByCompany.COMPLETED}}</span>
             </div>
             <div class="left-panel-hide-filter" style="margin: 0;">
               <div class="privet-andrey">

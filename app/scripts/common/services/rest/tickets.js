@@ -13,7 +13,7 @@
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
-      var queries, loadingInProcess, lastListType;
+      var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
       var operators = {
         NULL: function (value) {
           return value === null || value === undefined;
@@ -72,8 +72,17 @@
           userId = currentUserId;
           queries = getQueries(currentUserId);
           unwatch();
+          queriesForCompanyProfilePage = {
+            ALL: getQueries(currentUserId).ALL,
+            UNASSIGNED: getQueries(currentUserId).UNASSIGNED,
+            ON_HOLD: getQueries(currentUserId).ON_HOLD,
+            IN_PROGRESS: getQueries(currentUserId).IN_PROGRESS,
+            COMPLETED: getQueries(currentUserId).COMPLETED
+          }
         }
       });
+
+
 
       var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
 
@@ -464,6 +473,20 @@
 
           if (callback) {
             callback(storage.ticketsQuantityMap);
+          }
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+      }
+
+      function getAllCountsByCompanyId(companyId, callback) {
+        $http.post('/v2/tickets/'+companyId+'/counts', queries).then(function (resp) {
+          storage.ticketsQuantityMapByCompany = resp.data;
+
+          if (callback) {
+            callback(storage.ticketsQuantityMapByCompany);
           }
         }, function (resp) {
           if (callback) {
@@ -1184,7 +1207,8 @@
         changeLinkedAgent: changeLinkedAgent,
         save: saveEditedTicket,
         updateDiscount: updateDiscount,
-        getAllCounts: getAllCounts
+        getAllCounts: getAllCounts,
+        getAllCountsByCompanyId: getAllCountsByCompanyId
       }
 
     }
