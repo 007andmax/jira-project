@@ -25,7 +25,8 @@
           filter: {}
         },
         companyProfile: {
-          tabName: ''
+          tabName: '',
+          companyId: ''
         },
         usersHeader: {
           filter: {

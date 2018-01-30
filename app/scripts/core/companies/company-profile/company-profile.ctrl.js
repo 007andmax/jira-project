@@ -37,6 +37,8 @@
           reverse: false
         };
         $scope.companyId = $stateParams.companyId;
+        companyProfileSharedState.companyId = $stateParams.companyId;
+
         $scope.frequency = 'WEEKLY';
         $scope.selectedChart = 'countOfNewTickets';
         $scope.dateFormat = '%d %b';

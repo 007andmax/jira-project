@@ -70,6 +70,9 @@
           if(availableTabs.indexOf(stateParams.tabName) < 0) {
             $scope.listType = availableTabs[0];
             $stateParams.listType = 'all';
+              // $state.go('companyProfile', {
+              //   tabName: availableTabs[0]
+              // });
           } else {
             $scope.listType = tabsTypeMap[stateParams.tabName];
             $scope.currentOpeningTicket = stateParams.ticketId;

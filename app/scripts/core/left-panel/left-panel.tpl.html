@@ -566,10 +566,46 @@
               Completed
             </div>
             <div class="center-category__category sked">
-              By Users - search
+              <div class="filter-left-panel category-expanded angular-animate">
+                <div class="x-mark-wrapper">
+                  <input type="text" class="form-control has-dropdown pointer"
+                         placeholder="Select User"
+                         typeahead-input-formatter="getUserByID($model)"
+                         autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId"
+                         uib-typeahead="client.id as getFullName(client) for client in companyProfilePageUsersList | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                         qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                         custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                  <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
+                </div>
+                <div class="recent-left-panel">
+                  <h4 class="font-medium">recent</h4>
+                  <p ng-repeat="item in clientUsersFilterHistoryTicketsPage track by $index"
+                     ng-click="applyClientUserFilterFromHistoryListTicketPage(item)">
+                    {{item}}</p>
+
+                </div>
+
+              </div>
             </div>
             <div class="center-category__category sked">
-              By Tech - search
+              <div class="filter-left-panel category-expanded angular-animate">
+                <div class="x-mark-wrapper">
+                  <input type="text" class="form-control has-dropdown pointer"
+                         placeholder="Select Tech User"
+                         typeahead-input-formatter="getUserByID($model)"
+                         autocomplete="off" ng-model="ticketsSharedState.filter.techUserId"
+                         uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                         qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                         custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                  <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
+                </div>
+                <div class="recent-left-panel">
+                  <h4 class="font-medium">recent</h4>
+                  <p ng-repeat="item in techUsersFilterHistoryTicketsPage track by $index"
+                     ng-click="applyTechUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>

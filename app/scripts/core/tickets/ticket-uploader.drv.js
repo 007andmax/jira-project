@@ -4,9 +4,9 @@
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
     ['$uibModal', 'TicketsService', '$stateParams', '$timeout', '$document', 'localStorageService',
-      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
+      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService', '$rootScope',
       function ($uibModal, TicketsService, $stateParams, $timeout, $document, localStorageService, UserNotificationService,
-                SharedStateService) {
+                SharedStateService, $rootScope) {
 
         return {
           restrict: 'A',
@@ -44,10 +44,22 @@
             // scope.$watch(function() {
             //   return ticketsHeaderState.filter.clientUserId;
             // }, getTicketsList , true);
+            // var filterObj = {
+            //   userId: ticketsHeaderState.searchFilter.userId,
+            //   companyId: ticketsHeaderState.searchFilter.companyId
+            // }
 
             scope.onFinishRendering = function () {
               scope.loadingOrRendering = false;
             };
+
+            scope.$watch('runTicketListUploader', function(runTicketListUploader) {
+              if(runTicketListUploader) {
+                console.log(runTicketListUploader);
+                getTicketsList(ticketsHeaderState.searchFilter);
+                $rootScope.runTicketListUploader = false;
+              }
+            });
 
             function getTicketsList(filter) {
               if (!filter) {

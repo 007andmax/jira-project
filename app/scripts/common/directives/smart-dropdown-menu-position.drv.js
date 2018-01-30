@@ -22,8 +22,10 @@
             if((winHeight - productInputPosition) < 360) {
               productDropdownMenu.css({'top': 'auto'});
               productDropdownMenu.css({'bottom': '100%'});
+              productDropdownMenu.css({'margin-bottom': '10px'});
             } else {
               productDropdownMenu.css({'bottom': ''});
+              productDropdownMenu.css({'margin-bottom': ''});
             }
 
           } else if(attrs.smartDropdownMenuPosition === 'service-list'){

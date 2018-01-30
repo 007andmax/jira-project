@@ -262,6 +262,11 @@
             if($state.includes('tickets')) {
               $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
             }
+            if($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
+              $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
+            } else if ($state.includes('companyProfile') && $location.search().tabName === 'tickets-all') {
+              $rootScope.runTicketListUploader = true;
+            }
           } else if(value === undefined) {
             if($state.includes('tickets')) {
               if(ticketsSharedState.filter.companyId) {
@@ -285,6 +290,12 @@
             }
             if($state.includes('tickets')) {
               $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
+            }
+            if($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
+              $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
+            } else if ($state.includes('companyProfile') && $location.search().tabName === 'tickets-all') {
+
+              $rootScope.runTicketListUploader = true;
             }
           } else if(value === undefined) {
             if($state.includes('tickets')) {
@@ -896,6 +907,13 @@
         $scope.getOpenedUsersTab = function() {
           return $location.search().tabName
         };
+
+        $scope.$watch(function(){
+          return companyProfileSharedState.companyId;
+        }, function(companyId){
+          console.log(companyId);
+          $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId)
+        })
 
       }]);
 
