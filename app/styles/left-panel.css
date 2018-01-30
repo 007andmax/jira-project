@@ -193,7 +193,8 @@
   color: #16a4fa;
 }
 
-.tickets-left-panel .center-category__category span {
+.tickets-left-panel .center-category__category span,
+.company-dashboard-left-panel .center-category__category span{
   position: absolute;
   right: 20px;
   top: 7px;
