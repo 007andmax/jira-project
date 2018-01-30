@@ -806,7 +806,7 @@
   margin: 10px 0 0 30px;
   padding: 0;
   border: none;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   width: 100%;
   cursor: pointer;
   transition: all .3s;

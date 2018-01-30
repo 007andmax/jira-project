@@ -565,8 +565,14 @@
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-completed'}">
               Completed
             </div>
+            <div class="left-panel-hide-filter">
             <div class="center-category__category sked">
-              <div class="filter-left-panel category-expanded angular-animate">
+              <div class="left-panel-title font-medium left-panel-title-hover"
+                   ng-click="dropdownByUserCompanyProfilePage = !dropdownByUserCompanyProfilePage">
+                by user
+                <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByUserCompanyProfilePage}"></i>
+              </div>
+              <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByUserCompanyProfilePage">
                 <div class="x-mark-wrapper">
                   <input type="text" class="form-control has-dropdown pointer"
                          placeholder="Select User"
@@ -588,7 +594,12 @@
               </div>
             </div>
             <div class="center-category__category sked">
-              <div class="filter-left-panel category-expanded angular-animate">
+              <div class="left-panel-title font-medium left-panel-title-hover"
+                   ng-click="dropdownByTechUserCompanyProfilePage = !dropdownByTechUserCompanyProfilePage">
+                by tech team
+                <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByTechUserCompanyProfilePage}"></i>
+              </div>
+              <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByTechUserCompanyProfilePage">
                 <div class="x-mark-wrapper">
                   <input type="text" class="form-control has-dropdown pointer"
                          placeholder="Select Tech User"
@@ -606,6 +617,7 @@
 
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>

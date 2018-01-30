@@ -54,6 +54,9 @@
         $scope.dropdownByIndustryUserPage = false;
         $scope.dropdownByCompanyUserPage = false;
 
+        $scope.dropdownByTechUserCompanyProfilePage = false;
+        $scope.dropdownByUserCompanyProfilePage = false;
+
         $scope.CompanyProfileTicketsPage = false;
         $scope.CompanyProfileUsersPage = false;
         $scope.CompanyProfileDevicesPage = false;
