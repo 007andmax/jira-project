@@ -533,7 +533,7 @@
         </div>
 
         <div class="left-panel-hide-filter">
-          <div class="left-panel-title font-medium left-panel-title-hover"
+          <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileTicketsPage = !CompanyProfileTicketsPage"
                ng-class="{'left-panel-active': CompanyProfileTicketsPage}">
             Tickets
@@ -565,65 +565,69 @@
                  ng-class="{'active': getOpenedUsersTab() ==='tickets-completed'}">
               Completed
             </div>
-            <div class="left-panel-hide-filter">
-            <div class="center-category__category sked">
-              <div class="left-panel-title font-medium left-panel-title-hover"
-                   ng-click="dropdownByUserCompanyProfilePage = !dropdownByUserCompanyProfilePage">
-                by user
-                <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByUserCompanyProfilePage}"></i>
-              </div>
-              <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByUserCompanyProfilePage">
-                <div class="x-mark-wrapper">
-                  <input type="text" class="form-control has-dropdown pointer"
-                         placeholder="Select User"
-                         typeahead-input-formatter="getUserByID($model)"
-                         autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId"
-                         uib-typeahead="client.id as getFullName(client) for client in companyProfilePageUsersList | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                         qt-typeahead-async-show-on-focus smart-dropdown-menu-position
-                         custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-                  <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
+            <div class="left-panel-hide-filter" style="margin: 0;">
+              <div class="privet-andrey">
+                <div class="left-panel-title left-panel-title-hover"
+                     ng-click="dropdownByUserCompanyProfilePage = !dropdownByUserCompanyProfilePage">
+                  by user
+                  <i class="report-caret-icon"
+                     ng-class="{'report-caret-icon-up': dropdownByUserCompanyProfilePage}"></i>
                 </div>
-                <div class="recent-left-panel">
-                  <h4 class="font-medium">recent</h4>
-                  <p ng-repeat="item in clientUsersFilterHistoryTicketsPage track by $index"
-                     ng-click="applyClientUserFilterFromHistoryListTicketPage(item)">
-                    {{item}}</p>
+                <div class="filter-left-panel category-expanded angular-animate class-oleg"
+                     ng-show="dropdownByUserCompanyProfilePage">
+                  <div class="x-mark-wrapper">
+                    <input type="text" class="form-control has-dropdown pointer"
+                           placeholder="Select User"
+                           typeahead-input-formatter="getUserByID($model)"
+                           autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId"
+                           uib-typeahead="client.id as getFullName(client) for client in companyProfilePageUsersList | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                           qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                    <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
+                  </div>
+                  <div class="recent-left-panel">
+                    <h4 class="font-medium">recent</h4>
+                    <p ng-repeat="item in clientUsersFilterHistoryTicketsPage track by $index"
+                       ng-click="applyClientUserFilterFromHistoryListTicketPage(item)">
+                      {{item}}</p>
 
-                </div>
-
-              </div>
-            </div>
-            <div class="center-category__category sked">
-              <div class="left-panel-title font-medium left-panel-title-hover"
-                   ng-click="dropdownByTechUserCompanyProfilePage = !dropdownByTechUserCompanyProfilePage">
-                by tech team
-                <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByTechUserCompanyProfilePage}"></i>
-              </div>
-              <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByTechUserCompanyProfilePage">
-                <div class="x-mark-wrapper">
-                  <input type="text" class="form-control has-dropdown pointer"
-                         placeholder="Select Tech User"
-                         typeahead-input-formatter="getUserByID($model)"
-                         autocomplete="off" ng-model="ticketsSharedState.filter.techUserId"
-                         uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                         qt-typeahead-async-show-on-focus smart-dropdown-menu-position
-                         custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-                  <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
-                </div>
-                <div class="recent-left-panel">
-                  <h4 class="font-medium">recent</h4>
-                  <p ng-repeat="item in techUsersFilterHistoryTicketsPage track by $index"
-                     ng-click="applyTechUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
+                  </div>
 
                 </div>
               </div>
-            </div>
+              <div class="lp-border privet-andrey">
+                <div class="left-panel-title left-panel-title-hover"
+                     ng-click="dropdownByTechUserCompanyProfilePage = !dropdownByTechUserCompanyProfilePage">
+                  by tech team
+                  <i class="report-caret-icon"
+                     ng-class="{'report-caret-icon-up': dropdownByTechUserCompanyProfilePage}"></i>
+                </div>
+                <div class="filter-left-panel category-expanded angular-animate class-oleg"
+                     ng-show="dropdownByTechUserCompanyProfilePage">
+                  <div class="x-mark-wrapper">
+                    <input type="text" class="form-control has-dropdown pointer"
+                           placeholder="Select Tech User"
+                           typeahead-input-formatter="getUserByID($model)"
+                           autocomplete="off" ng-model="ticketsSharedState.filter.techUserId"
+                           uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                           qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                    <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
+                  </div>
+                  <div class="recent-left-panel">
+                    <h4 class="font-medium">recent</h4>
+                    <p ng-repeat="item in techUsersFilterHistoryTicketsPage track by $index"
+                       ng-click="applyTechUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
+
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="left-panel-hide-filter">
-          <div class="left-panel-title font-medium left-panel-title-hover"
+          <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileUsersPage = !CompanyProfileUsersPage"
                ng-class="{'left-panel-active': CompanyProfileUsersPage}">
             Users
@@ -649,7 +653,7 @@
         </div>
 
         <div class="left-panel-hide-filter">
-          <div class="left-panel-title font-medium left-panel-title-hover"
+          <div class="left-panel-title  left-panel-title-hover"
                ng-click="CompanyProfileDevicesPage = !CompanyProfileDevicesPage"
                ng-class="{'left-panel-active': CompanyProfileDevicesPage}">
             Devices
@@ -671,12 +675,12 @@
           </div>
         </div>
 
-        <div class="left-panel-title font-medium" style="margin-bottom: 10px;">
+        <div class="left-panel-title" style="margin-bottom: 10px;">
           Network Scan
         </div>
 
         <div class="left-panel-hide-filter">
-          <div class="left-panel-title font-medium left-panel-title-hover"
+          <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfilePasswordManagerPage = !CompanyProfilePasswordManagerPage"
                ng-class="{'left-panel-active': CompanyProfilePasswordManagerPage}">
             Password Manager
@@ -696,7 +700,7 @@
         </div>
 
         <div class="left-panel-hide-filter">
-          <div class="left-panel-title font-medium left-panel-title-hover"
+          <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileProductsPage = !CompanyProfileProductsPage"
                ng-class="{'left-panel-active': CompanyProfileProductsPage}">
             Products
@@ -710,7 +714,7 @@
         </div>
 
         <div class="left-panel-hide-filter">
-          <div class="left-panel-title font-medium left-panel-title-hover"
+          <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileInvoicesPage = !CompanyProfileInvoicesPage"
                ng-class="{'left-panel-active': CompanyProfileInvoicesPage}">
             Invoices
@@ -723,7 +727,7 @@
           </div>
         </div>
 
-        <div class="left-panel-title font-medium">
+        <div class="left-panel-title">
           Contracts
         </div>
 

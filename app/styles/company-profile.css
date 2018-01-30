@@ -803,50 +803,75 @@
 
 .company-dashboard-left-panel .left-panel-title,
 .company-dashboard-left-panel .left-panel-hide-filter {
-  margin: 10px 0 0 30px;
+  margin: 10px 0 0 25px;
   padding: 0;
   border: none;
-  /*text-transform: capitalize;*/
+  text-transform: capitalize;
   width: 100%;
   cursor: pointer;
   transition: all .3s;
 }
 
+.privet-andrey .left-panel-title:hover{
+  background-color: transparent!important;
+}
+.privet-andrey .left-panel-title{
+  padding: 11px 0 0 15px!important;
+}
+/*.privet-andrey:last-child .left-panel-title{*/
+  /*padding: 11px 0 11px 15px!important;*/
+/*}*/
 .company-dashboard-left-panel .left-panel-title:hover {
   color: #fff;
 }
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title {
   margin: 0;
-  padding: 10px 20px;
+  padding: 10px 15px;
 }
-.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title:hover{
+
+.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title:hover {
   background-color: #3C485E;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 6px;
 }
-.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title.left-panel-active{
+
+.company-dashboard-left-panel .left-panel-hide-filter .left-panel-title.left-panel-active {
   background-color: #3C485E;
+  border-radius: 6px;
 }
-.company-dashboard-left-panel .left-panel-hide-filter{
+
+.company-dashboard-left-panel .left-panel-hide-filter {
   margin: 0 10px;
 }
+
 .company-dashboard-left-panel .filter-left-panel {
   padding: 0;
   height: auto !important;
 }
 
 .company-dashboard-left-panel .center-category__category {
-  padding: 15px 0 0 25px;
+  padding: 11px 0 0 15px;
   height: auto !important;
+  color: #9ca5b6;
+}
+
+.class-oleg {
+  padding: 10px 20px 25px 20px!important;
+  min-height: 220px;
+  margin-left: -10px;
+  width: 109% !important;
+}
+.company-dashboard-left-panel .left-panel-title .report-caret-icon{
+  right: 23px!important;
+}
+.lp-border {
+  border-bottom: 2px solid #424F66;
+  padding-bottom: 11px;
 }
 
 .left-panel-full .center-category__category {
   color: #fff;
-}
-
-.company-dashboard-left-panel .center-category__category {
-  color: #9ca5b6;
 }
 
 .company-dashboard-left-panel .center-category__category:last-child {
