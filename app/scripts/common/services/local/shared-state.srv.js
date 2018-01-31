@@ -26,7 +26,8 @@
         },
         companyProfile: {
           tabName: '',
-          companyId: ''
+          companyId: '',
+          ticketsCounts: {}
         },
         usersHeader: {
           filter: {

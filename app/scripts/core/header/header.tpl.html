@@ -14,8 +14,11 @@
           <span style="font-family: 'Graphik Light', sans-serif;">
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
           </span>
-        <span class="text-muted" ng-if="globalSearch.count || globalSearch.count === 0">
+        <span class="text-muted" ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen()">
           &nbsp;{{ globalSearch.count }}
+        </span>
+        <span class="text-muted" ng-if="isCompanyProfileTicketPageIsOpen()">
+          &nbsp;{{ companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] }}
         </span>
       </p>
 

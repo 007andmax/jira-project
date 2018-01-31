@@ -4,9 +4,9 @@
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
     ['$uibModal', 'TicketsService', '$stateParams', '$timeout', '$document', 'localStorageService',
-      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService', '$rootScope',
+      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService', '$rootScope', '$state',
       function ($uibModal, TicketsService, $stateParams, $timeout, $document, localStorageService, UserNotificationService,
-                SharedStateService, $rootScope) {
+                SharedStateService, $rootScope, $state) {
 
         return {
           restrict: 'A',
@@ -64,6 +64,13 @@
             function getTicketsList(filter) {
               if (!filter) {
                 return;
+              }
+
+              if($state.includes('tickets')) {
+                filter = {
+                  companyId: undefined,
+                  userId: undefined
+                }
               }
 
               UserNotificationService.show('Loading...');

@@ -5,9 +5,9 @@
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
-      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout',
+      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout) {
+                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -15,6 +15,8 @@
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.draftsSharedState = SharedStateService.getSharedState('draftsHeader');
+        $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
+
 
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
@@ -123,6 +125,22 @@
 
         $scope.isShowDraftsBulkAction = function () {
           return $scope.draftsSharedState && $scope.draftsSharedState.selectedIds.length;
+        };
+
+        $scope.companyProfileTabsMap = {
+          'tickets-all': 'ALL',
+          'tickets-unassigned': 'UNASSIGNED',
+          'tickets-closed': 'CLOSED',
+          'tickets-inProgress': 'IN_PROGRESS',
+          'tickets-onHold': 'ON_HOLD'
+        };
+
+        $scope.isCompanyProfileTicketPageIsOpen = function() {
+          return $state.includes('companyProfile')
+        };
+
+        $scope.getOpenedUsersTab = function() {
+          return $location.search().tabName
         };
 
       }]);
