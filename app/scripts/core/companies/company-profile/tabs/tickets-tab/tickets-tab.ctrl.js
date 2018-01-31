@@ -221,8 +221,13 @@
         $scope.openTicket = function(id) {
           if(ticketsHeaderState.openTicketId !== id) {
             $scope.openTicketDetailsPage = false;
+            $timeout(function(){
+              $scope.openTicketDetailsPage = true;
+            }, 0)
+          } else {
+            $scope.openTicketDetailsPage = true;
           }
-          $scope.openTicketDetailsPage = true;
+
           ticketsHeaderState.openTicketId = id;
         };
 
