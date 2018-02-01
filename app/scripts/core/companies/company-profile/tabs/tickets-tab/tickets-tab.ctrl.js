@@ -227,7 +227,7 @@
           } else {
             $scope.openTicketDetailsPage = true;
           }
-
+          $scope.currentOpeningTicket = id;
           ticketsHeaderState.openTicketId = id;
         };
 
