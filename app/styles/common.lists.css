@@ -1199,13 +1199,28 @@ Devices tab
 .qt-list .dropdown-submenu-wrapper .control {
   padding-left: 46px;
 }
-
 .checkbox-caption {
   float: left;
   margin-right: 10px;
   cursor: pointer;
 }
-
+.qt-billable-clients .checkbox-caption{
+  cursor: text;
+  z-index: 9999;
+  margin-left: 10px;
+}
+.cur-text{
+  position: relative;
+  float: left;
+  padding: 0 5px;
+  vertical-align: top;
+}
+.qt-billable-clients .clickable-layer{
+  z-index: 0;
+}
+.qt-list.qt-billable-clients .checkbox{
+  margin-right: 0;
+}
 @-moz-document url-prefix() {
   .checkbox-caption {
     line-height: 19px;
