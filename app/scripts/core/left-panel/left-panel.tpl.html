@@ -662,7 +662,9 @@
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileDevicesPage}"></i>
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileDevicesPage">
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'devices-all' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='devices-all'}">
               All devices
             </div>
             <div class="center-category__category sked">
