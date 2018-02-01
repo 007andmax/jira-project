@@ -330,7 +330,7 @@
   padding: 10px;
 }
 
-.users-bg{
+.users-bg {
   background-color: #F3F7F9;
   color: #364656 !important;
   padding: 10px 25px 70px;
@@ -345,7 +345,8 @@
   background-color: #F3F7F9;
 }
 
-.users-bg li.list-heading [class*='col-md-'] {
+.qt-users li.list-heading [class*='col-md-'],
+.qt-users li.list-heading [class*='col-lg-']{
   text-transform: uppercase;
   font-size: 11px;
   font-family: 'Graphik Medium', sans-serif;
@@ -449,6 +450,9 @@
   background-color: #E8F6FE;
   padding: 4px 30px 4px 4px;
   cursor: pointer;
+}
+.users-bg .col-lg-2 #has-invoice-updates1{
+  float: left;
 }
 
 #has-invoice-updates1 i {
@@ -1684,7 +1688,7 @@ Devices tab
 }
 
 /*#product-list-cont .custom-product-list.nano {*/
-  /*width: 100%;*/
+/*width: 100%;*/
 /*}*/
 
 .qt-invoices .qt-table .ha-edit {
