@@ -915,12 +915,10 @@
         $scope.$watch(function(){
           return companyProfileSharedState.companyId;
         }, function(companyId){
-          console.log(companyId);
           $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId)
           TicketsService.getAllCountsByCompanyId(companyId, function(resp) {
             $scope.ticketsCounterByCompany = resp;
             companyProfileSharedState.ticketsCounts = resp;
-            console.log('companyProfileSharedState.ticketsCounts', companyProfileSharedState.ticketsCounts)
           })
 
         })
