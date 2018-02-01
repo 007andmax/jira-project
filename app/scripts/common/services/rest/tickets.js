@@ -442,7 +442,9 @@
         });
 
         RealTimeService.subscribe('/leftPanelCounts', scope, function (newChange) {
+
           if (newChange.action == 'LEFT_PANEL_COUNTS') {
+
             Utils.customizeObj(newChange.data, storage.leftPanelCounters);
           }
         });

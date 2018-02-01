@@ -310,34 +310,54 @@
         </span>
         </div>
 
-        <div class="col-lg-1 col-xs-1 buttons-col">
-          <div class="list-actions pull-right">
+        <!--<div class="col-lg-1 col-xs-1 buttons-col">-->
+          <!--<div class="list-actions pull-right">-->
 
-            <div class="btn-icn btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
-                 ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"
-                 tooltip-placement="top" uib-tooltip="Edit">
-              <i class="icon-sm edit-icon"></i>
-            </div>
+            <!--<div class="btn-icn btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"-->
+                 <!--ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"-->
+                 <!--tooltip-placement="top" uib-tooltip="Edit">-->
+              <!--<i class="icon-sm edit-icon"></i>-->
+            <!--</div>-->
 
-            <div class="btn btn-icn btn-default btn-user-mail pull-left has-tooltip"
-                 custom-disabled="{{ !user.primaryEmail }}"
-                 email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
-              <i class="icon-sm icn-user-mail"></i>
-            </div>
+            <!--<div class="btn btn-icn btn-default btn-user-mail pull-left has-tooltip"-->
+                 <!--custom-disabled="{{ !user.primaryEmail }}"-->
+                 <!--email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">-->
+              <!--<i class="icon-sm icn-user-mail"></i>-->
+            <!--</div>-->
 
-            <div class="btn btn-icn btn-default pull-left has-tooltip " ng-click="archiveUser()"
-                 custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
-                      || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
-                 tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">
-              <i class="icon-sm icn-delete"></i>
-            </div>
+            <!--<div class="btn btn-icn btn-default pull-left has-tooltip " ng-click="archiveUser()"-->
+                 <!--custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')-->
+                      <!--|| user.isContact || isLastUserWithInvoiceSubscription(user) }}"-->
+                 <!--tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">-->
+              <!--<i class="icon-sm icn-delete"></i>-->
+            <!--</div>-->
 
-            <div class="btn btn-icn btn-default pull-left has-tooltip"
-                 ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')">
-              <i class="icon-sm icn-restore" ng-click="dearchiveUser(user)"></i>
-            </div>
+            <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+                 <!--ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')">-->
+              <!--<i class="icon-sm icn-restore" ng-click="dearchiveUser(user)"></i>-->
+            <!--</div>-->
 
-          </div>
+          <!--</div>-->
+        <!--</div>-->
+
+        <div uib-dropdown class="user-list-more" smart-dropdown-menu-position="dropdown-menu">
+          <a class="hit-area ha-22-48 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle>
+            <i class="icn-sm icn-more-light-grey"></i>
+          </a>
+          <ul class="dropdown-menu" role="menu" style="left: -140px;" >
+
+            <li>
+              <a create-new-entity="user" item="user"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt">Edit</a>
+            </li>
+            <li ng-show="{{ !user.primaryEmail }}">
+              <a email-to="user.primaryEmail">Email</a>
+            </li>
+            <li ng-show="{{ !PermissionsService.isAllowed('ARCHIVE_USERS') || user.isContact || isLastUserWithInvoiceSubscription(user) }}">
+              <a ng-click="archiveUser()">Archive User</a>
+            </li>
+
+          </ul>
         </div>
       </div>
     </li>
