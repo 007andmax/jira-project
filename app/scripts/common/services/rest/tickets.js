@@ -481,9 +481,11 @@
             callback(resp.data);
           }
         });
+
+
       }
 
-      function getAllCountsByCompanyId(companyId, callback) {
+      function getAllCountsByCompanyId(scope, companyId, callback) {
         $http.post('/v2/tickets/'+companyId+'/counts', queries).then(function (resp) {
           storage.ticketsQuantityMapByCompany = resp.data;
 
@@ -495,6 +497,15 @@
             callback(resp.data);
           }
         });
+
+        RealTimeService.subscribe('/leftPanelCountsCompany', scope, function (newChange) {
+          if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
+            Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
+            //callback && callback(storage.ticketsQuantityMapByCompany)
+          }
+        });
+
+        return storage.ticketsQuantityMapByCompany;
       }
 
       function getCompanyTicketCount(query) {

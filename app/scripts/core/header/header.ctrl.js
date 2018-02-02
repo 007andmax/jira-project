@@ -22,9 +22,9 @@
           sharedQuickSession.isCreateNew = true;
         };
 
-        $scope.getAssignUserId = function(ticket) {
-          if(ticket) {
-            if(ticket.assignedUser && ticket.assignedUser.id && ticket.assignedUser.id.length) {
+        $scope.getAssignUserId = function (ticket) {
+          if (ticket) {
+            if (ticket.assignedUser && ticket.assignedUser.id && ticket.assignedUser.id.length) {
               return ticket.assignedUser.id;
             } else {
               return ticket.assignedUserId;
@@ -45,7 +45,7 @@
         };
 
         $scope.userReadable = function (text) {
-          if(text) {
+          if (text) {
             var words = text.split(/[\-_]/),
               result = '';
 
@@ -87,7 +87,7 @@
             return 'receipt-archive';
           } else if ($state.includes("service-agreements")) {
             return 'service-agreements';
-          }else if ($state.includes("settings")) {
+          } else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';
             } else {
@@ -132,17 +132,20 @@
           'tickets-unassigned': 'UNASSIGNED',
           'tickets-closed': 'CLOSED',
           'tickets-inProgress': 'IN_PROGRESS',
-          'tickets-onHold': 'ON_HOLD'
+          'tickets-onHold': 'ON_HOLD',
+          'tickets-completed': 'COMPLETED'
         };
 
-        $scope.isCompanyProfileTicketPageIsOpen = function() {
+        $scope.isCompanyProfileTicketPageIsOpen = function () {
           return $state.includes('companyProfile')
         };
 
-        $scope.getOpenedUsersTab = function() {
+        $scope.getOpenedUsersTab = function () {
           return $location.search().tabName
         };
 
       }]);
 
 }());
+
+

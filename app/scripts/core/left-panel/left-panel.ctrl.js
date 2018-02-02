@@ -915,8 +915,8 @@
         $scope.$watch(function(){
           return companyProfileSharedState.companyId;
         }, function(companyId){
-          $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId)
-          TicketsService.getAllCountsByCompanyId(companyId, function(resp) {
+          $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
+          TicketsService.getAllCountsByCompanyId($scope, companyId, function(resp) {
             $scope.ticketsCounterByCompany = resp;
             companyProfileSharedState.ticketsCounts = resp;
           })
