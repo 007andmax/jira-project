@@ -16,6 +16,7 @@
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.draftsSharedState = SharedStateService.getSharedState('draftsHeader');
         $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
+        $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
 
 
         $scope.addQuickSession = function () {
