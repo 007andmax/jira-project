@@ -267,7 +267,7 @@
           <ul class="dropdown-menu dropdown-subscribe">
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticket')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticket')" stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.ticket">
@@ -278,7 +278,7 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticketManager')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticketManager')" stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.ticketManager">
@@ -289,7 +289,7 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')" stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.invoice"

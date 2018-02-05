@@ -196,7 +196,7 @@
           <ul class="dropdown-menu dropdown-subscribe">
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')" stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
@@ -207,7 +207,7 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticketManager')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticketManager')" stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticketManager">
@@ -218,7 +218,7 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')" stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left"
                          ng-disabled="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
