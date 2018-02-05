@@ -5406,7 +5406,7 @@ Devices tab
 }
 
 .devices-detail-block {
-  padding: 25px 0;
+  padding-top: 25px;
 }
 
 .devices-detail-block .col-md-4:first-child {
