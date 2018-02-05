@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-2"></div>
   </li>
-  <li>
+  <li class="active-device-item">
     <div class="users-list-wrapper">
       <div class="col-md-4">
         <label class="control checkbox">
@@ -48,21 +48,22 @@
         </div>
       </div>
       <div class="col-md-3">
+        <div class="dashboard-active-device"></div>
         <p class="ellipsis">Activetek</p>
         <p class="label label-light ellipsis">Idle: <span>20</span>min</p>
       </div>
       <div class="col-md-3 up-time">
         <i class="up-time-green"></i>
         <i class="up-time-yellow"></i>
-        <div>
-          1 day 23 hrs
-        </div>
+        <div>1 day 23 hrs</div>
         <i class="bug-zbs"></i>
         <i class="bug-not-zbs"></i>
       </div>
       <div class="col-md-2" style="padding-left: 90px;">
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-          <i class="dev-btn devices-lock pointer" uib-dropdown-toggle></i>
+          <div uib-dropdown-toggle>
+            <i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>
+          </div>
           <div class="dropdown-menu" role="menu">
             <p><span>Server2008</span> Credential</p>
             <div>
@@ -72,14 +73,40 @@
           </div>
         </div>
         <div>
-          <i class="dev-btn devices-card pointer"></i>
+          <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
         </div>
         <div>
-          <i class="dev-btn devices-remote pointer"></i>
+          <i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>
         </div>
-        <div>
-          <i class="icn-more-light-grey icn-sm pointer"></i>
+        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+          <div uib-dropdown-toggle>
+            <i class="icn-more-light-grey icn-sm pointer" uib-tooltip="more"></i>
+          </div>
+          <ul class="dropdown-menu" role="menu">
+            <li>Restart</li>
+            <li>Shutdown</li>
+            <li>Remove</li>
+          </ul>
         </div>
+      </div>
+    </div>
+    <div class="devices-detail-block clearfix">
+      <div class="col-md-4">
+        <p class="label-light">OS</p>
+        <p>Windows7 Pro 64 bit</p>
+      </div>
+      <div class="col-md-3">
+        <p class="label-light">LAN IP</p>
+        <p>192.168.204.55</p>
+      </div>
+      <div class="col-md-3">
+        <p class="label-light">WAN IP</p>
+        <p style="display: inline-block;">24.58.157.55</p>
+        <i style="display: inline-block;" class="devices-location"></i>
+      </div>
+      <div class="col-md-2">
+        <p class="label-light">FQDN</p>
+        <p>OP02.activeitek.com</p>
       </div>
     </div>
   </li>

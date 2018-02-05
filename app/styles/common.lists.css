@@ -247,7 +247,8 @@
   padding: 0 10px;
 }
 
-.users-list-wrapper [class*='col-'] {
+.users-list-wrapper [class*='col-'],
+.devices-detail-block [class*='col-'] {
   padding: 0 10px;
 }
 
@@ -362,6 +363,7 @@
   box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
   font-size: 13px !important;
   min-height: 79px;
+  border: 1px solid transparent;
 }
 
 .users-list-wrapper [class*='col-md-'] {
@@ -807,6 +809,7 @@
   margin-right: 0;
   color: #94a4b8;
   background-color: #e7ecf2;
+  cursor: default;
 }
 
 .qt-users .label-light,
@@ -5313,41 +5316,106 @@ Devices tab
   background: url("../images/new-icons/bug-not-zbs.png");
   vertical-align: bottom;
 }
-.dev-btn{
+
+.dev-btn {
   width: 16px;
   vertical-align: middle;
   display: inline-block;
   margin-left: 20px;
   background-size: cover;
 }
-.devices-lock{
+
+.devices-lock {
   background-image: url(../images/new-icons/devices-lock.png);
   height: 18px;
 }
-.devices-card{
+
+.devices-card {
   background-image: url(../images/new-icons/devices-card.png);
   height: 19px;
 }
-.devices-remote{
+
+.devices-remote {
   background-image: url(../images/new-icons/devices-remote.png);
   height: 24px;
   width: 24px;
 }
-.company-devices .icn-more-light-grey{
+
+.company-devices .icn-more-light-grey {
   margin: 3px 0 0 20px;
   height: 16px;
 }
+
 .company-devices .icn-more-light-grey {
   background-position: -1664px 6px;
 }
-.company-devices .dropdown-menu{
-  padding: 10px;
-  width: 170px!important;
-  left: -120px!important;
+
+.company-devices .dropdown-menu {
+  width: 170px !important;
+  left: -120px !important;
 }
-.company-devices .dropdown-menu > p{
+
+.company-devices .dropdown-menu > p {
   font-weight: 700;
 }
-.company-devices .dropdown-menu p{
+
+.company-devices .dropdown-menu p {
+  padding: 5px 10px;
   font-size: 12px;
+}
+
+.company-devices .dropdown-menu li {
+  position: relative;
+  cursor: pointer;
+  padding: 10px 20px 10px 50px;
+}
+
+.company-devices .dropdown-menu li:before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 20px;
+  top: 15px;
+}
+
+.company-devices .dropdown-menu li:first-child:before {
+  background: url(../images/new-icons/devices-restart.png);
+}
+
+.company-devices .dropdown-menu li:nth-child(2):before {
+  background: url(../images/new-icons/devices-shutdown.png);
+}
+
+.company-devices .dropdown-menu li:last-child:before {
+  background: url(../images/new-icons/devices-remove.png);
+}
+
+.dashboard-active-device {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: -15px;
+  top: 10px;
+  background: url("../images/new-icons/devices-active-monitor.png");
+  cursor: pointer;
+}
+
+.active-device-item {
+  border: 1px solid #2EC866 !important;
+}
+
+.devices-detail-block {
+  padding: 25px 0;
+}
+
+.devices-detail-block .col-md-4:first-child {
+  padding-left: 105px;
+}
+
+.devices-location {
+  width: 16px;
+  height: 16px;
+  background: url(../images/sprites-s76c759f188.png) -964px -204px;
+  vertical-align: text-bottom;
 }
