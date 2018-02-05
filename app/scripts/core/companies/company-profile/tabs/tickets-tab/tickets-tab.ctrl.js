@@ -183,6 +183,11 @@
             globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
             globalSearch.goBack.func = uncheckAllTickets;
             globalSearch.goBack.tooltip = 'reset selected items';
+            if(globalSearch.selectedItemsCount<1) {
+              globalSearch.goBack.isEnabled = true;
+              globalSearch.goBack.func = $state.go.bind($state, 'companies');
+              globalSearch.goBack.tooltip = 'back to companies';
+            }
           }
         }
 
