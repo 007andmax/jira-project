@@ -17,10 +17,10 @@
         <span class="text-muted" ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen() ">
           &nbsp;{{ globalSearch.count }}
         </span>
-        <span class="text-muted" ng-if="(isCompanyProfileTicketPageIsOpen() && !ticketsSharedState.filter.clientUserId)">
+        <span class="text-muted" ng-if="(isCompanyProfileTicketPageIsOpen() && !ticketsSharedState.filter.clientUserId && !ticketsSharedState.filter.techUserId)">
           &nbsp;{{ companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] }}
         </span>
-        <span class="text-muted" ng-if="(isCompanyProfileTicketPageIsOpen() && ticketsSharedState.filter.clientUserId)">
+        <span class="text-muted" ng-if="(isCompanyProfileTicketPageIsOpen() && (ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId))">
           &nbsp;{{ globalSearch.count }}
         </span>
       </p>
