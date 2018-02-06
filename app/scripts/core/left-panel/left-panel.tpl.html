@@ -711,7 +711,9 @@
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileProductsPage}"></i>
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileProductsPage">
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'products' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='products'}">
               List of products sold
             </div>
           </div>
