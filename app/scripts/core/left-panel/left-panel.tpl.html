@@ -734,7 +734,7 @@
         </div>
 
         <div class="left-panel-title" ui-sref="companyProfile({ tabName: 'contracts' })"
-             ng-class="{'active': getOpenedUsersTab() ==='contracts'}" ng-if="isShowContractsTabOnCompanyPage()">
+             ng-class="{'active': getOpenedUsersTab() ==='contracts'}" ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
           Contracts
         </div>
 
@@ -916,7 +916,7 @@
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('service-agreements')}"
-             ng-click="stateGo($event, 'service-agreements')">
+             ng-click="stateGo($event, 'service-agreements')" ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
           Service Agreements
         </div>
       </div>

@@ -6,14 +6,19 @@
     <h3>Service Agreement</h3>
     <div class="billing-payment clearfix">
       <div class="col-xs-6">
-        <div class="form-group" ng-if="!preSetupCompany">
+        <div class="form-group">
           <p>Select Company</p>
           <qt-dropdown-typehead list-for-dropdown="companiesList"
                                 selected-item="contractCompany"
                                 display-property="'name'"
-                                filter-property="'name'">
+                                filter-property="'name'" ng-if="!preSetupCompany">
 
           </qt-dropdown-typehead>
+            <input type="text" class="form-control has-dropdown" next-after-text-editor
+                   ng-model="contractCompany" name="contractCompany" autocomplete="off"
+                   uib-typeahead="company as company.name for company in companiesList | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                   typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
+                   custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}" required disabled>
         </div>
       </div>
       <div class="col-xs-6"></div>
