@@ -516,7 +516,7 @@
       </div>
     </div>
 
-    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'companyProfile' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'companyProfile' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -733,7 +733,8 @@
           </div>
         </div>
 
-        <div class="left-panel-title">
+        <div class="left-panel-title" ui-sref="companyProfile({ tabName: 'contracts' })"
+             ng-class="{'active': getOpenedUsersTab() ==='contracts'}" ng-if="isShowContractsTabOnCompanyPage()">
           Contracts
         </div>
 

@@ -6,7 +6,7 @@
     <h3>Service Agreement</h3>
     <div class="billing-payment clearfix">
       <div class="col-xs-6">
-        <div class="form-group">
+        <div class="form-group" ng-if="!preSetupCompany">
           <p>Select Company</p>
           <qt-dropdown-typehead list-for-dropdown="companiesList"
                                 selected-item="contractCompany"

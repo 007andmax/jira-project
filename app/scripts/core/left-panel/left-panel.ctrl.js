@@ -167,6 +167,18 @@
           return company ? company.name : '';
         }
 
+        $scope.getCompanyById = function(id) {
+          return CompaniesService.getOneById(id)
+        };
+
+        $scope.isShowContractsTabOnCompanyPage = function() {
+          if($scope.$state.params.companyId) {
+            return $scope.getCompanyById($scope.$state.params.companyId).clientType !== 'VENDOR';
+          } else {
+            return true;
+          }
+        };
+
 
         function getCompanyIdByCompanyName(name) {
           //var company = $scope.clientCompanies().find((c) => c.name === name);
@@ -735,6 +747,8 @@
             }
           }
         };
+
+
 
         $scope.getDeviceNameById = function (deviceId) {
           var device = DevicesService.getOneByDeviceId(deviceId);
