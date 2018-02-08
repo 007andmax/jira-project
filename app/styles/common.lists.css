@@ -348,6 +348,7 @@
 }
 
 .qt-users li.list-heading [class*='col-md-'],
+.qt-users li.list-heading [class*='col-xs-'],
 .qt-users li.list-heading [class*='col-lg-'],
 .company-devices li.list-heading [class*='col-md-'] {
   text-transform: uppercase;
@@ -362,8 +363,25 @@
   border-radius: 5px;
   box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
   font-size: 13px !important;
-  min-height: 79px;
+  min-height: 72px;
   border: 1px solid transparent;
+  padding: 12px 15px 0;
+}
+
+.qt-companies > li {
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.company-devices > li {
+  min-height: 72px;
+  padding: 12px 15px 12px;
+  height: auto;
+}
+
+.qt-companies .list-company-row .col-xs-3 {
+  display: flex;
+  align-self: center;
 }
 
 .users-list-wrapper [class*='col-md-'] {
@@ -426,7 +444,7 @@
 
 .qt-users .checkbox,
 .company-devices .checkbox {
-  margin: 16px 10px 0 0 !important;
+  margin: 11px 10px 0 0 !important;
 }
 
 .qt-users li.list-heading,
@@ -445,7 +463,7 @@
   margin-right: 2px;
   background-color: #fff;
   border-radius: 3px;
-  width: 58px;
+  width: 61px;
   text-align: center;
   font-size: 10px;
   cursor: pointer;
@@ -461,13 +479,39 @@
 }
 
 .users-bg .col-lg-2 #has-invoice-updates1 {
-  float: left;
+  float: right;
 }
 
 #has-invoice-updates1 i {
   position: absolute;
   right: 11px;
   top: 13px;
+}
+
+.default-user-avatar,
+.default-company-logo {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.default-user-avatar span,
+.default-company-logo span {
+  color: #364656;
+  font-family: 'Graphik Medium', sans-serif;
+}
+
+.default-company-logo-big {
+  width: 120px;
+  height: 120px;
+}
+
+.default-company-logo-big span {
+  font-size: 30px;
 }
 
 .qt-users .col-1 {
@@ -4197,6 +4241,111 @@ Devices tab
   width: 150px;
 }
 
+.dashboard-network-scan {
+  display: flex;
+  flex-flow: column;
+  font-size: 13px;
+  color: #4f5f79;
+  text-align: center;
+  background-color: #F3F7F9;
+  height: calc(100vh - 78px);
+  padding: 155px 0 0;
+  align-items: center;
+}
+
+.dashboard-network-scan .network-scan-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-network-scan .network-scan-steps > div:not(:last-child) {
+  margin-right: 80px;
+}
+
+.dashboard-network-scan .network-scan-steps div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+.dashboard-network-scan .network-scan-steps div .network-scan-step-img {
+  width: 140px;
+  height: 140px;
+  margin-bottom: 30px;
+}
+
+.dashboard-network-scan .network-scan-steps div:first-child .network-scan-step-img {
+  background: url("../images/new-icons/network-scan-download.png");
+}
+
+.dashboard-network-scan .network-scan-steps div:nth-child(2) .network-scan-step-img {
+  background: url("../images/new-icons/network-scan-install.png");
+}
+
+.dashboard-network-scan .network-scan-steps div:last-child .network-scan-step-img {
+  background: url("../images/new-icons/network-scan-run-scan.png");
+}
+
+.dashboard-network-scan .network-scan-steps div div:nth-child(2) {
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 15px;
+}
+
+.network-scan-actions {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  width: 295px;
+  margin-top: 140px;
+}
+
+.network-scan-actions button {
+  color: #fff;
+  transition: all .3s;
+  font-size: 14px;
+  height: 40px;
+}
+
+.network-scan-actions .btn-success {
+  margin-bottom: 65px;
+  position: relative;
+  background-color: #2EC866;
+  border: solid 1px #189947;
+}
+
+.network-scan-actions .btn-success:hover,
+.network-scan-actions .btn-success:active,
+.network-scan-actions .btn-success:focus{
+  background-color: #189947;
+}
+
+.network-scan-actions .btn-primary {
+  background-color: #fff;
+  color: #16a4fa;
+  border: 1px solid #16a4fa;
+}
+
+.network-scan-actions .btn-primary:hover,
+.network-scan-actions .btn-primary:active,
+.network-scan-actions .btn-primary:focus{
+  background-color: #16a4fa;
+  border: 1px solid #16a4fa;
+  color: #fff;
+}
+
+.network-scan-actions .btn-success:after {
+  position: absolute;
+  content: 'OR';
+  color: #9ca5b6;
+  font-size: 12px;
+  font-family: "Graphik Medium", sans-serif;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 @media only screen and (min-width: 2000px) {
   .qt-network-scan > li > .col-1 {
     width: calc(100% - 1179px);
@@ -5273,7 +5422,9 @@ Devices tab
   border: 1px solid #c4cbd5;
 }
 
-.device-name-edit .btn-default:hover {
+.device-name-edit .btn-default:hover,
+.device-name-edit .btn-default:active,
+.device-name-edit .btn-default:focus{
   background-color: #c4cbd5;
   border: 1px solid #c4cbd5;
   color: #4f5f79;

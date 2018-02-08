@@ -3,12 +3,13 @@
   <ul class="qt-list qt-users users-bg" ng-controller="quicktech.core.companies.bulkOptionCtrl">
     <div class="selected-users-edit" ng-if="selectUsersIds.length > 0">
       <p><span>{{ selectUsersIds.length }}</span> Selected</p>
-      <i class="user-previledge" uib-tooltip="Set Privilege" >
+      <i class="user-previledge" uib-tooltip="Set Privilege">
         <div uib-dropdown>
           <div class="btn btn-icn has-tooltip pull-right" uib-dropdown-toggle>
           </div>
 
-          <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click" style="left: -130px;top: 25px;width: 160px!important;">
+          <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click"
+              style="left: -130px;top: 25px;width: 160px!important;">
 
             <li ng-click="changeUserSubscription('ticket')">
               <a tabindex="-1" href="javascript:void(0)">
@@ -48,13 +49,14 @@
           </ul>
         </div>
       </i>
-      <i class="user-send-email" uib-tooltip="Email" email-to="selectedUsersPrimaryEmails" ng-show="selectedUsersPrimaryEmails.length>0"></i>
+      <i class="user-send-email" uib-tooltip="Email" email-to="selectedUsersPrimaryEmails"
+         ng-show="selectedUsersPrimaryEmails.length>0"></i>
       <i class="user-send-email" uib-tooltip="Email" ng-hide="selectedUsersPrimaryEmails.length>0"></i>
       <i class="user-remove" uib-tooltip="Archive User" ng-click="archiveUsers()"></i>
     </div>
     <h3>{{getUsersNumber().name}} (<span>{{getUsersNumber().number}}</span>)</h3>
     <li class="list-heading" fixed-block-top>
-      <div class="col-md-3" >
+      <div class="col-md-4">
         <label class="control checkbox pull-left" ng-show="users.length > 0">
           <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
                  ng-model="selectedUsers['all']" ng-click="selectAllUsers(selectedUsers['all'])">
@@ -62,7 +64,7 @@
         </label>
 
         <span class="sort-span" ng-click="setOrderByUsers('name')">Name<i class="icn-sm sort-icon icn-sort"
-                                       ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
+                                                                          ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
       </div>
 
       <div class="col-md-3">
@@ -81,7 +83,7 @@
       <!--<div class="col-md-1 text-center">-->
       <!--<span>Primary contact</span>-->
       <!--</div>-->
-      <div class="col-md-3">Ticket Subscription</div>
+      <div class="col-md-2">Ticket Subscription</div>
 
 
       <!--<div class="col-md-1 " ng-click="setOrderByUsers('ticket')">-->
@@ -97,16 +99,20 @@
         show-model-element="{{ 'show-user-on-save-' + user.id }}" ng-show="usersFilter(user)">
 
       <div class="users-list-wrapper">
-        <div class="col-md-3 column-name">
+        <div class="col-md-4 column-name">
           <label class="control checkbox ">
             <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
             <span class="control-indicator"></span>
           </label>
 
           <div style="display: flex; overflow: hidden; align-items: center;">
-            <div class=" avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+            <div class="avatar">
+              <!--<img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">-->
               <i class="on bottom"></i>
+              <div class="default-user-avatar">
+                <span>A</span>
+                <span>B</span>
+              </div>
             </div>
             <div class="ellipsis" style="max-width: 80%;">
               <p style="padding-right: 10px; font-family: 'Graphik Medium',sans-serif;" class="user-name"
@@ -175,7 +181,8 @@
         <!--</label>-->
         <!--</div>-->
 
-        <div class="col-md-3" uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+        <div style="justify-content: flex-end;" class="col-md-2" uib-dropdown
+             smart-dropdown-menu-position="dropdown-menu">
 
           <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
                tooltip-placement="top">
@@ -196,7 +203,8 @@
           <ul class="dropdown-menu dropdown-subscribe">
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')" stop-propagation="click">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')"
+                 stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
@@ -207,7 +215,8 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticketManager')" stop-propagation="click">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticketManager')"
+                 stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticketManager">
@@ -218,7 +227,8 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')" stop-propagation="click">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')"
+                 stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left"
                          ng-disabled="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
@@ -241,57 +251,59 @@
         <!--</div>-->
 
         <!--<div class="col-md-1" style="justify-content: center">-->
-          <!--&lt;!&ndash;<div class="list-actions">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="list-actions">&ndash;&gt;-->
 
-          <!--<div class="btn btn-icn btn-default  has-tooltip" create-new-entity="user" item="user"-->
-                     <!--ng-if="PermissionsService.isAllowed('EDIT_USERS')"-->
-                     <!--tooltip-placement="top" uib-tooltip="Edit">-->
-          <!--<i class="icon-sm edit-icon"></i>-->
+        <!--<div class="btn btn-icn btn-default  has-tooltip" create-new-entity="user" item="user"-->
+        <!--ng-if="PermissionsService.isAllowed('EDIT_USERS')"-->
+        <!--tooltip-placement="top" uib-tooltip="Edit">-->
+        <!--<i class="icon-sm edit-icon"></i>-->
         <!--</div>-->
 
-          <!--<div class="btn btn-icn btn-default btn-user-mail  has-tooltip" custom-disabled="{{ !user.primaryEmail }}"-->
-          <!--email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">-->
-          <!--<i class="icon-sm icn-user-mail"></i>-->
-          <!--</div>-->
+        <!--<div class="btn btn-icn btn-default btn-user-mail  has-tooltip" custom-disabled="{{ !user.primaryEmail }}"-->
+        <!--email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">-->
+        <!--<i class="icon-sm icn-user-mail"></i>-->
+        <!--</div>-->
 
-          <!--<div class="right-align-tooltip">-->
-          <!--<div class="btn btn-icn btn-default pad-top has-tooltip" ng-click="archiveUser()"-->
-          <!--custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')-->
-          <!--|| user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"-->
-          <!--tooltip-placement="top" uib-tooltip="Archive this User">-->
-          <!--<i class="icn-sm icn-remove-old"></i>-->
-          <!--</div>-->
-          <!--</div>-->
+        <!--<div class="right-align-tooltip">-->
+        <!--<div class="btn btn-icn btn-default pad-top has-tooltip" ng-click="archiveUser()"-->
+        <!--custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')-->
+        <!--|| user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"-->
+        <!--tooltip-placement="top" uib-tooltip="Archive this User">-->
+        <!--<i class="icn-sm icn-remove-old"></i>-->
+        <!--</div>-->
+        <!--</div>-->
 
-          <!--</div>-->
-          <div uib-dropdown class="user-list-more" smart-dropdown-menu-position="dropdown-menu">
-            <a class="hit-area ha-22-48 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle>
-              <i class="icn-sm icn-more-light-grey"></i>
-            </a>
-            <ul class="dropdown-menu" role="menu" style="left: -140px;" >
+        <!--</div>-->
+        <div style="justify-content: flex-end;" uib-dropdown class="user-list-more col-md-1"
+             smart-dropdown-menu-position="dropdown-menu">
+          <a class="hit-area ha-22-48 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle>
+            <i class="icn-sm icn-more-light-grey"></i>
+          </a>
+          <ul class="dropdown-menu" role="menu" style="width: 70%;">
 
-              <li>
-                <a create-new-entity="user" item="user"
-                   ng-if="PermissionsService.isAllowed('EDIT_USERS')">Edit</a>
-              </li>
-              <li>
-                <a custom-disabled="{{ !user.primaryEmail }}"
-                   email-to="user.primaryEmail">Email</a>
-              </li>
-              <li>
-                <a ng-click="archiveUser()"
-                   custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS') || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}">Archive User</a>
-              </li>
-              <li>
-                <a ng-click="changePrimaryContact(user)">Mark as Primary</a>
-              </li>
+            <li>
+              <a create-new-entity="user" item="user"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS')">Edit</a>
+            </li>
+            <li>
+              <a custom-disabled="{{ !user.primaryEmail }}"
+                 email-to="user.primaryEmail">Email</a>
+            </li>
+            <li>
+              <a ng-click="archiveUser()"
+                 custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS') || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}">Archive
+                User</a>
+            </li>
+            <li>
+              <a ng-click="changePrimaryContact(user)">Mark as Primary</a>
+            </li>
 
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
-    </li>
-  </ul>
+</div>
+</li>
+</ul>
 </div>
 
 

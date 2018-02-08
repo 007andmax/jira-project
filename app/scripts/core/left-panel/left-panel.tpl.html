@@ -679,7 +679,10 @@
           </div>
         </div>
 
-        <div class="left-panel-title" style="margin-bottom: 10px;">
+        <div class="left-panel-title"
+             style="margin-bottom: 10px;"
+             ui-sref="companyProfile({ tabName: 'network-scan' })"
+             ng-class="{'active': getOpenedUsersTab() ==='network-scan'}">
           Network Scan
         </div>
 

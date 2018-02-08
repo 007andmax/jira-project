@@ -397,7 +397,7 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
 }
 
 .create-window .general .company-window .avatar-create .avatar {
-  border: 1px solid #e2e6e6;
+  /*border: 1px solid #e2e6e6;*/
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;

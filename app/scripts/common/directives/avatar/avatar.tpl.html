@@ -1,22 +1,26 @@
 <div class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
      model-image-path="{{ imagePath }}">
   <div class="avatar pull-left">
-    <img ng-src="{{ model[imagePath] && model[imagePath].cropped || !model[imagePath].base64 ? getUrl() : model[imagePath].base64 }}"
-         ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
-         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped || model[imagePath].base64 ? '100%' : 'none'}">
-
-    <div class="reposition" ng-show="model[imagePath] && model[imagePath].origin" reposition-button>
-      Reposition...
+    <!--<img-->
+      <!--ng-src="{{ model[imagePath] && model[imagePath].cropped || !model[imagePath].base64 ? getUrl() : model[imagePath].base64 }}"-->
+      <!--ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"-->
+      <!--ng-style="{'max-height': model[imagePath] && model[imagePath].cropped || model[imagePath].base64 ? '100%' : 'none'}">-->
+    <div class="default-company-logo default-company-logo-big">
+      <span>A</span>
     </div>
   </div>
-  <div class="choose-file pull-left">
-    <div class="select-file clearfix">
-      <div class="btn btn-lg btn-primary pull-left" crop-image-button>
-        {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }} image
-      </div>
-      <span class="file-name pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
+  <!--<div class="reposition" ng-show="model[imagePath] && model[imagePath].origin" reposition-button>-->
+    <!--Reposition...-->
+  <!--</div>-->
+</div>
+<div class="choose-file">
+  <div class="select-file">
+    <div class="btn btn-lg btn-primary" crop-image-button>
+      {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }} image
+    </div>
+    <span class="file-name pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
         <a href="javascript:void(0)" restore-default-button>Restore Default</a>
       </span>
-    </div>
   </div>
+</div>
 </div>

@@ -3,14 +3,19 @@
        ng-include="'/html/scripts/core/companies/company-profile/tabs/dashboard/dashboard.tpl.html'">
   </div>
 
-  <div ng-if="getOpenedTab() === 'users-all' || getOpenedTab() === 'users-managers' || getOpenedTab() === 'users-clients'"
-       ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'">
+  <div
+    ng-if="getOpenedTab() === 'users-all' || getOpenedTab() === 'users-managers' || getOpenedTab() === 'users-clients'"
+    ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'">
   </div>
-  <div ng-if="getOpenedTab() === 'tickets-all'|| getOpenedTab() === 'tickets-unassigned'|| getOpenedTab() === 'tickets-inProgress'|| getOpenedTab() === 'tickets-onHold' || getOpenedTab() === 'tickets-completed'"
-       ng-include="'/html/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.tpl.html'">
+  <div
+    ng-if="getOpenedTab() === 'tickets-all'|| getOpenedTab() === 'tickets-unassigned'|| getOpenedTab() === 'tickets-inProgress'|| getOpenedTab() === 'tickets-onHold' || getOpenedTab() === 'tickets-completed'"
+    ng-include="'/html/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.tpl.html'">
   </div>
   <div ng-if="getOpenedTab() === 'devices-all'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/devices-tab/companyDevices-tab.tpl.html'">
+  </div>
+  <div ng-if="getOpenedTab() === 'network-scan'"
+       ng-include="'/html/scripts/core/companies/company-profile/tabs/network-scan-tab/dashboard-network-scan-tab.tpl.html'">
   </div>
   <div ng-if="getOpenedTab() === 'products'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/products-tab/list-of-products-sold.tpl.html'">
@@ -86,204 +91,204 @@
   <!--</div>-->
 
   <!--<div class="company-profile-header"-->
-       <!--ng-style="{'height': tabName !== 'dashboard' ? '0px' : '320px',-->
-       <!--'opacity': tabName !== 'dashboard' ? 0 : 1}">-->
+  <!--ng-style="{'height': tabName !== 'dashboard' ? '0px' : '320px',-->
+  <!--'opacity': tabName !== 'dashboard' ? 0 : 1}">-->
 
-    <!--<div class="company-new-cover-wrapper">-->
-      <!--<div class="background-layer">-->
+  <!--<div class="company-new-cover-wrapper">-->
+  <!--<div class="background-layer">-->
 
-        <!--<div class="container company-info">-->
-          <!--<div class="company-logo">-->
-            <!--<img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">-->
-          <!--</div>-->
-          <!--<div class="company-name-header">-->
-            <!--<p class="ellipsis" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"-->
-               <!--trimmed-tooltip-checker="company.name">-->
-            <!--</p>-->
-          <!--</div>-->
-          <!--<div class="company-info-type clearfix"-->
-               <!--ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">-->
-            <!--<img src="images/input-icons/phone-number.png" alt="">-->
-            <!--<p class="ellipsis">{{ currentLocation.phoneNumbers[0].number }}</p>-->
-          <!--</div>-->
-          <!--<div class="company-info-type clearfix">-->
-            <!--<img src="images/new-icons/location-white.png" alt="">-->
-            <!--<p class="ellipsis">{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>-->
-          <!--</div>-->
-          <!--<div class="company-service-type" ng-show="companyData.serviceType">-->
-            <!--<p><strong>Service Type:</strong>{{ userReadable(companyData.serviceType) }}</p>-->
-          <!--</div>-->
-          <!--<div class="company-service-type" ng-show="companyData.clientType">-->
-            <!--<p><strong>Client Type:</strong>{{ userReadable(companyData.clientType) }}</p>-->
-          <!--</div>-->
-          <!--<div class="company-service-type clearfix" ng-show="companyData.clientType.toLowerCase() === 'vendor'">-->
-            <!--<p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>-->
-          <!--</div>-->
-          <!--<div class="company-contact-type first-of-type">-->
-            <!--<div class="ellipsis">-->
-              <!--<strong>Primary contact:</strong>-->
-              <!--<p class="ellipsis company-p-style" uib-tooltip="{{ getUserName(currentContact) }}"-->
-                 <!--tooltip-placement="bottom"-->
-                 <!--trimmed-tooltip-checker="getUserName(currentContact)"></p>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="company-contact-type" ng-show="currentContact.primaryEmail">-->
-            <!--<div class="ellipsis">-->
-              <!--<strong>Contact email:</strong>-->
-              <!--<p class="ellipsis company-p-style" uib-tooltip="{{ currentContact.primaryEmail }}"-->
-                 <!--tooltip-placement="bottom"-->
-                 <!--trimmed-tooltip-checker="currentContact.primaryEmail"></p>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="company-contact-type"-->
-               <!--ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">-->
-            <!--<div class="ellipsis">-->
-              <!--<strong>Contact phone:</strong>-->
-              <!--<p class="ellipsis company-p-style">{{ currentContact.phoneNumbers[0].number }}</p>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="btns-block clearfix">-->
-            <!--<div class="icn icn-create-ticket" create-new-entity="ticket" company-id="{{ company.id }}"-->
-                 <!--uib-tooltip="Create Ticket" tooltip-placement="top"></div>-->
-            <!--<div class="icn icn-add-new-user" create-new-entity="user" company-id="{{ company.id }}"-->
-                 <!--uib-tooltip="Create User" tooltip-placement="top"-->
-                 <!--ng-if="PermissionsService.isAllowed('CREATE_USERS')"></div>-->
-            <!--<div-->
-              <!--qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"-->
-              <!--qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}"-->
-              <!--style="display: inline-block;">-->
-              <!--<div class="icn icn-agent-download" qt-popover-trigger tooltip-placement="top"-->
-                   <!--uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></div>-->
-            <!--</div>-->
+  <!--<div class="container company-info">-->
+  <!--<div class="company-logo">-->
+  <!--<img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">-->
+  <!--</div>-->
+  <!--<div class="company-name-header">-->
+  <!--<p class="ellipsis" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"-->
+  <!--trimmed-tooltip-checker="company.name">-->
+  <!--</p>-->
+  <!--</div>-->
+  <!--<div class="company-info-type clearfix"-->
+  <!--ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">-->
+  <!--<img src="images/input-icons/phone-number.png" alt="">-->
+  <!--<p class="ellipsis">{{ currentLocation.phoneNumbers[0].number }}</p>-->
+  <!--</div>-->
+  <!--<div class="company-info-type clearfix">-->
+  <!--<img src="images/new-icons/location-white.png" alt="">-->
+  <!--<p class="ellipsis">{{ currentLocation.addressWithSuitNumberAndPostalCode }}</p>-->
+  <!--</div>-->
+  <!--<div class="company-service-type" ng-show="companyData.serviceType">-->
+  <!--<p><strong>Service Type:</strong>{{ userReadable(companyData.serviceType) }}</p>-->
+  <!--</div>-->
+  <!--<div class="company-service-type" ng-show="companyData.clientType">-->
+  <!--<p><strong>Client Type:</strong>{{ userReadable(companyData.clientType) }}</p>-->
+  <!--</div>-->
+  <!--<div class="company-service-type clearfix" ng-show="companyData.clientType.toLowerCase() === 'vendor'">-->
+  <!--<p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>-->
+  <!--</div>-->
+  <!--<div class="company-contact-type first-of-type">-->
+  <!--<div class="ellipsis">-->
+  <!--<strong>Primary contact:</strong>-->
+  <!--<p class="ellipsis company-p-style" uib-tooltip="{{ getUserName(currentContact) }}"-->
+  <!--tooltip-placement="bottom"-->
+  <!--trimmed-tooltip-checker="getUserName(currentContact)"></p>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="company-contact-type" ng-show="currentContact.primaryEmail">-->
+  <!--<div class="ellipsis">-->
+  <!--<strong>Contact email:</strong>-->
+  <!--<p class="ellipsis company-p-style" uib-tooltip="{{ currentContact.primaryEmail }}"-->
+  <!--tooltip-placement="bottom"-->
+  <!--trimmed-tooltip-checker="currentContact.primaryEmail"></p>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="company-contact-type"-->
+  <!--ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">-->
+  <!--<div class="ellipsis">-->
+  <!--<strong>Contact phone:</strong>-->
+  <!--<p class="ellipsis company-p-style">{{ currentContact.phoneNumbers[0].number }}</p>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="btns-block clearfix">-->
+  <!--<div class="icn icn-create-ticket" create-new-entity="ticket" company-id="{{ company.id }}"-->
+  <!--uib-tooltip="Create Ticket" tooltip-placement="top"></div>-->
+  <!--<div class="icn icn-add-new-user" create-new-entity="user" company-id="{{ company.id }}"-->
+  <!--uib-tooltip="Create User" tooltip-placement="top"-->
+  <!--ng-if="PermissionsService.isAllowed('CREATE_USERS')"></div>-->
+  <!--<div-->
+  <!--qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"-->
+  <!--qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}"-->
+  <!--style="display: inline-block;">-->
+  <!--<div class="icn icn-agent-download" qt-popover-trigger tooltip-placement="top"-->
+  <!--uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></div>-->
+  <!--</div>-->
 
-            <!--<div class="icn icn-camera" uib-dropdown uib-dropdown-toggle dropdown-append-to-body-->
-                 <!--uib-tooltip="Change Logo" tooltip-placement="top"-->
-                 <!--ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">-->
-              <!--<ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu-->
-                  <!--crop-image="companyData" model-image-path="logo">-->
-                <!--<li crop-image-button stop-propagation="click">-->
-                  <!--<a tabindex="-1" href="javascript:void(0)">Change Image</a>-->
-                <!--</li>-->
-                <!--<li restore-default-button stop-propagation="click" ng-show="companyData.logo">-->
-                  <!--<a tabindex="-1" href="javascript:void(0)">Restore Default</a>-->
-                <!--</li>-->
-                <!--<li reposition-button stop-propagation="click" ng-show="companyData.logo">-->
-                  <!--<a tabindex="-1" href="javascript:void(0)">Reposition</a>-->
-                <!--</li>-->
-              <!--</ul>-->
-            <!--</div>-->
+  <!--<div class="icn icn-camera" uib-dropdown uib-dropdown-toggle dropdown-append-to-body-->
+  <!--uib-tooltip="Change Logo" tooltip-placement="top"-->
+  <!--ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">-->
+  <!--<ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu-->
+  <!--crop-image="companyData" model-image-path="logo">-->
+  <!--<li crop-image-button stop-propagation="click">-->
+  <!--<a tabindex="-1" href="javascript:void(0)">Change Image</a>-->
+  <!--</li>-->
+  <!--<li restore-default-button stop-propagation="click" ng-show="companyData.logo">-->
+  <!--<a tabindex="-1" href="javascript:void(0)">Restore Default</a>-->
+  <!--</li>-->
+  <!--<li reposition-button stop-propagation="click" ng-show="companyData.logo">-->
+  <!--<a tabindex="-1" href="javascript:void(0)">Reposition</a>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--</div>-->
 
-            <!--<div class="icn icn-address" ng-click="chartHidden = !chartHidden"-->
-                 <!--uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>-->
+  <!--<div class="icn icn-address" ng-click="chartHidden = !chartHidden"-->
+  <!--uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>-->
 
-            <!--<div ng-show="companyData.description" class="icn"-->
-                 <!--qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"-->
-                 <!--qt-popover-position="bottom-left-align">-->
-              <!--<div class="icn icn-note" qt-popover-trigger="mouseenter"></div>-->
-            <!--</div>-->
+  <!--<div ng-show="companyData.description" class="icn"-->
+  <!--qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"-->
+  <!--qt-popover-position="bottom-left-align">-->
+  <!--<div class="icn icn-note" qt-popover-trigger="mouseenter"></div>-->
+  <!--</div>-->
 
-            <!--<div class="icn icn-edit-new" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"-->
-                 <!--create-new-entity="company" item="company" uib-tooltip="Edit"-->
-                 <!--tooltip-placement="top" tooltip-append-to-body="true">-->
-            <!--</div>-->
-            <!--<div class="icn icn-archive-usr" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"-->
-                 <!--ng-click="archiveCompany()" uib-tooltip="Archive Company"-->
-                 <!--tooltip-placement="top" tooltip-append-to-body="true">-->
-            <!--</div>-->
+  <!--<div class="icn icn-edit-new" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"-->
+  <!--create-new-entity="company" item="company" uib-tooltip="Edit"-->
+  <!--tooltip-placement="top" tooltip-append-to-body="true">-->
+  <!--</div>-->
+  <!--<div class="icn icn-archive-usr" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"-->
+  <!--ng-click="archiveCompany()" uib-tooltip="Archive Company"-->
+  <!--tooltip-placement="top" tooltip-append-to-body="true">-->
+  <!--</div>-->
 
 
-          <!--</div>-->
-        <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
 
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation && chartHidden"-->
-         <!--ng-model="companyData.addresses[0]"></div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation && chartHidden"-->
+  <!--ng-model="companyData.addresses[0]"></div>-->
 
-    <!--<div chart-data-restriction fetch-func="getStatisticByCompany"-->
-         <!--margin="100" divider="50" chart-wrap param0="companyId" param1="frequency"-->
-         <!--class="company-map-wrapper" ng-if="!chartHidden">-->
+  <!--<div chart-data-restriction fetch-func="getStatisticByCompany"-->
+  <!--margin="100" divider="50" chart-wrap param0="companyId" param1="frequency"-->
+  <!--class="company-map-wrapper" ng-if="!chartHidden">-->
 
-      <!--<div class="chart-header">-->
-        <!--<div class="chart-header-name">-->
-          <!--<p class="header-title">{{ getChartTitle() }}</p>-->
-          <!--<p ng-if="selectedChart === 'responseTime'">-->
-            <!--Outliers-->
-            <!--<span class="font-yellow">-->
-              <!--{{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)-->
-            <!--</span>-->
-          <!--</p>-->
-        <!--</div>-->
+  <!--<div class="chart-header">-->
+  <!--<div class="chart-header-name">-->
+  <!--<p class="header-title">{{ getChartTitle() }}</p>-->
+  <!--<p ng-if="selectedChart === 'responseTime'">-->
+  <!--Outliers-->
+  <!--<span class="font-yellow">-->
+  <!--{{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)-->
+  <!--</span>-->
+  <!--</p>-->
+  <!--</div>-->
 
-        <!--<div class="chart-header-controls">-->
-          <!--<p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>-->
-          <!--<p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>-->
-          <!--<p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>-->
-        <!--</div>-->
-      <!--</div>-->
+  <!--<div class="chart-header-controls">-->
+  <!--<p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>-->
+  <!--<p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>-->
+  <!--<p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>-->
+  <!--</div>-->
+  <!--</div>-->
 
-      <!--<div d3chart data="chartData" margin="{ top: 20, right: 10, bottom: 40, left: 70}"-->
-           <!--style="height: 229px" ng-if="!reloading">-->
-        <!--<d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"-->
-                <!--ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>-->
-        <!--<d3axis name="{{ selectedChart }}" orientation="left"></d3axis>-->
-        <!--<d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"-->
-                <!--tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}" to-fixed="0"></d3bars>-->
-      <!--</div>-->
+  <!--<div d3chart data="chartData" margin="{ top: 20, right: 10, bottom: 40, left: 70}"-->
+  <!--style="height: 229px" ng-if="!reloading">-->
+  <!--<d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"-->
+  <!--ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>-->
+  <!--<d3axis name="{{ selectedChart }}" orientation="left"></d3axis>-->
+  <!--<d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"-->
+  <!--tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}" to-fixed="0"></d3bars>-->
+  <!--</div>-->
 
-    <!--</div>-->
+  <!--</div>-->
 
-    <!--<div class="company-work-info">-->
-      <!--<table>-->
-        <!--<tbody ng-click="selectChart('countOfNewTickets')"-->
-               <!--ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">-->
-        <!--<tr>-->
-          <!--<td rowspan="2" colspan="1" class="bd-right-disabled">-->
-            <!--<p>Open Tickets</p>-->
-            <!--<p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>-->
-          <!--</td>-->
-          <!--<td colspan="1" class="bd-bottom-disabled bd-left-disabled">-->
-            <!--<p>Total</p>-->
-            <!--<p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-          <!--<td rowspan="1" class="bd-top-disabled bd-left-disabled">-->
-            <!--<p>On hold</p>-->
-            <!--<p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--<tbody ng-click="selectChart('responseTime')"-->
-               <!--ng-class="{'selected-chart': selectedChart === 'responseTime'}">-->
-        <!--<tr>-->
-          <!--<td colspan="2">-->
-            <!--<p>Response Time</p>-->
-            <!--<p class="big-count font-yellow">-->
-              <!--{{-->
-              <!--companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime-->
-              <!--?-->
-              <!--(companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()-->
-              <!--:-->
-              <!--0-->
-              <!--}} min-->
-            <!--</p>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--<tbody ng-click="selectChart('averageTime')"-->
-               <!--ng-class="{'selected-chart': selectedChart === 'averageTime'}">-->
-        <!--<tr>-->
-          <!--<td colspan="2">-->
-            <!--<p>Average Time</p>-->
-            <!--<p class="big-count font-red">-->
-              <!--{{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}-->
-            <!--</p>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-      <!--</table>-->
-    <!--</div>-->
+  <!--<div class="company-work-info">-->
+  <!--<table>-->
+  <!--<tbody ng-click="selectChart('countOfNewTickets')"-->
+  <!--ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">-->
+  <!--<tr>-->
+  <!--<td rowspan="2" colspan="1" class="bd-right-disabled">-->
+  <!--<p>Open Tickets</p>-->
+  <!--<p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>-->
+  <!--</td>-->
+  <!--<td colspan="1" class="bd-bottom-disabled bd-left-disabled">-->
+  <!--<p>Total</p>-->
+  <!--<p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>-->
+  <!--</td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+  <!--<td rowspan="1" class="bd-top-disabled bd-left-disabled">-->
+  <!--<p>On hold</p>-->
+  <!--<p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>-->
+  <!--</td>-->
+  <!--</tr>-->
+  <!--</tbody>-->
+  <!--<tbody ng-click="selectChart('responseTime')"-->
+  <!--ng-class="{'selected-chart': selectedChart === 'responseTime'}">-->
+  <!--<tr>-->
+  <!--<td colspan="2">-->
+  <!--<p>Response Time</p>-->
+  <!--<p class="big-count font-yellow">-->
+  <!--{{-->
+  <!--companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime-->
+  <!--?-->
+  <!--(companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()-->
+  <!--:-->
+  <!--0-->
+  <!--}} min-->
+  <!--</p>-->
+  <!--</td>-->
+  <!--</tr>-->
+  <!--</tbody>-->
+  <!--<tbody ng-click="selectChart('averageTime')"-->
+  <!--ng-class="{'selected-chart': selectedChart === 'averageTime'}">-->
+  <!--<tr>-->
+  <!--<td colspan="2">-->
+  <!--<p>Average Time</p>-->
+  <!--<p class="big-count font-red">-->
+  <!--{{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}-->
+  <!--</p>-->
+  <!--</td>-->
+  <!--</tr>-->
+  <!--</tbody>-->
+  <!--</table>-->
+  <!--</div>-->
 
   <!--</div>-->
 

@@ -4507,8 +4507,6 @@ select[multiple].input-lg {
   font-size: 65%;
   color: #fff;
   text-align: center;
-  background-color: transparent;
-  background-position: -905px -96px;
   border: 1px solid #d2dae4;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -4536,9 +4534,9 @@ select[multiple].input-lg {
 }
 
 .control input:checked ~ .control-indicator {
-  background-position: -858px -96px;
-  background-color: #90c56b;
-  border-color: #90c56b;
+  background-position: -858px -120px;
+  background-color: #2EC866;
+  border-color: #2EC866;
 }
 
 .device-field .control input:checked ~ .control-indicator {
