@@ -1092,7 +1092,7 @@ hr {
 
 .company-profile-content {
   background-color: #F3F7F9;
-  padding: 10px 25px;
+  padding: 30px 25px 0;
 }
 
 .company-profile-content .icn-remove-token-light {
@@ -4522,7 +4522,7 @@ select[multiple].input-lg {
 }
 
 .checkbox .control-indicator {
-  border-radius: 1px;
+  border-radius: 3px;
 }
 
 .device-field .checkbox .control-indicator {
@@ -10522,11 +10522,21 @@ button.close {
   height: auto;
   color: #ffffff;
   text-align: center;
-  background-color: #151e29;
+  background-color: #4F5F79;
   border-radius: 4px;
   max-width: 500px;
+  text-transform: capitalize;
+  position: relative;
 }
-
+.tooltip-inner:after{
+  position: absolute;
+  content: '';
+  border: 6px solid transparent;
+  border-top: 5px solid #4F5F79;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .tooltip-lg .tooltip-inner {
   padding: 18px 20px;
   height: auto;

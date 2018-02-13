@@ -335,7 +335,7 @@
 .users-bg {
   background-color: #F3F7F9;
   color: #364656 !important;
-  padding: 10px 25px 70px;
+  padding: 30px 25px 70px;
   min-height: calc(100vh - 78px);
 }
 
@@ -1331,7 +1331,17 @@ Devices tab
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
   width: 221px !important;
 }
-
+.qt-users.users-bg .dropdown-subscribe {
+  box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+  width: 229px !important;
+  left: 15px;
+}
+.qt-users.users-bg .dropdown-menu li a {
+  font-size: 13px;
+}
+.qt-users.users-bg .dropdown-subscribe li a label{
+  font-size: 13px;
+}
 .qt-list > li.billable-main > .col-1,
 .qt-billable-sub > li > .col-1 {
   width: calc(100% - 120px);
@@ -4352,7 +4362,7 @@ Devices tab
 
 .dashboard-network-scan-list h3 {
   margin: 0 25px 15px;
-  padding-top: 10px;
+  padding-top: 30px;
 }
 
 .dashboard-network-scan-header {
