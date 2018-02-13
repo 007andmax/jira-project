@@ -1,25 +1,120 @@
-<div class="dashboard-network-scan">
-  <div class="network-scan-steps">
-    <div>
-      <div class="network-scan-step-img"></div>
-      <div>1. Download</div>
-      <div>Download Agent for Windows</div>
+<!--<div class="dashboard-network-scan">-->
+<!--<div class="network-scan-steps">-->
+<!--<div>-->
+<!--<div class="network-scan-step-img"></div>-->
+<!--<div>1. Download</div>-->
+<!--<div>Download Agent for Windows</div>-->
+<!--</div>-->
+<!--<div>-->
+<!--<div class="network-scan-step-img"></div>-->
+<!--<div>2. Install</div>-->
+<!--<div>Follow the instructions on-->
+<!--your computer</div>-->
+<!--</div>-->
+<!--<div>-->
+<!--<div class="network-scan-step-img"></div>-->
+<!--<div>3. Run Scan</div>-->
+<!--<div>Get Started with run scan-->
+<!--to get result</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="network-scan-actions">-->
+<!--<button class="btn btn-success">Download Agent Installer for Windows</button>-->
+<!--<button class="btn btn-primary">Copy a installer link to clipboard</button>-->
+<!--</div>-->
+<!--</div>-->
+<div class="dashboard-network-scan dashboard-network-scan-list">
+  <h3>Network Scan</h3>
+  <div class="dashboard-network-scan-header clearfix">
+    <div class="header-item">
+      <div class="run-scan-img"></div>
+      <p>Run Scan</p>
     </div>
-    <div>
-      <div class="network-scan-step-img"></div>
-      <div>2. Install</div>
-      <div>Follow the instructions on
-        your computer</div>
+    <div class="header-item">
+      <p>User Name</p>
+      <input type="text">
+      <p>Password</p>
+      <input type="text">
+      <button class="btn btn-success">Add Credential</button>
     </div>
-    <div>
-      <div class="network-scan-step-img"></div>
-      <div>3. Run Scan</div>
-      <div>Get Started with run scan
-        to get result</div>
+    <div class="header-item">
+      <p>Saved Credentials</p>
+      <div class="saved-credentials">
+        <p>Active Tek</p>
+        <p>Admin Server</p>
+        <p>Office Server</p>
+        <p>HP Server</p>
+      </div>
+    </div>
+    <div class="header-item">
+      <div class="install-agent-img"></div>
+      <p>Install Agent</p>
     </div>
   </div>
-  <div class="network-scan-actions">
-    <button class="btn btn-success">Download Agent Installer for Windows</button>
-    <button class="btn btn-primary">Copy a installer link to clipboard</button>
-  </div>
+  <ul class="users-bg company-devices qt-list">
+    <li class="list-heading">
+      <div class="col-md-3">
+        <label class="control checkbox pull-left">
+          <input type="checkbox">
+          <span class="control-indicator"></span>
+        </label>
+        <span class="sort-span">
+        Device Name
+      </span>
+      </div>
+      <div class="col-md-2">
+        <span>
+          Lan IP
+        </span>
+      </div>
+      <div class="col-md-2">
+        <span>MANUFACTURER</span>
+      </div>
+      <div class="col-md-2">
+        <span>Mac address</span>
+      </div>
+      <div class="col-md-2">
+        <span>Status</span>
+      </div>
+      <div class="col-md-1"></div>
+    </li>
+    <li class="active-device-item">
+      <div class="users-list-wrapper">
+        <div class="col-md-3">
+          <label class="control checkbox">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+          </label>
+          <div class="company-device-name">
+
+            <i class="devices-monitor"></i>
+            <!--<i class="devices-phone"></i>-->
+            <!--<i class="devices-printer"></i>-->
+            <!--<i class="devices-server"></i>-->
+
+            <div>
+              <p class="ellipsis">BlackHall</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          192.168.15.120
+        </div>
+        <div class="col-md-2">
+          Asus computer
+        </div>
+        <div class="col-md-2">
+          00155dcc8501
+        </div>
+        <div class="col-md-2">
+          <!--<div class="network-scan-status status-success">Agent installed</div>-->
+          <div class="network-scan-status status-warning">Incorrect Password</div>
+          <!--<div class="network-scan-status status-danger">Blocked</div>-->
+        </div>
+        <div class="col-md-1" style="justify-content: flex-end;">
+          <i class="delete-network-scan"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

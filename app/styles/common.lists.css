@@ -4293,6 +4293,161 @@ Devices tab
   font-size: 15px;
 }
 
+.dashboard-network-scan.dashboard-network-scan-list {
+  padding: 0;
+  text-align: left;
+  display: block;
+}
+
+.dashboard-network-scan-list .company-device-name > div {
+  vertical-align: text-top;
+}
+
+.dashboard-network-scan-list .company-device-name {
+  padding: 0;
+}
+
+.dashboard-network-scan-list .company-device-name i {
+  margin: 10px 10px 0 0;
+}
+
+.dashboard-network-scan-list .company-devices .checkbox {
+  margin: 10px 10px 0 0 !important;
+}
+
+.dashboard-network-scan-list .users-list-wrapper {
+  padding-top: 5px;
+}
+
+.dashboard-network-scan-list .users-list-wrapper .col-md-3 .company-device-name div p {
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.dashboard-network-scan-list .users-list-wrapper .col-md-2,
+.dashboard-network-scan-list .users-list-wrapper .col-md-1 {
+  padding-top: 5px;
+}
+
+.network-scan-status {
+  padding: 1px 5px;
+  font-size: 11px;
+  border-radius: 3px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.status-success {
+  background-color: #D5F4E0;
+  color: #2EC866;
+}
+
+.status-warning {
+  background-color: #FFF0D5;
+  color: #ffb937;
+}
+
+.status-danger {
+  background-color: #FFD8D5;
+  color: #FF3E2B;
+}
+
+.dashboard-network-scan-list h3 {
+  margin: 0 25px 15px;
+  padding-top: 10px;
+}
+
+.dashboard-network-scan-header {
+  margin: 0 25px;
+  border-radius: 3px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-network-scan-header .header-item {
+  padding: 15px 30px;
+  border-right: 1px solid #edf2f6;
+  width: 25%;
+  height: 248px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.dashboard-network-scan-header .header-item:first-child,
+.dashboard-network-scan-header .header-item:last-child {
+  text-align: center;
+}
+
+.dashboard-network-scan-header .header-item:first-child p,
+.dashboard-network-scan-header .header-item:last-child p {
+  font-size: 15px;
+}
+
+.dashboard-network-scan-header .col-md-3:last-child {
+  border: none;
+}
+
+.run-scan-img {
+  height: 49px;
+  width: 61px;
+  background: url("../images/new-icons/network-scan-run-scan-icn.png");
+  margin: 0 auto 20px;
+}
+
+.install-agent-img {
+  height: 58px;
+  width: 56px;
+  background: url("../images/new-icons/network-scan-install-icn.png");
+  margin: 0 auto 20px;
+}
+
+.dashboard-network-scan-header .header-item p {
+  font-size: 13px;
+  font-family: "Graphik Medium", sans-serif;
+  margin-bottom: 10px;
+}
+
+.dashboard-network-scan-header .header-item input {
+  height: 40px;
+  border-radius: 3px;
+  border: solid 1px #c4cbd5;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+.dashboard-network-scan.dashboard-network-scan-list .dashboard-network-scan-header .btn-success {
+  height: 40px;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.dashboard-network-scan-header .header-item .saved-credentials p {
+  padding: 5px 10px;
+  transition: all .3s;
+  position: relative;
+  border-radius: 3px;
+  margin-bottom: 0;
+  cursor: default;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.saved-credentials p:hover {
+  background-color: #EDF2F6;
+}
+
+.saved-credentials p:hover:after {
+  position: absolute;
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: url(../images/new-icons/devices-remove.png);
+  cursor: pointer;
+  right: 8px;
+  top: 8px;
+}
+
 .network-scan-actions {
   display: flex;
   justify-content: center;
@@ -4308,28 +4463,28 @@ Devices tab
   height: 40px;
 }
 
-.network-scan-actions .btn-success {
+.dashboard-network-scan .btn-success {
   margin-bottom: 65px;
   position: relative;
   background-color: #2EC866;
   border: solid 1px #189947;
 }
 
-.network-scan-actions .btn-success:hover,
-.network-scan-actions .btn-success:active,
-.network-scan-actions .btn-success:focus{
+.dashboard-network-scan .btn-success:hover,
+.dashboard-network-scan .btn-success:active,
+.dashboard-network-scan .btn-success:focus {
   background-color: #189947;
 }
 
-.network-scan-actions .btn-primary {
+.dashboard-network-scan .btn-primary {
   background-color: #fff;
   color: #16a4fa;
   border: 1px solid #16a4fa;
 }
 
-.network-scan-actions .btn-primary:hover,
-.network-scan-actions .btn-primary:active,
-.network-scan-actions .btn-primary:focus{
+.dashboard-network-scan .btn-primary:hover,
+.dashboard-network-scan .btn-primary:active,
+.dashboard-network-scan .btn-primary:focus {
   background-color: #16a4fa;
   border: 1px solid #16a4fa;
   color: #fff;
@@ -5424,7 +5579,7 @@ Devices tab
 
 .device-name-edit .btn-default:hover,
 .device-name-edit .btn-default:active,
-.device-name-edit .btn-default:focus{
+.device-name-edit .btn-default:focus {
   background-color: #c4cbd5;
   border: 1px solid #c4cbd5;
   color: #4f5f79;
@@ -5540,6 +5695,13 @@ Devices tab
 
 .company-devices .dropdown-menu li:last-child:before {
   background: url(../images/new-icons/devices-remove.png);
+}
+
+.delete-network-scan {
+  width: 16px;
+  height: 16px;
+  background: url(../images/new-icons/devices-remove.png);
+  cursor: pointer;
 }
 
 .dashboard-active-device {
