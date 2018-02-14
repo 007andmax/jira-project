@@ -60,7 +60,8 @@
           <input type="checkbox" ng-model="selectDevices[agent.id]" ng-change="changeSelectDevices()">
           <span class="control-indicator"></span>
         </label>
-        <div class="company-device-name" ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}">
+        <div class="company-device-name"
+             ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}" ng-show="!showDeviceLabelEditForm">
 
           <i class="devices-monitor" ng-show="agent.type === 'workstation'" ng-click="openDevicesDetails = !openDevicesDetails"></i>
           <i class="devices-phone" ng-show="agent.type === 'device'" ng-click="openDevicesDetails = !openDevicesDetails"></i>
@@ -70,7 +71,7 @@
           <div ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
-              {{agent.hostName}}
+              {{agent.label || agent.hostName}}
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
@@ -79,12 +80,11 @@
 
           </div>
 
-          <div class="device-name-edit" ng-show="showDeviceLabelEditForm" ng-form="agentLabelEditForm">
-            <input type="text" ng-model="agentLabelEditForm.name">
-            <button class="btn btn-primary" ng-click="saveNewDeviceLabel(agentLabelEditForm.name)">Save</button>
-            <button class="btn btn-default" ng-click="cancelNewDeviceLabelEdit()">Cancel</button>
-          </div>
-
+        </div>
+        <div class="device-name-edit" ng-show="showDeviceLabelEditForm" ng-form="agentLabelEditForm">
+          <input type="text" ng-model="agentLabelEditForm.name">
+          <button class="btn btn-primary" ng-click="saveNewDeviceLabel(agentLabelEditForm.name)">Save</button>
+          <button class="btn btn-default" ng-click="cancelNewDeviceLabelEdit()">Cancel</button>
         </div>
       </div>
       <div class="col-md-3">
@@ -93,8 +93,8 @@
         <p class="label label-light ellipsis">Idle: <span>20</span>min</p>
       </div>
       <div class="col-md-3 up-time">
-        <i class="up-time-green"></i>
-        <i class="up-time-yellow"></i>
+        <i class="up-time-green" ng-show="agent.online"></i>
+        <i class="up-time-yellow" ng-show="!agent.online"></i>
         <div>1 day 23 hrs</div>
 
         <i class="bug-zbs" ng-show="agent.report.antivirus.length>0"></i>
