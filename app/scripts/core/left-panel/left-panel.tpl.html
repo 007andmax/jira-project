@@ -641,19 +641,19 @@
                  ui-sref="companyProfile({ tabName: 'users-all' })"
                  ng-class="{'active': getOpenedUsersTab() ==='users-all'}">
               All users
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='users-all'"></i>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'users-managers' })"
                  ng-class="{'active': getOpenedUsersTab() ==='users-managers'}">
               Managers
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='users-managers'"></i>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'users-clients' })"
                  ng-class="{'active': getOpenedUsersTab() ==='users-clients'}">
               Users
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='users-clients'"></i>
             </div>
           </div>
         </div>
@@ -670,25 +670,25 @@
                  ui-sref="companyProfile({ tabName: 'devices-all' })"
                  ng-class="{'active': getOpenedUsersTab() ==='devices-all'}">
               All devices
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-all'"></i>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'devices-workstations' })"
                  ng-class="{'active': getOpenedUsersTab() ==='devices-workstations'}">
               Workstations
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-workstations'"></i>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'devices-servers' })"
                  ng-class="{'active': getOpenedUsersTab() ==='devices-servers'}">
               Servers
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-servers'"></i>
             </div>
             <div class="center-category__category sked"
                  ui-sref="companyProfile({ tabName: 'devices-devices' })"
                  ng-class="{'active': getOpenedUsersTab() ==='devices-devices'}">
               Devices
-              <i class="icn-sm icn-label-save-left-panel"></i>
+              <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-devices'"></i>
             </div>
           </div>
         </div>
