@@ -146,8 +146,8 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: 'quicktech.com',
-            port: 8000,
+            host: 'localhost',
+            port: 8080,
             https: false,
             xforward: false,
             headers: {
@@ -175,8 +175,8 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             // TO CHANGE PORT 80-81 etc when on serveDev
-            host: 'quicktech.com',
-            port: 8000,
+            host: 'localhost',
+            port: 8080,
             https: false,
             xforward: false,
             headers: {

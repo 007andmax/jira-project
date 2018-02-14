@@ -28,6 +28,39 @@
           }
         }
 
+        $scope.openDevicesDetails = false;
+        $scope.showDeviceLabelEditButtom = false;
+        $scope.showDeviceLabelEditForm = false;
+        $scope.reserveAgentLabelCopy = '';
+
+        $scope.openDeviceLabelEditForm = function() {
+          $scope.reserveAgentLabelCopy = $scope.agent.label;
+          $scope.showDeviceLabelEditForm = true;
+        };
+
+        $scope.saveNewDeviceLabel = function(name) {
+          if(name) {
+
+            $scope.showDeviceLabelEditForm = false;
+            var dto = {
+              agentId: $scope.agent.agentId,
+              companyId: $scope.company.id,
+              newLabelValue: name
+            };
+            DevicesService.setNewDeviceLabel(dto, function(resp) {
+              if(resp) {
+                $scope.agent.label = name;
+              }
+
+            })
+          }
+        };
+
+        $scope.cancelNewDeviceLabelEdit = function() {
+          $scope.agent.label = $scope.reserveAgentLabelCopy;
+          $scope.showDeviceLabelEditForm = false;
+        };
+
         $scope.highlightDevice = function () {
           if (globalSearch.deviceFilter) {
             $rootScope.$broadcast('showFilteredDevice-' + globalSearch.deviceFilter);
@@ -127,5 +160,8 @@
         }
 
       }]);
+
+
+
 
 }());

@@ -672,15 +672,21 @@
               All devices
               <i class="icn-sm icn-label-save-left-panel"></i>
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'devices-workstations' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='devices-workstations'}">
               Workstations
               <i class="icn-sm icn-label-save-left-panel"></i>
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'devices-servers' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='devices-servers'}">
               Servers
               <i class="icn-sm icn-label-save-left-panel"></i>
             </div>
-            <div class="center-category__category sked">
+            <div class="center-category__category sked"
+                 ui-sref="companyProfile({ tabName: 'devices-devices' })"
+                 ng-class="{'active': getOpenedUsersTab() ==='devices-devices'}">
               Devices
               <i class="icn-sm icn-label-save-left-panel"></i>
             </div>

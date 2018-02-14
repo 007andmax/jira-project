@@ -802,6 +802,29 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
+
+        $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+          storage.devices[companyId][0].report = resp.data[companyId][0].report[0];
+          storage.devices[companyId][0].label = resp.data[companyId][0].label;
+          getAgentsByCompany(scope, companyId, callback)
+        });
+      }
+
+      function setNewDeviceLabel(dto, callback) {
+
+        // dto structure
+        // {
+        // “agentId”:””,
+        // “deviceId”:””,
+        // “companyId”:””,
+        // “newLabelValue”:””
+        // }
+
+        var future = $http.post('/devices/editAgentLabel', dto);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -837,9 +860,13 @@
         removeGadget: removeGadget,
         saveMasterAgent: saveMasterAgent,
         testCredentials: testCredentials,
-        _addInitListener: _addInitListener
+        _addInitListener: _addInitListener,
+        getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
+        setNewDeviceLabel: setNewDeviceLabel
       }
     }
   ]);
 })
 (window, jQuery);
+
+

@@ -11,7 +11,7 @@
     ng-if="getOpenedTab() === 'tickets-all'|| getOpenedTab() === 'tickets-unassigned'|| getOpenedTab() === 'tickets-inProgress'|| getOpenedTab() === 'tickets-onHold' || getOpenedTab() === 'tickets-completed'"
     ng-include="'/html/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.tpl.html'">
   </div>
-  <div ng-if="getOpenedTab() === 'devices-all'"
+  <div ng-if="getOpenedTab() === 'devices-all' || getOpenedTab() === 'devices-workstations' || getOpenedTab() === 'devices-servers' || getOpenedTab() === 'devices-devices'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/devices-tab/companyDevices-tab.tpl.html'">
   </div>
   <div ng-if="getOpenedTab() === 'network-scan'"

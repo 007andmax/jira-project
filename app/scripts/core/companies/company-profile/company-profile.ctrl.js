@@ -332,6 +332,26 @@
           return $location.search().tabName
         };
 
+        $scope.filterForDevices = function(device) {
+          var openedTab = $scope.getOpenedTab();
+          if(openedTab === 'devices-all') {
+            return true
+          } else if(openedTab === 'devices-workstations') {
+            return device.type === 'workstation'
+          } else if(openedTab === 'devices-servers') {
+            return device.type === 'server'
+          } else if(openedTab === 'devices-devices') {
+            return device.type === 'device'
+          }
+        };
+
+        $scope.countForDevicePage = function(agents) {
+          var filteringArray = agents.filter(function(device){
+            return $scope.filterForDevices(device)
+          })
+          return filteringArray.length;
+        }
+
 
 
         // $scope.$watch('companyProfileSharedState.tabName', function(data) {

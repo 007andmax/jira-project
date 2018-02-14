@@ -92,13 +92,15 @@
         //   }
         // };
 
-        DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
+
+        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
           if(resp && resp.length) {
             var agentsList = resp;
             $scope.agents = agentsList.sort(function(a,b) {
               return a.name < b.name
             })
           }
+
         });
 
         $scope.$watch('agents.length', function (val) {
