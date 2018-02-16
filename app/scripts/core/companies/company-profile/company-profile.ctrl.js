@@ -6,14 +6,19 @@
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService',
-      'quicktech.common.services.PermissionsService', 'UsersService', '$location',
+      'quicktech.common.services.PermissionsService', 'UsersService', '$location', 'PasswordManagerService',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
-                PermissionsService, UsersService, $location ) {
+                PermissionsService, UsersService, $location, PasswordManagerService) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
         }
+
+        $scope.passwordsCredentials = [];
+        PasswordManagerService.getRecords(function(resp) {
+          $scope.passwordsCredentials = resp;
+        });
 
         UserNotificationService.show('Loading...');
 
@@ -346,10 +351,15 @@
         };
 
         $scope.countForDevicePage = function(agents) {
-          var filteringArray = agents.filter(function(device){
-            return $scope.filterForDevices(device)
-          })
-          return filteringArray.length;
+          if(agents) {
+            var filteringArray = agents.filter(function(device){
+              return $scope.filterForDevices(device)
+            })
+            return filteringArray.length;
+          } else {
+            return 0;
+          }
+
         }
 
 

@@ -158,9 +158,9 @@
         ng-click="openCompany(company)">
       <div class="col-xs-3">
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
-          <!--<img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">-->
-          <div class="default-company-logo">
-            <span>A</span>
+          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="" ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+          <div class="default-company-logo" ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" style="background-color: pink;">
+            <span>{{company.name[0].toUpperCase()}}</span>
           </div>
         </div>
         <div>

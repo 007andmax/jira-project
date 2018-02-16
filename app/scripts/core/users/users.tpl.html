@@ -194,10 +194,10 @@
         <div class="col-lg-3 col-xs-3">
           <div class="user-bio">
             <div class="pull-left avatar">
-              <!--<img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">-->
-              <div class="default-user-avatar">
-                <span>A</span>
-                <span>B</span>
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38" ng-if="(user && user.avatar)">
+              <div class="default-user-avatar" ng-if="!(user && user.avatar)" style="background-color: pink;">
+                <span>{{user.firstName[0].toUpperCase()}}</span>
+                <span>{{user.lastName[0].toUpperCase()}}</span>
               </div>
             </div>
 

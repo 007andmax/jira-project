@@ -7,9 +7,9 @@
         <div class="company-logo">
           <!--<img src="images/bitmap@3x.png" alt="">-->
           <div style="min-height: 38px; display: inline-block; float: left;margin-right: 10px;">
-            <!--<img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">-->
-            <div class="default-company-logo default-company-logo-big">
-              <span>A</span>
+            <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="" ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+            <div class="default-company-logo default-company-logo-big" ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" style="background-color: pink;">
+              <span>{{company.name[0].toUpperCase()}}</span>
             </div>
           </div>
         </div>
