@@ -129,18 +129,46 @@
             <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
           </div>
 
-        <div>
-          <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
-          <div ng-if="(agent.type !== 'workstation') && agent.online"
+        <!--<div>-->
+          <!--&lt;!&ndash;<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>&ndash;&gt;-->
+          <!--<div ng-if="(agent.type !== 'workstation') && agent.online"-->
+               <!--ng-click="remoteAccess('PROXY')" >-->
+            <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
+          <!--</div>-->
+
+          <!--<div ng-if="(agent.type === 'workstation') && agent.online"-->
+               <!--aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle smart-dropdown-menu-position>-->
+            <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div class="pull-right" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+          <div class="btn btn-icn btn-default pull-left has-tooltip"
+               ng-if="(agent.type !== 'workstation') && agent.online"
                ng-click="remoteAccess('PROXY')" >
             <i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>
           </div>
 
-          <div ng-if="(agent.type === 'workstation') && agent.online"
+          <div class="btn btn-icn btn-default pull-left has-tooltip"
+               ng-if="(agent.type === 'workstation') && agent.online"
+
                aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle smart-dropdown-menu-position>
             <i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>
           </div>
+
+          <ul class="dropdown-menu dropdown-menu-custom scrollable-menu" role="menu">
+
+            <li ng-click="remoteAccess('CSS')">
+              <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+            </li>
+
+            <li ng-click="remoteAccess('RDP')">
+              <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+            </li>
+
+          </ul>
         </div>
+
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
           <div uib-dropdown-toggle>
             <i class="icn-more-light-grey icn-sm pointer" uib-tooltip="more"></i>
