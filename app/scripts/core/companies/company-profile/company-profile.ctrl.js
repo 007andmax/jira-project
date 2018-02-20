@@ -15,10 +15,10 @@
           $state.go('tickets');
         }
 
-        $scope.passwordsCredentials = [];
-        PasswordManagerService.getRecords(function(resp) {
-          $scope.passwordsCredentials = resp;
-        });
+        // $scope.passwordsCredentials = [];
+        // PasswordManagerService.getRecords(function(resp) {
+        //   $scope.passwordsCredentials = resp;
+        // });
 
         UserNotificationService.show('Loading...');
 
