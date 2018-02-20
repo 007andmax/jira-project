@@ -138,9 +138,9 @@
           </div>
           <div class="dropdown-menu" role="menu">
             <p><span>{{agent.hostName}}</span> Credential</p>
-            <div>
-              <p>User: <span>Admin1</span></p>
-              <p>Password: <span>Administrator</span></p>
+            <div ng-repeat="credential in passwordsCredentials[agent.id]">
+              <p>User: <span>{{credential.username}}</span></p>
+              <p>Password: <span>{{credential.password}}</span></p>
             </div>
           </div>
         </div>
