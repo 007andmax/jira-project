@@ -15,11 +15,6 @@
           $state.go('tickets');
         }
 
-        // $scope.passwordsCredentials = [];
-        // PasswordManagerService.getRecords(function(resp) {
-        //   $scope.passwordsCredentials = resp;
-        // });
-
         UserNotificationService.show('Loading...');
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');

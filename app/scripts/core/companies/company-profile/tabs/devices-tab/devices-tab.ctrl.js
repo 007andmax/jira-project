@@ -164,22 +164,6 @@
           }
         }
 
-        // $scope.getAgentCredentials = function(agent) {
-        //   var credentialRecords = [];
-        //   for(var i=0; i<$scope.passwordsCredentials.length; i++) {
-        //     if($scope.passwordsCredentials[i].links && $scope.passwordsCredentials[i].links.length) {
-        //       for(var l=0; l<$scope.passwordsCredentials[i].links.length; l++) {
-        //         if($scope.passwordsCredentials[i].links[l].deviceId === agent.id) {
-        //           var record = {
-        //             deviceName: agent.hostName
-        //
-        //           }
-        //         }
-        //       }
-        //     }
-        //   }
-        // };
-
         $scope.deviceCredentials = $scope.devicesCredentials[$scope.agent.id];
 
         $scope.$watch('agent.Idle', function(value) {

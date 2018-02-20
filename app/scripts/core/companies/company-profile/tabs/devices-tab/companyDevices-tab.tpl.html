@@ -89,17 +89,7 @@
       </div>
       <div class="col-md-3">
         <!--<div class="dashboard-active-device" ng-if="!agent.agentConnected"></div>-->
-        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-if="!agent.agentConnected">
-          <div uib-dropdown-toggle>
-            <div class="dashboard-active-device"></div>
-          </div>
-          <div class="dropdown-menu" role="menu">
 
-            <div>
-              <p>No one connected</p>
-            </div>
-          </div>
-        </div>
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-if="agent.agentConnected">
           <div uib-dropdown-toggle>
             <div class="dashboard-active-device"></div>
@@ -125,6 +115,9 @@
         <!--<div>{{returnTimeFormatForPage(online)}}</div>-->
         <div ng-show="agent.online">
           <span ng-show="returnTimeFormatForPage(online).days > 0">{{returnTimeFormatForPage(online).days}} day</span><span ng-show="returnTimeFormatForPage(online).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span ng-show="returnTimeFormatForPage(online).minutes > 0"> {{returnTimeFormatForPage(online).minutes}} min</span><span ng-show="returnTimeFormatForPage(online).seconds > 0"> {{returnTimeFormatForPage(online).seconds}} sec</span>
+        </div>
+        <div ng-show="!agent.online">
+          <span>offline</span>
         </div>
 
         <i class="bug-zbs" ng-show="agent.report.antivirus.length>0"></i>
