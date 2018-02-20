@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService', 'CompaniesService',
-      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService', '$interval',
       function ($scope, DevicesService, RemoteAccessService, ConstantsService, CompaniesService, SharedStateService,
-                $rootScope, UserConfirmationsService) {
+                $rootScope, UserConfirmationsService, $interval) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var constVersion = ConstantsService.getConstant('rest.server.agent.version', function (resp) {
@@ -20,6 +20,11 @@
         });
         var lastAgentArr = constVersion ? constVersion.split('.') : [];
         var currentAgentArr = $scope.agent.agentVersion ? $scope.agent.agentVersion.split('.') : [];
+
+        $scope.idle = 0;
+        $scope.noRestart = 0;
+        $scope.online = 0;
+        $scope.agentConnectedAt = 0;
 
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
@@ -173,7 +178,88 @@
               }
             }
           }
-        }
+        };
+
+        $scope.$watch('agent.Idle', function(value) {
+          if(value) {
+            $scope.idle = $scope.getMillisecondsFromTimeString(value);
+          }
+        });
+
+        $scope.$watch('agent.NoRestart', function(value) {
+          if(value) {
+            $scope.noRestart = $scope.getMillisecondsFromTimeString(value);
+          }
+        });
+
+        $scope.$watch('agent.Online', function(value) {
+          if(value) {
+            $scope.online = $scope.getMillisecondsFromTimeString(value);
+          }
+        });
+
+        $scope.$watch('agent.agentConnected', function(value) {
+          if(value) {
+            if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.startedAt) {
+              $scope.agentConnectedAt = $scope.agent.OneTimeConnectionData.startedAt
+            }
+          }
+        });
+
+
+         var addSecond = $interval(function() {
+           $scope.idle += 1000;
+           $scope.noRestart += 1000;
+           $scope.online += 1000;
+           $scope.agentConnectedAt += 1000;
+        }, 1000);
+
+
+        $scope.getMillisecondsFromTimeString = function(timeString) {
+          var splittedArray = timeString.split(':');
+          return splittedArray[2]*1000 + splittedArray[1]*60000 + splittedArray[0]*3600000
+        };
+
+
+
+        $scope.returnTimeFormatForPage = function(time) {
+          var days = '';
+          var hours = '';
+          var minutes = '';
+          var seconds = '';
+          if(time > 86400000) {
+            days = Math.floor(time/86400000);
+            hours = Math.floor((time - (days*86400000))/3600000);
+            minutes = Math.floor((time - (days*86400000) - (hours*3600000))/60000);
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          } else if(time < 86400000 && time > 3600000) {
+            days = 0;
+            hours = Math.floor((time - (days*86400000))/3600000);
+            minutes = Math.floor((time - (days*86400000) - (hours*3600000))/60000);
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          } else if(time < 3600000 && time > 60000) {
+            days = 0;
+            hours = 0;
+            minutes = Math.floor((time - (days*86400000) - (hours*3600000))/60000);
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          } else {
+            days = 0;
+            hours = 0;
+            minutes = 0;
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          }
+          return {
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+          }
+
+        };
+
+
+
+
 
       }]);
 

@@ -16,7 +16,7 @@
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
         if (tabs.indexOf($stateParams.tabName) === -1) {
-          $state.go('companyProfile', { tabName: 'devices' });
+          $state.go('companyProfile', {tabName: 'devices'});
         }
         $scope.orderDevicesBy = 'hostName';
         $scope.currentOpenProfileTab = $stateParams.tabName || 'devices';
@@ -36,9 +36,9 @@
             $scope.company.hasProducts = resp.isProductExist;
 
             if ($scope.isHasDevices) {
-              $state.go('companyProfile', { tabName: 'devices' });
+              $state.go('companyProfile', {tabName: 'devices'});
             } else {
-              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan' });
+              $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
             }
           });
 
@@ -50,7 +50,7 @@
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
 
-        $scope.getUsersNumber = function() {
+        $scope.getUsersNumber = function () {
           var usersInfo = {
             number: '',
             name: ''
@@ -58,20 +58,20 @@
           var allUserNumber = [];
           var tabName = $scope.getOpenedTab();
 
-          if(tabName === 'users-all') {
-            allUserNumber = $scope.users.filter(function(user) {
+          if (tabName === 'users-all') {
+            allUserNumber = $scope.users.filter(function (user) {
               return !user.deletedAt
             });
             usersInfo.name = 'All Users';
             usersInfo.number = allUserNumber.length;
-          } else if(tabName === 'users-managers') {
-            allUserNumber = $scope.users.filter(function(user) {
+          } else if (tabName === 'users-managers') {
+            allUserNumber = $scope.users.filter(function (user) {
               return !user.deletedAt && user.role === 'ADMIN'
             });
             usersInfo.name = 'Managers';
             usersInfo.number = allUserNumber.length;
-          } else if(tabName === 'users-clients') {
-            allUserNumber = $scope.users.filter(function(user) {
+          } else if (tabName === 'users-clients') {
+            allUserNumber = $scope.users.filter(function (user) {
               return !user.deletedAt && (user.role === 'USER' || !user.role)
             });
             usersInfo.name = 'Users';
@@ -92,12 +92,33 @@
         //   }
         // };
 
+        function sentDeviceStatusRequest(agentId) {
+          DevicesService.sendDeviceStatusRequest($scope.company.id, agentId, function (resp) {
+            if (resp) {
+              console.log(resp);
+            }
+          })
+        }
+
 
         DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
-          if(resp && resp.length) {
+          if (resp && resp.length) {
             var agentsList = resp;
-            $scope.agents = agentsList.sort(function(a,b) {
+            $scope.agents = agentsList.sort(function (a, b) {
               return a.name < b.name
+            });
+            $scope.agents.forEach(function (agent) {
+              sentDeviceStatusRequest(agent.agentId)
+            });
+
+            var devicesIds = [];
+            $scope.agents.forEach(function (device) {
+              devicesIds.push(device.id);
+            });
+            DevicesService.getDevicesCredentials(devicesIds, function(resp){
+              if(resp) {
+                $scope.devicesCredentials = resp;
+              }
             })
           }
 
@@ -201,7 +222,7 @@
               if (user.subscription.ticketManager) {
                 selectUsersSbscr.ticketManager++;
               }
-              if(user.primaryEmail && user.primaryEmail.length) {
+              if (user.primaryEmail && user.primaryEmail.length) {
                 selectedUsersPrimaryEmails.push(user.primaryEmail);
               }
 
@@ -215,8 +236,8 @@
           };
 
           $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.filter(function (user) {
-              return !user.deletedAt;
-            }).length);
+            return !user.deletedAt;
+          }).length);
           $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
           $scope.companyProfileHeader.selectedUsersPrimaryEmails = selectedUsersPrimaryEmails;
 
@@ -240,8 +261,8 @@
 
           for (var deviceId in $scope.selectDevices) {
             if ($scope.selectDevices[deviceId]) {
-              for(var j = 0, le = $scope.agents.length; j<le; j++) {
-                if($scope.agents[j].id === deviceId) {
+              for (var j = 0, le = $scope.agents.length; j < le; j++) {
+                if ($scope.agents[j].id === deviceId) {
                   selectDevicesIds.push($scope.agents[j].id);
                 }
               }
@@ -279,7 +300,7 @@
           if (tab === 'dashboard') {
             return '/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
           } else {
-            return '/html/scripts/core/companies/company-profile/tabs/'  + tab + '-tab/' + tab + '-tab.tpl.html';
+            return '/html/scripts/core/companies/company-profile/tabs/' + tab + '-tab/' + tab + '-tab.tpl.html';
           }
         };
 
@@ -290,10 +311,10 @@
           $scope.changeSelectDevices();
         };
 
-        $scope.companyProfileHeader.removeDeviceFromPage = function(idForRemove) {
-          for(var i = 0; i < idForRemove.length; i++) {
-            for(var j = 0; j < $scope.agents.length; j++) {
-              if($scope.agents[j].id === idForRemove[i]) {
+        $scope.companyProfileHeader.removeDeviceFromPage = function (idForRemove) {
+          for (var i = 0; i < idForRemove.length; i++) {
+            for (var j = 0; j < $scope.agents.length; j++) {
+              if ($scope.agents[j].id === idForRemove[i]) {
                 $scope.agents.splice(j, 1);
               }
             }

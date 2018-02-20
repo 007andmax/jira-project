@@ -88,14 +88,44 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="dashboard-active-device"></div>
+        <!--<div class="dashboard-active-device" ng-if="!agent.agentConnected"></div>-->
+        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-if="!agent.agentConnected">
+          <div uib-dropdown-toggle>
+            <div class="dashboard-active-device"></div>
+          </div>
+          <div class="dropdown-menu" role="menu">
+
+            <div>
+              <p>No one connected</p>
+            </div>
+          </div>
+        </div>
+        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-if="agent.agentConnected">
+          <div uib-dropdown-toggle>
+            <div class="dashboard-active-device"></div>
+          </div>
+          <div class="dropdown-menu" role="menu">
+            <p><span>{{agent.OneTimeConnectionData.performer.firstNae}}</span> {{agent.OneTimeConnectionData.performer.lastName}}</p>
+            <div>
+              <p>Connected: <span ng-show="returnTimeFormatForPage(agentConnectedAt).days > 0">{{returnTimeFormatForPage(agentConnectedAt).days}} day</span><span ng-show="returnTimeFormatForPage(agentConnectedAt).hours > 0"> {{returnTimeFormatForPage(agentConnectedAt).hours}} hrs</span><span ng-show="returnTimeFormatForPage(agentConnectedAt).minutes > 0"> {{returnTimeFormatForPage(agentConnectedAt).minutes}} min</span></p>
+            </div>
+          </div>
+        </div>
         <p class="ellipsis">{{agent.userName}}</p>
-        <p class="label label-light ellipsis">Idle: <span>20</span>min</p>
+        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle > 0)">
+          Idle: <span ng-show="returnTimeFormatForPage(Idle).days > 0">{{returnTimeFormatForPage(Idle).days}} day</span><span ng-show="returnTimeFormatForPage(Idle).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span ng-show="returnTimeFormatForPage(Idle).minutes > 0"> {{returnTimeFormatForPage(online).minutes}} min</span>
+        </p>
+        <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle > 0)">
+          Idle: 0 min
+        </p>
       </div>
       <div class="col-md-3 up-time">
         <i class="up-time-green" ng-show="agent.online"></i>
         <i class="up-time-yellow" ng-show="!agent.online"></i>
-        <div>1 day 23 hrs</div>
+        <!--<div>{{returnTimeFormatForPage(online)}}</div>-->
+        <div ng-show="agent.online">
+          <span ng-show="returnTimeFormatForPage(online).days > 0">{{returnTimeFormatForPage(online).days}} day</span><span ng-show="returnTimeFormatForPage(online).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span ng-show="returnTimeFormatForPage(online).minutes > 0"> {{returnTimeFormatForPage(online).minutes}} min</span><span ng-show="returnTimeFormatForPage(online).seconds > 0"> {{returnTimeFormatForPage(online).seconds}} sec</span>
+        </div>
 
         <i class="bug-zbs" ng-show="agent.report.antivirus.length>0"></i>
         <i class="bug-not-zbs" ng-hide="agent.report.antivirus.length>0"></i>
@@ -107,7 +137,7 @@
             <i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>
           </div>
           <div class="dropdown-menu" role="menu">
-            <p><span>Server2008</span> Credential</p>
+            <p><span>{{agent.hostName}}</span> Credential</p>
             <div>
               <p>User: <span>Admin1</span></p>
               <p>Password: <span>Administrator</span></p>

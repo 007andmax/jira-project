@@ -86,6 +86,35 @@
                   }
                 }
               }
+            } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
+              var companyId = getCompanyIdByAgentId(newChange.data.agentId);
+              if(newChange.data && newChange.data.statuses && newChange.data.statuses.Idle) {
+                for (var i in devices[companyId]) {
+                  if (devices[companyId][i].agentId === newChange.data.agentId) {
+                    //Utils.defineReadOnlyProperty(devices[companyId][i], 'Idle', newChange.data.statuses.Idle);
+                    storage.devices[companyId][i].Idle = newChange.data.statuses.Idle;
+                    break;
+                  }
+                }
+              } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.NoRestart && newChange.data.statuses.Online) {
+                for (var i in devices[companyId]) {
+                  if (devices[companyId][i].agentId === newChange.data.agentId) {
+                    // Utils.defineReadOnlyProperty(devices[companyId][i], 'NoRestart', newChange.data.statuses.NoRestart);
+                    // Utils.defineReadOnlyProperty(devices[companyId][i], 'Online', newChange.data.statuses.Online);
+                    storage.devices[companyId][i].NoRestart = newChange.data.statuses.NoRestart;
+                    storage.devices[companyId][i].Online = newChange.data.statuses.Online;
+                    break;
+                  }
+                }
+              }
+            } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
+              var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
+              Utils.defineReadOnlyProperty(device, 'OneTimeConnectionData', newChange.data);
+              Utils.defineReadOnlyProperty(device, 'agentConnected', true);
+            } else if(newChange.action === 'ONE_TIME_DELETED') {
+              var companyId = getCompanyIdByAgentId(newChange.data);
+              var device = Utils.findById(devices[companyId], newChange.data);
+              Utils.defineReadOnlyProperty(device, 'agentConnected', false);
             }
           });
 
@@ -758,6 +787,20 @@
         }
       }
 
+      function getCompanyIdByAgentId(value) {
+        if(value) {
+          return Object.keys(storage.devices).find(function(key) {
+            if(key !== 'staticCopy') {
+              for(var i=0; i<storage.devices[key].length; i++ ) {
+                if(storage.devices[key][0].agentId === value) {
+                  return true;
+                }
+              }
+            }
+          } );
+        }
+      }
+
       function _getDeviceByAgentId(devices, agentId) {
         for (var i = 0; i < devices.length; i++) {
           var device = devices[i];
@@ -805,8 +848,12 @@
       function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
 
         $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
-          storage.devices[companyId][0].report = resp.data[companyId][0].report[0];
-          storage.devices[companyId][0].label = resp.data[companyId][0].label;
+          if(resp) {
+            for(var i=0; i<storage.devices[companyId].length; i++) {
+              storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
+              storage.devices[companyId][i].label = resp.data[companyId][i].label;
+            }
+          }
           getAgentsByCompany(scope, companyId, callback)
         });
       }
@@ -822,6 +869,30 @@
         // }
 
         var future = $http.post('/devices/editAgentLabel', dto);
+        Utils.handleCallback(future, callback);
+      }
+
+      var actionsList = ["idle","norestart","online"];
+
+      function sendDeviceStatusRequest(companyId, agentId, callback) {
+        if(companyId && agentId) {
+          var dto = {
+            companyId: companyId,
+            agentId: agentId,
+            actions: actionsList
+          };
+
+          var future = $http({
+            url: '/devices/agentStatuses',
+            method: 'POST',
+            data: dto
+          });
+          Utils.handleCallback(future, callback);
+        }
+      }
+
+      function getDevicesCredentials(devices, callback) {
+        var future = $http.post('/passwordRecords/devices/password', devices);
         Utils.handleCallback(future, callback);
       }
 
@@ -853,6 +924,7 @@
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,
         getOneByAgentId: getOneByAgentId,
+        getCompanyIdByAgentId: getCompanyIdByAgentId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
         getGadgets: getGadgets,
@@ -862,7 +934,9 @@
         testCredentials: testCredentials,
         _addInitListener: _addInitListener,
         getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
-        setNewDeviceLabel: setNewDeviceLabel
+        setNewDeviceLabel: setNewDeviceLabel,
+        sendDeviceStatusRequest: sendDeviceStatusRequest,
+        getDevicesCredentials: getDevicesCredentials
       }
     }
   ]);
