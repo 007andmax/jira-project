@@ -4388,7 +4388,9 @@ Devices tab
 .dashboard-network-scan-header .header-item:last-child {
   text-align: center;
 }
-
+.dashboard-network-scan-header .header-item:nth-child(3){
+  justify-content: flex-start;
+}
 .dashboard-network-scan-header .header-item:first-child p,
 .dashboard-network-scan-header .header-item:last-child p {
   font-size: 15px;
