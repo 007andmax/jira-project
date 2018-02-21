@@ -11,6 +11,7 @@
         $scope.deviceEditDescription = $scope.device.description;
         $scope.isOpenDescrDrpdwn = false;
         $scope.patternMax40 = /^.{0,40}$/;
+        $scope.showEditDeviceField =  false;
 
         $scope.uninstallAgent = function () {
           if ($scope.device.status.statusValue) {

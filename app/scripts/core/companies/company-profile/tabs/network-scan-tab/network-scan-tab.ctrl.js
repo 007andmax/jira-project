@@ -33,9 +33,12 @@
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = $scope.scanDevices || {};
                 var devices = resp[$scope.company.id];
-                $scope.scanDevices.devices = devices.sort(function(a,b){
-                  return a.ipAddress < b.ipAddress;
-                });
+                if(devices) {
+                  $scope.scanDevices.devices = devices.sort(function(a,b){
+                    return a.ipAddress < b.ipAddress;
+                  });
+                }
+
                 $scope.scanDevices.status = resp.status;
               });
             } else {
@@ -62,15 +65,18 @@
           };
         };
 
-        $scope.downloadAgent = function (form) {
-          if (form.$valid) {
+        $scope.downloadAgent = function (isWoForm, form) {
+          if (isWoForm || form.$valid) {
             if (!$scope.savingInProcess) {
               $scope.triedToDownload = false;
               $scope.savingInProcess = true;
               DevicesService.downloadAgent($scope.company.id, $scope.downloadAgentModel.username || '',
                 $scope.downloadAgentModel.password || '', !!$scope.downloadAgentModel.autoInstall, function () {
                   $scope.savingInProcess = false;
-                  form.$setPristine();
+                  if(!isWoForm) {
+                    form.$setPristine();
+                  }
+
                 });
             }
           } else {
