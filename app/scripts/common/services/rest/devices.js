@@ -87,9 +87,10 @@
                 }
               }
             } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
+              console.log(newChange);
               var companyId = getCompanyIdByAgentId(newChange.data.agentId);
               if(newChange.data && newChange.data.statuses && newChange.data.statuses.Idle) {
-                for (var i in devices[companyId]) {
+                for (var i=0; i< devices[companyId].length; i++) {
                   if (devices[companyId][i].agentId === newChange.data.agentId) {
                     //Utils.defineReadOnlyProperty(devices[companyId][i], 'Idle', newChange.data.statuses.Idle);
                     storage.devices[companyId][i].Idle = newChange.data.statuses.Idle;
@@ -97,7 +98,8 @@
                   }
                 }
               } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.NoRestart && newChange.data.statuses.Online) {
-                for (var i in devices[companyId]) {
+                console.log(newChange);
+                for (var i=0; i< devices[companyId].length; i++) {
                   if (devices[companyId][i].agentId === newChange.data.agentId) {
                     // Utils.defineReadOnlyProperty(devices[companyId][i], 'NoRestart', newChange.data.statuses.NoRestart);
                     // Utils.defineReadOnlyProperty(devices[companyId][i], 'Online', newChange.data.statuses.Online);
@@ -107,14 +109,6 @@
                   }
                 }
               }
-            } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
-              var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
-              Utils.defineReadOnlyProperty(device, 'OneTimeConnectionData', newChange.data);
-              Utils.defineReadOnlyProperty(device, 'agentConnected', true);
-            } else if(newChange.action === 'ONE_TIME_DELETED') {
-              var companyId = getCompanyIdByAgentId(newChange.data);
-              var device = Utils.findById(devices[companyId], newChange.data);
-              Utils.defineReadOnlyProperty(device, 'agentConnected', false);
             }
           });
 
@@ -125,6 +119,14 @@
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
               var session = newChange.data;
               $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
+            } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
+              var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
+              Utils.defineReadOnlyProperty(device, 'OneTimeConnectionData', newChange.data);
+              Utils.defineReadOnlyProperty(device, 'agentConnected', true);
+            } else if(newChange.action === 'ONE_TIME_DELETED') {
+              var companyId = getCompanyIdByAgentId(newChange.data);
+              var device = Utils.findById(devices[companyId], newChange.data);
+              Utils.defineReadOnlyProperty(device, 'agentConnected', false);
             }
           })
         });
@@ -792,7 +794,7 @@
           return Object.keys(storage.devices).find(function(key) {
             if(key !== 'staticCopy') {
               for(var i=0; i<storage.devices[key].length; i++ ) {
-                if(storage.devices[key][0].agentId === value) {
+                if(storage.devices[key][i].agentId === value) {
                   return true;
                 }
               }

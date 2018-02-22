@@ -22,7 +22,7 @@
   </div>
   <div class="network-scan-actions">
     <button class="btn btn-success" ng-click="downloadAgent(true)">Download Agent Installer for Windows</button>
-    <button class="btn btn-primary">Copy a installer link to clipboard</button>
+    <button class="btn btn-primary" copy-key="downloadLink">Copy a installer link to clipboard</button>
   </div>
 </div>
 
@@ -39,16 +39,16 @@
 
       </div>
       <p>Run Scan</p>
-      <!--<div class="master-agent" ng-if="agents && agents.length" uib-dropdown>-->
-        <!--<p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>-->
-        <!--<input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly-->
-               <!--ng-disabled="saveMasterAgentInProgress">-->
-        <!--<i class="report-caret-icon"></i>-->
-        <!--<ul uib-dropdown-menu>-->
-          <!--<li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"-->
-              <!--ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>-->
-        <!--</ul>-->
-      <!--</div>-->
+      <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
+        <p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>
+        <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
+               ng-disabled="saveMasterAgentInProgress">
+        <i class="report-caret-icon"></i>
+        <ul uib-dropdown-menu>
+          <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
+              ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>
+        </ul>
+      </div>
     </div>
     <div class="header-item">
       <p>User Name</p>

@@ -48,6 +48,19 @@
           }
         });
 
+        $scope.downloadAgentUser = {
+          agentName: '',
+          agentPassword: '',
+          userName: '',
+          email: '',
+          companyId: $scope.company.id
+        };
+
+        DevicesService.getDownloadAgentLink($scope.downloadAgentUser, function (resp) {
+          $scope.gettingLink = false;
+          $scope.downloadLink = resp.downloadLink;
+        });
+
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToDownload || form[fieldName].$dirty) && form[fieldName].$invalid;
         };

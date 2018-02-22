@@ -163,8 +163,10 @@
             }
           }
         }
+        if($scope.devicesCredentials) {
+          $scope.deviceCredentials = $scope.devicesCredentials[$scope.agent.id];
+        }
 
-        $scope.deviceCredentials = $scope.devicesCredentials[$scope.agent.id];
 
         $scope.$watch('agent.Idle', function(value) {
           if(value) {
@@ -186,6 +188,7 @@
 
         $scope.$watch('agent.agentConnected', function(value) {
           if(value) {
+            $scope.agent.agentConnected = value;
             if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.startedAt) {
               $scope.agentConnectedAt = $scope.agent.OneTimeConnectionData.startedAt
             }

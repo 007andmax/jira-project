@@ -100,62 +100,62 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
-      localServer: {
-        proxies: [
-          {
-            context: '/html',
-            host: 'localhost',
-            port: 9000,
-            rewrite: {
-              '^/html': '/app'
-            }
-          },
-          {
-            context: [
-              '/',
-              '!/html',
-              '!/app',
-              '!/dist',
-              '!/bower_components'
-            ],
-            host: 'localhost',
-            port: 8080,
-            https: false,
-            xforward: false,
-            headers: {
-              'is-proxy-mode': true
-            }
-          }
-        ]
-      },
-      devServer: {
-        proxies: [
-          {
-            context: '/html',
-            host: 'localhost',
-            port: 9000,
-            rewrite: {
-              '^/html': '/app'
-            }
-          },
-          {
-            context: [
-              '/',
-              '!/html',
-              '!/app',
-              '!/dist',
-              '!/bower_components'
-            ],
-            host: 'localhost',
-            port: 8080,
-            https: false,
-            xforward: false,
-            headers: {
-              'is-proxy-mode': true
-            }
-          }
-        ]
-      },
+      // localServer: {
+      //   proxies: [
+      //     {
+      //       context: '/html',
+      //       host: 'localhost',
+      //       port: 9000,
+      //       rewrite: {
+      //         '^/html': '/app'
+      //       }
+      //     },
+      //     {
+      //       context: [
+      //         '/',
+      //         '!/html',
+      //         '!/app',
+      //         '!/dist',
+      //         '!/bower_components'
+      //       ],
+      //       host: 'localhost',
+      //       port: 8080,
+      //       https: false,
+      //       xforward: false,
+      //       headers: {
+      //         'is-proxy-mode': true
+      //       }
+      //     }
+      //   ]
+      // },
+      // devServer: {
+      //   proxies: [
+      //     {
+      //       context: '/html',
+      //       host: 'localhost',
+      //       port: 9000,
+      //       rewrite: {
+      //         '^/html': '/app'
+      //       }
+      //     },
+      //     {
+      //       context: [
+      //         '/',
+      //         '!/html',
+      //         '!/app',
+      //         '!/dist',
+      //         '!/bower_components'
+      //       ],
+      //       host: 'localhost',
+      //       port: 8080,
+      //       https: false,
+      //       xforward: false,
+      //       headers: {
+      //         'is-proxy-mode': true
+      //       }
+      //     }
+      //   ]
+      // },
       localDevServer: {
         proxies: [
           {
@@ -175,8 +175,8 @@ module.exports = function (grunt) {
               '!/bower_components'
             ],
             // TO CHANGE PORT 80-81 etc when on serveDev
-            host: 'localhost',
-            port: 8080,
+            host: '109.197.223.16',
+            port: 777,
             https: false,
             xforward: false,
             headers: {
@@ -185,34 +185,34 @@ module.exports = function (grunt) {
           }
         ]
       },
-      devDistServer: {
-        proxies: [
-          {
-            context: '/html',
-            host: 'localhost',
-            port: 9000,
-            rewrite: {
-              '^/html': '/dist'
-            }
-          },
-          {
-            context: [
-              '/',
-              '!/html',
-              '!/app',
-              '!/dist',
-              '!/bower_components'
-            ],
-            host: '192.168.1.46',
-            port: 8080,
-            https: false,
-            xforward: false,
-            headers: {
-              'is-proxy-mode': true
-            }
-          }
-        ]
-      },
+      // devDistServer: {
+      //   proxies: [
+      //     {
+      //       context: '/html',
+      //       host: 'localhost',
+      //       port: 9000,
+      //       rewrite: {
+      //         '^/html': '/dist'
+      //       }
+      //     },
+      //     {
+      //       context: [
+      //         '/',
+      //         '!/html',
+      //         '!/app',
+      //         '!/dist',
+      //         '!/bower_components'
+      //       ],
+      //       host: '192.168.1.46',
+      //       port: 8080,
+      //       https: false,
+      //       xforward: false,
+      //       headers: {
+      //         'is-proxy-mode': true
+      //       }
+      //     }
+      //   ]
+      // },
       livereload: {
         options: {
           open: true,

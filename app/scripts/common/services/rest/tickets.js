@@ -498,9 +498,10 @@
           }
         });
 
-        RealTimeService.subscribe('/leftPanelCountsCompany', scope, function (newChange) {
+        RealTimeService.subscribe('/leftPanelCountsCompany/'+companyId, scope, function (newChange) {
           if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
             Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
+            console.log(newChange);
             //callback && callback(storage.ticketsQuantityMapByCompany)
           }
         });
