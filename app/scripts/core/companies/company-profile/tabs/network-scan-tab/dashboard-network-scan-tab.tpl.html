@@ -1,4 +1,5 @@
-<div class="dashboard-network-scan" ng-controller="quicktech.core.devices.networkScanTabCtrl" ng-if="!agents || !agents.length">
+<div class="dashboard-network-scan" ng-controller="quicktech.core.devices.networkScanTabCtrl"
+     ng-if="!agents || !agents.length">
   <div class="network-scan-steps">
     <div>
       <div class="network-scan-step-img"></div>
@@ -41,12 +42,14 @@
       <p>Run Scan</p>
       <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
         <p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>
-        <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle readonly
+        <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle
+               readonly
                ng-disabled="saveMasterAgentInProgress">
         <i class="report-caret-icon"></i>
         <ul uib-dropdown-menu>
           <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
-              ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}</li>
+              ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}
+          </li>
         </ul>
       </div>
     </div>
@@ -72,102 +75,99 @@
     </div>
   </div>
   <div>
-  <ul class="users-bg company-devices qt-list">
-    <li class="list-heading">
-      <div class="col-md-3">
+    <ul class="users-bg company-devices qt-list">
+      <li class="list-heading">
+        <div class="col-md-3">
 
-        <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="isAllSelected" ng-change="toggleAll()"
-                 custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
-          <span class="control-indicator"></span>
-        </label>
-        <span class="sort-span">
+          <label class="control checkbox pull-left">
+            <input type="checkbox" ng-model="isAllSelected" ng-change="toggleAll()"
+                   custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
+            <span class="control-indicator"></span>
+          </label>
+          <span class="sort-span">
         Device Name
       </span>
-      </div>
-      <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
         <span>
           Lan IP
         </span>
-      </div>
-      <div class="col-md-2">
-        <span>MANUFACTURER</span>
-      </div>
-      <div class="col-md-2">
-        <span>Mac address</span>
-      </div>
-      <div class="col-md-2">
-        <span>Status</span>
-      </div>
-      <div class="col-md-1"></div>
-    </li>
-    <li class="active-device-item" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
-        ng-controller="quicktech.core.devices.networkScanItemCtrl">
-      <div class="users-list-wrapper">
-        <div class="col-md-3">
-          <!--<label class="control checkbox">-->
+        </div>
+        <div class="col-md-2">
+          <span>MANUFACTURER</span>
+        </div>
+        <div class="col-md-2">
+          <span>Mac address</span>
+        </div>
+        <div class="col-md-2">
+          <span>Status</span>
+        </div>
+        <div class="col-md-1"></div>
+      </li>
+      <li class="active-device-item" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
+          ng-controller="quicktech.core.devices.networkScanItemCtrl">
+        <div class="users-list-wrapper">
+          <div class="col-md-3" style="padding-top: 5px;">
+            <!--<label class="control checkbox">-->
             <!--<input type="checkbox">-->
             <!--<span class="control-indicator"></span>-->
-          <!--</label>-->
-          <label class="control checkbox">
-            <input type="checkbox" ng-change="checkSelection()" ng-if="device.status.statusValue"
-                   ng-model="selectedDevices[device.deviceId]">
-            <input type="checkbox" ng-change="checkSelection()" ng-if="!device.status.statusValue"
-                   ng-model="selectedDevices[device.id]">
-            <span class="control-indicator"></span>
-          </label>
-          <div class="company-device-name" ng-mouseover="showEditDeviceField = true"
-               ng-mouseleave="showEditDeviceField = false">
+            <!--</label>-->
+            <label class="control checkbox">
+              <input type="checkbox" ng-change="checkSelection()" ng-if="device.status.statusValue"
+                     ng-model="selectedDevices[device.deviceId]">
+              <input type="checkbox" ng-change="checkSelection()" ng-if="!device.status.statusValue"
+                     ng-model="selectedDevices[device.id]">
+              <span class="control-indicator"></span>
+            </label>
+            <div class="company-device-name" ng-mouseover="showEditDeviceField = true"
+                 ng-mouseleave="showEditDeviceField = false">
 
-            <i class="devices-monitor"></i>
-            <!--<i class="devices-phone"></i>-->
-            <!--<i class="devices-printer"></i>-->
-            <!--<i class="devices-server"></i>-->
+              <!--<i class="devices-phone"></i>-->
+              <!--<i class="devices-printer"></i>-->
+              <!--<i class="devices-server"></i>-->
 
-            <!--<div>-->
+              <!--<div>-->
               <!--<p class="ellipsis">BlackHall</p>-->
-            <!--</div>-->
-            <div class="checkbox-caption">
-              <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
-              <span style="display: inline-block"
-                    uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
-                    trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
+              <!--</div>-->
+              <div class="checkbox-caption">
+                <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
+                  <i class="devices-monitor"></i>
+                  <span style="display: inline-block"
+                        uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
+                        trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
               </span>
-                <i class="icon-sm edit-icon" ng-show="showEditDeviceField"></i>
-                <p ng-if="device.description | unknownFilter">{{ device.hostName | unknownFilter }}</p>
+                  <p ng-if="device.description | unknownFilter">{{ device.hostName | unknownFilter }}</p>
+                  <i class="icon-sm edit-icon" ng-show="showEditDeviceField"></i>
+                </div>
+                <input class="control" ng-if="isEditDescrOpened" ng-model="deviceDescription"
+                       execute-when-outfocused="saveDescription(deviceDescription)" focus-on/>
               </div>
-              <input class="control" ng-if="isEditDescrOpened" ng-model="deviceDescription"
-                     execute-when-outfocused="saveDescription(deviceDescription)" focus-on/>
             </div>
           </div>
-        </div>
-        <div class="col-md-2">
-          <div class="device-lan-ip">{{ device.ipAddress }}</div>
-        </div>
-        <div class="col-md-2">
-          <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
-               trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
+          <div class="col-md-2">
+            <div class="device-lan-ip">{{ device.ipAddress }}</div>
+          </div>
+          <div class="col-md-2">
+            <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
+                 trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="device-mac-address">{{ device.macAddress }}</div>
+          </div>
+          <div class="col-md-2">
+            <!--<div class="network-scan-status status-success">Agent installed</div>-->
+            <p class="network-scan-status {{ getStatusClass() }}">{{ device.status.message }}</p>
+            <!--<div class="network-scan-status status-danger">Blocked</div>-->
+          </div>
+          <div class="col-md-1" style="justify-content: flex-end;">
+            <i class="delete-network-scan" uib-tooltip="Remove Agent"
+               ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
+               ng-if="device.status.statusValue"></i>
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="device-mac-address">{{ device.macAddress }}</div>
-        </div>
-        <div class="col-md-2">
-          <!--<div class="network-scan-status status-success">Agent installed</div>-->
-          <div class="network-scan-status status-warning">
-            <p class="{{ getStatusClass() }}">{{ device.status.message }}</p>
-
-          </div>
-          <!--<div class="network-scan-status status-danger">Blocked</div>-->
-        </div>
-        <div class="col-md-1" style="justify-content: flex-end;">
-          <i class="delete-network-scan" uib-tooltip="Remove Agent"
-             ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
-             ng-if="device.status.statusValue"></i>
-        </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
     <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
       <div class="loader"></div>
     </div>

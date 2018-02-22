@@ -1,31 +1,20 @@
 <ul class="users-bg company-devices qt-list" ng-controller="quicktech.core.companies.bulkOptionCtrl">
   <h3>All Devices (<span>{{countForDevicePage(agents)}}</span>)</h3>
-  <div class="topNavbarLeft-Left" ng-if="bulkOptionMode === 'devices'">
-
+  <div class="selected-users-edit" ng-if="bulkOptionMode === 'devices'">
     <p>
-      <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
+      <span>{{ selectDevicesIds.length }}</span> Selected
     </p>
 
-    <div class="topNavbar-filter">
+      <i class="icn-sm icn-restart-device pointer" ng-click="restartDevices()"
+         tooltip-placement="top" uib-tooltip="Restart"
+         ng-if="!companyProfileHeader.isOfflineDeviceSelected"></i>
 
-      <div class="btn btn-icn has-tooltip" ng-click="restartDevices()"
-           tooltip-placement="bottom" uib-tooltip="Restart"
-           ng-if="!companyProfileHeader.isOfflineDeviceSelected">
-        <i class="icn-sm icn-restart-device"></i>
-      </div>
+      <i class="icn-sm icn-shutdown-device pointer" ng-click="shutdownDevices()"
+         tooltip-placement="top" uib-tooltip="Shutdown"
+         ng-if="!companyProfileHeader.isOfflineDeviceSelected"></i>
 
-      <div class="btn btn-icn has-tooltip" ng-click="shutdownDevices()"
-           tooltip-placement="bottom" uib-tooltip="Shutdown"
-           ng-if="!companyProfileHeader.isOfflineDeviceSelected">
-        <i class="icn-sm icn-shutdown-device"></i>
-      </div>
-
-      <div class="btn btn-icn has-tooltip" ng-click="removeDevices()"
-           tooltip-placement="bottom" uib-tooltip="Remove">
-        <i class="icn-sm icn-remove-old"></i>
-      </div>
-
-    </div>
+      <i class="icn-sm icn-remove-old pointer" ng-click="removeDevices()"
+         tooltip-placement="top" uib-tooltip="Remove"></i>
   </div>
   <li class="list-heading">
     <div class="col-md-4">
@@ -63,10 +52,14 @@
         <div class="company-device-name"
              ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}" ng-show="!showDeviceLabelEditForm">
 
-          <i class="devices-monitor" ng-show="agent.type === 'workstation'" ng-click="openDevicesDetails = !openDevicesDetails"></i>
-          <i class="devices-phone" ng-show="agent.type === 'device'" ng-click="openDevicesDetails = !openDevicesDetails"></i>
-          <i class="devices-printer" ng-show="agent.type === 'device'" ng-click="openDevicesDetails = !openDevicesDetails"></i>
-          <i class="devices-server" ng-show="agent.type === 'server'" ng-click="openDevicesDetails = !openDevicesDetails"></i>
+          <i class="devices-monitor" ng-show="agent.type === 'workstation'"
+             ng-click="openDevicesDetails = !openDevicesDetails"></i>
+          <i class="devices-phone" ng-show="agent.type === 'device'"
+             ng-click="openDevicesDetails = !openDevicesDetails"></i>
+          <i class="devices-printer" ng-show="agent.type === 'device'"
+             ng-click="openDevicesDetails = !openDevicesDetails"></i>
+          <i class="devices-server" ng-show="agent.type === 'server'"
+             ng-click="openDevicesDetails = !openDevicesDetails"></i>
 
           <div ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
@@ -95,15 +88,23 @@
             <div class="dashboard-active-device"></div>
           </div>
           <div class="dropdown-menu" role="menu">
-            <p><span>{{agent.OneTimeConnectionData.performer.firstName}}</span> {{agent.OneTimeConnectionData.performer.lastName}}</p>
+            <p><span>{{agent.OneTimeConnectionData.performer.firstName}}</span>
+              {{agent.OneTimeConnectionData.performer.lastName}}</p>
             <div>
-              <p>Connected: <span ng-show="returnTimeFormatForPage(agentConnectedAt).days > 0">{{returnTimeFormatForPage(agentConnectedAt).days}} day</span><span ng-show="returnTimeFormatForPage(agentConnectedAt).hours > 0"> {{returnTimeFormatForPage(agentConnectedAt).hours}} hrs</span><span ng-show="returnTimeFormatForPage(agentConnectedAt).minutes > 0"> {{returnTimeFormatForPage(agentConnectedAt).minutes}} min</span><span ng-show="returnTimeFormatForPage(agentConnectedAt).seconds > 0"> {{returnTimeFormatForPage(agentConnectedAt).seconds}} sec</span></p>
+              <p>Connected: <span ng-show="returnTimeFormatForPage(agentConnectedAt).days > 0">{{returnTimeFormatForPage(agentConnectedAt).days}} day</span><span
+                ng-show="returnTimeFormatForPage(agentConnectedAt).hours > 0"> {{returnTimeFormatForPage(agentConnectedAt).hours}} hrs</span><span
+                ng-show="returnTimeFormatForPage(agentConnectedAt).minutes > 0"> {{returnTimeFormatForPage(agentConnectedAt).minutes}} min</span><span
+                ng-show="returnTimeFormatForPage(agentConnectedAt).seconds > 0"> {{returnTimeFormatForPage(agentConnectedAt).seconds}} sec</span>
+              </p>
             </div>
           </div>
         </div>
         <p class="ellipsis">{{agent.userName}}</p>
         <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0)">
-          Idle: <span ng-show="returnTimeFormatForPage(idle).days > 0">{{returnTimeFormatForPage(idle).days}} day</span><span ng-show="returnTimeFormatForPage(idle).hours > 0"> {{returnTimeFormatForPage(idle).hours}} hrs</span><span ng-show="returnTimeFormatForPage(idle).minutes > 0"> {{returnTimeFormatForPage(idle).minutes}} min</span><span ng-show="returnTimeFormatForPage(idle).seconds > 0"> {{returnTimeFormatForPage(idle).seconds}} sec</span>
+          Idle: <span ng-show="returnTimeFormatForPage(idle).days > 0">{{returnTimeFormatForPage(idle).days}} day</span><span
+          ng-show="returnTimeFormatForPage(idle).hours > 0"> {{returnTimeFormatForPage(idle).hours}} hrs</span><span
+          ng-show="returnTimeFormatForPage(idle).minutes > 0"> {{returnTimeFormatForPage(idle).minutes}} min</span><span
+          ng-show="returnTimeFormatForPage(idle).seconds > 0"> {{returnTimeFormatForPage(idle).seconds}} sec</span>
         </p>
         <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0)">
           Idle: 0 min
@@ -114,7 +115,11 @@
         <i class="up-time-yellow" ng-show="!agent.online"></i>
         <!--<div>{{returnTimeFormatForPage(online)}}</div>-->
         <div ng-show="agent.online">
-          <span ng-show="returnTimeFormatForPage(online).days > 0">{{returnTimeFormatForPage(online).days}} day</span><span ng-show="returnTimeFormatForPage(online).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span ng-show="returnTimeFormatForPage(online).minutes > 0"> {{returnTimeFormatForPage(online).minutes}} min</span><span ng-show="returnTimeFormatForPage(online).seconds > 0"> {{returnTimeFormatForPage(online).seconds}} sec</span>
+          <span
+            ng-show="returnTimeFormatForPage(online).days > 0">{{returnTimeFormatForPage(online).days}} day</span><span
+          ng-show="returnTimeFormatForPage(online).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span
+          ng-show="returnTimeFormatForPage(online).minutes > 0"> {{returnTimeFormatForPage(online).minutes}} min</span><span
+          ng-show="returnTimeFormatForPage(online).seconds > 0"> {{returnTimeFormatForPage(online).seconds}} sec</span>
         </div>
         <div ng-show="!agent.online">
           <span>offline</span>
@@ -138,37 +143,37 @@
           </div>
         </div>
 
-          <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
-          <!--<div class="btn"-->
-               <!--append-html-to-body data="deviceReport" ng-if="agent.agentId"-->
-               <!--url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"-->
-               <!--ng-click="getDeviceReport(agent)">-->
-            <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
-          <!--</div>-->
-          <div
-               append-html-to-body data="deviceReport" ng-if="agent.agentId"
-               url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
-                ng-click="getDeviceReport(agent)">
-            <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
-          </div>
+        <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
+        <!--<div class="btn"-->
+        <!--append-html-to-body data="deviceReport" ng-if="agent.agentId"-->
+        <!--url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"-->
+        <!--ng-click="getDeviceReport(agent)">-->
+        <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
+        <!--</div>-->
+        <div
+          append-html-to-body data="deviceReport" ng-if="agent.agentId"
+          url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
+          ng-click="getDeviceReport(agent)">
+          <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
+        </div>
 
         <!--<div>-->
-          <!--&lt;!&ndash;<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>&ndash;&gt;-->
-          <!--<div ng-if="(agent.type !== 'workstation') && agent.online"-->
-               <!--ng-click="remoteAccess('PROXY')" >-->
-            <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
-          <!--</div>-->
+        <!--&lt;!&ndash;<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>&ndash;&gt;-->
+        <!--<div ng-if="(agent.type !== 'workstation') && agent.online"-->
+        <!--ng-click="remoteAccess('PROXY')" >-->
+        <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
+        <!--</div>-->
 
-          <!--<div ng-if="(agent.type === 'workstation') && agent.online"-->
-               <!--aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle smart-dropdown-menu-position>-->
-            <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
-          <!--</div>-->
+        <!--<div ng-if="(agent.type === 'workstation') && agent.online"-->
+        <!--aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle smart-dropdown-menu-position>-->
+        <!--<i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>-->
+        <!--</div>-->
         <!--</div>-->
 
         <div class="pull-right" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
           <div class="btn btn-icn btn-default pull-left has-tooltip"
                ng-if="(agent.type !== 'workstation') && agent.online"
-               ng-click="remoteAccess('PROXY')" >
+               ng-click="remoteAccess('PROXY')">
             <i class="dev-btn devices-remote pointer" uib-tooltip="remote access"></i>
           </div>
 
@@ -194,7 +199,7 @@
 
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
           <div uib-dropdown-toggle>
-            <i class="icn-more-light-grey icn-sm pointer" uib-tooltip="more"></i>
+            <i class="icn-more-light-grey icn-sm pointer dev-btn" uib-tooltip="more"></i>
           </div>
           <ul class="dropdown-menu" role="menu">
             <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>
