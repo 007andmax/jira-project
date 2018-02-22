@@ -5,10 +5,10 @@
   angular.module('quicktech.core.devices').controller('quicktech.core.companies.companyProfileTabsCtrl',
     ['$scope', 'DevicesService', '$state', '$stateParams', 'quicktech.common.services.SharedStateService',
       'quicktech.common.services.UserConfirmationsService', 'CompaniesService', 'UsersService', 'SubscriptionsService',
-      'Utils', 'quicktech.common.services.PermissionsService', 'ProductsService',
+      'Utils', 'quicktech.common.services.PermissionsService', 'ProductsService', '$rootScope',
       function ($scope, DevicesService, $state, $stateParams, SharedStateService,
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
-                Utils, PermissionsService, ProductsService) {
+                Utils, PermissionsService, ProductsService, $rootScope) {
 
         var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
@@ -106,9 +106,11 @@
             $scope.agents.forEach(function (device) {
               devicesIds.push(device.id);
             });
+            $rootScope.deviceCredentialsRecived = false;
             DevicesService.getDevicesCredentials(devicesIds, function(resp){
               if(resp) {
                 $scope.devicesCredentials = resp;
+                $rootScope.deviceCredentialsRecived = true;
               }
             })
           }

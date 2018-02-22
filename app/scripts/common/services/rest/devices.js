@@ -124,9 +124,20 @@
               Utils.defineReadOnlyProperty(device, 'OneTimeConnectionData', newChange.data);
               Utils.defineReadOnlyProperty(device, 'agentConnected', true);
             } else if(newChange.action === 'ONE_TIME_DELETED') {
-              var companyId = getCompanyIdByAgentId(newChange.data);
-              var device = Utils.findById(devices[companyId], newChange.data);
-              Utils.defineReadOnlyProperty(device, 'agentConnected', false);
+              var companyId = getCompanyIdByAgenSessionId(newChange.data);
+              // var device = Utils.findById(devices[companyId].OneTimeConnectionData.id, newChange.data);
+              // var device = findDeviceBySessionId(devices[companyId], newChange.data);
+              // Utils.defineReadOnlyProperty(device, 'agentConnected', false);
+
+                for (var i=0; i< devices[companyId].length; i++) {
+                  if (devices[companyId][i].OneTimeConnectionData.id === newChange.data) {
+                    console.log(devices[companyId][i]);
+                    storage.devices[companyId][i].agentConnected = false;
+                    break;
+                  }
+                }
+
+
             }
           })
         });
@@ -137,6 +148,21 @@
           initListeners[i]();
         }
       }
+
+
+
+      // function findDeviceBySessionId( deviceList, sessionId) {
+      //   if(deviceList && sessionId) {
+      //     var device = {};
+      //     for(var i=0; i<deviceList.length; i++) {
+      //       if(deviceList[i].OneTimeConnectionData.id === sessionId) {
+      //         device =  deviceList[i];
+      //         break;
+      //       }
+      //     }
+      //     return device;
+      //   }
+      // }
 
       function _addInitListener(callback) {
 
@@ -796,6 +822,22 @@
               for(var i=0; i<storage.devices[key].length; i++ ) {
                 if(storage.devices[key][i].agentId === value) {
                   return true;
+                }
+              }
+            }
+          } );
+        }
+      }
+
+      function getCompanyIdByAgenSessionId(value) {
+        if(value) {
+          return Object.keys(storage.devices).find(function(key) {
+            if(key !== 'staticCopy') {
+              for(var i=0; i<storage.devices[key].length; i++ ) {
+                if(storage.devices[key][i].OneTimeConnectionData && storage.devices[key][i].OneTimeConnectionData.id) {
+                  if(storage.devices[key][i].OneTimeConnectionData.id === value) {
+                    return true;
+                  }
                 }
               }
             }
