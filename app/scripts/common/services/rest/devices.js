@@ -940,6 +940,11 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getAgentsCredentialsForCompany(companyId, callback) {
+        var future = $http.get('/passwordRecords/'+companyId+'/agents/password');
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -980,7 +985,8 @@
         getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
         setNewDeviceLabel: setNewDeviceLabel,
         sendDeviceStatusRequest: sendDeviceStatusRequest,
-        getDevicesCredentials: getDevicesCredentials
+        getDevicesCredentials: getDevicesCredentials,
+        getAgentsCredentialsForCompany: getAgentsCredentialsForCompany
       }
     }
   ]);

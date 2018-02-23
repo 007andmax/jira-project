@@ -81,25 +81,11 @@
 
         };
 
-
-
-        function sentDeviceStatusRequest(agentId) {
-          DevicesService.sendDeviceStatusRequest($scope.company.id, agentId, function (resp) {
-            if (resp) {
-              console.log(resp);
-            }
-          })
-        }
-
-
         DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
           if (resp && resp.length) {
             var agentsList = resp;
             $scope.agents = agentsList.sort(function (a, b) {
               return a.name < b.name
-            });
-            $scope.agents.forEach(function (agent) {
-              sentDeviceStatusRequest(agent.agentId)
             });
 
             var devicesIds = [];

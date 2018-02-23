@@ -41,11 +41,11 @@
 
         $scope.getStatusClass = function () {
           if ($scope.device.changingStatus) {
-            return 'changing-status';
+            return 'status-warning';
           } else if ($scope.device.status && ($scope.device.status.statusValue || $scope.device.status.message === 'Correct')) {
-            return 'success-status';
+            return 'status-success';
           } else {
-            return 'error-status';
+            return 'status-danger';
           }
         };
 

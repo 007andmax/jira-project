@@ -100,13 +100,13 @@
           </div>
         </div>
         <p class="ellipsis">{{agent.userName}}</p>
-        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0)">
+        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0 && agent.online)">
           Idle: <span ng-show="returnTimeFormatForPage(idle).days > 0">{{returnTimeFormatForPage(idle).days}} day</span><span
           ng-show="returnTimeFormatForPage(idle).hours > 0"> {{returnTimeFormatForPage(idle).hours}} hrs</span><span
           ng-show="returnTimeFormatForPage(idle).minutes > 0"> {{returnTimeFormatForPage(idle).minutes}} min</span><span
           ng-show="returnTimeFormatForPage(idle).seconds > 0"> {{returnTimeFormatForPage(idle).seconds}} sec</span>
         </p>
-        <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0)">
+        <p class="label label-light ellipsis" ng-show="!((agent.Idle && agent.Idle.length > 0) || agent.online)">
           Idle: 0 min
         </p>
       </div>
@@ -114,7 +114,7 @@
         <i class="up-time-green" ng-show="agent.online"></i>
         <i class="up-time-yellow" ng-show="!agent.online"></i>
         <!--<div>{{returnTimeFormatForPage(online)}}</div>-->
-        <div ng-show="agent.online">
+        <div ng-show="agent.online && online > 0">
           <span
             ng-show="returnTimeFormatForPage(online).days > 0">{{returnTimeFormatForPage(online).days}} day</span><span
           ng-show="returnTimeFormatForPage(online).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span
@@ -129,7 +129,7 @@
         <i class="bug-not-zbs" ng-hide="agent.report.antivirus.length>0"></i>
 
       </div>
-      <div class="col-md-2" style="padding-left: 90px;" ng-click="openDevicesDetails = !openDevicesDetails">
+      <div class="col-md-2" style="padding-left: 90px;" >
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-show="deviceCredentials">
           <div uib-dropdown-toggle>
             <i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>
@@ -198,8 +198,8 @@
         </div>
 
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-          <div uib-dropdown-toggle>
-            <i class="icn-more-light-grey icn-sm pointer dev-btn" uib-tooltip="more"></i>
+          <div uib-dropdown-toggle uib-tooltip="more">
+            <i class="icn-more-light-grey icn-sm pointer dev-btn" ></i>
           </div>
           <ul class="dropdown-menu" role="menu">
             <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>

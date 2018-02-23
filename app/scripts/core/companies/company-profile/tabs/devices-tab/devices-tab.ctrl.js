@@ -33,6 +33,12 @@
           }
         }
 
+        DevicesService.sendDeviceStatusRequest($scope.company.id, $scope.agent.agentId, function(resp){
+          if(resp){
+            console.log(resp);
+          }
+        });
+
         $scope.openDevicesDetails = false;
         $scope.showDeviceLabelEditButtom = false;
         $scope.showDeviceLabelEditForm = false;

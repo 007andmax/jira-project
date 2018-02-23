@@ -40,38 +40,60 @@
 
       </div>
       <p>Run Scan</p>
-      <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
-        <p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>
-        <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle
-               readonly
-               ng-disabled="saveMasterAgentInProgress">
-        <i class="report-caret-icon"></i>
-        <ul uib-dropdown-menu>
-          <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
-              ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}
-          </li>
-        </ul>
-      </div>
+      <!--<div class="master-agent" ng-if="agents && agents.length" uib-dropdown>-->
+        <!--<p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>-->
+        <!--<input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle-->
+               <!--readonly-->
+               <!--ng-disabled="saveMasterAgentInProgress">-->
+        <!--<i class="report-caret-icon"></i>-->
+        <!--<ul uib-dropdown-menu>-->
+          <!--<li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"-->
+              <!--ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
     </div>
-    <div class="header-item">
-      <p>User Name</p>
-      <input type="text">
-      <p>Password</p>
-      <input type="text">
-      <button class="btn btn-success">Add Credential</button>
+    <div class="header-item" ng-form="credentialsForm">
+
+      <div class="form-group" ng-class="{ 'has-error': isShowingErrors(credentialsForm, 'agentName')}">
+        <div ng-messages="credentialsForm.agentName.$error"
+             ng-class="{'hide': !isShowingErrors(credentialsForm, 'agentName')}">
+          <label class="control-label" ng-message="required">Login can't be left empty</label>
+        </div>
+        <p>User Name</p>
+        <input type="text" class="form-control" name="agentName" ng-model="testCredentialsModel.username"
+               placeholder="Login" required>
+      </div>
+
+      <div class="form-group">
+        <p>Password</p>
+        <input type="password" class="form-control" name="agentPassword"
+               ng-model="testCredentialsModel.password" autocomplete="new-password"
+               placeholder="Password" required>
+      </div>
+      <button class="btn btn-success" ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add Credential'}}</button>
     </div>
     <div class="header-item">
       <p>Saved Credentials</p>
       <div class="saved-credentials">
-        <p>Active Tek</p>
-        <p>Admin Server</p>
-        <p>Office Server</p>
-        <p>HP Server</p>
+        <p ng-repeat="credential in companyAgentsCredentials"
+           ng-click="changeSelectedCredential(credential)" ng-style="{'background-color': selectedCredential.id === credential.id ? 'aliceblue' : ''}">
+          {{credential.username}} <i class="delete-network-scan" uib-tooltip="Remove Credential"
+                                     ng-click="removeCredential()" tooltip-placement="top" tooltip-append-to-body="true"
+                                     ng-if="selectedCredential.id === credential.id"></i>
+
+        </p>
       </div>
     </div>
-    <div class="header-item">
+    <div class="header-item" >
+      <div ng-hide="(isInstallInProgress || !isDeviceSelected())" ng-click="installAgents(credentialsForm)">
       <div class="install-agent-img"></div>
       <p>Install Agent</p>
+      <!--<div class="btn btn-primary has-tooltip" ng-click="installAgents(credentialsForm)"-->
+           <!--custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">-->
+        <!--Install Agent-->
+      <!--</div>-->
+      </div>
     </div>
   </div>
   <div>
