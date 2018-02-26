@@ -25,6 +25,7 @@
         $scope.noRestart = 0;
         $scope.online = 0;
         $scope.agentConnectedAt = 0;
+        $scope.offline = 0;
 
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
@@ -197,11 +198,27 @@
           }
         });
 
+        $scope.$watch('agent.offlineSince', function(value) {
+          if(value) {
+            $scope.offline = (Date.now() - value)
+          }
+        });
+
+        $scope.$watch('agent.online', function(value) {
+          if(value === true) {
+            $scope.online = 0;
+          }
+        });
+
         $scope.$watch('agent.agentConnected', function(value) {
           if(value) {
             $scope.agent.agentConnected = value;
             if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.startedAt) {
-              $scope.agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData.startedAt);
+              if($scope.agent.OneTimeConnectionData.startedAt > Date.now()) {
+                $scope.agentConnectedAt = 0;
+              } else {
+                $scope.agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData.startedAt);
+              }
               console.log($scope.agentConnectedAt);
             }
           }
@@ -213,6 +230,7 @@
            $scope.noRestart += 1000;
            $scope.online += 1000;
            $scope.agentConnectedAt += 1000;
+           $scope.offline +=1000;
         }, 1000);
 
 

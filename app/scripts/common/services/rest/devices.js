@@ -47,6 +47,8 @@
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', false);
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
+                  var now = Date.now();
+                  Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'offlineSince', now);
                   break;
                 }
               }
@@ -130,7 +132,7 @@
               // Utils.defineReadOnlyProperty(device, 'agentConnected', false);
 
                 for (var i=0; i< devices[companyId].length; i++) {
-                  if (devices[companyId][i].OneTimeConnectionData.id === newChange.data) {
+                  if (devices[companyId][i].OneTimeConnectionData && devices[companyId][i].OneTimeConnectionData.id === newChange.data) {
                     console.log(devices[companyId][i]);
                     storage.devices[companyId][i].agentConnected = false;
                     break;
@@ -896,6 +898,9 @@
             for(var i=0; i<storage.devices[companyId].length; i++) {
               storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
               storage.devices[companyId][i].label = resp.data[companyId][i].label;
+              if(!resp.data[companyId][i].online) {
+                storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineSince;
+              }
             }
           }
           getAgentsByCompany(scope, companyId, callback)

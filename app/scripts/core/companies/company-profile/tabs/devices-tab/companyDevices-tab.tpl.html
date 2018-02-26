@@ -99,14 +99,14 @@
             </div>
           </div>
         </div>
-        <p class="ellipsis">{{agent.userName}}</p>
-        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0 && agent.online)">
+        <p class="ellipsis">{{agent.userName || 'unknown'}}</p>
+        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0)">
           Idle: <span ng-show="returnTimeFormatForPage(idle).days > 0">{{returnTimeFormatForPage(idle).days}} day</span><span
           ng-show="returnTimeFormatForPage(idle).hours > 0"> {{returnTimeFormatForPage(idle).hours}} hrs</span><span
           ng-show="returnTimeFormatForPage(idle).minutes > 0"> {{returnTimeFormatForPage(idle).minutes}} min</span><span
           ng-show="returnTimeFormatForPage(idle).seconds > 0"> {{returnTimeFormatForPage(idle).seconds}} sec</span>
         </p>
-        <p class="label label-light ellipsis" ng-show="!((agent.Idle && agent.Idle.length > 0) || agent.online)">
+        <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0)">
           Idle: 0 min
         </p>
       </div>
@@ -122,7 +122,12 @@
           ng-show="returnTimeFormatForPage(online).seconds > 0"> {{returnTimeFormatForPage(online).seconds}} sec</span>
         </div>
         <div ng-show="!agent.online">
-          <span>offline</span>
+          <!--<span>offline</span>-->
+          <span
+            ng-show="returnTimeFormatForPage(offline).days > 0">{{returnTimeFormatForPage(offline).days}} day</span><span
+          ng-show="returnTimeFormatForPage(offline).hours > 0"> {{returnTimeFormatForPage(offline).hours}} hrs</span><span
+          ng-show="returnTimeFormatForPage(offline).minutes > 0"> {{returnTimeFormatForPage(offline).minutes}} min</span><span
+          ng-show="returnTimeFormatForPage(offline).seconds > 0"> {{returnTimeFormatForPage(offline).seconds}} sec</span>
         </div>
 
         <i class="bug-zbs" ng-show="agent.report.antivirus.length>0"></i>
@@ -197,8 +202,8 @@
           </ul>
         </div>
 
-        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-          <div uib-dropdown-toggle uib-tooltip="more">
+        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" uib-tooltip="more">
+          <div uib-dropdown-toggle >
             <i class="icn-more-light-grey icn-sm pointer dev-btn" ></i>
           </div>
           <ul class="dropdown-menu" role="menu">
