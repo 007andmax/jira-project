@@ -18,6 +18,9 @@
         $scope.isScanDevicesLoad = false;
         $scope.orderScanBy = 'hostName';
         $scope.PermissionsService = PermissionsService;
+        $scope.passwordShown = false;
+
+
 
         $scope.selectedCredential = {};
 
@@ -99,6 +102,10 @@
           }
 
         }
+
+        $scope.changeShowPassword = function() {
+          $scope.passwordShown = !$scope.passwordShown;
+        };
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToDownload || form[fieldName].$dirty) && form[fieldName].$invalid;

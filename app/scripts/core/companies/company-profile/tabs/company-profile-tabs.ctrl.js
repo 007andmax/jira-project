@@ -243,18 +243,21 @@
               for (var j = 0, le = $scope.agents.length; j < le; j++) {
                 if ($scope.agents[j].id === deviceId) {
                   selectDevicesIds.push($scope.agents[j].id);
+                  if($scope.agents[j].online) {
+                    countOnlineDevices++
+                  }
                 }
               }
             }
           }
 
-          if ($scope.agents) {
-            for (var i = 0, len = $scope.agents.length; i < len; i++) {
-              if ($scope.agents[i].online) {
-                countOnlineDevices++
-              }
-            }
-          }
+          // if ($scope.selectDevices && $scope.agents) {
+          //   for (var i = 0, len = $scope.selectDevices.length; i < len; i++) {
+          //     if ($scope.selectDevices[i].online) {
+          //       countOnlineDevices++
+          //     }
+          //   }
+          // }
 
           $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === $scope.agents.length);
           $scope.companyProfileHeader.isOfflineDeviceSelected = selectDevicesIds.length !== countOnlineDevices;

@@ -68,15 +68,18 @@
 
       <div class="form-group" style="margin-bottom: 20px;">
         <p>Password</p>
-        <input type="password" class="form-control" name="agentPassword"
+        <input type="{{ passwordShown ? 'text' : 'password' }}" class="form-control" name="agentPassword"
                ng-model="testCredentialsModel.password" autocomplete="new-password"
                placeholder="Password" required>
-        <a id="show_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;">
-          <i class="icn-sm icn-hide-password" style="display: inline-block"></i>
+        <a id="show_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;" ng-if="!passwordShown"
+           ng-click="changeShowPassword()" uib-tooltip="Show password" tooltip-placement="top">
+          <i class="icn-sm icn-hide-password" style="display: inline-block" ></i>
         </a>
-        <a id="hide_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;">
-          <i class="icn-sm icn-show-password" style="display: inline-block"></i>
+        <a id="hide_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;" ng-if="passwordShown"
+           ng-click="changeShowPassword()" uib-tooltip="Hide password" tooltip-placement="top">
+          <i class="icn-sm icn-show-password" style="display: inline-block" ></i>
         </a>
+
       </div>
       <button class="btn btn-success"
               ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add Credential'}}
@@ -87,11 +90,12 @@
       <div class="saved-credentials">
         <p ng-repeat="credential in companyAgentsCredentials"
            ng-click="changeSelectedCredential(credential)" ng-style="{'background-color': selectedCredential.id === credential.id ? 'aliceblue' : ''}">
-          {{credential.username}} <i class="delete-network-scan" uib-tooltip="Remove Credential"
-                                     ng-click="removeCredential()" tooltip-placement="top" tooltip-append-to-body="true"
-                                     ng-if="selectedCredential.id === credential.id"></i>
-
+          {{credential.username}}
+          <i class="delete-network-scan" uib-tooltip="Remove Credential"
+             ng-click="removeCredential()" tooltip-placement="top" tooltip-append-to-body="true"
+             ng-if="selectedCredential.id === credential.id"></i>
         </p>
+
       </div>
     </div>
     <div class="header-item" >
