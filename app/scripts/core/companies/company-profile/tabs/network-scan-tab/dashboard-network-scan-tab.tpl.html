@@ -33,7 +33,7 @@
   <div class="dashboard-network-scan-header clearfix">
     <div class="header-item">
       <!--<div class="run-scan-img"></div>-->
-      <div class="run-scan-img" ng-click="runScanDevices()" tooltip-placement="top"
+      <div class="run-scan-img pointer" ng-click="runScanDevices()" tooltip-placement="top"
            tooltip-append-to-body="true" tooltip-enable="{{ masterAgentOffline || isScanDevicesLoad }}"
            uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}"
            custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">
@@ -57,7 +57,8 @@
 
       <div class="form-group" ng-class="{ 'has-error': isShowingErrors(credentialsForm, 'agentName')}">
         <div ng-messages="credentialsForm.agentName.$error"
-             ng-class="{'hide': !isShowingErrors(credentialsForm, 'agentName')}">
+             ng-class="{'hide': !isShowingErrors(credentialsForm, 'agentName')}"
+             style="position: absolute;right: 0;">
           <label class="control-label" ng-message="required">Login can't be left empty</label>
         </div>
         <p>User Name</p>
@@ -65,13 +66,21 @@
                placeholder="Login" required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" style="margin-bottom: 20px;">
         <p>Password</p>
         <input type="password" class="form-control" name="agentPassword"
                ng-model="testCredentialsModel.password" autocomplete="new-password"
                placeholder="Password" required>
+        <a id="show_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;">
+          <i class="icn-sm icn-hide-password" style="display: inline-block"></i>
+        </a>
+        <a id="hide_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;">
+          <i class="icn-sm icn-show-password" style="display: inline-block"></i>
+        </a>
       </div>
-      <button class="btn btn-success" ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add Credential'}}</button>
+      <button class="btn btn-success"
+              ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add Credential'}}
+      </button>
     </div>
     <div class="header-item">
       <p>Saved Credentials</p>
@@ -87,7 +96,7 @@
     </div>
     <div class="header-item" >
       <div ng-hide="(isInstallInProgress || !isDeviceSelected())" ng-click="installAgents(credentialsForm)">
-      <div class="install-agent-img"></div>
+      <div class="install-agent-img pointer"></div>
       <p>Install Agent</p>
       <!--<div class="btn btn-primary has-tooltip" ng-click="installAgents(credentialsForm)"-->
            <!--custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">-->

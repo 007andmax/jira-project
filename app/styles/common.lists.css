@@ -4429,6 +4429,7 @@ Devices tab
 
 .dashboard-network-scan-header .header-item:nth-child(3) {
   justify-content: flex-start;
+  overflow: scroll;
 }
 
 .dashboard-network-scan-header .header-item:first-child p,
@@ -4465,7 +4466,6 @@ Devices tab
   border-radius: 3px;
   border: solid 1px #c4cbd5;
   width: 100%;
-  margin-bottom: 15px;
   padding: 0 10px;
 }
 
@@ -4489,16 +4489,16 @@ Devices tab
   background-color: #EDF2F6;
 }
 
-.saved-credentials p:hover:after {
-  position: absolute;
-  content: '';
-  width: 16px;
-  height: 16px;
-  background: url(../images/new-icons/devices-remove.png);
-  cursor: pointer;
-  right: 8px;
-  top: 8px;
-}
+/*.saved-credentials p:hover:after {*/
+  /*position: absolute;*/
+  /*content: '';*/
+  /*width: 16px;*/
+  /*height: 16px;*/
+  /*background: url(../images/new-icons/devices-remove.png);*/
+  /*cursor: pointer;*/
+  /*right: 8px;*/
+  /*top: 8px;*/
+/*}*/
 
 .network-scan-actions {
   display: flex;
@@ -5655,7 +5655,7 @@ Devices tab
 .up-time i {
   width: 18px;
   height: 18px;
-  margin-left: -30px;
+  margin-left: -20px;
   vertical-align: sub;
   background-repeat: no-repeat;
 }
@@ -5806,7 +5806,6 @@ Devices tab
 
 .dropdown-tooltip.dropdown-menu {
   padding: 6px 10px !important;
-  height: auto;
   color: #ffffff;
   text-align: center;
   background-color: #4F5F79;
@@ -5814,9 +5813,9 @@ Devices tab
   text-transform: capitalize;
   width: auto !important;
   margin: 0 !important;
-  overflow: hidden;
   top: -32px;
   transform: translateX(12%);
+  overflow: visible;
 }
 
 .dropdown-tooltip.dropdown-menu div {
@@ -5828,7 +5827,7 @@ Devices tab
   content: '';
   border: 6px solid transparent;
   border-top: 5px solid #4F5F79;
-  bottom: -11px;
+  bottom: -17px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -5842,7 +5841,7 @@ Devices tab
 }
 
 .devices-detail-block {
-  padding-top: 25px;
+  padding: 15px 0 10px
 }
 
 .devices-detail-block .col-md-4:first-child {
