@@ -4429,7 +4429,6 @@ Devices tab
 
 .dashboard-network-scan-header .header-item:nth-child(3) {
   justify-content: flex-start;
-  overflow: scroll;
 }
 
 .dashboard-network-scan-header .header-item:first-child p,
@@ -4489,15 +4488,24 @@ Devices tab
   background-color: #EDF2F6;
 }
 
+.dashboard-network-scan-header .header-item .saved-credentials {
+  overflow: scroll;
+}
+
+.dashboard-network-scan-header .header-item .saved-credentials p i {
+  float: right;
+  margin-top: 3px;
+}
+
 /*.saved-credentials p:hover:after {*/
-  /*position: absolute;*/
-  /*content: '';*/
-  /*width: 16px;*/
-  /*height: 16px;*/
-  /*background: url(../images/new-icons/devices-remove.png);*/
-  /*cursor: pointer;*/
-  /*right: 8px;*/
-  /*top: 8px;*/
+/*position: absolute;*/
+/*content: '';*/
+/*width: 16px;*/
+/*height: 16px;*/
+/*background: url(../images/new-icons/devices-remove.png);*/
+/*cursor: pointer;*/
+/*right: 8px;*/
+/*top: 8px;*/
 /*}*/
 
 .network-scan-actions {
@@ -5650,6 +5658,10 @@ Devices tab
 .up-time i,
 .up-time div {
   display: inline-block;
+}
+
+.up-time div {
+  width: 100px;
 }
 
 .up-time i {
