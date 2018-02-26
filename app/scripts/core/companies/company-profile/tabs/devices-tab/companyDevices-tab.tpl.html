@@ -53,14 +53,10 @@
         <div class="company-device-name"
              ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}" ng-show="!showDeviceLabelEditForm">
 
-          <i class="devices-monitor" ng-show="agent.type === 'workstation'"
-             ng-click="openDevicesDetails = !openDevicesDetails"></i>
-          <i class="devices-phone" ng-show="agent.type === 'device'"
-             ng-click="openDevicesDetails = !openDevicesDetails"></i>
-          <i class="devices-printer" ng-show="agent.type === 'device'"
-             ng-click="openDevicesDetails = !openDevicesDetails"></i>
-          <i class="devices-server" ng-show="agent.type === 'server'"
-             ng-click="openDevicesDetails = !openDevicesDetails"></i>
+          <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
+          <i class="devices-phone" ng-show="agent.type === 'device'"></i>
+          <i class="devices-printer" ng-show="agent.type === 'device'"></i>
+          <i class="devices-server" ng-show="agent.type === 'server'"></i>
 
           <div ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
