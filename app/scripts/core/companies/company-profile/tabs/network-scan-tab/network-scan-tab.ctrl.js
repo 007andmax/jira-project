@@ -328,11 +328,13 @@
               companyId: $scope.company.id,
               description: 'Agent Network Credentials',
               expiredDate: '',
-              id: $scope.testCredentialsModel.id || '',
               template: 'AGENT',
               password: $scope.testCredentialsModel.password,
               username: $scope.testCredentialsModel.username
             };
+            if($scope.testCredentialsModel.id) {
+              data.id = $scope.testCredentialsModel.id;
+            }
             PasswordManagerService.save(data, function () {
               $scope.loadingInProgress = false;
             })

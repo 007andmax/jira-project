@@ -85,7 +85,7 @@
           if (resp && resp.length) {
             var agentsList = resp;
             $scope.agents = agentsList.sort(function (a, b) {
-              return a.name < b.name
+              return a.hostName > b.hostName
             });
 
             var devicesIds = [];

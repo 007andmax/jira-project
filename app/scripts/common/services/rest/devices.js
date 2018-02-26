@@ -91,24 +91,35 @@
             } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
               console.log(newChange);
               var companyId = getCompanyIdByAgentId(newChange.data.agentId);
-              if(newChange.data && newChange.data.statuses && newChange.data.statuses.Idle) {
-                for (var i=0; i< devices[companyId].length; i++) {
-                  if (devices[companyId][i].agentId === newChange.data.agentId) {
-                    //Utils.defineReadOnlyProperty(devices[companyId][i], 'Idle', newChange.data.statuses.Idle);
-                    storage.devices[companyId][i].Idle = newChange.data.statuses.Idle;
-                    break;
+              if(newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle') ) {
+                if(companyId) {
+                  for (var i=0; i< devices[companyId].length; i++) {
+                    if (devices[companyId][i].agentId === newChange.data.agentId) {
+                      //Utils.defineReadOnlyProperty(devices[companyId][i], 'Idle', newChange.data.statuses.Idle);
+                      if(newChange.data.statuses.Idle) {
+                        storage.devices[companyId][i].Idle = newChange.data.statuses.Idle;
+                      } else {
+                        storage.devices[companyId][i].Idle = 'none';
+                      }
+
+                      break;
+                    }
                   }
                 }
-              } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.NoRestart && newChange.data.statuses.Online) {
+
+              } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
                 console.log(newChange);
                 for (var i=0; i< devices[companyId].length; i++) {
-                  if (devices[companyId][i].agentId === newChange.data.agentId) {
-                    // Utils.defineReadOnlyProperty(devices[companyId][i], 'NoRestart', newChange.data.statuses.NoRestart);
-                    // Utils.defineReadOnlyProperty(devices[companyId][i], 'Online', newChange.data.statuses.Online);
-                    storage.devices[companyId][i].NoRestart = newChange.data.statuses.NoRestart;
-                    storage.devices[companyId][i].Online = newChange.data.statuses.Online;
-                    break;
+                  if(companyId) {
+                    if (devices[companyId][i].agentId === newChange.data.agentId) {
+                      // Utils.defineReadOnlyProperty(devices[companyId][i], 'NoRestart', newChange.data.statuses.NoRestart);
+                      // Utils.defineReadOnlyProperty(devices[companyId][i], 'Online', newChange.data.statuses.Online);
+                      storage.devices[companyId][i].NoRestart = newChange.data.statuses.NoRestart;
+                      storage.devices[companyId][i].Online = newChange.data.statuses.Online;
+                      break;
+                    }
                   }
+
                 }
               }
             }

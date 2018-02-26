@@ -40,7 +40,8 @@
     </div>
     <div class="col-md-2"></div>
   </li>
-  <li class="active-device-item" ng-repeat="agent in agents track by $index"
+  <!--class="active-device-item"-->
+  <li  ng-repeat="agent in agents track by $index"
       ng-controller="quicktech.core.companies.devicesTabCtrl"
       ng-if="filterForDevices(agent)">
     <div class="users-list-wrapper">
@@ -100,13 +101,13 @@
           </div>
         </div>
         <p class="ellipsis">{{agent.userName || 'unknown'}}</p>
-        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0)">
+        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
           Idle: <span ng-show="returnTimeFormatForPage(idle).days > 0">{{returnTimeFormatForPage(idle).days}} day</span><span
           ng-show="returnTimeFormatForPage(idle).hours > 0"> {{returnTimeFormatForPage(idle).hours}} hrs</span><span
           ng-show="returnTimeFormatForPage(idle).minutes > 0"> {{returnTimeFormatForPage(idle).minutes}} min</span><span
           ng-show="returnTimeFormatForPage(idle).seconds > 0"> {{returnTimeFormatForPage(idle).seconds}} sec</span>
         </p>
-        <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0)">
+        <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
           Idle: 0 min
         </p>
       </div>

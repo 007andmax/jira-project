@@ -182,7 +182,9 @@
 
         $scope.$watch('agent.Idle', function(value) {
           if(value) {
-            $scope.idle = $scope.getMillisecondsFromTimeString(value);
+            if(value !=='none') {
+              $scope.idle = $scope.getMillisecondsFromTimeString(value);
+            }
           }
         });
 
