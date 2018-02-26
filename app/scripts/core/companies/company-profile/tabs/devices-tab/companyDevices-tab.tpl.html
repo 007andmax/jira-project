@@ -65,12 +65,12 @@
           <div ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
-              {{agent.label || agent.hostName}}
+              <span ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName}}</span>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
-            <p class="label label-light ellipsis">{{agent.hostName}}</p>
+            <p class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">{{agent.hostName}}</p>
 
           </div>
 
@@ -111,7 +111,7 @@
           Idle: 0 min
         </p>
       </div>
-      <div class="col-md-3 up-time" ng-click="openDevicesDetails = !openDevicesDetails">
+      <div class="col-md-3 up-time" >
         <i class="up-time-green" ng-show="agent.online"></i>
         <i class="up-time-yellow" ng-show="!agent.online"></i>
         <!--<div>{{returnTimeFormatForPage(online)}}</div>-->
