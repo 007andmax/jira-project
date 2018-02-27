@@ -4,9 +4,9 @@
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
     ['$uibModal', 'TicketsService', '$stateParams', '$timeout', '$document', 'localStorageService',
-      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
+      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService', '$rootScope', '$state',
       function ($uibModal, TicketsService, $stateParams, $timeout, $document, localStorageService, UserNotificationService,
-                SharedStateService) {
+                SharedStateService, $rootScope, $state) {
 
         return {
           restrict: 'A',
@@ -32,17 +32,45 @@
               }
             }, getTicketsList, true);
 
+            scope.$watch(function(){
+              return $stateParams.tabName
+            }, function(tabName) {
+              if(tabName) {
+                getTicketsList(ticketsHeaderState.searchFilter)
+              }
+            })
+
+
             // scope.$watch(function() {
             //   return ticketsHeaderState.filter.clientUserId;
             // }, getTicketsList , true);
+            // var filterObj = {
+            //   userId: ticketsHeaderState.searchFilter.userId,
+            //   companyId: ticketsHeaderState.searchFilter.companyId
+            // }
 
             scope.onFinishRendering = function () {
               scope.loadingOrRendering = false;
             };
 
+            scope.$watch('runTicketListUploader', function(runTicketListUploader) {
+              if(runTicketListUploader) {
+                console.log(runTicketListUploader);
+                getTicketsList(ticketsHeaderState.searchFilter);
+                $rootScope.runTicketListUploader = false;
+              }
+            });
+
             function getTicketsList(filter) {
               if (!filter) {
                 return;
+              }
+
+              if($state.includes('tickets')) {
+                filter = {
+                  companyId: undefined,
+                  userId: undefined
+                }
               }
 
               UserNotificationService.show('Loading...');

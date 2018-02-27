@@ -9,10 +9,10 @@
         scope: {
           emailTo: '='
         },
-        link: function (scope, element) {
+        link: function (scope, element, attrs) {
 
           element.click(function () {
-            window.open("mailto:" + scope.emailTo, '_parent');
+              window.open("mailto:" + scope.emailTo, '_parent');
           });
 
         }

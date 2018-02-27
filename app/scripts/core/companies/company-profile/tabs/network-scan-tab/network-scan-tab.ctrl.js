@@ -5,8 +5,10 @@
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.networkScanTabCtrl',
     [
       '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'quicktech.common.services.UserNotificationService', 'Utils',
-      function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService, UserNotificationService, Utils) {
+      'quicktech.common.services.UserNotificationService',
+      'Utils', 'PasswordManagerService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService,
+                UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService) {
         var lastMasterAgentId;
 
         $scope.testCredentialsModel = {};
@@ -15,6 +17,13 @@
         $scope.selectedDevices = {};
         $scope.isScanDevicesLoad = false;
         $scope.orderScanBy = 'hostName';
+        $scope.PermissionsService = PermissionsService;
+        $scope.passwordShown = false;
+
+
+
+        $scope.selectedCredential = {};
+
         $scope.usersWithEmails = UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
           return !!user.primaryEmail;
         });
@@ -26,16 +35,22 @@
             $scope.discoveredByAgentId = lastMasterAgentId;
 
             if (lastMasterAgentId) {
-              $scope.masterAgent = DevicesService.getOneByAgentId(lastMasterAgentId, $scope.company.id);
+              // $scope.masterAgent = DevicesService.getOneByAgentId(lastMasterAgentId, $scope.company.id);
+              // $scope.lastMasterAgent = $scope.masterAgent;
+              $scope.masterAgent = selectMAsterAgent();
               $scope.lastMasterAgent = $scope.masterAgent;
             }
+
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = $scope.scanDevices || {};
                 var devices = resp[$scope.company.id];
-                $scope.scanDevices.devices = devices.sort(function(a,b){
-                  return a.ipAddress < b.ipAddress;
-                });
+                if (devices) {
+                  $scope.scanDevices.devices = devices.sort(function (a, b) {
+                    return a.ipAddress < b.ipAddress;
+                  });
+                }
+
                 $scope.scanDevices.status = resp.status;
               });
             } else {
@@ -44,6 +59,53 @@
             }
           }
         });
+
+        DevicesService.getAgentsCredentialsForCompany($scope.company.id, function (resp) {
+          $scope.companyAgentsCredentials = resp[$scope.company.id];
+        });
+
+        $scope.changeSelectedCredential = function (credential) {
+          if (credential) {
+            if ($scope.selectedCredential && $scope.selectedCredential.id === credential.id) {
+              $scope.selectedCredential = {};
+              $scope.testCredentialsModel.id = '';
+            } else {
+              $scope.selectedCredential = credential;
+              $scope.testCredentialsModel = angular.copy(credential);
+            }
+          }
+        };
+
+        $scope.downloadAgentUser = {
+          agentName: '',
+          agentPassword: '',
+          userName: '',
+          email: '',
+          companyId: $scope.company.id
+        };
+
+        DevicesService.getDownloadAgentLink($scope.downloadAgentUser, function (resp) {
+          $scope.gettingLink = false;
+          $scope.downloadLink = resp.downloadLink;
+        });
+
+        function selectMAsterAgent() {
+          if ($scope.agents) {
+
+            var agentsSortedByCreatedAtDate = $scope.agents.sort(function (a, b) {
+              var aa = new Date(a.createdAt);
+              var bb = new Date(b.createdAt);
+              return aa > bb
+            });
+            return agentsSortedByCreatedAtDate[0]
+
+          }
+
+        }
+
+        $scope.changeShowPassword = function() {
+          $scope.passwordShown = !$scope.passwordShown;
+        };
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToDownload || form[fieldName].$dirty) && form[fieldName].$invalid;
@@ -62,15 +124,18 @@
           };
         };
 
-        $scope.downloadAgent = function (form) {
-          if (form.$valid) {
+        $scope.downloadAgent = function (isWoForm, form) {
+          if (isWoForm || form.$valid) {
             if (!$scope.savingInProcess) {
               $scope.triedToDownload = false;
               $scope.savingInProcess = true;
               DevicesService.downloadAgent($scope.company.id, $scope.downloadAgentModel.username || '',
                 $scope.downloadAgentModel.password || '', !!$scope.downloadAgentModel.autoInstall, function () {
                   $scope.savingInProcess = false;
-                  form.$setPristine();
+                  if (!isWoForm) {
+                    form.$setPristine();
+                  }
+
                 });
             }
           } else {
@@ -132,8 +197,8 @@
         $scope.isDeviceSelected = function () {
           var keys = Object.keys($scope.selectedDevices);
           return keys.length && keys.some(function (key) {
-              return $scope.selectedDevices[key];
-            });
+            return $scope.selectedDevices[key];
+          });
         };
 
         $scope.isAnyHasPassword = function () {
@@ -171,8 +236,8 @@
 
             if (deviceIds.length) {
               var dto = {
-                login: $scope.testCredentialsModel.agentName,
-                password: $scope.testCredentialsModel.agentPassword,
+                login: $scope.testCredentialsModel.username,
+                password: $scope.testCredentialsModel.password,
                 companyId: $scope.company.id,
                 discoveredByAgentId: $scope.discoveredByAgentId,
                 deviceIds: deviceIds
@@ -200,8 +265,8 @@
             }
             if (deviceIds.length) {
               var dto = {
-                login: $scope.testCredentialsModel.agentName,
-                password: $scope.testCredentialsModel.agentPassword,
+                login: $scope.testCredentialsModel.username,
+                password: $scope.testCredentialsModel.password,
                 companyId: $scope.company.id,
                 deviceIds: deviceIds,
                 discoveredByAgentId: $scope.discoveredByAgentId
@@ -253,6 +318,48 @@
         $scope.toggleDescription = function (deviceId) {
           $scope.isEditDescrOpened = true;
           $scope.$broadcast('toggleEditDeviceDescription', deviceId);
+        };
+
+        $scope.saveCredential = function (form) {
+          if (form.$valid) {
+            $scope.triedToDownload = false;
+            $scope.triedToSavePassword = false;
+            // if($scope.editedPasswordCompany && !$scope.editedPassword.companyId) {
+            //   $scope.setCompanyId();
+            // }
+            // $scope.loadingInProgress = true;
+            // $scope.editedPassword.links = angular.copy($scope.password.links);
+            // $scope.editedPassword.onlyForMe = $scope.password.onlyForMe;
+            // var toSave = buildDto($scope.editedPassword);
+            var data = {
+              companyId: $scope.company.id,
+              description: 'Agent Network Credentials',
+              expiredDate: '',
+              template: 'AGENT',
+              password: $scope.testCredentialsModel.password,
+              username: $scope.testCredentialsModel.username
+            };
+            if($scope.testCredentialsModel.id) {
+              data.id = $scope.testCredentialsModel.id;
+            }
+            PasswordManagerService.save(data, function () {
+              $scope.loadingInProgress = false;
+            })
+          } else {
+            $scope.triedToSavePassword = true;
+            $scope.triedToDownload = true;
+          }
+        };
+
+        $scope.removeCredential = function(credential) {
+          if (PermissionsService.isAllowed('DELETE_PASSWORD')) {
+            var message = 'Are you sure you want to delete this password?';
+            UserConfirmationsService.show(message, 'Yes').then(function () {
+              PasswordManagerService.deletePassword(credential.id, function () {
+                UserNotificationService.show('Password was deleted successfully.', true);
+              })
+            });
+          }
         };
 
         $scope.$watch(function () {

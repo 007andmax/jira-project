@@ -13,6 +13,7 @@
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var availableViews = ['list', 'grid'];
+        var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -28,17 +29,12 @@
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
-        //$scope.archivedShown = false;
-
 
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function(resp) {
           $scope.companiesColors = resp;
-          //console.log("color resp:", $scope.companiesColors);
         });
-
-
 
         $scope.companiesCtrl = {};
 
@@ -60,7 +56,8 @@
 
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
-            $state.go('companyProfile', { companyId: company.id, tabName: tabName });
+            $state.go('companyProfile', { companyId: company.id, tabName: 'dashboadr' });
+            companyProfileSharedState.tabName = 'dashboard';
           }
         };
 

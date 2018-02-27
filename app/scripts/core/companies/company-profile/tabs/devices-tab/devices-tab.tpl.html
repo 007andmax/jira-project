@@ -182,7 +182,7 @@
         <div class="list-actions pull-right">
 
           <div class="btn btn-icn btn-default has-tooltip pull-left"
-               append-html-to-body data="deviceReport" ng-if="agent.agentId"
+               append-html-to-body data="agent.report" ng-if="agent.agentId"
                url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
                tooltip-placement="top" uib-tooltip="Open Report" ng-click="getDeviceReport(agent)">
             <i class="icon-lg icn-description"></i>

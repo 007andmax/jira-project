@@ -131,7 +131,7 @@
   border-bottom: 2px solid rgba(79, 95, 121, 0.5);
   text-transform: uppercase;
   margin: 35px 25px 10px 25px;
-  color: #9ca5b6;
+  color: #fff;
   width: 80%;
 }
 
@@ -142,9 +142,9 @@
   margin: 10px 25px;
 }
 
-.left-panel-title-hover:hover {
-  color: #fff;
-}
+/*.left-panel-title-hover:hover {*/
+  /*color: #fff;*/
+/*}*/
 
 .filter-left-panel {
   padding: 0 25px;
@@ -193,7 +193,8 @@
   color: #16a4fa;
 }
 
-.tickets-left-panel .center-category__category span {
+.tickets-left-panel .center-category__category span,
+.company-dashboard-left-panel .center-category__category span{
   position: absolute;
   right: 20px;
   top: 7px;
@@ -433,10 +434,14 @@
   right: 15px;
   top: 10px;
   transition: all .3s;
+  transform: rotate(-90deg);
 }
-
+.company-dashboard-left-panel.center-category .left-panel-title .report-caret-icon {
+  top: 19px;
+}
 .center-category .left-panel-title .report-caret-icon.report-caret-icon-up {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
+  background: url("../images/new-icons/report-caret-right.png");
 }
 
 .center-category .icn-remove-old {

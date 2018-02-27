@@ -1,12 +1,12 @@
-<div class="users-content">
+<div class="users-content" style="margin-top: -7px;">
   <div class="change-view-actions">
     <div class="action-wrap clearfix">
       <!--<div class="archived-change">-->
-        <!--<span class="pull-left">Archived users</span>-->
-        <!--<div class="switch">-->
-          <!--<input type="checkbox" ng-model="archivedShown">-->
-          <!--<label><i></i></label>-->
-        <!--</div>-->
+      <!--<span class="pull-left">Archived users</span>-->
+      <!--<div class="switch">-->
+      <!--<input type="checkbox" ng-model="archivedShown">-->
+      <!--<label><i></i></label>-->
+      <!--</div>-->
       <!--</div>-->
       <div class="view-change">
         <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
@@ -54,9 +54,9 @@
         </span>
           </div>
 
-          <div class="col-lg-1 col-xs-2 subscribe-col">Subscription</div>
+          <div class="col-lg-2 col-xs-2">Subscription</div>
 
-          <div class="col-lg-1 col-xs-1 tickets-col" ng-click="setOrderByUsers('ticket')">
+          <div class="col-lg-1 col-xs-1 tickets-col" style="padding-left: 0;" ng-click="setOrderByUsers('ticket')">
         <span class="sort-span">
           Tickets
           <i class="icn-sm sort-icon icn-sort"
@@ -64,7 +64,7 @@
         </span>
           </div>
 
-          <div class="col-lg-2 col-xs-1 buttons-col"></div>
+          <div class="col-lg-1 col-xs-1 buttons-col"></div>
         </li>
       </ul>
     </div>
@@ -78,8 +78,10 @@
            ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) | limitTo: displayLimit track by user.id">
         <div class="card" ng-style="{'border-left-color': tagColors[usersColors[getUserType(user)]].backgroundColor}">
           <div class="card-header">
-            <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')" create-new-entity="user" item="user"></div>
-            <i class="icon-sm icn-restore" ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')" ng-click="dearchiveUser(user)"></i>
+            <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')"
+                 create-new-entity="user" item="user"></div>
+            <i class="icon-sm icn-restore" ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')"
+               ng-click="dearchiveUser(user)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
             <p class="ellipsis name" uib-tooltip="{{ getUserName(user) }}" tooltip-placement="bottom"
@@ -113,7 +115,8 @@
             </div>
             <div class="clearfix" ng-if="user.secondaryEmail">
               <img src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
-              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}" tooltip-placement="bottom"
+              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}"
+                 tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.secondaryEmail">
               </p>
             </div>
@@ -181,7 +184,8 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-users" ng-if="usersView === 'list'" style="margin-top: 70px;margin-bottom: 100px;" scroll-pagination qt-scroll-to="top" offset="83">
+  <ul class="qt-list qt-users users-bg" ng-if="usersView === 'list'" style="margin-top: 85px;"
+      scroll-pagination qt-scroll-to="top" offset="83">
 
     <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
         ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) | limitTo: displayLimit track by user.id">
@@ -190,13 +194,17 @@
         <div class="col-lg-3 col-xs-3">
           <div class="user-bio">
             <div class="pull-left avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38" ng-if="(user && user.avatar)">
+              <div class="default-user-avatar" ng-if="!(user && user.avatar)" style="background-color: pink;">
+                <span>{{user.firstName[0].toUpperCase()}}</span>
+                <span>{{user.lastName[0].toUpperCase()}}</span>
+              </div>
             </div>
 
-              <div class="user-name pull-left">
-                <p class="ellipsis" uib-tooltip="{{ getUserName(user) }}" trimmed-tooltip-checker="getUserName(user)"></p>
-                <p class="label label-light">{{ user.designation }}</p>
-              </div>
+            <div class="user-name pull-left">
+              <p class="ellipsis" uib-tooltip="{{ getUserName(user) }}" trimmed-tooltip-checker="getUserName(user)"></p>
+              <p class="label label-light">{{ user.designation }}</p>
+            </div>
 
           </div>
         </div>
@@ -242,25 +250,29 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-2  subscribe-col" uib-dropdown>
+        <div class="col-lg-2 col-xs-2  subscribe-col" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" tooltip-placement="top"
-               uib-dropdown-toggle custom-disabled="{{ user.deletedAt || !PermissionsService.isAllowed('EDIT_USERS') }}">
-            <img src="images/input-icons/ticket-update-green.png" alt=""
-                 ng-if="user.subscription.ticket" uib-tooltip="Ticket Updates">
-            <img src="images/input-icons/invoice-update-orange.png" alt=""
-                 ng-if="user.subscription.invoice" uib-tooltip="Invoice Updates">
-            <img src="images/input-icons/tick-manager-blue.png" alt=""
-                 ng-if="user.subscription.ticketManager" uib-tooltip="Ticket Manager">
-            <div class="no-subscribe" uib-tooltip="No Subscriptions"
-                 ng-if="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
+               tooltip-placement="top">
+            <div class="user-ticket-update" ng-show="user.subscription.ticket"
+                 uib-tooltip="Ticket Updates">Updates
             </div>
+            <div class="user-ticket-update" ng-show="user.subscription.invoice"
+                 uib-tooltip="Invoice Updates">Invoice
+            </div>
+            <div class="user-ticket-update" ng-show="user.subscription.ticketManager"
+                 uib-tooltip="Ticket Manager">Manager
+            </div>
+            <div class="no-subscribe" uib-tooltip="No Subscriptions"
+                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager"></div>
+            <i class="icn-sm report-caret-icon"></i>
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticket')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticket')"
+                 stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.ticket">
@@ -271,7 +283,8 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticketManager')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticketManager')"
+                 stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.ticketManager">
@@ -282,7 +295,8 @@
             </li>
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')"
+                 stop-propagation="click">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.invoice"
@@ -303,34 +317,56 @@
         </span>
         </div>
 
-        <div class="col-lg-2 col-xs-1 buttons-col">
-          <div class="list-actions pull-right">
+        <!--<div class="col-lg-1 col-xs-1 buttons-col">-->
+        <!--<div class="list-actions pull-right">-->
 
-            <div class="btn-icn btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
-                 ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"
-                 tooltip-placement="top" uib-tooltip="Edit">
-              <i class="icon-sm edit-icon"></i>
-            </div>
+        <!--<div class="btn-icn btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"-->
+        <!--ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"-->
+        <!--tooltip-placement="top" uib-tooltip="Edit">-->
+        <!--<i class="icon-sm edit-icon"></i>-->
+        <!--</div>-->
 
-            <div class="btn btn-icn btn-default btn-user-mail pull-left has-tooltip"
-                 custom-disabled="{{ !user.primaryEmail }}"
-                 email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
-              <i class="icon-sm icn-user-mail"></i>
-            </div>
+        <!--<div class="btn btn-icn btn-default btn-user-mail pull-left has-tooltip"-->
+        <!--custom-disabled="{{ !user.primaryEmail }}"-->
+        <!--email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">-->
+        <!--<i class="icon-sm icn-user-mail"></i>-->
+        <!--</div>-->
 
-            <div class="btn btn-icn btn-default pull-left has-tooltip " ng-click="archiveUser()"
-                 custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
-                      || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
-                 tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">
-              <i class="icon-sm icn-delete"></i>
-            </div>
+        <!--<div class="btn btn-icn btn-default pull-left has-tooltip " ng-click="archiveUser()"-->
+        <!--custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')-->
+        <!--|| user.isContact || isLastUserWithInvoiceSubscription(user) }}"-->
+        <!--tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">-->
+        <!--<i class="icon-sm icn-delete"></i>-->
+        <!--</div>-->
 
-            <div class="btn btn-icn btn-default pull-left has-tooltip"
-                 ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')">
-              <i class="icon-sm icn-restore" ng-click="dearchiveUser(user)"></i>
-            </div>
+        <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+        <!--ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')">-->
+        <!--<i class="icon-sm icn-restore" ng-click="dearchiveUser(user)"></i>-->
+        <!--</div>-->
 
-          </div>
+        <!--</div>-->
+        <!--</div>-->
+
+        <div uib-dropdown class="user-list-more col-md-1" style="justify-content: flex-end;"
+             smart-dropdown-menu-position="dropdown-menu">
+          <a class="hit-area ha-22-48 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle>
+            <i class="icn-sm icn-more-light-grey"></i>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+
+            <li>
+              <a create-new-entity="user" item="user"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt">Edit</a>
+            </li>
+            <li ng-show="{{!user.primaryEmail}}">
+              <a email-to="user.primaryEmail">Email</a>
+            </li>
+            <li
+              ng-show="{{!PermissionsService.isAllowed('ARCHIVE_USERS') || user.isContact || isLastUserWithInvoiceSubscription(user)}}">
+              <a ng-click="archiveUser()">Archive User</a>
+            </li>
+
+          </ul>
         </div>
       </div>
     </li>
@@ -338,10 +374,17 @@
   </ul>
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

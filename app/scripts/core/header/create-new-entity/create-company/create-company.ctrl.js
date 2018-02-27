@@ -11,6 +11,24 @@
                 PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
         $scope.descriptionMaxLength = 300;
+        $scope.techUsers = UsersService.getTechUsers;
+        $scope.showWorkingDaysEditButton = false;
+        $scope.showWorkingDaysEditFields = false;
+        $scope.showWorkingDaysSchedule = false;
+        $scope.selectedContractType;
+
+        var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+        $scope.daysOfWeekMap = {
+          MONDAY: 'Monday',
+          TUESDAY: 'Thursday',
+          WEDNESDAY: 'Wednesday',
+          THURSDAY: 'Thursday',
+          FRIDAY: 'Friday',
+          SATURDAY: 'Saturday',
+          SUNDAY: 'Sunday'
+        };
+
+
 
         var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
@@ -46,6 +64,7 @@
             // }
 
             $scope.editCompany = companyData.staticCopy();
+            getCorrectWorkingTime();
             $scope.contact = $scope.editCompany.contacts[0];
 
             if ($scope.editCompany.paymentTerms) {
@@ -103,6 +122,7 @@
             maxAgents: 0,
             removeOfflineTime: 30
           };
+          getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         } else {
           $scope.isLastInvoiceSubsciption = true;
@@ -117,6 +137,7 @@
             maxAgents: 0,
             removeOfflineTime: 30
           };
+          getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         }
 
@@ -129,25 +150,107 @@
         $scope.tryToSave = false;
         $scope.currentStep = 'info';
         $scope.PermissionsService = PermissionsService;
-        $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.selectedServices = {};
 
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
         $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
         $scope.paymentTerms = ['COD', '7 days', '15 days', '30 days'];
+        $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
+        $scope.serviceTypesMap = {
+          HOURLY: 'Hourly',
+          BLOCK_TIME: 'Block time',
+          SEMI_MANAGED: 'Semi managed',
+          FULLY_MANAGED: 'Fully managed'
+        };
+
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
 
-        $scope.selectedContractType;
+        $scope.saveWorkingHours = function () {
+          $scope.editCompany.workingDays = [];
+          for (var i = 0; i < 7; i++) {
+            var day = {};
+            if ($scope.workingDays[i].isDayOff || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+              day = {
+                dayOfWeek: $scope.workingDays[i].dayOfWeek,
+                startTime: 0,
+                endTime: 0
+              }
+            } else {
+              day = {
+                dayOfWeek: $scope.workingDays[i].dayOfWeek,
+                startTime: gotSecondFromTimeAndFormatObject($scope.workingDays[i].startTime, $scope.workingDays[i].startTimeFormat),
+                endTime: gotSecondFromTimeAndFormatObject($scope.workingDays[i].endTime, $scope.workingDays[i].endTimeFormat)
+              };
+            }
+
+            $scope.editCompany.workingDays.push(day);
+          }
+          $scope.showWorkingDaysEditFields = false;
+
+        };
+
+        function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
+          if (objectTime && objectTimeFormat) {
+            var separateTime = objectTime.split(':');
+            var hours = parseInt(separateTime[0]);
+            var minutes = parseInt(separateTime[1]);
+            return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
+          }
+        }
+
+        function getCorrectWorkingTime() {
+          $scope.workingDays = [];
+          for (var i = 0; i < 7; i++) {
+            var day = {
+              dayOfWeek: daysOfWeek[i],
+              startTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
+              startTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
+              endTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
+              endTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
+              isDayOff: ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && $scope.editCompany.workingDays[i].startTime > 0 && $scope.editCompany.workingDays[i].endTime > 0) ? false : true
+            };
+            $scope.workingDays.push(day);
+            $scope.workingDayReserved = angular.copy($scope.workingDays);
+          }
+        }
+
+        function timeFormatter(time) {
+          if (time && time > 0) {
+            var seconds = time > 43200 ? time - 43200 : time;
+            var hours = Math.floor(seconds / 3600);
+            var hoursToReturn = hours.toString().length > 1 ? hours : '0' + hours;
+            var minutes = Math.floor((seconds - (hours * 3600)) / 60);
+            var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
+            return hoursToReturn + ':' + minutesToreturn;
+          } else {
+            return '12' + ':' + '00';
+          }
+        }
+
+        function getTimeFormat(time) {
+          if (time && time > 0) {
+
+            var timeInHour = time / 3600;
+            if (timeInHour < 12) {
+              return 'AM';
+            } else {
+              return 'PM';
+            }
+          } else {
+            return 'AM';
+          }
+        }
+
+
         $scope.selectContractType = function(type) {
           if($scope.selectedContractType === type) {
             $scope.selectedContractType = '';
           }else {
             $scope.selectedContractType = type;
           }
-          //console.log('$scope.selectedContractType: ', $scope.selectedContractType);
         };
 
         $scope.servicesData = ServicesService.getServicesData($scope, function () {
@@ -177,6 +280,7 @@
 
           if (form.$valid) {
             $scope.savingInProcess = true;
+            $scope.saveWorkingHours();
 
             var editCompany = angular.copy($scope.editCompany);
             var contacts = editCompany.contacts,
@@ -220,6 +324,13 @@
             if (!editCompany.agentLinkToEmailEnabled) {
               editCompany.agentLinkToEmail = null;
             }
+
+            // if(editCompany.techLeadIds) {
+            //   var techIds = [];
+            //   techIds.push(editCompany.techLeadIds);
+            //   editCompany.techLeadIds = techIds;
+            //
+            // }
 
 
 
@@ -476,7 +587,8 @@
               || !angular.equals(company.address, origin.address)
               || hasContact
               || company.login !== origin.login
-              || company.password !== origin.password;
+              || company.password !== origin.password ||
+            company.techLeadIds !== origin.techLeadIds;
 
           } else {
             hasClientType = company.clientType && company.clientType.trim();
@@ -532,6 +644,30 @@
         function toEnum(text) {
           return text.trim().split(' ').join('_').toUpperCase();
         }
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.getFullName = function(client) {
+
+          var isAllSpaces = client.lastName === "    ";
+          if(client.lastName && !isAllSpaces) {
+            return client.firstName+' '+client.lastName;
+          } else {
+            return client.firstName;
+          }
+        };
       }
     ]);
 

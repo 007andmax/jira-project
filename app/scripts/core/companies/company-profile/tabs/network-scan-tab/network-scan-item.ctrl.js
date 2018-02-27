@@ -11,6 +11,7 @@
         $scope.deviceEditDescription = $scope.device.description;
         $scope.isOpenDescrDrpdwn = false;
         $scope.patternMax40 = /^.{0,40}$/;
+        $scope.showEditDeviceField =  false;
 
         $scope.uninstallAgent = function () {
           if ($scope.device.status.statusValue) {
@@ -40,11 +41,11 @@
 
         $scope.getStatusClass = function () {
           if ($scope.device.changingStatus) {
-            return 'changing-status';
+            return 'status-warning';
           } else if ($scope.device.status && ($scope.device.status.statusValue || $scope.device.status.message === 'Correct')) {
-            return 'success-status';
+            return 'status-success';
           } else {
-            return 'error-status';
+            return 'status-danger';
           }
         };
 

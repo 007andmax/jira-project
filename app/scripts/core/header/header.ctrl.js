@@ -5,9 +5,9 @@
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
-      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout',
+      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout) {
+                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -15,14 +15,17 @@
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.draftsSharedState = SharedStateService.getSharedState('draftsHeader');
+        $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
+        $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
+
 
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
 
-        $scope.getAssignUserId = function(ticket) {
-          if(ticket) {
-            if(ticket.assignedUser && ticket.assignedUser.id && ticket.assignedUser.id.length) {
+        $scope.getAssignUserId = function (ticket) {
+          if (ticket) {
+            if (ticket.assignedUser && ticket.assignedUser.id && ticket.assignedUser.id.length) {
               return ticket.assignedUser.id;
             } else {
               return ticket.assignedUserId;
@@ -43,7 +46,7 @@
         };
 
         $scope.userReadable = function (text) {
-          if(text) {
+          if (text) {
             var words = text.split(/[\-_]/),
               result = '';
 
@@ -85,7 +88,7 @@
             return 'receipt-archive';
           } else if ($state.includes("service-agreements")) {
             return 'service-agreements';
-          }else if ($state.includes("settings")) {
+          } else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';
             } else {
@@ -125,6 +128,25 @@
           return $scope.draftsSharedState && $scope.draftsSharedState.selectedIds.length;
         };
 
+        $scope.companyProfileTabsMap = {
+          'tickets-all': 'ALL',
+          'tickets-unassigned': 'UNASSIGNED',
+          'tickets-closed': 'CLOSED',
+          'tickets-inProgress': 'IN_PROGRESS',
+          'tickets-onHold': 'ON_HOLD',
+          'tickets-completed': 'COMPLETED'
+        };
+
+        $scope.isCompanyProfileTicketPageIsOpen = function () {
+          return $state.includes('companyProfile')
+        };
+
+        $scope.getOpenedUsersTab = function () {
+          return $location.search().tabName
+        };
+
       }]);
 
 }());
+
+

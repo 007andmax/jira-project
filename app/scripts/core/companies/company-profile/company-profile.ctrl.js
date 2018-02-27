@@ -5,9 +5,11 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.PermissionsService', 'UsersService', '$location', 'PasswordManagerService',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
+                PermissionsService, UsersService, $location, PasswordManagerService) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -16,6 +18,8 @@
         UserNotificationService.show('Loading...');
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
+        $scope.companyProfileSharedState = companyProfileSharedState;
 
         $scope.tabName = $state.params.tabName;
         $scope.PermissionsService = PermissionsService;
@@ -33,6 +37,8 @@
           reverse: false
         };
         $scope.companyId = $stateParams.companyId;
+        companyProfileSharedState.companyId = $stateParams.companyId;
+
         $scope.frequency = 'WEEKLY';
         $scope.selectedChart = 'countOfNewTickets';
         $scope.dateFormat = '%d %b';
@@ -42,6 +48,83 @@
             $state.go('companies');
           }
         });
+
+        $scope.companyInfo = CompaniesService.getCompanyData($scope, $scope.company.id, function () {
+
+          if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
+            $scope.companyInfo.addresses = [{}];
+          }
+
+          if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
+            $scope.companyInfo.contacts = [getEmptyContact()];
+          }
+
+          $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
+            $scope.companyInfo.contacts[0].subscription.invoice &&
+            UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
+              return user.subscription.invoice;
+            }).length <= 1;
+
+          $scope.editCompany = $scope.companyInfo.staticCopy();
+          $scope.contact = $scope.editCompany.contacts[0];
+
+          if ($scope.companyInfo.paymentTerms) {
+            $scope.companyInfo.paymentTerms += ' days';
+          } else if ($scope.editCompany.paymentTerms === 0) {
+            $scope.companyInfo.paymentTerms = 'COD';
+          }
+
+          if ($scope.companyInfo.clientType === 'VENDOR') {
+            $scope.companyInfo.hasProducts = false;
+            CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
+              $scope.companyInfo.hasProducts = resp.isProductExist;
+            });
+          }
+
+          // if ($scope.companyInfo.clientType) {
+          //   $scope.companyInfo.clientType = userReadable($scope.companyInfo.clientType);
+          // }
+
+          // if ($scope.companyInfo.serviceType) {
+          //   $scope.companyInfo.serviceType = userReadable($scope.companyInfo.serviceType);
+          // }
+
+          if ($scope.company.defaultPaymentMethod) {
+            $scope.companyInfo.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);
+          }
+
+          if (!$scope.companyInfo.credential) {
+            $scope.companyInfo.login = '';
+            $scope.companyInfo.password = '';
+          }
+          $timeout(function() {
+            $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
+          }, 3000);
+
+        });
+
+
+
+        function userReadable(text) {
+          if (!text) {
+            return '';
+          }
+
+          var words = text.split('_'),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        }
+
 
         if (!$scope.company) {
           $state.go('companies');
@@ -179,6 +262,8 @@
             return item.role;
           } else if ($scope.orderUsersTab.field === 'ticket') {
             return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
+          } else if ($scope.orderUsersTab.field === 'primaryEmail') {
+            return item.primaryEmail;
           }
 
         };
@@ -242,6 +327,43 @@
             $scope.dateFormat = '%d %b';
           }
         };
+
+        $scope.getOpenedTab = function() {
+          return $location.search().tabName
+        };
+
+        $scope.filterForDevices = function(device) {
+          var openedTab = $scope.getOpenedTab();
+          if(openedTab === 'devices-all') {
+            return true
+          } else if(openedTab === 'devices-workstations') {
+            return device.type === 'workstation'
+          } else if(openedTab === 'devices-servers') {
+            return device.type === 'server'
+          } else if(openedTab === 'devices-devices') {
+            return device.type === 'device'
+          }
+        };
+
+        $scope.countForDevicePage = function(agents) {
+          if(agents) {
+            var filteringArray = agents.filter(function(device){
+              return $scope.filterForDevices(device)
+            })
+            return filteringArray.length;
+          } else {
+            return 0;
+          }
+
+        }
+
+
+
+        // $scope.$watch('companyProfileSharedState.tabName', function(data) {
+        //   console.log(data);
+        //   $state.go('companyProfile', { companyId: $scope.company.id, tabName: data });
+        // })
+
 
       }]);
 

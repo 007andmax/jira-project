@@ -1125,10 +1125,12 @@
 }
 
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu {
-  left: -156px !important;
   max-height: 144px !important;
+  min-width: 360px;
 }
-
+.run-report-content-device .dropdown-remote-report-tech{
+  min-width: 250px;
+}
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a {
   padding: 10px;
 }

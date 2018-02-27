@@ -39,7 +39,7 @@
             <div ng-click="toggleBillableTickets()"
                  class="clickable-layer"></div>
 
-            <div class="col-1">
+            <div class="cur-text">
 
               <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
                  ng-show="billableCompany.lockType !== 'NONE'">
@@ -60,7 +60,7 @@
 
             </div>
 
-            <div class="col-2">
+            <div class="col-2" style="float: right;">
 
               <div style="float: left;" ng-if="isDisocuntForIcon(billableCompany)">
                 <i class="icon-sm sale-icon-for-isDicount"></i>
@@ -82,7 +82,7 @@
                 <div qt-ts-toggler
                      class="clickable-layer"></div>
 
-                <div class="col-1">
+                <div class="cur-text">
                   <div class="clearfix">
 
                     <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"
@@ -110,7 +110,7 @@
                   </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-2" style="float: right;">
                   <div ng-if="isDiscountForIconTicket(ticket)">
                     <i class="icon-sm sale-icon-for-isDicount"></i>
                   </div>

@@ -17,7 +17,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')" ng-hide="ticketDetails.hasInvoice">
 
     <i class="icn-lg icn-msg-open"></i>
 

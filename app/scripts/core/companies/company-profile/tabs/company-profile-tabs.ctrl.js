@@ -5,10 +5,10 @@
   angular.module('quicktech.core.devices').controller('quicktech.core.companies.companyProfileTabsCtrl',
     ['$scope', 'DevicesService', '$state', '$stateParams', 'quicktech.common.services.SharedStateService',
       'quicktech.common.services.UserConfirmationsService', 'CompaniesService', 'UsersService', 'SubscriptionsService',
-      'Utils', 'quicktech.common.services.PermissionsService', 'ProductsService',
+      'Utils', 'quicktech.common.services.PermissionsService', 'ProductsService', '$rootScope',
       function ($scope, DevicesService, $state, $stateParams, SharedStateService,
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
-                Utils, PermissionsService, ProductsService) {
+                Utils, PermissionsService, ProductsService, $rootScope) {
 
         var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
@@ -16,10 +16,10 @@
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
         if (tabs.indexOf($stateParams.tabName) === -1) {
-          $state.go('companyProfile', { tabName: 'devices' });
+          $state.go('companyProfile', {tabName: 'devices'});
         }
         $scope.orderDevicesBy = 'hostName';
-        $scope.currentOpenTab = $stateParams.tabName || 'devices';
+        $scope.currentOpenProfileTab = $stateParams.tabName || 'devices';
 
         $scope.credential = {
           name: '',
@@ -36,9 +36,9 @@
             $scope.company.hasProducts = resp.isProductExist;
 
             if ($scope.isHasDevices) {
-              $state.go('companyProfile', { tabName: 'devices' });
+              $state.go('companyProfile', {tabName: 'devices'});
             } else {
-              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan' });
+              $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
             }
           });
 
@@ -50,11 +50,57 @@
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
 
-        DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
-          var agentsList = resp;
-          $scope.agents = agentsList.sort(function(a,b) {
-            return a.name < b.name
-          })
+        $scope.getUsersNumber = function () {
+          var usersInfo = {
+            number: '',
+            name: ''
+          };
+          var allUserNumber = [];
+          var tabName = $scope.getOpenedTab();
+
+          if (tabName === 'users-all') {
+            allUserNumber = $scope.users.filter(function (user) {
+              return !user.deletedAt
+            });
+            usersInfo.name = 'All Users';
+            usersInfo.number = allUserNumber.length;
+          } else if (tabName === 'users-managers') {
+            allUserNumber = $scope.users.filter(function (user) {
+              return !user.deletedAt && user.role === 'ADMIN'
+            });
+            usersInfo.name = 'Managers';
+            usersInfo.number = allUserNumber.length;
+          } else if (tabName === 'users-clients') {
+            allUserNumber = $scope.users.filter(function (user) {
+              return !user.deletedAt && (user.role === 'USER' || !user.role)
+            });
+            usersInfo.name = 'Users';
+            usersInfo.number = allUserNumber.length;
+          }
+          return usersInfo;
+
+        };
+
+        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
+          if (resp && resp.length) {
+            var agentsList = resp;
+            $scope.agents = agentsList.sort(function (a, b) {
+              return a.hostName > b.hostName
+            });
+
+            var devicesIds = [];
+            $scope.agents.forEach(function (device) {
+              devicesIds.push(device.id);
+            });
+            $rootScope.deviceCredentialsRecived = false;
+            DevicesService.getDevicesCredentials(devicesIds, function(resp){
+              if(resp) {
+                $scope.devicesCredentials = resp;
+                $rootScope.deviceCredentialsRecived = true;
+              }
+            })
+          }
+
         });
 
         $scope.$watch('agents.length', function (val) {
@@ -62,7 +108,7 @@
             $scope.isHasDevices = true;
           } else {
             $scope.isHasDevices = false;
-            if ($scope.currentOpenTab === 'devices') {
+            if ($scope.currentOpenProfileTab === 'devices') {
               $state.go('companyProfile', {
                 tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
               });
@@ -75,9 +121,9 @@
           return $stateParams.tabName;
         }, function (tabName, prevTab) {
           if (tabs.indexOf(tabName) < 0) {
-            $scope.currentOpenTab = tabs[0];
+            $scope.currentOpenProfileTab = tabs[0];
           } else {
-            $scope.currentOpenTab = tabName;
+            $scope.currentOpenProfileTab = tabName;
           }
 
           $scope.companyProfileHeader.unCheckAll();
@@ -129,6 +175,7 @@
 
         $scope.changeSelectedUsers = function (selectedUsers) {
           var selectUsersIds = [];
+          var selectedUsersPrimaryEmails = [];
           var selectUsersSbscr = {
             invoice: 0,
             ticket: 0,
@@ -154,6 +201,9 @@
               if (user.subscription.ticketManager) {
                 selectUsersSbscr.ticketManager++;
               }
+              if (user.primaryEmail && user.primaryEmail.length) {
+                selectedUsersPrimaryEmails.push(user.primaryEmail);
+              }
 
             }
           }
@@ -165,9 +215,10 @@
           };
 
           $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.filter(function (user) {
-              return !user.deletedAt;
-            }).length);
+            return !user.deletedAt;
+          }).length);
           $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
+          $scope.companyProfileHeader.selectedUsersPrimaryEmails = selectedUsersPrimaryEmails;
 
         };
 
@@ -189,22 +240,24 @@
 
           for (var deviceId in $scope.selectDevices) {
             if ($scope.selectDevices[deviceId]) {
-              for(var j = 0, le = $scope.agents.length; j<le; j++) {
-                if($scope.agents[j].id === deviceId) {
+              for (var j = 0, le = $scope.agents.length; j < le; j++) {
+                if ($scope.agents[j].id === deviceId) {
                   selectDevicesIds.push($scope.agents[j].id);
+                  if($scope.agents[j].online) {
+                    countOnlineDevices++
+                  }
                 }
               }
             }
           }
-          console.log(selectDevicesIds);
 
-          if ($scope.agents) {
-            for (var i = 0, len = $scope.agents.length; i < len; i++) {
-              if ($scope.agents[i].online) {
-                countOnlineDevices++
-              }
-            }
-          }
+          // if ($scope.selectDevices && $scope.agents) {
+          //   for (var i = 0, len = $scope.selectDevices.length; i < len; i++) {
+          //     if ($scope.selectDevices[i].online) {
+          //       countOnlineDevices++
+          //     }
+          //   }
+          // }
 
           $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === $scope.agents.length);
           $scope.companyProfileHeader.isOfflineDeviceSelected = selectDevicesIds.length !== countOnlineDevices;
@@ -229,7 +282,7 @@
           if (tab === 'dashboard') {
             return '/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
           } else {
-            return '/html/scripts/core/companies/company-profile/tabs/'  + tab + '-tab/' + tab + '-tab.tpl.html';
+            return '/html/scripts/core/companies/company-profile/tabs/' + tab + '-tab/' + tab + '-tab.tpl.html';
           }
         };
 
@@ -240,10 +293,10 @@
           $scope.changeSelectDevices();
         };
 
-        $scope.companyProfileHeader.removeDeviceFromPage = function(idForRemove) {
-          for(var i = 0; i < idForRemove.length; i++) {
-            for(var j = 0; j < $scope.agents.length; j++) {
-              if($scope.agents[j].id === idForRemove[i]) {
+        $scope.companyProfileHeader.removeDeviceFromPage = function (idForRemove) {
+          for (var i = 0; i < idForRemove.length; i++) {
+            for (var j = 0; j < $scope.agents.length; j++) {
+              if ($scope.agents[j].id === idForRemove[i]) {
                 $scope.agents.splice(j, 1);
               }
             }

@@ -190,7 +190,7 @@
             if (phoneNumbers && phoneNumbers.length) {
               return phoneNumbers[0].number || '';
             }
-          } else if ($scope.orderUsers.field === 'ticket') {
+          }  else if ($scope.orderUsers.field === 'ticket') {
             return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
           }
 

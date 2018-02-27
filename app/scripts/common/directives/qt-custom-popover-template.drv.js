@@ -98,7 +98,7 @@
                 position: 'absolute',
                 width: 'auto',
                 padding: '15px 25px',
-                'z-index': $attrs.zIndex || 1001
+                'z-index': $attrs.zIndex || 1001,
               });
               calcPosition($attrs.qtPopoverPosition);
 
@@ -124,7 +124,10 @@
             } else if (position === 'bottom-left-align') {
               left = 0;
               top = trigger.outerHeight() + 10;
-            } else if (position === 'bottom-right-align') {
+            } else if (position === 'bottom-left-align-dashboard') {
+              left = 'calc(50% - 125px) !important;';
+              top = trigger.outerHeight() + 10;
+            }else if (position === 'bottom-right-align') {
               left = -popover.outerWidth() + trigger.outerWidth();
               top = trigger.outerHeight() + 10;
             }
@@ -135,7 +138,9 @@
               left += offset.left
             }
 
-            popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
+            var attributesForLeftStyle = (position === 'bottom-left-align-dashboard') ? '' : 'px !important;';
+
+            popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + attributesForLeftStyle);
           }
 
           function hideOnOutsideClick(e) {
