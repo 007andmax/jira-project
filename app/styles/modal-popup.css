@@ -586,7 +586,12 @@ _::-webkit-:not(:root:root),
 .modal-dialog.modal-unlock-window .modal-content {
   border-radius: 5px;
 }
-.unlock-screen-wrapper .log-out-btn{
+
+.unlock-screen-wrapper {
+  padding: 25px 30px 30px;
+}
+
+.unlock-screen-wrapper .log-out-btn {
   height: 90px;
   background-color: #F6F9FB;
   text-align: center;
@@ -598,6 +603,13 @@ _::-webkit-:not(:root:root),
   margin-right: -30px;
   padding: 32px 0;
 }
+
+.unlock-screen-wrapper .log-out-btn a {
+  position: absolute;
+  left: calc(50% - 25px);
+  top: calc(50% - 12px);
+}
+
 .caret-mark {
   right: 12px;
   position: absolute;
