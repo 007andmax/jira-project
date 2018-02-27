@@ -47,6 +47,8 @@
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', false);
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
+                  var now = Date.now();
+                  Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'offlineSince', now);
                   break;
                 }
               }
@@ -86,6 +88,40 @@
                   }
                 }
               }
+            } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
+              console.log(newChange);
+              var companyId = getCompanyIdByAgentId(newChange.data.agentId);
+              if(newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle') ) {
+                if(companyId) {
+                  for (var i=0; i< devices[companyId].length; i++) {
+                    if (devices[companyId][i].agentId === newChange.data.agentId) {
+                      //Utils.defineReadOnlyProperty(devices[companyId][i], 'Idle', newChange.data.statuses.Idle);
+                      if(newChange.data.statuses.Idle) {
+                        storage.devices[companyId][i].Idle = newChange.data.statuses.Idle;
+                      } else {
+                        storage.devices[companyId][i].Idle = 'none';
+                      }
+
+                      break;
+                    }
+                  }
+                }
+
+              } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
+                console.log(newChange);
+                for (var i=0; i< devices[companyId].length; i++) {
+                  if(companyId) {
+                    if (devices[companyId][i].agentId === newChange.data.agentId) {
+                      // Utils.defineReadOnlyProperty(devices[companyId][i], 'NoRestart', newChange.data.statuses.NoRestart);
+                      // Utils.defineReadOnlyProperty(devices[companyId][i], 'Online', newChange.data.statuses.Online);
+                      storage.devices[companyId][i].NoRestart = newChange.data.statuses.NoRestart;
+                      storage.devices[companyId][i].Online = newChange.data.statuses.Online;
+                      break;
+                    }
+                  }
+
+                }
+              }
             }
           });
 
@@ -96,6 +132,25 @@
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
               var session = newChange.data;
               $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
+            } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
+              var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
+              Utils.defineReadOnlyProperty(device, 'OneTimeConnectionData', newChange.data);
+              Utils.defineReadOnlyProperty(device, 'agentConnected', true);
+            } else if(newChange.action === 'ONE_TIME_DELETED') {
+              var companyId = getCompanyIdByAgenSessionId(newChange.data);
+              // var device = Utils.findById(devices[companyId].OneTimeConnectionData.id, newChange.data);
+              // var device = findDeviceBySessionId(devices[companyId], newChange.data);
+              // Utils.defineReadOnlyProperty(device, 'agentConnected', false);
+
+                for (var i=0; i< devices[companyId].length; i++) {
+                  if (devices[companyId][i].OneTimeConnectionData && devices[companyId][i].OneTimeConnectionData.id === newChange.data) {
+                    console.log(devices[companyId][i]);
+                    storage.devices[companyId][i].agentConnected = false;
+                    break;
+                  }
+                }
+
+
             }
           })
         });
@@ -106,6 +161,21 @@
           initListeners[i]();
         }
       }
+
+
+
+      // function findDeviceBySessionId( deviceList, sessionId) {
+      //   if(deviceList && sessionId) {
+      //     var device = {};
+      //     for(var i=0; i<deviceList.length; i++) {
+      //       if(deviceList[i].OneTimeConnectionData.id === sessionId) {
+      //         device =  deviceList[i];
+      //         break;
+      //       }
+      //     }
+      //     return device;
+      //   }
+      // }
 
       function _addInitListener(callback) {
 
@@ -758,6 +828,36 @@
         }
       }
 
+      function getCompanyIdByAgentId(value) {
+        if(value) {
+          return Object.keys(storage.devices).find(function(key) {
+            if(key !== 'staticCopy') {
+              for(var i=0; i<storage.devices[key].length; i++ ) {
+                if(storage.devices[key][i].agentId === value) {
+                  return true;
+                }
+              }
+            }
+          } );
+        }
+      }
+
+      function getCompanyIdByAgenSessionId(value) {
+        if(value) {
+          return Object.keys(storage.devices).find(function(key) {
+            if(key !== 'staticCopy') {
+              for(var i=0; i<storage.devices[key].length; i++ ) {
+                if(storage.devices[key][i].OneTimeConnectionData && storage.devices[key][i].OneTimeConnectionData.id) {
+                  if(storage.devices[key][i].OneTimeConnectionData.id === value) {
+                    return true;
+                  }
+                }
+              }
+            }
+          } );
+        }
+      }
+
       function _getDeviceByAgentId(devices, agentId) {
         for (var i = 0; i < devices.length; i++) {
           var device = devices[i];
@@ -802,6 +902,65 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
+
+        $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+          if(resp) {
+            for(var i=0; i<storage.devices[companyId].length; i++) {
+              storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
+              storage.devices[companyId][i].label = resp.data[companyId][i].label;
+              if(!resp.data[companyId][i].online) {
+                storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineSince;
+              }
+            }
+          }
+          getAgentsByCompany(scope, companyId, callback)
+        });
+      }
+
+      function setNewDeviceLabel(dto, callback) {
+
+        // dto structure
+        // {
+        // “agentId”:””,
+        // “deviceId”:””,
+        // “companyId”:””,
+        // “newLabelValue”:””
+        // }
+
+        var future = $http.post('/devices/editAgentLabel', dto);
+        Utils.handleCallback(future, callback);
+      }
+
+      var actionsList = ["idle","norestart","online"];
+
+      function sendDeviceStatusRequest(companyId, agentId, callback) {
+        if(companyId && agentId) {
+          var dto = {
+            companyId: companyId,
+            agentId: agentId,
+            actions: actionsList
+          };
+
+          var future = $http({
+            url: '/devices/agentStatuses',
+            method: 'POST',
+            data: dto
+          });
+          Utils.handleCallback(future, callback);
+        }
+      }
+
+      function getDevicesCredentials(devices, callback) {
+        var future = $http.post('/passwordRecords/devices/password', devices);
+        Utils.handleCallback(future, callback);
+      }
+
+      function getAgentsCredentialsForCompany(companyId, callback) {
+        var future = $http.get('/passwordRecords/'+companyId+'/agents/password');
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -830,6 +989,7 @@
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,
         getOneByAgentId: getOneByAgentId,
+        getCompanyIdByAgentId: getCompanyIdByAgentId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
         getGadgets: getGadgets,
@@ -837,9 +997,16 @@
         removeGadget: removeGadget,
         saveMasterAgent: saveMasterAgent,
         testCredentials: testCredentials,
-        _addInitListener: _addInitListener
+        _addInitListener: _addInitListener,
+        getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
+        setNewDeviceLabel: setNewDeviceLabel,
+        sendDeviceStatusRequest: sendDeviceStatusRequest,
+        getDevicesCredentials: getDevicesCredentials,
+        getAgentsCredentialsForCompany: getAgentsCredentialsForCompany
       }
     }
   ]);
 })
 (window, jQuery);
+
+

@@ -1091,8 +1091,24 @@ hr {
 }
 
 .company-profile-content {
-  float: left;
-  width: 100%;
+  background-color: #F3F7F9;
+  padding: 30px 25px 0;
+}
+
+.company-profile-content .icn-remove-token-light {
+  display: none !important;
+}
+
+.company-profile-content h3 {
+  font-size: 20px;
+  color: #364656;
+  margin: 0 0 7px 0;
+}
+
+.company-profile-content > p {
+  font-size: 13px;
+  color: #9ca5b6;
+  margin-bottom: 10px;
 }
 
 .company-profile-content.companies-list {
@@ -1961,7 +1977,7 @@ mark,
 }
 
 .text-uppercase {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 
 .text-capitalize {
@@ -4491,8 +4507,6 @@ select[multiple].input-lg {
   font-size: 65%;
   color: #fff;
   text-align: center;
-  background-color: transparent;
-  background-position: -905px -96px;
   border: 1px solid #d2dae4;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -4508,7 +4522,7 @@ select[multiple].input-lg {
 }
 
 .checkbox .control-indicator {
-  border-radius: 1px;
+  border-radius: 3px;
 }
 
 .device-field .checkbox .control-indicator {
@@ -4520,9 +4534,9 @@ select[multiple].input-lg {
 }
 
 .control input:checked ~ .control-indicator {
-  background-position: -858px -96px;
-  background-color: #90c56b;
-  border-color: #90c56b;
+  background-position: -858px -120px;
+  background-color: #2EC866;
+  border-color: #2EC866;
 }
 
 .device-field .control input:checked ~ .control-indicator {
@@ -10508,11 +10522,21 @@ button.close {
   height: auto;
   color: #ffffff;
   text-align: center;
-  background-color: #151e29;
+  background-color: #4F5F79;
   border-radius: 4px;
   max-width: 500px;
+  text-transform: capitalize;
+  position: relative;
 }
-
+.tooltip-inner:after{
+  position: absolute;
+  content: '';
+  border: 6px solid transparent;
+  border-top: 5px solid #4F5F79;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .tooltip-lg .tooltip-inner {
   padding: 18px 20px;
   height: auto;

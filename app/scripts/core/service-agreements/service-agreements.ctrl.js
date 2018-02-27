@@ -41,7 +41,11 @@
           for (var i = 0; i < $scope.agreementsList.length; i++) {
             $scope.agreementsList[i].company.name = getCompanyName($scope.agreementsList[i].company.id);
           }
-
+          if($scope.company && $scope.company.id) {
+            $scope.agreementsListByCompany = $scope.agreementsList.filter(function(c) {
+              return c.company.id === $scope.company.id;
+            })
+          }
         });
 
         $scope.allCompnaies = CompaniesService.getAllCompanies();
@@ -101,7 +105,7 @@
           }
         };
 
-        $scope.openAgreementsModal = function (contractType, editMode, agreementId) {
+        $scope.openAgreementsModal = function (contractType, editMode, agreementId, preSetupCompany) {
           var companyForReadOnlyMode = {};
           if (agreementId) {
             AgreementsService.getAgreement(agreementId, function (resp) {
@@ -144,7 +148,8 @@
                   companyData: {
                     editMode: editMode,
                     companyForReadOnlyMode: companyForReadOnlyMode,
-                    contractType: contractType
+                    contractType: contractType,
+                    preSetupCompany: preSetupCompany
                   }
                 }
 
@@ -173,6 +178,10 @@
 
       $scope.companyId = companyData.companyId;
       $scope.companyInfo = companyData.companyInfo;
+      $scope.preSetupCompany = companyData.preSetupCompany;
+      if($scope.preSetupCompany) {
+        $scope.contractCompany = $scope.preSetupCompany;
+      }
       $scope.companiesList = CompaniesService.getClientCompaniesWoClientsAndLeads();
 
       $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;
@@ -409,9 +418,9 @@
 
       $scope.closeModal = function () {
         $uibModalInstance.close();
-        if (!$state.includes('service-agreements')) {
-          $state.go('service-agreements');
-        }
+        // if (!$state.includes('service-agreements')) {
+        //   $state.go('service-agreements');
+        // }
       };
 
 
@@ -797,7 +806,7 @@
 
       $uibModalInstance.closed.then(function () {
 
-        if (!$state.includes('service-agreements')) {
+        if ($state.includes('tickets')) {
           $state.go('service-agreements');
         }
       });

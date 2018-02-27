@@ -19,7 +19,9 @@
       isShowTechSelectField: '@?',
       isReportAvailable: '=',
       isCustomerTicketOptions: '@?',
-      isProductOptions: '@?'
+      isProductOptions: '@?',
+      isProductReportForCompanyTab: '@?',
+      companyId: '=?'
     },
     controller: reportMenuCtrl
   });
@@ -46,6 +48,7 @@
     $ctrl.isShowTechSelectField = $scope.$eval($ctrl.isShowTechSelectField);
     $ctrl.isCustomerTicketOptions = $scope.$eval($ctrl.isCustomerTicketOptions);
     $ctrl.isProductOptions = $scope.$eval($ctrl.isProductOptions);
+    $ctrl.isProductReportForCompanyTab = $scope.$eval($ctrl.isProductReportForCompanyTab);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -67,7 +70,15 @@
     $scope.users = UsersService.getAllUsers();
     $scope.locationTechReport = $location.url();
 
+    // if($ctrl.isProductReportForCompanyTab && $ctrl.companyId) {
+    //   ProductsService.getProductsByCompany($scope, $ctrl.companyId, function(resp) {
+    //     $scope.autocompleteData = resp
+    //   })
+    // } else {
+    //   $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+    // }
     $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+
     $scope.loadProductByCategory = function (categoryId) {
       $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
     };
@@ -181,12 +192,42 @@
       // techDataToSend.endDate = null;
     }
 
+    function sendReportRequestForProductReportOnCompanyTab(reportSettings) {
+      $scope.errorNassageForCompany = true;
+      $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
+      if($scope.techUsers && $scope.techUsers.length >0) {
+        $scope.users = $scope.users.concat($scope.techUsers);
+        console.log($scope.users)
+      }
+      var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
+      var type = $scope.reportType.toUpperCase();
+
+      if ($scope.startDate && $scope.endDate) {
+        var dataToSend = {
+          type: type
+        };
+        dataToSend.startDate = $scope.startDate;
+        dataToSend.endDate = $scope.endDate;
+        dataToSend.companyId = $ctrl.companyId;
+        if($scope.selectedProduct) {
+          dataToSend.productId = $scope.selectedProduct.versionedId.id
+        }
+
+        lastSentData = dataToSend;
+        $scope.$emit("requestReportData", dataToSend, location, techType);
+
+      } else {
+        $scope.errorNassageForDate = false;
+      }
+    }
+
 
 
     function sendReportRequest(reportSettings) {
       $scope.errorNassageForCompany = true;
-
-      if(reportSettings && reportSettings.company) {
+      if($ctrl.isProductReportForCompanyTab) {
+        $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
+      } else if(reportSettings && reportSettings.company) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived(reportSettings.company.id);
         console.log($scope.users)
       } else {
@@ -197,7 +238,11 @@
         console.log($scope.users)
       }
 
-      if (!$ctrl.isTechReport) {
+      if($ctrl.isProductReportForCompanyTab) {
+
+        sendReportRequestForProductReportOnCompanyTab(reportSettings)
+
+      } else if  (!$ctrl.isTechReport) {
         var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
         var type = $scope.reportType.toUpperCase();
         if ($ctrl.isRadioButtonHidden) {

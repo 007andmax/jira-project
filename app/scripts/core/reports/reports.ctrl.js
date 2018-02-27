@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService',
-      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state',
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -226,6 +226,10 @@
             default:
               console.log("wrong location")
           }
+        }
+        if($state.includes('companyProfile')) {
+          getReportByProducts(data);
+          $scope.reportName = 'products_report';
         }
       });
 

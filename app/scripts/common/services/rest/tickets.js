@@ -13,7 +13,7 @@
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
-      var queries, loadingInProcess, lastListType;
+      var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
       var operators = {
         NULL: function (value) {
           return value === null || value === undefined;
@@ -72,8 +72,17 @@
           userId = currentUserId;
           queries = getQueries(currentUserId);
           unwatch();
+          queriesForCompanyProfilePage = {
+            ALL: getQueries(currentUserId).ALL,
+            UNASSIGNED: getQueries(currentUserId).UNASSIGNED,
+            ON_HOLD: getQueries(currentUserId).ON_HOLD,
+            IN_PROGRESS: getQueries(currentUserId).IN_PROGRESS,
+            COMPLETED: getQueries(currentUserId).COMPLETED
+          }
         }
       });
+
+
 
       var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
 
@@ -433,7 +442,9 @@
         });
 
         RealTimeService.subscribe('/leftPanelCounts', scope, function (newChange) {
+
           if (newChange.action == 'LEFT_PANEL_COUNTS') {
+
             Utils.customizeObj(newChange.data, storage.leftPanelCounters);
           }
         });
@@ -470,6 +481,32 @@
             callback(resp.data);
           }
         });
+
+
+      }
+
+      function getAllCountsByCompanyId(scope, companyId, callback) {
+        $http.post('/v2/tickets/'+companyId+'/counts', queries).then(function (resp) {
+          storage.ticketsQuantityMapByCompany = resp.data;
+
+          if (callback) {
+            callback(storage.ticketsQuantityMapByCompany);
+          }
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+
+        RealTimeService.subscribe('/leftPanelCountsCompany/'+companyId, scope, function (newChange) {
+          if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
+            Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
+            console.log(newChange);
+            //callback && callback(storage.ticketsQuantityMapByCompany)
+          }
+        });
+
+        return storage.ticketsQuantityMapByCompany;
       }
 
       function getCompanyTicketCount(query) {
@@ -675,143 +712,6 @@
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
-
-
-        // In case of slow working - below is pure front-end decision
-        // (the only problem is reassign action ('ASSIGNED_USER) )
-        //
-
-        //
-        // function isMyTicket() {
-        //   if(newChange.data.assignedUserId === userId) {
-        //     return true;
-        //   } else {
-        //     return false;
-        //   }
-        // }
-        //
-        // function isTicketAssigned() {
-        //   if(newChange.data.assignedUser !== null && newChange.data.assignedUserId !== null) {
-        //     return true;
-        //   } else {
-        //     return false;
-        //   }
-        // }
-        // switch(newChange.action) {
-        //
-        //   case('CREATED_TICKET'):
-        //
-        //     storage.ticketsQuantityMap.ALL++;
-        //     if(isTicketAssigned()) {
-        //       isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
-        //     } else if( newChange.data.assignedUser === null) {
-        //       storage.ticketsQuantityMap.UNASSIGNED++;
-        //     }
-        //     break;
-        //
-        //   case('TICKET_DELETED'):
-        //
-        //     if(newChange.data.spam) {storage.ticketsQuantityMap.SPAM--}
-        //     if(newChange.data.trash) {storage.ticketsQuantityMap.TRASH--}
-        //     break;
-        //
-        //   case('ASSIGNED_USER'):
-        //
-        //     if(newChange.data.reassigned) {
-        //       if(newChange.data.assignPerformer.id === userId) {
-        //         storage.ticketsQuantityMap.USER--;
-        //       } else if(newChange.data.assignPerformer !== null && newChange.data.assignedUser.id === userId) {
-        //         storage.ticketsQuantityMap.USER++;
-        //       }
-        //     } else {
-        //       storage.ticketsQuantityMap.OPEN++;
-        //       storage.ticketsQuantityMap.UNASSIGNED--;
-        //       isMyTicket() ? storage.ticketsQuantityMap.USER++ : false;
-        //     }
-        //     break;
-        //
-        //   case('PRIORITY_CHANGED'):
-        //
-        //     break;
-        //
-        //   case('STATUS'):
-        //
-        //     if(newChange.data.status === 'COMPLETED') {
-        //       storage.ticketsQuantityMap.CLOSED++;
-        //       if(isTicketAssigned()) {
-        //         isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
-        //       }
-        //     } else if (newChange.data.status === 'IN_PROGRESS') {
-        //       storage.ticketsQuantityMap.CLOSED--;
-        //       if(isTicketAssigned()) {
-        //         isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
-        //       }
-        //     }
-        //     break;
-        //
-        //   case('TRASH'):
-        //
-        //     if(newChange.data.trash === true) {
-        //       storage.ticketsQuantityMap.ALL--;
-        //       storage.ticketsQuantityMap.TRASH++;
-        //         if(isTicketAssigned()) {
-        //           isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
-        //         } else if( newChange.data.assignedUser === null) {
-        //           storage.ticketsQuantityMap.UNASSIGNED--;
-        //         }
-        //     } else if (newChange.data.trash === false) {
-        //       storage.ticketsQuantityMap.ALL++;
-        //       storage.ticketsQuantityMap.TRASH--;
-        //       if(isTicketAssigned()) {
-        //         isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
-        //       } else if( newChange.data.assignedUser === null) {
-        //         storage.ticketsQuantityMap.UNASSIGNED++;
-        //       }
-        //     }
-        //     break;
-        //
-        //   case('REPORT_AS_SPAM'):
-        //     //not sure - need to check
-        //     storage.ticketsQuantityMap.SPAM++;
-        //     if(isTicketAssigned()) {
-        //       isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
-        //     } else if( newChange.data.assignedUser === null) {
-        //       storage.ticketsQuantityMap.UNASSIGNED--;
-        //     }
-        //     break;
-        //
-        //   case('RESTORE_FROM_SPAM'):
-        //
-        //     storage.ticketsQuantityMap.ALL++;
-        //     storage.ticketsQuantityMap.SPAM--;
-        //     if(isTicketAssigned()) {
-        //       isMyTicket() ? storage.ticketsQuantityMap.USER++ : storage.ticketsQuantityMap.OPEN++;
-        //     } else if( newChange.data.assignedUser === null) {
-        //       storage.ticketsQuantityMap.UNASSIGNED++;
-        //     }
-        //     break;
-        //
-        //   case('TICKET_SHARE'):
-        //
-        //     storage.ticketsQuantityMap.SHARE++;
-        //     break;
-        //
-        //   case('MARKED_AS_SPAM'):
-        //
-        //     storage.ticketsQuantityMap.ALL--;
-        //     storage.ticketsQuantityMap.SPAM++;
-        //     if(isTicketAssigned()) {
-        //       isMyTicket() ? storage.ticketsQuantityMap.USER-- : storage.ticketsQuantityMap.OPEN--;
-        //     } else if( newChange.data.assignedUser === null) {
-        //       storage.ticketsQuantityMap.UNASSIGNED--;
-        //     }
-        //     break;
-        //
-        //   case('EDITED_TICKET'):
-        //     break;
-        //   default:
-        //     console.log('wrong action');
-        // }
       }
 
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
@@ -1184,7 +1084,8 @@
         changeLinkedAgent: changeLinkedAgent,
         save: saveEditedTicket,
         updateDiscount: updateDiscount,
-        getAllCounts: getAllCounts
+        getAllCounts: getAllCounts,
+        getAllCountsByCompanyId: getAllCountsByCompanyId
       }
 
     }

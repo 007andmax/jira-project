@@ -66,19 +66,21 @@
             <label class="control-label" ng-message="maxlength">Industry is too large.</label>
           </div>
 
-          <!--<input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"-->
-                 <!--ng-maxlength="40"-->
-                 <!--custom-style="{'width':'100%'}"-->
-                 <!--uib-typeahead="industry for industry in industries | orderBy: 'toString()'"-->
-                 <!--autocomplete="off" qt-typeahead-show-on-focus>-->
+          <input type="text" class="form-control pointer" ng-model="editCompany.clientIndustry.name" name="industry"
+                 ng-maxlength="40"
+                 custom-style="{'width':'100%'}"
+                 uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
+                 autocomplete="off" qt-typeahead-async-show-on-focus smart-dropdown-menu-position="">
+          <div typeahead-input-icon></div>
 
-            <qt-dropdown-typehead list-for-dropdown="industries"
-                                  selected-item="editCompany.clientIndustry.name"
-                                  qt-ng-maxlength="40"
-                                  qt-name="'industry'"
-                                  qt-class="'form-control'" qt-custom-style="'{\'width\':\'100%\'}'">
 
-            </qt-dropdown-typehead>
+          <!--<qt-dropdown-typehead list-for-dropdown="industries"-->
+                                  <!--selected-item="editCompany.clientIndustry.name"-->
+                                  <!--qt-ng-maxlength="40"-->
+                                  <!--qt-name="'industry'"-->
+                                  <!--qt-class="'form-control'" qt-custom-style="'{\'width\':\'100%\'}'">-->
+
+            <!--</qt-dropdown-typehead>-->
 
 
         </div>
@@ -94,11 +96,38 @@
             <label class="control-label" ng-message="required">Client Type is required.</label>
           </div>
 
-          <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
+          <input custom-style="{'width':'100%'}" type="text" class="form-control pointer" ng-model="editCompany.clientType" name="clientType"
                  uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
-                 readonly qt-typeahead-show-on-focus required uib-tooltip="Current vendor has linked products"
+                 readonly qt-typeahead-async-show-on-focus required uib-tooltip="Current vendor has linked products"
                  ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
-          <div typeahead-input-icon="editCompany.clientType" ></div>
+          <div typeahead-input-icon="editCompany.clientType" ng-if="!(editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts)"></div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'leadBy')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(infoForm, 'leadBy')}">
+            Lead By
+          </label>
+
+          <!--<div ng-messages="infoForm.clientType.$error"-->
+               <!--ng-class="{'hide': !isShowingErrors(infoForm, 'liedBy')}">-->
+            <!--<label class="control-label" ng-message="required">Client Type is required.</label>-->
+          <!--</div>-->
+
+          <!--<input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.liedBy"-->
+                 <!--name="liedBy"-->
+                 <!--uib-typeahead="clientType for clientType in clientTypes"-->
+                 <!--readonly qt-typeahead-async-show-on-focus>-->
+
+          <input type="text" class="form-control has-dropdown pointer"
+                 placeholder="Select Tech User"
+                 name="leadBy"
+                 typeahead-input-formatter="getUserByID($model)"
+                 autocomplete="off" ng-model="editCompany.techLeadId"
+                 uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                 qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+          <div typeahead-input-icon="editCompany.techLeadIds" ></div>
         </div>
 
 
@@ -155,6 +184,51 @@
       </div>
       <div class="col-xs-6">
         <div style="width: 100%; height: 250px; margin-top: 15px;" map alternative-map></div>
+      </div>
+      <div class="col-xs-12">
+        <div class="company-schedule clearfix">
+          <div>
+            <div>
+              <ul class="company-schedule-edit clearfix row">
+                <li class="col-md-6" ng-repeat="day in workingDays">
+                  <div class="mb">
+                    <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
+                    <input placeholder="Hours"
+                           name="startTime"
+                           type="text"
+                           class="form-control"
+                           ng-model="day.startTime"
+                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="day.isDayOff">
+                    <input type="text" class="form-control pointer text-center" name="startTimeFormat"
+                           ng-maxlength="40"
+                           custom-style="{'width':'100%'}"
+                           uib-typeahead="time for time in timeFormat"
+                           ng-model="day.startTimeFormat"
+                           autocomplete="off" qt-typeahead-async-show-on-focus ng-disabled="day.isDayOff">
+                    -
+                    <input placeholder="Hours"
+                           name="endTime"
+                           type="text"
+                           class="form-control"
+                           ng-model="day.endTime"
+                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="day.isDayOff">
+                    <input type="text" class="form-control pointer text-center" name="endTimeFormat"
+                           ng-maxlength="40"
+                           custom-style="{'width':'100%'}"
+                           uib-typeahead="time for time in timeFormat"
+                           ng-model="day.endTimeFormat"
+                           autocomplete="off" qt-typeahead-async-show-on-focus ng-disabled="day.isDayOff">
+                    <label class="control checkbox">
+                      <input type="checkbox" ng-model="day.isDayOff">
+                      <span class="control-indicator" uib-tooltip="Day off"></span>
+                    </label>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -357,13 +431,30 @@
 
             <label class="control-label">Default Payment Method</label>
 
-            <input type="text" class="form-control" ng-model="editCompany.defaultPaymentMethod"
+            <input type="text" class="form-control" ng-model="editCompany.paymentMethods"
                    name="defaultPaymentMethod"
                    custom-style="{'width':'100%'}"
                    uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
                    readonly qt-typeahead-async-show-on-focus>
-            <div typeahead-input-icon="editCompany.defaultPaymentMethod"
+            <div typeahead-input-icon="editCompany.paymentMethods"
             ></div>
+          </div>
+
+        </div>
+
+        <div class="col-xs-4">
+
+
+          <div class="form-group " style="padding-right: 0;" >
+
+            <label class="control-label">Service type</label>
+
+            <input type="text" class="form-control" ng-model="editCompany.serviceType"
+                   name="serviceType"
+                   custom-style="{'width':'100%'}"
+                   uib-typeahead="serviceType as serviceTypesMap[serviceType] for serviceType in serviceTypes"
+                   readonly qt-typeahead-async-show-on-focus>
+            <div typeahead-input-icon="editCompany.serviceTypes"></div>
           </div>
 
         </div>

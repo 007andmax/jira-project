@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService', 'CompaniesService',
-      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService', '$interval',
       function ($scope, DevicesService, RemoteAccessService, ConstantsService, CompaniesService, SharedStateService,
-                $rootScope, UserConfirmationsService) {
+                $rootScope, UserConfirmationsService, $interval) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var constVersion = ConstantsService.getConstant('rest.server.agent.version', function (resp) {
@@ -21,12 +21,57 @@
         var lastAgentArr = constVersion ? constVersion.split('.') : [];
         var currentAgentArr = $scope.agent.agentVersion ? $scope.agent.agentVersion.split('.') : [];
 
+        $scope.idle = 0;
+        $scope.noRestart = 0;
+        $scope.online = 0;
+        $scope.agentConnectedAt = 0;
+        $scope.offline = 0;
+
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
             $scope.agentDeprecated = true;
             break;
           }
         }
+
+        DevicesService.sendDeviceStatusRequest($scope.company.id, $scope.agent.agentId, function(resp){
+          if(resp){
+            console.log(resp);
+          }
+        });
+
+        $scope.openDevicesDetails = false;
+        $scope.showDeviceLabelEditButtom = false;
+        $scope.showDeviceLabelEditForm = false;
+        $scope.reserveAgentLabelCopy = '';
+
+        $scope.openDeviceLabelEditForm = function() {
+          $scope.reserveAgentLabelCopy = $scope.agent.label;
+          $scope.showDeviceLabelEditForm = true;
+        };
+
+        $scope.saveNewDeviceLabel = function(name) {
+          if(name) {
+
+            $scope.showDeviceLabelEditForm = false;
+            var dto = {
+              agentId: $scope.agent.agentId,
+              companyId: $scope.company.id,
+              newLabelValue: name
+            };
+            DevicesService.setNewDeviceLabel(dto, function(resp) {
+              if(resp) {
+                $scope.agent.label = name;
+              }
+
+            })
+          }
+        };
+
+        $scope.cancelNewDeviceLabelEdit = function() {
+          $scope.agent.label = $scope.reserveAgentLabelCopy;
+          $scope.showDeviceLabelEditForm = false;
+        };
 
         $scope.highlightDevice = function () {
           if (globalSearch.deviceFilter) {
@@ -126,6 +171,120 @@
           }
         }
 
+        $scope.$watch(function(){
+          return $rootScope.deviceCredentialsRecived;
+        }, function(value) {
+          if(value){
+            $scope.deviceCredentials = $scope.devicesCredentials[$scope.agent.id];
+          }
+        });
+
+
+        $scope.$watch('agent.Idle', function(value) {
+          if(value) {
+            if(value !=='none') {
+              $scope.idle = $scope.getMillisecondsFromTimeString(value);
+            }
+          }
+        });
+
+        $scope.$watch('agent.NoRestart', function(value) {
+          if(value) {
+            $scope.noRestart = $scope.getMillisecondsFromTimeString(value);
+          }
+        });
+
+        $scope.$watch('agent.Online', function(value) {
+          if(value) {
+            $scope.online = $scope.getMillisecondsFromTimeString(value);
+          }
+        });
+
+        $scope.$watch('agent.offlineSince', function(value) {
+          if(value) {
+            $scope.offline = (Date.now() - value)
+          }
+        });
+
+        $scope.$watch('agent.online', function(value) {
+          if(value === true) {
+            $scope.online = 0;
+          }
+        });
+
+        $scope.$watch('agent.agentConnected', function(value) {
+          if(value) {
+            $scope.agent.agentConnected = value;
+            if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.startedAt) {
+              if($scope.agent.OneTimeConnectionData.startedAt > Date.now()) {
+                $scope.agentConnectedAt = 0;
+              } else {
+                $scope.agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData.startedAt);
+              }
+              console.log($scope.agentConnectedAt);
+            }
+          }
+        });
+
+
+         var addSecond = $interval(function() {
+           $scope.idle += 1000;
+           $scope.noRestart += 1000;
+           $scope.online += 1000;
+           $scope.agentConnectedAt += 1000;
+           $scope.offline +=1000;
+        }, 1000);
+
+
+        $scope.getMillisecondsFromTimeString = function(timeString) {
+          var splittedArray = timeString.split(':');
+          return splittedArray[2]*1000 + splittedArray[1]*60000 + splittedArray[0]*3600000
+        };
+
+
+
+        $scope.returnTimeFormatForPage = function(time) {
+          var days = '';
+          var hours = '';
+          var minutes = '';
+          var seconds = '';
+          if(time > 86400000) {
+            days = Math.floor(time/86400000);
+            hours = Math.floor((time - (days*86400000))/3600000);
+            minutes = Math.floor((time - (days*86400000) - (hours*3600000))/60000);
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          } else if(time < 86400000 && time > 3600000) {
+            days = 0;
+            hours = Math.floor((time - (days*86400000))/3600000);
+            minutes = Math.floor((time - (days*86400000) - (hours*3600000))/60000);
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          } else if(time < 3600000 && time > 60000) {
+            days = 0;
+            hours = 0;
+            minutes = Math.floor((time - (days*86400000) - (hours*3600000))/60000);
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          } else {
+            days = 0;
+            hours = 0;
+            minutes = 0;
+            seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
+          }
+          return {
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+          }
+
+        };
+
+
+
+
+
       }]);
+
+
+
 
 }());

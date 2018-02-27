@@ -14,7 +14,8 @@
           isTryToSave: '=isTryToSave',
           countryCode: '@?',
           disabled: '@?',
-          onLostFocus: '=?'
+          onLostFocus: '=?',
+          isDashboardStyle: '@?'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {
@@ -35,6 +36,7 @@
             OFFICE: 'Office',
             FAX: 'Fax'
           };
+          $scope.dashboard = $scope.isDashboardStyle || false;
 
           $scope.$watch('phoneNumbers.length', function (count) {
             if (count === 0) {

@@ -1096,6 +1096,10 @@ aside#left div.nav-title {
   max-height: 65px;
 }
 
+#product-list-cont .icn-caret-gray {
+  top: 12px;
+}
+
 .custom-product-list .product-list-container > li div .title {
   font-size: 12px;
   color: #000;

@@ -10,7 +10,7 @@
           link: function (scope, element) {
 
             scope.taxIdPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/;
-            scope.taxIdDescriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/;
+            scope.taxIdDescriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/;
 
             var invoiceParams = {},
               numberInput = element.find('[ic-number-input]'),

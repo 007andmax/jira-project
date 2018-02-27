@@ -103,7 +103,7 @@
         } else if (newChange.data.accountType !== 'TECH') {
           var newClient = Utils.customizeObj(newChange.data);
           storage.companies.push(newClient);
-          if(custCompany.clientType === 'CLIENT') {
+          if(newClient.clientType.toLowerCase() === 'client') {
             storage.clientCompaniesWoVendorsAndLeads.push(newClient);
           }
           if (newClient.clientType.toLowerCase() !== 'vendor') {

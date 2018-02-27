@@ -12,7 +12,8 @@
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
                   TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService) {
 
-          var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
+          var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
+              ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
           rightPanelSharedState.companyId = '';
 
           $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -38,7 +39,12 @@
           }
 
           UserNotificationService.show('Loading...');
-          $scope.ticketDetails = { id: $stateParams.ticketId };
+          if($state.includes('tickets') && !$state.includes('companyProfile')) {
+            $scope.ticketDetails = { id: $stateParams.ticketId };
+          } else if($state.includes('companyProfile')) {
+            $scope.ticketDetails = { id: ticketsSharedState.openTicketId };
+          }
+          //$scope.ticketDetails = { id: $stateParams.ticketId };
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
 
             $scope.ticketDetails = details;
@@ -561,7 +567,7 @@
           };
 
           $scope.validateNotifying = function (share, event) {
-            if (!share.notify && (share.user.accountType !== 'TECH' ? (!share.user.subscription || (!share.user.subscription.ticket || !share.user.subscription.ticketManager)) : !share.user.myTicketUpdated)) {
+            if (!share.notify && (share.user.accountType !== 'TECH' ? (!share.user.subscription || (!share.user.subscription.ticket )) : !share.user.myTicketUpdated)) {
               UserConfirmationsService
                 .show($scope.getUserName(share.user) + ' has disabled ticket updates subscription. Do you still want to notify this user?', 'Yes')
                 .then(function () {
@@ -642,7 +648,10 @@
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.disablePreventingLocationChange = true;
-              $state.go('tickets');
+              if(!$state.includes('companyProfile')) {
+                $state.go('tickets');
+              }
+              //$state.go('tickets');
               $scope.uncheckTicket($scope.ticketDetails.id);
               $scope.ticketClosing = false;
             }, recipientsIds);

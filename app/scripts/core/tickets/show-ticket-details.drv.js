@@ -3,13 +3,14 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('showTicketDetails',
-    ['$timeout', '$stateParams', 'localStorageService',
-      function ($timeout, $stateParams, localStorageService) {
+    ['$timeout', '$stateParams', 'localStorageService', 'quicktech.common.services.SharedStateService',
+      function ($timeout, $stateParams, localStorageService, SharedStateService) {
         return {
           restrict: 'A',
           link: function (scope, element) {
 
             var body = $('body');
+            var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
 
             controlTicketList(null, true);
 
@@ -67,7 +68,7 @@
             $(window).on('resize', controlTicketList);
 
             function controlTicketList(e, isCheckView) {
-              if (!$stateParams.ticketId) {
+              if (!$stateParams.ticketId && !ticketsSharedState.openTicketId) {
                 return;
               }
 

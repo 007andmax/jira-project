@@ -15,13 +15,19 @@
           searchFilter: {},
           checkedTicketsIds: [],
           count: 0,
-          filter: {}
+          filter: {},
+          openTicketId: ''
         },
         draftsHeader: {
           selectedIds: []
         },
         companiesHeader: {
           filter: {}
+        },
+        companyProfile: {
+          tabName: '',
+          companyId: '',
+          ticketsCounts: {}
         },
         usersHeader: {
           filter: {

@@ -2,11 +2,11 @@
   <div class="change-view-actions">
     <div class="action-wrap clearfix">
       <!--<div class="archived-change">-->
-        <!--<span class="pull-left">Archived companies</span>-->
-        <!--<div class="switch">-->
-          <!--<input type="checkbox" ng-model="showArchivedCompanies">-->
-          <!--<label><i></i></label>-->
-        <!--</div>-->
+      <!--<span class="pull-left">Archived companies</span>-->
+      <!--<div class="switch">-->
+      <!--<input type="checkbox" ng-model="showArchivedCompanies">-->
+      <!--<label><i></i></label>-->
+      <!--</div>-->
       <!--</div>-->
       <div class="view-change">
         <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}"
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div ng-if="companiesView === 'list'">
-      <ul class="qt-list" style="margin-bottom: 1px;">
+      <ul class="qt-list qt-users" style="margin-bottom: 1px;">
         <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
           <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
             <span class="sort-span">
@@ -82,12 +82,14 @@
 
 
   <div class="company-profile-content companies-list not-charts-companies-page" style="background: #f4f4f4">
-    <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'" scroll-pagination qt-scroll-to="top" offset="49">
+    <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'" scroll-pagination qt-scroll-to="top"
+         offset="49">
       <div class="card-wrapper clickable"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: 'name')) | limitTo: displayLimit track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl"
            ng-click="openCompany(company)">
-        <div class="card" ng-style="{'border-left-color': tagColors[companiesColors[company.clientType]].backgroundColor}">
+        <div class="card"
+             ng-style="{'border-left-color': tagColors[companiesColors[company.clientType]].backgroundColor}">
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
                  create-new-entity="company" item="company" stop-propagation="click"></div>
@@ -148,16 +150,23 @@
     </div>
   </div>
 
-  <ul class="qt-list" style="margin-bottom: 75px; margin-top: 70px;" ng-if="companiesView === 'list'" qt-scroll-to="top" offset="83" scroll-pagination>
+  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 70px;" ng-if="companiesView === 'list'" qt-scroll-to="top"
+      offset="83" scroll-pagination>
     <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
         ng-click="openCompany(company)">
       <div class="col-xs-3">
-        <div style="min-height: 38px; display: inline-block; float: left;"><img
-          ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
-        <span class="list-company-name">{{ company.name }}</span>
-        <span style="display: flex;">{{ location }}</span>
+        <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
+          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="" ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+          <div class="default-company-logo" ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" style="background-color: pink;">
+            <span>{{company.name[0].toUpperCase()}}</span>
+          </div>
+        </div>
+        <div>
+          <span class="list-company-name">{{ company.name }}</span>
+          <span style="display: flex;">{{ location }}</span>
+        </div>
       </div>
       <div class="col-xs-2">
         <span>{{ primaryPhone.number || '' }}</span>
@@ -196,15 +205,22 @@
         </div>
       </div>
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
-           ng-click="dearchiveCompany(company)" />
+           ng-click="dearchiveCompany(company)"/>
     </li>
   </ul>
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

@@ -21,7 +21,7 @@
       <div class="form-group custom-phone-type col-xs-6 no-label">
         <div class="pull-left" uib-dropdown keyboard-nav="true">
 
-          <button class="form-control form-control-number has-dropdown" tabindex="21"
+          <button class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="21"
                   uib-dropdown-toggle ng-disabled="$eval(disabled)">
             {{ phoneNumberTypes[phoneNumber.typeNumber] }}
           </button>
@@ -32,12 +32,14 @@
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
             </li>
           </ul>
-          <i class="icn-sm icn-caret-gray"></i>
+          <i class="icn-sm report-caret-icon"></i>
 
         </div>
 
-        <button class="btn btn-icn phone-btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
-                tooltip-placement="top" uib-tooltip="Remove" tabindex="22" ng-disabled="$eval(disabled)">
+        <button
+          ng-class="{'company-remove-icn company-remove-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
+          ng-click="removePhoneNumber($index)"
+          tooltip-placement="top" uib-tooltip="Remove" tabindex="22" ng-disabled="$eval(disabled)">
           <i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
         </button>
 
@@ -66,7 +68,7 @@
       <div class="form-group col-xs-6 custom-phone-type no-label">
         <div class="pull-left " uib-dropdown keyboard-nav="true">
 
-          <button class="form-control form-control-number has-dropdown" tabindex="{{ 21 + $index * 3 }}"
+          <button class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="{{ 21 + $index * 3 }}"
                   uib-dropdown-toggle ng-disabled="$eval(disabled)">
             {{ phoneNumberTypes[phoneNumber.typeNumber] }}
           </button>
@@ -83,29 +85,33 @@
 
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
-          <button cns-if class="btn phone-btn btn-icn btn-primary has-tooltip pull-right" ng-disabled="$eval(disabled)"
+          <button cns-if
+                  ng-class="{'company-add-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
+                  ng-disabled="$eval(disabled)"
                   tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()"
                   tabindex="{{ 22 + $index * 3 }}">
-            <i style="margin-top: 12px;" class="icn-sm icn-plus"></i>
+            <i ng-if="!dashboard"style="margin-top: 12px;" class="icn-sm icn-plus"></i>
           </button>
 
-          <button cns-else class="btn phone-btn btn-icn btn-primary has-tooltip pull-right"
+
+          <button cns-else
+                  ng-class="{'company-remove-icn company-remove-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
                   tabindex="{{ 23 + $index * 3 }}"
                   tooltip-placement="top" title="" uib-tooltip="Remove"
                   ng-click="removePhoneNumber($index)" ng-disabled="$eval(disabled)">
-            <i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
+            <i ng-if="!dashboard" style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
           </button>
+
 
         </div>
 
       </div>
 
-      <!-- <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-         uib-tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()"
-         ng-disabled="phoneNumbers.length >= maximalAmountOfPhones">
-        <span class="icn-add"></span>
-      </a> -->
+
 
     </div>
   </div>
 </div>
+
+
+

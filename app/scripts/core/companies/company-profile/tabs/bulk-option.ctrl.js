@@ -13,6 +13,7 @@
             $scope.bulkOptionMode = 'users';
             $scope.selectUsersIds = val.selectUsersIds;
             $scope.usersSbscr = angular.copy(val.selectUsersSubscr);
+            $scope.selectedUsersPrimaryEmails = val.selectedUsersPrimaryEmails;
 
           } else if (val.selectDevicesIds.length > 0) {
 
@@ -42,6 +43,7 @@
             $scope.disabledSubscr = false;
           });
         };
+
 
         $scope.archiveUsers = function () {
           var confirmMessage = 'Do you want to archive ',

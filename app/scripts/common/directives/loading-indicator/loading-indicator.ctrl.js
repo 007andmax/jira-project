@@ -11,11 +11,9 @@
       },
       link: function ($scope, $element) {
         $element.css({
-          width: '100%',
-          height: '70px',
-          display: 'block',
-          top: 'calc(50% - 45px)',
-          position: 'absolute'
+          // width: '100%',
+          // height: '100vh',
+          // position: 'relative'
         });
 
         $scope.$on('loadingFinished', function () {
