@@ -926,14 +926,21 @@
           return $location.search().tabName
         };
 
+
         $scope.$watch(function(){
           return companyProfileSharedState.companyId;
         }, function(companyId){
-          $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
-          TicketsService.getAllCountsByCompanyId($scope, companyId, function(resp) {
-            $scope.ticketsCounterByCompany = resp;
-            companyProfileSharedState.ticketsCounts = resp;
-          })
+          if(companyId) {
+            $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
+            TicketsService.getAllCountsByCompanyId($scope, companyId, function(resp) {
+              $scope.ticketsCounterByCompany = resp;
+              companyProfileSharedState.ticketsCounts = resp;
+            });
+            $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId, function(resp) {
+              $scope.companyForCompanyProfile = resp;
+            })
+          }
+
 
         })
 

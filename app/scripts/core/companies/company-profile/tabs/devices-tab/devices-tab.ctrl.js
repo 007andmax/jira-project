@@ -27,6 +27,15 @@
         $scope.agentConnectedAt = 0;
         $scope.offline = 0;
 
+        // $scope.deviceOrder = 'hostName';
+        // $scope.changeOrder = function(order) {
+        //   if(order === $scope.deviceOrder) {
+        //     $scope.deviceOrder = '-'+$scope.deviceOrder
+        //   } else {
+        //     $scope.deviceOrder = order;
+        //   }
+        // };
+
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
             $scope.agentDeprecated = true;

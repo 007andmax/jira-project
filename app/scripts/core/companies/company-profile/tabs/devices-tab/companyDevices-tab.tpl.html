@@ -24,12 +24,12 @@
         <span class="control-indicator"></span>
       </label>
 
-      <span class="sort-span" style="padding-left: 63px;">
+      <span class="sort-span" style="padding-left: 63px;" ng-click="sortDevicesTab('hostName')">
         Device Name
       </span>
     </div>
     <div class="col-md-3">
-        <span>
+        <span class="sort-span" ng-click="sortDevicesTab('userName')">
           Logged in User
         </span>
     </div>
@@ -41,9 +41,9 @@
     <div class="col-md-2"></div>
   </li>
   <!--class="active-device-item"-->
-  <li ng-repeat="agent in agents track by $index"
+  <li ng-repeat="agent in agents  | orderBy: orderDevicesBy track by $index"
       ng-controller="quicktech.core.companies.devicesTabCtrl"
-      ng-if="filterForDevices(agent)">
+      ng-show="filterForDevices(agent)">
     <div class="users-list-wrapper">
       <div class="col-md-4">
         <label class="control checkbox pull-left">
@@ -55,7 +55,7 @@
 
           <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
           <i class="devices-phone" ng-show="agent.type === 'device'"></i>
-          <i class="devices-printer" ng-show="agent.type === 'device'"></i>
+          <i class="devices-printer" ng-show="agent.type === 'printer'"></i>
           <i class="devices-server" ng-show="agent.type === 'server'"></i>
 
           <div ng-mouseover="showDeviceLabelEditButtom = true"
@@ -67,7 +67,8 @@
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
             <p class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">
-              {{agent.hostName}}</p>
+              <div ng-hide="agent.label">{{agent.hostName}}</div>
+            </p>
 
           </div>
 
@@ -203,8 +204,8 @@
         </div>
 
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-          <div uib-dropdown-toggle>
-            <i class="icn-more-light-grey icn-sm pointer dev-btn" uib-tooltip="more" tooltip-placement="top"></i>
+          <div uib-dropdown-toggle uib-tooltip="more" tooltip-placement="top" tooltip-append-to-body="true">
+            <i class="icn-more-light-grey icn-sm pointer dev-btn"></i>
           </div>
           <ul class="dropdown-menu" role="menu">
             <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>

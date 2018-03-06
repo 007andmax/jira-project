@@ -72,6 +72,7 @@
           "/user/watch" + config.url,
           function (message) {
             var newChange = JSON.parse(message.body);
+            // commit console.log before prod update
             console.log(newChange);
             config.callback(newChange);
             config.scope.$apply();

@@ -182,6 +182,7 @@
       if($scope.preSetupCompany) {
         $scope.contractCompany = $scope.preSetupCompany;
       }
+
       $scope.companiesList = CompaniesService.getClientCompaniesWoClientsAndLeads();
 
       $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;

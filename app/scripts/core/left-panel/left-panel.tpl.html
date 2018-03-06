@@ -536,7 +536,8 @@
         <div class="left-panel-hide-filter">
           <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileTicketsPage = !CompanyProfileTicketsPage"
-               ng-class="{'left-panel-active': CompanyProfileTicketsPage}">
+               ng-class="{'left-panel-active': CompanyProfileTicketsPage}"
+               ui-sref="companyProfile({ tabName: 'tickets-all' })">
             Tickets
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileTicketsPage}"></i>
           </div>
@@ -632,7 +633,8 @@
         <div class="left-panel-hide-filter">
           <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileUsersPage = !CompanyProfileUsersPage"
-               ng-class="{'left-panel-active': CompanyProfileUsersPage}">
+               ng-class="{'left-panel-active': CompanyProfileUsersPage}"
+               ui-sref="companyProfile({ tabName: 'users-all' })">
             Users
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileUsersPage}"></i>
           </div>
@@ -661,7 +663,8 @@
         <div class="left-panel-hide-filter">
           <div class="left-panel-title  left-panel-title-hover"
                ng-click="CompanyProfileDevicesPage = !CompanyProfileDevicesPage"
-               ng-class="{'left-panel-active': CompanyProfileDevicesPage}">
+               ng-class="{'left-panel-active': CompanyProfileDevicesPage}"
+               ui-sref="companyProfile({ tabName: 'devices-all' })">
             Devices
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileDevicesPage}"></i>
           </div>
@@ -752,7 +755,7 @@
 
         <div class="left-panel-title" ui-sref="companyProfile({ tabName: 'contracts' })"
              ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
-             ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
+             ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS') && companyForCompanyProfile.clientType !== 'LEAD' && companyForCompanyProfile.clientType !== 'VENDOR'">
           Contracts
         </div>
 
