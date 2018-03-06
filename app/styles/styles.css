@@ -11581,7 +11581,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 .action-wrap {
-  width: 89%;
+  width: 99%;
   margin: auto;
   /*border-bottom: 1px solid rgba(79, 95, 121, 0.25);*/
 }
@@ -11598,7 +11598,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 .change-view-actions {
   text-align: right;
   padding: 10px;
-  background-color: #fff;
+  background-color: #F3F7F9;
   position: fixed;
   top: 77px;
   z-index: 99;

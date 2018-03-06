@@ -10,14 +10,14 @@
       <div class="network-scan-step-img"></div>
       <div>2. Install</div>
       <div>Follow the instructions on
-        your computer
+           your computer
       </div>
     </div>
     <div>
       <div class="network-scan-step-img"></div>
       <div>3. Run Scan</div>
       <div>Get Started with run scan
-        to get result
+           to get result
       </div>
     </div>
   </div>
@@ -41,16 +41,16 @@
       </div>
       <p>Run Scan</p>
       <!--<div class="master-agent" ng-if="agents && agents.length" uib-dropdown>-->
-        <!--<p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>-->
-        <!--<input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle-->
-               <!--readonly-->
-               <!--ng-disabled="saveMasterAgentInProgress">-->
-        <!--<i class="report-caret-icon"></i>-->
-        <!--<ul uib-dropdown-menu>-->
-          <!--<li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"-->
-              <!--ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}-->
-          <!--</li>-->
-        <!--</ul>-->
+      <!--<p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>-->
+      <!--<input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle-->
+      <!--readonly-->
+      <!--ng-disabled="saveMasterAgentInProgress">-->
+      <!--<i class="report-caret-icon"></i>-->
+      <!--<ul uib-dropdown-menu>-->
+      <!--<li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"-->
+      <!--ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}-->
+      <!--</li>-->
+      <!--</ul>-->
       <!--</div>-->
     </div>
     <div class="header-item" ng-form="credentialsForm">
@@ -71,25 +71,29 @@
         <input type="{{ passwordShown ? 'text' : 'password' }}" class="form-control" name="agentPassword"
                ng-model="testCredentialsModel.password" autocomplete="new-password"
                placeholder="Password" required>
-        <a id="show_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;" ng-if="!passwordShown"
+        <a id="show_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;"
+           ng-if="!passwordShown"
            ng-click="changeShowPassword()" uib-tooltip="Show password" tooltip-placement="top">
-          <i class="icn-hide-password pointer" style="display: inline-block" ></i>
+          <i class="icn-hide-password pointer" style="display: inline-block"></i>
         </a>
-        <a id="hide_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;" ng-if="passwordShown"
+        <a id="hide_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;"
+           ng-if="passwordShown"
            ng-click="changeShowPassword()" uib-tooltip="Hide password" tooltip-placement="top">
-          <i class="icn-show-password pointer" style="display: inline-block" ></i>
+          <i class="icn-show-password pointer" style="display: inline-block"></i>
         </a>
 
       </div>
       <button class="btn btn-success"
-              ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add Credential'}}
+              ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add
+                                                         Credential'}}
       </button>
     </div>
     <div class="header-item">
       <p>Saved Credentials</p>
       <div class="saved-credentials">
         <p ng-repeat="credential in companyAgentsCredentials"
-           ng-click="changeSelectedCredential(credential)" ng-style="{'background-color': selectedCredential.id === credential.id ? 'aliceblue' : ''}">
+           ng-click="changeSelectedCredential(credential)"
+           ng-style="{'background-color': selectedCredential.id === credential.id ? 'aliceblue' : ''}">
           {{credential.username}}
           <i class="delete-network-scan" uib-tooltip="Remove Credential"
              ng-click="removeCredential(credential)" tooltip-placement="top" tooltip-append-to-body="true"
@@ -98,14 +102,14 @@
 
       </div>
     </div>
-    <div class="header-item" >
+    <div class="header-item">
       <div ng-hide="(isInstallInProgress || !isDeviceSelected())" ng-click="installAgents(credentialsForm)">
-      <div class="install-agent-img pointer"></div>
-      <p>Install Agent</p>
-      <!--<div class="btn btn-primary has-tooltip" ng-click="installAgents(credentialsForm)"-->
-           <!--custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">-->
+        <div class="install-agent-img pointer"></div>
+        <p>Install Agent</p>
+        <!--<div class="btn btn-primary has-tooltip" ng-click="installAgents(credentialsForm)"-->
+        <!--custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">-->
         <!--Install Agent-->
-      <!--</div>-->
+        <!--</div>-->
       </div>
     </div>
   </div>
@@ -167,15 +171,16 @@
               <div class="checkbox-caption">
                 <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
                   <i class="devices-monitor"></i>
-                  <span style="display: inline-block"
+                  <span class="ellipsis"
+                        style="display: inline-block; max-width: 260px;"
                         uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
-                        trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
-              </span>
-                  <p ng-if="device.description | unknownFilter">{{ device.hostName | unknownFilter }}</p>
+                        trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')"></span>
+                  <p ng-if="device.description | unknownFilter" class="ellipsis">{{ device.hostName | unknownFilter
+                                                                                 }}</p>
                   <i class="icon-sm edit-icon" ng-show="showEditDeviceField"></i>
                 </div>
                 <input class="control" ng-if="isEditDescrOpened" ng-model="deviceDescription"
-                       execute-when-outfocused="saveDescription(deviceDescription)" focus-on/>
+                       execute-when-outfocused="saveDescription(deviceDescription)" focus-on />
               </div>
             </div>
           </div>

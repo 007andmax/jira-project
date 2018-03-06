@@ -53,6 +53,8 @@
         <div class="company-device-name"
              ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}" ng-show="!showDeviceLabelEditForm">
 
+          <i class="without-device-type"></i>
+
           <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
           <i class="devices-phone" ng-show="agent.type === 'device'"></i>
           <i class="devices-printer" ng-show="agent.type === 'printer'"></i>
@@ -190,14 +192,14 @@
             <i class="dev-btn devices-remote pointer" uib-tooltip="remote access" style="margin-left: 10px;"></i>
           </div>
 
-          <ul class="dropdown-menu dropdown-menu-custom scrollable-menu" role="menu">
+          <ul class="dropdown-menu dropdown-menu-custom scrollable-menu remote-dropdown" role="menu">
 
             <li ng-click="remoteAccess('CSS')">
-              <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+              <a tabindex="-1" href="javascript:void(0)">QuickTech Connect</a>
             </li>
 
             <li ng-click="remoteAccess('RDP')">
-              <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+              <a tabindex="-1" href="javascript:void(0)">Remote Desktop</a>
             </li>
 
           </ul>

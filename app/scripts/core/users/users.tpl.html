@@ -22,7 +22,7 @@
     <div ng-if="usersView === 'list'">
       <ul class="qt-list qt-users" style="margin-bottom: 1px;">
         <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
-          <div class="col-lg-3 col-xs-3" style="padding-left: 15px;" ng-click="setOrderByUsers('name')">
+          <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
         <span class="sort-span">
           Name
           <i class="icn-sm sort-icon icn-sort"
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <div style="background: #f4f4f4" ng-if="usersView === 'grid'" qt-scroll-to="top" offset="49">
+  <div style="background: #F3F7F9;" ng-if="usersView === 'grid'" qt-scroll-to="top" offset="49">
     <div ui-view></div>
 
     <div class="card-view-wrapper clearfix" scroll-pagination>
@@ -184,7 +184,7 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-users users-bg" ng-if="usersView === 'list'" style="margin-top: 85px;"
+  <ul class="qt-list qt-users users-bg" ng-if="usersView === 'list'" style="margin-top: 65px;"
       scroll-pagination qt-scroll-to="top" offset="83">
 
     <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
