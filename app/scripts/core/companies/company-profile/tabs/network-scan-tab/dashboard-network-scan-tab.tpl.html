@@ -92,7 +92,7 @@
            ng-click="changeSelectedCredential(credential)" ng-style="{'background-color': selectedCredential.id === credential.id ? 'aliceblue' : ''}">
           {{credential.username}}
           <i class="delete-network-scan" uib-tooltip="Remove Credential"
-             ng-click="removeCredential()" tooltip-placement="top" tooltip-append-to-body="true"
+             ng-click="removeCredential(credential)" tooltip-placement="top" tooltip-append-to-body="true"
              ng-if="selectedCredential.id === credential.id"></i>
         </p>
 

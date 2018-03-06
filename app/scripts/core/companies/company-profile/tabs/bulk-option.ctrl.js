@@ -19,11 +19,17 @@
 
             $scope.bulkOptionMode = 'devices';
             $scope.selectDevicesIds = val.selectDevicesIds;
+            $scope.selectDevicesAgentsId = [];
+              $scope.selectDevicesIds.forEach(function(val) {
+                var agent = DevicesService.getOneById(val, $scope.company.id);
+                $scope.selectDevicesAgentsId.push(agent.agentId);
+              })
 
           } else {
             $scope.bulkOptionMode = false;
             $scope.selectUsersIds = [];
             $scope.selectDevicesIds = [];
+            $scope.selectDevicesAgentsId = [];
           }
 
         }, true);
@@ -75,16 +81,16 @@
           }
 
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function(){
-            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.selectDevicesIds, UncheckAllAndRemoveFromList());
+            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.selectDevicesAgentsId, UncheckAllAndRemoveFromList());
           });
         };
 
         $scope.shutdownDevices = function () {
-          DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesIds, 'shutdown');
+          DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesAgentsId, 'shutdown');
         };
 
         $scope.restartDevices = function () {
-          DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesIds, 'reboot');
+          DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesAgentsId, 'reboot');
         };
 
         $scope.getDeviceReport = function (agentIds) {
