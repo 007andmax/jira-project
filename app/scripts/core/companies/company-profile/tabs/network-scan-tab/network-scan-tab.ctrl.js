@@ -60,7 +60,7 @@
           }
         });
 
-        DevicesService.getAgentsCredentialsForCompany($scope.company.id, function (resp) {
+        PasswordManagerService.getAgentsCredentialsForCompany($scope, $scope.company.id, function (resp) {
           $scope.companyAgentsCredentials = resp[$scope.company.id];
         });
 
