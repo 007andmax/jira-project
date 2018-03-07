@@ -128,7 +128,7 @@
             ng-show="returnTimeFormatForPage(offline).days > 0">{{returnTimeFormatForPage(offline).days}} day</span><span
           ng-show="returnTimeFormatForPage(offline).hours > 0"> {{returnTimeFormatForPage(offline).hours}} hrs</span><span
           ng-show="returnTimeFormatForPage(offline).minutes > 0 && returnTimeFormatForPage(offline).days < 1"> {{returnTimeFormatForPage(offline).minutes}} min</span><span
-          ng-show="returnTimeFormatForPage(offline).seconds > 0 && returnTimeFormatForPage(offline).minutes < 1"> 0 min</span>
+          ng-show="returnTimeFormatForPage(offline).seconds > 0 && returnTimeFormatForPage(offline).minutes < 1 && returnTimeFormatForPage(offline).hours < 1 && returnTimeFormatForPage(offline).days < 1"> 0 min</span>
         </div>
 
         <i class="bug-zbs" ng-show="agent.report.antivirus.length>0"></i>

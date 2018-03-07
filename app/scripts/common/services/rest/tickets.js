@@ -486,7 +486,46 @@
       }
 
       function getAllCountsByCompanyId(scope, companyId, callback) {
-        $http.post('/v2/tickets/'+companyId+'/counts', queries).then(function (resp) {
+        var typeOfQueries = ['ALL', 'UNASSIGNED', 'IN_PROGRESS', 'ON_HOLD', 'COMPLETED'];
+        var queryForCompanyCounters = {
+          ALL: {},
+          UNASSIGNED: {},
+          IN_PROGRESS: {},
+          ON_HOLD: {},
+          COMPLETED: {}
+        };
+
+        var groupedQuery = {
+          excludeTrashSpam: true,
+          groupFieldFilters: [{
+            predicateRule: 'AND',
+            fieldFilterDtos: []
+          }]
+        };
+        if(companyId) {
+          var coompanyIdQuery = {
+            path: 'companyId',
+            operator: 'EQ',
+            values: []
+          };
+          coompanyIdQuery.values.push(companyId);
+          groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(coompanyIdQuery);
+        }
+
+        typeOfQueries.forEach(function(query){
+          if(queries.hasOwnProperty(query)){
+            var q = queries[query];
+            var gq = angular.copy(groupedQuery);
+            if(q && q.groupFieldFilters) {
+              var ticketFilterQuery = q.groupFieldFilters[0].fieldFilterDtos[0];
+              gq.groupFieldFilters[0].fieldFilterDtos.push(ticketFilterQuery);
+            }
+            queryForCompanyCounters[query] = gq;
+          }
+        });
+
+
+        $http.post('/v2/tickets/counts', queryForCompanyCounters).then(function (resp) {
           storage.ticketsQuantityMapByCompany = resp.data;
 
           if (callback) {
