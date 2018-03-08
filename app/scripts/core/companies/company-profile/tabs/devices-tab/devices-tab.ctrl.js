@@ -226,12 +226,13 @@
           }
         });
 
-        $scope.$watch('agent.online', function(value) {
-          if(value === true) {
-            $scope.agent.timing.online = 0;
-            $scope.agent.timing.uptimeForOrdering = $scope.agent.timing.online;
-          }
-        });
+        // $scope.$watch('agent.online', function(value) {
+        //   if(value === true) {
+        //     $scope.agent.timing.online = 0;
+        //     console.log('VALUE', value)
+        //     //$scope.agent.timing.uptimeForOrdering = $scope.agent.timing.online;
+        //   }
+        // });
 
         $scope.$watch('agent.agentConnected', function(value) {
           if(value) {
