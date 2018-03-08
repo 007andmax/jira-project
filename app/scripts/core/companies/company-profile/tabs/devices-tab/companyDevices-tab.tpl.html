@@ -121,7 +121,7 @@
             ng-show="returnTimeFormatForPage(agent.timing.online).days > 0">{{returnTimeFormatForPage(agent.timing.online).days}} day</span><span
           ng-show="returnTimeFormatForPage(agent.timing.online).hours > 0"> {{returnTimeFormatForPage(agent.timing.online).hours}} hrs</span><span
           ng-show="returnTimeFormatForPage(agent.timing.online).minutes > 0 && returnTimeFormatForPage(agent.timing.online).days < 1"> {{returnTimeFormatForPage(agent.timing.online).minutes}} min</span><span
-          ng-show="returnTimeFormatForPage(agent.timing.online).seconds > 0 && returnTimeFormatForPage(agent.timing.online).minutes < 1 && returnTimeFormatForPage(agent.timing.online).hours < 1 && returnTimeFormatForPage(agent.timing.online).days < 1""> 0 min</span>
+          ng-show="returnTimeFormatForPage(agent.timing.online).seconds > 0 && returnTimeFormatForPage(agent.timing.online).minutes < 1 && returnTimeFormatForPage(agent.timing.online).hours < 1 && returnTimeFormatForPage(agent.timing.online).days < 1"> 0 min</span>
         </div>
         <div ng-show="!agent.online">
           <!--<span>offline</span>-->
