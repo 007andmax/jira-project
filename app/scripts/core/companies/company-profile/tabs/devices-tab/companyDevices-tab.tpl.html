@@ -34,14 +34,14 @@
         </span>
     </div>
     <div class="col-md-3">
-        <span>
+        <span class="sort-span" ng-click="sortDevicesTab('online', true)">
           Up Time
         </span>
     </div>
     <div class="col-md-2"></div>
   </li>
   <!--class="active-device-item"-->
-  <li ng-repeat="agent in agents  | orderBy: orderDevicesBy track by $index"
+  <li ng-repeat="agent in agents  | orderBy: [orderDevicesBy, uptimeOrder] track by $index"
       ng-controller="quicktech.core.companies.devicesTabCtrl"
       ng-show="filterForDevices(agent)">
     <div class="users-list-wrapper">
@@ -63,13 +63,13 @@
           <div ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
-              <span ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName}}</span>
+              <span ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName || agent.ip}}</span>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
             <p class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">
-              <div ng-hide="agent.label">{{agent.hostName}}</div>
+              <div ng-hide="agent.label">{{agent.hostName || agent.ip}}</div>
             </p>
 
           </div>
@@ -102,10 +102,10 @@
         </div>
         <p class="ellipsis">{{agent.userName || 'unknown'}}</p>
         <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
-          Idle: <span ng-show="returnTimeFormatForPage(idle).days > 0">{{returnTimeFormatForPage(idle).days}} day</span><span
-          ng-show="returnTimeFormatForPage(idle).hours > 0"> {{returnTimeFormatForPage(idle).hours}} hrs</span><span
-          ng-show="returnTimeFormatForPage(idle).minutes > 0 && returnTimeFormatForPage(idle).days < 1"> {{returnTimeFormatForPage(idle).minutes}} min</span><span
-          ng-show="returnTimeFormatForPage(idle).seconds > 0 && returnTimeFormatForPage(idle).minutes < 1"> 0 min</span>
+          Idle: <span ng-show="returnTimeFormatForPage(agent.timing.idle).days > 0">{{returnTimeFormatForPage(agent.timing.idle).days}} day</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.idle).hours > 0"> {{returnTimeFormatForPage(agent.timing.idle).hours}} hrs</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.idle).minutes > 0 && returnTimeFormatForPage(agent.timing.idle).days < 1"> {{returnTimeFormatForPage(agent.timing.idle).minutes}} min</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.idle).seconds > 0 && returnTimeFormatForPage(agent.timing.idle).minutes < 1"> 0 min</span>
         </p>
         <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
           Idle: 0 min
@@ -115,20 +115,20 @@
         <i class="up-time-green" ng-show="agent.online"></i>
         <i class="up-time-yellow" ng-show="!agent.online"></i>
         <!--<div>{{returnTimeFormatForPage(online)}}</div>-->
-        <div ng-show="agent.online && online > 0">
+        <div ng-show="agent.online && agent.timing.online > 0">
           <span
-            ng-show="returnTimeFormatForPage(online).days > 0">{{returnTimeFormatForPage(online).days}} day</span><span
-          ng-show="returnTimeFormatForPage(online).hours > 0"> {{returnTimeFormatForPage(online).hours}} hrs</span><span
-          ng-show="returnTimeFormatForPage(online).minutes > 0 && returnTimeFormatForPage(online).days < 1"> {{returnTimeFormatForPage(online).minutes}} min</span><span
-          ng-show="returnTimeFormatForPage(online).seconds > 0 && returnTimeFormatForPage(online).minutes < 1"> 0 min</span>
+            ng-show="returnTimeFormatForPage(agent.timing.online).days > 0">{{returnTimeFormatForPage(agent.timing.online).days}} day</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.online).hours > 0"> {{returnTimeFormatForPage(agent.timing.online).hours}} hrs</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.online).minutes > 0 && returnTimeFormatForPage(agent.timing.online).days < 1"> {{returnTimeFormatForPage(agent.timing.online).minutes}} min</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.online).seconds > 0 && returnTimeFormatForPage(agent.timing.online).minutes < 1 && returnTimeFormatForPage(agent.timing.online).hours < 1 && returnTimeFormatForPage(agent.timing.online).days < 1""> 0 min</span>
         </div>
         <div ng-show="!agent.online">
           <!--<span>offline</span>-->
           <span
-            ng-show="returnTimeFormatForPage(offline).days > 0">{{returnTimeFormatForPage(offline).days}} day</span><span
-          ng-show="returnTimeFormatForPage(offline).hours > 0"> {{returnTimeFormatForPage(offline).hours}} hrs</span><span
-          ng-show="returnTimeFormatForPage(offline).minutes > 0 && returnTimeFormatForPage(offline).days < 1"> {{returnTimeFormatForPage(offline).minutes}} min</span><span
-          ng-show="returnTimeFormatForPage(offline).seconds > 0 && returnTimeFormatForPage(offline).minutes < 1 && returnTimeFormatForPage(offline).hours < 1 && returnTimeFormatForPage(offline).days < 1"> 0 min</span>
+            ng-show="returnTimeFormatForPage(agent.timing.offline).days > 0">{{returnTimeFormatForPage(agent.timing.offline).days}} day</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.offline).hours > 0"> {{returnTimeFormatForPage(agent.timing.offline).hours}} hrs</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.offline).minutes > 0 && returnTimeFormatForPage(agent.timing.offline).days < 1"> {{returnTimeFormatForPage(agent.timing.offline).minutes}} min</span><span
+          ng-show="returnTimeFormatForPage(agent.timing.offline).seconds > 0 && returnTimeFormatForPage(agent.timing.offline).minutes < 1 && returnTimeFormatForPage(agent.timing.offline).hours < 1 && returnTimeFormatForPage(agent.timing.offline).days < 1"> 0 min</span>
         </div>
 
         <i class="bug-zbs" ng-show="agent.report.antivirus.length>0"></i>

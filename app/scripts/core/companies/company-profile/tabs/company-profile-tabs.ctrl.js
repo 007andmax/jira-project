@@ -19,6 +19,7 @@
           $state.go('companyProfile', {tabName: 'devices'});
         }
         $scope.orderDevicesBy = 'hostName';
+        $scope.uptimeOrder = '';
         $scope.currentOpenProfileTab = $stateParams.tabName || 'devices';
 
         $scope.credential = {
@@ -161,7 +162,7 @@
           devicesHeaderState.checkedDevicesId = selectDevicesIds;
         };
 
-        $scope.sortDevicesTab = function (option) {
+        $scope.sortDevicesTab = function (option, uptimeOption) {
           if (option === $scope.orderDevicesBy) {
             if (option[0] === '-') {
               $scope.orderDevicesBy = $scope.orderDevicesBy.substring(1);
@@ -170,6 +171,14 @@
             }
           } else {
             $scope.orderDevicesBy = option;
+          }
+          if(uptimeOption) {
+            if( $scope.uptimeOrder) {
+              $scope.uptimeOrder = '';
+              $scope.orderDevicesBy = 'hostname'
+            }else {
+              $scope.uptimeOrder = 'timing.uptimeForOrdering';
+            }
           }
         };
 

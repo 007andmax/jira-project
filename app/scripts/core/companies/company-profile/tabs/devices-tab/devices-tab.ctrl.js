@@ -20,12 +20,13 @@
         });
         var lastAgentArr = constVersion ? constVersion.split('.') : [];
         var currentAgentArr = $scope.agent.agentVersion ? $scope.agent.agentVersion.split('.') : [];
-
-        $scope.idle = 0;
-        $scope.noRestart = 0;
-        $scope.online = 0;
-        $scope.agentConnectedAt = 0;
-        $scope.offline = 0;
+        $scope.agent.timing = {};
+        $scope.agent.timing.idle = 0;
+        $scope.agent.timing.noRestart = 0;
+        $scope.agent.timing.online = 0;
+        $scope.agent.timing.agentConnectedAt = 0;
+        $scope.agent.timing.offline = 0;
+        $scope.agent.timing.uptimeForOrdering = 0;
 
         // $scope.deviceOrder = 'hostName';
         // $scope.changeOrder = function(order) {
@@ -104,7 +105,8 @@
         };
 
         $scope.orderDevicesBy = 'hostName';
-        $scope.sortDevicesTab = function (option) {
+        $scope.uptimeOrder = '';
+        $scope.sortDevicesTab = function (option, uptimeOption) {
           if (option === $scope.orderDevicesBy) {
             if (option[0] === '-') {
               $scope.orderDevicesBy = $scope.orderDevicesBy.substring(1);
@@ -113,6 +115,13 @@
             }
           } else {
             $scope.orderDevicesBy = option;
+          }
+          if(uptimeOption) {
+            if( $scope.uptimeOrder) {
+              $scope.uptimeOrder = '';
+            }else {
+              $scope.uptimeOrder = 'timing.uptimeForOrdering';
+            }
           }
         };
 
@@ -191,33 +200,36 @@
 
         $scope.$watch('agent.Idle', function(value) {
           if(value) {
-            if(value !=='none') {
-              $scope.idle = $scope.getMillisecondsFromTimeString(value);
+            if(value !== 'none') {
+              $scope.agent.timing.idle = $scope.getMillisecondsFromTimeString(value);
             }
           }
         });
 
         $scope.$watch('agent.NoRestart', function(value) {
           if(value) {
-            $scope.noRestart = $scope.getMillisecondsFromTimeString(value);
+            $scope.agent.timing.noRestart = $scope.getMillisecondsFromTimeString(value);
           }
         });
 
         $scope.$watch('agent.Online', function(value) {
           if(value) {
-            $scope.online = $scope.getMillisecondsFromTimeString(value);
+            $scope.agent.timing.online = $scope.getMillisecondsFromTimeString(value);
+            $scope.agent.timing.uptimeForOrdering = $scope.agent.timing.online;
           }
         });
 
         $scope.$watch('agent.offlineSince', function(value) {
           if(value) {
-            $scope.offline = (Date.now() - value)
+            $scope.agent.timing.offline = (Date.now() - value);
+            $scope.agent.timing.uptimeForOrdering = $scope.agent.timing.offline;
           }
         });
 
         $scope.$watch('agent.online', function(value) {
           if(value === true) {
-            $scope.online = 0;
+            $scope.agent.timing.online = 0;
+            $scope.agent.timing.uptimeForOrdering = $scope.agent.timing.online;
           }
         });
 
@@ -237,11 +249,12 @@
 
 
          var addSecond = $interval(function() {
-           $scope.idle += 1000;
-           $scope.noRestart += 1000;
-           $scope.online += 1000;
-           $scope.agentConnectedAt += 1000;
-           $scope.offline +=1000;
+           $scope.agent.timing.idle += 1000;
+           $scope.agent.timing.noRestart += 1000;
+           $scope.agent.timing.online += 1000;
+           $scope.agent.timing.agentConnectedAt += 1000;
+           $scope.agent.timing.offline +=1000;
+           $scope.agent.timing.uptimeForOrdering +=1000;
         }, 1000);
 
 
