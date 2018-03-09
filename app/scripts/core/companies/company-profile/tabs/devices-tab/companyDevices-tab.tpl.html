@@ -205,6 +205,11 @@
 
           </ul>
         </div>
+        <div class="pull-right" ng-if="!agent.online">
+          <div class="btn btn-icn btn-default pull-left has-tooltip">
+            <i class="dev-btn devices-remote devices-remote-non-active"  style="margin-left: 10px;"></i>
+          </div>
+        </div>
 
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
           <div uib-dropdown-toggle uib-tooltip="more" tooltip-placement="top" tooltip-append-to-body="true" tooltip-popup-delay="2000">
