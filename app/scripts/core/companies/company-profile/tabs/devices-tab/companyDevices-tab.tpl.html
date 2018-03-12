@@ -70,7 +70,7 @@
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
             <p class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">
-              <div ng-hide="agent.label">{{agent.hostName || agent.ip}}</div>
+              <div>{{agent.hostName || agent.ip}}</div>
             </p>
 
           </div>
