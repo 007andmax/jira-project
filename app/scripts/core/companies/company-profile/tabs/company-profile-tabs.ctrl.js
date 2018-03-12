@@ -84,7 +84,7 @@
 
         DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
           if (resp && resp.length) {
-            var agentsList = resp;
+            //var agentsList = resp;
             // $scope.agents = agentsList.sort(function (a, b) {
             //   return a.hostName > b.hostName
             // });

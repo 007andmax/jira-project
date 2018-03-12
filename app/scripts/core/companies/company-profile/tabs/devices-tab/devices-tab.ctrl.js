@@ -301,6 +301,10 @@
 
         };
 
+        $scope.checkAgentType = function(type) {
+          return type === 'workstation' || type === 'device' || type === 'printer' || type === 'server';
+        }
+
 
 
 
