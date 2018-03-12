@@ -1,7 +1,7 @@
 <div class="product-list-report detail-tax"
      convert-to-pdf="/reports/pdf"
      email-endpoint="/reports/email"
-     selector=".product-list-ticket"
+     selector=".product-list___ticket"
      disable-selector=".open-pdf-btn"
      file-name="{{ reportName }}">
   <p class="report-title">Tax Report</p>
@@ -11,6 +11,7 @@
                  open-in-pdf="openInPdf" download-as-pdf="downloadAsPdf" email-pattern="emailPattern" is-report-available="isReportAvailable"></report-menu>
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list___ticket">
   <div class="product-list-ticket tax-det-col product-list-ticket-taxes" ng-show="!loadingInProgress">
     <div class="header-product-list-ticket" ng-if="reportByTaxes.lines">
       <h3>{{reportByTaxes.techCompanyName}}</h3>
@@ -65,6 +66,7 @@
         <div class="col-md-2"><strong>{{reportByTaxes.totalTaxSum | currency: '$': 2 }}</strong></div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 

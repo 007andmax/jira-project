@@ -1,5 +1,5 @@
 <div class="product-list-report remote-access-summary" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
-     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
+     selector=".product-list___ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
   <p class="report-title">Remote Connection Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
@@ -14,6 +14,7 @@
                  is-radio-button-hidden="true"></report-menu>
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list___ticket">
   <div class="product-list-ticket" ng-show="!loadingInProgress">
     <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
       <h3>{{reportRemoteAccess.techCompanyName}}</h3>
@@ -49,5 +50,6 @@
     <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
       <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
     </div>
+  </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div ng-controller="quicktech.core.reports.reportsCtrl" class="product-list-report product-list" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
-     selector=".product-list-ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}" orientation="LANDSCAPE">
+     selector=".product-list___ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}" orientation="LANDSCAPE">
   <p class="report-title">List of products sold</p>
   <div>
     <report-menu is-device-hidden="true"
@@ -17,6 +17,7 @@
     </report-menu>
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list___ticket">
   <div class="product-list-ticket product-list-ticket-pdf" ng-show="!loadingInProgress">
     <div class="header-product-list-ticket" ng-if="reportByProducts.lines">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
@@ -59,5 +60,6 @@
       <div class="col-md-1"><br> <strong><span>{{reportByProducts.salePriceSum | currency: '$': 2}}</span></strong></div>
       <div class="col-md-2"><br> <strong><span>{{reportByProducts.purchaseCostSum | currency: '$': 2}}</span></strong></div>
     </div>
+  </div>
   </div>
 </div>

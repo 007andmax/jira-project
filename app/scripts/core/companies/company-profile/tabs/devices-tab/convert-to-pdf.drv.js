@@ -98,6 +98,7 @@
             selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
           }
 
+
           var dto = {
             fileName: attrs.fileName,
             content: selectedHtml,
