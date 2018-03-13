@@ -69,8 +69,8 @@
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
-            <p class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">
-              <div>{{agent.hostName || agent.ip}}</div>
+            <p class="label label-light ellipsis"  ng-click="openDevicesDetails = !openDevicesDetails">
+              <div ng-show="isLabel(agent)">{{agent.hostName || agent.ip}}</div>
             </p>
 
           </div>

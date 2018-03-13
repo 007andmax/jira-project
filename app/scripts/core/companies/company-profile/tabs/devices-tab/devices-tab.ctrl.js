@@ -28,6 +28,7 @@
         $scope.agent.timing.offline = 0;
         $scope.agent.timing.uptimeForOrdering = 0;
 
+        $scope.agentLabelEditForm = {};
         // $scope.deviceOrder = 'hostName';
         // $scope.changeOrder = function(order) {
         //   if(order === $scope.deviceOrder) {
@@ -57,25 +58,30 @@
 
         $scope.openDeviceLabelEditForm = function() {
           $scope.reserveAgentLabelCopy = $scope.agent.label;
+          $scope.agentLabelEditForm.name = $scope.agent.label;
           $scope.showDeviceLabelEditForm = true;
         };
 
         $scope.saveNewDeviceLabel = function(name) {
+          var dto = {
+            agentId: $scope.agent.agentId,
+            companyId: $scope.company.id,
+          };
           if(name) {
-
-            $scope.showDeviceLabelEditForm = false;
-            var dto = {
-              agentId: $scope.agent.agentId,
-              companyId: $scope.company.id,
-              newLabelValue: name
-            };
-            DevicesService.setNewDeviceLabel(dto, function(resp) {
-              if(resp) {
-                $scope.agent.label = name;
-              }
-
-            })
+            dto.newLabelValue = name;
+            $scope.agent.label = name;
+          } else {
+            dto.newLabelValue = $scope.agent.hostName;
+            $scope.agent.label = $scope.agent.hostName;
           }
+          $scope.showDeviceLabelEditForm = false;
+
+          DevicesService.setNewDeviceLabel(dto, function(resp) {
+            if(resp) {
+              $scope.agent.label = name;
+            }
+
+          })
         };
 
         $scope.cancelNewDeviceLabelEdit = function() {
@@ -303,9 +309,13 @@
 
         $scope.checkAgentType = function(type) {
           return type === 'workstation' || type === 'device' || type === 'printer' || type === 'server';
+        };
+
+        $scope.isLabel = function(agent) {
+          if(agent && agent.label && agent.hostName) {
+            return agent.label !== agent.hostName;
+          }
         }
-
-
 
 
 
