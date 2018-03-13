@@ -96,7 +96,8 @@
 
     <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
         ng-controller="quicktech.core.companies.usersTabCtrl" ng-if="!user.deletedAt"
-        show-model-element="{{ 'show-user-on-save-' + user.id }}" ng-show="usersFilter(user)">
+        show-model-element="{{ 'show-user-on-save-' + user.id }}" ng-show="usersFilter(user)"
+        style="padding-top: 13px;">
 
       <div class="users-list-wrapper">
         <div class="col-md-4 column-name">
@@ -107,7 +108,8 @@
 
           <div style="display: flex; overflow: hidden; align-items: center;">
             <div class="avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38" ng-if="(user && user.avatar)">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
+                   ng-if="(user && user.avatar)">
               <i class="on bottom"></i>
               <div class="default-user-avatar" ng-if="!(user && user.avatar)" style="background-color: pink;">
                 <span>{{user.firstName[0].toUpperCase()}}</span>
@@ -277,7 +279,8 @@
         <!--</div>-->
         <div style="justify-content: flex-end;" uib-dropdown class="user-list-more col-md-1"
              smart-dropdown-menu-position="dropdown-menu">
-          <a class="hit-area ha-22-48 pointer" uib-tooltip="More" tooltip-append-to-body="true" tooltip-popup-delay="2000" uib-dropdown-toggle>
+          <a class="hit-area ha-20-20 pointer" uib-tooltip="More" tooltip-append-to-body="true"
+             tooltip-popup-delay="2000" uib-dropdown-toggle>
             <i class="icn-sm icn-more-light-grey"></i>
           </a>
           <ul class="dropdown-menu" role="menu" style="width: 70%;">

@@ -1,10 +1,10 @@
 .qt-list {
   float: left;
-  
+
   width: 100%;
   margin: 0;
   padding: 10px 10px;
-  
+
   list-style: none;
 }
 
@@ -14,7 +14,7 @@
 
 .qt-list > li {
   position: relative;
-  
+
   display: block;
   float: left;
   background-color: #fff;
@@ -26,14 +26,14 @@
 .qt-list > li:after {
   position: absolute;
   top: 0;
-  
+
   display: none;
   clear: both;
-  
+
   width: 3px;
-  
+
   content: '';
-  
+
   background-color: #e7ecf2;
 }
 
@@ -48,7 +48,7 @@
 
 .qt-list > li:before {
   left: -30px;
-  
+
   width: 4px;
 }
 
@@ -193,7 +193,7 @@
   .receivable-content .qt-list li.list-heading .col-sm-2-1 {
     width: 125px;
   }
-  
+
   .receivable-content .qt-list li .col-sm-2-1 {
     width: 125px;
   }
@@ -212,7 +212,7 @@
 @-moz-document url-prefix() {
   .qt-list li.list-heading > [class*='col-'] {
     line-height: 11px;
-    
+
     padding-bottom: 1px;
   }
 }
@@ -228,11 +228,11 @@
 
 .qt-list > li > [class*='col-'] {
   position: relative;
-  
+
   float: left;
-  
+
   padding: 0 5px;
-  
+
   vertical-align: top;
 }
 
@@ -271,11 +271,11 @@
   .qt-list.qt-users > li > [class*='col-']:not(:first-child).tickets-col {
     padding: 0 5px;
   }
-  
+
   .users-list-wrapper .list-actions .btn {
     padding: 0 5px;
   }
-  
+
   .qt-users .list-heading .sub-col {
     padding: 0 !important;
   }
@@ -302,7 +302,7 @@
 .qt-list > li > [class*='col-']:after {
   display: table;
   clear: both;
-  
+
   content: '';
 }
 
@@ -365,7 +365,7 @@
   font-size: 13px !important;
   min-height: 72px;
   border: 1px solid transparent;
-  padding: 12px 15px 0;
+  padding: 13px 15px 0;
 }
 
 .qt-companies > li {
@@ -537,31 +537,31 @@
     width: calc(100% - 575px);
     padding-right: 15px;
   }
-  
+
   .qt-users .col-1-1 {
     display: none;
   }
-  
+
   .qt-users .col-2 {
     width: 135px;
   }
-  
+
   .qt-users .col-3 {
     width: 80px;
   }
-  
+
   .qt-users .col-3-2 {
     width: 120px;
   }
-  
+
   .qt-users .col-4 {
     width: 80px;
   }
-  
+
   .qt-users .col-5 {
     width: 161px;
   }
-  
+
 }
 
 @media only screen and (min-width: 1280px) and (max-width: 1365px) {
@@ -569,43 +569,43 @@
     width: calc(100% - 615px);
     padding-right: 15px;
   }
-  
+
   .left-panel-closed .qt-users .col-1 {
     width: calc(100% - 816px);
   }
-  
+
   .qt-users .col-1-1 {
     display: none;
   }
-  
+
   .left-panel-closed .qt-users .col-1-1 {
     display: block;
     width: 200px;
     padding-right: 15px;
   }
-  
+
   .qt-users .col-2 {
     width: 135px;
   }
-  
+
   .qt-users .col-3 {
     width: 100px;
   }
-  
+
   .qt-users .col-3-2 {
     width: 120px;
   }
-  
+
   .qt-users .col-4 {
     width: 100px;
   }
-  
+
   @media (max-width: 1280px) {
     .qt-users .col-4 {
       padding: 0 20px;
     }
   }
-  
+
   .qt-users .col-5 {
     width: 161px;
   }
@@ -616,47 +616,47 @@
     width: calc(100% - 660px);
     padding-right: 15px;
   }
-  
+
   .left-panel-closed .qt-users .col-1 {
     width: calc(100% - 900px);
   }
-  
+
   .qt-users .col-1-1 {
     display: none;
   }
-  
+
   .left-panel-closed .qt-users .col-1-1 {
     display: block;
     padding-right: 15px;
     width: 260px;
   }
-  
+
   .qt-users .col-2 {
     width: 188px;
   }
-  
+
   .left-panel-closed .qt-users .col-2 {
     width: 168px;
   }
-  
+
   .qt-users .col-3 {
     width: 100px;
   }
-  
+
   .qt-users .col-3-2 {
     width: 120px;
   }
-  
+
   .qt-users .col-4 {
     width: 100px;
   }
-  
+
   @media (max-width: 1366px) {
     .qt-users .col-4 {
       padding: 0 20px;
     }
   }
-  
+
   .qt-users .col-5 {
     width: 152px;
   }
@@ -667,38 +667,38 @@
     width: calc(100% - 770px);
     padding-right: 15px;
   }
-  
+
   .left-panel-closed .qt-users .col-1 {
     width: calc(100% - 900px);
   }
-  
+
   .qt-users .col-1-1 {
     display: block;
     padding-right: 15px;
     width: 190px;
   }
-  
+
   .left-panel-closed .qt-users .col-1-1 {
     padding-right: 15px;
     width: 272px;
   }
-  
+
   .qt-users .col-2 {
     width: 120px;
   }
-  
+
   .left-panel-closed .qt-users .col-2 {
     width: 168px;
   }
-  
+
   .qt-users .col-3 {
     width: 100px;
   }
-  
+
   .qt-users .col-3-2 {
     width: 120px;
   }
-  
+
   .qt-users .col-4 {
     width: 80px;
   }
@@ -709,38 +709,38 @@
     width: calc(100% - 850px);
     padding-right: 15px;
   }
-  
+
   .left-panel-closed .qt-users .col-1 {
     width: calc(100% - 900px);
   }
-  
+
   .qt-users .col-1-1 {
     display: block;
     padding-right: 15px;
     width: 228px;
   }
-  
+
   .left-panel-closed .qt-users .col-1-1 {
     padding-right: 15px;
     width: 272px;
   }
-  
+
   .qt-users .col-2 {
     width: 170px;
   }
-  
+
   .left-panel-closed .qt-users .col-2 {
     width: 168px;
   }
-  
+
   .qt-users .col-3 {
     width: 100px;
   }
-  
+
   .qt-users .col-3-2 {
     width: 120px;
   }
-  
+
   .qt-users .col-4 {
     width: 80px;
   }
@@ -751,35 +751,35 @@
     width: 26%;
     padding-right: 15px;
   }
-  
+
   .qt-users .col-1-1 {
     display: block;
     padding-right: 15px;
     width: 20%;
   }
-  
+
   .qt-users .col-2 {
     width: 12%;
   }
-  
+
   .qt-users .col-3 {
     width: 10%;
   }
-  
+
   .qt-users .col-3-2 {
     width: 10%;
   }
-  
+
   @media screen and (min-width: 2048px) {
     .qt-users .col-3-2 {
       width: 9%;
     }
   }
-  
+
   .qt-users .col-4 {
     width: 10%;
   }
-  
+
   .qt-users .col-5 {
     width: 10%;
     min-width: 160px;
@@ -788,13 +788,13 @@
 
 .label-wrapper {
   float: left;
-  
+
   width: 69px;
 }
 
 .list-actions .more {
   line-height: 0;
-  
+
   margin-left: 18px;
 }
 
@@ -813,9 +813,9 @@
 
 .qt-list .user-name {
   overflow: hidden;
-  
+
   max-width: 100%;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -830,11 +830,11 @@
 .qt-list .label {
   float: left;
   overflow: hidden;
-  
+
   max-width: 100%;
   height: 20px;
   margin-right: 10px;
-  
+
   cursor: pointer;
   white-space: nowrap;
   text-transform: uppercase;
@@ -929,9 +929,9 @@ Devices tab
 
 .qt-company-devices .col-4 {
   width: 111px;
-  
+
   text-align: right;
-  
+
   color: #94a4b8;
 }
 
@@ -965,12 +965,12 @@ Devices tab
 
 .device-name {
   position: relative;
-  
+
   overflow: hidden;
-  
+
   width: 100%;
   padding-left: 18px;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -999,7 +999,7 @@ Devices tab
 
 .device-manufacturer {
   overflow: hidden;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -1010,7 +1010,7 @@ Devices tab
   display: -webkit-flex;
   display: flex;
   float: none;
-  
+
   margin-right: 8px;
 }
 
@@ -1019,9 +1019,9 @@ Devices tab
   display: inline-block;
   float: left;
   overflow: hidden;
-  
+
   width: auto;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -1029,7 +1029,7 @@ Devices tab
 
 .device-desc.no-desc-added {
   cursor: pointer;
-  
+
   color: #4c5c6f;
 }
 
@@ -1049,15 +1049,15 @@ Devices tab
   position: absolute;
   top: 6px;
   left: 0;
-  
+
   display: block;
-  
+
   width: 8px;
   height: 8px;
-  
+
   cursor: auto;
   pointer-events: none;
-  
+
   border-radius: 50%;
 }
 
@@ -1106,7 +1106,7 @@ Devices tab
 
 .qt-assc-vendors .col-1 {
   width: calc(100% - 740px);
-  
+
   white-space: nowrap;
 }
 
@@ -1116,15 +1116,15 @@ Devices tab
 
 .qt-assc-vendors .col-3 {
   width: 208px;
-  
+
   color: #94a4b8;
 }
 
 .qt-assc-vendors .col-4 {
   width: 65px;
-  
+
   text-align: right;
-  
+
   color: #94a4b8;
 }
 
@@ -1136,19 +1136,19 @@ Devices tab
   .qt-assc-vendors .col-1 {
     width: calc(100% - 940px);
   }
-  
+
   .qt-assc-vendors .col-2 {
     width: 446px;
   }
-  
+
   .qt-assc-vendors .col-3 {
     width: 308px;
   }
-  
+
   .qt-assc-vendors .col-4 {
     width: 65px;
   }
-  
+
   .qt-assc-vendors .col-5 {
     width: 121px;
   }
@@ -1158,23 +1158,23 @@ Devices tab
   .users-list-wrapper .col-3-2.dropdown.open .dropdown-subscribe {
     width: 140% !important;
   }
-  
+
   .qt-assc-vendors .col-1 {
     width: calc(100% - 630px);
   }
-  
+
   .qt-assc-vendors .col-2 {
     width: 296px;
   }
-  
+
   .qt-assc-vendors .col-3 {
     width: 148px;
   }
-  
+
   .qt-assc-vendors .col-4 {
     width: 65px;
   }
-  
+
   .qt-assc-vendors .col-5 {
     width: 121px;
   }
@@ -1184,26 +1184,26 @@ Devices tab
   .qt-assc-vendors .col-1 {
     width: calc(100% - 482px);
   }
-  
+
   .qt-assc-vendors .col-2 {
     width: 296px;
   }
-  
+
   .qt-assc-vendors .col-3 {
     display: none;
-    
+
     width: 296px;
   }
-  
+
   .qt-assc-vendors .list-heading .col-2 span,
   .qt-assc-vendors .list-heading .col-3 span {
     cursor: pointer;
   }
-  
+
   .qt-assc-vendors .col-4 {
     width: 65px;
   }
-  
+
   .qt-assc-vendors .col-5 {
     width: 121px;
   }
@@ -1215,7 +1215,7 @@ Devices tab
 
 .vendor-contact-no i {
   float: left;
-  
+
   margin-top: 4px;
   margin-right: 10px;
 }
@@ -1232,9 +1232,9 @@ Devices tab
 
 .vendor-name {
   overflow: hidden;
-  
+
   width: 100%;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -1408,7 +1408,7 @@ Devices tab
   display: none;
   float: left;
   clear: both;
-  
+
   width: 100%;
   padding: 15px;
 }
@@ -1432,19 +1432,19 @@ Devices tab
 .inventory-details .qt-table {
   display: none;
   float: right;
-  
+
   width: calc(100% - 26px);
   padding-top: 25px;
   padding-bottom: 14px;
-  
+
   cursor: default;
 }
 
 .qt-table-product {
   position: relative;
-  
+
   height: 54px;
-  
+
   border: 1px solid #e7ecf2;
   background-color: #f1f5fa;
 }
@@ -1478,33 +1478,33 @@ Devices tab
 
 .qt-table-product .col-2 {
   overflow: hidden;
-  
+
   max-width: 1px;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
 .qt-table-product .col-3 {
   width: 117px;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
 .qt-table-product .col-4 {
   width: 98px;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
 .qt-table-service {
   position: relative;
-  
+
   height: 54px;
-  
+
   border: 1px solid #e7ecf2;
   background-color: #f1f5fa;
 }
@@ -1538,31 +1538,31 @@ Devices tab
 
 .qt-table-service .col-2 {
   width: 155px;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
 .qt-table-service .col-3 {
   overflow: hidden;
-  
+
   max-width: 1px;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
 .qt-table-service .col-4 {
   width: 140px;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
 .qt-table-service .col-5 {
   width: 98px;
-  
+
   border-left: 1px solid #e7ecf2;
 }
 
@@ -1570,7 +1570,7 @@ Devices tab
 .qt-recurring-invoices > li {
   height: auto;
   min-height: 70px;
-  
+
   cursor: pointer;
 }
 
@@ -1578,7 +1578,7 @@ Devices tab
   position: absolute;
   top: 16px;
   left: -23px;
-  
+
   cursor: default;
 }
 
@@ -1610,13 +1610,13 @@ Devices tab
 .qt-recurring-invoices > li > .col-2 {
   width: 140px;
   padding-right: 0;
-  
+
   text-align: right;
 }
 
 .qt-recurring-invoices > li > .col-2 > .hit-area {
   display: none;
-  
+
   margin: 11px -2px 0 18px;
 }
 
@@ -1633,7 +1633,7 @@ Devices tab
 
 .qt-invoices {
   float: left;
-  
+
   width: 100%;
   padding-left: 15px;
   padding-top: 0;
@@ -1643,17 +1643,17 @@ Devices tab
   position: absolute;
   top: 24px;
   left: -26px;
-  
+
   cursor: default;
 }
 
 .qt-list > li .sub-wrapper {
   display: none;
   float: left;
-  
+
   width: 100%;
   margin-top: 25px;
-  
+
   cursor: auto;
 }
 
@@ -1673,28 +1673,28 @@ Devices tab
 
 .qt-invoices > li > .col-2 {
   width: 183px;
-  
+
   color: #94a4b8;
 }
 
 .qt-invoices > li > .col-3 {
   width: 208px;
-  
+
   color: #94a4b8;
 }
 
 .qt-invoices > li > .col-4 {
   width: 86px;
-  
+
   text-align: right;
-  
+
   color: #94a4b8;
 }
 
 .qt-invoices > li > .col-5 {
   width: 27px;
   padding-right: 0;
-  
+
   text-align: right;
 }
 
@@ -1702,19 +1702,19 @@ Devices tab
   .qt-invoices > li > .col-1 {
     width: calc(100% - 784px);
   }
-  
+
   .qt-invoices > li > .col-2 {
     width: 323px;
   }
-  
+
   .qt-invoices > li > .col-3 {
     width: 348px;
   }
-  
+
   .qt-invoices > li > .col-4 {
     width: 86px;
   }
-  
+
   .qt-invoices > li > .col-5 {
     width: 27px;
   }
@@ -1731,7 +1731,7 @@ Devices tab
 
 .qt-invoices > li > .col-3 .invoice-frequency {
   float: left;
-  
+
   width: 85px;
   margin-right: 10px;
 }
@@ -1740,17 +1740,17 @@ Devices tab
   font-size: 14px;
   font-weight: bold;
   line-height: 14px;
-  
+
   height: auto;
   padding: 28px 0;
-  
+
   text-transform: capitalize;
 }
 
 @-moz-document url-prefix() {
   .qt-invoices li.list-heading [class*='col-'] {
     line-height: 11px !important;
-    
+
     padding-bottom: 1px;
   }
 }
@@ -1775,7 +1775,7 @@ Devices tab
 
 .qt-invoices .qt-table:not(.category-list-container):not(.product-list-container) {
   float: right;
-  
+
   width: calc(100% - 88px);
   margin-right: 64px;
   padding-top: 25px;
@@ -1824,7 +1824,7 @@ Devices tab
 
 .qt-invoices .add-btns span {
   margin-left: 18px;
-  
+
   cursor: auto;
 }
 
@@ -1848,15 +1848,15 @@ Devices tab
 
 .qt-invoice-form-wrapper {
   padding: 25px 0 0 !important;
-  
+
   cursor: auto !important;
-  
+
   border: none !important;
 }
 
 .sub-wrapper .qt-invoice-form-wrapper {
   float: left;
-  
+
   width: 100%;
   margin-bottom: 10px;
   padding: 0 !important;
@@ -1869,9 +1869,9 @@ Devices tab
 .qt-create-invoice-form-wrapper {
   min-height: 166px !important;
   padding: 0 !important;
-  
+
   cursor: auto !important;
-  
+
   border: none !important;
 }
 
@@ -1892,11 +1892,11 @@ Devices tab
   top: -25px;
   right: -60px;
   left: -86px;
-  
+
   width: calc(100% + 150px);
   min-height: 166px;
   padding: 70px 96px 30px 86px;
-  
+
   background-color: #fff;
   box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
 }
@@ -1904,7 +1904,7 @@ Devices tab
 .sub-wrapper .qt-invoice-form-wrapper .qt-add-product,
 .sub-wrapper .qt-invoice-form-wrapper .qt-add-service {
   top: 0;
-  
+
   padding-top: 30px;
 }
 
@@ -1921,7 +1921,7 @@ Devices tab
 .qt-create-invoice-form-wrapper .qt-invoices {
   margin-top: 0;
   padding: 0;
-  
+
   cursor: auto;
 }
 
@@ -1932,7 +1932,7 @@ Devices tab
 .qt-invoice-form-wrapper .qt-invoices > li,
 .qt-create-invoice-form-wrapper .qt-invoices > li {
   padding: 0;
-  
+
   cursor: auto;
 }
 
@@ -1957,15 +1957,15 @@ Devices tab
   .qt-create-invoice .qt-invoices > li > .col-1 {
     width: calc(100% - 751px);
   }
-  
+
   .qt-create-invoice .qt-invoices > li > .col-2 {
     width: 322px;
   }
-  
+
   .qt-create-invoice .qt-invoices > li > .col-3 {
     width: 348px;
   }
-  
+
   .qt-create-invoice .qt-invoices > li > .col-4 {
     width: 81px;
     padding-right: 0;
@@ -1976,7 +1976,7 @@ Devices tab
   height: auto;
   min-height: 0;
   margin-top: 10px;
-  
+
   border: none !important;
 }
 
@@ -2037,9 +2037,9 @@ Devices tab
 .qt-form-actions {
   min-height: 0 !important;
   margin-top: 30px !important;
-  
+
   cursor: auto !important;
-  
+
   border: none !important;
 }
 
@@ -2074,7 +2074,7 @@ Devices tab
 
 .qt-receivable > li > .col-2 {
   width: 98px;
-  
+
   text-align: right;
 }
 
@@ -2082,7 +2082,7 @@ Devices tab
   position: absolute;
   top: 14px;
   left: -18px;
-  
+
   cursor: default;
 }
 
@@ -2102,7 +2102,7 @@ Devices tab
 
 .qt-receivable .qt-invoices > li {
   padding: 15px 0;
-  
+
   cursor: pointer;
 }
 
@@ -2113,7 +2113,7 @@ Devices tab
 @-moz-document url-prefix() {
   .qt-receivable .qt-invoices > li.list-heading {
     line-height: 11px;
-    
+
     padding-bottom: 29px;
   }
 }
@@ -2125,7 +2125,7 @@ Devices tab
 .qt-receivable .qt-invoices > li > .col-2 {
   width: 183px;
   padding-top: 9px;
-  
+
   color: #94a4b8;
 }
 
@@ -2137,9 +2137,9 @@ Devices tab
 .qt-receivable .qt-invoices > li > .col-4 {
   width: 144px;
   padding-top: 9px;
-  
+
   text-align: left;
-  
+
   color: #94a4b8;
 }
 
@@ -2147,7 +2147,7 @@ Devices tab
   width: 86px;
   padding-top: 9px;
   padding-right: 0;
-  
+
   text-align: left;
 }
 
@@ -2155,19 +2155,19 @@ Devices tab
   .qt-receivable .qt-invoices > li > .col-1 {
     width: calc(100% - 903px);
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-2 {
     width: 283px;
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-3 {
     width: 290px;
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-4 {
     width: 244px;
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-5 {
     width: 86px;
   }
@@ -2177,19 +2177,19 @@ Devices tab
   .qt-receivable .qt-invoices > li > .col-1 {
     width: calc(100% - 725px);
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-2 {
     width: 153px;
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-3 {
     width: 160px;
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-4 {
     width: 114px;
   }
-  
+
   .qt-receivable .qt-invoices > li > .col-5 {
     width: 86px;
   }
@@ -2203,20 +2203,20 @@ Devices tab
   position: absolute;
   top: 28px;
   left: -25px;
-  
+
   cursor: default;
 }
 
 .send-again-txt {
   display: inline-block;
   float: left;
-  
+
   width: 48px;
 }
 
 .qt-receivable-number > li {
   padding: 15px;
-  
+
   cursor: pointer;
 }
 
@@ -2226,21 +2226,21 @@ Devices tab
 
 .qt-receivable-number > li > .col-2 {
   overflow: hidden;
-  
+
   width: calc(100% - 1070px);
   padding-top: 9px;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
-  
+
   color: #94a4b8;
 }
 
 .qt-receivable-number > li > .col-3 {
   width: 183px;
   padding-top: 9px;
-  
+
   color: #94a4b8;
 }
 
@@ -2252,9 +2252,9 @@ Devices tab
 .qt-receivable-number > li > .col-5 {
   width: 166px;
   padding-top: 9px;
-  
+
   text-align: left;
-  
+
   color: #94a4b8;
 }
 
@@ -2262,9 +2262,9 @@ Devices tab
   width: 110px;
   padding-top: 9px;
   padding-right: 0;
-  
+
   text-align: left;
-  
+
   color: #94a4b8;
 }
 
@@ -2276,23 +2276,23 @@ Devices tab
   .qt-receivable-number > li > .col-1 {
     width: 225px;
   }
-  
+
   .qt-receivable-number > li > .col-2 {
     width: calc(100% - 1125px);
   }
-  
+
   .qt-receivable-number > li > .col-3 {
     width: 220px;
   }
-  
+
   .qt-receivable-number > li > .col-4 {
     width: 200px;
   }
-  
+
   .qt-receivable-number > li > .col-5 {
     width: 180px;
   }
-  
+
   .qt-receivable-number > li > .col-6 {
     width: 64px;
   }
@@ -2302,23 +2302,23 @@ Devices tab
   .qt-receivable-number > li > .col-1 {
     width: 100px;
   }
-  
+
   .qt-receivable-number > li > .col-2 {
     width: calc(100% - 780px);
   }
-  
+
   .qt-receivable-number > li > .col-3 {
     width: 115px;
   }
-  
+
   .qt-receivable-number > li > .col-4 {
     width: 130px;
   }
-  
+
   .qt-receivable-number > li > .col-5 {
     width: 136px;
   }
-  
+
   .qt-receivable-number > li > .col-6 {
     width: 90px;
   }
@@ -2328,26 +2328,26 @@ Devices tab
   .qt-receivable-number > li > .col-1 {
     width: 127px;
   }
-  
+
   .qt-receivable-number > li > .col-2 {
     width: calc(100% - 750px);
   }
-  
+
   .qt-receivable-number > li > .col-3 {
     width: 113px;
   }
-  
+
   .qt-receivable-number > li > .col-4 {
     width: 120px;
   }
-  
+
   .qt-receivable-number > li > .col-5 {
     width: 96px;
   }
-  
+
   .qt-receivable-number > li > .col-6 {
     width: 90px;
-    
+
     text-align: left;
   }
 }
@@ -2356,7 +2356,7 @@ Devices tab
   position: absolute;
   top: 28px;
   left: -22px;
-  
+
   cursor: default;
 }
 
@@ -2381,7 +2381,7 @@ Devices tab
 
 .qt-receipt-archive > li > .col-2 {
   width: 98px;
-  
+
   text-align: right;
 }
 
@@ -2400,7 +2400,7 @@ Devices tab
 
 .qt-receipt-archive .qt-invoices > li {
   padding: 15px;
-  
+
   cursor: auto;
 }
 
@@ -2416,7 +2416,7 @@ Devices tab
 .qt-receipt-archive .qt-invoices > li > .col-2 {
   width: 210px;
   padding-top: 9px;
-  
+
 }
 
 .qt-receipt-archive .qt-invoices > li > .col-3 {
@@ -2428,24 +2428,24 @@ Devices tab
   width: 86px;
   padding-top: 9px;
   padding-right: 0;
-  
+
   text-align: right;
-  
+
 }
 
 @media only screen and (min-width: 2000px) {
   .qt-receipt-archive .qt-invoices > li > .col-1 {
     width: calc(100% - 643px);
   }
-  
+
   .qt-receipt-archive .qt-invoices > li > .col-2 {
     width: 310px;
   }
-  
+
   .qt-receipt-archive .qt-invoices > li > .col-3 {
     width: 247px;
   }
-  
+
   .qt-receipt-archive .qt-invoices > li > .col-4 {
     width: 86px;
   }
@@ -2477,18 +2477,18 @@ Devices tab
 
 .qt-receipt-number > li > .col-2 {
   overflow: hidden;
-  
+
   width: calc(100% - 640px);
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
-  
+
 }
 
 .qt-receipt-number > li > .col-3 {
   width: 210px;
-  
+
 }
 
 .qt-receipt-number > li > .col-4 {
@@ -2504,19 +2504,19 @@ Devices tab
   .qt-receipt-number > li > .col-1 {
     width: 296px;
   }
-  
+
   .qt-receipt-number > li > .col-2 {
     width: calc(100% - 940px);
   }
-  
+
   .qt-receipt-number > li > .col-3 {
     width: 310px;
   }
-  
+
   .qt-receipt-number > li > .col-4 {
     width: 247px;
   }
-  
+
   .qt-receipt-number > li > .col-5 {
     width: 86px;
   }
@@ -2526,19 +2526,19 @@ Devices tab
   .qt-receipt-number > li > .col-1 {
     width: 156px;
   }
-  
+
   .qt-receipt-number > li > .col-2 {
     width: calc(100% - 520px);
   }
-  
+
   .qt-receipt-number > li > .col-3 {
     width: 170px;
   }
-  
+
   .qt-receipt-number > li > .col-4 {
     width: 107px;
   }
-  
+
   .qt-receipt-number > li > .col-5 {
     width: 86px;
   }
@@ -2589,7 +2589,7 @@ Devices tab
 
 .qt-products > li > .col-2 {
   width: 169px;
-  
+
   text-align: right;
 }
 
@@ -2599,13 +2599,13 @@ Devices tab
 
 .qt-products > li.qt-product-edit > .col-2 {
   width: 64px;
-  
+
   text-align: right;
 }
 
 .category-name {
   line-height: 2.6em;
-  
+
   padding: 0 10px;
 }
 
@@ -2617,7 +2617,7 @@ Devices tab
   .category-name,
   .no-items {
     line-height: 19px;
-    
+
     padding-bottom: 1px;
   }
 }
@@ -2634,7 +2634,7 @@ Devices tab
   position: absolute;
   top: 0;
   right: 0;
-  
+
   display: none;
 }
 
@@ -2656,13 +2656,13 @@ Devices tab
 
 .product-actions .btn {
   z-index: 2;
-  
+
   width: 100px;
 }
 
 .product-actions .hit-area {
   z-index: 2;
-  
+
   margin-top: 11px;
   margin-right: -2px;
   margin-left: 17px;
@@ -2708,10 +2708,10 @@ Devices tab
 
 .qt-product-edit {
   z-index: 2;
-  
+
   margin-bottom: -1px;
   padding: 0 !important;
-  
+
   cursor: auto !important;
 }
 
@@ -2795,14 +2795,14 @@ Devices tab
 .qt-product-edit .error-msg {
   font-size: 11px;
   line-height: 12px;
-  
+
   position: absolute;
   top: 17px;
   left: 0;
-  
+
   text-transform: uppercase;
   pointer-events: none;
-  
+
   color: #e53935;
 }
 
@@ -2819,7 +2819,7 @@ Devices tab
 .qt-product-edit .form-control {
   /*height: 70px;*/
   /*padding-left: 0;*/
-  
+
   /*border-color: transparent;*/
   /*border-left: none;*/
   /*background-color: transparent;*/
@@ -2827,12 +2827,12 @@ Devices tab
 
 .qt-product-list {
   position: relative;
-  
+
   padding: 0;
-  
+
   cursor: auto;
   text-align: center;
-  
+
 }
 
 .qt-product-list.left-list {
@@ -2863,26 +2863,26 @@ Devices tab
 }
 
 @media only screen and (min-width: 2000px) {
-  
+
   .qt-user-product-list > li > .col-1 {
     width: 225px;
   }
-  
+
   .left-list > li > .col-2 {
     width: calc(100% - 1194px);
   }
-  
+
   .qt-user-product-list > li > .col-4 {
     width: 225px;
   }
-  
+
 }
 
 @media (max-width: 1700px) {
   .qt-user-product-list > li > .col-1 {
     width: 145px;
   }
-  
+
   .qt-user-product-list > li > .col-4 {
     width: 110px;
   }
@@ -2901,9 +2901,9 @@ Devices tab
 .product-name {
   float: left;
   overflow: hidden;
-  
+
   max-width: calc(100% - 30px);
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -2918,7 +2918,7 @@ Devices tab
 
 .add-product-btn-wrapper .btn {
   float: right;
-  
+
   width: 100px;
 }
 
@@ -2939,13 +2939,13 @@ Devices tab
 .product-form-wrapper {
   height: 166px;
   padding: 30px 129px 30px 86px;
-  
+
   box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
 }
 
 .product-form-wrapper .qt-form-actions {
   float: left;
-  
+
   width: 100%;
 }
 
@@ -2955,42 +2955,42 @@ Devices tab
 
 .product-form-wrapper .col-1 {
   float: left;
-  
+
   width: 183px;
   padding-right: 5px;
 }
 
 .product-form-wrapper .col-2 {
   float: left;
-  
+
   width: 233px;
   padding: 0 5px;
 }
 
 .product-form-wrapper .col-3 {
   float: left;
-  
+
   width: 203px;
   padding: 0 5px;
 }
 
 .product-form-wrapper .col-4 {
   float: left;
-  
+
   width: 115px;
   padding: 0 5px;
 }
 
 .product-form-wrapper .col-5 {
   float: left;
-  
+
   width: 111px;
   padding-left: 5px;
 }
 
 .product-form-wrapper .col-desc {
   float: left;
-  
+
   width: calc(100% - 845px);
   padding-left: 5px;
 }
@@ -2999,27 +2999,27 @@ Devices tab
   .qt-product-form .text-error {
     margin-left: 248px;
   }
-  
+
   .product-form-wrapper .col-1 {
     width: 243px;
   }
-  
+
   .product-form-wrapper .col-2 {
     width: 323px;
   }
-  
+
   .product-form-wrapper .col-3 {
     width: 263px;
   }
-  
+
   .product-form-wrapper .col-4 {
     width: 145px;
   }
-  
+
   .product-form-wrapper .col-5 {
     width: 141px;
   }
-  
+
   .product-form-wrapper .col-desc {
     width: calc(100% - 1115px);
   }
@@ -3029,27 +3029,27 @@ Devices tab
   .qt-product-form .text-error {
     margin-left: 118px;
   }
-  
+
   .product-form-wrapper .col-1 {
     width: 113px;
   }
-  
+
   .product-form-wrapper .col-2 {
     width: 213px;
   }
-  
+
   .product-form-wrapper .col-3 {
     width: 153px;
   }
-  
+
   .product-form-wrapper .col-4 {
     width: 80px;
   }
-  
+
   .product-form-wrapper .col-5 {
     width: 76px;
   }
-  
+
   .product-form-wrapper .col-desc {
     width: calc(100% - 635px);
   }
@@ -3057,13 +3057,13 @@ Devices tab
 
 .default-services-header {
   float: left;
-  
+
   width: 100%;
 }
 
 .default-service-count {
   float: left;
-  
+
   margin-top: 9px;
 }
 
@@ -3092,15 +3092,15 @@ Devices tab
 .qt-default-services > li > .col-2 {
   width: 120px;
   padding-top: 9px;
-  
+
   color: #94a4b8;
 }
 
 .qt-default-services > li > .col-3 {
   width: 160px;
-  
+
   text-align: left;
-  
+
   color: #94a4b8;
 }
 
@@ -3121,7 +3121,7 @@ Devices tab
   .qt-default-services > li.list-heading > .col-2,
   .qt-default-services > li.list-heading > .col-3 {
     line-height: 11px;
-    
+
     padding-bottom: 1px;
   }
 }
@@ -3130,22 +3130,22 @@ Devices tab
   .qt-users .type-col {
     display: none;
   }
-  
+
   .qt-users .buttons-col {
     width: 20%;
     float: right;
     min-width: 174px;
   }
-  
+
   .qt-users .subscribe-col {
     width: 16%;
     text-align: left !important;
   }
-  
+
   .qt-users .subscribe-col .persistent-tooltip {
     padding-right: 25px;
   }
-  
+
   .qt-users .tickets-col {
     text-align: right;
   }
@@ -3168,7 +3168,7 @@ Devices tab
   padding: 0 !important;
   list-style-type: none;
   cursor: auto !important;
-  
+
   border: none !important;
 }
 
@@ -3179,13 +3179,13 @@ Devices tab
 
 .service-form-wrapper .qt-form-actions {
   float: right;
-  
+
   width: 100%;
 }
 
 .service-form-wrapper .col-1 {
   float: left;
-  
+
   width: calc(100% - 127px);
   padding-right: 5px;
   margin-bottom: 20px;
@@ -3193,7 +3193,7 @@ Devices tab
 
 .service-form-wrapper .col-2 {
   float: left;
-  
+
   width: 127px;
   padding: 0 5px;
   margin-bottom: 20px;
@@ -3201,7 +3201,7 @@ Devices tab
 
 .service-form-wrapper .col-3 {
   float: left;
-  
+
   width: 173px;
   padding-left: 5px;
 }
@@ -3210,11 +3210,11 @@ Devices tab
   .service-form-wrapper .col-1 {
     width: calc(100% - 380px);
   }
-  
+
   .service-form-wrapper .col-2 {
     width: 192px;
   }
-  
+
   .service-form-wrapper .col-3 {
     width: 188px;
   }
@@ -3222,7 +3222,7 @@ Devices tab
 
 .add-service-btn-wrapper {
   float: left;
-  
+
   width: 100%;
   margin-bottom: 60px;
 }
@@ -3239,17 +3239,17 @@ Devices tab
 
 .all-companies-heading {
   float: left;
-  
+
   width: 100%;
   padding-top: 55px;
-  
+
   border-top: 1px solid #f1f5fa;
 }
 
 @-moz-document url-prefix() {
   .all-companies-heading {
     line-height: 19px;
-    
+
     padding-bottom: 1px;
   }
 }
@@ -3270,15 +3270,15 @@ Devices tab
 .qt-devices .checkbox-caption {
   display: flex;
   float: none;
-  
+
   margin-right: 18px;
 }
 
 .qt-devices .checkbox-caption span {
   overflow: hidden;
-  
+
   width: auto;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -3319,19 +3319,19 @@ Devices tab
 
 .qt-devices > li > .col-4 {
   width: 307px;
-  
+
   color: #94a4b8;
 }
 
 .qt-devices > li > .col-5 {
   width: 98px;
-  
+
   color: #94a4b8;
 }
 
 .qt-devices > li > .col-6 {
   width: 197px;
-  
+
   text-align: right;
 }
 
@@ -3339,15 +3339,15 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 1267px);
   }
-  
+
   .qt-devices > li > .col-2 {
     width: 300px;
   }
-  
+
   .qt-devices > li > .col-3 {
     width: 265px;
   }
-  
+
   .qt-devices > li > .col-4 {
     width: 240px;
   }
@@ -3357,15 +3357,15 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 1147px);
   }
-  
+
   .qt-devices > li > .col-2 {
     width: 320px;
   }
-  
+
   .qt-devices > li > .col-3 {
     width: 225px;
   }
-  
+
   .qt-devices > li > .col-4 {
     width: 307px;
   }
@@ -3375,23 +3375,23 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 620px);
   }
-  
+
   .qt-devices > li > .col-2 {
     width: 150px;
   }
-  
+
   .qt-devices > li > .col-3 {
     width: 50px;
   }
-  
+
   .qt-devices > li > .col-4 {
     width: 124px;
   }
-  
+
   .qt-devices > li > .col-5 {
     width: 94px;
   }
-  
+
   .qt-devices > li > .col-6 {
     width: 197px;
   }
@@ -3401,7 +3401,7 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 760px);
   }
-  
+
   .qt-devices .checkbox-caption a {
     display: block;
   }
@@ -3411,15 +3411,15 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 600px);
   }
-  
+
   .qt-devices > li > .col-6 {
     width: 189px;
   }
-  
+
   .qt-devices .list-actions .more .dropdown-menu > li:nth-child(2) {
     display: block;
   }
-  
+
   .qt-devices .list-actions .btn-spec-report {
     display: none;
   }
@@ -3429,19 +3429,19 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 600px);
   }
-  
+
   .qt-devices > li > .col-2 {
     width: 140px;
   }
-  
+
   .qt-devices > li > .col-3 {
     width: 50px;
   }
-  
+
   .qt-devices .list-actions .more .dropdown-menu > li:first-child {
     display: block;
   }
-  
+
   .qt-devices .list-actions .btn-alert {
     display: none;
   }
@@ -3451,15 +3451,15 @@ Devices tab
   .qt-devices > li > .col-1 {
     width: calc(100% - 530px);
   }
-  
+
   .qt-devices > li > .col-2 {
     width: 110px;
   }
-  
+
   .qt-devices > li > .col-3 {
     width: 50px;
   }
-  
+
   .qt-devices > li > .col-4 {
     width: 87px;
   }
@@ -3476,7 +3476,7 @@ Devices tab
 
 .qt-devices .device-user-name a {
   display: inline-block;
-  
+
   margin-top: 2px;
   margin-left: 9px;
 }
@@ -3487,7 +3487,7 @@ Devices tab
 
 .qt-devices .device-desc .hit-area {
   display: none;
-  
+
   margin-top: 2px;
 }
 
@@ -3534,7 +3534,7 @@ Devices tab
 
 .qt-agents > li > .col-6 {
   width: 159px;
-  
+
   text-align: right;
 }
 
@@ -3542,23 +3542,23 @@ Devices tab
   .qt-agents > li > .col-1 {
     width: calc(100% - 1019px);
   }
-  
+
   .qt-agents > li > .col-2 {
     width: 302px;
   }
-  
+
   .qt-agents > li > .col-3 {
     width: 232px;
   }
-  
+
   .qt-agents > li > .col-4 {
     width: 132px;
   }
-  
+
   .qt-agents > li > .col-5 {
     width: 194px;
   }
-  
+
   .qt-agents > li > .col-6 {
     width: 159px;
   }
@@ -3568,23 +3568,23 @@ Devices tab
   .qt-agents > li > .col-1 {
     width: calc(100% - 1149px);
   }
-  
+
   .qt-agents > li > .col-2 {
     width: 352px;
   }
-  
+
   .qt-agents > li > .col-3 {
     width: 272px;
   }
-  
+
   .qt-agents > li > .col-4 {
     width: 172px;
   }
-  
+
   .qt-agents > li > .col-5 {
     width: 194px;
   }
-  
+
   .qt-agents > li > .col-6 {
     width: 159px;
   }
@@ -3594,50 +3594,50 @@ Devices tab
   .qt-agents > li > .col-1 {
     width: calc(100% - 719px);
   }
-  
+
   .qt-agents > li > .col-2 {
     width: 202px;
   }
-  
+
   .qt-agents > li > .col-3 {
     width: 132px;
   }
-  
+
   .qt-agents > li > .col-4 {
     width: 32px;
   }
-  
+
   .qt-agents > li > .col-5 {
     width: 194px;
   }
-  
+
   .qt-agents > li > .col-6 {
     width: 159px;
   }
 }
 
 @media only screen and (max-width: 1600px) {
-  
+
   .qt-agents > li > .col-1 {
     width: calc(100% - 629px);
   }
-  
+
   .qt-agents > li > .col-2 {
     width: 172px;
   }
-  
+
   .qt-agents > li > .col-3 {
     width: 102px;
   }
-  
+
   .qt-agents > li > .col-4 {
     width: 52px;
   }
-  
+
   .qt-agents > li > .col-5 {
     width: 144px;
   }
-  
+
   .qt-agents > li > .col-6 {
     width: 159px;
   }
@@ -3647,28 +3647,28 @@ Devices tab
   .qt-agents > li > .col-1 {
     width: calc(100% - 557px);
   }
-  
+
   .qt-agents > li > .col-2 {
     width: 172px;
   }
-  
+
   .qt-agents > li > .col-3 {
     width: 102px;
   }
-  
+
   .qt-agents > li > .col-4 {
     display: none;
   }
-  
+
   .qt-agents > li.list-heading > .col-3,
   .qt-agents > li.list-heading > .col-4 {
     cursor: pointer;
   }
-  
+
   .qt-agents > li > .col-5 {
     width: 124px;
   }
-  
+
   .qt-agents > li > .col-6 {
     width: 159px;
   }
@@ -3678,20 +3678,20 @@ Devices tab
   display: -webkit-flex;
   display: flex;
   float: none;
-  
+
   margin-top: 9px;
   margin-right: 10px;
-  
+
   color: #94a4b8;
 }
 
 .agent-username span {
   display: inline-block;
   overflow: hidden;
-  
+
   width: auto;
   max-width: 100%;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -3704,7 +3704,7 @@ Devices tab
 
 .agent-ip {
   margin-top: 9px;
-  
+
   color: #94a4b8;
 }
 
@@ -4146,13 +4146,13 @@ Devices tab
 .network-scan-results {
   float: left;
   flex-direction: column;
-  
+
   width: 100%;
   min-height: 100px;
   margin-top: 150px;
-  
+
   text-align: center;
-  
+
   -webkit-flex-direction: column;
   -webkit-align-items: center;
   align-items: center;
@@ -4170,7 +4170,7 @@ Devices tab
 
 .qt-network-scan .device-desc .hit-area {
   display: none;
-  
+
   margin-top: 2px;
 }
 
@@ -4181,10 +4181,10 @@ Devices tab
 .result-heading {
   font-size: 17px;
   line-height: 24px;
-  
+
   margin-top: 24px;
   margin-bottom: -1px;
-  
+
   color: #4c5c6f;
 }
 
@@ -4200,9 +4200,9 @@ Devices tab
   display: -webkit-flex;
   display: flex;
   float: none;
-  
+
   margin-right: 18px;
-  
+
   cursor: default;
 }
 
@@ -4218,9 +4218,9 @@ Devices tab
 
 .qt-network-scan .checkbox-caption span {
   overflow: hidden;
-  
+
   width: auto;
-  
+
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
@@ -4249,13 +4249,13 @@ Devices tab
 
 .qt-network-scan > li > .col-5 {
   width: 130px;
-  
+
   text-align: right;
 }
 
 .qt-network-scan > li > .col-6 {
   width: 87px;
-  
+
   text-align: right;
 }
 
@@ -4569,27 +4569,27 @@ Devices tab
   .qt-network-scan > li > .col-1 {
     width: calc(100% - 1179px);
   }
-  
+
   .qt-network-scan > li > .col-2 {
     width: 264px;
   }
-  
+
   .qt-network-scan > li > .col-3 {
     width: 272px;
   }
-  
+
   .qt-network-scan > li > .col-4 {
     width: 276px;
   }
-  
+
   .qt-network-scan > li > .col-5 {
     width: 130px;
   }
-  
+
   .qt-network-scan > li > .col-6 {
     width: 87px;
   }
-  
+
   .qt-network-scan > li > .col-7 {
     width: 150px;
   }
@@ -4599,14 +4599,14 @@ Devices tab
   .qt-network-scan > li > .col-1 {
     width: calc(100% - 1520px);
   }
-  
+
   .qt-network-scan .checkbox-caption .hit-area {
     display: none;
   }
-  
+
   .qt-network-scan > li > .col-desc {
     display: block;
-    
+
     width: 340px;
   }
 }
@@ -4615,27 +4615,27 @@ Devices tab
   .qt-network-scan > li > .col-1 {
     width: calc(100% - 759px);
   }
-  
+
   .qt-network-scan > li > .col-2 {
     width: 124px;
   }
-  
+
   .qt-network-scan > li > .col-3 {
     width: 132px;
   }
-  
+
   .qt-network-scan > li > .col-4 {
     width: 136px;
   }
-  
+
   .qt-network-scan > li > .col-5 {
     width: 130px;
   }
-  
+
   .qt-network-scan > li > .col-6 {
     width: 87px;
   }
-  
+
   .qt-network-scan > li > .col-7 {
     width: 150px;
   }
@@ -4645,27 +4645,27 @@ Devices tab
   .qt-network-scan > li > .col-1 {
     width: calc(100% - 699px);
   }
-  
+
   .qt-network-scan > li > .col-2 {
     width: 104px;
   }
-  
+
   .qt-network-scan > li > .col-3 {
     width: 112px;
   }
-  
+
   .qt-network-scan > li > .col-4 {
     width: 116px;
   }
-  
+
   .qt-network-scan > li > .col-5 {
     width: 130px;
   }
-  
+
   .qt-network-scan > li > .col-6 {
     width: 87px;
   }
-  
+
   .qt-network-scan > li > .col-7 {
     width: 150px;
   }
@@ -4677,18 +4677,18 @@ Devices tab
 
 .device-management {
   position: relative;
-  
+
   width: 52px;
   height: 26px;
   margin-top: 6px;
-  
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
+
   border-radius: 13px;
-  
+
   -o-user-select: none;
 }
 
@@ -4697,10 +4697,10 @@ Devices tab
   position: absolute;
   top: 0;
   left: 0;
-  
+
   width: 52px;
   height: 26px;
-  
+
   border-radius: 13px;
   background-color: #e7ecf2;
 }
@@ -4711,10 +4711,10 @@ Devices tab
 
 .device-management label {
   display: block;
-  
+
   width: 100%;
   height: 100%;
-  
+
   cursor: pointer;
 }
 
@@ -4723,15 +4723,15 @@ Devices tab
   position: absolute;
   top: 5px;
   left: 0;
-  
+
   width: 16px;
   height: 16px;
   margin-left: 31px;
-  
+
   -webkit-transition: margin 0.2s ease-out;
   -o-transition: margin 0.2s ease-out;
   transition: margin 0.2s ease-out;
-  
+
   border-radius: 50%;
   background-color: #b2becd;
   box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
@@ -4740,7 +4740,7 @@ Devices tab
 .device-management input:checked ~ .toggle-indicator,
 .global-search-trigger input:checked ~ .toggle-indicator {
   margin-left: 5px;
-  
+
   background-color: #4caf50;
   box-shadow: 0 2px 6px 0 rgba(76, 175, 80, 0.45);
 }
@@ -4753,7 +4753,7 @@ Devices tab
 .device-management.installing-agent {
   width: 28px;
   padding-top: 8px;
-  
+
   background-color: transparent;
 }
 
@@ -4770,7 +4770,7 @@ Devices tab
   position: absolute;
   top: 4px;
   right: -24px;
-  
+
   cursor: default;
 }
 
@@ -4795,9 +4795,9 @@ Devices tab
   margin-top: 2px !important;
   margin-left: -1px;
   padding: 25px 30px 30px;
-  
+
   cursor: auto;
-  
+
   border-radius: 3px;
   background-color: #fff;
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
@@ -4805,7 +4805,7 @@ Devices tab
 
 .add-description-form .form-control {
   padding: 0;
-  
+
   border: none;
   background: none;
 }
@@ -4826,9 +4826,9 @@ Devices tab
 .add-description-form .word-count {
   font-size: 11px;
   line-height: 12px;
-  
+
   margin-top: 13px;
-  
+
   color: #b2becd;
 }
 
@@ -4841,10 +4841,10 @@ Devices tab
 /***/
 .receive-payment-list {
   overflow-y: auto;
-  
+
   max-height: calc(100vh - 350px);
   padding: 0 30px;
-  
+
   border-top: 1px solid #e7ecf2;
 }
 
@@ -4872,7 +4872,7 @@ Devices tab
 
 .receive-payment-list > li {
   padding: 25px 0;
-  
+
   cursor: pointer;
 }
 
@@ -4883,7 +4883,7 @@ Devices tab
 @-moz-document url-prefix() {
   .receive-payment-list > li {
     line-height: 19px;
-    
+
     padding-bottom: 26px;
   }
 }
@@ -4905,16 +4905,16 @@ Devices tab
 .receive-payment-list > li > .col-2,
 .invoice-list-heading > li > .col-2 {
   width: 300px;
-  
+
   color: #94a4b8;
 }
 
 .receive-payment-list > li > .col-3,
 .invoice-list-heading > li > .col-3 {
   width: 98px;
-  
+
   text-align: right;
-  
+
   color: #94a4b8;
 }
 
@@ -4936,7 +4936,7 @@ Devices tab
 @-moz-document url-prefix() {
   .default-tax-list > li {
     line-height: 19px;
-    
+
     padding-bottom: 26px;
   }
 }
@@ -4948,7 +4948,7 @@ Devices tab
 
 .default-tax-list > li.new-tax {
   height: auto;
-  
+
   border: none;
 }
 
@@ -4959,7 +4959,7 @@ Devices tab
 @-moz-document url-prefix() {
   .default-tax-list > li.new-tax p {
     line-height: 19px;
-    
+
     margin-bottom: 6px;
   }
 }
@@ -4982,7 +4982,7 @@ Devices tab
 
 .qt-list-loading {
   float: left;
-  
+
   width: 100%;
   height: 50px;
   padding: 20px 0;
@@ -5044,11 +5044,11 @@ Devices tab
   .service-form-wrapper.edit-form-checkbox .col-1 {
     width: calc(100% - 320px);
   }
-  
+
   .no-agent .send-by-email {
     padding: 0 0 10px 183px;
   }
-  
+
   .run-scan [class*=network-scan-item-]  .master-agent ul {
     left: 108px;
   }
@@ -5058,53 +5058,53 @@ Devices tab
   .qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
     margin-right: 6px;
   }
-  
+
   .qt-product-list > li > .intermediate-parent-elem > .col-6 {
     width: 63px;
   }
-  
+
   .with-category .qt-list > li > .intermediate-parent-elem > .col-1, .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 95px;
     height: auto;
   }
-  
+
   .qt-list > li > .intermediate-parent-elem > .col-4, .qt-product-list > li > .col-4, .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 100px;
   }
-  
+
   .vendor-products-width > li > .intermediate-parent-elem > .col-2, .vendor-products-width > li > [class*=col-]:first-child {
     width: calc(100% - 644px);
   }
-  
+
   .with-category .qt-product-list > li > .col-4 {
     width: 100px;
   }
-  
+
   .with-category .qt-product-list > li > .col-1 {
     width: 95px;
   }
-  
+
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 10%;
   }
-  
+
   .run-scan [class*=network-scan-item-]  .master-agent ul {
     left: 17px;
   }
-  
+
   .no-agent .send-by-email {
     padding: 0 0 10px 109px;
   }
-  
+
   .master-agent i {
     left: 183px;
     top: 53px;
   }
-  
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 15.6%;
   }
-  
+
   .run-scan [class*=network-scan-item-]:before,
   .no-agent [class*=network-scan-item-]:before {
     left: 42%;
@@ -5119,32 +5119,32 @@ Devices tab
   .network-scan .qt-network-scan .col-1 p {
     font-size: 12px;
   }
-  
+
   .network-scan .qt-network-scan .checkbox-caption {
     width: 78%;
   }
-  
+
   .run-scan [class*=network-scan-item-]  .master-agent ul {
     left: 0;
   }
-  
+
   .no-agent .send-by-email {
     padding: 0 0 10px 70px;
   }
-  
+
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 11%;
   }
-  
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 14.6%;
   }
-  
+
   .master-agent i {
     left: 165px;
     top: 53px;
   }
-  
+
   .run-scan [class*=network-scan-item-]:before,
   .no-agent [class*=network-scan-item-]:before {
     left: 39%;
@@ -5155,25 +5155,25 @@ Devices tab
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 12% !important;
   }
-  
+
   .network-scan .qt-network-scan .checkbox-caption input {
     width: 96%;
   }
-  
+
   .no-agent .send-by-email {
     padding: 0 0 10px 56px;
   }
-  
+
   .master-agent i {
     left: 165px;
     top: 54px;
   }
-  
+
   .run-scan [class*=network-scan-item-]:before,
   .no-agent [class*=network-scan-item-]:before {
     left: 38%;
   }
-  
+
   .network-scan .qt-list.qt-network-scan .list-content .col-1, .network-scan .qt-list li.list-heading .col-1 {
     width: 13.5%;
   }
@@ -5723,6 +5723,11 @@ Devices tab
 
 .devices-card {
   background-image: url(../images/new-icons/devices-card.png);
+  height: 19px;
+}
+
+.non-devices-card {
+  background-image: url(../images/new-icons/non-devices-card.png);
   height: 19px;
 }
 

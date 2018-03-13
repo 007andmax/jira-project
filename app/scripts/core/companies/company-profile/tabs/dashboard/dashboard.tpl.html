@@ -1,21 +1,23 @@
 <div class="company-profile-content clearfix" ng-controller="quicktech.core.companies.companyProfileDashboardCtrl">
-  <h3>Hi <span>{{ getUserName(currentUser) }}</span>,</h3>
-  <p>Welcome to Quicktech agent dashboard</p>
   <div class="company-info-wrapper" ng-form="companyDashboardForm">
     <div class="company-info-header clearfix">
       <div class="col-md-8">
         <div class="company-logo">
           <!--<img src="images/bitmap@3x.png" alt="">-->
           <div style="min-height: 38px; display: inline-block; float: left;margin-right: 10px;">
-            <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="" ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
-            <div class="default-company-logo default-company-logo-big" ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" style="background-color: pink;">
+            <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
+                 ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+            <div class="default-company-logo default-company-logo-big"
+                 ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+                 style="background-color: pink;">
               <span>{{company.name[0].toUpperCase()}}</span>
             </div>
           </div>
         </div>
         <!--<button class="company-logo-icn" uib-tooltip="change logo"></button>-->
         <div class="company-logo-icn" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
-             uib-tooltip="Change Logo" tooltip-placement="top" tooltip-popup-delay="2000" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
+             uib-tooltip="Change Logo" tooltip-placement="top" tooltip-popup-delay="2000"
+             ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
           <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
               crop-image="companyData" model-image-path="logo">
             <li crop-image-button stop-propagation="click">
@@ -59,13 +61,14 @@
           <div>
             <div ng-mouseover="showCompanyNameEditButton = true"
                  ng-mouseleave="showCompanyNameEditButton = false"
-                 style="display: inline-block;max-width: 84%;width: 100%;">
+                 class="company-edit-button">
               <div class="ellipsis"
                    ng-show="!showCompanyNameEditField">{{companyInfo.name}}
               </div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
-                      ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
+                      ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
             </div>
             <div uib-dropdown class="create-dropdown pull-right" ng-show="!showCompanyNameEditField">
               <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
@@ -80,10 +83,10 @@
               </ul>
             </div>
           </div>
-          <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+          <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
              ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
              uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-          <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+          <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
              ng-show="showCompanyNameEditField"
              ng-click="checkingFormAndSave(companyDashboardForm)"
              uib-tooltip="Save" tooltip-popup-delay="2000"></i>
@@ -127,11 +130,12 @@
           </p>
           <button style="vertical-align: top;" class="company-edit-icn company-edit-icn-sm"
                   ng-show="showAddressEditButton && !showAddressEditFields"
-                  ng-click="openEditForm('showAddressEditFields')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-          <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showAddressEditFields"
+                  ng-click="openEditForm('showAddressEditFields')" uib-tooltip="Edit"
+                  tooltip-popup-delay="2000"></button>
+          <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right" ng-show="showAddressEditFields"
              ng-click="cancelEdit()"
              uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-          <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+          <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
              ng-show="showAddressEditFields"
              ng-click="save()"
              uib-tooltip="Save" tooltip-popup-delay="2000"></i>
@@ -179,7 +183,7 @@
               ng-show="!day.isDayOff">{{day.endTimeFormat}}</span><span ng-show="day.isDayOff">Not working</span>
             </li>
           </ul>
-          <i class="icn-sm icn-remove-old pointer pull-right"
+          <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
              ng-show="showWorkingDaysEditFields" ng-click="cancelWorkingDaysEdit()"
              uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
           <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
@@ -238,11 +242,12 @@
               <div class="w-92">Telephone</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showPhoneEditButton && !showPhoneNumbersEditFields"
-                      ng-click="openEditForm('showPhoneNumbersEditFields')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+                      ng-click="openEditForm('showPhoneNumbersEditFields')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
                  ng-show="showPhoneNumbersEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-              <i style="margin-top: 10px;" class=" icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class=" icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showPhoneNumbersEditFields" ng-click="save()"
                  uib-tooltip="Save" tooltip-popup-delay="2000"></i>
             </div>
@@ -261,11 +266,12 @@
               <div class="w-92">Email Domain</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDomainEditButton && !showDomainEditFields"
-                      ng-click="openEditForm('showDomainEditFields')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+                      ng-click="openEditForm('showDomainEditFields')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
                  ng-show="showDomainEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showDomainEditFields"
                  ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save" tooltip-popup-delay="2000"></i>
             </div>
@@ -292,12 +298,13 @@
               <div class="w-92">Industry</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showIndustryEditDutton && !showIndustryEditFields"
-                      ng-click="openEditForm('showIndustryEditFields')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+                      ng-click="openEditForm('showIndustryEditFields')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
                  ng-show="showIndustryEditFields"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showIndustryEditFields"
                  ng-click="checkingFormAndSave(companyDashboardForm)" uib-tooltip="Save" tooltip-popup-delay="2000"></i>
             </div>
@@ -324,11 +331,12 @@
               <div class="w-92">Service type</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showServiceTypeEditButton && !showServiceTypeEditField"
-                      ng-click="openEditForm('showServiceTypeEditField')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+                      ng-click="openEditForm('showServiceTypeEditField')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
                  ng-show="showServiceTypeEditField" ng-click="cancelEdit()"
                  uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showServiceTypeEditField"
                  ng-click="save()" uib-tooltip="Save" tooltip-popup-delay="2000"></i>
             </div>
@@ -351,13 +359,15 @@
               <div class="w-92">Contact person</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showContactPersonEditButton && !showContactPersonEditFields"
-                      ng-click="openEditForm('showContactPersonEditFields')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+                      ng-click="openEditForm('showContactPersonEditFields')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
                  ng-show="showContactPersonEditFields" ng-click="cancelEdit()"
                  uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showContactPersonEditFields"
-                 ng-click="saveNewPrimaryContact(companyInfo.contacts[0], companyDashboardForm)" uib-tooltip="Save" tooltip-popup-delay="2000"></i>
+                 ng-click="saveNewPrimaryContact(companyInfo.contacts[0], companyDashboardForm)" uib-tooltip="Save"
+                 tooltip-popup-delay="2000"></i>
 
             </div>
             <p ng-show="!showContactPersonEditFields">{{companyInfo.contacts[0].firstName}}
@@ -383,11 +393,12 @@
                  ng-mouseleave="showLedByEditButton = false">
               <div class="w-92">Lead By</div>
               <button class="company-edit-icn company-edit-icn-sm" ng-show="showLedByEditButton && !showLedByEditField"
-                      ng-click="openEditForm('showLedByEditField')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right" ng-show="showLedByEditField"
+                      ng-click="openEditForm('showLedByEditField')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right" ng-show="showLedByEditField"
                  ng-click="cancelEdit()"
                  uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showLedByEditField"
                  ng-click="save()" uib-tooltip="Save" tooltip-popup-delay="2000"></i>
             </div>
@@ -414,16 +425,17 @@
               <div class="w-92">Notes</div>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showNoteEditButton && !showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0"
-                      ng-click="openEditForm('showNoteEditField')" uib-tooltip="Edit" tooltip-popup-delay="2000"></button>
+                      ng-click="openEditForm('showNoteEditField')" uib-tooltip="Edit"
+                      tooltip-popup-delay="2000"></button>
 
-              <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
+              <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
                  ng-show="showNoteEditField"
-                 ng-click="cancelEdit()" uib-tooltip="Cancel" tooltip-placement="top-right" ></i>
+                 ng-click="cancelEdit()" uib-tooltip="Cancel" tooltip-placement="top"></i>
 
-              <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+              <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showNoteEditField"
                  ng-click="checkingFormAndSave(companyDashboardForm)"
-                 uib-tooltip="Save" tooltip-placement="top-right" ></i>
+                 uib-tooltip="Save" tooltip-placement="top"></i>
 
             </div>
             <p class="company-notes"
@@ -446,97 +458,96 @@
   </div>
 </div>
 
-<div class="company-profile-content clearfix" style="padding-bottom: 90px;">
+<div class="company-profile-content clearfix" style="padding-bottom: 135px;">
 
   <div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation && chartHidden"
        ng-model="companyData.addresses[0]"></div>
+  <div style="max-width: 1234px; margin: 0 auto;" class="clearfix">
+    <div chart-data-restriction fetch-func="getStatisticByCompany"
+         margin="100" divider="50" chart-wrap param0="companyId" param1="frequency"
+         class="company-map-wrapper col-md-9" ng-if="!chartHidden"
+         style="background-color: #fff;height: 320px;margin-bottom: 40px;">
 
-  <div chart-data-restriction fetch-func="getStatisticByCompany"
-       margin="100" divider="50" chart-wrap param0="companyId" param1="frequency"
-       class="company-map-wrapper col-md-9" ng-if="!chartHidden"
-       style="background-color: #fff;height: 320px;margin-bottom: 40px;">
-
-    <div class="chart-header">
-      <div class="chart-header-name">
-        <p class="header-title">{{ getChartTitle() }}</p>
-        <p ng-if="selectedChart === 'responseTime'">
-          Outliers
-          <span class="font-yellow">
+      <div class="chart-header">
+        <div class="chart-header-name">
+          <p class="header-title">{{ getChartTitle() }}</p>
+          <p ng-if="selectedChart === 'responseTime'">
+            Outliers
+            <span class="font-yellow">
               {{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)
             </span>
-        </p>
+          </p>
+        </div>
+
+        <div class="chart-header-controls">
+          <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+          <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+          <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+        </div>
       </div>
 
-      <div class="chart-header-controls">
-        <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
-        <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
-        <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+      <div d3chart data="chartData" margin="{ top: 20, right: 10, bottom: 40, left: 70}"
+           style="height: 241px" ng-if="!reloading">
+        <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
+                ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+        <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
+        <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"
+                tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}" to-fixed="0"></d3bars>
       </div>
+
     </div>
-
-    <div d3chart data="chartData" margin="{ top: 20, right: 10, bottom: 40, left: 70}"
-         style="height: 241px" ng-if="!reloading">
-      <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
-              ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
-      <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
-      <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"
-              tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}" to-fixed="0"></d3bars>
+    <div class="company-work-info col-md-3" style="background: #fff;height: 320px;padding: 10px;">
+      <table>
+        <tbody ng-click="selectChart('countOfNewTickets')"
+               ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">
+        <tr>
+          <td rowspan="2" colspan="1" class="bd-right-disabled">
+            <p>Open Tickets</p>
+            <p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>
+          </td>
+          <td colspan="1" class="bd-bottom-disabled bd-left-disabled">
+            <p>Total</p>
+            <p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="1" class="bd-top-disabled bd-left-disabled">
+            <p>On hold</p>
+            <p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>
+          </td>
+        </tr>
+        </tbody>
+        <tbody ng-click="selectChart('responseTime')"
+               ng-class="{'selected-chart': selectedChart === 'responseTime'}">
+        <tr>
+          <td colspan="2">
+            <p>Response Time</p>
+            <p class="big-count font-yellow">
+              {{
+              companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime
+              ?
+              (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
+              :
+              0
+              }} min
+            </p>
+          </td>
+        </tr>
+        </tbody>
+        <tbody ng-click="selectChart('averageTime')"
+               ng-class="{'selected-chart': selectedChart === 'averageTime'}">
+        <tr>
+          <td colspan="2">
+            <p>Average Time</p>
+            <p class="big-count font-red">
+              {{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}
+            </p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-
   </div>
-
-  <div class="company-work-info col-md-3" style="background: #fff;height: 320px;padding: 10px;">
-    <table>
-      <tbody ng-click="selectChart('countOfNewTickets')"
-             ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">
-      <tr>
-        <td rowspan="2" colspan="1" class="bd-right-disabled">
-          <p>Open Tickets</p>
-          <p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>
-        </td>
-        <td colspan="1" class="bd-bottom-disabled bd-left-disabled">
-          <p>Total</p>
-          <p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>
-        </td>
-      </tr>
-      <tr>
-        <td rowspan="1" class="bd-top-disabled bd-left-disabled">
-          <p>On hold</p>
-          <p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>
-        </td>
-      </tr>
-      </tbody>
-      <tbody ng-click="selectChart('responseTime')"
-             ng-class="{'selected-chart': selectedChart === 'responseTime'}">
-      <tr>
-        <td colspan="2">
-          <p>Response Time</p>
-          <p class="big-count font-yellow">
-            {{
-            companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime
-            ?
-            (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
-            :
-            0
-            }} min
-          </p>
-        </td>
-      </tr>
-      </tbody>
-      <tbody ng-click="selectChart('averageTime')"
-             ng-class="{'selected-chart': selectedChart === 'averageTime'}">
-      <tr>
-        <td colspan="2">
-          <p>Average Time</p>
-          <p class="big-count font-red">
-            {{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}
-          </p>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
 </div>
 <script>
   (function (i, s, o, g, r, a, m) {

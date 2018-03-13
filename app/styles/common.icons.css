@@ -537,8 +537,8 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
 /*.icn-label-save, a:focus > .icn-label-save {*/
 .icn-label-save {
   background-position: -1720px -100px;
-  width: 14px;
-  height: 10px;
+  width: 20px!important;
+  height: 20px!important;
 }
 
 .icn-label-save-left-panel,
@@ -548,6 +548,11 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   height: 10px;
   margin-right: 25px;
 }
+.company-info-content .icn-remove-old.dashboard-remove{
+  background-position: -691px 6px;
+  width: 20px;
+  height: 20px;
+}
 
 .list-container .icn-label-save {
   position: absolute;
@@ -556,7 +561,7 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
 }
 
 .icn-label-save-dashboard {
-  background-position: -1702px -100px;
+  background-position: -1699px -95px;
 }
 
 a:hover > .icn-label-save, a:active > .icn-label-save {
