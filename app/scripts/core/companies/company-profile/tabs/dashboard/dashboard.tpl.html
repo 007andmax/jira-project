@@ -418,12 +418,13 @@
 
               <i style="margin-top: 10px;" class="icn-sm icn-remove-old pointer pull-right"
                  ng-show="showNoteEditField"
-                 ng-click="cancelEdit()" uib-tooltip="Cancel" tooltip-append-to-body="true"></i>
+                 ng-click="cancelEdit()" uib-tooltip="Cancel" tooltip-placement="top-right" ></i>
 
               <i style="margin-top: 10px;" class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
                  ng-show="showNoteEditField"
                  ng-click="checkingFormAndSave(companyDashboardForm)"
-                 uib-tooltip="Save" tooltip-append-to-body="true" tooltip-popup-delay="2000"></i>
+                 uib-tooltip="Save" tooltip-placement="top-right" ></i>
+
             </div>
             <p class="company-notes"
                ng-show="!showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0">
