@@ -10463,6 +10463,7 @@ button.close {
   text-transform: uppercase;
   opacity: 0;
   filter: alpha(opacity=0);
+  top: -30px!important;
 }
 
 .tooltip.in {
