@@ -381,6 +381,7 @@
               }
             } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
               phoneNumbers.shift();
+
             }
           }
 

@@ -55,6 +55,14 @@
             $scope.companyInfo.addresses = [{}];
           }
 
+          // if($scope.companyInfo.addresses && $scope.companyInfo.addresses.length && $scope.companyInfo.addresses[0].phoneNumbers && $scope.companyInfo.addresses[0].phoneNumbers.length) {
+          //   for(var i=0; i< $scope.companyInfo.addresses[0].phoneNumbers.length; i++) {
+          //     if($scope.companyInfo.addresses[0].phoneNumbers[i].number.length < 4) {
+          //       $scope.companyInfo.addresses[0].phoneNumbers[i].splice(i, 1);
+          //     }
+          //   }
+          // }
+
           if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
             $scope.companyInfo.contacts = [getEmptyContact()];
           }
@@ -102,6 +110,10 @@
           }, 3000);
 
         });
+
+        $scope.rewriteReservedCompanyInfoFromDashboard = function(companyInfo) {
+          $scope.reservedCompanyInfo = angular.copy(companyInfo);
+        }
 
 
 

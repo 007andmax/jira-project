@@ -5,9 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileDashboardCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService', '$uibModal',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService', '$uibModal', 'quicktech.common.services.PhoneFormats',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
-                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal) {
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal, PhoneFormats) {
 
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeek = daysOfWeek;
@@ -275,6 +275,7 @@
           CompaniesService.save(editCompany, function (resp) {
             if (resp) {
               $scope.reservedCompanyInfo = angular.copy(editCompany);
+              $scope.rewriteReservedCompanyInfoFromDashboard($scope.reservedCompanyInfo);
             }
           });
           closeEditFields();
