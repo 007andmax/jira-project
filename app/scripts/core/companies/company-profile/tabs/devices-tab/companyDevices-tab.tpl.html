@@ -160,10 +160,17 @@
         <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
         <!--</div>-->
         <div>
-          <div append-html-to-body data="deviceReport" ng-if="agent.agentId"
+          <div append-html-to-body data="deviceReport" ng-if="agent.agentId && agent.type !== 'printer'"
                url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
                ng-click="getDeviceReport(agent)">
             <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
+          </div>
+        </div>
+        <div>
+          <div append-html-to-body data="deviceReport" ng-if="agent.agentId && agent.type === 'printer'"
+               url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
+               ng-click="getDeviceReport(agent)">
+            <i class="dev-btn non-devices-card pointer" uib-tooltip="report"></i>
           </div>
         </div>
         <!--<div>-->
