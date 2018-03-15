@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('DevicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'UsersService', 'Downloader', 'CompaniesService',
-    function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService, ) {
+    function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService ) {
 
       var storage = { devices: {}, callbacks: {}, deviceCounter: {}, oneTimeCallbacks: {} },
         serviceScope = $rootScope.$new(),
