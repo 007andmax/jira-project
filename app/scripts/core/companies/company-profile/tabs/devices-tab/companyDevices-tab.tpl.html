@@ -85,19 +85,21 @@
       <div class="col-md-3">
         <!--<div class="dashboard-active-device" ng-if="!agent.agentConnected"></div>-->
 
-        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-if="agent.agentConnected">
+        <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" ng-if="agent.OneTimeConnectionData.length > 0">
           <div uib-dropdown-toggle>
             <div class="dashboard-active-device"></div>
           </div>
           <div class="dropdown-menu dropdown-tooltip" role="menu">
-            <p><span>{{agent.OneTimeConnectionData.performer.firstName}}</span>
-              {{agent.OneTimeConnectionData.performer.lastName}}</p>
-            <div>
-              <p>Connected: <span ng-show="returnTimeFormatForPage(agentConnectedAt).days > 0">{{returnTimeFormatForPage(agentConnectedAt).days}} day</span><span
-                ng-show="returnTimeFormatForPage(agentConnectedAt).hours > 0"> {{returnTimeFormatForPage(agentConnectedAt).hours}} hrs</span><span
-                ng-show="returnTimeFormatForPage(agentConnectedAt).minutes > 0 && returnTimeFormatForPage(agentConnectedAt).days < 1"> {{returnTimeFormatForPage(agentConnectedAt).minutes}} min</span><span
-                ng-show="returnTimeFormatForPage(agentConnectedAt).seconds > 0 && returnTimeFormatForPage(agentConnectedAt).minutes < 1"> 0 min</span>
-              </p>
+            <div ng-repeat="connection in agent.OneTimeConnectionData">
+              <p><span>{{connection.performer.firstName}}</span>
+                {{connection.performer.lastName}}</p>
+              <div>
+                <p>Connected: <span ng-show="returnTimeFormatForPage(connection.agentConnectedAt).days > 0">{{returnTimeFormatForPage(connection.agentConnectedAt).days}} day</span><span
+                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt).hours > 0"> {{returnTimeFormatForPage(connection.agentConnectedAt).hours}} hrs</span><span
+                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt).minutes > 0 && returnTimeFormatForPage(connection.agentConnectedAt).days < 1"> {{returnTimeFormatForPage(connection.agentConnectedAt).minutes}} min</span><span
+                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt).seconds > 0 && returnTimeFormatForPage(connection.agentConnectedAt).minutes < 1"> 0 min</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

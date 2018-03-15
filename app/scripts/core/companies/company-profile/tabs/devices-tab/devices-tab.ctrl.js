@@ -240,17 +240,25 @@
         //   }
         // });
 
-        $scope.$watch('agent.agentConnected', function(value) {
-          if(value) {
-            $scope.agent.agentConnected = value;
-            if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.startedAt) {
-              if($scope.agent.OneTimeConnectionData.startedAt > Date.now()) {
-                $scope.agentConnectedAt = 0;
+        $scope.$watch('agent.OneTimeConnectionData.length', function(value) {
+          if(value || value === 0) {
+            // $scope.agent.agentConnected = value;
+            // if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.startedAt) {
+            //   if($scope.agent.OneTimeConnectionData.startedAt > Date.now()) {
+            //     $scope.agentConnectedAt = 0;
+            //   } else {
+            //     $scope.agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData.startedAt);
+            //   }
+            //   console.log($scope.agentConnectedAt);
+            // }
+            for(var i=0; i<$scope.agent.OneTimeConnectionData.length; i++) {
+              if($scope.agent.OneTimeConnectionData[i].startedAt > Date.now()) {
+                $scope.agent.OneTimeConnectionData[i].agentConnectedAt = 0;
               } else {
-                $scope.agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData.startedAt);
+                $scope.agent.OneTimeConnectionData[i].agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData[i].startedAt);
               }
-              console.log($scope.agentConnectedAt);
             }
+            console.log(value)
           }
         });
 
@@ -259,9 +267,14 @@
            $scope.agent.timing.idle += 1000;
            $scope.agent.timing.noRestart += 1000;
            $scope.agent.timing.online += 1000;
-           $scope.agent.timing.agentConnectedAt += 1000;
+           // $scope.agent.timing.agentConnectedAt += 1000;
            $scope.agent.timing.offline +=1000;
            $scope.agent.timing.uptimeForOrdering +=1000;
+           if($scope.agent.OneTimeConnectionData.length>0) {
+             for(var i=0; i<$scope.agent.OneTimeConnectionData.length; i++) {
+               $scope.agent.OneTimeConnectionData[i].agentConnectedAt += 1000;
+             }
+           }
         }, 1000);
 
 

@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('DevicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'UsersService', 'Downloader', 'CompaniesService',
-    function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService) {
+    function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService, ) {
 
       var storage = { devices: {}, callbacks: {}, deviceCounter: {}, oneTimeCallbacks: {} },
         serviceScope = $rootScope.$new(),
@@ -133,23 +133,12 @@
               var session = newChange.data;
               $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
             } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
-              var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
-              Utils.defineReadOnlyProperty(device, 'OneTimeConnectionData', newChange.data);
-              Utils.defineReadOnlyProperty(device, 'agentConnected', true);
+
+              //var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
+              addRemoteConnectionSessionToDevice(newChange, devices);
             } else if(newChange.action === 'ONE_TIME_DELETED') {
-              var companyId = getCompanyIdByAgenSessionId(newChange.data);
-              // var device = Utils.findById(devices[companyId].OneTimeConnectionData.id, newChange.data);
-              // var device = findDeviceBySessionId(devices[companyId], newChange.data);
-              // Utils.defineReadOnlyProperty(device, 'agentConnected', false);
 
-                for (var i=0; i< devices[companyId].length; i++) {
-                  if (devices[companyId][i].OneTimeConnectionData && devices[companyId][i].OneTimeConnectionData.id === newChange.data) {
-                    console.log(devices[companyId][i]);
-                    storage.devices[companyId][i].agentConnected = false;
-                    break;
-                  }
-                }
-
+              removeRemoteConnectionSessionToDevice(newChange, devices);
 
             }
           })
@@ -162,20 +151,29 @@
         }
       }
 
+      function addRemoteConnectionSessionToDevice(newChange, devices) {
+        //var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
+        for(var i=0; i<devices[newChange.data.clientCompany.id].length; i++) {
+          if(devices[newChange.data.clientCompany.id][i].id === newChange.data.deviceId) {
+            devices[newChange.data.clientCompany.id][i].OneTimeConnectionData.push(newChange.data)
+          }
+        }
+      }
+
+      function removeRemoteConnectionSessionToDevice(newChange, devices) {
+        var companyId = getCompanyIdByAgenSessionId(newChange.data);
+        if(companyId) {
+          for(var i=0; i<devices[companyId].length; i++) {
+            for(var r=0; r<devices[companyId][i].OneTimeConnectionData.length; r++) {
+              if(devices[companyId][i].OneTimeConnectionData[r].id === newChange.data) {
+                devices[companyId][i].OneTimeConnectionData.splice(r, 1);
+              }
+            }
+          }
+        }
+      }
 
 
-      // function findDeviceBySessionId( deviceList, sessionId) {
-      //   if(deviceList && sessionId) {
-      //     var device = {};
-      //     for(var i=0; i<deviceList.length; i++) {
-      //       if(deviceList[i].OneTimeConnectionData.id === sessionId) {
-      //         device =  deviceList[i];
-      //         break;
-      //       }
-      //     }
-      //     return device;
-      //   }
-      // }
 
       function _addInitListener(callback) {
 
@@ -847,9 +845,11 @@
           return Object.keys(storage.devices).find(function(key) {
             if(key !== 'staticCopy') {
               for(var i=0; i<storage.devices[key].length; i++ ) {
-                if(storage.devices[key][i].OneTimeConnectionData && storage.devices[key][i].OneTimeConnectionData.id) {
-                  if(storage.devices[key][i].OneTimeConnectionData.id === value) {
-                    return true;
+                if(storage.devices[key][i].OneTimeConnectionData && storage.devices[key][i].OneTimeConnectionData.length) {
+                  for(var c=0; c<storage.devices[key][i].OneTimeConnectionData.length; c++) {
+                    if(storage.devices[key][i].OneTimeConnectionData[c].id === value) {
+                      return true;
+                    }
                   }
                 }
               }
@@ -909,12 +909,27 @@
             for(var i=0; i<storage.devices[companyId].length; i++) {
               storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
               storage.devices[companyId][i].label = resp.data[companyId][i].label;
+              storage.devices[companyId][i].OneTimeConnectionData = [];
+              storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
+              if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
+                for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
+                  var connection = {
+                    startedAt: resp.data[companyId][i].remoteSessions[r].createdAt,
+                    id: resp.data[companyId][i].remoteSessions[r].id,
+                    sessionId: resp.data[companyId][i].remoteSessions[r].sessionId
+                  };
+                  var user = UsersService.getOneById(resp.data[companyId][i].remoteSessions[r].performer);
+                  connection.performer = user;
+                  storage.devices[companyId][i].OneTimeConnectionData.push(connection);
+                }
+              }
               if(!resp.data[companyId][i].online) {
                 storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineSince;
               }
             }
           }
-          getAgentsByCompany(scope, companyId, callback)
+          getAgentsByCompany(scope, companyId, callback);
+          console.log(storage.devices);
         });
       }
 
