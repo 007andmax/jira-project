@@ -111,7 +111,7 @@
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
                    ng-if="(user && user.avatar)">
               <i class="on bottom"></i>
-              <div class="default-user-avatar" ng-if="!(user && user.avatar)" style="background-color: pink;">
+              <div class="default-user-avatar" ng-if="!(user && user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
                 <span>{{user.firstName[0].toUpperCase()}}</span>
                 <span>{{user.lastName[0].toUpperCase()}}</span>
               </div>
