@@ -112,6 +112,7 @@
 
     if (location === '/reports/remoteAccess') {
       $scope.reportType = 'Detailed';
+      $scope.availableTechusersWoCompany = true;
     }
 
     $scope.reportSetting = {
