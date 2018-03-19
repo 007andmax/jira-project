@@ -28,6 +28,7 @@
     Utils.customizeObj(storage);
 
     $http.get('/company/clients').then(function (resp) {
+      console.log('COMPANIES', resp)
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
           if (custCompany.deletedAt) {
@@ -266,6 +267,7 @@
       var info = Utils.customizeObj({});
 
       $http.get('/company/clients/info').then(function (resp) {
+        console.log('INFO RESP', resp)
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -289,7 +291,6 @@
           }
         }
       });
-
       return info;
     }
 

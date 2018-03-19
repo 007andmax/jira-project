@@ -16,7 +16,6 @@
             primaryPhone;
 
           if (newInfo) {
-
             for (var i = 0; i < newInfo.contacts.length; i++) {
               if (!primaryContact || newInfo.contacts[i].priority > primaryContact.priority)
                 primaryContact = newInfo.contacts[i];
