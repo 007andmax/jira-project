@@ -28,7 +28,6 @@
     Utils.customizeObj(storage);
 
     $http.get('/company/clients').then(function (resp) {
-      console.log('COMPANIES', resp)
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
           if (custCompany.deletedAt) {
@@ -57,7 +56,6 @@
       });
 
     $http.get('/ps/settings').then(function(resp) {
-      //console.log('payment info: ', resp.data);
       Utils.customizeObj(resp.data, companyPaymentInfo);
       checkInit();
     },
@@ -267,7 +265,6 @@
       var info = Utils.customizeObj({});
 
       $http.get('/company/clients/info').then(function (resp) {
-        console.log('INFO RESP', resp)
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
