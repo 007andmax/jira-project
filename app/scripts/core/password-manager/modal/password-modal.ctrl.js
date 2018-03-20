@@ -27,6 +27,7 @@
           'Local user account',
           'Wifi network'
         ];
+        $scope.showCompanyError = false;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.users = UsersService.getClientUsers();
         DevicesService.getDevicesCount($scope, function (resp) {
@@ -283,17 +284,22 @@
 
         $scope.save = function (form) {
           if (form.$valid) {
-            if($scope.editedPasswordCompany && !$scope.editedPassword.companyId) {
-              $scope.setCompanyId();
+            if($scope.editedPassword.companyId || $scope.editedPasswordCompany) {
+              if($scope.editedPasswordCompany && !$scope.editedPassword.companyId) {
+                $scope.setCompanyId();
+              }
+              $scope.loadingInProgress = true;
+              $scope.editedPassword.links = angular.copy($scope.password.links);
+              $scope.editedPassword.onlyForMe = $scope.password.onlyForMe;
+              var toSave = buildDto($scope.editedPassword);
+              PasswordManagerService.save(toSave, function () {
+                $scope.loadingInProgress = false;
+                $uibModalInstance.dismiss();
+              })
+            } else {
+              $scope.showCompanyError = true;
             }
-            $scope.loadingInProgress = true;
-            $scope.editedPassword.links = angular.copy($scope.password.links);
-            $scope.editedPassword.onlyForMe = $scope.password.onlyForMe;
-            var toSave = buildDto($scope.editedPassword);
-            PasswordManagerService.save(toSave, function () {
-              $scope.loadingInProgress = false;
-              $uibModalInstance.dismiss();
-            })
+
           } else {
             $scope.triedToSavePassword = true;
           }
