@@ -1,5 +1,6 @@
 <div class="product-list-report remote-access-summary" convert-to-pdf="/reports/pdf" email-endpoint="/reports/email"
-     selector=".product-list___ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}">
+     selector=".product-list___ticket" disable-selector=".open-pdf-btn" file-name="{{ reportName }}"
+     orientation="{{ !reportRemoteAccess.clientCompanyName ? 'LANDSCAPE' : 'PORTRAIT' }}">
   <p class="report-title">Remote Connection Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
