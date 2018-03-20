@@ -285,6 +285,7 @@
         $scope.save = function (form) {
           $scope.showCompanyError = false;
           if (form.$valid) {
+            // additional checking is  due to dropdown bug - after open and clicking outside there are no value(only viewValue and saved company ID)
             if($scope.editedPassword.companyId || $scope.editedPasswordCompany) {
               if($scope.editedPasswordCompany && !$scope.editedPassword.companyId) {
                 $scope.setCompanyId();
