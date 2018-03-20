@@ -283,6 +283,7 @@
         };
 
         $scope.save = function (form) {
+          $scope.showCompanyError = false;
           if (form.$valid) {
             if($scope.editedPassword.companyId || $scope.editedPasswordCompany) {
               if($scope.editedPasswordCompany && !$scope.editedPassword.companyId) {
