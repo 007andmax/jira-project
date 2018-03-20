@@ -16,70 +16,71 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket">
-  <div class="product-list-ticket" ng-show="!loadingInProgress"  ng-style="{'width': !reportRemoteAccess.clientCompanyName ? '1040' : '995'}">
-    <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
-      <h3>{{reportRemoteAccess.techCompanyName}}</h3>
-      <p ng-if="reportRemoteAccess.type === 'DETAILED'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>
-      </p>
-      <p><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd.MM.yyyy' }}</span>
-      </p>
-    </div>
-
-    <div ng-if="reportRemoteAccess.lines">
-      <div ng-if="reportRemoteAccess.clientCompanyName">
-        <ul class="con-col">
-        <li class="top-product-list-ticket clearfix">
-        <div class="col-md-2"><strong>Date</strong></div>
-        <div class="col-md-2"><strong>Device</strong></div>
-        <div class="col-md-2"><strong>Tech</strong></div>
-        <div class="col-md-2"><strong>Ticket</strong></div>
-        <div class="col-md-2"><strong>Viewer IP</strong></div>
-        <div class="col-md-1"><strong>Start time</strong></div>
-        <div class="col-md-1"><strong>Duration</strong></div>
-        </li>
-        <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
-        on-finish-render="buildPdf()">
-        <div class="col-md-2">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
-        <div class="col-md-2">{{line.deviceName}}</div>
-        <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
-        <div class="col-md-2 ellipsis">{{line.ticketNumber}}</div>
-        <div class="col-md-2 ellipsis">{{line.viewerIp}}</div>
-        <div class="col-md-1">{{ line.startTime }}</div>
-        <div class="col-md-1" on-finish-render="hideLoadingIndicator()">{{line.duration}} min</div>
-        </li>
-        </ul>
-      </div>
-      <div ng-if="!reportRemoteAccess.clientCompanyName">
-        <ul class="con-col">
-          <li class="top-product-list-ticket clearfix">
-            <div class="col-md-1"><strong>Date</strong></div>
-            <div class="col-md-3"><strong>company name</strong></div>
-            <div class="col-md-2"><strong>Device</strong></div>
-            <div class="col-md-2"><strong>Tech</strong></div>
-            <div class="col-md-1"><strong>Ticket</strong></div>
-            <div class="col-md-1"><strong>Viewer IP</strong></div>
-            <div class="col-md-1"><strong>Start time</strong></div>
-            <div class="col-md-1"><strong>Duration</strong></div>
-          </li>
-          <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
-              on-finish-render="buildPdf()">
-            <div class="col-md-1">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
-            <div class="col-md-3">{{line.companyName}}</div>
-            <div class="col-md-2">{{line.deviceName}}</div>
-            <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
-            <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
-            <div class="col-md-1 ellipsis">{{line.viewerIp}}</div>
-            <div class="col-md-1">{{ line.startTime }}</div>
-            <div class="col-md-1" on-finish-render="hideLoadingIndicator()">{{line.duration}} min</div>
-          </li>
-        </ul>
+    <div class="product-list-ticket" ng-show="!loadingInProgress"
+         ng-style="{'width': !reportRemoteAccess.clientCompanyName ? '1040' : '995'}">
+      <div class="header-product-list-ticket" ng-if="reportRemoteAccess.lines">
+        <h3>{{reportRemoteAccess.techCompanyName}}</h3>
+        <p ng-if="reportRemoteAccess.type === 'DETAILED'"><span>Detailed</span> quicktech connect support for <span>{{reportRemoteAccess.clientCompanyName}}</span>
+        </p>
+        <p><span>{{ parseDate(reportRemoteAccess.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportRemoteAccess.endDate) | date: 'dd.MM.yyyy' }}</span>
+        </p>
       </div>
 
-    </div>
+      <div ng-if="reportRemoteAccess.lines">
+        <div ng-if="reportRemoteAccess.clientCompanyName">
+          <ul class="con-col">
+            <li class="top-product-list-ticket clearfix">
+              <div class="col-md-2"><strong>Date</strong></div>
+              <div class="col-md-2"><strong>Device</strong></div>
+              <div class="col-md-2"><strong>Tech</strong></div>
+              <div class="col-md-2"><strong>Ticket</strong></div>
+              <div class="col-md-2"><strong>Viewer IP</strong></div>
+              <div class="col-md-1"><strong>Start time</strong></div>
+              <div class="col-md-1"><strong>Duration</strong></div>
+            </li>
+            <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
+                on-finish-render="buildPdf()">
+              <div class="col-md-2">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
+              <div class="col-md-2">{{line.deviceName}}</div>
+              <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
+              <div class="col-md-2 ellipsis">{{line.ticketNumber}}</div>
+              <div class="col-md-2 ellipsis">{{line.viewerIp}}</div>
+              <div class="col-md-1">{{ line.startTime }}</div>
+              <div class="col-md-1" on-finish-render="hideLoadingIndicator()">{{line.duration}} min</div>
+            </li>
+          </ul>
+        </div>
+        <div ng-if="!reportRemoteAccess.clientCompanyName">
+          <ul class="con-col">
+            <li class="top-product-list-ticket clearfix">
+              <div class="col-md-1"><strong>Date</strong></div>
+              <div class="col-md-3"><strong>Company name</strong></div>
+              <div class="col-md-2"><strong>Device</strong></div>
+              <div class="col-md-2"><strong>Tech</strong></div>
+              <div class="col-md-1"><strong>Ticket</strong></div>
+              <div class="col-md-1"><strong>Viewer IP</strong></div>
+              <div class="col-md-1"><strong>Start time</strong></div>
+              <div class="col-md-1"><strong>Duration</strong></div>
+            </li>
+            <li class="content-product-list-ticket clearfix" ng-repeat="line in reportRemoteAccess.lines"
+                on-finish-render="buildPdf()">
+              <div class="col-md-1">{{ parseDate(line.date) | date: 'dd.MM.yyyy' }}</div>
+              <div class="col-md-3">{{line.companyName}}</div>
+              <div class="col-md-2">{{line.deviceName}}</div>
+              <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
+              <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
+              <div class="col-md-1 ellipsis">{{line.viewerIp}}</div>
+              <div class="col-md-1">{{ line.startTime }}</div>
+              <div class="col-md-1" on-finish-render="hideLoadingIndicator()">{{line.duration}} min</div>
+            </li>
+          </ul>
+        </div>
 
-    <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
-      <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      </div>
+
+      <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
+        <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      </div>
     </div>
-  </div>
   </div>
 </div>
