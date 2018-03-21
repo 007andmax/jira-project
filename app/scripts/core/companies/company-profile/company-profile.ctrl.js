@@ -353,7 +353,7 @@
           } else if(openedTab === 'devices-servers') {
             return device.type === 'server'
           } else if(openedTab === 'devices-devices') {
-            return device.type === 'device'
+            return device.type === 'device' || device.type === 'printer'
           }
         };
 
