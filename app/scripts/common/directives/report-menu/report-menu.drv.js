@@ -21,13 +21,15 @@
       isCustomerTicketOptions: '@?',
       isProductOptions: '@?',
       isProductReportForCompanyTab: '@?',
-      companyId: '=?'
+      companyId: '=?',
+      isSerialNumberOptions: '@?'
     },
     controller: reportMenuCtrl
   });
 
-  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService'];
-  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService) {
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService', 'quicktech.common.services.SharedStateService'];
+
+  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService, SharedStateService) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.exportFileToCsv = exportFileToCsv;
@@ -49,6 +51,7 @@
     $ctrl.isCustomerTicketOptions = $scope.$eval($ctrl.isCustomerTicketOptions);
     $ctrl.isProductOptions = $scope.$eval($ctrl.isProductOptions);
     $ctrl.isProductReportForCompanyTab = $scope.$eval($ctrl.isProductReportForCompanyTab);
+    $ctrl.isSerialNumberOptions = $scope.$eval($ctrl.isSerialNumberOptions);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -70,6 +73,8 @@
     $scope.users = UsersService.getAllUsers();
     $scope.locationTechReport = $location.url();
 
+    $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
+
     // if($ctrl.isProductReportForCompanyTab && $ctrl.companyId) {
     //   ProductsService.getProductsByCompany($scope, $ctrl.companyId, function(resp) {
     //     $scope.autocompleteData = resp
@@ -82,11 +87,11 @@
     $scope.loadProductByCategory = function (categoryId) {
       $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
     };
-    $scope.selectProduct = function(product) {
+    $scope.selectProduct = function (product) {
       $scope.selectedProduct = product;
     };
 
-    $scope.removeProduct = function() {
+    $scope.removeProduct = function () {
       $scope.selectedProduct = undefined;
     };
 
@@ -120,7 +125,7 @@
     };
 
     // to clear company input field when report type changed to Summary
-    $scope.$watch('reportType', function(){
+    $scope.$watch('reportType', function () {
       if (location === '/reports/byProducts' || location === '/reports/byCustomers') {
         if ($scope.reportType === 'Summary') {
           $scope.reportSetting.company = null;
@@ -194,56 +199,54 @@
     }
 
     function sendReportRequestForProductReportOnCompanyTab(reportSettings) {
+      var companyFromProfile = CompaniesService.getOneById($scope.companyProfileSharedState.companyId);
       $scope.errorNassageForCompany = true;
       $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
-      if($scope.techUsers && $scope.techUsers.length >0) {
+      if ($scope.techUsers && $scope.techUsers.length > 0) {
         $scope.users = $scope.users.concat($scope.techUsers);
         //console.log($scope.users)
       }
       var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
       var type = $scope.reportType.toUpperCase();
 
-      if ($scope.startDate && $scope.endDate) {
-        var dataToSend = {
-          type: type
-        };
-        dataToSend.startDate = $scope.startDate;
-        dataToSend.endDate = $scope.endDate;
-        dataToSend.companyId = $ctrl.companyId;
-        if($scope.selectedProduct) {
-          dataToSend.productId = $scope.selectedProduct.versionedId.id
-        }
 
-        lastSentData = dataToSend;
-        $scope.$emit("requestReportData", dataToSend, location, techType);
-
-      } else {
-        $scope.errorNassageForDate = false;
+      var dataToSend = {
+        type: type
+      };
+      dataToSend.startDate = $scope.startDate;
+      dataToSend.endDate = $scope.endDate;
+      dataToSend.companyId = $ctrl.companyId;
+      if ($scope.selectedProduct) {
+        dataToSend.productId = $scope.selectedProduct.versionedId.id
       }
-    }
+      dataToSend.startDate = $filter('date')(new Date($scope.startDate || companyFromProfile.createdAt), 'yyyy/MM/dd'),
+        dataToSend.endDate = $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
 
+      lastSentData = dataToSend;
+      $scope.$emit("requestReportData", dataToSend, location, techType);
+    }
 
 
     function sendReportRequest(reportSettings) {
       $scope.errorNassageForCompany = true;
-      if($ctrl.isProductReportForCompanyTab) {
+      if ($ctrl.isProductReportForCompanyTab) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
-      } else if(reportSettings && reportSettings.company) {
+      } else if (reportSettings && reportSettings.company) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived(reportSettings.company.id);
         //console.log($scope.users)
       } else {
         $scope.users = UsersService.getAllUsers();
       }
-      if($scope.techUsers && $scope.techUsers.length >0) {
+      if ($scope.techUsers && $scope.techUsers.length > 0) {
         $scope.users = $scope.users.concat($scope.techUsers);
         //console.log($scope.users)
       }
 
-      if($ctrl.isProductReportForCompanyTab) {
+      if ($ctrl.isProductReportForCompanyTab) {
 
         sendReportRequestForProductReportOnCompanyTab(reportSettings)
 
-      } else if  (!$ctrl.isTechReport) {
+      } else if (!$ctrl.isTechReport) {
         var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
         var type = $scope.reportType.toUpperCase();
         if ($ctrl.isRadioButtonHidden) {
@@ -273,7 +276,7 @@
                 $scope.errorNassageForDate = false;
               }
             }
-          } else if(location === '/reports/ticket-report') {
+          } else if (location === '/reports/ticket-report') {
             if (reportSettings.company) {
               var dataToSend = {
                 company: reportSettings.company,
@@ -312,7 +315,7 @@
               dataToSend.startDate = $scope.startDate;
               dataToSend.endDate = $scope.endDate;
               lastSentData = dataToSend;
-              if($scope.selectedProduct) {
+              if ($scope.selectedProduct) {
                 dataToSend.productId = $scope.selectedProduct.versionedId.id
               }
               $scope.$emit("requestReportData", dataToSend, location, techType);
@@ -327,7 +330,7 @@
               };
               dataToSend.startDate = $scope.startDate;
               dataToSend.endDate = $scope.endDate;
-              if($scope.selectedProduct) {
+              if ($scope.selectedProduct) {
                 dataToSend.productId = $scope.selectedProduct.versionedId.id
               }
               if (reportSettings.company) {
@@ -379,8 +382,8 @@
       //$scope.$emit("requestReportData", dataToSend, location)
     }
 
-    $scope.$watch('reportType', function(value) {
-      if(value) {
+    $scope.$watch('reportType', function (value) {
+      if (value) {
         $scope.previousReportType = value;
         $scope.reportType = value;
         // console.log('$scope.reportType', $scope.reportType)
