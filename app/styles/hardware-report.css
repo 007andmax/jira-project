@@ -1412,6 +1412,10 @@
   width: 100%;
 }
 
+.list-of-product .report-title {
+  left: 30px;
+}
+
 .company-report {
   width: 100%;
   padding: 0;
