@@ -204,12 +204,9 @@
       $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
       if ($scope.techUsers && $scope.techUsers.length > 0) {
         $scope.users = $scope.users.concat($scope.techUsers);
-        //console.log($scope.users)
       }
       var techType = $scope.techReportType.split(' ').join('_').toUpperCase();
       var type = $scope.reportType.toUpperCase();
-
-
       var dataToSend = {
         type: type
       };
@@ -233,13 +230,11 @@
         $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
       } else if (reportSettings && reportSettings.company) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived(reportSettings.company.id);
-        //console.log($scope.users)
       } else {
         $scope.users = UsersService.getAllUsers();
       }
       if ($scope.techUsers && $scope.techUsers.length > 0) {
         $scope.users = $scope.users.concat($scope.techUsers);
-        //console.log($scope.users)
       }
 
       if ($ctrl.isProductReportForCompanyTab) {

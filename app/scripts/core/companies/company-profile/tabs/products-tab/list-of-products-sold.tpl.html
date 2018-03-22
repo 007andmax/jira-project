@@ -19,7 +19,8 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket">
-  <div class="product-list-ticket product-list-ticket-pdf" ng-show="!loadingInProgress">
+  <div class="product-list-ticket product-list-ticket-pdf" ng-if="!loadingInProgress">
+    <div ng-if="reportByProducts.lines" ng-controller="quicktech.core.companies.companyProductReportCtrl">
     <div class="header-product-list-ticket" ng-if="reportByProducts.lines">
       <h3>{{ reportByProducts.techCompanyName }}</h3>
       <p ng-show="reportByProducts.type ==='DETAILED' ">Detailed sales for <span>{{ reportByProducts.clientCompanyName }}</span></p>
@@ -31,8 +32,8 @@
       <ul class="customer-det-col">
         <li class="top-product-list-ticket product-list-ticket-grid clearfix">
           <div class="col-md-1"><strong>
-            <label class="control checkbox pull-left">
-              <input type="checkbox">
+            <label class="control checkbox pull-left hide-in-report">
+              <input type="checkbox" ng-checked="isAllLinesAreChecked()" ng-click="selectAllLines()">
               <span class="control-indicator"></span>
             </label>
           </strong></div>
@@ -48,10 +49,10 @@
           <!--<div class="col-md-1"><strong>Discount(amount)</strong></div>-->
         </li>
         <li class="content-product-list-ticket product-list-ticket-grid clearfix" ng-repeat="product in reportByProducts.lines"
-            on-finish-render="buildPdf()" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}">
+            on-finish-render="buildPdf()" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}" ng-class="{'hide-in-report': !selectedLinesIds[product.lineId]}">
           <div class="col-md-1">
-            <label class="control checkbox pull-left">
-              <input type="checkbox">
+            <label class="control checkbox pull-left hide-in-report">
+              <input type="checkbox" ng-model="selectedLinesIds[product.lineId]" ng-change="selectLine(product)">
               <span class="control-indicator"></span>
             </label>
           </div>
@@ -73,6 +74,7 @@
       <div class="col-md-1" style="margin-right: 20px;"><br> <strong><span>{{reportByProducts.salePriceSum | currency: '$': 2}}</span></strong></div>
       <div class="col-md-2"><br> <strong><span>{{reportByProducts.purchaseCostSum | currency: '$': 2}}</span></strong></div>
     </div>
+  </div>
   </div>
   </div>
 </div>

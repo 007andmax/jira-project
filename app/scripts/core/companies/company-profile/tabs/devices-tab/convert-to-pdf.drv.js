@@ -9,9 +9,11 @@
       link: function (scope, element, attrs) {
         var disableElement, url = '', selectedHtml;
         disableOpenPdfBtn();
+        var savedFileName = '';
 
         attrs.$observe('fileName', function (fileName) {
           if (fileName) {
+            savedFileName = fileName;
             scope.$on('buildPdf-' + fileName, getPdfIdFromRest);
           }
         });
@@ -64,6 +66,7 @@
             canvas = document.createElement('canvas');
 
           target.find('.ng-hide').remove();
+          target.find('.hide-in-report').remove();
 
           if (sourceSVGs && sourceSVGs.length) {
             var svgs = target.find('svg');
