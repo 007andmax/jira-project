@@ -2,8 +2,8 @@
 
 (function () {
   angular.module("quicktech.core.companies").directive('convertToPdf',
-    ['$http', '$timeout', 'Downloader', 'quicktech.common.services.UserNotificationService',
-    function ($http, $timeout, Downloader, UserNotificationService) {
+    ['$http', '$timeout', 'Downloader', 'quicktech.common.services.UserNotificationService', '$rootScope',
+    function ($http, $timeout, Downloader, UserNotificationService, $rootScope) {
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -16,6 +16,13 @@
             savedFileName = fileName;
             scope.$on('buildPdf-' + fileName, getPdfIdFromRest);
           }
+        });
+
+        $rootScope.$watch('reportLineChanged', function(resp) {
+          if(resp === true) {
+            getPdfIdFromRest();
+          }
+          $rootScope.reportLineChanged = false;
         });
 
         scope.openInPdf = function (callback) {

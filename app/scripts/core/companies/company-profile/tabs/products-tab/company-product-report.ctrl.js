@@ -3,14 +3,19 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProductReportCtrl',
-    ['$scope',
-      function ($scope ) {
+    ['$scope', '$rootScope', '$timeout', 'quicktech.common.services.PermissionsService',
+      function ($scope, $rootScope, $timeout, PermissionsService ) {
+
+        $scope.PermissionsService = PermissionsService;
 
         $scope.selectedLines = [];
         $scope.selectedLinesIds = {};
         var lineId = 0;
+        $rootScope.reportLineChanged = false;
 
         $scope.selectLine = function(line) {
+
+
           var ind = $scope.selectedLines.indexOf(line);
           if (ind === -1) {
             $scope.selectedLines.push(line);
@@ -19,6 +24,9 @@
             $scope.selectedLines.splice(ind, 1);
             $scope.selectedLinesIds[line.lineId] = false;
           }
+          $timeout(function () {
+            $rootScope.reportLineChanged = true;
+          }, 1000);
         };
 
         $scope.isLineSelected = function(line) {

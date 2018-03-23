@@ -27,9 +27,9 @@
     controller: reportMenuCtrl
   });
 
-  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService', 'quicktech.common.services.SharedStateService'];
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService', 'quicktech.common.services.SharedStateService', '$rootScope'];
 
-  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService, SharedStateService) {
+  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService, SharedStateService, $rootScope) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.exportFileToCsv = exportFileToCsv;
@@ -94,6 +94,11 @@
     $scope.removeProduct = function () {
       $scope.selectedProduct = undefined;
     };
+
+    $scope.sendNewHTMLForPdf = function() {
+      console.log('new HTML send request');
+      $rootScope.reportLineChanged = true;
+    }
 
     $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
     $scope.techUsers = UsersService.getTechUsers();

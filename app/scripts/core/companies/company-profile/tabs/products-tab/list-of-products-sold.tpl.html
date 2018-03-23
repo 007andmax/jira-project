@@ -53,7 +53,7 @@
             </li>
             <li class="content-product-list-ticket clearfix"
                 ng-repeat="product in reportByProducts.lines"
-                on-finish-render="buildPdf()" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}"
+                on-finish-render="buildPdf()"
                 ng-class="{'hide-in-report': !selectedLinesIds[product.lineId]}">
               <div style="width: 2%;padding: 0 5px;" class="col-md-1">
                 <label class="control checkbox hide-in-report">
@@ -67,10 +67,10 @@
               <div class="col-md-3">
                 {{product.description}}
               </div>
-              <div class="col-md-2">{{product.ticketNumber }}</div>
-              <div class="col-md-2">{{product.invoiceNumber }}</div>
+              <div class="col-md-2" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}">{{product.ticketNumber }}</div>
+              <div class="col-md-2" ng-style="{'color': product.invoiceNumber ? 'green' : 'none'}">{{product.invoiceNumber }}</div>
               <!--<div class="col-md-1">{{product.count}}</div>-->
-              <div class="col-md-1">{{product.purchaseCost | currency: '$': 2}}</div>
+              <div class="col-md-1" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{product.purchaseCost | currency: '$': 2}}</div>
               <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
                 {{product.salePrice | currency: '$': 2}}
               </div>
