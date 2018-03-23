@@ -1415,7 +1415,12 @@
 .list-of-product .report-title {
   left: 30px;
 }
-
+.list-of-product .dropdown-email.product-report-btn.dropdown.open .dropdown-menu{
+  right: -90px;
+}
+.list-of-product .product-report-btn.dropdown.open .dropdown-menu{
+  right: 0;
+}
 .company-report {
   width: 100%;
   padding: 0;
