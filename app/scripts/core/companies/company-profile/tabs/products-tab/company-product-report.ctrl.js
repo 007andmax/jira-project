@@ -39,7 +39,6 @@
               $scope.selectedLinesIds[line.lineId] = false;
             });
             $scope.selectedLines = [];
-
           }
         };
 

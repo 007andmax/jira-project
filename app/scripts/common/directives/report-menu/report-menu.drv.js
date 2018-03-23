@@ -213,6 +213,9 @@
       dataToSend.startDate = $scope.startDate;
       dataToSend.endDate = $scope.endDate;
       dataToSend.companyId = $ctrl.companyId;
+      if($scope.serialNumber) {
+        dataToSend.serialNumber = $scope.serialNumber
+      }
       if ($scope.selectedProduct) {
         dataToSend.productId = $scope.selectedProduct.versionedId.id
       }
