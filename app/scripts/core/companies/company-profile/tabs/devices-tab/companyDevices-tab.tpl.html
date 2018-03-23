@@ -54,23 +54,26 @@
         <div class="company-device-name"
              ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}" ng-show="!showDeviceLabelEditForm">
 
-          <i class="without-device-type" ng-style="{'display': !checkAgentType(agent.type)   ? 'inline-block' : ''}"></i>
+          <i class="without-device-type"
+             ng-style="{'display': !checkAgentType(agent.type)   ? 'inline-block' : ''}"></i>
 
           <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
           <i class="devices-phone" ng-show="agent.type === 'device'"></i>
           <i class="devices-printer" ng-show="agent.type === 'printer'"></i>
           <i class="devices-server" ng-show="agent.type === 'server'"></i>
 
-          <div ng-mouseover="showDeviceLabelEditButtom = true"
+          <div style="margin-top: -4px;"
+               ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
-              <span ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName || agent.ip}}</span>
+              <span
+                ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName || agent.ip}}</span>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
-            <p class="label label-light ellipsis"  ng-click="openDevicesDetails = !openDevicesDetails">
-              <div ng-show="isLabel(agent)">{{agent.hostName || agent.ip}}</div>
+            <p class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">
+            <div ng-show="isLabel(agent)">{{agent.hostName || agent.ip}}</div>
             </p>
 
           </div>
@@ -85,11 +88,11 @@
       <div class="col-md-3">
         <!--<div class="dashboard-active-device" ng-if="!agent.agentConnected"></div>-->
 
-        <div uib-dropdown  ng-if="agent.OneTimeConnectionData.length > 0">
+        <div uib-dropdown ng-if="agent.OneTimeConnectionData.length > 0">
           <div uib-dropdown-toggle>
             <div class="dashboard-active-device"></div>
           </div>
-          <div class="dropdown-menu dropdown-tooltip" role="menu"  style="top: auto !important; bottom: 100% !important">
+          <div class="dropdown-menu dropdown-tooltip" role="menu" style="top: auto !important; bottom: 100% !important">
             <div ng-repeat="connection in agent.OneTimeConnectionData">
               <p><span>{{connection.performer.firstName}}</span>
                 {{connection.performer.lastName}}</p>
@@ -216,12 +219,13 @@
         </div>
         <div class="pull-right" ng-if="!agent.online">
           <div class="btn btn-icn btn-default pull-left has-tooltip">
-            <i class="dev-btn devices-remote devices-remote-non-active"  style="margin-left: 10px;"></i>
+            <i class="dev-btn devices-remote devices-remote-non-active" style="margin-left: 10px;"></i>
           </div>
         </div>
 
         <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-          <div uib-dropdown-toggle uib-tooltip="more" tooltip-placement="top-left" tooltip-append-to-body="true" tooltip-popup-delay="2000">
+          <div uib-dropdown-toggle uib-tooltip="more" tooltip-placement="top-left" tooltip-append-to-body="true"
+               tooltip-popup-delay="2000">
             <i class="icn-more-light-grey icn-sm pointer dev-btn"></i>
           </div>
           <ul class="dropdown-menu" role="menu">
