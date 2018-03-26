@@ -294,8 +294,8 @@
              ng-class="{'has-error': sendMailForm.$dirty && (!$ctrl.emailToNotify || !$ctrl.emailPattern.test($ctrl.emailToNotify))}">
           <input class="form-control" type="text" ng-model="$ctrl.emailToNotify"> </input>
           <div>
-            <i class="icn-sm icn-label-save" ng-click="$ctrl.addEmailToNotify($ctrl.emailToNotify, sendMailForm)"></i>
-            <i class="icn-sm icn-remove-old" ng-click="$ctrl.emailToNotify = ''"></i>
+            <i style="margin: 5px 0 0;" class="icn-sm icn-label-save" ng-click="$ctrl.addEmailToNotify($ctrl.emailToNotify, sendMailForm)"></i>
+            <i style="margin-top: -18px;" class="icn-sm icn-remove-old" ng-click="$ctrl.emailToNotify = ''"></i>
           </div>
         </div>
         <ul class="scrollable">
