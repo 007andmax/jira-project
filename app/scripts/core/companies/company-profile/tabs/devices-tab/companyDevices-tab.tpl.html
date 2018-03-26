@@ -55,7 +55,7 @@
              ng-class="{'circle-green' : agent.online, 'circle-red': !agent.online}" ng-show="!showDeviceLabelEditForm">
 
           <i class="without-device-type"
-             ng-style="{'display': !checkAgentType(agent.type)   ? 'inline-block' : ''}"></i>
+             ng-style="{'display': !checkAgentType(agent.type) ? 'inline-block' : ''}"></i>
 
           <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
           <i class="devices-phone" ng-show="agent.type === 'device'"></i>
