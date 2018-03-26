@@ -10,20 +10,20 @@
           users: UsersService.getAllByCompanyId($scope.company.id)
         };
 
-        $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
+        if($scope.company) {
           var primaryContact,
             primaryAddress,
             primaryPhone;
 
-          if (newInfo) {
-            for (var i = 0; i < newInfo.contacts.length; i++) {
-              if (!primaryContact || newInfo.contacts[i].priority > primaryContact.priority)
-                primaryContact = newInfo.contacts[i];
+          if ($scope.company.companyInfo) {
+            for (var i = 0; i < $scope.company.companyInfo.contacts.length; i++) {
+              if (!primaryContact || $scope.company.companyInfo.contacts[i].priority > primaryContact.priority)
+                primaryContact = $scope.company.companyInfo.contacts[i];
             }
 
-            for (var i = 0; i < newInfo.addresses.length; i++) {
-              if (newInfo.addresses[i].isPrimary) {
-                primaryAddress = newInfo.addresses[i];
+            for (var i = 0; i < $scope.company.companyInfo.addresses.length; i++) {
+              if ($scope.company.companyInfo.addresses[i].isPrimary) {
+                primaryAddress = $scope.company.companyInfo.addresses[i];
               }
             }
 
@@ -41,7 +41,7 @@
           } else {
             $scope.location = '';
           }
-        });
+        }
 
         $scope.getUserSubscribeClass = function () {
           if (!$scope.primaryContact || !$scope.primaryContact.subscription) {
