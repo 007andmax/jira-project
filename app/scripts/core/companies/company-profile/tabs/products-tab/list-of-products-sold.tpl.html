@@ -21,7 +21,8 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket">
-    <div class="product-list-ticket product-list-ticket-pdf company-report" ng-if="!loadingInProgress">
+    <div class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
+         ng-if="!loadingInProgress">
       <div ng-if="reportByProducts.lines" ng-controller="quicktech.core.companies.companyProductReportCtrl">
         <div class="header-product-list-ticket" ng-if="reportByProducts.lines">
           <h3>{{ reportByProducts.techCompanyName }}</h3>
@@ -67,10 +68,16 @@
               <div class="col-md-3">
                 {{product.description}}
               </div>
-              <div class="col-md-2" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}">{{product.ticketNumber }}</div>
-              <div class="col-md-2" ng-style="{'color': product.invoiceNumber ? 'green' : 'none'}">{{product.invoiceNumber }}</div>
+              <div class="col-md-2" ng-style="{'color': !product.invoiceNumber ? 'red' : 'none'}">{{product.ticketNumber
+                }}
+              </div>
+              <div class="col-md-2" ng-style="{'color': product.invoiceNumber ? 'green' : 'none'}">
+                {{product.invoiceNumber }}
+              </div>
               <!--<div class="col-md-1">{{product.count}}</div>-->
-              <div class="col-md-1" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{product.purchaseCost | currency: '$': 2}}</div>
+              <div class="col-md-1" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{product.purchaseCost |
+                currency: '$': 2}}
+              </div>
               <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
                 {{product.salePrice | currency: '$': 2}}
               </div>
