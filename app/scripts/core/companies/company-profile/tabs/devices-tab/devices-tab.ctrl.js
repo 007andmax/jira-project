@@ -28,6 +28,9 @@
         $scope.agent.timing.offline = 0;
         $scope.agent.timing.uptimeForOrdering = 0;
 
+        $scope.orderDevicesBy = 'label';
+        $scope.uptimeOrder = '';
+
         $scope.agentLabelEditForm = {};
         // $scope.deviceOrder = 'hostName';
         // $scope.changeOrder = function(order) {
@@ -110,8 +113,7 @@
           });
         };
 
-        $scope.orderDevicesBy = 'hostName';
-        $scope.uptimeOrder = '';
+
         $scope.sortDevicesTab = function (option, uptimeOption) {
           if (option === $scope.orderDevicesBy) {
             if (option[0] === '-') {

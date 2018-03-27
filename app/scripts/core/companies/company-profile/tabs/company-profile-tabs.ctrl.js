@@ -176,7 +176,7 @@
           if(uptimeOption) {
             if( $scope.uptimeOrder) {
               $scope.uptimeOrder = '';
-              $scope.orderDevicesBy = 'hostName'
+              $scope.orderDevicesBy = 'label'
             }else {
               $scope.uptimeOrder = 'timing.uptimeForOrdering';
             }

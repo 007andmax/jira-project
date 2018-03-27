@@ -726,7 +726,8 @@
         <div class="left-panel-hide-filter">
           <div class="left-panel-title left-panel-title-hover"
                ng-click="CompanyProfileProductsPage = !CompanyProfileProductsPage"
-               ng-class="{'left-panel-active': CompanyProfileProductsPage}">
+               ng-class="{'left-panel-active': CompanyProfileProductsPage}"
+               ui-sref="companyProfile({ tabName: 'products' })">
             Products
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileProductsPage}"></i>
           </div>

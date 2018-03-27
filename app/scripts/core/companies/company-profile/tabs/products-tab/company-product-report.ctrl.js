@@ -42,6 +42,11 @@
               lineId++;
               $scope.selectedLinesIds[line.lineId] = true;
             });
+
+            $timeout(function () {
+              $rootScope.reportLineChanged = true;
+            }, 1000);
+
           } else {
             $scope.reportByProducts.lines.forEach(function(line){
               $scope.selectedLinesIds[line.lineId] = false;
