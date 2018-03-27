@@ -12,6 +12,7 @@
         var headerSharedState = SharedStateService.getSharedState('passwordsHeader');
 
         $scope.passwords = [];
+        $scope.companyProfilePasswords = [];
         $scope.orderPasswords = {
           field: 'company',
           reverse: false
@@ -19,6 +20,11 @@
 
         PasswordManagerService.getRecords(function (resp) {
           $scope.passwords = angular.copy(resp);
+          if($scope.company && $scope.company.id) {
+            $scope.companyProfilePasswords = $scope.passwords.filter(function(pass) {
+              return pass.companyId === $scope.company.id
+            })
+          }
         });
         DevicesService.getGadgets(function (resp) {
           $scope.gadgets = resp;

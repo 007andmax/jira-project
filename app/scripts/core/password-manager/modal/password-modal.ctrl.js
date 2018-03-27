@@ -5,16 +5,20 @@
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordModalCtrl',
     [
       '$scope', '$uibModalInstance', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
-      'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem', 'isEditable', 'quicktech.common.services.SharedStateService',
+      'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem', 'isEditable', 'quicktech.common.services.SharedStateService', 'presetupCompany',
       function ($scope, $uibModalInstance, PasswordManagerService, CompaniesService, UsersService, DevicesService,
-                UserConfirmationsService, resolvedExistedItem, isEditable, SharedStateService) {
+                UserConfirmationsService, resolvedExistedItem, isEditable, SharedStateService, presetupCompany) {
         $scope.editedPassword = angular.copy(resolvedExistedItem);
+        $scope.presetupCompany = angular.copy(presetupCompany);
         var isEdit = resolvedExistedItem && resolvedExistedItem.id;
         $scope.isEditable = isEditable;
 
         $scope.passwordSharedState = SharedStateService.getSharedState('passwordsHeader');
         if($scope.passwordSharedState && $scope.passwordSharedState.filter && $scope.passwordSharedState.filter.companyId) {
           $scope.editedPasswordCompany = CompaniesService.getOneById($scope.passwordSharedState.filter.companyId)
+        }
+        if($scope.presetupCompany) {
+          $scope.editedPasswordCompany = CompaniesService.getOneById($scope.presetupCompany.id)
         }
         $scope.templates = [
           'Office 365 account',

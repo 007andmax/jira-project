@@ -54,6 +54,8 @@
         $scope.dropdownByIndustryCompanyPage = false;
         $scope.dropdownByIndustryUserPage = false;
         $scope.dropdownByCompanyUserPage = false;
+        $scope.dropdownSearchByDeviceCompanyPasswordManager = false;
+        $scope.dropdownSearchByUserCompanyPasswordManager = false;
 
         $scope.dropdownByTechUserCompanyProfilePage = false;
         $scope.dropdownByUserCompanyProfilePage = false;
@@ -372,6 +374,7 @@
         });
 
         $scope.$watch('passwordSharedStateFilterDeviceId', function(value) {
+          console.log(value)
           if(value !== '' && value !== ' ') {
             passwordSharedState.filter.deviceId = value;
           }

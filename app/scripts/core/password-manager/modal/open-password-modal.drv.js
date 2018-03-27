@@ -7,12 +7,18 @@
       return {
         restrict: 'A',
         scope: {
-          item: '=?openPasswordModal'
+          item: '=?openPasswordModal',
+          company: '=?companyForPasswordModal'
         },
         link: function ($scope, element, attrs) {
           var existingItem = false;
+          var presetupCompany = false;
           if ($scope.item || attrs.item) {
             existingItem = function () { return $scope.item; };
+          }
+
+          if($scope.company || attrs.company) {
+            presetupCompany = function () { return $scope.company; };
           }
 
           element.click(function () {
@@ -29,6 +35,7 @@
               animation: true,
               resolve: {
                 resolvedExistedItem: existingItem,
+                presetupCompany: presetupCompany,
                 isEditable: function () {
                   return typeof attrs.notEditable !== 'string';
                 }
