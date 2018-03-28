@@ -124,6 +124,18 @@
             result = result && isDeviceFound;
           }
 
+          if (filter.userId) {
+            var isDeviceFound = false;
+            for (var i = 0; i < value.links.length; i++) {
+              var link = value.links[i];
+              if (link.userId === filter.userId) {
+                isDeviceFound = true;
+                break;
+              }
+            }
+            result = result && isDeviceFound;
+          }
+
           if (filter.template) {
             result = result && filter.template === value.template;
           }

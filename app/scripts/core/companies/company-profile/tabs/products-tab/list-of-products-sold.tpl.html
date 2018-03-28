@@ -55,9 +55,9 @@
             <li class="content-product-list-ticket clearfix"
                 ng-repeat="product in reportByProducts.lines"
                 on-finish-render="buildPdf()"
-                ng-class="{'hide-in-report': !selectedLinesIds[product.lineId]}">
+                ng-class="{'hide-in-report': elementChecker(product)}">
               <div style="width: 2%;padding: 0 5px;" class="col-md-1">
-                <label class="control checkbox hide-in-report">
+                <label class="control checkbox ">
                   <input type="checkbox" ng-model="selectedLinesIds[product.lineId]" ng-change="selectLine(product)">
                   <span class="control-indicator"></span>
                 </label>

@@ -33,6 +33,10 @@
           return  $scope.selectedLines.indexOf(line) === -1
         };
 
+        $scope.elementChecker = function(line) {
+          return !$scope.selectedLinesIds[line.lineId]
+        }
+
         $scope.selectAllLines = function() {
           if( $scope.selectedLines.length < 1 || $scope.selectedLines.length !== $scope.reportByProducts.lines.length) {
             $scope.selectedLines = [];

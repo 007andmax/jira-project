@@ -267,7 +267,6 @@
           }
         });
 
-
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
           if (value !== "" && value !== " " ) {
             ticketsSharedState.filter.completed = false;
@@ -378,6 +377,16 @@
           if(value !== '' && value !== ' ') {
             passwordSharedState.filter.deviceId = value;
           }
+        });
+
+        $scope.rt = function(){
+          console.log($scope.passwordSharedStateFilterDeviceId)
+        };
+        $scope.pm= {}
+        $scope.$watch(function(){
+          return $scope.pm.passwordSharedStateFilterDeviceId
+        }, function(value) {
+          console.log(value);
         });
 
         $scope.$watch('passwordSharedStateFilterTemplate', function(value) {

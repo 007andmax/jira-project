@@ -7,7 +7,7 @@
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        var disableElement, url = '', selectedHtml;
+        var disableElement, selectedHtml;
         disableOpenPdfBtn();
         var savedFileName = '';
 
@@ -25,11 +25,12 @@
           $rootScope.reportLineChanged = false;
         });
 
+
         scope.openInPdf = function (callback) {
           if (!disableElement.length || (disableElement.hasClass('disabled') || typeof disableElement.attr('disabled') === 'string')) {
             return;
           }
-          var newWindow = window.open(url);
+          var newWindow = window.open($rootScope.reportUrl);
           callback && callback(newWindow);
         };
 
@@ -37,7 +38,7 @@
           if (!disableElement.length || (disableElement.hasClass('disabled') || typeof disableElement.attr('disabled') === 'string')) {
             return;
           }
-          Downloader.downloadByUrl(url, attrs.fileName);
+          Downloader.downloadByUrl($rootScope.reportUrl, attrs.fileName);
         };
 
         scope.sendToMail = function (emails, callback) {
@@ -66,7 +67,7 @@
         function getPdfIdFromRest() {
           disableOpenPdfBtn();
 
-          var source = element.find(attrs.selector);
+          var source = $(attrs.selector);
           var target = source.clone(),
             unknownLoadingStr = 'Loading...',
             sourceSVGs = source.find('svg'),
@@ -117,7 +118,8 @@
           };
           $http.post(attrs.convertToPdf, dto).then(function (resp) {
             if (resp.data) {
-              url = resp.data.url || 'data:application/pdf;base64,' + resp.data;
+              $rootScope.reportUrl = resp.data.url || 'data:application/pdf;base64,' + resp.data;
+              //scope.$apply();
 
               disableElement = angular.element(document).find(attrs.disableSelector);
               if (disableElement.length) {
