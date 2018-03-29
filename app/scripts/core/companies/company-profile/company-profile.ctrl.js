@@ -61,7 +61,7 @@
 
           $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
             $scope.companyInfo.contacts[0].subscription.invoice &&
-            UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
+            UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
               return user.subscription.invoice;
             }).length <= 1;
 
@@ -76,7 +76,7 @@
 
           if ($scope.companyInfo.clientType === 'VENDOR') {
             $scope.companyInfo.hasProducts = false;
-            CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
+            CompaniesService.isVendorHasProducts($stateParams.companyId, function (resp) {
               $scope.companyInfo.hasProducts = resp.isProductExist;
             });
           }
@@ -145,7 +145,7 @@
 
         });
 
-        DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
+        DevicesService.getSomeInfoForDevices($stateParams.companyId, function (resp) {
           $scope.isDomainPresent = resp.domainPresent;
           $scope.allowAgentInstall = resp.allowAgentInstall;
         });
@@ -163,7 +163,7 @@
         });
 
         $scope.archiveCompany = function () {
-          var company = CompaniesService.getOneById($scope.company.id);
+          var company = CompaniesService.getOneById($stateParams.companyId);
           var confirmMessage = 'Do you want to archive ' + company.name + '? All related users and service agreements will be archived and all agents will be uninstalled.';
           var confirmButton = 'Yes';
 
