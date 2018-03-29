@@ -125,15 +125,15 @@
           }
 
           if (filter.userId) {
-            var isDeviceFound = false;
+            var isUserFound = false;
             for (var i = 0; i < value.links.length; i++) {
               var link = value.links[i];
               if (link.userId === filter.userId) {
-                isDeviceFound = true;
+                isUserFound = true;
                 break;
               }
             }
-            result = result && isDeviceFound;
+            result = result && isUserFound;
           }
 
           if (filter.template) {

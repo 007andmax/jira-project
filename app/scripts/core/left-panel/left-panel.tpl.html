@@ -733,9 +733,9 @@
                      ng-show="dropdownSearchByDeviceCompanyPasswordManager">
                   <div class="x-mark-wrapper">
                     <input type="text" class="form-control has-dropdown pointer"
-                           autocomplete="off" ng-model="pm.passwordSharedStateFilterDeviceId"
+                           autocomplete="off" ng-model="companyProfilePasswordsFilter.deviceId"
                            typeahead-input-formatter="getDeviceNameById($model)"
-                           uib-typeahead="device.id as device.hostName || device.ip for device in devices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
+                           uib-typeahead="device.id as device.hostName || device.ip for device in companyDevices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
@@ -755,13 +755,14 @@
                 <div class="filter-left-panel category-expanded angular-animate class-oleg"
                      ng-show="dropdownSearchByUserCompanyPasswordManager">
                   <div class="x-mark-wrapper">
-                    <!--<input type="text" class="form-control has-dropdown pointer"-->
-                           <!--placeholder="Select Tech User"-->
-                           <!--autocomplete="off" ng-model="passwordSharedStateFilterDeviceId"-->
-                           <!--uib-typeahead="device.id as device.hostName || device.ip for device in devices |  orderBy:'hostName'"-->
-                           <!--qt-typeahead-async-show-on-focus smart-dropdown-menu-position-->
-                           <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
-                    <!--<div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>-->
+                    <input type="text" class="form-control has-dropdown pointer"
+                           placeholder="Select User"
+                           typeahead-input-formatter="getUserByID($model)"
+                           autocomplete="off" ng-model="companyProfilePasswordsFilter.userId"
+                           uib-typeahead="client.id as getFullName(client) for client in companyProfilePageUsersList | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                           qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                    <div typeahead-input-icon="passwordSharedState.filter.userId"></div>
                   </div>
 
                 </div>

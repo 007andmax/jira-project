@@ -373,20 +373,29 @@
         });
 
         $scope.$watch('passwordSharedStateFilterDeviceId', function(value) {
-          console.log(value)
           if(value !== '' && value !== ' ') {
             passwordSharedState.filter.deviceId = value;
           }
         });
 
-        $scope.rt = function(){
-          console.log($scope.passwordSharedStateFilterDeviceId)
-        };
-        $scope.pm= {}
+        $scope.companyProfilePasswordsFilter= {};
+
         $scope.$watch(function(){
-          return $scope.pm.passwordSharedStateFilterDeviceId
+          return $scope.companyProfilePasswordsFilter.deviceId
         }, function(value) {
           console.log(value);
+          if(value !== '' && value !== ' ') {
+            passwordSharedState.filter.deviceId = value;
+          }
+        });
+
+        $scope.$watch(function(){
+          return $scope.companyProfilePasswordsFilter.userId
+        }, function(value) {
+          console.log(value);
+          if(value !== '' && value !== ' ') {
+            passwordSharedState.filter.userId = value;
+          }
         });
 
         $scope.$watch('passwordSharedStateFilterTemplate', function(value) {
@@ -950,6 +959,9 @@
             });
             $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId, function(resp) {
               $scope.companyForCompanyProfile = resp;
+            });
+            $scope.companyDevices = $scope.devices.filter(function(device) {
+              return device.companyId === companyId;
             })
           }
 
