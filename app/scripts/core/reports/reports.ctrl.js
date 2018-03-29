@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state',
-      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope',
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -186,42 +186,42 @@
           switch (location) {
             case('/reports/remoteAccess') :
               getReportRemoteAccess(data);
-              $scope.reportName = 'remote_access_report';
+              $rootScope.reportName = 'remote_access_report';
               break;
             case('/reports/byTaxes'):
               getReportByTaxes(data);
-              $scope.reportName = 'taxes_report';
+              $rootScope.reportName = 'taxes_report';
               break;
             case('/reports/byCustomers'):
               getReportByCustomers(data);
-              $scope.reportName = 'sales_report';
+              $rootScope.reportName = 'sales_report';
               break;
             case('/reports/byProducts'):
               getReportByProducts(data);
-              $scope.reportName = 'products_report';
+              $rootScope.reportName = 'products_report';
               break;
             case('/reports/byTechSold'):
               getReportByTechSold(data);
-              $scope.reportName = 'tech_sold_report';
+              $rootScope.reportName = 'tech_sold_report';
               break;
             case('/reports/techReport-TicketCreated'):
               getTechReportTickedCreated(data);
               techReportTypeForChart = techReportType;
-              $scope.reportName = 'ticket_created';
+              $rootScope.reportName = 'ticket_created';
               break;
             case('/reports/techReport-ProductSales'):
               getTechReportProductSales(data);
               techReportTypeForChart = techReportType;
-              $scope.reportName = 'product_sold';
+              $rootScope.reportName = 'product_sold';
               break;
             case('/reports/accountsReceivable'):
               getReportAccountsReceivable(data);
-              $scope.reportName = 'accounts_receivable';
+              $rootScope.reportName = 'accounts_receivable';
               break;
             case('/reports/ticket-report'):
               gerReportTicketReport(data);
               $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $scope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');;
+              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');;
               break;
             default:
               console.log("wrong location")
@@ -229,7 +229,7 @@
         }
         if($state.includes('companyProfile')) {
           getReportByProducts(data);
-          $scope.reportName = 'products_report';
+          $rootScope.reportName = 'products_report';
         }
       });
 
@@ -371,9 +371,9 @@
               break;
             }
           }
-          allRendersFinished && $scope.$broadcast('buildPdf-' + $scope.reportName);
+          allRendersFinished && $scope.$broadcast('buildPdf-' + $rootScope.reportName);
         } else {
-          $scope.$broadcast('buildPdf-' + $scope.reportName);
+          $scope.$broadcast('buildPdf-' + $rootScope.reportName);
         }
       };
 

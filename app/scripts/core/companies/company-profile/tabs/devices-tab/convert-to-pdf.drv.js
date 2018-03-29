@@ -111,7 +111,7 @@
 
 
           var dto = {
-            fileName: attrs.fileName,
+            fileName: $rootScope.reportName,
             content: selectedHtml,
             id: attrs.id,
             orientation: attrs.orientation || 'PORTRAIT'
