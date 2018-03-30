@@ -175,7 +175,12 @@
 
         $scope.isShowContractsTabOnCompanyPage = function() {
           if($scope.$state.params.companyId) {
-            return $scope.getCompanyById($scope.$state.params.companyId).clientType !== 'VENDOR';
+            var c = $scope.getCompanyById($scope.$state.params.companyId)
+            if(c) {
+              return c.clientType !== 'VENDOR';
+            } else {
+              return true;
+            }
           } else {
             return true;
           }
