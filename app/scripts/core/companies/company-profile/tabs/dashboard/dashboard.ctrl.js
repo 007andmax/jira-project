@@ -29,7 +29,14 @@
           FULLY_MANAGED: 'Fully managed'
         };
 
-        $timeout(getCorrectWorkingTime(), 1000);
+        //$timeout(getCorrectWorkingTime(), 1000);
+        $scope.$watch(function(){
+          return $scope.companyInfo;
+        }, function(data){
+          if(data) {
+            getCorrectWorkingTime()
+          }
+        });
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
