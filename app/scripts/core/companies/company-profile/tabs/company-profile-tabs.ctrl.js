@@ -52,7 +52,11 @@
         }
 
 
-
+        $scope.checkClientType = function(type) {
+          if($scope.company && type) {
+            return $scope.company.clientType.toLowerCase() === type
+          }
+        };
 
         $scope.getUsersNumber = function () {
           var usersInfo = {
