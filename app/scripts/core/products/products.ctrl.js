@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'CompaniesService', '$timeout',
-      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'quicktech.common.services.PermissionsService', 'TaxesService',
       function ($scope, $rootScope, ProductsService, CompaniesService, $timeout,
-                SharedStateService, $stateParams, $state, PermissionsService) {
+                SharedStateService, $stateParams, $state, PermissionsService, TaxesService) {
 
         var availableTabs = ['category', 'list'],
           globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -136,9 +136,19 @@
         };
 
         $scope.getSelectedTaxNames = function(taxes) {
-          return taxes && taxes.map(function (tax) {
-              return tax.name + ' ' + tax.rate + '%';
+          if(taxes && taxes.length && taxes.length > 0) {
+            var taxObjects = TaxesService.findTaxesByIds(taxes);
+            return taxes && taxObjects.map(function (tax) {
+              if(tax && tax.name && tax.rate) {
+                return tax.name + ' ' + tax.rate + '%';
+              } else {
+                return '';
+              }
             }).join(', ') || 'No taxes';
+          } else {
+            return 'No taxes';
+          }
+
         };
 
       }]);

@@ -73,12 +73,33 @@
       Utils.handleCallback(future, callback);
     }
 
+    function findTaxById(taxId) {
+      if(taxId) {
+        return Utils.findById(taxes, taxId);
+      } else {
+        console.log('no tax id', taxId);
+      }
+    }
+
+    function findTaxesByIds(IdsArray) {
+      if(IdsArray && IdsArray.length && IdsArray.length > 0) {
+        var taxes = [];
+        IdsArray.forEach(function(id) {
+          var tax = findTaxById(id);
+          taxes.push(tax);
+        });
+        return taxes;
+      }
+    }
+
     return {
       getAll: getAll,
       save: save,
       remove: remove,
       linkWithEntity: linkWithEntity,
-      isUniqueName: isUniqueName
+      isUniqueName: isUniqueName,
+      findTaxById: findTaxById,
+      findTaxesByIds: findTaxesByIds
     };
 
   }]);

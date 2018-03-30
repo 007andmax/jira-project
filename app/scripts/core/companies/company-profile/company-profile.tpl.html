@@ -1,8 +1,8 @@
 <div ng-controller="quicktech.core.companies.companyProfileTabsCtrl">
+
   <div ng-if="getOpenedTab() === 'dashboard'"
        ng-include="'/html/scripts/core/companies/company-profile/tabs/dashboard/dashboard.tpl.html'">
   </div>
-
   <div
     ng-if="getOpenedTab() === 'users-all' || getOpenedTab() === 'users-managers' || getOpenedTab() === 'users-clients'"
     ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'">
