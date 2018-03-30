@@ -924,7 +924,6 @@
             }
           }
           getAgentsByCompany(scope, companyId, callback);
-          console.log(storage.devices);
         });
       }
 
