@@ -42,7 +42,7 @@
     <div class="col-md-2"></div>
   </li>
   <!--class="active-device-item"-->
-  <li ng-repeat="agent in agents  | orderBy: [orderDevicesBy, uptimeOrder] track by $index"
+  <li ng-repeat="agent in agents  | orderBy: [orderDevicesBy, uptimeOrder]"
       ng-controller="quicktech.core.companies.devicesTabCtrl"
       ng-show="filterForDevices(agent)">
     <div class="users-list-wrapper">
