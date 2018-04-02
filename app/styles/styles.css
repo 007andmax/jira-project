@@ -1022,6 +1022,78 @@ hr {
   font-weight: 700;
 }
 
+.billable-items {
+  padding: 25px;
+  background-color: #F3F7F9;
+  color: #364656;
+}
+
+.billable-items-list {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-top: 25px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.billable-items .billable-items-header h3 {
+  margin: 0;
+}
+
+.billable-items .billable-items-header .btn-success {
+  height: 40px;
+  width: 150px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.billable-items .billable-items-list .billable-items-list-item .hr,
+.billable-items-list-item-sub .hr {
+  height: 1px;
+  width: 100%;
+  background-color: #edf2f6;
+  margin-top: 25px;
+}
+
+.billable-items-list-item-sub {
+  padding: 25px 5px 0 55px !important;
+  font-size: 13px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.billable-items-list-item-sub-content {
+  border-left: 3px solid #16A4FA;
+  border-top: 1px solid #edf2f6;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 0 !important;
+}
+
+.billable-items .billable-items-list .billable-items-list-item {
+  padding: 25px 25px 0;
+}
+
+.sub-content-item [class*="col-md-"] {
+  padding: 20px;
+  border-bottom: 1px solid #edf2f6;
+  border-right: 1px solid #edf2f6;
+  box-sizing: border-box
+}
+
+.billable-items .billable-items-list .billable-items-list-item > div {
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.billable-tkt {
+  background-color: #E2F2FB;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 0 3px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
 .billable-content,
 .receivable-content {
   position: relative;

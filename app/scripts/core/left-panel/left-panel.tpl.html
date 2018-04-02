@@ -986,23 +986,23 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting.billable')">
-          Billable
+          Billable Items
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"
              ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
-          Receivable
+          Invoices
         </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('payments')}"
-             ng-click="stateGo($event, 'payments', {mode: 'payments-list'})">
-          Payments
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('receipt-archive')}"
-             ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
-          Receipt Archive
-        </div>
+        <!--<div class="center-category__category"-->
+             <!--ng-class="{active: $state.includes('payments')}"-->
+             <!--ng-click="stateGo($event, 'payments', {mode: 'payments-list'})">-->
+          <!--Payments-->
+        <!--</div>-->
+        <!--<div class="center-category__category"-->
+             <!--ng-class="{active: $state.includes('receipt-archive')}"-->
+             <!--ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">-->
+          <!--Receipt Archive-->
+        <!--</div>-->
         <div class="center-category__category"
              ng-class="{active: $state.includes('service-agreements')}"
              ng-click="stateGo($event, 'service-agreements')"

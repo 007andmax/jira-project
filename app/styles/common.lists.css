@@ -4527,7 +4527,8 @@ Devices tab
   height: 40px;
 }
 
-.dashboard-network-scan .btn-success {
+.dashboard-network-scan .btn-success,
+.billable-items-header .btn-success{
   margin-bottom: 65px;
   position: relative;
   background-color: #2ec866;
@@ -4536,7 +4537,10 @@ Devices tab
 
 .dashboard-network-scan .btn-success:hover,
 .dashboard-network-scan .btn-success:active,
-.dashboard-network-scan .btn-success:focus {
+.dashboard-network-scan .btn-success:focus,
+.billable-items-header .btn-success:hover,
+.billable-items-header .btn-success:active,
+.billable-items-header .btn-success:focus{
   background-color: #189947;
 }
 
