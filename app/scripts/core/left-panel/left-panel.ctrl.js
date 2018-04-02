@@ -400,7 +400,6 @@
         $scope.$watch(function(){
           return $scope.companyProfilePasswordsFilter.deviceId
         }, function(value) {
-          console.log(value);
           if(value !== '' && value !== ' ') {
             if(value) {
               sendNewFilterToStorage("PasswordFilterByDevice", $scope.PasswordFiltersDyDevice, value);
@@ -421,7 +420,6 @@
         $scope.$watch(function(){
           return $scope.companyProfilePasswordsFilter.userId
         }, function(value) {
-          console.log(value);
           if(value !== '' && value !== ' ') {
             if(value) {
               sendNewFilterToStorage("PasswordFilterByUser", $scope.PasswordFiltersDyUser, $scope.getUserByID(value));

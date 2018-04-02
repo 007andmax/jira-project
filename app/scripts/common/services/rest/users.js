@@ -244,7 +244,6 @@
       }
 
       function getAllByCompanyIdNonArchived(companyId) {
-        console.log('storage', storage)
         var companyUsers =  storage.usersByCompanies[companyId] || [];
         var nonArchivedUsers = [];
         if(companyUsers.length > 0) {

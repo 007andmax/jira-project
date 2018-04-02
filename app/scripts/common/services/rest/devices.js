@@ -898,33 +898,49 @@
       }
 
       function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
-
-        $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
-          if(resp) {
-            for(var i=0; i<storage.devices[companyId].length; i++) {
-              storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
-              storage.devices[companyId][i].label = resp.data[companyId][i].label;
-              storage.devices[companyId][i].OneTimeConnectionData = [];
-              storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
-              if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
-                for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
-                  var connection = {
-                    startedAt: resp.data[companyId][i].remoteSessions[r].createdAt,
-                    id: resp.data[companyId][i].remoteSessions[r].id,
-                    sessionId: resp.data[companyId][i].remoteSessions[r].sessionId
-                  };
-                  var user = UsersService.getOneById(resp.data[companyId][i].remoteSessions[r].performer);
-                  connection.performer = user;
-                  storage.devices[companyId][i].OneTimeConnectionData.push(connection);
+        var checking = 0;
+        var extendedRespInterval = setInterval(function(){
+          if(storage.devices[companyId] && storage.devices[companyId].length) {
+            $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+              if(resp) {
+                for(var i=0; i<storage.devices[companyId].length; i++) {
+                  storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
+                  storage.devices[companyId][i].label = resp.data[companyId][i].label;
+                  storage.devices[companyId][i].OneTimeConnectionData = [];
+                  storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
+                  if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
+                    for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
+                      var connection = {
+                        startedAt: resp.data[companyId][i].remoteSessions[r].createdAt,
+                        id: resp.data[companyId][i].remoteSessions[r].id,
+                        sessionId: resp.data[companyId][i].remoteSessions[r].sessionId
+                      };
+                      var user = UsersService.getOneById(resp.data[companyId][i].remoteSessions[r].performer);
+                      connection.performer = user;
+                      storage.devices[companyId][i].OneTimeConnectionData.push(connection);
+                    }
+                  }
+                  if(!resp.data[companyId][i].online) {
+                    storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineSince;
+                  }
                 }
               }
-              if(!resp.data[companyId][i].online) {
-                storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineSince;
-              }
-            }
+              getAgentsByCompany(scope, companyId, callback);
+            });
           }
-          getAgentsByCompany(scope, companyId, callback);
-        });
+          checking++;
+          if(checking > 4) {
+            console.log('SMTH wrong. No company in device for a long time');
+            clearInterval(extendedRespInterval);
+          }
+          if(storage.devices[companyId]) {
+            console.log('Success devices extended resp!');
+            clearInterval(extendedRespInterval);
+          }
+          // console.log('extended devices resp trying, ', checking)
+        }, 1000)
+
+
       }
 
       function setNewDeviceLabel(dto, callback) {
