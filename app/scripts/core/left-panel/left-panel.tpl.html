@@ -734,12 +734,20 @@
                   <div class="x-mark-wrapper">
                     <input type="text" class="form-control has-dropdown pointer"
                            autocomplete="off" ng-model="companyProfilePasswordsFilter.deviceId"
+                           placeholder="Select Device"
                            typeahead-input-formatter="getDeviceNameById($model)"
                            uib-typeahead="device.id as device.hostName || device.ip for device in companyDevices | filter:filterDevice($viewValue):stateComparator | orderBy:'hostName'"
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
                     <div typeahead-input-icon="passwordSharedState.filter.deviceId"></div>
+
+                  </div>
+                  <div class="recent-left-panel">
+                    <h4 class="font-medium">recent</h4>
+                    <p ng-repeat="item in PasswordFiltersDyDevice track by $index"
+                       ng-click="applyDeviceFilterForPasswordManagerInCompanyProfile(item)">
+                      {{getDeviceNameById(item)}}</p>
 
                   </div>
                 </div>
@@ -763,6 +771,14 @@
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
                     <div typeahead-input-icon="passwordSharedState.filter.userId"></div>
+                  </div>
+
+                  <div class="recent-left-panel">
+                    <h4 class="font-medium">recent</h4>
+                    <p ng-repeat="item in PasswordFiltersDyUser track by $index"
+                       ng-click="applyUserFilterForPasswordManagerInCompanyProfile(item)">
+                      {{item}}</p>
+
                   </div>
 
                 </div>

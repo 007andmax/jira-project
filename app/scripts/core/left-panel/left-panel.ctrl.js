@@ -113,6 +113,14 @@
           $scope.techUsersFilterHistoryTicketsPage = resp;
         });
 
+        CustomStorageService.getUserCustomStorageValue('PasswordFilterByDevice', function(resp) {
+          $scope.PasswordFiltersDyDevice = resp;
+        });
+
+        CustomStorageService.getUserCustomStorageValue('PasswordFilterByUser', function(resp) {
+          $scope.PasswordFiltersDyUser = resp;
+        });
+
         CustomStorageService.getUserCustomStorageValue('ticketsTagsColors', function(resp) {
           if(resp) {
             $rootScope.ticketsTagsColors = resp;
@@ -157,6 +165,10 @@
               $scope.clientUsersFilterHistoryTicketsPage = JSON.parse(resp.value);
             } else if (recentArray === $scope.techUsersFilterHistoryTicketsPage) {
               $scope.techUsersFilterHistoryTicketsPage = JSON.parse(resp.value);
+            } else if(recentArray === $scope.PasswordFiltersDyDevice) {
+              $scope.PasswordFiltersDyDevice = JSON.parse(resp.value);
+            } else if(recentArray === $scope.PasswordFiltersDyUser) {
+              $scope.PasswordFiltersDyUser = JSON.parse(resp.value);
             }
           })
         }
@@ -390,15 +402,30 @@
         }, function(value) {
           console.log(value);
           if(value !== '' && value !== ' ') {
+            if(value) {
+              sendNewFilterToStorage("PasswordFilterByDevice", $scope.PasswordFiltersDyDevice, value);
+            }
+
             passwordSharedState.filter.deviceId = value;
           }
         });
+
+        $scope.getDeviceNameById = function(id) {
+          for(var i=0; i<$scope.devices.length; i++) {
+            if($scope.devices[i].id === id) {
+              return $scope.devices[i].hostName;
+            }
+          }
+        };
 
         $scope.$watch(function(){
           return $scope.companyProfilePasswordsFilter.userId
         }, function(value) {
           console.log(value);
           if(value !== '' && value !== ' ') {
+            if(value) {
+              sendNewFilterToStorage("PasswordFilterByUser", $scope.PasswordFiltersDyUser, $scope.getUserByID(value));
+            }
             passwordSharedState.filter.userId = value;
           }
         });
@@ -439,6 +466,14 @@
 
         $scope.applyTechUserFilterFromHistoryListTicketPage = function(value) {
           ticketsSharedState.filter.techUserId = getUserIdByUserFullName(value);
+        };
+
+        $scope.applyDeviceFilterForPasswordManagerInCompanyProfile = function(value) {
+          $scope.companyProfilePasswordsFilter.deviceId = value
+        };
+
+        $scope.applyUserFilterForPasswordManagerInCompanyProfile = function(value) {
+          $scope.companyProfilePasswordsFilter.userId = getUserIdByUserFullName(value)
         };
 
         TutorialsService.getTypes(function (resp) {
@@ -969,8 +1004,6 @@
               return device.companyId === companyId;
             })
           }
-
-
         })
 
       }]);
