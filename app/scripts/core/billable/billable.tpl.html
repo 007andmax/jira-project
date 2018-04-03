@@ -1,19 +1,38 @@
 <div>
   <div class="billable-items">
-    <div class="billable-items-header clearfix">
+    <div class="billable-items-header clearfix ">
       <h3 class="pull-left">Billable Items</h3>
-      <button class="btn btn-success pull-right">Create Invoice</button>
+
+      <button class="btn btn-success pull-right fixed-block-top"  fixed-block-top
+              custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
+              tooltip-placement="top" tooltip-append-to-body="true"
+              modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+              modal-window-class="invoice-modal-not-background"
+              mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+              mw-controller="quicktech.core.billable.createInvoiceCtrl">Create Invoice</button>
     </div>
-    <div class="billable-items-list clearfix">
-      <div class="billable-item clearfix">
+    <div class="billable-items-list clearfix" event-toggle-slider="toggleBillableTickets"
+         ng-controller="quicktech.core.billable.companyCtrl"
+         ng-repeat="billableCompany in billableData | filterBillableCompany"
+         on-finish-render="loadingFinished()">
+      <!--<div ng-click="toggleBillableTickets()"-->
+           <!--class="clickable-layer"></div>-->
+
+      <div class="billable-item clearfix" ng-click="toggleBillableTickets()">
+        <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
+           ng-show="billableCompany.lockType !== 'NONE'">
+          <i class="icn-sm icn-locked"></i>
+        </a>
         <div class="billable-items-list-item clearfix">
           <div class="pull-left" style="width: 2%;">
             <label class="control checkbox pull-left" style="margin-top: 3px;">
-              <input type="checkbox">
+              <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
+                     ng-click="changeCompanyCheckbox(billableCompany.companyId)"
+                     ng-disabled="anotherCompanySelected(billableCompany.companyId)">
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="pull-left">Hexaware Technologies Ltd</div>
+          <div class="pull-left">{{ company.name }} <span class="label label-light">{{ billableCompany.tickets.length }}</span></div>
           <div class="text-right pull-right" style="width: 6%;font-size: 15px;">$90234</div>
           <div class="pull-right">
             <i class="expand expand-down pointer pull-right" uib-tooltip="expand"></i>
@@ -22,8 +41,9 @@
           <div class="col-md-12 hr"></div>
         </div>
       </div>
-      <div class="billable-item clearfix"
-      style="background-color:#F9FBFC;">
+
+      <div class="billable-item clearfix" style="background-color:#F9FBFC;" ets-slider ng-if="showTickets" qt-scroll-to="top"
+           ng-controller="quicktech.core.billable.companyTicketsCtrl">
         <div class="billable-items-list-item clearfix">
           <div class="pull-left" style="width: 2%;">
             <label class="control checkbox pull-left" style="margin-top: 3px;">
@@ -31,13 +51,17 @@
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="pull-left">Hexaware Technologies Ltd</div>
-          <div class="text-right pull-right" style="width: 6%;font-size: 15px;">$90234</div>
-          <div class="pull-right">
-            <i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>
+          <div>
+            <div class="pull-left">{{ company.name }}</div>
+            <div class="text-right pull-right" style="width: 6%;font-size: 15px;">$90234</div>
+            <div class="pull-right">
+              <i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>
+            </div>
           </div>
+
           <div class="col-md-12 hr"></div>
           <div class="item-sub-list">
+
             <div class="billable-items-list-item-sub col-md-12 clearfix">
               <div class="pull-left" style="width: 2%;">
                 <label class="control checkbox pull-left" style="margin-top: 3px;">
@@ -51,24 +75,27 @@
               <div class="pull-right">
                 <i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>
               </div>
-              <div class="billable-items-list-item-sub-content col-md-12 clearfix">
-                <div class="sub-content-item clearfix">
-                  <div class="col-md-1">17 Mar 2018</div>
-                  <div class="col-md-2">Printer #8960</div>
-                  <div class="col-md-6">HP Laser Jet 2100 35 PPM color</div>
-                  <div class="col-md-2"><span style="width: 50%;display: inline-block;">$190</span><span style="width: 50%;display: inline-block;"><strong>Qty 2</strong></span></div>
-                  <div class="col-md-1"><strong>$380</strong></div>
-                </div>
-                <div class="sub-content-item clearfix">
-                  <div class="col-md-1">16 Mar 2018</div>
-                  <div class="col-md-2">Remote Service</div>
-                  <div class="col-md-6">Set default server ip address</div>
-                  <div class="col-md-2">Total hours 2:25</div>
-                  <div class="col-md-1"><strong>$300</strong></div>
-                </div>
-              </div>
+
+              <!--<div class="billable-items-list-item-sub-content col-md-12 clearfix">-->
+                <!--<div class="sub-content-item clearfix">-->
+                  <!--<div class="col-md-1">17 Mar 2018</div>-->
+                  <!--<div class="col-md-2">Printer #8960</div>-->
+                  <!--<div class="col-md-6">HP Laser Jet 2100 35 PPM color</div>-->
+                  <!--<div class="col-md-2"><span style="width: 50%;display: inline-block;">$190</span><span style="width: 50%;display: inline-block;"><strong>Qty 2</strong></span></div>-->
+                  <!--<div class="col-md-1"><strong>$380</strong></div>-->
+                <!--</div>-->
+                <!--<div class="sub-content-item clearfix">-->
+                  <!--<div class="col-md-1">16 Mar 2018</div>-->
+                  <!--<div class="col-md-2">Remote Service</div>-->
+                  <!--<div class="col-md-6">Set default server ip address</div>-->
+                  <!--<div class="col-md-2">Total hours 2:25</div>-->
+                  <!--<div class="col-md-1"><strong>$300</strong></div>-->
+                <!--</div>-->
+              <!--</div>-->
+
               <div class="col-md-12 hr"></div>
             </div>
+
             <div class="billable-items-list-item-sub col-md-12 clearfix">
               <div class="pull-left" style="width: 2%;">
                 <label class="control checkbox pull-left" style="margin-top: 3px;">
@@ -88,6 +115,8 @@
           </div>
         </div>
       </div>
+
+
       <div class="billable-item clearfix">
         <div class="billable-items-list-item clearfix">
           <div class="pull-left" style="width: 2%;">
@@ -105,6 +134,8 @@
           <div class="col-md-12 hr"></div>
         </div>
       </div>
+
+
     </div>
   </div>
 
