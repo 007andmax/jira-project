@@ -72,14 +72,10 @@
                   userId: undefined
                 }
               }
-
-              UserNotificationService.show('Loading...');
-
+              UserNotificationService.show('Loading... ');
               scope.loadingOrRendering = true;
               lastListType = $stateParams.listType.toUpperCase();
-              console.log(lastListType, filter.userId, filter.companyId)
               TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets) {
-                console.log(uploadedTickets)
                 scope.tickets = uploadedTickets;
 
                 if (!uploadedTickets.length) {

@@ -15,7 +15,7 @@
           $state.go('tickets');
         }
 
-        UserNotificationService.show('Loading...');
+        UserNotificationService.show('Loading...COMPANIES');
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
@@ -144,10 +144,13 @@
         }
 
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
+          console.log('$stateParams.companyId', $stateParams.companyId)
+          console.log('$scope', $scope)
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
-
+          console.log('start timeout for hde loading');
           $timeout(function () {
+            console.log('hide Loading')
             UserNotificationService.hide();
           }, 0);
 
