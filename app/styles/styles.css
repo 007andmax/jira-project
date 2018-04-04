@@ -1022,10 +1022,11 @@ hr {
   font-weight: 700;
 }
 
-.billable-items {
+.billable-items, .invoices {
   padding: 25px;
   background-color: #F3F7F9;
   color: #364656;
+  min-height: calc(100vh - 78px);
 }
 
 .billable-items-list {
@@ -1039,9 +1040,11 @@ hr {
   margin: 0;
 }
 
-.billable-items .billable-items-header .btn-success {
+.billable-items .billable-items-header .btn-success,
+.invoices .invoices-header .invoices-header-filters .btn-success {
   height: 40px;
-  width: 150px;
+  max-width: 150px !important;
+  width: 100% !important;
   margin: 0;
   font-size: 14px;
   font-weight: 300;
@@ -1076,6 +1079,7 @@ hr {
 .remove-display-none {
   display: block !important
 }
+
 .sub-content-item [class*="col-md-"] {
   padding: 20px;
   border-bottom: 1px solid #edf2f6;
@@ -1108,6 +1112,73 @@ hr {
 .billable-content .bootstrap-datetimepicker-widget.dropdown-menu {
   right: 0 !important;
   left: auto !important;
+}
+
+.invoices .invoices-header,
+.invoices .invoices-header .invoices-header-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoices .invoices-header .invoices-header-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 64%;
+  width: 100%;
+}
+
+.invoices .invoices-header .invoices-header-filters > div {
+  max-width: 250px;
+  width: 100%;
+  margin-right: 10px;
+  position: relative;
+}
+
+.invoices .invoices-header .invoices-header-filters > div i {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div:nth-child(2) {
+  max-width: 300px;
+  width: 100%;
+}
+
+.invoices .invoices-header .invoices-header-filters > div:nth-child(3) {
+  margin-right: 20px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div > input {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
+  color: #4F5F79;
+  padding: 0 30px 0 10px;
+}
+
+.invoices input:focus {
+  outline: 0;
+}
+.invoices-list .list-heading{
+  padding-top: 10px!important;
+}
+.invoices-list .list-item {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  margin-bottom: 8px;
+}
+
+.invoices-list .list-item .checkbox {
+  margin-top: 3px !important;
+}
+
+bold {
+  font-family: "Graphik Medium", sans-serif;
 }
 
 .receivable-content .product-list-ticket {
@@ -5156,7 +5227,7 @@ tbody.collapse.in {
 .dropdown-menu .subdropdown-menu > li > a,
 .dropdown-menu > .nano li a {
   display: block;
-  padding: 5px 20px;
+  padding: 5px 20px 5px 50px;
   clear: both;
   font-weight: normal;
   line-height: 2;

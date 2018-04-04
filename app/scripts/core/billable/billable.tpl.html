@@ -3,24 +3,14 @@
   <div class="billable-items">
     <div class="billable-items-header clearfix ">
       <h3 class="pull-left">Billable Items</h3>
-
-      <!--<button class="btn btn-success pull-right fixed-block-top"  fixed-block-top-->
-              <!--custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"-->
-              <!--tooltip-placement="top" tooltip-append-to-body="true"-->
-              <!--modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"-->
-              <!--modal-window-class="invoice-modal-not-background"-->
-              <!--mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"-->
-              <!--mw-controller="quicktech.core.billable.createInvoiceCtrl">Create Invoice</button>-->
       <div class="fixed-block-top" style="width: auto; height: 55px; right: 20px; margin-top: 20px;" fixed-block-top offset-top="100">
-
         <ul class="nav nav-qt" role="tablist">
-
           <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
             <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
                  qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
                  style="display: inline-block;">
               <div qt-popover-trigger="mouseenter" style="display: inline-block; background-color: white">
-                <button class="btn btn-create-invoice btn-primary pull-right has-tooltip" style="width: 98px;"
+                <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip" style="width: 98px;"
                      custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
                      modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
                      modal-window-class="invoice-modal-not-background"
