@@ -1073,6 +1073,9 @@ hr {
   padding: 25px 25px 0;
 }
 
+.remove-display-none {
+  display: block !important
+}
 .sub-content-item [class*="col-md-"] {
   padding: 20px;
   border-bottom: 1px solid #edf2f6;
