@@ -118,47 +118,47 @@
 
 
 
-  <!--<div class="receivable-content">-->
-    <!--<div class="tabs-container" style="height: 55px">-->
+  <div class="receivable-content">
+    <div class="tabs-container" style="height: 55px">
 
-      <!--<div class="payment-receive-fixed" fixed-block-top>-->
-        <!--<div class="btn btn-primary pull-right has-tooltip"-->
-             <!--custom-disabled="{{ !selectedInvoiceCount }}"-->
-             <!--modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"-->
-             <!--modal-window-class="modal-receive-payment"-->
-             <!--mw-controller="quicktech.core.receivable.receivePaymentCtrl">-->
-          <!--Receive Payment-->
-        <!--</div>-->
+      <div class="payment-receive-fixed" fixed-block-top>
+        <div class="btn btn-primary pull-right has-tooltip"
+             custom-disabled="{{ !selectedInvoiceCount }}"
+             modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
+             modal-window-class="modal-receive-payment"
+             mw-controller="quicktech.core.receivable.receivePaymentCtrl">
+          Receive Payment
+        </div>
 
-        <!--<button-with-loading-indicator class="btn btn-primary pull-right" ng-click="resendSelectedInvoices()"-->
-                                       <!--custom-disabled="{{ !selectedInvoiceCount || sendingInvoices }}"-->
-                                       <!--loading="sendingInvoices"-->
-                                       <!--label="Resend Selected"></button-with-loading-indicator>-->
+        <button-with-loading-indicator class="btn btn-primary pull-right" ng-click="resendSelectedInvoices()"
+                                       custom-disabled="{{ !selectedInvoiceCount || sendingInvoices }}"
+                                       loading="sendingInvoices"
+                                       label="Resend Selected"></button-with-loading-indicator>
 
-        <!--<ul class="nav nav-qt" role="tablist">-->
+        <ul class="nav nav-qt" role="tablist">
 
-          <!--<li role="presentation" ng-class="{active: mode === 'group-by-company'}">-->
-            <!--<a ui-sref="receivable({mode: 'group-by-company'})">-->
-              <!--Invoice by Company-->
-            <!--</a>-->
-          <!--</li>-->
+          <li role="presentation" ng-class="{active: mode === 'group-by-company'}">
+            <a ui-sref="receivable({mode: 'group-by-company'})">
+              Invoice by Company
+            </a>
+          </li>
 
-          <!--<li role="presentation" ng-class="{active: mode === 'list'}">-->
-            <!--<a ui-sref="receivable({mode: 'list'})">-->
-              <!--Invoice by Number-->
-            <!--</a>-->
-          <!--</li>-->
+          <li role="presentation" ng-class="{active: mode === 'list'}">
+            <a ui-sref="receivable({mode: 'list'})">
+              Invoice by Number
+            </a>
+          </li>
 
-        <!--</ul>-->
-      <!--</div>-->
+        </ul>
+      </div>
 
-    <!--</div>-->
+    </div>
 
-    <!--<div class="tab-content" ng-hide="loadingInProgress"-->
-         <!--ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>-->
-    <!--<loading-indicator loading-trigger="loadingInProgress"></loading-indicator>-->
+    <div class="tab-content" ng-hide="loadingInProgress"
+         ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
-  <!--</div>-->
+  </div>
 </div>
 <script>
   (function (i, s, o, g, r, a, m) {

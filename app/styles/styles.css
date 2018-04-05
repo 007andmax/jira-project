@@ -1163,9 +1163,11 @@ hr {
 .invoices input:focus {
   outline: 0;
 }
-.invoices-list .list-heading{
-  padding-top: 10px!important;
+
+.invoices-list .list-heading {
+  padding-top: 10px !important;
 }
+
 .invoices-list .list-item {
   display: flex;
   align-items: center;
@@ -10090,6 +10092,7 @@ button.close {
   background-clip: padding-box;
   outline: 0;
   margin-bottom: 50px;
+  margin-top: 0px;
 }
 
 .modal-open .modal::-webkit-scrollbar {
@@ -10133,10 +10136,13 @@ button.close {
   filter: alpha(opacity=50);
 }
 
+.receive {
+  padding: 20px 50px;
+  width: 100%;
+}
+
 .modal-header {
-  padding: 15px;
-  border-bottom: 1px solid #e7ecf2;
-  min-height: 35px;
+  border-bottom: 1px solid #edf2f6 !important;
 }
 
 .modal-header .close {
@@ -10518,24 +10524,20 @@ button.close {
 
 /****/
 .modal-receive-payment > .modal-dialog {
-  width: 642px;
+  width: 530px;
+  height: 785px;
   top: 50%;
   left: 50%;
   margin: 0;
   transform: translate3d(-50%, -50%, 0) !important;
 }
 
-.modal-receive-payment .modal-header {
-  border-bottom: 0px;
-  padding: 25px 27px 18px 30px;
-}
-
 .modal-receive-payment .modal-body {
   padding: 0;
 }
 
-.modal-receive-payment .invoices-header {
-  padding: 0 30px;
+.modal-receive-payment .qt-list > li {
+  padding: 0 !important;
 }
 
 .modal-receive-payment .invoices-header label {
@@ -10554,11 +10556,6 @@ button.close {
   max-width: none;
 }
 
-.modal-receive-payment .modal-footer {
-  border-top: 1px solid #e7ecf2;
-  padding: 30px;
-}
-
 .modal-receive-payment .modal-title {
   font-size: 14px;
   font-weight: bold;
@@ -10569,7 +10566,11 @@ button.close {
 }
 
 .modal-receive-payment .form-group {
-  margin-bottom: 0;
+  margin: 0;
+}
+
+.modal-receive-payment .invoice-list-heading {
+  padding: 0;
 }
 
 .modal-receive-payment .modal-footer .total-amount {

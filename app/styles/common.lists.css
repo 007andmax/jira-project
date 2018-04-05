@@ -4858,8 +4858,7 @@ Devices tab
 .receive-payment-list {
   overflow-y: auto;
 
-  max-height: calc(100vh - 350px);
-  padding: 0 30px;
+  max-height: 350px;
 
   border-top: 1px solid #e7ecf2;
 }

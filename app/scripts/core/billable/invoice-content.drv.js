@@ -26,7 +26,7 @@
             }, function () {
 
               if (ngModelCtrl.$viewValue) {
-                element.animate({ opacity: 0 });
+                element.animate({ right: "15px" });
 
                 scope.currentInvoice = ngModelCtrl.$viewValue;
 
