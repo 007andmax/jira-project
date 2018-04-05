@@ -44,25 +44,16 @@
         $scope.dateFormat = '%d %b';
 
 
-        // CompaniesService._addInitListener(function(){
-        //   console.log('$scope.company',$scope.company)
-        //   $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
-        //     if (resp === $scope.company.id) {
-        //       $state.go('companies');
-        //     }
-        //   });
-        //   console.log('$scope.company',$scope.company)
-        // })
 
-        if($rootScope.companyListLoaded) {
-          console.log('$scope.company',$scope.company)
-          $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
-            if (resp === $scope.company.id) {
-              $state.go('companies');
-            }
-          });
-          console.log('$scope.company',$scope.company)
-        }
+
+        console.log('$scope.company',$scope.company)
+        $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
+          if (resp === $scope.company.id) {
+            $state.go('companies');
+          }
+        });
+        console.log('$scope.company',$scope.company)
+
 
 
         $scope.$watch(function(){
@@ -159,6 +150,7 @@
           return;
         }
 
+        console.log('$scope.companyData', $scope.companyData)
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
@@ -167,6 +159,7 @@
           }, 0);
 
         });
+        console.log('$scope.companyData', $scope.companyData)
 
         DevicesService.getSomeInfoForDevices($stateParams.companyId, function (resp) {
           $scope.isDomainPresent = resp.domainPresent;
