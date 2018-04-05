@@ -6,10 +6,10 @@
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService',
-      'quicktech.common.services.PermissionsService', 'UsersService', '$location', 'PasswordManagerService',
+      'quicktech.common.services.PermissionsService', 'UsersService', '$location', 'PasswordManagerService', '$rootScope',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
-                PermissionsService, UsersService, $location, PasswordManagerService) {
+                PermissionsService, UsersService, $location, PasswordManagerService, $rootScope) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -43,18 +43,24 @@
         $scope.selectedChart = 'countOfNewTickets';
         $scope.dateFormat = '%d %b';
 
-        console.log('$scope.company',$scope.company)
 
-        $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
-          if (resp === $scope.company.id) {
-            $state.go('companies');
-          }
-        });
-        console.log('$scope.company',$scope.company)
+        CompaniesService._addInitListener(function(){
+          console.log('$scope.company',$scope.company)
+          $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
+            if (resp === $scope.company.id) {
+              $state.go('companies');
+            }
+          });
+          console.log('$scope.company',$scope.company)
+        })
+
+
+
 
         $scope.$watch(function(){
           return $scope.company;
         }, function(data){
+          console.log('data',data)
           if(data) {
             $scope.companyInfo = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
               if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
