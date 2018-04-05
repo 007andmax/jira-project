@@ -43,18 +43,20 @@
         $scope.selectedChart = 'countOfNewTickets';
         $scope.dateFormat = '%d %b';
 
+        console.log('$scope.company',$scope.company)
+
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
           if (resp === $scope.company.id) {
             $state.go('companies');
           }
         });
+        console.log('$scope.company',$scope.company)
 
         $scope.$watch(function(){
           return $scope.company;
         }, function(data){
           if(data) {
             $scope.companyInfo = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
-
               if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
                 $scope.companyInfo.addresses = [{}];
               }
@@ -146,7 +148,6 @@
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
-
           $timeout(function () {
             UserNotificationService.hide();
           }, 0);

@@ -297,7 +297,7 @@
           UsersService._addInitListener(function () {
             def.resolve();
             $rootScope.servicesLoaded = true;
-            if ($rootScope.currentUserLoaded) {
+            if ($rootScope.currentUserLoaded && $rootScope.companyListLoaded) {
               $rootScope.applicationLoaded = true;
             }
           });

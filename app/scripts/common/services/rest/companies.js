@@ -49,6 +49,8 @@
           }
         }
         checkInit();
+        console.log('storage', storage)
+        $rootScope.companyListLoaded = true;
       },
       function (resp) {
         console.error(resp);
@@ -205,13 +207,20 @@
     }
 
     function getOneById(companyId, callback) {
+
       if (callback) {
         callbackForArchive = callback;
       }
       if (companyId === storage.currentCompany.id) {
         return storage.currentCompany;
       }
+
       return Utils.findById(storage.companies, companyId) || Utils.findById(storage.deletedCompanies, companyId);
+
+    }
+
+    function checkStorageCompanyLength() {
+      return storage.company.length;
     }
 
     function searchByAllCompanies(keyword) {
@@ -828,7 +837,8 @@
       saveInboxEnabled: saveInboxEnabled,
       getCompanyPaymentInfo: getCompanyPaymentInfo,
       saveCompanyPaymentInfo: saveCompanyPaymentInfo,
-      changePrimaryContact: changePrimaryContact
+      changePrimaryContact: changePrimaryContact,
+      checkStorageCompanyLength: checkStorageCompanyLength
     }
 
   }]);
