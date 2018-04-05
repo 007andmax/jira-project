@@ -44,7 +44,17 @@
         $scope.dateFormat = '%d %b';
 
 
-        CompaniesService._addInitListener(function(){
+        // CompaniesService._addInitListener(function(){
+        //   console.log('$scope.company',$scope.company)
+        //   $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
+        //     if (resp === $scope.company.id) {
+        //       $state.go('companies');
+        //     }
+        //   });
+        //   console.log('$scope.company',$scope.company)
+        // })
+
+        if($rootScope.companyListLoaded) {
           console.log('$scope.company',$scope.company)
           $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
             if (resp === $scope.company.id) {
@@ -52,9 +62,7 @@
             }
           });
           console.log('$scope.company',$scope.company)
-        })
-
-
+        }
 
 
         $scope.$watch(function(){
