@@ -15,7 +15,7 @@
           $state.go('tickets');
         }
 
-        UserNotificationService.show('Loading...COMPANIES');
+        UserNotificationService.show('Loading...');
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
