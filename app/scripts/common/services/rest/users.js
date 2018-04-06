@@ -49,7 +49,6 @@
                 storage.deleted.push(user);
               }
             }
-            console.log('USERS GET')
             initialized = true;
             for (var i = 0; i < initListeners.length; i++) {
               initListeners[i]();

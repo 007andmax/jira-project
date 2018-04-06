@@ -49,7 +49,6 @@
           }
         }
         checkInit();
-        console.log('storage', storage)
         $rootScope.companyListLoaded = true;
       },
       function (resp) {
