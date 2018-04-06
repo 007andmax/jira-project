@@ -109,7 +109,7 @@
           var companyForReadOnlyMode = {};
           if (agreementId) {
             AgreementsService.getAgreement(agreementId, function (resp) {
-              console.log(resp);
+              //console.log(resp);
               companyForReadOnlyMode = resp;
               openModal(contractType, editMode, companyForReadOnlyMode)
             })
@@ -223,7 +223,7 @@
         $scope.editContract.services = [];
 
         ServicesService.getServicesData($scope, function (data) {
-          console.log(data);
+          //console.log(data);
           var listOfServices = [];
           for (var i = 0; i < data.length; i++) {
             var serv = {
@@ -257,7 +257,7 @@
         }, 1000);
 
       } else {
-        console.log(companyData);
+        //console.log(companyData);
         $scope.editContract = companyData.companyForReadOnlyMode;
         $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
         $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');

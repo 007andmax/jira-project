@@ -89,7 +89,7 @@
                 }
               }
             } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
-              console.log(newChange);
+              //console.log(newChange);
               var companyId = getCompanyIdByAgentId(newChange.data.agentId);
               if(newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle') ) {
                 if(companyId) {
@@ -107,7 +107,7 @@
                 }
 
               } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
-                console.log(newChange);
+                //console.log(newChange);
                 for (var i=0; i< devices[companyId].length; i++) {
                   if(companyId) {
                     if (devices[companyId][i].agentId === newChange.data.agentId) {
