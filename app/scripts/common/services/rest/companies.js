@@ -77,7 +77,7 @@
 
     function checkInit() {
       checkInitsCount++;
-      if (checkInitsCount === 2) {
+      if (checkInitsCount === 3) {
         initialized = true;
 
         for (var i = 0; i < initListeners.length; i++) {

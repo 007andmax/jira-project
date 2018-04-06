@@ -49,65 +49,61 @@
           }
         });
 
-        $scope.$watch(function(){
-          return $scope.company;
-        }, function(data){
-          if(data) {
-            $scope.companyInfo = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
+        $scope.companyInfo = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
 
-              if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
-                $scope.companyInfo.addresses = [{}];
-              }
+          if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
+            $scope.companyInfo.addresses = [{}];
+          }
 
-              if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
-                $scope.companyInfo.contacts = [getEmptyContact()];
-              }
+          if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
+            $scope.companyInfo.contacts = [getEmptyContact()];
+          }
 
-              $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
-                $scope.companyInfo.contacts[0].subscription.invoice &&
-                UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
-                  return user.subscription.invoice;
-                }).length <= 1;
+          $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
+            $scope.companyInfo.contacts[0].subscription.invoice &&
+            UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
+              return user.subscription.invoice;
+            }).length <= 1;
 
-              $scope.editCompany = $scope.companyInfo.staticCopy();
-              $scope.contact = $scope.editCompany.contacts[0];
+          $scope.editCompany = $scope.companyInfo.staticCopy();
+          $scope.contact = $scope.editCompany.contacts[0];
 
-              if ($scope.companyInfo.paymentTerms) {
-                $scope.companyInfo.paymentTerms += ' days';
-              } else if ($scope.editCompany.paymentTerms === 0) {
-                $scope.companyInfo.paymentTerms = 'COD';
-              }
+          if ($scope.companyInfo.paymentTerms) {
+            $scope.companyInfo.paymentTerms += ' days';
+          } else if ($scope.editCompany.paymentTerms === 0) {
+            $scope.companyInfo.paymentTerms = 'COD';
+          }
 
-              if ($scope.companyInfo.clientType === 'VENDOR') {
-                $scope.companyInfo.hasProducts = false;
-                CompaniesService.isVendorHasProducts($stateParams.companyId, function (resp) {
-                  $scope.companyInfo.hasProducts = resp.isProductExist;
-                });
-              }
-
-              // if ($scope.companyInfo.clientType) {
-              //   $scope.companyInfo.clientType = userReadable($scope.companyInfo.clientType);
-              // }
-
-              // if ($scope.companyInfo.serviceType) {
-              //   $scope.companyInfo.serviceType = userReadable($scope.companyInfo.serviceType);
-              // }
-
-              if ($scope.company.defaultPaymentMethod) {
-                $scope.companyInfo.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);
-              }
-
-              if (!$scope.companyInfo.credential) {
-                $scope.companyInfo.login = '';
-                $scope.companyInfo.password = '';
-              }
-              $timeout(function() {
-                $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
-              }, 3000);
-
+          if ($scope.companyInfo.clientType === 'VENDOR') {
+            $scope.companyInfo.hasProducts = false;
+            CompaniesService.isVendorHasProducts($stateParams.companyId, function (resp) {
+              $scope.companyInfo.hasProducts = resp.isProductExist;
             });
           }
+
+          // if ($scope.companyInfo.clientType) {
+          //   $scope.companyInfo.clientType = userReadable($scope.companyInfo.clientType);
+          // }
+
+          // if ($scope.companyInfo.serviceType) {
+          //   $scope.companyInfo.serviceType = userReadable($scope.companyInfo.serviceType);
+          // }
+
+          if ($scope.company.defaultPaymentMethod) {
+            $scope.companyInfo.defaultPaymentMethod = userReadable($scope.company.defaultPaymentMethod);
+          }
+
+          if (!$scope.companyInfo.credential) {
+            $scope.companyInfo.login = '';
+            $scope.companyInfo.password = '';
+          }
+          $timeout(function() {
+            $scope.reservedCompanyInfo = angular.copy($scope.companyInfo);
+          }, 3000);
+
         });
+
+
 
 
 
