@@ -84,6 +84,8 @@
           $uibModalInstance.dismiss();
         };
 
+
+
         $scope.print = function () {
           var lockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId,
             currentAddressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId,

@@ -15,6 +15,7 @@
 
             scope.currentTime = +(new Date());
 
+
             scope.$watch(function () {
 
               var invoiceDto = ngModelCtrl.$viewValue;
@@ -81,6 +82,8 @@
                 });
 
             });
+
+
 
             function initNanoScroller(compileElement) {
               var nanoElement = $('.nano', compileElement),

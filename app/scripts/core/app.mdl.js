@@ -304,7 +304,6 @@
 
           return def.promise;
         }];
-
         return conf;
       }
 
