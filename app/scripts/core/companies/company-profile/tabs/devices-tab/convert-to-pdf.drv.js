@@ -2,25 +2,35 @@
 
 (function () {
   angular.module("quicktech.core.companies").directive('convertToPdf',
-    ['$http', '$timeout', 'Downloader', 'quicktech.common.services.UserNotificationService',
-    function ($http, $timeout, Downloader, UserNotificationService) {
+    ['$http', '$timeout', 'Downloader', 'quicktech.common.services.UserNotificationService', '$rootScope',
+    function ($http, $timeout, Downloader, UserNotificationService, $rootScope) {
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        var disableElement, url = '', selectedHtml;
+        var disableElement, selectedHtml;
         disableOpenPdfBtn();
+        var savedFileName = '';
 
         attrs.$observe('fileName', function (fileName) {
           if (fileName) {
+            savedFileName = fileName;
             scope.$on('buildPdf-' + fileName, getPdfIdFromRest);
           }
         });
+
+        $rootScope.$watch('reportLineChanged', function(resp) {
+          if(resp === true) {
+            getPdfIdFromRest();
+          }
+          $rootScope.reportLineChanged = false;
+        });
+
 
         scope.openInPdf = function (callback) {
           if (!disableElement.length || (disableElement.hasClass('disabled') || typeof disableElement.attr('disabled') === 'string')) {
             return;
           }
-          var newWindow = window.open(url);
+          var newWindow = window.open($rootScope.reportUrl);
           callback && callback(newWindow);
         };
 
@@ -28,7 +38,7 @@
           if (!disableElement.length || (disableElement.hasClass('disabled') || typeof disableElement.attr('disabled') === 'string')) {
             return;
           }
-          Downloader.downloadByUrl(url, attrs.fileName);
+          Downloader.downloadByUrl($rootScope.reportUrl, attrs.fileName);
         };
 
         scope.sendToMail = function (emails, callback) {
@@ -57,13 +67,14 @@
         function getPdfIdFromRest() {
           disableOpenPdfBtn();
 
-          var source = element.find(attrs.selector);
+          var source = $(attrs.selector);
           var target = source.clone(),
             unknownLoadingStr = 'Loading...',
             sourceSVGs = source.find('svg'),
             canvas = document.createElement('canvas');
 
           target.find('.ng-hide').remove();
+          target.find('.hide-in-report').remove();
 
           if (sourceSVGs && sourceSVGs.length) {
             var svgs = target.find('svg');
@@ -100,14 +111,15 @@
 
 
           var dto = {
-            fileName: attrs.fileName,
+            fileName: $rootScope.reportName,
             content: selectedHtml,
             id: attrs.id,
             orientation: attrs.orientation || 'PORTRAIT'
           };
           $http.post(attrs.convertToPdf, dto).then(function (resp) {
             if (resp.data) {
-              url = resp.data.url || 'data:application/pdf;base64,' + resp.data;
+              $rootScope.reportUrl = resp.data.url || 'data:application/pdf;base64,' + resp.data;
+              //scope.$apply();
 
               disableElement = angular.element(document).find(attrs.disableSelector);
               if (disableElement.length) {

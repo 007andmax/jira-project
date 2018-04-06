@@ -28,15 +28,10 @@
         $scope.agent.timing.offline = 0;
         $scope.agent.timing.uptimeForOrdering = 0;
 
+        $scope.uptimeOrder = '';
+
         $scope.agentLabelEditForm = {};
-        // $scope.deviceOrder = 'hostName';
-        // $scope.changeOrder = function(order) {
-        //   if(order === $scope.deviceOrder) {
-        //     $scope.deviceOrder = '-'+$scope.deviceOrder
-        //   } else {
-        //     $scope.deviceOrder = order;
-        //   }
-        // };
+
 
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
@@ -110,26 +105,6 @@
           });
         };
 
-        $scope.orderDevicesBy = 'hostName';
-        $scope.uptimeOrder = '';
-        $scope.sortDevicesTab = function (option, uptimeOption) {
-          if (option === $scope.orderDevicesBy) {
-            if (option[0] === '-') {
-              $scope.orderDevicesBy = $scope.orderDevicesBy.substring(1);
-            } else {
-              $scope.orderDevicesBy = '-' + $scope.orderDevicesBy;
-            }
-          } else {
-            $scope.orderDevicesBy = option;
-          }
-          if(uptimeOption) {
-            if( $scope.uptimeOrder) {
-              $scope.uptimeOrder = '';
-            }else {
-              $scope.uptimeOrder = 'timing.uptimeForOrdering';
-            }
-          }
-        };
 
         $scope.sendAlert = function () {
           console.log('sendAlert - ' + $scope.agent.agentId);

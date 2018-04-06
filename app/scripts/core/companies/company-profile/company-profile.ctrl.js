@@ -15,7 +15,7 @@
           $state.go('tickets');
         }
 
-        UserNotificationService.show('Loading...');
+        UserNotificationService.show('Loading...COMPANIES');
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
@@ -49,19 +49,11 @@
           }
         });
 
-        $scope.companyInfo = CompaniesService.getCompanyData($scope, $scope.company.id, function () {
+        $scope.companyInfo = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
 
           if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
             $scope.companyInfo.addresses = [{}];
           }
-
-          // if($scope.companyInfo.addresses && $scope.companyInfo.addresses.length && $scope.companyInfo.addresses[0].phoneNumbers && $scope.companyInfo.addresses[0].phoneNumbers.length) {
-          //   for(var i=0; i< $scope.companyInfo.addresses[0].phoneNumbers.length; i++) {
-          //     if($scope.companyInfo.addresses[0].phoneNumbers[i].number.length < 4) {
-          //       $scope.companyInfo.addresses[0].phoneNumbers[i].splice(i, 1);
-          //     }
-          //   }
-          // }
 
           if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
             $scope.companyInfo.contacts = [getEmptyContact()];
@@ -69,7 +61,7 @@
 
           $scope.isLastInvoiceSubsciption = $scope.companyInfo.contacts[0].subscription &&
             $scope.companyInfo.contacts[0].subscription.invoice &&
-            UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
+            UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
               return user.subscription.invoice;
             }).length <= 1;
 
@@ -84,7 +76,7 @@
 
           if ($scope.companyInfo.clientType === 'VENDOR') {
             $scope.companyInfo.hasProducts = false;
-            CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
+            CompaniesService.isVendorHasProducts($stateParams.companyId, function (resp) {
               $scope.companyInfo.hasProducts = resp.isProductExist;
             });
           }
@@ -110,6 +102,10 @@
           }, 3000);
 
         });
+
+
+
+
 
         $scope.rewriteReservedCompanyInfoFromDashboard = function(companyInfo) {
           $scope.reservedCompanyInfo = angular.copy(companyInfo);
@@ -144,16 +140,19 @@
         }
 
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
+          console.log('$stateParams.companyId', $stateParams.companyId)
+          console.log('$scope', $scope)
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
-
+          console.log('start timeout for hde loading');
           $timeout(function () {
+            console.log('hide Loading')
             UserNotificationService.hide();
           }, 0);
 
         });
 
-        DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
+        DevicesService.getSomeInfoForDevices($stateParams.companyId, function (resp) {
           $scope.isDomainPresent = resp.domainPresent;
           $scope.allowAgentInstall = resp.allowAgentInstall;
         });
@@ -171,7 +170,7 @@
         });
 
         $scope.archiveCompany = function () {
-          var company = CompaniesService.getOneById($scope.company.id);
+          var company = CompaniesService.getOneById($stateParams.companyId);
           var confirmMessage = 'Do you want to archive ' + company.name + '? All related users and service agreements will be archived and all agents will be uninstalled.';
           var confirmButton = 'Yes';
 
@@ -353,7 +352,7 @@
           } else if(openedTab === 'devices-servers') {
             return device.type === 'server'
           } else if(openedTab === 'devices-devices') {
-            return device.type === 'device'
+            return device.type === 'device' || device.type === 'printer'
           }
         };
 

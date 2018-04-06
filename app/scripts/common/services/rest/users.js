@@ -248,7 +248,7 @@
         var nonArchivedUsers = [];
         if(companyUsers.length > 0) {
           for(var i=0; i<companyUsers.length; i++) {
-            if(companyUsers[i].userEnabled === true) {
+            if(!companyUsers[i].deletedAt) {
               nonArchivedUsers.push(companyUsers[i]);
             }
           }

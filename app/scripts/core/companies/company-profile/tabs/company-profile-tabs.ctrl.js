@@ -31,25 +31,32 @@
           selectDevicesIds: [],
           isOfflineDeviceSelected: false
         };
+        if($scope.company) {
+          if ($scope.company.clientType.toLowerCase() === 'vendor') {
+            CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
+              $scope.company.hasProducts = resp.isProductExist;
 
-        if ($scope.company.clientType.toLowerCase() === 'vendor') {
-          CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
-            $scope.company.hasProducts = resp.isProductExist;
+              if ($scope.isHasDevices) {
+                $state.go('companyProfile', {tabName: 'devices'});
+              } else {
+                $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
+              }
+            });
 
-            if ($scope.isHasDevices) {
-              $state.go('companyProfile', {tabName: 'devices'});
-            } else {
-              $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
-            }
-          });
-
-          ProductsService.getProductsByCompany($scope, $scope.company.id, function (resp) {
-            $scope.productsData = resp;
-          });
+            ProductsService.getProductsByCompany($scope, $scope.company.id, function (resp) {
+              $scope.productsData = resp;
+            });
+          }
+          $scope.users = UsersService.getAllByCompanyId($scope.company.id);
+          $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
         }
 
-        $scope.users = UsersService.getAllByCompanyId($scope.company.id);
-        $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
+
+        $scope.checkClientType = function(type) {
+          if($scope.company && type) {
+            return $scope.company.clientType.toLowerCase() === type
+          }
+        };
 
         $scope.getUsersNumber = function () {
           var usersInfo = {
@@ -82,7 +89,7 @@
 
         };
 
-        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
+        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $stateParams.companyId, function (resp) {
           if (resp && resp.length) {
             //var agentsList = resp;
             // $scope.agents = agentsList.sort(function (a, b) {
@@ -176,7 +183,7 @@
           if(uptimeOption) {
             if( $scope.uptimeOrder) {
               $scope.uptimeOrder = '';
-              $scope.orderDevicesBy = 'hostName'
+              $scope.orderDevicesBy = 'label'
             }else {
               $scope.uptimeOrder = 'timing.uptimeForOrdering';
             }

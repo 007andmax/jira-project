@@ -260,10 +260,11 @@
           <div ng-messages="contactForm.lastName.$error"
                ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'lastName')}">
             <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+            <label class="control-label" ng-message="required">Last name is required.</label>
           </div>
 
           <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-                 name="lastName" ng-model="contact.lastName" make-dirty-on-blur>
+                 name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'designation')}">

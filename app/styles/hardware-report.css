@@ -637,9 +637,11 @@
 .con-col .col-md-2 {
   width: 16%;
 }
+
 .con-col .col-md-3 {
   width: 18%;
 }
+
 .con-col .col-md-1 {
   width: 10%;
 }
@@ -1130,9 +1132,11 @@
   max-height: 144px !important;
   min-width: 360px;
 }
-.run-report-content-device .dropdown-remote-report-tech{
+
+.run-report-content-device .dropdown-remote-report-tech {
   min-width: 250px;
 }
+
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a {
   padding: 10px;
 }
@@ -1398,6 +1402,78 @@
 
 .grey-btn-report:hover:not([disabled]) {
   background-color: #cac9c9;
+}
+
+.list-of-product {
+  background-color: #F3F7F9;
+}
+
+.list-of-product .product-list-report-btn {
+  width: 100%;
+}
+
+.list-of-product .report-title {
+  left: 30px;
+}
+.list-of-product .dropdown-email.product-report-btn.dropdown.open .dropdown-menu{
+  right: -90px;
+}
+.list-of-product .product-report-btn.dropdown.open .dropdown-menu{
+  right: 0;
+}
+.company-report {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: #F3F7F9;
+  box-shadow: none;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.company-report .top-product-list-ticket {
+  color: #364656 !important;
+  border: none;
+  padding: 0 15px;
+}
+
+.company-report .top-product-list-ticket [class*=col-md-] {
+  font-size: 11px;
+}
+
+.company-report .col-md-3 {
+  width: 26%;
+}
+
+.company-report .top-product-list-ticket .control.checkbox {
+  margin-top: 7px;
+}
+
+.company-report li.content-product-list-ticket {
+  background-color: #fff;
+  margin-bottom: 8px;
+  border: none !important;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
+  padding: 5px 15px 0;
+  cursor: default !important;
+  min-height: 50px;
+}
+
+.company-report li.content-product-list-ticket:last-child {
+  margin-bottom: 0;
+}
+
+.company-report .content-product-list-ticket [class*=col-md-] {
+  font-size: 13px;
+}
+
+.company-report .content-product-list-ticket .control.checkbox {
+  margin-top: 20px;
+}
+
+.company-report [class*=col-md-] {
+  padding: 12px 6px;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 1600px) {
