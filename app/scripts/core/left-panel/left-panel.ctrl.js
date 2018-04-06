@@ -490,7 +490,7 @@
             value: jsonObj
           };
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function(resp) {
-            console.log(resp);
+            //console.log(resp);
           })
         };
 
@@ -500,7 +500,7 @@
             colorCode: colorCode
           };
           ColorsService.putCompaniesColors(dataToSend, function(resp) {
-            console.log(resp);
+            //console.log(resp);
           })
         };
 
@@ -509,14 +509,14 @@
         });
 
         $scope.changeUserColor = function(type, colorCode) {
-          console.log("colorCode: ", colorCode);
-          console.log("type: ", type);
+          //console.log("colorCode: ", colorCode);
+          //console.log("type: ", type);
           var dataToSend = {
             type: type,
             colorCode: colorCode
           };
           ColorsService.putUsersColors(dataToSend, function(resp) {
-            console.log(resp);
+            //console.log(resp);
           })
         };
 

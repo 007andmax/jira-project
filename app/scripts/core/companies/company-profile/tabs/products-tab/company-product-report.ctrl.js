@@ -7,6 +7,9 @@
       function ($scope, $rootScope, $timeout, PermissionsService ) {
 
         $scope.PermissionsService = PermissionsService;
+        $scope.purchaseCostSum = 0;
+        $scope.salesPriceSum = 0;
+
 
         $scope.selectedLines = [];
         $scope.selectedLinesIds = {};
@@ -24,6 +27,7 @@
             $scope.selectedLines.splice(ind, 1);
             $scope.selectedLinesIds[line.lineId] = false;
           }
+          calculateSumPrices()
           $timeout(function () {
             $rootScope.reportLineChanged = true;
           }, 1000);
@@ -47,6 +51,8 @@
               $scope.selectedLinesIds[line.lineId] = true;
             });
 
+            calculateSumPrices()
+
             $timeout(function () {
               $rootScope.reportLineChanged = true;
             }, 1000);
@@ -56,6 +62,7 @@
               $scope.selectedLinesIds[line.lineId] = false;
             });
             $scope.selectedLines = [];
+            calculateSumPrices()
           }
         };
 
@@ -66,6 +73,18 @@
 
         $scope.isAllLinesAreChecked = function() {
           return $scope.selectedLines.length === $scope.reportByProducts.lines.length
+        }
+
+
+        function calculateSumPrices(){
+          if($scope.selectedLines.length > 0) {
+            $scope.purchaseCostSum = 0;
+            $scope.salesPriceSum = 0;
+            for(var i=0; i<$scope.selectedLines.length; i++) {
+              $scope.purchaseCostSum +=$scope.selectedLines[i].purchaseCost;
+              $scope.salesPriceSum += $scope.selectedLines[i].salePrice;
+            }
+          }
         }
 
       }]);

@@ -42,7 +42,7 @@
 
         DevicesService.sendDeviceStatusRequest($scope.company.id, $scope.agent.agentId, function(resp){
           if(resp){
-            console.log(resp);
+            //console.log(resp);
           }
         });
 

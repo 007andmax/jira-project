@@ -215,7 +215,7 @@
         $scope.changePrimaryContact = function(user) {
           CompaniesService.changePrimaryContact(user.id, function(resp) {
             if(resp) {
-              console.log(resp);
+              //console.log(resp);
             }
           })
         };

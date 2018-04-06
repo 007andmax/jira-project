@@ -96,7 +96,6 @@
     };
 
     $scope.sendNewHTMLForPdf = function() {
-      console.log('new HTML send request');
       $rootScope.reportLineChanged = true;
     }
 
