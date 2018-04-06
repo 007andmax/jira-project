@@ -79,7 +79,8 @@
 
     function checkInit() {
       checkInitsCount++;
-      if (checkInitsCount === 2) {
+      if (checkInitsCount === 3) {
+        console.log(storage.companies);
         initialized = true;
 
         for (var i = 0; i < initListeners.length; i++) {
@@ -220,7 +221,7 @@
     }
 
     function checkStorageCompanyLength() {
-      return storage.company.length;
+      return storage.companies.length;
     }
 
     function searchByAllCompanies(keyword) {
