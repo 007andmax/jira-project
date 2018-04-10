@@ -253,7 +253,8 @@
         };
 
         $scope.installAgents = function (form) {
-          if (form.$valid) {
+          // if (form.$valid) {
+            if (true) {
             $scope.isInstallInProgress = true;
             $scope.triedToDownload = false;
 
@@ -283,6 +284,7 @@
         $scope.saveMasterAgent = function (masterAgent) {
           if (!$scope.saveMasterAgentInProgress) {
             $scope.saveMasterAgentInProgress = true;
+            $scope.masterAgent = masterAgent;
             DevicesService.saveMasterAgent($scope.company.id, masterAgent.agentId, function () {
               $scope.saveMasterAgentInProgress = false;
             });

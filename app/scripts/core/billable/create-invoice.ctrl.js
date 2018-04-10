@@ -55,7 +55,6 @@
             xmlhttp.setRequestHeader("Content-type", "application/json");
             xmlhttp.send();
           }
-
         };
 
         $scope.$on('$destroy', function () {
@@ -83,8 +82,6 @@
         $scope.close = function () {
           $uibModalInstance.dismiss();
         };
-
-
 
         $scope.print = function () {
           var lockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId,

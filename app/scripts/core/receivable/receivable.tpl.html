@@ -26,93 +26,95 @@
         </button>
       </div>
     </div>
-    <ul class="qt-list company-devices qt-users invoices-list">
-      <li class="list-heading clearfix">
-        <div class="col-md-1">
-          <label class="control checkbox pull-left">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label>
-          Invoice#
-        </div>
-        <div class="col-md-3">Company</div>
-        <div class="col-md-2">Invoice date</div>
-        <div class="col-md-2">Read On</div>
-        <div class="col-md-1" style="width: 13.6%;">Amount</div>
-        <div class="col-md-2">Due Date</div>
-        <div class="col-md-1" style="width: 3%;"></div>
-      </li>
-      <li class="list-item">
-        <div class="col-md-1">
-          <label class="control checkbox pull-left">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label>
-          INV 95025
-        </div>
-        <div class="col-md-3">
-          <bold>ACS-Tech 80 Ltd.</bold>
-        </div>
-        <div class="col-md-2">06 Nov 2018</div>
-        <div class="col-md-2">10 Dec 2018</div>
-        <div class="col-md-1" style="width: 13.6%;">$82809</div>
-        <div class="col-md-2">
-          <p class="invoice-status status-success">Over due by 5 days</p>
-          <!--<p class="network-scan-status status-success"></p>-->
-          <!--<p class="network-scan-status status-danger"></p>-->
-        </div>
-        <div class="col-md-1" style="width: 3%;">
-          <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-            <div uib-dropdown-toggle uib-tooltip="more"
-                 tooltip-placement="top"
-                 tooltip-append-to-body="true"
-                 tooltip-popup-delay="2000">
-              <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
-            </div>
-            <ul class="dropdown-menu" role="menu">
-              <li><a>Resend</a></li>
-              <li><a>Rollback</a></li>
-              <li><a>Remove</a></li>
-            </ul>
-          </div>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="col-md-1">
-          <label class="control checkbox pull-left">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label>
-          INV 95025
-        </div>
-        <div class="col-md-3">
-          <bold>ACS-Tech 80 Ltd.</bold>
-        </div>
-        <div class="col-md-2">06 Nov 2018</div>
-        <div class="col-md-2">10 Dec 2018</div>
-        <div class="col-md-1" style="width: 13.6%;">$82809</div>
-        <div class="col-md-2">
-          <p class="invoice-status status-success">Over due by 5 days</p>
-          <!--<p class="network-scan-status status-success"></p>-->
-          <!--<p class="network-scan-status status-danger"></p>-->
-        </div>
-        <div class="col-md-1" style="width: 3%;">
-          <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-            <div uib-dropdown-toggle uib-tooltip="more"
-                 tooltip-placement="top"
-                 tooltip-append-to-body="true"
-                 tooltip-popup-delay="2000">
-              <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
-            </div>
-            <ul class="dropdown-menu" role="menu">
-              <li><a>Resend</a></li>
-              <li><a>Rollback</a></li>
-              <li><a>Remove</a></li>
-            </ul>
-          </div>
-        </div>
-      </li>
-    </ul>
+    <div ng-hide="loadingInProgress"
+         ng-include="'/html/scripts/core/receivable/invoices-'+ mode +'.tpl.html'"></div>
+    <!--<ul class="qt-list company-devices qt-users invoices-list">-->
+      <!--<li class="list-heading clearfix">-->
+        <!--<div class="col-md-1">-->
+          <!--<label class="control checkbox pull-left">-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
+          <!--</label>-->
+          <!--Invoice#-->
+        <!--</div>-->
+        <!--<div class="col-md-3">Company</div>-->
+        <!--<div class="col-md-2">Invoice date</div>-->
+        <!--<div class="col-md-2">Read On</div>-->
+        <!--<div class="col-md-1" style="width: 13.6%;">Amount</div>-->
+        <!--<div class="col-md-2">Due Date</div>-->
+        <!--<div class="col-md-1" style="width: 3%;"></div>-->
+      <!--</li>-->
+      <!--<li class="list-item">-->
+        <!--<div class="col-md-1">-->
+          <!--<label class="control checkbox pull-left">-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
+          <!--</label>-->
+          <!--INV 95025-->
+        <!--</div>-->
+        <!--<div class="col-md-3">-->
+          <!--<bold>ACS-Tech 80 Ltd.</bold>-->
+        <!--</div>-->
+        <!--<div class="col-md-2">06 Nov 2018</div>-->
+        <!--<div class="col-md-2">10 Dec 2018</div>-->
+        <!--<div class="col-md-1" style="width: 13.6%;">$82809</div>-->
+        <!--<div class="col-md-2">-->
+          <!--<p class="invoice-status status-success">Over due by 5 days</p>-->
+          <!--&lt;!&ndash;<p class="network-scan-status status-success"></p>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p class="network-scan-status status-danger"></p>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="col-md-1" style="width: 3%;">-->
+          <!--<div uib-dropdown smart-dropdown-menu-position="dropdown-menu">-->
+            <!--<div uib-dropdown-toggle uib-tooltip="more"-->
+                 <!--tooltip-placement="top"-->
+                 <!--tooltip-append-to-body="true"-->
+                 <!--tooltip-popup-delay="2000">-->
+              <!--<i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>-->
+            <!--</div>-->
+            <!--<ul class="dropdown-menu" role="menu">-->
+              <!--<li><a>Resend</a></li>-->
+              <!--<li><a>Rollback</a></li>-->
+              <!--<li><a>Remove</a></li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li class="list-item">-->
+        <!--<div class="col-md-1">-->
+          <!--<label class="control checkbox pull-left">-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
+          <!--</label>-->
+          <!--INV 95025-->
+        <!--</div>-->
+        <!--<div class="col-md-3">-->
+          <!--<bold>ACS-Tech 80 Ltd.</bold>-->
+        <!--</div>-->
+        <!--<div class="col-md-2">06 Nov 2018</div>-->
+        <!--<div class="col-md-2">10 Dec 2018</div>-->
+        <!--<div class="col-md-1" style="width: 13.6%;">$82809</div>-->
+        <!--<div class="col-md-2">-->
+          <!--<p class="invoice-status status-success">Over due by 5 days</p>-->
+          <!--&lt;!&ndash;<p class="network-scan-status status-success"></p>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p class="network-scan-status status-danger"></p>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="col-md-1" style="width: 3%;">-->
+          <!--<div uib-dropdown smart-dropdown-menu-position="dropdown-menu">-->
+            <!--<div uib-dropdown-toggle uib-tooltip="more"-->
+                 <!--tooltip-placement="top"-->
+                 <!--tooltip-append-to-body="true"-->
+                 <!--tooltip-popup-delay="2000">-->
+              <!--<i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>-->
+            <!--</div>-->
+            <!--<ul class="dropdown-menu" role="menu">-->
+              <!--<li><a>Resend</a></li>-->
+              <!--<li><a>Rollback</a></li>-->
+              <!--<li><a>Remove</a></li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</li>-->
+    <!--</ul>-->
   </div>
 
 

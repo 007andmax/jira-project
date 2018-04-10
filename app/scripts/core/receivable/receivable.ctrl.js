@@ -21,7 +21,7 @@
         });
 
         $scope.PermissionsService = PermissionsService;
-        $scope.mode = availableMods[0];
+        $scope.mode = availableMods[1];
         $scope.orderInvoices = {
           field: 'number',
           reverse: false

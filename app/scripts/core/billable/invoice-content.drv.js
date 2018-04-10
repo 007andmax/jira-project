@@ -15,7 +15,10 @@
 
             scope.currentTime = +(new Date());
 
-
+            // scope.closeButton = element.find('[close-button]')
+            // scope.closeButton.click(function(){
+            //   console.log('EXIT')
+            // })
             scope.$watch(function () {
 
               var invoiceDto = ngModelCtrl.$viewValue;
