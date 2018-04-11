@@ -30,7 +30,7 @@
             }, function () {
 
               if (ngModelCtrl.$viewValue) {
-                element.animate({ right: "15px" });
+                element.animate({right: "15px"});
 
                 scope.currentInvoice = ngModelCtrl.$viewValue;
 
@@ -75,7 +75,7 @@
                 }
               }
 
-              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', { cache: $templateCache })
+              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
                 .then(function (response) {
 
                   invoiceTemplate = angular.copy(response);
@@ -85,7 +85,6 @@
                 });
 
             });
-
 
 
             function initNanoScroller(compileElement) {
@@ -129,7 +128,7 @@
 
               initScrollListner(pages.length);
               invoiceModalWindow.trigger("scroll")
-              element.animate({ opacity: 1 });
+              element.animate({opacity: 1});
 
             }
 

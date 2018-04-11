@@ -16,40 +16,44 @@
   padding: 0 30px;
 }
 
-.invoice-page .header {
-  border-bottom: 2px solid gray;
-  padding-bottom: 10px;
-  position: absolute;
-}
-
-.invoice-page .invoice-btns {
+.invoice-btns {
   background-color: #F1F5F8;
   border-radius: 6px;
   height: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 130px;
   position: absolute;
-  right: 70px;
+  right: 100px;
+  top: 30px;
   z-index: 1;
+  transition: all .3s;
 }
 
-.invoice-page .invoice-btns button i {
+.invoice-btns button i {
   width: 16px;
   height: 16px;
   display: inline-block;
   margin-top: 5px;
 }
-.invoice-page .invoice-btns button .invoice-download{
+
+.invoice-btns button .invoice-download {
   background-image: url(../images/new-icons/invoice-download.png);
 }
-.invoice-page .invoice-btns button .invoice-send{
+
+.invoice-btns button .invoice-send {
   background-image: url(../images/new-icons/invoice-send.png);
 }
-.invoice-page .invoice-btns button {
+
+.invoice-btns button {
   border: none;
   background-color: transparent;
+}
+
+.invoice-btns .close-icon {
+  position: absolute;
+  right: -40px;
 }
 
 .invoice-page .header .tech-company-name {
@@ -107,7 +111,6 @@
 .invoice-page .sub-header {
   float: left;
   width: 790px;
-  padding-top: 140px;
   padding-bottom: 25px;
   color: #4c5c6f;
   page-break-inside: avoid;

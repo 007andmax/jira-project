@@ -278,7 +278,6 @@
   top: 4px;
 }
 
-.inv-modal .invoice-actions,
 .hardware .invoice-actions {
   float: right;
 }
@@ -302,7 +301,6 @@
   background-position: -735px 1px;
 }
 
-.inv-modal .close-icon,
 .hardware .close-icon {
   margin: 13px -1px 0 29px;
 }
@@ -335,7 +333,7 @@
 .inv-modal .paging {
   position: fixed;
   bottom: 40px;
-  left: 50%;
+  left: calc(100% - 370px);
   margin-left: -27px;
   transition: opacity .3s;
   z-index: 11;
