@@ -368,6 +368,9 @@
           }
         }, function (val) {
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
+          if(val === 'finished') {
+            UserNotificationService.show('Scanning finished', true);
+          }
         });
 
       }

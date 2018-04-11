@@ -52,6 +52,10 @@
       <!--</li>-->
       <!--</ul>-->
       <!--</div>-->
+
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
+        Scanning  <div class="loader"></div>
+      </div>
     </div>
     <div class="header-item" ng-form="credentialsForm">
 
@@ -208,8 +212,8 @@
         </div>
       </li>
     </ul>
-    <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
-      <div class="loader"></div>
-    </div>
+    <!--<div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">-->
+      <!--<div class="loader"></div>-->
+    <!--</div>-->
   </div>
 </div>

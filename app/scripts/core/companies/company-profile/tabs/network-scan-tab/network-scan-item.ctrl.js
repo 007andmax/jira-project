@@ -52,31 +52,53 @@
         $scope.$watchGroup(['device.agentStatus', 'device.agentPassword.status'], function () {
           $scope.device.status = $scope.device.status || {};
 
-          if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {
+          if ( $scope.device.agentStatus === 'managed') {
 
             $scope.device.changingStatus = false;
-
             $scope.device.status.message = 'Managed';
             $scope.device.status.statusValue = true;
             $scope.device.status.online = true;
 
-          } else if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'FAIL') {
+          } else if ($scope.device.agentStatus === 'installed') {
 
             $scope.device.changingStatus = false;
-            $scope.device.status.message = 'Incorrect';
+            $scope.device.status.message = 'Installed';
+            $scope.device.status.statusValue = true;
+            $scope.device.status.online = true;
 
-          } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'loginError') {
+          }else if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'FAIL') {
 
             $scope.device.changingStatus = false;
+            $scope.device.status.message = 'Fail';
 
+          } else if ($scope.device.agentStatus === 'error' ) {
+
+            $scope.device.changingStatus = false;
             $scope.device.status.message = 'Error';
             $scope.device.status.statusValue = false;
             $scope.device.status.online = false;
 
-          } else if ($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress'
+          } else if ( $scope.device.agentStatus === 'loginError') {
+
+            $scope.device.changingStatus = false;
+            $scope.device.status.message = 'Incorrect Password';
+            $scope.device.status.statusValue = false;
+            $scope.device.status.online = false;
+
+          } else if ( $scope.device.agentStatus === 'inProgress'
             || ($scope.device.agentPassword && $scope.device.agentPassword.status === 'PROCEED')) {
 
-            $scope.device.status.message = 'Changing';
+            $scope.device.status.message = 'Installing';
+            $scope.device.changingStatus = true;
+
+          } else if ($scope.device.agentStatus === 'init' ) {
+
+            $scope.device.status.message = 'Copy install files';
+            $scope.device.changingStatus = true;
+
+          } else if ($scope.device.agentStatus === 'unknown' ) {
+
+            $scope.device.status.message = 'install error';
             $scope.device.changingStatus = true;
 
           } else {
@@ -86,7 +108,7 @@
             if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'SUCCESS') {
               $scope.device.status.message = 'Correct';
             } else {
-              $scope.device.status.message = 'Unknown';
+              $scope.device.status.message = 'Not Monitored';
             }
             $scope.device.status.statusValue = false;
             $scope.device.status.online = false;
