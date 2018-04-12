@@ -60,7 +60,7 @@
     {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
   </div>
 
-  <div class="invoice-actions invoice-btns" style="opacity: 0;">
+  <div class="invoice-actions invoice-btns" style="opacity: 3;">
     <button ng-if="!invoicePreview"
             ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
             ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"

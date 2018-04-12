@@ -163,6 +163,7 @@
             lockObj.invoiceDataDto.company.companyInfo = CompaniesService.getOneById(lock.invoiceDataDto.company.id);
 
             $scope.invoiceLocks.push(lockObj);
+            console.log('$scope.invoiceLocks', $scope.invoiceLocks)
 
           }
 
