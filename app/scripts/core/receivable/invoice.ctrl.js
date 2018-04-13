@@ -22,6 +22,25 @@
           }
         }
 
+        var today = Date.now();
+        var dueDate = new Date($scope.invoice.dueDate).getTime();
+        var overDue;
+        $scope.isOverDue = false;
+
+        $scope.getDueDate = function(){
+          overDue = (dueDate - today)/86400000;
+          $scope.isOverDue = (overDue < 0);
+          return Math.abs(Math.floor(overDue));
+        };
+
+        $scope.invoiceFilterChecker = function() {
+          if($scope.invoiceFilter && $scope.invoiceFilter !== '') {
+            return ($scope.invoice.number.indexOf($scope.invoiceFilter) > -1 || $scope.company.name.indexOf($scope.invoiceFilter) > -1)
+          } else {
+            return true;
+          }
+        };
+
         $scope.sentInvoice = function () {
           var idInvoiceToSend = $scope.invoice.id;
           $scope.sending[idInvoiceToSend] = true;

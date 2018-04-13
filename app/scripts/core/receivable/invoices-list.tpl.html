@@ -1,10 +1,10 @@
 <ul class="qt-list company-devices qt-users invoices-list">
   <li class="list-heading clearfix">
     <div class="col-md-1">
-      <label class="control checkbox pull-left">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
+      <!--<label class="control checkbox pull-left">-->
+        <!--<input type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+      <!--</label>-->
       Invoice#
     </div>
     <div class="col-md-3">Company</div>
@@ -14,14 +14,22 @@
     <div class="col-md-2">Due Date</div>
     <div class="col-md-1" style="width: 3%;"></div>
   </li>
-  <li class="list-item" ng-repeat="invoice in receivableInvoicesData.list | filter: filterByCompany | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
-      ng-controller="quicktech.core.receivable.invoiceCtrl">
+  <li class="list-item" ng-repeat="invoice in receivableInvoicesData.list  | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
+      ng-controller="quicktech.core.receivable.invoiceCtrl" ng-show="invoiceFilterChecker()">
     <div class="col-md-1">
       <label class="control checkbox pull-left">
-        <input type="checkbox">
+        <input type="checkbox" ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
+               ng-model="invoiceToSent.invoices[invoice.number]">
         <span class="control-indicator"></span>
       </label>
-      INV {{invoice.number}}
+       <a class="checkbox-caption free-number-link" style="margin-right: 0;"
+             tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true"
+             modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+             modal-window-class="invoice-modal-not-background"
+             mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+             mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
+         INV {{ invoice.number }}
+    </a>
     </div>
     <div class="col-md-3">
       <bold>{{company.name}}</bold>
@@ -30,7 +38,8 @@
     <div class="col-md-2">10 Dec 2018</div>
     <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
     <div class="col-md-2">
-      <p class="invoice-status status-success">Over due by 5 days</p>
+      <p class="invoice-status " ng-class="{'status-success': getDueDate() < 5, 'status-danger': getDueDate() >=5}" ng-if="isOverDue">Over due by {{getDueDate()}} days</p>
+      <p class="invoice-status status-success"  ng-if="!isOverDue">Pay in {{getDueDate()}} days</p>
       <!--<p class="network-scan-status status-success"></p>-->
       <!--<p class="network-scan-status status-danger"></p>-->
     </div>
@@ -43,9 +52,10 @@
           <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
         </div>
         <ul class="dropdown-menu" role="menu">
-          <li><a>Resend</a></li>
-          <li><a>Rollback</a></li>
-          <li><a>Remove</a></li>
+          <li><a ng-click="sentInvoice()">Resend</a></li>
+          <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
+          <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
+          <!--<li><a>Make read on</a></li>-->
         </ul>
       </div>
     </div>

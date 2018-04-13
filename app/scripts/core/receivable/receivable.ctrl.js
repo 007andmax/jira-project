@@ -20,6 +20,8 @@
           });
         });
 
+        $scope.invoiceFilter = '';
+
         $scope.PermissionsService = PermissionsService;
         $scope.mode = availableMods[1];
         $scope.orderInvoices = {
