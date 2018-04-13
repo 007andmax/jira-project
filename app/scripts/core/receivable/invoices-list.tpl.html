@@ -38,10 +38,9 @@
     <div class="col-md-2">10 Dec 2018</div>
     <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
     <div class="col-md-2">
-      <p class="invoice-status " ng-class="{'status-success': getDueDate() < 5, 'status-danger': getDueDate() >=5}" ng-if="isOverDue">Over due by {{getDueDate()}} days</p>
-      <p class="invoice-status status-success"  ng-if="!isOverDue">Pay in {{getDueDate()}} days</p>
-      <!--<p class="network-scan-status status-success"></p>-->
-      <!--<p class="network-scan-status status-danger"></p>-->
+      <p class="invoice-status status-danger" ng-if="isOverDue">Overdue by {{getDueDate()}} days</p>
+      <p class="invoice-status status-warning"  ng-if="!isOverDue">Outstanding by {{getDueDate()}} days</p>
+      <p class="invoice-status status-success"  ng-if="invoice.paidOn">Payd {{getDueDate()}} days ago</p>
     </div>
     <div class="col-md-1" style="width: 3%;">
       <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">

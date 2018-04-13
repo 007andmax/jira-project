@@ -9,7 +9,12 @@
           <i class="report-calendar"></i>
         </div>
         <div>
-          <input class="pointer" type="text" placeholder="Search by company, invoice" ng-model="invoiceFilter">
+          <input type="text" class="form-control has-dropdown pointer"
+                 placeholder="Search by company or number" ng-trim="false"
+                 autocomplete="off" ng-model="invoiceFilter"
+                 uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                 qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
+          <div typeahead-input-icon="invoiceFilter"></div>
         </div>
         <div>
           <input class="pointer" type="text" placeholder="Sort By">

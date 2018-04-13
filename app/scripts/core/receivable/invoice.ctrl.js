@@ -34,7 +34,7 @@
         };
 
         $scope.invoiceFilterChecker = function() {
-          if($scope.invoiceFilter && $scope.invoiceFilter !== '') {
+          if($scope.invoiceFilter && $scope.invoiceFilter !== '' && $scope.invoiceFilter !== ' ') {
             return ($scope.invoice.number.indexOf($scope.invoiceFilter) > -1 || $scope.company.name.indexOf($scope.invoiceFilter) > -1)
           } else {
             return true;
