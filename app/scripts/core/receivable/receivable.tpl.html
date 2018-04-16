@@ -17,8 +17,41 @@
           <div typeahead-input-icon="invoiceFilter"></div>
         </div>
         <div>
-          <input class="pointer" type="text" placeholder="Sort By">
-          <i class="icn-sm report-caret-icon"></i>
+          <!--<input class="pointer" type="text" placeholder="Sort By">-->
+          <!--<i class="icn-sm report-caret-icon"></i>-->
+          <!--<input  type="text" class="pointer" placeholder="Sort by"-->
+                 <!--ng-model="sortBy"-->
+                 <!--uib-typeahead="interval for interval in sortByItems"-->
+                 <!--qt-typeahead-async-show-on-focus readonly >-->
+          <!--<div>-->
+            <!--<i class="icn-sm icn-caret-gray pointer" ng-show="!sortBy"></i>-->
+            <!--<i class="icn-sm icn-remove-old pointer"-->
+               <!--ng-show="sortBy"-->
+               <!--uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy = ''"></i>-->
+          <!--</div>-->
+          <div class="col-md-1" style="width: 3%;">
+            <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+              <div uib-dropdown-toggle uib-tooltip="more"
+                   tooltip-placement="top"
+                   tooltip-append-to-body="true"
+                   tooltip-popup-delay="2000">
+                <input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">
+                <div>
+                <i class="icn-sm icn-caret-gray pointer" ng-show="!sortByValue"></i>
+                <i class="icn-sm icn-remove-old pointer"
+                  ng-show="sortByValue"
+                  uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
+                </div>
+              </div>
+              <ul class="dropdown-menu" role="menu">
+                <li><a ng-click="sortBy('Paid invoices')">Paid invoices</a></li>
+                <li><a ng-click="sortBy('Outstanding invoices')">Outstanding invoices</a></li>
+                <li><a ng-click="sortBy('Overdue invoices')">Overdue invoices</a></li>
+                <li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
          <!--НЕ ОБВОРАЧИВАЙ БАТТОН В ДИВ-->

@@ -1,16 +1,12 @@
 <ul class="qt-list company-devices qt-users invoices-list">
   <li class="list-heading clearfix">
-    <div class="col-md-1">
-      <!--<label class="control checkbox pull-left">-->
-        <!--<input type="checkbox">-->
-        <!--<span class="control-indicator"></span>-->
-      <!--</label>-->
+    <div class="col-md-1" >
       Invoice#
     </div>
     <div class="col-md-3">Company</div>
     <div class="col-md-2">Invoice date</div>
     <div class="col-md-2">Read On</div>
-    <div class="col-md-1" style="width: 13.6%;">Amount</div>
+    <div class="col-md-1" style="width: 13.6%;" >Amount</div>
     <div class="col-md-2">Due Date</div>
     <div class="col-md-1" style="width: 3%;"></div>
   </li>
@@ -35,7 +31,7 @@
       <bold>{{company.name}}</bold>
     </div>
     <div class="col-md-2">{{invoice.date | date:'dd MMM yyyy'}}</div>
-    <div class="col-md-2">10 Dec 2018</div>
+    <div class="col-md-2">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
     <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
     <div class="col-md-2">
       <p class="invoice-status status-danger" ng-if="isOverDue">Overdue by {{getDueDate()}} days</p>

@@ -175,6 +175,29 @@
           }
         }, true);
 
+        $scope.sortBy = function(value) {
+          $scope.sortByValue = value;
+          // if(value) {
+          //   switch(value) {
+          //     case 'Group By companies':
+          //       $scope.mode = 'group-by-company';
+          //       break;
+          //   }
+          // }
+          if(value === 'Group by companies') {
+            // $scope.mode = 'group-by-company';
+            $state.go('receivable', {
+              mode: availableMods[0]
+            });
+            $scope.sortByValue = 'Group by companies'
+          } else {
+            $state.go('receivable', {
+              mode: availableMods[1]
+            });
+            $scope.sortByValue = ''
+          }
+        };
+
         $scope.hideLoadingIndicator = function () {
           $scope.loadingInProgress = false;
         };
