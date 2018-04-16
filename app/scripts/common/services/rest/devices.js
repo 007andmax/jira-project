@@ -623,6 +623,7 @@
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
                 }
                 Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
+                Utils.defineReadOnlyProperty(device, "realTimeChecker", true);
               }
 
               var call = callbacksForRemoteInstall[newChange.data.netScanId] || callbacksForRemoteInstall[newChange.data.deviceId];

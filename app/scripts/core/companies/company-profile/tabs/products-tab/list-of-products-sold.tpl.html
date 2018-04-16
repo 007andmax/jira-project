@@ -87,9 +87,9 @@
         </div>
         <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
           <!--<div class="col-md-1" style="margin-right: 20px;"><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong></div>-->
-          <div class="col-md-1" style="margin-right: 30px;"><br> <strong><span>{{salesPriceSum | currency: '$': 2}}</span></strong>
+          <div class="col-md-1" style="margin-right: 30px;" ><br> <strong><span ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
           </div>
-          <div class="col-md-2"><br>
+          <div class="col-md-2" ><br>
             <strong><span>{{purchaseCostSum | currency: '$': 2}}</span></strong></div>
         </div>
       </div>
