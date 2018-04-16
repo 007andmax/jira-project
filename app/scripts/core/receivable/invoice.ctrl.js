@@ -26,10 +26,12 @@
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var overDue;
         $scope.isOverDue = false;
+        $scope.isOutstanding = false;
 
         $scope.getDueDate = function(){
           overDue = (dueDate - today)/86400000;
           $scope.isOverDue = (overDue < 0);
+          $scope.isOutstanding = (overDue > 0);
           return Math.abs(Math.floor(overDue));
         };
 
@@ -38,6 +40,12 @@
             return ($scope.invoice.number.indexOf($scope.invoiceFilter) > -1 || $scope.company.name.indexOf($scope.invoiceFilter) > -1)
           } else {
             return true;
+          }
+        };
+
+        $scope.sortByFilterChecker = function() {
+          if($scope.sortByValue === 'Paid invoices') {
+
           }
         };
 
