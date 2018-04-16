@@ -13,6 +13,8 @@
         $scope.patternMax40 = /^.{0,40}$/;
         $scope.showEditDeviceField =  false;
 
+        $scope.device.realTimeChecker = false;
+
         $scope.uninstallAgent = function () {
           if ($scope.device.status.statusValue) {
             DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.device.deviceId);

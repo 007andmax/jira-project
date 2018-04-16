@@ -201,7 +201,7 @@
           </div>
           <div class="col-md-2">
             <!--<div class="network-scan-status status-success">Agent installed</div>-->
-            <p class="network-scan-status {{ getStatusClass() }}">{{ device.status.message }}</p>
+            <p class="network-scan-status {{ getStatusClass() }}" ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message }}</p>
             <!--<div class="network-scan-status status-danger">Blocked</div>-->
           </div>
           <div class="col-md-1" style="justify-content: flex-end;">
