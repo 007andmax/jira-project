@@ -181,11 +181,8 @@
           if(value === 'Group by companies') {
             $scope.mode =  availableMods[0];
           } else {
-            $scope.sortByValue = '';
             $scope.mode = availableMods[1]
           }
-
-
         };
 
         $scope.hideLoadingIndicator = function () {

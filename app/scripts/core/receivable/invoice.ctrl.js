@@ -43,9 +43,15 @@
           }
         };
 
-        $scope.sortByFilterChecker = function() {
+        $scope.sortByFilterChecker = function(invoice) {
           if($scope.sortByValue === 'Paid invoices') {
-
+            return !!invoice.paidOn;
+          } else if($scope.sortByValue === 'Outstanding invoices') {
+            return $scope.isOutstanding
+          } else if($scope.sortByValue === 'Overdue invoices') {
+            return $scope.isOverDue
+          } else {
+            return true;
           }
         };
 

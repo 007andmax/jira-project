@@ -11,7 +11,7 @@
     <div class="col-md-1" style="width: 3%;"></div>
   </li>
   <li class="list-item" ng-repeat="invoice in receivableInvoicesData.list  | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
-      ng-controller="quicktech.core.receivable.invoiceCtrl" ng-show="invoiceFilterChecker()">
+      ng-controller="quicktech.core.receivable.invoiceCtrl" ng-show="invoiceFilterChecker() && sortByFilterChecker(invoice)" on-finish-render="hideLoadingIndicator()">
     <div class="col-md-1">
       <label class="control checkbox pull-left">
         <input type="checkbox" ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"

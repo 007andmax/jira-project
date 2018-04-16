@@ -79,7 +79,6 @@
     function checkInit() {
       checkInitsCount++;
       if (checkInitsCount === 3) {
-        console.log(storage.companies);
         initialized = true;
 
         for (var i = 0; i < initListeners.length; i++) {
