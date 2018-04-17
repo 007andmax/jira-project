@@ -206,15 +206,17 @@
           if ($scope.orderInvoices.field === 'number') {
             return parseInt(item.number) || 0;
           } else if ($scope.orderInvoices.field === 'company') {
-            return CompaniesService.getOneById(item.company.id).name;
+            return item.companyName
           } else if ($scope.orderInvoices.field === 'readedAt') {
             return item.readedAt;
           } else if ($scope.orderInvoices.field === 'date') {
             return item.date;
           } else if ($scope.orderInvoices.field === 'dueDate') {
-            return item.dueDate.value;
+            return item.dueDate
           } else if ($scope.orderInvoices.field === 'amount') {
             return $scope.totalSum.invoices[item.id];
+          } else if ($scope.orderInvoices.field === 'sum') {
+            return item.sum
           }
         };
 

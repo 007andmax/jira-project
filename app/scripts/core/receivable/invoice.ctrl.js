@@ -8,6 +8,7 @@
         var disableInvoiceButtons = false;
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
+        $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
 
         if ($scope.invoice.dueDate <= Date.now()) {
           $scope.$emit('indicatorInvoice');
