@@ -340,21 +340,21 @@
 }
 
 .inv-modal .expires-in {
-  position: fixed;
+  position: absolute;
   top: 82px;
-  left: 50%;
-  margin-left: -118px;
+  left: 94%;
+  margin-left: -125px;
   width: 234px;
   text-align: center;
   z-index: 5555;
   display: inline-block;
-  background-color: #ffecb3;
-  border: 1px solid #ffe493;
-  border-radius: 3px;
+  background-color: transparent;
   color: #1f2a37;
   padding: 5px 15px;
-  -webkit-box-shadow: 0 2px 5px 0 rgba(255, 228, 147, 0.4);
-  box-shadow: 0 2px 5px 0 rgba(255, 228, 147, 0.4);
+}
+
+.inv-modal .expires-in strong {
+  font-weight: 500;
 }
 
 @-moz-document url-prefix() {

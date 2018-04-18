@@ -108,6 +108,15 @@
   padding: 8px 0 4px;
 }
 
+.invoices .invoices-header-filters .dropdown-menu > li > a {
+  padding: 5px 20px !important;
+}
+
+.invoices .invoices-header-filters [uib-typeahead-popup].dropdown-menu {
+  position: absolute;
+  width: 100%;
+}
+
 .invoice-page .sub-header {
   float: left;
   width: 790px;

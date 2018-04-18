@@ -5,7 +5,8 @@
       <h3>Invoices</h3>
       <div class="invoices-header-filters">
         <div>
-          <input class="pointer" type="text" placeholder="Filter by date" date-range-picker ng-model="invoiceDateFilter" options="invoiceDateFilterOptions">
+          <input class="pointer" type="text" placeholder="Filter by date" date-range-picker ng-model="invoiceDateFilter"
+                 options="invoiceDateFilterOptions">
           <i class="report-calendar"></i>
         </div>
         <div>
@@ -16,45 +17,41 @@
                  qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
           <div typeahead-input-icon="invoiceFilter"></div>
         </div>
-        <div>
+        <div class="clearfix">
           <!--<input class="pointer" type="text" placeholder="Sort By">-->
           <!--<i class="icn-sm report-caret-icon"></i>-->
           <!--<input  type="text" class="pointer" placeholder="Sort by"-->
-                 <!--ng-model="sortBy"-->
-                 <!--uib-typeahead="interval for interval in sortByItems"-->
-                 <!--qt-typeahead-async-show-on-focus readonly >-->
+          <!--ng-model="sortBy"-->
+          <!--uib-typeahead="interval for interval in sortByItems"-->
+          <!--qt-typeahead-async-show-on-focus readonly >-->
           <!--<div>-->
-            <!--<i class="icn-sm icn-caret-gray pointer" ng-show="!sortBy"></i>-->
-            <!--<i class="icn-sm icn-remove-old pointer"-->
-               <!--ng-show="sortBy"-->
-               <!--uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy = ''"></i>-->
+          <!--<i class="icn-sm icn-caret-gray pointer" ng-show="!sortBy"></i>-->
+          <!--<i class="icn-sm icn-remove-old pointer"-->
+          <!--ng-show="sortBy"-->
+          <!--uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy = ''"></i>-->
           <!--</div>-->
-          <div class="col-md-1" style="width: 3%;">
-            <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-              <div uib-dropdown-toggle uib-tooltip="more"
-                   tooltip-placement="top"
-                   tooltip-append-to-body="true"
-                   tooltip-popup-delay="2000">
-                <input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">
-                <div>
+          <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+            <div uib-dropdown-toggle uib-tooltip="more"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true"
+                 tooltip-popup-delay="2000">
+              <input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">
+              <div>
                 <i class="icn-sm icn-caret-gray pointer" ng-show="!sortByValue"></i>
                 <i class="icn-sm icn-remove-old pointer"
-                  ng-show="sortByValue"
-                  uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
-                </div>
+                   ng-show="sortByValue"
+                   uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
               </div>
-              <ul class="dropdown-menu" role="menu">
-                <li><a ng-click="sortBy('Paid invoices')">Paid invoices</a></li>
-                <li><a ng-click="sortBy('Outstanding invoices')">Outstanding invoices</a></li>
-                <li><a ng-click="sortBy('Overdue invoices')">Overdue invoices</a></li>
-                <li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>
-              </ul>
             </div>
+            <ul class="dropdown-menu" role="menu">
+              <li><a ng-click="sortBy('Paid invoices')">Paid invoices</a></li>
+              <li><a ng-click="sortBy('Outstanding invoices')">Outstanding invoices</a></li>
+              <li><a ng-click="sortBy('Overdue invoices')">Overdue invoices</a></li>
+              <li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>
+            </ul>
           </div>
-
         </div>
 
-         <!--НЕ ОБВОРАЧИВАЙ БАТТОН В ДИВ-->
         <button class="btn btn-success"
                 custom-disabled="{{ !selectedInvoiceCount }}"
                 modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
@@ -70,47 +67,45 @@
   </div>
 
 
-
-
   <!--<div class="receivable-content">-->
-    <!--<div class="tabs-container" style="height: 55px">-->
+  <!--<div class="tabs-container" style="height: 55px">-->
 
-      <!--<div class="payment-receive-fixed" fixed-block-top>-->
-        <!--<div class="btn btn-primary pull-right has-tooltip"-->
-             <!--custom-disabled="{{ !selectedInvoiceCount }}"-->
-             <!--modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"-->
-             <!--modal-window-class="modal-receive-payment"-->
-             <!--mw-controller="quicktech.core.receivable.receivePaymentCtrl">-->
-          <!--Receive Payment-->
-        <!--</div>-->
+  <!--<div class="payment-receive-fixed" fixed-block-top>-->
+  <!--<div class="btn btn-primary pull-right has-tooltip"-->
+  <!--custom-disabled="{{ !selectedInvoiceCount }}"-->
+  <!--modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"-->
+  <!--modal-window-class="modal-receive-payment"-->
+  <!--mw-controller="quicktech.core.receivable.receivePaymentCtrl">-->
+  <!--Receive Payment-->
+  <!--</div>-->
 
-        <!--<button-with-loading-indicator class="btn btn-primary pull-right" ng-click="resendSelectedInvoices()"-->
-                                       <!--custom-disabled="{{ !selectedInvoiceCount || sendingInvoices }}"-->
-                                       <!--loading="sendingInvoices"-->
-                                       <!--label="Resend Selected"></button-with-loading-indicator>-->
+  <!--<button-with-loading-indicator class="btn btn-primary pull-right" ng-click="resendSelectedInvoices()"-->
+  <!--custom-disabled="{{ !selectedInvoiceCount || sendingInvoices }}"-->
+  <!--loading="sendingInvoices"-->
+  <!--label="Resend Selected"></button-with-loading-indicator>-->
 
-        <!--<ul class="nav nav-qt" role="tablist">-->
+  <!--<ul class="nav nav-qt" role="tablist">-->
 
-          <!--<li role="presentation" ng-class="{active: mode === 'group-by-company'}">-->
-            <!--<a ui-sref="receivable({mode: 'group-by-company'})">-->
-              <!--Invoice by Company-->
-            <!--</a>-->
-          <!--</li>-->
+  <!--<li role="presentation" ng-class="{active: mode === 'group-by-company'}">-->
+  <!--<a ui-sref="receivable({mode: 'group-by-company'})">-->
+  <!--Invoice by Company-->
+  <!--</a>-->
+  <!--</li>-->
 
-          <!--<li role="presentation" ng-class="{active: mode === 'list'}">-->
-            <!--<a ui-sref="receivable({mode: 'list'})">-->
-              <!--Invoice by Number-->
-            <!--</a>-->
-          <!--</li>-->
+  <!--<li role="presentation" ng-class="{active: mode === 'list'}">-->
+  <!--<a ui-sref="receivable({mode: 'list'})">-->
+  <!--Invoice by Number-->
+  <!--</a>-->
+  <!--</li>-->
 
-        <!--</ul>-->
-      <!--</div>-->
+  <!--</ul>-->
+  <!--</div>-->
 
-    <!--</div>-->
+  <!--</div>-->
 
-    <!--<div class="tab-content" ng-hide="loadingInProgress"-->
-         <!--ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>-->
-    <!--<loading-indicator loading-trigger="loadingInProgress"></loading-indicator>-->
+  <!--<div class="tab-content" ng-hide="loadingInProgress"-->
+  <!--ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>-->
+  <!--<loading-indicator loading-trigger="loadingInProgress"></loading-indicator>-->
 
   <!--</div>-->
 </div>
