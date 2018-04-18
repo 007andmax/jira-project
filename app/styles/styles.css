@@ -1088,8 +1088,8 @@ hr {
 }
 
 .billable-items .label-primary:hover {
-  background-color: #6295b161!important;
-  color: #4F5F79!important;
+  background-color: #6295b161 !important;
+  color: #4F5F79 !important;
 }
 
 .remove-display-none {
@@ -1165,6 +1165,10 @@ hr {
   top: 17px;
 }
 
+.invoices .invoices-header .invoices-header-filters > div .icn-remove-old {
+  top: 15px;
+}
+
 .invoices .invoices-header .invoices-header-filters > div:nth-child(2) {
   max-width: 300px;
   width: 100%;
@@ -1175,7 +1179,7 @@ hr {
 }
 
 .invoices .invoices-header .invoices-header-filters > div > input,
-.invoices .invoices-header .invoices-header-filters [uib-dropdown] input{
+.invoices .invoices-header .invoices-header-filters [uib-dropdown] input {
   width: 100%;
   border: none;
   border-radius: 4px;
