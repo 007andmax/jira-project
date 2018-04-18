@@ -30,7 +30,7 @@
 
                 scope.currentInvoice = ngModelCtrl.$viewValue;
 
-                if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
+                if (scope.showInvoiceLockIndex && scope.invoiceLocks && scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
 
                   var currentBillToId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId;
 
@@ -40,17 +40,18 @@
                     }
                   }
                 } else {
-
-                  for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
-                    if (scope.currentInvoice.billTo[i].isPrimary) {
-                      scope.currentBillTo = scope.currentInvoice.billTo[i];
-                      scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
+                  if(scope.currentInvoice.billTo) {
+                    for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
+                      if (scope.currentInvoice.billTo[i].isPrimary) {
+                        scope.currentBillTo = scope.currentInvoice.billTo[i];
+                        scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
+                      }
                     }
                   }
 
                 }
 
-                if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId) {
+                if (scope.showInvoiceLockIndex && scope.invoiceLocks && scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId) {
 
                   var currentAddressId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId;
 
@@ -62,10 +63,12 @@
                   }
 
                 } else {
-                  for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
-                    if (scope.currentInvoice.shipTo[i].isPrimary) {
-                      scope.currentShipTo = scope.currentInvoice.shipTo[i];
-                      scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = scope.currentShipTo.id;
+                  if(scope.currentInvoice.shipTo) {
+                    for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
+                      if (scope.currentInvoice.shipTo[i].isPrimary) {
+                        scope.currentShipTo = scope.currentInvoice.shipTo[i];
+                        scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = scope.currentShipTo.id;
+                      }
                     }
                   }
                 }

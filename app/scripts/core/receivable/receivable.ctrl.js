@@ -37,6 +37,11 @@
 
         $scope.invoiceDateFilter = {startDate: null, endDate: null};
 
+        $scope.invoiceDateFilterOptions = {
+          'autoApply': true,
+          "cancelClass": "btn-secondary"
+        };
+
         $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
           $scope.totalCollectedLast30Days = 0;
           for (var i = 0; i < $scope.receivableGraphData.length; i++) {
