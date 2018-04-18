@@ -570,10 +570,8 @@
           }
 
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
-            console.log('realtime netScan', newChanges);
 
             if (newChange.action === 'NETWORK_SCAN') {
-              console.log('realtime action = NETWORK SCAN', newChanges);
 
               var data = newChange.data,
                 newDevices = data.deviceList,
@@ -597,7 +595,6 @@
               }
 
             } else if (newChange.action === 'REMOTE_INSTALL') {
-              console.log('realtime action = REMOTE INSTALL', newChanges);
 
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
 
@@ -610,8 +607,6 @@
               }
 
               if (device) {
-                console.log('device', device);
-                console.log('device old agentStatus', device.agentStatus);
                 if (newChange.data.status === 'MANAGED') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'managed');
                 } else if (newChange.data.status === 'INSTALLED') {
@@ -628,7 +623,6 @@
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
                 }
                 Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
-                console.log('device new agentStatus', device.agentStatus);
               }
 
               var call = callbacksForRemoteInstall[newChange.data.netScanId] || callbacksForRemoteInstall[newChange.data.deviceId];

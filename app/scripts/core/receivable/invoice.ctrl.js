@@ -56,6 +56,17 @@
           }
         };
 
+        $scope.dateFilterChecker = function(invoice) {
+          if($scope.invoiceDateFilter.startDate && $scope.invoiceDateFilter.endDate) {
+            var invoiceDate = new Date(invoice.date).getTime();
+            var startDateFromFilter = new Date($scope.invoiceDateFilter.startDate._d).getTime();
+            var endDateFromFilter = new Date($scope.invoiceDateFilter.endDate._d).getTime();
+            return (invoiceDate >= startDateFromFilter && invoiceDate <= endDateFromFilter);
+          }else {
+            return true;
+          }
+        };
+
         $scope.sentInvoice = function () {
           var idInvoiceToSend = $scope.invoice.id;
           $scope.sending[idInvoiceToSend] = true;
