@@ -4537,11 +4537,15 @@ Devices tab
 
 .dashboard-network-scan .btn-success,
 .billable-items-header .btn-success,
-.invoices .invoices-header .invoices-header-filters .btn-success {
+.invoices .invoices-header .invoices-header-filters .btn-success,
+.receive .btn-success{
   margin-bottom: 65px;
   position: relative;
   background-color: #2ec866;
   border: solid 1px #189947;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashboard-network-scan .btn-success:hover,
@@ -4552,7 +4556,10 @@ Devices tab
 .billable-items-header .btn-success:focus,
 .invoices .invoices-header .invoices-header-filters .btn-success:hover,
 .invoices .invoices-header .invoices-header-filters .btn-success:active,
-.invoices .invoices-header .invoices-header-filters .btn-success:focus {
+.invoices .invoices-header .invoices-header-filters .btn-success:focus,
+.receive .btn-success:hover,
+.receive .btn-success:active,
+.receive .btn-success:focus{
   background-color: #189947;
 }
 
@@ -5664,7 +5671,8 @@ Devices tab
   border: solid 1px #0e83ca;
 }
 
-.device-name-edit .btn-default {
+.device-name-edit .btn-default,
+.receive .btn-default{
   width: 80px;
   background-color: #edf2f6;
   color: #4f5f79;
@@ -5673,7 +5681,10 @@ Devices tab
 
 .device-name-edit .btn-default:hover,
 .device-name-edit .btn-default:active,
-.device-name-edit .btn-default:focus {
+.device-name-edit .btn-default:focus,
+.receive .btn-default:hover,
+.receive .btn-default:active,
+.receive .btn-default:focus{
   background-color: #c4cbd5;
   border: 1px solid #c4cbd5;
   color: #4f5f79;

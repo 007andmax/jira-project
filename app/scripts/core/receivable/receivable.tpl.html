@@ -17,7 +17,7 @@
                  qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
           <div typeahead-input-icon="invoiceFilter"></div>
         </div>
-        <div class="clearfix">
+        <div class="clearfix sort-by">
           <!--<input class="pointer" type="text" placeholder="Sort By">-->
           <!--<i class="icn-sm report-caret-icon"></i>-->
           <!--<input  type="text" class="pointer" placeholder="Sort by"-->
@@ -31,10 +31,7 @@
           <!--uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy = ''"></i>-->
           <!--</div>-->
           <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
-            <div uib-dropdown-toggle uib-tooltip="more"
-                 tooltip-placement="top"
-                 tooltip-append-to-body="true"
-                 tooltip-popup-delay="2000">
+            <div uib-dropdown-toggle>
               <input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">
               <div>
                 <i class="icn-sm report-caret-icon pointer" ng-show="!sortByValue"></i>
@@ -43,7 +40,7 @@
                    uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
               </div>
             </div>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="dropdown-menu" role="menu" style="margin-top: -3px;">
               <li><a ng-click="sortBy('Paid invoices')">Paid invoices</a></li>
               <li><a ng-click="sortBy('Outstanding invoices')">Outstanding invoices</a></li>
               <li><a ng-click="sortBy('Overdue invoices')">Overdue invoices</a></li>

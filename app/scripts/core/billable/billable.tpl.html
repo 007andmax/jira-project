@@ -1,21 +1,24 @@
 <div>
-
   <div class="billable-items">
     <div class="billable-items-header clearfix ">
       <h3 class="pull-left">Billable Items</h3>
-      <div class="fixed-block-top" style="width: auto; height: 55px; right: 20px; margin-top: 20px;" fixed-block-top offset-top="100">
+      <div class="fixed-block-top" style="width: auto; height: 55px; right: 20px; margin-top: 20px;" fixed-block-top
+           offset-top="100">
         <ul class="nav nav-qt" role="tablist">
           <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
             <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
                  qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
                  style="display: inline-block;">
-              <div qt-popover-trigger="mouseenter" style="display: inline-block; background-color: white; width: 150px;">
-                <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip" style="width: 98px;"
-                     custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
-                     modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
-                     modal-window-class="invoice-modal-not-background"
-                     mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-                     mw-controller="quicktech.core.billable.createInvoiceCtrl">Create Invoice</button>
+              <div qt-popover-trigger="mouseenter"
+                   style="display: inline-block; background-color: white; width: 150px;">
+                <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip"
+                        style="width: 98px;"
+                        custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
+                        modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+                        modal-window-class="invoice-modal-not-background"
+                        mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+                        mw-controller="quicktech.core.billable.createInvoiceCtrl">Create Invoice
+                </button>
                 </button>
               </div>
             </div>
@@ -26,20 +29,21 @@
     </div>
 
 
-    <div class="billable-items-list clearfix"  ng-hide="loadingInProgress" ftt-tab-content>
+    <div class="billable-items-list clearfix" ng-hide="loadingInProgress" ftt-tab-content>
 
       <div class="billable-item clearfix" event-toggle-slider="toggleBillableTickets"
            ng-controller="quicktech.core.billable.companyCtrl"
            ng-repeat="billableCompany in billableData | filterBillableCompany"
-           on-finish-render="loadingFinished()" >
+           on-finish-render="loadingFinished()">
 
-        <div class="billable-items-list-item clearfix"  ng-style="{'background-color': showTickets ? '#F9FBFC' : ''}">
+        <div class="billable-items-list-item clearfix" ng-style="{'background-color': showTickets ? '#F9FBFC' : ''}">
           <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
              ng-show="billableCompany.lockType !== 'NONE'">
             <i class="icn-sm icn-locked"></i>
           </a>
           <div class="pull-left" style="width: 2%;">
-            <label class="control checkbox pull-left" style="margin-top: 3px;" stop-propagation="click" ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')">
+            <label class="control checkbox pull-left" style="margin-top: 3px;" stop-propagation="click"
+                   ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')">
               <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
                      ng-click="changeCompanyCheckbox(billableCompany.companyId)"
                      ng-disabled="anotherCompanySelected(billableCompany.companyId)">
@@ -48,9 +52,12 @@
           </div>
           <div class="pull-left">{{ company.name }}</div>
           <span class="label label-light">{{ billableCompany.tickets.length }}</span>
-          <div class="text-right pull-right" style="width: 8%;font-size: 15px;">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
+          <div class="text-right pull-right" style="width: 8%;font-size: 15px;">{{ billableCompany.totalSum | currency:
+            '$': 2 }}
+          </div>
           <div class="pull-right" ng-click="toggleBillableTickets()">
-            <i class="expand pull-right pointer" uib-tooltip="expand" ng-class="{'expand-down': !showTickets, 'expand-up': showTickets}"></i>
+            <i class="expand pull-right pointer" uib-tooltip="expand"
+               ng-class="{'expand-down': !showTickets, 'expand-up': showTickets}"></i>
           </div>
           <div class="col-md-12 hr"></div>
         </div>
@@ -58,200 +65,196 @@
 
         <div class="billable-item clearfix "
              style="background-color:#F9FBFC;" ng-if="showTickets" qt-scroll-to="top" ets-slider
-             ng-controller="quicktech.core.billable.companyTicketsCtrl" >
+             ng-controller="quicktech.core.billable.companyTicketsCtrl">
           <div class="clearfix">
             <!--<div class="pull-left" style="width: 2%;">-->
-              <!--<label class="control checkbox pull-left" style="margin-top: 3px;">-->
-                <!--<input type="checkbox">-->
-                <!--<span class="control-indicator"></span>-->
-              <!--</label>-->
+            <!--<label class="control checkbox pull-left" style="margin-top: 3px;">-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
             <!--</div>-->
             <!--<div class="pull-left">Hexaware Technologies Ltd</div>-->
             <!--<div class="text-right pull-right" style="width: 8%;font-size: 15px;">$90234</div>-->
             <!--<div class="pull-right">-->
-              <!--<i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>-->
+            <!--<i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>-->
             <!--</div>-->
             <!--<div class="col-md-12 hr"></div>-->
             <!--<div class="item-sub-list">-->
 
 
-              <div class="billable-items-list-item-sub col-md-12 clearfix" ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
-                   show-model-element="{{ 'showTicket-' + ticket.id }}" >
-                <div class="clearfix" style="margin-bottom: 14px;">
-                  <div class="pull-left" style="width: 2%;">
-                    <label class="control checkbox pull-left" style="margin-top: 3px;"
-                           ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"
-                           stop-propagation="click">
-                      <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
-                             ng-change="changeTicketCheckbox(billableCompany.companyId)"
-                             ng-disabled="anotherCompanySelected(billableCompany.companyId)">
-                      <span class="control-indicator"></span>
-                    </label>
-                  </div>
-                  <div class="pull-left">{{ ticket.subject }}</div>
-                  <div class="billable-tkt pull-left">
-                    <a class="label label-primary" stop-propagation="click"
-                       style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
-                       ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
-                      Tkt# {{ ticket.ticketNumber }}
-                    </a>
-                  </div>
-                  <div class="text-right pull-right" style="width: 8%;">{{ ticket.sum | currency: '$': 2 }}</div>
-                  <div class="pull-right">
-                    <i class="expand expand-down pointer pull-right" uib-tooltip="expand" qt-icon-toggle-to-change></i>
-                  </div>
+            <div class="billable-items-list-item-sub col-md-12 clearfix"
+                 ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
+                 show-model-element="{{ 'showTicket-' + ticket.id }}">
+              <div class="clearfix" style="margin-bottom: 14px;">
+                <div class="pull-left" style="width: 2%;">
+                  <label class="control checkbox pull-left" style="margin-top: 3px;"
+                         ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"
+                         stop-propagation="click">
+                    <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
+                           ng-change="changeTicketCheckbox(billableCompany.companyId)"
+                           ng-disabled="anotherCompanySelected(billableCompany.companyId)">
+                    <span class="control-indicator"></span>
+                  </label>
                 </div>
-
-                <div class="billable-items-list-item-sub-content col-md-12 clearfix" qt-ts-slider style="display: none;">
-                  <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
-                  <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
+                <div class="pull-left">{{ ticket.subject }}</div>
+                <div class="billable-tkt pull-left">
+                  <a class="label label-primary" stop-propagation="click"
+                     style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
+                     ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
+                    Tkt# {{ ticket.ticketNumber }}
+                  </a>
                 </div>
-                <div class="col-md-12 hr" style="margin-top: 11px;"></div>
+                <div class="text-right pull-right" style="width: 8%;">{{ ticket.sum | currency: '$': 2 }}</div>
+                <div class="pull-right">
+                  <i class="expand expand-down pointer pull-right" uib-tooltip="expand" qt-icon-toggle-to-change></i>
+                </div>
               </div>
+
+              <div class="billable-items-list-item-sub-content col-md-12 clearfix" qt-ts-slider style="display: none;">
+                <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
+                <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
+              </div>
+              <div class="col-md-12 hr" style="margin-top: 6px;"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<!--<div class="billable-content">-->
+<!--<div class="tabs-container">-->
+<!--<div class="fixed-block-top" style="width: auto; height: 55px; right: -20px;" fixed-block-top>-->
 
+<!--<ul class="nav nav-qt" role="tablist">-->
 
+<!--<div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">-->
+<!--<div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"-->
+<!--qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"-->
+<!--style="display: inline-block;">-->
+<!--<div qt-popover-trigger="mouseenter" style="display: inline-block">-->
+<!--<div class="btn btn-create-invoice btn-primary pull-right has-tooltip" style="width: 98px;"-->
+<!--custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"-->
+<!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Create Invoice"-->
+<!--modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"-->
+<!--modal-window-class="invoice-modal-not-background"-->
+<!--mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"-->
+<!--mw-controller="quicktech.core.billable.createInvoiceCtrl">-->
+<!--<i class="icon-sm icn-create-invoice"></i>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</ul>-->
+<!--</div>-->
 
+<!--</div>-->
+<!--<div class="tab-content" style="margin-top: 20px;">-->
+<!--<div role="tabpanel" class="tab-pane active">-->
+<!--<ul class="qt-list qt-billable-clients" ng-hide="loadingInProgress" ftt-tab-content>-->
 
+<!--<li class="billable-main" event-toggle-slider="toggleBillableTickets"-->
+<!--ng-controller="quicktech.core.billable.companyCtrl"-->
+<!--ng-repeat="billableCompany in billableData | filterBillableCompany"-->
+<!--on-finish-render="loadingFinished()">-->
 
-  <!--<div class="billable-content">-->
-    <!--<div class="tabs-container">-->
-      <!--<div class="fixed-block-top" style="width: auto; height: 55px; right: -20px;" fixed-block-top>-->
+<!--<div ng-click="toggleBillableTickets()"-->
+<!--class="clickable-layer"></div>-->
 
-        <!--<ul class="nav nav-qt" role="tablist">-->
+<!--<div class="cur-text">-->
 
-          <!--<div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">-->
-            <!--<div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"-->
-                 <!--qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"-->
-                 <!--style="display: inline-block;">-->
-              <!--<div qt-popover-trigger="mouseenter" style="display: inline-block">-->
-                <!--<div class="btn btn-create-invoice btn-primary pull-right has-tooltip" style="width: 98px;"-->
-                     <!--custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"-->
-                     <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Create Invoice"-->
-                     <!--modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"-->
-                     <!--modal-window-class="invoice-modal-not-background"-->
-                     <!--mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"-->
-                     <!--mw-controller="quicktech.core.billable.createInvoiceCtrl">-->
-                  <!--<i class="icon-sm icn-create-invoice"></i>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</ul>-->
-      <!--</div>-->
+<!--<a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"-->
+<!--ng-show="billableCompany.lockType !== 'NONE'">-->
+<!--<i class="icn-sm icn-locked"></i>-->
+<!--</a>-->
 
-    <!--</div>-->
-    <!--<div class="tab-content" style="margin-top: 20px;">-->
-      <!--<div role="tabpanel" class="tab-pane active">-->
-        <!--<ul class="qt-list qt-billable-clients" ng-hide="loadingInProgress" ftt-tab-content>-->
+<!--<label ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')"-->
+<!--class="control checkbox pull-left"-->
+<!--stop-propagation="click" style="z-index: 2;">-->
+<!--<input type="checkbox" ng-model="ticketsSelection[company.id].checked"-->
+<!--ng-click="changeCompanyCheckbox(billableCompany.companyId)"-->
+<!--ng-disabled="anotherCompanySelected(billableCompany.companyId)">-->
+<!--<span class="control-indicator"></span>-->
+<!--</label>-->
 
-          <!--<li class="billable-main" event-toggle-slider="toggleBillableTickets"-->
-              <!--ng-controller="quicktech.core.billable.companyCtrl"-->
-              <!--ng-repeat="billableCompany in billableData | filterBillableCompany"-->
-              <!--on-finish-render="loadingFinished()">-->
+<!--<div class="checkbox-caption bold">{{ company.name }}</div>-->
+<!--<span class="label label-light">{{ billableCompany.tickets.length }}</span>-->
 
-            <!--<div ng-click="toggleBillableTickets()"-->
-                 <!--class="clickable-layer"></div>-->
+<!--</div>-->
 
-            <!--<div class="cur-text">-->
+<!--<div class="col-2" style="float: right;">-->
 
-              <!--<a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"-->
-                 <!--ng-show="billableCompany.lockType !== 'NONE'">-->
-                <!--<i class="icn-sm icn-locked"></i>-->
-              <!--</a>-->
+<!--<div style="float: left;" ng-if="isDisocuntForIcon(billableCompany)">-->
+<!--<i class="icon-sm sale-icon-for-isDicount"></i>-->
+<!--</div>-->
 
-              <!--<label ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')"-->
-                     <!--class="control checkbox pull-left"-->
-                     <!--stop-propagation="click" style="z-index: 2;">-->
-                <!--<input type="checkbox" ng-model="ticketsSelection[company.id].checked"-->
-                       <!--ng-click="changeCompanyCheckbox(billableCompany.companyId)"-->
-                       <!--ng-disabled="anotherCompanySelected(billableCompany.companyId)">-->
-                <!--<span class="control-indicator"></span>-->
-              <!--</label>-->
+<!--<div class="billable-amount bold">-->
+<!--{{ billableCompany.totalSum | currency: '$': 2 }}-->
+<!--</div>-->
 
-              <!--<div class="checkbox-caption bold">{{ company.name }}</div>-->
-              <!--<span class="label label-light">{{ billableCompany.tickets.length }}</span>-->
+<!--</div>-->
 
-            <!--</div>-->
+<!--<ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets" qt-scroll-to="top"-->
+<!--ng-controller="quicktech.core.billable.companyTicketsCtrl">-->
 
-            <!--<div class="col-2" style="float: right;">-->
+<!--<li class="inventory-details"-->
+<!--ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider-->
+<!--show-model-element="{{ 'showTicket-' + ticket.id }}">-->
 
-              <!--<div style="float: left;" ng-if="isDisocuntForIcon(billableCompany)">-->
-                <!--<i class="icon-sm sale-icon-for-isDicount"></i>-->
-              <!--</div>-->
+<!--<div qt-ts-toggler-->
+<!--class="clickable-layer"></div>-->
 
-              <!--<div class="billable-amount bold">-->
-                <!--{{ billableCompany.totalSum | currency: '$': 2 }}-->
-              <!--</div>-->
+<!--<div class="cur-text">-->
+<!--<div class="clearfix">-->
 
-            <!--</div>-->
+<!--<a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"-->
+<!--ng-if="ticket.lockedBy" stop-propagation="click"-->
+<!--tooltip-placement="top" tooltip-append-to-body="true"-->
+<!--uib-tooltip="{{ getTooltipName(ticket.lockedBy) }}">-->
+<!--<i class="icn-sm icn-locked-blue"></i>-->
+<!--</a>-->
 
-            <!--<ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets" qt-scroll-to="top"-->
-                <!--ng-controller="quicktech.core.billable.companyTicketsCtrl">-->
+<!--<label class="control checkbox pull-left"-->
+<!--ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"-->
+<!--stop-propagation="click">-->
+<!--<input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"-->
+<!--ng-change="changeTicketCheckbox(billableCompany.companyId)"-->
+<!--ng-disabled="anotherCompanySelected(billableCompany.companyId)">-->
+<!--<span class="control-indicator"></span>-->
+<!--</label>-->
 
-              <!--<li class="inventory-details"-->
-                  <!--ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider-->
-                  <!--show-model-element="{{ 'showTicket-' + ticket.id }}">-->
+<!--<div class="checkbox-caption">{{ ticket.subject }}</div>-->
+<!--<a class="label label-primary" stop-propagation="click"-->
+<!--style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"-->
+<!--ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">-->
+<!--Tkt# {{ ticket.ticketNumber }}-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
 
-                <!--<div qt-ts-toggler-->
-                     <!--class="clickable-layer"></div>-->
+<!--<div class="col-2" style="float: right;">-->
+<!--<div ng-if="isDiscountForIconTicket(ticket)">-->
+<!--<i class="icon-sm sale-icon-for-isDicount"></i>-->
+<!--</div>-->
+<!--<div class="billable-amount bold">{{ ticket.sum | currency: '$': 2 }}</div>-->
+<!--</div>-->
 
-                <!--<div class="cur-text">-->
-                  <!--<div class="clearfix">-->
+<!--<div class="table-wrapper clearfix" qt-ts-slider style="display: none;">-->
 
-                    <!--<a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"-->
-                       <!--ng-if="ticket.lockedBy" stop-propagation="click"-->
-                       <!--tooltip-placement="top" tooltip-append-to-body="true"-->
-                       <!--uib-tooltip="{{ getTooltipName(ticket.lockedBy) }}">-->
-                      <!--<i class="icn-sm icn-locked-blue"></i>-->
-                    <!--</a>-->
+<!--<div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>-->
+<!--<div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>-->
 
-                    <!--<label class="control checkbox pull-left"-->
-                           <!--ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"-->
-                           <!--stop-propagation="click">-->
-                      <!--<input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"-->
-                             <!--ng-change="changeTicketCheckbox(billableCompany.companyId)"-->
-                             <!--ng-disabled="anotherCompanySelected(billableCompany.companyId)">-->
-                      <!--<span class="control-indicator"></span>-->
-                    <!--</label>-->
+<!--</div>-->
+<!--</li>-->
 
-                    <!--<div class="checkbox-caption">{{ ticket.subject }}</div>-->
-                    <!--<a class="label label-primary" stop-propagation="click"-->
-                       <!--style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"-->
-                       <!--ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">-->
-                      <!--Tkt# {{ ticket.ticketNumber }}-->
-                    <!--</a>-->
-                  <!--</div>-->
-                <!--</div>-->
-
-                <!--<div class="col-2" style="float: right;">-->
-                  <!--<div ng-if="isDiscountForIconTicket(ticket)">-->
-                    <!--<i class="icon-sm sale-icon-for-isDicount"></i>-->
-                  <!--</div>-->
-                  <!--<div class="billable-amount bold">{{ ticket.sum | currency: '$': 2 }}</div>-->
-                <!--</div>-->
-
-                <!--<div class="table-wrapper clearfix" qt-ts-slider style="display: none;">-->
-
-                  <!--<div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>-->
-                  <!--<div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>-->
-
-                <!--</div>-->
-              <!--</li>-->
-
-            <!--</ul>-->
-          <!--</li>-->
-        <!--</ul>-->
-        <!--<loading-indicator loading-trigger="loadingInProgress"></loading-indicator>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<loading-indicator loading-trigger="loadingInProgress"></loading-indicator>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 <script>
   (function (i, s, o, g, r, a, m) {
