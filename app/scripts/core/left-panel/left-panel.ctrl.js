@@ -67,6 +67,8 @@
         $scope.CompanyProfileProductsPage = false;
         $scope.CompanyProfileInvoicesPage = false;
 
+
+
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -88,6 +90,23 @@
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
+
+        function deactivateAllCompanyProfileTabs() {
+          $scope.CompanyProfileTicketsPage = false;
+          $scope.CompanyProfileUsersPage = false;
+          $scope.CompanyProfileDevicesPage = false;
+          $scope.CompanyProfilePasswordManagerPage = false;
+          $scope.CompanyProfileProductsPage = false;
+          $scope.CompanyProfileInvoicesPage = false;
+        }
+
+        $scope.activateCompanyProfileTab = function(tabToActivate) {
+          var tab = $scope[tabToActivate];
+          deactivateAllCompanyProfileTabs();
+          if(tab === false) {
+            $scope[tabToActivate]= true;
+          }
+        };
 
         CustomStorageService.getUserCustomStorageValue('companiesPageFilterByIndustryHistory', function(resp) {
           $scope.industryFilterHistoryCompaniesPage = resp;

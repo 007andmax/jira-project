@@ -535,7 +535,7 @@
 
         <div class="left-panel-hide-filter">
           <div class="left-panel-title left-panel-title-hover"
-               ng-click="CompanyProfileTicketsPage = !CompanyProfileTicketsPage"
+               ng-click="activateCompanyProfileTab('CompanyProfileTicketsPage')"
                ng-class="{'left-panel-active': CompanyProfileTicketsPage}"
                ui-sref="companyProfile({ tabName: 'tickets-all' })">
             Tickets
@@ -570,7 +570,7 @@
             <div class="left-panel-hide-filter" style="margin: 0;">
               <div class="privet-andrey">
                 <div class="left-panel-title left-panel-title-hover"
-                     ng-click="dropdownByUserCompanyProfilePage = !dropdownByUserCompanyProfilePage"
+                     ng-click="activateCompanyProfileTab('dropdownByUserCompanyProfilePage')"
                      style="color: #9ca5b6;">
                   By User
                   <i class="report-caret-icon"
@@ -633,7 +633,7 @@
 
         <div class="left-panel-hide-filter">
           <div class="left-panel-title left-panel-title-hover"
-               ng-click="CompanyProfileUsersPage = !CompanyProfileUsersPage"
+               ng-click="activateCompanyProfileTab('CompanyProfileUsersPage')"
                ng-class="{'left-panel-active': CompanyProfileUsersPage}"
                ui-sref="companyProfile({ tabName: 'users-all' })">
             Users
@@ -663,7 +663,7 @@
 
         <div class="left-panel-hide-filter">
           <div class="left-panel-title  left-panel-title-hover"
-               ng-click="CompanyProfileDevicesPage = !CompanyProfileDevicesPage"
+               ng-click="activateCompanyProfileTab('CompanyProfileDevicesPage')"
                ng-class="{'left-panel-active': CompanyProfileDevicesPage}"
                ui-sref="companyProfile({ tabName: 'devices-all' })">
             Devices
@@ -706,7 +706,7 @@
 
         <div class="left-panel-hide-filter" ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')">
           <div class="left-panel-title left-panel-title-hover"
-               ng-click="CompanyProfilePasswordManagerPage = !CompanyProfilePasswordManagerPage"
+               ng-click="activateCompanyProfileTab('CompanyProfilePasswordManagerPage')"
                ng-class="{'left-panel-active': CompanyProfilePasswordManagerPage}"
                ui-sref="companyProfile({ tabName: 'password-manager' })">
             Password Manager
@@ -792,7 +792,7 @@
 
         <div class="left-panel-hide-filter" ng-if="PermissionsService.isAllowed('VIEW_SALES_REPORT')">
           <div class="left-panel-title left-panel-title-hover"
-               ng-click="CompanyProfileProductsPage = !CompanyProfileProductsPage"
+               ng-click="activateCompanyProfileTab('CompanyProfileProductsPage')"
                ng-class="{'left-panel-active': CompanyProfileProductsPage}"
                ui-sref="companyProfile({ tabName: 'products' })">
             Products
@@ -809,7 +809,7 @@
 
         <div class="left-panel-hide-filter">
           <div class="left-panel-title left-panel-title-hover"
-               ng-click="CompanyProfileInvoicesPage = !CompanyProfileInvoicesPage"
+               ng-click="activateCompanyProfileTab('CompanyProfileInvoicesPage')"
                ng-class="{'left-panel-active': CompanyProfileInvoicesPage}">
             Invoices
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileInvoicesPage}"></i>
