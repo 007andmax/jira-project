@@ -26,6 +26,7 @@
         }
 
         function onScroll() {
+          console.log('onScroll')
           var etsSlider = element.closest('[ets-slider]');
           if (element.css('display') !== 'none' && (!etsSlider.length || etsSlider.css('display') !== 'none')) {
             var elementScreenTop = element[0].getBoundingClientRect().top - (scope.offsetTop || 78), //78 - header height
