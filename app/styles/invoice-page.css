@@ -17,7 +17,7 @@
 }
 
 .invoice-btns {
-  background-color: #F1F5F8;
+  background-color: #f1f5f8;
   border-radius: 6px;
   height: 40px;
   display: flex;
@@ -115,6 +115,24 @@
 .invoices .invoices-header-filters [uib-typeahead-popup].dropdown-menu {
   position: absolute;
   width: 100%;
+}
+
+.daterangepicker .calendar-table .prev, .daterangepicker .calendar-table .next {
+  position: relative;
+}
+
+.daterangepicker .calendar-table .prev .fa-chevron-left,
+.daterangepicker .calendar-table .next .fa-chevron-right{
+  background-image: url(../images/new-icons/report-caret.png) !important;
+  width: 10px !important;
+  height: 7px !important;
+  position: absolute;
+  transform: rotate(90deg);
+  top: calc(50% - 3.5px);
+  left: calc(50% - 5px);
+}
+.daterangepicker .calendar-table .next .fa-chevron-right{
+  transform: rotate(-90deg);
 }
 
 .invoice-page .sub-header {
