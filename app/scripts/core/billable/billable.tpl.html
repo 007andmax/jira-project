@@ -55,16 +55,16 @@
           <div class="text-right pull-right" style="width: 8%;font-size: 15px;">{{ billableCompany.totalSum | currency:
             '$': 2 }}
           </div>
-          <div class="pull-right" ng-click="toggleBillableTickets()">
+          <div class="pull-right" ng-click="setExpandedCompanyId(billableCompany.companyId) ">
             <i class="expand pull-right pointer" uib-tooltip="expand"
-               ng-class="{'expand-down': !showTickets, 'expand-up': showTickets}"></i>
+               ng-class="{'expand-down': billableCompany.companyId !== expandedCompanyId, 'expand-up': billableCompany.companyId === expandedCompanyId}"></i>
           </div>
           <div class="col-md-12 hr"></div>
         </div>
 
 
         <div class="billable-item clearfix "
-             style="background-color:#F9FBFC;" ng-if="showTickets" qt-scroll-to="top" ets-slider
+             style="background-color:#F9FBFC;" ng-if="(billableCompany.companyId === expandedCompanyId)" qt-scroll-to="top" ets-slider
              ng-controller="quicktech.core.billable.companyTicketsCtrl">
           <div class="clearfix">
             <!--<div class="pull-left" style="width: 2%;">-->

@@ -254,6 +254,11 @@
       Utils.handleCallback(future, callback);
     }
 
+    function markAsRead(invoiceId, callback) {
+      var future = $http.post('/invoice/'+invoiceId+'/markAsRead');
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       getReceivableGraphData: getReceivableGraphData,
       getReceivableInvoicesData: getReceivableInvoicesData,
@@ -263,7 +268,8 @@
       resendInvoices: resendInvoices,
       search: search,
       rollback: rollback,
-      remove: remove
+      remove: remove,
+      markAsRead: markAsRead
     }
   }]);
 

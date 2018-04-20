@@ -76,6 +76,12 @@
           });
         };
 
+        $scope.markAsRead = function(invoice){
+          ReceivableService.markAsRead(invoice.id, function(resp){
+            console.log(resp);
+          })
+        };
+
         $scope.rollbackInvoice = function (invoice) {
           if (!disableInvoiceButtons && !invoice.recurringInvoice) {
             var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '? ' +

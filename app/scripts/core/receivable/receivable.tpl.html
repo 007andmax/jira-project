@@ -10,7 +10,7 @@
           <i class="report-calendar"></i>
         </div>
         <div>
-          <input type="text" class="form-control has-dropdown pointer"
+          <input type="text" class="has-dropdown pointer"
                  placeholder="Search by company or number" ng-trim="false"
                  autocomplete="off" ng-model="invoiceFilter"
                  uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"

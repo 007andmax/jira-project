@@ -84,7 +84,6 @@
 
         TicketsService.getAllCounts( function(resp) {
           $scope.ticketsCounter = resp;
-
         });
 
         CompaniesService.getIndustries(function (resp) {

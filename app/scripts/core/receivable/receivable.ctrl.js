@@ -39,7 +39,10 @@
 
         $scope.invoiceDateFilterOptions = {
           'autoApply': true,
-          "cancelClass": "btn-secondary"
+          "cancelClass": "btn-secondary",
+          locale: {
+            "format": 'D MMM YYYY'
+          }
         };
 
         $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
