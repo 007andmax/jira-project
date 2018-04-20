@@ -39,22 +39,22 @@ body.non-body-scroll::-webkit-scrollbar {
   padding-left: 0;
   max-height: 190px;
   overflow-y: auto;
-
+  
 }
 
 #qtDropdown ul li {
   padding: 7px 20px;
   cursor: pointer;
-
+  
 }
 
 #qtDropdown ul li:hover {
-  background-color: #E7ECF2;
+  background-color: #e7ecf2;
 }
 
 .dropdown > input {
   cursor: pointer;
-  background-color: #FCFDFD;
+  background-color: #fcfdfd;
 }
 
 .modal-create-ticket .dropdown-menu {
@@ -96,7 +96,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-list > li .sub-wrapper {
-  margin-top: 25px;
+  /*margin-top: 25px;*/
   display: none;
   float: left;
   width: 100%;
@@ -110,6 +110,14 @@ body.non-body-scroll::-webkit-scrollbar {
   vertical-align: top;
   position: relative;
   text-align: left;
+}
+
+.invoices .qt-list > li.expanded > .col-sm-10 {
+  margin-bottom: 25px;
+}
+
+.invoices .qt-list > li {
+  margin-bottom: 8px;
 }
 
 /*.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {*/
@@ -150,7 +158,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .end-date .bootstrap-datetimepicker-widget .datepicker .table-condensed .day:after {
-  border: 2px solid #E53935;
+  border: 2px solid #e53935;
   border-radius: 0;
   -webkit-box-shadow: 2px 2px 5px 2px rgba(107, 107, 107, 0.75);
   -moz-box-shadow: 2px 2px 5px 2px rgba(107, 107, 107, 0.75);
@@ -223,39 +231,39 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media only screen and (min-width: 2000px) {
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 225px;
   }
-
+  
   .slide-category-content .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 95px;
   }
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 225px;
   }
-
+  
   .qt-billable-clients .tax-recurring input {
     width: 130%;
   }
-
+  
 }
 
 @media screen and (max-width: 1700px) {
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 145px;
   }
-
+  
   .right-list > li > .intermediate-parent-elem > .col-2, .right-list > li > .col-2 {
     width: calc(100% - 764px);
   }
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 110px;
   }
-
+  
 }
 
 @media screen and (max-width: 1600px) {
@@ -263,47 +271,47 @@ body.non-body-scroll::-webkit-scrollbar {
   .vendor-products-width > li > [class*='col-']:first-child {
     width: calc(100% - 644px);
   }
-
+  
   .qt-billable-clients .tax-recurring input {
     width: 100%;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 235px;
   }
-
+  
   .discount-recurring input, .discount-recurring div {
     display: block;
   }
-
+  
   .discount-recurring .form-group div {
     width: 70px;
   }
-
+  
   .product-list-btn a {
     margin-right: 5px;
   }
-
+  
   .qt-product-list.left-list .new-intermediate-parent-elem .col-md-1,
   .qt-product-list.left-list .new-list-heading .col-md-1 {
     width: 11.1%;
   }
-
+  
   .qt-product-list.left-list .new-intermediate-parent-elem .col-md-5,
   .qt-product-list.left-list .new-list-heading .col-md-5 {
     width: 25.7%;
   }
-
+  
   .qt-product-list.right-list .new-intermediate-parent-elem .col-md-1,
   .qt-product-list.right-list .new-list-heading .col-md-1 {
     width: 9.5%;
   }
-
+  
   .qt-product-list.right-list .new-intermediate-parent-elem .col-md-5,
   .qt-product-list.right-list .new-list-heading .col-md-5 {
     width: 25.8%;
   }
-
+  
   .qt-product-list .new-intermediate-parent-elem .col-md-1.product-list-btn,
   .qt-product-list .new-list-heading .col-md-1.product-list-btn {
     width: 7.7%;
@@ -319,19 +327,19 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1366px) {
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown label {
     padding: 13px 40px 13px 15px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown .icn-label-save {
     right: 20px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 198px;
   }
-
+  
   .qt-product-list,
   .qt-product-list p {
     font-size: 12px;
@@ -339,31 +347,31 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1280px) {
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 185px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown .icn-label-save {
     right: 30px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown label {
     padding: 13px 45px 13px 15px;
   }
-
+  
   .qt-list li.list-heading > [class*='col-'] {
     font-size: 12px;
   }
-
+  
   .qt-list > li > .intermediate-parent-elem > .col-4, .qt-list > li > .col-4 {
     width: 90px;
   }
-
+  
   .qt-default-services li .intermediate-parent-elem .is-billable label {
     left: 0;
   }
-
+  
   .qt-product-list,
   .qt-product-list p {
     font-size: 11px;
@@ -381,13 +389,13 @@ body.non-body-scroll::-webkit-scrollbar {
 .tax-recurring input, .discount-recurring input, .discount-recurring button {
   height: 25px;
   border-radius: 0;
-  background-color: #F1F5FA;
-  border: 1px solid #F1F5FA;
+  background-color: #f1f5fa;
+  border: 1px solid #f1f5fa;
   cursor: pointer;
 }
 
 .tax-recurring input:hover, .discount-recurring input:hover, .discount-recurring button:hover {
-  border: 1px solid #B4B4B4;
+  border: 1px solid #b4b4b4;
 }
 
 .tax-recurring .form-control[disabled], fieldset[disabled] .form-control,
@@ -903,7 +911,7 @@ aside#left div.nav-title {
   border-width: 0 5px;
   text-decoration: none;
   padding: 5px 10px;
-  background: #ffffff;
+  background: #fff;
   display: block;
   color: #4c5c6f;
 }
@@ -1319,12 +1327,12 @@ aside#left div.nav-title {
 
 .move-services .add-label {
   padding-bottom: 10px;
-  border-bottom: 1px solid #F1F5FA;
+  border-bottom: 1px solid #f1f5fa;
 }
 
 .move-services .custom-scroll {
   padding-bottom: 10px;
-  border-bottom: 1px solid #F1F5FA;
+  border-bottom: 1px solid #f1f5fa;
 }
 
 .move-services .checkbox-dropdown-footer {
@@ -1372,7 +1380,7 @@ span.sort-span {
 
 .device-settings-tab .form-right-column {
   border: 1px solid #e7ecf2;
-  color: #94A4B8;
+  color: #94a4b8;
   width: 57%;
   min-height: 277px;
   margin-top: 20px;
@@ -1655,7 +1663,7 @@ span.sort-span {
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-desc {
     width: calc(100% - 1150px);
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-2 {
     width: 270px;
   }
@@ -1665,15 +1673,15 @@ span.sort-span {
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-1 {
     width: 100px;
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-2 {
     width: 140px;
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-3 {
     width: 135px;
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-desc {
     width: calc(100% - 670px);
   }
@@ -1710,19 +1718,19 @@ span.sort-span {
   .with-category .qt-user-product-list li .col-1 {
     width: 170px;
   }
-
+  
   .with-category .qt-user-product-list li .col-4 {
     width: 165px;
   }
-
+  
   .with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 170px;
   }
-
+  
   .with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 165px;
   }
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 75px;
   }
@@ -1779,11 +1787,11 @@ span.sort-span {
   width: 100%;
   position: absolute;
   z-index: 1;
-  border: dashed 2px #6464E4;
+  border: dashed 2px #6464e4;
   border-radius: 10px;
   font-size: 3em;
   text-align: center;
-  color: #6464E4;
+  color: #6464e4;
 }
 
 .drop-area-subwrapper {
@@ -1853,7 +1861,7 @@ span.sort-span {
 }
 
 .container-ticket-content.inbox .ticket-message {
-  color: #94A4B8;;
+  color: #94a4b8;;
 }
 
 .inbox .btn-danger {

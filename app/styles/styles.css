@@ -1097,7 +1097,8 @@ hr {
   display: block !important
 }
 
-.billable-items .label-light {
+.billable-items .label-light,
+.invoices .label-light{
   margin-left: 10px;
   background-color: #E2F2FB;
   color: #4F5F79;
