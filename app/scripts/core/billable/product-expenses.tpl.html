@@ -57,7 +57,40 @@
 <div class="sub-content-item clearfix" ng-repeat="product in ticket.productExpense">
   <div class="col-md-1">{{product.createdAt | date:'dd MMM yyyy'}}</div>
   <div class="col-md-2">{{ product.item.manufacture }}</div>
-  <div class="col-md-6">{{ product.item.description }}</div>
+  <div class="col-md-4">{{ product.item.description }}</div>
+  <div class="col-md-1">
+
+      <form name="billableEditDiscountForm"
+            stop-propagation="click">
+        <div ng-hide="isShowBillableDiscountInput || product.discountAmount != null">
+          <i class="icon-sm sale-icon-for-isDicount"
+             ng-click="isShowBillableDiscountInput = !isShowBillableDiscountInput"
+             uib-tooltip="Click to choose Discount"></i>
+        </div>
+        <div class="form-group discount-recurring"
+             ng-show="isShowBillableDiscountInput || product.discountAmount != null">
+          <input style="padding: 0 5px;"
+                 type="text"
+                 class="form-control"
+                 name="discountAmount"
+                 ng-model="product.discountAmount"
+                 ng-max="100"
+                 ng-min="0"
+                 execute-when-outfocused="addDiscountInBillable(product.id, product.discountAmount); isShowBillableDiscountInput = false"
+                 hard-reset-pattern="PERCENT"
+                 ng-keydown="$event.which === 13 && $event.preventDefault()">
+          <p>%</p>
+        </div>
+      </form>
+
+  </div>
+  <div class="col-md-1">
+
+      <div class="tax-recurring" uib-tooltip="Taxes">
+        <select-taxes taxes="taxes" entity="product" entity-type="product" on-close="saveTaxes"></select-taxes>
+      </div>
+
+  </div>
   <div class="col-md-2"><span style="width: 50%;display: inline-block;">{{ product.price | currency: '$': 2 }}</span><span style="width: 50%;display: inline-block;"><strong>Qty {{product.billableQuantity}}</strong></span></div>
   <div class="col-md-1"><strong>{{ product.sum | currency: '$': 2 }}</strong></div>
 </div>

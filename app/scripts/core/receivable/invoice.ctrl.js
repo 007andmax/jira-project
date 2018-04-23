@@ -48,9 +48,9 @@
           if($scope.sortByValue === 'Paid invoices') {
             return !!invoice.paidOn;
           } else if($scope.sortByValue === 'Outstanding invoices') {
-            return $scope.isOutstanding
+            return $scope.isOutstanding && !invoice.paidOn
           } else if($scope.sortByValue === 'Overdue invoices') {
-            return $scope.isOverDue
+            return $scope.isOverDue && !invoice.paidOn
           } else {
             return true;
           }
