@@ -38,8 +38,8 @@
     <div class="col-md-2">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
     <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
     <div class="col-md-2">
-      <p class="invoice-status status-danger" ng-if="isOverDue">Overdue by {{getDueDate()}} days</p>
-      <p class="invoice-status status-warning" ng-if="!isOverDue">Outstanding by {{getDueDate()}} days</p>
+      <p class="invoice-status status-danger" ng-if="isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
+      <p class="invoice-status status-warning" ng-if="!isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
       <p class="invoice-status status-success" ng-if="invoice.paidOn">Payd {{getDueDate()}} days ago</p>
     </div>
     <div class="col-md-1" style="width: 3%;">
