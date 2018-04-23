@@ -75,7 +75,7 @@
             $scope.receivableCompanies.push(CompaniesService.getOneById(id));
           }
 
-          if ($stateParams.mode === 'group-by-company') {
+          if ($scope.mode === 'group-by-company') {
 
             for (var companyId in invoicesData.companies) {
               $scope.invoiceToSent[companyId] = {
@@ -131,7 +131,7 @@
           var disabledCount = 0,
             invoices;
 
-          if ($stateParams.mode === 'group-by-company') {
+          if ($scope.mode === 'group-by-company') {
 
             for (var companyId in $scope.invoiceToSent) {
               var invoiceToSent = $scope.invoiceToSent[companyId],
@@ -187,11 +187,18 @@
 
         $scope.sortBy = function(value) {
           $scope.sortByValue = value;
-
+          $scope.invoiceToSent = {};
           if(value === 'Group by companies') {
             $scope.mode =  availableMods[0];
+            for (var companyId in $scope.receivableInvoicesData.companies) {
+              $scope.invoiceToSent[companyId] = {
+                checked: false,
+                invoices: {}
+              };
+            }
           } else {
             $scope.mode = availableMods[1]
+            $scope.invoiceToSent.invoices = {};
           }
         };
 
@@ -256,7 +263,7 @@
 
           $scope.sendingInvoices = true;
 
-          if ($stateParams.mode === 'list') {
+          if ($scope.mode === 'list') {
             for (var i = 0; i < invoiceList.length; i++) {
               if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
                 invoiceIds.push(invoiceList[i].id);
