@@ -412,7 +412,9 @@
   color: #9ca5b6;
   border: none;
 }
-
+.x-mark-wrapper .dropdown-menu > li > a{
+  padding: 5px 20px;
+}
 .left-panel-full-wrapper .dropdown-menu > .active a,
 .left-panel-full-wrapper .dropdown-menu > .active a:hover,
 .left-panel-full-wrapper .dropdown-menu > .active a:focus,

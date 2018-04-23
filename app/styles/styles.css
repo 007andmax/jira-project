@@ -1098,7 +1098,7 @@ hr {
 }
 
 .billable-items .label-light,
-.invoices .label-light{
+.invoices .label-light {
   margin-left: 10px;
   background-color: #E2F2FB;
   color: #4F5F79;
@@ -1155,7 +1155,7 @@ hr {
 }
 
 .daterangepicker {
-  margin-top: 6px!important;
+  margin-top: 6px !important;
 }
 
 .sort-by .dropdown-menu {
@@ -10447,6 +10447,17 @@ button.close {
 .modal-create-ticket .modal-footer {
   margin: 0 30px;
   padding: 23px 0 23px;
+}
+
+.create-ticket-form .modal-footer {
+  margin: 0;
+  border-top: 0;
+  padding: 10px 0;
+}
+
+.modal-create-ticket .modal-header.create-ticket-header {
+  padding: 0;
+  border: none!important;
 }
 
 .modal-create-ticket .modal-footer .form-group {

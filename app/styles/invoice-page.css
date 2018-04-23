@@ -16,6 +16,28 @@
   padding: 0 30px;
 }
 
+.invoice-page .header {
+  margin-top: 20px;
+  border-top: 1px solid #808080;
+  padding-top: 20px;
+}
+
+.sticky-invoice-header {
+  width: 849px;
+  z-index: 1;
+  right: 0;
+  background-color: #fff;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+}
+
+.tooltip.bottom .tooltip-inner:after {
+  transform: rotate(180deg);
+  left: calc(50% - 6px);
+  bottom: 24px;
+}
+
 .invoice-btns {
   background-color: #f1f5f8;
   border-radius: 6px;
@@ -26,7 +48,7 @@
   width: 130px;
   position: absolute;
   right: 100px;
-  top: 30px;
+  top: 5px;
   z-index: 1;
   transition: all .3s;
 }
@@ -122,7 +144,7 @@
 }
 
 .daterangepicker .calendar-table .prev .fa-chevron-left,
-.daterangepicker .calendar-table .next .fa-chevron-right{
+.daterangepicker .calendar-table .next .fa-chevron-right {
   background-image: url(../images/new-icons/report-caret.png) !important;
   width: 10px !important;
   height: 7px !important;
@@ -131,7 +153,8 @@
   top: calc(50% - 3.5px);
   left: calc(50% - 5px);
 }
-.daterangepicker .calendar-table .next .fa-chevron-right{
+
+.daterangepicker .calendar-table .next .fa-chevron-right {
   transform: rotate(-90deg);
 }
 

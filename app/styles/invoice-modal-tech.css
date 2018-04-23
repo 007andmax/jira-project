@@ -340,17 +340,13 @@
 }
 
 .inv-modal .expires-in {
-  position: absolute;
-  top: 82px;
-  left: 94%;
-  margin-left: -140px;
   width: 234px;
   text-align: center;
   z-index: 5555;
   display: inline-block;
   background-color: transparent;
   color: #1f2a37;
-  padding: 5px 15px;
+  padding: 0 15px;
 }
 
 .inv-modal .expires-in strong {

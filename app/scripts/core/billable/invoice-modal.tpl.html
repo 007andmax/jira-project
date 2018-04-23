@@ -9,7 +9,7 @@
         <img ng-src="{{ (currentInvoice.company.parent.id ? '/companyLogo/' + currentInvoice.company.parent.id : currentInvoice.company.parent.logo) + '?t=' + currentTime }}"
              width="100%" height="100%" alt="{{ currentInvoice.techCompanyName }}">
       </div>
-      <div class="company-info col-md-6">
+      <div class="company-info col-md-7">
         <div class="tech-company-name">{{ currentInvoice.techCompanyName }}</div>
         <div class="address">{{ currentInvoice.senderAddress }}</div>
         <div ng-repeat="phone in currentInvoice.phoneNumbers">
