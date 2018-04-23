@@ -24,6 +24,7 @@
 
 .sticky-invoice-header {
   width: 849px;
+  transition: all .3s;
   z-index: 1;
   right: 0;
   background-color: #fff;
