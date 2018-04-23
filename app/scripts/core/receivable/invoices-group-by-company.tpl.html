@@ -4,8 +4,8 @@
     <li event-toggle-slider="toggleReceivableInvoices"
         ng-repeat="company in receivableCompanies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
         on-finish-render="hideLoadingIndicator()" ng-if="receivableInvoicesData.companies[company.id].length"
-        ng-controller="quicktech.core.receivable.companyCtrl">
-      <div ng-click="toggleReceivableInvoices()" class="clickable-layer"></div>
+        ng-controller="quicktech.core.receivable.companyCtrl" style="cursor: auto;">
+
       <div class="col-sm-10" >
 
         <label class="control checkbox pull-left" stop-propagation="click" style="z-index: 2;">
@@ -23,8 +23,12 @@
           {{ userReadable(company.defaultPaymentMethod) }}
         </span>
       </div>
+      <div class="col-sm-1 text-right" ng-click="toggleReceivableInvoices()">
+        <i class="expand pull-right pointer" uib-tooltip="expand"
+           ng-class="{'expand-down': !showInvoices, 'expand-up': showInvoices}"></i>
+      </div>
 
-      <div class="col-sm-2 text-right" >
+      <div class="col-sm-1 text-right" >
         <div class="billable-amount bold">{{ totalSum.companies[company.id] | currency: '$': 2 }}</div>
       </div>
 
@@ -67,8 +71,8 @@
             <div class="col-md-2">10 Dec 2018</div>
             <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
             <div class="col-md-2">
-              <p class="invoice-status status-danger" ng-if="isOverDue">Overdue by {{getDueDate()}} days</p>
-              <p class="invoice-status status-warning"  ng-if="!isOverDue">Outstanding by {{getDueDate()}} days</p>
+              <p class="invoice-status status-danger" ng-if="isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
+              <p class="invoice-status status-warning"  ng-if="!isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
               <p class="invoice-status status-success"  ng-if="invoice.paidOn">Payd {{getDueDate()}} days ago</p>
             </div>
             <div class="col-md-1" style="width: 3%;">
@@ -82,8 +86,8 @@
                 <ul class="dropdown-menu" role="menu">
                   <li><a ng-click="sentInvoice()">Resend</a></li>
                   <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
+                  <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Make read on</a></li>
                   <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
-                  <!--<li><a>Make read on</a></li>-->
                 </ul>
               </div>
             </div>
