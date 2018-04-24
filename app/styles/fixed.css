@@ -49,12 +49,12 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 #qtDropdown ul li:hover {
-  background-color: #E7ECF2;
+  background-color: #e7ecf2;
 }
 
 .dropdown > input {
   cursor: pointer;
-  background-color: #FCFDFD;
+  background-color: #fcfdfd;
 }
 
 .modal-create-ticket .dropdown-menu {
@@ -96,7 +96,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-list > li .sub-wrapper {
-  margin-top: 25px;
+  /*margin-top: 25px;*/
   display: none;
   float: left;
   width: 100%;
@@ -112,13 +112,17 @@ body.non-body-scroll::-webkit-scrollbar {
   text-align: left;
 }
 
-/*.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {*/
-/*padding-left: 25px;*/
-/*}*/
+.invoices .qt-list > li.expanded > .col-sm-10 {
+  margin-bottom: 25px;
+}
 
-/*.qt-list > li > .intermediate-parent-elem > [class*="col-"]:last-child {*/
-/*padding-right: 25px;*/
-/*}*/
+.invoices .qt-list > li {
+  margin-bottom: 8px;
+}
+
+.invoices .qt-invoices > li {
+  margin-bottom: 0;
+}
 
 .qt-product-list.qt-list > li > .intermediate-parent-elem > .col-2 {
   text-overflow: ellipsis;
@@ -150,7 +154,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .end-date .bootstrap-datetimepicker-widget .datepicker .table-condensed .day:after {
-  border: 2px solid #E53935;
+  border: 2px solid #e53935;
   border-radius: 0;
   -webkit-box-shadow: 2px 2px 5px 2px rgba(107, 107, 107, 0.75);
   -moz-box-shadow: 2px 2px 5px 2px rgba(107, 107, 107, 0.75);
@@ -381,13 +385,13 @@ body.non-body-scroll::-webkit-scrollbar {
 .tax-recurring input, .discount-recurring input, .discount-recurring button {
   height: 25px;
   border-radius: 0;
-  background-color: #F1F5FA;
-  border: 1px solid #F1F5FA;
+  background-color: #f1f5fa;
+  border: 1px solid #f1f5fa;
   cursor: pointer;
 }
 
 .tax-recurring input:hover, .discount-recurring input:hover, .discount-recurring button:hover {
-  border: 1px solid #B4B4B4;
+  border: 1px solid #b4b4b4;
 }
 
 .tax-recurring .form-control[disabled], fieldset[disabled] .form-control,
@@ -903,7 +907,7 @@ aside#left div.nav-title {
   border-width: 0 5px;
   text-decoration: none;
   padding: 5px 10px;
-  background: #ffffff;
+  background: #fff;
   display: block;
   color: #4c5c6f;
 }
@@ -1319,12 +1323,12 @@ aside#left div.nav-title {
 
 .move-services .add-label {
   padding-bottom: 10px;
-  border-bottom: 1px solid #F1F5FA;
+  border-bottom: 1px solid #f1f5fa;
 }
 
 .move-services .custom-scroll {
   padding-bottom: 10px;
-  border-bottom: 1px solid #F1F5FA;
+  border-bottom: 1px solid #f1f5fa;
 }
 
 .move-services .checkbox-dropdown-footer {
@@ -1372,7 +1376,7 @@ span.sort-span {
 
 .device-settings-tab .form-right-column {
   border: 1px solid #e7ecf2;
-  color: #94A4B8;
+  color: #94a4b8;
   width: 57%;
   min-height: 277px;
   margin-top: 20px;
@@ -1779,11 +1783,11 @@ span.sort-span {
   width: 100%;
   position: absolute;
   z-index: 1;
-  border: dashed 2px #6464E4;
+  border: dashed 2px #6464e4;
   border-radius: 10px;
   font-size: 3em;
   text-align: center;
-  color: #6464E4;
+  color: #6464e4;
 }
 
 .drop-area-subwrapper {
@@ -1853,7 +1857,7 @@ span.sort-span {
 }
 
 .container-ticket-content.inbox .ticket-message {
-  color: #94A4B8;;
+  color: #94a4b8;;
 }
 
 .inbox .btn-danger {

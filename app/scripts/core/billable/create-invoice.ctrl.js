@@ -55,7 +55,6 @@
             xmlhttp.setRequestHeader("Content-type", "application/json");
             xmlhttp.send();
           }
-
         };
 
         $scope.$on('$destroy', function () {
@@ -164,6 +163,7 @@
             lockObj.invoiceDataDto.company.companyInfo = CompaniesService.getOneById(lock.invoiceDataDto.company.id);
 
             $scope.invoiceLocks.push(lockObj);
+            console.log('$scope.invoiceLocks', $scope.invoiceLocks)
 
           }
 

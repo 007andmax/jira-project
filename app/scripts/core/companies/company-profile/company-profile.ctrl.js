@@ -6,10 +6,10 @@
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService',
-      'quicktech.common.services.PermissionsService', 'UsersService', '$location', 'PasswordManagerService',
+      'quicktech.common.services.PermissionsService', 'UsersService', '$location', 'PasswordManagerService', '$rootScope',
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
-                PermissionsService, UsersService, $location, PasswordManagerService) {
+                PermissionsService, UsersService, $location, PasswordManagerService, $rootScope) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -51,9 +51,9 @@
 
         $scope.companyInfo = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
 
-          if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
-            $scope.companyInfo.addresses = [{}];
-          }
+              if (!$scope.companyInfo.addresses || $scope.companyInfo.addresses.length === 0) {
+                $scope.companyInfo.addresses = [{}];
+              }
 
           if (!$scope.companyInfo.contacts || $scope.companyInfo.contacts.length === 0) {
             $scope.companyInfo.contacts = [getEmptyContact()];
@@ -139,6 +139,7 @@
           return;
         }
 
+        console.log('$scope.companyData', $scope.companyData)
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
@@ -147,6 +148,7 @@
           }, 0);
 
         });
+        console.log('$scope.companyData', $scope.companyData)
 
         DevicesService.getSomeInfoForDevices($stateParams.companyId, function (resp) {
           $scope.isDomainPresent = resp.domainPresent;

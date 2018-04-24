@@ -1,0 +1,63 @@
+<ul class="qt-list company-devices qt-users invoices-list">
+  <li class="list-heading clearfix">
+    <div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">
+      Invoice#
+    </div>
+    <div class="col-md-3 pointer" ng-click="setOrderForInvoices('company')">Company</div>
+    <div class="col-md-2 pointer" ng-click="setOrderForInvoices('date')">Invoice date</div>
+    <div class="col-md-2 pointer" ng-click="setOrderForInvoices('readAt')">Read On</div>
+    <div class="col-md-1 pointer" style="width: 13.6%;" ng-click="setOrderForInvoices('sum')">Amount</div>
+    <div class="col-md-2" ng-click="setOrderForInvoices('dueDate')">Due Date</div>
+    <div class="col-md-1" style="width: 3%;"></div>
+  </li>
+  <li class="list-item"
+      ng-repeat="invoice in receivableInvoicesData.list  | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
+      ng-controller="quicktech.core.receivable.invoiceCtrl"
+      ng-show="invoiceFilterChecker(invoice) && sortByFilterChecker(invoice) && dateFilterChecker(invoice)"
+      on-finish-render="hideLoadingIndicator()">
+    <div class="col-md-1">
+      <label class="control checkbox pull-left">
+        <input type="checkbox"
+               ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
+               ng-model="invoiceToSent.invoices[invoice.number]">
+        <span class="control-indicator"></span>
+      </label>
+      <a class="checkbox-caption free-number-link" style="margin-right: 0; color:#364656;"
+         tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true"
+         modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+         modal-window-class="invoice-modal-not-background"
+         mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+         mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
+        INV {{ invoice.number }}
+      </a>
+    </div>
+    <div class="col-md-3">
+      <bold>{{company.name}}</bold>
+    </div>
+    <div class="col-md-2">{{invoice.date | date:'dd MMM yyyy'}}</div>
+    <div class="col-md-2">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
+    <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
+    <div class="col-md-2">
+      <p class="invoice-status status-danger" ng-if="isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
+      <p class="invoice-status status-warning" ng-if="!isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
+      <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
+    </div>
+    <div class="col-md-1" style="width: 3%;">
+      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+        <div uib-dropdown-toggle uib-tooltip="more"
+             tooltip-placement="top"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="2000">
+          <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
+        </div>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="sentInvoice()">Resend</a></li>
+          <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
+          <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Read</a></li>
+          <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
+        </ul>
+      </div>
+    </div>
+  </li>
+
+</ul>

@@ -26,11 +26,11 @@
             }, function () {
 
               if (ngModelCtrl.$viewValue) {
-                element.animate({ opacity: 0 });
+                element.animate({right: "15px"});
 
                 scope.currentInvoice = ngModelCtrl.$viewValue;
 
-                if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
+                if (scope.showInvoiceLockIndex && scope.invoiceLocks && scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
 
                   var currentBillToId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId;
 
@@ -40,17 +40,18 @@
                     }
                   }
                 } else {
-
-                  for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
-                    if (scope.currentInvoice.billTo[i].isPrimary) {
-                      scope.currentBillTo = scope.currentInvoice.billTo[i];
-                      scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
+                  if(scope.currentInvoice.billTo) {
+                    for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
+                      if (scope.currentInvoice.billTo[i].isPrimary) {
+                        scope.currentBillTo = scope.currentInvoice.billTo[i];
+                        scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
+                      }
                     }
                   }
 
                 }
 
-                if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId) {
+                if (scope.showInvoiceLockIndex && scope.invoiceLocks && scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId) {
 
                   var currentAddressId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId;
 
@@ -62,16 +63,18 @@
                   }
 
                 } else {
-                  for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
-                    if (scope.currentInvoice.shipTo[i].isPrimary) {
-                      scope.currentShipTo = scope.currentInvoice.shipTo[i];
-                      scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = scope.currentShipTo.id;
+                  if(scope.currentInvoice.shipTo) {
+                    for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
+                      if (scope.currentInvoice.shipTo[i].isPrimary) {
+                        scope.currentShipTo = scope.currentInvoice.shipTo[i];
+                        scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = scope.currentShipTo.id;
+                      }
                     }
                   }
                 }
               }
 
-              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', { cache: $templateCache })
+              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
                 .then(function (response) {
 
                   invoiceTemplate = angular.copy(response);
@@ -81,6 +84,7 @@
                 });
 
             });
+
 
             function initNanoScroller(compileElement) {
               var nanoElement = $('.nano', compileElement),
@@ -123,7 +127,7 @@
 
               initScrollListner(pages.length);
               invoiceModalWindow.trigger("scroll")
-              element.animate({ opacity: 1 });
+              element.animate({opacity: 1});
 
             }
 

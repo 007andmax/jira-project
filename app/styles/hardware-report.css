@@ -506,7 +506,9 @@
 .service-agreements-lists {
   text-align: left;
 }
-
+.service-agreements-lists .dropdown-menu > li > a{
+  padding: 5px 20px;
+}
 .service-agreements-lists a.ha-22-38 {
   height: 15px;
 }

@@ -71,6 +71,7 @@
 
               scope.invoiceTimer = resp.time;
               scope.showTimer = true;
+              scope.showHeaderButtons = true;
 
               interval = setInterval(function () {
 

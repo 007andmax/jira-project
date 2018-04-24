@@ -33,7 +33,8 @@
       'LocalStorageModule',
       'ngCropper',
       'nvd3',
-      'vs-repeat'
+      'vs-repeat',
+      'daterangepicker'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
@@ -304,9 +305,10 @@
 
           return def.promise;
         }];
-
         return conf;
       }
+
+
 
     }]);
 

@@ -1022,6 +1022,110 @@ hr {
   font-weight: 700;
 }
 
+.billable-items, .invoices {
+  padding: 25px;
+  background-color: #F3F7F9;
+  color: #364656;
+  min-height: calc(100vh - 78px);
+}
+
+.billable-items-list {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-top: 25px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.billable-items .billable-items-header h3 {
+  margin: 0;
+}
+
+.billable-items .billable-items-header .btn-success,
+.invoices .invoices-header .invoices-header-filters .btn-success,
+.receive .btn-success {
+  height: 40px;
+  max-width: 150px !important;
+  width: 100% !important;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.billable-items .billable-items-list .billable-items-list-item .hr,
+.billable-items-list-item-sub .hr {
+  height: 1px;
+  width: 100%;
+  background-color: #edf2f6;
+  margin-top: 20px;
+}
+
+.billable-items-list-item-sub {
+  padding: 23px 30px 0 55px !important;
+  font-size: 13px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.billable-items-list-item-sub-content {
+  border-left: 3px solid #16A4FA;
+  border-top: 1px solid #edf2f6;
+  margin-top: 5px;
+  background-color: #fff;
+  padding: 0 !important;
+  border-radius: 3px;
+}
+
+.billable-items .billable-items-list .billable-items-list-item {
+  padding: 23px 25px 0;
+}
+
+.billable-items .sub-content-item strong {
+  font-weight: 500;
+}
+
+.billable-items .label-primary {
+  background-color: #E2F2FB;
+  color: #4F5F79;
+  transition: all .3s;
+}
+
+.billable-items .label-primary:hover {
+  background-color: #6295b161 !important;
+  color: #4F5F79 !important;
+}
+
+.remove-display-none {
+  display: block !important
+}
+
+.billable-items .label-light,
+.invoices .label-light {
+  margin-left: 10px;
+  background-color: #E2F2FB;
+  color: #4F5F79;
+}
+
+.sub-content-item [class*="col-md-"] {
+  padding: 13px 20px;
+  border-bottom: 1px solid #edf2f6;
+  border-right: 1px solid #edf2f6;
+  box-sizing: border-box;
+  min-height: 52px;
+}
+
+.billable-items .billable-items-list .billable-items-list-item > div {
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.billable-tkt {
+  background-color: #E2F2FB;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 0 3px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
 .billable-content,
 .receivable-content {
   position: relative;
@@ -1033,6 +1137,88 @@ hr {
 .billable-content .bootstrap-datetimepicker-widget.dropdown-menu {
   right: 0 !important;
   left: auto !important;
+}
+
+.invoices .invoices-header,
+.invoices .invoices-header .invoices-header-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoices .invoices-header .invoices-header-filters {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 64%;
+  width: 100%;
+}
+
+.daterangepicker {
+  margin-top: 6px !important;
+}
+
+.sort-by .dropdown-menu {
+  margin-top: -3px !important;
+}
+
+.invoices .invoices-header .invoices-header-filters > div {
+  max-width: 190px;
+  width: 100%;
+  margin-right: 10px;
+  position: relative;
+}
+
+.invoices .invoices-header .invoices-header-filters > div i {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div .icn-remove-old {
+  top: 15px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div:nth-child(2) {
+  max-width: 300px;
+  width: 100%;
+}
+
+.invoices .invoices-header .invoices-header-filters > div:nth-child(3) {
+  margin-right: 20px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div > input,
+.invoices .invoices-header .invoices-header-filters [uib-dropdown] input {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
+  color: #4F5F79;
+  padding: 0 30px 0 10px;
+}
+
+.invoices input:focus {
+  outline: 0;
+}
+
+.invoices-list .list-heading {
+  padding-top: 10px !important;
+}
+
+.invoices-list .list-item {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  margin-bottom: 8px;
+}
+
+.invoices-list .list-item .checkbox {
+  margin-top: 3px !important;
+}
+
+bold {
+  font-family: "Graphik Medium", sans-serif;
 }
 
 .receivable-content .product-list-ticket {
@@ -4520,6 +4706,7 @@ select[multiple].input-lg {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  background-color: #fff;
 }
 
 .control-indicator.plus-circle {
@@ -5045,7 +5232,7 @@ tbody.collapse.in {
   overflow-y: auto;
   top: calc(100% + 10px);
   z-index: 1000;
-  max-height: 300px;
+  max-height: 350px;
   display: none;
   float: left;
   min-width: 150px;
@@ -5081,7 +5268,7 @@ tbody.collapse.in {
 .dropdown-menu .subdropdown-menu > li > a,
 .dropdown-menu > .nano li a {
   display: block;
-  padding: 5px 20px;
+  padding: 5px 20px 5px 50px;
   clear: both;
   font-weight: normal;
   line-height: 2;
@@ -9944,6 +10131,7 @@ button.close {
   background-clip: padding-box;
   outline: 0;
   margin-bottom: 50px;
+  margin-top: 0;
 }
 
 .modal-open .modal::-webkit-scrollbar {
@@ -9987,10 +10175,62 @@ button.close {
   filter: alpha(opacity=50);
 }
 
+.receive {
+  padding: 40px 55px;
+  width: 100%;
+  color: #364656;
+}
+
+.receive .invoices-header .dropdown-menu {
+  margin: 0;
+}
+
+.receive .invoices-header .dropdown-menu a {
+  padding: 5px 20px;
+}
+
+.receive p {
+  font-size: 13px;
+  color: #626B7F;
+  padding: 10px 0 50px;
+
+}
+
+.receive .btn-success {
+  max-width: 175px !important;
+  width: 100%;
+  display: inline-block;
+  font-size: 14px;
+  font-family: "Graphik Medium", sans-serif;
+  padding: 4px;
+}
+
+.receive .qt-list > li:hover:before,
+.receive .qt-list > li:hover:after {
+  display: none;
+}
+
+.receive .receive-payment-list .col-md-3 {
+  text-align: right;
+}
+
+.receive .receive-payment-list > li {
+  cursor: default;
+}
+
+.receive .btn-default {
+  max-width: 100px;
+  width: 100%;
+  display: inline-block;
+  margin-left: 10px;
+  height: 40px;
+  font-size: 14px;
+  font-family: "Graphik Medium", sans-serif;
+  padding: 4px;
+}
+
 .modal-header {
-  padding: 15px;
-  border-bottom: 1px solid #e7ecf2;
-  min-height: 35px;
+  border-bottom: 1px solid #edf2f6 !important;
 }
 
 .modal-header .close {
@@ -9999,7 +10239,9 @@ button.close {
 
 .modal-title {
   margin: 0;
-  line-height: 20px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  font-family: 'Graphik Medium', sans-serif;
 }
 
 @-moz-document url-prefix() {
@@ -10011,7 +10253,6 @@ button.close {
 
 .modal-body {
   position: relative;
-  padding: 15px;
 }
 
 .modal-footer input {
@@ -10208,6 +10449,17 @@ button.close {
   padding: 23px 0 23px;
 }
 
+.create-ticket-form .modal-footer {
+  margin: 0;
+  border-top: 0;
+  padding: 10px 0;
+}
+
+.modal-create-ticket .modal-header.create-ticket-header {
+  padding: 0;
+  border: none!important;
+}
+
 .modal-create-ticket .modal-footer .form-group {
   margin-bottom: 0;
 }
@@ -10372,29 +10624,35 @@ button.close {
 
 /****/
 .modal-receive-payment > .modal-dialog {
-  width: 642px;
+  width: 530px;
+  height: 785px;
   top: 50%;
   left: 50%;
   margin: 0;
   transform: translate3d(-50%, -50%, 0) !important;
 }
 
-.modal-receive-payment .modal-header {
-  border-bottom: 0px;
-  padding: 25px 27px 18px 30px;
+.receive .invoices-header .readonly-normal {
+  border: 1px solid #C4CBD5;
+  height: 40px !important;
+  background-color: #fff !important;
+  margin-bottom: 10px;
 }
 
-.modal-receive-payment .modal-body {
-  padding: 0;
+.receive .qt-list > li {
+  padding: 20px 0;
 }
 
-.modal-receive-payment .invoices-header {
-  padding: 0 30px;
-}
-
-.modal-receive-payment .invoices-header label {
+.receive .invoice-list-heading {
   text-transform: uppercase;
-  margin-bottom: 4px;
+  font-size: 11px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.receive .invoices-header .control-label {
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 13px;
+  padding-bottom: 10px;
 }
 
 @-moz-document url-prefix() {
@@ -10408,26 +10666,61 @@ button.close {
   max-width: none;
 }
 
-.modal-receive-payment .modal-footer {
-  border-top: 1px solid #e7ecf2;
-  padding: 30px;
-}
-
-.modal-receive-payment .modal-title {
-  font-size: 14px;
-  font-weight: bold;
-}
-
 .modal-receive-payment .modal-header .hit-area {
   margin-top: 2px;
 }
 
 .modal-receive-payment .form-group {
-  margin-bottom: 0;
+  margin: 0;
 }
 
-.modal-receive-payment .modal-footer .total-amount {
+.modal-receive-payment .invoice-list-heading {
+  padding: 0;
+}
+
+.modal-receive-payment .total-amount {
   display: flex;
+  margin-top: 20px;
+  color: #4F5F79;
+  margin-bottom: 10px;
+}
+
+.modal-receive-payment .total-amount span {
+  font-size: 11px;
+  margin-right: 15px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.modal-receive-payment .total-amount strong {
+  background-color: #EDF2F6;
+  padding: 15px 10px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.modal-receive-payment .note {
+  margin-bottom: 25px;
+}
+
+.modal-receive-payment .note label {
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.modal-receive-payment .note textarea {
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #C4CBD5;
+  padding: 17px 12px;
+  min-height: 90px;
+}
+
+.modal-receive-payment .checkbox-caption {
+  font-size: 13px;
+  margin-left: 5px;
+  color: #4F5F79;
+  margin-bottom: 35px;
 }
 
 @-moz-document url-prefix() {

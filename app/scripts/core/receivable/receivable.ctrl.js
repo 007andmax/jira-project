@@ -20,8 +20,16 @@
           });
         });
 
+        $scope.invoiceFilterCompany = '';
+
+        $scope.$watch('invoiceFilterCompany', function(value){
+          if(value && value !== '' && value !== ' ') {
+            $scope.invoiceFilter = value;
+          }
+        });
+
         $scope.PermissionsService = PermissionsService;
-        $scope.mode = availableMods[0];
+        $scope.mode = availableMods[1];
         $scope.orderInvoices = {
           field: 'number',
           reverse: false
@@ -32,6 +40,16 @@
         };
         $scope.loadingInProgress = true;
         $scope.sending = [];
+
+        $scope.invoiceDateFilter = {startDate: null, endDate: null};
+
+        $scope.invoiceDateFilterOptions = {
+          'autoApply': true,
+          "cancelClass": "btn-secondary",
+          locale: {
+            "format": 'D MMM YYYY'
+          }
+        };
 
         $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
           $scope.totalCollectedLast30Days = 0;
@@ -63,7 +81,7 @@
             $scope.receivableCompanies.push(CompaniesService.getOneById(id));
           }
 
-          if ($stateParams.mode === 'group-by-company') {
+          if ($scope.mode === 'group-by-company') {
 
             for (var companyId in invoicesData.companies) {
               $scope.invoiceToSent[companyId] = {
@@ -119,7 +137,7 @@
           var disabledCount = 0,
             invoices;
 
-          if ($stateParams.mode === 'group-by-company') {
+          if ($scope.mode === 'group-by-company') {
 
             for (var companyId in $scope.invoiceToSent) {
               var invoiceToSent = $scope.invoiceToSent[companyId],
@@ -173,6 +191,23 @@
           }
         }, true);
 
+        $scope.sortBy = function(value) {
+          $scope.sortByValue = value;
+          $scope.invoiceToSent = {};
+          if(value === 'Group by companies') {
+            $scope.mode =  availableMods[0];
+            for (var companyId in $scope.receivableInvoicesData.companies) {
+              $scope.invoiceToSent[companyId] = {
+                checked: false,
+                invoices: {}
+              };
+            }
+          } else {
+            $scope.mode = availableMods[1]
+            $scope.invoiceToSent.invoices = {};
+          }
+        };
+
         $scope.hideLoadingIndicator = function () {
           $scope.loadingInProgress = false;
         };
@@ -194,15 +229,17 @@
           if ($scope.orderInvoices.field === 'number') {
             return parseInt(item.number) || 0;
           } else if ($scope.orderInvoices.field === 'company') {
-            return CompaniesService.getOneById(item.company.id).name;
+            return item.companyName
           } else if ($scope.orderInvoices.field === 'readedAt') {
             return item.readedAt;
           } else if ($scope.orderInvoices.field === 'date') {
             return item.date;
           } else if ($scope.orderInvoices.field === 'dueDate') {
-            return item.dueDate.value;
+            return item.dueDate
           } else if ($scope.orderInvoices.field === 'amount') {
             return $scope.totalSum.invoices[item.id];
+          } else if ($scope.orderInvoices.field === 'sum') {
+            return item.sum
           }
         };
 
@@ -232,7 +269,7 @@
 
           $scope.sendingInvoices = true;
 
-          if ($stateParams.mode === 'list') {
+          if ($scope.mode === 'list') {
             for (var i = 0; i < invoiceList.length; i++) {
               if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
                 invoiceIds.push(invoiceList[i].id);

@@ -25,6 +25,16 @@
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
+        $scope.expandedCompanyId = '';
+
+        $scope.setExpandedCompanyId = function(companyId){
+          if (companyId === $scope.expandedCompanyId) {
+            $scope.expandedCompanyId = '';
+          } else {
+            $scope.expandedCompanyId = companyId;
+          }
+        };
+
         $scope.isDisocuntForIcon = function (billableCompany) {
           var isDiscount = false;
           for (var t = 0; t < billableCompany.tickets.length; t++) {
