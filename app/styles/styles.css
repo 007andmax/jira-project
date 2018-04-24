@@ -1106,10 +1106,18 @@ hr {
 
 .sub-content-item [class*="col-md-"] {
   padding: 13px 20px;
-  border-bottom: 1px solid #edf2f6;
   border-right: 1px solid #edf2f6;
   box-sizing: border-box;
   min-height: 52px;
+}
+
+.sub-content-item {
+  border-bottom: 1px solid #edf2f6;
+  display: flex;
+}
+
+.sub-content-item .discount-recurring {
+  margin-bottom: 0;
 }
 
 .billable-items .billable-items-list .billable-items-list-item > div {
@@ -10457,7 +10465,7 @@ button.close {
 
 .modal-create-ticket .modal-header.create-ticket-header {
   padding: 0;
-  border: none!important;
+  border: none !important;
 }
 
 .modal-create-ticket .modal-footer .form-group {
