@@ -15,7 +15,7 @@
                  ng-change="changeCompanyCheckbox(company.id)">
           <span class="control-indicator"></span>
         </label>
-        <div class="checkbox-caption bold">{{ company.name }}</div>
+        <div class="checkbox-caption bold" style="cursor: auto;">{{ company.name }}</div>
         <span class="label label-light" ng-class="{'high':showIndicator}">{{ receivableInvoicesData.companies[company.id].length }}</span>
 
 
@@ -73,7 +73,7 @@
             <div class="col-md-2">
               <p class="invoice-status status-danger" ng-if="isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
               <p class="invoice-status status-warning"  ng-if="!isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
-              <p class="invoice-status status-success"  ng-if="invoice.paidOn">Paid {{getDueDate()}} days ago</p>
+              <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
             </div>
             <div class="col-md-1" style="width: 3%;">
               <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">

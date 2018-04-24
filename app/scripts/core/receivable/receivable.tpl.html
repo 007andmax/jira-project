@@ -12,7 +12,7 @@
         <div>
           <input type="text" class="has-dropdown pointer"
                  placeholder="Search by company or number" ng-trim="false"
-                 autocomplete="off" ng-model="invoiceFilter"
+                 autocomplete="off" ng-model="invoiceFilterCompany"
                  uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                  qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
           <div typeahead-input-icon="invoiceFilter"></div>

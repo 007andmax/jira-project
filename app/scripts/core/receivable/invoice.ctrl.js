@@ -36,9 +36,15 @@
           return Math.abs(Math.floor(overDue));
         };
 
-        $scope.invoiceFilterChecker = function() {
+        $scope.getPaidOnDate = function() {
+          var paidOn =  new Date($scope.invoice.paidOn).getTime();
+          var paid = (paidOn - today)/86400000;
+          return Math.abs(Math.floor(paid));
+        };
+
+        $scope.invoiceFilterChecker = function(invoice) {
           if($scope.invoiceFilter && $scope.invoiceFilter !== '' && $scope.invoiceFilter !== ' ') {
-            return ($scope.invoice.number.indexOf($scope.invoiceFilter) > -1 || $scope.company.name.indexOf($scope.invoiceFilter) > -1)
+            return (invoice.number.indexOf($scope.invoiceFilter) > -1 || invoice.companyName.indexOf($scope.invoiceFilter) > -1)
           } else {
             return true;
           }

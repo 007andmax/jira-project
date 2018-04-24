@@ -1,6 +1,6 @@
 <ul class="qt-list company-devices qt-users invoices-list">
   <li class="list-heading clearfix">
-    <div class="col-md-1" ng-click="setOrderForInvoices('number')">
+    <div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">
       Invoice#
     </div>
     <div class="col-md-3 pointer" ng-click="setOrderForInvoices('company')">Company</div>
@@ -13,7 +13,7 @@
   <li class="list-item"
       ng-repeat="invoice in receivableInvoicesData.list  | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
       ng-controller="quicktech.core.receivable.invoiceCtrl"
-      ng-show="invoiceFilterChecker() && sortByFilterChecker(invoice) && dateFilterChecker(invoice)"
+      ng-show="invoiceFilterChecker(invoice) && sortByFilterChecker(invoice) && dateFilterChecker(invoice)"
       on-finish-render="hideLoadingIndicator()">
     <div class="col-md-1">
       <label class="control checkbox pull-left">
@@ -40,7 +40,7 @@
     <div class="col-md-2">
       <p class="invoice-status status-danger" ng-if="isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
       <p class="invoice-status status-warning" ng-if="!isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
-      <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getDueDate()}} days ago</p>
+      <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
     </div>
     <div class="col-md-1" style="width: 3%;">
       <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">

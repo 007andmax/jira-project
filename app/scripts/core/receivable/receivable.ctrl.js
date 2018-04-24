@@ -20,7 +20,13 @@
           });
         });
 
-        $scope.invoiceFilter = '';
+        $scope.invoiceFilterCompany = '';
+
+        $scope.$watch('invoiceFilterCompany', function(value){
+          if(value && value !== '' && value !== ' ') {
+            $scope.invoiceFilter = value;
+          }
+        });
 
         $scope.PermissionsService = PermissionsService;
         $scope.mode = availableMods[1];
