@@ -1,21 +1,19 @@
-<div class="inner-wrapper-all" parent-invoice-page prevent-hash-change="close()"
+<div class="inner-wrapper-all " parent-invoice-page prevent-hash-change="close()"
      ng-style="{'transform-origin': '50% 0px 0px', 'transform': 'scale(' + zoomRange + ')'}">
 
   <div class="invoice-page inner-wrapper clearfix">
 
-    <div class="header">
-      <div class="invoice-label">
-        <span class="pull-right">INVOICE</span>
-      </div>
-      <div id="logo">
+    <div class="header clearfix">
+      <div class="invoice-label" style="display: none;"> <span class="pull-right">INVOICE</span> </div>
+      <div id="logo" class="col-md-4">
         <img ng-src="{{ (currentInvoice.company.parent.id ? '/companyLogo/' + currentInvoice.company.parent.id : currentInvoice.company.parent.logo) + '?t=' + currentTime }}"
-             width="450" height="200" alt="{{ currentInvoice.techCompanyName }}">
+             width="100%" height="100%" alt="{{ currentInvoice.techCompanyName }}">
       </div>
-      <div class="company-info">
+      <div class="company-info col-md-7">
         <div class="tech-company-name">{{ currentInvoice.techCompanyName }}</div>
         <div class="address">{{ currentInvoice.senderAddress }}</div>
         <div ng-repeat="phone in currentInvoice.phoneNumbers">
-            phone: <span>{{phone.number}}</span>
+          phone: <span>{{phone.number}}</span>
         </div>
       </div>
     </div>
@@ -205,30 +203,30 @@
     </div>
 
     <!--<div class="ticket-amount" ng-repeat-end>-->
-      <!--<div class="updates" style="width:510px">-->
+    <!--<div class="updates" style="width:510px">-->
 
-        <!--<div class="update">-->
-          <!--<h4>PRODUCT</h4>-->
+    <!--<div class="update">-->
+    <!--<h4>PRODUCT</h4>-->
 
-          <!--<div class="amount">{{ ticket.productsSum | currency: '$':2 }}</div>-->
-        <!--</div>-->
+    <!--<div class="amount">{{ ticket.productsSum | currency: '$':2 }}</div>-->
+    <!--</div>-->
 
-        <!--<div class="plus">-->
-          <!--<img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>-->
-        <!--</div>-->
+    <!--<div class="plus">-->
+    <!--<img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>-->
+    <!--</div>-->
 
-        <!--<div class="update">-->
-          <!--<h4>SERVICE</h4>-->
+    <!--<div class="update">-->
+    <!--<h4>SERVICE</h4>-->
 
-          <!--<div class="amount">{{ ticket.servicesSum | currency: '$':2 }}</div>-->
-        <!--</div>-->
+    <!--<div class="amount">{{ ticket.servicesSum | currency: '$':2 }}</div>-->
+    <!--</div>-->
 
-      <!--</div>-->
+    <!--</div>-->
 
-      <!--<div class="total-amount">-->
-        <!--<div class="totals"><span class="number">TKT# {{ ticket.number }}</span> Total</div>-->
-        <!--<div class="amount">{{ ticket.totalSum | currency: '$' :2 }}</div>-->
-      <!--</div>-->
+    <!--<div class="total-amount">-->
+    <!--<div class="totals"><span class="number">TKT# {{ ticket.number }}</span> Total</div>-->
+    <!--<div class="amount">{{ ticket.totalSum | currency: '$' :2 }}</div>-->
+    <!--</div>-->
 
     <!--</div>-->
 
@@ -284,7 +282,7 @@
 </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 

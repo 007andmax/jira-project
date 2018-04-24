@@ -27,7 +27,7 @@
           $uibModalInstance.dismiss('cancel');
         };
 
-        if ($stateParams.mode === 'list') {
+        if ($scope.mode === 'list') {
           for (var i = 0; i < invoiceList.length; i++) {
             if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
               $scope.receivePaymentInvoices.push(invoiceList[i]);

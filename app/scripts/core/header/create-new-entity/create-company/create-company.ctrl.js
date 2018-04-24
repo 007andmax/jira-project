@@ -406,7 +406,7 @@
             templateUrl: template,
             animation: true,
             backdrop: false,
-            size: 'lg',
+            size: 'md',
             controller: 'serviceAgreementsModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
             resolve: {

@@ -10,7 +10,20 @@
 
           var target = element.find('[qt-ts-toggler]').length ? element.find('[qt-ts-toggler]') : element;
 
-          target.click(function () {
+          var icon = element.find('[qt-icon-toggle-to-change]');
+
+          function changeIconClass(){
+            if(icon.hasClass('expand-down')){
+              icon.removeClass('expand-down');
+              icon.addClass('expand-up');
+            } else {
+              icon.removeClass('expand-up');
+              icon.addClass('expand-down');
+            }
+          }
+
+          icon.click(function () {
+            changeIconClass();
             element.toggleClass("expanded");
             element.find('[qt-ts-slider]').slideToggle('fast');
           })

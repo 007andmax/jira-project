@@ -24,22 +24,11 @@
         <div class="col-md-3" style="margin-right: 26px;">
           <div class="form-group">
             Start Date*:
+
             <div style="position: absolute;top: 30px;right: -350px;"
                  ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
-            <!--<input type="text"-->
-                   <!--class="form-control has-dropdown pointer"-->
-                   <!--name="StartDate"-->
-                   <!--readonly-->
-                   <!--date-format="yyyy/mm/dd"-->
-                   <!--date-range-picker="startDatePicker"-->
-                   <!--min-date="{{today}}"-->
-                   <!--ng-model="editContract.startDate"-->
-                   <!--placeholder="Start Date" required>-->
-            <!--<i class="report-calendar"></i>-->
-
-
             <input class="form-control has-dropdown pointer"
                    type="text"
                    ng-model="editContract.startDate"
@@ -56,16 +45,6 @@
         <div class="col-md-3">
           <div class="form-group">
             End Date*:
-            <!--<input type="text"-->
-                   <!--class="form-control has-dropdown pointer"-->
-                   <!--name="EndDate"-->
-                   <!--readonly-->
-                   <!--date-format="yyyy/mm/dd"-->
-                   <!--date-range-picker="endDatePicker"-->
-                   <!--min-date="{{minDateForEndDatePicker}}"-->
-                   <!--ng-model="editContract.endDate"-->
-                   <!--placeholder="End Date" required>-->
-            <!--<i class="report-calendar"></i>-->
 
             <input class="form-control has-dropdown pointer"
                    ng-if="reInitEndDateHourly"

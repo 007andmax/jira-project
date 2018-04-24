@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('dateRangePicker', ['$timeout', function ($timeout) {
+  angular.module("quicktech.common.directives").directive('qtDateRangePicker', ['$timeout', function ($timeout) {
     return {
       restrict: 'A',
       scope: {

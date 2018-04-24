@@ -1699,3 +1699,15 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .user-remove {
   background-image: url(../images/new-icons/user-remove.svg);
 }
+.expand{
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.expand-down{
+  background-image: url(../images/new-icons/expand-down.png);
+}
+.expand-up{
+  background-image: url(../images/new-icons/expand-up.png);
+}
+

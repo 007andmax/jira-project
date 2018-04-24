@@ -12,15 +12,19 @@
             scope.$on(attrs.eventToggleSlider, function () {
               element.toggleClass("expanded");
               element.find('[ets-slider]').slideToggle('fast');
+              element.find('[ets-slider]').addClass('remove-display-none')
             });
-          } else {
+          }
+          else {
             scope.$on(attrs.showEvent, function () {
               element.addClass("expanded");
               element.find('[ets-slider]').slideDown('fast');
+              element.find('[ets-slider]').addClass('remove-display-none')
             });
             scope.$on(attrs.hideEvent, function () {
               element.removeClass("expanded");
               element.find('[ets-slider]').slideUp('fast');
+              element.find('[ets-slider]').addClass('remove-display-none')
             });
           }
         }

@@ -6,7 +6,7 @@
   margin-right: 30px;
 }
 
-.invoice-page{
+.invoice-page {
   background-color: #fff;
   font-family: 'Graphik Regular', sans-serif;
   font-size: 13px;
@@ -17,15 +17,66 @@
 }
 
 .invoice-page .header {
-  border-bottom: 2px solid gray;
-  padding-bottom: 10px;
-  float: left;
-  width: 790px;
+  margin-top: 20px;
+  border-top: 1px solid #808080;
+  padding-top: 20px;
 }
 
-.invoice-page .header #logo {
-  float: left;
-  margin-top: -35px;
+.sticky-invoice-header {
+  width: 849px;
+  transition: all .3s;
+  z-index: 1;
+  right: 0;
+  background-color: #fff;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+}
+
+.tooltip.bottom .tooltip-inner:after {
+  transform: rotate(180deg);
+  left: calc(50% - 6px);
+  bottom: 24px;
+}
+
+.invoice-btns {
+  background-color: #f1f5f8;
+  border-radius: 6px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 130px;
+  position: absolute;
+  right: 100px;
+  top: 5px;
+  z-index: 1;
+  transition: all .3s;
+}
+
+.invoice-btns button i {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.invoice-btns button .invoice-download {
+  background-image: url(../images/new-icons/invoice-download.png);
+}
+
+.invoice-btns button .invoice-send {
+  background-image: url(../images/new-icons/invoice-send.png);
+}
+
+.invoice-btns button {
+  border: none;
+  background-color: transparent;
+}
+
+.invoice-btns .close-icon {
+  position: absolute;
+  right: -40px;
 }
 
 .invoice-page .header .tech-company-name {
@@ -36,11 +87,7 @@
 }
 
 .invoice-page .header .company-info {
-  width: 340px;
-  text-align: right;
-  float: right;
   line-height: 20px;
-  margin-top: 3px;
 }
 
 .invoice-page .header .company-info .address {
@@ -63,16 +110,19 @@
   margin: 0;
   padding: 18px 0;
 }
-.invoice-page .dropdown-menu{
+
+.invoice-page .dropdown-menu {
   width: 100%;
   height: 230px;
   overflow: hidden;
   padding: 0;
 }
-.invoice-page .dropdown-menu .nano-content>div:first-child{
+
+.invoice-page .dropdown-menu .nano-content > div:first-child {
   margin-top: 10px;
 }
-.invoice-page .dropdown-menu .nano-content>div:last-child{
+
+.invoice-page .dropdown-menu .nano-content > div:last-child {
   margin-bottom: 10px;
 }
 
@@ -81,10 +131,37 @@
   padding: 8px 0 4px;
 }
 
+.invoices .invoices-header-filters .dropdown-menu > li > a {
+  padding: 5px 20px !important;
+}
+
+.invoices .invoices-header-filters [uib-typeahead-popup].dropdown-menu {
+  position: absolute;
+  width: 100%;
+}
+
+.daterangepicker .calendar-table .prev, .daterangepicker .calendar-table .next {
+  position: relative;
+}
+
+.daterangepicker .calendar-table .prev .fa-chevron-left,
+.daterangepicker .calendar-table .next .fa-chevron-right {
+  background-image: url(../images/new-icons/report-caret.png) !important;
+  width: 10px !important;
+  height: 7px !important;
+  position: absolute;
+  transform: rotate(90deg);
+  top: calc(50% - 3.5px);
+  left: calc(50% - 5px);
+}
+
+.daterangepicker .calendar-table .next .fa-chevron-right {
+  transform: rotate(-90deg);
+}
+
 .invoice-page .sub-header {
   float: left;
   width: 790px;
-  padding-top: 15px;
   padding-bottom: 25px;
   color: #4c5c6f;
   page-break-inside: avoid;
@@ -103,15 +180,15 @@
   white-space: nowrap;
 }
 
-
 .invoice-page .sub-header .heading {
   border-bottom: 1px solid gray;
 }
-.invoice-page .sub-header .heading[data-toggle]{
+
+.invoice-page .sub-header .heading[data-toggle] {
   cursor: pointer;
 }
 
-.invoice-page .sub-header .heading .icn-caret-gray{
+.invoice-page .sub-header .heading .icn-caret-gray {
   position: absolute;
   right: 0px;
   top: 18px;
@@ -143,6 +220,7 @@
   padding: 5px 30px;
   color: #4c5c6f;
 }
+
 .invoice-page .sub-header .dropdown-menu a:hover {
   background-color: #e7ecf2;
   cursor: pointer;
@@ -183,6 +261,7 @@
   color: #1586e4;
   font-weight: bold;
 }
+
 .invoice-page .inv-ticket-header {
   float: left;
   width: 790px;
@@ -413,6 +492,7 @@
   display: block;
   /*width: 100%;*/
 }
+
 .invoice-page .footer .message .contact .email .em img {
   float: left;
   margin-top: 3px;

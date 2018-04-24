@@ -116,35 +116,37 @@
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
 
             var invoiceIds = newChange.data;
+            var invoice = Utils.findById(data.list, newChange.data[0].id);
+            Utils.customizeObj(newChange.data[0], invoice);
 
-            for (var i = 0; i < invoiceIds.length; i++) {
-
-              var invoiceId = invoiceIds[i],
-                invoiceCompanyId = undefined;
-
-              for (var j = 0; j < data.list.length; j++) {
-
-                var inv = data.list[j];
-
-                if (invoiceId === inv.id) {
-                  data.list.splice(j, 1);
-                  invoiceCompanyId = inv.company.id;
-                  break;
-                }
-              }
-
-              if (invoiceCompanyId && data.companies[invoiceCompanyId]) {
-
-                var invoices = data.companies[invoiceCompanyId],
-                  index = Utils.indexOfId(invoices, invoiceId);
-
-                if (invoices.length <= 1) {
-                  delete data.companies[invoiceCompanyId];
-                } else if (index > -1) {
-                  invoices.splice(index, 1);
-                }
-              }
-            }
+            // for (var i = 0; i < invoiceIds.length; i++) {
+            //
+            //   var invoiceId = invoiceIds[i].id,
+            //     invoiceCompanyId = undefined;
+            //
+            //   for (var j = 0; j < data.list.length; j++) {
+            //
+            //     var inv = data.list[j];
+            //
+            //     if (invoiceId === inv.id) {
+            //       data.list.splice(j, 1);
+            //       invoiceCompanyId = inv.company.id;
+            //       break;
+            //     }
+            //   }
+            //
+            //   // if (invoiceCompanyId && data.companies[invoiceCompanyId]) {
+            //   //
+            //   //   var invoices = data.companies[invoiceCompanyId],
+            //   //     index = Utils.indexOfId(invoices, invoiceId);
+            //   //
+            //   //   if (invoices.length <= 1) {
+            //   //     delete data.companies[invoiceCompanyId];
+            //   //   } else if (index > -1) {
+            //   //     invoices.splice(index, 1);
+            //   //   }
+            //   // }
+            // }
           }
           /*else if (newChange.action == 'COMPANY_ARCHIVED') {
 
@@ -254,6 +256,11 @@
       Utils.handleCallback(future, callback);
     }
 
+    function markAsRead(invoiceId, callback) {
+      var future = $http.post('/invoice/'+invoiceId+'/markAsRead');
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       getReceivableGraphData: getReceivableGraphData,
       getReceivableInvoicesData: getReceivableInvoicesData,
@@ -263,7 +270,8 @@
       resendInvoices: resendInvoices,
       search: search,
       rollback: rollback,
-      remove: remove
+      remove: remove,
+      markAsRead: markAsRead
     }
   }]);
 
