@@ -72,6 +72,9 @@
               scope.invoiceTimer = resp.time;
               scope.showTimer = true;
               scope.showHeaderButtons = true;
+              $timeout(function () {
+                scope.showHeader = true;
+              }, 1000);
 
               interval = setInterval(function () {
 

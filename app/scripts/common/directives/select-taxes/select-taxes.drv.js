@@ -55,7 +55,8 @@
           $ctrl.taxList.push(entityTax);
         }
       }
-      console.log('taList', $ctrl.taxList)
+      console.log('taList', $ctrl.taxList);
+      console.log('item', $ctrl.entity);
     }
 
     function updateEntityTaxList(changedTax) {

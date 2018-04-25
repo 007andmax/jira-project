@@ -53,7 +53,7 @@
   <!--custom-disabled="{{ showInvoiceLockIndex <= 0 }}"-->
   <!--ng-click="(showInvoiceLockIndex <= 0) || setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>-->
   <!--</div>-->
-  <div class="sticky-invoice-header" ng-style="{'opacity': showTimer || receivablePreview  ? 1 : 0}" style="height: 50px" ng-show="showTimer || currentInvoice">
+  <div class="sticky-invoice-header" ng-style="{'opacity': showTimer || receivablePreview  ? 1 : 0}" style="height: 50px" ng-show="showHeader">
     <div class="expires-in" ng-show="showTimer">
       <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
       {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}

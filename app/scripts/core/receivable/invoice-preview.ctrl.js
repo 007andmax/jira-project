@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.receivable.invoicePreviewCtrl',
-    ['$scope', '$uibModalInstance', 'CompaniesService', 'ReceivableService', 'Downloader',
-      function ($scope, $uibModalInstance, CompaniesService, ReceivableService, Downloader) {
+    ['$scope', '$uibModalInstance', 'CompaniesService', 'ReceivableService', 'Downloader', '$timeout',
+      function ($scope, $uibModalInstance, CompaniesService, ReceivableService, Downloader, $timeout) {
 
         $scope.receivablePreview = true;
 
@@ -26,6 +26,10 @@
           }
 
           $scope.locksInitialized = true;
+
+          $timeout(function () {
+            $scope.showHeader = true;
+          }, 2000)
         });
 
         $scope.close = function () {
