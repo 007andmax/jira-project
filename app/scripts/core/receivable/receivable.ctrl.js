@@ -32,7 +32,7 @@
         $scope.mode = availableMods[1];
         $scope.orderInvoices = {
           field: 'number',
-          reverse: false
+          reverse: true
         };
         $scope.totalSum = {
           companies: {},
@@ -49,6 +49,10 @@
           locale: {
             "format": 'D MMM YYYY'
           }
+        };
+
+        $scope.clearInvoiceDateFilter = function() {
+          $scope.invoiceDateFilter = {startDate: null, endDate: null};
         };
 
         $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
@@ -203,7 +207,7 @@
               };
             }
           } else {
-            $scope.mode = availableMods[1]
+            $scope.mode = availableMods[1];
             $scope.invoiceToSent.invoices = {};
           }
         };
