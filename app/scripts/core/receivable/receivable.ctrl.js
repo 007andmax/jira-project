@@ -10,15 +10,15 @@
         var availableMods = ['group-by-company', 'list'];
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        TicketsService.getCounts($scope, function (resp) {
-          globalSearch.count = resp.RECEIVABLE || 0;
-
-          $scope.$watch(function () {
-            return resp.RECEIVABLE;
-          }, function (value) {
-            globalSearch.count = value || 0;
-          });
-        });
+        // TicketsService.getCounts($scope, function (resp) {
+        //   globalSearch.count = resp.RECEIVABLE || 0;
+        //
+        //   $scope.$watch(function () {
+        //     return resp.RECEIVABLE;
+        //   }, function (value) {
+        //     globalSearch.count = value || 0;
+        //   });
+        // });
 
         $scope.invoiceFilterCompany = '';
 
@@ -65,6 +65,7 @@
         ReceivableService.getReceivableInvoicesData($scope, function (resp) {
 
           var invoicesData = $scope.receivableInvoicesData = resp;
+          globalSearch.count = $scope.receivableInvoicesData.list.length;
 
           $scope.totalReceivables = 0;
           $scope.receivableCompanies = [];
@@ -157,7 +158,7 @@
             var startDateFromFilter = new Date($scope.invoiceDateFilter.startDate._d).getTime();
             var endDateFromFilter = new Date($scope.invoiceDateFilter.endDate._d).getTime();
             return (invoiceDate >= startDateFromFilter && invoiceDate <= endDateFromFilter);
-          }else {
+          } else {
             return true;
           }
         };
