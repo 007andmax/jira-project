@@ -46,12 +46,14 @@
       for (var i = 0; i < $ctrl.entity.taxes.length; i++) {
         var entityTax = $ctrl.entity.taxes[i];
         var sameOriginalTax = $ctrl.taxList.find(function (tax) {
-          return tax.name === entityTax.name && tax.rate === entityTax.rate;
+          return tax.name === entityTax.name && tax.rate === entityTax.rate && tax.id === entityTax.id;
         });
 
         if (sameOriginalTax) {
+          console.log('sameOriginalTax.id '+sameOriginalTax.id+' entityTax '+entityTax.id)
           sameOriginalTax.id = entityTax.id;
         } else {
+          console.log('pushed tax', entityTax)
           $ctrl.taxList.push(entityTax);
         }
       }

@@ -275,7 +275,11 @@
             $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
           } else {
             $scope.orderInvoices.field = option;
-            $scope.orderInvoices.reverse = false;
+            if(option === 'date') {
+              $scope.orderInvoices.reverse = true;
+            } else {
+              $scope.orderInvoices.reverse = false;
+            }
           }
         };
 
