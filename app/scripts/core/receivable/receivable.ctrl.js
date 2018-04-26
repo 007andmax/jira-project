@@ -143,9 +143,9 @@
           if($scope.sortByValue === 'Paid invoices') {
             return !!invoice.paidOn;
           } else if($scope.sortByValue === 'Outstanding invoices') {
-            return $scope.isOutstanding && !invoice.paidOn
+            return invoice.isOutstanding && !invoice.paidOn
           } else if($scope.sortByValue === 'Overdue invoices') {
-            return $scope.isOverDue && !invoice.paidOn
+            return invoice.isOverDue && !invoice.paidOn
           } else {
             return true;
           }
@@ -167,12 +167,10 @@
         };
 
         $scope.$watchGroup(['invoiceDateFilter', 'invoiceFilter', 'sortByValue'] , function(value){
-          console.log(value);
           if(value && $scope.receivableInvoicesData) {
             var filteredInvoices = $scope.receivableInvoicesData.list.filter(function(invoice) {
               return $scope.filteringForInvoice(invoice);
             });
-            console.log(filteredInvoices.length);
             globalSearch.count = filteredInvoices.length;
           }
         });
@@ -253,7 +251,6 @@
                 invoices: {}
               };
             }
-
             $scope.invoiceDateFilter = {startDate: null, endDate: null};
             $scope.invoiceFilter = '';
             $scope.invoiceFilterCompany = '';

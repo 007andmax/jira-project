@@ -26,13 +26,13 @@
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var overDue;
-        $scope.isOverDue = false;
-        $scope.isOutstanding = false;
+        $scope.invoice.isOverDue = false;
+        $scope.invoice.isOutstanding = false;
 
         $scope.getDueDate = function(){
           overDue = (dueDate - today)/86400000;
-          $scope.isOverDue = (overDue < 0);
-          $scope.isOutstanding = (overDue > 0);
+          $scope.invoice.isOverDue = (overDue < 0);
+          $scope.invoice.isOutstanding = (overDue > 0);
           return Math.abs(Math.floor(overDue));
         };
 
