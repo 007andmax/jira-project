@@ -42,36 +42,6 @@
           return Math.abs(Math.floor(paid));
         };
 
-        $scope.invoiceFilterChecker = function(invoice) {
-          if($scope.invoiceFilter && $scope.invoiceFilter !== '' && $scope.invoiceFilter !== ' ') {
-            return (invoice.number.indexOf($scope.invoiceFilter) > -1 || invoice.companyName.indexOf($scope.invoiceFilter) > -1)
-          } else {
-            return true;
-          }
-        };
-
-        $scope.sortByFilterChecker = function(invoice) {
-          if($scope.sortByValue === 'Paid invoices') {
-            return !!invoice.paidOn;
-          } else if($scope.sortByValue === 'Outstanding invoices') {
-            return $scope.isOutstanding && !invoice.paidOn
-          } else if($scope.sortByValue === 'Overdue invoices') {
-            return $scope.isOverDue && !invoice.paidOn
-          } else {
-            return true;
-          }
-        };
-
-        $scope.dateFilterChecker = function(invoice) {
-          if($scope.invoiceDateFilter.startDate && $scope.invoiceDateFilter.endDate) {
-            var invoiceDate = new Date(invoice.date).getTime();
-            var startDateFromFilter = new Date($scope.invoiceDateFilter.startDate._d).getTime();
-            var endDateFromFilter = new Date($scope.invoiceDateFilter.endDate._d).getTime();
-            return (invoiceDate >= startDateFromFilter && invoiceDate <= endDateFromFilter);
-          }else {
-            return true;
-          }
-        };
 
         $scope.sentInvoice = function () {
           var idInvoiceToSend = $scope.invoice.id;
