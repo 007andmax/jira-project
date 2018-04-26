@@ -143,8 +143,8 @@
         $scope.sortByFilterChecker = function(invoice) {
           if($scope.sortByValue === 'Paid invoices') {
             return !!invoice.paidOn;
-          } else if($scope.sortByValue === 'Outstanding invoices') {
-            return invoice.isOutstanding && !invoice.paidOn
+          } else if($scope.sortByValue === 'Unpaid invoices') {
+            return (invoice.isOutstanding || invoice.isOverDue) && !invoice.paidOn;
           } else if($scope.sortByValue === 'Overdue invoices') {
             return invoice.isOverDue && !invoice.paidOn
           } else {
