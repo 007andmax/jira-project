@@ -275,7 +275,7 @@
             $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
           } else {
             $scope.orderInvoices.field = option;
-            if(option === 'date') {
+            if(option === 'date' ) {
               $scope.orderInvoices.reverse = true;
             } else {
               $scope.orderInvoices.reverse = false;
@@ -293,11 +293,42 @@
           } else if ($scope.orderInvoices.field === 'date') {
             return item.date;
           } else if ($scope.orderInvoices.field === 'dueDate') {
-            return item.dueDate
+            // return item.paidOn ? item.paidOn : item.dueDate;
+            if(item.isOverDue) {
+              return  item.daysOfOverDue;
+            } else if(item.isOutstanding) {
+              return  item.daysOfOutstanding;
+            } else if(item.paidOn) {
+              return item.paidOn
+            }
+
           } else if ($scope.orderInvoices.field === 'amount') {
             return $scope.totalSum.invoices[item.id];
           } else if ($scope.orderInvoices.field === 'sum') {
             return item.sum
+          }
+        };
+
+        $scope.isComparator = function() {
+          if($scope.orderInvoices.field === 'dueDate') {
+            return dueDateComparator
+          } else {
+            return false;
+          }
+        };
+
+        $scope.dueDateComparator = function(i1, i2) {
+          console.log('comparator DOOOOOOOOOOOO')
+          if(i1.isOverDue && i2.isOverDue) {
+            return i1.dueDate > i2.dueDate ? -1 : 1;
+          } else if(i1.isOverDue && i2.isOutstanding) {
+            return -1;
+          } else if(i1.isOutstanding && i2.isOutstanding) {
+            return i1.dueDate > i2.dueDate ? -1 : 1;
+          } else if(i1.isOutstanding && i2.paidOn) {
+            return -1
+          } else if(i1.paidOn && i2.paidOn) {
+            return i1.paidOn > i2.paidOn ? 1 : -1;
           }
         };
 

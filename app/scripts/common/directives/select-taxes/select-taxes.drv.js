@@ -46,7 +46,7 @@
       for (var i = 0; i < $ctrl.entity.taxes.length; i++) {
         var entityTax = $ctrl.entity.taxes[i];
         var sameOriginalTax = $ctrl.taxList.find(function (tax) {
-          return tax.name === entityTax.name && tax.rate === entityTax.rate && tax.id === entityTax.id;
+          return tax.name === entityTax.name && tax.rate === entityTax.rate ;
         });
 
         if (sameOriginalTax) {

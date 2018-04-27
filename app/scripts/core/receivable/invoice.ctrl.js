@@ -28,17 +28,26 @@
         var overDue;
         $scope.invoice.isOverDue = false;
         $scope.invoice.isOutstanding = false;
+        $scope.invoice.daysOfOverDue;
+        $scope.invoice.daysOfOutstanding;
+        $scope.invoice.daysOfPaidOn;
 
         $scope.getDueDate = function(){
           overDue = (dueDate - today)/86400000;
           $scope.invoice.isOverDue = (overDue < 0);
           $scope.invoice.isOutstanding = (overDue > 0);
+          if($scope.invoice.isOverDue) {
+            $scope.invoice.daysOfOverDue = (Math.abs(Math.floor(overDue))) *-1;
+          } else if ($scope.invoice.isOutstanding) {
+            $scope.invoice.daysOfOutstanding = Math.abs(Math.floor(overDue));
+          }
           return Math.abs(Math.floor(overDue));
         };
 
         $scope.getPaidOnDate = function() {
           var paidOn =  new Date($scope.invoice.paidOn).getTime();
           var paid = (paidOn - today)/86400000;
+          $scope.invoice.daysOfPaidOn = Math.abs(Math.floor(paid))
           return Math.abs(Math.floor(paid));
         };
 
