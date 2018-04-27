@@ -5,7 +5,7 @@
     <div class="list-container">
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;" ng-if="!$ctrl.previewMode">
         <div class="checkbox-dd-item"
-             ng-repeat="tax in $ctrl.taxList | orderBy: 'name' track by tax.id">
+             ng-repeat="tax in $ctrl.taxList | orderBy: 'name'">
           <label class="control checkbox ellipsis">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
                    ng-change="$ctrl.updateEntityTaxList(tax)">

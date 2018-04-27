@@ -18,7 +18,9 @@
           });
         });
 
-        $scope.taxes = TaxesService.getAll();
+        TaxesService.getAll(function(resp){
+          $scope.taxes = resp;
+        });
 
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
