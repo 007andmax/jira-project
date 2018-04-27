@@ -7,7 +7,10 @@
         <div>
           <input class="pointer" type="text" placeholder="Filter by date" date-range-picker ng-model="invoiceDateFilter"
                  options="invoiceDateFilterOptions">
-          <i class="report-calendar"></i>
+          <i class="report-calendar" ng-show="!invoiceDateFilter.startDate && !invoiceDateFilter.endDate"></i>
+          <i class="icn-sm icn-remove-old pointer"
+             ng-show="invoiceDateFilter.startDate && invoiceDateFilter.endDate"
+             uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearInvoiceDateFilter()"></i>
         </div>
         <div>
           <input type="text" class="has-dropdown pointer"
@@ -42,7 +45,7 @@
             </div>
             <ul class="dropdown-menu" role="menu" style="margin-top: -3px;">
               <li><a ng-click="sortBy('Paid invoices')">Paid invoices</a></li>
-              <li><a ng-click="sortBy('Outstanding invoices')">Outstanding invoices</a></li>
+              <li><a ng-click="sortBy('Unpaid invoices')">Unpaid invoices</a></li>
               <li><a ng-click="sortBy('Overdue invoices')">Overdue invoices</a></li>
               <li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>
             </ul>

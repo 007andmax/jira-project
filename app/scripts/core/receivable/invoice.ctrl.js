@@ -23,55 +23,40 @@
           }
         }
 
+
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var overDue;
-        $scope.isOverDue = false;
-        $scope.isOutstanding = false;
+        $scope.invoice.isOverDue = false;
+        $scope.invoice.isOutstanding = false;
+        $scope.invoice.daysDueDateForSorting;
+        $scope.invoice.dueDatePositionForSorting;
+
+        $scope.invoice.isReadedAt = !!$scope.invoice.readedAt;
+        $scope.invoice.readedAtInMilliseconds = new Date($scope.invoice.readedAt).getTime()
 
         $scope.getDueDate = function(){
           overDue = (dueDate - today)/86400000;
-          $scope.isOverDue = (overDue < 0);
-          $scope.isOutstanding = (overDue > 0);
+          $scope.invoice.isOverDue = (overDue < 0);
+          $scope.invoice.isOutstanding = (overDue > 0);
+          if($scope.invoice.isOverDue) {
+            $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) * -1;
+            $scope.invoice.dueDatePositionForSorting = 0;
+          } else if ($scope.invoice.isOutstanding) {
+            $scope.invoice.daysDueDateForSorting = Math.abs(Math.floor(overDue));
+            $scope.invoice.dueDatePositionForSorting = 1;
+          }
           return Math.abs(Math.floor(overDue));
         };
 
         $scope.getPaidOnDate = function() {
           var paidOn =  new Date($scope.invoice.paidOn).getTime();
           var paid = (paidOn - today)/86400000;
+          $scope.invoice.daysDueDateForSorting = Math.abs(Math.floor(paid)) * -1;
+          $scope.invoice.dueDatePositionForSorting = 2;
           return Math.abs(Math.floor(paid));
         };
 
-        $scope.invoiceFilterChecker = function(invoice) {
-          if($scope.invoiceFilter && $scope.invoiceFilter !== '' && $scope.invoiceFilter !== ' ') {
-            return (invoice.number.indexOf($scope.invoiceFilter) > -1 || invoice.companyName.indexOf($scope.invoiceFilter) > -1)
-          } else {
-            return true;
-          }
-        };
-
-        $scope.sortByFilterChecker = function(invoice) {
-          if($scope.sortByValue === 'Paid invoices') {
-            return !!invoice.paidOn;
-          } else if($scope.sortByValue === 'Outstanding invoices') {
-            return $scope.isOutstanding && !invoice.paidOn
-          } else if($scope.sortByValue === 'Overdue invoices') {
-            return $scope.isOverDue && !invoice.paidOn
-          } else {
-            return true;
-          }
-        };
-
-        $scope.dateFilterChecker = function(invoice) {
-          if($scope.invoiceDateFilter.startDate && $scope.invoiceDateFilter.endDate) {
-            var invoiceDate = new Date(invoice.date).getTime();
-            var startDateFromFilter = new Date($scope.invoiceDateFilter.startDate._d).getTime();
-            var endDateFromFilter = new Date($scope.invoiceDateFilter.endDate._d).getTime();
-            return (invoiceDate >= startDateFromFilter && invoiceDate <= endDateFromFilter);
-          }else {
-            return true;
-          }
-        };
 
         $scope.sentInvoice = function () {
           var idInvoiceToSend = $scope.invoice.id;

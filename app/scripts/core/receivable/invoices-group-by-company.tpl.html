@@ -61,7 +61,7 @@
                  modal-window-class="invoice-modal-not-background"
                  mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
                  mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
-                INV {{ invoice.number }}
+                 {{ invoice.number }}
               </a>
             </div>
             <div class="col-md-3">
@@ -71,8 +71,8 @@
             <div class="col-md-2">10 Dec 2018</div>
             <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
             <div class="col-md-2">
-              <p class="invoice-status status-danger" ng-if="isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
-              <p class="invoice-status status-warning"  ng-if="!isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
+              <p class="invoice-status status-danger" ng-if="invoice.isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
+              <p class="invoice-status status-warning"  ng-if="!invoice.isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
               <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
             </div>
             <div class="col-md-1" style="width: 3%;">
@@ -86,7 +86,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <li><a ng-click="sentInvoice()">Resend</a></li>
                   <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
-                  <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Read</a></li>
+                  <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
                   <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
                 </ul>
               </div>
