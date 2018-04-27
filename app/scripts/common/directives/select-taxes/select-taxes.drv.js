@@ -50,15 +50,11 @@
         });
 
         if (sameOriginalTax) {
-          console.log('sameOriginalTax.id '+sameOriginalTax.id+' entityTax '+entityTax.id)
           sameOriginalTax.id = entityTax.id;
         } else {
-          console.log('pushed tax', entityTax)
           $ctrl.taxList.push(entityTax);
         }
       }
-      console.log('taList', $ctrl.taxList);
-      console.log('item', $ctrl.entity);
     }
 
     function updateEntityTaxList(changedTax) {
