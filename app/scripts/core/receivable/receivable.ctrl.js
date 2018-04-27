@@ -272,16 +272,19 @@
 
         $scope.setOrderForInvoices = function (option) {
           if (option === $scope.orderInvoices.field) {
-            $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
+            if(option !== 'readedAt') {
+              $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
+            } else {
+              $scope.sortForReadedAtReverse = !$scope.sortForReadedAtReverse
+            }
+
           } else {
             $scope.orderInvoices.field = option;
-            if(option === 'date' ) {
-              $scope.orderInvoices.reverse = true;
-            } else {
-              $scope.orderInvoices.reverse = false;
-            }
+            $scope.orderInvoices.reverse = (option === 'date');
           }
         };
+
+        $scope.sortForReadedAtReverse = false;
 
         $scope.orderByForInvoices = function (item) {
           $scope.stateComparator= false;
@@ -290,12 +293,15 @@
           } else if ($scope.orderInvoices.field === 'company') {
             return item.companyName
           } else if ($scope.orderInvoices.field === 'readedAt') {
-            return item.readedAt;
+            if($scope.sortForReadedAtReverse) {
+              return [-item.isReadedAt, item.readedAt];
+            } else {
+              return [-item.isReadedAt, -item.readedAt];
+            }
           } else if ($scope.orderInvoices.field === 'date') {
             return item.date;
           } else if ($scope.orderInvoices.field === 'dueDate') {
             return [item.dueDatePositionForSorting, item.daysDueDateForSorting];
-
           } else if ($scope.orderInvoices.field === 'amount') {
             return $scope.totalSum.invoices[item.id];
           } else if ($scope.orderInvoices.field === 'sum') {
@@ -307,10 +313,8 @@
           if (!text) {
             return '';
           }
-
           var words = text.split('_'),
             result = '';
-
           for (var i = 0, len = words.length; i < len; i++) {
             var word = words[i];
             result += word[0].toUpperCase() + word.slice(1).toLowerCase();
@@ -319,7 +323,6 @@
               result += ' ';
             }
           }
-
           return result;
         };
 

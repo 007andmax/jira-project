@@ -32,6 +32,9 @@
         $scope.invoice.daysDueDateForSorting;
         $scope.invoice.dueDatePositionForSorting;
 
+        $scope.invoice.isReadedAt = !!$scope.invoice.readedAt;
+        $scope.invoice.readedAtInMilliseconds = new Date($scope.invoice.readedAt).getTime().toString();
+
         $scope.getDueDate = function(){
           overDue = (dueDate - today)/86400000;
           $scope.invoice.isOverDue = (overDue < 0);
