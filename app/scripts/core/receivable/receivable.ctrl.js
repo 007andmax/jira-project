@@ -276,12 +276,17 @@
           if (option === $scope.orderInvoices.field) {
             if(option !== 'readedAt') {
               $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
-            } else {
+            }  else {
               $scope.sortForReadedAtReverse = !$scope.sortForReadedAtReverse
             }
           } else {
-            $scope.orderInvoices.field = option;
-            $scope.orderInvoices.reverse = (option === 'date');
+            if(option === 'number') {
+              $scope.orderInvoices.reverse = true;
+              $scope.orderInvoices.field = option;
+            } else {
+              $scope.orderInvoices.field = option;
+              $scope.orderInvoices.reverse = (option === 'date');
+            }
           }
         };
 
