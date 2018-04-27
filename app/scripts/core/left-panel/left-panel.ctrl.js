@@ -107,6 +107,15 @@
           }
         };
 
+        $scope.companyIconClick = function() {
+            $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
+
+        };
+
+        $scope.isCompanyProfile = function() {
+          return $state.includes('companyProfile')
+        };
+
         CustomStorageService.getUserCustomStorageValue('companiesPageFilterByIndustryHistory', function(resp) {
           $scope.industryFilterHistoryCompaniesPage = resp;
         });

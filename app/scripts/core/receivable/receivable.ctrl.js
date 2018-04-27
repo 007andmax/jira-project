@@ -22,6 +22,8 @@
 
         $scope.invoiceFilterCompany = '';
 
+        $scope.sortForReadedAtReverse = false;
+
         $scope.$watch('invoiceFilterCompany', function(value){
           if(value && value !== '' && value !== ' ') {
             $scope.invoiceFilter = value;
@@ -277,14 +279,11 @@
             } else {
               $scope.sortForReadedAtReverse = !$scope.sortForReadedAtReverse
             }
-
           } else {
             $scope.orderInvoices.field = option;
             $scope.orderInvoices.reverse = (option === 'date');
           }
         };
-
-        $scope.sortForReadedAtReverse = false;
 
         $scope.orderByForInvoices = function (item) {
           $scope.stateComparator= false;
@@ -294,9 +293,9 @@
             return item.companyName
           } else if ($scope.orderInvoices.field === 'readedAt') {
             if($scope.sortForReadedAtReverse) {
-              return [-item.isReadedAt, item.readedAt];
+              return [item.isReadedAt, item.readedAt];
             } else {
-              return [-item.isReadedAt, -item.readedAt];
+              return [item.isReadedAt, -item.readedAt];
             }
           } else if ($scope.orderInvoices.field === 'date') {
             return item.date;
