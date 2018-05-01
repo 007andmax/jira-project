@@ -291,7 +291,7 @@
         };
 
         $scope.orderByForInvoices = function (item) {
-          $scope.stateComparator= false;
+          //$scope.stateComparator= false;
           if ($scope.orderInvoices.field === 'number') {
             return parseInt(item.number) || 0;
           } else if ($scope.orderInvoices.field === 'company') {
