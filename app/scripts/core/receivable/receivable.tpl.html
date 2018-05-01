@@ -4,6 +4,7 @@
     <div class="invoices-header">
       <h3>Invoices</h3>
       <div class="invoices-header-filters">
+
         <div>
           <input class="pointer" type="text" placeholder="Filter by date" date-range-picker ng-model="invoiceDateFilter"
                  options="invoiceDateFilterOptions">
@@ -13,11 +14,15 @@
              uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearInvoiceDateFilter()"></i>
         </div>
         <div>
-          <input type="text" class="has-dropdown pointer"
-                 placeholder="Search by company or number" ng-trim="false"
-                 autocomplete="off" ng-model="invoiceFilterCompany"
+          <input type="text"
+                 class="has-dropdown pointer"
+                 placeholder="Search by company or number"
+                 ng-trim="false"
+                 autocomplete="off"
+                 ng-model="invoiceFilterCompany"
                  uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                  qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
+
           <div typeahead-input-icon="invoiceFilter"></div>
         </div>
         <div class="clearfix sort-by">
@@ -50,6 +55,7 @@
               <li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>
             </ul>
           </div>
+
         </div>
 
         <button class="btn btn-success"
@@ -64,7 +70,9 @@
     <div ng-hide="loadingInProgress"
          ng-include="'/html/scripts/core/receivable/invoices-'+ mode +'.tpl.html'"></div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+
   </div>
+
 
 </div>
 <script>
