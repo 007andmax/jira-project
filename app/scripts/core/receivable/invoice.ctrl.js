@@ -40,10 +40,10 @@
           $scope.invoice.isOverDue = (overDue < 0);
           $scope.invoice.isOutstanding = (overDue > 0);
           if($scope.invoice.isOverDue) {
-            $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) * -1;
+            $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) + 1000000000;
             $scope.invoice.dueDatePositionForSorting = 0;
           } else if ($scope.invoice.isOutstanding) {
-            $scope.invoice.daysDueDateForSorting = Math.abs(Math.floor(overDue));
+            $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) + 2000000000;
             $scope.invoice.dueDatePositionForSorting = 1;
           }
           return Math.abs(Math.floor(overDue));
@@ -52,7 +52,7 @@
         $scope.getPaidOnDate = function() {
           var paidOn =  new Date($scope.invoice.paidOn).getTime();
           var paid = (paidOn - today)/86400000;
-          $scope.invoice.daysDueDateForSorting = Math.abs(Math.floor(paid)) * -1;
+          $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(paid))) + 3000000000 ;
           $scope.invoice.dueDatePositionForSorting = 2;
           return Math.abs(Math.floor(paid));
         };
