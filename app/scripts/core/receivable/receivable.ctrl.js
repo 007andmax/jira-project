@@ -298,7 +298,7 @@
             return item.companyName
           } else if ($scope.orderInvoices.field === 'readedAt') {
             if($scope.sortForReadedAtReverse) {
-              return item.readedAtInMilliseconds;
+              return item.readedAtInMillisecondsReverse;
             } else {
               return -item.readedAtInMilliseconds;
             }
