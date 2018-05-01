@@ -6,7 +6,7 @@
     return {
       restrict: 'A',
       scope: {
-        dateRangePicker: '=?',
+        qtDateRangePicker: '=?',
         onHide: '=?',
         minDate: '@?',
         maxDate: '@?',
@@ -29,7 +29,7 @@
           scope.$parent.clearDateRange = datepicker.clear.bind(datepicker);
         }
       }
-    }
+    };
 
     function initDatepicker(scope, element, attrs){
       var hideTimeout;
@@ -46,7 +46,7 @@
         maxDate: scope.maxDate ? new Date(+scope.maxDate) : '',
         onSelect: function () {
           $timeout(function () {
-            scope.dateRangePicker && scope.dateRangePicker(datepicker.selectedDates);
+            scope.qtDateRangePicker && scope.qtDateRangePicker(datepicker.selectedDates);
           });
         },
         onHide: function () {

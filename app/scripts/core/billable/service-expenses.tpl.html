@@ -87,7 +87,7 @@
 
   </div>
   <div class="col-md-2">Total hours {{service.billableQuantity}}</div>
-  <div class="col-md-1"><strong>{{service.sum}}</strong></div>
+  <div class="col-md-1"><strong>{{service.sum | currency: '$': 2 }}</strong></div>
 </div>
 
 <script>
