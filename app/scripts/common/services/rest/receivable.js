@@ -116,8 +116,11 @@
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
 
             var invoiceIds = newChange.data;
-            var invoice = Utils.findById(data.list, newChange.data[0].id);
-            Utils.customizeObj(newChange.data[0], invoice);
+            for(var i=0; i<invoiceIds.length; i++) {
+              var invoice = Utils.findById(data.list, invoiceIds[i].id);
+              Utils.customizeObj(invoiceIds[i], invoice);
+            }
+
 
             // for (var i = 0; i < invoiceIds.length; i++) {
             //
