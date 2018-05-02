@@ -51,8 +51,8 @@
         };
 
         $scope.getPaidOnDate = function() {
-          var paidOn =  new Date($scope.invoice.paidOn).getTime();
-          var paid = (paidOn - today)/86400000;
+          var paidOn =  $scope.invoice.paidOn
+          var paid = (today - paidOn)/86400000;
           $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(paid))) + 3000000000 ;
           $scope.invoice.dueDatePositionForSorting = 2;
           return Math.abs(Math.floor(paid));
