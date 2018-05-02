@@ -298,14 +298,14 @@
             return item.companyName
           } else if ($scope.orderInvoices.field === 'readedAt') {
             if($scope.sortForReadedAtReverse) {
-              return [item.isReadedAt, item.readedAt];
+              return item.readedAtInMillisecondsReverse;
             } else {
-              return [item.isReadedAt, -item.readedAt];
+              return -item.readedAtInMilliseconds;
             }
           } else if ($scope.orderInvoices.field === 'date') {
             return item.date;
           } else if ($scope.orderInvoices.field === 'dueDate') {
-            return [item.dueDatePositionForSorting, item.daysDueDateForSorting];
+            return  item.daysDueDateForSorting;
           } else if ($scope.orderInvoices.field === 'amount') {
             return $scope.totalSum.invoices[item.id];
           } else if ($scope.orderInvoices.field === 'sum') {
