@@ -1,6 +1,10 @@
 <ul class="qt-list company-devices qt-users invoices-list">
   <li class="list-heading clearfix">
     <div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">
+      <label class="control checkbox pull-left">
+        <input type="checkbox" ng-click="selectAllInvoices()" ng-checked="isAllinvoicesSelected()">
+        <span class="control-indicator"></span>
+      </label>
       Invoice#
     </div>
     <div class="col-md-3 pointer" ng-click="setOrderForInvoices('company')">Company</div>
@@ -18,7 +22,6 @@
     <div class="col-md-1">
       <label class="control checkbox pull-left">
         <input type="checkbox"
-               ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
                ng-model="invoiceToSent.invoices[invoice.number]">
         <span class="control-indicator"></span>
       </label>

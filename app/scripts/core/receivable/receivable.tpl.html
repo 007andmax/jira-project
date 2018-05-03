@@ -59,7 +59,7 @@
         </div>
 
         <button class="btn btn-success"
-                custom-disabled="{{ !selectedInvoiceCount }}"
+                custom-disabled="{{ !selectedInvoiceCount || !selectableCompanyId}}"
                 modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
                 modal-window-class="modal-receive-payment"
                 mw-controller="quicktech.core.receivable.receivePaymentCtrl">

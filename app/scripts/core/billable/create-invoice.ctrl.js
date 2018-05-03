@@ -12,6 +12,7 @@
         $scope.showInvoiceLockIndex = 0;
         $scope.savingInvoiceInProcess = [];
         $scope.lockInfo = {};
+        $scope.invoiceCreated = false;
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
           $scope.invoiceNumber = number;
@@ -68,15 +69,12 @@
         });
 
         $scope.setShowInvoiceLockIndex = function (index) {
-
           if (index < 0) {
             index = $scope.invoiceLocks.length - 1;
           } else if (index >= $scope.invoiceLocks.length) {
             index = 0;
           }
-
           $scope.showInvoiceLockIndex = index;
-
         };
 
         $scope.close = function () {
@@ -97,17 +95,12 @@
             currentContactAddress = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
 
           Downloader.downloadByUrl('/invoice/show/lock/' + lockId + '/pdf?isDownload=true&shipTo=' + currentAddressId + '&billTo=' + currentContactAddress, 'Invoice.pdf')
-
         };
 
-        $scope.invoiceCreated = false;
 
         $scope.createInvoice = function (lock, callback) {
-
           if (lock && !lock.expired ) {
-
             $scope.savingInvoiceInProcess.push(lock.id);
-
             var contactId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
             var addressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
             var isSend = !callback;
@@ -118,9 +111,7 @@
 
             BillableService.createInvoice(lock.lockId, isSend, contactId, addressId, function (resp) {
               if (resp.id) {
-
                 $scope.invoiceLocks.splice($scope.showInvoiceLockIndex, 1);
-
                 if ($scope.invoiceLocks.length === 0) {
                   //$scope.close();
                 } else {
