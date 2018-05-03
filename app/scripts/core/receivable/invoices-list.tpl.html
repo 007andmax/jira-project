@@ -1,4 +1,12 @@
 <ul class="qt-list company-devices qt-users invoices-list">
+  <div class="selected-users-edit">
+    <p>
+      <span>1</span> Selected
+    </p>
+    <i tooltip-placement="top"
+       uib-tooltip="Resend">
+    </i>
+  </div>
   <li class="list-heading clearfix">
     <div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">
       <label class="control checkbox pull-left">
@@ -31,7 +39,7 @@
          modal-window-class="invoice-modal-not-background"
          mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
          mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
-         {{ invoice.number }}
+        {{ invoice.number }}
       </a>
     </div>
     <div class="col-md-3">
@@ -41,8 +49,10 @@
     <div class="col-md-2">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
     <div class="col-md-1" style="width: 13.6%;">{{invoice.sum | currency: '$': 2 }}</div>
     <div class="col-md-2">
-      <p class="invoice-status status-danger" ng-if="invoice.isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}} days</p>
-      <p class="invoice-status status-warning" ng-if="!invoice.isOverDue && !invoice.paidOn">Outstanding by {{getDueDate()}} days</p>
+      <p class="invoice-status status-danger" ng-if="invoice.isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}}
+                                                                                           days</p>
+      <p class="invoice-status status-warning" ng-if="!invoice.isOverDue && !invoice.paidOn">Outstanding by
+                                                                                             {{getDueDate()}} days</p>
       <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
     </div>
     <div class="col-md-1" style="width: 3%;">
