@@ -39,7 +39,7 @@
         $scope.print = function () {
           var wnd = window.open('/invoice/show/' + $scope.invoice.id + '/pdf');
           wnd.print();
-          $scope.close();
+          //$scope.close();
         };
 
         $scope.download = function () {
@@ -47,7 +47,16 @@
             '/invoice/show/' + $scope.invoice.id + '/pdf',
             CompaniesService.getOneById($scope.invoice.company.id).name + '-' + $scope.invoice.number + '.pdf'
           );
-          $scope.close();
+          //$scope.close();
+        };
+
+        $scope.sentInvoiceToMail = function () {
+          var idInvoiceToSend = $scope.invoice.id;
+          //$scope.sending[idInvoiceToSend] = true;
+
+          ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
+            //$scope.sending[idInvoiceToSend] = false;
+          });
         };
       }]);
 

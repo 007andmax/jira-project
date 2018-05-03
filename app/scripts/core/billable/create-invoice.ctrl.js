@@ -100,9 +100,11 @@
 
         };
 
+        $scope.invoiceCreated = false;
+
         $scope.createInvoice = function (lock, callback) {
 
-          if (!lock.expired) {
+          if (lock && !lock.expired ) {
 
             $scope.savingInvoiceInProcess.push(lock.id);
 
@@ -120,7 +122,7 @@
                 $scope.invoiceLocks.splice($scope.showInvoiceLockIndex, 1);
 
                 if ($scope.invoiceLocks.length === 0) {
-                  $scope.close();
+                  //$scope.close();
                 } else {
                   $scope.setShowInvoiceLockIndex($scope.showInvoiceLockIndex - 1);
                 }
@@ -130,6 +132,7 @@
               if (index > -1) {
                 $scope.savingInvoiceInProcess.splice(index, 1);
               }
+              $scope.invoiceCreated = true;
             })
           }
         };

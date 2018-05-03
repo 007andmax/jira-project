@@ -54,13 +54,13 @@
   <!--ng-click="(showInvoiceLockIndex <= 0) || setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>-->
   <!--</div>-->
   <div class="sticky-invoice-header" ng-style="{'opacity': showTimer || receivablePreview  ? 1 : 0}" style="height: 50px" ng-show="showHeader">
-    <div class="expires-in" ng-show="showTimer">
+    <div class="expires-in" ng-show="showTimer && !invoiceCreated">
       <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
       {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
     </div>
 
-    <div class="invoice-actions invoice-btns"  style="position: fixed;">
-      <button ng-if="!invoicePreview"
+    <div class="invoice-actions invoice-btns"  style="position: fixed;" ng-style="invoiceCreated && {'background-color': 'white'}">
+      <button ng-if="!invoicePreview && !invoiceCreated"
               ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
               ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
               tooltip-append-to-body="true"
@@ -69,15 +69,15 @@
         <i class="invoice-download"></i>
       </button>
 
-      <button ng-if="!invoicePreview && !receivablePreview"
-              ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
+      <button ng-if="(!receivablePreview || (receivablePreview && !invoice.paidOn)) && !invoiceCreated"
+              ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
               ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
               tooltip-placement="bottom"
-              tooltip-append-to-body="true" uib-tooltip="Create and Send Invoice">
+              tooltip-append-to-body="true" uib-tooltip="{{ receivablePreview ? 'Sent Invoice' : 'Create and Send Invoice'}}">
         <i class="invoice-send"></i>
       </button>
 
-      <button ng-if="!invoicePreview"
+      <button ng-if="!invoicePreview && !invoiceCreated"
               ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
               ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
               tooltip-placement="bottom"
