@@ -207,7 +207,10 @@
           }
         };
 
+        $scope.selectedPaidInvoice = false;
+
         $scope.$watch('invoiceToSent', function () {
+          $scope.selectedPaidInvoice = false;
 
           $scope.selectedInvoiceCount = 0;
           var disabledCount = 0,
@@ -262,6 +265,10 @@
                       }
                     } else {
                       $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
+                    }
+
+                    if($scope.receivableInvoicesData.list[i].paidOn) {
+                      $scope.selectedPaidInvoice = true;
                     }
 
                     break;

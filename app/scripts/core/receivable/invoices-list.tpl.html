@@ -1,10 +1,10 @@
 <ul class="qt-list company-devices qt-users invoices-list">
-  <div class="selected-users-edit">
+  <div class="selected-users-edit" ng-show="selectedInvoiceCount > 0 && !selectedPaidInvoice">
     <p>
-      <span>1</span> Selected
+      <span>{{selectedInvoiceCount}}</span> Selected
     </p>
     <i tooltip-placement="top"
-       uib-tooltip="Resend">
+       uib-tooltip="Resend" ng-click="resendSelectedInvoices()">
     </i>
   </div>
   <li class="list-heading clearfix">
