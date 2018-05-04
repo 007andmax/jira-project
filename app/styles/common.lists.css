@@ -5892,8 +5892,7 @@ Devices tab
 
 .invoices .list-item .dropdown-menu li:nth-child(3):before,
 .invoices .qt-invoices .dropdown-menu li:nth-child(3):before {
-  background: url(../images/sprites-s76c759f188.png);
-  background-position: -153px -67px;
+  background: url(../images/new-icons/read.png);
 }
 
 .remote-dropdown {
