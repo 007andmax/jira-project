@@ -71,6 +71,7 @@
     $scope.techReportType = "Billed time";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
     $scope.users = UsersService.getAllUsers();
+    $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
 
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
