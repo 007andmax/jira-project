@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', '$uibModalInstance', 'Downloader',
-      function ($scope, BillableService, CompaniesService, $uibModalInstance, Downloader) {
+    ['$scope', 'BillableService', 'CompaniesService', '$uibModalInstance', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout',
+      function ($scope, BillableService, CompaniesService, $uibModalInstance, Downloader, UserNotificationService, $timeout) {
 
         var locksCount = 0;
 
@@ -13,6 +13,8 @@
         $scope.savingInvoiceInProcess = [];
         $scope.lockInfo = {};
         $scope.invoiceCreated = false;
+        $scope.shoeInvoiceCreatedMessage = false;
+        $scope.notificationMessage = 'Invoice has been created';
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
           $scope.invoiceNumber = number;
@@ -117,6 +119,8 @@
                 } else {
                   $scope.setShowInvoiceLockIndex($scope.showInvoiceLockIndex - 1);
                 }
+                $scope.shoeInvoiceCreatedMessage = true;
+
               }
 
               var index = $scope.savingInvoiceInProcess.indexOf(lock.id);

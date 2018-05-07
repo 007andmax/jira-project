@@ -7,6 +7,8 @@
       function ($scope, $uibModalInstance, CompaniesService, ReceivableService, Downloader, $timeout) {
 
         $scope.receivablePreview = true;
+        $scope.shoeInvoiceCreatedMessage = false;
+        $scope.notificationMessage = 'Invoice has been sent';
 
         ReceivableService.getInvoiceDataForPreview($scope.invoice.id, function (resp) {
           $scope.currentInvoice = resp;
@@ -56,6 +58,7 @@
 
           ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
             //$scope.sending[idInvoiceToSend] = false;
+            $scope.shoeInvoiceCreatedMessage = true;
           });
         };
       }]);

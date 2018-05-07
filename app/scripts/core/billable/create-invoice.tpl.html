@@ -59,6 +59,10 @@
       {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
     </div>
 
+    <div class="expires-in" ng-show="shoeInvoiceCreatedMessage">
+      <div style="margin-top: 10px;">{{notificationMessage}}</div>
+    </div>
+
     <div class="invoice-actions invoice-btns"  style="position: fixed;" ng-style="invoiceCreated && {'background-color': 'white'}">
       <button ng-if="!invoicePreview && !invoiceCreated"
               ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
