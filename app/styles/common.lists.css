@@ -400,8 +400,11 @@
 }
 
 .user-list-more .dropdown-menu li {
-  padding-left: 20px;
   position: relative;
+}
+
+.user-list-more .dropdown-menu li a {
+  padding: 5px 20px 5px 40px;
 }
 
 .user-list-more .dropdown-menu li:before {
