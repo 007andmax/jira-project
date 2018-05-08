@@ -84,7 +84,7 @@
                   <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
                 </div>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a ng-click="sentInvoice()">Resend</a></li>
+                  <li ng-show="!invoice.paidOn"><a ng-click="sentInvoice()">Resend</a></li>
                   <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
                   <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
                   <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>

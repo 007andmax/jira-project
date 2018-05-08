@@ -183,7 +183,34 @@
           $scope.highlightInvoiceId = invoiceId;
         };
 
+
+        $scope.isAllinvoicesSelected = function() {
+          if($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) {
+            return $scope.selectedInvoiceCount === $scope.receivableInvoicesData.list.length
+          } else {
+            return false;
+          }
+        };
+
+        $scope.selectAllInvoices = function() {
+          if($scope.selectedInvoiceCount !== $scope.receivableInvoicesData.list.length) {
+            for(var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
+              $scope.invoiceToSent.invoices[$scope.receivableInvoicesData.list[i].number] = true;
+              $scope.selectedInvoiceCount++
+            }
+          } else {
+            for(var invoice in $scope.invoiceToSent.invoices) {
+              if($scope.invoiceToSent.invoices.hasOwnProperty(invoice)) {
+                $scope.invoiceToSent.invoices[invoice] = false;
+              }
+            }
+          }
+        };
+
+        $scope.selectedPaidInvoice = false;
+
         $scope.$watch('invoiceToSent', function () {
+          $scope.selectedPaidInvoice = false;
 
           $scope.selectedInvoiceCount = 0;
           var disabledCount = 0,
@@ -229,7 +256,21 @@
                 disabledCount++;
                 for (var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
                   if (invoiceNumber === $scope.receivableInvoicesData.list[i].number) {
-                    $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id;
+
+                    if($scope.selectableCompanyId) {
+                      if($scope.selectableCompanyId === $scope.receivableInvoicesData.list[i].company.id) {
+                        $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
+                      } else {
+                        $scope.selectableCompanyId = undefined;
+                      }
+                    } else {
+                      $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
+                    }
+
+                    if($scope.receivableInvoicesData.list[i].paidOn) {
+                      $scope.selectedPaidInvoice = true;
+                    }
+
                     break;
                   }
                 }

@@ -71,6 +71,7 @@
     $scope.techReportType = "Billed time";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
     $scope.users = UsersService.getAllUsers();
+    $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
 
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
@@ -287,8 +288,8 @@
                 withResponseTime: $scope.customerTicketWithResponseTime,
                 withTimeSpent: $scope.customerTicketWithTimeSpent,
                 showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
-                startDate: $filter('date')(new Date(reportSettings.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
-                endDate: $filter('date')(new Date(reportSettings.endDate || now), 'yyyy/MM/dd')
+                startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);

@@ -3,8 +3,7 @@
   <div class="invoices clearfix">
     <div class="invoices-header">
       <h3>Invoices</h3>
-      <div class="invoices-header-filters">
-
+      <div class="invoices-header-filters fixed-block-top" style="margin-top: 25px; background-color: #F3F7F9; right: 25px;" fixed-block-top offset-top="100">
         <div>
           <input class="pointer" type="text" placeholder="Filter by date" date-range-picker ng-model="invoiceDateFilter"
                  options="invoiceDateFilterOptions">
@@ -59,12 +58,13 @@
         </div>
 
         <button class="btn btn-success"
-                custom-disabled="{{ !selectedInvoiceCount }}"
+                custom-disabled="{{ !selectedInvoiceCount || !selectableCompanyId}}"
                 modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
                 modal-window-class="modal-receive-payment"
                 mw-controller="quicktech.core.receivable.receivePaymentCtrl">
           Received Payment
         </button>
+
       </div>
     </div>
     <div ng-hide="loadingInProgress"

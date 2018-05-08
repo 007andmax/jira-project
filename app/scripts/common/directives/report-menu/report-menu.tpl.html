@@ -300,7 +300,7 @@
         </div>
         <ul class="scrollable">
           <li class="clearfix" ng-if="user.primaryEmail && !user.deletedAt" style="padding: 0"
-              ng-repeat="user in ($ctrl.tempUsers.concat(users)) | filter: {id: '!' + $ctrl.currentUser.id} | orderBy: ['custom', 'firstName'] track by $index">
+              ng-repeat="user in ($ctrl.tempUsers.concat(users).concat(currentUser)) | orderBy: ['custom', 'firstName'] track by $index">
             <label class="control checkbox pull-left ng-scope" stop-propagation="click">
               <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]"
                      placeholder="Add custom email"> </input>
