@@ -613,9 +613,6 @@
               $rootScope.isLeftPanelHidden = false;
             }
           }
-
-          // $scope.openedCategory = section;
-          // $rootScope.isLeftPanelHidden = false;
         };
 
         $scope.showLeftArrowToggleLeftPanel = function() {
@@ -623,11 +620,6 @@
         };
 
         $rootScope.toggleLeftPanel = function( ifIconPart) {
-          // if( $scope.openedCategory === 'companyProfile') {
-          //   $scope.toggleLeftPanel('companyProfile', true)
-          // } else {
-          //   $scope.toggleLeftPanel($scope.openedCategory, ifIconPart)
-          // }
           $rootScope.isLeftPanelHidden = !$rootScope.isLeftPanelHidden
         };
 
@@ -675,12 +667,6 @@
           }
 
         };
-
-        // $scope.openCompanyProfileTab = function(tabName) {
-        //   if(tabName) {
-        //     companyProfileSharedState.tabName = tabName;
-        //   }
-        // };
 
         $scope.openTutorial = function (type) {
           window.open('/tutorials/pdf/' + type + '.pdf');
