@@ -25,7 +25,7 @@
 }
 
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-
+  
   .icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator {
     /*background-image: url('../images/sprites-retina-s9f68249a71.png');*/
     background-image: url('../images/sprites-s76c759f188.png');
@@ -35,7 +35,7 @@
     display: inline-block;
     margin: auto;
   }
-
+  
 }
 
 /* Hit Area Start */
@@ -226,11 +226,13 @@ a.ha-24 {
   width: 18px;
   height: 4px;
 }
-.icn-more-users{
+
+.icn-more-users {
   background-position: -1664px 0;
   width: 18px;
   height: 4px;
 }
+
 .icn-more-grey {
   background-position: -1636px 0;
   width: 18px;
@@ -280,12 +282,8 @@ a.ha-24 {
 }*/
 
 .icn-back-arrow {
-  background-position: -1864px -100px;
+  background-position: -575px -100px;
   width: 16px;
-}
-
-:hover > .icn-back-arrow, :active > .icn-back-arrow, :focus:hover > .icn-back-arrow, :focus:active > .icn-back-arrow, :hover:active > .icn-back-arrow, .active > .icn-back-arrow, .open > .icn-back-arrow {
-  background-position: -1890px -100px;
 }
 
 .icn-plus {
@@ -445,12 +443,12 @@ a.ha-24 {
 }
 
 .icon-ticket-flag {
-
+  
   background-image: url("../images/new-icons/flag-white.png");
 }
 
 .icon-user {
-
+  
   background-image: url("../images/new-icons/user-circle-white.png");
 }
 
@@ -537,8 +535,8 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
 /*.icn-label-save, a:focus > .icn-label-save {*/
 .icn-label-save {
   background-position: -1720px -100px;
-  width: 20px!important;
-  height: 20px!important;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .icn-label-save-left-panel,
@@ -548,7 +546,8 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   height: 10px;
   margin-right: 25px;
 }
-.company-info-content .icn-remove-old.dashboard-remove{
+
+.company-info-content .icn-remove-old.dashboard-remove {
   background-position: -691px 6px;
   width: 20px;
   height: 20px;
@@ -977,7 +976,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 .wysiwyg-bold {
   background-image: url("../images/new-icons/bold-na.png");
-
+  
 }
 
 /*:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {*/
@@ -1295,7 +1294,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   width: 1px;
   height: 21px;
   transform: rotate(35deg);
-  border: solid 0.5px #4F5F79;
+  border: solid 0.5px #4f5f79;
   right: 11px;
   top: 1px;
 }
@@ -1575,11 +1574,11 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 .priority-dot.low, .priority-dot.yearly {
-  background-color: #CDDC39;
+  background-color: #cddc39;
 }
 
 .priority-dot.medium {
-  background-color: #FFC107;
+  background-color: #ffc107;
 }
 
 .priority-dot.high, .priority-dot.weekly {
@@ -1699,15 +1698,18 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 .user-remove {
   background-image: url(../images/new-icons/user-remove.svg);
 }
-.expand{
+
+.expand {
   width: 16px;
   height: 16px;
   display: block;
 }
-.expand-down{
+
+.expand-down {
   background-image: url(../images/new-icons/expand-down.png);
 }
-.expand-up{
+
+.expand-up {
   background-image: url(../images/new-icons/expand-up.png);
 }
 
