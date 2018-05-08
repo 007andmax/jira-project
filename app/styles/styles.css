@@ -1220,7 +1220,11 @@ hr {
   min-height: 72px;
   margin-bottom: 8px;
 }
-
+.invoices-list .selected-users-edit{
+  right: 35px;
+  top: 88px;
+  
+}
 .invoices-list .list-item .checkbox {
   margin-top: 3px !important;
 }

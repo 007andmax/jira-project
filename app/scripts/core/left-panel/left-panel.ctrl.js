@@ -18,6 +18,8 @@
           ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
           companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
+        var $win = $(window);
+
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
@@ -109,7 +111,6 @@
 
         $scope.companyIconClick = function() {
             $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
-
         };
 
         $scope.isCompanyProfile = function() {
@@ -612,9 +613,14 @@
               $rootScope.isLeftPanelHidden = false;
             }
           }
+        };
 
-          // $scope.openedCategory = section;
-          // $rootScope.isLeftPanelHidden = false;
+        $scope.showLeftArrowToggleLeftPanel = function() {
+          return window.outerWidth <= 1024
+        };
+
+        $rootScope.toggleLeftPanel = function( ifIconPart) {
+          $rootScope.isLeftPanelHidden = !$rootScope.isLeftPanelHidden
         };
 
         $scope.onClickSettings = function () {
@@ -661,12 +667,6 @@
           }
 
         };
-
-        // $scope.openCompanyProfileTab = function(tabName) {
-        //   if(tabName) {
-        //     companyProfileSharedState.tabName = tabName;
-        //   }
-        // };
 
         $scope.openTutorial = function (type) {
           window.open('/tutorials/pdf/' + type + '.pdf');

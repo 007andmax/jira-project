@@ -39,7 +39,7 @@
           function closeLeftPanelOnSmallScreen(e) {
             var isClickOutside = !angular.element(e.target).closest($element[0]).length;
             if (window.outerWidth <= 1024 && isClickOutside) {
-              $rootScope.isLeftPanelHidden = true;
+              //$rootScope.isLeftPanelHidden = true;
               $scope.$broadcast('leftPanelClosedFromQTSidebar');
               $scope.$apply();
             }

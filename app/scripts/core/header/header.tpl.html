@@ -2,13 +2,20 @@
   <div class="topNavbar-content" ng-controller="quicktech.core.header.headerCtrl">
 
     <div class="topNavbarLeft ellipsis">
-      <div ng-if="globalSearch.goBack.isEnabled">
+      <div ng-show="!isToggleLeftPanelButtonAvailable()">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-           style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"
-           tooltip-append-to-body="true" tooltip-placement="bottom" uib-tooltip="{{ globalSearch.goBack.tooltip }}">
+           style="margin: 5px 8px 0 0;" ng-click="toggleLeftPanel()"
+           tooltip-append-to-body="true" tooltip-placement="bottom" uib-tooltip="{{tooltipForLeftPanelToggleIcon()}}">
           <i class="icn-sm icn-back-arrow"></i>
         </a>
       </div>
+      <!--<div ng-if="globalSearch.goBack.isEnabled">-->
+        <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"-->
+           <!--style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"-->
+           <!--tooltip-append-to-body="true" tooltip-placement="bottom" uib-tooltip="{{ globalSearch.goBack.tooltip }}">-->
+          <!--<i class="icn-sm icn-back-arrow"></i>-->
+        <!--</a>-->
+      <!--</div>-->
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
           <span style="font-family: 'Graphik Light', sans-serif;">
