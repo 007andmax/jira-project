@@ -1158,7 +1158,7 @@ hr {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 64%;
+  max-width: 59%;
   width: 100%;
 }
 
@@ -1171,10 +1171,11 @@ hr {
 }
 
 .invoices .invoices-header .invoices-header-filters > div {
-  max-width: 220px;
+  /*max-width: 220px;*/
   width: 100%;
   margin-right: 10px;
   position: relative;
+  margin-left: 10px;
 }
 
 .invoices .invoices-header .invoices-header-filters > div i {
@@ -1223,7 +1224,7 @@ hr {
 .invoices-list .selected-users-edit{
   right: 35px;
   top: 88px;
-  
+
 }
 .invoices-list .list-item .checkbox {
   margin-top: 3px !important;
