@@ -623,12 +623,12 @@
         };
 
         $rootScope.toggleLeftPanel = function( ifIconPart) {
-          if( $scope.openedCategory === 'companyProfile') {
-            $scope.toggleLeftPanel('companyProfile', true)
-          } else {
-            $scope.toggleLeftPanel($scope.openedCategory, ifIconPart)
-          }
-
+          // if( $scope.openedCategory === 'companyProfile') {
+          //   $scope.toggleLeftPanel('companyProfile', true)
+          // } else {
+          //   $scope.toggleLeftPanel($scope.openedCategory, ifIconPart)
+          // }
+          $rootScope.isLeftPanelHidden = !$rootScope.isLeftPanelHidden
         };
 
         $scope.onClickSettings = function () {

@@ -150,7 +150,7 @@
         };
 
         $scope.tooltipForLeftPanelToggleIcon = function() {
-          return window.outerWidth <= 1024 ? '' : 'Toggle left panel;'
+          return window.outerWidth <= 1024 ? '' : 'Toggle left panel'
         }
 
 
