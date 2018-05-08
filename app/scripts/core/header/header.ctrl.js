@@ -145,6 +145,15 @@
           return $location.search().tabName
         };
 
+        $scope.isToggleLeftPanelButtonAvailable = function() {
+          return ($state.includes('settings') || $state.includes('reports') )
+        };
+
+        $scope.tooltipForLeftPanelToggleIcon = function() {
+          return window.outerWidth <= 1024 ? '' : 'Toggle left panel;'
+        }
+
+
       }]);
 
 }());

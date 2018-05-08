@@ -18,6 +18,8 @@
           ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
           companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
+        var $win = $(window);
+
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
@@ -109,7 +111,6 @@
 
         $scope.companyIconClick = function() {
             $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
-
         };
 
         $scope.isCompanyProfile = function() {
@@ -615,6 +616,19 @@
 
           // $scope.openedCategory = section;
           // $rootScope.isLeftPanelHidden = false;
+        };
+
+        $scope.showLeftArrowToggleLeftPanel = function() {
+          return window.outerWidth <= 1024
+        };
+
+        $rootScope.toggleLeftPanel = function( ifIconPart) {
+          if( $scope.openedCategory === 'companyProfile') {
+            $scope.toggleLeftPanel('companyProfile', true)
+          } else {
+            $scope.toggleLeftPanel($scope.openedCategory, ifIconPart)
+          }
+
         };
 
         $scope.onClickSettings = function () {
