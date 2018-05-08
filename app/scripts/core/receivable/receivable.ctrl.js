@@ -249,7 +249,7 @@
             }
 
             invoices = $scope.invoiceToSent.invoices;
-
+            $scope.selectMoreThanOneCompany = false;
             for (var invoiceNumber in invoices) {
               if (invoices[invoiceNumber]) {
                 $scope.selectedInvoiceCount++;
@@ -262,6 +262,7 @@
                         $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
                       } else {
                         $scope.selectableCompanyId = undefined;
+                        $scope.selectMoreThanOneCompany = true;
                       }
                     } else {
                       $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
@@ -270,11 +271,13 @@
                     if($scope.receivableInvoicesData.list[i].paidOn) {
                       $scope.selectedPaidInvoice = true;
                     }
-
                     break;
                   }
                 }
               }
+            }
+            if( $scope.selectMoreThanOneCompany) {
+              $scope.selectableCompanyId = undefined;
             }
 
           }
