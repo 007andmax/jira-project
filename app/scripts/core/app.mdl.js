@@ -396,7 +396,9 @@
         };
 
         $rootScope.getCompanyLogoUrl = function (company) {
-          if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
+          if(company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) {
+            return company.logo.base64
+          }else if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
             return '/company/default/logo' + '.jpg'
           }
           return '/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
