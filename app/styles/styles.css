@@ -5286,7 +5286,7 @@ tbody.collapse.in {
 .dropdown-menu .subdropdown-menu > li > a,
 .dropdown-menu > .nano li a {
   display: block;
-  padding: 5px 20px 5px 50px;
+  padding: 5px 20px;
   clear: both;
   font-weight: normal;
   line-height: 2;
@@ -5295,6 +5295,11 @@ tbody.collapse.in {
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.dropdown-menu .subdropdown-menu > li > a,
+.valera .dropdown-menu > li > a{
+  padding: 5px 20px 5px 50px;
 }
 
 .topNavbar-content .dropdown-menu > li > a {
