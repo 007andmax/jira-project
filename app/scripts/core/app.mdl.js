@@ -667,7 +667,6 @@
         $rootScope.PERCENT = /^[1-9][0-9]?$|^100$/;
         $rootScope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $rootScope.timeHoursAndMinutesPattern = /^(?:0?\d|1[12]):[0-5]?[0-9]$/;
-
         //display limit for infinity-scroll-pagination
         $rootScope.displayLimit = 20;
 

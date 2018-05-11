@@ -624,6 +624,7 @@ _::-webkit-:not(:root:root),
   padding: 10px;
   cursor: pointer;
   line-height: 1;
+  pointer-events: none;
 }
 
 .service-form-wrapper #qtDropdown .x-mark {
