@@ -2,7 +2,7 @@
      model-image-path="{{ imagePath }}">
   <div class="avatar pull-left">
     <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
-         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped ? '100%' : 'none'}">
+         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped ? '100%' : '150px'}">
 
     <div class="reposition" ng-show="model[imagePath] && model[imagePath].origin" reposition-button>
       Reposition...
