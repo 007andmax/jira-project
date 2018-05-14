@@ -844,7 +844,7 @@
               shares: [],
               taxIds: []
             };
-            if($scope.blockTimeContract.interval == 'MONTHLY' || $scope.blockTimeContract.interval == 'YEARLY') {
+            if($scope.blockTimeContract.interval === 'MONTHLY' || $scope.blockTimeContract.interval === 'YEARLY') {
               blockContract.interval = contractData.interval;
             } else {
               blockContract.interval = null;
