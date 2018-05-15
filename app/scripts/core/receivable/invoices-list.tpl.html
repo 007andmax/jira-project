@@ -1,27 +1,27 @@
 <ul class="qt-list company-devices qt-users invoices-list">
-  <div class="selected-users-edit fixed-block-top" ng-show="selectedInvoiceCount > 0 && !selectedPaidInvoice" fixed-block-top offset-top="160" style="width: 150px;">
-    <p>
-      <span>{{selectedInvoiceCount}}</span> Selected
-    </p>
-    <i tooltip-placement="top"
-       uib-tooltip="Resend" ng-click="resendSelectedInvoices()">
-    </i>
-  </div>
-  <li class="list-heading clearfix">
-    <div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">
-      <label class="control checkbox pull-left">
-        <input type="checkbox" ng-click="selectAllInvoices()" ng-checked="isAllinvoicesSelected()">
-        <span class="control-indicator"></span>
-      </label>
-      Invoice#
+  <div class="fixed-block-top" ng-show="selectedInvoiceCount > 0 && !selectedPaidInvoice" fixed-block-top
+       offset-top="78" >
+    <div class="selected-users-edit" style="width: 150px;">
+      <button class="btn btn-success">
+        Resend invoices
+      </button>
     </div>
-    <div class="col-md-3 pointer" ng-click="setOrderForInvoices('company')">Company</div>
-    <div class="col-md-2 pointer" ng-click="setOrderForInvoices('date')">Invoice date</div>
-    <div class="col-md-2 pointer" ng-click="setOrderForInvoices('readedAt')">Read On</div>
-    <div class="col-md-1 pointer" style="width: 13.6%;" ng-click="setOrderForInvoices('sum')">Amount</div>
-    <div class="col-md-2 pointer" ng-click="setOrderForInvoices('dueDate')">Due Date</div>
-    <div class="col-md-1" style="width: 3%;"></div>
-  </li>
+  </div>
+  <!--<li class="list-heading clearfix">-->
+  <!--<div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox" ng-click="selectAllInvoices()" ng-checked="isAllinvoicesSelected()">-->
+  <!--<span class="control-indicator"></span>-->
+  <!--</label>-->
+  <!--Invoice#-->
+  <!--</div>-->
+  <!--<div class="col-md-3 pointer" ng-click="setOrderForInvoices('company')">Company</div>-->
+  <!--<div class="col-md-2 pointer" ng-click="setOrderForInvoices('date')">Invoice date</div>-->
+  <!--<div class="col-md-2 pointer" ng-click="setOrderForInvoices('readedAt')">Read On</div>-->
+  <!--<div class="col-md-1 pointer" style="width: 13.6%;" ng-click="setOrderForInvoices('sum')">Amount</div>-->
+  <!--<div class="col-md-2 pointer" ng-click="setOrderForInvoices('dueDate')">Due Date</div>-->
+  <!--<div class="col-md-1" style="width: 3%;"></div>-->
+  <!--</li>-->
   <li class="list-item"
       ng-repeat="invoice in receivableInvoicesData.list  | orderBy: orderByForInvoices : orderInvoices.reverse  track by invoice.id"
       ng-controller="quicktech.core.receivable.invoiceCtrl"
@@ -56,7 +56,7 @@
       <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
     </div>
     <div class="col-md-1" style="width: 3%;">
-      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">
         <div uib-dropdown-toggle uib-tooltip="more"
              tooltip-placement="top"
              tooltip-append-to-body="true"

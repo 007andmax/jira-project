@@ -13,9 +13,9 @@
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{ countryCode }}"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}"
                execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
-               ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
+               ng-change="phoneNumber.error = false">
       </div>
 
       <div class="form-group custom-phone-type col-xs-6 no-label">
@@ -60,9 +60,9 @@
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               ng-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()" ng-disabled="$eval(disabled)"
-               hard-phone-number-pattern country="{{ countryCode }}" tabindex="{{ 20 + $index * 3 }}"
-               ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
+               hard-reset-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()" ng-disabled="$eval(disabled)"
+                country="{{ countryCode }}" tabindex="{{ 20 + $index * 3 }}"
+               ng-change="phoneNumber.error = false">
       </div>
 
       <div class="form-group col-xs-6 custom-phone-type no-label">

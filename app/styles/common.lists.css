@@ -4541,6 +4541,7 @@ Devices tab
 .dashboard-network-scan .btn-success,
 .billable-items-header .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
+.selected-users-edit .btn-success,
 .receive .btn-success {
   margin-bottom: 65px;
   position: relative;
@@ -4557,6 +4558,9 @@ Devices tab
 .billable-items-header .btn-success:hover,
 .billable-items-header .btn-success:active,
 .billable-items-header .btn-success:focus,
+.selected-users-edit .btn-success:hover,
+.selected-users-edit .btn-success:active,
+.selected-users-edit .btn-success:focus
 .invoices .invoices-header .invoices-header-filters .btn-success:hover,
 .invoices .invoices-header .invoices-header-filters .btn-success:active,
 .invoices .invoices-header .invoices-header-filters .btn-success:focus,

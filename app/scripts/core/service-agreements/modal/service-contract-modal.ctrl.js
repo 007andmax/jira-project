@@ -82,7 +82,9 @@
             services: [],
             serviceExpenses: [],
             productExpenses: [],
-            serviceContractServicesToTrack: []
+            serviceContractServicesToTrack: [],
+            taxes: [],
+            taxIds: []
           };
           $scope.reInitPrpductsExpenseNameField = true;
           preCreateFirstServicesEntities();
@@ -101,13 +103,28 @@
           $timeout(function () {
             changeNumOfIntervals($scope.serviceContract.startDatePreview, $scope.serviceContract.endDatePreview, true);
           }, 500);
+          if($scope.serviceContract.blockTimeServices.length > 0) {
+            $scope.serviceContract.contractWithBlockTime = true;
+            $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices
+          }
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
           });
 
-          if($scope.serviceContract.interval == null) {
+          if($scope.serviceContract.interval === null) {
             $scope.serviceContract.interval = $scope.serviceContract.customInterval + ' days';
+          }
+
+          if($scope.serviceContract.taxIds && $scope.serviceContract.taxIds.length > 0) {
+            $scope.serviceContract.taxes = [];
+            for (var i = 0; i < $scope.serviceContract.taxIds.length; i++) {
+              for (var j = 0; j < $scope.taxes.length; j++) {
+                if ($scope.serviceContract.taxIds[i] === $scope.taxes[j].id) {
+                  $scope.serviceContract.taxes.push($scope.taxes[j]);
+                }
+              }
+            }
           }
 
           for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
@@ -1185,6 +1202,16 @@
           return hours + part;
         }
 
+        $scope.calculateTotalAmountForBlockrate = function () {
+          var sum = null;
+          if ($scope.serviceContract.includedHours && $scope.serviceContract.blockRate) {
+            sum =  $scope.serviceContract.includedHours * $scope.serviceContract.blockRate;
+          } else {
+            sum =  null;
+          }
+          return sum;
+        };
+
         function createServiceContract(serviceContract) {
           $scope.showValidationFailMessage = false;
           if (serviceContract) {
@@ -1201,8 +1228,31 @@
               serviceContractServices: [],
               serviceExpenses: null,
               productExpenses: null,
-              serviceContractServicesToTrack: []
+              serviceContractServicesToTrack: [],
+              contractWithBlockTime: false,
+              taxIds: null,
+              blockRate: null,
+              includedHours: null,
+              rateExceeding: null,
+              blockTimeServices: null
             };
+
+            if(serviceContract.contractWithBlockTime && (servContract.billType === 'USER' || servContract.billType === 'DEVICE')) {
+              servContract.contractWithBlockTime = serviceContract.contractWithBlockTime;
+              servContract.blockRate = serviceContract.blockRate;
+              servContract.includedHours = serviceContract.includedHours;
+              servContract.rateExceeding = serviceContract.rateExceeding;
+              servContract.blockTimeServices = [];
+
+              if (serviceContract.taxes && serviceContract.taxes.length) {
+                servContract.taxIds = [];
+                for (var r = 0; r < serviceContract.taxes.length; r++) {
+                  servContract.taxIds.push(serviceContract.taxes[r].id);
+                }
+              }
+
+            }
+
 
             if (servContract.billType === 'OTHER') {
               servContract.serviceExpenses = [];
@@ -1236,7 +1286,12 @@
                     name: serviceContract.serviceContractServicesToTrack[l].name,
                     rate: 0
                   };
-                  servContract.serviceContractServicesToTrack.push(scstt);
+                  if(serviceContract.contractWithBlockTime) {
+                    servContract.blockTimeServices.push(scstt);
+                  } else {
+                    servContract.serviceContractServicesToTrack.push(scstt);
+                  }
+
                 }
               }
               if (serviceContract.services && serviceContract.services.length) {

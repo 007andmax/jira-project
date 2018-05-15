@@ -396,7 +396,9 @@
         };
 
         $rootScope.getCompanyLogoUrl = function (company) {
-          if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
+          if(company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) {
+            return company.logo.base64
+          }else if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
             return '/company/default/logo' + '.jpg'
           }
           return '/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
@@ -665,7 +667,6 @@
         $rootScope.PERCENT = /^[1-9][0-9]?$|^100$/;
         $rootScope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $rootScope.timeHoursAndMinutesPattern = /^(?:0?\d|1[12]):[0-5]?[0-9]$/;
-
         //display limit for infinity-scroll-pagination
         $rootScope.displayLimit = 20;
 
@@ -712,3 +713,5 @@
   }
 
 }());
+
+
