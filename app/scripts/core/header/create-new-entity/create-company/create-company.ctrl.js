@@ -28,7 +28,7 @@
           SUNDAY: 'Sunday'
         };
 
-
+        $scope.timeFormat = ['AM', 'PM'];
 
         var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
@@ -172,7 +172,7 @@
           $scope.editCompany.workingDays = [];
           for (var i = 0; i < 7; i++) {
             var day = {};
-            if ($scope.workingDays[i].isDayOff || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+            if (!$scope.workingDays[i].isWorkingDay || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
               day = {
                 dayOfWeek: $scope.workingDays[i].dayOfWeek,
                 startTime: 0,
@@ -210,7 +210,7 @@
               startTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
               endTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
               endTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
-              isDayOff: ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && $scope.editCompany.workingDays[i].startTime > 0 && $scope.editCompany.workingDays[i].endTime > 0) ? false : true
+              isWorkingDay: ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && $scope.editCompany.workingDays[i].startTime > 0 && $scope.editCompany.workingDays[i].endTime > 0) ? true : false
             };
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);

@@ -140,7 +140,7 @@
           $scope.companyInfo.workingDays = [];
           for (var i = 0; i < 7; i++) {
             var day = {};
-            if ($scope.workingDays[i].isDayOff || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+            if (!$scope.workingDays[i].isWorkingDay || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
               day = {
                 dayOfWeek: $scope.workingDays[i].dayOfWeek,
                 startTime: 0,
@@ -178,7 +178,7 @@
               startTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
               endTime: timeFormatter($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
               endTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
-              isDayOff: ($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 && $scope.companyInfo.workingDays[i].startTime > 0 && $scope.companyInfo.workingDays[i].endTime > 0) ? false : true
+              isWorkingDay: ($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 && $scope.companyInfo.workingDays[i].startTime > 0 && $scope.companyInfo.workingDays[i].endTime > 0) ? true : false
             };
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
