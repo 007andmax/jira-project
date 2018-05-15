@@ -298,16 +298,16 @@
       </label>
     </div>
 
-    <div class="col-md-12" ng-if="serviceContract.billType === 'USER' || serviceContract.billType === 'DEVICE'">
+    <div ng-if="serviceContract.billType === 'USER' || serviceContract.billType === 'DEVICE'">
       <label class="control checkbox">
         <input type="checkbox" ng-model="serviceContract.contractWithBlockTime">
         <span class="control-indicator"></span>
         Set maximum amount of hours
       </label>
     </div>
-    <div ng-if="serviceContract.contractWithBlockTime && (serviceContract.billType === 'USER' || serviceContract.billType === 'DEVICE')">
+    <div ng-if="serviceContract.contractWithBlockTime && (serviceContract.billType === 'USER' || serviceContract.billType === 'DEVICE')" class="row">
       <div class="col-md-12">
-        <div class="interval-agreement">
+        <div class="interval-agreement" style="padding-left: 0;">
           <div class="form-group">
             Included hours*
             <input placeholder="Hours"
@@ -341,7 +341,7 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="col-md-4" style="width: 193px;padding-right: 0;">
+        <div class="col-md-4 interval-agreement" style="width: 193px;padding-right: 0;padding-left: 0;">
           <div class="form-group before-icon">
             Rate exceding block time*
             <input style="width: 127px;"
