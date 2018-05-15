@@ -162,12 +162,12 @@
              ng-mouseover="showWorkingDaysEditButton = true"
              ng-mouseleave="showWorkingDaysEditButton = false">
           <p class="w-92" ng-click="openWorkingDaysSchedule()">{{daysOfWeekMap[daysOfWeek[getTodayDayOfWeek()-1]]}}
-            <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].startTime}}</span>
-            <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].startTimeFormat}}</span><span
-              ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">-</span><span
-              ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].endTime}}</span>
-            <span ng-show="!workingDays[getTodayDayOfWeek()-1].isDayOff">{{workingDays[getTodayDayOfWeek()-1].endTimeFormat}}</span><span
-              ng-show="workingDays[getTodayDayOfWeek()-1].isDayOff">Not working</span>
+            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTime}}</span>
+            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTimeFormat}}</span><span
+              ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">-</span><span
+              ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTime}}</span>
+            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTimeFormat}}</span><span
+              ng-show="!workingDays[getTodayDayOfWeek()-1].isWorkingDay">Not working</span>
             <i class="icn-sm report-caret-icon"></i>
           </p>
           <button class="company-edit-icn company-edit-icn-sm"
@@ -178,9 +178,9 @@
             <li ng-repeat="day in workingDays"
                 ng-style="{'font-weight': daysOfWeek[getTodayDayOfWeek()-1] === day.dayOfWeek ? 'bold' : ''}">
               <div>{{daysOfWeekMap[day.dayOfWeek]}}:</div>
-              <span ng-show="!day.isDayOff">{{day.startTime}}</span> <span ng-show="!day.isDayOff">{{day.startTimeFormat}}</span><span
-              ng-show="!day.isDayOff">-</span><span ng-show="!day.isDayOff">{{day.endTime}}</span> <span
-              ng-show="!day.isDayOff">{{day.endTimeFormat}}</span><span ng-show="day.isDayOff">Not working</span>
+              <span ng-show="day.isWorkingDay">{{day.startTime}}</span> <span ng-show="day.isWorkingDay">{{day.startTimeFormat}}</span><span
+              ng-show="day.isWorkingDay">-</span><span ng-show="!ay.isWorkingDay">{{day.endTime}}</span> <span
+              ng-show="day.isWorkingDay">{{day.endTimeFormat}}</span><span ng-show="!day.isWorkingDay">Not working</span>
             </li>
           </ul>
           <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
