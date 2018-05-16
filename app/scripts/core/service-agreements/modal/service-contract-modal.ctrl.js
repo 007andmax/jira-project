@@ -1232,6 +1232,7 @@
               servContract.contractWithBlockTime = serviceContract.contractWithBlockTime;
               servContract.includedHours = serviceContract.includedHours;
               servContract.rateExceeding = serviceContract.rateExceeding;
+              servContract.blockRate = 0;
               servContract.blockTimeServices = [];
 
               if (serviceContract.taxes && serviceContract.taxes.length) {
