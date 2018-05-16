@@ -1202,15 +1202,7 @@
           return hours + part;
         }
 
-        $scope.calculateTotalAmountForBlockrate = function () {
-          var sum = null;
-          if ($scope.serviceContract.includedHours && $scope.serviceContract.blockRate) {
-            sum =  $scope.serviceContract.includedHours * $scope.serviceContract.blockRate;
-          } else {
-            sum =  null;
-          }
-          return sum;
-        };
+
 
         function createServiceContract(serviceContract) {
           $scope.showValidationFailMessage = false;
@@ -1231,7 +1223,6 @@
               serviceContractServicesToTrack: [],
               contractWithBlockTime: false,
               taxIds: null,
-              blockRate: null,
               includedHours: null,
               rateExceeding: null,
               blockTimeServices: null
@@ -1239,9 +1230,9 @@
 
             if(serviceContract.contractWithBlockTime && (servContract.billType === 'USER' || servContract.billType === 'DEVICE')) {
               servContract.contractWithBlockTime = serviceContract.contractWithBlockTime;
-              servContract.blockRate = serviceContract.blockRate;
               servContract.includedHours = serviceContract.includedHours;
               servContract.rateExceeding = serviceContract.rateExceeding;
+              servContract.blockRate = 0;
               servContract.blockTimeServices = [];
 
               if (serviceContract.taxes && serviceContract.taxes.length) {
@@ -1250,7 +1241,6 @@
                   servContract.taxIds.push(serviceContract.taxes[r].id);
                 }
               }
-
             }
 
 
