@@ -1241,7 +1241,6 @@
                   servContract.taxIds.push(serviceContract.taxes[r].id);
                 }
               }
-
             }
 
 
