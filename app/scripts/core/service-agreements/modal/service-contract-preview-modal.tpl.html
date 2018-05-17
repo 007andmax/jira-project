@@ -156,15 +156,15 @@
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2"  readonly>
           </div>
         </div>
-        <div class="interval-agreement col-md-4">
-          <div class="tax-agreement form-group">
+
+          <div class="tax-agreement form-group" style="right: 40px">
             Select taxes
             <select-taxes taxes="taxes" entity="serviceContract" is-preview-mode="true"
                           ng-show="serviceContract.taxIds.length > 0"></select-taxes>
             <input placeholder="No taxes selected" readonly type="text" class="form-control"
                    ng-hide="serviceContract.taxIds.length > 0">
           </div>
-        </div>
+
       </div>
 
     </div>
