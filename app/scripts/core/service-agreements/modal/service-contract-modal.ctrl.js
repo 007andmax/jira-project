@@ -83,7 +83,7 @@
             serviceExpenses: [],
             productExpenses: [],
             serviceContractServicesToTrack: [],
-            taxes: [],
+            taxes: $scope.addDefaultTaxes(),
             taxIds: []
           };
           $scope.reInitPrpductsExpenseNameField = true;
