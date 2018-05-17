@@ -70,8 +70,6 @@
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
 
-
-
         if ($scope.editMode) {
           $scope.serviceContract = {
             billType: null,
