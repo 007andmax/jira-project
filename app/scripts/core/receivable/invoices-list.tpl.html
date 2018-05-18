@@ -2,7 +2,7 @@
   <div class="fixed-block-top" ng-show="selectedInvoiceCount > 0 && !selectedPaidInvoice" fixed-block-top
        offset-top="78" >
     <div class="selected-users-edit" style="width: 150px;">
-      <button class="btn btn-success">
+      <button class="btn btn-success" uib-tooltip="Resend" ng-click="resendSelectedInvoices()">
         Resend invoices
       </button>
     </div>
