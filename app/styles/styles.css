@@ -17,8 +17,6 @@ body {
   margin: 0;
   /*min-width: 1200px;*/
   overflow: hidden;
-  display: initial;
-  
 }
 
 ::-webkit-scrollbar {
