@@ -45,6 +45,7 @@
           dropdowns[$scope.ticket.id]['status'] = false;
         };
 
+
       }]);
 
 }());
