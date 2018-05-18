@@ -156,7 +156,6 @@
               delete user.subscription;
             }
           }
-
         });
 
         RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
