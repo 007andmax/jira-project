@@ -11532,7 +11532,7 @@ button.close {
 .invoices .selected-users-edit {
   height: auto;
   padding: 0;
-  top: 60px;
+  top: 4px;
   z-index: 3;
 }
 
