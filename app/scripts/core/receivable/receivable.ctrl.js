@@ -400,11 +400,11 @@
             }
           }
 
-          var notificationMessage = invoiceIds.length > 1 ? 'Invoices' : 'The invoice';
+          var notificationMessage = invoiceIds.length > 1 ? 'Invoices have' : 'The invoice has';
 
           ReceivableService.resendInvoices(invoiceIds, function () {
             $scope.sendingInvoices = false;
-            UserNotificationService.show(notificationMessage+' has been sent', true);
+            UserNotificationService.show(notificationMessage + ' been sent', true);
           });
         };
 
