@@ -56,6 +56,16 @@
             Received Payment
           </button>
 
+          <div>
+            <button class="btn btn-success"
+                    ng-click="resendSelectedInvoices()"
+                    custom-disabled="{{ selectedInvoiceCount === 0 || selectedPaidInvoice }}">
+              Resend invoices
+            </button>
+          </div>
+
+          
+       
         </div>
       </div>
       <ul class="qt-list company-devices qt-users invoices-list" ng-show="mode === 'list'">
