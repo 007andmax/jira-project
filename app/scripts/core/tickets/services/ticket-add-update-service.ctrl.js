@@ -10,7 +10,7 @@
           $scope.maxServiceDate = new Date();
 
 
-
+          $scope.serviceExpense.item = undefined;
           $scope.setNewService = function (service) {
             $scope.serviceExpense.item = service.staticCopy()
           };
@@ -34,13 +34,14 @@
               }
 
               if ($scope.serviceExpense.item.name.toLowerCase() === $scope.serviceList[i].name.toLowerCase()) {
-                $scope.serviceExpense.item = $scope.serviceList[i].staticCopy();
+                $scope.serviceExpense.item = angular.copy($scope.serviceList[i]);
                 return;
-              } else {
-                if ($scope.serviceExpense.item && $scope.serviceExpense.item.versionedId) {
-                  $scope.serviceExpense.item.versionedId.id = undefined;
-                }
               }
+              // else {
+              //   if ($scope.serviceExpense.item && $scope.serviceExpense.item.versionedId) {
+              //     $scope.serviceExpense.item.versionedId.id = undefined;
+              //   }
+              // }
 
             }
           });

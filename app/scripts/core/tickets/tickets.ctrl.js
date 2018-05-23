@@ -166,7 +166,7 @@
         }
 
         $scope.checkAgreementTypeToShowDiscount = function(serviceExpense) {
-          if(serviceExpense.item && serviceExpense.item.name) {
+          if(serviceExpense.item && serviceExpense.item.name && serviceExpense.item.name !== " ") {
             if(serviceExpense.item.blockTimeServiceAgreement == null &&
               serviceExpense.item.serviceContractServiceAgreement == null &&
               serviceExpense.item.serviceAgreement.id) {
