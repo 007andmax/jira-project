@@ -88,7 +88,7 @@
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-
+      console.log(newChange);
       if (!initialized) {
         return;
       }
