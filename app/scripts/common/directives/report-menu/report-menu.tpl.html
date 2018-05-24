@@ -238,16 +238,17 @@
         <p ng-click="$ctrl.setTechReportDateType('MONTH')" ng-class="{'choosen': techReportDateType === 'MONTH'}">
           Month</p>
         <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
-          Custom</p>
+          Select date</p>
         <div ng-show="techReportDateType==='CUSTOM'">
           <input style="display: inline-block;width: 250px;margin-top: 10px;"
                  type="text"
                  class="form-control has-dropdown readonly-normal"
                  name="reportDateRange"
                  readonly
-                 qt-date-range-picker="$ctrl.onDateRangeChangeReport"
-                 on-hide="$ctrl.setTechReportDateType"
-                 range max-date="{{ maxDateForDateRangeInputField }}"
+                 options="datePickerOptions"
+                 range
+                 date-range-picker 
+                 max-date="{{ maxDateForDateRangeInputField }}"
                  ng-model="reportSetting.dateRange"> </input>
         </div>
       </div>
