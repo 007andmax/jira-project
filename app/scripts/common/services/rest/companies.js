@@ -88,7 +88,7 @@
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-
+      console.log(newChange);
       if (!initialized) {
         return;
       }
@@ -290,9 +290,18 @@
         if (newChange.action == 'CLIENT_COMPANY_INFO') {
 
           var data = JSON.parse(newChange.data);
-
           for (var companyId in  data) {
             Utils.defineReadOnlyProperty(info, companyId, Utils.customizeObj(data[companyId]));
+            for(var i=0; i<storage.companies.length; i++) {
+              if(storage.companies[i].id === companyId) {
+                storage.companies[i].companyInfo = {
+                  addresses: data[companyId].addresses,
+                  contacts: data[companyId].contacts,
+                  primaryAddress: data[companyId].primaryAddress
+                }
+              }
+            }
+            $rootScope.$broadcast('newCompanyInfo'+companyId);
           }
         }
       });

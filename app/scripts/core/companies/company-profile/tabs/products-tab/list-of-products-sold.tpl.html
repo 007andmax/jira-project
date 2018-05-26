@@ -41,15 +41,24 @@
                   <span class="control-indicator"></span>
                 </label>
               </strong></div>
-              <div class="col-md-1">Date</div>
-              <div class="col-md-1" ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>
-              <div class="col-md-1">MFG#</div>
-              <div class="col-md-3">Description</div>
-              <div class="col-md-2">Ticket number</div>
-              <div class="col-md-2">Invoice number</div>
+              <!--<div class="col-md-1" ng-click="sortBy(['date', 'ticketNumber'])">Date</div>-->
+              <!--<div class="col-md-1" ng-click="sortBy(['client'])" ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>-->
+              <!--<div class="col-md-1" ng-click="sortBy(['mfg'])">MFG#</div>-->
+              <!--<div class="col-md-3" ng-click="sortBy(['description'])">Description</div>-->
+              <!--<div class="col-md-2" ng-click="sortBy(['ticketNumber'])">Ticket number</div>-->
+              <!--<div class="col-md-2" ng-click="sortBy(['invoiceNumber'])">Invoice number</div>-->
+              <!--&lt;!&ndash;<div class="col-md-1"><strong>Count</strong></div>&ndash;&gt;-->
+              <!--<div class="col-md-1" ng-click="sortBy(['purchaseCost'])">Purchase cost</div>-->
+              <!--<div class="col-md-1" ng-click="sortBy(['salePrice'])">Sale price</div>-->
+              <div class="col-md-1" >Date</div>
+              <div class="col-md-1"  ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>
+              <div class="col-md-1" >MFG#</div>
+              <div class="col-md-3" >Description</div>
+              <div class="col-md-2" >Ticket number</div>
+              <div class="col-md-2" >Invoice number</div>
               <!--<div class="col-md-1"><strong>Count</strong></div>-->
-              <div class="col-md-1">Purchase cost</div>
-              <div class="col-md-1">Sale price</div>
+              <div class="col-md-1" >Purchase cost</div>
+              <div class="col-md-1" >Sale price</div>
               <!--<div class="col-md-1"><strong>Discount(amount)</strong></div>-->
             </li>
             <li class="content-product-list-ticket clearfix"

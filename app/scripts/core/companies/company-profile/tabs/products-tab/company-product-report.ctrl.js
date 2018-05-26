@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProductReportCtrl',
-    ['$scope', '$rootScope', '$timeout', 'quicktech.common.services.PermissionsService',
-      function ($scope, $rootScope, $timeout, PermissionsService ) {
+    ['$scope', '$rootScope', '$timeout', 'quicktech.common.services.PermissionsService', '$filter',
+      function ($scope, $rootScope, $timeout, PermissionsService, $filter ) {
 
         $scope.PermissionsService = PermissionsService;
         $scope.purchaseCostSum = 0;
@@ -16,9 +16,11 @@
         var lineId = 0;
         $rootScope.reportLineChanged = false;
 
+        $scope.sortBy = sortBy;
+        $scope.reverse = false;
+        $scope.sortProps = ['date', 'ticketNumber'] 
+
         $scope.selectLine = function(line) {
-
-
           var ind = $scope.selectedLines.indexOf(line);
           if (ind === -1) {
             $scope.selectedLines.push(line);
@@ -65,12 +67,7 @@
             calculateSumPrices()
           }
         };
-
-        if($scope.reportByProducts.lines) {
-          $scope.selectedLines = [];
-          $scope.selectAllLines();
-        }
-
+ 
         $scope.isAllLinesAreChecked = function() {
           return $scope.selectedLines.length === $scope.reportByProducts.lines.length
         }
@@ -87,6 +84,99 @@
           }
         }
 
+
+        var sortByFew;
+
+        (function() {
+            var default_cmp = function(a, b) {
+                    if (a == b) return 0;
+                    return a < b ? -1 : 1;
+                },
+                getCmpFunc = function(primer, reverse) {
+                    var dfc = default_cmp, 
+                        cmp = default_cmp;
+                    if (primer) {
+                        cmp = function(a, b) {
+                            return dfc(primer(a), primer(b));
+                        };
+                    }
+                    if (reverse) {
+                        return function(a, b) {
+                            return -1 * cmp(a, b);
+                        };
+                    }
+                    return cmp;
+                };
+
+            sortByFew = function() {
+                var fields = [],
+                    n_fields = arguments.length,
+                    field, name, reverse, cmp;
+
+                for (var i = 0; i < n_fields; i++) {
+                    field = arguments[i];
+                    if (typeof field === 'string') {
+                        name = field;
+                        cmp = default_cmp;
+                    }
+                    else {
+                        name = field.name;
+                        cmp = getCmpFunc(field.primer, field.reverse);
+                    }
+                    fields.push({
+                        name: name,
+                        cmp: cmp
+                    });
+                }
+
+                return function(A, B) {
+                    var a, b, name, result;
+                    for (var i = 0; i < n_fields; i++) {
+                        result = 0;
+                        field = fields[i];
+                        name = field.name;
+
+                        result = field.cmp(A[name], B[name]);
+                        if (result !== 0) break;
+                    }
+                    return result;
+                }
+            }
+        }());
+
+
+        function sortBy(props) {
+          var prop1 = props[0];
+          var prop2 = props[1];
+
+          console.log($scope.reportByProducts.lines)       
+
+          if ($scope.sortProps[0] !== props[0]) {
+            $scope.reverse = true;
+          } else {
+            $scope.reverse = !$scope.reverse;
+          }
+
+          $scope.sortProps = props;
+
+          if (!prop2) {
+            $scope.reportByProducts.lines = $filter('orderBy')($scope.reportByProducts.lines, prop1, $scope.reverse);
+          } else {
+            $scope.reportByProducts.lines.sort(sortByFew({name: prop1, reverse: $scope.reverse}, { name: prop2, reverse: $scope.reverse, primer: parseInt }));
+          }
+
+          
+        }
+
+
+        if ($scope.reportByProducts.lines) {
+          $scope.selectedLines = [];
+          $scope.selectAllLines();
+          sortBy($scope.sortProps);
+        }
+
+
       }]);
+
 
 }());

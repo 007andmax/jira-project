@@ -10,14 +10,14 @@
       <div class="network-scan-step-img"></div>
       <div>2. Install</div>
       <div>Follow the instructions on
-           your computer
+        your computer
       </div>
     </div>
     <div>
       <div class="network-scan-step-img"></div>
       <div>3. Run Scan</div>
       <div>Get Started with run scan
-           to get result
+        to get result
       </div>
     </div>
   </div>
@@ -40,21 +40,22 @@
 
       </div>
       <p>Run Scan</p>
-      <!--<div class="master-agent" ng-if="agents && agents.length" uib-dropdown>-->
-      <!--<p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>-->
-      <!--<input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle-->
-      <!--readonly-->
-      <!--ng-disabled="saveMasterAgentInProgress">-->
-      <!--<i class="report-caret-icon"></i>-->
-      <!--<ul uib-dropdown-menu>-->
-      <!--<li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"-->
-      <!--ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}-->
-      <!--</li>-->
-      <!--</ul>-->
-      <!--</div>-->
+      <div class="master-agent" ng-if="agents && agents.length" uib-dropdown>
+        <p style="display: inline-block; padding-bottom: 0;">Master Agent:</p>
+        <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle
+               readonly
+               ng-disabled="saveMasterAgentInProgress">
+        <i class="report-caret-icon" style="left: 275px"></i>
+        <ul uib-dropdown-menu>
+          <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
+              ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}
+          </li>
+        </ul>
+      </div>
 
       <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
-        Scanning  <div class="loader"></div>
+        Scanning
+        <div class="loader"></div>
       </div>
     </div>
     <div class="header-item" ng-form="credentialsForm">
@@ -89,7 +90,7 @@
       </div>
       <button class="btn btn-success"
               ng-click="saveCredential(credentialsForm)">{{testCredentialsModel.id ? 'Edit Credential' : 'Add
-                                                         Credential'}}
+        Credential'}}
       </button>
     </div>
     <div class="header-item">
@@ -180,11 +181,11 @@
                         uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
                         trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')"></span>
                   <p ng-if="device.description | unknownFilter" class="ellipsis">{{ device.hostName | unknownFilter
-                                                                                 }}</p>
+                    }}</p>
                   <i class="icon-sm edit-icon" ng-show="showEditDeviceField"></i>
                 </div>
                 <input class="control" ng-if="isEditDescrOpened" ng-model="deviceDescription"
-                       execute-when-outfocused="saveDescription(deviceDescription)" focus-on />
+                       execute-when-outfocused="saveDescription(deviceDescription)" focus-on/>
               </div>
             </div>
           </div>
@@ -201,7 +202,8 @@
           </div>
           <div class="col-md-2">
             <!--<div class="network-scan-status status-success">Agent installed</div>-->
-            <p class="network-scan-status {{ getStatusClass() }}" ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message }}</p>
+            <p class="network-scan-status {{ getStatusClass() }}"
+               ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message }}</p>
             <!--<div class="network-scan-status status-danger">Blocked</div>-->
           </div>
           <div class="col-md-1" style="justify-content: flex-end;">
@@ -213,7 +215,7 @@
       </li>
     </ul>
     <!--<div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">-->
-      <!--<div class="loader"></div>-->
+    <!--<div class="loader"></div>-->
     <!--</div>-->
   </div>
 </div>

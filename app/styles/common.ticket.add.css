@@ -57,6 +57,15 @@
   padding: 15px 20px;
 }
 
+.ticket-add-content input[type='number'].form-control {
+  -moz-appearance: textfield;
+}
+
+.ticket-add-content input::-webkit-outer-spin-button,
+.ticket-add-content input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 .ticket-add-content-actions {
   height: 55px;
   background-color: #f2f2f2;
