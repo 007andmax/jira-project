@@ -294,8 +294,13 @@
             Utils.defineReadOnlyProperty(info, companyId, Utils.customizeObj(data[companyId]));
             for(var i=0; i<storage.companies.length; i++) {
               if(storage.companies[i].id === companyId) {
-                storage.companies[i].companyInfo = angular.copy(data[companyId]);
+                storage.companies[i].companyInfo = {
+                  addresses: data[companyId].addresses,
+                  contacts: data[companyId].contacts,
+                  primaryAddress: data[companyId].primaryAddress
+                }
               }
+              scope.$apply();
             }
           }
         }
