@@ -300,8 +300,8 @@
                   primaryAddress: data[companyId].primaryAddress
                 }
               }
-              scope.$apply();
             }
+            $rootScope.$broadcast('newCompanyInfo'+companyId);
           }
         }
       });
