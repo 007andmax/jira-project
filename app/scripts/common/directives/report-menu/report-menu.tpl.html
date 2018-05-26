@@ -154,16 +154,16 @@
           <div class="input-top-4" typeahead-input-icon="userCompany"></div>
 
           <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies"-->
-                                <!--selected-item="reportSetting.company"-->
-                                <!--display-property="'name'"-->
-                                <!--filter-property="'name'"-->
-                                <!--qt-tabindex="'3'"-->
-                                <!--qt-ng-disabled="'reportType.toUpperCase() === \'SUMMARY\''"-->
-                                <!--qt-ng-required="'reportType.toUpperCase() === \'DETAILED\''"-->
-                                <!--qt-name="'reportCompany'"-->
-                                <!--qt-readonly-->
-                                <!--qt-class="'form-control'"-->
-                                <!--qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
+          <!--selected-item="reportSetting.company"-->
+          <!--display-property="'name'"-->
+          <!--filter-property="'name'"-->
+          <!--qt-tabindex="'3'"-->
+          <!--qt-ng-disabled="'reportType.toUpperCase() === \'SUMMARY\''"-->
+          <!--qt-ng-required="'reportType.toUpperCase() === \'DETAILED\''"-->
+          <!--qt-name="'reportCompany'"-->
+          <!--qt-readonly-->
+          <!--qt-class="'form-control'"-->
+          <!--qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
 
           <!--</qt-dropdown-typehead>-->
 
@@ -238,17 +238,16 @@
         <p ng-click="$ctrl.setTechReportDateType('MONTH')" ng-class="{'choosen': techReportDateType === 'MONTH'}">
           Month</p>
         <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
-          Select date</p>
+          Custom</p>
         <div ng-show="techReportDateType==='CUSTOM'">
           <input style="display: inline-block;width: 250px;margin-top: 10px;"
                  type="text"
                  class="form-control has-dropdown readonly-normal"
                  name="reportDateRange"
                  readonly
-                 options="datePickerOptions"
-                 range
-                 date-range-picker 
-                 max-date="{{ maxDateForDateRangeInputField }}"
+                 qt-date-range-picker="$ctrl.onDateRangeChangeReport"
+                 on-hide="$ctrl.setTechReportDateType"
+                 range max-date="{{ maxDateForDateRangeInputField }}"
                  ng-model="reportSetting.dateRange"> </input>
         </div>
       </div>
