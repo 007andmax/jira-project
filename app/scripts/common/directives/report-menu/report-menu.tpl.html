@@ -238,20 +238,22 @@
           Week</p>
         <p ng-click="$ctrl.setTechReportDateType('MONTH')" ng-class="{'choosen': techReportDateType === 'MONTH'}">
           Month</p>
-        <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
-          Select date</p>
-        <div ng-show="techReportDateType==='CUSTOM'">
-          <input style="display: inline-block;width: 250px;margin-top: 10px;"
-                 type="text"
-                 class="form-control has-dropdown readonly-normal"
-                 name="reportDateRange"
-                 readonly
-                 options="datePickerOptions"
-                 range
-                 date-range-picker
-                 max-date="{{ maxDateForDateRangeInputField }}"
-                 ng-model="reportSetting.dateRange"> </input>
-        </div>
+        <!-- <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
+          Select date</p> -->
+        <!-- <div ng-show="techReportDateType==='CUSTOM'"> -->
+        <input style="display: inline-block;width: 250px;margin-top: 10px;"
+               ng-click="$ctrl.setTechReportDateType('CUSTOM')"
+               type="text"
+               class="form-control has-dropdown readonly-normal"
+               name="reportDateRange"
+               readonly
+               options="datePickerOptions"
+               range
+               placeholder="Select date"
+               date-range-picker
+               max-date="{{ maxDateForDateRangeInputField }}"
+               ng-model="reportSetting.dateRange"> </input>
+        <!-- </div> -->
       </div>
       <div class="form-group content" ng-hide="locationTechReport === '/reports/techReport-TicketCreated'">
         <div uib-dropdown>

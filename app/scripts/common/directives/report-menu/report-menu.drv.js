@@ -135,6 +135,7 @@
 
      $scope.datePickerOptions = {
       opens: 'left',
+      autoApply: true,
       locale: {
         format: "YYYY/MM/DD"
       }
@@ -183,15 +184,27 @@
 
     function setTechReportDateType(type) {
       $scope.techReportDateType = typeof type === 'string' ? type : 'CUSTOM';
+
+      if ($scope.techReportDateType !== 'CUSTOM') {
+        resetDate();
+      }
+
       sendTechDataRequest();
+    }
+
+    function resetDate() {
+      $scope.reportSetting.dateRange = {
+        startDate: '',
+        endDate: ''
+      }
     }
 
     function onDateRangeChangeReport(dates) {
       $scope.startDate = null;
       $scope.endDate = null;
       if (dates && dates.length && dates.length > 1) {
-        $scope.startDate = formatDate(dates[0]);
-        $scope.endDate = formatDate(dates[1]);
+        $scope.startDate = formatDate(dates[0] || new Date(0));
+        $scope.endDate = formatDate(dates[1] || now);
         $scope.errorNassageForDate = true;
       }
     }
@@ -245,10 +258,11 @@
       if ($scope.selectedProduct) {
         dataToSend.productId = $scope.selectedProduct.versionedId.id
       }
-      dataToSend.startDate = $scope.startDate;
-        dataToSend.endDate = $scope.endDate;
+      dataToSend.startDate = $scope.startDate || formatDate(new Date(companyFromProfile.createdAt));
+        dataToSend.endDate = $scope.endDate || formatDate(now);
 
       lastSentData = dataToSend;
+
       $scope.$emit("requestReportData", dataToSend, location, techType);
     }
 

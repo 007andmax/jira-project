@@ -18,7 +18,7 @@
 
         $scope.sortBy = sortBy;
         $scope.reverse = false;
-        $scope.sortProps = ['date', 'ticketNumber'] 
+        $scope.sortProps = ['date', 'ticketNumber']
 
         $scope.selectLine = function(line) {
           var ind = $scope.selectedLines.indexOf(line);
@@ -67,7 +67,7 @@
             calculateSumPrices()
           }
         };
- 
+
         $scope.isAllLinesAreChecked = function() {
           return $scope.selectedLines.length === $scope.reportByProducts.lines.length
         }
@@ -93,7 +93,7 @@
                     return a < b ? -1 : 1;
                 },
                 getCmpFunc = function(primer, reverse) {
-                    var dfc = default_cmp, 
+                    var dfc = default_cmp,
                         cmp = default_cmp;
                     if (primer) {
                         cmp = function(a, b) {
@@ -149,7 +149,9 @@
           var prop1 = props[0];
           var prop2 = props[1];
 
-          console.log($scope.reportByProducts.lines)       
+          $timeout(function () {
+            $rootScope.reportLineChanged = true;
+          }, 1000);    
 
           if ($scope.sortProps[0] !== props[0]) {
             $scope.reverse = true;
@@ -165,7 +167,7 @@
             $scope.reportByProducts.lines.sort(sortByFew({name: prop1, reverse: $scope.reverse}, { name: prop2, reverse: $scope.reverse, primer: parseInt }));
           }
 
-          
+
         }
 
 
