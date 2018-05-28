@@ -151,18 +151,17 @@
 
           $timeout(function () {
             $rootScope.reportLineChanged = true;
-          }, 1000);    
+          }, 1000);
 
           if ($scope.sortProps[0] !== props[0]) {
-            $scope.reverse = true;
+            $scope.reverse = false;
           } else {
             $scope.reverse = !$scope.reverse;
           }
 
           $scope.sortProps = props;
-
           if (!prop2) {
-            $scope.reportByProducts.lines = $filter('orderBy')($scope.reportByProducts.lines, prop1, $scope.reverse);
+            $scope.reportByProducts.lines = separateEmpty($scope.reportByProducts.lines, prop1);
           } else {
             $scope.reportByProducts.lines.sort(sortByFew({name: prop1, reverse: $scope.reverse}, { name: prop2, reverse: $scope.reverse, primer: parseInt }));
           }
@@ -170,6 +169,28 @@
 
         }
 
+        function separateEmpty(array, prop) {
+          var toSort = [];
+          var result = [];
+
+          for (var i = 0; i < array.length; i++) {
+            var el = array[i];
+
+            if (!el[prop] && el[prop] !== 0) {
+              result.push(el);
+            } else {
+              toSort.push(el);
+            }
+          }
+
+          toSort = $filter('orderBy')(toSort, prop, $scope.reverse);
+
+          toSort.forEach(function(el) {
+            result.push(el);
+          })
+
+          return result;
+        }
 
         if ($scope.reportByProducts.lines) {
           $scope.selectedLines = [];

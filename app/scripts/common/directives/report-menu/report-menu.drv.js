@@ -203,8 +203,8 @@
       $scope.startDate = null;
       $scope.endDate = null;
       if (dates && dates.length && dates.length > 1) {
-        $scope.startDate = formatDate(dates[0] || new Date(0));
-        $scope.endDate = formatDate(dates[1] || now);
+        $scope.startDate = formatDate(dates[0]);
+        $scope.endDate = formatDate(dates[1]);
         $scope.errorNassageForDate = true;
       }
     }
@@ -234,6 +234,7 @@
     }
 
     function formatDate(date) {
+      if (!date) return '';
       return moment(date).format('YYYY/MM/DD');
     }
 
@@ -258,6 +259,7 @@
       if ($scope.selectedProduct) {
         dataToSend.productId = $scope.selectedProduct.versionedId.id
       }
+
       dataToSend.startDate = $scope.startDate || formatDate(new Date(companyFromProfile.createdAt));
         dataToSend.endDate = $scope.endDate || formatDate(now);
 
