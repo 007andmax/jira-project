@@ -109,7 +109,8 @@
                    name="reportDateRange"
                    readonly
                    date-format="dd/mm/yy"
-                   qt-date-range-picker="$ctrl.onDateRangeChangeReport"
+                   date-range-picker
+                   options="datePickerOptions"
                    range max-date="{{ maxDateForDateRangeInputField }}"
                    ng-model="reportSetting.dateRange"
                    placeholder="Select Date"> </input>
@@ -247,7 +248,7 @@
                  readonly
                  options="datePickerOptions"
                  range
-                 date-range-picker 
+                 date-range-picker
                  max-date="{{ maxDateForDateRangeInputField }}"
                  ng-model="reportSetting.dateRange"> </input>
         </div>

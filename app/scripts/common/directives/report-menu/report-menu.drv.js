@@ -151,7 +151,8 @@
 
     $scope.$watch('reportSetting.dateRange', function() {
       if ($scope.reportSetting.dateRange) {
-        sendTechDataRequest()
+        onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
+        sendReportRequest($scope.reportSetting);
       }
     })
 
@@ -189,10 +190,8 @@
       $scope.startDate = null;
       $scope.endDate = null;
       if (dates && dates.length && dates.length > 1) {
-        var startMonth = dates[0].getMonth() + 1;
-        var endMonth = dates[1].getMonth() + 1;
-        $scope.startDate = dates[0].getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(dates[0].getDate());
-        $scope.endDate = dates[1].getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(dates[1].getDate());
+        $scope.startDate = formatDate(dates[0]);
+        $scope.endDate = formatDate(dates[1]);
         $scope.errorNassageForDate = true;
       }
     }
@@ -246,8 +245,8 @@
       if ($scope.selectedProduct) {
         dataToSend.productId = $scope.selectedProduct.versionedId.id
       }
-      dataToSend.startDate = $filter('date')(new Date($scope.startDate || companyFromProfile.createdAt), 'yyyy/MM/dd'),
-        dataToSend.endDate = $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+      dataToSend.startDate = $scope.startDate;
+        dataToSend.endDate = $scope.endDate;
 
       lastSentData = dataToSend;
       $scope.$emit("requestReportData", dataToSend, location, techType);
