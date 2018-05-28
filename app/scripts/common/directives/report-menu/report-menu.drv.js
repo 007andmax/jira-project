@@ -125,6 +125,8 @@
       $scope.availableTechusersWoCompany = true;
     }
 
+    $scope.resetDate = resetDate;
+
     $scope.reportSetting = {
       company: '',
       dateRange: {
@@ -141,6 +143,8 @@
       }
     };
 
+    $scope.firstIteration = true;
+
     // to clear company input field when report type changed to Summary
     $scope.$watch('reportType', function () {
       if (location === '/reports/byProducts' || location === '/reports/byCustomers') {
@@ -153,6 +157,11 @@
     $scope.$watch('reportSetting.dateRange', function() {
       if ($scope.reportSetting.dateRange) {
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
+
+        if ($scope.firstIteration && !$ctrl.isProductReportForCompanyTab) {
+          $scope.firstIteration = false;
+          return;
+        }
         sendReportRequest($scope.reportSetting);
       }
     })
