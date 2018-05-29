@@ -31,8 +31,9 @@
      ng-controller="quicktech.core.devices.networkScanTabCtrl" ng-if="agents && agents.length">
   <h3>Network Scan</h3>
   <div class="dashboard-network-scan-header clearfix">
+
     <div class="header-item">
-      <!--<div class="run-scan-img"></div>-->
+      <p style="text-align: left; font-size: 13px;">Network Scan</p>
       <div class="run-scan-img pointer" ng-click="runScanDevices()" tooltip-placement="top"
            tooltip-append-to-body="true" tooltip-enable="{{ masterAgentOffline || isScanDevicesLoad }}"
            uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}"
@@ -45,7 +46,7 @@
         <input placeholder="Master agent select" type="text" ng-model="masterAgent.hostName" uib-dropdown-toggle
                readonly
                ng-disabled="saveMasterAgentInProgress">
-        <i class="report-caret-icon" style="left: 275px"></i>
+        <i class="report-caret-icon" style="top: 51px;left: auto;right: 15px;"></i>
         <ul uib-dropdown-menu>
           <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
               ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}
@@ -59,7 +60,7 @@
       </div>
     </div>
     <div class="header-item" ng-form="credentialsForm">
-
+      <p>Create Credentials</p>
       <div class="form-group" ng-class="{ 'has-error': isShowingErrors(credentialsForm, 'agentName')}">
         <div ng-messages="credentialsForm.agentName.$error"
              ng-class="{'hide': !isShowingErrors(credentialsForm, 'agentName')}"
@@ -76,12 +77,12 @@
         <input type="{{ passwordShown ? 'text' : 'password' }}" class="form-control" name="agentPassword"
                ng-model="testCredentialsModel.password" autocomplete="new-password"
                placeholder="Password" required>
-        <a id="show_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;"
+        <a id="show_pass_icon" style="position: absolute;left: auto;right: 0;top: 43px;display: inline-block;"
            ng-if="!passwordShown"
            ng-click="changeShowPassword()" uib-tooltip="Show password" tooltip-placement="top">
           <i class="icn-hide-password pointer" style="display: inline-block"></i>
         </a>
-        <a id="hide_pass_icon" style="position: absolute;left: 300px;top: 43px;display: inline-block;"
+        <a id="hide_pass_icon" style="position: absolute;left: auto;right: 0;top: 43px;display: inline-block;"
            ng-if="passwordShown"
            ng-click="changeShowPassword()" uib-tooltip="Hide password" tooltip-placement="top">
           <i class="icn-show-password pointer" style="display: inline-block"></i>
@@ -108,6 +109,7 @@
       </div>
     </div>
     <div class="header-item">
+      <p style="text-align: left; font-size: 13px;" >Install Agents</p>
       <div ng-hide="(isInstallInProgress || !isDeviceSelected())" ng-click="installAgents(credentialsForm)">
         <div class="install-agent-img pointer"></div>
         <p>Install Agent</p>
@@ -117,11 +119,12 @@
         <!--</div>-->
       </div>
     </div>
+
   </div>
   <div>
     <ul class="users-bg company-devices qt-list">
       <li class="list-heading">
-        <div class="col-md-3">
+        <div class="col-md-4">
 
           <label class="control checkbox pull-left">
             <input type="checkbox" ng-model="isAllSelected" ng-change="toggleAll()"
@@ -143,7 +146,7 @@
         <div class="col-md-2">
           <span>Mac address</span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
           <span>Status</span>
         </div>
         <div class="col-md-1"></div>
@@ -151,7 +154,7 @@
       <li class="active-device-item" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
           ng-controller="quicktech.core.devices.networkScanItemCtrl">
         <div class="users-list-wrapper">
-          <div class="col-md-3" style="padding-top: 5px;">
+          <div class="col-md-4" style="padding-top: 5px;">
             <!--<label class="control checkbox">-->
             <!--<input type="checkbox">-->
             <!--<span class="control-indicator"></span>-->
@@ -177,7 +180,7 @@
                 <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
                   <i class="devices-monitor"></i>
                   <span class="ellipsis"
-                        style="display: inline-block; max-width: 260px;"
+                        style="display: inline-block; max-width: 400px;"
                         uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
                         trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')"></span>
                   <p ng-if="device.description | unknownFilter" class="ellipsis">{{ device.hostName | unknownFilter
@@ -200,7 +203,7 @@
           <div class="col-md-2">
             <div class="device-mac-address">{{ device.macAddress }}</div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <!--<div class="network-scan-status status-success">Agent installed</div>-->
             <p class="network-scan-status {{ getStatusClass() }}"
                ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message }}</p>
