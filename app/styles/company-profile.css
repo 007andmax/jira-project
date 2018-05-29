@@ -370,6 +370,15 @@
   position: relative;
 }
 
+.company-info-content p.company-notes {
+  white-space: pre-line;
+}
+
+.company-info-content p.company-notes:first-line {
+  line-height: 0px;
+}
+
+
 .company-info-content .company-notes textarea {
   height: 120px;
   background: transparent;
