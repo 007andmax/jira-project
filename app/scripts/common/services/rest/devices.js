@@ -264,6 +264,18 @@
         Utils.handleCallback(future, callback);
       }
 
+      function markDeviceAsMaster(companyId, agentId, callback) {
+        var request = {
+          "masterAgentId": agentId,
+          "clientCompanyId": companyId
+        }
+
+        $http.post('/devices/updateMasterAgent', request)
+          .then(function(resp) {
+            console.log('server resp', resp)
+          })
+      }
+
       function createOneTimeRemoteSession(callback) {
         $http.get('/remote/createOneTimeRemoteSession').then(function (resp) {
           if (callback) {
@@ -1024,11 +1036,10 @@
         getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
         setNewDeviceLabel: setNewDeviceLabel,
         sendDeviceStatusRequest: sendDeviceStatusRequest,
-        getDevicesCredentials: getDevicesCredentials
+        getDevicesCredentials: getDevicesCredentials,
+        markDeviceAsMaster: markDeviceAsMaster
       }
     }
   ]);
 })
 (window, jQuery);
-
-
