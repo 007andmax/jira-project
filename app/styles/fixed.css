@@ -920,6 +920,23 @@ aside#left div.nav-title {
   border-width: 0 5px 5px;
 }
 
+/* .timer-quantity.set-working-hours .hour_drop_down {
+  max-height: 316px;
+  overflow: scroll;
+} */
+
+.timer-quantity .time_drop_down .show-inside-company {
+  display: none;
+}
+
+.timer-quantity.set-working-hours .time_drop_down .show-inside-company {
+  display: block;
+}
+
+.timer-quantity.set-working-hours .time_drop_down .hide-inside-company {
+  display: none;
+}
+
 .timer-quantity .time_drop_down .hour_drop_down {
   display: inline-block;
   float: left;

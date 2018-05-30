@@ -3,16 +3,22 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('serviceQuantityPicker',
-    ['$templateRequest', '$compile', '$timeout', function ($templateRequest, $compile, $timeout) {
+    ['$templateRequest', '$compile', '$timeout', '$rootScope', function ($templateRequest, $compile, $timeout, $rootScope) {
       return {
         restrict: 'A',
         scope: {
           quantity: "=serviceQuantityPicker",
           form: '=sqpForm',
-          sqpInput: '>sqpInput'
+          sqpDay: '<sqpDay',
+          sqpPeriod: '@sqpPeriod'
         },
         link: function (scope, element, attrs) {
-          console.log(scope.sqpInput, 'sqpinput')
+          if (scope.sqpDay) {
+            scope.sqpInput = 'sqp-cond-input=' + '"' + scope.sqpDay + ' ' + scope.sqpPeriod + '"';
+          } else {
+            scope.sqpInput = 'sqp-input';
+          }
+
           var quantityDropdown,
             isFormatShow = attrs.sqpIsShowFormat === 'true',
             isDropdownShow = false,
@@ -39,6 +45,135 @@
               input.val('')
             }
           });
+
+          scope.$watch(function() {
+            return $rootScope.hideTimePickers;
+          }, function(val) {
+            if (!val) return;
+            if (scope.sqpDay !== val[0] || scope.sqpPeriod !== val[1]) {
+              quantityDropdown.hide();
+            }
+          })
+
+          checkInput()
+
+          function checkInput() {
+            if (input.val() === undefined) {
+              input = element.find('[' + scope.sqpInput + ']');
+              $timeout(checkInput, 100)
+            } else {
+              initPicker();
+              inited = true;
+              input.bind('input', onInput);
+              input.bind('blur', onBlur);
+              input.click(onClick);
+            }
+          }
+
+          function onClick() {
+            if (scope.sqpDay) {
+              $rootScope.hideTimePickers = [scope.sqpDay, scope.sqpPeriod];
+            }
+
+            if (!isDropdownShow) {
+              quantityDropdown.show();
+              isDropdownShow = true;
+            } else {
+              quantityDropdown.hide();
+              isDropdownShow = false;
+            }
+          }
+
+          function onBlur() {
+            var splited = input.val().split(' '),
+              hours = splited.shift(),
+              minutes = splited.pop();
+
+            if (!hours) {
+              scope.quantity = 0;
+              return;
+            }
+
+            if (!minutes) {
+              minutes = '0';
+            }
+
+            hours = parseInt(hours);
+            minutes = parseInt(minutes);
+
+            var isHoursInvalid = (hours || hours === 0) && hours < 10,
+              isMinutesInvalid = minutes < 10,
+              formattedHours = (isHoursInvalid ? '0' : '') + hours,
+              formattedMinutes = (isMinutesInvalid ? '0' : '') + minutes;
+
+            input.val(formattedHours + ' : ' + formattedMinutes);
+
+            if (hours <= 8) {
+              dropdownElement.hoverHour = formattedHours;
+            } else {
+              dropdownElement.hoverHour = '08';
+            }
+
+            if (minutes === 0 || minutes === 15 || minutes === 30 || minutes === 45) {
+              dropdownElement.hoverMinute = formattedMinutes;
+            } else {
+              dropdownElement.hoverMinute = '00';
+            }
+
+            scope.quantity = hours * 60 + minutes;
+            scope.$apply();
+          }
+
+          function onInput() {
+
+            quantityDropdown.hide();
+            isDropdownShow = false;
+
+            var value = input.val(),
+              lastIndex = value.length - 1;
+
+            if (value === savedValue || value.length < savedValue.length) {
+
+              var splited = value.split('');
+
+              for (var i = 0; i < splited.length; i++) {
+                var symbol = splited[i];
+                if (': 0123456789'.indexOf(symbol) === -1) {
+                  splited.splice(i--, 1);
+                }
+              }
+
+              if (value[lastIndex] === ':' || (value[lastIndex] === ' ' && value[lastIndex - 1] !== ':')) {
+                savedValue = value.split(' ')[0];
+              } else {
+                savedValue = splited.join('');
+              }
+
+              input.val(savedValue);
+              return;
+            }
+
+            if (value) {
+              var newSymbol = value[lastIndex],
+                oldPart = value.substring(0, lastIndex),
+                isNumber = !!parseInt(newSymbol) || parseInt(newSymbol) === 0,
+                minutes = value.split(' : ')[1];
+
+              if ((newSymbol === ':' || newSymbol === ' ') && oldPart.length && oldPart.indexOf(newSymbol) === -1) {
+                savedValue = oldPart + ' : ';
+              } else if (!isNumber || (minutes && minutes.length > 2)) {
+                savedValue = oldPart;
+              } else if (parseInt(minutes) > 60) {
+                value = value.split(' : ');
+                value[1] = '60';
+                savedValue = value.join(' : ');
+              } else {
+                savedValue = value;
+              }
+
+              input.val(savedValue);
+            }
+          }
 
           function initPicker() {
             $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
@@ -116,105 +251,6 @@
             });
           }
 
-          input.bind('input', function () {
-            quantityDropdown.hide();
-            isDropdownShow = false;
-
-            var value = input.val(),
-              lastIndex = value.length - 1;
-
-            if (value === savedValue || value.length < savedValue.length) {
-
-              var splited = value.split('');
-
-              for (var i = 0; i < splited.length; i++) {
-                var symbol = splited[i];
-                if (': 0123456789'.indexOf(symbol) === -1) {
-                  splited.splice(i--, 1);
-                }
-              }
-
-              if (value[lastIndex] === ':' || (value[lastIndex] === ' ' && value[lastIndex - 1] !== ':')) {
-                savedValue = value.split(' ')[0];
-              } else {
-                savedValue = splited.join('');
-              }
-
-              input.val(savedValue);
-              return;
-            }
-
-            if (value) {
-              var newSymbol = value[lastIndex],
-                oldPart = value.substring(0, lastIndex),
-                isNumber = !!parseInt(newSymbol) || parseInt(newSymbol) === 0,
-                minutes = value.split(' : ')[1];
-
-              if ((newSymbol === ':' || newSymbol === ' ') && oldPart.length && oldPart.indexOf(newSymbol) === -1) {
-                savedValue = oldPart + ' : ';
-              } else if (!isNumber || (minutes && minutes.length > 2)) {
-                savedValue = oldPart;
-              } else if (parseInt(minutes) > 60) {
-                value = value.split(' : ');
-                value[1] = '60';
-                savedValue = value.join(' : ');
-              } else {
-                savedValue = value;
-              }
-
-              input.val(savedValue);
-            }
-          });
-
-          input.bind('blur', function () {
-            var splited = input.val().split(' '),
-              hours = splited.shift(),
-              minutes = splited.pop();
-
-            if (!hours) {
-              scope.quantity = 0;
-              return;
-            }
-
-            if (!minutes) {
-              minutes = '0';
-            }
-
-            hours = parseInt(hours);
-            minutes = parseInt(minutes);
-
-            var isHoursInvalid = (hours || hours === 0) && hours < 10,
-              isMinutesInvalid = minutes < 10,
-              formattedHours = (isHoursInvalid ? '0' : '') + hours,
-              formattedMinutes = (isMinutesInvalid ? '0' : '') + minutes;
-
-            input.val(formattedHours + ' : ' + formattedMinutes);
-
-            if (hours <= 8) {
-              dropdownElement.hoverHour = formattedHours;
-            } else {
-              dropdownElement.hoverHour = '08';
-            }
-
-            if (minutes === 0 || minutes === 15 || minutes === 30 || minutes === 45) {
-              dropdownElement.hoverMinute = formattedMinutes;
-            } else {
-              dropdownElement.hoverMinute = '00';
-            }
-
-            scope.quantity = hours * 60 + minutes;
-            scope.$apply();
-          });
-
-          input.click(function () {
-            if (!isDropdownShow) {
-              quantityDropdown.show();
-              isDropdownShow = true;
-            } else {
-              quantityDropdown.hide();
-              isDropdownShow = false;
-            }
-          });
 
           scope.closeDropdown = function () {
             quantityDropdown.hide();
@@ -272,6 +308,16 @@
           }
 
           function setStartingValue(value, hourDropdown, minuteDropdown, formatDropdown) {
+
+            if (scope.sqpDay) {
+              var time = value.split(':');
+              var hour = time[0];
+              var minute = time[1];
+
+              setValue(hour, minute);
+
+              return;
+            }
 
             if (isFormatShow) {
 
