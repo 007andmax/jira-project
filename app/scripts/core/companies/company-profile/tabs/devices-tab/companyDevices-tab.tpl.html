@@ -145,25 +145,66 @@
 
       </div>
       <div class="col-md-2" style="padding-left: 90px; justify-content: flex-end; align-items: center">
-        <div class="sub-dropdown"
-             uib-dropdown
-             smart-dropdown-menu-position="dropdown-menu"
-             ng-show="deviceCredentials">
-          <div uib-dropdown-toggle>
-            <i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>
-          </div>
-          <div class="dropdown-menu" role="menu">
-            <div>
-              <span>{{agent.hostName}}</span> Credential
-              <div class="sub-dropdown-menu">
-                <div ng-repeat="credential in deviceCredentials">
-                  <p>User: <span>{{credential.username}}</span></p>
-                  <p>Password: <span>{{credential.password}}</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="hover-dropdown">
+          <i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>
+          <ul class="hover-dropdown-content">
+            <li>
+              <p><span>agent</span> Credential</p>
+              <ul class="sub-hover-dropdown">
+                <li>
+                  <p>User: <span>user</span></p>
+                  <p>Password: <span>password</span></p>
+                </li>
+                <li>
+                  <p>User: <span>user</span></p>
+                  <p>Password: <span>password</span></p>
+                </li>
+                <li>
+                  <p>User: <span>user</span></p>
+                  <p>Password: <span>password</span></p>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span>agent</span> Credential
+              <ul class="sub-hover-dropdown">
+                <li>
+                  <p>User: <span>user</span></p>
+                  <p>Password: <span>password</span></p>
+                </li>
+                <li>
+                  <p>User: <span>user</span></p>
+                  <p>Password: <span>password</span></p>
+                </li>
+                <li>
+                  <p>User: <span>user</span></p>
+                  <p>Password: <span>password</span></p>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
+
+
+        <!--<div class="sub-dropdown"-->
+        <!--uib-dropdown-->
+        <!--smart-dropdown-menu-position="dropdown-menu"-->
+        <!--ng-show="deviceCredentials">-->
+        <!--<div uib-dropdown-toggle>-->
+        <!--<i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>-->
+        <!--</div>-->
+        <!--<div class="dropdown-menu" role="menu">-->
+        <!--<div>-->
+        <!--<span>{{agent.hostName}}</span> Credential-->
+        <!--<div class="sub-dropdown-menu">-->
+        <!--<div ng-repeat="credential in deviceCredentials">-->
+        <!--<p>User: <span>{{credential.username}}</span></p>-->
+        <!--<p>Password: <span>{{credential.password}}</span></p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
         <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
         <!--<div class="btn"-->
