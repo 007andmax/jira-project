@@ -161,7 +161,6 @@
         };
 
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
-          console.log(objectTime, objectTimeFormat, 'HUI')
           if (objectTime && objectTimeFormat) {
             // var separateTime = objectTime.split(':');
             // var hours = parseInt(separateTime[0]);

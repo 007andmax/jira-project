@@ -52,6 +52,7 @@
             if (!val) return;
             if (scope.sqpDay !== val[0] || scope.sqpPeriod !== val[1]) {
               quantityDropdown.hide();
+              $rootScope.hideTimePickers = null;
             }
           })
 
@@ -125,7 +126,6 @@
           }
 
           function onInput() {
-
             quantityDropdown.hide();
             isDropdownShow = false;
 
