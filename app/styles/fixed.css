@@ -884,8 +884,10 @@ aside#left div.nav-title {
 .timer-quantity .time_drop_down {
   position: absolute;
   display: none;
-  left: 10px;
-  top: 48px;
+  left: 0;
+  top: 31px;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
 }
 
 .create-company-content .timer-quantity .time_drop_down {
@@ -903,21 +905,12 @@ aside#left div.nav-title {
 }
 
 .timer-quantity .time_drop_down li a {
-  border: solid #fff;
-  border-width: 0 5px;
   text-decoration: none;
-  padding: 5px 10px;
+  padding: 0 5px;
   background: #fff;
   display: block;
   color: #4c5c6f;
-}
-
-.timer-quantity .time_drop_down li:first-child a {
-  border-width: 5px 5px 0;
-}
-
-.timer-quantity .time_drop_down li:last-child a {
-  border-width: 0 5px 5px;
+  margin: 0;
 }
 
 /* .timer-quantity.set-working-hours .hour_drop_down {
@@ -937,10 +930,18 @@ aside#left div.nav-title {
   display: none;
 }
 
+.hour_drop_down::-webkit-scrollbar {
+  width: 4px;
+}
+
 .timer-quantity .time_drop_down .hour_drop_down {
   display: inline-block;
   float: left;
   padding: 0;
+  max-height: 190px;
+  overflow-y: scroll;
+  border-radius: 4px;
+  width: 100%;
 }
 
 .timer-quantity .time_drop_down .hour_drop_down li {
@@ -950,9 +951,11 @@ aside#left div.nav-title {
 .timer-quantity .time_drop_down .min_drop_down {
   display: inline-block;
   position: absolute;
-  top: 0;
+  top: 0 !important;
   left: 56px;
   padding-left: 0;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .timer-quantity .time_drop_down .format_drop_down {
