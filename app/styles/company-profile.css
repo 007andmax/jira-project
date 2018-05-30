@@ -215,7 +215,7 @@
 .company-name-content {
   display: inline-block;
   margin-left: 10px;
-  vertical-align: top;
+  vertical-align: middle;
   width: 78%;
 }
 
@@ -233,10 +233,6 @@
   border: none;
   font-family: 'Graphik Regular', sans-serif;
   text-align: center;
-}
-
-.company-info-header .company-rate {
-  margin-bottom: 10px;
 }
 
 .company-info-header .company-rate span {
