@@ -161,10 +161,13 @@
         };
 
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
+          console.log(objectTime, objectTimeFormat, 'HUI')
           if (objectTime && objectTimeFormat) {
-            var separateTime = objectTime.split(':');
-            var hours = parseInt(separateTime[0]);
-            var minutes = parseInt(separateTime[1]);
+            // var separateTime = objectTime.split(':');
+            // var hours = parseInt(separateTime[0]);
+            // var minutes = parseInt(separateTime[1]);
+            var hours = Math.floor(objectTime / 60);
+            var minutes = objectTime % 60;
             return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
           }
         }
@@ -393,6 +396,3 @@
       }]);
 
 }());
-
-
-

@@ -8,14 +8,15 @@
         restrict: 'A',
         scope: {
           quantity: "=serviceQuantityPicker",
-          form: '=sqpForm'
+          form: '=sqpForm',
+          sqpInput: '>sqpInput'
         },
         link: function (scope, element, attrs) {
-
+          console.log(scope.sqpInput, 'sqpinput')
           var quantityDropdown,
             isFormatShow = attrs.sqpIsShowFormat === 'true',
             isDropdownShow = false,
-            input = element.find('[sqp-input]'),
+            input = element.find('[' + scope.sqpInput + ']'),
             dropdownElement = {
               hoverHour: '00',
               hoverMinute: '00',

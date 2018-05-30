@@ -307,6 +307,10 @@
   width: 20%;
 }
 
+.company-schedule-edit input.time {
+  width: 100%;
+}
+
 .company-schedule-edit .control {
   margin-left: 5px;
   vertical-align: middle;
