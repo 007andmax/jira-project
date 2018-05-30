@@ -6,9 +6,9 @@
     [
       '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.UserNotificationService',
-      'Utils', 'PasswordManagerService', 'quicktech.common.services.UserConfirmationsService',
+      'Utils', 'PasswordManagerService', 'quicktech.common.services.UserConfirmationsService', '$filter',
       function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService,
-                UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService) {
+                UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService, $filter) {
         var lastMasterAgentId;
 
         $scope.testCredentialsModel = {};
@@ -17,6 +17,7 @@
         $scope.selectedDevices = {};
         $scope.isScanDevicesLoad = false;
         $scope.orderScanBy = 'hostName';
+        $scope.reverse = false;
         $scope.PermissionsService = PermissionsService;
         $scope.passwordShown = false;
 
@@ -291,6 +292,35 @@
           }
         };
 
+        $scope.sortDevices = function(option) {
+          if (!option) {
+            option = $scope.orderScanBy;
+          } else if (option === $scope.orderScanBy) {
+            $scope.reverse = !$scope.reverse;
+          } else {
+            $scope.reverse = false;
+          }
+
+          $scope.orderScanBy = option;
+
+          if (option === 'ipAddress') {
+            $scope.scanDevices.devices.sort(function(a, b) {
+              var first = $scope.reverse ? b : a;
+              var second = $scope.reverse ? a : b;
+
+              return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
+            });
+          } else {
+            $scope.scanDevices.devices = $filter('orderBy')($scope.scanDevices.devices, option, $scope.reverse);
+          }
+
+          function getIpAsNum(ip) {
+            return +ip.split('.').join('');
+          }
+
+
+        }
+
         $scope.runScanDevices = function () {
           $scope.runScan = true;
           $scope.scanDevices = {};
@@ -369,6 +399,7 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
+          $scope.sortDevices();
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
           if(val === 'finished') {
             UserNotificationService.show('Scanning finished', true);

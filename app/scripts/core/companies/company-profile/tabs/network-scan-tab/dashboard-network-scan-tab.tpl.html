@@ -131,27 +131,32 @@
                    custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
             <span class="control-indicator"></span>
           </label>
-          <span class="sort-span">
-        Device Name
-      </span>
+          <span ng-click="sortDevices('hostName')"
+                class="sort-span">
+            Device Name
+          </span>
         </div>
         <div class="col-md-2">
-        <span>
+        <span ng-click="sortDevices('ipAddress')"
+              class="sort-span">
           Lan IP
         </span>
         </div>
         <div class="col-md-2">
-          <span>MANUFACTURER</span>
+          <span ng-click="sortDevices('manufacturer')"
+                class="sort-span">MANUFACTURER</span>
         </div>
         <div class="col-md-2">
-          <span>Mac address</span>
+          <span ng-click="sortDevices('macAddress')"
+                class="sort-span">Mac address</span>
         </div>
         <div class="col-md-1">
-          <span>Status</span>
+          <span ng-click="sortDevices('agentStatus')"
+                class="sort-span">Status</span>
         </div>
         <div class="col-md-1"></div>
       </li>
-      <li class="active-device-item" ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
+      <li class="active-device-item" ng-repeat="device in scanDevices.devices track by device.hostName"
           ng-controller="quicktech.core.devices.networkScanItemCtrl">
         <div class="users-list-wrapper">
           <div class="col-md-4" style="padding-top: 5px;">
