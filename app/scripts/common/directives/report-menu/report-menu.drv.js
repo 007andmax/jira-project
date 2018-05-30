@@ -158,11 +158,20 @@
       if ($scope.reportSetting.dateRange) {
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
 
-        if ($scope.firstIteration && !$ctrl.isProductReportForCompanyTab) {
+        if ($scope.firstIteration) {
           $scope.firstIteration = false;
+
+          if ($ctrl.isProductReportForCompanyTab) {
+            sendReportRequest($scope.reportSetting);
+          }
+          
           return;
         }
-        sendReportRequest($scope.reportSetting);
+
+        if ($ctrl.isTechReport) {
+          sendReportRequest($scope.reportSetting);
+        }
+
       }
     })
 
