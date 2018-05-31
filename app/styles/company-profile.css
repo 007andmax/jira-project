@@ -18,7 +18,6 @@
   max-width: 160px;
   max-height: 160px;
   display: inline-block;
-  margin-right: 10px;
   vertical-align: middle;
 }
 
@@ -121,13 +120,16 @@
 }
 
 .company-edit-icn-sm {
-  vertical-align: top;
+  position: absolute;
+  right: 3px;
+  top: 0;
 }
 
 .company-edit-button {
   display: inline-block;
-  width: auto;
   max-width: 92%;
+  position: relative;
+  padding-right: 30px;
 }
 
 .company-remove-icn-sm,
@@ -173,6 +175,8 @@
 
 .company-logo-wrapper {
   display: inline-block;
+  padding-right: 35px;
+  position: relative;
 }
 
 .company-logo-wrapper:hover .company-logo-icn {
@@ -182,10 +186,12 @@
 .company-logo-icn {
   width: 24px;
   height: 24px;
-  position: relative;
   cursor: pointer;
   transition: all .3s;
   display: none;
+  position: absolute;
+  right: -3px;
+  top: calc(50% - 12px);
 }
 
 .company-logo-icn:hover {
