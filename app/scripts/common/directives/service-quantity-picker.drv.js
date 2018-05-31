@@ -206,12 +206,14 @@
               }
 
               hourDropdown.bind('mousemove', function (event) {
-
                 processingColumn('Hour', event.target);
 
-                if (+dropdownElement.hoverHour < 6) {
+                // if (!dropdownElement.hoverHour) return;
 
-                  var topMinuteElement = (+dropdownElement.hoverHour * 30);
+                if (+dropdownElement.hoverHour < 6 || scope.sqpDay) {
+
+                  // var topMinuteElement = (+dropdownElement.hoverHour * 30);
+                  var topMinuteElement = getMousePositionInsidePicker(event);
                   minuteDropdown.css('top', topMinuteElement + 'px');
 
                   if (isFormatShow && +dropdownElement.hoverMinute * 2 > 60) {
@@ -249,6 +251,11 @@
               });
 
             });
+          }
+
+          function getMousePositionInsidePicker(event) {
+            var topPos = event.pageY - quantityDropdown[0].getBoundingClientRect().top - (quantityDropdown[0].scrollTop + (window.pageYOffset || document.documentElement.scrollTop));
+            return Math.floor(topPos / 24) * 24;
           }
 
 
@@ -295,6 +302,7 @@
           }
 
           function processingColumn(element, target) {
+            if (target.tagName.toLowerCase() !== 'a') return;
 
             if (dropdownElement['hover' + element + 'Element']) {
               dropdownElement['hover' + element + 'Element'].css('background-color', '#ffffff');

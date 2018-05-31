@@ -942,16 +942,18 @@ aside#left div.nav-title {
   overflow-y: scroll;
   border-radius: 4px;
   width: 100%;
+  /* direction: rtl; */
 }
 
 .timer-quantity .time_drop_down .hour_drop_down li {
   list-style-type: none;
+  /* direction: ltr; */
 }
 
 .timer-quantity .time_drop_down .min_drop_down {
   display: inline-block;
   position: absolute;
-  top: 0 !important;
+  top: 0;
   left: 56px;
   padding-left: 0;
   overflow: hidden;
