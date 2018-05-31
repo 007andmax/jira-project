@@ -12,7 +12,7 @@
               templateUrl: '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html',
               animation: true,
               backdrop: false,
-              size: 'lg',
+              size: 'md',
               controller: 'serviceAgreementsModalCtrl',
               windowClass: 'create-popup margin-top-modal-dialog',
               resolve: {
