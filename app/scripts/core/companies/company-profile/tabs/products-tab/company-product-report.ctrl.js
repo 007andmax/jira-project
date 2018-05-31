@@ -29,7 +29,7 @@
             $scope.selectedLines.splice(ind, 1);
             $scope.selectedLinesIds[line.lineId] = false;
           }
-          calculateSumPrices()
+          calculateSumPrices();
           $timeout(function () {
             $rootScope.reportLineChanged = true;
           }, 1000);
@@ -187,7 +187,7 @@
 
           toSort.forEach(function(el) {
             result.push(el);
-          })
+          });
 
           return result;
         }

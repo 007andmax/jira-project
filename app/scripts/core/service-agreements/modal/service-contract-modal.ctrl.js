@@ -1108,7 +1108,10 @@
           return (service.name && service.name.length && $scope.notAddedSCSTTError)
         };
         $scope.showNotAddedServiceExpenseError = function(service) {
-          return (service.name && service.name.name.length && $scope.notAddedServiceExpenseError)
+          if(service.name) {
+            return (service.name && service.name.name.length && $scope.notAddedServiceExpenseError)
+          }
+
         };
         $scope.showNotAddedProductExpenseError = function(service) {
           return (service.name && service.name.description.length && $scope.notAddedProductExpenseError)
