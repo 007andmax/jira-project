@@ -171,12 +171,21 @@
   background: url(../images/sprites-s76c759f188.png) -298px -13px;
 }
 
+.company-logo-wrapper {
+  display: inline-block;
+}
+
+.company-logo-wrapper:hover .company-logo-icn {
+  display: inline-block;
+}
+
 .company-logo-icn {
   width: 24px;
   height: 24px;
   position: relative;
   cursor: pointer;
   transition: all .3s;
+  display: none;
 }
 
 .company-logo-icn:hover {
