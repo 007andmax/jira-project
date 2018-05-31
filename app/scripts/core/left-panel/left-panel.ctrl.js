@@ -566,10 +566,12 @@
           for (var companyId in resp) {
             var devicesByCompany = resp[companyId];
             if (companyId !== 'staticCopy') {
-              for (var i = 0; i < devicesByCompany.length; i++) {
-                var device = devicesByCompany[i];
-                device.companyId = companyId;
-                $scope.devices.push(device);
+              if(devicesByCompany && devicesByCompany.length) {
+                for (var i = 0; i < devicesByCompany.length; i++) {
+                  var device = devicesByCompany[i];
+                  device.companyId = companyId;
+                  $scope.devices.push(device);
+                }
               }
             }
           }
