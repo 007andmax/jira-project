@@ -3925,7 +3925,7 @@ _:-moz-tree-row(hover), .tax-recurring .form-control[readonly] {
 
 .form-control[disabled],
 fieldset[disabled] .form-control {
-  cursor: default;
+  cursor: default !important;
 }
 
 textarea.form-control {
@@ -7960,8 +7960,8 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 }
 
 .contracts .service-bill .interval-agreement .before-icon:before {
-  top: 29px!important;
-  left: 10px!important;
+  top: 29px !important;
+  left: 10px !important;
 }
 
 .contracts .qt-table .col-sm-3 .dropdown-menu {

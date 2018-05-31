@@ -13,6 +13,21 @@
   font-size: 12px;
   padding: 0;
   text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.company-window .company-schedule-edit .dropdown-menu {
+  min-width: 20% !important;
+}
+
+.company-window .company-schedule {
+  margin-left: 15px;
+}
+
+.company-window .company-schedule .timer-quantity .time_drop_down .min_drop_down {
+  left: 82px;
+  width: 100%;
 }
 
 .company-logo {
@@ -294,9 +309,11 @@
 .company-info-content .company-schedule i {
   margin-bottom: 2px;
 }
-.phone-number-form label{
+
+.phone-number-form label {
   font-size: 12px;
 }
+
 .company-schedule-edit {
   padding: 0;
   list-style: none;
@@ -409,22 +426,27 @@
   padding: 5px 0;
   width: 230px;
 }
-#service-quantity-dropdown{
+
+#service-quantity-dropdown {
   width: 100%;
 }
+
 @media (max-width: 1366px) {
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-  .company-edit-button{
+
+  .company-edit-button {
     max-width: 75%;
   }
 }
+
 @media (max-width: 1280px) {
-  .company-edit-button{
+  .company-edit-button {
     max-width: 72%;
   }
 }
+
 .company-new-cover-wrapper .company-contact-type .company-p-style {
   display: inline-block;
   width: 195px;

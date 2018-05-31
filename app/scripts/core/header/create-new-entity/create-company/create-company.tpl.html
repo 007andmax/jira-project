@@ -185,7 +185,7 @@
       <div class="col-xs-6">
         <div style="width: 100%; height: 250px; margin-top: 15px;" map alternative-map></div>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-12 company-info-wrapper">
         <div class="company-schedule clearfix">
           <div>
             <div>
@@ -199,12 +199,9 @@
                          sqp-day="day.dayOfWeek"
                          sqp-period="start"
                          sqp-is-show-format="false" >
-                      <input class="time"
-                             uib-tooltip="Hr(s) : Min(s)"
-                             tooltip-placement="top"
+                      <input class="time form-control"
                              id="service-quantity-picker"
                              type="text"
-                             class="form-control"
                              placeholder="Hr(s) : Min(s)"
                              sqp-cond-input="{{day.dayOfWeek + ' start'}}"
                              autocomplete="off"
@@ -229,12 +226,9 @@
                          sqp-day="day.dayOfWeek"
                          sqp-period="end"
                          sqp-is-show-format="false">
-                      <input class="time"
-                             uib-tooltip="Hr(s) : Min(s)"
-                             tooltip-placement="top"
+                      <input class="time form-control"
                              id="service-quantity-picker"
                              type="text"
-                             class="form-control"
                              placeholder="Hr(s) : Min(s)"
                              sqp-cond-input="{{day.dayOfWeek + ' end'}}"
                              ng-disabled="!day.isWorkingDay"
