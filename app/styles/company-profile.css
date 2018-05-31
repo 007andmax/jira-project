@@ -120,10 +120,14 @@
   vertical-align: middle;
 }
 
+.company-edit-icn-sm {
+  vertical-align: top;
+}
+
 .company-edit-button {
   display: inline-block;
-  max-width: 80%;
-  width: 100%;
+  width: auto;
+  max-width: 92%;
 }
 
 .company-remove-icn-sm,
@@ -195,40 +199,43 @@
   font-size: 13px;
 }
 
-.company-info-content .company-name {
+.company-info-header .company-name {
   color: #364656;
   font-size: 20px;
   margin-bottom: 10px;
   font-family: 'Graphik Medium', sans-serif;
 }
 
-.company-info-content .company-name div .ellipsis {
+.company-info-header .company-name div .ellipsis {
   display: inline-block;
   vertical-align: middle;
   max-width: 91%;
 }
 
-.company-info-content .company-name .dropdown {
+.company-name-content {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  width: 78%;
+}
+
+.company-info-header .company-name .dropdown {
   font-size: 12px;
   border-radius: 3px;
   background-color: #ffe3af;
-  vertical-align: middle;
+  vertical-align: top;
   display: inline-block;
   padding: 0;
   width: 54px;
 }
 
-.company-info-content .company-name .dropdown input {
+.company-info-header .company-name .dropdown input {
   border: none;
   font-family: 'Graphik Regular', sans-serif;
   text-align: center;
 }
 
-.company-info-content .company-rate {
-  margin-bottom: 10px;
-}
-
-.company-info-content .company-rate span {
+.company-info-header .company-rate span {
   cursor: pointer;
 }
 
@@ -293,9 +300,11 @@
 .company-info-content .company-schedule i {
   margin-bottom: 2px;
 }
-.phone-number-form label{
+
+.phone-number-form label {
   font-size: 12px;
 }
+
 .company-schedule-edit {
   padding: 0;
   list-style: none;
@@ -353,15 +362,21 @@
 }
 
 .w-92,
-.w-91 {
+.w-91,
+.w-90 {
   display: inline-block;
   max-width: 92%;
   word-wrap: break-word;
   vertical-align: middle;
+  width: auto;
 }
 
 .w-91 {
-  width: 91%;
+  max-width: 91%;
+}
+
+.w-90 {
+  max-width: 90%;
 }
 
 .company-info-content .company-notes {
@@ -408,15 +423,8 @@
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-  .company-edit-button{
-    max-width: 75%;
-  }
 }
-@media (max-width: 1280px) {
-  .company-edit-button{
-    max-width: 72%;
-  }
-}
+
 .company-new-cover-wrapper .company-contact-type .company-p-style {
   display: inline-block;
   width: 195px;
