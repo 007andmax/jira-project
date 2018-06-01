@@ -110,13 +110,17 @@
     </div>
     <div class="header-item">
       <p style="text-align: left; font-size: 13px;" >Install Agents</p>
-      <div ng-hide="(isInstallInProgress || !isDeviceSelected())" ng-click="installAgents(credentialsForm)">
+      <div ng-click="installAgents(credentialsForm)" ng-class="{disabledIcon: !isDeviceSelected()}">
         <div class="install-agent-img pointer"></div>
         <p>Install Agent</p>
         <!--<div class="btn btn-primary has-tooltip" ng-click="installAgents(credentialsForm)"-->
         <!--custom-disabled="{{ isInstallInProgress || !isDeviceSelected() }}">-->
         <!--Install Agent-->
         <!--</div>-->
+      </div>
+      <div class="qt-list-loading" ng-show="isInstallInProgress">
+        Installing
+        <div class="loader"></div>
       </div>
     </div>
 
