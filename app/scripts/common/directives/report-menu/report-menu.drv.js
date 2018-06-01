@@ -125,9 +125,25 @@
       $scope.availableTechusersWoCompany = true;
     }
 
+    $scope.resetDate = resetDate;
+
     $scope.reportSetting = {
-      company: ''
+      company: '',
+      dateRange: {
+        startDate: '',
+        endDate: ''
+      }
     };
+
+     $scope.datePickerOptions = {
+      opens: 'left',
+      autoApply: true,
+      locale: {
+        format: "YYYY/MM/DD"
+      }
+    };
+
+    $scope.firstIteration = true;
 
     // to clear company input field when report type changed to Summary
     $scope.$watch('reportType', function () {
@@ -137,6 +153,27 @@
         }
       }
     });
+
+    $scope.$watch('reportSetting.dateRange', function() {
+      if ($scope.reportSetting.dateRange) {
+        onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
+
+        if ($scope.firstIteration) {
+          $scope.firstIteration = false;
+
+          if ($ctrl.isProductReportForCompanyTab) {
+            sendReportRequest($scope.reportSetting);
+          }
+
+          return;
+        }
+
+        if ($ctrl.isTechReport) {
+          sendReportRequest($scope.reportSetting);
+        }
+
+      }
+    })
 
 
     if ($ctrl.isTechReport) {
@@ -165,17 +202,27 @@
 
     function setTechReportDateType(type) {
       $scope.techReportDateType = typeof type === 'string' ? type : 'CUSTOM';
+
+      if ($scope.techReportDateType !== 'CUSTOM') {
+        resetDate();
+      }
+
       sendTechDataRequest();
+    }
+
+    function resetDate() {
+      $scope.reportSetting.dateRange = {
+        startDate: '',
+        endDate: ''
+      }
     }
 
     function onDateRangeChangeReport(dates) {
       $scope.startDate = null;
       $scope.endDate = null;
       if (dates && dates.length && dates.length > 1) {
-        var startMonth = dates[0].getMonth() + 1;
-        var endMonth = dates[1].getMonth() + 1;
-        $scope.startDate = dates[0].getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(dates[0].getDate());
-        $scope.endDate = dates[1].getFullYear() + "/" + addZeroIfNeed(endMonth) + "/" + addZeroIfNeed(dates[1].getDate());
+        $scope.startDate = formatDate(dates[0]);
+        $scope.endDate = formatDate(dates[1]);
         $scope.errorNassageForDate = true;
       }
     }
@@ -203,6 +250,11 @@
       // techDataToSend.endDate = null;
     }
 
+    function formatDate(date) {
+      if (!date) return '';
+      return moment(date).format('YYYY/MM/DD');
+    }
+
     function sendReportRequestForProductReportOnCompanyTab(reportSettings) {
       var companyFromProfile = CompaniesService.getOneById($scope.companyProfileSharedState.companyId);
       $scope.errorNassageForCompany = true;
@@ -224,10 +276,12 @@
       if ($scope.selectedProduct) {
         dataToSend.productId = $scope.selectedProduct.versionedId.id
       }
-      dataToSend.startDate = $filter('date')(new Date($scope.startDate || companyFromProfile.createdAt), 'yyyy/MM/dd'),
-        dataToSend.endDate = $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+
+      dataToSend.startDate = $scope.startDate || formatDate(new Date(companyFromProfile.createdAt));
+        dataToSend.endDate = $scope.endDate || formatDate(now);
 
       lastSentData = dataToSend;
+
       $scope.$emit("requestReportData", dataToSend, location, techType);
     }
 

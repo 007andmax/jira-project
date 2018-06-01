@@ -28,7 +28,14 @@
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
 
-          Utils.customizeObj(resp.data, devices);
+          var listOfCompaniesWithAgents = {};
+          Object.keys(resp.data).forEach(function(key,index) {
+            if(resp.data[key] !== null) {
+              listOfCompaniesWithAgents[key] = resp.data[key];
+            }
+          });
+
+          Utils.customizeObj(listOfCompaniesWithAgents, devices);
           calculateDevicesCountersAndCallCallbacks();
 
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
@@ -212,7 +219,7 @@
             continue;
           }
 
-          if (!storage.devices[companyId].length) {
+          if (storage.devices[companyId] === null || !storage.devices[companyId].length) {
             delete storage.deviceCounter[companyId];
             callCallbacks();
             return;
@@ -799,12 +806,15 @@
       }
 
       function _getDeviceByDeviceId(devices, agentId) {
-        for (var i = 0; i < devices.length; i++) {
-          var device = devices[i];
-          if (device.id === agentId) {
-            return device;
+        if(device) {
+          for (var i = 0; i < devices.length; i++) {
+            var device = devices[i];
+            if (device.id === agentId) {
+              return device;
+            }
           }
         }
+
       }
 
       function _getNetScanByDeviceId(devices, deviceId) {
@@ -838,11 +848,12 @@
         if(value) {
           return Object.keys(storage.devices).find(function(key) {
             if(key !== 'staticCopy') {
-              for(var i=0; i<storage.devices[key].length; i++ ) {
-                if(storage.devices[key][i].agentId === value) {
-                  return true;
+                for(var i=0; i<storage.devices[key].length; i++ ) {
+                  if(storage.devices[key][i].agentId === value) {
+                    return true;
+                  }
                 }
-              }
+
             }
           } );
         }

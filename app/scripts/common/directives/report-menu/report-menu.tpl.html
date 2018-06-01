@@ -109,12 +109,16 @@
                    name="reportDateRange"
                    readonly
                    date-format="dd/mm/yy"
-                   qt-date-range-picker="$ctrl.onDateRangeChangeReport"
+                   date-range-picker
+                   options="datePickerOptions"
                    range max-date="{{ maxDateForDateRangeInputField }}"
                    ng-model="reportSetting.dateRange"
                    placeholder="Select Date"> </input>
-            <i class="report-calendar"></i>
-
+            <i class="report-calendar" ng-show="!startDate && !endDate"></i>
+            <i class="icn-sm icn-remove-old pointer"
+               ng-show="startDate && endDate"
+               uib-tooltip="clear date filter"
+               style="pointer-events: all;" tooltip-placement="top" ng-click="resetDate()"></i>
           </div>
         </div>
       </div>
@@ -237,19 +241,31 @@
           Week</p>
         <p ng-click="$ctrl.setTechReportDateType('MONTH')" ng-class="{'choosen': techReportDateType === 'MONTH'}">
           Month</p>
-        <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
-          Custom</p>
-        <div ng-show="techReportDateType==='CUSTOM'">
+        <!-- <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
+          Custom</p> -->
+        <!-- <div ng-show="techReportDateType==='CUSTOM'"> -->
+        <div style="position: relative; display: inline-block">
           <input style="display: inline-block;width: 250px;margin-top: 10px;"
+                 ng-click="$ctrl.setTechReportDateType('CUSTOM')"
                  type="text"
                  class="form-control has-dropdown readonly-normal"
                  name="reportDateRange"
                  readonly
-                 qt-date-range-picker="$ctrl.onDateRangeChangeReport"
-                 on-hide="$ctrl.setTechReportDateType"
-                 range max-date="{{ maxDateForDateRangeInputField }}"
+                 options="datePickerOptions"
+                 range
+                 placeholder="Select date"
+                 date-range-picker
+                 max-date="{{ maxDateForDateRangeInputField }}"
                  ng-model="reportSetting.dateRange"> </input>
+
+          <i class="report-calendar" ng-show="!startDate && !endDate"></i>
+          <i class="icn-sm icn-remove-old pointer"
+             ng-show="startDate && endDate"
+             uib-tooltip="clear date filter"
+             style="pointer-events: all;"tooltip-placement="top" ng-click="$ctrl.setTechReportDateType('TODAY')"></i>
         </div>
+
+        <!-- </div> -->
       </div>
       <div class="form-group content" ng-hide="locationTechReport === '/reports/techReport-TicketCreated'">
         <div uib-dropdown>

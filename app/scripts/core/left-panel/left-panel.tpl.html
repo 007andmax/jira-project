@@ -8,40 +8,68 @@
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
            ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
-        <div class="left-panel-icn left-panel-icons-remote"></div>
+        <div class="left-panel-icn left-panel-icons-remote"
+             uib-tooltip="Quick Support"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
            ng-click="clearTicketsFilters(); toggleLeftPanel('tickets', true)"
       >
-        <div class="left-panel-icn left-panel-icons-tickets"></div>
+        <div class="left-panel-icn left-panel-icons-tickets"
+             uib-tooltip="tickets"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'companies' || openedCategory === 'companyProfile' }"
            ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies', true)"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
-        <div class="left-panel-icn left-panel-icons-companies"></div>
+        <div class="left-panel-icn left-panel-icons-companies"
+             uib-tooltip="companies"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users', true)"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
-        <div class="left-panel-icn left-panel-icons-users"></div>
+        <div class="left-panel-icn left-panel-icons-users"
+             uib-tooltip="users"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
-        <div class="left-panel-icn left-panel-icons-billing"></div>
+        <div class="left-panel-icn left-panel-icons-billing"
+             uib-tooltip="billing"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory', true)">
-        <div class="left-panel-icn left-panel-icons-inventory"></div>
+        <div class="left-panel-icn left-panel-icons-inventory"
+             uib-tooltip="inventory"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
            ng-class="{'active': openedCategory === 'password-manager'}"
            ng-click="toggleLeftPanel('password-manager', true)"
            ui-sref="password-manager">
-        <div class="left-panel-icn left-panel-icons-password-manager"></div>
+        <div class="left-panel-icn left-panel-icons-password-manager"
+             uib-tooltip="password manager"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
       <!--REPORTS-->
       <div class="left-panel__category"
@@ -49,7 +77,11 @@
            ng-click="onClickReports()"
            ui-sref="reports"
            ng-if="showReportsPage()">
-        <div class="left-panel-icn left-panel-icons-reports"></div>
+        <div class="left-panel-icn left-panel-icons-reports"
+             uib-tooltip="reports"
+             tooltip-placement="right"
+             tooltip-append-to-body="true"
+             tooltip-popup-delay="1000"></div>
       </div>
 
       <div ui-sref="settings" ng-click="onClickSettings()"
@@ -62,10 +94,10 @@
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'quick-support' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)" ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
-        </div>
         <span class="left-panel-full__head--header">Quick Support</span>
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)" ng-show="showLeftArrowToggleLeftPanel()">
+          <i class="icn-sm icn-back-arrow"></i>
+        </div>
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category"
@@ -101,7 +133,7 @@
          ng-show="(openedCategory === 'tickets' || openedCategory === 'inbox') && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Tickets</span>
       </div>
@@ -397,7 +429,7 @@
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'companies' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Companies</span>
       </div>
@@ -521,7 +553,7 @@
     <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'companyProfile' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Companies</span>
       </div>
@@ -834,7 +866,7 @@
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'users' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Users</span>
       </div>
@@ -974,7 +1006,7 @@
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'billing' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Billing</span>
       </div>
@@ -1015,7 +1047,7 @@
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'inventory' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Inventory</span>
       </div>
@@ -1035,7 +1067,7 @@
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'password-manager' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
-          <i class="icn-sm icn-expand-back"></i>
+          <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Password<br>Manager</span>
       </div>

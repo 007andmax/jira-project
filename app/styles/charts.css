@@ -130,6 +130,10 @@
   float: right;
 }
 
+.chart-header .chart-header-controls input.form-control {
+  margin-top: 0 !important;
+}
+
 .chart-header .chart-header-controls p,
 .customer-filter p{
   float: left;

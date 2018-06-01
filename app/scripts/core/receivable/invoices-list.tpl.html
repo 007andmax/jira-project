@@ -1,10 +1,10 @@
 <ul class="qt-list company-devices qt-users invoices-list">
   <!-- <div class="fixed-block-top" ng-show="selectedInvoiceCount > 0 && !selectedPaidInvoice" fixed-block-top
        offset-top="133" style="position: absolute;top: 55px;width: 0;padding: 0;margin: 0;">
-    
+
   </div> -->
 
-  
+
   <!--<li class="list-heading clearfix">-->
   <!--<div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">-->
   <!--<label class="control checkbox pull-left">-->
@@ -62,7 +62,7 @@
           <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
         </div>
         <ul class="dropdown-menu" role="menu">
-          <li ng-show="!invoice.paidOn"><a ng-click="sentInvoice()">Resend</a></li>
+          <li><a ng-click="sentInvoice()">Resend</a></li>
           <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
           <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
           <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>

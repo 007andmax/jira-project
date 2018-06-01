@@ -18,7 +18,7 @@
 
         $scope.sortBy = sortBy;
         $scope.reverse = false;
-        $scope.sortProps = ['date', 'ticketNumber'] 
+        $scope.sortProps = ['date', 'ticketNumber']
 
         $scope.selectLine = function(line) {
           var ind = $scope.selectedLines.indexOf(line);
@@ -29,7 +29,7 @@
             $scope.selectedLines.splice(ind, 1);
             $scope.selectedLinesIds[line.lineId] = false;
           }
-          calculateSumPrices()
+          calculateSumPrices();
           $timeout(function () {
             $rootScope.reportLineChanged = true;
           }, 1000);
@@ -67,7 +67,7 @@
             calculateSumPrices()
           }
         };
- 
+
         $scope.isAllLinesAreChecked = function() {
           return $scope.selectedLines.length === $scope.reportByProducts.lines.length
         }
@@ -93,7 +93,7 @@
                     return a < b ? -1 : 1;
                 },
                 getCmpFunc = function(primer, reverse) {
-                    var dfc = default_cmp, 
+                    var dfc = default_cmp,
                         cmp = default_cmp;
                     if (primer) {
                         cmp = function(a, b) {
@@ -149,25 +149,48 @@
           var prop1 = props[0];
           var prop2 = props[1];
 
-          console.log($scope.reportByProducts.lines)       
+          $timeout(function () {
+            $rootScope.reportLineChanged = true;
+          }, 1000);
 
           if ($scope.sortProps[0] !== props[0]) {
-            $scope.reverse = true;
+            $scope.reverse = false;
           } else {
             $scope.reverse = !$scope.reverse;
           }
 
           $scope.sortProps = props;
-
           if (!prop2) {
-            $scope.reportByProducts.lines = $filter('orderBy')($scope.reportByProducts.lines, prop1, $scope.reverse);
+            $scope.reportByProducts.lines = separateEmpty($scope.reportByProducts.lines, prop1);
           } else {
             $scope.reportByProducts.lines.sort(sortByFew({name: prop1, reverse: $scope.reverse}, { name: prop2, reverse: $scope.reverse, primer: parseInt }));
           }
 
-          
+
         }
 
+        function separateEmpty(array, prop) {
+          var toSort = [];
+          var result = [];
+
+          for (var i = 0; i < array.length; i++) {
+            var el = array[i];
+
+            if (!el[prop] && el[prop] !== 0) {
+              result.push(el);
+            } else {
+              toSort.push(el);
+            }
+          }
+
+          toSort = $filter('orderBy')(toSort, prop, $scope.reverse);
+
+          toSort.forEach(function(el) {
+            result.push(el);
+          });
+
+          return result;
+        }
 
         if ($scope.reportByProducts.lines) {
           $scope.selectedLines = [];
