@@ -195,25 +195,61 @@
                 <li ng-repeat="day in workingDays">
                   <div class="mb">
                     <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
-                    <input placeholder="Hours"
-                           name="startTime"
-                           type="text"
-                           class="form-control"
-                           ng-model="day.startTime"
-                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="!day.isWorkingDay">
-                    <input type="text" class="form-control pointer text-center" name="startTimeFormat"
+
+                    <div style="position: relative; padding: 0; display: inline-block; width: 20%"
+                         service-quantity-picker="day.startTime"
+                         class="set-working-hours"
+                         sqp-day="day.dayOfWeek"
+                         sqp-period="start"
+                         sqp-is-show-format="false" >
+                      <input class="time form-control"
+                             id="service-quantity-picker"
+                             type="text"
+                             class="form-control"
+                             placeholder="12 : 00"
+                             sqp-cond-input="{{day.dayOfWeek + ' start'}}"
+                             autocomplete="off"
+                             aria-expanded="true"
+                             ng-disabled="!day.isWorkingDay"/>
+                      <input type="hidden"
+                             ng-model="day.startTime"
+                             name="serviceTime"
+                             ng-disabled="!day.isWorkingDay"/>
+                    </div>
+
+                    <input type="text"
+                           class="form-control pointer text-center"
+                           name="startTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
                            uib-typeahead="time for time in timeFormat"
                            ng-model="day.startTimeFormat"
-                           autocomplete="off" qt-typeahead-async-show-on-focus ng-disabled="!day.isWorkingDay" readonly>
+                           autocomplete="off"
+                           qt-typeahead-async-show-on-focus
+                           ng-disabled="!day.isWorkingDay"
+                           readonly>
                     -
-                    <input placeholder="Hours"
-                           name="endTime"
-                           type="text"
-                           class="form-control"
-                           ng-model="day.endTime"
-                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="!day.isWorkingDay">
+                    <div style="position: relative; padding: 0; display: inline-block; width: 20%"
+                         service-quantity-picker="day.endTime"
+                         class="set-working-hours"
+                         sqp-day="day.dayOfWeek"
+                         sqp-period="end"
+                         sqp-is-show-format="false">
+                      <input class="time form-control"
+                             id="service-quantity-picker"
+                             type="text"
+                             class="form-control"
+                             placeholder="12 : 00"
+                             sqp-cond-input="{{day.dayOfWeek + ' end'}}"
+                             ng-disabled="!day.isWorkingDay"
+                             autocomplete="off"
+                             aria-expanded="true"/>
+                      <input type="hidden"
+                             ng-model="day.endTime"
+                             name="serviceTime"
+                             ng-disabled="!day.isWorkingDay"/>
+                    </div>
+
                     <input type="text" class="form-control pointer text-center" name="endTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"

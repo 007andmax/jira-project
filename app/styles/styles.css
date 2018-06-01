@@ -3925,7 +3925,7 @@ _:-moz-tree-row(hover), .tax-recurring .form-control[readonly] {
 
 .form-control[disabled],
 fieldset[disabled] .form-control {
-  cursor: default;
+  cursor: default !important;
 }
 
 textarea.form-control {

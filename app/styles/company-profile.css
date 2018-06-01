@@ -10,8 +10,24 @@
 .company-info-wrapper button.form-control-number {
   height: 25px;
   background-color: transparent;
-  font-size: 13px;
-  padding: 0 5px;
+  font-size: 12px;
+  padding: 0;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.company-window .company-schedule-edit .dropdown-menu {
+  min-width: 20% !important;
+}
+
+.company-window .company-schedule {
+  margin-left: 15px;
+}
+
+.company-window .company-schedule .timer-quantity .time_drop_down .min_drop_down {
+  left: 82px;
+  width: 100%;
 }
 
 .company-logo {
@@ -316,6 +332,11 @@
   width: 20%;
 }
 
+.company-schedule-edit input.time {
+  width: 100%;
+  cursor: pointer;
+}
+
 .company-schedule-edit .control {
   margin-left: 5px;
   vertical-align: middle;
@@ -419,12 +440,19 @@
   width: 230px;
 }
 
+#service-quantity-dropdown {
+  width: 100%;
+}
+
 @media (max-width: 1366px) {
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-}
 
+  .company-edit-button {
+    max-width: 75%;
+  }
+}
 .company-new-cover-wrapper .company-contact-type .company-p-style {
   display: inline-block;
   width: 195px;
