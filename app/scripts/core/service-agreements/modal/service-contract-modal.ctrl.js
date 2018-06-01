@@ -766,22 +766,24 @@
           }, 4000);
         }
         $scope.addNewService = function (form, service) {
+          // console.log(form, service, 'ADDING NEW')
           $scope.notAddedAdditionalServiceError = false;
           $scope.showAddButtonNewService = false;
           $scope.showNewServiceError = false;
           if (form.$valid) {
-            if( service.nameValue.length < 1) {
+            if( !service.name ) {
+              // console.log('too short', service)
               showErrorNewServiceNameTimeOut();
               $scope.showAddButtonNewService = true;
             } else {
-              validateNewServiceName(service.nameValue).then(function (resp) {
+              validateNewServiceName(service.name.name).then(function (resp) {
                 if (resp) {
                   var ns = {
-                    name: service.nameValue,
+                    name: service.name.name,
                     rate: service.name.rate,
                     billable: service.billable,
-                    taxes: service.taxes,
-                    nameValue: service.nameValue
+                    taxes: service.name.taxes,
+                    nameValue: service.name.name
                   };
                   $scope.serviceContract.services.push(ns);
                   $scope.newService = {
@@ -868,6 +870,9 @@
 
         $scope.isAdditionalServiceNameUnique = function (name) {
           var check = true;
+          if (typeof name === 'object') {
+            name = name.name;
+          }
           if (name) {
             if ($scope.serviceContract.billType === 'OTHER') {
               if ($scope.serviceContract.serviceExpenses.length > 0) {
@@ -1020,7 +1025,9 @@
           var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
           var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames, function (resp) {
+            // console.log(listOFNames, resp, 'validation')
             if (Object.keys(resp).length === 0) {
+
               deferred.resolve(resp);
             } else {
               deferred.reject();
@@ -1039,7 +1046,8 @@
           } else if ($scope.companyId) {
             id = $scope.companyId;
           }
-          return id;
+
+          return id.id ? id.id : id;
         }
 
         function checkForInvalidFields() {
@@ -1500,30 +1508,30 @@
             var listOfAdditionalServicesNames = [];
             if (serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER') {
               for (var i = 0; i < serviceContract.serviceContractServices.length; i++) {
-                listOfNames.push(serviceContract.serviceContractServices[i].name);
+                listOfNames.push(checkNameForObject(serviceContract.serviceContractServices[i].name));
               }
               if(serviceContract.billType === 'DEVICE') {
                 if($scope.presettupDeviceServices.length>0) {
                   for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
-                    listOfNames.push($scope.presettupDeviceServices[d].name);
+                    listOfNames.push(checkNameForObject($scope.presettupDeviceServices[d].name));
                   }
                 }
 
               } else if(serviceContract.billType === 'USER') {
                 if($scope.presettupUsersServices.length>0) {
                   for(var u=0; u<$scope.presettupUsersServices.length; u++) {
-                    listOfNames.push($scope.presettupUsersServices[u].name);
+                    listOfNames.push(checkNameForObject($scope.presettupUsersServices[u].name));
                   }
                 }
               }
               if(serviceContract.serviceContractServicesToTrack.length>0) {
                 for (var l = 0; l < serviceContract.serviceContractServicesToTrack.length; l++) {
-                  listOfAdditionalServicesNames.push(serviceContract.serviceContractServicesToTrack[l].name);
+                  listOfAdditionalServicesNames.push(checkNameForObject(serviceContract.serviceContractServicesToTrack[l].name));
                 }
               }
               if(serviceContract.services.length>0) {
                 for (var n = 0; n < serviceContract.services.length; n++) {
-                  listOfAdditionalServicesNames.push(serviceContract.services[n].name);
+                  listOfAdditionalServicesNames.push(checkNameForObject(serviceContract.services[n].name));
                 }
               }
             }
@@ -1553,6 +1561,14 @@
               } else {
                 createServiceContract(serviceContract);
               }
+            }
+          }
+
+          function checkNameForObject(name) {
+            if (typeof name === 'object') {
+              return name.name;
+            } else {
+              return name;
             }
           }
         }
