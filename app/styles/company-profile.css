@@ -402,22 +402,38 @@
 
 .company-info-content .company-notes {
   font-family: 'Graphik Regular', sans-serif;
-  padding-left: 20px;
   position: relative;
 }
 
-.company-info-content .company-notes textarea {
-  height: 120px;
-  background: transparent;
-  padding: 5px;
+.company-info-content p.company-notes:first-line {
+  line-height: 0;
 }
 
-.company-info-content .company-notes:after {
+.company-info-content .company-notes textarea,
+.company-info-content .company-notes p {
+  height: 135px;
+  background: transparent;
+  padding: 5px;
+  white-space: pre-line;
+  max-height: 154px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.company-info-content .company-notes p {
+  overflow-y: scroll;
+  border: 1px solid #eae9e9;
+}
+
+.company-info-content .notes:after {
   position: absolute;
   content: '';
   width: 12px;
   height: 15px;
-  top: 4px;
+  top: 26px;
   left: 0;
   background-image: url(../images/new-icons/company-note.svg);
 }
@@ -453,6 +469,13 @@
     max-width: 75%;
   }
 }
+
+@media (max-width: 1280px) {
+  .company-edit-button {
+    max-width: 72%;
+  }
+}
+
 .company-new-cover-wrapper .company-contact-type .company-p-style {
   display: inline-block;
   width: 195px;
