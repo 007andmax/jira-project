@@ -79,7 +79,7 @@
           })
         };
 
-        console.log($scope.agent, 'ASFAFJAFSF')
+        console.log($scope.agent, 'agent')
 
         $scope.cancelNewDeviceLabelEdit = function() {
           $scope.agent.label = $scope.reserveAgentLabelCopy;
@@ -161,6 +161,16 @@
         };
 
         function markDeviceAsMaster() {
+          $scope.agents = $scope.agents.map(function(agent) {
+            if (agent.agentId === $scope.agent.agentId) {
+              agent.master = true;
+            } else {
+              agent.master = false;
+            };
+
+            return agent;
+          });
+
           DevicesService.markDeviceAsMaster($scope.company.id, $scope.agent.agentId);
         }
 

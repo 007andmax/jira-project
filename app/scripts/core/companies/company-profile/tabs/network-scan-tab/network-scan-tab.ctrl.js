@@ -20,9 +20,7 @@
         $scope.reverse = false;
         $scope.PermissionsService = PermissionsService;
         $scope.passwordShown = false;
-
-
-
+        $scope.defaultMasterAgent = null;
         $scope.selectedCredential = {};
 
         $scope.usersWithEmails = UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
@@ -38,22 +36,12 @@
             if (lastMasterAgentId) {
               // $scope.masterAgent = DevicesService.getOneByAgentId(lastMasterAgentId, $scope.company.id);
               // $scope.lastMasterAgent = $scope.masterAgent;
-              $scope.masterAgent = selectMAsterAgent();
+              $scope.masterAgent = selectMAsterAgent(lastMasterAgentId);
               $scope.lastMasterAgent = $scope.masterAgent;
             }
 
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
-              DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
-                $scope.scanDevices = $scope.scanDevices || {};
-                var devices = resp[$scope.company.id];
-                if (devices) {
-                  $scope.scanDevices.devices = devices.sort(function (a, b) {
-                    return a.ipAddress < b.ipAddress;
-                  });
-                }
-
-                $scope.scanDevices.status = resp.status;
-              });
+              getScanDevices();
             } else {
               $scope.scanDevices = undefined;
               $scope.isScanDevicesLoad = false;
@@ -90,18 +78,48 @@
           $scope.downloadLink = resp.downloadLink;
         });
 
-        function selectMAsterAgent() {
-          if ($scope.agents) {
+        function getScanDevices(newMasterAgent) {
+          DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
+            $scope.scanDevices = $scope.scanDevices || {};
+            var devices = resp[$scope.company.id];
+            if (devices) {
+              $scope.scanDevices.devices = devices.sort(function (a, b) {
+                return a.ipAddress < b.ipAddress;
+              });
+            }
 
-            var agentsSortedByCreatedAtDate = $scope.agents.sort(function (a, b) {
-              var aa = new Date(a.createdAt);
-              var bb = new Date(b.createdAt);
-              return aa > bb
-            });
-            return agentsSortedByCreatedAtDate[0]
+            $scope.scanDevices.status = resp.status;
+          });
+        }
 
+        function selectMAsterAgent(masterAgentId) {
+          if ($scope.masterAgent) {
+            return $scope.masterAgent;
           }
 
+          if ($scope.agents) {
+            var masterAgent = $scope.agents.find(function(agent) {
+              return agent.master;
+            });
+
+            if (masterAgent) {
+              if (!$scope.defaultMasterAgent) {
+                $scope.defaultMasterAgent = masterAgent;
+              }
+
+              return masterAgent;
+            } else {
+              var agentsSortedByCreatedAtDate = $scope.agents.sort(function (a, b) {
+                var aa = new Date(a.createdAt);
+                var bb = new Date(b.createdAt);
+                return aa > bb
+              });
+
+              // DevicesService.markDeviceAsMaster($scope.company.id, masterAgent.agentId);
+
+              return agentsSortedByCreatedAtDate[0]
+            }
+          }
         }
 
         $scope.changeShowPassword = function() {
@@ -290,6 +308,16 @@
               $scope.saveMasterAgentInProgress = false;
             });
           }
+          // var lastMasterAgentId = masterAgent.agentId;
+          // $scope.discoveredByAgentId = lastMasterAgentId;
+          //
+          // if (lastMasterAgentId) {
+          //   $scope.masterAgent = masterAgent;
+          //   $scope.lastMasterAgent = $scope.masterAgent;
+          // }
+          //
+          // getScanDevices();
+
         };
 
         $scope.sortDevices = function(option) {
@@ -405,6 +433,12 @@
             UserNotificationService.show('Scanning finished', true);
           }
         });
+
+        $scope.$on('$destroy', function() {
+          if ($scope.defaultMasterAgent) {
+            DevicesService.markDeviceAsMaster($scope.company.id, $scope.defaultMasterAgent.agentId);
+          }
+        })
 
       }
     ]);
