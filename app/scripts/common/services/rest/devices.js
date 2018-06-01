@@ -836,13 +836,12 @@
         if(value) {
           return Object.keys(storage.devices).find(function(key) {
             if(key !== 'staticCopy') {
-              if(storage.devices[key] !== null) {
                 for(var i=0; i<storage.devices[key].length; i++ ) {
                   if(storage.devices[key][i].agentId === value) {
                     return true;
                   }
                 }
-              }
+
             }
           } );
         }
