@@ -29,9 +29,7 @@
         $scope.agent.timing.uptimeForOrdering = 0;
 
         $scope.uptimeOrder = '';
-
         $scope.agentLabelEditForm = {};
-
 
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
@@ -50,6 +48,8 @@
         $scope.showDeviceLabelEditButtom = false;
         $scope.showDeviceLabelEditForm = false;
         $scope.reserveAgentLabelCopy = '';
+
+        $scope.markDeviceAsMaster = markDeviceAsMaster;
 
         $scope.openDeviceLabelEditForm = function() {
           $scope.reserveAgentLabelCopy = $scope.agent.label;
@@ -78,6 +78,8 @@
 
           })
         };
+
+        console.log($scope.agent, 'agent')
 
         $scope.cancelNewDeviceLabelEdit = function() {
           $scope.agent.label = $scope.reserveAgentLabelCopy;
@@ -157,6 +159,20 @@
             $scope.deviceReport[agentId] = report;
           });
         };
+
+        function markDeviceAsMaster() {
+          $scope.agents = $scope.agents.map(function(agent) {
+            if (agent.agentId === $scope.agent.agentId) {
+              agent.master = true;
+            } else {
+              agent.master = false;
+            };
+
+            return agent;
+          });
+
+          DevicesService.markDeviceAsMaster($scope.company.id, $scope.agent.agentId);
+        }
 
         function groupSingleFields(report) {
           report.general = {};

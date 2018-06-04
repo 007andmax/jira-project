@@ -156,7 +156,7 @@
         </div>
         <div class="col-md-1"></div>
       </li>
-      <li class="active-device-item" ng-repeat="device in scanDevices.devices track by device.hostName"
+      <li class="active-device-item" ng-repeat="device in scanDevices.devices track by device.ipAddress"
           ng-controller="quicktech.core.devices.networkScanItemCtrl">
         <div class="users-list-wrapper">
           <div class="col-md-4" style="padding-top: 5px;">
