@@ -598,6 +598,7 @@
 
         $scope.toggleLeftPanel = function (section, ifIconPart) {
           if (ifIconPart) {
+            deactivateAllCompanyProfileTabs();
             $scope.openedCategory = section;
             $rootScope.isLeftPanelHidden = false;
           } else {

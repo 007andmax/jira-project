@@ -2,34 +2,37 @@
   <div class="company-info-wrapper" ng-form="companyDashboardForm">
     <div class="company-info-header clearfix">
       <div class="col-md-10">
-        <div class="company-logo">
-          <!--<img src="images/bitmap@3x.png" alt="">-->
-          <div style="min-height: 38px; display: inline-block; float: left;margin-right: 10px;">
-            <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
-                 ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
-            <div class="default-company-logo default-company-logo-big"
-                 ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
-                 style="background-color: pink;">
-              <span>{{company.name[0].toUpperCase()}}</span>
+        <div class="company-logo-wrapper">
+          <div class="company-logo">
+            <!--<img src="images/bitmap@3x.png" alt="">-->
+            <div style="min-height: 38px; display: inline-block; float: left;">
+              <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
+                   ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+              <div class="default-company-logo default-company-logo-big"
+                   ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+                   style="background-color: pink;">
+                <span>{{company.name[0].toUpperCase()}}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <!--<button class="company-logo-icn" uib-tooltip="change logo"></button>-->
-        <div class="company-logo-icn" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
-             uib-tooltip="Change Logo" tooltip-placement="top" tooltip-popup-delay="2000"
-             ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
-          <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
-              crop-image="companyData" model-image-path="logo">
-            <li crop-image-button stop-propagation="click">
-              <a tabindex="-1" href="javascript:void(0)">Change Image</a>
-            </li>
-            <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
-              <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
-            </li>
-            <li reposition-button stop-propagation="click" ng-show="companyData.logo">
-              <a tabindex="-1" href="javascript:void(0)">Reposition</a>
-            </li>
-          </ul>
+          <!--<button class="company-logo-icn" uib-tooltip="change logo"></button>-->
+          <div class="company-logo-icn" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
+               uib-tooltip="Change Logo" tooltip-placement="top" tooltip-popup-delay="2000"
+               ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
+            <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
+                crop-image="companyData" model-image-path="logo">
+              <li crop-image-button stop-propagation="click">
+                <a tabindex="-1" href="javascript:void(0)">Change Image</a>
+              </li>
+              <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
+                <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
+              </li>
+              <li reposition-button stop-propagation="click" ng-show="companyData.logo">
+                <a tabindex="-1" href="javascript:void(0)">Reposition</a>
+              </li>
+            </ul>
+          </div>
+
         </div>
         <div class="company-name-content">
           <div class="company-name clearfix">
@@ -38,7 +41,7 @@
                    ng-mouseleave="showCompanyNameEditButton = false"
                    class="company-edit-button">
                 <div ng-show="!showCompanyNameEditField"
-                     style="display: inline-block;width: auto;max-width: 96%;">
+                     style="display: inline-block;">
                   {{companyInfo.name}}
                 </div>
                 <button class="company-edit-icn company-edit-icn-sm"
