@@ -4570,6 +4570,11 @@ Devices tab
   margin: 40px auto 20px;
 }
 
+.disabledIcon:hover, .disabledIcon .install-agent-img:hover {
+  cursor: not-allowed !important;
+}
+
+
 .install-agent-img {
   height: 58px;
   width: 56px;
