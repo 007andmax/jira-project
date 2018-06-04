@@ -509,6 +509,7 @@
       }
 
       function getDevicesCount(scope, callback) {
+        console.log('getDevicesCount', storage.devices)
         if (!scope) {
           throw "scope is required!"
         }
@@ -791,6 +792,7 @@
         var devices = storage.devices[companyId] || storage.devices;
 
         if (companyId) {
+          console.log(devices, 'HERE I TRY TO RETURN', deviceId)
           return _getDeviceByDeviceId(devices, deviceId);
         } else {
           for (var companyId in devices) {
@@ -806,7 +808,7 @@
       }
 
       function _getDeviceByDeviceId(devices, agentId) {
-        if(device) {
+        if(devices) {
           for (var i = 0; i < devices.length; i++) {
             var device = devices[i];
             if (device.id === agentId) {

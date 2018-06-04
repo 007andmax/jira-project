@@ -66,12 +66,13 @@
     }
 
       function getAgentsCredentialsForCompany(scope, companyId, callback) {
+        console.log('subscribed for credentials')
         var credentials = {};
         $http.get('/passwordRecords/'+companyId+'/agents/password').then(function(resp){
           credentials = resp.data;
 
           RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
-
+            console.log('credentials have changed', newChange)
             if (newChange.action === 'PASSWORD_RECORD_CREATED') {
               var credential = {
                 id: newChange.data.id,

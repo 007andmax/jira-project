@@ -35,6 +35,7 @@
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.users = UsersService.getClientUsers();
         DevicesService.getDevicesCount($scope, function (resp) {
+          console.log('get devices count', resp)
           $scope.devicesByCompanies = resp;
           $scope.devices = [];
           for (var companyId in resp) {
@@ -137,6 +138,7 @@
         $scope.validateLinks = function (type, itemId, companyId) {
           var password = $scope.password;
           var firstLink = password.links[0];
+          console.log(itemId, "VALIDATE")
 
           if (password.selectionMap[itemId]) {
             if (firstLink) {
@@ -166,6 +168,8 @@
           }
 
           $scope.password.firstLinkName = getLinkName(password.links[0], companyId);
+
+          console.log(getLinkName(password.links[0], companyId), "LINKS")
         };
 
         $scope.closeWindowWithConfirm = function (form) {
@@ -332,8 +336,12 @@
             }
           } else if (link.deviceId) {
             var device = DevicesService.getOneByDeviceId(link.deviceId, companyId);
+            console.log(device, 'device')
             if (device) {
+              console.log(getDeviceName(device), 'if device')
               return getDeviceName(device);
+            } else {
+              return link.deviceId;
             }
           } else if (link.gadgetId) {
             var gadgets = $scope.gadgets;
