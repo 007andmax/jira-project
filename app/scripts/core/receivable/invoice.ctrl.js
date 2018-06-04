@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
-    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService) {
+    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService, UserNotificationService) {
         var disableInvoiceButtons = false;
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
@@ -70,6 +70,7 @@
 
           ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
             $scope.sending[idInvoiceToSend] = false;
+            UserNotificationService.show('The invoice has been sent', true);
           });
         };
 
