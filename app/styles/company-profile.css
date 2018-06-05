@@ -17,6 +17,11 @@
   border-radius: 4px;
 }
 
+.company-info-wrapper input {
+  text-align: left;
+  padding: 0 5px;
+}
+
 .company-window .company-schedule-edit .dropdown-menu {
   min-width: 20% !important;
 }
@@ -101,7 +106,7 @@
 
 .star-icn.active {
   background-position: 0 0;
-
+  
 }
 
 .company-logo-icn,
@@ -111,7 +116,7 @@
 .company-add-icn-sm {
   position: relative;
   display: inline-block;
-  background-color: #EFF9FF;
+  background-color: #eff9ff;
   border-radius: 50%;
   border: none;
   outline: none;
@@ -137,7 +142,6 @@
 
 .company-edit-icn-sm {
   position: absolute;
-  right: 3px;
   top: 0;
 }
 
@@ -157,7 +161,7 @@
 .company-edit-icn:hover,
 .company-remove-icn:hover,
 .company-add-icn-sm:hover {
-  background-color: #9CC8E1;
+  background-color: #9cc8e1;
 }
 
 .company-download-icn:after,
@@ -211,7 +215,7 @@
 }
 
 .company-logo-icn:hover {
-  background-color: #9CC8E1;
+  background-color: #9cc8e1;
 }
 
 .company-logo-icn:after {
@@ -303,7 +307,7 @@
 .company-info-content .company-schedule:after {
   background-image: url(../images/new-icons/company-schedule.svg);
   top: 3px;
-
+  
 }
 
 .company-schedule-list {
@@ -318,7 +322,7 @@
 }
 
 .company-info-content a.company-link {
-  color: #16A4FA;
+  color: #16a4fa;
   font-size: 12px;
   text-decoration: underline;
   transition: all .3s
@@ -344,7 +348,20 @@
 
 .company-schedule-edit input {
   display: inline-block;
+  text-align: center;
+  padding: 0;
   width: 20%;
+}
+
+.company-schedule .dashboard-remove {
+  position: absolute;
+  right: 0;
+}
+
+.company-schedule .icn-label-save-dashboard {
+  position: absolute;
+  right: 20px;
+  margin-right: 0;
 }
 
 .company-schedule-edit input.time {
@@ -387,6 +404,7 @@
 }
 
 .company-profile-content .company-info-subtitle {
+  position: relative;
   font-size: 10px;
   color: #9ca5b6;
   text-transform: uppercase;
@@ -405,6 +423,7 @@
   word-wrap: break-word;
   vertical-align: middle;
   width: auto;
+  margin-right: 10px;
 }
 
 .w-91 {
@@ -449,7 +468,7 @@
   width: 12px;
   height: 15px;
   top: 26px;
-  left: 0;
+  left: -17px;
   background-image: url(../images/new-icons/company-note.svg);
 }
 
@@ -479,7 +498,7 @@
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-
+  
   .company-edit-button {
     max-width: 75%;
   }
@@ -879,7 +898,7 @@
   bottom: 5px;
   left: 42px;
   font-size: 13px;
-
+  
   color: #94a4b8;
   content: 'hours';
 }
@@ -924,13 +943,13 @@
 }
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title:hover {
-  background-color: #3C485E;
+  background-color: #3c485e;
   padding: 10px 15px;
   border-radius: 6px;
 }
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title.left-panel-active {
-  background-color: #3C485E;
+  background-color: #3c485e;
   border-radius: 6px;
 }
 
@@ -955,7 +974,7 @@
 }
 
 .lp-border {
-  border-bottom: 2px solid #424F66;
+  border-bottom: 2px solid #424f66;
   padding-bottom: 11px;
 }
 
@@ -971,5 +990,5 @@
 
 .company-dashboard-left-panel .center-category__category:last-child {
   padding-bottom: 15px;
-  border-bottom: 2px solid #424F66;
+  border-bottom: 2px solid #424f66;
 }
