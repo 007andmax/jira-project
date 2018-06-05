@@ -163,10 +163,10 @@
              ng-mouseover="showWorkingDaysEditButton = true"
              ng-mouseleave="showWorkingDaysEditButton = false">
           <p class="w-92" ng-click="openWorkingDaysSchedule()">{{daysOfWeekMap[daysOfWeek[getTodayDayOfWeek()-1]]}}
-            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTime}}</span>
+            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTime | timeFilter}}</span>
             <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTimeFormat}}</span><span
               ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">-</span><span
-              ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTime}}</span>
+              ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTime | timeFilter}}</span>
             <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTimeFormat}}</span><span
               ng-show="!workingDays[getTodayDayOfWeek()-1].isWorkingDay">Not working</span>
             <i class="icn-sm report-caret-icon"></i>
