@@ -241,9 +241,8 @@
 
         function getTimeFormat(time) {
           if (time && time > 0) {
-
             var timeInHour = time / 3600;
-            if (timeInHour < 12) {
+            if (timeInHour <= 12) {
               return 'AM';
             } else {
               return 'PM';
