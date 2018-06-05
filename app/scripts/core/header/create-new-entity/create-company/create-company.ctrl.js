@@ -468,7 +468,7 @@
             ngModelCtrl.$setValidity('unique', false);
             afterValidationCallback();
           } else {
-            var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', false, function () {
+            var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', false, $scope.editCompany.id, function () {
               ngModelCtrl.$setValidity('unique', validationResult.value);
               afterValidationCallback()
             });
