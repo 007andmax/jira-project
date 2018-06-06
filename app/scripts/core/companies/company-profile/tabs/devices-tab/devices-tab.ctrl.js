@@ -88,9 +88,8 @@
           }
 
           $scope.agent.iconName = icon || 'workstation';
-
           DevicesService.setNewDeviceLabel(dto, function(resp) {
-            $scope.agent.iconName = icon || 'workstation';
+
           })
         }
 

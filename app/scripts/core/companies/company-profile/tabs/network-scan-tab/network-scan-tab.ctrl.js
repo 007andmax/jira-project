@@ -141,7 +141,7 @@
             }
             return true;
           };
-
+        };
 
         $scope.downloadAgent = function (isWoForm, form) {
           if (isWoForm || form.$valid) {
