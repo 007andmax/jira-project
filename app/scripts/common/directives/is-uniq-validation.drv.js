@@ -21,8 +21,14 @@
             return ngModelCtrl.$viewValue;
           }, validate);
 
-          function validate(newValue, prevValue) {
-            if (newValue && newValue !== prevValue) {
+          scope.$watch(function() {
+            return scope.$parent.userCompany && scope.$parent.userCompany.id;
+          }, function() {
+            validate(ngModelCtrl.$vievValue, ngModelCtrl.$vievValue, true);
+          })
+
+          function validate(newValue, prevValue, forceValidation) {
+            if (newValue && newValue !== prevValue || forceValidation) {
               if (timeoutId) {
                 $timeout.cancel(timeoutId);
               }
