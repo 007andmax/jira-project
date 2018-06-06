@@ -186,8 +186,12 @@
               <!--<p class="ellipsis">BlackHall</p>-->
               <!--</div>-->
               <div class="checkbox-caption">
-                <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
-                  <i class="devices-monitor"></i>
+                <i class="devices-monitor" ng-show="device.iconName === 'device'"></i>
+                <i class="devices-phone" ng-show="device.iconName === 'workstation'"></i>
+                <i class="devices-printer" ng-show="device.iconName === 'printer'"></i>
+                <i class="devices-server" ng-show="device.iconName === 'server'"></i>
+              <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
+
                   <span class="ellipsis"
                         style="display: inline-block; max-width: 400px;"
                         uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"

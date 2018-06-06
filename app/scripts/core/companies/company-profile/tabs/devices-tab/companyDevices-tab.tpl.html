@@ -57,10 +57,37 @@
           <i class="without-device-type"
              ng-style="{'display': !checkAgentType(agent.type) ? 'inline-block' : ''}"></i>
 
-          <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
-          <i class="devices-phone" ng-show="agent.type === 'device'"></i>
-          <i class="devices-printer" ng-show="agent.type === 'printer'"></i>
-          <i class="devices-server" ng-show="agent.type === 'server'"></i>
+          <div uib-dropdown class="icon-dropdown">
+            <div uib-dropdown-toggle>
+              <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
+              <!--ng-click="currentUser.online = !currentUser.online"></i>-->
+              <i class="devices-monitor" ng-show="agent.iconName === 'workstation'"></i>
+              <i class="devices-phone" ng-show="agent.iconName === 'device'"></i>
+              <i class="devices-printer" ng-show="agent.iconName === 'printer'"></i>
+              <i class="devices-server" ng-show="agent.iconName === 'server'"></i>
+
+
+            </div>
+
+            <ul class="dropdown-menu icon-list">
+              <li ng-show="agent.iconName !== 'workstation'">
+                <i class="devices-monitor"
+                   ng-click="saveNewIcon('workstation')"></i>
+              </li>
+              <li ng-show="agent.iconName !== 'device'">
+                <i class="devices-phone"
+                   ng-click="saveNewIcon('device')"></i>
+              </li>
+              <li ng-show="agent.iconName !== 'printer'">
+                <i class="devices-printer"
+                   ng-click="saveNewIcon('printer')"></i>
+              </li>
+              <li ng-show="agent.iconName !== 'server'">
+                <i class="devices-server"
+                   ng-click="saveNewIcon('server')"></i>
+              </li>
+            </ul>
+          </div>
 
           <div style="margin-top: -4px;"
                ng-mouseover="showDeviceLabelEditButtom = true"

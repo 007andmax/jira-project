@@ -79,7 +79,20 @@
           })
         };
 
-        console.log($scope.agent, 'agent')
+        $scope.saveNewIcon = function(icon) {
+          var dto = {
+            agentId: $scope.agent.agentId,
+            companyId: $scope.company.id,
+            newLabelValue: $scope.agent.label || $scope.agent.hostName,
+            iconName: icon
+          }
+
+          $scope.agent.iconName = icon || 'workstation';
+
+          DevicesService.setNewDeviceLabel(dto, function(resp) {
+            $scope.agent.iconName = icon || 'workstation';
+          })
+        }
 
         $scope.cancelNewDeviceLabelEdit = function() {
           $scope.agent.label = $scope.reserveAgentLabelCopy;
