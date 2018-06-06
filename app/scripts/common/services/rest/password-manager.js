@@ -66,7 +66,6 @@
     }
 
       function getAgentsCredentialsForCompany(scope, companyId, callback) {
-        console.log('subscribed for credentials')
         var credentials = {};
         $http.get('/passwordRecords/'+companyId+'/agents/password').then(function(resp){
           credentials = resp.data;

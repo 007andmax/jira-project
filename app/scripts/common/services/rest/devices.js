@@ -509,7 +509,6 @@
       }
 
       function getDevicesCount(scope, callback) {
-        console.log('getDevicesCount', storage.devices)
         if (!scope) {
           throw "scope is required!"
         }
@@ -750,7 +749,6 @@
         });
 
         RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-
           if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
             if (callback) {
               callback(newChange.data);
@@ -792,7 +790,6 @@
         var devices = storage.devices[companyId] || storage.devices;
 
         if (companyId) {
-          console.log(devices, 'HERE I TRY TO RETURN', deviceId)
           return _getDeviceByDeviceId(devices, deviceId);
         } else {
           for (var companyId in devices) {
@@ -1002,9 +999,57 @@
         }
       }
 
-      function getDevicesCredentials(devices, callback) {
-        var future = $http.post('/passwordRecords/devices/password', devices);
-        Utils.handleCallback(future, callback);
+      function getDevicesCredentials(devices, scope, callback) {
+        var credentials = {};
+        $http.post('/passwordRecords/devices/password', devices).then(function(resp) {
+          credentials = resp.data;
+          RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
+            // console.log('credentials have changed', newChange)
+            if (newChange.action === 'PASSWORD_RECORD_CREATED') {
+              var agentId = newChange.data.links[0].deviceId;
+              var credential = {
+                password: newChange.data.password,
+                username: newChange.data.username
+              };
+
+              if (!credentials[agentId]) {
+                credentials.agentId = [credential];
+              } else {
+                credentials[agentId].push(credential);
+              }
+
+            } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
+              // yet to be done
+              // console.log(newChange, "UPDATE")
+
+              // var recordById = Utils.findById(credentials[newChange.data.companyId], newChange.data.id);
+              // if (recordById) {
+              //   var newCredentionalData = {
+              //     is: newChange.data.id,
+              //     password: newChange.data.password,
+              //     username: newChange.data.username
+              //   };
+              //   Utils.customizeObj(newCredentionalData, recordById);
+              // }
+
+            } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
+              // yet to be done
+              // var companyID = Object.keys(credentials)[0];
+              // Utils.deleteById(credentials[companyID], newChange.data.id);
+
+            }
+
+            if (callback) {
+              // console.log('devices credentials has been updated', credentials)
+              callback(credentials);
+            }
+          });
+
+          if (callback) {
+            callback(credentials);
+          }
+        });
+
       }
 
 
