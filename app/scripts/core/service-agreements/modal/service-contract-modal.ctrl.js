@@ -1401,6 +1401,7 @@
             if(Utils.compareDateNowWithDate(serviceContract.startDate)) {
               askCreateBillableItemNow(servContract)
             } else {
+              console.log(servContract, "SERVERS")
               sendContractCreateRequest(servContract, false)
             }
           }
