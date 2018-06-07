@@ -1004,12 +1004,12 @@
         $http.post('/passwordRecords/devices/password', devices).then(function(resp) {
           credentials = resp.data;
           RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
-            // console.log('credentials have changed', newChange)
             if (newChange.action === 'PASSWORD_RECORD_CREATED') {
               var agentId = newChange.data.links[0].deviceId;
               var credential = {
                 password: newChange.data.password,
-                username: newChange.data.username
+                username: newChange.data.username,
+                id: newChange.data.id
               };
 
               if (!credentials[agentId]) {
@@ -1020,14 +1020,12 @@
 
             } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
               var agentId = newChange.data.links[0].deviceId;
-
-              // console.log(newChange, 'newCHange')
               var recordIndex = credentials[agentId].findIndex(function(el) {
                 return el.id === newChange.data.id;
               })
 
               if (recordIndex !== -1) {
-                // console.log('updated!!!')
+
                 credentials[agentId][recordIndex] = {
                   id: newChange.data.id,
                   password: newChange.data.password,
