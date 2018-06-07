@@ -140,7 +140,7 @@
           $scope.companyInfo.workingDays = [];
           for (var i = 0; i < 7; i++) {
             var day = {};
-            if (!$scope.workingDays[i].isWorkingDay || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+            if (!$scope.workingDays[i].isWorkingDay || (!$scope.workingDays[i].startTime && !$scope.workingDays[i].endTime)) {
               day = {
                 dayOfWeek: $scope.workingDays[i].dayOfWeek,
                 startTime: 0,
@@ -162,11 +162,18 @@
 
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
           if (objectTime && objectTimeFormat) {
-            // var separateTime = objectTime.split(':');
-            // var hours = parseInt(separateTime[0]);
-            // var minutes = parseInt(separateTime[1]);
-            var hours = Math.floor(objectTime / 60);
-            var minutes = objectTime % 60;
+            // console.log(objectTime, objectTimeFormat, '*******________**********  ');
+            var hours, minutes, separateTime;
+
+            if (typeof objectTime === 'string') {
+              separateTime = objectTime.split(':');
+              hours = parseInt(separateTime[0]);
+              minutes = parseInt(separateTime[1]);
+            } else {
+              hours = Math.floor(objectTime / 60);
+              minutes = objectTime % 60;
+            }
+
             return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
           }
         }
@@ -180,7 +187,7 @@
               startTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
               endTime: timeFormatter($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
               endTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
-              isWorkingDay: ($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 && $scope.companyInfo.workingDays[i].startTime > 0 && $scope.companyInfo.workingDays[i].endTime > 0) ? true : false
+              isWorkingDay: ($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 && ($scope.companyInfo.workingDays[i].startTime || $scope.companyInfo.workingDays[i].endTime)) ? true : false
             };
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
@@ -204,7 +211,7 @@
           if (time && time > 0) {
 
             var timeInHour = time / 3600;
-            if (timeInHour < 12) {
+            if (timeInHour <= 12) {
               return 'AM';
             } else {
               return 'PM';
@@ -393,5 +400,20 @@
 
 
       }]);
+
+      angular.module("quicktech.core.companies").filter('timeFilter',
+        [function () {
+          return function (time) {
+            if (typeof time === 'string') return time;
+
+            var hours = Math.floor(time / 60) + '';
+            var minutes = time % 60 + '';
+
+            if (hours.length === 1) hours = '0' + hours;
+            if (minutes.length === 1) minutes = '0' + minutes;
+
+            return hours + ':' + minutes;
+          };
+        }]);
 
 }());
