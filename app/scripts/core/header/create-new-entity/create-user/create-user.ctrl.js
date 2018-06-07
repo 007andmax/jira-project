@@ -186,10 +186,14 @@
         };
 
         $scope.validateUserEmail = function (ngModelCtrl, modelId, afterValidationCallback) {
-          var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id || '', false, function () {
-            ngModelCtrl.$setValidity('unique', validationResult.value);
-            afterValidationCallback();
-          });
+          if ($scope.userCompany && $scope.userCompany.id) {
+            var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id || '', false, $scope.userCompany.id, function () {
+              console.log('set unique', validationResult.value)
+              ngModelCtrl.$setValidity('unique', validationResult.value);
+              afterValidationCallback();
+            });
+          }
+
         };
 
         $scope.changeConfirmPass = function (form) {

@@ -942,6 +942,17 @@
   top: -2px;
 }
 
+.top-product-list-ticket.sticky {
+  background-color: #F3F7F9;
+  position: relative;
+  z-index: 100;
+
+}
+
+.top-product-list-ticket.sticky.shown {
+  display: block;
+}
+
 .top-product-list-ticket {
   font-size: 12px;
 }

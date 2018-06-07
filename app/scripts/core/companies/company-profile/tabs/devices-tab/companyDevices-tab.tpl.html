@@ -280,7 +280,9 @@
           <ul class="dropdown-menu" role="menu">
             <li><a ng-click="restart()">Restart</a></li>
             <li><a ng-click="shutdown()">Shutdown</a></li>
+            <li ng-show="!agent.master"><a ng-click="markDeviceAsMaster()">Mark as master</a></li>
             <li><a ng-click="remove()">Remove</a></li>
+
           </ul>
         </div>
       </div>

@@ -474,15 +474,26 @@
         return info;
       }
 
-      function isEmailUnique(email, id, isTechUser, callback) {
+      function isEmailUnique(email, id, isTechUser, companyId, callback) {
 
         if (!email) {
           throw 'email is required!'
         }
 
-        var info = Utils.customizeObj({});
+        var isCompanyId = (typeof companyId === 'function' ? false : companyId);
 
-        $http.get('/users/isEmailUnique?email=' + email + '&id=' + id + '&isTechUser=' + isTechUser).then(function (resp) {
+        if (!isCompanyId) {
+          callback = companyId;
+        }
+
+        var info = Utils.customizeObj({});
+        var url = '/users/isEmailUnique?email=' + email + '&id=' + id + '&isTechUser=' + isTechUser;
+
+        if (isCompanyId) {
+          url += '&companyId=' + isCompanyId;
+        }
+
+        $http.get(url).then(function (resp) {
           Utils.customizeObj(resp.data, info);
 
           if (callback) {
