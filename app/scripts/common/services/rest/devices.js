@@ -1019,28 +1019,35 @@
               }
 
             } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
-              // yet to be done
-              // console.log(newChange, "UPDATE")
+              var agentId = newChange.data.links[0].deviceId;
 
-              // var recordById = Utils.findById(credentials[newChange.data.companyId], newChange.data.id);
-              // if (recordById) {
-              //   var newCredentionalData = {
-              //     is: newChange.data.id,
-              //     password: newChange.data.password,
-              //     username: newChange.data.username
-              //   };
-              //   Utils.customizeObj(newCredentionalData, recordById);
-              // }
+              // console.log(newChange, 'newCHange')
+              var recordIndex = credentials[agentId].findIndex(function(el) {
+                return el.id === newChange.data.id;
+              })
+
+              if (recordIndex !== -1) {
+                // console.log('updated!!!')
+                credentials[agentId][recordIndex] = {
+                  id: newChange.data.id,
+                  password: newChange.data.password,
+                  username: newChange.data.username
+                }
+              }
 
             } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
-              // yet to be done
-              // var companyID = Object.keys(credentials)[0];
-              // Utils.deleteById(credentials[companyID], newChange.data.id);
+              var agents = Object.keys(credentials);
+
+              for (var i = 0; i < agents.length; i++) {
+                credentials[agents[i]] = credentials[agents[i]].filter(function(el) {
+                  return el.id !== newChange.data.id;
+                })
+              }
 
             }
 
             if (callback) {
-              // console.log('devices credentials has been updated', credentials)
+              // console.log('devices credentials has been updated', credentials, newChange.action)
               callback(credentials);
             }
           });
