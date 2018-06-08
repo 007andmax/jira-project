@@ -130,6 +130,11 @@
               rightPanelSharedState.companyId = id;
               CompaniesService.getCompanyData($scope, id, companyDataRequestCallback);
 
+              $rootScope.changeTicketCompany = {
+                id: ticket.id,
+                companyId: id
+              }
+
               TicketsService.save(editedTicket, function(resp) {
                 console.log(resp, 'RESP')
               })
