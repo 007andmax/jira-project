@@ -871,7 +871,7 @@
 
             for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {
-                name: $scope.blockTimeContract.blockTimeServices[i].name,
+                name: $scope.blockTimeContract.blockTimeServices[i].name.name || $scope.blockTimeContract.blockTimeServices[i].name,
                 rate: contractData.rateExceeding
               };
               blockContract.blockTimeServices.push(bs);
@@ -879,13 +879,13 @@
 
             for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
               var cs = {
-                name: $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name.name,
+                name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
                 rate: 0
               };
               if($scope.blockTimeContract.services[m].billable) {
-                cs.rate = $scope.blockTimeContract.services[m].rate
+                cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
                 if ($scope.blockTimeContract.services[m].taxes.length) {
                   for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
                     cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
