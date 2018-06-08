@@ -21,10 +21,29 @@
                 </strong>
                 <strong ng-if="!company.isDefault">
                   <span class="dot-sep"></span>
-                  <span class="company-name" qt-popover-position="bottom"
+                  <!-- <span class="company-name" qt-popover-position="bottom"
                         qt-custom-popover-template="/html/scripts/core/tickets/popup-templates/company-info-popup.tpl.html">
                     <span qt-popover-trigger="mouseenter">{{ company.name }}</span>
-                  </span>
+                  </span> -->
+                  <span class="company-name" ng-show="!isEmail">{{ company.name }}</span>
+                  <div style="display: inline-block" uib-dropdown class="companies-dropdown" ng-show="isEmail">
+                   <div uib-dropdown-toggle>
+                     <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
+                     <!--ng-click="currentUser.online = !currentUser.online"></i>-->
+                     <span>{{ company.name }}</span>
+
+
+                   </div>
+
+                   <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+                     <li ng-repeat="item in userCompanies" ng-click="setUserCompany(item.id)">
+                       <!-- <span>{{ userCompany.name }}</span> -->
+                        <span>{{ item.name }}</span>
+                     </li>
+
+
+                   </ul>
+                 </div>
                 </strong>
               </div>
               <div class="ticket-header-status pull-left">
