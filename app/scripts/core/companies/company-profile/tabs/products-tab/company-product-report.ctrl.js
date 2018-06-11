@@ -172,6 +172,7 @@
         function separateEmpty(array, prop) {
           var toSort = [];
           var result = [];
+          var reverse;
 
           for (var i = 0; i < array.length; i++) {
             var el = array[i];
@@ -182,8 +183,10 @@
               toSort.push(el);
             }
           }
+          //check for numbers
+          reverse = (+toSort[0][prop] == toSort[0][prop]) ? !$scope.reverse : $scope.reverse;
 
-          toSort = $filter('orderBy')(toSort, prop, $scope.reverse);
+          toSort = $filter('orderBy')(toSort, prop, reverse);
 
           toSort.forEach(function(el) {
             result.push(el);
