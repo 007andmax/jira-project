@@ -755,8 +755,7 @@
 
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
 
-        // changeTicketsCounts(); //realtime ticket counts change
-        console.log('im hederasdasdsadsadad **************************************************', newChange)
+        changeTicketsCounts(); //realtime ticket counts change
 
         if (newChange.data && newChange.data.number) {
           newChange.data.number = numberPrefix + newChange.data.number;
