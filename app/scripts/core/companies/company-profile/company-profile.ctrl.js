@@ -112,7 +112,6 @@
         }
 
 
-
         function userReadable(text) {
           if (!text) {
             return '';
