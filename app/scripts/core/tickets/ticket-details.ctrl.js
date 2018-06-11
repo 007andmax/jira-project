@@ -75,17 +75,17 @@
 
             var unreadUpdatesId = [];
 
-            $scope.isEmail = $scope.ticketDetails.ticketSource === 'FROM_EMAIL' || true;
+            $scope.isEmail = $scope.ticketDetails.ticketSource === 'FROM_EMAIL';
 
             // console.log(CompaniesService.getAllCompanies())
 
-            $scope.companyScope = [
-              "52dfe577-a8ac-4eb7-8a9f-0fed029c6ce1",
-              "c7cccdb1-e8bd-41d3-9b83-c8d188266ed8",
-              "36d5bfd5-b856-42be-aa20-b3babd17a8f5",
-              "fdadb2df-ed3d-4e28-b41e-741617b7ffa6",
-              "844061ac-7570-433c-9dcb-3663ebf0725e"
-            ]
+            // $scope.companyScope = [
+            //   "52dfe577-a8ac-4eb7-8a9f-0fed029c6ce1",
+            //   "c7cccdb1-e8bd-41d3-9b83-c8d188266ed8",
+            //   "36d5bfd5-b856-42be-aa20-b3babd17a8f5",
+            //   "fdadb2df-ed3d-4e28-b41e-741617b7ffa6",
+            //   "844061ac-7570-433c-9dcb-3663ebf0725e"
+            // ]
 
             if ($scope.isEmail) {
               setUserCompanies();
@@ -104,7 +104,7 @@
               //       name: cmpData
               //     }
               //   })
-              $scope.userCompanies = $scope.companyScope.map(function(id) {
+              $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
                   var cmpData = CompaniesService.getOneById(id);
 
                   return {
