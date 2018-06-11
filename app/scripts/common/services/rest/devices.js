@@ -1005,33 +1005,41 @@
           credentials = resp.data;
           RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
             if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-              var agentId = newChange.data.links[0].deviceId;
-              var credential = {
-                password: newChange.data.password,
-                username: newChange.data.username,
-                id: newChange.data.id
-              };
+              var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
 
-              if (!credentials[agentId]) {
-                credentials.agentId = [credential];
-              } else {
-                credentials[agentId].push(credential);
-              }
-
-            } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
-              var agentId = newChange.data.links[0].deviceId;
-              var recordIndex = credentials[agentId].findIndex(function(el) {
-                return el.id === newChange.data.id;
-              })
-
-              if (recordIndex !== -1) {
-
-                credentials[agentId][recordIndex] = {
-                  id: newChange.data.id,
+              if (agentId) {
+                var credential = {
                   password: newChange.data.password,
-                  username: newChange.data.username
+                  username: newChange.data.username,
+                  id: newChange.data.id
+                };
+
+                if (!credentials[agentId]) {
+                  credentials.agentId = [credential];
+                } else {
+                  credentials[agentId].push(credential);
                 }
               }
+
+
+            } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
+              var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
+
+              if (agentId) {
+                var recordIndex = credentials[agentId].findIndex(function(el) {
+                  return el.id === newChange.data.id;
+                })
+
+                if (recordIndex !== -1) {
+
+                  credentials[agentId][recordIndex] = {
+                    id: newChange.data.id,
+                    password: newChange.data.password,
+                    username: newChange.data.username
+                  }
+                }
+              }
+
 
             } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
               var agents = Object.keys(credentials);
