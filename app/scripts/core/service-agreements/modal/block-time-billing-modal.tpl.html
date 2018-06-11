@@ -290,10 +290,10 @@
                     <input tooltip-placement="top"
                            type="text" class="form-control has-dropdown"
                            name="contractService.name" autocomplete="off"
-                           autocomplete-service-item="contractService.name.name"
-                           ng-model="contractService.name.name" service-list="defaultServicesForDropdown"
+                           autocomplete-service-item="contractService.name"
+                           ng-model="contractService.name" service-list="defaultServicesForDropdown"
                            autocomplete-service-list uib-dropdown-toggle smart-dropdown-menu-position="service-list"
-                           entity="contractService.name.name" hard-reset-pattern="descriptionPattern"
+                           entity="contractService.name" hard-reset-pattern="descriptionPattern"
                            invalid-when="!isNameUnique(contractService)"/>
                     <i class="icn-sm icn-caret-gray"></i>
                     <div class="service-list-container"></div>
@@ -396,7 +396,7 @@
 
                     <input type="text"
                            name="newContractServiceName"
-                           ng-model="newContractService.name.name"
+                           ng-model="newContractService.name"
                            ng-minlength="1"
                            autocomplete="off"
                            placeholder="Service"

@@ -285,6 +285,12 @@
           chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate);
         });
 
+        $scope.$watch(function () {
+          return $scope.newContractService.name.rate
+        }, function () {
+          $scope.newContractService.name.rate = $filter('number')($scope.newContractService.name.rate, 2);
+        });
+
         // $scope.changeNumOfIntervals = function(newEndDate) {
         //   chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate)
         // }
@@ -607,6 +613,8 @@
                         taxes: service.taxes,
                         nameValue: service.name.name
                       };
+
+                      console.log(service, 'SERVICES')
                       $scope.blockTimeContract.services.push(ns);
                       $scope.newContractService = {
                         name: '',

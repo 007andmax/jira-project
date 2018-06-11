@@ -551,6 +551,12 @@
           changeStartDate()
         });
 
+        $scope.$watch(function () {
+          return $scope.newService.name.rate
+        }, function () {
+          $scope.newService.name.rate = $filter('number')($scope.newService.name.rate, 2);
+        });
+
 
         ServicesService.getServicesData($scope, function (data) {
           for (var i = 0; i < data.length; i++) {
