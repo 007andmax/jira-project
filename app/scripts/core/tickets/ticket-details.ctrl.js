@@ -127,16 +127,17 @@
                 note: ticket.note,
                 companyId: id
               };
+
+              var oldCompanyId = $scope.ticketDetails.company.id || $scope.ticketDetails.companyId;
               rightPanelSharedState.companyId = id;
               CompaniesService.getCompanyData($scope, id, companyDataRequestCallback);
 
-              $rootScope.changeTicketCompany = {
-                id: ticket.id,
-                companyId: id
-              }
-
               TicketsService.save(editedTicket, function(resp) {
-                console.log(resp, 'RESP')
+                $rootScope.changeTicketCompany = {
+                  id: ticket.id,
+                  companyId: id,
+                  oldCompanyId: oldCompanyId
+                }
               })
 
               // $scope.saveEditedTicket = function (form) {

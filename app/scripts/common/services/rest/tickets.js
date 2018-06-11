@@ -227,6 +227,8 @@
 
           var query = queries[listType.toUpperCase()];
 
+          console.log('IM FETCHING TICKETS')
+
           if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId) {
             var groupedQuery = {
               excludeTrashSpam: true,
@@ -540,7 +542,6 @@
         RealTimeService.subscribe('/leftPanelCountsCompany/'+companyId, scope, function (newChange) {
           if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
             Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
-            //console.log(newChange);
             //callback && callback(storage.ticketsQuantityMapByCompany)
           }
         });
@@ -549,7 +550,6 @@
       }
 
       function getCompanyTicketCount(query) {
-
         $http.post('/v2/tickets/counts', {COUNT: query}).then(function(resp) {
           if(resp) {
             globalSearch.count = resp.data.COUNT;
@@ -755,7 +755,8 @@
 
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
 
-        changeTicketsCounts(); //realtime ticket counts change
+        // changeTicketsCounts(); //realtime ticket counts change
+        console.log('im hederasdasdsadsadad **************************************************', newChange)
 
         if (newChange.data && newChange.data.number) {
           newChange.data.number = numberPrefix + newChange.data.number;
@@ -780,6 +781,8 @@
           storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
 
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
+          var isUpdate = newChange.action === 'EDITED_TICKET';
+          var global = globalSearch.count;
 
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.customizeObj(newChange.data, storage.openedTicket);
@@ -791,13 +794,16 @@
               Utils.customizeObj(newChange.data, ticketById);
             } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
               storage.ticketsQuantity++;
+              global++;
             }
 
           } else if (ticketById) {
             storage.tickets.splice(ticketIndex, 1);
             storage.ticketsQuantity--;
+            global--;
           }
-          storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
+
+          storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(isUpdate ? global : storage.ticketsQuantity);
 
         } else if (newChange.action === 'READ') {
           if (ticketById) {
@@ -1124,7 +1130,8 @@
         save: saveEditedTicket,
         updateDiscount: updateDiscount,
         getAllCounts: getAllCounts,
-        getAllCountsByCompanyId: getAllCountsByCompanyId
+        getAllCountsByCompanyId: getAllCountsByCompanyId,
+        getCompanyTicketCount: getCompanyTicketCount
       }
 
     }

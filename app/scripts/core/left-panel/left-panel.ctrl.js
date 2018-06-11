@@ -1021,10 +1021,7 @@
         }, function (companyId) {
           if (companyId) {
             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
-            TicketsService.getAllCountsByCompanyId($scope, companyId, function (resp) {
-              $scope.ticketsCounterByCompany = resp;
-              companyProfileSharedState.ticketsCounts = resp;
-            });
+            TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
             $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId, function (resp) {
               $scope.companyForCompanyProfile = resp;
             });
@@ -1033,6 +1030,23 @@
             })
           }
         })
+
+        $scope.$watch(function() {
+          return $rootScope.changeTicketCompany;
+        }, function(val) {
+          if (val) {
+            var id = companyProfileSharedState.companyId
+            if (id === val.oldCompanyId || id === val.companyId) {
+              TicketsService.getAllCountsByCompanyId($scope, id, ticketCounterCallback);
+            }
+          }
+        })
+
+        function ticketCounterCallback(resp) {
+          $scope.ticketsCounterByCompany = resp;
+          companyProfileSharedState.ticketsCounts = resp;
+        }
+
 
       }]);
 

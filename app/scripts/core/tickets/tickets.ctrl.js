@@ -59,6 +59,14 @@
           }
         }, true);
 
+        $scope.$watch(function() {
+          return $rootScope.changeTicketCompany;
+        }, function(val) {
+          if (val) {
+            // TicketsService.getCompanyTicketCount();
+          }
+        })
+
         $scope.linkAgent = function (ticketId, agentId) {
           TicketsService.changeLinkedAgent(ticketId, agentId);
         };
