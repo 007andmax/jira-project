@@ -285,11 +285,6 @@
           chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate);
         });
 
-        $scope.$watch(function () {
-          return $scope.newContractService.name.rate
-        }, function () {
-          $scope.newContractService.name.rate = $filter('number')($scope.newContractService.name.rate, 2);
-        });
 
         // $scope.changeNumOfIntervals = function(newEndDate) {
         //   chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate)
@@ -614,7 +609,7 @@
                         nameValue: service.name.name
                       };
 
-                      console.log(service, 'SERVICES')
+
                       $scope.blockTimeContract.services.push(ns);
                       $scope.newContractService = {
                         name: '',
@@ -814,7 +809,7 @@
         };
         $scope.showNotAddedBlockAdditionalServiceError = function(service) {
           if($scope.blockTimeContract.billForAdditionalService && service) {
-            return (service.name && service.name.name.length && $scope.notAddedBlockAdditionalServiceError)
+            return (service.name && service.name.name && service.name.name.length && $scope.notAddedBlockAdditionalServiceError)
           }
         };
 
@@ -940,8 +935,6 @@
 
           function sendContractCreateRequest(blockContract, createBillableItem) {
             AgreementsService.createContract(blockContract, createBillableItem, function (resp) {
-              console.log(resp);
-              console.log(blockContract, 'DATA')
               if (resp.message === 'Validation failed') {
                 $scope.showValidationFailMessage = true;
                 $scope.BlockTimeContractCreateMessage = 'Something went wrong, please try again later and contact administrator';

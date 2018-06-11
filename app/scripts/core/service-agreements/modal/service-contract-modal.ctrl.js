@@ -551,11 +551,6 @@
           changeStartDate()
         });
 
-        $scope.$watch(function () {
-          return $scope.newService.name.rate
-        }, function () {
-          $scope.newService.name.rate = $filter('number')($scope.newService.name.rate, 2);
-        });
 
 
         ServicesService.getServicesData($scope, function (data) {
@@ -1402,12 +1397,9 @@
               }
             }
 
-            console.log(servContract);
-
             if(Utils.compareDateNowWithDate(serviceContract.startDate)) {
               askCreateBillableItemNow(servContract)
             } else {
-              console.log(servContract, "SERVERS")
               sendContractCreateRequest(servContract, false)
             }
           }
@@ -1424,7 +1416,6 @@
 
           function sendContractCreateRequest(servContract, createBillableItem) {
             AgreementsService.createContract(servContract, createBillableItem, function (resp) {
-              console.log(resp);
               if (resp.message === 'Validation failed') {
                 showCreateErrorWithTimeout()
               } else {
