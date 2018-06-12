@@ -13,7 +13,7 @@
         $scope.daysOfWeek = daysOfWeek;
         $scope.daysOfWeekMap = {
           MONDAY: 'Monday',
-          TUESDAY: 'Thursday',
+          TUESDAY: 'Tuesday',
           WEDNESDAY: 'Wednesday',
           THURSDAY: 'Thursday',
           FRIDAY: 'Friday',

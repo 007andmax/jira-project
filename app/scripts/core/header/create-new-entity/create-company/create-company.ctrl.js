@@ -20,7 +20,7 @@
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeekMap = {
           MONDAY: 'Monday',
-          TUESDAY: 'Thursday',
+          TUESDAY: 'Tuesday',
           WEDNESDAY: 'Wednesday',
           THURSDAY: 'Thursday',
           FRIDAY: 'Friday',
