@@ -576,7 +576,7 @@
         var companyId = returnCompanyId();
         var serviceNamesList = [];
         for (var i = 0; i < $scope.editContract.services.length; i++) {
-          serviceNamesList.push($scope.editContract.services[i].name);
+          serviceNamesList.push(checkNameForObject($scope.editContract.services[i].name));
         }
         ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, function (resp) {
           if (Object.keys(resp).length === 0) {
@@ -590,6 +590,14 @@
           }
         });
         return deferred.promise;
+      }
+
+      function checkNameForObject(name) {
+        if (typeof name === 'object') {
+          return name.name;
+        } else {
+          return name;
+        }
       }
 
       function validateNewServiceName(editService) {
@@ -792,7 +800,7 @@
 
       $scope.terminateAndCopy = function () {
         AgreementsService.terminate($scope.editContract.id, function (resp) {
-          console.log(resp);
+          console.log(resp, 'terminate and copy');
           $scope.editContract.description = $scope.editContract.description + ' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;

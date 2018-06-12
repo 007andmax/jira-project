@@ -817,7 +817,7 @@
                      name="newServiceRate"
                      type="text"
                      class="form-control"
-                     ng-model="newService.name.rate | number: 2"
+                     ng-model="newService.name.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
             <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newService.billable ? 'visible' : 'hidden'}">
@@ -880,4 +880,3 @@
 <div class="service-agreement-modal" ng-show="!editMode">
   <div ng-include="'/html/scripts/core/service-agreements/modal/service-contract-preview-modal.tpl.html'"></div>
 </div>
-
