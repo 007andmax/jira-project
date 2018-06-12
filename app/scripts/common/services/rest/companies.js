@@ -418,7 +418,10 @@
 
         if (newChange.action == 'COMPANY_DTO_CHANGED') {
 
+
+
           var data = JSON.parse(newChange.data);
+
           if (data[companyId]) {
             Utils.customizeObj(data[companyId], companyDto);
 
