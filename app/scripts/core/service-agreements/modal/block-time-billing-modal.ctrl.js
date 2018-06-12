@@ -66,6 +66,8 @@
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
 
+        console.log($scope, 'AFTER TERMINATIO')
+
 
         if ($scope.editMode) {
           $scope.blockTimeContract = {
@@ -882,7 +884,7 @@
 
             for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
               var cs = {
-                name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue,
+                name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
                 rate: 0

@@ -800,7 +800,7 @@
 
       $scope.terminateAndCopy = function () {
         AgreementsService.terminate($scope.editContract.id, function (resp) {
-          console.log(resp);
+          console.log(resp, 'terminate and copy');
           $scope.editContract.description = $scope.editContract.description + ' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;
