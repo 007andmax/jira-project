@@ -5734,6 +5734,31 @@ Devices tab
   background-color: #2ec866;
 }
 
+.company-device-name .dropdown-toggle:hover {
+  cursor: pointer;
+}
+
+.company-device-name .dropdown-menu.icon-list {
+  min-width: 50px;
+  max-height: none;
+  overflow-y: visible;
+}
+
+.company-device-name .dropdown-menu.icon-list li:before {
+  background: none !important;
+}
+
+.company-device-name .dropdown-menu.icon-list li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.company-device-name .dropdown-menu.icon-list li i {
+  margin: 0;
+}
+
 .company-device-name i {
   width: 20px;
   height: 20px;

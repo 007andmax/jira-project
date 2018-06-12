@@ -930,6 +930,7 @@
                   storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
                   storage.devices[companyId][i].label = resp.data[companyId][i].label;
                   storage.devices[companyId][i].OneTimeConnectionData = [];
+                  storage.devices[companyId][i].iconName = resp.data[companyId][i].iconName
                   storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
                   if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
                     for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
@@ -976,7 +977,7 @@
         // “newLabelValue”:””
         // }
 
-        var future = $http.post('/devices/editAgentLabel', dto);
+        var future = $http.post('/devices/editAgentInfo', dto);
         Utils.handleCallback(future, callback);
       }
 
