@@ -75,17 +75,107 @@
 
             var unreadUpdatesId = [];
 
+            $scope.isEmail = $scope.ticketDetails.ticketSource === 'FROM_EMAIL';
+
+            // console.log(CompaniesService.getAllCompanies())
+
+            // $scope.companyScope = [
+            //   "52dfe577-a8ac-4eb7-8a9f-0fed029c6ce1",
+            //   "c7cccdb1-e8bd-41d3-9b83-c8d188266ed8",
+            //   "36d5bfd5-b856-42be-aa20-b3babd17a8f5",
+            //   "fdadb2df-ed3d-4e28-b41e-741617b7ffa6",
+            //   "844061ac-7570-433c-9dcb-3663ebf0725e"
+            // ]
+
+            if ($scope.isEmail) {
+              setUserCompanies();
+            }
+
+            function setUserCompanies() {
+              // $scope.userCompanies = $scope.ticketDetails.userCompanies
+              //   .filter(function(id) {
+              //     return id !== $scope.company.id;
+              //   })
+              //   .map(function(id) {
+              //     var cmpData = CompanyService.getOnyById(id);
+              //
+              //     return {
+              //       id: id,
+              //       name: cmpData
+              //     }
+              //   })
+              $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
+                  var cmpData = CompaniesService.getOneById(id);
+
+                  return {
+                    id: id,
+                    name: cmpData.name
+                  }
+                })
+            }
+
+
+
+            $scope.setUserCompany = function(id) {
+              console.log(id, $scope.editedTicket)
+
+              var ticket = $scope.ticketDetails;
+
+              var editedTicket = {
+                id: ticket.id,
+                subject: ticket.subject,
+                note: ticket.note,
+                companyId: id
+              };
+
+              var oldCompanyId = $scope.ticketDetails.company.id || $scope.ticketDetails.companyId;
+              rightPanelSharedState.companyId = id;
+              CompaniesService.getCompanyData($scope, id, companyDataRequestCallback);
+
+              TicketsService.save(editedTicket, function(resp) {
+                $rootScope.changeTicketCompany = {
+                  id: ticket.id,
+                  companyId: id,
+                  oldCompanyId: oldCompanyId
+                }
+              })
+
+              // $scope.saveEditedTicket = function (form) {
+              //   if (form.$valid) {
+              //     $scope.disabledSaveButton = true;
+              //     $scope.tryToSaveTicket = false;
+              //     $scope.editedTicket.note = $scope.editedTicket.note || '';
+              //     TicketsService.save($scope.editedTicket, function () {
+              //       $scope.editingTicket = false;
+              //     })
+              //   } else {
+              //     $scope.tryToSaveTicket = true;
+              //   }
+              // };
+            }
+
             $scope.currentOpenTab = $scope.currentOpenTab || 'NOTE';
 
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
-            CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, function (resp) {
+            CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, companyDataRequestCallback);
+
+
+            function companyDataRequestCallback(resp) {
               $scope.company = resp;
               $scope.company.isDefault = $scope.ticketDetails.company.isDefault;
               $scope.companyAddress = resp.addresses[0] || {};
+
+              if ($scope.isEmail) {
+                setUserCompanies();
+                $scope.userCompanies = $scope.userCompanies.filter(function(cmp) {
+                  return cmp.id !== resp.id;
+                })
+              }
+
               if ($scope.companyAddress.phoneNumbers && $scope.companyAddress.phoneNumbers.length) {
                 $scope.companyPhoneNumber = $scope.companyAddress.phoneNumbers[0].number;
               }
-            });
+            }
 
             if ($scope.ticketDetails.assignPerformer && $scope.ticketDetails.assignPerformer.id) {
               $scope.assignPerformer = UsersService.getOneById($scope.ticketDetails.assignPerformer.id);
@@ -737,4 +827,3 @@
         }]);
   }()
 );
-

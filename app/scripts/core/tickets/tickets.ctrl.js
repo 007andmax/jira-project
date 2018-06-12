@@ -5,9 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService',
+      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$rootScope',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $rootScope) {
 
         var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
@@ -59,7 +59,13 @@
           }
         }, true);
 
-
+        $scope.$watch(function() {
+          return $rootScope.changeTicketCompany;
+        }, function(val) {
+          if (val) {
+            // TicketsService.getCompanyTicketCount();
+          }
+        })
 
         $scope.linkAgent = function (ticketId, agentId) {
           TicketsService.changeLinkedAgent(ticketId, agentId);

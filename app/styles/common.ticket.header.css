@@ -136,8 +136,24 @@
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
+
+
+.companies-dropdown .dropdown-toggle {
+  cursor: pointer;
+}
+
+.companies-dropdown .dropdown-menu li {
+  padding: 5px 10px;
+}
+
+.companies-dropdown .dropdown-menu li:hover {
+  cursor: pointer;
+}
+
+
+
 
 .ticket-header-status {
   margin-top: 2px;
@@ -213,4 +229,3 @@
     width: calc(100% - 656px);
   }
 }
-
