@@ -143,6 +143,7 @@
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
+          $rootScope.updateTimePickers = true;
           $timeout(function () {
             UserNotificationService.hide();
           }, 0);

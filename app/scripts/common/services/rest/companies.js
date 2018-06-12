@@ -418,7 +418,11 @@
 
         if (newChange.action == 'COMPANY_DTO_CHANGED') {
 
+
+
           var data = JSON.parse(newChange.data);
+
+          console.log('*************', data)
           if (data[companyId]) {
             Utils.customizeObj(data[companyId], companyDto);
 
@@ -688,6 +692,7 @@
       return Utils.getListByUrl('/company/' + companyId + '/contacts', callback, function (list) {
 
         RealTimeService.subscribe('/companyContact', scope, function (newChange) {
+          console.log("HERe I AM")
 
           if (newChange.action == 'COMPANY_CONTACT') {
             list.splice(0, list.length);
@@ -696,6 +701,8 @@
         });
 
         RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
+
+          console.log('no, here i am, fuck you')
 
           if (!newChange.data.contact) {
             return;

@@ -213,14 +213,29 @@
         function getCorrectWorkingTime() {
           $scope.workingDays = [];
           for (var i = 0; i < 7; i++) {
-            var day = {
-              dayOfWeek: daysOfWeek[i],
-              startTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
-              startTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
-              endTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
-              endTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
-              isWorkingDay: ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && ($scope.editCompany.workingDays[i].startTime || $scope.editCompany.workingDays[i].endTime)) ? true : false
-            };
+            var isWorkingDay = ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && ($scope.editCompany.workingDays[i].startTime || $scope.editCompany.workingDays[i].endTime)) ? true : false;
+            var day;
+
+            if (isWorkingDay) {
+              day = {
+                startTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
+                startTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
+                endTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
+                endTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
+
+              };
+            } else {
+              day = {
+                startTime: timeFormatter(28800),
+                startTimeFormat: 'AM',
+                endTime: timeFormatter(21600),
+                endTimeFormat: 'PM'
+              }
+            }
+
+            day.dayOfWeek = daysOfWeek[i];
+            day.isWorkingDay = isWorkingDay;
+
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
           }
