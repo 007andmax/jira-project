@@ -678,13 +678,13 @@
                        name="serviceName"
                        autocomplete="off"
                        autocomplete-service-item="service.name"
-                       ng-model="service.name"
+                       ng-model="service.nameValue"
                        service-list="defaultServicesAdditionalForDropDown"
                        autocomplete-service-list smart-dropdown-menu-position="service-list"
                        uib-dropdown-toggle
                        entity="service.nameValue"
                        hard-reset-pattern="descriptionPattern"
-                       invalid-when="!isAdditionalServiceNameUnique(service.name)" required/>
+                       invalid-when="!isAdditionalServiceNameUnique(service.nameValue)" required/>
                 <i class="icn-sm icn-caret-gray"></i>
                 <div class="service-list-container"></div>
 

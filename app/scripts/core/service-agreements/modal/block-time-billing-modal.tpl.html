@@ -289,12 +289,12 @@
 
                     <input tooltip-placement="top"
                            type="text" class="form-control has-dropdown"
-                           name="contractService.name" autocomplete="off"
+                           name="contractService" autocomplete="off"
                            autocomplete-service-item="contractService.name"
-                           ng-model="contractService.name" service-list="defaultServicesForDropdown"
+                           ng-model="contractService.nameValue" service-list="defaultServicesForDropdown"
                            autocomplete-service-list uib-dropdown-toggle smart-dropdown-menu-position="service-list"
-                           entity="contractService.name" hard-reset-pattern="descriptionPattern"
-                           invalid-when="!isNameUnique(contractService)"/>
+                           entity="contractService.nameValue" hard-reset-pattern="descriptionPattern"
+                           invalid-when="!isNameUnique(contractService.nameValue)"/>
                     <i class="icn-sm icn-caret-gray"></i>
                     <div class="service-list-container"></div>
 

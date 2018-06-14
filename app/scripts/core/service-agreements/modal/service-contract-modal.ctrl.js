@@ -597,6 +597,10 @@
           }, 4000);
         }
 
+        $scope.console = function(val) {
+          console.log(val);
+        }
+
         function showErrorNewSCSValidationTimeOut() {
           $scope.showNewServiceContractServiceValidationError = true;
           $timeout(function () {
@@ -895,7 +899,7 @@
             } else {
               if ($scope.serviceContract.serviceContractServices.length > 0) {
                 for (var n = 0; n < $scope.serviceContract.serviceContractServices.length; n++) {
-                  if ($scope.serviceContract.serviceContractServices[n].name === name) {
+                  if (checkNameForObject($scope.serviceContract.serviceContractServices[n].name) === name) {
                     check = false;
                     break;
                   }
@@ -924,7 +928,7 @@
           }
           if ($scope.serviceContract.services.length > 0) {
             for (var h = 0; h < $scope.serviceContract.services.length; h++) {
-              if ($scope.serviceContract.services[h].name === name) {
+              if (checkNameForObject($scope.serviceContract.services[h].name) === name) {
                 check = false;
                 break;
               }
@@ -1213,6 +1217,64 @@
           var part = (minutes%60) / 60;
           return hours + part;
         }
+
+        $scope.$watch(function() {
+          return $scope.serviceContract.services[0]
+        }, function(val) {
+          // console.log(val, "VAL")
+          // console.log($scope.serviceContract.services)
+        });
+
+        $scope.$watch(function() {
+          return $scope.serviceContract.services
+        }, function(val) {
+          // console.log('collection', val)
+          // console.log($scope.defaultServicesAdditionalForDropDown);
+
+          for (var i = 0; i < val.length; i++) {
+            var serv = val[i];
+
+            if (typeof serv.name === 'object') {
+              serv = Object.assign({}, serv);
+
+              // var defaultServ = serv;
+              // defaultServ.nameValue = defaultServ.name;
+              //
+              // console.log(serv.name, serv.nameValue, 'NEED TO CHANGE')
+              // var newServ = $scope.defaultServicesAdditionalForDropDown.find(function(value) {
+              //   return value.name === serv.nameValue;
+              // });
+
+              var ns = {
+                name: serv.nameValue,
+                rate: serv.name.rate,
+                billable: true,
+                taxes: serv.name.taxes,
+                nameValue: serv.nameValue
+              };
+
+              // console.log(serv, 'NEWSERV');
+
+              (function() {
+                var id = i;
+                // console.log(ns, id, 'SERV')
+                var serv = ns;
+
+                validateNewServiceName(serv.nameValue).then(function (resp) {
+                  if (resp) {
+                    // console.log(ns, "NEW")
+                    $scope.serviceContract.services.splice(id, 1, ns);
+                  }
+                }, function() {
+                  showErrorNewServiceValidationTimeOut();
+
+                })
+              }())
+
+
+            }
+          }
+        }, true)
 
 
 
@@ -1562,12 +1624,14 @@
             }
           }
 
-          function checkNameForObject(name) {
-            if (typeof name === 'object') {
-              return name.name;
-            } else {
-              return name;
-            }
+
+        }
+
+        function checkNameForObject(name) {
+          if (typeof name === 'object') {
+            return name.name;
+          } else {
+            return name;
           }
         }
 
