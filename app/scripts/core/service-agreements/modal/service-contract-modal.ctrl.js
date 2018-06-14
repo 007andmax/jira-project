@@ -182,6 +182,17 @@
           preCreateFirstServicesEntities();
         }
 
+
+        if ($scope.serviceContract && $scope.serviceContract.services) {
+          $scope.serviceContract.services = $scope.serviceContract.services.map(function(service) {
+            if (!service.nameValue) {
+              service.nameValue = service.name;
+            }
+
+            return service;
+          })
+        }
+
         ServicesService.getServicesData($scope, function(resp){
           if(resp) {
             for(var i=0; i<resp.length; i++) {

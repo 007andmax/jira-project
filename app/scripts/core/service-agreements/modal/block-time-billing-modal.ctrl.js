@@ -66,8 +66,6 @@
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
 
-        console.log($scope, 'AFTER TERMINATIO')
-
 
         if ($scope.editMode) {
           $scope.blockTimeContract = {
@@ -117,6 +115,16 @@
 
           }
           fillNotifyUsersList();
+        }
+
+        if ($scope.blockTimeContract && $scope.blockTimeContract.services) {
+          $scope.blockTimeContract.services = $scope.blockTimeContract.services.map(function(service) {
+            if (!service.nameValue) {
+              service.nameValue = service.name;
+            }
+
+            return service;
+          })
         }
 
 

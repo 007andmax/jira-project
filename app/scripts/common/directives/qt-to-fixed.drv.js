@@ -15,7 +15,6 @@
             if (val && !focused) {
               element.val(parseFloat(val).toFixed(parseInt(attrs.qtToFixed)));
 
-              unwatch();
             }
 
           });
