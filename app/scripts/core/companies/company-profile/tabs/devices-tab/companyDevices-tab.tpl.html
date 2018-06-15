@@ -61,7 +61,7 @@
             <div uib-dropdown-toggle>
               <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
               <!--ng-click="currentUser.online = !currentUser.online"></i>-->
-              <i class="devices-monitor" ng-show="agent.iconName === 'workstation'"></i>
+              <i class="devices-monitor" ng-show="agent.iconName === 'workstation' || !agent.iconName"></i>
               <i class="devices-phone" ng-show="agent.iconName === 'device'"></i>
               <i class="devices-printer" ng-show="agent.iconName === 'printer'"></i>
               <i class="devices-server" ng-show="agent.iconName === 'server'"></i>
