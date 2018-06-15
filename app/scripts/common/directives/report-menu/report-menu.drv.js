@@ -27,9 +27,9 @@
     controller: reportMenuCtrl
   });
 
-  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService', 'quicktech.common.services.SharedStateService', '$rootScope'];
+  reportMenuCtrl.$inject = ['$scope', 'CompaniesService', 'UsersService', 'DevicesService', '$location', 'ReportsService', '$filter', 'ProductsService', 'quicktech.common.services.SharedStateService', '$rootScope', '$timeout'];
 
-  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService, SharedStateService, $rootScope) {
+  function reportMenuCtrl($scope, CompaniesService, UsersService, DevicesService, $location, ReportsService, $filter, ProductsService, SharedStateService, $rootScope, $timeout) {
     var $ctrl = this;
     this.sendReportRequest = sendReportRequest;
     this.exportFileToCsv = exportFileToCsv;
@@ -126,6 +126,7 @@
     }
 
     $scope.resetDate = resetDate;
+    $scope.togglePurchaseCost = togglePurchaseCost;
 
     $scope.reportSetting = {
       company: '',
@@ -142,6 +143,9 @@
         format: "YYYY/MM/DD"
       }
     };
+
+    $scope.isPurchaseShown = false;
+    $rootScope.isPurchaseShown = $scope.isPurchaseShown;
 
     $scope.firstIteration = true;
 
@@ -225,6 +229,15 @@
         $scope.endDate = formatDate(dates[1]);
         $scope.errorNassageForDate = true;
       }
+    }
+
+    function togglePurchaseCost() {
+      $scope.isPurchaseShown = !$scope.isPurchaseShown;
+      $rootScope.isPurchaseShown = $scope.isPurchaseShown;
+
+      $timeout(function () {
+        $rootScope.reportLineChanged = true;
+      }, 500);
     }
 
     function addZeroIfNeed(n) {

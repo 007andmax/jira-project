@@ -44,9 +44,9 @@
         }
 
         $scope.$watch(function() {
-          return $scope.reportByProducts.lines
+          return $rootScope.isPurchaseShown
         }, function(val) {
-          console.log(val, "VAL")
+          $scope.isPurchaseShown = val;
 
         })
 
