@@ -957,6 +957,10 @@
   font-size: 12px;
 }
 
+.top-product-list-ticket div:hover {
+  cursor: pointer;
+}
+
 .top-product-list-ticket .col-md-2,
 .top-product-list-ticket .col-md-1 {
   position: relative;

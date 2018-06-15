@@ -43,6 +43,13 @@
           return !$scope.selectedLinesIds[line.lineId]
         }
 
+        $scope.$watch(function() {
+          return $scope.reportByProducts.lines
+        }, function(val) {
+          console.log(val, "VAL")
+
+        })
+
         $scope.selectAllLines = function() {
           if( $scope.selectedLines.length < 1 || $scope.selectedLines.length !== $scope.reportByProducts.lines.length) {
             $scope.selectedLines = [];
@@ -172,7 +179,7 @@
         function separateEmpty(array, prop) {
           var toSort = [];
           var result = [];
-          var reverse;
+          var reverse = $scope.reverse;
 
           for (var i = 0; i < array.length; i++) {
             var el = array[i];
@@ -183,8 +190,15 @@
               toSort.push(el);
             }
           }
+
+          if (!toSort.some(function(el) {
+            return +el[prop] != el[prop];
+          })) {
+            console.log("REVERSE< STRING", toSort)
+            reverse = !reverse;
+          }
           //check for numbers
-          reverse = (+toSort[0][prop] == toSort[0][prop]) ? !$scope.reverse : $scope.reverse;
+          // reverse = (+toSort[0][prop] == toSort[0][prop]) ? !$scope.reverse : $scope.reverse;
 
           toSort = $filter('orderBy')(toSort, prop, reverse);
 
@@ -198,6 +212,18 @@
         if ($scope.reportByProducts.lines) {
           $scope.selectedLines = [];
           $scope.selectAllLines();
+          $scope.reportByProducts.lines = $scope.reportByProducts.lines.map(function(line) {
+            if (line.invoiceNumber) {
+              line.invoiceNumber = +line.invoiceNumber;
+            }
+
+            if (line.ticketNumber) {
+              line.ticketNumber = +line.ticketNumber;
+            }
+
+            return line;
+          })
+
           sortBy($scope.sortProps);
         }
 
