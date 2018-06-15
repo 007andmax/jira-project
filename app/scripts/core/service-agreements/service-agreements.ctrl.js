@@ -211,6 +211,7 @@
       $scope.today = Date.now();
 
       $scope.minDateForEndDatePicker;
+      $scope.defaultDate;
 
 
       $scope.reinitNewServiceForm = true;
@@ -245,7 +246,10 @@
             $scope.editContract.services = listOfServices;
           }
         });
+
+        // console.log($scope.today, 'SOSDOSDOSOs')
         setMiNDateForEndDate($scope.today);
+        setDefaultTime($scope.today);
 
         $timeout(function () {
           $scope.editService = {
@@ -329,11 +333,15 @@
       }
 
       function setMiNDateForEndDate(date) {
+        $scope.minDateForEndDatePicker = $filter('date')(date, 'dd MMM yyyy');
+      }
 
-        var d = new Date(date);
-        var newDate = Utils.addNumberOfMonth(d, 1);
-        var temp = Utils.minusDays(newDate, 1);
-        $scope.minDateForEndDatePicker = temp.getTime();
+      function setDefaultTime(date) {
+        if (!date) {
+          date = new Date();
+        }
+
+        $scope.defaultDate = date
       }
 
 
@@ -360,7 +368,7 @@
         return $filter('date')(date, 'dd MMM yyyy');
       };
 
-      function reInitEndDateHourly() {
+      function reInitEndDateHourly(date) {
         $scope.reInitEndDateHourly = false;
         $timeout(function () {
           $scope.reInitEndDateHourly = true;
@@ -368,6 +376,8 @@
       }
 
       $scope.startDatePicker = function (date) {
+        var newEndDate = new Date(moment(date).year() + 1, moment(date).month() + 1, 0);
+
         if (date && date.length > 0) {
           var startDate = new Date(date);
 
@@ -381,17 +391,28 @@
           var temp  = Utils.minusDays(n, 1);
           // var temp = new Date(n);
           // temp.setDate(temp.getDate()-1);
-          $scope.editContract.endDate = $filter('date')(temp, 'dd MMM yyyy');
+          // $scope.editContract.endDate = $filter('date')(temp, 'dd MMM yyyy');
           var f = new Date(date);
-          setMiNDateForEndDate(f.getTime());
-          reInitEndDateHourly()
+          // setMiNDateForEndDate(f);
+          // reInitEndDateHourly(newEndDate);
+          $scope.endDatePicker(newEndDate, true);
+          // setDefaultTime(newEndDate)
+
         }
 
       };
 
-      $scope.endDatePicker = function (date) {
-        if (date && date.length > 0) {
-          var endDate = new Date(date);
+      $scope.endDatePicker = function (date, force) {
+        var newDate = date;
+        var isForce = force;
+        if (new Date(date) < new Date($scope.editContract.startDate)) {
+          newDate = new Date($scope.editContract.startDate);
+          newDate.setDate(newDate.getDate() + 1);
+          isForce = true;
+        }
+
+        if ((date && date.length > 0) || isForce) {
+          var endDate = new Date(newDate);
           var endMonth = endDate.getMonth() + 1;
           $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
           $scope.endDate = $scope.editContract.endDate;
