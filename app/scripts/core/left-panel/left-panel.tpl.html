@@ -224,9 +224,9 @@
           Trash <span>{{ticketsCounter.TRASH}}</span>
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'spam'})}"
-             ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
-          Spam <span>{{ticketsCounter.SPAM}}</span>
+             ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
+             ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
+          Unassigned <span>{{ticketsCounter.UNASSIGNED}}</span>
         </div>
         <div class="left-panel-title font-medium">
           tags
