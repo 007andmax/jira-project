@@ -39,14 +39,34 @@
           calculateDevicesCountersAndCallCallbacks();
 
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-
+            // console.log(newChange, '****s*********************************8')
             if (newChange.action === 'DEVICE_ONLINE') {
+              var deviceFound = false;
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', true);
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
-                  break;
+                  deviceFound = true;
                 }
+              }
+
+              if (!deviceFound) {
+                // console.log('request i did')
+                getUpdatedDevices();
+                // var username = newChange.data.username;
+                // console.log(newChange, 'DEVICE INSTALLED')
+                // // var parsedData = JSON.parse(newChange.data.value);
+                // // parsedData.device.userName = newChange.data.userName;
+                // if (!devices[newChange.data.clientCompanyId]) {
+                //   var companyId = newChange.data.clientCompanyId;
+                //   devices[companyId] = [];
+                //   devices[companyId].push(parsedData.device);
+                // } else {
+                //   var deviceById = Utils.findById(devices[newChange.data.clientCompanyId], parsedData.device.id);
+                //   Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
+                //   Utils.customizeObj(parsedData.device, deviceById);
+                // }
+                // calculateDevicesCountersAndCallCallbacks();
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_OFFLINE') {
@@ -61,6 +81,7 @@
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_INSTALLED') {
+              // console.log(newChange, 'DEVICE INSTALLED')
               var parsedData = JSON.parse(newChange.data.value);
               parsedData.device.userName = newChange.data.userName;
               if (!devices[newChange.data.clientCompanyId]) {
@@ -151,6 +172,22 @@
         for (var i = 0; i < initListeners.length; i++) {
           initListeners[i]();
         }
+      }
+
+      function getUpdatedDevices() {
+        $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
+          var devices = storage.devices;
+
+          var listOfCompaniesWithAgents = {};
+          Object.keys(resp.data).forEach(function(key,index) {
+            if(resp.data[key] !== null) {
+              listOfCompaniesWithAgents[key] = resp.data[key];
+            }
+          });
+
+          Utils.customizeObj(listOfCompaniesWithAgents, devices);
+          calculateDevicesCountersAndCallCallbacks();
+        });
       }
 
       function addRemoteConnectionSessionToDevice(newChange, devices) {
@@ -1109,7 +1146,8 @@
         setNewDeviceLabel: setNewDeviceLabel,
         sendDeviceStatusRequest: sendDeviceStatusRequest,
         getDevicesCredentials: getDevicesCredentials,
-        markDeviceAsMaster: markDeviceAsMaster
+        markDeviceAsMaster: markDeviceAsMaster,
+        getUpdatedDevices: getUpdatedDevices
       }
     }
   ]);
