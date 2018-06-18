@@ -506,9 +506,11 @@
 .service-agreements-lists {
   text-align: left;
 }
-.service-agreements-lists .dropdown-menu > li > a{
+
+.service-agreements-lists .dropdown-menu > li > a {
   padding: 5px 20px;
 }
+
 .service-agreements-lists a.ha-22-38 {
   height: 15px;
 }
@@ -1432,12 +1434,15 @@
 .list-of-product .report-title {
   left: 30px;
 }
-.list-of-product .dropdown-email.product-report-btn.dropdown.open .dropdown-menu{
+
+.list-of-product .dropdown-email.product-report-btn.dropdown.open .dropdown-menu {
   right: -90px;
 }
-.list-of-product .product-report-btn.dropdown.open .dropdown-menu{
+
+.list-of-product .product-report-btn.dropdown.open .dropdown-menu {
   right: 0;
 }
+
 .company-report {
   width: 100%;
   padding: 0;
@@ -1491,6 +1496,203 @@
 .company-report [class*=col-md-] {
   padding: 12px 6px;
   font-weight: 500;
+}
+
+.customer-ticket__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.customer-ticket__header--item {
+  min-width: 33%;
+  min-height: 352px;
+}
+
+.customer-ticket__header--item:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.customer-ticket__header--item:nth-child(2) {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-right: 40px;
+}
+
+.customer-ticket__header--item:nth-child(2) p {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+  font-weight: 400;
+}
+
+.customer-ticket__header--item:nth-child(2) p span {
+  font-weight: 600;
+}
+
+.customer-ticket__header--item:nth-child(2) p:before {
+  position: absolute;
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  left: -5px;
+  top: 9px;
+}
+
+.customer-ticket__header--item:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #edf2f6;
+  border-radius: 3px;
+  max-height: 330px;
+  min-height: 330px;
+}
+
+.customer-ticket__header--item:nth-child(3) p:first-child {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.customer-ticket__header--item:nth-child(3) p:first-child span {
+  font-weight: 600;
+}
+
+.customer-ticket__header--item:nth-child(3) > div {
+  width: 168px;
+  height: 168px;
+  background-color: #16A4FA;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.customer-ticket__report--summary h3,
+.customer-ticket__report--details h3 {
+  font-size: 16px;
+  padding: 0 60px;
+}
+
+.customer-ticket__report--summary,
+.customer-ticket__report--details {
+  padding: 35px 0 !important;
+}
+
+.customer-ticket__header {
+  padding: 0 60px;
+}
+
+.customer-ticket__header--item:nth-child(3) > div p:first-child {
+  font-size: 32px;
+  margin: 10px 0;
+  font-family: 'Graphik Light', sans-serif;
+}
+
+.customer-ticket__report--summary, .customer-ticket__report--details-plus {
+  border: none !important;
+}
+
+.customer-ticket__header--item:nth-child(3) p {
+  font-weight: 400;
+}
+
+.customer-ticket__header--item:nth-child(3) span {
+  font-weight: 600;
+}
+
+.customer-ticket__header--item:nth-child(3) p:last-child {
+  color: #9ca5b6;
+  position: relative;
+}
+
+.customer-ticket__header--item:nth-child(3) p:last-child span {
+  color: #404b5f;
+}
+
+.customer-ticket__header--item:nth-child(3) .ticket-report-time {
+  padding-left: 20px;
+}
+
+.customer-ticket__header--item:nth-child(3) .ticket-report-time:before {
+  position: absolute;
+  content: '';
+  background-image: url(../images/new-icons/ticket-report-time.png);
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 3px;
+}
+
+.blue-service:before {
+  background-color: #16a4fa;
+}
+
+.green-service:before {
+  background-color: #2EC866;
+}
+
+.red-service:before {
+  background-color: #FF6E61;
+}
+
+.yellow-service:before {
+  background-color: #FFB937;
+}
+
+.customer-ticket__header--item:nth-child(2) p:not(:last-child) {
+  margin-bottom: 17px;
+}
+
+.details-header,
+.details-content {
+  background-color: #F1F5F8;
+  padding: 15px 60px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.details-content {
+  background-color: transparent;
+  text-transform: none;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0 60px;
+  padding: 20px 0;
+  border-bottom: 1px solid #edf2f6;
+}
+
+.details-content .network-scan-status {
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.details-content [class*=col-md-] {
+  line-height: 20px;
+}
+
+.details-header > div,
+.details-content > div {
+  padding: 0 6px !important;
+}
+
+.details-header .col-md-2,
+.details-content .col-md-2 {
+  width: 16%;
 }
 
 @media screen and (max-width: 1600px) {

@@ -4502,6 +4502,12 @@ Devices tab
   display: inline-block;
 }
 
+.status-in-progress {
+  background-color: #D0EDFE;
+  color: #16A4FA;
+  display: inline-block;
+}
+
 .dashboard-network-scan-list h3 {
   margin: 0 25px 15px;
   padding-top: 30px;
@@ -4573,7 +4579,6 @@ Devices tab
 .disabledIcon:hover, .disabledIcon .install-agent-img:hover {
   cursor: not-allowed !important;
 }
-
 
 .install-agent-img {
   height: 58px;
