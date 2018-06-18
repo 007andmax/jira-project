@@ -182,7 +182,8 @@
 
             <div tooltip-placement="top">
 
-              <input style="cursor: pointer;" ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+              <input style="cursor: pointer;" ng-hide="isPLOpen" type="text" class="form-control has-dropdown"
+                     pl-product-input
                      placeholder="Product" autocomplete="off"> </input>
 
               <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
@@ -262,7 +263,7 @@
           <i class="icn-sm icn-remove-old pointer"
              ng-show="startDate && endDate"
              uib-tooltip="clear date filter"
-             style="pointer-events: all;"tooltip-placement="top" ng-click="$ctrl.setTechReportDateType('TODAY')"></i>
+             style="pointer-events: all;" tooltip-placement="top" ng-click="$ctrl.setTechReportDateType('TODAY')"></i>
         </div>
 
         <!-- </div> -->
@@ -311,7 +312,8 @@
              ng-class="{'has-error': sendMailForm.$dirty && (!$ctrl.emailToNotify || !$ctrl.emailPattern.test($ctrl.emailToNotify))}">
           <input class="form-control" type="text" ng-model="$ctrl.emailToNotify"> </input>
           <div>
-            <i style="margin: 5px 0 0;" class="icn-sm icn-label-save" ng-click="$ctrl.addEmailToNotify($ctrl.emailToNotify, sendMailForm)"></i>
+            <i style="margin: 5px 0 0;" class="icn-sm icn-label-save"
+               ng-click="$ctrl.addEmailToNotify($ctrl.emailToNotify, sendMailForm)"></i>
             <i style="margin-top: -18px;" class="icn-sm icn-remove-old" ng-click="$ctrl.emailToNotify = ''"></i>
           </div>
         </div>
@@ -327,19 +329,21 @@
           </li>
         </ul>
         <div class="fix-btn-report">
-          <button class="grey-btn-report" ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)"
+          <button class="grey-btn-report"
+                  ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)"
                   type="button" custom-disabled="{{ !$ctrl.isReportAvailable }}">
             Send
           </button>
         </div>
       </div>
     </div>
-    <div ng-show="$ctrl.isProductOptions" style="max-width: 300px; float: right; height: 32px; display: flex; align-items: center">
-      Show purchase cost
-      <label class="control checkbox hide-in-report" style="margin-left: 10px;">
+    <div ng-show="$ctrl.isProductOptions"
+         style="max-width: 300px; float: right; height: 32px; display: flex; align-items: center; margin-right: 10px;">
+      <label class="control checkbox hide-in-report" style="margin-left: 10px;margin-top: -3px;">
         <input type="checkbox" ng-checked="isPurchaseShown" ng-click="togglePurchaseCost()">
         <span class="control-indicator"></span>
       </label>
+      Show purchase cost
     </div>
 
   </div>
