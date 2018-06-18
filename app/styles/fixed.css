@@ -1944,7 +1944,8 @@ span.sort-span {
 }
 
 .product-list-scroll {
-  max-height: calc(100vh - 240px);
+  height: calc(100%);
+  /* max-height: calc(100vh - 240px); */
   overflow: scroll;
   width: 100%;
   margin-top: 70px;

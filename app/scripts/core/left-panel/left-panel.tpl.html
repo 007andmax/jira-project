@@ -199,6 +199,11 @@
           All Tickets <span>{{ticketsCounter.ALL}}</span>
         </div>
         <div class="center-category__category"
+             ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && !isOnHoldTag}"
+             ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
+          Unassigned <span>{{ticketsCounter.UNASSIGNED}}</span>
+        </div>
+        <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'open'})">
           Open <span>{{ticketsCounter.OPEN}}</span>
@@ -223,17 +228,13 @@
              ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
           Trash <span>{{ticketsCounter.TRASH}}</span>
         </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
-             ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-          Unassigned <span>{{ticketsCounter.UNASSIGNED}}</span>
-        </div>
+
         <div class="left-panel-title font-medium">
           tags
         </div>
         <div class="center-category__category sked">
-          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
-               ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
+          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
+               ng-click="stateGo($event, 'tickets', {listType: 'unassigned'}, true)">
             Unassigned
           </div>
 
