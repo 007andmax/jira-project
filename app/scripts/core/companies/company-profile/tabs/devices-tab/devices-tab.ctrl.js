@@ -93,6 +93,10 @@
           })
         }
 
+        if ($scope.agent && $scope.agent.agentId && !$scope.agent.iconName) {
+          $scope.saveNewIcon('workstation');
+        }
+
         $scope.cancelNewDeviceLabelEdit = function() {
           $scope.agent.label = $scope.reserveAgentLabelCopy;
           $scope.showDeviceLabelEditForm = false;
