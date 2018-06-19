@@ -23,6 +23,13 @@
   <div class="product-list___ticket">
     <div class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
          ng-if="!loadingInProgress">
+      <div class="report-header">
+        <h1>Product Sales Report</h1>
+        <div class="company-info">
+          <h3>Absolute Dentistry</h3>
+          <p><span>1 Dec 2018</span> - <span>31 Dec 2018</span></p>
+        </div>
+      </div>
       <div ng-if="reportByProducts.lines" ng-controller="quicktech.core.companies.companyProductReportCtrl">
         <div class="header-product-list-ticket" ng-if="reportByProducts.lines">
           <h3>{{ reportByProducts.techCompanyName }}</h3>
@@ -101,6 +108,12 @@
           <div class="col-md-2 purchase-cost" ><br>
             <strong><span>{{purchaseCostSum | currency: '$': 2}}</span></strong></div>
         </div>
+      </div>
+      <div class="report-footer">
+        <p>Prepare by : <span>Jarett Hauser</span></p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/SEGA_logo.png"
+             alt="company-logo">
+        <p>Quicktech <span>2018</span> ©. All rights reserved</p>
       </div>
     </div>
   </div>
