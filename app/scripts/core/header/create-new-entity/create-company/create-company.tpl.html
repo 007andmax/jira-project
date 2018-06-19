@@ -187,9 +187,15 @@
       </div>
       <div class="col-xs-12 company-info-wrapper">
         <div class="company-schedule clearfix">
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="isScheduleShown">
+            <span class="control-indicator" uib-tooltip="Working day"></span>
+
+            Set working hours
+          </label>
           <div>
             <div>
-              <ul class="company-schedule-edit clearfix row">
+              <ul class="company-schedule-edit clearfix row" ng-show="isScheduleShown">
                 <li class="col-md-6" ng-repeat="day in workingDays">
                   <div class="mb">
                     <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
