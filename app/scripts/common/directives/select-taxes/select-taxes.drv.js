@@ -14,8 +14,10 @@
     },
     controller: selectTaxesCtrl
   });
-  selectTaxesCtrl.$inject = ['$scope'];
-  function selectTaxesCtrl($scope) {
+
+  angular.module('quicktech')
+  selectTaxesCtrl.$inject = ['$scope', '$uibModal', '$rootScope'];
+  function selectTaxesCtrl($scope, $uibModal, $rootScope) {
     var $ctrl = this;
     this.updateEntityTaxList = updateEntityTaxList;
     this.getSelectedTaxNames = getSelectedTaxNames;
@@ -38,6 +40,33 @@
       return $ctrl.taxes;
     }, generateTaxList, true);
 
+    $scope.addNewTax = function() {
+      var modalInstance = $uibModal.open({
+        templateUrl: '/html/scripts/common/directives/select-taxes/add-new-tax.tpl.html',
+        animation: true,
+        backdrop: false,
+        size: 'md',
+        controller: 'taxModalCtrl',
+        windowClass: 'create-popup margin-top-modal-dialog',
+        resolve: {
+          isModalTax: true
+        }
+
+      });
+    };
+
+    $scope.$watch(function() {
+      return $rootScope.newTaxFromModal;
+    }, function(val) {
+      if (val) {
+        // $ctrl.taxList.push(val);
+        $rootScope.newTaxFromModal = null;
+
+        $ctrl.updateEntityTaxList && $ctrl.updateEntityTaxList(val)
+        $ctrl.selectedTaxes[val.id] = val;
+      }
+    })
+
     //  add taxes to the list from entity
     //  it's needed to make it possible to manage related taxes even when original is deleted
     // $ctrl.taxes = $ctrl.taxes.staticCopy();
@@ -56,6 +85,8 @@
         }
       }
     }
+
+
 
     function updateEntityTaxList(changedTax) {
       var entityTaxes = $ctrl.entity.taxes;

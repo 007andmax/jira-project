@@ -5088,6 +5088,25 @@ Devices tab
   display: none !important;
 }
 
+.modal-new-tax {
+  padding: 25px;
+  position: relative;
+}
+
+.modal-new-tax .col-1 {
+  margin-right: 5px;
+}
+
+.modal-new-tax .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.modal-new-tax > div {
+  float: left;
+}
+
 .default-tax-list > li.new-tax {
   height: auto;
 
