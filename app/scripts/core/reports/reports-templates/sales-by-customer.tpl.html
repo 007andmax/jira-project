@@ -17,10 +17,10 @@
     <div class="product-list-ticket" ng-show="!loadingInProgress"
          ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '940' : '1180'}">
       <div class="report-header">
-        <h1>Product Sales Report</h1>
+        <h1>Customer Sales Report</h1>
         <div class="company-info">
-          <h3>Absolute Dentistry</h3>
-          <p><span>1 Dec 2018</span> - <span>31 Dec 2018</span></p>
+          <h3>{{reportByCustomers.clientCompanyName}}</h3>
+          <p><span>{{reportByCustomers.startDate}}</span> - <span>{{reportByCustomers.endDate}}</span></p>
         </div>
       </div>
       <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
@@ -88,9 +88,10 @@
         </div>
       </div>
       <div class="report-footer">
-        <p>Prepare by : <span>Jarett Hauser</span></p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/SEGA_logo.png"
-             alt="company-logo">
+        <p>Prepare by : <span>{{ username }}</span></p>
+        <img alt="company-logo"
+             ng-if="(currentCompany && currentCompany.logo && currentCompany.logo.cropped && currentCompany.logo.cropped.id)"
+             ng-src="{{ companyLogo }}">
         <p>Quicktech <span>2018</span> ©. All rights reserved</p>
       </div>
     </div>

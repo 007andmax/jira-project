@@ -80,7 +80,7 @@
         <!--</div>-->
         <!--<div class="customer-ticket__report&#45;&#45;details clearfix">-->
         <!--<h3>Tickets details</h3>-->
-        <!--<div class="clearfix report-info-point" ng-repeat="ticket in ticketReport.tickets"-->
+        <!-- <div class="clearfix report-info-point" ng-repeat="ticket in ticketReport.tickets"-->
         <!--on-finish-render="buildPdf('tickets')">-->
         <!--<div>-->
         <!--<div class="col-md-3">-->
@@ -116,7 +116,7 @@
         <!--<p class="details-futures-info">-->
         <!--<span class="col-md-12" ng-bind-html="getTrustedHtml(ticket.description)"></span>-->
         <!--</p>-->
-        <!--</div>-->
+        <!--</div> -->
 
         <!--<div ng-if="ticketReport.extendedReport">-->
         <!--<div ng-repeat="update in ticket.updates">-->
@@ -154,10 +154,10 @@
         <!--</div>-->
 
         <div class="report-header">
-          <h1>Product Sales Report</h1>
+          <h1>Tickets Report</h1>
           <div class="company-info">
-            <h3>Absolute Dentistry</h3>
-            <p><span>1 Dec 2018</span> - <span>31 Dec 2018</span></p>
+            <h3>{{ ticketReport.companyName.name }}</h3>
+            <p><span>{{ticketReport.startDate}}</span> - <span>{{ ticketReport.endDate }}</span></p>
           </div>
         </div>
         <div class="customer-ticket__report--summary">
@@ -197,44 +197,30 @@
             <div class="col-md-1">STATUS</div>
             <div class="col-md-2">DESCRIPTION</div>
           </div>
-          <div class="details-content row">
-            <div class="col-md-2">114586</div>
-            <div class="col-md-2">22 Jan 2018, 14:30</div>
-            <div class="col-md-2">James Stobbe</div>
-            <div class="col-md-1">OP03</div>
-            <div class="col-md-2">6:40 hr</div>
-            <div class="col-md-1" style="padding: 0;">
+          <div class="details-content row" on-finish-render="buildPdf('tickets')" ng-repeat="ticket in ticketReport.tickets">
+            <div class="col-md-2">{{ticket.ticketNumber}}</div>
+            <div class="col-md-2">{{ticket.ticketCreatedAt}}</div>
+            <div class="col-md-2">{{ticket.username.firstName + ' ' + ticket.username.lastName}}</div>
+            <div class="col-md-1">{{ticket.deviceName}}</div>
+            <div class="col-md-2">{{ticket.responseTime}}</div>
+            <div class="col-md-1" style="padding: 0;" ng-show="ticket.status === 'ON_HOLD'">
               <p class="network-scan-status status-warning">On Hold</p>
             </div>
-            <div class="col-md-2">Server Maintence of Head office</div>
-          </div>
-          <div class="details-content row">
-            <div class="col-md-2">114586</div>
-            <div class="col-md-2">22 Jan 2018, 14:30</div>
-            <div class="col-md-2">James Stobbe</div>
-            <div class="col-md-1">OP03</div>
-            <div class="col-md-2">6:40 hr</div>
-            <div class="col-md-1" style="padding: 0;">
-              <p class="network-scan-status status-in-progress">In Progress</p>
-            </div>
-            <div class="col-md-2">Server Maintence of Head office</div>
-          </div>
-          <div class="details-content row">
-            <div class="col-md-2">114586</div>
-            <div class="col-md-2">22 Jan 2018, 14:30</div>
-            <div class="col-md-2">James Stobbe</div>
-            <div class="col-md-1">OP03</div>
-            <div class="col-md-2">6:40 hr</div>
-            <div class="col-md-1" style="padding: 0;">
+            <div class="col-md-1" style="padding: 0;" ng-show="ticket.status === 'COMPLETED'">
               <p class="network-scan-status status-success">Completed</p>
             </div>
-            <div class="col-md-2">Server Maintence of Head office</div>
+            <div class="col-md-1" style="padding: 0;" ng-show="ticket.status === 'IN_PROGRESS'">
+              <p class="network-scan-status status-in-progress">In Progress</p>
+            </div>
+            <div class="col-md-2">{{ticket.description}}</div>
           </div>
+
         </div>
         <div class="report-footer">
-          <p>Prepare by : <span>Jarett Hauser</span></p>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/SEGA_logo.png"
-               alt="company-logo">
+          <p>Prepare by : <span>{{ username }}</span></p>
+          <img alt="company-logo"
+               ng-if="(currentCompany && currentCompany.logo && currentCompany.logo.cropped && currentCompany.logo.cropped.id)"
+               ng-src="{{ companyLogo }}">
           <p>Quicktech <span>2018</span> ©. All rights reserved</p>
         </div>
       </div>

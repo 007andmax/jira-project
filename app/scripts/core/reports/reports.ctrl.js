@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope',
-      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService',
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -23,12 +23,24 @@
       $scope.isReportAvailable = false;
 
       $scope.taxesLabels = [];
+      $scope.currentCompany = CompaniesService.getCurrentCompany();
+      // $scope.company;
+      $scope.companyLogo;
+
+      $scope.user = $rootScope.currentUser;
+      $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
 
       var techReportTypeForChart;
       var renderFinished = {
         lines: false,
         columns: false
       };
+
+      $scope.$watch('currentCompany', function(val) {
+        $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
+      })
+
+
 
 
       $scope.reportType = {
@@ -56,6 +68,9 @@
         $scope.reportByTaxes = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -68,6 +83,9 @@
         $scope.reportByCustomers = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByCustomers(data, function (resp) {
           $scope.reportByCustomers = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -79,6 +97,9 @@
         $scope.reportByProducts = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByProducts(data, function (resp) {
           $scope.reportByProducts = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -90,6 +111,9 @@
         $scope.reportByTechSold={};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByTechSold(data, function (resp) {
           $scope.reportByTechSold = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -100,6 +124,9 @@
         $scope.reportRemoteAccess = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportRemoteAccess(data, function (resp) {
           $scope.reportRemoteAccess = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -111,6 +138,9 @@
         $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getTechReportTicketCreated(data, function (resp) {
           $scope.techReportTicketCreated = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -123,6 +153,9 @@
         $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getTechReportProductSales(data, function (resp) {
           $scope.techReportProductSales = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -143,16 +176,27 @@
             companyId: data.companyId
           }
         }
+
+        // console.log('data to send', dataToSend)
+        if (dataToSend.companyId) {
+          $scope.company = CompaniesService.getOneById(dataToSend.companyId)
+        }
+
         ReportsService.getReportAccountsReceivable(dataToSend, function (resp) {
           $scope.reportAccountsReceivable = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
+          // console.log($scope.company, 'company')
         })
       }
 
       function gerReportTicketReport(data) {
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
             $scope.ticketReport = resp;
@@ -167,8 +211,19 @@
               }
             }
 
-            $scope.ticketReport.startDate = new Date(resp.startDate);
-            $scope.ticketReport.endDate = new Date(resp.endDate);
+            if ($scope.ticketReport && $scope.ticketReport.tickets) {
+              $scope.ticketReport.companyName = CompaniesService.getOneById($scope.ticketReport.companyId)
+
+              $scope.ticketReport.tickets = $scope.ticketReport.tickets.map(function(ticket) {
+                ticket.username = UsersService.getOneById(ticket.clientUserId);
+                return ticket;
+              })
+            }
+
+
+
+            $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');
+            $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
           }
@@ -181,6 +236,7 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
+        console.log(data, 'data', location)
         //console.log("data: ", data);
         if (location) {
           switch (location) {
