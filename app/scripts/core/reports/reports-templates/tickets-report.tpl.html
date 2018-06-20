@@ -160,7 +160,7 @@
             <p><span>{{ticketReport.startDate}}</span> - <span>{{ ticketReport.endDate }}</span></p>
           </div>
         </div>
-        <div class="customer-ticket__report--summary">
+        <div class="customer-ticket__report--summary" on-finish-render="buildPdf()">
           <h3>Resolved Tickets</h3>
           <div class="customer-ticket__header">
             <div class="customer-ticket__header--item"></div>
@@ -197,7 +197,7 @@
             <div class="col-md-1">STATUS</div>
             <div class="col-md-2">DESCRIPTION</div>
           </div>
-          <div class="details-content row" on-finish-render="buildPdf('tickets')" ng-repeat="ticket in ticketReport.tickets">
+          <div class="details-content row" ng-repeat="ticket in ticketReport.tickets" on-finish-render="build()">
             <div class="col-md-2">{{ticket.ticketNumber}}</div>
             <div class="col-md-2">{{ticket.ticketCreatedAt}}</div>
             <div class="col-md-2">{{ticket.username.firstName + ' ' + ticket.username.lastName}}</div>

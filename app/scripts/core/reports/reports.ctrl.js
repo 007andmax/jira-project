@@ -40,6 +40,8 @@
         $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
       })
 
+      $scope.buildPdf = buildPdf;
+
 
 
 
@@ -226,6 +228,7 @@
             $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
+            // $scope.buildPdf('tickets');
           }
         })
       }
@@ -417,7 +420,14 @@
         }
       }
 
-      $scope.buildPdf = function (param) {
+      $scope.build = function(param) {
+        $scope.buildPdf(param);
+      }
+
+
+
+      function buildPdf(param) {
+        console.log('building pdf', param, renderFinished)
         if (param) {
           var allRendersFinished = true;
           renderFinished[param] = true;
@@ -427,6 +437,8 @@
               break;
             }
           }
+
+          console.log('we arent here')
           allRendersFinished && $scope.$broadcast('buildPdf-' + $rootScope.reportName);
         } else {
           $scope.$broadcast('buildPdf-' + $rootScope.reportName);
