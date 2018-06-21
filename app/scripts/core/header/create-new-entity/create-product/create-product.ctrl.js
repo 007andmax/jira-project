@@ -112,8 +112,8 @@
 
       $scope.saveChangeProduct = function (form) {
         $scope.validateCategory($scope.editProduct.category, form);
-
-        if (form.$valid || crutchValidation(form)) {
+        
+        if (form.$valid) {
 
           $scope.disabledSaveChangeButton = true;
 
@@ -146,23 +146,6 @@
         }
       };
 
-      function crutchValidation(form) {
-        var keys = Object.keys(form);
-        var valid = true;
-
-        for (var i = 0; i < keys.length; i++) {
-          var prop = form[keys[i]];
-
-          if (typeof prop === 'object' && prop.$valid !== undefined) {
-            if (prop.$valid === false && keys[i] !== '$$parentForm') {
-              valid = false;
-            }
-          }
-        }
-
-        return valid;
-      }
-
       $scope.validateProductIls = function (ngModelCtrl, modelId, afterValidationCallback) {
         var validationResult = ProductsService.isILCUnique(ngModelCtrl.$viewValue, modelId || '', function () {
           ngModelCtrl.$setValidity('unique', validationResult.value);
@@ -173,7 +156,6 @@
       $scope.validateProductMnf = function (ngModelCtrl, modelId, afterValidationCallback) {
         var validationResult = ProductsService.isMfgUnique(ngModelCtrl.$viewValue, modelId || '', function () {
           ngModelCtrl.$setValidity('unique', validationResult.value);
-          console.log(validationResult.value, "VALIDATION")
           afterValidationCallback();
         });
       };
