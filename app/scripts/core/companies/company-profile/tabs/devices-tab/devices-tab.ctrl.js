@@ -267,7 +267,7 @@
            $scope.agent.timing.online += 1000;
            $scope.agent.timing.offline +=1000;
            $scope.agent.timing.uptimeForOrdering +=1000;
-           if($scope.agent.OneTimeConnectionData.length>0) {
+           if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.length>0) {
              for(var i=0; i<$scope.agent.OneTimeConnectionData.length; i++) {
                $scope.agent.OneTimeConnectionData[i].agentConnectedAt += 1000;
              }
