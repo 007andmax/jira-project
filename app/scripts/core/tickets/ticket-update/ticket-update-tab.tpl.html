@@ -35,7 +35,7 @@
     <div class="tab-pane in active" id="Note" ng-if="currentOpenTab === 'NOTE'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
 
-      <div class="ticket-add clearfix" ng-form="updateTicketNote">
+      <div class="ticket-add clearfix" ng-form="updateTicketNote" ng-required="false">
 
         <!--  <div class="avator pull-left">
            <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">

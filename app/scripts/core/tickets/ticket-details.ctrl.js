@@ -404,6 +404,10 @@
             return $scope.ticketUpdate && $scope.ticketUpdate.attachments.length > 0;
           }
 
+          $scope.haveNote = function() {
+            return $scope.ticketUpdate && $scope.ticketUpdate.note;
+          }
+
 
 
 
@@ -450,7 +454,7 @@
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 }
 
-              } else if ($scope.ticketUpdate.note !== undefined) {
+              } else if ($scope.haveAttachments() || $scope.haveNote()) {
 
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
                 ticketUpdateToSend.attachments = [];
