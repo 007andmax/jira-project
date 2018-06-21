@@ -400,6 +400,13 @@
             }
           };
 
+          $scope.haveAttachments = function() {
+            return $scope.ticketUpdate && $scope.ticketUpdate.attachments.length > 0;
+          }
+
+
+
+
           $scope.getTriedToSaveUpdate = function () {
             return $scope.triedToSaveUpdate;
           };

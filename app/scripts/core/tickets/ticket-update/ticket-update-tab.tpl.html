@@ -41,7 +41,15 @@
            <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
          </div> -->
 
-        <div class="ticket-add-content clearfix">
+        <div class="ticket-add-content clearfix" style="position: relative">
+
+          <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
+              <span class="drop-area-subwrapper">
+                <span class="drop-area">
+                  Drop Files Here
+                </span>
+              </span>
+          </div>
 
           <div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
 
