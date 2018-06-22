@@ -45,28 +45,6 @@
         };
 
 
-      }]).controller('taxModalCtrl', [
-        '$scope', '$uibModalInstance', '$rootScope',
-        function($scope, $uibModalInstance, $rootScope) {
-          $scope.closeModal = function () {
-            $uibModalInstance.close();
-            // if (!$state.includes('service-agreements')) {
-            //   $state.go('service-agreements');
-            // }
-          };
-
-          $scope.$watch(function() {
-            return $rootScope.newTaxIsSaved;
-          }, function(val) {
-            // console.log('new tas is saved', val)
-            if (val) {
-              $rootScope.newTaxFromModal = val;
-              $rootScope.newTaxIsSaved = null;
-              $scope.closeModal();
-
-            }
-          })
-        }
-      ]);
+      }]);
 
 }());

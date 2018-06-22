@@ -15,7 +15,6 @@
     controller: selectTaxesCtrl
   });
 
-  angular.module('quicktech')
   selectTaxesCtrl.$inject = ['$scope', '$uibModal', '$rootScope'];
   function selectTaxesCtrl($scope, $uibModal, $rootScope) {
     var $ctrl = this;
