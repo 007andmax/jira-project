@@ -32,7 +32,10 @@
       $scope.user = $rootScope.currentUser;
       $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
 
-      $scope.chartData = []
+      $scope.chartData = [];
+      $scope.chartColors = ["#415ff4", "#ef0909", "#23d12c", "#f9f916", "#f2a60e", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
+
+
       $scope.chartOptions = {
         chart: {
                 type: 'pieChart',
@@ -41,6 +44,9 @@
                 x: function(d){return d.name;},
                 y: function(d){return d.time;},
                 showLabels: false,
+                color: function(d,i){
+                    return $scope.chartColors[i];
+                },
 
                 pie: {
                     startAngle: function(d) { return d.startAngle },
@@ -248,6 +254,7 @@
 
               $scope.ticketReport.tickets = $scope.ticketReport.tickets.map(function(ticket) {
                 ticket.username = UsersService.getOneById(ticket.clientUserId);
+                ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
                 return ticket;
               })
 

@@ -1637,20 +1637,40 @@
   top: 3px;
 }
 
-.blue-service:before {
-  background-color: #16a4fa;
+.service-color-0:before {
+  background-color: #415ff4;
 }
 
-.green-service:before {
-  background-color: #2EC866;
+.service-color-1:before {
+  background-color: #ef0909;
 }
 
-.red-service:before {
-  background-color: #FF6E61;
+.service-color-2:before {
+  background-color: #23d12c;
 }
 
-.yellow-service:before {
-  background-color: #FFB937;
+.service-color-3:before {
+  background-color: #f9f916;
+}
+
+.service-color-4:before {
+  background-color: #f2a60e;
+}
+
+.service-color-5:before {
+  background-color: #ff1ed2;
+}
+
+.service-color-6:before {
+  background-color:  #1bf4fc;
+}
+
+.service-color-7:before {
+  background-color: #7d1a9e;
+}
+
+.service-color-8:before {
+  background-color: #7f1313;
 }
 
 .customer-ticket__header--item:nth-child(2) p:not(:last-child) {
