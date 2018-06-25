@@ -1662,7 +1662,7 @@
 }
 
 .service-color-6:before {
-  background-color:  #1bf4fc;
+  background-color: #1bf4fc;
 }
 
 .service-color-7:before {
@@ -1761,6 +1761,10 @@
 .report-footer img {
   max-width: 33%;
   max-height: 40px;
+}
+
+.report-header, .report-footer {
+  display: none;
 }
 
 @media screen and (max-width: 1600px) {
