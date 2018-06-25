@@ -1266,6 +1266,11 @@ Devices tab
 }
 
 @media only screen and (max-width: 1600px) {
+  .qt-users li.list-heading .checkbox,
+  .company-devices li.list-heading .checkbox {
+    margin: -2px 0 3px 0 !important;
+  }
+
   .users-list-wrapper .col-3-2.dropdown.open .dropdown-subscribe {
     width: 140% !important;
   }
@@ -4574,7 +4579,6 @@ Devices tab
   cursor: not-allowed !important;
 }
 
-
 .install-agent-img {
   height: 58px;
   width: 56px;
@@ -5273,6 +5277,18 @@ Devices tab
 }
 
 @media only screen and (max-width: 1366px) {
+  .qt-users .checkbox, .company-devices .checkbox {
+    margin: 11px 0 0 0 !important;
+  }
+
+  .w-11 {
+    width: 11% !important;
+  }
+
+  .w-22 {
+    width: 22% !important;
+  }
+
   .network-scan .qt-list li.list-heading > [class*='col-'],
   .network-scan .qt-list.qt-network-scan .list-content .col-1,
   .network-scan .qt-list.qt-network-scan .list-content .col-2,
@@ -5315,6 +5331,14 @@ Devices tab
 @media only screen and (max-width: 1280px) {
   .network-scan .qt-list.qt-network-scan .list-content .col-3, .network-scan .qt-list li.list-heading .col-3 {
     width: 12% !important;
+  }
+
+  .w-11 {
+    width: 12% !important;
+  }
+
+  .w-22 {
+    width: 21% !important;
   }
 
   .network-scan .qt-network-scan .checkbox-caption input {
@@ -6144,4 +6168,25 @@ Devices tab
   height: 16px;
   background: url(../images/sprites-s76c759f188.png) -964px -204px;
   vertical-align: text-bottom;
+}
+
+@media (max-width: 1600px) {
+  #has-invoice-updates1 .user-ticket-update {
+    width: 44px;
+  }
+}
+
+@media (max-width: 1366px) {
+
+  #has-invoice-updates1 .user-ticket-update {
+    width: 100%;
+  }
+
+  .users-bg .col-lg-2 #has-invoice-updates1 {
+    width: 100%;
+  }
+
+  .users-bg > li {
+    padding: 13px 15px;
+  }
 }

@@ -106,7 +106,7 @@
 
 .star-icn.active {
   background-position: 0 0;
-  
+
 }
 
 .company-logo-icn,
@@ -307,7 +307,7 @@
 .company-info-content .company-schedule:after {
   background-image: url(../images/new-icons/company-schedule.svg);
   top: 3px;
-  
+
 }
 
 .company-schedule-list {
@@ -498,15 +498,28 @@
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-  
+
   .company-edit-button {
     max-width: 75%;
+  }
+
+  .company-download-icn,
+  .company-edit-icn,
+  .company-remove-icn {
+    margin-left: 5px;
+  }
+
+  .company-name-content {
+    width: 73%;
   }
 }
 
 @media (max-width: 1280px) {
   .company-edit-button {
     max-width: 72%;
+  }
+  .company-name-content {
+    width: 70%;
   }
 }
 
@@ -898,7 +911,7 @@
   bottom: 5px;
   left: 42px;
   font-size: 13px;
-  
+
   color: #94a4b8;
   content: 'hours';
 }

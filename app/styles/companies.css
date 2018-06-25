@@ -1616,10 +1616,6 @@
 }
 
 @media (max-width: 1600px) {
-  .list-company-row {
-    align-items: flex-start;
-  }
-
   .restore {
     top: 20px;
   }

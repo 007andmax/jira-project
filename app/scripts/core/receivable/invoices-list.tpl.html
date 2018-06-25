@@ -25,7 +25,7 @@
       ng-controller="quicktech.core.receivable.invoiceCtrl"
       ng-show="filteringForInvoice(invoice)"
       on-finish-render="hideLoadingIndicator()">
-    <div class="col-md-1">
+    <div class="col-md-1 w-11">
       <label class="control checkbox pull-left">
         <input type="checkbox"
                ng-model="invoiceToSent.invoices[invoice.number]">
@@ -40,7 +40,7 @@
         {{ invoice.number }}
       </a>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 w-22">
       <bold>{{company.name}}</bold>
     </div>
     <div class="col-md-2">{{invoice.date | date:'dd MMM yyyy'}}</div>

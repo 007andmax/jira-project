@@ -1950,3 +1950,13 @@ span.sort-span {
   width: 100%;
   margin-top: 70px;
 }
+
+@media screen and (min-width: 1600px) and (min-width: 1366px) and (min-width: 1280px) {
+  .custom-product-list .category-conteiner .category-info .icn-caret-gray.rotated {
+    margin: 5px 10px 0 0;
+  }
+
+  .custom-product-list .category-conteiner .category-info .icn-caret-gray {
+    margin-right: 10px;
+  }
+}

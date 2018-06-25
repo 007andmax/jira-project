@@ -70,14 +70,14 @@
       </div>
       <ul class="qt-list company-devices qt-users invoices-list" ng-show="mode === 'list'">
         <li class="list-heading clearfix" style="z-index: 2;box-shadow: 0 10px 10px -2px rgba(0,0,0,0.05);">
-          <div class="col-md-1 pointer" ng-click="setOrderForInvoices('number')">
+          <div class="col-md-1 pointer w-11" ng-click="setOrderForInvoices('number')">
             <label class="control checkbox pull-left">
               <input type="checkbox" ng-click="selectAllInvoices()" ng-checked="isAllinvoicesSelected()">
               <span class="control-indicator"></span>
             </label>
             Invoice#
           </div>
-          <div class="col-md-3 pointer" ng-click="setOrderForInvoices('company')">Company</div>
+          <div class="col-md-3 pointer w-22" ng-click="setOrderForInvoices('company')">Company</div>
           <div class="col-md-2 pointer" ng-click="setOrderForInvoices('date')">Invoice date</div>
           <div class="col-md-2 pointer" ng-click="setOrderForInvoices('readedAt')">Read On</div>
           <div class="col-md-1 pointer" style="width: 13.6%;" ng-click="setOrderForInvoices('sum')">Amount</div>

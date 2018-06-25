@@ -506,9 +506,11 @@
 .service-agreements-lists {
   text-align: left;
 }
-.service-agreements-lists .dropdown-menu > li > a{
+
+.service-agreements-lists .dropdown-menu > li > a {
   padding: 5px 20px;
 }
+
 .service-agreements-lists a.ha-22-38 {
   height: 15px;
 }
@@ -1432,12 +1434,15 @@
 .list-of-product .report-title {
   left: 30px;
 }
-.list-of-product .dropdown-email.product-report-btn.dropdown.open .dropdown-menu{
+
+.list-of-product .dropdown-email.product-report-btn.dropdown.open .dropdown-menu {
   right: -90px;
 }
-.list-of-product .product-report-btn.dropdown.open .dropdown-menu{
+
+.list-of-product .product-report-btn.dropdown.open .dropdown-menu {
   right: 0;
 }
+
 .company-report {
   width: 100%;
   padding: 0;
@@ -1520,6 +1525,18 @@
 }
 
 @media screen and (max-width: 1366px) {
+  .run-report-content .content {
+    width: 200px;
+  }
+
+  .company-report .content-product-list-ticket [class*=col-md-] {
+    font-size: 11px;
+  }
+
+  .company-report .top-product-list-ticket [class*=col-md-] {
+    font-size: 9px;
+  }
+
   .service-agreements-lists .col-width-3 {
     width: 20%;
   }
