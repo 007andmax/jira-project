@@ -19,6 +19,8 @@
       $scope.techReportProductSales = {};
       $scope.reportAccountsReceivable = {};
 
+
+
       $scope.loadingInProgress = false;
       $scope.isReportAvailable = false;
 
@@ -29,6 +31,34 @@
 
       $scope.user = $rootScope.currentUser;
       $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
+
+      $scope.chartData = []
+      $scope.chartOptions = {
+        chart: {
+                type: 'pieChart',
+                height: 350,
+                donut: true,
+                x: function(d){return d.name;},
+                y: function(d){return d.time;},
+                showLabels: false,
+
+                pie: {
+                    startAngle: function(d) { return d.startAngle },
+                    endAngle: function(d) { return d.endAngle }
+                },
+                showLegend: false,
+                duration: 500,
+                legend: {
+                    margin: {
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                    }
+                }
+            }
+      }
+
 
       var techReportTypeForChart;
       var renderFinished = {
@@ -220,6 +250,8 @@
                 ticket.username = UsersService.getOneById(ticket.clientUserId);
                 return ticket;
               })
+
+              calculateServicesTime($scope.ticketReport.tickets);
             }
 
 
@@ -232,6 +264,85 @@
           }
         })
       }
+
+      function calculateServicesTime(tickets) {
+        var overallTime = {};
+
+        for (var i = 0; i < tickets.length; i++) {
+          var upd = tickets[i].updates;
+
+          if (!upd) continue;
+
+          for (var j = 0; j < upd.length; j++) {
+            if (upd[j].type === 'SERVICE') {
+              var exp = upd[j].expenses;
+
+              if (!exp) continue;
+
+              for (var k = 0; k < exp.length; k++) {
+                if (exp[k].isServiceExpense) {
+                  var name = exp[k].name;
+                  var time = exp[k].quantity;
+
+                  if (overallTime[name]) {
+                    overallTime[name] += time;
+                  } else {
+                    overallTime[name] = time;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        calculateTopTime(overallTime);
+      }
+
+      function calculateTopTime(timeObj) {
+        var keys = Object.keys(timeObj);
+        var timeArr = [];
+
+        for (var i = 0; i < keys.length; i++) {
+          var time = {
+            name: keys[i],
+            time: timeObj[keys[i]]
+          };
+
+          timeArr.push(time);
+        }
+
+        timeArr.sort(function(a, b) {
+          return b.time - a.time;
+        })
+
+        var top = timeArr.slice(0, 8);
+        var rest = timeArr.slice(8);
+
+        if (rest.length) {
+          var time = {
+            name: 'Rest',
+            time: rest.reduce(function(acc, i) {
+              acc += i.time;
+              return acc;
+            }, 0)
+          };
+          top.push(time);
+
+
+        }
+
+        $scope.overallServiceTime = top;
+
+
+        drawChart(top);
+      }
+
+      function drawChart(data) {
+        $scope.chartData = data;
+      }
+
+
+
 
 
       $scope.changeReportPageView = function (reportType) {

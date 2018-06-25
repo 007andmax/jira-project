@@ -163,22 +163,20 @@
         <div class="customer-ticket__report--summary" on-finish-render="buildPdf()">
           <h3>Resolved Tickets</h3>
           <div class="customer-ticket__header">
-            <div class="customer-ticket__header--item"></div>
-            <div class="customer-ticket__header--item">
-              <p class="blue-service">Onsite Service <span>200</span></p>
-              <p class="green-service">Remote Service <span>68</span></p>
-              <p class="red-service">Update and monitors <span>15</span></p>
-              <p class="yellow-service">Meetings <span>10</span></p>
-              <p class="yellow-service">Meetings <span>10</span></p>
-              <p class="yellow-service">Meetings <span>10</span></p>
-              <p class="yellow-service">Meetings <span>10</span></p>
-              <p class="yellow-service">Meetings <span>10</span></p>
-              <p class="yellow-service">Meetings <span>10</span></p>
+            <div class="customer-ticket__header--item canvas-chart">
+
+              <nvd3 options="chartOptions" data="chartData"></nvd3>
             </div>
             <div class="customer-ticket__header--item">
-              <p>Total amount: <span>10</span></p>
+              <p class="blue-service" ng-repeat="time in overallServiceTime">
+                {{ time.name }} <span>{{ time.time | reportTime }}</span>
+              </p>
+
+            </div>
+            <div class="customer-ticket__header--item">
+              <p>Total amount: <span>{{ticketReport.tickets.length}}</span></p>
               <div>
-                <p><span style="font-weight: 400;">6:00</span> hr</p>
+                <p><span style="font-weight: 400;">{{ticketReport.timeSpent | reportTime}}</span> hr</p>
                 <p style="color:#fff;">Time Spent</p>
               </div>
               <p class="ticket-report-time"><span>21 Min</span> Response time</p>

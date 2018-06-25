@@ -62,8 +62,8 @@
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
     $scope.customerTicketShowTotalTicketAmount = true;
-    $scope.customerTicketTypes = ['Simple report', 'Extended report'];
-    $scope.customerTicketType = 'Simple report';
+    // $scope.customerTicketTypes = ['Simple report', 'Extended report'];
+    $scope.customerTicketType = 'Extended report';
     $scope.reportTypes = ['Summary', 'Detailed'];
     $scope.previousReportType = 'Summary';
     $scope.reportType = "Summary";
