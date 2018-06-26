@@ -33,7 +33,7 @@
       $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
 
       $scope.chartData = [];
-      $scope.chartColors = ["#415ff4", "#ef0909", "#23d12c", "#f9f916", "#f2a60e", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
+      $scope.chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
       $scope.Math = Math;
 
       $scope.chartOptions = {
