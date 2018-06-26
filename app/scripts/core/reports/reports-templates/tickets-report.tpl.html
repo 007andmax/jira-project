@@ -27,132 +27,8 @@
        style="padding: 0;width: 980px;"
        ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl"
        ng-show="!loadingInProgress">
-
     <div class="customer-ticket" ng-if="ticketReport && isReportAvailable">
       <div class="customer-ticket__report">
-        <!--<div class="customer-ticket__report&#45;&#45;summary">-->
-        <!--<h3>Resolved tickets</h3> <span ng-if="ticketReport.showTotalTicketAmount" class="pull-right"> Total amount: {{ticketReport.tickets.length}}</span>-->
-        <!--<div class="header-product-list-ticket">-->
-        <!--<h3>-->
-        <!--{{ getCompanyById(ticketReport.companyId).name + (ticketReport.userId ? ', ' + getUserName(getUserById(ticketReport.userId)) : '')-->
-        <!--}}-->
-        <!--</h3>-->
-        <!--<p>-->
-        <!--{{ (ticketReport.startDate | date: 'MM/dd/yyyy') + ' - ' + (ticketReport.endDate | date: 'MM/dd/yyyy') }}-->
-        <!--</p>-->
-        <!--</div>-->
-        <!--<table>-->
-        <!--<tbody>-->
-        <!--<tr>-->
-        <!--<td rowspan="2" colspan="1" class="summary-chart">-->
-        <!--<div chart-data-restriction margin="80" divider="20" ng-if="reportChartData && reportChartData.length"-->
-        <!--handle-data="reportChartData" style="height: 100%">-->
-
-        <!--<div d3chart data="chartData" margin="{ top: 10, right: 40, bottom: 30, left: 40}"-->
-        <!--on-finish-rendering="buildPdf" style="height: 100%">-->
-        <!--<d3axis name="date" scale="ordinal" orientation="bottom" filter="parseDate"-->
-        <!--ticks="{{ chartTicks.length }}" tick-values="chartTicks"-->
-        <!--first-tick-dy="-10000" first-tick-dx="-10000"-->
-        <!--last-tick-dy="-10000" last-tick-dx="-10000"></d3axis>-->
-        <!--<d3axis name="tickets" orientation="left" filter="groupBars" ></d3axis>-->
-
-        <!--<d3bars x="date" y="ticketResolved" yscale="tickets" color="#4caf50"-->
-        <!--width="20" chart-tooltip="chart"></d3bars>-->
-        <!--&lt;!&ndash;<d3bars x="date" y="ticketUnresolved" yscale="tickets" color="#0094d0"&ndash;&gt;-->
-        <!--&lt;!&ndash;width="15" offset="-2" chart-tooltip="chart"></d3bars>&ndash;&gt;-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</td>-->
-        <!--<td colspan="1" class="time-info" ng-if="ticketReport.withTimeSpent">-->
-        <!--<p>Time spent</p>-->
-        <!--<h4>{{ timeToHoursAndMinutes(ticketReport.timeSpent) || '0 hours' }}</h4>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td rowspan="1" class="time-info" ng-if="ticketReport.withResponseTime">-->
-        <!--<p>Average Response time</p>-->
-        <!--<h4>{{ timeToHoursAndMinutes(ticketReport.averageResponseTime / 60) || '0 hours' }}</h4>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--</table>-->
-        <!--</div>-->
-        <!--<div class="customer-ticket__report&#45;&#45;details clearfix">-->
-        <!--<h3>Tickets details</h3>-->
-        <!-- <div class="clearfix report-info-point" ng-repeat="ticket in ticketReport.tickets"-->
-        <!--on-finish-render="buildPdf('tickets')">-->
-        <!--<div>-->
-        <!--<div class="col-md-3">-->
-        <!--<p class="text-uppercase fz-13"><strong>Date/Time</strong></p>-->
-        <!--<p>{{ dateParse(ticket.ticketCreatedAt) | date: 'MMM d, y / h:mm:ss a' }}</p>-->
-        <!--</div>-->
-        <!--<div class="col-md-2">-->
-        <!--<p class="text-uppercase fz-13"><strong>Ticket Number</strong></p>-->
-        <!--<p>{{ ticket.ticketNumber }}</p>-->
-        <!--</div>-->
-        <!--<div class="col-md-2">-->
-        <!--<p class="text-uppercase fz-13"><strong>Status</strong></p>-->
-        <!--<p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).split('_').join(' ').toLowerCase() :-->
-        <!--'Unclaimed' }}</p>-->
-        <!--</div>-->
-        <!--<div class="col-md-3">-->
-        <!--<p class="text-uppercase fz-13"><strong>User</strong></p>-->
-        <!--<p>{{ getUserName(getUserById(ticket.clientUserId)) }}</p>-->
-        <!--</div>-->
-        <!--<div class="col-md-2" ng-if="ticket.deviceName">-->
-        <!--<p class="text-uppercase fz-13"><strong>Device</strong></p>-->
-        <!--<p>{{ ticket.deviceName }}</p>-->
-        <!--</div>-->
-        <!--<div class="col-md-2">-->
-        <!--<p class="text-uppercase fz-13"><strong>Response Time</strong></p>-->
-        <!--<p>-->
-        <!--{{ ticket.responseTime ? timeToHoursAndMinutes(ticket.responseTime / 60, true) : 'immediately'}}-->
-        <!--</p>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div ng-if="ticket.description">-->
-        <!--<p class="text-uppercase fz-13" style="padding: 0 5px;"><strong>Description</strong></p>-->
-        <!--<p class="details-futures-info">-->
-        <!--<span class="col-md-12" ng-bind-html="getTrustedHtml(ticket.description)"></span>-->
-        <!--</p>-->
-        <!--</div> -->
-
-        <!--<div ng-if="ticketReport.extendedReport">-->
-        <!--<div ng-repeat="update in ticket.updates">-->
-        <!--<div ng-if="update.note">-->
-        <!--<p class="text-uppercase fz-13"><strong>Notes:</strong></p>-->
-        <!--<p class="details-futures-info" ng-bind-html="getTrustedHtml(update.note)"></p>-->
-        <!--</div>-->
-
-        <!--<div class="extended-report" ng-repeat="expense in update.expenses"-->
-        <!--ng-if="update.expenses && update.expenses.length">-->
-        <!--<p class="text-uppercase fz-13 col-md-4" style="padding-bottom: 0;"><strong>{{ update.type[0] + update.type.slice(1).toLowerCase() }}</strong></p>-->
-        <!--<p class="col-md-3" style="padding-bottom: 0;" ng-if="expense.ilc"><strong>ILC:</strong> {{ expense.ilc }}</p>-->
-        <!--<p class="col-md-3" style="padding-bottom: 0;" ng-if="expense.manufacture"><strong>P/N:</strong>{{ expense.manufacture }}</p>-->
-        <!--<div class="details-futures-info" ng-if="update.type === 'PRODUCT'">-->
-        <!--<div class="col-md-4"><strong>Name:</strong> {{ expense.name }}</div>-->
-        <!--<div class="col-md-2"><strong>Quantity:</strong> {{ expense.quantity }}</div>-->
-        <!--<div class="col-md-3"><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</div>-->
-        <!--</div>-->
-
-        <!--<div class="details-futures-info" ng-if="update.type === 'SERVICE'">-->
-        <!--<div class="col-md-4"><strong>Name:</strong> {{ expense.name }}</div>-->
-        <!--<div class="col-md-2"><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</div>-->
-        <!--<div class="col-md-3"><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<p style="float: left; margin: 5px 0;" ng-if="ticket.discount">-->
-        <!--<strong>Discount: </strong> {{ getAmount(ticket.discount) }}-->
-        <!--</p>-->
-        <!--<p style="float: right; margin: 5px 0; white-space: nowrap;" ng-if="ticket.techUserId">-->
-        <!--<strong class="text-uppercase fz-13">Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}-->
-        <!--</p>-->
-        <!--</div>-->
-        <!--</div>-->
-
         <div class="report-header">
           <h1>Tickets Report</h1>
           <div class="company-info">
@@ -168,7 +44,8 @@
               <nvd3 options="chartOptions" data="chartData"></nvd3>
             </div>
             <div class="customer-ticket__header--item">
-              <p ng-if="ticketReport.timeSpent" ng-repeat="time in overallServiceTime" ng-class="'service-color-' + $index">
+              <p ng-if="ticketReport.timeSpent" ng-repeat="time in overallServiceTime"
+                 ng-class="'service-color-' + $index">
                 {{ time.name }} <span>{{ time.time | reportTime }}</span>
               </p>
 
@@ -179,7 +56,8 @@
                 <p><span style="font-weight: 400;">{{ticketReport.timeSpent | reportTime}}</span> hr</p>
                 <p style="color:#fff;">Time Spent</p>
               </div>
-              <p class="ticket-report-time" ng-if="ticketReport.averageResponseTime"><span>{{ Math.floor(ticketReport.averageResponseTime) }} Min</span> Response time</p>
+              <p class="ticket-report-time" ng-if="ticketReport.averageResponseTime"><span>{{ Math.floor(ticketReport.averageResponseTime) }} Min</span>
+                Response time</p>
             </div>
           </div>
 
@@ -190,15 +68,16 @@
             <div class="col-md-2">TICKET NUMBER</div>
             <div class="col-md-3" style="width: 18%;">DATE / TIME</div>
             <div class="col-md-2" style="width: 20%;">User</div>
-            <div class="col-md-2" style="width: 24%;">Device</div>
+            <div class="col-md-2 device-field-pdf" style="width: 24%;">Device</div>
             <div class="col-md-2" style="width: 12%;">Response Time</div>
             <div class="col-md-1">STATUS</div>
           </div>
           <div class="details-content row" ng-repeat="ticket in ticketReport.tickets" on-finish-render="build()">
             <div class="col-md-2">{{ticket.ticketNumber}}</div>
             <div class="col-md-3" style="width: 18%;">{{ ticket.ticketCreatedAt }}</div>
-            <div class="col-md-2" style="width: 20%;">{{ticket.username.firstName + ' ' + ticket.username.lastName}}</div>
-            <div class="col-md-2" style="width: 24%;">{{ticket.deviceName}}</div>
+            <div class="col-md-2" style="width: 20%;">{{ticket.username.firstName + ' ' + ticket.username.lastName}}
+            </div>
+            <div class="col-md-2 device-field-pdf" style="width: 24%;">{{ticket.deviceName}}</div>
             <div class="col-md-2" style="width: 12%;">{{ formatResponseTime(ticket.responseTime) }}</div>
             <div class="col-md-1" style="padding: 0;" ng-show="ticket.status === 'ON_HOLD'">
               <p class="network-scan-status status-warning">On Hold</p>
@@ -209,7 +88,9 @@
             <div class="col-md-1" style="padding: 0;" ng-show="ticket.status === 'IN_PROGRESS'">
               <p class="network-scan-status status-in-progress">In Progress</p>
             </div>
-            <div class="col-md-12" style="padding-top: 15px!important;"><span style="text-transform: uppercase;font-weight: bold;">Description: </span>{{ticket.description}}</div>
+            <div class="col-md-12" style="padding-top: 15px!important;"><span
+              style="text-transform: uppercase;font-weight: bold;">Description: </span>{{ticket.description}}
+            </div>
           </div>
 
         </div>
@@ -222,6 +103,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
