@@ -49,7 +49,8 @@
                 </label>
               </strong></div>
               <div class="col-md-1" ng-click="sortBy(['date', 'ticketNumber'])">Date</div>
-              <div class="col-md-1" ng-click="sortBy(['client'])" ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>
+              <div class="col-md-1" ng-click="sortBy(['client'])" ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong>
+              </div>
               <div class="col-md-1" ng-click="sortBy(['mfg'])">MFG#</div>
               <div class="col-md-3" ng-click="sortBy(['description'])">Description</div>
               <div class="col-md-2" ng-click="sortBy(['ticketNumber'])">Ticket number</div>
@@ -91,7 +92,8 @@
                 {{product.invoiceNumber }}
               </div>
               <!--<div class="col-md-1">{{product.count}}</div>-->
-              <div class="col-md-1 purchase-cost" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{product.purchaseCost |
+              <div class="col-md-1 purchase-cost" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+                {{product.purchaseCost |
                 currency: '$': 2}}
               </div>
               <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
@@ -103,9 +105,10 @@
         </div>
         <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
           <!--<div class="col-md-1" style="margin-right: 20px;"><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong></div>-->
-          <div class="col-md-1" style="margin-right: 30px;" ><br> <strong><span ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
+          <div class="col-md-1" style="margin-right: 30px;"><br> <strong><span
+            ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
           </div>
-          <div class="col-md-2 purchase-cost" ><br>
+          <div class="col-md-2 purchase-cost"><br>
             <strong><span>{{purchaseCostSum | currency: '$': 2}}</span></strong></div>
         </div>
       </div>
