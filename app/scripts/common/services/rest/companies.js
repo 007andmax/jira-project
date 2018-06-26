@@ -750,6 +750,16 @@
       Utils.handleCallback(future, callback);
     }
 
+    function changeRoleName(name, id, callback) {
+      var future = $http.put('/settings/companyProfile/updateTechRoleName/' + id, { newTechRoleName: name });
+      Utils.handleCallback(future, callback);
+    }
+
+    function addNewRole(role, callback) {
+      var future = $http.post('/settings/companyProfile/createTechRole', role);
+      Utils.handleCallback(future, callback);
+    }
+
     function getPermissions(callback) {
       var future = $http.get('/settings/companyProfile/permissions');
       Utils.handleCallback(future, callback);
@@ -839,6 +849,8 @@
       checkSMTPLoginUnique: checkSMTPLoginUnique,
       getPermissions: getPermissions,
       savePermissions: savePermissions,
+      changeRoleName: changeRoleName,
+      addNewRole: addNewRole,
       getTechRoles: getTechRoles,
       getEmailAlias: getEmailAlias,
       saveEmailAlias: saveEmailAlias,
