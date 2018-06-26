@@ -283,7 +283,7 @@
         var hours = Math.floor(time / 60);
         var minutes = time % 60;
 
-        return addZero(hours) + ':' + addZero(minutes);
+        return addZero(hours) + ':' + addZero(minutes) + ' hr';
 
 
         function addZero(num) {

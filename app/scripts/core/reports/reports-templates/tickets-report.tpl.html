@@ -168,7 +168,7 @@
               <nvd3 options="chartOptions" data="chartData"></nvd3>
             </div>
             <div class="customer-ticket__header--item">
-              <p ng-repeat="time in overallServiceTime" ng-class="'service-color-' + $index">
+              <p ng-if="ticketReport.timeSpent" ng-repeat="time in overallServiceTime" ng-class="'service-color-' + $index">
                 {{ time.name }} <span>{{ time.time | reportTime }}</span>
               </p>
 
