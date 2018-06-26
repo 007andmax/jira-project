@@ -174,12 +174,12 @@
 
             </div>
             <div class="customer-ticket__header--item">
-              <p>Total amount: <span>{{ticketReport.tickets.length}}</span></p>
+              <p ng-if="!ticketReport.hideTotalTickets">Total amount: <span>{{ticketReport.tickets.length}}</span></p>
               <div>
                 <p><span style="font-weight: 400;">{{ticketReport.timeSpent | reportTime}}</span> hr</p>
                 <p style="color:#fff;">Time Spent</p>
               </div>
-              <p class="ticket-report-time"><span>21 Min</span> Response time</p>
+              <p class="ticket-report-time" ng-if="ticketReport.averageResponseTime"><span>{{ Math.floor(ticketReport.averageResponseTime) }} Min</span> Response time</p>
             </div>
           </div>
 
@@ -200,7 +200,7 @@
             <div class="col-md-2">{{ ticket.ticketCreatedAt }}</div>
             <div class="col-md-2">{{ticket.username.firstName + ' ' + ticket.username.lastName}}</div>
             <div class="col-md-1">{{ticket.deviceName}}</div>
-            <div class="col-md-2">{{ticket.responseTime}}</div>
+            <div class="col-md-2">{{ formatResponseTime(ticket.responseTime) }}</div>
             <div class="col-md-1" style="padding: 0;" ng-show="ticket.status === 'ON_HOLD'">
               <p class="network-scan-status status-warning">On Hold</p>
             </div>

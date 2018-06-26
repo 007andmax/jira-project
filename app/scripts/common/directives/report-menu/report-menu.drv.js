@@ -149,6 +149,11 @@
 
     $scope.firstIteration = true;
 
+
+    $scope.hideTotalTickets = function() {
+      $rootScope.customerTicketShowTotalTicketAmount = $scope.customerTicketShowTotalTicketAmount;
+    }
+
     // to clear company input field when report type changed to Summary
     $scope.$watch('reportType', function () {
       if (location === '/reports/byProducts' || location === '/reports/byCustomers') {
@@ -358,6 +363,11 @@
                 startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
+
+              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+                dataToSend.userId = reportSettings.techUser.id
+              }
+
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);
 
