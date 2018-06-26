@@ -4,7 +4,10 @@
 			Permissions
 		</p>
 	</div>
-	<div class="col-md-2 col-sm-3  col-xs-3 wrap-category" ng-repeat="role in roles">
+	<div class="col-md-2 col-sm-3  col-xs-3 wrap-category"
+			 ng-repeat="role in roles"
+			 ng-mouseover="showEditBtn = role.id"
+			 ng-mouseleave="showEditBtn = false">
 		<p ng-show="!isRoleNameEdited || editData.id !== role.id" class="permission-headline">{{ role.name }}</p>
 		<input ng-show="isRoleNameEdited && role.id === editData.id" type="text" class="form-control" ng-model="editData.name"></input>
 		<i class="icn-sm icn-remove-old pointer pull-right"
@@ -15,13 +18,12 @@
 			 style = "margin: 5px; float: left !important"
 			 ng-show="isRoleNameEdited && role.id === editData.id" ng-click="changeRoleName()"
 			 uib-tooltip="Save" tooltip-popup-delay="2000"></i>
-		<button ng-show="!isRoleNameEdited || editData.id !== role.id" style="right: 3px;"
+		<button ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)" style="right: 3px;"
 						class="company-edit-icn company-edit-icn-sm"
-						ng-show="true"
 						ng-click="editRoleName(role.name, role.id)"></button>
 
 	</div>
-	<div class=" col-md-2 col-sm-3  col-xs-3 wrap-category">
+	<div class=" col-md-2 col-sm-3  col-xs-3 wrap-category" ng-if="roles && roles.length < 5">
 		<div class="btn btn-primary has-tooltip" ng-click="addNewRole()">
 			<div class="create-new-wrap">
 				<span class="create-new-label">Create New</span>
