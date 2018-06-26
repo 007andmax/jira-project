@@ -33,8 +33,8 @@
       $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
 
       $scope.chartData = [];
-      $scope.chartColors = ["#415ff4", "#ef0909", "#23d12c", "#f9f916", "#f2a60e", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
-
+      $scope.chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
+      $scope.Math = Math;
 
       $scope.chartOptions = {
         chart: {
@@ -255,10 +255,15 @@
               $scope.ticketReport.tickets = $scope.ticketReport.tickets.map(function(ticket) {
                 ticket.username = UsersService.getOneById(ticket.clientUserId);
                 ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
+
                 return ticket;
               })
 
               calculateServicesTime($scope.ticketReport.tickets);
+            }
+
+            if ($rootScope.customerTicketShowTotalTicketAmount === false) {
+              $scope.ticketReport.hideTotalTickets = true;
             }
 
 
@@ -270,6 +275,24 @@
             // $scope.buildPdf('tickets');
           }
         })
+      }
+
+      $scope.formatResponseTime = function(time) {
+        if (!time && time !== 0) return;
+
+        var hours = Math.floor(time / 60);
+        var minutes = time % 60;
+
+        return addZero(hours) + ':' + addZero(minutes) + ' hr';
+
+
+        function addZero(num) {
+          if (String(num).length < 2) {
+            return '0' + num;
+          }
+
+          return num;
+        }
       }
 
       function calculateServicesTime(tickets) {
@@ -345,6 +368,12 @@
       }
 
       function drawChart(data) {
+        if (!$scope.ticketReport.timeSpent) {
+          data = data.map(function(el) {
+            el.time = 0;
+            return el;
+          })
+        }
         $scope.chartData = data;
       }
 
