@@ -163,6 +163,10 @@
       }
     });
 
+    $scope.$watch('customerTicketWithTimeSpent', function(val) {
+      $rootScope.customerTicketWithTimeSpent = val;
+    })
+
     $scope.$watch('reportSetting.dateRange', function() {
       if ($scope.reportSetting.dateRange) {
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
@@ -358,7 +362,7 @@
                 companyId: reportSettings.company.id,
                 extendedReport: ($scope.customerTicketType === 'Extended report'),
                 withResponseTime: $scope.customerTicketWithResponseTime,
-                withTimeSpent: $scope.customerTicketWithTimeSpent,
+                withTimeSpent: true,
                 showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
                 startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')

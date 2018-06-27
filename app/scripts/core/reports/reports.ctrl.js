@@ -266,6 +266,8 @@
               $scope.ticketReport.hideTotalTickets = true;
             }
 
+            $scope.showHeader = $rootScope.customerTicketWithTimeSpent
+
 
 
             $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');

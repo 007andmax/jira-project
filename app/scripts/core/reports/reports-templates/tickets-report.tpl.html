@@ -36,7 +36,7 @@
             <p><span>{{ticketReport.startDate}}</span> - <span>{{ ticketReport.endDate }}</span></p>
           </div>
         </div>
-        <div class="customer-ticket__report--summary" on-finish-render="buildPdf()">
+        <div ng-show = "showHeader" class="customer-ticket__report--summary" on-finish-render="buildPdf()">
           <h3>Resolved Tickets</h3>
           <div class="customer-ticket__header">
             <div class="customer-ticket__header--item canvas-chart">
