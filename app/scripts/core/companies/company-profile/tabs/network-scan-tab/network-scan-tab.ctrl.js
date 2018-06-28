@@ -65,6 +65,14 @@
           }
         };
 
+        $scope.$watchCollection('scanDevices.devices', function() {
+          if ($scope.manualSort) {
+            $scope.manualSort = false;
+            return;
+          }
+          $scope.sortDevices();
+        })
+
         $scope.downloadAgentUser = {
           agentName: '',
           agentPassword: '',
@@ -321,6 +329,9 @@
         };
 
         $scope.sortDevices = function(option) {
+          if (option) {
+            $scope.manualSort = true;
+          }
           if (!option) {
             option = $scope.orderScanBy;
           } else if (option === $scope.orderScanBy) {
@@ -427,7 +438,7 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
-          $scope.sortDevices();
+          $scope.sortDevices('hostName');
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
           if(val === 'finished') {
             UserNotificationService.show('Scanning finished', true);

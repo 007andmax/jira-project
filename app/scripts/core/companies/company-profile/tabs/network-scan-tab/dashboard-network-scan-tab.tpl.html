@@ -218,8 +218,12 @@
           </div>
           <div class="col-md-1">
             <!--<div class="network-scan-status status-success">Agent installed</div>-->
-            <p class="network-scan-status {{ getStatusClass() }}"
-               ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message }}</p>
+            <div class="network-scan-status {{ getStatusClass() }} tooltip-ns" ng-show="device.status.message === 'Managed' || device.realTimeChecker">
+              {{ device.status.message }}
+              <span ng-show="device.status.tooltip" class="tooltiptext-ns">{{device.status.tooltip}}</span>
+            </div>
+            <!-- <p class="network-scan-status {{ getStatusClass() }}"
+               ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message === 'Error' ? device.agentStatusMsg : device.status.message }} </p> -->
             <!--<div class="network-scan-status status-danger">Blocked</div>-->
           </div>
           <div class="col-md-1" style="justify-content: flex-end;">

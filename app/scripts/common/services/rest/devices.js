@@ -20,6 +20,111 @@
 
       var scannedDevices = {};
 
+
+      var installationStatuses = {
+        'INITIALIZATION': {
+          status: 'Installing',
+          message: "Remote installation initialized"
+        },
+        'CONNECT_TO_HOST': {
+          status: 'Installing',
+          message: 'Connecting to a remote computer'
+        },
+        'OPEN_SC_MANAGER': {
+          status: 'Installing',
+          message: 'Opening the service manager'
+        },
+        'OPEN_S_C_MANAGER': {
+          status: 'Installing',
+          message: 'Opening the service manager'
+        },
+        'INSTALL_CLEAN_UP': {
+          status: 'Installing',
+          message: 'Cleaning the previous installation'
+        },
+        'OPEN_DESTINATION_FOLDER': {
+          status: 'Installing',
+          message: 'Opening the destination folder'
+        },
+        'COPY_BINARY_FILES': {
+          status: 'Installing',
+          message: 'Copying the binary files'
+        },
+        'SERVICE_INSTALLATION': {
+          status: 'Installing',
+          message: 'Running the service'
+        },
+        'SERVICE_INSTALLED': {
+          status: 'Installing',
+          message: 'Service is installed \ started'
+        },
+        'BIN_DOWNLOADING': {
+          status: 'Installing',
+          message: 'Downloading the installer'
+        },
+        'INSTALLATION': {
+          status: 'Installing',
+          message: 'Running the installer'
+        },
+        'INSTALL_FINISHED': {
+          status: 'Installed',
+          message: 'Remote installation completed successfully'
+        },
+        'ERROR_USER_NAME_OR_PASS': {
+          status: 'Bad password',
+          message: 'Incorrect login or password'
+        },
+        'ERROR_INVALID_USER_NAME': {
+          status: 'Bad password',
+          message: 'Incorrect username'
+        },
+        'ERROR_HOST_OFFLINE_OR_FIREWALL': {
+          status: 'Blocked',
+          message: 'The remote computer is not connected to the network or is blocked by a firewall'
+        },
+        'ERROR_UAC': {
+          status: 'Blocked',
+          message: 'Enabled UAC does not allow installation'
+        },
+        'ERROR_INITIALIZATION': {
+          status: 'Install error',
+          message: 'Initialization error'
+        },
+        'ERROR_CONNECT_TO_HOST': {
+          status: 'Install error',
+          message: 'Error  connecting to a remote computer'
+        },
+        'ERROR_OPEN_SC_MANAGER': {
+          status: 'Install error',
+          message: 'Error opening service manager'
+        },
+        'ERROR_OPEN_S_C_MANAGER': {
+          status: 'Install error',
+          message: 'Error opening service manager'
+        },
+        'ERROR_OPEN_DESTINATION_FOLDER': {
+          status: 'Install error',
+          message: 'Error opening destination folder'
+        },
+        'ERROR_COPY_BINARY_FILES': {
+          status: 'Install error',
+          message: 'Error copying files'
+        },
+        'ERROR_SERVICE_INSTALLATION': {
+          status: 'Install error',
+          message: 'Error installing service'
+        },
+        'ERROR_BIN_DOWNLOADING': {
+          status: 'Install error',
+          message: 'Failed to load installer'
+        },
+        'ERROR_INSTALLATION': {
+          status: 'Install error',
+          message: 'Installation error'
+        },
+
+      }
+
       Utils.customizeObj(storage);
 
       CompaniesService._addInitListener(init);
@@ -40,7 +145,55 @@
 
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
             // console.log(newChange, '****s*********************************8')
-            if (newChange.action === 'DEVICE_ONLINE') {
+            // console.log(newChange, '/device change')
+            if (false && newChange.action === 'REMOTE_INSTALL_INFO') {
+
+              var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
+              console.log(device, 'IS DEVICE ????')
+              if (!device) {
+                console.log(scannedDevices, 'SCANNED DEVICES, NO DEVICES');
+                for (var i in scannedDevices[companyId]) {
+
+                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {
+                    device = scannedDevices[companyId][i];
+                  }
+                }
+              }
+
+              console.log(console.log(newChange, '_____________________'))
+
+              if (device) {
+                console.log(newChange.data.status, 'STATUS')
+                if (newChange.data.status === 'MANAGED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed');
+                } else if (newChange.data.status === 'INSTALLED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'installed');
+                } else if (newChange.data.status === 'INSTALL_ERROR') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'error');
+                } else if (newChange.data.status === 'LOGIN_ERROR') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'loginError');
+                } else if (newChange.data.status === 'UNKNOWN') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'unknown');
+                } else if (newChange.data.status === 'INSTALL_INITIALIZED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'init');
+                } else if (newChange.data.status === 'INSTALL_DEPLOYING') {
+                  console.log("__+_+_+_+_+_+_+__+, in progress")
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
+                }
+                Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
+                Utils.defineReadOnlyProperty(device, "realTimeChecker", true);
+              }
+
+              var call = callbacksForRemoteInstall[newChange.data.netScanId] || callbacksForRemoteInstall[newChange.data.deviceId];
+              if (call && typeof call === "function") {
+                call();
+              }
+
+              var uninstallCall = callbacksForRemoteUninstall[newChange.data.netScanId] || callbacksForRemoteUninstall[newChange.data.deviceId];
+              if (uninstallCall && typeof uninstallCall === "function") {
+                uninstallCall();
+              }
+            } else  if (newChange.action === 'DEVICE_ONLINE') {
               var deviceFound = false;
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
@@ -620,12 +773,20 @@
         $http.get('/devices/networkScan?companyId=' + companyId).then(function (resp) {
           var networkScan = JSON.parse(resp.data.networkScan);
 
+          console.log(resp, 'net scam')
+
           if (networkScan) {
             Utils.defineReadOnlyProperty(scannedDevices, "status", networkScan.netScanStatus.toLowerCase());
             scannedDevices[companyId] = networkScan.devices;
+
+
           }
 
+          console.log('im here')
+
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
+
+            console.log(console.log(newChange, '**************************88'))
 
             if (newChange.action === 'NETWORK_SCAN') {
 
@@ -650,34 +811,33 @@
                 }
               }
 
-            } else if (newChange.action === 'REMOTE_INSTALL') {
-
+            } else if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
-
               if (!device) {
+                console.log(scannedDevices, 'SCANNED DEVICES, NO DEVICES');
                 for (var i in scannedDevices[companyId]) {
-                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId) {
+
+                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {
                     device = scannedDevices[companyId][i];
                   }
                 }
               }
 
+              // console.log(console.log(newChange, '_____________________'))
+
+              // console.log(console.log(newChange, '_____________________'))
+
               if (device) {
-                if (newChange.data.status === 'MANAGED') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed');
-                } else if (newChange.data.status === 'INSTALLED') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'installed');
-                } else if (newChange.data.status === 'ERROR') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'error');
-                } else if (newChange.data.status === 'LOGIN_ERROR') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'loginError');
-                } else if (newChange.data.status === 'UNKNOWN') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'unknown');
-                } else if (newChange.data.status === 'INIT') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'init');
-                } else if (newChange.data.status === 'IN_PROGRESS') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
+                var statusName = newChange.data.status;
+                var status = installationStatuses[statusName];
+
+                if (statusName === 'MANAGED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed')
+                  Utils.defineReadOnlyProperty(device, "agentStatusTooltip", 'Managed');
+                  return;
                 }
+                Utils.defineReadOnlyProperty(device, "agentStatus", status.status);
+                Utils.defineReadOnlyProperty(device, "agentStatusTooltip", status.message);
                 Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
                 Utils.defineReadOnlyProperty(device, "realTimeChecker", true);
               }
