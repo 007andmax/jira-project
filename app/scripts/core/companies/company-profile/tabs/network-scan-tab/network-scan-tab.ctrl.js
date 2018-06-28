@@ -6,9 +6,9 @@
     [
       '$scope', 'UsersService', 'CompaniesService', 'DevicesService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.UserNotificationService',
-      'Utils', 'PasswordManagerService', 'quicktech.common.services.UserConfirmationsService',
+      'Utils', 'PasswordManagerService', 'quicktech.common.services.UserConfirmationsService', '$filter',
       function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService,
-                UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService) {
+                UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService, $filter) {
         var lastMasterAgentId;
 
         $scope.testCredentialsModel = {};
@@ -17,11 +17,10 @@
         $scope.selectedDevices = {};
         $scope.isScanDevicesLoad = false;
         $scope.orderScanBy = 'hostName';
+        $scope.reverse = false;
         $scope.PermissionsService = PermissionsService;
         $scope.passwordShown = false;
-
-
-
+        $scope.defaultMasterAgent = null;
         $scope.selectedCredential = {};
 
         $scope.usersWithEmails = UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
@@ -37,22 +36,12 @@
             if (lastMasterAgentId) {
               // $scope.masterAgent = DevicesService.getOneByAgentId(lastMasterAgentId, $scope.company.id);
               // $scope.lastMasterAgent = $scope.masterAgent;
-              $scope.masterAgent = selectMAsterAgent();
+              $scope.masterAgent = selectMAsterAgent(lastMasterAgentId);
               $scope.lastMasterAgent = $scope.masterAgent;
             }
 
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
-              DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
-                $scope.scanDevices = $scope.scanDevices || {};
-                var devices = resp[$scope.company.id];
-                if (devices) {
-                  $scope.scanDevices.devices = devices.sort(function (a, b) {
-                    return a.ipAddress < b.ipAddress;
-                  });
-                }
-
-                $scope.scanDevices.status = resp.status;
-              });
+              getScanDevices();
             } else {
               $scope.scanDevices = undefined;
               $scope.isScanDevicesLoad = false;
@@ -76,6 +65,14 @@
           }
         };
 
+        $scope.$watchCollection('scanDevices.devices', function() {
+          if ($scope.manualSort) {
+            $scope.manualSort = false;
+            return;
+          }
+          $scope.sortDevices();
+        })
+
         $scope.downloadAgentUser = {
           agentName: '',
           agentPassword: '',
@@ -89,18 +86,48 @@
           $scope.downloadLink = resp.downloadLink;
         });
 
-        function selectMAsterAgent() {
-          if ($scope.agents) {
+        function getScanDevices(newMasterAgent) {
+          DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
+            $scope.scanDevices = $scope.scanDevices || {};
+            var devices = resp[$scope.company.id];
+            if (devices) {
+              $scope.scanDevices.devices = devices.sort(function (a, b) {
+                return a.ipAddress < b.ipAddress;
+              });
+            }
 
-            var agentsSortedByCreatedAtDate = $scope.agents.sort(function (a, b) {
-              var aa = new Date(a.createdAt);
-              var bb = new Date(b.createdAt);
-              return aa > bb
-            });
-            return agentsSortedByCreatedAtDate[0]
+            $scope.scanDevices.status = resp.status;
+          });
+        }
 
+        function selectMAsterAgent(masterAgentId) {
+          if ($scope.masterAgent) {
+            return $scope.masterAgent;
           }
 
+          if ($scope.agents) {
+            var masterAgent = $scope.agents.find(function(agent) {
+              return agent.master;
+            });
+
+            if (masterAgent) {
+              if (!$scope.defaultMasterAgent) {
+                $scope.defaultMasterAgent = masterAgent;
+              }
+
+              return masterAgent;
+            } else {
+              var agentsSortedByCreatedAtDate = $scope.agents.sort(function (a, b) {
+                var aa = new Date(a.createdAt);
+                var bb = new Date(b.createdAt);
+                return aa > bb
+              });
+
+              // DevicesService.markDeviceAsMaster($scope.company.id, masterAgent.agentId);
+
+              return agentsSortedByCreatedAtDate[0]
+            }
+          }
         }
 
         $scope.changeShowPassword = function() {
@@ -264,6 +291,40 @@
                 deviceIds.push(deviceId);
               }
             }
+
+            $scope.devicesToWatch = deviceIds.map(function(id) {
+              return $scope.scanDevices.devices.find(function(device) {
+                return device.id === id;
+              })
+            })
+            $scope.devicesToWatch = $scope.devicesToWatch.filter(function(el) {
+              return !!el;
+            })
+
+            // console.log(devicesToWatch, 'deviecs')
+
+            // consossle.log($scope.selectedCredential, $scope.devicesToWatch, 's')
+
+            if ($scope.selectedCredential.password && $scope.selectedCredential.username) {
+              var watcher = $scope.$watch('devicesToWatch', function(val) {
+                var completedDevices = 0;
+                var devices = $scope.devicesToWatch;
+
+                for (var i = 0; i < devices.length; i++) {
+                  if (devices[i].status.message !== 'Installing' && devices[i].status.tooltip) {
+                    completedDevices++;
+                  }
+                }
+
+                if (completedDevices === devices.length) {
+                  $scope.isInstallInProgress = false;
+                }
+              }, true)
+            } else {
+              $scope.isInstallInProgress = false;
+            }
+
+
             if (deviceIds.length) {
               var dto = {
                 login: $scope.testCredentialsModel.username,
@@ -273,7 +334,7 @@
                 discoveredByAgentId: $scope.discoveredByAgentId
               };
               DevicesService.sendInstallAgentRequests(dto, function () {
-                $scope.isInstallInProgress = false;
+
               });
             }
           } else {
@@ -289,7 +350,49 @@
               $scope.saveMasterAgentInProgress = false;
             });
           }
+          // var lastMasterAgentId = masterAgent.agentId;
+          // $scope.discoveredByAgentId = lastMasterAgentId;
+          //
+          // if (lastMasterAgentId) {
+          //   $scope.masterAgent = masterAgent;
+          //   $scope.lastMasterAgent = $scope.masterAgent;
+          // }
+          //
+          // getScanDevices();
+
         };
+
+        $scope.sortDevices = function(option) {
+          if (option) {
+            $scope.manualSort = true;
+          }
+          if (!option) {
+            option = $scope.orderScanBy;
+          } else if (option === $scope.orderScanBy) {
+            $scope.reverse = !$scope.reverse;
+          } else {
+            $scope.reverse = false;
+          }
+
+          $scope.orderScanBy = option;
+
+          if (option === 'ipAddress') {
+            $scope.scanDevices.devices.sort(function(a, b) {
+              var first = $scope.reverse ? b : a;
+              var second = $scope.reverse ? a : b;
+
+              return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
+            });
+          } else {
+            $scope.scanDevices.devices = $filter('orderBy')($scope.scanDevices.devices, option, $scope.reverse);
+          }
+
+          function getIpAsNum(ip) {
+            return +ip.split('.').join('');
+          }
+
+
+        }
 
         $scope.runScanDevices = function () {
           $scope.runScan = true;
@@ -369,11 +472,18 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
+          $scope.sortDevices('hostName');
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
           if(val === 'finished') {
             UserNotificationService.show('Scanning finished', true);
           }
         });
+
+        $scope.$on('$destroy', function() {
+          if ($scope.defaultMasterAgent) {
+            DevicesService.markDeviceAsMaster($scope.company.id, $scope.defaultMasterAgent.agentId);
+          }
+        })
 
       }
     ]);

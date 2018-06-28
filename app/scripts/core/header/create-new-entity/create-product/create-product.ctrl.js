@@ -16,6 +16,8 @@
         }
       });
 
+      $scope.mfgRequired = false;
+
       $scope.taxes = TaxesService.getAll();
 
       ProductsService.getCategories($scope, function (resp) {
@@ -84,7 +86,8 @@
       };
 
       $scope.$watch('editProduct.company', function (value) {
-        if ($scope.editProductForm.editProductVendor.$dirty) {
+        // console.log($scope.editProductForm, 'editproduct')
+        if ($scope.editProductForm.editProductVendor && $scope.editProductForm.editProductVendor.$dirty) {
           $scope.editProductForm.editProductVendor.$setValidity('vendorNotExist', !value || typeof value !== 'string');
         }
       });
@@ -109,7 +112,7 @@
 
       $scope.saveChangeProduct = function (form) {
         $scope.validateCategory($scope.editProduct.category, form);
-
+        
         if (form.$valid) {
 
           $scope.disabledSaveChangeButton = true;
@@ -128,8 +131,6 @@
           for(var i=0; i<$scope.editProduct.taxes.length; i++) {
             changedProduct.taxIds.push($scope.editProduct.taxes[i].id)
           }
-
-
 
           ProductsService.saveProduct(changedProduct, function (resp) {
             $scope.disabledSaveChangeButton = false;

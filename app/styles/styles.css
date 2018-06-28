@@ -1159,7 +1159,7 @@ hr {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 59%;
+  max-width: 63%;
   width: 100%;
 }
 
@@ -3925,7 +3925,7 @@ _:-moz-tree-row(hover), .tax-recurring .form-control[readonly] {
 
 .form-control[disabled],
 fieldset[disabled] .form-control {
-  cursor: default;
+  cursor: default !important;
 }
 
 textarea.form-control {
@@ -10805,8 +10805,14 @@ button.close {
 }
 
 .tooltip.right {
-  margin-left: 6px;
+  margin-left: 16px;
   padding: 0;
+}
+
+.tooltip.right .tooltip-inner:after {
+  top: calc(50% - 2.5px);;
+  left: -8px;
+  transform: rotate(90deg);
 }
 
 .tooltip.bottom {
@@ -11516,7 +11522,7 @@ button.close {
 }
 
 .fixed-block-top {
-  height: 54px;
+  height: 57px;
 }
 
 .invoices .fixed-block-top {
@@ -11754,6 +11760,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1600px) {
+  .invoices .invoices-header .invoices-header-filters {
+    max-width: 90%;
+  }
+
   .invoices-header .dropdown-menu > li > a {
     padding: 4px 20px;
   }
@@ -11828,6 +11838,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1366px) {
+  .invoices .invoices-header .invoices-header-filters .btn-success{
+    max-width: 110px!important;
+    font-size: 12px;
+  }
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 106px !important;
   }

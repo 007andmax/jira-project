@@ -117,6 +117,16 @@
           fillNotifyUsersList();
         }
 
+        if ($scope.blockTimeContract && $scope.blockTimeContract.services) {
+          $scope.blockTimeContract.services = $scope.blockTimeContract.services.map(function(service) {
+            if (!service.nameValue) {
+              service.nameValue = service.name;
+            }
+
+            return service;
+          })
+        }
+
 
         ServicesService.getServicesData($scope, function(resp){
           if(resp) {
@@ -137,7 +147,7 @@
 
         function pickService(serviceName) {
           for(var i=0; i<$scope.defaultServicesForDropdown.length; i++) {
-            if($scope.defaultServicesForDropdown[i].name === serviceName) {
+            if(getNameAsObject($scope.defaultServicesForDropdown[i].name) === serviceName) {
               $scope.defaultServicesForDropdown.splice(i, 1);
               break;
             }
@@ -146,7 +156,7 @@
         function unpickExistingServices() {
           for(var s=0; s<$scope.blockTimeContract.services.length; s++) {
             for(var d=0; d< $scope.defaultServicesForDropdown.length; d++) {
-              if($scope.defaultServicesForDropdown[d].name === $scope.blockTimeContract.services[s].name) {
+              if(getNameAsObject($scope.defaultServicesForDropdown[d].name) === getNameAsObject($scope.blockTimeContract.services[s].name)) {
                 $scope.defaultServicesForDropdown.splice(d, 1);
               }
             }
@@ -155,11 +165,16 @@
 
         function unpickService(serviceName) {
           for(var i=0; i<$scope.defaultServices.length; i++) {
-            if($scope.defaultServices[i].name === serviceName) {
+            if(getNameAsObject($scope.defaultServices[i].name) === serviceName) {
               $scope.defaultServicesForDropdown.push($scope.defaultServices[i]);
               break;
             }
           }
+        }
+
+        function getNameAsObject(name) {
+          if (name.name) return name.name;
+          return name;
         }
 
         $scope.newContractService = {
@@ -279,6 +294,7 @@
         }, function(oldEndDate) {
           chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate);
         });
+
 
         // $scope.changeNumOfIntervals = function(newEndDate) {
         //   chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate)
@@ -442,7 +458,7 @@
           if (serviceList && service) {
             var unique = true;
             for (var i = 0; i < serviceList.length; i++) {
-              if (serviceList[i].name === service.name) {
+              if (getNameAsObject(serviceList[i].name) === service.name) {
                 unique = false;
                 break;
               }
@@ -491,6 +507,60 @@
           }
         };
 
+
+        $scope.$watch(function() {
+          return $scope.blockTimeContract.services
+        }, function(val) {
+          // console.log('collection', val)
+          // console.log($scope.defaultServicesAdditionalForDropDown);
+
+          console.log(val, 'container')
+
+          for (var i = 0; i < val.length; i++) {
+            var serv = val[i];
+
+            if (typeof serv.name === 'object') {
+              serv = Object.assign({}, serv);
+
+              // var defaultServ = serv;
+              // defaultServ.nameValue = defaultServ.name;
+              //
+              // console.log(serv.name, serv.nameValue, 'NEED TO CHANGE')
+              // var newServ = $scope.defaultServicesAdditionalForDropDown.find(function(value) {
+              //   return value.name === serv.nameValue;
+              // });
+
+              var ns = {
+                name: serv.nameValue,
+                rate: serv.name.rate,
+                billable: true,
+                taxes: serv.name.taxes,
+                nameValue: serv.nameValue
+              };
+
+              // console.log(serv, 'NEWSERV');
+
+              (function() {
+                var id = i;
+                // console.log(ns, id, 'SERV')
+                var serv = ns;
+
+                validateNewServiceName(serv.nameValue).then(function (resp) {
+                  if (resp) {
+                    // console.log(ns, "NEW")
+                    $scope.blockTimeContract.services.splice(id, 1, ns);
+                  }
+                }, function() {
+                  showErrorNewServiceContractValidation();
+
+                })
+              }())
+
+
+            }
+          }
+        }, true)
+
         $scope.getUserById = function (userId) {
           return UsersService.getOneById(userId);
         };
@@ -518,7 +588,7 @@
                 $scope.newBlockTimeServiceErrorMessage = 'Please enter start and end date to check service name';
                 $scope.showAddButtonNewBlockServices = true;
               } else {
-                validateNewServiceName(service.name, 'block').then(function (resp) {
+                validateNewServiceName(getNameAsObject(service.name), 'block').then(function (resp) {
                   $scope.showAddButtonNewBlockServices = true;
                   if (resp) {
                     if (service.name.name && service.name.name.length) {
@@ -583,7 +653,7 @@
         $scope.addContractService = function (form, service) {
           $scope.showAddButtonNewService = false;
           if (form.$valid) {
-            if (!service.name ||  service.nameValue.length < 1) {
+            if (!service.name.name) {
               showNewServiceNameError();
               $scope.showAddButtonNewService = true;
             } else {
@@ -592,17 +662,18 @@
                 $scope.newServiceErrorMessage = 'Please enter start and end date to check service name';
                 $scope.showAddButtonNewService = true;
               } else {
-                validateNewServiceName(service.nameValue, 'service').then(function (resp) {
-
+                validateNewServiceName(service.name.name, 'service').then(function (resp) {
                   if (resp) {
 
                       var ns = {
-                        name: service.nameValue,
+                        name: service.name.name,
                         rate: service.name.rate,
                         billable: service.billable,
                         taxes: service.taxes,
-                        nameValue: service.nameValue
+                        nameValue: service.name.name
                       };
+
+
                       $scope.blockTimeContract.services.push(ns);
                       $scope.newContractService = {
                         name: '',
@@ -611,7 +682,7 @@
                         taxes: $scope.addDefaultTaxes(),
                         nameValue: ''
                       };
-                      pickService(service.nameValue);
+                      pickService(service.name.name);
                       $scope.showAddButtonNewService = true;
                       reInitServiceForm()
 
@@ -726,6 +797,9 @@
           } else {
             id = $scope.companyId;
           }
+          if (id.id) {
+            return id.id;
+          }
           return id;
         }
 
@@ -743,7 +817,7 @@
           var companyId = returnCompanyId();
           var serviceNamesList = [];
           for (var i = 0; i < serviceList.length; i++) {
-            serviceNamesList.push(serviceList[i].name);
+            serviceNamesList.push(getNameAsObject(serviceList[i].name));
           }
 
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, function (resp) {
@@ -767,7 +841,7 @@
 
             var companyId = returnCompanyId();
             var name = [];
-            name.push(newService);
+            name.push(getNameAsObject(newService));
 
             var startDate = $filter('date')($scope.blockTimeContract.startDate, 'yyyy/MM/dd');
             var endDate = $filter('date')($scope.blockTimeContract.endDate, 'yyyy/MM/dd');
@@ -799,7 +873,7 @@
         };
         $scope.showNotAddedBlockAdditionalServiceError = function(service) {
           if($scope.blockTimeContract.billForAdditionalService && service) {
-            return (service.name && service.name.name.length && $scope.notAddedBlockAdditionalServiceError)
+            return (service.name && service.name.name && service.name.name.length && $scope.notAddedBlockAdditionalServiceError)
           }
         };
 
@@ -864,7 +938,7 @@
 
             for (var i = 0; i < $scope.blockTimeContract.blockTimeServices.length; i++) {
               var bs = {
-                name: $scope.blockTimeContract.blockTimeServices[i].name,
+                name: $scope.blockTimeContract.blockTimeServices[i].name.name || $scope.blockTimeContract.blockTimeServices[i].name,
                 rate: contractData.rateExceeding
               };
               blockContract.blockTimeServices.push(bs);
@@ -872,13 +946,13 @@
 
             for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
               var cs = {
-                name: $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
+                name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
                 rate: 0
               };
               if($scope.blockTimeContract.services[m].billable) {
-                cs.rate = $scope.blockTimeContract.services[m].rate;
+                cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
                 if ($scope.blockTimeContract.services[m].taxes.length) {
                   for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
                     cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
@@ -925,7 +999,6 @@
 
           function sendContractCreateRequest(blockContract, createBillableItem) {
             AgreementsService.createContract(blockContract, createBillableItem, function (resp) {
-              console.log(resp);
               if (resp.message === 'Validation failed') {
                 $scope.showValidationFailMessage = true;
                 $scope.BlockTimeContractCreateMessage = 'Something went wrong, please try again later and contact administrator';

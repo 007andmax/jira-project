@@ -92,7 +92,10 @@
 }
 
 .company-devices .users-list-wrapper .col-md-2 .dropdown-menu {
-  left: -110px;
+  left: auto;
+  right: 0;
+  top: auto !important;
+  color: #4c5c6f;
 }
 
 .companies-list.company-devices-list .company-card {
@@ -425,7 +428,7 @@
   font-size: 11px;
   line-height: 12px;
   color: #94a4b8;
-  
+
 }
 
 .device-stats-chart {
@@ -813,7 +816,7 @@
   white-space: nowrap;
   margin-bottom: 10px;
   line-height: 1.4em;
-  
+
 }
 
 @-moz-document url-prefix() {
@@ -1613,10 +1616,6 @@
 }
 
 @media (max-width: 1600px) {
-  .list-company-row {
-    align-items: flex-start;
-  }
-  
   .restore {
     top: 20px;
   }

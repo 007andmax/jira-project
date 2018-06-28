@@ -16,8 +16,8 @@
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
           <label>Mfg/Item number</label>
           <input type="text" class="form-control" name="editProductMfg"
-                 ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
-                 is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
+                ng-required='false'  ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
+                 is-uniq-validation is-empty-valid="true" validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
         </div>
 
         <div class="form-group"

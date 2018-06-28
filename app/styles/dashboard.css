@@ -126,19 +126,20 @@
   text-overflow: ellipsis;
 }
 
-.third-part .board-head{
+.third-part .board-head {
   text-align: center;
   font-size: 20px;
 }
+
 _::-webkit-:host:not(:root:root),
 .third-part .board-head {
   font-weight: 100;
 }
+
 _::-webkit-:not(:root:root),
 .third-part .board-head {
   font-weight: 100;
 }
-
 
 .helper {
   border: 1px solid #000;
@@ -280,7 +281,7 @@ header .calendar-top input {
   font-size: 54px;
 }
 
-.dashboard-main .stats.third-part{
+.dashboard-main .stats.third-part {
   height: 130px;
   cursor: pointer;
 }
@@ -357,7 +358,7 @@ header .calendar-top input {
   max-height: 182px;
 }
 
-.dashboard-main .stats__main--count p{
+.dashboard-main .stats__main--count p {
   font-size: 28px;
 }
 
@@ -790,4 +791,16 @@ header .calendar-top input {
   text-align: center;
   font-size: 16px;
   padding-top: 5px;
+}
+
+@media (max-width: 1600px) {
+  .third-part .board-head {
+    margin-bottom: 0;
+  }
+
+  .dashboard-main .stats__main--count p {
+    font-size: 18px;
+    word-break: break-all;
+    text-align: center;
+  }
 }

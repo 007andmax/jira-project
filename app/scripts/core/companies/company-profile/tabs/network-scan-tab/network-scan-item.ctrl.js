@@ -54,14 +54,16 @@
         $scope.$watchGroup(['device.agentStatus', 'device.agentPassword.status'], function () {
           $scope.device.status = $scope.device.status || {};
 
-          if ( $scope.device.agentStatus === 'managed') {
+          $scope.device.status.tooltip = $scope.device.agentStatusTooltip;
 
+
+          if ( $scope.device.agentStatus === 'managed') {
             $scope.device.changingStatus = false;
             $scope.device.status.message = 'Managed';
             $scope.device.status.statusValue = true;
             $scope.device.status.online = true;
 
-          } else if ($scope.device.agentStatus === 'installed') {
+          } else if ($scope.device.agentStatus === 'Installed') {
 
             $scope.device.changingStatus = false;
             $scope.device.status.message = 'Installed';
@@ -73,21 +75,21 @@
             $scope.device.changingStatus = false;
             $scope.device.status.message = 'Fail';
 
-          } else if ($scope.device.agentStatus === 'error' ) {
+          } else if ($scope.device.agentStatus === 'Install error' ) {
 
             $scope.device.changingStatus = false;
-            $scope.device.status.message = 'Error';
+            $scope.device.status.message = 'Install error';
             $scope.device.status.statusValue = false;
             $scope.device.status.online = false;
 
-          } else if ( $scope.device.agentStatus === 'loginError') {
+          } else if ( $scope.device.agentStatus === 'Bad password') {
 
             $scope.device.changingStatus = false;
-            $scope.device.status.message = 'Incorrect Password';
+            $scope.device.status.message = 'Bad password';
             $scope.device.status.statusValue = false;
             $scope.device.status.online = false;
 
-          } else if ( $scope.device.agentStatus === 'inProgress'
+          } else if ( $scope.device.agentStatus === 'Installing'
             || ($scope.device.agentPassword && $scope.device.agentPassword.status === 'PROCEED')) {
 
             $scope.device.status.message = 'Installing';
@@ -98,9 +100,9 @@
             $scope.device.status.message = 'Copy install files';
             $scope.device.changingStatus = true;
 
-          } else if ($scope.device.agentStatus === 'unknown' ) {
+          } else if ($scope.device.agentStatus === 'Blocked' ) {
 
-            $scope.device.status.message = 'install error';
+            $scope.device.status.message = 'Blocked';
             $scope.device.changingStatus = true;
 
           } else {

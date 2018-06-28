@@ -888,6 +888,20 @@ aside#left div.nav-title {
   top: 48px;
 }
 
+.company-schedule .timer-quantity .time_drop_down {
+  position: absolute;
+  display: none;
+}
+
+.company-schedule .timer-quantity .time_drop_down {
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 31px;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
+}
+
 .create-company-content .timer-quantity .time_drop_down {
   top: 63px;
 }
@@ -899,43 +913,91 @@ aside#left div.nav-title {
 .timer-quantity .time_drop_down ul {
   width: 47px;
   text-align: center;
-  box-shadow: rgba(10, 45, 89, 0.15) 0px 5px 25px 0px;
+  box-shadow: rgba(10, 45, 89, 0.15) 0 5px 25px 0;
 }
 
 .timer-quantity .time_drop_down li a {
   border: solid #fff;
-  border-width: 0 5px;
   text-decoration: none;
   padding: 5px 10px;
   background: #fff;
   display: block;
   color: #4c5c6f;
+  margin: 0;
+}
+
+.company-schedule .timer-quantity .time_drop_down li a {
+  text-decoration: none;
+  border: none;
+  padding: 0 5px;
+  background: #fff;
+  display: block;
+  color: #4c5c6f;
+  margin: 0;
 }
 
 .timer-quantity .time_drop_down li:first-child a {
   border-width: 5px 5px 0;
 }
 
-.timer-quantity .time_drop_down li:last-child a {
-  border-width: 0 5px 5px;
+/* .timer-quantity.set-working-hours .hour_drop_down {
+  max-height: 316px;
+  overflow: scroll;
+} */
+
+.timer-quantity .time_drop_down .show-inside-company {
+  display: none;
+}
+
+.timer-quantity.set-working-hours .time_drop_down .show-inside-company {
+  display: block;
+}
+
+.timer-quantity.set-working-hours .time_drop_down .hide-inside-company {
+  display: none;
+}
+
+.hour_drop_down::-webkit-scrollbar {
+  width: 4px;
 }
 
 .timer-quantity .time_drop_down .hour_drop_down {
   display: inline-block;
   float: left;
   padding: 0;
+  /* direction: rtl; */
+}
+
+.company-schedule .timer-quantity .time_drop_down .hour_drop_down {
+  display: inline-block;
+  float: left;
+  padding: 0;
+  max-height: 190px;
+  overflow-y: scroll;
+  border-radius: 4px;
+  width: 100%;
 }
 
 .timer-quantity .time_drop_down .hour_drop_down li {
   list-style-type: none;
+  /* direction: ltr; */
 }
 
 .timer-quantity .time_drop_down .min_drop_down {
   display: inline-block;
   position: absolute;
+  left: 56px;
+  padding-left: 0;
+}
+
+.company-schedule .timer-quantity .time_drop_down .min_drop_down {
+  display: inline-block;
+  position: absolute;
   top: 0;
   left: 56px;
   padding-left: 0;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .timer-quantity .time_drop_down .format_drop_down {
@@ -1882,8 +1944,19 @@ span.sort-span {
 }
 
 .product-list-scroll {
-  max-height: calc(100vh - 240px);
+  height: calc(100%);
+  /* max-height: calc(100vh - 240px); */
   overflow: scroll;
   width: 100%;
   margin-top: 70px;
+}
+
+@media screen and (min-width: 1600px) and (min-width: 1366px) and (min-width: 1280px) {
+  .custom-product-list .category-conteiner .category-info .icn-caret-gray.rotated {
+    margin: 5px 10px 0 0;
+  }
+
+  .custom-product-list .category-conteiner .category-info .icn-caret-gray {
+    margin-right: 10px;
+  }
 }

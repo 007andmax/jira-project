@@ -195,7 +195,7 @@
 		activeToolbarClass: 'active',
 		selectionMarker: 'edit-focus-marker',
 		selectionColor: 'darkgrey',
-		dragAndDropImages: true,
+		dragAndDropImages: false,
 		fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
 	};
 }(window.jQuery));

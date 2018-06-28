@@ -1,38 +1,105 @@
 <div class="company-profile-content clearfix" ng-controller="quicktech.core.companies.companyProfileDashboardCtrl">
   <div class="company-info-wrapper" ng-form="companyDashboardForm">
     <div class="company-info-header clearfix">
-      <div class="col-md-8">
-        <div class="company-logo">
-          <!--<img src="images/bitmap@3x.png" alt="">-->
-          <div style="min-height: 38px; display: inline-block; float: left;margin-right: 10px;">
-            <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
-                 ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
-            <div class="default-company-logo default-company-logo-big"
-                 ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
-                 style="background-color: pink;">
-              <span>{{company.name[0].toUpperCase()}}</span>
+      <div class="col-md-10">
+        <div class="company-logo-wrapper">
+          <div class="company-logo">
+            <!--<img src="images/bitmap@3x.png" alt="">-->
+            <div style="min-height: 38px; display: inline-block; float: left;">
+              <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
+                   ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+              <div class="default-company-logo default-company-logo-big"
+                   ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+                   style="background-color: pink;">
+                <span>{{company.name[0].toUpperCase()}}</span>
+              </div>
             </div>
           </div>
+          <!--<button class="company-logo-icn" uib-tooltip="change logo"></button>-->
+          <div class="company-logo-icn" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
+               uib-tooltip="Change Logo" tooltip-placement="top" tooltip-popup-delay="2000"
+               ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
+            <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
+                crop-image="companyData" model-image-path="logo">
+              <li crop-image-button stop-propagation="click">
+                <a tabindex="-1" href="javascript:void(0)">Change Image</a>
+              </li>
+              <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
+                <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
+              </li>
+              <li reposition-button stop-propagation="click" ng-show="companyData.logo">
+                <a tabindex="-1" href="javascript:void(0)">Reposition</a>
+              </li>
+            </ul>
+          </div>
+
         </div>
-        <!--<button class="company-logo-icn" uib-tooltip="change logo"></button>-->
-        <div class="company-logo-icn" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
-             uib-tooltip="Change Logo" tooltip-placement="top" tooltip-popup-delay="2000"
-             ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')">
-          <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
-              crop-image="companyData" model-image-path="logo">
-            <li crop-image-button stop-propagation="click">
-              <a tabindex="-1" href="javascript:void(0)">Change Image</a>
-            </li>
-            <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
-              <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
-            </li>
-            <li reposition-button stop-propagation="click" ng-show="companyData.logo">
-              <a tabindex="-1" href="javascript:void(0)">Reposition</a>
-            </li>
-          </ul>
+        <div class="company-name-content">
+          <div class="company-name clearfix">
+            <div>
+              <div ng-mouseover="showCompanyNameEditButton = true"
+                   ng-mouseleave="showCompanyNameEditButton = false"
+                   class="company-edit-button">
+                <div ng-show="!showCompanyNameEditField"
+                     style="display: inline-block;">
+                  {{companyInfo.name}}
+                </div>
+                <button style="right: 3px;"
+                        class="company-edit-icn company-edit-icn-sm"
+                        ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
+                        ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"
+                        tooltip-popup-delay="2000"></button>
+              </div>
+              <div uib-dropdown class="create-dropdown" ng-show="!showCompanyNameEditField">
+                <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
+                       readonly value="{{clientTypesMap[companyInfo.clientType]}}"
+                       ng-disabled="companyInfo.clientType.toLowerCase() === 'vendor' && companyInfo.hasProducts">
+                <ul class="dropdown-menu dropdown-priority" role="menu">
+                  <li ng-repeat="(key, value) in clientTypesMap" ng-click="setClientType(key)">
+                    <a tabindex="-1" href="javascript:void(0)">
+                      {{ value }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <i style="margin-top: 5px;" class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
+               ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
+               uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
+            <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
+               ng-show="showCompanyNameEditField"
+               ng-click="checkingFormAndSave(companyDashboardForm)"
+               uib-tooltip="Save" tooltip-popup-delay="2000"></i>
+          </div>
+          <div class="form-group" ng-show="showCompanyNameEditField"
+               ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'companyName')}">
+
+            <input class="form-control dashboard-edit-input" type="text" ng-model="companyInfo.name"
+                   aria-expanded="true"
+                   ng-minlength="2" ng-maxlength="40" name="companyName" required="true"
+                   is-uniq-validation validation-func="validateCompanyName">
+
+          </div>
+          <div class="company-rate">
+            <div class="company-rate-dashboard"><i class="star-icn"
+                                                   ng-class="{'active': checkCompanyReputationScore(1)}"
+                                                   ng-click="setCompanyReputation(1)"></i></div>
+            <div class="company-rate-dashboard"><i class="star-icn"
+                                                   ng-class="{'active': checkCompanyReputationScore(2)}"
+                                                   ng-click="setCompanyReputation(2)"></i></div>
+            <div class="company-rate-dashboard"><i class="star-icn"
+                                                   ng-class="{'active': checkCompanyReputationScore(3)}"
+                                                   ng-click="setCompanyReputation(3)"></i></div>
+            <div class="company-rate-dashboard"><i class="star-icn"
+                                                   ng-class="{'active': checkCompanyReputationScore(4)}"
+                                                   ng-click="setCompanyReputation(4)"></i></div>
+            <div class="company-rate-dashboard"><i class="star-icn"
+                                                   ng-class="{'active': checkCompanyReputationScore(5)}"
+                                                   ng-click="setCompanyReputation(5)"></i></div>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-2">
         <div class="pull-right">
           <div
             qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
@@ -57,78 +124,12 @@
     </div>
     <div class="company-info-content clearfix">
       <div class="col-md-3">
-        <div class="company-name clearfix">
-          <div>
-            <div ng-mouseover="showCompanyNameEditButton = true"
-                 ng-mouseleave="showCompanyNameEditButton = false"
-                 class="company-edit-button">
-              <div class="ellipsis"
-                   ng-show="!showCompanyNameEditField">{{companyInfo.name}}
-              </div>
-              <button class="company-edit-icn company-edit-icn-sm"
-                      ng-show="showCompanyNameEditButton && !showCompanyNameEditField"
-                      ng-click="openEditForm('showCompanyNameEditField')" uib-tooltip="Edit"
-                      tooltip-popup-delay="2000"></button>
-            </div>
-            <div uib-dropdown class="create-dropdown pull-right" ng-show="!showCompanyNameEditField">
-              <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
-                     readonly value="{{clientTypesMap[companyInfo.clientType]}}"
-                     ng-disabled="companyInfo.clientType.toLowerCase() === 'vendor' && companyInfo.hasProducts">
-              <ul class="dropdown-menu dropdown-priority" role="menu">
-                <li ng-repeat="(key, value) in clientTypesMap" ng-click="setClientType(key)">
-                  <a tabindex="-1" href="javascript:void(0)">
-                    {{ value }}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
-             ng-show="showCompanyNameEditField" ng-click="cancelEdit()"
-             uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
-          <i class="icn-sm icn-label-save-dashboard icn-label-save pointer pull-right"
-             ng-show="showCompanyNameEditField"
-             ng-click="checkingFormAndSave(companyDashboardForm)"
-             uib-tooltip="Save" tooltip-popup-delay="2000"></i>
-        </div>
-        <div class="form-group" ng-show="showCompanyNameEditField"
-             ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'companyName')}">
-
-          <input class="form-control dashboard-edit-input" type="text" ng-model="companyInfo.name" aria-expanded="true"
-                 ng-minlength="2" ng-maxlength="40" name="companyName" required="true"
-                 is-uniq-validation validation-func="validateCompanyName">
-
-        </div>
-        <!--<div class="form-group" ng-show="showCompanyNameEditField"-->
-        <!--ng-class="{'has-error': isShowingErrors(companyDashboardForm, 'clientType')}">-->
-
-        <!--<input custom-style="{'width':'100%'}" type="text" class="form-control dashboard-edit-input"-->
-        <!--ng-model="companyInfo.clientType" name="clientType"-->
-        <!--uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="companyInfo.hasProducts"-->
-        <!--readonly qt-typeahead-async-show-on-focus required uib-tooltip="Current vendor has linked products"-->
-        <!--ng-disabled="companyInfo.clientType.toLowerCase() === 'vendor' && companyInfo.hasProducts">-->
-        <!--<div typeahead-input-icon="editCompany.clientType"-->
-        <!--ng-if="companyInfo.clientType.toLowerCase() !== 'vendor'"></div>-->
-        <!--</div>-->
-
-        <div class="company-rate">
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(1)}"
-                                                 ng-click="setCompanyReputation(1)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(2)}"
-                                                 ng-click="setCompanyReputation(2)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(3)}"
-                                                 ng-click="setCompanyReputation(3)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(4)}"
-                                                 ng-click="setCompanyReputation(4)"></i></div>
-          <div class="company-rate-dashboard"><i class="star-icn" ng-class="{'active': checkCompanyReputationScore(5)}"
-                                                 ng-click="setCompanyReputation(5)"></i></div>
-        </div>
         <div class="company-address clearfix" ng-mouseover="showAddressEditButton = true"
              ng-mouseleave="showAddressEditButton = false">
           <p class="w-92" ng-show="!showAddressEditFields">
             {{companyInfo.addresses[0].address}}
           </p>
-          <button style="vertical-align: top;" class="company-edit-icn company-edit-icn-sm"
+          <button class="company-edit-icn company-edit-icn-sm"
                   ng-show="showAddressEditButton && !showAddressEditFields"
                   ng-click="openEditForm('showAddressEditFields')" uib-tooltip="Edit"
                   tooltip-popup-delay="2000"></button>
@@ -162,10 +163,10 @@
              ng-mouseover="showWorkingDaysEditButton = true"
              ng-mouseleave="showWorkingDaysEditButton = false">
           <p class="w-92" ng-click="openWorkingDaysSchedule()">{{daysOfWeekMap[daysOfWeek[getTodayDayOfWeek()-1]]}}
-            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTime}}</span>
+            <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTime | timeFilter}}</span>
             <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].startTimeFormat}}</span><span
               ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">-</span><span
-              ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTime}}</span>
+              ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTime | timeFilter}}</span>
             <span ng-show="workingDays[getTodayDayOfWeek()-1].isWorkingDay">{{workingDays[getTodayDayOfWeek()-1].endTimeFormat}}</span><span
               ng-show="!workingDays[getTodayDayOfWeek()-1].isWorkingDay">Not working</span>
             <i class="icn-sm report-caret-icon"></i>
@@ -180,7 +181,8 @@
               <div>{{daysOfWeekMap[day.dayOfWeek]}}:</div>
               <span ng-show="day.isWorkingDay">{{day.startTime}}</span> <span ng-show="day.isWorkingDay">{{day.startTimeFormat}}</span><span
               ng-show="day.isWorkingDay">-</span><span ng-show="day.isWorkingDay">{{day.endTime}}</span> <span
-              ng-show="day.isWorkingDay">{{day.endTimeFormat}}</span><span ng-show="!day.isWorkingDay">Not working</span>
+              ng-show="day.isWorkingDay">{{day.endTimeFormat}}</span><span
+              ng-show="!day.isWorkingDay">Not working</span>
             </li>
           </ul>
           <i class="icn-sm dashboard-remove icn-remove-old pointer pull-right"
@@ -197,25 +199,59 @@
                 <li ng-repeat="day in workingDays">
                   <div class="mb">
                     <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
-                    <input placeholder="Hours"
-                           name="startTime"
-                           type="text"
-                           class="form-control"
-                           ng-model="day.startTime"
-                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="!day.isWorkingDay">
-                    <input type="text" class="form-control pointer text-center" name="startTimeFormat"
+
+                    <div style="position: relative; padding: 0; display: inline-block; width: 20%"
+                         service-quantity-picker="day.startTime"
+                         class="set-working-hours"
+                         sqp-day="day.dayOfWeek"
+                         sqp-period="start"
+                         sqp-is-show-format="false">
+                      <input class="time form-control service-quantity-picker"
+                             type="text"
+                             class="form-control"
+                             placeholder="12 : 00"
+                             sqp-cond-input="{{day.dayOfWeek + ' start'}}"
+                             autocomplete="off"
+                             aria-expanded="true"
+                             ng-disabled="!day.isWorkingDay" />
+                      <input type="hidden"
+                             ng-model="day.startTime"
+                             name="serviceTime"
+                             ng-disabled="!day.isWorkingDay" />
+                    </div>
+
+                    <input type="text"
+                           class="form-control pointer text-center"
+                           name="startTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
                            uib-typeahead="time for time in timeFormat"
                            ng-model="day.startTimeFormat"
-                           autocomplete="off" qt-typeahead-async-show-on-focus ng-disabled="!day.isWorkingDay" readonly>
+                           autocomplete="off"
+                           qt-typeahead-async-show-on-focus
+                           ng-disabled="!day.isWorkingDay"
+                           readonly>
                     -
-                    <input placeholder="Hours"
-                           name="endTime"
-                           type="text"
-                           class="form-control"
-                           ng-model="day.endTime"
-                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="!day.isWorkingDay">
+                    <div style="position: relative; padding: 0; display: inline-block; width: 20%"
+                         service-quantity-picker="day.endTime"
+                         class="set-working-hours"
+                         sqp-day="day.dayOfWeek"
+                         sqp-period="end"
+                         sqp-is-show-format="false">
+                      <input class="time form-control service-quantity-picker"
+                             type="text"
+                             class="form-control"
+                             placeholder="12 : 00"
+                             sqp-cond-input="{{day.dayOfWeek + ' end'}}"
+                             ng-disabled="!day.isWorkingDay"
+                             autocomplete="off"
+                             aria-expanded="true" />
+                      <input type="hidden"
+                             ng-model="day.endTime"
+                             name="serviceTime"
+                             ng-disabled="!day.isWorkingDay" />
+                    </div>
+
                     <input type="text" class="form-control pointer text-center" name="endTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
@@ -371,7 +407,7 @@
 
             </div>
             <p ng-show="!showContactPersonEditFields">{{companyInfo.contacts[0].firstName}}
-              {{companyInfo.contacts[0].lastName}}</p>
+                                                      {{companyInfo.contacts[0].lastName}}</p>
 
             <div ng-show="showContactPersonEditFields">
               <div class="form-group">
@@ -420,7 +456,7 @@
           </div>
           <div class="col-md-4">
 
-            <div class="company-info-subtitle" ng-mouseover="showNoteEditButton = true"
+            <div class="company-info-subtitle notes" ng-mouseover="showNoteEditButton = true"
                  ng-mouseleave="showNoteEditButton = false">
               <div class="w-92">Notes</div>
               <button class="company-edit-icn company-edit-icn-sm"
@@ -438,9 +474,12 @@
                  uib-tooltip="Save" tooltip-placement="top"></i>
 
             </div>
-            <p class="company-notes"
-               ng-show="!showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0">
-              {{ companyInfo.description}}</p>
+
+            <div class="company-notes"
+                 ng-show="!showNoteEditField && companyInfo.description && companyInfo.description.length && companyInfo.description.length>0">
+              <p>{{companyInfo.description}}</p>
+            </div>
+
             <div class="form-group company-notes" ng-show="showNoteEditField">
               <textarea class="form-control" ng-model="companyInfo.description" name="companyDescription"
                         maxlength="{{ descriptionMaxLength }}" ng-trim="false" make-dirty-on-blur></textarea>
@@ -450,7 +489,8 @@
 
             <a class="company-link" href="" ng-click="openEditForm('showNoteEditField')"
                ng-hide="(companyInfo.description && companyInfo.description.length && companyInfo.description.length>0) || showNoteEditField ">Add
-              New Note</a>
+                                                                                                                                               New
+                                                                                                                                               Note</a>
           </div>
         </div>
       </div>
@@ -500,69 +540,69 @@
       <table>
         <tbody ng-click="selectChart('countOfNewTickets')"
                ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">
-        <tr>
-          <td rowspan="2" colspan="1" class="bd-right-disabled">
-            <p>Open Tickets</p>
-            <p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>
-          </td>
-          <td colspan="1" class="bd-bottom-disabled bd-left-disabled">
-            <p>Total</p>
-            <p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="1" class="bd-top-disabled bd-left-disabled">
-            <p>On hold</p>
-            <p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>
-          </td>
-        </tr>
+          <tr>
+            <td rowspan="2" colspan="1" class="bd-right-disabled">
+              <p>Open Tickets</p>
+              <p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>
+            </td>
+            <td colspan="1" class="bd-bottom-disabled bd-left-disabled">
+              <p>Total</p>
+              <p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="1" class="bd-top-disabled bd-left-disabled">
+              <p>On hold</p>
+              <p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>
+            </td>
+          </tr>
         </tbody>
         <tbody ng-click="selectChart('responseTime')"
                ng-class="{'selected-chart': selectedChart === 'responseTime'}">
-        <tr>
-          <td colspan="2">
-            <p>Response Time</p>
-            <p class="big-count font-yellow">
-              {{
-              companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime
-              ?
-              (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
-              :
-              0
-              }} min
-            </p>
-          </td>
-        </tr>
+          <tr>
+            <td colspan="2">
+              <p>Response Time</p>
+              <p class="big-count font-yellow">
+                {{
+                companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime
+                ?
+                (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
+                :
+                0
+                }} min
+              </p>
+            </td>
+          </tr>
         </tbody>
         <tbody ng-click="selectChart('averageTime')"
                ng-class="{'selected-chart': selectedChart === 'averageTime'}">
-        <tr>
-          <td colspan="2">
-            <p>Average Time</p>
-            <p class="big-count font-red">
-              {{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}
-            </p>
-          </td>
-        </tr>
+          <tr>
+            <td colspan="2">
+              <p>Average Time</p>
+              <p class="big-count font-red">
+                {{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}
+              </p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    m.parentNode.insertBefore(a, m);
+  })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
 
-  ga('create', 'UA-93441341-1', 'auto');
-  ga('send', 'pageview');
+  ga("create", "UA-93441341-1", "auto");
+  ga("send", "pageview");
 
 </script>

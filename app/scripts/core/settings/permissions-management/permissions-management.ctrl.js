@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.permissionsManagementCtrl',
-    ['$scope', 'CompaniesService', '$timeout', function ($scope, CompaniesService, $timeout) {
+    ['$scope', 'CompaniesService', '$timeout', 'UsersService', function ($scope, CompaniesService, $timeout, UsersService) {
       var promise;
       var companiesRelatedPermissions = ['CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES',
         'NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS', 'VIEW_PASSWORD_SECTION',
@@ -28,6 +28,7 @@
         $scope.roles = resp;
       });
 
+      $scope.techCompany = CompaniesService.getOneById(UsersService.getCurrentUser().company.id);
       $scope.togglePermission = function (role, permission) {
         addOrRemovePermission(role.permissions, permission);
 
@@ -88,6 +89,53 @@
           return 'required permission';
         }
       };
+
+      $scope.editData = {
+        name: '',
+        id: ''
+      }
+
+      $scope.editRoleName = function(name, id) {
+        if (!name || $scope.isRoleNameEdited && id === $scope.editData.id) {
+          $scope.isRoleNameEdited = false;
+          $scope.editData = {
+            name: '',
+            id: ''
+          }
+          return;
+        }
+
+        $scope.isRoleNameEdited = true;
+        $scope.editData = {
+          name: name,
+          id: id
+        }
+      }
+
+      $scope.addNewRole = function() {
+        var newRole = {
+          company: $scope.techCompany,
+          name: 'New role #' + $scope.roles.length,
+          order: $scope.roles.length,
+          permissions: []
+        }
+
+        CompaniesService.addNewRole(newRole, function(resp) {
+          $scope.roles.push(resp);
+        })
+      }
+
+      $scope.changeRoleName = function() {
+        CompaniesService.changeRoleName($scope.editData.name, $scope.editData.id, function(resp) {
+          var role = $scope.roles.find(function(el) {
+            return el.id === $scope.editData.id;
+          })
+
+          role.name = $scope.editData.name;
+
+          $scope.editRoleName();
+        })
+      }
 
       function addOrRemovePermission(permissions, permission) {
         var index = permissions.indexOf(permission),

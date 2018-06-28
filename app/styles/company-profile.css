@@ -10,15 +10,35 @@
 .company-info-wrapper button.form-control-number {
   height: 25px;
   background-color: transparent;
-  font-size: 13px;
+  font-size: 12px;
+  padding: 0;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.company-info-wrapper input {
+  text-align: left;
   padding: 0 5px;
+}
+
+.company-window .company-schedule-edit .dropdown-menu {
+  min-width: 20% !important;
+}
+
+.company-window .company-schedule {
+  margin-left: 15px;
+}
+
+.company-window .company-schedule .timer-quantity .time_drop_down .min_drop_down {
+  left: 82px;
+  width: 100%;
 }
 
 .company-logo {
   max-width: 160px;
   max-height: 160px;
   display: inline-block;
-  margin-right: 10px;
   vertical-align: middle;
 }
 
@@ -96,7 +116,7 @@
 .company-add-icn-sm {
   position: relative;
   display: inline-block;
-  background-color: #EFF9FF;
+  background-color: #eff9ff;
   border-radius: 50%;
   border: none;
   outline: none;
@@ -120,10 +140,16 @@
   vertical-align: middle;
 }
 
+.company-edit-icn-sm {
+  position: absolute;
+  top: 0;
+}
+
 .company-edit-button {
   display: inline-block;
-  max-width: 80%;
-  width: 100%;
+  max-width: 92%;
+  position: relative;
+  padding-right: 30px;
 }
 
 .company-remove-icn-sm,
@@ -135,7 +161,7 @@
 .company-edit-icn:hover,
 .company-remove-icn:hover,
 .company-add-icn-sm:hover {
-  background-color: #9CC8E1;
+  background-color: #9cc8e1;
 }
 
 .company-download-icn:after,
@@ -167,16 +193,29 @@
   background: url(../images/sprites-s76c759f188.png) -298px -13px;
 }
 
+.company-logo-wrapper {
+  display: inline-block;
+  padding-right: 35px;
+  position: relative;
+}
+
+.company-logo-wrapper:hover .company-logo-icn {
+  display: inline-block;
+}
+
 .company-logo-icn {
   width: 24px;
   height: 24px;
-  position: relative;
   cursor: pointer;
   transition: all .3s;
+  display: none;
+  position: absolute;
+  right: -3px;
+  top: calc(50% - 12px);
 }
 
 .company-logo-icn:hover {
-  background-color: #9CC8E1;
+  background-color: #9cc8e1;
 }
 
 .company-logo-icn:after {
@@ -195,40 +234,43 @@
   font-size: 13px;
 }
 
-.company-info-content .company-name {
+.company-info-header .company-name {
   color: #364656;
   font-size: 20px;
   margin-bottom: 10px;
   font-family: 'Graphik Medium', sans-serif;
 }
 
-.company-info-content .company-name div .ellipsis {
+.company-info-header .company-name div .ellipsis {
   display: inline-block;
   vertical-align: middle;
   max-width: 91%;
 }
 
-.company-info-content .company-name .dropdown {
+.company-name-content {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  width: 78%;
+}
+
+.company-info-header .company-name .dropdown {
   font-size: 12px;
   border-radius: 3px;
   background-color: #ffe3af;
-  vertical-align: middle;
+  vertical-align: top;
   display: inline-block;
   padding: 0;
   width: 54px;
 }
 
-.company-info-content .company-name .dropdown input {
+.company-info-header .company-name .dropdown input {
   border: none;
   font-family: 'Graphik Regular', sans-serif;
   text-align: center;
 }
 
-.company-info-content .company-rate {
-  margin-bottom: 10px;
-}
-
-.company-info-content .company-rate span {
+.company-info-header .company-rate span {
   cursor: pointer;
 }
 
@@ -280,7 +322,7 @@
 }
 
 .company-info-content a.company-link {
-  color: #16A4FA;
+  color: #16a4fa;
   font-size: 12px;
   text-decoration: underline;
   transition: all .3s
@@ -293,9 +335,11 @@
 .company-info-content .company-schedule i {
   margin-bottom: 2px;
 }
-.phone-number-form label{
+
+.phone-number-form label {
   font-size: 12px;
 }
+
 .company-schedule-edit {
   padding: 0;
   list-style: none;
@@ -304,7 +348,25 @@
 
 .company-schedule-edit input {
   display: inline-block;
+  text-align: center;
+  padding: 0;
   width: 20%;
+}
+
+.company-schedule .dashboard-remove {
+  position: absolute;
+  right: 0;
+}
+
+.company-schedule .icn-label-save-dashboard {
+  position: absolute;
+  right: 20px;
+  margin-right: 0;
+}
+
+.company-schedule-edit input.time {
+  width: 100%;
+  cursor: pointer;
 }
 
 .company-schedule-edit .control {
@@ -342,6 +404,7 @@
 }
 
 .company-profile-content .company-info-subtitle {
+  position: relative;
   font-size: 10px;
   color: #9ca5b6;
   text-transform: uppercase;
@@ -353,36 +416,59 @@
 }
 
 .w-92,
-.w-91 {
+.w-91,
+.w-90 {
   display: inline-block;
   max-width: 92%;
   word-wrap: break-word;
   vertical-align: middle;
+  width: auto;
+  margin-right: 10px;
 }
 
 .w-91 {
-  width: 91%;
+  max-width: 91%;
+}
+
+.w-90 {
+  max-width: 90%;
 }
 
 .company-info-content .company-notes {
   font-family: 'Graphik Regular', sans-serif;
-  padding-left: 20px;
   position: relative;
 }
 
-.company-info-content .company-notes textarea {
-  height: 120px;
-  background: transparent;
-  padding: 5px;
+.company-info-content p.company-notes:first-line {
+  line-height: 0;
 }
 
-.company-info-content .company-notes:after {
+.company-info-content .company-notes textarea,
+.company-info-content .company-notes p {
+  height: 135px;
+  background: transparent;
+  padding: 5px;
+  white-space: pre-line;
+  max-height: 154px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.company-info-content .company-notes p {
+  overflow-y: scroll;
+  border: 1px solid #eae9e9;
+}
+
+.company-info-content .notes:after {
   position: absolute;
   content: '';
   width: 12px;
   height: 15px;
-  top: 4px;
-  left: 0;
+  top: 26px;
+  left: -17px;
   background-image: url(../images/new-icons/company-note.svg);
 }
 
@@ -404,19 +490,39 @@
   width: 230px;
 }
 
+#service-quantity-dropdown {
+  width: 100%;
+}
+
 @media (max-width: 1366px) {
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-  .company-edit-button{
+
+  .company-edit-button {
     max-width: 75%;
   }
-}
-@media (max-width: 1280px) {
-  .company-edit-button{
-    max-width: 72%;
+
+  .company-download-icn,
+  .company-edit-icn,
+  .company-remove-icn {
+    margin-left: 5px;
+  }
+
+  .company-name-content {
+    width: 73%;
   }
 }
+
+@media (max-width: 1280px) {
+  .company-edit-button {
+    max-width: 72%;
+  }
+  .company-name-content {
+    width: 70%;
+  }
+}
+
 .company-new-cover-wrapper .company-contact-type .company-p-style {
   display: inline-block;
   width: 195px;
@@ -850,13 +956,13 @@
 }
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title:hover {
-  background-color: #3C485E;
+  background-color: #3c485e;
   padding: 10px 15px;
   border-radius: 6px;
 }
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title.left-panel-active {
-  background-color: #3C485E;
+  background-color: #3c485e;
   border-radius: 6px;
 }
 
@@ -881,7 +987,7 @@
 }
 
 .lp-border {
-  border-bottom: 2px solid #424F66;
+  border-bottom: 2px solid #424f66;
   padding-bottom: 11px;
 }
 
@@ -897,5 +1003,5 @@
 
 .company-dashboard-left-panel .center-category__category:last-child {
   padding-bottom: 15px;
-  border-bottom: 2px solid #424F66;
+  border-bottom: 2px solid #424f66;
 }

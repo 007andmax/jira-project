@@ -102,7 +102,7 @@
               devicesIds.push(device.id);
             });
             $rootScope.deviceCredentialsRecived = false;
-            DevicesService.getDevicesCredentials(devicesIds, function(resp){
+            DevicesService.getDevicesCredentials(devicesIds, $scope, function(resp){
               if(resp) {
                 $scope.devicesCredentials = resp;
                 $rootScope.deviceCredentialsRecived = true;

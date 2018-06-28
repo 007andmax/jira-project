@@ -20,7 +20,7 @@
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeekMap = {
           MONDAY: 'Monday',
-          TUESDAY: 'Thursday',
+          TUESDAY: 'Tuesday',
           WEDNESDAY: 'Wednesday',
           THURSDAY: 'Thursday',
           FRIDAY: 'Friday',
@@ -172,7 +172,7 @@
           $scope.editCompany.workingDays = [];
           for (var i = 0; i < 7; i++) {
             var day = {};
-            if (!$scope.workingDays[i].isWorkingDay || (!$scope.workingDays[i].startTime || !$scope.workingDays[i].endTime)) {
+            if (!$scope.workingDays[i].isWorkingDay || (!$scope.workingDays[i].startTime && !$scope.workingDays[i].endTime)) {
               day = {
                 dayOfWeek: $scope.workingDays[i].dayOfWeek,
                 startTime: 0,
@@ -194,9 +194,18 @@
 
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
           if (objectTime && objectTimeFormat) {
-            var separateTime = objectTime.split(':');
-            var hours = parseInt(separateTime[0]);
-            var minutes = parseInt(separateTime[1]);
+            // console.log(objectTime, objectTimeFormat, '*******________**********  ');
+            var hours, minutes, separateTime;
+
+            if (typeof objectTime === 'string') {
+              separateTime = objectTime.split(':');
+              hours = parseInt(separateTime[0]);
+              minutes = parseInt(separateTime[1]);
+            } else {
+              hours = Math.floor(objectTime / 60);
+              minutes = objectTime % 60;
+            }
+
             return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
           }
         }
@@ -204,14 +213,29 @@
         function getCorrectWorkingTime() {
           $scope.workingDays = [];
           for (var i = 0; i < 7; i++) {
-            var day = {
-              dayOfWeek: daysOfWeek[i],
-              startTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
-              startTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
-              endTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
-              endTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
-              isWorkingDay: ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && $scope.editCompany.workingDays[i].startTime > 0 && $scope.editCompany.workingDays[i].endTime > 0) ? true : false
-            };
+            var isWorkingDay = ($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 && ($scope.editCompany.workingDays[i].startTime || $scope.editCompany.workingDays[i].endTime)) ? true : false;
+            var day;
+
+            if (isWorkingDay) {
+              day = {
+                startTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
+                startTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].startTime : 0),
+                endTime: timeFormatter($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
+                endTimeFormat: getTimeFormat($scope.editCompany.workingDays && $scope.editCompany.workingDays.length > 0 ? $scope.editCompany.workingDays[i].endTime : 0),
+
+              };
+            } else {
+              day = {
+                startTime: timeFormatter(28800),
+                startTimeFormat: 'AM',
+                endTime: timeFormatter(21600),
+                endTimeFormat: 'PM'
+              }
+            }
+
+            day.dayOfWeek = daysOfWeek[i];
+            day.isWorkingDay = isWorkingDay;
+
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
           }
@@ -232,9 +256,8 @@
 
         function getTimeFormat(time) {
           if (time && time > 0) {
-
             var timeInHour = time / 3600;
-            if (timeInHour < 12) {
+            if (timeInHour <= 12) {
               return 'AM';
             } else {
               return 'PM';
@@ -466,7 +489,7 @@
             ngModelCtrl.$setValidity('unique', false);
             afterValidationCallback();
           } else {
-            var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', false, function () {
+            var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', false, $scope.editCompany.id, function () {
               ngModelCtrl.$setValidity('unique', validationResult.value);
               afterValidationCallback()
             });

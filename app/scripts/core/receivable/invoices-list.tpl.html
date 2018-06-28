@@ -25,7 +25,7 @@
       ng-controller="quicktech.core.receivable.invoiceCtrl"
       ng-show="filteringForInvoice(invoice)"
       on-finish-render="hideLoadingIndicator()">
-    <div class="col-md-1">
+    <div class="col-md-1 w-11">
       <label class="control checkbox pull-left">
         <input type="checkbox"
                ng-model="invoiceToSent.invoices[invoice.number]">
@@ -40,7 +40,7 @@
         {{ invoice.number }}
       </a>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 w-22">
       <bold>{{company.name}}</bold>
     </div>
     <div class="col-md-2">{{invoice.date | date:'dd MMM yyyy'}}</div>
@@ -62,7 +62,7 @@
           <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
         </div>
         <ul class="dropdown-menu" role="menu">
-          <li ng-show="!invoice.paidOn"><a ng-click="sentInvoice()">Resend</a></li>
+          <li><a ng-click="sentInvoice()">Resend</a></li>
           <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">Rollback</a></li>
           <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
           <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>

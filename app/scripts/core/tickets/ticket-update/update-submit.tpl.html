@@ -23,7 +23,7 @@
 
   <div class="pull-right" style="padding-top: 15px;">
     <div class="btn btn-primary"
-         custom-disabled="{{ updateTicketNote.$invalid || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+         custom-disabled="{{ (!haveNote() && !haveAttachments()) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
          ng-click="saveTicketUpdate(ticketUpdateForm)">
       Update
     </div>

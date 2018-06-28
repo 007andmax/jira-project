@@ -34,31 +34,31 @@
 
         <div ng-if="reportByProducts.lines">
           <ul>
-            <li class="top-product-list-ticket clearfix">
+            <li class="top-product-list-ticket clearfix" sticky-products-header>
               <div style="width: 2%;" class="col-md-1"><strong>
                 <label class="control checkbox hide-in-report">
                   <input type="checkbox" ng-checked="isAllLinesAreChecked()" ng-click="selectAllLines()">
                   <span class="control-indicator"></span>
                 </label>
               </strong></div>
-              <!--<div class="col-md-1" ng-click="sortBy(['date', 'ticketNumber'])">Date</div>-->
-              <!--<div class="col-md-1" ng-click="sortBy(['client'])" ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>-->
-              <!--<div class="col-md-1" ng-click="sortBy(['mfg'])">MFG#</div>-->
-              <!--<div class="col-md-3" ng-click="sortBy(['description'])">Description</div>-->
-              <!--<div class="col-md-2" ng-click="sortBy(['ticketNumber'])">Ticket number</div>-->
-              <!--<div class="col-md-2" ng-click="sortBy(['invoiceNumber'])">Invoice number</div>-->
-              <!--&lt;!&ndash;<div class="col-md-1"><strong>Count</strong></div>&ndash;&gt;-->
-              <!--<div class="col-md-1" ng-click="sortBy(['purchaseCost'])">Purchase cost</div>-->
-              <!--<div class="col-md-1" ng-click="sortBy(['salePrice'])">Sale price</div>-->
-              <div class="col-md-1" >Date</div>
-              <div class="col-md-1"  ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>
-              <div class="col-md-1" >MFG#</div>
-              <div class="col-md-3" >Description</div>
-              <div class="col-md-2" >Ticket number</div>
-              <div class="col-md-2" >Invoice number</div>
+              <div class="col-md-1" ng-click="sortBy(['date', 'ticketNumber'])">Date</div>
+              <div class="col-md-1" ng-click="sortBy(['client'])" ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>
+              <div class="col-md-1" ng-click="sortBy(['mfg'])">MFG#</div>
+              <div class="col-md-3" ng-click="sortBy(['description'])">Description</div>
+              <div class="col-md-2" ng-click="sortBy(['ticketNumber'])">Ticket number</div>
+              <div class="col-md-2" ng-click="sortBy(['invoiceNumber'])">Invoice number</div>
               <!--<div class="col-md-1"><strong>Count</strong></div>-->
-              <div class="col-md-1" >Purchase cost</div>
-              <div class="col-md-1" >Sale price</div>
+              <div class="col-md-1 purchase-cost" ng-click="sortBy(['purchaseCost'])">Purchase cost</div>
+              <div class="col-md-1" ng-click="sortBy(['salePrice'])">Sale price</div>
+              <!--<div class="col-md-1" >Date</div>-->
+              <!--<div class="col-md-1"  ng-if="reportByProducts.type === 'SUMMARY'"><strong>Client</strong></div>-->
+              <!--<div class="col-md-1" >MFG#</div>-->
+              <!--<div class="col-md-3" >Description</div>-->
+              <!--<div class="col-md-2" >Ticket number</div>-->
+              <!--<div class="col-md-2" >Invoice number</div>-->
+              <!--&lt;!&ndash;<div class="col-md-1"><strong>Count</strong></div>&ndash;&gt;-->
+              <!--<div class="col-md-1" >Purchase cost</div>-->
+              <!--<div class="col-md-1" >Sale price</div>-->
               <!--<div class="col-md-1"><strong>Discount(amount)</strong></div>-->
             </li>
             <li class="content-product-list-ticket clearfix"
@@ -84,8 +84,9 @@
                 {{product.invoiceNumber }}
               </div>
               <!--<div class="col-md-1">{{product.count}}</div>-->
-              <div class="col-md-1" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{product.purchaseCost |
-                currency: '$': 2}}
+              <div class="col-md-1 purchase-cost">
+                <span ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{product.purchaseCost | currency: '$': 2}}</span>
+
               </div>
               <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
                 {{product.salePrice | currency: '$': 2}}
@@ -96,9 +97,9 @@
         </div>
         <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
           <!--<div class="col-md-1" style="margin-right: 20px;"><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong></div>-->
-          <div class="col-md-1" style="margin-right: 30px;" ><br> <strong><span ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
+          <div class="col-md-1" style="margin-right: 30px;" ><br> <strong><span>{{salesPriceSum | currency: '$': 2}}</span></strong>
           </div>
-          <div class="col-md-2" ><br>
+          <div class="col-md-2 purchase-cost" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')"><br>
             <strong><span>{{purchaseCostSum | currency: '$': 2}}</span></strong></div>
         </div>
       </div>

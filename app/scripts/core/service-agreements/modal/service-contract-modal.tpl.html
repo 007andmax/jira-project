@@ -678,13 +678,13 @@
                        name="serviceName"
                        autocomplete="off"
                        autocomplete-service-item="service.name"
-                       ng-model="service.name"
+                       ng-model="service.nameValue"
                        service-list="defaultServicesAdditionalForDropDown"
                        autocomplete-service-list smart-dropdown-menu-position="service-list"
                        uib-dropdown-toggle
                        entity="service.nameValue"
                        hard-reset-pattern="descriptionPattern"
-                       invalid-when="!isAdditionalServiceNameUnique(service.name)" required/>
+                       invalid-when="!isAdditionalServiceNameUnique(service.nameValue)" required/>
                 <i class="icn-sm icn-caret-gray"></i>
                 <div class="service-list-container"></div>
 
@@ -768,24 +768,39 @@
                        <!--value="newService.name" hard-reset-pattern="serviceNamePattern"-->
                        <!--invalid-when="!isAdditionalServiceNameUnique(newService.name)">-->
 
-                <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
-
-                <input tooltip-placement="top"
-                       type="text"
-                       class="form-control has-dropdown"
-                       placeholder="Service"
+                <input type="text"
                        name="newServiceName"
+                       ng-model="newService.name"
+                       ng-minlength="1"
                        autocomplete="off"
-                       ng-click="refreshNotAddedError('additional')"
-                       autocomplete-service-item="newService.name"
-                       ng-model="newService.name.name"
-                       service-list="defaultServicesAdditionalForDropDown"
-                       autocomplete-service-list smart-dropdown-menu-position="service-list"
-                       uib-dropdown-toggle
-                       entity="newService.nameValue"
+                       placeholder="Service"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service as service.name for service in defaultServicesAdditionalForDropDown |  orderBy:'name'"
+                       qt-typeahead-async-show-on-focus
+                       hard-reset-pattern="descriptionPattern"
                        invalid-when="!isAdditionalServiceNameUnique(newService.name)"
-                       hard-reset-pattern="descriptionPattern"/>
-                <i class="icn-sm icn-caret-gray"></i>
+                       ng-click="refreshNotAddedError('additional')"/>
+
+                <div class="input-top-4" typeahead-input-icon="newService.name"></div>
+
+                <!--<div class="input-top-4" typeahead-input-icon="newService.name"></div>-->
+
+                <!--<input tooltip-placement="top"-->
+                       <!--type="text"-->
+                       <!--class="form-control has-dropdown"-->
+                       <!--placeholder="Service"-->
+                       <!--name="newServiceName"-->
+                       <!--autocomplete="off"-->
+                       <!--ng-click="refreshNotAddedError('additional')"-->
+                       <!--autocomplete-service-item="newService.name"-->
+                       <!--ng-model="newService.name.name"-->
+                       <!--service-list="defaultServicesAdditionalForDropDown"-->
+                       <!--autocomplete-service-list smart-dropdown-menu-position="service-list"-->
+                       <!--uib-dropdown-toggle-->
+                       <!--entity="newService.nameValue"-->
+                       <!--invalid-when="!isAdditionalServiceNameUnique(newService.name)"-->
+                       <!--hard-reset-pattern="descriptionPattern"/>-->
+                <!--<i class="icn-sm icn-caret-gray"></i>-->
                 <div class="service-list-container"></div>
 
               </div>
@@ -802,7 +817,7 @@
                      name="newServiceRate"
                      type="text"
                      class="form-control"
-                     ng-model="newService.name.rate | number: 2"
+                     ng-model="newService.name.rate"
                      hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required>
             </div>
             <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': newService.billable ? 'visible' : 'hidden'}">
@@ -865,4 +880,3 @@
 <div class="service-agreement-modal" ng-show="!editMode">
   <div ng-include="'/html/scripts/core/service-agreements/modal/service-contract-preview-modal.tpl.html'"></div>
 </div>
-

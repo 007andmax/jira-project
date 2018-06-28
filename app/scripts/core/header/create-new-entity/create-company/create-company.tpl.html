@@ -185,20 +185,39 @@
       <div class="col-xs-6">
         <div style="width: 100%; height: 250px; margin-top: 15px;" map alternative-map></div>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-12 company-info-wrapper">
         <div class="company-schedule clearfix">
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="isScheduleShown">
+            <span class="control-indicator" uib-tooltip="Working day"></span>
+
+            Set working hours
+          </label>
           <div>
             <div>
-              <ul class="company-schedule-edit clearfix row">
+              <ul class="company-schedule-edit clearfix row" ng-show="isScheduleShown">
                 <li class="col-md-6" ng-repeat="day in workingDays">
                   <div class="mb">
                     <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
-                    <input placeholder="Hours"
-                           name="startTime"
-                           type="text"
-                           class="form-control"
-                           ng-model="day.startTime"
-                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="!day.isWorkingDay">
+                    <div style="position: relative; padding: 0; display: inline-block; width: 20%"
+                         class="set-working-hours"
+                         service-quantity-picker="day.startTime"
+                         sqp-day="day.dayOfWeek"
+                         sqp-period="start"
+                         sqp-is-show-format="false" >
+                      <input class="time form-control service-quantity-picker"
+                             type="text"
+                             placeholder="Hr(s) : Min(s)"
+                             sqp-cond-input="{{day.dayOfWeek + ' start'}}"
+                             autocomplete="off"
+                             aria-expanded="true"
+                             ng-disabled="!day.isWorkingDay"/>
+                      <input type="hidden"
+                             ng-model="day.startTime"
+                             name="serviceTime"
+                             ng-disabled="!day.isWorkingDay"/>
+                    </div>
+
                     <input type="text" class="form-control pointer text-center" name="startTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
@@ -206,12 +225,24 @@
                            ng-model="day.startTimeFormat"
                            autocomplete="off" qt-typeahead-async-show-on-focus ng-disabled="!day.isWorkingDay" readonly>
                     -
-                    <input placeholder="Hours"
-                           name="endTime"
-                           type="text"
-                           class="form-control"
-                           ng-model="day.endTime"
-                           hard-reset-pattern="timeHoursAndMinutesPattern" ng-disabled="!day.isWorkingDay">
+                    <div style="position: relative; padding: 0; display: inline-block; width: 20%"
+                         class="set-working-hours"
+                         service-quantity-picker="day.endTime"
+                         sqp-day="day.dayOfWeek"
+                         sqp-period="end"
+                         sqp-is-show-format="false">
+                      <input class="time form-control service-quantity-picker"
+                             type="text"
+                             placeholder="Hr(s) : Min(s)"
+                             sqp-cond-input="{{day.dayOfWeek + ' end'}}"
+                             ng-disabled="!day.isWorkingDay"
+                             autocomplete="off"
+                             aria-expanded="true"/>
+                      <input type="hidden"
+                             ng-model="day.endTime"
+                             name="serviceTime"
+                             ng-disabled="!day.isWorkingDay"/>
+                    </div>
                     <input type="text" class="form-control pointer text-center" name="endTimeFormat"
                            ng-maxlength="40"
                            custom-style="{'width':'100%'}"
@@ -725,4 +756,3 @@
   ga('send', 'pageview');
 
 </script>
-

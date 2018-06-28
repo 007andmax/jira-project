@@ -73,7 +73,7 @@
         <i class="invoice-download"></i>
       </button>
 
-      <button ng-if="(!receivablePreview || (receivablePreview && !invoice.paidOn)) && !invoiceCreated"
+      <button ng-if="(!receivablePreview || receivablePreview ) && !invoiceCreated"
               ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
               ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
               tooltip-placement="bottom"

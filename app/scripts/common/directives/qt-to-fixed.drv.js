@@ -7,17 +7,24 @@
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {
+          var focused;
 
           var unwatch = scope.$watch(function () {
             return element.val();
           }, function (val) {
-            if (val) {
+            if (val && !focused) {
               element.val(parseFloat(val).toFixed(parseInt(attrs.qtToFixed)));
-            }
-            unwatch();
-          });
 
-          element.on('blur', formatNumber);
+            }
+
+          });
+          element.on('focus', function() {
+            focused = true;
+          })
+          element.on('blur', function() {
+            focused = false;
+            formatNumber();
+          });
           scope.$on('addFloatPartOfNumber', formatNumber);
 
           function formatNumber() {

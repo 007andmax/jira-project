@@ -57,10 +57,33 @@
           <i class="without-device-type"
              ng-style="{'display': !checkAgentType(agent.type) ? 'inline-block' : ''}"></i>
 
-          <i class="devices-monitor" ng-show="agent.type === 'workstation'"></i>
-          <i class="devices-phone" ng-show="agent.type === 'device'"></i>
-          <i class="devices-printer" ng-show="agent.type === 'printer'"></i>
-          <i class="devices-server" ng-show="agent.type === 'server'"></i>
+          <div uib-dropdown class="icon-dropdown">
+            <div uib-dropdown-toggle>
+              <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
+              <!--ng-click="currentUser.online = !currentUser.online"></i>-->
+              <i class="devices-monitor" ng-show="agent.iconName === 'workstation' || !agent.iconName"></i>
+              <i class="devices-phone" ng-show="agent.iconName === 'device'"></i>
+              <i class="devices-printer" ng-show="agent.iconName === 'printer'"></i>
+              <i class="devices-server" ng-show="agent.iconName === 'server'"></i>
+
+
+            </div>
+
+            <ul class="dropdown-menu icon-list">
+              <li ng-click="saveNewIcon('workstation')">
+                <i class="devices-monitor"></i>
+              </li>
+              <li ng-click="saveNewIcon('device')">
+                <i class="devices-phone"></i>
+              </li>
+              <li ng-click="saveNewIcon('printer')">
+                <i class="devices-printer"></i>
+              </li>
+              <li ng-click="saveNewIcon('server')">
+                <i class="devices-server"></i>
+              </li>
+            </ul>
+          </div>
 
           <div style="margin-top: -4px;"
                ng-mouseover="showDeviceLabelEditButtom = true"
@@ -72,7 +95,8 @@
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>
             </p>
-            <div class="label label-light ellipsis" ng-click="openDevicesDetails = !openDevicesDetails">
+            <div style="position: absolute;top: 20px;" class="label label-light ellipsis"
+                 ng-click="openDevicesDetails = !openDevicesDetails">
               <p class="label-light" ng-show="isLabel(agent)">{{agent.hostName || agent.ip}}</p>
             </div>
 
@@ -107,13 +131,15 @@
           </div>
         </div>
         <p class="ellipsis">{{agent.userName || 'unknown'}}</p>
-        <p class="label label-light ellipsis" ng-show="(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
+        <p style="position: absolute;top: 20px;" class="label label-light ellipsis"
+           ng-show="(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
           Idle: <span ng-show="returnTimeFormatForPage(agent.timing.idle).days > 0">{{returnTimeFormatForPage(agent.timing.idle).days}} day</span><span
           ng-show="returnTimeFormatForPage(agent.timing.idle).hours > 0"> {{returnTimeFormatForPage(agent.timing.idle).hours}} hrs</span><span
           ng-show="returnTimeFormatForPage(agent.timing.idle).minutes > 0 && returnTimeFormatForPage(agent.timing.idle).days < 1"> {{returnTimeFormatForPage(agent.timing.idle).minutes}} min</span><span
           ng-show="returnTimeFormatForPage(agent.timing.idle).seconds > 0 && returnTimeFormatForPage(agent.timing.idle).minutes < 1"> 0 min</span>
         </p>
-        <p class="label label-light ellipsis" ng-show="!(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
+        <p style="position: absolute;top: 20px;" class="label label-light ellipsis"
+           ng-show="!(agent.Idle && agent.Idle.length > 0 && agent.Idle !=='none')">
           Idle: 0 min
         </p>
       </div>
@@ -142,20 +168,41 @@
 
       </div>
       <div class="col-md-2" style="padding-left: 90px; justify-content: flex-end; align-items: center">
-        <div uib-dropdown
-             smart-dropdown-menu-position="dropdown-menu"
-             ng-show="deviceCredentials">
-          <div uib-dropdown-toggle>
-            <i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>
-          </div>
-          <div class="dropdown-menu" role="menu">
-            <p><span>{{agent.hostName}}</span> Credential</p>
-            <div ng-repeat="credential in deviceCredentials">
-              <p>User: <span>{{credential.username}}</span></p>
-              <p>Password: <span>{{credential.password}}</span></p>
-            </div>
-          </div>
+        <div class="hover-dropdown">
+          <i class="dev-btn devices-lock pointer" ng-show="deviceCredentials && deviceCredentials.length !== 0" uib-tooltip="show credentials"></i>
+          <ul class="hover-dropdown-content">
+            <li ng-repeat="cred in deviceCredentials">
+              <p><span>{{agent.hostName}}</span> Credential</p>
+              <ul class="sub-hover-dropdown">
+                <li>
+                  <p>User: <span>{{ cred.username }}</span></p>
+                  <p>Password: <span>{{ cred.password }}</span></p>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
+
+
+        <!--<div class="sub-dropdown"-->
+        <!--uib-dropdown-->
+        <!--smart-dropdown-menu-position="dropdown-menu"-->
+        <!--ng-show="deviceCredentials">-->
+        <!--<div uib-dropdown-toggle>-->
+        <!--<i class="dev-btn devices-lock pointer" uib-tooltip="show credentials"></i>-->
+        <!--</div>-->
+        <!--<div class="dropdown-menu" role="menu">-->
+        <!--<div>-->
+        <!--<span>{{agent.hostName}}</span> Credential-->
+        <!--<div class="sub-dropdown-menu">-->
+        <!--<div ng-repeat="credential in deviceCredentials">-->
+        <!--<p>User: <span>{{credential.username}}</span></p>-->
+        <!--<p>Password: <span>{{credential.password}}</span></p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
         <!--<i class="dev-btn devices-card pointer" uib-tooltip="report"></i>-->
         <!--<div class="btn"-->
@@ -231,7 +278,9 @@
           <ul class="dropdown-menu" role="menu">
             <li><a ng-click="restart()">Restart</a></li>
             <li><a ng-click="shutdown()">Shutdown</a></li>
+            <li ng-show="!agent.master"><a ng-click="markDeviceAsMaster()">Master agent</a></li>
             <li><a ng-click="remove()">Remove</a></li>
+
           </ul>
         </div>
       </div>

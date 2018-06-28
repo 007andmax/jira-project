@@ -76,6 +76,10 @@
           target.find('.ng-hide').remove();
           target.find('.hide-in-report').remove();
 
+          if (!$rootScope.isPurchaseShown) {
+            target.find('.purchase-cost').remove();
+          }
+
           if (sourceSVGs && sourceSVGs.length) {
             var svgs = target.find('svg');
             svgs.replaceWith(function (index) {

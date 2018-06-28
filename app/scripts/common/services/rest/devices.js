@@ -20,6 +20,111 @@
 
       var scannedDevices = {};
 
+
+      var installationStatuses = {
+        'INITIALIZATION': {
+          status: 'Installing',
+          message: "Remote installation initialized"
+        },
+        'CONNECT_TO_HOST': {
+          status: 'Installing',
+          message: 'Connecting to a remote computer'
+        },
+        'OPEN_SC_MANAGER': {
+          status: 'Installing',
+          message: 'Opening the service manager'
+        },
+        'OPEN_S_C_MANAGER': {
+          status: 'Installing',
+          message: 'Opening the service manager'
+        },
+        'INSTALL_CLEAN_UP': {
+          status: 'Installing',
+          message: 'Cleaning the previous installation'
+        },
+        'OPEN_DESTINATION_FOLDER': {
+          status: 'Installing',
+          message: 'Opening the destination folder'
+        },
+        'COPY_BINARY_FILES': {
+          status: 'Installing',
+          message: 'Copying the binary files'
+        },
+        'SERVICE_INSTALLATION': {
+          status: 'Installing',
+          message: 'Running the service'
+        },
+        'SERVICE_INSTALLED': {
+          status: 'Installing',
+          message: 'Service is installed \ started'
+        },
+        'BIN_DOWNLOADING': {
+          status: 'Installing',
+          message: 'Downloading the installer'
+        },
+        'INSTALLATION': {
+          status: 'Installing',
+          message: 'Running the installer'
+        },
+        'INSTALL_FINISHED': {
+          status: 'Installed',
+          message: 'Remote installation completed successfully'
+        },
+        'ERROR_USER_NAME_OR_PASS': {
+          status: 'Bad password',
+          message: 'Incorrect login or password'
+        },
+        'ERROR_INVALID_USER_NAME': {
+          status: 'Bad password',
+          message: 'Incorrect username'
+        },
+        'ERROR_HOST_OFFLINE_OR_FIREWALL': {
+          status: 'Blocked',
+          message: 'The remote computer is not connected to the network or is blocked by a firewall'
+        },
+        'ERROR_UAC': {
+          status: 'Blocked',
+          message: 'Enabled UAC does not allow installation'
+        },
+        'ERROR_INITIALIZATION': {
+          status: 'Install error',
+          message: 'Initialization error'
+        },
+        'ERROR_CONNECT_TO_HOST': {
+          status: 'Install error',
+          message: 'Error  connecting to a remote computer'
+        },
+        'ERROR_OPEN_SC_MANAGER': {
+          status: 'Install error',
+          message: 'Error opening service manager'
+        },
+        'ERROR_OPEN_S_C_MANAGER': {
+          status: 'Install error',
+          message: 'Error opening service manager'
+        },
+        'ERROR_OPEN_DESTINATION_FOLDER': {
+          status: 'Install error',
+          message: 'Error opening destination folder'
+        },
+        'ERROR_COPY_BINARY_FILES': {
+          status: 'Install error',
+          message: 'Error copying files'
+        },
+        'ERROR_SERVICE_INSTALLATION': {
+          status: 'Install error',
+          message: 'Error installing service'
+        },
+        'ERROR_BIN_DOWNLOADING': {
+          status: 'Install error',
+          message: 'Failed to load installer'
+        },
+        'ERROR_INSTALLATION': {
+          status: 'Install error',
+          message: 'Installation error'
+        },
+
+      }
+
       Utils.customizeObj(storage);
 
       CompaniesService._addInitListener(init);
@@ -28,18 +133,87 @@
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
 
-          Utils.customizeObj(resp.data, devices);
+          var listOfCompaniesWithAgents = {};
+          Object.keys(resp.data).forEach(function(key,index) {
+            if(resp.data[key] !== null) {
+              listOfCompaniesWithAgents[key] = resp.data[key];
+            }
+          });
+
+          Utils.customizeObj(listOfCompaniesWithAgents, devices);
           calculateDevicesCountersAndCallCallbacks();
 
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
+            // console.log(newChange, '****s*********************************8')
+            // console.log(newChange, '/device change')
+            if (false && newChange.action === 'REMOTE_INSTALL_INFO') {
 
-            if (newChange.action === 'DEVICE_ONLINE') {
+              var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
+              if (!device) {
+                for (var i in scannedDevices[companyId]) {
+
+                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {
+                    device = scannedDevices[companyId][i];
+                  }
+                }
+              }
+
+              if (device) {
+                if (newChange.data.status === 'MANAGED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed');
+                } else if (newChange.data.status === 'INSTALLED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'installed');
+                } else if (newChange.data.status === 'INSTALL_ERROR') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'error');
+                } else if (newChange.data.status === 'LOGIN_ERROR') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'loginError');
+                } else if (newChange.data.status === 'UNKNOWN') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'unknown');
+                } else if (newChange.data.status === 'INSTALL_INITIALIZED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'init');
+                } else if (newChange.data.status === 'INSTALL_DEPLOYING') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
+                }
+                Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
+                Utils.defineReadOnlyProperty(device, "realTimeChecker", true);
+              }
+
+              var call = callbacksForRemoteInstall[newChange.data.netScanId] || callbacksForRemoteInstall[newChange.data.deviceId];
+              if (call && typeof call === "function") {
+                call();
+              }
+
+              var uninstallCall = callbacksForRemoteUninstall[newChange.data.netScanId] || callbacksForRemoteUninstall[newChange.data.deviceId];
+              if (uninstallCall && typeof uninstallCall === "function") {
+                uninstallCall();
+              }
+            } else  if (newChange.action === 'DEVICE_ONLINE') {
+              var deviceFound = false;
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'online', true);
                   Utils.defineReadOnlyProperty(devices[newChange.data.clientCompanyId][i], 'userName', newChange.data.userName);
-                  break;
+                  deviceFound = true;
                 }
+              }
+
+              if (!deviceFound) {
+                // console.log('request i did')
+                getUpdatedDevices();
+                // var username = newChange.data.username;
+                // console.log(newChange, 'DEVICE INSTALLED')
+                // // var parsedData = JSON.parse(newChange.data.value);
+                // // parsedData.device.userName = newChange.data.userName;
+                // if (!devices[newChange.data.clientCompanyId]) {
+                //   var companyId = newChange.data.clientCompanyId;
+                //   devices[companyId] = [];
+                //   devices[companyId].push(parsedData.device);
+                // } else {
+                //   var deviceById = Utils.findById(devices[newChange.data.clientCompanyId], parsedData.device.id);
+                //   Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
+                //   Utils.customizeObj(parsedData.device, deviceById);
+                // }
+                // calculateDevicesCountersAndCallCallbacks();
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_OFFLINE') {
@@ -54,6 +228,7 @@
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_INSTALLED') {
+              // console.log(newChange, 'DEVICE INSTALLED')
               var parsedData = JSON.parse(newChange.data.value);
               parsedData.device.userName = newChange.data.userName;
               if (!devices[newChange.data.clientCompanyId]) {
@@ -146,6 +321,22 @@
         }
       }
 
+      function getUpdatedDevices() {
+        $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
+          var devices = storage.devices;
+
+          var listOfCompaniesWithAgents = {};
+          Object.keys(resp.data).forEach(function(key,index) {
+            if(resp.data[key] !== null) {
+              listOfCompaniesWithAgents[key] = resp.data[key];
+            }
+          });
+
+          Utils.customizeObj(listOfCompaniesWithAgents, devices);
+          calculateDevicesCountersAndCallCallbacks();
+        });
+      }
+
       function addRemoteConnectionSessionToDevice(newChange, devices) {
         //var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
         for(var i=0; i<devices[newChange.data.clientCompany.id].length; i++) {
@@ -212,7 +403,7 @@
             continue;
           }
 
-          if (!storage.devices[companyId].length) {
+          if (storage.devices[companyId] === null || !storage.devices[companyId].length) {
             delete storage.deviceCounter[companyId];
             callCallbacks();
             return;
@@ -262,6 +453,18 @@
       function getDownloadAgentLink(agentDownloadDto, callback) {
         var future = $http.post('/data/getAgentDownloadLink', agentDownloadDto);
         Utils.handleCallback(future, callback);
+      }
+
+      function markDeviceAsMaster(companyId, agentId, callback) {
+        var request = {
+          "masterAgentId": agentId,
+          "clientCompanyId": companyId
+        }
+
+        $http.post('/devices/updateMasterAgent', request)
+          .then(function(resp) {
+            console.log('server resp', resp)
+          })
       }
 
       function createOneTimeRemoteSession(callback) {
@@ -567,7 +770,10 @@
           if (networkScan) {
             Utils.defineReadOnlyProperty(scannedDevices, "status", networkScan.netScanStatus.toLowerCase());
             scannedDevices[companyId] = networkScan.devices;
+
+
           }
+
 
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
 
@@ -594,34 +800,32 @@
                 }
               }
 
-            } else if (newChange.action === 'REMOTE_INSTALL') {
-
+            } else if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
-
               if (!device) {
                 for (var i in scannedDevices[companyId]) {
-                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId) {
+
+                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {
                     device = scannedDevices[companyId][i];
                   }
                 }
               }
 
+              // console.log(console.log(newChange, '_____________________'))
+
+              // console.log(console.log(newChange, '_____________________'))
+
               if (device) {
-                if (newChange.data.status === 'MANAGED') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed');
-                } else if (newChange.data.status === 'INSTALLED') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'installed');
-                } else if (newChange.data.status === 'ERROR') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'error');
-                } else if (newChange.data.status === 'LOGIN_ERROR') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'loginError');
-                } else if (newChange.data.status === 'UNKNOWN') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'unknown');
-                } else if (newChange.data.status === 'INIT') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'init');
-                } else if (newChange.data.status === 'IN_PROGRESS') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
+                var statusName = newChange.data.status;
+                var status = installationStatuses[statusName];
+
+                if (statusName === 'MANAGED') {
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed')
+                  Utils.defineReadOnlyProperty(device, "agentStatusTooltip", 'Managed');
+                  return;
                 }
+                Utils.defineReadOnlyProperty(device, "agentStatus", status.status);
+                Utils.defineReadOnlyProperty(device, "agentStatusTooltip", status.message);
                 Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
                 Utils.defineReadOnlyProperty(device, "realTimeChecker", true);
               }
@@ -730,7 +934,6 @@
         });
 
         RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-
           if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
             if (callback) {
               callback(newChange.data);
@@ -787,12 +990,15 @@
       }
 
       function _getDeviceByDeviceId(devices, agentId) {
-        for (var i = 0; i < devices.length; i++) {
-          var device = devices[i];
-          if (device.id === agentId) {
-            return device;
+        if(devices) {
+          for (var i = 0; i < devices.length; i++) {
+            var device = devices[i];
+            if (device.id === agentId) {
+              return device;
+            }
           }
         }
+
       }
 
       function _getNetScanByDeviceId(devices, deviceId) {
@@ -826,11 +1032,12 @@
         if(value) {
           return Object.keys(storage.devices).find(function(key) {
             if(key !== 'staticCopy') {
-              for(var i=0; i<storage.devices[key].length; i++ ) {
-                if(storage.devices[key][i].agentId === value) {
-                  return true;
+                for(var i=0; i<storage.devices[key].length; i++ ) {
+                  if(storage.devices[key][i].agentId === value) {
+                    return true;
+                  }
                 }
-              }
+
             }
           } );
         }
@@ -908,6 +1115,7 @@
                   storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
                   storage.devices[companyId][i].label = resp.data[companyId][i].label;
                   storage.devices[companyId][i].OneTimeConnectionData = [];
+                  storage.devices[companyId][i].iconName = resp.data[companyId][i].iconName
                   storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
                   if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
                     for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
@@ -954,7 +1162,7 @@
         // “newLabelValue”:””
         // }
 
-        var future = $http.post('/devices/editAgentLabel', dto);
+        var future = $http.post('/devices/editAgentInfo', dto);
         Utils.handleCallback(future, callback);
       }
 
@@ -977,9 +1185,70 @@
         }
       }
 
-      function getDevicesCredentials(devices, callback) {
-        var future = $http.post('/passwordRecords/devices/password', devices);
-        Utils.handleCallback(future, callback);
+      function getDevicesCredentials(devices, scope, callback) {
+        var credentials = {};
+        $http.post('/passwordRecords/devices/password', devices).then(function(resp) {
+          credentials = resp.data;
+          RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
+            if (newChange.action === 'PASSWORD_RECORD_CREATED') {
+              var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
+
+              if (agentId) {
+                var credential = {
+                  password: newChange.data.password,
+                  username: newChange.data.username,
+                  id: newChange.data.id
+                };
+
+                if (!credentials[agentId]) {
+                  credentials.agentId = [credential];
+                } else {
+                  credentials[agentId].push(credential);
+                }
+              }
+
+
+            } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
+              var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
+
+              if (agentId) {
+                var recordIndex = credentials[agentId].findIndex(function(el) {
+                  return el.id === newChange.data.id;
+                })
+
+                if (recordIndex !== -1) {
+
+                  credentials[agentId][recordIndex] = {
+                    id: newChange.data.id,
+                    password: newChange.data.password,
+                    username: newChange.data.username
+                  }
+                }
+              }
+
+
+            } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
+              var agents = Object.keys(credentials);
+
+              for (var i = 0; i < agents.length; i++) {
+                credentials[agents[i]] = credentials[agents[i]].filter(function(el) {
+                  return el.id !== newChange.data.id;
+                })
+              }
+
+            }
+
+            if (callback) {
+              // console.log('devices credentials has been updated', credentials, newChange.action)
+              callback(credentials);
+            }
+          });
+
+          if (callback) {
+            callback(credentials);
+          }
+        });
+
       }
 
 
@@ -1024,11 +1293,11 @@
         getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
         setNewDeviceLabel: setNewDeviceLabel,
         sendDeviceStatusRequest: sendDeviceStatusRequest,
-        getDevicesCredentials: getDevicesCredentials
+        getDevicesCredentials: getDevicesCredentials,
+        markDeviceAsMaster: markDeviceAsMaster,
+        getUpdatedDevices: getUpdatedDevices
       }
     }
   ]);
 })
 (window, jQuery);
-
-

@@ -22,6 +22,7 @@
           TaxesService.save($scope.currentTax, function () {
             $scope.currentTax = {};
           });
+
         };
 
         $scope.cancelTax = function () {

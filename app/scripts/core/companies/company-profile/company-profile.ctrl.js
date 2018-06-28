@@ -112,7 +112,6 @@
         }
 
 
-
         function userReadable(text) {
           if (!text) {
             return '';
@@ -143,6 +142,7 @@
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
+          $rootScope.updateTimePickers = true;
           $timeout(function () {
             UserNotificationService.hide();
           }, 0);
@@ -346,11 +346,11 @@
           if(openedTab === 'devices-all') {
             return true
           } else if(openedTab === 'devices-workstations') {
-            return device.type === 'workstation'
+            return device.iconName === 'workstation'
           } else if(openedTab === 'devices-servers') {
-            return device.type === 'server'
+            return device.iconName === 'server'
           } else if(openedTab === 'devices-devices') {
-            return device.type === 'device' || device.type === 'printer'
+            return device.iconName === 'device' || device.iconName === 'printer'
           }
         };
 

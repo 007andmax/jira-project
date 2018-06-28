@@ -289,12 +289,12 @@
 
                     <input tooltip-placement="top"
                            type="text" class="form-control has-dropdown"
-                           name="newContractServiceName" autocomplete="off"
+                           name="contractService" autocomplete="off"
                            autocomplete-service-item="contractService.name"
-                           ng-model="contractService.name" service-list="defaultServicesForDropdown"
+                           ng-model="contractService.nameValue" service-list="defaultServicesForDropdown"
                            autocomplete-service-list uib-dropdown-toggle smart-dropdown-menu-position="service-list"
                            entity="contractService.nameValue" hard-reset-pattern="descriptionPattern"
-                           invalid-when="!isNameUnique(contractService)"/>
+                           invalid-when="!isNameUnique(contractService.nameValue)"/>
                     <i class="icn-sm icn-caret-gray"></i>
                     <div class="service-list-container"></div>
 
@@ -333,7 +333,7 @@
                 <div ng-show="showNewServiceError && newContractService.nameValue.length<1">
                   <p style="color: red;padding-left: 15px; margin-bottom: 0;">Please select service from the list</p>
                 </div>
-                <div ng-show="!isNameUnique(newContractService) && newContractService.name">
+                <div ng-show="!isNameUnique(newContractService) && newContractService.name.name">
                   <p style="color: red;padding-left: 15px; margin-bottom: 0;">Duplicate name</p>
                 </div>
                 <div
@@ -378,21 +378,36 @@
 
                     <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
-                    <input tooltip-placement="top"
-                           type="text"
-                           class="form-control has-dropdown"
-                           placeholder="Service"
+                    <!--<input tooltip-placement="top"-->
+                           <!--type="text"-->
+                           <!--class="form-control has-dropdown"-->
+                           <!--placeholder="Service"-->
+                           <!--name="newContractServiceName"-->
+                           <!--autocomplete="off"-->
+                           <!--ng-click="refreshNotAddedError('additional')"-->
+                           <!--autocomplete-service-item="newContractService.name"-->
+                           <!--ng-model="newContractService.name.name"-->
+                           <!--service-list="defaultServicesForDropdown"-->
+                           <!--autocomplete-service-list smart-dropdown-menu-position="service-list"-->
+                           <!--uib-dropdown-toggle-->
+                           <!--entity="newContractService.nameValue"-->
+                           <!--hard-reset-pattern="descriptionPattern"/>-->
+                    <!--<i class="icn-sm icn-caret-gray"></i>-->
+
+                    <input type="text"
                            name="newContractServiceName"
+                           ng-model="newContractService.name"
+                           ng-minlength="1"
                            autocomplete="off"
-                           ng-click="refreshNotAddedError('additional')"
-                           autocomplete-service-item="newContractService.name"
-                           ng-model="newContractService.name.name"
-                           service-list="defaultServicesForDropdown"
-                           autocomplete-service-list smart-dropdown-menu-position="service-list"
-                           uib-dropdown-toggle
-                           entity="newContractService.nameValue"
-                           hard-reset-pattern="descriptionPattern"/>
-                    <i class="icn-sm icn-caret-gray"></i>
+                           placeholder="Service"
+                           class="form-control form-control-dropdown dropdown-toggle"
+                           uib-typeahead="service as service.name for service in defaultServicesForDropdown |  orderBy:'name'"
+                           qt-typeahead-async-show-on-focus
+                           hard-reset-pattern="descriptionPattern"
+                           ng-click="refreshNotAddedError('additional')"/>
+
+                    <div class="input-top-4" typeahead-input-icon="newService.name"></div>
+
                     <div class="service-list-container"></div>
                     <!--<input type="hidden" name="service" ng-model="newContractService.name.versionedId.id" ng-required="true">-->
 
@@ -409,7 +424,7 @@
                   <input placeholder="0.00"
                          type="text"
                          class="form-control"
-                         ng-model="newContractService.name.rate | number: 2"
+                         ng-model="newContractService.name.rate"
                          hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
                 </div>
                 <div class="tax-agreement fourm-group text-center"

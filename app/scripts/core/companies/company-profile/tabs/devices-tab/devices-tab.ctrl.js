@@ -29,9 +29,7 @@
         $scope.agent.timing.uptimeForOrdering = 0;
 
         $scope.uptimeOrder = '';
-
         $scope.agentLabelEditForm = {};
-
 
         for (var i = 0; i < lastAgentArr.length; i++) {
           if (lastAgentArr[i] > currentAgentArr[i]) {
@@ -50,6 +48,8 @@
         $scope.showDeviceLabelEditButtom = false;
         $scope.showDeviceLabelEditForm = false;
         $scope.reserveAgentLabelCopy = '';
+
+        $scope.markDeviceAsMaster = markDeviceAsMaster;
 
         $scope.openDeviceLabelEditForm = function() {
           $scope.reserveAgentLabelCopy = $scope.agent.label;
@@ -78,6 +78,24 @@
 
           })
         };
+
+        $scope.saveNewIcon = function(icon) {
+          var dto = {
+            agentId: $scope.agent.agentId,
+            companyId: $scope.company.id,
+            newLabelValue: $scope.agent.label || $scope.agent.hostName,
+            iconName: icon
+          }
+
+          $scope.agent.iconName = icon || 'workstation';
+          DevicesService.setNewDeviceLabel(dto, function(resp) {
+
+          })
+        }
+
+        if ($scope.agent && $scope.agent.agentId && !$scope.agent.iconName) {
+          $scope.saveNewIcon('workstation');
+        }
 
         $scope.cancelNewDeviceLabelEdit = function() {
           $scope.agent.label = $scope.reserveAgentLabelCopy;
@@ -158,6 +176,20 @@
           });
         };
 
+        function markDeviceAsMaster() {
+          $scope.agents = $scope.agents.map(function(agent) {
+            if (agent.agentId === $scope.agent.agentId) {
+              agent.master = true;
+            } else {
+              agent.master = false;
+            };
+
+            return agent;
+          });
+
+          DevicesService.markDeviceAsMaster($scope.company.id, $scope.agent.agentId);
+        }
+
         function groupSingleFields(report) {
           report.general = {};
           for (var prop in report) {
@@ -235,7 +267,7 @@
            $scope.agent.timing.online += 1000;
            $scope.agent.timing.offline +=1000;
            $scope.agent.timing.uptimeForOrdering +=1000;
-           if($scope.agent.OneTimeConnectionData.length>0) {
+           if($scope.agent.OneTimeConnectionData && $scope.agent.OneTimeConnectionData.length>0) {
              for(var i=0; i<$scope.agent.OneTimeConnectionData.length; i++) {
                $scope.agent.OneTimeConnectionData[i].agentConnectedAt += 1000;
              }
