@@ -332,7 +332,7 @@
           <input class="form-control" type="text" name="primaryEmail" aria-expanded="true"
                  make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
                  ng-maxlength="128"
-                 contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
+                 contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
                  model-id="contact.id">
         </div>
 

@@ -36,7 +36,7 @@
 
             <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
                    ng-model="editUser.primaryEmail" ng-pattern="emailPattern" ng-maxlength="128"
-                   is-uniq-validation validation-func="validateUserEmail" tabindex="3">
+                   is-uniq-validation is-empty-valid="true" validation-func="validateUserEmail" tabindex="3">
 
           </div>
         </div>
