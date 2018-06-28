@@ -201,6 +201,7 @@
                     <p>{{daysOfWeekMap[day.dayOfWeek]}}</p>
                     <div style="position: relative; padding: 0; display: inline-block; width: 20%"
                          class="set-working-hours"
+                         service-quantity-picker="day.startTime"
                          sqp-day="day.dayOfWeek"
                          sqp-period="start"
                          sqp-is-show-format="false" >
@@ -226,6 +227,7 @@
                     -
                     <div style="position: relative; padding: 0; display: inline-block; width: 20%"
                          class="set-working-hours"
+                         service-quantity-picker="day.endTime"
                          sqp-day="day.dayOfWeek"
                          sqp-period="end"
                          sqp-is-show-format="false">
