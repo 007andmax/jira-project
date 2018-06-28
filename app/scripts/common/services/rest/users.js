@@ -482,7 +482,7 @@
 
         var isCompanyId = (typeof companyId === 'function' ? false : companyId);
 
-        if (!isCompanyId) {
+        if (!isCompanyId && !callback) {
           callback = companyId;
         }
 
