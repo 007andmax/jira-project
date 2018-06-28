@@ -37,11 +37,12 @@
 .custom-phone-type.no-label {
   margin-top: 24px;
 }
-.create-user-container .custom-phone-type.no-label .pull-left.dropdown{
+
+.create-user-container .custom-phone-type.no-label .pull-left.dropdown {
   width: 65%;
 }
 
-.create-popup .create-user-container .custom-phone-type.no-label .pull-left.dropdown{
+.create-popup .create-user-container .custom-phone-type.no-label .pull-left.dropdown {
   width: 85%;
 }
 
@@ -144,27 +145,51 @@
   width: 500px;
   padding-top: 25px;
 }
-.settings-main-wrapper .discount td{
+
+.settings-main-wrapper .discount td {
   width: 44%;
 }
+
 .settings-main-wrapper .discount .icon-margin {
   margin-right: 10px;
   cursor: pointer;
 }
+
 .settings-main-wrapper td {
   padding: 0 5px;
 }
 
 .settings-main-wrapper.permission-settings,
-.settings-main-wrapper.activity-history{
-  width: 900px;
+.settings-main-wrapper.activity-history {
+  width: 700px;
 }
+
 .activity-history button,
-.activity-history .dropdown-menu{
+.activity-history .dropdown-menu {
   width: 260px;
 }
-.activity-map{
+
+.activity-map {
   width: 700px !important;
+}
+
+.settings-main-wrapper.permission-settings {
+  width: 100%;
+  padding: 50px 25px;
+  margin-left: 130px;
+}
+
+.settings-main-wrapper.permission-settings .col-md-2 {
+  width: 18%;
+}
+
+.settings-main-wrapper.permission-settings .col-md-1 {
+  width: 13%;
+}
+
+.settings-main-wrapper.permission-settings .form-control {
+  height: 24px;
+  background-color: #fff;
 }
 
 .settings-main-wrapper textarea {
@@ -873,7 +898,8 @@ input.default-invoice-terms {
 .settings-wrapper__trow:first-child {
   margin-top: 10px;
 }
-.settings-wrapper__trow h3{
+
+.settings-wrapper__trow h3 {
   padding-bottom: 15px;
   border-bottom: 1px solid #eee;
 }
@@ -916,67 +942,78 @@ input.default-invoice-terms {
 }
 
 .response-time-settings-wrapper .form-row,
-.payments-info .form-row{
+.payments-info .form-row {
   display: table;
   width: 100%;
   margin-bottom: 10px;
 }
-.accept-credit-card-payments{
+
+.accept-credit-card-payments {
   width: 1000px;
   margin: 0 auto;
   font-size: 0;
 }
+
 .response-time-settings-wrapper .form-row .form-group,
-.payments-info .form-row .form-group{
+.payments-info .form-row .form-group {
   display: table-cell;
   width: 50%;
   vertical-align: middle;
   float: none;
 }
-.turn-on-content{
+
+.turn-on-content {
   background-color: #EAECEE;
   font-size: 0;
   margin-top: 80px;
   border-radius: 10px;
   position: relative;
 }
-.turn-on-content .credit-card-info{
+
+.turn-on-content .credit-card-info {
   width: 55%;
   margin: 0;
   padding-left: 60px;
 }
-.turn-on-content .left-image{
+
+.turn-on-content .left-image {
   width: 45%;
 }
-.triangle-bottom{
+
+.triangle-bottom {
   position: absolute;
   border: 60px solid transparent;
   border-top: 40px solid #EAECEE;
   left: calc(50% - 60px);
 }
-.turn-on-content .btn-success{
+
+.turn-on-content .btn-success {
   display: block;
 }
+
 .left-image,
-.credit-card-info{
+.credit-card-info {
   display: inline-block;
 }
-.payments-info h3{
+
+.payments-info h3 {
   margin-bottom: 13px;
 }
+
 .payments-info,
-.credit-card-info{
+.credit-card-info {
   padding-top: 20px;
   display: inline-block;
   width: 490px;
   vertical-align: top;
 }
-.credit-card-header{
+
+.credit-card-header {
   text-align: center;
 }
 
 .credit-card-turn-off .btn-primary,
-.credit-card-turn-on .btn-success{
+.credit-card-turn-on .btn-success {
   height: 50px;
   width: 460px;
   font-size: 22px;
@@ -984,11 +1021,13 @@ input.default-invoice-terms {
   display: inherit;
   padding-top: 7px;
 }
-.credit-card-header p{
+
+.credit-card-header p {
   color: #4ba9df;
   font-size: 20px;
 }
-.credit-card-info{
+
+.credit-card-info {
   background-color: #EAECEE;
   margin-left: 20px;
   margin-top: 80px;
@@ -996,13 +1035,15 @@ input.default-invoice-terms {
   border-radius: 10px;
   padding-top: 50px;
 }
-.credit-card-info .credit-card-content p{
+
+.credit-card-info .credit-card-content p {
   position: relative;
   padding: 0 0 15px 45px;
   font-size: 16px;
   color: #848484;
 }
-.credit-card-info .credit-card-content p:before{
+
+.credit-card-info .credit-card-content p:before {
   content: '';
   position: absolute;
   left: 17px;
@@ -1012,20 +1053,24 @@ input.default-invoice-terms {
   background: url(../images/input-icons/accept.png);
   background-size: cover;
 }
-.credit-card-footer{
+
+.credit-card-footer {
   color: #b3aeae;
   padding-left: 17px;
   font-style: italic;
 }
-.credit-card-footer img{
+
+.credit-card-footer img {
   width: 55px;
   margin: 0 2px;
   border-radius: 4px;
 }
-.payments-info .btn{
+
+.payments-info .btn {
   float: right;
   width: 190px;
 }
+
 @media screen and (max-width: 1024px) {
   .settings-wrapper__trow--td .svg-icn-full {
     width: 60px;

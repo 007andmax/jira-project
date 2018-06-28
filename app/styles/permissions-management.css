@@ -2,19 +2,15 @@
 	text-align: center;
 }
 .permission-box{
-	transform: translateX(50%);
 	top: -4px;
 }
 .permission-item{
-	padding-left: 20%;
+	padding-left: 10%;
 }
 @media screen and (max-width: 769px){
 	.permission-item{
 		padding-left: 5px;
 		white-space: nowrap;
-	}
-	.permission-box{
-		transform: translateX(100%);
 	}
 }
 .category-head{
