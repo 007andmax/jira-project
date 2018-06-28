@@ -291,6 +291,40 @@
                 deviceIds.push(deviceId);
               }
             }
+
+            $scope.devicesToWatch = deviceIds.map(function(id) {
+              return $scope.scanDevices.devices.find(function(device) {
+                return device.id === id;
+              })
+            })
+            $scope.devicesToWatch = $scope.devicesToWatch.filter(function(el) {
+              return !!el;
+            })
+
+            // console.log(devicesToWatch, 'deviecs')
+
+            // consossle.log($scope.selectedCredential, $scope.devicesToWatch, 's')
+
+            if ($scope.selectedCredential.password && $scope.selectedCredential.username) {
+              var watcher = $scope.$watch('devicesToWatch', function(val) {
+                var completedDevices = 0;
+                var devices = $scope.devicesToWatch;
+
+                for (var i = 0; i < devices.length; i++) {
+                  if (devices[i].status.message !== 'Installing' && devices[i].status.tooltip) {
+                    completedDevices++;
+                  }
+                }
+
+                if (completedDevices === devices.length) {
+                  $scope.isInstallInProgress = false;
+                }
+              }, true)
+            } else {
+              $scope.isInstallInProgress = false;
+            }
+
+
             if (deviceIds.length) {
               var dto = {
                 login: $scope.testCredentialsModel.username,
@@ -300,7 +334,7 @@
                 discoveredByAgentId: $scope.discoveredByAgentId
               };
               DevicesService.sendInstallAgentRequests(dto, function () {
-                $scope.isInstallInProgress = false;
+
               });
             }
           } else {
