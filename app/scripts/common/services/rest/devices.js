@@ -149,9 +149,7 @@
             if (false && newChange.action === 'REMOTE_INSTALL_INFO') {
 
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
-              console.log(device, 'IS DEVICE ????')
               if (!device) {
-                console.log(scannedDevices, 'SCANNED DEVICES, NO DEVICES');
                 for (var i in scannedDevices[companyId]) {
 
                   if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {
@@ -160,10 +158,7 @@
                 }
               }
 
-              console.log(console.log(newChange, '_____________________'))
-
               if (device) {
-                console.log(newChange.data.status, 'STATUS')
                 if (newChange.data.status === 'MANAGED') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'managed');
                 } else if (newChange.data.status === 'INSTALLED') {
@@ -177,7 +172,6 @@
                 } else if (newChange.data.status === 'INSTALL_INITIALIZED') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'init');
                 } else if (newChange.data.status === 'INSTALL_DEPLOYING') {
-                  console.log("__+_+_+_+_+_+_+__+, in progress")
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'inProgress');
                 }
                 Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
@@ -773,8 +767,6 @@
         $http.get('/devices/networkScan?companyId=' + companyId).then(function (resp) {
           var networkScan = JSON.parse(resp.data.networkScan);
 
-          console.log(resp, 'net scam')
-
           if (networkScan) {
             Utils.defineReadOnlyProperty(scannedDevices, "status", networkScan.netScanStatus.toLowerCase());
             scannedDevices[companyId] = networkScan.devices;
@@ -782,11 +774,8 @@
 
           }
 
-          console.log('im here')
 
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
-
-            console.log(console.log(newChange, '**************************88'))
 
             if (newChange.action === 'NETWORK_SCAN') {
 
@@ -814,7 +803,6 @@
             } else if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
               if (!device) {
-                console.log(scannedDevices, 'SCANNED DEVICES, NO DEVICES');
                 for (var i in scannedDevices[companyId]) {
 
                   if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {

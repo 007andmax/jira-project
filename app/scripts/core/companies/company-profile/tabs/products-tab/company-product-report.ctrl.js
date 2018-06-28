@@ -194,7 +194,6 @@
           if (!toSort.some(function(el) {
             return +el[prop] != el[prop];
           })) {
-            console.log("REVERSE< STRING", toSort)
             reverse = !reverse;
           }
           //check for numbers
