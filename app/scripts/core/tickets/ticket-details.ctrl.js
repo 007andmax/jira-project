@@ -364,6 +364,10 @@
             }
           };
 
+          $scope.isCurrentTab = function(tab) {
+            return $scope.currentOpenTab === tab;
+          }
+
           $scope.getUserType = function (accountType) {
 
             switch (accountType) {
