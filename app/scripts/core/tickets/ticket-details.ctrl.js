@@ -401,7 +401,7 @@
           };
 
           $scope.haveAttachments = function() {
-            return $scope.ticketUpdate && $scope.ticketUpdate.attachments.length > 0;
+            return $scope.ticketUpdate && $scope.ticketUpdate.attachments && $scope.ticketUpdate.attachments.length > 0;
           }
 
           $scope.haveNote = function() {
