@@ -698,7 +698,7 @@
         if (!ticketUpdate.type) {
           throw 'ticketUpdate.type is required!';
         }
-        if ((!ticketUpdate.note && !ticketUpdate.attachments.length) && !ticketUpdate.products && !ticketUpdate.services) {
+        if ((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) {
           throw 'In TicketUpdate must be or note or products or services!';
         }
 
