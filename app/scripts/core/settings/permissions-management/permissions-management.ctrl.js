@@ -129,9 +129,27 @@
 
       $scope.addNewRole = function() {
         $scope.isNewRoleCreating = true;
+        var maxNum = 0;
+
+        for (var i = 0; i < $scope.roles.length; i++) {
+          var role = $scope.roles[i];
+          var secondPart = role.name.split('#')[1];
+
+          if (secondPart) {
+            if (+secondPart == secondPart) {
+              maxNum = +secondPart > maxNum ? +secondPart : maxNum;
+            }
+          }
+
+
+        }
+
+        if (maxNum) maxNum++
+
+
         var newRole = {
           company: $scope.techCompany,
-          name: 'New role #' + $scope.roles.length,
+          name: 'New role #' + (maxNum || $scope.roles.length) ,
           order: $scope.roles.length,
           permissions: []
         }
