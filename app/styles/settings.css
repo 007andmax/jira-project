@@ -159,6 +159,33 @@
   padding: 0 5px;
 }
 
+.error-delete-role {
+  padding: 15px;
+  position: relative;
+}
+
+.error-delete-role .close-btn {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}
+
+.change-users-role {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.change-users-role div, .change-users-role p {
+  display: block;
+}
+
+.change-users-role div {
+  float: right;
+}
+
+
 .settings-main-wrapper.permission-settings,
 .settings-main-wrapper.activity-history {
   width: 700px;

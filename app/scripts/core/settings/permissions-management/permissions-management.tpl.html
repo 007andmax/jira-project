@@ -20,13 +20,15 @@
          style="margin: 5px;position: absolute;right: 15px;top: -20px;"
          ng-show="isRoleNameEdited && role.id === editData.id" ng-click="changeRoleName()"
          uib-tooltip="Save" tooltip-popup-delay="2000"></i>
-      <button ng-show="false && showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
+      <button ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
               style="right: 20px;"
               class="company-edit-icn company-edit-icn-sm"
               ng-click="editRoleName(role.name, role.id)"></button>
+      <button class="company-remove-icn" ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
+              ng-click="deleteRole(role.id)"></button>
     </div>
-    <div class=" col-md-1col-sm-3  col-xs-3 wrap-category" ng-if="false && roles && roles.length < 5">
-      <div class="btn btn-primary has-tooltip" ng-click="addNewRole()">
+    <div class=" col-md-1col-sm-3  col-xs-3 wrap-category" ng-if="roles && roles.length < 5">
+      <div class="btn btn-primary has-tooltip" ng-click="addNewRole()" custom-disabled="{{ isNewRoleCreating }}">
         <div class="create-new-wrap">
           <span class="create-new-label">Create New</span>
           <i class="icn-sm icn-plus"></i>

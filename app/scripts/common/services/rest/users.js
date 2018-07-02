@@ -377,7 +377,7 @@
         Utils.handleCallback(future, callback);
       }
 
-      function save(user, callback) {
+      function save(user, callback, addSubscription) {
 
         if (!user) {
           throw 'user is required!';
@@ -390,6 +390,10 @@
           method = 'PUT';
           url = url + '/' + user.id;
 
+        }
+
+        if (addSubscription && !user.subscription) {
+          user.subscription = {id: null, invoice: null, ticket: null, ticketManager: null}
         }
 
         var future = $http({
