@@ -179,7 +179,7 @@
                templateUrl: '/html/scripts/core/settings/permissions-management/delete-role.tpl.html',
                animation: true,
                backdrop: false,
-               size: 'md',
+               size: 'xs',
                controller: 'deleteRoleCtrl',
                windowClass: 'create-popup margin-top-modal-dialog',
                scope: $scope

@@ -10340,6 +10340,12 @@ button.close {
   height: 100%;
 }
 
+.modal-xs {
+  width: 500px !important;
+  left: calc(50% - 250px) !important;
+  height: 100%;
+}
+
 .modal-spam .modal-dialog {
   width: 422px;
   top: 50%;
@@ -11838,10 +11844,11 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media only screen and (max-width: 1366px) {
-  .invoices .invoices-header .invoices-header-filters .btn-success{
-    max-width: 110px!important;
+  .invoices .invoices-header .invoices-header-filters .btn-success {
+    max-width: 110px !important;
     font-size: 12px;
   }
+
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 106px !important;
   }
