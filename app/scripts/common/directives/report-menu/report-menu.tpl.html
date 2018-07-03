@@ -80,7 +80,7 @@
 
       </div>
 
-      <div class="form-group content" ng-show="$ctrl.isCustomerTicketOptions">
+      <div class="form-group content" ng-show="$ctrl.isCustomerTicketOptions && false">
         <div uib-dropdown>
           <input type="text"
                  name="customerTicketType"
@@ -208,15 +208,15 @@
           <label class="control checkbox">
             <input type="checkbox" ng-model="customerTicketWithTimeSpent"> </input>
             <span class="control-indicator"></span>
-            Time spent
+            Show dashboard
           </label>
           <label class="control checkbox">
             <input type="checkbox" ng-model="customerTicketWithResponseTime"> </input>
             <span class="control-indicator"></span>
             Average response time
           </label>
-          <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount"> </input>
+          <label ng-show="false" class="control checkbox">
+            <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount" ng-click="hideTotalTickets()"> </input>
             <span class="control-indicator"></span>
             Total ticket amount
           </label>
