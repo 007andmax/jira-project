@@ -44,7 +44,7 @@
 
               <div class="name-designation">
                 <h4>{{ getUserName(user) }}</h4>
-                <span class="label label-{{ user.techRole.split(' ').join('-').toLowerCase() }}">{{ user.techRole }}</span><br/>
+                <span ng-style="{'background-color': techColors[user.techRole]}" class="label">{{ user.techRole }}</span><br/>
 
                 <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
               </div>
