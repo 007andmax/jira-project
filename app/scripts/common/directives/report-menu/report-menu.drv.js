@@ -62,8 +62,8 @@
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
     $scope.customerTicketShowTotalTicketAmount = true;
-    $scope.customerTicketTypes = ['Simple report', 'Extended report'];
-    $scope.customerTicketType = 'Simple report';
+    // $scope.customerTicketTypes = ['Simple report', 'Extended report'];
+    $scope.customerTicketType = 'Extended report';
     $scope.reportTypes = ['Summary', 'Detailed'];
     $scope.previousReportType = 'Summary';
     $scope.reportType = "Summary";
@@ -149,6 +149,11 @@
 
     $scope.firstIteration = true;
 
+
+    $scope.hideTotalTickets = function() {
+      $rootScope.customerTicketShowTotalTicketAmount = $scope.customerTicketShowTotalTicketAmount;
+    }
+
     // to clear company input field when report type changed to Summary
     $scope.$watch('reportType', function () {
       if (location === '/reports/byProducts' || location === '/reports/byCustomers') {
@@ -157,6 +162,10 @@
         }
       }
     });
+
+    $scope.$watch('customerTicketWithTimeSpent', function(val) {
+      $rootScope.customerTicketWithTimeSpent = val;
+    })
 
     $scope.$watch('reportSetting.dateRange', function() {
       if ($scope.reportSetting.dateRange) {
@@ -353,11 +362,16 @@
                 companyId: reportSettings.company.id,
                 extendedReport: ($scope.customerTicketType === 'Extended report'),
                 withResponseTime: $scope.customerTicketWithResponseTime,
-                withTimeSpent: $scope.customerTicketWithTimeSpent,
+                withTimeSpent: true,
                 showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
                 startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
+
+              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+                dataToSend.userId = reportSettings.techUser.id
+              }
+
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);
 

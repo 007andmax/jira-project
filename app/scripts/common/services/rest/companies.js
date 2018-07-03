@@ -760,6 +760,11 @@
       Utils.handleCallback(future, callback);
     }
 
+    function deleteRole(roleId, callback) {
+      var future = $http.delete('/settings/companyProfile/deleteTechRole/' + roleId);
+      Utils.handleCallback(future, callback);
+    }
+
     function getPermissions(callback) {
       var future = $http.get('/settings/companyProfile/permissions');
       Utils.handleCallback(future, callback);
@@ -851,6 +856,7 @@
       savePermissions: savePermissions,
       changeRoleName: changeRoleName,
       addNewRole: addNewRole,
+      deleteRole: deleteRole,
       getTechRoles: getTechRoles,
       getEmailAlias: getEmailAlias,
       saveEmailAlias: saveEmailAlias,

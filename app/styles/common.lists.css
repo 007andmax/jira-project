@@ -4545,6 +4545,12 @@ Devices tab
   display: inline-block;
 }
 
+.status-in-progress {
+  background-color: #D0EDFE;
+  color: #16A4FA;
+  display: inline-block;
+}
+
 .dashboard-network-scan-list h3 {
   margin: 0 25px 15px;
   padding-top: 30px;

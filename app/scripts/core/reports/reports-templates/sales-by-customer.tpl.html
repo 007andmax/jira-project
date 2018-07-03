@@ -16,6 +16,13 @@
   <div class="product-list___ticket">
     <div class="product-list-ticket" ng-show="!loadingInProgress"
          ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '940' : '1180'}">
+      <div class="report-header">
+        <h1>Customer Sales Report</h1>
+        <div class="company-info">
+          <h3>{{reportByCustomers.clientCompanyName}}</h3>
+          <p><span>{{reportByCustomers.startDate}}</span> - <span>{{reportByCustomers.endDate}}</span></p>
+        </div>
+      </div>
       <div class="header-product-list-ticket" ng-if="reportByCustomers && reportByCustomers.type">
         <h3>{{ reportByCustomers.techCompanyName }}</h3>
         <p ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
@@ -24,7 +31,6 @@
         <p><span>{{ parseDate(reportByCustomers.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByCustomers.endDate) | date: 'dd.MM.yyyy' }}</span>
         </p>
       </div>
-
       <div ng-if="reportByCustomers && reportByCustomers.type === 'DETAILED'">
         <ul>
           <li class="top-product-list-ticket top-product-list-ticket-detail-customer clearfix">
@@ -80,6 +86,13 @@
             <div class="col-md-2"><strong>{{ reportByCustomers.totalSum | currency: '$': 2 }}</strong></div>
           </div>
         </div>
+      </div>
+      <div class="report-footer">
+        <p>Prepare by : <span>{{ username }}</span></p>
+        <img alt="company-logo"
+             ng-if="(currentCompany && currentCompany.logo && currentCompany.logo.cropped && currentCompany.logo.cropped.id)"
+             ng-src="{{ companyLogo }}">
+        <p>Quicktech <span>2018</span> ©. All rights reserved</p>
       </div>
     </div>
   </div>

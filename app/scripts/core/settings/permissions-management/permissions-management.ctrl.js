@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.permissionsManagementCtrl',
-    ['$scope', 'CompaniesService', '$timeout', 'UsersService', function ($scope, CompaniesService, $timeout, UsersService) {
+    ['$scope', 'CompaniesService', '$timeout', 'UsersService', '$uibModal', '$rootScope', function ($scope, CompaniesService, $timeout, UsersService, $uibModal, $rootScope) {
       var promise;
       var companiesRelatedPermissions = ['CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES',
         'NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS', 'VIEW_PASSWORD_SECTION',
@@ -28,6 +28,10 @@
         $scope.roles = resp;
       });
 
+      CompaniesService.getTechRoles(function (resp) {
+        $scope.allTechRoles = resp;
+      });
+
       $scope.techCompany = CompaniesService.getOneById(UsersService.getCurrentUser().company.id);
       $scope.togglePermission = function (role, permission) {
         addOrRemovePermission(role.permissions, permission);
@@ -46,6 +50,17 @@
           return word[0] + word.slice(1).toLowerCase();
         }).join(' ');
       };
+
+      $scope.$watch(function() {
+        return $rootScope.deleteRoleId;
+      }, function(val) {
+        if (val) {
+          $rootScope.deleteRoleId = null;
+          $scope.roles = $scope.roles.filter(function(el) {
+            return el.id !== val;
+          })
+        }
+      })
 
       $scope.isPermissionDisabled = function (permission, role) {
 
@@ -113,16 +128,106 @@
       }
 
       $scope.addNewRole = function() {
+        $scope.isNewRoleCreating = true;
+        var maxNum = 0;
+
+        for (var i = 0; i < $scope.roles.length; i++) {
+          var role = $scope.roles[i];
+          var secondPart = role.name.split('#')[1];
+
+          if (secondPart) {
+            if (+secondPart == secondPart) {
+              maxNum = +secondPart > maxNum ? +secondPart : maxNum;
+            }
+          }
+
+
+        }
+
+        if (maxNum) maxNum++
+
+
         var newRole = {
           company: $scope.techCompany,
-          name: 'New role #' + $scope.roles.length,
+          name: 'New role #' + (maxNum || $scope.roles.length) ,
           order: $scope.roles.length,
           permissions: []
         }
 
         CompaniesService.addNewRole(newRole, function(resp) {
+          $scope.isNewRoleCreating = false
           $scope.roles.push(resp);
         })
+      }
+
+      $scope.deleteRole = function(id, isModal) {
+        CompaniesService.deleteRole(id, function(resp) {
+          if (resp.length) {
+            $scope.usersToShift = resp.map(function(user) {
+              var newUser = UsersService.getOneById(user.id)
+              newUser.companyId = newUser.company.id;
+              if (!newUser.subscription) {
+                newUser.subscription = {id: null, invoice: null, ticket: null, ticketManager: null}
+              }
+
+              return newUser;
+            });
+
+            $scope.roleToDelete = id;
+
+             var modalInstance = $uibModal.open({
+               templateUrl: '/html/scripts/core/settings/permissions-management/delete-role.tpl.html',
+               animation: true,
+               backdrop: false,
+               size: 'xs',
+               controller: 'deleteRoleCtrl',
+               windowClass: 'create-popup margin-top-modal-dialog',
+               scope: $scope
+
+             });
+          } else {
+            $rootScope.deleteRoleId = id;
+
+          }
+        })
+      }
+
+      $scope.allRolesAreChanged = function(id) {
+
+        var roles = $scope.roles;
+
+        var roleToDelete = roles.find(function(role) {
+          return role.id === id;
+        });
+
+        // console.log(id, roleToDelete, roles, 'IM HERE SDADASDAS')
+
+        for (var i = 0; i < $scope.usersToShift.length; i++) {
+          var user = $scope.usersToShift[i];
+          // console.log(user.techRole, roleToDelete.name, user.techRole === roleToDelete.name, 'userROle')
+          if (user.techRole === roleToDelete.name) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      $scope.changeUsersRole = function(user) {
+        UsersService.save(user, function (resp) {
+          var userIndex = $scope.usersToShift.findIndex(function(el) {
+            return el.id === user.id
+          });
+
+          if (userIndex !== -1) {
+            var newUser = UsersService.getOneById(user.id);
+            newUser.companyId = newUser.company.id;
+            if (!newUser.subscription) {
+              newUser.subscription = {id: null, invoice: null, ticket: null, ticketManager: null}
+            }
+            $scope.usersToShift[userIndex] = newUser;
+          }
+        }, true)
       }
 
       $scope.changeRoleName = function() {

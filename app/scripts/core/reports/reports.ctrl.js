@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope',
-      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService',
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService) {
 
       $scope.parseDate = Date.parse.bind(Date);
 
@@ -19,16 +19,66 @@
       $scope.techReportProductSales = {};
       $scope.reportAccountsReceivable = {};
 
+
+
       $scope.loadingInProgress = false;
       $scope.isReportAvailable = false;
 
       $scope.taxesLabels = [];
+      $scope.currentCompany = CompaniesService.getCurrentCompany();
+      // $scope.company;
+      $scope.companyLogo;
+
+      $scope.user = $rootScope.currentUser;
+      $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
+
+      $scope.chartData = [];
+      $scope.chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
+      $scope.Math = Math;
+
+      $scope.chartOptions = {
+        chart: {
+                type: 'pieChart',
+                height: 350,
+                donut: true,
+                x: function(d){return d.name;},
+                y: function(d){return d.time;},
+                showLabels: false,
+                color: function(d,i){
+                    return $scope.chartColors[i];
+                },
+
+                pie: {
+                    startAngle: function(d) { return d.startAngle },
+                    endAngle: function(d) { return d.endAngle }
+                },
+                showLegend: false,
+                duration: 500,
+                legend: {
+                    margin: {
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                    }
+                }
+            }
+      }
+
 
       var techReportTypeForChart;
       var renderFinished = {
         lines: false,
         columns: false
       };
+
+      $scope.$watch('currentCompany', function(val) {
+        $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
+      })
+
+      $scope.buildPdf = buildPdf;
+
+
 
 
       $scope.reportType = {
@@ -56,6 +106,9 @@
         $scope.reportByTaxes = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByTaxes(data, function (resp) {
           $scope.reportByTaxes = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -68,6 +121,9 @@
         $scope.reportByCustomers = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByCustomers(data, function (resp) {
           $scope.reportByCustomers = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -79,6 +135,9 @@
         $scope.reportByProducts = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByProducts(data, function (resp) {
           $scope.reportByProducts = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -90,6 +149,9 @@
         $scope.reportByTechSold={};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportByTechSold(data, function (resp) {
           $scope.reportByTechSold = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -100,6 +162,9 @@
         $scope.reportRemoteAccess = {};
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getReportRemoteAccess(data, function (resp) {
           $scope.reportRemoteAccess = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -111,6 +176,9 @@
         $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getTechReportTicketCreated(data, function (resp) {
           $scope.techReportTicketCreated = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -123,6 +191,9 @@
         $scope.loadingInProgress = true;
         $scope.responseSuccess = false;
         $scope.isReportAvailable = false;
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         ReportsService.getTechReportProductSales(data, function (resp) {
           $scope.techReportProductSales = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
@@ -143,16 +214,27 @@
             companyId: data.companyId
           }
         }
+
+        // console.log('data to send', dataToSend)
+        if (dataToSend.companyId) {
+          $scope.company = CompaniesService.getOneById(dataToSend.companyId)
+        }
+
         ReportsService.getReportAccountsReceivable(dataToSend, function (resp) {
           $scope.reportAccountsReceivable = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
+          // console.log($scope.company, 'company')
         })
       }
 
       function gerReportTicketReport(data) {
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
+
+        if (data.companyId) {
+          $scope.company = CompaniesService.getOneById(data.companyId)
+        }
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
             $scope.ticketReport = resp;
@@ -167,13 +249,138 @@
               }
             }
 
-            $scope.ticketReport.startDate = new Date(resp.startDate);
-            $scope.ticketReport.endDate = new Date(resp.endDate);
+            if ($scope.ticketReport && $scope.ticketReport.tickets) {
+              $scope.ticketReport.companyName = CompaniesService.getOneById($scope.ticketReport.companyId)
+
+              $scope.ticketReport.tickets = $scope.ticketReport.tickets.map(function(ticket) {
+                ticket.username = UsersService.getOneById(ticket.clientUserId);
+                ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
+
+                return ticket;
+              })
+
+              calculateServicesTime($scope.ticketReport.tickets);
+            }
+
+            if ($rootScope.customerTicketShowTotalTicketAmount === false) {
+              $scope.ticketReport.hideTotalTickets = true;
+            }
+
+            $scope.showHeader = $rootScope.customerTicketWithTimeSpent
+
+
+
+            $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');
+            $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
+            // $scope.buildPdf('tickets');
           }
         })
       }
+
+      $scope.formatResponseTime = function(time) {
+        if (!time && time !== 0) return;
+
+        var hours = Math.floor(time / 60);
+        var minutes = time % 60;
+
+        return addZero(hours) + ':' + addZero(minutes) + ' hr';
+
+
+        function addZero(num) {
+          if (String(num).length < 2) {
+            return '0' + num;
+          }
+
+          return num;
+        }
+      }
+
+      function calculateServicesTime(tickets) {
+        var overallTime = {};
+
+        for (var i = 0; i < tickets.length; i++) {
+          var upd = tickets[i].updates;
+
+          if (!upd) continue;
+
+          for (var j = 0; j < upd.length; j++) {
+            if (upd[j].type === 'SERVICE') {
+              var exp = upd[j].expenses;
+
+              if (!exp) continue;
+
+              for (var k = 0; k < exp.length; k++) {
+                if (exp[k].isServiceExpense) {
+                  var name = exp[k].name;
+                  var time = exp[k].quantity;
+
+                  if (overallTime[name]) {
+                    overallTime[name] += time;
+                  } else {
+                    overallTime[name] = time;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        calculateTopTime(overallTime);
+      }
+
+      function calculateTopTime(timeObj) {
+        var keys = Object.keys(timeObj);
+        var timeArr = [];
+
+        for (var i = 0; i < keys.length; i++) {
+          var time = {
+            name: keys[i],
+            time: timeObj[keys[i]]
+          };
+
+          timeArr.push(time);
+        }
+
+        timeArr.sort(function(a, b) {
+          return b.time - a.time;
+        })
+
+        var top = timeArr.slice(0, 8);
+        var rest = timeArr.slice(8);
+
+        if (rest.length) {
+          var time = {
+            name: 'Rest',
+            time: rest.reduce(function(acc, i) {
+              acc += i.time;
+              return acc;
+            }, 0)
+          };
+          top.push(time);
+
+
+        }
+
+        $scope.overallServiceTime = top;
+
+
+        drawChart(top);
+      }
+
+      function drawChart(data) {
+        if (!$scope.ticketReport.timeSpent) {
+          data = data.map(function(el) {
+            el.time = 0;
+            return el;
+          })
+        }
+        $scope.chartData = data;
+      }
+
+
+
 
 
       $scope.changeReportPageView = function (reportType) {
@@ -181,6 +388,7 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
+        console.log(data, 'data', location)
         //console.log("data: ", data);
         if (location) {
           switch (location) {
@@ -361,7 +569,14 @@
         }
       }
 
-      $scope.buildPdf = function (param) {
+      $scope.build = function(param) {
+        $scope.buildPdf(param);
+      }
+
+
+
+      function buildPdf(param) {
+        console.log('building pdf', param, renderFinished)
         if (param) {
           var allRendersFinished = true;
           renderFinished[param] = true;
@@ -371,6 +586,8 @@
               break;
             }
           }
+
+          console.log('we arent here')
           allRendersFinished && $scope.$broadcast('buildPdf-' + $rootScope.reportName);
         } else {
           $scope.$broadcast('buildPdf-' + $rootScope.reportName);

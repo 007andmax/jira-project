@@ -13,13 +13,19 @@
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket">
   <div class="product-list-ticket tax-det-col product-list-ticket-taxes" ng-show="!loadingInProgress">
+    <div class="report-header">
+      <h1>Tax Report</h1>
+      <div class="company-info">
+        <h3>{{reportByTaxes.clientCompanyName}}</h3>
+        <p><span>{{reportByTaxes.startDate}}</span> - <span>{{reportByTaxes.endDate}}</span></p>
+      </div>
+    </div>
     <div class="header-product-list-ticket" ng-if="reportByTaxes.lines">
       <h3>{{reportByTaxes.techCompanyName}}</h3>
       <p>Sales Tax report <span>{{reporttype[reportByTaxes.type]}}</span></p>
       <p><span>{{ parseDate(reportByTaxes.startDate) | date: 'dd.MM.yyyy' }}</span> to <span>{{ parseDate(reportByTaxes.endDate) | date: 'dd.MM.yyyy' }}</span>
       </p>
     </div>
-
     <div ng-if="reportByTaxes.type === 'DETAILED'&& reportByTaxes.reducedTaxes">
       <ul>
         <li class="top-product-list-ticket clearfix">
@@ -66,8 +72,13 @@
         <div class="col-md-2"><strong>{{reportByTaxes.totalTaxSum | currency: '$': 2 }}</strong></div>
       </div>
     </div>
+    <div class="report-footer">
+      <p>Prepare by : <span>{{ username }}</span></p>
+      <img alt="company-logo"
+           ng-if="(currentCompany && currentCompany.logo && currentCompany.logo.cropped && currentCompany.logo.cropped.id)"
+           ng-src="{{ companyLogo }}">
+      <p>Quicktech <span>2018</span> ©. All rights reserved</p>
+    </div>
   </div>
   </div>
 </div>
-
-

@@ -10,10 +10,21 @@
         var archivedUsers = UsersService.getArchivedUsers();
         var users = UsersService.getTechUsers();
         $scope.usersEmailNotificationList = {};
+        $scope.colors = ["#040404", '#ffb039', '#3c92ca', '#e16767', '#63be8f']
 
         CompaniesService.getTechRoles(function (resp) {
           $scope.techRoles = resp;
+
+          $scope.techColors = $scope.techRoles.reduce(function(acc, role, i) {
+            acc[role] = $scope.colors[i];
+            return acc;
+          }, {});
         });
+
+
+
+
+
 
         var usersIds = users.map(function(user){
           return user.id;
