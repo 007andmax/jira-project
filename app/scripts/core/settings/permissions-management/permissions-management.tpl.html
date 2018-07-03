@@ -1,11 +1,11 @@
 <div class="settings-main-wrapper permission-settings row">
   <div class="permission-wrapper">
-    <div class="col-md-2 col-sm-3 col-xs-3">
+    <div class="col-md-2 ">
       <p class="permission-headline">
         Permissions
       </p>
     </div>
-    <div class="col-md-1 col-sm-3  col-xs-3 wrap-category"
+    <div class="col-md-1 wrap-category"
          ng-repeat="role in roles"
          ng-mouseover="showEditBtn = role.id"
          ng-mouseleave="showEditBtn = false">
@@ -21,13 +21,13 @@
          ng-show="isRoleNameEdited && role.id === editData.id" ng-click="changeRoleName()"
          uib-tooltip="Save" tooltip-popup-delay="2000"></i>
       <button ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
-              style="right: 20px;"
+              style="right: 25px;"
               class="company-edit-icn company-edit-icn-sm"
               ng-click="editRoleName(role.name, role.id)"></button>
       <button class="company-remove-icn" ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
               ng-click="deleteRole(role.id)"></button>
     </div>
-    <div class=" col-md-1col-sm-3  col-xs-3 wrap-category" ng-if="roles && roles.length < 5">
+    <div class=" col-md-1 wrap-category text-center" ng-if="roles && roles.length < 5">
       <div class="btn btn-primary has-tooltip" ng-click="addNewRole()" custom-disabled="{{ isNewRoleCreating }}">
         <div class="create-new-wrap">
           <span class="create-new-label">Create New</span>
@@ -35,15 +35,15 @@
         </div>
       </div>
     </div>
-    <div ng-repeat="(sectionName, permissions) in sections">
+    <div class="col-md-12" ng-repeat="(sectionName, permissions) in sections">
       <div class="col-md-12">
         <p class="category-head">{{ sectionName }}</p>
       </div>
-      <div class="permission-line" ng-repeat="permission in permissions">
-        <div class="col-md-2 col-sm-3 col-xs-3">
+      <div class="permission-line col-md-12" ng-repeat="permission in permissions">
+        <div class="col-md-2">
           <p class="permission-item">{{ userReadable(permission) }}</p>
         </div>
-        <div class="col-md-1 col-sm-3 col-xs-3 text-center" ng-repeat="role in roles">
+        <div class="col-md-1 text-center" ng-repeat="role in roles">
           <label class="control checkbox permission-box">
             <input type="checkbox" ng-checked="role.permissions.indexOf(permission) > -1"
                    ng-click="togglePermission(role, permission)"

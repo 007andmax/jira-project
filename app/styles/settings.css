@@ -185,10 +185,18 @@
   float: right;
 }
 
-
 .settings-main-wrapper.permission-settings,
 .settings-main-wrapper.activity-history {
   width: 700px;
+}
+
+.permission-settings .company-remove-icn {
+  width: 22px;
+  height: 22px;
+  margin-left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .activity-history button,
