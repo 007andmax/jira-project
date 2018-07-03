@@ -16,7 +16,7 @@
         $scope.isAllSelected = false;
         $scope.selectedDevices = {};
         $scope.isScanDevicesLoad = false;
-        $scope.orderScanBy = 'hostName';
+        $scope.orderScanBy = 'ipAddress';
         $scope.reverse = false;
         $scope.PermissionsService = PermissionsService;
         $scope.passwordShown = false;
@@ -472,7 +472,7 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
-          $scope.sortDevices('hostName');
+          $scope.sortDevices();
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
           if(val === 'finished') {
             UserNotificationService.show('Scanning finished', true);

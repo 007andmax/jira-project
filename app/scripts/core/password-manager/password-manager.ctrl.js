@@ -144,6 +144,19 @@
             result = result && formatDate(filter.expiredDate) === formatDate(new Date(value.expiredDate));
           }
 
+          var keys = Object.keys(filter);
+          var isFilter = false;
+          for (var i = 0; i < keys.length; i++) {
+            if (filter[keys[i]]) {
+              isFilter = true;
+              break;
+            }
+          }
+
+          if (!isFilter) {
+            return false;
+          }
+
           return result;
         };
 

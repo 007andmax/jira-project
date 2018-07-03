@@ -48,7 +48,7 @@
                ng-disabled="saveMasterAgentInProgress">
         <i class="report-caret-icon" style="top: 51px;left: auto;right: 15px;"></i>
         <ul uib-dropdown-menu>
-          <li ng-repeat="agent in agents" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
+          <li ng-repeat="agent in agents | orderBy : 'hostName'" ng-click="saveMasterAgent(agent)" ng-if="agent.agentId"
               ng-class="{'active': masterAgent && agent.agentId === masterAgent.agentId}">{{ agent.hostName }}
           </li>
         </ul>
