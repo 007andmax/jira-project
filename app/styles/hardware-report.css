@@ -1638,23 +1638,23 @@
 }
 
 .service-color-0:before {
-  background-color: #415ff4;
+  background-color: #16a4fa;
 }
 
 .service-color-1:before {
-  background-color: #ef0909;
+  background-color: #ffb937;
 }
 
 .service-color-2:before {
-  background-color: #23d12c;
+  background-color: #ff6e61;
 }
 
 .service-color-3:before {
-  background-color: #f9f916;
+  background-color: #2ec866;
 }
 
 .service-color-4:before {
-  background-color: #f2a60e;
+  background-color: #f9f916;
 }
 
 .service-color-5:before {
@@ -1672,6 +1672,7 @@
 .service-color-8:before {
   background-color: #7f1313;
 }
+
 
 .customer-ticket__header--item:nth-child(2) p:not(:last-child) {
   margin-bottom: 17px;
