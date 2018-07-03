@@ -45,7 +45,7 @@
                 y: function(d){return d.time;},
                 showLabels: false,
                 color: function(d,i){
-                    return $scope.chartColors[i];
+                    return (d.color) || $scope.chartColors[i]
                 },
 
                 pie: {
@@ -376,7 +376,10 @@
             return el;
           })
         }
-        $scope.chartData = data;
+        $scope.chartData = data.map(function(el, i) {
+          el.color = $scope.chartColors[i];
+          return el;
+        });
       }
 
 
