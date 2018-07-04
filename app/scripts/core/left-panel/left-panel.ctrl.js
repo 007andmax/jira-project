@@ -436,6 +436,13 @@
           }
         });
 
+        $scope.clearAllFilters = function() {
+          $scope.passwordSharedStateFilterCompanyId = undefined;
+          $scope.passwordSharedStateFilterDeviceId = undefined;
+          $scope.passwordSharedStateFilterTemplate = undefined;
+          $scope.clearDateRange();
+        }
+
         $scope.getDeviceNameById = function (id) {
           for (var i = 0; i < $scope.devices.length; i++) {
             if ($scope.devices[i].id === id) {
@@ -597,6 +604,7 @@
         });
 
         $scope.toggleLeftPanel = function (section, ifIconPart) {
+          $scope.clearAllFilters()
           if (ifIconPart) {
             deactivateAllCompanyProfileTabs();
             $scope.openedCategory = section;
