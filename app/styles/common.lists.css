@@ -5918,7 +5918,8 @@ Devices tab
 }
 
 .device-name-edit .btn-default,
-.receive .btn-default {
+.receive .btn-default,
+.service .btn-default{
   width: 80px;
   background-color: #edf2f6;
   color: #4f5f79;
@@ -5928,6 +5929,9 @@ Devices tab
 .device-name-edit .btn-default:hover,
 .device-name-edit .btn-default:active,
 .device-name-edit .btn-default:focus,
+.service .btn-default:hover,
+.service .btn-default:active,
+.service .btn-default:focus,
 .receive .btn-default:hover,
 .receive .btn-default:active,
 .receive .btn-default:focus {

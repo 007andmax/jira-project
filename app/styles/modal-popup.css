@@ -1,6 +1,6 @@
 .create-popup .modal-dialog {
-  width: 1000px;
-  height: 700px;
+  width: 620px;
+  height: auto;
   top: 5%;
   left: calc(50% - 500px);
   margin: 0;
@@ -12,7 +12,7 @@
 
 .create-window {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 3px;
 }
 
 .contracts.readonly label,
@@ -181,17 +181,21 @@
 .create-window .general .company-window .company-steps {
   margin-bottom: 30px;
 }
-.modal-create-ticket .create-window .general .company-window .company-schedule-edit{
+
+.modal-create-ticket .create-window .general .company-window .company-schedule-edit {
   margin-bottom: 20px;
 }
-.modal-create-ticket .create-window .general .company-window .company-schedule-edit .control{
+
+.modal-create-ticket .create-window .general .company-window .company-schedule-edit .control {
   display: inline-block;
   margin-left: 10px;
   margin-bottom: 15px;
 }
-.modal-create-ticket .create-window .general .company-window .company-schedule-edit .col-md-6{
+
+.modal-create-ticket .create-window .general .company-window .company-schedule-edit .col-md-6 {
   padding: 0;
 }
+
 .create-window .general .company-window .company-steps__list {
   position: relative;
   display: flex;
@@ -659,6 +663,119 @@ _::-webkit-:not(:root:root),
 
 .create-window .general .create-user-form .btn {
   width: 40px;
+}
+
+.service--header, .service--content, .service--footer,
+.company--header, .company--content, .company--footer,
+.product--header, .product--content, .product--footer {
+  padding: 30px 40px;
+}
+
+.service--header,
+.company--header,
+.product--header {
+  background-color: #E7F5FE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.service--header button,
+.company--header button,
+.product--header button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #ccc
+}
+
+.service--header h2,
+.company--header h2,
+.product--header h2 {
+  margin: 0;
+  color: #364656;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.service--content,
+.company--content,
+.product--content {
+  margin: 0 -15px;
+}
+
+.service--content input,
+.company--content input,
+.product--content input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #E5E7EB;
+  outline: none;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+.service--content input::placeholder,
+.company--content input::placeholder,
+.product--content input::placeholder {
+  color: #9CA5B6;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.service--content p,
+.company--content p,
+.product--content p {
+  margin: 10px 0 32px;
+  color: #16A4FA;
+  cursor: pointer;
+}
+
+.service--content label {
+  color: #4F5F79;
+  font-size: 13px;
+  padding-left: 25px;
+}
+
+.service--content label .control-indicator {
+  top: -1px;
+}
+
+.service-footer,
+.company-footer,
+.product-footer {
+  margin-top: 30px;
+}
+
+.create-new .btn {
+  width: 160px !important;
+  height: 50px !important;
+  margin-right: 15px;
+  font-size: 14px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+}
+
+.create-new .btn-primary {
+  background-color: #16A4FA !important;
+}
+.create-new .btn-default{
+  background-color: #EDF2F6 !important;
+  border: 1px solid #C4CBD5;
+  color: #4F5F79;
+}
+
+.create-new .btn-primary:hover {
+  background-color: #3D7BA7 !important;
+}
+.create-new .btn-default:hover {
+  background-color: #C4CBD5 !important;
+}
+
+.company--content p {
+  margin: 30px 0 0;
 }
 
 /*# sourceMappingURL=modal-popup.css.map */
