@@ -91,7 +91,6 @@
               <div class="col-md-2" ng-style="{'color': product.invoiceNumber ? 'green' : 'none'}">
                 {{product.invoiceNumber }}
               </div>
-              <!--<div class="col-md-1">{{product.count}}</div>-->
               <div class="col-md-1 purchase-cost" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
                 {{product.purchaseCost |
                 currency: '$': 2}}
@@ -99,17 +98,16 @@
               <div class="col-md-1" ng-style="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
                 {{product.salePrice | currency: '$': 2}}
               </div>
-              <!--<div class="col-md-1" style="color: red">{{product.discount | currency: '$': 2}}</div>-->
             </li>
           </ul>
         </div>
         <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
-          <!--<div class="col-md-1" style="margin-right: 20px;"><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong></div>-->
-          <div class="col-md-1" style="margin-right: 30px;"><br> <strong><span
-            ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
-          </div>
+          <div class="col-md-10" style="width: 78%;"></div>
           <div class="col-md-1 purchase-cost"><br>
             <strong><span>{{purchaseCostSum | currency: '$': 2}}</span></strong></div>
+          <div class="col-md-1"><br> <strong><span
+            ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
+          </div>
         </div>
       </div>
       <div class="report-footer">

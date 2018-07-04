@@ -677,11 +677,6 @@
 
 .product-report-total-sales .col-md-1,
 .product-report-total-sales .col-md-2 {
-  float: right;
-}
-
-.product-report-total-sales .col-md-1,
-.product-report-total-sales .col-md-2 {
   line-height: 18px;
 }
 
