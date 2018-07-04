@@ -391,7 +391,6 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
-        console.log(data, 'data', location)
         //console.log("data: ", data);
         if (location) {
           switch (location) {

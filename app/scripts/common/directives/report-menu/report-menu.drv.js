@@ -168,15 +168,17 @@
     })
 
     $scope.$watch('reportSetting.dateRange', function() {
+      console.log("HERERE ERE")
       if ($scope.reportSetting.dateRange) {
+        console.log('im iisnide')
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
 
         if ($scope.firstIteration) {
           $scope.firstIteration = false;
 
-          if ($ctrl.isProductReportForCompanyTab) {
-            sendReportRequest($scope.reportSetting);
-          }
+          // if ($ctrl.isProductReportForCompanyTab) {
+          //   sendReportRequest($scope.reportSetting);
+          // }
 
           return;
         }
@@ -278,6 +280,7 @@
     }
 
     function sendReportRequestForProductReportOnCompanyTab(reportSettings) {
+      console.log("ASDSADSDADSADASD")
       var companyFromProfile = CompaniesService.getOneById($scope.companyProfileSharedState.companyId);
       $scope.errorNassageForCompany = true;
       $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);

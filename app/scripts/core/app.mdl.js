@@ -37,8 +37,8 @@
       'daterangepicker'
     ]);
 
-  app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
-    function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider) {
+  app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider, $locationProvider) {
 
       //uncomment this line for increasing angularjs performance (when debugging will not need)
       //$compileProvider.debugInfoEnabled(false);
@@ -50,7 +50,6 @@
         .setNotify(false, false);
 
       $urlRouterProvider.otherwise(getUserDefaultPage);
-
       $urlRouterProvider.when('/accounting', '/accounting/billable');
 
       $stateProvider
@@ -713,5 +712,3 @@
   }
 
 }());
-
-
