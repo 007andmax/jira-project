@@ -125,6 +125,10 @@
       $scope.availableTechusersWoCompany = true;
     }
 
+    if (location === '/reports/ticket-report') {
+      $scope.availableTechusersWoCompany = true;
+    }
+
     $scope.resetDate = resetDate;
     $scope.togglePurchaseCost = togglePurchaseCost;
 
