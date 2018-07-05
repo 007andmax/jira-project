@@ -366,6 +366,9 @@
           if (option) {
             $scope.manualSort = true;
           }
+
+          if (!$scope.scanDevices.devices) return;
+          
           if (!option) {
             option = $scope.orderScanBy;
           } else if (option === $scope.orderScanBy) {
