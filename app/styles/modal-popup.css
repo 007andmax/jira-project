@@ -665,10 +665,34 @@ _::-webkit-:not(:root:root),
   width: 40px;
 }
 
+.create-new {
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
 .service--header, .service--content, .service--footer,
 .company--header, .company--content, .company--footer,
 .product--header, .product--content, .product--footer {
   padding: 30px 40px;
+}
+
+.add-tax-dropdown {
+  border-radius: 3px;
+  width: 240px;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  position: relative;
+}
+
+.add-tax-dropdown:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+  border-bottom-color: #fff;
+  border-top: 0;
+  position: absolute;
+  top: -8px;
+  left: 14px;
 }
 
 .service--header,
@@ -707,6 +731,7 @@ _::-webkit-:not(:root:root),
 
 .service--content input,
 .company--content input,
+.add-tax-dropdown input,
 .product--content input {
   width: 100%;
   border: none;
@@ -718,6 +743,7 @@ _::-webkit-:not(:root:root),
 
 .service--content input::placeholder,
 .company--content input::placeholder,
+.add-tax-dropdown input::placeholder,
 .product--content input::placeholder {
   color: #9CA5B6;
   font-size: 13px;
@@ -733,13 +759,15 @@ _::-webkit-:not(:root:root),
   cursor: pointer;
 }
 
-.service--content label {
+.service--content label,
+.add-tax-dropdown label {
   color: #4F5F79;
   font-size: 13px;
   padding-left: 25px;
 }
 
-.service--content label .control-indicator {
+.service--content label .control-indicator,
+.add-tax-dropdown label .control-indicator {
   top: -1px;
 }
 
@@ -761,17 +789,29 @@ _::-webkit-:not(:root:root),
 .create-new .btn-primary {
   background-color: #16A4FA !important;
 }
-.create-new .btn-default{
+
+.create-new .btn-default {
   background-color: #EDF2F6 !important;
   border: 1px solid #C4CBD5;
   color: #4F5F79;
 }
 
+.create-new .btn-success {
+  background-color: #2EC866 !important;
+  border: 1px solid #189947;
+  color: #fff;
+}
+
 .create-new .btn-primary:hover {
   background-color: #3D7BA7 !important;
 }
+
 .create-new .btn-default:hover {
   background-color: #C4CBD5 !important;
+}
+
+.create-new .btn-success:hover {
+  background-color: #189947 !important;
 }
 
 .company--content p {

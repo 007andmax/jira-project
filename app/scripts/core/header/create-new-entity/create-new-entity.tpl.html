@@ -1,4 +1,5 @@
 <div class="create-window clearfix">
+
   <div class="create-new">
     <div class="service--header">
       <h2>Create Service</h2>
@@ -20,6 +21,17 @@
     <div class="service--footer">
       <button class="btn btn-primary">Create Service</button>
       <button class="btn btn-default">Cancel</button>
+    </div>
+
+    <div class="add-tax-dropdown">
+      <input type="text" placeholder="Enter Tax Name">
+      <input type="text" placeholder="Rate (%)">
+      <label class="control checkbox" style="margin-bottom: 20px;">
+        <input type="checkbox">
+        <span class="control-indicator">
+          </span>Set as Default
+      </label>
+      <button class="btn btn-success">Add</button>
     </div>
   </div>
 
@@ -52,7 +64,8 @@
     </div>
     <div class="company--content row">
       <div class="col-md-6"><input placeholder="Company Name" type="text"></div>
-      <div class="col-md-6"><input placeholder="Primary Contact" type="text"></div>
+      <div class="col-md-3"><input placeholder="First Name" type="text"></div>
+      <div class="col-md-3"><input placeholder="Last Name" type="text"></div>
       <div class="col-md-6"><input placeholder="Select Company Type" type="text"></div>
       <div class="col-md-6"><input placeholder="Primary Contact Phone" type="text"></div>
       <div class="col-md-6"><input placeholder="Company Domain Name" type="text"></div>
@@ -62,6 +75,25 @@
     </div>
     <div class="company--footer">
       <button class="btn btn-primary">Create Product</button>
+      <button class="btn btn-default">Cancel</button>
+    </div>
+  </div>
+
+  <div class="create-new">
+    <div class="ticket--header">
+      <h2>Create New Ticket</h2>
+      <button class="close-modal">X</button>
+    </div>
+    <div class="ticket--content row">
+      <h2>Type ticket subject here</h2>
+      <div class="col-md-12 description"><input placeholder="Write issue here…" type="text"></div>
+      <div class="col-md-6"><input placeholder="Select Company" type="text"></div>
+      <div class="col-md-6"><input placeholder="Select User" type="text"></div>
+      <div class="col-md-6"><input placeholder="Assign to" type="text"></div>
+      <div class="col-md-6"><input placeholder="Select Device" type="text"></div>
+    </div>
+    <div class="ticket--footer">
+      <button class="btn btn-primary">Create Ticket</button>
       <button class="btn btn-default">Cancel</button>
     </div>
   </div>
