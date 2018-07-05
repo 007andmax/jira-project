@@ -70,11 +70,6 @@
             $scope.device.status.statusValue = true;
             $scope.device.status.online = true;
 
-          }else if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'FAIL') {
-
-            $scope.device.changingStatus = false;
-            $scope.device.status.message = 'Fail';
-
           } else if ($scope.device.agentStatus === 'Install error' ) {
 
             $scope.device.changingStatus = false;
