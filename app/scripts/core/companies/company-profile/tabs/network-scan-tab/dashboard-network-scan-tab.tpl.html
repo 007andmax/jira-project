@@ -218,7 +218,7 @@
           </div>
           <div class="col-md-1">
             <!--<div class="network-scan-status status-success">Agent installed</div>-->
-            <div class="network-scan-status {{ getStatusClass() }} tooltip-ns" ng-show="device.status.message === 'Managed' || device.realTimeChecker">
+            <div class="network-scan-status {{ getStatusClass() }} tooltip-ns" ng-show="device.status.message && (device.status.message === 'Managed' || device.realTimeChecker)">
               {{ device.status.message }}
               <span ng-show="device.status.tooltip" class="tooltiptext-ns">{{device.status.tooltip}}</span>
             </div>

@@ -306,6 +306,12 @@
             // consossle.log($scope.selectedCredential, $scope.devicesToWatch, 's')
 
             if ($scope.selectedCredential.password && $scope.selectedCredential.username) {
+              // var completedIds = {};
+              $scope.devicesToWatch = $scope.devicesToWatch.map(function(dev) {
+                dev.status.message = '';
+                dev.status.tooltip = '';
+                return dev;
+              })
               var watcher = $scope.$watch('devicesToWatch', function(val) {
                 var completedDevices = 0;
                 var devices = $scope.devicesToWatch;
@@ -368,7 +374,7 @@
           }
 
           if (!$scope.scanDevices.devices) return;
-          
+
           if (!option) {
             option = $scope.orderScanBy;
           } else if (option === $scope.orderScanBy) {
