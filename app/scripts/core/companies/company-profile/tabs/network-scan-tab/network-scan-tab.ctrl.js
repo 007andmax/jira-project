@@ -65,13 +65,13 @@
           }
         };
 
-        $scope.$watchCollection('scanDevices.devices', function() {
-          if ($scope.manualSort) {
-            $scope.manualSort = false;
-            return;
-          }
-          $scope.sortDevices();
-        })
+        // $scope.$watchCollection('scanDevices.devices', function() {
+        //   if ($scope.manualSort) {
+        //     $scope.manualSort = false;
+        //     return;
+        //   }
+        //   $scope.sortDevices();
+        // })
 
         $scope.downloadAgentUser = {
           agentName: '',
@@ -301,11 +301,14 @@
               return !!el;
             })
 
-            // console.log(devicesToWatch, 'deviecs')
-
-            // consossle.log($scope.selectedCredential, $scope.devicesToWatch, 's')
-
             if ($scope.selectedCredential.password && $scope.selectedCredential.username) {
+              // var completedIds = {};
+              $scope.devicesToWatch = $scope.devicesToWatch.map(function(dev) {
+                if (!dev.status) return dev;
+                dev.status.message = '';
+                dev.status.tooltip = '';
+                return dev;
+              })
               var watcher = $scope.$watch('devicesToWatch', function(val) {
                 var completedDevices = 0;
                 var devices = $scope.devicesToWatch;
@@ -362,10 +365,20 @@
 
         };
 
-        $scope.sortDevices = function(option) {
-          if (option) {
-            $scope.manualSort = true;
+        $scope.changeSortProp = function(prop) {
+          if ($scope.orderScanBy === prop) {
+            $scope.reverse = !$scope.reverse;
           }
+
+          $scope.orderScanBy = prop;
+        }
+
+        $scope.sortDevices = function(option, devices) {
+
+          if (!devices) return
+
+          if (!$scope.scanDevices.devices) return;
+
           if (!option) {
             option = $scope.orderScanBy;
           } else if (option === $scope.orderScanBy) {
@@ -374,22 +387,31 @@
             $scope.reverse = false;
           }
 
+          var sortedDevices = devices;
+
           $scope.orderScanBy = option;
 
           if (option === 'ipAddress') {
-            $scope.scanDevices.devices.sort(function(a, b) {
+            devices.sort(function(a, b) {
               var first = $scope.reverse ? b : a;
               var second = $scope.reverse ? a : b;
 
               return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
             });
           } else {
-            $scope.scanDevices.devices = $filter('orderBy')($scope.scanDevices.devices, option, $scope.reverse);
+            devices.sort(function(a, b) {
+              var first = $scope.reverse ? b : a;
+              var second = $scope.reverse ? a : b;
+
+              return ('' + first.attr).localeCompare(second.attr);
+            })
           }
 
           function getIpAsNum(ip) {
             return +ip.split('.').join('');
           }
+
+          return sortedDevices
 
 
         }
@@ -472,7 +494,7 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
-          $scope.sortDevices('hostName');
+          // $scope.sortDevices('hostName');
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
           if(val === 'finished') {
             UserNotificationService.show('Scanning finished', true);
@@ -486,5 +508,23 @@
         })
 
       }
-    ]);
+    ]).filter('sortScanDevs', function () {
+      return function (devices, option, reverse) {
+        if (!devices) return;
+
+        if (option === 'ipAddress') {
+          return devices.sort(function(a, b) {
+            var first = reverse ? b : a;
+            var second = reverse ? a : b;
+
+            return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
+          });
+        }
+
+        function getIpAsNum(ip) {
+          return +ip.split('.').join('');
+        }
+
+      }
+    })
 }());
