@@ -662,6 +662,13 @@
 /*border-bottom: 1px solid #bbb;*/
 /*border-top: 1px solid #bbb;*/
 /*}*/
+.col-4-31 .col-md-4 {
+  width: 31%;
+}
+
+.col-3-21 .col-md-3 {
+  width: 21%;
+}
 
 .product-report-total-sales p {
   float: right;
@@ -1667,7 +1674,6 @@
 .service-color-8:before {
   background-color: #7f1313;
 }
-
 
 .customer-ticket__header--item:nth-child(2) p:not(:last-child) {
   margin-bottom: 17px;

@@ -72,13 +72,21 @@
           </li>
         </ul>
       </div>
-      <div class="product-report-total-sales clearfix" ng-if="reportByProducts.lines">
-        <div class="col-md-1" style="margin-right: 20px;"><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong>
+      <div class="product-report-total-sales col-4-31 col-3-21 clearfix" ng-if="reportByProducts.lines">
+        <div class="col-md-1" style="width: 7%;"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1" ng-if="reportByProducts.type === 'SUMMARY'"></div>
+        <div
+          ng-class="{'col-md-3': reportByProducts.type === 'SUMMARY', 'col-md-4': reportByProducts.type !== 'SUMMARY'}"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2"><br> <strong><span>{{reportByProducts.purchaseCostSum | currency: '$': 2}}</span></strong>
         </div>
         <div class="col-md-1"><br> <strong><span>{{reportByProducts.salePriceSum | currency: '$': 2}}</span></strong>
         </div>
-        <div class="col-md-2"><br> <strong><span>{{reportByProducts.purchaseCostSum | currency: '$': 2}}</span></strong>
+        <div class="col-md-1"><br> <strong><span>{{reportByProducts.discountSum | currency: '$': 2}}</span></strong>
         </div>
+
       </div>
       <div class="report-footer">
         <p>Prepare by : <span>{{ username }}</span></p>
