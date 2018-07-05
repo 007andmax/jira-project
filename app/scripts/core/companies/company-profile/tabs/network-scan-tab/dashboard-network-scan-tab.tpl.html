@@ -135,32 +135,32 @@
                    custom-disabled="{{ isScanDevicesLoad || !scanDevices.devices || !scanDevices.devices.length }}">
             <span class="control-indicator"></span>
           </label>
-          <span ng-click="sortDevices('hostName')"
+          <span ng-click="changeSortProp('hostName')"
                 class="sort-span">
             Device Name
           </span>
         </div>
         <div class="col-md-2">
-        <span ng-click="sortDevices('ipAddress')"
+        <span ng-click="changeSortProp('ipAddress')"
               class="sort-span">
           Lan IP
         </span>
         </div>
         <div class="col-md-2">
-          <span ng-click="sortDevices('manufacturer')"
+          <span ng-click="changeSortProp('manufacturer')"
                 class="sort-span">MANUFACTURER</span>
         </div>
         <div class="col-md-2">
-          <span ng-click="sortDevices('macAddress')"
+          <span ng-click="changeSortProp('macAddress')"
                 class="sort-span">Mac address</span>
         </div>
         <div class="col-md-1">
-          <span ng-click="sortDevices('agentStatus')"
+          <span ng-click="changeSortProp('agentStatus')"
                 class="sort-span">Status</span>
         </div>
         <div class="col-md-1"></div>
       </li>
-      <li class="active-device-item" ng-repeat="device in scanDevices.devices track by device.id"
+      <li ng-if="orderScanBy !== 'ipAddress'" class="active-device-item" ng-repeat="device in scanDevices.devices | orderBy : orderScanBy : reverse track by device.id"
           ng-controller="quicktech.core.devices.networkScanItemCtrl">
         <div class="users-list-wrapper">
           <div class="col-md-4" style="padding-top: 5px;">
@@ -196,12 +196,83 @@
                         style="display: inline-block; max-width: 400px;"
                         uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
                         trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')"></span>
-                  <p ng-if="device.description | unknownFilter" class="ellipsis">{{ device.hostName | unknownFilter
-                    }}</p>
+
                   <i class="icon-sm edit-icon" ng-show="showEditDeviceField"></i>
                 </div>
-                <input class="control" ng-if="isEditDescrOpened" ng-model="deviceDescription"
-                       execute-when-outfocused="saveDescription(deviceDescription)" focus-on/>
+                <input class="control" ng-if="isEditDescrOpened" ng-model="device.description"
+                       execute-when-outfocused="saveDescription(device.description)" focus-on/>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="device-lan-ip">{{ device.ipAddress }}</div>
+          </div>
+          <div class="col-md-2">
+            <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
+                 trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="device-mac-address">{{ device.macAddress }}</div>
+          </div>
+          <div class="col-md-1">
+            <!--<div class="network-scan-status status-success">Agent installed</div>-->
+            <div class="network-scan-status {{ getStatusClass() }} tooltip-ns" ng-show="device.status.message && (device.status.message === 'Managed' || device.realTimeChecker)">
+              {{ device.status.message }}
+              <span ng-show="device.status.tooltip" class="tooltiptext-ns">{{device.status.tooltip}}</span>
+            </div>
+            <!-- <p class="network-scan-status {{ getStatusClass() }}"
+               ng-show="device.status.message === 'Managed' || device.realTimeChecker">{{ device.status.message === 'Error' ? device.agentStatusMsg : device.status.message }} </p> -->
+            <!--<div class="network-scan-status status-danger">Blocked</div> -->
+          </div>
+          <div class="col-md-1" style="justify-content: flex-end;">
+            <i class="delete-network-scan" uib-tooltip="Remove Agent"
+               ng-click="uninstallAgent()" tooltip-placement="top" tooltip-append-to-body="true"
+               ng-if="device.status.statusValue"></i>
+          </div>
+        </div>
+      </li>
+      <li ng-if="orderScanBy === 'ipAddress'" class="active-device-item" ng-repeat="device in scanDevices.devices | sortScanDevs  : orderScanBy : reverse track by device.id"
+          ng-controller="quicktech.core.devices.networkScanItemCtrl">
+        <div class="users-list-wrapper">
+          <div class="col-md-4" style="padding-top: 5px;">
+            <!--<label class="control checkbox">-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
+            <label class="control checkbox">
+              <input type="checkbox" ng-change="checkSelection()" ng-if="device.status.statusValue"
+                     ng-model="selectedDevices[device.deviceId]">
+              <input type="checkbox" ng-change="checkSelection()" ng-if="!device.status.statusValue"
+                     ng-model="selectedDevices[device.id]">
+              <span class="control-indicator"></span>
+            </label>
+            <div class="company-device-name" ng-mouseover="showEditDeviceField = true"
+                 ng-mouseleave="showEditDeviceField = false">
+
+              <!--<i class="devices-phone"></i>-->
+              <!--<i class="devices-printer"></i>-->
+              <!--<i class="devices-server"></i>-->
+
+              <!--<div>-->
+              <!--<p class="ellipsis">BlackHall</p>-->
+              <!--</div>-->
+              <div class="checkbox-caption">
+                <i class="devices-monitor" ng-show="device.iconName === 'device'"></i>
+                <i class="devices-phone" ng-show="device.iconName === 'workstation'"></i>
+                <i class="devices-printer" ng-show="device.iconName === 'printer'"></i>
+                <i class="devices-server" ng-show="device.iconName === 'server'"></i>
+              <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
+
+                  <span class="ellipsis"
+                        style="display: inline-block; max-width: 400px;"
+                        uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
+                        trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')"></span>
+
+                  <i class="icon-sm edit-icon" ng-show="showEditDeviceField"></i>
+                </div>
+                <input class="control" ng-if="isEditDescrOpened" ng-model="device.description"
+                       execute-when-outfocused="saveDescription(device.description)" focus-on/>
               </div>
             </div>
           </div>

@@ -21,6 +21,7 @@
           }
         };
 
+
         $scope.saveDescription = function (deviceDescription) {
           if (deviceDescription && deviceDescription.length > 30) {
             deviceDescription = deviceDescription.slice(0, 30);
@@ -33,6 +34,19 @@
 
         $scope.$on('toggleEditDeviceDescription', function (event, deviceId) {
           $scope.isEditDescrOpened = $scope.device.id === deviceId;
+          $scope.device.description = '';
+
+          if ($scope.isEditDescrOpened) {
+            var vals = [$scope.device.description, $scope.device.hostName, $scope.device.ipAddress];
+
+            for (var i = 0; i < vals.length; i++) {
+              if (vals[i] && vals[i] !== 'unknown') {
+
+                $scope.device.description = vals[i];
+                return;
+              }
+            }
+          }
         });
 
         $scope.userReadable = function (str) {
@@ -50,6 +64,16 @@
             return 'status-danger';
           }
         };
+
+        // var vals = [$scope.device.description, $scope.device.hostName, $scope.device.ipAddress];
+        //
+        // for (var i = 0; i < vals.length; i++) {
+        //   if (vals[i] && vals[i] !== 'unknown') {
+        //
+        //     $scope.device.description = vals[i];
+        //     return;
+        //   }
+        // }
 
         $scope.$watchGroup(['device.agentStatus', 'device.agentPassword.status'], function () {
           $scope.device.status = $scope.device.status || {};
