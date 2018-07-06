@@ -104,6 +104,7 @@
               //       name: cmpData
               //     }
               //   })
+              console.log('ehre everything is okay, ', $scope.ticketDetails, details)
               $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
                   var cmpData = CompaniesService.getOneById(id);
 
@@ -112,6 +113,7 @@
                     name: cmpData.name
                   }
                 })
+              console.log('amnd here everything if fucked up, probably')
             }
 
 
