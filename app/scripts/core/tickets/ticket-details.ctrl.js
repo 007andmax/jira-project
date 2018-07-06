@@ -116,10 +116,14 @@
                   var cmpData = CompaniesService.getOneById(id);
                   console.log(cmpData, "CMPDATA")
 
+                  if (!cmpData) return {};
+
                   return {
                     id: id,
                     name: cmpData.name
                   }
+                }).filter(function(el) {
+                  return el.name;
                 })
               console.log('amnd here everything if fucked up, probably')
             }
