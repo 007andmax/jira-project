@@ -105,7 +105,7 @@
               //     }
               //   })
 
-              if ($scope.ticketDetails.userCompanies) {
+              if (!$scope.ticketDetails.userCompanies) {
                 var ticket = TicketsService.getTicketFromStorage($scope.ticketDetails.id);
                 $scope.ticketDetails.userCompanies = ticket.userCompanies;
                 console.log("RESP", ticket);
