@@ -112,7 +112,9 @@
               }
               console.log('ehre everything is okay, ', $scope.ticketDetails, details)
               $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
+                  console.log(id, 'IDISHNKI')
                   var cmpData = CompaniesService.getOneById(id);
+                  console.log(cmpData, "CMPDATA")
 
                   return {
                     id: id,
