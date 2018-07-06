@@ -57,7 +57,7 @@
           <i class="without-device-type"
              ng-style="{'display': !checkAgentType(agent.type) ? 'inline-block' : ''}"></i>
 
-          <div uib-dropdown class="icon-dropdown">
+          <div uib-dropdown class="icon-dropdown" smart-dropdown-menu-position="dropdown-menu">
             <div uib-dropdown-toggle>
               <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
               <!--ng-click="currentUser.online = !currentUser.online"></i>-->
@@ -69,7 +69,7 @@
 
             </div>
 
-            <ul class="dropdown-menu icon-list">
+            <ul class="dropdown-menu icon-list" >
               <li ng-click="saveNewIcon('workstation')">
                 <i class="devices-monitor"></i>
               </li>

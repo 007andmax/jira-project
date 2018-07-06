@@ -16,7 +16,7 @@
         $scope.isAllSelected = false;
         $scope.selectedDevices = {};
         $scope.isScanDevicesLoad = false;
-        $scope.orderScanBy = 'hostName';
+        $scope.orderScanBy = 'ipAddress';
         $scope.reverse = false;
         $scope.PermissionsService = PermissionsService;
         $scope.passwordShown = false;
