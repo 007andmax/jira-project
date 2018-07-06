@@ -190,22 +190,132 @@
     <h2>Create Product</h2>
     <button class="close-modal" ng-click="closeWindowWithConfirm()">X</button>
   </div>
-  <div class="product--content row">
-    <div class="col-md-6"><input placeholder="Item number" type="text"></div>
-    <div class="col-md-6"><input placeholder="Description" type="text"></div>
-    <div class="col-md-6"><input placeholder="Enter Category" type="text"></div>
-    <div class="col-md-3"><input placeholder="Cost" type="text"></div>
-    <div class="col-md-3"><input placeholder="Price" type="text"></div>
-    <div class="col-md-6"><input placeholder="Select Tax" type="text"></div>
+  <div class="product--content row" ng-form="editProductForm">
+    <div class="col-md-6">
+      <div class="form-group"
+           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+        <input type="text" class="form-control" name="editProductMfg"
+              ng-required='false' placeholder="Item number" ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
+               is-uniq-validation is-empty-valid="true" validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="form-group"
+           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+        <input type="text" style="vertical-align: top;" type="text" class="form-control"
+               ng-model="editProduct.description" ng-required="true" placeholder="Description"
+                  ng-maxlength="500" name="editProductDescription" tabindex="1"></input>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group"
+           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
+        <div class="dropdown">
+          <input style="padding-right: 70px;" type="text" class="form-control has-dropdown"
+                 required ng-maxlength="100"
+                 autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
+                 typeahead-editable="true"
+                 placeholder='Category'
+                 typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
+                 ng-change="validateCategory(editProduct.category, editProductForm)"
+                 typeahead-input-formatter="getItemName($model)" tabindex="4"
+                 uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
+                 qt-typeahead-show-on-focus
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                 hard-reset-pattern="newCategoryNamePattern">
+
+          <div class="product-actions category-caret">
+
+            <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+               ng-show="editProduct.category && !editProduct.category.id"
+               ng-click="addCategory(editProductForm.editProductCategory)">
+              <i class="icn-sm icn-product-save"></i>
+            </a>
+
+            <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+               ng-show="editProduct.category && !editProduct.category.id"
+               ng-click="editProduct.category = ''">
+              <i class="icn-sm icn-product-cancel"></i>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
+           ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+
+        <input type="text" class="form-control" ng-model="editProduct.cost"
+               name="cost" ng-change="validateSaleAndCost(editProductForm)"
+               hard-reset-pattern="decimalNumberPattern" placeholder="Cost" qt-to-fixed="2" tabindex="2">
+      </div>
+    </div>
+    <div class="col-md-3">
+
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
+        <input type="text" class="form-control" ng-model="editProduct.sale"
+               name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
+               hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" placeholder="Price" tabindex="3">
+      </div>
+
+    </div>
+    <div class="col-md-6"><select-taxes taxes="taxes" entity="editProduct"></select-taxes></div>
     <div class="col-md-6"><p>Add New Tax</p></div>
-    <div class="col-md-6"><input placeholder="ILC Number" type="text"></div>
-    <div class="col-md-6"><input placeholder="Select Vendor" type="text"></div>
+    <div class="col-md-6">
+
+      <div class="form-group"
+           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+        <input type="text" class="form-control" name="editProductILC"
+               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
+               is-uniq-validation validation-func="validateProductIls" placeholder="ILC number" model-id="editProduct.versionedId.id">
+          <i class="barcode-icon"></i>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group"
+           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+        <div class="dropdown">
+          <!-- <input type="text" class="form-control has-dropdown"
+                 autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
+                 typeahead-input-formatter="getItemName($model)" tabindex="5"
+                 uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
+                 qt-typeahead-show-on-focus
+                 placeholder="Select vendor"
+                 custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+          <div typeahead-input-icon="editProduct.company" class="input-top-4"></div> -->
+
+
+          <qt-dropdown-typehead list-for-dropdown="vendors"
+                                qt-add-create-new-button="company"
+                                selected-item="editProduct.company"
+                                display-property="'name'"
+                                filter-property="'name'"
+                                qt-tabindex="'5'"
+                                qt-name="'editProductVendor'"
+                                qt-class="'form-control'"
+                                qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'97%\'}'">
+
+          </qt-dropdown-typehead>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="product--footer">
-    <button class="btn btn-primary">Create Product</button>
-    <button class="btn btn-default">Cancel</button>
+    <button-with-loading-indicator class="btn btn-primary"
+                                   ng-click="saveChangeProduct(editProductForm)"
+                                   loading="disabledSaveChangeButton"
+                                   label="Create Product">
+    </button-with-loading-indicator>
+    <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
   </div>
 </div>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
