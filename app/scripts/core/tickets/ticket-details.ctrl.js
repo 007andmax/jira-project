@@ -104,6 +104,12 @@
               //       name: cmpData
               //     }
               //   })
+
+              if ($scope.ticketDetails.userCompanies) {
+                var ticket = TicketsService.getTicketFromStorage($scope.ticketDetails.id);
+                $scope.ticketDetails.userCompanies = ticket.userCompanies;
+                console.log("RESP", ticket);
+              }
               console.log('ehre everything is okay, ', $scope.ticketDetails, details)
               $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
                   var cmpData = CompaniesService.getOneById(id);

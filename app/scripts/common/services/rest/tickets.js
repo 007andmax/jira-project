@@ -342,6 +342,12 @@
         });
       }
 
+      function getTicketFromStorage(id) {
+        return storage.tickets.find(function(ticket) {
+          return ticket.id === id;
+        })
+      }
+
       function search(callback, keyword, companyId) {
         if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
           keyword = '';
@@ -1105,6 +1111,7 @@
         getList: fetchTickets,
         getCurrentlyWorkingWith: getCurrentlyWorkingWith,
         loadMore: loadMore,
+        getTicketFromStorage: getTicketFromStorage,
         search: search,
         getCount: getCount,
         getCounts: getLeftPanelCounts,
