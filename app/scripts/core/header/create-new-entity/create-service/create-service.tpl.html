@@ -1,4 +1,4 @@
-<div class="service-form-wrapper edit-form-checkbox" ng-form="editServiceForm"
+<!-- <div class="service-form-wrapper edit-form-checkbox" ng-form="editServiceForm"
      ng-controller="quicktech.editServiceCtrl">
   <h4 class="modal-title title-services">Create new Service</h4>
   <p class="services-description">Services are used to bill customers, for specialized labor, hourly consulting hours or
@@ -47,7 +47,98 @@
     </button-with-loading-indicator>
 
   </div>
+</div> -->
+
+<div class="service-form-wrapper edit-form-checkbox create-new" ng-form="editServiceForm"
+     ng-controller="quicktech.editServiceCtrl">
+  <div class="service--header">
+    <h2>Create Service</h2>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()">X</button>
+  </div>
+  <div class="service--content row">
+    <div class="col-md-6">
+      <input placeholder="Service Name" type="text" class="form-control" placeholder="Service Name"
+           ng-model="editService.name"
+           name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
+           is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
+           ng-maxlength="30" ng-minlength="3" >
+    </div>
+    <div class="col-md-6">
+      <input placeholder="Per Hour Rate" type="text" class="form-control"
+           ng-model="editService.rate" qt-to-fixed="2"
+           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+    </div>
+    <div class="col-md-6"><select-taxes taxes="taxes" entity="editService"></select-taxes></div>
+    <div class="col-md-6"><p>Add New Tax</p></div>
+    <div class="col-md-12">
+      <label class="control checkbox">
+        <input type="checkbox" ng-model="editService.billable">
+        <span class="control-indicator">
+        </span> Make this service billable
+      </label>
+    </div>
+  </div>
+  <div class="service--footer">
+
+    <button-with-loading-indicator class="btn btn-primary"
+                                   ng-click="saveEditService(editServiceForm, true)" loading="disabledSaveButton"
+                                   label="Create Service">
+    </button-with-loading-indicator>
+    <!-- <button class="btn btn-primary">Create Service</button> -->
+    <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
+  </div>
+
+  <div class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl" ng-required='false'>
+    <div ng-messages="newTaxForm.name.$error"
+         ng-class="{'hide': !isShowingErrors(newTaxForm, 'name')}">
+
+      <label class="control-label" ng-message="required">
+        Name is required.
+      </label>
+
+      <label class="control-label" ng-message="unique">
+        Name is already taken.
+      </label>
+
+      <label class="control-label" ng-message="minlength">
+        Name is too short.
+      </label>
+
+      <label class="control-label" ng-message="maxlength">
+        Name is too long.
+      </label>
+    </div>
+    <input placeholder="Enter Tax Name" type="text" class="form-control" name="name" ng-model="newTax.name"
+           is-uniq-validation validation-func="isUniqueName" ng-minlength="2" ng-maxlength="30">
+
+
+    <div ng-messages="newTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(newTaxForm, 'rate')}">
+      <label style="white-space: nowrap;" class="control-label" ng-message="required">
+        Required.
+      </label>
+      <label style="white-space: nowrap;" class="control-label" ng-message="number">
+        Only numbers.
+      </label>
+      <label style="white-space: nowrap;" class="control-label" ng-message="min">
+        To small.
+      </label>
+      <label style="white-space: nowrap;" class="control-label" ng-message="max">
+        To large.
+      </label>
+    </div>
+    <input placeholder="Rate (%)" type="number" class="form-control" ng-model="newTax.rate" name="rate"
+           required min="0.01" max="99">
+    <label class="control checkbox" style="margin-bottom: 20px;">
+      <input type="checkbox" ng-model="newTax.isDefault">
+      <span class="control-indicator">
+        </span>Set as Default
+    </label>
+    <button class="btn btn-success" ng-click="saveNewTax(newTaxForm, true)"
+    custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">Add</button>
+  </div>
 </div>
+
+
 <script>
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;

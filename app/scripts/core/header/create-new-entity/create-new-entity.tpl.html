@@ -1,103 +1,24 @@
 <div class="create-window clearfix">
 
-  <div class="create-new">
-    <div class="service--header">
-      <h2>Create Service</h2>
-      <button class="close-modal">X</button>
-    </div>
-    <div class="service--content row">
-      <div class="col-md-6"><input placeholder="Service Name" type="text"></div>
-      <div class="col-md-6"><input placeholder="Per Hour Rate" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select Tax" type="text"></div>
-      <div class="col-md-6"><p>Add New Tax</p></div>
-      <div class="col-md-12">
-        <label class="control checkbox">
-          <input type="checkbox">
-          <span class="control-indicator">
-          </span> Make this service billable
-        </label>
-      </div>
-    </div>
-    <div class="service--footer">
-      <button class="btn btn-primary">Create Service</button>
-      <button class="btn btn-default">Cancel</button>
-    </div>
+  <div ng-switch="openedTab">
+   <div ng-switch-when="ticket">
+   <div ng-include="'/html/scripts/core/header/create-new-entity/create-ticket/create-ticket.tpl.html'"></div>
+   </div>
+   <div ng-switch-when="user">
+   <div ng-include="'/html/scripts/core/header/create-new-entity/create-user/create-user.tpl.html'"></div>
+   </div>
+   <div ng-switch-when="company">
+   <div ng-include="'/html/scripts/core/header/create-new-entity/create-company/create-company.tpl.html'"></div>
+   </div>
+   <div ng-switch-when="product">
+   <div ng-include="'/html/scripts/core/header/create-new-entity/create-product/create-product.tpl.html'"></div>
+   </div>
+   <div ng-switch-when="service">
+   <div ng-include="'/html/scripts/core/header/create-new-entity/create-service/create-service.tpl.html'"></div>
+   </div>
+ </div>
 
-    <div class="add-tax-dropdown">
-      <input type="text" placeholder="Enter Tax Name">
-      <input type="text" placeholder="Rate (%)">
-      <label class="control checkbox" style="margin-bottom: 20px;">
-        <input type="checkbox">
-        <span class="control-indicator">
-          </span>Set as Default
-      </label>
-      <button class="btn btn-success">Add</button>
-    </div>
-  </div>
-
-  <div class="create-new">
-    <div class="product--header">
-      <h2>Create Product</h2>
-      <button class="close-modal">X</button>
-    </div>
-    <div class="product--content row">
-      <div class="col-md-6"><input placeholder="Item number" type="text"></div>
-      <div class="col-md-6"><input placeholder="Description" type="text"></div>
-      <div class="col-md-6"><input placeholder="Enter Category" type="text"></div>
-      <div class="col-md-3"><input placeholder="Cost" type="text"></div>
-      <div class="col-md-3"><input placeholder="Price" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select Tax" type="text"></div>
-      <div class="col-md-6"><p>Add New Tax</p></div>
-      <div class="col-md-6"><input placeholder="ILC Number" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select Vendor" type="text"></div>
-    </div>
-    <div class="product--footer">
-      <button class="btn btn-primary">Create Product</button>
-      <button class="btn btn-default">Cancel</button>
-    </div>
-  </div>
-
-  <div class="create-new">
-    <div class="company--header">
-      <h2>Create Company</h2>
-      <button class="close-modal">X</button>
-    </div>
-    <div class="company--content row">
-      <div class="col-md-6"><input placeholder="Company Name" type="text"></div>
-      <div class="col-md-3"><input placeholder="First Name" type="text"></div>
-      <div class="col-md-3"><input placeholder="Last Name" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select Company Type" type="text"></div>
-      <div class="col-md-6"><input placeholder="Primary Contact Phone" type="text"></div>
-      <div class="col-md-6"><input placeholder="Company Domain Name" type="text"></div>
-      <div class="col-md-6"><input placeholder="Primary Contact Email" type="text"></div>
-      <div class="col-md-6"><input placeholder="Phone Number" type="text"></div>
-      <div class="col-md-12"><p>Would you like to Create Company in Advance mode?</p></div>
-    </div>
-    <div class="company--footer">
-      <button class="btn btn-primary">Create Product</button>
-      <button class="btn btn-default">Cancel</button>
-    </div>
-  </div>
-
-  <div class="create-new">
-    <div class="ticket--header">
-      <h2>Create New Ticket</h2>
-      <button class="close-modal">X</button>
-    </div>
-    <div class="ticket--content row">
-      <h2>Type ticket subject here</h2>
-      <div class="col-md-12 description"><input placeholder="Write issue here…" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select Company" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select User" type="text"></div>
-      <div class="col-md-6"><input placeholder="Assign to" type="text"></div>
-      <div class="col-md-6"><input placeholder="Select Device" type="text"></div>
-    </div>
-    <div class="ticket--footer">
-      <button class="btn btn-primary">Create Ticket</button>
-      <button class="btn btn-default">Cancel</button>
-    </div>
-  </div>
-  <!--<div class="close-btn btn btn-icn" ng-click="closeWindowWithConfirm()" tabindex="-1">-->
+  <!-- <div class="close-btn btn btn-icn" ng-click="closeWindowWithConfirm()" tabindex="-1">-->
   <!--<i class="icn-sm icn-remove-old" ></i>-->
   <!--</div>-->
   <!--<aside class="navigation">-->
@@ -129,25 +50,8 @@
   <!--</ul>-->
   <!--</aside>-->
   <!--<section class="general">-->
-  <!--<div style="height: 588px;" ng-switch="openedTab">-->
-  <!--<div ng-switch-when="ticket">-->
-  <!--<div ng-include="'/html/scripts/core/header/create-new-entity/create-ticket/create-ticket.tpl.html'"></div>-->
-  <!--</div>-->
-  <!--<div ng-switch-when="user">-->
-  <!--<div ng-include="'/html/scripts/core/header/create-new-entity/create-user/create-user.tpl.html'"></div>-->
-  <!--</div>-->
-  <!--<div ng-switch-when="company">-->
-  <!--<div ng-include="'/html/scripts/core/header/create-new-entity/create-company/create-company.tpl.html'"></div>-->
-  <!--</div>-->
-  <!--<div ng-switch-when="product">-->
-  <!--<div ng-include="'/html/scripts/core/header/create-new-entity/create-product/create-product.tpl.html'"></div>-->
-  <!--</div>-->
-  <!--<div ng-switch-when="service">-->
-  <!--<div ng-include="'/html/scripts/core/header/create-new-entity/create-service/create-service.tpl.html'"></div>-->
-  <!--</div>-->
 
-  <!--</div>-->
-  <!--</section>-->
+  <!--</section> -->
 </div>
 <script>
   (function (i, s, o, g, r, a, m) {

@@ -191,11 +191,31 @@
     </div>
     <div class="">
       <div class="topNavbar-create">
-        <div class="btn btn-primary has-tooltip" ng-if="applicationLoaded" create-new-entity>
-          <div class="create-new-wrap">
-            <span class="create-new-label">Create New</span>
-            <i class="icn-sm icn-plus"></i>
+        <div uib-dropdown>
+          <div class="btn btn-primary has-tooltip" ng-if="applicationLoaded" uib-dropdown-toggle>
+            <div class="create-new-wrap">
+              <span class="create-new-label">Create New</span>
+              <i class="icn-sm icn-plus"></i>
+            </div>
           </div>
+
+          <ul class="dropdown-menu tag-list">
+            <li class="topNavbar-logout" create-new-entity="product">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>New product</span>
+              </a>
+            </li>
+            <li class="topNavbar-logout" create-new-entity="service">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>New service</span>
+              </a>
+            </li>
+            <li class="topNavbar-logout" create-new-entity="company">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>New company</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

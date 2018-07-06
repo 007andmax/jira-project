@@ -27,11 +27,14 @@
           })
         };
 
-        $scope.saveNewTax = function (form) {
+        $scope.saveNewTax = function (form, dropdown) {
           // console.log(form, 'SAVING', $scope.newTax)
           if (form.$valid) {
             TaxesService.save($scope.newTax, function (resp) {
-              $rootScope.newTaxIsSaved = resp;
+              if (dropdown) {
+                $rootScope.newTaxIsSaved = resp;
+              }
+
               $scope.newTax = {
                 name: '',
                 rate: '',
