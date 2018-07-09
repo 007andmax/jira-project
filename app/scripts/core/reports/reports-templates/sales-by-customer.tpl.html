@@ -19,7 +19,7 @@
       <div class="report-header">
         <h1>Customer Sales Report</h1>
         <div class="company-info">
-          <h3>{{reportByCustomers.clientCompanyName}}</h3>
+          <h3>{{reportByCustomers.clientCompanyName || 'All companies'}}</h3>
           <p><span>{{reportByCustomers.startDate}}</span> - <span>{{reportByCustomers.endDate}}</span></p>
         </div>
       </div>
@@ -89,9 +89,7 @@
       </div>
       <div class="report-footer">
         <p>Prepare by : <span>{{ username }}</span></p>
-        <img alt="company-logo"
-             ng-if="(currentCompany && currentCompany.logo && currentCompany.logo.cropped && currentCompany.logo.cropped.id)"
-             ng-src="{{ companyLogo }}">
+        <p>{{ currentCompany.name }}</p>
         <p>Quicktech <span>2018</span> ©. All rights reserved</p>
       </div>
     </div>
