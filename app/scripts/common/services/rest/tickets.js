@@ -8,8 +8,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService',
-    function ($http, $rootScope, RealTimeService, Utils, SharedStateService) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout',
+    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout) {
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
@@ -55,6 +55,8 @@
           return false;
         }
       };
+
+      var allCountsCallback;
 
       var storage = {
         lastParams: {},
@@ -342,6 +344,12 @@
         });
       }
 
+      function getTicketFromStorage(id) {
+        return storage.tickets.find(function(ticket) {
+          return ticket.id === id;
+        })
+      }
+
       function search(callback, keyword, companyId) {
         if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
           keyword = '';
@@ -471,6 +479,7 @@
       }
 
       function getAllCounts(callback) {
+        allCountsCallback = callback;
 
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
           storage.ticketsQuantityMap = resp.data;
@@ -541,6 +550,7 @@
 
         RealTimeService.subscribe('/leftPanelCountsCompany/'+companyId, scope, function (newChange) {
           if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
+
             Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
             //callback && callback(storage.ticketsQuantityMapByCompany)
           }
@@ -749,13 +759,27 @@
       function changeTicketsCounts() {
 
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
+          console.log(Object.assign({}, resp), 'new amount of tickets')
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
       }
 
+      // function increase
+
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
 
         changeTicketsCounts(); //realtime ticket counts change
+        // $timeout(changeTicketsCounts, 300)
+        // $timeout(changeTicketsCounts, 600)
+        // $timeout(changeTicketsCounts, 1000)
+        // $timeout(changeTicketsCounts, 1400)
+        // $timeout(changeTicketsCounts, 1800)
+
+        // ALL: {},
+        // UNASSIGNED: {},
+        // IN_PROGRESS: {},
+        // ON_HOLD: {},
+        // COMPLETED: {}
 
         if (newChange.data && newChange.data.number) {
           newChange.data.number = numberPrefix + newChange.data.number;
@@ -766,9 +790,18 @@
 
         if (newChange.action === 'CREATED_TICKET') {
 
+          // console.log(storage, "CREATED")
+
+          storage.ticketsQuantityMap.ALL = 1000000000;
+
+          // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
+
+          console.log(ticketById, "TICKET")
+
           if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
 
             if (ticketById) {
+              console.log(ticketById, "TICKET")
               Utils.customizeObj(newChange.data, ticketById);
             } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
               storage.ticketsQuantity++;
@@ -778,6 +811,8 @@
             storage.ticketsQuantity--;
           }
           storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
+
+
 
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
           var isUpdate = newChange.action === 'EDITED_TICKET';
@@ -956,11 +991,15 @@
           return false;
         }
 
+        console.log(conditionsGroup, groupRule, 'ASDSADADADJJFJSAJ')
+
         for (var prop in conditionsGroup) {
           var conditionGroup = conditionsGroup[prop],
             conditions = conditionGroup.fieldFilterDtos,
             rule = conditionGroup.predicateRule,
             conditionsResult = rule !== 'OR';
+
+            console.log(rule, conditions, 'SDADADASDSKADLANSDDNJASN')
 
           for (var i = 0; i < conditions.length; i++) {
             var condition = conditions[i];
@@ -1018,6 +1057,7 @@
           return false;
         } else {
           if (values) {
+            if (operator === "NOT_EQ" && values[0] === 'COMPLETED' && !valueToCheck) return false;
             return operators[operator](valueToCheck, values[0]);
           } else {
             return operators[operator](valueToCheck);
@@ -1105,6 +1145,7 @@
         getList: fetchTickets,
         getCurrentlyWorkingWith: getCurrentlyWorkingWith,
         loadMore: loadMore,
+        getTicketFromStorage: getTicketFromStorage,
         search: search,
         getCount: getCount,
         getCounts: getLeftPanelCounts,
