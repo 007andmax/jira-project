@@ -1,4 +1,4 @@
-<div class="create-new" ng-controller="quicktech.createCompanyCtrl" >
+<div class="create-new" ng-controller="quicktech.createCompanyCtrl">
   <div class="company--header">
     <h2>Create Company</h2>
     <button class="close-modal" ng-click="closeWindowWithConfirm()">X</button>
@@ -17,7 +17,7 @@
              ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
              is-uniq-validation validation-func="validateCompanyName">
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
       <div ng-messages="companyForm.firstName.$error"
            ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
         <label class="control-label" ng-message="required">First name is required.</label>
@@ -28,7 +28,23 @@
       <input placeholder="First Name" type="text" ng-minlength="2" ng-maxlength="15"
              name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
+      <div ng-messages="companyForm.clientType.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
+        <label class="control-label" ng-message="required">Client Type is required.</label>
+      </div>
+      <input custom-style="{'width':'100%'}" type="text" class="form-control pointer" ng-model="editCompany.clientType"
+             name="clientType"
+             uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
+             readonly qt-typeahead-async-show-on-focus placeholder="Select Company Type" required
+             uib-tooltip="Current vendor has linked products"
+             ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
+      <div typeahead-input-icon="editCompany.clientType"
+           ng-if="!(editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts)"></div>
+      <!-- <input placeholder="Select Company Type" type="text"> -->
+
+    </div>
+    <div class="col-md-6">
       <div ng-messages="companyForm.lastName.$error"
            ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'lastName')}">
         <label class="control-label" ng-message="maxlength">Last name is too large.</label>
@@ -37,25 +53,6 @@
       <input placeholder="Last Name" type="text" aria-expanded="true" ng-maxlength="15"
              name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
     </div>
-    <div class="col-md-6">
-      <div ng-messages="companyForm.clientType.$error"
-           ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
-        <label class="control-label" ng-message="required">Client Type is required.</label>
-      </div>
-      <input custom-style="{'width':'100%'}" type="text" class="form-control pointer" ng-model="editCompany.clientType" name="clientType"
-             uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
-             readonly qt-typeahead-async-show-on-focus placeholder="Select Company Type" required uib-tooltip="Current vendor has linked products"
-             ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
-      <div typeahead-input-icon="editCompany.clientType" ng-if="!(editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts)"></div>
-      <!-- <input placeholder="Select Company Type" type="text"> -->
-
-    </div>
-    <div class="col-md-6">
-      <div is-try-to-save="triedToSave" no-add-more="true" phone-numbers-edit country-code="{{editCompany.addresses[0].countryCode}}"
-           ng-model="contact.phoneNumbers" custom-placeholder="'Primary contact phone'"></div>
-      <!-- <input placeholder="Primary Contact Phone" type="text"> -->
-    </div>
-
     <div class="col-md-6">
       <div ng-messages="companyForm.companyDomain.$error"
            ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
@@ -67,7 +64,21 @@
              name="companyDomain"
              is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
     </div>
-
+    <div class="col-md-6">
+      <div is-try-to-save="triedToSave"
+           no-add-more="true"
+           phone-numbers-edit
+           country-code="{{editCompany.addresses[0].countryCode}}"
+           ng-model="contact.phoneNumbers"
+           custom-placeholder="'Primary contact phone'"></div>
+      <!-- <input placeholder="Primary Contact Phone" type="text"> -->
+    </div>
+    <div class="col-md-6">
+      <div phone-numbers-edit no-add-more="true" ng-model="editCompany.addresses[0].phoneNumbers"
+           is-try-to-save="triedToSave"
+           country-code="{{editCompany.addresses[0].countryCode}}" custom-placeholder="'Phone number'"></div>
+      <!-- <input placeholder="Phone Number" type="text"> -->
+    </div>
     <div class="col-md-6">
       <div ng-messages="companyForm.primaryEmail.$error"
            ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
@@ -82,28 +93,80 @@
              contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
              model-id="contact.id">
     </div>
-    <div class="col-md-6">
-      <div phone-numbers-edit no-add-more="true" ng-model="editCompany.addresses[0].phoneNumbers" is-try-to-save="triedToSave"
-           country-code="{{editCompany.addresses[0].countryCode}}" custom-placeholder="'Phone number'"></div>
-      <!-- <input placeholder="Phone Number" type="text"> -->
-    </div>
     <div class="col-md-12"><p>Would you like to Create Company in Advance mode?</p></div>
   </div>
   <div class="company--footer">
     <!-- <button class="btn btn-primary">Create Product</button> -->
     <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
-                                   loading="savingInProcess" label="Create Product">
+                                   loading="savingInProcess" label="Create Company">
     </button-with-loading-indicator>
     <button class="btn btn-default">Cancel</button>
   </div>
 </div>
 
+<div class="create-new" ng-controller="quicktech.createCompanyCtrl">
+  <div class="company--header">
+    <h2>Create Company</h2>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()">X</button>
+  </div>
+  <div class="company--content row" ng-form="companyForm">
+    <div class="col-md-4">
+      ==> company logo here <===
+    </div>
+    <div class="col-md-8"><input type="text" placeholder="Write Company Name or Search Company"></div>
+    <div class="col-md-4"><input type="text" placeholder="Select Company Type"></div>
+    <div class="col-md-4"><input type="text" placeholder="First Name"></div>
+    <div class="col-md-4"><input type="text" placeholder="Select Time Zone"></div>
+    <div class="col-md-4"><input type="text" placeholder="Company Domain Name"></div>
+    <div class="col-md-4"><input type="text" placeholder="Last Name"></div>
+    <div class="col-md-4"><input type="text" placeholder="Subscribe for"></div>
+    <div class="col-md-4"><input type="text" placeholder="Select Client Type"></div>
+    <div class="col-md-4"><input type="text" placeholder="Designation"></div>
+    <div class="col-md-4"><input type="text" placeholder="Select Payment Terms"></div>
+    <div class="col-md-4 location">
+      <input type="text" placeholder="Select Payment Terms">
+      <a class="create-new-link" href="#">Add More</a>
+    </div>
+    <div class="col-md-3" style="padding-right: 5px;"><input type="text" placeholder="Primary Contact Phone"></div>
+    <div class="col-md-1" style="padding-left: 5px;"><input type="text" placeholder="Mobile"></div>
+    <div class="col-md-4"><input type="text" placeholder="Select Payment Method"></div>
+    <div class="col-md-2" style="padding-right: 5px;"><input type="text" placeholder="Suite No"></div>
+    <div class="col-md-2" style="padding-left: 5px;"><input type="text" placeholder="Zip"></div>
+    <div class="col-md-4"><input type="text" placeholder="Primary Contact Email"></div>
+    <div class="col-md-4"><input type="text" placeholder="Select Service Type"></div>
+    <div class="col-md-4"><input type="text" placeholder="Phone Number"></div>
+    <div class="col-md-4 col-md-offset-4"><input type="text" placeholder="Lead by"></div>
+    <div class="col-md-12"><p>Add Note for Company</p></div>
+  </div>
+  <div class="company--footer company--footer-big">
+    <div>
+      <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
+                                     loading="savingInProcess" label="Create Company">
+      </button-with-loading-indicator>
+      <button class="btn btn-default">Cancel</button>
+    </div>
+    <a class="create-new-link" href="#">Create contact
+      <span tooltip-placement="top"
+            uib-tooltip="Create custom hourly rates or Service contract for this customer Tickets">
+        ?
+      </span>
+    </a>
+  </div>
+</div>
+
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

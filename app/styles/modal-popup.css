@@ -669,10 +669,24 @@ _::-webkit-:not(:root:root),
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
+.modal-dialog.xl {
+  width: 920px !important;
+}
+
 .service--header, .service--content, .service--footer,
+.user--header, .user--content, .user--footer,
+.ticket--header, .ticket--content, .ticket--footer,
 .company--header, .company--content, .company--footer,
 .product--header, .product--content, .product--footer {
   padding: 30px 40px;
+}
+
+.company--footer,
+.product--footer,
+.ticket--footer,
+.user--footer,
+.service--footer {
+  display: flex;
 }
 
 .add-tax-dropdown {
@@ -696,6 +710,8 @@ _::-webkit-:not(:root:root),
 }
 
 .service--header,
+.user--header,
+.ticket--header,
 .company--header,
 .product--header {
   background-color: #E7F5FE;
@@ -706,6 +722,8 @@ _::-webkit-:not(:root:root),
 }
 
 .service--header button,
+.user--header button,
+.ticket--header button,
 .company--header button,
 .product--header button {
   border: none;
@@ -715,6 +733,8 @@ _::-webkit-:not(:root:root),
 }
 
 .service--header h2,
+.user--header h2,
+.ticket--header h2,
 .company--header h2,
 .product--header h2 {
   margin: 0;
@@ -724,12 +744,16 @@ _::-webkit-:not(:root:root),
 }
 
 .service--content,
+.user--content,
+.ticket--content,
 .company--content,
 .product--content {
   margin: 0 -15px;
 }
 
 .service--content input,
+.user--content input,
+.ticket--content input,
 .company--content input,
 .add-tax-dropdown input,
 .product--content input {
@@ -742,16 +766,20 @@ _::-webkit-:not(:root:root),
 }
 
 .service--content input::placeholder,
+.user--content input::placeholder,
+.ticket--content input::placeholder,
 .company--content input::placeholder,
 .add-tax-dropdown input::placeholder,
 .product--content input::placeholder {
   color: #9CA5B6;
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
 }
 
 .service--content p,
+.user--content p,
+.ticket--content p,
 .company--content p,
 .product--content p {
   margin: 10px 0 32px;
@@ -772,12 +800,17 @@ _::-webkit-:not(:root:root),
 }
 
 .service-footer,
+.user-footer,
+.ticket-footer,
 .company-footer,
 .product-footer {
   margin-top: 30px;
 }
 
 .create-new .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 160px !important;
   height: 50px !important;
   margin-right: 15px;
@@ -816,6 +849,134 @@ _::-webkit-:not(:root:root),
 
 .company--content p {
   margin: 30px 0 0;
+}
+
+.ticket--content .description input::placeholder,
+.ticket--content .description input {
+  font-size: 16px;
+}
+
+.ticket--content .description input::placeholder {
+  font-weight: 100;
+}
+
+.ticket--content .ticket-subject input,
+.ticket--content .ticket-subject input::placeholder {
+  font-size: 24px;
+  padding: 15px 0;
+}
+
+.ticket--header > div {
+  display: flex;
+  align-items: center;
+}
+
+.ticket--header > div span {
+  margin-left: 20px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ticket--header > div > .ticket-priority {
+  margin-left: 20px;
+}
+
+.create-user-avatar .btn {
+  width: 108px !important;
+  height: 40px !important;
+}
+
+.img-description {
+  font-size: 11px;
+  color: #9CA5B6;
+  line-height: 16px;
+  max-width: 118px;
+  margin-top: 10px;
+}
+
+.user--footer {
+  padding-top: 0;
+}
+
+.user--content {
+  padding-bottom: 20px;
+}
+
+.company--footer-big > div {
+  display: flex;
+}
+
+.company--footer-big {
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.create-new-link {
+  color: #16A4FA;
+  font-size: 13px;
+}
+
+.create-new-link:hover {
+  color: #16A4FA;
+}
+
+.create-new-link span {
+  margin-left: 5px;
+  padding: 1.5px 5px;
+  border-radius: 50%;
+  background-color: #4F5F79;
+  text-align: center;
+  color: #fff;
+}
+
+.location {
+  position: relative;
+}
+
+.location .create-new-link {
+  position: absolute;
+  right: 17px;
+  top: 11px;
+  font-size: 13px;
+}
+
+.company--footer-big .create-new-link {
+  position: relative;
+}
+
+.company--footer-big .create-new-link:before {
+  position: absolute;
+  content: '';
+  width: 80%;
+  height: 1px;
+  background-color: #16A4FA;
+  bottom: 5px;
+  left: 0;
+  opacity: 1;
+  transition: all .3s;
+}
+
+.company--footer-big .create-new-link:hover:before {
+  opacity: 0;
+}
+
+.company--footer .tooltip-inner {
+  max-width: none;
+  width: 185px;
+  height: auto;
+  word-spacing: unset;
+  white-space: normal;
+  text-align: left;
+  font-weight: 100;
+  line-height: 16px;
+  padding: 10px !important;
+  font-size: 12px;
+  text-transform: initial;
+}
+
+.company--content .col-md-12 p {
+  margin: 0;
 }
 
 /*# sourceMappingURL=modal-popup.css.map */
