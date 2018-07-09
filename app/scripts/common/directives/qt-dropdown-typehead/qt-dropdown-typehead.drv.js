@@ -36,6 +36,8 @@
     self.lastCorrectSelecteditem = '';
     self.list = [];
 
+    console.log(self.qtPlaceholder, 'PLACEHOLDER')
+
 
     var inputAdditionalSettingsDictionary = {
       'ng-required'  : self.qtNgRequired ? self.qtNgRequired : '',
@@ -188,6 +190,3 @@
 
 
 })();
-
-
-

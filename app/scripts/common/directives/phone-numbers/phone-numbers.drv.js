@@ -15,7 +15,9 @@
           countryCode: '@?',
           disabled: '@?',
           onLostFocus: '=?',
-          isDashboardStyle: '@?'
+          isDashboardStyle: '@?',
+          noAddMore: '<noAddMore',
+          customPlaceholder: '<customPlaceholder'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {
@@ -27,7 +29,6 @@
           }
         },
         controller: function ($scope) {
-
           $scope.isPrefixValid = PhoneFormats.isPrefixValid;
           $scope.maximalAmountOfPhones = 2;
           $scope.phoneNumberPattern = /^\+?[0-9\s\-\+\(\)]{1,20}$/;

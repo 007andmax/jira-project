@@ -1,21 +1,99 @@
-<div class="create-new" ng-controller="quicktech.createCompanyCtrl" ng-form="companyForm">
+<div class="create-new" ng-controller="quicktech.createCompanyCtrl" >
   <div class="company--header">
     <h2>Create Company</h2>
     <button class="close-modal" ng-click="closeWindowWithConfirm()">X</button>
   </div>
-  <div class="company--content row">
-    <div class="col-md-6"><input placeholder="Company Name" type="text"></div>
-    <div class="col-md-3"><input placeholder="First Name" type="text"></div>
-    <div class="col-md-3"><input placeholder="Last Name" type="text"></div>
-    <div class="col-md-6"><input placeholder="Select Company Type" type="text"></div>
-    <div class="col-md-6"><input placeholder="Primary Contact Phone" type="text"></div>
-    <div class="col-md-6"><input placeholder="Company Domain Name" type="text"></div>
-    <div class="col-md-6"><input placeholder="Primary Contact Email" type="text"></div>
-    <div class="col-md-6"><input placeholder="Phone Number" type="text"></div>
+  <div class="company--content row" ng-form="companyForm">
+
+    <div class="col-md-6">
+      <div ng-messages="companyForm.companyName.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
+        <label class="control-label" ng-message="required">Company name is required.</label>
+        <label class="control-label" ng-message="maxlength">Company name is too large.</label>
+        <label class="control-label" ng-message="minlength">Company name is too short.</label>
+        <label class="control-label" ng-message="unique">This company name already occupied.</label>
+      </div>
+      <input placeholder="Company Name" type="text" ng-model="editCompany.name" aria-expanded="true"
+             ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+             is-uniq-validation validation-func="validateCompanyName">
+    </div>
+    <div class="col-md-3">
+      <div ng-messages="companyForm.firstName.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
+        <label class="control-label" ng-message="required">First name is required.</label>
+        <label class="control-label" ng-message="maxlength">First name is too large.</label>
+        <label class="control-label" ng-message="minlength">First name is too short.</label>
+      </div>
+
+      <input placeholder="First Name" type="text" ng-minlength="2" ng-maxlength="15"
+             name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
+    </div>
+    <div class="col-md-3">
+      <div ng-messages="companyForm.lastName.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'lastName')}">
+        <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+        <label class="control-label" ng-message="required">Last name is required.</label>
+      </div>
+      <input placeholder="Last Name" type="text" aria-expanded="true" ng-maxlength="15"
+             name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
+    </div>
+    <div class="col-md-6">
+      <div ng-messages="companyForm.clientType.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
+        <label class="control-label" ng-message="required">Client Type is required.</label>
+      </div>
+      <input custom-style="{'width':'100%'}" type="text" class="form-control pointer" ng-model="editCompany.clientType" name="clientType"
+             uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
+             readonly qt-typeahead-async-show-on-focus placeholder="Select Company Type" required uib-tooltip="Current vendor has linked products"
+             ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
+      <div typeahead-input-icon="editCompany.clientType" ng-if="!(editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts)"></div>
+      <!-- <input placeholder="Select Company Type" type="text"> -->
+
+    </div>
+    <div class="col-md-6">
+      <div is-try-to-save="triedToSave" no-add-more="true" phone-numbers-edit country-code="{{editCompany.addresses[0].countryCode}}"
+           ng-model="contact.phoneNumbers" custom-placeholder="'Primary contact phone'"></div>
+      <!-- <input placeholder="Primary Contact Phone" type="text"> -->
+    </div>
+
+    <div class="col-md-6">
+      <div ng-messages="companyForm.companyDomain.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
+        <label class="control-label" ng-message="unique">This domain already occupied.</label>
+        <label class="control-label" ng-message="pattern">Please enter a valid domain.</label>
+      </div>
+      <input placeholder="Company Domain Name" type="text" ng-model="editCompany.domain"
+             placeholder="yourcompany.com"
+             name="companyDomain"
+             is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
+    </div>
+
+    <div class="col-md-6">
+      <div ng-messages="companyForm.primaryEmail.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
+        <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+        <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+        <div class="control-label" ng-message="unique">This email already occupied.</div>
+        <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+      </div>
+      <input placeholder="Primary Contact Email" type="text" name="primaryEmail" aria-expanded="true"
+             make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
+             ng-maxlength="128"
+             contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
+             model-id="contact.id">
+    </div>
+    <div class="col-md-6">
+      <div phone-numbers-edit no-add-more="true" ng-model="editCompany.addresses[0].phoneNumbers" is-try-to-save="triedToSave"
+           country-code="{{editCompany.addresses[0].countryCode}}" custom-placeholder="'Phone number'"></div>
+      <!-- <input placeholder="Phone Number" type="text"> -->
+    </div>
     <div class="col-md-12"><p>Would you like to Create Company in Advance mode?</p></div>
   </div>
   <div class="company--footer">
-    <button class="btn btn-primary">Create Product</button>
+    <!-- <button class="btn btn-primary">Create Product</button> -->
+    <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
+                                   loading="savingInProcess" label="Create Product">
+    </button-with-loading-indicator>
     <button class="btn btn-default">Cancel</button>
   </div>
 </div>
