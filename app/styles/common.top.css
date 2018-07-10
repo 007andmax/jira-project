@@ -1,7 +1,7 @@
 .topNavbar {
 }
 
-.topNavbar-content div{
+.topNavbar-content div {
   margin-right: 5px;
 }
 
@@ -225,9 +225,10 @@
   width: 40%;
 }
 
-.search-block .dropdown-menu.dropdown-priority{
+.search-block .dropdown-menu.dropdown-priority {
   font-size: 15px;
 }
+
 .form-control-top-search-icn {
   float: right;
   margin-right: 10%;
@@ -238,20 +239,55 @@
   justify-content: space-between;
 }
 
+.topNavbar-content .btn-primary {
+  width: 135px;
+  height: 40px;
+  padding: 3px 15px;
+}
+
+.topNavbar-content .btn-primary span {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
 .topNavbar-create {
   /*margin-right: 1px;*/
   text-align: center;
 }
 
-.topNavbar-create .create-new-wrap {
-  display: flex;
-  margin: 0 5px;
-  height: 100%;
+.topNavbar-create .dropdown-menu {
+  width: 180px !important;
+  margin: 0 !important;
 }
 
-.topNavbar-create .create-new-label {
-  color: white !important;
-  margin: auto 10px auto 0;
+.topNavbar-create .dropdown-menu li {
+  padding: 5px 25px;
+  transition: all .3s;
+}
+
+.topNavbar-create .dropdown-menu li:first-child{
+  padding-top: 10px;
+}
+.topNavbar-create .dropdown-menu li:last-child {
+  padding-bottom: 10px;
+}
+
+.topNavbar-create .dropdown-menu li:hover {
+  background-color: #16A4FA;
+}
+
+.topNavbar-create .dropdown-menu li:hover a {
+  color: #fff;
+}
+
+.topNavbar-create .dropdown-menu li a {
+  font-size: 13px;
+}
+
+.topNavbar-create .create-new-wrap {
+  display: flex;
+  height: 100%;
 }
 
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
@@ -292,7 +328,8 @@
     width: 100px;
     font-size: 14px;
   }
-  .topNavbar-content .topNavbarRight .nickname-wrap .nickname{
+
+  .topNavbar-content .topNavbarRight .nickname-wrap .nickname {
     font-size: 14px;
     font-family: 'Graphik Light', sans-serif;
   }
@@ -347,7 +384,6 @@
   display: inline-block;
   margin-left: 30px;
 }
-
 
 .topNavbar-filter .dropdown.more {
   cursor: pointer;

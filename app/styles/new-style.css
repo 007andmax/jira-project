@@ -101,11 +101,11 @@
     color: #8e9598;
     pointer-events: none; }
   .btn-primary {
-    background-color: #4ba9df;
-    border-color: #4ba9df; }
+    background-color: #16A4FA;
+    border-color: #16A4FA; }
     .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
-      background-color: #3D7BA7;
-      border-color: #3D7BA7; }
+      background-color: #2c95e0;
+      border-color: #2c95e0; }
   .btn-success {
     background-color: #90c56b;
     border-color: #90c56b; }

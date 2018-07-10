@@ -751,6 +751,25 @@ _::-webkit-:not(:root:root),
   margin: 0 -15px;
 }
 
+.service--content .col-md-6,
+.user--content .col-md-6,
+.ticket--content .col-md-6,
+.company--content .col-md-6,
+.product--content .col-md-6 {
+  position: relative;
+}
+
+.service--content .col-md-6 label,
+.user--content .col-md-6 label,
+.ticket--content .col-md-6 label,
+.company--content .col-md-6 label,
+.product--content .col-md-6 label {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  top: -7px;
+}
+
 .service--content input,
 .user--content input,
 .ticket--content input,
@@ -837,6 +856,7 @@ _::-webkit-:not(:root:root),
 
 .create-new .btn-primary:hover {
   background-color: #3D7BA7 !important;
+  border-color: #3D7BA7 !important;
 }
 
 .create-new .btn-default:hover {
@@ -979,4 +999,90 @@ _::-webkit-:not(:root:root),
   margin: 0;
 }
 
+.launch-installer-model {
+  position: relative;
+  padding: 70px 40px 60px 140px;
+}
+
+.create-new .close-modal {
+  margin: 0;
+}
+
+.launch-installer-model .close-modal {
+  position: absolute;
+  right: 30px;
+  top: 35px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+}
+
+.launch-installer-model--download {
+  margin-bottom: 60px;
+}
+
+.launch-installer-model--download h3,
+.launch-installer-model--launch h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.launch-installer-model--download p,
+.launch-installer-model--launch p {
+  font-size: 13px;
+  margin-bottom: 15px;
+  font-weight: 100;
+}
+
+.launch-installer-model--download h3:before,
+.launch-installer-model--launch h3:before {
+  position: absolute;
+  content: '';
+  left: -90px;
+  top: 0;
+  width: 64px;
+  height: 64px;
+  background: url("../images/new-icons/download-app.png");
+}
+
+.launch-installer-model--launch h3:before {
+  background: url("../images/new-icons/launch-app.png");
+}
+
+.create-new .phone-number {
+  position: relative;
+}
+
+.create-new .phone-number input {
+  padding-left: 30px;
+}
+
+.create-new .phone-number:before {
+  position: absolute;
+  content: '';
+  background-image: url(../images/new-icons/new-mobile.png);
+  width: 16px;
+  height: 16px;
+  left: 18px;
+  top: 14px;
+}
+
+.create-new .google-plus {
+  position: relative;
+}
+
+.create-new .google-plus input {
+  padding-right: 30px;
+}
+.create-new .google-plus:before {
+  position: absolute;
+  content: '';
+  background-image: url(../images/new-icons/google-plus.png);
+  width: 20px;
+  height: 13px;
+  right: 20px;
+  top: 20px;
+}
 /*# sourceMappingURL=modal-popup.css.map */
