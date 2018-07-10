@@ -442,9 +442,12 @@
           }
         };
 
-        $scope.toggleDescription = function (deviceId) {
+
+
+        $scope.toggleDescription = function (deviceId, close) {
           $scope.isEditDescrOpened = true;
           $scope.$broadcast('toggleEditDeviceDescription', deviceId);
+
         };
 
         $scope.saveCredential = function (form) {
@@ -512,14 +515,24 @@
       return function (devices, option, reverse) {
         if (!devices) return;
 
+        var toSort = devices.slice();
+
         if (option === 'ipAddress') {
-          return devices.sort(function(a, b) {
+          toSort.sort(function(a, b) {
             var first = reverse ? b : a;
             var second = reverse ? a : b;
 
             return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
           });
+        } else {
+          toSort.sort(function(a, b) {
+            var first = reverse ? b : a;
+            var second = reverse ? a : b;
+            return first[option].localeCompare(second[option]);
+          })
         }
+
+        return toSort;
 
         function getIpAsNum(ip) {
           return +ip.split('.').join('');

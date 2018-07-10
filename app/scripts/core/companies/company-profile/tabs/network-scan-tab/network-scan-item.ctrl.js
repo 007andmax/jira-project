@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.networkScanItemCtrl',
     [
-      '$scope', 'CompaniesService', 'DevicesService', '$filter', '$uibModal',
-      function ($scope, CompaniesService, DevicesService, $filter, $uibModal) {
+      '$scope', 'CompaniesService', 'DevicesService', '$filter', '$uibModal', '$timeout',
+      function ($scope, CompaniesService, DevicesService, $filter, $uibModal, $timeout) {
 
         $scope.deviceDescription = $filter('unknownFilter')($scope.device.description);
         $scope.deviceEditDescription = $scope.device.description;
@@ -26,26 +26,52 @@
           if (deviceDescription && deviceDescription.length > 30) {
             deviceDescription = deviceDescription.slice(0, 30);
           }
+
+          $scope.device.savedDescription = true;
+
+          $timeout(function() {
+            $scope.device.savedDescription = false;
+          }, 200)
+
           DevicesService.sendDescription($scope.company.id, $scope.device.id, deviceDescription, function () {
             $scope.device.description = deviceDescription;
             $scope.isEditDescrOpened = false;
           })
         };
 
+        $scope.closeDescription = function(e, wait) {
+          if (e) e.stopPropagation();
+
+          if (wait) {
+            $timeout(function() {
+              if (!$scope.device.savedDescription) {
+                $scope.isEditDescrOpened = false;
+                $scope.device.description = $scope.device.deviceNameToRemember;
+              }
+            }, 100)
+          } else {
+            $scope.isEditDescrOpened = false;
+            $scope.device.description = $scope.device.deviceNameToRemember;
+          }
+
+        }
+
         $scope.$on('toggleEditDeviceDescription', function (event, deviceId) {
           $scope.isEditDescrOpened = $scope.device.id === deviceId;
-          $scope.device.description = '';
 
           if ($scope.isEditDescrOpened) {
-            var vals = [$scope.device.description, $scope.device.hostName, $scope.device.ipAddress];
 
+            var vals = [$scope.device.description, $scope.device.hostName, $scope.device.ipAddress];
             for (var i = 0; i < vals.length; i++) {
               if (vals[i] && vals[i] !== 'unknown') {
 
                 $scope.device.description = vals[i];
-                return;
+                break;
               }
             }
+
+            $scope.device.deviceNameToRemember = $scope.device.description;
+
           }
         });
 
