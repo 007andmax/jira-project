@@ -1,28 +1,28 @@
-<div class="create-new create-ticket-form" ng-controller="quicktech.createTicketCtrl" ng-form="ticketForm" >
+<div class="create-new create-ticket-form" ng-controller="quicktech.createTicketCtrl" ng-form="ticketForm">
   <div class="ticket--header">
     <div>
       <h2>Create New Ticket</h2>
       <span>QT 23904</span>
       <div class="ticket-priority create-dropdown" uib-dropdown>
 
-          <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
-                 readonly>
-          <i class="icn-sm report-caret-icon"></i>
+        <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
+               readonly>
+        <i class="icn-sm report-caret-icon"></i>
 
-          <ul class="dropdown-menu dropdown-priority" role="menu">
+        <ul class="dropdown-menu dropdown-priority" role="menu">
 
-            <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
-              <a tabindex="-1" href="javascript:void(0)">
-                <span class="priority-dot {{ label.toLowerCase() }}"></span>{{ label }}
-              </a>
-            </li>
+          <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
+            <a tabindex="-1" href="javascript:void(0)">
+              <span class="priority-dot {{ label.toLowerCase() }}"></span>{{ label }}
+            </a>
+          </li>
 
-          </ul>
+        </ul>
 
-          <div class="default-value"><span
-            class="priority-dot {{ ticketPriorityValue[ticket.priorityLevel].toLowerCase() }}"></span> {{
-            ticketPriorityValue[ticket.priorityLevel] }}
-          </div>
+        <div class="default-value"><span
+          class="priority-dot {{ ticketPriorityValue[ticket.priorityLevel].toLowerCase() }}"></span> {{
+          ticketPriorityValue[ticket.priorityLevel] }}
+        </div>
 
       </div>
     </div>
@@ -31,24 +31,26 @@
   <div class="ticket--content row">
     <div class="col-md-12 ticket-subject">
       <input type="text" class="form-validation"
-            placeholder="Type ticket subject here"
+             placeholder="Type ticket subject here"
              name="ticketSubject" ng-maxlength="300"
              required="true" make-dirty-on-blur
              ng-model="ticket.subject">
     </div>
     <div class="col-md-12" style="position: relative">
       <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
-          <span class="drop-area-subwrapper">
-            <span class="drop-area">
+          <div class="drop-area-subwrapper">
+            <p class="drop-area">
               Drop Files Here
-            </span>
-          </span>
+            </p>
+          </div>
       </div>
 
       <div class="drag-n-drop-body">
-        <h2>DRAG N DROP HERE</h2>
-        <ul class="upload-attachments"><!--
-            -->
+        <div>
+          <p>Drag & Drop your attachment here or
+            <span>click</span> to upload manually</p>
+        </div>
+        <ul class="upload-attachments">
           <li ng-repeat="file in ticketAttachments"
               ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
@@ -104,47 +106,48 @@
              ng-trim="false"
              custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}">
 
-        <div typeahead-input-icon="userCompany" ></div>
+      <div typeahead-input-icon="userCompany"></div>
 
-        <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies" qt-add-create-new-button="company"-->
-                              <!--selected-item="ticketCompany"-->
-                              <!--display-property="'name'"-->
-                              <!--filter-property="'name'"-->
-                              <!--qt-ng-minlength="40"-->
-                              <!--qt-ng-trim="'false'"-->
-                              <!--qt-name="'ticketCompany'"-->
-                              <!--qt-class="'form-control'"-->
-                              <!--qt-ng-style="'{\'max-height\': \'190px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
+      <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies" qt-add-create-new-button="company"-->
+      <!--selected-item="ticketCompany"-->
+      <!--display-property="'name'"-->
+      <!--filter-property="'name'"-->
+      <!--qt-ng-minlength="40"-->
+      <!--qt-ng-trim="'false'"-->
+      <!--qt-name="'ticketCompany'"-->
+      <!--qt-class="'form-control'"-->
+      <!--qt-ng-style="'{\'max-height\': \'190px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
 
-        <!--</qt-dropdown-typehead>-->
+      <!--</qt-dropdown-typehead>-->
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" add-create-new-button="user" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCreatedUser')}">
+    <div class="col-md-6 dropdown-user-parent" add-create-new-button="user"
+         ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCreatedUser')}">
       <!-- <input placeholder="Select User" type="text"> -->
 
-        <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
-               smart-dropdown-menu-position
-               ng-model="ticketCreatedUser"
-               typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-               uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
-               qt-typeahead-async-show-on-focus ng-trim="false"
-               placeholder="Select User"
-               custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
+      <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
+             smart-dropdown-menu-position
+             ng-model="ticketCreatedUser"
+             typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+             uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
+             qt-typeahead-async-show-on-focus ng-trim="false"
+             placeholder="Select User"
+             custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
 
-        <input placeholder="Select User" type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
+      <input placeholder="Select User" type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser"
+             ng-required="true">
 
-        <div typeahead-input-icon-sm="ticketCreatedUser"></div>
-        <div class="ng-scope" typeahead-input-icon="userCompany">
+      <div typeahead-input-icon-sm="ticketCreatedUser"></div>
+      <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
                tooltip-placement="top"></i>
         </span>
-          <span class="x-mark ng-hide" ng-hide="showClearIcon">
+        <span class="x-mark ng-hide" ng-hide="showClearIcon">
             <i class="icn-sm icn-caret-gray"></i>
           </span>
-        </div>
-
+      </div>
 
 
     </div>
@@ -152,54 +155,53 @@
       <!-- <input placeholder="Assign to" type="text"> -->
 
 
+      <input type="text" class="form-validation has-dropdown-with-label"
+             smart-dropdown-menu-position autocomplete="off"
+             ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
+             typeahead-on-select="userAssigned(ticketAssignTo)"
+             placeholder="Assign to"
+             typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+             uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
+             qt-typeahead-async-show-on-focus ng-required="false"
+             custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">
 
-        <input type="text" class="form-validation has-dropdown-with-label"
-               smart-dropdown-menu-position autocomplete="off"
-               ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
-               typeahead-on-select="userAssigned(ticketAssignTo)"
-               placeholder="Assign to"
-               typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-               uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
-               qt-typeahead-async-show-on-focus ng-required="false"
-               custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">
+      <div typeahead-input-icon-sm="ticketAssignTo"></div>
 
-        <div typeahead-input-icon-sm="ticketAssignTo"></div>
-
-        <div class="ng-scope" typeahead-input-icon="userCompany">
+      <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
                tooltip-placement="top"></i>
         </span>
-          <span class="x-mark ng-hide" ng-hide="showClearIcon">
+        <span class="x-mark ng-hide" ng-hide="showClearIcon">
             <i class="icn-sm icn-caret-gray"></i>
           </span>
-        </div>
+      </div>
 
 
     </div>
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}">
       <!-- <input placeholder="Select Device" type="text"> -->
 
-        <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
-               smart-dropdown-menu-position
-               ng-model="ticketAgent" name="ticketAgent"
-               placeholder="Select Device"
-               ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
-               uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
-               qt-typeahead-async-show-on-focus
-               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
+      <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
+             smart-dropdown-menu-position
+             ng-model="ticketAgent" name="ticketAgent"
+             placeholder="Select Device"
+             ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
+             uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
+             qt-typeahead-async-show-on-focus
+             custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
 
-        <div typeahead-input-icon-sm="ticketAgent"></div>
+      <div typeahead-input-icon-sm="ticketAgent"></div>
 
-        <div class="ng-scope" typeahead-input-icon="userCompany">
+      <div class="ng-scope" typeahead-input-icon="userCompany">
             <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
               <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
                  tooltip-placement="top"></i>
           </span>
-          <span class="x-mark ng-hide" ng-hide="showClearIcon">
+        <span class="x-mark ng-hide" ng-hide="showClearIcon">
               <i class="icn-sm icn-caret-gray"></i>
             </span>
-        </div>
+      </div>
 
 
     </div>

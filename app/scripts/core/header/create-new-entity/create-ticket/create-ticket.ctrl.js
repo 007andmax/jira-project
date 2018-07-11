@@ -90,9 +90,9 @@
         }
 
         $scope.ticketPriorityValue = {
-          LOW: 'Low',
-          MEDIUM: 'Medium',
-          HIGH: 'High'
+          LOW: 'Low Priority',
+          MEDIUM: 'Medium Priority',
+          HIGH: 'High Priority'
         };
 
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;

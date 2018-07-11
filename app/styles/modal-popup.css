@@ -1076,11 +1076,13 @@ _::-webkit-:not(:root:root),
 
 .create-new .google-plus {
   position: relative;
+  margin-top: 55px;
 }
 
 .create-new .google-plus input {
   padding-right: 30px;
 }
+
 .create-new .google-plus:before {
   position: absolute;
   content: '';
@@ -1090,4 +1092,174 @@ _::-webkit-:not(:root:root),
   right: 20px;
   top: 20px;
 }
+
+.ticket--header .ticket-priority {
+  width: 145px;
+  height: 32px;
+  font-size: 13px;
+}
+
+.ticket--header .ticket-priority .ticket-drop {
+  padding-left: 0;
+  padding-right: 30px;
+  border: none;
+}
+
+.ticket--header .ticket-priority .priority-dot {
+  margin: -2px 3px 0;
+  width: 4px;
+  height: 4px !important;
+}
+
+.ticket--header .ticket-priority .default-value {
+  top: 3px;
+  left: 8px;
+}
+
+.ticket--header .ticket-priority .dropdown-priority {
+  width: 145px !important;
+  top: 35px
+}
+
+.ticket--header .ticket-priority .dropdown-priority li {
+  transition: all .3s;
+  font-size: 13px;
+}
+
+.ticket--header .ticket-priority .dropdown-priority li a {
+  transition: all .3s;
+}
+
+.ticket--header .ticket-priority .dropdown-priority li a:hover {
+  background-color: #16A4FA;
+  color: #fff;
+}
+
+.ticket--header .ticket-priority .dropdown-priority a {
+  padding: 2px 0;
+}
+
+.ticket--header .ticket-priority .dropdown-priority a span {
+  margin: -2px 10px 0;
+}
+
+.create-new .drag-n-drop-body {
+  height: 96px;
+  width: 100%;
+  border-radius: 3px;
+  border: 2px dashed #C4CBD5;
+  margin-bottom: 15px;
+}
+
+.create-new .drag-n-drop-body > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.create-new .drag-n-drop-body > div p {
+  width: 305px;
+  position: relative;
+  padding-left: 60px;
+  color: #C4CBD5;
+  margin: 0;
+}
+
+.create-new .drag-n-drop-body > div p span {
+  color: #16A4FA;
+}
+
+.create-new .drop-area-wrapper {
+  height: 96px;
+  width: 95%;
+  border-color: #16A4FA;
+}
+
+.create-new .drop-area-subwrapper {
+  height: 100%;
+}
+
+.create-new .drop-area-subwrapper p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.create-new .drag-n-drop-body > div p:before {
+  position: absolute;
+  content: '';
+  background-image: url(../images/new-icons/drag-drop-dcoument.png);
+  width: 47px;
+  height: 46px;
+  left: 0;
+  top: 0;
+}
+
+.ticket--footer {
+  padding-top: 0;
+}
+
+.create-new .x-mark {
+  top: 4px;
+  right: 10px;
+}
+
+.create-new input:active,
+.create-new input:focus {
+  border-color: #16A4FA;
+}
+
+.create-new .has-error input {
+  background-color: transparent;
+  border-color: red;
+}
+
+.create-new .dropdown-menu {
+  width: 255px !important;
+}
+
+.create-new .dropdown-menu li a {
+  transition: all .3s;
+}
+
+.create-new .dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #16A4FA;
+}
+
+.create-new .dropdown-menu li a:hover,
+.create-new .dropdown-menu li label:hover{
+  background-color: #16A4FA;
+  color: #fff;
+}
+
+.create-new .dropdown-menu > .active > a {
+  background-color: transparent;
+}
+
+.create-new .control-label,
+.create-new .has-error .control-label{
+  position: absolute;
+  font-size: 12px;
+  color: red;
+}
+
+.create-new .dropdown > input {
+  background-color: transparent;
+}
+
+.create-new .ticket-priority.dropdown > input {
+  background-color: #fff;
+}
+
+.create-new .subscribe-tokens {
+  top: 7px;
+}
+
+.create-new .subscribe-tokens div {
+  width: 70px;
+  height: 29px;
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
 /*# sourceMappingURL=modal-popup.css.map */
