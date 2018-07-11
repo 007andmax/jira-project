@@ -507,6 +507,11 @@ _::-webkit-:not(:root:root),
   border: solid 1px #ff3e2b;
 }
 
+.modal-dialog.modal-unlock-window .has-error .form-validation {
+  background-color: #FFF2F1;
+  border: solid 1px #ff3e2b;
+}
+
 .modal-dialog.modal-unlock-window input {
   height: 48px;
   background-color: transparent;

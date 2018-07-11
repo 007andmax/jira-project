@@ -22,7 +22,8 @@
       qtTabindex: '<?',
       qtNgDisabled: '<?',
       qtReadonly: '<?',
-      qtPlaceholder : '<?'
+      qtPlaceholder : '<?',
+      noForm: '<qtValid'
     },
     controller: qtDropdownTypeheadCtrl
   });
@@ -36,7 +37,9 @@
     self.lastCorrectSelecteditem = '';
     self.list = [];
 
-    console.log(self.qtPlaceholder, 'PLACEHOLDER')
+    $scope.noForm = self.noForm;
+
+    console.log(self.noForm, 'PLACEHOLDER')
 
 
     var inputAdditionalSettingsDictionary = {

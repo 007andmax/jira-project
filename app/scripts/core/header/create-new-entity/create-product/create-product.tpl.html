@@ -15,7 +15,7 @@
         <div class="form-group"
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
           <label>Mfg/Item number</label>
-          <input type="text" class="form-control" name="editProductMfg"
+          <input type="text" class="form-validation" name="editProductMfg"
                 ng-required='false'  ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
                  is-uniq-validation is-empty-valid="true" validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
         </div>
@@ -23,7 +23,7 @@
         <div class="form-group"
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
           <label>Description</label>
-          <textarea style="height: 120px; vertical-align: top;" type="text" class="form-control"
+          <textarea style="height: 120px; vertical-align: top;" type="text" class="form-validation"
                  ng-model="editProduct.description" ng-required="true"
                     ng-maxlength="500" name="editProductDescription" tabindex="1"></textarea>
         </div>
@@ -32,7 +32,7 @@
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
           <div class="dropdown">
             <label>Category</label>
-            <input style="padding-right: 70px;" type="text" class="form-control has-dropdown"
+            <input style="padding-right: 70px;" type="text" class="form-validation has-dropdown"
                    required ng-maxlength="100"
                    autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
                    typeahead-editable="true"
@@ -67,14 +67,14 @@
         <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
              ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
           <label>Cost</label>
-          <input type="text" class="form-control" ng-model="editProduct.cost"
+          <input type="text" class="form-validation" ng-model="editProduct.cost"
                  name="cost" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" tabindex="2">
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
           <label>Price</label>
-          <input type="text" class="form-control" ng-model="editProduct.sale"
+          <input type="text" class="form-validation" ng-model="editProduct.sale"
                  name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
                  hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" tabindex="3">
         </div>
@@ -87,7 +87,7 @@
         <div class="form-group"
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
           <label>ILC</label>
-          <input type="text" class="form-control" name="editProductILC"
+          <input type="text" class="form-validation" name="editProductILC"
                  ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
                  is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
             <i class="barcode-icon"></i>
@@ -97,7 +97,7 @@
              ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
           <div class="dropdown">
             <label>Vendor/Supplier</label>
-            <!--<input type="text" class="form-control has-dropdown"-->
+            <!--<input type="text" class="form-validation has-dropdown"-->
 <!--autocomplete="off" ng-model="editProduct.company" name="editProductVendor"-->
 <!--typeahead-input-formatter="getItemName($model)" tabindex="5"-->
 <!--uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"-->
@@ -114,7 +114,7 @@
                                   filter-property="'name'"
                                   qt-tabindex="'5'"
                                   qt-name="'editProductVendor'"
-                                  qt-class="'form-control'"
+                                  qt-class="'form-validation'"
                                   qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'97%\'}'">
 
             </qt-dropdown-typehead>
@@ -135,7 +135,7 @@
 <!--<div class="col-xs-4">-->
 <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'discountAmount')}">-->
 <!--<input type="number"-->
-<!--class="form-control"-->
+<!--class="form-validation"-->
 <!--placeholder="Discount Amount"-->
 <!--name="discountAmount"-->
 <!--ng-model="editProduct.discountAmount"-->
@@ -151,7 +151,7 @@
 <!--<div class="form-group">-->
 <!--<div uib-dropdown keyboard-nav="true">-->
 
-<!--<button class="form-control form-control-dropdown account-type no-cursor has-dropdown"-->
+<!--<button class="form-validation form-validation-dropdown account-type no-cursor has-dropdown"-->
 <!--uib-dropdown-toggle aria-expanded="true"-->
 <!--tabindex="32">-->
 <!--{{discountTypes[editProduct.discountType]}} <b ng-hide="editProduct.discountType"-->
@@ -191,30 +191,25 @@
     <button class="close-modal icn-sm icn-remove-old" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="product--content row" ng-form="editProductForm">
-    <div class="col-md-6">
-      <div class="form-group"
-           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
-        <input type="text" class="form-control" name="editProductMfg"
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+
+        <input type="text" class="form-validation" name="editProductMfg"
                ng-required='false' placeholder="Item number" ng-model="editProduct.manufacture" ng-maxlength="50"
                tabindex="7"
                is-uniq-validation is-empty-valid="true" validation-func="validateProductMnf"
                model-id="editProduct.versionedId.id">
-      </div>
-    </div>
-    <div class="col-md-6">
 
-      <div class="form-group"
-           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
-        <input type="text" style="vertical-align: top;" type="text" class="form-control"
+    </div>
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+
+    <input type="text" style="vertical-align: top;" type="text" class="form-validation"
                ng-model="editProduct.description" ng-required="true" placeholder="Description"
                ng-maxlength="500" name="editProductDescription" tabindex="1"/>
-      </div>
+
     </div>
-    <div class="col-md-6">
-      <div class="form-group"
-           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
-        <div class="dropdown">
-          <input style="padding-right: 70px;" type="text" class="form-control has-dropdown"
+    <div class="col-md-6 dropdown" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
+
+          <input style="padding-right: 70px;" type="text" class="has-dropdown"
                  required ng-maxlength="100"
                  autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
                  typeahead-editable="true"
@@ -244,48 +239,98 @@
             </a>
 
           </div>
-        </div>
-      </div>
+
+
 
     </div>
-    <div class="col-md-3">
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
-           ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-
-        <input type="text" class="form-control" ng-model="editProduct.cost"
+    <div class="col-md-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <input type="text" ng-model="editProduct.cost"
                name="cost" ng-change="validateSaleAndCost(editProductForm)"
                hard-reset-pattern="decimalNumberPattern" placeholder="Cost" qt-to-fixed="2" tabindex="2">
-      </div>
-    </div>
-    <div class="col-md-3">
 
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
-        <input type="text" class="form-control" ng-model="editProduct.sale"
-               name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
-               hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" placeholder="Price" tabindex="3">
-      </div>
+    </div>
+    <div class="col-md-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
+      <input type="text" class="form-validation" ng-model="editProduct.sale"
+             name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
+             hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" placeholder="Price" tabindex="3">
 
     </div>
     <div class="col-md-6">
       <select-taxes taxes="taxes" entity="editProduct"></select-taxes>
     </div>
-    <div class="col-md-6"><p>Add New Tax</p></div>
     <div class="col-md-6">
 
-      <div class="form-group"
-           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
-        <input type="text" class="form-control" name="editProductILC"
-               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
-               is-uniq-validation validation-func="validateProductIls" placeholder="ILC number"
-               model-id="editProduct.versionedId.id">
-        <i class="barcode-icon"></i>
+      <p  smart-dropdown-menu-position
+           dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+        Add new tax
+      </p>
+
+      <div class="dropdown-menu dropdown-menu-custom" role="menu">
+
+        <div class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl" ng-required='false'>
+          <div ng-messages="newTaxForm.name.$error"
+               ng-class="{'hide': !isShowingErrors(newTaxForm, 'name')}">
+
+            <label class="control-label" ng-message="required">
+              Name is required.
+            </label>
+
+            <label class="control-label" ng-message="unique">
+              Name is already taken.
+            </label>
+
+            <label class="control-label" ng-message="minlength">
+              Name is too short.
+            </label>
+
+            <label class="control-label" ng-message="maxlength">
+              Name is too long.
+            </label>
+          </div>
+          <input placeholder="Enter Tax Name" type="text" class="form-validation" name="name" ng-model="newTax.name"
+                 is-uniq-validation validation-func="isUniqueName" ng-minlength="2" ng-maxlength="30">
+
+
+          <div ng-messages="newTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(newTaxForm, 'rate')}">
+            <label style="white-space: nowrap;" class="control-label" ng-message="required">
+              Required.
+            </label>
+            <label style="white-space: nowrap;" class="control-label" ng-message="number">
+              Only numbers.
+            </label>
+            <label style="white-space: nowrap;" class="control-label" ng-message="min">
+              To small.
+            </label>
+            <label style="white-space: nowrap;" class="control-label" ng-message="max">
+              To large.
+            </label>
+          </div>
+          <input placeholder="Rate (%)" type="number" class="form-validation" ng-model="newTax.rate" name="rate"
+                 required min="0.01" max="99">
+          <label class="control checkbox" style="margin-bottom: 20px;">
+            <input type="checkbox" ng-model="newTax.isDefault">
+            <span class="control-indicator">
+              </span>Set as Default
+          </label>
+          <button class="btn btn-success" ng-click="saveNewTax(newTaxForm, true)"
+          custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">Add</button>
+        </div>
+
       </div>
+
+
+
     </div>
-    <div class="col-md-6">
-      <div class="form-group"
-           ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
-        <div class="dropdown">
-          <!-- <input type="text" class="form-control has-dropdown"
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+      <input type="text" class="form-validation" name="editProductILC"
+             ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
+             is-uniq-validation validation-func="validateProductIls" placeholder="ILC number"
+             model-id="editProduct.versionedId.id">
+      <i class="barcode-icon"></i>
+    </div>
+    <div class="col-md-6 dropdown" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+
+          <!-- <input type="text" class="form-validation has-dropdown"
                  autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
                  typeahead-input-formatter="getItemName($model)" tabindex="5"
                  uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
@@ -302,14 +347,13 @@
                                 display-property="'name'"
                                 filter-property="'name'"
                                 qt-tabindex="'5'"
+                                qt-valid="true"
                                 qt-placeholder="'Vendors'"
                                 qt-name="'editProductVendor'"
-                                qt-class="'form-control'"
                                 qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'97%\'}'">
 
           </qt-dropdown-typehead>
-        </div>
-      </div>
+
     </div>
   </div>
   <div class="product--footer">

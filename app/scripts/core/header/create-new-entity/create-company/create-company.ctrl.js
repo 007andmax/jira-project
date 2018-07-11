@@ -17,6 +17,7 @@
         $scope.showWorkingDaysSchedule = false;
         $scope.selectedContractType;
 
+
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeekMap = {
           MONDAY: 'Monday',
@@ -27,6 +28,18 @@
           SATURDAY: 'Saturday',
           SUNDAY: 'Sunday'
         };
+
+
+
+        $scope.addAnotherLocation = function() {
+          $scope.editCompany.additionalAddresses.push({
+            phoneNumbers: [],
+            address: '',
+            postalCode: '',
+            suiteNumber: '',
+            isPrimary: false,
+          });
+        }
 
         $scope.timeFormat = ['AM', 'PM'];
 
@@ -140,6 +153,7 @@
           getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         }
+        $scope.editCompany.additionalAddresses = [];
 
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !PermissionsService.isAllowed(action)) {
@@ -305,7 +319,13 @@
             $scope.savingInProcess = true;
             $scope.saveWorkingHours();
 
+
             var editCompany = angular.copy($scope.editCompany);
+
+            editCompany.additionalAddresses.forEach(function(ad) {
+              editCompany.addresses.push(ad);
+            })
+
             var contacts = editCompany.contacts,
               addresses = editCompany.addresses;
 
@@ -319,7 +339,7 @@
               }
             }
 
-            for (var i = 0; i < addresses.length; i++) {
+            for (var i = 0; i < 1; i++) {
               processPhoneNumbers(addresses[i].phoneNumbers);
             }
 

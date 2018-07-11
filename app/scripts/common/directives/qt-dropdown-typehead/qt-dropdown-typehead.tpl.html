@@ -5,6 +5,15 @@
     <input type="text"
            class="form-control has-dropdown"
            id="qtInput"
+           ng-if="!noForm"
+           ng-model="$ctrl.viewValueItem"
+           ng-click="$ctrl.changeDropdownState()"
+           ng-keyup="$ctrl.listFilterFunction()">
+    <input type="text"
+           class="has-dropdown"
+           id="qtInput"
+           ng-if="noForm"
+           placeholder="Select Vendor"
            ng-model="$ctrl.viewValueItem"
            ng-click="$ctrl.changeDropdownState()"
            ng-keyup="$ctrl.listFilterFunction()">

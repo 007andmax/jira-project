@@ -31,6 +31,14 @@
 
         var alreadyPushCloseButton = false;
 
+        $scope.longCreateCompany = false;
+
+        $scope.switchCompanyModal = function() {
+          var modal = document.querySelector('.modal-dialog');
+          modal.classList.add('xl');
+          $scope.longCreateCompany = true;
+        }
+
         $scope.sessionId = sessionId;
         $scope.sessionTime = sessionTime;
         $scope.resolvedDeviceId = resolvedDeviceId;
