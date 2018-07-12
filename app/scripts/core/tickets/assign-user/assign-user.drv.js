@@ -110,7 +110,6 @@
                 actionElement.addClass('disabled').attr('disabled', 1);
                 inputElement.focus();
 
-                console.log('remove')
 
                 $rootScope.$broadcast('userToAssignToTicket', { data: null })
               });

@@ -45,7 +45,6 @@
         // })
 
         $rootScope.$on('userToAssignToTicket', function(val, args) {
-          console.log("I GOT *******", args)
           $scope.ticket.ticketAssignTo = args.data;
           $scope.ticket.assignedTo = args.data ? args.data.firstName + ' ' + args.data.lastName : '';
 
@@ -625,7 +624,6 @@
             return item.user && item.user.id === oldId;
           });
 
-          console.log($scope.ticket.ticketAssignTo, "CHANGED\ ")
 
           if ($scope.ticket.ticketAssignTo) {
             $scope.ticketSharedUsersList.push({
