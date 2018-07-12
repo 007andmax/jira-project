@@ -7,7 +7,7 @@
       restrict: 'A',
       scope: {
         noRestricted: '<noRestricted'
-      }
+      },
 
       link: function (scope, element, attrs) {
 
@@ -87,13 +87,17 @@
               if((winHeight - position) < 250) {
                 d.css({'top': 'auto'});
                 d.css({'bottom': '100%'});
-                if (!noRestricted) d.css({'max-height': '160px'});
+                if (!scope.noRestricted) {
+                  d.css({'max-height': '160px'});
+                }
                 parentElement.css({'overflow': 'visible'});
               } else {
                 d.css({'top': 'auto'});
                 d.css({'bottom': ''});
 
-                if (!noRestricted) d.css({'max-height': '160px'});
+                if (!scope.noRestricted) {
+                  d.css({'max-height': '160px'});
+                }
                 parentElement.css({'overflow': 'hidden'});
               }
             }
