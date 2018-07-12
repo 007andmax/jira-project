@@ -32,6 +32,26 @@
           "text/csv"
         ];
 
+        $scope.assignTicketTo = function(user) {
+          $scope.ticket.ticketAssignTo = user;
+        }
+
+        // $scope.$watch(function() {
+        //   return $rootScope.userToAssignToTicket;
+        // }, function(val) {
+        //   console.log("I GOT EVENT")
+        //   $scope.ticket.ticketAssignTo = val;
+        //   $scope.ticket.assignedTo = val ? val.firstName + ' ' + val.lastName : ''
+        // })
+
+        $rootScope.$on('userToAssignToTicket', function(val, args) {
+          console.log("I GOT *******", args)
+          $scope.ticket.ticketAssignTo = args.data;
+          $scope.ticket.assignedTo = args.data ? args.data.firstName + ' ' + args.data.lastName : '';
+
+          $scope.$apply()
+        })
+
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
@@ -604,6 +624,8 @@
           Utils.removeFromArrayByCondition($scope.ticketSharedUsersList, function (item) {
             return item.user && item.user.id === oldId;
           });
+
+          console.log($scope.ticket.ticketAssignTo, "CHANGED\ ")
 
           if ($scope.ticket.ticketAssignTo) {
             $scope.ticketSharedUsersList.push({

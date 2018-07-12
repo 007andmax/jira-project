@@ -2,7 +2,7 @@
   <div class="ticket--header">
     <div>
       <h2>Create New Ticket</h2>
-      <span>QT 23904</span>
+      <span>QT {{ticketNumber}}</span>
       <div class="ticket-priority create-dropdown" uib-dropdown>
 
         <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
@@ -46,9 +46,11 @@
       </div>
 
       <div class="drag-n-drop-body">
-        <div>
+        <div style="position: relative"  ticket-attachment-files attachment-func="addAttachmentFiles"
+             ng-model="ticketUpdate.ticketAttachments">
           <p>Drag & Drop your attachment here or
             <span>click</span> to upload manually</p>
+          <input type="file" class="file-input" multiple=""/>
         </div>
         <ul class="upload-attachments">
           <li ng-repeat="file in ticketAttachments"
@@ -151,23 +153,38 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}">
+    <div class="col-md-6 dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}" uib-dropdown>
       <!-- <input placeholder="Assign to" type="text"> -->
 
+      <!-- smart-dropdown-menu-position -->
+      <!-- uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'" -->
+      <div uib-dropdown-toggle>
+        <input type="text" class="form-validation has-dropdown-with-label"
+               autocomplete="off"
+               ng-model="ticket.assignedTo" name="ticketAssignTo"
+               typeahead-on-select="userAssigned(ticketAssignTo)"
+               placeholder="Assign to"
+               typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+               onkeypress="return false;"
+               ng-required="false"
+               custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}"
+               aria-haspopup="true">
+      </div>
 
-      <input type="text" class="form-validation has-dropdown-with-label"
-             smart-dropdown-menu-position autocomplete="off"
-             ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
-             typeahead-on-select="userAssigned(ticketAssignTo)"
-             placeholder="Assign to"
-             typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-             uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
-             qt-typeahead-async-show-on-focus ng-required="false"
-             custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">
+      <div uib-dropdown-menu class="dropdown-assign-ticket dropdown-menu" style="width: auto; margin-top: -10px;"
+           stop-propagation="click" assign-user-button
+           onUserAssign="'true'"
+           aub-is-bulk-operation="true"
+           aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
 
       <div typeahead-input-icon-sm="ticketAssignTo"></div>
 
-      <div class="ng-scope" typeahead-input-icon="userCompany">
+
+
+
+
+
+      <!-- <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
                tooltip-placement="top"></i>
@@ -175,7 +192,8 @@
         <span class="x-mark ng-hide" ng-hide="showClearIcon">
             <i class="icn-sm icn-caret-gray"></i>
           </span>
-      </div>
+      </div> -->
+
 
 
     </div>

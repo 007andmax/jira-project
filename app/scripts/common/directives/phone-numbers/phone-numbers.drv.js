@@ -17,7 +17,9 @@
           onLostFocus: '=?',
           isDashboardStyle: '@?',
           noAddMore: '<noAddMore',
-          customPlaceholder: '<customPlaceholder'
+          customPlaceholder: '<customPlaceholder',
+          isRestricted: '<isRestricted',
+          showTypeSelector: '<showTypeSelector'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {

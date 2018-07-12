@@ -1,4 +1,4 @@
-<div ng-form="phoneNumbersForm" class="phone-number-form">
+<div ng-form="phoneNumbersForm" class="phone-number-form" ng-if="!isRestricted">
   <div class="row clearfix" ng-repeat="phoneNumber in phoneNumbers">
 
     <div ng-if="$index !== phoneNumbers.length - 1">
@@ -113,4 +113,38 @@
 
     </div>
   </div>
+</div>
+
+<div ng-form="phoneNumbersForm" ng-if="isRestricted">
+
+      <div class="custom-phone-number col-xs-6" ng-class="{'has-error': phoneNumbers[0].error}">
+
+
+        <div ng-if="phoneNumbers[0].error">
+          <label class="control-label">{{ phoneNumbers[0].error }}</label>
+        </div>
+
+        <input type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
+               execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
+               ng-change="phoneNumbers[0].error = false">
+      </div>
+
+      <div ng-if="showTypeSelector" class="col-xs-3 no-label" uib-dropdown keyboard-nav="true">
+
+          <button class="has-dropdown" style="min-width: 74px;" tabindex="21"
+                  uib-dropdown-toggle ng-disabled="$eval(disabled)">
+            {{ phoneNumberTypes[phoneNumbers[0].typeNumber] }}
+          </button>
+
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+            <li ng-repeat="(type, label) in phoneNumberTypes"
+                ng-click="phoneNumbers[0].typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+          <i class="icn-sm report-caret-icon"></i>
+
+      </div>
+
 </div>

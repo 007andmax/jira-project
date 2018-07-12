@@ -109,14 +109,21 @@
                 inputElement.autocomplete('resetSelection');
                 actionElement.addClass('disabled').attr('disabled', 1);
                 inputElement.focus();
+
+                console.log('remove')
+
+                $rootScope.$broadcast('userToAssignToTicket', { data: null })
               });
 
               inputElement.val('').tokenfield({
                 limit: 1,
                 autocomplete: null
               }).tokenfield('createToken', selection.data.primaryEmail);
-              inputElement.data('bs.tokenfield').$input.remove();
 
+              // $rootScope.userToAssignToTicket = selection.data;
+              $rootScope.$broadcast('userToAssignToTicket', { data: selection.data })
+              inputElement.data('bs.tokenfield').$input.remove();
+              // console.log('assign, here, look', selection.data)
               inputElement.val('').autocomplete('onValueChange', true);
 
               actionElement.removeClass('disabled').removeAttr('disabled');

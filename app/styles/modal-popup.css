@@ -1056,6 +1056,19 @@ _::-webkit-:not(:root:root),
   background: url("../images/new-icons/launch-app.png");
 }
 
+.create-new .file-input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.create-new .file-input:hover {
+  cursor: pointer;
+}
+
 .create-new .phone-number {
   position: relative;
 }
