@@ -117,7 +117,7 @@
 
 <div ng-form="phoneNumbersForm" ng-if="isRestricted">
 
-      <div class="custom-phone-number col-xs-6" ng-class="{'has-error': phoneNumbers[0].error}">
+      <div class="custom-phone-number" ng-class="{'has-error': phoneNumbers[0].error}">
 
 
         <div ng-if="phoneNumbers[0].error">
@@ -130,7 +130,7 @@
                ng-change="phoneNumbers[0].error = false">
       </div>
 
-      <div ng-if="showTypeSelector" class="col-xs-3 no-label" uib-dropdown keyboard-nav="true">
+      <div ng-if="showTypeSelector" class="no-label" uib-dropdown keyboard-nav="true">
 
           <button class="has-dropdown" style="min-width: 74px;" tabindex="21"
                   uib-dropdown-toggle ng-disabled="$eval(disabled)">

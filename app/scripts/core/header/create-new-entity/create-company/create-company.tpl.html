@@ -108,7 +108,7 @@
       <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
                                      loading="savingInProcess" label="Create Company">
       </button-with-loading-indicator>
-      <button class="btn btn-default">Cancel</button>
+      <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
     </div>
   </div>
 
@@ -490,7 +490,7 @@
         <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
                                        loading="savingInProcess" label="Create Company">
         </button-with-loading-indicator>
-        <button class="btn btn-default">Cancel</button>
+        <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
       </div>
       <a class="create-new-link" href="#">Create contact
         <span tooltip-placement="top"

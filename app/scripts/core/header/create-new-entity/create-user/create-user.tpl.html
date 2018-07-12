@@ -140,11 +140,15 @@
           </div>
     </div>
 
-    <div class="col-md-6 phone-number">
-      <!-- <input placeholder="Phone Number" type="text"> -->
-
-      <div ng-hide="isTechUser" phone-numbers-edit is-try-to-save="triedToSave"
-           custom-placeholder="'Primary contact phone'" no-add-more="true" country-code="{{ userCompanyCountryCode }}" ng-model="editUser.phoneNumbers"></div>
+    <div class="col-md-6 phone-number"
+         ng-hide="isTechUser"
+         phone-numbers-edit
+         is-try-to-save="triedToSave"
+         custom-placeholder="'Primary contact phone'"
+         no-add-more="true"
+         country-code="{{ userCompanyCountryCode }}"
+         ng-model="editUser.phoneNumbers"
+         is-restricted="true">
 
     </div>
   </div>
@@ -153,7 +157,7 @@
                                    ng-click="save(userForm)" loading="savingInProcess"
                                    label="Create User">
     </button-with-loading-indicator>
-    <button class="btn btn-default">Cancel</button>
+    <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
   </div>
 </div>
 
