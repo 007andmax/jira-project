@@ -29,11 +29,11 @@
     <button class="close-modal icn-sm icn-remove-old" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="ticket--content row">
-    <div class="col-md-12 ticket-subject">
+    <div class="col-md-12 ticket-subject" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
       <input type="text" class="form-validation"
              placeholder="Type ticket subject here"
              name="ticketSubject" ng-maxlength="300"
-             required="true" make-dirty-on-blur
+             ng-required="true" make-dirty-on-blur
              ng-model="ticket.subject">
     </div>
     <div class="col-md-12" style="position: relative">
