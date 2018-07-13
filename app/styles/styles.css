@@ -3937,6 +3937,11 @@ textarea.form-control {
   border-color: #fde9e9;
 }
 
+.has-error .form-validation {
+  background-color: #fff2f2;
+  border-color: #fde9e9;
+}
+
 .form-control.show-password + a.show-password-hit {
   position: absolute;
   right: 12px;

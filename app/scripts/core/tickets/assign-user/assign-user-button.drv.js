@@ -14,7 +14,8 @@
           ticketAssignedUserId: "=ticketAssignedUserId",
           currentUser: '=aubCurrentUser',
           usersCurrentCompany: "=users",
-          isBulkOperation: '=aubIsBulkOperation'
+          isBulkOperation: '=aubIsBulkOperation',
+          onUserAssign: '&onUserAssign',
         },
         link: function (scope) {
           scope.getUserName = $rootScope.getUserName;

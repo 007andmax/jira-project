@@ -11,11 +11,14 @@
   <div class="choose-file pull-left">
     <div class="select-file clearfix">
       <div class="btn btn-lg btn-primary pull-left" crop-image-button>
-        {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }} image
-      </div>
-      <span class="file-name pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
+        {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }}
+        <span class="file-name pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
         <a href="javascript:void(0)" restore-default-button>Restore Default</a>
       </span>
+      </div>
+    </div>
+    <div class="img-description">
+      Maximum size of 2MB. JPG, GIF, PNG
     </div>
   </div>
 </div>

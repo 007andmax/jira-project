@@ -66,7 +66,10 @@
 
         $scope.assignUserToTicket = function () {
 
+
           $scope.disabledAssignToButton = true;
+
+          if (!$scope.ticketId || !$scope.userToAssign.id) return;
 
           TicketsService.assignTo($scope.ticketId, $scope.userToAssign.id, function () {
 

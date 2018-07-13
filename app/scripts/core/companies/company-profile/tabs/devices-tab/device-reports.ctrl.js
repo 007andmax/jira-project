@@ -24,11 +24,11 @@
             }
 
             $scope.dto = {
-              manufacturer: currentReport.editableFields.manufacturer,
-              model: currentReport.editableFields.model,
-              serialNumber: currentReport.editableFields.serialNumber,
-              assetTag: currentReport.editableFields.assetTag,
-              installDate: currentReport.editableFields.installDate,
+              manufacturer: currentReport.system.manufacturer,
+              model: currentReport.system.model,
+              serialNumber: currentReport.system.serial_number,
+              assetTag: currentReport.system.asset_tag,
+              installDate: currentReport.system.install_date,
               warrantyDate: currentReport.editableFields.warrantyDate,
               officeAccount: currentReport.editableFields.officeAccount,
               password: currentReport.editableFields.password,

@@ -15,7 +15,12 @@
           countryCode: '@?',
           disabled: '@?',
           onLostFocus: '=?',
-          isDashboardStyle: '@?'
+          isDashboardStyle: '@?',
+          noAddMore: '<noAddMore',
+          customPlaceholder: '<customPlaceholder',
+          isRestricted: '<isRestricted',
+          showTypeSelector: '<showTypeSelector',
+          isRequired: '<isRequired'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {
@@ -27,7 +32,6 @@
           }
         },
         controller: function ($scope) {
-
           $scope.isPrefixValid = PhoneFormats.isPrefixValid;
           $scope.maximalAmountOfPhones = 2;
           $scope.phoneNumberPattern = /^\+?[0-9\s\-\+\(\)]{1,20}$/;
@@ -36,6 +40,10 @@
             OFFICE: 'Office',
             FAX: 'Fax'
           };
+
+          $scope.forms = {};
+
+          $scope.controller = this;
           $scope.dashboard = $scope.isDashboardStyle || false;
 
           $scope.$watch('phoneNumbers.length', function (count) {
@@ -43,6 +51,14 @@
               $scope.addPhoneNumber();
             }
           });
+
+          // $scope.$watch('phoneNumbers[0].number', function(val) {
+          //   $scope.getPhoneNumberError(val);
+          // })
+
+          $scope.$watch('isTryToSave', function(val) {
+            $scope.getPhoneNumberError($scope.phoneNumbers[0].number);
+          })
 
           $scope.addPhoneNumber = function () {
             $scope.phoneNumbers.push({
@@ -57,19 +73,28 @@
 
           $scope.getPhoneNumberError = function (number, form, index) {
             var required = false, invalid = false, minlength = false, maxlength = false;
+            // console.log($scope.forms.phoneNumbersForm, Object.assign({}, $scope.forms), 'PHONENUMBERSFORM')
+            if (!form) form = $scope.forms.phoneNumbersForm;
+            if (!index) index = 0;
+
+            if (!form) return;
             var formField = form['phoneNumber' + index];
             var error;
 
+            // console.log(form, $scope.isTryToSave, 'SDSFSJFKSDFSKJFSFSDFSF')
+
             if (form.$dirty || $scope.isTryToSave) {
               if (number) {
-                var prefixValid = $scope.isPrefixValid(number);
-                var isPrefixOnly = number.split(' ').length <= 1
+                var prefixValid = true || $scope.isPrefixValid(number);
+                var isPrefixOnly = false && number.split(' ').length <= 1
               }
+
+
 
               if ((number && !prefixValid) || formField.$error.pattern) {
                 invalid = true;
                 error = 'Invalid primary phone number';
-              } else if (($scope.isFirstRequired || (index === 0 && $scope.phoneNumbers.length > 1)) && (!number || (prefixValid && isPrefixOnly))) {
+              } else if (($scope.isFirstRequired) || (!number || (prefixValid && isPrefixOnly))) {
                 required = true;
                 error = 'Phone number is required';
               } else if (!isPrefixOnly && number && number.length < 5) {
@@ -80,6 +105,8 @@
                 error = 'Phone number is too long';
               }
             }
+
+            $scope.phoneNumbers[0].error = error;
 
             formField.$setValidity('invalid', !invalid);
             formField.$setValidity('required', !required);

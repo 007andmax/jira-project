@@ -4,12 +4,6 @@
   <div class="dropdown-menu checkbox-dropdown" uib-dropdown-menu stop-propagation="click" style="overflow: hidden;">
     <div class="list-container">
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;" ng-if="!$ctrl.previewMode">
-        <div class="checkbox-dd-item" ng-click="addNewTax()">
-          <label class="control checkbox ellipsis" onclick="return false">
-            Add new
-
-          </label>
-        </div>
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxList | orderBy: 'name'">
           <label class="control checkbox ellipsis">
@@ -22,12 +16,6 @@
       </div>
 
       <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;" ng-if="$ctrl.previewMode">
-        <div class="checkbox-dd-item" ng-click="addNewTax()">
-          <label class="control checkbox ellipsis" onclick="return false">
-            Add new
-
-          </label>
-        </div>
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxList | orderBy: 'name' track by tax.id" ng-show="$ctrl.selectedTaxes[tax.id]">
           <label class="control checkbox ellipsis" onclick="return false">

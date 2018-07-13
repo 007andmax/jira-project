@@ -29,8 +29,9 @@
           }
         }
 
-        $scope.saveEditService = function (form) {
-          if (form.$valid) {
+        $scope.saveEditService = function (form, isModal) {
+          console.log(form, form.$valid, "ASDADA")
+          if (form.$valid || isModal && form.editServiceName.$valid && form.editServiceRate.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
             saveService.taxIds = saveService.taxes.map(function (tax) {

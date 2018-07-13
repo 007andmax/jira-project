@@ -1,10 +1,10 @@
 <div class="form-group clearfix full-width" ng-form="timeZoneForm"
      ng-class="{'has-error': isShowingErrors(timeZoneForm, 'timeZone')}">
 
-  <label class="control-label"
+  <!-- <label class="control-label"
          ng-class="{'hide': isShowingErrors(timeZoneForm, 'timeZone')}">
     Timezone
-  </label>
+  </label> -->
 
   <div ng-class="{'hide': !isShowingErrors(timeZoneForm, 'timeZone')}">
     <label class="control-label">Please select a time zone</label>
@@ -14,7 +14,7 @@
 
     <input class="form-control form-control-time-zone has-dropdown" type="text"
            uib-dropdown-toggle aria-expanded="false" ng-model="address.locale"
-           name="timeZone" required autocomplete="off">
+           name="timeZone" required autocomplete="off" placeholder="Select Time Zone">
     <a ng-show="address.locale.length" href="javascript:void(0)" class="erase" aria-label="erase"
        ng-click="eraseInput($event)">
       <i class="icn-sm icn-remove-old"></i>

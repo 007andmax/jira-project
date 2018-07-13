@@ -10,24 +10,27 @@
         </a>
       </div>
       <!--<div ng-if="globalSearch.goBack.isEnabled">-->
-        <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"-->
-           <!--style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"-->
-           <!--tooltip-append-to-body="true" tooltip-placement="bottom" uib-tooltip="{{ globalSearch.goBack.tooltip }}">-->
-          <!--<i class="icn-sm icn-back-arrow"></i>-->
-        <!--</a>-->
+      <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"-->
+      <!--style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"-->
+      <!--tooltip-append-to-body="true" tooltip-placement="bottom" uib-tooltip="{{ globalSearch.goBack.tooltip }}">-->
+      <!--<i class="icn-sm icn-back-arrow"></i>-->
+      <!--</a>-->
       <!--</div>-->
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
           <span style="font-family: 'Graphik Light', sans-serif;">
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
           </span>
-        <span class="text-muted" ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen() ">
+        <span class="text-muted"
+              ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen() ">
           &nbsp;{{ globalSearch.count }}
         </span>
-        <span class="text-muted" ng-if="(isCompanyProfileTicketPageIsOpen() && !ticketsSharedState.filter.clientUserId && !ticketsSharedState.filter.techUserId) && !(companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] > globalSearch.count)">
+        <span class="text-muted"
+              ng-if="(isCompanyProfileTicketPageIsOpen() && !ticketsSharedState.filter.clientUserId && !ticketsSharedState.filter.techUserId) && !(companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] > globalSearch.count)">
           &nbsp;{{ companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] }}
         </span>
-        <span class="text-muted" ng-if="(isCompanyProfileTicketPageIsOpen() && (ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId)) || companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] > globalSearch.count">
+        <span class="text-muted"
+              ng-if="(isCompanyProfileTicketPageIsOpen() && (ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId)) || companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] > globalSearch.count">
           &nbsp;{{ globalSearch.count }}
         </span>
       </p>
@@ -191,11 +194,41 @@
     </div>
     <div class="">
       <div class="topNavbar-create">
-        <div class="btn btn-primary has-tooltip" ng-if="applicationLoaded" create-new-entity>
-          <div class="create-new-wrap">
-            <span class="create-new-label">Create New</span>
-            <i class="icn-sm icn-plus"></i>
+        <div uib-dropdown>
+          <div class="btn btn-primary has-tooltip" ng-if="applicationLoaded" uib-dropdown-toggle>
+            <div class="create-new-wrap">
+              <span class="create-new-label">Create New</span>
+              <i class="icn-sm icn-plus"></i>
+            </div>
           </div>
+
+          <ul class="dropdown-menu tag-list">
+            <li class="topNavbar-logout" create-new-entity="ticket">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>Ticket</span>
+              </a>
+            </li>
+            <li class="topNavbar-logout" create-new-entity="user">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>User</span>
+              </a>
+            </li>
+            <li class="topNavbar-logout" create-new-entity="company">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>Company</span>
+              </a>
+            </li>
+            <li class="topNavbar-logout" create-new-entity="service">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>Service</span>
+              </a>
+            </li>
+            <li class="topNavbar-logout" create-new-entity="product">
+              <a href="javascript:void(0)" class="ha-20-16">
+                <span>Product</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -239,8 +272,8 @@
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;

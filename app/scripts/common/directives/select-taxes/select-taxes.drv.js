@@ -55,11 +55,11 @@
     };
 
     $scope.$watch(function() {
-      return $rootScope.newTaxFromModal;
+      return $rootScope.newTaxIsSaved;
     }, function(val) {
       if (val) {
         // $ctrl.taxList.push(val);
-        $rootScope.newTaxFromModal = null;
+        $rootScope.newTaxIsSaved = null;
 
         $ctrl.updateEntityTaxList && $ctrl.updateEntityTaxList(val)
         $ctrl.selectedTaxes[val.id] = val;

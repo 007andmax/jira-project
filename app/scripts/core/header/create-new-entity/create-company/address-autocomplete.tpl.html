@@ -2,7 +2,8 @@
   <div class="form-group"
        ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
 
-    <label class="control-label"
+    <label ng-if="!onlyAddress"
+           class="control-label"
            ng-class="{'hide': ((addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid)}">
       Address
     </label>
@@ -11,20 +12,20 @@
          ng-class="{'hide': !((addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid)}">
 
       <label class="control-label" ng-message="required">
-        PLEASE ENTER THE COMPANY’S ADDRESS.
+        Please enter the company's address
       </label>
 
       <label class="control-label" ng-message="correct">
-        PLEASE SELECT ADDRESS FROM AUTOCOMPLETE RESULTS
+        Please select address from autocomplete results
       </label>
 
     </div>
 
-    <input class="form-control pointer" type="text" ng-model="model.address"
-           name="address" map-input required make-dirty-on-blur>
+    <input class="form-validation pointer" type="text" ng-model="model.address"
+           name="address" map-input make-dirty-on-blur>
   </div>
 
-  <div class="form-row clearfix">
+  <div class="form-row clearfix" ng-if="!onlyAddress">
     <div class="form-group"
          ng-class="{'has-error': isShowingErrors(addressForm, 'suiteNumber')}">
 
