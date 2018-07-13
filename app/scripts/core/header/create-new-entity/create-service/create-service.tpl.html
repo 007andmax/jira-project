@@ -56,14 +56,12 @@
     <button class="close-modal icn-sm icn-remove-old" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="service--content row">
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'primaryEmail')}">
-        <div ng-messages="companyForm.primaryEmail.$error"
-             ng-class="{'hide': !isShowingErrors(editServiceForm, 'primaryEmail')}">
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+        <div ng-messages="editServiceForm.editServiceName.$error"
+             ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
           <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
-          <div class="control-label" ng-message="required">Email address is required.</div>
-          <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-          <div class="control-label" ng-message="unique">This email already occupied.</div>
-          <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+          <div class="control-label" ng-message="required">Service name is required.</div>
+
         </div>
       <input placeholder="Service Name" type="text" class="form-validation" placeholder="Service Name"
            ng-model="editService.name"
@@ -72,7 +70,13 @@
            is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
            ng-maxlength="30" ng-minlength="3" >
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+      <div ng-messages="editServiceForm.editServiceName.$error"
+           ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceRate')}">
+        <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+        <div class="control-label" ng-message="required">Hour rate is required.</div>
+
+      </div>
       <input placeholder="Per Hour Rate" type="text" class="form-validation"
            ng-model="editService.rate" qt-to-fixed="2"
            required
