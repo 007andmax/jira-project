@@ -125,7 +125,7 @@
                execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
                ng-change="phoneNumbers[0].error = false"> -->
 
-        <input ng-if="isRequired" type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+        <input type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
                hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
                execute-when-outfocused="onLostFocus()"
                tabindex="20"
