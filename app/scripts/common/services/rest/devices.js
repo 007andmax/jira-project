@@ -259,7 +259,7 @@
                 if (device) {
                   device = _getNetScanByDeviceId(scannedDevices[newChange.data.companyId], device.id);
                   if (device && newChange.data.testResult.toUpperCase() === 'FAIL') {
-                    console.log('Im here causing error(Test Credentials)', newChange)
+                    // console.log('Im here causing error(Test Credentials)', newChange)
                     $rootScope.$broadcast('masterAgentWrongCredentials-' + device.deviceId);
                   }
                 }
@@ -817,11 +817,11 @@
               // console.log(console.log(newChange, '_____________________'))
 
               if (device) {
-                console.log(newChange, 'NEwCHANGE ACTION')
+                // console.log(newChange, 'NEwCHANGE ACTION')
                 var statusName = newChange.data.status;
                 var status = installationStatuses[statusName];
 
-                console.log(statusName, newChange.data.status, 'I FOUDD DEVICE')
+                // console.log(statusName, newChange.data.status, 'I FOUDD DEVICE')
 
                 if (statusName === 'MANAGED') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'managed')
