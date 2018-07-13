@@ -104,21 +104,29 @@
               //       name: cmpData
               //     }
               //   })
+
+              if (!$scope.ticketDetails.userCompanies) {
+                var ticket = TicketsService.getTicketFromStorage($scope.ticketDetails.id);
+                $scope.ticketDetails.userCompanies = ticket.userCompanies;
+              }
               $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
                   var cmpData = CompaniesService.getOneById(id);
+
+                  if (!cmpData) return {};
 
                   return {
                     id: id,
                     name: cmpData.name
                   }
+                }).filter(function(el) {
+                  return el.name;
                 })
+
             }
 
 
 
             $scope.setUserCompany = function(id) {
-              console.log(id, $scope.editedTicket)
-
               var ticket = $scope.ticketDetails;
 
               var editedTicket = {
