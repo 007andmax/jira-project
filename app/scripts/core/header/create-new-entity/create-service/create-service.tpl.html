@@ -53,22 +53,21 @@
      ng-controller="quicktech.editServiceCtrl">
   <div class="service--header">
     <h2>Create Service</h2>
-    <button class="close-modal icn-sm icn-remove-old" ng-click="closeWindowWithConfirm()"></button>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="service--content row">
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
-        <div ng-messages="editServiceForm.editServiceName.$error"
-             ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
-          <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
-          <div class="control-label" ng-message="required">Service name is required.</div>
+      <div ng-messages="editServiceForm.editServiceName.$error"
+           ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
+        <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+        <div class="control-label" ng-message="required">Service name is required.</div>
 
-        </div>
+      </div>
       <input placeholder="Service Name" type="text" class="form-validation" placeholder="Service Name"
-           ng-model="editService.name"
-           name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
-           required
-           is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
-           ng-maxlength="30" ng-minlength="3" >
+             ng-model="editService.name"
+             name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
+             requiredis-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
+             ng-maxlength="30" ng-minlength="3">
     </div>
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
       <div ng-messages="editServiceForm.editServiceName.$error"
@@ -78,21 +77,23 @@
 
       </div>
       <input placeholder="Per Hour Rate" type="text" class="form-validation"
-           ng-model="editService.rate" qt-to-fixed="2"
-           required
-           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+             ng-model="editService.rate" qt-to-fixed="2"
+             requiredname="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
     </div>
-    <div class="col-md-6"><select-taxes taxes="taxes" entity="editService"></select-taxes></div>
+    <div class="col-md-6 taxes">
+      <select-taxes taxes="taxes" entity="editService"></select-taxes>
+    </div>
     <div class="col-md-6">
 
-      <p  smart-dropdown-menu-position no-restricted="true"
-           dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+      <p style="margin-bottom: 0;" smart-dropdown-menu-position no-restricted="true"
+         dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
         Add new tax
       </p>
 
-      <div class="dropdown-menu dropdown-menu-custom" role="menu">
+      <div class="dropdown-menu dropdown-menu-custom new-tax" role="menu">
 
-        <div class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl" ng-required='false'>
+        <div class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl"
+             ng-required='false'>
           <div ng-messages="newTaxForm.name.$error"
                ng-class="{'hide': !isShowingErrors(newTaxForm, 'name')}">
 
@@ -138,16 +139,16 @@
               </span>Set as Default
           </label>
           <button class="btn btn-success" ng-click="saveNewTax(newTaxForm, true)"
-          custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">Add</button>
+                  custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">Add
+          </button>
         </div>
 
       </div>
 
 
-
     </div>
     <div class="col-md-12">
-      <label class="control checkbox">
+      <label class="control checkbox" style="margin-bottom: 15px;">
         <input type="checkbox" ng-model="editService.billable">
         <span class="control-indicator">
         </span> Make this service billable
@@ -219,8 +220,8 @@
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
