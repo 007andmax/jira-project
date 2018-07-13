@@ -108,13 +108,9 @@
               if (!$scope.ticketDetails.userCompanies) {
                 var ticket = TicketsService.getTicketFromStorage($scope.ticketDetails.id);
                 $scope.ticketDetails.userCompanies = ticket.userCompanies;
-                console.log("RESP", ticket);
               }
-              console.log('ehre everything is okay, ', $scope.ticketDetails, details)
               $scope.userCompanies = $scope.ticketDetails.userCompanies.map(function(id) {
-                  console.log(id, 'IDISHNKI')
                   var cmpData = CompaniesService.getOneById(id);
-                  console.log(cmpData, "CMPDATA")
 
                   if (!cmpData) return {};
 
@@ -125,14 +121,12 @@
                 }).filter(function(el) {
                   return el.name;
                 })
-              console.log('amnd here everything if fucked up, probably')
+
             }
 
 
 
             $scope.setUserCompany = function(id) {
-              console.log(id, $scope.editedTicket)
-
               var ticket = $scope.ticketDetails;
 
               var editedTicket = {
