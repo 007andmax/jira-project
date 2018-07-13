@@ -23,8 +23,6 @@
               currentReport.editableFields.warrantyDate = new Date(currentReport.editableFields.warrantyDate);
             }
 
-            console.log(currentReport.system, 'CURRENT REPORTL')
-
             $scope.dto = {
               manufacturer: currentReport.system.manufacturer,
               model: currentReport.system.model,
