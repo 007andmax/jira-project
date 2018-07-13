@@ -119,7 +119,20 @@
       $scope.saveChangeProduct = function (form) {
         $scope.validateCategory($scope.editProduct.category, form);
 
-        if (form.$valid) {
+        // form.newTaxForm.name.$setValidity('required', false);
+        // form.newTaxForm.rate.$setValidity('required', false);
+
+
+        function checkValid(form) {
+          if (form.editProductILC.$valid && form.editProductCategory.$valid && form.editProductDescription.$valid && form.editProductILC.$valid && form.editProductMfg.$valid && form.sale.$valid && form.cost.$valid) {
+            return true;
+          }
+
+          return false;
+        }
+        console.log(form, 'form')
+
+        if (form.$valid || checkValid(form)) {
 
           $scope.disabledSaveChangeButton = true;
 
