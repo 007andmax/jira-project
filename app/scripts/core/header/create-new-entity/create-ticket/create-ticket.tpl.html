@@ -171,11 +171,15 @@
                aria-haspopup="true">
       </div>
 
-      <div uib-dropdown-menu class="dropdown-assign-ticket dropdown-menu" style="width: auto; margin-top: -10px;"
-           stop-propagation="click" assign-user-button
+      <div uib-dropdown-menu
+           class="dropdown-assign-ticket dropdown-menu"
+           stop-propagation="click"
+           assign-user-button
            onUserAssign="'true'"
            aub-is-bulk-operation="true"
-           aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
+           aub-ticket-number="ticket.number"
+           users="usersCurrentCompany"
+           aub-current-user="currentUser"></div>
 
       <div typeahead-input-icon-sm="ticketAssignTo"></div>
 

@@ -19,7 +19,7 @@
 
           var refreshAssignTicket = function () {
 
-            if (typeof( inputElement.data('bs.tokenfield')) != 'undefined') {
+            if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
               inputElement.tokenfield('setTokens', []);
               inputElement.trigger('tokenfield:removedtoken');
             }
@@ -42,14 +42,14 @@
               if (query.indexOf('@') !== -1) {
                 query = '';
               }
-              var data = { suggestions: [] };
+              var data = {suggestions: []};
               var queryLowerCase = query.toLowerCase();
               for (var userIndex in users) {
                 if ($scope.filterAssignUser(users[userIndex])) {
                   var name = getUserName(users[userIndex]);
 
                   if (name.toLowerCase().indexOf(queryLowerCase) !== -1) {
-                    data.suggestions.push({ value: name, data: users[userIndex] })
+                    data.suggestions.push({value: name, data: users[userIndex]})
                   }
                 }
               }
@@ -77,7 +77,10 @@
               image.src = avatarUrl;
               return '<a href="javascript:void(0)" class=""> \
                         <img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"> \
-                        <span>' + result + ' “' + suggestion.data.primaryEmail + '”</span> \
+                        <span>\
+                          <p>' + result + '</p> \
+                          <p>' + suggestion.data.primaryEmail + '</p> \
+                        </span>\
                       </a>';
             },
             calculateWidth: function (result, suggestion) {
@@ -97,7 +100,7 @@
             },
             onSelect: function (selection) {
 
-              if (typeof( inputElement.data('bs.tokenfield')) != 'undefined') {
+              if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
                 inputElement.off('tokenfield:removedtoken');
                 inputElement.tokenfield('destroy');
               }
@@ -111,7 +114,7 @@
                 inputElement.focus();
 
 
-                $rootScope.$broadcast('userToAssignToTicket', { data: null })
+                $rootScope.$broadcast('userToAssignToTicket', {data: null})
               });
 
               inputElement.val('').tokenfield({
@@ -120,7 +123,7 @@
               }).tokenfield('createToken', selection.data.primaryEmail);
 
               // $rootScope.userToAssignToTicket = selection.data;
-              $rootScope.$broadcast('userToAssignToTicket', { data: selection.data })
+              $rootScope.$broadcast('userToAssignToTicket', {data: selection.data})
               inputElement.data('bs.tokenfield').$input.remove();
               // console.log('assign, here, look', selection.data)
               inputElement.val('').autocomplete('onValueChange', true);
@@ -129,7 +132,7 @@
 
               inputElement.data('autocomplete').container.focus();
               $scope.setUserToAssign(selection.data);
-              setTimeout(function() {
+              setTimeout(function () {
                 mainDropdown.removeClass('open');
               }, 500)
             },
@@ -150,7 +153,7 @@
 
           inputElement.data('autocomplete').container.on('keyup', function (e) {
             if (e.keyCode == 8) {
-              if (typeof( inputElement.data('bs.tokenfield')) != 'undefined') {
+              if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
                 inputElement.tokenfield('setTokens', []);
                 inputElement.trigger('tokenfield:removedtoken');
               }

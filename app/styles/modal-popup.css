@@ -786,6 +786,14 @@ _::-webkit-:not(:root:root),
   border-bottom: 1px solid #E5E7EB;
   outline: none;
   padding: 10px 0;
+}
+
+.service--content [class*='col-md-'],
+.user--content [class*='col-md-'],
+.ticket--content [class*='col-md-'],
+.company--content [class*='col-md-'],
+.add-tax-dropdown [class*='col-md-'],
+.product--content [class*='col-md-'] {
   margin-bottom: 20px;
 }
 
@@ -1240,7 +1248,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-menu li a:hover,
-.create-new .dropdown-menu li label:hover{
+.create-new .dropdown-menu li label:hover {
   background-color: #16A4FA;
   color: #fff;
 }
@@ -1250,7 +1258,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .control-label,
-.create-new .has-error .control-label{
+.create-new .has-error .control-label {
   position: absolute;
   font-size: 12px;
   color: red;
@@ -1273,6 +1281,89 @@ _::-webkit-:not(:root:root),
   height: 29px;
   font-size: 11px;
   text-transform: capitalize;
+}
+
+.create-new .dropdown-assign-ticket {
+  width: 290px !important;
+  max-height: 286px;
+  overflow: hidden;
+}
+
+.create-new .dropdown-assign-ticket .assign-ticket-header {
+  padding: 20px 10px 18px 20px;
+  width: 97%;
+}
+
+.create-new .dropdown-assign-ticket .assign-ticket-header .form-group {
+  position: relative;
+}
+
+.create-new .dropdown-assign-ticket .assign-ticket-header .form-group input {
+  height: 40px;
+  padding: 12px 10px 10px 35px;
+}
+
+.create-new .dropdown-assign-ticket .assign-ticket-header .form-group:before {
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: 8px;
+  background-image: url(../images/new-icons/search-user.png);
+}
+
+.create-new .dropdown-assign-ticket .users-list {
+  background-color: #fff;
+  max-height: 175px;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item {
+  transition: all .3s;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+.create-new .dropdown-assign-ticket .users-list::-webkit-scrollbar-thumb {
+  background-color: #16A4FA;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item p {
+  color: #4F5F79;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item a span p:last-child {
+  color: #9CA5B6;
+  font-size: 12px;
+  margin: -5px 0 0;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item:hover p {
+  color: #fff !important;
+}
+
+.create-new .avatar-26 {
+  width: 32px;
+  height: 32px;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item:hover {
+  background-color: #16A4FA;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item a {
+  padding: 6px 20px;
+}
+
+.create-new .dropdown-menu,
+.create-new .uib-dropdown-menu {
+  top: auto;
+  margin-top: 6px;
 }
 
 /*# sourceMappingURL=modal-popup.css.map */
