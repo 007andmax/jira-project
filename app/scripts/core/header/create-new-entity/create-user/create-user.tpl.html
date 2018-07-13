@@ -3,20 +3,21 @@
     <div>
       <h2>Create New User</h2>
     </div>
-    <button class="close-modal icn-sm icn-remove-old" ng-click="closeWindowWithConfirm()"></button>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="user--content row">
     <div edit-avatar class="col-xs-12" model="editUser" model-name="user"></div>
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(userForm, 'firstName')}">
-        <div ng-messages="userForm.firstName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'firstName')}">
-          <div class="control-label" ng-message="required">First name is required.</div>
-          <div class="control-label" ng-message="maxlength">First name is too large.</div>
-          <div class="control-label" ng-message="minlength">First name is too short.</div>
-        </div>
-        <input class="form-validation" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
-               name="firstName" placeholder="First Name" ng-model="editUser.firstName" ng-required="true" make-dirty-on-blur tabindex="1" hard-reset-pattern="namePattern">
+      <div ng-messages="userForm.firstName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'firstName')}">
+        <div class="control-label" ng-message="required">First name is required.</div>
+        <div class="control-label" ng-message="maxlength">First name is too large.</div>
+        <div class="control-label" ng-message="minlength">First name is too short.</div>
+      </div>
+      <input class="form-validation" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
+             name="firstName" placeholder="First Name" ng-model="editUser.firstName" ng-required="true"
+             make-dirty-on-blur tabindex="1" hard-reset-pattern="namePattern">
     </div>
-    <div class="col-md-6"  ng-class="{'has-error': isShowingErrors(userForm, 'lastName')}">
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(userForm, 'lastName')}">
       <div ng-messages="userForm.lastName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
         <div class="control-label" ng-message="maxlength">Last name is too large.</div>
         <div class="control-label" ng-message="required">Last name is required</div>
@@ -26,16 +27,16 @@
              required make-dirty-on-blur tabindex="2" placeholder="Last name" hard-reset-pattern="namePattern">
     </div>
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
-        <div ng-messages="userForm.primaryEmail.$error"
-             ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
-          <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
-          <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-          <div class="control-label" ng-message="unique">This email already occupied.</div>
-          <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
-        </div>
-        <input class="form-validation" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-               ng-model="editUser.primaryEmail" placeholder="Email" ng-pattern="emailPattern" ng-maxlength="128"
-               is-uniq-validation is-empty-valid="true" validation-func="validateUserEmail" tabindex="3">
+      <div ng-messages="userForm.primaryEmail.$error"
+           ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
+        <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+        <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+        <div class="control-label" ng-message="unique">This email already occupied.</div>
+        <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+      </div>
+      <input class="form-validation" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+             ng-model="editUser.primaryEmail" placeholder="Email" ng-pattern="emailPattern" ng-maxlength="128"
+             is-uniq-validation is-empty-valid="true" validation-func="validateUserEmail" tabindex="3">
 
     </div>
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(userForm, 'userCompany')}">
@@ -44,7 +45,8 @@
         Please select the company.
       </div>
       <input type="text" class="form-validation" name="userCompany"
-             value="{{userCompany.name || userCompany}}" placeholder="Select Company" disabled="disabled" ng-if="!isCreation">
+             value="{{userCompany.name || userCompany}}" placeholder="Select Company" disabled="disabled"
+             ng-if="!isCreation">
       <div uib-dropdown ng-show="isCreation" add-create-new-button="company">
         <input type="text" ng-model="userCompany" autocomplete="off" tabindex="5"
                smart-dropdown-menu-position
@@ -67,7 +69,8 @@
     <div class="col-md-6">
       <!-- <input placeholder="Contact Type" type="text"> -->
       <div uib-dropdown keyboard-nav="true">
-        <button class="form-control form-validation-dropdown account-type no-cursor has-dropdown"
+        <button style="padding: 0; height: 45px;text-align: left"
+                class="form-control form-validation-dropdown no-cursor has-dropdown"
                 uib-dropdown-toggle aria-expanded="true" tabindex="7">
           {{ roles[editUser.role] }}
         </button>
@@ -81,63 +84,64 @@
     </div>
     <div class="col-md-6">
       <!-- <input placeholder="Subscribe for" type="text"> -->
-        <!-- <label class="control-label">Subscribe to</label> -->
+      <!-- <label class="control-label">Subscribe to</label> -->
 
-          <div uib-dropdown keyboard-nav="true">
-            <button class="form-control has-dropdown subscribe-dropdown"
-                    tabindex="8" uib-dropdown-toggle aria-expanded="true"></button>
-            <i class="icn-sm report-caret-icon"></i>
-            <div class="subscribe-tokens">
-              <div class="invoice-update-token"
-                   ng-show="editUser.subscription.invoice">
-                Inv. Updates
-              </div>
-              <div class="ticket-update-token"
-                   ng-show="editUser.subscription.ticket">
-                Tkt Updates
-              </div>
-              <div class="ticket-update-token"
-                   ng-show="editUser.subscription.ticketManager">
-                Tkt Manager
-              </div>
-            </div>
-            <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
-              <li>
-                <a href="javascript:void(0)" qt-checkbox
-                   ng-model="editUser.subscription.ticket">
-                  <div class="clearfix">
-                    <label class="control checkbox pull-left">
-                      <input type="checkbox" ng-model="editUser.subscription.ticket">
-                      <span class="control-indicator"></span> Ticket Updates
-                    </label>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0)" qt-checkbox
-                   ng-model="editUser.subscription.ticketManager">
-                  <div class="clearfix">
-                    <label class="control checkbox pull-left">
-                      <input type="checkbox" ng-model="editUser.subscription.ticketManager">
-                      <span class="control-indicator"></span> Ticket Manager
-                    </label>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0)"
-                   qt-checkbox ng-model="editUser.subscription.invoice"
-                   custom-disabled="{{ !isCreation && isLastUserWithInvoiceSubscription(editUser) }}">
-                  <div class="clearfix">
-                    <label class="control checkbox pull-left">
-                      <input type="checkbox" ng-model="editUser.subscription.invoice">
-                      <span class="control-indicator"></span> Invoice Updates
-                    </label>
-                  </div>
-                </a>
-              </li>
-            </ul>
+      <div uib-dropdown keyboard-nav="true">
+        <button style="padding: 0;height: 45px;"
+                class="form-control has-dropdown subscribe-dropdown"
+                tabindex="8" uib-dropdown-toggle aria-expanded="true"></button>
+        <i class="icn-sm report-caret-icon"></i>
+        <div class="subscribe-tokens">
+          <div class="invoice-update-token"
+               ng-show="editUser.subscription.invoice">
+            Inv. Updates
           </div>
+          <div class="ticket-update-token"
+               ng-show="editUser.subscription.ticket">
+            Tkt Updates
+          </div>
+          <div class="ticket-update-token"
+               ng-show="editUser.subscription.ticketManager">
+            Tkt Manager
+          </div>
+        </div>
+        <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
+          <li>
+            <a href="javascript:void(0)" qt-checkbox
+               ng-model="editUser.subscription.ticket">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-model="editUser.subscription.ticket">
+                  <span class="control-indicator"></span> Ticket Updates
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" qt-checkbox
+               ng-model="editUser.subscription.ticketManager">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-model="editUser.subscription.ticketManager">
+                  <span class="control-indicator"></span> Ticket Manager
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+               qt-checkbox ng-model="editUser.subscription.invoice"
+               custom-disabled="{{ !isCreation && isLastUserWithInvoiceSubscription(editUser) }}">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-model="editUser.subscription.invoice">
+                  <span class="control-indicator"></span> Invoice Updates
+                </label>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="col-md-6 phone-number"
@@ -163,10 +167,17 @@
 </div>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

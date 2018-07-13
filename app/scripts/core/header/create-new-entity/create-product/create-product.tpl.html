@@ -188,7 +188,7 @@
 <div class="create-new" ng-controller="quicktech.createProductCtrl">
   <div class="product--header">
     <h2>Create Product</h2>
-    <button class="close-modal icn-sm icn-remove-old" ng-click="closeWindowWithConfirm()"></button>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="product--content row" ng-form="editProductForm">
     <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
@@ -255,17 +255,17 @@
              hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" placeholder="Price" tabindex="3">
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 taxes">
       <select-taxes taxes="taxes" entity="editProduct"></select-taxes>
     </div>
     <div class="col-md-6">
 
-      <p  smart-dropdown-menu-position no-restricted="true"
+      <p style="margin-bottom: 0; padding-bottom: 11px;"  smart-dropdown-menu-position no-restricted="true"
            dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
         Add new tax
       </p>
 
-      <div class="dropdown-menu dropdown-menu-custom" role="menu">
+      <div class="dropdown-menu dropdown-menu-custom new-tax" role="menu">
 
         <div class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl" ng-required='false'>
           <div ng-messages="newTaxForm.name.$error"
@@ -366,7 +366,7 @@
   </div>
 </div>
 <div class="launch-installer-model create-new">
-  <button class="close-modal icn-sm icn-remove-old"></button>
+  <button class="close-modal"></button>
   <div class="launch-installer-model--download">
     <h3>Download the app</h3>
     <p>Get our Windows Installer package to install the app on your system.
