@@ -1503,4 +1503,8 @@ _::-webkit-:not(:root:root),
   color: #fff;
 }
 
+.create-new .barcode-icon {
+  display: none;
+}
+
 /*# sourceMappingURL=modal-popup.css.map */
