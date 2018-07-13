@@ -31,6 +31,12 @@
         savedState = $scope.getLastSavedState('category');
       }
 
+      $scope.$watch(function() {
+        return $scope.editProduct.category;
+      }, function(val) {
+        console.log($scope.editProduct.category && !$scope.editProduct.category.id, "IS TRUE")
+      })
+
       var origin = savedState.item;
       if (savedState.type === 'product' && origin) {
         if (origin.name) {
@@ -112,7 +118,7 @@
 
       $scope.saveChangeProduct = function (form) {
         $scope.validateCategory($scope.editProduct.category, form);
-        
+
         if (form.$valid) {
 
           $scope.disabledSaveChangeButton = true;

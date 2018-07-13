@@ -59,12 +59,14 @@
       <div class="col-md-6" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
         <div ng-messages="companyForm.companyDomain.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
+          <label class="control-label" ng-message="required">Domain is required.</label>
           <label class="control-label" ng-message="unique">This domain already occupied.</label>
           <label class="control-label" ng-message="pattern">Please enter a valid domain.</label>
         </div>
         <input placeholder="Company Domain Name" type="text" ng-model="editCompany.domain"
                placeholder="yourcompany.com"
                name="companyDomain"
+               required
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
       <div class="col-md-6"
@@ -72,15 +74,18 @@
            no-add-more="true"
            phone-numbers-edit
            is-restricted="true"
+           is-required="true"
            country-code="{{editCompany.addresses[0].countryCode}}"
            ng-model="contact.phoneNumbers"
            custom-placeholder="'Primary contact phone'">
       </div>
       <div class="col-md-6"
+
            phone-numbers-edit no-add-more="true"
            ng-model="editCompany.addresses[0].phoneNumbers"
            is-try-to-save="triedToSave"
            is-restricted="true"
+           is-required="true"
            country-code="{{editCompany.addresses[0].countryCode}}"
            custom-placeholder="'Phone number'">
 
@@ -90,6 +95,7 @@
         <div ng-messages="companyForm.primaryEmail.$error"
              ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
           <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+          <div class="control-label" ng-message="required">Email address is required.</div>
           <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
           <div class="control-label" ng-message="unique">This email already occupied.</div>
           <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
@@ -97,6 +103,7 @@
         <input placeholder="Primary Contact Email" type="text" name="primaryEmail" aria-expanded="true"
                make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
                ng-maxlength="128"
+               required
                contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
                model-id="contact.id">
       </div>
@@ -187,12 +194,14 @@
       <div class="col-md-4" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
         <div ng-messages="companyForm.companyDomain.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
+          <label class="control-label" ng-message="required">Domain is required.</label>
           <label class="control-label" ng-message="unique">This domain already occupied.</label>
           <label class="control-label" ng-message="pattern">Please enter a valid domain.</label>
         </div>
         <input placeholder="Company Domain Name" type="text" ng-model="editCompany.domain"
-               placeholder="yourcompany.com"
                name="companyDomain"
+               ng-required="true"
+               required='true'
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
 
@@ -311,7 +320,7 @@
       <div class="col-md-4 location"
            ng-class="{'has-error': (companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid}">
 
-        <div ng-messages="companyForm.address.$error"
+        <!-- <div ng-messages="companyForm.address.$error"
              ng-class="{'hide': !((companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid)}">
 
           <label class="control-label" ng-message="required">
@@ -324,7 +333,11 @@
         </div>
 
         <input class="form-validation pointer" type="text" ng-model="editCompany.addresses[0].address"
-               name="address" map-input required make-dirty-on-blur placeholder="Location">
+               name="address" map-input required make-dirty-on-blur placeholder="Location"> -->
+
+        <div class="form-group" only-address="true" use-alternative-map="true"
+             address-autocomplete template-page="header/create-new-entity/create-company"
+             ng-model="editCompany.addresses[0]" show-validation-messages="triedToSave"></div>
 
         <a class="create-new-link" href="#" ng-click="addAnotherLocation()">Add More</a>
 
@@ -373,10 +386,11 @@
                placeholder="Zip" ng-maxlength="15">
       </div>
 
-      <div class="col-md-4" ng-class="{'has-error': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
+      <div class="col-md-4" ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
         <div ng-messages="companyForm.primaryEmail.$error"
              ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
           <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+          <div class="control-label" ng-message="required">Email address is required.</div>
           <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
           <div class="control-label" ng-message="unique">This email already occupied.</div>
           <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
@@ -384,6 +398,7 @@
         <input placeholder="Primary Contact Email" type="text" name="primaryEmail" aria-expanded="true"
                make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
                ng-maxlength="128"
+               required
                contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
                model-id="contact.id">
       </div>
@@ -421,7 +436,21 @@
 
       </div>
       <div class="col-md-12">
-        <p ng-click="showAddNote = !showAddNote">Add Note for Company</p>
+
+        <div uib-dropdown>
+          <p uib-dropdown-toggle>Add Note for Company</p>
+          <ul class="dropdown-menu dropdown-subscribe" style="min-height: 90px" stop-propagation="click">
+
+            <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
+                      rows="4" maxlength="{{ descriptionMaxLength }}" ng-trim="false" make-dirty-on-blur></textarea>
+
+            <div class="word-count">{{ descriptionMaxLength - editCompany.description.length }}</div>
+
+          </ul>
+        </div>
+
+
+        <!-- <p ng-click="showAddNote = !showAddNote">Add Note for Company</p>
 
         <div ng-if="showAddNote">
 
@@ -429,7 +458,7 @@
                     maxlength="{{ descriptionMaxLength }}" ng-trim="false" make-dirty-on-blur></textarea>
 
           <div class="word-count">{{ descriptionMaxLength - editCompany.description.length }}</div>
-        </div>
+        </div> -->
       </div>
 
       <div class="additional-locations">
@@ -437,7 +466,7 @@
           <div class="col-md-4 location"
                ng-class="{'has-error': (companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid}">
 
-            <div ng-messages="companyForm.address.$error"
+            <!-- <div ng-messages="companyForm.address.$error"
                  ng-class="{'hide': !((companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid)}">
 
               <label class="control-label" ng-message="required">
@@ -452,12 +481,21 @@
 
             <input class="form-validation pointer" type="text"
                    ng-model="editCompany.additionalAddresses[$index].address"
-                   name="address" map-input required make-dirty-on-blur placeholder="Location">
+                   name="address" map-input required make-dirty-on-blur placeholder="Location"> -->
+
+
+
+            <div only-address="true"
+                 address-autocomplete template-page="header/create-new-entity/create-company"
+                 ng-model="editCompany.addresses[0]" show-validation-messages="triedToSave"></div>
+
+
 
             <a class="create-new-link" href="#" ng-click="addAnotherLocation()">Add More</a>
 
 
           </div>
+          <!-- <div style="width: 100%; height: 250px; margin-top: 15px;" map alternative-map></div> -->
           <div class="col-md-2" style="padding-right: 5px;"
                ng-class="{'has-error': isShowingErrors(companyForm, 'suiteNumber')}">
             <!-- <input type="text" placeholder="Suite No"> -->

@@ -115,15 +115,24 @@
   </div>
 </div>
 
-<div ng-form="phoneNumbersForm" ng-if="isRestricted">
+<div ng-form="phoneNumbersForm" name="forms.phoneNumbersForm" ng-if="isRestricted">
       <div class="custom-phone-number" ng-class="{'has-error': phoneNumbers[0].error}">
         <div ng-if="phoneNumbers[0].error">
           <label class="control-label">{{ phoneNumbers[0].error }}</label>
         </div>
-        <input type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+        <!-- <input type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
                hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
                execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
-               ng-change="phoneNumbers[0].error = false">
+               ng-change="phoneNumbers[0].error = false"> -->
+
+        <input ng-if="isRequired" type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
+               execute-when-outfocused="onLostFocus()"
+               tabindex="20"
+               ng-disabled="$eval(disabled)"
+               required
+               ng-change="getPhoneNumberError(phoneNumbers[0].number, phoneNumbersForm, 0)">
+
       </div>
 
       <div ng-if="showTypeSelector" class="no-label" uib-dropdown keyboard-nav="true">

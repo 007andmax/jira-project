@@ -197,14 +197,13 @@
 
 
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}">
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}" ng-hide='(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length'>
       <!-- <input placeholder="Select Device" type="text"> -->
 
       <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
              smart-dropdown-menu-position
              ng-model="ticketAgent" name="ticketAgent"
              placeholder="Select Device"
-             ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
              uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
              qt-typeahead-async-show-on-focus
              custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
