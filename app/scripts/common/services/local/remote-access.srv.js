@@ -43,6 +43,10 @@
           function createRemoteAccess(realSessionId) {
             counter = 0;
             message = 'Wait until the connection is established... ';
+            var modalInstance = $uibModal.open(modalParams),
+              promise = $interval(function () {
+                counter++;
+              }, 1000);
 
             var remoteConnectPort = ConstantsService.getConstant('remote.connect.port', function (resp) {
                 remoteConnectPort = resp;
@@ -52,10 +56,7 @@
               }),
               url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
 
-            var modalInstance = $uibModal.open(modalParams),
-              promise = $interval(function () {
-                counter++;
-              }, 1000);
+
 
             modalInstance.result.then(angular.noop, function () {
               if (promise) {
