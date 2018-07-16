@@ -114,7 +114,7 @@
           </div>
           <button class="company-edit-icn" uib-tooltip="edit" tooltip-popup-delay="2000"
                   ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-                  create-new-entity="company" item="company" stop-propagation="click"></button>
+                  create-new-entity="company" is-edit="true" item="company" stop-propagation="click"></button>
           <button class="company-remove-icn" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
                   ng-click="archiveCompany()" uib-tooltip="Archive Company"
                   tooltip-placement="top" tooltip-append-to-body="true" tooltip-popup-delay="2000"></button>

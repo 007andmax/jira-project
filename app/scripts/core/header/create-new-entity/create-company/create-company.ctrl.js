@@ -41,6 +41,8 @@
           });
         }
 
+
+
         $scope.timeFormat = ['AM', 'PM'];
 
         var newServiceCounter = 0;
@@ -110,6 +112,10 @@
             }
 
             origin = angular.copy($scope.editCompany);
+
+            if ($scope.resolvedAdvanced) {
+              $scope.switchCompanyModal()
+            }
           });
 
         } else if (origin) {
@@ -153,7 +159,9 @@
           getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         }
-        $scope.editCompany.additionalAddresses = [];
+        // $scope.editCompany.additionalAddresses = [];
+
+
 
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !PermissionsService.isAllowed(action)) {
@@ -315,6 +323,8 @@
         $scope.save = function (form, isCreateContract) {
           $scope.isSaveFailed = false;
 
+          // console.log(form, form.$valid);
+
           if (form.$valid) {
             $scope.savingInProcess = true;
             $scope.saveWorkingHours();
@@ -322,9 +332,9 @@
 
             var editCompany = angular.copy($scope.editCompany);
 
-            editCompany.additionalAddresses.forEach(function(ad) {
-              editCompany.addresses.push(ad);
-            })
+            // editCompany.additionalAddresses.forEach(function(ad) {
+            //   editCompany.addresses.push(ad);
+            // })
 
             var contacts = editCompany.contacts,
               addresses = editCompany.addresses;
@@ -712,6 +722,8 @@
             return client.firstName;
           }
         };
+
+
       }
     ]);
 

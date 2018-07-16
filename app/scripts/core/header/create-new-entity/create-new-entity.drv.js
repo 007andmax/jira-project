@@ -8,7 +8,8 @@
         restrict: 'A',
         scope: {
           item: '=?',
-          categoryForModal: '=?'
+          categoryForModal: '=?',
+          isEdit: '<isEdit'
         },
         link: function ($scope, element, attrs) {
           var existingItem = false;
@@ -56,7 +57,10 @@
                     return attrs.createNewEntity;
                   },
                   resolvedExistedItem: existingItem,
-                  resolveExistingCategory: existingCategory
+                  resolveExistingCategory: existingCategory,
+                  resolvedAdvanced: function() {
+                    return $scope.isEdit ? true : false
+                  }
                 }
               });
 

@@ -1,6 +1,6 @@
 <!-- SHORT VERSION -->
 <div class="company-wrapper" ng-controller="quicktech.createCompanyCtrl" ng-form="companyForm">
-  <div class="create-new" ng-if="!longCreateCompany">
+  <div class="create-new" ng-if="!longCreateCompany && !resolvedAdvanced">
     <div class="company--header">
       <h2>Create Company</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
@@ -533,7 +533,7 @@
     <div class="company--footer company--footer-big">
       <div>
         <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
-                                       loading="savingInProcess" label="Create Company">
+                                       loading="savingInProcess" label="{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}">
         </button-with-loading-indicator>
         <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
       </div>

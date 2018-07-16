@@ -4,10 +4,10 @@
 
   angular.module("quicktech").controller("createNewEntityCtrl",
     ['$scope', 'resolvedExistedItem', 'resolveExistingCategory', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedUserId',
-      'resolvedOpenedTab', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
+      'resolvedOpenedTab', 'resolvedAdvanced', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
       'quicktech.common.services.UserConfirmationsService', '$rootScope',
       function ($scope, resolvedExistedItem, resolveExistingCategory, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedUserId,
-                resolvedOpenedTab, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService, $rootScope) {
+                resolvedOpenedTab, resolvedAdvanced, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService, $rootScope) {
 
         $scope.openedTab = resolvedOpenedTab || 'ticket';
 
@@ -44,6 +44,7 @@
         $scope.resolvedDeviceId = resolvedDeviceId;
         $scope.resolvedCompanyId = resolvedCompanyId;
         $scope.resolvedCreatedUserId = resolvedUserId;
+        $scope.resolvedAdvanced = resolvedAdvanced;
         $scope.closeWindow = $uibModalInstance.dismiss;
         $scope.closeWindowWithoutConfirmation = function(){
           alreadyPushCloseButton = true;
