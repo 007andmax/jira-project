@@ -188,7 +188,7 @@
       </div>
 
       <div class="col-md-4 time-zone">
-        <time-zone-autocomplete address="editCompany.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
+        <time-zone-autocomplete qt-required="false" address="editCompany.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
       </div>
 
       <div class="col-md-4" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
@@ -537,7 +537,7 @@
         </button-with-loading-indicator>
         <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
       </div>
-      <a class="create-new-link" href="#">Create contact
+      <a class="create-new-link" href="#" ng-click="save(companyForm, true)">Create contact
         <span tooltip-placement="top"
               uib-tooltip="Create custom hourly rates or Service contract for this customer Tickets">
           ?
