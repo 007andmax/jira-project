@@ -75,7 +75,11 @@
               $rootScope.currentRemoteSessionId = realSessionId;
             });
 
-            window.open(url, '_self');
+            // window.open(url, '_self');
+
+            $scope.launchApp = function() {
+              window.open(url, '_self');
+            }
           }
 
         }
@@ -100,5 +104,3 @@
       }]);
 
 })(window, jQuery);
-
-

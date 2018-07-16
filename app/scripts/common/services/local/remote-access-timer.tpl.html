@@ -1,4 +1,4 @@
-<div class="modal-header remote-access-header">
+<!-- <div class="modal-header remote-access-header">
   <span class="title">Remote Access</span>
   <div class="pull-right" ng-click="close()" style="cursor: pointer;"><i class="icn-sm icn-remove-old"></i></div>
 </div>
@@ -24,4 +24,20 @@
 </div>
 <div class="modal-footer">
   <div class="btn btn-lg btn-primary" ng-if="getCounter() >= 30" ng-click="download()">Download Viewer</div>
+</div> -->
+
+<div class="launch-installer-model create-new">
+  <button class="close-modal"></button>
+  <div class="launch-installer-model--download">
+    <h3>Download the app</h3>
+    <p>Get our Windows Installer package to install the app on your system.
+      The app will be available to join future sessions instantly.</p>
+    <button class="btn btn-primary" ng-if="getCounter() >= 30" ng-click="download()">Download App</button>
+  </div>
+  <div class="launch-installer-model--launch">
+    <h3>Launch the Downloaded App</h3>
+    <p>Launch our app already installed on your device. If not installed, we will attempt the next option after 2
+      seconds have elapsed.</p>
+    <button class="btn btn-primary" ng-click="launchApp()">Launch App</button>
+  </div>
 </div>
