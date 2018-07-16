@@ -155,7 +155,9 @@
           getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         }
-        $scope.editCompany.additionalAddresses = [];
+
+        // $scope.editCompany.additionalAddresses = [];
+        // error when open edit company, additionalAddresses of undefined;
 
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !PermissionsService.isAllowed(action)) {
