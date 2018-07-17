@@ -92,11 +92,14 @@
              ng-style="{'border-left-color': tagColors[companiesColors[company.clientType]].backgroundColor}">
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-                 create-new-entity="company" item="company" stop-propagation="click"></div>
+                 create-new-entity="company" is-edit="true" item="company" stop-propagation="click"></div>
             <i class="icon-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
+            <i style="position: absolute; top: 25px; right: -8px;"
+               class="company-remove-icn"
+               ng-if="company.id === exampleCompanyId && PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
+               ng-click="removeExampleCompany($event)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
-
             <p class="ellipsis name"
                uib-tooltip="{{ company.name }}" tooltip-placement="bottom" trimmed-tooltip-checker="company.name">
             </p>

@@ -218,7 +218,18 @@
                 values: ['COMPLETED']
               }]
             }]
-          }
+          },
+          EXAMPLE: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'number',
+                operator: 'EQ',
+                values: ['0000']
+              }]
+            }]
+          },
+
         };
       }
 
@@ -229,7 +240,6 @@
 
           var query = queries[listType.toUpperCase()];
 
-          console.log('IM FETCHING TICKETS')
 
           if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId) {
             var groupedQuery = {

@@ -482,6 +482,15 @@
       }
     }
 
+    function deleteExample(callback) {
+       var future = $http({
+         url: '/company/removeExampleCompany',
+         method: 'POST',
+       });
+
+       Utils.handleCallback(future, callback);
+    }
+
     function saveCompanySettingsDto(companyDto, callback) {
 
       if (!companyDto) throw 'companyDto is required!';
@@ -836,6 +845,7 @@
       archive: archive,
       dearchive: dearchive,
       save: save,
+      deleteExample: deleteExample,
       saveForCompanyProfile: saveForCompanyProfile,
       saveCompanySettingsDto: saveCompanySettingsDto,
       getCompanyForSettingPage: getCompanyForSettingPage,

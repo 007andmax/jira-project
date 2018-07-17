@@ -5,10 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'ColorsService', 'TagsService',
+      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'ColorsService', 'TagsService', 'TicketsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 SharedStateService, DevicesService, PermissionsService, localStorageService, UserConfirmationsService,
-                UserNotificationService, ColorsService, TagsService) {
+                UserNotificationService, ColorsService, TagsService, TicketsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -18,6 +18,12 @@
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
         }
+
+        TicketsService.getList('EXAMPLE', null, null, function(resp) {
+          var ticket = resp[0];
+          if (!ticket) return;
+          $scope.exampleCompanyId = ticket.companyId;
+        })
 
         $scope.headerSharedState = headerSharedState;
 
@@ -42,6 +48,13 @@
           field: 'name',
           reverse: false
         };
+
+        $scope.removeExampleCompany = function(e) {
+          e.stopPropagation();
+          CompaniesService.deleteExample(function(resp) {
+            console.log(resp)
+          })
+        }
 
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
