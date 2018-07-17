@@ -33,6 +33,10 @@
           });
         }
 
+        // $scope.$watch('editUser', function(val) {
+        //   console.log(val)
+        // }, true)
+
         if ($scope.resolvedCompanyId) {
           $timeout(function () {
             var company = CompaniesService.getOneById($scope.resolvedCompanyId);

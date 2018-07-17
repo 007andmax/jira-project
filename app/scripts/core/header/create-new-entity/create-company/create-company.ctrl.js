@@ -43,6 +43,11 @@
           });
         }
 
+        // $scope.$watch('editCompany', function(val) {
+        //   console.log(val)
+        // }, true)
+
+
         $scope.timeFormat = ['AM', 'PM'];
 
         var newServiceCounter = 0;

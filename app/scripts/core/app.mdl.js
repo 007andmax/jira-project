@@ -377,6 +377,8 @@
           if (!(user && user.avatar)) {
             return '/users/default/image' + '.jpg'
           }
+
+          // console.log('/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : ''), 'USER AVATAR')
           return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
         };
 
@@ -400,6 +402,8 @@
           }else if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
             return '/company/default/logo' + '.jpg'
           }
+
+          // console.log('/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : ''), 'COMPANY AVATAR')
           return '/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
         };
 

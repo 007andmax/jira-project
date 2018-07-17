@@ -153,7 +153,7 @@
             }
           }
 
-          if (!isFilter) {
+          if (!isFilter && !$scope.companyProfilePasswords.length) {
             return false;
           }
 
