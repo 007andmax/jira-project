@@ -381,13 +381,10 @@
           if (user.id) {
             return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
           } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-            return '/file/' + (user.avatar && user.avatar.origin && user.avatar.origin.id) + '.jpg';
-
+            return '/file/' + (user.avatar.origin.id) + '.jpg';
           } else {
-            return '/users/' + ('default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')
+            return '/users/default/image' + '.jpg'
           }
-          // console.log('/users/' + (user.avatar && user.avatar.origin && user.avatar.origin.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : ''))
-
         };
 
         $rootScope.getContactAvatarUrl = function (contact) {
