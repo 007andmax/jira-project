@@ -31,8 +31,6 @@
 
 
 
-
-
         $scope.addAnotherLocation = function() {
           $scope.editCompany.additionalAddresses.push({
             phoneNumbers: [],
@@ -43,9 +41,6 @@
           });
         }
 
-        // $scope.$watch('editCompany', function(val) {
-        //   console.log(val)
-        // }, true)
 
 
         $scope.timeFormat = ['AM', 'PM'];
@@ -117,6 +112,10 @@
             }
 
             origin = angular.copy($scope.editCompany);
+
+            if ($scope.resolvedAdvanced) {
+              $scope.switchCompanyModal()
+            }
           });
 
         } else if (origin) {
@@ -160,9 +159,9 @@
           getCorrectWorkingTime();
           $scope.contact = $scope.editCompany.contacts[0];
         }
-
         // $scope.editCompany.additionalAddresses = [];
-        // error when open edit company, additionalAddresses of undefined;
+
+
 
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !PermissionsService.isAllowed(action)) {
@@ -321,84 +320,21 @@
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
-        // $scope.openAgreementsModal = function (contractType, editMode, agreementId, preSetupCompany) {
-        //   var companyForReadOnlyMode = {};
-        //   if (agreementId) {
-        //     AgreementsService.getAgreement(agreementId, function (resp) {
-        //       //console.log(resp);
-        //       companyForReadOnlyMode = resp;
-        //       openModal(contractType, editMode, companyForReadOnlyMode)
-        //     })
-        //   } else {
-        //     openModal(contractType, editMode, companyForReadOnlyMode)
-        //   }
-        //
-        //   function openModal(contractType, editMode, companyForReadOnlyMode) {
-        //     if($scope.allowToOpenAgreementModal) {
-        //       var template;
-        //       switch (contractType) {
-        //         case('CREATE_NEW'):
-        //           template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
-        //           break;
-        //         case('HOURLY'):
-        //           template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
-        //           break;
-        //         case('BLOCK_TIME'):
-        //           template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
-        //           break;
-        //         case('SERVICE_CONTRACT'):
-        //           template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
-        //           break;
-        //         default:
-        //           console.log('no contract type selected');
-        //       }
-        //       $scope.allowToOpenAgreementModal = false;
-        //       var modalInstance = $uibModal.open({
-        //         templateUrl: template,
-        //         animation: true,
-        //         backdrop: false,
-        //         size: 'md',
-        //         controller: 'serviceAgreementsModalCtrl',
-        //         windowClass: 'create-popup margin-top-modal-dialog',
-        //         resolve: {
-        //           companyData: {
-        //             editMode: editMode,
-        //             companyForReadOnlyMode: companyForReadOnlyMode,
-        //             contractType: contractType,
-        //             preSetupCompany: preSetupCompany
-        //           }
-        //         }
-        //
-        //       });
-        //
-        //       modalInstance.opened.then(function () {
-        //         $scope.allowToOpenAgreementModal = true;
-        //       });
-        //     }
-        //
-        //   }
-        //
-        //
-        // };
-        //
-        // $scope.createContractAgreement = function() {
-        //   // openAgreementsModal('CREATE_NEW', true, null);
-        // }
-
         $scope.save = function (form, isCreateContract) {
           $scope.isSaveFailed = false;
 
-          if (form.$valid) {
+          console.log(form, form.$valid, "VALID");
 
+          if (form.$valid) {
             $scope.savingInProcess = true;
             $scope.saveWorkingHours();
 
 
             var editCompany = angular.copy($scope.editCompany);
 
-            editCompany.additionalAddresses.forEach(function(ad) {
-              editCompany.addresses.push(ad);
-            })
+            // editCompany.additionalAddresses.forEach(function(ad) {
+            //   editCompany.addresses.push(ad);
+            // })
 
             var contacts = editCompany.contacts,
               addresses = editCompany.addresses;
@@ -460,9 +396,9 @@
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
                 if (!$scope.savedState.items.length) {
-                  if(isCreateContract) {
+                  if(isCreateContract && $scope.selectedContractType) {
                     $scope.closeWindowWithoutConfirmation();
-                    openCreateContractModal(editCompany, 'CREATE_NEW', resp);
+                    openCreateContractModal(editCompany, $scope.selectedContractType, resp);
                   } else {
                     $scope.closeWindow();
                     openCreateContractModal(editCompany)
@@ -507,9 +443,6 @@
         function openCreateContractModal(companyInfo, contractType, companyId) {
           var template;
           switch (contractType) {
-            case('CREATE_NEW'):
-              template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
-              break;
             case('HOURLY'):
               template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
@@ -521,11 +454,6 @@
               break;
             default:
               console.log('no contract type selected');
-          }
-
-          companyInfo.companyId = companyId;
-          companyInfo.company = {
-            id: companyId
           }
           $uibModal.open({
             templateUrl: template,
@@ -539,8 +467,7 @@
                 companyInfo: companyInfo,
                 companyId: companyId,
                 type:  contractType,
-                editMode: true,
-                preSetupCompany: companyInfo
+                editMode: true
               }
               // companyInfo: companyInfo,
               // companyId: companyId,
@@ -795,6 +722,8 @@
             return client.firstName;
           }
         };
+
+
       }
     ]);
 

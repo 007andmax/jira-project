@@ -378,8 +378,16 @@
             return '/users/default/image' + '.jpg'
           }
 
-          // console.log('/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : ''), 'USER AVATAR')
-          return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
+          if (user.id) {
+            return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
+          } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+            return '/file/' + (user.avatar && user.avatar.origin && user.avatar.origin.id) + '.jpg';
+
+          } else {
+            return '/users/' + ('default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')
+          }
+          // console.log('/users/' + (user.avatar && user.avatar.origin && user.avatar.origin.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : ''))
+
         };
 
         $rootScope.getContactAvatarUrl = function (contact) {
@@ -402,8 +410,6 @@
           }else if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
             return '/company/default/logo' + '.jpg'
           }
-
-          // console.log('/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : ''), 'COMPANY AVATAR')
           return '/file/' + company.logo.cropped.id + '.jpg?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
         };
 
