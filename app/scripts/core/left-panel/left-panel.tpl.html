@@ -894,9 +894,9 @@
           <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
         </div>
         <div class="left-panel-title font-medium">
-          contact type
+          Title
         </div>
-        <div class="center-category__category" ng-click="filterUsers('managers')"
+        <!-- <div class="center-category__category" ng-click="filterUsers('title', 'User from email')"
              ng-class="{'active': usersSharedState.filter.isContact}">
           Managers
           <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
@@ -939,7 +939,43 @@
               </li>
             </ul>
           </div>
+        </div> -->
+        <div style='position: relative'>
+          <input style="padding-right: 50px;" type="text" class="has-dropdown form-validation"
+                 ng-maxlength="100"
+                 autocomplete="off"
+                 ng-model="filterDesignation"
+                 name="designation"
+                 typeahead-editable="true"
+                 placeholder='Title'
+                 typeahead-on-select="filterUsers('title', filterDesignation)"
+                 ng-change="isTitleFilterTyped = true"
+                 tabindex="4"
+                 uib-typeahead="title for title in allTitles | filter: $viewValue"
+                 qt-typeahead-show-on-focus
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                 hard-reset-pattern="newCategoryNamePattern">
+
+          <div class="product-actions category-caret" ng-style="(true) ? { 'display': 'block' } : ''">
+
+            <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+               ng-show="isTitleFilterTyped && filterDesignation"
+               ng-click="filterUsers('title', filterDesignation)">
+              <i class="icn-sm icn-product-save"></i>
+            </a>
+
+            <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+               ng-show="isTitleFilterTyped && filterDesignation"
+               ng-click="filterDesignation = ''; filterUsers()">
+              <i class="icn-sm icn-product-cancel"></i>
+            </a>
+
+          </div>
         </div>
+
+
 
 
         <div class="left-panel-hide-filter">

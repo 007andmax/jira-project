@@ -109,6 +109,10 @@
             result = result && clientType && clientType.toLowerCase() === 'client';
           }
 
+          if (filter.designation) {
+            result = filter.designation === value.designation
+          }
+
           // if(filter.isArchived) {
           //   result = result && !value.userEnabled;
           //   console.log(result && !value.userEnabled);

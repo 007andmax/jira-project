@@ -46,11 +46,11 @@
         </span>
           </div>
 
-          <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('type')">
+          <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('designation')">
         <span class="sort-span">
-          Type
+          Title
           <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'type'}"></i>
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'designation'}"></i>
         </span>
           </div>
 
@@ -225,7 +225,7 @@
         </div>
 
         <div class="col-lg-1 col-xs-1 type-col">
-          <div class="user-account-type" uib-dropdown>
+          <!-- <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
               <span> {{getUserType(user) === 'MANAGER' ? 'Manager' : 'Standard user'}}</span>
@@ -247,6 +247,9 @@
 
             </ul>
 
+          </div> -->
+          <div class="user-account-type">
+            <span> {{user.designation}}</span>
           </div>
         </div>
 

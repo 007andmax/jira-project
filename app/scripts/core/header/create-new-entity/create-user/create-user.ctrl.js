@@ -51,12 +51,6 @@
             return acc;
           }, []);
 
-        console.log($scope.allTitles)
-
-        $scope.con = function(arg) {
-          console.log('HUIHUIHUI', arg)
-        }
-
         $scope.showError = function() {
           $scope.isErrorShown = true;
         }

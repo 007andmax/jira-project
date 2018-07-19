@@ -766,10 +766,39 @@
           clearFilter(usersSharedState.filter);
         };
 
+        $scope.allUsers = UsersService.getAllUsers();
+
+        $scope.allTitles = $scope.allUsers
+          .map(function(user) {
+            return user.designation;
+          })
+          .reduce(function(acc, title) {
+            if (acc.indexOf(title) === -1 && title) {
+              acc.push(title);
+            }
+
+            return acc;
+          }, []);
+
+
+        $scope.isTitleFilterTyped = true
+
+        $scope.$watch('filterDesignation', function(val) {
+          console.log(val, $scope.isTitleFilterTyped)
+        });
+
+
         $scope.filterUsers = function (filter, value) {
-          var sharedFilter = usersSharedState.filter;
+          var sharedFilter = usersSharedState.filter
 
           switch (filter) {
+            case 'title':
+              if (value) {
+                $scope.isTitleFilterTyped = false;
+                clearFilter(sharedFilter);
+                sharedFilter.designation = value;
+              }
+
             case 'managers':
               sharedFilter.isStandard = '';
               sharedFilter.isContact = true;
