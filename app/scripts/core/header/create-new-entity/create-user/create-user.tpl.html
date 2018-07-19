@@ -57,14 +57,50 @@
         <div class="input-top-4" typeahead-input-icon="userCompany"></div>
       </div>
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(userForm, 'designation')}">
-      <div ng-messages="userForm.designation.$error"
-           ng-class="{'hide': !isShowingErrors(userForm, 'designation')}">
-        <div class="control-label" ng-message="maxlength">Title is too large</div>
-        <div class="control-label" ng-message="minlength">Title is too short</div>
+    <div class="col-md-6" ng-class="{'has-error': isErrorShown && editUser.designation}">
+      <div ng-class="{'hide': !isErrorShown || (isErrorShown && !editUser.designation)}">
+        <div class="control-label">You have to save your title or choose it from the list</div>
+        <!-- <div class="control-label" ng-message="minlength">Title is too short</div> -->
       </div>
-      <input class="form-validation" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
-             ng-model="editUser.designation" ng-minlength="3" placeholder="Title" ng-maxlength="30" tabindex="6">
+      <!-- <input class="form-validation" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
+             ng-model="editUser.designation" ng-minlength="3" placeholder="Title" ng-maxlength="30" tabindex="6"> -->
+
+             <!-- typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
+             ng-change="validateCategory(editProduct.category, editProductForm)" -->
+              <!-- | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name' -->
+
+      <input style="padding-right: 50px;" type="text" class="has-dropdown form-validation"
+             ng-maxlength="100"
+             autocomplete="off"
+             ng-model="editUser.designation"
+             name="designation"
+             typeahead-editable="true"
+             placeholder='Title'
+             typeahead-on-select="saveTitle()"
+             ng-change="showError()"
+             tabindex="4"
+             uib-typeahead="title for title in allTitles | filter: $viewValue"
+             qt-typeahead-show-on-focus
+             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+             hard-reset-pattern="newCategoryNamePattern">
+
+      <div class="product-actions category-caret" ng-style="(editUser.designation && isErrorShown) ? { 'display': 'block' } : ''">
+
+        <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+           ng-show="editUser.designation && isErrorShown"
+           ng-click="saveTitle()">
+          <i class="icn-sm icn-product-save"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+           ng-show="editUser.designation && isErrorShown"
+           ng-click="editUser.designation = ''">
+          <i class="icn-sm icn-product-cancel"></i>
+        </a>
+
+      </div>
     </div>
     <div class="col-md-6">
       <!-- <input placeholder="Contact Type" type="text"> -->

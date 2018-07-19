@@ -33,9 +33,41 @@
           });
         }
 
-        $scope.$watch('editUser', function(val) {
-          console.log(val)
-        }, true)
+        // $scope.$watch('editUser', function(val) {
+        //   console.log(val)
+        // }, true)
+
+        $scope.allUsers = UsersService.getAllUsers();
+
+        $scope.allTitles = $scope.allUsers
+          .map(function(user) {
+            return user.designation;
+          })
+          .reduce(function(acc, title) {
+            if (acc.indexOf(title) === -1 && title) {
+              acc.push(title);
+            }
+
+            return acc;
+          }, []);
+
+        console.log($scope.allTitles)
+
+        $scope.con = function(arg) {
+          console.log('HUIHUIHUI', arg)
+        }
+
+        $scope.showError = function() {
+          $scope.isErrorShown = true;
+        }
+
+        $scope.saveTitle = function() {
+          $scope.isErrorShown = false;
+        }
+
+
+
+
 
         if ($scope.resolvedCompanyId) {
           $timeout(function () {
