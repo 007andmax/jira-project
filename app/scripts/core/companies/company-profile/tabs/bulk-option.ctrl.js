@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.bulkOptionCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService) {
+    ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$uibModal',
+      function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal) {
 
         $scope.$watch('companyProfileHeader', function (val) {
 
@@ -92,6 +92,34 @@
         $scope.restartDevices = function () {
           DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesAgentsId, 'reboot');
         };
+
+        $scope.turnOff = function(action) {
+          console.log(action)
+          var method;
+
+          // if (action === 'restart') {
+          //   method =
+          // }
+          $scope.turnOffAction = action;
+          $uibModal.open({
+            templateUrl: '/html/scripts/core/companies/company-profile/tabs/confirmModal.html',
+            animation: true,
+            backdrop: true,
+            size: 'sm',
+            controller: 'quicktech.core.companies.confirmModalCtrl',
+            resolve: {
+              action: function() {
+                return action;
+              },
+              devices: function() {
+                return $scope.selectDevicesIds
+              },
+              companyId: function() {
+                return $scope.company.id;
+              }
+            }
+          });
+        }
 
         $scope.getDeviceReport = function (agentIds) {
           DevicesService.getDeviceReports(agentIds, $scope.company.id, function (resp) {

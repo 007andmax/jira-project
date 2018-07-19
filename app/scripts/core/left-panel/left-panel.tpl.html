@@ -956,7 +956,7 @@
                  custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                  hard-reset-pattern="newCategoryNamePattern">
 
-          <div class="product-actions category-caret" ng-style="(true) ? { 'display': 'block' } : ''">
+          <div class="product-actions category-caret" ng-style="((isTitleFilterTyped && filterDesignation) || sharedFilter.designation) ? { 'display': 'block' } : ''">
 
             <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
                tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
@@ -967,7 +967,7 @@
 
             <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
                tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-               ng-show="isTitleFilterTyped && filterDesignation"
+               ng-show="(isTitleFilterTyped && filterDesignation) || sharedFilter.designation"
                ng-click="filterDesignation = ''; filterUsers()">
               <i class="icn-sm icn-product-cancel"></i>
             </a>

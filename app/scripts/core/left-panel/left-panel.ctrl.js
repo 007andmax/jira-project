@@ -791,6 +791,8 @@
         $scope.filterUsers = function (filter, value) {
           var sharedFilter = usersSharedState.filter
 
+          $scope.sharedFilter = sharedFilter;
+
           switch (filter) {
             case 'title':
               if (value) {

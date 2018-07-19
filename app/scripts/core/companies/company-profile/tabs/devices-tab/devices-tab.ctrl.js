@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService', 'CompaniesService',
-      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService', '$interval',
+      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService', '$interval', '$uibModal',
       function ($scope, DevicesService, RemoteAccessService, ConstantsService, CompaniesService, SharedStateService,
-                $rootScope, UserConfirmationsService, $interval) {
+                $rootScope, UserConfirmationsService, $interval, $uibModal) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var constVersion = ConstantsService.getConstant('rest.server.agent.version', function (resp) {
@@ -146,6 +146,31 @@
         $scope.shutdown = function () {
           DevicesService.sendPowerAction($scope.company.id, $scope.agent.agentId, 'shutdown');
         };
+
+        $scope.turnOffDevice = function(action) {
+          var method;
+
+          console.log($scope.agent)
+          $uibModal.open({
+            templateUrl: '/html/scripts/core/companies/company-profile/tabs/confirmModal.html',
+            animation: true,
+            backdrop: true,
+            size: 'sm',
+            controller: 'quicktech.core.companies.confirmModalCtrl',
+            resolve: {
+              action: function() {
+                return action;
+              },
+
+              devices: function() {
+                return $scope.agent.id
+              },
+              companyId: function() {
+                return $scope.company.id
+              }
+            }
+          });
+        }
 
         $scope.remove = function () {
           var confirmMesage = 'Do you want to remove ' + ($scope.agent.hostName || $scope.agent.ip) + ' device?';
