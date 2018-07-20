@@ -2754,6 +2754,10 @@ Devices tab
   display: none;
 }
 
+.product-actions.centered {
+  padding-right: 10px;
+}
+
 .qt-product-edit .product-actions {
   top: 10px;
   right: 15px;

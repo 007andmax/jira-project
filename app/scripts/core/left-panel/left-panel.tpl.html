@@ -940,40 +940,43 @@
             </ul>
           </div>
         </div> -->
-        <div style='position: relative'>
-          <input style="padding-right: 50px;" type="text" class="has-dropdown form-validation"
-                 ng-maxlength="100"
-                 autocomplete="off"
-                 ng-model="filterDesignation"
-                 name="designation"
-                 typeahead-editable="true"
-                 placeholder='Title'
-                 typeahead-on-select="filterUsers('title', filterDesignation)"
-                 ng-change="isTitleFilterTyped = true"
-                 tabindex="4"
-                 uib-typeahead="title for title in allTitles | filter: $viewValue"
-                 qt-typeahead-show-on-focus
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                 hard-reset-pattern="newCategoryNamePattern">
 
-          <div class="product-actions category-caret" ng-style="((isTitleFilterTyped && filterDesignation) || sharedFilter.designation) ? { 'display': 'block' } : ''">
+        <div class="filter-left-panel" style="height: auto !important">
+          <div class="x-mark-wrapper" style="position: relative;">
+            <input style="padding-right: 50px;" type="text" class="form-control has-dropdown pointer"
+                   ng-maxlength="100"
+                   autocomplete="off"
+                   ng-model="filterDesignation"
+                   name="designation"
+                   typeahead-editable="true"
+                   placeholder='Title'
+                   typeahead-on-select="filterUsers('title', filterDesignation)"
+                   ng-change="isTitleFilterTyped = true"
+                   tabindex="4"
+                   uib-typeahead="title for title in allTitles | filter: $viewValue : stateComparator"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                   hard-reset-pattern="newCategoryNamePattern">
 
-            <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
-               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
-               ng-show="isTitleFilterTyped && filterDesignation"
-               ng-click="filterUsers('title', filterDesignation)">
-              <i class="icn-sm icn-product-save"></i>
-            </a>
+            <div class="product-actions category-caret centered" ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
 
-            <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
-               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-               ng-show="(isTitleFilterTyped && filterDesignation) || sharedFilter.designation"
-               ng-click="filterDesignation = ''; filterUsers()">
-              <i class="icn-sm icn-product-cancel"></i>
-            </a>
+
+              <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+                 ng-show="sharedFilter.designation"
+                 ng-click="filterDesignation = ''; filterUsers()">
+                <i class="icn-sm icn-product-cancel"></i>
+              </a>
+
+            </div>
+
 
           </div>
+
+
+
         </div>
+
 
 
 
