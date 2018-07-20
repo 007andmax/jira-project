@@ -24,6 +24,41 @@
 
       CompaniesService._addInitListener(init);
 
+
+      function reinitUsers(callback) {
+        $http.get('/users').then(function (resp) {
+            Utils.customizeArray(resp.data, storage.users);
+            for (var i = 0; i < storage.users.length; i++) {
+              var user = storage.users[i];
+              generateInitials(user);
+              if (!storage.usersByCompanies[user.company.id]) {
+                storage.usersByCompanies[user.company.id] = [];
+              }
+              storage.usersByCompanies[user.company.id].push(user);
+              var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
+              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
+              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
+                storage.clientUsers.push(user);
+              } else if (isDeleted) {
+                storage.deleted.push(user);
+              }
+            }
+            initialized = true;
+            for (var i = 0; i < initListeners.length; i++) {
+              initListeners[i]();
+            }
+            initListeners = [];
+
+            if (callback) {
+              callback(resp)
+            }
+          },
+          function (resp) {
+            console.error(resp);
+            throw 'Cannot initialize CompaniesService!';
+          });
+      }
+
       function init() {
 
         if (initializingStarted) {
@@ -655,6 +690,7 @@
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
+        reinitUsers: reinitUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,
         getTechUsersEmailNotification: getTechUsersEmailNotification,

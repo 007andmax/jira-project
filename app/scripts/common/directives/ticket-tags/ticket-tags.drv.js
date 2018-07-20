@@ -10,8 +10,10 @@
           templateUrl: '/html/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
           scope: {
             ticketId: '@',
+            readonlyTags: '@?',
             ticketTags: '=',
-            readonlyTags: '@?'
+            tagFilter: '<',
+            onSaveFunc: '<'
           },
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -51,7 +53,7 @@
 
               $scope.addTag = function (value) {
                 if (typeof value === 'string') {
-                  if (!$scope.currentCompany.allowCreateTags && !$rootScope.currentUser.isOwner) {
+                  if (!$scope.currentCompany.allowCreateTags && !$rootScope.currentUser.isOwner && !tagFilter) {
                     return;
                   }
 
@@ -75,7 +77,7 @@
               };
 
               $scope.saveTags = function () {
-                if (tagsChanged) {
+                if (tagsChanged && !$scope.tagFilter) {
                   $scope.saving = true;
                   $scope.dropdownOpened = false;
                   TagsService.setTagsInTicket($scope.ticketTags, $scope.ticketId, function () {
@@ -87,6 +89,9 @@
                     lastQuery = undefined;
                     searchTag(searchQuery);
                   });
+                } else if (tagsChanged && $scope.tagFilter) {
+                  console.log('tags filter changed')
+                  // $scope.onSaveFunc($scope.ticketTags)
                 }
               };
 

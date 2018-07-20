@@ -27,6 +27,41 @@
 
     Utils.customizeObj(storage);
 
+    function reinitCompanies(callback) {
+      $http.get('/company/clients').then(function (resp) {
+          for (var i = 0; i < resp.data.length; i++) {
+            var custCompany = Utils.customizeObj(resp.data[i]);
+            if (custCompany.deletedAt) {
+              storage.deletedCompanies.push(custCompany);
+            } else {
+              if (!custCompany.isDefault && custCompany.clientType) {
+                if(custCompany.clientType === 'CLIENT') {
+                  storage.clientCompaniesWoVendorsAndLeads.push(custCompany);
+                }
+                if (custCompany.clientType.toLowerCase() !== 'vendor') {
+                  storage.clientCompanies.push(custCompany);
+                } else {
+                  storage.clientCompanies.push(custCompany);
+                  storage.vendors.push(custCompany);
+                }
+              }
+
+              storage.companies.push(custCompany);
+            }
+          }
+          checkInit();
+          $rootScope.companyListLoaded = true;
+
+          if (callback) {
+            callback(resp);
+          }
+        },
+        function (resp) {
+          console.error(resp);
+          throw 'Cannot initialize CompaniesService!';
+        });
+    }
+
     $http.get('/company/clients').then(function (resp) {
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
@@ -831,6 +866,7 @@
       _search: search,
       _isInitialized: isInitialized,
       getCurrentCompany: getCurrentCompany,
+      reinitCompanies: reinitCompanies,
       getVendors: getVendors,
       getClientCompanies: getClientCompanies,
       getClientCompaniesWoClientsAndLeads: getClientCompaniesWoClientsAndLeads,

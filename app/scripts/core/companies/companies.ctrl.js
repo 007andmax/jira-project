@@ -49,10 +49,25 @@
           reverse: false
         };
 
+        if ($rootScope.exampleCompanyDeleted) {
+          $scope.companies = $scope.companies.filter(function(company) {
+            return company.id !== $rootScope.exampleCompanyDeleted
+          })
+        }
+
         $scope.removeExampleCompany = function(e) {
           e.stopPropagation();
           CompaniesService.deleteExample(function(resp) {
-            console.log(resp)
+            $rootScope.exampleCompanyDeleted = $scope.exampleCompanyId;
+            $scope.companies = $scope.companies.filter(function(company) {
+              return company.id !== $scope.exampleCompanyId
+            })
+            // CompaniesService.reinitCompanies(function() {
+            //   $scope.companies = CompaniesService.getAllCompanies();
+            // });
+
+
+
           })
         }
 

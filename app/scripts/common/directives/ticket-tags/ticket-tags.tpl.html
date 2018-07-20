@@ -1,9 +1,9 @@
-<div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="setFocus($event)">
+<div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="setFocus($event)" ng-style="tagFilter ? { 'max-width': '190px' } : ''">
   <div class="{{readonlyTags ? 'readonly-tags' : 'tags'}}">
-    <span class="tags-title" ng-hide="readonlyTags">Tags: </span>
-    <span class="tag-label"
+    <span class="tags-title tag-span" ng-hide="readonlyTags || tagFilter">Tags: </span>
+    <span class="tag-label tag-span"
           ng-repeat="tag in ticketTags track by $index">
-      <span>{{ tag.word }}</span>
+      <span class="tag-span">{{ tag.word }}</span>
       <i ng-show="!readonlyTags" class="icn-xs remove-tag" ng-click="removeTag($index)"
          uib-tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
     </span>
@@ -16,8 +16,8 @@
       <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
         <li class="autocomplete-item" ng-repeat="tag in result | orderBy:'word'"
             ng-click="addTag(tag)">
-          <span class="tag-name">{{tag.word}}</span>
-          <span class="pull-right">{{tag.usedCounter}}</span>
+          <span class="tag-name tag-span">{{tag.word}}</span>
+          <span class="pull-right tag-span">{{tag.usedCounter}}</span>
         </li>
       </ul>
     </div>

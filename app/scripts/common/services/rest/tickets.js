@@ -360,6 +360,30 @@
         })
       }
 
+      function ticketSearch(data, callback) {
+        if (!data.length) return;
+
+        var request = {
+          "filter" : "ALL",
+          "view": "normal",
+          "priority":null, //null, low, medium, high
+          "status": null, // null, ON_HOLD, IN_PROGRESS, COMPLETED
+          "lastId":null,
+          "companyId":null,
+          "userId":null,
+          "keyword":null,
+          "targetUser":null
+        }
+
+        request.tagIds = data;
+
+        $http.post('/v2/tickets/search', request).then(function(resp) {
+          if (callback) {
+            callback(resp)
+          }
+        })
+      }
+
       function search(callback, keyword, companyId) {
         if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
           keyword = '';
@@ -1157,6 +1181,7 @@
         loadMore: loadMore,
         getTicketFromStorage: getTicketFromStorage,
         search: search,
+        ticketSearch: ticketSearch,
         getCount: getCount,
         getCounts: getLeftPanelCounts,
         getOne: getOne,

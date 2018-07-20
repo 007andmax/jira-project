@@ -68,6 +68,8 @@
         $scope.CompanyProfilePasswordManagerPage = false;
         $scope.CompanyProfileProductsPage = false;
         $scope.CompanyProfileInvoicesPage = false;
+        $scope.ticketFilterTags = [];
+
 
 
         //for one time popover
@@ -86,6 +88,16 @@
         TicketsService.getAllCounts(function (resp) {
           $scope.ticketsCounter = resp;
         });
+
+        $scope.$watch(function() {
+          return $rootScope.exampleCompanyDeleted;
+        }, function(val) {
+          if (val) {
+            TicketsService.getAllCounts(function (resp) {
+              $scope.ticketsCounter = resp;
+            });
+          }
+        })
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
@@ -153,6 +165,8 @@
             $rootScope.ticketsTagsColors = resp;
           }
         });
+
+        $scope.ticketsSharedState.filter.tags = [];
 
         function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
@@ -311,6 +325,32 @@
           }
         });
 
+        $scope.$watch('ticketFilterTags', function (value) {
+          console.log(value)
+
+          var data = value.map(function(el) {
+            return el.word;
+          })
+
+          TicketsService.ticketSearch(data, function(resp) {
+            console.log(resp, "RESP")
+          })
+          // if (value !== "" && value !== " " && value.length > 0) {
+          //   ticketsSharedState.filter.completed = false;
+          //   ticketsSharedState.filter.inProgress = false;
+          //   ticketsSharedState.filter.onHold = false;
+          //   ticketsSharedState.filter.onHoldTag = false;
+          //   ticketsSharedState.filter.clientUserId = '';
+          //
+          //
+          // } else if (value === undefined) {
+          //   if ($state.includes('tickets')) {
+          //     clearFilter(ticketsSharedState.filter);
+          //     $scope.stateGo(null, 'tickets', {listType: 'all'});
+          //   }
+          // }
+        }, true);
+
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
           if (value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
@@ -369,6 +409,7 @@
             }
           }
         });
+
 
         $scope.checkCompanieValueMatched = function (inputValue) {
           if (inputValue) {

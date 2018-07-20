@@ -3,12 +3,12 @@
 (function () {
 
   angular.module("quicktech.core.passwordManager").directive("openPasswordModal",
-    ['$uibModal', function ($uibModal) {
+    ['$uibModal', 'quicktech.common.services.PermissionsService', function ($uibModal, PermissionsService) {
       return {
         restrict: 'A',
         scope: {
           item: '=?openPasswordModal',
-          company: '=?companyForPasswordModal'
+          company: '=?companyForPasswordModal',
         },
         link: function ($scope, element, attrs) {
           var existingItem = false;
@@ -27,6 +27,7 @@
               return;
             }
 
+
             var modalInstance = $uibModal.open({
               templateUrl: '/html/scripts/core/password-manager/modal/password-modal.tpl.html',
               controller: 'quicktech.core.passwordManager.passwordModalCtrl',
@@ -37,7 +38,7 @@
                 resolvedExistedItem: existingItem,
                 presetupCompany: presetupCompany,
                 isEditable: function () {
-                  return typeof attrs.notEditable !== 'string';
+                  return PermissionsService.isAllowed('EDIT_PASSWORDS')
                 }
               }
             });

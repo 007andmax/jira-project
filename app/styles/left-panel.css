@@ -103,6 +103,10 @@
   font-size: 13px;
 }
 
+.center-category__category.without-height {
+  height: auto;
+}
+
 .center-category__category.cust-report {
   border-top: 1px solid rgba(255, 255, 255, .12);
   position: fixed;
@@ -193,8 +197,8 @@
   color: #16a4fa;
 }
 
-.tickets-left-panel .center-category__category span,
-.company-dashboard-left-panel .center-category__category span{
+.tickets-left-panel .center-category__category span:not(.tag-span),
+.company-dashboard-left-panel .center-category__category span:not(.tag-span){
   position: absolute;
   right: 20px;
   top: 7px;

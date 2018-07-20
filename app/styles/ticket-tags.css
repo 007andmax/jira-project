@@ -4,6 +4,7 @@
   border: 1px solid #404b5f;
   border-radius: 5px;
   cursor: text;
+  background: white;
 }
 .readonly-tags-wrap {
   position: relative;

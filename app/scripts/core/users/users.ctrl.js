@@ -30,6 +30,24 @@
           ADMIN: 'Manager'
         };
 
+        if ($rootScope.exampleCompanyDeleted && $scope.users) {
+          $scope.users = $scope.users.filter(function(user) {
+            return user.company.id !== $rootScope.exampleCompanyDeleted;
+          })
+        }
+
+        $scope.$watch(function() {
+          return $rootScope.exampleCompanyDeleted
+        }, function(val) {
+          if (val) {
+            $scope.users = $scope.users.filter(function(user) {
+              return user.company.id !== val;
+            })
+          }
+        })
+
+
+
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
         $scope.archivedUsers = UsersService.getArchivedUsers();
