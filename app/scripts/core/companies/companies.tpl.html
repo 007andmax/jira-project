@@ -75,6 +75,9 @@
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
             </span>
           </div>
+          <!-- <div class='col-xs-1'>
+
+          </div> -->
         </li>
       </ul>
     </div>
@@ -154,7 +157,7 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 65px;" ng-if="companiesView === 'list'" qt-scroll-to="top"
+  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 65px; position: relative" ng-if="companiesView === 'list'" qt-scroll-to="top"
       offset="83" scroll-pagination>
     <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
@@ -208,6 +211,23 @@
           </span>
         </div>
       </div>
+
+      <div
+
+
+        qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+        qt-popover-position="bottom-left-align-dashboard"
+        style="display: inline-block"
+        ng-click="$event.stopPropagation()">
+
+        <button class="company-download-icn"
+                uib-tooltip="{{ 'Download Agent' }}"
+                qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">
+
+        </button>
+      </div>
+
+
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)"/>
     </li>
