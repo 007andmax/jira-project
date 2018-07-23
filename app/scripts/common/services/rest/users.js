@@ -298,6 +298,25 @@
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
       }
 
+      function setGridPresentation(data) {
+        var translate = {
+          'list': 'LIST',
+          'grid': 'TILE'
+        }
+        var future = $http({
+          url: '/settings/userProfile/gridPresentation',
+          method: 'PUT',
+          data: {
+            "usersGridPresentation": translate[data.users] || null,
+            "companiesGridPresentation": translate[data.companies] || null
+          }
+        })
+
+
+
+        Utils.handleCallback(future)
+      }
+
       function getTechUsersEmailNotification(listOfTechUsers, callback) {
         var future = $http({
           url: '/settings/userProfile/getUsersEmailNotifications',
@@ -709,6 +728,7 @@
         changeUsersRoles: changeUsersRoles,
         save: save,
         saveUserSettingsDto: saveUserSettingsDto,
+        setGridPresentation: setGridPresentation,
         saveForUserProfile: saveForUserProfile,
         archiveUser: archiveUser,
         dearchiveUser: dearchiveUser,

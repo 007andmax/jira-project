@@ -27,7 +27,15 @@
 
         $scope.headerSharedState = headerSharedState;
 
-        $scope.companiesView = localStorageService.get('companies-view') || 'grid';
+        $scope.currentUser = UsersService.getCurrentUser();
+
+        $scope.usersView = $scope.currentUser.usersGridPresentation ?
+                             $scope.currentUser.usersGridPresentation === 'LIST' ?
+                               'list' :
+                               'grid'
+                             :
+                             'grid';
+
         $scope.PermissionsService = PermissionsService;
 
         $scope.companies = CompaniesService.getAllCompanies();
@@ -74,7 +82,8 @@
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
             $scope.companiesView = view;
-            localStorageService.set('companies-view', view);
+            UsersService.setGridPresentation({ companies: view });
+            // localStorageService.set('companies-view', view);
           }
         };
 

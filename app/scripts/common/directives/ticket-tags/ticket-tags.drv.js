@@ -57,11 +57,16 @@
                     return;
                   }
 
-                  $scope.ticketTags.push({
-                    word: value,
-                    colorCode: 0
-                  });
+                  if (tagFilter) return;
+
+
+                  // $scope.ticketTags.push({
+                  //   word: value,
+                  //   colorCode: 0
+                  // });
                 } else {
+
+                  console.log(value)
                   $scope.ticketTags.push(value);
                   $scope.dropdownOpened = false;
                 }

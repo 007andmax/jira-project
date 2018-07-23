@@ -361,27 +361,54 @@
       }
 
       function ticketSearch(data, callback) {
-        if (!data.length) return;
+        if (!data.length) data = [];
+        var url = window.location.href.split('/');
+
+        if (url.indexOf('tickets') === -1) return;
+        var filter = url.slice(-1)[0].toUpperCase();
+        var filters = storage.lastParams.groupFieldFilters && storage.lastParams.groupFieldFilters[0].fieldFilterDtos;
+
+        var userId, companyId, techId;
+
+        // console.log(storage.lastParams.groupFieldFilters[0].fieldFilterDtos, "PARAMS", filter);
+
+        if (filters && Array.isArray(filters)) {
+          companyId = filters.find(function(el) {
+            return el.path === 'companyId';
+          })
+
+          userId = filters.find(function(el) {
+            return el.path === 'createdUserId';
+          })
+
+          techId = filters.find(function(el) {
+            return el.path === 'assignedUser.id';
+          })
+        }
+
+
+
+        console.log(companyId, userId, techId, filter, "PARAMS")
 
         var request = {
-          "filter" : "ALL",
+          "filter" : filter ? filter : 'ALL',
           "view": "normal",
           "priority":null, //null, low, medium, high
           "status": null, // null, ON_HOLD, IN_PROGRESS, COMPLETED
           "lastId":null,
-          "companyId":null,
-          "userId":null,
+          "companyId": companyId ? companyId.value : null,
+          "userId": userId ? userId.value : null,
           "keyword":null,
-          "targetUser":null
+          "targetUser": techId ? techId.value : null
         }
 
         request.tagIds = data;
 
-        $http.post('/v2/tickets/search', request).then(function(resp) {
-          if (callback) {
-            callback(resp)
-          }
-        })
+        // $http.post('/v2/tickets/search', request).then(function(resp) {
+        //   if (callback) {
+        //     callback(resp)
+        //   }
+        // })
       }
 
       function search(callback, keyword, companyId) {

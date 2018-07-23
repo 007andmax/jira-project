@@ -19,7 +19,14 @@
 
         $scope.usersCtrl = {};
 
-        $scope.usersView = localStorageService.get('users-view') || 'grid';
+        $scope.currentUser = UsersService.getCurrentUser();
+
+        $scope.usersView = $scope.currentUser.usersGridPresentation ?
+                             $scope.currentUser.usersGridPresentation === 'LIST' ?
+                               'list' :
+                               'grid'
+                             :
+                             'grid';
         $scope.orderUsers = {
           field: 'name',
           reverse: false
@@ -61,7 +68,9 @@
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
             $scope.usersView = view;
-            localStorageService.set('users-view', view);
+
+            UsersService.setGridPresentation({ users: view });
+            // localStorageService.set('users-view', view);
           }
         };
 

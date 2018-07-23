@@ -249,7 +249,7 @@
         }
 
         function getUserIdByUserFullName(name) {
-          var user = $scope.allUsers().find(function (user) {
+          var user = $scope.allUsers.find(function (user) {
             var fullName = user.lastName ? user.firstName + ' ' + user.lastName : user.firstName;
             return name === fullName;
           });
@@ -257,7 +257,7 @@
         }
 
         function getUserObjByUserFullName(name) {
-          var user = $scope.allUsers().find(function (user) {
+          var user = $scope.allUsers.find(function (user) {
             var fullName = user.lastName ? user.firstName + ' ' + user.lastName : user.firstName;
             return name === fullName;
           });
@@ -329,7 +329,7 @@
           console.log(value)
 
           var data = value.map(function(el) {
-            return el.word;
+            return el.id;
           })
 
           TicketsService.ticketSearch(data, function(resp) {
