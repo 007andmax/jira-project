@@ -38,7 +38,7 @@
                 resolvedExistedItem: existingItem,
                 presetupCompany: presetupCompany,
                 isEditable: function () {
-                  return PermissionsService.isAllowed('EDIT_PASSWORDS')
+                  return PermissionsService.isAllowed('EDIT_PASSWORD')
                 }
               }
             });

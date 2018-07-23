@@ -5,9 +5,9 @@
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$timeout',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
-      'localStorageService', 'ColorsService', 'TagsService',
+      'localStorageService', 'ColorsService', 'TagsService', '$filter',
       function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, $timeout,
-                SharedStateService, PermissionsService, $state, localStorageService, ColorsService, TagsService) {
+                SharedStateService, PermissionsService, $state, localStorageService, ColorsService, TagsService, $filter) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
           $state.go('tickets');
@@ -98,6 +98,46 @@
           }
 
         };
+
+        $scope.newSort = function(arr) {
+          if ($scope.orderUsers.field !== 'designation') {
+            return $filter('orderBy')(arr, $scope.orderByForUsers, $scope.orderUsers.reverse)
+          } else {
+            var sorted = arr.slice();
+            var reverse = $scope.orderUsers.reverse;
+            var empty = [];
+            var toSort = sorted
+              .reduce(function(acc, el) {
+                if (!el.designation) {
+                  empty.push(el);
+                } else {
+                  acc.push(el);
+                }
+
+                return acc;
+              }, [])
+              .sort(function(a,b) {
+                var first = reverse ? b : a;
+                var second = reverse ? a : b;
+
+                var first = first.designation || '';
+                var second = second.designation || '';
+
+                return first.localeCompare(second);
+              });
+
+
+            for (var i = 0; i < toSort.length; i++) {
+              empty.push(toSort[i]);
+            }
+
+
+            return empty;
+
+
+
+          }
+        }
 
 
         $scope.usersFilter = function (value) {

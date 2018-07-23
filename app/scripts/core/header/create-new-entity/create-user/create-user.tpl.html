@@ -79,7 +79,7 @@
              typeahead-on-select="saveTitle()"
              ng-change="showError()"
              tabindex="4"
-             uib-typeahead="title for title in allTitles | filter: $viewValue"
+             uib-typeahead="title for title in allTitles | filter: $viewValue : stateComparator | orderBy"
              qt-typeahead-show-on-focus
              custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
              hard-reset-pattern="newCategoryNamePattern">
@@ -100,7 +100,13 @@
           <i class="icn-sm icn-product-cancel"></i>
         </a>
 
+
+
       </div>
+
+      <span class="caret-mark ng-hide" style="right: 27px;" ng-hide="editUser.designation">
+        <i class="icn-sm report-caret-icon"></i>
+      </span>
     </div>
     <div class="col-md-6">
       <!-- <input placeholder="Contact Type" type="text"> -->

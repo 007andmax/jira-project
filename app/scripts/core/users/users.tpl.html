@@ -188,7 +188,7 @@
       scroll-pagination qt-scroll-to="top" offset="83">
 
     <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
-        ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) | limitTo: displayLimit track by user.id">
+        ng-repeat="user in (usersCtrl.shownUsers = (newSort(users.concat(archivedUsers)) | filter: usersFilter)) | limitTo: displayLimit track by user.id">
 
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3">

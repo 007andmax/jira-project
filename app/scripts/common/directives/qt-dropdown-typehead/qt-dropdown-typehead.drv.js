@@ -23,7 +23,9 @@
       qtNgDisabled: '<?',
       qtReadonly: '<?',
       qtPlaceholder : '<?',
-      noForm: '<qtValid'
+      noForm: '<qtValid',
+      customPlaceholder: '<customPlaceholder',
+      byIndustry: '<byIndustry'
     },
     controller: qtDropdownTypeheadCtrl
   });
@@ -37,9 +39,10 @@
     self.lastCorrectSelecteditem = '';
     self.list = [];
 
-    $scope.noForm = self.noForm;
+    $scope.qtPlaceholder = self.qtPlaceholder;
 
-    console.log(self.noForm, 'PLACEHOLDER')
+    $scope.noForm = self.noForm;
+    $scope.byIndustry = self.byIndustry;
 
 
     var inputAdditionalSettingsDictionary = {
@@ -53,8 +56,10 @@
       'ng-trim'      : self.qtNgTrim ? self.qtNgTrim : '',
       'tabindex'     : self.qtTabindex ? self.qtTabindex : '',
       'ng-disabled'  : self.qtNgDisabled ? self.qtNgDisabled : '',
-      'placeholder'  : self.qtPlaceholder ? self.qtPlaceholder : '',
+      'placeholder'  : self.qtPlaceholder ? self.qtPlaceholder : self.customPlaceholder ? self.customPlaceholder : '',
     };
+
+    console.log(inputAdditionalSettingsDictionary, 'INPUT')
 
     reInitList();
     addSettingToInput();
