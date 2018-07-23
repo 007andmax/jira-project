@@ -29,12 +29,13 @@
 
         $scope.currentUser = UsersService.getCurrentUser();
 
-        $scope.usersView = $scope.currentUser.usersGridPresentation ?
-                             $scope.currentUser.usersGridPresentation === 'LIST' ?
+        $scope.companiesView = $scope.currentUser.companiesGridPresentation ?
+                             $scope.currentUser.companiesGridPresentation === 'LIST' ?
                                'list' :
                                'grid'
                              :
                              'grid';
+
 
         $scope.PermissionsService = PermissionsService;
 
