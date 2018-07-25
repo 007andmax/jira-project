@@ -829,7 +829,7 @@
         $scope.isTitleFilterTyped = true
 
         $scope.$watch('filterDesignation', function(val) {
-          console.log(val, $scope.isTitleFilterTyped)
+          
         });
 
 
