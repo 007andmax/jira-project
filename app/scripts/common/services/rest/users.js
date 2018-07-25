@@ -303,6 +303,14 @@
           'list': 'LIST',
           'grid': 'TILE'
         }
+        var currentUser = getCurrentUser();
+        var users = translate[data.users];
+        var companies = translate[data.companies];
+
+        currentUser.usersGridPresentation = users ? users : currentUser.usersGridPresentation;
+        currentUser.companiesGridPresentation = companies ? companies : currentUser.companiesGridPresentation;
+
+
         var future = $http({
           url: '/settings/userProfile/gridPresentation',
           method: 'PUT',
@@ -311,7 +319,6 @@
             "companiesGridPresentation": translate[data.companies] || null
           }
         })
-
 
 
         Utils.handleCallback(future)
