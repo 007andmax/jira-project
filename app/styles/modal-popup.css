@@ -842,11 +842,11 @@ _::-webkit-:not(:root:root),
   margin-top: 30px;
 }
 
+.invoice-create .btn,
 .create-new .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 160px !important;
   height: 50px !important;
   margin-right: 15px;
   font-size: 14px !important;
@@ -854,16 +854,22 @@ _::-webkit-:not(:root:root),
   font-weight: 500 !important;
 }
 
+.create-new .btn {
+  width: 160px !important;
+}
+
 .create-new .btn-primary {
   background-color: #16A4FA !important;
 }
 
+.invoice-create .btn-default,
 .create-new .btn-default {
   background-color: #EDF2F6 !important;
   border: 1px solid #C4CBD5;
   color: #4F5F79;
 }
 
+.invoice-create .btn-success,
 .create-new .btn-success {
   background-color: #2EC866 !important;
   border: 1px solid #189947;
@@ -875,10 +881,13 @@ _::-webkit-:not(:root:root),
   border-color: #3D7BA7 !important;
 }
 
+.invoice-create .btn-default:hover,
 .create-new .btn-default:hover {
   background-color: #C4CBD5 !important;
+  color: #4F5F79;
 }
 
+.invoice-create .btn-success:hover,
 .create-new .btn-success:hover {
   background-color: #189947 !important;
 }
@@ -1071,7 +1080,8 @@ _::-webkit-:not(:root:root),
   background: url("../images/new-icons/launch-app.png");
 }
 
-.create-new .file-input {
+.create-new .file-input,
+.invoice-create .file-input {
   opacity: 0;
   position: absolute;
   top: 0;
@@ -1080,7 +1090,8 @@ _::-webkit-:not(:root:root),
   bottom: 0;
 }
 
-.create-new .file-input:hover {
+.create-new .file-input:hover,
+.invoice-create .file-input:hover {
   cursor: pointer;
 }
 
