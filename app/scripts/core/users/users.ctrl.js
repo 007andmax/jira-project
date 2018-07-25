@@ -177,7 +177,7 @@
           }
 
           if (filter.designation) {
-            result = filter.designation === value.designation
+            result = (filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase()
           }
 
           // if(filter.isArchived) {

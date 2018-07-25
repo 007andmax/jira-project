@@ -44,7 +44,11 @@
             return user.designation;
           })
           .reduce(function(acc, title) {
-            if (acc.indexOf(title) === -1 && title) {
+            var index = acc.findIndex(function(el) {
+              return (el || '').toLowerCase() === (title || '').toLowerCase();
+            })
+
+            if (index === -1 && title) {
               acc.push(title);
             }
 
