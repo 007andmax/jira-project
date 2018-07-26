@@ -139,45 +139,71 @@
           }
         }
 
+        $scope.newFilter = function(arr) {
+          return arr.filter(function(value) {
+
+          })
+        }
+
 
         $scope.usersFilter = function (value) {
           var filter = headerSharedState.filter;
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
           var isUserDeleted = value.deletedAt || company.deletedAt;
+
+          var results = [];
           var result = !isUserDeleted && !$rootScope.showArchivedUsers || $rootScope.showArchivedUsers && isUserDeleted;
+          var logs = [];
+          results.push(result);
 
           if (value.isDefault || value.default || value.accountType === 'TECH') {
             return false;
           }
 
           if (filter.userId) {
-            result = result && filter.userId === value.id;
+            // result = result && filter.userId === value.id;
+            results.push(filter.userId === value.id);
+            logs.push('userid')
           }
 
           if (filter.companyId) {
-            result = result && filter.companyId === value.company.id;
+            // result = result && filter.companyId === value.company.id;
+            results.push(filter.companyId === value.company.id);
+            logs.push('companyid')
           }
 
           if (filter.isContact) {
             //result = result && value.isContact;
-            result = result && $scope.getUserType(value) === 'MANAGER';
+            // result = result && $scope.getUserType(value) === 'MANAGER';
+            results.push(value.isContact && $scope.getUserType(value) === 'MANAGER');
+            logs.push('iscontact')
           }
 
           if(filter.isStandard) {
-            result = result && $scope.getUserType(value) === 'CLIENT';
+            // result = result && $scope.getUserType(value) === 'CLIENT';
+            results.push($scope.getUserType(value) === 'CLIENT');
+            logs.push('issstandart')
           }
 
           if (filter.isLead) {
-            result = result && clientType && clientType.toLowerCase() === 'lead';
+            // result = result && clientType && clientType.toLowerCase() === 'lead';
+            results.push(clientType && clientType.toLowerCase() === 'lead');
+            logs.push('islead')
           }
 
           if (filter.isClient) {
-            result = result && clientType && clientType.toLowerCase() === 'client';
+            // result = result && clientType && clientType.toLowerCase() === 'client';
+            results.push(clientType && clientType.toLowerCase() === 'client');
+
+            logs.push('isclient')
           }
 
           if (filter.designation) {
-            result = (filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase()
+            logs.push('designation')
+            // result = (filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase();
+            // console.log((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase(), filter.designation, value.designation)
+            results.push((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase());
           }
 
           // if(filter.isArchived) {
@@ -186,10 +212,22 @@
           // }
 
           if (filter.industry) {
+            logs.push('industry')
             var industryName = company.clientIndustry ? (company.clientIndustry.name || '') : '';
-            result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
+            // result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
+            results.push(industryName.toLowerCase() === filter.industry.toLowerCase());
           }
-          return result;
+
+          if (result && results.every(function(el) { return !!el })) {
+            // console.log(results, 'results')
+          }
+
+          if (value.designation && value.designation.toLowerCase() === 'admin') {
+            // console.log(results, value.designation, logs)
+          }
+
+
+          return results.every(function(el) { return !!el });
         };
 
         $scope.getUserName = function (user) {

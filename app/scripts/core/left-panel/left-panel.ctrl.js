@@ -829,7 +829,7 @@
         $scope.isTitleFilterTyped = true
 
         $scope.$watch('filterDesignation', function(val) {
-          
+
         });
 
 
@@ -840,12 +840,9 @@
 
           switch (filter) {
             case 'title':
-              if (value) {
-                $scope.isTitleFilterTyped = false;
-                clearFilter(sharedFilter);
                 sharedFilter.designation = value;
-              }
 
+                break;
             case 'managers':
               sharedFilter.isStandard = '';
               sharedFilter.isContact = true;
@@ -856,29 +853,29 @@
               break;
             case 'leads':
               $rootScope.showArchivedUsers = false;
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
               sharedFilter.isLead = true;
               break;
             case 'clients':
               $rootScope.showArchivedUsers = false;
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
               sharedFilter.isClient = true;
               break;
             case 'archived':
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
               sharedFilter.isArchived = true;
               break;
             case 'byIndustry':
               sharedFilter.industry = value;
-              sharedFilter.companyId = '';
+              // sharedFilter.companyId = '';
               break;
             case 'byCompany':
               sharedFilter.companyId = value;
-              sharedFilter.industry = '';
+              // sharedFilter.industry = '';
               break;
             default:
               $rootScope.showArchivedUsers = false;
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
           }
         };
 
@@ -1055,9 +1052,17 @@
         //   })
         // };
 
-        function clearFilter(sharedFilter) {
+        function clearFilter(sharedFilter, user) {
           for (var prop in sharedFilter) {
             sharedFilter[prop] = '';
+          }
+
+          if (user) {
+            $scope.userPageCompanyIdFilter = '';
+            $scope.usersSharedState.filter.industry = '';
+            $scope.filterDesignation = '';
+            $rootScope.clearIndustryFilter(); // crutch for resetting by industry filter. im sorry for this(((
+
           }
 
           if ($scope.clearDateRange) {

@@ -45,6 +45,9 @@
     $scope.byIndustry = self.byIndustry;
 
 
+
+
+
     var inputAdditionalSettingsDictionary = {
       'ng-required'  : self.qtNgRequired ? self.qtNgRequired : '',
       'ng-minlength' : self.qtNgMinlength ? self.qtNgMinlength : '',
@@ -138,6 +141,8 @@
       self.selectedItem = '';
       self.isOpen = true;
     };
+
+    $rootScope.clearIndustryFilter = self.clearValueByIconClick;
 
     document.addEventListener("click", function(e){
       var targetElement = e.target || document.activeElement;
