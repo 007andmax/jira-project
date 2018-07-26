@@ -5,10 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'ColorsService', 'TagsService',
+      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'ColorsService', 'TagsService', 'TicketsService', '$uibModal',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 SharedStateService, DevicesService, PermissionsService, localStorageService, UserConfirmationsService,
-                UserNotificationService, ColorsService, TagsService) {
+                UserNotificationService, ColorsService, TagsService, TicketsService, $uibModal) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -19,9 +19,24 @@
           $state.go('tickets');
         }
 
+        TicketsService.getList('EXAMPLE', null, null, function(resp) {
+          var ticket = resp[0];
+          if (!ticket) return;
+          $scope.exampleCompanyId = ticket.companyId;
+        })
+
         $scope.headerSharedState = headerSharedState;
 
-        $scope.companiesView = localStorageService.get('companies-view') || 'grid';
+        $scope.currentUser = UsersService.getCurrentUser();
+
+        $scope.companiesView = $scope.currentUser.companiesGridPresentation ?
+                             $scope.currentUser.companiesGridPresentation === 'LIST' ?
+                               'list' :
+                               'grid'
+                             :
+                             'grid';
+
+
         $scope.PermissionsService = PermissionsService;
 
         $scope.companies = CompaniesService.getAllCompanies();
@@ -43,10 +58,60 @@
           reverse: false
         };
 
+        $scope.downloadAgent = function(e) {
+          e.stopPropagation();
+
+          $rootScope.openFromList = true;
+        }
+
+        if ($rootScope.exampleCompanyDeleted) {
+          $scope.companies = $scope.companies.filter(function(company) {
+            return company.id !== $rootScope.exampleCompanyDeleted
+          })
+        }
+
+
+        $scope.confirmRemoval = function(e) {
+          e.stopPropagation();
+          $uibModal.open({
+            templateUrl: '/html/scripts/core/companies/example-removal.tpl.html',
+            animation: true,
+            backdrop: true,
+            size: 'sm',
+            controller: 'quicktech.core.companies.confirmModal',
+            resolve: {
+              action: function() {
+                return $scope.removeExampleCompany
+              }
+            }
+
+          });
+
+
+        }
+
+        $scope.removeExampleCompany = function(callback) {
+          CompaniesService.deleteExample(function(resp) {
+            $rootScope.exampleCompanyDeleted = $scope.exampleCompanyId;
+            $scope.companies = $scope.companies.filter(function(company) {
+              return company.id !== $scope.exampleCompanyId
+            })
+
+            if (callback) callback();
+            // CompaniesService.reinitCompanies(function() {
+            //   $scope.companies = CompaniesService.getAllCompanies();
+            // });
+
+
+
+          })
+        }
+
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
             $scope.companiesView = view;
-            localStorageService.set('companies-view', view);
+            UsersService.setGridPresentation({ companies: view });
+            // localStorageService.set('companies-view', view);
           }
         };
 

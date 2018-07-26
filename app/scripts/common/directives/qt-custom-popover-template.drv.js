@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtCustomPopoverTemplate',
-    ['$templateRequest', '$compile', '$document', '$timeout', function ($templateRequest, $compile, $document, $timeout) {
+    ['$templateRequest', '$compile', '$document', '$timeout', '$rootScope', function ($templateRequest, $compile, $document, $timeout, $rootScope) {
       return {
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
@@ -126,6 +126,10 @@
               top = trigger.outerHeight() + 10;
             } else if (position === 'bottom-left-align-dashboard') {
               left = 'calc(50% - 125px) !important;';
+
+              if ($attrs.openedFromList) {
+                left = 'calc(50% - 211px) !important;';
+              }
               top = trigger.outerHeight() + 10;
             }else if (position === 'bottom-right-align') {
               left = -popover.outerWidth() + trigger.outerWidth();

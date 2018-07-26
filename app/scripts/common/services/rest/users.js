@@ -24,6 +24,41 @@
 
       CompaniesService._addInitListener(init);
 
+
+      function reinitUsers(callback) {
+        $http.get('/users').then(function (resp) {
+            Utils.customizeArray(resp.data, storage.users);
+            for (var i = 0; i < storage.users.length; i++) {
+              var user = storage.users[i];
+              generateInitials(user);
+              if (!storage.usersByCompanies[user.company.id]) {
+                storage.usersByCompanies[user.company.id] = [];
+              }
+              storage.usersByCompanies[user.company.id].push(user);
+              var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
+              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
+              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
+                storage.clientUsers.push(user);
+              } else if (isDeleted) {
+                storage.deleted.push(user);
+              }
+            }
+            initialized = true;
+            for (var i = 0; i < initListeners.length; i++) {
+              initListeners[i]();
+            }
+            initListeners = [];
+
+            if (callback) {
+              callback(resp)
+            }
+          },
+          function (resp) {
+            console.error(resp);
+            throw 'Cannot initialize CompaniesService!';
+          });
+      }
+
       function init() {
 
         if (initializingStarted) {
@@ -261,6 +296,32 @@
         }
 
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
+      }
+
+      function setGridPresentation(data) {
+        var translate = {
+          'list': 'LIST',
+          'grid': 'TILE'
+        }
+        var currentUser = getCurrentUser();
+        var users = translate[data.users];
+        var companies = translate[data.companies];
+
+        currentUser.usersGridPresentation = users ? users : currentUser.usersGridPresentation;
+        currentUser.companiesGridPresentation = companies ? companies : currentUser.companiesGridPresentation;
+
+
+        var future = $http({
+          url: '/settings/userProfile/gridPresentation',
+          method: 'PUT',
+          data: {
+            "usersGridPresentation": translate[data.users] || null,
+            "companiesGridPresentation": translate[data.companies] || null
+          }
+        })
+
+
+        Utils.handleCallback(future)
       }
 
       function getTechUsersEmailNotification(listOfTechUsers, callback) {
@@ -655,6 +716,7 @@
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
+        reinitUsers: reinitUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,
         getTechUsersEmailNotification: getTechUsersEmailNotification,
@@ -673,6 +735,7 @@
         changeUsersRoles: changeUsersRoles,
         save: save,
         saveUserSettingsDto: saveUserSettingsDto,
+        setGridPresentation: setGridPresentation,
         saveForUserProfile: saveForUserProfile,
         archiveUser: archiveUser,
         dearchiveUser: dearchiveUser,

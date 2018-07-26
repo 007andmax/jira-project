@@ -85,7 +85,7 @@
                 var ticketFilter = ticketsHeaderState.filter;
                 var isAnyFilters = false;
                 for(var prop in ticketFilter) {
-                  if (ticketFilter[prop]) {
+                  if (ticketFilter[prop] && ticketFilter[prop].length > 0) {
                     isAnyFilters = true;
                     break;
                   }

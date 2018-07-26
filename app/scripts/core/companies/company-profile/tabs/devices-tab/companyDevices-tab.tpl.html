@@ -5,11 +5,11 @@
       <span>{{ selectDevicesIds.length }}</span> Selected
     </p>
 
-    <i class="icn-sm icn-restart-device pointer" ng-click="restartDevices()"
+    <i class="icn-sm icn-restart-device pointer" ng-click="turnOff('reboot')"
        tooltip-placement="top" uib-tooltip="Restart"
        ng-if="!companyProfileHeader.isOfflineDeviceSelected"></i>
 
-    <i class="icn-sm icn-shutdown-device pointer" ng-click="shutdownDevices()"
+    <i class="icn-sm icn-shutdown-device pointer" ng-click="turnOff('shutdown')"
        tooltip-placement="top" uib-tooltip="Shutdown"
        ng-if="!companyProfileHeader.isOfflineDeviceSelected"></i>
 
@@ -276,8 +276,8 @@
             <i class="icn-more-light-grey icn-sm pointer dev-btn"></i>
           </div>
           <ul class="dropdown-menu" role="menu">
-            <li><a ng-click="restart()">Restart</a></li>
-            <li><a ng-click="shutdown()">Shutdown</a></li>
+            <li><a ng-click="turnOffDevice('reboot')">Restart</a></li>
+            <li><a ng-click="turnOffDevice('shutdown')">Shutdown</a></li>
             <li ng-show="!agent.master"><a ng-click="markDeviceAsMaster()">Master agent</a></li>
             <li><a ng-click="remove()">Remove</a></li>
 

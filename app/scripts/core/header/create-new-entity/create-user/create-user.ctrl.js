@@ -33,6 +33,40 @@
           });
         }
 
+        // $scope.$watch('editUser', function(val) {
+        //   console.log(val)
+        // }, true)
+
+        $scope.allUsers = UsersService.getAllUsers();
+
+        $scope.allTitles = $scope.allUsers
+          .map(function(user) {
+            return user.designation;
+          })
+          .reduce(function(acc, title) {
+            var index = acc.findIndex(function(el) {
+              return (el || '').toLowerCase() === (title || '').toLowerCase();
+            })
+
+            if (index === -1 && title) {
+              acc.push(title);
+            }
+
+            return acc;
+          }, []);
+
+        $scope.showError = function() {
+          $scope.isErrorShown = true;
+        }
+
+        $scope.saveTitle = function() {
+          $scope.isErrorShown = false;
+        }
+
+
+
+
+
         if ($scope.resolvedCompanyId) {
           $timeout(function () {
             var company = CompaniesService.getOneById($scope.resolvedCompanyId);

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.deviceReports',
-    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.UserConfirmationsService', '$timeout',
-      function ($scope, DevicesService, $stateParams, UserConfirmationsService, $timeout) {
+    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.UserConfirmationsService', '$timeout', '$uibModal',
+      function ($scope, DevicesService, $stateParams, UserConfirmationsService, $timeout, $uibModal) {
 
         var currentReport = {};
         $scope.$watch('data', function (value) {

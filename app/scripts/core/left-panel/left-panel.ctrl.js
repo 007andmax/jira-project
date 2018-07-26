@@ -68,6 +68,8 @@
         $scope.CompanyProfilePasswordManagerPage = false;
         $scope.CompanyProfileProductsPage = false;
         $scope.CompanyProfileInvoicesPage = false;
+        $scope.ticketFilterTags = [];
+
 
 
         //for one time popover
@@ -86,6 +88,16 @@
         TicketsService.getAllCounts(function (resp) {
           $scope.ticketsCounter = resp;
         });
+
+        $scope.$watch(function() {
+          return $rootScope.exampleCompanyDeleted;
+        }, function(val) {
+          if (val) {
+            TicketsService.getAllCounts(function (resp) {
+              $scope.ticketsCounter = resp;
+            });
+          }
+        })
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
@@ -153,6 +165,8 @@
             $rootScope.ticketsTagsColors = resp;
           }
         });
+
+        $scope.ticketsSharedState.filter.tags = [];
 
         function sendNewFilterToStorage(customerKey, recentArray, item) {
           var newHistoryItemArray = [];
@@ -235,7 +249,7 @@
         }
 
         function getUserIdByUserFullName(name) {
-          var user = $scope.allUsers().find(function (user) {
+          var user = $scope.allUsers.find(function (user) {
             var fullName = user.lastName ? user.firstName + ' ' + user.lastName : user.firstName;
             return name === fullName;
           });
@@ -243,7 +257,7 @@
         }
 
         function getUserObjByUserFullName(name) {
-          var user = $scope.allUsers().find(function (user) {
+          var user = $scope.allUsers.find(function (user) {
             var fullName = user.lastName ? user.firstName + ' ' + user.lastName : user.firstName;
             return name === fullName;
           });
@@ -283,6 +297,15 @@
 
         $scope.isTicketCompanyIdFieldEmpty = true;
 
+        $scope.$watch('ticketFilterTags', function(val) {
+          $scope.ticketsSharedState.filter.tags = val;
+          ticketsSharedState.filter.tags = val;
+
+          if ($state.includes('tickets')) {
+            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+          }
+        }, true)
+
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
           if (value !== "" && value !== " ") {
             if (value && $scope.checkCompanieValueMatched(value)) {
@@ -310,6 +333,32 @@
             }
           }
         });
+
+        $scope.$watch('ticketFilterTags', function (value) {
+          // console.log(value)
+
+          // var data = value.map(function(el) {
+          //   return el.id;
+          // })
+          //
+          // TicketsService.ticketSearch(data, function(resp) {
+          //   console.log(resp, "RESP")
+          // })
+          // if (value !== "" && value !== " " && value.length > 0) {
+          //   ticketsSharedState.filter.completed = false;
+          //   ticketsSharedState.filter.inProgress = false;
+          //   ticketsSharedState.filter.onHold = false;
+          //   ticketsSharedState.filter.onHoldTag = false;
+          //   ticketsSharedState.filter.clientUserId = '';
+          //
+          //
+          // } else if (value === undefined) {
+          //   if ($state.includes('tickets')) {
+          //     clearFilter(ticketsSharedState.filter);
+          //     $scope.stateGo(null, 'tickets', {listType: 'all'});
+          //   }
+          // }
+        }, true);
 
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
           if (value !== "" && value !== " ") {
@@ -369,6 +418,7 @@
             }
           }
         });
+
 
         $scope.checkCompanieValueMatched = function (inputValue) {
           if (inputValue) {
@@ -766,10 +816,42 @@
           clearFilter(usersSharedState.filter);
         };
 
+        $scope.allUsers = UsersService.getAllUsers();
+
+        $scope.allTitles = $scope.allUsers
+          .map(function(user) {
+            return user.designation;
+          })
+          .reduce(function(acc, title) {
+            var index = acc.findIndex(function(el) {
+              return (el || '').toLowerCase() === (title || '').toLowerCase();
+            })
+
+            if (index === -1 && title) {
+              acc.push(title);
+            }
+
+            return acc;
+          }, []);
+
+
+        $scope.isTitleFilterTyped = true
+
+        $scope.$watch('filterDesignation', function(val) {
+
+        });
+
+
         $scope.filterUsers = function (filter, value) {
-          var sharedFilter = usersSharedState.filter;
+          var sharedFilter = usersSharedState.filter
+
+          $scope.sharedFilter = sharedFilter;
 
           switch (filter) {
+            case 'title':
+                sharedFilter.designation = value;
+
+                break;
             case 'managers':
               sharedFilter.isStandard = '';
               sharedFilter.isContact = true;
@@ -780,29 +862,29 @@
               break;
             case 'leads':
               $rootScope.showArchivedUsers = false;
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
               sharedFilter.isLead = true;
               break;
             case 'clients':
               $rootScope.showArchivedUsers = false;
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
               sharedFilter.isClient = true;
               break;
             case 'archived':
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
               sharedFilter.isArchived = true;
               break;
             case 'byIndustry':
               sharedFilter.industry = value;
-              sharedFilter.companyId = '';
+              // sharedFilter.companyId = '';
               break;
             case 'byCompany':
               sharedFilter.companyId = value;
-              sharedFilter.industry = '';
+              // sharedFilter.industry = '';
               break;
             default:
               $rootScope.showArchivedUsers = false;
-              clearFilter(sharedFilter);
+              clearFilter(sharedFilter, true);
           }
         };
 
@@ -979,9 +1061,17 @@
         //   })
         // };
 
-        function clearFilter(sharedFilter) {
+        function clearFilter(sharedFilter, user) {
           for (var prop in sharedFilter) {
             sharedFilter[prop] = '';
+          }
+
+          if (user) {
+            $scope.userPageCompanyIdFilter = '';
+            $scope.usersSharedState.filter.industry = '';
+            $scope.filterDesignation = '';
+            $rootScope.clearIndustryFilter(); // crutch for resetting by industry filter. im sorry for this(((
+
           }
 
           if ($scope.clearDateRange) {

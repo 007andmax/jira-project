@@ -218,7 +218,18 @@
                 values: ['COMPLETED']
               }]
             }]
-          }
+          },
+          EXAMPLE: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'number',
+                operator: 'EQ',
+                values: ['0000']
+              }]
+            }]
+          },
+
         };
       }
 
@@ -227,11 +238,10 @@
 
       function fetchTickets(listType, userId, companyId, callback) {
 
-          var query = queries[listType.toUpperCase()];
+          var query = queries[listType.toUpperCase()]
 
-          console.log('IM FETCHING TICKETS')
-
-          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId) {
+          // console.log(ticketsSharedState.filter, 'FILTER')
+          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
             var groupedQuery = {
               excludeTrashSpam: true,
               groupFieldFilters: [{
@@ -247,6 +257,26 @@
                 values: [ticketsSharedState.filter.companyId]
               };
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(coompanyIdQuery);
+              // groupedQuery.groupFieldFilters[0].fieldFilterDtos.push({
+              //   // path: 'company.id',
+              //   // operator: 'EQ',
+              //   // values: [companyId]
+              //   "path": "tags.id",
+              //   "operator": "IN",
+              //   "values": [
+              //     "9cb72af9-4629-4fdd-a4e8-b4d3d6012509"
+              //   ]
+              // })
+            }
+
+            if (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length > 0) {
+              var tagsQuery = {
+                "path": "tags.id",
+                "operator": "IN",
+                "values": ticketsSharedState.filter.tags.map(function(el) { return el.id })
+              }
+
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(tagsQuery)
             }
 
             if(ticketsSharedState.filter.clientUserId) {
@@ -311,6 +341,7 @@
         //   storage.lastParams.offset = storage.tickets.length;
         // }
         storage.lastParams.offset = storage.tickets.length;
+        // storage.lastParams.offset = 14;
         loadingInProcess = true;
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
@@ -348,6 +379,57 @@
         return storage.tickets.find(function(ticket) {
           return ticket.id === id;
         })
+      }
+
+      function ticketSearch(data, callback) {
+        if (!data.length) data = [];
+        var url = window.location.href.split('/');
+
+        if (url.indexOf('tickets') === -1) return;
+        var filter = url.slice(-1)[0].toUpperCase();
+        var filters = storage.lastParams.groupFieldFilters && storage.lastParams.groupFieldFilters[0].fieldFilterDtos;
+
+        var userId, companyId, techId;
+
+        // console.log(storage.lastParams.groupFieldFilters[0].fieldFilterDtos, "PARAMS", filter);
+
+        if (filters && Array.isArray(filters)) {
+          companyId = filters.find(function(el) {
+            return el.path === 'companyId';
+          })
+
+          userId = filters.find(function(el) {
+            return el.path === 'createdUserId';
+          })
+
+          techId = filters.find(function(el) {
+            return el.path === 'assignedUser.id';
+          })
+        }
+
+
+
+        console.log(companyId, userId, techId, filter, "PARAMS")
+
+        var request = {
+          "filter" : filter ? filter : 'ALL',
+          "view": "normal",
+          "priority":null, //null, low, medium, high
+          "status": null, // null, ON_HOLD, IN_PROGRESS, COMPLETED
+          "lastId":null,
+          "companyId": companyId ? companyId.value : null,
+          "userId": userId ? userId.value : null,
+          "keyword":null,
+          "targetUser": techId ? techId.value : null
+        }
+
+        request.tagIds = data;
+
+        // $http.post('/v2/tickets/search', request).then(function(resp) {
+        //   if (callback) {
+        //     callback(resp)
+        //   }
+        // })
       }
 
       function search(callback, keyword, companyId) {
@@ -1147,6 +1229,7 @@
         loadMore: loadMore,
         getTicketFromStorage: getTicketFromStorage,
         search: search,
+        ticketSearch: ticketSearch,
         getCount: getCount,
         getCounts: getLeftPanelCounts,
         getOne: getOne,

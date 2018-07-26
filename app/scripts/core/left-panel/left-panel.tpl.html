@@ -230,10 +230,10 @@
         </div>
 
         <div class="left-panel-title font-medium">
-          tags
+          By tags
         </div>
-        <div class="center-category__category sked">
-          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
+        <div class="center-category__category sked without-height">
+          <!-- <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
                ng-click="stateGo($event, 'tickets', {listType: 'unassigned'}, true)">
             Unassigned
           </div>
@@ -253,9 +253,10 @@
                               'border-color': tagColor.borderColor}"></i>
               </li>
             </ul>
-          </div>
+          </div> -->
+          <ticket-tags tag-filter="true" on-save-func="" ticket-tags="ticketFilterTags"></ticket-tags>
         </div>
-        <div class="center-category__category sked">
+        <!-- <div class="center-category__category sked">
           <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
                ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
             Completed
@@ -324,7 +325,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
         <div class="left-panel-hide-filter">
 
           <div class="left-panel-title font-medium left-panel-title-hover"
@@ -418,6 +419,103 @@
               <p ng-repeat="item in techUsersFilterHistoryTicketsPage track by $index"
                  ng-click="applyTechUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
 
+            </div>
+          </div>
+          <div class="left-panel-title font-medium">
+            Statuses
+          </div>
+          <div class="center-category__category sked without-height">
+            <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
+                 ng-click="stateGo($event, 'tickets', {listType: 'unassigned'}, true)">
+              Unassigned
+            </div>
+
+            <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+              <div uib-dropdown-toggle>
+                <span class="colored-circle ticket-color"
+                      ng-style="{'background-color': tagColors[ticketsTagsColors['unassigned']].backgroundColor,
+                                'border-color': tagColors[ticketsTagsColors['unassigned']].borderColor}"></span>
+              </div>
+              <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+                <li ng-repeat="tagColor in tagColors"
+                    ng-class="{'active': ticketsTagsColors['unassigned'] === $index}"
+                    ng-click="changeTicketsTagColor('unassigned', $index)">
+                  <i class="tag-color tag-color-md"
+                     ng-style="{'background-color': tagColor.backgroundColor,
+                                'border-color': tagColor.borderColor}"></i>
+                </li>
+              </ul>
+            </div>
+            <!-- <ticket-tags tag-filter="true" on-save-func="" ticket-tags="ticketFilterTags"></ticket-tags> -->
+          </div>
+          <div class="center-category__category sked">
+            <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
+                 ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
+              Completed
+            </div>
+
+            <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+              <div uib-dropdown-toggle>
+                <span class="colored-circle ticket-color"
+                      ng-style="{'background-color': tagColors[ticketsTagsColors['completed']].backgroundColor,
+                                'border-color': tagColors[ticketsTagsColors['completed']].borderColor}"></span>
+              </div>
+              <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+                <li ng-repeat="tagColor in tagColors"
+                    ng-class="{'active': ticketsTagsColors['completed'] === $index}"
+                    ng-click="changeTicketsTagColor('completed', $index)">
+                  <i class="tag-color tag-color-md"
+                     ng-style="{'background-color': tagColor.backgroundColor,
+                                'border-color': tagColor.borderColor}"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="center-category__category sked">
+            <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
+                 ng-click="stateGo($event, 'tickets', {listType: 'in_progress'})">
+              In Progress
+            </div>
+
+            <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+              <div uib-dropdown-toggle>
+                <span class="colored-circle ticket-color"
+                      ng-style="{'background-color': tagColors[ticketsTagsColors['inProgress']].backgroundColor,
+                                'border-color': tagColors[ticketsTagsColors['inProgress']].borderColor}"></span>
+              </div>
+              <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+                <li ng-repeat="tagColor in tagColors"
+                    ng-class="{'active': ticketsTagsColors['inProgress'] === $index}"
+                    ng-click="changeTicketsTagColor('inProgress', $index)">
+                  <i class="tag-color tag-color-md"
+                     ng-style="{'background-color': tagColor.backgroundColor,
+                                'border-color': tagColor.borderColor}"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="center-category__category sked">
+            <div style="width: 100%;"
+                 ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
+                 ng-click="stateGo($event, 'tickets', {listType: 'on_hold'}, true)">
+              On Hold
+            </div>
+
+            <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+              <div uib-dropdown-toggle>
+                <span class="colored-circle ticket-color"
+                      ng-style="{'background-color': tagColors[ticketsTagsColors['onHold']].backgroundColor,
+                                'border-color': tagColors[ticketsTagsColors['onHold']].borderColor}"></span>
+              </div>
+              <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
+                <li ng-repeat="tagColor in tagColors"
+                    ng-class="{'active': ticketsTagsColors['onHold'] === $index}"
+                    ng-click="changeTicketsTagColor('onHold', $index)">
+                  <i class="tag-color tag-color-md"
+                     ng-style="{'background-color': tagColor.backgroundColor,
+                                'border-color': tagColor.borderColor}"></i>
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -535,7 +633,7 @@
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="companiesSharedState.filter.industry"
                                     qt-class="'form-control has-dropdown pointer'"
-                                    qt-placeholder="'Select Industry'"
+                                    by-industry="true"
                                     qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
 
               </qt-dropdown-typehead>
@@ -894,9 +992,9 @@
           <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
         </div>
         <div class="left-panel-title font-medium">
-          contact type
+          By title
         </div>
-        <div class="center-category__category" ng-click="filterUsers('managers')"
+        <!-- <div class="center-category__category" ng-click="filterUsers('title', 'User from email')"
              ng-class="{'active': usersSharedState.filter.isContact}">
           Managers
           <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
@@ -939,7 +1037,50 @@
               </li>
             </ul>
           </div>
+        </div> -->
+
+        <div class="filter-left-panel" style="height: auto !important">
+          <div class="x-mark-wrapper" style="position: relative;">
+            <input style="padding-right: 50px;" type="text" class="form-control has-dropdown pointer"
+                   ng-maxlength="100"
+                   autocomplete="off"
+                   ng-model="filterDesignation"
+                   name="designation"
+                   typeahead-editable="true"
+                   placeholder='Select title'
+                   typeahead-on-select="filterUsers('title', filterDesignation)"
+                   ng-change="isTitleFilterTyped = true"
+                   tabindex="4"
+                   uib-typeahead="title for title in allTitles | filter: $viewValue : stateComparator | orderBy"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                   hard-reset-pattern="newCategoryNamePattern">
+
+            <div class="product-actions category-caret centered" ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
+
+
+              <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+                 ng-show="sharedFilter.designation"
+                 ng-click="filterDesignation = ''; filterUsers()">
+                <i class="icn-sm icn-product-cancel"></i>
+              </a>
+
+            </div>
+
+            <!-- <span class="caret-mark ng-hide" style="position:relative" ng-hide="filterDesignation">
+              <i class="icn-sm report-caret-icon"></i>
+            </span> -->
+
+
+          </div>
+
+
+
         </div>
+
+
+
 
 
         <div class="left-panel-hide-filter">
@@ -975,7 +1116,7 @@
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryUserPage}"></i>
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
-            <div class="x-mark-wrapper">
+            <div class="x-mark-wrapper select-to-click">
               <!--<input type="text" class="form-control has-dropdown pointer"-->
               <!--placeholder="Select Industry"-->
               <!--autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"-->
@@ -988,7 +1129,7 @@
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="usersSharedState.filter.industry"
                                     qt-class="'form-control has-dropdown pointer'"
-                                    qt-placeholder="'Select Industry'"
+                                    by-industry="true"
                                     qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
 
               </qt-dropdown-typehead>

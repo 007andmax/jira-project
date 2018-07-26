@@ -396,9 +396,9 @@
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
                 if (!$scope.savedState.items.length) {
-                  if(isCreateContract && $scope.selectedContractType) {
+                  if(isCreateContract) {
                     $scope.closeWindowWithoutConfirmation();
-                    openCreateContractModal(editCompany, $scope.selectedContractType, resp);
+                    openCreateContractModal(editCompany, 'CREATE_NEW', resp);
                   } else {
                     $scope.closeWindow();
                     openCreateContractModal(editCompany)
@@ -443,6 +443,9 @@
         function openCreateContractModal(companyInfo, contractType, companyId) {
           var template;
           switch (contractType) {
+            case('CREATE_NEW'):
+              template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+              break;
             case('HOURLY'):
               template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
@@ -455,6 +458,12 @@
             default:
               console.log('no contract type selected');
           }
+
+          companyInfo.companyId = companyId;
+          companyInfo.company = {
+            id: companyId
+          }
+
           $uibModal.open({
             templateUrl: template,
             animation: true,
@@ -467,7 +476,8 @@
                 companyInfo: companyInfo,
                 companyId: companyId,
                 type:  contractType,
-                editMode: true
+                editMode: true,
+                preSetupCompany: companyInfo
               }
               // companyInfo: companyInfo,
               // companyId: companyId,

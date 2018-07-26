@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.downloadAgent',
-    ['$scope', 'EmailSettingsService', 'DevicesService', '$timeout', 'UsersService',
-      function ($scope, EmailSettingsService, DevicesService, $timeout, UsersService) {
+    ['$scope', 'EmailSettingsService', 'DevicesService', '$timeout', 'UsersService', '$rootScope',
+      function ($scope, EmailSettingsService, DevicesService, $timeout, UsersService, $rootScope) {
         var savedTemplate,
           templateKey = 'DOWNLOAD_AGENT',
           timeout = $timeout(angular.noop);
@@ -32,6 +32,8 @@
         //  savedTemplate = angular.copy($scope.emailTemplate);
         //  $scope.keywords = data.keywords;
         //});
+
+        // console.log($scope.company.id, 'COMPANYID ID ID')
 
         $scope.$watch(function () {
           return $scope.downloadAgentUser.agentName + ' ' + $scope.downloadAgentUser.agentPassword;

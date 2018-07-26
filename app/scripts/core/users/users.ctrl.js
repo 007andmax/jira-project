@@ -5,9 +5,9 @@
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$timeout',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
-      'localStorageService', 'ColorsService', 'TagsService',
+      'localStorageService', 'ColorsService', 'TagsService', '$filter',
       function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, $timeout,
-                SharedStateService, PermissionsService, $state, localStorageService, ColorsService, TagsService) {
+                SharedStateService, PermissionsService, $state, localStorageService, ColorsService, TagsService, $filter) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
           $state.go('tickets');
@@ -19,7 +19,14 @@
 
         $scope.usersCtrl = {};
 
-        $scope.usersView = localStorageService.get('users-view') || 'grid';
+        $scope.currentUser = UsersService.getCurrentUser();
+
+        $scope.usersView = $scope.currentUser.usersGridPresentation ?
+                             $scope.currentUser.usersGridPresentation === 'LIST' ?
+                               'list' :
+                               'grid'
+                             :
+                             'grid';
         $scope.orderUsers = {
           field: 'name',
           reverse: false
@@ -29,6 +36,24 @@
           USER: 'Standard user',
           ADMIN: 'Manager'
         };
+
+        if ($rootScope.exampleCompanyDeleted && $scope.users) {
+          $scope.users = $scope.users.filter(function(user) {
+            return user.company.id !== $rootScope.exampleCompanyDeleted;
+          })
+        }
+
+        $scope.$watch(function() {
+          return $rootScope.exampleCompanyDeleted
+        }, function(val) {
+          if (val) {
+            $scope.users = $scope.users.filter(function(user) {
+              return user.company.id !== val;
+            })
+          }
+        })
+
+
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
@@ -43,7 +68,9 @@
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
             $scope.usersView = view;
-            localStorageService.set('users-view', view);
+
+            UsersService.setGridPresentation({ users: view });
+            // localStorageService.set('users-view', view);
           }
         };
 
@@ -72,41 +99,111 @@
 
         };
 
+        $scope.newSort = function(arr) {
+          if ($scope.orderUsers.field !== 'designation') {
+            return $filter('orderBy')(arr, $scope.orderByForUsers, $scope.orderUsers.reverse)
+          } else {
+            var sorted = arr.slice();
+            var reverse = $scope.orderUsers.reverse;
+            var empty = [];
+            var toSort = sorted
+              .reduce(function(acc, el) {
+                if (!el.designation) {
+                  empty.push(el);
+                } else {
+                  acc.push(el);
+                }
+
+                return acc;
+              }, [])
+              .sort(function(a,b) {
+                var first = reverse ? b : a;
+                var second = reverse ? a : b;
+
+                var first = first.designation || '';
+                var second = second.designation || '';
+
+                return first.localeCompare(second);
+              });
+
+
+            for (var i = 0; i < toSort.length; i++) {
+              empty.push(toSort[i]);
+            }
+
+
+            return empty;
+
+
+
+          }
+        }
+
+        $scope.newFilter = function(arr) {
+          return arr.filter(function(value) {
+
+          })
+        }
+
 
         $scope.usersFilter = function (value) {
           var filter = headerSharedState.filter;
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
           var isUserDeleted = value.deletedAt || company.deletedAt;
+
+          var results = [];
           var result = !isUserDeleted && !$rootScope.showArchivedUsers || $rootScope.showArchivedUsers && isUserDeleted;
+          var logs = [];
+          results.push(result);
 
           if (value.isDefault || value.default || value.accountType === 'TECH') {
             return false;
           }
 
           if (filter.userId) {
-            result = result && filter.userId === value.id;
+            // result = result && filter.userId === value.id;
+            results.push(filter.userId === value.id);
+            logs.push('userid')
           }
 
           if (filter.companyId) {
-            result = result && filter.companyId === value.company.id;
+            // result = result && filter.companyId === value.company.id;
+            results.push(filter.companyId === value.company.id);
+            logs.push('companyid')
           }
 
           if (filter.isContact) {
             //result = result && value.isContact;
-            result = result && $scope.getUserType(value) === 'MANAGER';
+            // result = result && $scope.getUserType(value) === 'MANAGER';
+            results.push(value.isContact && $scope.getUserType(value) === 'MANAGER');
+            logs.push('iscontact')
           }
 
           if(filter.isStandard) {
-            result = result && $scope.getUserType(value) === 'CLIENT';
+            // result = result && $scope.getUserType(value) === 'CLIENT';
+            results.push($scope.getUserType(value) === 'CLIENT');
+            logs.push('issstandart')
           }
 
           if (filter.isLead) {
-            result = result && clientType && clientType.toLowerCase() === 'lead';
+            // result = result && clientType && clientType.toLowerCase() === 'lead';
+            results.push(clientType && clientType.toLowerCase() === 'lead');
+            logs.push('islead')
           }
 
           if (filter.isClient) {
-            result = result && clientType && clientType.toLowerCase() === 'client';
+            // result = result && clientType && clientType.toLowerCase() === 'client';
+            results.push(clientType && clientType.toLowerCase() === 'client');
+
+            logs.push('isclient')
+          }
+
+          if (filter.designation) {
+            logs.push('designation')
+            // result = (filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase();
+            // console.log((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase(), filter.designation, value.designation)
+            results.push((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase());
           }
 
           // if(filter.isArchived) {
@@ -115,10 +212,22 @@
           // }
 
           if (filter.industry) {
+            logs.push('industry')
             var industryName = company.clientIndustry ? (company.clientIndustry.name || '') : '';
-            result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
+            // result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
+            results.push(industryName.toLowerCase() === filter.industry.toLowerCase());
           }
-          return result;
+
+          if (result && results.every(function(el) { return !!el })) {
+            // console.log(results, 'results')
+          }
+
+          if (value.designation && value.designation.toLowerCase() === 'admin') {
+            // console.log(results, value.designation, logs)
+          }
+
+
+          return results.every(function(el) { return !!el });
         };
 
         $scope.getUserName = function (user) {

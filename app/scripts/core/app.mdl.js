@@ -377,7 +377,14 @@
           if (!(user && user.avatar)) {
             return '/users/default/image' + '.jpg'
           }
-          return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
+
+          if (user.id) {
+            return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '');
+          } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+            return '/file/' + (user.avatar.origin.id) + '.jpg';
+          } else {
+            return '/users/default/image' + '.jpg'
+          }
         };
 
         $rootScope.getContactAvatarUrl = function (contact) {
