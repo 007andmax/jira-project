@@ -5,7 +5,14 @@
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
       'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal',
-      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService, TaxesService, $uibModal) {
+      function ($scope,
+                BillableService,
+                CompaniesService,
+                SharedStateService,
+                PermissionsService,
+                TicketsService,
+                TaxesService,
+                $uibModal) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -18,7 +25,7 @@
           });
         });
 
-        TaxesService.getAll(function(resp){
+        TaxesService.getAll(function (resp) {
           $scope.taxes = resp;
         });
 
@@ -31,7 +38,7 @@
             templateUrl: templates[type],
             animation: true,
             backdrop: true,
-            size: 'sm',
+            size: '620',
             controller: 'quicktech.core.billable.invoiceEditModalCtrl',
             resolve: {
               paymentIds: function () {
@@ -55,7 +62,7 @@
 
         $scope.expandedCompanyId = '';
 
-        $scope.setExpandedCompanyId = function(companyId){
+        $scope.setExpandedCompanyId = function (companyId) {
           if (companyId === $scope.expandedCompanyId) {
             $scope.expandedCompanyId = '';
           } else {
@@ -87,9 +94,9 @@
           return isDiscount;
         };
 
-        $scope.checkAgreementTypeToShowDiscount = function(serviceExpense) {
-          if(serviceExpense.item && serviceExpense.item.name) {
-            if(serviceExpense.item.blockTimeServiceAgreementId == null &&
+        $scope.checkAgreementTypeToShowDiscount = function (serviceExpense) {
+          if (serviceExpense.item && serviceExpense.item.name) {
+            if (serviceExpense.item.blockTimeServiceAgreementId == null &&
               serviceExpense.item.serviceContractServiceAgreementId == null &&
               serviceExpense.item.serviceAgreementId !== null) {
               return true

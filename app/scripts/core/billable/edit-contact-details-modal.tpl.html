@@ -1,6 +1,23 @@
-<div>
-  Edit Your Business Address and Contact Details
-</div>
-<div ng-click="close()">
-  close
+<div class="create-new invoice-create-modal">
+  <div class="invoice--header">
+    <div>
+      <h2>Edit Business Address and Contact Details</h2>
+    </div>
+    <button class="close-modal" ng-click="close()"></button>
+  </div>
+  <div class="invoice--content row">
+    <div class="col-md-6"><input type="text" placeholder="Company"></div>
+    <div class="col-md-6"><input type="text" placeholder="Country"></div>
+    <div class="col-md-6"><input type="text" placeholder="Address Line 1"></div>
+    <div class="col-md-6"><input type="text" placeholder="Province/State"></div>
+    <div class="col-md-6"><input type="text" placeholder="Address Line 2"></div>
+    <div class="col-md-6"><input type="text" placeholder="Phone Number"></div>
+    <div class="col-md-6"><input type="text" placeholder="City"></div>
+    <div class="col-md-6"><input type="text" placeholder="Website"></div>
+    <div class="col-md-6"><input type="text" placeholder="Postal/ZIP Code"></div>
+  </div>
+  <div class="invoice--footer">
+    <button class="btn btn-primary">Save</button>
+    <button class="btn btn-default">Cancel</button>
+  </div>
 </div>

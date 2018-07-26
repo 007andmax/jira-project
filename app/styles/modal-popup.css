@@ -667,13 +667,24 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new {
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modal-620 {
+  width: 620px;
+  height: auto;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  transition: none !important;
 }
 
 .modal-dialog.xl {
   width: 920px !important;
 }
 
+.invoice--header, .invoice--content, .invoice--footer,
 .service--header, .service--content, .service--footer,
 .user--header, .user--content, .user--footer,
 .ticket--header, .ticket--content, .ticket--footer,
@@ -682,12 +693,17 @@ _::-webkit-:not(:root:root),
   padding: 30px 40px;
 }
 
+.invoice--footer,
 .company--footer,
 .product--footer,
 .ticket--footer,
 .user--footer,
 .service--footer {
   display: flex;
+}
+
+.invoice--footer {
+  padding-top: 0;
 }
 
 .add-tax-dropdown {
@@ -710,6 +726,7 @@ _::-webkit-:not(:root:root),
   left: 14px;
 }
 
+.invoice--header,
 .service--header,
 .user--header,
 .ticket--header,
@@ -722,6 +739,7 @@ _::-webkit-:not(:root:root),
   border-radius: 3px;
 }
 
+.invoice--header button,
 .service--header button,
 .user--header button,
 .ticket--header button,
@@ -733,6 +751,7 @@ _::-webkit-:not(:root:root),
   color: #ccc
 }
 
+.invoice--header h2,
 .service--header h2,
 .user--header h2,
 .ticket--header h2,
@@ -744,6 +763,7 @@ _::-webkit-:not(:root:root),
   font-weight: 500;
 }
 
+.invoice--content,
 .service--content,
 .user--content,
 .ticket--content,
@@ -752,6 +772,11 @@ _::-webkit-:not(:root:root),
   margin: 0 -15px;
 }
 
+.invoice--content {
+  padding-bottom: 20px;
+}
+
+.invoice--content .col-md-6,
 .service--content .col-md-6,
 .user--content .col-md-6,
 .ticket--content .col-md-6,
@@ -760,23 +785,14 @@ _::-webkit-:not(:root:root),
   position: relative;
 }
 
-/*.service--content .col-md-6 label,*/
-/*.user--content .col-md-6 label,*/
-/*.ticket--content .col-md-6 label,*/
-/*.company--content .col-md-6 label,*/
-/*.product--content .col-md-6 label {*/
-/*position: absolute;*/
-/*color: red;*/
-/*font-size: 12px;*/
-/*top: -7px;*/
-/*}*/
-
+.invoice--content input,
 .service--content input,
 .user--content input,
 .ticket--content input,
 .company--content input,
 .add-tax-dropdown input,
 .product--content input,
+.invoice--content .form-control,
 .service--content .form-control,
 .user--content .form-control,
 .ticket--content .form-control,
@@ -791,6 +807,7 @@ _::-webkit-:not(:root:root),
   background-color: #fff;
 }
 
+.invoice--content [class*='col-md-'],
 .service--content [class*='col-md-'],
 .user--content [class*='col-md-'],
 .ticket--content [class*='col-md-'],
@@ -800,6 +817,7 @@ _::-webkit-:not(:root:root),
   margin-bottom: 20px;
 }
 
+.invoice--content input::placeholder,
 .service--content input::placeholder,
 .user--content input::placeholder,
 .ticket--content input::placeholder,
@@ -812,6 +830,7 @@ _::-webkit-:not(:root:root),
   letter-spacing: .5px;
 }
 
+.invoice--content p,
 .service--content p,
 .user--content p,
 .ticket--content p,
@@ -822,6 +841,7 @@ _::-webkit-:not(:root:root),
   cursor: pointer;
 }
 
+.invoice--content label,
 .service--content label,
 .add-tax-dropdown label {
   color: #4F5F79;
@@ -834,6 +854,7 @@ _::-webkit-:not(:root:root),
   top: -1px;
 }
 
+.invoice-footer,
 .service-footer,
 .user-footer,
 .ticket-footer,
@@ -856,6 +877,14 @@ _::-webkit-:not(:root:root),
 
 .create-new .btn {
   width: 160px !important;
+}
+
+.invoice-create-modal .btn-primary {
+  width: 97px !important;
+}
+
+.invoice-create-modal .btn-default {
+  width: 111px !important;
 }
 
 .create-new .btn-primary {
