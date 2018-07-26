@@ -58,6 +58,12 @@
           reverse: false
         };
 
+        $scope.downloadAgent = function(e) {
+          e.stopPropagation();
+
+          $rootScope.openFromList = true;
+        }
+
         if ($rootScope.exampleCompanyDeleted) {
           $scope.companies = $scope.companies.filter(function(company) {
             return company.id !== $rootScope.exampleCompanyDeleted

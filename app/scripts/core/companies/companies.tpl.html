@@ -217,7 +217,8 @@
           qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
           qt-popover-position="bottom-left-align-dashboard"
           style="display: inline-block;"
-          ng-click="$event.stopPropagation()">
+          opened-from-list="true"
+          ng-click="downloadAgent($event)">
           <button class="company-download-icn"
                   uib-tooltip="{{ 'Download Agent' }}"
                   qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">

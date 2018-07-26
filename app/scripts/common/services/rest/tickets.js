@@ -241,7 +241,7 @@
           var query = queries[listType.toUpperCase()]
 
           // console.log(ticketsSharedState.filter, 'FILTER')
-          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || ticketsSharedState.filter.tags.length) {
+          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
             var groupedQuery = {
               excludeTrashSpam: true,
               groupFieldFilters: [{
@@ -269,7 +269,7 @@
               // })
             }
 
-            if (ticketsSharedState.filter.tags.length > 0) {
+            if (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length > 0) {
               var tagsQuery = {
                 "path": "tags.id",
                 "operator": "IN",
