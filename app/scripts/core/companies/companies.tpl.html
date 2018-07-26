@@ -75,9 +75,6 @@
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
             </span>
           </div>
-          <!-- <div class='col-xs-1'>
-
-          </div> -->
         </li>
       </ul>
     </div>
@@ -157,7 +154,8 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 65px; position: relative" ng-if="companiesView === 'list'" qt-scroll-to="top"
+  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 65px; position: relative"
+      ng-if="companiesView === 'list'" qt-scroll-to="top"
       offset="83" scroll-pagination>
     <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
@@ -165,8 +163,11 @@
         ng-click="openCompany(company)">
       <div class="col-xs-3">
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
-          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="" ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
-          <div class="default-company-logo" ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
+               ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+          <div class="default-company-logo"
+               ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+               ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
             <span>{{company.name[0].toUpperCase()}}</span>
           </div>
         </div>
@@ -211,22 +212,19 @@
           </span>
         </div>
       </div>
+      <div style="position: absolute;right: 15px;">
+        <div
+          qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+          qt-popover-position="bottom-left-align-dashboard"
+          style="display: inline-block;"
+          ng-click="$event.stopPropagation()">
+          <button class="company-download-icn"
+                  uib-tooltip="{{ 'Download Agent' }}"
+                  qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">
 
-      <div
-
-
-        qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
-        qt-popover-position="bottom-left-align-dashboard"
-        style="display: inline-block"
-        ng-click="$event.stopPropagation()">
-
-        <button class="company-download-icn"
-                uib-tooltip="{{ 'Download Agent' }}"
-                qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">
-
-        </button>
+          </button>
+        </div>
       </div>
-
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)"/>
