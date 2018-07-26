@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService',
-      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService, TaxesService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal',
+      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService, TaxesService, $uibModal) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -21,6 +21,32 @@
         TaxesService.getAll(function(resp){
           $scope.taxes = resp;
         });
+
+        $scope.openEditModal = function (type) {
+          var templates = {
+            contacts: '/html/scripts/core/billable/edit-contact-details-modal.tpl.html',
+            customer: '/html/scripts/core/billable/edit-customer-modal.tpl.html'
+          }
+          $uibModal.open({
+            templateUrl: templates[type],
+            animation: true,
+            backdrop: true,
+            size: 'sm',
+            controller: 'quicktech.core.billable.invoiceEditModalCtrl',
+            resolve: {
+              paymentIds: function () {
+                var paymentIds = [];
+                for (var id in $scope.idDictionary) {
+                  if ($scope.idDictionary[id]) {
+                    paymentIds.push(id);
+                  }
+                }
+                $scope.idDictionary = {};
+                return paymentIds;
+              }
+            }
+          });
+        };
 
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
