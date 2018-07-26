@@ -94,7 +94,7 @@
         };
 
         $scope.turnOff = function(action) {
-          console.log(action)
+          // console.log(action)
           var method;
 
           // if (action === 'restart') {
@@ -112,7 +112,7 @@
                 return action;
               },
               devices: function() {
-                return $scope.selectDevicesIds
+                return $scope.selectDevicesAgentsId
               },
               companyId: function() {
                 return $scope.company.id;

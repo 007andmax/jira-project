@@ -147,10 +147,12 @@
           DevicesService.sendPowerAction($scope.company.id, $scope.agent.agentId, 'shutdown');
         };
 
+        // console.log()
+
         $scope.turnOffDevice = function(action) {
           var method;
 
-          // console.log($scope.agent)
+          // console.log($scope.agent.agentId)
           $uibModal.open({
             templateUrl: '/html/scripts/core/companies/company-profile/tabs/confirmModal.html',
             animation: true,
@@ -163,7 +165,7 @@
               },
 
               devices: function() {
-                return $scope.agent.id
+                return $scope.agent.agentId
               },
               companyId: function() {
                 return $scope.company.id
