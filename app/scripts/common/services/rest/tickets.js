@@ -238,10 +238,10 @@
 
       function fetchTickets(listType, userId, companyId, callback) {
 
-          var query = queries[listType.toUpperCase()];
+          var query = queries[listType.toUpperCase()]
 
-
-          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId) {
+          // console.log(ticketsSharedState.filter, 'FILTER')
+          if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || ticketsSharedState.filter.tags.length) {
             var groupedQuery = {
               excludeTrashSpam: true,
               groupFieldFilters: [{
@@ -267,6 +267,16 @@
               //     "9cb72af9-4629-4fdd-a4e8-b4d3d6012509"
               //   ]
               // })
+            }
+
+            if (ticketsSharedState.filter.tags.length > 0) {
+              var tagsQuery = {
+                "path": "tags.id",
+                "operator": "IN",
+                "values": ticketsSharedState.filter.tags.map(function(el) { return el.id })
+              }
+
+              groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(tagsQuery)
             }
 
             if(ticketsSharedState.filter.clientUserId) {
@@ -331,6 +341,7 @@
         //   storage.lastParams.offset = storage.tickets.length;
         // }
         storage.lastParams.offset = storage.tickets.length;
+        // storage.lastParams.offset = 14;
         loadingInProcess = true;
 
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {

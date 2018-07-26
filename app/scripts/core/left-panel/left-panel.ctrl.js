@@ -297,6 +297,15 @@
 
         $scope.isTicketCompanyIdFieldEmpty = true;
 
+        $scope.$watch('ticketFilterTags', function(val) {
+          $scope.ticketsSharedState.filter.tags = val;
+          ticketsSharedState.filter.tags = val;
+
+          if ($state.includes('tickets')) {
+            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+          }
+        }, true)
+
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
           if (value !== "" && value !== " ") {
             if (value && $scope.checkCompanieValueMatched(value)) {
@@ -326,15 +335,15 @@
         });
 
         $scope.$watch('ticketFilterTags', function (value) {
-          console.log(value)
+          // console.log(value)
 
-          var data = value.map(function(el) {
-            return el.id;
-          })
-
-          TicketsService.ticketSearch(data, function(resp) {
-            console.log(resp, "RESP")
-          })
+          // var data = value.map(function(el) {
+          //   return el.id;
+          // })
+          //
+          // TicketsService.ticketSearch(data, function(resp) {
+          //   console.log(resp, "RESP")
+          // })
           // if (value !== "" && value !== " " && value.length > 0) {
           //   ticketsSharedState.filter.completed = false;
           //   ticketsSharedState.filter.inProgress = false;
