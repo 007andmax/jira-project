@@ -100,7 +100,7 @@
             <i style="position: absolute; top: 25px; right: -8px;"
                class="company-remove-icn"
                ng-if="company.id === exampleCompanyId && PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
-               ng-click="removeExampleCompany($event)"></i>
+               ng-click="confirmRemoval($event)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
             <p class="ellipsis name"

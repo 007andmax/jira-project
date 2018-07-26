@@ -257,6 +257,16 @@
                 values: [ticketsSharedState.filter.companyId]
               };
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(coompanyIdQuery);
+              // groupedQuery.groupFieldFilters[0].fieldFilterDtos.push({
+              //   // path: 'company.id',
+              //   // operator: 'EQ',
+              //   // values: [companyId]
+              //   "path": "tags.id",
+              //   "operator": "IN",
+              //   "values": [
+              //     "9cb72af9-4629-4fdd-a4e8-b4d3d6012509"
+              //   ]
+              // })
             }
 
             if(ticketsSharedState.filter.clientUserId) {
