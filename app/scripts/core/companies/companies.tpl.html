@@ -212,12 +212,39 @@
           </span>
         </div>
       </div>
-      <div style="position: absolute;right: 15px;">
+
+      <!-- <div uib-dropdown  smart-dropdown-menu-position="dropdown-menu">
+        <div uib-dropdown-toggle>
+
+          <i class="devices-monitor" ng-show="agent.iconName === 'workstation' || !agent.iconName"></i>
+          <i class="devices-phone" ng-show="agent.iconName === 'device'"></i>
+          <i class="devices-printer" ng-show="agent.iconName === 'printer'"></i>
+          <i class="devices-server" ng-show="agent.iconName === 'server'"></i>
+
+
+        </div>
+
+        <ul class="dropdown-menu icon-list" >
+          <li ng-click="saveNewIcon('workstation')">
+            <i class="devices-monitor"></i>
+          </li>
+          <li ng-click="saveNewIcon('device')">
+            <i class="devices-phone"></i>
+          </li>
+          <li ng-click="saveNewIcon('printer')">
+            <i class="devices-printer"></i>
+          </li>
+          <li ng-click="saveNewIcon('server')">
+            <i class="devices-server"></i>
+          </li>
+        </ul>
+      </div> -->
+      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" to-left='true' style="position: absolute;right: 15px;">
         <div
-          qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
-          qt-popover-position="bottom-left-align-dashboard"
+
           style="display: inline-block;"
           opened-from-list="true"
+          uib-dropdown-toggle
           ng-click="downloadAgent($event)">
           <button class="company-download-icn"
                   uib-tooltip="{{ 'Download Agent' }}"
@@ -225,7 +252,171 @@
 
           </button>
         </div>
+
+        <div class="wrapper container dropdown-menu" ng-click="$event.stopPropagation()" dropdown-menu ng-controller="quicktech.core.companies.downloadAgent">
+          <div class="row">
+            <div class="interior" ng-form="downloadAgentForm">
+              <div class="col-md-12 agent-head">
+                <p class="agent-head__description">Agent Install</p>
+              </div>
+              <div class="col-md-12 icons-container">
+                <div class="col-md-6" ng-class="{'active': currentType === 'download'}"
+                     ng-click="setAgentDownloadType('download')">
+                  <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
+                       alt="download">
+                </div>
+                <div class="col-md-6" ng-class="{'active': currentType === 'email'}"
+                     ng-click="setAgentDownloadType('email')">
+                  <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
+                </div>
+              </div>
+              <div class="form-container col-md-12" ng-if="currentType === 'email'">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">User Name</label>
+                    <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
+                           uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
+                           placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
+                           custom-style="{'width':'100%'}"
+                           autocomplete="off" qt-scroll-to="center">
+
+                    <div typeahead-input-icon="downloadAgentUser.userName" style="position: absolute;top: 28px;right: 13px;"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'email')}">
+                    <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'email')}">
+                      Email
+                    </label>
+
+                    <div ng-messages="downloadAgentForm.email.$error"
+                         ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
+                      <label class="control-label" ng-message="required">Email field is required if u want to send email</label>
+                      <label class="control-label" ng-message="pattern">Email should be valid</label>
+                      <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+                    </div>
+
+                    <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
+                           uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
+                           placeholder="Email Address" ng-model="downloadAgentUser.email" custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
+
+                    <input type="hidden" ng-model="downloadAgentUser.email" name="email"
+                           ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">
+
+                    <div typeahead-input-icon="downloadAgentUser.email" style="position: absolute;top: 28px;right: 13px;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-if="currentType === 'email'">
+                <div class="col-md-12">
+                  <div class="btn btn-lg btn-primary download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
+                       custom-disabled="{{ savingInProcess }}">
+                    Send Email
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="btn btn-lg btn-primary download-agent-btn" copy-key="downloadLink"
+                       custom-disabled="{{ gettingLink }}">
+                    Copy Link to Clipboard
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12" ng-if="currentType === 'download'">
+                <div class="btn btn-lg btn-primary download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
+                     custom-disabled="{{ savingInProcess }}">
+                  {{ isDomainPresent ? 'Download' : 'Save and Download' }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
+
+      <!-- <div class="wrapper container" ng-controller="quicktech.core.companies.downloadAgent">
+        <div class="row">
+          <div class="interior" ng-form="downloadAgentForm">
+            <div class="col-md-12 agent-head">
+              <p class="agent-head__description">Agent Install</p>
+            </div>
+            <div class="col-md-12 icons-container">
+              <div class="col-md-6" ng-class="{'active': currentType === 'download'}"
+                   ng-click="setAgentDownloadType('download')">
+                <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
+                     alt="download">
+              </div>
+              <div class="col-md-6" ng-class="{'active': currentType === 'email'}"
+                   ng-click="setAgentDownloadType('email')">
+                <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
+              </div>
+            </div>
+            <div class="form-container col-md-12" ng-if="currentType === 'email'">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">User Name</label>
+                  <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
+                         uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
+                         placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
+                         custom-style="{'width':'100%'}"
+                         autocomplete="off" qt-scroll-to="center">
+
+                  <div typeahead-input-icon="downloadAgentUser.userName" style="position: absolute;top: 28px;right: 13px;"></div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'email')}">
+                  <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'email')}">
+                    Email
+                  </label>
+
+                  <div ng-messages="downloadAgentForm.email.$error"
+                       ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
+                    <label class="control-label" ng-message="required">Email field is required if u want to send email</label>
+                    <label class="control-label" ng-message="pattern">Email should be valid</label>
+                    <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+                  </div>
+
+                  <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
+                         uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
+                         placeholder="Email Address" ng-model="downloadAgentUser.email" custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
+
+                  <input type="hidden" ng-model="downloadAgentUser.email" name="email"
+                         ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">
+
+                  <div typeahead-input-icon="downloadAgentUser.email" style="position: absolute;top: 28px;right: 13px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div ng-if="currentType === 'email'">
+              <div class="col-md-12">
+                <div class="btn btn-lg btn-primary download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
+                     custom-disabled="{{ savingInProcess }}">
+                  Send Email
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="btn btn-lg btn-primary download-agent-btn" copy-key="downloadLink"
+                     custom-disabled="{{ gettingLink }}">
+                  Copy Link to Clipboard
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12" ng-if="currentType === 'download'">
+              <div class="btn btn-lg btn-primary download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
+                   custom-disabled="{{ savingInProcess }}">
+                {{ isDomainPresent ? 'Download' : 'Save and Download' }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div> -->
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)"/>

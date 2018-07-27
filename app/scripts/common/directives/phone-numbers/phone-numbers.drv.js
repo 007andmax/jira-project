@@ -34,7 +34,7 @@
         controller: function ($scope) {
           $scope.isPrefixValid = PhoneFormats.isPrefixValid;
           $scope.maximalAmountOfPhones = 2;
-          $scope.phoneNumberPattern = /^\+?[0-9\s\-\+\(\)]{1,20}$/;
+          $scope.phoneNumberPattern = /^\+?[0-9\s\-\+\(\)\.\,]{1,20}$/;
           $scope.phoneNumberTypes = {
             MOBILE: 'Mobile',
             OFFICE: 'Office',

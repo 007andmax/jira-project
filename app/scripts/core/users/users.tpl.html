@@ -46,11 +46,11 @@
         </span>
           </div>
 
-          <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('designation')">
+          <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('email')">
         <span class="sort-span">
-          Title
+          Email
           <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'designation'}"></i>
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'email'}"></i>
         </span>
           </div>
 
@@ -249,7 +249,7 @@
 
           </div> -->
           <div class="user-account-type">
-            <span> {{user.designation}}</span>
+            <span> {{user.primaryEmail || user.secondaryEmail}}</span>
           </div>
         </div>
 

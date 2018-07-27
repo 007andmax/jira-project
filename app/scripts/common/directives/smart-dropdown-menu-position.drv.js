@@ -63,6 +63,11 @@
               ulElement.css({'margin': ''});
             }
 
+            if (attrs.toLeft) {
+              console.log("HEIL HYDRA")
+              ulElement.css({'left': 'calc(50% - 211px)'})
+            }
+
           }else if(parentElement ) {
             // if(!d.hasClass('ng-hide')) {
             //   parentElement.css({'overflow': 'visible'});

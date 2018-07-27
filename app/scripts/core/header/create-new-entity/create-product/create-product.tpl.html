@@ -360,7 +360,7 @@
     <button-with-loading-indicator class="btn btn-primary"
                                    ng-click="saveChangeProduct(editProductForm)"
                                    loading="disabledSaveChangeButton"
-                                   label="Create Product">
+                                   label="{{ editProduct.versionedId && editProduct.versionedId.id ? 'Save Product' : 'Create Product' }}">
     </button-with-loading-indicator>
     <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
   </div>

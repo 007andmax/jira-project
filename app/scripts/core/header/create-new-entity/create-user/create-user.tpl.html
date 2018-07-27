@@ -202,7 +202,7 @@
   <div class="user--footer">
     <button-with-loading-indicator class="btn btn-primary" tabindex="33"
                                    ng-click="save(userForm)" loading="savingInProcess"
-                                   label="Create User">
+                                   label="{{ isCreation ? 'Create User' : 'Save User' }}">
     </button-with-loading-indicator>
     <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
   </div>

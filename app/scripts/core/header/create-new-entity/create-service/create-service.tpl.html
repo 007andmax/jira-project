@@ -159,7 +159,7 @@
 
     <button-with-loading-indicator class="btn btn-primary"
                                    ng-click="saveEditService(editServiceForm, true)" loading="disabledSaveButton"
-                                   label="Create Service">
+                                   label="{{ editService.versionedId.id ? 'Save Service' : 'Create Service' }}">
     </button-with-loading-indicator>
     <!-- <button class="btn btn-primary">Create Service</button> -->
     <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>

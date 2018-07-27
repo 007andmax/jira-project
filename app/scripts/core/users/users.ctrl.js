@@ -100,7 +100,7 @@
         };
 
         $scope.newSort = function(arr) {
-          if ($scope.orderUsers.field !== 'designation') {
+          if ($scope.orderUsers.field !== 'email') {
             return $filter('orderBy')(arr, $scope.orderByForUsers, $scope.orderUsers.reverse)
           } else {
             var sorted = arr.slice();
@@ -108,7 +108,7 @@
             var empty = [];
             var toSort = sorted
               .reduce(function(acc, el) {
-                if (!el.designation) {
+                if (!el.primaryEmail && !el.secondaryEmail) {
                   empty.push(el);
                 } else {
                   acc.push(el);
@@ -120,8 +120,8 @@
                 var first = reverse ? b : a;
                 var second = reverse ? a : b;
 
-                var first = first.designation || '';
-                var second = second.designation || '';
+                var first = first.primaryEmail || first.secondaryEmail || '';
+                var second = second.primaryEmail || second.secondaryEmail || '';
 
                 return first.localeCompare(second);
               });
