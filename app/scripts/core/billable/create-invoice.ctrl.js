@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', '$uibModalInstance', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout',
-      function ($scope, BillableService, CompaniesService, $uibModalInstance, Downloader, UserNotificationService, $timeout) {
+    ['$scope', 'BillableService', 'CompaniesService', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout',
+      function ($scope, BillableService, CompaniesService, Downloader, UserNotificationService, $timeout) {
 
         var locksCount = 0;
 
@@ -15,10 +15,13 @@
         $scope.invoiceCreated = false;
         $scope.shoeInvoiceCreatedMessage = false;
         $scope.notificationMessage = 'Invoice has been created';
+        $scope.editCompany = CompaniesService.getCurrentCompany().staticCopy();
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
           $scope.invoiceNumber = number;
         });
+
+        $scope.isInvoiceHeaderShown = true;
 
         for (var companyId in $scope.ticketsSelection) {
 
@@ -39,6 +42,10 @@
               lockTickets(companyId, selectedTickets);
             }
           }
+        }
+
+        $scope.toggleInvoiceHeader = function() {
+          $scope.isInvoiceHeaderShown = !$scope.isInvoiceHeaderShown;
         }
 
         $scope.$on('modal.closing', function () {

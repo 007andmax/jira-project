@@ -62,6 +62,15 @@
 
         $scope.expandedCompanyId = '';
 
+
+        $scope.showInvoice = function() {
+          $scope.isInvoiceShown = true;
+        }
+
+        $scope.togglePreview = function() {
+          $scope.isPreviewShown = !$scope.isPreviewShown;
+        }
+
         $scope.setExpandedCompanyId = function (companyId) {
           if (companyId === $scope.expandedCompanyId) {
             $scope.expandedCompanyId = '';
