@@ -33,32 +33,62 @@
           function createRemoteAccess(realSessionId) {
             counter = 0;
             message = 'Wait until the connection is established... ';
-            var remoteConnectPort = ConstantsService.getConstant('remote.connect.port', function (resp) {
-                remoteConnectPort = resp;
-              }),
-              restServerAddress = ConstantsService.getConstant('rest.server.address', function (resp) {
-                restServerAddress = resp;
-              }),
-              url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
             var modalInstance = $uibModal.open(modalParams),
               promise = $interval(function () {
                 counter++;
               }, 1000);
-            modalInstance.result.then(angular.noop, function () {
-              if (promise) {
-                $interval.cancel(promise);
-              }
-            });
-            DevicesService.subscribeToRemoteConnection(realSessionId, function () {
-              if (modalInstance) {
-                modalInstance.dismiss();
-              }
-              if (promise) {
-                $interval.cancel(promise);
-              }
-              $rootScope.currentRemoteSessionId = realSessionId;
-            });
-            window.open(url, '_self');
+            var remoteConnectPort;
+
+            $scope.launchApp = function() {
+              remoteConnectPort = ConstantsService.getConstant('remote.connect.port', function (resp) {
+                  remoteConnectPort = resp;
+                }),
+                restServerAddress = ConstantsService.getConstant('rest.server.address', function (resp) {
+                  restServerAddress = resp;
+                }),
+                url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
+              modalInstance.result.then(angular.noop, function () {
+                if (promise) {
+                  $interval.cancel(promise);
+                }
+              });
+              DevicesService.subscribeToRemoteConnection(realSessionId, function () {
+                if (modalInstance) {
+                  modalInstance.dismiss();
+                }
+                if (promise) {
+                  $interval.cancel(promise);
+                }
+                $rootScope.currentRemoteSessionId = realSessionId;
+              });
+              window.open(url, '_self');
+            }
+            // var remoteConnectPort = ConstantsService.getConstant('remote.connect.port', function (resp) {
+            //     remoteConnectPort = resp;
+            //   }),
+            //   restServerAddress = ConstantsService.getConstant('rest.server.address', function (resp) {
+            //     restServerAddress = resp;
+            //   }),
+            //   url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
+            // // var modalInstance = $uibModal.open(modalParams),
+            // //   promise = $interval(function () {
+            // //     counter++;
+            // //   }, 1000);
+            // modalInstance.result.then(angular.noop, function () {
+            //   if (promise) {
+            //     $interval.cancel(promise);
+            //   }
+            // });
+            // DevicesService.subscribeToRemoteConnection(realSessionId, function () {
+            //   if (modalInstance) {
+            //     modalInstance.dismiss();
+            //   }
+            //   if (promise) {
+            //     $interval.cancel(promise);
+            //   }
+            //   $rootScope.currentRemoteSessionId = realSessionId;
+            // });
+            // window.open(url, '_self');
           }
         }
         function timerController($scope, $uibModalInstance) {
