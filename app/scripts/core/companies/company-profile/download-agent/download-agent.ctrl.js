@@ -114,7 +114,7 @@
             $scope.savingInProcess = true;
             DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.agentName,
               $scope.downloadAgentUser.agentPassword, false, function () {
-                $scope.hidePopover();
+                if ($scope.hidePopover) $scope.hidePopover();
                 $scope.savingInProcess = false;
                 form.$setPristine();
               });
@@ -128,7 +128,7 @@
             $scope.triedToDownload = false;
             $scope.savingInProcess = true;
             DevicesService.sendDownloadAgentLink($scope.downloadAgentUser, function () {
-              $scope.hidePopover();
+              if ($scope.hidePopover) $scope.hidePopover();
               $scope.savingInProcess = false;
               form.$setPristine();
             });
