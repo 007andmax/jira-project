@@ -64,7 +64,6 @@
             }
 
             if (attrs.toLeft) {
-              console.log("HEIL HYDRA")
               ulElement.css({'left': 'calc(50% - 211px)'})
             }
 
