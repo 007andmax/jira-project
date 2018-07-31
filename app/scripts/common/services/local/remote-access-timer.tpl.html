@@ -27,12 +27,17 @@
 </div> -->
 
 <div class="launch-installer-model create-new">
-  <button class="close-modal"></button>
+  <button class="close-modal" ng-click="close()"></button>
+
+  <div class="qt-list-loading preloader" ng-show="getCounter() !== 0">
+    Connecting
+    <div class="loader"></div>
+  </div>
   <div class="launch-installer-model--download">
     <h3>Download the app</h3>
     <p>Get our Windows Installer package to install the app on your system.
       The app will be available to join future sessions instantly.</p>
-    <button class="btn btn-primary" ng-if="getCounter() >= 30" ng-click="download()">Download App</button>
+    <button class="btn btn-primary" ng-click="download()">Download App</button>
   </div>
   <div class="launch-installer-model--launch">
     <h3>Launch the Downloaded App</h3>

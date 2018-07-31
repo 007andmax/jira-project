@@ -10,7 +10,7 @@
           size: 'custom-size-confirmation-pop-up',
           windowClass: 'modal-spam',
           templateUrl: '/html/scripts/common/services/local/remote-access-timer.tpl.html',
-          controller: ['$scope', '$uibModalInstance', timerController]
+          controller: ['$scope', '$uibModalInstance', '$rootScope', timerController]
         }, counter, message;
         function connectRemoteAccess(sessionId, conectionType, isOneTime) {
           if (!sessionId) {
@@ -33,13 +33,16 @@
           function createRemoteAccess(realSessionId) {
             counter = 0;
             message = 'Wait until the connection is established... ';
-            var modalInstance = $uibModal.open(modalParams),
+            var modalInstance = $uibModal.open(modalParams);
+            var promise;
+            var remoteConnectPort;
+            var restServerAddress;
+            var url;
+
+            $rootScope.launchRemoteApp = function() {
               promise = $interval(function () {
                 counter++;
               }, 1000);
-            var remoteConnectPort;
-
-            $scope.launchApp = function() {
               remoteConnectPort = ConstantsService.getConstant('remote.connect.port', function (resp) {
                   remoteConnectPort = resp;
                 }),
@@ -91,7 +94,8 @@
             // window.open(url, '_self');
           }
         }
-        function timerController($scope, $uibModalInstance) {
+        function timerController($scope, $uibModalInstance, $rootScope) {
+          $scope.launchApp = $rootScope.launchRemoteApp;
           $scope.getCounter = getCounter;
           $scope.close = $uibModalInstance.dismiss;
           $scope.download = function () {

@@ -1038,6 +1038,14 @@ _::-webkit-:not(:root:root),
   margin: 0;
 }
 
+.launch-installer-model .preloader {
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 70px;
+}
+
 .launch-installer-model--download {
   margin-bottom: 60px;
 }
