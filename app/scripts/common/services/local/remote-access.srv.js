@@ -7,8 +7,8 @@
           animation: true,
           backdrop: 'static',
           keyboard: false,
-          size: 'custom-size-confirmation-pop-up',
-          windowClass: 'modal-spam',
+          size: 'custom-size-confirmation-pop',
+          windowClass: 'modal-remote',
           templateUrl: '/html/scripts/common/services/local/remote-access-timer.tpl.html',
           controller: ['$scope', '$uibModalInstance', '$rootScope', timerController]
         }, counter, message;

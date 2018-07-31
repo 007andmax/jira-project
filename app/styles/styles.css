@@ -10359,6 +10359,21 @@ button.close {
   transform: translate3d(-50%, -50%, 0) !important;
 }
 
+.modal-remote {
+  width: 620px;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate3d(-50%, -50%, 0) !important;
+}
+
+.modal-custom-size-confirmation-pop {
+  position: static !important;
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+
+}
+
 .modal-spam .modal-body {
   padding: 5px 30px;
   padding-top: 25px;
