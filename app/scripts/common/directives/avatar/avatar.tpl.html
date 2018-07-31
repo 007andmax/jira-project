@@ -24,7 +24,7 @@
 </div>
 
 <!-- <div class="invoice-logo" style="position: relative;">
-  <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
+  <div class="drop-area-wrapper" crop-image attach-files attach-func="attachDraggedAvatar">
     <div class="drop-area-subwrapper">
       <p class="drop-area">
         Drop Files Here
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="drag-n-drop-body">
-    <div ticket-attachment-files attachment-func="addAttachmentFiles"
+    <div ticket-attachment-files attachment-func="attachDraggedAvatar"
          ng-model="ticketUpdate.ticketAttachments">
       <p class="bold"><a href="#">Browse</a> or drop your logo here.</p>
       <p style="opacity: .5;">Maximum 5 MB in size.</p>
@@ -40,41 +40,5 @@
       <p style="opacity: .5;">Recommended size 300 x 200 pixels.</p>
       <input type="file" class="file-input" multiple=""/>
     </div>
-    <ul class="upload-attachments">
-      <li ng-repeat="file in ticketAttachments"
-          ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
-
-        <span class="file-name">{{ file.name }}</span>
-        <span class="file-size">{{ file.size | fileSizeFilter }}</span>
-
-        <a href="javascript:void(0)" class="hit-area pull-right"
-           uib-tooltip="Remove file" tooltip-placement="top"
-           ng-click="removeAttachment($index, fileInfo[file.name].error)">
-          <i class="icn-sm icn-remove-old"></i>
-        </a>
-
-        <a href="javascript:void(0)" class="hit-area pull-right"
-           ng-show="file.progress !== 100"
-           uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
-          <i class="icn-sm icn-reupload"></i>
-        </a>
-
-        <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
-          <div class="progress-bar" role="progressbar"
-               aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
-               ng-style="styleProgressBar(file.progress)">
-            <span class="sr-only">{{ file.progress }}% Complete</span>
-          </div>
-        </div>
-
-        <span class="pull-right" ng-show="fileInfo[file.name].error"
-              uib-tooltip="{{ fileInfo[file.name].message }}"
-              tooltip-append-to-body tooltip-placement="top"
-              style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 250px;text-overflow: ellipsis">
-          {{ fileInfo[file.name].message }}
-        </span>
-
-      </li>
-    </ul>
   </div>
 </div> -->

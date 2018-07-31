@@ -3,11 +3,16 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.invoiceEditModalCtrl',
-    ['$scope', '$uibModalInstance', '$timeout',
-      function ($scope, $uibModalInstance, $timeout) {
+    ['$scope', '$uibModalInstance', '$timeout', 'CompaniesService',
+      function ($scope, $uibModalInstance, $timeout, CompaniesService) {
         $scope.close = function () {
           $uibModalInstance.dismiss();
         };
+
+        // $scope.editCompany = Object.assign({}, CompaniesService.getCurrentCompany());
+        // $scope.contact = $scope.editCompany.contacts[0];
+
+
       }]);
 
 }());

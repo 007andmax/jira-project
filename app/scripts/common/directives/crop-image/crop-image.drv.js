@@ -2,8 +2,8 @@
 
 (function () {
   angular.module("quicktech.common.directives").directive('cropImage',
-    ['$uibModal', 'Utils', 'UsersService', 'CompaniesService',
-      function ($uibModal, Utils, UsersService, CompaniesService) {
+    ['$uibModal', 'Utils', 'UsersService', 'CompaniesService', '$rootScope',
+      function ($uibModal, Utils, UsersService, CompaniesService, $rootScope) {
         return {
           restrict: 'A',
           scope: {
@@ -11,6 +11,8 @@
             isTechLogo: '@?'
           },
           link: function (scope, element, attrs) {
+
+            // console.log('CROP IMAGE DOWNLOAD')
             var $body = angular.element(document.body), image;
             var isTechLogo = scope.$eval(scope.isTechLogo);
 
@@ -84,6 +86,21 @@
                 console.error(message);
               }
             });
+
+            scope.$watch(function() {
+              return $rootScope.draggedAvatar;
+            }, function(val) {
+              if (val) {
+                $rootScope.draggedAvatar = null;
+
+                showCropper($rootScope.draggedAvatar);
+              }
+            })
+
+            $rootScope.attachDraggedAvatar = showCropper;
+
+            scope.showCropper = showCropper;
+            scope.attachFunc = showCropper;
 
             function showCropper(image) {
               $uibModal.open({
@@ -235,5 +252,3 @@
       }]);
 
 })();
-
-

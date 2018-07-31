@@ -4,7 +4,7 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal',
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope',
       function ($scope,
                 BillableService,
                 CompaniesService,
@@ -12,7 +12,8 @@
                 PermissionsService,
                 TicketsService,
                 TaxesService,
-                $uibModal) {
+                $uibModal,
+                $rootScope) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -34,6 +35,8 @@
             contacts: '/html/scripts/core/billable/edit-contact-details-modal.tpl.html',
             customer: '/html/scripts/core/billable/edit-customer-modal.tpl.html'
           }
+
+          $rootScope.savedCompanyId = 'fdadb2df-ed3d-4e28-b41e-741617b7ffa6';
           $uibModal.open({
             templateUrl: templates[type],
             animation: true,

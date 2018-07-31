@@ -47,13 +47,21 @@
 
         var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
-        var savedState = $scope.getLastSavedState('company');
+        var savedState = $scope.getLastSavedState ? $scope.getLastSavedState('company') : {};
         var action = 'CREATE_COMPANIES';
 
         var origin = savedState.item;
-        if (savedState.type === 'company' && origin && origin.id) {
-          var companyId = origin.id,
-            company = CompaniesService.getOneById(companyId);
+        if ((savedState.type === 'company' && origin && origin.id) || $rootScope.savedCompanyId) {
+
+          if ($rootScope.savedCompanyId) {
+            console.log("ROOTSCOPE")
+            var companyId = $rootScope.savedCompanyId,
+              company = CompaniesService.getOneById(companyId);
+          } else {
+            var companyId = origin.id,
+              company = CompaniesService.getOneById(companyId);
+
+          }
 
           action = 'EDIT_COMPANIES';
 

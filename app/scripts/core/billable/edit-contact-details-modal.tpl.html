@@ -6,7 +6,17 @@
     <button class="close-modal" ng-click="close()"></button>
   </div>
   <div class="invoice--content row">
-    <div class="col-md-6"><input type="text" placeholder="Company"></div>
+    <div class="col-md-6">
+      <!-- <input type="text" placeholder="Company"> -->
+
+      <input type="text" class="form-validation" ng-model="editCompany.name" aria-expanded="true"
+             ng-minlength="2" ng-maxlength="40" placeholder="Company" name="companyName" required="true" make-dirty-on-blur
+             model-id="editCompany.name">
+      <!-- <input type="text" class="form-validationl" ng-model="editCompany.name" aria-expanded="true"
+             ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+             model-id="editCompany.name" execute-when-outfocused="saveBasicInfo(basicInfoForm)"
+             is-uniq-validation validation-func="validateCompanyName"> -->
+    </div>
     <div class="col-md-6"><input type="text" placeholder="Country"></div>
     <div class="col-md-6"><input type="text" placeholder="Address Line 1"></div>
     <div class="col-md-6"><input type="text" placeholder="Province/State"></div>

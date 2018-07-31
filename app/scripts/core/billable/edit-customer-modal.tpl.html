@@ -1,4 +1,4 @@
-<div class="create-new invoice-create-modal">
+<div class="create-new invoice-create-modal" ng-form="companyForm" ng-controller="quicktech.createCompanyCtrl">
   <div class="invoice--header">
     <div>
       <h2>Edit Customer</h2>
@@ -6,15 +6,87 @@
     <button class="close-modal" ng-click="close()"></button>
   </div>
   <div class="invoice--content row">
-    <div class="col-md-6"><input type="text" placeholder="Company"></div>
+    <div class="col-md-6">
+      <!-- <input type="text" placeholder="Company"> -->
+
+      <div ng-messages="companyForm.companyName.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
+        <label class="control-label" ng-message="required">Company name is required.</label>
+        <label class="control-label" ng-message="maxlength">Company name is too large.</label>
+        <label class="control-label" ng-message="minlength">Company name is too short.</label>
+        <label class="control-label" ng-message="unique">This company name already occupied.</label>
+      </div>
+      <input placeholder="Write Company Name" type="text" ng-model="editCompany.name"
+             aria-expanded="true"
+             ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+             is-uniq-validation validation-func="validateCompanyName">
+    </div>
+
     <div class="col-md-6"><input type="text" placeholder="Address Line 1"></div>
-    <div class="col-md-6"><input type="text" placeholder="Email"></div>
+
+    <div class="col-md-6" ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
+      <!-- <input type="text" placeholder="Email"> -->
+
+      <div ng-messages="companyForm.primaryEmail.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
+        <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+        <div class="control-label" ng-message="required">Email address is required.</div>
+        <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+        <div class="control-label" ng-message="unique">This email already occupied.</div>
+        <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+      </div>
+      <input placeholder="Email" type="text" name="primaryEmail" aria-expanded="true"
+             make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
+             ng-maxlength="128"
+             required
+             contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
+             model-id="contact.id">
+    </div>
+
+
     <div class="col-md-6"><input type="text" placeholder="Address Line 2"></div>
-    <div class="col-md-6"><input type="text" placeholder="Phone"></div>
+    <div  class="col-md-6"
+          is-try-to-save="triedToSave"
+          no-add-more="true"
+          phone-numbers-edit
+          is-restricted="true"
+          is-required="true"
+          country-code="{{editCompany.addresses[0].countryCode}}"
+          ng-model="contact.phoneNumbers"
+          custom-placeholder="'Phone'">
+
+      <!-- <input type="text" placeholder="Phone"> -->
+
+
+
+    </div>
+
     <div class="col-md-6"><input type="text" placeholder="City"></div>
-    <div class="col-md-6"><input type="text" placeholder="First Name"></div>
+    <div class="col-md-6" ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'firstName')}">
+      <!-- <input type="text" placeholder="First Name"> -->
+
+      <div ng-messages="companyForm.firstName.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
+        <label class="control-label" ng-message="required">First name is required.</label>
+        <label class="control-label" ng-message="maxlength">First name is too large.</label>
+        <label class="control-label" ng-message="minlength">First name is too short.</label>
+      </div>
+
+      <input placeholder="First Name" type="text" ng-minlength="2" ng-maxlength="15"
+             name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
+    </div>
     <div class="col-md-6"><input type="text" placeholder="Postal/ZIP Code"></div>
-    <div class="col-md-6"><input type="text" placeholder="Last Name"></div>
+    <div class="col-md-6" ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'lastName')}">
+      <!-- <input type="text" placeholder="Last Name"> -->
+
+      <div ng-messages="companyForm.lastName.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'lastName')}">
+        <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+        <label class="control-label" ng-message="required">Last name is required.</label>
+      </div>
+      <input placeholder="Last Name" type="text" aria-expanded="true" ng-maxlength="15"
+             name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
+    </div>
     <div class="col-md-6"><input type="text" placeholder="Country"></div>
     <div class="col-md-6 col-md-offset-6"><input type="text" placeholder="Province/State"></div>
   </div>
