@@ -10,6 +10,8 @@
           require: 'ngModel',
           link: function (scope, element, attrs, ngModelCtrl) {
 
+            console.log('INVOICE CONTENT MOTHERFUCKER', scope)
+
             var invoiceTemplate,
               invoiceModalWindow = $('.modal-open .modal');
 
@@ -26,9 +28,11 @@
             }, function () {
 
               if (ngModelCtrl.$viewValue) {
-                element.animate({right: "15px"});
+                // element.animate({right: "15px"});
 
                 scope.currentInvoice = ngModelCtrl.$viewValue;
+
+                console.log(scope, ngModelCtrl, "JERERER")
 
                 if (scope.showInvoiceLockIndex && scope.invoiceLocks && scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
 
@@ -43,6 +47,7 @@
                   if(scope.currentInvoice.billTo) {
                     for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
                       if (scope.currentInvoice.billTo[i].isPrimary) {
+                        console.log(scope.currentInvoice, scope, "!!!!")
                         scope.currentBillTo = scope.currentInvoice.billTo[i];
                         scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
                       }
@@ -185,17 +190,17 @@
             }
 
             function compileInvoice() {
-              ($compile(invoiceTemplate.data)(scope, function (compileElement, scope) {
-                $timeout(function () {
-
-                  element.html(compileElement);
-
-                  splitPage();
-                  initNanoScroller(compileElement);
-                  initDropdown()
-
-                })
-              }));
+              // ($compile(invoiceTemplate.data)(scope, function (compileElement, scope) {
+              //   $timeout(function () {
+              //
+              //     element.html(compileElement);
+              //
+              //     splitPage();
+              //     initNanoScroller(compileElement);
+              //     initDropdown()
+              //
+              //   })
+              // }));
             }
 
           }

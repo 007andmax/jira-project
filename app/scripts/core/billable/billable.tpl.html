@@ -1,298 +1,236 @@
 <!--NEW INVOICE EDIT-->
-<div ng-if="isInvoiceShown" ng-controller="quicktech.core.billable.createInvoiceCtrl">
+<div ng-if="isInvoiceShown" ng-controller="quicktech.core.billable.createInvoiceCtrl" >
 
-  <div ng-if="!isPreviewShown" class="invoice-edit invoice-create">
-    <div class="invoice-create--header">
-      <h3>New Invoice</h3>
-      <div class="invoice-create--header__btn">
-        <button class="btn btn-default" ng-click="togglePreview()">Preview</button>
-        <button class="btn btn-success">Save and Continue</button>
-      </div>
-    </div>
+  <div ng-if="locksInitialized" invoice-modal-window>
+    <div ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto || currentInvoice" invoice-content>
+      <div ng-if="!isPreviewShown" class="invoice-edit invoice-create">
 
-    <div class="invoice-create--info">
-      <p class="bold" style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px;' : '' }}">Business Address and Contact Details, Title, Summary, and Logo</p>
-      <i class="icn-sm pointer report-caret-icon" ng-click="toggleInvoiceHeader()"></i>
-      <div class="invoice-create--info__content" ng-if="isInvoiceHeaderShown">
-
-        <div class="tech-company-logo" is-invoice="true" edit-avatar model="editCompany" model-name="techCompany"></div>
-
-        <!-- <div class="invoice-logo" style="position: relative;">
-          <div class="drop-area-wrapper" attach-files attach-func="attachDraggedAvatar">
-            <div class="drop-area-subwrapper">
-              <p class="drop-area">
-                Drop Files Here
-              </p>
-            </div>
-          </div>
-          <div class="drag-n-drop-body">
-            <div ticket-attachment-files attachment-func="attachDraggedAvatar"
-                 ng-model="ticketUpdate.ticketAttachments">
-              <p class="bold"><a href="#">Browse</a> or drop your logo here.</p>
-              <p style="opacity: .5;">Maximum 5 MB in size.</p>
-              <p style="opacity: .5;">JPG, PNG, or GIF formats.</p>
-              <p style="opacity: .5;">Recommended size 300 x 200 pixels.</p>
-              <input type="file" class="file-input" multiple=""/>
-            </div>
-          </div>
-        </div> -->
-
-
-
-        <!-- <div class="invoice-logo" style="position: relative;">
-          <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
-            <div class="drop-area-subwrapper">
-              <p class="drop-area">
-                Drop Files Here
-              </p>
-            </div>
-          </div>
-          <div class="drag-n-drop-body">
-            <div ticket-attachment-files attachment-func="addAttachmentFiles"
-                 ng-model="ticketUpdate.ticketAttachments">
-              <p class="bold"><a href="#">Browse</a> or drop your logo here.</p>
-              <p style="opacity: .5;">Maximum 5 MB in size.</p>
-              <p style="opacity: .5;">JPG, PNG, or GIF formats.</p>
-              <p style="opacity: .5;">Recommended size 300 x 200 pixels.</p>
-              <input type="file" class="file-input" multiple=""/>
-            </div>
-            <ul class="upload-attachments">
-              <li ng-repeat="file in ticketAttachments"
-                  ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
-
-                <span class="file-name">{{ file.name }}</span>
-                <span class="file-size">{{ file.size | fileSizeFilter }}</span>
-
-                <a href="javascript:void(0)" class="hit-area pull-right"
-                   uib-tooltip="Remove file" tooltip-placement="top"
-                   ng-click="removeAttachment($index, fileInfo[file.name].error)">
-                  <i class="icn-sm icn-remove-old"></i>
-                </a>
-
-                <a href="javascript:void(0)" class="hit-area pull-right"
-                   ng-show="file.progress !== 100"
-                   uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
-                  <i class="icn-sm icn-reupload"></i>
-                </a>
-
-                <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
-                  <div class="progress-bar" role="progressbar"
-                       aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
-                       ng-style="styleProgressBar(file.progress)">
-                    <span class="sr-only">{{ file.progress }}% Complete</span>
-                  </div>
-                </div>
-
-                <span class="pull-right" ng-show="fileInfo[file.name].error"
-                      uib-tooltip="{{ fileInfo[file.name].message }}"
-                      tooltip-append-to-body tooltip-placement="top"
-                      style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 250px;text-overflow: ellipsis">
-                  {{ fileInfo[file.name].message }}
-                </span>
-
-              </li>
-            </ul>
-          </div>
-        </div> -->
-
-
-
-        <div class="invoice-info">
-          <div>
-            <span class="bold">Invoice Number</span> <input type="text" placeholder="Invoice Number" ng-model="invoiceNumber">
-          </div>
-          <div>
-            <p class="bold">Active Information Systems</p>
-          </div>
-          <div>
-            <p>3673 th Street,</p>
-            <p>Edmonton Alberta</p>
-          </div>
-          <div>
-            <p>780-903-8719</p>
-          </div>
-          <div>
-            <a class="bold pointer" ng-click="openEditModal('contacts')">Edit Your Business Address and Contact Details</a>
+        <div class="invoice-create--header">
+          <h3>New Invoice</h3>
+          <div class="invoice-create--header__btn">
+            <button class="btn btn-default" ng-click="togglePreview()">Preview</button>
+            <!-- <button class="btn btn-success">Save and Continue</button> -->
+            <button ng-if="!invoicePreview && !invoiceCreated"
+                    ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
+                    ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                    tooltip-append-to-body="true"
+                    tooltip-placement="bottom"
+                    uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
+              <i class="invoice-download"></i>
+              Save and Continue
+            </button>
           </div>
         </div>
-      </div>
-    </div>
+
+        <div class="invoice-create--info">
+          <p class="bold" style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px;' : '' }}">Business Address and Contact Details, Title, Summary, and Logo</p>
+          <i class="icn-sm pointer report-caret-icon" ng-click="toggleInvoiceHeader()"></i>
+          <div class="invoice-create--info__content" ng-if="isInvoiceHeaderShown">
+
+            <div class="tech-company-logo" is-invoice="true" edit-avatar model="editCompany" model-name="techCompany"></div>
 
 
-    <div class="invoice-create--info-2">
-      <div class="bill-anton">
-        <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
-        <p class="bold">activeis</p>
-        <p>Scott Willson</p>
-        <p>104 Street Southwest</p>
-        <p style="margin-bottom: 20px;">High River, AB T1V</p>
-        <a class="bold pointer" ng-click="openEditModal('customer')">Edit Customer</a>
-      </div>
-      <div class="bill-valera">
-        <div><span>Tax Number</span><input type="text" placeholder="Tax Number"></div>
-        <div><span>Invoice Date</span><input type="text" placeholder="Invoice Date"></div>
-        <div><span>Payment Due</span><input type="text" placeholder="Payment Due"></div>
-      </div>
-    </div>
-    <div class="invoice-list">
-      <div class="invoice-list--item">
-        <div class="invoice-list--item__header">
-          <div class="pavlik clearfix">
-            <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
-            <div class="col-md-9 bold" style="opacity: .7;">Subject</div>
-            <div class="col-md-1 text-right pr-30" style="opacity: .7;">21 Jan 2018</div>
-          </div>
-          <div class="clearfix">
-            <div class="col-md-2 pl-30">#8990</div>
-            <div class="col-md-10 pr-30">Install back and color printers</div>
-          </div>
-        </div>
-        <div class="invoice-list--item__content">
-          <div class="pavlik p-2 clearfix" style="background-color:#F5F8FA;">
-            <div class="col-md-7 bold pl-30">Item</div>
-            <div class="col-md-1 bold">Unit Price</div>
-            <div class="col-md-1 bold">Quantity</div>
-            <div class="col-md-1 bold">Tax</div>
-            <div class="col-md-2 bold text-right pr-30">Total</div>
-          </div>
-          <div class="clearfix p-14">
-            <div class="col-md-7 pl-30">AVG Cloud AntiVirus</div>
-            <div class="col-md-1">$896</div>
-            <div class="col-md-1">10</div>
-            <div class="col-md-1">$2.10</div>
-            <div class="col-md-2 text-right pr-30">$8,960</div>
-          </div>
-        </div>
-      </div>
-      <div class="invoice-list--footer">
-        <div class="invoice-list--footer__top">
-          <div class="clearfix" style="margin-bottom: 5px;">
-            <div class="col-md-9 bold pl-30">Customer Note Type</div>
-            <div class="col-md-1 bold fz-11">Sub Total</div>
-            <div class="col-md-2 text-right pr-30">$46,890</div>
-          </div>
-          <div class="clearfix" style="margin-bottom: 15px;">
-            <div class="col-md-9 pl-30">
-              <input type="text" placeholder="Add Note"><span style="margin-left: 15px;"><a href="#"
-                                                                                            class="bold">Add Note</a></span>
+            <div class="invoice-info">
+              <div>
+                <span class="bold">Invoice Number</span> <input type="text" placeholder="Invoice Number" ng-model="invoiceNumber">
+              </div>
+              <div>
+                <p class="bold">Active Information Systems</p>
+              </div>
+              <div>
+                <p>3673 th Street,</p>
+                <p>Edmonton Alberta</p>
+              </div>
+              <div>
+                <p>780-903-8719</p>
+              </div>
+              <div>
+                <a class="bold pointer" ng-click="openEditModal('contacts')">Edit Your Business Address and Contact Details</a>
+              </div>
             </div>
-            <div class="col-md-1 bold fz-11" style="padding: 8px 15px;">Tax</div>
-            <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">$210.00</div>
-          </div>
-          <div class="clearfix">
-            <div class="col-md-9 pl-30">Company’s Credit note policy is 15days will be consider from Invoice date
-              generated.
-            </div>
-            <div class="col-md-1 bold fz-11">Total</div>
-            <div class="col-md-2 bold fz-16 text-right pr-30">$47,890</div>
           </div>
         </div>
-        <div class="invoice-list--footer__bottom clearfix">
-          <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-          <div class="col-md-12 pl-30">Mention your company’s Terms and Conditions.</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
-  <!--NEW INVOICE PREVIEW-->
-
-  <div ng-if="isPreviewShown" class="invoice-preview invoice-create">
-    <div class="invoice-create--header">
-      <h3>New Invoice</h3>
-      <div class="invoice-create--header__btn">
-        <button class="btn btn-default" ng-click="togglePreview()">Edit</button>
-        <button class="btn btn-success">Save and Continue</button>
-      </div>
-    </div>
-    <p class="info-block">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
-    <div class="invoice-list">
-      <div class="invoice-list--header">
-        <div class="invoice-list--header__top clearfix">
-          <div class="col-md-5 pl-30">
-            <img src="https://www.imperialinnovations.co.uk/r/19-519/" alt="logo">
-          </div>
-          <div class="col-md-7 text-right pr-30">
-            <h4 class="bold">Invoice <span>#{{ invoiceNumber }}</span></h4>
-            <p class="bold">Active Information Systems</p>
-            <p>3673 th Street, Edmonton Alberta</p>
-            <p>780-903-8719</p>
-          </div>
-        </div>
-        <div class="invoice-list--header__bottom clearfix">
-          <div class="col-md-7 pl-30">
+        <div class="invoice-create--info-2">
+          <div class="bill-anton">
             <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
-            <p class="bold" style="margin-bottom: 10px;">activeis</p>
+            <p class="bold">activeis</p>
             <p>Scott Willson</p>
             <p>104 Street Southwest</p>
-            <p>High River, AB T1V</p>
-            <p>scott@activeis.ca</p>
+            <p style="margin-bottom: 20px;">High River, AB T1V</p>
+            <a class="bold pointer" ng-click="openEditModal('customer')">Edit Customer</a>
           </div>
-          <div class="col-md-5 pr-30">
-            <p class="bold"><span>568906</span>Tax Number</p>
-            <p class="bold"><span>06 Nov 2018</span>Invoice Date:</p>
-            <p class="bold"><span>10 Dec 2018</span>Payment Due</p>
-            <p class="bold"><span style="font-weight: 700!important;">$8,960</span>Amount Due:</p>
-          </div>
-        </div>
-      </div>
-      <div class="invoice-list--item">
-        <div class="invoice-list--item__header">
-          <div class="pavlik clearfix">
-            <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
-            <div class="col-md-7 bold" style="opacity: .7;">Subject</div>
-            <div class="col-md-3 text-right pr-30" style="opacity: .7;">21 Jan 2018</div>
-          </div>
-          <div class="clearfix">
-            <div class="col-md-2 pl-30">#8990</div>
-            <div class="col-md-10 pr-30">Install back and color printers</div>
+          <div class="bill-valera">
+            <div><span>Tax Number</span><input type="text" placeholder="Tax Number"></div>
+            <div><span>Invoice Date</span><input type="text" placeholder="Invoice Date"></div>
+            <div><span>Payment Due</span><input type="text" placeholder="Payment Due"></div>
           </div>
         </div>
-        <div class="invoice-list--item__content">
-          <div class="pavlik p-2 clearfix" style="background-color:#F5F8FA;">
-            <div class="col-md-4 bold pl-30">Item</div>
-            <div class="col-md-2 bold">Unit Price</div>
-            <div class="col-md-2 bold">Quantity</div>
-            <div class="col-md-2 bold">Tax</div>
-            <div class="col-md-2 bold text-right pr-30">Total</div>
-          </div>
-          <div class="clearfix p-14">
-            <div class="col-md-4 pl-30">AVG Cloud AntiVirus</div>
-            <div class="col-md-2">$896</div>
-            <div class="col-md-2">10</div>
-            <div class="col-md-2">$2.10</div>
-            <div class="col-md-2 text-right pr-30">$8,960</div>
-          </div>
-        </div>
-      </div>
-      <div class="invoice-list--footer">
-        <div class="invoice-list--footer__top">
-          <div class="clearfix" style="margin-bottom: 5px;">
-            <div class="col-md-8 bold pl-30">Customer Note Type</div>
-            <div class="col-md-2 bold fz-11">Sub Total</div>
-            <div class="col-md-2 text-right pr-30">$46,890</div>
-          </div>
-          <div class="clearfix">
-            <div class="col-md-8 pl-30">Company’s Credit note policy is 15days will be consider from Invoice date
-              generated.
+        <div class="invoice-list">
+          <div class="invoice-list--item">
+            <div class="invoice-list--item__header">
+              <div class="pavlik clearfix">
+                <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
+                <div class="col-md-9 bold" style="opacity: .7;">Subject</div>
+                <div class="col-md-1 text-right pr-30" style="opacity: .7;">21 Jan 2018</div>
+              </div>
+              <div class="clearfix">
+                <div class="col-md-2 pl-30">#8990</div>
+                <div class="col-md-10 pr-30">Install back and color printers</div>
+              </div>
             </div>
-            <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
-            <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">$210.00</div>
+            <div class="invoice-list--item__content">
+              <div class="pavlik p-2 clearfix" style="background-color:#F5F8FA;">
+                <div class="col-md-7 bold pl-30">Item</div>
+                <div class="col-md-1 bold">Unit Price</div>
+                <div class="col-md-1 bold">Quantity</div>
+                <div class="col-md-1 bold">Tax</div>
+                <div class="col-md-2 bold text-right pr-30">Total</div>
+              </div>
+              <div class="clearfix p-14">
+                <div class="col-md-7 pl-30">AVG Cloud AntiVirus</div>
+                <div class="col-md-1">$896</div>
+                <div class="col-md-1">10</div>
+                <div class="col-md-1">$2.10</div>
+                <div class="col-md-2 text-right pr-30">$8,960</div>
+              </div>
+            </div>
           </div>
-          <div class="clearfix">
-            <div class="col-md-8 pl-30"></div>
-            <div class="col-md-2 bold fz-11">Total</div>
-            <div class="col-md-2 bold fz-16 text-right pr-30">$47,890</div>
+          <div class="invoice-list--footer">
+            <div class="invoice-list--footer__top">
+              <div class="clearfix" style="margin-bottom: 5px;">
+                <div class="col-md-9 bold pl-30">Customer Note Type</div>
+                <div class="col-md-1 bold fz-11">Sub Total</div>
+                <div class="col-md-2 text-right pr-30">$46,890</div>
+              </div>
+              <div class="clearfix" style="margin-bottom: 15px;">
+                <div class="col-md-9 pl-30">
+                  <input type="text" placeholder="Add Note"><span style="margin-left: 15px;"><a href="#"
+                                                                                                class="bold">Add Note</a></span>
+                </div>
+                <div class="col-md-1 bold fz-11" style="padding: 8px 15px;">Tax</div>
+                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">$210.00</div>
+              </div>
+              <div class="clearfix">
+                <div class="col-md-9 pl-30">Company’s Credit note policy is 15days will be consider from Invoice date
+                  generated.
+                </div>
+                <div class="col-md-1 bold fz-11">Total</div>
+                <div class="col-md-2 bold fz-16 text-right pr-30">$47,890</div>
+              </div>
+            </div>
+            <div class="invoice-list--footer__bottom clearfix">
+              <div class="col-md-12 bold pl-30">Terms & Conditions</div>
+              <div class="col-md-12 pl-30">Mention your company’s Terms and Conditions.</div>
+            </div>
           </div>
         </div>
-        <div class="invoice-list--footer__bottom clearfix">
-          <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-          <div class="col-md-12 pl-30">Mention your company’s Terms and Conditions.</div>
+      </div>
+
+
+      <!--NEW INVOICE PREVIEW-->
+
+      <div ng-if="isPreviewShown" class="invoice-preview invoice-create">
+        <div class="invoice-create--header">
+          <h3>New Invoice</h3>
+          <div class="invoice-create--header__btn">
+            <button class="btn btn-default" ng-click="togglePreview()">Edit</button>
+            <button class="btn btn-success">Save and Continue</button>
+          </div>
+        </div>
+        <p class="info-block">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
+        <div class="invoice-list">
+          <div class="invoice-list--header">
+            <div class="invoice-list--header__top clearfix">
+              <div class="col-md-5 pl-30">
+                <img src="https://www.imperialinnovations.co.uk/r/19-519/" alt="logo">
+              </div>
+              <div class="col-md-7 text-right pr-30">
+                <h4 class="bold">Invoice <span>#{{ invoiceNumber }}</span></h4>
+                <p class="bold">Active Information Systems</p>
+                <p>3673 th Street, Edmonton Alberta</p>
+                <p>780-903-8719</p>
+              </div>
+            </div>
+            <div class="invoice-list--header__bottom clearfix">
+              <div class="col-md-7 pl-30">
+                <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
+                <p class="bold" style="margin-bottom: 10px;">activeis</p>
+                <p>Scott Willson</p>
+                <p>104 Street Southwest</p>
+                <p>High River, AB T1V</p>
+                <p>scott@activeis.ca</p>
+              </div>
+              <div class="col-md-5 pr-30">
+                <p class="bold"><span>568906</span>Tax Number</p>
+                <p class="bold"><span>06 Nov 2018</span>Invoice Date:</p>
+                <p class="bold"><span>10 Dec 2018</span>Payment Due</p>
+                <p class="bold"><span style="font-weight: 700!important;">$8,960</span>Amount Due:</p>
+              </div>
+            </div>
+          </div>
+          <div class="invoice-list--item">
+            <div class="invoice-list--item__header">
+              <div class="pavlik clearfix">
+                <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
+                <div class="col-md-7 bold" style="opacity: .7;">Subject</div>
+                <div class="col-md-3 text-right pr-30" style="opacity: .7;">21 Jan 2018</div>
+              </div>
+              <div class="clearfix">
+                <div class="col-md-2 pl-30">#8990</div>
+                <div class="col-md-10 pr-30">Install back and color printers</div>
+              </div>
+            </div>
+            <div class="invoice-list--item__content">
+              <div class="pavlik p-2 clearfix" style="background-color:#F5F8FA;">
+                <div class="col-md-4 bold pl-30">Item</div>
+                <div class="col-md-2 bold">Unit Price</div>
+                <div class="col-md-2 bold">Quantity</div>
+                <div class="col-md-2 bold">Tax</div>
+                <div class="col-md-2 bold text-right pr-30">Total</div>
+              </div>
+              <div class="clearfix p-14">
+                <div class="col-md-4 pl-30">AVG Cloud AntiVirus</div>
+                <div class="col-md-2">$896</div>
+                <div class="col-md-2">10</div>
+                <div class="col-md-2">$2.10</div>
+                <div class="col-md-2 text-right pr-30">$8,960</div>
+              </div>
+            </div>
+          </div>
+          <div class="invoice-list--footer">
+            <div class="invoice-list--footer__top">
+              <div class="clearfix" style="margin-bottom: 5px;">
+                <div class="col-md-8 bold pl-30">Customer Note Type</div>
+                <div class="col-md-2 bold fz-11">Sub Total</div>
+                <div class="col-md-2 text-right pr-30">$46,890</div>
+              </div>
+              <div class="clearfix">
+                <div class="col-md-8 pl-30">Company’s Credit note policy is 15days will be consider from Invoice date
+                  generated.
+                </div>
+                <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
+                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">$210.00</div>
+              </div>
+              <div class="clearfix">
+                <div class="col-md-8 pl-30"></div>
+                <div class="col-md-2 bold fz-11">Total</div>
+                <div class="col-md-2 bold fz-16 text-right pr-30">$47,890</div>
+              </div>
+            </div>
+            <div class="invoice-list--footer__bottom clearfix">
+              <div class="col-md-12 bold pl-30">Terms & Conditions</div>
+              <div class="col-md-12 pl-30">Mention your company’s Terms and Conditions.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+
+
 
 </div>
 
@@ -306,6 +244,12 @@
    modal-window-class="invoice-modal-not-background"
    mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
    mw-controller="quicktech.core.billable.createInvoiceCtrl">Create Invoice
+</button> -->
+
+<!-- <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip"
+   style="width: 98px;"
+   custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
+   ng-click="showInvoice()">Create Invoice
 </button> -->
 
 <div class="billable-items" ng-if="!isInvoiceShown">

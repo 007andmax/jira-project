@@ -18,41 +18,41 @@
             modalTransclude = modalWindow.find('[modal-transclude]');
 
           scope.zoomRange = 1;
-
-          $('html').css('overflow-y', 'hidden');
-          centering();
-          $('.modal-backdrop.in').css({ background: 'none' });
-
-          element.find('.nano').nanoScroller();
-
-          element.find(".dropdown").on('shown.bs.dropdown', function () {
-            element.find('.nano').nanoScroller();
-          });
-
-          function centering() {
-
-            var wrapperWidth = window.innerWidth,
-              zoomMargin = parseInt((wrapperWidth - 300) / 2);
-
-            zoomSlider.css("margin-left", zoomMargin);
-            companyDropdown.css("width", zoomMargin);
-          }
-
-          icnZoomPlus.click(function () {
-            if (scope.zoomRange < 3) {
-              scope.zoomRange = +scope.zoomRange + 0.1;
-            }
-          });
-
-          icnZoomMinus.click(function () {
-            if (scope.zoomRange > 1) {
-              scope.zoomRange = +scope.zoomRange - 0.1;
-            }
-          });
-
-          $(window).resize(function () {
-            centering()
-          });
+          //
+          // $('html').css('overflow-y', 'hidden');
+          // centering();
+          // $('.modal-backdrop.in').css({ background: 'none' });
+          //
+          // element.find('.nano').nanoScroller();
+          //
+          // element.find(".dropdown").on('shown.bs.dropdown', function () {
+          //   element.find('.nano').nanoScroller();
+          // });
+          //
+          // function centering() {
+          //
+          //   var wrapperWidth = window.innerWidth,
+          //     zoomMargin = parseInt((wrapperWidth - 300) / 2);
+          //
+          //   zoomSlider.css("margin-left", zoomMargin);
+          //   companyDropdown.css("width", zoomMargin);
+          // }
+          //
+          // icnZoomPlus.click(function () {
+          //   if (scope.zoomRange < 3) {
+          //     scope.zoomRange = +scope.zoomRange + 0.1;
+          //   }
+          // });
+          //
+          // icnZoomMinus.click(function () {
+          //   if (scope.zoomRange > 1) {
+          //     scope.zoomRange = +scope.zoomRange - 0.1;
+          //   }
+          // });
+          //
+          // $(window).resize(function () {
+          //   centering()
+          // });
 
           if (scope.invoiceLocks) {
             for (var i = 0; i < scope.invoiceLocks.length; i++) {
@@ -100,10 +100,10 @@
           });
 
           scope.$watch('zoomRange', function () {
-            initHorizontalScroll()
+            // initHorizontalScroll()
           });
 
-          $(window).resize(initHorizontalScroll)
+          // $(window).resize(initHorizontalScroll)
 
           function initHorizontalScroll() {
 

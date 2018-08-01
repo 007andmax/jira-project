@@ -181,6 +181,24 @@
         Utils.handleCallback(sentDiscount, callback);
       }
 
+      function updateInvoiceData(data, lockId, callback) {
+        var data = {
+          "invoiceNumber": data.invoiceNumber || null, // null is allowed
+          "dueDate": data.dueDate || null, // null is allowed
+          "invoiceNoteIds": data.invoiceNoteIds || null // null of not empty
+        }
+
+        var request = $http({
+          url: '/invoice/partialUpdate/' + lockId,
+          method: 'POST',
+          data: data
+        });
+
+        if (callback) {
+          Utils.handleCallback(future, callback);
+        }
+      }
+
       function createInvoice(lockId, isSend, contact, address, callback) {
         if (!lockId) {
           throw 'lockId is required!'
@@ -272,6 +290,7 @@
 
       return {
         createInvoice: createInvoice,
+        updateInvoiceData: updateInvoiceData,
         getActualInvoiceNumber: getActualInvoiceNumber,
         getLockedTicketIds: getLockedTicketIds,
         lockTicketIds: lockTicketIds,

@@ -29,9 +29,12 @@
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
           $scope.invoiceNumber = number;
+          $scope.receivedInvoiceNumber = true;
         });
 
         $scope.isInvoiceHeaderShown = true;
+
+        console.log($scope.ticketsSelection, 'tickets tickets')
 
         for (var companyId in $scope.ticketsSelection) {
 
@@ -149,9 +152,23 @@
           }
         };
 
+        $scope.$watch('invoiceNumber', function(val) {
+          console.log('data data')
+          if ($scope.receivedInvoiceNumber && $scope.invoiceLocks[$scope.showInvoiceLockIndex] && $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId) {
+            console.log(val, 'updated update')
+            BillableService.updateInvoiceData({ invoiceNumber: val }, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+          }
+        })
+
+        $scope.updateInvoice = function(data) {
+
+        }
+
         function lockTickets(companyId, selectedTickets) {
 
           locksCount++;
+
+          console.log('IM HERE', selectedTickets)
 
           if (selectedTickets) {
 
@@ -178,11 +195,11 @@
             lockObj.invoiceDataDto.company.companyInfo = CompaniesService.getOneById(lock.invoiceDataDto.company.id);
 
             $scope.invoiceLocks.push(lockObj);
-            console.log('$scope.invoiceLocks', $scope.invoiceLocks)
 
           }
 
           locksCount--;
+          console.log('$scope.invoiceLocks', $scope.invoiceLocks)
 
           if (locksCount === 0) {
             $scope.locksInitialized = true;
