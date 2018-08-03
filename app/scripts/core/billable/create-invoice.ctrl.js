@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope',
-      function ($scope, BillableService, CompaniesService, Downloader, UserNotificationService, $timeout, $rootScope) {
+    ['$scope', 'BillableService', 'CompaniesService', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope', 'EmailSettingsService',
+      function ($scope, BillableService, CompaniesService, Downloader, UserNotificationService, $timeout, $rootScope, EmailSettingsService) {
 
         var locksCount = 0;
 
@@ -16,6 +16,21 @@
         $scope.shoeInvoiceCreatedMessage = false;
         $scope.notificationMessage = 'Invoice has been created';
         $scope.editCompany = CompaniesService.getCurrentCompany().staticCopy();
+        $scope.firstUpdatedDate = false;
+
+        $scope.taxIdData = {
+          taxIdDescription: '',
+          taxId: ''
+        };
+        EmailSettingsService.getTaxNumber(function(resp) {
+          $scope.taxIdData = resp;
+        });
+
+        $scope.changeTaxIdData = function() {
+          EmailSettingsService.updateTaxNumber($scope.taxIdData, function(resp) {
+            console.log(resp);
+          })
+        };
 
 
         $scope.$watch(function() {
@@ -26,6 +41,45 @@
             console.log(val, "VAL")
           }
         })
+
+        $scope.regularNotes = [
+          {
+            title: 'note1',
+            text: 'regular note1'
+          },
+          {
+            title: 'note2',
+            text: 'regulare note 2'
+          },
+          {
+            title: 'note3',
+            text: 'reqgular nite'
+          }
+        ];
+
+        $scope.updateNote = function(note) {
+          console.log(note, 'note')
+        }
+
+        $scope.savePaymentDue = function(due) {
+          console.log('payment due', due)
+
+          $scope.paymentDue = moment(due).format("YYYY-MM-DD")
+
+          console.log(moment(due).format("YYYY-MM-DD"), 'moment')
+
+          if (!$scope.firstUpdatedDate) {
+            $scope.firstUpdatedDate = true;
+          } else {
+            var request = {
+              "invoiceNumber": $scope.invoiceNumber || null, // null is allowed
+              "dueDate": $scope.paymentDue, // null is allowed
+              "invoiceNoteIds": [] || null
+            }
+
+            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+          }
+        }
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
           $scope.invoiceNumber = number;
@@ -155,10 +209,20 @@
         $scope.$watch('invoiceNumber', function(val) {
           console.log('data data')
           if ($scope.receivedInvoiceNumber && $scope.invoiceLocks[$scope.showInvoiceLockIndex] && $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId) {
-            console.log(val, 'updated update')
-            BillableService.updateInvoiceData({ invoiceNumber: val }, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+            console.log(val, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, 'updated update')
+            var request = {
+              "invoiceNumber": val, // null is allowed
+              "dueDate": $scope.paymentDue || null, // null is allowed
+              "invoiceNoteIds": [] || null
+            }
+
+            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
           }
         })
+
+        $scope.changeInvoiceNumber = function(value) {
+          $scope.invoiceNumber = value;
+        }
 
         $scope.updateInvoice = function(data) {
 
