@@ -201,7 +201,7 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-9 pl-30">
-                  <textarea style="width: 100%" ng-model="chosenNote.line" ng-keypress="saveNote()" maxlength="510"></textarea>
+                  <textarea ng-if="chosenNote.line" style="width: 100%" ng-model="chosenNote.line" ng-keypress="saveNote()" maxlength="510"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
                 <div class="col-md-2 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
