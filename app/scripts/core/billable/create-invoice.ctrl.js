@@ -18,6 +18,58 @@
         $scope.editCompany = CompaniesService.getCurrentCompany().staticCopy();
         $scope.firstUpdatedDate = false;
 
+        $scope.regularNotes = [];
+        $scope.globalNote = {};
+
+        BillableService.getInvoiceData(function(res) {
+          var data = res.data;
+          console.log(data, 'data')
+          $scope.regularNotes = data.filter(function(el) {
+            return el.noteType === 'REGULAR';
+          });
+
+          $scope.globalNote = data.filter(function(el) {
+            return el.noteType === 'GLOBAL';
+          })[0];
+
+          console.log($scope.globalNote, data, 'data data')
+
+        })
+
+        var data = [
+          {
+            title: 'cool',
+            noteType: 'REGULAR',
+            line1: 'first title ever'
+          },
+          {
+            title: 'second',
+            noteType: 'REGULAR',
+            line1: 'second title ever'
+          },
+          {
+            title: 'third',
+            noteType: 'REGULAR',
+            line1: 'third title ever'
+          },
+          {
+            noteType: 'GLOBAL',
+            line1: 'first global note ever'
+          }
+        ]
+
+        $scope.chosenNote = {
+          title: '',
+          line1: '',
+          line2: ''
+        }
+
+        // for (var i = 0; i < data.length; i++) {
+        //   BillableService.createNote(data[i], function(res) {
+        //     console.log(res, 'res')
+        //   });
+        // }
+
         $scope.taxIdData = {
           taxIdDescription: '',
           taxId: ''
@@ -41,24 +93,42 @@
             console.log(val, "VAL")
           }
         })
+        $scope.$watch('ticketNote', function(val) {
+          // console.log(val, 'ticketNote a sa  as saas sas sa as a as ')
+        })
 
-        $scope.regularNotes = [
-          {
-            title: 'note1',
-            text: 'regular note1'
-          },
-          {
-            title: 'note2',
-            text: 'regulare note 2'
-          },
-          {
-            title: 'note3',
-            text: 'reqgular nite'
+        $scope.saveNote = function() {
+          // console.log($scope.chosenNote, 'chosen')
+        }
+
+        $scope.saveUpdatedNote = function() {
+          var note = $scope.chosenNote;
+          var line1 = note.line.slice(0, 255);
+          var line2 = note.line.slice(255, 510)
+
+          $scope.chosenNote.line1 = line1;
+          $scope.chosenNote.line2 = line2;
+          $scope.chosenNote.title = note.title;
+
+          var data = {
+            title: note.title,
+            line1: line1,
+            line2: line2 || null
           }
-        ];
+
+
+          BillableService.updateNote(data, note.id)
+
+          $scope.chosenNote.line1 = line1;
+          $scope.chosenNote.line2 = line2;
+          $scope.chosenNote.title = note.title;
+          $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+        }
 
         $scope.updateNote = function(note) {
-          console.log(note, 'note')
+          $scope.chosenNote = note;
+          $scope.chosenNote.line = note.line1 + (note.line2 || '');
+          console.log($scope.chosenNote, 'CJOSEN')
         }
 
         $scope.savePaymentDue = function(due) {
@@ -207,7 +277,6 @@
         };
 
         $scope.$watch('invoiceNumber', function(val) {
-          console.log('data data')
           if ($scope.receivedInvoiceNumber && $scope.invoiceLocks[$scope.showInvoiceLockIndex] && $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId) {
             console.log(val, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, 'updated update')
             var request = {

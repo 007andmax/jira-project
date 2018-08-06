@@ -214,6 +214,38 @@
 
       }
 
+      function getInvoiceData(callback) {
+        $http.get('/invoice/invoiceNote/getAll').then(function(res) {
+          if (callback) {
+            callback(res);
+          }
+        })
+      }
+
+      function createNote(data, callback) {
+        var request = $http({
+          url: '/invoice/createInvoiceNote?createRegular=' + (data.noteType === "REGULAR"),
+          method: 'POST',
+          data: [data]
+        });
+
+        if (callback) {
+          Utils.handleCallback(request, callback);
+        }
+      }
+
+      function updateNote(data, id, callback) {
+        var request = $http({
+          url: '/invoice/updateInvoiceNote/' + id,
+          method: 'POST',
+          data: data
+        });
+
+        if (callback) {
+          Utils.handleCallback(request, callback);
+        }
+      }
+
       function getExistTimeByLockId(lockId, callback) {
 
         if (!lockId) {
@@ -291,6 +323,9 @@
       return {
         createInvoice: createInvoice,
         updateInvoiceData: updateInvoiceData,
+        getInvoiceData: getInvoiceData,
+        createNote: createNote,
+        updateNote: updateNote,
         getActualInvoiceNumber: getActualInvoiceNumber,
         getLockedTicketIds: getLockedTicketIds,
         lockTicketIds: lockTicketIds,
