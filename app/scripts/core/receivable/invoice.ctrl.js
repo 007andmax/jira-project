@@ -24,6 +24,8 @@
         }
 
 
+
+
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var dateOfinvoiceCreate = new Date($scope.invoice.date).getTime();

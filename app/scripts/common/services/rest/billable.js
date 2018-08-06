@@ -185,7 +185,7 @@
         var data = {
           "invoiceNumber": data.invoiceNumber || null, // null is allowed
           "dueDate": data.dueDate || null, // null is allowed
-          "invoiceNoteIds": data.invoiceNoteIds || null // null of not empty
+          "regularInvoiceNote": data.regularInvoiceNote || null // null of not empty
         }
 
         var request = $http({

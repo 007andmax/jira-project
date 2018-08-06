@@ -32,29 +32,30 @@
             return el.noteType === 'GLOBAL';
           })[0];
 
-          console.log($scope.globalNote, data, 'data data')
+          // console.log($scope.globalNote, data, 'data data')
 
         })
 
         var data = [
           {
-            title: 'cool',
+            title: 'Note 1',
             noteType: 'REGULAR',
-            line1: 'first title ever'
+            line1: 'Note 1 description'
           },
           {
-            title: 'second',
+            title: 'Note 2',
             noteType: 'REGULAR',
-            line1: 'second title ever'
+            line1: 'Note 2 description'
           },
           {
-            title: 'third',
+            title: 'Note 5',
             noteType: 'REGULAR',
-            line1: 'third title ever'
+            line1: 'Note 5 description'
           },
           {
             noteType: 'GLOBAL',
-            line1: 'first global note ever'
+            line1: 'Note 4 description',
+            title: 'Note 4'
           }
         ]
 
@@ -98,10 +99,10 @@
         })
 
         $scope.saveNote = function() {
-          // console.log($scope.chosenNote, 'chosen')
+
         }
 
-        $scope.saveUpdatedNote = function() {
+        $scope.saveUpdatedNote = function(globalUpdate) {
           var note = $scope.chosenNote;
           var line1 = note.line.slice(0, 255);
           var line2 = note.line.slice(255, 510)
@@ -116,18 +117,37 @@
             line2: line2 || null
           }
 
+          if (globalUpdate) {
 
-          BillableService.updateNote(data, note.id)
+            // console.log('globalUpdate', data, 'asdadadas')
+            // data.suggestedNote = true;
+            BillableService.updateNote(data, note.id)
 
-          $scope.chosenNote.line1 = line1;
-          $scope.chosenNote.line2 = line2;
-          $scope.chosenNote.title = note.title;
-          $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+            $scope.chosenNote.line1 = line1;
+            $scope.chosenNote.line2 = line2;
+            $scope.chosenNote.title = note.title;
+            $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+          } else {
+            console.log("SOMETHING HApPEN")
+            data.noteType = "REGULAR"
+            data.suggestedNote = false;
+            delete data.line;
+
+            $scope.addNoteToInvoice(data);
+          }
+
+
+
         }
 
         $scope.updateNote = function(note) {
           $scope.chosenNote = note;
           $scope.chosenNote.line = note.line1 + (note.line2 || '');
+
+          note = Object.assign({}, note);
+          note.suggestedNote = true;
+
+          $scope.addNoteToInvoice(note);
           console.log($scope.chosenNote, 'CJOSEN')
         }
 
@@ -149,6 +169,14 @@
 
             BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
           }
+        }
+
+        $scope.addNoteToInvoice = function(data) {
+          var request = {
+            regularInvoiceNote: data
+          };
+
+          BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
         }
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
