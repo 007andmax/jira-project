@@ -137,6 +137,14 @@
   text-align: left;
 }
 
+.dropdown-menu-wrapper {
+  position: relative;
+}
+
+.dropdown-menu-wrapper .dropdown-menu {
+  width: 100%;
+}
+
 .bill-anton p.bold,
 .invoice-info div:nth-child(4) p,
 .invoice-info div:nth-child(2) p {

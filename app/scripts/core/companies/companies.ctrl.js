@@ -30,6 +30,8 @@
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
 
+        console.log($scope.companies, 'COMPANIES')
+
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function(resp) {

@@ -21,22 +21,7 @@
         $scope.regularNotes = [];
         $scope.globalNote = {};
 
-        BillableService.getInvoiceData(function(res) {
-          var data = res.data;
-          console.log(data, 'data')
-          $scope.regularNotes = data.filter(function(el) {
-            return el.noteType === 'REGULAR';
-          });
-
-          $scope.globalNote = data.filter(function(el) {
-            return el.noteType === 'GLOBAL';
-          })[0];
-
-          // console.log($scope.globalNote, data, 'data data')
-
-        })
-
-        var data = [
+        var placeholderNotes = [
           {
             title: 'Note 1',
             noteType: 'REGULAR',
@@ -48,16 +33,66 @@
             line1: 'Note 2 description'
           },
           {
+            title: 'Note 3',
+            noteType: 'REGULAR',
+            line1: 'Note 3 description'
+          },
+          {
+            title: 'Note 4',
+            noteType: 'REGULAR',
+            line1: 'Note 4 description'
+          },
+          {
             title: 'Note 5',
             noteType: 'REGULAR',
             line1: 'Note 5 description'
           },
           {
             noteType: 'GLOBAL',
-            line1: 'Note 4 description',
-            title: 'Note 4'
-          }
+            line1: 'Terms & Conditions description'
+          },
         ]
+
+        BillableService.getInvoiceData(function(res) {
+          var data = res.data;
+          // console.log(data, 'data')
+
+          if (!data || data.length === 0) {
+            var requests = 0;
+
+            for (var i = 0; i < placeholderNotes.length; i++) {
+              BillableService.createNote(placeholderNotes[i], function(res) {
+                requests++;
+
+                if (request === 6) {
+                  BillableService.getInvoiceData(function(res) {
+                    var data = res.data;
+
+                    adaptNotes(data);
+                  })
+                }
+              });
+            }
+          }
+
+          adaptNotes(data)
+
+
+          function adaptNotes(data) {
+            $scope.regularNotes = data.filter(function(el) {
+              return el.noteType === 'REGULAR';
+            });
+
+            $scope.globalNote = data.filter(function(el) {
+              return el.noteType === 'GLOBAL';
+            })[0];
+
+
+            $scope.globalNote.line = $scope.globalNote.line1 + ($scope.globalNote.line2 || '');
+          }
+
+
+        })
 
         $scope.chosenNote = {
           title: '',
@@ -65,11 +100,7 @@
           line2: ''
         }
 
-        // for (var i = 0; i < data.length; i++) {
-        //   BillableService.createNote(data[i], function(res) {
-        //     console.log(res, 'res')
-        //   });
-        // }
+
 
         $scope.taxIdData = {
           taxIdDescription: '',
@@ -102,14 +133,16 @@
 
         }
 
-        $scope.saveUpdatedNote = function(globalUpdate) {
-          var note = $scope.chosenNote;
+        $scope.saveUpdatedNote = function(globalUpdate, note) {
+          var note = note || $scope.chosenNote;
           var line1 = note.line.slice(0, 255);
           var line2 = note.line.slice(255, 510)
 
-          $scope.chosenNote.line1 = line1;
-          $scope.chosenNote.line2 = line2;
-          $scope.chosenNote.title = note.title;
+          if (!note) {
+            $scope.chosenNote.line1 = line1;
+            $scope.chosenNote.line2 = line2;
+            $scope.chosenNote.title = note.title;
+          }
 
           var data = {
             title: note.title,
@@ -118,15 +151,13 @@
           }
 
           if (globalUpdate) {
-
-            // console.log('globalUpdate', data, 'asdadadas')
-            // data.suggestedNote = true;
             BillableService.updateNote(data, note.id)
 
-            $scope.chosenNote.line1 = line1;
-            $scope.chosenNote.line2 = line2;
-            $scope.chosenNote.title = note.title;
-            $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+            if (!note) {
+              $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+            }
+
+
           } else {
             console.log("SOMETHING HApPEN")
             data.noteType = "REGULAR"

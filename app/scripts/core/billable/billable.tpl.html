@@ -180,17 +180,20 @@
               <div class="clearfix" style="margin-bottom: 15px;">
                 <div class="col-md-9 pl-30">
                   <!-- <input type="text" placeholder="Add Note"> -->
+                  <div style="display: inline-block" class="dropdown-menu-wrapper">
+                    <input type="text" class="form-control has-dropdown pointer"
+                           placeholder="Add note"
+                           autocomplete="off" ng-model="ticketNote"
+                           name="ticketNote"
+                           onkeypress="return false;"
+                           typeahead-on-select="updateNote(ticketNote)"
+                           uib-typeahead="note as note.title for note in regularNotes | orderBy:'toString()'"
+                           qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                           custom-style="{'display': 'inline-block', 'max-height': '160px', 'overflow-y': 'auto'}"
+                           >
+                  </div>
 
-                  <input type="text" class="form-control has-dropdown pointer"
-                         placeholder="Add note"
-                         autocomplete="off" ng-model="ticketNote"
-                         name="ticketNote"
-                         onkeypress="return false;"
-                         typeahead-on-select="updateNote(ticketNote)"
-                         uib-typeahead="note as note.title for note in regularNotes | orderBy:'toString()'"
-                         qt-typeahead-async-show-on-focus smart-dropdown-menu-position
-                         custom-style="{'display': 'inline-block', 'max-height': '160px', 'overflow-y': 'auto'}"
-                         style="display: inline-block">
+
 
                   <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block" type="text" class="form-control" ng-model="chosenNote.title">
 
@@ -209,7 +212,11 @@
             </div>
             <div class="invoice-list--footer__bottom clearfix">
               <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-              <div class="col-md-12 pl-30">{{globalNote.line1 + (globalNote.line2 || '')}}</div>
+              <div class="col-md-12 pl-30">
+
+                <textarea style="width: 100%" ng-model="globalNote.line" execute-when-outfocused="saveUpdatedNote(true, globalNote)" maxlength="510"></textarea>
+                <!-- {{globalNote.line1 + (globalNote.line2 || '')}} -->
+              </div>
             </div>
           </div>
         </div>
