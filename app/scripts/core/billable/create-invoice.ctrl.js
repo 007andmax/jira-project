@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope', 'EmailSettingsService',
-      function ($scope, BillableService, CompaniesService, Downloader, UserNotificationService, $timeout, $rootScope, EmailSettingsService) {
+    ['$scope', 'BillableService', 'CompaniesService', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope', 'EmailSettingsService', 'FilesService',
+      function ($scope, BillableService, CompaniesService, Downloader, UserNotificationService, $timeout, $rootScope, EmailSettingsService, FilesService) {
 
         var locksCount = 0;
 
@@ -114,6 +114,54 @@
           EmailSettingsService.updateTaxNumber($scope.taxIdData, function(resp) {
             console.log(resp);
           })
+        };
+
+        $scope.attachDraggedAvatar = function (file) {
+          // $scope.ticketAttachments.push(file);
+          // $rootScope.draggedAvatar = file;
+          if (file.size < 4194304) {
+
+            file.xhr = FilesService.create(file,
+              function (progress) {
+                $scope.fileLoadOrError = true;
+                file.progress = 100 * (progress.loaded / progress.total);
+                $rootScope.safeDigest();
+              }, function (finish) {
+
+                $scope.fileLoadOrError = false;
+
+                if (finish.code === 400 || finish.code === 500) {
+
+                  $scope.fileLoadOrError = true;
+
+                  $scope.fileInfo[file.name] = {
+                    error: true,
+                    message: finish.message.split(';')[0]
+                  };
+
+                  $scope.fileInfo.quantityErrorFiles++;
+
+                }
+
+                file.xhr = null;
+                file.id = finish.id;
+                // file.origin = finish;
+                $rootScope.draggedAvatar = { origin: finish, id: $scope.editCompany.id }
+                $rootScope.safeDigest();
+              }, function (error) {}, true);
+          } else {
+            $scope.fileLoadOrError = true;
+
+            $scope.fileInfo[file.name] = {
+              error: true,
+              message: 'File must be less then 4 MB'
+            };
+
+            $scope.fileInfo.quantityErrorFiles++;
+            $scope.ticketForm.$setValidity('errorFile', false);
+          }
+
+          $rootScope.safeDigest();
         };
 
 

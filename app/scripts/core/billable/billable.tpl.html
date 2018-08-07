@@ -29,6 +29,26 @@
 
             <div class="tech-company-logo" is-invoice="true" edit-avatar model="editCompany" model-name="techCompany"></div>
 
+            <div class="invoice-logo" style="position: relative;">
+              <div class="drop-area-wrapper" attach-files attach-func="attachDraggedAvatar">
+                <div class="drop-area-subwrapper">
+                  <p class="drop-area">
+                    Drop Files Here
+                  </p>
+                </div>
+              </div>
+              <div class="drag-n-drop-body">
+                <div ticket-attachment-files attachment-func="attachDraggedAvatar"
+                     ng-model="ticketUpdate.ticketAttachments">
+                  <p class="bold"><a href="#">Browse</a> or drop your logo here.</p>
+                  <p style="opacity: .5;">Maximum 5 MB in size.</p>
+                  <p style="opacity: .5;">JPG, PNG, or GIF formats.</p>
+                  <p style="opacity: .5;">Recommended size 300 x 200 pixels.</p>
+                  <input type="file" class="file-input" multiple=""/>
+                </div>
+              </div>
+            </div>
+
 
             <div class="invoice-info">
               <div>

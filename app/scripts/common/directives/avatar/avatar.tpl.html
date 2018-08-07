@@ -1,4 +1,4 @@
-<div class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
+<div ng-show="!isInvoice" class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
      model-image-path="{{ imagePath }}">
   <div class="avatar pull-left">
     <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
@@ -23,8 +23,8 @@
   </div>
 </div>
 
-<!-- <div class="invoice-logo" style="position: relative;">
-  <div class="drop-area-wrapper" crop-image attach-files attach-func="attachDraggedAvatar">
+<!-- <div crop-image="model" class="invoice-logo" style="position: relative;">
+  <div class="drop-area-wrapper" >
     <div class="drop-area-subwrapper">
       <p class="drop-area">
         Drop Files Here
@@ -32,8 +32,7 @@
     </div>
   </div>
   <div class="drag-n-drop-body">
-    <div ticket-attachment-files attachment-func="attachDraggedAvatar"
-         ng-model="ticketUpdate.ticketAttachments">
+    <div>
       <p class="bold"><a href="#">Browse</a> or drop your logo here.</p>
       <p style="opacity: .5;">Maximum 5 MB in size.</p>
       <p style="opacity: .5;">JPG, PNG, or GIF formats.</p>
