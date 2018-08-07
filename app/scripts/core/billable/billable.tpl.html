@@ -197,7 +197,7 @@
 
                   <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block" type="text" class="form-control" ng-model="chosenNote.title">
 
-                  <span ng-if="chosenNote.title" style="margin-left: 15px;"><a class="bold" ng-click="saveUpdatedNote(true)">Save Note</a></span>
+                  <span ng-if="chosenNote.title" class="pointer" style="margin-left: 15px;"><a class="bold" ng-click="saveUpdatedNote(true)">Save Note</a></span>
                 </div>
                 <div class="col-md-1 bold fz-11" style="padding: 8px 15px;">Tax</div>
                 <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ currentInvoice.taxSum | currency: '$':2 }}</div>
