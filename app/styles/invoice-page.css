@@ -145,6 +145,19 @@
   width: 100%;
 }
 
+.transparent-cursor {
+  border: none;
+  color: transparent;
+  text-shadow: 0 0 0 black;
+  text-align: center;
+
+}
+
+.transparent-cursor:focus {
+  outline: none;
+}
+
+
 .bill-anton p.bold,
 .invoice-info div:nth-child(4) p,
 .invoice-info div:nth-child(2) p {
