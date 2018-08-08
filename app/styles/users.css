@@ -388,6 +388,7 @@
   height: 26px;
   left: -1px;
   bottom: -1px;
+  opacity: 0;
   background-color: rgba(21, 30, 41, .7);
   color: #fff;
   font-size: 11px;
@@ -400,6 +401,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.create-user-avatar:hover .avatar .reposition {
+  opacity: 1;
 }
 
 .create-user-avatar .avatar img,

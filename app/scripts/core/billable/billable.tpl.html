@@ -29,10 +29,10 @@
 
 
 
-            <div ng-if="(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="invoice-logo-image">
+            <!-- <div ng-if="(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="invoice-logo-image">
               <img ng-src="{{ getLogoUrl(editCompany) }}" ng-class="{'no-avatar': editCompany.logo && editCompany.logo.cropped}"
                    ng-style="{'max-height': editCompany.logo && editCompany.logo.cropped ? '100%' : '150px'}">
-            </div>
+            </div> -->
 
             <div ng-if="!(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="invoice-logo" style="position: relative;">
 
@@ -57,7 +57,8 @@
               </div>
 
             </div>
-            <div class="tech-company-logo" is-invoice="true" attach-func="attachDraggedAvatar" edit-avatar model="editCompany" model-name="techCompany"></div>
+
+            <div ng-show="(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="tech-company-logo" is-invoice="true" attach-func="attachDraggedAvatar" edit-avatar model="editCompany" model-name="techCompany"></div>
 
 
             <div class="invoice-info">

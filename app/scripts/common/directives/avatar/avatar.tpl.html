@@ -1,4 +1,4 @@
-<div ng-show="!isInvoice" class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
+<div class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
      model-image-path="{{ imagePath }}">
   <div class="avatar pull-left">
     <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
