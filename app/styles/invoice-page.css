@@ -93,6 +93,15 @@
   background-image: url(../images/new-icons/download-app-up.png);
 }
 
+.invoice-logo-image {
+  width: 300px;
+}
+
+.invoice-logo-image img {
+  width: 100%;
+  height: auto;
+}
+
 .invoice-logo .file-input {
   width: 293px;
 }

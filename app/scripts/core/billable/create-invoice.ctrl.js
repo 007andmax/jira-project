@@ -116,6 +116,8 @@
           })
         };
 
+        $scope.getLogoUrl = $rootScope.getCompanyLogoUrl;
+
         $scope.attachDraggedAvatar = function (file) {
           // $scope.ticketAttachments.push(file);
           // $rootScope.draggedAvatar = file;

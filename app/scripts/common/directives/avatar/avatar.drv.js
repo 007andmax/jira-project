@@ -8,7 +8,8 @@
       scope: {
         model: '=',
         modelName: '@',
-        isInvoice: '<isInvoice'
+        isInvoice: '<isInvoice',
+        attachFunc: '<attachFunc'
       },
       link: function (scope) {
 
