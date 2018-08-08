@@ -42,6 +42,9 @@
         }
 
 
+        console.log("CONTROLLER MOTHERFUKCER")
+
+
 
         $scope.timeFormat = ['AM', 'PM'];
 
@@ -57,6 +60,8 @@
             console.log("ROOTSCOPE")
             var companyId = $rootScope.savedCompanyId,
               company = CompaniesService.getOneById(companyId);
+
+              console.log("COMPANY", company, "SAVED SAVED")
           } else {
             var companyId = origin.id,
               company = CompaniesService.getOneById(companyId);
@@ -66,6 +71,7 @@
           action = 'EDIT_COMPANIES';
 
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
+            console.log(companyData, 'companyData ')
 
             if (!companyData.addresses || companyData.addresses.length === 0) {
               companyData.addresses = [{}];

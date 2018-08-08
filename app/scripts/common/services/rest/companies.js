@@ -197,6 +197,19 @@
 
     }
 
+    function getCompanyByAddressId(id) {
+      var clients = storage.clientCompanies;
+
+      for (var i = 0; i < clients.length; i++) {
+        if (clients[i].companyInfo.addresses && clients[i].companyInfo.addresses[0] && clients[i].companyInfo.addresses[0].id === id) {
+          console.log('got it');
+          return clients[i];
+        }
+      }
+
+      return null;
+    }
+
     function getUnassignedCompany() {
       for (var i = 0; i < storage.companies.length; i++) {
         if (storage.companies[i].isDefault) {
@@ -828,6 +841,7 @@
       getAllCompanies: getAllCompanies,
       getArchivedCompanies: getArchivedCompanies,
       getOneById: getOneById,
+      getCompanyByAddressId: getCompanyByAddressId,
       getUnassignedCompany: getUnassignedCompany,
       searchByAllCompanies: searchByAllCompanies,
       searchByClientCompanies: searchByClientCompanies,

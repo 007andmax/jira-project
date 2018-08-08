@@ -76,7 +76,7 @@
                 <p>780-903-8719</p>
               </div>
               <div>
-                <a class="bold pointer" ng-click="openEditModal('contacts')">Edit Your Business Address and Contact Details</a>
+                <a class="bold pointer" ng-click="openEditModal('contacts', editCompany)">Edit Your Business Address and Contact Details</a>
               </div>
             </div>
           </div>
@@ -90,11 +90,11 @@
             <p>Scott Willson</p>
             <p>104 Street Southwest</p>
             <p style="margin-bottom: 20px;">High River, AB T1V</p>
-            <a class="bold pointer" ng-click="openEditModal('customer')">Edit Customer</a>
+            <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
           <div class="bill-valera">
             <div><span>Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId" ng-change="changeTaxIdData()"></div>
-            <div><span>Invoice Date</span><input type="text" placeholder="Invoice Date"></div>
+            <div><span>Invoice Date</span><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span></div>
             <div><span>Payment Due</span>
               <!-- <input type="text" placeholder="Payment Due"> -->
               <input type="text" class="form-control has-dropdown" placeholder="Date"
@@ -288,8 +288,8 @@
                 <p>scott@activeis.ca</p>
               </div>
               <div class="col-md-5 pr-30">
-                <p class="bold"><span>568906</span>Tax Number</p>
-                <p class="bold"><span>06 Nov 2018</span>Invoice Date:</p>
+                <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>
+                <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice Date:</p>
                 <p class="bold"><span>{{ paymentDue }}</span>Payment Due</p>
                 <p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount Due:</p>
               </div>

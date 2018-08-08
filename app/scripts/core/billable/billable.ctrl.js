@@ -30,13 +30,19 @@
           $scope.taxes = resp;
         });
 
-        $scope.openEditModal = function (type) {
+        $scope.openEditModal = function (type, company) {
           var templates = {
             contacts: '/html/scripts/core/billable/edit-contact-details-modal.tpl.html',
             customer: '/html/scripts/core/billable/edit-customer-modal.tpl.html'
           }
 
-          $rootScope.savedCompanyId = 'fdadb2df-ed3d-4e28-b41e-741617b7ffa6';
+          if (type === 'customer') {
+            company = CompaniesService.getCompanyByAddressId(company.id);
+          }
+
+          console.log(company, 'COMPANY')
+
+          $rootScope.savedCompanyId = company.id;
           $uibModal.open({
             templateUrl: templates[type],
             animation: true,
