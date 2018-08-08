@@ -25,7 +25,10 @@
         <div class="invoice-create--info">
           <p class="bold" style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px;' : '' }}">Business Address and Contact
             Details, Title, Summary, and Logo</p>
-          <i class="icn-sm pointer report-caret-icon" ng-click="toggleInvoiceHeader()"></i>
+          <div class="caret-wrapper pointer" ng-click="toggleInvoiceHeader()">
+            <i class="icn-sm pointer report-caret-icon" ></i>
+          </div>
+
           <div class="invoice-create--info__content" ng-if="isInvoiceHeaderShown">
 
 
@@ -102,7 +105,7 @@
             <div><span>Invoice Date</span><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span></div>
             <div><span>Payment Due</span>
               <!-- <input type="text" placeholder="Payment Due"> -->
-              <input type="text" class="form-control has-dropdown" placeholder="Date"
+              <input type="text" class="form-validation has-dropdown" placeholder="Date"
                      qt-data-time-picker ng-model="paymentDue"
                      ng-change="savePaymentDue(paymentDue)"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
@@ -227,13 +230,13 @@
                 <div class="col-md-9 pl-30">
                   <!-- <input type="text" placeholder="Add Note"> -->
                   <div style="display: inline-block" class="dropdown-menu-wrapper">
-                    <input type="text" class="form-control has-dropdown pointer transparent-cursor"
+                    <input type="text" class="form-validation has-dropdown pointer transparent-cursor"
                            placeholder="Add note"
                            autocomplete="off" ng-model="ticketNote"
                            name="ticketNote"
                            onkeypress="return false;"
                            typeahead-on-select="updateNote(ticketNote)"
-                           uib-typeahead="note as note.title for note in regularNotes | orderBy:'toString()'"
+                           uib-typeahead="note as note.title for note in sorted(regularNotes)"
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                            custom-style="{'display': 'inline-block', 'max-height': '160px', 'overflow-y': 'auto'}"
                     >

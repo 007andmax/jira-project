@@ -61,11 +61,12 @@
   position: relative;
 }
 
-.invoice-create--info .report-caret-icon {
+.invoice-create--info .caret-wrapper {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 15px;
+  top: 10px;
   transform: rotate(180deg);
+  padding: 5px;
 }
 
 .invoice-create--info__content {

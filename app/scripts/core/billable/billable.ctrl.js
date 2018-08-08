@@ -64,6 +64,16 @@
           });
         };
 
+        $scope.sorted = function(arr) {
+          var newArr = arr.slice();
+          newArr.sort(function(a, b) {
+            // console.log(a, b)
+            return a.title.localeCompare(b.title);
+          });
+
+          return newArr;
+        }
+
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
         $scope.loadingInProgress = true;
