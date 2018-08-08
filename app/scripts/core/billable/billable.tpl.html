@@ -1,5 +1,5 @@
 <!--NEW INVOICE EDIT-->
-<div ng-if="isInvoiceShown" ng-controller="quicktech.core.billable.createInvoiceCtrl" >
+<div ng-if="isInvoiceShown" ng-controller="quicktech.core.billable.createInvoiceCtrl">
 
   <div ng-if="locksInitialized" invoice-modal-window>
     <div ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto || currentInvoice" invoice-content>
@@ -23,10 +23,10 @@
         </div>
 
         <div class="invoice-create--info">
-          <p class="bold" style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px;' : '' }}">Business Address and Contact Details, Title, Summary, and Logo</p>
+          <p class="bold" style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px;' : '' }}">Business Address and Contact
+            Details, Title, Summary, and Logo</p>
           <i class="icn-sm pointer report-caret-icon" ng-click="toggleInvoiceHeader()"></i>
           <div class="invoice-create--info__content" ng-if="isInvoiceHeaderShown">
-
 
 
             <!-- <div ng-if="(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="invoice-logo-image">
@@ -34,7 +34,8 @@
                    ng-style="{'max-height': editCompany.logo && editCompany.logo.cropped ? '100%' : '150px'}">
             </div> -->
 
-            <div ng-if="!(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="invoice-logo" style="position: relative;">
+            <div ng-if="!(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)"
+                 class="invoice-logo" style="position: relative;">
 
               <div>
                 <div class="drop-area-wrapper" attach-files attach-func="attachDraggedAvatar">
@@ -58,12 +59,16 @@
 
             </div>
 
-            <div ng-show="(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)" class="tech-company-logo" is-invoice="true" attach-func="attachDraggedAvatar" edit-avatar model="editCompany" model-name="techCompany"></div>
+            <div ng-show="(editCompany && editCompany.logo && editCompany.logo.cropped && editCompany.logo.cropped.id)"
+                 class="tech-company-logo" is-invoice="true" attach-func="attachDraggedAvatar" edit-avatar
+                 model="editCompany" model-name="techCompany"></div>
 
 
             <div class="invoice-info">
               <div>
-                <span class="bold">Invoice Number</span> <input type="text" placeholder="Invoice Number" ng-model="invoiceNumber" ng-change="changeInvoiceNumber(invoiceNumber)">
+                <span class="bold">Invoice Number</span> <input type="text" placeholder="Invoice Number"
+                                                                ng-model="invoiceNumber"
+                                                                ng-change="changeInvoiceNumber(invoiceNumber)">
               </div>
               <div>
                 <p class="bold">Active Information Systems</p>
@@ -76,7 +81,8 @@
                 <p>780-903-8719</p>
               </div>
               <div>
-                <a class="bold pointer" ng-click="openEditModal('contacts')">Edit Your Business Address and Contact Details</a>
+                <a class="bold pointer" ng-click="openEditModal('contacts')">Edit Your Business Address and Contact
+                  Details</a>
               </div>
             </div>
           </div>
@@ -93,7 +99,8 @@
             <a class="bold pointer" ng-click="openEditModal('customer')">Edit Customer</a>
           </div>
           <div class="bill-valera">
-            <div><span>Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId" ng-change="changeTaxIdData()"></div>
+            <div><span>Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId"
+                                               ng-change="changeTaxIdData()"></div>
             <div><span>Invoice Date</span><input type="text" placeholder="Invoice Date"></div>
             <div><span>Payment Due</span>
               <!-- <input type="text" placeholder="Payment Due"> -->
@@ -168,8 +175,10 @@
             <div class="invoice-list--item__header">
               <div class="pavlik clearfix">
                 <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
-                <div class="col-md-9 bold" style="opacity: .7;">Subject</div>
-                <div class="col-md-1 text-right pr-30" style="opacity: .7;">{{ ticket.closedAt | date: 'dd MMM yyyy' }}</div>
+                <div class="col-md-8 bold" style="opacity: .7;">Subject</div>
+                <div class="col-md-2 text-right pr-30" style="opacity: .7;">{{ ticket.closedAt | date: 'dd MMM yyyy'
+                  }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-2 pl-30">#{{ ticket.number }}</div>
@@ -178,24 +187,30 @@
             </div>
             <div class="invoice-list--item__content">
               <div class="pavlik p-2 clearfix" style="background-color:#F5F8FA;">
-                <div class="col-md-7 bold pl-30">Item</div>
-                <div class="col-md-1 bold">Unit Price</div>
+                <div class="col-md-6 bold pl-30">Item</div>
+                <div class="col-md-2 bold">Unit Price</div>
                 <div class="col-md-1 bold">Quantity</div>
                 <div class="col-md-1 bold">Tax</div>
                 <div class="col-md-2 bold text-right pr-30">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-7 pl-30">{{ productExpense.item.description }}</div>
-                <div class="col-md-1">{{ productExpense.item.sale | currency: '$':2 }}</div>
+                <div class="col-md-6 pl-30">{{ productExpense.item.description }}</div>
+                <div class="col-md-2">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-1">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
                 <div class="col-md-2 text-right pr-30">{{ productExpense.totalSum | currency: '$':2 }}</div>
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
-                <div class="col-md-7 pl-30">{{ serviceExpense.item.name }}</div>
-                <div class="col-md-1">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
-                <div class="col-md-1" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
-                <div class="col-md-1" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
+                <div class="col-md-6 pl-30">{{ serviceExpense.item.name }}</div>
+                <div class="col-md-2">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
+                <div class="col-md-1"
+                     ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">
+                  {{ serviceExpense.billableQuantity }}
+                </div>
+                <div class="col-md-1"
+                     ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">
+                  {{ serviceExpense.billableQuantity | durationFilter }} hr(s)
+                </div>
                 <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
                 <div class="col-md-2 text-right pr-30">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
               </div>
@@ -206,7 +221,9 @@
               <div class="clearfix" style="margin-bottom: 5px;">
                 <div class="col-md-9 bold pl-30">Customer Note Type</div>
                 <div class="col-md-1 bold fz-11">Sub Total</div>
-                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) |
+                  currency: '$':2 }}
+                </div>
               </div>
               <div class="clearfix" style="margin-bottom: 15px;">
                 <div class="col-md-9 pl-30">
@@ -221,21 +238,25 @@
                            uib-typeahead="note as note.title for note in regularNotes | orderBy:'toString()'"
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                            custom-style="{'display': 'inline-block', 'max-height': '160px', 'overflow-y': 'auto'}"
-                           >
+                    >
                   </div>
 
 
+                  <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block"
+                         type="text" class="form-control" ng-model="chosenNote.title">
 
-                  <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block" type="text" class="form-control" ng-model="chosenNote.title">
-
-                  <span ng-if="chosenNote.title" class="pointer" style="margin-left: 15px;"><a class="bold" ng-click="saveUpdatedNote(true)">Save Note</a></span>
+                  <span ng-if="chosenNote.title" class="pointer" style="margin-left: 15px;"><a class="bold"
+                                                                                               ng-click="saveUpdatedNote(true)">Save Note</a></span>
                 </div>
                 <div class="col-md-1 bold fz-11" style="padding: 8px 15px;">Tax</div>
-                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ currentInvoice.taxSum | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ currentInvoice.taxSum | currency:
+                  '$':2 }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-9 pl-30">
-                  <textarea ng-if="chosenNote.line" style="width: 100%" ng-model="chosenNote.line" ng-keypress="saveUpdatedNote()" maxlength="510"></textarea>
+                  <textarea ng-if="chosenNote.line" style="width: 100%" ng-model="chosenNote.line"
+                            ng-keypress="saveUpdatedNote()" maxlength="510"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
                 <div class="col-md-2 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
@@ -245,7 +266,8 @@
               <div class="col-md-12 bold pl-30">Terms & Conditions</div>
               <div class="col-md-12 pl-30">
 
-                <textarea style="width: 100%" ng-model="globalNote.line" execute-when-outfocused="saveUpdatedNote(true, globalNote)" maxlength="510"></textarea>
+                <textarea style="width: 100%" ng-model="globalNote.line"
+                          execute-when-outfocused="saveUpdatedNote(true, globalNote)" maxlength="510"></textarea>
                 <!-- {{globalNote.line1 + (globalNote.line2 || '')}} -->
               </div>
             </div>
@@ -291,7 +313,8 @@
                 <p class="bold"><span>568906</span>Tax Number</p>
                 <p class="bold"><span>06 Nov 2018</span>Invoice Date:</p>
                 <p class="bold"><span>{{ paymentDue }}</span>Payment Due</p>
-                <p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount Due:</p>
+                <p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount
+                  Due:</p>
               </div>
             </div>
           </div>
@@ -328,8 +351,10 @@
             <div class="invoice-list--item__header">
               <div class="pavlik clearfix">
                 <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
-                <div class="col-md-9 bold" style="opacity: .7;">Subject</div>
-                <div class="col-md-1 text-right pr-30" style="opacity: .7;">{{ ticket.closedAt | date: 'dd MMM yyyy' }}</div>
+                <div class="col-md-8 bold" style="opacity: .7;">Subject</div>
+                <div class="col-md-2 text-right pr-30" style="opacity: .7;">{{ ticket.closedAt | date: 'dd MMM yyyy'
+                  }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-2 pl-30">#{{ ticket.number }}</div>
@@ -338,24 +363,30 @@
             </div>
             <div class="invoice-list--item__content">
               <div class="pavlik p-2 clearfix" style="background-color:#F5F8FA;">
-                <div class="col-md-7 bold pl-30">Item</div>
-                <div class="col-md-1 bold">Unit Price</div>
+                <div class="col-md-6 bold pl-30">Item</div>
+                <div class="col-md-2 bold">Unit Price</div>
                 <div class="col-md-1 bold">Quantity</div>
                 <div class="col-md-1 bold">Tax</div>
                 <div class="col-md-2 bold text-right pr-30">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-7 pl-30">{{ productExpense.item.description }}</div>
-                <div class="col-md-1">{{ productExpense.item.sale | currency: '$':2 }}</div>
+                <div class="col-md-6 pl-30">{{ productExpense.item.description }}</div>
+                <div class="col-md-2">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-1">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
                 <div class="col-md-2 text-right pr-30">{{ productExpense.totalSum | currency: '$':2 }}</div>
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
-                <div class="col-md-7 pl-30">{{ serviceExpense.item.name }}</div>
-                <div class="col-md-1">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
-                <div class="col-md-1" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
-                <div class="col-md-1" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
+                <div class="col-md-6 pl-30">{{ serviceExpense.item.name }}</div>
+                <div class="col-md-2">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
+                <div class="col-md-1"
+                     ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">
+                  {{ serviceExpense.billableQuantity }}
+                </div>
+                <div class="col-md-1"
+                     ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">
+                  {{ serviceExpense.billableQuantity | durationFilter }} hr(s)
+                </div>
                 <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
                 <div class="col-md-2 text-right pr-30">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
               </div>
@@ -366,18 +397,23 @@
               <div class="clearfix" style="margin-bottom: 5px;">
                 <div class="col-md-8 bold pl-30">Customer Note Type</div>
                 <div class="col-md-2 bold fz-11">Sub Total</div>
-                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) |
+                  currency: '$':2 }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-8 pl-30">{{ chosenNote.line1 + (chosenNote.line2 || '') }}
                 </div>
                 <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
-                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) | currency:
+                  '$':2 }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-8 pl-30"></div>
                 <div class="col-md-2 bold fz-11">Total</div>
-                <div class="col-md-2 bold fz-16 text-right pr-30">{{ (currentInvoice.totalSum) | currency: '$':2 }}</div>
+                <div class="col-md-2 bold fz-16 text-right pr-30">{{ (currentInvoice.totalSum) | currency: '$':2 }}
+                </div>
               </div>
             </div>
             <div class="invoice-list--footer__bottom clearfix">
@@ -391,11 +427,7 @@
   </div>
 
 
-
-
 </div>
-
-
 
 
 <!-- <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip"
@@ -414,127 +446,128 @@
 </button> -->
 
 <div class="billable-items" ng-if="!isInvoiceShown">
-   <div class="billable-items-header clearfix ">
-      <h3 class="pull-left">Billable Items</h3>
-      <div class="fixed-block-top" style="width: auto; height: 55px; right: 20px; margin-top: 20px;" fixed-block-top
+  <div class="billable-items-header clearfix ">
+    <h3 class="pull-left">Billable Items</h3>
+    <div class="fixed-block-top" style="width: auto; height: 55px; right: 20px; margin-top: 20px;" fixed-block-top
          offset-top="100">
-         <ul class="nav nav-qt" role="tablist">
-            <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
-               <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
-                  qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
-                  style="display: inline-block;">
-                  <div qt-popover-trigger="mouseenter"
-                     style="display: inline-block; background-color: white; width: 150px;">
-                     <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip"
-                        style="width: 98px;"
-                        custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
-                        ng-click="showInvoice()">Create Invoice
-                     </button>
-                  </div>
-               </div>
+      <ul class="nav nav-qt" role="tablist">
+        <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
+          <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
+               qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+               style="display: inline-block;">
+            <div qt-popover-trigger="mouseenter"
+                 style="display: inline-block; background-color: white; width: 150px;">
+              <button class="btn btn-success btn-create-invoice btn-primary pull-right has-tooltip"
+                      style="width: 98px;"
+                      custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
+                      ng-click="showInvoice()">Create Invoice
+              </button>
             </div>
-         </ul>
-      </div>
-   </div>
-   <div class="billable-items-list clearfix" ng-hide="loadingInProgress" ftt-tab-content>
-      <div class="billable-item clearfix" event-toggle-slider="toggleBillableTickets"
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="billable-items-list clearfix" ng-hide="loadingInProgress" ftt-tab-content>
+    <div class="billable-item clearfix" event-toggle-slider="toggleBillableTickets"
          ng-controller="quicktech.core.billable.companyCtrl"
          ng-repeat="billableCompany in billableData | filterBillableCompany"
          on-finish-render="loadingFinished()">
-         <div class="billable-items-list-item clearfix" ng-style="{'background-color': showTickets ? '#F9FBFC' : ''}">
-            <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
-               ng-show="billableCompany.lockType !== 'NONE'">
-            <i class="icn-sm icn-locked"></i>
-            </a>
-            <div class="pull-left" style="width: 2%;">
-               <label class="control checkbox pull-left" style="margin-top: 3px;" stop-propagation="click"
-                  ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')">
-               <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
-                  ng-click="changeCompanyCheckbox(billableCompany.companyId)"
-                  ng-disabled="anotherCompanySelected(billableCompany.companyId)">
-               <span class="control-indicator"></span>
-               </label>
-            </div>
-            <div class="pull-left">{{ company.name }}</div>
-            <span class="label label-light">{{ billableCompany.tickets.length }}</span>
-            <div class="text-right pull-right" style="width: 8%;font-size: 15px;">{{ billableCompany.totalSum | currency:
-               '$': 2 }}
-            </div>
-            <div class="pull-right" ng-click="setExpandedCompanyId(billableCompany.companyId) ">
-               <i class="expand pull-right pointer" uib-tooltip="expand"
-                  ng-class="{'expand-down': billableCompany.companyId !== expandedCompanyId, 'expand-up': billableCompany.companyId === expandedCompanyId}"></i>
-            </div>
-            <div class="col-md-12 hr"></div>
-         </div>
-         <div class="billable-item clearfix "
-            style="background-color:#F9FBFC;" ng-if="(billableCompany.companyId === expandedCompanyId)" qt-scroll-to="top" ets-slider
-            ng-controller="quicktech.core.billable.companyTicketsCtrl">
-            <div class="clearfix">
-
-               <!-- <div class="pull-left" style="width: 2%;">
-                  <label class="control checkbox pull-left" style="margin-top: 3px;">
-                  <input type="checkbox">
-                  <span class="control-indicator"></span>
-                  </label>
-
-               </div>
-
-
-               <div class="pull-left">Hexaware Technologies Ltd</div>
-
-
-               <div class="text-right pull-right" style="width: 8%;font-size: 15px;">$90234</div>
-
-
-               <div class="pull-right">
-                  <i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>
-
-               </div>
-
-
-               <div class="col-md-12 hr"></div> -->
-
-
-               <div class="item-sub-list">
-
-                  <div class="billable-items-list-item-sub col-md-12 clearfix"
-                     ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
-                     show-model-element="{{ 'showTicket-' + ticket.id }}">
-                     <div class="clearfix" style="margin-bottom: 14px;">
-                        <div class="pull-left" style="width: 2%;">
-                           <label class="control checkbox pull-left" style="margin-top: 3px;"
-                              ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"
-                              stop-propagation="click">
-                           <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
-                              ng-change="changeTicketCheckbox(billableCompany.companyId)"
-                              ng-disabled="anotherCompanySelected(billableCompany.companyId)">
-                           <span class="control-indicator"></span>
-                           </label>
-                        </div>
-                        <div class="pull-left">{{ ticket.subject }}</div>
-                        <div class="billable-tkt pull-left">
-                           <a class="label label-primary" stop-propagation="click"
-                              style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
-                              ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
-                           Tkt# {{ ticket.ticketNumber }}
-                           </a>
-                        </div>
-                        <div class="text-right pull-right" style="width: 8%;">{{ ticket.sum | currency: '$': 2 }}</div>
-                        <div class="pull-right">
-                           <i class="expand expand-down pointer pull-right" uib-tooltip="expand" qt-icon-toggle-to-change></i>
-                        </div>
-                     </div>
-                     <div class="billable-items-list-item-sub-content col-md-12 clearfix" qt-ts-slider style="display: none;">
-                        <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
-                        <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
-                     </div>
-                     <div class="col-md-12 hr" style="margin-top: 6px;"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
+      <div class="billable-items-list-item clearfix" ng-style="{'background-color': showTickets ? '#F9FBFC' : ''}">
+        <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
+           ng-show="billableCompany.lockType !== 'NONE'">
+          <i class="icn-sm icn-locked"></i>
+        </a>
+        <div class="pull-left" style="width: 2%;">
+          <label class="control checkbox pull-left" style="margin-top: 3px;" stop-propagation="click"
+                 ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')">
+            <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
+                   ng-click="changeCompanyCheckbox(billableCompany.companyId)"
+                   ng-disabled="anotherCompanySelected(billableCompany.companyId)">
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <div class="pull-left">{{ company.name }}</div>
+        <span class="label label-light">{{ billableCompany.tickets.length }}</span>
+        <div class="text-right pull-right" style="width: 8%;font-size: 15px;">{{ billableCompany.totalSum | currency:
+          '$': 2 }}
+        </div>
+        <div class="pull-right" ng-click="setExpandedCompanyId(billableCompany.companyId) ">
+          <i class="expand pull-right pointer" uib-tooltip="expand"
+             ng-class="{'expand-down': billableCompany.companyId !== expandedCompanyId, 'expand-up': billableCompany.companyId === expandedCompanyId}"></i>
+        </div>
+        <div class="col-md-12 hr"></div>
       </div>
-   </div>
+      <div class="billable-item clearfix "
+           style="background-color:#F9FBFC;" ng-if="(billableCompany.companyId === expandedCompanyId)"
+           qt-scroll-to="top" ets-slider
+           ng-controller="quicktech.core.billable.companyTicketsCtrl">
+        <div class="clearfix">
+
+          <!-- <div class="pull-left" style="width: 2%;">
+             <label class="control checkbox pull-left" style="margin-top: 3px;">
+             <input type="checkbox">
+             <span class="control-indicator"></span>
+             </label>
+
+          </div>
+
+
+          <div class="pull-left">Hexaware Technologies Ltd</div>
+
+
+          <div class="text-right pull-right" style="width: 8%;font-size: 15px;">$90234</div>
+
+
+          <div class="pull-right">
+             <i class="expand expand-up pointer pull-right" uib-tooltip="expand"></i>
+
+          </div>
+
+
+          <div class="col-md-12 hr"></div> -->
+
+
+          <div class="item-sub-list">
+
+            <div class="billable-items-list-item-sub col-md-12 clearfix"
+                 ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
+                 show-model-element="{{ 'showTicket-' + ticket.id }}">
+              <div class="clearfix" style="margin-bottom: 14px;">
+                <div class="pull-left" style="width: 2%;">
+                  <label class="control checkbox pull-left" style="margin-top: 3px;"
+                         ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"
+                         stop-propagation="click">
+                    <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
+                           ng-change="changeTicketCheckbox(billableCompany.companyId)"
+                           ng-disabled="anotherCompanySelected(billableCompany.companyId)">
+                    <span class="control-indicator"></span>
+                  </label>
+                </div>
+                <div class="pull-left">{{ ticket.subject }}</div>
+                <div class="billable-tkt pull-left">
+                  <a class="label label-primary" stop-propagation="click"
+                     style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
+                     ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
+                    Tkt# {{ ticket.ticketNumber }}
+                  </a>
+                </div>
+                <div class="text-right pull-right" style="width: 8%;">{{ ticket.sum | currency: '$': 2 }}</div>
+                <div class="pull-right">
+                  <i class="expand expand-down pointer pull-right" uib-tooltip="expand" qt-icon-toggle-to-change></i>
+                </div>
+              </div>
+              <div class="billable-items-list-item-sub-content col-md-12 clearfix" qt-ts-slider style="display: none;">
+                <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
+                <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
+              </div>
+              <div class="col-md-12 hr" style="margin-top: 6px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
