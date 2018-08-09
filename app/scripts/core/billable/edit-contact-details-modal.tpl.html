@@ -26,7 +26,7 @@
     <div class="col-md-6"
          ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
 
-      <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyName')}">
+      <label class="control-label" ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
         Company Name
       </label>
 
@@ -54,8 +54,7 @@
            use-alternative-map="true"
            address-autocomplete
            template-page="header/create-new-entity/create-company"
-           ng-model="editCompany.addresses[0]"
-           show-validation-messages="triedToSave"></div>
+           ng-model="companyForSettingPage.addresses[0]"></div>
 
 
 
@@ -66,20 +65,33 @@
     <div class="col-md-6"><input type="text" placeholder="Address Line 2"></div> -->
     <!-- <div class="col-md-6"><input type="text" placeholder="Phone Number"></div> -->
 
-    <div  class="col-md-6"
+    <!-- <div  class="col-md-6"
           is-try-to-save="triedToSave"
           no-add-more="true"
           phone-numbers-edit
           is-restricted="true"
           is-required="true"
-          country-code="{{editCompany.addresses[0].countryCode}}"
+          country-code="{{companyForSettingPage.addresses[0].countryCode}}"
           ng-model="contact.phoneNumbers"
           custom-placeholder="'Phone'">
 
-      <!-- <input type="text" placeholder="Phone"> -->
 
 
 
+
+    </div> -->
+
+    <div class="col-md-6 phone-number"
+
+         phone-numbers-edit no-add-more="true"
+         ng-model="companyForSettingPage.addresses[0].phoneNumbers"
+         is-try-to-save="triedToSave"
+         is-restricted="true"
+         is-required="true"
+         country-code="{{companyForSettingPage.addresses[0].countryCode}}"
+         custom-placeholder="'Phone number'">
+
+      <!-- <input placeholder="Phone Number" type="text"> -->
     </div>
     <!-- <div class="col-md-6"><input type="text" placeholder="City"></div> -->
 
@@ -94,8 +106,9 @@
       <input placeholder="Company Domain Name" type="text" ng-model="editCompany.domain"
              placeholder="yourcompany.com"
              name="companyDomain"
-             required
-             is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
+              ng-pattern="domainPattern">
+
+              <!-- is-uniq-validation validation-func="validateCompanyDomain" -->
     </div>
 
     <!-- <div class="col-md-6"><input type="text" placeholder="Postal/ZIP Code"></div> -->
@@ -105,7 +118,7 @@
            ng-class="{'hide': !isShowingErrors(companyForm, 'zip')}">
         <div class="control-label" ng-message="maxlength">too large</div>
       </div>
-      <input class="form-validation" type="text" name="zip" ng-model="editCompany.addresses[0].postalCode"
+      <input class="form-validation" type="text" name="zip" ng-model="companyForSettingPage.addresses[0].postalCode"
              placeholder="Postal/ZIP Code" ng-maxlength="15">
     </div>
 
@@ -118,12 +131,12 @@
       </div>
 
       <input class="form-validation" type="text" name="suiteNumber" autocomplete="off"
-             ng-model="editCompany.additionalAddresses[$index].suiteNumber" ng-maxlength="15"
+             ng-model="companyForSettingPage.addresses[0].suiteNumber" ng-maxlength="15"
              placeholder="Suite No">
     </div>
   </div>
   <div class="invoice--footer">
-    <button class="btn btn-primary">Save</button>
+    <button class="btn btn-primary" ng-click="updateTechCompany(companyForm, true)">Save</button>
     <button class="btn btn-default">Cancel</button>
   </div>
 </div>

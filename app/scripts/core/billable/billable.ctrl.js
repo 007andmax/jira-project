@@ -30,6 +30,42 @@
           $scope.taxes = resp;
         });
 
+
+        $scope.$watch(function() {
+          return $rootScope.currentBillTo;
+        }, function(val) {
+
+          if (val) {
+            $scope.invoiceBillTo = CompaniesService.getCompanyByAddressId(val.id);
+
+            console.log($scope.invoiceBillTo, 'billtotot')
+          }
+
+        })
+
+        $scope.$watch(function() {
+          return $rootScope.updateBillTo;
+        }, function(val) {
+          console.log(val, 'BILLTO')
+
+          // if (val) {
+          //   var address = val.addressForm.address.$modelValue;
+          //   var companyName = val.companyName.$viewValue;
+          //   var phone = val['forms.phoneNumbersForm'].phoneNumber0.$viewValue;
+          //
+          //   console.log(address, companyName, phone, "DATA FROM MODAL WINDOW")
+          //
+          //   scope.currentInvoice.techCompanyName = companyName
+          //   scope.currentInvoice.phoneNumbers[0].number = phone;
+          //   scope.currentInvoice.senderAddress = address;
+          //
+          // }
+
+
+
+          // $scope.editCo
+        })
+
         $scope.openEditModal = function (type, company) {
           var templates = {
             contacts: '/html/scripts/core/billable/edit-contact-details-modal.tpl.html',

@@ -318,7 +318,7 @@
               if ($scope.servicesData && $scope.servicesData.default) {
                 for (var i = 0; i < $scope.servicesData.default.length; i++) {
                   var service = angular.copy($scope.servicesData.default[i]);
-                  $scope.editCompany.services.push(service);
+                  $scope.editCompany.services && $scope.editCompany.services.push(service);
                   $scope.selectedServices[service.versionedId.id] = true;
                 }
               }
@@ -334,10 +334,17 @@
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
-        $scope.save = function (form, isCreateContract) {
+        $scope.save = function (form, isCreateContract, isInvoice) {
           $scope.isSaveFailed = false;
 
           // console.log(form, form.$valid);
+
+          console.log(form, 'form')
+
+          if (isInvoice) {
+            $rootScope.updateBillTo = form;
+          }
+
 
           if (form.$valid) {
             $scope.savingInProcess = true;
@@ -398,6 +405,8 @@
             //   editCompany.techLeadIds = techIds;
             //
             // }
+
+            console.log('im saving')
 
 
 

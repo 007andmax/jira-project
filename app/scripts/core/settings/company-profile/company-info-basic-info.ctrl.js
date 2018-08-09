@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoBasicInfoCtrl',
-    ['$scope', 'CompaniesService',
-      function ($scope, CompaniesService) {
+    ['$scope', 'CompaniesService', '$rootScope',
+      function ($scope, CompaniesService, $rootScope) {
 
         $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
@@ -18,6 +18,16 @@
             $scope.saveBasicInfo($scope.basicInfoForm);
           }
         }, true);
+
+
+        $scope.$watch(function() {
+          return $rootScope.updateTech;
+        }, function(val) {
+          console.log('updatedTECH')
+          if (val) {
+            $scope.saveBasicInfo(val);
+          }
+        })
 
         $scope.saveBasicInfo = function (form) {
 

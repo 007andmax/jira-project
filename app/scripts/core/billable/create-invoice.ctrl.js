@@ -21,6 +21,8 @@
         $scope.regularNotes = [];
         $scope.globalNote = {};
 
+
+
         var placeholderNotes = [
           {
             title: 'Note 1',

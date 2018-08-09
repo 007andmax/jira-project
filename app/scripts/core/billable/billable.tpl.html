@@ -74,14 +74,13 @@
                                                                 ng-change="changeInvoiceNumber(invoiceNumber)">
               </div>
               <div>
-                <p class="bold">Active Information Systems</p>
+                <p class="bold">{{currentInvoice.techCompanyName}}</p>
               </div>
               <div>
-                <p>3673 th Street,</p>
-                <p>Edmonton Alberta</p>
+                <p>{{currentInvoice.senderAddress}}</p>
               </div>
               <div>
-                <p>780-903-8719</p>
+                <p>{{currentInvoice.phoneNumbers[0].number}}</p>
               </div>
               <div>
                 <a class="bold pointer" ng-click="openEditModal('contacts', editCompany)">Edit Your Business Address and Contact Details</a>
@@ -94,10 +93,9 @@
         <div class="invoice-create--info-2">
           <div class="bill-anton">
             <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
-            <p class="bold">activeis</p>
-            <p>Scott Willson</p>
-            <p>104 Street Southwest</p>
-            <p style="margin-bottom: 20px;">High River, AB T1V</p>
+            <p class="bold">{{invoiceBillTo.name}}</p>
+            <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
+            <p style="margin-bottom: 20px;">{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
             <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
           <div class="bill-valera">
@@ -304,11 +302,9 @@
             <div class="invoice-list--header__bottom clearfix">
               <div class="col-md-7 pl-30">
                 <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
-                <p class="bold" style="margin-bottom: 10px;">activeis</p>
-                <p>Scott Willson</p>
-                <p>104 Street Southwest</p>
-                <p>High River, AB T1V</p>
-                <p>scott@activeis.ca</p>
+                <p class="bold">{{invoiceBillTo.name}}</p>
+                <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
+                <p style="margin-bottom: 20px;">{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
               </div>
               <div class="col-md-5 pr-30">
                 <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>

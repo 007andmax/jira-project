@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.billable").directive("invoiceContent",
-    ['$timeout', '$http', '$compile', '$templateCache',
-      function ($timeout, $http, $compile, $templateCache) {
+    ['$timeout', '$http', '$compile', '$templateCache', '$rootScope',
+      function ($timeout, $http, $compile, $templateCache, $rootScope) {
         return {
           restrict: 'A',
           require: 'ngModel',
@@ -77,7 +77,14 @@
                     }
                   }
                 }
+
+
+
               }
+
+              console.log('im hereAAAA', scope.currentInvoice.billTo[0])
+
+              $rootScope.currentBillTo = scope.currentInvoice.billTo[0];
 
               $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
                 .then(function (response) {
@@ -188,6 +195,29 @@
               });
 
             }
+
+            scope.$watch(function() {
+              return $rootScope.updateTech;
+            }, function(val) {
+              console.log(val, 'VAL')
+
+              if (val) {
+                var address = val.addressForm.address.$modelValue;
+                var companyName = val.companyName.$viewValue;
+                var phone = val['forms.phoneNumbersForm'].phoneNumber0.$viewValue;
+
+                console.log(address, companyName, phone, "DATA FROM MODAL WINDOW")
+
+                scope.currentInvoice.techCompanyName = companyName
+                scope.currentInvoice.phoneNumbers[0].number = phone;
+                scope.currentInvoice.senderAddress = address;
+
+              }
+
+
+
+              // $scope.editCo
+            })
 
             function compileInvoice() {
               // ($compile(invoiceTemplate.data)(scope, function (compileElement, scope) {
