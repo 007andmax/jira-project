@@ -418,7 +418,7 @@
                   UsersService.updateWelcomeWizard('setupClient');
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
-                if (!$scope.savedState.items.length) {
+                if (!($scope.savedState && $scope.savedState.items.length)) {
                   if(isCreateContract && $scope.selectedContractType) {
                     $scope.closeWindowWithoutConfirmation();
                     openCreateContractModal(editCompany, $scope.selectedContractType, resp);

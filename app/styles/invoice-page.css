@@ -76,6 +76,22 @@
   padding: 15px 15px 40px;
 }
 
+.dropdown-menu .create-invoice-dropdown {
+  height: 50px;
+  width: 175px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+}
+
+.invoice-create--header .dropdown-menu {
+  width: 175px;
+}
+
+.dropdown-menu .create-invoice-dropdown:hover {
+  cursor: pointer;
+}
+
 .invoice-logo {
   padding: 100px 30px 20px;
   border: 2px dashed #C4CBD5;
@@ -153,6 +169,7 @@
 
 .dropdown-menu-wrapper .dropdown-menu {
   width: 100%;
+  transform: translateY(40px);
 }
 
 .transparent-cursor {

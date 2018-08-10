@@ -5,7 +5,7 @@
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.invoiceEditModalCtrl',
     ['$scope', '$uibModalInstance', '$timeout', 'CompaniesService',
       function ($scope, $uibModalInstance, $timeout, CompaniesService) {
-        $scope.close = function () {
+        $scope.closeWindow = function () {
           $uibModalInstance.dismiss();
         };
 

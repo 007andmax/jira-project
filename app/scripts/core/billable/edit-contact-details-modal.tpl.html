@@ -3,7 +3,7 @@
     <div>
       <h2>Edit Business Address and Contact Details</h2>
     </div>
-    <button class="close-modal" ng-click="close()"></button>
+    <button class="close-modal" ng-click="closeWindow()"></button>
   </div>
   <div class="invoice--content row">
     <!-- <div class="col-md-6">
@@ -96,7 +96,7 @@
     <!-- <div class="col-md-6"><input type="text" placeholder="City"></div> -->
 
     <!-- <div class="col-md-6"><input type="text" placeholder="Website"></div> -->
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
+    <!-- <div class="col-md-6" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
       <div ng-messages="companyForm.companyDomain.$error"
            ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
         <label class="control-label" ng-message="required">Domain is required.</label>
@@ -108,8 +108,8 @@
              name="companyDomain"
               ng-pattern="domainPattern">
 
-              <!-- is-uniq-validation validation-func="validateCompanyDomain" -->
-    </div>
+
+    </div> -->
 
     <!-- <div class="col-md-6"><input type="text" placeholder="Postal/ZIP Code"></div> -->
     <div class="col-md-6"
@@ -137,6 +137,6 @@
   </div>
   <div class="invoice--footer">
     <button class="btn btn-primary" ng-click="updateTechCompany(companyForm, true)">Save</button>
-    <button class="btn btn-default">Cancel</button>
+    <button class="btn btn-default" ng-click="closeWindow()">Cancel</button>
   </div>
 </div>

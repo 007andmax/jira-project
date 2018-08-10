@@ -3,7 +3,7 @@
     <div>
       <h2>Edit Customer</h2>
     </div>
-    <button class="close-modal" ng-click="close()"></button>
+    <button class="close-modal" ng-click="closeWindow()"></button>
   </div>
   <div class="invoice--content row">
     <div class="col-md-6">
@@ -154,6 +154,6 @@
     <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false, true)"
                                    loading="savingInProcess" label="Save">
     </button-with-loading-indicator>
-    <button class="btn btn-default">Cancel</button>
+    <button class="btn btn-default" ng-click="closeWindow()">Cancel</button>
   </div>
 </div>

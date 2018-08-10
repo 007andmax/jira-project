@@ -46,24 +46,33 @@
         $scope.$watch(function() {
           return $rootScope.updateBillTo;
         }, function(val) {
-          console.log(val, 'BILLTO')
 
-          // if (val) {
-          //   var address = val.addressForm.address.$modelValue;
-          //   var companyName = val.companyName.$viewValue;
-          //   var phone = val['forms.phoneNumbersForm'].phoneNumber0.$viewValue;
-          //
-          //   console.log(address, companyName, phone, "DATA FROM MODAL WINDOW")
-          //
-          //   scope.currentInvoice.techCompanyName = companyName
-          //   scope.currentInvoice.phoneNumbers[0].number = phone;
-          //   scope.currentInvoice.senderAddress = address;
-          //
-          // }
+          if (val) {
+            var companyName = val.companyName.$modelValue;
+            var firstName = val.firstName.$modelValue;
+            var lastName = val.lastName.$modelValue;
+            var address = val.addressForm.address.$modelValue;
+            var zip = val.zip.$viewValue;
+            var suiteNum = val.suiteNumber.$viewValue;
+
+            var fullAddress;
+
+            if (suiteNum) {
+              fullAddress = suiteNum + ', ' + address;
+            }
+
+            if (zip) {
+              fullAddress = fullAddress + ', ' + zip;
+            }
+
+            $scope.invoiceBillTo.companyInfo.contacts[0].firstName = firstName;
+            $scope.invoiceBillTo.companyInfo.contacts[0].lastName = lastName;
+            $scope.invoiceBillTo.name = companyName;
+            $scope.invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode = fullAddress
+          }
 
 
 
-          // $scope.editCo
         })
 
         $scope.openEditModal = function (type, company) {
