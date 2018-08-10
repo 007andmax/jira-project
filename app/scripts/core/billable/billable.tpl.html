@@ -58,9 +58,9 @@
 
                 Save and Continue
 
-                <div class="caret-wrapper pointer" style="color: white; padding: 10px" uib-dropdown-toggle ng-click="$event.stopPropagation()">
-                  <i class="icn-sm pointer report-caret-icon" ></i>
-                </div>
+                <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
+                  <i class="icn-sm pointer report-caret-icon-white" uib-dropdown-toggle ng-click="$event.stopPropagation()"></i>
+                <!--</div>-->
               </button>
               <ul class="dropdown-menu">
                 <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
@@ -159,6 +159,7 @@
               <input type="text" class="form-validation has-dropdown" placeholder="Date"
                      qt-data-time-picker ng-model="currentInvoice.date"
                      disabled="true" ng-required="true">
+              <i class="new-calendar"></i>
             </div>
             <div><span>Payment Due</span>
               <!-- <input type="text" placeholder="Payment Due"> -->
@@ -166,6 +167,7 @@
                      qt-data-time-picker ng-model="currentInvoice.dueDate"
                      ng-change="savePaymentDue(currentInvoice.dueDate)"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
+              <i class="new-calendar"></i>
             </div>
           </div>
         </div>

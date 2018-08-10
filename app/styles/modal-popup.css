@@ -875,6 +875,39 @@ _::-webkit-:not(:root:root),
   font-weight: 500 !important;
 }
 
+.invoice-create .btn {
+  height: 40px !important;
+}
+
+.invoice-create--header__btn .btn-success {
+  padding-left: 25px;
+  width: 184px !important;
+  margin-right: 0;
+}
+.invoice-create--header__btn .btn{
+  font-size: 13px!important;
+}
+.invoice-create--header__btn li {
+  font-size: 13px;
+  transition: all .3s;
+  height: 40px;
+  padding-left: 25px !important;
+  font-weight: bold;
+  width: 100% !important;
+}
+
+.invoice-create--header__btn li:hover {
+  background-color: #16A4FA;
+  color: #fff;
+  font-weight: normal;
+}
+
+.invoice-create--header__btn .dropdown-menu {
+  top: auto;
+  padding: 10px 0;
+  width: 184px !important;
+}
+
 .create-new .btn {
   width: 160px !important;
 }
