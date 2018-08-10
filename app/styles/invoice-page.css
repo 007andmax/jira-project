@@ -73,6 +73,18 @@
   background: url("../images/new-icons/new-calendar-icon.png");
 }
 
+.save-invoice-button {
+  position: relative;
+}
+
+.save-invoice-button .open-dropdown-zone {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 38px;
+}
+
 .invoice-create--info .caret-wrapper {
   position: absolute;
   right: 15px;

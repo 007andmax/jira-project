@@ -47,7 +47,7 @@
                 </li>
               </ul>
             </div> -->
-            <div uib-dropdown>
+            <div uib-dropdown class="save-invoice-button">
               <button ng-if="!invoicePreview && !invoiceCreated"
                       ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
@@ -59,8 +59,9 @@
                 Save and Continue
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
-                  <i class="icn-sm pointer report-caret-icon-white" uib-dropdown-toggle ng-click="$event.stopPropagation()"></i>
+                  <i class="icn-sm pointer report-caret-icon-white" ></i>
                 <!--</div>-->
+                <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
               </button>
               <ul class="dropdown-menu">
                 <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
@@ -343,7 +344,28 @@
           <h3>New Invoice</h3>
           <div class="invoice-create--header__btn">
             <button class="btn btn-default" ng-click="togglePreview()">Edit</button>
-            <button class="btn btn-success">Save and Continue</button>
+            <div uib-dropdown class="save-invoice-button">
+              <button ng-if="!invoicePreview && !invoiceCreated"
+                      ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
+                      ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                      tooltip-append-to-body="true"
+                      class="btn btn-success"
+                      tooltip-placement="bottom"
+                      uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
+
+                Save and Continue
+
+                <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
+                  <i class="icn-sm pointer report-caret-icon-white" ></i>
+                <!--</div>-->
+                <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
+
+                <li class="create-invoice-dropdown" ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])">Save and Send</li>
+              </ul>
+            </div>
           </div>
         </div>
         <p class="info-block">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
@@ -355,9 +377,9 @@
               </div>
               <div class="col-md-7 text-right pr-30">
                 <h4 class="bold">Invoice <span>#{{ invoiceNumber }}</span></h4>
-                <p class="bold">Active Information Systems</p>
-                <p>3673 th Street, Edmonton Alberta</p>
-                <p>780-903-8719</p>
+                <p class="bold">{{currentInvoice.techCompanyName}}</p>
+                <p>{{currentInvoice.senderAddress}}</p>
+                <p>{{currentInvoice.phoneNumbers[0].number}}</p>
               </div>
             </div>
             <div class="invoice-list--header__bottom clearfix">
