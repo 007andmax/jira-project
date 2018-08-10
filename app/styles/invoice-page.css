@@ -61,6 +61,18 @@
   position: relative;
 }
 
+.invoice-create--info .file-name {
+  position: absolute;
+  bottom: -80px;
+  left: -10px;
+}
+
+.new-calendar {
+  width: 16px;
+  height: 16px;
+  background: url("../images/new-icons/new-calendar-icon.png");
+}
+
 .invoice-create--info .caret-wrapper {
   position: absolute;
   right: 15px;
@@ -184,7 +196,6 @@
   outline: none;
 }
 
-
 .bill-anton p.bold,
 .invoice-info div:nth-child(4) p,
 .invoice-info div:nth-child(2) p {
@@ -208,6 +219,15 @@
   padding: 32px;
   margin-top: 28px;
   background-color: #fff;
+}
+
+.invoice-create--info-2 .new-calendar {
+  position: absolute;
+  top: 11px;
+}
+
+.bill-valera > div {
+  position: relative;
 }
 
 .invoice-list {

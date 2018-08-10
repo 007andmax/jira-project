@@ -9,7 +9,7 @@
             <input class="pointer" type="text" placeholder="Filter by date" date-range-picker
                    ng-model="invoiceDateFilter"
                    options="invoiceDateFilterOptions">
-            <i class="report-calendar" ng-show="!invoiceDateFilter.startDate && !invoiceDateFilter.endDate"></i>
+            <i class="new-calendar" ng-show="!invoiceDateFilter.startDate && !invoiceDateFilter.endDate"></i>
             <i class="icn-sm icn-remove-old pointer"
                ng-show="invoiceDateFilter.startDate && invoiceDateFilter.endDate"
                uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearInvoiceDateFilter()"></i>
