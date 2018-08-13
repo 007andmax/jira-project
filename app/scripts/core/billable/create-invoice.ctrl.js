@@ -118,6 +118,13 @@
           })
         };
 
+
+        $scope.goBackToList = function() {
+          $scope.unlockAllTickets();
+
+          $rootScope.hideInvoiceWhenBack = true;
+        }
+
         $scope.getLogoUrl = $rootScope.getCompanyLogoUrl;
 
         $scope.attachDraggedAvatar = function (file) {
@@ -313,11 +320,20 @@
           $scope.isInvoiceHeaderShown = !$scope.isInvoiceHeaderShown;
         }
 
+        $scope.unlockAllTickets = function() {
+          $scope.invoiceLocks.forEach(function (lock) {
+            BillableService.unlockTicketIds(lock.lockId);
+          })
+        }
+
         $scope.$on('modal.closing', function () {
           $scope.invoiceLocks.forEach(function (lock) {
             BillableService.unlockTicketIds(lock.lockId);
           })
         });
+
+
+        $scope.$on('$destroy', $scope.unlockAllTickets);
 
         window.onbeforeunload = function () {
 

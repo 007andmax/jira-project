@@ -131,6 +131,14 @@
           $scope.isInvoiceShown = true;
         }
 
+        $scope.$watch(function() {
+          return $rootScope.hideInvoiceWhenBack
+        }, function(val) {
+          if (val) {
+            $scope.isInvoiceShown = false;
+          }
+        })
+
         $scope.togglePreview = function() {
           $scope.isPreviewShown = !$scope.isPreviewShown;
         }
@@ -283,6 +291,10 @@
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
         };
+
+        $scope.clearAllSelections = function() {
+          
+        }
 
         $scope.anotherCompanySelected = function (companyId) {
           if ($scope.ticketsSelection[companyId] && $scope.ticketsSelection[companyId].checked) {
