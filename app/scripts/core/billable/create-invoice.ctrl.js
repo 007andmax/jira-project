@@ -416,6 +416,8 @@
                 $scope.savingInvoiceInProcess.splice(index, 1);
               }
               $scope.invoiceCreated = true;
+
+              $rootScope.isInvoiceCreated = true;
             })
           }
         };

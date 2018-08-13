@@ -150,6 +150,16 @@
           }
         })
 
+        $scope.$watch(function() {
+          return $rootScope.isInvoiceCreated;
+        }, function(val) {
+          if (val) {
+            $rootScope.isInvoiceCreated = false;
+
+            $scope.isInvoiceShown = false;
+          }
+        })
+
         $scope.togglePreview = function() {
           $scope.isPreviewShown = !$scope.isPreviewShown;
         }

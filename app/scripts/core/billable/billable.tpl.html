@@ -140,7 +140,7 @@
                 <p>{{currentInvoice.phoneNumbers[0].number}}</p>
               </div>
               <div>
-                <a class="bold pointer" ng-click="openEditModal('contacts', editCompany)">Edit Your Business Address and Contact Details</a>
+                <a class="bold pointer font-size-13" ng-click="openEditModal('contacts', editCompany)">Edit Your Business Address and Contact Details</a>
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@
             <p style="margin-bottom: 20px;">{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
             <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
-          <div class="bill-valera">
+          <div class="bill-valera font-size-13">
             <div><span>Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId" ng-change="changeTaxIdData()"></div>
             <div><span>Invoice Date</span>
               <input type="text" class="form-validation has-dropdown" placeholder="Date"
@@ -281,14 +281,14 @@
           <div class="invoice-list--footer">
             <div class="invoice-list--footer__top">
               <div class="clearfix" style="margin-bottom: 5px;">
-                <div class="col-md-9 bold pl-30">Customer Note Type</div>
+                <div class="col-md-9 bold pl-30 font-size-13">Customer Note Type</div>
                 <div class="col-md-1 bold fz-11">Sub Total</div>
                 <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) |
                   currency: '$':2 }}
                 </div>
               </div>
               <div class="clearfix" style="margin-bottom: 15px;">
-                <div class="col-md-9 pl-30">
+                <div class="col-md-9 pl-30 font-size-13">
                   <!-- <input type="text" placeholder="Add Note"> -->
                   <div style="display: inline-block" class="dropdown-menu-wrapper">
                     <input type="text" class="form-validation has-dropdown pointer transparent-cursor"
@@ -316,7 +316,7 @@
                 </div>
               </div>
               <div class="clearfix">
-                <div class="col-md-9 pl-30">
+                <div class="col-md-9 pl-30 font-size-13">
                   <textarea rows="3" ng-if="chosenNote.line" style="width: 100%" ng-model="chosenNote.line"
                             ng-keypress="saveUpdatedNote()" maxlength="510"></textarea>
                 </div>
@@ -324,7 +324,7 @@
                 <div class="col-md-2 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
               </div>
             </div>
-            <div class="invoice-list--footer__bottom clearfix">
+            <div class="invoice-list--footer__bottom clearfix font-size-13">
               <div class="col-md-3 bold pl-30">Terms & Conditions</div>
               <span class="col-md-3 pointer" style="margin-left: 15px;"><a class="bold"
                                                                                            ng-click="saveUpdatedNote(true, globalNote)">Save Terms & Conditions</a></span>
@@ -401,7 +401,7 @@
                 <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
                 <p style="margin-bottom: 20px;">{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
               </div>
-              <div class="col-md-5 pr-30">
+              <div class="col-md-5 pr-30 font-size-13">
                 <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>
                 <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice Date:</p>
                 <p class="bold"><span>{{ currentInvoice.dueDate | date: 'dd MMM yyyy'}}</span>Payment Due</p>
@@ -487,14 +487,14 @@
           <div class="invoice-list--footer">
             <div class="invoice-list--footer__top">
               <div class="clearfix" style="margin-bottom: 5px;">
-                <div class="col-md-8 bold pl-30">Customer Note Type</div>
+                <div class="col-md-8 bold pl-30 font-size-13">Customer Note Type</div>
                 <div class="col-md-2 bold fz-11">Sub Total</div>
                 <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) |
                   currency: '$':2 }}
                 </div>
               </div>
               <div class="clearfix">
-                <div class="col-md-8 pl-30">{{ chosenNote.line1 + (chosenNote.line2 || '') }}
+                <div class="col-md-8 pl-30 font-size-13">{{ chosenNote.line1 + (chosenNote.line2 || '') }}
                 </div>
                 <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
                 <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) | currency:
@@ -509,8 +509,8 @@
               </div>
             </div>
             <div class="invoice-list--footer__bottom clearfix">
-              <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-              <div class="col-md-12 pl-30">{{globalNote.line1 + (globalNote.line2 || '')}}</div>
+              <div class="col-md-12 bold pl-30 font-size-13">Terms & Conditions</div>
+              <div class="col-md-12 pl-30 font-size-13">{{globalNote.line1 + (globalNote.line2 || '')}}</div>
             </div>
           </div>
         </div>
