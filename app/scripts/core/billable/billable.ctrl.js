@@ -43,6 +43,8 @@
 
         })
 
+
+
         $scope.$watch(function() {
           return $rootScope.updateBillTo;
         }, function(val) {
@@ -131,10 +133,19 @@
           $scope.isInvoiceShown = true;
         }
 
+        console.log('billable ctrl')
+
+        $scope.$on('$destroy', function() {
+          console.log('billable ctrl has been destroyed')
+        })
+
         $scope.$watch(function() {
           return $rootScope.hideInvoiceWhenBack
         }, function(val) {
+
+          console.log("something happen", val)
           if (val) {
+            $rootScope.hideInvoiceWhenBack = false;
             $scope.isInvoiceShown = false;
           }
         })
@@ -293,7 +304,7 @@
         };
 
         $scope.clearAllSelections = function() {
-          
+
         }
 
         $scope.anotherCompanySelected = function (companyId) {

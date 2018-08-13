@@ -194,6 +194,7 @@
 .dropdown-menu-wrapper .dropdown-menu {
   width: 100%;
   transform: translateY(40px);
+  max-height: none !important;
 }
 
 .transparent-cursor {
