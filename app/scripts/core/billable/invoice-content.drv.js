@@ -84,6 +84,8 @@
 
               $rootScope.currentBillTo = scope.currentInvoice.billTo[0];
 
+              $rootScope.isSenderAddress = scope.currentInvoice.senderAddress;
+
               if (scope.currentInvoice.date) scope.currentInvoice.date = moment(new Date(scope.currentInvoice.date)).format('DD MMM YYYY')
               if (scope.currentInvoice.dueDate) scope.currentInvoice.dueDate = moment(new Date(scope.currentInvoice.dueDate)).format('DD MMM YYYY');
 

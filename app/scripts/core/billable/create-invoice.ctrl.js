@@ -279,6 +279,13 @@
 
         $scope.isInvoiceHeaderShown = true;
 
+        $scope.$watch(function() {
+          return $rootScope.isSenderAddress;
+        }, function(val) {
+          console.log('iSSENDER ADDRESS')
+          $scope.isInvoiceHeaderShown = !($scope.editCompany && $scope.editCompany.logo && $scope.editCompany.logo.cropped && $scope.editCompany.logo.cropped.id) || !val;
+        })
+
         console.log($scope.ticketsSelection, 'tickets tickets')
 
         for (var companyId in $scope.ticketsSelection) {
