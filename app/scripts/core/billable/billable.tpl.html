@@ -49,14 +49,14 @@
             </div> -->
             <div uib-dropdown class="save-invoice-button">
               <button ng-if="!invoicePreview && !invoiceCreated"
-                      ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
+                      ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                       tooltip-append-to-body="true"
                       class="btn btn-success"
-                      tooltip-placement="bottom"
-                      uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
+                      tooltip-placement="bottom">
 
-                Save and Continue
+
+                Save and Send
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
                   <i class="icn-sm pointer report-caret-icon-white" ></i>
@@ -66,7 +66,7 @@
               <ul class="dropdown-menu">
                 <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
 
-                <li class="create-invoice-dropdown" ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])">Save and Send</li>
+                <li class="create-invoice-dropdown" ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)">Save and Download</li>
               </ul>
             </div>
 
