@@ -206,7 +206,7 @@
           var data = {
             title: note.title,
             line1: line1,
-            line2: line2 || null
+            line2: line2 || ''
           }
 
           if (globalUpdate) {

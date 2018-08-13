@@ -92,7 +92,7 @@
              ng-style="{'border-left-color': tagColors[companiesColors[company.clientType]].backgroundColor}">
           <div class="card-header clearfix">
             <div class="edit-icn" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-                 create-new-entity="company" item="company" stop-propagation="click"></div>
+                 create-new-entity="company" is-edit="true" item="company" stop-propagation="click"></div>
             <i class="icon-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
 
             <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>

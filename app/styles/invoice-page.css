@@ -124,6 +124,11 @@
   position: relative;
 }
 
+.select-file {
+  display: flex;
+  align-items: center;
+}
+
 .font-size-13 {
   font-size: 13px !important;
 }
