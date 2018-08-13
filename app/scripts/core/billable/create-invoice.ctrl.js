@@ -203,6 +203,16 @@
           }
 
           if (globalUpdate) {
+            var noteToUpdate = $scope.regularNotes.find(function(el) {
+              return el.id === note.id;
+            })
+
+            if (noteToUpdate) {
+              noteToUpdate.line1 = line1;
+              noteToUpdate.line2 = line2;
+              noteToUpdate.title = note.title
+            }
+
             BillableService.updateNote(data, note.id)
 
             if (!note) {

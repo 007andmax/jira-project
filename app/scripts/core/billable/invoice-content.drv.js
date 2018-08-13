@@ -82,14 +82,12 @@
 
               }
 
-              console.log('im hereAAAA', scope.currentInvoice.billTo[0])
-
               $rootScope.currentBillTo = scope.currentInvoice.billTo[0];
 
               if (scope.currentInvoice.date) scope.currentInvoice.date = moment(new Date(scope.currentInvoice.date)).format('DD MMM YYYY')
-              if (scope.currentInvoice.dueDate) scope.currentInvoice.dueDate = moment(new Date(scope.currentInvoice.dueDate)).add(1, 'd').format('DD MMM YYYY');
+              if (scope.currentInvoice.dueDate) scope.currentInvoice.dueDate = moment(new Date(scope.currentInvoice.dueDate)).format('DD MMM YYYY');
 
-              console.log(scope.currentInvoice.date, 'date')
+              console.log(scope.currentInvoice, 'currentINVOICE')
 
               $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
                 .then(function (response) {
