@@ -61,6 +61,8 @@
 
 
         $scope.updateTechCompany = function(form) {
+          $scope.savingInProcess = true;
+          $scope.saveRequests = 2;
 
 
           $rootScope.updateTech = form;
@@ -72,7 +74,7 @@
         $scope.saveContactInfo = function (form) {
 
           var address = $scope.companyForSettingPage.addresses[0];
-          if (form.$valid && address.address && address.timeZone && address.locale === address.timeZone.name) {
+          if (form.$valid && address.timeZone && address.locale === address.timeZone.name) {
             var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
 
             for (var i = 0; i < copyAddress.length; i++) {
@@ -102,6 +104,12 @@
             CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function () {
               if (form) {
                 form.$setPristine();
+                $scope.saveRequests--;
+
+                if (!$scope.saveRequests) {
+                  $scope.savingInProcess = false;
+                  $rootScope.closeEditModal = true;
+                }
               } else {
                 $scope.addressesWrapForm.$setPristine();
               }
@@ -120,6 +128,13 @@
 
             CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function () {
               form.$setPristine();
+
+              $scope.saveRequests--;
+
+              if (!$scope.saveRequests) {
+                $scope.savingInProcess = false;
+                $rootScope.closeEditModal = true;
+              }
             });
           }
         };

@@ -136,7 +136,10 @@
     </div>
   </div>
   <div class="invoice--footer">
-    <button class="btn btn-primary" ng-click="updateTechCompany(companyForm, true)">Save</button>
+    <!-- <button class="btn btn-primary" ng-click="updateTechCompany(companyForm, true)">Save</button> -->
+    <button-with-loading-indicator class="btn btn-primary" ng-click="updateTechCompany(companyForm, true)"
+                                   loading="savingInProcess" label="Save">
+    </button-with-loading-indicator>
     <button class="btn btn-default" ng-click="closeWindow()">Cancel</button>
   </div>
 </div>

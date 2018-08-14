@@ -360,6 +360,8 @@
             var contacts = editCompany.contacts,
               addresses = editCompany.addresses;
 
+            console.log(editCompany, 'EDITDI')
+
             for (var i = 0; i < contacts.length; i++) {
               var contact = contacts[i];
 
