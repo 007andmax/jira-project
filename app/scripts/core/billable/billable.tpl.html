@@ -57,7 +57,7 @@
                       tooltip-placement="bottom">
 
 
-                Save and Send
+                Save and Continue
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
                   <i class="icn-sm pointer report-caret-icon-white" ></i>
@@ -350,12 +350,12 @@
             <button class="btn btn-default" ng-click="togglePreview()">Edit</button>
             <div uib-dropdown class="save-invoice-button">
               <button ng-if="!invoicePreview && !invoiceCreated"
-                      ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
+                      ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                       tooltip-append-to-body="true"
                       class="btn btn-success"
-                      tooltip-placement="bottom"
-                      uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
+                      tooltip-placement="bottom">
+
 
                 Save and Continue
 
@@ -367,13 +367,13 @@
               <ul class="dropdown-menu">
                 <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
 
-                <li class="create-invoice-dropdown" ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])">Save and Send</li>
+                <li class="create-invoice-dropdown" ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)">Save and Download</li>
               </ul>
             </div>
           </div>
         </div>
         <div class="info-block">
-          <p>This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
+          <p style="display: inline-block; margin-right: 20px;">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
           <div class="expires-in" ng-show="showTimer && !invoiceCreated" style="display: inline-block;">
             <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
             {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
