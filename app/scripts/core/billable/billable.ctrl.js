@@ -123,6 +123,7 @@
 
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
+        $scope.getLogo = $rootScope.getCompanyLogoUrl;
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
