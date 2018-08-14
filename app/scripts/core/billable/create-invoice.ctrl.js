@@ -214,10 +214,16 @@
               return el.id === note.id;
             })
 
+            if (!noteToUpdate) {
+              noteToUpdate = $scope.globalNote;
+            } else {
+              noteToUpdate.title = note.title
+            }
+
             if (noteToUpdate) {
               noteToUpdate.line1 = line1;
               noteToUpdate.line2 = line2;
-              noteToUpdate.title = note.title
+
             }
 
             BillableService.updateNote(data, note.id)
@@ -228,7 +234,6 @@
 
 
           } else {
-            console.log("SOMETHING HApPEN")
             data.noteType = "REGULAR"
             data.suggestedNote = false;
             delete data.line;
