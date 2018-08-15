@@ -187,6 +187,8 @@
         })
 
         $scope.saveNote = function(note) {
+
+          $scope.ticketNote = note;
           var chosen = $scope.chosenNote;
           // console.log(note, "NOTE", $scope.chosenNote);
 
@@ -271,7 +273,8 @@
             BillableService.updateNote(data, note.id)
 
             if (!note) {
-              $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+              // console.log('ASSIGN')
+              // $scope.ticketNote = Object.assign({}, $scope.chosenNote);
             }
 
 
@@ -289,6 +292,10 @@
 
         $scope.updateNote = function(note) {
           $scope.chosenNote = Object.assign({}, note);
+
+          // console.log(note, 'note')
+          $scope.ticketNote = note.title;
+          // $scope.chosenNote = note;
           $scope.chosenNote.line = note.line1 + (note.line2 || '');
 
           note = Object.assign({}, note);
@@ -339,6 +346,10 @@
           // console.log('iSSENDER ADDRESS')
           $scope.isInvoiceHeaderShown = !($scope.editCompany && $scope.editCompany.logo && $scope.editCompany.logo.cropped && $scope.editCompany.logo.cropped.id) || !val;
         })
+
+        $scope.$watch('ticketNote', function(val) {
+          // console.log(val, "TICKET NOTE")
+        }, true)
 
         // console.log($scope.ticketsSelection, 'tickets tickets')
 

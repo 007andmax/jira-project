@@ -176,6 +176,8 @@
 
         $scope.togglePreview = function() {
           $scope.isPreviewShown = !$scope.isPreviewShown;
+
+          // console.log($scope.ticketNote, 'note')
         }
 
         $scope.setExpandedCompanyId = function (companyId) {
