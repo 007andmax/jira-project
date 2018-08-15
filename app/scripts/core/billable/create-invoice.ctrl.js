@@ -59,7 +59,7 @@
           var data = res.data;
           // console.log(data, 'data')
 
-          if (!data || data.length === 0) {
+          if (false && (!data || data.length === 0)) {
             var requests = 0;
 
             for (var i = 0; i < placeholderNotes.length; i++) {
@@ -97,9 +97,7 @@
         })
 
         $scope.chosenNote = {
-          title: '',
-          line1: '',
-          line2: ''
+
         }
 
 
@@ -188,7 +186,35 @@
           // console.log(val, 'ticketNote a sa  as saas sas sa as a as ')
         })
 
-        $scope.saveNote = function() {
+        $scope.saveNote = function(note) {
+          var chosen = $scope.chosenNote;
+          console.log(note, "NOTE", $scope.chosenNote);
+
+          if (chosen.id) {
+
+          }
+
+          console.log($scope.regularNotes, "REGULAR")
+
+          chosen.title = note;
+
+          $scope.saveUpdatedNote();
+
+
+        }
+
+        $scope.isSaveButtonShown = function() {
+          var chosen = $scope.chosenNote;
+
+          if (!chosen.id && $scope.regularNotes.length === 5) {
+            return false;
+          }
+
+          if (!chosen.title) {
+            return false;
+          }
+
+          return true;
 
         }
 
@@ -210,6 +236,20 @@
           }
 
           if (globalUpdate) {
+
+            if (!note.id) {
+              // data.noteType = 'REGULAR';
+              // BillableService.createNote(data)
+
+              console.log('this note should be added to list, not globally updated')
+
+            }
+
+            if (!note.title && note.id !== $scope.globalNote.id) {
+              console.log('you cant save regular note w/o title');
+              return;
+            }
+
             var noteToUpdate = $scope.regularNotes.find(function(el) {
               return el.id === note.id;
             })
@@ -246,7 +286,7 @@
         }
 
         $scope.updateNote = function(note) {
-          $scope.chosenNote = note;
+          $scope.chosenNote = Object.assign({}, note);
           $scope.chosenNote.line = note.line1 + (note.line2 || '');
 
           note = Object.assign({}, note);
