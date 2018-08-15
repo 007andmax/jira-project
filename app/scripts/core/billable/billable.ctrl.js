@@ -63,6 +63,7 @@
             var address = val.addressForm.address.$modelValue;
             var zip = val.zip.$viewValue;
             var suiteNum = val.suiteNumber.$viewValue;
+            var email = val.primaryEmail.$viewValue;
 
             var fullAddress;
 
@@ -73,6 +74,8 @@
             if (zip) {
               fullAddress = fullAddress + ', ' + zip;
             }
+
+            $scope.invoiceBillTo.companyInfo.contacts[0].primaryEmail = email;
 
             $scope.invoiceBillTo.companyInfo.contacts[0].firstName = firstName;
             $scope.invoiceBillTo.companyInfo.contacts[0].lastName = lastName;
