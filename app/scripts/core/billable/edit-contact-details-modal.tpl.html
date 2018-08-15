@@ -38,7 +38,7 @@
         <label class="control-label" ng-message="unique" for="">This company name already occupied.</label>
       </div>
 
-      <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
+      <input type="text" style="border-radius: 0;height: 45px;" class="form-control" ng-model="editCompany.name" aria-expanded="true"
              ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
              is-uniq-validation validation-func="validateCompanyName" model-id="editCompany.name"
              >
