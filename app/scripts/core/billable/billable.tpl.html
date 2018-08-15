@@ -115,7 +115,9 @@
             <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
             <p class="bold">{{invoiceBillTo.name}}</p>
             <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
-            <p style="margin-bottom: 20px;">{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
+            <p>{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
+            <p>{{ invoiceBillTo.companyInfo.contacts[0].primaryEmail }}</p>
+            <p style="margin-bottom: 20px;">{{ invoiceBillTo.contacts[0].phoneNumbers[0].number }}</p>
             <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
           <div class="bill-valera font-size-13">
@@ -365,7 +367,9 @@
                 <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
                 <p class="bold">{{invoiceBillTo.name}}</p>
                 <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
-                <p style="margin-bottom: 20px;">{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
+                <p>{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
+                <p>{{ invoiceBillTo.companyInfo.contacts[0].primaryEmail }}</p>
+                <p style="margin-bottom: 20px;">{{ invoiceBillTo.contacts[0].phoneNumbers[0].number }}</p>
               </div>
               <div class="col-md-5 pr-30 font-size-13">
                 <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>

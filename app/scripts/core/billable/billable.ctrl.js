@@ -38,6 +38,11 @@
           if (val) {
             $scope.invoiceBillTo = CompaniesService.getCompanyByAddressId(val.id);
 
+            var companyData = CompaniesService.getCompanyData($scope, $scope.invoiceBillTo.id, function() {
+              console.log(companyData, 'DATA DATA DATA')
+              $scope.invoiceBillTo.contacts = companyData.contacts;
+            })
+
             console.log($scope.invoiceBillTo, 'billtotot')
           }
 
@@ -50,6 +55,8 @@
         }, function(val) {
 
           if (val) {
+
+            console.log(val, 'val')
             var companyName = val.companyName.$modelValue;
             var firstName = val.firstName.$modelValue;
             var lastName = val.lastName.$modelValue;

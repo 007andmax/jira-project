@@ -112,8 +112,9 @@
                 <p class="bold">{{currentInvoice.companyName}}</p>
                 <p>{{ currentInvoice.invoiceContact.firstName + ' ' + currentInvoice.invoiceContact.lastName}}</p>
                 <!-- <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p> -->
-                <p style="margin-bottom: 20px;">{{ currentInvoice.billingAddress }}</p>
+                <p>{{ currentInvoice.billingAddress }}</p>
                 <p>{{ currentInvoice.invoiceContact.primaryEmail }}</p>
+                <p style="margin-bottom: 20px;">{{ currentInvoice.invoiceContact.phoneNumbers[0].number }}</p>
               </div>
               <div class="col-md-5 pr-30">
                 <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>
