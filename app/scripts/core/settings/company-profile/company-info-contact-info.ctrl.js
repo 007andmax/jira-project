@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoContactInfoCtrl',
-    ['$scope', 'quicktech.common.services.PhoneFormats', 'CompaniesService', 'UsersService',
-      function ($scope, PhoneFormats, CompaniesService, UsersService) {
+    ['$scope', 'quicktech.common.services.PhoneFormats', 'CompaniesService', 'UsersService', '$rootScope',
+      function ($scope, PhoneFormats, CompaniesService, UsersService, $rootScope) {
 
         $scope.currentAddressIndex = 0;
         $scope.maximalAmountOfPhones = 3;
@@ -55,6 +55,15 @@
           });
           location.isPrimary = true;
         };
+
+        $scope.$watch(function() {
+          return $rootScope.updateTech;
+        }, function(val) {
+          console.log('updatedTECH')
+          if (val) {
+            $scope.saveContactInfo(val);
+          }
+        })
 
         $scope.saveContactInfo = function (form) {
 

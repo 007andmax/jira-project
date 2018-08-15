@@ -1329,6 +1329,12 @@
   background: url("../images/new-icons/report-caret.png");
 }
 
+.report-caret-icon-white {
+  width: 14px;
+  height: 17px;
+  background: url("../images/new-icons/input-dropdownarrow.png");
+}
+
 .report-calendar {
   width: 12px;
   height: 12px;

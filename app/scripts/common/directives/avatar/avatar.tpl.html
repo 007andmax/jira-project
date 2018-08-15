@@ -12,13 +12,33 @@
     <div class="select-file clearfix">
       <div class="btn btn-lg btn-primary pull-left" crop-image-button>
         {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }}
-        <span class="file-name pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
-        <a href="javascript:void(0)" restore-default-button>Restore Default</a>
-      </span>
+
       </div>
+      <span class="pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
+      <a href="javascript:void(0)" restore-default-button>Restore Default</a>
+      </span>
     </div>
     <div class="img-description">
       Maximum size of 2MB. JPG, GIF, PNG
     </div>
   </div>
 </div>
+
+<!-- <div crop-image="model" class="invoice-logo" style="position: relative;">
+  <div class="drop-area-wrapper" >
+    <div class="drop-area-subwrapper">
+      <p class="drop-area">
+        Drop Files Here
+      </p>
+    </div>
+  </div>
+  <div class="drag-n-drop-body">
+    <div>
+      <p class="bold"><a href="#">Browse</a> or drop your logo here.</p>
+      <p style="opacity: .5;">Maximum 5 MB in size.</p>
+      <p style="opacity: .5;">JPG, PNG, or GIF formats.</p>
+      <p style="opacity: .5;">Recommended size 300 x 200 pixels.</p>
+      <input type="file" class="file-input" multiple=""/>
+    </div>
+  </div>
+</div> -->

@@ -7,24 +7,26 @@
       templateUrl: '/html/scripts/common/directives/avatar/avatar.tpl.html',
       scope: {
         model: '=',
-        modelName: '@'
+        modelName: '@',
+        isInvoice: '<isInvoice',
+        attachFunc: '<attachFunc'
       },
       link: function (scope) {
-        
+
         var urlGetters = {
           user: $rootScope.getUserAvatarUrl,
           company: $rootScope.getCompanyLogoUrl,
           techCompany: $rootScope.getCompanyLogoUrl
         };
-        
+
         scope.imagePath = scope.modelName.toLowerCase().indexOf('company') > -1 ? 'logo' : 'avatar';
-        
+
         scope.getUrl = function () {
           return urlGetters[scope.modelName](scope.model);
         };
-        
+
       }
     }
   }]);
-  
+
 })();

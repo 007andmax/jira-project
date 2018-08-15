@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyProfileCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService', 'ConstantsService',
-      function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService) {
+    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService', 'ConstantsService', '$rootScope', 'UsersService',
+      function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService, $rootScope, UsersService) {
 
         var weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'],
           defaultWorkingDay = {
@@ -58,6 +58,99 @@
 
           $scope.companyForSettingLoad = true;
         });
+
+
+        $scope.updateTechCompany = function(form) {
+          $scope.savingInProcess = true;
+          $scope.saveRequests = 2;
+
+
+          $rootScope.updateTech = form;
+
+          $scope.saveContactInfo(form);
+          $scope.saveBasicInfo(form);
+        }
+
+        $scope.saveContactInfo = function (form) {
+
+          var address = $scope.companyForSettingPage.addresses[0];
+          if (form.$valid && address.timeZone && address.locale === address.timeZone.name) {
+            var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
+
+            for (var i = 0; i < copyAddress.length; i++) {
+              var phoneNumbers = copyAddress[i].phoneNumbers,
+                firstPhone = phoneNumbers[0].number,
+                lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
+
+              if (!lastPhone || lastPhone.trim().length === 0 ||
+                (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+
+                phoneNumbers.splice(phoneNumbers.length - 1, 1);
+
+                if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+                  phoneNumbers.pop();
+                }
+              } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+                phoneNumbers.shift();
+              }
+            }
+
+            copyAddress[0].isPrimary = true;
+
+            if (copyAddress[0].phoneNumbers && copyAddress[0].phoneNumbers[0] && copyAddress[0].phoneNumbers[0].number) {
+              UsersService.updateWelcomeWizard('companyProfile');
+            }
+
+            CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function () {
+              if (form) {
+                form.$setPristine();
+                $scope.saveRequests--;
+
+                if (!$scope.saveRequests) {
+                  $scope.savingInProcess = false;
+                  $rootScope.closeEditModal = true;
+                }
+              } else {
+                $scope.addressesWrapForm.$setPristine();
+              }
+            });
+          }
+        };
+
+        $scope.saveBasicInfo = function (form) {
+
+          if (form.$valid) {
+            var basicInfo = {
+              logo: $scope.editCompany.logo,
+              name: $scope.editCompany.name,
+              description: $scope.editCompany.description
+            };
+
+            CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function () {
+              form.$setPristine();
+
+              $scope.saveRequests--;
+
+              if (!$scope.saveRequests) {
+                $scope.savingInProcess = false;
+                $rootScope.closeEditModal = true;
+              }
+            });
+          }
+        };
+
+        $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
+
+          if ($scope.currentUser.accountType === "ROOT") {
+            ngModelCtrl.$setValidity('unique', true);
+            return
+          }
+
+          var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+            afterValidationCallback();
+          });
+        };
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form && form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;

@@ -1185,6 +1185,10 @@ hr {
   top: 17px;
 }
 
+.invoices .invoices-header .invoices-header-filters > div .new-calendar {
+  top: 12px;
+}
+
 .invoices .invoices-header .invoices-header-filters > div .icn-remove-old {
   top: 15px;
 }

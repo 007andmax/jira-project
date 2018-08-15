@@ -3,15 +3,17 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.receivable.invoicePreviewCtrl',
-    ['$scope', '$uibModalInstance', 'CompaniesService', 'ReceivableService', 'Downloader', '$timeout',
-      function ($scope, $uibModalInstance, CompaniesService, ReceivableService, Downloader, $timeout) {
+    ['$scope', 'CompaniesService', 'ReceivableService', 'Downloader', '$timeout', '$rootScope',
+      function ($scope, CompaniesService, ReceivableService, Downloader, $timeout, $rootScope) {
 
         $scope.receivablePreview = true;
         $scope.shoeInvoiceCreatedMessage = false;
         $scope.notificationMessage = 'Invoice has been sent';
 
-        ReceivableService.getInvoiceDataForPreview($scope.invoice.id, function (resp) {
+        ReceivableService.getInvoiceDataForPreview($rootScope.invoiceToShow.id, function (resp) {
           $scope.currentInvoice = resp;
+
+          console.log(resp, 'CURRENT INVOICE')
           $scope.currentBillTo = {
             addressWithSuitNumberAndPostalCode: resp.billingAddress
           };
@@ -39,21 +41,21 @@
         };
 
         $scope.print = function () {
-          var wnd = window.open('/invoice/show/' + $scope.invoice.id + '/pdf');
+          var wnd = window.open('/invoice/show/' + $rootScope.invoiceToShow.id + '/pdf');
           wnd.print();
           //$scope.close();
         };
 
         $scope.download = function () {
           Downloader.downloadByUrl(
-            '/invoice/show/' + $scope.invoice.id + '/pdf',
-            CompaniesService.getOneById($scope.invoice.company.id).name + '-' + $scope.invoice.number + '.pdf'
+            '/invoice/show/' + $rootScope.invoiceToShow.id + '/pdf',
+            CompaniesService.getOneById($rootScope.invoiceToShow.company.id).name + '-' + $rootScope.invoiceToShow.number + '.pdf'
           );
           //$scope.close();
         };
 
         $scope.sentInvoiceToMail = function () {
-          var idInvoiceToSend = $scope.invoice.id;
+          var idInvoiceToSend = $rootScope.invoiceToShow.id;
           //$scope.sending[idInvoiceToSend] = true;
 
           ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {

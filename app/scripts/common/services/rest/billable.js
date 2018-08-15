@@ -181,6 +181,24 @@
         Utils.handleCallback(sentDiscount, callback);
       }
 
+      function updateInvoiceData(data, lockId, callback) {
+        var data = {
+          "invoiceNumber": data.invoiceNumber || null, // null is allowed
+          "dueDate": data.dueDate || null, // null is allowed
+          "regularInvoiceNote": data.regularInvoiceNote || null // null of not empty
+        }
+
+        var request = $http({
+          url: '/invoice/partialUpdate/' + lockId,
+          method: 'POST',
+          data: data
+        });
+
+        if (callback) {
+          Utils.handleCallback(future, callback);
+        }
+      }
+
       function createInvoice(lockId, isSend, contact, address, callback) {
         if (!lockId) {
           throw 'lockId is required!'
@@ -194,6 +212,38 @@
         var future = $http.get('/invoice/create/' + lockId + '?isSendNotification=' + isSend + '&billTo=' + contact + '&shipTo=' + address);
         Utils.handleCallback(future, callback);
 
+      }
+
+      function getInvoiceData(callback) {
+        $http.get('/invoice/invoiceNote/getAll').then(function(res) {
+          if (callback) {
+            callback(res);
+          }
+        })
+      }
+
+      function createNote(data, callback) {
+        var request = $http({
+          url: '/invoice/createInvoiceNote?createRegular=' + (data.noteType === "REGULAR"),
+          method: 'POST',
+          data: [data]
+        });
+
+        if (callback) {
+          Utils.handleCallback(request, callback);
+        }
+      }
+
+      function updateNote(data, id, callback) {
+        var request = $http({
+          url: '/invoice/updateInvoiceNote/' + id,
+          method: 'POST',
+          data: data
+        });
+
+        if (callback) {
+          Utils.handleCallback(request, callback);
+        }
       }
 
       function getExistTimeByLockId(lockId, callback) {
@@ -272,6 +322,10 @@
 
       return {
         createInvoice: createInvoice,
+        updateInvoiceData: updateInvoiceData,
+        getInvoiceData: getInvoiceData,
+        createNote: createNote,
+        updateNote: updateNote,
         getActualInvoiceNumber: getActualInvoiceNumber,
         getLockedTicketIds: getLockedTicketIds,
         lockTicketIds: lockTicketIds,

@@ -4,8 +4,16 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService',
-      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService, TaxesService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope',
+      function ($scope,
+                BillableService,
+                CompaniesService,
+                SharedStateService,
+                PermissionsService,
+                TicketsService,
+                TaxesService,
+                $uibModal,
+                $rootScope) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -18,18 +26,161 @@
           });
         });
 
-        TaxesService.getAll(function(resp){
+        TaxesService.getAll(function (resp) {
           $scope.taxes = resp;
         });
 
+
+        $scope.$watch(function() {
+          return $rootScope.currentBillTo;
+        }, function(val) {
+
+          if (val) {
+            $scope.invoiceBillTo = CompaniesService.getCompanyByAddressId(val.id);
+
+            var companyData = CompaniesService.getCompanyData($scope, $scope.invoiceBillTo.id, function() {
+              // console.log(companyData, 'DATA DATA DATA')
+              $scope.invoiceBillTo.contacts = companyData.contacts;
+            })
+
+            // console.log($scope.invoiceBillTo, 'billtotot')
+          }
+
+        })
+
+
+
+        $scope.$watch(function() {
+          return $rootScope.updateBillTo;
+        }, function(val) {
+
+          if (val) {
+
+            // console.log(val, 'val')
+            var companyName = val.companyName.$modelValue;
+            var firstName = val.firstName.$modelValue;
+            var lastName = val.lastName.$modelValue;
+            var address = val.addressForm.address.$modelValue;
+            var zip = val.zip.$viewValue;
+            var suiteNum = val.suiteNumber.$viewValue;
+            var email = val.primaryEmail.$viewValue;
+            var phone = val['forms.phoneNumbersForm'].phoneNumber0.$viewValue;
+
+            var fullAddress = address;
+
+            if (suiteNum && address) {
+              fullAddress = suiteNum + ', ' + fullAddress;
+            }
+
+            if (zip && address) {
+              fullAddress = fullAddress + ', ' + zip;
+            }
+
+            $scope.invoiceBillTo.companyInfo.contacts[0].primaryEmail = email;
+
+            $scope.invoiceBillTo.contacts[0].phoneNumbers[0].number = phone;
+
+            $scope.invoiceBillTo.companyInfo.contacts[0].firstName = firstName;
+            $scope.invoiceBillTo.companyInfo.contacts[0].lastName = lastName;
+            $scope.invoiceBillTo.name = companyName;
+            $scope.invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode = fullAddress
+          }
+
+
+
+        })
+
+        $scope.openEditModal = function (type, company) {
+          var templates = {
+            contacts: '/html/scripts/core/billable/edit-contact-details-modal.tpl.html',
+            customer: '/html/scripts/core/billable/edit-customer-modal.tpl.html'
+          }
+
+          if (type === 'customer') {
+            company = CompaniesService.getCompanyByAddressId(company.id);
+          }
+
+          // console.log(company, 'COMPANY')
+
+          $rootScope.savedCompanyId = company.id;
+          $uibModal.open({
+            templateUrl: templates[type],
+            animation: true,
+            backdrop: true,
+            size: '620',
+            controller: 'quicktech.core.billable.invoiceEditModalCtrl',
+            resolve: {
+              paymentIds: function () {
+                var paymentIds = [];
+                for (var id in $scope.idDictionary) {
+                  if ($scope.idDictionary[id]) {
+                    paymentIds.push(id);
+                  }
+                }
+                $scope.idDictionary = {};
+                return paymentIds;
+              }
+            }
+          });
+        };
+
+        $scope.sorted = function(arr) {
+          var newArr = arr.slice();
+          newArr.sort(function(a, b) {
+            // console.log(a, b)
+            return a.title.localeCompare(b.title);
+          });
+
+          return newArr;
+        }
+
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
+        $scope.getLogo = $rootScope.getCompanyLogoUrl;
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
         $scope.expandedCompanyId = '';
 
-        $scope.setExpandedCompanyId = function(companyId){
+
+        $scope.showInvoice = function() {
+          $scope.isInvoiceShown = true;
+        }
+
+        // console.log('billable ctrl')
+
+        $scope.$on('$destroy', function() {
+          // console.log('billable ctrl has been destroyed')
+        })
+
+        $scope.$watch(function() {
+          return $rootScope.hideInvoiceWhenBack
+        }, function(val) {
+
+          // console.log("something happen", val)
+          if (val) {
+            $rootScope.hideInvoiceWhenBack = false;
+            $scope.isInvoiceShown = false;
+          }
+        })
+
+        $scope.$watch(function() {
+          return $rootScope.isInvoiceCreated;
+        }, function(val) {
+          if (val) {
+            $rootScope.isInvoiceCreated = false;
+
+            $scope.isInvoiceShown = false;
+          }
+        })
+
+        $scope.togglePreview = function() {
+          $scope.isPreviewShown = !$scope.isPreviewShown;
+
+          // console.log($scope.ticketNote, 'note')
+        }
+
+        $scope.setExpandedCompanyId = function (companyId) {
           if (companyId === $scope.expandedCompanyId) {
             $scope.expandedCompanyId = '';
           } else {
@@ -61,9 +212,9 @@
           return isDiscount;
         };
 
-        $scope.checkAgreementTypeToShowDiscount = function(serviceExpense) {
-          if(serviceExpense.item && serviceExpense.item.name) {
-            if(serviceExpense.item.blockTimeServiceAgreementId == null &&
+        $scope.checkAgreementTypeToShowDiscount = function (serviceExpense) {
+          if (serviceExpense.item && serviceExpense.item.name) {
+            if (serviceExpense.item.blockTimeServiceAgreementId == null &&
               serviceExpense.item.serviceContractServiceAgreementId == null &&
               serviceExpense.item.serviceAgreementId !== null) {
               return true
@@ -177,6 +328,10 @@
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
         };
+
+        $scope.clearAllSelections = function() {
+
+        }
 
         $scope.anotherCompanySelected = function (companyId) {
           if ($scope.ticketsSelection[companyId] && $scope.ticketsSelection[companyId].checked) {

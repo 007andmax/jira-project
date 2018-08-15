@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivableCtrl',
     ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService', 'TicketsService',
-      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, TicketsService, SharedStateService, PermissionsService, UserNotificationService) {
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserNotificationService', '$rootScope',
+      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, TicketsService, SharedStateService, PermissionsService, UserNotificationService, $rootScope) {
 
         var availableMods = ['group-by-company', 'list'];
         var globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -19,6 +19,12 @@
         //     globalSearch.count = value || 0;
         //   });
         // });
+
+        $scope.showInvoice = function(invoice, goBack) {
+          $scope.isInvoiceShown = goBack ? false : true;
+          $rootScope.invoiceToShow = invoice;
+          console.log('INVOICE IS SHOWn', $scope.isInvoiceShown)
+        }
 
         $scope.invoiceFilterCompany = '';
 

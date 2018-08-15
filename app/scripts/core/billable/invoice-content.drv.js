@@ -3,12 +3,14 @@
 (function () {
 
   angular.module("quicktech.core.billable").directive("invoiceContent",
-    ['$timeout', '$http', '$compile', '$templateCache',
-      function ($timeout, $http, $compile, $templateCache) {
+    ['$timeout', '$http', '$compile', '$templateCache', '$rootScope',
+      function ($timeout, $http, $compile, $templateCache, $rootScope) {
         return {
           restrict: 'A',
           require: 'ngModel',
           link: function (scope, element, attrs, ngModelCtrl) {
+
+            // console.log('INVOICE CONTENT MOTHERFUCKER', scope)
 
             var invoiceTemplate,
               invoiceModalWindow = $('.modal-open .modal');
@@ -26,9 +28,11 @@
             }, function () {
 
               if (ngModelCtrl.$viewValue) {
-                element.animate({right: "15px"});
+                // element.animate({right: "15px"});
 
                 scope.currentInvoice = ngModelCtrl.$viewValue;
+
+                // console.log(scope, ngModelCtrl, "JERERER")
 
                 if (scope.showInvoiceLockIndex && scope.invoiceLocks && scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
 
@@ -43,6 +47,7 @@
                   if(scope.currentInvoice.billTo) {
                     for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
                       if (scope.currentInvoice.billTo[i].isPrimary) {
+                        // console.log(scope.currentInvoice, scope, "!!!!")
                         scope.currentBillTo = scope.currentInvoice.billTo[i];
                         scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
                       }
@@ -72,7 +77,19 @@
                     }
                   }
                 }
+
+
+
               }
+
+              $rootScope.currentBillTo = scope.currentInvoice.billTo[0];
+
+              $rootScope.isSenderAddress = scope.currentInvoice.senderAddress;
+
+              if (scope.currentInvoice.date) scope.currentInvoice.date = moment(new Date(scope.currentInvoice.date)).format('DD MMM YYYY')
+              if (scope.currentInvoice.dueDate) scope.currentInvoice.dueDate = moment(new Date(scope.currentInvoice.dueDate)).format('DD MMM YYYY');
+
+              // console.log(scope.currentInvoice, 'currentINVOICE')
 
               $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
                 .then(function (response) {
@@ -184,18 +201,41 @@
 
             }
 
+            scope.$watch(function() {
+              return $rootScope.updateTech;
+            }, function(val) {
+              // console.log(val, 'VAL')
+
+              if (val) {
+                var address = val.addressForm.address.$modelValue;
+                var companyName = val.companyName.$viewValue;
+                var phone = val['forms.phoneNumbersForm'].phoneNumber0.$viewValue;
+
+                // console.log(address, companyName, phone, "DATA FROM MODAL WINDOW")
+
+                scope.currentInvoice.techCompanyName = companyName
+                scope.currentInvoice.phoneNumbers[0].number = phone;
+                scope.currentInvoice.senderAddress = address;
+
+              }
+
+
+
+              // $scope.editCo
+            })
+
             function compileInvoice() {
-              ($compile(invoiceTemplate.data)(scope, function (compileElement, scope) {
-                $timeout(function () {
-
-                  element.html(compileElement);
-
-                  splitPage();
-                  initNanoScroller(compileElement);
-                  initDropdown()
-
-                })
-              }));
+              // ($compile(invoiceTemplate.data)(scope, function (compileElement, scope) {
+              //   $timeout(function () {
+              //
+              //     element.html(compileElement);
+              //
+              //     splitPage();
+              //     initNanoScroller(compileElement);
+              //     initDropdown()
+              //
+              //   })
+              // }));
             }
 
           }

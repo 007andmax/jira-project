@@ -2,88 +2,110 @@
 
 (function () {
   angular.module("quicktech.common.directives").directive('cropImage',
-    ['$uibModal', 'Utils', 'UsersService', 'CompaniesService',
-      function ($uibModal, Utils, UsersService, CompaniesService) {
+    ['$uibModal', 'Utils', 'UsersService', 'CompaniesService', '$rootScope',
+      function ($uibModal, Utils, UsersService, CompaniesService, $rootScope) {
         return {
           restrict: 'A',
           scope: {
             model: '=cropImage',
-            isTechLogo: '@?'
+            isTechLogo: '@?',
+            isInvoice: '<isInvoice'
           },
           link: function (scope, element, attrs) {
+
+            // console.log('CROP IMAGE DOWNLOAD')
             var $body = angular.element(document.body), image;
             var isTechLogo = scope.$eval(scope.isTechLogo);
 
             //delete image
-            var restoreDefaultButton = element.find('[restore-default-button]');
-            if (restoreDefaultButton.length) {
-              restoreDefaultButton.on('click', function () {
-                if (attrs.modelImagePath === 'avatar') {
-                  if (scope.model.id) {
-                    UsersService.deleteAvatar(scope.model.id, function () {
+
+            if (!scope.isInvoice) {
+              var restoreDefaultButton = element.find('[restore-default-button]');
+              if (restoreDefaultButton.length) {
+                restoreDefaultButton.on('click', function () {
+                  if (attrs.modelImagePath === 'avatar') {
+                    if (scope.model.id) {
+                      UsersService.deleteAvatar(scope.model.id, function () {
+                        scope.model[attrs.modelImagePath] = null;
+                      });
+                    } else {
                       scope.model[attrs.modelImagePath] = null;
-                    });
-                  } else {
-                    scope.model[attrs.modelImagePath] = null;
-                  }
-                } else if (attrs.modelImagePath === 'logo') {
-                  if (scope.model.id) {
-                    CompaniesService.deleteLogo(scope.model.id, function () {
+                    }
+                  } else if (attrs.modelImagePath === 'logo') {
+                    if (scope.model.id) {
+                      CompaniesService.deleteLogo(scope.model.id, function () {
+                        scope.model[attrs.modelImagePath] = null;
+                      });
+                    } else {
                       scope.model[attrs.modelImagePath] = null;
-                    });
-                  } else {
-                    scope.model[attrs.modelImagePath] = null;
+                    }
                   }
-                }
 
-                $body.click();
-                scope.$apply();
-              });
-            }
-
-            //reposition
-            var repositionButton = element.find('[reposition-button]');
-            if (repositionButton.length) {
-              repositionButton.on('click', function (e) {
-                $body.click();
-
-                var image = scope.model[attrs.modelImagePath];
-                if (image) {
-                  image.id = scope.model.id;
-                  showCropper(image);
-                }
-              });
-            }
-
-            //load image and show crop modal
-            element.find('[crop-image-button]').fileUploader({
-              uploadUrl: '/file?isAvatar=true&ratio=' + (isTechLogo ? 2.25 : 1),
-              uploadName: 'file',
-              maxUploadSize: 2 * 1024 * 1024,
-              accpetType: '.jpg,.png,.gif,.jpeg,.JPG,.PNG,.GIF,.JPEG',
-              allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
-              minImageWidth: 1,
-              minImageHeight: 1,
-
-              onStart: function () {
-                image = {};
-                if (scope.model) {
-                  image.id = scope.model.id;
-                }
-                scope.$apply();
-              },
-              onProgress: function (progress) {
-                //loading
-              },
-              onSuccess: function (data) {
-                image.origin = data;
-                showCropper(image);
-                scope.$apply();
-              },
-              onFailure: function (message) {
-                console.error(message);
+                  $body.click();
+                  scope.$apply();
+                });
               }
-            });
+
+              //reposition
+              var repositionButton = element.find('[reposition-button]');
+              if (repositionButton.length) {
+                repositionButton.on('click', function (e) {
+                  $body.click();
+
+                  var image = scope.model[attrs.modelImagePath];
+                  if (image) {
+                    image.id = scope.model.id;
+                    showCropper(image);
+                  }
+                });
+              }
+
+              // load image and show crop modal
+              element.find('[crop-image-button]').fileUploader({
+                uploadUrl: '/file?isAvatar=true&ratio=' + (isTechLogo ? 2.25 : 1),
+                uploadName: 'file',
+                maxUploadSize: 5 * 1024 * 1024,
+
+                accpetType: '.jpg,.png,.gif,.jpeg,.JPG,.PNG,.GIF,.JPEG',
+                allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
+                minImageWidth: 1,
+                minImageHeight: 1,
+
+                onStart: function () {
+                  console.log('started downloading')
+                  image = {};
+                  if (scope.model) {
+                    image.id = scope.model.id;
+                  }
+                  scope.$apply();
+                },
+                onProgress: function (progress) {
+                  //loading
+                },
+                onSuccess: function (data) {
+                  image.origin = data;
+                  showCropper(image);
+                  scope.$apply();
+                },
+                onFailure: function (message) {
+                  console.error(message);
+                }
+              });
+            }
+
+
+            scope.$watch(function() {
+              return $rootScope.draggedAvatar;
+            }, function(val) {
+              if (val) {
+                showCropper($rootScope.draggedAvatar);
+                $rootScope.draggedAvatar = null;
+
+
+
+              }
+            })
+
 
             function showCropper(image) {
               $uibModal.open({
@@ -235,5 +257,3 @@
       }]);
 
 })();
-
-

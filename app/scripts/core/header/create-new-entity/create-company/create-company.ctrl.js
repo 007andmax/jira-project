@@ -42,22 +42,36 @@
         }
 
 
+        console.log("CONTROLLER MOTHERFUKCER")
+
+
 
         $scope.timeFormat = ['AM', 'PM'];
 
         var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
-        var savedState = $scope.getLastSavedState('company');
+        var savedState = $scope.getLastSavedState ? $scope.getLastSavedState('company') : {};
         var action = 'CREATE_COMPANIES';
 
         var origin = savedState.item;
-        if (savedState.type === 'company' && origin && origin.id) {
-          var companyId = origin.id,
-            company = CompaniesService.getOneById(companyId);
+        if ((savedState.type === 'company' && origin && origin.id) || $rootScope.savedCompanyId) {
+
+          if ($rootScope.savedCompanyId) {
+            console.log("ROOTSCOPE")
+            var companyId = $rootScope.savedCompanyId,
+              company = CompaniesService.getOneById(companyId);
+
+              console.log("COMPANY", company, "SAVED SAVED")
+          } else {
+            var companyId = origin.id,
+              company = CompaniesService.getOneById(companyId);
+
+          }
 
           action = 'EDIT_COMPANIES';
 
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
+            console.log(companyData, 'companyData ')
 
             if (!companyData.addresses || companyData.addresses.length === 0) {
               companyData.addresses = [{}];
@@ -304,7 +318,7 @@
               if ($scope.servicesData && $scope.servicesData.default) {
                 for (var i = 0; i < $scope.servicesData.default.length; i++) {
                   var service = angular.copy($scope.servicesData.default[i]);
-                  $scope.editCompany.services.push(service);
+                  $scope.editCompany.services && $scope.editCompany.services.push(service);
                   $scope.selectedServices[service.versionedId.id] = true;
                 }
               }
@@ -320,10 +334,17 @@
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
-        $scope.save = function (form, isCreateContract) {
+        $scope.save = function (form, isCreateContract, isInvoice) {
           $scope.isSaveFailed = false;
 
           // console.log(form, form.$valid);
+
+          console.log(form, 'form')
+
+          if (isInvoice) {
+            $rootScope.updateBillTo = form;
+          }
+
 
           if (form.$valid) {
             $scope.savingInProcess = true;
@@ -338,6 +359,8 @@
 
             var contacts = editCompany.contacts,
               addresses = editCompany.addresses;
+
+            console.log(editCompany, 'EDITDI')
 
             for (var i = 0; i < contacts.length; i++) {
               var contact = contacts[i];
@@ -385,6 +408,8 @@
             //
             // }
 
+            console.log('im saving')
+
 
 
             CompaniesService.save(editCompany, function (resp) {
@@ -395,8 +420,8 @@
                   UsersService.updateWelcomeWizard('setupClient');
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
-                if (!$scope.savedState.items.length) {
-                  if(isCreateContract) {
+                if (!($scope.savedState && $scope.savedState.items.length)) {
+                  if(isCreateContract && $scope.selectedContractType) {
                     $scope.closeWindowWithoutConfirmation();
                     openCreateContractModal(editCompany, 'CREATE_NEW', resp);
                   } else {
@@ -421,6 +446,10 @@
           }
 
           function processPhoneNumbers(phoneNumbers) {
+
+            if (!phoneNumbers.length) return;
+
+            console.log(phoneNumbers, 'phoneNumbers')
             var firstPhone = phoneNumbers[0].number,
               lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
