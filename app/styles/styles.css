@@ -11961,6 +11961,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 
 .invoice-edit.invoice-create .bold {
   font-family: "Graphik Medium", sans-serif;
+  font-weight: 500;
 }
 
 .action-wrap {
