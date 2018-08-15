@@ -121,14 +121,14 @@
             <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
           <div class="bill-valera font-size-13">
-            <div><span>Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId" ng-change="changeTaxIdData()"></div>
-            <div><span>Invoice Date</span>
+            <div><span class="bold">Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId" ng-change="changeTaxIdData()"></div>
+            <div><span class="bold">Invoice Date</span>
               <input type="text" class="form-validation has-dropdown" placeholder="Date"
                      qt-data-time-picker ng-model="currentInvoice.date"
                      disabled="true" ng-required="true">
               <i class="new-calendar"></i>
             </div>
-            <div><span>Payment Due</span>
+            <div><span class="bold">Payment Due</span>
               <!-- <input type="text" placeholder="Payment Due"> -->
               <input type="text" class="form-validation has-dropdown" placeholder="Date"
                      qt-data-time-picker ng-model="currentInvoice.dueDate"
