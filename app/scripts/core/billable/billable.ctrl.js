@@ -39,11 +39,11 @@
             $scope.invoiceBillTo = CompaniesService.getCompanyByAddressId(val.id);
 
             var companyData = CompaniesService.getCompanyData($scope, $scope.invoiceBillTo.id, function() {
-              console.log(companyData, 'DATA DATA DATA')
+              // console.log(companyData, 'DATA DATA DATA')
               $scope.invoiceBillTo.contacts = companyData.contacts;
             })
 
-            console.log($scope.invoiceBillTo, 'billtotot')
+            // console.log($scope.invoiceBillTo, 'billtotot')
           }
 
         })
@@ -56,7 +56,7 @@
 
           if (val) {
 
-            console.log(val, 'val')
+            // console.log(val, 'val')
             var companyName = val.companyName.$modelValue;
             var firstName = val.firstName.$modelValue;
             var lastName = val.lastName.$modelValue;
@@ -100,7 +100,7 @@
             company = CompaniesService.getCompanyByAddressId(company.id);
           }
 
-          console.log(company, 'COMPANY')
+          // console.log(company, 'COMPANY')
 
           $rootScope.savedCompanyId = company.id;
           $uibModal.open({
@@ -147,17 +147,17 @@
           $scope.isInvoiceShown = true;
         }
 
-        console.log('billable ctrl')
+        // console.log('billable ctrl')
 
         $scope.$on('$destroy', function() {
-          console.log('billable ctrl has been destroyed')
+          // console.log('billable ctrl has been destroyed')
         })
 
         $scope.$watch(function() {
           return $rootScope.hideInvoiceWhenBack
         }, function(val) {
 
-          console.log("something happen", val)
+          // console.log("something happen", val)
           if (val) {
             $rootScope.hideInvoiceWhenBack = false;
             $scope.isInvoiceShown = false;
