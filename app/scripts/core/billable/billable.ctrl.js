@@ -64,18 +64,21 @@
             var zip = val.zip.$viewValue;
             var suiteNum = val.suiteNumber.$viewValue;
             var email = val.primaryEmail.$viewValue;
+            var phone = val['forms.phoneNumbersForm'].phoneNumber0.$viewValue;
 
-            var fullAddress;
+            var fullAddress = address;
 
-            if (suiteNum) {
-              fullAddress = suiteNum + ', ' + address;
+            if (suiteNum && address) {
+              fullAddress = suiteNum + ', ' + fullAddress;
             }
 
-            if (zip) {
+            if (zip && address) {
               fullAddress = fullAddress + ', ' + zip;
             }
 
             $scope.invoiceBillTo.companyInfo.contacts[0].primaryEmail = email;
+
+            $scope.invoiceBillTo.contacts[0].phoneNumbers[0].number = phone;
 
             $scope.invoiceBillTo.companyInfo.contacts[0].firstName = firstName;
             $scope.invoiceBillTo.companyInfo.contacts[0].lastName = lastName;

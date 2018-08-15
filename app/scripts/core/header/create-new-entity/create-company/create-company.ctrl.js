@@ -446,6 +446,10 @@
           }
 
           function processPhoneNumbers(phoneNumbers) {
+
+            if (!phoneNumbers.length) return;
+
+            console.log(phoneNumbers, 'phoneNumbers')
             var firstPhone = phoneNumbers[0].number,
               lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
