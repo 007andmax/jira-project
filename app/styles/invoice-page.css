@@ -13,15 +13,24 @@
   background-color: #F9FBFC;
 }
 
+.invoice-edit.invoice-create input[type="text"] {
+  font-size: 13px;
+}
+
 .invoice-create .bold {
   color: #364656;
+}
+
+.invoice-edit.invoice-create .invoice-create--header__btn .btn {
+  font-size: 14px !important;
+  font-family: "Graphik Medium", sans-serif;
 }
 
 .invoice-create a.bold,
 .invoice-create a {
   text-decoration: underline !important;
   color: #16A4FA;
-  font-size: 13px !important;
+  font-size: 12px !important;
 }
 
 .invoice-create p {
@@ -271,8 +280,9 @@
   font-size: 13px !important;
 }
 
-.invoice-list--item .pavlik {
+.invoice-list--item .pavlik,  .invoice-list--item .pavlik .bold{
   font-size: 11px !important;
+  font-family: "Graphik Semibold", sans-serif;
 }
 
 .invoice-list--item__header {
@@ -298,6 +308,7 @@
 .invoice-list--footer__top {
   padding: 40px 0;
   border-bottom: 1px solid #F5F8FA;
+  font-size: 13px;
 }
 
 .fz-11 {
@@ -343,8 +354,8 @@
 
 .invoice-list--header__top img {
   width: 100%;
-  max-height: 150px;
-  object-fit: contain;
+  /*max-height: 150px;*/
+  /*object-fit: contain;*/
 }
 
 .invoice-list--header__bottom {
