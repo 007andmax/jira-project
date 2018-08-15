@@ -884,9 +884,11 @@ _::-webkit-:not(:root:root),
   width: 184px !important;
   margin-right: 0;
 }
-.invoice-create--header__btn .btn{
-  font-size: 13px!important;
+
+.invoice-create--header__btn .btn {
+  font-size: 13px !important;
 }
+
 .invoice-create--header__btn li {
   font-size: 13px;
   transition: all .3s;
@@ -918,6 +920,10 @@ _::-webkit-:not(:root:root),
 
 .invoice-create-modal .btn-default {
   width: 111px !important;
+}
+
+.invoice-create-modal .control-label {
+  padding: 0;
 }
 
 .create-new .btn-primary {

@@ -16,7 +16,9 @@
         <label class="control-label" ng-message="minlength">Company name is too short.</label>
         <label class="control-label" ng-message="unique">This company name already occupied.</label>
       </div>
-      <input placeholder="Company Name" type="text" ng-model="editCompany.name"
+      <input placeholder="Company Name"
+             type="text"
+             ng-model="editCompany.name"
              aria-expanded="true"
              ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
              is-uniq-validation validation-func="validateCompanyName">
@@ -121,7 +123,7 @@
              name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
     </div>
 
-    <div  class="col-md-6"
+    <div  class="col-md-6 phone-number"
           is-try-to-save="triedToSave"
           no-add-more="true"
           phone-numbers-edit

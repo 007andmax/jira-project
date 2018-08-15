@@ -379,6 +379,10 @@
   height: auto;
 }
 
+.company-devices .users-list-wrapper .col-md-3 .dropdown .dropdown-tooltip {
+  left: -120px;
+}
+
 .qt-companies .list-company-row .col-xs-3 {
   display: flex;
   align-self: center;
@@ -4484,41 +4488,41 @@ Devices tab
 }
 
 .tooltip-ns {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .tooltip-ns .tooltiptext-ns {
-    visibility: hidden;
-    width: 180px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -90px;
-    opacity: 0;
-    transition: opacity 0.3s;
+  visibility: hidden;
+  width: 180px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -90px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .tooltip-ns .tooltiptext-ns::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 
 .tooltip-ns:hover .tooltiptext-ns {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .status-success,
@@ -5919,7 +5923,7 @@ Devices tab
 
 .device-name-edit .btn-default,
 .receive .btn-default,
-.service .btn-default{
+.service .btn-default {
   width: 80px;
   background-color: #edf2f6;
   color: #4f5f79;
