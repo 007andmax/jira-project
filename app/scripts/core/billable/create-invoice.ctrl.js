@@ -59,7 +59,7 @@
           var data = res.data;
           // console.log(data, 'data')
 
-          if (!data || data.length === 0) {
+          if (false && (!data || data.length === 0)) {
             var requests = 0;
 
             for (var i = 0; i < placeholderNotes.length; i++) {
@@ -96,11 +96,11 @@
 
         })
 
-        $scope.chosenNote = {
-          title: '',
-          line1: '',
-          line2: ''
-        }
+        // $scope.chosenNote = {
+        //   title: '',
+        //   line1: '',
+        //   line2: ''
+        // }
 
 
 

@@ -260,13 +260,15 @@
                            placeholder="Select note"
                            autocomplete="off" ng-model="ticketNote"
                            name="ticketNote"
-                           onkeypress="return false;"
+
                            typeahead-on-select="updateNote(ticketNote)"
                            uib-typeahead="note as note.title for note in sorted(regularNotes)"
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                            custom-style="{'display': 'inline-block', 'max-height': '160px', 'overflow-y': 'auto'}"
                     >
                   </div>
+
+                  <!-- onkeypress="return false;" -->
 
 
                   <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block"
@@ -282,7 +284,7 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-9 pl-30 font-size-13">
-                  <textarea rows="3" ng-if="chosenNote.line" style="width: 100%" ng-model="chosenNote.line"
+                  <textarea rows="3" style="width: 100%" ng-model="chosenNote.line"
                             ng-keypress="saveUpdatedNote()" maxlength="510"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
