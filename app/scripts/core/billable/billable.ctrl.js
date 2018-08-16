@@ -145,6 +145,8 @@
 
         $scope.showInvoice = function() {
           $scope.isInvoiceShown = true;
+
+          // addListeners();
         }
 
         // console.log('billable ctrl')
@@ -412,6 +414,11 @@
           });
           TaxesService.linkWithEntity(entity.id, entityType, taxIds);
         };
+
+
+
+
+
 
       }]);
 

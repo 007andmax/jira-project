@@ -193,6 +193,19 @@
   margin-right: 10px;
 }
 
+.invoice-list--footer .notes {
+  white-space: pre-line;
+}
+
+.invoice-list--footer textarea {
+  border: 0;
+  white-space: pre-line;
+}
+
+.invoice-list--footer textarea:focus{
+  outline: none;
+}
+
 .bill-valera div input,
 .invoice-list--footer__top input,
 .invoice-info div:first-child input {

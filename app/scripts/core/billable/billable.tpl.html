@@ -20,7 +20,7 @@
                       tooltip-placement="bottom">
 
 
-                Save and Continue
+                Save and Email
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
                   <i class="icn-sm pointer report-caret-icon-white" ></i>
@@ -284,8 +284,8 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-9 pl-30 font-size-13">
-                  <textarea rows="3" style="width: 100%; padding: 5px 12px;" ng-model="chosenNote.line"
-                            ng-keyup="saveUpdatedNote()" maxlength="510" placeholder="Note description"></textarea>
+                  <textarea limit-lines class="limited-areas" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="chosenNote.line"
+                            ng-keyup="saveUpdatedNote()" maxlength="510" placeholder="Please type custom note here"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
                 <div class="col-md-2 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
@@ -300,8 +300,8 @@
 
               <div class="col-md-12 pl-30">
 
-                <textarea rows="3" style="width: 100%; padding: 5px 12px;" ng-model="globalNote.line"
-                           maxlength="510" ng-keypress="globalNoteHasChanged = true"></textarea>
+                <textarea limit-lines class="limited-areas" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="globalNote.line"
+                           placeholder="Mention your company's Terms and Conditions" maxlength="510" ng-keypress="globalNoteHasChanged = true"></textarea>
                 <!-- {{globalNote.line1 + (globalNote.line2 || '')}} -->
                 <!-- execute-when-outfocused="saveUpdatedNote(true, globalNote)" -->
               </div>
@@ -327,7 +327,7 @@
                       tooltip-placement="bottom">
 
 
-                Save and Continue
+                Save and Email
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
                   <i class="icn-sm pointer report-caret-icon-white" ></i>
@@ -466,7 +466,7 @@
                 </div>
               </div>
               <div class="clearfix">
-                <div class="col-md-8 pl-30 font-size-13">{{ chosenNote.line }}
+                <div class="col-md-8 pl-30 font-size-13 notes">{{ chosenNote.line }}
                 </div>
                 <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
                 <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) | currency:
@@ -482,7 +482,7 @@
             </div>
             <div class="invoice-list--footer__bottom clearfix">
               <div class="col-md-12 bold pl-30 font-size-13">Terms & Conditions</div>
-              <div class="col-md-12 pl-30 font-size-13">{{globalNote.line1 + (globalNote.line2 || '')}}</div>
+              <div class="col-md-12 pl-30 font-size-13 notes">{{globalNote.line1 + (globalNote.line2 || '')}}</div>
             </div>
           </div>
         </div>
