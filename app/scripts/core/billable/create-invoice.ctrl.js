@@ -290,6 +290,74 @@
 
         }
 
+        $scope.onTextareaChange = function(e) {
+          var area;
+          var counter = 0;
+
+
+
+          if (e === 'regular') {
+            area = document.querySelector('.limited-regular-area');
+            setInterval(decrease.bind(this, area), 100)
+            decrease(area);
+
+
+
+            // while (area.clientHeight < area.scrollHeight) {
+            //   console.log('more than 4 lines!!');
+            //
+            //   counter++;
+            //
+            //   if (counter > 4000) {
+            //     return;
+            //   }
+            //
+            //   $scope.chosenNote.line = $scope.chosenNote.line.slice(0, -1);
+            // }
+
+
+          } else {
+            area = document.querySelector('.limited-global-area');
+
+            while (area.clientHeight < area.scrollHeight) {
+              console.log('more than 4 lines!!');
+
+              counter++;
+
+              if (counter > 4000) {
+                return;
+              }
+
+              $scope.globalNote.line = $scope.globalNote.line.slice(0, -1);
+            }
+          }
+
+          function decrease(area) {
+            console.log('decreasing')
+            counter++;
+            if (counter > 4000) {
+              return;
+            }
+            console.log(area.clientHeight, area.scrollHeight, 'height')
+            if (area.clientHeight < area.scrollHeight) {
+
+              console.log('inside of here', area.value)
+              // $scope.chosenNote.line = $scope.chosenNote.line.slice(0, -1);
+              // $scope.chosenNote.line = 'a'
+
+
+
+              area.value = area.value.slice(0, -1);
+              decrease(area);
+            } else {
+              return;
+            }
+
+          }
+
+
+        }
+
         $scope.updateNote = function(note) {
           $scope.chosenNote = Object.assign({}, note);
 
@@ -547,7 +615,7 @@
           }
         }
 
-        
+
       }]);
 
 }());
