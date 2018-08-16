@@ -89,7 +89,7 @@
 
     <div ng-hide="loadingInProgress"
          ng-include="'/html/scripts/core/receivable/invoices-'+ mode +'.tpl.html'"
-         ng-style="{'margin-top': mode === 'list' ? '93px' : '50px'}"></div>
+         ng-style="{'margin-top': isInvoiceShown ? '0' : mode === 'list' ? '93px' : '50px'}"></div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
   </div>

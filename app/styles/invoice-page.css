@@ -41,9 +41,14 @@
   align-items: center;
 }
 
+.invoice-create--header.invoice-preview {
+  justify-content: flex-end;
+}
+
 .invoice-create--header__btn {
   display: flex;
 }
+
 
 .invoice-create--header__btn .btn-default {
   width: 110px !important;
