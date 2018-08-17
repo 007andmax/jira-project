@@ -37,10 +37,15 @@
 }
 .invoice-create--header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 30px;
   align-items: center;
 }
+
+.invoice-create--header.invoice-preview {
+  justify-content: flex-end;
+}
+
 .invoice-create--header__btn {
   display: flex;
 }
