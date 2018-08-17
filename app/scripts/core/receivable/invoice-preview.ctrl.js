@@ -10,6 +10,8 @@
         $scope.shoeInvoiceCreatedMessage = false;
         $scope.notificationMessage = 'Invoice has been sent';
 
+        $scope.getLogo = $rootScope.getCompanyLogoUrl;
+
         ReceivableService.getInvoiceDataForPreview($rootScope.invoiceToShow.id, function (resp) {
           $scope.currentInvoice = resp;
 
