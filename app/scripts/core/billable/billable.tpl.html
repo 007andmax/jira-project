@@ -125,7 +125,7 @@
             <div><span>Invoice Date</span>
               <input type="text" class="form-validation has-dropdown" placeholder="Date"
                      qt-data-time-picker ng-model="currentInvoice.date"
-                     disabled="true" ng-required="true">
+                     disabled="true" style="background-color: white !important" ng-required="true">
               <i class="new-calendar"></i>
             </div>
             <div><span>Payment Due</span>
@@ -260,7 +260,7 @@
                            placeholder="Select note"
                            autocomplete="off" ng-model="ticketNote"
                            name="ticketNote"
-                           ng-keyup="saveNote(ticketNote)"
+                           ng-keyup="saveNote(ticketNote) || hideRegularNoteButton(true)"
                            typeahead-on-select="updateNote(ticketNote)"
                            uib-typeahead="note as note.title for note in sorted(regularNotes)"
                            qt-typeahead-async-show-on-focus smart-dropdown-menu-position
@@ -275,7 +275,7 @@
                   <!-- <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block"
                          type="text" class="form-validation" ng-model="chosenNote.title"> -->
 
-                  <span ng-if="isSaveButtonShown()" class="pointer" style="margin-left: 15px;"><a class="bold" ng-click="saveUpdatedNote(true)">Save Note</a></span>
+                  <span ng-if="isSaveButtonShown()" class="pointer" style="margin-left: 15px;"><a class="bold" ng-click="saveUpdatedNote(true) || hideRegularNoteButton(false)">Save Note</a></span>
                 </div>
                 <div class="col-md-1 bold fz-11" style="padding: 8px 15px;">Tax</div>
                 <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ currentInvoice.taxSum | currency:
@@ -285,7 +285,7 @@
               <div class="clearfix">
                 <div class="col-md-9 pl-30 font-size-13">
                   <textarea auto-expand class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="chosenNote.line"
-                            ng-keyup="saveUpdatedNote()" maxlength="510" placeholder="Please type custom note here"></textarea>
+                            ng-keyup="saveUpdatedNote() || hideRegularNoteButton(true)" maxlength="510" placeholder="Please type custom note here"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
                 <div class="col-md-2 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
@@ -293,15 +293,15 @@
             </div>
             <div class="invoice-list--footer__bottom clearfix font-size-13">
               <div class="bold pl-30">Terms & Conditions
-                <span class="pointer" style="margin-left: 15px;">
-                  <a class="bold" ng-click="saveUpdatedNote(true, globalNote, true)">Save Terms & Conditions</a>
+                <span class="pointer" style="margin-left: 15px;" ng-if="isGlobalNoteUpdated">
+                  <a class="bold" ng-click="saveUpdatedNote(true, globalNote, true) || hideGlobalNoteButton(false)">Save Terms & Conditions</a>
                 </span>
               </div>
 
               <div class="col-md-12 pl-30">
 
                 <textarea auto-expand class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="globalNote.line"
-                         placeholder="Mention your company's Terms and Conditions" maxlength="510" ng-keypress="globalNoteHasChanged = true"></textarea>
+                         placeholder="Mention your company's Terms and Conditions" maxlength="510" ng-keyup="hideGlobalNoteButton(true)"></textarea>
                 <!-- {{globalNote.line1 + (globalNote.line2 || '')}} -->
                 <!-- execute-when-outfocused="saveUpdatedNote(true, globalNote)" -->
               </div>

@@ -125,6 +125,18 @@
 
         $scope.getLogoUrl = $rootScope.getCompanyLogoUrl;
 
+        $scope.isRegularNoteUpdated = false;
+        $scope.isGlobalNoteUpdated = false;
+
+        $scope.hideRegularNoteButton = function(state) {
+          $scope.isRegularNoteUpdated = state;
+        }
+
+        $scope.hideGlobalNoteButton = function(state) {
+          $scope.isGlobalNoteUpdated = state;
+        }
+
+
         $scope.attachDraggedAvatar = function (file) {
           // $scope.ticketAttachments.push(file);
           // $rootScope.draggedAvatar = file;
@@ -212,7 +224,8 @@
             return false;
           }
 
-          if (!chosen.title) {
+
+          if (!chosen.title || !$scope.isRegularNoteUpdated) {
             return false;
           }
 
@@ -369,6 +382,7 @@
         }
 
         $scope.updateNote = function(note) {
+          $scope.hideRegularNoteButton(false);
           $scope.chosenNote = Object.assign({}, note);
 
           // console.log(note, 'note')
