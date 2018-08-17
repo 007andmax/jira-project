@@ -1,4 +1,4 @@
-<div class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
+<div ng-if="!isInvoice" class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
      model-image-path="{{ imagePath }}">
   <div class="avatar pull-left">
     <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
@@ -9,6 +9,33 @@
     </div>
   </div>
   <div class="choose-file pull-left">
+    <div class="select-file clearfix">
+      <div class="btn btn-lg btn-primary pull-left" crop-image-button>
+        {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }}
+
+      </div>
+      <span class="pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
+      <a href="javascript:void(0)" restore-default-button>Restore Default</a>
+      </span>
+    </div>
+    <div class="img-description">
+      Maximum size of 2MB. JPG, GIF, PNG
+    </div>
+  </div>
+</div>
+
+
+<div ng-if="isInvoice" class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
+     model-image-path="{{ imagePath }}">
+  <div class="avatar pull-left">
+    <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
+         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped ? '100%' : '150px'}">
+
+    <div class="reposition" ng-show="model[imagePath] && model[imagePath].origin" crop-image-button>
+      Change
+    </div>
+  </div>
+  <div ng-show="false" class="choose-file pull-left">
     <div class="select-file clearfix">
       <div class="btn btn-lg btn-primary pull-left" crop-image-button>
         {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }}

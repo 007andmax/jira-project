@@ -20,21 +20,29 @@
         //   });
         // });
 
+
+        $scope.filterInvoicesBy = function(val) {
+          console.log('filter', val)
+        }
+
         $scope.showInvoice = function(invoice, goBack) {
           $scope.isInvoiceShown = goBack ? false : true;
           $rootScope.invoiceToShow = invoice;
-          console.log('INVOICE IS SHOWn', $scope.isInvoiceShown)
         }
 
-        $scope.invoiceFilterCompany = '';
+
+
 
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
+          console.log(value)
           if(value && value !== '' && value !== ' ') {
             $scope.invoiceFilter = value;
           }
         });
+
+        $scope.invoiceFilterCompany = '';
 
         $scope.PermissionsService = PermissionsService;
         $scope.mode = availableMods[1];
@@ -60,6 +68,7 @@
         };
 
         $scope.clearInvoiceDateFilter = function() {
+          // console.log('clear')
           $scope.invoiceDateFilter = {startDate: null, endDate: null};
         };
 
@@ -171,6 +180,10 @@
           }
         };
 
+        $scope.filterInvoices = function(invoices) {
+          return invoices.filter($scope.filteringForInvoice)
+        }
+
         $scope.filteringForInvoice = function(invoice) {
           return $scope.invoiceFilterChecker(invoice) && $scope.sortByFilterChecker(invoice) && $scope.dateFilterChecker(invoice);
         };
@@ -178,6 +191,7 @@
         $scope.$watchGroup(['invoiceDateFilter', 'invoiceFilter', 'sortByValue'] , function(value){
           if(value && $scope.receivableInvoicesData) {
             var filteredInvoices = $scope.receivableInvoicesData.list.filter(function(invoice) {
+              console.log('i should filter right now')
               return $scope.filteringForInvoice(invoice);
             });
             globalSearch.count = filteredInvoices.length;

@@ -82,13 +82,13 @@
 
           function adaptNotes(data) {
             $scope.regularNotes = data.filter(function(el) {
-              return el.noteType === 'REGULAR';
+              return el.noteType === 'REGULAR' && el.title;
             });
 
             $scope.globalNote = data.filter(function(el) {
               return el.noteType === 'GLOBAL';
             })[0];
-
+            
 
             $scope.globalNote.line = $scope.globalNote.line1 + ($scope.globalNote.line2 || '');
           }
@@ -114,6 +114,9 @@
           EmailSettingsService.updateTaxNumber($scope.taxIdData, function(resp) {
             console.log(resp);
           })
+
+          BillableService.updateInvoiceData({ taxId: $scope.taxIdData.taxId }, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+
         };
 
 
@@ -124,6 +127,18 @@
         }
 
         $scope.getLogoUrl = $rootScope.getCompanyLogoUrl;
+
+        $scope.isRegularNoteUpdated = false;
+        $scope.isGlobalNoteUpdated = false;
+
+        $scope.hideRegularNoteButton = function(state) {
+          $scope.isRegularNoteUpdated = state;
+        }
+
+        $scope.hideGlobalNoteButton = function(state) {
+          $scope.isGlobalNoteUpdated = state;
+        }
+
 
         $scope.attachDraggedAvatar = function (file) {
           // $scope.ticketAttachments.push(file);
@@ -212,7 +227,8 @@
             return false;
           }
 
-          if (!chosen.title) {
+
+          if (!chosen.title || !$scope.isRegularNoteUpdated) {
             return false;
           }
 
@@ -220,7 +236,7 @@
 
         }
 
-        $scope.saveUpdatedNote = function(globalUpdate, note) {
+        $scope.saveUpdatedNote = function(globalUpdate, note, isGlobalNote) {
           var note = note || $scope.chosenNote;
           var line1 = note.line.slice(0, 255);
           var line2 = note.line.slice(255, 510)
@@ -240,17 +256,25 @@
           if (globalUpdate) {
 
             if (!note.id) {
-              data.noteType = 'REGULAR';
-              BillableService.createNote(data)
+              data.noteType = isGlobalNote ? 'GLOBAL' : 'REGULAR';
+              BillableService.createNote(data, function(resp) {
+                var id = resp.ids[0];
+                if (isGlobalNote) {
+                  $scope.globalNote = note;
+                  $scope.globalNote.id = id;
+
+                } else {
+                  $scope.chosenNote.id = id;
+                  $scope.regularNotes.push(Object.assign({}, $scope.chosenNote))
+                }
+
+              })
 
               return;
-
-              // console.log('this note should be added to list, not globally updated')
 
             }
 
             if (!note.title && note.id !== $scope.globalNote.id) {
-              // console.log('you cant save regular note w/o title');
               return;
             }
 
@@ -290,7 +314,78 @@
 
         }
 
+        $scope.onTextareaChange = function(e) {
+          var area;
+          var counter = 0;
+
+
+
+          if (e === 'regular') {
+            area = document.querySelector('.limited-regular-area');
+            var interval = setInterval(decrease.bind(this, area), 100)
+            decrease(area);
+
+
+
+            // while (area.clientHeight < area.scrollHeight) {
+            //   console.log('more than 4 lines!!');
+            //
+            //   counter++;
+            //
+            //   if (counter > 4000) {
+            //     return;
+            //   }
+            //
+            //   $scope.chosenNote.line = $scope.chosenNote.line.slice(0, -1);
+            // }
+
+
+          } else {
+            area = document.querySelector('.limited-global-area');
+
+            while (area.clientHeight < area.scrollHeight) {
+              console.log('more than 4 lines!!');
+
+              counter++;
+
+              if (counter > 4000) {
+                return;
+              }
+
+              $scope.globalNote.line = $scope.globalNote.line.slice(0, -1);
+            }
+          }
+
+          function decrease(area) {
+            console.log('decreasing')
+            counter++;
+            if (counter > 4000) {
+              return;
+            }
+            console.log(area.clientHeight, area.scrollHeight, 'height')
+            if (area.clientHeight < area.scrollHeight) {
+
+              console.log('inside of here', area.value)
+              // $scope.chosenNote.line = $scope.chosenNote.line.slice(0, -1);
+              // $scope.chosenNote.line = 'a'
+
+
+
+              area.value = area.value.slice(0, -1);
+              decrease(area);
+            } else {
+
+              if (interval) clearInterval(interval)
+              return;
+            }
+
+          }
+
+
+        }
+
         $scope.updateNote = function(note) {
+          $scope.hideRegularNoteButton(false);
           $scope.chosenNote = Object.assign({}, note);
 
           // console.log(note, 'note')
@@ -546,6 +641,8 @@
             }
           }
         }
+
+
       }]);
 
 }());
