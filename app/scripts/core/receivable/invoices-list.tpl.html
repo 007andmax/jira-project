@@ -120,7 +120,7 @@
           <div class="invoice-list--header">
             <div class="invoice-list--header__top clearfix">
               <div class="col-md-5 pl-30">
-                <img ng-src="/companyLogo/{{currentInvoice.company.parent.id}}" alt="logo">
+                <img ng-src="/companyLogo/{{currentInvoice.company.parent.id}}?update={{ stopCache }}" alt="logo">
               </div>
               <div class="col-md-7 text-right pr-30">
                 <h4 class="bold">Invoice <span>#{{ currentInvoice.number }}</span></h4>

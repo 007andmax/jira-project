@@ -82,7 +82,7 @@
 
           function adaptNotes(data) {
             $scope.regularNotes = data.filter(function(el) {
-              return el.noteType === 'REGULAR';
+              return el.noteType === 'REGULAR' && el.title;
             });
 
             $scope.globalNote = data.filter(function(el) {
@@ -220,7 +220,7 @@
 
         }
 
-        $scope.saveUpdatedNote = function(globalUpdate, note) {
+        $scope.saveUpdatedNote = function(globalUpdate, note, isGlobalNote) {
           var note = note || $scope.chosenNote;
           var line1 = note.line.slice(0, 255);
           var line2 = note.line.slice(255, 510)
@@ -240,7 +240,7 @@
           if (globalUpdate) {
 
             if (!note.id) {
-              data.noteType = 'REGULAR';
+              data.noteType = isGlobalNote ? 'GLOBAL' : 'REGULAR';
               BillableService.createNote(data)
 
               return;
