@@ -197,6 +197,10 @@
   margin-right: 10px;
 }
 
+.invoice-list--footer {
+  background-color: #fff;
+}
+
 .bill-valera div input,
 .invoice-list--footer__top input,
 .invoice-info div:first-child input {
@@ -267,20 +271,23 @@
 
 .invoice-list {
   margin: 25px 0 75px;
-  border: 1px solid #F5F8FA;
-  border-radius: 3px;
-  background-color: #fff;
+  border: 1px solid #EDF2F6;
+  border-radius: 5px;
+  background-color: #F9FBFC;
 }
 
 .invoice-list--item {
   border-bottom: 1px solid #F5F8FA;
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 10px 0;
 }
 
 .invoice-list--item {
   font-size: 13px !important;
 }
 
-.invoice-list--item .pavlik,  .invoice-list--item .pavlik .bold{
+.invoice-list--item .pavlik, .invoice-list--item .pavlik .bold {
   font-size: 11px !important;
   font-family: "Graphik Semibold", sans-serif;
 }
@@ -336,6 +343,7 @@
 
 .invoice-list--header {
   padding: 35px 0 0;
+  background-color: #fff;
 }
 
 .invoice-list--header__bottom,
