@@ -240,11 +240,9 @@
           if (globalUpdate) {
 
             if (!note.id) {
-
               data.noteType = isGlobalNote ? 'GLOBAL' : 'REGULAR';
               BillableService.createNote(data, function(resp) {
                 var id = resp.ids[0];
-
                 if (isGlobalNote) {
                   $scope.globalNote = note;
                   $scope.globalNote.id = id;
@@ -253,18 +251,14 @@
                   $scope.chosenNote.id = id;
                   $scope.regularNotes.push(Object.assign({}, $scope.chosenNote))
                 }
+
               })
 
-
-
               return;
-
-              // console.log('this note should be added to list, not globally updated')
 
             }
 
             if (!note.title && note.id !== $scope.globalNote.id) {
-              // console.log('you cant save regular note w/o title');
               return;
             }
 
