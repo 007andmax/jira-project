@@ -284,8 +284,8 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-9 pl-30 font-size-13">
-                  <textarea  class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="chosenNote.line"
-                            ng-keyup="saveUpdatedNote()" ng-change="onTextareaChange('regular')" maxlength="510" placeholder="Please type custom note here"></textarea>
+                  <textarea auto-expand class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="chosenNote.line"
+                            ng-keyup="saveUpdatedNote()" maxlength="510" placeholder="Please type custom note here"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
                 <div class="col-md-2 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
@@ -300,8 +300,8 @@
 
               <div class="col-md-12 pl-30">
 
-                <textarea  class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="globalNote.line"
-                          ng-change="onTextareaChange" placeholder="Mention your company's Terms and Conditions" maxlength="510" ng-keypress="globalNoteHasChanged = true"></textarea>
+                <textarea auto-expand class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="globalNote.line"
+                         placeholder="Mention your company's Terms and Conditions" maxlength="510" ng-keypress="globalNoteHasChanged = true"></textarea>
                 <!-- {{globalNote.line1 + (globalNote.line2 || '')}} -->
                 <!-- execute-when-outfocused="saveUpdatedNote(true, globalNote)" -->
               </div>
