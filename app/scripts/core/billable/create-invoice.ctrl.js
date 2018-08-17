@@ -88,11 +88,7 @@
             $scope.globalNote = data.filter(function(el) {
               return el.noteType === 'GLOBAL';
             })[0];
-
-            // $scope.regularNotes.map(function(el) {
-            //   if (!el.title)
-            // })
-
+            
 
             $scope.globalNote.line = $scope.globalNote.line1 + ($scope.globalNote.line2 || '');
           }

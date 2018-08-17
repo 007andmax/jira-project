@@ -20,6 +20,11 @@
         //   });
         // });
 
+
+        $scope.filterInvoicesBy = function(val) {
+          console.log('filter', val)
+        }
+
         $scope.showInvoice = function(invoice, goBack) {
           $scope.isInvoiceShown = goBack ? false : true;
           $rootScope.invoiceToShow = invoice;
