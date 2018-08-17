@@ -241,7 +241,6 @@
 
             if (!note.id) {
 
-              console.log(note, 'note before request')
               data.noteType = isGlobalNote ? 'GLOBAL' : 'REGULAR';
               BillableService.createNote(data, function(resp) {
                 var id = resp.ids[0];
@@ -249,14 +248,10 @@
                 if (isGlobalNote) {
                   $scope.globalNote = note;
                   $scope.globalNote.id = id;
-                  // $scope.globalNote.id = id;
 
-                  console.log($scope.globalNote)
                 } else {
                   $scope.chosenNote.id = id;
                   $scope.regularNotes.push(Object.assign({}, $scope.chosenNote))
-
-                  console.log($scope.chosenNote, 'chosennote')
                 }
               })
 
