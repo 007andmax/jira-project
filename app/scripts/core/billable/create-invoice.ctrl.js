@@ -89,6 +89,10 @@
               return el.noteType === 'GLOBAL';
             })[0];
 
+            // $scope.regularNotes.map(function(el) {
+            //   if (!el.title)
+            // })
+
 
             $scope.globalNote.line = $scope.globalNote.line1 + ($scope.globalNote.line2 || '');
           }
@@ -114,6 +118,9 @@
           EmailSettingsService.updateTaxNumber($scope.taxIdData, function(resp) {
             console.log(resp);
           })
+
+          BillableService.updateInvoiceData({ taxId: $scope.taxIdData.taxId }, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+
         };
 
 
