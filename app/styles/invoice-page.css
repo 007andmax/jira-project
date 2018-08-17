@@ -202,6 +202,7 @@
   margin-right: 10px;
 }
 
+<<<<<<< HEAD
 .invoice-list--footer .notes {
   white-space: pre-line;
 }
@@ -213,6 +214,10 @@
 
 .invoice-list--footer textarea:focus{
   outline: none;
+=======
+.invoice-list--footer {
+  background-color: #fff;
+>>>>>>> redesign-new-invoices
 }
 
 .bill-valera div input,
@@ -285,20 +290,23 @@
 
 .invoice-list {
   margin: 25px 0 75px;
-  border: 1px solid #F5F8FA;
-  border-radius: 3px;
-  background-color: #fff;
+  border: 1px solid #EDF2F6;
+  border-radius: 5px;
+  background-color: #F9FBFC;
 }
 
 .invoice-list--item {
   border-bottom: 1px solid #F5F8FA;
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 10px 0;
 }
 
 .invoice-list--item {
   font-size: 13px !important;
 }
 
-.invoice-list--item .pavlik,  .invoice-list--item .pavlik .bold{
+.invoice-list--item .pavlik, .invoice-list--item .pavlik .bold {
   font-size: 11px !important;
   font-family: "Graphik Semibold", sans-serif;
 }
@@ -354,6 +362,7 @@
 
 .invoice-list--header {
   padding: 35px 0 0;
+  background-color: #fff;
 }
 
 .invoice-list--header__bottom,
@@ -372,8 +381,8 @@
 
 .invoice-list--header__top img {
   width: 100%;
-  /*max-height: 150px;*/
-  /*object-fit: contain;*/
+  max-height: 150px;
+  object-fit: contain;
 }
 
 .invoice-list--header__bottom {
