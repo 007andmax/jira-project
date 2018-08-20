@@ -86,7 +86,8 @@
 
 
       <div class="invoice-preview invoice-create">
-        <div class="invoice-create--header invoice-preview">
+        <div class="invoice-create--header">
+          <h3>Invoice</h3>
           <div class="invoice-create--header__btn">
             <button class="btn btn-default" ng-click="showInvoice(null, true)">Back</button>
             <!-- <button class="btn btn-success" ng-click="download()">Download</button> -->
@@ -114,6 +115,19 @@
               </ul>
             </div>
           </div>
+        </div>
+
+        <div class="info-block">
+          <p style="display: inline-block; margin-right: 20px;">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
+
+          <p style="display: inline-block">
+            <span ng-if="readedAt">This invoice was read on {{ readedAt | date:'dd MMM yyyy' }}</span>
+            <span ng-if="!readedAt">This invoice has not been read</span>
+          </p>
+          <!-- <div class="expires-in" ng-show="showTimer && !invoiceCreated" style="display: inline-block;">
+            <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
+            {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
+          </div> -->
         </div>
         <!-- <p class="info-block">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p> -->
         <div class="invoice-list">
