@@ -158,14 +158,14 @@
 
       <!-- smart-dropdown-menu-position -->
       <!-- uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'" -->
-      <div uib-dropdown-toggle>
+      <!-- <div uib-dropdown-toggle>
         <input type="text" class="form-validation has-dropdown-with-label"
                autocomplete="off"
                ng-model="ticket.assignedTo" name="ticketAssignTo"
                typeahead-on-select="userAssigned(ticketAssignTo)"
                placeholder="Assign to"
+               stop-propagation="click"
                typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-               onkeypress="return false;"
                ng-required="false"
                custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}"
                aria-haspopup="true">
@@ -173,6 +173,7 @@
 
       <div uib-dropdown-menu
            class="dropdown-assign-ticket dropdown-menu"
+
            stop-propagation="click"
            assign-user-button
            onUserAssign="'true'"
@@ -181,7 +182,29 @@
            users="usersCurrentCompany"
            aub-current-user="currentUser"></div>
 
+      <div typeahead-input-icon-sm="ticketAssignTo"></div> -->
+
+      <input type="text" class="form-control has-dropdown-with-label"
+             smart-dropdown-menu-position autocomplete="off"
+             placeholder="Assign to"
+             ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
+             typeahead-on-select="userAssigned(ticketAssignTo)"
+             typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+             uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
+             qt-typeahead-async-show-on-focus ng-required="false"
+             custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">
+
       <div typeahead-input-icon-sm="ticketAssignTo"></div>
+
+      <div class="ng-scope" typeahead-input-icon="userCompany">
+        <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+          <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+             tooltip-placement="top"></i>
+      </span>
+        <span class="x-mark ng-hide" ng-hide="showClearIcon">
+          <i class="icn-sm icn-caret-gray"></i>
+        </span>
+      </div>
 
 
 

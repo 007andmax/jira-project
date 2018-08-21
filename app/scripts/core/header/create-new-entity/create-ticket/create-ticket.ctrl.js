@@ -51,6 +51,22 @@
           $scope.$apply()
         })
 
+
+        $scope.ticketSharedUsersList = [];
+
+        $scope.addNotificationRecipients = function() {
+
+          var recipientsIds = $scope.ticketSharedUsersList.filter(function (shared) {
+            return shared.notify;
+          }).map(function (shared) {
+            return shared.user.id;
+          });
+
+          TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
+            
+          }, recipientsIds);
+        }
+
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
