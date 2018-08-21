@@ -17,6 +17,8 @@
           var actionElement = inputElement.parents('.form-group').find('div.label-add-btn > div');
           var mainDropdown = element.parents('div.dropdown');
 
+          $scope.usersToAssign = [];
+
           var refreshAssignTicket = function () {
 
             if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
@@ -74,6 +76,8 @@
             formatItem: function (result, suggestion) {
               var avatarUrl = getUserAvatarUrl(suggestion.data);
               var image = new Image();
+              var index = $scope.usersToAssign.findIndex(function(el) { return el.id === suggestion.data.id});
+              console.log(index)
               image.src = avatarUrl;
               return '<a href="javascript:void(0)" class=""> \
                         <img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"> \
@@ -106,6 +110,24 @@
                 inputElement.tokenfield('destroy');
               }
 
+              var user = selection.data;
+
+              $scope.usersToAssign.push(user);
+
+              var id = user.id;
+
+              var index = $scope.usersToAssign.findIndex(function(el) {
+                return el.id === id;
+              })
+
+              console.log(index, 'indez')
+
+              if (index !== -1) {
+                $scope.usersToAssign.splice(index, 1);
+              } else {
+                $scope.usersToAssign.push(data);
+              }
+
               inputElement.on('tokenfield:removedtoken', function (e) {
                 inputElement.off('tokenfield:removedtoken');
                 inputElement.tokenfield('destroy');
@@ -133,9 +155,13 @@
 
               inputElement.data('autocomplete').container.focus();
               $scope.setUserToAssign(selection.data);
-              setTimeout(function () {
-                mainDropdown.removeClass('open');
-              }, 500)
+
+              if (!$scope.createTicket) {
+                setTimeout(function () {
+                  mainDropdown.removeClass('open');
+                }, 500)
+              }
+
             },
             onDoubleEnter: function () {
               // Idea: use the callback return value to decide if the execution should continue or not

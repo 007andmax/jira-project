@@ -44,12 +44,14 @@
         //   $scope.ticket.assignedTo = val ? val.firstName + ' ' + val.lastName : ''
         // })
 
-        $rootScope.$on('userToAssignToTicket', function(val, args) {
-          $scope.ticket.ticketAssignTo = args.data;
-          $scope.ticket.assignedTo = args.data ? args.data.firstName + ' ' + args.data.lastName : '';
+        // $rootScope.$on('userToAssignToTicket', function(val, args) {
+        //   $scope.ticket.ticketAssignTo = args.data;
+        //   $scope.ticket.assignedTo = args.data ? args.data.firstName + ' ' + args.data.lastName : '';
+        //
+        //   $scope.$apply()
+        // })
 
-          $scope.$apply()
-        })
+        var getUserAvatarUrl = $rootScope.getUserAvatarUrl;
 
 
         $scope.ticketSharedUsersList = [];
@@ -235,6 +237,24 @@
 
         $scope.$on('userToAssignToTicket', function(evt, val) {
           console.log(evt, val, "SADNESS")
+          var data = val.data;
+          var id = data.id;
+
+          var index = $scope.ticketSharedUsersList.findIndex(function(el) {
+            return el.id === id;
+          })
+
+          console.log(index, 'indez')
+
+          if (index !== -1) {
+            $scope.ticketSharedUsersList.splice(index, 1);
+          } else {
+            $scope.ticketSharedUsersList.push(data);
+          }
+
+          console.log($scope.ticketSharedUsersList);
+
+          $scope.$apply();
         })
 
 
@@ -541,6 +561,36 @@
               $scope.savingInProcess = false;
               $scope.openingInProcess = false;
               $scope.closeWindow();
+
+              if ($scope.ticketSharedUsersList.length > 1) {
+
+                console.log($scope.ticketSharedUsersList, 'FUR FUR FUR')
+                var data = $scope.ticketSharedUsersList.map(function(el) {
+                  if (el.id) {
+                    return el.id;
+                  }
+
+                  if (el.user && el.notify) {
+                    return el.user.id;
+                  }
+
+                  return null;;
+                });
+
+                data = data.filter(function(el) {
+                  return el;
+                })
+
+                console.log(data, 'DATATAAATATAT')
+
+                var status = ($scope.ticket.assignedTo || $scope.ticket.ticketAssignTo) ? 'IN_PROGRESS' : "UNASSIGNED";
+
+                TicketsService.changeStatus(resp.id, status, function() {
+                  console.log('request has been sent')
+                }, data);
+
+
+              }
 
               if (resp.code >= 400) {
                 var message = resp.validationResults && resp.validationResults.remoteSessionId ? resp.validationResults.remoteSessionId : resp.message;

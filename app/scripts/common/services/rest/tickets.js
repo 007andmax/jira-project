@@ -721,9 +721,9 @@
           url = '/v2/tickets/' + id + '/' + action;
         }
 
-        if (value === 'COMPLETED') {
+        // if (value === 'COMPLETED') {
           data.recipientsIds = recipientsIds;
-        }
+        // }
 
         var future = $http.put(url, data);
 
