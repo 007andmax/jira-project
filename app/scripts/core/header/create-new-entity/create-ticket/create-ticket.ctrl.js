@@ -63,9 +63,15 @@
           });
 
           TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
-            
+
           }, recipientsIds);
         }
+
+        $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+
+
+        $scope.usersToWatch = $scope.agents.slice();
+
 
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -223,9 +229,30 @@
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
+        $scope.console = function(message) {
+          console.log(message, "FUS RO DAH")
+        }
+
+        $scope.$on('userToAssignToTicket', function(evt, val) {
+          console.log(evt, val, "SADNESS")
+        })
+
 
 
         $scope.$watch('ticketCompany', function (val) {
+          $scope.usersToWatch = $scope.agents.slice();
+
+          if (val && val.id) {
+            $scope.clients = UsersService.getAllByCompanyId(val.id);
+
+            for (var i = 0; i < $scope.clients.length; i++) {
+              $scope.usersToWatch.push($scope.clients[i]);
+            }
+
+          }
+
+          console.log($scope.usersToWatch, $scope.usersToWatch.length, 'USERS TO WaTCH')
+
           $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
             $scope.ticketCompanyChoosen = true;

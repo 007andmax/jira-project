@@ -99,6 +99,7 @@
               lastSelected: 'active'
             },
             onSelect: function (selection) {
+              console.log(selection, 'selections')
 
               if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
                 inputElement.off('tokenfield:removedtoken');
