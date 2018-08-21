@@ -17,6 +17,8 @@
 
         if ($rootScope.invoiceToShow) {
           $scope.readedAt = $rootScope.invoiceToShow.readedAt;
+          $scope.paidOn = $rootScope.invoiceToShow.paidOn;
+          console.log($rootScope.invoiceToShow, 'toshow')
         }
 
 

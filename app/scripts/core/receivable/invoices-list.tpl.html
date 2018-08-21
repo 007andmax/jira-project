@@ -119,8 +119,10 @@
 
         <div class="info-block">
           <p style="display: inline-block">
-            <span ng-if="readedAt">This invoice was read on {{ readedAt | date:'dd MMM yyyy' }}</span>
-            <span ng-if="!readedAt">This invoice has not been read</span>
+            <span ng-if="readedAt">This invoice was read on {{ readedAt | date:'dd MMM yyyy' }}. </span>
+            <span ng-if="!readedAt">This invoice is unread. </span>
+            <span ng-if="paidOn">Invoice was paid on {{ paidOn | date:'dd MMM yyyy' }} </span>
+            <span
           </p>
           <!-- <div class="expires-in" ng-show="showTimer && !invoiceCreated" style="display: inline-block;">
             <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
