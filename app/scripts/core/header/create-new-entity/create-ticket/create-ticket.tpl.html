@@ -286,6 +286,16 @@
     </div>
 
     <div class="col-md-6 shared-avatars">
+      <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+
+          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+            <img src="images/input-icons/checkbox-checked.png" />
+          </div>
+          <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
+        </div>
+      </div>
         <div class="tech-users avatars" >
           <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
             <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
@@ -297,16 +307,7 @@
           </div>
         </div>
 
-        <div class="client-users avatars">
-          <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-            <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
 
-            <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-              <img src="images/input-icons/checkbox-checked.png" />
-            </div>
-            <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
-          </div>
-        </div>
 
 
     </div>

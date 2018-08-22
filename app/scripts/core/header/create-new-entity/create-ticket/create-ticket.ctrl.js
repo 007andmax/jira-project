@@ -74,7 +74,11 @@
           }, recipientsIds);
         }
 
-        $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+        $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id).filter(function(user) {
+          return user.userEnabled;
+        });
+
+
 
 
         $scope.usersToWatch = $scope.agents.slice();
@@ -270,6 +274,12 @@
           $scope.$apply();
         })
 
+        $scope.$watch('ticketSharedUsersList.length', function(val) {
+          if (val > 8) {
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
+          }
+        })
+
 
 
         $scope.$watch('ticketCompany', function (val) {
@@ -277,6 +287,8 @@
 
           if (val && val.id) {
             $scope.clients = UsersService.getAllByCompanyId(val.id);
+
+            console.log($scope.clients, 'CLIENTS')
 
             for (var i = 0; i < $scope.clients.length; i++) {
               $scope.usersToWatch.push($scope.clients[i]);
@@ -328,6 +340,7 @@
               resetSharedUsers(selectedCompany);
             }
           } else {
+            console.log("NO COMPANY")
             if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
               $scope.ticket.serviceExpenses[0].item = undefined;
               $scope.ticket.serviceExpenses.splice(1);
@@ -336,6 +349,14 @@
               $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
             }
             $scope.clients = UsersService.getClientUsers();
+
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
+              var user = el.user;
+
+              console.log(user, 'USER', $scope.lastCompany)
+
+              return !(user.company.id === $scope.lastCompany && user.subscription && user.subscription.ticketManager && !user.deletedAt)
+            })
 
             $scope.ticketAgent = '';
           }
@@ -862,6 +883,8 @@
 
           // add to shared all users subscribed on ticket updates or Ticket Manager
           if (company) {
+
+            $scope.lastCompany = company.id;
             var clients = UsersService.getAllByCompanyId(company.id);
 
             for(var i = 0; i < clients.length; i++){
