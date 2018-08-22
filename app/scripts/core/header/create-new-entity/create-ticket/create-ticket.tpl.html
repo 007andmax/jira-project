@@ -232,12 +232,8 @@
                                    custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
     </button-with-loading-indicator>
     <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
-<<<<<<< HEAD
-    <div class="dropdown-user-parent" uib-dropdown ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"  auto-close="outsideClick">
-=======
     <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
          uib-dropdown auto-close="outsideClick">
->>>>>>> 9f9702afe1dcb8eec563ea17d01c58cfb6b24cff
       <!-- <input placeholder="Assign to" type="text"> -->
 
       <!-- smart-dropdown-menu-position -->
@@ -285,18 +281,12 @@
 
     <div class="col-md-6 shared-avatars">
       <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-<<<<<<< HEAD
         <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
           <img ng-if="(sharedUser.user && sharedUser.user.avatar)" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
           <div class="default-user-avatar" ng-if="!(sharedUser.user && sharedUser.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
             <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
             <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
           </div>
-=======
-        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
-             ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
->>>>>>> 9f9702afe1dcb8eec563ea17d01c58cfb6b24cff
 
           <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
             <img src="images/input-icons/checkbox-checked.png"/>
@@ -304,7 +294,6 @@
           <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
         </div>
       </div>
-<<<<<<< HEAD
         <div class="tech-users avatars" >
           <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
             <img ng-if="(sharedUser.user && sharedUser.user.avatar)" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
@@ -316,15 +305,6 @@
               <img src="images/input-icons/checkbox-checked.png" />
             </div>
             <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
-=======
-      <div class="tech-users avatars">
-        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
-             ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
-
-          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-            <img src="images/input-icons/checkbox-checked.png"/>
->>>>>>> 9f9702afe1dcb8eec563ea17d01c58cfb6b24cff
           </div>
           <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
         </div>
