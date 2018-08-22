@@ -4,7 +4,7 @@
 
   angular.module('quicktech.core.tickets').directive('assignUser',
     [
-      '$rootScope', function ($rootScope) {
+      '$rootScope', '$compile', function ($rootScope, $compile) {
       return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
@@ -119,6 +119,19 @@
               noDataNotice: 'No results found',
               formatItem: function (result, suggestion) {
                 var avatarUrl = getUserAvatarUrl(suggestion.data);
+                var isAvatar = '<img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26">';
+                var noAvatar = `
+                  <div class="default-user-avatar" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                    <span>` + suggestion.data.firstName[0].toUpperCase() + `</span>
+                    <span>` + suggestion.data.lastName[0].toUpperCase() + `</span>
+                  </div>
+                `;
+
+                noAvatar = $compile(angular.element(noAvatar))($rootScope)[0].outerHTML;
+
+                console.log(noAvatar, 'NOAVAtAR')
+
+                var avatar = suggestion.data.avatar ? isAvatar : noAvatar;
                 var image = new Image();
                 var index = $scope.usersToAssign.findIndex(function(el) {
                   var el = el.user ? el.user : el;
@@ -127,8 +140,8 @@
                 });
                 console.log(index)
                 image.src = avatarUrl;
-                return '<a href="javascript:void(0)" id="' + suggestion.data.id + '" class="' + (index !== -1 ? 'active-link' : '') + '"> \
-                          <img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26"> \
+                return '<a href="javascript:void(0)" id="' + suggestion.data.id + '" class="dropdown-link"> \
+                          ' + avatar + ' \
                           <span>\
                             <p>' + result + '</p> \
                             <p>' + suggestion.data.primaryEmail + '</p> \

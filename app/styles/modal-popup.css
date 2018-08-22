@@ -745,10 +745,7 @@ _::-webkit-:not(:root:root),
 
 }
 
-.ticket--footer .shared-avatars .avatars .default-user-avatar {
-  width: 100%;
-  height: 100%;
-}
+
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
@@ -761,6 +758,11 @@ _::-webkit-:not(:root:root),
   margin-right: 2px;
 }
 
+.ticket--footer .shared-avatars .avatars .default-user-avatar {
+  width: 100%;
+  height: 100%;
+}
+
 .ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
   margin-right: 3px;
 }
@@ -771,6 +773,10 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   border-radius: 50%;
+}
+
+.dropdown-link {
+  display: flex !important;
 }
 
 .invoice--footer {
