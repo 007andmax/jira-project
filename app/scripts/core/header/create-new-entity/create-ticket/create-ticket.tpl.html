@@ -38,15 +38,15 @@
     </div>
     <div class="col-md-12" style="position: relative">
       <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
-          <div class="drop-area-subwrapper">
-            <p class="drop-area">
-              Drop Files Here
-            </p>
-          </div>
+        <div class="drop-area-subwrapper">
+          <p class="drop-area">
+            Drop Files Here
+          </p>
+        </div>
       </div>
 
       <div class="drag-n-drop-body">
-        <div style="position: relative"  ticket-attachment-files attachment-func="addAttachmentFiles"
+        <div style="position: relative" ticket-attachment-files attachment-func="addAttachmentFiles"
              ng-model="ticketUpdate.ticketAttachments">
           <p>Drag & Drop your attachment here or
             <span>click</span> to upload manually</p>
@@ -153,7 +153,8 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}" uib-dropdown>
+    <div class="col-md-6 dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+         uib-dropdown>
       <!-- <input placeholder="Assign to" type="text"> -->
 
       <!-- smart-dropdown-menu-position -->
@@ -162,7 +163,7 @@
 
       <!-- users="usersCurrentCompany" -->
 
-      <input type="text" class="form-control has-dropdown-with-label"
+      <input type="text" class="form-validation has-dropdown-with-label"
              smart-dropdown-menu-position autocomplete="off"
              placeholder="Assign to"
              ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
@@ -185,10 +186,6 @@
       </div>
 
 
-
-
-
-
       <!-- <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
@@ -200,9 +197,9 @@
       </div> -->
 
 
-
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}" ng-hide='(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length'>
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
+         ng-hide='(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length'>
       <!-- <input placeholder="Select Device" type="text"> -->
 
       <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
@@ -235,7 +232,8 @@
                                    custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
     </button-with-loading-indicator>
     <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
-    <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}" uib-dropdown auto-close="outsideClick">
+    <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+         uib-dropdown auto-close="outsideClick">
       <!-- <input placeholder="Assign to" type="text"> -->
 
       <!-- smart-dropdown-menu-position -->
@@ -250,7 +248,7 @@
                ng-required="false"
                custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}"
                aria-haspopup="true"> -->
-        <img src="images/new-icons/add-user.png" class="pointer" />
+        <img src="images/new-icons/add-user.png" class="pointer"/>
       </div>
 
       <div uib-dropdown-menu
@@ -267,10 +265,6 @@
       <div typeahead-input-icon-sm="ticketAssignTo"></div>
 
 
-
-
-
-
       <!-- <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
@@ -282,32 +276,31 @@
       </div> -->
 
 
-
     </div>
 
     <div class="col-md-6 shared-avatars">
       <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
+             ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
 
           <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-            <img src="images/input-icons/checkbox-checked.png" />
+            <img src="images/input-icons/checkbox-checked.png"/>
           </div>
           <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
         </div>
       </div>
-        <div class="tech-users avatars" >
-          <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-            <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+      <div class="tech-users avatars">
+        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
+             ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
 
-            <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-              <img src="images/input-icons/checkbox-checked.png" />
-            </div>
-            <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
+          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+            <img src="images/input-icons/checkbox-checked.png"/>
           </div>
+          <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
         </div>
-
-
+      </div>
 
 
     </div>

@@ -502,6 +502,7 @@ body.non-body-scroll::-webkit-scrollbar {
 .dropdown-user-parent > .dropdown-menu > li {
   /*padding: 10px 20px;*/ /*styles of user dropdown fixed*/
   cursor: pointer;
+  height: 56px;
 }
 
 .dropdown-user-parent > .dropdown-menu > li:hover {
@@ -510,6 +511,11 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .dropdown-user-parent > .dropdown-menu > li .avatar {
   margin-right: 7px !important;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a {
+  height: 56px;
+  padding: 0 10px;
 }
 
 .dropdown-user-parent > .dropdown-menu > li .user-name {
@@ -526,6 +532,43 @@ body.non-body-scroll::-webkit-scrollbar {
 .dropdown-user-parent > .dropdown-menu > li:active,
 .dropdown-user-parent > .dropdown-menu > li.active {
   background-color: #e2f1fd;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a p {
+  margin: 0;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a .user-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 56px;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a .user-name > p {
+  line-height: 16px;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a .user-name > p:first-child {
+  font-size: 13px;
+  color: #4F5F79;
+  font-weight: bold;
+}
+
+.dropdown-user-parent > .dropdown-menu > li a .user-name > p:last-child {
+  font-size: 12px;
+  color: #9CA5B6;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.dropdown-user-parent > .dropdown-menu > li:hover a .user-name > p {
+  color: #fff;
 }
 
 /*description popover on companies page*/

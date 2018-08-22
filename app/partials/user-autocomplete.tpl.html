@@ -1,11 +1,13 @@
-<a href="javascript:void(0)" class="clearfix">
-  <div href="javascript:void(0)" class="pull-left avatar">
+<a href="javascript:void(0)">
+  <div href="javascript:void(0)" class="avatar">
     <img class="img-circle avatar-26"
          ng-src="{{ '/users/' + (match.model.id || 'default') + '/image' + (match.model.avatar ? '.jpg?t=' + match.model.avatar.updatedAt : '') }}"
          alt="...">
   </div>
-
-  <div class="user-name"
-       ng-bind-html='(match.label | uibTypeaheadHighlight:query) + (match.model.primaryEmail && match.model.primaryEmail.length > 0 ? " \"" + match.model.primaryEmail + "\"" : "")'></div>
-
+  <div class="user-name">
+    <p
+      ng-bind-html='(match.label | uibTypeaheadHighlight:query)'></p>
+    <p
+      ng-bind-html='(match.model.primaryEmail && match.model.primaryEmail.length > 0 ? " \"" + match.model.primaryEmail + "\"" : " ")'></p>
+  </div>
 </a>
