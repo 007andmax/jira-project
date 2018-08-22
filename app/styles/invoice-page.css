@@ -18,9 +18,12 @@
   color: #364656;
 }
 .invoice-edit.invoice-create .invoice-create--header__btn .btn,
+.invoices-header .btn,
+.invoices-list .btn,
 .invoice-preview.invoice-create .invoice-create--header__btn .btn {
   font-size: 14px !important;
   font-family: "Graphik Medium", sans-serif;
+  font-weight: 500;
 }
 .invoice-create a.bold,
 .invoice-create a {
