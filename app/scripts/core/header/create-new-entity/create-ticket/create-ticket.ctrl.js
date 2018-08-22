@@ -75,7 +75,7 @@
         }
 
         $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id).filter(function(user) {
-          return user.userEnabled;
+          return !user.deletedAt;
         });
 
 
@@ -291,7 +291,7 @@
 
           if (val && val.id) {
             $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
-              return user.userEnabled;
+              return !user.deletedAt;
             });;
 
             console.log($scope.clients, 'CLIENTS')
@@ -320,7 +320,7 @@
               $scope.filteredAgentList = agentsByCompany[val.id];
             }
             $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
-              return user.userEnabled;
+              return !user.deletedAt;
             });
 
             resetSharedUsers(val);
