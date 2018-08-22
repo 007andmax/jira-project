@@ -702,6 +702,72 @@ _::-webkit-:not(:root:root),
   display: flex;
 }
 
+.ticket--footer .dropdown-user-parent div[uib-dropdown-toggle] {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.ticket--footer .shared-avatars .shared-avatar {
+  position: relative;
+}
+
+.ticket--footer .shared-avatars .check-area {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border: 1px solid #edf2f6;
+  border-radius: 50%;
+}
+
+.ticket--footer .shared-avatars  {
+  display: flex;
+}
+
+.ticket--footer .shared-avatars .check-area.checked {
+  background: #2ec866;
+  border: 1px solid white;
+}
+
+
+
+.ticket--footer .shared-avatars .avatars {
+  padding: 2px 7px;
+  display: flex;
+
+}
+
+.ticket--footer .shared-avatars .tech-users {
+  border-right: 1px solid #edf2f6;
+
+}
+
+.ticket--footer .shared-avatars .shared-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+}
+
+.ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
+  margin-right: 3px;
+}
+
+
+
+.ticket--footer .shared-avatars .shared-avatar > img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
 .invoice--footer {
   padding-top: 0;
 }

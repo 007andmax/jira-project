@@ -51,7 +51,12 @@
         //   $scope.$apply()
         // })
 
-        var getUserAvatarUrl = $rootScope.getUserAvatarUrl;
+        $scope.getUserAvatarUrl = function(user) {
+          var data = user.user ? user.user : user;
+          console.log(data, user, 'usedata')
+
+          return $rootScope.getUserAvatarUrl(data);
+        };
 
 
         $scope.ticketSharedUsersList = [];
@@ -231,17 +236,22 @@
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.console = function(message) {
-          console.log(message, "FUS RO DAH")
+
+
+        $scope.filterByType = function(arr, type) {
+          return arr.filter(function(el) {
+            return el.user.accountType === type;
+          })
         }
 
         $scope.$on('userToAssignToTicket', function(evt, val) {
-          console.log(evt, val, "SADNESS")
+          // console.log(evt, val, "SADNESS")
           var data = val.data;
           var id = data.id;
 
           var index = $scope.ticketSharedUsersList.findIndex(function(el) {
-            return el.id === id;
+            var userId = el.user ? el.user.id : el.id
+            return userId === id;
           })
 
           console.log(index, 'indez')
@@ -249,7 +259,10 @@
           if (index !== -1) {
             $scope.ticketSharedUsersList.splice(index, 1);
           } else {
-            $scope.ticketSharedUsersList.push(data);
+            $scope.ticketSharedUsersList.push({
+              user: data,
+              notify: true
+            });
           }
 
           console.log($scope.ticketSharedUsersList);
@@ -562,35 +575,35 @@
               $scope.openingInProcess = false;
               $scope.closeWindow();
 
-              if ($scope.ticketSharedUsersList.length > 1) {
-
-                console.log($scope.ticketSharedUsersList, 'FUR FUR FUR')
-                var data = $scope.ticketSharedUsersList.map(function(el) {
-                  if (el.id) {
-                    return el.id;
-                  }
-
-                  if (el.user && el.notify) {
-                    return el.user.id;
-                  }
-
-                  return null;;
-                });
-
-                data = data.filter(function(el) {
-                  return el;
-                })
-
-                console.log(data, 'DATATAAATATAT')
-
-                var status = ($scope.ticket.assignedTo || $scope.ticket.ticketAssignTo) ? 'IN_PROGRESS' : "UNASSIGNED";
-
-                TicketsService.changeStatus(resp.id, status, function() {
-                  console.log('request has been sent')
-                }, data);
-
-
-              }
+              // if ($scope.ticketSharedUsersList.length > 1) {
+              //
+              //   console.log($scope.ticketSharedUsersList, 'FUR FUR FUR')
+              //   var data = $scope.ticketSharedUsersList.map(function(el) {
+              //     if (el.id) {
+              //       return el.id;
+              //     }
+              //
+              //     if (el.user && el.notify) {
+              //       return el.user.id;
+              //     }
+              //
+              //     return null;;
+              //   });
+              //
+              //   data = data.filter(function(el) {
+              //     return el;
+              //   })
+              //
+              //   console.log(data, 'DATATAAATATAT')
+              //
+              //   var status = ($scope.ticket.assignedTo || $scope.ticket.ticketAssignTo) ? 'IN_PROGRESS' : "UNASSIGNED";
+              //
+              //   TicketsService.changeStatus(resp.id, status, function() {
+              //     console.log('request has been sent')
+              //   }, data);
+              //
+              //
+              // }
 
               if (resp.code >= 400) {
                 var message = resp.validationResults && resp.validationResults.remoteSessionId ? resp.validationResults.remoteSessionId : resp.message;
@@ -719,10 +732,19 @@
 
 
           if ($scope.ticket.ticketAssignTo) {
-            $scope.ticketSharedUsersList.push({
-              user: $scope.ticket.ticketAssignTo,
-              notify: true
-            });
+            var index = $scope.ticketSharedUsersList.findIndex(function(el) {
+              return (el.user.id === $scope.ticket.ticketAssignTo.id);
+            })
+
+            if (index === -1) {
+              $scope.ticketSharedUsersList.push({
+                user: $scope.ticket.ticketAssignTo,
+                notify: true
+              });
+            } else {
+              $scope.ticketSharedUsersList[index].notify = true;
+            }
+
           }
         });
 
