@@ -278,6 +278,10 @@
           if (val > 8) {
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
           }
+
+          console.log('THERE MUSTH HAPPEN SOMETHING')
+
+          $rootScope.ticketSharedList = $scope.ticketSharedUsersList.slice();
         })
 
 
@@ -286,7 +290,9 @@
           $scope.usersToWatch = $scope.agents.slice();
 
           if (val && val.id) {
-            $scope.clients = UsersService.getAllByCompanyId(val.id);
+            $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
+              return user.userEnabled;
+            });;
 
             console.log($scope.clients, 'CLIENTS')
 
@@ -313,7 +319,9 @@
             if (agentsByCompany) {
               $scope.filteredAgentList = agentsByCompany[val.id];
             }
-            $scope.clients = UsersService.getAllByCompanyId(val.id);
+            $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
+              return user.userEnabled;
+            });;
 
             resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
