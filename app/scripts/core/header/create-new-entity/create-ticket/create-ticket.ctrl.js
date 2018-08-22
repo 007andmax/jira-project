@@ -321,7 +321,7 @@
             }
             $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
               return user.userEnabled;
-            });;
+            });
 
             resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
