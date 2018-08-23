@@ -274,21 +274,49 @@
           $scope.$apply();
         })
 
+        $scope.$watch('ticketSharedUsersList', function() {
+          $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
+            return typeof el.user === 'object';
+          });
+          
+        }, true)
+
         $scope.$watch('ticketSharedUsersList.length', function(val) {
           if (val > 8) {
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
           }
-
-          console.log('THERE MUSTH HAPPEN SOMETHING')
 
           $rootScope.ticketSharedList = $scope.ticketSharedUsersList.slice();
         })
 
 
 
+        $scope.ticketCompanyOutfocus = function() {
+          if ($scope.ticketCompany && typeof $scope.ticketCompany === 'string') {
+            $scope.ticketCompany = $scope.lastValidCompany;
+          }
+        }
+
+        $scope.assignToOutfocus = function() {
+          if ($scope.ticket.ticketAssignTo && typeof $scope.ticket.ticketAssignTo === 'string') {
+            $scope.ticket.ticketAssignTo = $scope.lastValidAssignTo;
+          }
+
+        }
+
+        $scope.createdUserOutfocus = function() {
+
+
+          if ($scope.ticketCreatedUser && typeof $scope.ticketCreatedUser === 'string') {
+            $scope.ticketCreatedUser = $scope.lastValidCreatedUser;
+          }
+        }
+
+
+
         $scope.$watch('ticketCompany', function (val, prevVal) {
 
-          console.log(val, prevVal, "VAL")
+          // console.log(val, prevVal, "VAL")
           if (!val && typeof prevVal === 'object' && !$rootScope.clearButtonPressed) {
             $scope.ticketCompany = prevVal;
             return;
@@ -303,7 +331,7 @@
           if (val && val.id) {
             $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
               return !user.deletedAt;
-            });;
+            });
 
             console.log($scope.clients, 'CLIENTS')
 
@@ -318,6 +346,8 @@
           $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
             $scope.ticketCompanyChoosen = true;
+
+            $scope.lastValidCompany = val;
 
             if ($scope.ticket.createdUser) {
               var ticketUserId = $scope.ticket.createdUser.id,
@@ -356,6 +386,7 @@
               return $scope.ticketForm.ticketCompany.$setValidity('invalidName', false);
             } else {
               $scope.ticketCompany = selectedCompany;
+              $scope.lastValidCompany = selectedCompany;
               resetSharedUsers(selectedCompany);
             }
           } else {
@@ -421,6 +452,8 @@
               notify: false
             });
 
+            $scope.lastValidCreatedUser = val;
+
             $scope.selectUpdateSharedUser[$scope.ticketCreatedUser.id] = true;
             $scope.ticketForm.ticketCreatedUser.$setValidity('invalidUser', true);
 
@@ -446,6 +479,8 @@
                 $scope.selectUpdateSharedUser[$scope.ticket.createdUser.id] = false;
               }
             } else {
+
+              $scope.lastValidCreatedUser = selectedUser;
               $scope.ticketCreatedUser = selectedUser;
               $scope.ticketForm.ticketCreatedUser.$setValidity('invalidUser', true);
             }
@@ -787,6 +822,10 @@
             $rootScope.clearButtonPressed = false;
           }
 
+          if (val && typeof val === 'object') {
+            $scope.lastValidAssignTo = val;
+          }
+
           if (oldVal && oldVal.id) {
             Utils.removeFromArrayByCondition($scope.ticketSharedUsersList, function (item) {
               return item.user && item.user.id === oldId;
@@ -936,6 +975,8 @@
           //remove users from other companies
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
+
+            console.log(shares, 'SHARES')
 
             if (UsersService.getOneById(shares.user.id).accountType === 'TECH') {
               continue;
