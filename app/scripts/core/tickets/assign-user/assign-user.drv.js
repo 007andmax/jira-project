@@ -123,12 +123,12 @@
                 var className = items % 2 === 0 ? 'avatar-background-color-even' : 'avatar-background-color-odd';
                 var avatarUrl = getUserAvatarUrl(suggestion.data);
                 var isAvatar = '<img src="' + avatarUrl + '" alt="..." class="img-circle avatar-26">';
-                var noAvatar = `
-                  <div class="default-user-avatar ` + className +  `">
-                    <span>` + suggestion.data.firstName[0].toUpperCase() + `</span>
-                    <span>` + suggestion.data.lastName[0].toUpperCase() + `</span>
-                  </div>
-                `;
+                var noAvatar = [
+                  '<div class="default-user-avatar ' + className +  '">',
+                    '<span>' + suggestion.data.firstName[0].toUpperCase() + '</span>',
+                    '<span>' + suggestion.data.lastName[0].toUpperCase() + '</span>',
+                  '</div>'
+                ].join('');
 
                 items++;
 

@@ -802,7 +802,7 @@ _::-webkit-:not(:root:root),
   background-color: #aae8e8;
 } */
 
-.user-item:nth-child(even)  .default-user-avatar, li:nth-child(even)  .default-user-avatar {
+.user-item:nth-child(even) .default-user-avatar, li:nth-child(even)  .default-user-avatar {
   background-color: #ffe3af;
 }
 
