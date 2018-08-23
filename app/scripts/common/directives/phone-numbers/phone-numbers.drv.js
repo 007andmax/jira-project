@@ -20,7 +20,8 @@
           customPlaceholder: '<customPlaceholder',
           isRestricted: '<isRestricted',
           showTypeSelector: '<showTypeSelector',
-          isRequired: '<isRequired'
+          isRequired: '<isRequired',
+          notRequired: '<notRequired',
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {
@@ -94,7 +95,7 @@
               if ((number && !prefixValid) || formField.$error.pattern) {
                 invalid = true;
                 error = 'Invalid primary phone number';
-              } else if (($scope.isFirstRequired) || (!number || (prefixValid && isPrefixOnly))) {
+              } else if ((($scope.isFirstRequired) || (!number || (prefixValid && isPrefixOnly))) && !notRequired) {
                 required = true;
                 error = 'Phone number is required';
               } else if (!isPrefixOnly && number && number.length < 5) {
