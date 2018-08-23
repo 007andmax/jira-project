@@ -53,7 +53,7 @@
 
         $scope.getUserAvatarUrl = function(user) {
           var data = user.user ? user.user : user;
-          console.log(data, user, 'usedata')
+          // console.log(data, user, 'usedata')
 
           return $rootScope.getUserAvatarUrl(data);
         };
@@ -410,7 +410,7 @@
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
               var user = el.user;
 
-              console.log(user, 'USER', $scope.lastCompany)
+              // console.log(user, 'USER', $scope.lastCompany)
 
               return !(user.company.id === $scope.lastCompany && user.subscription && user.subscription.ticketManager && !user.deletedAt)
             })

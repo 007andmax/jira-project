@@ -38,16 +38,16 @@
 
 
 
-            console.log(idArray, 'IDAARRAYADSAD')
+            // console.log(idArray, 'IDAARRAYADSAD')
 
             var links = element.find('a').map(function(el, i) {
-              console.log(this, 'THIS')
+              // console.log(this, 'THIS')
 
               var index = ids.indexOf(this.id);
 
               if (~index) {
 
-                console.log('this element should br active', this)
+                // console.log('this element should br active', this)
                 this.parentNode.classList.add('active');
               } else {
                 this.parentNode.classList.remove('active');
@@ -55,7 +55,7 @@
 
             })
 
-            console.log(links, 'links')
+            // console.log(links, 'links')
             //
             // console.log(links, 'links')
             // console.log('newnenwnewnw', val)

@@ -12,7 +12,7 @@
 
         $scope.setUserToAssign = function (user) {
           $scope.userToAssign = user;
-          
+
           if (!$scope.createTicket) {
             $scope.assignUserToTicket();
           }
@@ -34,6 +34,8 @@
 
           return true;
         };
+
+        // $scope.$watch()
 
         $scope.$watch('assignToModel', function (typedUserName) {
 
