@@ -87,7 +87,7 @@
 
         $rootScope.ticketsTagsColors = {
           unassigned: 1,
-          completed: 3,
+          completed: 2,
           inProgress: 0,
           onHold: 7
         };
