@@ -258,7 +258,7 @@
             return userId === id;
           })
 
-          console.log(index, 'indez')
+          // console.log(index, 'indez')
 
           if (index !== -1) {
             $scope.ticketSharedUsersList.splice(index, 1);
@@ -269,7 +269,7 @@
             });
           }
 
-          console.log($scope.ticketSharedUsersList);
+          // console.log($scope.ticketSharedUsersList);
 
           $scope.$apply();
         })
@@ -278,7 +278,7 @@
           $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
             return typeof el.user === 'object';
           });
-          
+
         }, true)
 
         $scope.$watch('ticketSharedUsersList.length', function(val) {
@@ -326,6 +326,11 @@
             $rootScope.clearButtonPressed = false;
           }
 
+          if (!val) {
+            $rootScope.clearButtonPressed = true;
+            $scope.ticketCreatedUser = null;
+          }
+
           $scope.usersToWatch = $scope.agents.slice();
 
           if (val && val.id) {
@@ -333,7 +338,7 @@
               return !user.deletedAt;
             });
 
-            console.log($scope.clients, 'CLIENTS')
+            // console.log($scope.clients, 'CLIENTS')
 
             for (var i = 0; i < $scope.clients.length; i++) {
               $scope.usersToWatch.push($scope.clients[i]);
@@ -341,7 +346,7 @@
 
           }
 
-          console.log($scope.usersToWatch, $scope.usersToWatch.length, 'USERS TO WaTCH')
+          // console.log($scope.usersToWatch, $scope.usersToWatch.length, 'USERS TO WaTCH')
 
           $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
@@ -390,7 +395,9 @@
               resetSharedUsers(selectedCompany);
             }
           } else {
-            console.log("NO COMPANY")
+            // console.log("NO COMPANY")
+
+            $scope.lastValidCompany = null;
             if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
               $scope.ticket.serviceExpenses[0].item = undefined;
               $scope.ticket.serviceExpenses.splice(1);
@@ -486,6 +493,7 @@
             }
 
           } else {
+            $scope.lastValidCreatedUser = null;
             if ($scope.ticket.createdUser && $scope.ticket.createdUser.id) {
               $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
                 return share.user.id !== $scope.ticket.createdUser.id;
@@ -809,7 +817,7 @@
         });
 
         $scope.$watch('ticket.ticketAssignTo', function(val, oldVal) {
-          console.log(val, oldVal, 'ASSIGN TO')
+          // console.log(val, oldVal, 'ASSIGN TO')
           var oldId = oldVal && oldVal.id;
           var newId = val && val.id;
 
@@ -823,6 +831,8 @@
           }
 
           if (val && typeof val === 'object') {
+            $scope.lastValidAssignTo = val;
+          } else if (!val) {
             $scope.lastValidAssignTo = val;
           }
 
@@ -976,7 +986,7 @@
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
-            console.log(shares, 'SHARES')
+            // console.log(shares, 'SHARES')
 
             if (UsersService.getOneById(shares.user.id).accountType === 'TECH') {
               continue;
