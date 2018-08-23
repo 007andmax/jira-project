@@ -78,11 +78,18 @@
 
         $scope.tagColors = TagsService.getColors();
 
+        // $rootScope.ticketsTagsColors = {
+        //   unassigned: 0,
+        //   completed: 1,
+        //   inProgress: 2,
+        //   onHold: 9
+        // };
+
         $rootScope.ticketsTagsColors = {
-          unassigned: 0,
-          completed: 1,
-          inProgress: 2,
-          onHold: 9
+          unassigned: 1,
+          completed: 3,
+          inProgress: 0,
+          onHold: 7
         };
 
         TicketsService.getAllCounts(function (resp) {
