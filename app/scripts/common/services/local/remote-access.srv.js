@@ -39,6 +39,8 @@
             var restServerAddress;
             var url;
 
+
+
             $rootScope.launchRemoteApp = function() {
               promise = $interval(function () {
                 counter++;
@@ -102,6 +104,26 @@
             window.location.href = '/data/connection-viewer';
             $scope.close();
           };
+
+          var modal
+
+          var interval = setInterval(function() {
+            modal = document.querySelector('[uib-modal-window=modal-window]');
+
+            if (!modal) return;
+
+            modal.style.height = '550px';
+
+            if (modal) clearInterval(interval);
+
+
+          }, 50)
+
+          $scope.$on('$destroy', function() {
+            modal.style.height = 'auto';
+          })
+
+
         }
         function getCounter() {
           return counter;
