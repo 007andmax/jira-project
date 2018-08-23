@@ -286,7 +286,18 @@
 
 
 
-        $scope.$watch('ticketCompany', function (val) {
+        $scope.$watch('ticketCompany', function (val, prevVal) {
+
+          console.log(val, prevVal, "VAL")
+          if (!val && typeof prevVal === 'object' && !$rootScope.clearButtonPressed) {
+            $scope.ticketCompany = prevVal;
+            return;
+          }
+
+          if ($rootScope.clearButtonPressed) {
+            $rootScope.clearButtonPressed = false;
+          }
+
           $scope.usersToWatch = $scope.agents.slice();
 
           if (val && val.id) {
@@ -376,6 +387,15 @@
         $scope.$watch('ticketCreatedUser', function (val, prevValue) {
           if (val === prevValue) {
             return;
+          }
+
+          if (!val && typeof prevValue === 'object' && !$rootScope.clearButtonPressed) {
+            $scope.ticketCreatedUser = prevValue;
+            return;
+          }
+
+          if ($rootScope.clearButtonPressed) {
+            $rootScope.clearButtonPressed = false;
           }
 
           if (val && (typeof val === 'object') && val.id) {
@@ -753,12 +773,25 @@
 
         });
 
-        $scope.$watch('ticket.ticketAssignTo.id', function (newId, oldId) {
+        $scope.$watch('ticket.ticketAssignTo', function(val, oldVal) {
+          console.log(val, oldVal, 'ASSIGN TO')
+          var oldId = oldVal && oldVal.id;
+          var newId = val && val.id;
 
-          Utils.removeFromArrayByCondition($scope.ticketSharedUsersList, function (item) {
-            return item.user && item.user.id === oldId;
-          });
+          if (!val && typeof oldVal === 'object' && !$rootScope.clearButtonPressed) {
+            $scope.ticket.ticketAssignTo = oldVal;
+            return;
+          }
 
+          if ($rootScope.clearButtonPressed) {
+            $rootScope.clearButtonPressed = false;
+          }
+
+          if (oldVal && oldVal.id) {
+            Utils.removeFromArrayByCondition($scope.ticketSharedUsersList, function (item) {
+              return item.user && item.user.id === oldId;
+            });
+          }
 
           if ($scope.ticket.ticketAssignTo) {
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
@@ -775,7 +808,33 @@
             }
 
           }
-        });
+
+
+        }, true)
+
+        // $scope.$watch('ticket.ticketAssignTo.id', function (newId, oldId) {
+        //
+        //   Utils.removeFromArrayByCondition($scope.ticketSharedUsersList, function (item) {
+        //     return item.user && item.user.id === oldId;
+        //   });
+        //
+        //
+        //   if ($scope.ticket.ticketAssignTo) {
+        //     var index = $scope.ticketSharedUsersList.findIndex(function(el) {
+        //       return (el.user.id === $scope.ticket.ticketAssignTo.id);
+        //     })
+        //
+        //     if (index === -1) {
+        //       $scope.ticketSharedUsersList.push({
+        //         user: $scope.ticket.ticketAssignTo,
+        //         notify: true
+        //       });
+        //     } else {
+        //       $scope.ticketSharedUsersList[index].notify = true;
+        //     }
+        //
+        //   }
+        // });
 
         $scope.clearTicketCompany = function () {
           $scope.ticketCompany = undefined;
