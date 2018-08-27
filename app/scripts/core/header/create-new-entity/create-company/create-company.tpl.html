@@ -16,7 +16,7 @@
           <label class="control-label" ng-message="unique">This company name already occupied.</label>
         </div>
         <input placeholder="Company Name" type="text" ng-model="editCompany.name" aria-expanded="true"
-               ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+               tabindex="1" ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
                is-uniq-validation validation-func="validateCompanyName" class="form-validation">
       </div>
       <div class="col-md-6" ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'firstName')}">
@@ -28,7 +28,7 @@
         </div>
 
         <input placeholder="First Name" type="text" ng-minlength="2" ng-maxlength="15"
-               name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur class="form-validation">
+               tabindex="5" name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur class="form-validation">
       </div>
       <div class="col-md-6" ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
         <div ng-messages="companyForm.clientType.$error"
@@ -38,6 +38,7 @@
         <input custom-style="{'width':'100%'}" type="text" class="form-validation pointer"
                ng-model="editCompany.clientType"
                name="clientType"
+               tabindex="2"
                uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
                readonly qt-typeahead-async-show-on-focus placeholder="Select Company Type" required
                uib-tooltip="Current vendor has linked products"
@@ -54,7 +55,7 @@
           <label class="control-label" ng-message="required">Last name is required.</label>
         </div>
         <input placeholder="Last Name" type="text" aria-expanded="true" ng-maxlength="15"
-               name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true" class="form-validation">
+               tabindex="6" name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true" class="form-validation">
       </div>
       <div class="col-md-6" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
         <div ng-messages="companyForm.companyDomain.$error"
@@ -66,6 +67,7 @@
         <input placeholder="Company Domain Name" type="text" ng-model="editCompany.domain"
                placeholder="yourcompany.com"
                name="companyDomain"
+               tabindex="3"
                required
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
@@ -75,6 +77,7 @@
            phone-numbers-edit
            is-restricted="true"
            is-required="true"
+           qt-tab-index="7"
            country-code="{{editCompany.addresses[0].countryCode}}"
            ng-model="contact.phoneNumbers"
            custom-placeholder="'Primary contact phone'">
@@ -86,6 +89,7 @@
            is-try-to-save="triedToSave"
            is-restricted="true"
            is-required="true"
+           qt-tab-index="4"
            country-code="{{editCompany.addresses[0].countryCode}}"
            custom-placeholder="'Phone number'">
 
@@ -104,6 +108,7 @@
                make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
                ng-maxlength="128"
                required
+               tabindex="8"
                contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
                model-id="contact.id">
       </div>
@@ -112,7 +117,7 @@
     </div>
     <div class="company--footer">
       <!-- <button class="btn btn-primary">Create Product</button> -->
-      <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false)"
+      <button-with-loading-indicator tabindex="9" class="btn btn-primary" ng-click="save(companyForm, false)"
                                      loading="savingInProcess" label="Create Company">
       </button-with-loading-indicator>
       <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
