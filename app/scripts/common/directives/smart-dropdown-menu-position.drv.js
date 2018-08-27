@@ -6,7 +6,8 @@
     return {
       restrict: 'A',
       scope: {
-        noRestricted: '<noRestricted'
+        noRestricted: '<noRestricted',
+        isRestricted: '<isRestricted'
       },
 
       link: function (scope, element, attrs) {
@@ -88,7 +89,7 @@
                 parentElement.css({'overflow': 'hidden'});
               }
             } else {
-              if((winHeight - position) < 250) {
+              if((winHeight - position) < 290) {
                 d.css({'top': 'auto'});
                 d.css({'bottom': '100%'});
                 if (!scope.noRestricted) {
@@ -99,7 +100,7 @@
                 d.css({'top': 'auto'});
                 d.css({'bottom': ''});
 
-                if (!scope.noRestricted) {
+                if (!scope.noRestricted && !scope.isRestricted) {
                   d.css({'max-height': '160px'});
                 }
                 parentElement.css({'overflow': 'hidden'});

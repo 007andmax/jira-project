@@ -6,13 +6,17 @@
     ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$rootScope',
       'quicktech.common.services.UserNotificationService',
       function ($scope, TicketsService, UsersService, $stateParams, $rootScope, UserNotificationService) {
-
+        $scope.usersToAssign = [];
         $scope.userToAssign = {};
         $scope.assignToModel = '';
 
         $scope.setUserToAssign = function (user) {
           $scope.userToAssign = user;
-          $scope.assignUserToTicket();
+
+          if (!$scope.createTicket) {
+            $scope.assignUserToTicket();
+          }
+
         };
 
         $scope.filterAssignUser = function (item) {
@@ -30,6 +34,8 @@
 
           return true;
         };
+
+        // $scope.$watch()
 
         $scope.$watch('assignToModel', function (typedUserName) {
 

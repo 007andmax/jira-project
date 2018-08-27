@@ -746,9 +746,9 @@
           url = '/v2/tickets/' + id + '/' + action;
         }
 
-        if (value === 'COMPLETED') {
+        // if (value === 'COMPLETED') {
           data.recipientsIds = recipientsIds;
-        }
+        // }
 
         var future = $http.put(url, data);
 
@@ -899,7 +899,7 @@
 
           // console.log(storage, "CREATED")
 
-          storage.ticketsQuantityMap.ALL = 1000000000;
+          // storage.ticketsQuantityMap.ALL = 1000000000;
 
           // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
 

@@ -16,6 +16,7 @@
           usersCurrentCompany: "=users",
           isBulkOperation: '=aubIsBulkOperation',
           onUserAssign: '&onUserAssign',
+          createTicket: '<aubCreateTicket'
         },
         link: function (scope) {
           scope.getUserName = $rootScope.getUserName;

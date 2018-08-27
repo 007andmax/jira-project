@@ -702,6 +702,114 @@ _::-webkit-:not(:root:root),
   display: flex;
 }
 
+.ticket--footer .dropdown-user-parent div[uib-dropdown-toggle] {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.ticket--footer .shared-avatars .shared-avatar {
+  position: relative;
+}
+
+.ticket--footer .shared-avatars .check-area {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border: 1px solid #edf2f6;
+  border-radius: 50%;
+}
+
+.ticket--footer .shared-avatars  {
+  display: flex;
+}
+
+.ticket--footer .shared-avatars .check-area.checked {
+  background: #2ec866;
+  border: 1px solid white;
+}
+
+
+
+.ticket--footer .shared-avatars .avatars {
+  padding: 2px 7px;
+  display: flex;
+
+}
+
+
+
+.ticket--footer .shared-avatars .client-users {
+  border-right: 1px solid #edf2f6;
+
+}
+
+.ticket--footer .shared-avatars .shared-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+}
+
+.ticket--footer .shared-avatars .avatars .default-user-avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
+  margin-right: 3px;
+}
+
+
+
+.ticket--footer .shared-avatars .shared-avatar > img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.dropdown-link {
+  display: flex !important;
+  align-items: center;
+}
+
+.dropdown-link .default-user-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+
+
+}
+
+.dropdown-menu .default-user-avatar {
+  width: 32px;
+  height: 32px;
+
+}
+
+/* .avatar-background-color-even {
+  background-color: #ffe3af;
+}
+
+.avatar-background-color-odd {
+  background-color: #aae8e8;
+} */
+
+.user-item:nth-child(even) .default-user-avatar, li:nth-child(even)  .default-user-avatar {
+  background-color: #ffe3af;
+}
+
+.user-item:nth-child(odd) .default-user-avatar, li:nth-child(odd) .default-user-avatar {
+  background-color: #aae8e8;
+}
+
 .invoice--footer {
   padding-top: 0;
 }

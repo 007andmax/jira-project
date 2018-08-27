@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("typeaheadInputIcon",
-    [function () {
+    ['$rootScope', function ($rootScope) {
       return {
         restrict: 'A',
         template: '<span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">' +
@@ -47,6 +47,8 @@
             }
 
             input.click();
+
+            $rootScope.clearButtonPressed = true;
           };
 
           scope.toggleDropdown = function (e) {
