@@ -284,9 +284,9 @@
 
     <div class="col-md-6 shared-avatars">
       <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+        <div class="shared-avatar pointer" uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
           <img ng-if="(sharedUser.user && sharedUser.user.avatar)" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
-          <div class="default-user-avatar" ng-if="!(sharedUser.user && sharedUser.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+          <div class="default-user-avatar" ng-if="!(sharedUser.user && sharedUser.user.avatar)"  ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
             <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
             <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
           </div>
@@ -298,7 +298,7 @@
         </div>
       </div>
         <div class="tech-users avatars" >
-          <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+          <div class="shared-avatar pointer" uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"  ng-click="sharedUser.notify = !sharedUser.notify" ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
             <img ng-if="(sharedUser.user && sharedUser.user.avatar)" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
             <div class="default-user-avatar" ng-if="!(sharedUser.user && sharedUser.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
               <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
