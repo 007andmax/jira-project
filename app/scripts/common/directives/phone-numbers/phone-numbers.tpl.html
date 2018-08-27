@@ -128,16 +128,15 @@
         <input ng-if="!notRequired" type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
                hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
                execute-when-outfocused="onLostFocus()"
-               tabindex="20"
+               tabindex="{{qtTabIndex ? qtTabIndex : 20}}"
                ng-disabled="$eval(disabled)"
                required
                ng-change="getPhoneNumberError(phoneNumbers[0].number, phoneNumbersForm, 0)">
-        <s></s>
 
         <input ng-if="notRequired" type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
                hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
                execute-when-outfocused="onLostFocus()"
-               tabindex="20"
+               tabindex="{{qtTabIndex ? qtTabIndex : 20}}"
                ng-disabled="$eval(disabled)"
                ng-change="getPhoneNumberError(phoneNumbers[0].number, phoneNumbersForm, 0)">
 

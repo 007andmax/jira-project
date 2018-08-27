@@ -21,8 +21,24 @@
 
     </div>
 
-    <input class="form-validation pointer" type="text" ng-model="model.address"
+    <!-- <div ng-if="!qtTabIndex">
+      <input class="form-validation pointer" type="text" ng-model="model.address"
+             name="address" map-input make-dirty-on-blur>
+    </div>
+
+    <div ng-if="qtTabIndex">
+      <input class="form-validation pointer" type="text" ng-model="model.address"
+             name="address" map-input make-dirty-on-blur>
+    </div> -->
+
+    <input tabindex="{{ qtTabIndex ? qtTabIndex : 0 }}" class="form-validation pointer" type="text" ng-model="model.address"
            name="address" map-input make-dirty-on-blur>
+
+
+    <!-- <input ng-if="!qtTabIndex" class="form-validation pointer" type="text" ng-model="model.address"
+           name="address" map-input make-dirty-on-blur>
+    <input ng-if="qtTabIndex"  class="form-validation pointer" type="text" ng-model="model.address"
+           name="address" map-input make-dirty-on-blur> -->
   </div>
 
   <div class="form-row clearfix" ng-if="!onlyAddress">

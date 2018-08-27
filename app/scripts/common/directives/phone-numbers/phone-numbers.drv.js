@@ -22,6 +22,7 @@
           showTypeSelector: '<showTypeSelector',
           isRequired: '<isRequired',
           notRequired: '<notRequired',
+          qtTabIndex: '<qtTabIndex'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {

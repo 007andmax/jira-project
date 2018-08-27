@@ -153,6 +153,7 @@
         </div>
         <input placeholder="Write Company Name or Search Company" type="text" ng-model="editCompany.name"
                aria-expanded="true"
+               tabindex="8"
                ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
                is-uniq-validation validation-func="validateCompanyName">
       </div>
@@ -166,6 +167,8 @@
         <input custom-style="{'width':'100%'}" type="text" class="form-validation pointer"
                ng-model="editCompany.clientType"
                name="clientType"
+
+               tabindex="1"
                uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
                readonly qt-typeahead-async-show-on-focus placeholder="Select Company Type" required
                uib-tooltip="Current vendor has linked products"
@@ -184,11 +187,11 @@
         </div>
 
         <input placeholder="First Name" type="text" ng-minlength="2" ng-maxlength="15"
-               name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
+               tabindex="9" name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
       </div>
 
       <div class="col-md-4 time-zone">
-        <time-zone-autocomplete qt-required="false" address="editCompany.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
+        <time-zone-autocomplete qt-required="false" qt-tab-index="14" address="editCompany.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
       </div>
 
       <div class="col-md-4" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
@@ -202,6 +205,7 @@
                name="companyDomain"
                ng-required="true"
                required='true'
+               tabindex="2"
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
 
@@ -212,7 +216,7 @@
           <label class="control-label" ng-message="required">Last name is required.</label>
         </div>
         <input placeholder="Last Name" type="text" aria-expanded="true" ng-maxlength="15"
-               name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
+               tabindex="10" name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
       </div>
 
       <div class="col-md-4">
@@ -221,7 +225,7 @@
         <div uib-dropdown>
 
           <input class="form-validation has-dropdown" type="text" value="" uib-dropdown-toggle
-                 aria-expanded="false" readonly="readonly">
+                 aria-expanded="false" tabindex="15" readonly="readonly">
           <i class="icn-sm report-caret-icon"></i>
 
           <div class="subscribe-tokens">
@@ -283,6 +287,7 @@
 
         <input type="text" class="form-validation pointer" ng-model="editCompany.clientIndustry.name" name="industry"
                ng-maxlength="40"
+               tabindex="3"
                custom-style="{'width':'100%'}"
                uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
                autocomplete="off" qt-typeahead-async-show-on-focus smart-dropdown-menu-position=""
@@ -301,7 +306,7 @@
 
         <input class="form-validation" type="text" name="designation"
                aria-expanded="true" make-dirty-on-blur
-               ng-model="contact.designation" ng-minlength="3" ng-maxlength="30" placeholder="Designation">
+               tabindex="11" ng-model="contact.designation" ng-minlength="3" ng-maxlength="30" placeholder="Designation">
       </div>
       <div class="col-md-4" ng-class="{'has-error': isShowingErrors(companyForm, 'vendorPaymentTerms')}">
 
@@ -313,7 +318,7 @@
 
         <input custom-style="{'width':'100%'}" type="text" class="form-validation" ng-model="editCompany.paymentTerms"
                uib-typeahead="paymentTerm for paymentTerm in paymentTerms"
-               qt-typeahead-async-show-on-focus readonly placeholder="Select Payment Terms">
+               tabindex="16" qt-typeahead-async-show-on-focus readonly placeholder="Select Payment Terms">
         <div typeahead-input-icon="editCompany.paymentTerms"></div>
 
       </div>
@@ -342,6 +347,7 @@
              address-autocomplete
              template-page="header/create-new-entity/create-company"
              ng-model="editCompany.addresses[0]"
+             qt-tab-index="4"
              show-validation-messages="triedToSave"></div>
 
         <!-- <a class="create-new-link" href="#" ng-click="addAnotherLocation()">Add More</a> -->
@@ -353,6 +359,7 @@
            no-add-more="true"
            phone-numbers-edit
            is-restricted="true"
+           qt-tab-index="12"
            show-type-selector="true"
            country-code="{{editCompany.addresses[0].countryCode}}"
            ng-model="contact.phoneNumbers"
@@ -365,7 +372,7 @@
                name="defaultPaymentMethod"
                custom-style="{'width':'100%'}"
                uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
-               readonly qt-typeahead-async-show-on-focus placeholder="Select Payment Method">
+               tabindex="17" readonly qt-typeahead-async-show-on-focus placeholder="Select Payment Method">
         <div typeahead-input-icon="editCompany.paymentMethods"></div>
 
       </div>
@@ -378,7 +385,7 @@
           <div class="control-label" ng-message="maxlength">too large</div>
         </div>
 
-        <input class="form-validation" type="text" name="suiteNumber" autocomplete="off"
+        <input class="form-validation" tabindex="5" type="text" name="suiteNumber" autocomplete="off"
                ng-model="editCompany.addresses[0].suiteNumber" ng-maxlength="15" placeholder="Suite No">
       </div>
       <div class="col-md-2" style="padding: 0;width: 90px;margin-right: 15px;"
@@ -387,7 +394,7 @@
              ng-class="{'hide': !isShowingErrors(companyForm, 'zip')}">
           <div class="control-label" ng-message="maxlength">too large</div>
         </div>
-        <input class="form-validation" type="text" name="zip" ng-model="editCompany.addresses[0].postalCode"
+        <input class="form-validation" tabindex="6" type="text" name="zip" ng-model="editCompany.addresses[0].postalCode"
                placeholder="Zip" ng-maxlength="15">
       </div>
 
@@ -404,6 +411,7 @@
                make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
                ng-maxlength="128"
                required
+               tabindex="13"
                contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
                model-id="contact.id">
       </div>
@@ -415,7 +423,7 @@
                name="serviceType"
                custom-style="{'width':'100%'}"
                uib-typeahead="serviceType as serviceTypesMap[serviceType] for serviceType in serviceTypes"
-               readonly qt-typeahead-async-show-on-focus placeholder="Select Service Type">
+               tabindex="18" readonly qt-typeahead-async-show-on-focus placeholder="Select Service Type">
         <div typeahead-input-icon="editCompany.serviceTypes"></div>
 
       </div>
@@ -424,6 +432,7 @@
            ng-model="editCompany.addresses[0].phoneNumbers"
            is-try-to-save="triedToSave"
            is-restricted="true"
+           qt-tab-index="7"
            country-code="{{editCompany.addresses[0].countryCode}}"
            custom-placeholder="'Phone number'">
 
@@ -433,6 +442,7 @@
         <input type="text" class="form-validation has-dropdown pointer"
                placeholder="Lead by"
                name="leadBy"
+               tabindex="19"
                typeahead-input-formatter="getUserByID($model)"
                autocomplete="off" ng-model="editCompany.techLeadId"
                uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
