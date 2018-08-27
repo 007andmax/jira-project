@@ -15,6 +15,12 @@
 
         $scope.stopCache = Math.floor(Math.random() * 100000);
 
+        if ($rootScope.invoiceToShow) {
+          $scope.readedAt = $rootScope.invoiceToShow.readedAt;
+          $scope.paidOn = $rootScope.invoiceToShow.paidOn;
+          console.log($rootScope.invoiceToShow, 'toshow')
+        }
+
 
         ReceivableService.getInvoiceDataForPreview($rootScope.invoiceToShow.id, function (resp) {
           $scope.currentInvoice = resp;

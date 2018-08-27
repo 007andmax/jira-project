@@ -317,6 +317,7 @@
         <div class="invoice-create--header">
           <h3>New Invoice</h3>
           <div class="invoice-create--header__btn">
+            <button ng-if="!(invoiceTimer > 0)" class="btn btn-default" ng-click="goBackToList()">Back</button>
             <button ng-if="invoiceTimer > 0" class="btn btn-default" ng-click="togglePreview()">Edit</button>
             <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button">
               <button ng-if="!invoicePreview && !invoiceCreated"
