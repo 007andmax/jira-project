@@ -134,16 +134,16 @@
 
                 noAvatar = $compile(angular.element(noAvatar))($scope)[0].outerHTML;
                 // $scope.$apply();
-                console.log(noAvatar, 'NOAVAtAR')
+                // console.log(noAvatar, 'NOAVAtAR')
 
                 var avatar = suggestion.data.avatar ? isAvatar : noAvatar;
                 var image = new Image();
-                var index = $scope.usersToAssign.findIndex(function(el) {
+                var index = $scope.usersToAssign && $scope.usersToAssign.findIndex(function(el) {
                   var el = el.user ? el.user : el;
 
                   return el.id === suggestion.data.id
                 });
-                console.log(index)
+                // console.log(index)
                 image.src = avatarUrl;
                 return '<a href="javascript:void(0)" id="' + suggestion.data.id + '" class="dropdown-link"> \
                           ' + avatar + ' \
@@ -169,7 +169,7 @@
                 lastSelected: 'active'
               },
               onSelect: function (selection) {
-                console.log(selection, 'selections')
+                // console.log(selection, 'selections')
 
                 if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
                   inputElement.off('tokenfield:removedtoken');
