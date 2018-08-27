@@ -89,7 +89,7 @@
                 parentElement.css({'overflow': 'hidden'});
               }
             } else {
-              if((winHeight - position) < 250) {
+              if((winHeight - position) < 290) {
                 d.css({'top': 'auto'});
                 d.css({'bottom': '100%'});
                 if (!scope.noRestricted) {
