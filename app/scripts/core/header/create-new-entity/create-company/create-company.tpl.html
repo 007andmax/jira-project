@@ -158,7 +158,7 @@
         </div>
         <input placeholder="Write Company Name or Search Company" type="text" ng-model="editCompany.name"
                aria-expanded="true"
-               tabindex="8"
+               tabindex="1"
                ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
                is-uniq-validation validation-func="validateCompanyName">
       </div>
@@ -173,7 +173,7 @@
                ng-model="editCompany.clientType"
                name="clientType"
 
-               tabindex="1"
+               tabindex="2"
                uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
                readonly qt-typeahead-async-show-on-focus placeholder="Select Company Type" required
                uib-tooltip="Current vendor has linked products"
@@ -210,7 +210,7 @@
                name="companyDomain"
                ng-required="true"
                required='true'
-               tabindex="2"
+               tabindex="3"
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
 
@@ -292,7 +292,7 @@
 
         <input type="text" class="form-validation pointer" ng-model="editCompany.clientIndustry.name" name="industry"
                ng-maxlength="40"
-               tabindex="3"
+               tabindex="4"
                custom-style="{'width':'100%'}"
                uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
                autocomplete="off" qt-typeahead-async-show-on-focus smart-dropdown-menu-position=""
@@ -352,7 +352,7 @@
              address-autocomplete
              template-page="header/create-new-entity/create-company"
              ng-model="editCompany.addresses[0]"
-             qt-tab-index="4"
+             qt-tab-index="5"
              show-validation-messages="triedToSave"></div>
 
         <!-- <a class="create-new-link" href="#" ng-click="addAnotherLocation()">Add More</a> -->
@@ -390,7 +390,7 @@
           <div class="control-label" ng-message="maxlength">too large</div>
         </div>
 
-        <input class="form-validation" tabindex="5" type="text" name="suiteNumber" autocomplete="off"
+        <input class="form-validation" tabindex="6" type="text" name="suiteNumber" autocomplete="off"
                ng-model="editCompany.addresses[0].suiteNumber" ng-maxlength="15" placeholder="Suite No">
       </div>
       <div class="col-md-2" style="padding: 0;width: 90px;margin-right: 15px;"
@@ -399,7 +399,7 @@
              ng-class="{'hide': !isShowingErrors(companyForm, 'zip')}">
           <div class="control-label" ng-message="maxlength">too large</div>
         </div>
-        <input class="form-validation" tabindex="6" type="text" name="zip" ng-model="editCompany.addresses[0].postalCode"
+        <input class="form-validation" tabindex="7" type="text" name="zip" ng-model="editCompany.addresses[0].postalCode"
                placeholder="Zip" ng-maxlength="15">
       </div>
 
@@ -437,7 +437,7 @@
            ng-model="editCompany.addresses[0].phoneNumbers"
            is-try-to-save="triedToSave"
            is-restricted="true"
-           qt-tab-index="7"
+           qt-tab-index="8"
            country-code="{{editCompany.addresses[0].countryCode}}"
            custom-placeholder="'Phone number'">
 
