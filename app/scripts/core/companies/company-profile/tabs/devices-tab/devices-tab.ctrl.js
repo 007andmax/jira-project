@@ -44,6 +44,15 @@
           }
         });
 
+
+        if ($scope.agent.OneTimeConnectionData) {
+          $scope.agent.OneTimeConnectionData = $scope.agent.OneTimeConnectionData.map(function(el) {
+            el.agentConnectedAt = el.starteddAt;
+
+            return el;
+          })
+        }
+
         $scope.openDevicesDetails = false;
         $scope.showDeviceLabelEditButtom = false;
         $scope.showDeviceLabelEditForm = false;
@@ -254,6 +263,7 @@
 
         $scope.$watch('agent.Online', function(value) {
           if(value) {
+
             $scope.agent.timing.online = $scope.getMillisecondsFromTimeString(value);
             $scope.agent.timing.uptimeForOrdering = $scope.agent.timing.online;
           }
@@ -261,10 +271,16 @@
 
         $scope.$watch('agent.offlineSince', function(value) {
           if(value) {
-            $scope.agent.timing.offline = (Date.now() - value);
+
+            var newValue = moment(value).valueOf();
+
+            $scope.agent.timing.offline = (Date.now() - newValue);
+
             $scope.agent.timing.uptimeForOrdering = $scope.agent.timing.offline;
           }
         });
+
+
 
         // $scope.$watch('agent.online', function(value) {
         //   if(value === true) {
@@ -309,7 +325,19 @@
 
 
 
-        $scope.returnTimeFormatForPage = function(time) {
+        $scope.returnTimeFormatForPage = function(time, timeToNow) {
+
+          // console.log(time, 'TIME')
+          if (typeof time === 'string') {
+            time = moment(time).valueOf();
+          }
+
+          if (timeToNow) {
+            var currentTimeZone = new Date().getTimezoneOffset();
+            var minutesDiff = -(currentTimeZone);
+            time = Date.now() - (time + (minutesDiff * 60 * 1000));
+          }
+
           var days = '';
           var hours = '';
           var minutes = '';

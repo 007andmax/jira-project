@@ -1115,6 +1115,8 @@
           if(storage.devices[companyId] && storage.devices[companyId].length) {
             $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
               if(resp) {
+
+                console.log(resp, 'resp resp resp')
                 for(var i=0; i<storage.devices[companyId].length; i++) {
                   storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
                   storage.devices[companyId][i].label = resp.data[companyId][i].label;
@@ -1124,17 +1126,18 @@
                   if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
                     for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
                       var connection = {
-                        startedAt: resp.data[companyId][i].remoteSessions[r].createdAt,
+                        startedAt: resp.data[companyId][i].remoteSessions[r].createdAt || resp.data[companyId][i].remoteSessions[r].startedAt,
                         id: resp.data[companyId][i].remoteSessions[r].id,
-                        sessionId: resp.data[companyId][i].remoteSessions[r].sessionId
+                        sessionId: resp.data[companyId][i].remoteSessions[r].sessionId || resp.data[companyId][i].remoteSessions[r].id,
+                        agentConnectedAt: resp.data[companyId][i].remoteSessions[r].createdAt || resp.data[companyId][i].remoteSessions[r].startedAt,
                       };
-                      var user = UsersService.getOneById(resp.data[companyId][i].remoteSessions[r].performer);
+                      var user = UsersService.getOneById(resp.data[companyId][i].remoteSessions[r].userId);
                       connection.performer = user;
                       storage.devices[companyId][i].OneTimeConnectionData.push(connection);
                     }
                   }
                   if(!resp.data[companyId][i].online) {
-                    storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineSince;
+                    storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineAt;
                   }
                 }
               }
