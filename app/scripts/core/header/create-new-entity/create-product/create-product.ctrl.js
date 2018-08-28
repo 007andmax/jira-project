@@ -38,12 +38,27 @@
       })
 
       var origin = savedState.item;
+
+      setTimeout(function() {
+        console.log($scope.editProduct.taxes)
+      }, 5000)
+
+      console.log('saved state STATE', savedState, origin)
       if (savedState.type === 'product' && origin) {
         if (origin.name) {
           savedState.item = { category: origin };
         }
 
+
+
         $scope.editProduct = angular.copy(origin);
+        $scope.editProduct.taxes = origin.taxIds.map(function(taxId) {
+          return $scope.taxes.find(function(el) {
+            return el.id === taxId;
+          })
+        }).filter(function(el) { return el; })
+
+        console.log($scope.editProduct.taxes, 'origin')
         var company = $scope.editProduct.company;
 
         if ($scope.editProduct.category && $scope.editProduct.category.default) {
