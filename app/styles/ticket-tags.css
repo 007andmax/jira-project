@@ -64,11 +64,8 @@
   border: solid 1px #edf2f6;
 
   font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
+
   line-height: 1.33;
-  letter-spacing: normal;
   color: #4f5f79;
 
   display: flex !important;
