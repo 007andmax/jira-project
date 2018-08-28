@@ -100,17 +100,16 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="pull-right">
+        <div class="pull-right" style="display: flex; align-items: center;">
           <div
             qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
             qt-popover-position="bottom-left-align-dashboard" custom-disabled="{{ !allowAgentInstall }}"
             style="display: inline-block;">
 
-            <button class="company-download-icn"
-                    uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"
-                    qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">
-
-            </button>
+            <div qt-popover-trigger class="download-agent-company pointer">
+              <span>Download Agent</span>
+              <img src="./images/new-icons/download.svg"></img>
+            </div>
           </div>
           <button class="company-edit-icn" uib-tooltip="edit" tooltip-popup-delay="2000"
                   ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"

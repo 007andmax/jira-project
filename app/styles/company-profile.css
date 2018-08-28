@@ -109,6 +109,37 @@
 
 }
 
+
+.download-agent-company {
+  width: 169px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #2ec866;
+  border: solid 1px #189947;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* font-family: Graphik; */
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.download-agent-company img {
+  width: 15px;
+  height: 27px;
+
+  color: white;
+
+  margin-left: 12px;
+}
+
 .company-logo-icn,
 .company-download-icn,
 .company-edit-icn,

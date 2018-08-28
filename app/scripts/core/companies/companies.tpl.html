@@ -33,7 +33,7 @@
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
             </span>
           </div>
-          <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
+          <div class="col-xs-1" ng-click="setOrderByCompanies('phone')">
             <span class="sort-span">
             Contact No.
               <i class="icn-sm sort-icon icn-sort"
@@ -47,7 +47,7 @@
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
             </span>
           </div>
-          <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
+          <div class="col-xs-1" ng-click="setOrderByCompanies('contact')">
             <span class="sort-span">
               Primary Contact
               <i class="icn-sm sort-icon icn-sort"
@@ -176,13 +176,13 @@
           <span style="display: flex;">{{ location }}</span>
         </div>
       </div>
-      <div class="col-xs-2">
+      <div class="col-xs-1">
         <span>{{ primaryPhone.number || '' }}</span>
       </div>
       <div class="col-xs-2" style="word-break: break-all">
         <span>{{ primaryContact.primaryEmail }}</span>
       </div>
-      <div class="col-xs-2">
+      <div class="col-xs-1">
         <span>{{ getUserName(primaryContact) }}</span>
       </div>
       <div class="col-xs-1">
@@ -246,11 +246,16 @@
           opened-from-list="true"
           uib-dropdown-toggle
           ng-click="downloadAgent($event)">
-          <button class="company-download-icn"
+          <!-- <button class="company-download-icn"
                   uib-tooltip="{{ 'Download Agent' }}"
                   qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">
 
-          </button>
+          </button> -->
+
+          <div class="download-agent-company pointer">
+            <span>Download Agent</span>
+            <img src="./images/new-icons/download.svg"></img>
+          </div>
         </div>
 
         <div class="wrapper container dropdown-menu" ng-click="$event.stopPropagation()" dropdown-menu ng-controller="quicktech.core.companies.downloadAgent">
