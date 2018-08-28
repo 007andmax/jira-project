@@ -131,6 +131,10 @@
   color: #ffffff;
 }
 
+.dropdown-wo-max-height .dropdown-menu {
+  max-height: none;
+}
+
 .download-agent-company img {
   width: 15px;
   height: 27px;

@@ -47,14 +47,38 @@
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
             </span>
           </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('contact')">
+          <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
             <span class="sort-span">
               Primary Contact
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
             </span>
           </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
+
+          <div class="col-xs-2">
+            <div class="col-xs-4" ng-click="setOrderByCompanies('tickets')">
+              <span class="sort-span">
+                Tickets
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
+              </span>
+            </div>
+            <div class="col-xs-4" ng-click="setOrderByCompanies('devices')">
+              <span class="sort-span">
+                Devices
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
+              </span>
+            </div>
+            <div class="col-xs-4" ng-click="setOrderByCompanies('users')">
+              <span class="sort-span">
+                Users
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
+              </span>
+            </div>
+          </div>
+          <!-- <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
             <span class="sort-span">
               Tickets
               <i class="icn-sm sort-icon icn-sort"
@@ -74,7 +98,7 @@
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
             </span>
-          </div>
+          </div> -->
         </li>
       </ul>
     </div>
@@ -182,36 +206,40 @@
       <div class="col-xs-2" style="word-break: break-all">
         <span>{{ primaryContact.primaryEmail }}</span>
       </div>
-      <div class="col-xs-1">
+      <div class="col-xs-2">
         <span>{{ getUserName(primaryContact) }}</span>
       </div>
-      <div class="col-xs-1">
-        <div create-new-entity="ticket" company-id="{{ company.id }}"
-             style="margin-left: 15px; display: inline-block;" custom-disabled="{{ company.deletedAt }}"
-             uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
-          <span><i class="nav-icon icon-lg icn-unassigned"></i></span>
-          <span class="badge badge-primary-outline list-company-badge">
-            {{ company.companyStatistic.ticketsSubmitted || '0' }}
-          </span>
+
+      <div class="col-xs-2">
+        <div class="col-xs-4">
+          <div create-new-entity="ticket" company-id="{{ company.id }}"
+               style="margin-left: 15px; display: inline-block;" custom-disabled="{{ company.deletedAt }}"
+               uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
+            <span><i class="nav-icon icon-lg icn-unassigned"></i></span>
+            <span class="badge badge-primary-outline list-company-badge">
+              {{ company.companyStatistic.ticketsSubmitted || '0' }}
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div style="display: inline-block;margin-left: 15px;">
+            <span><i class="icon-lg icon-tab-devices" style="margin: 0;"></i></span>
+            <span class="badge badge-primary-outline list-company-badge">
+              {{ devicesCount[company.id].all || '0' }}
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div ng-click="openCompany(company, 'users')"
+               style="display: inline-block;margin-left: 15px;" stop-propagation="click">
+            <span><i class="nav-icon icon-lg icon-user-black" style="margin: 0;"></i></span>
+            <span class="badge badge-primary-outline list-company-badge">
+              {{ filterArchived(companyComponentsCount.users, company).length || '0' }}
+            </span>
+          </div>
         </div>
       </div>
-      <div class="col-xs-1">
-        <div style="display: inline-block;margin-left: 15px;">
-          <span><i class="icon-lg icon-tab-devices" style="margin: 0;"></i></span>
-          <span class="badge badge-primary-outline list-company-badge">
-            {{ devicesCount[company.id].all || '0' }}
-          </span>
-        </div>
-      </div>
-      <div class="col-xs-1">
-        <div ng-click="openCompany(company, 'users')"
-             style="display: inline-block;margin-left: 15px;" stop-propagation="click">
-          <span><i class="nav-icon icon-lg icon-user-black" style="margin: 0;"></i></span>
-          <span class="badge badge-primary-outline list-company-badge">
-            {{ filterArchived(companyComponentsCount.users, company).length || '0' }}
-          </span>
-        </div>
-      </div>
+
 
       <!-- <div uib-dropdown  smart-dropdown-menu-position="dropdown-menu">
         <div uib-dropdown-toggle>
@@ -239,7 +267,7 @@
           </li>
         </ul>
       </div> -->
-      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" to-left='true' style="position: absolute;right: 15px;">
+      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="dropdown-wo-max-height" to-left='true' style="position: absolute;right: 15px;">
         <div
 
           style="display: inline-block;"
