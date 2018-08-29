@@ -53,6 +53,8 @@
           })
         }
 
+        console.log($scope.agent, 'AGENT')
+
         $scope.openDevicesDetails = false;
         $scope.showDeviceLabelEditButtom = false;
         $scope.showDeviceLabelEditForm = false;
@@ -296,8 +298,10 @@
             for(var i=0; i<$scope.agent.OneTimeConnectionData.length; i++) {
               if($scope.agent.OneTimeConnectionData[i].startedAt > Date.now()) {
                 $scope.agent.OneTimeConnectionData[i].agentConnectedAt = 0;
+                $scope.agent.OneTimeConnectionData[i].createdAt = 0;
               } else {
                 $scope.agent.OneTimeConnectionData[i].agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData[i].startedAt);
+                $scope.agent.OneTimeConnectionData[i].createdAt = ( Date.now() - $scope.agent.OneTimeConnectionData[i].startedAt)
               }
             }
           }
