@@ -48,6 +48,8 @@
               $scope.cancel();
             });
           } else {
+
+            console.log('something happen to tag ********************888')
             TagsService.save($scope.editedTag, function (resp) {
               $scope.cancel();
             });

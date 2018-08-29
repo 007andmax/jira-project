@@ -6,7 +6,7 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TagsService', ['$http', 'RealTimeService', 'Utils', function ($http, RealTimeService, Utils) {
+  services.factory('TagsService', ['$http', 'RealTimeService', 'Utils', '$rootScope', function ($http, RealTimeService, Utils, $rootScope) {
 
     var tagsColors = [];
 
@@ -42,6 +42,12 @@
       if (!ticketId) {
         throw 'ticketId is required!';
       }
+
+      ticketTags.forEach(function(el) {
+        if (!el.id) {
+          $rootScope.newTagHasCreated = true;
+        }
+      })
 
       var future = $http({
         url: '/tags?ticketId=' + ticketId,
@@ -168,6 +174,10 @@
       }
 
       var future = $http.post('/tags', newTag);
+
+      console.log('new tag has been created')
+
+      $rootScope.newTagHasCreated = true;
 
       Utils.handleCallback(future, callback);
     }

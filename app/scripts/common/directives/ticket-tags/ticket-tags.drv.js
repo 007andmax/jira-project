@@ -32,6 +32,19 @@
                 $scope.result = resp;
                 $scope.allTags = resp;
               });
+
+              $scope.$watch(function() {
+                return $rootScope.newTagHasCreated;
+              }, function(val) {
+                if (val) {
+                  $rootScope.newTagHasCreated = false;
+                  console.log('tag has been created')
+                  TagsService.search('', function (resp) {
+                    $scope.result = resp;
+                    $scope.allTags = resp;
+                  });
+                }
+              })
               $document.on('click', $scope.saveTags);
               $scope.$on('$destroy', function () {
                 $document.off('click', $scope.saveTags);
