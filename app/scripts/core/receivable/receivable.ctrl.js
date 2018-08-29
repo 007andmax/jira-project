@@ -27,6 +27,15 @@
 
         $scope.showInvoice = function(invoice, goBack) {
           $scope.isInvoiceShown = goBack ? false : true;
+
+          if (goBack) {
+
+            setTimeout(function() {
+              window.scrollTo(0, 10);
+              window.scrollTo(0, 0);
+            }, 0)
+
+          }
           $rootScope.invoiceToShow = invoice;
         }
 
