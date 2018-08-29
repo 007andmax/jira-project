@@ -295,13 +295,15 @@
         $scope.$watch('agent.OneTimeConnectionData.length', function(value) {
           if(value || value === 0) {
 
+            $scope.indexesWoGMT = [];
+
             for(var i=0; i<$scope.agent.OneTimeConnectionData.length; i++) {
-              if($scope.agent.OneTimeConnectionData[i].startedAt > Date.now()) {
+              if(moment($scope.agent.OneTimeConnectionData[i].startedAt).valueOf() > Date.now()) {
                 $scope.agent.OneTimeConnectionData[i].agentConnectedAt = 0;
-                $scope.agent.OneTimeConnectionData[i].createdAt = 0;
+
+                $scope.indexesWoGMT.push(i);
               } else {
-                $scope.agent.OneTimeConnectionData[i].agentConnectedAt = ( Date.now() - $scope.agent.OneTimeConnectionData[i].startedAt);
-                $scope.agent.OneTimeConnectionData[i].createdAt = ( Date.now() - $scope.agent.OneTimeConnectionData[i].startedAt)
+                $scope.agent.OneTimeConnectionData[i].agentConnectedAt = ( Date.now() - moment($scope.agent.OneTimeConnectionData[i].startedAt).valueOf());
               }
             }
           }
@@ -329,17 +331,22 @@
 
 
 
-        $scope.returnTimeFormatForPage = function(time, timeToNow) {
-
-          // console.log(time, 'TIME')
+        $scope.returnTimeFormatForPage = function(time, timeToNow, index) {
           if (typeof time === 'string') {
             time = moment(time).valueOf();
           }
 
-          if (timeToNow) {
+          if (timeToNow && index !== undefined && $scope.indexesWoGMT) {
+            var isGMT = !($scope.indexesWoGMT.indexOf(index) !== -1);
+          }
+
+
+          if (timeToNow && isGMT) {
             var currentTimeZone = new Date().getTimezoneOffset();
             var minutesDiff = -(currentTimeZone);
-            time = Date.now() - (time + (minutesDiff * 60 * 1000));
+            time = (time - (minutesDiff * 60 * 1000));
+
+
           }
 
           var days = '';
@@ -367,6 +374,7 @@
             minutes = 0;
             seconds =  Math.floor((time - (days*86400000) - (hours*3600000) - (minutes*60000))/1000);
           }
+
           return {
             days: days,
             hours: hours,

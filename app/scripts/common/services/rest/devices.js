@@ -312,6 +312,9 @@
 
             } else if(newChange.action === 'ONE_TIME_DELETED') {
 
+
+              console.log("REMOVE CONNECTION", newChange)
+
               removeRemoteConnectionSessionToDevice(newChange, devices);
             }
           })
