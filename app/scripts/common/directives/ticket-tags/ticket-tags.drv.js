@@ -31,7 +31,12 @@
               TagsService.search('', function (resp) {
                 $scope.result = resp;
                 $scope.allTags = resp;
+                $scope.lastResult = resp;
               });
+
+
+
+
 
               $scope.$watch(function() {
                 return $rootScope.newTagHasCreated;
@@ -45,6 +50,31 @@
                   });
                 }
               })
+
+              var menu = $element.find('.dropdown-menu');
+
+              menu.on('scroll', scrollHandler)
+
+
+              function scrollHandler(e) {
+                // if (!$scope.loadingOrRendering) {
+                  var scrollTop = $(e.target).scrollTop(),
+                    isNeedToLoadMoreTickets = scrollTop + menu[0].clientHeight >= menu[0].scrollHeight - 100;
+
+                  if (isNeedToLoadMoreTickets) {
+                    $rootScope.shouldDownloadNewTags = true;
+                  }
+
+                  console.log(scrollTop, isNeedToLoadMoreTickets, menu[0], menu[0].scrollHeight, 'truee')
+
+                  // if (isNeedToLoadMoreTickets && (!scope.tickets || scope.tickets.length < scope.globalSearch.count)) {
+                  //   $scope.loadingOrRendering = true;
+                  //   TicketsService.loadMore(lastListType);
+                  // }
+                // }
+              }
+
+
               $document.on('click', $scope.saveTags);
               $scope.$on('$destroy', function () {
                 $document.off('click', $scope.saveTags);
@@ -54,7 +84,8 @@
           controller: function ($scope) {
             if (!$scope.readonlyTags) {
               var lastQuery = '',
-                tagsChanged = false;
+                tagsChanged = false,
+                areNewTagsDownloading;
               $scope.$watch('newTag', searchTag);
               $scope.addTag = function (value) {
                 if (typeof value === 'string') {
@@ -84,10 +115,23 @@
                 $scope.newTag = '';
                 lastQuery = '';
               };
+
+
               $scope.removeTag = function (index) {
                 $scope.ticketTags.splice(index, 1);
                 tagsChanged = true;
               };
+
+              $scope.$watch(function() {
+                return $rootScope.shouldDownloadNewTags;
+              }, function(val) {
+                if (val && !areNewTagsDownloading) {
+                  $rootScope.shouldDownloadNewTags = false;
+
+                  searchTag(lastQuery, true, $scope.result.length);
+                }
+              })
+
               $scope.saveTags = function () {
                 if (tagsChanged && !$scope.tagFilter) {
                   $scope.saving = true;
@@ -116,12 +160,30 @@
                 }
               };
             }
-            function searchTag(query) {
+            function searchTag(query, forceLoad, offset) {
               // console.log(query, "QUEYR")
-              if (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === ''))) {
+              if (forceLoad || (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === '')))) {
+                areNewTagsDownloading = true;
+
+                if (offset) {
+                  query += '&offset=' + offset;
+                }
+
                 TagsService.search(query, function (resp) {
-                  $scope.result = resp;
+
+                  if (offset) {
+                    resp.forEach(function(el) {
+                      $scope.result.push(el);
+                    });
+                  } else {
+                    $scope.result = resp;
+                  }
+
+                  $scope.lastResult = resp;
                   lastQuery = query;
+                  areNewTagsDownloading = false;
+
+                  console.log($scope.result, 'result')
                 });
               }
             }
