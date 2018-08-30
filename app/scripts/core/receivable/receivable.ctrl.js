@@ -21,6 +21,9 @@
         // });
 
 
+        console.log("SFDFDSFF")
+
+
         $scope.filterInvoicesBy = function(val) {
           console.log('filter', val)
         }
@@ -81,65 +84,109 @@
           $scope.invoiceDateFilter = {startDate: null, endDate: null};
         };
 
-        $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
-          $scope.totalCollectedLast30Days = 0;
-          for (var i = 0; i < $scope.receivableGraphData.length; i++) {
-            $scope.totalCollectedLast30Days += $scope.receivableGraphData[i].receivedOnDay;
-          }
-        });
+        // $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
+        //   $scope.totalCollectedLast30Days = 0;
+        //   for (var i = 0; i < $scope.receivableGraphData.length; i++) {
+        //     $scope.totalCollectedLast30Days += $scope.receivableGraphData[i].receivedOnDay;
+        //   }
+        // });
 
-        $scope.$watch(function() {
-          return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
-        }, function (resp) {
+        if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
+          $scope.$watch(function() {
+            return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
+          }, function (resp) {
 
-          if (resp) {
-            resp = $rootScope.uploadedReceivable;
-          } else {
-            return;
-          }
+            if (resp) {
+              resp = $rootScope.uploadedReceivable;
+            } else {
+              return;
+            }
+            var invoicesData = $scope.receivableInvoicesData = resp;
+            globalSearch.count = $scope.receivableInvoicesData.list.length;
 
+            $scope.totalReceivables = 0;
+            $scope.receivableCompanies = [];
+            $scope.invoiceToSent = {};
 
-          console.log(resp, 'RESP')
+            for (var id in invoicesData.companies) {
+              var invoices = invoicesData.companies[id];
+              $scope.totalSum.companies[id] = 0;
 
-          var invoicesData = $scope.receivableInvoicesData = resp;
-          globalSearch.count = $scope.receivableInvoicesData.list.length;
+              for (var i = 0; i < invoices.length; i++) {
+                var invoice = invoices[i];
 
-          $scope.totalReceivables = 0;
-          $scope.receivableCompanies = [];
-          $scope.invoiceToSent = {};
+                $scope.totalSum.invoices[invoice.id] = invoice.sum;
+                $scope.totalSum.companies[id] += invoice.sum;
+              }
 
-          for (var id in invoicesData.companies) {
-            var invoices = invoicesData.companies[id];
-            $scope.totalSum.companies[id] = 0;
-
-            for (var i = 0; i < invoices.length; i++) {
-              var invoice = invoices[i];
-
-              $scope.totalSum.invoices[invoice.id] = invoice.sum;
-              $scope.totalSum.companies[id] += invoice.sum;
+              $scope.totalReceivables += $scope.totalSum.companies[id];
+              $scope.receivableCompanies.push(CompaniesService.getOneById(id));
             }
 
-            $scope.totalReceivables += $scope.totalSum.companies[id];
-            $scope.receivableCompanies.push(CompaniesService.getOneById(id));
-          }
+            if ($scope.mode === 'group-by-company') {
 
-          if ($scope.mode === 'group-by-company') {
-
-            for (var companyId in invoicesData.companies) {
-              $scope.invoiceToSent[companyId] = {
-                checked: false,
-                invoices: {}
-              };
+              for (var companyId in invoicesData.companies) {
+                $scope.invoiceToSent[companyId] = {
+                  checked: false,
+                  invoices: {}
+                };
+              }
+            } else {
+              $scope.invoiceToSent.invoices = {};
             }
-          } else {
-            $scope.invoiceToSent.invoices = {};
-          }
 
-          if (!resp.list.length) {
-            $scope.loadingInProgress = false;
-          }
+            if (!resp.list.length) {
+              $scope.loadingInProgress = false;
+            }
 
-        })
+          })
+        } else {
+
+          setTimeout(function() {
+            var resp = $rootScope.uploadedReceivable;
+
+            var invoicesData = $scope.receivableInvoicesData = resp;
+            globalSearch.count = $scope.receivableInvoicesData.list.length;
+
+            $scope.totalReceivables = 0;
+            $scope.receivableCompanies = [];
+            $scope.invoiceToSent = {};
+
+            for (var id in invoicesData.companies) {
+              var invoices = invoicesData.companies[id];
+              $scope.totalSum.companies[id] = 0;
+
+              for (var i = 0; i < invoices.length; i++) {
+                var invoice = invoices[i];
+
+                $scope.totalSum.invoices[invoice.id] = invoice.sum;
+                $scope.totalSum.companies[id] += invoice.sum;
+              }
+
+              $scope.totalReceivables += $scope.totalSum.companies[id];
+              $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+            }
+
+            if ($scope.mode === 'group-by-company') {
+
+              for (var companyId in invoicesData.companies) {
+                $scope.invoiceToSent[companyId] = {
+                  checked: false,
+                  invoices: {}
+                };
+              }
+            } else {
+              $scope.invoiceToSent.invoices = {};
+            }
+
+            if (!resp.list.length) {
+              $scope.loadingInProgress = false;
+            }
+          }, 0)
+
+        }
+
+
 
         // ReceivableService.getReceivableInvoicesData($scope, function (resp) {
         //
