@@ -88,7 +88,18 @@
           }
         });
 
-        ReceivableService.getReceivableInvoicesData($scope, function (resp) {
+        $scope.$watch(function() {
+          return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
+        }, function (resp) {
+
+          if (resp) {
+            resp = $rootScope.uploadedReceivable;
+          } else {
+            return;
+          }
+
+
+          console.log(resp, 'RESP')
 
           var invoicesData = $scope.receivableInvoicesData = resp;
           globalSearch.count = $scope.receivableInvoicesData.list.length;
@@ -128,7 +139,49 @@
             $scope.loadingInProgress = false;
           }
 
-        });
+        })
+
+        // ReceivableService.getReceivableInvoicesData($scope, function (resp) {
+        //
+        //   var invoicesData = $scope.receivableInvoicesData = resp;
+        //   globalSearch.count = $scope.receivableInvoicesData.list.length;
+        //
+        //   $scope.totalReceivables = 0;
+        //   $scope.receivableCompanies = [];
+        //   $scope.invoiceToSent = {};
+        //
+        //   for (var id in invoicesData.companies) {
+        //     var invoices = invoicesData.companies[id];
+        //     $scope.totalSum.companies[id] = 0;
+        //
+        //     for (var i = 0; i < invoices.length; i++) {
+        //       var invoice = invoices[i];
+        //
+        //       $scope.totalSum.invoices[invoice.id] = invoice.sum;
+        //       $scope.totalSum.companies[id] += invoice.sum;
+        //     }
+        //
+        //     $scope.totalReceivables += $scope.totalSum.companies[id];
+        //     $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+        //   }
+        //
+        //   if ($scope.mode === 'group-by-company') {
+        //
+        //     for (var companyId in invoicesData.companies) {
+        //       $scope.invoiceToSent[companyId] = {
+        //         checked: false,
+        //         invoices: {}
+        //       };
+        //     }
+        //   } else {
+        //     $scope.invoiceToSent.invoices = {};
+        //   }
+        //
+        //   if (!resp.list.length) {
+        //     $scope.loadingInProgress = false;
+        //   }
+        //
+        // });
 
         $scope.$watch(function () {
           return $stateParams.mode;

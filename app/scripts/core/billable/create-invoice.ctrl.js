@@ -88,7 +88,7 @@
             $scope.globalNote = data.filter(function(el) {
               return el.noteType === 'GLOBAL';
             })[0];
-            
+
 
             $scope.globalNote.line = $scope.globalNote.line1 + ($scope.globalNote.line2 || '');
           }
@@ -571,6 +571,7 @@
               $scope.invoiceCreated = true;
 
               $rootScope.isInvoiceCreated = true;
+              $rootScope.shouldUpdateReceivable = true;
             })
           }
         };

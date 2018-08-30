@@ -6,10 +6,10 @@
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
-      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location', 'ReceivableService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
                 TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-                CustomStorageService, UsersService, $timeout, $location) {
+                CustomStorageService, UsersService, $timeout, $location, ReceivableService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -640,6 +640,13 @@
           return $state.current.url + ' ' + $state.current.name;
         }, function (value) {
           if (value && value !== '^ ') {
+
+            console.log('url changes changes changes')
+
+            if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
+              uploadReceivable();
+            }
+
             $scope.openedCategory = getOpenedCategory(value);
 
             if ($scope.openedCategory) {
@@ -662,6 +669,11 @@
 
         $scope.toggleLeftPanel = function (section, ifIconPart) {
           $scope.clearAllFilters()
+
+          if (section === 'billing') {
+            uploadReceivable();
+          }
+
           if (ifIconPart) {
             deactivateAllCompanyProfileTabs();
             $scope.openedCategory = section;
@@ -676,6 +688,26 @@
             }
           }
         };
+
+
+
+        function uploadReceivable() {
+          ReceivableService.getReceivableInvoicesData($scope, function(resp) {
+            $rootScope.uploadedReceivable = resp;
+
+            console.log('uploaded receivable', resp)
+          })
+        }
+
+        $scope.$watch(function() {
+          return $rootScope.shouldUpdateReceivable;
+        }, function(val) {
+          if (val) {
+            $rootScope.shouldUpdateReceivable = false;
+
+            uploadReceivable();
+          }
+        })
 
         $scope.showLeftArrowToggleLeftPanel = function () {
           return window.outerWidth <= 1024
