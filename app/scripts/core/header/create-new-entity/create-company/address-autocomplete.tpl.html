@@ -1,4 +1,4 @@
-<div class="clearfix" ng-form="addressForm">
+<div class="clearfix" ng-form="addressForm" add-on-focus>
   <div class="form-group"
        ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
 
@@ -21,8 +21,14 @@
 
     </div>
 
-    <input class="form-validation pointer" type="text" ng-model="model.address"
+
+    <input ng-if="!activePlaceholder" class="form-validation pointer" type="text" ng-model="model.address"
            name="address" map-input make-dirty-on-blur>
+
+    <input ng-if="activePlaceholder" placeholder="" class="form-validation pointer" type="text" ng-model="model.address"
+           name="address" map-input make-dirty-on-blur>
+    <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
+
   </div>
 
   <div class="form-row clearfix" ng-if="!onlyAddress">

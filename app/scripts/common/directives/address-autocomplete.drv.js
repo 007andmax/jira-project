@@ -15,7 +15,8 @@
             focusAddress: '=?',
             isAddressRequired: '=?',
             useAlternativeMap: '@?',
-            onlyAddress: '<onlyAddress'
+            onlyAddress: '<onlyAddress',
+            activePlaceholder: '<activePlaceholder'
           },
           templateUrl: function (elem, attr) {
             return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';
