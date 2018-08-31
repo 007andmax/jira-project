@@ -151,7 +151,7 @@
         </div> -->
       </div>
 
-      <div class="col-md-8 google-plus" add-on-focus >
+      <div class="col-md-8 google-plus" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
         <div ng-messages="companyForm.companyName.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
           <label class="control-label" ng-message="required">Company name is required.</label>
@@ -170,7 +170,7 @@
       <div class="col-md-4 alyosha">Contact Detail</div>
       <div class="col-md-4 alyosha">Settings</div>
 
-      <div class="col-md-4" add-on-focus>
+      <div class="col-md-4" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
         <div ng-messages="companyForm.clientType.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
           <label class="control-label" ng-message="required">Client Type is required.</label>
@@ -188,7 +188,7 @@
         <!-- <input placeholder="Select Company Type" type="text"> -->
       </div>
 
-      <div class="col-md-4" add-on-focus>
+      <div class="col-md-4" add-on-focus ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'firstName')}">
         <div ng-messages="companyForm.firstName.$error"
              ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
           <label class="control-label" ng-message="required">First name is required.</label>

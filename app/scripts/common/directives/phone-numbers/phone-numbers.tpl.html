@@ -115,8 +115,8 @@
   </div>
 </div>
 
-<div ng-form="phoneNumbersForm" name="forms.phoneNumbersForm" ng-if="isRestricted" add-on-focus>
-      <div class="custom-phone-number" ng-class="{'has-error': phoneNumbers[0].error}">
+<div ng-form="phoneNumbersForm" name="forms.phoneNumbersForm" ng-if="isRestricted">
+      <div class="custom-phone-number" ng-class="{'has-error': phoneNumbers[0].error}" add-on-focus>
         <div ng-if="phoneNumbers[0].error">
           <label class="control-label">{{ phoneNumbers[0].error }}</label>
         </div>

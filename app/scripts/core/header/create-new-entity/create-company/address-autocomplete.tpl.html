@@ -22,10 +22,7 @@
     </div>
 
 
-    <input ng-if="!activePlaceholder" class="form-validation pointer" type="text" ng-model="model.address"
-           name="address" map-input make-dirty-on-blur>
-
-    <input ng-if="activePlaceholder" placeholder="" class="form-validation pointer" type="text" ng-model="model.address"
+    <input placeholder="'{{ activePlaceholder ? '' : 'Enter a location' }}" class="form-validation pointer" type="text" ng-model="model.address"
            name="address" map-input make-dirty-on-blur>
     <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
 
