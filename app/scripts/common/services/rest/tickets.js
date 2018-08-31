@@ -874,7 +874,7 @@
 
           // console.log(storage, "CREATED")
 
-          storage.ticketsQuantityMap.ALL = 1000000000;
+          // storage.ticketsQuantityMap.ALL = 1000000000;
 
           // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
 
