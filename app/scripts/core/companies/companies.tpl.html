@@ -24,23 +24,23 @@
       </div>
     </div>
     <div ng-if="companiesView === 'list'">
-      <ul class="qt-list qt-users" style="margin-bottom: 1px;">
+      <ul class="qt-list qt-users company-list-header" style="margin-bottom: 1px;">
         <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
-          <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
+          <div class="col-xs-3" style="width: 34%;" ng-click="setOrderByCompanies('name')">
             <span class="sort-span">
               Name
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
             </span>
           </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('phone')">
+          <div class="col-xs-1" style="width: 160px;" ng-click="setOrderByCompanies('phone')">
             <span class="sort-span">
             Contact No.
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'phone'}"></i>
             </span>
           </div>
-          <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
+          <div class="col-xs-2 company-email" ng-click="setOrderByCompanies('email')">
             <span class="sort-span">
               Email Address
               <i class="icn-sm sort-icon icn-sort"
@@ -54,73 +54,27 @@
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
             </span>
           </div>
-
-          <!-- <div class="col-xs-2">
-            <div class="col-xs-4" ng-click="setOrderByCompanies('tickets')">
-              <span class="sort-span">
-                Tickets
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
-              </span>
-            </div>
-            <div class="col-xs-4" ng-click="setOrderByCompanies('devices')">
-              <span class="sort-span">
-                Devices
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
-              </span>
-            </div>
-            <div class="col-xs-4" ng-click="setOrderByCompanies('users')">
-              <span class="sort-span">
-                Users
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
-              </span>
-            </div>
-          </div> -->
-
-          <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
+          <div class="col-xs-1" style="width: 70px;text-align: center" ng-click="setOrderByCompanies('tickets')">
             <span class="sort-span">
               Tickets
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
             </span>
           </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
+          <div class="col-xs-1" style="width: 70px;text-align: center" ng-click="setOrderByCompanies('devices')">
             <span class="sort-span">
               Devices
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
             </span>
           </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
+          <div class="col-xs-1" style="width: 70px;text-align: center" ng-click="setOrderByCompanies('users')">
             <span class="sort-span">
               Users
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
             </span>
           </div>
-          <!-- <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
-            <span class="sort-span">
-              Tickets
-              <i class="icn-sm sort-icon icn-sort"
-                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
-            </span>
-          </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
-            <span class="sort-span">
-              Devices
-              <i class="icn-sm sort-icon icn-sort"
-                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
-            </span>
-          </div>
-          <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
-            <span class="sort-span">
-              Users
-              <i class="icn-sm sort-icon icn-sort"
-                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
-            </span>
-          </div> -->
         </li>
       </ul>
     </div>
@@ -207,7 +161,7 @@
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
         ng-click="openCompany(company)">
-      <div class="col-xs-3">
+      <div class="col-xs-3" style="width: 34%;">
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
           <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
                ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
@@ -222,47 +176,16 @@
           <span style="display: flex;">{{ location }}</span>
         </div>
       </div>
-      <div class="col-xs-1">
+      <div class="col-xs-1" style="width: 160px;">
         <span>{{ primaryPhone.number || '' }}</span>
       </div>
-      <div class="col-xs-2" style="word-break: break-all">
+      <div class="col-xs-2 company-email" style="word-break: break-all">
         <span>{{ primaryContact.primaryEmail }}</span>
       </div>
       <div class="col-xs-2" style="max-width: 190px;">
         <span>{{ getUserName(primaryContact) }}</span>
       </div>
-
-      <!-- <div class="col-xs-2">
-        <div class="col-xs-4">
-          <div create-new-entity="ticket" company-id="{{ company.id }}"
-               style="margin-left: 15px; display: inline-block;" custom-disabled="{{ company.deletedAt }}"
-               uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
-            <span><i class="nav-icon icon-lg icn-unassigned"></i></span>
-            <span class="badge badge-primary-outline list-company-badge">
-              {{ company.companyStatistic.ticketsSubmitted || '0' }}
-            </span>
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div style="display: inline-block;margin-left: 15px;">
-            <span><i class="icon-lg icon-tab-devices" style="margin: 0;"></i></span>
-            <span class="badge badge-primary-outline list-company-badge">
-              {{ devicesCount[cooriginmpany.id].all || '0' }}
-            </span>
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div ng-click="openCompany(company, 'users')"
-               style="display: inline-block;margin-left: 15px;" stop-propagation="click">
-            <span><i class="nav-icon icon-lg icon-user-black" style="margin: 0;"></i></span>
-            <span class="badge badge-primary-outline list-company-badge">
-              {{ filterArchived(companyComponentsCount.users, company).length || '0' }}
-            </span>
-          </div>
-        </div>
-      </div> -->
-
-      <div class="col-xs-1">
+      <div style="width: 70px;" class="col-xs-1">
         <div create-new-entity="ticket" company-id="{{ company.id }}"
              style="margin-left: 15px; display: inline-block;" custom-disabled="{{ company.deletedAt }}"
              uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
@@ -272,7 +195,7 @@
           </span>
         </div>
       </div>
-      <div class="col-xs-1">
+      <div style="width: 70px;" class="col-xs-1">
         <div style="display: inline-block;margin-left: 15px;">
           <span><i class="icon-lg icon-tab-devices" style="margin: 0;"></i></span>
           <span class="badge badge-primary-outline list-company-badge">
@@ -280,7 +203,7 @@
           </span>
         </div>
       </div>
-      <div class="col-xs-1">
+      <div style="width: 70px;" class="col-xs-1">
         <div ng-click="openCompany(company, 'users')"
              style="display: inline-block;margin-left: 15px;" stop-propagation="click">
           <span><i class="nav-icon icon-lg icon-user-black" style="margin: 0;"></i></span>
@@ -289,54 +212,22 @@
           </span>
         </div>
       </div>
-
-
-      <!-- <div uib-dropdown  smart-dropdown-menu-position="dropdown-menu">
-        <div uib-dropdown-toggle>
-
-          <i class="devices-monitor" ng-show="agent.iconName === 'workstation' || !agent.iconName"></i>
-          <i class="devices-phone" ng-show="agent.iconName === 'device'"></i>
-          <i class="devices-printer" ng-show="agent.iconName === 'printer'"></i>
-          <i class="devices-server" ng-show="agent.iconName === 'server'"></i>
-
-
-        </div>
-
-        <ul class="dropdown-menu icon-list" >
-          <li ng-click="saveNewIcon('workstation')">
-            <i class="devices-monitor"></i>
-          </li>
-          <li ng-click="saveNewIcon('device')">
-            <i class="devices-phone"></i>
-          </li>
-          <li ng-click="saveNewIcon('printer')">
-            <i class="devices-printer"></i>
-          </li>
-          <li ng-click="saveNewIcon('server')">
-            <i class="devices-server"></i>
-          </li>
-        </ul>
-      </div> -->
-      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="dropdown-wo-max-height" to-left='true' style="position: absolute;right: 15px;">
-        <div
-
-          style="display: inline-block;"
-          opened-from-list="true"
-          uib-dropdown-toggle
-          ng-click="downloadAgent($event)">
-          <!-- <button class="company-download-icn"
-                  uib-tooltip="{{ 'Download Agent' }}"
-                  qt-popover-trigger tooltip-placement="top" tooltip-popup-delay="2000">
-
-          </button> -->
-
+      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu"
+           class="dropdown-wo-max-height"
+           to-left='true'
+           style="position: absolute;right: 15px;">
+        <div style="display: inline-block;"
+             opened-from-list="true"
+             uib-dropdown-toggle
+             ng-click="downloadAgent($event)">
           <div class="download-agent-company pointer">
             <span>Download Agent</span>
             <img src="./images/new-icons/download.svg"></img>
           </div>
         </div>
 
-        <div class="wrapper container dropdown-menu" ng-click="$event.stopPropagation()" dropdown-menu ng-controller="quicktech.core.companies.downloadAgent">
+        <div class="wrapper container dropdown-menu" ng-click="$event.stopPropagation()" dropdown-menu
+             ng-controller="quicktech.core.companies.downloadAgent">
           <div class="row">
             <div class="interior" ng-form="downloadAgentForm">
               <div class="col-md-12 agent-head">
@@ -357,13 +248,15 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">User Name</label>
-                    <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
+                    <input type="text" class="form-control" name="userName"
+                           typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
                            uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
                            placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
                            custom-style="{'width':'100%'}"
                            autocomplete="off" qt-scroll-to="center">
 
-                    <div typeahead-input-icon="downloadAgentUser.userName" style="position: absolute;top: 28px;right: 13px;"></div>
+                    <div typeahead-input-icon="downloadAgentUser.userName"
+                         style="position: absolute;top: 28px;right: 13px;"></div>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -374,26 +267,133 @@
 
                     <div ng-messages="downloadAgentForm.email.$error"
                          ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
-                      <label class="control-label" ng-message="required">Email field is required if u want to send email</label>
+                      <label class="control-label" ng-message="required">Email field is required if u want to send
+                        email</label>
                       <label class="control-label" ng-message="pattern">Email should be valid</label>
                       <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
                     </div>
 
                     <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
                            uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
-                           placeholder="Email Address" ng-model="downloadAgentUser.email" custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
+                           placeholder="Email Address" ng-model="downloadAgentUser.email"
+                           custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
 
                     <input type="hidden" ng-model="downloadAgentUser.email" name="email"
                            ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">
 
-                    <div typeahead-input-icon="downloadAgentUser.email" style="position: absolute;top: 28px;right: 13px;"></div>
+                    <div typeahead-input-icon="downloadAgentUser.email"
+                         style="position: absolute;top: 28px;right: 13px;"></div>
                   </div>
                 </div>
               </div>
 
               <div ng-if="currentType === 'email'">
                 <div class="col-md-12">
-                  <div class="btn btn-lg btn-primary download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
+                  <div class="btn btn-lg btn-primary download-agent-btn"
+                       ng-click="sendEmailWithAgent(downloadAgentForm)"
+                       custom-disabled="{{ savingInProcess }}">
+                    Send Email
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="btn btn-lg btn-primary download-agent-btn" copy-key="downloadLink"
+                       custom-disabled="{{ gettingLink }}">
+                    Copy Link to Clipboard
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12" ng-if="currentType === 'download'">
+                <div class="btn btn-lg btn-primary download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
+                     custom-disabled="{{ savingInProcess }}">
+                  {{ isDomainPresent ? 'Download' : 'Save and Download' }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div uib-dropdown smart-dropdown-menu-position="dropdown-menu"
+           class="dropdown-wo-max-height"
+           to-left='true'
+           style="position: absolute;right: 15px;">
+        <div style="display: inline-block;"
+             opened-from-list="true"
+             uib-dropdown-toggle
+             ng-click="downloadAgent($event)">
+          <div class="download-agent-company download-agent-company-small pointer">
+            <span>Download Agent</span>
+            <img src="./images/new-icons/download.svg">
+          </div>
+        </div>
+
+        <div class="wrapper container dropdown-menu" ng-click="$event.stopPropagation()" dropdown-menu
+             ng-controller="quicktech.core.companies.downloadAgent">
+          <div class="row">
+            <div class="interior" ng-form="downloadAgentForm">
+              <div class="col-md-12 agent-head">
+                <p class="agent-head__description">Agent Install</p>
+              </div>
+              <div class="col-md-12 icons-container">
+                <div class="col-md-6" ng-class="{'active': currentType === 'download'}"
+                     ng-click="setAgentDownloadType('download')">
+                  <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
+                       alt="download">
+                </div>
+                <div class="col-md-6" ng-class="{'active': currentType === 'email'}"
+                     ng-click="setAgentDownloadType('email')">
+                  <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
+                </div>
+              </div>
+              <div class="form-container col-md-12" ng-if="currentType === 'email'">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">User Name</label>
+                    <input type="text" class="form-control" name="userName"
+                           typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
+                           uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
+                           placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
+                           custom-style="{'width':'100%'}"
+                           autocomplete="off" qt-scroll-to="center">
+
+                    <div typeahead-input-icon="downloadAgentUser.userName"
+                         style="position: absolute;top: 28px;right: 13px;"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'email')}">
+                    <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'email')}">
+                      Email
+                    </label>
+
+                    <div ng-messages="downloadAgentForm.email.$error"
+                         ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
+                      <label class="control-label" ng-message="required">Email field is required if u want to send
+                        email</label>
+                      <label class="control-label" ng-message="pattern">Email should be valid</label>
+                      <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+                    </div>
+
+                    <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
+                           uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
+                           placeholder="Email Address" ng-model="downloadAgentUser.email"
+                           custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
+
+                    <input type="hidden" ng-model="downloadAgentUser.email" name="email"
+                           ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">
+
+                    <div typeahead-input-icon="downloadAgentUser.email"
+                         style="position: absolute;top: 28px;right: 13px;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-if="currentType === 'email'">
+                <div class="col-md-12">
+                  <div class="btn btn-lg btn-primary download-agent-btn"
+                       ng-click="sendEmailWithAgent(downloadAgentForm)"
                        custom-disabled="{{ savingInProcess }}">
                     Send Email
                   </div>
@@ -419,87 +419,6 @@
         </div>
       </div>
 
-      <!-- <div class="wrapper container" ng-controller="quicktech.core.companies.downloadAgent">
-        <div class="row">
-          <div class="interior" ng-form="downloadAgentForm">
-            <div class="col-md-12 agent-head">
-              <p class="agent-head__description">Agent Install</p>
-            </div>
-            <div class="col-md-12 icons-container">
-              <div class="col-md-6" ng-class="{'active': currentType === 'download'}"
-                   ng-click="setAgentDownloadType('download')">
-                <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
-                     alt="download">
-              </div>
-              <div class="col-md-6" ng-class="{'active': currentType === 'email'}"
-                   ng-click="setAgentDownloadType('email')">
-                <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
-              </div>
-            </div>
-            <div class="form-container col-md-12" ng-if="currentType === 'email'">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label class="control-label">User Name</label>
-                  <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
-                         uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
-                         placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
-                         custom-style="{'width':'100%'}"
-                         autocomplete="off" qt-scroll-to="center">
-
-                  <div typeahead-input-icon="downloadAgentUser.userName" style="position: absolute;top: 28px;right: 13px;"></div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'email')}">
-                  <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'email')}">
-                    Email
-                  </label>
-
-                  <div ng-messages="downloadAgentForm.email.$error"
-                       ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
-                    <label class="control-label" ng-message="required">Email field is required if u want to send email</label>
-                    <label class="control-label" ng-message="pattern">Email should be valid</label>
-                    <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
-                  </div>
-
-                  <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
-                         uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
-                         placeholder="Email Address" ng-model="downloadAgentUser.email" custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
-
-                  <input type="hidden" ng-model="downloadAgentUser.email" name="email"
-                         ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">
-
-                  <div typeahead-input-icon="downloadAgentUser.email" style="position: absolute;top: 28px;right: 13px;"></div>
-                </div>
-              </div>
-            </div>
-
-            <div ng-if="currentType === 'email'">
-              <div class="col-md-12">
-                <div class="btn btn-lg btn-primary download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
-                     custom-disabled="{{ savingInProcess }}">
-                  Send Email
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="btn btn-lg btn-primary download-agent-btn" copy-key="downloadLink"
-                     custom-disabled="{{ gettingLink }}">
-                  Copy Link to Clipboard
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-12" ng-if="currentType === 'download'">
-              <div class="btn btn-lg btn-primary download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
-                   custom-disabled="{{ savingInProcess }}">
-                {{ isDomainPresent ? 'Download' : 'Save and Download' }}
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div> -->
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)"/>
