@@ -6293,3 +6293,20 @@ Devices tab
     width: 36% !important;
   }
 }
+
+@media (max-width: 1280px) {
+  .left-panel-closed .content-wrapper {
+    width: 1187px !important;
+    overflow-x: scroll;
+  }
+
+  .content-wrapper,
+  .qt-companies {
+    width: 964px !important;
+    overflow-x: scroll;
+  }
+
+  .change-view-actions {
+    width: 973px !important;
+  }
+}
