@@ -18,6 +18,7 @@
           isDashboardStyle: '@?',
           noAddMore: '<noAddMore',
           customPlaceholder: '<customPlaceholder',
+          activePlaceholder: '<activePlaceholder',
           isRestricted: '<isRestricted',
           showTypeSelector: '<showTypeSelector',
           isRequired: '<isRequired'

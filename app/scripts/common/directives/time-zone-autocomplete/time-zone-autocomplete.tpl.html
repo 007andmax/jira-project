@@ -14,7 +14,9 @@
 
     <input class="form-control form-control-time-zone has-dropdown" type="text"
            uib-dropdown-toggle aria-expanded="false" ng-model="address.locale"
-           name="timeZone" autocomplete="off" placeholder="Select Time Zone">
+           name="timeZone" autocomplete="off" placeholder="{{ activePlaceholder ? '' : 'Select Time Zone' }}">
+
+    <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
     <a ng-show="address.locale.length" href="javascript:void(0)" class="erase" aria-label="erase"
        ng-click="eraseInput($event)">
       <i class="icn-sm icn-remove-old"></i>

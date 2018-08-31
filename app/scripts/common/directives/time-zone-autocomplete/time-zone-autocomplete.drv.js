@@ -9,7 +9,8 @@
       scope: {
         timeZones: '=',
         address: '=',
-        saveFunc: '=?'
+        saveFunc: '=?',
+        activePlaceholder: '<activePlaceholder'
       },
       link: function ($scope, element) {
         var currentFocused,

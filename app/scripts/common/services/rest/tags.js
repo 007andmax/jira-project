@@ -23,6 +23,17 @@
 
     function search(keyword, callback) {
 
+      if (!keyword) {
+        $http.get('/tags/getAll').then(function (response) {
+
+          if (callback) {
+            callback(response.data);
+          }
+
+          return response.data;
+        });
+      }
+
       $http.get('/tags/search?word=' + (keyword ? keyword.toLowerCase() : '')).then(function (response) {
 
         if (callback) {
