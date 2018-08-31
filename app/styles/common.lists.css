@@ -6304,12 +6304,20 @@ Devices tab
 
   .change-view-actions {
     width: 973px !important;
+    overflow: hidden;
   }
 
   .left-panel-closed .content-wrapper,
-  .left-panel-closed .qt-companies,
-  .left-panel-closed .change-view-actions {
+  .left-panel-closed .qt-companies {
     width: 1187px !important;
     overflow-x: scroll;
+  }
+
+  .left-panel-closed .change-view-actions {
+    width: 1187px !important;
+  }
+
+  .main-container {
+    background-color: #27303F;
   }
 }
