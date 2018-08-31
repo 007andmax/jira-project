@@ -232,79 +232,81 @@
                                    custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || fileLoadOrError || errorFileMessage }}">
     </button-with-loading-indicator>
     <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
-    <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
-         uib-dropdown auto-close="outsideClick">
-      <!-- <input placeholder="Assign to" type="text"> -->
+    <div>
+      <p style="line-height: 14px;font-size: 13px;color:#9CA5B6;">Select users to notify them</p>
+      <div class="notify-user-dropdown">
+        <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+             uib-dropdown auto-close="outsideClick">
+          <!-- <input placeholder="Assign to" type="text"> -->
 
-      <!-- smart-dropdown-menu-position -->
-      <!-- uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'" -->
-      <div uib-dropdown-toggle>
-        <!-- <input type="text" class="form-validation has-dropdown-with-label"
-               autocomplete="off"
-               ng-model="ticket.assignedTo" name="ticketAssignTo"
-               typeahead-on-select="userAssigned(ticketAssignTo)"
-               placeholder="Assign to"
-               typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-               ng-required="false"
-               custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}"
-               aria-haspopup="true"> -->
-        <img src="images/new-icons/add-user.png" class="pointer"/>
-      </div>
-
-      <div uib-dropdown-menu
-           class="dropdown-assign-ticket dropdown-menu"
-           stop-propagation="click"
-           assign-user-button
-           onUserAssign="'true'"
-           aub-create-ticket="true"
-           aub-is-bulk-operation="true"
-           aub-ticket-number="ticket.number"
-           users="usersToWatch"
-           aub-current-user="currentUser"></div>
-
-      <div typeahead-input-icon-sm="ticketAssignTo"></div>
-
-
-      <!-- <div class="ng-scope" typeahead-input-icon="userCompany">
-          <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
-            <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
-               tooltip-placement="top"></i>
-        </span>
-        <span class="x-mark ng-hide" ng-hide="showClearIcon">
-            <i class="icn-sm icn-caret-gray"></i>
-          </span>
-      </div> -->
-
-
-    </div>
-
-    <div class="col-md-6 shared-avatars">
-      <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
-             ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
-
-          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-            <img src="images/input-icons/checkbox-checked.png"/>
+          <!-- smart-dropdown-menu-position -->
+          <!-- uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'" -->
+          <div uib-dropdown-toggle>
+            <!-- <input type="text" class="form-validation has-dropdown-with-label"
+                   autocomplete="off"
+                   ng-model="ticket.assignedTo" name="ticketAssignTo"
+                   typeahead-on-select="userAssigned(ticketAssignTo)"
+                   placeholder="Assign to"
+                   typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                   ng-required="false"
+                   custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}"
+                   aria-haspopup="true"> -->
+            <img src="images/new-icons/add-user.png" style="padding-top: 20px;" class="pointer"/>
           </div>
-          <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
+
+          <div uib-dropdown-menu
+               class="dropdown-assign-ticket dropdown-menu"
+               stop-propagation="click"
+               assign-user-button
+               onUserAssign="'true'"
+               aub-create-ticket="true"
+               aub-is-bulk-operation="true"
+               aub-ticket-number="ticket.number"
+               users="usersToWatch"
+               aub-current-user="currentUser"></div>
+
+          <div typeahead-input-icon-sm="ticketAssignTo"></div>
+
+
+          <!-- <div class="ng-scope" typeahead-input-icon="userCompany">
+              <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+                <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+                   tooltip-placement="top"></i>
+            </span>
+            <span class="x-mark ng-hide" ng-hide="showClearIcon">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+          </div> -->
+
+
+        </div>
+        <div class="shared-avatars">
+          <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+            <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
+                 ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+              <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
+
+              <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                <img src="images/input-icons/checkbox-checked.png"/>
+              </div>
+              <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
+            </div>
+          </div>
+          <div class="tech-users avatars">
+            <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
+                 ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+              <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
+
+              <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                <img src="images/input-icons/checkbox-checked.png"/>
+              </div>
+              <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="tech-users avatars">
-        <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
-             ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-          <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
-
-          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-            <img src="images/input-icons/checkbox-checked.png"/>
-          </div>
-          <!-- <input type="checkbox" ng-model="sharedUser.notify" /> -->
-        </div>
-      </div>
-
-
     </div>
-
   </div>
 </div>
 
