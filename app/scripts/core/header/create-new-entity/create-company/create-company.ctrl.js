@@ -6,9 +6,9 @@
     [
       '$scope', '$uibModal','UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService', '$state', '$timeout',
-      '$rootScope', 'quicktech.common.services.PermissionsService',
+      '$rootScope', 'quicktech.common.services.PermissionsService', 'TagsService',
       function ($scope, $uibModal, UsersService, SubscriptionsService, CompaniesService, AddressesService, ServicesService,
-                PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
+                PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService, TagsService) {
 
         $scope.descriptionMaxLength = 300;
         $scope.techUsers = UsersService.getTechUsers;
@@ -30,6 +30,9 @@
         };
 
 
+        $scope.companyTags = [];
+
+
 
         $scope.addAnotherLocation = function() {
           $scope.editCompany.additionalAddresses.push({
@@ -40,6 +43,11 @@
             isPrimary: false,
           });
         }
+
+
+        $scope.$watch('companyTags', function(val) {
+          console.log(val, 'tags')
+        }, true)
 
 
         console.log("CONTROLLER MOTHERFUKCER")
@@ -420,6 +428,11 @@
                   UsersService.updateWelcomeWizard('setupClient');
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
+
+                TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function(res) {
+                  console.log('TICKET ASSSIGNED', res)
+                })
+
                 if (!($scope.savedState && $scope.savedState.items.length)) {
                   if(isCreateContract && $scope.selectedContractType) {
                     $scope.closeWindowWithoutConfirmation();

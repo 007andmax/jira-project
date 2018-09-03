@@ -92,6 +92,19 @@
           onHold: 7
         };
 
+        $scope.companyFilterTags = [];
+
+
+        $scope.$watch('companyFilterTags', function(val) {
+          if (val.length) {
+            TagsService.filterCompanies(val, function(res) {
+              $rootScope.filteredCompanies = res.data;
+            })
+          } else {
+            $rootScope.filteredCompanies = false;
+          }
+        }, true)
+
         TicketsService.getAllCounts(function (resp) {
           $scope.ticketsCounter = resp;
         });
