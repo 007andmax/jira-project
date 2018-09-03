@@ -177,12 +177,36 @@
       Utils.handleCallback(future, callback);
     }
 
+    function changeWordCompany(tagId, word, callback) {
+      if (!tagId) {
+        throw 'Tag id required!';
+      }
+
+      if (!word) {
+        throw 'Word is required!';
+      }
+
+      var future = $http.put('/company/tags/setWordForTag?tagId=' + tagId + '&word=' + word, {});
+
+      Utils.handleCallback(future, callback);
+    }
+
     function remove(tagId, callback) {
       if (!tagId) {
         throw 'Tag id required!';
       }
 
       var future = $http.delete('/tags/removeTag?tagId=' + tagId);
+
+      Utils.handleCallback(future, callback);
+    }
+
+    function removeCompany(tagId, callback) {
+      if (!tagId) {
+        throw 'Tag id required!';
+      }
+
+      var future = $http.delete('/company/tags/removeTag?tagId=' + tagId);
 
       Utils.handleCallback(future, callback);
     }
@@ -244,7 +268,9 @@
       saveForCompany: saveForCompany,
       changeColor: changeColor,
       changeWord: changeWord,
+      changeWordCompany: changeWordCompany,
       remove: remove,
+      removeCompany: removeCompany,
       removeAndReplace: removeAndReplace,
       save: save,
       getColors: getColors,

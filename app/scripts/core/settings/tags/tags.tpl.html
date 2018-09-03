@@ -16,163 +16,263 @@
       <span>Allow user to create custom Tags</span>
     </div>
 
-    <div class="form-group">
-      <input type="search" class="form-control" placeholder="Search Tags..." ng-model="keyword">
+    <div class="tumblers">
+      <a class="pointer" ng-click="setShown('ticket')">Tickets</a>
+      <a class="pointer" ng-click="setShown('company')">Companies</a>
     </div>
 
-    <div class="add-tag">
-      <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()" custom-disabled="{{ !!editingId }}">
-        <div class="btn btn-icn btn-primary" custom-disabled="{{ !!editingId }}">
-          <i class="icn-sm icn-plus"></i>
-        </div>
-        Create new tag</a>
-    </div>
 
-    <div class="clearfix">
-      <ul class="qt-list clearfix" ng-init="filteredTags = []">
+    <div ng-if="shownTags === 'ticket'">
+      <div class="form-group">
+        <input type="search" class="form-control" placeholder="Search Tags..." ng-model="keyword">
+      </div>
 
-        <li ng-if="!tags.length && editingId !== 'new'">There is no tags yet.</li>
-        <li ng-if="!filteredTags.length && tags.length">No tags responding to this query.</li>
-
-        <li class="list-heading" ng-show="filteredTags.length">
-          <div class="col-1" ng-click="setOrderForTags('word')">
-            <span class="sort-span">
-              Custom tags
-              <i class="icn-sm sort-icon icn-sort"
-                 ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'word'}"></i></span>
+      <div class="add-tag">
+        <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()" custom-disabled="{{ !!editingId }}">
+          <div class="btn btn-icn btn-primary" custom-disabled="{{ !!editingId }}">
+            <i class="icn-sm icn-plus"></i>
           </div>
-          <div class="col-2">Color</div>
-          <div class="col-3" ng-click="setOrderForTags('usedCounter')">
-            <span class="sort-span">
-              Count
-              <i class="icn-sm sort-icon icn-sort"
-                 ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'usedCounter'}"></i></span>
-          </div>
-          <div class="col-4">&nbsp;</div>
-          <div class="col-5">&nbsp;</div>
-        </li>
+          Create new tag</a>
+      </div>
 
-        <li ng-if="editingId === 'new'" ng-form="createTagForm">
-          <div class="col-1 form-group"
-               ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
-            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
-                   ng-maxlength="16" required>
-          </div>
-          <div class="col-2" uib-dropdown>
-            <span uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
-                              'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
-              <i class="icon-sm icn-picker"></i>
-            </span>
+      <div class="clearfix">
+        <ul class="qt-list clearfix" ng-init="filteredTags = []">
 
-            <ul class="dropdown-menu dropdown-tag-colors">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': editedTag.colorCode === $index}"
-                  ng-click="editedTag.colorCode = $index">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-          <div class="col-3">{{ editedTag.usedCounter }}</div>
-          <div class="col-4" ng-click="cancel()"
-               uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-remove-old"></i></div>
-          <div class="col-4" ng-click="saveOrUpdate(createTagForm)"
-               uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-product-save"></i></div>
-        </li>
+          <li ng-if="!tags.length && editingId !== 'new'">There is no tags yet.</li>
+          <li ng-if="!filteredTags.length && tags.length">No tags responding to this query.</li>
 
-        <li ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
-          ng-form="updateTagForm">
-          <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
-            {{ tag.word }}
-            <i class="icon-sm edit-icon" uib-tooltip="Edit" tooltip-placement="top"
-               tooltip-append-to-body="true"></i>
-          </div>
-          <div class="col-1 form-group" ng-if="editingId === tag.id"
-               ng-class="{'has-error': (triedToSave || updateTagForm.word.$dirty) && updateTagForm.$invalid}">
-            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
-                   required>
-          </div>
+          <li class="list-heading" ng-show="filteredTags.length">
+            <div class="col-1" ng-click="setOrderForTags('word')">
+              <span class="sort-span">
+                Custom tags
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'word'}"></i></span>
+            </div>
+            <div class="col-2">Color</div>
+            <div class="col-3" ng-click="setOrderForTags('usedCounter')">
+              <span class="sort-span">
+                Count
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'usedCounter'}"></i></span>
+            </div>
+            <div class="col-4">&nbsp;</div>
+            <div class="col-5">&nbsp;</div>
+          </li>
 
-          <div class="col-2" uib-dropdown on-toggle="changeColor(open, tag)">
-            <span uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
-                              'border-color': tagColors[tag.colorCode].borderColor}"></span>
-              <i class="icon-sm icn-picker"></i>
-            </span>
+          <li ng-if="editingId === 'new'" ng-form="createTagForm">
+            <div class="col-1 form-group"
+                 ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
+              <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                     ng-maxlength="16" required>
+            </div>
+            <div class="col-2" uib-dropdown>
+              <span uib-dropdown-toggle>
+                <span class="colored-circle"
+                      ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
+                                'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
+                <i class="icon-sm icn-picker"></i>
+              </span>
 
-            <ul class="dropdown-menu dropdown-tag-colors">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': tag.colorCode === $index}"
-                  ng-click="tag.colorCode = $index">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
+              <ul class="dropdown-menu dropdown-tag-colors">
+                <li ng-repeat="tagColor in tagColors"
+                    ng-class="{'active': editedTag.colorCode === $index}"
+                    ng-click="editedTag.colorCode = $index">
+                  <i class="tag-color tag-color-md"
+                     ng-style="{'background-color': tagColor.backgroundColor,
+                                'border-color': tagColor.borderColor}"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="col-3">{{ editedTag.usedCounter }}</div>
+            <div class="col-4" ng-click="cancel()"
+                 uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-remove-old"></i></div>
+            <div class="col-4" ng-click="saveOrUpdate(createTagForm)"
+                 uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-product-save"></i></div>
+          </li>
 
-          <div class="col-3">{{ tag.usedCounter }}</div>
+          <li ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
+            ng-form="updateTagForm">
+            <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
+              {{ tag.word }}
+              <i class="icon-sm edit-icon" uib-tooltip="Edit" tooltip-placement="top"
+                 tooltip-append-to-body="true"></i>
+            </div>
+            <div class="col-1 form-group" ng-if="editingId === tag.id"
+                 ng-class="{'has-error': (triedToSave || updateTagForm.word.$dirty) && updateTagForm.$invalid}">
+              <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                     required>
+            </div>
 
-          <div class="col-4" ng-click="remove(tag.id)" ng-if="editingId !== tag.id"
-               uib-tooltip="Delete" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icon-sm icn-delete"></i>
-          </div>
-          <div class="col-4" uib-dropdown is-open="replaceDropdown[tag.id].isOpen"
-               uib-tooltip="Replace with..." tooltip-placement="top" tooltip-append-to-body="true"
-               on-toggle="initReplace(open, tag, replaceTagForm)"
-               ng-if="tags.length > 1 && tag.usedCounter > 0 && editingId !== tag.id">
-            <i class="icn-sm icn-replace" uib-dropdown-toggle></i>
-            <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
+            <div class="col-2" uib-dropdown on-toggle="changeColor(open, tag)">
+              <span uib-dropdown-toggle>
+                <span class="colored-circle"
+                      ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
+                                'border-color': tagColors[tag.colorCode].borderColor}"></span>
+                <i class="icon-sm icn-picker"></i>
+              </span>
 
-              <div class="move-services">
+              <ul class="dropdown-menu dropdown-tag-colors">
+                <li ng-repeat="tagColor in tagColors"
+                    ng-class="{'active': tag.colorCode === $index}"
+                    ng-click="tag.colorCode = $index">
+                  <i class="tag-color tag-color-md"
+                     ng-style="{'background-color': tagColor.backgroundColor,
+                                'border-color': tagColor.borderColor}"></i>
+                </li>
+              </ul>
+            </div>
 
-                <div class="add-label">
-                  <label>Replace With</label>
-                </div>
+            <div class="col-3">{{ tag.usedCounter }}</div>
 
-                <div class="custom-scroll" style="max-height: 164px" ng-form="replaceTagForm">
+            <div class="col-4" ng-click="remove(tag.id)" ng-if="editingId !== tag.id"
+                 uib-tooltip="Delete" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icon-sm icn-delete"></i>
+            </div>
+            <div class="col-4" uib-dropdown is-open="replaceDropdown[tag.id].isOpen"
+                 uib-tooltip="Replace with..." tooltip-placement="top" tooltip-append-to-body="true"
+                 on-toggle="initReplace(open, tag, replaceTagForm)"
+                 ng-if="tags.length > 1 && tag.usedCounter > 0 && editingId !== tag.id">
+              <i class="icn-sm icn-replace" uib-dropdown-toggle></i>
+              <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
 
-                  <div class="radio" ng-repeat="tagForReplace in tags | orderBy: 'word' track by tagForReplace.id"
-                       ng-if="tag.id !== tagForReplace.id">
-                    <label>
-                      <input type="radio" name="replaceRadios" value="{{ tagForReplace.id }}"
-                             ng-model="replaceDropdown[tag.id].selectedTag">
-                      {{ tagForReplace.word }}
-                    </label>
+                <div class="move-services">
+
+                  <div class="add-label">
+                    <label>Replace With</label>
                   </div>
 
-                </div>
+                  <div class="custom-scroll" style="max-height: 164px" ng-form="replaceTagForm">
 
-                <div role="presentation" class="checkbox-dropdown-footer clearfix">
-                  <div class="btn btn-primary btn-lg pull-right"
-                       ng-click="removeAndReplace(tag.id, replaceDropdown[tag.id].selectedTag)"
-                       custom-disabled="{{ replaceTagForm.$pristine }}">
-                    Save
+                    <div class="radio" ng-repeat="tagForReplace in tags | orderBy: 'word' track by tagForReplace.id"
+                         ng-if="tag.id !== tagForReplace.id">
+                      <label>
+                        <input type="radio" name="replaceRadios" value="{{ tagForReplace.id }}"
+                               ng-model="replaceDropdown[tag.id].selectedTag">
+                        {{ tagForReplace.word }}
+                      </label>
+                    </div>
+
                   </div>
-                  <div class="btn btn-primary   btn-lg pull-right" ng-click="replaceDropdown[tag.id].isOpen = false">
-                    Cancel
+
+                  <div role="presentation" class="checkbox-dropdown-footer clearfix">
+                    <div class="btn btn-primary btn-lg pull-right"
+                         ng-click="removeAndReplace(tag.id, replaceDropdown[tag.id].selectedTag)"
+                         custom-disabled="{{ replaceTagForm.$pristine }}">
+                      Save
+                    </div>
+                    <div class="btn btn-primary   btn-lg pull-right" ng-click="replaceDropdown[tag.id].isOpen = false">
+                      Cancel
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-4" ng-click="cancel()" ng-if="editingId === tag.id"
-               uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-remove-old"></i></div>
-          <div class="col-4" ng-click="saveOrUpdate(updateTagForm)" ng-if="editingId === tag.id"
-               uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-product-save"></i></div>
-        </li>
+            <div class="col-4" ng-click="cancel()" ng-if="editingId === tag.id"
+                 uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-remove-old"></i></div>
+            <div class="col-4" ng-click="saveOrUpdate(updateTagForm)" ng-if="editingId === tag.id"
+                 uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-product-save"></i></div>
+          </li>
 
-      </ul>
+        </ul>
+      </div>
+
     </div>
+
+
+
+
+    <div ng-if="shownTags === 'company'">
+      <div class="form-group">
+        <input type="search" class="form-control" placeholder="Search Tags..." ng-model="companyKeyword">
+      </div>
+
+      <div class="add-tag">
+        <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()" custom-disabled="{{ !!editingId }}">
+          <div class="btn btn-icn btn-primary" custom-disabled="{{ !!editingId }}">
+            <i class="icn-sm icn-plus"></i>
+          </div>
+          Create new tag</a>
+      </div>
+
+      <div class="clearfix">
+        <ul class="qt-list clearfix" ng-init="filteredTags = []">
+
+          <li ng-if="!companyTags.length && editingId !== 'new'">There is no tags yet.</li>
+          <li ng-if="!filteredCompanyTags.length && companyTags.length">No tags responding to this query.</li>
+
+          <li class="list-heading" ng-show="filteredCompanyTags.length">
+            <div class="col-1" ng-click="setOrderForTags('word')">
+              <span class="sort-span">
+                Custom tags
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'word'}"></i></span>
+            </div>
+
+            <div class="col-3" ng-click="setOrderForTags('usedCounter')">
+              <span class="sort-span">
+                Count
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'usedCounter'}"></i></span>
+            </div>
+            <div class="col-4">&nbsp;</div>
+            <div class="col-5">&nbsp;</div>
+          </li>
+
+          <li ng-if="editingId === 'new'" ng-form="createTagForm">
+            <div class="col-1 form-group"
+                 ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
+              <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                     ng-maxlength="16" required>
+            </div>
+
+            <div class="col-3">{{ editedTag.usedCounter }}</div>
+            <div class="col-4" ng-click="cancel()"
+                 uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-remove-old"></i></div>
+            <div class="col-4" ng-click="saveOrUpdate(createTagForm)"
+                 uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-product-save"></i></div>
+          </li>
+
+          <li ng-repeat="tag in filteredCompanyTags = (companyTags | filter: {word: companyKeyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
+            ng-form="updateTagForm">
+            <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
+              {{ tag.word }}
+              <i class="icon-sm edit-icon" uib-tooltip="Edit" tooltip-placement="top"
+                 tooltip-append-to-body="true"></i>
+            </div>
+            <div class="col-1 form-group" ng-if="editingId === tag.id"
+                 ng-class="{'has-error': (triedToSave || updateTagForm.word.$dirty) && updateTagForm.$invalid}">
+              <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                     required>
+            </div>
+
+            <div class="col-3">{{ tag.usedCounter }}</div>
+
+            <div class="col-4" ng-click="remove(tag.id)" ng-if="editingId !== tag.id"
+                 uib-tooltip="Delete" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icon-sm icn-delete"></i>
+            </div>
+
+            <div class="col-4" ng-click="cancel()" ng-if="editingId === tag.id"
+                 uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-remove-old"></i></div>
+            <div class="col-4" ng-click="saveOrUpdate(updateTagForm)" ng-if="editingId === tag.id"
+                 uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+              <i class="icn-sm icn-product-save"></i></div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+
+
 
 
 
