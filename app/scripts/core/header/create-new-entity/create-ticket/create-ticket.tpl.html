@@ -275,7 +275,7 @@
     </div>
         <div class="shared-avatars">
           <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-            <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
+            <div class="shared-avatar pointer" uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}" ng-click="sharedUser.notify = !sharedUser.notify"
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
               <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
 
@@ -286,7 +286,7 @@
             </div>
           </div>
           <div class="tech-users avatars">
-            <div class="shared-avatar pointer" ng-click="sharedUser.notify = !sharedUser.notify"
+            <div class="shared-avatar pointer" uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}" ng-click="sharedUser.notify = !sharedUser.notify"
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
               <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
 
