@@ -96,6 +96,10 @@
   border-bottom: 1px solid #E5E7EB;
 }
 
+.tags-modal-wrapper .tags-wrap .tags {
+  height: 45px;
+}
+
 
 
 
