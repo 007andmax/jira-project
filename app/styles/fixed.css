@@ -356,10 +356,6 @@ body.non-body-scroll::-webkit-scrollbar {
     padding: 13px 45px 13px 15px;
   }
 
-  .qt-list li.list-heading > [class*='col-'] {
-    font-size: 12px;
-  }
-
   .qt-list > li > .intermediate-parent-elem > .col-4, .qt-list > li > .col-4 {
     width: 90px;
   }

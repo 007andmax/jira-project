@@ -618,6 +618,10 @@
   }
 }
 
+.dropdown-wo-max-height .download-agent-company-small {
+  display: none;
+}
+
 @media only screen and (min-width: 1366px) and (max-width: 1440px) {
   .qt-users .col-1 {
     width: calc(100% - 660px);
@@ -656,12 +660,6 @@
 
   .qt-users .col-4 {
     width: 100px;
-  }
-
-  @media (max-width: 1366px) {
-    .qt-users .col-4 {
-      padding: 0 20px;
-    }
   }
 
   .qt-users .col-5 {
@@ -6226,6 +6224,13 @@ Devices tab
   vertical-align: text-bottom;
 }
 
+@media (max-width: 1680px) {
+  .company-list-header .col-xs-3,
+  .qt-companies .col-xs-3 {
+    width: 26% !important;
+  }
+}
+
 @media (max-width: 1600px) {
   #has-invoice-updates1 .user-ticket-update {
     width: 44px;
@@ -6244,5 +6249,58 @@ Devices tab
 
   .users-bg > li {
     padding: 13px 15px;
+  }
+
+  .qt-users .col-4 {
+    padding: 0 20px;
+  }
+
+  .dropdown-wo-max-height .download-agent-company {
+    display: none;
+  }
+
+  .dropdown-wo-max-height .download-agent-company-small {
+    display: flex;
+    width: 40px;
+  }
+
+  .dropdown-wo-max-height .download-agent-company-small span {
+    display: none;
+  }
+
+  .dropdown-wo-max-height .download-agent-company-small img {
+    margin: 0;
+  }
+
+  .company-list-header .col-xs-3,
+  .qt-companies .col-xs-3 {
+    width: 40% !important;
+  }
+
+  .company-email {
+    display: none;
+  }
+}
+
+@media (max-width: 1366px) {
+  .left-panel-closed .company-list-header .col-xs-3,
+  .left-panel-closed .qt-companies .col-xs-3 {
+    width: 45% !important;
+  }
+
+  .company-list-header .col-xs-3,
+  .qt-companies .col-xs-3 {
+    width: 36% !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .main-container {
+    overflow-y: hidden;
+    width: 1280px;
+  }
+
+  aside#left {
+    height: 100%;
   }
 }

@@ -1,14 +1,21 @@
 /*Tickets and Ticket List Setting - Start*/
-.ticket-list{
+.ticket-list {
   padding: 20px 30px;
 }
-.content-wrapper .ticket-list{
+
+.content-wrapper {
+  background-color: #F3F7F9;
+}
+
+.content-wrapper .ticket-list {
   padding: 0;
 }
-.tickets{
+
+.tickets {
   margin: 0;
   padding: 0 0 240px;
 }
+
 .ticket {
   list-style: none;
   background-color: #fff;
@@ -18,25 +25,29 @@
   border-bottom: 1px #e7ecf2 solid;
   cursor: pointer;
 }
-.ticket:first-child{
+
+.ticket:first-child {
   min-height: 136px;
   padding-top: 30px;
 }
-.tickets li:first-child{
+
+.tickets li:first-child {
   border-top: none;
 }
-.tickets li:last-child{
+
+.tickets li:last-child {
   border-bottom: none;
 }
-.tickets li.ticket:last-child{
+
+.tickets li.ticket:last-child {
   border-bottom: 1px #e7ecf2 solid;
 }
 
-
-.tickets li:first-child.ticket-type{
+.tickets li:first-child.ticket-type {
   padding-top: 16px;
   min-height: 54px;
 }
+
 .ticket-type {
   list-style: none;
   color: #4c5c6f;
@@ -47,14 +58,17 @@
   padding-top: 15px;
   border-bottom: 1px #e7ecf2 solid;
 }
+
 @-moz-document url-prefix() {
   .ticket-type {
     padding-top: 14px;
   }
 }
-.ticket-type b{
+
+.ticket-type b {
   font-weight: 700;
 }
+
 .ticket-loading {
   list-style: none;
   background-color: #f1f5fa;
@@ -68,29 +82,33 @@
 
 /*Ticket States - Start*/
 
-.ticket.active{
+.ticket.active {
   border: 1px solid #08a8dd;
 }
-.ticket.selected{
+
+.ticket.selected {
   background-color: #e2f1fd;
 }
+
 /*Ticket States - End*/
 
 /*Ticket Hover - Start*/
 .ticket:before, .ticket:after {
-   position: absolute;
-   top: 0;
-   bottom: 0;
-   width: 3px;
-   background-color: transparent;
-   content: '';
- }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: transparent;
+  content: '';
+}
+
 .ticket .ticket-meta .ticket-list-header p.ellipsis {
   width: calc(100% - 90px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .ticket .ticket-meta .ticket-title p.ellipsis {
   width: calc(100% - 20px);
   display: -webkit-inline-flex;
@@ -99,17 +117,20 @@
   display: -o-inline-flex;
   display: inline-flex;
 }
-.ticket .ticket-meta .ticket-title p.ellipsis strong{
+
+.ticket .ticket-meta .ticket-title p.ellipsis strong {
   float: left;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.ticket.closed .ticket-meta .ticket-title p.ellipsis strong{
+
+.ticket.closed .ticket-meta .ticket-title p.ellipsis strong {
   font-weight: normal;
 }
-.ticket .ticket-meta .ticket-title p.ellipsis span{
+
+.ticket .ticket-meta .ticket-title p.ellipsis span {
   float: left;
   display: inline-block;
   -webkit-flex: 1;
@@ -126,33 +147,29 @@
   display: block;
 }
 
-.ticket:hover.no-action .ticket-meta .ticket-title .icn-ticket-list-attachment{
+.ticket:hover.no-action .ticket-meta .ticket-title .icn-ticket-list-attachment {
   display: block;
   cursor: default;
 }
 
-
-
-.ticket .ticket-checkbox{
+.ticket .ticket-checkbox {
   padding-top: 22px;
   padding-left: 30px;
   width: 62px;
 }
 
-.ticket .ticket-meta{
+.ticket .ticket-meta {
   padding: 0;
   margin-left: 62px;
 }
 
-.ticket .ticket-meta .ticket-list-header{
+.ticket .ticket-meta .ticket-list-header {
   height: 24px;
 }
 
-.ticket .ticket-meta .ticket-title .ticket-list-attachment{
-  margin:0 10px;
+.ticket .ticket-meta .ticket-title .ticket-list-attachment {
+  margin: 0 10px;
 }
-
-
 
 /*Ticket Tags*/
 
@@ -181,8 +198,6 @@
   color: #1f2a37;
 }
 
-
-
 /*Ticket Actions*/
 
 .ticket .ticket-meta .ticket-actions {
@@ -205,7 +220,7 @@
   display: block;
 }
 
-.ticket .ticket-meta .ticket-actions > .dropdown-menu{
+.ticket .ticket-meta .ticket-actions > .dropdown-menu {
   margin-top: 4px;
 }
 
@@ -214,10 +229,12 @@
 .ticket .ticket-meta .ticket-labels {
   height: 20px;
 }
-.ticket .ticket-meta .ticket-labels .icn-ticket-onhold{
+
+.ticket .ticket-meta .ticket-labels .icn-ticket-onhold {
   height: 10px;
 }
-.ticket .ticket-meta .ticket-labels span{
+
+.ticket .ticket-meta .ticket-labels span {
   margin-right: 10px;
   height: 20px;
   cursor: pointer;
@@ -227,7 +244,7 @@
   font-weight: normal;
 }
 
-.ticket .ticket-meta .ticket-labels .ticket-unread-updates{
+.ticket .ticket-meta .ticket-labels .ticket-unread-updates {
   margin-top: 3px;
 }
 
@@ -237,31 +254,39 @@
     padding-bottom: 1px;
   }
 }
-.low-priority-border{
+
+.low-priority-border {
   border-left: 5px solid #4caf50 !important;
 }
-.medium-priority-border{
+
+.medium-priority-border {
   border-left: 5px solid transparent !important;
 }
-.high-priority-border{
+
+.high-priority-border {
   border-left: 5px solid #e53935 !important;
 }
+
 .active.low-priority-border {
   border-left-color: #6AFF6E !important;
 }
+
 .active.medium-priority-border {
   border-left-color: transparent !important;
 }
+
 .active.high-priority-border {
   border-left-color: #FF241A !important;
 }
-.ellipsis{
+
+.ellipsis {
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-.ticket-title > .text-muted{
+
+.ticket-title > .text-muted {
   float: left;
   width: calc(100% - 40px);
 }
