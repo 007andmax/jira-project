@@ -255,6 +255,8 @@
       $http.post('/company/tags', newTag).then(function(res) {
         if (callback) {
           callback(res);
+
+          $rootScope.tagForCompanyCreated = true;
         }
       })
     }

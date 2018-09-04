@@ -47,6 +47,20 @@
                   $scope.lastResult = resp.data;
                 })
 
+                $scope.$watch(function() {
+                  return $rootScope.tagForCompanyCreated;
+                }, function(val) {
+                  if (val) {
+                    $rootScope.tagForCompanyCreated = false;
+                  }
+
+                  TagsService.getAllCompanies(function(resp) {
+                    $scope.result = resp.data;
+                    $scope.allTags = resp.data;
+                    $scope.lastResult = resp.data;
+                  })
+                })
+
                 // var tags = ['first', 'second', 'third', 'fourth'];
 
                 // for (var i = 0; i < tags.length; i++) {
@@ -68,22 +82,22 @@
 
 
 
-              // $scope.$watch(function() {
-              //   return $rootScope.newTagHasCreated;
-              // }, function(val) {
-              //   if (val) {
-              //     $rootScope.newTagHasCreated = false;
-              //     console.log('tag has been created')
-              //     TagsService.search('', function (resp) {
-              //       $scope.result = resp;
-              //       $scope.allTags = resp;
-              //     });
-              //   }
-              // })
+              $scope.$watch(function() {
+                return $rootScope.newTagHasCreated;
+              }, function(val) {
+                if (val) {
+                  $rootScope.newTagHasCreated = false;
+                  console.log('tag has been created')
+                  TagsService.search('', function (resp) {
+                    $scope.result = resp;
+                    $scope.allTags = resp;
+                  });
+                }
+              })
 
               var menu = $element.find('.dropdown-menu');
 
-              menu.on('scroll', scrollHandler)
+              // menu.on('scroll', scrollHandler)
 
 
               function scrollHandler(e) {
