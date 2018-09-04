@@ -92,6 +92,8 @@
 
 .tags-modal-wrapper .tags-wrap {
   margin: 0;
+  border: none;
+  border-bottom: 1px solid #E5E7EB;
 }
 
 
