@@ -71,11 +71,24 @@
                 //   })
                 // }
               } else {
-                TagsService.search('', function (resp) {
+                TagsService.getAll($scope, function (resp) {
                   $scope.result = resp;
                   $scope.allTags = resp;
                   $scope.lastResult = resp;
                 });
+
+                $scope.$watch(function() {
+                  return $rootScope.newTagHasCreated;
+                }, function(val) {
+                  if (val) {
+                    $rootScope.newTagHasCreated = false;
+                    console.log('tag has been created')
+                    TagsService.getAll($scope, function (resp) {
+                      $scope.result = resp;
+                      $scope.allTags = resp;
+                    });
+                  }
+                })
               }
 
 
@@ -84,18 +97,7 @@
 
 
 
-              $scope.$watch(function() {
-                return $rootScope.newTagHasCreated;
-              }, function(val) {
-                if (val) {
-                  $rootScope.newTagHasCreated = false;
-                  console.log('tag has been created')
-                  TagsService.search('', function (resp) {
-                    $scope.result = resp;
-                    $scope.allTags = resp;
-                  });
-                }
-              })
+
 
               var menu = $element.find('.dropdown-menu');
 
@@ -231,6 +233,8 @@
                 event.stopPropagation();
               };
               $scope.setDropdownOpened = function (open) {
+
+                // console.log('DSADADASDAS')
                 if (!open) {
                   $scope.dropdownOpened = false;
                 }
