@@ -256,7 +256,7 @@
         if (callback) {
           callback(res);
 
-          $rootScope.tagForCompanyCreated = true;
+          $rootScope.tagForCompanyCreated = res.id || res.data.id;
         }
       })
     }

@@ -51,14 +51,15 @@
                   return $rootScope.tagForCompanyCreated;
                 }, function(val) {
                   if (val) {
-                    $rootScope.tagForCompanyCreated = false;
+                    
+                    TagsService.getAllCompanies(function(resp) {
+                      $scope.result = resp.data;
+                      $scope.allTags = resp.data;
+                      $scope.lastResult = resp.data;
+                    })
                   }
 
-                  TagsService.getAllCompanies(function(resp) {
-                    $scope.result = resp.data;
-                    $scope.allTags = resp.data;
-                    $scope.lastResult = resp.data;
-                  })
+
                 })
 
                 // var tags = ['first', 'second', 'third', 'fourth'];
