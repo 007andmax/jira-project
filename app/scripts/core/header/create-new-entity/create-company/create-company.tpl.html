@@ -442,7 +442,13 @@
            custom-placeholder="'Phone number'">
 
       </div>
-      <div class="col-md-4 col-md-offset-4" ng-class="{'has-error': isShowingErrors(companyForm, 'leadBy')}">
+
+      <div class="col-md-4 tags-modal-wrapper">
+        <ticket-tags is-company="true"  on-save-func="" ticket-tags="companyTags"></ticket-tags>
+
+      </div>
+
+      <div class="col-md-4" ng-class="{'has-error': isShowingErrors(companyForm, 'leadBy')}">
 
         <input type="text" class="form-validation has-dropdown pointer"
                placeholder="Lead by"
@@ -458,10 +464,7 @@
 
       </div>
 
-      <div class="col-md-4">
-        <ticket-tags is-company="true"  on-save-func="" ticket-tags="companyTags"></ticket-tags>
 
-      </div>
       <div class="col-md-12">
 
         <div uib-dropdown>
