@@ -13,7 +13,8 @@
             ticketTags: '=',
             tagFilter: '<',
             onSaveFunc: '<',
-            isCompany: "<"
+            isCompany: "<",
+            newDesign: '<'
           },
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -51,7 +52,7 @@
                   return $rootScope.tagForCompanyCreated;
                 }, function(val) {
                   if (val) {
-                    
+
                     TagsService.getAllCompanies(function(resp) {
                       $scope.result = resp.data;
                       $scope.allTags = resp.data;
@@ -129,6 +130,8 @@
             }
           },
           controller: function ($scope) {
+
+            console.log($scope.readonlyTags, 'READONLY')
             if (!$scope.readonlyTags) {
               var lastQuery = '',
                 tagsChanged = false,
@@ -219,7 +222,6 @@
                     searchTag(searchQuery);
                   });
                 } else if (tagsChanged && $scope.tagFilter) {
-                  console.log('tags filter changed')
                   // $scope.onSaveFunc($scope.ticketTags)
                 }
               };

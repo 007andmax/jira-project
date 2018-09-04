@@ -46,11 +46,11 @@
 
 
         $scope.$watch('companyTags', function(val) {
-          console.log(val, 'tags')
+
         }, true)
 
 
-        console.log("CONTROLLER MOTHERFUKCER")
+        // console.log("CONTROLLER MOTHERFUKCER")
 
 
 

@@ -97,7 +97,40 @@
 }
 
 .tags-modal-wrapper .tags-wrap .tags {
-  height: 45px;
+  min-height: 45px;
+}
+
+.tags-modal-wrapper .tags .tag-label, .tags-modal-wrapper .readonly-tags .tag-label {
+  position: relative;
+  display: inline-block;
+  min-width: 35px;
+  padding: 6px 8px;
+  margin: 2px;
+  border-radius: 3px;
+  background-color: #f8f9fa;
+  border: solid 1px #edf2f6;
+
+  font-size: 12px;
+
+  line-height: 1.33;
+  color: #4f5f79;
+
+  display: flex !important;
+  align-items: center !important;
+}
+
+.tags-modal-wrapper .remove-tag {
+  position: static;
+  margin: 0;
+  /* transform: translateY(0.5px) */
+  /* width: 14px !important; */
+  height: 12px !important;
+  /* margin-left: 8px !important; */
+}
+
+.tags-modal-wrapper .tags-action input {
+  height: 30px;
+  padding: 10px 5px;
 }
 
 
