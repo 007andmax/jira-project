@@ -547,6 +547,10 @@ body.non-body-scroll::-webkit-scrollbar {
   height: 56px;
 }
 
+.notify-user-dropdown {
+  display: flex;
+}
+
 .dropdown-user-parent > .dropdown-menu > li a .user-name > p {
   line-height: 16px;
 }
