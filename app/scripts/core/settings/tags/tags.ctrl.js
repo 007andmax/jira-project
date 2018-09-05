@@ -19,11 +19,17 @@
         $scope.tags = angular.copy(resp);
       });
 
+      TagsService.getAllCompanies(function(resp) {
+        $scope.companyTags = resp.data || resp;
+      })
+
       $scope.changeColor = function (open, tag) {
         if (!open) {
           TagsService.changeColor(tag.id, tag.colorCode);
         }
       };
+
+      $scope.shownTags = 'ticket';
 
       $scope.createOrEdit = function (tag) {
         if (tag) {
@@ -38,21 +44,46 @@
         }
       };
 
+      $scope.setShown = function(prop) {
+        $scope.shownTags = prop;
+      }
+
       $scope.saveOrUpdate = function (form) {
         if (form.$valid && !$scope.saveInProgress) {
 
           $scope.saveInProgress = true;
 
           if ($scope.editedTag.id) {
-            TagsService.changeWord($scope.editedTag.id, $scope.editedTag.word, function (resp) {
-              $scope.cancel();
-            });
-          } else {
 
-            console.log('something happen to tag ********************888')
-            TagsService.save($scope.editedTag, function (resp) {
-              $scope.cancel();
-            });
+            if ($scope.shownTags === 'ticket') {
+              TagsService.changeWord($scope.editedTag.id, $scope.editedTag.word, function (resp) {
+                $scope.cancel();
+              });
+            } else {
+              TagsService.changeWordCompany($scope.editedTag.id, $scope.editedTag.word, function (resp) {
+                $scope.cancel();
+
+                $scope.companyTags.find(function(el) {
+                  return el.id === $scope.editedTag.id;
+                }).word = $scope.editedTag.word;
+              });
+            }
+          } else {
+            if ($scope.shownTags === 'ticket') {
+              TagsService.save($scope.editedTag, function (resp) {
+                $scope.cancel();
+              });
+            } else {
+              TagsService.saveForCompany($scope.editedTag, function (resp) {
+                console.log(resp, "RESP")
+                $scope.cancel();
+                var tag = Object.assign({}, $scope.editedTag);
+                tag.id = resp.data.id;
+
+                $scope.companyTags.push(tag);
+              });
+            }
+
           }
         } else {
           $scope.triedToSave = true;
@@ -62,9 +93,21 @@
       $scope.remove = function (tagId) {
         if (!$scope.removeInProgress) {
           $scope.removeInProgress = true;
-          TagsService.remove(tagId, function () {
-            $scope.removeInProgress = false;
-          });
+
+          if ($scope.shownTags === 'ticket') {
+            TagsService.remove(tagId, function () {
+              $scope.removeInProgress = false;
+            });
+          } else {
+            TagsService.removeCompany(tagId, function () {
+              $scope.removeInProgress = false;
+
+              $scope.companyTags = $scope.companyTags.filter(function(el) {
+                return el.id !== tagId;
+              })
+            });
+          }
+
         }
       };
 

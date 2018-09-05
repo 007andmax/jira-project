@@ -18,6 +18,7 @@
           isDashboardStyle: '@?',
           noAddMore: '<noAddMore',
           customPlaceholder: '<customPlaceholder',
+          activePlaceholder: '<activePlaceholder',
           isRestricted: '<isRestricted',
           showTypeSelector: '<showTypeSelector',
           isRequired: '<isRequired',
@@ -96,7 +97,7 @@
               if ((number && !prefixValid) || formField.$error.pattern) {
                 invalid = true;
                 error = 'Invalid primary phone number';
-              } else if ((($scope.isFirstRequired) || (!number || (prefixValid && isPrefixOnly))) && !notRequired) {
+              } else if ((($scope.isFirstRequired) || (!number || (prefixValid && isPrefixOnly))) && !$scope.notRequired) {
                 required = true;
                 error = 'Phone number is required';
               } else if (!isPrefixOnly && number && number.length < 5) {

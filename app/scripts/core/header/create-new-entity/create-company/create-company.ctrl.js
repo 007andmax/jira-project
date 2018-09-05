@@ -6,9 +6,9 @@
     [
       '$scope', '$uibModal','UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService', '$state', '$timeout',
-      '$rootScope', 'quicktech.common.services.PermissionsService',
+      '$rootScope', 'quicktech.common.services.PermissionsService', 'TagsService',
       function ($scope, $uibModal, UsersService, SubscriptionsService, CompaniesService, AddressesService, ServicesService,
-                PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
+                PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService, TagsService) {
 
         $scope.descriptionMaxLength = 300;
         $scope.techUsers = UsersService.getTechUsers;
@@ -30,6 +30,9 @@
         };
 
 
+        $scope.companyTags = [];
+
+
 
         $scope.addAnotherLocation = function() {
           $scope.editCompany.additionalAddresses.push({
@@ -42,7 +45,12 @@
         }
 
 
-        console.log("CONTROLLER MOTHERFUKCER")
+        $scope.$watch('companyTags', function(val) {
+
+        }, true)
+
+
+        // console.log("CONTROLLER MOTHERFUKCER")
 
 
 
@@ -73,6 +81,9 @@
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
             console.log(companyData, 'companyData ')
 
+
+            $scope.companyTags = companyData.tags || $scope.companyTags;
+
             if (!companyData.addresses || companyData.addresses.length === 0) {
               companyData.addresses = [{}];
             }
@@ -93,6 +104,8 @@
             // }
 
             $scope.editCompany = companyData.staticCopy();
+
+
             getCorrectWorkingTime();
             $scope.contact = $scope.editCompany.contacts[0];
 
@@ -331,6 +344,8 @@
         });
 
         $scope.isShowingContactErrors = function (contact, form, fieldName) {
+          if (!$scope.triedToSave) return false;
+
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
@@ -344,6 +359,8 @@
           if (isInvoice) {
             $rootScope.updateBillTo = form;
           }
+
+          $scope.triedToSave = true;
 
 
           if (form.$valid) {
@@ -420,6 +437,11 @@
                   UsersService.updateWelcomeWizard('setupClient');
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
+
+                TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function(res) {
+                  console.log('TICKET ASSSIGNED', res)
+                })
+
                 if (!($scope.savedState && $scope.savedState.items.length)) {
                   if(isCreateContract && $scope.selectedContractType) {
                     $scope.closeWindowWithoutConfirmation();
@@ -517,10 +539,12 @@
         }
 
         $scope.isShowingErrors = function (form, fieldName) {
+          if (!$scope.triedToSave) return false;
           return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 
         $scope.isShowingServiceErrors = function (form, fieldName) {
+          if (!$scope.triedToSave) return false;
           return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 

@@ -6296,7 +6296,7 @@ Devices tab
 
 @media (max-width: 1280px) {
   .main-container {
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
     width: 1280px;
   }
 

@@ -82,7 +82,7 @@
       }
 
       $scope.isShowingErrors = function (form, fieldName) {
-        return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
+        return $scope.triedToSaveProduct && form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
       };
 
       $scope.isShowingCreateCategoryError = function (form, fieldName) {

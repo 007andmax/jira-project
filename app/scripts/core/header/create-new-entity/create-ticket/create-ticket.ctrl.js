@@ -237,7 +237,7 @@
         });
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return $scope.triedToSaveTicket && form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
 

@@ -10,7 +10,8 @@
         timeZones: '=',
         address: '=',
         saveFunc: '=?',
-        qtTabIndex: '<qtTabIndex'
+        qtTabIndex: '<qtTabIndex',
+        activePlaceholder: '<activePlaceholder'
       },
       link: function ($scope, element) {
         var currentFocused,

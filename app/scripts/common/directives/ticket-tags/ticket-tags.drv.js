@@ -12,11 +12,18 @@
             readonlyTags: '@?',
             ticketTags: '=',
             tagFilter: '<',
-            onSaveFunc: '<'
+            onSaveFunc: '<',
+            isCompany: "<",
+            newDesign: '<'
           },
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
             $scope.tagColors = TagsService.getColors();
+
+            $scope.allTags = [];
+
+
+
             if (!$scope.readonlyTags) {
               var input = $element.find('input');
               input.on('keydown', function (e) {
@@ -28,32 +35,73 @@
                 }
                 $scope.$apply();
               });
-              TagsService.search('', function (resp) {
-                $scope.result = resp;
-                $scope.allTags = resp;
-                $scope.lastResult = resp;
-              });
 
 
 
 
 
-              $scope.$watch(function() {
-                return $rootScope.newTagHasCreated;
-              }, function(val) {
-                if (val) {
-                  $rootScope.newTagHasCreated = false;
-                  console.log('tag has been created')
-                  TagsService.search('', function (resp) {
-                    $scope.result = resp;
-                    $scope.allTags = resp;
-                  });
-                }
-              })
+
+              if ($scope.isCompany) {
+                TagsService.getAllCompanies(function(resp) {
+                  $scope.result = resp.data;
+                  $scope.allTags = resp.data;
+                  $scope.lastResult = resp.data;
+                })
+
+                $scope.$watch(function() {
+                  return $rootScope.tagForCompanyCreated;
+                }, function(val) {
+                  if (val) {
+
+                    TagsService.getAllCompanies(function(resp) {
+                      $scope.result = resp.data;
+                      $scope.allTags = resp.data;
+                      $scope.lastResult = resp.data;
+                    })
+                  }
+
+
+                })
+
+                // var tags = ['first', 'second', 'third', 'fourth'];
+
+                // for (var i = 0; i < tags.length; i++) {
+                //   TagsService.saveForCompany({ word: tags[i] }, function(res) {
+                //     console.log(res);
+                //   })
+                // }
+              } else {
+                TagsService.getAll($scope, function (resp) {
+                  $scope.result = resp;
+                  $scope.allTags = resp;
+                  $scope.lastResult = resp;
+                });
+
+                $scope.$watch(function() {
+                  return $rootScope.newTagHasCreated;
+                }, function(val) {
+                  if (val) {
+                    $rootScope.newTagHasCreated = false;
+                    console.log('tag has been created')
+                    TagsService.getAll($scope, function (resp) {
+                      $scope.result = resp;
+                      $scope.allTags = resp;
+                    });
+                  }
+                })
+              }
+
+
+
+
+
+
+
+
 
               var menu = $element.find('.dropdown-menu');
 
-              menu.on('scroll', scrollHandler)
+              // menu.on('scroll', scrollHandler)
 
 
               function scrollHandler(e) {
@@ -74,14 +122,18 @@
                 // }
               }
 
+              if (!$scope.isCompany) {
+                $document.on('click', $scope.saveTags);
+                $scope.$on('$destroy', function () {
+                  $document.off('click', $scope.saveTags);
+                });
+              }
 
-              $document.on('click', $scope.saveTags);
-              $scope.$on('$destroy', function () {
-                $document.off('click', $scope.saveTags);
-              });
             }
           },
           controller: function ($scope) {
+
+            console.log($scope.readonlyTags, 'READONLY')
             if (!$scope.readonlyTags) {
               var lastQuery = '',
                 tagsChanged = false,
@@ -102,10 +154,37 @@
                       $scope.dropdownOpened = false;
                     }
                   } else {
-                    $scope.ticketTags.push({
-                      word: value,
-                      colorCode: 0
-                    });
+
+                    if ($scope.isCompany) {
+                      var createdTag = $scope.result.find(function(tag) {
+                        return tag.word === value;
+                      });
+
+                      if (createdTag) {
+                        $scope.ticketTags.push(createdTag);
+                      } else {
+                        var tagToCreate = {
+                          word: value
+                        }
+
+                        TagsService.saveForCompany(tagToCreate, function(res) {
+                          tagToCreate.id = res.data.id;
+
+                          console.log(res,' tag to create')
+
+                          $scope.ticketTags.push(tagToCreate);
+                        })
+                      }
+                    } else {
+                      $scope.ticketTags.push({
+                        word: value,
+                        colorCode: 0
+                      });
+                    }
+
+
+
+
                   }
                 } else {
                   $scope.ticketTags.push(value);
@@ -122,15 +201,15 @@
                 tagsChanged = true;
               };
 
-              $scope.$watch(function() {
-                return $rootScope.shouldDownloadNewTags;
-              }, function(val) {
-                if (val && !areNewTagsDownloading) {
-                  $rootScope.shouldDownloadNewTags = false;
-
-                  searchTag(lastQuery, true, $scope.result.length);
-                }
-              })
+              // $scope.$watch(function() {
+              //   return $rootScope.shouldDownloadNewTags;
+              // }, function(val) {
+              //   if (val && !areNewTagsDownloading) {
+              //     $rootScope.shouldDownloadNewTags = false;
+              //
+              //     searchTag(lastQuery, true, $scope.result.length);
+              //   }
+              // })
 
               $scope.saveTags = function () {
                 if (tagsChanged && !$scope.tagFilter) {
@@ -145,7 +224,6 @@
                     searchTag(searchQuery);
                   });
                 } else if (tagsChanged && $scope.tagFilter) {
-                  console.log('tags filter changed')
                   // $scope.onSaveFunc($scope.ticketTags)
                 }
               };
@@ -155,38 +233,46 @@
                 event.stopPropagation();
               };
               $scope.setDropdownOpened = function (open) {
+
+                // console.log('DSADADASDAS')
                 if (!open) {
                   $scope.dropdownOpened = false;
                 }
               };
             }
-            function searchTag(query, forceLoad, offset) {
-              // console.log(query, "QUEYR")
-              if (forceLoad || (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === '')))) {
-                areNewTagsDownloading = true;
 
-                if (offset) {
-                  query += '&offset=' + offset;
-                }
-
-                TagsService.search(query, function (resp) {
-
-                  if (offset) {
-                    resp.forEach(function(el) {
-                      $scope.result.push(el);
-                    });
-                  } else {
-                    $scope.result = resp;
-                  }
-
-                  $scope.lastResult = resp;
-                  lastQuery = query;
-                  areNewTagsDownloading = false;
-
-                  console.log($scope.result, 'result')
-                });
-              }
+            function searchTag(query) {
+              $scope.result = $scope.allTags.filter(function(tag) {
+                return tag.word.indexOf(query) !== -1;
+              });
             }
+            // function searchTag(query, forceLoad, offset) {
+            //   // console.log(query, "QUEYR")
+            //   if (forceLoad || (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === '')))) {
+            //     areNewTagsDownloading = true;
+            //
+            //     if (offset) {
+            //       query += '&offset=' + offset;
+            //     }
+            //
+            //     TagsService.search(query, function (resp) {
+            //
+            //       if (offset) {
+            //         resp.forEach(function(el) {
+            //           $scope.result.push(el);
+            //         });
+            //       } else {
+            //         $scope.result = resp;
+            //       }
+            //
+            //       $scope.lastResult = resp;
+            //       lastQuery = query;
+            //       areNewTagsDownloading = false;
+            //
+            //       console.log($scope.result, 'result')
+            //     });
+            //   }
+            // }
           }
         }
       }]);

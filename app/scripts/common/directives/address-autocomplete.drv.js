@@ -16,7 +16,9 @@
             isAddressRequired: '=?',
             useAlternativeMap: '@?',
             onlyAddress: '<onlyAddress',
-            qtTabIndex: '<qtTabIndex'
+            qtTabIndex: '<qtTabIndex',
+            activePlaceholder: '<activePlaceholder'
+
           },
           templateUrl: function (elem, attr) {
             return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';

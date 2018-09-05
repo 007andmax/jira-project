@@ -23,6 +23,17 @@
 
     function search(keyword, callback) {
 
+      if (!keyword) {
+        $http.get('/tags/getAll').then(function (response) {
+
+          if (callback) {
+            callback(response.data);
+          }
+
+          return response.data;
+        });
+      }
+
       $http.get('/tags/search?word=' + (keyword ? keyword.toLowerCase() : '')).then(function (response) {
 
         if (callback) {
@@ -56,6 +67,43 @@
       });
 
       Utils.handleCallback(future, callback);
+    }
+
+    function setTagsInCompany(tags, companyId, callback) {
+      if (!tags || !Array.isArray(tags)) {
+        throw 'tags is required and must be array!';
+      }
+
+      if (!companyId) {
+        throw 'companyId is required!';
+      }
+
+      var future = $http({
+        url: '/company/tags?companyId=' + companyId,
+        method: 'PUT',
+        data: tags
+      });
+
+      Utils.handleCallback(future, callback);
+    }
+
+
+    function getAllCompanies(callback) {
+      $http.get('/company/tags/getAll')
+        .then(function(response) {
+          if (callback) {
+            callback(response);
+          }
+        })
+    }
+
+    function filterCompanies(tags, callback) {
+      $http.post('/company/clientsByTags', tags.map(function(el) { return el.id }))
+        .then(function(res) {
+          if (callback) {
+            callback(res);
+          }
+        })
     }
 
     function getAll(scope, callback) {
@@ -140,12 +188,36 @@
       Utils.handleCallback(future, callback);
     }
 
+    function changeWordCompany(tagId, word, callback) {
+      if (!tagId) {
+        throw 'Tag id required!';
+      }
+
+      if (!word) {
+        throw 'Word is required!';
+      }
+
+      var future = $http.put('/company/tags/setWordForTag?tagId=' + tagId + '&word=' + word, {});
+
+      Utils.handleCallback(future, callback);
+    }
+
     function remove(tagId, callback) {
       if (!tagId) {
         throw 'Tag id required!';
       }
 
       var future = $http.delete('/tags/removeTag?tagId=' + tagId);
+
+      Utils.handleCallback(future, callback);
+    }
+
+    function removeCompany(tagId, callback) {
+      if (!tagId) {
+        throw 'Tag id required!';
+      }
+
+      var future = $http.delete('/company/tags/removeTag?tagId=' + tagId);
 
       Utils.handleCallback(future, callback);
     }
@@ -182,16 +254,40 @@
       Utils.handleCallback(future, callback);
     }
 
+    function saveForCompany(newTag, callback) {
+      if (!newTag) {
+        throw 'Tag object is required!';
+      }
+
+      if (!newTag.word) {
+        throw 'Tag word is required!';
+      }
+
+      $http.post('/company/tags', newTag).then(function(res) {
+        if (callback) {
+          callback(res);
+
+          $rootScope.tagForCompanyCreated = res.id || res.data.id;
+        }
+      })
+    }
+
     return {
       search: search,
       setTagsInTicket: setTagsInTicket,
+      setTagsInCompany: setTagsInCompany,
       getAll: getAll,
+      getAllCompanies: getAllCompanies,
+      saveForCompany: saveForCompany,
       changeColor: changeColor,
       changeWord: changeWord,
+      changeWordCompany: changeWordCompany,
       remove: remove,
+      removeCompany: removeCompany,
       removeAndReplace: removeAndReplace,
       save: save,
-      getColors: getColors
+      getColors: getColors,
+      filterCompanies: filterCompanies
     }
 
   }]);

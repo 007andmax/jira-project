@@ -23,6 +23,7 @@
       qtNgDisabled: '<?',
       qtReadonly: '<?',
       qtPlaceholder : '<?',
+      activePlaceholder: '<activePlaceholder',
       noForm: '<qtValid',
       customPlaceholder: '<customPlaceholder',
       byIndustry: '<byIndustry'
@@ -40,6 +41,7 @@
     self.list = [];
 
     $scope.qtPlaceholder = self.qtPlaceholder;
+    $scope.activePlaceholder = self.activePlaceholder;
 
     $scope.noForm = self.noForm;
     $scope.byIndustry = self.byIndustry;
@@ -59,7 +61,7 @@
       'ng-trim'      : self.qtNgTrim ? self.qtNgTrim : '',
       'tabindex'     : self.qtTabindex ? self.qtTabindex : '',
       'ng-disabled'  : self.qtNgDisabled ? self.qtNgDisabled : '',
-      'placeholder'  : self.qtPlaceholder ? self.qtPlaceholder : self.customPlaceholder ? self.customPlaceholder : '',
+      'placeholder'  : self.activePlaceholder ? '' : self.qtPlaceholder ? self.qtPlaceholder : self.customPlaceholder ? self.customPlaceholder : '',
     };
 
     console.log(inputAdditionalSettingsDictionary, 'INPUT')

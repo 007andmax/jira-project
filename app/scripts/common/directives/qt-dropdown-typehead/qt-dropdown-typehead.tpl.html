@@ -2,6 +2,7 @@
 <div id="qtDropdown">
 
   <div smart-dropdown-menu-position>
+    <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
     <input type="text"
            class="form-control has-dropdown"
            id="qtInput"
@@ -13,7 +14,7 @@
            class="has-dropdown"
            id="qtInput"
            ng-if="noForm && !byIndustry"
-           placeholder="Select Vendor"
+           placeholder="{{ activePlaceholder ? '' : 'Select Vendor' }}"
            ng-model="$ctrl.viewValueItem"
            ng-click="$ctrl.changeDropdownState()"
            ng-keyup="$ctrl.listFilterFunction()">

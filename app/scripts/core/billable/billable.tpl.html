@@ -23,14 +23,20 @@
                 Save and Email
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
-                  <i class="icn-sm pointer report-caret-icon-white" ></i>
+                <i class="icn-sm pointer report-caret-icon-white"></i>
                 <!--</div>-->
                 <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
               </button>
               <ul class="dropdown-menu">
-                <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
+                <li class="create-invoice-dropdown"
+                    ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">
+                  Save and Print
+                </li>
 
-                <li class="create-invoice-dropdown" ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)">Save and Download</li>
+                <li class="create-invoice-dropdown"
+                    ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)">
+                  Save and Download
+                </li>
               </ul>
             </div>
 
@@ -38,15 +44,18 @@
         </div>
 
         <div class="invoice-create--info">
-          <p class="bold" style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px; display: inline-block' : 'display: inline-block' }}">Business Address and Contact
+          <p class="bold"
+             style="{{ isInvoiceHeaderShown ? 'margin-bottom: 15px; display: inline-block' : 'display: inline-block' }}">
+            Business Address and Contact
             Details, Title, Summary, and Logo</p>
 
-          <div class="expires-in" ng-show="showTimer && !invoiceCreated" style="display: inline-block; margin-left: 20px">
+          <div class="expires-in" ng-show="showTimer && !invoiceCreated"
+               style="display: inline-block; margin-left: 20px">
             <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
             {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
           </div>
           <div class="caret-wrapper pointer" ng-click="toggleInvoiceHeader()">
-            <i class="icn-sm pointer report-caret-icon" ></i>
+            <i class="icn-sm pointer report-caret-icon"></i>
           </div>
 
           <div class="invoice-create--info__content" ng-if="isInvoiceHeaderShown">
@@ -103,7 +112,8 @@
                 <p>{{currentInvoice.phoneNumbers[0].number}}</p>
               </div>
               <div>
-                <a class="bold pointer font-size-13" ng-click="openEditModal('contacts', editCompany)">Edit Your Business Address and Contact Details</a>
+                <a class="bold pointer font-size-13" ng-click="openEditModal('contacts', editCompany)">Edit Your
+                  Business Address and Contact Details</a>
               </div>
             </div>
           </div>
@@ -114,14 +124,17 @@
           <div class="bill-anton">
             <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
             <p class="bold">{{invoiceBillTo.name}}</p>
-            <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
+            <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +
+              invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
             <p>{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
             <p>{{ invoiceBillTo.companyInfo.contacts[0].primaryEmail }}</p>
             <p style="margin-bottom: 20px;">{{ invoiceBillTo.contacts[0].phoneNumbers[0].number }}</p>
             <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
           <div class="bill-valera font-size-13">
-            <div><span class="bold">Tax Number</span><input type="text" placeholder="Tax Number" ng-model="taxIdData.taxId" ng-change="changeTaxIdData()"></div>
+            <div><span class="bold">Tax Number</span><input type="text" placeholder="Tax Number"
+                                                            ng-model="taxIdData.taxId" ng-change="changeTaxIdData()">
+            </div>
             <div><span class="bold">Invoice Date</span>
               <input type="text" class="form-validation has-dropdown" placeholder="Date"
                      qt-data-time-picker ng-model="currentInvoice.date"
@@ -203,7 +216,8 @@
               <div class="pavlik clearfix">
                 <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
                 <div class="col-md-8 bold" style="opacity: .7;">Subject</div>
-                <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">{{ ticket.closedAt | date: 'dd MMM yyyy'
+                <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">{{
+                  ticket.closedAt | date: 'dd MMM yyyy'
                   }}
                 </div>
               </div>
@@ -269,13 +283,14 @@
                   </div>
 
                   <!-- onkeypress="return false;" -->
-                   <!-- | filter: $viewValue -->
+                  <!-- | filter: $viewValue -->
 
 
                   <!-- <input ng-if="chosenNote.line1" ng-keypress="saveUpdatedNote()" style="display: inline-block"
                          type="text" class="form-validation" ng-model="chosenNote.title"> -->
 
-                  <span ng-if="isSaveButtonShown()" class="pointer" style="margin-left: 15px;"><a class="bold" ng-click="saveUpdatedNote(true) || hideRegularNoteButton(false)">Save Note</a></span>
+                  <span ng-if="isSaveButtonShown()" class="pointer" style="margin-left: 15px;"><a class="bold"
+                                                                                                  ng-click="saveUpdatedNote(true) || hideRegularNoteButton(false)">Save Note</a></span>
                 </div>
                 <div class="col-md-1 bold fz-11" style="padding: 8px 15px;">Tax</div>
                 <div class="col-md-1 text-right pr-30" style="padding: 8px 15px;">{{ currentInvoice.taxSum | currency:
@@ -284,8 +299,10 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-10 pl-30 font-size-13">
-                  <textarea auto-expand class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="chosenNote.line"
-                            ng-keyup="saveUpdatedNote() || hideRegularNoteButton(true)" maxlength="510" placeholder="Please type custom note here"></textarea>
+                  <textarea auto-expand class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;"
+                            ng-model="chosenNote.line"
+                            ng-keyup="saveUpdatedNote() || hideRegularNoteButton(true)" maxlength="510"
+                            placeholder="Please type custom note here"></textarea>
                 </div>
                 <div class="col-md-1 bold fz-11">Total</div>
                 <div class="col-md-1 bold fz-16 text-right pr-30">{{ currentInvoice.totalSum | currency: '$':2 }}</div>
@@ -300,8 +317,10 @@
 
               <div class="col-md-12 pl-30">
 
-                <textarea auto-expand class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;" ng-model="globalNote.line"
-                         placeholder="Mention your company's Terms and Conditions" maxlength="510" ng-keyup="hideGlobalNoteButton(true)"></textarea>
+                <textarea auto-expand class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;"
+                          ng-model="globalNote.line"
+                          placeholder="Mention your company's Terms and Conditions" maxlength="510"
+                          ng-keyup="hideGlobalNoteButton(true)"></textarea>
                 <!-- {{globalNote.line1 + (globalNote.line2 || '')}} -->
                 <!-- execute-when-outfocused="saveUpdatedNote(true, globalNote)" -->
               </div>
@@ -331,20 +350,27 @@
                 Save and Email
 
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
-                  <i class="icn-sm pointer report-caret-icon-white" ></i>
+                <i class="icn-sm pointer report-caret-icon-white"></i>
                 <!--</div>-->
                 <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
               </button>
               <ul class="dropdown-menu">
-                <li class="create-invoice-dropdown" ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">Save and Print</li>
+                <li class="create-invoice-dropdown"
+                    ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)">
+                  Save and Print
+                </li>
 
-                <li class="create-invoice-dropdown" ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)">Save and Download</li>
+                <li class="create-invoice-dropdown"
+                    ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)">
+                  Save and Download
+                </li>
               </ul>
             </div>
           </div>
         </div>
         <div class="info-block">
-          <p style="display: inline-block; margin-right: 20px;">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p>
+          <p style="display: inline-block; margin-right: 20px;">This is a preview of your invoice. Switch back to Edit
+            if you need to make changes.</p>
           <div class="expires-in" ng-show="showTimer && !invoiceCreated" style="display: inline-block;">
             <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
             {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
@@ -369,14 +395,16 @@
               <div class="col-md-7 pl-30">
                 <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
                 <p class="bold">{{invoiceBillTo.name}}</p>
-                <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
+                <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +
+                  invoiceBillTo.companyInfo.contacts[0].lastName}}</p>
                 <p>{{ invoiceBillTo.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}</p>
                 <p>{{ invoiceBillTo.companyInfo.contacts[0].primaryEmail }}</p>
                 <p style="margin-bottom: 20px;">{{ invoiceBillTo.contacts[0].phoneNumbers[0].number }}</p>
               </div>
               <div class="col-md-5 pr-30 font-size-13">
                 <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>
-                <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice Date:</p>
+                <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice
+                  Date:</p>
                 <p class="bold"><span>{{ currentInvoice.dueDate | date: 'dd MMM yyyy'}}</span>Payment Due</p>
                 <p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount
                   Due:</p>
@@ -417,7 +445,8 @@
               <div class="pavlik clearfix">
                 <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
                 <div class="col-md-8 bold" style="opacity: .7;">Subject</div>
-                <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">{{ ticket.closedAt | date: 'dd MMM yyyy'
+                <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">{{
+                  ticket.closedAt | date: 'dd MMM yyyy'
                   }}
                 </div>
               </div>

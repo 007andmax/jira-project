@@ -39,13 +39,32 @@
 
         $scope.PermissionsService = PermissionsService;
 
+
+
+        $scope.allCompanies = CompaniesService.getAllCompanies();
+        $scope.allArchivedCompanies = CompaniesService.getArchivedCompanies();
+
         $scope.companies = CompaniesService.getAllCompanies();
         $scope.archivedCompanies = CompaniesService.getArchivedCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
 
-        console.log($scope.companies, 'COMPANIES')
+        $scope.$watch(function() {
+          return $rootScope.filteredCompanies;
+        }, function(val) {
+          if (val) {
+
+            console.log(val, "VAL", $scope.allCompanies)
+            $scope.companies = val;
+            $scope.archivedCompanies = [];
+          } else if (val === false) {
+            $scope.companies = $scope.allCompanies;
+            $scope.archivedCompanies = $scope.allArchivedCompanies;
+          }
+
+          $rootScope.filterCompanies = null;
+        })
 
         $scope.tagColors = TagsService.getColors();
 
@@ -121,6 +140,14 @@
           globalSearch.count = value;
         });
 
+        $scope.$watch(function() {
+          return globalSearch.count;
+        }, function(val) {
+          if (val !== $scope.companiesCtrl.shownCompanies.length) {
+            globalSearch.count = $scope.companiesCtrl.shownCompanies.length;
+          }
+        })
+
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
             $state.go('companyProfile', { companyId: company.id, tabName: 'dashboadr' });
@@ -170,6 +197,8 @@
               result = result && value.createdAt <= (new Date(end)).getTime();
             }
           }
+
+          // console.log(result, "RSUT")
           return result;
 
         };

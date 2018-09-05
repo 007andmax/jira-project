@@ -27,12 +27,22 @@
                 $scope.$broadcast('leftPanelClosedFromQTSidebar');
               }
 
-              if (e) {
-                $scope.$apply();
-              }
+
 
               $document.off('click', closeLeftPanelOnSmallScreen);
               $document.on('click', closeLeftPanelOnSmallScreen);
+
+              if ($rootScope.isLeftPanelHidden === false && window.innerWidth < 1280) {
+                setTimeout(function(){
+                  document.getElementById('toggle-left-panel').click();
+                }, 0)
+              } else {
+                if (e) {
+                  $scope.$apply();
+                }
+              }
+
+
             }
           }
 

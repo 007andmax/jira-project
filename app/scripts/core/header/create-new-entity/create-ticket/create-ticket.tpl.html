@@ -29,9 +29,9 @@
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="ticket--content row">
-    <div class="col-md-12 ticket-subject" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
+    <div class="col-md-12 ticket-subject" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
+      <div class="placeholder">Type ticket subject here</div>
       <input type="text" class="form-validation"
-             placeholder="Type ticket subject here"
              name="ticketSubject" ng-maxlength="300"
              ng-required="true" make-dirty-on-blur
              ng-model="ticket.subject">
@@ -90,17 +90,20 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-12 description">
-      <input ng-model="ticket.note" placeholder="Write issue here…" type="text">
+    <div class="col-md-12 description" add-on-focus>
+      <div class="placeholder">Write issue here…</div>
+      <input ng-model="ticket.note" type="text">
     </div>
-    <div class="col-md-6" add-create-new-button="company">
+    <div class="col-md-6" add-on-focus add-create-new-button="company">
       <!-- <input placeholder="Select Company" type="text"> -->
+      <div class="placeholder">Select Company</div>
       <input type="text" class="form-validation has-dropdown"
              smart-dropdown-menu-position
              next-after-text-editor
              ng-model="ticketCompany"
              name="ticketCompany"
-             placeholder="Select Company"
+             execute-when-outfocused="ticketCompanyOutfocus()"
+             placeholder=""
              autocomplete="off"
              uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
              typeahead-min-length="0"
@@ -124,20 +127,19 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" add-create-new-button="user"
+    <div class="col-md-6 dropdown-user-parent" add-on-focus add-create-new-button="user"
          ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCreatedUser')}">
       <!-- <input placeholder="Select User" type="text"> -->
-
+      <div class="placeholder">Select User</div>
       <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
              smart-dropdown-menu-position
              ng-model="ticketCreatedUser"
              typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
              uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
              qt-typeahead-async-show-on-focus ng-trim="false"
-             placeholder="Select User"
              custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
 
-      <input placeholder="Select User" type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser"
+      <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser"
              ng-required="true">
 
       <div typeahead-input-icon-sm="ticketCreatedUser"></div>
@@ -153,28 +155,24 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+    <div class="col-md-6 dropdown-user-parent" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
          uib-dropdown>
       <!-- <input placeholder="Assign to" type="text"> -->
-
       <!-- smart-dropdown-menu-position -->
       <!-- uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'" -->
-
-
       <!-- users="usersCurrentCompany" -->
-
+      <div class="placeholder">Assign to</div>
       <input type="text" class="form-validation has-dropdown-with-label"
              smart-dropdown-menu-position autocomplete="off"
-             placeholder="Assign to"
+             placeholder=""
+             execute-when-outfocused="assignToOutfocus()"
              ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
              typeahead-on-select="userAssigned(ticketAssignTo)"
              typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
              uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
              qt-typeahead-async-show-on-focus ng-required="false"
              custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">
-
       <div typeahead-input-icon-sm="ticketAssignTo"></div>
-
       <div class="ng-scope" typeahead-input-icon="userCompany">
         <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
           <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
@@ -184,8 +182,6 @@
           <i class="icn-sm icn-caret-gray"></i>
         </span>
       </div>
-
-
       <!-- <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
@@ -195,17 +191,14 @@
             <i class="icn-sm icn-caret-gray"></i>
           </span>
       </div> -->
-
-
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
          ng-hide='(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length'>
       <!-- <input placeholder="Select Device" type="text"> -->
-
+      <div class="placeholder">Select Device</div>
       <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
              smart-dropdown-menu-position
              ng-model="ticketAgent" name="ticketAgent"
-             placeholder="Select Device"
              uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
              qt-typeahead-async-show-on-focus
              custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">

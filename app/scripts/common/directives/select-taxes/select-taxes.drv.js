@@ -10,7 +10,8 @@
       entityType: '@?',
       onClose: '=?',
       isIcon: '@?',
-      isPreviewMode: '@?'
+      isPreviewMode: '@?',
+      activePlaceholder: '<activePlaceholder'
     },
     controller: selectTaxesCtrl
   });
@@ -100,9 +101,12 @@
     }
 
     function getSelectedTaxNames() {
+      console.log($ctrl.entity.taxes.map(function (tax) {
+          return tax.name + ' ' + tax.rate + '%';
+        }).join(', '))
       return $ctrl.entity.taxes.map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
-        }).join(', ') || 'No taxes';
+        }).join(', ') || ($ctrl.activePlaceholder ? "" : 'No taxes');
     }
 
     function createSelectedTaxes(taxes) {

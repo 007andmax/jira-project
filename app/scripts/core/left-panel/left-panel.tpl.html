@@ -548,13 +548,9 @@
           <i class="icn-sm icn-label-save-left-panel"
              ng-show="!isArchivedCompaniesToShow()"></i>
         </div>
-        <div class="center-category__category sked" ng-click="filterCompanies('archived')"
-             ng-class="{'active': isArchivedCompaniesToShow()}">
-          Archived
-          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
-        </div>
+
         <div class="left-panel-title font-medium">
-          tags
+          types
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('clients')"
              ng-class="{'active': companiesSharedState.filter.isClient}">
@@ -621,6 +617,22 @@
               </li>
             </ul>
           </div>
+        </div>
+
+        <div class="center-category__category sked" ng-click="filterCompanies('archived')"
+             ng-class="{'active': isArchivedCompaniesToShow()}">
+          Archived
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
+        </div>
+
+        <div class="left-panel-title font-medium">
+          tags
+        </div>
+
+        <div class="center-category__category sked without-height">
+
+          <ticket-tags is-company="true" tag-filter="true" on-save-func="" ticket-tags="companyFilterTags"></ticket-tags>
+
         </div>
         <div class="left-panel-hide-filter">
           <div class="left-panel-title font-medium left-panel-title-hover"
