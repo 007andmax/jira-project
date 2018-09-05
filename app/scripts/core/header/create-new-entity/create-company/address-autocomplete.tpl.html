@@ -1,4 +1,4 @@
-<div class="clearfix" ng-form="addressForm">
+<div class="clearfix" ng-form="addressForm" add-on-focus>
   <div class="form-group"
        ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
 
@@ -21,24 +21,11 @@
 
     </div>
 
-    <!-- <div ng-if="!qtTabIndex">
-      <input class="form-validation pointer" type="text" ng-model="model.address"
-             name="address" map-input make-dirty-on-blur>
-    </div>
 
-    <div ng-if="qtTabIndex">
-      <input class="form-validation pointer" type="text" ng-model="model.address"
-             name="address" map-input make-dirty-on-blur>
-    </div> -->
-
-    <input tabindex="{{ qtTabIndex ? qtTabIndex : 0 }}" class="form-validation pointer" type="text" ng-model="model.address"
+    <input tabindex="{{ qtTabIndex ? qtTabIndex : '0' }}" placeholder="'{{ activePlaceholder ? '' : 'Enter a location' }}" class="form-validation pointer" type="text" ng-model="model.address"
            name="address" map-input make-dirty-on-blur>
+    <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
 
-
-    <!-- <input ng-if="!qtTabIndex" class="form-validation pointer" type="text" ng-model="model.address"
-           name="address" map-input make-dirty-on-blur>
-    <input ng-if="qtTabIndex"  class="form-validation pointer" type="text" ng-model="model.address"
-           name="address" map-input make-dirty-on-blur> -->
   </div>
 
   <div class="form-row clearfix" ng-if="!onlyAddress">

@@ -1,3 +1,41 @@
+.placeholder {
+  color: #9CA5B6;
+  font-size: 13px;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  position: absolute;
+  top: 12px;
+  transition: all .3s;
+  pointer-events: none;
+  z-index: 99;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.description .placeholder {
+  font-size: 16px;
+}
+
+.ticket-subject .placeholder {
+  font-size: 24px;
+}
+
+.active-field .placeholder {
+  font-size: 10px;
+  top: -5px;
+  text-transform: uppercase;
+}
+
+.add-taxes {
+  position: absolute;
+  top: 0;
+  right: 15px;
+}
+
+.alyosha {
+  font-family: "Graphik Bold", sans-serif;
+  font-size: 12px;
+}
+
 .create-popup .modal-dialog {
   width: 620px;
   height: auto;
@@ -1427,6 +1465,13 @@ _::-webkit-:not(:root:root),
   right: 10px;
 }
 
+.create-new input {
+  color: #4F5F79;
+  font-size: 13px;
+  letter-spacing: 0;
+  font-family: "Graphik Medium", sans-serif;
+}
+
 .create-new input:active,
 .create-new input:focus {
   border-color: #16A4FA;
@@ -1592,6 +1637,7 @@ _::-webkit-:not(:root:root),
 
 .create-new .create-user-avatar .avatar img {
   margin-top: -25px;
+  max-width: 300%;
 }
 
 .company--footer {
@@ -1612,6 +1658,13 @@ _::-webkit-:not(:root:root),
 
 .phone-number-anton > div > div {
   display: inline-block;
+}
+
+.phone-number-anton button {
+  color: #4F5F79;
+  font-size: 13px;
+  letter-spacing: 0;
+  font-family: "Graphik Medium", sans-serif;
 }
 
 .phone-number-anton > div > div:last-child button {
@@ -1649,6 +1702,7 @@ _::-webkit-:not(:root:root),
 .create-new .taxes .select-taxes-drv > input {
   height: 45px;
   border-radius: 0;
+  padding: 10px 60px 10px 0;
 }
 
 .create-new .taxes .icn-label-save {

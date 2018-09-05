@@ -339,6 +339,8 @@
         });
 
         $scope.isShowingContactErrors = function (contact, form, fieldName) {
+          if (!$scope.triedToSave) return false;
+
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
@@ -352,6 +354,8 @@
           if (isInvoice) {
             $rootScope.updateBillTo = form;
           }
+
+          $scope.triedToSave = true;
 
 
           if (form.$valid) {
@@ -530,10 +534,12 @@
         }
 
         $scope.isShowingErrors = function (form, fieldName) {
+          if (!$scope.triedToSave) return false;
           return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 
         $scope.isShowingServiceErrors = function (form, fieldName) {
+          if (!$scope.triedToSave) return false;
           return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 

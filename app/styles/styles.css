@@ -3946,6 +3946,12 @@ textarea.form-control {
   border-color: #fde9e9;
 }
 
+.has-error.active-field .placeholder {
+  display: none !important;
+}
+
+
+
 .form-control.show-password + a.show-password-hit {
   position: absolute;
   right: 12px;
