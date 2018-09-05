@@ -140,6 +140,14 @@
           globalSearch.count = value;
         });
 
+        $scope.$watch(function() {
+          return globalSearch.count;
+        }, function(val) {
+          if (val !== $scope.companiesCtrl.shownCompanies.length) {
+            globalSearch.count = $scope.companiesCtrl.shownCompanies.length;
+          }
+        })
+
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
             $state.go('companyProfile', { companyId: company.id, tabName: 'dashboadr' });
