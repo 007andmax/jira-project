@@ -1,6 +1,6 @@
-<div class="clearfix" ng-form="addressForm" add-on-focus>
+<div class="clearfix" ng-form="addressForm" >
   <div class="form-group"
-       ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+       ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}" add-on-focus>
 
     <label ng-if="!onlyAddress"
            class="control-label"
@@ -22,7 +22,7 @@
     </div>
 
 
-    <input tabindex="{{ qtTabIndex ? qtTabIndex : '0' }}" placeholder="'{{ activePlaceholder ? '' : 'Enter a location' }}" class="form-validation pointer" type="text" ng-model="model.address"
+    <input tabindex="{{ qtTabIndex ? qtTabIndex : 0 }}" placeholder="'{{ activePlaceholder ? '' : 'Enter a location' }}" class="form-validation pointer" type="text" ng-model="model.address"
            name="address" map-input make-dirty-on-blur>
     <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
 

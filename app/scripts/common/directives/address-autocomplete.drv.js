@@ -16,7 +16,7 @@
             isAddressRequired: '=?',
             useAlternativeMap: '@?',
             onlyAddress: '<onlyAddress',
-            qtTabIndex: '<qtTabIndex'
+            qtTabIndex: '<qtTabIndex',
             activePlaceholder: '<activePlaceholder'
 
           },

@@ -75,7 +75,7 @@
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
       <div class="col-md-6 phone-number"
-           add-on-focus
+
            is-try-to-save="triedToSave"
            no-add-more="true"
            phone-numbers-edit
@@ -88,7 +88,6 @@
            custom-placeholder="'Primary contact phone'">
       </div>
       <div class="col-md-6 phone-number"
-           add-on-focus
            phone-numbers-edit no-add-more="true"
            ng-model="editCompany.addresses[0].phoneNumbers"
            is-try-to-save="triedToSave"
@@ -336,7 +335,7 @@
 
       <div class="col-md-4 phone-number-anton"
            is-try-to-save="triedToSave"
-           add-on-focus
+
            active-placeholder="'Primary contact phone'"
            no-add-more="true"
            phone-numbers-edit
@@ -419,7 +418,6 @@
       </div>
 
       <div class="col-md-4 phone-number"
-           add-on-focus
            phone-numbers-edit no-add-more="true"
            ng-model="editCompany.addresses[0].phoneNumbers"
            is-try-to-save="triedToSave"
@@ -487,6 +485,10 @@
 
         </div>
 
+      </div>
+
+      <div class="col-md-4 tags-modal-wrapper">
+        <ticket-tags is-company="true" new-design="true" on-save-func="" ticket-tags="companyTags"></ticket-tags>
       </div>
 
 
