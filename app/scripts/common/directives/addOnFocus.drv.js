@@ -11,8 +11,6 @@
           setTimeout(function() {
             var input = element.find('input');
 
-            console.log(element[0], input)
-
             $scope.$watch(function() {
               return input.val();
             }, function(val) {
