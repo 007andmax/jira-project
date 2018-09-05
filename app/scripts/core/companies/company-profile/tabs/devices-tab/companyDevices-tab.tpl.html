@@ -121,10 +121,10 @@
               <p><span>{{connection.performer.firstName}}</span>
                 {{connection.performer.lastName}}</p>
               <div>
-                <p>Connected: <span ng-show="returnTimeFormatForPage(connection.agentConnectedAt).days > 0">{{returnTimeFormatForPage(connection.agentConnectedAt).days}} day</span><span
-                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt).hours > 0"> {{returnTimeFormatForPage(connection.agentConnectedAt).hours}} hrs</span><span
-                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt).minutes > 0 && returnTimeFormatForPage(connection.agentConnectedAt).days < 1"> {{returnTimeFormatForPage(connection.agentConnectedAt).minutes}} min</span><span
-                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt).seconds > 0 && returnTimeFormatForPage(connection.agentConnectedAt).minutes < 1"> 0 min</span>
+                <p>Connected: <span ng-show="returnTimeFormatForPage(connection.agentConnectedAt, true, $index).days > 0">{{returnTimeFormatForPage(connection.agentConnectedAt, true, $index).days}} day</span><span
+                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt, true, $index).hours > 0"> {{returnTimeFormatForPage(connection.agentConnectedAt, true, $index).hours}} hrs</span><span
+                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt, true, $index).minutes > 0 && returnTimeFormatForPage(connection.agentConnectedAt, true, $index).days < 1"> {{returnTimeFormatForPage(connection.agentConnectedAt, true, $index).minutes}} min</span><span
+                  ng-show="returnTimeFormatForPage(connection.agentConnectedAt, true, $index).seconds > 0 && returnTimeFormatForPage(connection.agentConnectedAt, true, $index).minutes < 1"> 0 min</span>
                 </p>
               </div>
             </div>
