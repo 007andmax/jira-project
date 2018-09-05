@@ -21,7 +21,7 @@
 
 .active-field .placeholder {
   font-size: 10px;
-  top: -5px;
+  top: -10px;
   text-transform: uppercase;
 }
 
@@ -766,7 +766,7 @@ _::-webkit-:not(:root:root),
   border-radius: 50%;
 }
 
-.ticket--footer .shared-avatars  {
+.ticket--footer .shared-avatars {
   display: flex;
 }
 
@@ -775,15 +775,11 @@ _::-webkit-:not(:root:root),
   border: 1px solid white;
 }
 
-
-
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
 
 }
-
-
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
@@ -805,8 +801,6 @@ _::-webkit-:not(:root:root),
   margin-right: 3px;
 }
 
-
-
 .ticket--footer .shared-avatars .shared-avatar > img {
   width: 32px;
   height: 32px;
@@ -822,7 +816,6 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
 
 }
 
@@ -840,7 +833,7 @@ _::-webkit-:not(:root:root),
   background-color: #aae8e8;
 } */
 
-.user-item:nth-child(even) .default-user-avatar, li:nth-child(even)  .default-user-avatar {
+.user-item:nth-child(even) .default-user-avatar, li:nth-child(even) .default-user-avatar {
   background-color: #ffe3af;
 }
 
@@ -916,6 +909,33 @@ _::-webkit-:not(:root:root),
 .company--content,
 .product--content {
   margin: 0 -15px;
+}
+
+.company--content .tags-modal-wrapper input {
+  padding: 10px 0;
+  height: 45px;
+}
+
+.company--content .tags {
+  padding: 0;
+}
+
+.company--content .tags-modal-wrapper .tags-wrap .tags {
+  min-height: auto;
+}
+
+.company--content .tags-wrap {
+  border-radius: 0;
+}
+
+.company--content .tags:before {
+  position: absolute;
+  content: '';
+  background-image: url(../images/new-icons/tag.png);
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 13px;
 }
 
 .invoice--content {

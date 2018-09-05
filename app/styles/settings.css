@@ -30,6 +30,11 @@
   padding: 0;
 }
 
+.custom-phone-number .placeholder,
+.company--content .tags-modal-wrapper .placeholder {
+  padding-left: 25px;
+}
+
 .custom-phone-type {
   padding-right: 0;
 }
