@@ -26,7 +26,7 @@
     //$ctrl.isIcon = $scope.$eval($ctrl.isIcon);
     this.showIcon = $ctrl.isIcon ? true : false;
     this.previewMode = $ctrl.isPreviewMode ? true : false;
-    
+
     $ctrl.searchTax = '';
 
     if ($ctrl.entity.taxes && $ctrl.entity.taxes.length) {
@@ -101,9 +101,12 @@
     }
 
     function getSelectedTaxNames() {
+      console.log($ctrl.entity.taxes.map(function (tax) {
+          return tax.name + ' ' + tax.rate + '%';
+        }).join(', '))
       return $ctrl.entity.taxes.map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
-        }).join(', ') || $ctrl.activePlaceholder ? "" : 'No taxes';
+        }).join(', ') || ($ctrl.activePlaceholder ? "" : 'No taxes');
     }
 
     function createSelectedTaxes(taxes) {

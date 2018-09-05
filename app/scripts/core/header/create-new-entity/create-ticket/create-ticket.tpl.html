@@ -29,7 +29,7 @@
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="ticket--content row">
-    <div class="col-md-12 ticket-subject" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
+    <div class="col-md-12 ticket-subject" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
       <div class="placeholder">Type ticket subject here</div>
       <input type="text" class="form-validation"
              name="ticketSubject" ng-maxlength="300"
@@ -90,11 +90,11 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-12 description">
+    <div class="col-md-12 description" add-on-focus>
       <div class="placeholder">Write issue here…</div>
       <input ng-model="ticket.note" type="text">
     </div>
-    <div class="col-md-6" add-create-new-button="company">
+    <div class="col-md-6" add-on-focus add-create-new-button="company">
       <!-- <input placeholder="Select Company" type="text"> -->
       <div class="placeholder">Select Company</div>
       <input type="text" class="form-validation has-dropdown"
@@ -103,7 +103,7 @@
              ng-model="ticketCompany"
              name="ticketCompany"
              execute-when-outfocused="ticketCompanyOutfocus()"
-             placeholder="Select Company"
+             placeholder=""
              autocomplete="off"
              uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
              typeahead-min-length="0"
@@ -127,7 +127,7 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" add-create-new-button="user"
+    <div class="col-md-6 dropdown-user-parent" add-on-focus add-create-new-button="user"
          ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCreatedUser')}">
       <!-- <input placeholder="Select User" type="text"> -->
       <div class="placeholder">Select User</div>
@@ -156,15 +156,16 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+    <div class="col-md-6 dropdown-user-parent" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
          uib-dropdown>
       <!-- <input placeholder="Assign to" type="text"> -->
       <!-- smart-dropdown-menu-position -->
       <!-- uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'" -->
       <!-- users="usersCurrentCompany" -->
+      <div class="placeholder">Assign to</div>
       <input type="text" class="form-validation has-dropdown-with-label"
              smart-dropdown-menu-position autocomplete="off"
-             placeholder="Assign to"
+             placeholder=""
              execute-when-outfocused="assignToOutfocus()"
              ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
              typeahead-on-select="userAssigned(ticketAssignTo)"
@@ -192,7 +193,7 @@
           </span>
       </div> -->
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
          ng-hide='(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length'>
       <!-- <input placeholder="Select Device" type="text"> -->
       <div class="placeholder">Select Device</div>

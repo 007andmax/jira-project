@@ -56,7 +56,7 @@
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="service--content row">
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
       <div ng-messages="editServiceForm.editServiceName.$error"
            ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
         <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
@@ -70,7 +70,7 @@
              requiredis-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
              ng-maxlength="30" ng-minlength="3">
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+    <div class="col-md-6" add-on-focus  ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
       <div ng-messages="editServiceForm.editServiceName.$error"
            ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceRate')}">
         <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
@@ -82,8 +82,8 @@
              ng-model="editService.rate" qt-to-fixed="2"
              required name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
     </div>
-    <div class="col-md-6 taxes">
-      <select-taxes taxes="taxes" entity="editService"></select-taxes>
+    <div class="col-md-6 taxes" add-on-focus>
+      <select-taxes taxes="taxes" active-placeholder='"Taxes"' entity="editService"></select-taxes>
       <div class="add-taxes">
         <p style="margin-bottom: 0;" smart-dropdown-menu-position no-restricted="true"
            dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">

@@ -13,8 +13,8 @@
          ng-style="tagFilter ? { 'width': '100%' } : ''"
          dropdown-arrow-navigation on-enter="addTag" dropdown-data-item-name="tag">
 
-
-      <input type="text" class="{{ tagFilter ? 'form-control tags-input' : 'tags-input' }}" ng-model="newTag" placeholder="{{ newDesign ? 'Add tag' : '' }}" set-focus-on-var-change="focusInput">
+      <div ng-if="newDesign" class="placeholder">Taxes</div>
+      <input type="text" class="{{ tagFilter ? 'form-control tags-input' : 'tags-input' }}" ng-model="newTag" placeholder="" set-focus-on-var-change="focusInput">
       <ul ng-show="newDesign" class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
         <li ng-repeat="tag in result | orderBy:'word'"
             ng-click="addTag(tag)">

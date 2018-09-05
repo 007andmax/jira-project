@@ -54,7 +54,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
+          return $scope.triedToSaveService && form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.validateServiceName = function (ngModelCtrl, modelId, afterValidationCallback) {
