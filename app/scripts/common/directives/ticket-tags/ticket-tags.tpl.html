@@ -13,7 +13,7 @@
          ng-style="tagFilter ? { 'width': '100%' } : ''"
          dropdown-arrow-navigation on-enter="addTag" dropdown-data-item-name="tag">
 
-      <div ng-if="newDesign" class="placeholder">Taxes</div>
+      <div ng-if="newDesign && !ticketTags.length" class="placeholder">Tags</div>
       <input type="text" class="{{ tagFilter ? 'form-control tags-input' : 'tags-input' }}" ng-model="newTag" placeholder="" set-focus-on-var-change="focusInput">
       <ul ng-show="newDesign" class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
         <li ng-repeat="tag in result | orderBy:'word'"
