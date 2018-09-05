@@ -81,6 +81,9 @@
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
             console.log(companyData, 'companyData ')
 
+
+            $scope.companyTags = companyData.tags || $scope.companyTags;
+
             if (!companyData.addresses || companyData.addresses.length === 0) {
               companyData.addresses = [{}];
             }
@@ -101,6 +104,8 @@
             // }
 
             $scope.editCompany = companyData.staticCopy();
+
+
             getCorrectWorkingTime();
             $scope.contact = $scope.editCompany.contacts[0];
 
