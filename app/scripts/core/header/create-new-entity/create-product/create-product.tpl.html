@@ -191,7 +191,7 @@
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="product--content row" ng-form="editProductForm">
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}" add-on-focus>
       <div class="placeholder">Item number</div>
       <input type="text" class="form-validation" name="editProductMfg"
              ng-required='false' ng-model="editProduct.manufacture" ng-maxlength="50"
@@ -200,7 +200,7 @@
              model-id="editProduct.versionedId.id">
 
     </div>
-    <div class="col-md-6 dropdown" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
+    <div class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
       <div class="placeholder">Category</div>
       <input style="padding-right: 70px;" type="text" class="has-dropdown"
              required ng-maxlength="100"
@@ -235,15 +235,15 @@
 
 
     </div>
-    <div class="col-md-12" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+    <div class="col-md-12" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
       <div class="placeholder">Description</div>
       <input type="text" style="vertical-align: top;" type="text" class="form-validation"
              ng-model="editProduct.description" ng-required="true"
              ng-maxlength="500" name="editProductDescription" tabindex="1"/>
 
     </div>
-    <div class="col-md-6 taxes">
-      <select-taxes taxes="taxes" entity="editProduct"></select-taxes>
+    <div class="col-md-6 taxes" add-on-focus>
+      <select-taxes taxes="taxes"  active-placeholder="'Taxes'" entity="editProduct"></select-taxes>
       <div class="add-taxes">
         <p style="margin-bottom: 0; padding-bottom: 11px;" smart-dropdown-menu-position no-restricted="true"
            dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
@@ -306,7 +306,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
+    <div class="col-md-3" add-on-focus  ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
          ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
       <div class="placeholder">Cost</div>
       <input type="text" ng-model="editProduct.cost"
@@ -314,21 +314,21 @@
              hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" tabindex="2">
 
     </div>
-    <div class="col-md-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
+    <div class="col-md-3" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
       <div class="placeholder">Price</div>
       <input type="text" class="form-validation" ng-model="editProduct.sale"
              name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
              hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" tabindex="3">
 
     </div>
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
       <div class="placeholder">ILC number</div>
       <input type="text" class="form-validation" name="editProductILC"
              ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
              is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       <i class="barcode-icon"></i>
     </div>
-    <div class="col-md-6 dropdown" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+    <div class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
 
       <!-- <input type="text" class="form-validation has-dropdown"
              autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
@@ -348,6 +348,7 @@
                             filter-property="'name'"
                             qt-tabindex="'5'"
                             qt-valid="true"
+                            active-placeholder="'Vendors'"
                             qt-placeholder="'Vendors'"
                             qt-name="'editProductVendor'"
                             qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'97%\'}'">
