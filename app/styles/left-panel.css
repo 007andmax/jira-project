@@ -152,7 +152,7 @@
 
 .filter-left-panel {
   padding: 0 25px;
-  height: 210px !important;
+  /* height: 210px !important; */
 }
 
 .left-panel-full__head {
@@ -257,10 +257,20 @@
   max-height: 100%;
   height: auto;
   overflow: hidden;
+
+}
+
+.left-panel-full .category-expanded {
+  overflow: visible;
 }
 
 .category-expanded.ng-hide {
   max-height: 0;
+
+}
+
+.category-expanded.ng-hide-animate {
+  overflow: hidden;
 }
 
 .category-expanded-paragraph {

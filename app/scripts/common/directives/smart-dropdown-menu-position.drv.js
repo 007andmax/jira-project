@@ -20,7 +20,6 @@
           var d = $(dropdownMenu[0]);
           var parentElement = d.closest('.category-expanded');
 
-          console.log(scope.noOverflow)
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
             var productInputPosition = element[0].getBoundingClientRect().top;
@@ -84,7 +83,7 @@
                 d.css({'top': 'auto'});
                 d.css({'bottom': '100%'});
                 d.css({'max-height': '350px'});
-                parentElement.css({'overflow': 'visible'});
+                if (!scope.noOverflow) parentElement.css({'overflow': 'visible'});
               } else {
                 d.css({'top': 'auto'});
                 d.css({'bottom': ''});
@@ -98,7 +97,7 @@
                 if (!scope.noRestricted) {
                   d.css({'max-height': '160px'});
                 }
-                parentElement.css({'overflow': 'visible'});
+                if (!scope.noOverflow) parentElement.css({'overflow': 'visible'});
               } else {
                 d.css({'top': 'auto'});
                 d.css({'bottom': ''});
