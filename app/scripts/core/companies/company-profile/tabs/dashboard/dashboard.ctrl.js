@@ -29,6 +29,24 @@
           FULLY_MANAGED: 'Fully managed'
         };
 
+        $scope.downloadAgent = function(e) {
+
+          if (e) e.stopPropagation();
+          console.log('agent is being downloaded')
+
+          var modalParams = {
+            animation: true,
+            backdrop: 'static',
+            keyboard: false,
+            size: 'custom-size-confirmation-pop',
+            windowClass: 'modal-remote',
+            templateUrl: '/html/scripts/core/companies/download-agent.tpl.html',
+            controller: 'quicktech.core.companies.downloadAgent'
+          }
+
+          $uibModal.open(modalParams);
+        }
+
         //$timeout(getCorrectWorkingTime(), 1000);
         $scope.$watch(function(){
           return $scope.companyInfo;

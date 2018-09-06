@@ -80,10 +80,33 @@
         };
 
         $scope.downloadAgent = function(e) {
-          e.stopPropagation();
 
-          $rootScope.openFromList = true;
+          if (e) e.stopPropagation();
+          console.log('agent is being downloaded')
+
+          var modalParams = {
+            animation: true,
+            backdrop: 'static',
+            keyboard: false,
+            size: 'custom-size-confirmation-pop',
+            windowClass: 'modal-remote',
+            templateUrl: '/html/scripts/core/companies/download-agent.tpl.html',
+            controller: 'quicktech.core.companies.downloadAgent'
+          }
+
+          $uibModal.open(modalParams);
         }
+
+        $scope.$watch(function() {
+          return $rootScope.agentToDownload;
+        }, function(val) {
+
+          console.log(val, 'agent to download')
+          if (val) {
+            $rootScope.agentToDownload = manually
+            $scope.downloadAgent();
+          }
+        })
 
         if ($rootScope.exampleCompanyDeleted) {
           $scope.companies = $scope.companies.filter(function(company) {
