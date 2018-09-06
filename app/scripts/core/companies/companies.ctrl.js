@@ -3,9 +3,22 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
-      'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'ColorsService', 'TagsService', 'TicketsService', '$uibModal',
+    ['$scope',
+      'UsersService',
+      'SubscriptionsService',
+      'CompaniesService',
+      '$state',
+      '$rootScope',
+      'quicktech.common.services.SharedStateService',
+      'DevicesService',
+      'quicktech.common.services.PermissionsService',
+      'localStorageService',
+      'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.UserNotificationService',
+      'ColorsService',
+      'TagsService',
+      'TicketsService',
+      '$uibModal',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 SharedStateService, DevicesService, PermissionsService, localStorageService, UserConfirmationsService,
                 UserNotificationService, ColorsService, TagsService, TicketsService, $uibModal) {
@@ -19,9 +32,11 @@
           $state.go('tickets');
         }
 
-        TicketsService.getList('EXAMPLE', null, null, function(resp) {
+        TicketsService.getList('EXAMPLE', null, null, function (resp) {
           var ticket = resp[0];
-          if (!ticket) return;
+          if (!ticket) {
+            return;
+          }
           $scope.exampleCompanyId = ticket.companyId;
         })
 
@@ -29,16 +44,14 @@
 
         $scope.currentUser = UsersService.getCurrentUser();
 
-        $scope.companiesView = $scope.currentUser.companiesGridPresentation ?
-                             $scope.currentUser.companiesGridPresentation === 'LIST' ?
-                               'list' :
-                               'grid'
-                             :
-                             'grid';
+        $scope.companiesView = $scope.currentUser.companiesGridPresentation
+          ? $scope.currentUser.companiesGridPresentation === 'LIST'
+                                 ? 'list'
+                                 : 'grid'
+          : 'grid';
 
 
         $scope.PermissionsService = PermissionsService;
-
 
 
         $scope.allCompanies = CompaniesService.getAllCompanies();
@@ -50,9 +63,9 @@
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.filteredCompanies;
-        }, function(val) {
+        }, function (val) {
           if (val) {
 
             console.log(val, "VAL", $scope.allCompanies)
@@ -68,7 +81,7 @@
 
         $scope.tagColors = TagsService.getColors();
 
-        ColorsService.getCompaniesColors($scope, function(resp) {
+        ColorsService.getCompaniesColors($scope, function (resp) {
           $scope.companiesColors = resp;
         });
 
@@ -79,9 +92,11 @@
           reverse: false
         };
 
-        $scope.downloadAgent = function(e) {
+        $scope.downloadAgent = function (e) {
 
-          if (e) e.stopPropagation();
+          if (e) {
+            e.stopPropagation();
+          }
           console.log('agent is being downloaded')
 
           var modalParams = {
@@ -97,9 +112,9 @@
           $uibModal.open(modalParams);
         }
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.agentToDownload;
-        }, function(val) {
+        }, function (val) {
 
           console.log(val, 'agent to download')
           if (val) {
@@ -109,13 +124,13 @@
         })
 
         if ($rootScope.exampleCompanyDeleted) {
-          $scope.companies = $scope.companies.filter(function(company) {
+          $scope.companies = $scope.companies.filter(function (company) {
             return company.id !== $rootScope.exampleCompanyDeleted
           })
         }
 
 
-        $scope.confirmRemoval = function(e) {
+        $scope.confirmRemoval = function (e) {
           e.stopPropagation();
           $uibModal.open({
             templateUrl: '/html/scripts/core/companies/example-removal.tpl.html',
@@ -124,7 +139,7 @@
             size: 'sm',
             controller: 'quicktech.core.companies.confirmModal',
             resolve: {
-              action: function() {
+              action: function () {
                 return $scope.removeExampleCompany
               }
             }
@@ -134,18 +149,19 @@
 
         }
 
-        $scope.removeExampleCompany = function(callback) {
-          CompaniesService.deleteExample(function(resp) {
+        $scope.removeExampleCompany = function (callback) {
+          CompaniesService.deleteExample(function (resp) {
             $rootScope.exampleCompanyDeleted = $scope.exampleCompanyId;
-            $scope.companies = $scope.companies.filter(function(company) {
+            $scope.companies = $scope.companies.filter(function (company) {
               return company.id !== $scope.exampleCompanyId
             })
 
-            if (callback) callback();
+            if (callback) {
+              callback();
+            }
             // CompaniesService.reinitCompanies(function() {
             //   $scope.companies = CompaniesService.getAllCompanies();
             // });
-
 
 
           })
@@ -154,7 +170,7 @@
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
             $scope.companiesView = view;
-            UsersService.setGridPresentation({ companies: view });
+            UsersService.setGridPresentation({companies: view});
             // localStorageService.set('companies-view', view);
           }
         };
@@ -163,9 +179,9 @@
           globalSearch.count = value;
         });
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return globalSearch.count;
-        }, function(val) {
+        }, function (val) {
           if (val !== $scope.companiesCtrl.shownCompanies.length) {
             globalSearch.count = $scope.companiesCtrl.shownCompanies.length;
           }
@@ -173,7 +189,7 @@
 
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
-            $state.go('companyProfile', { companyId: company.id, tabName: 'dashboadr' });
+            $state.go('companyProfile', {companyId: company.id, tabName: 'dashboadr'});
             companyProfileSharedState.tabName = 'dashboard';
           }
         };

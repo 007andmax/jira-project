@@ -10371,6 +10371,7 @@ button.close {
 
 .modal-remote {
   width: 620px;
+  min-height: 500px;
   top: 50%;
   left: 50%;
   margin: 0;
