@@ -23,6 +23,15 @@
 
 
 
+        // console.log(users, 'tech users')
+        //
+        // $scope.console = console.log;
+
+        $scope.resendWelcomeEmail = function(email) {
+          UsersService.resendWelcomeEmail(email, function(res) {
+            console.log(res, 'RES FROM SERVER')
+          })
+        }
 
 
 

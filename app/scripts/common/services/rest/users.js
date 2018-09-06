@@ -298,6 +298,16 @@
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
       }
 
+      function resendWelcomeEmail(email, callback) {
+        $http.post('/resend/verifyUserEmail', {
+          "email": email
+        }).then(function(resp) {
+          if (callback) {
+            callback(resp);
+          }
+        })
+      }
+
       function setGridPresentation(data) {
         var translate = {
           'list': 'LIST',
@@ -750,7 +760,8 @@
         restoreUser: restoreUser,
         requestToChangePassword: requestToChangePassword,
         updateWelcomeWizard: updateWelcomeWizard,
-        changePassword: changePassword
+        changePassword: changePassword,
+        resendWelcomeEmail: resendWelcomeEmail
       }
 
     }]);
