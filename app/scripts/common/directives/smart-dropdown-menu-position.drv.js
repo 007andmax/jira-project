@@ -7,7 +7,8 @@
       restrict: 'A',
       scope: {
         noRestricted: '<noRestricted',
-        isRestricted: '<isRestricted'
+        isRestricted: '<isRestricted',
+        noOverflow: '<noOverflow',
       },
 
       link: function (scope, element, attrs) {
@@ -18,6 +19,8 @@
           var position = element[0].getBoundingClientRect().top;
           var d = $(dropdownMenu[0]);
           var parentElement = d.closest('.category-expanded');
+
+          console.log(scope.noOverflow)
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
             var productInputPosition = element[0].getBoundingClientRect().top;
@@ -86,7 +89,7 @@
                 d.css({'top': 'auto'});
                 d.css({'bottom': ''});
                 d.css({'max-height': '350px'});
-                parentElement.css({'overflow': 'hidden'});
+                if (!scope.noOverflow) parentElement.css({'overflow': 'hidden'});
               }
             } else {
               if((winHeight - position) < 290) {
@@ -103,7 +106,7 @@
                 if (!scope.noRestricted && !scope.isRestricted) {
                   d.css({'max-height': '160px'});
                 }
-                parentElement.css({'overflow': 'hidden'});
+                if (!scope.noOverflow) parentElement.css({'overflow': 'hidden'});
               }
             }
           } else {
