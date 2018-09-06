@@ -270,7 +270,14 @@
           <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
             <div class="shared-avatar pointer" uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}" ng-click="sharedUser.notify = !sharedUser.notify"
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-              <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
+
+
+              <img  ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
+
+              <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+              </div>
 
               <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
                 <img src="images/input-icons/checkbox-checked.png"/>
@@ -281,7 +288,12 @@
           <div class="tech-users avatars">
             <div class="shared-avatar pointer" uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}" ng-click="sharedUser.notify = !sharedUser.notify"
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-              <img src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
+                 <img  ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}"/>
+
+                 <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                   <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                   <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                 </div>
 
               <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
                 <img src="images/input-icons/checkbox-checked.png"/>

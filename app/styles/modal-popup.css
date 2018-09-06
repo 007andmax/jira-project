@@ -766,7 +766,7 @@ _::-webkit-:not(:root:root),
   border-radius: 50%;
 }
 
-.ticket--footer .shared-avatars {
+.ticket--footer .shared-avatars  {
   display: flex;
 }
 
@@ -775,11 +775,15 @@ _::-webkit-:not(:root:root),
   border: 1px solid white;
 }
 
+
+
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
 
 }
+
+
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
@@ -801,10 +805,47 @@ _::-webkit-:not(:root:root),
   margin-right: 3px;
 }
 
+
+
 .ticket--footer .shared-avatars .shared-avatar > img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+}
+
+.dropdown-link {
+  display: flex !important;
+  align-items: center;
+}
+
+.dropdown-link .default-user-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+
+
+}
+
+.dropdown-menu .default-user-avatar {
+  width: 32px;
+  height: 32px;
+
+}
+
+/* .avatar-background-color-even {
+  background-color: #ffe3af;
+}
+
+.avatar-background-color-odd {
+  background-color: #aae8e8;
+} */
+
+.user-item:nth-child(even) .default-user-avatar, li:nth-child(even)  .default-user-avatar {
+  background-color: #ffe3af;
+}
+
+.user-item:nth-child(odd) .default-user-avatar, li:nth-child(odd) .default-user-avatar {
+  background-color: #aae8e8;
 }
 
 .dropdown-link {
