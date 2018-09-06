@@ -107,7 +107,7 @@
           taxId: ''
         };
         EmailSettingsService.getTaxNumber(function(resp) {
-          $scope.taxIdData = resp;
+          $scope.taxIdData = resp || taxIdData;
         });
 
         $scope.changeTaxIdData = function() {
