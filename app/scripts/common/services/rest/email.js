@@ -190,6 +190,10 @@
     }
 
     function updateTaxNumber(data, callback) {
+
+      data.taxId = data.taxId || null
+      data.taxIdDescription = data.taxIdDescription || null;
+      
       var future = $http({
         method: 'PUT',
         url: '/settings/emailPages/taxNumber',

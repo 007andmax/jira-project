@@ -132,7 +132,7 @@
             <a class="bold pointer" ng-click="openEditModal('customer', currentInvoice.billTo[0])">Edit Customer</a>
           </div>
           <div class="bill-valera font-size-13">
-            <div><span class="bold">Tax Number</span><input type="text" placeholder="Tax Number"
+            <div><span class="bold">{{ taxIdData.taxIdDescription || 'Tax Number' }}</span><input type="text" placeholder="Tax Number"
                                                             ng-model="taxIdData.taxId" ng-change="changeTaxIdData()">
             </div>
             <div><span class="bold">Invoice Date</span>
@@ -402,7 +402,7 @@
                 <p style="margin-bottom: 20px;">{{ invoiceBillTo.contacts[0].phoneNumbers[0].number }}</p>
               </div>
               <div class="col-md-5 pr-30 font-size-13">
-                <p class="bold"><span>{{taxIdData.taxId}}</span>Tax Number</p>
+                <p ng-if="taxIdData.taxId" class="bold"><span>{{taxIdData.taxId}}</span>{{ taxIdData.taxIdDescription || 'Tax Number' }}</p>
                 <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice
                   Date:</p>
                 <p class="bold"><span>{{ currentInvoice.dueDate | date: 'dd MMM yyyy'}}</span>Payment Due</p>
