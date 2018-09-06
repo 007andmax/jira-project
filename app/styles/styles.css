@@ -2501,6 +2501,7 @@ address {
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
+  float: left;
 }
 
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
@@ -11941,27 +11942,27 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media screen and (max-width: 1024px) {
-  .priority-big-size {
-    display: none;
-  }
+  /*.priority-big-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (min-width: 1026px) {
-  .priority-small-size {
+/*  .priority-small-size {
     display: none;
-  }
+  }*/
 }
 
 @media screen and (max-width: 1024px) {
-  .progress-big-size {
-    display: none;
-  }
+  /*.progress-big-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (min-width: 1026px) {
-  .progress-small-size {
-    display: none;
-  }
+  /*.progress-small-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (max-width: 1366px) {
@@ -12519,27 +12520,27 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 @media screen and (max-width: 1024px) {
-  .priority-big-size {
-    display: none;
-  }
+  /*.priority-big-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (min-width: 1026px) {
-  .priority-small-size {
-    display: none;
-  }
+  /*.priority-small-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (max-width: 1024px) {
-  .progress-big-size {
-    display: none;
-  }
+  /*.progress-big-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (min-width: 1026px) {
-  .progress-small-size {
-    display: none;
-  }
+  /*.progress-small-size {*/
+    /*display: none;*/
+  /*}*/
 }
 
 @media screen and (max-width: 1366px) {

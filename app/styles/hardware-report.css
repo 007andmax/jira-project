@@ -1054,7 +1054,7 @@
 .reports-all {
   padding: 45px 30px;
   color: #404b5f;
-  height: 92vh;
+  height: calc(100vh - 78px);
   background-color: #F4F4F4;
   display: flex;
   justify-content: center;
@@ -1806,6 +1806,22 @@
 }
 
 @media screen and (max-width: 1366px) {
+  .company-report .top-product-list-ticket [class*=col-md-] {
+    font-size: 9px;
+  }
+
+  .company-report .content-product-list-ticket [class*=col-md-] {
+    font-size: 11px;
+  }
+
+  .run-report-content .content {
+    width: 28.6%;
+  }
+
+  .run-report-content {
+    margin-top: 50px;
+  }
+
   .service-agreements-lists .col-width-3 {
     width: 20%;
   }
@@ -1838,10 +1854,6 @@
 @media screen and (max-width: 1280px) {
   .deposit-create .col-md-2 {
     width: 16% !important;
-  }
-
-  .run-report-content .content {
-    max-width: 160px;
   }
 
   .product-list-ticket-deposit .col-md-3 {
