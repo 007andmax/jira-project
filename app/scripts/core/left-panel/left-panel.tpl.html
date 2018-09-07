@@ -1347,7 +1347,7 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tags')"
-             ng-class="{active: $state.is('settings.tags')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.tags')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
           <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">-->
           Manage Tags
         </div>
@@ -1359,13 +1359,13 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
-             ng-class="{active: $state.is('settings.companyProfile')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.companyProfile')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
           <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">-->
           Company Profile
         </div>
 
         <div ng-style="{'height': $state.is('settings.companyProfile') ? '105px' : '0'}"
-             class="category-expanded angular-animate" ng-if="currentUser.isOwner">
+             class="category-expanded angular-animate" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
           <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
@@ -1377,17 +1377,17 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
-             ng-class="{active: $state.is('settings.techUsers')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.techUsers')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
           Tech Users
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
-             ng-class="{active: $state.is('settings.email')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.email')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">
           Email Settings
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.taxes')"
-             ng-class="{active: $state.is('settings.taxes')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.taxes')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAXES_SETTINGS')">
           Taxes
         </div>
 
@@ -1398,12 +1398,12 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
-             ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
           Permission Management
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
-             ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
+             ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
           Email Templates
         </div>
 
