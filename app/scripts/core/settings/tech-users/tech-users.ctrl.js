@@ -29,7 +29,7 @@
 
         $scope.resendWelcomeEmail = function(email) {
           UsersService.resendWelcomeEmail(email, function(res) {
-            console.log(res, 'RES FROM SERVER')
+            UserNotificationService.show('A welcome email was sent', true);
           })
         }
 
@@ -172,6 +172,7 @@
         $scope.changePasswordRequired = function (user) {
           UsersService.requestToChangePassword(user.id);
           user.requestToChangePassword = true;
+          UserNotificationService.show('A request to change password was sent', true);
         };
 
       }]);
