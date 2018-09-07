@@ -11,8 +11,7 @@
         <div class="left-panel-icn left-panel-icons-remote"
              uib-tooltip="Quick Support"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
@@ -21,8 +20,7 @@
         <div class="left-panel-icn left-panel-icons-tickets"
              uib-tooltip="tickets"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'companies' || openedCategory === 'companyProfile' }"
@@ -31,8 +29,7 @@
         <div class="left-panel-icn left-panel-icons-companies"
              uib-tooltip="companies"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
            ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users', true)"
@@ -40,8 +37,7 @@
         <div class="left-panel-icn left-panel-icons-users"
              uib-tooltip="users"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
            ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
@@ -49,16 +45,14 @@
         <div class="left-panel-icn left-panel-icons-billing"
              uib-tooltip="billing"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
            ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory', true)">
         <div class="left-panel-icn left-panel-icons-inventory"
              uib-tooltip="inventory"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category"
            ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
@@ -68,8 +62,7 @@
         <div class="left-panel-icn left-panel-icons-password-manager"
              uib-tooltip="password manager"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
       <!--REPORTS-->
       <div class="left-panel__category"
@@ -80,8 +73,7 @@
         <div class="left-panel-icn left-panel-icons-reports"
              uib-tooltip="reports"
              tooltip-placement="right"
-             tooltip-append-to-body="true"
-             tooltip-popup-delay="1000"></div>
+             tooltip-append-to-body="true"></div>
       </div>
 
       <div ui-sref="settings" ng-click="onClickSettings()"
