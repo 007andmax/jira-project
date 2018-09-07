@@ -32,7 +32,6 @@
         $scope.downloadAgent = function(e) {
 
           if (e) e.stopPropagation();
-          console.log('agent is being downloaded')
 
           var modalParams = {
             animation: true,
@@ -41,8 +40,10 @@
             size: 'custom-size-confirmation-pop',
             windowClass: 'modal-remote',
             templateUrl: '/html/scripts/core/companies/download-agent.tpl.html',
-            controller: 'quicktech.core.companies.downloadAgent'
+            controller: 'quicktech.core.companies.downloadAgentModal'
           }
+
+          $rootScope.companyForDownload = $scope.company;
 
           $uibModal.open(modalParams);
         }

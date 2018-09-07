@@ -9,6 +9,10 @@
           templateKey = 'DOWNLOAD_AGENT',
           timeout = $timeout(angular.noop);
 
+        if (!$scope.company) {
+          $scope.company = $rootScope.companyForDownload;
+        }
+
         $scope.usersWithEmails = UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
           return !!user.primaryEmail;
         });
