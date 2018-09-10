@@ -38,7 +38,7 @@
             backdrop: 'static',
             keyboard: false,
             size: 'custom-size-confirmation-pop',
-            windowClass: 'modal-remote',
+            windowClass: 'modal-remote-agent',
             templateUrl: '/html/scripts/core/companies/download-agent.tpl.html',
             controller: 'quicktech.core.companies.downloadAgentModal'
           }
