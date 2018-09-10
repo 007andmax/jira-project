@@ -79,6 +79,25 @@
           $rootScope.filterCompanies = null;
         })
 
+        $scope.$watch('companies.length', function(val) {
+          var counters = {
+            VENDOR: 0,
+            LEAD: 0,
+            CLIENT: 0
+          }
+
+          // console.log($scope.companies.filter(function() {}), "FILTEREEEEEEEd")
+
+          $scope.companies.filter(function(el) {
+            return $scope.filterCompanies(el, true);
+          }).forEach(function(el) {
+            counters[el.clientType]++;
+          })
+
+
+          $rootScope.companyCounters = counters;
+        })
+
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function (resp) {
@@ -196,13 +215,17 @@
           }
         };
 
-        $scope.filterCompanies = function (value) {
+        $scope.filterCompanies = function (value, noFilters) {
           var filter = headerSharedState.filter;
           var clientType = value.clientType;
           var result = !value.deletedAt && !$rootScope.showArchivedCompanies || $rootScope.showArchivedCompanies && value.deletedAt;
 
           if (value.isDefault || value.default) {
             return false;
+          }
+
+          if (noFilters === true) {
+            return result;
           }
 
           if (filter.companyId) {

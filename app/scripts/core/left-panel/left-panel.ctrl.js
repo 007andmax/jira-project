@@ -70,6 +70,15 @@
         $scope.CompanyProfileInvoicesPage = false;
         $scope.ticketFilterTags = [];
 
+        $scope.companyCounters = {};
+
+
+        $scope.$watch(function() {
+          return $rootScope.companyCounters
+        }, function(val) {
+          $scope.companyCounters = val;
+        }, true)
+
 
 
         //for one time popover

@@ -549,6 +549,12 @@
           <i class="icn-sm icn-label-save-left-panel"
              ng-show="!isArchivedCompaniesToShow()"></i>
         </div>
+        <div class="center-category__category sked" ng-click="filterCompanies('archived')"
+             ng-class="{'active': isArchivedCompaniesToShow()}">
+          Archived
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
+        </div>
+
 
         <div class="left-panel-title font-medium">
           types
@@ -557,7 +563,11 @@
              ng-class="{'active': companiesSharedState.filter.isClient}">
           Clients
 
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+          <div class="col-2 user-company-circle">
+            <span>{{ companyCounters.CLIENT }}</span>
+          </div>
+
+          <!-- <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
@@ -573,13 +583,17 @@
                               'border-color': tagColor.borderColor}"></i>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('leads')"
              ng-class="{'active': companiesSharedState.filter.isLead}">
           Leads
 
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+          <div class="col-2 user-company-circle">
+            <span>{{ companyCounters.LEAD }}</span>
+          </div>
+
+          <!-- <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[companiesColors['LEAD']].backgroundColor,
@@ -595,13 +609,17 @@
                               'border-color': tagColor.borderColor}"></i>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('vendors')"
              ng-class="{'active': companiesSharedState.filter.isVendor}">
-          Vendors
+          Vendor
 
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
+          <div class="col-2 user-company-circle">
+            <span>{{ companyCounters.VENDOR }}</span>
+          </div>
+
+          <!-- <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
             <div uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[companiesColors['VENDOR']].backgroundColor,
@@ -617,17 +635,12 @@
                               'border-color': tagColor.borderColor}"></i>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
 
-        <div class="center-category__category sked" ng-click="filterCompanies('archived')"
-             ng-class="{'active': isArchivedCompaniesToShow()}">
-          Archived
-          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
-        </div>
 
         <div class="left-panel-title font-medium">
-          tags
+          by tags
         </div>
 
         <div class="center-category__category sked without-height">
