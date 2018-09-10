@@ -150,7 +150,9 @@
                       return el.word.toLowerCase() === value.toLowerCase();
                     });
                     if (tag) {;
-                      $scope.ticketTags.push(tag);
+                      if (!checkTagPresence(tag)) {
+                        $scope.ticketTags.push(tag);
+                      }
                       $scope.dropdownOpened = false;
                     }
                   } else {
@@ -161,7 +163,10 @@
                       });
 
                       if (createdTag) {
-                        $scope.ticketTags.push(createdTag);
+                        if (!checkTagPresence(createdTag)) {
+                          $scope.ticketTags.push(createdTag);
+                        }
+
                       } else {
                         var tagToCreate = {
                           word: value
@@ -176,6 +181,8 @@
                         })
                       }
                     } else {
+
+
                       $scope.ticketTags.push({
                         word: value,
                         colorCode: 0
@@ -187,13 +194,22 @@
 
                   }
                 } else {
-                  $scope.ticketTags.push(value);
+                  if (!checkTagPresence(value)) {
+                    $scope.ticketTags.push(value);
+                  }
+
                   $scope.dropdownOpened = false;
                 }
                 tagsChanged = true;
                 $scope.newTag = '';
                 lastQuery = '';
               };
+
+              function checkTagPresence(tag) {
+                return $scope.ticketTags.findIndex(function(el) {
+                  return el.id === tag.id;
+                }) !== -1;
+              }
 
 
               $scope.removeTag = function (index) {
