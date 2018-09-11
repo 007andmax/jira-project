@@ -95,53 +95,43 @@
             callback(response);
           }
 
-          RealTimeService.subscribe('/companyTagManagement/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
-            // console.log(newChange.data, "NEW CHANGE TO COMPANY TAGS")
+          RealTimeService.subscribe('/companyTagManagement', scope, function (newChange) {
+            console.log(newChange.data, "NEW CHANGE TO COMPANY TAGS FROM /companytamanagement")
 
 
-            $rootScope.createdCompanyTag = newChange.data;
-
-            if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
-
-            } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
-
-            }
+            // $rootScope.createdCompanyTag = newChange.data;
+            //
+            // if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
+            //
+            // } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
+            //
+            // }
           });
 
-          RealTimeService.subscribe('/companyTags/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
-            // console.log(newChange.data, "NEW CHANGE TO COMPANY  FROM /COMPANY TAGS TAGS")
+          RealTimeService.subscribe('/companyTags', scope, function (newChange) {
+            console.log(newChange.data, "NEW CHANGE TO COMPANY TAGS FROM /companytags")
 
-
-            $rootScope.createdCompanyTag = newChange.data;
-
-            if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
-
-
-
-            } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
-
-            }
           });
 
           RealTimeService.subscribe('/companyTagsSpecifying/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
-            // console.log(newChange.data, "NEW CHANGE TO COMPANY  FROM /companyTagsSpecifying TAGS")
+            console.log(newChange.data, "NEW CHANGE TO COMPANY  FROM /companyTagsSpecifying TAGS")
 
 
-            $rootScope.createdCompanyTag = newChange.data;
+            // $rootScope.createdCompanyTag = newChange.data;
 
-            if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
-
-
-
-            } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
-              // Utils.deleteById(tags, newChange.data);
-              //
-              // if (callback) {
-              //   callback(tags);
-              // }
-
-              // console.log(newChange.data, "NEWNEWNEWNEWNCHANGE")
-            }
+            // if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
+            //
+            //
+            //
+            // } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
+            //   // Utils.deleteById(tags, newChange.data);
+            //   //
+            //   // if (callback) {
+            //   //   callback(tags);
+            //   // }
+            //
+            //   // console.log(newChange.data, "NEWNEWNEWNEWNCHANGE")
+            // }
           });
 
 
