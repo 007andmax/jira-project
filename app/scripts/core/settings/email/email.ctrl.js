@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.emailCtrl',
-    ['$scope', 'CompaniesService', '$timeout', 'ConstantsService',
-      function ($scope, CompaniesService, $timeout, ConstantsService) {
+    ['$scope', 'CompaniesService', '$timeout', 'ConstantsService', '$rootScope',
+      function ($scope, CompaniesService, $timeout, ConstantsService, $rootScope) {
         var smtpPromise,
           inboxEnabledPromise,
           savedSMTPSettings,
@@ -69,6 +69,33 @@
           portIsEmpty = !resp.port;
           $scope.usedEmailVia = $scope.smtp.useSMTP ? getEmailViaByDomain($scope.smtp.domain) : $scope.emailVia[0];
         });
+
+        $scope.$watch(function() {
+          return $rootScope.SMTPChanged;
+        }, function (val) {
+          if (val) {
+            $rootScope.SMTPChanged = false;
+
+            CompaniesService.getCompanySMTPSettings(function (resp) {
+              $scope.smtp = resp.smtpSettings;
+              $scope.supportMailBox = resp.supportMailBox;
+              $scope.smtp.testEmail = resp.login;
+              savedSMTPSettings = angular.copy(resp);
+              portIsEmpty = !resp.port;
+              $scope.usedEmailVia = $scope.smtp.useSMTP ? getEmailViaByDomain($scope.smtp.domain) : $scope.emailVia[0];
+            });
+          }
+        })
+
+        $scope.$watch(function() {
+          return $rootScope.updatedAlias;
+        }, function (val) {
+          if (val) {
+            $rootScope.updatedAlias = false;
+
+            $scope.emailAlias = val;
+          }
+        })
 
         CompaniesService.getEmailAlias(function (resp) {
           $scope.emailAlias = resp.emailAlias;

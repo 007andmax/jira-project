@@ -213,7 +213,13 @@
     });
 
     RealTimeService.subscribe('/companySettings', serviceScope, function(newChange) {
-      // console.log('NEW CHANGE SETTINGS')
+      console.log('NEW CHANGE SETTINGS')
+
+      if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
+        $rootScope.SMTPChanged = newChange.data;
+      } else if (newChange.action === 'COMPANY_EMAIL_ALIAS_UPDATED') {
+        $rootScope.updatedAlias = newChange.data;
+      }
     })
 
     function _addAmountChangeListener(callback) {
