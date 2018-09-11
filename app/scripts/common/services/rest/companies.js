@@ -839,7 +839,13 @@
       var future = $http.get('/settings/companyProfile/getRoleNames');
 
       RealTimeService.subscribe('/techRoles', $rootScope.$new(), function (newChange) {
-        console.log(newChange, "TECH ROLES")
+
+
+        if (newChange.action === 'TECH_ROLE_DELETED') {
+          $rootScope.techRolesChanged = newChange.data.id;
+        } else {
+          $rootScope.techRolesChanged = newChange.data;
+        }
       })
 
       Utils.handleCallback(future, callback);

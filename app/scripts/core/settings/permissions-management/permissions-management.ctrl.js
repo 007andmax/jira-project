@@ -29,16 +29,40 @@
         $scope.roles = resp;
       });
 
+      $scope.$watch(function() {
+        return $rootScope.techRolesChanged;
+      }, function(val) {
+        if (val) {
+          if (typeof val === 'string') {
+            $scope.roles = $scope.roles.filter(function(el) {
+              return el.id !== val;
+            })
+          } else {
+            var index = $scope.roles.findIndex(function(el) {
+              return el.id === val.id
+            });
+
+            if (index !== -1) {
+              $scope.roles[index] = val;
+            } else {
+              $scope.roles.push(val);
+            }
+          }
+        }
+      })
+
 
       $scope.$watch(function() {
         return $rootScope.changedPermission;
       }, function(val) {
-        var id = val.id;
-        var index = $scope.roles.findIndex(function(el) {
-          return el.id === id;
-        })
+        if (val) {
+          var id = val.id;
+          var index = $scope.roles.findIndex(function(el) {
+            return el.id === id;
+          })
 
-        $scope.roles.splice(index, 1, val);
+          $scope.roles.splice(index, 1, val);
+        }
 
       });
 
@@ -173,7 +197,7 @@
 
         CompaniesService.addNewRole(newRole, function(resp) {
           $scope.isNewRoleCreating = false
-          $scope.roles.push(resp);
+          // $scope.roles.push(resp);
         })
       }
 
