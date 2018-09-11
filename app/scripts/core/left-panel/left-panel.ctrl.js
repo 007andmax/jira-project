@@ -70,6 +70,15 @@
         $scope.CompanyProfileInvoicesPage = false;
         $scope.ticketFilterTags = [];
 
+        $scope.companyCounters = {};
+
+
+        $scope.$watch(function() {
+          return $rootScope.companyCounters
+        }, function(val) {
+          $scope.companyCounters = val;
+        }, true)
+
 
 
         //for one time popover
@@ -822,14 +831,17 @@
 
           switch (filter) {
             case 'clients':
+              if ($rootScope.showArchivedCompanies) return;
               clearFilter(sharedFilter);
               sharedFilter.isClient = true;
               break;
             case 'leads':
+              if ($rootScope.showArchivedCompanies) return;
               clearFilter(sharedFilter);
               sharedFilter.isLead = true;
               break;
             case 'vendors':
+              if ($rootScope.showArchivedCompanies) return;
               clearFilter(sharedFilter);
               sharedFilter.isVendor = true;
               break;
@@ -844,6 +856,7 @@
               sharedFilter.dateRange = value;
               break;
             case 'archived':
+
               $scope.showArchivedCompanies();
               clearFilter(sharedFilter);
               break;

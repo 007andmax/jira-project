@@ -1339,6 +1339,19 @@ bold {
   /*padding: 0 0 30px;*/
 }
 
+.products-content .loading {
+  position: absolute !important;
+
+  top: calc(50vh - 70px) !important;
+  left: calc(50% - 35px) !important;
+
+  /* transform: translate(-50%, -50%) !important; */
+}
+
+.products-content  {
+  position: relative;
+}
+
 .devices-content,
 .receipt-archive-content {
   float: left;
@@ -10371,10 +10384,24 @@ button.close {
 
 .modal-remote {
   width: 620px;
+  min-height: 500px;
   top: 50%;
   left: 50%;
   margin: 0;
   transform: translate3d(-50%, -50%, 0) !important;
+}
+
+.modal-remote-agent {
+  width: 450px;
+  min-height: 500px;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate3d(-50%, -50%, 0) !important;
+}
+
+.modal-remote-agent .modal-dialog {
+  width: 100% !important;
 }
 
 .modal-custom-size-confirmation-pop {

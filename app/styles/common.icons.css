@@ -1717,3 +1717,26 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background-image: url(../images/new-icons/expand-up.png);
 }
 
+.windows-icn {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../images/new-icons/window.png);
+}
+
+.apple-icn {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../images/new-icons/apple.png);
+}
+
+.linux-icn {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../images/new-icons/linux.png);
+}

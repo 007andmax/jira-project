@@ -109,6 +109,72 @@
 
 }
 
+.download-agent-modal {
+  padding: 50px 75px;
+  position: relative;
+}
+
+.download-agent-modal h3 {
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.download-agent-modal p {
+  margin: 14px 0 16px;
+  text-align: center;
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca5b6;
+  line-height: 1;
+}
+
+.download-agent-modal .btn-primary.not-active {
+  background-color: #C4CBD5;
+  border-color: #C4CBD5;
+  cursor: default;
+  pointer-events: none;
+}
+
+.download-agent-modal .btn {
+  background-color: #16A4FA;
+  width: 100%;
+  text-align: left;
+  height: 48px;
+  margin-bottom: 10px;
+}
+
+.download-agent-modal i {
+  margin-right: 5px;
+}
+
+.download-agent-modal .btn span {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Graphik Medium", sans-serif;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.primary-default.btn {
+  background-color: transparent;
+  color: #16a4fa;
+  border-radius: 4px;
+  border: 1px solid #16a4fa;
+  text-align: center;
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all .3s;
+}
+
+.primary-default.btn:hover {
+  background-color: #16a4fa;
+  color: #fff;
+}
 
 .download-agent-company {
   width: 169px;
@@ -553,6 +619,7 @@
   .company-edit-button {
     max-width: 72%;
   }
+
   .company-name-content {
     width: 70%;
   }
