@@ -6,7 +6,7 @@
 
   var services = angular.module('main.services');
 
-  services.factory('TagsService', ['$http', 'RealTimeService', 'Utils', '$rootScope', function ($http, RealTimeService, Utils, $rootScope) {
+  services.factory('TagsService', ['$http', 'RealTimeService', 'Utils', '$rootScope', 'CompaniesService', function ($http, RealTimeService, Utils, $rootScope, CompaniesService) {
 
     var tagsColors = [];
 
@@ -88,12 +88,63 @@
     }
 
 
-    function getAllCompanies(callback) {
+    function getAllCompanies(scope, callback) {
       $http.get('/company/tags/getAll')
         .then(function(response) {
           if (callback) {
             callback(response);
           }
+
+          RealTimeService.subscribe('/companyTagManagement/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
+            // console.log(newChange.data, "NEW CHANGE TO COMPANY TAGS")
+
+
+            $rootScope.createdCompanyTag = newChange.data;
+
+            if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
+
+            } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
+
+            }
+          });
+
+          RealTimeService.subscribe('/companyTags/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
+            // console.log(newChange.data, "NEW CHANGE TO COMPANY  FROM /COMPANY TAGS TAGS")
+
+
+            $rootScope.createdCompanyTag = newChange.data;
+
+            if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
+
+
+
+            } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
+
+            }
+          });
+
+          RealTimeService.subscribe('/companyTagsSpecifying/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
+            // console.log(newChange.data, "NEW CHANGE TO COMPANY  FROM /companyTagsSpecifying TAGS")
+
+
+            $rootScope.createdCompanyTag = newChange.data;
+
+            if (newChange.action === 'TAG_SAVED_COMPANY_SCOPE') {
+
+
+
+            } else if (newChange.action === 'TAG_REMOVED_COMPANY_SCOPE') {
+              // Utils.deleteById(tags, newChange.data);
+              //
+              // if (callback) {
+              //   callback(tags);
+              // }
+
+              // console.log(newChange.data, "NEWNEWNEWNEWNCHANGE")
+            }
+          });
+
+
         })
     }
 
@@ -126,6 +177,8 @@
         }
 
         RealTimeService.subscribe('/tagManagement', scope, function (newChange) {
+
+          console.log(newChange.data, "NEW CHANGE TO TICKET TAGS")
 
           if (newChange.action === 'TAG_SAVED') {
             var tagForUpdate = Utils.findById(tags, newChange.data.id);

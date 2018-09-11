@@ -108,6 +108,8 @@
       RealTimeService.subscribe('/permissions', $rootScope.$new(), function (newChange) {
         if (newChange.action === 'PERMISSIONS_UPDATE') {
           $rootScope.currentUser.permissions = newChange.data.permissions;
+        } else if (newChange.action === 'PERMISSIONS_UPDATE_GLOBAL') {
+          $rootScope.changedPermission = newChange.data;
         }
       })
     });

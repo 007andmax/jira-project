@@ -29,8 +29,24 @@
         $scope.roles = resp;
       });
 
+
+      $scope.$watch(function() {
+        return $rootScope.changedPermission;
+      }, function(val) {
+        var id = val.id;
+        var index = $scope.roles.findIndex(function(el) {
+          return el.id === id;
+        })
+
+        $scope.roles.splice(index, 1, val);
+
+      });
+
+
+
       CompaniesService.getTechRoles(function (resp) {
         $scope.allTechRoles = resp;
+
       });
 
       $scope.techCompany = CompaniesService.getOneById(UsersService.getCurrentUser().company.id);

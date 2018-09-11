@@ -197,6 +197,10 @@
       }
     });
 
+    RealTimeService.subscribe('/companySettings', serviceScope, function(newChange) {
+      // console.log('NEW CHANGE SETTINGS')
+    })
+
     function _addAmountChangeListener(callback) {
       amountChangeListeners.push(callback);
     }
@@ -833,6 +837,11 @@
 
     function getTechRoles(callback) {
       var future = $http.get('/settings/companyProfile/getRoleNames');
+
+      RealTimeService.subscribe('/techRoles', $rootScope.$new(), function (newChange) {
+        console.log(newChange, "TECH ROLES")
+      })
+
       Utils.handleCallback(future, callback);
     }
 
