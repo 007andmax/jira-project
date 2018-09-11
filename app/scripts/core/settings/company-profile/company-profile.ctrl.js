@@ -31,6 +31,51 @@
           $scope.isFromWelcomeWizard = $stateParams.fromWelcomeWizard;
         }
 
+        $scope.$watch(function() {
+          return $rootScope.techCompanyChanged;
+        }, function(val) {
+
+          // console.log($rootScope.updatedInCurrentWindow, "UPDATED HEREEEEEEEE")
+          if (val && !$rootScope.updatedInCurrentWindow) {
+            $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {
+
+              $scope.companyForSettingPage = $scope.companyForSettingPage.staticCopy();
+
+              for (var i = 0; i < $scope.companyForSettingPage.addresses.length; i++) {
+                if ($scope.companyForSettingPage.addresses[i].phoneNumbers.length === 0) {
+                  $scope.companyForSettingPage.addresses[i].phoneNumbers.push({ typeNumber: 'OFFICE' });
+                }
+              }
+
+              $scope.outliersTime = Math.round($scope.companyForSettingPage.responseTimeSettings.outliersSeconds / 3600);
+
+              var workingDays = $scope.companyForSettingPage.responseTimeSettings.workingDays;
+              for (var i = 0; i < weekDays.length; i++) {
+                var day = workingDays[i],
+                  name = weekDays[i];
+
+                if (!day || day.dayOfWeek !== name) {
+                  defaultWorkingDay.dayOfWeek = name;
+                  workingDays.splice(i, 0, angular.copy(defaultWorkingDay));
+                } else {
+                  day.isSelected = true;
+                }
+              }
+
+              $scope.companyForSettingLoad = true;
+            });
+
+            CompaniesService.reloadCurrentCompany(function(resp) {
+              $scope.currentCompany = resp;
+              $scope.editCompany = Object.assign({}, resp);
+            })
+
+
+          } else if ($rootScope.updatedInCurrentWindow) {
+            $rootScope.updatedInCurrentWindow = false;
+          }
+        })
+
         $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {
 
           $scope.companyForSettingPage = $scope.companyForSettingPage.staticCopy();
