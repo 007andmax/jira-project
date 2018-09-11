@@ -1,4 +1,4 @@
-<div class="settings-main-wrapper" ng-if="currentUser.accountType !== 'ROOT' && currentUser.isOwner">
+<div class="settings-main-wrapper" ng-if="(currentUser.accountType !== 'ROOT' && currentUser.isOwner) || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
 
   <div class="tech-user-templates-wrapper">
 

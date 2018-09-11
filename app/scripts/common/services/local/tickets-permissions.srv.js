@@ -139,6 +139,12 @@
           return true;
         }
 
+        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket)) {
+
+          // console.log('ACTION IS ALLOWEDDDD')
+          return true;
+        }
+
         return isTicketOpen(ticket) &&
           (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
           (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
@@ -147,6 +153,11 @@
 
       function editTicketUpdate(ticket, updateCreator) {
         if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && isTicketOpen(ticket)) {
+          return true;
+        }
+
+        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && isTicketOpen(ticket)) {
+          // console.log('ACTION IS ALLOWEDDDD')
           return true;
         }
 
@@ -192,5 +203,3 @@
     }]);
 
 })(window, jQuery);
-
-

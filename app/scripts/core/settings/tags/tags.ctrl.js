@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.tagsCtrl',
-    ['$scope', 'TagsService', 'CompaniesService', function ($scope, TagsService, CompaniesService) {
+    ['$scope', 'TagsService', 'CompaniesService', '$rootScope', function ($scope, TagsService, CompaniesService, $rootScope) {
 
       $scope.orderTags = {
         field: 'word',
@@ -19,8 +19,34 @@
         $scope.tags = angular.copy(resp);
       });
 
-      TagsService.getAllCompanies(function(resp) {
+      TagsService.getAllCompanies($scope, function(resp) {
         $scope.companyTags = resp.data || resp;
+      })
+
+
+
+
+
+      $scope.$watch(function() {
+        return $rootScope.createdCompanyTag;
+      }, function(val) {
+
+        if (typeof val === 'string') {
+
+          $scope.companyTags = $scope.companyTags.filter(function(el) {
+            return el.id !== val;
+          })
+        } else if (val) {
+          var index = $scope.companyTags.findIndex(function(el) {
+            return el.id === val.id;
+          })
+
+          if (index !== -1) {
+            $scope.companyTags[index] = val;
+          } else {
+            $scope.companyTags.push(val);
+          }
+        }
       })
 
       $scope.changeColor = function (open, tag) {
@@ -75,7 +101,6 @@
               });
             } else {
               TagsService.saveForCompany($scope.editedTag, function (resp) {
-                console.log(resp, "RESP")
                 $scope.cancel();
                 var tag = Object.assign({}, $scope.editedTag);
                 tag.id = resp.data.id;

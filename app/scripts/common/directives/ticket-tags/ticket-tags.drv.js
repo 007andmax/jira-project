@@ -42,7 +42,7 @@
 
 
               if ($scope.isCompany) {
-                TagsService.getAllCompanies(function(resp) {
+                TagsService.getAllCompanies($scope, function(resp) {
                   $scope.result = resp.data;
                   $scope.allTags = resp.data;
                   $scope.lastResult = resp.data;
@@ -53,7 +53,7 @@
                 }, function(val) {
                   if (val) {
 
-                    TagsService.getAllCompanies(function(resp) {
+                    TagsService.getAllCompanies($scope, function(resp) {
                       $scope.result = resp.data;
                       $scope.allTags = resp.data;
                       $scope.lastResult = resp.data;
@@ -61,6 +61,20 @@
                   }
 
 
+                })
+
+                $scope.$watch(function() {
+                  return $rootScope.createdCompanyTag;
+                }, function(val) {
+                  if (val === 'string') {
+                    $scope.allTags = $scope.allTags.filter(function(el) {
+                      return el.id !== val;
+                    })
+
+                    $scope.result = $scope.result.filter(function(el) {
+                      return el.id !== val;
+                    })
+                  }
                 })
 
                 // var tags = ['first', 'second', 'third', 'fourth'];

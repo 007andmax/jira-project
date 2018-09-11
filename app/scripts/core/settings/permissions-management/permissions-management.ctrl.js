@@ -15,21 +15,38 @@
       var viewPasswordsRelatedPermissions = ['CREATE_PASSWORD', 'EDIT_PASSWORD'];
 
       $scope.sections = {
-        'Tickets Area': ['EDIT_TICKETS', 'DELETE_TICKETS', 'REOPEN_CLOSED_TICKETS'],
+        'Tickets Area': ['EDIT_TICKETS', 'DELETE_TICKETS', 'REOPEN_CLOSED_TICKETS', 'EDIT_ANOTHER_USERS_TICKET'],
         'Company Area': ['VIEW_COMPANIES', 'CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES', 'VIEW_USERS', 'CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'],
         'Accounting': ['VIEW_ACCOUNTING', 'CREATE_INVOICE', 'MANAGE_PRODUCTS', 'VIEW_PRODUCT_COST', 'MANAGE_SERVICES', 'VIEW_TICKET_AND_INVOICE_SETTINGS', 'DELETE_SERVICE_AGREEMENTS', 'VIEW_SERVICE_AGREEMENTS'],
         'Devices': ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS'],
         'Passwords': ['VIEW_PASSWORD_SECTION', 'VIEW_PASSWORD', 'CREATE_PASSWORD', 'EDIT_PASSWORD', 'DELETE_PASSWORD'],
         'Quick Support': ['ALLOW_QUICK_CONNECT'],
-        'Reports': ['VIEW_SALES_REPORT', 'VIEW_FINANCIAL_REPORT', 'VIEW_PERFORMANCE_REPORT', 'VIEW_REMOTE_ACCESS_REPORT', 'VIEW_TAXES_REPORT']
+        'Reports': ['VIEW_SALES_REPORT', 'VIEW_FINANCIAL_REPORT', 'VIEW_PERFORMANCE_REPORT', 'VIEW_REMOTE_ACCESS_REPORT', 'VIEW_TAXES_REPORT'],
+        "Settings": ['VIEW_COMPANY_PROFILE_SETTINGS', 'VIEW_TECH_USERS_SETTINGS', 'VIEW_PERMISSIONS_SETTINGS', 'VIEW_EMAIL_SETTINGS', 'VIEW_TAXES_SETTINGS', 'VIEW_EMAIL_TEMPLATES_SETTINGS', 'VIEW_TAGS_SETTINGS']
       };
 
       CompaniesService.getPermissions(function (resp) {
         $scope.roles = resp;
       });
 
+
+      $scope.$watch(function() {
+        return $rootScope.changedPermission;
+      }, function(val) {
+        var id = val.id;
+        var index = $scope.roles.findIndex(function(el) {
+          return el.id === id;
+        })
+
+        $scope.roles.splice(index, 1, val);
+
+      });
+
+
+
       CompaniesService.getTechRoles(function (resp) {
         $scope.allTechRoles = resp;
+
       });
 
       $scope.techCompany = CompaniesService.getOneById(UsersService.getCurrentUser().company.id);
