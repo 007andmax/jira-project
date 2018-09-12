@@ -55,13 +55,15 @@
       $scope.$watch(function() {
         return $rootScope.changedPermission;
       }, function(val) {
-        if (val) {
+        if (val && !$rootScope.arePermissionsSavedHere) {
           var id = val.id;
           var index = $scope.roles.findIndex(function(el) {
             return el.id === id;
           })
 
           $scope.roles.splice(index, 1, val);
+        } else if ($rootScope.arePermissionsSavedHere) {
+          $rootScope.arePermissionsSavedHere = false;
         }
 
       });
@@ -82,6 +84,7 @@
         }
 
         promise = $timeout(function () {
+          $rootScope.arePermissionsSavedHere = true;
           CompaniesService.savePermissions(role);
         }, 500);
       };
