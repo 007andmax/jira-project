@@ -51,7 +51,7 @@
 
           if (availableTypes.indexOf(stateParams.listType) < 0) {
             $state.go('tickets', {
-              listType: availableTypes[0]
+              listType: availableTypes[2]
             });
           } else {
             $scope.listType = stateParams.listType;
