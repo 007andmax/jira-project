@@ -37,13 +37,19 @@
             return el.id !== val;
           })
         } else if (val) {
+
+          console.log(val, 'VALLLLLLLLLL');
           var index = $scope.companyTags.findIndex(function(el) {
             return el.id === val.id;
           })
 
+          console.log(index, "INDEX")
+
           if (index !== -1) {
             $scope.companyTags[index] = val;
           } else {
+
+            console.log('I PUSHHHHHH')
             $scope.companyTags.push(val);
           }
         }
