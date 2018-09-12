@@ -15,9 +15,12 @@
              tooltip-popup-delay="1000"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
-           ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
+           ui-sref="tickets({ listType: 'user' })"
            ng-click="clearTicketsFilters(); toggleLeftPanel('tickets', true)"
       >
+
+      <!-- ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })" -->
+
         <div class="left-panel-icn left-panel-icons-tickets"
              uib-tooltip="tickets"
              tooltip-placement="right"
@@ -194,6 +197,11 @@
           Dashboard
         </div>
         <div class="center-category__category"
+            ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
+            ng-click="stateGo($event, 'tickets', {listType: 'user'})">
+          My Tickets <span>{{ticketsCounter.USER}}</span>
+        </div>
+        <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'all'}) || $state.includes('tickets', {listType: 'by_company'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
           All Tickets <span>{{ticketsCounter.ALL}}</span>
@@ -203,6 +211,7 @@
              ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
           Unassigned <span>{{ticketsCounter.UNASSIGNED}}</span>
         </div>
+
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'open'})">

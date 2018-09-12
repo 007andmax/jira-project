@@ -101,22 +101,27 @@
             }]
           },
           USER: {
-            excludeTrashSpam: true,
-            groupFieldFilters: [{
-              predicateRule: 'AND',
-              fieldFilterDtos: [{
-                path: 'assignedUser.id',
-                operator: 'EQ',
-                values: [currentUserId]
-              }, {
-                path: 'status',
-                operator: 'NOT_NULL'
-              }, {
-                path: 'status',
-                operator: 'NOT_EQ',
-                values: ['COMPLETED']
-              }]
-            }]
+            "excludeTrashSpam": true,
+            "groupFieldFilters": [
+              {
+                "predicateRule": "OR",
+                "fieldFilterDtos": [
+                  {
+                    "path": "assignedUser.id",
+                    "operator": "EQ",
+                    "values": [
+                      currentUserId
+                    ]
+                  },
+                  {
+                    "path": "assignedUser.id",
+                    "operator": "NULL",
+                    "values": []
+                  }
+                ]
+              }
+            ],
+            "offset": 0
           },
           SHARED: {
             excludeTrashSpam: true,
