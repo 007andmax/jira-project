@@ -60,7 +60,7 @@
         </div>
         <div class="placeholder">Last Name</div>
         <input type="text" aria-expanded="true" ng-maxlength="15" tabindex="6"
-               name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true" class="form-validation">
+               name="lastName" ng-model="contact.lastName" make-dirty-on-blur class="form-validation">
       </div>
       <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
         <div ng-messages="companyForm.companyDomain.$error"
@@ -83,7 +83,7 @@
            phone-numbers-edit
            active-placeholder="'Primary contact phone'"
            is-restricted="true"
-           is-required="true"
+           not-required="true"
            qt-tab-index="7"
            country-code="{{editCompany.addresses[0].countryCode}}"
            ng-model="contact.phoneNumbers"
@@ -243,7 +243,7 @@
         </div>
         <div class="placeholder">Last Name</div>
         <input type="text" aria-expanded="true" ng-maxlength="15"
-               name="lastName" tabindex="10" ng-model="contact.lastName" make-dirty-on-blur required="true">
+               name="lastName" tabindex="10" ng-model="contact.lastName" make-dirty-on-blur>
       </div>
 
       <div class="col-md-4" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'vendorPaymentTerms')}">
@@ -348,6 +348,7 @@
            no-add-more="true"
            phone-numbers-edit
            is-restricted="true"
+           not-required="true"
            qt-tab-index="12"
            show-type-selector="true"
            country-code="{{editCompany.addresses[0].countryCode}}"
