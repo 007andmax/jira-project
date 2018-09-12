@@ -40,7 +40,7 @@
         });
 
        $scope.saveUserNewEmailNotificationSetting = function(userId) {
-         if(userId && $scope.currentUser.role === 'SUPER_TECH_ADMIN') {
+         if(userId) {
            var notificationSetting = {
              newDevice:  $scope.usersEmailNotificationList[userId].newDevice,
              scheduleChanged:  $scope.usersEmailNotificationList[userId].scheduleChanged,

@@ -111,7 +111,7 @@
                 var tag = Object.assign({}, $scope.editedTag);
                 tag.id = resp.data.id;
 
-                $scope.companyTags.push(tag);
+                // $scope.companyTags.push(tag);
               });
             }
 
