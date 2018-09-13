@@ -141,7 +141,7 @@
             origin = angular.copy($scope.editCompany);
 
             if ($scope.resolvedAdvanced) {
-              $scope.switchCompanyModal()
+              $scope.switchCompanyModal(true)
             }
           });
 

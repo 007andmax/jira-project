@@ -19,6 +19,10 @@
   font-size: 24px;
 }
 
+.no-animation .placeholder {
+  transition: none !important;
+}
+
 .active-field .placeholder {
   font-size: 10px;
   top: -10px;

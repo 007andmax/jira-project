@@ -33,10 +33,18 @@
 
         $scope.longCreateCompany = false;
 
-        $scope.switchCompanyModal = function() {
+        $scope.switchCompanyModal = function(delay) {
           var modal = document.querySelector('.modal-dialog');
           modal.classList.add('xl');
           $scope.longCreateCompany = true;
+
+          if (delay) {
+            $scope.hideDiv = true;
+
+            $timeout(function() {
+              $scope.hideDiv = false;
+            }, 400)
+          }
         }
 
         $scope.sessionId = sessionId;

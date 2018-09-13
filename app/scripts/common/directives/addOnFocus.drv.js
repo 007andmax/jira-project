@@ -7,12 +7,15 @@
       return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
+          element.addClass('no-animation');
+
           var interval = setTimeout(function() {
             var input = element.find('input');
 
             if (!input.length) {
               return;
             }
+
 
             $scope.$watch(function() {
               return input.val();
@@ -41,6 +44,10 @@
 
             if (input.length !== 0) {
               clearInterval(interval);
+
+              setTimeout(function() {
+                element.removeClass('no-animation')
+              }, 500);
             }
           }, 0)
 
