@@ -133,7 +133,7 @@
             </div>
             <input placeholder="Rate (%)" type="number" class="form-control" ng-model="newTax.rate" name="rate"
                    required min="0.01" max="99">
-            <label class="control checkbox" style="margin-bottom: 20px;">
+            <label ng-click="stopPropagation($event)" class="control checkbox" style="margin-bottom: 20px;">
               <input type="checkbox" ng-model="newTax.isDefault">
               <span class="control-indicator">
               </span>Set as Default

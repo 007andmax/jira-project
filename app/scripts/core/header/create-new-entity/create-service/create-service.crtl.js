@@ -29,6 +29,10 @@
           }
         }
 
+        $scope.stopPropagation = function(e) {
+          e.stopPropagation();
+        }
+
         $scope.saveEditService = function (form, isModal) {
           console.log(form, form.$valid, "ASDADA")
           if (form.$valid || isModal && form.editServiceName.$valid && form.editServiceRate.$valid) {
