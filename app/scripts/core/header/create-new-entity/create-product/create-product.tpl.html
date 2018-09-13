@@ -252,7 +252,7 @@
 
         <div class="dropdown-menu dropdown-menu-custom new-tax" role="menu">
 
-          <div class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl"
+          <div ng-click="stopPropagation($event)" class="add-tax-dropdown" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl"
                ng-required='false'>
             <div ng-messages="newTaxForm.name.$error"
                  ng-class="{'hide': !isShowingErrors(newTaxForm, 'name')}">
