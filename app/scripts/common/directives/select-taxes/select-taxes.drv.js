@@ -101,9 +101,6 @@
     }
 
     function getSelectedTaxNames() {
-      console.log($ctrl.entity.taxes.map(function (tax) {
-          return tax.name + ' ' + tax.rate + '%';
-        }).join(', '))
       return $ctrl.entity.taxes.map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
         }).join(', ') || ($ctrl.activePlaceholder ? "" : 'No taxes');
