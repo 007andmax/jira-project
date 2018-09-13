@@ -6,10 +6,10 @@
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
-      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location', 'ReceivableService',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location', 'ReceivableService', 'TaxesService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
                 TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-                CustomStorageService, UsersService, $timeout, $location, ReceivableService) {
+                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
