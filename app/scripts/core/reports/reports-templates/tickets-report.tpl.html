@@ -91,6 +91,52 @@
             <div class="col-md-12" style="padding-top: 15px!important;"><span
               style="text-transform: uppercase;font-weight: bold;">Description: </span>{{ticket.description}}
             </div>
+
+            <div ng-if="ticket.updates && showServices" class="services">
+              <div ng-repeat="service in ticket.updates">
+                <div ng-if="service.type === 'SERVICE'" class="col-md-12" ng-repeat="expence in service.expenses">
+                  <div class="col-md-3">
+                    {{ expence.name }}
+                  </div>
+
+                  <div class="col-md-5">
+                    {{ expence.description }}
+                  </div>
+
+                  <div class="col-md-2">
+                    Duration {{ durationFilter(expence.quantity) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ng-if="ticket.updates && showProducts" class="products">
+              <div ng-repeat="product in ticket.updates" ng-if="product.type === 'PRODUCT'">
+                <div class="col-md-12" ng-repeat="expence in product.expenses">
+                  <div class="col-md-3">
+                    {{ expence.name }}
+                  </div>
+
+                  <div class="col-md-2">
+                    ${{ expence.price }}
+
+                  </div>
+
+                  <div class="col-md-2">
+                    {{ expence.quantity }}
+                  </div>
+
+                  <div class="col-md-2">
+                    ${{ calcTaxes(expence.taxes, expence.price * expence.quantity) }}
+                  </div>
+
+                  <div class="col-md-3">
+                    ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)}}
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
