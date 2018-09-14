@@ -62,7 +62,7 @@
             <div uib-dropdown>
 
               <input type="text"class="form-control has-dropdown form-control-dropdown dropdown-toggle no-cursor"
-                     ng-model="editUser.techRole" uib-dropdown-toggle aria-expanded="true" READONLY>
+                     ng-model="editUser.techRole" custom-disabled="{{ editUser.isOwner }}" uib-dropdown-toggle aria-expanded="true" READONLY>
               <i class="icn-sm icn-caret-gray"></i>
 
               <ul class="dropdown-menu dropdown-account-type">
