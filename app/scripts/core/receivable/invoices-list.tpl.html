@@ -195,7 +195,7 @@
                 <div class="col-md-5 pl-30">{{ serviceExpense.item.name }}</div>
                 <div class="col-md-2">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
                 <div class="col-md-2" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
-                <div class="col-md-1" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
+                <div class="col-md-2" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
                 <div class="col-md-2">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
                 <div class="col-md-1 text-right pr-30">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
               </div>
