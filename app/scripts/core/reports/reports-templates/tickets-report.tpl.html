@@ -112,7 +112,41 @@
 
             <div ng-if="ticket.updates && showProducts" class="products">
               <div ng-repeat="product in ticket.updates" ng-if="product.type === 'PRODUCT'">
-                <div class="col-md-12" ng-repeat="expence in product.expenses">
+                <div class="col-md-12" ng-repeat="expence in product.expenses" ng-if="expence.manufacture">
+                  <div class="col-md-3">
+                    {{ expence.name }}
+                  </div>
+
+                  <div class="col-md-9" style="margin-left: auto">
+                    {{ expence.manufacture }}
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-2">
+                      Price: ${{ expence.price }}
+
+                    </div>
+
+                    <div class="col-md-2">
+                      QTY: {{ expence.quantity }}
+                    </div>
+
+                    <div class="col-md-2">
+                      Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity) }}
+                    </div>
+
+                    <div class="col-md-3">
+                      Total: ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)}}
+
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="col-md-12" ng-repeat="expence in product.expenses" ng-if="!expence.manufacture">
                   <div class="col-md-3">
                     {{ expence.name }}
                   </div>
@@ -134,14 +168,6 @@
                     Total: ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)}}
 
                   </div>
-
-                  <div class="col-md-12">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9" style="margin-left: auto">
-                      {{ expence.manufacture }}
-                    </div>
-                  </div>
-
 
                 </div>
               </div>
