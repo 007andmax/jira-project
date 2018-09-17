@@ -167,6 +167,14 @@
       }
     });
 
+    $scope.$watch('customerTicketWithProducts', function(val) {
+      $rootScope.customerTicketWithProducts = val;
+    })
+
+    $scope.$watch('customerTicketWithServices', function(val) {
+      $rootScope.customerTicketWithServices = val;
+    })
+
     $scope.$watch('customerTicketWithTimeSpent', function(val) {
       $rootScope.customerTicketWithTimeSpent = val;
     })

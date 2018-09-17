@@ -10,6 +10,13 @@
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
             afterValidationCallback();
+
+            console.log(ngModelCtrl, 'NGMODEL')
+
+            if ($scope.triedToSave && ngModelCtrl.$valid) {
+              $scope.saveBasicInfo(ngModelCtrl)
+              $scope.triedToSave = false;
+            }
           });
         };
 
@@ -30,17 +37,23 @@
         })
 
         $scope.saveBasicInfo = function (form) {
-
+          console.log('FORMAAAAAAA', form.$valid)
           if (form.$valid) {
             var basicInfo = {
               logo: $scope.editCompany.logo,
               name: $scope.editCompany.name,
               description: $scope.editCompany.description
             };
+            // console.log('SET UPDATE HERE TO TRUE')
 
+            $rootScope.updatedInCurrentWindow = true;
             CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function () {
               form.$setPristine();
+
+
             });
+          } else {
+            $scope.triedToSave = true;
           }
         };
 

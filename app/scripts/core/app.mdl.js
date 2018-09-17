@@ -712,10 +712,12 @@
     }
 
     if (defaultTicketsPage) {
-      return '/tickets/' + defaultTicketsPage;
+      return '/tickets/' + 'user';
     }
 
-    return '/tickets/all';
+
+
+    return '/tickets/user';
   }
 
 }());

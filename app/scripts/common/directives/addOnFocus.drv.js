@@ -7,9 +7,15 @@
       return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
+          element.addClass('no-animation');
 
-          setTimeout(function() {
+          var interval = setTimeout(function() {
             var input = element.find('input');
+
+            if (!input.length) {
+              return;
+            }
+
 
             $scope.$watch(function() {
               return input.val();
@@ -26,9 +32,6 @@
 
             input.on('focus', function() {
               element.addClass('active-field');
-
-
-              console.log('something is FOCUSEDDDDDD')
             })
 
             input.on('blur', function() {
@@ -38,7 +41,15 @@
               }
 
             })
-          }, 500)
+
+            if (input.length !== 0) {
+              clearInterval(interval);
+
+              setTimeout(function() {
+                element.removeClass('no-animation')
+              }, 500);
+            }
+          }, 0)
 
         }
       }

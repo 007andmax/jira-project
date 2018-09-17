@@ -16,6 +16,10 @@
         }
       });
 
+      $scope.stopPropagation = function(e) {
+        e.stopPropagation()
+      }
+
       $scope.mfgRequired = false;
 
       $scope.taxes = TaxesService.getAll();

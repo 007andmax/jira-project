@@ -109,6 +109,16 @@
         throw 'Cannot initialize CompaniesService!';
       });
 
+    function reloadCurrentCompany(callback) {
+      $http.get('/company/current').then(function (resp) {
+          if (callback) {
+            callback(resp.data);
+          } else {
+            Utils.customizeObj(resp.data, storage.currentCompany);
+          }
+        })
+    }
+
     var checkInitsCount = 0;
 
     function checkInit() {
@@ -123,7 +133,6 @@
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-      console.log(newChange);
       if (!initialized) {
         return;
       }
@@ -132,6 +141,12 @@
       if (newChange.action == 'COMPANY_SAVED') {
 
         var company = getOneById(companyId);
+
+        if (companyId === getCurrentCompany().id) {
+          $rootScope.techCompanyChanged = newChange.data;
+
+          console.log('new data for tech company', newChange.data)
+        }
 
         if (company) {
           Utils.customizeObj(newChange.data, company);
@@ -198,7 +213,13 @@
     });
 
     RealTimeService.subscribe('/companySettings', serviceScope, function(newChange) {
-      // console.log('NEW CHANGE SETTINGS')
+      console.log('NEW CHANGE SETTINGS')
+
+      if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
+        $rootScope.SMTPChanged = newChange.data;
+      } else if (newChange.action === 'COMPANY_EMAIL_ALIAS_UPDATED') {
+        $rootScope.updatedAlias = newChange.data;
+      }
     })
 
     function _addAmountChangeListener(callback) {
@@ -839,7 +860,13 @@
       var future = $http.get('/settings/companyProfile/getRoleNames');
 
       RealTimeService.subscribe('/techRoles', $rootScope.$new(), function (newChange) {
-        console.log(newChange, "TECH ROLES")
+
+
+        if (newChange.action === 'TECH_ROLE_DELETED') {
+          $rootScope.techRolesChanged = newChange.data.id;
+        } else {
+          $rootScope.techRolesChanged = newChange.data;
+        }
       })
 
       Utils.handleCallback(future, callback);
@@ -936,7 +963,8 @@
       getCompanyPaymentInfo: getCompanyPaymentInfo,
       saveCompanyPaymentInfo: saveCompanyPaymentInfo,
       changePrimaryContact: changePrimaryContact,
-      checkStorageCompanyLength: checkStorageCompanyLength
+      checkStorageCompanyLength: checkStorageCompanyLength,
+      reloadCurrentCompany: reloadCurrentCompany
     }
 
   }]);

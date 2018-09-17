@@ -22,8 +22,7 @@
       <li class="template-item tech-user-item" ng-repeat="user in users | orderBy: getUserName track by user.id"
           ng-class="{'expanded': editUserId === user.id}"
           show-model-element="{{ 'showTechUser-' + user.id}}"
-          on-finish-render="highlightTechUser()"
-          ng-if="user.id !== currentUser.id">
+          on-finish-render="highlightTechUser()">
 
         <div class="clearfix tech-user">
 

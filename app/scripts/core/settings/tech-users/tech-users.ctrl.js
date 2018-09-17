@@ -22,6 +22,10 @@
         });
 
 
+        console.log($scope.currentUser, 'CURRENT USER')
+        console.log(users, 'USERS')
+
+
 
         // console.log(users, 'tech users')
         //

@@ -28,7 +28,7 @@
           }
 
           promise = $timeout(function () {
-            CompaniesService.saveForCompanyProfile(dto, 'workingDay');
+            CompaniesService.saveForCompanyProfile(dto, 'workingTime');
           }, 400);
         }
       };

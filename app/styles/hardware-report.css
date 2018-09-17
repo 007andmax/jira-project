@@ -1162,10 +1162,6 @@
   min-width: 250px;
 }
 
-.run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a {
-  padding: 10px;
-}
-
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a .avatar {
   margin-right: 10px;
 }
@@ -1602,6 +1598,14 @@
 .customer-ticket__report--summary,
 .customer-ticket__report--details {
   padding: 35px 0 !important;
+}
+
+.products .col-md-12, .services  .col-md-12, .products .col-md-12 .col-md-9 {
+  padding: 0px 2px !important;
+}
+
+.products div > *, .services div > * {
+  padding: 5px 0 !important;
 }
 
 .customer-ticket__header {

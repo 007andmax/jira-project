@@ -14,6 +14,7 @@
         if (savedState.type === 'service' && origin) {
           $scope.editService = angular.copy(origin);
         } else {
+          
           $scope.editService = {
             billable: true,
             isDefault: true,
@@ -27,6 +28,10 @@
               $scope.editService.taxes.push(tax);
             }
           }
+        }
+
+        $scope.stopPropagation = function(e) {
+          e.stopPropagation();
         }
 
         $scope.saveEditService = function (form, isModal) {
