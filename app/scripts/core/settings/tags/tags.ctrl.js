@@ -37,13 +37,19 @@
             return el.id !== val;
           })
         } else if (val) {
+
+          console.log(val, 'VALLLLLLLLLL');
           var index = $scope.companyTags.findIndex(function(el) {
             return el.id === val.id;
           })
 
+          console.log(index, "INDEX")
+
           if (index !== -1) {
             $scope.companyTags[index] = val;
           } else {
+
+            console.log('I PUSHHHHHH')
             $scope.companyTags.push(val);
           }
         }
@@ -105,7 +111,7 @@
                 var tag = Object.assign({}, $scope.editedTag);
                 tag.id = resp.data.id;
 
-                $scope.companyTags.push(tag);
+                // $scope.companyTags.push(tag);
               });
             }
 

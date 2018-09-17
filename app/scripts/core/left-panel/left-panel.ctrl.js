@@ -43,6 +43,7 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+
         $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
@@ -663,8 +664,6 @@
         }, function (value) {
           if (value && value !== '^ ') {
 
-            console.log('url changes changes changes')
-
             if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
               uploadReceivable();
             }
@@ -716,8 +715,6 @@
         function uploadReceivable() {
           ReceivableService.getReceivableInvoicesData($scope, function(resp) {
             $rootScope.uploadedReceivable = resp;
-
-            console.log('uploaded receivable', resp)
           })
         }
 

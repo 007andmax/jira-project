@@ -26,7 +26,7 @@
       <div class="placeholder">Last name</div>
       <input class="form-validation" type="text" aria-expanded="true" ng-maxlength="15"
              name="lastName" ng-model="editUser.lastName"
-             required make-dirty-on-blur tabindex="2" hard-reset-pattern="namePattern">
+             make-dirty-on-blur tabindex="2" hard-reset-pattern="namePattern">
     </div>
     <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
       <div ng-messages="userForm.primaryEmail.$error"
@@ -194,7 +194,7 @@
          phone-numbers-edit
          active-placeholder="'Primary contact phone'"
          is-restricted="true"
-         is-required="true"
+         not-required="true"
          country-code="{{ userCompanyCountryCode }}"
          ng-model="editUser.phoneNumbers"
          custom-placeholder="'Primary contact phone'">>

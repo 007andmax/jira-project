@@ -5,9 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', '$timeout',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      'DevicesService', '$rootScope',
+      'DevicesService', '$rootScope', 'AgreementsService',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, $timeout,
-                UserConfirmationsService, UserNotificationService, DevicesService, $rootScope) {
+                UserConfirmationsService, UserNotificationService, DevicesService, $rootScope, AgreementsService) {
 
         $scope.user = UsersService.getOneById($scope.ticket.createdUserId);
         $scope.getUserById = UsersService.getOneById;
