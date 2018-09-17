@@ -118,22 +118,31 @@
                   </div>
 
                   <div class="col-md-2">
-                    ${{ expence.price }}
+                    Price: ${{ expence.price }}
 
                   </div>
 
                   <div class="col-md-2">
-                    {{ expence.quantity }}
+                    QTY: {{ expence.quantity }}
                   </div>
 
                   <div class="col-md-2">
-                    ${{ calcTaxes(expence.taxes, expence.price * expence.quantity) }}
+                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity) }}
                   </div>
 
                   <div class="col-md-3">
-                    ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)}}
+                    Total: ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)}}
 
                   </div>
+
+                  <div class="col-md-12">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9" style="margin-left: auto">
+                      {{ expence.manufacture }}
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
             </div>

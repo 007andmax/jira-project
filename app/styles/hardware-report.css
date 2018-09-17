@@ -1604,6 +1604,14 @@
   padding: 35px 0 !important;
 }
 
+.products .col-md-12, .services  .col-md-12, .products .col-md-12 .col-md-9 {
+  padding: 0px 2px !important;
+}
+
+.products div > *, .services div > * {
+  padding: 5px 0 !important;
+}
+
 .customer-ticket__header {
   padding: 0 60px;
 }
