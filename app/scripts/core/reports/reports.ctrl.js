@@ -76,7 +76,40 @@
         $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
       })
 
+      $scope.$watch(function() {
+        return $rootScope.customerTicketWithProducts
+      }, function(val) {
+        $scope.showProducts = val;
+      })
+
+      $scope.$watch(function() {
+        return $rootScope.customerTicketWithServices
+      }, function(val) {
+        $scope.showServices = val;
+      })
+
+
+
       $scope.buildPdf = buildPdf;
+
+      $scope.durationFilter = function(quanity) {
+        var minutes = (quanity * 60) % 60;
+        var hours = Math.floor(quanity);
+
+        hours = String(hours).length < 2 ? '0' + hours : hours;
+
+        return hours + ':' + minutes;
+      }
+
+      $scope.calcTaxes = function(taxes, sum) {
+        var rate = 0;
+
+        taxes.forEach(function(tax) {
+          rate += tax.rate;
+        })
+
+        return (sum / 100) * rate;
+      }
 
 
 
