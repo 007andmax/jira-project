@@ -242,8 +242,8 @@
                 <div class="col-md-1 text-right pr-30">{{ productExpense.totalSum | currency: '$':2 }}</div>
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
-                <div class="col-md-5 pl-30">{{ serviceExpense.item.name }}</div>
-                <div class="col-md-3">{{ serviceExpense.description }}</div>
+                <div class="col-md-3 pl-30">{{ serviceExpense.item.name }}</div>
+                <div class="col-md-5">{{ serviceExpense.description }}</div>
                 <div class="col-md-1">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
                 <div class="col-md-1"
                      ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">
@@ -472,8 +472,8 @@
                 <div class="col-md-2 text-right pr-30">{{ productExpense.totalSum | currency: '$':2 }}</div>
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
-                <div class="col-md-3 pl-30">{{ serviceExpense.item.name }}</div>
-                <div class="col-md-2">{{ serviceExpense.description }}</div>
+                <div class="col-md-2 pl-30">{{ serviceExpense.item.name }}</div>
+                <div class="col-md-3">{{ serviceExpense.description }}</div>
                 <div class="col-md-2">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
                 <div class="col-md-2"
                      ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">
