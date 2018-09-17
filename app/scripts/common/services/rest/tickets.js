@@ -871,6 +871,35 @@
         })
       }
 
+
+      function deleteTicketExpense(ticketId, updateId, products, services, callback) {
+
+        $http({
+          url: '/v2/tickets/' + ticketId +  '/updates/' + updateId + '/deleteExpenses',
+          method: 'DELETE',
+          data: {
+            productExpenseIds: products.length ? products : null,
+            serviceExpenseIds: services.length ? services : null
+          },
+          headers: {
+            "Content-Type": "application/json;charset=utf-8"
+          }
+        }).then(function(resp) {
+          if (callback) {
+            callback(resp);
+          }
+        })
+      }
+
+
+      function updateNote(ticketId, updateId, note, callback) {
+        $http.put('/v2/tickets/' + ticketId + '/updates/' + updateId + '/updateNote', {
+          note: note
+        }).then(function(resp) {
+            if (callback) callback(resp);
+          })
+      }
+
       // function increase
 
       RealTimeService.subscribe('/tickets', scope, function (newChange) {
@@ -1279,7 +1308,9 @@
         updateDiscount: updateDiscount,
         getAllCounts: getAllCounts,
         getAllCountsByCompanyId: getAllCountsByCompanyId,
-        getCompanyTicketCount: getCompanyTicketCount
+        getCompanyTicketCount: getCompanyTicketCount,
+        deleteTicketExpense: deleteTicketExpense,
+        updateNote: updateNote,
       }
 
     }

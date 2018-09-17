@@ -40,6 +40,12 @@
   border-radius: 3px;
 }
 
+.static-wysiwyg .wysiwyg-controls-wrapper {
+  left: 0 !important;
+  top: 92px !important;
+  /* width: 100% !important; */
+}
+
 .ticket-updates .btn-load-more {
   margin: 20px auto 344px auto;
   display: block;

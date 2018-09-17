@@ -91,6 +91,53 @@
               setUserCompanies();
             }
 
+            $scope.toggleNoteUpdate = function(ticketUpdate) {
+              console.log(ticketUpdate)
+
+              if (ticketUpdate.id !== $scope.isNoteUpdating) {
+                $scope.prevNote = ticketUpdate.note;
+                $scope.isNoteUpdating = ticketUpdate.id;
+              }
+
+            }
+
+            $scope.cancelNoteUpdate = function(ticketUpdate) {
+              $scope.isNoteUpdating = false;
+
+              ticketUpdate.note = $scope.prevNote;
+            }
+
+            $scope.updateNoteRequest = function(updateId, note) {
+              // updateNote(ticketId, updateId, note, callback)
+
+              TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
+                console.log('note updated', resp);
+
+                $scope.isNoteUpdating = false;
+              })
+            }
+
+            $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
+              console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
+
+              // deleteTicketExpense(ticketId, updateId, products, services, callback)
+              TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
+
+                console.log('I SHOULD DELETEEEEEE')
+                productExpense.forEach(function(id) {
+                  ticketUpdate.products = ticketUpdate.products.filter(function(product) {
+                    return product.id !== id;
+                  })
+                });
+
+                serviceExpence.forEach(function(id) {
+                  ticketUpdate.services = ticketUpdate.services.filter(function(service) {
+                    return service.id !== id;
+                  })
+                })
+              })
+            }
+
             function setUserCompanies() {
               // $scope.userCompanies = $scope.ticketDetails.userCompanies
               //   .filter(function(id) {

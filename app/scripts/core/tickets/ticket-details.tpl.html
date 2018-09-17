@@ -455,8 +455,136 @@
                    custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
                   <i class="icon-sm icn-delete"></i>
                 </a>
+                <a ng-if="ticketUpdate.type === 'NOTE'" class="hit-area pull-right has-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
+                   ng-click="toggleNoteUpdate(ticketUpdate)"
+                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                  <i class="icon-sm edit-icon"></i>
+                </a>
               </div>
-              <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE'" ng-bind-html="getUpdateNote()"></p>
+
+              <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating !== ticketUpdate.id" ng-bind-html="getUpdateNote()"></p>
+
+              <div ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id" class="static-wysiwyg">
+                <div class="ticket-update-note">
+
+                  <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note"
+                       name="note" te-text-maxlength="5000" te-html-maxlength="50000">
+
+                    <div te-editor class="form-control editor" contenteditable="true"
+                        style="min-height: 92px;height: auto;border: none;" data-text="Click here to respond to the Ticket"></div>
+
+                        <div class="ticket-add-content-actions pull-left">
+
+
+
+
+
+
+                        </div>
+
+                    <div class="wysiwyg-controls-wrapper clearfix">
+                      <div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">
+
+                        <div class="font-styles pull-left">
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="bold"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
+                            <i class="icon-sm wysiwyg-bold "></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="italic"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
+                            <i class="icon-sm wysiwyg-italic"></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="underline"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
+                            <i class="icon-sm wysiwyg-underline"></i>
+                          </a>
+                        </div>
+
+                        <div class="text-bullets pull-left">
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="insertorderedlist"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
+                            <i class="icon-sm wysiwyg-ol"></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="insertunorderedlist"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
+                            <i class="icon-sm wysiwyg-ul"></i>
+                          </a>
+                        </div>
+
+                        <div class="text-styles pull-left">
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="justifyleft"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
+                            <i class="icn-sm icn-wysiwyg-align-left"></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="justifycenter"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
+                            <i class="icn-sm icn-wysiwyg-align-center"></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="justifyright"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
+                            <i class="icn-sm icn-wysiwyg-align-right"></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="outdent"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">
+                            <i class="icon-sm wysiwyg-unindent"></i>
+                          </a>
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="indent"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">
+                            <i class="icon-sm wysiwyg-indent"></i>
+                          </a>
+                        </div>
+
+                        <div class="quote-link pull-left">
+
+                          <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                             data-edit="cblock"
+                             tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">
+                            <i class="icon-sm wysiwyg-quote"></i>
+                          </a>
+
+                        </div>
+                      </div>
+
+                      <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip reset-formatting"
+                         data-edit="removeformat"
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">
+                        <i class="icon-sm wysiwyg-reset"></i>
+                      </a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="ticket-update-edit-actions clearfix">
+
+                  <div class="validation-msg pull-left">{{ validationMessage() }}</div>
+
+                  <div class="btn btn-primary" ng-click="cancelNoteUpdate(ticketUpdate)">
+                    Cancel
+                  </div>
+
+                  <div class="btn btn-success"
+                       custom-disabled="{{ disabledSave || updateTicketService.$invalid}}"
+                       ng-click="updateNoteRequest(ticketUpdate.id, ticketUpdate.note)">
+                    Save
+                  </div>
+
+                </div>
+              </div>
+
               <ul class="attachments clearfix" style="position: relative;"
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
@@ -531,6 +659,12 @@
                        custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icon-sm edit-icon"></i>
                     </a>
+                    <a class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"
+                       ng-click="deleteExpence(ticketUpdate, [product.id], [])"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm icn-delete"></i>
+                    </a>
                   </div>
                 </div>
                 <div class="ticket-update-edit" ng-class="{'hide': product.id !== editExpenseId}"
@@ -558,6 +692,12 @@
                        ng-click="setEditExpenseId(service.id)"
                        custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icon-sm edit-icon"></i>
+                    </a>
+                    <a class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete service"
+                       ng-click="deleteExpence(ticketUpdate, [], [service.id])"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm icn-delete"></i>
                     </a>
                   </div>
                 </div>
