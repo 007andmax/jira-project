@@ -237,9 +237,9 @@
     </div>
     <div class="col-md-12" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
       <div class="placeholder">Description</div>
-      <input type="text" style="vertical-align: top;" type="text" class="form-validation"
+      <textarea auto-expand limit="140" type="text" style="vertical-align: top;" type="text" class="form-validation"
              ng-model="editProduct.description" ng-required="true"
-             ng-maxlength="500" name="editProductDescription" tabindex="1"/>
+             ng-maxlength="500" name="editProductDescription" tabindex="1"></textarea>
 
     </div>
     <div class="col-md-6 taxes" add-on-focus>
