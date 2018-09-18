@@ -31,6 +31,7 @@
             var cloned = element.clone();
 
             cloned.css('opacity', 0);
+            cloned.css('z-index', '1000');
             cloned.css('height', '0px');
 
             element.parent().append(cloned);
@@ -45,9 +46,13 @@
             console.log(scope.model, 'ATTRRR')
 
             if (limit) {
-              console.log('limited to', limit)
 
-              console.log('HERER AIII M')
+              element.css('overflow', 'hidden');
+              cloned.css('overflow', 'hidden');
+              cloned.css('position', 'absolute');
+              cloned.css('width', element[0].clientWidth + 'px')
+
+
               var lines = 1;
 
               function getKeyNum(e) {
@@ -77,6 +82,7 @@
                     scope.$digest()
                   }
 
+
                   if (keynum === 13) {
                       if (element[0].scrollHeight >= +limit) {
                           e.stopPropagation();
@@ -84,20 +90,20 @@
                       }
                   }
 
-                  if (element[0].scrollHeight < +limit) {
-
-                  } else if (keynum !== 8){
-                    cloned.html(scope.value + String.fromCharCode(keynum));
-
+                  if (keynum !== 8) {
+                    var value = e.target.value.slice(0, e.srcElement.selectionStart) + String.fromCharCode(keynum) + e.target.value.slice(e.srcElement.selectionStart);
+                    // value.splice(e.srcElement.selectionStart, 0, String.fromCharCode(keynum))
+                    console.log(e.target.value, "EVENT")
+                    cloned.html(value);
                     if (cloned[0].scrollHeight > +limit) {
                       e.stopPropagation();
                       e.preventDefault();
 
                       cloned.html(scope.value);
-                    } else {
-
                     }
                   }
+
+
               };
 
               var setNumberOfLines = function (e) {
@@ -106,7 +112,6 @@
 
               var limitPaste = function (e) {
                   var clipboardData, pastedData, newValue, isOverflowed;
-
                   // Stop data actually being pasted into div
                   e.stopPropagation();
                   e.preventDefault();
@@ -115,8 +120,8 @@
                   clipboardData = e.clipboardData || window.clipboardData;
                   pastedData = clipboardData.getData('Text');
 
-                  console.log(pastedData, "PASTEDDDDD")
-                  newValue = (scope.value || '') + pastedData
+                  // console.log(pastedData, "PASTEDDDDD")
+                  newValue = scope.value.slice(0, e.srcElement.selectionStart) + pastedData + scope.value.slice(e.srcElement.selectionStart);
                   cloned.html(newValue);
 
                   isOverflowed = cloned[0].scrollHeight > +limit
@@ -124,7 +129,7 @@
                   var copiedValue = newValue;
 
 
-                  console.log('pretty good', scope)
+                  // console.log('pretty good', scope)
 
                   scope.value = checkForOverflow(copiedValue);
                   element[0].blur();

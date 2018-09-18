@@ -300,7 +300,7 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-10 pl-30 font-size-13">
-                  <textarea auto-expand class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;"
+                  <textarea auto-expand value="chosenNote.line" class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;"
                             ng-model="chosenNote.line"
                             ng-keyup="saveUpdatedNote() || hideRegularNoteButton(true)" maxlength="510"
                             placeholder="Please type custom note here"></textarea>
@@ -318,7 +318,7 @@
 
               <div class="col-md-12 pl-30">
 
-                <textarea auto-expand class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;"
+                <textarea auto-expand value="globalNote.line" class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;"
                           ng-model="globalNote.line"
                           placeholder="Mention your company's Terms and Conditions" maxlength="510"
                           ng-keyup="hideGlobalNoteButton(true)"></textarea>
