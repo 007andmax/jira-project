@@ -101,6 +101,73 @@
 
             }
 
+            $scope.deleteExpence = function (ticketUpdate, productExpense, serviceExpence) {
+              var type;
+              if (!productExpense.length) {
+                type = "SERVICE"
+              } else {
+                type = "PRODUCT"
+              }
+
+              // deleteTicketExpense(ticketId, updateId, products, services, callback)
+
+
+
+
+
+
+
+              switch (type) {
+
+
+
+                case 'SERVICE':
+                  var confirmMesage = 'Are you sure you want to remove a service?',
+                    userPopUpMessage,
+                    confirmButton = 'Delete';
+
+                  UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                    TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
+
+                      productExpense.forEach(function(id) {
+                        ticketUpdate.products = ticketUpdate.products.filter(function(product) {
+                          return product.id !== id;
+                        })
+                      });
+
+                      serviceExpence.forEach(function(id) {
+                        ticketUpdate.services = ticketUpdate.services.filter(function(service) {
+                          return service.id !== id;
+                        })
+                      })
+                    })
+                  });
+                  return;
+
+                case 'PRODUCT':
+                  var confirmMesage = 'Are you sure you want to remove a product?',
+                    userPopUpMessage,
+                    confirmButton = 'Delete'
+                  UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                    TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
+
+                      productExpense.forEach(function(id) {
+                        ticketUpdate.products = ticketUpdate.products.filter(function(product) {
+                          return product.id !== id;
+                        })
+                      });
+
+                      serviceExpence.forEach(function(id) {
+                        ticketUpdate.services = ticketUpdate.services.filter(function(service) {
+                          return service.id !== id;
+                        })
+                      })
+                    })
+                  });
+                  return;
+              }
+            };
+
             $scope.cancelNoteUpdate = function(ticketUpdate) {
               $scope.isNoteUpdating = false;
 
@@ -117,26 +184,7 @@
               })
             }
 
-            $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
-              console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
-
-              // deleteTicketExpense(ticketId, updateId, products, services, callback)
-              TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
-
-                console.log('I SHOULD DELETEEEEEE')
-                productExpense.forEach(function(id) {
-                  ticketUpdate.products = ticketUpdate.products.filter(function(product) {
-                    return product.id !== id;
-                  })
-                });
-
-                serviceExpence.forEach(function(id) {
-                  ticketUpdate.services = ticketUpdate.services.filter(function(service) {
-                    return service.id !== id;
-                  })
-                })
-              })
-            }
+            
 
             function setUserCompanies() {
               // $scope.userCompanies = $scope.ticketDetails.userCompanies
