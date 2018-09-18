@@ -6,11 +6,14 @@
     ['$timeout', '$compile', function ($timeout, $compile) {
       return {
         restrict: 'A',
+        scope: {
+          isTextarea: '<isTextarea'
+        },
         link: function ($scope, element, attrs) {
           element.addClass('no-animation');
 
           var interval = setTimeout(function() {
-            var input = element.find('input');
+            var input = element.find($scope.isTextarea ? 'textarea' : 'input');
 
             if (!input.length) {
               return;
