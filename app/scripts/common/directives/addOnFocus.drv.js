@@ -52,7 +52,7 @@
                 element.removeClass('no-animation')
               }, 500);
             }
-          }, 0)
+          }, 50)
 
         }
       }
