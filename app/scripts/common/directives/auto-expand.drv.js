@@ -121,7 +121,7 @@
                   pastedData = clipboardData.getData('Text');
 
                   // console.log(pastedData, "PASTEDDDDD")
-                  newValue = scope.value.slice(0, e.srcElement.selectionStart) + pastedData + scope.value.slice(e.srcElement.selectionStart);
+                  newValue = (scope.value || '').slice(0, e.srcElement.selectionStart) + pastedData + (scope.value || '').slice(e.srcElement.selectionStart);
                   cloned.html(newValue);
 
                   isOverflowed = cloned[0].scrollHeight > +limit

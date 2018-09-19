@@ -1055,6 +1055,10 @@ _::-webkit-:not(:root:root),
   padding-left: 25px;
 }
 
+.modal-textarea {
+  height: 45px;
+}
+
 .service--content label .control-indicator,
 .add-tax-dropdown label .control-indicator {
   top: -1px;
