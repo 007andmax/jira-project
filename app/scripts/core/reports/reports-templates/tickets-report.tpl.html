@@ -94,7 +94,10 @@
               style="text-transform: uppercase;font-weight: bold;">Description: </span>{{ticket.description}}
             </div>
 
-            <div ng-if="ticket.updates && showServices" class="services col-md-12 clearfix">
+            <div ng-if="ticket.updates && showServices"
+                 style="{{ getProducts(ticket).length && getServices(ticket).length ? 'margin-bottom: 10px' : '' }}"
+                 ng-class="{border: getServices(ticket).length}"
+                 class="services col-md-12 clearfix">
               <div ng-repeat="service in ticket.updates">
                 <div ng-if="service.type === 'SERVICE'" class="col-md-12" ng-repeat="expence in service.expenses">
                   <div class="col-md-4">
@@ -112,7 +115,8 @@
               </div>
             </div>
 
-            <div ng-if="ticket.updates && showProducts" class="products col-md-12 clearfix">
+            <div ng-if="ticket.updates && showProducts" class="products col-md-12 clearfix"
+                 ng-class="{border: getProducts(ticket).length}">
               <div ng-repeat="product in ticket.updates" ng-if="product.type === 'PRODUCT'">
                 <div class="col-md-12" ng-repeat="expence in product.expenses" ng-if="expence.manufacture">
                   <div class="col-md-1">
