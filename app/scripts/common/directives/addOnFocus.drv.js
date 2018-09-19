@@ -21,7 +21,7 @@
 
 
             $scope.$watch(function() {
-              return input.val();
+              return input[0].value;
             }, function(val) {
               if (val) {
                 element.addClass('active-field');
@@ -39,7 +39,7 @@
 
             input.on('blur', function() {
 
-              if (!input.val()) {
+              if (!input[0].value) {
                 element.removeClass('active-field');
               }
 
@@ -52,7 +52,7 @@
                 element.removeClass('no-animation')
               }, 500);
             }
-          }, 50)
+          }, 0)
 
         }
       }
