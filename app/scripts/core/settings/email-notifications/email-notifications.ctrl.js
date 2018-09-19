@@ -25,6 +25,15 @@
           }
         };
 
+        $scope.ticketCloseNotification = function(form) {
+          var data = $scope.ticketClosed || false;
+          UsersService.saveForUserProfile(data, 'ticketCloseNotifications', function () {
+
+          });
+        }
+
+        // settings/userProfile/ticketCloseNotifications
+
       }]);
 
 }());

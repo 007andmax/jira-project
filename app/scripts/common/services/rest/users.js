@@ -493,7 +493,7 @@
 
       function saveForUserProfile(data, toUpdate, callback) {
 
-        if (!data) {
+        if (!data && data !== false) {
           throw 'data is required!';
         }
         if (!toUpdate) {
