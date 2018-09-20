@@ -328,7 +328,7 @@
              is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       <i class="barcode-icon"></i>
     </div>
-    <div class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+    <div ng-if="!reloading" class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
 
       <!-- <input type="text" class="form-validation has-dropdown"
              autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
