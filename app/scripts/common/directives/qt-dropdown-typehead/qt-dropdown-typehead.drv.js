@@ -40,6 +40,7 @@
     self.lastCorrectSelecteditem = '';
     self.list = [];
 
+
     $scope.qtPlaceholder = self.qtPlaceholder;
     $scope.activePlaceholder = self.activePlaceholder;
 
@@ -98,6 +99,8 @@
       self.changeDropdownState();
     };
 
+
+
     self.getDisplayedProperty = function(item) {
       return (self.displayProperty ? item[self.displayProperty] : item);
     };
@@ -143,6 +146,12 @@
       self.selectedItem = '';
       self.isOpen = true;
     };
+
+    if (self.selectedItem) {
+      self.selectItem(self.selectedItem);
+
+      self.changeDropdownState(false);
+    }
 
     $rootScope.clearIndustryFilter = self.clearValueByIconClick;
 

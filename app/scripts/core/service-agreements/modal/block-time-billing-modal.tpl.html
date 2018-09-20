@@ -292,9 +292,10 @@
                            name="contractService" autocomplete="off"
                            autocomplete-service-item="contractService.name"
                            ng-model="contractService.nameValue" service-list="defaultServicesForDropdown"
-                           autocomplete-service-list uib-dropdown-toggle smart-dropdown-menu-position="service-list"
+                           autocomplete-service-list uib-dropdown-toggle
                            entity="contractService.nameValue" hard-reset-pattern="descriptionPattern"
                            invalid-when="!isNameUnique(contractService.nameValue)"/>
+                           <!-- smart-dropdown-menu-position="service-list" -->
                     <i class="icn-sm icn-caret-gray"></i>
                     <div class="service-list-container"></div>
 

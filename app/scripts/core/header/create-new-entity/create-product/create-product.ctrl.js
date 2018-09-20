@@ -38,16 +38,11 @@
       $scope.$watch(function() {
         return $scope.editProduct.category;
       }, function(val) {
-        console.log($scope.editProduct.category && !$scope.editProduct.category.id, "IS TRUE")
+        // console.log($scope.editProduct.category && !$scope.editProduct.category.id, "IS TRUE")
       })
 
       var origin = savedState.item;
 
-      setTimeout(function() {
-        console.log($scope.editProduct.taxes)
-      }, 5000)
-
-      console.log('saved state STATE', savedState, origin)
       if (savedState.type === 'product' && origin) {
         if (origin.name) {
           savedState.item = { category: origin };
@@ -62,8 +57,7 @@
           })
         }).filter(function(el) { return el; })
 
-        console.log($scope.editProduct.taxes, 'origin')
-        var company = $scope.editProduct.company;
+        var company = CompaniesService.getOneById($scope.editProduct.companyId);
 
         if ($scope.editProduct.category && $scope.editProduct.category.default) {
           $scope.editProduct.category.name = null;
@@ -71,6 +65,12 @@
           $scope.editProduct.category = angular.copy($scope.savedCategory);
         }
         if (company) {
+          $scope.reloading = true;
+
+          setTimeout(function() {
+            $scope.reloading = false;
+          }, 0)
+
           company = CompaniesService.getOneById(company.id);
           $scope.editProduct.company = company.clientType.toLowerCase() === 'vendor' ? company : undefined;
         }
