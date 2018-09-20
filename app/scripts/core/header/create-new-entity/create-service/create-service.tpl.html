@@ -61,6 +61,7 @@
            ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
         <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
         <div class="control-label" ng-message="required">Service name is required.</div>
+        <div class="control-label" ng-message="maxlength">Service name is too long.</div>
 
       </div>
       <div class="placeholder">Service Name</div>
@@ -68,7 +69,7 @@
              ng-model="editService.name"
              name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
              requiredis-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
-             ng-maxlength="30" ng-minlength="3">
+             ng-maxlength="100" ng-minlength="3">
     </div>
     <div class="col-md-6" add-on-focus  ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
       <div ng-messages="editServiceForm.editServiceName.$error"

@@ -162,6 +162,7 @@
           ProductsService.getFullListForAutocomplete($scope, function(resp) {
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
+              console.log("IIIIIIIIIIIIII")
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
                 for(var w=0; w<productsData.length; w++) {
                   for(var v=0; v<productsData[w].products.length; v++) {
@@ -1133,7 +1134,7 @@
         };
         $scope.showNotAddedServiceExpenseError = function(service) {
           if(service.name) {
-            return (service.name && service.name.name.length && $scope.notAddedServiceExpenseError)
+            return (service.name && service.name.name && service.name.name.length && $scope.notAddedServiceExpenseError)
           }
 
         };
