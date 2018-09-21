@@ -156,6 +156,8 @@
           }
 
           for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
+
+            console.log($scope.serviceContract.serviceExpenses[g], "FUCK")
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
 
@@ -583,6 +585,8 @@
             }
             $scope.defaultServices.push(serv);
           }
+
+          console.log($scope.defaultServices, $scope.serviceContract.serviceExpenses, "4E za")
 
           if ($scope.serviceContract.serviceExpenses.length > 0) {
             for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
