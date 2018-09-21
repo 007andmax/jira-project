@@ -36,8 +36,8 @@
 
       <div class="clearfix">
         <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="ticketClosed"
-                ng-change="ticketCloseNotification(emailNotificationsForm)" >
+          <input type="checkbox" ng-model="emailNotifications.ticketCloseNotifications"
+                ng-change="saveEmailNotifications(emailNotificationsForm)" >
           <span class="control-indicator"></span> When any ticket is closed
         </label>
       </div>
