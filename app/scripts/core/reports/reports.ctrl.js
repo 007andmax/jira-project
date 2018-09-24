@@ -347,7 +347,7 @@
               for (var k = 0; k < exp.length; k++) {
                 if (exp[k].isServiceExpense) {
                   var name = exp[k].name;
-                  var time = exp[k].quantity;
+                  var time = exp[k].totalQuantity;
 
                   if (overallTime[name]) {
                     overallTime[name] += time;
