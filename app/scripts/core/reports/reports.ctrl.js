@@ -88,6 +88,20 @@
         $scope.showServices = val;
       })
 
+      $scope.getServices = function(ticket) {
+        return ticket.updates && ticket.updates.filter(function(el) {
+          return el.type === "SERVICE";
+        })
+
+
+      }
+
+      $scope.getProducts = function(ticket) {
+        return ticket.updates && ticket.updates.filter(function(el) {
+          return el.type === "PRODUCT";
+        })
+      }
+
 
 
       $scope.buildPdf = buildPdf;

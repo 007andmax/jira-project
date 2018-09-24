@@ -761,7 +761,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: 0;
   transform: translate(50%, 50%);
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -782,12 +782,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-  
+
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-  
+
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -820,13 +820,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -854,13 +854,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -996,6 +996,7 @@ _::-webkit-:not(:root:root),
 .company--content input,
 .add-tax-dropdown input,
 .product--content input,
+.product--content textarea,
 .invoice--content .form-control,
 .service--content .form-control,
 .user--content .form-control,
@@ -1027,7 +1028,8 @@ _::-webkit-:not(:root:root),
 .ticket--content input::placeholder,
 .company--content input::placeholder,
 .add-tax-dropdown input::placeholder,
-.product--content input::placeholder {
+.product--content input::placeholder,
+.product--content textarea::placeholder {
   color: #9ca5b6;
   font-size: 13px;
   font-weight: 500;
@@ -1051,6 +1053,10 @@ _::-webkit-:not(:root:root),
   color: #4f5f79;
   font-size: 13px;
   padding-left: 25px;
+}
+
+.modal-textarea {
+  height: 45px;
 }
 
 .service--content label .control-indicator,

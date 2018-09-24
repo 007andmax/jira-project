@@ -30,9 +30,9 @@
   font-weight: 500;
 }
 
-.invoice-preview.invoice-create .invoice-list--item__content .col-md-5 {
-  width: 38%;
-}
+/*.invoice-preview.invoice-create .invoice-list--item__content .col-md-5 {*/
+  /*width: 38%;*/
+/*}*/
 
 .invoice-create a.bold,
 .invoice-create a {

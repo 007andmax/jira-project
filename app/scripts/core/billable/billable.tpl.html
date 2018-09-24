@@ -235,7 +235,8 @@
                 <div class="col-md-1 bold text-right pr-30">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-8 pl-30">{{ productExpense.item.description }}</div>
+                <div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>
+                <div class="col-md-6">{{ productExpense.item.description }}</div>
                 <div class="col-md-1">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-1">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
@@ -300,7 +301,7 @@
               </div>
               <div class="clearfix">
                 <div class="col-md-10 pl-30 font-size-13">
-                  <textarea auto-expand class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;"
+                  <textarea auto-expand value="chosenNote.line" class="limited-regular-area" rows="4" style="width: 100%; padding: 5px 12px;"
                             ng-model="chosenNote.line"
                             ng-keyup="saveUpdatedNote() || hideRegularNoteButton(true)" maxlength="510"
                             placeholder="Please type custom note here"></textarea>
@@ -318,7 +319,7 @@
 
               <div class="col-md-12 pl-30">
 
-                <textarea auto-expand class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;"
+                <textarea auto-expand value="globalNote.line" class="limited-global-area" rows="4" style="width: 100%; padding: 5px 12px;"
                           ng-model="globalNote.line"
                           placeholder="Mention your company's Terms and Conditions" maxlength="510"
                           ng-keyup="hideGlobalNoteButton(true)"></textarea>
@@ -465,7 +466,8 @@
                 <div class="col-md-2 bold text-right pr-30">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-5 pl-30">{{ productExpense.item.description }}</div>
+                <div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>
+                <div class="col-md-3">{{ productExpense.item.description }}</div>
                 <div class="col-md-2">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-2">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
