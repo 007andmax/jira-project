@@ -200,41 +200,15 @@
              model-id="editProduct.versionedId.id">
 
     </div>
-    <div class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
-      <div class="placeholder">Category</div>
-      <input style="padding-right: 70px;" type="text" class="has-dropdown"
-             required ng-maxlength="100"
-             autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
-             typeahead-editable="true"
-             typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
-             ng-change="validateCategory(editProduct.category, editProductForm)"
-             typeahead-input-formatter="getItemName($model)" tabindex="4"
-             uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
-             qt-typeahead-show-on-focus
-             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-             hard-reset-pattern="newCategoryNamePattern">
 
-      <div class="product-actions category-caret"
-           ng-style="(editProduct.category && !editProduct.category.id) ? { 'display': 'block' } : ''">
-
-        <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
-           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
-           ng-show="editProduct.category && !editProduct.category.id"
-           ng-click="addCategory(editProductForm.editProductCategory)">
-          <i class="icn-sm icn-product-save"></i>
-        </a>
-
-        <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
-           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-           ng-show="editProduct.category && !editProduct.category.id"
-           ng-click="editProduct.category = ''">
-          <i class="icn-sm icn-product-cancel"></i>
-        </a>
-
-      </div>
-
-
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+      <div class="placeholder">ILC number</div>
+      <input type="text" class="form-validation" name="editProductILC"
+             ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
+             is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
+      <i class="barcode-icon"></i>
     </div>
+
     <div class="col-md-12" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
       <div class="placeholder">Description</div>
       <input type="text" style="vertical-align: top;" type="text" class="form-validation"
@@ -321,12 +295,42 @@
              hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" tabindex="3">
 
     </div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
-      <div class="placeholder">ILC number</div>
-      <input type="text" class="form-validation" name="editProductILC"
-             ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
-             is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
-      <i class="barcode-icon"></i>
+
+
+    <div class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
+      <div class="placeholder">Category</div>
+      <input style="padding-right: 70px;" type="text" class="has-dropdown"
+             required ng-maxlength="100"
+             autocomplete="off" ng-model="editProduct.category" name="editProductCategory"
+             typeahead-editable="true"
+             typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
+             ng-change="validateCategory(editProduct.category, editProductForm)"
+             typeahead-input-formatter="getItemName($model)" tabindex="4"
+             uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
+             qt-typeahead-show-on-focus
+             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+             hard-reset-pattern="newCategoryNamePattern">
+
+      <div class="product-actions category-caret"
+           ng-style="(editProduct.category && !editProduct.category.id) ? { 'display': 'block' } : ''">
+
+        <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+           ng-show="editProduct.category && !editProduct.category.id"
+           ng-click="addCategory(editProductForm.editProductCategory)">
+          <i class="icn-sm icn-product-save"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+           ng-show="editProduct.category && !editProduct.category.id"
+           ng-click="editProduct.category = ''">
+          <i class="icn-sm icn-product-cancel"></i>
+        </a>
+
+      </div>
+
+
     </div>
     <div ng-if="!reloading" class="col-md-6 dropdown" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
 
