@@ -412,6 +412,11 @@
 
         $scope.overallServiceTime = top;
 
+        $scope.ticketReport.timeSpent = top.reduce(function(acc, el) {
+          acc += el.time;
+          return acc;
+        }, 0);
+
 
         drawChart(top);
       }
