@@ -127,8 +127,8 @@
                     {{ expence.name }}
                   </div>
 
-                  <div class="col-md-2">
-                    Price: ${{ expence.price }}
+                    <div class="col-md-2">
+                      Price: ${{ (+expence.price).toFixed(2) }}
 
                   </div>
 
@@ -136,13 +136,12 @@
                     QTY: {{ expence.quantity }}
                   </div>
 
-                  <div class="col-md-2">
-                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity) }}
-                  </div>
+                    <div class="col-md-2">
+                      Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
+                    </div>
 
-                  <div class="col-md-2">
-                    Total: ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
-                    expence.quantity)}}
+                    <div class="col-md-3">
+                      Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)).toFixed(2)}}
 
                   </div>
 
@@ -159,7 +158,7 @@
                   </div>
 
                   <div class="col-md-2">
-                    Price: ${{ expence.price }}
+                    Price: ${{ (+expence.price).toFixed(2) }}
 
                   </div>
 
@@ -168,12 +167,11 @@
                   </div>
 
                   <div class="col-md-2">
-                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity) }}
+                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
                   </div>
 
-                  <div class="col-md-2">
-                    Total: ${{ expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
-                    expence.quantity)}}
+                  <div class="col-md-3">
+                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)).toFixed(2)}}
 
                   </div>
 

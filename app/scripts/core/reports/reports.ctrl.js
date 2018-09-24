@@ -111,7 +111,7 @@
         var hours = Math.floor(quanity);
 
         hours = String(hours).length < 2 ? '0' + hours : hours;
-
+        minutes = String(minutes).length < 2 ? '0' + minutes : minutes;
         return hours + ':' + minutes;
       }
 

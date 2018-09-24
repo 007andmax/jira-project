@@ -64,7 +64,7 @@
           </label>
         </div>
         <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
-          <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly>
+          <input placeholder="0.00" type="text" class="form-control" ng-model="service.rate" readonly qt-to-fixed="2">
         </div>
         <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
           <div>

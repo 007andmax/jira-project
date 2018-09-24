@@ -42,7 +42,9 @@
 
 .static-wysiwyg .wysiwyg-controls-wrapper {
   left: 0 !important;
-  top: 92px !important;
+  /* bottom: 0 !important; */
+  top: auto !important;
+  /* transform: translateY(-50%); */
   /* width: 100% !important; */
 }
 
