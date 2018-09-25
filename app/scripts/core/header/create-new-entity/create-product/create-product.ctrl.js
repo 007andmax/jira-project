@@ -51,7 +51,7 @@
 
 
         $scope.editProduct = angular.copy(origin);
-        $scope.editProduct.taxes = origin.taxIds.map(function(taxId) {
+        $scope.editProduct.taxes = (origin.taxIds || []).map(function(taxId) {
           return $scope.taxes.find(function(el) {
             return el.id === taxId;
           })
