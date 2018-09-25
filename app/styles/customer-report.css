@@ -1,6 +1,9 @@
 .customer-ticket p {
   font-weight: 600; }
 
+html.no-d3-tooltip .nvtooltip .value {
+  display: none; }
+
 .customer-ticket__report {
   width: 100%; }
 
