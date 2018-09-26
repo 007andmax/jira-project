@@ -118,12 +118,12 @@
             }
 
             $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
-              console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
+              // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
 
               // deleteTicketExpense(ticketId, updateId, products, services, callback)
               TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
 
-                console.log('I SHOULD DELETEEEEEE')
+                // console.log('I SHOULD DELETEEEEEE')
                 productExpense.forEach(function(id) {
                   ticketUpdate.products = ticketUpdate.products.filter(function(product) {
                     return product.id !== id;
@@ -278,8 +278,9 @@
           };
 
           $scope.updateAndCloseTicket = function (form) {
+            var saveFailed = $scope.saveTicketUpdate(form, true, true, closeTicket);
             if (hasUnsavedUpdate($scope.ticketUpdate)) {
-              var saveFailed = $scope.saveTicketUpdate(form, true);
+
               if (!saveFailed) {
                 var unwatch = $scope.$watch('isSavingUpdate', function (value) {
                   if (value === false) {
@@ -478,7 +479,7 @@
             $scope.triedToSaveUpdate = value;
           };
 
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, close) {
             if (form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -537,7 +538,7 @@
                 });
               }
 
-              TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
+              TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
 
                 $scope.isSavingUpdate = false;
 
@@ -805,16 +806,25 @@
               return shared.user.id;
             });
 
-            TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
-              $scope.disablePreventingLocationChange = true;
-              if(!$state.includes('companyProfile')) {
-                $state.go('tickets');
-              }
-              //$state.go('tickets');
-              $scope.uncheckTicket($scope.ticketDetails.id);
-              $scope.ticketClosing = false;
-            }, recipientsIds);
+            // TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
+            //   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+            //   $scope.disablePreventingLocationChange = true;
+            //   if(!$state.includes('companyProfile')) {
+            //     $state.go('tickets');
+            //   }
+            //   //$state.go('tickets');
+            //   $scope.uncheckTicket($scope.ticketDetails.id);
+            //   $scope.ticketClosing = false;
+            // }, recipientsIds);
+
+            UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+            $scope.disablePreventingLocationChange = true;
+            if(!$state.includes('companyProfile')) {
+              $state.go('tickets');
+            }
+            //$state.go('tickets');
+            $scope.uncheckTicket($scope.ticketDetails.id);
+            $scope.ticketClosing = false;
           }
 
           function hasUnsavedUpdate(update) {
