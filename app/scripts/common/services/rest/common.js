@@ -140,7 +140,7 @@
     }
 
     function downloadByUrl(url, fileName) {
-
+      alert('WE AHRE HERE')
       //iOS devices do not support downloading. We have to inform user about this.
       if (/(iP)/g.test(navigator.userAgent)) {
         alert('Your device does not support files downloading. Please try again in desktop browser.');
@@ -151,6 +151,7 @@
       if (isChrome || isFirefox) {
         //Creating new link node.
         var link = document.createElement('a');
+        link.target = "_blank";
         link.href = url;
 
         if (link.download !== undefined) {
@@ -163,6 +164,7 @@
 
         //Dispatching click event.
         if (document.createEvent) {
+          alert('LOOol')
           var e = document.createEvent('MouseEvents');
           e.initEvent('click', true, true);
           link.dispatchEvent(e);
@@ -178,7 +180,8 @@
       // Force file download (whether supported by server).
 //            url += '?download';
 //todo fix bug with multiple files download
-      window.open(url, '_new');
+      alert('HERE???')
+      window.open(url, '_blank');
       return true;
 
     }
