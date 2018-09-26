@@ -381,6 +381,36 @@
       return info;
     }
 
+    function setCategoryRate(id, rate, callback) {
+      $http.put('/settings/companyProfile/categoryRate/' + id, {
+        commissionRate: rate
+      }).then(function(res) {
+        if (callback) callback(res);
+      })
+    }
+
+    function setServiceRate(id, rate, callback) {
+      $http.put('/settings/companyProfile/serviceRate/' + id, {
+        commissionRate: rate
+      }).then(function(res) {
+        if (callback) callback(res);
+      })
+    }
+
+    function setAgreementsRate(id, rates, callback) {
+      $http.put('/settings/companyProfile/agreementRate/', rates)
+        .then(function(res) {
+          if (callback) callback(res);
+        })
+    }
+
+    function getAgreementsRates(callback) {
+      $http.get('/settings/companyProfile/agreementRate/')
+        .then(function(res) {
+          if (callback) callback(res);
+        })
+    }
+
     function getCompanyInfo(companyId, scope, callback) {
 
       if (!companyId) {
@@ -964,7 +994,11 @@
       saveCompanyPaymentInfo: saveCompanyPaymentInfo,
       changePrimaryContact: changePrimaryContact,
       checkStorageCompanyLength: checkStorageCompanyLength,
-      reloadCurrentCompany: reloadCurrentCompany
+      reloadCurrentCompany: reloadCurrentCompany,
+      setServiceRate: setServiceRate,
+      setCategoryRate: setCategoryRate,
+      setAgreementsRate: setAgreementsRate,
+      getAgreementsRates: getAgreementsRates
     }
 
   }]);

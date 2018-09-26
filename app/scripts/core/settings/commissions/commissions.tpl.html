@@ -1,0 +1,34 @@
+<div>
+  <div class="togglers">
+    <div ng-click="setView('product')">Product Commissions</div>
+    <div ng-click="setView('service')">Service Commissions</div>
+    <div ng-click="setView('commissions')">Contract Commissions</div>
+
+  </div>
+
+
+  <div ng-if="view === 'product'">
+    <div ng-repeat="category in categories">
+      <div>
+        {{ category.name }}
+      </div>
+
+      <input type="number" ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate)"/>
+    </div>
+
+  </div>
+
+  <div ng-if="view === 'service'">
+    <div ng-repeat="service in services">
+      <div>
+        {{ service.name }}
+      </div>
+
+      <input type="number" ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate)"/>
+    </div>
+
+  </div>
+
+
+
+</div>

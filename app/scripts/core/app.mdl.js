@@ -209,6 +209,11 @@
           templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
           controller: 'quicktech.core.settings.techUsersCtrl'
         }))
+        .state('settings.commissions', waitForServices({
+          url: '/commissions',
+          templateUrl: '/html/scripts/core/settings/commissions/commissions.tpl.html',
+          controller: 'quicktech.core.settings.commissionsCtrl'
+        }))
         .state('settings.email', waitForServices({
           url: '/email',
           templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
