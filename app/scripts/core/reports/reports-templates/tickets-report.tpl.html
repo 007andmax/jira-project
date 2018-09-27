@@ -36,6 +36,11 @@
             <p><span>{{ticketReport.startDate}}</span> - <span>{{ ticketReport.endDate }}</span></p>
           </div>
         </div>
+        <div class="report-footer">
+          <p>Prepare by : <span>{{ username }}</span></p>
+          <p>{{ currentCompany.name }}</p>
+          <p>Quicktech <span>2018</span> ©. All rights reserved</p>
+        </div>
         <div ng-show="showHeader" class="customer-ticket__report--summary" on-finish-render="buildPdf()">
           <h3>Resolved Tickets</h3>
           <div class="customer-ticket__header">
@@ -65,126 +70,90 @@
         <div class="customer-ticket__report--details">
           <h3>Ticket Details</h3>
           <div class="details-header row">
-            <div class="col-md-2">TICKET NUMBER</div>
-            <div class="col-md-2">DATE / TIME</div>
-            <div class="col-md-2">User</div>
-            <div class="col-md-2 device-field-pdf">Device</div>
-            <div ng-if="ticketReport.averageResponseTime" class="col-md-2">Response Time</div>
-            <div class="col-md-2" style="padding-left: 65px!important;">STATUS</div>
+            <div class="col-md-8" style="width: 70%;">TICKET NUMBER</div>
+            <div class="col-md-2" style="width: 20%;">DATE / TIME</div>
+            <div class="col-md-2" style="width: 10%;">STATUS</div>
           </div>
           <div class="details-content row" ng-repeat="ticket in ticketReport.tickets" on-finish-render="build()">
-            <div class="col-md-2">{{ticket.ticketNumber}}</div>
-            <div class="col-md-2">{{ ticket.ticketCreatedAt }}</div>
-            <div class="col-md-2">{{ticket.username.firstName + ' ' + ticket.username.lastName}}
-            </div>
-            <div class="col-md-2 device-field-pdf">{{ticket.deviceName}}</div>
-            <div ng-if="ticketReport.averageResponseTime" class="col-md-2">
-              {{formatResponseTime(ticket.responseTime)}}
-            </div>
-            <div class="col-md-2" style="padding: 0; text-align: right" ng-show="ticket.status === 'ON_HOLD'">
+            <div class="col-md-8 ellipsis" style="width: 70%;margin-bottom: 20px;">{{ticket.ticketNumber}} - {{ticket.description}}</div>
+            <div class="col-md-2" style="width: 20%;margin-bottom: 20px;">{{ ticket.ticketCreatedAt }}</div>
+            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" ng-show="ticket.status === 'ON_HOLD'">
               <p class="network-scan-status status-warning">On Hold</p>
             </div>
-            <div class="col-md-2" style="padding: 0; text-align: right" ng-show="ticket.status === 'COMPLETED'">
+            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" ng-show="ticket.status === 'COMPLETED'">
               <p class="network-scan-status status-success">Completed</p>
             </div>
-            <div class="col-md-2" style="padding: 0; text-align: right" ng-show="ticket.status === 'IN_PROGRESS'">
+            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" ng-show="ticket.status === 'IN_PROGRESS'">
               <p class="network-scan-status status-in-progress">In Progress</p>
-            </div>
-            <div class="col-md-12" style="padding-top: 15px!important;"><span
-              style="text-transform: uppercase;font-weight: bold;">Description: </span>{{ticket.description}}
             </div>
 
             <div ng-if="ticket.updates && showServices"
-                 style="{{ getProducts(ticket).length && getServices(ticket).length ? 'margin-bottom: 10px' : '' }}"
-                 ng-class="{border: getServices(ticket).length}"
-                 class="services col-md-12 clearfix">
+                 class="services">
               <div ng-repeat="service in ticket.updates">
-                <div ng-if="service.type === 'SERVICE'" class="col-md-12" ng-repeat="expence in service.expenses">
-                  <div class="col-md-4">
+                <div ng-if="service.type === 'SERVICE'" class="clearfix" ng-repeat="expence in service.expenses">
+                  <div class="col-md-3 ellipsis">
                     {{ expence.name }}
                   </div>
 
-                  <div class="col-md-6">
+                  <div class="col-md-7">
                     {{ expence.description }}
                   </div>
 
                   <div class="col-md-2">
-                    Duration {{ durationFilter(expence.totalQuantity) }}
+                    Time: {{ durationFilter(expence.totalQuantity) }}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div ng-if="ticket.updates && showProducts" class="products col-md-12 clearfix"
-                 ng-class="{border: getProducts(ticket).length}">
+            <div ng-if="ticket.updates && showProducts" class="products">
               <div ng-repeat="product in ticket.updates" ng-if="product.type === 'PRODUCT'">
-                <div class="col-md-12" ng-repeat="expence in product.expenses" ng-if="expence.manufacture">
-                  <div class="col-md-1">
-                    {{ expence.manufacture }}
-                  </div>
-
-                  <div class="col-md-3">
+                <div class="clearfix" ng-repeat="expence in product.expenses" ng-if="expence.manufacture">
+                  <div class="col-md-12 ellipsis">
                     {{ expence.name }}
                   </div>
-
-                    <div class="col-md-2">
-                      Price: ${{ (+expence.price).toFixed(2) }}
-
-                  </div>
-
-                  <div class="col-md-2">
-                    QTY: {{ expence.quantity }}
-                  </div>
-
-                    <div class="col-md-2">
-                      Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
-                    </div>
-
-                    <div class="col-md-3">
-                      Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)).toFixed(2)}}
-
-                  </div>
-
-
-                </div>
-
-                <div class="col-md-12" ng-repeat="expence in product.expenses" ng-if="!expence.manufacture">
-                  <div class="col-md-1">
-                    {{ expence.manufacture }}
-                  </div>
-
-                  <div class="col-md-3">
-                    {{ expence.name }}
-                  </div>
-
                   <div class="col-md-2">
                     Price: ${{ (+expence.price).toFixed(2) }}
-
                   </div>
-
                   <div class="col-md-2">
                     QTY: {{ expence.quantity }}
                   </div>
-
                   <div class="col-md-2">
                     Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
                   </div>
-
-                  <div class="col-md-3">
-                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price * expence.quantity)).toFixed(2)}}
-
+                  <div class="col-md-2">
+                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
+                    expence.quantity)).toFixed(2) }}
                   </div>
+                </div>
 
+                <div class="col-md-12" ng-repeat="expence in product.expenses" ng-if="!expence.manufacture">
+                  <div class="col-md-12 ellipsis">
+                    {{ expence.name }}
+                  </div>
+                  <div class="col-md-2">
+                    Price: ${{ (+expence.price).toFixed(2) }}
+                  </div>
+                  <div class="col-md-2">
+                    QTY: {{ expence.quantity }}
+                  </div>
+                  <div class="col-md-2">
+                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
+                  </div>
+                  <div class="col-md-2">
+                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
+                    expence.quantity)).toFixed(2)}}
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div class="col-md-3" style="margin-top: 20px;">User: Amanda Diamond</div>
+            <div class="col-md-3" style="margin-top: 20px;">Device: Server</div>
+            <div class="col-md-3" style="margin-top: 20px;">Tech: Scott Wilson</div>
+            <div class="col-md-3" style="margin-top: 20px;">Response time: 1h32min</div>
           </div>
 
-        </div>
-        <div class="report-footer">
-          <p>Prepare by : <span>{{ username }}</span></p>
-          <p>{{ currentCompany.name }}</p>
-          <p>Quicktech <span>2018</span> ©. All rights reserved</p>
         </div>
       </div>
     </div>
