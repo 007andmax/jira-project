@@ -252,7 +252,6 @@
           }
         }
 
-        // console.log('data to send', dataToSend)
         if (dataToSend.companyId) {
           $scope.company = CompaniesService.getOneById(dataToSend.companyId)
         }
@@ -261,7 +260,6 @@
           $scope.reportAccountsReceivable = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
-          // console.log($scope.company, 'company')
         })
       }
 
@@ -449,7 +447,6 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
-        //console.log("data: ", data);
         if (location) {
           switch (location) {
             case('/reports/remoteAccess') :
@@ -510,7 +507,6 @@
         } else {
           calculatedHeight = 400;
         }
-        console.log("calculatedHeight ", calculatedHeight);
         chartHeight =  calculatedHeight;
       }
 
@@ -636,7 +632,6 @@
 
 
       function buildPdf(param) {
-        console.log('building pdf', param, renderFinished)
         if (param) {
           var allRendersFinished = true;
           renderFinished[param] = true;
@@ -647,7 +642,6 @@
             }
           }
 
-          console.log('we arent here')
           allRendersFinished && $scope.$broadcast('buildPdf-' + $rootScope.reportName);
         } else {
           $scope.$broadcast('buildPdf-' + $rootScope.reportName);
