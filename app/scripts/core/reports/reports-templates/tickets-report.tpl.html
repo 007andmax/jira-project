@@ -69,12 +69,12 @@
         </div>
         <div class="customer-ticket__report--details">
           <h3>Ticket Details</h3>
-          <div class="details-header row">
+          <div class="details-header clearfix">
             <div class="col-md-8" style="width: 70%;">TICKET NUMBER</div>
             <div class="col-md-2" style="width: 20%;">DATE / TIME</div>
             <div class="col-md-2" style="width: 10%;">STATUS</div>
           </div>
-          <div class="details-content row" ng-repeat="ticket in ticketReport.tickets" on-finish-render="build()">
+          <div class="details-content clearfix" ng-repeat="ticket in ticketReport.tickets" on-finish-render="build()">
             <div class="col-md-8 ellipsis" style="width: 70%;margin-bottom: 20px;">{{ticket.ticketNumber}} - {{ticket.description}}</div>
             <div class="col-md-2" style="width: 20%;margin-bottom: 20px;">{{ ticket.ticketCreatedAt }}</div>
             <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" ng-show="ticket.status === 'ON_HOLD'">
