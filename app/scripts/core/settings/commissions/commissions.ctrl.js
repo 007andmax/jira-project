@@ -14,6 +14,10 @@
           $scope.view = view;
         }
 
+        $scope.agreementsCommissions = {}
+
+
+
         ProductsService.getCategories($scope, function(res) {
           $scope.categories = res;
         })
@@ -23,6 +27,19 @@
 
           console.log($scope.services, 'SERVICES')
         })
+
+        CompaniesService.getAgreementsRates(function(res) {
+          $scope.agreementsCommissions = res.data;
+
+          console.log($scope.agreementsCommissions, "AGREEMNGS")
+        })
+
+//         CompaniesService.setAgreementsRate({"blockTimeContractCommission":123,
+// "blockTimeContractCommissionExceeding":123,
+// "userOrDeviceContractCommission":123,
+// "userOrDeviceContractCommissionExceeding":123}, function(res) {
+//   console.log(res, "RES FROM AGReEM")
+// })
 
         $scope.setCategoryRate = function(id, rate) {
 
@@ -42,6 +59,12 @@
             })
           }
 
+        }
+
+        $scope.setAgreementRate = function() {
+          CompaniesService.setAgreementsRate($scope.agreementsCommissions, function(res) {
+            console.log('res from agreements', res)
+          })
         }
 
       }]);

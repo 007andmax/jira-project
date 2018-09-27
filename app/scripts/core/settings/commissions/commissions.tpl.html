@@ -1,33 +1,164 @@
-<div>
-  <div class="togglers">
-    <div ng-click="setView('product')">Product Commissions</div>
-    <div ng-click="setView('service')">Service Commissions</div>
-    <div ng-click="setView('commissions')">Contract Commissions</div>
+<div class="commissions-settings">
 
+  <div class="col-md-12">
+    <div class="togglers col-md-5">
+      <div class="pointer" ng-click="setView('product')">Product Commissions</div>
+      <div class="pointer" ng-click="setView('service')">Service Commissions</div>
+      <div class="pointer" ng-click="setView('commission')">Contract Commissions</div>
+
+    </div>
+
+    <div class="col-md-7" style="padding-top: 25px; padding-bottom: 25px">
+      Commission Rate %
+    </div>
   </div>
 
+  <div class="col-md-12">
+    <div ng-if="view === 'product'">
+      <div ng-repeat="category in categories" class="commission-input">
+        <div class="col-md-5">
+          {{ category.name }}
+        </div>
 
-  <div ng-if="view === 'product'">
-    <div ng-repeat="category in categories">
-      <div>
-        {{ category.name }}
+        <div class="col-md-7">
+          <!-- <input  type="number" /> -->
+
+          <input type="text" class="form-validation"
+                 ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate)" qt-to-fixed="2"
+                  hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+
+        </div>
+
       </div>
 
-      <input type="number" ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate)"/>
+    </div>
+
+    <div ng-if="view === 'service'">
+      <div ng-repeat="service in services" class="commission-input">
+        <div class="col-md-5">
+          {{ service.name }}
+        </div>
+
+        <div class="col-md-7">
+          <!-- <input type="number" /> -->
+          <input type="number" class="form-validation"
+                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate)" qt-to-fixed="2"
+                  hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div ng-if="view === 'commission'">
+      <div class="block col-md-12" >
+        <div class="col-md-5">
+          <h3>Hourly Contracts</h3>
+          <p>Hourly Contracts will use the service default commission rate.</p>
+        </div>
+
+      </div>
+      <div class="block col-md-12" >
+
+        <div class="col-md-5">
+          <h3>Block Time Contracts</h3>
+
+          <p>
+            Block time contracts will be separated in two commissions rates,
+            the first will be for the included Hours, a second rate can be set for Hours exceeding the included hours.
+
+          </p>
+        </div>
+
+        <div class="col-md-12 commission-input">
+          <div class="col-md-5">
+            Block time Included Hours commission Rate
+          </div>
+
+          <div class="col-md-7">
+            <input type="text" class="form-validation"
+                   ng-model="agreementsCommissions.blockTimeContractCommission" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                    hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+          </div>
+
+          <div class="col-md-5">
+            Rate for hours Exceeding Included hours on Black Time Contracts
+          </div>
+
+          <div class="col-md-7">
+            <input type="text" class="form-validation"
+                   ng-model="agreementsCommissions.blockTimeContractCommissionExceeding" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                    hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="block col-md-12">
+
+        <div class="col-md-5">
+          <h3>Per User and Device Cotracts</h3>
+
+          <p>
+            Managed Service. contracts will have two commissions rates, one for the Contract
+            , and one for Exceeding maximum hours included in the contract, this
+             will be the same for Per Device and Per User Contract. If you Bill
+             the customer for Other services in the contracts then the additional
+             services commission will be calculated by their rates in Services Commissions.
+
+
+          </p>
+
+
+        </div>
+
+        <div class="col-md-12 commission-input">
+          <div class="col-md-5">
+            Per User and Per Device Contracts
+          </div>
+
+          <div class="col-md-7">
+            <input type="text" class="form-validation"
+                   ng-model="agreementsCommissions.userOrDeviceContractCommission" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                    hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+          </div>
+
+          <div class="col-md-5">
+            Rate for hours Exceeding Included hours on Block Time contracts
+          </div>
+
+          <div class="col-md-7">
+            <input type="text" class="form-validation"
+                   ng-model="agreementsCommissions.userOrDeviceContractCommissionExceeding" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                    hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+          </div>
+        </div>
+
+      </div>
+      <div class="block col-md-12">
+
+        <div class="col-md-5">
+          <h3>Other Contracts</h3>
+
+          <p>
+            Other Contacts, that contain Products and Services, commission rate will be calculated based on their Product and Service Commissions rates set in the Product and Service Commissions.
+
+          </p>
+        </div>
+
+      </div>
+
+
+
     </div>
 
   </div>
 
-  <div ng-if="view === 'service'">
-    <div ng-repeat="service in services">
-      <div>
-        {{ service.name }}
-      </div>
 
-      <input type="number" ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate)"/>
-    </div>
 
-  </div>
+
 
 
 

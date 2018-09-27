@@ -397,15 +397,15 @@
       })
     }
 
-    function setAgreementsRate(id, rates, callback) {
-      $http.put('/settings/companyProfile/agreementRate/', rates)
+    function setAgreementsRate(rates, callback) {
+      $http.post('/settings/companyProfile/agreementRates', rates)
         .then(function(res) {
           if (callback) callback(res);
         })
     }
 
     function getAgreementsRates(callback) {
-      $http.get('/settings/companyProfile/agreementRate/')
+      $http.get('/settings/companyProfile/agreementRates')
         .then(function(res) {
           if (callback) callback(res);
         })
