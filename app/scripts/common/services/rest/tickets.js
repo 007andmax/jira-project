@@ -821,7 +821,7 @@
           throw 'ticketUpdate.type is required!';
         }
         if ((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) {
-          throw 'In TicketUpdate must be or note or products or services!';
+          ticketUpdate = {"type":"NOTE","shares":[],"ticket":ticketUpdate.ticket,"note": "Ticket has been closed","attachments":[]}
         }
 
         var future = $http.post('/v2/tickets/updates?close=' + !!close, ticketUpdate);

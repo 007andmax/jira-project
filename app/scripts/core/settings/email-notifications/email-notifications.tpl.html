@@ -24,11 +24,21 @@
         </label>
       </div>
 
+
+
       <div class="clearfix">
         <label class="control checkbox pull-left">
           <input type="checkbox" ng-model="emailNotifications.myTicketUpdated"
                  ng-change="saveEmailNotifications(emailNotificationsForm)">
           <span class="control-indicator"></span> When a ticket that is assigned to me is updated
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="emailNotifications.ticketCloseNotifications"
+                ng-change="saveEmailNotifications(emailNotificationsForm)" >
+          <span class="control-indicator"></span> When any ticket is closed
         </label>
       </div>
 
