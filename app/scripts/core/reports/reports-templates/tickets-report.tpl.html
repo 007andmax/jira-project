@@ -151,7 +151,7 @@
             <div class="col-md-3 pdf-w" style="margin-top: 20px;">User: {{ ticket.username.firstName + ' ' + ticket.username.lastName }}</div>
             <div class="col-md-3 pdf-w" style="margin-top: 20px;">Device: {{ ticket.deviceName }}</div>
             <div class="col-md-3 pdf-w" style="margin-top: 20px;">Tech: {{ ticket.techUsername.firstName + ' ' + ticket.techUsername.lastName }}</div>
-            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Response time: {{ ticket.responseTime }}</div>
+            <div ng-if="ticket.responseTime !== null" class="col-md-3 pdf-w" style="margin-top: 20px;">Response time: {{ formatResponseTime(ticket.responseTime) }}</div>
           </div>
 
         </div>
