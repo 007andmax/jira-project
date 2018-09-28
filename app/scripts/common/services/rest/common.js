@@ -150,26 +150,42 @@
       //If in Chrome or Safari - download via virtual link click
       if (isChrome || isFirefox) {
         //Creating new link node.
-        var link = document.createElement('a');
-        link.target = "_blank";
-        link.href = url;
+        var indexOf = url.indexOf('.com');
+        var shortUrl = url.slice(url.indexOf('.com') + 4);
 
-        if (link.download !== undefined) {
-          //Set HTML5 download attribute. This will prevent file from opening if supported.
-          if (!fileName) {
-            fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
-          }
-          link.download = fileName;
+        if (indexOf !== -1) {
+          return redownload(url) && redownload(shortUrl);
+        } else {
+
+          return redownload(url);
         }
 
-        //Dispatching click event.
-        if (document.createEvent) {
-          alert('LOOol')
-          var e = document.createEvent('MouseEvents');
-          e.initEvent('click', true, true);
-          link.dispatchEvent(e);
-          return true;
-        }
+        // var link = document.createElement('a');
+        // link.target = "_blank";
+        // link.href = url;
+        //
+        // if (link.download !== undefined) {
+        //   //Set HTML5 download attribute. This will prevent file from opening if supported.
+        //   if (!fileName) {
+        //     fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
+        //   }
+        //
+        //   // alert(url);
+        //   // alert(fileName);
+        //   link.download = fileName.indexOf('.') === -1 ? fileName + '.pdf' : fileName;
+        //
+        //   // alert(link.download)
+        // }
+        //
+        // //Dispatching click event.
+        // if (document.createEvent) {
+        //   var e = document.createEvent('MouseEvents');
+        //   e.initEvent('click', true, true);
+        //   link.dispatchEvent(e);
+        //
+        //   console.log(link)
+        //   return true;
+        // }
       } else if (isSafari) {
         $("#pdf").remove();
         $("body").append("<iframe id='pdf' style='display:none;'></iframe>");
@@ -184,7 +200,38 @@
       window.open(url, '_blank');
       return true;
 
+      function redownload(url) {
+        var link = document.createElement('a');
+        link.target = "_blank";
+        link.href = url;
+
+        if (link.download !== undefined) {
+          //Set HTML5 download attribute. This will prevent file from opening if supported.
+          if (!fileName) {
+            fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
+          }
+
+          // alert(url);
+          // alert(fileName);
+          link.download = fileName;
+
+          // alert(link.download)
+        }
+
+        //Dispatching click event.
+        if (document.createEvent) {
+          var e = document.createEvent('MouseEvents');
+          e.initEvent('click', true, true);
+          link.dispatchEvent(e);
+
+          console.log(link)
+          return true;
+        }
+      }
+
     }
+
+
 
     function downloadFile(fileId, fileName) {
       downloadByUrl('/file/' + fileId, fileName);
