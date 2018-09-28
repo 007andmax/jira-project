@@ -140,7 +140,6 @@
     }
 
     function downloadByUrl(url, fileName) {
-      alert('WE AHRE HERE')
       //iOS devices do not support downloading. We have to inform user about this.
       if (/(iP)/g.test(navigator.userAgent)) {
         alert('Your device does not support files downloading. Please try again in desktop browser.');
@@ -196,7 +195,6 @@
       // Force file download (whether supported by server).
 //            url += '?download';
 //todo fix bug with multiple files download
-      alert('HERE???')
       window.open(url, '_blank');
       return true;
 
@@ -223,8 +221,6 @@
           var e = document.createEvent('MouseEvents');
           e.initEvent('click', true, true);
           link.dispatchEvent(e);
-
-          console.log(link)
           return true;
         }
       }
