@@ -294,6 +294,7 @@
 
               $scope.ticketReport.tickets = $scope.ticketReport.tickets.map(function(ticket) {
                 ticket.username = UsersService.getOneById(ticket.clientUserId);
+                ticket.techUsername = UsersService.getOneById(ticket.techUserId);
                 ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
 
                 return ticket;
