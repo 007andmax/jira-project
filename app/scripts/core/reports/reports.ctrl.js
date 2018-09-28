@@ -76,17 +76,7 @@
         $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
       })
 
-      $scope.$watch(function() {
-        return $rootScope.customerTicketWithProducts
-      }, function(val) {
-        $scope.showProducts = val;
-      })
 
-      $scope.$watch(function() {
-        return $rootScope.customerTicketWithServices
-      }, function(val) {
-        $scope.showServices = val;
-      })
 
       $scope.getServices = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
@@ -262,7 +252,6 @@
           }
         }
 
-        // console.log('data to send', dataToSend)
         if (dataToSend.companyId) {
           $scope.company = CompaniesService.getOneById(dataToSend.companyId)
         }
@@ -271,7 +260,6 @@
           $scope.reportAccountsReceivable = resp;
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
-          // console.log($scope.company, 'company')
         })
       }
 
@@ -282,6 +270,11 @@
         if (data.companyId) {
           $scope.company = CompaniesService.getOneById(data.companyId)
         }
+
+        $scope.showProducts = $rootScope.customerTicketWithProducts;
+        $scope.showServices = $rootScope.customerTicketWithServices;
+
+
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
             $scope.ticketReport = resp;
@@ -308,6 +301,9 @@
 
               calculateServicesTime($scope.ticketReport.tickets);
             }
+
+
+
 
             if ($rootScope.customerTicketShowTotalTicketAmount === false) {
               $scope.ticketReport.hideTotalTickets = true;
@@ -423,10 +419,18 @@
 
       function drawChart(data) {
         if (!$scope.ticketReport.timeSpent) {
-          data = data.map(function(el) {
-            el.time = 0;
-            return el;
-          })
+          data = [{
+            time: 1,
+            name: 'No data available'
+          }]
+
+          document.documentElement.classList.add('no-d3-tooltip');
+
+          // var tooltip = document.querySelector('.nvtooltip .value');
+          // tooltip.style.display = 'none';
+        } else {
+          document.documentElement.classList.remove('no-d3-tooltip');
+
         }
         $scope.chartData = data.map(function(el, i) {
           el.color = $scope.chartColors[i];
@@ -443,7 +447,6 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
-        //console.log("data: ", data);
         if (location) {
           switch (location) {
             case('/reports/remoteAccess') :
@@ -504,7 +507,6 @@
         } else {
           calculatedHeight = 400;
         }
-        console.log("calculatedHeight ", calculatedHeight);
         chartHeight =  calculatedHeight;
       }
 
@@ -630,7 +632,6 @@
 
 
       function buildPdf(param) {
-        console.log('building pdf', param, renderFinished)
         if (param) {
           var allRendersFinished = true;
           renderFinished[param] = true;
@@ -641,7 +642,6 @@
             }
           }
 
-          console.log('we arent here')
           allRendersFinished && $scope.$broadcast('buildPdf-' + $rootScope.reportName);
         } else {
           $scope.$broadcast('buildPdf-' + $rootScope.reportName);

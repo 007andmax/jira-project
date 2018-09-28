@@ -2,6 +2,10 @@
   font-weight: 600;
 }
 
+html.no-d3-tooltip .nvtooltip .value {
+  display: none;
+}
+
 .customer-ticket__report {
   width: 100%;
 }
@@ -35,7 +39,7 @@
   border: 1px solid #d3d8e1;
   min-height: 50px;
   padding: 5px;
-} 
+}
 
 .customer-ticket__report--summary {
   .summary-chart {

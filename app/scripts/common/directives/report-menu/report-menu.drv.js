@@ -73,6 +73,8 @@
     $scope.users = UsersService.getAllUsers();
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
+    $scope.customerTicketWithProducts = true;
+    $scope.customerTicketWithServices = true;
 
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 

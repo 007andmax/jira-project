@@ -8,6 +8,7 @@
 
         var invoiceList = $scope.receivableInvoicesData.list;
 
+
         $scope.invoiceToReceive = {
           invoices: {},
           method: 'CHEQUE',
@@ -102,6 +103,8 @@
             function () {
               $uibModalInstance.dismiss('cancel');
               $scope.disableReceiveButton = false;
+
+              $scope.invoiceToSent.invoices = {};
             }
           );
         };
