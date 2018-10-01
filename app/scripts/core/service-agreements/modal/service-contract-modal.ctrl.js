@@ -612,7 +612,6 @@
         }
 
         $scope.console = function(val) {
-          console.log(val);
         }
 
         function showErrorNewSCSValidationTimeOut() {

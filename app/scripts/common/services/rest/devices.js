@@ -301,19 +301,16 @@
             storage.oneTimeCallbacks[newChange.action] && storage.oneTimeCallbacks[newChange.action](newChange);
             storage.oneTimeCallbacks.listener && storage.oneTimeCallbacks.listener(newChange);
 
-            console.log(newChange, 'NEWCHANGE CHANGeS')
 
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
               var session = newChange.data;
               $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
             } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
-              console.log(newChange, "NEw CHANGE CHANGE CHANGE")
               addRemoteConnectionSessionToDevice(newChange, devices);
 
             } else if(newChange.action === 'ONE_TIME_DELETED') {
 
 
-              console.log("REMOVE CONNECTION", newChange)
 
               removeRemoteConnectionSessionToDevice(newChange, devices);
             }

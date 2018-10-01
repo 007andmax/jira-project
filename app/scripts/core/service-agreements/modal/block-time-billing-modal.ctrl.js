@@ -514,7 +514,6 @@
           // console.log('collection', val)
           // console.log($scope.defaultServicesAdditionalForDropDown);
 
-          console.log(val, 'container')
 
           for (var i = 0; i < val.length; i++) {
             var serv = val[i];
@@ -575,7 +574,6 @@
 
         $scope.addNewBlockTimeService = function (form, service) {
           $scope.showNewBlockTimeServiceError = false;
-          console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError);
           $scope.showAddButtonNewBlockServices = false;
           if (form.$valid) {
             if (!service.name) {
@@ -837,7 +835,6 @@
           if (newService ) {
             $scope.showNewBlockTimeServiceError = false;
             $scope.showNewServiceError = false;
-            console.log('showNewBlockTimeServiceError', $scope.showNewBlockTimeServiceError)
 
             var companyId = returnCompanyId();
             var name = [];

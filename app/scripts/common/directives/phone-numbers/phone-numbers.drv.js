@@ -76,7 +76,7 @@
 
           $scope.getPhoneNumberError = function (number, form, index) {
             var required = false, invalid = false, minlength = false, maxlength = false;
-            // console.log($scope.forms.phoneNumbersForm, Object.assign({}, $scope.forms), 'PHONENUMBERSFORM')
+
             if (!form) form = $scope.forms.phoneNumbersForm;
             if (!index) index = 0;
 
@@ -84,7 +84,7 @@
             var formField = form['phoneNumber' + index];
             var error;
 
-            // console.log(form, $scope.isTryToSave, 'SDSFSJFKSDFSKJFSFSDFSF')
+          
 
             if (form.$dirty || $scope.isTryToSave) {
               if (number) {

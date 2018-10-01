@@ -43,7 +43,6 @@
             attr.$set("ngTrim", "false");
 
             var limit = attr.limit;
-            console.log(scope.model, 'ATTRRR')
 
             if (limit) {
 
@@ -69,7 +68,6 @@
               }
 
               var limitLines = function (e) {
-                console.log('limit lines')
                   var keynum = getKeyNum(e);
 
                   var evtobj = window.event? event : e
@@ -93,7 +91,6 @@
                   if (keynum !== 8) {
                     var value = e.target.value.slice(0, e.srcElement.selectionStart) + String.fromCharCode(keynum) + e.target.value.slice(e.srcElement.selectionStart);
                     // value.splice(e.srcElement.selectionStart, 0, String.fromCharCode(keynum))
-                    console.log(e.target.value, "EVENT")
                     cloned.html(value);
                     if (cloned[0].scrollHeight > +limit) {
                       e.stopPropagation();
@@ -120,7 +117,7 @@
                   clipboardData = e.clipboardData || window.clipboardData;
                   pastedData = clipboardData.getData('Text');
 
-                  // console.log(pastedData, "PASTEDDDDD")
+
                   newValue = (scope.value || '').slice(0, e.srcElement.selectionStart) + pastedData + (scope.value || '').slice(e.srcElement.selectionStart);
                   cloned.html(newValue);
 
@@ -129,7 +126,7 @@
                   var copiedValue = newValue;
 
 
-                  // console.log('pretty good', scope)
+                
 
                   scope.value = checkForOverflow(copiedValue);
                   element[0].blur();

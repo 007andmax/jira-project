@@ -47,7 +47,6 @@
           }
 
           $scope.openContractAgreementsModal = function(company) {
-            console.log('push', company);
             openModal();
 
           }

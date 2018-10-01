@@ -68,7 +68,6 @@
         }, function (val) {
           if (val) {
 
-            console.log(val, "VAL", $scope.allCompanies)
             $scope.companies = val;
             $scope.archivedCompanies = [];
           } else if (val === false) {

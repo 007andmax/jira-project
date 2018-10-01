@@ -96,7 +96,6 @@
                 }, function(val) {
                   if (val) {
                     $rootScope.newTagHasCreated = false;
-                    console.log('tag has been created')
                     TagsService.getAll($scope, function (resp) {
                       $scope.result = resp;
                       $scope.allTags = resp;
@@ -127,7 +126,7 @@
                     $rootScope.shouldDownloadNewTags = true;
                   }
 
-                  console.log(scrollTop, isNeedToLoadMoreTickets, menu[0], menu[0].scrollHeight, 'truee')
+                  // console.log(scrollTop, isNeedToLoadMoreTickets, menu[0], menu[0].scrollHeight, 'truee')
 
                   // if (isNeedToLoadMoreTickets && (!scope.tickets || scope.tickets.length < scope.globalSearch.count)) {
                   //   $scope.loadingOrRendering = true;
@@ -147,7 +146,6 @@
           },
           controller: function ($scope) {
 
-            console.log($scope.readonlyTags, 'READONLY')
             if (!$scope.readonlyTags) {
               var lastQuery = '',
                 tagsChanged = false,
@@ -189,7 +187,6 @@
                         TagsService.saveForCompany(tagToCreate, function(res) {
                           tagToCreate.id = res.data.id;
 
-                          console.log(res,' tag to create')
 
                           $scope.ticketTags.push(tagToCreate);
                         })

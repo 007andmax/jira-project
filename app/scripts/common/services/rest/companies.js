@@ -144,8 +144,6 @@
 
         if (companyId === getCurrentCompany().id) {
           $rootScope.techCompanyChanged = newChange.data;
-
-          console.log('new data for tech company', newChange.data)
         }
 
         if (company) {
@@ -213,7 +211,6 @@
     });
 
     RealTimeService.subscribe('/companySettings', serviceScope, function(newChange) {
-      console.log('NEW CHANGE SETTINGS')
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
         $rootScope.SMTPChanged = newChange.data;
@@ -262,7 +259,6 @@
 
       for (var i = 0; i < clients.length; i++) {
         if (clients[i].companyInfo.addresses && clients[i].companyInfo.addresses[0] && clients[i].companyInfo.addresses[0].id === id) {
-          console.log('got it');
           return clients[i];
         }
       }

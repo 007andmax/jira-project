@@ -11,7 +11,6 @@
             ngModelCtrl.$setValidity('unique', validationResult.value);
             afterValidationCallback();
 
-            console.log(ngModelCtrl, 'NGMODEL')
 
             if ($scope.triedToSave && ngModelCtrl.$valid) {
               $scope.saveBasicInfo(ngModelCtrl)
@@ -30,14 +29,12 @@
         $scope.$watch(function() {
           return $rootScope.updateTech;
         }, function(val) {
-          console.log('updatedTECH')
           if (val) {
             $scope.saveBasicInfo(val);
           }
         })
 
         $scope.saveBasicInfo = function (form) {
-          console.log('FORMAAAAAAA', form.$valid)
           if (form.$valid) {
             var basicInfo = {
               logo: $scope.editCompany.logo,

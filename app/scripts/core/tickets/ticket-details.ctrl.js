@@ -184,26 +184,26 @@
               })
             }
 
-            $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
-              // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
-
-              // deleteTicketExpense(ticketId, updateId, products, services, callback)
-              TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
-
-                // console.log('I SHOULD DELETEEEEEE')
-                productExpense.forEach(function(id) {
-                  ticketUpdate.products = ticketUpdate.products.filter(function(product) {
-                    return product.id !== id;
-                  })
-                });
-
-                serviceExpence.forEach(function(id) {
-                  ticketUpdate.services = ticketUpdate.services.filter(function(service) {
-                    return service.id !== id;
-                  })
-                })
-              })
-            }
+            // $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
+            //   // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
+            //
+            //   // deleteTicketExpense(ticketId, updateId, products, services, callback)
+            //   TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
+            //
+            //     // console.log('I SHOULD DELETEEEEEE')
+            //     productExpense.forEach(function(id) {
+            //       ticketUpdate.products = ticketUpdate.products.filter(function(product) {
+            //         return product.id !== id;
+            //       })
+            //     });
+            //
+            //     serviceExpence.forEach(function(id) {
+            //       ticketUpdate.services = ticketUpdate.services.filter(function(service) {
+            //         return service.id !== id;
+            //       })
+            //     })
+            //   })
+            // }
 
             function setUserCompanies() {
               // $scope.userCompanies = $scope.ticketDetails.userCompanies

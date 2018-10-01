@@ -13,7 +13,7 @@
           },
           link: function (scope, element, attrs) {
 
-            // console.log('CROP IMAGE DOWNLOAD')
+
             var $body = angular.element(document.body), image;
             var isTechLogo = scope.$eval(scope.isTechLogo);
 
@@ -72,7 +72,6 @@
                 minImageHeight: 1,
 
                 onStart: function () {
-                  console.log('started downloading')
                   image = {};
                   if (scope.model) {
                     image.id = scope.model.id;

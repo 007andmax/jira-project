@@ -73,7 +73,7 @@
         <input type="text" ng-model="editCompany.domain"
                name="companyDomain"
                tabindex="3"
-               required
+               is-empty-valid='true'
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
       <div class="col-md-6 phone-number"
@@ -228,8 +228,7 @@
         <div class="placeholder">Company Domain Name</div>
         <input type="text" ng-model="editCompany.domain"
                name="companyDomain"
-               ng-required="true"
-               required='true'
+               is-empty-valid="true"
                tabindex="3"
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>

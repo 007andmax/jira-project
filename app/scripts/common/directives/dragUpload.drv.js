@@ -12,7 +12,6 @@
         require: '?ngModel',
         // template: '<div class="asset-upload">Drag here to upload</div>',
         link: function(scope, element, attrs, ngModel) {
-          console.log('HERE IM, uploaded')
           element.on('dragover', function(e) {
               e.preventDefault();
               e.stopPropagation();

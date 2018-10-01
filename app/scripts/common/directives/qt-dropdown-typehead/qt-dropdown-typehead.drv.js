@@ -65,7 +65,6 @@
       'placeholder'  : self.activePlaceholder ? '' : self.qtPlaceholder ? self.qtPlaceholder : self.customPlaceholder ? self.customPlaceholder : '',
     };
 
-    console.log(inputAdditionalSettingsDictionary, 'INPUT')
 
     reInitList();
     addSettingToInput();

@@ -22,8 +22,6 @@
         });
 
 
-        console.log($scope.currentUser, 'CURRENT USER')
-        console.log(users, 'USERS')
 
 
 
@@ -44,7 +42,6 @@
         });
 
         UsersService.getTechUsersEmailNotification(usersIds, function(resp){
-          console.log('resp for notifications', resp);
           $scope.usersEmailNotificationList = resp;
         });
 

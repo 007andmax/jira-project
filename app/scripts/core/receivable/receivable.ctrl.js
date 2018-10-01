@@ -21,11 +21,9 @@
         // });
 
 
-        console.log("SFDFDSFF")
 
 
         $scope.filterInvoicesBy = function(val) {
-          console.log('filter', val)
         }
 
         $scope.showInvoice = function(invoice, goBack) {
@@ -48,7 +46,6 @@
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
-          console.log(value)
           if(value && value !== '' && value !== ' ') {
             $scope.invoiceFilter = value;
           }
@@ -300,7 +297,6 @@
         $scope.$watchGroup(['invoiceDateFilter', 'invoiceFilter', 'sortByValue'] , function(value){
           if(value && $scope.receivableInvoicesData) {
             var filteredInvoices = $scope.receivableInvoicesData.list.filter(function(invoice) {
-              console.log('i should filter right now')
               return $scope.filteringForInvoice(invoice);
             });
             globalSearch.count = filteredInvoices.length;

@@ -149,7 +149,6 @@
 
           return false;
         }
-        console.log(form, 'form')
 
         if (form.$valid || checkValid(form)) {
 
