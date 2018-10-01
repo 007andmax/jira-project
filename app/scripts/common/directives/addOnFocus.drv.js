@@ -6,11 +6,14 @@
     ['$timeout', '$compile', function ($timeout, $compile) {
       return {
         restrict: 'A',
+        scope: {
+          isTextarea: '<isTextarea'
+        },
         link: function ($scope, element, attrs) {
           element.addClass('no-animation');
 
           var interval = setTimeout(function() {
-            var input = element.find('input');
+            var input = element.find($scope.isTextarea ? 'textarea' : 'input');
 
             if (!input.length) {
               return;
@@ -18,7 +21,7 @@
 
 
             $scope.$watch(function() {
-              return input.val();
+              return input[0].value;
             }, function(val) {
               if (val) {
                 element.addClass('active-field');
@@ -36,7 +39,7 @@
 
             input.on('blur', function() {
 
-              if (!input.val()) {
+              if (!input[0].value) {
                 element.removeClass('active-field');
               }
 

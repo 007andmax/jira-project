@@ -222,7 +222,6 @@
         $scope.validateUserEmail = function (ngModelCtrl, modelId, afterValidationCallback) {
           if ($scope.userCompany && $scope.userCompany.id) {
             var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id || '', false, $scope.userCompany.id, function () {
-              console.log('set unique', validationResult.value)
               ngModelCtrl.$setValidity('unique', validationResult.value);
               afterValidationCallback();
             });

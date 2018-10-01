@@ -178,29 +178,30 @@
             </div>
             <div class="invoice-list--item__content">
               <div class="pavlik p-2 clearfix">
-                <div class="col-md-5 bold pl-30">Item</div>
-                <div class="col-md-2 bold">Unit Price</div>
-                <div class="col-md-2 bold">Quantity</div>
+                <div class="col-md-5 bold pl-30" style="width: 52%;">Item</div>
+                <div class="col-md-2 bold" style="width: 13%;">Unit Price</div>
+                <div class="col-md-2 bold" style="width: 13%;">Quantity</div>
                 <div class="col-md-1 bold">Tax</div>
-                <div class="col-md-2 bold text-right pr-30">Total</div>
+                <div class="col-md-2 bold text-right pr-30" style="width: 13%;">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-5 pl-30">{{ productExpense.item.description }}</div>
-                <div class="col-md-2">{{ productExpense.item.sale | currency: '$':2 }}</div>
-                <div class="col-md-2">{{ productExpense.billableQuantity }}</div>
+                <div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>
+                <div class="col-md-3" style="width: 35.4%;">{{ productExpense.item.description }}</div>
+                <div class="col-md-2" style="width: 13%;">{{ productExpense.item.sale | currency: '$':2 }}</div>
+                <div class="col-md-2" style="width: 13%;">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-2 text-right pr-30">{{ productExpense.totalSum | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.totalSum | currency: '$':2 }}</div>
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
-                <div class="col-md-5 pl-30">
+                <div class="col-md-5 pl-30" style="width: 51.9%;">
                   <div class="col-md-5 no-padding" style="padding-left: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{ serviceExpense.item.name }}</div>
                   <div class="col-md-7 no-padding" style="padding-right: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{ serviceExpense.description }}</div>
                 </div>
-                <div class="col-md-2">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
-                <div class="col-md-2" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
-                <div class="col-md-2" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
-                <div class="col-md-2">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-1 text-right pr-30">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
+                <div class="col-md-2" style="width: 13%;">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
+                <div class="col-md-2" style="width: 13%;" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
+                <div class="col-md-2" style="width: 13%;" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
+                <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
               </div>
             </div>
           </div>

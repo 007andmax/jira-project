@@ -207,7 +207,8 @@
                 <div class="col-md-2 bold text-right pr-30">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-5 pl-30">{{ productExpense.item.description }}</div>
+                <div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>
+                <div class="col-md-3">{{ productExpense.item.description }}</div>
                 <div class="col-md-2">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-2">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
@@ -218,8 +219,8 @@
                 <div class="col-md-2">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
                 <div class="col-md-2" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
                 <div class="col-md-1" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
-                <div class="col-md-2">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-1 text-right pr-30">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
+                <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
               </div>
             </div>
           </div>

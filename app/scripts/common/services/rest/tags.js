@@ -278,8 +278,6 @@
 
       var future = $http.post('/tags', newTag);
 
-      console.log('new tag has been created')
-
       $rootScope.newTagHasCreated = true;
 
       Utils.handleCallback(future, callback);

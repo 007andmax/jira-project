@@ -18,14 +18,12 @@
         if ($rootScope.invoiceToShow) {
           $scope.readedAt = $rootScope.invoiceToShow.readedAt;
           $scope.paidOn = $rootScope.invoiceToShow.paidOn;
-          console.log($rootScope.invoiceToShow, 'toshow')
         }
 
 
         ReceivableService.getInvoiceDataForPreview($rootScope.invoiceToShow.id, function (resp) {
           $scope.currentInvoice = resp;
 
-          console.log(resp, 'CURRENT INVOICE')
           $scope.currentBillTo = {
             addressWithSuitNumberAndPostalCode: resp.billingAddress
           };

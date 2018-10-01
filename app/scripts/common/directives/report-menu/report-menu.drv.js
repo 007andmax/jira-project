@@ -73,6 +73,8 @@
     $scope.users = UsersService.getAllUsers();
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
+    $scope.customerTicketWithProducts = true;
+    $scope.customerTicketWithServices = true;
 
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
@@ -180,9 +182,7 @@
     })
 
     $scope.$watch('reportSetting.dateRange', function() {
-      console.log("HERERE ERE")
       if ($scope.reportSetting.dateRange) {
-        console.log('im iisnide')
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
 
         if ($scope.firstIteration) {
@@ -292,7 +292,6 @@
     }
 
     function sendReportRequestForProductReportOnCompanyTab(reportSettings) {
-      console.log("ASDSADSDADSADASD")
       var companyFromProfile = CompaniesService.getOneById($scope.companyProfileSharedState.companyId);
       $scope.errorNassageForCompany = true;
       $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);

@@ -45,7 +45,6 @@
     // };
 
     CustomerListService.getCustomerList($scope, function (resp) {
-      console.log("resp ", resp);
       $scope.customerList = resp;
     });
 
@@ -86,10 +85,8 @@
 
     // $scope.changeOrder = function(order) {
     //   $scope.customerListOrder = order;
-    //   console.log($scope.customerListOrder);
     // }
 
   }
 
 })();
-

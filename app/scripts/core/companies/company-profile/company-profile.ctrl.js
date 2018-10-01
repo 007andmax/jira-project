@@ -138,7 +138,6 @@
           return;
         }
 
-        console.log('$scope.companyData', $scope.companyData)
         $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
@@ -148,7 +147,6 @@
           }, 0);
 
         });
-        console.log('$scope.companyData', $scope.companyData)
 
         DevicesService.getSomeInfoForDevices($stateParams.companyId, function (resp) {
           $scope.isDomainPresent = resp.domainPresent;

@@ -51,7 +51,7 @@
 
 
         $scope.editProduct = angular.copy(origin);
-        $scope.editProduct.taxes = origin.taxIds.map(function(taxId) {
+        $scope.editProduct.taxes = (origin.taxIds || []).map(function(taxId) {
           return $scope.taxes.find(function(el) {
             return el.id === taxId;
           })
@@ -149,7 +149,6 @@
 
           return false;
         }
-        console.log(form, 'form')
 
         if (form.$valid || checkValid(form)) {
 
@@ -200,7 +199,7 @@
 
       $scope.validateSaleAndCost = function (form) {
 
-        var valid = (!$scope.editProduct.sale || !$scope.editProduct.cost)
+        var valid = ((!$scope.editProduct.sale  && $scope.editProduct.sale != 0) || (!$scope.editProduct.cost && $scope.editProduct.cost != 0))
           || ($scope.editProduct.sale * 1) >= ($scope.editProduct.cost * 1);
         form.sale.$setValidity('smallerThanCost', valid);
         form.cost.$setValidity('biggerThanSale', valid);

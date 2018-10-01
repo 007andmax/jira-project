@@ -200,7 +200,8 @@
                 <div class="col-md-2 bold text-right pr-30">Total</div>
               </div>
               <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
-                <div class="col-md-5 pl-30">{{ productExpense.item.description }}</div>
+                <div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>
+                <div class="col-md-3">{{ productExpense.item.description }}</div>
                 <div class="col-md-2">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-2">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>

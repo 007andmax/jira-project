@@ -162,13 +162,13 @@
           ProductsService.getFullListForAutocomplete($scope, function(resp) {
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
-              console.log("IIIIIIIIIIIIII")
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
                 for(var w=0; w<productsData.length; w++) {
                   for(var v=0; v<productsData[w].products.length; v++) {
                     if(productsData[w].products[v].versionedId.id ===  $scope.serviceContract.productExpenses[p].productId) {
                       $scope.serviceContract.productExpenses[p].name = {};
                       $scope.serviceContract.productExpenses[p].name.description = productsData[w].products[v].description;
+                      // $scope.serviceContract.productExpenses[p].name.name = productsData[w].products[v].description;
                       $scope.serviceContract.productExpenses[p].name.sale = productsData[w].products[v].sale;
                       break;
                     }
@@ -584,6 +584,8 @@
             $scope.defaultServices.push(serv);
           }
 
+
+
           if ($scope.serviceContract.serviceExpenses.length > 0) {
             for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
               for (var j = 0; j < $scope.defaultServices.length; j++) {
@@ -610,7 +612,6 @@
         }
 
         $scope.console = function(val) {
-          console.log(val);
         }
 
         function showErrorNewSCSValidationTimeOut() {

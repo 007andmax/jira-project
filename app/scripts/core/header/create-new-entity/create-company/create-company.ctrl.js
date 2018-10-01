@@ -65,11 +65,9 @@
         if ((savedState.type === 'company' && origin && origin.id) || $rootScope.savedCompanyId) {
 
           if ($rootScope.savedCompanyId) {
-            console.log("ROOTSCOPE")
             var companyId = $rootScope.savedCompanyId,
               company = CompaniesService.getOneById(companyId);
 
-              console.log("COMPANY", company, "SAVED SAVED")
           } else {
             var companyId = origin.id,
               company = CompaniesService.getOneById(companyId);
@@ -79,7 +77,6 @@
           action = 'EDIT_COMPANIES';
 
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
-            console.log(companyData, 'companyData ')
 
 
             $scope.companyTags = companyData.tags || $scope.companyTags;
@@ -243,7 +240,6 @@
 
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
           if (objectTime && objectTimeFormat) {
-            // console.log(objectTime, objectTimeFormat, '*******________**********  ');
             var hours, minutes, separateTime;
 
             if (typeof objectTime === 'string') {
@@ -354,7 +350,6 @@
 
           // console.log(form, form.$valid);
 
-          console.log(form, 'form')
 
           if (isInvoice) {
             $rootScope.updateBillTo = form;
@@ -377,7 +372,6 @@
             var contacts = editCompany.contacts,
               addresses = editCompany.addresses;
 
-            console.log(editCompany, 'EDITDI')
 
             for (var i = 0; i < contacts.length; i++) {
               var contact = contacts[i];
@@ -425,7 +419,6 @@
             //
             // }
 
-            console.log('im saving')
 
 
 
@@ -439,7 +432,6 @@
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
 
                 TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function(res) {
-                  console.log('TICKET ASSSIGNED', res)
                 })
 
                 if (!($scope.savedState && $scope.savedState.items.length)) {
@@ -471,7 +463,6 @@
 
             if (!phoneNumbers.length) return;
 
-            console.log(phoneNumbers, 'phoneNumbers')
             var firstPhone = phoneNumbers[0].number,
               lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 

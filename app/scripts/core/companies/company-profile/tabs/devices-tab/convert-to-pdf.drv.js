@@ -38,7 +38,8 @@
           if (!disableElement.length || (disableElement.hasClass('disabled') || typeof disableElement.attr('disabled') === 'string')) {
             return;
           }
-          Downloader.downloadByUrl($rootScope.reportUrl, attrs.fileName);
+          
+          Downloader.downloadByUrl($rootScope.reportUrl + '?isDownload=true', attrs.fileName);
         };
 
         scope.sendToMail = function (emails, callback) {

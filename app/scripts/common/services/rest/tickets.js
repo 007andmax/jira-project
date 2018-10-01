@@ -439,7 +439,6 @@
 
 
 
-        console.log(companyId, userId, techId, filter, "PARAMS")
 
         var request = {
           "filter" : filter ? filter : 'ALL',
@@ -821,7 +820,7 @@
           throw 'ticketUpdate.type is required!';
         }
         if ((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) {
-          throw 'In TicketUpdate must be or note or products or services!';
+          ticketUpdate = {"type":"NOTE","shares":[],"ticket":ticketUpdate.ticket,"note": "Ticket has been closed","attachments":[]}
         }
 
         var future = $http.post('/v2/tickets/updates?close=' + !!close, ticketUpdate);
@@ -871,7 +870,6 @@
       function changeTicketsCounts() {
 
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
-          console.log(Object.assign({}, resp), 'new amount of tickets')
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
       }
@@ -937,12 +935,10 @@
 
           // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
 
-          console.log(ticketById, "TICKET")
 
           if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
 
             if (ticketById) {
-              console.log(ticketById, "TICKET")
               Utils.customizeObj(newChange.data, ticketById);
             } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
               storage.ticketsQuantity++;
@@ -1132,7 +1128,6 @@
           return false;
         }
 
-        console.log(conditionsGroup, groupRule, 'ASDSADADADJJFJSAJ')
 
         for (var prop in conditionsGroup) {
           var conditionGroup = conditionsGroup[prop],
@@ -1140,7 +1135,6 @@
             rule = conditionGroup.predicateRule,
             conditionsResult = rule !== 'OR';
 
-            console.log(rule, conditions, 'SDADADASDSKADLANSDDNJASN')
 
           for (var i = 0; i < conditions.length; i++) {
             var condition = conditions[i];

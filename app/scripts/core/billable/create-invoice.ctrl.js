@@ -344,7 +344,6 @@
             area = document.querySelector('.limited-global-area');
 
             while (area.clientHeight < area.scrollHeight) {
-              console.log('more than 4 lines!!');
 
               counter++;
 
@@ -357,15 +356,12 @@
           }
 
           function decrease(area) {
-            console.log('decreasing')
             counter++;
             if (counter > 4000) {
               return;
             }
-            console.log(area.clientHeight, area.scrollHeight, 'height')
             if (area.clientHeight < area.scrollHeight) {
 
-              console.log('inside of here', area.value)
               // $scope.chosenNote.line = $scope.chosenNote.line.slice(0, -1);
               // $scope.chosenNote.line = 'a'
 

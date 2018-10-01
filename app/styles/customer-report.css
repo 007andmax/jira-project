@@ -1,11 +1,22 @@
 .customer-ticket p {
   font-weight: 600; }
 
+html.no-d3-tooltip .nvtooltip .value {
+  display: none; }
+
 .customer-ticket__report {
   width: 100%; }
 
 .customer-ticket__report--details {
   padding: 15px; }
+
+.customer-ticket__report .services.border {
+  border: 1px dashed #d0edfe;
+  border-radius: 5px; }
+
+.customer-ticket__report .products.border {
+  border: 1px dashed #d5f4e0;
+  border-radius: 5px; }
 
 .customer-ticket__report--summary, .customer-ticket__report--details-plus {
   padding: 15px;

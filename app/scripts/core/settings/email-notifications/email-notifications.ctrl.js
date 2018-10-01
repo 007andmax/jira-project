@@ -16,7 +16,8 @@
             var emailObjToSend = {
               newDevice: $scope.emailNotifications.newDevice,
               ticketCreated: $scope.emailNotifications.ticketCreated,
-              myTicketUpdated: $scope.emailNotifications.myTicketUpdated
+              myTicketUpdated: $scope.emailNotifications.myTicketUpdated,
+              ticketCloseNotifications: $scope.emailNotifications.ticketCloseNotifications || false
             };
 
             UsersService.saveForUserProfile(emailObjToSend, 'email', function () {
@@ -24,6 +25,15 @@
             });
           }
         };
+
+        $scope.ticketCloseNotification = function(form) {
+          var data = $scope.ticketClosed || false;
+          UsersService.saveForUserProfile(data, 'ticketCloseNotifications', function () {
+
+          });
+        }
+
+        // settings/userProfile/ticketCloseNotifications
 
       }]);
 

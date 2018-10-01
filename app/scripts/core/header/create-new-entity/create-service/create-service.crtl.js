@@ -14,7 +14,7 @@
         if (savedState.type === 'service' && origin) {
           $scope.editService = angular.copy(origin);
         } else {
-          
+
           $scope.editService = {
             billable: true,
             isDefault: true,
@@ -35,7 +35,6 @@
         }
 
         $scope.saveEditService = function (form, isModal) {
-          console.log(form, form.$valid, "ASDADA")
           if (form.$valid || isModal && form.editServiceName.$valid && form.editServiceRate.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
