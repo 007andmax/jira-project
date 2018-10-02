@@ -61,6 +61,7 @@
             })
 
             if (input.length !== 0) {
+              console.log(input, "CLEAR INTERVAL")
               clearInterval(interval);
 
               setTimeout(function() {
