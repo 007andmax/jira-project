@@ -9,7 +9,7 @@
              ng-repeat="tax in $ctrl.taxList | orderBy: 'name'">
           <label class="control checkbox ellipsis">
             <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
-                   ng-change="$ctrl.updateEntityTaxList(tax)">
+                   ng-change="$ctrl.updateEntityTaxList(tax)" class="tax-input">
             {{ tax.name }}&nbsp;{{ tax.rate }}%
             <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]" style="right: 13px"></i>
           </label>

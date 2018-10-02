@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('addOnFocus',
-    ['$timeout', '$compile', function ($timeout, $compile) {
+    ['$timeout', '$compile', '$rootScope', function ($timeout, $compile, $rootScope) {
       return {
         restrict: 'A',
         scope: {
@@ -19,6 +19,20 @@
               return;
             }
 
+            $scope.$watch(function() {
+              return $rootScope.taxPlaceholderIsUp;
+            }, function(val) {
+              if (val) {
+                $rootScope.taxPlaceholderIsUp = false;
+
+                if (input.hasClass('tax-input')) {
+                  // console.log('tax input');
+
+                  element.addClass('active-field');
+                }
+              }
+            })
+
 
             $scope.$watch(function() {
               return input[0].value;
@@ -28,7 +42,6 @@
               } else {
                 if (!input.is(':focus')) {
                   element.removeClass('active-field');
-                  // console.log('im not focused bitch')
                 }
               }
             })
