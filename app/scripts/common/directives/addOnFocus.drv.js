@@ -12,17 +12,17 @@
         link: function ($scope, element, attrs) {
           element.addClass('no-animation');
 
-          var interval = setTimeout(function() {
+          var interval = setInterval(function() {
             var input = element.find($scope.isTextarea ? 'textarea' : 'input:not([no-select])');
 
 
-            console.log('input', input, 'ENDLESS INTERVAL')
+            // console.log('input', input, 'ENDLESS INTERVAL')
 
             if (!input.length) {
               return;
             }
 
-            console.log(input, 'INPUT INPUT INPUT')
+            // console.log(input, 'INPUT INPUT INPUT')
 
             $scope.$watch(function() {
               return $rootScope.taxPlaceholderIsUp;
@@ -64,7 +64,7 @@
             })
 
             if (input.length && input.length !== 0) {
-              console.log(input, "CLEAR INTERVAL")
+              // console.log(input, "CLEAR INTERVAL")
               clearInterval(interval);
 
               setTimeout(function() {

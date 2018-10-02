@@ -101,28 +101,48 @@
             }]
           },
           USER: {
-            "excludeTrashSpam": true,
-            "groupFieldFilters": [
-              {
-                "predicateRule": "OR",
-                "fieldFilterDtos": [
-                  {
-                    "path": "assignedUser.id",
-                    "operator": "EQ",
-                    "values": [
-                      currentUserId
-                    ]
-                  },
-                  {
-                    "path": "assignedUser.id",
-                    "operator": "NULL",
-                    "values": []
-                  }
-                ]
-              }
-            ],
-            "offset": 0
-          },
+  "excludeTrashSpam": true,
+  "groupFieldFilters": [
+    {
+      "predicateRule": "OR",
+      "fieldFilterDtos": [
+        {
+          "path": "assignedUser.id",
+          "operator": "EQ",
+          "values": [
+            currentUserId
+          ]
+        },
+        {
+          "path": "assignedUser.id",
+          "operator": "NULL",
+          "values": []
+        }
+      ]
+    },
+    {
+      "predicateRule": "OR",
+      "fieldFilterDtos": [
+        {
+          "path": "status",
+          "operator": "EQ",
+          "values": ["ON_HOLD"]
+        },
+        {
+          "path": "status",
+          "operator": "EQ",
+          "values": ["IN_PROGRESS"]
+        },
+        {
+          "path": "status",
+          "operator": "NULL",
+          "values": []
+        }
+      ]
+    }
+  ],
+  "offset": 0
+},
           SHARED: {
             excludeTrashSpam: true,
             orderByFilters: [{
