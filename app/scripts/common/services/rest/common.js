@@ -146,6 +146,9 @@
         return false;
       }
 
+
+      console.log(url, fileName, 'double download is here??')
+
       //If in Chrome or Safari - download via virtual link click
       if (isChrome || isFirefox) {
         //Creating new link node.
@@ -153,6 +156,8 @@
         var shortUrl = url.slice(url.indexOf('.com') + 4);
 
         if (indexOf !== -1) {
+
+          console.log('or probably here?', url, ' || ', shortUrl);
           return redownload(url) && redownload(shortUrl);
         } else {
 
