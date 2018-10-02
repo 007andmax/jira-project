@@ -6,6 +6,8 @@
       ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService',
         function ($scope, ProductsService, PermissionsService) {
 
+          $scope.productExpense.quantity = 1;
+
           $scope.discountAmountMsxLength;
           $scope.isValidNewExpenseOrNote = false;
 
@@ -16,7 +18,7 @@
           function setTicketUpdateToDefault() {
 
             $scope.setTicketUpdate({
-              products: [{item:{}}]
+              products: [{item:{quantity: 1}}]
             });
 
             $scope.setTriedToSaveUpdate(false);
@@ -27,7 +29,7 @@
           };
 
           $scope.addProduct = function () {
-            $scope.ticketUpdate.products.push({ item: {} });
+            $scope.ticketUpdate.products.push({ item: {quantity: 1} });
           };
 
           $scope.$watch('ticketUpdate', function () {
