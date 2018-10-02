@@ -8,7 +8,7 @@
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxList | orderBy: 'name'">
           <label class="control checkbox ellipsis">
-            <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]"
+            <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]" no-select
                    ng-change="$ctrl.updateEntityTaxList(tax)">
             {{ tax.name }}&nbsp;{{ tax.rate }}%
             <i class="icn-sm icn-label-save" ng-show="$ctrl.selectedTaxes[tax.id]" style="right: 13px"></i>
@@ -20,7 +20,7 @@
         <div class="checkbox-dd-item"
              ng-repeat="tax in $ctrl.taxList | orderBy: 'name' track by tax.id" ng-show="$ctrl.selectedTaxes[tax.id]">
           <label class="control checkbox ellipsis" onclick="return false">
-            <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]">
+            <input type="checkbox" ng-model="$ctrl.selectedTaxes[tax.id]" no-select>
             {{ tax.name }}&nbsp;{{ tax.rate }}%
 
           </label>

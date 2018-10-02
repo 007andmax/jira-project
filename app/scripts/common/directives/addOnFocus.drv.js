@@ -13,7 +13,7 @@
           element.addClass('no-animation');
 
           var interval = setTimeout(function() {
-            var input = element.find($scope.isTextarea ? 'textarea' : 'input');
+            var input = element.find($scope.isTextarea ? 'textarea' : 'input:not([no-select])');
 
             if (!input.length) {
               return;
