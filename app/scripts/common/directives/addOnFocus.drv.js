@@ -15,6 +15,9 @@
           var interval = setTimeout(function() {
             var input = element.find($scope.isTextarea ? 'textarea' : 'input:not([no-select])');
 
+
+            console.log('input', input, 'ENDLESS INTERVAL')
+
             if (!input.length) {
               return;
             }
@@ -60,7 +63,7 @@
 
             })
 
-            if (input.length !== 0) {
+            if (input.length && input.length !== 0) {
               console.log(input, "CLEAR INTERVAL")
               clearInterval(interval);
 
