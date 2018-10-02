@@ -19,6 +19,8 @@
               return;
             }
 
+            console.log(input, 'INPUT INPUT INPUT')
+
             $scope.$watch(function() {
               return $rootScope.taxPlaceholderIsUp;
             }, function(val) {
