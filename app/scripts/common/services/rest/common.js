@@ -155,14 +155,14 @@
         var indexOf = url.indexOf('.com');
         var shortUrl = url.slice(url.indexOf('.com') + 4);
 
-        // if (indexOf !== -1) {
-        //
-        //   console.log('or probably here?', url, ' || ', shortUrl);
-        //   return redownload(url) && redownload(shortUrl);
-        // } else {
+        if (indexOf !== -1) {
+
+          console.log('or probably here?', url, ' || ', shortUrl);
+          return redownload(url, true) && redownload(shortUrl);
+        } else {
 
           return redownload(url);
-        // }
+        }
 
         // var link = document.createElement('a');
         // link.target = "_blank";
@@ -203,7 +203,7 @@
       window.open(url, '_blank');
       return true;
 
-      function redownload(url) {
+      function redownload(url, open) {
         var link = document.createElement('a');
         link.target = "_blank";
         link.href = url;
@@ -216,7 +216,10 @@
 
           // alert(url);
           // alert(fileName);
-          link.download = fileName;
+          if (!open) {
+            link.download = fileName;
+            
+          }
 
           // alert(link.download)
         }
