@@ -284,7 +284,7 @@
       function createNewWindowClosing() {
         var product = $scope.editProduct;
         var isProductChanged;
-
+        // console.log(origin, product, savedState.type, 'PRODUCT')
         if (savedState.type === 'product') {
           if (origin) {
             isProductChanged = product.description !== origin.description
@@ -302,7 +302,7 @@
           if (origin) {
             isProductChanged = $scope.editCategory.name !== origin.name;
           } else {
-            isProductChanged = $scope.editCategory.name;
+            isProductChanged = $scope.editProduct.description || product.cost || product.sale || product.ilc || product.manufacture || product.category || product.company;
           }
         }
 
