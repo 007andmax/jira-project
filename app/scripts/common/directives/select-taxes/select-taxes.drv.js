@@ -37,6 +37,8 @@
       $ctrl.entity.taxes = $ctrl.entity.taxes || [];
     }
 
+    $scope.showPlaceholder = self.showPlaceholder; 
+
     $scope.$watch(function () {
       return $ctrl.taxes;
     }, generateTaxList, true);

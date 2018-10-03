@@ -16,10 +16,10 @@
         }
       });
 
-      $scope.showModal = false;
+      $scope.showModal = true;
 
       $timeout(function() {
-        $scope.showModal = true;
+        $scope.showModal = false;
       }, 50)
 
       $scope.stopPropagation = function(e) {
