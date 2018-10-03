@@ -11,7 +11,8 @@
       onClose: '=?',
       isIcon: '@?',
       isPreviewMode: '@?',
-      activePlaceholder: '<activePlaceholder'
+      activePlaceholder: '<activePlaceholder',
+      showPlaceholder: '<showPlaceholder'
     },
     controller: selectTaxesCtrl
   });
