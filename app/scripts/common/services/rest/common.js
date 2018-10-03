@@ -155,14 +155,14 @@
         var indexOf = url.indexOf('.com');
         var shortUrl = url.slice(url.indexOf('.com') + 4);
 
-        if (indexOf !== -1) {
-
-          console.log('or probably here?', url, ' || ', shortUrl);
-          return redownload(url) && redownload(shortUrl);
-        } else {
+        // if (indexOf !== -1) {
+        //
+        //   console.log('or probably here?', url, ' || ', shortUrl);
+        //   return redownload(url) && redownload(shortUrl);
+        // } else {
 
           return redownload(url);
-        }
+        // }
 
         // var link = document.createElement('a');
         // link.target = "_blank";
