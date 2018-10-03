@@ -620,7 +620,7 @@
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
                   <div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
-                    <span class="ellipsis" uib-tooltip="{{ product.item.description }}"
+                    <span class="ellipsis pre-line" uib-tooltip="{{ product.item.description }}"
                           trimmed-tooltip-checker="product.item.description"></span>
                     <div style="color:#b2becd;font-size: 13px; line-height: 20px;">
                       <span style="word-break: break-all" ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>
