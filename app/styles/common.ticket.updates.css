@@ -413,7 +413,7 @@
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: 38%;
+  width: 64%;
   float: left;
 }
 
@@ -474,7 +474,7 @@
 
 .table-wrapper .table-content .col-5 {
   /*.table-wrapper .table-content .col-4 {*/
-  width: 22%;
+  width: 21%;
   float: right;
   white-space: nowrap;
 }
@@ -546,9 +546,11 @@
   top: 43px;
   left: 63px;
 }
-.ticket-update-edit .icon-edit.icn-update-product{
+
+.ticket-update-edit .icon-edit.icn-update-product {
   top: 50px;
 }
+
 .ticket-update-product-edit {
   position: absolute;
   left: -20px;
@@ -664,17 +666,9 @@
   .table-wrapper.product-upd .table-content .col-1 {
     width: 15%;
   }
-
+  
   .table-wrapper.product-upd .table-content .col-3 {
     width: 18%;
-  }
-
-  .table-wrapper.product-upd .table-content .col-4 {
-    width: 17%;
-  }
-
-  .table-wrapper.product-upd .table-content .col-2.col-2-has-serial-number {
-    width: 43%;
   }
 }
 
@@ -702,19 +696,19 @@
   .table-content.service-table .col-3 {
     width: 75%;
   }
-
+  
   .opened-ticket .table-wrapper .service-table .col-3 {
     width: calc(100% - 605px);
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 485px);
   }
-
+  
   _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 488px);
   }
-
+  
   .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
     width: 33.333333%;
   }
@@ -724,43 +718,43 @@
   .table-content.service-table .col-3 {
     padding-left: 342px;
   }
-
+  
   .ticket-update-service-edit {
     padding: 30px 40px 30px 50px;
   }
-
+  
   .ticket-update-product-edit {
     padding: 30px 40px 30px 50px;
   }
-
+  
   .ticket-update-edit .icon-edit {
     left: 30px;
   }
-
+  
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 563px);
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 36%;
   }
-
+  
   _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 35%;
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-5 div {
     white-space: nowrap;
   }
-
+  
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 290px);
   }
-
+  
   .table-wrapper .table-content .discount-ticket {
     white-space: normal;
   }
-
+  
   .table-wrapper .service-table .col-2 {
     width: 20%;
   }
@@ -770,38 +764,37 @@
   .table-content.service-table .col-3 {
     padding-left: 295px;
   }
-
+  
   .table-wrapper .table-content .form-group input {
     font-size: 12px;
   }
-
+  
   .tax-recurring input {
     font-size: 12px;
   }
-
+  
   .table-wrapper .table-content .discount-ticket {
     white-space: nowrap;
   }
-
+  
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 464px);
   }
-
+  
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 230px);
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 75%;
   }
-
 }
 
 @media screen and (max-width: 1280px) {
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 210px);
   }
-
+  
   .table-content.service-table .col-3 {
     padding-left: 278px;
   }
