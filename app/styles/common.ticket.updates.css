@@ -798,4 +798,12 @@
   .table-content.service-table .col-3 {
     padding-left: 278px;
   }
+  
+  .table-wrapper .table-content .col-5 {
+    width: 14%;
+  }
+  
+  .table-wrapper .table-content .col-2.col-2-has-serial-number {
+    width: 71%;
+  }
 }
