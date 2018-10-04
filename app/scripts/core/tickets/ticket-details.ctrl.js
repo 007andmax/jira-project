@@ -346,19 +346,19 @@
 
           $scope.updateAndCloseTicket = function (form) {
             var saveFailed = $scope.saveTicketUpdate(form, true, true, closeTicket);
-            if (hasUnsavedUpdate($scope.ticketUpdate)) {
-
-              if (!saveFailed) {
-                var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-                  if (value === false) {
-                    closeTicket();
-                    unwatch();
-                  }
-                });
-              }
-            } else {
-              closeTicket()
-            }
+            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
+            //
+            //   if (!saveFailed) {
+            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
+            //       if (value === false) {
+            //         closeTicket();
+            //         unwatch();
+            //       }
+            //     });
+            //   }
+            // } else {
+            //   closeTicket()
+            // }
           };
 
           $scope.$watch('ticketDetails.agent', function (value) {
