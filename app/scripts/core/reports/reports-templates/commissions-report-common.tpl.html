@@ -1,0 +1,103 @@
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/customerReport/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     selector=".customer-ticket"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
+  <p class="report-title">Commissions Report</p>
+  <i class="back-page" ui-sref="reports"></i>
+  <div>
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 is-report-available="isReportAvailable"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 common-commissions="true"
+                 is-radio-button-hidden="true"
+                 is-device-hidden="true">
+
+    </report-menu>
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list-ticket"
+       style="padding: 0;width: 980px;"
+       ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl"
+       ng-show="!loadingInProgress">
+    <div class="customer-ticket" ng-if="ticketReport && isReportAvailable">
+      <div class="customer-ticket__report">
+        <div class="report-header">
+          <h1>Tickets Report</h1>
+          <div class="company-info">
+            <h3>{{ ticketReport.companyName.name || 'All companies' }}</h3>
+            <p><span>{{ticketReport.startDate}}</span> - <span>{{ ticketReport.endDate }}</span></p>
+          </div>
+        </div>
+        <div ng-show="showHeader" class="customer-ticket__report--summary" on-finish-render="buildPdf()">
+          <h3>Resolved Tickets</h3>
+          <div class="commissions__header">
+            <div class="commissions__header--item canvas-chart">
+
+              <nvd3 options="chartOptions" data="chartData"></nvd3>
+            </div>
+            <div class="commissions__header--item">
+              <p ng-if="ticketReport.timeSpent" ng-repeat="time in overallServiceTime"
+                 ng-class="'service-color-' + $index">
+                {{ time.name }} <span>{{ time.time | reportTime }}</span>
+              </p>
+
+            </div>
+
+
+            <div class="commissions__header--item canvas-chart">
+
+              <nvd3 options="chartOptions" data="chartData"></nvd3>
+            </div>
+            <div class="commissions__header--item">
+              <p ng-if="ticketReport.timeSpent" ng-repeat="time in overallServiceTime"
+                 ng-class="'service-color-' + $index">
+                {{ time.name }} <span>{{ time.time | reportTime }}</span>
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="customer-ticket__report--details">
+          <h3>Commissions Details</h3>
+          <div class="details-header row">
+            <div class="col-md-4">Client</div>
+            <div class="col-md-2"><span ng-if="showProducts">Product cost</span></div>
+            <div class="col-md-2">Total sales</div>
+            <div class="col-md-2">Contracts</div>
+            <div class="col-md-2">Commissions</div>
+
+          </div>
+          <div class="details-content row" ng-repeat="ticket in ticketReport.tickets" on-finish-render="build()">
+            <div class="col-md-4">{{ticket.ticketNumber}}</div>
+            <div class="col-md-2"><span ng-if="showProducts">{{ ticket.ticketCreatedAt }}</span></div>
+            <div class="col-md-2">{{ticket.username.firstName + ' ' + ticket.username.lastName}}
+            </div>
+            <div class="col-md-2 device-field-pdf">{{ticket.deviceName}}</div>
+            <div class="col-md-2">
+              {{formatResponseTime(ticket.responseTime)}}
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="report-footer">
+          <p>Prepare by : <span>{{ username }}</span></p>
+          <p>{{ currentCompany.name }}</p>
+          <p>Quicktech <span>2018</span> ©. All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

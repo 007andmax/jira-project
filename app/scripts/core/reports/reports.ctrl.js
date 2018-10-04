@@ -443,7 +443,7 @@
       };
 
       $scope.$on("requestReportData", function (event, data, location, techReportType) {
-        //console.log("data: ", data);
+        console.log("data: ", data);
         if (location) {
           switch (location) {
             case('/reports/remoteAccess') :
@@ -483,8 +483,18 @@
             case('/reports/ticket-report'):
               gerReportTicketReport(data);
               $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');;
+              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
               break;
+            case('/reports/byCommissionsDetailed'):
+              gerReportTicketReport(data);
+              $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
+              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
+              break;
+            case('/reports/byCommissions'):
+              gerReportTicketReport(data);
+              $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
+              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
+              break
             default:
               console.log("wrong location")
           }

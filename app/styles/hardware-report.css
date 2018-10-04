@@ -1506,6 +1506,54 @@
   font-weight: 500;
 }
 
+.commissions__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commissions__header--item {
+  width: 25%;
+  min-height: 352px;
+}
+
+.commissions__header--item:nth-child(odd) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.commissions__header--item:nth-child(even) {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-right: 40px;
+}
+
+.commissions__header--item:nth-child(even) p {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+  font-weight: 400;
+}
+
+.commissions__header--item:nth-child(even) p span {
+  font-weight: 600;
+}
+
+.commissions__header--item:nth-child(even) p:before {
+  position: absolute;
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  left: -5px;
+  top: 9px;
+}
+
 .customer-ticket__header {
   display: flex;
   justify-content: space-between;

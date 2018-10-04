@@ -274,6 +274,16 @@
           templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
+        .state('commissionsReport-detailed', waitForServices({
+          url: '/reports/byCommissionsDetailed',
+          templateUrl: '/html/scripts/core/reports/reports-templates/commissions-report-detailed.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('commissionsReport-common', waitForServices({
+          url: '/reports/byCommissions',
+          templateUrl: '/html/scripts/core/reports/reports-templates/commissions-report-common.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
         .state('techReport-ProductSales', waitForServices({
           url: '/reports/techReport-ProductSales',
           templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',

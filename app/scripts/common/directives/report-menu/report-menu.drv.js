@@ -22,7 +22,9 @@
       isProductOptions: '@?',
       isProductReportForCompanyTab: '@?',
       companyId: '=?',
-      isSerialNumberOptions: '@?'
+      isSerialNumberOptions: '@?',
+      commonCommissions: '<commonCommissions',
+      detailedCommissions: '<detailedCommissions'
     },
     controller: reportMenuCtrl
   });
@@ -371,6 +373,52 @@
               }
             }
           } else if (location === '/reports/ticket-report') {
+            if (reportSettings.company) {
+              var dataToSend = {
+                company: reportSettings.company,
+                companyId: reportSettings.company.id,
+                extendedReport: ($scope.customerTicketType === 'Extended report'),
+                withResponseTime: $scope.customerTicketWithResponseTime,
+                withTimeSpent: true,
+                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
+                startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+              };
+
+              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+                dataToSend.userId = reportSettings.techUser.id
+              }
+
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+
+            } else {
+              $scope.errorNassageForCompany = false;
+            }
+          } else if (location === '/reports/byCommissionsDetailed') {
+            if (reportSettings.company) {
+              var dataToSend = {
+                company: reportSettings.company,
+                companyId: reportSettings.company.id,
+                extendedReport: ($scope.customerTicketType === 'Extended report'),
+                withResponseTime: $scope.customerTicketWithResponseTime,
+                withTimeSpent: true,
+                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
+                startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+              };
+
+              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+                dataToSend.userId = reportSettings.techUser.id
+              }
+
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+
+            } else {
+              $scope.errorNassageForCompany = false;
+            }
+          } else if (location === '/reports/byCommissions') {
             if (reportSettings.company) {
               var dataToSend = {
                 company: reportSettings.company,

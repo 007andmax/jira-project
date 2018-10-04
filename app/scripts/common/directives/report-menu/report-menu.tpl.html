@@ -232,6 +232,39 @@
           </label>
         </div>
       </div>
+      <div ng-show="$ctrl.commonCommissions" class="col-md-11">
+        <div class="include-ticket-report">
+
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="customerTicketWithProducts"> </input>
+            <span class="control-indicator"></span>
+            Show products cost
+          </label>
+        </div>
+      </div>
+
+      <div ng-show="$ctrl.detailedCommissions" class="col-md-11">
+        <div class="include-ticket-report">
+
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="customerTicketWithProducts"> </input>
+            <span class="control-indicator"></span>
+            Show products cost
+          </label>
+
+          <label class="control checkbox">
+            <input type="radio" name="details" ng-model="detailsByCustomer"> </input>
+            <span class="control-indicator"></span>
+            Details by customer
+          </label>
+
+          <label class="control checkbox">
+            <input type="radio" name="details" ng-model="detailsByProducts"> </input>
+            <span class="control-indicator"></span>
+            Details by product
+          </label>
+        </div>
+      </div>
     </div>
 
   </div>
