@@ -84,7 +84,7 @@
             var invoice = Utils.findById(data.list, newChange.data.id);
 
             if (invoice) {
-              Utils.customizeObj(newChange.data, invoice);
+              // Utils.customizeObj(newChange.data, invoice);
             } else {
               data.list.push(newChange.data);
 
