@@ -17,6 +17,7 @@
       var urlForReportCreatedVsClosedTickets = "/reports/techTickets";
       var urlForReportProductSoldVsQuotedProjects = "/reports/sales/byTechSold";
       var urlForReportAccountReceivable = "/reports/sales/byReceivable";
+      var urlForReportByCommissions = "/reports/commission/byCustomers";
 
       function getReport(url, data, callback) {
         var future = $http({
@@ -80,6 +81,10 @@
         return getReport(urlForReportAccountReceivable, data, callback);
       }
 
+      function getReportByCommissions(data, callback) {
+        return getReport(urlForReportByCommissions, data, callback);
+      }
+
       function exportCsvAccountsReceivable(data, callback) {
         return exportCsv(urlForReportAccountReceivable, data, callback);
       }
@@ -127,6 +132,7 @@
         getReportByProducts: getReportByProducts,
         getReportByTechSold: getReportByTechSold,
         getReportRemoteAccess: getReportRemoteAccess,
+        getReportByCommissions: getReportByCommissions,
         exportCsvByTaxes: exportCsvByTaxes,
         exportCsvByCustomers: exportCsvByCustomers,
         exportCsvByProducts: exportCsvByProducts,

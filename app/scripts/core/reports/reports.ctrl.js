@@ -275,6 +275,46 @@
         })
       }
 
+      function getReportCommissions(data) {
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+
+        ReportsService.getReportByCommissions(data, function(res) {
+          console.log(res, 'RES GET REPORT')
+
+          $scope.isReportAvailable = !!res.lines && res.lines.length;
+          $scope.loadingInProgress = false;
+          $scope.commissionsReport = res;
+
+          var salesByCustomers = [];
+          var totalSum = res.totalSum;
+
+          $scope.commissionsReport.lines = res.lines.map(function(el) {
+            el.percent = (el.totalSum * 100 / totalSum).toFixed(2);
+
+            return el;
+          });
+
+          $scope.byCustomerChartData = $scope.commissionsReport.lines.sort(function(a, b) {
+            return +b.percent - a.percent;
+          }).slice(0, 4).map(function(el) {
+            return {
+              name: el.companyName,
+              time: el.percent
+            }
+          })
+
+
+          console.log($scope.commissionsReport, "REPOT");
+
+        })
+
+
+
+
+
+      }
+
       function gerReportTicketReport(data) {
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
@@ -491,9 +531,9 @@
               $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
               break;
             case('/reports/byCommissions'):
-              gerReportTicketReport(data);
-              $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
+              getReportCommissions(data);
+              // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
+              $rootScope.reportName = 'commissions-report'
               break
             default:
               console.log("wrong location")

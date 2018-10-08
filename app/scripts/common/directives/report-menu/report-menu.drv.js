@@ -107,6 +107,7 @@
 
     $scope.errorNassageForDate = true;
     $scope.errorNassageForCompany = true;
+    $scope.errorNassageForSalesUser = true;
 
     $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'Summary';
 
@@ -419,28 +420,41 @@
               $scope.errorNassageForCompany = false;
             }
           } else if (location === '/reports/byCommissions') {
-            if (reportSettings.company) {
+            // if (reportSettings.company) {
+            //
+            //
+            // } else {
+            //   $scope.errorNassageForCompany = false;
+            // }
+
+            if ($scope.startDate && $scope.endDate && reportSettings.salesUser) {
               var dataToSend = {
-                company: reportSettings.company,
-                companyId: reportSettings.company.id,
-                extendedReport: ($scope.customerTicketType === 'Extended report'),
-                withResponseTime: $scope.customerTicketWithResponseTime,
-                withTimeSpent: true,
-                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
+                companyId: (reportSettings.company && reportSettings.company.id) || null,
+                userId: (reportSettings.salesUser && reportSettings.salesUser.id) || null,
+                type: "SUMMARY",
                 startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
 
-              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
-                dataToSend.userId = reportSettings.techUser.id
-              }
+              // if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+              //   dataToSend.userId = reportSettings.techUser.id
+              // }
 
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);
-
             } else {
-              $scope.errorNassageForCompany = false;
+              if (!$scope.startDate || !$scope.endDate) {
+                $scope.errorNassageForDate = false;
+              }
+
+              if (!reportSettings.salesUser) {
+                $scope.errorNassageForSalesUser = false;
+              }
             }
+
+
+
+
           } else {
             var dataToSend = {
               type: type
