@@ -290,7 +290,11 @@
           var totalSum = res.totalSum;
           var categories = res.categorySalesValue;
 
+          $scope.commissionsReport.lines = res.lines.map(function(el) {
+            el.totalSum = el.totalSum.toFixed(2);
 
+            return el;
+          });
 
 
 
@@ -314,7 +318,7 @@
             .map(function(el) {
               return {
                 name: el.companyName,
-                time: el.percent
+                time: el.totalSum
               }
             })
 
