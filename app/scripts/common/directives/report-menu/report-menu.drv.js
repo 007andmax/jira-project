@@ -78,6 +78,8 @@
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
 
+    $scope.customerTicketWithProducts= true;
+
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
     // if($ctrl.isProductReportForCompanyTab && $ctrl.companyId) {
@@ -105,7 +107,9 @@
     }
 
     $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
-    $scope.techUsers = UsersService.getTechUsers();
+    $scope.techUsers = UsersService.getTechUsers().filter(function(el) {
+      return el.userEnabled && !el.deletedAt;
+    });
 
     $scope.errorNassageForDate = true;
     $scope.errorNassageForCompany = true;
