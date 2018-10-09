@@ -288,6 +288,7 @@
 
           var salesByCustomers = [];
           var totalSum = res.totalSum;
+          var categories = res.categorySalesValue;
 
           $scope.commissionsReport.lines = res.lines.map(function(el) {
             el.percent = (el.totalSum * 100 / totalSum).toFixed(2);
@@ -295,14 +296,31 @@
             return el;
           });
 
-          $scope.byCustomerChartData = $scope.commissionsReport.lines.sort(function(a, b) {
-            return +b.percent - a.percent;
-          }).slice(0, 4).map(function(el) {
-            return {
-              name: el.companyName,
-              time: el.percent
-            }
-          })
+
+
+          $scope.byCategoriesChartData = Object.keys(categories)
+            .map(function(key) {
+              return {
+                name: key,
+                time: categories[key]
+              }
+            })
+            .sort(function(a, b) {
+              return +b.time - +a.time;
+            })
+            .slice(0, 4);
+
+          $scope.byCustomerChartData = $scope.commissionsReport.lines
+            .sort(function(a, b) {
+              return +b.percent - a.percent;
+            })
+            .slice(0, 4)
+            .map(function(el) {
+              return {
+                name: el.companyName,
+                time: el.percent
+              }
+            })
 
 
           console.log($scope.commissionsReport, "REPOT");

@@ -29,16 +29,17 @@
     <div class="customer-ticket" ng-if="commissionsReport && isReportAvailable">
       <div class="customer-ticket__report">
         <div class="report-header">
-          <h1>Tickets Report</h1>
+          <h1>Commissions Report</h1>
           <div class="company-info">
             <h3>{{ commissionsReport.companyName.name || 'All companies' }}</h3>
             <p><span>{{commissionsReport.startDate}}</span> - <span>{{ commissionsReport.endDate }}</span></p>
           </div>
         </div>
         <div class="customer-ticket__report--summary" on-finish-render="buildPdf()">
-          <h3>Resolved Tickets</h3>
+
           <div class="commissions__header">
             <div class="commissions__header--item canvas-chart">
+              <h3 style="padding: 0;">Sales by customer</h3>
 
               <nvd3 options="chartOptions" data="byCustomerChartData"></nvd3>
             </div>
@@ -52,13 +53,14 @@
 
 
             <div class="commissions__header--item canvas-chart">
+              <h3 style="padding: 0;">Top Sales Category</h3>
 
-              <nvd3 options="chartOptions" data="chartData"></nvd3>
+              <nvd3 options="chartOptions" data="byCategoriesChartData"></nvd3>
             </div>
             <div class="commissions__header--item">
-              <p ng-if="ticketReport.timeSpent" ng-repeat="time in overallServiceTime"
+              <p ng-repeat="time in byCategoriesChartData"
                  ng-class="'service-color-' + $index">
-                {{ time.name }} <span>{{ time.time | reportTime }}</span>
+                {{ time.name }} <span>{{ time.time }}</span>
               </p>
 
             </div>

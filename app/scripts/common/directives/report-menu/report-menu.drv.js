@@ -61,6 +61,8 @@
     $ctrl.currentUser = UsersService.getCurrentUser();
 
     $scope.maxDateForDateRangeInputField = Date.now();
+
+    $scope.currentCompany = CompaniesService.getCurrentCompany();
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
     $scope.customerTicketShowTotalTicketAmount = true;
@@ -405,7 +407,7 @@
                 withResponseTime: $scope.customerTicketWithResponseTime,
                 withTimeSpent: true,
                 showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
-                startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                startDate: $filter('date')(new Date($scope.startDate || $scope.currentCompany.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
 
@@ -427,12 +429,12 @@
             //   $scope.errorNassageForCompany = false;
             // }
 
-            if ($scope.startDate && $scope.endDate && reportSettings.salesUser) {
+            if (reportSettings.salesUser) {
               var dataToSend = {
                 companyId: (reportSettings.company && reportSettings.company.id) || null,
                 userId: (reportSettings.salesUser && reportSettings.salesUser.id) || null,
                 type: "SUMMARY",
-                startDate: $filter('date')(new Date($scope.startDate || reportSettings.company.createdAt), 'yyyy/MM/dd'),
+                startDate: $filter('date')(new Date($scope.startDate || $scope.currentCompany.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
 
@@ -443,9 +445,9 @@
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);
             } else {
-              if (!$scope.startDate || !$scope.endDate) {
-                $scope.errorNassageForDate = false;
-              }
+              // if (!$scope.startDate || !$scope.endDate) {
+              //   $scope.errorNassageForDate = false;
+              // }
 
               if (!reportSettings.salesUser) {
                 $scope.errorNassageForSalesUser = false;
