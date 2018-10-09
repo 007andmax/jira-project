@@ -298,7 +298,7 @@
 
 
 
-          $scope.byCategoriesChartData = Object.keys(categories)
+          $scope.byCategoriesChartData = Object.keys(categories || {})
             .map(function(key) {
               return {
                 name: key,

@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-2 device-field-pdf">{{ line.servicesSum }}</div>
             <div class="col-md-2">
-              {{ line.commissionsSum || 0 }}
+              {{ line.commissionSum || 0 }}
             </div>
 
 
@@ -96,8 +96,8 @@
             <div class="col-md-4">Total</div>
             <div class="col-md-2"><span ng-if="showProducts">{{ commissionsReport.productsSum }}</span></div>
             <div class="col-md-2">{{ commissionsReport.totalSum }}</div>
-            <div class="col-md-2">{{ commissionsReport.serviceSum }}</div>
-            <div class="col-md-2">{{ commissionsReport.totalCommissionsSum }}</div>
+            <div class="col-md-2">{{ commissionsReport.servicesSum }}</div>
+            <div class="col-md-2">{{ commissionsReport.totalCommissionSum }}</div>
 
           </div>
 
