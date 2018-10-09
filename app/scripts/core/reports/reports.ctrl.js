@@ -290,11 +290,7 @@
           var totalSum = res.totalSum;
           var categories = res.categorySalesValue;
 
-          $scope.commissionsReport.lines = res.lines.map(function(el) {
-            el.percent = (el.totalSum * 100 / totalSum).toFixed(2);
 
-            return el;
-          });
 
 
 
@@ -312,7 +308,7 @@
 
           $scope.byCustomerChartData = $scope.commissionsReport.lines
             .sort(function(a, b) {
-              return +b.percent - a.percent;
+              return +b.totalSum - a.totalSum;
             })
             .slice(0, 4)
             .map(function(el) {

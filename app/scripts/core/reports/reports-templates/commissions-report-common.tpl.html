@@ -46,7 +46,7 @@
             <div class="commissions__header--item">
               <p ng-repeat="time in byCustomerChartData"
                  ng-class="'service-color-' + $index">
-                {{ time.name }} <span>{{ time.time  }}</span>
+                {{ time.name }} <span>${{ time.time.toFixed(2)  }}</span>
               </p>
 
             </div>
@@ -60,7 +60,7 @@
             <div class="commissions__header--item">
               <p ng-repeat="time in byCategoriesChartData"
                  ng-class="'service-color-' + $index">
-                {{ time.name }} <span>{{ time.time }}</span>
+                {{ time.name }} <span>${{ time.time }}</span>
               </p>
 
             </div>
@@ -74,17 +74,19 @@
           <div class="details-header row">
             <div class="col-md-4">Client</div>
             <div class="col-md-2"><span ng-if="showProducts">Product cost</span></div>
-            <div class="col-md-2">Total sales</div>
             <div class="col-md-2">Contracts</div>
+            <div class="col-md-2">Total sales</div>
+
             <div class="col-md-2">Commissions</div>
 
           </div>
           <div class="details-content row" ng-repeat="line in commissionsReport.lines" on-finish-render="build()">
             <div class="col-md-4">{{line.companyName}}</div>
             <div class="col-md-2"><span ng-if="showProducts">{{ line.productsSum }}</span></div>
+            <div class="col-md-2 device-field-pdf">{{ line.servicesSum }}</div>
             <div class="col-md-2">{{ line.totalSum }}
             </div>
-            <div class="col-md-2 device-field-pdf">{{ line.servicesSum }}</div>
+
             <div class="col-md-2">
               {{ line.commissionSum || 0 }}
             </div>

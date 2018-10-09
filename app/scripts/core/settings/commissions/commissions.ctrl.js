@@ -29,7 +29,7 @@
         })
 
         CompaniesService.getAgreementsRates(function(res) {
-          $scope.agreementsCommissions = res.data;
+          $scope.agreementsCommissions = res.data || {};
 
           console.log($scope.agreementsCommissions, "AGREEMNGS")
         })
@@ -62,7 +62,21 @@
         }
 
         $scope.setAgreementRate = function() {
-          CompaniesService.setAgreementsRate($scope.agreementsCommissions, function(res) {
+          console.log($scope.agreementsCommissions, 'saddsad')
+
+          Object.keys($scope.agreementsCommissions).forEach(function(key) {
+            $scope.agreementsCommissions[key] = +$scope.agreementsCommissions[key];
+          });
+
+          var rates = $scope.agreementsCommissions;
+          var data = {
+            blockTimeContractCommission: rates.blockTimeContractCommission,
+            blockTimeContractCommissionExceeding: rates.blockTimeContractCommissionExceeding,
+            userOrDeviceContractCommission: rates.userOrDeviceContractCommission,
+            userOrDeviceContractCommissionExceeding: rates.userOrDeviceContractCommissionExceeding
+          }
+
+          CompaniesService.setAgreementsRate(data, function(res) {
             console.log('res from agreements', res)
           })
         }
