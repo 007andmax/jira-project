@@ -119,6 +119,26 @@
                     "values": []
                   }
                 ]
+              },
+              {
+                "predicateRule": "OR",
+                "fieldFilterDtos": [
+                  {
+                    "path": "status",
+                    "operator": "EQ",
+                    "values": ["ON_HOLD"]
+                  },
+                  {
+                    "path": "status",
+                    "operator": "EQ",
+                    "values": ["IN_PROGRESS"]
+                  },
+                  {
+                    "path": "status",
+                    "operator": "NULL",
+                    "values": []
+                  }
+                ]
               }
             ],
             "offset": 0
