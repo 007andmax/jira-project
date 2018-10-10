@@ -224,15 +224,17 @@
         $scope.editContract.services = [];
 
         ServicesService.getServicesData($scope, function (data) {
-          //console.log(data);
+          console.log(data, 'SERVICES');
           var listOfServices = [];
           for (var i = 0; i < data.length; i++) {
             var serv = {
+              commissionRate: data[i].commissionRate,
               name: data[i].name,
               rate: data[i].rate,
               billable: data[i].billable,
               taxes: data[i].taxes || [],
-              taxIds: data[i].taxIds || []
+              taxIds: data[i].taxIds || [],
+              basedOnDefault: true
             };
             if (data[i].taxIds && data[i].taxIds.length) {
               for (var m = 0; m < data[i].taxIds.length; m++) {
@@ -672,7 +674,9 @@
             name: $scope.editContract.services[i].name,
             rate: 0,
             billable: $scope.editContract.services[i].billable,
-            taxIds: []
+            taxIds: [],
+            basedOnDefault: $scope.editContract.services[i].basedOnDefault || false,
+            commissionRate: $scope.editContract.services[i].commissionRate || 0,
           };
           if($scope.editContract.services[i].billable) {
             correctService.rate =  $scope.editContract.services[i].rate;
