@@ -45,9 +45,11 @@
             }
 
             // if(!$scope.$$phase && !$rootScope.$$phase) {
-              return $scope.$apply(function () {
+            return setTimeout(function() {
+              $scope.$apply(function () {
                 return fn($scope);
-              });    //$digest or $apply
+              });
+            }, 0)      //$digest or $apply
             // }
 
 
