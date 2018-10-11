@@ -334,6 +334,8 @@
 
     function sendReportRequest(reportSettings) {
       $scope.errorNassageForCompany = true;
+      $scope.errorNassageForSalesUser = true;
+
       if ($ctrl.isProductReportForCompanyTab) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
       } else if (reportSettings && reportSettings.company) {
