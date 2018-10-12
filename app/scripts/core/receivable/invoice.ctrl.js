@@ -23,9 +23,6 @@
           }
         }
 
-
-
-
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var dateOfinvoiceCreate = new Date($scope.invoice.date).getTime();
@@ -85,7 +82,7 @@
         $scope.rollbackInvoice = function (invoice) {
           if (!disableInvoiceButtons && !invoice.recurringInvoice) {
             var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '? ' +
-              (invoice.ticketNumbers.length ? (invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
+              (invoice.ticketNumbers && invoice.ticketNumbers.length ? (invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
               invoice.ticketNumbers.join(', #') + ' will be restored.' : '');
 
             disableInvoiceButtons = true;
