@@ -216,10 +216,7 @@
           // alert(fileName);
           if (!open) {
             link.download = fileName;
-<<<<<<< HEAD
-=======
 
->>>>>>> master-double-download
           }
 
           // alert(link.download)
