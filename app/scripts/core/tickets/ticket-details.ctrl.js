@@ -552,7 +552,7 @@
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, close) {
 
-            var isEmptyProductValid = (Object.keys($scope.productExpenseModel).length === 3 || Object.keys($scope.productExpenseModel).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
+            var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
             if (form.$valid || isEmptyProductValid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;

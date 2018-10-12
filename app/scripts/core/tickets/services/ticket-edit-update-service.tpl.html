@@ -16,7 +16,7 @@
             <ul class="dropdown-menu dropdown-menu-services">
 
               <li role="presentation"
-                  ng-repeat="companyService in companyServices | filter: {name: editService.item.name} | orderBy: 'name'">
+                  ng-repeat="companyService in companyServices | orderBy: 'name'">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="setNewService(companyService)">
                   {{ companyService.name }}
                 </a>
