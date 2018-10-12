@@ -15,6 +15,8 @@
                  execute-when-outfocused="isShowBarcotInputField = false"
                  uib-tooltip="{{ productExpense.serialNumber }}"
                  tooltip-placement="top"
+
+                 ng-init="setModel(productExpense)"
                  tooltip-append-to-body="true"/>
         </div>
 
@@ -96,16 +98,16 @@
         <div class="col-3 price-width" style="width: 125px; float: left;"
              ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
-          <input uib-tooltip="Product Sale Price" 
+          <input uib-tooltip="Product Sale Price"
                  tooltip-placement="top"
-                 type="number" class="form-control" 
+                 type="number" class="form-control"
                  placeholder="Price" qt-to-fixed="2"
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
-                 name="productPrice" 
-                 ng-required="true" 
+                 name="productPrice"
+                 ng-required="true"
                  ng-model="productExpense.item.sale"
                  hard-reset-pattern="pricePattern"
-                 step="0.01" 
+                 step="0.01"
                  hard-reset-required="true"/>
         </div>
 

@@ -535,6 +535,10 @@
             return $scope.ticketUpdate && $scope.ticketUpdate.note;
           }
 
+          $scope.setModel = function(model) {
+            $scope.productExpenseModel = model;
+          }
+
 
 
 
@@ -547,7 +551,9 @@
           };
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, close) {
-            if (form.$valid) {
+
+            var isEmptyProductValid = (Object.keys($scope.productExpenseModel).length === 3 || Object.keys($scope.productExpenseModel).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
+            if (form.$valid || isEmptyProductValid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
@@ -558,7 +564,7 @@
                   ticket: { id: $scope.ticketDetails.id }
                 };
 
-              if ($scope.ticketUpdate.products) {
+              if ($scope.ticketUpdate.products && !isEmptyProductValid) {
 
                 for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
                   $scope.ticketUpdate.products[i].discountType = 'PERCENT';
