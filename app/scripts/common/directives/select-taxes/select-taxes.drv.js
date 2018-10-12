@@ -11,7 +11,8 @@
       onClose: '=?',
       isIcon: '@?',
       isPreviewMode: '@?',
-      activePlaceholder: '<activePlaceholder'
+      activePlaceholder: '<activePlaceholder',
+      showPlaceholder: '<showPlaceholder'
     },
     controller: selectTaxesCtrl
   });
@@ -35,6 +36,8 @@
       $ctrl.selectedTaxes = {};
       $ctrl.entity.taxes = $ctrl.entity.taxes || [];
     }
+
+    $scope.showPlaceholder = self.showPlaceholder; 
 
     $scope.$watch(function () {
       return $ctrl.taxes;
@@ -101,9 +104,15 @@
     }
 
     function getSelectedTaxNames() {
-      return $ctrl.entity.taxes.map(function (tax) {
+      var value = $ctrl.entity.taxes.map(function (tax) {
           return tax.name + ' ' + tax.rate + '%';
         }).join(', ') || ($ctrl.activePlaceholder ? "" : 'No taxes');
+
+      if (value) {
+        $rootScope.taxPlaceholderIsUp = true;
+      }
+
+      return value;
     }
 
     function createSelectedTaxes(taxes) {

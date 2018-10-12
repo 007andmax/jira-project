@@ -4,8 +4,8 @@
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-      'TaxesService',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService) {
+      'TaxesService', '$timeout',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout) {
 
       $scope.discountAmountMsxLength;
       $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,100}$/;
@@ -15,6 +15,12 @@
           $scope.closeWindow();
         }
       });
+
+      $scope.showModal = true;
+
+      $timeout(function() {
+        $scope.showModal = false;
+      }, 50)
 
       $scope.stopPropagation = function(e) {
         e.stopPropagation()

@@ -216,7 +216,8 @@
 
     </div>
     <div class="col-md-6 taxes" add-on-focus>
-      <select-taxes taxes="taxes"  active-placeholder="'Taxes'" entity="editProduct"></select-taxes>
+
+      <select-taxes taxes="taxes"  active-placeholder="'Taxes'" entity="editProduct" show-placeholder="showModal"></select-taxes>
       <div class="add-taxes">
         <p style="margin-bottom: 0; padding-bottom: 11px;" smart-dropdown-menu-position no-restricted="true"
            dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
@@ -246,7 +247,7 @@
                 Name is too long.
               </label>
             </div>
-            <input placeholder="Enter Tax Name" type="text" class="form-validation" name="name" ng-model="newTax.name"
+            <input no-select placeholder="Enter Tax Name" type="text" class="form-validation" name="name" ng-model="newTax.name"
                    is-uniq-validation validation-func="isUniqueName" ng-minlength="2" ng-maxlength="30">
 
 
@@ -264,10 +265,10 @@
                 To large.
               </label>
             </div>
-            <input placeholder="Rate (%)" type="number" class="form-validation" ng-model="newTax.rate" name="rate"
+            <input no-select placeholder="Rate (%)" type="number" class="form-validation" ng-model="newTax.rate" name="rate"
                    required min="0.01" max="99">
             <label class="control checkbox" style="margin-bottom: 20px;">
-              <input type="checkbox" ng-model="newTax.isDefault">
+              <input no-select type="checkbox" ng-model="newTax.isDefault">
               <span class="control-indicator">
               </span>Set as Default
             </label>

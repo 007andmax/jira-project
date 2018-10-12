@@ -3,12 +3,18 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.editServiceCtrl',
-    ['$scope', '$rootScope', 'ServicesService', 'TaxesService',
-      function ($scope, $rootScope, ServicesService, TaxesService) {
+    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout',
+      function ($scope, $rootScope, ServicesService, TaxesService, $timeout) {
 
         var savedState = $scope.getLastSavedState('service');
 
         $scope.taxes = TaxesService.getAll();
+
+        $scope.showModal = false;
+
+        $timeout(function() {
+          $scope.showModal = true;
+        }, 50)
 
         var origin = savedState.item;
         if (savedState.type === 'service' && origin) {

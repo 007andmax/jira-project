@@ -20,6 +20,8 @@
               $scope.productExpense.discountType = "PERCENT";
             }
             $scope.productExpense.item = angular.copy(product);
+            $scope.productExpense.item.quantity = 1;
+            $scope.productExpense.quantity = 1;
           };
 
           $scope.removeProduct = function () {

@@ -50,7 +50,7 @@
 </div> -->
 
 <div class="service-form-wrapper edit-form-checkbox create-new" ng-form="editServiceForm"
-     ng-controller="quicktech.editServiceCtrl">
+     ng-controller="quicktech.editServiceCtrl" ng-show="showModal">
   <div class="service--header">
     <h2>Create Service</h2>
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
@@ -114,7 +114,7 @@
                 Name is too long.
               </label>
             </div>
-            <input placeholder="Enter Tax Name" type="text" class="form-control" name="name" ng-model="newTax.name"
+            <input  no-select placeholder="Enter Tax Name" type="text" class="form-control" name="name" ng-model="newTax.name"
                    is-uniq-validation validation-func="isUniqueName" ng-minlength="2" ng-maxlength="30">
 
 
@@ -132,10 +132,10 @@
                 To large.
               </label>
             </div>
-            <input placeholder="Rate (%)" type="number" class="form-control" ng-model="newTax.rate" name="rate"
+            <input  no-select placeholder="Rate (%)" type="number" class="form-control" ng-model="newTax.rate" name="rate"
                    required min="0.01" max="99">
             <label ng-click="stopPropagation($event)" class="control checkbox" style="margin-bottom: 20px;">
-              <input type="checkbox" ng-model="newTax.isDefault">
+              <input no-select  type="checkbox" ng-model="newTax.isDefault">
               <span class="control-indicator">
               </span>Set as Default
             </label>
