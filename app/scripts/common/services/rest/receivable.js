@@ -84,14 +84,14 @@
             var invoice = Utils.findById(data.list, newChange.data.id);
 
             if (invoice) {
-              Utils.customizeObj(newChange.data, invoice);
+              // Utils.customizeObj(newChange.data, invoice);
             } else {
-              data.list.push(newChange.data);
+              // data.list.push(newChange.data);
 
               if (data.companies[newChange.data.company.id]) {
-                data.companies[newChange.data.company.id].push(newChange.data);
+                // data.companies[newChange.data.company.id].push(newChange.data);
               } else {
-                data.companies[newChange.data.company.id] = [newChange.data];
+                // data.companies[newChange.data.company.id] = [newChange.data];
               }
             }
 

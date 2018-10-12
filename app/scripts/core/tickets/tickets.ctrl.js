@@ -175,7 +175,7 @@
           if(serviceExpense.item && serviceExpense.item.name && serviceExpense.item.name !== " ") {
             if(serviceExpense.item.blockTimeServiceAgreement == null &&
               serviceExpense.item.serviceContractServiceAgreement == null &&
-              serviceExpense.item.serviceAgreement.id) {
+              serviceExpense.item.serviceAgreement && serviceExpense.item.serviceAgreement.id) {
               return true
             } else {
               return false;

@@ -690,6 +690,15 @@
   page-break-inside: avoid;
 }
 
+.pre-line {
+  white-space: pre-line;
+}
+
+.pre-line + .tooltip .tooltip-inner {
+  white-space: pre-line !important;
+  /* background: red !important; */
+}
+
 .invoice-page .inv-ticket-header .head {
   font-size: 13px;
   font-weight: normal;

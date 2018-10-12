@@ -21,12 +21,14 @@
 
         $scope.currentUser = UsersService.getCurrentUser();
 
-        $scope.usersView = $scope.currentUser.usersGridPresentation ?
-                             $scope.currentUser.usersGridPresentation === 'LIST' ?
-                               'list' :
-                               'grid'
-                             :
-                             'grid';
+        // $scope.usersView = $scope.currentUser.usersGridPresentation ?
+        //                      $scope.currentUser.usersGridPresentation === 'LIST' ?
+        //                        'list' :
+        //                        'grid'
+        //                      :
+        //                      'grid';
+
+        $scope.usersView = 'list';
         $scope.orderUsers = {
           field: 'name',
           reverse: false

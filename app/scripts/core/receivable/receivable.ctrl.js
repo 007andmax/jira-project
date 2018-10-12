@@ -88,100 +88,149 @@
         //   }
         // });
 
-        if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
-          $scope.$watch(function() {
-            return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
-          }, function (resp) {
+        // if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
+        //   $scope.$watch(function() {
+        //     return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
+        //   }, function (resp) {
+        //
+        //     if (resp) {
+        //       resp = $rootScope.uploadedReceivable;
+        //     } else {
+        //       return;
+        //     }
+        //     var invoicesData = $scope.receivableInvoicesData = resp;
+        //     globalSearch.count = $scope.receivableInvoicesData.list.length;
+        //
+        //     $scope.totalReceivables = 0;
+        //     $scope.receivableCompanies = [];
+        //     $scope.invoiceToSent = {};
+        //
+        //     for (var id in invoicesData.companies) {
+        //       var invoices = invoicesData.companies[id];
+        //       $scope.totalSum.companies[id] = 0;
+        //
+        //       for (var i = 0; i < invoices.length; i++) {
+        //         var invoice = invoices[i];
+        //
+        //         $scope.totalSum.invoices[invoice.id] = invoice.sum;
+        //         $scope.totalSum.companies[id] += invoice.sum;
+        //       }
+        //
+        //       $scope.totalReceivables += $scope.totalSum.companies[id];
+        //       $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+        //     }
+        //
+        //     if ($scope.mode === 'group-by-company') {
+        //
+        //       for (var companyId in invoicesData.companies) {
+        //         $scope.invoiceToSent[companyId] = {
+        //           checked: false,
+        //           invoices: {}
+        //         };
+        //       }
+        //     } else {
+        //       $scope.invoiceToSent.invoices = {};
+        //     }
+        //
+        //     if (!resp.list.length) {
+        //       $scope.loadingInProgress = false;
+        //     }
+        //
+        //   })
+        // } else {
+        //
+        //   setTimeout(function() {
+        //     var resp = $rootScope.uploadedReceivable;
+        //
+        //     var invoicesData = $scope.receivableInvoicesData = resp;
+        //     globalSearch.count = $scope.receivableInvoicesData.list.length;
+        //
+        //     $scope.totalReceivables = 0;
+        //     $scope.receivableCompanies = [];
+        //     $scope.invoiceToSent = {};
+        //
+        //     for (var id in invoicesData.companies) {
+        //       var invoices = invoicesData.companies[id];
+        //       $scope.totalSum.companies[id] = 0;
+        //
+        //       for (var i = 0; i < invoices.length; i++) {
+        //         var invoice = invoices[i];
+        //
+        //         $scope.totalSum.invoices[invoice.id] = invoice.sum;
+        //         $scope.totalSum.companies[id] += invoice.sum;
+        //       }
+        //
+        //       $scope.totalReceivables += $scope.totalSum.companies[id];
+        //       $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+        //     }
+        //
+        //     if ($scope.mode === 'group-by-company') {
+        //
+        //       for (var companyId in invoicesData.companies) {
+        //         $scope.invoiceToSent[companyId] = {
+        //           checked: false,
+        //           invoices: {}
+        //         };
+        //       }
+        //     } else {
+        //       $scope.invoiceToSent.invoices = {};
+        //     }
+        //
+        //     if (!resp.list.length) {
+        //       $scope.loadingInProgress = false;
+        //     }
+        //   }, 0)
+        //
+        // }
 
-            if (resp) {
-              resp = $rootScope.uploadedReceivable;
-            } else {
-              return;
+        $scope.$watch(function() {
+          return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
+        }, function (resp) {
+
+          if (resp) {
+            resp = $rootScope.uploadedReceivable;
+          } else {
+            return;
+          }
+          var invoicesData = $scope.receivableInvoicesData = resp;
+          globalSearch.count = $scope.receivableInvoicesData.list.length;
+
+          $scope.totalReceivables = 0;
+          $scope.receivableCompanies = [];
+          $scope.invoiceToSent = {};
+
+          for (var id in invoicesData.companies) {
+            var invoices = invoicesData.companies[id];
+            $scope.totalSum.companies[id] = 0;
+
+            for (var i = 0; i < invoices.length; i++) {
+              var invoice = invoices[i];
+
+              $scope.totalSum.invoices[invoice.id] = invoice.sum;
+              $scope.totalSum.companies[id] += invoice.sum;
             }
-            var invoicesData = $scope.receivableInvoicesData = resp;
-            globalSearch.count = $scope.receivableInvoicesData.list.length;
 
-            $scope.totalReceivables = 0;
-            $scope.receivableCompanies = [];
-            $scope.invoiceToSent = {};
+            $scope.totalReceivables += $scope.totalSum.companies[id];
+            $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+          }
 
-            for (var id in invoicesData.companies) {
-              var invoices = invoicesData.companies[id];
-              $scope.totalSum.companies[id] = 0;
+          if ($scope.mode === 'group-by-company') {
 
-              for (var i = 0; i < invoices.length; i++) {
-                var invoice = invoices[i];
-
-                $scope.totalSum.invoices[invoice.id] = invoice.sum;
-                $scope.totalSum.companies[id] += invoice.sum;
-              }
-
-              $scope.totalReceivables += $scope.totalSum.companies[id];
-              $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+            for (var companyId in invoicesData.companies) {
+              $scope.invoiceToSent[companyId] = {
+                checked: false,
+                invoices: {}
+              };
             }
+          } else {
+            $scope.invoiceToSent.invoices = {};
+          }
 
-            if ($scope.mode === 'group-by-company') {
+          if (!resp.list.length) {
+            $scope.loadingInProgress = false;
+          }
 
-              for (var companyId in invoicesData.companies) {
-                $scope.invoiceToSent[companyId] = {
-                  checked: false,
-                  invoices: {}
-                };
-              }
-            } else {
-              $scope.invoiceToSent.invoices = {};
-            }
-
-            if (!resp.list.length) {
-              $scope.loadingInProgress = false;
-            }
-
-          })
-        } else {
-
-          setTimeout(function() {
-            var resp = $rootScope.uploadedReceivable;
-
-            var invoicesData = $scope.receivableInvoicesData = resp;
-            globalSearch.count = $scope.receivableInvoicesData.list.length;
-
-            $scope.totalReceivables = 0;
-            $scope.receivableCompanies = [];
-            $scope.invoiceToSent = {};
-
-            for (var id in invoicesData.companies) {
-              var invoices = invoicesData.companies[id];
-              $scope.totalSum.companies[id] = 0;
-
-              for (var i = 0; i < invoices.length; i++) {
-                var invoice = invoices[i];
-
-                $scope.totalSum.invoices[invoice.id] = invoice.sum;
-                $scope.totalSum.companies[id] += invoice.sum;
-              }
-
-              $scope.totalReceivables += $scope.totalSum.companies[id];
-              $scope.receivableCompanies.push(CompaniesService.getOneById(id));
-            }
-
-            if ($scope.mode === 'group-by-company') {
-
-              for (var companyId in invoicesData.companies) {
-                $scope.invoiceToSent[companyId] = {
-                  checked: false,
-                  invoices: {}
-                };
-              }
-            } else {
-              $scope.invoiceToSent.invoices = {};
-            }
-
-            if (!resp.list.length) {
-              $scope.loadingInProgress = false;
-            }
-          }, 0)
-
-        }
+        })
 
 
 

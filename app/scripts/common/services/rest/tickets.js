@@ -839,8 +839,11 @@
         if (!ticketUpdate.type) {
           throw 'ticketUpdate.type is required!';
         }
-        if ((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) {
-          ticketUpdate = {"type":"NOTE","shares":[],"ticket":ticketUpdate.ticket,"note": "Ticket has been closed","attachments":[]}
+        if (((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) || (ticketUpdate.services && ticketUpdate.services.length === 1 && !ticketUpdate.services[0].item)) {
+          if (close) {
+            ticketUpdate = {"type":"NOTE","shares":[],"ticket":ticketUpdate.ticket,"note": "Ticket has been closed","attachments":[]}
+
+          }
         }
 
         var future = $http.post('/v2/tickets/updates?close=' + !!close, ticketUpdate);

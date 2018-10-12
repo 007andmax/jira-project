@@ -4,8 +4,8 @@
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-      'TaxesService',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService) {
+      'TaxesService', '$timeout',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout) {
 
       $scope.discountAmountMsxLength;
       $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,100}$/;
@@ -15,6 +15,12 @@
           $scope.closeWindow();
         }
       });
+
+      $scope.showModal = true;
+
+      $timeout(function() {
+        $scope.showModal = false;
+      }, 50)
 
       $scope.stopPropagation = function(e) {
         e.stopPropagation()
@@ -284,7 +290,7 @@
       function createNewWindowClosing() {
         var product = $scope.editProduct;
         var isProductChanged;
-
+        // console.log(origin, product, savedState.type, 'PRODUCT')
         if (savedState.type === 'product') {
           if (origin) {
             isProductChanged = product.description !== origin.description
@@ -302,7 +308,7 @@
           if (origin) {
             isProductChanged = $scope.editCategory.name !== origin.name;
           } else {
-            isProductChanged = $scope.editCategory.name;
+            isProductChanged = $scope.editProduct.description || product.cost || product.sale || product.ilc || product.manufacture || product.category || product.company;
           }
         }
 

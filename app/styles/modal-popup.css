@@ -29,6 +29,12 @@
   text-transform: uppercase;
 }
 
+.placeholder.active {
+  font-size: 10px;
+  top: -10px;
+  text-transform: uppercase;
+}
+
 .add-taxes {
   position: absolute;
   top: 0;
