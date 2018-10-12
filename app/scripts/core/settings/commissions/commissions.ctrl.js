@@ -25,13 +25,21 @@
         ServicesService.getServicesData($scope, function(res) {
           $scope.services = res;
 
-          console.log($scope.services, 'SERVICES')
+        })
+
+        ServicesService.getSpecialServices(function(res) {
+          $scope.specialServices = [];
+
+          res.data.forEach(function(el) {
+            el.services.forEach(function(service) {
+              $scope.specialServices.push(service)
+            })
+          })
         })
 
         CompaniesService.getAgreementsRates(function(res) {
           $scope.agreementsCommissions = res.data || {};
 
-          console.log($scope.agreementsCommissions, "AGREEMNGS")
         })
 
 //         CompaniesService.setAgreementsRate({"blockTimeContractCommission":123,

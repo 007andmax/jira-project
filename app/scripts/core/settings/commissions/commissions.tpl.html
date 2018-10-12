@@ -34,7 +34,7 @@
     </div>
 
     <div ng-if="view === 'service'">
-      <div ng-repeat="service in services" class="commission-input">
+      <div ng-repeat="service in services" class="commission-input clearfix">
         <div class="col-md-5">
           {{ service.name }}
         </div>
@@ -43,6 +43,22 @@
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation"
                  ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate)" qt-to-fixed="2"
+                  hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+        </div>
+
+      </div>
+
+      <h3>Special services</h3>
+
+      <div ng-repeat="service in specialServices" class="commission-input clearfix">
+        <div class="col-md-5">
+          {{ service.name }}
+        </div>
+
+        <div class="col-md-7">
+          <!-- <input type="number" /> -->
+          <input type="number" class="form-validation"
+                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
         </div>
 
