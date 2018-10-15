@@ -1378,7 +1378,8 @@
                     name: serviceContract.services[i].nameValue || serviceContract.services[i].name,
                     rate: 0,
                     billable: serviceContract.services[i].billable,
-                    taxIds: []
+                    taxIds: [],
+                    basedOnDefault: true
                   };
                   if(serviceContract.services[i].billable) {
                     serv.rate = serviceContract.services[i].rate;

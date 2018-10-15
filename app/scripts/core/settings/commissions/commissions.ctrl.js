@@ -32,7 +32,9 @@
 
           res.data.forEach(function(el) {
             el.services.forEach(function(service) {
-              $scope.specialServices.push(service)
+              if (!service.basedOnDefault) {
+                $scope.specialServices.push(service)
+              }
             })
           })
         })

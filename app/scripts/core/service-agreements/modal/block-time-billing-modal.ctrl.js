@@ -535,7 +535,8 @@
                 rate: serv.name.rate,
                 billable: true,
                 taxes: serv.name.taxes,
-                nameValue: serv.nameValue
+                nameValue: serv.nameValue,
+                basedOnDefault: true
               };
 
               // console.log(serv, 'NEWSERV');
@@ -949,7 +950,8 @@
                 name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
-                rate: 0
+                rate: 0,
+                basedOnDefault: true
               };
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
