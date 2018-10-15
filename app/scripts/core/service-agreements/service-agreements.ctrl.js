@@ -109,9 +109,13 @@
           var companyForReadOnlyMode = {};
           if (agreementId) {
             AgreementsService.getAgreement(agreementId, function (resp) {
-              //console.log(resp);
-              companyForReadOnlyMode = resp;
-              openModal(contractType, editMode, companyForReadOnlyMode)
+              // console.log(resp, 'rsp');
+
+              if (resp.code !== 500) {
+                companyForReadOnlyMode = resp;
+                openModal(contractType, editMode, companyForReadOnlyMode)
+              }
+
             })
           } else {
             openModal(contractType, editMode, companyForReadOnlyMode)
