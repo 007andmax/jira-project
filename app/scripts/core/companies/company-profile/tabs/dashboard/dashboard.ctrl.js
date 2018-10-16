@@ -82,6 +82,12 @@
 
         $scope.techUsers = UsersService.getTechUsers;
 
+        $scope.activeTechUsers = function() {
+          return UsersService.getTechUsers().filter(function(el) {
+            return el.userEnabled && !el.deletedAt;
+          })
+        }
+
         $scope.descriptionMaxLength = 300;
 
         $scope.showPhoneEditButton = false;
@@ -331,6 +337,11 @@
           if (!editCompany.agentLinkToEmailEnabled) {
             editCompany.agentLinkToEmail = null;
           }
+
+          // if (!editCompany.techLeadId) {
+          //   editCompany.techLeadId = null;
+          // }
+
           CompaniesService.save(editCompany, function (resp) {
             if (resp) {
               $scope.reservedCompanyInfo = angular.copy(editCompany);

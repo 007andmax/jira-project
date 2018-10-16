@@ -5589,6 +5589,10 @@ Devices tab
   top: 2px;
 }
 
+.service-bill .service-name-agreement .x-mark {
+  top: 2px;
+}
+
 .block-time .service-name-agreement .report-caret-icon,
 .contracts .service-name-agreement .report-caret-icon {
   margin: 0 3px 2px 0;

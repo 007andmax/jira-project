@@ -35,6 +35,9 @@
         };
 
 
+        $scope.editService = {taxes: []};
+
+
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;
 
@@ -228,7 +231,7 @@
         $scope.editContract.services = [];
 
         ServicesService.getServicesData($scope, function (data) {
-          console.log(data, 'SERVICES');
+          // console.log(data, 'SERVICES');
           var listOfServices = [];
           for (var i = 0; i < data.length; i++) {
             var serv = {
@@ -257,14 +260,21 @@
         setMiNDateForEndDate($scope.today);
         setDefaultTime($scope.today);
 
-        $timeout(function () {
-          $scope.editService = {
-            name: '',
-            rate: null,
-            billable: true,
-            taxes: addDefaultTaxes()
-          };
-        }, 1000);
+        // $timeout(function () {
+        //   $scope.editService = {
+        //     name: '',
+        //     rate: null,
+        //     billable: true,
+        //     taxes: addDefaultTaxes()
+        //   };
+        // }, 1000);
+
+        $scope.editService = {
+          name: '',
+          rate: null,
+          billable: true,
+          taxes: addDefaultTaxes()
+        };
 
       } else {
         //console.log(companyData);
@@ -293,6 +303,12 @@
       if (companyData.editMode === false) {
         $scope.editMode = false;
       }
+
+      $scope.$watch('editService', function(val) {
+        if (!val) {
+          $scope.editService = {taxes: []};
+        }
+      })
 
 
       $scope.showClearIcon = function () {
@@ -470,7 +486,7 @@
                   taxes: editService.taxes || $scope.addDefaultTaxes(),
                   taxIds: []
                 };
-                if (editService.taxes.length) {
+                if (editService.taxes && editService.taxes.length) {
                   for (var i = 0; i < editService.taxes.length; i++) {
                     newService.taxIds.push(editService.taxes[i].id)
                   }
@@ -535,7 +551,6 @@
 
         var companyId = returnCompanyId();
         AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
-          console.log('validateCrossingDatesHourly ', resp.valid);
           if (resp.valid == true) {
             deferred.resolve(resp)
           } else {
@@ -730,8 +745,11 @@
       }
 
       $scope.validateAndCreateHourlyContract = function (editService) {
+
+
         if(!checkForInvalidFields()) {
           var emptyNewService = true;
+
           if (editService && editService.name && editService.name.length) {
             activateNotAddedServiceErrorHourly();
             emptyNewService = false;
@@ -806,6 +824,7 @@
 
       function checkForInvalidFields() {
 
+
         if (!$scope.editContract.startDate ||
           !$scope.editContract.endDate ||
           !$scope.editContract.description ||
@@ -820,24 +839,26 @@
       }
 
 
+
+
       $scope.terminateContract = function () {
         AgreementsService.terminate($scope.editContract.id, function (resp) {
-          console.log(resp);
           $scope.closeModal()
         })
       };
 
       $scope.terminateAndCopy = function () {
         AgreementsService.terminate($scope.editContract.id, function (resp) {
-          console.log(resp, 'terminate and copy');
           $scope.editContract.description = $scope.editContract.description + ' COPY';
           $scope.modlToShow = $scope.editContract.type;
           $scope.editMode = true;
+
+          $scope.editService = {taxes: []};
           var d = new Date($scope.editContract.startDate);
-          if (d.getTime() < $scope.today) {
-            $scope.editContract.startDate = '';
-            $scope.editContract.endDate = '';
-          }
+          // if (d.getTime() < $scope.today) {
+          //   $scope.editContract.startDate = '';
+          //   $scope.editContract.endDate = '';
+          // }
         })
       };
 

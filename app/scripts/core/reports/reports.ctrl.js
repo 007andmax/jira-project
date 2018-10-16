@@ -285,6 +285,7 @@
           $scope.isReportAvailable = !!res.lines && res.lines.length;
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
+          $scope.showCategoriesData = true
 
           var salesByCustomers = [];
           var totalSum = res.totalSum;
@@ -297,18 +298,35 @@
           });
 
 
+          var newCategories = categories;
 
-          $scope.byCategoriesChartData = Object.keys(categories || {})
+          if (!newCategories || !Object.keys(newCategories).length) {
+            newCategories = { 'No data available': '0' };
+
+            $scope.showCategoriesData = false;
+          }
+
+
+
+          $scope.byCategoriesChartData = Object.keys(newCategories)
             .map(function(key) {
               return {
                 name: key,
-                time: categories[key]
+                time: newCategories[key]
               }
             })
             .sort(function(a, b) {
               return +b.time - +a.time;
             })
             .slice(0, 4);
+          console.log($scope.byCategoriesChartData, "$scope", newCategories)
+
+          // if (!$scope.byCategoriesChartData || !$scope.byCategoriesChartData.length) {
+          //   $scope.byCategoriesChartData = [{
+          //     name: 'No data available',
+          //     time: 0
+          //   }]
+          // }
 
           $scope.byCustomerChartData = $scope.commissionsReport.lines
             .sort(function(a, b) {
@@ -323,7 +341,7 @@
             })
 
 
-          console.log($scope.commissionsReport, "REPOT");
+          console.log($scope.byCustomerChartData, "REPOT");
 
         })
 

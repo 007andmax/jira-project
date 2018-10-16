@@ -424,7 +424,7 @@
             <!--<div class="company-info-subtitle">Lead by</div>-->
             <div class="company-info-subtitle" ng-mouseover="showLedByEditButton = true"
                  ng-mouseleave="showLedByEditButton = false">
-              <div class="w-92">Lead By</div>
+              <div class="w-92">Sales person</div>
               <button class="company-edit-icn company-edit-icn-sm" ng-show="showLedByEditButton && !showLedByEditField"
                       ng-click="openEditForm('showLedByEditField')" uib-tooltip="Edit"
                       tooltip-popup-delay="2000"></button>
@@ -443,7 +443,7 @@
                        name="leadBy"
                        typeahead-input-formatter="getUserByID($model)"
                        autocomplete="off" ng-model="companyInfo.techLeadId"
-                       uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                       uib-typeahead="client.id as getFullName(client) for client in activeTechUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
                        qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                        custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
                 <div typeahead-input-icon="companyInfo.techLeadId"></div>

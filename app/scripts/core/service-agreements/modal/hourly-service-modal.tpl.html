@@ -138,9 +138,9 @@
                    hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
           </div>
           <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': editService.billable ? 'visible' : 'hidden'}">
-            <div class="" ng-hide="editContract.services.length > 19">
+            <div class="">
               <div>
-                <select-taxes taxes="taxes" entity="editService"></select-taxes>
+                <select-taxes taxes="taxes" entity="editService" wrong="true"></select-taxes>
                 <!--<p>{{editService.taxes.length}}</p>-->
               </div>
             </div>
