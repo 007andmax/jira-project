@@ -11,7 +11,8 @@
       onClose: '=?',
       isIcon: '@?',
       isPreviewMode: '@?',
-      activePlaceholder: '<activePlaceholder'
+      activePlaceholder: '<activePlaceholder',
+      wrong: '<wrong'
     },
     controller: selectTaxesCtrl
   });
@@ -28,12 +29,14 @@
     this.previewMode = $ctrl.isPreviewMode ? true : false;
 
     $ctrl.searchTax = '';
-
     if ($ctrl.entity.taxes && $ctrl.entity.taxes.length) {
       $ctrl.selectedTaxes = createSelectedTaxes($ctrl.entity.taxes);
     } else {
       $ctrl.selectedTaxes = {};
+
       $ctrl.entity.taxes = $ctrl.entity.taxes || [];
+
+
     }
 
     $scope.$watch(function () {

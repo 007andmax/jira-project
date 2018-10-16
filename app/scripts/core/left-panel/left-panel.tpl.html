@@ -1417,9 +1417,17 @@
           Ticket and Invoice
         </div>
 
+
+
         <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
              ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
+
           Permission Management
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.commissions')"
+             ng-class="{active: $state.is('settings.commissions')}" ng-if="currentUser.isOwner">
+          Commissions
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
