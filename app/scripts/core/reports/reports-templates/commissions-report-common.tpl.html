@@ -57,9 +57,10 @@
 
               <nvd3 options="chartOptions" data="byCategoriesChartData"></nvd3>
             </div>
-            <div class="commissions__header--item" >
+            <div class="commissions__header--item">
               <p ng-repeat="time in byCategoriesChartData"
-                 ng-class="'service-color-' + $index">
+                 ng-class="'service-color-' + $index"
+                 ng-show="showCategoriesData">
                 {{ time.name }} <span>${{ time.time }}</span>
               </p>
 
