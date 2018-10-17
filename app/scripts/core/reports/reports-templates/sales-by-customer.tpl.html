@@ -14,7 +14,7 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket">
-    <div class="product-list-ticket customer-report" ng-show="!loadingInProgress"
+    <div class="product-list-ticket customer-report" ng-class="{ 'detailed': reportByCustomers.type === 'DETAILED' }" ng-show="!loadingInProgress"
          ng-style="{'width': reportByCustomers.type === 'SUMMARY' ? '940' : '1180'}">
       <div class="report-header">
         <h1>Customer Sales Report</h1>
