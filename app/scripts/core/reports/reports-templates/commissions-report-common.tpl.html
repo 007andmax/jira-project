@@ -61,7 +61,7 @@
               <p ng-repeat="time in byCategoriesChartData"
                  ng-class="'service-color-' + $index"
                  ng-show="showCategoriesData">
-                {{ time.name }} <span>${{ time.time }}</span>
+                {{ time.name }} <span>${{ time.time | toFixed : 2 }}</span>
               </p>
 
             </div>
@@ -83,13 +83,13 @@
           </div>
           <div class="details-content row" ng-repeat="line in commissionsReport.lines" on-finish-render="build()">
             <div class="col-md-4">{{line.companyName}}</div>
-            <div class="col-md-2"><span ng-if="showProducts">{{ line.productsSum }}</span></div>
-            <div class="col-md-2 device-field-pdf">{{ line.servicesSum }}</div>
-            <div class="col-md-2">{{ line.totalSum }}
+            <div class="col-md-2"><span ng-if="showProducts">{{ line.productsSum | toFixed : 2 }}</span></div>
+            <div class="col-md-2 device-field-pdf">{{ line.servicesSum | toFixed : 2 }}</div>
+            <div class="col-md-2">{{ line.totalSum  }}
             </div>
 
             <div class="col-md-2">
-              {{ line.commissionSum || 0 }}
+              {{ (line.commissionSum || 0) | toFixed : 2 }}
             </div>
 
 
@@ -97,11 +97,11 @@
 
           <div class="details-content row">
             <div class="col-md-4">Total</div>
-            <div class="col-md-2"><span ng-if="showProducts">{{ commissionsReport.productsSum }}</span></div>
+            <div class="col-md-2"><span ng-if="showProducts">{{ commissionsReport.productsSum | toFixed : 2 }}</span></div>
 
-            <div class="col-md-2">{{ commissionsReport.servicesSum }}</div>
-            <div class="col-md-2">{{ commissionsReport.totalSum }}</div>
-            <div class="col-md-2">{{ commissionsReport.totalCommissionSum }}</div>
+            <div class="col-md-2">{{ commissionsReport.servicesSum | toFixed : 2 }}</div>
+            <div class="col-md-2">{{ commissionsReport.totalSum | toFixed : 2 }}</div>
+            <div class="col-md-2">{{ commissionsReport.totalCommissionSum | toFixed : 2 }}</div>
 
           </div>
 
