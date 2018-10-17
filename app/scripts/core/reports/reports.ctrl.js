@@ -66,6 +66,19 @@
       }
 
 
+      $scope.chartNoDataAvailable = {
+        chart:  Object.assign({}, $scope.chartOptions.chart)
+      }
+
+      $scope.chartNoDataAvailable.chart.tooltip = {
+        contentGenerator: function() {
+          return '<table><tr><td>No data available</td></tr></table>'
+        },
+      }
+
+      $scope.chartOptionsToggler = $scope.chartOptions;
+
+
       var techReportTypeForChart;
       var renderFinished = {
         lines: false,
@@ -304,10 +317,11 @@
             newCategories = { 'No data available': '1'  };
 
             $scope.showCategoriesData = false;
-            document.documentElement.classList.add('no-d3-tooltip');
+            $scope.chartOptionsToggler = $scope.chartNoDataAvailable;
+          } else {
+            $scope.chartOptionsToggler = $scope.chartOptions;
+
           }
-
-
 
           $scope.byCategoriesChartData = Object.keys(newCategories)
             .map(function(key, i) {
@@ -321,7 +335,10 @@
               return +b.time - +a.time;
             })
             .slice(0, 4);
-          console.log($scope.byCategoriesChartData, "$scope", newCategories)
+
+
+
+
 
           // if (!$scope.byCategoriesChartData || !$scope.byCategoriesChartData.length) {
           //   $scope.byCategoriesChartData = [{
