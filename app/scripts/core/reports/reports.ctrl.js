@@ -301,7 +301,7 @@
           var newCategories = categories;
 
           if (!newCategories || !Object.keys(newCategories).length) {
-            newCategories = { 'No data available': '0' };
+            newCategories = { 'No data available': '1'  };
 
             $scope.showCategoriesData = false;
           }
@@ -309,10 +309,11 @@
 
 
           $scope.byCategoriesChartData = Object.keys(newCategories)
-            .map(function(key) {
+            .map(function(key, i) {
               return {
                 name: key,
-                time: newCategories[key]
+                time: newCategories[key],
+                color: $scope.chartColors[i],
               }
             })
             .sort(function(a, b) {
@@ -333,10 +334,11 @@
               return +b.totalSum - a.totalSum;
             })
             .slice(0, 4)
-            .map(function(el) {
+            .map(function(el, i) {
               return {
                 name: el.companyName,
-                time: el.totalSum
+                time: el.totalSum,
+                color: $scope.chartColors[i],
               }
             })
 
