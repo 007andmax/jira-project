@@ -17,6 +17,12 @@
         $scope.showWorkingDaysSchedule = false;
         $scope.selectedContractType;
 
+        $scope.activeTechUsers = function() {
+          return UsersService.getTechUsers().filter(function(el) {
+            return el.userEnabled && !el.deletedAt;
+          })
+        }
+
 
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeekMap = {
