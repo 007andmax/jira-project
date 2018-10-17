@@ -304,6 +304,7 @@
             newCategories = { 'No data available': '1'  };
 
             $scope.showCategoriesData = false;
+            document.documentElement.classList.add('no-d3-tooltip');
           }
 
 
