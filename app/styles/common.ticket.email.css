@@ -1,6 +1,6 @@
 .ticket-detail {
 	margin: 0 30px 25px;
-  padding-top: 100px;
+  padding-top: 125px;
 }
 .ticket-message ul{
 	padding-left: 16px;
@@ -14,6 +14,12 @@
 .ticket-message a {
     color: #3c7dcd;
     text-decoration: underline;
+}
+
+@media only screen and (max-width: 1400px) {
+	.ticket-detail {
+		padding-top: 150px;
+	}
 }
 
 @-moz-document url-prefix(){
