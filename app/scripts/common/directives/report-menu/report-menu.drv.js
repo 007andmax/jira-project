@@ -78,6 +78,8 @@
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
 
+    $scope.detailsByProducts = true;
+
     $scope.customerTicketWithProducts= true;
 
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
@@ -176,6 +178,10 @@
       }
     });
 
+    $scope.$watch('detailsByProducts', function(val) {
+      $rootScope.detailsByProducts = val;
+    })
+
     $scope.$watch('customerTicketWithProducts', function(val) {
       $rootScope.customerTicketWithProducts = val;
     })
@@ -189,9 +195,7 @@
     })
 
     $scope.$watch('reportSetting.dateRange', function() {
-      console.log("HERERE ERE")
       if ($scope.reportSetting.dateRange) {
-        console.log('im iisnide')
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
 
         if ($scope.firstIteration) {
@@ -405,27 +409,29 @@
               $scope.errorNassageForCompany = false;
             }
           } else if (location === '/reports/byCommissionsDetailed') {
-            if (reportSettings.company) {
+            if (reportSettings.salesUser) {
               var dataToSend = {
-                company: reportSettings.company,
-                companyId: reportSettings.company.id,
-                extendedReport: ($scope.customerTicketType === 'Extended report'),
-                withResponseTime: $scope.customerTicketWithResponseTime,
-                withTimeSpent: true,
-                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
+                companyId: (reportSettings.company && reportSettings.company.id) || null,
+                userId: (reportSettings.salesUser && reportSettings.salesUser.id) || null,
+                type: "DETAILED",
                 startDate: $filter('date')(new Date($scope.startDate || $scope.currentCompany.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
 
-              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
-                dataToSend.userId = reportSettings.techUser.id
-              }
+              // if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+              //   dataToSend.userId = reportSettings.techUser.id
+              // }
 
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);
-
             } else {
-              $scope.errorNassageForCompany = false;
+              // if (!$scope.startDate || !$scope.endDate) {
+              //   $scope.errorNassageForDate = false;
+              // }
+
+              if (!reportSettings.salesUser) {
+                $scope.errorNassageForSalesUser = false;
+              }
             }
           } else if (location === '/reports/byCommissions') {
             // if (reportSettings.company) {

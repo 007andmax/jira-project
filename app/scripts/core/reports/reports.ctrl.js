@@ -295,7 +295,9 @@
         ReportsService.getReportByCommissions(data, function(res) {
           console.log(res, 'RES GET REPORT')
 
-          $scope.isReportAvailable = !!res.lines && res.lines.length;
+          $scope.isReportAvailable = res.lines && res.lines.length;
+
+          console.log(res, res.lines && res.lines.length, "DASDASDASD")
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
           $scope.showCategoriesData = true
@@ -364,6 +366,92 @@
           console.log($scope.byCustomerChartData, "REPOT");
 
         })
+
+
+
+
+
+      }
+
+
+      function getDetailedReportCommissions(data) {
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+
+        ReportsService.getReportByCommissions(data, function(res) {
+          // console.log(res, 'RES GET REPORT')
+
+          $scope.isReportAvailable = res.lines && res.lines.length;
+
+          // console.log(res, res.lines && res.lines.length, "DASDASDASD")
+          $scope.loadingInProgress = false;
+          $scope.commissionsReport = res;
+          $scope.showCategoriesData = true
+
+          var salesByCustomers = [];
+          var totalSum = res.totalSum;
+          var categories = res.categorySalesValue;
+
+          $scope.commissionsReport.lines = res.lines.map(function(el) {
+            el.totalSum = el.totalSum.toFixed(2);
+
+            return el;
+          });
+
+          $scope.detailsByProducts = $rootScope.detailsByProducts
+
+          // console.log("BY CUSTOMER???", $rootScope.detailsByProducts, $scope.commissionsReport && $scope.isReportAvailable)
+
+          if (!$scope.detailsByProducts) {
+
+            var data = res.lines.map(function(el) {
+              if (el.agreementType === 'HOURLY') {
+                el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription;
+              } else if (el.agreementType === 'BLOCK_TIME') {
+                if (!el.exceededCommissionRateApplied) {
+                  el.firstLine = el.expenseName + ' ' + el.serviceAgreementDescription + ' included hours';
+                } else {
+                  el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription + ' over hours';
+                }
+              } else if (el.agreementType === 'SERVICE_CONTRACT') {
+                if (!el.exceededCommissionRateApplied) {
+                  el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription;
+                } else {
+                  el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription + ' over hours';
+                }
+
+                if (el.expenseFromOtherTypeContract) {
+                  el.firstLine = el.expenseName + ' ' + el.agreementType  + ' by Other';
+                }
+              } else {
+                el.firstLine = el.expenseName;
+              }
+
+              return el;
+            })
+
+            var reducedData = data.reduce(function(acc, el) {
+              var company = el.companyName;
+
+              if (acc[company]) {
+                acc[company].push(el);
+              } else {
+                acc[company] = [el];
+              }
+
+              return acc;
+            }, {});
+
+
+            $scope.reducedData = reducedData;
+            $scope.reducedCompanies = Object.keys(reducedData);
+
+            console.log(reducedData, 'REDUCED DATA')
+          }
+
+
+        })
+
 
 
 
@@ -582,9 +670,9 @@
               $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
               break;
             case('/reports/byCommissionsDetailed'):
-              gerReportTicketReport(data);
-              $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
+              getDetailedReportCommissions(data);
+              // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
+              $rootScope.reportName = 'commissions-report'
               break;
             case('/reports/byCommissions'):
               getReportCommissions(data);
