@@ -37,7 +37,6 @@
         </div>
 
         <div class="customer-ticket__report--details" ng-if="!detailsByProducts">
-          <h3>Ticket Details</h3>
           <div class="details-header row">
             <div class="col-md-4">Client</div>
             <div class="col-md-2">Product Cost</div>
@@ -46,10 +45,10 @@
             <div class="col-md-2">Commission</div>
           </div>
           <div class="details-content row" ng-repeat="company in reducedCompanies" on-finish-render="build()">
-            <h3>{{ company }}</h3>
+            <h3 style="padding: 0">{{ company }}</h3>
 
-            <div class="details-content row" ng-repeat="line in reducedData[company]">
-              <div class="col-md-4">{{ line.firstLine }}</div>
+            <div class="row" ng-repeat="line in reducedData[company]">
+              <div class="col-md-4" style="padding-left: 20px">{{ line.firstLine }}</div>
               <div class="col-md-2">Product Cost</div>
               <div class="col-md-2">{{ line.totalSum }}</div>
               <div class="col-md-2">{{ line.commissionRate }}%</div>
@@ -82,7 +81,13 @@
             <div class="col-md-1">{{ line.commissionSum | toFixed : 2 }}</div>
           </div>
           <div class="details-content row">
-            <div class="col-md-4"
+            <div class="col-md-4"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">Product Cost</div>
+            <div class="col-md-1">{{ commissionsReport.totalSum }}</div>
+            <div class="col-md-1"></div>
+            <div class="col-md-1">{{ (commissionsReport.totalCommissionSum ) | toFixed : 2 }}</div>
           </div>
 
         </div>
