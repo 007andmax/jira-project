@@ -48,11 +48,11 @@
             <h3 style="padding: 0">{{ company }}</h3>
 
             <div class="row" ng-repeat="line in reducedData[company]">
-              <div class="col-md-4" style="padding-left: 20px">{{ line.firstLine }}</div>
-              <div class="col-md-2">Product Cost</div>
-              <div class="col-md-2">{{ line.totalSum }}</div>
-              <div class="col-md-2">{{ line.commissionRate }}%</div>
-              <div class="col-md-2">{{ line.commissionSum | toFixed : 2 }}</div>
+              <div class="col-md-4 detailed-by-customer" style="padding-left: 20px">{{ line.firstLine }}</div>
+              <div class="col-md-2 detailed-by-customer">Product Cost</div>
+              <div class="col-md-2 detailed-by-customer">{{ line.totalSum }}</div>
+              <div class="col-md-2 detailed-by-customer">{{ line.commissionRate }}%</div>
+              <div class="col-md-2 detailed-by-customer">{{ line.commissionSum | toFixed : 2 }}</div>
             </div>
           </div>
 

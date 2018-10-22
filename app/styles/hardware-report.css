@@ -569,6 +569,10 @@
   line-height: 30px;
 }
 
+.product-list-ticket [class*=col-md-].detailed-by-customer {
+  padding: 6px;
+}
+
 .deposit-create .product-list-ticket [class*=col-md-] {
   padding: 0 6px;
 }
