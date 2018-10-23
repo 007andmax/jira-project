@@ -27,7 +27,7 @@
        ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl"
        ng-show="!loadingInProgress">
     <div class="customer-ticket" ng-if="commissionsReport && isReportAvailable">
-      <div class="customer-ticket__report">
+      <div class="customer-ticket__report commission-report">
         <div class="report-header">
           <h1>Commissions Report</h1>
           <div class="company-info">
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="customer-ticket__report--details" ng-if="!detailsByProducts">
+        <div class="customer-ticket__report--details" style="padding: 0!important;" ng-if="!detailsByProducts">
           <div class="details-header row">
             <div class="col-md-4">Client</div>
             <div class="col-md-2">Product Cost</div>
@@ -59,34 +59,33 @@
         </div>
 
 
-
-        <div class="customer-ticket__report--details" ng-if="detailsByProducts">
+        <div class="customer-ticket__report--details" style="padding: 0!important;" ng-if="detailsByProducts">
           <div class="details-header row">
-            <div class="col-md-4">Product</div>
+            <div class="col-md-4" style="width: 21.5%;">Product</div>
             <div class="col-md-2">Product Groups</div>
             <div class="col-md-2">Client</div>
             <div class="col-md-1">Product Cost</div>
-            <div class="col-md-1">Total Sales</div>
-            <div class="col-md-1">Commission Rate</div>
+            <div class="col-md-1" style="width: 9.5%;">Total Sales</div>
+            <div class="col-md-1" style="width: 13.2%;">Commission Rate</div>
             <div class="col-md-1">Commission</div>
           </div>
 
           <div class="details-content row" ng-repeat="line in commissionsReport.lines" on-finish-render="build()">
-            <div class="col-md-4">{{ line.expenseName }}</div>
+            <div class="col-md-4" style="width: 21.5%;">{{ line.expenseName }}</div>
             <div class="col-md-2">{{ line.agreementType || line.productCategory }}</div>
             <div class="col-md-2">{{ line.companyName }}</div>
             <div class="col-md-1">Product Cost</div>
-            <div class="col-md-1">{{ line.totalSum }}</div>
-            <div class="col-md-1">{{ line.commissionRate }}%</div>
+            <div class="col-md-1" style="width: 9.5%;">{{ line.totalSum }}</div>
+            <div class="col-md-1" style="width: 13.2%;">{{ line.commissionRate }}%</div>
             <div class="col-md-1">{{ line.commissionSum | toFixed : 2 }}</div>
           </div>
           <div class="details-content row">
-            <div class="col-md-4"></div>
+            <div class="col-md-4" style="width: 21.5%;"></div>
             <div class="col-md-2"></div>
             <div class="col-md-2"></div>
             <div class="col-md-1">Product Cost</div>
-            <div class="col-md-1">{{ commissionsReport.totalSum }}</div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1" style="width: 9.5%;">{{ commissionsReport.totalSum }}</div>
+            <div class="col-md-1" style="width: 13.2%;"></div>
             <div class="col-md-1">{{ (commissionsReport.totalCommissionSum ) | toFixed : 2 }}</div>
           </div>
 
