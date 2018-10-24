@@ -24,7 +24,7 @@
           <!-- <input  type="number" /> -->
 
           <input type="text" class="form-validation"
-                 ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate)" qt-to-fixed="2"
+                 ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate, category)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
 
         </div>
@@ -42,7 +42,7 @@
         <div class="col-md-7">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation"
-                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate)" qt-to-fixed="2"
+                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate, service)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
         </div>
 
@@ -58,7 +58,7 @@
         <div class="col-md-7">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation"
-                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate)" qt-to-fixed="2"
+                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate, service)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
         </div>
 

@@ -49,7 +49,7 @@
 
             <div class="row" ng-repeat="line in reducedData[company]">
               <div class="col-md-4 detailed-by-customer" style="padding-left: 20px">{{ line.firstLine }}</div>
-              <div class="col-md-2 detailed-by-customer">Product Cost</div>
+              <div class="col-md-2 detailed-by-customer">{{ line.productCost | toFixed : 2 }}</div>
               <div class="col-md-2 detailed-by-customer">{{ line.totalSum }}</div>
               <div class="col-md-2 detailed-by-customer">{{ line.commissionRate }}%</div>
               <div class="col-md-2 detailed-by-customer">{{ line.commissionSum | toFixed : 2 }}</div>
@@ -75,7 +75,7 @@
             <div class="col-md-4">{{ line.expenseName }}</div>
             <div class="col-md-2">{{ line.agreementType || line.productCategory }}</div>
             <div class="col-md-2">{{ line.companyName }}</div>
-            <div class="col-md-1">Product Cost</div>
+            <div class="col-md-1"><span ng-if="line.productCost !== null">{{ line.productCost | toFixed : 2 }}</span></div>
             <div class="col-md-1">{{ line.totalSum }}</div>
             <div class="col-md-1">{{ line.commissionRate }}%</div>
             <div class="col-md-1">{{ line.commissionSum | toFixed : 2 }}</div>
