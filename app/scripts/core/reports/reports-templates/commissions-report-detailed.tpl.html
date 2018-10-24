@@ -36,7 +36,8 @@
           </div>
         </div>
 
-        <div class="customer-ticket__report--details" style="padding: 0!important;" ng-if="!detailsByProducts">
+        <div class="customer-ticket__report--details commission-customer" style="padding: 0!important;"
+             ng-if="!detailsByProducts">
           <div class="details-header row">
             <div class="col-md-4">Client</div>
             <div class="col-md-2">Product Cost</div>
@@ -44,22 +45,29 @@
             <div class="col-md-2">Commission Rate</div>
             <div class="col-md-2">Commission</div>
           </div>
-          <div class="details-content row" ng-repeat="company in reducedCompanies" on-finish-render="build()">
-            <h3 style="padding: 0">{{ company }}</h3>
-
+          <div class="details-content" ng-repeat="company in reducedCompanies" on-finish-render="build()">
+            <h3>{{ company }}</h3>
             <div class="row" ng-repeat="line in reducedData[company]">
-              <div class="col-md-4 detailed-by-customer" style="padding-left: 20px">{{ line.firstLine }}</div>
-              <div class="col-md-2 detailed-by-customer">Product Cost</div>
-              <div class="col-md-2 detailed-by-customer">{{ line.totalSum }}</div>
-              <div class="col-md-2 detailed-by-customer">{{ line.commissionRate }}%</div>
-              <div class="col-md-2 detailed-by-customer">{{ line.commissionSum | toFixed : 2 }}</div>
+              <div class="col-md-4" style="padding-left: 0;">{{ line.firstLine }}</div>
+              <div class="col-md-2">Product Cost</div>
+              <div class="col-md-2">{{ line.totalSum }}</div>
+              <div class="col-md-2">{{ line.commissionRate }}%</div>
+              <div class="col-md-2" style="padding-right: 0;">{{ line.commissionSum | toFixed : 2 }}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4" style="padding-left: 0;"></div>
+              <div class="col-md-2"><b>sum</b></div>
+              <div class="col-md-2"><b>sum</b></div>
+              <div class="col-md-2"><b>sum</b></div>
+              <div class="col-md-2" style="padding-right: 0;"><b>sum</b></div>
             </div>
           </div>
 
         </div>
 
 
-        <div class="customer-ticket__report--details" style="padding: 0!important;" ng-if="detailsByProducts">
+        <div class="customer-ticket__report--details commission-product" style="padding: 0!important;"
+             ng-if="detailsByProducts">
           <div class="details-header row">
             <div class="col-md-4" style="width: 21.5%;">Product</div>
             <div class="col-md-2">Product Groups</div>
