@@ -381,17 +381,19 @@
       return info;
     }
 
-    function setCategoryRate(id, rate, callback) {
+    function setCategoryRate(id, data, callback) {
       $http.put('/settings/companyProfile/categoryRate/' + id, {
-        commissionRate: rate
+        commissionRate: data.rate,
+        setForOldExpenses: data.setForOldExpenses
       }).then(function(res) {
         if (callback) callback(res);
       })
     }
 
-    function setServiceRate(id, rate, callback) {
+    function setServiceRate(id, data, callback) {
       $http.put('/settings/companyProfile/serviceRate/' + id, {
-        commissionRate: rate
+        commissionRate: data.rate,
+        setForOldExpenses: data.setForOldExpenses
       }).then(function(res) {
         if (callback) callback(res);
       })

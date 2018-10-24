@@ -3,11 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.commissionsCtrl',
-    ['$scope', 'UsersService', 'ProductsService', 'ServicesService', 'CompaniesService',
-      function ($scope, UsersService, ProductsService, ServicesService, CompaniesService) {
+    ['$scope', 'UsersService', 'ProductsService', 'ServicesService', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, UsersService, ProductsService, ServicesService, CompaniesService, UserConfirmationsService, UserNotificationService) {
 
-        console.log('commissions controller')
-
+        var confirmMessage = 'Do you want this commission to fact old items?';
+        var confirmButton = 'Yes';
         $scope.view = 'product';
 
         $scope.setView = function(view) {
@@ -25,7 +25,7 @@
         ServicesService.getServicesData($scope, function(res) {
           $scope.services = res;
 
-        })
+        });
 
         ServicesService.getSpecialServices(function(res) {
           $scope.specialServices = [];
@@ -51,22 +51,66 @@
 //   console.log(res, "RES FROM AGReEM")
 // })
 
-        $scope.setCategoryRate = function(id, rate) {
+        $scope.setCategoryRate = function(id, rate, category) {
+
+
 
           if (rate || rate === 0) {
-            CompaniesService.setCategoryRate(id, rate, function(res) {
-              console.log(res, 'Set category rate')
-            })
+
+            var data = {
+              rate: rate,
+              setForOldExpenses: false
+            }
+
+            if (category) {
+
+              UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+                data.setForOldExpenses = true;
+                CompaniesService.setCategoryRate(id, data, function(res) {
+                  console.log(res, 'Set category rate')
+                })
+              }, function() {
+                CompaniesService.setCategoryRate(id, data, function(res) {
+                  console.log(res, 'Set category rate')
+                })
+              });
+            } else {
+              CompaniesService.setCategoryRate(id, data, function(res) {
+                console.log(res, 'Set category rate')
+              })
+            }
+
           }
 
         }
 
-        $scope.setServiceRate = function(id, rate) {
+        $scope.setServiceRate = function(id, rate, service) {
 
           if (rate || rate === 0) {
-            CompaniesService.setServiceRate(id, rate, function(res) {
-              console.log(res, 'Set service rate')
-            })
+            var data = {
+              rate: rate,
+              setForOldExpenses: false
+            }
+
+            if (service) {
+
+
+
+              UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                data.setForOldExpenses = true;
+                CompaniesService.setServiceRate(id, data, function(res) {
+                  console.log(res, 'Set service rate')
+                })
+              }, function() {
+                CompaniesService.setServiceRate(id, data, function(res) {
+                  console.log(res, 'Set service rate')
+                })
+              });
+            } else {
+              CompaniesService.setServiceRate(id, data, function(res) {
+                console.log(res, 'Set service rate')
+              })
+            }
           }
 
         }
