@@ -382,18 +382,16 @@
     }
 
     function setCategoryRate(id, data, callback) {
-      $http.put('/settings/companyProfile/categoryRate/' + id, {
-        commissionRate: data.rate,
-        setForOldExpenses: data.setForOldExpenses
+      $http.put('/settings/companyProfile/categoryRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
+        commissionRate: data.rate
       }).then(function(res) {
         if (callback) callback(res);
       })
     }
 
     function setServiceRate(id, data, callback) {
-      $http.put('/settings/companyProfile/serviceRate/' + id, {
-        commissionRate: data.rate,
-        setForOldExpenses: data.setForOldExpenses
+      $http.put('/settings/companyProfile/serviceRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
+        commissionRate: data.rate
       }).then(function(res) {
         if (callback) callback(res);
       })
