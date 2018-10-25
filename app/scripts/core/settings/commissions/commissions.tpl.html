@@ -24,7 +24,7 @@
           <!-- <input  type="number" /> -->
 
           <input type="text" class="form-validation form-control"
-                 ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate)" qt-to-fixed="2"
+                 ng-model="category.commissionRate" execute-when-outfocused="setCategoryRate(category.id, category.commissionRate, category)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
 
         </div>
@@ -42,7 +42,7 @@
         <div class="col-md-7">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation form-control"
-                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate)" qt-to-fixed="2"
+                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate, service)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
         </div>
 
@@ -58,7 +58,7 @@
         <div class="col-md-7">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation form-control"
-                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate)" qt-to-fixed="2"
+                 ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate, service)" qt-to-fixed="2"
                   hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
         </div>
 
@@ -93,7 +93,7 @@
 
           <div class="col-md-7">
             <input type="text" class="form-validation form-control"
-                   ng-model="agreementsCommissions.blockTimeContractCommission" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                   ng-model="agreementsCommissions.blockTimeContractCommission" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTime')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
           </div>
 
@@ -103,7 +103,7 @@
 
           <div class="col-md-7">
             <input type="text" class="form-validation form-control"
-                   ng-model="agreementsCommissions.blockTimeContractCommissionExceeding" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                   ng-model="agreementsCommissions.blockTimeContractCommissionExceeding" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTimeExceeding')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
           </div>
         </div>
@@ -137,7 +137,7 @@
 
           <div class="col-md-7">
             <input type="text" class="form-validation form-control"
-                   ng-model="agreementsCommissions.userOrDeviceContractCommission" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                   ng-model="agreementsCommissions.userOrDeviceContractCommission" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContract')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
           </div>
 
@@ -147,7 +147,7 @@
 
           <div class="col-md-7">
             <input type="text" class="form-validation form-control"
-                   ng-model="agreementsCommissions.userOrDeviceContractCommissionExceeding" execute-when-outfocused="setAgreementRate()" qt-to-fixed="2"
+                   ng-model="agreementsCommissions.userOrDeviceContractCommissionExceeding" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContractExceeding')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
           </div>
         </div>

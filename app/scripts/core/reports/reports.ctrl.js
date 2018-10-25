@@ -398,6 +398,13 @@
             return el;
           });
 
+
+          res.lines = res.lines.map(function(el) {
+            el.itemGroup = el.productCategory || normalizeString(el.agreementType);
+
+            return el;
+          })
+
           $scope.detailsByProducts = $rootScope.detailsByProducts
 
           // console.log("BY CUSTOMER???", $rootScope.detailsByProducts, $scope.commissionsReport && $scope.isReportAvailable)
@@ -406,22 +413,22 @@
 
             var data = res.lines.map(function(el) {
               if (el.agreementType === 'HOURLY') {
-                el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription;
+                el.firstLine = el.expenseName + ' - ' + 'Hourly' + ' - ' + el.serviceAgreementDescription;
               } else if (el.agreementType === 'BLOCK_TIME') {
                 if (!el.exceededCommissionRateApplied) {
-                  el.firstLine = el.expenseName + ' ' + el.serviceAgreementDescription + ' included hours';
+                  el.firstLine = el.expenseName + ' - ' + el.serviceAgreementDescription + '- included hours';
                 } else {
-                  el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription + ' over hours';
+                  el.firstLine = el.expenseName + ' - ' + 'Block time' + ' - ' + el.serviceAgreementDescription + ' - over hours';
                 }
               } else if (el.agreementType === 'SERVICE_CONTRACT') {
                 if (!el.exceededCommissionRateApplied) {
-                  el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription;
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription;
                 } else {
-                  el.firstLine = el.expenseName + ' ' + el.agreementType + ' ' + el.serviceAgreementDescription + ' over hours';
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription + ' - over hours';
                 }
 
                 if (el.expenseFromOtherTypeContract) {
-                  el.firstLine = el.expenseName + ' ' + el.agreementType  + ' by Other';
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract'  + ' - by Other';
                 }
               } else {
                 el.firstLine = el.expenseName;
@@ -457,6 +464,16 @@
 
 
 
+      }
+
+      function normalizeString(str) {
+        console.log(typeof str, "STR")
+        str = str.split('_');
+        str = str.map(function(el) {
+          return el[0].toUpperCase() + el.slice(1).toLowerCase();
+        })
+
+        return str.join(' ');
       }
 
       function gerReportTicketReport(data) {

@@ -8,6 +8,14 @@
 
         var confirmMessage = 'Do you want this commission to fact old items?';
         var confirmButton = 'Yes';
+        var agreementsFlags = {
+          commissionRateSetOldSalesBlockTime: false,
+          commissionRateSetOldSalesBlockTimeExceeding: false,
+          commissionRateSetOldSalesUserOrDeviceContract: false,
+          commissionRateSetOldSalesUserOrDeviceContractExceeding: false
+        }
+
+
         $scope.view = 'product';
 
         $scope.setView = function(view) {
@@ -62,7 +70,8 @@
               setForOldExpenses: false
             }
 
-            if (category) {
+
+            if (!category.commissionRateSetOldSales) {
 
               UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
                 data.setForOldExpenses = true;
@@ -92,11 +101,11 @@
               setForOldExpenses: false
             }
 
-            if (service) {
+            if (!service.commissionRateSetOldSales) {
 
 
 
-              UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+              UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setServiceRate(id, data, function(res) {
                   console.log(res, 'Set service rate')
@@ -115,8 +124,7 @@
 
         }
 
-        $scope.setAgreementRate = function() {
-          console.log($scope.agreementsCommissions, 'saddsad')
+        $scope.setAgreementRate = function(flag) {
 
           Object.keys($scope.agreementsCommissions).forEach(function(key) {
             $scope.agreementsCommissions[key] = +$scope.agreementsCommissions[key];
@@ -130,9 +138,28 @@
             userOrDeviceContractCommissionExceeding: rates.userOrDeviceContractCommissionExceeding
           }
 
-          CompaniesService.setAgreementsRate(data, function(res) {
-            console.log('res from agreements', res)
-          })
+          data = Object.assign({}, data, agreementsFlags);
+
+          if (!rates[flag]) {
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              data[flag] = true
+              CompaniesService.setAgreementsRate(data, function(res) {
+                console.log('res from agreements', res)
+              })
+            }, function() {
+              CompaniesService.setAgreementsRate(data, function(res) {
+                console.log('res from agreements', res)
+              })
+            });
+          } else {
+            CompaniesService.setAgreementsRate(data, function(res) {
+              console.log('res from agreements', res)
+            })
+          }
+
+
+
+
         }
 
       }]);
