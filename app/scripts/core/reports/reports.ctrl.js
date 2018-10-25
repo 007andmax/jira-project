@@ -392,9 +392,11 @@
           var totalSum = res.totalSum;
           var categories = res.categorySalesValue;
 
-          $scope.commissionsReport.lines = res.lines.map(function(el) {
-            el.totalSum = el.totalSum.toFixed(2);
 
+
+          $scope.commissionsReport.lines = res.lines.map(function(el) {
+            // el.totalSum = el.totalSum.toFixed(2);
+            //
             return el;
           });
 
@@ -402,8 +404,15 @@
           res.lines = res.lines.map(function(el) {
             el.itemGroup = el.productCategory || normalizeString(el.agreementType);
 
+            el.productPrice = el.productPrice || el.totalSum / el.billableQuantity;
+
             return el;
           })
+
+          $scope.commissionsReport.priceSum = res.lines.reduce(function(acc, el) {
+            acc += el.productPrice || 0;
+            return acc;
+          }, 0)
 
           $scope.detailsByProducts = $rootScope.detailsByProducts
 
@@ -437,14 +446,22 @@
               return el;
             })
 
+
             var reducedData = data.reduce(function(acc, el) {
               var company = el.companyName;
 
               if (acc[company]) {
-                acc[company].push(el);
+                acc[company].list.push(el);
               } else {
-                acc[company] = [el];
+                acc[company] = {
+                  list: [el]
+                }
               }
+
+              acc[company].commissionSum = (acc[company].commissionSum || 0) + el.commissionSum;
+              acc[company].priceSum = (acc[company].priceSum || 0) + (el.productPrice || 0);
+              acc[company].totalSum = (acc[company].totalSum || 0) + el.totalSum;
+
 
               return acc;
             }, {});

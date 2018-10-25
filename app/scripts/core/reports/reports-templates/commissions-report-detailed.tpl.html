@@ -47,19 +47,19 @@
           </div>
           <div class="details-content" ng-repeat="company in reducedCompanies" on-finish-render="build()">
             <h3>{{ company }}</h3>
-            <div class="row" ng-repeat="line in reducedData[company]">
+            <div class="row" ng-repeat="line in reducedData[company].list">
               <div class="col-md-4" style="padding-left: 0;">{{ line.firstLine }}</div>
               <div class="col-md-2">{{ (line.productPrice || 0) | toFixed : 2 }}</div>
-              <div class="col-md-2">{{ line.totalSum }}</div>
+              <div class="col-md-2">{{ line.totalSum | toFixed : 2 }}</div>
               <div class="col-md-2">{{ line.commissionRate || 0 }}%</div>
               <div class="col-md-2" style="padding-right: 0;">{{ line.commissionSum | toFixed : 2 }}</div>
             </div>
             <div class="row">
               <div class="col-md-4" style="padding-left: 0;"></div>
-              <div class="col-md-2"><b>sum</b></div>
-              <div class="col-md-2"><b>sum</b></div>
-              <div class="col-md-2"><b>sum</b></div>
-              <div class="col-md-2" style="padding-right: 0;"><b>sum</b></div>
+              <div class="col-md-2"><b>{{ reducedData[company].priceSum | toFixed : 2 }}</b></div>
+              <div class="col-md-2"><b>{{ reducedData[company].totalSum | toFixed : 2 }}</b></div>
+              <div class="col-md-2"><b></b></div>
+              <div class="col-md-2" style="padding-right: 0;"><b>{{ reducedData[company].commissionSum | toFixed : 2 }}</b></div>
 
             </div>
           </div>
@@ -82,9 +82,9 @@
             <div class="col-md-2">{{ line.companyName }}</div>
 
             <div class="col-md-1">
-              <span ng-if="line.productCost !== null">{{ (line.productPrice || 0) | toFixed : 2 }}</span>
+              <span ng-if="line.productPrice !== null">{{ (line.productPrice || 0) | toFixed : 2 }}</span>
             </div>
-            <div class="col-md-1" style="width: 9.5%;">{{ line.totalSum }}</div>
+            <div class="col-md-1" style="width: 9.5%;">{{ line.totalSum | toFixed : 2 }}</div>
             <div class="col-md-1" style="width: 13.2%;">{{ line.commissionRate || 0 }}%</div>
             <div class="col-md-1">{{ line.commissionSum | toFixed : 2 }}</div>
           </div>
@@ -92,8 +92,8 @@
             <div class="col-md-4" style="width: 21.5%;"></div>
             <div class="col-md-2"></div>
             <div class="col-md-2"></div>
-            <div class="col-md-1">Product Cost</div>
-            <div class="col-md-1" style="width: 9.5%;">{{ commissionsReport.totalSum }}</div>
+            <div class="col-md-1">{{ commissionsReport.priceSum | toFixed : 2 }}</div>
+            <div class="col-md-1" style="width: 9.5%;">{{ commissionsReport.totalSum | toFixed : 2 }}</div>
             <div class="col-md-1" style="width: 13.2%;"></div>
             <div class="col-md-1">{{ (commissionsReport.totalCommissionSum ) | toFixed : 2 }}</div>
           </div>
