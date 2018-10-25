@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="customer-ticket__report--details commission-customer" style="padding: 0!important;"
+        <div class="customer-ticket__report--details commission-customer"
              ng-if="!detailsByProducts">
           <div class="details-header row">
             <div class="col-md-4">Client</div>
@@ -65,8 +65,7 @@
           </div>
         </div>
 
-        <div class="customer-ticket__report--details commission-product" style="padding: 0!important;"
-             ng-if="detailsByProducts">
+        <div class="customer-ticket__report--details commission-product" ng-if="detailsByProducts">
           <div class="details-header row">
             <div class="col-md-4" style="width: 21.5%;">Product</div>
             <div class="col-md-2">Product Groups</div>
@@ -82,7 +81,9 @@
             <div class="col-md-2">{{ line.itemGroup }}</div>
             <div class="col-md-2">{{ line.companyName }}</div>
 
-            <div class="col-md-1"><span ng-if="line.productCost !== null">{{ (line.productPrice || 0) | toFixed : 2 }}</span></div>
+            <div class="col-md-1">
+              <span ng-if="line.productCost !== null">{{ (line.productPrice || 0) | toFixed : 2 }}</span>
+            </div>
             <div class="col-md-1" style="width: 9.5%;">{{ line.totalSum }}</div>
             <div class="col-md-1" style="width: 13.2%;">{{ line.commissionRate || 0 }}%</div>
             <div class="col-md-1">{{ line.commissionSum | toFixed : 2 }}</div>
