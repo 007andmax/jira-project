@@ -257,76 +257,7 @@
           </div> -->
           <ticket-tags tag-filter="true" on-save-func="" ticket-tags="ticketFilterTags"></ticket-tags>
         </div>
-        <!-- <div class="center-category__category sked">
-          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
-               ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
-            Completed
-          </div>
 
-          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[ticketsTagsColors['completed']].backgroundColor,
-                              'border-color': tagColors[ticketsTagsColors['completed']].borderColor}"></span>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': ticketsTagsColors['completed'] === $index}"
-                  ng-click="changeTicketsTagColor('completed', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="center-category__category sked">
-          <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
-               ng-click="stateGo($event, 'tickets', {listType: 'in_progress'})">
-            In Progress
-          </div>
-
-          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[ticketsTagsColors['inProgress']].backgroundColor,
-                              'border-color': tagColors[ticketsTagsColors['inProgress']].borderColor}"></span>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': ticketsTagsColors['inProgress'] === $index}"
-                  ng-click="changeTicketsTagColor('inProgress', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="center-category__category sked">
-          <div style="width: 100%;"
-               ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
-               ng-click="stateGo($event, 'tickets', {listType: 'on_hold'}, true)">
-            On Hold
-          </div>
-
-          <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle ticket-color"
-                    ng-style="{'background-color': tagColors[ticketsTagsColors['onHold']].backgroundColor,
-                              'border-color': tagColors[ticketsTagsColors['onHold']].borderColor}"></span>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': ticketsTagsColors['onHold'] === $index}"
-                  ng-click="changeTicketsTagColor('onHold', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-        </div> -->
         <div class="left-panel-hide-filter">
 
           <div class="left-panel-title font-medium left-panel-title-hover"
