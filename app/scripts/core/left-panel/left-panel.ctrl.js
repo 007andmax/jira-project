@@ -105,6 +105,10 @@
         $scope.companyFilterTags = [];
 
 
+        $scope.toggleMobileLeftPanel = function(state) {
+          $rootScope.isLeftPanelOpened = state;
+        }
+
         $scope.$watch('companyFilterTags', function(val) {
           if (val.length) {
             TagsService.filterCompanies(val, function(res) {

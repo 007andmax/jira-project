@@ -1,5 +1,37 @@
-<button class="mobile-btn menu-btn"></button>
+<button class="mobile-btn menu-btn" ng-click="toggleLeftPanel(true)"></button>
 <div ng-if="!isShowTicketsBulkAction() && !isShowDraftsBulkAction()" class="searchField">
   <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
 </div>
-<button class="mobile-btn primary header-btn"></button>
+<div uib-dropdown>
+  <button class="mobile-btn primary header-btn" ng-if="applicationLoaded" uib-dropdown-toggle>
+
+  </button>
+
+  <ul class="dropdown-menu tag-list" style="transform: translateX(-80%)">
+    <li class="topNavbar-logout" create-new-entity="ticket">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>Ticket</span>
+      </a>
+    </li>
+    <li class="topNavbar-logout" create-new-entity="user">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>User</span>
+      </a>
+    </li>
+    <li class="topNavbar-logout" create-new-entity="company">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>Company</span>
+      </a>
+    </li>
+    <li class="topNavbar-logout" create-new-entity="service">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>Service</span>
+      </a>
+    </li>
+    <li class="topNavbar-logout" create-new-entity="product">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>Product</span>
+      </a>
+    </li>
+  </ul>
+</div>
