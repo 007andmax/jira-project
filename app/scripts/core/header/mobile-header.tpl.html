@@ -1,2 +1,5 @@
 <button class="mobile-btn menu-btn"></button>
+<div ng-if="!isShowTicketsBulkAction() && !isShowDraftsBulkAction()" class="searchField">
+  <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
+</div>
 <button class="mobile-btn primary header-btn"></button>
