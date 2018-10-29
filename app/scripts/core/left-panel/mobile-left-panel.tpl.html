@@ -1,5 +1,5 @@
 <div class="left-menu-header">
-  <button class="x-mark mobile-btn"></button>
+  <button class="x-mark mobile-btn" ng-click="toggleMobileLeftPanel(false)"></button>
   <div class="mobile-logo">Quicktech</div>
   <div class="mobile-user">
     <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-128.png"
@@ -7,89 +7,128 @@
   </div>
 </div>
 <div class="left-menu-content">
-  <div class="mobile-tickets opened">
-    <div class="mobile-sub-header">Tickets</div>
+
+  <div class="mobile-tickets" ng-class="{ opened: areTicketsOpened }">
+    <div class="mobile-sub-header" ui-sref="tickets({ listType: 'user' })" href="#/tickets/user" ng-click="areTicketsOpened = !areTicketsOpened; clearTicketsFilters(); toggleLeftPanel('tickets', true);">Tickets</div>
     <div class="mobile-sub-content">
-      <div class="center-category__category">
-        My Tickets (<span>10</span>)
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
+           ng-click="stateGo($event, 'tickets', {listType: 'user'})">
+        My Tickets (<span>{{ticketsCounter.USER}}</span>)
       </div>
-      <div class="center-category__category">
-        All Tickets (<span>10</span>)
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'all'}) || $state.includes('tickets', {listType: 'by_company'})}"
+           ng-click="stateGo($event, 'tickets', {listType: 'all'})">
+        All Tickets (<span>{{ticketsCounter.ALL}}</span>)
       </div>
-      <div class="center-category__category">
-        Unassigned (<span>10</span>)
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && !isOnHoldTag}"
+           ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
+        Unassigned (<span>{{ticketsCounter.UNASSIGNED}}</span>)
       </div>
-      <div class="center-category__category">
-        Open (<span>10</span>)
+
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
+           ng-click="stateGo($event, 'tickets', {listType: 'open'})">
+        Open (<span>{{ticketsCounter.OPEN}}</span>)
       </div>
-      <div class="center-category__category">
-        Closed (<span>10</span>)
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
+           ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
+        Closed (<span>{{ticketsCounter.CLOSED}}</span>)
       </div>
-      <div class="center-category__category">
-        On Hold (<span>10</span>)
+
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && !isOnHoldTag}"
+           ng-click="stateGo($event, 'tickets', {listType: 'on_hold'})">
+        On Hold (<span>{{ticketsCounter.ON_HOLD}}</span>)
       </div>
-      <div class="center-category__category">
-        Trash (<span>10</span>)
+      <div class="center-category__category"
+           ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
+           ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
+        Trash (<span>{{ticketsCounter.TRASH}}</span>)
       </div>
+
     </div>
+
+
   </div>
-  <div class="mobile-companies opened">
-    <div class="mobile-sub-header">Companies</div>
+
+  <div class="mobile-companies" ng-class="{ opened: areCompaniesOpened }">
+    <div class="mobile-sub-header" ui-sref="companies" ng-click="areCompaniesOpened = !areCompaniesOpened; clearCompaniesFilters(); toggleLeftPanel('companies', true);">Companies</div>
     <div class="mobile-sub-content">
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category sked">
+        <div class="center-category__category sked" ng-click="filterCompanies()"
+             ng-class="{'active': !isArchivedCompaniesToShow()}">
           All Companies
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel"
+             ng-show="!isArchivedCompaniesToShow()"></i>
         </div>
-        <div class="center-category__category sked">
+        <div class="center-category__category sked" ng-click="filterCompanies('archived')"
+             ng-class="{'active': isArchivedCompaniesToShow()}">
           Archived
-          <i class="icn-sm icn-label-save-left-panel"></i>
+          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
         </div>
+
 
         <div class="left-panel-title font-medium">
           types
         </div>
-        <div class="center-category__category sked">
+        <div class="center-category__category sked" ng-click="filterCompanies('clients')"
+             ng-class="{'active': companiesSharedState.filter.isClient}">
           Clients
+
           <div class="col-2 user-company-circle">
-            <span>2</span>
+            <span>{{ companyCounters.CLIENT }}</span>
           </div>
+
         </div>
-        <div class="center-category__category sked">
+        <div class="center-category__category sked" ng-click="filterCompanies('leads')"
+             ng-class="{'active': companiesSharedState.filter.isLead}">
           Leads
+
           <div class="col-2 user-company-circle">
-            <span>2</span>
+            <span>{{ companyCounters.LEAD }}</span>
           </div>
+
         </div>
-        <div class="center-category__category sked">
+        <div class="center-category__category sked" ng-click="filterCompanies('vendors')"
+             ng-class="{'active': companiesSharedState.filter.isVendor}">
           Vendor
+
           <div class="col-2 user-company-circle">
-            <span>2</span>
+            <span>{{ companyCounters.VENDOR }}</span>
           </div>
+
         </div>
       </div>
     </div>
   </div>
-  <div class="mobile-users opened">
-    <div class="mobile-sub-header">Users</div>
+
+  <div class="mobile-users" ng-class="{ opened: areUsersOpened }">
+    <div class="mobile-sub-header" ui-sref="users" ng-click="areUsersOpened = !areUsersOpened; clearUsersFilters(); toggleLeftPanel('users', true);">Users</div>
     <div class="mobile-sub-content">
-      <div class="center-category__category">
+      <div class="center-category__category" ng-click="filterUsers()"
+           ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())}">
         All Users
-        <i class="icn-sm icn-label-save-left-panel"></i>
+        <i class="icn-sm icn-label-save-left-panel"
+           ng-show="!( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())"></i>
       </div>
-      <div class="center-category__category">
+      <div class="center-category__category" ng-click="filterUsers('clients')"
+           ng-class="{'active': usersSharedState.filter.isClient}">
         Customer Users
-        <i class="icn-sm icn-label-save-left-panel"></i>
+        <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isClient"></i>
       </div>
-      <div class="center-category__category">
+      <div class="center-category__category" ng-click="filterUsers('leads')"
+           ng-class="{'active': usersSharedState.filter.isLead}">
         Lead Users
-        <i class="icn-sm icn-label-save-left-panel"></i>
+        <i class="icn-sm icn-label-save-left-panel" ng-show="usersSharedState.filter.isLead"></i>
       </div>
-      <div class="center-category__category">
+      <div class="center-category__category" ng-click="showArchivedUsers()"
+           ng-class="{'active': isArchivedUsersToShow()}">
         Archived Users
-        <i class="icn-sm icn-label-save-left-panel"></i>
+        <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedUsersToShow()"></i>
       </div>
     </div>
   </div>
 </div>
-

@@ -23,6 +23,10 @@
           sharedQuickSession.isCreateNew = true;
         };
 
+        $scope.toggleLeftPanel = function(state) {
+          $rootScope.isLeftPanelOpened = state;
+        }
+
         $scope.getAssignUserId = function (ticket) {
           if (ticket) {
             if (ticket.assignedUser && ticket.assignedUser.id && ticket.assignedUser.id.length) {
@@ -157,5 +161,3 @@
       }]);
 
 }());
-
-

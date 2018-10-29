@@ -3,13 +3,13 @@
 <div class="top-bar" style="z-index: 1038;" ng-if="applicationLoaded "
      ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
 
-<div class="mobile-top-bar" style="z-index: 1038;" ng-if="applicationLoaded "
+<div ng-controller="quicktech.core.header.headerCtrl" class="mobile-top-bar" style="z-index: 1038;" ng-if="applicationLoaded "
      ng-include="'/html/scripts/core/header/mobile-header.tpl.html'"></div>
 
 <aside id="left" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"
        ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
-<aside id="mobile-left" class="opened" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"
+<aside ng-controller="quicktech.core.leftPanel.leftPanelCtrl" id="mobile-left" ng-class="{opened: isLeftPanelOpened}" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"
        ng-include="'/html/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
 
 <aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
