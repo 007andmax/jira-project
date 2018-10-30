@@ -956,7 +956,7 @@
                 taxIds: [],
                 rate: 0,
                 basedOnDefault: true,
-                id: $scope.blockTimeContract.services[m].id.id // !!!!!!!!!! fix here
+                id: $scope.blockTimeContract.services[m].id.id 
               };
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate

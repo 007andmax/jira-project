@@ -242,7 +242,7 @@
               taxes: data[i].taxes || [],
               taxIds: data[i].taxIds || [],
               basedOnDefault: true,
-              id: data[i].versionenId
+              id: data[i].versionedId
             };
             if (data[i].taxIds && data[i].taxIds.length) {
               for (var m = 0; m < data[i].taxIds.length; m++) {
@@ -690,6 +690,7 @@
       function createHourlyContract() {
         var servicesWithTaxIds = [];
         for (var i = 0; i < $scope.editContract.services.length; i++) {
+          console.log($scope.editContract.services[i], "SERVICE")
           var correctService = {
             name: $scope.editContract.services[i].name,
             rate: 0,
@@ -697,8 +698,12 @@
             taxIds: [],
             basedOnDefault: $scope.editContract.services[i].basedOnDefault || false,
             commissionRate: $scope.editContract.services[i].commissionRate || 0,
-            id: $scope.editContract.services[i].commissionRate.id
+
           };
+
+          if (correctService.basedOnDefault) {
+            correctService.id = $scope.editContract.services[i].id.id
+          }
           if($scope.editContract.services[i].billable) {
             correctService.rate =  $scope.editContract.services[i].rate;
             if ($scope.editContract.services[i].taxes.length) {

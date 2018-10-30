@@ -201,7 +201,8 @@
                 name: resp[i].name,
                 picked: false,
                 taxes: resp[i].taxes,
-                rate: resp[i].rate
+                rate: resp[i].rate,
+                id: resp[i].versionedId
               };
               $scope.defaultServicesAdditional.push(s);
               $scope.defaultServicesAdditionalForDropDown.push(s);
@@ -797,12 +798,14 @@
             } else {
               validateNewServiceName(service.name.name).then(function (resp) {
                 if (resp) {
+                  console.log(service, 'SERVICE')
                   var ns = {
                     name: service.name.name,
                     rate: service.name.rate,
                     billable: service.billable,
                     taxes: service.name.taxes,
-                    nameValue: service.name.name
+                    nameValue: service.name.name,
+                    id: service.name.id
                   };
                   $scope.serviceContract.services.push(ns);
                   $scope.newService = {
@@ -862,6 +865,8 @@
           if(form.$valid) {
             validateNewServiceName(service.name).then(function(resp) {
               if(resp) {
+
+                console.log(service, "SERVICES")
                 $scope.serviceContract.serviceContractServicesToTrack.push(service);
                 $scope.newServiceContractServicesToTrack = {
                   name: ''
@@ -1379,7 +1384,8 @@
                     rate: 0,
                     billable: serviceContract.services[i].billable,
                     taxIds: [],
-                    basedOnDefault: true
+                    basedOnDefault: true,
+                    id: serviceContract.services[i].id.id
                   };
                   if(serviceContract.services[i].billable) {
                     serv.rate = serviceContract.services[i].rate;
