@@ -241,7 +241,8 @@
               billable: data[i].billable,
               taxes: data[i].taxes || [],
               taxIds: data[i].taxIds || [],
-              basedOnDefault: true
+              basedOnDefault: true,
+              id: data[i].versionenId
             };
             if (data[i].taxIds && data[i].taxIds.length) {
               for (var m = 0; m < data[i].taxIds.length; m++) {
@@ -696,6 +697,7 @@
             taxIds: [],
             basedOnDefault: $scope.editContract.services[i].basedOnDefault || false,
             commissionRate: $scope.editContract.services[i].commissionRate || 0,
+            id: $scope.editContract.services[i].commissionRate.id
           };
           if($scope.editContract.services[i].billable) {
             correctService.rate =  $scope.editContract.services[i].rate;

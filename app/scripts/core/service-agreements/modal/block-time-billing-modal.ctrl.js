@@ -539,6 +539,8 @@
                 basedOnDefault: true
               };
 
+              console.log(serv, "SERV")
+
               // console.log(serv, 'NEWSERV');
 
               (function() {
@@ -671,7 +673,9 @@
                         rate: service.name.rate,
                         billable: service.billable,
                         taxes: service.taxes,
-                        nameValue: service.name.name
+                        nameValue: service.name.name,
+                        id: service.name.versionedId
+
                       };
 
 
@@ -951,7 +955,8 @@
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
                 rate: 0,
-                basedOnDefault: true
+                basedOnDefault: true,
+                id: $scope.blockTimeContract.services[m].id.id // !!!!!!!!!! fix here
               };
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
