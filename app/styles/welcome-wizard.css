@@ -146,10 +146,10 @@
 .mobile-top-bar, #mobile-left,
 .company-phone,
 .mob-company-footer,
-.mob-company-filters-btn,
+.mob-filters-btn,
 .desktop-hidden,
-.mob-company-filters,
-.mob-company-filters-btn,
+.mob-filters,
+.mob-filters-btn,
 .list-company-row .company-location {
   display: none;
 }
@@ -543,7 +543,7 @@
     font-weight: 500 !important;
   }
   
-  .mob-company-filters-btn {
+  .mob-filters-btn {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -555,7 +555,7 @@
     display: block;
   }
   
-  .mob-company-filters-btn:after {
+  .mob-filters-btn:after {
     position: absolute;
     content: '';
     right: 22px;
@@ -565,7 +565,7 @@
     height: 24px;
   }
   
-  .mob-company-filters {
+  .mob-filters {
     top: 100%;
     transition: all .3s;
     left: 0;
@@ -578,13 +578,13 @@
     visibility: hidden;
   }
   
-  .mob-company-filters.opened {
+  .mob-filters.opened {
     top: 0;
     opacity: 1;
     visibility: visible;
   }
   
-  .mob-company-filters-header {
+  .mob-filters-header {
     background: #27303f;
     height: 56px;
     display: flex;
@@ -594,15 +594,15 @@
     color: #fff;
   }
   
-  .mob-company-filters-header .x-mark {
+  .mob-filters-header .x-mark {
     margin-right: 20px;
   }
   
-  .mob-company-filters .center-category {
+  .mob-filters .center-category {
     padding: 15px 20px;
   }
   
-  .mob-company-filters .left-panel-title {
+  .mob-filters .left-panel-title {
     margin: 0 0 12px 0;
     width: 100%;
     font-family: 'Graphik Semibold', sans-serif;
@@ -614,19 +614,19 @@
     padding-bottom: 7px;
   }
   
-  .mob-company-filters .center-category__category.sked {
+  .mob-filters .center-category__category.sked {
     padding: 0;
   }
   
-  .mob-company-filters .tags-wrap,
-  .mob-company-filters .tags,
-  .mob-company-filters ticket-tags,
-  .mob-company-filters .tag-autocomplete {
+  .mob-filters .tags-wrap,
+  .mob-filters .tags,
+  .mob-filters ticket-tags,
+  .mob-filters .tag-autocomplete {
     width: 100% !important;
     max-width: 100% !important;
   }
   
-  .mob-company-filters .filter-left-panel {
+  .mob-filters .filter-left-panel {
     padding: 0;
     width: 100%;
   }
@@ -702,7 +702,7 @@
   }
   
   .desktop-hidden,
-  .mob-company-filters {
+  .mob-filters {
     display: block;
   }
   

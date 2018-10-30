@@ -1,13 +1,6 @@
 <div class="users-content" style="margin-top: -7px;">
   <div class="change-view-actions">
     <div class="action-wrap clearfix">
-      <!--<div class="archived-change">-->
-      <!--<span class="pull-left">Archived users</span>-->
-      <!--<div class="switch">-->
-      <!--<input type="checkbox" ng-model="archivedShown">-->
-      <!--<label><i></i></label>-->
-      <!--</div>-->
-      <!--</div>-->
       <div class="view-change">
         <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
           <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/tile-gray.svg">
@@ -480,12 +473,12 @@
     </li>
 
     <!--@Leo-->
-    <button class="mob-company-filters-btn mobile-btn primary"
+    <button class="mob-filters-btn mobile-btn primary"
             ng-click="toggleMobileCompanyFilters(true)">
       Filters
     </button>
-    <div class="mob-company-filters">
-      <div class="mob-company-filters-header">
+    <div class="mob-filters">
+      <div class="mob-filters-header">
         <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
         <div>Filters</div>
       </div>
@@ -501,7 +494,7 @@
                    ng-model="filterDesignation"
                    name="designation"
                    typeahead-editable="true"
-                   placeholder='Select title'
+                   placeholder="Select title"
                    typeahead-on-select="filterUsers('title', filterDesignation)"
                    ng-change="isTitleFilterTyped = true"
                    tabindex="4"
@@ -510,7 +503,8 @@
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                    hard-reset-pattern="newCategoryNamePattern">
 
-            <div class="product-actions category-caret centered" ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
+            <div class="product-actions category-caret centered"
+                 ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
 
 
               <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
@@ -528,7 +522,6 @@
 
 
           </div>
-
 
 
         </div>
@@ -596,7 +589,7 @@
         </div>
 
       </div>
-      <button class="mob-company-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
+      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
     </div>
   </ul>
 </div>

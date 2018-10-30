@@ -269,13 +269,13 @@
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
     </li>
-    <button class="mob-company-filters-btn mobile-btn primary"
+    <button class="mob-filters-btn mobile-btn primary"
             ng-click="toggleMobileCompanyFilters(true)">
       Filters
     </button>
-    <div class="mob-company-filters" ng-class="{ opened: areMobileFiltersOpened }"
+    <div class="mob-filters" ng-class="{ opened: areMobileFiltersOpened }"
          ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
-      <div class="mob-company-filters-header">
+      <div class="mob-filters-header">
         <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
         <div>Filters</div>
       </div>
@@ -317,7 +317,7 @@
           </div>
         </div>
       </div>
-      <button class="mob-company-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
+      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
     </div>
   </ul>
 </div>
