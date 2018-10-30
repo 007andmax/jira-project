@@ -159,8 +159,11 @@
     <li class="list-company-row opene"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
-        ng-click="openCompany(company)">
-      <div class="col-xs-3" style="width: 34%;">
+        desktop-mobile-function
+        desktop="openCompany(company)"
+        mobile="mobileOpenCompany()"
+        company-name="company">
+      <div class="col-xs-3" style="width: 34%;" ng-init="companyName = company">
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
           <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
                ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
@@ -261,10 +264,10 @@
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
     </li>
-    <button class="mob-company-filters-btn mobile-btn primary">Filters</button>
-    <div class="mob-company-filters opene">
+    <button class="mob-company-filters-btn mobile-btn primary" ng-click="toggleMobileCompanyFilters(true)">Filters</button>
+    <div class="mob-company-filters opene" ng-class="{ opened: areMobileFiltersOpened }" ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
       <div class="mob-company-filters-header">
-        <button class="x-mark mobile-btn"></button>
+        <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
         <div>Filters</div>
       </div>
       <div class="center-category">
@@ -274,7 +277,7 @@
         <div class="center-category__category sked without-height">
 
           <ticket-tags is-company="true" tag-filter="true" on-save-func=""
-                       ticket-tags="companyFilterTags"></ticket-tags>
+                       ticket-tags="mobileFilterTags"></ticket-tags>
 
         </div>
         <div class="left-panel-hide-filter">
@@ -287,7 +290,7 @@
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
             <div class="x-mark-wrapper">
               <qt-dropdown-typehead list-for-dropdown="industries"
-                                    selected-item="companiesSharedState.filter.industry"
+                                    selected-item="mobileIndustryFilter"
                                     no-overflow="true"
                                     qt-class="'form-control has-dropdown pointer'"
                                     by-industry="true"
@@ -298,13 +301,13 @@
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
               <p ng-repeat="item in industryFilterHistoryCompaniesPage track by $index"
-                 ng-click="applyIndustryFilterFromHistoryListCompanyPage(item)">{{item}}
+                 ng-click="mobileApplyIndustryFilter(item)">{{item}}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <button class="mob-company-filters-btn mobile-btn primary">Apply Filters</button>
+      <button class="mob-company-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
     </div>
   </ul>
 </div>

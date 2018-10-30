@@ -337,7 +337,6 @@
           var globalSearch = SharedStateService.getSharedState('globalSearch');
           $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
-          $rootScope.isLeftPanelOpened = false;
 
           var toTickets = toState.name === 'tickets' || toState.name === 'tickets.details';
           var toDrafts = toState.name === 'drafts' || toState.name === 'drafts.details';

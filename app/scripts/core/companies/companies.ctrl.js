@@ -196,6 +196,17 @@
           }
         };
 
+        $scope.mobileOpenCompany = function(element) {
+          element.addClass('opened');
+          console.log('MOBIEEEEEL')
+        }
+
+        $scope.toggleMobileCompanyFilters = function(state) {
+          $scope.areMobileFiltersOpened = state;
+        }
+
+
+
         $scope.$watch('companiesCtrl.shownCompanies.length', function (value) {
           globalSearch.count = value;
         });

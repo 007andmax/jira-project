@@ -103,6 +103,7 @@
         };
 
         $scope.companyFilterTags = [];
+        $scope.mobileFilterTags = [];
 
 
         $scope.toggleMobileLeftPanel = function(state) {
@@ -199,6 +200,21 @@
             $rootScope.ticketsTagsColors = resp;
           }
         });
+
+        $scope.applyMobileFilters = function() {
+          $scope.companiesSharedState.filter.industry = $scope.mobileIndustryFilter;
+          $scope.companyFilterTags = $scope.mobileFilterTags.slice();
+
+          $scope.toggleMobileCompanyFilters(false);
+        }
+
+        $scope.closeAndResetMobileFilters = function() {
+          $scope.mobileIndustryFilter = $scope.companiesSharedState.filter.industry;
+          $scope.mobileFilterTags = $scope.companyFilterTags.slice();
+
+
+          $scope.toggleMobileCompanyFilters(false);
+        }
 
         $scope.ticketsSharedState.filter.tags = [];
 
@@ -555,6 +571,11 @@
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function (value) {
           companiesSharedState.filter.industry = value;
         };
+
+        $scope.mobileApplyIndustryFilter = function(value) {
+          console.log('mobileApplyIndu')
+          $scope.mobileIndustryFilter = value;
+        }
 
         $scope.applyIndustryFilterFromHistoryListUserPage = function (value) {
           usersSharedState.filter.industry = value;
