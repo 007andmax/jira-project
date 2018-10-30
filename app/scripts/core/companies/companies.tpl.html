@@ -153,10 +153,12 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 65px; position: relative"
-      ng-if="companiesView === 'list'" qt-scroll-to="top"
+  <ul class="qt-list qt-companies qt-users users-bg"
+      style="margin-top: 65px; position: relative"
+      ng-if="companiesView === 'list'"
+      qt-scroll-to="top"
       offset="83" scroll-pagination>
-    <li class="list-company-row opene"
+    <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
         desktop-mobile-function
@@ -264,8 +266,12 @@
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
     </li>
-    <button class="mob-company-filters-btn mobile-btn primary" ng-click="toggleMobileCompanyFilters(true)">Filters</button>
-    <div class="mob-company-filters opene" ng-class="{ opened: areMobileFiltersOpened }" ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
+    <button class="mob-company-filters-btn mobile-btn primary"
+            ng-click="toggleMobileCompanyFilters(true)">
+      Filters
+    </button>
+    <div class="mob-company-filters" ng-class="{ opened: areMobileFiltersOpened }"
+         ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
       <div class="mob-company-filters-header">
         <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
         <div>Filters</div>
@@ -281,9 +287,10 @@
 
         </div>
         <div class="left-panel-hide-filter">
-          <div style="font-family: 'Graphik Medium', sans-serif;font-weight: 500; font-size: 13px; color:#fff;text-transform: capitalize;"
-               class="left-panel-title left-panel-title-hover"
-               ng-click="dropdownByIndustryCompanyPage = !dropdownByIndustryCompanyPage">
+          <div
+            style="font-family: 'Graphik Medium', sans-serif;font-weight: 500; font-size: 13px; color:#fff;text-transform: capitalize;"
+            class="left-panel-title left-panel-title-hover"
+            ng-click="dropdownByIndustryCompanyPage = !dropdownByIndustryCompanyPage">
             by industry
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryCompanyPage}"></i>
           </div>
