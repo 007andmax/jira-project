@@ -628,6 +628,7 @@
   
   .mob-company-filters .filter-left-panel {
     padding: 0;
+    width: 100%;
   }
   
   .create-popup .modal-dialog {
@@ -696,8 +697,8 @@
     min-height: 100vh;
   }
   
-  .company--content .mob-hidden {
-    display: none;
+  .mob-hidden {
+    display: none !important;
   }
   
   .desktop-hidden,
@@ -705,8 +706,8 @@
     display: block;
   }
   
-  .qt-list > .list-company-row:hover:before,
-  .qt-list > .list-company-row:hover:after {
+  .qt-list > li:hover:before,
+  .qt-list > li:hover:after {
     background-color: transparent;
   }
   
@@ -721,6 +722,124 @@
   
   .remove-tag.icn-xs {
     top: 8px;
+  }
+  
+  .user-list-row {
+    padding: 15px 20px !important;
+  }
+  
+  .visible-user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  
+  .qt-users .label-light {
+    text-transform: capitalize;
+  }
+  
+  .visible-user-info .user-name p {
+    line-height: 20px;
+  }
+  
+  .mob-user-email,
+  .mob-user-phone-ticket,
+  .mob-user-designation {
+    margin-top: 10px;
+  }
+  
+  .mob-user-designation,
+  .mob-user-email {
+    padding-left: 25px;
+  }
+  
+  .mob-user-ticket {
+    padding-left: 50px;
+  }
+  
+  .mob-user-designation,
+  .mob-user-email,
+  .mob-user-ticket {
+    position: relative;
+  }
+  
+  .mob-user-designation:before,
+  .mob-user-ticket:before,
+  .mob-user-email:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .mob-user-email:before {
+    background-image: url(../images/new-icons/user-send-email.svg);
+    top: 3px;
+  }
+  
+  .mob-user-designation:before {
+    background: url("../images/new-icons/mob-company.png");
+    top: 3px;
+  }
+  
+  .mob-user-ticket:before {
+    background: url("../images/new-icons/mob-tickets.png");
+    left: 27px;
+    top: 4px;
+    width: 16px;
+    height: 14px;
+  }
+  
+  .mob-user-phone-ticket {
+    display: flex;
+  }
+  
+  .icn-user-phone, .icn-user-fax, .icn-iphone {
+    margin-right: 7px;
+  }
+  
+  .icn-iphone {
+    background-image: url(../images/new-icons/new-mobile.png);
+    width: 16px;
+    height: 16px;
+    margin: -3px 3px 0 0;
+  }
+  
+  #has-invoice-updates1 .user-ticket-update {
+    width: 60px !important;
+  }
+  
+  .mob-user-subscription p {
+    font-size: 9px;
+    font-weight: 500;
+    color: #9ca5b6;
+    margin: 20px 0 0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  .hidden-user-info {
+    display: none;
+  }
+  
+  .user-list-row.opened .hidden-user-info {
+    display: block;
+  }
+  
+  .user-mob-filters,
+  .companies-mob-filters {
+    margin-top: 15px;
+    padding: 0 26px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4f5f79;
+  }
+  
+  .mob-user .hit-area ~ .dropdown-menu {
+    margin-top: 5px;
+    left: -125px;
   }
 }
 

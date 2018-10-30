@@ -9,6 +9,8 @@
 <div class="left-menu-content">
 
   <div class="mobile-tickets" ng-class="{ opened: areTicketsOpened, 'active': openedCategory === 'tickets' }">
+
+    <!--@Leo-->
     <div class="mobile-sub-header" ui-sref="tickets({ listType: 'user' })" href="#/tickets/user" ng-click="areTicketsOpened = !areTicketsOpened; clearTicketsFilters(); toggleLeftPanel('tickets', true);">Tickets</div>
     <div class="mobile-sub-content">
       <div class="center-category__category"
@@ -54,6 +56,8 @@
 
   </div>
   <div class="mobile-companies" ng-class="{ opened: areCompaniesOpened, 'active': openedCategory === 'companies' }">
+
+    <!--@Leo-->
     <div class="mobile-sub-header" ui-sref="companies" ng-click="areCompaniesOpened = !areCompaniesOpened; clearCompaniesFilters(); toggleLeftPanel('companies', true);">Companies</div>
     <div class="mobile-sub-content">
       <div class="center-category collapsed-nav nano-content">
@@ -105,6 +109,8 @@
   </div>
 
   <div class="mobile-users" ng-class="{ opened: areUsersOpened, 'active': openedCategory === 'users' }">
+
+    <!--@Leo-->
     <div class="mobile-sub-header" ui-sref="users" ng-click="areUsersOpened = !areUsersOpened; clearUsersFilters(); toggleLeftPanel('users', true);">Users</div>
     <div class="mobile-sub-content">
       <div class="center-category__category" ng-click="filterUsers(); toggleMobileLeftPanel(false)"
