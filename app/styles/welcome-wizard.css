@@ -841,6 +841,38 @@
     margin-top: 5px;
     left: -125px;
   }
+  
+  .mob-search input {
+    width: 100%;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #3c4451;
+    padding: 5px 10px 5px 40px;
+    border: none;
+    color: #9ca5b6;
+  }
+  
+  .mob-search {
+    position: relative;
+    margin: 0 15px;
+    max-width: 236px;
+    width: 100%;
+  }
+  
+  .mob-search:before {
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    content: '';
+    background: url(../images/new-icons/search.png);
+    left: 10px;
+    top: 6px;
+  }
+  
+  .mob-search input::placeholder {
+    color: #9ca5b6;
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=welcome-wizard.css.map */
