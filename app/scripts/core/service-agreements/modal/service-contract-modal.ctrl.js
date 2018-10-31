@@ -202,7 +202,8 @@
                 picked: false,
                 taxes: resp[i].taxes,
                 rate: resp[i].rate,
-                id: resp[i].versionedId
+                id: resp[i].versionedId,
+                commissionRate: resp[i].commissionRate
               };
               $scope.defaultServicesAdditional.push(s);
               $scope.defaultServicesAdditionalForDropDown.push(s);
@@ -1385,7 +1386,8 @@
                     billable: serviceContract.services[i].billable,
                     taxIds: [],
                     basedOnDefault: true,
-                    id: serviceContract.services[i].id.id
+                    id: serviceContract.services[i].id.id,
+                    commissionRate: serviceContract.services[i].commissionRate
                   };
                   if(serviceContract.services[i].billable) {
                     serv.rate = serviceContract.services[i].rate;

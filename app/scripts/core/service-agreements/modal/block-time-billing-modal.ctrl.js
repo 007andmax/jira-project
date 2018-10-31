@@ -136,7 +136,8 @@
                 picked: false,
                 taxes: resp[i].taxes,
                 rate: resp[i].rate,
-                versionedId: resp[i].versionedId
+                versionedId: resp[i].versionedId,
+                commissionRate: resp[i].commissionRate
               };
               $scope.defaultServices.push(s);
               $scope.defaultServicesForDropdown.push(s);
@@ -956,7 +957,8 @@
                 taxIds: [],
                 rate: 0,
                 basedOnDefault: true,
-                id: $scope.blockTimeContract.services[m].id.id 
+                id: $scope.blockTimeContract.services[m].id.id,
+                commissionRate: $scope.blockTimeContract.services[m].commissionRate
               };
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
