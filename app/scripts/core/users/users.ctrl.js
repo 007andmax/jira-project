@@ -15,6 +15,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
+        $scope.usersSharedState = SharedStateService.getSharedState('usersHeader');
         var availableViews = ['list', 'grid'];
 
         $scope.usersCtrl = {};
@@ -31,6 +32,8 @@
           field: 'name',
           reverse: false
         };
+
+
 
 
         $scope.$watch(function() {
@@ -89,6 +92,15 @@
             // localStorageService.set('users-view', view);
           }
         };
+
+        $scope.openUsersItem = function(event) {
+          console.log(event.currentTarget, "TARGET")
+          event.currentTarget.classList.add('opened');
+        }
+
+        $scope.toggleMobileUsersFilters = function(state) {
+          $scope.areMobileUsersFiltersOpened = state;
+        }
 
         $scope.$watch('usersCtrl.shownUsers.length', function (usersCount) {
           globalSearch.count = usersCount;

@@ -1,7 +1,7 @@
 <div class="create-new" ng-controller="quicktech.createUserCtrl" ng-form="userForm">
   <div class="user--header">
     <div>
-      <h2>Create New User</h2>
+      <h2>{{ isCreation ? 'Create New User' : 'Edit User' }}</h2>
     </div>
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>

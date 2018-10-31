@@ -8,10 +8,9 @@
 </div>
 <div class="left-menu-content">
 
-  <div class="mobile-tickets" ng-class="{ opened: areTicketsOpened, 'active': openedCategory === 'tickets' }">
+  <div class="mobile-tickets" ng-class="{ opened: areTicketsOpened }">
 
-    <!--@Leo-->
-    <div class="mobile-sub-header" ui-sref="tickets({ listType: 'user' })" href="#/tickets/user" ng-click="areTicketsOpened = !areTicketsOpened; clearTicketsFilters(); toggleLeftPanel('tickets', true);">Tickets</div>
+    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'tickets' }" ui-sref="tickets({ listType: 'user' })" href="#/tickets/user" ng-click="toggleMobileMenu('areTicketsOpened'); clearTicketsFilters(); toggleLeftPanel('tickets', true);">Tickets</div>
     <div class="mobile-sub-content">
       <div class="center-category__category"
            ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
@@ -55,10 +54,9 @@
 
 
   </div>
-  <div class="mobile-companies" ng-class="{ opened: areCompaniesOpened, 'active': openedCategory === 'companies' }">
+  <div class="mobile-companies" ng-class="{ opened: areCompaniesOpened }">
 
-    <!--@Leo-->
-    <div class="mobile-sub-header" ui-sref="companies" ng-click="areCompaniesOpened = !areCompaniesOpened; clearCompaniesFilters(); toggleLeftPanel('companies', true);">Companies</div>
+    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'companies' }" ui-sref="companies" ng-click="toggleMobileMenu('areCompaniesOpened'); clearCompaniesFilters(); toggleLeftPanel('companies', true);">Companies</div>
     <div class="mobile-sub-content">
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" ng-click="filterCompanies(); toggleMobileLeftPanel(false)"
@@ -110,8 +108,7 @@
 
   <div class="mobile-users" ng-class="{ opened: areUsersOpened, 'active': openedCategory === 'users' }">
 
-    <!--@Leo-->
-    <div class="mobile-sub-header" ui-sref="users" ng-click="areUsersOpened = !areUsersOpened; clearUsersFilters(); toggleLeftPanel('users', true);">Users</div>
+    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'users' }" ui-sref="users" ng-click="toggleMobileMenu('areUsersOpened'); clearUsersFilters(); toggleLeftPanel('users', true);">Users</div>
     <div class="mobile-sub-content">
       <div class="center-category__category" ng-click="filterUsers(); toggleMobileLeftPanel(false)"
            ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())}">

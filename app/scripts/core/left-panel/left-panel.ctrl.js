@@ -43,6 +43,8 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
+
 
         $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
@@ -108,6 +110,14 @@
 
         $scope.toggleMobileLeftPanel = function(state) {
           $rootScope.isLeftPanelOpened = state;
+        }
+
+        $scope.toggleMobileMenu = function(menu) {
+          $scope.listOfMobileTitles.forEach(function(title) {
+            $scope[title] = false;
+          })
+
+          $scope[menu] = true;
         }
 
         $scope.$watch('companyFilterTags', function(val) {
@@ -214,6 +224,26 @@
 
 
           $scope.toggleMobileCompanyFilters(false);
+        }
+
+        $scope.applyMobileUsersFilters = function() {
+          $scope.filterDesignation = $scope.mobileFilterDesignation;
+          $scope.userPageCompanyIdFilter = $scope.mobileUserPageCompanyIdFilter
+          $scope.filterUsers('title', $scope.filterDesignation);
+
+          $scope.usersSharedState.filter.industry = $scope.mobileFilterUsersIndustry;
+
+          $scope.toggleMobileUsersFilters(false);
+        }
+
+        $scope.closeAndResetMobileUsersFilters = function() {
+          $scope.mobileFilterDesignation = $scope.filterDesignation;
+          $scope.mobileUserPageCompanyIdFilter = $scope.userPageCompanyIdFilter;
+          $scope.mobileFilterUsersIndustry = $scope.usersSharedState.filter.industry;
+
+          $scope.toggleMobileUsersFilters(false);
+
+
         }
 
         $scope.ticketsSharedState.filter.tags = [];
@@ -581,9 +611,17 @@
           usersSharedState.filter.industry = value;
         };
 
+        $scope.mobileApplyIndustryFilterFromHistoryListUserPage = function (value) {
+          $scope.mobileFilterUsersIndustry = value;
+        };
+
         $scope.applyCompanyFilterFromHistoryListUserPage = function (value) {
           usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
         };
+
+        $scope.mobileApplyCompanyFilterFromHistoryListUserPage = function (value) {
+          $scope.mobileUserPageCompanyIdFilter = getCompanyIdByCompanyName(value);
+        }
 
         $scope.applyCompanyFilterFromHistoryListTicketPage = function (value) {
           ticketsSharedState.filter.companyId = getCompanyIdByCompanyName(value);

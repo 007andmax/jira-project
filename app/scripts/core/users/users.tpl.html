@@ -182,15 +182,21 @@
   </div>
 
   <!--@Leo-->
-  <p class="desktop-hidden user-mob-filters">Lead Users</p>
+  <p class="desktop-hidden user-mob-filters">
+
+    <span ng-if="!(usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || showArchivedUsers)">All Users</span>
+    <span ng-if="usersSharedState.filter.isLead">Lead Users</span>
+    <span ng-if="usersSharedState.filter.isClient">Customer Users</span>
+    <span ng-if="showArchivedUsers">Archived Users</span>
+  </p>
 
   <ul class="qt-list qt-users users-bg" ng-if="usersView === 'list'" style="margin-top: 65px;"
       scroll-pagination qt-scroll-to="top" offset="83">
 
-    <!--@Leo-->
     <li class="user-list-row" ng-controller="quicktech.core.users.userCtrl"
         show-model-element="{{ 'show-user-on-save-' + user.id }}"
-        ng-repeat="user in (usersCtrl.shownUsers = (newSort(users.concat(archivedUsers)) | filter: usersFilter)) | limitTo: displayLimit track by user.id">
+        ng-repeat="user in (usersCtrl.shownUsers = (newSort(users.concat(archivedUsers)) | filter: usersFilter)) | limitTo: displayLimit track by user.id"
+        ng-click="openUsersItem($event)">
 
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3 mob-hidden">
@@ -220,15 +226,16 @@
         <div class="col-lg-2 col-xs-2 mob-hidden">
           <div class="clearfix">
           <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
-            <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+            <i ng-show="phoneNumber.number" class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
             'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+
             {{ phoneNumber.number }}
           </span>
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2 type-col mob-hidden" style="overflow: hidden">
+        <div ng-show="user.primaryEmail || user.secondaryEmail" class="col-lg-2 col-xs-2 type-col mob-hidden" style="overflow: hidden">
           <!-- <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
@@ -409,7 +416,7 @@
             <div class="mob-user-ticket"> {{ user.userStatistic.ticketsSubmitted || '0' }}</div>
           </div>
           <div class="mob-user-designation"> {{ user.designation }}</div>
-          <div class="mob-user-subscription">
+          <div class="mob-user-subscription" uib-dropdown>
             <p>Subscription</p>
             <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
                  tooltip-placement="top">
@@ -472,14 +479,13 @@
       </div>
     </li>
 
-    <!--@Leo-->
-    <button class="mob-filters-btn mobile-btn primary"
-            ng-click="toggleMobileCompanyFilters(true)">
+
+    <button class="mob-filters-btn mobile-btn primary" ng-click="toggleMobileUsersFilters(true)">
       Filters
     </button>
-    <div class="mob-filters">
+    <div class="mob-filters" ng-controller="quicktech.core.leftPanel.leftPanelCtrl" ng-class="{ opened: areMobileUsersFiltersOpened }">
       <div class="mob-filters-header">
-        <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
+        <button class="x-mark mobile-btn" ng-click="closeAndResetMobileUsersFilters()"></button>
         <div>Filters</div>
       </div>
       <div class="center-category">
@@ -491,11 +497,11 @@
             <input style="padding-right: 50px;" type="text" class="form-control has-dropdown pointer"
                    ng-maxlength="100"
                    autocomplete="off"
-                   ng-model="filterDesignation"
+                   ng-model="mobileFilterDesignation"
                    name="designation"
                    typeahead-editable="true"
                    placeholder="Select title"
-                   typeahead-on-select="filterUsers('title', filterDesignation)"
+
                    ng-change="isTitleFilterTyped = true"
                    tabindex="4"
                    uib-typeahead="title for title in allTitles | filter: $viewValue : stateComparator | orderBy"
@@ -510,7 +516,7 @@
               <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
                  ng-show="sharedFilter.designation"
-                 ng-click="filterDesignation = ''; filterUsers()">
+                 ng-click="mobileFilterDesignation = '';">
                 <i class="icn-sm icn-product-cancel"></i>
               </a>
 
@@ -536,7 +542,7 @@
             <div class="x-mark-wrapper">
               <input type="text" class="form-control has-dropdown pointer"
                      placeholder="Select Company" ng-trim="false"
-                     autocomplete="off" ng-model="userPageCompanyIdFilter"
+                     autocomplete="off" ng-model="mobileUserPageCompanyIdFilter"
                      typeahead-input-formatter="getCompanyName($model)"
                      uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                      qt-typeahead-async-show-on-focus smart-dropdown-menu-position
@@ -548,7 +554,7 @@
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
               <p ng-repeat="item in companiesFilterHistoryUserPage track by $index"
-                 ng-click="applyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
+                 ng-click="mobileApplyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
 
             </div>
           </div>
@@ -570,7 +576,7 @@
               <!--<div typeahead-input-icon="usersSharedState.filter.industry"></div>-->
 
               <qt-dropdown-typehead list-for-dropdown="industries"
-                                    selected-item="usersSharedState.filter.industry"
+                                    selected-item="mobileFilterUsersIndustry"
                                     qt-class="'form-control has-dropdown pointer'"
                                     by-industry="true"
                                     no-overflow="true"
@@ -581,7 +587,7 @@
             <div class="recent-left-panel">
               <h4 class="font-medium">recent</h4>
               <p ng-repeat="item in industriesFilterHistoryUserPage track by $index"
-                 ng-click="applyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
+                 ng-click="mobileApplyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
 
             </div>
           </div>
@@ -589,7 +595,7 @@
         </div>
 
       </div>
-      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
+      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileUsersFilters()">Apply Filters</button>
     </div>
   </ul>
 </div>

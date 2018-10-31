@@ -153,8 +153,7 @@
     </div>
   </div>
 
-  <!--@Leo-->
-  <p class="desktop-hidden companies-mob-filters">All Companies</p>
+  <p class="desktop-hidden companies-mob-filters" ><span ng-if="showArchivedCompanies">Archived Companies</span><span ng-if="!showArchivedCompanies">All Companies</span></p>
 
   <ul class="qt-list qt-companies qt-users users-bg"
       style="margin-top: 65px; position: relative"
