@@ -638,27 +638,33 @@
     border-radius: 0 !important;
   }
   
-  .company--content .x-mark {
+  .company--content .x-mark,
+  .user--content .x-mark {
     background: none;
   }
   
   .company--content .col-md-12,
-  .company--footer .btn-default {
+  .user--content .col-md-12,
+  .company--footer .btn-default,
+  .user--footer .btn-default {
     display: none !important;
   }
   
-  .company--header {
+  .company--header,
+  .user--header {
     padding: 12px 20px !important;
     background-color: #27303f !important;
     border-radius: 0 !important;
   }
   
-  .company--header .close-modal {
+  .company--header .close-modal,
+  .user--header .close-modal {
     position: absolute;
     left: 16px;
   }
   
-  .company--header h2 {
+  .company--header h2,
+  .user--header h2 {
     color: #fff !important;
     font-size: 16px !important;
     font-weight: 500 !important;
@@ -666,31 +672,52 @@
     padding-left: 30px;
   }
   
-  .company--content {
+  .company--content,
+  .user--content {
     padding: 28px 20px 56px !important;
   }
   
-  .company--content [class*='col-'] {
+  .company--content [class*='col-'],
+  .user--content [class*='col-'] {
     margin-bottom: 26px !important;
     float: left;
+  }
+  
+  .create-new .company--content .dropdown-menu,
+  .create-new .user--content .dropdown-menu {
+    width: 100% !important;
   }
   
   .modal-content {
     margin: 0 !important;
   }
   
-  .company--footer {
+  .company--footer,
+  .user--footer {
     padding: 0 !important;
     width: 100%;
     position: absolute;
     bottom: 0;
   }
   
-  .create-new .company--footer .btn.btn-primary {
+  .create-new .user--content .dd-w .dropdown-menu {
+    width: 93% !important;
+  }
+  
+  .create-new .company--footer .btn.btn-primary,
+  .create-new .user--footer .btn.btn-primary {
     margin: 0;
     border-radius: 0 !important;
     width: 100% !important;
     padding: 0;
+  }
+  
+  .create-new .user--content .x-mark {
+    right: 8px !important;
+  }
+  
+  .user--content .col-xs-12:first-child {
+    margin-bottom: 0 !important;
   }
   
   .create-new {
@@ -699,6 +726,12 @@
   
   .mob-hidden {
     display: none !important;
+  }
+  
+  .ticket-update-token,
+  .invoice-update-token {
+    background-color: #e8f6fe;
+    color: #4f5f79 !important;
   }
   
   .desktop-hidden,
@@ -872,6 +905,12 @@
   .mob-search input::placeholder {
     color: #9ca5b6;
     opacity: 1;
+  }
+  
+  .list-company-row .company-edit-icn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
   }
 }
 

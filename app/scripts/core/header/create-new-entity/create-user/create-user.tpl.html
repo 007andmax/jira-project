@@ -7,7 +7,7 @@
   </div>
   <div class="user--content row">
     <div edit-avatar class="col-xs-12" model="editUser" model-name="user"></div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'firstName')}">
+    <div class="col-md-6 col-xs-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'firstName')}">
       <div ng-messages="userForm.firstName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'firstName')}">
         <div class="control-label" ng-message="required">First name is required.</div>
         <div class="control-label" ng-message="maxlength">First name is too large.</div>
@@ -18,7 +18,7 @@
              name="firstName" ng-model="editUser.firstName" ng-required="true"
              make-dirty-on-blur tabindex="1" hard-reset-pattern="namePattern">
     </div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'lastName')}">
+    <div class="col-md-6 col-xs-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'lastName')}">
       <div ng-messages="userForm.lastName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
         <div class="control-label" ng-message="maxlength">Last name is too large.</div>
         <div class="control-label" ng-message="required">Last name is required</div>
@@ -28,7 +28,7 @@
              name="lastName" ng-model="editUser.lastName"
              make-dirty-on-blur tabindex="2" hard-reset-pattern="namePattern">
     </div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
+    <div class="col-md-6 col-xs-12" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'primaryEmail')}">
       <div ng-messages="userForm.primaryEmail.$error"
            ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
         <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
@@ -42,7 +42,7 @@
              is-uniq-validation is-empty-valid="true" validation-func="validateUserEmail" tabindex="3">
 
     </div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'userCompany')}">
+    <div class="col-md-6 col-xs-12" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'userCompany')}">
       <div class="control-label"
            ng-class="{'hide': !isShowingErrors(userForm, 'userCompany')}">
         Please select the company.
@@ -61,7 +61,7 @@
         <div class="input-top-4" typeahead-input-icon="userCompany"></div>
       </div>
     </div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isErrorShown && editUser.designation}">
+    <div class="col-md-6 col-xs-12 dd-w" add-on-focus ng-class="{'has-error': isErrorShown && editUser.designation}">
       <div ng-class="{'hide': !isErrorShown || (isErrorShown && !editUser.designation)}">
         <div class="control-label">You have to save your title or choose it from the list</div>
         <!-- <div class="control-label" ng-message="minlength">Title is too short</div> -->
@@ -111,7 +111,7 @@
         <i class="icn-sm report-caret-icon"></i>
       </span>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 col-xs-12">
       <!-- <input placeholder="Contact Type" type="text"> -->
       <div uib-dropdown keyboard-nav="true">
         <button style="padding: 0; height: 45px;text-align: left"
@@ -127,7 +127,20 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-6">
+
+    <div class="col-md-6 col-xs-12 phone-number desktop-hidden"
+         is-try-to-save="triedToSave"
+         no-add-more="true"
+         phone-numbers-edit
+         active-placeholder="'Primary contact phone'"
+         is-restricted="true"
+         not-required="true"
+         country-code="{{ userCompanyCountryCode }}"
+         ng-model="editUser.phoneNumbers"
+         custom-placeholder="'Primary contact phone'">>
+    </div>
+
+    <div class="col-md-6 col-xs-12">
       <!-- <input placeholder="Subscribe for" type="text"> -->
       <!-- <label class="control-label">Subscribe to</label> -->
 
@@ -157,7 +170,7 @@
               <div class="clearfix">
                 <label class="control checkbox pull-left">
                   <input type="checkbox" ng-model="editUser.subscription.ticket">
-                  <span class="control-indicator"></span> Ticket Updates
+                  <span class="control-indicator"></span> Updates
                 </label>
               </div>
             </a>
@@ -168,7 +181,7 @@
               <div class="clearfix">
                 <label class="control checkbox pull-left">
                   <input type="checkbox" ng-model="editUser.subscription.ticketManager">
-                  <span class="control-indicator"></span> Ticket Manager
+                  <span class="control-indicator"></span> Manager
                 </label>
               </div>
             </a>
@@ -180,7 +193,7 @@
               <div class="clearfix">
                 <label class="control checkbox pull-left">
                   <input type="checkbox" ng-model="editUser.subscription.invoice">
-                  <span class="control-indicator"></span> Invoice Updates
+                  <span class="control-indicator"></span> Invoice
                 </label>
               </div>
             </a>
@@ -188,7 +201,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-6 phone-number"
+    <div class="col-md-6 col-xs-12 phone-number mob-hidden"
          is-try-to-save="triedToSave"
          no-add-more="true"
          phone-numbers-edit
