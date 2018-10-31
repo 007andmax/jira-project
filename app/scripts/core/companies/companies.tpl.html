@@ -264,6 +264,7 @@
           <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
         </div>
       </div>
+      <button class="company-edit-icn company-edit-icn-sm desktop-hidden"></button>
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
