@@ -799,14 +799,14 @@
             } else {
               validateNewServiceName(service.name.name).then(function (resp) {
                 if (resp) {
-                  console.log(service, 'SERVICE')
                   var ns = {
                     name: service.name.name,
                     rate: service.name.rate,
                     billable: service.billable,
                     taxes: service.name.taxes,
                     nameValue: service.name.name,
-                    id: service.name.id
+                    id: service.name.id,
+                    commissionRate: service.name.commissionRate
                   };
                   $scope.serviceContract.services.push(ns);
                   $scope.newService = {
@@ -867,7 +867,6 @@
             validateNewServiceName(service.name).then(function(resp) {
               if(resp) {
 
-                console.log(service, "SERVICES")
                 $scope.serviceContract.serviceContractServicesToTrack.push(service);
                 $scope.newServiceContractServicesToTrack = {
                   name: ''

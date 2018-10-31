@@ -139,6 +139,9 @@
                 versionedId: resp[i].versionedId,
                 commissionRate: resp[i].commissionRate
               };
+
+
+              console.log(s, "SERVICE")
               $scope.defaultServices.push(s);
               $scope.defaultServicesForDropdown.push(s);
             }
@@ -675,9 +678,13 @@
                         billable: service.billable,
                         taxes: service.taxes,
                         nameValue: service.name.name,
-                        id: service.name.versionedId
+                        id: service.name.versionedId,
+                        commissionRate: service.name.commissionRate
 
                       };
+
+
+                      console.log(service, 'SERVVICE')
 
 
                       $scope.blockTimeContract.services.push(ns);
@@ -960,6 +967,8 @@
                 id: $scope.blockTimeContract.services[m].id.id,
                 commissionRate: $scope.blockTimeContract.services[m].commissionRate
               };
+
+              console.log(cs, $scope.blockTimeContract.services[m], 'before SENDING')
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
                 if ($scope.blockTimeContract.services[m].taxes.length) {
