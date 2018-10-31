@@ -2,7 +2,7 @@
 <div class="company-wrapper" ng-controller="quicktech.createCompanyCtrl" ng-form="companyForm">
   <div class="create-new" ng-if="!longCreateCompany && !resolvedAdvanced">
     <div class="company--header">
-      <h2>Create Company</h2>
+      <h2>{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
     </div>
     <div class="company--content row">
@@ -176,7 +176,7 @@
 
   <div class="create-new" style="{{ hideDiv ? 'display: none' : '' }}" ng-if="longCreateCompany">
     <div class="company--header">
-      <h2>Create Company</h2>
+      <h2>{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
     </div>
     <div class="company--content row" ng-form="companyForm">
