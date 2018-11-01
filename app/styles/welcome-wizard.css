@@ -862,12 +862,18 @@
   }
   
   .user-mob-filters,
-  .companies-mob-filters {
+  .companies-mob-filters,
+  .tickets-mob-filters {
     margin-top: 15px;
     padding: 0 26px;
     font-size: 13px;
     font-weight: 600;
     color: #4f5f79;
+  }
+  
+  .tickets-mob-filters {
+    margin-top: 0;
+    padding: 8px 26px;
   }
   
   .mob-user .hit-area ~ .dropdown-menu {
@@ -912,6 +918,115 @@
     right: 20px;
     top: 15px;
   }
+  
+  .tickets {
+    background-color: #f7fcff;
+    padding: 0;
+  }
+  
+  .ticket, .ticket:first-child {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    min-height: 0;
+  }
+  
+  .mob-ticket {
+    min-height: 112px;
+    padding: 12px 16px 0 48px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .medium-priority-border,
+  .high-priority-border,
+  .low-priority-border {
+    border-left: none !important;
+  }
+  
+  .mob-ticket-info-user {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca5b6;
+  }
+  
+  .mob-ticket-info-company {
+    font-size: 13px;
+    color: #364656;
+    display: flex;
+    align-items: center;
+  }
+  
+  .mob-ticket-info-company .separator {
+    width: 4px;
+    height: 4px;
+    margin: 0 8px;
+    background-color: #9ca5b6;
+    border-radius: 50%;
+  }
+  
+  .mob-ticket-info {
+    display: flex;
+    align-items: center;
+    padding-right: 55px;
+  }
+  
+  .mob-ticket-subject {
+    font-size: 13px;
+    font-weight: 600;
+    color: #364656;
+    padding-right: 55px;
+  }
+  
+  .progress-big-size {
+    display: block !important;
+    background-color: transparent !important;
+  }
+  
+  .mob-ticket-footer {
+    margin-top: 8px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf2f6;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  
+  .mob-ticket-footer:before {
+    position: absolute;
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: url("../images/new-icons/low-priority-mobile.png") no-repeat;
+    left: -27px;
+    top: 4px;
+  }
+  
+  .low-priority-border .mob-ticket-footer:before {
+    background: url("../images/new-icons/low-priority-mobile.png") no-repeat;
+  }
+  
+  .medium-priority-border .mob-ticket-footer:before {
+    background: url("../images/new-icons/medium-priority-mobile.png") no-repeat;
+  }
+  
+  .high-priority-border .mob-ticket-footer:before {
+    background: url("../images/new-icons/high-priority-mobile.png") no-repeat;
+  }
+  
+  .ticket-date {
+    font-size: 13px;
+    color: #9ca5b6;
+  }
+  
+  .icn-ticket-attachment {
+    margin: 0;
+    position: absolute;
+    right: 15px;
+    top: 18px;
+  }
+  
 }
 
 /*# sourceMappingURL=welcome-wizard.css.map */
