@@ -45,7 +45,7 @@
                 y: function(d){return d.time;},
                 showLabels: false,
                 color: function(d,i){
-                    return (d.color) || $scope.chartColors[i]
+                    return  $scope.chartColors[i]
                 },
 
                 pie: {
@@ -425,15 +425,15 @@
                 el.firstLine = el.expenseName + ' - ' + 'Hourly' + ' - ' + el.serviceAgreementDescription;
               } else if (el.agreementType === 'BLOCK_TIME') {
                 if (!el.exceededCommissionRateApplied) {
-                  el.firstLine = el.expenseName + ' - ' + el.serviceAgreementDescription + '- included hours';
+                  el.firstLine = el.expenseName + ' - ' + el.serviceAgreementDescription + (el.expenseBasedOnDefault ? '' : '- included hours');
                 } else {
-                  el.firstLine = el.expenseName + ' - ' + 'Block time' + ' - ' + el.serviceAgreementDescription + ' - over hours';
+                  el.firstLine = el.expenseName + ' - ' + 'Block time' + ' - ' + el.serviceAgreementDescription + (el.expenseBasedOnDefault ? '' : ' - over hours');
                 }
               } else if (el.agreementType === 'SERVICE_CONTRACT') {
                 if (!el.exceededCommissionRateApplied) {
                   el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription;
                 } else {
-                  el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription + ' - over hours';
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription + (el.expenseBasedOnDefault ? '' : ' - over hours');
                 }
 
                 if (el.expenseFromOtherTypeContract) {
