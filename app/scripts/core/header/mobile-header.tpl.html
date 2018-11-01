@@ -1,15 +1,10 @@
 <button class="mobile-btn menu-btn" ng-click="toggleLeftPanel(true)"></button>
-
 <div class="mob-search">
   <input type="text"
          placeholder="Search by Company">
 </div>
-
-<div uib-dropdown>
-  <button class="mobile-btn primary header-btn" ng-if="applicationLoaded" uib-dropdown-toggle>
-
-  </button>
-
+<div uib-dropdown class="mob-header-btn">
+  <button class="mobile-btn primary header-btn" ng-if="applicationLoaded" uib-dropdown-toggle></button>
   <ul class="dropdown-menu tag-list" style="transform: translateX(-80%)">
     <li class="topNavbar-logout" create-new-entity="ticket">
       <a href="javascript:void(0)" class="ha-20-16">
@@ -37,4 +32,10 @@
       </a>
     </li>
   </ul>
+</div>
+
+<button class="mob-back-btn"></button>
+<h3>Ticket Detail</h3>
+<div class="more-ticket-details">
+  <button></button>
 </div>

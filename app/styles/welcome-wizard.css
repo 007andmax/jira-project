@@ -745,7 +745,7 @@
   }
   
   .tags .tag-label {
-    padding: 7px;
+    padding: 9px;
     border-radius: 4px;
   }
   
@@ -754,7 +754,7 @@
   }
   
   .remove-tag.icn-xs {
-    top: 8px;
+    top: 10px;
   }
   
   .user-list-row {
@@ -1027,6 +1027,313 @@
     top: 18px;
   }
   
+  .opened-ticket .content-wrapper .container-ticket-content,
+  .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+    left: 0;
+    width: 100%;
+  }
+  
+  #right,
+  .ticket-content,
+  .mobile-top-bar .mob-back-btn,
+  .mobile-top-bar h3,
+  .mobile-top-bar .more-ticket-details,
+  .mobile-top-bar.ticket-detail-header .menu-btn,
+  .mobile-top-bar.ticket-detail-header .mob-search,
+  .mobile-top-bar.ticket-detail-header .mob-header-btn {
+    display: none;
+  }
+  
+  .mobile-top-bar.ticket-detail-header .mob-back-btn,
+  .mobile-top-bar.ticket-detail-header h3,
+  .mobile-top-bar.ticket-detail-header .more-ticket-details {
+    display: block;
+  }
+  
+  .mobile-top-bar.ticket-detail-header {
+    justify-content: flex-start;
+  }
+  
+  .mobile-top-bar.ticket-detail-header .mob-back-btn,
+  .mobile-top-bar.ticket-detail-header .more-ticket-details button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0 16px 0 0;
+    background: url('../images/new-icons/back-button.png'), transparent;
+    outline: none;
+  }
+  
+  .mobile-top-bar.ticket-detail-header h3 {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .mobile-top-bar.ticket-detail-header .more-ticket-details button {
+    background: url(../images/sprites-s76c759f188.png) no-repeat -1657px 14px, #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    margin: 0;
+  }
+  
+  .mob-ticket-content {
+    padding: 20px 16px 20px 16px;
+  }
+  
+  .mob-ticket-header-info {
+    display: flex;
+  }
+  
+  .mob-valera-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #364656;
+    display: flex;
+  }
+  
+  .mob-valera-ticket-num {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca5b6;
+    margin-right: 28px;
+  }
+  
+  .mob-valera-ticket {
+    display: flex;
+  }
+  
+  .mob-ticket-header-info img {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+  }
+  
+  .mob-valera-ticket-date {
+    font-size: 13px;
+    color: #4f5f79;
+    position: relative;
+  }
+  
+  .mob-valera-ticket-date:before {
+    position: absolute;
+    content: '';
+    background-color: #9ca5b6;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    left: -15px;
+    top: calc(50% - 2px);
+  }
+  
+  .priority-big-size {
+    display: block !important;
+    margin: 6px 0 0 8px;
+    width: 12px;
+    height: 12px;
+    background: url(../images/new-icons/low-priority-mobile.png) no-repeat;
+    border: none;
+  }
+  
+  .priority-big-size.label-priority-high {
+    background: url(../images/new-icons/high-priority-mobile.png) no-repeat;
+  }
+  
+  .priority-big-size.label-priority-medium {
+    background: url(../images/new-icons/medium-priority-mobile.png) no-repeat;
+  }
+  
+  .dropdown-priority {
+    top: 20px;
+    width: 114px !important;
+  }
+  
+  .mob-ticket-header-progress {
+    padding-left: 50px;
+    margin-top: 8px;
+  }
+  
+  .mob-ticket-detail-message {
+    max-height: 200px;
+    height: 100%;
+    overflow: scroll;
+  }
+  
+  .mob-ticket-detail-subject {
+    margin: 10px 0;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.42;
+    color: #364656;
+  }
+  
+  .tags-wrap {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #edf2f6;
+  }
+  
+  .tags-wrap:before {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: url("../images/new-icons/tag.png");
+    left: -2px;
+    top: 13px;
+  }
+  
+  .tags {
+    padding-left: 20px;
+  }
+  
+  .tags-title {
+    display: none;
+  }
+  
+  .tag-label {
+    height: 32px;
+    border-radius: 3px;
+    border: solid 1px #edf2f6;
+    background-color: #f8f9fa;
+    color: #4f5f79;
+    font-size: 12px;
+  }
+  
+  .mob-ticket-detail-attachments-counter {
+    border-bottom: 1px solid #edf2f6;
+    padding: 18px 0;
+  }
+  
+  .mob-ticket-detail-attachments-counter span {
+    font-size: 13px;
+    color: #9ca5b6;
+  }
+  
+  .container-ticket-content > .nano-pane {
+    width: 8px;
+    height: 100vh;
+  }
+  
+  .container-ticket-content > .nano-pane > .nano-slider {
+    margin: 0;
+    width: 6px;
+  }
+  
+  .attachments > li {
+    width: 50%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    margin-right: 0;
+    display: flex;
+    height: auto;
+    align-items: center;
+  }
+  
+  .attachments li > .file-icon-name {
+    margin: 0;
+  }
+  
+  .attachments li .file-name {
+    padding: 0;
+    height: auto;
+    margin-left: 10px;
+  }
+  
+  .attachments li > .file-icon-name {
+    width: 40px;
+    height: 32px;
+  }
+  
+  .attach-type-png {
+    background: url("../images/new-icons/png-attach.png") no-repeat;
+  }
+  
+  .attach-type-doc,
+  .attach-type-docx,
+  .attach-type-txt {
+    background: url("../images/new-icons/doc-attach.png") no-repeat;
+  }
+  
+  .attach-type-jpg {
+    background: url("../images/new-icons/jpeg-attach.png") no-repeat;
+  }
+  
+  .attach-type-pdf {
+    margin-left: 4px;
+    background: url("../images/new-icons/screen-attach.png") no-repeat;
+  }
+  
+  .attachments li > .onhover {
+    background: #fff;
+    height: 45px;
+  }
+  
+  .mob-ticket-header-progress .onhold-ticket {
+    background-color: rgba(255, 185, 55, 0.21) !important;
+    color: #ffb937 !important;
+    border: 1px solid #ffb937;
+  }
+  
+  .mob-ticket-header-progress .progress-ticket {
+    background-color: rgba(22, 164, 250, 0.21) !important;
+    color: #16a4fa !important;
+    border: 1px solid #16a4fa;
+  }
+  
+  .attachments li .file-name {
+    font-size: 13px;
+    color: #9ca5b6;
+  }
+  
+  .alert.alert-info {
+    margin: 0 0 24px 0;
+    background: #e7f5fe;
+    border: none;
+    color: #16a4fa;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: none;
+  }
+  
+  .alert.alert-info strong {
+    font-weight: 500 !important;
+    color: #16a4fa;
+  }
+  
+  .mob-ticket-detail-updates {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  
+  .mob-ticket-detail-updates span {
+    font-size: 13px;
+    color: #9ca5b6;
+  }
+  
+  .mob-ticket-updates {
+    padding-top: 20px;
+    border-top: 1px solid #edf2f6;
+  }
+  
+  .ticket-update {
+    margin: 0;
+    padding: 0;
+    font-size: 13px !important;
+  }
+  
+  .updater-name .text-muted {
+    text-transform: lowercase;
+    color: #9ca5b6;
+  }
 }
 
 /*# sourceMappingURL=welcome-wizard.css.map */
