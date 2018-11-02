@@ -941,8 +941,9 @@
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
 
+                <!--@Leo for 'ticket-update-product-item' add class 'has-discount' if product has discount-->
                 <div class="ticket-update-product-item" ng-class="{'hide': product.id === editExpenseId}">
-                  <div class="ellipsis col desc-w" uib-tooltip="{{ product.item.description }}"
+                  <div class="col desc-w" uib-tooltip="{{ product.item.description }}"
                        trimmed-tooltip-checker="product.item.description">
                   </div>
                   <div class="discount-ticket col text-right discount-w" ng-if="product.discountAmount>0">
@@ -951,25 +952,21 @@
 
                   <div class="update-border"></div>
 
-                  <div class="w-25 col">
-                    <div class="ellipsis" ng-show="product.item.ilc && product.item.ilc.length > 0">#{{ product.item.ilc
-                                                                                                    }}
-                    </div>
-                  </div>
-                  <div class="ellipsis w-25 col text-right"
+                  <div class="ellipsis w-33 col"
                        uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
                        trimmed-tooltip-checker="product.item.sale | currency:'$':2">
                   </div>
-                  <div class="model w-25 col text-right">Qty {{ product.quantity }}</div>
-                  <div class="ellipsis w-25 col text-right" ng-show="ticketDetails.status !== 'COMPLETED'"
+                  <div class="model w-33 col text-center">Qty {{ product.quantity }}</div>
+                  <div class="ellipsis w-33 col text-right" ng-show="ticketDetails.status !== 'COMPLETED'"
                        uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
                        trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
                   </div>
-                  <div class="ellipsis w-25 col text-right" ng-show="ticketDetails.status === 'COMPLETED'"
+                  <div class="ellipsis w-33 col text-right" ng-show="ticketDetails.status === 'COMPLETED'"
                        uib-tooltip="{{ product.sum | currency :'$':2 }}"
                        trimmed-tooltip-checker="product.sum | currency:'$':2">
                   </div>
 
+                  <!--@Leo-->
                   <a class="hit-area has-tooltip edit-update"
                      tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
                      ng-click="setEditExpenseId(product.id)"
@@ -1087,7 +1084,7 @@
     m.parentNode.insertBefore(a, m);
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-93441341-1', 'auto');
-    ga('send', 'pageview');
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
 
-  </script>
+</script>

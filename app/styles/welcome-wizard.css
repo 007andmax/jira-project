@@ -640,6 +640,7 @@
   }
   
   .company--content .x-mark,
+  .ticket--content .x-mark,
   .user--content .x-mark {
     background: none;
   }
@@ -647,6 +648,7 @@
   .company--content .col-md-12,
   .user--content .col-md-12,
   .company--footer .btn-default,
+  .ticket--footer .btn-default,
   .user--footer .btn-default {
     display: none !important;
   }
@@ -694,6 +696,7 @@
   }
   
   .company--footer,
+  .ticket--footer,
   .user--footer {
     padding: 0 !important;
     width: 100%;
@@ -706,6 +709,7 @@
   }
   
   .create-new .company--footer .btn.btn-primary,
+  .create-new .ticket--footer .btn.btn-primary,
   .create-new .user--footer .btn.btn-primary {
     margin: 0;
     border-radius: 0 !important;
@@ -1259,9 +1263,12 @@
   }
   
   .attach-type-doc,
-  .attach-type-docx,
-  .attach-type-txt {
+  .attach-type-docx {
     background: url("../images/new-icons/doc-attach.png") no-repeat;
+  }
+  
+  .attach-type-txt {
+    background: url("../images/new-icons/txt-attach.png") no-repeat;
   }
   
   .attach-type-jpg {
@@ -1270,7 +1277,7 @@
   
   .attach-type-pdf {
     margin-left: 4px;
-    background: url("../images/new-icons/screen-attach.png") no-repeat;
+    background: url("../images/new-icons/pdf-attach.png") no-repeat;
   }
   
   .attachments li > .onhover {
@@ -1391,8 +1398,8 @@
     padding-left: 45px !important;
   }
   
-  .w-25 {
-    width: 25%;
+  .w-33 {
+    width: 33.3333333%;
   }
   
   .w-26 {
@@ -1432,10 +1439,6 @@
     top: 64px;
     right: -30px;
     margin: 0;
-  }
-  
-  .ticket-update-service .ticket-update-service-item .delete-update {
-    top: 78px;
   }
   
   .col {
@@ -1479,11 +1482,24 @@
   }
   
   .desc-w {
-    width: 70%;
+    width: 100%;
   }
   
   .discount-w {
+    display: none;
+  }
+  
+  .ticket-update-product-item.has-discount .desc-w {
+    width: 70%;
+  }
+  
+  .tags-action {
+    height: 32px;
+  }
+  
+  .ticket-update-product-item.has-discount .discount-w {
     width: 30%;
+    display: block;
   }
   
   .btn-load-more {
@@ -1534,25 +1550,126 @@
   .mob-add-ticket-btn {
     color: #fff;
   }
+  
+  .mob-filters .tags-wrap {
+    border-bottom: none;
+  }
+  
+  .mob-filters .tags-wrap:before {
+    display: none;
+  }
+  
+  .mob-filters .tags {
+    padding: 5px;
+  }
+  
+  .create-ticket-form .ticket--header {
+    display: flex;
+    height: 56px;
+    padding: 0 20px 0 56px;
+    border-radius: 0;
+  }
+  
+  .create-ticket-form .ticket--header > div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .create-ticket-form .ticket--header h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #364656;
+  }
+  
+  .create-ticket-form .ticket--header .close-modal {
+    right: -100px;
+  }
+  
+  .create-ticket-form .close-modal {
+    position: absolute;
+    left: 20px;
+  }
+  
+  .create-ticket-form .ticket--content {
+    padding: 30px 16px;
+  }
+  
+  .create-ticket-form .ticket--content .dropdown-menu {
+    width: 300px !important;
+  }
+  
+  .shared-avatars {
+    display: flex;
+  }
+  
+  .shared-avatars .avatars {
+    padding: 2px 7px;
+    display: flex;
+  }
+  
+  .shared-avatars .shared-avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 2px;
+  }
+  
+  .shared-avatars .shared-avatar {
+    position: relative;
+  }
+  
+  .shared-avatars .shared-avatar > img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  
+  .shared-avatars .check-area.checked {
+    background: #2ec866;
+    border: 1px solid white;
+  }
+  
+  .shared-avatars .avatars .default-user-avatar {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .shared-avatars .check-area {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translate(50%, 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border: 1px solid #edf2f6;
+    border-radius: 50%;
+  }
 }
 
 @media (max-width: 375px) {
-  .desc-w {
+  .ticket-update-product-item.has-discount .desc-w {
     width: 68%;
   }
   
-  .discount-w {
+  .ticket-update-product-item.has-discount .discount-w {
     width: 32%;
+    display: block;
   }
 }
 
 @media (max-width: 320px) {
-  .desc-w {
+  .ticket-update-product-item.has-discount .desc-w {
     width: 61%;
   }
   
-  .discount-w {
+  .ticket-update-product-item.has-discount .discount-w {
     width: 39%;
+    display: block;
   }
 }
 
