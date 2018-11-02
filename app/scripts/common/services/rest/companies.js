@@ -257,6 +257,15 @@
 
     }
 
+    function setTechLead(companyId, techLeadId, callback) {
+      $http.put('/company/' + companyId +  '/setTechLead/' + techLeadId).
+        then(function(res) {
+          if (callback) {
+            callback()
+          }
+        })
+    }
+
     function getCompanyByAddressId(id) {
       var clients = storage.clientCompanies;
 
