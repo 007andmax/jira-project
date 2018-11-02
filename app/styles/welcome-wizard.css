@@ -337,6 +337,7 @@
     border-radius: 4px;
     outline: none;
     transition: all .3s;
+    border: none;
   }
   
   .mobile-btn.primary {
@@ -1320,8 +1321,9 @@
   }
   
   .mob-ticket-updates {
-    padding-top: 20px;
     border-top: 1px solid #edf2f6;
+    padding: 0 15px;
+    margin: 0 -15px;
   }
   
   .ticket-update {
@@ -1333,6 +1335,224 @@
   .updater-name .text-muted {
     text-transform: lowercase;
     color: #9ca5b6;
+  }
+  
+  .ticket-updates-wrapper {
+    margin-bottom: 71px;
+  }
+  
+  .ticket-update-header {
+    margin: 20px 0 0 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    border-bottom: none;
+    position: relative;
+  }
+  
+  .ticket-update-actions {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .ticket-update-actions .edit-update {
+    margin-right: 10px;
+  }
+  
+  .ticket-update-header img {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    border-radius: 50%;
+  }
+  
+  .ticket-update-message {
+    margin: 0 !important;
+  }
+  
+  .ticket-update-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+    width: 100%;
+  }
+  
+  .ticket-update-message {
+    padding-left: 45px;
+    font-size: 13px;
+    line-height: 1.54 !important;
+    color: #626b7f !important;
+  }
+  
+  .attachments {
+    padding-left: 45px !important;
+  }
+  
+  .w-25 {
+    width: 25%;
+  }
+  
+  .w-26 {
+    width: 26%;
+  }
+  
+  .w-48 {
+    width: 48%;
+  }
+  
+  .ticket-update-service .col {
+    line-height: 20px;
+  }
+  
+  .ticket-update-product .ticket-update-product-item,
+  .ticket-update-service .ticket-update-service-item {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 15px 10px;
+    background-color: #f6f8fa;
+    margin: 15px 30px 0 0;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .ticket-update-product .ticket-update-product-item .edit-update,
+  .ticket-update-service .ticket-update-service-item .edit-update {
+    position: absolute;
+    top: 18px;
+    right: -30px;
+    margin: 0;
+  }
+  
+  .ticket-update-product .ticket-update-product-item .delete-update,
+  .ticket-update-service .ticket-update-service-item .delete-update {
+    position: absolute;
+    top: 64px;
+    right: -30px;
+    margin: 0;
+  }
+  
+  .ticket-update-service .ticket-update-service-item .delete-update {
+    top: 78px;
+  }
+  
+  .col {
+    padding: 0 5px;
+    min-height: 1px;
+  }
+  
+  .ticket-update-product > .ticket-update-product-item,
+  .ticket-update-service > .ticket-update-service-item,
+  .ticket-update-product > .ticket-update-product-item p,
+  .ticket-update-product > .ticket-update-product-item span {
+    font-size: 13px !important;
+  }
+  
+  .discount-ticket {
+    font-size: 12px;
+    color: #2ec866;
+  }
+  
+  .update-border {
+    margin: 10px -10px;
+    width: 110%;
+    height: 1px;
+    background-color: #edf2f6;
+  }
+  
+  .mob-ticket-detail-attachments-content .attachments {
+    padding-left: 0 !important;
+  }
+  
+  .edit-icon {
+    background-image: url(../images/new-icons/company-edit.svg);
+    width: 14px;
+    height: 14px;
+  }
+  
+  .icn-delete {
+    background-image: url(../images/new-icons/company-remove.svg);
+    width: 12px;
+    height: 12px;
+  }
+  
+  .desc-w {
+    width: 70%;
+  }
+  
+  .discount-w {
+    width: 30%;
+  }
+  
+  .btn-load-more {
+    margin: 15px auto;
+    display: block !important;
+    width: 200px;
+    background-color: #16a4fa !important;
+  }
+  
+  .btn-load-more.disabled {
+    background-color: transparent !important;
+  }
+  
+  .ticket-update-service-duration span {
+    color: #9ca5b6;
+  }
+  
+  .ticket-update-content .ticket-update-meta span.update-timestamp {
+    margin-top: 12px;
+  }
+  
+  .mob-ticket-buttons {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+  }
+  
+  .mob-ticket-buttons button {
+    width: 50%;
+    height: 48px;
+    border-radius: 0;
+    font-size: 14px;
+  }
+  
+  .mob-close-ticket-btn {
+    color: #16a4fa;
+    background-color: #fff;
+  }
+  
+  .mob-close-ticket-btn:hover {
+    background-color: #16a4fa;
+    color: #fff;
+  }
+  
+  .mob-add-ticket-btn {
+    color: #fff;
+  }
+}
+
+@media (max-width: 375px) {
+  .desc-w {
+    width: 68%;
+  }
+  
+  .discount-w {
+    width: 32%;
+  }
+}
+
+@media (max-width: 320px) {
+  .desc-w {
+    width: 61%;
+  }
+  
+  .discount-w {
+    width: 39%;
   }
 }
 
