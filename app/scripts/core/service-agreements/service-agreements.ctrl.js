@@ -6,8 +6,8 @@
     ['$scope', '$uibModal', 'AgreementsService', 'CompaniesService',
       'quicktech.common.services.UserConfirmationsService',
       'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService, PermissionsService) {
+      'quicktech.common.services.PermissionsService', 'ServicesService',
+      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService, PermissionsService, ServicesService) {
 
         $scope.parseDate = Date.parse.bind(Date);
         $scope.filterType = 'company.name';
@@ -253,6 +253,8 @@
             listOfServices.sort(function(a,b) {
               return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
             });
+
+            $scope.defaultServicesList = listOfServices.slice();
             $scope.editContract.services = listOfServices;
           }
         });
@@ -468,6 +470,15 @@
         // }
       };
 
+      $scope.getUniqueServicesForDropdown = function() {
+
+        return $scope.defaultServicesList.filter(function(el) {
+          return !~$scope.editContract.services.findIndex(function(service) {
+            return service.id === el.id;
+          })
+        })
+      }
+
 
       $scope.addNewService = function (form, editService) {
         $scope.showAddServiceButton = false;
@@ -480,19 +491,48 @@
           } else {
             validateNewServiceName(editService).then(function (resp) {
               if (resp) {
-                var newService = {
-                  name: editService.name,
-                  rate: editService.rate || 0.00,
-                  billable: editService.billable || false,
-                  taxes: editService.taxes || $scope.addDefaultTaxes(),
-                  taxIds: []
-                };
+
+                if (editService.name.name) {
+                  var newService = {
+                    name: editService.name.name,
+                    rate: editService.name.rate || 0.00,
+                    billable: editService.name.billable || false,
+                    taxes: editService.taxes || $scope.addDefaultTaxes(),
+                    taxIds: [],
+                    id: editService.name.id,
+                    basedOnDefault: true
+                  };
+                } else {
+                  var newService = {
+                    name: editService.name,
+                    rate: editService.rate || 0.00,
+                    billable: editService.billable || false,
+                    taxes: editService.taxes || $scope.addDefaultTaxes(),
+                    taxIds: [],
+                    basedOnDefault: true
+                  };
+                }
+
+
                 if (editService.taxes && editService.taxes.length) {
                   for (var i = 0; i < editService.taxes.length; i++) {
                     newService.taxIds.push(editService.taxes[i].id)
                   }
                 }
-                $scope.editContract.services.push(newService);
+
+
+                if (!editService.name.id) {
+                  var serviceToSend = Object.assign({isDefault: true}, newService)
+
+                  ServicesService.save(serviceToSend, function(resp) {
+                    newService.id = resp.versionedId
+                    $scope.editContract.services.push(newService);
+                  })
+                } else {
+                  $scope.editContract.services.push(newService);
+                }
+
+
                 $scope.editService = {
                   name: '',
                   rate: null,
@@ -650,7 +690,7 @@
 
           var companyId = returnCompanyId();
           var name = [];
-          name.push(editService.name);
+          name.push(editService.name.name || editService.name);
           ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name, function (resp) {
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);

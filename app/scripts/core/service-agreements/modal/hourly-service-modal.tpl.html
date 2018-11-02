@@ -112,7 +112,33 @@
           <div ng-show="!isNameUnique(editService.name) && editService.name">
             <p style="color: red;padding-left: 15px;">Duplicate name</p>
           </div>
-          <div class="col-md-4 service-name-agreement form-group"
+
+          <div class="col-md-4 service-name-agreement form-group short-service-list">
+            <div uib-dropdown
+                 ng-class="{'has-error': (isShowingHourNewFieldError(newServiceForm, 'editServiceName') || showNotAddedHourlyServiceError(editService))}">
+
+              <input type="text"
+                     name="editServiceName"
+                     ng-model="editService.name"
+                     ng-minlength="1"
+                     autocomplete="off"
+                     placeholder="Service"
+                     class="form-control form-control-dropdown dropdown-toggle"
+                     uib-typeahead="service as service.name for service in getUniqueServicesForDropdown() |  orderBy:'name'"
+                     qt-typeahead-async-show-on-focus
+                     hard-reset-pattern="descriptionPattern"
+                     ng-click="refreshNotAddedServiceErrorHourly()"/>
+
+              <div class="input-top-4" typeahead-input-icon="editService.name"></div>
+
+              <div class="service-list-container"></div>
+              <!--<input type="hidden" name="service" ng-model="newContractService.name.versionedId.id" ng-required="true">-->
+
+            </div>
+          </div>
+
+
+          <!-- <div class="col-md-4 service-name-agreement form-group"
                ng-class="{'has-error': (isShowingHourNewFieldError(newServiceForm, 'editServiceName') || showNotAddedHourlyServiceError(editService))}">
 
             <input placeholder="New Service Name"
@@ -123,7 +149,10 @@
                    ng-model="editService.name"
                    required hard-reset-pattern="serviceNamePattern"
                    invalid-when="!isNameUnique(editService.name)">
-          </div>
+          </div> -->
+
+
+
           <div class="col-md-1 fourm-group text-center">
             <label class="control checkbox">
               <input type="checkbox" ng-model="editService.billable">
