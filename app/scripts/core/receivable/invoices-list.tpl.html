@@ -210,7 +210,7 @@
               <div class="clearfix" style="margin-bottom: 5px;">
                 <div class="col-md-8 bold pl-30">Customer Note Type</div>
                 <div class="col-md-2 bold fz-11">Sub Total</div>
-                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.totalSum - currentInvoice.taxSum ) | currency: '$':2 }}</div>
               </div>
               <div class="clearfix">
                 <div class="col-md-8 pl-30 notes">{{ currentInvoice.regularNote.line1 + (currentInvoice.regularNote.line2 || '') }}
