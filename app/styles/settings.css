@@ -54,19 +54,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 33%;
+  width: 25%;
 }
 
 .commissions-settings .togglers div:hover {
 
 }
 
-.commissions-settings .togglers div:nth-child(2) {
+.commissions-settings .togglers div:not(:last-child) {
   border-right: 1px solid #b4b4b4;
-  border-left: 1px solid #b4b4b4;
 }
 
-.commissions-settings .commission-input div {
+.commission-input {
   margin: 10px 0;
 }
 

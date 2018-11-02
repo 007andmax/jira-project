@@ -492,6 +492,8 @@
             validateNewServiceName(editService).then(function (resp) {
               if (resp) {
 
+                console.log(editService, 'EDITEDIT')
+
                 if (editService.name.name) {
                   var newService = {
                     name: editService.name.name,

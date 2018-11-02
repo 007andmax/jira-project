@@ -258,6 +258,7 @@
     }
 
     function setTechLead(companyId, techLeadId, callback) {
+      if (!companyId || !techLeadId) return;
       $http.put('/company/' + companyId +  '/setTechLead/' + techLeadId).
         then(function(res) {
           if (callback) {
@@ -1007,7 +1008,8 @@
       setServiceRate: setServiceRate,
       setCategoryRate: setCategoryRate,
       setAgreementsRate: setAgreementsRate,
-      getAgreementsRates: getAgreementsRates
+      getAgreementsRates: getAgreementsRates,
+      setTechLead: setTechLead
     }
 
   }]);

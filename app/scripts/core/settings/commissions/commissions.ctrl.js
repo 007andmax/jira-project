@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.commissionsCtrl',
-    ['$scope', 'UsersService', 'ProductsService', 'ServicesService', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, UsersService, ProductsService, ServicesService, CompaniesService, UserConfirmationsService, UserNotificationService) {
+    ['$scope', 'UsersService', 'ProductsService', 'ServicesService', 'CompaniesService', 'quicktech.common.services.NewConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, UsersService, ProductsService, ServicesService, CompaniesService, NewConfirmationsService, UserNotificationService) {
 
         var confirmMessage = 'Do you want this commission to fact old items?';
         var confirmButton = 'Yes';
@@ -22,7 +22,53 @@
           $scope.view = view;
         }
 
+        $scope.getFullName = function (client) {
+          if (client) {
+            var isAllSpaces = client.lastName === "    ";
+            if (client.lastName && !isAllSpaces) {
+              return client.firstName + ' ' + client.lastName;
+            } else {
+              return client.firstName;
+            }
+          }
+        };
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.setTechLeadId = function(company) {
+          console.log(company, 'copany')
+
+
+          CompaniesService.setTechLead(company.id, company.techLeadId, function(res) {
+            console.log(res)
+          })
+        }
+
+        $scope.activeTechUsers = function() {
+
+          console.log('techUsers', UsersService.getTechUsers().filter(function(el) {
+            return el.userEnabled && !el.deletedAt;
+          }))
+          return UsersService.getTechUsers().filter(function(el) {
+            return el.userEnabled && !el.deletedAt;
+          })
+        }
+
         $scope.agreementsCommissions = {}
+
+        $scope.clientsCompanies = CompaniesService.getClientCompanies()
 
 
 
@@ -73,7 +119,7 @@
 
             if (!category.commissionRateSetOldSales) {
 
-              UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              NewConfirmationsService.show(confirmMessage, confirmButton).then(function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setCategoryRate(id, data, function(res) {
                   console.log(res, 'Set category rate')
@@ -105,7 +151,7 @@
 
 
 
-              UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              NewConfirmationsService.show(confirmMessage, confirmButton).then(function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setServiceRate(id, data, function(res) {
                   console.log(res, 'Set service rate')
@@ -141,7 +187,7 @@
           data = Object.assign({}, data, agreementsFlags);
 
           if (!rates[flag]) {
-            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+            NewConfirmationsService.show(confirmMessage, confirmButton).then(function () {
               data[flag] = true
               CompaniesService.setAgreementsRate(data, function(res) {
                 console.log('res from agreements', res)

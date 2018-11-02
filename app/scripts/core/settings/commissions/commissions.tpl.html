@@ -1,26 +1,27 @@
 <div class="commissions-settings">
 
   <div class="col-md-12">
-    <div class="togglers col-md-5">
+    <div class="togglers col-md-7">
       <div class="pointer" ng-click="setView('product')">Product Commissions</div>
       <div class="pointer" ng-click="setView('service')">Service Commissions</div>
       <div class="pointer" ng-click="setView('commission')">Contract Commissions</div>
-
+      <div class="pointer" ng-click="setView('companies')">Companies' Sales Persons</div>
     </div>
 
-    <div class="col-md-7" style="padding-top: 25px; padding-bottom: 25px">
-      Commission Rate %
+    <div class="col-md-5" style="padding-top: 25px; padding-bottom: 25px">
+      <span ng-if="view !== 'companies'">Commission Rate %</span>
+      <span ng-if="view === 'companies'">Sales person</div>
     </div>
   </div>
 
   <div class="col-md-12">
     <div ng-if="view === 'product'">
-      <div ng-repeat="category in categories" class="commission-input">
-        <div class="col-md-5">
+      <div ng-repeat="category in categories" class="commission-input clearfix">
+        <div class="col-md-7">
           {{ category.name }}
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-5">
           <!-- <input  type="number" /> -->
 
           <input type="text" class="form-validation form-control"
@@ -35,11 +36,11 @@
 
     <div ng-if="view === 'service'">
       <div ng-repeat="service in services" class="commission-input clearfix">
-        <div class="col-md-5">
+        <div class="col-md-7">
           {{ service.name }}
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-5">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation form-control"
                  ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate, service)" qt-to-fixed="2"
@@ -51,11 +52,11 @@
       <h3>Special services</h3>
 
       <div ng-repeat="service in specialServices" class="commission-input clearfix">
-        <div class="col-md-5">
+        <div class="col-md-7">
           {{ service.name }}
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-5">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation form-control"
                  ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate, service)" qt-to-fixed="2"
@@ -68,7 +69,7 @@
 
     <div ng-if="view === 'commission'">
       <div class="block col-md-12" >
-        <div class="col-md-5">
+        <div class="col-md-7">
           <h3>Hourly Contracts</h3>
           <p>Hourly Contracts will use the service default commission rate.</p>
         </div>
@@ -76,7 +77,7 @@
       </div>
       <div class="block col-md-12" >
 
-        <div class="col-md-5">
+        <div class="col-md-7">
           <h3>Block Time Contracts</h3>
 
           <p>
@@ -87,21 +88,21 @@
         </div>
 
         <div class="col-md-12 commission-input">
-          <div class="col-md-5">
+          <div class="col-md-7">
             Block time Included Hours commission Rate
           </div>
 
-          <div class="col-md-7">
+          <div class="col-md-5">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.blockTimeContractCommission" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTime')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-7">
             Rate for hours Exceeding Included hours on Black Time Contracts
           </div>
 
-          <div class="col-md-7">
+          <div class="col-md-5">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.blockTimeContractCommissionExceeding" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTimeExceeding')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -114,7 +115,7 @@
       </div>
       <div class="block col-md-12">
 
-        <div class="col-md-5">
+        <div class="col-md-7">
           <h3>Per User and Device Cotracts</h3>
 
           <p>
@@ -131,21 +132,21 @@
         </div>
 
         <div class="col-md-12 commission-input">
-          <div class="col-md-5">
+          <div class="col-md-7">
             Per User and Per Device Contracts
           </div>
 
-          <div class="col-md-7">
+          <div class="col-md-5">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.userOrDeviceContractCommission" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContract')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-7">
             Rate for hours Exceeding Included hours on Block Time contracts
           </div>
 
-          <div class="col-md-7">
+          <div class="col-md-5">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.userOrDeviceContractCommissionExceeding" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContractExceeding')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -155,7 +156,7 @@
       </div>
       <div class="block col-md-12">
 
-        <div class="col-md-5">
+        <div class="col-md-7">
           <h3>Other Contracts</h3>
 
           <p>
@@ -169,6 +170,33 @@
 
 
     </div>
+
+
+      <div ng-if="view === 'companies'" ng-repeat="company in clientsCompanies" class="commission-input clearfix">
+        <div class="col-md-7">
+          {{ company.name }}
+        </div>
+
+        <div class="col-md-5">
+          <!-- <input type="number" /> -->
+          <div class='form-group'>
+            <input type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select Tech User"
+                   name="leadBy"
+                   typeahead-input-formatter="getUserByID($model)"
+                   autocomplete="off" ng-model="company.techLeadId"
+                   uib-typeahead="client.id as getFullName(client) for client in activeTechUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                   execute-when-outfocused="setTechLeadId(company)">
+            <div typeahead-input-icon="company.techLeadId"></div>
+          </div>
+        </div>
+
+      </div>
+
+
+
 
   </div>
 
