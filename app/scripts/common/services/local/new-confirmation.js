@@ -15,28 +15,29 @@
           templateUrl: '/html/scripts/core/settings/commissions/commission-confirmation.html'
         };
 
-        this.show = function (message, button, hideCancel, btnCancel) {
+        this.show = function (message, button, approveFn, rejectFn, closeFn) {
 
           modalParams.controller = (['$scope', '$uibModalInstance',
             function ($scope, $uibModalInstance) {
 
               $scope.messageConfirm = message;
               $scope.buttonConfirm = button;
-              $scope.hideCancel = hideCancel;
+
               $scope.btnCancel = 'No';
-              if(btnCancel) {
-                $scope.btnCancel = btnCancel;
-              }
+
 
               $scope.approveConfirm = function (result) {
+                approveFn()
                 $uibModalInstance.close(result);
               };
 
               $scope.cancelConfirm = function () {
+                rejectFn();
                 $uibModalInstance.dismiss();
               };
 
               $scope.closeModal = function() {
+                if (closeFn) closeFn();
                 $uibModalInstance.dismiss();
               }
 

@@ -119,7 +119,7 @@
 
             if (!category.commissionRateSetOldSales) {
 
-              NewConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setCategoryRate(id, data, function(res) {
                   console.log(res, 'Set category rate')
@@ -128,7 +128,13 @@
                 CompaniesService.setCategoryRate(id, data, function(res) {
                   console.log(res, 'Set category rate')
                 })
-              });
+              }, function() {
+                var category = $scope.categories.find(function(el) {
+                  return el.id === id;
+                })
+
+                category.commissionRate = 0;
+              })
             } else {
               CompaniesService.setCategoryRate(id, data, function(res) {
                 console.log(res, 'Set category rate')
@@ -151,7 +157,7 @@
 
 
 
-              NewConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setServiceRate(id, data, function(res) {
                   console.log(res, 'Set service rate')
@@ -160,7 +166,22 @@
                 CompaniesService.setServiceRate(id, data, function(res) {
                   console.log(res, 'Set service rate')
                 })
-              });
+              }, function() {
+                var specialServices = $scope.specialServices;
+                var services = $scope.services;
+
+                var service = specialServices.find(function(el) {
+                  return el.id === id;
+                });
+
+                if (!service) {
+                  service = services.find(function(el) {
+                    return el.versionedId.id === id;
+                  })
+                }
+
+                service.commissionRate = 0;
+              })
             } else {
               CompaniesService.setServiceRate(id, data, function(res) {
                 console.log(res, 'Set service rate')
@@ -170,7 +191,7 @@
 
         }
 
-        $scope.setAgreementRate = function(flag) {
+        $scope.setAgreementRate = function(flag, rate) {
 
           Object.keys($scope.agreementsCommissions).forEach(function(key) {
             $scope.agreementsCommissions[key] = +$scope.agreementsCommissions[key];
@@ -185,9 +206,9 @@
           }
 
           data = Object.assign({}, data, agreementsFlags);
-
+          console.log(rates, "RATES")
           if (!rates[flag]) {
-            NewConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+            NewConfirmationsService.show(confirmMessage, confirmButton, function () {
               data[flag] = true
               CompaniesService.setAgreementsRate(data, function(res) {
                 console.log('res from agreements', res)
@@ -196,7 +217,9 @@
               CompaniesService.setAgreementsRate(data, function(res) {
                 console.log('res from agreements', res)
               })
-            });
+            }, function() {
+              rates[rate] = 0;
+            })
           } else {
             CompaniesService.setAgreementsRate(data, function(res) {
               console.log('res from agreements', res)
