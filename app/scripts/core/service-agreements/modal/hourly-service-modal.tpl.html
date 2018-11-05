@@ -126,6 +126,7 @@
                      class="form-control form-control-dropdown dropdown-toggle"
                      uib-typeahead="service as service.name for service in getUniqueServicesForDropdown() |  orderBy:'name'"
                      qt-typeahead-async-show-on-focus
+                     ng-change="pullServiceRate(editService)"
                      hard-reset-pattern="descriptionPattern"
                      ng-click="refreshNotAddedServiceErrorHourly()"/>
 

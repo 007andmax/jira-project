@@ -370,6 +370,19 @@
       }
 
 
+      $scope.pullServiceRate = function(service) {
+        console.log(service, 'service');
+
+        $timeout(function() {
+          if (typeof service.name === 'object') {
+            if (service.name.rate) {
+              $scope.editService.rate = service.name.rate;
+            }
+          }
+        }, 2000)
+      }
+
+
       $scope.addDefaultTaxes = function () {
         var defaultTaxList = [];
         for (var i = 0; i < $scope.taxes.length; i++) {
@@ -497,7 +510,7 @@
                 if (editService.name.name) {
                   var newService = {
                     name: editService.name.name,
-                    rate: editService.name.rate || 0.00,
+                    rate: editService.rate || editService.name.rate || 0.00,
                     billable: editService.name.billable || false,
                     taxes: editService.taxes || $scope.addDefaultTaxes(),
                     taxIds: [],
