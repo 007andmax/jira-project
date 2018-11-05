@@ -375,7 +375,7 @@
 
         $timeout(function() {
           if (typeof service.name === 'object') {
-            if (service.name.rate) {
+            if (service.name.rate || service.name.rate == 0) {
               $scope.editService.rate = service.name.rate;
             }
           }
