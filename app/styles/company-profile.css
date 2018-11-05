@@ -48,11 +48,17 @@
 
 .company-info-content .form-group .icn-remove-old,
 .company-info-content .form-group .report-caret-icon {
+
+}
+
+.form-group .icn-remove-old,
+.form-group .report-caret-icon {
   position: absolute;
   right: 5px;
   top: 7px;
   cursor: pointer;
 }
+
 
 .company-info-content .form-group .report-caret-icon {
   right: 7px;

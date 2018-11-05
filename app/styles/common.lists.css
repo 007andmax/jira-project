@@ -5572,6 +5572,11 @@ Devices tab
   width: 335px !important;
 }
 
+.short-service-list ul {
+  width: 100%;
+  max-height: 135px;
+}
+
 .readonly .service-name-agreement {
   width: 394px !important;
 }
@@ -5586,6 +5591,10 @@ Devices tab
 }
 
 .block-time .service-name-agreement .x-mark {
+  top: 2px;
+}
+
+.service-bill .service-name-agreement .x-mark {
   top: 2px;
 }
 

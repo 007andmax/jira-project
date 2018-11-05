@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("clickOutside",
-    ['$document', '$parse', function ($document, $parse) {
+    ['$document', '$parse', '$rootScope', function ($document, $parse, $rootScope) {
       return {
         restrict: 'A',
         link: function ($scope, elem, attr) {
@@ -44,9 +44,15 @@
               }
             }
 
-            return $scope.$apply(function () {
-              return fn($scope);
-            });
+            // if(!$scope.$$phase && !$rootScope.$$phase) {
+            return setTimeout(function() {
+              $scope.$apply(function () {
+                return fn($scope);
+              });
+            }, 0)      //$digest or $apply
+            // }
+
+
           };
 
           $document.on('click', eventHandler);
