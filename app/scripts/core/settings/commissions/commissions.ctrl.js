@@ -133,7 +133,7 @@
                   return el.id === id;
                 })
 
-                category.commissionRate = 0;
+                category.commissionRate = null;
               })
             } else {
               CompaniesService.setCategoryRate(id, data, function(res) {
@@ -180,7 +180,7 @@
                   })
                 }
 
-                service.commissionRate = 0;
+                service.commissionRate = null;
               })
             } else {
               CompaniesService.setServiceRate(id, data, function(res) {
@@ -218,7 +218,7 @@
                 console.log('res from agreements', res)
               })
             }, function() {
-              rates[rate] = 0;
+              rates[rate] = null;
             })
           } else {
             CompaniesService.setAgreementsRate(data, function(res) {
