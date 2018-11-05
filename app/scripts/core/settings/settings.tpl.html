@@ -33,6 +33,13 @@
       <img class="svg-icn-full" src="images/settings-icon/permission-management.png">
       <p>Permissions</p>
     </div>
+
+    <div class="col-xs-1 settings-wrapper__trow--td"
+         ui-sref="settings.commissions">
+      <img class="svg-icn-full" src="images/settings-icon/permission-management.png">
+      <p>Commissions</p>
+    </div>
+
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.email"
          ng-click="updateWelcomeWizard('settings.email')"
          ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">

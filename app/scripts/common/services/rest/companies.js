@@ -254,6 +254,16 @@
 
     }
 
+    function setTechLead(companyId, techLeadId, callback) {
+      if (!companyId || !techLeadId) return;
+      $http.put('/company/' + companyId +  '/setTechLead/' + techLeadId).
+        then(function(res) {
+          if (callback) {
+            callback()
+          }
+        })
+    }
+
     function getCompanyByAddressId(id) {
       var clients = storage.clientCompanies;
 
@@ -375,6 +385,36 @@
         }
       });
       return info;
+    }
+
+    function setCategoryRate(id, data, callback) {
+      $http.put('/settings/companyProfile/categoryRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
+        commissionRate: data.rate
+      }).then(function(res) {
+        if (callback) callback(res);
+      })
+    }
+
+    function setServiceRate(id, data, callback) {
+      $http.put('/settings/companyProfile/serviceRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
+        commissionRate: data.rate
+      }).then(function(res) {
+        if (callback) callback(res);
+      })
+    }
+
+    function setAgreementsRate(rates, callback) {
+      $http.post('/settings/companyProfile/agreementRates', rates)
+        .then(function(res) {
+          if (callback) callback(res);
+        })
+    }
+
+    function getAgreementsRates(callback) {
+      $http.get('/settings/companyProfile/agreementRates')
+        .then(function(res) {
+          if (callback) callback(res);
+        })
     }
 
     function getCompanyInfo(companyId, scope, callback) {
@@ -534,6 +574,12 @@
         method: method,
         data: company
       });
+
+      if (company.id) {
+        storage.clientCompanies.find(function(val) {
+          return val.id === company.id;
+        }).techLeadId = company.techLeadId;
+      }
 
       if (!company.id && callback) {
         future.then(function (resp) {
@@ -960,7 +1006,12 @@
       saveCompanyPaymentInfo: saveCompanyPaymentInfo,
       changePrimaryContact: changePrimaryContact,
       checkStorageCompanyLength: checkStorageCompanyLength,
-      reloadCurrentCompany: reloadCurrentCompany
+      reloadCurrentCompany: reloadCurrentCompany,
+      setServiceRate: setServiceRate,
+      setCategoryRate: setCategoryRate,
+      setAgreementsRate: setAgreementsRate,
+      getAgreementsRates: getAgreementsRates,
+      setTechLead: setTechLead
     }
 
   }]);

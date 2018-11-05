@@ -209,6 +209,11 @@
           templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
           controller: 'quicktech.core.settings.techUsersCtrl'
         }))
+        .state('settings.commissions', waitForServices({
+          url: '/commissions',
+          templateUrl: '/html/scripts/core/settings/commissions/commissions.tpl.html',
+          controller: 'quicktech.core.settings.commissionsCtrl'
+        }))
         .state('settings.email', waitForServices({
           url: '/email',
           templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
@@ -267,6 +272,16 @@
         .state('techReport-TicketCreated', waitForServices({
           url: '/reports/techReport-TicketCreated',
           templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('commissionsReport-detailed', waitForServices({
+          url: '/reports/byCommissionsDetailed',
+          templateUrl: '/html/scripts/core/reports/reports-templates/commissions-report-detailed.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('commissionsReport-common', waitForServices({
+          url: '/reports/byCommissions',
+          templateUrl: '/html/scripts/core/reports/reports-templates/commissions-report-common.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('techReport-ProductSales', waitForServices({

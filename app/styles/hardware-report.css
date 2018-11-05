@@ -14,7 +14,7 @@
 
 .hardware {
   padding: 20px 0;
-  background: #F4F4F4;
+  background: #f4f4f4;
 }
 
 .hardware-wrap::-webkit-scrollbar {
@@ -250,7 +250,7 @@
 
 .hardware__wrapper--report .info-row .hard-drive__point--icon img {
   width: 150px;
-
+  
 }
 
 .hardware__wrapper--report .info-row .hard-drive:before {
@@ -334,7 +334,7 @@
 .product-list-report {
   padding: 30px 30px 30px;
   height: 100%;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   min-height: 92vh;
 }
 
@@ -529,7 +529,7 @@
 
 .service-agreements-lists .content-product-list-ticket {
   border-top: 1px solid #e7ecf2;
-
+  
 }
 
 .service-agreements ul {
@@ -569,6 +569,10 @@
   line-height: 30px;
 }
 
+.product-list-ticket [class*=col-md-].detailed-by-customer {
+  padding: 6px;
+}
+
 .deposit-create .product-list-ticket [class*=col-md-] {
   padding: 0 6px;
 }
@@ -582,7 +586,7 @@
 }
 
 /*.product-list-ticket .col-md-3 {*/
-  /*width: 24%;*/
+/*width: 24%;*/
 /*}*/
 
 .content-product-list-ticket-detail-customer .col-md-3,
@@ -607,7 +611,7 @@
 }
 
 /*.product-list-ticket .col-md-2 {*/
-  /*width: 15.3%;*/
+/*width: 15.3%;*/
 /*}*/
 
 .product-list-ticket-grid .col-md-2 {
@@ -615,7 +619,7 @@
 }
 
 /*.product-list-ticket .col-md-1 {*/
-  /*width: 10%;*/
+/*width: 10%;*/
 /*}*/
 
 .product-list-ticket-grid .col-md-4 {
@@ -691,9 +695,9 @@
   line-height: 18px;
 }
 
-.product-report-total-sales .col-md-1 {
-  width: 10%;
-}
+/*.product-report-total-sales .col-md-1 {*/
+/*width: 10%;*/
+/*}*/
 
 .product-report-total-sales .col-md-2 {
   width: 10.1%;
@@ -707,10 +711,10 @@
   width: 32px;
   height: 32px;
   border: 1px solid #d1dbec;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 50%;
   transition: all .3s;
-
+  
 }
 
 .product-report-btn:hover {
@@ -796,7 +800,7 @@
 
 .radio-buttons-product-report label {
   font-size: 20px;
-  color: #404B5F;
+  color: #404b5f;
 }
 
 .report-title {
@@ -827,7 +831,7 @@
   left: 0;
   width: 18px;
   height: 18px;
-  border: 2px solid #404B5F;
+  border: 2px solid #404b5f;
   border-radius: 50%;
 }
 
@@ -839,7 +843,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #404B5F;
+  background: #404b5f;
   opacity: 0;
 }
 
@@ -922,6 +926,11 @@
   border-bottom: 1px solid #d3d8e1;
 }
 
+.run-report-content .form-group .report-caret-icon {
+  top: 14px;
+  right: 16px;
+}
+
 .run-report-content .form-group {
   float: right;
 }
@@ -929,7 +938,7 @@
 .run-report-content .btn {
   margin-bottom: 20px;
   vertical-align: bottom;
-  background-color: #90C56B;
+  background-color: #90c56b;
   width: 100px;
 }
 
@@ -951,10 +960,10 @@
 }
 
 .top-product-list-ticket.sticky {
-  background-color: #F3F7F9;
+  background-color: #f3f7f9;
   position: relative;
   z-index: 100;
-
+  
 }
 
 .top-product-list-ticket.sticky.shown {
@@ -1003,7 +1012,7 @@
   height: 36px;
   border-radius: 4px 3px 3px 4px;
   border: 1px solid #d3d8e1;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .run-report-content input::-webkit-input-placeholder {
@@ -1017,7 +1026,7 @@
 }
 
 .run-report-content .content:first-child input {
-  background-color: #F1F5FA;
+  background-color: #f1f5fa;
 }
 
 .run-report-content i {
@@ -1055,7 +1064,7 @@
   padding: 45px 30px;
   color: #404b5f;
   height: 92vh;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   display: flex;
   justify-content: center;
 }
@@ -1089,7 +1098,7 @@
 .reports-all .report p:after {
   width: 44px;
   height: 2px;
-  background-color: #4BA9DF;
+  background-color: #4ba9df;
   content: '';
   position: absolute;
   bottom: -7px;
@@ -1122,7 +1131,7 @@
 }
 
 .reports-all .report ul li:hover:before {
-  border-color: #4BA9DF;
+  border-color: #4ba9df;
 }
 
 .reports-all .report ul li:before {
@@ -1130,7 +1139,7 @@
   width: 12px;
   height: 12px;
   border: 2px solid #c2c5cb;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 50%;
   position: absolute;
   left: -25px;
@@ -1180,7 +1189,7 @@
 
 .content-sales-by-customer input {
   width: 320px;
-  background-color: #F1F5FA;
+  background-color: #f1f5fa;
 }
 
 .content-sales-by-customer {
@@ -1423,7 +1432,7 @@
   border: none;
   font-weight: 500;
   font-size: 14px;
-  background-color: #DDDDDD;
+  background-color: #ddd;
   transition: all .3s;
 }
 
@@ -1432,7 +1441,7 @@
 }
 
 .list-of-product {
-  background-color: #F3F7F9;
+  background-color: #f3f7f9;
 }
 
 .list-of-product .product-list-report-btn {
@@ -1455,7 +1464,7 @@
   width: 100%;
   padding: 0;
   border: none;
-  background: #F3F7F9;
+  background: #f3f7f9;
   box-shadow: none;
   font-family: "Graphik Medium", sans-serif;
 }
@@ -1504,6 +1513,54 @@
 .company-report [class*=col-md-] {
   padding: 12px 6px;
   font-weight: 500;
+}
+
+.commissions__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commissions__header--item {
+  width: 25%;
+  min-height: 352px;
+}
+
+.commissions__header--item:nth-child(odd) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.commissions__header--item:nth-child(even) {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-right: 40px;
+}
+
+.commissions__header--item:nth-child(even) p {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+  font-weight: 400;
+}
+
+.commissions__header--item:nth-child(even) p span {
+  font-weight: 600;
+}
+
+.commissions__header--item:nth-child(even) p:before {
+  position: absolute;
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  left: -5px;
+  top: 9px;
 }
 
 .customer-ticket__header {
@@ -1579,7 +1636,7 @@
 .customer-ticket__header--item:nth-child(3) > div {
   width: 168px;
   height: 168px;
-  background-color: #16A4FA;
+  background-color: #16a4fa;
   border-radius: 50%;
   color: #fff;
   display: flex;
@@ -1600,6 +1657,13 @@
   padding: 35px 0 !important;
 }
 
+<<<<<<< HEAD
+=======
+.products .col-md-12, .services .col-md-12, .products .col-md-12 .col-md-9 {
+  padding: 0px 2px !important;
+}
+
+>>>>>>> QT-145
 .products div > *, .services div > * {
   padding: 5px 0 !important;
 }
@@ -1691,7 +1755,7 @@
 
 .details-header,
 .details-content {
-  background-color: #F1F5F8;
+  background-color: #f1f5f8;
   padding: 15px 60px;
   font-size: 11px;
   text-transform: uppercase;
@@ -1724,7 +1788,7 @@
 
 /*.details-header .col-md-2,*/
 /*.details-content .col-md-2 {*/
-  /*width: 16%;*/
+/*width: 16%;*/
 /*}*/
 
 /*STYLES FOR REPORT HEADER AND FOOTER */
@@ -1761,7 +1825,7 @@
 
 .report-header p,
 .report-footer p {
-  color: #9CA5B6;
+  color: #9ca5b6;
   font-size: 12px;
   font-weight: 300;
 }
@@ -1783,23 +1847,23 @@
   .service-agreements-lists .col-width-3 {
     width: 22.2%;
   }
-
+  
   .service-agreements-lists .col-width-4 {
     width: 14.3%;
   }
-
+  
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -60px;
   }
-
+  
   .product-list-ticket-deposit .col-md-3 {
     width: 45%;
   }
-
+  
   .service-agreements ul li [class*='col-md-'] {
     padding: 15px 5px;
   }
-
+  
   .service-agreements-lists .col-width-1 {
     width: 8.5%;
   }
@@ -1809,27 +1873,27 @@
   .service-agreements-lists .col-width-3 {
     width: 20%;
   }
-
+  
   .service-agreements-lists .col-width-4 {
     width: 15.7%;
   }
-
+  
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -210px;
   }
-
+  
   .run-report-content-device .device-report {
     max-width: 125px;
   }
-
+  
   .deposit-create .col-md-2 {
     width: 17% !important;
   }
-
+  
   .service-agreements-lists {
     font-size: 12px;
   }
-
+  
   .service-agreements-lists .col-width-1 {
     width: 8.3%;
   }
@@ -1839,19 +1903,19 @@
   .deposit-create .col-md-2 {
     width: 16% !important;
   }
-
+  
   .run-report-content .content {
     max-width: 160px;
   }
-
+  
   .product-list-ticket-deposit .col-md-3 {
     width: 44%;
   }
-
+  
   .service-agreements-lists {
     font-size: 11px;
   }
-
+  
   .product-list-report {
     padding: 30px 10px;
   }

@@ -22,7 +22,9 @@
       isProductOptions: '@?',
       isProductReportForCompanyTab: '@?',
       companyId: '=?',
-      isSerialNumberOptions: '@?'
+      isSerialNumberOptions: '@?',
+      commonCommissions: '<commonCommissions',
+      detailedCommissions: '<detailedCommissions'
     },
     controller: reportMenuCtrl
   });
@@ -59,6 +61,8 @@
     $ctrl.currentUser = UsersService.getCurrentUser();
 
     $scope.maxDateForDateRangeInputField = Date.now();
+
+    $scope.currentCompany = CompaniesService.getCurrentCompany();
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
     $scope.customerTicketShowTotalTicketAmount = true;
@@ -75,6 +79,10 @@
     $scope.locationTechReport = $location.url();
     $scope.customerTicketWithProducts = true;
     $scope.customerTicketWithServices = true;
+
+    $scope.detailsByProducts = true;
+
+    $scope.customerTicketWithProducts= true;
 
     $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
 
@@ -103,10 +111,13 @@
     }
 
     $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
-    $scope.techUsers = UsersService.getTechUsers();
+    $scope.techUsers = UsersService.getTechUsers().filter(function(el) {
+      return el.userEnabled && !el.deletedAt;
+    });
 
     $scope.errorNassageForDate = true;
     $scope.errorNassageForCompany = true;
+    $scope.errorNassageForSalesUser = true;
 
     $scope.requiredForDeviceFiled = !$ctrl.isRadioButtonHidden || $scope.reportType === 'Summary';
 
@@ -168,6 +179,10 @@
         }
       }
     });
+
+    $scope.$watch('detailsByProducts', function(val) {
+      $rootScope.detailsByProducts = val;
+    })
 
     $scope.$watch('customerTicketWithProducts', function(val) {
       $rootScope.customerTicketWithProducts = val;
@@ -324,6 +339,8 @@
 
     function sendReportRequest(reportSettings) {
       $scope.errorNassageForCompany = true;
+      $scope.errorNassageForSalesUser = true;
+
       if ($ctrl.isProductReportForCompanyTab) {
         $scope.users = UsersService.getAllByCompanyIdNonArchived($ctrl.companyId);
       } else if (reportSettings && reportSettings.company) {
@@ -392,6 +409,67 @@
             } else {
               $scope.errorNassageForCompany = false;
             }
+          } else if (location === '/reports/byCommissionsDetailed') {
+            if (reportSettings.salesUser) {
+              var dataToSend = {
+                companyId: (reportSettings.company && reportSettings.company.id) || null,
+                userId: (reportSettings.salesUser && reportSettings.salesUser.id) || null,
+                type: "DETAILED",
+                startDate: $filter('date')(new Date($scope.startDate || $scope.currentCompany.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+              };
+
+              // if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+              //   dataToSend.userId = reportSettings.techUser.id
+              // }
+
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+            } else {
+              // if (!$scope.startDate || !$scope.endDate) {
+              //   $scope.errorNassageForDate = false;
+              // }
+
+              if (!reportSettings.salesUser) {
+                $scope.errorNassageForSalesUser = false;
+              }
+            }
+          } else if (location === '/reports/byCommissions') {
+            // if (reportSettings.company) {
+            //
+            //
+            // } else {
+            //   $scope.errorNassageForCompany = false;
+            // }
+
+            if (reportSettings.salesUser) {
+              var dataToSend = {
+                companyId: (reportSettings.company && reportSettings.company.id) || null,
+                userId: (reportSettings.salesUser && reportSettings.salesUser.id) || null,
+                type: "SUMMARY",
+                startDate: $filter('date')(new Date($scope.startDate || $scope.currentCompany.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+              };
+
+              // if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+              //   dataToSend.userId = reportSettings.techUser.id
+              // }
+
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
+            } else {
+              // if (!$scope.startDate || !$scope.endDate) {
+              //   $scope.errorNassageForDate = false;
+              // }
+
+              if (!reportSettings.salesUser) {
+                $scope.errorNassageForSalesUser = false;
+              }
+            }
+
+
+
+
           } else {
             var dataToSend = {
               type: type

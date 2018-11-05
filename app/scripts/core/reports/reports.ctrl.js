@@ -45,7 +45,7 @@
                 y: function(d){return d.time;},
                 showLabels: false,
                 color: function(d,i){
-                    return (d.color) || $scope.chartColors[i]
+                    return  $scope.chartColors[i]
                 },
 
                 pie: {
@@ -64,6 +64,19 @@
                 }
             }
       }
+
+
+      $scope.chartNoDataAvailable = {
+        chart:  Object.assign({}, $scope.chartOptions.chart)
+      }
+
+      $scope.chartNoDataAvailable.chart.tooltip = {
+        contentGenerator: function() {
+          return '<table><tr><td>No data available</td></tr></table>'
+        },
+      }
+
+      $scope.chartOptionsToggler = $scope.chartOptions;
 
 
       var techReportTypeForChart;
@@ -261,6 +274,211 @@
           $scope.isReportAvailable = !!resp.lines && resp.lines.length;
           $scope.loadingInProgress = false;
         })
+      }
+
+      function getReportCommissions(data) {
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+
+        ReportsService.getReportByCommissions(data, function(res) {
+          console.log(res, 'RES GET REPORT')
+
+          $scope.isReportAvailable = res.lines && res.lines.length;
+
+          console.log(res, res.lines && res.lines.length, "DASDASDASD")
+          $scope.loadingInProgress = false;
+          $scope.commissionsReport = res;
+          $scope.showCategoriesData = true
+
+          var salesByCustomers = [];
+          var totalSum = res.totalSum;
+          var categories = res.categorySalesValue;
+
+          $scope.commissionsReport.lines = res.lines.map(function(el) {
+            el.totalSum = el.totalSum.toFixed(2);
+
+            return el;
+          });
+
+
+          var newCategories = categories;
+
+          if (!newCategories || !Object.keys(newCategories).length) {
+            newCategories = { 'No data available': '1'  };
+
+            $scope.showCategoriesData = false;
+            $scope.chartOptionsToggler = $scope.chartNoDataAvailable;
+          } else {
+            $scope.chartOptionsToggler = $scope.chartOptions;
+
+          }
+
+          $scope.byCategoriesChartData = Object.keys(newCategories)
+            .map(function(key, i) {
+              return {
+                name: key,
+                time: newCategories[key],
+                color: $scope.chartColors[i],
+              }
+            })
+            .sort(function(a, b) {
+              return +b.time - +a.time;
+            })
+            .slice(0, 4);
+
+
+
+
+
+          // if (!$scope.byCategoriesChartData || !$scope.byCategoriesChartData.length) {
+          //   $scope.byCategoriesChartData = [{
+          //     name: 'No data available',
+          //     time: 0
+          //   }]
+          // }
+
+          $scope.byCustomerChartData = $scope.commissionsReport.lines
+            .sort(function(a, b) {
+              return +b.totalSum - a.totalSum;
+            })
+            .slice(0, 4)
+            .map(function(el, i) {
+              return {
+                name: el.companyName,
+                time: el.totalSum,
+                color: $scope.chartColors[i],
+              }
+            })
+
+
+          console.log($scope.byCustomerChartData, "REPOT");
+
+        })
+
+
+
+
+
+      }
+
+
+      function getDetailedReportCommissions(data) {
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+
+        ReportsService.getReportByCommissions(data, function(res) {
+          // console.log(res, 'RES GET REPORT')
+
+          $scope.isReportAvailable = res.lines && res.lines.length;
+
+          // console.log(res, res.lines && res.lines.length, "DASDASDASD")
+          $scope.loadingInProgress = false;
+          $scope.commissionsReport = res;
+          $scope.showCategoriesData = true
+
+          var salesByCustomers = [];
+          var totalSum = res.totalSum;
+          var categories = res.categorySalesValue;
+
+
+
+          $scope.commissionsReport.lines = res.lines.map(function(el) {
+            // el.totalSum = el.totalSum.toFixed(2);
+            //
+            return el;
+          });
+
+
+          res.lines = res.lines.map(function(el) {
+            el.itemGroup = el.productCategory || normalizeString(el.agreementType);
+
+            el.productPrice = el.productPrice || el.totalSum / el.billableQuantity;
+
+            return el;
+          })
+
+          $scope.commissionsReport.priceSum = res.lines.reduce(function(acc, el) {
+            acc += el.productPrice || 0;
+            return acc;
+          }, 0)
+
+          $scope.detailsByProducts = $rootScope.detailsByProducts
+
+          // console.log("BY CUSTOMER???", $rootScope.detailsByProducts, $scope.commissionsReport && $scope.isReportAvailable)
+
+          if (!$scope.detailsByProducts) {
+
+            var data = res.lines.map(function(el) {
+              if (el.agreementType === 'HOURLY') {
+                el.firstLine = el.expenseName + ' - ' + 'Hourly' + ' - ' + el.serviceAgreementDescription;
+              } else if (el.agreementType === 'BLOCK_TIME') {
+                if (!el.exceededCommissionRateApplied) {
+                  el.firstLine = el.expenseName + ' - ' + el.serviceAgreementDescription + (el.expenseBasedOnDefault ? '' : '- included hours');
+                } else {
+                  el.firstLine = el.expenseName + ' - ' + 'Block time' + ' - ' + el.serviceAgreementDescription + (el.expenseBasedOnDefault ? '' : ' - over hours');
+                }
+              } else if (el.agreementType === 'SERVICE_CONTRACT') {
+                if (!el.exceededCommissionRateApplied) {
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription;
+                } else {
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract' + ' - ' + el.serviceAgreementDescription + (el.expenseBasedOnDefault ? '' : ' - over hours');
+                }
+
+                if (el.expenseFromOtherTypeContract) {
+                  el.firstLine = el.expenseName + ' - ' + 'Service Contract'  + ' - by Other';
+                }
+              } else {
+                el.firstLine = el.expenseName;
+              }
+
+              return el;
+            })
+
+
+            var reducedData = data.reduce(function(acc, el) {
+              var company = el.companyName;
+
+              if (acc[company]) {
+                acc[company].list.push(el);
+              } else {
+                acc[company] = {
+                  list: [el]
+                }
+              }
+
+              acc[company].commissionSum = (acc[company].commissionSum || 0) + el.commissionSum;
+              acc[company].priceSum = (acc[company].priceSum || 0) + (el.productPrice || 0);
+              acc[company].totalSum = (acc[company].totalSum || 0) + el.totalSum;
+
+
+              return acc;
+            }, {});
+
+
+            $scope.reducedData = reducedData;
+            $scope.reducedCompanies = Object.keys(reducedData);
+
+            console.log(reducedData, 'REDUCED DATA')
+          }
+
+
+        })
+
+
+
+
+
+
+      }
+
+      function normalizeString(str) {
+        console.log(typeof str, "STR")
+        str = str.split('_');
+        str = str.map(function(el) {
+          return el[0].toUpperCase() + el.slice(1).toLowerCase();
+        })
+
+        return str.join(' ');
       }
 
       function gerReportTicketReport(data) {
@@ -487,8 +705,18 @@
             case('/reports/ticket-report'):
               gerReportTicketReport(data);
               $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');;
+              $rootScope.reportName = 'customer-report-'+ data.company.name.toLowerCase().split(' ').join('-');
               break;
+            case('/reports/byCommissionsDetailed'):
+              getDetailedReportCommissions(data);
+              // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
+              $rootScope.reportName = 'commissions-report'
+              break;
+            case('/reports/byCommissions'):
+              getReportCommissions(data);
+              // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
+              $rootScope.reportName = 'commissions-report'
+              break
             default:
               console.log("wrong location")
           }

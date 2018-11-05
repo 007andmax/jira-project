@@ -21,6 +21,16 @@
         </ul>
       </div>
     </div>
+    <div class="report">
+      <div ng-if="PermissionsService.isAllowed('VIEW_PERFORMANCE_REPORT')">
+        <p>Commissions</p>
+        <img src="images/new-icons/Report-Perforrmance.svg">
+        <ul>
+          <li class="content-report" ui-sref="commissionsReport-common">Common report</li>
+          <li class="content-report" ui-sref="commissionsReport-detailed">Detailed report</li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="col-sm-4"
        ng-if="PermissionsService.isAllowed('VIEW_FINANCIAL_REPORT') && PermissionsService.isAllowed('VIEW_REMOTE_ACCESS_REPORT')">
@@ -64,4 +74,5 @@
       </div>
     </div>
   </div>
+
 </div>

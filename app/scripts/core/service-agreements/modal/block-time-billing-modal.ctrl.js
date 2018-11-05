@@ -136,8 +136,12 @@
                 picked: false,
                 taxes: resp[i].taxes,
                 rate: resp[i].rate,
-                versionedId: resp[i].versionedId
+                versionedId: resp[i].versionedId,
+                commissionRate: resp[i].commissionRate
               };
+
+
+              console.log(s, "SERVICE")
               $scope.defaultServices.push(s);
               $scope.defaultServicesForDropdown.push(s);
             }
@@ -534,8 +538,11 @@
                 rate: serv.name.rate,
                 billable: true,
                 taxes: serv.name.taxes,
-                nameValue: serv.nameValue
+                nameValue: serv.nameValue,
+                basedOnDefault: true
               };
+
+              console.log(serv, "SERV")
 
               // console.log(serv, 'NEWSERV');
 
@@ -668,8 +675,14 @@
                         rate: service.name.rate,
                         billable: service.billable,
                         taxes: service.taxes,
-                        nameValue: service.name.name
+                        nameValue: service.name.name,
+                        id: service.name.versionedId,
+                        commissionRate: service.name.commissionRate
+
                       };
+
+
+                      console.log(service, 'SERVVICE')
 
 
                       $scope.blockTimeContract.services.push(ns);
@@ -946,8 +959,13 @@
                 name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
                 billable: $scope.blockTimeContract.services[m].billable,
                 taxIds: [],
-                rate: 0
+                rate: 0,
+                basedOnDefault: true,
+                id: $scope.blockTimeContract.services[m].id.id,
+                commissionRate: $scope.blockTimeContract.services[m].commissionRate
               };
+
+              console.log(cs, $scope.blockTimeContract.services[m], 'before SENDING')
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
                 if ($scope.blockTimeContract.services[m].taxes.length) {

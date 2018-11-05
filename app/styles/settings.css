@@ -35,6 +35,40 @@
   padding-left: 25px;
 }
 
+.commissions-settings .togglers {
+
+  padding: 10px 0;
+}
+
+.commissions-settings .col-md-7 {
+  padding-left: 20px;
+}
+
+.commissions-settings .col-md-7 input {
+  width: 100px;
+}
+
+.commissions-settings .togglers div {
+  padding: 15px 0;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+
+.commissions-settings .togglers div:hover {
+
+}
+
+.commissions-settings .togglers div:not(:last-child) {
+  border-right: 1px solid #b4b4b4;
+}
+
+.commission-input {
+  margin: 10px 0;
+}
+
 .custom-phone-type {
   padding-right: 0;
 }
@@ -259,6 +293,8 @@
   padding: 0;
   height: 37px;
 }
+
+
 
 .settings-main-wrapper .wysiwyg-controls-wrapper .control-wrappers, .settings-main-wrapper .wysiwyg-controls-wrapper > a {
   margin-top: 11px;

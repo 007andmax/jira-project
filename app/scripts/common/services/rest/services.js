@@ -99,6 +99,12 @@
         return data;
       }
 
+      function getSpecialServices(callback) {
+        $http.get('/serviceAgreements/services').then(function(res) {
+          if (callback) callback(res);
+        })
+      }
+
       function addCompanyToServiceData(data, companyId) {
 
         if (!data) {
@@ -264,6 +270,7 @@
 
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
+        getSpecialServices: getSpecialServices,
         save: save,
         addCompanyToServiceData: addCompanyToServiceData,
         deleteCompanyFromServiceData: deleteCompanyFromServiceData,
