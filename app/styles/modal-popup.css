@@ -82,6 +82,26 @@
   padding: 0;
 }
 
+.block-time .service-bill-hide-content .form-group .report-caret-icon {
+  top: 12px;
+}
+
+.block-time .service-bill-hide-content .form-group .icn-remove-old {
+  top: 11px;
+}
+
+.contracts .service-bill-hide-content .form-group .icn-remove-old {
+  top: 10px;
+}
+
+.contracts .service-bill-hide-content .form-group .report-caret-icon {
+  top: 13px;
+}
+
+.hourly .service-bill-hide-content .form-group .icn-remove-old {
+  top: 6px;
+}
+
 .block-time .service-bill .col-md-12.service-bill-hide-content {
   padding-left: 25px;
 }
@@ -670,8 +690,8 @@ _::-webkit-:not(:root:root),
 .create-window .x-mark,
 .service-form-wrapper .x-mark {
   position: absolute;
-  top: 17px;
-  right: 0;
+  top: 7px;
+  right: 4px;
   padding: 10px;
   cursor: pointer;
   line-height: 1;
@@ -761,7 +781,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: 0;
   transform: translate(50%, 50%);
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -782,12 +802,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-
+  
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-
+  
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -820,13 +840,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -854,13 +874,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -1667,7 +1687,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-assign-ticket .users-list .user-item a span p:last-child,
-.run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a p:last-child{
+.run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a p:last-child {
   color: #9ca5b6;
   font-size: 12px;
   margin: -5px 0 0;

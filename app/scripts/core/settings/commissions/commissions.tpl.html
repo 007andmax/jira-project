@@ -8,9 +8,9 @@
       <div class="pointer" ng-click="setView('companies')">Companies' Sales Persons</div>
     </div>
 
-    <div class="col-md-5" style="padding-top: 25px; padding-bottom: 25px">
+    <div class="col-md-2" style="padding-top: 25px; padding-bottom: 25px">
       <span ng-if="view !== 'companies'">Commission Rate %</span>
-      <span ng-if="view === 'companies'">Sales person</div>
+      <span ng-if="view === 'companies'">Sales person</span>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
           {{ category.name }}
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-1">
           <!-- <input  type="number" /> -->
 
           <input type="text" class="form-validation form-control"
@@ -40,7 +40,7 @@
           {{ service.name }}
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-1">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation form-control"
                  ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate, service)" qt-to-fixed="2"
@@ -56,7 +56,7 @@
           {{ service.name }}
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-2">
           <!-- <input type="number" /> -->
           <input type="number" class="form-validation form-control"
                  ng-model="service.commissionRate" execute-when-outfocused="setServiceRate(service.id, service.commissionRate, service)" qt-to-fixed="2"
@@ -92,7 +92,7 @@
             Block time Included Hours commission Rate
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-1">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.blockTimeContractCommission" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTime', 'blockTimeContractCommission')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -102,7 +102,7 @@
             Rate for hours Exceeding Included hours on Black Time Contracts
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-1">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.blockTimeContractCommissionExceeding" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTimeExceeding', 'blockTimeContractCommissionExceeding')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -136,7 +136,7 @@
             Per User and Per Device Contracts
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-1">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.userOrDeviceContractCommission" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContract', 'userOrDeviceContractCommission')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -146,7 +146,7 @@
             Rate for hours Exceeding Included hours on Block Time contracts
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-1">
             <input type="text" class="form-validation form-control"
                    ng-model="agreementsCommissions.userOrDeviceContractCommissionExceeding" execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContractExceeding', 'userOrDeviceContractCommissionExceeding')" qt-to-fixed="2"
                     hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -177,7 +177,7 @@
           {{ company.name }}
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-2">
           <!-- <input type="number" /> -->
           <div class='form-group'>
             <input type="text" class="form-control has-dropdown pointer"
