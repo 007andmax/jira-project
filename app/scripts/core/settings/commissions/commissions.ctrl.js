@@ -68,7 +68,9 @@
 
         $scope.agreementsCommissions = {}
 
-        $scope.clientsCompanies = CompaniesService.getClientCompanies()
+        $scope.clientsCompanies = CompaniesService.getClientCompanies().sort(function(a, b) {
+          return a.name.localeCompare(b.name);
+        })
 
 
 
