@@ -579,6 +579,12 @@
         data: company
       });
 
+      if (company.id) {
+        storage.clientCompanies.find(function(val) {
+          return val.id === company.id;
+        }).techLeadId = company.techLeadId;
+      }
+
       if (!company.id && callback) {
         future.then(function (resp) {
           var companyId = resp.data.id;
