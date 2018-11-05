@@ -124,11 +124,13 @@
               NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setCategoryRate(id, data, function(res) {
-                  console.log(res, 'Set category rate')
+                  console.log(res, 'Set category rate');
+                  category.commissionRateSetOldSales = true;
                 })
               }, function() {
                 CompaniesService.setCategoryRate(id, data, function(res) {
-                  console.log(res, 'Set category rate')
+                  console.log(res, 'Set category rate');
+                  category.commissionRateSetOldSales = true;
                 })
               }, function() {
                 var category = $scope.categories.find(function(el) {
@@ -162,11 +164,13 @@
               NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setServiceRate(id, data, function(res) {
-                  console.log(res, 'Set service rate')
+                  console.log(res, 'Set service rate');
+                  service.commissionRateSetOldSales = true;
                 })
               }, function() {
                 CompaniesService.setServiceRate(id, data, function(res) {
-                  console.log(res, 'Set service rate')
+                  console.log(res, 'Set service rate');
+                  service.commissionRateSetOldSales = true;
                 })
               }, function() {
                 var specialServices = $scope.specialServices;
@@ -213,11 +217,13 @@
             NewConfirmationsService.show(confirmMessage, confirmButton, function () {
               data[flag] = true
               CompaniesService.setAgreementsRate(data, function(res) {
-                console.log('res from agreements', res)
+                console.log('res from agreements', res);
+                rates[flag] = true;
               })
             }, function() {
               CompaniesService.setAgreementsRate(data, function(res) {
-                console.log('res from agreements', res)
+                console.log('res from agreements', res);
+                rates[flag] = true;
               })
             }, function() {
               rates[rate] = null;
