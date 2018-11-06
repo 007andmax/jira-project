@@ -407,8 +407,8 @@
       })
     }
 
-    function setAgreementsRate(rates, callback) {
-      $http.post('/settings/companyProfile/agreementRates', rates)
+    function setAgreementsRate(rates, setForOldExpenses, callback) {
+      $http.post('/settings/companyProfile/agreementRates' + "?setForOldExpenses=" + setForOldExpenses, rates)
         .then(function(res) {
           if (callback) callback(res);
         })
