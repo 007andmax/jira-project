@@ -3,7 +3,7 @@
   <input type="text"
          placeholder="Search by Company">
 </div>
-<div uib-dropdown class="mob-header-btn">
+<div uib-dropdown class="mob-header-btn topNavbar-create">
   <button class="mobile-btn primary header-btn" ng-if="applicationLoaded" uib-dropdown-toggle></button>
   <ul class="dropdown-menu tag-list" style="transform: translateX(-80%)">
     <li class="topNavbar-logout" create-new-entity="ticket">
@@ -21,21 +21,15 @@
         <span>Company</span>
       </a>
     </li>
-    <li class="topNavbar-logout" create-new-entity="service">
-      <a href="javascript:void(0)" class="ha-20-16">
-        <span>Service</span>
-      </a>
-    </li>
-    <li class="topNavbar-logout" create-new-entity="product">
-      <a href="javascript:void(0)" class="ha-20-16">
-        <span>Product</span>
-      </a>
-    </li>
   </ul>
 </div>
 
 <button class="mob-back-btn"></button>
-<h3>Ticket Detail</h3>
+<h3 class="ticket-detail-subject">Ticket Detail</h3>
 <div class="more-ticket-details">
   <button></button>
 </div>
+
+<button class="x-mark mobile-btn"></button>
+<h3 class="ticket-update-subject">Create New</h3>
+<button class="add-new-ticket-update">+</button>

@@ -150,7 +150,8 @@
 .desktop-hidden,
 .mob-filters,
 .mob-filters-btn,
-.list-company-row .company-location {
+.list-company-row .company-location,
+.mob-ticket-create-updates {
   display: none;
 }
 
@@ -740,7 +741,8 @@
   }
   
   .desktop-hidden,
-  .mob-filters {
+  .mob-filters,
+  .mob-ticket-create-updates {
     display: block;
   }
   
@@ -1042,20 +1044,33 @@
   .ticket-content,
   .mobile-top-bar .mob-back-btn,
   .mobile-top-bar h3,
+  .mobile-top-bar .x-mark,
   .mobile-top-bar .more-ticket-details,
+  .mobile-top-bar .add-new-ticket-update,
   .mobile-top-bar.ticket-detail-header .menu-btn,
   .mobile-top-bar.ticket-detail-header .mob-search,
-  .mobile-top-bar.ticket-detail-header .mob-header-btn {
+  .mobile-top-bar.ticket-detail-header .mob-header-btn,
+  .mobile-top-bar.ticket-create-update .menu-btn,
+  .mobile-top-bar.ticket-create-update .mob-search,
+  .mobile-top-bar.ticket-create-update .mob-header-btn {
     display: none;
   }
   
   .mobile-top-bar.ticket-detail-header .mob-back-btn,
-  .mobile-top-bar.ticket-detail-header h3,
-  .mobile-top-bar.ticket-detail-header .more-ticket-details {
+  .mobile-top-bar.ticket-detail-header h3.ticket-detail-subject,
+  .mobile-top-bar.ticket-detail-header .more-ticket-details,
+  .mobile-top-bar.ticket-create-update h3.ticket-update-subject,
+  .mobile-top-bar.ticket-create-update .add-new-ticket-update,
+  .mobile-top-bar.ticket-create-update .x-mark {
     display: block;
   }
   
-  .mobile-top-bar.ticket-detail-header {
+  .mobile-top-bar.ticket-create-update .x-mark {
+    margin-right: 20px;
+  }
+  
+  .mobile-top-bar.ticket-detail-header,
+  .mobile-top-bar.ticket-create-update {
     justify-content: flex-start;
   }
   
@@ -1071,7 +1086,8 @@
     outline: none;
   }
   
-  .mobile-top-bar.ticket-detail-header h3 {
+  .mobile-top-bar.ticket-detail-header h3,
+  .mobile-top-bar.ticket-create-update h3 {
     font-size: 16px;
     color: #fff;
     font-weight: 500;
@@ -1649,6 +1665,252 @@
     border: 1px solid #edf2f6;
     border-radius: 50%;
   }
+  
+  .mob-ticket-create-updates {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: all .3s;
+    background-color: #fff;
+    height: 100vh;
+    width: 100%;
+    z-index: 99999;
+  }
+  
+  .mob-ticket-create-updates.opened {
+    top: 0;
+  }
+  
+  .create-updates-footer {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+    height: auto;
+    min-height: 64px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    align-items: center;
+    display: flex;
+  }
+  
+  .create-updates-footer .icn-ticket-attachment {
+    position: static;
+    margin-right: 25px;
+  }
+  
+  .create-updates-footer .dropdown-user-parent > .dropdown-menu {
+    width: 290px;
+    left: -40px;
+  }
+  
+  .create-updates-header {
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    border-bottom: 1px solid #edf2f6;
+  }
+  
+  .create-updates-header img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 35px;
+  }
+  
+  .create-updates-content {
+    height: calc(100vh - 184px);
+  }
+  
+  .create-updates-content-note,
+  .create-updates-content-product,
+  .create-updates-content-service {
+    display: none;
+  }
+  
+  .create-updates-content-note.show,
+  .create-updates-content-product.show,
+  .create-updates-content-service.show {
+    display: block;
+  }
+  
+  .create-updates-content textarea,
+  .create-updates-content .create-updates-content-note {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .create-updates-content textarea {
+    padding: 22px 15px;
+    border: none;
+    overflow: scroll;
+    font-size: 13px;
+  }
+  
+  .create-updates-content textarea::placeholder {
+    color: #9ca5b6;
+    opacity: 1;
+  }
+  
+  .mob-note, .mob-product, .mob-service {
+    width: 24px;
+    height: 24px;
+    margin-right: 35px;
+    position: relative;
+  }
+  
+  .mob-note:after,
+  .mob-product:after,
+  .mob-service:after {
+    position: absolute;
+    content: '';
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+  }
+  
+  .mob-note:hover:after,
+  .mob-product:hover:after,
+  .mob-service:hover:after,
+  .mob-note.active:after,
+  .mob-product.active:after,
+  .mob-service.active:after {
+    background-color: #16a4fa;
+  }
+  
+  .mob-note {
+    background: url("../images/new-icons/mob-note.png");
+  }
+  
+  .mob-product {
+    background: url("../images/new-icons/mob-product.png");
+  }
+  
+  .mob-service {
+    background: url("../images/new-icons/mob-service.png");
+  }
+  
+  .mob-note.active,
+  .mob-note:hover {
+    background: url("../images/new-icons/mob-note-hover.png");
+  }
+  
+  .mob-product.active,
+  .mob-product:hover {
+    background: url("../images/new-icons/mob-product-hover.png");
+  }
+  
+  .mob-service.active,
+  .mob-service:hover {
+    background: url("../images/new-icons/mob-service-hover.png");
+  }
+  
+  .add-new-ticket-update {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    background-color: #2ec866;
+    right: 20px;
+    top: 20px;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    line-height: 0px;
+    border: none;
+    font-weight: 900;
+  }
+  
+  .create-ticket-update {
+    width: 40px;
+    height: 40px;
+    background: url("../images/new-icons/create-ticket-update.png");
+    position: absolute;
+    right: 15px;
+  }
+  
+  .create-updates-content-product,
+  .create-updates-content-service {
+    padding: 20px 15px;
+  }
+  
+  .create-updates-content input,
+  .create-updates-content textarea {
+    width: 100%;
+    border-radius: 3px;
+    border: solid 1px #c4cbd5;
+    padding: 7px 12px;
+    outline: none;
+  }
+  
+  .create-updates-content input::placeholder {
+    font-size: 13px;
+    color: #9ca5b6;
+  }
+  
+  .create-updates-content [class*='col-xs-'] {
+    margin-bottom: 8px;
+    padding: 0 4px;
+    position: relative;
+  }
+  
+  .create-updates-content .mob-serial-input input {
+    padding-left: 70px;
+  }
+  
+  .create-updates-content .mob-cost-input input {
+    padding-left: 44px;
+  }
+  
+  .create-updates-content .mob-qty-input input {
+    padding-left: 38px;
+  }
+  
+  .create-updates-content .mob-price-input input {
+    padding-left: 46px;
+  }
+  
+  .create-updates-content .mob-disc-input input {
+    padding-left: 82px;
+  }
+  
+  .create-updates-content .mob-serial-input:before,
+  .create-updates-content .mob-cost-input:before,
+  .create-updates-content .mob-qty-input:before,
+  .create-updates-content .mob-price-input:before,
+  .create-updates-content .mob-disc-input:before {
+    position: absolute;
+    content: 'Serial No';
+    font-size: 13px;
+    color: #9ca5b6;
+    left: 15px;
+    top: 8px;
+  }
+  
+  .create-updates-content .mob-cost-input:before {
+    content: 'Cost';
+  }
+  
+  .create-updates-content .mob-qty-input:before {
+    content: 'Qty';
+  }
+  
+  .create-updates-content .mob-price-input:before {
+    content: 'Price';
+  }
+  
+  .create-updates-content .mob-disc-input:before {
+    content: 'Discount %';
+  }
+  
+  .create-updates-content-service textarea {
+    min-height: 40px;
+    max-height: 136px;
+    padding: 7px 12px;
+  }
+  
 }
 
 @media (max-width: 375px) {
