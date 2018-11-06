@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("typeaheadInputIcon",
-    ['$rootScope', function ($rootScope) {
+    ['$rootScope', '$timeout', function ($rootScope, $timeout) {
       return {
         restrict: 'A',
         template: '<span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">' +
