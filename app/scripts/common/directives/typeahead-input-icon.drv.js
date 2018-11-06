@@ -30,25 +30,27 @@
           });
 
           scope.clearInput = function (e) {
-            e.stopPropagation();
+            $timeout(function() {
+              e.stopPropagation();
 
-            var deleteItems = attrs.typeaheadInputIcon.split(',');
+              var deleteItems = attrs.typeaheadInputIcon.split(',');
 
-            for (var i = 0; i < deleteItems.length; i++) {
-              scope.$parent[deleteItems[i].trim()] = '';
-            }
+              for (var i = 0; i < deleteItems.length; i++) {
+                scope.$parent[deleteItems[i].trim()] = '';
+              }
 
-            input.val('');
+              input.val('');
 
-            var model = input.controller('ngModel');
-            model.testVar = true;
-            if (model) {
-              model.$setViewValue(undefined);
-            }
+              var model = input.controller('ngModel');
+              model.testVar = true;
+              if (model) {
+                model.$setViewValue(undefined);
+              }
 
-            input.click();
+              input.click();
 
-            $rootScope.clearButtonPressed = true;
+              $rootScope.clearButtonPressed = true;
+            })
           };
 
           scope.toggleDropdown = function (e) {
