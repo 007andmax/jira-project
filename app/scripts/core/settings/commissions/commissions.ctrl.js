@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.commissionsCtrl',
-    ['$scope', 'UsersService', 'ProductsService', 'ServicesService', 'CompaniesService', 'quicktech.common.services.NewConfirmationsService', 'quicktech.common.services.UserNotificationService', '$timeout',
-      function ($scope, UsersService, ProductsService, ServicesService, CompaniesService, NewConfirmationsService, UserNotificationService, $timeout) {
+    ['$scope', 'UsersService', 'ProductsService', 'ServicesService', 'CompaniesService', 'quicktech.common.services.NewConfirmationsService', 'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope',
+      function ($scope, UsersService, ProductsService, ServicesService, CompaniesService, NewConfirmationsService, UserNotificationService, $timeout, $rootScope) {
 
         var confirmMessage = 'Do you want this commission to fact old items?';
         var confirmButton = 'Yes';
@@ -158,7 +158,7 @@
         }
 
         $scope.setServiceRate = function(id, rate, service) {
-
+          // $timeout($scope.newSetServiceRate.bind(this, id, rate, service), 1000)
           if (rate || rate === 0) {
             var data = {
               rate: rate,
@@ -168,6 +168,7 @@
             if (service.oldCommissionRate === null) {
 
 
+              console.log($rootScope.justBlurredElement, 'BLURRED')
 
               NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
@@ -205,6 +206,54 @@
 
         }
 
+        $scope.newSetServiceRate = function(id, rate, service) {
+          if (rate || rate === 0) {
+            var data = {
+              rate: rate,
+              setForOldExpenses: false
+            }
+
+            if (service.oldCommissionRate === null) {
+
+
+              console.log($rootScope.justBlurredElement, 'BLURRED')
+
+              $rootScope.justBlurredElement[0].focus();
+              NewConfirmationsService.show(confirmMessage, confirmButton, function () {
+                data.setForOldExpenses = true;
+                CompaniesService.setServiceRate(id, data, function(res) {
+                  console.log(res, 'Set service rate');
+                  service.oldCommissionRate = rate;
+                })
+              }, function() {
+                CompaniesService.setServiceRate(id, data, function(res) {
+                  console.log(res, 'Set service rate');
+                  service.oldCommissionRate = rate;
+                })
+              }, function() {
+                var specialServices = $scope.specialServices;
+                var services = $scope.services;
+
+                var service = specialServices.find(function(el) {
+                  return el.id === id;
+                });
+
+                if (!service) {
+                  service = services.find(function(el) {
+                    return el.versionedId.id === id;
+                  })
+                }
+
+                service.commissionRate = null;
+              })
+            } else {
+              CompaniesService.setServiceRate(id, data, function(res) {
+                console.log(res, 'Set service rate')
+              })
+            }
+          }
+        }
+
         $scope.setAgreementRate = function(flag, rate) {
 
           Object.keys($scope.agreementsCommissions).forEach(function(key) {
@@ -218,6 +267,7 @@
             userOrDeviceContractCommission: rates.userOrDeviceContractCommission,
             userOrDeviceContractCommissionExceeding: rates.userOrDeviceContractCommissionExceeding
           }
+
 
           data = Object.assign({}, data, agreementsFlags);
           if (!$scope.oldAgreementsCommissions[rate] && $scope.oldAgreementsCommissions[rate] != 0) {
