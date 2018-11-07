@@ -75,11 +75,15 @@
 
 
         ProductsService.getCategories($scope, function(res) {
-          $scope.categories = res.map(function(el) {
-            el.oldCommissionRate = el.commissionRate;
+          $scope.categories = res
+            .sort(function(a, b) {
+              return (a.name).localeCompare(b.name);
+            })
+            .map(function(el) {
+              el.oldCommissionRate = el.commissionRate;
 
-            return el;
-          });
+              return el;
+            });
         })
 
         ServicesService.getServicesData($scope, function(res) {
