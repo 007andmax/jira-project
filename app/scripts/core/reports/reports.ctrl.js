@@ -473,6 +473,8 @@
 
       function normalizeString(str) {
         console.log(typeof str, "STR")
+
+        if (!str) return str;
         str = str.split('_');
         str = str.map(function(el) {
           return el[0].toUpperCase() + el.slice(1).toLowerCase();

@@ -372,14 +372,25 @@
 
       $scope.pullServiceRate = function(service) {
         console.log(service, 'service');
+        var counter = 0;
 
-        $timeout(function() {
-          if (typeof service.name === 'object') {
-            if (service.name.rate) {
-              $scope.editService.rate = service.name.rate;
+        pull()
+
+        function pull() {
+          $timeout(function() {
+            if (typeof service.name === 'object') {
+              if (service.name.rate || service.name.rate == 0) {
+                $scope.editService.rate = service.name.rate;
+              }
+            } else if (counter !== 50) {
+              counter++;
+              pull();
             }
-          }
-        }, 2000)
+          }, 50)
+        }
+
+
+
       }
 
 

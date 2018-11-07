@@ -225,6 +225,10 @@
   margin: 10px 0 0 0;
 }
 
+.vladik {
+  width: calc(100% - 260px);
+}
+
 @-moz-document url-prefix() {
   .ticket-header.ticket-fixed-header {
     padding-bottom: 30px;
@@ -258,7 +262,7 @@
 
 @media only screen and (max-width: 1600px) {
   .vladik {
-    width: calc(100% - 188px) !important;
+    width: calc(100% - 230px) !important;
   }
 
   .ticket-header-actions .btn {
@@ -268,7 +272,7 @@
 
 @media only screen and (max-width: 1366px) {
   .vladik {
-    width: calc(100% - 170px) !important;
+    width: calc(100% - 210px) !important;
   }
 
   .ticket-header-username {
