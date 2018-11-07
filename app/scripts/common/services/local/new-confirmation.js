@@ -3,8 +3,8 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').service('quicktech.common.services.NewConfirmationsService',
-    ['$uibModal', '$state',
-      function ($uibModal, $state) {
+    ['$uibModal', '$state', '$timeout',
+      function ($uibModal, $state, $timeout) {
 
         var modalParams = {
           animation: true,
@@ -16,7 +16,7 @@
         };
 
         this.show = function (message, button, approveFn, rejectFn, closeFn) {
-
+          console.log('showowowwo')
           modalParams.controller = (['$scope', '$uibModalInstance',
             function ($scope, $uibModalInstance) {
 
@@ -43,7 +43,9 @@
 
             }]);
 
-          return $uibModal.open(modalParams).result;
+          $timeout(function() {
+            $uibModal.open(modalParams)
+          })
         };
 
 
