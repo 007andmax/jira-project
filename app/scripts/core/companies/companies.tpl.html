@@ -167,7 +167,7 @@
         desktop="openCompany(company)"
         mobile="mobileOpenCompany()"
         company-name="company">
-      <div class="col-xs-3" style="width: 34%;" ng-init="companyName = company">
+      <div class="col-xs-3" style="width: 34%;" ng-init="companyName = company" mobile-open-company>
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
           <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
                ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
@@ -264,7 +264,8 @@
           <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
         </div>
       </div>
-      <button class="company-edit-icn company-edit-icn-sm desktop-hidden"></button>
+      <button class="company-edit-icn company-edit-icn-sm desktop-hidden" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+           create-new-entity="company" is-edit="true" item="company" stop-propagation="click"></button>
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />

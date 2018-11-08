@@ -15,7 +15,7 @@
 
           element.on('click', function() {
             if (window.innerWidth <= 414) {
-              $scope.mobileOpenCompany(element);
+
             } else {
               $scope.openCompany($scope.companyName)
             }

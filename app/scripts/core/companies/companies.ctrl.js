@@ -197,7 +197,7 @@
         };
 
         $scope.mobileOpenCompany = function(element) {
-          element.addClass('opened');
+          element.parent().toggleClass('opened');
           console.log('MOBIEEEEEL')
         }
 
