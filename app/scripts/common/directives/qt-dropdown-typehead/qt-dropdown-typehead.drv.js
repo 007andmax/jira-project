@@ -99,6 +99,12 @@
       self.changeDropdownState();
     };
 
+    $scope.$watch(function() {
+      return $rootScope.selectedIndustryItem;
+    }, function(val) {
+      self.selectItem(val);
+    })
+
 
 
     self.getDisplayedProperty = function(item) {

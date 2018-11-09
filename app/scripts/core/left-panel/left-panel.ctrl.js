@@ -600,11 +600,13 @@
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function (value) {
           companiesSharedState.filter.industry = value;
+
         };
 
         $scope.mobileApplyIndustryFilter = function(value) {
           console.log('mobileApplyIndu')
           $scope.mobileIndustryFilter = value;
+          $rootScope.selectedIndustryItem = value;
         }
 
         $scope.applyIndustryFilterFromHistoryListUserPage = function (value) {
