@@ -185,7 +185,7 @@
       </div>
       <div class="company-location">
         <span style="display: flex;">{{ location }}</span>
-        <a class="company-link" href="" ng-click="openMapModal()">Show Map</a>
+        <a class="company-link" href="" ng-click="openMapModal(company.id)">Show Map</a>
       </div>
       <div class="col-xs-1" style="width: 160px;">
         <span>{{ primaryPhone.number || '' }}</span>
