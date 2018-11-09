@@ -111,7 +111,17 @@
                     (navigator.platform.indexOf("iPad") != -1) ||
                     (navigator.platform.indexOf("iPod") != -1)) {
                       // window.open("maps:daddr=" + lat +   "," + lon + "&amp;ll=");
-                      window.open("https://www.google.com/maps/search/?api=1&query=" + lat +   "," + lon);
+                      $uibModal.open({
+                        templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
+                        animation: true,
+                        backdrop: true,
+                        size: 'md',
+                        controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
+                        windowClass: 'create-popup margin-top-modal-dialog',
+                        resolve: {
+                          companyInfo: res
+                        }
+                      });
 
 
                       // window.open("https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=");
