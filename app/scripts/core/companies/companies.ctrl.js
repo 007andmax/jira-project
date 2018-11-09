@@ -110,7 +110,10 @@
                 if ((navigator.platform.indexOf("iPhone") != -1) ||
                     (navigator.platform.indexOf("iPad") != -1) ||
                     (navigator.platform.indexOf("iPod") != -1)) {
-                      window.open("maps:daddr=" + lat +   "," + lon + "&amp;ll=");
+                      // window.open("maps:daddr=" + lat +   "," + lon + "&amp;ll=");
+                      window.open("https://www.google.com/maps/@"  + lat +   "," + lon);
+
+
                       // window.open("https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=");
                     } else {
                       window.open("https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=");
