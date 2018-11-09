@@ -148,6 +148,22 @@
 
             if ($scope.resolvedAdvanced) {
               $scope.switchCompanyModal(true)
+            } else if ($scope.isMobileEdit) {
+              $scope.switchCompanyModal(false)
+              $scope.switchCompanyModalBack(true)
+
+              setTimeout(function() {
+                $scope.$apply();
+                $scope.switchCompanyModal(false)
+              }, 1000)
+
+              setTimeout(function() {
+                console.log('sECOND CHANSE')
+
+                $scope.$apply();
+                $scope.switchCompanyModal(false)
+                $scope.switchCompanyModalBack(true)
+              }, 2000)
             }
           });
 

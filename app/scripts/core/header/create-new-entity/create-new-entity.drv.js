@@ -9,7 +9,8 @@
         scope: {
           item: '=?',
           categoryForModal: '=?',
-          isEdit: '<isEdit'
+          isEdit: '<isEdit',
+          isMobileEdit: '<isMobileEdit'
         },
         link: function ($scope, element, attrs) {
           var existingItem = false;
@@ -60,6 +61,9 @@
                   resolveExistingCategory: existingCategory,
                   resolvedAdvanced: function() {
                     return $scope.isEdit ? true : false
+                  },
+                  isMobileEdit: function() {
+                    return $scope.isMobileEdit ? true : false
                   }
                 }
               });

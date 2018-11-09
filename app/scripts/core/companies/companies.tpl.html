@@ -265,7 +265,7 @@
         </div>
       </div>
       <button class="company-edit-icn company-edit-icn-sm desktop-hidden" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-           create-new-entity="company" is-edit="true" item="company" stop-propagation="click"></button>
+           create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
