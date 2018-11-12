@@ -94,8 +94,8 @@
         };
 
         $scope.openUsersItem = function(event) {
-          console.log(event.currentTarget, "TARGET")
-          event.currentTarget.classList.add('opened');
+          console.log(event, "TARGETDDDDDDDDDDDDDDDDDDD")
+          $(event.currentTarget).parent().parent().parent().toggleClass('opened');
         }
 
         $scope.toggleMobileUsersFilters = function(state) {

@@ -195,13 +195,12 @@
 
     <li class="user-list-row" ng-controller="quicktech.core.users.userCtrl"
         show-model-element="{{ 'show-user-on-save-' + user.id }}"
-        ng-repeat="user in (usersCtrl.shownUsers = (newSort(users.concat(archivedUsers)) | filter: usersFilter)) | limitTo: displayLimit track by user.id"
-        ng-click="openUsersItem($event)">
+        ng-repeat="user in (usersCtrl.shownUsers = (newSort(users.concat(archivedUsers)) | filter: usersFilter)) | limitTo: displayLimit track by user.id">
 
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3 mob-hidden">
           <div class="user-bio">
-            <div class="pull-left avatar">
+            <div class="pull-left avatar" >
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
                    ng-if="(user && user.avatar)">
               <div class="default-user-avatar" ng-if="!(user && user.avatar)"
@@ -361,7 +360,7 @@
 
       <div class="mob-user desktop-hidden">
         <div class="visible-user-info">
-          <div class="user-bio">
+          <div class="user-bio" ng-click="openUsersItem($event)">
             <div class="pull-left avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
                    ng-if="(user && user.avatar)">
