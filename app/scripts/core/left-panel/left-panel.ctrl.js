@@ -628,7 +628,7 @@
         };
 
         $scope.mobileApplyCompanyFilterFromHistoryListUserPage = function (value) {
-          // $scope.mobileUserPageCompanyIdFilter = getCompanyIdByCompanyName(value);
+          $scope.mobileUserPageCompanyIdFilter = getCompanyIdByCompanyName(value);
         }
 
         $scope.applyCompanyFilterFromHistoryListTicketPage = function (value) {
