@@ -23,6 +23,8 @@
           })
         }
 
+        $scope.isMobilePhone = window.innerWidth <= 414;
+        $scope.showModal = true;
 
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeekMap = {
@@ -83,6 +85,11 @@
           }
 
           action = 'EDIT_COMPANIES';
+
+          if ($scope.isMobilePhone) {
+            $scope.showModal = false;
+
+          }
 
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
             console.log(companyData, 'companyData ')
@@ -149,21 +156,28 @@
             if ($scope.resolvedAdvanced) {
               $scope.switchCompanyModal(true)
             } else if ($scope.isMobileEdit) {
+
+              if ($scope.isMobilePhone) {
+                $scope.showModal = false;
+                $timeout(function() {
+                  $scope.showModal = true;
+                }, 400)
+              }
               $scope.switchCompanyModal(false)
               $scope.switchCompanyModalBack(true)
 
               setTimeout(function() {
                 $scope.$apply();
-                $scope.switchCompanyModal(false)
-              }, 1000)
+                $scope.switchCompanyModal(true)
+              }, 50)
 
               setTimeout(function() {
                 console.log('sECOND CHANSE')
 
                 $scope.$apply();
-                $scope.switchCompanyModal(false)
+                $scope.switchCompanyModal(true)
                 $scope.switchCompanyModalBack(true)
-              }, 2000)
+              }, 100)
             }
           });
 

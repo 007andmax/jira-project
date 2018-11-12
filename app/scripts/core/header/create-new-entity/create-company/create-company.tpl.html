@@ -1,6 +1,6 @@
 <!-- SHORT VERSION -->
-<div class="company-wrapper" ng-controller="quicktech.createCompanyCtrl" ng-form="companyForm">
-  <div class="create-new" ng-if="!longCreateCompany && !resolvedAdvanced">
+<div class="company-wrapper" ng-controller="quicktech.createCompanyCtrl">
+  <div class="create-new" ng-if="!longCreateCompany && !resolvedAdvanced && showModal" ng-form="companyForm">
     <div class="company--header">
       <h2>{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
@@ -15,6 +15,7 @@
           <label class="control-label" ng-message="minlength">Company name is too short.</label>
           <label class="control-label" ng-message="unique">This company name already occupied.</label>
         </div>
+        {{ editCompany.name }} EEE {{ editCompany.name }}
         <div class="placeholder">Company Name</div>
         <input type="text" ng-model="editCompany.name" aria-expanded="true" tabindex="1"
                ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
@@ -174,7 +175,7 @@
   <!-- LONG VERSION  -->
 
 
-  <div class="create-new" style="{{ hideDiv ? 'display: none' : '' }}" ng-if="longCreateCompany">
+  <div class="create-new" style="{{ hideDiv ? 'display: none' : '' }}" ng-if="longCreateCompany && showModal" ng-form="companyForm">
     <div class="company--header">
       <h2>{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
