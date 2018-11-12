@@ -615,6 +615,8 @@
 
         $scope.mobileApplyIndustryFilterFromHistoryListUserPage = function (value) {
           $scope.mobileFilterUsersIndustry = value;
+          $rootScope.selectedIndustryItem = value;
+          
         };
 
         $scope.applyCompanyFilterFromHistoryListUserPage = function (value) {
