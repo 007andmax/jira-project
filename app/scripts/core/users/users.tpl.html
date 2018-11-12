@@ -414,7 +414,7 @@
             </div>
             <div class="mob-user-ticket"> {{ user.userStatistic.ticketsSubmitted || '0' }}</div>
           </div>
-          <div class="mob-user-designation"> {{ user.designation }}</div>
+          <div class="mob-user-designation" ng-if="user.designation"> {{ user.designation }}</div>
           <div class="mob-user-subscription" uib-dropdown>
             <p>Subscription</p>
             <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle

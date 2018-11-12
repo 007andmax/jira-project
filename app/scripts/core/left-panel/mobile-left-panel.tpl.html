@@ -1,9 +1,15 @@
 <div class="left-menu-header">
   <button class="x-mark mobile-btn" ng-click="toggleMobileLeftPanel(false)"></button>
   <div class="mobile-logo"></div>
-  <div class="mobile-user">
-    <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-128.png"
-         alt="user-logo">
+  <div class="mobile-user user-panel-avatar" style="overflow:hidden">
+    <img ng-if="currentUser.avatar" src="{{getUserAvatarUrl(currentUser || currentUser.user)}}" />
+
+    <div class="default-user-avatar" ng-if="!(currentUser.avatar)"
+         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+      <span>{{currentUser.firstName[0].toUpperCase()}}</span>
+      <span>{{currentUser.lastName[0].toUpperCase()}}</span>
+    </div>
+
   </div>
 </div>
 <div class="left-menu-content">

@@ -45,6 +45,7 @@
 
         $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
 
+        $scope.currentUser = UsersService.getCurrentUser();
 
         $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
