@@ -616,15 +616,19 @@
         $scope.mobileApplyIndustryFilterFromHistoryListUserPage = function (value) {
           $scope.mobileFilterUsersIndustry = value;
           $rootScope.selectedIndustryItem = value;
-          
+
         };
 
         $scope.applyCompanyFilterFromHistoryListUserPage = function (value) {
           usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+
+          $scope.usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+          $scope.userPageCompanyIdFilter =  getCompanyIdByCompanyName(value);
+          console.log(usersSharedState.filter.companyId, "HUEHUEHUE")
         };
 
         $scope.mobileApplyCompanyFilterFromHistoryListUserPage = function (value) {
-          $scope.mobileUserPageCompanyIdFilter = getCompanyIdByCompanyName(value);
+          // $scope.mobileUserPageCompanyIdFilter = getCompanyIdByCompanyName(value);
         }
 
         $scope.applyCompanyFilterFromHistoryListTicketPage = function (value) {
