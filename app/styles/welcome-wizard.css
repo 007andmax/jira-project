@@ -1911,6 +1911,57 @@
     padding: 7px 12px;
   }
   
+  .modal-customize-avatar > .modal-dialog,
+  .modal-spam .modal-dialog {
+    width: 100vw;
+    top: 0;
+    left: 0;
+    margin: 0;
+    transform: none !important;
+    max-width: 414px;
+    height: 100vh;
+  }
+  
+  .crop-wrapper {
+    height: 100vh;
+  }
+  
+  .img-crop,
+  .cropper-canvas,
+  .cropper-crop-box,
+  .cropper-container.cropper-bg {
+    width: 100% !important;
+  }
+  
+  .cropper-point.point-se {
+    width: 5px;
+    height: 5px;
+  }
+  
+  .logo-crop {
+    float: none;
+  }
+  
+  .cropper-btns-container {
+    float: none;
+    margin-top: 20px;
+  }
+  
+  .modal-spam .modal-dialog {
+    top: calc(50% - 70px);
+  }
+  
+  .mob-user-ticket.without-mob {
+    padding-left: 24px;
+  }
+  
+  .mob-user-ticket.without-mob:before {
+    left: 0;
+  }
+  
+  .restore {
+    right: 3%;
+  }
 }
 
 @media (max-width: 375px) {
@@ -1932,6 +1983,15 @@
   .ticket-update-product-item.has-discount .discount-w {
     width: 39%;
     display: block;
+  }
+  
+  .img-crop,
+  .cropper-container.cropper-bg {
+    height: 300px;
+  }
+  
+  .modal-dialog.modal-custom-size-confirmation-pop-up .modal-footer {
+    display: flex;
   }
 }
 
