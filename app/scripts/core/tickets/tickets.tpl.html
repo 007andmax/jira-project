@@ -17,12 +17,12 @@
           <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
         </li>
         <button class="mob-filters-btn mobile-btn primary"
-                ng-click="toggleMobileCompanyFilters(true)">
+                ng-click="toggleMobileTicketsFilters(true)">
           Filters
         </button>
-        <div class="mob-filters">
+        <div class="mob-filters" ng-class="{ opened: areMobileTicketsFiltersOpened }">
           <div class="mob-filters-header">
-            <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
+            <button class="x-mark mobile-btn" ng-click="closeAndResetMobileTicketsFilters()"></button>
             <div>Filters</div>
           </div>
           <div class="center-category">
@@ -31,7 +31,7 @@
               By tags
             </div>
             <div class="center-category__category sked without-height">
-              <ticket-tags tag-filter="true" on-save-func="" ticket-tags="ticketFilterTags"></ticket-tags>
+              <ticket-tags tag-filter="true" on-save-func="" ticket-tags="ticketsFilterTags"></ticket-tags>
             </div>
 
             <div class="left-panel-hide-filter">
@@ -47,18 +47,18 @@
                          placeholder="Select Company"
                          next-after-text-editor ng-trim="false"
                          typeahead-input-formatter="getCompanyName($model)"
-                         autocomplete="off" ng-model="ticketsSharedState.filter.companyId"
+                         autocomplete="off" ng-model="companyModel"
                          uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                          qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                          no-overflow="true"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-                  <div typeahead-input-icon="ticketsSharedState.filter.companyId"></div>
+                  <div typeahead-input-icon="companyModel"></div>
                 </div>
                 <div class="recent-left-panel">
                   <h4 class="font-medium">recent</h4>
                   <p ng-repeat="item in companiesFilterHistoryTicketsPage track by $index"
-                     ng-click="applyCompanyFilterFromHistoryListTicketPage(item)">{{item}}</p>
+                     ng-click="mobileApplyCompany(item)">{{item}}</p>
                 </div>
               </div>
 
@@ -72,18 +72,18 @@
                   <input type="text" class="form-control has-dropdown pointer"
                          placeholder="Select User"
                          typeahead-input-formatter="getUserByID($model)"
-                         autocomplete="off" ng-model="ticketsSharedState.filter.clientUserId"
+                         autocomplete="off" ng-model="clientUserModel"
                          uib-typeahead="client.id as getFullName(client) for client in clientsUsersByCompany | filter: $viewValue:stateComparator | orderBy:'toString()'"
                          qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                          no-overflow="true"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                          ng-disabled="isTicketCompanyIdFieldEmpty">
-                  <div typeahead-input-icon="ticketsSharedState.filter.clientUserId"></div>
+                  <div typeahead-input-icon="clientUserModel"></div>
                 </div>
                 <div class="recent-left-panel">
                   <h4 class="font-medium">recent</h4>
                   <p ng-repeat="item in clientUsersFilterHistoryTicketsPage track by $index"
-                     ng-click="applyClientUserFilterFromHistoryListTicketPage(item)">
+                     ng-click="mobileApplyClientUser(item)">
                     {{item}}</p>
 
                 </div>
@@ -101,17 +101,17 @@
                   <input type="text" class="form-control has-dropdown pointer"
                          placeholder="Select Tech User"
                          typeahead-input-formatter="getUserByID($model)"
-                         autocomplete="off" ng-model="ticketsSharedState.filter.techUserId"
+                         autocomplete="off" ng-model="techUserModel"
                          uib-typeahead="client.id as getFullName(client) for client in techUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
                          qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                          no-overflow="true"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-                  <div typeahead-input-icon="ticketsSharedState.filter.techUserId"></div>
+                  <div typeahead-input-icon="techUserModel"></div>
                 </div>
                 <div class="recent-left-panel">
                   <h4 class="font-medium">recent</h4>
                   <p ng-repeat="item in techUsersFilterHistoryTicketsPage track by $index"
-                     ng-click="applyTechUserFilterFromHistoryListTicketPage(item)">{{item}}</p>
+                     ng-click="mobileApplyUser(item)">{{item}}</p>
 
                 </div>
               </div>
@@ -219,7 +219,7 @@
 
             </div>
           </div>
-          <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
+          <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileTicketsFilters()">Apply Filters</button>
         </div>
       </ul>
     </div>

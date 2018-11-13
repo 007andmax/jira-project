@@ -43,6 +43,8 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        console.log("REINIT ReINIT")
+
         $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
 
         $scope.currentUser = UsersService.getCurrentUser();
@@ -247,6 +249,11 @@
 
         }
 
+        $scope.closeAndResetMobileTicketsFilters = function() {
+
+          $scope.toggleMobileTicketsFilters(false);
+        }
+
         $scope.ticketsSharedState.filter.tags = [];
 
         function sendNewFilterToStorage(customerKey, recentArray, item) {
@@ -388,7 +395,7 @@
         }, true)
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
-          if (value !== "" && value !== " ") {
+          if (value !== undefined && value !== "" && value !== " ") {
             if (value && $scope.checkCompanieValueMatched(value)) {
               $scope.isTicketCompanyIdFieldEmpty = false;
               sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
@@ -442,7 +449,7 @@
         }, true);
 
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
-          if (value !== "" && value !== " ") {
+          if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -471,7 +478,9 @@
         });
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
-          if (value !== "" && value !== " ") {
+
+          console.log(ticketsSharedState.filter, 'PIZDEC')
+          if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -491,6 +500,7 @@
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
+                console.log('WE ARE HERE')
                 $scope.stateGo(null, 'tickets', {listType: 'by_company'});
               } else {
                 $scope.stateGo(null, 'tickets', {listType: 'all'});
