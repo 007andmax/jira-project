@@ -24,6 +24,10 @@
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
+          $scope.toggleUpdateWindow = function(state) {
+            $scope.isMobileUpdateShown = state;
+          }
+
           var params = $state.params.remoteParams;
           var isFromRemote = params && (params.deviceId || params.companyId || params.connectionDuration);
           if (isFromRemote) {
@@ -184,7 +188,7 @@
               })
             }
 
-            
+
 
             function setUserCompanies() {
               // $scope.userCompanies = $scope.ticketDetails.userCompanies
