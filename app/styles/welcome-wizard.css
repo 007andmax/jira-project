@@ -1962,6 +1962,12 @@
   .restore {
     right: 3%;
   }
+  
+  .modal-dialog.modal-md {
+    width: 100vw!important;
+    left: 0!important;
+    top: calc(50% - 250px);
+  }
 }
 
 @media (max-width: 375px) {
