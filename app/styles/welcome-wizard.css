@@ -1057,6 +1057,10 @@
     display: none;
   }
 
+  .ticket-content {
+    margin-bottom: 0;
+  }
+
   .mobile-top-bar.ticket-detail-header .mob-back-btn,
   .mobile-top-bar.ticket-detail-header h3.ticket-detail-subject,
   .mobile-top-bar.ticket-detail-header .more-ticket-details,

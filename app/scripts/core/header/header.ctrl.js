@@ -23,6 +23,23 @@
           sharedQuickSession.isCreateNew = true;
         };
 
+
+        $scope.$watch(function() {
+          return $rootScope.isTicketOpened;
+        }, function(val) {
+          $scope.isTicketOpened = val;
+        })
+
+        $scope.$watch(function() {
+          return $rootScope.isTicketEditOpened;
+        }, function(val) {
+          $scope.isTicketEditOpened = val;
+        })
+
+        $scope.closeEditTicket = function() {
+          $rootScope.isMobileUpdateShown = false;
+        }
+
         $scope.toggleLeftPanel = function(state) {
           $rootScope.isLeftPanelOpened = state;
         }

@@ -5,7 +5,11 @@
 
 <!-- @Leo add class: ticket-detail-header -->
 <!-- @Leo add class: ticket-create-update -->
-<div ng-controller="quicktech.core.header.headerCtrl" class="mobile-top-bar" style="z-index: 1038;" ng-if="applicationLoaded "
+<div ng-controller="quicktech.core.header.headerCtrl"
+     class="mobile-top-bar"
+     ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
+     style="z-index: 1038;"
+     ng-if="applicationLoaded"
      ng-include="'/html/scripts/core/header/mobile-header.tpl.html'"></div>
 
 <aside id="left" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"

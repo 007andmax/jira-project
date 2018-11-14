@@ -24,9 +24,20 @@
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
-          $scope.toggleUpdateWindow = function(state) {
-            $scope.isMobileUpdateShown = state;
+          $rootScope.toggleUpdateWindow = function(state) {
+            $rootScope.isMobileUpdateShown = state;
+
+            $rootScope.isTicketEditOpened = state;
           }
+
+          $rootScope.isTicketOpened = true;
+
+          $scope.$on('$destroy', function() {
+            console.log('ustroi destroi');
+            $rootScope.isTicketOpened = false;
+          })
+
+
 
           var params = $state.params.remoteParams;
           var isFromRemote = params && (params.deviceId || params.companyId || params.connectionDuration);
