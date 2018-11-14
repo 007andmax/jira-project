@@ -8,6 +8,38 @@
           $scope.quantityPattern = /^\d{0,4}$/;
           $scope.pricePattern = /^\d{0,6}(\.\d{0,2})?$/;
 
+
+
+          setTimeout(function() {
+
+            console.log($scope.ticketUpdate.products[0], 'ticket')
+            if (!$scope.productExpense) {
+              $scope.productExpense = $scope.ticketUpdate.products[0];
+            }
+          }, 100);
+
+
+          if (window.innerWidth <= 414) {
+            $scope.$watch('productExpense', function(val) {
+              if (val) {
+                $scope.ticketUpdate.products[0] = val
+                
+              }
+            }, true);
+          }
+
+
+
+
+
+          function getParentWithProp(element, prop) {
+            if (element[prop]) {
+              return element[prop];
+            } else {
+              return getParentWithProp(element.$parent, prop);
+            }
+          }
+
           $scope.PermissionsService = PermissionsService;
 
           $scope.loadProductByCategory = function (categoryId) {
@@ -19,6 +51,7 @@
               $scope.productExpense.discountAmount = product.discountAmount;
               $scope.productExpense.discountType = "PERCENT";
             }
+
             $scope.productExpense.item = angular.copy(product);
           };
 

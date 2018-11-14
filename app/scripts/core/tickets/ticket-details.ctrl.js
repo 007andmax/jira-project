@@ -30,12 +30,26 @@
             $rootScope.isTicketEditOpened = state;
           }
 
+          $rootScope.closeTicket = function() {
+            window.location.href = window.location.href.split('/').slice(0, -1).join('/');
+          }
+
           $rootScope.isTicketOpened = true;
 
           $scope.$on('$destroy', function() {
             console.log('ustroi destroi');
             $rootScope.isTicketOpened = false;
           })
+
+          $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id).filter(function(user) {
+            return !user.deletedAt;
+          });
+
+
+
+
+          $scope.usersToWatch = $scope.agents.slice();
+
 
 
 
@@ -541,7 +555,9 @@
             $scope.triedToSaveUpdate = value;
           };
 
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback) {
+
+            console.log($scope.ticketUpdate.products, "VOFOOOOOO")
             if (form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -603,6 +619,8 @@
               TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
 
                 $scope.isSavingUpdate = false;
+
+                if (callback) callback()
 
                 if (!disableRestoringDefaults) {
                   switch (ticketUpdateToSend.type) {
