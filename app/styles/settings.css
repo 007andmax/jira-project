@@ -35,8 +35,106 @@
   padding-left: 25px;
 }
 
-.commissions-settings .togglers {
+.commissions-settings {
+  padding: 0 10px 40px;
+}
 
+.commissions-settings .block {
+  border-radius: 5px;
+  background-color: #fff !important;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.commissions-settings .block [class*='col-md-'] {
+  background-color: #fff !important;
+  padding: 0;
+}
+
+.commissions-settings .block .commission-input {
+  border-bottom: none;
+}
+
+.commissions-settings .block h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+
+.commissions-settings .block p {
+  font-size: 13px;
+}
+
+.commission-style {
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 16px 20px !important;
+  border-bottom: none !important;
+  margin-bottom: 16px !important;
+}
+
+.commission-style input {
+  width: 100% !important;
+}
+
+.commission-style span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca5b6;
+  line-height: 20px;
+}
+
+.commission-style .form-group {
+  margin: 0;
+}
+
+.commission-style span.list-company-name {
+  font-size: 13px;
+  color: #364656;
+  font-weight: 900;
+}
+
+.commission-input .default-company-logo span {
+  color: #364656;
+  font-size: 13px;
+}
+
+.commission-input input.com-edit {
+  border-radius: 3px;
+  border: solid 1px #c4cbd5;
+  background-color: #fff;
+  height: 40px;
+  padding: 0 10px;
+}
+
+.commission-style [class*='col-md-'] {
+  background-color: #fff !important;
+}
+
+.commissions-header {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #364656;
+  font-weight: 900;
+  padding: 10px 0;
+  border-bottom: 1px solid #dbe1e7;
+}
+
+.commissions-header [class*='col-md-'],
+.commission-input [class*='col-md-'] {
+  padding: 0;
+}
+
+.commissions-settings {
+  min-height: calc(100vh - 78px);
+  height: auto;
+  background-color: #f3f7f9;
+}
+
+.commissions-settings [class*="col-md-"] {
+  background-color: #f3f7f9;
+}
+
+.commissions-settings .togglers {
   padding: 10px 0;
 }
 
@@ -52,21 +150,43 @@
   padding: 15px 0;
   float: left;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 25%;
+  width: auto;
+  font-size: 13px;
+  font-weight: 900;
+  color: #4f5f79;
+  border-bottom: 3px solid transparent;
+  transition: all .3s;
+  margin-right: 40px;
 }
 
-.commissions-settings .togglers div:hover {
-
-}
-
-.commissions-settings .togglers div:not(:last-child) {
-  border-right: 1px solid #b4b4b4;
+.commissions-settings .togglers div:hover,
+.commissions-settings .togglers div.active {
+  border-bottom-color: #16a4fa;
+  color: #16a4fa;
 }
 
 .commission-input {
-  margin: 10px 0;
+  margin: 0;
+  padding: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #dbe1e7;
+  font-size: 13px;
+  font-weight: 900;
+  color: #364656;
+}
+
+.commission-input input {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 900;
+  color: #364656;
+  width: 80px;
 }
 
 .custom-phone-type {
@@ -293,8 +413,6 @@
   padding: 0;
   height: 37px;
 }
-
-
 
 .settings-main-wrapper .wysiwyg-controls-wrapper .control-wrappers, .settings-main-wrapper .wysiwyg-controls-wrapper > a {
   margin-top: 11px;
@@ -1039,7 +1157,7 @@ input.default-invoice-terms {
 }
 
 .turn-on-content {
-  background-color: #EAECEE;
+  background-color: #eaecee;
   font-size: 0;
   margin-top: 80px;
   border-radius: 10px;
@@ -1059,7 +1177,7 @@ input.default-invoice-terms {
 .triangle-bottom {
   position: absolute;
   border: 60px solid transparent;
-  border-top: 40px solid #EAECEE;
+  border-top: 40px solid #eaecee;
   left: calc(50% - 60px);
 }
 
@@ -1104,7 +1222,7 @@ input.default-invoice-terms {
 }
 
 .credit-card-info {
-  background-color: #EAECEE;
+  background-color: #eaecee;
   margin-left: 20px;
   margin-top: 80px;
   height: 287px;
