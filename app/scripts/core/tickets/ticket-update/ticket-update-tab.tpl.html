@@ -1,7 +1,7 @@
 
 
 
-<div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
+<div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl" >
 
   <div class="ticket-post-update-wrapper">
 
@@ -163,18 +163,18 @@
   </div>
 
 
-  <div class="mob-ticket-create-updates" ng-class="{ opened: isMobileUpdateShown }">
+  <div class="mob-ticket-create-updates" ng-class="{ opened: isMobileUpdateShown }" ng-init="setMobileForm(ticketUpdateForm)">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
       <!--@Leo class: active-->
-      <button class="mob-note mobile-btn" ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
-      <button class="mob-product mobile-btn" ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
-      <button class="mob-service mobile-btn" ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
+      <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note" ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
+      <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product" ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
+      <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service" ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
     </div>
     <div class="create-updates-content">
       <!--@Leo class: show-->
       <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'" ng-class="{'show': currentOpenTab === 'NOTE'}">
-        <textarea placeholder="Write ticket conversation here…" ng-model="ticketUpdate.note"></textarea>
+        <textarea placeholder="Write ticket conversation here…" ng-model="updateNote.note"></textarea>
       </div>
 
 
@@ -525,8 +525,8 @@
         </div>
       </div>
       <button class="create-ticket-update mobile-btn"
-              custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
-              ng-click="saveTicketUpdate(ticketUpdateForm, null, toggleUpdateWindow);"></button>
+              custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE') && !newEditExpense) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+              ng-click="saveTicketUpdate(ticketUpdateForm, null, toggleUpdateWindow, newEditExpense);"></button>
     </div>
   </div>
 </div>

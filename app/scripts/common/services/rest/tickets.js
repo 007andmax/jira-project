@@ -502,7 +502,7 @@
         RealTimeService.subscribe('/ticketUpdates/' + ticket.id, targetScope, function (newChange) {
 
           if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
-
+            // console.log(newChange, 'NEWWWWCHANGeEE')
             var update = Utils.findById(ticket.updates, newChange.data.id),
               attachments = newChange.data.attachments;
 

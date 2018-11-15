@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
-      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService',
-        function ($scope, ServicesService, $uibModal, AgreementsService) {
+      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout',
+        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout) {
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id);
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
@@ -28,6 +28,38 @@
             }
 
           });
+
+          console.log("HEEEEERERERERE")
+          if ($scope.editExpense) {
+            console.log('TICKET EXPENSEEEEEEEE')
+          }
+
+          $scope.$watch('editExpense', function(val) {
+            console.log(val, "'TICKET EXPENSEEEEEEEE'")
+
+
+            $timeout(function() {
+
+              $scope.newEditExpense = angular.copy($scope.editExpense);
+              if (val && val.note) {
+                $scope.updateNote = $scope.newEditExpense.note;
+                $scope.openedTab('NOTE')
+              } else {
+
+                $scope.updateNote = $scope.ticketUpdate
+
+                console.log($scope.ticketUpdate.note, "RREEEE")
+              }
+
+              if (val && val.product) {
+                $scope.openedTab('PRODUCT')
+                $scope.productToEdit = $scope.newEditExpense.product;
+              } else {
+                $scope.productToEdit = null;
+              }
+            }, 100)
+
+          }, true)
 
           function openModal(company) {
             $uibModal.open({

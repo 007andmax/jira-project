@@ -28,6 +28,10 @@
             $rootScope.isMobileUpdateShown = state;
 
             $rootScope.isTicketEditOpened = state;
+
+            if (!state) {
+              $scope.editExpense = null;
+            }
           }
 
           $rootScope.closeTicket = function() {
@@ -121,12 +125,20 @@
             }
 
             $scope.toggleNoteUpdate = function(ticketUpdate) {
-              console.log(ticketUpdate)
+              if (window.innerWidth <= 414) {
+                $scope.editExpense = {
+                  note: ticketUpdate
+                }
 
-              if (ticketUpdate.id !== $scope.isNoteUpdating) {
-                $scope.prevNote = ticketUpdate.note;
-                $scope.isNoteUpdating = ticketUpdate.id;
+                $scope.toggleUpdateWindow(true)
+              } else {
+                if (ticketUpdate.id !== $scope.isNoteUpdating) {
+                  $scope.prevNote = ticketUpdate.note;
+                  $scope.isNoteUpdating = ticketUpdate.id;
+                }
               }
+
+
 
             }
 
@@ -203,13 +215,15 @@
               ticketUpdate.note = $scope.prevNote;
             }
 
-            $scope.updateNoteRequest = function(updateId, note) {
+            $scope.updateNoteRequest = function(updateId, note, callback) {
               // updateNote(ticketId, updateId, note, callback)
 
               TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
                 console.log('note updated', resp);
 
                 $scope.isNoteUpdating = false;
+
+                if (callback) callback()
               })
             }
 
@@ -354,7 +368,15 @@
             $scope.ticketUpdate = value;
           };
 
+          $scope.setMobileForm = function(form) {
+            console.log('SETMOBILE FORM', form)
+            $scope.mobileUpdateForm = form;
+          }
+
           $scope.updateAndCloseTicket = function (form) {
+            console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
+            if (!form) form = $scope.mobileUpdateForm;
+
             if (hasUnsavedUpdate($scope.ticketUpdate)) {
               var saveFailed = $scope.saveTicketUpdate(form, true);
               if (!saveFailed) {
@@ -555,7 +577,18 @@
             $scope.triedToSaveUpdate = value;
           };
 
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value) {
+            console.log('WTF')
+            if (isExpenseEdit) {
+              console.log(isExpenseEdit);
+              if (isExpenseEdit.note) {
+                var note = isExpenseEdit.note;
+
+                $scope.updateNoteRequest(note.id, note.note, callback);
+              }
+
+              return;
+            }
 
             console.log($scope.ticketUpdate.products, "VOFOOOOOO")
             if (form.$valid) {
@@ -671,8 +704,24 @@
             }
           };
 
-          $scope.setEditExpenseId = function (id) {
-            $scope.editExpenseId = id;
+          $scope.setEditExpenseId = function (id, item) {
+
+            if (window.innerWidth <= 414) {
+
+              $scope.toggleUpdateWindow(true)
+              if (item.isServiceExpense) {
+                $scope.editExpense = {
+                  service: item
+                }
+              } else {
+                $scope.editExpense = {
+                  product: item
+                }
+              }
+            } else {
+              $scope.editExpenseId = id;
+
+            }
           };
 
           $scope.deleteForever = function () {

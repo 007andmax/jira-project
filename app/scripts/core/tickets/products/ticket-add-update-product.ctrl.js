@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateProductCtrl',
-      ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService',
-        function ($scope, ProductsService, PermissionsService) {
+      ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService', '$rootScope',
+        function ($scope, ProductsService, PermissionsService, $rootScope) {
           $scope.quantityPattern = /^\d{0,4}$/;
           $scope.pricePattern = /^\d{0,6}(\.\d{0,2})?$/;
 
@@ -21,12 +21,25 @@
 
           if (window.innerWidth <= 414) {
             $scope.$watch('productExpense', function(val) {
-              if (val) {
+              if (val && !$scope.productToEdit) {
                 $scope.ticketUpdate.products[0] = val
-                
+
               }
             }, true);
           }
+
+
+          $scope.$watch('productToEdit', function(val) {
+            if (val) {
+              $scope.productExpense = val;
+
+              console.log('val before', val)
+              $rootScope.selectedMobileProduct = val;
+
+              console.log($scope.productExpense.item.description, "VALLLL")
+              // $scope.$apply()
+            }
+          })
 
 
 
