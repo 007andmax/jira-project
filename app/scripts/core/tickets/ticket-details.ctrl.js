@@ -54,7 +54,11 @@
 
           $scope.usersToWatch = $scope.agents.slice();
 
+          $scope.editForms = {};
 
+          $scope.setEditForm = function(form, name) {
+            $scope.editForms[name] = form;
+          }
 
 
           var params = $state.params.remoteParams;
@@ -577,6 +581,90 @@
             $scope.triedToSaveUpdate = value;
           };
 
+          $scope.saveUpdateProduct = function (form, item, callback) {
+            console.log(item, "IIIIII")
+            if (form.$valid) {
+              var product = item.item;
+              var editVersionedId = product.versionedId;
+
+              $scope.disabledSave = true;
+
+              TicketsService.updateExpenseInTicketUpdate({
+
+                ticketUpdateId: item.ticketUpdateId,
+                productExpense: {
+
+                  id: item.id,
+                  item: {
+                    sale: product.sale,
+                    versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                    cost: product.cost
+                  },
+                  serialNumber: item.serialNumber,
+                  quantity: item.quantity,
+                  date: item.date,
+                  discountAmount: item.discountAmount,
+                  discountType: 'PERCENT'
+                }
+              }, function () {
+                UserNotificationService.show('The ticket update containing a product has been modified', true);
+                if (callback) callback();
+                $scope.setEditExpenseId();
+
+
+              })
+            } else {
+              $scope.triedToSaveProduct = true;
+            }
+
+          };
+
+          $scope.saveUpdateService = function (form, item, callback) {
+
+            if (form.$valid) {
+              var editVersionedId = $scope.editService.item.versionedId;
+              var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
+              var isDescriptionChange = $scope.service.description != $scope.editService.description;
+              var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
+              var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
+              var isDescountAmountChange = $scope.service.discountAmount != $scope.editService.discountAmount;
+              var isDiscountTypeChange = $scope.service.discountType != $scope.editService.discountType;
+
+              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange || isDescountAmountChange || isDiscountTypeChange)) {
+                $scope.setEditExpenseId();
+                return;
+              }
+
+              $scope.disabledSave = true;
+
+              var serviceDate = new Date($scope.editService.date);
+              if (callback) callback()
+              TicketsService.updateExpenseInTicketUpdate({
+
+                ticketUpdateId: $scope.ticketUpdate.id,
+                serviceExpense: {
+
+                  id: $scope.editService.id,
+                  item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+                  description: $scope.editService.description,
+                  quantity: $scope.editService.quantity / 60,
+                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                  discountAmount: $scope.editService.discountAmount,
+                  discountType: "PERCENT"
+
+                }
+              }, function () {
+                UserNotificationService.show('The ticket update containing a service has been modified', true);
+
+                $scope.setEditExpenseId();
+
+
+              })
+            } else {
+              $scope.triedToSaveService = true;
+            }
+          };
+
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value) {
             console.log('WTF')
             if (isExpenseEdit) {
@@ -585,6 +673,8 @@
                 var note = isExpenseEdit.note;
 
                 $scope.updateNoteRequest(note.id, note.note, callback);
+              } else if (isExpenseEdit.product) {
+                $scope.saveUpdateProduct($scope.editForms.editProductForm, isExpenseEdit.product, callback)
               }
 
               return;
@@ -704,10 +794,12 @@
             }
           };
 
-          $scope.setEditExpenseId = function (id, item) {
+          $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
 
             if (window.innerWidth <= 414) {
-
+              if (item) {
+                item.ticketUpdateId = ticketUpdateId
+              }
               $scope.toggleUpdateWindow(true)
               if (item.isServiceExpense) {
                 $scope.editExpense = {

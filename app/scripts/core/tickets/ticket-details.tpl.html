@@ -665,7 +665,7 @@
                   <div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
-                       ng-click="setEditExpenseId(product.id, product)"
+                       ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"
                        custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icon-sm edit-icon"></i>
                     </a>
@@ -705,7 +705,7 @@
                   <div class="table-content-action pull-right" ng-show="ticketDetails.status != 'COMPLETED'">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
-                       ng-click="setEditExpenseId(service.id, service)"
+                       ng-click="setEditExpenseId(service.id, service, ticketUpdate.id)"
                        custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icon-sm edit-icon"></i>
                     </a>
@@ -970,7 +970,7 @@
                   <!--@Leo-->
                   <a class="hit-area has-tooltip edit-update"
                      tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
-                     ng-click="setEditExpenseId(product.id, product)"
+                     ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"
                      custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                     <i class="icon-sm edit-icon"></i>
                   </a>
@@ -1008,7 +1008,7 @@
 
                   <a class="hit-area has-tooltip edit-update"
                      tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
-                     ng-click="setEditExpenseId(service.id, service)"
+                     ng-click="setEditExpenseId(service.id, service, ticketUpdate.id)"
                      custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                     <i class="icon-sm edit-icon"></i>
                   </a>

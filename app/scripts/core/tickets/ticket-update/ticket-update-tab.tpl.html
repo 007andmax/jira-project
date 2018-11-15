@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-
 
 
 <div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl" >
-=======
-<div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
->>>>>>> b036613bd253834e4cefcada6e83cfbd7b574bd2
+
 
   <div class="ticket-post-update-wrapper">
 
@@ -172,7 +168,7 @@
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
       <!--@Leo class: active-->
-<<<<<<< HEAD
+
       <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note" ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
       <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product" ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
       <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service" ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
@@ -181,20 +177,7 @@
       <!--@Leo class: show-->
       <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'" ng-class="{'show': currentOpenTab === 'NOTE'}">
         <textarea placeholder="Write ticket conversation here…" ng-model="updateNote.note"></textarea>
-=======
-      <button class="mob-note mobile-btn" ng-click="openedTab('NOTE')"
-              ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
-      <button class="mob-product mobile-btn" ng-click="openedTab('PRODUCT')"
-              ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
-      <button class="mob-service mobile-btn" ng-click="openedTab('SERVICE')"
-              ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
-    </div>
-    <div class="create-updates-content">
-      <!--@Leo class: show-->
-      <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'"
-           ng-class="{'show': currentOpenTab === 'NOTE'}">
-        <textarea placeholder="Write ticket conversation here…" ng-model="ticketUpdate.note"></textarea>
->>>>>>> b036613bd253834e4cefcada6e83cfbd7b574bd2
+
       </div>
 
 
@@ -374,7 +357,9 @@
                    execute-when-outfocused="isShowBarcotInputField = false"
                    uib-tooltip="{{ productExpense.serialNumber }}"
                    tooltip-placement="top"
-                   tooltip-append-to-body="true" />
+                   tooltip-append-to-body="true"
+                   ng-init="setEditForm(addProductForm, 'editProductForm')"
+                     />
           </div>
           <div class="col-xs-12 mob-cost-input"
                ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}">
@@ -450,6 +435,7 @@
                      autocomplete="off"
                      placeholder="Service"
                      class="form-control-dropdown dropdown-toggle"
+                     ng-init="setEditForm(addServiceForm, 'editServiceForm')"
                      uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
                      qt-typeahead-async-show-on-focus>
 
