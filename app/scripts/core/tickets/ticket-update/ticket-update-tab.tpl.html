@@ -1,6 +1,3 @@
-
-
-
 <div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
 
   <div class="ticket-post-update-wrapper">
@@ -68,7 +65,7 @@
                   <i class="icon-sm attachment"></i>
                 </a>
 
-                <input type="file" style="display:none" multiple=""/>
+                <input type="file" style="display:none" multiple="" />
               </div>
 
               <div class="line-sep pull-left"></div>
@@ -125,7 +122,8 @@
 
         <div class="ticket-add clearfix" ng-form="addServicesForm">
 
-          <div style="width: 100%;" class="info-block" ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated) && !(serviceList.length === 0 && areTickets))">
+          <div style="width: 100%;" class="info-block"
+               ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated) && !(serviceList.length === 0 && areTickets))">
             <span ng-show="areTicketsTerminated">Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services.</span>
             <span ng-show="!areTicketsPresented">You are using default services.</span>
           </div>
@@ -133,13 +131,13 @@
           <div class="service-not-yet" ng-show="areTicketsTerminated || (serviceList.length === 0 && areTickets)">
             <img src="images/hourly.svg" alt="">
             <p>No service Set up yet, <br>
-              click on button to set up service</p>
+               click on button to set up service</p>
             <div class="btn btn-primary btn-create" ng-click="openContractAgreementsModal(company)">Setup Service</div>
           </div>
 
 
-
-          <div class="ticket-add-content clearfix" ng-show="!areTicketsTerminated && !(serviceList.length === 0 && areTickets)">
+          <div class="ticket-add-content clearfix"
+               ng-show="!areTicketsTerminated && !(serviceList.length === 0 && areTickets)">
 
             <div>
               <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
@@ -167,16 +165,19 @@
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
       <!--@Leo class: active-->
-      <button class="mob-note mobile-btn" ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
-      <button class="mob-product mobile-btn" ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
-      <button class="mob-service mobile-btn" ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
+      <button class="mob-note mobile-btn" ng-click="openedTab('NOTE')"
+              ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
+      <button class="mob-product mobile-btn" ng-click="openedTab('PRODUCT')"
+              ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
+      <button class="mob-service mobile-btn" ng-click="openedTab('SERVICE')"
+              ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
     </div>
     <div class="create-updates-content">
       <!--@Leo class: show-->
-      <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'" ng-class="{'show': currentOpenTab === 'NOTE'}">
+      <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'"
+           ng-class="{'show': currentOpenTab === 'NOTE'}">
         <textarea placeholder="Write ticket conversation here…" ng-model="ticketUpdate.note"></textarea>
       </div>
-
 
 
       <!-- <div>
@@ -318,8 +319,9 @@
       </div> -->
 
 
-
-      <div class="create-updates-content-product row" ng-if="currentOpenTab === 'PRODUCT'" ng-class="{'show': currentOpenTab === 'PRODUCT'}" ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl" ng-form="addProductsForm">
+      <div class="create-updates-content-product row" ng-if="currentOpenTab === 'PRODUCT'"
+           ng-class="{'show': currentOpenTab === 'PRODUCT'}"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl" ng-form="addProductsForm">
         <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl" ng-form="addProductForm">
           <div class="col-xs-12 mob-product-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
             <div products-list id="product-list-cont"
@@ -327,11 +329,12 @@
 
               <div uib-tooltip="Product" tooltip-placement="top">
 
-                <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown pointer" pl-product-input
+                <input ng-hide="isPLOpen" type="text" class="has-dropdown pointer" pl-product-input
                        placeholder="Product" autocomplete="off">
 
-                <input ng-show="isPLOpen" type="text" class="form-control has-dropdown pointer" pl-search-product-input
-                       placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct" smart-dropdown-menu-position="product-list">
+                <input ng-show="isPLOpen" type="text" class="has-dropdown pointer" pl-search-product-input
+                       placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct"
+                       smart-dropdown-menu-position="product-list">
 
                 <i class="icn-sm icn-caret-gray"></i>
               </div>
@@ -343,69 +346,71 @@
 
             </div>
           </div>
-          <div class="col-xs-12 mob-serial-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}">
+          <div class="col-xs-12 mob-serial-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}">
 
             <input type="text"
-                   class="form-control"
                    name="productSerialNumber"
-                   placeholder="Serial number"
                    ng-model="productExpense.serialNumber"
                    ng-maxlength="55"
                    execute-when-outfocused="isShowBarcotInputField = false"
                    uib-tooltip="{{ productExpense.serialNumber }}"
                    tooltip-placement="top"
-                   tooltip-append-to-body="true"/>
+                   tooltip-append-to-body="true" />
           </div>
-          <div class="col-xs-12 mob-cost-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}">
+          <div class="col-xs-12 mob-cost-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}">
 
-           <input uib-tooltip="Cost"
-                  tooltip-placement="top"
-                  type="number"
-                  class="form-control"
-                  name="productCost"
-                  qt-to-fixed="2"
-                  hard-reset-pattern="pricePattern"
-                  placeholder="Cost"
-                  ng-max="productExpense.item.sale"
-                  ng-model="productExpense.item.cost"
-                  tooltip-append-to-body="true"
-                  step="0.01"
-                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"/>
+            <input uib-tooltip="Cost"
+                   tooltip-placement="top"
+                   type="number"
+                   name="productCost"
+                   qt-to-fixed="2"
+                   hard-reset-pattern="pricePattern"
+                   ng-max="productExpense.item.sale"
+                   ng-model="productExpense.item.cost"
+                   tooltip-append-to-body="true"
+                   step="0.01"
+                   ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')" />
           </div>
           <div class="col-xs-6 mob-qty-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
-             <input uib-tooltip="Qty" tooltip-placement="top"
-                    type="text" class="form-control" placeholder="Qty" maxlength="4"
-                    name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
-                    ng-model="productExpense.quantity" ng-maxlength="10"
-                    hard-reset-pattern="quantityPattern">
+            <input uib-tooltip="Qty"
+                   tooltip-placement="top"
+                   type="text"
+                   maxlength="4"
+                   name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
+                   ng-model="productExpense.quantity" ng-maxlength="10"
+                   hard-reset-pattern="quantityPattern">
           </div>
-          <div class="col-xs-6 mob-price-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
+          <div class="col-xs-6 mob-price-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
 
             <input uib-tooltip="Product Sale Price"
                    tooltip-placement="top"
-                   type="number" class="form-control text-right"
-                   placeholder="Price" qt-to-fixed="2"
+                   type="number"
+                   class="text-right"
+                   qt-to-fixed="2"
                    ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                    name="productPrice"
                    ng-required="true"
                    ng-model="productExpense.item.sale"
                    hard-reset-pattern="pricePattern"
                    step="0.01"
-                   hard-reset-required="true"/>
+                   hard-reset-required="true" />
           </div>
-          <div class="col-xs-6 mob-disc-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
-           <input maxlength="3"
-                  type="text"
-                  placeholder="Discount"
-                  class="form-control text-right"
-                  name="discountAmount"
-                  ng-model="productExpense.discountAmount"
-                  ng-max="100"
-                  ng-min="0"
-                  hard-reset-pattern="PERCENT"
-                  execute-when-outfocused="isShowInputField = false"
-                  ng-keydown="$event.which === 13 && $event.preventDefault()">
+          <div class="col-xs-6 mob-disc-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
+            <input maxlength="3"
+                   type="text"
+                   class="text-right"
+                   name="discountAmount"
+                   ng-model="productExpense.discountAmount"
+                   ng-max="100"
+                   ng-min="0"
+                   hard-reset-pattern="PERCENT"
+                   execute-when-outfocused="isShowInputField = false"
+                   ng-keydown="$event.which === 13 && $event.preventDefault()">
           </div>
 
         </div>
@@ -413,9 +418,9 @@
       </div>
 
 
-
-      <div class="create-updates-content-service row" ng-if="currentOpenTab === 'SERVICE'" ng-class="{'show': currentOpenTab === 'SERVICE'}"  >
-        <div ng-form="addServiceForm">
+      <div class="create-updates-content-service row" ng-if="currentOpenTab === 'SERVICE'"
+           ng-class="{'show': currentOpenTab === 'SERVICE'}">
+        <div ng-form="addServiceForm" class="clearfix">
           <div class="col-xs-12">
             <div uib-dropdown>
 
@@ -426,7 +431,7 @@
                      ng-minlength="1"
                      autocomplete="off"
                      placeholder="Service"
-                     class="form-control form-control-dropdown dropdown-toggle"
+                     class="form-control-dropdown dropdown-toggle"
                      uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
                      qt-typeahead-async-show-on-focus>
 
@@ -437,30 +442,27 @@
                      ng-required="ticketUpdate.services[0].item ? true : false">
             </div>
           </div>
-          <div class="col-xs-6" service-quantity-picker="ticketUpdate.services[0].quantity" sqp-is-show-format="false"
+          <div class="col-xs-6 mob-timer" service-quantity-picker="ticketUpdate.services[0].quantity"
+               sqp-is-show-format="false"
                ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
             <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
-                   id="service-quantity-picker" type="text" class="form-control"
+                   id="service-quantity-picker" type="text"
                    placeholder="Hr(s) : Min(s)" sqp-input
-                   autocomplete="off" aria-expanded="true"/>
+                   autocomplete="off" aria-expanded="true" />
             <input type="hidden" ng-model="ticketUpdate.services[0].quantity" name="serviceTime"
-                   ng-required="ticketUpdate.services[0].item ? true : false"/>
+                   ng-required="ticketUpdate.services[0].item ? true : false" />
           </div>
           <div class="col-xs-6" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
-            <div>
-              <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
-                     qt-data-time-picker max-date="maxServiceDate" ng-model="ticketUpdate.services[0].date"
-                     name="serviceData" ng-required="true" uib-tooltip="select date">
-              <div>
-                <i class="report-calendar"></i>
-              </div>
-            </div>
+            <input type="text" class="has-dropdown" placeholder="Date"
+                   qt-data-time-picker max-date="maxServiceDate" ng-model="ticketUpdate.services[0].date"
+                   name="serviceData" ng-required="true" uib-tooltip="select date">
+            <i class="new-calendar"></i>
           </div>
           <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
             <input uib-tooltip="Description" tooltip-placement="top"
-                   type="text" class="form-control" placeholder="Description"
+                   type="text" placeholder="Description"
                    ng-model="ticketUpdate.services[0].description" ng-maxlength="2000"
-                   name="serviceDescription" max-length-word="100"/>
+                   name="serviceDescription" max-length-word="100" />
           </div>
         </div>
 
@@ -531,16 +533,16 @@
   </div>
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
-    m.parentNode.insertBefore(a, m)
+    m.parentNode.insertBefore(a, m);
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
