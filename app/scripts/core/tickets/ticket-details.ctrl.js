@@ -680,7 +680,7 @@
               return;
             }
 
-            console.log($scope.ticketUpdate.products, "VOFOOOOOO")
+            console.log($scope.ticketUpdate, "SSSSS", "VOFOOOOOO")
             if (form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -797,19 +797,24 @@
           $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
 
             if (window.innerWidth <= 414) {
+
               if (item) {
+
                 item.ticketUpdateId = ticketUpdateId
-              }
-              $scope.toggleUpdateWindow(true)
-              if (item.isServiceExpense) {
-                $scope.editExpense = {
-                  service: item
+                $scope.toggleUpdateWindow(true)
+                if (item.isServiceExpense) {
+                  $scope.editExpense = {
+                    service: item
+                  }
+                } else {
+                  $scope.editExpense = {
+                    product: item
+                  }
                 }
               } else {
-                $scope.editExpense = {
-                  product: item
-                }
+                $scope.toggleUpdateWindow(false)
               }
+
             } else {
               $scope.editExpenseId = id;
 

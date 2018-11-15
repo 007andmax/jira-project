@@ -57,9 +57,48 @@
               } else {
                 $scope.productToEdit = null;
               }
+
+              if (val && val.service) {
+                $scope.openedTab('SERVICE');
+                $scope.serviceToEdit = [$scope.newEditExpense.service];
+              } else {
+                $scope.serviceToEdit = $scope.ticketUpdate.services;
+              }
+
+              if ($scope.serviceToEdit) {
+                $scope.serviceToEdit[0].quantity = (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+              }
+
+
+              console.log($scope.serviceToEdit, 'SERVICETOEIDT')
+
             }, 100)
 
           }, true)
+
+          $scope.$watch(function() {
+            return $scope.ticketUpdate && $scope.ticketUpdate.services
+          }, function(val) {
+            console.log(val, 'TICEKTUPDATE SERVICE!!!!!!!!!!')
+            if (val) {
+              if ($scope.newEditExpense && $scope.newEditExpense.service) {
+                $scope.openedTab('SERVICE');
+                $scope.serviceToEdit = [$scope.newEditExpense.service];
+              } else {
+
+                $scope.serviceToEdit = $scope.ticketUpdate.services;
+                console.log($scope.serviceToEdit, 'TICKKKKKKKKK')
+
+              }
+
+              if ($scope.serviceToEdit) {
+                $scope.serviceToEdit[0].quantity = (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+              }
+              console.log($scope.serviceToEdit, 'SERVICETOEIDT')
+            }
+          })
 
           function openModal(company) {
             $uibModal.open({

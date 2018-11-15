@@ -38,6 +38,9 @@
 
               console.log($scope.productExpense.item.description, "VALLLL")
               // $scope.$apply()
+            } else {
+              $scope.productExpense = $scope.ticketUpdate.products[0];
+              $rootScope.selectedMobileProduct = null;
             }
           })
 

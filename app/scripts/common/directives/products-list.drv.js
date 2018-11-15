@@ -36,7 +36,9 @@
 
             if (val) {
               scope.chooseProductItem(val.item, true)
-              $rootScope.selectedMobileProduct = null;
+              $rootScope.selectedMobileProduct = false;
+            } else if (val === null) {
+              scope.chooseProductItem(null, true)
             }
           })
 

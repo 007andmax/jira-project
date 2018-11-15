@@ -9,8 +9,10 @@
           $scope.discountAmountMsxLength;
           $scope.maxServiceDate = new Date();
 
+          if (window.innerWidth > 414 && $scope.servoceExpense) {
+            $scope.serviceExpense.item = undefined;
+          }
 
-          $scope.serviceExpense.item = undefined;
           $scope.setNewService = function (service) {
             $scope.serviceExpense.item = service.staticCopy()
           };
@@ -49,4 +51,3 @@
         }]);
   }()
 );
-
