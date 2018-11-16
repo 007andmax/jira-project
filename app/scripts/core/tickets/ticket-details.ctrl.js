@@ -824,8 +824,62 @@
           };
 
 
+          // ticket notify
+
+          $scope.$on('userToAssignToTicket', function(evt, val) {
+
+            console.log("LEEEEEEEEEEEEEEEe", val)
+            // console.log(evt, val, "SADNESS")
+            var data = val.data;
+            var id = data.id;
+
+            var index = $scope.ticketSharedUsersList.findIndex(function(el) {
+              var userId = el.user ? el.user.id : el.id
+              return userId === id;
+            })
+
+            // console.log(index, 'indez')
+
+            if (index !== -1) {
+              $scope.ticketSharedUsersList.splice(index, 1);
+            } else {
+              $scope.ticketSharedUsersList.push({
+                user: data,
+                notify: true
+              });
+            }
+
+            // console.log($scope.ticketSharedUsersList);
+
+            $scope.$apply();
+          })
+
+          $scope.$watch('ticketSharedUsersList', function() {
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
+              return typeof el.user === 'object';
+            });
+
+          }, true)
+
+          $scope.$watch('ticketSharedUsersList.length', function(val) {
+            if (val > 8) {
+              $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
+            }
+
+            $rootScope.ticketSharedList = $scope.ticketSharedUsersList.slice();
+          })
+
+          // ticket notify end
+
+
 
           // Attachments
+
+          $scope.filterByType = function(arr, type) {
+            return arr.filter(function(el) {
+              return el.user.accountType === type;
+            })
+          }
 
           function setTicketUpdateToDefault() {
             if (window.innerWidth <= 414) return;
