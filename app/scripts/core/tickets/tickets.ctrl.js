@@ -5,15 +5,19 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$rootScope', 'CustomStorageService',
+      'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$rootScope', 'CustomStorageService', '$timeout',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $rootScope, CustomStorageService) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $rootScope, CustomStorageService, $timeout) {
 
         var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
         var ticketsSharedState = ticketsHeaderState;
+
+        $timeout(function() {
+          $scope.ticketsGroup = window.location.href.split('/').slice(-1)[0].split('_').join(' ');
+        })
 
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;

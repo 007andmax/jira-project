@@ -4,9 +4,9 @@
     <div class="empty-page-helper" ng-if="!tickets.length && !loadingOrRendering">
       <p style="opacity: 0.57">There are no tickets</p>
     </div>
-    <p class="desktop-hidden tickets-mob-filters">
-      <span>All Tickets</span>
-    </p>
+    <div class="desktop-hidden tickets-mob-filters" style="text-transform: capitalize">
+      {{ ticketsGroup }} tickets
+    </div>
     <div class="ticket-list">
       <ul class="tickets" tu-tickets-container>
         <li class="ticket {{ ticket.priorityLevel.toLowerCase() }}-priority-border"
