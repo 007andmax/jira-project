@@ -34,6 +34,12 @@
             console.log('TICKET EXPENSEEEEEEEE')
           }
 
+          $scope.$watch('ticketUpdate', function(val) {
+            if (!$scope.editExpense) {
+              $scope.updateNote = $scope.ticketUpdate;
+            }
+          })
+
           $scope.$watch('editExpense', function(val) {
             console.log(val, "'TICKET EXPENSEEEEEEEE'")
 
@@ -46,9 +52,12 @@
                 $scope.openedTab('NOTE')
               } else {
 
+                if ($scope.ticketUpdate) {
+                  $scope.ticketUpdate.note = '';
+                }
+
                 $scope.updateNote = $scope.ticketUpdate
 
-                console.log($scope.ticketUpdate.note, "RREEEE")
               }
 
               if (val && val.product) {

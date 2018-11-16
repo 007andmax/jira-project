@@ -13,7 +13,7 @@
           setTicketUpdateToDefault();
 
           function setTicketUpdateToDefault() {
-
+            if ($scope.editExpense) return;
             $scope.setTicketUpdate({
               note: '',
               attachments: []
