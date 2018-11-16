@@ -1695,6 +1695,7 @@ _::-webkit-:not(:root:root),
   color: #fff;
 }
 
+.create-updates-footer .user-item a,
 .create-new .dropdown-assign-ticket .users-list .user-item a,
 .run-report-content-device .dropdown-remote-report-tech .dropdown-menu > li > a {
   padding: 6px 20px;

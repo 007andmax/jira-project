@@ -540,12 +540,13 @@
             <img src="images/new-icons/add-user.png" class="pointer" />
           </div>
           <div uib-dropdown-menu
-               class="dropdown-assign-ticket dropdown-menu"
+               class="dropdown-assign-ticket dropdown-menu without-max-height"
                stop-propagation="click"
                assign-user-button
                onUserAssign="'true'"
                aub-create-ticket="true"
                aub-is-bulk-operation="true"
+               style="max-height: auto !important"
                aub-ticket-number="ticket.number"
                users="usersToWatch"
                aub-current-user="currentUser"></div>
