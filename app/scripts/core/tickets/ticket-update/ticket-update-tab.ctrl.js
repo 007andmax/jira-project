@@ -45,9 +45,8 @@
                 $scope.updateNote = $scope.newEditExpense.note;
                 $scope.openedTab('NOTE')
               } else {
-
-                $scope.updateNote = $scope.ticketUpdate
-
+                $scope.ticketUpdate.note = '';
+                $scope.updateNote = $scope.ticketUpdate;
                 console.log($scope.ticketUpdate.note, "RREEEE")
               }
 

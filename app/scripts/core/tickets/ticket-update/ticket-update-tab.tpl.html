@@ -477,6 +477,61 @@
       </div>
     </div>
     <div class="create-updates-footer" ng-if="isMobileUpdateShown">
+
+
+      <div>
+        <li ng-repeat="file in ticketUpdate.attachments"
+            ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
+
+          <span class="file-name">{{ file.name }}</span>
+          <span class="file-size">{{ file.size | fileSizeFilter }}</span>
+
+          <a href="javascript:void(0)" class="hit-area pull-right"
+             uib-tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index, fileInfo[file.name].error)">
+            <i class="icn-sm icn-remove-old"></i>
+          </a>
+
+           <span class="pull-right" ng-show="fileInfo[file.name].error"
+                 style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
+            {{ fileInfo[file.name].message }}
+          </span>
+
+          <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+             ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
+             uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+            <i class="icn-sm icn-reupload"></i>
+          </a>
+
+          <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
+            <div class="progress-bar" role="progressbar"
+                 aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+                 ng-style="styleProgressBar(file.progress)">
+              <span class="sr-only">{{ file.progress }}% Complete</span>
+            </div>
+          </div>
+
+        </li>
+
+
+        <div class="ticket-add-content-actions-attachment pull-left"
+             ticket-attachment-files attachment-func="addAttachmentFiles"
+             ng-model="ticketUpdate.ticketAttachments">
+
+          <a href="javascript:void(0)" class="hit-area ha-16-26 has-tooltip"
+             uib-tooltip="Attach files" tooltip-placement="top">
+            <i class="icon-sm attachment"></i>
+          </a>
+
+          <input type="file" style="display:none" multiple="" />
+        </div>
+
+
+      </div>
+
+
+
+
+
       <a class="icn-sm icn-ticket-attachment"> </a>
       <div class="notify-user-dropdown">
         <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
