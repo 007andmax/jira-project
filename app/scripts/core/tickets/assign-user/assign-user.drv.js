@@ -9,7 +9,9 @@
         restrict: 'A',
         link: function ($scope, element, attrs) {
 
-          var users = $scope.usersCurrentCompany;
+
+          console.log($rootScope.usersToNotify, 'ASDSD')
+          var users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
           var getUserAvatarUrl = $rootScope.getUserAvatarUrl;
 
           var inputElement = element.find('input');
@@ -294,7 +296,7 @@
 
 
           $scope.$watch('usersCurrentCompany.length', function() {
-            users = $scope.usersCurrentCompany;
+            users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
 
             $scope.autoComplete();
           })

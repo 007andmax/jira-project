@@ -1214,6 +1214,10 @@
             }
           });
 
+          $scope.$on('$destroy', function() {
+            $rootScope.usersToNotify = null;
+          })
+
           function closeTicket() {
             $scope.ticketClosing = true;
 
@@ -1287,6 +1291,8 @@
                 addUserToResult(user);
               }
             }
+
+            $rootScope.usersToNotify = result.slice().map(function(el) { return el.user; });
 
             return result;
 
