@@ -453,6 +453,23 @@
             });
           };
 
+          $scope.markAsOpen = function () {
+            TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function (resp) {
+
+              if (resp.code == 403) {
+
+                var user = UsersService.getOneById(resp.message);
+                alert($scope.getUserName(user) + ' locked this ticket to create invoice!');
+                return;
+              }
+
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
+              $scope.uncheckTicket($scope.ticketDetails.id);
+
+              $scope.$apply()
+            });
+          };
+
           $scope.moveIntoSpam = function () {
             var confirmMesage = 'Do you want to ' + ($scope.currentUser.isOwner ? 'mark' : 'report') + ' the ticket as spam?',
               confirmButton = 'Spam';

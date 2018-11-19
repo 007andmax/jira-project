@@ -1066,8 +1066,12 @@
         </div>
       </div>
       <div class="mob-ticket-buttons">
-        <button class="mob-add-ticket-btn mobile-btn primary" ng-click="toggleUpdateWindow(true)">+ Add New</button>
-        <button class="mob-close-ticket-btn mobile-btn" ng-click="updateAndCloseTicket()">Close Ticket</button>
+        <button class="mob-add-ticket-btn mobile-btn primary" ng-class="{ 'class-disabled': TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') }" ng-click="toggleUpdateWindow(true)" ng-disabled="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')">+ Add New</button>
+        <button class="mob-close-ticket-btn mobile-btn" ng-if="!TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')" ng-click="updateAndCloseTicket()">Close Ticket</button>
+
+        <button class="mob-close-ticket-btn mobile-btn" ng-click="markAsOpen()" ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') && PermissionsService.isAllowed('REOPEN_CLOSED_TICKETS')">
+          Re-open Ticket
+        </button>
       </div>
 
 
