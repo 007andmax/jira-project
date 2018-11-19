@@ -1,6 +1,4 @@
-
-
-<div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl" >
+<div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
 
 
   <div class="ticket-post-update-wrapper">
@@ -164,18 +162,24 @@
   </div>
 
 
-  <div class="mob-ticket-create-updates" ng-class="{ opened: isMobileUpdateShown }" ng-init="setMobileForm(ticketUpdateForm)">
+  <div class="mob-ticket-create-updates" ng-class="{ opened: isMobileUpdateShown }"
+       ng-init="setMobileForm(ticketUpdateForm)">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
       <!--@Leo class: active-->
 
-      <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note" ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
-      <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product" ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
-      <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service" ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
+      <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note"
+              ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
+      <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product"
+              ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
+      <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service"
+              ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
     </div>
+
     <div class="create-updates-content">
       <!--@Leo class: show-->
-      <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'" ng-class="{'show': currentOpenTab === 'NOTE'}">
+      <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'"
+           ng-class="{'show': currentOpenTab === 'NOTE'}">
         <textarea placeholder="Write ticket conversation here…" ng-model="updateNote.note"></textarea>
 
       </div>
@@ -359,7 +363,7 @@
                    tooltip-placement="top"
                    tooltip-append-to-body="true"
                    ng-init="setEditForm(addProductForm, 'editProductForm')"
-                     />
+            />
           </div>
           <div class="col-xs-12 mob-cost-input"
                ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}">
@@ -421,178 +425,177 @@
       </div>
 
 
-      <div class="create-updates-content-service row" ng-if="currentOpenTab === 'SERVICE'" ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl"
+      <div class="create-updates-content-service row" ng-if="currentOpenTab === 'SERVICE'"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl"
            ng-class="{'show': currentOpenTab === 'SERVICE'}">
 
-           <div ng-controller='quicktech.core.tickets.ticketAddUpdateServiceCtrl'>
-             <div ng-form="addServiceForm" class="clearfix">
-               <div class="col-xs-12">
-                 <div uib-dropdown>
+        <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
+          <div ng-form="addServiceForm" class="clearfix">
+            <div class="col-xs-12">
+              <div uib-dropdown>
 
-                   <input type="text"
-                          name="serviceName"
-                          ng-disabled="!serviceList.length"
-                          ng-model="serviceToEdit[0].item"
-                          ng-minlength="1"
-                          autocomplete="off"
-                          placeholder="Service"
-                          class="form-control-dropdown dropdown-toggle"
-                          ng-init="setEditForm(addServiceForm, 'editServiceForm')"
-                          uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
-                          qt-typeahead-async-show-on-focus>
+                <input type="text"
+                       name="serviceName"
+                       ng-disabled="!serviceList.length"
+                       ng-model="serviceToEdit[0].item"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       placeholder="Service"
+                       class="form-control-dropdown dropdown-toggle"
+                       ng-init="setEditForm(addServiceForm, 'editServiceForm')"
+                       uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
+                       qt-typeahead-async-show-on-focus>
 
-                   <div style="position: absolute;right: 10px;top: 5px;cursor: pointer;"
-                        typeahead-input-icon="serviceToEdit[0].item"></div>
-                   <div class="service-list-container"></div>
-                   <input type="hidden" name="service" ng-model="serviceToEdit[0].item.versionedId.id"
-                          ng-required="serviceToEdit[0].item ? true : false">
-                 </div>
-               </div>
-               <div class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
-                    sqp-is-show-format="false"
-                    ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
-                 <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
-                        id="service-quantity-picker" type="text"
-                        placeholder="Hr(s) : Min(s)" sqp-input
-                        autocomplete="off" aria-expanded="true" />
-                 <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
-                        ng-required="serviceToEdit[0].item ? true : false" />
-               </div>
-               <div class="col-xs-6" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
-                 <input type="text" class="has-dropdown" placeholder="Date"
-                        qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
-                        name="serviceData" ng-required="true" uib-tooltip="select date">
-                 <i class="new-calendar"></i>
-               </div>
-               <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
-                 <input uib-tooltip="Description" tooltip-placement="top"
-                        type="text" placeholder="Description"
-                        ng-model="serviceToEdit[0].description" ng-maxlength="2000"
-                        name="serviceDescription" max-length-word="100" />
-               </div>
-             </div>
-           </div>
+                <div style="position: absolute;right: 10px;top: 5px;cursor: pointer;"
+                     typeahead-input-icon="serviceToEdit[0].item"></div>
+                <div class="service-list-container"></div>
+                <input type="hidden" name="service" ng-model="serviceToEdit[0].item.versionedId.id"
+                       ng-required="serviceToEdit[0].item ? true : false">
+              </div>
+            </div>
+            <div class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
+                 sqp-is-show-format="false"
+                 ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
+              <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
+                     id="service-quantity-picker" type="text"
+                     placeholder="Hr(s) : Min(s)" sqp-input
+                     autocomplete="off" aria-expanded="true" />
+              <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
+                     ng-required="serviceToEdit[0].item ? true : false" />
+            </div>
+            <div class="col-xs-6" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+              <input type="text" class="has-dropdown" placeholder="Date"
+                     qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
+                     name="serviceData" ng-required="true" uib-tooltip="select date">
+              <i class="new-calendar"></i>
+            </div>
+            <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
+              <input uib-tooltip="Description" tooltip-placement="top"
+                     type="text" placeholder="Description"
+                     ng-model="serviceToEdit[0].description" ng-maxlength="2000"
+                     name="serviceDescription" max-length-word="100" />
+            </div>
+          </div>
+        </div>
 
 
       </div>
     </div>
+
     <div class="create-updates-footer" ng-if="isMobileUpdateShown">
-
-
       <div ng-if="currentOpenTab === 'NOTE'" ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
-        <!-- Slava attachments DON'T MOVE OUTSIDE-->
-        <li ng-repeat="file in ticketUpdate.attachments"
-            ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
+        <ul class="upload-attachments">
+          <li ng-repeat="file in ticketUpdate.attachments"
+              ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
-          <span class="file-name">{{ file.name }}</span>
-          <span class="file-size">{{ file.size | fileSizeFilter }}</span>
-
-          <a href="javascript:void(0)" class="hit-area pull-right"
-             uib-tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index, fileInfo[file.name].error)">
-            <i class="icn-sm icn-remove-old"></i>
-          </a>
-
-           <span class="pull-right" ng-show="fileInfo[file.name].error"
-                 style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
-            {{ fileInfo[file.name].message }}
-          </span>
-
-          <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
-             ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
-             uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
-            <i class="icn-sm icn-reupload"></i>
-          </a>
-
-          <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
-            <div class="progress-bar" role="progressbar"
-                 aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
-                 ng-style="styleProgressBar(file.progress)">
-              <span class="sr-only">{{ file.progress }}% Complete</span>
+            <div style="max-width: 72%;width: 100%;">
+              <span class="file-name ellipsis" style="max-width: 64%;font-weight: 900;">{{ file.name }}</span>
+              <span class="file-size">{{ file.size | fileSizeFilter }}</span>
             </div>
-          </div>
 
-        </li>
+            <!--<span-->
+            <!--ng-show="fileInfo[file.name].error"-->
+            <!--style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">-->
+            <!--{{ fileInfo[file.name].message }}-->
+            <!--</span>-->
 
-        <div class="ticket-add-content-actions-attachment pull-left"
-             ticket-attachment-files attachment-func="addAttachmentFiles"
-             ng-model="ticketUpdate.ticketAttachments">
+            <a href="" class="hit-area" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+               ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
+               uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+              <i class="icn-sm icn-reupload"></i>
+            </a>
 
-          <a href="javascript:void(0)" class="hit-area ha-16-26 has-tooltip"
-             uib-tooltip="Attach files" tooltip-placement="top">
-            <i class="icon-sm attachment"></i>
+            <div class="progress progress-attachment" ng-show="file.progress !== 100">
+              <div class="progress-bar" role="progressbar"
+                   aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+                   ng-style="styleProgressBar(file.progress)">
+                <span class="sr-only">{{ file.progress }}% Complete</span>
+              </div>
+            </div>
+
+            <a href="javascript:void(0)"
+               style="position: absolute;right: 4px;top: 7px;"
+               class="hit-area"
+               uib-tooltip="Remove file" tooltip-placement="top"
+               ng-click="removeAttachment($index, fileInfo[file.name].error)">
+              <i class="icn-sm icn-remove-old"></i>
+            </a>
+
+          </li>
+        </ul>
+        <div ticket-attachment-files
+             attachment-func="addAttachmentFiles"
+             ng-model="ticketUpdate.ticketAttachments"
+             style="position: relative;">
+          <a href="javascript:void(0)" style="position: absolute;bottom: -38px;">
+            <i class="icn-sm icn-ticket-attachment"></i>
           </a>
-
           <input type="file" style="display:none" multiple="" />
         </div>
-
-
       </div>
 
-
-
-
-
-      <!-- <a class="icn-sm icn-ticket-attachment"> </a> -->
-      <div class="notify-user-dropdown">
-        <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
-             uib-dropdown auto-close="outsideClick">
-          <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-            <img src="images/new-icons/add-user.png" class="pointer" />
+      <div class="create-updates-footer--notify">
+        <div class="notify-user-dropdown">
+          <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+               uib-dropdown auto-close="outsideClick">
+            <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
+              <img src="images/new-icons/add-user.png" class="pointer" style="margin: 14px 20px 0 0;" />
+            </div>
+            <div uib-dropdown-menu
+                 class="dropdown-assign-ticket dropdown-menu without-max-height"
+                 stop-propagation="click"
+                 assign-user-button
+                 onUserAssign="'true'"
+                 aub-create-ticket="true"
+                 aub-is-bulk-operation="true"
+                 style="max-height: auto !important"
+                 aub-ticket-number="ticket.number"
+                 users="usersToWatch"
+                 aub-current-user="currentUser"></div>
+            <div typeahead-input-icon-sm="ticketAssignTo"></div>
           </div>
-          <div uib-dropdown-menu
-               class="dropdown-assign-ticket dropdown-menu without-max-height"
-               stop-propagation="click"
-               assign-user-button
-               onUserAssign="'true'"
-               aub-create-ticket="true"
-               aub-is-bulk-operation="true"
-               style="max-height: auto !important"
-               aub-ticket-number="ticket.number"
-               users="usersToWatch"
-               aub-current-user="currentUser"></div>
-          <div typeahead-input-icon-sm="ticketAssignTo"></div>
-        </div>
-        <div class="shared-avatars">
-          <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-            <div class="shared-avatar pointer"
-                 uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                 ng-click="sharedUser.notify = !sharedUser.notify"
-                 ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-              <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
-              <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
-                   ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-                <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
-                <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
-              </div>
-              <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                <img src="images/input-icons/checkbox-checked.png" />
+          <div class="shared-avatars">
+            <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+              <div class="shared-avatar pointer"
+                   uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                   ng-click="sharedUser.notify = !sharedUser.notify"
+                   ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+                <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                     ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                  <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                  <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                </div>
+                <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                  <img src="images/input-icons/checkbox-checked.png" />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="tech-users avatars">
-            <div class="shared-avatar pointer"
-                 uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                 ng-click="sharedUser.notify = !sharedUser.notify"
-                 ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-              <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+            <div class="tech-users avatars">
+              <div class="shared-avatar pointer"
+                   uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                   ng-click="sharedUser.notify = !sharedUser.notify"
+                   ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+                <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
 
-              <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
-                   ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-                <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
-                <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
-              </div>
+                <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                     ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                  <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                  <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                </div>
 
-              <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                <img src="images/input-icons/checkbox-checked.png" />
+                <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                  <img src="images/input-icons/checkbox-checked.png" />
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
+        <button class="create-ticket-update mobile-btn"
+                custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE') && !newEditExpense) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                ng-click="saveTicketUpdate(ticketUpdateForm, null, toggleUpdateWindow, newEditExpense);"></button>
       </div>
-      <button class="create-ticket-update mobile-btn"
-              custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE') && !newEditExpense) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
-              ng-click="saveTicketUpdate(ticketUpdateForm, null, toggleUpdateWindow, newEditExpense);"></button>
     </div>
   </div>
 </div>

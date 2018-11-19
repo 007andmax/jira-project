@@ -1093,12 +1093,22 @@
     outline: none;
   }
   
+  .more-ticket-details {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  
   .mobile-top-bar.ticket-detail-header h3,
   .mobile-top-bar.ticket-create-update h3 {
     font-size: 16px;
     color: #fff;
     font-weight: 500;
     margin: 0;
+  }
+  
+  .dropdown-assign-ticket .scroll-pane {
+    background-color: #fff;
   }
   
   .mobile-top-bar.ticket-detail-header .more-ticket-details button {
@@ -1625,6 +1635,10 @@
   
   .shared-avatars {
     display: flex;
+    max-width: 100%;
+    overflow-x: scroll;
+    /*overflow-y: hidden;*/
+    height: 46px;
   }
   
   .shared-avatars .avatars {
@@ -1636,10 +1650,11 @@
     width: 32px;
     height: 32px;
     margin-right: 2px;
+    position: relative;
   }
   
-  .shared-avatars .shared-avatar {
-    position: relative;
+  .shared-avatars .shared-avatar:not(:first-child) {
+    margin-left: -14px;
   }
   
   .shared-avatars .shared-avatar > img {
@@ -1696,19 +1711,91 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    padding: 15px;
-    align-items: center;
+    padding: 9px 15px;
     display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+  
+  .notify-user-dropdown {
+    width: 84%;
   }
   
   .create-updates-footer .icn-ticket-attachment {
     position: static;
-    margin-right: 25px;
   }
   
   .create-updates-footer .dropdown-user-parent > .dropdown-menu {
     width: 290px;
     left: -40px;
+    margin-bottom: 10px;
+  }
+  
+  .create-updates-footer .dropdown-user-parent > .dropdown-menu .avatar-26 {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .create-updates-footer .dropdown-user-parent > .dropdown-menu a span p:first-child {
+    color: #4f5f79;
+    font-size: 13px;
+    font-weight: 900;
+  }
+  
+  .create-updates-footer .dropdown-user-parent > .dropdown-menu a span p:last-child {
+    font-size: 12px;
+    color: #9ca5b6;
+  }
+  
+  .create-updates-footer .dropdown-user-parent > .dropdown-menu a span p {
+    line-height: 20px;
+  }
+  
+  .create-updates-footer .user-item a {
+    padding: 8px 20px !important;
+  }
+  
+  .create-updates-footer .dropdown-user-parent > .dropdown-menu .user-item.active a span p {
+    color: #fff;
+  }
+  
+  .create-updates-footer .assign-ticket-header .form-control {
+    border: none;
+    border-radius: 0;
+    font-size: 13px;
+    color: #9ca5b6;
+    background-color: #edf2f6;
+    padding: 0 10px 0 38px;
+  }
+  
+  .upload-attachments {
+    max-height: 132px;
+    overflow: scroll;
+    padding: 0 5px;
+  }
+  
+  .create-updates-footer .assign-ticket-header .form-group {
+    position: relative;
+  }
+  
+  .create-updates-footer .assign-ticket-header .form-group:before {
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    content: '';
+    background: url(../images/new-icons/search.png);
+    left: 10px;
+    top: 8px;
+  }
+  
+  .user-item.active {
+    background-color: #16a4fa;
+  }
+  
+  .create-updates-footer--notify {
+    display: flex;
+    align-items: center;
+    padding-left: 36px;
   }
   
   .create-updates-header {
@@ -1716,6 +1803,23 @@
     padding: 15px;
     align-items: center;
     border-bottom: 1px solid #edf2f6;
+  }
+  
+  .upload-attachments li {
+    padding: 5px 23px 5px 10px;
+    display: flex;
+    position: relative;
+    font-size: 12px;
+    margin: 0 0 10px 0;
+    width: 101%;
+  }
+  
+  .upload-attachments li:last-child {
+    margin: 0;
+  }
+  
+  .progress-attachment > .progress-bar {
+    background-color: #2ec866;
   }
   
   .create-updates-header img {
@@ -1792,6 +1896,10 @@
   .create-updates-content .create-updates-content-note {
     height: 100%;
     width: 100%;
+  }
+  
+  .create-updates-content textarea:focus {
+    outline: none;
   }
   
   .create-updates-content textarea {
@@ -1890,8 +1998,7 @@
     padding: 20px 15px;
   }
   
-  .create-updates-content input,
-  .create-updates-content textarea {
+  .create-updates-content input {
     width: 100%;
     border-radius: 3px;
     border: solid 1px #c4cbd5;
