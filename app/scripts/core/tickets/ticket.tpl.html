@@ -179,7 +179,7 @@
         {{ ticket.createdAt | ticketCreateDate }}
       </div>
     </div>
-    <i class="icn-sm icn-ticket-attachment"></i>
+    <i ng-show="ticket.hasAttachments === true" class="icn-sm icn-ticket-attachment"></i>
   </div>
 
 </div>

@@ -1163,6 +1163,10 @@ hr {
   width: 100%;
 }
 
+.custom-disabled {
+  background: grey !important;
+}
+
 .daterangepicker {
   margin-top: 6px !important;
 }
