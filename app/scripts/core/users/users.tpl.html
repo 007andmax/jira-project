@@ -104,15 +104,15 @@
               <img src="images/company/smartphone-green.png" alt="">
               <p>{{ user.phoneNumbers[1].number }}</p>
             </div>
-            <div class="clearfix" ng-if="user.primaryEmail">
-              <img src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
-              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
+            <div class="clearfix">
+              <img ng-if="user.primaryEmail" src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
+              <p ng-if="user.primaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.primaryEmail">
               </p>
             </div>
-            <div class="clearfix" ng-if="user.secondaryEmail">
-              <img src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
-              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}"
+            <div class="clearfix" >
+              <img ng-if="user.secondaryEmail" src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
+              <p  ng-if="user.secondaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}"
                  tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.secondaryEmail">
               </p>
@@ -225,16 +225,16 @@
         <div class="col-lg-2 col-xs-2 mob-hidden">
           <div class="clearfix">
           <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
-            <i ng-show="phoneNumber.number" class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+            <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
             'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
 
-            {{ phoneNumber.number }}
+            <span ng-show="phoneNumber.number">{{ phoneNumber.number }}</span>
           </span>
           </div>
         </div>
 
-        <div ng-show="user.primaryEmail || user.secondaryEmail" class="col-lg-2 col-xs-2 type-col mob-hidden" style="overflow: hidden">
+        <div class="col-lg-2 col-xs-2 type-col mob-hidden" style="overflow: hidden">
           <!-- <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
@@ -258,7 +258,7 @@
             </ul>
 
           </div> -->
-          <div class="user-account-type" style="overflow: hidden; width: 100%; text-overflow: ellipsis">
+          <div class="user-account-type" ng-show="user.primaryEmail || user.secondaryEmail" style="overflow: hidden; width: 100%; text-overflow: ellipsis">
             <span> {{user.primaryEmail || user.secondaryEmail}}</span>
           </div>
         </div>
