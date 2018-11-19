@@ -47,13 +47,13 @@
                          placeholder="Select Company"
                          next-after-text-editor ng-trim="false"
                          typeahead-input-formatter="getCompanyName($model)"
-                         autocomplete="off" ng-model="companyModel"
-                         uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                         autocomplete="off" ng-model="companyModelObj.companyModel"
+                         uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue }:stateComparator | orderBy:'name'"
                          qt-typeahead-async-show-on-focus smart-dropdown-menu-position
                          no-overflow="true"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-                  <div typeahead-input-icon="companyModel"></div>
+                  <div typeahead-input-icon="companyModelObj.companyModel"></div>
                 </div>
                 <div class="recent-left-panel">
                   <h4 class="font-medium">recent</h4>
@@ -125,7 +125,7 @@
                 <div class="center-category__category sked">
                   <div style="width: 100%;"
                        ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
-                       ng-click="stateGo($event, 'tickets', {listType: 'unassigned'}, true)">
+                       ng-click="stateMobileGo($event, 'tickets', {listType: 'unassigned'}, true)">
                     Unassigned
                   </div>
                   <div class="col-2 ticket-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
@@ -147,7 +147,7 @@
                 </div>
                 <div class="center-category__category sked">
                   <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'completed'})}"
-                       ng-click="stateGo($event, 'tickets', {listType: 'completed'})">
+                       ng-click="stateMobileGo($event, 'tickets', {listType: 'completed'})">
                     Completed
                   </div>
 
@@ -170,7 +170,7 @@
                 </div>
                 <div class="center-category__category sked">
                   <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'in_progress'})}"
-                       ng-click="stateGo($event, 'tickets', {listType: 'in_progress'})">
+                       ng-click="stateMobileGo($event, 'tickets', {listType: 'in_progress'})">
                     In Progress
                   </div>
 
@@ -194,7 +194,7 @@
                 <div class="center-category__category sked">
                   <div style="width: 100%;"
                        ng-class="{active: $state.includes('tickets', {listType: 'on_hold'}) && isOnHoldTag }"
-                       ng-click="stateGo($event, 'tickets', {listType: 'on_hold'}, true)">
+                       ng-click="stateMobileGo($event, 'tickets', {listType: 'on_hold'}, true)">
                     On Hold
                   </div>
 

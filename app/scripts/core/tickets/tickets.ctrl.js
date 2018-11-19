@@ -17,7 +17,15 @@
 
         $timeout(function() {
           $scope.ticketsGroup = window.location.href.split('/').slice(-1)[0].split('_').join(' ');
+
+          if ($scope.ticketsGroup === 'user') $scope.ticketsGroup = 'My';
         })
+
+        $scope.companyModelObj = {
+          companyModel: ''
+        }
+
+        $scope.lastSavedStatus = null;
 
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -70,12 +78,15 @@
           $scope.techUsersFilterHistoryTicketsPage = resp;
         });
 
-        $scope.$watch('companyModel', function(val) {
+        $scope.$watch('companyModelObj.companyModel', function(val) {
           console.log("!!!!!!!!!!!!!!!!!!!", val)
         })
 
-        $scope.stateGo = function (event, state, stateParams, isTag) {
+        $scope.stateMobileGo = function() {
+          $scope.lastSavedStatus = arguments;
+        }
 
+        $scope.stateGo = function (event, state, stateParams, isTag) {
           if (isTag) {
             $scope.isOnHoldTag = true;
           } else {
@@ -115,7 +126,7 @@
         };
 
         $scope.techUserModel = ticketsSharedState.filter.techUserId;
-        $scope.companyModel = $scope.ticketsSharedState.filter.companyId;
+        $scope.companyModelObj.companyModel = $scope.ticketsSharedState.filter.companyId;
         $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
         $scope.areMobileTicketsFiltersOpened = false;
 
@@ -131,7 +142,9 @@
           $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
 
           $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
-          $scope.companyModel = $scope.ticketsSharedState.filter.companyId;
+          $scope.companyModelObj.companyModel = $scope.ticketsSharedState.filter.companyId;
+
+          $scope.lastSavedStatus = null;
         }
 
         $scope.applyMobileTicketsFilters = function() {
@@ -142,7 +155,15 @@
           $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
           $scope.ticketsSharedState.filter.clientUserId = $scope.clientUserModel;
 
-          $scope.ticketsSharedState.filter.companyId = $scope.companyModel;
+          $scope.ticketsSharedState.filter.companyId = $scope.companyModelObj.companyModel;
+          if ($scope.lastSavedStatus) {
+
+            $timeout(function() {
+              $scope.stateGo.apply(this, $scope.lastSavedStatus);
+
+            }, 100)
+
+          }
         }
 
         $scope.ticketsFilterTags = $scope.ticketsSharedState.filter.tags || [];
@@ -180,18 +201,22 @@
           // HERERERE
           $scope.clientUserModel = getUserIdByUserFullName(value);
           var user = getUserObjByUserFullName(value);
-          if ($scope.companyModel) {
-            if (user.company.id !== $scope.companyModel) {
-              $scope.companyModel = user.company.id
+          if ($scope.companyModelObj.companyModel) {
+            if (user.company.id !== $scope.companyModelObj.companyModel) {
+              $scope.companyModelObj.companyModel = user.company.id
             }
           } else {
-            $scope.companyModel = user.company.id;
+            $scope.companyModelObj.companyModel = user.company.id;
           }
         };
 
         $scope.mobileApplyCompany = function (value) {
-          $scope.companyModel = getCompanyIdByCompanyName(value);
-          $rootScope.selectedIndustryItem = value;
+
+          console.log('MOBILE APPLY', value)
+          $scope.companyModelObj.companyModel = getCompanyIdByCompanyName(value);
+
+          console.log($scope.companyModel, 'MODELLL')
+          // $rootScope.selectedIndustryItem = value;
 
         };
 
