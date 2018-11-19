@@ -176,7 +176,7 @@
               ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
     </div>
 
-    <div class="create-updates-content">
+    <div class="create-updates-content" ng-style="{ height: ticketUpdate.attachments.length === 1 ? 'calc(100vh - 239px)' : ticketUpdate.attachments.length === 2 ? 'calc(100vh - 285px)' : ticketUpdate.attachments.length >= 3 ? 'calc(100vh - 331px)' : 'auto' }">
       <!--@Leo class: show-->
       <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'"
            ng-class="{'show': currentOpenTab === 'NOTE'}">
@@ -484,7 +484,7 @@
 
     <div class="create-updates-footer" ng-if="isMobileUpdateShown">
       <div ng-if="currentOpenTab === 'NOTE'" ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
-        <ul class="upload-attachments">
+        <ul class="upload-attachments" ng-style="{ display: !ticketUpdate.attachments.length ? 'none' : 'block' }">
           <li ng-repeat="file in ticketUpdate.attachments"
               ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
