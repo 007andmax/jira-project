@@ -5,9 +5,9 @@
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
-      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location',
+      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location', 'quicktech.common.services.ticketMobileSettings',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location) {
+                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location, ticketMobileSettings) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -19,6 +19,8 @@
         $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
 
 
+
+        $scope.ticketMobileSettings = ticketMobileSettings;
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
