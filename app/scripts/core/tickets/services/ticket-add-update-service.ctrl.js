@@ -9,7 +9,7 @@
           $scope.discountAmountMsxLength;
           $scope.maxServiceDate = new Date();
 
-          if (window.innerWidth > 414 && $scope.servoceExpense) {
+          if (window.innerWidth > 414 && $scope.serviceExpense) {
             $scope.serviceExpense.item = undefined;
           }
 

@@ -74,10 +74,18 @@
                 $scope.serviceToEdit = $scope.ticketUpdate.services;
               }
 
-              if ($scope.serviceToEdit) {
-                $scope.serviceToEdit[0].quantity = (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+              if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
 
+                console.log($scope.serviceToEdit[0].quantity, "I CHANGE QUANTITY TO ", (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0))
+                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
+                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
               }
+
+              toggleDataSelector()
+
+
+              console.log($scope.serviceToEdit, 'SERVICETOEDITPIDA')
 
 
               console.log($scope.serviceToEdit, 'SERVICETOEIDT')
@@ -101,13 +109,35 @@
 
               }
 
-              if ($scope.serviceToEdit) {
-                $scope.serviceToEdit[0].quantity = (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+              if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
+                console.log($scope.serviceToEdit[0].quantity, "I CHANGE QUANTITY TO ", (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0))
+                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+
+                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
+                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
 
               }
+
+              toggleDataSelector()
+
+
+              console.log("PIDOZ YE ME")
               console.log($scope.serviceToEdit, 'SERVICETOEIDT')
             }
           })
+
+
+          function toggleDataSelector() {
+
+            setTimeout(function() {
+              var input = document.querySelector('input[qt-data-time-picker]');
+
+              $scope.$apply()
+            })
+
+          }
+
 
           function openModal(company) {
             $uibModal.open({

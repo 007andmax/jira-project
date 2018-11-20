@@ -650,34 +650,24 @@
           $scope.saveUpdateService = function (form, item, callback) {
 
             if (form.$valid) {
-              var editVersionedId = $scope.editService.item.versionedId;
-              var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
-              var isDescriptionChange = $scope.service.description != $scope.editService.description;
-              var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
-              var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
-              var isDescountAmountChange = $scope.service.discountAmount != $scope.editService.discountAmount;
-              var isDiscountTypeChange = $scope.service.discountType != $scope.editService.discountType;
+              var editVersionedId = item.item.versionedId;
 
-              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange || isDescountAmountChange || isDiscountTypeChange)) {
-                $scope.setEditExpenseId();
-                return;
-              }
 
               $scope.disabledSave = true;
 
-              var serviceDate = new Date($scope.editService.date);
-              if (callback) callback()
+              var serviceDate = new Date(item.date);
+
               TicketsService.updateExpenseInTicketUpdate({
 
-                ticketUpdateId: $scope.ticketUpdate.id,
+                ticketUpdateId: item.ticketUpdateId,
                 serviceExpense: {
 
-                  id: $scope.editService.id,
+                  id: item.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                  description: $scope.editService.description,
-                  quantity: $scope.editService.quantity / 60,
+                  description: item.description,
+                  quantity: item.quantity / 60,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                  discountAmount: $scope.editService.discountAmount,
+                  discountAmount: item.discountAmount,
                   discountType: "PERCENT"
 
                 }
@@ -685,7 +675,7 @@
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
 
                 $scope.setEditExpenseId();
-
+                if (callback) callback()
 
               })
             } else {
@@ -702,13 +692,31 @@
 
                 $scope.updateNoteRequest(note.id, note.note, callback);
               } else if (isExpenseEdit.product) {
-                $scope.saveUpdateProduct($scope.editForms.editProductForm, isExpenseEdit.product, callback)
+                $scope.saveUpdateProduct($scope.editForms.editProductForm, isExpenseEdit.product, callback);
+              } else if (isExpenseEdit.service) {
+                console.log(isExpenseEdit.service, 'EXPENSE EDIT')
+
+                $scope.saveUpdateService($scope.editForms.editServiceForm, isExpenseEdit.service, callback);
               }
 
               return;
             }
 
-            console.log($scope.ticketUpdate, "SSSSS", "VOFOOOOOO")
+
+            console.log(form, 'EXPENSE EDIT')
+
+
+            $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
+              if (typeof el.item.name === 'object') {
+                console.log(el, "ELLLLLL")
+                console.log(el.item.name, "EL>item")
+                el.item = el.item.name;
+                return el;
+              }
+
+            })
+
+            console.log(Object.assign({}, $scope.ticketUpdate), "SSSSS", "VOFOOOOOO")
             if (form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;

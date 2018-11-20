@@ -427,7 +427,8 @@
 
       <div class="create-updates-content-service row" ng-if="currentOpenTab === 'SERVICE'"
            ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl"
-           ng-class="{'show': currentOpenTab === 'SERVICE'}">
+           ng-class="{'show': currentOpenTab === 'SERVICE'}"
+           ng-form="addServicesForm">
 
         <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
           <div ng-form="addServiceForm" class="clearfix">
@@ -437,7 +438,7 @@
                 <input type="text"
                        name="serviceName"
                        ng-disabled="!serviceList.length"
-                       ng-model="serviceToEdit[0].item"
+                       ng-model="serviceToEdit[0].item.name"
                        ng-minlength="1"
                        autocomplete="off"
                        placeholder="Service"
@@ -450,7 +451,7 @@
                      typeahead-input-icon="serviceToEdit[0].item"></div>
                 <div class="service-list-container"></div>
                 <input type="hidden" name="service" ng-model="serviceToEdit[0].item.versionedId.id"
-                       ng-required="serviceToEdit[0].item ? true : false">
+                      >
               </div>
             </div>
             <div class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"

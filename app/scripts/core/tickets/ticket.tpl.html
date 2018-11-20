@@ -24,7 +24,7 @@
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
       <div class="ticket-status pull-right" style="margin-top: 15px; min-width: 30px;">
         <a href="javascript:void(0)" class="ticket-list-attachment pull-left"
-           ng-show="ticket.hasAttachments === true">
+           ng-show="ticket.attachmentsCount">
           <i class="icon-sm attachment"></i>
         </a>
         <span class="label label-info" ng-show="ticket.unread">NEW</span>
@@ -179,7 +179,7 @@
         {{ ticket.createdAt | ticketCreateDate }}
       </div>
     </div>
-    <i ng-show="ticket.hasAttachments === true" class="icn-sm icn-ticket-attachment"></i>
+    <i ng-show="ticket.attachmentsCount" class="icn-sm icn-ticket-attachment"></i>
   </div>
 
 </div>
