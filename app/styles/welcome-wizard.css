@@ -1712,14 +1712,18 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
     height: auto;
     min-height: 64px;
-    /*position: fixed;*/
-    /*left: 0;*/
-    /*bottom: 0;*/
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
     padding: 9px 15px;
     display: flex;
     flex-direction: column;
     background: #fff;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0;
   }
   
   .notify-user-dropdown {
