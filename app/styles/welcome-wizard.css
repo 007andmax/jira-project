@@ -1694,22 +1694,27 @@
     left: 0;
     transition: all .3s;
     background-color: #fff;
-    height: 100vh;
     width: 100%;
     z-index: 99999;
+    overflow: scroll;
+    height: calc(100vh - 53px);
   }
   
   .mob-ticket-create-updates.opened {
     top: 0;
   }
   
+  .timer-quantity input[readonly] {
+    background-color: #fff;
+  }
+  
   .create-updates-footer {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
     height: auto;
     min-height: 64px;
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    /*position: fixed;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
     width: 100%;
     padding: 9px 15px;
     display: flex;
@@ -1907,6 +1912,7 @@
     border: none;
     overflow: scroll;
     font-size: 13px;
+    background-color: transparent;
   }
   
   .create-updates-content textarea::placeholder {
