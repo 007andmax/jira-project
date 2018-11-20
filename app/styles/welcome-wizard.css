@@ -1840,6 +1840,7 @@
   
   .create-updates-content {
     height: calc(100vh - 184px);
+    margin-bottom: 200px;
   }
   
   .create-updates-content-note,
