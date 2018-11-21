@@ -241,7 +241,7 @@
               })
             }
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
             // $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
             //   // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
             //
@@ -262,9 +262,9 @@
             //     })
             //   })
             // }
-=======
-
->>>>>>> mobile-version
+// =======
+//
+// >>>>>>> mobile-version
 
             function setUserCompanies() {
               // $scope.userCompanies = $scope.ticketDetails.userCompanies
@@ -411,7 +411,7 @@
           }
 
           $scope.updateAndCloseTicket = function (form) {
-<<<<<<< HEAD
+// <<<<<<< HEAD
             var saveFailed = $scope.saveTicketUpdate(form, true, true, closeTicket);
             // if (hasUnsavedUpdate($scope.ticketUpdate)) {
             //
@@ -426,7 +426,7 @@
             // } else {
             //   closeTicket()
             // }
-=======
+// =======
             console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
             if (!form) form = $scope.mobileUpdateForm;
 
@@ -443,7 +443,7 @@
             } else {
               closeTicket()
             }
->>>>>>> mobile-version
+// >>>>>>> mobile-version
           };
 
           $scope.$watch('ticketDetails.agent', function (value) {
