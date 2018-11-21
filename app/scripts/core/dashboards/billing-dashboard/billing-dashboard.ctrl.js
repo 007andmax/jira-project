@@ -21,7 +21,8 @@
             totalSales: data.totalSales,
             totalBillable: data.totalBillable,
             totalReceivable: data.totalReceivable,
-            totalOverDue: data.totalOverDue
+            totalOverDue: data.totalOverDue,
+            totalReceivableUnpaid: data.totalReceivableUnpaid
           };
           return data.chartData;
         };

@@ -1,4 +1,4 @@
-<div class="tickets-dashboard">
+<div class="tickets-dashboard four-stats-dashboard">
   <div class="container-fluid">
     <section class="dashboard-main">
       <div class="row">
@@ -75,18 +75,38 @@
                  ng-class="{'selected-chart': selectedChart === 'totalReceivable'}">
               <div class="stats__main">
                 <p class="board-head">
-                  Receivables
+                  Received payments
                 </p>
                 <div class="stats__main--count font-yellow">
                   <p>${{ dashboard.totalReceivable || 0 }}</p>
                 </div>
-                <p class="overdue-receivables">Overdue &nbsp; <span class="font-yellow">${{ dashboard.totalOverDue || 0 }}</span></p>
+
               </div>
-              <div class="stats__icon bg-yellow">
+              <div class="stats__icon bg-yellow" style="background-color:#498902">
                 <img src="images/new-icons/warning-circle-white.png" alt="">
               </div>
             </div>
           </div>
+
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('totalReceivableUnpaid')"
+                 ng-class="{'selected-chart': selectedChart === 'totalReceivableUnpaid'}">
+              <div class="stats__main">
+                <p class="board-head">
+                  Receivables
+                </p>
+                <div class="stats__main--count font-yellow">
+                  <p>${{ dashboard.totalReceivableUnpaid || 0 }}</p>
+                </div>
+                <p class="overdue-receivables">Overdue &nbsp; <span class="font-yellow">${{ dashboard.totalOverDue || 0 }}</span></p>
+              </div>
+              <div class="stats__icon bg-red" style="background-color:#ffb937">
+                <img src="images/new-icons/warning-circle-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </section>
