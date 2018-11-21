@@ -76,19 +76,23 @@
 
               if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
 
-                console.log($scope.serviceToEdit[0].quantity, "I CHANGE QUANTITY TO ", (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0))
-                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
-                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
-                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
+
+                } else {
+                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+
+                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
+                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                }
               }
 
               toggleDataSelector()
 
 
-              console.log($scope.serviceToEdit, 'SERVICETOEDITPIDA')
 
 
-              console.log($scope.serviceToEdit, 'SERVICETOEIDT')
+              // console.log($scope.serviceToEdit, 'SERVICETOEIDT')
 
             }, 100)
 
@@ -97,7 +101,7 @@
           $scope.$watch(function() {
             return $scope.ticketUpdate && $scope.ticketUpdate.services
           }, function(val) {
-            console.log(val, 'TICEKTUPDATE SERVICE!!!!!!!!!!')
+            // console.log(val, 'TICEKTUPDATE SERVICE!!!!!!!!!!')
             if (val) {
               if ($scope.newEditExpense && $scope.newEditExpense.service) {
                 $scope.openedTab('SERVICE');
@@ -105,36 +109,65 @@
               } else {
 
                 $scope.serviceToEdit = $scope.ticketUpdate.services;
-                console.log($scope.serviceToEdit, 'TICKKKKKKKKK')
+                // console.log($scope.serviceToEdit, 'TICKKKKKKKKK')
 
               }
 
               if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
-                console.log($scope.serviceToEdit[0].quantity, "I CHANGE QUANTITY TO ", (($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0))
-                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
+
+                } else {
+                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
 
 
-                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
-                $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
+                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                }
+
+
 
               }
 
               toggleDataSelector()
 
 
-              console.log("PIDOZ YE ME")
-              console.log($scope.serviceToEdit, 'SERVICETOEIDT')
+
             }
           })
 
 
+
           function toggleDataSelector() {
+            var input = document.querySelector('div[data-date-picker] input');
 
-            setTimeout(function() {
-              var input = document.querySelector('input[qt-data-time-picker]');
+            // console.log(input, 'INPUTTTT')
+            // $scope.hideInputs = true;
 
-              $scope.$apply()
-            })
+            // input.focus();
+
+            // input.parentNode.focus()
+
+
+            // var evt = document.createEvent('MouseEvents')
+            // evt.initMouseEvent('mousedown', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            //
+            // input.dispatchEvent(evt);
+            // input.dispatchEvent(evt);
+            // input.dispatchEvent(evt);
+            // input.dispatchEvent(evt);
+            // input.dispatchEvent(evt);
+            // input.dispatchEvent(evt);
+            // input.dispatchEvent(evt);
+            input.click()
+
+            // $timeout(function() {
+            //   // $scope.hideInputs = false;
+            //
+            //
+            //
+            //   input.click();
+            //   input.focus();
+            // }, 100)
 
           }
 

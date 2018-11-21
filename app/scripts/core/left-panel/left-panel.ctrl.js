@@ -604,7 +604,7 @@
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 
-          console.log(ticketsSharedState.filter, 'PIZDEC')
+          
           if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;

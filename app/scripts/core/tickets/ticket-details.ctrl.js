@@ -52,7 +52,6 @@
           $rootScope.isTicketOpened = true;
 
           $scope.$on('$destroy', function() {
-            console.log('ustroi destroi');
             $rootScope.isTicketOpened = false;
           })
 
@@ -384,7 +383,7 @@
           };
 
           $scope.setMobileForm = function(form) {
-            console.log('SETMOBILE FORM', form)
+            // console.log('SETMOBILE FORM', form)
             $scope.mobileUpdateForm = form;
           }
 
@@ -610,7 +609,7 @@
           };
 
           $scope.saveUpdateProduct = function (form, item, callback) {
-            console.log(item, "IIIIII")
+            // console.log(item, "IIIIII")
             if (form.$valid) {
               var product = item.item;
               var editVersionedId = product.versionedId;
@@ -650,8 +649,8 @@
           $scope.saveUpdateService = function (form, item, callback) {
 
             if (form.$valid) {
-              var editVersionedId = item.item.versionedId;
-
+              var editVersionedId = item.item.name.versionedId;
+              // console.log(item, "ITEM")
 
               $scope.disabledSave = true;
 
@@ -684,7 +683,7 @@
           };
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value) {
-            console.log('WTF')
+            // console.log('WTF')
             if (isExpenseEdit) {
               console.log(isExpenseEdit);
               if (isExpenseEdit.note) {
@@ -703,20 +702,24 @@
             }
 
 
-            console.log(form, 'EXPENSE EDIT')
+            // console.log(form, 'EXPENSE EDIT')
+
+            if ($scope.ticketUpdate.services) {
+              $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
+                if (typeof el.item.name === 'object') {
+                  // console.log(el, "ELLLLLL")
+                  // console.log(el.item.name, "EL>item")
+                  el.item = el.item.name;
+                  return el;
+                }
+
+              })
+            }
 
 
-            $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
-              if (typeof el.item.name === 'object') {
-                console.log(el, "ELLLLLL")
-                console.log(el.item.name, "EL>item")
-                el.item = el.item.name;
-                return el;
-              }
 
-            })
 
-            console.log(Object.assign({}, $scope.ticketUpdate), "SSSSS", "VOFOOOOOO")
+            // console.log(Object.assign({}, $scope.ticketUpdate), "SSSSS", "VOFOOOOOO")
             if (form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -862,7 +865,7 @@
 
           $scope.$on('userToAssignToTicket', function(evt, val) {
 
-            console.log("LEEEEEEEEEEEEEEEe", val)
+            // console.log("LEEEEEEEEEEEEEEEe", val)
             // console.log(evt, val, "SADNESS")
             var data = val.data;
             var id = data.id;

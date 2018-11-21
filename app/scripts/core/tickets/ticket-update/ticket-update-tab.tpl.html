@@ -319,7 +319,7 @@
                       >
               </div>
             </div>
-            <div class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
                  sqp-is-show-format="false"
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
               <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
@@ -329,7 +329,7 @@
               <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
                      ng-required="serviceToEdit[0].item ? true : false" />
             </div>
-            <div class="col-xs-6" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+            <div ng-if="!hideInputs" class="col-xs-6" data-date-picker ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
               <input type="text" class="has-dropdown" placeholder="Date" readonly
                      qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
