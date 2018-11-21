@@ -5,9 +5,9 @@
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
-      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location',
+      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location', 'quicktech.common.services.ticketMobileSettings',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location) {
+                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location, ticketMobileSettings) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -19,9 +19,32 @@
         $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
 
 
+
+        $scope.ticketMobileSettings = ticketMobileSettings;
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
+
+
+        $scope.$watch(function() {
+          return $rootScope.isTicketOpened;
+        }, function(val) {
+          $scope.isTicketOpened = val;
+        })
+
+        $scope.$watch(function() {
+          return $rootScope.isTicketEditOpened;
+        }, function(val) {
+          $scope.isTicketEditOpened = val;
+        })
+
+        $scope.closeEditTicket = function() {
+          $rootScope.isMobileUpdateShown = false;
+        }
+
+        $scope.toggleLeftPanel = function(state) {
+          $rootScope.isLeftPanelOpened = state;
+        }
 
         $scope.getAssignUserId = function (ticket) {
           if (ticket) {
@@ -157,5 +180,3 @@
       }]);
 
 }());
-
-

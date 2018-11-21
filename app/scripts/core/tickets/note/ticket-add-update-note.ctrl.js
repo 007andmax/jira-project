@@ -13,7 +13,7 @@
           setTicketUpdateToDefault();
 
           function setTicketUpdateToDefault() {
-
+            if ($scope.editExpense) return;
             $scope.setTicketUpdate({
               note: '',
               attachments: []
@@ -117,7 +117,9 @@
 
           $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault);
 
-          $scope.$watch('ticketUpdate.attachments.length', function () {
+          $scope.$watch('ticketUpdate.attachments.length', function (val) {
+
+            if (!val) return;
 
             var totalAttachSize = 0;
 

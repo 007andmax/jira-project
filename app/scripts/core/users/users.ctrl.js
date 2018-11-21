@@ -15,6 +15,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
+        $scope.usersSharedState = SharedStateService.getSharedState('usersHeader');
         var availableViews = ['list', 'grid'];
 
         $scope.usersCtrl = {};
@@ -33,6 +34,24 @@
           field: 'name',
           reverse: false
         };
+
+
+
+
+        $scope.$watch(function() {
+          return window.innerWidth;
+        }, function(val) {
+          if (val <= 414) {
+            $scope.usersView = 'list';
+          } else {
+            $scope.usersView = $scope.currentUser.usersGridPresentation ?
+                                 $scope.currentUser.usersGridPresentation === 'LIST' ?
+                                   'list' :
+                                   'grid'
+                                 :
+                                 'grid';
+          }
+        })
 
         $scope.userRoles = {
           USER: 'Standard user',
@@ -75,6 +94,15 @@
             // localStorageService.set('users-view', view);
           }
         };
+
+        $scope.openUsersItem = function(event) {
+          console.log(event, "TARGETDDDDDDDDDDDDDDDDDDD")
+          $(event.currentTarget).parent().parent().parent().toggleClass('opened');
+        }
+
+        $scope.toggleMobileUsersFilters = function(state) {
+          $scope.areMobileUsersFiltersOpened = state;
+        }
 
         $scope.$watch('usersCtrl.shownUsers.length', function (usersCount) {
           globalSearch.count = usersCount;

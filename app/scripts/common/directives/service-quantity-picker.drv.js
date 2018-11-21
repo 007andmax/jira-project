@@ -37,7 +37,11 @@
           element.addClass('timer-quantity');
 
           scope.$watch('quantity', function (val) {
-            if (!inited) {
+
+            console.log("VALLLL QUNAITYT", val)
+            if (!inited || true) {
+
+              console.log("INIT PICKER HEREREREE")
               initPicker();
               inited = true;
             }
@@ -176,6 +180,8 @@
           }
 
           function initPicker() {
+
+            console.log("I INIT PICKERERERERER")
             $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
 
               quantityDropdown = angular.element(html);

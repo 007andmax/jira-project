@@ -3,10 +3,58 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateProductCtrl',
-      ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService',
-        function ($scope, ProductsService, PermissionsService) {
+      ['$scope', 'ProductsService', 'quicktech.common.services.PermissionsService', '$rootScope',
+        function ($scope, ProductsService, PermissionsService, $rootScope) {
           $scope.quantityPattern = /^\d{0,4}$/;
           $scope.pricePattern = /^\d{0,6}(\.\d{0,2})?$/;
+
+
+
+          setTimeout(function() {
+
+            console.log($scope.ticketUpdate.products[0], 'ticket')
+            if (!$scope.productExpense) {
+              $scope.productExpense = $scope.ticketUpdate.products[0];
+            }
+          }, 100);
+
+
+          if (window.innerWidth <= 414) {
+            $scope.$watch('productExpense', function(val) {
+              if (val && !$scope.productToEdit) {
+                $scope.ticketUpdate.products[0] = val
+
+              }
+            }, true);
+          }
+
+
+          $scope.$watch('productToEdit', function(val) {
+            if (val) {
+              $scope.productExpense = val;
+
+              console.log('val before', val)
+              $rootScope.selectedMobileProduct = val;
+
+              console.log($scope.productExpense.item.description, "VALLLL")
+              // $scope.$apply()
+            } else {
+              $scope.productExpense = $scope.ticketUpdate.products[0];
+              $rootScope.selectedMobileProduct = null;
+            }
+          })
+
+
+
+
+
+          function getParentWithProp(element, prop) {
+            if (element[prop]) {
+              return element[prop];
+            } else {
+              return getParentWithProp(element.$parent, prop);
+            }
+          }
 
           $scope.PermissionsService = PermissionsService;
 
@@ -19,6 +67,7 @@
               $scope.productExpense.discountAmount = product.discountAmount;
               $scope.productExpense.discountType = "PERCENT";
             }
+
             $scope.productExpense.item = angular.copy(product);
             $scope.productExpense.item.quantity = 1;
             $scope.productExpense.quantity = 1;

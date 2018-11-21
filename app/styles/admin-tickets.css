@@ -108,6 +108,10 @@
   0s;
 }
 
+.ticket-content {
+  margin-bottom: 200px;
+}
+
 .opened-ticket .content-wrapper .container-ticket-list {
   width: 0;
   overflow: hidden;

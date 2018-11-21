@@ -1,6 +1,6 @@
 <div ng-init="dropdowns = {}">
 
-  <div class="ticket-checkbox pull-left" stop-propagation="click">
+  <div class="ticket-checkbox pull-left mob-hidden" stop-propagation="click">
     <label class="control checkbox">
       <input type="checkbox" ng-model="selectedTickets[ticket.id]"
              ng-change="changeSelectedTickets(ticket.id, ticket.status)">
@@ -8,7 +8,7 @@
     </label>
   </div>
 
-  <div class="ticket-meta">
+  <div class="ticket-meta mob-hidden">
 
     <div class="ticket-list-header clearfix">
 
@@ -22,13 +22,14 @@
       </p>
 
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
-      <div class="ticket-status pull-right"style="margin-top: 15px; min-width: 30px;">
+      <div class="ticket-status pull-right" style="margin-top: 15px; min-width: 30px;">
         <a href="javascript:void(0)" class="ticket-list-attachment pull-left"
-           ng-show="ticket.hasAttachments === true">
+           ng-show="ticket.attachmentsCount">
           <i class="icon-sm attachment"></i>
         </a>
         <span class="label label-info" ng-show="ticket.unread">NEW</span>
-        <span class="ticket-unread-updates animation-hide" ng-show="ticket.hasNewUpdates" style="margin-left: 10px; transform: translateY(20%)">
+        <span class="ticket-unread-updates animation-hide" ng-show="ticket.hasNewUpdates"
+              style="margin-left: 10px; transform: translateY(20%)">
           <i class="icon-sm wysiwyg-reset"></i>
         </span>
       </div>
@@ -44,7 +45,8 @@
     </div>
 
     <div class="ticket-title ellipsis clearfix">
-      <p style="font-size: 14.1px;" class="pull-left ellipsis"><strong>{{ ticket.number + ' - ' + ticket.subject }}</strong>
+      <p style="font-size: 14.1px;" class="pull-left ellipsis"><strong>{{ ticket.number + ' - ' + ticket.subject
+                                                                       }}</strong>
       </p>
       <span class="text-muted ellipsis">{{ ticket.previewNote || '&nbsp;' }}</span>
     </div>
@@ -54,16 +56,16 @@
 
       <div class="pull-left" uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
         <!--<span-->
-          <!--class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"-->
-          <!--tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" uib-dropdown-toggle>-->
-          <!--<label class="priority-flag">-->
-            <!--<i class="icn-sm icn-priority"></i>-->
-          <!--</label>-->
+        <!--class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"-->
+        <!--tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" uib-dropdown-toggle>-->
+        <!--<label class="priority-flag">-->
+        <!--<i class="icn-sm icn-priority"></i>-->
+        <!--</label>-->
         <!--</span>-->
 
         <!--<span class="label label-primary priority-big-size label-priority-{{ ticket.priorityLevel.toLowerCase() }}"-->
-              <!--dropdown-toggle>-->
-          <!--{{ userReadable(ticket.priorityLevel) }}-->
+        <!--dropdown-toggle>-->
+        <!--{{ userReadable(ticket.priorityLevel) }}-->
         <!--</span>-->
 
         <ul class="dropdown-menu dropdown-menu-custom scrollable-menu" role="menu"
@@ -94,7 +96,8 @@
       </div>
 
       <div class="pull-left" uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
-        <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
+        <span
+          class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
           uib-tooltip="{{ userReadable(ticket.status) || 'Unclaimed' }}" tooltip-placement="top" uib-dropdown-toggle>
           <label class="status-{{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}">
@@ -102,9 +105,10 @@
           </label>
         </span>
 
-        <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
-              ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
-              ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
+        <span
+          class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
+          ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
+          ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>
 
@@ -127,11 +131,13 @@
       </div>
 
       <div class="text-muted ellipsis"
-           ng-if="(ticket.assignedUser && ticket.assignedUser.id) || ticket.assignedUserId" style="width: 40%;vertical-align: top;">
+           ng-if="(ticket.assignedUser && ticket.assignedUser.id) || ticket.assignedUserId"
+           style="width: 40%;vertical-align: top;">
         {{ getUserName(getUserById(getAssignedUserIDFromTicket(ticket))) }}
       </div>
 
-      <span class="text-muted ellipsis" style="float: right; margin-right: 0;width: 38%; text-align: right;vertical-align: top; ">
+      <span class="text-muted ellipsis"
+            style="float: right; margin-right: 0;width: 38%; text-align: right;vertical-align: top; ">
         {{ userReadable(ticket.ticketSource) }}
         <span ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
           &nbsp;({{ ticket.sourceName }})
@@ -142,12 +148,53 @@
 
   </div>
 
+  <div class="mob-ticket desktop-hidden">
+    <div class="mob-ticket-info">
+      <div class="mob-ticket-info-user ellipsis">
+        {{ getUserName(user) }}
+      </div>
+      <div class="mob-ticket-info-company ellipsis" ng-if="!company.isDefault">
+        <div class="separator"></div>
+        {{ company.name }}
+      </div>
+    </div>
+    <div class="mob-ticket-subject">
+      {{ ticket.number + ' - ' + ticket.subject }}
+    </div>
+    <div class="mob-ticket-footer">
+      <div class="ticket-labels"
+           ng-init="dropdowns[ticket.id] = {};
+           dropdowns[ticket.id]['priority'] = false;
+           dropdowns[ticket.id]['status'] = false;">
+        <div uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
+          <span
+            class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
+            ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
+            ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
+          {{ userReadable(ticket.status) || 'Unclaimed' }}
+        </span>
+        </div>
+      </div>
+      <div class="ticket-date">
+        {{ ticket.createdAt | ticketCreateDate }}
+      </div>
+    </div>
+    <i ng-show="ticket.attachmentsCount" class="icn-sm icn-ticket-attachment"></i>
+  </div>
+
 </div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');
   ga('send', 'pageview');

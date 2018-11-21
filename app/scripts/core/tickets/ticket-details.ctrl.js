@@ -7,14 +7,16 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
           rightPanelSharedState.companyId = '';
+
+          var ticketMobileSettings = ticketMobileSettings;
 
           $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
           $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -23,6 +25,51 @@
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+
+
+
+          $timeout(function() {
+            ticketMobileSettings.data = $scope;
+          }, 3000)
+
+
+          $rootScope.toggleUpdateWindow = function(state) {
+            $rootScope.isMobileUpdateShown = state;
+
+            $rootScope.isTicketEditOpened = state;
+
+            if (!state) {
+              $scope.editExpense = null;
+            } else {
+              $scope.editExpense = $scope.editExpense || false;
+            }
+          }
+
+          $rootScope.closeTicket = function() {
+            window.location.href = window.location.href.split('/').slice(0, -1).join('/');
+          }
+
+          $rootScope.isTicketOpened = true;
+
+          $scope.$on('$destroy', function() {
+            $rootScope.isTicketOpened = false;
+          })
+
+          $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id).filter(function(user) {
+            return !user.deletedAt;
+          });
+
+
+
+
+          $scope.usersToWatch = $scope.agents.slice();
+
+          $scope.editForms = {};
+
+          $scope.setEditForm = function(form, name) {
+            $scope.editForms[name] = form;
+          }
+
 
           var params = $state.params.remoteParams;
           var isFromRemote = params && (params.deviceId || params.companyId || params.connectionDuration);
@@ -92,12 +139,20 @@
             }
 
             $scope.toggleNoteUpdate = function(ticketUpdate) {
-              console.log(ticketUpdate)
+              if (window.innerWidth <= 414) {
+                $scope.editExpense = {
+                  note: ticketUpdate
+                }
 
-              if (ticketUpdate.id !== $scope.isNoteUpdating) {
-                $scope.prevNote = ticketUpdate.note;
-                $scope.isNoteUpdating = ticketUpdate.id;
+                $scope.toggleUpdateWindow(true)
+              } else {
+                if (ticketUpdate.id !== $scope.isNoteUpdating) {
+                  $scope.prevNote = ticketUpdate.note;
+                  $scope.isNoteUpdating = ticketUpdate.id;
+                }
               }
+
+
 
             }
 
@@ -174,16 +229,19 @@
               ticketUpdate.note = $scope.prevNote;
             }
 
-            $scope.updateNoteRequest = function(updateId, note) {
+            $scope.updateNoteRequest = function(updateId, note, callback) {
               // updateNote(ticketId, updateId, note, callback)
 
               TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
                 console.log('note updated', resp);
 
                 $scope.isNoteUpdating = false;
+
+                if (callback) callback()
               })
             }
 
+<<<<<<< HEAD
             // $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
             //   // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
             //
@@ -204,6 +262,9 @@
             //     })
             //   })
             // }
+=======
+
+>>>>>>> mobile-version
 
             function setUserCompanies() {
               // $scope.userCompanies = $scope.ticketDetails.userCompanies
@@ -344,7 +405,13 @@
             $scope.ticketUpdate = value;
           };
 
+          $scope.setMobileForm = function(form) {
+            // console.log('SETMOBILE FORM', form)
+            $scope.mobileUpdateForm = form;
+          }
+
           $scope.updateAndCloseTicket = function (form) {
+<<<<<<< HEAD
             var saveFailed = $scope.saveTicketUpdate(form, true, true, closeTicket);
             // if (hasUnsavedUpdate($scope.ticketUpdate)) {
             //
@@ -359,6 +426,24 @@
             // } else {
             //   closeTicket()
             // }
+=======
+            console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
+            if (!form) form = $scope.mobileUpdateForm;
+
+            if (hasUnsavedUpdate($scope.ticketUpdate)) {
+              var saveFailed = $scope.saveTicketUpdate(form, true);
+              if (!saveFailed) {
+                var unwatch = $scope.$watch('isSavingUpdate', function (value) {
+                  if (value === false) {
+                    closeTicket();
+                    unwatch();
+                  }
+                });
+              }
+            } else {
+              closeTicket()
+            }
+>>>>>>> mobile-version
           };
 
           $scope.$watch('ticketDetails.agent', function (value) {
@@ -404,6 +489,23 @@
           $scope.changeTicketStatus = function (status) {
             TicketsService.changeStatus($scope.ticketDetails.id, status, function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.userReadable(status) + '"', true);
+            });
+          };
+
+          $scope.markAsOpen = function () {
+            TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function (resp) {
+
+              if (resp.code == 403) {
+
+                var user = UsersService.getOneById(resp.message);
+                alert($scope.getUserName(user) + ' locked this ticket to create invoice!');
+                return;
+              }
+
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
+              $scope.uncheckTicket($scope.ticketDetails.id);
+
+              $scope.$apply()
             });
           };
 
@@ -550,7 +652,116 @@
             $scope.triedToSaveUpdate = value;
           };
 
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, close) {
+          $scope.saveUpdateProduct = function (form, item, callback) {
+            // console.log(item, "IIIIII")
+            if (form.$valid) {
+              var product = item.item;
+              var editVersionedId = product.versionedId;
+
+              $scope.disabledSave = true;
+
+              TicketsService.updateExpenseInTicketUpdate({
+
+                ticketUpdateId: item.ticketUpdateId,
+                productExpense: {
+
+                  id: item.id,
+                  item: {
+                    sale: product.sale,
+                    versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                    cost: product.cost
+                  },
+                  serialNumber: item.serialNumber,
+                  quantity: item.quantity,
+                  date: item.date,
+                  discountAmount: item.discountAmount,
+                  discountType: 'PERCENT'
+                }
+              }, function () {
+                UserNotificationService.show('The ticket update containing a product has been modified', true);
+                if (callback) callback();
+                $scope.setEditExpenseId();
+
+
+              })
+            } else {
+              $scope.triedToSaveProduct = true;
+            }
+
+          };
+
+          $scope.saveUpdateService = function (form, item, callback) {
+
+            if (form.$valid) {
+              var editVersionedId = item.item.name.versionedId;
+              // console.log(item, "ITEM")
+
+              $scope.disabledSave = true;
+
+              var serviceDate = new Date(item.date);
+
+              TicketsService.updateExpenseInTicketUpdate({
+
+                ticketUpdateId: item.ticketUpdateId,
+                serviceExpense: {
+
+                  id: item.id,
+                  item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+                  description: item.description,
+                  quantity: item.quantity / 60,
+                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                  discountAmount: item.discountAmount,
+                  discountType: "PERCENT"
+
+                }
+              }, function () {
+                UserNotificationService.show('The ticket update containing a service has been modified', true);
+
+                $scope.setEditExpenseId();
+                if (callback) callback()
+
+              })
+            } else {
+              $scope.triedToSaveService = true;
+            }
+          };
+
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value) {
+            // console.log('WTF')
+            if (isExpenseEdit) {
+              console.log(isExpenseEdit);
+              if (isExpenseEdit.note) {
+                var note = isExpenseEdit.note;
+
+                $scope.updateNoteRequest(note.id, note.note, callback);
+              } else if (isExpenseEdit.product) {
+                $scope.saveUpdateProduct($scope.editForms.editProductForm, isExpenseEdit.product, callback);
+              } else if (isExpenseEdit.service) {
+                console.log(isExpenseEdit.service, 'EXPENSE EDIT')
+
+                $scope.saveUpdateService($scope.editForms.editServiceForm, isExpenseEdit.service, callback);
+              }
+
+              return;
+            }
+
+
+            // console.log(form, 'EXPENSE EDIT')
+
+            if ($scope.ticketUpdate.services) {
+              $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
+                if (typeof el.item.name === 'object') {
+                  // console.log(el, "ELLLLLL")
+                  // console.log(el.item.name, "EL>item")
+                  el.item = el.item.name;
+                  return el;
+                }
+
+              })
+            }
+
+
+
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
             if (form.$valid || isEmptyProductValid) {
@@ -615,6 +826,8 @@
 
                 $scope.isSavingUpdate = false;
 
+                if (callback) callback()
+
                 if (!disableRestoringDefaults) {
                   switch (ticketUpdateToSend.type) {
 
@@ -664,9 +877,221 @@
             }
           };
 
-          $scope.setEditExpenseId = function (id) {
-            $scope.editExpenseId = id;
+          $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
+
+            if (window.innerWidth <= 414) {
+
+              if (item) {
+
+                item.ticketUpdateId = ticketUpdateId
+                $scope.toggleUpdateWindow(true)
+                if (item.isServiceExpense) {
+                  $scope.editExpense = {
+                    service: item
+                  }
+                } else {
+                  $scope.editExpense = {
+                    product: item
+                  }
+                }
+              } else {
+                $scope.toggleUpdateWindow(false)
+              }
+
+            } else {
+              $scope.editExpenseId = id;
+
+            }
           };
+
+
+          // ticket notify
+
+          $scope.$on('userToAssignToTicket', function(evt, val) {
+
+            // console.log("LEEEEEEEEEEEEEEEe", val)
+            // console.log(evt, val, "SADNESS")
+            var data = val.data;
+            var id = data.id;
+
+            var index = $scope.ticketSharedUsersList.findIndex(function(el) {
+              var userId = el.user ? el.user.id : el.id
+              return userId === id;
+            })
+
+            // console.log(index, 'indez')
+
+            if (index !== -1) {
+              $scope.ticketSharedUsersList.splice(index, 1);
+            } else {
+              $scope.ticketSharedUsersList.push({
+                user: data,
+                notify: true
+              });
+            }
+
+            // console.log($scope.ticketSharedUsersList);
+
+            $scope.$apply();
+          })
+
+          $scope.$watch('ticketSharedUsersList', function() {
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
+              return typeof el.user === 'object';
+            });
+
+          }, true)
+
+          $scope.$watch('ticketSharedUsersList.length', function(val) {
+            if (val > 8) {
+              $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
+            }
+
+            $rootScope.ticketSharedList = $scope.ticketSharedUsersList.slice();
+          })
+
+          // ticket notify end
+
+
+
+          // Attachments
+
+          $scope.filterByType = function(arr, type) {
+            return arr.filter(function(el) {
+              return el.user.accountType === type;
+            })
+          }
+
+          function setTicketUpdateToDefault() {
+            if (window.innerWidth <= 414) return;
+
+            if ($scope.openedTab === 'NOTE') {
+              $scope.setTicketUpdate({
+               note: '',
+               attachments: []
+             });
+            }
+
+          }
+
+          $scope.addAttachmentFiles = function (file) {
+            // console.log(file, 'file to upload')
+            $scope.ticketUpdate.attachments.push(file);
+            $scope.disabledWhenLoadAttachment = true;
+
+            uploadingAttachmentsCount++;
+            if (file.size < 4194304) {
+              file.xhr = FilesService.create(file,
+                function (progress) {
+                  file.progress = 100 * (progress.loaded / progress.total);
+                  $scope.$apply();
+                },
+                function (finish) {
+
+                  if (finish.code === 400 || finish.code === 500) {
+
+                    var message = finish.code === 500 ? 'Maximum upload size of 4 MB' : finish.message;
+
+                    $scope.fileInfo[file.name] = {
+                      error: true,
+                      message: message,
+                      code: finish.code
+                    };
+
+                    $scope.fileInfo.quantityErrorFiles++;
+                    $scope.updateTicketNote.$setValidity('errorFile', false);
+                  }
+
+                  if (--uploadingAttachmentsCount === 0) {
+                    $scope.disabledWhenLoadAttachment = false;
+                  }
+
+                  file.xhr = null;
+                  file.id = finish.id;
+                  $scope.$apply();
+                }, function (error) {
+                });
+            } else {
+              $scope.fileLoadOrError = true;
+
+              $scope.fileInfo[file.name] = {
+                error: true,
+                message: 'File must be less then 4 MB'
+              };
+
+              $scope.fileInfo.quantityErrorFiles++;
+              $scope.ticketForm.$setValidity('errorFile', false);
+            }
+
+            $scope.$apply();
+          };
+
+          $scope.reloadAttachment = function (file) {
+            if ($scope.fileInfo[file.name] && $scope.fileInfo[file.name].error) {
+              return;
+            }
+            if (file.xhr && file.xhr.abort) {
+              file.xhr.abort();
+            }
+            file.xhr = FilesService.create(file,
+              function (progress) {
+                file.progress = 100 * (progress.loaded / progress.total);
+                $scope.$apply();
+              },
+              function (finish) {
+                file.xhr = null;
+                file.id = finish.id;
+                $scope.$apply();
+              }, function (error) {
+              });
+          };
+
+          $scope.styleProgressBar = function (progress) {
+            return {
+              width: progress + '%'
+            };
+          };
+
+          $scope.removeAttachment = function (index, isErrorFile) {
+            if (isErrorFile) {
+
+              $scope.fileInfo.quantityErrorFiles--;
+
+              if ($scope.fileInfo.quantityErrorFiles === 0) {
+                $scope.updateTicketNote.$setValidity('errorFile', true);
+              }
+            }
+
+            $scope.ticketUpdate.attachments.splice(index, 1);
+          };
+
+          $scope.isShowingErrors = function (form, fieldName) {
+            return form[fieldName] && !form[fieldName].$valid;
+          };
+
+          $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault);
+
+          $scope.$watch('ticketUpdate.attachments.length', function (val) {
+
+            if (!val) return;
+
+            var totalAttachSize = 0;
+
+            for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
+              totalAttachSize += $scope.ticketUpdate.attachments[i].size;
+            }
+
+            if (totalAttachSize > (15 * 1024 * 1024)) {
+              $scope.errorAttachSize = 'Attachments must be less than 15 Megabyte';
+              $scope.disabledWhenLoadAttachment = true;
+            } else {
+              $scope.errorAttachSize = false;
+              $scope.disabledWhenLoadAttachment = false;
+            }
+
+          })
+
+          // ATTACHMENTS ENDING
 
           $scope.deleteForever = function () {
             var confirmMesage = 'The ticket will become inaccessible. Continue with permanent deletion?',
@@ -870,6 +1295,10 @@
             }
           });
 
+          $scope.$on('$destroy', function() {
+            $rootScope.usersToNotify = null;
+          })
+
           function closeTicket() {
             $scope.ticketClosing = true;
 
@@ -952,6 +1381,8 @@
                 addUserToResult(user);
               }
             }
+
+            $rootScope.usersToNotify = result.slice().map(function(el) { return el.user; });
 
             return result;
 

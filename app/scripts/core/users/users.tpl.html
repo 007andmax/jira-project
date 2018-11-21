@@ -63,22 +63,12 @@
             <div class="col-lg-4 col-xs-4 buttons-col"></div>
 
           </div>
-
-          <!-- <div class="col-lg-1 col-xs-1 tickets-col" style="padding-left: 0;" ng-click="setOrderByUsers('ticket')">
-        <span class="sort-span">
-          Tickets
-          <i class="icn-sm sort-icon icn-sort"
-             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'ticket'}"></i>
-        </span>
-          </div>
-
-          <div class="col-lg-1 col-xs-1 buttons-col"></div> -->
         </li>
       </ul>
     </div>
   </div>
 
-  <div style="background: #F3F7F9;" ng-if="usersView === 'grid'" qt-scroll-to="top" offset="49">
+  <div style="background: #f3f7f9;" ng-if="usersView === 'grid'" qt-scroll-to="top" offset="49">
     <div ui-view></div>
 
     <div class="card-view-wrapper clearfix" scroll-pagination>
@@ -115,15 +105,15 @@
               <img src="images/company/smartphone-green.png" alt="">
               <p>{{ user.phoneNumbers[1].number }}</p>
             </div>
-            <div class="clearfix" ng-if="user.primaryEmail">
-              <img src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
-              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
+            <div class="clearfix">
+              <img ng-if="user.primaryEmail" src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
+              <p ng-if="user.primaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.primaryEmail">
               </p>
             </div>
-            <div class="clearfix" ng-if="user.secondaryEmail">
-              <img src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
-              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}"
+            <div class="clearfix" >
+              <img ng-if="user.secondaryEmail" src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
+              <p  ng-if="user.secondaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}"
                  tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.secondaryEmail">
               </p>
@@ -192,18 +182,30 @@
     </div>
   </div>
 
+  <!--@Leo-->
+  <p class="desktop-hidden user-mob-filters">
+
+    <span ng-if="!(usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || showArchivedUsers)">All Users</span>
+    <span ng-if="usersSharedState.filter.isLead">Lead Users</span>
+    <span ng-if="usersSharedState.filter.isClient">Customer Users</span>
+    <span ng-if="showArchivedUsers">Archived Users</span>
+  </p>
+
   <ul class="qt-list qt-users users-bg" ng-if="usersView === 'list'" style="margin-top: 65px;"
       scroll-pagination qt-scroll-to="top" offset="83">
 
-    <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
+    <li class="user-list-row" ng-controller="quicktech.core.users.userCtrl"
+        show-model-element="{{ 'show-user-on-save-' + user.id }}"
         ng-repeat="user in (usersCtrl.shownUsers = (newSort(users.concat(archivedUsers)) | filter: usersFilter)) | limitTo: displayLimit track by user.id">
 
       <div class="users-list-wrapper">
-        <div class="col-lg-3 col-xs-3">
+        <div class="col-lg-3 col-xs-3 mob-hidden">
           <div class="user-bio">
-            <div class="pull-left avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38" ng-if="(user && user.avatar)">
-              <div class="default-user-avatar" ng-if="!(user && user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+            <div class="pull-left avatar" >
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
+                   ng-if="(user && user.avatar)">
+              <div class="default-user-avatar" ng-if="!(user && user.avatar)"
+                   ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
                 <span>{{user.firstName[0].toUpperCase()}}</span>
                 <span>{{user.lastName[0].toUpperCase()}}</span>
               </div>
@@ -217,22 +219,23 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2 ellipsis">
+        <div class="col-lg-2 col-xs-2 ellipsis mob-hidden">
           {{ getUserCompanyName(user) }}
         </div>
 
-        <div class="col-lg-2 col-xs-2">
+        <div class="col-lg-2 col-xs-2 mob-hidden">
           <div class="clearfix">
           <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
             <i class="icon-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
             'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
-            {{ phoneNumber.number }}
+
+            <span ng-show="phoneNumber.number">{{ phoneNumber.number }}</span>
           </span>
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2 type-col" style="overflow: hidden">
+        <div class="col-lg-2 col-xs-2 type-col mob-hidden" style="overflow: hidden">
           <!-- <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
@@ -256,12 +259,12 @@
             </ul>
 
           </div> -->
-          <div class="user-account-type" style="overflow: hidden; width: 100%; text-overflow: ellipsis">
+          <div class="user-account-type" ng-show="user.primaryEmail || user.secondaryEmail" style="overflow: hidden; width: 100%; text-overflow: ellipsis">
             <span> {{user.primaryEmail || user.secondaryEmail}}</span>
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2  subscribe-col" uib-dropdown>
+        <div class="col-lg-2 col-xs-2  subscribe-col mob-hidden" uib-dropdown>
 
           <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
                tooltip-placement="top">
@@ -322,7 +325,7 @@
 
         </div>
 
-        <div class="col-lg-1 col-xs-1 tickets-col" style="padding-right: 0;">
+        <div class="col-lg-1 col-xs-1 tickets-col mob-hidden" style="padding-right: 0;">
           <div class="col-lg-7 col-xs-7">
           <span class="user-submitted-tickets">
             {{ user.userStatistic.ticketsSubmitted || '0' }}
@@ -354,55 +357,259 @@
           </div>
 
         </div>
+      </div>
 
-        <!-- <div class="col-lg-1 col-xs-1 tickets-col">
-        <span class="user-submitted-tickets">
-          {{ user.userStatistic.ticketsSubmitted || '0' }}
-        </span>
+      <div class="mob-user desktop-hidden">
+        <div class="visible-user-info">
+          <div class="user-bio" ng-click="openUsersItem($event)">
+            <div class="pull-left avatar">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
+                   ng-if="(user && user.avatar)">
+              <div class="default-user-avatar" ng-if="!(user && user.avatar)"
+                   ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                <span>{{user.firstName[0].toUpperCase()}}</span>
+                <span>{{user.lastName[0].toUpperCase()}}</span>
+              </div>
+            </div>
+
+            <div class="user-name pull-left">
+              <p class="ellipsis" uib-tooltip="{{ getUserName(user) }}" trimmed-tooltip-checker="getUserName(user)"></p>
+              <p class="label label-light">{{ getUserCompanyName(user) }}</p>
+            </div>
+
+          </div>
+          <div uib-dropdown class="user-list-more"
+               smart-dropdown-menu-position="dropdown-menu">
+            <a class="hit-area ha-20-20 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle
+               tooltip-append-to-body="true" tooltip-popup-delay="2000">
+              <i class="icn-sm icn-more-light-grey"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+
+              <li>
+                <a create-new-entity="user" item="user"
+                   ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt">Edit</a>
+              </li>
+              <li ng-show="{{!user.primaryEmail}}">
+                <a email-to="user.primaryEmail">Email</a>
+              </li>
+              <li
+                ng-show="{{!PermissionsService.isAllowed('ARCHIVE_USERS') || user.isContact || isLastUserWithInvoiceSubscription(user)}}">
+                <a ng-click="archiveUser()">Archive User</a>
+              </li>
+
+            </ul>
+          </div>
         </div>
+        <div class="hidden-user-info">
+          <div class="mob-user-email ellipsis"> {{user.primaryEmail || user.secondaryEmail}}</div>
+          <div class="mob-user-phone-ticket">
+            <div class="mob-user-phone">
+                 <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
+                    <i class="icon-sm"
+                       ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                                  'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+                                  'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+                  {{ phoneNumber.number }}
+                </span>
+            </div>
+            <div class="mob-user-ticket" ng-class="{ 'without-mob': !(user.phoneNumbers && user.phoneNumbers.length > 0) }"> {{ user.userStatistic.ticketsSubmitted || '0' }}</div>
+          </div>
+          <div class="mob-user-designation" ng-if="user.designation"> {{ user.designation }}</div>
+          <div class="mob-user-subscription" uib-dropdown>
+            <p>Subscription</p>
+            <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
+                 tooltip-placement="top">
+              <div class="user-ticket-update" ng-show="user.subscription.ticket"
+                   uib-tooltip="Ticket Updates">Updates
+              </div>
+              <div class="user-ticket-update" ng-show="user.subscription.invoice"
+                   uib-tooltip="Invoice Updates">Invoice
+              </div>
+              <div class="user-ticket-update" ng-show="user.subscription.ticketManager"
+                   uib-tooltip="Ticket Manager">Manager
+              </div>
+              <div class="no-subscribe" uib-tooltip="No Subscriptions"
+                   ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager"></div>
+              <i class="icn-sm report-caret-icon"></i>
+            </div>
 
+            <ul class="dropdown-menu dropdown-subscribe">
 
-        <div uib-dropdown class="user-list-more col-md-1" style="justify-content: flex-end;"
-             smart-dropdown-menu-position="dropdown-menu">
-          <a class="hit-area ha-20-20 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle
-             tooltip-append-to-body="true" tooltip-popup-delay="2000">
-            <i class="icn-sm icn-more-light-grey"></i>
-          </a>
-          <ul class="dropdown-menu" role="menu">
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticket')"
+                   stop-propagation="click">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-checked="user.subscription.ticket">
+                      <span class="control-indicator"></span> Ticket Updates
+                    </label>
+                  </div>
+                </a>
+              </li>
 
-            <li>
-              <a create-new-entity="user" item="user"
-                 ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt">Edit</a>
-            </li>
-            <li ng-show="{{!user.primaryEmail}}">
-              <a email-to="user.primaryEmail">Email</a>
-            </li>
-            <li
-              ng-show="{{!PermissionsService.isAllowed('ARCHIVE_USERS') || user.isContact || isLastUserWithInvoiceSubscription(user)}}">
-              <a ng-click="archiveUser()">Archive User</a>
-            </li>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticketManager')"
+                   stop-propagation="click">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-checked="user.subscription.ticketManager">
+                      <span class="control-indicator"></span> Ticket Manager
+                    </label>
+                  </div>
+                </a>
+              </li>
 
-          </ul>
-        </div> -->
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')"
+                   stop-propagation="click">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-checked="user.subscription.invoice"
+                             ng-disabled="isLastUserWithInvoiceSubscription(user)">
+                      <span class="control-indicator"></span> Invoice Updates
+                    </label>
+                  </div>
+                </a>
+              </li>
 
-
-
+            </ul>
+          </div>
+        </div>
       </div>
     </li>
 
+
+    <button class="mob-filters-btn mobile-btn primary" ng-click="toggleMobileUsersFilters(true)">
+      Filters
+    </button>
+    <div class="mob-filters" ng-controller="quicktech.core.leftPanel.leftPanelCtrl" ng-class="{ opened: areMobileUsersFiltersOpened }">
+      <div class="mob-filters-header">
+        <button class="x-mark mobile-btn" ng-click="closeAndResetMobileUsersFilters()"></button>
+        <div>Filters</div>
+      </div>
+      <div class="center-category">
+        <div class="left-panel-title">
+          By title
+        </div>
+        <div class="filter-left-panel" style="height: auto !important">
+          <div class="x-mark-wrapper" style="position: relative;">
+            <input style="padding-right: 50px;" type="text" class="form-control has-dropdown pointer"
+                   ng-maxlength="100"
+                   autocomplete="off"
+                   ng-model="mobileFilterDesignation"
+                   name="designation"
+                   typeahead-editable="true"
+                   placeholder="Select title"
+
+                   ng-change="isTitleFilterTyped = true"
+                   tabindex="4"
+                   uib-typeahead="title for title in allTitles | filter: $viewValue : stateComparator | orderBy"
+                   qt-typeahead-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                   hard-reset-pattern="newCategoryNamePattern">
+
+            <div class="product-actions category-caret centered"
+                 ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
+
+
+              <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+                 ng-show="sharedFilter.designation"
+                 ng-click="mobileFilterDesignation = '';">
+                <i class="icn-sm icn-product-cancel"></i>
+              </a>
+
+            </div>
+
+            <!-- <span class="caret-mark ng-hide" style="position:relative" ng-hide="filterDesignation">
+              <i class="icn-sm report-caret-icon"></i>
+            </span> -->
+
+
+          </div>
+
+
+        </div>
+        <div class="left-panel-hide-filter">
+
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="dropdownByCompanyUserPage = !dropdownByCompanyUserPage">
+            By Company
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByCompanyUserPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByCompanyUserPage">
+            <div class="x-mark-wrapper">
+              <input type="text" class="form-control has-dropdown pointer"
+                     placeholder="Select Company" ng-trim="false"
+                     autocomplete="off" ng-model="mobileUserPageCompanyIdFilter"
+                     typeahead-input-formatter="getCompanyName($model)"
+                     uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                     no-overflow="true"
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="usersSharedState.filter.companyId"></div>
+            </div>
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in companiesFilterHistoryUserPage track by $index"
+                 ng-click="mobileApplyCompanyFilterFromHistoryListUserPage(item)">{{item}}</p>
+
+            </div>
+          </div>
+
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="dropdownByIndustryUserPage = !dropdownByIndustryUserPage">
+            By Industry
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryUserPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
+            <div class="x-mark-wrapper select-to-click">
+              <!--<input type="text" class="form-control has-dropdown pointer"-->
+              <!--placeholder="Select Industry"-->
+              <!--autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"-->
+              <!--uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"-->
+              <!--qt-typeahead-show-on-focus-->
+              <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
+
+              <!--<div typeahead-input-icon="usersSharedState.filter.industry"></div>-->
+
+              <qt-dropdown-typehead list-for-dropdown="industries"
+                                    selected-item="mobileFilterUsersIndustry"
+                                    qt-class="'form-control has-dropdown pointer'"
+                                    by-industry="true"
+                                    no-overflow="true"
+                                    qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+
+              </qt-dropdown-typehead>
+            </div>
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in industriesFilterHistoryUserPage track by $index"
+                 ng-click="mobileApplyIndustryFilterFromHistoryListUserPage(item)">{{item}}</p>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileUsersFilters()">Apply Filters</button>
+    </div>
   </ul>
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
-    m.parentNode.insertBefore(a, m)
+    m.parentNode.insertBefore(a, m);
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');

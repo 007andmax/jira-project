@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('productsList',
-    ['$timeout', 'quicktech.common.services.PermissionsService', function ($timeout, PermissionsService) {
+    ['$timeout', 'quicktech.common.services.PermissionsService', '$rootScope', function ($timeout, PermissionsService, $rootScope) {
       return {
         restrict: 'A',
 
@@ -12,6 +12,8 @@
           var dropdown;
           var productInput = element.find('[pl-product-input]');
           var searchProductInput = element.find('[pl-search-product-input]');
+
+          console.log(productInput, "PRODUCCCCCCCT")
 
           if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].item) {
             productInput.val(scope[attrs.productsList].item.description);
@@ -27,14 +29,27 @@
 
           scope.closeDropdown = hideDropdown;
 
-          scope.chooseProductItem = function (product) {
+          scope.$watch(function() {
+            return $rootScope.selectedMobileProduct
+          }, function(val) {
+            console.log("SELECTED *****", val);
+
+            if (val) {
+              scope.chooseProductItem(val.item, true)
+              $rootScope.selectedMobileProduct = false;
+            } else if (val === null) {
+              scope.chooseProductItem(null, true)
+            }
+          })
+
+          scope.chooseProductItem = function (product, notUseCallback) {
             if (product && product.description) {
               productInput.val(product.description);
             } else {
               productInput.val('');
             }
 
-            scope.selectProduct(product);
+            if (!notUseCallback) scope.selectProduct(product);
             scope.$broadcast('addFloatPartOfNumber');
             hideDropdown();
           };

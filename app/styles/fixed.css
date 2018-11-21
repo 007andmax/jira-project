@@ -490,7 +490,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 /*created for dropdown in create user form*/
-.dropdown-user-parent > .dropdown-menu {
+.dropdown-user-parent > .dropdown-menu:not(.without-max-height) {
   width: 380px;
   max-height: 204px;
 }
