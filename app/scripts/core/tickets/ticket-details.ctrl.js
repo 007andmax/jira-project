@@ -412,7 +412,7 @@
 
           $scope.updateAndCloseTicket = function (form) {
 // <<<<<<< HEAD
-            var saveFailed = $scope.saveTicketUpdate(form, true, true, closeTicket);
+            var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
             // if (hasUnsavedUpdate($scope.ticketUpdate)) {
             //
             //   if (!saveFailed) {
@@ -726,7 +726,7 @@
             }
           };
 
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             // console.log('WTF')
             if (isExpenseEdit) {
               console.log(isExpenseEdit);
@@ -754,8 +754,10 @@
                   // console.log(el, "ELLLLLL")
                   // console.log(el.item.name, "EL>item")
                   el.item = el.item.name;
-                  return el;
                 }
+
+                return el;
+                
 
               })
             }
@@ -784,6 +786,8 @@
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
 
               } else if ($scope.ticketUpdate.services) {
+
+                console.log($scope.ticketUpdate.services, "SERVICE")
 
                 for(var i=0; i<$scope.ticketUpdate.services.length; i++) {
                   $scope.ticketUpdate.services[i].discountType = 'PERCENT';
