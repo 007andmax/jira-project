@@ -21,6 +21,8 @@
           }
         })
 
+        // console.log($scope.ticket, 'SCOPETICKET')
+
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           $scope.agentList = resp;
         });

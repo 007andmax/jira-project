@@ -16,6 +16,11 @@
   padding: 0 0 240px;
 }
 
+.class-disabled {
+  background: lightgrey !important;
+}
+
+
 .ticket {
   list-style: none;
   background-color: #fff;

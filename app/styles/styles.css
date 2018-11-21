@@ -22,6 +22,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1161,6 +1162,10 @@ hr {
   align-items: center;
   max-width: 63%;
   width: 100%;
+}
+
+.custom-disabled {
+  background: grey !important;
 }
 
 .daterangepicker {

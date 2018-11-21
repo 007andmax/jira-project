@@ -1,13 +1,13 @@
 <!-- SHORT VERSION -->
-<div class="company-wrapper" ng-controller="quicktech.createCompanyCtrl" ng-form="companyForm">
-  <div class="create-new" ng-if="!longCreateCompany && !resolvedAdvanced">
+<div class="company-wrapper" ng-controller="quicktech.createCompanyCtrl">
+  <div class="create-new" ng-if="!longCreateCompany && !resolvedAdvanced && showModal" ng-form="companyForm">
     <div class="company--header">
-      <h2>Create Company</h2>
+      <h2>{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
     </div>
     <div class="company--content row">
 
-      <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
+      <div class="col-md-6 col-xs-12" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
         <div ng-messages="companyForm.companyName.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
           <label class="control-label" ng-message="required">Company name is required.</label>
@@ -20,7 +20,7 @@
                ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
                is-uniq-validation validation-func="validateCompanyName" class="form-validation">
       </div>
-      <div class="col-md-6" add-on-focus
+      <div class="col-md-6 mob-hidden" add-on-focus
            ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'firstName')}">
         <div ng-messages="companyForm.firstName.$error"
              ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
@@ -32,7 +32,7 @@
         <input type="text" ng-minlength="2" ng-maxlength="15" tabindex="5"
                name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur class="form-validation">
       </div>
-      <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
+      <div class="col-md-6 col-xs-12" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
         <div ng-messages="companyForm.clientType.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
           <label class="control-label" ng-message="required">Client Type is required.</label>
@@ -51,7 +51,7 @@
         <!-- <input placeholder="Select Company Type" type="text"> -->
 
       </div>
-      <div class="col-md-6" add-on-focus
+      <div class="col-md-6 mob-hidden" add-on-focus
            ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'lastName')}">
         <div ng-messages="companyForm.lastName.$error"
              ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'lastName')}">
@@ -62,7 +62,7 @@
         <input type="text" aria-expanded="true" ng-maxlength="15" tabindex="6"
                name="lastName" ng-model="contact.lastName" make-dirty-on-blur class="form-validation">
       </div>
-      <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
+      <div class="col-md-6 col-xs-12" add-on-focus ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
         <div ng-messages="companyForm.companyDomain.$error"
              ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
           <label class="control-label" ng-message="required">Domain is required.</label>
@@ -76,7 +76,7 @@
                is-empty-valid='true'
                is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
       </div>
-      <div class="col-md-6 phone-number"
+      <div class="col-md-6 phone-number mob-hidden"
 
            is-try-to-save="triedToSave"
            no-add-more="true"
@@ -89,7 +89,7 @@
            ng-model="contact.phoneNumbers"
            custom-placeholder="'Primary contact phone'">
       </div>
-      <div class="col-md-6 phone-number"
+      <div class="col-md-6 col-xs-12 phone-number"
            phone-numbers-edit no-add-more="true"
            ng-model="editCompany.addresses[0].phoneNumbers"
            is-try-to-save="triedToSave"
@@ -102,7 +102,45 @@
 
         <!-- <input placeholder="Phone Number" type="text"> -->
       </div>
-      <div class="col-md-6" add-on-focus
+
+      <div class="col-xs-6 desktop-hidden" add-on-focus
+           ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'firstName')}">
+        <div ng-messages="companyForm.firstName.$error"
+             ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
+          <label class="control-label" ng-message="required">First name is required.</label>
+          <label class="control-label" ng-message="maxlength">First name is too large.</label>
+          <label class="control-label" ng-message="minlength">First name is too short.</label>
+        </div>
+        <div class="placeholder">First Name</div>
+        <input type="text" ng-minlength="2" ng-maxlength="15" tabindex="5"
+               name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur class="form-validation">
+      </div>
+      <div class="col-xs-6 desktop-hidden" add-on-focus
+           ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'lastName')}">
+        <div ng-messages="companyForm.lastName.$error"
+             ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'lastName')}">
+          <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+          <label class="control-label" ng-message="required">Last name is required.</label>
+        </div>
+        <div class="placeholder">Last Name</div>
+        <input type="text" aria-expanded="true" ng-maxlength="15" tabindex="6"
+               name="lastName" ng-model="contact.lastName" make-dirty-on-blur class="form-validation">
+      </div>
+      <div class="col-md-6 phone-number desktop-hidden col-xs-12"
+
+           is-try-to-save="triedToSave"
+           no-add-more="true"
+           phone-numbers-edit
+           active-placeholder="'Primary contact phone'"
+           is-restricted="true"
+           not-required="true"
+           qt-tab-index="7"
+           country-code="{{editCompany.addresses[0].countryCode}}"
+           ng-model="contact.phoneNumbers"
+           custom-placeholder="'Primary contact phone'">
+      </div>
+
+      <div class="col-md-6 col-xs-12" add-on-focus
            ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
         <div ng-messages="companyForm.primaryEmail.$error"
              ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
@@ -136,9 +174,9 @@
   <!-- LONG VERSION  -->
 
 
-  <div class="create-new" style="{{ hideDiv ? 'display: none' : '' }}" ng-if="longCreateCompany">
+  <div class="create-new" style="{{ hideDiv ? 'display: none' : '' }}" ng-if="longCreateCompany && showModal" ng-form="companyForm">
     <div class="company--header">
-      <h2>Create Company</h2>
+      <h2>{{ resolvedAdvanced ? 'Update Company' : 'Create Company' }}</h2>
       <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
     </div>
     <div class="company--content row" ng-form="companyForm">

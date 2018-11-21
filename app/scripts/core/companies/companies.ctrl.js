@@ -99,6 +99,72 @@
           $rootScope.companyCounters = counters;
         })
 
+        $scope.openMapModal = function (companyId) {
+          console.log("OPEN MODALLLLLLLL", companyId)
+          CompaniesService.getCompanyData($scope, companyId, function(res) {
+            console.log(res, 'RSS')
+            // var lat = res.addresses[0].locationLat;
+            // var lon = res.addresses[0].locationLng;
+            //
+            // if (window.innerWidth <= 414) {
+            //
+            //     if ((navigator.platform.indexOf("iPhone") != -1) ||
+            //         (navigator.platform.indexOf("iPad") != -1) ||
+            //         (navigator.platform.indexOf("iPod") != -1)) {
+            //           // window.open("maps:daddr=" + lat +   "," + lon + "&amp;ll=");
+            //           $uibModal.open({
+            //             templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
+            //             animation: true,
+            //             backdrop: true,
+            //             size: 'md',
+            //             controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
+            //             windowClass: 'create-popup margin-top-modal-dialog',
+            //             resolve: {
+            //               companyInfo: res
+            //             }
+            //           });
+            //
+            //
+            //           // window.open("https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=");
+            //         } else {
+            //           window.open("https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=");
+            //
+            //           console.log('WE ARE HERE', "https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=")
+            //         }
+            //
+            //
+            // } else {
+            //   $uibModal.open({
+            //     templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
+            //     animation: true,
+            //     backdrop: true,
+            //     size: 'md',
+            //     controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
+            //     windowClass: 'create-popup margin-top-modal-dialog',
+            //     resolve: {
+            //       companyInfo: res
+            //     }
+            //   });
+            // }
+
+            $uibModal.open({
+              templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
+              animation: true,
+              backdrop: true,
+              size: 'md',
+              controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
+              windowClass: 'create-popup margin-top-modal-dialog',
+              resolve: {
+                companyInfo: res
+              }
+            });
+
+          })
+
+
+
+        }
+
         $scope.tagColors = TagsService.getColors();
 
         ColorsService.getCompaniesColors($scope, function (resp) {
@@ -196,6 +262,17 @@
             // localStorageService.set('companies-view', view);
           }
         };
+
+        $scope.mobileOpenCompany = function(element) {
+          element.parent().toggleClass('opened');
+          console.log('MOBIEEEEEL')
+        }
+
+        $scope.toggleMobileCompanyFilters = function(state) {
+          $scope.areMobileFiltersOpened = state;
+        }
+
+
 
         $scope.$watch('companiesCtrl.shownCompanies.length', function (value) {
           globalSearch.count = value;

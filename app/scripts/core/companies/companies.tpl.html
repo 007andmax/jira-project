@@ -147,14 +147,21 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-companies qt-users users-bg" style="margin-top: 65px; position: relative"
-      ng-if="companiesView === 'list'" qt-scroll-to="top"
+  <p class="desktop-hidden companies-mob-filters" ><span ng-if="showArchivedCompanies">Archived Companies</span><span ng-if="!showArchivedCompanies">All Companies</span></p>
+
+  <ul class="qt-list qt-companies qt-users users-bg"
+      style="margin-top: 65px; position: relative"
+      ng-if="companiesView === 'list'"
+      qt-scroll-to="top"
       offset="83" scroll-pagination>
     <li class="list-company-row"
         ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
-        ng-click="openCompany(company)">
-      <div class="col-xs-3" style="width: 34%;">
+        desktop-mobile-function
+        desktop="openCompany(company)"
+        mobile="mobileOpenCompany()"
+        company-name="company">
+      <div class="col-xs-3" style="width: 34%;" ng-init="companyName = company" mobile-open-company>
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
           <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
                ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
@@ -167,7 +174,12 @@
         <div>
           <span class="list-company-name">{{ company.name }}</span>
           <span style="display: flex;">{{ location }}</span>
+          <span class="company-phone">{{ primaryPhone.number || '' }}</span>
         </div>
+      </div>
+      <div class="company-location">
+        <span style="display: flex;">{{ location }}</span>
+        <a class="company-link" href="" ng-click="openMapModal(company.id)">Show Map</a>
       </div>
       <div class="col-xs-1" style="width: 160px;">
         <span>{{ primaryPhone.number || '' }}</span>
@@ -175,7 +187,7 @@
       <div class="col-xs-2 company-email" style="word-break: break-all">
         <span>{{ primaryContact.primaryEmail }}</span>
       </div>
-      <div class="col-xs-2" style="max-width: 190px;">
+      <div class="col-xs-2 company-primary-contact" style="max-width: 190px;">
         <span>{{ getUserName(primaryContact) }}</span>
       </div>
       <div style="width: 70px;" class="col-xs-1">
@@ -206,7 +218,7 @@
         </div>
       </div>
       <div class="dropdown-wo-max-height"
-           to-left='true'
+           to-left="true"
            style="position: absolute;right: 15px;">
         <div style="display: inline-block;"
              opened-from-list="true"
@@ -220,7 +232,7 @@
 
       </div>
       <div class="dropdown-wo-max-height"
-           to-left='true'
+           to-left="true"
            style="position: absolute;right: 15px;">
         <div style="display: inline-block;"
              opened-from-list="true"
@@ -232,24 +244,89 @@
           </div>
         </div>
       </div>
-
+      <div class="mob-company-footer">
+        <div>
+          <p>TICKETS</p>
+          <p> {{ company.companyStatistic.ticketsSubmitted || '0' }}</p>
+        </div>
+        <div>
+          <p>DEVICES</p>
+          <p> {{ devicesCount[cooriginmpany.id].all || '0' }} </p>
+        </div>
+        <div>
+          <p>USERS</p>
+          <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
+        </div>
+      </div>
+      <button class="company-edit-icn company-edit-icn-sm desktop-hidden" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+           create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
-           ng-click="dearchiveCompany(company)"/>
+           ng-click="dearchiveCompany(company)" />
     </li>
+    <button class="mob-filters-btn mobile-btn primary"
+            ng-click="toggleMobileCompanyFilters(true)">
+      Filters
+    </button>
+    <div class="mob-filters" ng-class="{ opened: areMobileFiltersOpened }"
+         ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
+      <div class="mob-filters-header">
+        <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
+        <div>Filters</div>
+      </div>
+      <div class="center-category">
+        <div class="left-panel-title">
+          by tags
+        </div>
+        <div class="center-category__category sked without-height">
+
+          <ticket-tags is-company="true" tag-filter="true" on-save-func=""
+                       ticket-tags="mobileFilterTags"></ticket-tags>
+
+        </div>
+        <div class="left-panel-hide-filter">
+          <div
+            style="font-family: 'Graphik Medium', sans-serif;font-weight: 500; font-size: 13px; color:#fff;text-transform: capitalize;"
+            class="left-panel-title left-panel-title-hover"
+            ng-click="dropdownByIndustryCompanyPage = !dropdownByIndustryCompanyPage">
+            by industry
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryCompanyPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
+            <div class="x-mark-wrapper">
+              <qt-dropdown-typehead list-for-dropdown="industries"
+                                    selected-item="mobileIndustryFilter"
+                                    no-overflow="true"
+                                    qt-class="'form-control has-dropdown pointer'"
+                                    by-industry="true"
+                                    qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+
+              </qt-dropdown-typehead>
+            </div>
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in industryFilterHistoryCompaniesPage track by $index"
+                 ng-click="mobileApplyIndustryFilter(item)">{{item}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
+    </div>
   </ul>
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
-    m.parentNode.insertBefore(a, m)
+    m.parentNode.insertBefore(a, m);
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');

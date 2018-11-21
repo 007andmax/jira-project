@@ -4,10 +4,10 @@
 
   angular.module("quicktech").controller("createNewEntityCtrl",
     ['$scope', 'resolvedExistedItem', 'resolveExistingCategory', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedUserId',
-      'resolvedOpenedTab', 'resolvedAdvanced', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
+      'resolvedOpenedTab', 'resolvedAdvanced', 'isMobileEdit', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
       'quicktech.common.services.UserConfirmationsService', '$rootScope',
       function ($scope, resolvedExistedItem, resolveExistingCategory, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedUserId,
-                resolvedOpenedTab, resolvedAdvanced, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService, $rootScope) {
+                resolvedOpenedTab, resolvedAdvanced, isMobileEdit, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService, $rootScope) {
 
         $scope.openedTab = resolvedOpenedTab || 'ticket';
 
@@ -47,12 +47,30 @@
           }
         }
 
+        $scope.switchCompanyModalBack = function(delay) {
+          var modal = document.querySelector('.modal-dialog');
+          modal.classList.remove('xl');
+          $scope.longCreateCompany = false;
+
+          console.log('BAAAACKKK')
+
+
+          if (delay) {
+            $scope.hideDiv = true;
+
+            $timeout(function() {
+              $scope.hideDiv = false;
+            }, 500)
+          }
+        }
+
         $scope.sessionId = sessionId;
         $scope.sessionTime = sessionTime;
         $scope.resolvedDeviceId = resolvedDeviceId;
         $scope.resolvedCompanyId = resolvedCompanyId;
         $scope.resolvedCreatedUserId = resolvedUserId;
         $scope.resolvedAdvanced = resolvedAdvanced;
+        $scope.isMobileEdit = isMobileEdit;
         $scope.closeWindow = $uibModalInstance.dismiss;
         $scope.closeWindowWithoutConfirmation = function(){
           alreadyPushCloseButton = true;

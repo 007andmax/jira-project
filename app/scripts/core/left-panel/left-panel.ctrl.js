@@ -43,6 +43,11 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        console.log("REINIT ReINIT")
+
+        $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
+
+        $scope.currentUser = UsersService.getCurrentUser();
 
         $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
@@ -103,7 +108,20 @@
         };
 
         $scope.companyFilterTags = [];
+        $scope.mobileFilterTags = [];
 
+
+        $scope.toggleMobileLeftPanel = function(state) {
+          $rootScope.isLeftPanelOpened = state;
+        }
+
+        $scope.toggleMobileMenu = function(menu) {
+          $scope.listOfMobileTitles.forEach(function(title) {
+            $scope[title] = false;
+          })
+
+          $scope[menu] = true;
+        }
 
         $scope.$watch('companyFilterTags', function(val) {
           if (val.length) {
@@ -195,6 +213,50 @@
             $rootScope.ticketsTagsColors = resp;
           }
         });
+
+        $scope.stateMobileGo = function() {
+          $scope.lastSavedStatus = arguments;
+        }
+
+        $scope.applyMobileFilters = function() {
+          $scope.companiesSharedState.filter.industry = $scope.mobileIndustryFilter;
+          $scope.companyFilterTags = $scope.mobileFilterTags.slice();
+
+          $scope.toggleMobileCompanyFilters(false);
+        }
+
+        $scope.closeAndResetMobileFilters = function() {
+          $scope.mobileIndustryFilter = $scope.companiesSharedState.filter.industry;
+          $scope.mobileFilterTags = $scope.companyFilterTags.slice();
+
+
+          $scope.toggleMobileCompanyFilters(false);
+        }
+
+        $scope.applyMobileUsersFilters = function() {
+          $scope.filterDesignation = $scope.mobileFilterDesignation;
+          $scope.userPageCompanyIdFilter = $scope.mobileUserPageCompanyIdFilter
+          $scope.filterUsers('title', $scope.filterDesignation);
+
+          $scope.usersSharedState.filter.industry = $scope.mobileFilterUsersIndustry;
+
+          $scope.toggleMobileUsersFilters(false);
+        }
+
+        $scope.closeAndResetMobileUsersFilters = function() {
+          $scope.mobileFilterDesignation = $scope.filterDesignation;
+          $scope.mobileUserPageCompanyIdFilter = $scope.userPageCompanyIdFilter;
+          $scope.mobileFilterUsersIndustry = $scope.usersSharedState.filter.industry;
+
+          $scope.toggleMobileUsersFilters(false);
+
+
+        }
+
+        $scope.closeAndResetMobileTicketsFilters = function() {
+
+          $scope.toggleMobileTicketsFilters(false);
+        }
 
         $scope.ticketsSharedState.filter.tags = [];
 
@@ -295,6 +357,127 @@
         }
 
 
+
+        $scope.companyModelObj = {
+          companyModel: ''
+        }
+
+        $scope.ticketsFilterTags = [];
+
+
+        $rootScope.toggleMobileTicketsFilters = function(state) {
+          $rootScope.areMobileTicketsFiltersOpened = state;
+
+          console.log('toggle mobile tickets filter')
+        }
+
+
+        $scope.closeAndResetMobileTicketsFilters = function() {
+          $scope.toggleMobileTicketsFilters(false);
+
+          $scope.ticketsFilterTags = $scope.appliedTicketsTags.slice();
+
+          if ($scope.techUserModel !== $scope.ticketsSharedState.filter.techUserId) {
+            $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
+          }
+
+          if ($scope.clientUserModel !== $scope.ticketsSharedState.filter.clientUserId) {
+            $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
+          }
+
+          if ($scope.companyModelObj.companyModel !== $scope.ticketsSharedState.filter.companyId) {
+            $scope.companyModelObj.companyModel = $scope.ticketsSharedState.filter.companyId;
+          }
+
+          $scope.lastSavedStatus = null;
+        }
+
+        $scope.applyMobileTicketsFilters = function() {
+          $scope.toggleMobileTicketsFilters(false);
+          $scope.appliedTicketsTags = $scope.ticketsFilterTags.slice();
+
+
+          if ($scope.ticketsSharedState.filter.techUserId !== $scope.techUserModel) {
+            $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
+          }
+
+          if ($scope.ticketsSharedState.filter.clientUserId !== $scope.clientUserModel) {
+            $scope.ticketsSharedState.filter.clientUserId = $scope.clientUserModel;
+          }
+          if ($scope.ticketsSharedState.filter.companyId !== $scope.companyModelObj.companyModel) {
+            $scope.ticketsSharedState.filter.companyId = $scope.companyModelObj.companyModel;
+          }
+
+
+          if ($scope.lastSavedStatus) {
+
+            $timeout(function() {
+              $scope.stateGo.apply(this, $scope.lastSavedStatus);
+
+            }, 100)
+
+          }
+        }
+
+
+
+        $scope.appliedTicketsTags = [];
+
+        var counter = true;
+
+        $scope.$watch('appliedTicketsTags', function(val) {
+          if (counter) {
+            counter = false;
+            return;
+          }
+
+          console.log(val, "APPLIED MOTHERFUCKED")
+
+          $scope.ticketsSharedState.filter.tags = val;
+          ticketsSharedState.filter.tags = val;
+
+          console.log(ticketsSharedState.filter, "FILTERSSS")
+
+          if ($state.includes('tickets')) {
+            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+          }
+        }, true)
+
+
+        $scope.mobileApplyUser = function (value) {
+          $scope.techUserModel = getUserIdByUserFullName(value);
+
+          console.log($scope.techUserModel, "DDDDDD")
+          $rootScope.selectedIndustryItem = value;
+
+        };
+
+        $scope.mobileApplyClientUser = function (value) {
+          $rootScope.selectedIndustryItem = value;
+
+          // HERERERE
+          $scope.clientUserModel = getUserIdByUserFullName(value);
+          var user = getUserObjByUserFullName(value);
+          if ($scope.companyModelObj.companyModel) {
+            if (user.company.id !== $scope.companyModelObj.companyModel) {
+              $scope.companyModelObj.companyModel = user.company.id
+            }
+          } else {
+            $scope.companyModelObj.companyModel = user.company.id;
+          }
+        };
+
+        $scope.mobileApplyCompany = function (value) {
+
+          console.log('MOBILE APPLY', value)
+          $scope.companyModelObj.companyModel = getCompanyIdByCompanyName(value);
+
+          console.log($scope.companyModel, 'MODELLL')
+          // $rootScope.selectedIndustryItem = value;
+
+        };
+
+
         $scope.$watch('companiesSharedState.filter.industry', function (value) {
           if (value !== "" && value !== " ") {
             if (value && $scope.checkIndustriesMatched(value)) {
@@ -337,7 +520,7 @@
         }, true)
 
         $scope.$watch('ticketsSharedState.filter.companyId', function (value) {
-          if (value !== "" && value !== " ") {
+          if (value !== undefined && value !== "" && value !== " ") {
             if (value && $scope.checkCompanieValueMatched(value)) {
               $scope.isTicketCompanyIdFieldEmpty = false;
               sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
@@ -391,7 +574,7 @@
         }, true);
 
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
-          if (value !== "" && value !== " ") {
+          if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -420,7 +603,9 @@
         });
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
-          if (value !== "" && value !== " ") {
+
+          
+          if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
             ticketsSharedState.filter.onHold = false;
@@ -440,6 +625,7 @@
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
+                console.log('WE ARE HERE')
                 $scope.stateGo(null, 'tickets', {listType: 'by_company'});
               } else {
                 $scope.stateGo(null, 'tickets', {listType: 'all'});
@@ -550,15 +736,36 @@
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function (value) {
           companiesSharedState.filter.industry = value;
+
         };
+
+        $scope.mobileApplyIndustryFilter = function(value) {
+          console.log('mobileApplyIndu')
+          $scope.mobileIndustryFilter = value;
+          $rootScope.selectedIndustryItem = value;
+        }
 
         $scope.applyIndustryFilterFromHistoryListUserPage = function (value) {
           usersSharedState.filter.industry = value;
         };
 
+        $scope.mobileApplyIndustryFilterFromHistoryListUserPage = function (value) {
+          $scope.mobileFilterUsersIndustry = value;
+          $rootScope.selectedIndustryItem = value;
+
+        };
+
         $scope.applyCompanyFilterFromHistoryListUserPage = function (value) {
           usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+
+          $scope.usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
+          $scope.userPageCompanyIdFilter =  getCompanyIdByCompanyName(value);
+          console.log(usersSharedState.filter.companyId, "HUEHUEHUE")
         };
+
+        $scope.mobileApplyCompanyFilterFromHistoryListUserPage = function (value) {
+          $scope.mobileUserPageCompanyIdFilter = getCompanyIdByCompanyName(value);
+        }
 
         $scope.applyCompanyFilterFromHistoryListTicketPage = function (value) {
           ticketsSharedState.filter.companyId = getCompanyIdByCompanyName(value);

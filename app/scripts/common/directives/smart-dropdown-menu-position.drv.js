@@ -25,7 +25,7 @@
             var productInputPosition = element[0].getBoundingClientRect().top;
             var productInput = $(element[0]);
             var productDropdownMenu = productInput.parent('div').parent('div').find('.nano');
-            if((winHeight - productInputPosition) < 360) {
+            if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
               productDropdownMenu.css({'top': 'auto'});
               productDropdownMenu.css({'bottom': '100%'});
               productDropdownMenu.css({'margin-bottom': '10px'});
