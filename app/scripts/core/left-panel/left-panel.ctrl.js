@@ -214,6 +214,10 @@
           }
         });
 
+        $scope.stateMobileGo = function() {
+          $scope.lastSavedStatus = arguments;
+        }
+
         $scope.applyMobileFilters = function() {
           $scope.companiesSharedState.filter.industry = $scope.mobileIndustryFilter;
           $scope.companyFilterTags = $scope.mobileFilterTags.slice();
@@ -351,6 +355,127 @@
           });
           return user;
         }
+
+
+
+        $scope.companyModelObj = {
+          companyModel: ''
+        }
+
+        $scope.ticketsFilterTags = [];
+
+
+        $rootScope.toggleMobileTicketsFilters = function(state) {
+          $rootScope.areMobileTicketsFiltersOpened = state;
+
+          console.log('toggle mobile tickets filter')
+        }
+
+
+        $scope.closeAndResetMobileTicketsFilters = function() {
+          $scope.toggleMobileTicketsFilters(false);
+
+          $scope.ticketsFilterTags = $scope.appliedTicketsTags.slice();
+
+          if ($scope.techUserModel !== $scope.ticketsSharedState.filter.techUserId) {
+            $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
+          }
+
+          if ($scope.clientUserModel !== $scope.ticketsSharedState.filter.clientUserId) {
+            $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
+          }
+
+          if ($scope.companyModelObj.companyModel !== $scope.ticketsSharedState.filter.companyId) {
+            $scope.companyModelObj.companyModel = $scope.ticketsSharedState.filter.companyId;
+          }
+
+          $scope.lastSavedStatus = null;
+        }
+
+        $scope.applyMobileTicketsFilters = function() {
+          $scope.toggleMobileTicketsFilters(false);
+          $scope.appliedTicketsTags = $scope.ticketsFilterTags.slice();
+
+
+          if ($scope.ticketsSharedState.filter.techUserId !== $scope.techUserModel) {
+            $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
+          }
+
+          if ($scope.ticketsSharedState.filter.clientUserId !== $scope.clientUserModel) {
+            $scope.ticketsSharedState.filter.clientUserId = $scope.clientUserModel;
+          }
+          if ($scope.ticketsSharedState.filter.companyId !== $scope.companyModelObj.companyModel) {
+            $scope.ticketsSharedState.filter.companyId = $scope.companyModelObj.companyModel;
+          }
+
+
+          if ($scope.lastSavedStatus) {
+
+            $timeout(function() {
+              $scope.stateGo.apply(this, $scope.lastSavedStatus);
+
+            }, 100)
+
+          }
+        }
+
+
+
+        $scope.appliedTicketsTags = [];
+
+        var counter = true;
+
+        $scope.$watch('appliedTicketsTags', function(val) {
+          if (counter) {
+            counter = false;
+            return;
+          }
+
+          console.log(val, "APPLIED MOTHERFUCKED")
+
+          $scope.ticketsSharedState.filter.tags = val;
+          ticketsSharedState.filter.tags = val;
+
+          console.log(ticketsSharedState.filter, "FILTERSSS")
+
+          if ($state.includes('tickets')) {
+            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+          }
+        }, true)
+
+
+        $scope.mobileApplyUser = function (value) {
+          $scope.techUserModel = getUserIdByUserFullName(value);
+
+          console.log($scope.techUserModel, "DDDDDD")
+          $rootScope.selectedIndustryItem = value;
+
+        };
+
+        $scope.mobileApplyClientUser = function (value) {
+          $rootScope.selectedIndustryItem = value;
+
+          // HERERERE
+          $scope.clientUserModel = getUserIdByUserFullName(value);
+          var user = getUserObjByUserFullName(value);
+          if ($scope.companyModelObj.companyModel) {
+            if (user.company.id !== $scope.companyModelObj.companyModel) {
+              $scope.companyModelObj.companyModel = user.company.id
+            }
+          } else {
+            $scope.companyModelObj.companyModel = user.company.id;
+          }
+        };
+
+        $scope.mobileApplyCompany = function (value) {
+
+          console.log('MOBILE APPLY', value)
+          $scope.companyModelObj.companyModel = getCompanyIdByCompanyName(value);
+
+          console.log($scope.companyModel, 'MODELLL')
+          // $rootScope.selectedIndustryItem = value;
+
+        };
 
 
         $scope.$watch('companiesSharedState.filter.industry', function (value) {

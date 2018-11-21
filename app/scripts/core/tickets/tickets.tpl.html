@@ -20,7 +20,9 @@
                 ng-click="toggleMobileTicketsFilters(true)">
           Filters
         </button>
-        <div class="mob-filters" ng-class="{ opened: areMobileTicketsFiltersOpened }">
+
+
+        <!-- <div class="mob-filters" ng-class="{ opened: areMobileTicketsFiltersOpened }">
           <div class="mob-filters-header">
             <button class="x-mark mobile-btn" ng-click="closeAndResetMobileTicketsFilters()"></button>
             <div>Filters</div>
@@ -45,12 +47,12 @@
                 <div class="x-mark-wrapper">
                   <input type="text" class="form-control has-dropdown pointer"
                          placeholder="Select Company"
-                         next-after-text-editor ng-trim="false"
                          typeahead-input-formatter="getCompanyName($model)"
                          autocomplete="off" ng-model="companyModelObj.companyModel"
                          uib-typeahead="company.id as company.name for company in clientCompanies() | filter:{'name': $viewValue }:stateComparator | orderBy:'name'"
-                         qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                         qt-typeahead-async-show-on-focus
                          no-overflow="true"
+                         name="companyModel"
                          custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
                   <div typeahead-input-icon="companyModelObj.companyModel"></div>
@@ -220,7 +222,8 @@
             </div>
           </div>
           <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileTicketsFilters()">Apply Filters</button>
-        </div>
+        </div> -->
+
       </ul>
     </div>
   </div>

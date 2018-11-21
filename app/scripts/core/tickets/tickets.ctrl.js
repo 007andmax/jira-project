@@ -66,21 +66,18 @@
           'image/bmp': 'not-viewable'
         };
 
-        CustomStorageService.getUserCustomStorageValue('ticketPageFilterByCompanyHistory', function (resp) {
-          $scope.companiesFilterHistoryTicketsPage = resp;
-        });
+        // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByCompanyHistory', function (resp) {
+        //   $scope.companiesFilterHistoryTicketsPage = resp;
+        // });
+        //
+        // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByClientUsersHistory', function (resp) {
+        //   $scope.clientUsersFilterHistoryTicketsPage = resp;
+        // });
+        //
+        // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByTechUsersHistory', function (resp) {
+        //   $scope.techUsersFilterHistoryTicketsPage = resp;
+        // });
 
-        CustomStorageService.getUserCustomStorageValue('ticketPageFilterByClientUsersHistory', function (resp) {
-          $scope.clientUsersFilterHistoryTicketsPage = resp;
-        });
-
-        CustomStorageService.getUserCustomStorageValue('ticketPageFilterByTechUsersHistory', function (resp) {
-          $scope.techUsersFilterHistoryTicketsPage = resp;
-        });
-
-        $scope.$watch('companyModelObj.companyModel', function(val) {
-          console.log("!!!!!!!!!!!!!!!!!!!", val)
-        })
 
         $scope.stateMobileGo = function() {
           $scope.lastSavedStatus = arguments;
@@ -100,6 +97,30 @@
           }
 
         };
+
+        // $scope.$watch('companyModelObj.companyModel', function (value) {
+        //   if (value !== undefined && value !== "" && value !== " ") {
+        //
+        //     ticketsSharedState.filter.completed = false;
+        //     ticketsSharedState.filter.inProgress = false;
+        //     ticketsSharedState.filter.onHold = false;
+        //     ticketsSharedState.filter.onHoldTag = false;
+        //     ticketsSharedState.filter.clientUserId = '';
+        //     $scope.clientsUsersByCompany = $scope.clientUsers().filter(function (user) {
+        //       return user.company.id === value;
+        //     });
+        //     if ($state.includes('tickets')) {
+        //       $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+        //     }
+        //
+        //   } else if (value === undefined) {
+        //     $scope.isTicketCompanyIdFieldEmpty = true;
+        //     if ($state.includes('tickets')) {
+        //       clearFilter(ticketsSharedState.filter);
+        //       $scope.stateGo(null, 'tickets', {listType: 'all'});
+        //     }
+        //   }
+        // });
 
         $scope.getFullName = function (client) {
           console.log(client, 'GETFULLNAME')
@@ -130,95 +151,95 @@
         $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
         $scope.areMobileTicketsFiltersOpened = false;
 
-        $scope.toggleMobileTicketsFilters = function(state) {
-          $scope.areMobileTicketsFiltersOpened = state;
-        }
+        // $scope.toggleMobileTicketsFilters = function(state) {
+        //   $scope.areMobileTicketsFiltersOpened = state;
+        // }
 
-        $scope.closeAndResetMobileTicketsFilters = function() {
-          $scope.toggleMobileTicketsFilters(false);
-          $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
-          $scope.ticketsFilterTags = $scope.appliedTicketsTags.slice();
-
-          $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
-
-          $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
-          $scope.companyModelObj.companyModel = $scope.ticketsSharedState.filter.companyId;
-
-          $scope.lastSavedStatus = null;
-        }
-
-        $scope.applyMobileTicketsFilters = function() {
-          $scope.toggleMobileTicketsFilters(false);
-          $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
-          $scope.appliedTicketsTags = $scope.ticketsFilterTags.slice();
-
-          $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
-          $scope.ticketsSharedState.filter.clientUserId = $scope.clientUserModel;
-
-          $scope.ticketsSharedState.filter.companyId = $scope.companyModelObj.companyModel;
-          if ($scope.lastSavedStatus) {
-
-            $timeout(function() {
-              $scope.stateGo.apply(this, $scope.lastSavedStatus);
-
-            }, 100)
-
-          }
-        }
-
-        $scope.ticketsFilterTags = $scope.ticketsSharedState.filter.tags || [];
-
-        $scope.appliedTicketsTags = [];
-
-        var counter = true;
-
-        $scope.$watch('appliedTicketsTags', function(val) {
-          if (counter) {
-            counter = false;
-            return;
-          }
-
-          $scope.ticketsSharedState.filter.tags = val;
-          ticketsSharedState.filter.tags = val;
-
-          if ($state.includes('tickets')) {
-            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
-          }
-        }, true)
-
-
-        $scope.mobileApplyUser = function (value) {
-          $scope.techUserModel = getUserIdByUserFullName(value);
-
-          console.log($scope.techUserModel, "DDDDDD")
-          $rootScope.selectedIndustryItem = value;
-
-        };
-
-        $scope.mobileApplyClientUser = function (value) {
-          $rootScope.selectedIndustryItem = value;
-
-          // HERERERE
-          $scope.clientUserModel = getUserIdByUserFullName(value);
-          var user = getUserObjByUserFullName(value);
-          if ($scope.companyModelObj.companyModel) {
-            if (user.company.id !== $scope.companyModelObj.companyModel) {
-              $scope.companyModelObj.companyModel = user.company.id
-            }
-          } else {
-            $scope.companyModelObj.companyModel = user.company.id;
-          }
-        };
-
-        $scope.mobileApplyCompany = function (value) {
-
-          console.log('MOBILE APPLY', value)
-          $scope.companyModelObj.companyModel = getCompanyIdByCompanyName(value);
-
-          console.log($scope.companyModel, 'MODELLL')
-          // $rootScope.selectedIndustryItem = value;
-
-        };
+        // $scope.closeAndResetMobileTicketsFilters = function() {
+        //   $scope.toggleMobileTicketsFilters(false);
+        //   $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
+        //   $scope.ticketsFilterTags = $scope.appliedTicketsTags.slice();
+        //
+        //   $scope.techUserModel = $scope.ticketsSharedState.filter.techUserId;
+        //
+        //   $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
+        //   $scope.companyModelObj.companyModel = $scope.ticketsSharedState.filter.companyId;
+        //
+        //   $scope.lastSavedStatus = null;
+        // }
+        //
+        // $scope.applyMobileTicketsFilters = function() {
+        //   $scope.toggleMobileTicketsFilters(false);
+        //   $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
+        //   $scope.appliedTicketsTags = $scope.ticketsFilterTags.slice();
+        //
+        //   $scope.ticketsSharedState.filter.techUserId = $scope.techUserModel;
+        //   $scope.ticketsSharedState.filter.clientUserId = $scope.clientUserModel;
+        //
+        //   $scope.ticketsSharedState.filter.companyId = $scope.companyModelObj.companyModel;
+        //   if ($scope.lastSavedStatus) {
+        //
+        //     $timeout(function() {
+        //       $scope.stateGo.apply(this, $scope.lastSavedStatus);
+        //
+        //     }, 100)
+        //
+        //   }
+        // }
+        //
+        // $scope.ticketsFilterTags = $scope.ticketsSharedState.filter.tags || [];
+        //
+        // $scope.appliedTicketsTags = [];
+        //
+        // var counter = true;
+        //
+        // $scope.$watch('appliedTicketsTags', function(val) {
+        //   if (counter) {
+        //     counter = false;
+        //     return;
+        //   }
+        //
+        //   $scope.ticketsSharedState.filter.tags = val;
+        //   ticketsSharedState.filter.tags = val;
+        //
+        //   if ($state.includes('tickets')) {
+        //     $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+        //   }
+        // }, true)
+        //
+        //
+        // $scope.mobileApplyUser = function (value) {
+        //   $scope.techUserModel = getUserIdByUserFullName(value);
+        //
+        //   console.log($scope.techUserModel, "DDDDDD")
+        //   $rootScope.selectedIndustryItem = value;
+        //
+        // };
+        //
+        // $scope.mobileApplyClientUser = function (value) {
+        //   $rootScope.selectedIndustryItem = value;
+        //
+        //   // HERERERE
+        //   $scope.clientUserModel = getUserIdByUserFullName(value);
+        //   var user = getUserObjByUserFullName(value);
+        //   if ($scope.companyModelObj.companyModel) {
+        //     if (user.company.id !== $scope.companyModelObj.companyModel) {
+        //       $scope.companyModelObj.companyModel = user.company.id
+        //     }
+        //   } else {
+        //     $scope.companyModelObj.companyModel = user.company.id;
+        //   }
+        // };
+        //
+        // $scope.mobileApplyCompany = function (value) {
+        //
+        //   console.log('MOBILE APPLY', value)
+        //   $scope.companyModelObj.companyModel = getCompanyIdByCompanyName(value);
+        //
+        //   console.log($scope.companyModel, 'MODELLL')
+        //   // $rootScope.selectedIndustryItem = value;
+        //
+        // };
 
         $scope.$watch(function () {
           return $stateParams;
