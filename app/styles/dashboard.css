@@ -125,7 +125,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+.four-stats-dashboard .board-head{
+  margin: 10px 10px 0;
+}
 .third-part .board-head {
   text-align: center;
   font-size: 20px;
@@ -187,7 +189,7 @@ header .calendar-top {
 header .calendar-top:hover {
   border-color: transparent;
   box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
-
+  
 }
 
 header .calendar-top input {
@@ -238,16 +240,20 @@ header .calendar-top input {
   -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
-
+.four-stats-dashboard .dashboard-main .stats{
+  margin-bottom: 6px;
+}
 .dashboard-main .stats .front,
 .dashboard-main .stats .back {
   width: 100%;
   height: 100%;
-  border: 1px solid;
-  border-color: #eee;
+  border: 1px solid #eee;
   margin-bottom: 30px;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
 
+.four-stats-dashboard .dashboard-main .stats .front {
+  margin-bottom: 6px;
 }
 
 .dashboard-main .stats .front:hover,
@@ -263,7 +269,6 @@ header .calendar-top input {
   border: 1px solid;
   border-color: #eee;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-
 }
 
 .dashboard-main .stats .front:hover,
@@ -273,7 +278,6 @@ header .calendar-top input {
 .dashboard-main .stats.half-stats:hover {
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
   border-color: transparent;
-
 }
 
 .dashboard-main .stats.half-stats .stats__main--count {
@@ -286,17 +290,21 @@ header .calendar-top input {
   cursor: pointer;
 }
 
+.four-stats-dashboard .dashboard-main .stats.third-part {
+  height: 108px;
+}
+
 .dashboard-main .stats .front {
   position: absolute;
   top: 0;
   left: 0;
-
+  
   -webkit-backface-visibility: hidden;
   -moz-visibility: hidden;
   -ms-visibility: hidden;
   -o-visibility: hidden;
   backface-visibility: hidden;
-
+  
   -webkit-transition: -webkit-transform .6s, -webkit-box-shadow .3s, -webkit-border-color .3s;
   -moz-transition: -moz-transform .6s, -moz-box-shadow .3s, -moz-border-color .3s;
   -ms-transition: -ms-transform .6s, -ms-box-shadow .3s, -ms-border-color .3s;
@@ -308,19 +316,19 @@ header .calendar-top input {
   position: absolute;
   top: 0;
   left: 0;
-
+  
   -webkit-backface-visibility: hidden;
   -moz-visibility: hidden;
   -ms-visibility: hidden;
   -o-visibility: hidden;
   backface-visibility: hidden;
-
+  
   -webkit-transition: -webkit-transform .6s, -webkit-box-shadow .3s, -webkit-border-color .3s;
   -moz-transition: -moz-transform .6s, -moz-box-shadow .3s, -moz-border-color .3s;
   -ms-transition: -ms-transform .6s, -ms-box-shadow .3s, -ms-border-color .3s;
   -o-transition: -o-transform .6s, -o-box-shadow .3s, -o-border-color .3s;
   transition: transform .6s, box-shadow .3s, border-color .3s;
-
+  
   -webkit-transform: rotateY(-180deg);
   -moz-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
@@ -361,7 +369,9 @@ header .calendar-top input {
 .dashboard-main .stats__main--count p {
   font-size: 28px;
 }
-
+.four-stats-dashboard .dashboard-main .stats__main--count p{
+  line-height: 10px;
+}
 .dashboard-main .stats__icon {
   display: flex;
   justify-content: center;
@@ -416,44 +426,44 @@ header .calendar-top input {
   text-transform: none;
   background-color: #00a4b5;
   font-size: 14px;
-
+  
 }
 
 .average-sales-tooltip {
   background-color: #8849ae;
   font-size: 14px;
-
+  
 }
 
 .creation-timeline-tooltip {
   background-color: #369ce3;
   font-size: 14px;
-
+  
 }
 
 .ticket-resp-time-tooltip {
   text-transform: none;
   background-color: #00bf8e;
   font-size: 14px;
-
+  
 }
 
 .total-receivables-tooltip {
   background-color: #86db5e;
   font-size: 14px;
-
+  
 }
 
 .total-invoiceable-tooltip {
   background-color: #ffb55c;
   font-size: 14px;
-
+  
 }
 
 .total-projection-tooltip {
   background-color: #27c1e3;
   font-size: 14px;
-
+  
 }
 
 .billing-dashboard .top-ten {
@@ -534,7 +544,7 @@ header .calendar-top input {
   .top-ten__list--point-head div, .dashboard-main .top-ten__list--point div {
     padding: 2px;
   }
-
+  
   .top-ten__list--point-head div p, .dashboard-main .top-ten__list--point div p {
     max-width: 100%;
     overflow: hidden;
@@ -569,7 +579,6 @@ header .calendar-top input {
   width: 100%;
   top: 85%;
   flex-direction: row;
-
 }
 
 .pie-legend div {
@@ -758,7 +767,7 @@ header .calendar-top input {
   height: 20px;
   border: 1px solid #c32e2e;
   border-top: none;
-
+  
   content: '';
 }
 
@@ -790,14 +799,13 @@ header .calendar-top input {
 .overdue-receivables {
   text-align: center;
   font-size: 16px;
-  padding-top: 5px;
 }
 
 @media (max-width: 1600px) {
   .third-part .board-head {
     margin-bottom: 0;
   }
-
+  
   .dashboard-main .stats__main--count p {
     font-size: 18px;
     word-break: break-all;
