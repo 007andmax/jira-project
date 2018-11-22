@@ -839,7 +839,7 @@
         if (!ticketUpdate.type) {
           throw 'ticketUpdate.type is required!';
         }
-        if (((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) || (ticketUpdate.services && ticketUpdate.services.length === 1 && !ticketUpdate.services[0].item)) {
+        if (((!ticketUpdate.note && !(ticketUpdate.attachments && ticketUpdate.attachments.length)) && !ticketUpdate.products && !ticketUpdate.services) || (ticketUpdate.services && ticketUpdate.services.length === 1 && !(ticketUpdate.services[0].item && Object.keys(ticketUpdate.services[0].item).length))) {
           if (close) {
             ticketUpdate = {"type":"NOTE","shares":[],"ticket":ticketUpdate.ticket,"note": "Ticket has been closed","attachments":[]}
 
