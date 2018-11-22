@@ -430,10 +430,12 @@
             // } else {
             //   closeTicket()
             // }
-            var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
-// =======
+
             console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
             if (!form) form = $scope.mobileUpdateForm;
+            var saveFailed = $scope.saveTicketUpdate({$valid: true}, true, closeTicket, null, null, true);
+// =======
+
 
             // if (hasUnsavedUpdate($scope.ticketUpdate)) {
             //
@@ -753,7 +755,7 @@
 
             // console.log(form, 'EXPENSE EDIT')
 
-            if ($scope.ticketUpdate.services) {
+            if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (el.item && typeof el.item.name === 'object') {
 
@@ -775,7 +777,7 @@
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
             console.log(isEmptyProductValid, "ISEMPTY VALID")
-            if (form.$valid || isEmptyProductValid) {
+            if (isEmptyProductValid || form.$valid) {
               console.log("WE ARENT HERERER")
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -787,7 +789,7 @@
                   ticket: { id: $scope.ticketDetails.id }
                 };
 
-              if ($scope.ticketUpdate.products && !isEmptyProductValid) {
+              if ($scope.ticketUpdate && $scope.ticketUpdate.products && !isEmptyProductValid) {
 
                 for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
                   $scope.ticketUpdate.products[i].discountType = 'PERCENT';
@@ -795,9 +797,8 @@
 
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
 
-              } else if ($scope.ticketUpdate.services) {
+              } else if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
 
-                console.log($scope.ticketUpdate.services, "SERVICE")
 
                 for(var i=0; i<$scope.ticketUpdate.services.length; i++) {
                   $scope.ticketUpdate.services[i].discountType = 'PERCENT';
@@ -881,7 +882,7 @@
               return true;
             }
 
-            if ($scope.ticketUpdate.selectedDiscount && $scope.currentOpenTab === 'PRODUCT') {
+            if ($scope.ticketUpdate && $scope.ticketUpdate.selectedDiscount && $scope.currentOpenTab === 'PRODUCT') {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
               TicketsService.updateDiscount($scope.ticketDetails.id, $scope.ticketUpdate.selectedDiscount.id, function () {

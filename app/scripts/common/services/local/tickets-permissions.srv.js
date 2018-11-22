@@ -21,6 +21,8 @@
           return techUsers && techUsers.length > 1 && isTicketOpen(ticket);
         },
         'REOPEN': function (ticket, option) {
+
+          console.log("HEEEEEY", option)
           if (ticket.status !== 'COMPLETED' || isSpamOrTrash(ticket)) {
             return false;
           }
