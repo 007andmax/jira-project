@@ -430,23 +430,24 @@
             // } else {
             //   closeTicket()
             // }
+            var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
 // =======
             console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
             if (!form) form = $scope.mobileUpdateForm;
 
-            if (hasUnsavedUpdate($scope.ticketUpdate)) {
-              var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
-              if (!saveFailed) {
-                var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-                  if (value === false) {
-                    closeTicket();
-                    unwatch();
-                  }
-                });
-              }
-            } else {
-              closeTicket()
-            }
+            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
+            //
+            //   if (!saveFailed) {
+            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
+            //       if (value === false) {
+            //         closeTicket();
+            //         unwatch();
+            //       }
+            //     });
+            //   }
+            // } else {
+            //   closeTicket()
+            // }
 // >>>>>>> mobile-version
           };
 
@@ -733,7 +734,7 @@
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             // console.log('WTF')
             if (isExpenseEdit) {
-              console.log(isExpenseEdit);
+              console.log(isExpenseEdit, 'ISEXPENSEEIDT');
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
 
@@ -772,7 +773,10 @@
 
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
+
+            console.log(isEmptyProductValid, "ISEMPTY VALID")
             if (form.$valid || isEmptyProductValid) {
+              console.log("WE ARENT HERERER")
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
