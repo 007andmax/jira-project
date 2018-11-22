@@ -40,100 +40,106 @@
             }
           })
 
-          $scope.$watch('editExpense', function(val) {
-            console.log(val, "'TICKET EXPENSEEEEEEEE'")
+          if (window.innerWidth <= 414) {
+            $scope.$watch('editExpense', function(val) {
+              console.log(val, "'TICKET EXPENSEEEEEEEE'")
 
 
-            $timeout(function() {
+              $timeout(function() {
 
-              $scope.newEditExpense = angular.copy($scope.editExpense);
-              if (val && val.note) {
-                $scope.updateNote = $scope.newEditExpense.note;
-                $scope.openedTab('NOTE')
-              } else {
-
-                if ($scope.ticketUpdate) {
-                  $scope.ticketUpdate.note = '';
-                }
-
-                $scope.updateNote = $scope.ticketUpdate
-
-              }
-
-              if (val && val.product) {
-                $scope.openedTab('PRODUCT')
-                $scope.productToEdit = $scope.newEditExpense.product;
-              } else {
-                $scope.productToEdit = null;
-              }
-
-              if (val && val.service) {
-                $scope.openedTab('SERVICE');
-                $scope.serviceToEdit = [$scope.newEditExpense.service];
-              } else {
-                $scope.serviceToEdit = $scope.ticketUpdate.services;
-              }
-
-              if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
-
-                if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
-
+                $scope.newEditExpense = angular.copy($scope.editExpense);
+                if (val && val.note) {
+                  $scope.updateNote = $scope.newEditExpense.note;
+                  $scope.openedTab('NOTE')
                 } else {
-                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
 
+                  if ($scope.ticketUpdate) {
+                    $scope.ticketUpdate.note = '';
+                  }
 
-                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
-                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                  $scope.updateNote = $scope.ticketUpdate
+
                 }
-              }
 
-              toggleDataSelector()
-
-
-
-
-              // console.log($scope.serviceToEdit, 'SERVICETOEIDT')
-
-            }, 100)
-
-          }, true)
-
-          $scope.$watch(function() {
-            return $scope.ticketUpdate && $scope.ticketUpdate.services
-          }, function(val) {
-            // console.log(val, 'TICEKTUPDATE SERVICE!!!!!!!!!!')
-            if (val) {
-              if ($scope.newEditExpense && $scope.newEditExpense.service) {
-                $scope.openedTab('SERVICE');
-                $scope.serviceToEdit = [$scope.newEditExpense.service];
-              } else {
-
-                $scope.serviceToEdit = $scope.ticketUpdate.services;
-                // console.log($scope.serviceToEdit, 'TICKKKKKKKKK')
-
-              }
-
-              if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
-                if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
-
+                if (val && val.product) {
+                  $scope.openedTab('PRODUCT')
+                  $scope.productToEdit = $scope.newEditExpense.product;
                 } else {
-                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
-
-
-                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
-                  $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                  $scope.productToEdit = null;
                 }
+
+                if (val && val.service) {
+                  $scope.openedTab('SERVICE');
+                  $scope.serviceToEdit = [$scope.newEditExpense.service];
+                } else {
+                  $scope.serviceToEdit = $scope.ticketUpdate.services;
+                }
+
+                if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
+
+                  if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
+
+                  } else {
+                    $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+
+                    $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
+                    $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                  }
+                }
+
+                toggleDataSelector()
+
+
+
+
+                // console.log($scope.serviceToEdit, 'SERVICETOEIDT')
+
+              }, 100)
+
+            }, true);
+
+            $scope.$watch(function() {
+              return $scope.ticketUpdate && $scope.ticketUpdate.services
+            }, function(val) {
+              // console.log(val, 'TICEKTUPDATE SERVICE!!!!!!!!!!')
+              if (val) {
+                if ($scope.newEditExpense && $scope.newEditExpense.service) {
+                  $scope.openedTab('SERVICE');
+                  $scope.serviceToEdit = [$scope.newEditExpense.service];
+                } else {
+
+                  $scope.serviceToEdit = $scope.ticketUpdate.services;
+                  // console.log($scope.serviceToEdit, 'TICKKKKKKKKK')
+
+                }
+
+                if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
+                  if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
+
+                  } else {
+                    $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+
+                    $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
+                    $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+                  }
+
+
+
+                }
+
+                toggleDataSelector()
 
 
 
               }
+            })
+          }
 
-              toggleDataSelector()
 
 
 
-            }
-          })
 
 
 

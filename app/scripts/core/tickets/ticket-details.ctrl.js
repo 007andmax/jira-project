@@ -410,6 +410,10 @@
             $scope.mobileUpdateForm = form;
           }
 
+          $scope.$watch('ticketUpdate.products[1]', function(val) {
+            console.log(val, 'PRODUCT *** PRODUCT')
+          })
+
           $scope.updateAndCloseTicket = function (form) {
 // <<<<<<< HEAD
             var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
@@ -757,7 +761,7 @@
                 }
 
                 return el;
-                
+
 
               })
             }
