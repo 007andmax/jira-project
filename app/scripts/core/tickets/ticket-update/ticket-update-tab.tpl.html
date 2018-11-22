@@ -162,7 +162,7 @@
   </div>
 
 
-  <div class="mob-ticket-create-updates" ng-class="{ opened: isMobileUpdateShown }"
+  <div class="mob-ticket-create-updates" ng-if="isMobileUpdateShown" ng-class="{ opened: isMobileUpdateShown }"
        ng-init="setMobileForm(ticketUpdateForm)">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">

@@ -410,9 +410,13 @@
             $scope.mobileUpdateForm = form;
           }
 
+          $scope.$watch('ticketUpdate.products[1]', function(val) {
+            console.log(val, 'PRODUCT *** PRODUCT')
+          })
+
           $scope.updateAndCloseTicket = function (form) {
 // <<<<<<< HEAD
-            var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
+            // var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
             // if (hasUnsavedUpdate($scope.ticketUpdate)) {
             //
             //   if (!saveFailed) {
@@ -426,23 +430,26 @@
             // } else {
             //   closeTicket()
             // }
-// =======
+
             console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
             if (!form) form = $scope.mobileUpdateForm;
+            var saveFailed = $scope.saveTicketUpdate({$valid: true}, true, closeTicket, null, null, true);
+// =======
 
-            if (hasUnsavedUpdate($scope.ticketUpdate)) {
-              var saveFailed = $scope.saveTicketUpdate(form, true);
-              if (!saveFailed) {
-                var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-                  if (value === false) {
-                    closeTicket();
-                    unwatch();
-                  }
-                });
-              }
-            } else {
-              closeTicket()
-            }
+
+            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
+            //
+            //   if (!saveFailed) {
+            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
+            //       if (value === false) {
+            //         closeTicket();
+            //         unwatch();
+            //       }
+            //     });
+            //   }
+            // } else {
+            //   closeTicket()
+            // }
 // >>>>>>> mobile-version
           };
 
@@ -729,7 +736,7 @@
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             // console.log('WTF')
             if (isExpenseEdit) {
-              console.log(isExpenseEdit);
+              console.log(isExpenseEdit, 'ISEXPENSEEIDT');
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
 
@@ -748,16 +755,18 @@
 
             // console.log(form, 'EXPENSE EDIT')
 
-            if ($scope.ticketUpdate.services) {
+            if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
-                if (typeof el.item.name === 'object') {
+                if (el.item && typeof el.item.name === 'object') {
+
+                  // if (el.item && typeof el.item.name === 'object') {
                   // console.log(el, "ELLLLLL")
                   // console.log(el.item.name, "EL>item")
                   el.item = el.item.name;
                 }
 
                 return el;
-                
+
 
               })
             }
@@ -766,7 +775,10 @@
 
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
-            if (form.$valid || isEmptyProductValid) {
+
+            console.log(isEmptyProductValid, "ISEMPTY VALID")
+            if (isEmptyProductValid || form.$valid) {
+              console.log("WE ARENT HERERER")
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
@@ -777,7 +789,7 @@
                   ticket: { id: $scope.ticketDetails.id }
                 };
 
-              if ($scope.ticketUpdate.products && !isEmptyProductValid) {
+              if ($scope.ticketUpdate && $scope.ticketUpdate.products && !isEmptyProductValid) {
 
                 for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
                   $scope.ticketUpdate.products[i].discountType = 'PERCENT';
@@ -785,9 +797,8 @@
 
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
 
-              } else if ($scope.ticketUpdate.services) {
+              } else if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
 
-                console.log($scope.ticketUpdate.services, "SERVICE")
 
                 for(var i=0; i<$scope.ticketUpdate.services.length; i++) {
                   $scope.ticketUpdate.services[i].discountType = 'PERCENT';
@@ -871,7 +882,7 @@
               return true;
             }
 
-            if ($scope.ticketUpdate.selectedDiscount && $scope.currentOpenTab === 'PRODUCT') {
+            if ($scope.ticketUpdate && $scope.ticketUpdate.selectedDiscount && $scope.currentOpenTab === 'PRODUCT') {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
               TicketsService.updateDiscount($scope.ticketDetails.id, $scope.ticketUpdate.selectedDiscount.id, function () {

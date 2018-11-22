@@ -9,14 +9,21 @@
           $scope.pricePattern = /^\d{0,6}(\.\d{0,2})?$/;
 
 
+          if (window.innerWidth <= 414) {
 
-          setTimeout(function() {
+            console.log("SET TIMEOUTTTTT")
+            setTimeout(function() {
 
-            console.log($scope.ticketUpdate.products[0], 'ticket')
-            if (!$scope.productExpense) {
-              $scope.productExpense = $scope.ticketUpdate.products[0];
-            }
-          }, 100);
+              console.log($scope.ticketUpdate.products[0], 'ticket')
+              if (!$scope.productExpense) {
+                $scope.productExpense = $scope.ticketUpdate.products[0];
+              }
+            }, 100);
+          }
+
+
+          console.log($scope.productExpense, "RPODUCT EXPENSEEEEEEEEEE")
+
 
 
           if (window.innerWidth <= 414) {
@@ -28,21 +35,25 @@
             }, true);
           }
 
+          if (window.innerWidth <= 414) {
+            $scope.$watch('productToEdit', function(val) {
+              if (val) {
+                $scope.productExpense = val;
 
-          $scope.$watch('productToEdit', function(val) {
-            if (val) {
-              $scope.productExpense = val;
+                console.log('val before', val)
+                $rootScope.selectedMobileProduct = val;
 
-              console.log('val before', val)
-              $rootScope.selectedMobileProduct = val;
+                console.log($scope.productExpense.item.description, "VALLLL")
+                // $scope.$apply()
+              } else {
+                $scope.productExpense = $scope.ticketUpdate.products[0];
+                $rootScope.selectedMobileProduct = null;
+              }
+            })
+          }
 
-              console.log($scope.productExpense.item.description, "VALLLL")
-              // $scope.$apply()
-            } else {
-              $scope.productExpense = $scope.ticketUpdate.products[0];
-              $rootScope.selectedMobileProduct = null;
-            }
-          })
+
+
 
 
 
