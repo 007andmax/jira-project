@@ -416,7 +416,7 @@
 
           $scope.updateAndCloseTicket = function (form) {
 // <<<<<<< HEAD
-            var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
+            // var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
             // if (hasUnsavedUpdate($scope.ticketUpdate)) {
             //
             //   if (!saveFailed) {
@@ -435,7 +435,7 @@
             if (!form) form = $scope.mobileUpdateForm;
 
             if (hasUnsavedUpdate($scope.ticketUpdate)) {
-              var saveFailed = $scope.saveTicketUpdate(form, true);
+              var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
               if (!saveFailed) {
                 var unwatch = $scope.$watch('isSavingUpdate', function (value) {
                   if (value === false) {
@@ -755,6 +755,7 @@
             if ($scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (typeof el.item.name === 'object') {
+                  // if (el.item && typeof el.item.name === 'object') {
                   // console.log(el, "ELLLLLL")
                   // console.log(el.item.name, "EL>item")
                   el.item = el.item.name;
