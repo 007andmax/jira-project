@@ -754,7 +754,8 @@
 
             if ($scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
-                if (typeof el.item.name === 'object') {
+                if (el.item && typeof el.item.name === 'object') {
+
                   // if (el.item && typeof el.item.name === 'object') {
                   // console.log(el, "ELLLLLL")
                   // console.log(el.item.name, "EL>item")
