@@ -92,6 +92,10 @@
             $scope.ticketDetails = { id: ticketsSharedState.openTicketId };
           }
           //$scope.ticketDetails = { id: $stateParams.ticketId };
+
+          $scope.$watch('ticketDetails', function(val) {
+            console.log('ticketdetails!', val)
+          })
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
 
             $scope.ticketDetails = details;
