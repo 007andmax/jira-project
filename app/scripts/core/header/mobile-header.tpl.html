@@ -41,8 +41,8 @@
     <li  ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
       <a tabindex="-1" href="javascript:void(0)" ng-click="ticketMobileSettings.data.claimTicket()">Claim Ticket</a>
     </li>
-    <li ng-show="false" class="dropdown-submenu left-align">
-      <a tabindex="-1" href="javascript:void(0)">
+    <li class="dropdown-submenu left-align">
+      <a tabindex="-1" href="javascript:void(0)" stop-propagation="click">
         {{ ticketMobileSettings.data.ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...
       </a>
       <div class="dropdown-submenu-wrapper">
@@ -57,9 +57,9 @@
       </div>
     </li>
 
-    <li ng-show="false" class="dropdown-submenu left-align linked-agent-dropdown"
+    <li class="dropdown-submenu left-align linked-agent-dropdown"
         ng-if="!ticketMobileSettings.data.ticketDetails.company.isDefault && ticketMobileSettings.data.agentList && ticketMobileSettings.data.agentList.length && ticketMobileSettings.data.isDeviceToLink(ticketMobileSettings.data.agentList, ticketMobileSettings.data.ticketDetails.agent)">
-      <a tabindex="-1" href="javascript:void(0)">
+      <a tabindex="-1" href="javascript:void(0)" stop-propagation="click">
         {{ ticketMobileSettings.data.ticketDetails.agent && ticketMobileSettings.data.ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}
         Agent
       </a>
