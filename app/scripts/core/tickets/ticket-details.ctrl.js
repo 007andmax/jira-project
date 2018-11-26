@@ -32,6 +32,8 @@
             ticketMobileSettings.data = $scope;
           }, 3000)
 
+          // console.log($scope.usersCurrentCompany, "SCOPESCOPESCOPE");
+
 
           $rootScope.toggleUpdateWindow = function(state) {
             $rootScope.isMobileUpdateShown = state;

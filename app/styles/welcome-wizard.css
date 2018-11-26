@@ -169,7 +169,7 @@
   /* temporary solution */
 
   .ticket-update-service a.edit-update {
-    display: none;
+    /* display: none; */
   }
 
   .x-mark {

@@ -18,9 +18,18 @@
         $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
         $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
 
+        $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
+
 
 
         $scope.ticketMobileSettings = ticketMobileSettings;
+
+
+        // $scope.$watch('ticketMobileSettings', function(val) {
+        //   console.log(val, "DATATATATATATATATATATATATAT")
+        // }, true)
+
+
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
