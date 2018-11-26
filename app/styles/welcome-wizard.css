@@ -167,8 +167,7 @@
   }
 
   /* temporary solution */
-
-  .ticket-update-service i.edit-icon {
+  .ticket-update-service a.edit-update {
     display: none;
   }
 
@@ -1584,6 +1583,10 @@
     font-size: 14px;
   }
 
+  .mob-ticket-buttons button.full {
+    width: 100%;
+  }
+
   .mob-close-ticket-btn {
     color: #16a4fa;
     background-color: #fff;
@@ -2193,6 +2196,28 @@
   .user--content .avatar img {
     width: 96px !important;
     border-radius: 10px;
+  }
+
+  .mobile-top-bar .more-ticket-details .dropdown-submenu-wrapper {
+    position: absolute;
+    right: 36px;
+    top: 63px;
+  }
+
+  .mobile-top-bar .more-ticket-details .dropdown-submenu-wrapper.dropdown-menu {
+    top: 32px;
+  }
+
+  .dropdown-link span p {
+    color: #16a4fa;
+  }
+
+  .user-item:hover, .user-item.hovered {
+    background-color: #16a4fa;
+  }
+
+  .user-item:hover, .user-item.hovered span p {
+    color: #fff;
   }
 }
 
