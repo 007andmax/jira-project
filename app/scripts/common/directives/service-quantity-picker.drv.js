@@ -38,10 +38,10 @@
 
           scope.$watch('quantity', function (val) {
 
-            console.log("VALLLL QUNAITYT", val)
+
             if (!inited || true) {
 
-              console.log("INIT PICKER HEREREREE")
+
               initPicker();
               inited = true;
             }

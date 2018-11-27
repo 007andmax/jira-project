@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
-      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout',
-        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout) {
+      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter',
+        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter) {
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id);
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
@@ -29,10 +29,6 @@
 
           });
 
-          console.log("HEEEEERERERERE")
-          if ($scope.editExpense) {
-            console.log('TICKET EXPENSEEEEEEEE')
-          }
 
           $scope.$watch('ticketUpdate', function(val) {
             if (!$scope.editExpense) {
@@ -88,6 +84,11 @@
                   }
                 }
 
+                if ($scope.serviceToEdit[0].date) {
+                  $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
+
+                }
+
                 toggleDataSelector()
 
 
@@ -129,6 +130,10 @@
 
                 }
 
+                if ($scope.serviceToEdit[0].date) {
+                  $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
+                }
+
                 toggleDataSelector()
 
 
@@ -144,37 +149,8 @@
 
 
           function toggleDataSelector() {
-            var input = document.querySelector('div[data-date-picker] input');
-
-            // console.log(input, 'INPUTTTT')
-            // $scope.hideInputs = true;
-
-            // input.focus();
-
-            // input.parentNode.focus()
-
-
-            // var evt = document.createEvent('MouseEvents')
-            // evt.initMouseEvent('mousedown', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-            //
-            // input.dispatchEvent(evt);
-            // input.dispatchEvent(evt);
-            // input.dispatchEvent(evt);
-            // input.dispatchEvent(evt);
-            // input.dispatchEvent(evt);
-            // input.dispatchEvent(evt);
-            // input.dispatchEvent(evt);
-            input.click()
-
-            // $timeout(function() {
-            //   // $scope.hideInputs = false;
-            //
-            //
-            //
-            //   input.click();
-            //   input.focus();
-            // }, 100)
-
+            // var input = document.querySelector('div[data-date-picker] input');
+            // input.click();
           }
 
 

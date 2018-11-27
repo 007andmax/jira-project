@@ -706,7 +706,15 @@
           $scope.saveUpdateService = function (form, item, callback) {
 
             if (form.$valid) {
-              var editVersionedId = item.item.name.versionedId;
+              var editVersionedId;
+              if (typeof item.item.name === 'object') {
+                editVersionedId = item.item.name.versionedId;
+              } else {
+                editVersionedId = item.item.versionedId;
+              }
+
+
+              console.log(item, 'SSSSSSSSSSSSWWW')
               // console.log(item, "ITEM")
 
               $scope.disabledSave = true;
