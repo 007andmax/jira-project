@@ -1113,9 +1113,11 @@
 
       function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
         var checking = 0;
+        $rootScope.isAgentsRequestSending = true;
         var extendedRespInterval = setInterval(function(){
           if(storage.devices[companyId] && storage.devices[companyId].length) {
             $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+              $rootScope.isAgentsRequestSending = false;
               if(resp) {
 
                 console.log(resp, 'resp resp resp')
