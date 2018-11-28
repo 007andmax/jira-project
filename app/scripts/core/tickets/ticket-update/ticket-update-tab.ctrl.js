@@ -38,7 +38,6 @@
 
           if (window.innerWidth <= 414) {
             $scope.$watch('editExpense', function(val) {
-              console.log(val, "'TICKET EXPENSEEEEEEEE'")
 
 
               $timeout(function() {

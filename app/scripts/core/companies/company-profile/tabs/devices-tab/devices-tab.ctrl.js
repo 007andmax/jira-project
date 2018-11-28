@@ -53,7 +53,6 @@
           })
         }
 
-        console.log($scope.agent, 'AGENT')
 
         $scope.openDevicesDetails = false;
         $scope.showDeviceLabelEditButtom = false;

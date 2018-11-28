@@ -790,9 +790,7 @@
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
-            console.log(isEmptyProductValid, "ISEMPTY VALID")
             if (isEmptyProductValid || form.$valid) {
-              console.log("WE ARENT HERERER")
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 

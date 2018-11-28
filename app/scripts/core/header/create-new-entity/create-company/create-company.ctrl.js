@@ -169,7 +169,6 @@
               }, 50)
 
               setTimeout(function() {
-                console.log('sECOND CHANSE')
 
                 $scope.$apply();
                 $scope.switchCompanyModal(true)

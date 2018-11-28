@@ -181,7 +181,6 @@
 
           function initPicker() {
 
-            console.log("I INIT PICKERERERERER")
             $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
 
               quantityDropdown = angular.element(html);
