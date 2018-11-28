@@ -1120,7 +1120,7 @@
 
                 console.log(resp, 'resp resp resp')
                 for(var i=0; i<storage.devices[companyId].length; i++) {
-                  storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
+                  storage.devices[companyId][i].report = resp.data[companyId][i].report;
                   storage.devices[companyId][i].label = resp.data[companyId][i].label;
                   storage.devices[companyId][i].OneTimeConnectionData = [];
                   storage.devices[companyId][i].iconName = resp.data[companyId][i].iconName
