@@ -2,10 +2,10 @@
 
   <div class="col-md-8">
     <div class="togglers col-md-10">
-      <div class="pointer" ng-click="setView('product')">Product Commissions</div>
-      <div class="pointer" ng-click="setView('service')">Service Commissions</div>
-      <div class="pointer" ng-click="setView('commission')">Contract Commissions</div>
-      <div class="pointer" ng-click="setView('companies')">Companies' Sales Persons</div>
+      <div class="pointer" ng-class="{ active: view === 'product' }" ng-click="setView('product')">Product Commissions</div>
+      <div class="pointer" ng-class="{ active: view === 'service' }" ng-click="setView('service')">Service Commissions</div>
+      <div class="pointer" ng-class="{ active: view === 'commission' }" ng-click="setView('commission')">Contract Commissions</div>
+      <div class="pointer" ng-class="{ active: view === 'companies' }" ng-click="setView('companies')">Companies' Sales Persons</div>
     </div>
 
     <!--<div class="col-md-2" style="padding-top: 25px; padding-bottom: 25px">-->
@@ -196,8 +196,7 @@
         <div>
           <span class="list-company-name">{{ company.name }}</span>
           <span style="display: flex;">
-            {{ location }}
-            824 16th Avenue Southwest Calgary, AB T2R 0S9
+            {{ company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}
           </span>
         </div>
       </div>

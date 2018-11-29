@@ -98,7 +98,7 @@
   font-size: 13px;
 }
 
-.commission-input input.com-edit {
+.commission-input input:focus {
   border-radius: 3px;
   border: solid 1px #c4cbd5;
   background-color: #fff;
