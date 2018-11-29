@@ -78,12 +78,63 @@
 
         $scope.companyCounters = {};
 
+        $scope.salesPerson = '';
+
 
         $scope.$watch(function() {
           return $rootScope.companyCounters
         }, function(val) {
           $scope.companyCounters = val;
         }, true)
+
+        $scope.getFullName = function (client) {
+          if (client) {
+            var isAllSpaces = client.lastName === "    ";
+            if (client.lastName && !isAllSpaces) {
+              return client.firstName + ' ' + client.lastName;
+            } else {
+              return client.firstName;
+            }
+          }
+        };
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.toggleClickedStatus = function(state) {
+          $scope.isSalesPersonClicked = state;
+        }
+
+
+        $scope.activeTechUsers = function() {
+
+          return UsersService.getTechUsers().filter(function(el) {
+            return el.userEnabled && !el.deletedAt;;
+          })
+        }
+
+        $scope.$watch(function() {
+          return $scope.salesPerson
+        }, function(val) {
+
+          if (!val && $scope.isSalesPersonClicked) {
+            $scope.toggleClickedStatus(false);
+            return;
+          }
+          if (val === ' ') return;
+          $scope.companiesSharedState.filter.salesPerson = val;
+        })
 
 
 
@@ -604,7 +655,7 @@
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 
-          
+
           if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
@@ -1051,6 +1102,9 @@
               break;
             case 'byIndustry':
               sharedFilter.industry = value;
+              break;
+            case 'salesPerson':
+              sharedFilter.salesPerson = value;
               break;
             case 'dateRange':
               var endDate = value[1];

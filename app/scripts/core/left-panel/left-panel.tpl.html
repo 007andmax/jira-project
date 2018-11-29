@@ -788,6 +788,31 @@
 
         </div>
         <div class="left-panel-hide-filter">
+
+          <div class="left-panel-title font-medium left-panel-title-hover"
+               ng-click="dropdownBySalesTicketPage = !dropdownBySalesTicketPage">
+            by sales person
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownBySalesTicketPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownBySalesTicketPage">
+            <div class="x-mark-wrapper">
+              <input type="text" class="form-control has-dropdown pointer"
+                     placeholder="Select Sales Person"
+                     typeahead-input-formatter="getUserByID(salesPerson)"
+                     autocomplete="off" ng-model="salesPerson"
+                     ng-click="toggleClickedStatus(true)"
+                     uib-typeahead="company.id as getFullName(company) for company in activeTechUsers() | filter:{'firstName': $viewValue }:stateComparator | orderBy:'name'"
+                     qt-typeahead-async-show-on-focus
+                     no-overflow="true"
+                     name="salesPerson"
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+              <div typeahead-input-icon="salesPerson"></div>
+            </div>
+
+          </div>
+
+
           <div class="left-panel-title font-medium left-panel-title-hover"
                ng-click="dropdownByIndustryCompanyPage = !dropdownByIndustryCompanyPage">
             by industry

@@ -310,6 +310,11 @@
             return filter.companyId === value.id;
           }
 
+          if (filter.salesPerson) {
+            console.log(filter.salesPerson, 'FILTEREEEEEE')
+            return filter.salesPerson === value.techLeadId;
+          }
+
           if (filter.isVendor) {
             result = result && clientType && clientType.toLowerCase() === 'vendor';
           }
