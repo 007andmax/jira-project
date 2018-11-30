@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.bulkOptionCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$uibModal',
-      function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal) {
+    ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$uibModal', '$rootScope',
+      function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal, $rootScope) {
 
         $scope.$watch('companyProfileHeader', function (val) {
 
@@ -37,6 +37,14 @@
         $scope.changeUserRole = function (role) {
           UsersService.changeUsersRoles($scope.selectUsersIds, role);
         };
+
+        $scope.$watch(function() {
+          return $rootScope.isAgentsRequestSending;
+        }, function(val) {
+
+          console.log('we are here********************', val)
+          $scope.isAgentsRequestSending = val;
+        })
 
         $scope.changeUserSubscription = function (subsc) {
           if ($scope.disabledSubscr || (subsc === 'invoice' && $scope.isInvoiceSubscriptionForbidden())) {

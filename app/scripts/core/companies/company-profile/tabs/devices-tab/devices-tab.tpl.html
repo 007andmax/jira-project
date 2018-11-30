@@ -52,6 +52,8 @@
       <div class="col-6">&nbsp;</div>
     </li>
 
+    <div class="loading" style="transform: translateY(-200px)" ng-show="isAgentsRequestSending"></div>
+
     <li ng-repeat="agent in agents | orderBy: orderDevicesBy" ng-controller="quicktech.core.companies.devicesTabCtrl"
         show-model-element="{{ 'showFilteredDevice-' + agent.id }}" on-finish-render="highlightDevice()">
       <div class="col-1">
