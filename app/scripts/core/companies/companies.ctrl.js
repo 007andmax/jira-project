@@ -100,9 +100,7 @@
         })
 
         $scope.openMapModal = function (companyId) {
-          console.log("OPEN MODALLLLLLLL", companyId)
           CompaniesService.getCompanyData($scope, companyId, function(res) {
-            console.log(res, 'RSS')
             // var lat = res.addresses[0].locationLat;
             // var lon = res.addresses[0].locationLng;
             //
@@ -204,7 +202,6 @@
           return $rootScope.agentToDownload;
         }, function (val) {
 
-          console.log(val, 'agent to download')
           if (val) {
             $rootScope.agentToDownload = manually
             $scope.downloadAgent();
@@ -265,7 +262,6 @@
 
         $scope.mobileOpenCompany = function(element) {
           element.parent().toggleClass('opened');
-          console.log('MOBIEEEEEL')
         }
 
         $scope.toggleMobileCompanyFilters = function(state) {
@@ -308,6 +304,11 @@
 
           if (filter.companyId) {
             return filter.companyId === value.id;
+          }
+
+          if (filter.salesPerson) {
+            console.log(filter.salesPerson, 'FILTEREEEEEE')
+            return filter.salesPerson === value.techLeadId;
           }
 
           if (filter.isVendor) {

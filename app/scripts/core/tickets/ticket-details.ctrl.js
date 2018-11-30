@@ -706,7 +706,15 @@
           $scope.saveUpdateService = function (form, item, callback) {
 
             if (form.$valid) {
-              var editVersionedId = item.item.name.versionedId;
+              var editVersionedId;
+              if (typeof item.item.name === 'object') {
+                editVersionedId = item.item.name.versionedId;
+              } else {
+                editVersionedId = item.item.versionedId;
+              }
+
+
+              console.log(item, 'SSSSSSSSSSSSWWW')
               // console.log(item, "ITEM")
 
               $scope.disabledSave = true;
@@ -782,9 +790,7 @@
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
-            console.log(isEmptyProductValid, "ISEMPTY VALID")
             if (isEmptyProductValid || form.$valid) {
-              console.log("WE ARENT HERERER")
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 

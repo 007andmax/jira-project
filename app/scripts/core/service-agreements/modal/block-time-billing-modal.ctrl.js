@@ -141,7 +141,7 @@
               };
 
 
-              console.log(s, "SERVICE")
+              // console.log(s, "SERVICE")
               $scope.defaultServices.push(s);
               $scope.defaultServicesForDropdown.push(s);
             }

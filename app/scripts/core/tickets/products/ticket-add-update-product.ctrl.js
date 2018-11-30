@@ -11,10 +11,8 @@
 
           if (window.innerWidth <= 414) {
 
-            console.log("SET TIMEOUTTTTT")
             setTimeout(function() {
 
-              console.log($scope.ticketUpdate.products[0], 'ticket')
               if (!$scope.productExpense) {
                 $scope.productExpense = $scope.ticketUpdate.products[0];
               }
@@ -22,7 +20,6 @@
           }
 
 
-          console.log($scope.productExpense, "RPODUCT EXPENSEEEEEEEEEE")
 
 
 
@@ -40,10 +37,8 @@
               if (val) {
                 $scope.productExpense = val;
 
-                console.log('val before', val)
                 $rootScope.selectedMobileProduct = val;
 
-                console.log($scope.productExpense.item.description, "VALLLL")
                 // $scope.$apply()
               } else {
                 $scope.productExpense = $scope.ticketUpdate.products[0];

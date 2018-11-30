@@ -43,7 +43,6 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
-        console.log("REINIT ReINIT")
 
         $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
 
@@ -78,12 +77,63 @@
 
         $scope.companyCounters = {};
 
+        $scope.salesPerson = '';
+
 
         $scope.$watch(function() {
           return $rootScope.companyCounters
         }, function(val) {
           $scope.companyCounters = val;
         }, true)
+
+        $scope.getFullName = function (client) {
+          if (client) {
+            var isAllSpaces = client.lastName === "    ";
+            if (client.lastName && !isAllSpaces) {
+              return client.firstName + ' ' + client.lastName;
+            } else {
+              return client.firstName;
+            }
+          }
+        };
+
+        $scope.getUserByID = function(userId) {
+          if(!userId) {
+            return
+          }
+          var user = UsersService.getOneById(userId);
+          if(user) {
+            if(user.lastName === '    ') {
+              return user.firstName
+            } else {
+              return user.firstName+' '+user.lastName;
+            }
+          }
+        };
+
+        $scope.toggleClickedStatus = function(state) {
+          $scope.isSalesPersonClicked = state;
+        }
+
+
+        $scope.activeTechUsers = function() {
+
+          return UsersService.getTechUsers().filter(function(el) {
+            return el.userEnabled && !el.deletedAt;;
+          })
+        }
+
+        $scope.$watch(function() {
+          return $scope.salesPerson
+        }, function(val) {
+
+          if (!val && $scope.isSalesPersonClicked) {
+            $scope.toggleClickedStatus(false);
+            return;
+          }
+          if (val === ' ') return;
+          $scope.companiesSharedState.filter.salesPerson = val;
+        })
 
 
 
@@ -368,7 +418,6 @@
         $rootScope.toggleMobileTicketsFilters = function(state) {
           $rootScope.areMobileTicketsFiltersOpened = state;
 
-          console.log('toggle mobile tickets filter')
         }
 
 
@@ -431,12 +480,10 @@
             return;
           }
 
-          console.log(val, "APPLIED MOTHERFUCKED")
 
           $scope.ticketsSharedState.filter.tags = val;
           ticketsSharedState.filter.tags = val;
 
-          console.log(ticketsSharedState.filter, "FILTERSSS")
 
           if ($state.includes('tickets')) {
             $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
@@ -447,7 +494,6 @@
         $scope.mobileApplyUser = function (value) {
           $scope.techUserModel = getUserIdByUserFullName(value);
 
-          console.log($scope.techUserModel, "DDDDDD")
           $rootScope.selectedIndustryItem = value;
 
         };
@@ -469,10 +515,8 @@
 
         $scope.mobileApplyCompany = function (value) {
 
-          console.log('MOBILE APPLY', value)
           $scope.companyModelObj.companyModel = getCompanyIdByCompanyName(value);
 
-          console.log($scope.companyModel, 'MODELLL')
           // $rootScope.selectedIndustryItem = value;
 
         };
@@ -604,7 +648,7 @@
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 
-          
+
           if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
             ticketsSharedState.filter.inProgress = false;
@@ -625,7 +669,6 @@
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
-                console.log('WE ARE HERE')
                 $scope.stateGo(null, 'tickets', {listType: 'by_company'});
               } else {
                 $scope.stateGo(null, 'tickets', {listType: 'all'});
@@ -740,7 +783,6 @@
         };
 
         $scope.mobileApplyIndustryFilter = function(value) {
-          console.log('mobileApplyIndu')
           $scope.mobileIndustryFilter = value;
           $rootScope.selectedIndustryItem = value;
         }
@@ -760,7 +802,6 @@
 
           $scope.usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
           $scope.userPageCompanyIdFilter =  getCompanyIdByCompanyName(value);
-          console.log(usersSharedState.filter.companyId, "HUEHUEHUE")
         };
 
         $scope.mobileApplyCompanyFilterFromHistoryListUserPage = function (value) {
@@ -1051,6 +1092,9 @@
               break;
             case 'byIndustry':
               sharedFilter.industry = value;
+              break;
+            case 'salesPerson':
+              sharedFilter.salesPerson = value;
               break;
             case 'dateRange':
               var endDate = value[1];

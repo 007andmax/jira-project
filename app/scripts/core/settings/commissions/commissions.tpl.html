@@ -2,10 +2,10 @@
 
   <div class="col-md-8">
     <div class="togglers col-md-10">
-      <div class="pointer" ng-click="setView('product')">Product Commissions</div>
-      <div class="pointer" ng-click="setView('service')">Service Commissions</div>
-      <div class="pointer" ng-click="setView('commission')">Contract Commissions</div>
-      <div class="pointer" ng-click="setView('companies')">Companies' Sales Persons</div>
+      <div class="pointer" ng-class="{ active: view === 'product' }" ng-click="setView('product')">Product Commissions</div>
+      <div class="pointer" ng-class="{ active: view === 'service' }" ng-click="setView('service')">Service Commissions</div>
+      <div class="pointer" ng-class="{ active: view === 'commission' }" ng-click="setView('commission')">Contract Commissions</div>
+      <div class="pointer" ng-class="{ active: view === 'companies' }" ng-click="setView('companies')">Companies' Sales Persons</div>
     </div>
 
     <!--<div class="col-md-2" style="padding-top: 25px; padding-bottom: 25px">-->
@@ -28,7 +28,7 @@
         <div class="col-md-2">
           <!-- <input  type="number" /> -->
 
-          <input type="text" class="form-validation form-control"
+          <input type="text" class="form-validation form-control pointer"
                  ng-model="category.commissionRate"
                  execute-when-outfocused="setCategoryRate(category.id, category.commissionRate, category)"
                  qt-to-fixed="2"
@@ -52,7 +52,7 @@
 
         <div class="col-md-2">
           <!-- <input type="number" /> -->
-          <input type="number" class="form-validation form-control"
+          <input type="text" class="form-validation form-control pointer"
                  ng-model="service.commissionRate"
                  execute-when-outfocused="setServiceRate(service.versionedId.id, service.commissionRate, service)"
                  qt-to-fixed="2"
@@ -70,7 +70,7 @@
 
         <div class="col-md-2">
           <!-- <input type="number" /> -->
-          <input type="number" class="form-validation form-control"
+          <input type="text" class="form-validation form-control pointer"
                  ng-model="service.commissionRate"
                  execute-when-outfocused="setServiceRate(service.id, service.commissionRate, service)" qt-to-fixed="2"
                  hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
@@ -106,7 +106,7 @@
           </div>
 
           <div class="col-md-2">
-            <input type="text" class="form-validation form-control"
+            <input type="text" class="form-validation form-control pointer"
                    ng-model="agreementsCommissions.blockTimeContractCommission"
                    execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTime', 'blockTimeContractCommission')"
                    qt-to-fixed="2"
@@ -119,7 +119,7 @@
           </div>
 
           <div class="col-md-2">
-            <input type="text" class="form-validation form-control"
+            <input type="text" class="form-validation form-control pointer"
                    ng-model="agreementsCommissions.blockTimeContractCommissionExceeding"
                    execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesBlockTimeExceeding', 'blockTimeContractCommissionExceeding')"
                    qt-to-fixed="2"
@@ -144,7 +144,7 @@
           </div>
 
           <div class="col-md-2">
-            <input type="text" class="form-validation form-control"
+            <input type="text" class="form-validation form-control pointer"
                    ng-model="agreementsCommissions.userOrDeviceContractCommission"
                    execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContract', 'userOrDeviceContractCommission')"
                    qt-to-fixed="2"
@@ -157,7 +157,7 @@
           </div>
 
           <div class="col-md-2">
-            <input type="text" class="form-validation form-control"
+            <input type="text" class="form-validation form-control pointer"
                    ng-model="agreementsCommissions.userOrDeviceContractCommissionExceeding"
                    execute-when-outfocused="setAgreementRate('commissionRateSetOldSalesUserOrDeviceContractExceeding', 'userOrDeviceContractCommissionExceeding')"
                    qt-to-fixed="2"
@@ -196,13 +196,64 @@
         <div>
           <span class="list-company-name">{{ company.name }}</span>
           <span style="display: flex;">
-            {{ location }}
-            824 16th Avenue Southwest Calgary, AB T2R 0S9
+            {{ company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode }}
           </span>
         </div>
       </div>
 
-      <div class="col-md-2">
+      <!-- <div class="col-md-2 dropdown-user-parent" uib-dropdown>
+        <input type="text" class="form-control has-dropdown pointer"
+               smart-dropdown-menu-position autocomplete="off"
+               placeholder="Select Tech User"
+               execute-when-outfocused="setTechLeadId(company)"
+               ng-model="company.techLeadId"
+               name="leadBy"
+               typeahead-on-select="userAssigned(ticketAssignTo)"
+               typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+               uib-typeahead="client.id as getFullName(client) for client in activeTechUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+               qt-typeahead-async-show-on-focus ng-required="false"
+               custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+        <div typeahead-input-icon-sm="company.techLeadId"></div>
+        <div class="ng-scope" typeahead-input-icon="userCompany">
+          <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
+            <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
+               tooltip-placement="top"></i>
+        </span>
+          <span class="x-mark ng-hide" ng-hide="showClearIcon">
+            <i class="icn-sm icn-caret-gray"></i>
+          </span>
+        </div>
+      </div> -->
+
+
+
+
+
+      <div uib-dropdown class="create-new" style="box-shadow: none">
+        <span uib-dropdown-toggle class="pointer">{{ getUserByID(company.techLeadId) }}</span>
+        <div class="dropdown-menu dropdown-assign-ticket assign-ticket">
+
+          <div class="assign-ticket-content">
+            <div class="assign-ticket-header" ng-click="$event.stopPropagation()">
+                <div class="clearfix">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Search Users" ng-model="filterTechUsers">
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-pane" style="background: white; margin-top: 79px">
+              <div class="users-list custom-scroll">
+                <div class="user-item" ng-repeat="client in activeTechUsers()" ng-show="getFullName(client).includes(filterTechUsers)">
+                  <a class="dropdown-link" style="color: #4f5f79" ng-click="company.techLeadId = client.id; setTechLeadId(company)">{{ getFullName(client) }}</a>
+                </div>
+              </div>
+
+
+            </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-2">
         <div class="form-group">
           <input style="padding-right: 30px;text-align: right;font-weight: 500;"
                  type="text" class="form-control has-dropdown pointer"
@@ -216,7 +267,11 @@
                  execute-when-outfocused="setTechLeadId(company)">
           <div typeahead-input-icon="company.techLeadId"></div>
         </div>
-      </div>
+      </div> -->
+
+
+
+
 
     </div>
 

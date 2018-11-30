@@ -52,7 +52,6 @@
           modal.classList.remove('xl');
           $scope.longCreateCompany = false;
 
-          console.log('BAAAACKKK')
 
 
           if (delay) {

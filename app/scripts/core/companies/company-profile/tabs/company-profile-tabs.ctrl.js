@@ -97,6 +97,8 @@
             // });
             $scope.agents = resp;
 
+            console.log($scope.agents, "AGENTS")
+
             var devicesIds = [];
             $scope.agents.forEach(function (device) {
               devicesIds.push(device.id);
