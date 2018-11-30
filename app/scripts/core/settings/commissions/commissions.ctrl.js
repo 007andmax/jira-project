@@ -15,12 +15,15 @@
           commissionRateSetOldSalesUserOrDeviceContractExceeding: false
         }
 
+        $scope.filterTechUsers = '';
+
 
         $scope.view = 'product';
 
         $scope.setView = function(view) {
           $scope.view = view;
         }
+
 
         $scope.getFullName = function (client) {
           if (client) {
@@ -47,6 +50,7 @@
           }
         };
 
+
         $scope.setTechLeadId = function(company) {
 
 
@@ -58,7 +62,7 @@
 
 
           return UsersService.getTechUsers().filter(function(el) {
-            return el.userEnabled && !el.deletedAt;
+            return el.userEnabled && !el.deletedAt && (el.firstName+' '+el.lastName).includes($scope.filterTechUsers);
           })
         }
 
