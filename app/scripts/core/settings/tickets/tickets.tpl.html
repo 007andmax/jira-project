@@ -87,6 +87,32 @@
         </div>
       </div>
 
+      <h3>Reference Date</h3>
+
+      <div class="template-form-wrapper">
+
+        <div class="form-row clearfix">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+
+              <input type="text" class="form-control has-dropdown pointer" placeholder="Date"
+                     qt-data-time-picker max-date="maxServiceDate" ng-model="referenceDate"
+                     name="referenceDate" ng-required="true" uib-tooltip="select date">
+              <div>
+                <i class="report-calendar"></i>
+              </div>
+
+          </div>
+
+
+          <div class="form-group">
+            <button class="btn phone-btn btn-icn btn-primary has-tooltip" ng-click="resetReferenceDate()">Reset date</button>
+          </div>
+
+        </div>
+
+
+      </div>
+
 
       <h3>Tax Number</h3>
       <div class="template-form-wrapper">

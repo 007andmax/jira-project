@@ -254,6 +254,28 @@
 
     }
 
+
+    function resetReferenceDate(callback) {
+      $http.post('/settings/companyProfile/accountingStartDate/reset')
+        .then(function(res) {
+          if (callback) callback(res)
+        })
+    }
+
+    function getReferenceDate(callback) {
+      $http.get('/settings/companyProfile/accountingStartDate')
+        .then(function(res) {
+          if (callback) callback(res);
+        })
+    }
+
+    function setReferenceDate(date, callback) {
+      $http.post('/settings/companyProfile/accountingStartDate', date)
+        .then(function(res) {
+          if (callback) callback(res)
+        })
+    }
+
     function setTechLead(companyId, techLeadId, callback) {
       if (!companyId || !techLeadId) return;
       $http.put('/company/' + companyId +  '/setTechLead/' + techLeadId).
@@ -1011,7 +1033,10 @@
       setCategoryRate: setCategoryRate,
       setAgreementsRate: setAgreementsRate,
       getAgreementsRates: getAgreementsRates,
-      setTechLead: setTechLead
+      setTechLead: setTechLead,
+      getReferenceDate: getReferenceDate,
+      setReferenceDate: setReferenceDate,
+      resetReferenceDate: resetReferenceDate
     }
 
   }]);
