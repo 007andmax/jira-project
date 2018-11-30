@@ -112,6 +112,8 @@
         };
 
         $scope.toggleClickedStatus = function(state) {
+
+
           $scope.isSalesPersonClicked = state;
         }
 
@@ -127,12 +129,26 @@
           return $scope.salesPerson
         }, function(val) {
 
-          if (!val && $scope.isSalesPersonClicked) {
-            $scope.toggleClickedStatus(false);
-            return;
-          }
-          if (val === ' ') return;
-          $scope.companiesSharedState.filter.salesPerson = val;
+
+
+          $timeout(function() {
+            if (!val && $scope.isSalesPersonClicked) {
+              $scope.toggleClickedStatus(false);
+              return;
+            }
+            if (val === ' ') return;
+            $scope.companiesSharedState.filter.salesPerson = val;
+
+            if (val && $scope.checkSalesValueMatched(val)) {
+
+              console.log('I SET THE VALUE', $scope.getUserByID(val))
+              sendNewFilterToStorage("companiesPageFilterBySalesHistory", $scope.salesFilterHistoryCompaniesPage, $scope.getUserByID(val))
+            }
+
+
+
+          }, 100)
+
         })
 
 
@@ -229,6 +245,13 @@
         CustomStorageService.getUserCustomStorageValue('companiesPageFilterByIndustryHistory', function (resp) {
           $scope.industryFilterHistoryCompaniesPage = resp;
         });
+
+
+
+        CustomStorageService.getUserCustomStorageValue('companiesPageFilterBySalesHistory', function (resp) {
+          $scope.salesFilterHistoryCompaniesPage = resp;
+        });
+
 
         CustomStorageService.getUserCustomStorageValue('userPageFilterByIndustryHistory', function (resp) {
           $scope.industriesFilterHistoryUserPage = resp;
@@ -689,6 +712,17 @@
           }
         };
 
+
+        $scope.checkSalesValueMatched = function(inputValue) {
+          if (inputValue) {
+            return $scope.activeTechUsers().some(function(item) {
+              return item.id === inputValue;
+            })
+          } else {
+            return false;
+          }
+        }
+
         $scope.checkClientValueMatched = function (inputValue) {
           if (inputValue) {
             return $scope.clientsUsersByCompany.some(function (item) {
@@ -779,6 +813,17 @@
 
         $scope.applyIndustryFilterFromHistoryListCompanyPage = function (value) {
           companiesSharedState.filter.industry = value;
+
+        };
+
+        $scope.applySalesFilterFromHistoryListCompanyPage = function (value) {
+          var user = $scope.activeTechUsers().find(function(el) {
+            return el.firstName + ' ' + el.lastName === value;
+          })
+
+          console.log(user);
+          console.log('SSSSS')
+          $scope.salesPerson = user.id;
 
         };
 

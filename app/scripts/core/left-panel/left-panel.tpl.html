@@ -810,6 +810,13 @@
               <div typeahead-input-icon="salesPerson"></div>
             </div>
 
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in salesFilterHistoryCompaniesPage track by $index"
+                 ng-click="applySalesFilterFromHistoryListCompanyPage(item)">{{item}}</p>
+
+            </div>
+
           </div>
 
 
