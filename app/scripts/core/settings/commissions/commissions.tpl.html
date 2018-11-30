@@ -2,10 +2,16 @@
 
   <div class="col-md-8">
     <div class="togglers col-md-10">
-      <div class="pointer" ng-class="{ active: view === 'product' }" ng-click="setView('product')">Product Commissions</div>
-      <div class="pointer" ng-class="{ active: view === 'service' }" ng-click="setView('service')">Service Commissions</div>
-      <div class="pointer" ng-class="{ active: view === 'commission' }" ng-click="setView('commission')">Contract Commissions</div>
-      <div class="pointer" ng-class="{ active: view === 'companies' }" ng-click="setView('companies')">Companies' Sales Persons</div>
+      <div class="pointer" ng-class="{ active: view === 'product' }" ng-click="setView('product')">Product Commissions
+      </div>
+      <div class="pointer" ng-class="{ active: view === 'service' }" ng-click="setView('service')">Service Commissions
+      </div>
+      <div class="pointer" ng-class="{ active: view === 'commission' }" ng-click="setView('commission')">Contract
+                                                                                                         Commissions
+      </div>
+      <div class="pointer" ng-class="{ active: view === 'companies' }" ng-click="setView('companies')">Companies' Sales
+                                                                                                       Persons
+      </div>
     </div>
 
     <!--<div class="col-md-2" style="padding-top: 25px; padding-bottom: 25px">-->
@@ -226,54 +232,54 @@
       </div> -->
 
 
-
-
-
-      <div uib-dropdown class="create-new" style="box-shadow: none">
-        <span uib-dropdown-toggle class="pointer">{{ getUserByID(company.techLeadId) }}</span>
-        <div class="dropdown-menu dropdown-assign-ticket assign-ticket">
+      <div uib-dropdown class="create-new col-md-2" style="box-shadow: none">
+        <div uib-dropdown-toggle
+             class="pointer text-right valentin">
+          {{ getUserByID(company.techLeadId) }}
+        </div>
+        <div style="right: 0;" class="dropdown-menu dropdown-assign-ticket assign-ticket">
 
           <div class="assign-ticket-content">
             <div class="assign-ticket-header" ng-click="$event.stopPropagation()">
-                <div class="clearfix">
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Search Users" ng-model="filterTechUsers">
-                    </div>
+              <div class="clearfix">
+                <div class="form-group">
+                  <input class="form-control" placeholder="Search Tech Person" ng-model="filterTechUsers">
                 </div>
+              </div>
             </div>
             <div class="scroll-pane" style="background: white; margin-top: 79px">
               <div class="users-list custom-scroll">
-                <div class="user-item" ng-repeat="client in activeTechUsers()" ng-show="getFullName(client).includes(filterTechUsers)">
-                  <a class="dropdown-link" style="color: #4f5f79" ng-click="company.techLeadId = client.id; setTechLeadId(company)">{{ getFullName(client) }}</a>
+                <div class="user-item" ng-repeat="client in activeTechUsers()"
+                     ng-show="getFullName(client).includes(filterTechUsers)">
+                  <a class="dropdown-link" ng-click="company.techLeadId = client.id; setTechLeadId(company)">{{
+                                                                                                             getFullName(client)
+                                                                                                             }}</a>
                 </div>
               </div>
 
 
             </div>
+          </div>
         </div>
+
+        <!-- <div class="col-md-2">
+          <div class="form-group">
+            <input style="padding-right: 30px;text-align: right;font-weight: 500;"
+                   type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select Tech User"
+                   name="leadBy"
+                   typeahead-input-formatter="getUserByID($model)"
+                   autocomplete="off" ng-model="company.techLeadId"
+                   uib-typeahead="client.id as getFullName(client) for client in activeTechUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
+                   qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                   execute-when-outfocused="setTechLeadId(company)">
+            <div typeahead-input-icon="company.techLeadId"></div>
+          </div>
+        </div> -->
+
+
       </div>
 
-      <!-- <div class="col-md-2">
-        <div class="form-group">
-          <input style="padding-right: 30px;text-align: right;font-weight: 500;"
-                 type="text" class="form-control has-dropdown pointer"
-                 placeholder="Select Tech User"
-                 name="leadBy"
-                 typeahead-input-formatter="getUserByID($model)"
-                 autocomplete="off" ng-model="company.techLeadId"
-                 uib-typeahead="client.id as getFullName(client) for client in activeTechUsers() | filter: $viewValue:stateComparator | orderBy:'toString()'"
-                 qt-typeahead-async-show-on-focus smart-dropdown-menu-position
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                 execute-when-outfocused="setTechLeadId(company)">
-          <div typeahead-input-icon="company.techLeadId"></div>
-        </div>
-      </div> -->
-
-
-
-
-
     </div>
-
   </div>
-</div>
