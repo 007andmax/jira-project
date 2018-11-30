@@ -189,6 +189,62 @@
   width: 80px;
 }
 
+.commissions-settings .assign-ticket-header input {
+  font-weight: 500;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.valentin {
+  font-family: 'Graphik Regular', sans-serif;
+  color: #364656;
+  font-weight: 500;
+  position: relative;
+  padding-right: 20px;
+}
+
+.valentin:after {
+  position: absolute;
+  content: '';
+  width: 10px;
+  height: 6px;
+  background: url(../images/new-icons/report-caret.png);
+  right: 0;
+  top: 8px;
+}
+
+.commissions-settings .create-new .dropdown-assign-ticket {
+  width: 220px !important;
+  max-height: 265px;
+}
+
+.commissions-settings .create-new .dropdown-assign-ticket .assign-ticket-header {
+  padding: 12px;
+  width: 100%;
+}
+
+.commissions-settings .create-new .dropdown-assign-ticket .scroll-pane {
+  margin-top: 63px !important;
+}
+
+.commissions-settings .create-new .dropdown-assign-ticket .users-list .user-item a {
+  padding: 8px 20px;
+}
+
+.commissions-settings .create-new .dropdown-assign-ticket .users-list {
+  max-height: 100%;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item a {
+  transition: all .3s;
+  color: #4f5f79;
+  font-family: "Graphik Medium", sans-serif;
+  font-weight: 500;
+}
+
+.create-new .dropdown-assign-ticket .users-list .user-item:hover a {
+  color: #fff;
+}
+
 .custom-phone-type {
   padding-right: 0;
 }
