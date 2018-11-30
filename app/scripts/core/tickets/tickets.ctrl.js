@@ -123,7 +123,6 @@
         // });
 
         $scope.getFullName = function (client) {
-          console.log(client, 'GETFULLNAME')
           var isAllSpaces = client.lastName === "    ";
           if (client.lastName && !isAllSpaces) {
             return client.firstName + ' ' + client.lastName;

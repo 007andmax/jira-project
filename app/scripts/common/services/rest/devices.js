@@ -1118,7 +1118,6 @@
             $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
               if(resp) {
 
-                console.log(resp, 'resp resp resp')
                 for(var i=0; i<storage.devices[companyId].length; i++) {
                   storage.devices[companyId][i].report = resp.data[companyId][i].report[0];
                   storage.devices[companyId][i].label = resp.data[companyId][i].label;

@@ -281,11 +281,9 @@
         $scope.isReportAvailable = false;
 
         ReportsService.getReportByCommissions(data, function(res) {
-          console.log(res, 'RES GET REPORT')
 
           $scope.isReportAvailable = res.lines && res.lines.length;
 
-          console.log(res, res.lines && res.lines.length, "DASDASDASD")
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
           $scope.showCategoriesData = true
@@ -351,7 +349,6 @@
             })
 
 
-          console.log($scope.byCustomerChartData, "REPOT");
 
         })
 
@@ -458,7 +455,6 @@
             $scope.reducedData = reducedData;
             $scope.reducedCompanies = Object.keys(reducedData);
 
-            console.log(reducedData, 'REDUCED DATA')
           }
 
 
@@ -472,7 +468,6 @@
       }
 
       function normalizeString(str) {
-        console.log(typeof str, "STR")
 
         if (!str) return str;
         str = str.split('_');

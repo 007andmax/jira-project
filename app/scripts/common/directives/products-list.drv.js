@@ -13,7 +13,6 @@
           var productInput = element.find('[pl-product-input]');
           var searchProductInput = element.find('[pl-search-product-input]');
 
-          console.log(productInput, "PRODUCCCCCCCT")
 
           if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].item) {
             productInput.val(scope[attrs.productsList].item.description);
@@ -32,7 +31,6 @@
           scope.$watch(function() {
             return $rootScope.selectedMobileProduct
           }, function(val) {
-            console.log("SELECTED *****", val);
 
             if (val) {
               scope.chooseProductItem(val.item, true)

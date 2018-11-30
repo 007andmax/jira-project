@@ -16,7 +16,6 @@
         };
 
         this.show = function (message, button, approveFn, rejectFn, closeFn) {
-          console.log('showowowwo')
           modalParams.controller = (['$scope', '$uibModalInstance',
             function ($scope, $uibModalInstance) {
 

@@ -17,7 +17,6 @@
 
 
 
-          console.log($scope.editProduct, 'EDIT PRODUCT MOTH')
 
 
           $scope.loadProductByCategory = function (categoryId) {

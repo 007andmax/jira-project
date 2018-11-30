@@ -29,7 +29,6 @@
           $scope.addProduct = function () {
             $scope.ticketUpdate.products.push({ item: {} });
 
-            console.log('add productTTTTT', $scope.ticketUpdate.products)
           };
 
           $scope.$watch('ticketUpdate', function () {

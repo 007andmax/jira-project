@@ -48,19 +48,15 @@
         };
 
         $scope.setTechLeadId = function(company) {
-          console.log(company, 'copany')
 
 
           CompaniesService.setTechLead(company.id, company.techLeadId, function(res) {
-            console.log(res)
           })
         }
 
         $scope.activeTechUsers = function() {
 
-          console.log('techUsers', UsersService.getTechUsers().filter(function(el) {
-            return el.userEnabled && !el.deletedAt;
-          }))
+
           return UsersService.getTechUsers().filter(function(el) {
             return el.userEnabled && !el.deletedAt;
           })
@@ -136,12 +132,10 @@
               NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setCategoryRate(id, data, function(res) {
-                  console.log(res, 'Set category rate');
                   category.oldCommissionRate = rate;
                 })
               }, function() {
                 CompaniesService.setCategoryRate(id, data, function(res) {
-                  console.log(res, 'Set category rate');
                   category.oldCommissionRate = rate;
                 })
               }, function() {
@@ -153,7 +147,6 @@
               })
             } else {
               CompaniesService.setCategoryRate(id, data, function(res) {
-                console.log(res, 'Set category rate')
               })
             }
 
@@ -172,17 +165,14 @@
             if (service.oldCommissionRate === null) {
 
 
-              console.log($rootScope.justBlurredElement, 'BLURRED')
 
               NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setServiceRate(id, data, function(res) {
-                  console.log(res, 'Set service rate');
                   service.oldCommissionRate = rate;
                 })
               }, function() {
                 CompaniesService.setServiceRate(id, data, function(res) {
-                  console.log(res, 'Set service rate');
                   service.oldCommissionRate = rate;
                 })
               }, function() {
@@ -203,7 +193,6 @@
               })
             } else {
               CompaniesService.setServiceRate(id, data, function(res) {
-                console.log(res, 'Set service rate')
               })
             }
           }
@@ -220,18 +209,15 @@
             if (service.oldCommissionRate === null) {
 
 
-              console.log($rootScope.justBlurredElement, 'BLURRED')
 
               $rootScope.justBlurredElement[0].focus();
               NewConfirmationsService.show(confirmMessage, confirmButton, function () {
                 data.setForOldExpenses = true;
                 CompaniesService.setServiceRate(id, data, function(res) {
-                  console.log(res, 'Set service rate');
                   service.oldCommissionRate = rate;
                 })
               }, function() {
                 CompaniesService.setServiceRate(id, data, function(res) {
-                  console.log(res, 'Set service rate');
                   service.oldCommissionRate = rate;
                 })
               }, function() {
@@ -252,7 +238,6 @@
               })
             } else {
               CompaniesService.setServiceRate(id, data, function(res) {
-                console.log(res, 'Set service rate')
               })
             }
           }
