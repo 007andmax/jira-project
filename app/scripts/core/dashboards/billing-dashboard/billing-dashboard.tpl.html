@@ -46,6 +46,12 @@
                 <div class="stats__main--count font-green">
                   <p>${{ dashboard.totalSales || 0 }}</p>
                 </div>
+
+                <div style="display: flex; justify-content: center; align-items: center;">
+                  <span style="margin: 0 5px;">{{ referenceDate }}</span>
+
+                  <button style="height: 28px; line-height: 1" class="btn phone-btn btn-icn btn-primary has-tooltip" ng-click="openSettings()">Settings</button>
+                </div>
               </div>
               <div class="stats__icon bg-green">
                 <img src="images/new-icons/USD-circle-white.png" alt="">

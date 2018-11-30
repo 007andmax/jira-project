@@ -26,7 +26,8 @@
       activePlaceholder: '<activePlaceholder',
       noForm: '<qtValid',
       customPlaceholder: '<customPlaceholder',
-      byIndustry: '<byIndustry'
+      byIndustry: '<byIndustry',
+      noOverflow: '<noOverflow'
     },
     controller: qtDropdownTypeheadCtrl
   });
