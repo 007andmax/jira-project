@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.dashboards').controller('quicktech.core.dashboards.billingDashboardCtrl',
-    ['$scope', '$timeout',
-      function ($scope, $timeout) {
+    ['$scope', '$timeout', 'CompaniesService', '$filter', '$state',
+      function ($scope, $timeout, CompaniesService, $filter, $state) {
         $scope.chartTooltips = {
           totalSales: 'Shows an amount of money that has already been received from invoices\n during a selected period (includes taxes).',
           totalReceivables: 'Shows an amount of money that has been sent to clients as invoices\n and are waiting to be received during a selected period (includes taxes).',
@@ -15,6 +15,30 @@
         $scope.frequency = 'WEEKLY';
         $scope.selectedChart = 'totalSales';
         $scope.dateFormat = '%d %b';
+
+
+        CompaniesService.getReferenceDate(function(val) {
+          $scope.referenceDate = $filter('date')(new Date(val.data.accountingStartDate), 'dd MMM yyyy');
+        })
+
+        $scope.openSettings = function() {
+          $scope.stateGo(null, 'settings.tickets')
+        }
+
+        $scope.stateGo = function (event, state, stateParams, isTag) {
+          if (isTag) {
+            $scope.isOnHoldTag = true;
+          } else {
+            $scope.isOnHoldTag = false;
+          }
+          if (event && event.button > 0) {
+            var url = $state.href(state, stateParams, {absolute: true});
+            window.open(url, '_blank');
+          } else {
+            $state.go(state, stateParams);
+          }
+
+        };
 
         $scope.handleDashboardData = function (data) {
           $scope.dashboard = {
