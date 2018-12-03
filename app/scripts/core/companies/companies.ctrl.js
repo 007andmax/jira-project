@@ -307,8 +307,7 @@
           }
 
           if (filter.salesPerson) {
-            console.log(filter.salesPerson, 'FILTEREEEEEE')
-            return filter.salesPerson === value.techLeadId;
+            result = result && filter.salesPerson === value.techLeadId;
           }
 
           if (filter.isVendor) {
