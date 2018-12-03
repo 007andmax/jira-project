@@ -44,7 +44,7 @@
                   Total sales
                 </p>
                 <div class="stats__main--count font-green">
-                  <p>${{ dashboard.totalSales || 0 }}</p>
+                  <p>${{ dashboard.totalSales || 0 | priceDelimiters }}</p>
                 </div>
 
                 <div style="display: flex; justify-content: center; align-items: center;">
@@ -67,7 +67,7 @@
                   Unbilled tickets
                 </p>
                 <div class="stats__main--count font-red">
-                  <p>${{ dashboard.totalBillable || 0 }}</p>
+                  <p>${{ dashboard.totalBillable || 0 | priceDelimiters }}</p>
                 </div>
               </div>
               <div class="stats__icon bg-red">
@@ -84,7 +84,7 @@
                   Received payments
                 </p>
                 <div class="stats__main--count font-yellow">
-                  <p>${{ dashboard.totalReceivable || 0 }}</p>
+                  <p>${{ dashboard.totalReceivable || 0 | priceDelimiters }}</p>
                 </div>
 
               </div>
@@ -102,9 +102,9 @@
                   Receivables
                 </p>
                 <div class="stats__main--count font-yellow">
-                  <p>${{ dashboard.totalReceivableUnpaid || 0 }}</p>
+                  <p>${{ dashboard.totalReceivableUnpaid || 0 | priceDelimiters }}</p>
                 </div>
-                <p class="overdue-receivables">Overdue &nbsp; <span class="font-yellow">${{ dashboard.totalOverDue || 0 }}</span></p>
+                <p class="overdue-receivables">Overdue &nbsp; <span class="font-yellow">${{ dashboard.totalOverDue || 0 | priceDelimiters }}</span></p>
               </div>
               <div class="stats__icon bg-red" style="background-color:#ffb937">
                 <img src="images/new-icons/warning-circle-white.png" alt="">

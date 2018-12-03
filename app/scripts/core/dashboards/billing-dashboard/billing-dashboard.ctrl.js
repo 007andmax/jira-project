@@ -72,7 +72,9 @@
             case 'totalBillable':
               return 'Unbilled tickets';
             case 'totalReceivable':
-              return 'Total receivables';
+              return 'Total received payments';
+            case 'totalReceivableUnpaid':
+              return 'Total receivables'
           }
         };
 
