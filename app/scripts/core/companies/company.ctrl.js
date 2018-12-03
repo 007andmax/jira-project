@@ -23,10 +23,16 @@
               primaryPhone;
 
             if ($scope.company.companyInfo) {
-              for (var i = 0; i < $scope.company.companyInfo.contacts.length; i++) {
-                if (!primaryContact || $scope.company.companyInfo.contacts[i].priority > primaryContact.priority)
-                  primaryContact = $scope.company.companyInfo.contacts[i];
+
+              console.log($scope.company.companyInfo, "COMPANY INFO");
+
+              if ($scope.company.companyInfo.contacts) {
+                for (var i = 0; i < $scope.company.companyInfo.contacts.length; i++) {
+                  if (!primaryContact || $scope.company.companyInfo.contacts[i].priority > primaryContact.priority)
+                    primaryContact = $scope.company.companyInfo.contacts[i];
+                }
               }
+
 
               for (var i = 0; i < $scope.company.companyInfo.addresses.length; i++) {
                 if ($scope.company.companyInfo.addresses[i].isPrimary) {
