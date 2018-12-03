@@ -24,7 +24,6 @@
 
             if ($scope.company.companyInfo) {
 
-              console.log($scope.company.companyInfo, "COMPANY INFO");
 
               if ($scope.company.companyInfo.contacts) {
                 for (var i = 0; i < $scope.company.companyInfo.contacts.length; i++) {

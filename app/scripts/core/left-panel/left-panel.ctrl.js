@@ -375,6 +375,8 @@
               $scope.PasswordFiltersDyDevice = JSON.parse(resp.value);
             } else if (recentArray === $scope.PasswordFiltersDyUser) {
               $scope.PasswordFiltersDyUser = JSON.parse(resp.value);
+            } else if (recentArray === $scope.salesFilterHistoryCompaniesPage) {
+              $scope.salesFilterHistoryCompaniesPage = JSON.parse(resp.value);
             }
           })
         }
