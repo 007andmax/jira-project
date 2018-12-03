@@ -141,7 +141,6 @@
 
             if (val && $scope.checkSalesValueMatched(val)) {
 
-              console.log('I SET THE VALUE', $scope.getUserByID(val))
               sendNewFilterToStorage("companiesPageFilterBySalesHistory", $scope.salesFilterHistoryCompaniesPage, $scope.getUserByID(val))
             }
 

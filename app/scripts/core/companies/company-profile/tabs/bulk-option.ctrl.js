@@ -42,7 +42,6 @@
           return $rootScope.isAgentsRequestSending;
         }, function(val) {
 
-          console.log('we are here********************', val)
           $scope.isAgentsRequestSending = val;
         })
 

@@ -96,7 +96,6 @@
           //$scope.ticketDetails = { id: $stateParams.ticketId };
 
           $scope.$watch('ticketDetails', function(val) {
-            console.log('ticketdetails!', val)
           })
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
 
@@ -417,7 +416,6 @@
           }
 
           $scope.$watch('ticketUpdate.products[1]', function(val) {
-            console.log(val, 'PRODUCT *** PRODUCT')
           })
 
           $scope.updateAndCloseTicket = function (form) {
@@ -437,7 +435,6 @@
             //   closeTicket()
             // }
 
-            console.log($scope.mobileUpdateForm, 'MOBILE UPDATEFORM')
             if (!form) form = $scope.mobileUpdateForm;
             var saveFailed = $scope.saveTicketUpdate({$valid: true}, true, closeTicket, null, null, true);
 // =======
@@ -714,7 +711,6 @@
               }
 
 
-              console.log(item, 'SSSSSSSSSSSSWWW')
               // console.log(item, "ITEM")
 
               $scope.disabledSave = true;
@@ -750,7 +746,6 @@
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             // console.log('WTF')
             if (isExpenseEdit) {
-              console.log(isExpenseEdit, 'ISEXPENSEEIDT');
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
 
@@ -758,7 +753,6 @@
               } else if (isExpenseEdit.product) {
                 $scope.saveUpdateProduct($scope.editForms.editProductForm, isExpenseEdit.product, callback);
               } else if (isExpenseEdit.service) {
-                console.log(isExpenseEdit.service, 'EXPENSE EDIT')
 
                 $scope.saveUpdateService($scope.editForms.editServiceForm, isExpenseEdit.service, callback);
               }

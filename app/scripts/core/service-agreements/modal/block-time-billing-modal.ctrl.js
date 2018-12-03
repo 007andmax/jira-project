@@ -965,7 +965,6 @@
                 commissionRate: $scope.blockTimeContract.services[m].commissionRate
               };
 
-              console.log(cs, $scope.blockTimeContract.services[m], 'before SENDING')
               if($scope.blockTimeContract.services[m].billable) {
                 cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
                 if ($scope.blockTimeContract.services[m].taxes.length) {

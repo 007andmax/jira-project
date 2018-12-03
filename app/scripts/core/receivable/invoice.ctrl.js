@@ -75,7 +75,6 @@
 
         $scope.markAsRead = function(invoice){
           ReceivableService.markAsRead(invoice.id, function(resp){
-            console.log(resp);
           })
         };
 

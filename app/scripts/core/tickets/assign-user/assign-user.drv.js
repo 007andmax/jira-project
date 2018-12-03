@@ -10,7 +10,6 @@
         link: function ($scope, element, attrs) {
 
 
-          console.log($rootScope.usersToNotify, 'ASDSD')
           var users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
           var getUserAvatarUrl = $rootScope.getUserAvatarUrl;
 

@@ -112,7 +112,6 @@
 
         $scope.changeTaxIdData = function() {
           EmailSettingsService.updateTaxNumber($scope.taxIdData, function(resp) {
-            console.log(resp);
           })
 
           BillableService.updateInvoiceData({ taxId: $scope.taxIdData.taxId }, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)

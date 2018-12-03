@@ -10,7 +10,6 @@
 
         CompaniesService.getReferenceDate(function(val) {
 
-          console.log(val.data.accountingStartDate, val, "REFERENCE DATE SET")
           // $scope.referenceDate = moment(val.data.accountingStartDate).format('dd MMM yyyy');
           $scope.referenceDate = $filter('date')(new Date(val.data.accountingStartDate), 'dd MMM yyyy');
           // $scope.referenceDate = new Date(val.data.accountingStartDate).toISOString();
@@ -38,7 +37,6 @@
         };
 
         $scope.$watch('referenceDate', function(val) {
-          console.log(val, 'reference')
 
 
 

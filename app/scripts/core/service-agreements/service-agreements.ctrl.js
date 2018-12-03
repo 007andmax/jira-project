@@ -371,7 +371,6 @@
 
 
       $scope.pullServiceRate = function(service) {
-        console.log(service, 'service');
         var counter = 0;
 
         pull()
@@ -516,7 +515,6 @@
             validateNewServiceName(editService).then(function (resp) {
               if (resp) {
 
-                console.log(editService, 'EDITEDIT')
 
                 if (editService.name.name) {
                   var newService = {
@@ -756,7 +754,6 @@
       function createHourlyContract() {
         var servicesWithTaxIds = [];
         for (var i = 0; i < $scope.editContract.services.length; i++) {
-          console.log($scope.editContract.services[i], "SERVICE")
           var correctService = {
             name: $scope.editContract.services[i].name,
             rate: 0,
@@ -800,9 +797,7 @@
         ed.setMilliseconds(0);
         companyContractInfo.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
-        console.log(companyContractInfo);
         AgreementsService.createContract(companyContractInfo, false, function (resp) {
-          console.log(resp);
           if (resp.message === 'Validation failed') {
             $scope.showErrorInHourlyContract = true;
             if (resp.validationResults && resp.validationResults.serviceAgreementDto) {

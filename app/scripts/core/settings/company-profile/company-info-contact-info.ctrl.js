@@ -59,7 +59,6 @@
         $scope.$watch(function() {
           return $rootScope.updateTech;
         }, function(val) {
-          console.log('updatedTECH')
           if (val) {
             $scope.saveContactInfo(val);
           }
