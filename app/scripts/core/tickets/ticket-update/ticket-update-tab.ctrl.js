@@ -6,9 +6,21 @@
       ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter',
         function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter) {
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id);
+
+
+          console.log($scope.serviceList, 'SERVICE LIST')
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
+
+          console.log($scope.serviceList)
+
+
+          ServicesService.getServicesData($scope, function(res) {
+            console.log(res, "REST REST")
+
+            $scope.serviceList = res;
+          })
 
           AgreementsService.getAllServiceAgreements($scope, function (data) {
             $scope.areTickets = data.length;
@@ -16,6 +28,8 @@
             var data = data.filter(function(el) {
               return el.company.id === $scope.ticketDetails.company.id;
             })
+
+            console.log(data, "DATA huyata")
 
             if (!data.length) {
               $scope.areTicketsPresented = false;
