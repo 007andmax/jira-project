@@ -41,7 +41,7 @@
             if (!data.length) {
               $scope.areTicketsPresented = false;
 
-              $scope.serviceList.filter(function(el) {
+              $scope.serviceList = $scope.serviceList.filter(function(el) {
                 return el.canUseInTicket;
               });
             } else {
