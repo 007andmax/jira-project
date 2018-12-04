@@ -19,7 +19,9 @@
           ServicesService.getServicesData($scope, function(res) {
             console.log(res, "REST REST")
 
-            $scope.serviceList = res;
+            $scope.serviceList = res.filter(function(el) {
+              return el.canUseInTicket;
+            });
           })
 
           AgreementsService.getAllServiceAgreements($scope, function (data) {
