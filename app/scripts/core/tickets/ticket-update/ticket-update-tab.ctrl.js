@@ -5,9 +5,7 @@
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
       ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter',
         function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter) {
-          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id).filter(function(el) {
-            return el.canUseInTicket;
-          });
+          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
 
 
 
@@ -36,12 +34,16 @@
               return el.company.id === $scope.ticketDetails.company.id;
             })
 
-            
+
 
             console.log(data, "DATA huyata")
 
             if (!data.length) {
               $scope.areTicketsPresented = false;
+
+              $scope.serviceList.filter(function(el) {
+                return el.canUseInTicket;
+              });
             } else {
               $scope.areTicketsPresented = true;
 
