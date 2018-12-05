@@ -610,7 +610,7 @@
             $scope.isTicketCompanyIdFieldEmpty = true;
             if ($state.includes('tickets')) {
               clearFilter(ticketsSharedState.filter);
-              $scope.stateGo(null, 'tickets', {listType: 'all'});
+              $scope.stateGo(null, 'tickets', {listType: 'user'});
             }
           }
         });
@@ -663,7 +663,7 @@
               if (ticketsSharedState.filter.companyId) {
                 $scope.stateGo(null, 'tickets', {listType: 'by_company'});
               } else {
-                $scope.stateGo(null, 'tickets', {listType: 'all'});
+                $scope.stateGo(null, 'tickets', {listType: 'user'});
               }
               ticketsSharedState.filter.clientUserId = '';
             }
@@ -695,7 +695,7 @@
               if (ticketsSharedState.filter.companyId) {
                 $scope.stateGo(null, 'tickets', {listType: 'by_company'});
               } else {
-                $scope.stateGo(null, 'tickets', {listType: 'all'});
+                $scope.stateGo(null, 'tickets', {listType: 'user'});
               }
               ticketsSharedState.filter.techUserId = '';
             }

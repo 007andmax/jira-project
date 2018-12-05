@@ -702,7 +702,6 @@
       }]);
 
   function getUserDefaultPage() {
-
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',
@@ -728,6 +727,7 @@
     }
 
     if (defaultTicketsPage) {
+
       return '/tickets/' + 'user';
     }
 
