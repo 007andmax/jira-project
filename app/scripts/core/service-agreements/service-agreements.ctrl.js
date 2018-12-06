@@ -307,6 +307,36 @@
 
       }
 
+      if (!companyData.editMode) {
+        ServicesService.getServicesData($scope, function (data) {
+          // console.log(data, 'SERVICES');
+          var listOfServices = [];
+          for (var i = 0; i < data.length; i++) {
+            var serv = {
+              commissionRate: data[i].commissionRate,
+              name: data[i].name,
+              rate: data[i].rate,
+              billable: data[i].billable,
+              taxes: data[i].taxes || [],
+              taxIds: data[i].taxIds || [],
+              basedOnDefault: true,
+              id: data[i].versionedId
+            };
+            if (data[i].taxIds && data[i].taxIds.length) {
+              for (var m = 0; m < data[i].taxIds.length; m++) {
+                serv.taxIds.push(data[i].taxes[m].id)
+              }
+            }
+            listOfServices.push(serv);
+            listOfServices.sort(function(a,b) {
+              return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
+            });
+
+            $scope.defaultServicesList = listOfServices.slice();
+          }
+        });
+      }
+
 
       if (companyData.editMode === false) {
         $scope.editMode = false;
@@ -501,7 +531,7 @@
 
       $scope.getUniqueServicesForDropdown = function() {
 
-        return $scope.defaultServicesList.filter(function(el) {
+        return $scope.defaultServicesList && $scope.defaultServicesList.filter(function(el) {
           return !~$scope.editContract.services.findIndex(function(service) {
             return service.id === el.id;
           })
