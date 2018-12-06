@@ -609,7 +609,7 @@
           } else if (value === undefined) {
             $scope.isTicketCompanyIdFieldEmpty = true;
             if ($state.includes('tickets')) {
-              clearFilter(ticketsSharedState.filter);
+              // clearFilter(ticketsSharedState.filter);
 
               // LEO!!!
               $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
