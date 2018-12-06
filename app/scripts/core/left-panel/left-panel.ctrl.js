@@ -691,7 +691,7 @@
               sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
             if ($state.includes('tickets')) {
-              // $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
+              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
             }
             if ($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
               $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
