@@ -510,7 +510,7 @@
 
 
           if ($state.includes('tickets')) {
-            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+            $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
           }
         }, true)
 
@@ -583,7 +583,7 @@
           ticketsSharedState.filter.tags = val;
 
           if ($state.includes('tickets')) {
-            $scope.stateGo(null, 'tickets', {listType: 'by_tags'});
+            $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
           }
         }, true)
 
@@ -603,14 +603,16 @@
               return user.company.id === value;
             });
             if ($state.includes('tickets')) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
             }
 
           } else if (value === undefined) {
             $scope.isTicketCompanyIdFieldEmpty = true;
             if ($state.includes('tickets')) {
               clearFilter(ticketsSharedState.filter);
-              $scope.stateGo(null, 'tickets', {listType: 'user'});
+
+              // LEO!!!
+              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
             }
           }
         });
@@ -641,6 +643,12 @@
           // }
         }, true);
 
+
+        function getTicketsListType() {
+          console.log('location', location.href.split('/').slice(-1)[0])
+          return location.href.split('/').slice(-1)[0];
+        }
+
         $scope.$watch('ticketsSharedState.filter.clientUserId', function (value) {
           if (value !== undefined && value !== "" && value !== " ") {
             ticketsSharedState.filter.completed = false;
@@ -651,7 +659,7 @@
               sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
             if ($state.includes('tickets')) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_company/by_user'});
+              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
             }
             if ($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
               $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
@@ -661,9 +669,10 @@
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
-                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
               } else {
-                $scope.stateGo(null, 'tickets', {listType: 'user'});
+                // LEO!!!
+                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
               }
               ticketsSharedState.filter.clientUserId = '';
             }
@@ -682,7 +691,7 @@
               sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
             if ($state.includes('tickets')) {
-              $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
+              // $scope.stateGo(null, 'tickets', {listType: 'by_user_tech'});
             }
             if ($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
               $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
@@ -693,9 +702,11 @@
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
-                $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
               } else {
-                $scope.stateGo(null, 'tickets', {listType: 'user'});
+
+                // LEO!!!
+                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
               }
               ticketsSharedState.filter.techUserId = '';
             }
@@ -1061,7 +1072,6 @@
         $scope.isOnHoldTag = false;
 
         $scope.stateGo = function (event, state, stateParams, isTag) {
-
           if (isTag) {
             $scope.isOnHoldTag = true;
           } else {
@@ -1069,9 +1079,17 @@
           }
           if (event && event.button > 0) {
             var url = $state.href(state, stateParams, {absolute: true});
+
+            console.log(url, "URLURL")
             window.open(url, '_blank');
           } else {
-            $state.go(state, stateParams);
+
+            $state.go(state, { listType: 'trash' });
+
+            setTimeout(function() {
+              $state.go(state, stateParams);
+
+            }, 0)
           }
 
         };
