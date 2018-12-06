@@ -531,9 +531,11 @@
 
       $scope.getUniqueServicesForDropdown = function() {
 
+        console.log($scope.editContract.services, $scope.defaultServicesList, "HERERER")
+
         return $scope.defaultServicesList && $scope.defaultServicesList.filter(function(el) {
           return !~$scope.editContract.services.findIndex(function(service) {
-            return service.id === el.id;
+            return service.name.toLowerCase() === el.name.toLowerCase();
           })
         })
       }
