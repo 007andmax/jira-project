@@ -703,6 +703,7 @@
 
   function getUserDefaultPage() {
 
+    console.log('is it default??')
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',
@@ -728,7 +729,8 @@
     }
 
     if (defaultTicketsPage) {
-      return '/tickets/' + 'user';
+
+      return '/tickets/' + defaultTicketsPage;
     }
 
 

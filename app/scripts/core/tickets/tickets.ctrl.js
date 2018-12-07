@@ -84,6 +84,8 @@
         }
 
         $scope.stateGo = function (event, state, stateParams, isTag) {
+
+          
           if (isTag) {
             $scope.isOnHoldTag = true;
           } else {
