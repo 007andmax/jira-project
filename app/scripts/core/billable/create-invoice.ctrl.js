@@ -580,7 +580,15 @@
               "invoiceNoteIds": [] || null
             }
 
-            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+            $scope.invoiceNumError = null;
+
+            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, function(res) {
+              console.log(res, "RESSSS")
+
+              if (res.code == 400) {
+                $scope.invoiceNumError = res.message;
+              }
+            })
           }
         })
 

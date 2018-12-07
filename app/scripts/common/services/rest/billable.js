@@ -196,7 +196,7 @@
         });
 
         if (callback) {
-          Utils.handleCallback(future, callback);
+          Utils.handleCallback(request, callback);
         }
       }
 
