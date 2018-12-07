@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
-      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter',
-        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter) {
+      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter', '$state',
+        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter, $state) {
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
 
 
@@ -14,6 +14,18 @@
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
+
+
+
+          $scope.stateGo = function (event, state, stateParams) {
+            if (event && event.button > 0) {
+              var url = $state.href(state, stateParams, {absolute: true});
+              window.open(url, '_blank');
+            } else {
+              $state.go(state, stateParams);
+            }
+
+          };
 
 
 
