@@ -1,8 +1,8 @@
 .left-panel {
   /*display: flex;*/
-
+  
   height: 100%;
-
+  
   /*flex-flow: row wrap;*/
   /*-ms-align-content: flex-start;*/
   /*align-content: flex-start;*/
@@ -37,7 +37,7 @@
   border-radius: 10px;
   left: 24%;
   padding: 0px 9px;
-
+  
   content: 'Beta';
 }
 
@@ -66,14 +66,14 @@
   position: fixed;
   top: 0;
   left: 76px;
-
+  
   display: flex;
-
+  
   height: 100%;
-
+  
   flex-flow: row wrap;
   transition: .2s ease-in width .0s;
-
+  
 }
 
 @media only screen and (max-width: 1024px) {
@@ -86,17 +86,17 @@
 
 .center-category__category {
   position: relative;
-
+  
   display: flex;
-
+  
   width: 100%;
   height: 35px;
   padding-left: 25px;
-
+  
   cursor: pointer;
-
+  
   color: #9ca5b6;
-
+  
   align-items: center;
   justify-content: flex-start;
   transition: all .3s;
@@ -147,7 +147,7 @@
 }
 
 /*.left-panel-title-hover:hover {*/
-  /*color: #fff;*/
+/*color: #fff;*/
 /*}*/
 
 .filter-left-panel {
@@ -161,12 +161,12 @@
   display: -ms-flex;
   display: -o-flex;
   display: flex;
-
+  
   width: 100%;
   height: 78px;
-
+  
   text-align: center;
-
+  
   color: #edf2f6;
   background: #354053;
   align-items: center;
@@ -177,13 +177,13 @@
 
 .center-category {
   display: flex;
-
+  
   width: 100%;
   height: 100%;
-
+  
   align-content: flex-start;
   flex-flow: row wrap;
-
+  
   padding: 78px 0 15px;
 }
 
@@ -198,7 +198,7 @@
 }
 
 .tickets-left-panel .center-category__category span:not(.tag-span),
-.company-dashboard-left-panel .center-category__category span:not(.tag-span){
+.company-dashboard-left-panel .center-category__category span:not(.tag-span) {
   position: absolute;
   right: 20px;
   top: 7px;
@@ -236,7 +236,7 @@
 .badge-orange {
   font-weight: bold;
   color: white;
-  background-color: #FFC107;
+  background-color: #ffc107;
 }
 
 .slider-pos {
@@ -257,7 +257,7 @@
   max-height: 100%;
   height: auto;
   overflow: hidden;
-
+  
 }
 
 .left-panel-full .category-expanded {
@@ -266,7 +266,7 @@
 
 .category-expanded.ng-hide {
   max-height: 0;
-
+  
 }
 
 .category-expanded.ng-hide-animate {
@@ -357,7 +357,7 @@
   border: 1px solid #fff;
   border-radius: 50%;
   background-color: transparent;
-
+  
   content: '';
 }
 
@@ -415,27 +415,30 @@
 }
 
 .x-mark-wrapper input.form-control {
-  background-color: #313A4D !important;
+  background-color: #313a4d !important;
   color: #9ca5b6;
   border: none;
 }
 
 .x-mark-wrapper .dropdown-menu,
-.x-mark-wrapper .dropdown-content{
-  background-color: #313A4D;
+.x-mark-wrapper .dropdown-content {
+  background-color: #313a4d;
   color: #9ca5b6;
   border: none;
+  max-height: 180px !important;
 }
-.x-mark-wrapper .dropdown-menu > li > a{
+
+.x-mark-wrapper .dropdown-menu > li > a {
   padding: 5px 20px;
 }
+
 .left-panel-full-wrapper .dropdown-menu > .active a,
 .left-panel-full-wrapper .dropdown-menu > .active a:hover,
 .left-panel-full-wrapper .dropdown-menu > .active a:focus,
 .left-panel-full-wrapper .dropdown-content > .active a,
 .left-panel-full-wrapper .dropdown-content > .active a:hover,
-.left-panel-full-wrapper .dropdown-content > .active a:focus{
-  background-color: #16A4FA;
+.left-panel-full-wrapper .dropdown-content > .active a:focus {
+  background-color: #16a4fa;
   color: #fff;
 }
 
@@ -452,9 +455,11 @@
   transition: all .3s;
   transform: rotate(-90deg);
 }
+
 .company-dashboard-left-panel.center-category .left-panel-title .report-caret-icon {
   top: 19px;
 }
+
 .center-category .left-panel-title .report-caret-icon.report-caret-icon-up {
   transform: rotate(0deg);
   background: url("../images/new-icons/report-caret-right.png");
@@ -530,7 +535,7 @@
   border-radius: 50%;
   top: 10px;
   box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.50);
-
+  
 }
 
 .left-panel-icons-remote {

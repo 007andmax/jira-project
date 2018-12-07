@@ -5415,8 +5415,8 @@ Devices tab
 }
 
 .service-form-wrapper {
-  overflow-y: hidden;
-  overflow-x: hidden !important;
+  /*overflow-y: hidden;*/
+  /*overflow-x: hidden !important;*/
   /*max-height: 650px;*/
 }
 
@@ -5574,7 +5574,7 @@ Devices tab
 
 .short-service-list ul {
   width: 100%;
-  max-height: 135px;
+  max-height: 152px;
 }
 
 .readonly .service-name-agreement {
@@ -5588,6 +5588,7 @@ Devices tab
 .block-time .service-name-agreement .dropdown-menu,
 .contracts .service-name-agreement .dropdown-menu {
   width: 100%;
+  max-height: 152px;
 }
 
 .block-time .service-name-agreement .x-mark {
