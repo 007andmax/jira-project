@@ -242,7 +242,8 @@
               taxes: data[i].taxes || [],
               taxIds: data[i].taxIds || [],
               basedOnDefault: true,
-              id: data[i].versionedId
+              id: data[i].versionedId,
+              canUseInTicket: data[i].canUseInTicket
             };
             if (data[i].taxIds && data[i].taxIds.length) {
               for (var m = 0; m < data[i].taxIds.length; m++) {
@@ -255,7 +256,11 @@
             });
 
             $scope.defaultServicesList = listOfServices.slice();
-            $scope.editContract.services = listOfServices;
+            $scope.editContract.services = listOfServices.filter(function(el) {
+              console.log(el)
+              console.log(el.canUseInTicket, "CANUSEINTICKETs")
+              return el.canUseInTicket;
+            });
           }
         });
 
@@ -300,6 +305,36 @@
           }
         }
 
+      }
+
+      if (!companyData.editMode) {
+        ServicesService.getServicesData($scope, function (data) {
+          // console.log(data, 'SERVICES');
+          var listOfServices = [];
+          for (var i = 0; i < data.length; i++) {
+            var serv = {
+              commissionRate: data[i].commissionRate,
+              name: data[i].name,
+              rate: data[i].rate,
+              billable: data[i].billable,
+              taxes: data[i].taxes || [],
+              taxIds: data[i].taxIds || [],
+              basedOnDefault: true,
+              id: data[i].versionedId
+            };
+            if (data[i].taxIds && data[i].taxIds.length) {
+              for (var m = 0; m < data[i].taxIds.length; m++) {
+                serv.taxIds.push(data[i].taxes[m].id)
+              }
+            }
+            listOfServices.push(serv);
+            listOfServices.sort(function(a,b) {
+              return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
+            });
+
+            $scope.defaultServicesList = listOfServices.slice();
+          }
+        });
       }
 
 
@@ -495,9 +530,11 @@
 
       $scope.getUniqueServicesForDropdown = function() {
 
-        return $scope.defaultServicesList.filter(function(el) {
+        console.log($scope.editContract.services, $scope.defaultServicesList, "HERERER")
+
+        return $scope.defaultServicesList && $scope.defaultServicesList.filter(function(el) {
           return !~$scope.editContract.services.findIndex(function(service) {
-            return service.id === el.id;
+            return service.name.toLowerCase() === el.name.toLowerCase();
           })
         })
       }

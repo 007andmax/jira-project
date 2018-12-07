@@ -25,6 +25,11 @@
       <span class="sort-span">Is Billable<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
     </div>
+
+    <div class="col-5 is-billable" ng-click="setOrderForServices('canUseInTicket')">
+      <span class="sort-span">Is Default<i class="icn-sm sort-icon icn-sort"
+                                            ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'canUseInTicket'}"></i></span>
+    </div>
   </li>
 
   <li ng-repeat="service in services | orderBy : orderByForServices : orderServices.reverse"
@@ -55,6 +60,15 @@
           <input type="checkbox" ng-checked="service.billable"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
                  ng-click="onChangeBillable()">
+          <span class="control-indicator"></span>
+        </label>
+      </div>
+
+      <div class="col-5 is-billable">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-checked="service.canUseInTicket"
+                 custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
+                 ng-click="onChangeDefaultState()">
           <span class="control-indicator"></span>
         </label>
       </div>

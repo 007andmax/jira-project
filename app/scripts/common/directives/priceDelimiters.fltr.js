@@ -4,6 +4,9 @@
 
   angular.module("quicktech.common.directives").filter('priceDelimiters', function () {
     return function (input) {
+
+      if (!input) return 0;
+      
       var inputParts = (input + '').split('.');
 
       var firstPart = inputParts[0] + '';
