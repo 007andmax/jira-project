@@ -79,6 +79,8 @@
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
+          console.log(newChange, '***********************************************')
+
           if (newChange.action == 'INVOICE_SAVED') {
 
             var invoice = Utils.findById(data.list, newChange.data.id);
@@ -150,6 +152,12 @@
             //   //   }
             //   // }
             // }
+          } else if (newChange.action === 'INVOICE_ROLLBACK') {
+            var invoice = Utils.findById(data.list, newChange.data.id);
+            Utils.customizeObj(newChange.data, invoice)
+
+            // console.log(invoice, 'invoice')
+            invoice.status = newChange.data.status;
           }
           /*else if (newChange.action == 'COMPANY_ARCHIVED') {
 

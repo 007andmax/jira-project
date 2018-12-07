@@ -161,6 +161,9 @@
                 callback(info);
               }
             }
+
+
+            console.log(newChange.action, "NEWCHANGEEEE")
           });
 
           if (callback) {
@@ -221,6 +224,13 @@
             callback(res);
           }
         })
+      }
+
+      function deleteFromOrderTicket(ticketId, updateId, callback) {
+        $http.delete('/' + ticketId + '/updates/' + updateId  +  '/deleteExpenses?fromOrderTicket=true')
+          .then(function(res) {
+            if (callback) callback(res);
+          })
       }
 
       function createNote(data, callback) {
@@ -334,7 +344,8 @@
         getExistTimeByLockId: getExistTimeByLockId,
         lockTicketsByCompany: lockTicketsByCompany,
         getBillablePageDto: getBillablePageDto,
-        saveBillableDiscount: saveBillableDiscount
+        saveBillableDiscount: saveBillableDiscount,
+        deleteFromOrderTicket: deleteFromOrderTicket
       }
 
     }]);

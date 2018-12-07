@@ -48,6 +48,10 @@
 
         })
 
+        $scope.deleteTicket = function(ticket) {
+          console.log(ticket)
+        }
+
 
 
         $scope.$watch(function() {

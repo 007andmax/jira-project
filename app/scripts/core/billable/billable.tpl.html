@@ -658,7 +658,7 @@
                 <div class="pull-right">
                   <!-- <i class="expand expand-down pointer pull-right" ></i> -->
 
-                  <span ng-if="ticket.isOrder">Delete</span>
+                  <span ng-if="ticket.isOrder" ng-click="deleteTicket(ticket)">Delete</span>
                   <a ng-if="!ticket.isOrder" ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })" ng-if="ticket.isOrder">Edit</a>
                 </div>
               </div>
