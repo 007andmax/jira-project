@@ -11,7 +11,7 @@
             <button class="btn btn-default" ng-click="goBackToList()">Back</button>
             <button ng-if="invoiceTimer > 0" class="btn btn-default" ng-click="togglePreview()">Preview</button>
 
-            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button" custom-disabled="invoiceNumError">
+            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}">
               <button ng-if="!invoicePreview && !invoiceCreated"
                       ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
@@ -341,7 +341,7 @@
           <div class="invoice-create--header__btn">
             <button ng-if="!(invoiceTimer > 0)" class="btn btn-default" ng-click="goBackToList()">Back</button>
             <button ng-if="invoiceTimer > 0" class="btn btn-default" ng-click="togglePreview()">Edit</button>
-            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button" custom-disabled="invoiceNumError">
+            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}">
               <button ng-if="!invoicePreview && !invoiceCreated"
                       ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"

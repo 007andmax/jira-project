@@ -21,6 +21,16 @@
   color: #364656;
 }
 
+.invoice-create .disabled {
+  background: #edf2f6 !important;
+  pointer-events: none;
+}
+
+.invoice-create .disabled button {
+  background: #edf2f6 !important;
+  color: #4f5f79 !important;
+}
+
 .invoice-edit.invoice-create .invoice-create--header__btn .btn,
 .invoices-header .btn,
 .invoices-list .btn,
