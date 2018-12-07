@@ -682,7 +682,6 @@
                       };
 
 
-                      console.log(service, 'SERVVICE')
 
 
                       $scope.blockTimeContract.services.push(ns);

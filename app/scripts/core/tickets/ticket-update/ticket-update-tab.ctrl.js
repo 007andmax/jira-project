@@ -11,12 +11,10 @@
 
 
 
-          console.log($scope.serviceList, 'SERVICE LIST')
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
 
-          console.log($scope.serviceList)
 
 
           // ServicesService.getServicesData($scope, function(res) {
@@ -36,7 +34,6 @@
 
 
 
-            console.log(data, "DATA huyata")
 
             if (!data.length) {
               $scope.areTicketsPresented = false;

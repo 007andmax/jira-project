@@ -703,7 +703,7 @@
 
   function getUserDefaultPage() {
 
-    console.log('is it default??')
+    // console.log('is it default??')
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',

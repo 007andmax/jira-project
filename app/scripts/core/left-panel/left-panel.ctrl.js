@@ -645,7 +645,6 @@
 
 
         function getTicketsListType() {
-          console.log('location', location.href.split('/').slice(-1)[0])
           return location.href.split('/').slice(-1)[0];
         }
 
@@ -833,8 +832,6 @@
             return el.firstName + ' ' + el.lastName === value;
           })
 
-          console.log(user);
-          console.log('SSSSS')
           $scope.salesPerson = user.id;
 
         };
