@@ -50,9 +50,25 @@
 
         $scope.deleteTicket = function(ticket) {
           console.log(ticket)
-          // TicketsService.deleteForever(ticket.id, function(res) {
-          //   console.log(res, "RES FORK BAKC")
-          // })
+          TicketsService.deleteForever(ticket.id, function(res) {
+            var keys = Object.keys($scope.billableData).filter(function(prop) {
+              return $scope.billableData.hasOwnProperty(prop);
+            });
+
+            loop: for (var i = 0; i < keys.length; i++) {
+              var tickets = $scope.billableData[keys[i]].tickets;
+              if (!tickets) continue;
+
+              for (var i = 0; i <= tickets.length; i++) {
+                if (tickets[i].id === ticket.id) {
+                  console.log(tickets[i], 'tickets[i]')
+                  tickets.splice(i, 1);
+
+                  break loop;
+                }
+              }
+            }
+          })
           // console.log(ticket)
         }
 
@@ -262,7 +278,9 @@
           });
         });
 
-        $scope.billableData = BillableService.getBillablePageDto($scope, function (respData) {
+        $scope.billableData = BillableService.getBillablePageDto($scope, getBillableDto);
+
+        function getBillableDto(respData) {
           $scope.billableData = respData;
 
           var companyIds = Object.keys(respData).filter(function (id) {
@@ -308,7 +326,7 @@
 
             }
           }
-        });
+        }
 
         $scope.addDiscountInBillable = function (expenseId, discountAmount) {
           var data = {};
