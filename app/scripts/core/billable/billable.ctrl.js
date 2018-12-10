@@ -50,6 +50,10 @@
 
         $scope.deleteTicket = function(ticket) {
           console.log(ticket)
+          // TicketsService.deleteForever(ticket.id, function(res) {
+          //   console.log(res, "RES FORK BAKC")
+          // })
+          // console.log(ticket)
         }
 
 
