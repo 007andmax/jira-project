@@ -119,7 +119,7 @@
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
           } else if ($state.includes("service-agreements")) {
-            return 'service-agreements';
+            return 'contracts';
           } else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';

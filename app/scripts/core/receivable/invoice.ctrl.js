@@ -84,6 +84,10 @@
               (invoice.ticketNumbers && invoice.ticketNumbers.length ? (invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
               invoice.ticketNumbers.join(', #') + ' will be restored.' : '');
 
+            if (invoice.paidOn) {
+              confirmMessage = 'Invoice will be marked as not paid.';
+            }
+
             disableInvoiceButtons = true;
             UserConfirmationsService.show(confirmMessage, 'OK').then(function (resp) {
               ReceivableService.rollback(invoice.id, function () {

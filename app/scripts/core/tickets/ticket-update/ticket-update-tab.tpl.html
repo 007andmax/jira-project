@@ -125,16 +125,16 @@
 
           <div style="width: 100%;" class="info-block"
                ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated) && !(serviceList.length === 0 && areTickets))">
-            <span ng-show="areTicketsTerminated">Your contacts are expired/terminated. Please recreate them on the <a ng-click="stateGo($event, 'service-agreements')" class="pointer" style="text-decoration: underline">Service agreement page</a> in order to use contract's services or remove them in order to use default services.</span>
+            <span ng-show="areTicketsTerminated">"The Existing contract for this customer has Expired. <a ng-click="stateGo($event, 'service-agreements')" class="pointer" style="text-decoration: underline">Open Contracts</a></span>
             <span ng-show="!areTicketsPresented">This customer does not have a service contract, Only <a ng-click="stateGo($event, 'services', { tabName: 'default' })" class="pointer" style="text-decoration: underline">default services</a> will be shown.</span>
           </div>
 
-          <div class="service-not-yet" ng-show="areTicketsTerminated || (serviceList.length === 0 && areTickets)">
+          <!-- <div class="service-not-yet" ng-show="areTicketsTerminated || (serviceList.length === 0 && areTickets)">
             <img src="images/hourly.svg" alt="">
             <p>No service Set up yet, <br>
                click on button to set up service</p>
             <div class="btn btn-primary btn-create" ng-click="openContractAgreementsModal(company)">Setup Service</div>
-          </div>
+          </div> -->
 
 
           <div class="ticket-add-content clearfix"
