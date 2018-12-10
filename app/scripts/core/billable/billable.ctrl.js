@@ -63,14 +63,14 @@
             return $scope.billableData.hasOwnProperty(prop);
           });
 
+
           loop: for (var i = 0; i < keys.length; i++) {
             var tickets = $scope.billableData[keys[i]].tickets;
             if (!tickets) continue;
 
-            for (var i = 0; i <= tickets.length; i++) {
-              if (tickets[i].id === val) {
-                console.log(tickets[i], 'tickets[i]')
-                tickets.splice(i, 1);
+            for (var j = 0; j <= tickets.length; j++) {
+              if (tickets[j] && tickets[j].id === val) {
+                tickets.splice(j, 1);
 
                 break loop;
               }
