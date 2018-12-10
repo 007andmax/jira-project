@@ -1016,6 +1016,10 @@
           }
 
         } else if (newChange.action === 'TICKET_DELETED') {
+
+
+
+          $rootScope.deletedTicket = newChange.data.id;
           if (ticketIndex != null) {
             storage.tickets.splice(ticketIndex, 1);
 
