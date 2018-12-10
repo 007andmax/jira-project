@@ -20,32 +20,18 @@
   background: lightgrey !important;
 }
 
-
 .ticket {
   list-style: none;
-  background-color: #fff;
-  padding: 15px 0;
-  padding-right: 30px;
+  background-color: #f7fcff;
+  padding: 15px 30px 0 0;
   position: relative;
-  border-bottom: 1px #e7ecf2 solid;
   cursor: pointer;
+  border-right: 1px solid #edf2f6;
+  font-size: 13px;
 }
 
-.ticket:first-child {
-  min-height: 136px;
-  padding-top: 30px;
-}
-
-.tickets li:first-child {
-  border-top: none;
-}
-
-.tickets li:last-child {
-  border-bottom: none;
-}
-
-.tickets li.ticket:last-child {
-  border-bottom: 1px #e7ecf2 solid;
+.ticket p {
+  font-size: 13px;
 }
 
 .tickets li:first-child.ticket-type {
@@ -88,23 +74,18 @@
 /*Ticket States - Start*/
 
 .ticket.active {
-  border: 1px solid #08a8dd;
+  box-shadow: 0 3px 18px 2px rgba(0, 0, 0, .05);
+  background-color: #fff;
+  border-right: none;
+  z-index: 10;
+}
+
+.ticket.active .ticket-meta {
+  border: none;
 }
 
 .ticket.selected {
   background-color: #e2f1fd;
-}
-
-/*Ticket States - End*/
-
-/*Ticket Hover - Start*/
-.ticket:before, .ticket:after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: transparent;
-  content: '';
 }
 
 .ticket .ticket-meta .ticket-list-header p.ellipsis {
@@ -164,8 +145,9 @@
 }
 
 .ticket .ticket-meta {
-  padding: 0;
+  padding: 0 0 15px 0;
   margin-left: 62px;
+  border-bottom: 1px solid #edf2f6;
 }
 
 .ticket .ticket-meta .ticket-list-header {
@@ -245,6 +227,13 @@
   cursor: pointer;
 }
 
+.icn-ticket-attachment {
+  margin: 0;
+  position: absolute;
+  right: 32px;
+  top: 45px;
+}
+
 .ticket .ticket-meta .ticket-labels .label-primary {
   font-weight: normal;
 }
@@ -260,30 +249,6 @@
   }
 }
 
-.low-priority-border {
-  border-left: 5px solid #4caf50 !important;
-}
-
-.medium-priority-border {
-  border-left: 5px solid transparent !important;
-}
-
-.high-priority-border {
-  border-left: 5px solid #e53935 !important;
-}
-
-.active.low-priority-border {
-  border-left-color: #6AFF6E !important;
-}
-
-.active.medium-priority-border {
-  border-left-color: transparent !important;
-}
-
-.active.high-priority-border {
-  border-left-color: #FF241A !important;
-}
-
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -294,4 +259,30 @@
 .ticket-title > .text-muted {
   float: left;
   width: calc(100% - 40px);
+}
+
+.ticket-labels {
+  position: relative;
+}
+
+.ticket-labels:before {
+  position: absolute;
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: url("../images/new-icons/low-priority-mobile.png") no-repeat;
+  left: -31px;
+  top: 4px;
+}
+
+.low-priority-border .ticket-labels:before {
+  background: url("../images/new-icons/low-priority-mobile.png") no-repeat;
+}
+
+.medium-priority-border .ticket-labels:before {
+  background: url("../images/new-icons/medium-priority-mobile.png") no-repeat;
+}
+
+.high-priority-border .ticket-labels:before {
+  background: url("../images/new-icons/high-priority-mobile.png") no-repeat;
 }

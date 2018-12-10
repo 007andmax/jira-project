@@ -12,51 +12,18 @@
             <div class="pull-left ticket-header-avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
-            <div class="clearfix pull-left vladik" >
-              <div class="ticket-header-username pull-left">
-                <strong qt-popover-position="bottom"
-                        custom-disabled="{{ user.company.isDefault }}"
-                        qt-custom-popover-template="/html/scripts/core/tickets/popup-templates/user-info-popup.tpl.html">
+            <div class="clearfix pull-left vladik">
+              <div class="ticket-header-username">
+                <div qt-popover-position="bottom"
+                     custom-disabled="{{ user.company.isDefault }}"
+                     qt-custom-popover-template="/html/scripts/core/tickets/popup-templates/user-info-popup.tpl.html">
                   <span qt-popover-trigger="mouseenter">{{ getUserName(user) }}</span>
-                </strong>
-                <strong ng-if="!company.isDefault">
-                  <span class="dot-sep"></span>
-                  <!-- <span class="company-name" qt-popover-position="bottom"
-                        qt-custom-popover-template="/html/scripts/core/tickets/popup-templates/company-info-popup.tpl.html">
-                    <span qt-popover-trigger="mouseenter">{{ company.name }}</span>
-                  </span> -->
-                  <span class="company-name" ng-show="!isEmail">{{ company.name }}</span>
-                  <div style="display: inline-block" uib-dropdown class="companies-dropdown" ng-show="isEmail">
-                    <div uib-dropdown-toggle>
-                      <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
-                      <!--ng-click="currentUser.online = !currentUser.online"></i>-->
-                      <span>{{ company.name }}</span>
-
-
-                    </div>
-
-                    <ul class="dropdown-menu dropdown-menu-custom" role="menu">
-                      <li ng-repeat="item in userCompanies" ng-click="setUserCompany(item.id)">
-                        <!-- <span>{{ userCompany.name }}</span> -->
-                        <span>{{ item.name }}</span>
-                      </li>
-
-
-                    </ul>
-                  </div>
-                </strong>
-              </div>
-              <div class="ticket-header-status pull-left">
-                <div class="pull-left" uib-dropdown>
-                <span
-                  class="label-icn-sm priority-small-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }} persistent-tooltip"
-                  uib-tooltip="{{ userReadable(ticketDetails.priorityLevel) }} priority" tooltip-placement="top"
-                  tooltip-append-to-body="true" uib-dropdown-toggle>
-                  <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
-                </span>
+                </div>
+                <div uib-dropdown>
                   <span
                     class="label label-primary priority-big-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }}"
-                    uib-dropdown-toggle> {{ userReadable(ticketDetails.priorityLevel) }} </span>
+                    uib-dropdown-toggle></span>
+
                   <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
                       ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)">
                     <li>
@@ -79,6 +46,25 @@
                     </li>
                   </ul>
                 </div>
+                <div ng-if="!company.isDefault">
+                  <span class="company-name" ng-show="!isEmail">{{ company.name }}</span>
+                  <div style="display: inline-block" uib-dropdown class="companies-dropdown" ng-show="isEmail">
+                    <div uib-dropdown-toggle>
+                      <span>{{ company.name }}</span>
+                    </div>
+
+                    <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+                      <li ng-repeat="item in userCompanies" ng-click="setUserCompany(item.id)">
+                        <span>{{ item.name }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket-header-status pull-left">
+                <div style="font-size: 12px;font-weight: 700;color: #9ca5b6;">{{ticketDetails.number}}</div>
+                <i class="dot-sep"></i>
+                <div style="color:#4f5f79;"> {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}</div>
                 <div class="pull-left" uib-dropdown>
                 <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                       class="label-icn-sm progress-small-size label-primary persistent-tooltip"
@@ -112,18 +98,6 @@
                     </li>
                   </ul>
                 </div>
-              </div>
-              <!--<div ng-if="TicketsPermissionsService.isTagsVisible(listType, currentUser.role)"-->
-              <!--class="ticket-header-labels pull-left">-->
-              <!--<span ng-repeat="tag in ticketDetails.tags"-->
-              <!--class="tag-color tag-color-sm color{{ tag.color }} persistent-tooltip"-->
-              <!--tooltip="{{ tag.name }}" tooltip-placement="top"></span>-->
-              <!--</div>-->
-              <div class="ticket-header-details text-muted">
-                <i ng-show="ticketDetails.hasAttachments === true"
-                   class="icn-sm icn-ticket-attachment pull-left"></i>
-                {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
-                <i class="dot-sep"></i>
                 {{ userReadable(ticketDetails.ticketSource) }}
                 <span ng-if="ticketDetails.sourceName && ticketDetails.ticketSource.toLowerCase() === 'from_agent'">
                   &nbsp;({{ ticketDetails.sourceName }})
@@ -134,227 +108,242 @@
           <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
             <div class="pull-left ticket-edit-actions"
                  ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
-              <div class="btn btn-icn btn-default pull-left" ng-if="editingTicket" ng-disabled="disabledSaveButton"
-                   uib-tooltip="Save" tooltip-placement="top" ng-click="saveEditedTicket(editTicketForm)">
+              <div class="btn btn-icn btn-default pull-left"
+                   ng-if="editingTicket"
+                   ng-disabled="disabledSaveButton"
+                   uib-tooltip="Save"
+                   tooltip-placement="top"
+                   ng-click="saveEditedTicket(editTicketForm)">
                 <i class="icn-sm icn-label-save"></i>
               </div>
               <div class="btn btn-icn btn-default pull-left"
-                   uib-tooltip="{{ editingTicket ? 'Cancel' : 'Edit subject & note' }}"
-                   tooltip-placement="top" ng-click="setEditingTicket(!editingTicket)">
-                <i class=" {{ editingTicket ? 'icn-sm icn-label-cancel' : 'icon-sm edit-icon' }}"></i>
+                   ng-if="editingTicket"
+                   uib-tooltip="Cancel"
+                   tooltip-placement="top"
+                   ng-click="setEditingTicket(!editingTicket)">
+                <i class="icn-sm icn-label-cancel"></i>
+              </div>
+              <div uib-tooltip="Edit"
+                   tooltip-placement="top">
+                <button class="company-edit-icn"
+                        ng-click="setEditingTicket(!editingTicket)"
+                        ng-hide="editingTicket">
+                </button>
               </div>
             </div>
-            <div class="pull-left" uib-dropdown
-                 ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
 
-              <div class="btn btn-icn btn-default pull-left has-tooltip"
-                   ng-if="(ticketAgent.type !== 'workstation') && ticketAgent.online"
-                   ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">
-                <i class="icon-sm icn-remote-access"></i>
-              </div>
+            <!--<button class="ticket-assign"></button>-->
+            <!--<div class="pull-left" uib-dropdown-->
+            <!--ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">-->
 
-              <div class="btn btn-icn btn-default pull-left has-tooltip"
-                   ng-if="(ticketAgent.type === 'workstation') && ticketAgent.online"
-                   tooltip-placement="top" uib-tooltip="Remote Access"
-                   aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
-                <i class="icon-sm icn-remote-access"></i>
-              </div>
+            <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+            <!--ng-if="(ticketAgent.type !== 'workstation') && ticketAgent.online"-->
+            <!--ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">-->
+            <!--<i class="icon-sm icn-remote-access"></i>-->
+            <!--</div>-->
 
-              <ul class="dropdown-menu dropdown-menu-right" style="width: 230px;" role="menu">
+            <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+            <!--ng-if="(ticketAgent.type === 'workstation') && ticketAgent.online"-->
+            <!--tooltip-placement="top" uib-tooltip="Remote Access"-->
+            <!--aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>-->
+            <!--<i class="icon-sm icn-remote-access"></i>-->
+            <!--</div>-->
 
-                <li ng-click="remoteAccess('CSS')">
-                  <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
-                </li>
+            <!--<ul class="dropdown-menu dropdown-menu-right" style="width: 230px;" role="menu">-->
 
-                <li ng-click="remoteAccess('RDP')">
-                  <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
-                </li>
+            <!--<li ng-click="remoteAccess('CSS')">-->
+            <!--<a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>-->
+            <!--</li>-->
 
-              </ul>
-            </div>
-            <div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">
-              <div class="btn btn-icn btn-default pull-left has-tooltip"
-                   aria-haspopup="true" aria-expanded="false"
-                   ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
-                   uib-dropdown-toggle uib-tooltip="Settings" tooltip-placement="top">
-                <i class="icon-sm settings-icon"></i>
-              </div>
-              <ul class="dropdown-menu dropdown-menu-right" style="width: 185px; overflow: visible;" role="menu">
-                <li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
-                  <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
-                </li>
-                <li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"
-                    class="dropdown-submenu left-align">
-                  <a tabindex="-1" href="javascript:void(0)">
-                    {{ ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...
-                  </a>
-                  <div class="dropdown-submenu-wrapper">
-                    <div class="dropdown-assign-ticket dropdown-menu"
-                         stop-propagation="click"
-                         assign-user-button aub-ticket-id="ticketDetails.id"
-                         ticket-assigned-user-id="ticketDetails.assignedUser.id"
-                         aub-ticket-number="ticketDetails.number"
-                         users="usersCurrentCompany"
-                         aub-current-user="currentUser">
-                    </div>
-                  </div>
-                </li>
+            <!--<li ng-click="remoteAccess('RDP')">-->
+            <!--<a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>-->
+            <!--</li>-->
 
-                <li class="dropdown-submenu left-align linked-agent-dropdown"
-                    ng-if="!ticketDetails.company.isDefault && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">
-                  <a tabindex="-1" href="javascript:void(0)">
-                    {{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}
-                    Agent
-                  </a>
-                  <ul class="dropdown-submenu-wrapper dropdown-menu">
-                    <li ng-repeat="agent in agentList" ng-click="linkAgent(ticketDetails.id, agent.id)"
-                        ng-if="!ticketDetails.agent || agent.id !== ticketDetails.agent.deviceId">
-                      {{ agent.hostName || agent.ip }}
-                    </li>
-                  </ul>
-                </li>
-                <li ng-if="ticketDetails.agent && ticketDetails.agent.deviceId">
-                  <a tabindex="-1" href="javascript:void(0)" ng-click="linkAgent(ticketDetails.id, '')">Unlink Agent</a>
-                </li>
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">-->
+            <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+            <!--aria-haspopup="true" aria-expanded="false"-->
+            <!--ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"-->
+            <!--uib-dropdown-toggle uib-tooltip="Settings" tooltip-placement="top">-->
+            <!--<i class="icon-sm settings-icon"></i>-->
+            <!--</div>-->
+            <!--<ul class="dropdown-menu dropdown-menu-right" style="width: 185px; overflow: visible;" role="menu">-->
+            <!--<li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">-->
+            <!--<a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>-->
+            <!--</li>-->
+            <!--<li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"-->
+            <!--class="dropdown-submenu left-align">-->
+            <!--<a tabindex="-1" href="javascript:void(0)">-->
+            <!--{{ ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...-->
+            <!--</a>-->
+            <!--<div class="dropdown-submenu-wrapper">-->
+            <!--<div class="dropdown-assign-ticket dropdown-menu"-->
+            <!--stop-propagation="click"-->
+            <!--assign-user-button aub-ticket-id="ticketDetails.id"-->
+            <!--ticket-assigned-user-id="ticketDetails.assignedUser.id"-->
+            <!--aub-ticket-number="ticketDetails.number"-->
+            <!--users="usersCurrentCompany"-->
+            <!--aub-current-user="currentUser">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</li>-->
 
-                <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">
-                  <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.isOwner"
-                     ng-click="moveIntoSpam()">Mark as Spam</a>
-                  <a tabindex="-1" href="javascript:void(0)" ng-if="!currentUser.isOwner"
-                     ng-click="moveIntoSpam()">Report as Spam</a>
-                </li>
-                <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">
-                  <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
-                </li>
-              </ul>
-            </div>
+            <!--<li class="dropdown-submenu left-align linked-agent-dropdown"-->
+            <!--ng-if="!ticketDetails.company.isDefault && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">-->
+            <!--<a tabindex="-1" href="javascript:void(0)">-->
+            <!--{{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}-->
+            <!--Agent-->
+            <!--</a>-->
+            <!--<ul class="dropdown-submenu-wrapper dropdown-menu">-->
+            <!--<li ng-repeat="agent in agentList" ng-click="linkAgent(ticketDetails.id, agent.id)"-->
+            <!--ng-if="!ticketDetails.agent || agent.id !== ticketDetails.agent.deviceId">-->
+            <!--{{ agent.hostName || agent.ip }}-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+            <!--<li ng-if="ticketDetails.agent && ticketDetails.agent.deviceId">-->
+            <!--<a tabindex="-1" href="javascript:void(0)" ng-click="linkAgent(ticketDetails.id, '')">Unlink Agent</a>-->
+            <!--</li>-->
+
+            <!--<li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">-->
+            <!--<a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.isOwner"-->
+            <!--ng-click="moveIntoSpam()">Mark as Spam</a>-->
+            <!--<a tabindex="-1" href="javascript:void(0)" ng-if="!currentUser.isOwner"-->
+            <!--ng-click="moveIntoSpam()">Report as Spam</a>-->
+            <!--</li>-->
+            <!--<li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">-->
+            <!--<a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
           </div>
         </div>
         <div class="ticket-detail">
           <div ng-if="!editingTicket">
-            <h2 class="ellipsis">{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
+            <h2 class="ellipsis">{{ ticketDetails.subject }}</h2>
             <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
           </div>
 
-          <div ng-if="editingTicket">
-            <div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"
-                 style="margin-bottom: 10px;">
-
-              <label class="control-label" ng-class="{'hide': isShowingErrors(editTicketForm, 'subject')}">
-                Subject
-              </label>
-
-              <div ng-messages="editTicketForm.subject.$error"
-                   ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">
-                <label class="control-label" ng-message="required">Subject can not be left empty.</label>
-                <label class="control-label" ng-message="maxlength">Subject is too large.</label>
-              </div>
-
-              <input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"
-                     name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">
-
-              <label class="control-label" ng-class="{'hide': isShowingErrors(editTicketForm, 'note')}">
-                Note
-              </label>
-
-              <div ng-messages="editTicketForm.note.$error"
-                   ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">
-                <label class="control-label" ng-message="maxlength">Note is too large.</label>
-              </div>
-
-              <div text-editor te-initial-value="{{ editedTicket.note }}"
-                   ng-model="editedTicket.note" name="note" te-text-maxlength="5000" te-html-maxlength="50000">
-
-                <div te-editor class="form-control editor" contenteditable="true"
-                     style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
-
-                <div class="wysiwyg-controls-wrapper clearfix">
-                  <div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">
-
-                    <div class="font-styles pull-left">
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="bold"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
-                        <i class="icon-sm wysiwyg-bold "></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="italic"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
-                        <i class="icon-sm wysiwyg-italic"></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="underline"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
-                        <i class="icon-sm wysiwyg-underline"></i>
-                      </a>
-                    </div>
-
-                    <div class="text-bullets pull-left">
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="insertorderedlist"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
-                        <i class="icon-sm wysiwyg-ol"></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="insertunorderedlist"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
-                        <i class="icon-sm wysiwyg-ul"></i>
-                      </a>
-                    </div>
-
-                    <div class="text-styles pull-left">
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="justifyleft"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
-                        <i class="icn-sm icn-wysiwyg-align-left"></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="justifycenter"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
-                        <i class="icn-sm icn-wysiwyg-align-center"></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="justifyright"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
-                        <i class="icn-sm icn-wysiwyg-align-right"></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="outdent"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">
-                        <i class="icon-sm wysiwyg-unindent"></i>
-                      </a>
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="indent"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">
-                        <i class="icon-sm wysiwyg-indent"></i>
-                      </a>
-                    </div>
-
-                    <div class="quote-link pull-left">
-
-                      <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                         data-edit="cblock"
-                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">
-                        <i class="icon-sm wysiwyg-quote"></i>
-                      </a>
-
-                    </div>
-                  </div>
-
-                  <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
-                     data-edit="removeformat"
-                     tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">
-                    <i class="icon-sm wysiwyg-reset"></i>
-                  </a>
-
-                </div>
-
-              </div>
-            </div>
+          <div ng-if="editingTicket" ng-class="{'ticket-editing': editingTicket}">
+            <h2 contenteditable="true" class="ellipsis">{{ ticketDetails.subject }}</h2>
+            <div contenteditable="true" class="ticket-message" ng-bind-html="getTicketNote()"></div>
           </div>
+
+          <!--<div ng-if="editingTicket">-->
+            <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"-->
+                 <!--style="margin-bottom: 10px;">-->
+
+              <!--<div ng-messages="editTicketForm.subject.$error"-->
+                   <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">-->
+                <!--<label class="control-label" ng-message="required">Subject can not be left empty.</label>-->
+                <!--<label class="control-label" ng-message="maxlength">Subject is too large.</label>-->
+              <!--</div>-->
+
+              <!--<input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"-->
+                     <!--name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">-->
+            <!--</div>-->
+            <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">-->
+
+              <!--<label class="control-label" ng-class="{'hide': isShowingErrors(editTicketForm, 'note')}">-->
+                <!--Note-->
+              <!--</label>-->
+
+              <!--<div ng-messages="editTicketForm.note.$error"-->
+                   <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">-->
+                <!--<label class="control-label" ng-message="maxlength">Note is too large.</label>-->
+              <!--</div>-->
+
+              <!--<div text-editor te-initial-value="{{ editedTicket.note }}"-->
+                   <!--ng-model="editedTicket.note" name="note" te-text-maxlength="5000" te-html-maxlength="50000">-->
+
+                <!--<div te-editor class="form-control editor" contenteditable="true"-->
+                     <!--style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>-->
+
+                <!--<div class="wysiwyg-controls-wrapper clearfix">-->
+                  <!--<div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">-->
+
+                    <!--<div class="font-styles pull-left">-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="bold"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">-->
+                        <!--<i class="icon-sm wysiwyg-bold "></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="italic"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">-->
+                        <!--<i class="icon-sm wysiwyg-italic"></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="underline"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">-->
+                        <!--<i class="icon-sm wysiwyg-underline"></i>-->
+                      <!--</a>-->
+                    <!--</div>-->
+
+                    <!--<div class="text-bullets pull-left">-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="insertorderedlist"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">-->
+                        <!--<i class="icon-sm wysiwyg-ol"></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="insertunorderedlist"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">-->
+                        <!--<i class="icon-sm wysiwyg-ul"></i>-->
+                      <!--</a>-->
+                    <!--</div>-->
+
+                    <!--<div class="text-styles pull-left">-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="justifyleft"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">-->
+                        <!--<i class="icn-sm icn-wysiwyg-align-left"></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="justifycenter"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">-->
+                        <!--<i class="icn-sm icn-wysiwyg-align-center"></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="justifyright"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">-->
+                        <!--<i class="icn-sm icn-wysiwyg-align-right"></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="outdent"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">-->
+                        <!--<i class="icon-sm wysiwyg-unindent"></i>-->
+                      <!--</a>-->
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="indent"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">-->
+                        <!--<i class="icon-sm wysiwyg-indent"></i>-->
+                      <!--</a>-->
+                    <!--</div>-->
+
+                    <!--<div class="quote-link pull-left">-->
+
+                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+                         <!--data-edit="cblock"-->
+                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">-->
+                        <!--<i class="icon-sm wysiwyg-quote"></i>-->
+                      <!--</a>-->
+
+                    <!--</div>-->
+                  <!--</div>-->
+
+                  <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"-->
+                     <!--data-edit="removeformat"-->
+                     <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">-->
+                    <!--<i class="icon-sm wysiwyg-reset"></i>-->
+                  <!--</a>-->
+
+                <!--</div>-->
+
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
           <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
         </div>
@@ -739,7 +728,8 @@
                       <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
                            ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
 
-                      <div class="default-user-avatar" ng-if="!(share.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                      <div class="default-user-avatar" ng-if="!(share.user.avatar)"
+                           ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
                         <span>{{share.user.firstName[0].toUpperCase()}}</span>
                         <span>{{share.user.lastName[0].toUpperCase()}}</span>
                       </div>
@@ -756,7 +746,9 @@
                            uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                         <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
                              ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
-                        <div class="default-user-avatar" ng-if="!(share.user.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                        <div class="default-user-avatar" ng-if="!(share.user.avatar)"
+                             ng-class-odd="'avatar-background-color-odd'"
+                             ng-class-even="'avatar-background-color-even'">
                           <span>{{share.user.firstName[0].toUpperCase()}}</span>
                           <span>{{share.user.lastName[0].toUpperCase()}}</span>
                         </div>
@@ -1075,19 +1067,29 @@
         </div>
       </div>
       <div class="mob-ticket-buttons">
-        <button class="mob-add-ticket-btn mobile-btn primary" ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)" ng-class="{ 'class-disabled': TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') }" ng-click="toggleUpdateWindow(true)" ng-disabled="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')">+ Add New</button>
-        <button class="mob-close-ticket-btn mobile-btn" ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)" ng-click="updateAndCloseTicket()">Close Ticket</button>
+        <button class="mob-add-ticket-btn mobile-btn primary"
+                ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)"
+                ng-class="{ 'class-disabled': TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') }"
+                ng-click="toggleUpdateWindow(true)"
+                ng-disabled="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')">+ Add New
+        </button>
+        <button class="mob-close-ticket-btn mobile-btn"
+                ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)"
+                ng-click="updateAndCloseTicket()">Close Ticket
+        </button>
 
 
-        <button class="mob-add-ticket-btn mobile-btn primary full" ng-if="ticketDetails.status === 'COMPLETED' && (TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')) && !TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billed')" ng-click="markAsOpen()">
+        <button class="mob-add-ticket-btn mobile-btn primary full"
+                ng-if="ticketDetails.status === 'COMPLETED' && (TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')) && !TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billed')"
+                ng-click="markAsOpen()">
           Re-open Ticket
         </button>
 
-        <button  class="mob-add-ticket-btn mobile-btn primary full" ng-click="claimTicket()" ng-if="!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id">
+        <button class="mob-add-ticket-btn mobile-btn primary full" ng-click="claimTicket()"
+                ng-if="!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id">
           Claim
         </button>
       </div>
-
 
 
       <!-- <div class="mob-ticket-create-updates opened" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl" ng-form="ticketUpdateForm">

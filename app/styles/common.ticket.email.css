@@ -1,30 +1,68 @@
 .ticket-detail {
-	margin: 0 30px 25px;
-  padding-top: 125px;
+  margin: 0 30px 25px;
+  padding-top: 82px;
 }
-.ticket-message ul{
-	padding-left: 16px;
+
+.ticket-message ul {
+  padding-left: 16px;
 }
-.ticket-message ol{
-	margin-top: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+
+.ticket-message ol {
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .ticket-message a {
-    color: #3c7dcd;
-    text-decoration: underline;
+  color: #3c7dcd;
+  text-decoration: underline;
+}
+
+.ticket-detail h2 {
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.42;
+  letter-spacing: normal;
+  color: #364656;
+  border-radius: 4px;
+  padding: 5px;
+  border: 1px solid transparent;
+}
+
+.ticket-detail .ticket-message {
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: #626b7f;
+  border-radius: 4px;
+  padding: 5px;
+  border: 1px solid transparent;
+}
+
+.ticket-detail .ticket-editing .ticket-message:focus,
+.ticket-detail .ticket-editing h2:focus {
+  outline: none;
+}
+
+.ticket-detail .ticket-editing .ticket-message,
+.ticket-detail .ticket-editing h2 {
+  border: 1px solid #9ca5b6;
 }
 
 @media only screen and (max-width: 1400px) {
-	.ticket-detail {
-		padding-top: 150px;
-	}
+  .ticket-detail {
+    padding-top: 150px;
+  }
 }
 
-@-moz-document url-prefix(){
-    .ticket-detail h2{
-      margin-top: 1px;
-    	line-height: 33px;
-    }
+@-moz-document url-prefix() {
+  .ticket-detail h2 {
+    margin-top: 1px;
+    line-height: 33px;
+  }
 }

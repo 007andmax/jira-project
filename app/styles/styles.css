@@ -8966,7 +8966,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 
 .label {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 4px 9px;
   font-size: 11px;
   font-weight: bold;
   line-height: 12px;
@@ -9282,23 +9282,6 @@ a.label-icn-sm:focus {
   border: 1px solid #ffc107;
   border-radius: 4px;
 }
-
-/*.label-priority-medium[href]:hover,*/
-/*.label-priority-medium[href]:focus {*/
-/*background-color: #bc5500;*/
-/*}*/
-
-.label-priority-high {
-  background-color: #fff;
-  color: #e53935 !important;
-  border: 1px solid #e53935;
-  border-radius: 4px;
-}
-
-/*.label-priority-high[href]:hover,*/
-/*.label-priority-high[href]:focus {*/
-/*background-color: #cd1e1a;*/
-/*}*/
 
 @-moz-document url-prefix() {
   .label {

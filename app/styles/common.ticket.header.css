@@ -17,7 +17,7 @@
   padding: 30px;
   padding-bottom: 24px;
   padding-left: 50px;
-
+  
   background-color: rgba(255, 255, 255, 1);
 }
 
@@ -84,16 +84,16 @@
   .ticket-header.ticket-fixed-header {
     width: calc(100% - 394px);
   }
-
+  
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 154px);
   }
-
+  
   .right-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 317px);
     right: 0;
   }
-
+  
   .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 76px);
     right: 0;
@@ -104,11 +104,11 @@
   .ticket-header.ticket-fixed-header {
     width: calc(100% - 397px);
   }
-
+  
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 157px);
   }
-
+  
   .btn-collapse {
     display: none !important;
   }
@@ -117,19 +117,19 @@
 @media only screen and (max-width: 1024px) {
   .ticket-header.ticket-fixed-header {
     left: 76px;
-
+    
     width: calc(100% - 153px);
   }
-
+  
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 153px);
   }
-
+  
   .right-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 77px);
     right: 0;
   }
-
+  
   .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 77px);
     right: 0;
@@ -148,12 +148,24 @@
 }
 
 .ticket-header-username {
+  display: flex;
   margin-right: 10px;
-  max-width: calc(100% - 170px);
   white-space: nowrap;
-  -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  /* overflow: hidden; */
+  font-weight: 700;
+}
+
+.priority-big-size.label-priority-high {
+  background: url(../images/new-icons/high-priority-mobile.png) no-repeat;
+}
+
+.priority-big-size {
+  display: block !important;
+  margin: 6px 0 0 8px;
+  width: 12px;
+  height: 12px;
+  background: url(../images/new-icons/low-priority-mobile.png) no-repeat;
+  border: none;
 }
 
 .companies-dropdown .dropdown-toggle {
@@ -169,19 +181,13 @@
 }
 
 .ticket-header-status {
-  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
 }
 
-.ticket-header-status .label-icn-sm {
-  margin-right: 4px;
-}
-
-.ticket-header-status .progress-big-size {
-  margin-right: 4px;
-}
-
-.ticket-header-status .priority-big-size {
-  margin-right: 4px;
+.ticket-header-status .dropdown {
+  margin: 0 7px;
 }
 
 .ticket-header-labels {
@@ -229,6 +235,32 @@
   width: calc(100% - 260px);
 }
 
+.ticket-edit-actions {
+  display: flex;
+}
+
+.ticket-edit-actions button {
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: 1px solid #edf2f6;
+  border-radius: 50%;
+  position: relative;
+  transition: all .3s;
+  margin: 0;
+}
+
+.ticket-assign:after {
+  background-image: url(../images/new-icons/primary-user.svg);
+  position: absolute;
+  content: "";
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  top: calc(50% - 8px);
+  left: calc(50% - 7px);
+}
+
 @-moz-document url-prefix() {
   .ticket-header.ticket-fixed-header {
     padding-bottom: 30px;
@@ -247,14 +279,14 @@
 }
 
 .ticket-company-info .ticket-company-address {
-  color: #94A4B8;
+  color: #94a4b8;
 }
 
 @media only screen and (min-width: 1316px) and (max-width: 1440px) {
   .opened-ticket-list .ticket-header.ticket-fixed-header {
     width: calc(100% - 734px);
   }
-
+  
   .right-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
     width: calc(100% - 656px);
   }
@@ -264,7 +296,7 @@
   .vladik {
     width: calc(100% - 230px) !important;
   }
-
+  
   .ticket-header-actions .btn {
     margin: 0;
   }
@@ -274,11 +306,12 @@
   .vladik {
     width: calc(100% - 210px) !important;
   }
-
+  
   .ticket-header-username {
     white-space: normal;
   }
-  .dot-sep{
+  
+  .dot-sep {
     margin: 3px 2px;
   }
 }
