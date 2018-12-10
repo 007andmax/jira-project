@@ -6045,8 +6045,8 @@ Devices tab
 
 .company-devices .list-item .col-md-1 .dropdown-menu,
 .invoices .col-md-1 .dropdown-menu {
-  width: 170px !important;
-  left: -120px !important;
+  width: 180px !important;
+  left: -130px !important;
 }
 
 .company-devices .dropdown-menu.remote-dropdown {
