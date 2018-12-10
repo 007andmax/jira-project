@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
-            <div class="pull-left ticket-edit-actions"
+            <div class="ticket-edit-actions"
                  ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
               <div class="btn btn-icn btn-default pull-left"
                    ng-if="editingTicket"
@@ -132,7 +132,20 @@
               </div>
             </div>
 
-            <!--<button class="ticket-assign"></button>-->
+            <div class="ticket-assign-actions">
+              <div uib-tooltip="Assign"
+                   tooltip-placement="top">
+                <button class="ticket-assign"></button>
+              </div>
+            </div>
+
+            <div class="ticket-settings-actions">
+              <div uib-tooltip="Settings"
+                   tooltip-placement="top">
+                <button class="ticket-settings"></button>
+              </div>
+            </div>
+
             <!--<div class="pull-left" uib-dropdown-->
             <!--ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">-->
 
@@ -220,138 +233,137 @@
           </div>
         </div>
         <div class="ticket-detail">
-          <div ng-if="!editingTicket">
-            <h2 class="ellipsis">{{ ticketDetails.subject }}</h2>
-            <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
-          </div>
-
-          <div ng-if="editingTicket" ng-class="{'ticket-editing': editingTicket}">
-            <h2 contenteditable="true" class="ellipsis">{{ ticketDetails.subject }}</h2>
-            <div contenteditable="true" class="ticket-message" ng-bind-html="getTicketNote()"></div>
+          <div ng-class="{'ticket-editing': editingTicket}">
+            <h2 contenteditable="{{ editingTicket }}" class="ellipsis">{{ ticketDetails.subject }}</h2>
+            <div contenteditable="{{ editingTicket }}" class="ticket-message" ng-bind-html="getTicketNote()"></div>
           </div>
 
           <!--<div ng-if="editingTicket">-->
-            <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"-->
-                 <!--style="margin-bottom: 10px;">-->
+          <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"-->
+          <!--style="margin-bottom: 10px;">-->
 
-              <!--<div ng-messages="editTicketForm.subject.$error"-->
-                   <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">-->
-                <!--<label class="control-label" ng-message="required">Subject can not be left empty.</label>-->
-                <!--<label class="control-label" ng-message="maxlength">Subject is too large.</label>-->
-              <!--</div>-->
+          <!--<div ng-messages="editTicketForm.subject.$error"-->
+          <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">-->
+          <!--<label class="control-label" ng-message="required">Subject can not be left empty.</label>-->
+          <!--<label class="control-label" ng-message="maxlength">Subject is too large.</label>-->
+          <!--</div>-->
 
-              <!--<input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"-->
-                     <!--name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">-->
-            <!--</div>-->
-            <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">-->
+          <!--<input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"-->
+          <!--name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">-->
+          <!--</div>-->
+          <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">-->
 
-              <!--<label class="control-label" ng-class="{'hide': isShowingErrors(editTicketForm, 'note')}">-->
-                <!--Note-->
-              <!--</label>-->
+          <!--<label class="control-label" ng-class="{'hide': isShowingErrors(editTicketForm, 'note')}">-->
+          <!--Note-->
+          <!--</label>-->
 
-              <!--<div ng-messages="editTicketForm.note.$error"-->
-                   <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">-->
-                <!--<label class="control-label" ng-message="maxlength">Note is too large.</label>-->
-              <!--</div>-->
+          <!--<div ng-messages="editTicketForm.note.$error"-->
+          <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">-->
+          <!--<label class="control-label" ng-message="maxlength">Note is too large.</label>-->
+          <!--</div>-->
 
-              <!--<div text-editor te-initial-value="{{ editedTicket.note }}"-->
-                   <!--ng-model="editedTicket.note" name="note" te-text-maxlength="5000" te-html-maxlength="50000">-->
+          <!--<div text-editor te-initial-value="{{ editedTicket.note }}"-->
+          <!--ng-model="editedTicket.note" name="note" te-text-maxlength="5000" te-html-maxlength="50000">-->
 
-                <!--<div te-editor class="form-control editor" contenteditable="true"-->
-                     <!--style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>-->
+          <!--<div te-editor class="form-control editor" contenteditable="true"-->
+          <!--style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>-->
 
-                <!--<div class="wysiwyg-controls-wrapper clearfix">-->
-                  <!--<div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">-->
+          <!--<div class="wysiwyg-controls-wrapper clearfix">-->
+          <!--<div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">-->
 
-                    <!--<div class="font-styles pull-left">-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="bold"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">-->
-                        <!--<i class="icon-sm wysiwyg-bold "></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="italic"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">-->
-                        <!--<i class="icon-sm wysiwyg-italic"></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="underline"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">-->
-                        <!--<i class="icon-sm wysiwyg-underline"></i>-->
-                      <!--</a>-->
-                    <!--</div>-->
+          <!--<div class="font-styles pull-left">-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="bold"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">-->
+          <!--<i class="icon-sm wysiwyg-bold "></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="italic"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">-->
+          <!--<i class="icon-sm wysiwyg-italic"></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="underline"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">-->
+          <!--<i class="icon-sm wysiwyg-underline"></i>-->
+          <!--</a>-->
+          <!--</div>-->
 
-                    <!--<div class="text-bullets pull-left">-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="insertorderedlist"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">-->
-                        <!--<i class="icon-sm wysiwyg-ol"></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="insertunorderedlist"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">-->
-                        <!--<i class="icon-sm wysiwyg-ul"></i>-->
-                      <!--</a>-->
-                    <!--</div>-->
+          <!--<div class="text-bullets pull-left">-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="insertorderedlist"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">-->
+          <!--<i class="icon-sm wysiwyg-ol"></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="insertunorderedlist"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">-->
+          <!--<i class="icon-sm wysiwyg-ul"></i>-->
+          <!--</a>-->
+          <!--</div>-->
 
-                    <!--<div class="text-styles pull-left">-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="justifyleft"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">-->
-                        <!--<i class="icn-sm icn-wysiwyg-align-left"></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="justifycenter"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">-->
-                        <!--<i class="icn-sm icn-wysiwyg-align-center"></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="justifyright"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">-->
-                        <!--<i class="icn-sm icn-wysiwyg-align-right"></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="outdent"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">-->
-                        <!--<i class="icon-sm wysiwyg-unindent"></i>-->
-                      <!--</a>-->
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="indent"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">-->
-                        <!--<i class="icon-sm wysiwyg-indent"></i>-->
-                      <!--</a>-->
-                    <!--</div>-->
+          <!--<div class="text-styles pull-left">-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="justifyleft"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">-->
+          <!--<i class="icn-sm icn-wysiwyg-align-left"></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="justifycenter"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">-->
+          <!--<i class="icn-sm icn-wysiwyg-align-center"></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="justifyright"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">-->
+          <!--<i class="icn-sm icn-wysiwyg-align-right"></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="outdent"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">-->
+          <!--<i class="icon-sm wysiwyg-unindent"></i>-->
+          <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="indent"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">-->
+          <!--<i class="icon-sm wysiwyg-indent"></i>-->
+          <!--</a>-->
+          <!--</div>-->
 
-                    <!--<div class="quote-link pull-left">-->
+          <!--<div class="quote-link pull-left">-->
 
-                      <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-                         <!--data-edit="cblock"-->
-                         <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">-->
-                        <!--<i class="icon-sm wysiwyg-quote"></i>-->
-                      <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
+          <!--data-edit="cblock"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">-->
+          <!--<i class="icon-sm wysiwyg-quote"></i>-->
+          <!--</a>-->
 
-                    <!--</div>-->
-                  <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
 
-                  <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"-->
-                     <!--data-edit="removeformat"-->
-                     <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">-->
-                    <!--<i class="icon-sm wysiwyg-reset"></i>-->
-                  <!--</a>-->
+          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"-->
+          <!--data-edit="removeformat"-->
+          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">-->
+          <!--<i class="icon-sm wysiwyg-reset"></i>-->
+          <!--</a>-->
 
-                <!--</div>-->
+          <!--</div>-->
 
-              <!--</div>-->
-            <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</div>-->
 
           <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
         </div>
       </div>
       <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0">
-        <div class="attachment-meta clearfix">
-          <span class="attachments-count pull-left">{{ ticketDetails.attachments.length }} Attachments</span>
-          <div class="download-all pull-right">
+        <div class="attachment-meta">
+          <div>
+            <b>{{ ticketDetails.attachments.length }} </b>
+            <span>Attachments</span>
+          </div>
+          <div class="combined-shape"></div>
+          <div class="download-all pull-right" style="display: none;">
             <div class="btn btn-icn btn-default pull-right has-tooltip"
                  uib-tooltip="download all attachments" tooltip-append-to-body="true"
                  tooltip-placement="top" ng-click="downloadAllAttachments()">
@@ -366,18 +378,14 @@
               url="/html/scripts/core/tickets/image-preview.tpl.html"
               data="attachment.file" func="downloadAttachment"
               first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
-            <div class="file-icon-name">
-              <span class="file-icon icn-lg"></span>
-              <span class="file-ext">
-                {{ type }}
-              </span>
-            </div>
+            <div class="file-icon-name attach-type-{{ type }}"></div>
             <div class="file-name" ng-bind="attachment.file.name"></div>
             <div class="onhover">
-              <span class="file-name" ng-bind="attachment.file.name"></span>
+              <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                    ng-bind="attachment.file.name"></span>
               <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
-              <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
-                 uib-tooltip="Download" tooltip-placement="bottom"
+              <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
+                 uib-tooltip="Download" tooltip-placement="top"
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                 <span class="icon-sm attachments"></span>
               </a>
@@ -393,15 +401,10 @@
         <div
           ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates"
           class="ticket-update-header clearfix">
-          <h4>
-          <span class="pull-left ticket-update-title">Ticket Updates
-            <span class="light-cl">{{ ticketDetails.updates.length + ticketDetails.unloadedUpdates }}</span>
-          </span>
-            <span class="pull-left label shared-with" ng-style="{'cursor': shares.length ? 'pointer' : 'default'}"
-                  style="cursor: pointer" ng-click="toggleFullSharedUsers()">
-            SHARED WITH {{ shares.length }}
-          </span>
-          </h4>
+          <div style="font-size: 13px;">
+            <b class="ng-binding">{{ticketDetails.updates.length + ticketDetails.unloadedUpdates}}</b>
+            <span style="color: #9ca5b6;">Ticket Updates</span>
+          </div>
           <div class="clearfix"></div>
           <ul class="shared-users-list clearfix" ng-show="isFullSharedUserShow === true">
             <li ng-repeat="share in shares">
@@ -430,12 +433,6 @@
               <div class="pull-left avatar m-r">
                 <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="avatar-38 img-circle">
               </div>
-              <span class="icon-update pull-left icn-sm"
-                    ng-class="{'icn-update-message': ticketUpdate.type === 'NOTE',
-                'icn-update-service': ticketUpdate.type === 'SERVICE',
-                'icn-update-product': ticketUpdate.type === 'PRODUCT',
-                'icn-update-attach': ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.lenfth > 0}">
-              </span>
             </div>
             <div class="ticket-update-content pull-left">
               <div class="updater-name">{{ getUserName(user) }}
@@ -456,7 +453,8 @@
 
               <p class="ticket-update-message"
                  ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating !== ticketUpdate.id"
-                 ng-bind-html="getUpdateNote()"></p>
+                 ng-bind-html="getUpdateNote()"
+                 contenteditable="{{ ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id}}"></p>
 
               <div ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id" class="clearfix"
                    style="position: relative; float: left; width: 100%">
@@ -469,93 +467,6 @@
                       <div te-editor class="form-control editor" contenteditable="true"
                            style="min-height: 92px;height: auto;border: none;"
                            data-text="Click here to respond to the Ticket"></div>
-
-                      <div class="ticket-add-content-actions pull-left">
-
-
-                      </div>
-
-                      <div class="wysiwyg-controls-wrapper clearfix">
-                        <div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">
-
-                          <div class="font-styles pull-left">
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="bold"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
-                              <i class="icon-sm wysiwyg-bold "></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="italic"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
-                              <i class="icon-sm wysiwyg-italic"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="underline"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
-                              <i class="icon-sm wysiwyg-underline"></i>
-                            </a>
-                          </div>
-
-                          <div class="text-bullets pull-left">
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="insertorderedlist"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
-                              <i class="icon-sm wysiwyg-ol"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="insertunorderedlist"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
-                              <i class="icon-sm wysiwyg-ul"></i>
-                            </a>
-                          </div>
-
-                          <div class="text-styles pull-left">
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="justifyleft"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
-                              <i class="icn-sm icn-wysiwyg-align-left"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="justifycenter"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
-                              <i class="icn-sm icn-wysiwyg-align-center"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="justifyright"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
-                              <i class="icn-sm icn-wysiwyg-align-right"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="outdent"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">
-                              <i class="icon-sm wysiwyg-unindent"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="indent"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">
-                              <i class="icon-sm wysiwyg-indent"></i>
-                            </a>
-                          </div>
-
-                          <div class="quote-link pull-left">
-
-                            <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                               data-edit="cblock"
-                               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">
-                              <i class="icon-sm wysiwyg-quote"></i>
-                            </a>
-
-                          </div>
-                        </div>
-
-                        <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip reset-formatting"
-                           data-edit="removeformat"
-                           tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">
-                          <i class="icon-sm wysiwyg-reset"></i>
-                        </a>
-
-                      </div>
-
                     </div>
 
                   </div>
@@ -576,8 +487,6 @@
 
                   </div>
                 </div>
-
-
               </div>
 
               <ul class="attachments clearfix" style="position: relative;"
@@ -588,17 +497,14 @@
                     url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
-                  <div class="file-icon-name">
-                    <span class="file-icon icn-lg"></span>
-                    <span class="file-ext">
-                      {{ type }}
-                    </span>
-                  </div>
+                  <div class="file-icon-name attach-type-{{ type }}"></div>
                   <div class="file-name" ng-bind="attachment.file.name"></div>
                   <div class="onhover">
-                    <span class="file-name" ng-bind="attachment.file.name"></span>
+                    <span class="file-name"
+                          style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                          ng-bind="attachment.file.name"></span>
                     <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
-                    <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
+                    <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
                        data-placement="top" uib-tooltip="Download"
                        ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                       <span class="icon-sm attachments"></span>
@@ -930,7 +836,8 @@
                   <div class="onhover">
                     <span class="file-name" ng-bind="attachment.file.name"></span>
                     <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
-                    <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
+                    <a href="javascript:void(0)"
+                       class="tp-hide file-download has-tooltip"
                        data-placement="top" uib-tooltip="Download"
                        ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                       <span class="icon-sm attachments"></span>

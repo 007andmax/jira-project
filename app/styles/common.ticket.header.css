@@ -219,7 +219,7 @@
 
 .ticket-header-actions {
   margin-top: 1px;
-  margin-right: 15px;
+  display: flex;
 }
 
 .ticket-header-actions .btn,
@@ -232,15 +232,15 @@
 }
 
 .vladik {
-  width: calc(100% - 260px);
+  width: calc(100% - 235px);
 }
 
 .ticket-edit-actions {
   display: flex;
 }
 
-.ticket-edit-actions button {
-  width: 32px;
+.ticket-header-actions button {
+  width: 32px !important;
   height: 32px;
   background-color: transparent;
   border: 1px solid #edf2f6;
@@ -248,6 +248,11 @@
   position: relative;
   transition: all .3s;
   margin: 0;
+  outline: none;
+}
+
+.ticket-header-actions button:hover {
+  background-color: #9cc8e1;
 }
 
 .ticket-assign:after {
@@ -259,6 +264,95 @@
   height: 16px;
   top: calc(50% - 8px);
   left: calc(50% - 7px);
+}
+
+.ticket-header-actions > div {
+  margin-right: 10px;
+}
+
+.ticket-header-actions > div:last-child {
+  margin: 0;
+}
+
+.ticket-settings:after {
+  background: url(../images/sprites-s76c759f188.png) -1636px 0;
+  position: absolute;
+  content: "";
+  width: 19px;
+  height: 5px;
+  top: calc(50% - 2px);
+  left: calc(50% - 9px);
+}
+
+.ticket-detail .tags-wrap {
+  cursor: pointer;
+  margin: 10px 0 0 0;
+  border: none;
+  border-bottom: 1px solid #edf2f6;
+}
+
+.ticket-detail .tags-wrap:before {
+  position: absolute;
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: url(../images/new-icons/tag.png);
+  left: -2px;
+  top: 13px;
+}
+
+.ticket-detail .tags,
+.ticket-detail .tags-action {
+  width: 100%;
+}
+
+.ticket-detail .tags {
+  padding-left: 20px;
+}
+
+.ticket-detail .tag-span {
+  font-size: 12px;
+  color: #4f5f79;
+}
+
+.ticket-detail .tags-title {
+  display: none;
+}
+
+.ticket-detail .tags .tag-label span {
+  padding-right: 15px;
+}
+
+.ticket-detail .remove-tag.icn-xs {
+  top: 10px;
+}
+
+.ticket-detail .tags .tag-label {
+  padding: 9px;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  border: 1px solid #edf2f6;
+}
+
+.ticket-detail .tag-autocomplete {
+  width: 230px !important;
+  height: 210px !important;
+  margin: 0;
+  top: 100% !important;
+}
+
+.ticket-detail .tag-autocomplete .autocomplete-item {
+  font-weight: 900;
+  padding: 8px 24px;
+}
+
+.ticket-detail .tags-action input {
+  cursor: pointer;
+}
+
+.ticket-detail .tag-span {
+  font-size: 12px;
+  color: #4f5f79;
 }
 
 @-moz-document url-prefix() {
@@ -273,9 +367,105 @@
   }
 }
 
+.attachment-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.attachments > li {
+  background: transparent;
+  border: none;
+  margin-right: 0;
+  display: flex;
+  height: auto;
+  align-items: center;
+  flex-direction: column;
+}
+
+.attachments li .file-name {
+  text-align: center;
+  font-size: 13px;
+  color: #9ca5b6;
+}
+
+.attachments li > .onhover .file-download {
+  height: 16px;
+  width: 16px;
+}
+
+.attachments li > .onhover {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.11);
+  border: 1px solid #2ec866;
+}
+
+.attach-type-png {
+  background: url("../images/new-icons/png-attach.png") no-repeat;
+}
+
+.alert.alert-info strong {
+  font-weight: 500 !important;
+  color: #16a4fa;
+}
+
+.ticket-detail .dropdown-menu > li:hover {
+  background-color: #16a4fa;
+}
+
+.ticket-detail .dropdown-menu > li:hover span {
+  color: #fff;
+}
+
+.ticket-alert-msg {
+  padding: 0 30px;
+}
+
+.alert.alert-info {
+  margin: 0 0 60px 0;
+  background: #e7f5fe;
+  border: none;
+  color: #16a4fa;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.attach-type-doc,
+.attach-type-docx {
+  background: url("../images/new-icons/doc-attach.png") no-repeat;
+}
+
+.attach-type-txt {
+  background: url("../images/new-icons/txt-attach.png") no-repeat;
+}
+
+.attach-type-jpg {
+  background: url("../images/new-icons/jpeg-attach.png") no-repeat;
+}
+
+.attach-type-pdf {
+  margin-left: 4px;
+  background: url("../images/new-icons/pdf-attach.png") no-repeat;
+}
+
+.combined-shape {
+  background: url("../images/new-icons/combined-shape.png");
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 .ticket-company-info {
   width: 100%;
   margin-top: 10px;
+}
+
+.attachment-meta span {
+  font-size: 13px;
+  color: #9ca5b6;
 }
 
 .ticket-company-info .ticket-company-address {

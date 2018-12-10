@@ -23,6 +23,92 @@
   pointer-events: none;
 }
 
+.mobile-btn {
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  outline: none;
+  transition: all .3s;
+  border: none;
+}
+
+.mobile-btn.primary {
+  background: #16a4fa;
+}
+
+.mobile-btn.primary:hover {
+  background: #1481c4;
+}
+
+.create-updates-header {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  border-bottom: 1px solid #edf2f6;
+}
+
+.mob-note, .mob-product, .mob-service {
+  width: 24px;
+  height: 24px;
+  margin-right: 35px;
+  position: relative;
+}
+
+.mob-note:after,
+.mob-product:after,
+.mob-service:after {
+  position: absolute;
+  content: '';
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+}
+
+.mob-note:hover:after,
+.mob-product:hover:after,
+.mob-service:hover:after,
+.mob-note.active:after,
+.mob-product.active:after,
+.mob-service.active:after {
+  background-color: #16a4fa;
+}
+
+.mob-note {
+  background: url("../images/new-icons/mob-note.png");
+}
+
+.mob-product {
+  background: url("../images/new-icons/mob-product.png");
+}
+
+.mob-service {
+  background: url("../images/new-icons/mob-service.png");
+}
+
+.mob-note.active,
+.mob-note:hover {
+  background: url("../images/new-icons/mob-note-hover.png");
+}
+
+.mob-product.active,
+.mob-product:hover {
+  background: url("../images/new-icons/mob-product-hover.png");
+}
+
+.mob-service.active,
+.mob-service:hover {
+  background: url("../images/new-icons/mob-service-hover.png");
+}
+
+.create-updates-header img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 35px;
+}
+
 .ticket-add-container {
   margin: 0 30px;
 }
@@ -50,7 +136,7 @@
 }
 
 .ticket-add-content textarea.form-control {
-  background-color: #FFF;
+  background-color: #fff;
   resize: none;
   border: none;
   min-height: 64px;
@@ -70,7 +156,7 @@
   height: 55px;
   background-color: #f2f2f2;
   border-top: 1px solid;
-  border-color: #CBCBCB;
+  border-color: #cbcbcb;
   padding: 8px 7px;
   width: 100%;
 }
@@ -219,41 +305,47 @@
 
 /* Add Product tab */
 
-
 #Product .col-4, #Product .col-5 {
   width: 124px;
 }
-#Product .col-4 .discount-input, #Service .col-4 .discount-input{
+
+#Product .col-4 .discount-input, #Service .col-4 .discount-input {
   position: relative;
 }
-#Product .icn-delete{
+
+#Product .icn-delete {
   margin-top: 15px;
   cursor: pointer;
   width: 14px;
   height: 14px;
 }
+
 #Product .col-4 .discount-input:after,
 #Service .col-4 .discount-input:after,
 .ticket-update-service-edit .col-4 .discount-input:after,
-.ticket-update-product-edit .col-4 .discount-input:after  {
+.ticket-update-product-edit .col-4 .discount-input:after {
   content: "%";
   position: absolute;
   top: 5px;
   right: 5px;
 }
-#Service .service-not-yet{
+
+#Service .service-not-yet {
   text-align: center;
 }
-#Service .service-not-yet p{
+
+#Service .service-not-yet p {
   text-align: left;
 }
+
 #Service .service-not-yet img,
 #Service .service-not-yet p,
-#Service .service-not-yet .btn{
+#Service .service-not-yet .btn {
   display: inline-block;
   margin: 40px;
   vertical-align: middle;
 }
+
 /* Add Service tab */
 #Service .col-1 {
   width: 240px;
@@ -278,7 +370,8 @@
 .shared-user-add .checkbox {
   margin-left: 10px;
 }
-@media screen and (max-width: 1600px){
+
+@media screen and (max-width: 1600px) {
   #Service .col-1 {
     width: 237px;
   }

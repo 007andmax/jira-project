@@ -1,12 +1,17 @@
 <div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
 
 
-  <div class="ticket-post-update-wrapper">
+  <div class="ticket-post-update-wrapper" style="display: none;">
+    <div class="create-updates-header">
+      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
+      <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note"
+              ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
+      <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product"
+              ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
+      <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service"
+              ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
+    </div>
 
-    <!--<div class="btn btn-primary pull-right has-tooltip" custom-disabled="{{ true }}"-->
-    <!--tooltip-placement="top" uib-tooltip="Remote Access" style="width: 92px;">-->
-    <!--<i class="icn-sm icn-remote-access"></i>-->
-    <!--</div>-->
 
     <ul class="nav nav-ticket-add"
         ng-if="TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)">
@@ -166,8 +171,6 @@
        ng-init="setMobileForm(ticketUpdateForm)">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
-      <!--@Leo class: active-->
-
       <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note"
               ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
       <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product"

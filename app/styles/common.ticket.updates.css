@@ -1,10 +1,10 @@
-.ticket-update, .ticket-update-header {
+.ticket-update {
   margin-left: 30px;
   margin-right: 30px;
 }
 
 .ticket-update-header {
-  padding-bottom: 30px;
+  padding: 0 30px 20px 30px;
   border-bottom: 1px solid #e9edf1;
 }
 
@@ -85,6 +85,11 @@
 .ticket-updates-wrapper {
   position: relative;
   margin-bottom: 100px;
+  font-size: 13px;
+}
+
+.ticket-updates-wrapper p {
+  font-size: 13px;
 }
 
 .ticket-update {
@@ -134,8 +139,42 @@
 }
 
 .ticket-update-content .ticket-update-meta .ticket-meta-wrapper {
-  display: -webkit-flex;
   display: flex;
+  align-items: center;
+}
+
+.ticket-meta-wrapper .default-user-avatar, .default-company-logo {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+
+.ticket-update-content .icn-delete {
+  background-image: url(../images/new-icons/company-remove.svg);
+  width: 12px;
+  height: 12px;
+}
+
+.ticket-update-content .edit-icon {
+  background-image: url(../images/new-icons/company-edit.svg);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.ticket-update-content .ticket-update-message {
+  margin: 0;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ticket-update-content .ticket-update-message.editing {
+  border: 1px solid #9ca5b6;
+}
+
+.ticket-update-content .updater-name a {
+  margin-left: 10px;
 }
 
 .ticket-update-content .ticket-update-meta .avatar {
