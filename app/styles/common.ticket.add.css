@@ -1,18 +1,36 @@
 .ticket-post-update-wrapper {
-  border-bottom: 1px solid #e7ecf2;
-  margin: 20px 30px;
-  padding-bottom: 30px;
-  position: relative;
-}
-
-.opened-ticket-list .ticket-post-update-wrapper {
-  padding-bottom: 30px;
+  /*border-bottom: 1px solid #e7ecf2;*/
+  /*position: relative;*/
+  position: fixed;
+  bottom: 0;
+  z-index: 99999;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+  width: calc(100% - 933px);
+  right: 77px;
 }
 
 .ticket-post-update-wrapper > .btn {
   position: absolute;
   top: 30px;
   right: 0;
+}
+
+.ticket-post-update-wrapper .petrovich {
+  position: relative;
+}
+
+.ticket-post-update-wrapper .petrovich a {
+  position: absolute;
+  bottom: 10px;
+  left: 73px;
+}
+
+.ticket-add .ticket-update-note .editor {
+  border: none;
+  padding: 24px 24px 0 24px;
+  color: #9ca5b6;
+  font-size: 13px;
 }
 
 .ticket-post-update-wrapper > .btn.connected, .ticket-post-update-wrapper > .btn.connected:hover, .ticket-post-update-wrapper > .btn.connected:active:hover, .ticket-post-update-wrapper > .btn.connected:focus:hover, .ticket-post-update-wrapper > .btn.connected:focus, .ticket-post-update-wrapper > .btn.connected:active {
@@ -114,7 +132,6 @@
 }
 
 .ticket-add {
-  padding-top: 30px;
   width: 100%;
 }
 
@@ -130,11 +147,6 @@
   margin-right: 10px;
 }
 
-.ticket-add-content {
-  /*margin-left: 48px;*/
-  border: 1px #e7ecf2 solid;
-}
-
 .ticket-add-content textarea.form-control {
   background-color: #fff;
   resize: none;
@@ -143,8 +155,18 @@
   padding: 15px 20px;
 }
 
+.ticket-add .ticket--footer {
+  padding: 20px 20px 20px 64px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .ticket-add-content input[type='number'].form-control {
   -moz-appearance: textfield;
+}
+
+.ticket-add .ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
+  margin-right: 0;
 }
 
 .ticket-add-content input::-webkit-outer-spin-button,

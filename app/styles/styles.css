@@ -764,6 +764,9 @@ hr {
   margin: 10px;
   border: 1px solid #e7ecf2;
   background-color: #f1f5fa;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .modal-create-ticket .upload-attachments li {
@@ -9694,7 +9697,7 @@ a.thumbnail.active {
 .progress-attachment {
   width: 100px;
   height: 6px;
-  margin-top: 7px;
+  /*margin-top: 7px;*/
   margin-right: 13px;
   margin-bottom: 0;
   background-color: #d7dde5;
