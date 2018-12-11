@@ -84,7 +84,7 @@
 
 .ticket-updates-wrapper {
   position: relative;
-  margin-bottom: 100px;
+  /*margin-bottom: 100px;*/
   font-size: 13px;
 }
 
@@ -356,9 +356,8 @@
   padding: 0;
   position: relative;
   list-style: none;
-  color: #4c5c6f;
-  background-color: #f1f5fa;
-  border: 1px solid #e7ecf2;
+  color: #4f5f79;
+  background-color: #f6f8fa;
 }
 
 .table-wrapper .table-content + .table-content {
@@ -411,7 +410,6 @@
 /*padding-left: 7px;*/
 /*}*/
 .table-wrapper .table-content [class^="col-"] {
-  border-left: 1px solid #e7ecf2;
   padding: 5px;
   height: auto;
   border-right: 0;
@@ -537,8 +535,10 @@
 .table-wrapper .table-content-action {
   width: 32px;
   position: absolute;
-  right: -32px;
-  top: 0;
+  right: -50px;
+  top: -16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .table-wrapper .table-content-action a.hit-area {
@@ -590,24 +590,19 @@
   top: 50px;
 }
 
-.ticket-update-product-edit {
-  position: absolute;
-  left: -20px;
-  right: -20px;
-  height: 166px;
-  padding: 30px 84px 30px 100px;
-  box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;
-  background-color: #fff;
+.ticket-update-product-edit .table-content,
+.ticket-update-service-edit .table-content {
+  width: 100%;
 }
 
 .ticket-update-service-edit {
-  position: absolute;
-  left: -20px;
-  right: -20px;
-  height: 166px;
-  padding: 30px 84px 30px 100px;
-  box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;
-  background-color: #fff;
+  /*position: absolute;*/
+  /*left: -20px;*/
+  /*right: -20px;*/
+  /*height: 166px;*/
+  /*padding: 30px 84px 30px 100px;*/
+  /*box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;*/
+  /*background-color: #fff;*/
 }
 
 .ticket-update-product-edit .edit-col1 {
@@ -655,8 +650,8 @@
 }
 
 .ticket-update-edit-actions {
-  margin-top: 30px;
   text-align: right;
+  margin-top: 10px;
 }
 
 .ticket-update-edit-actions .validation-msg {
@@ -729,6 +724,15 @@
 .table-content.service-table .col-3 {
   width: 75%;
   padding-left: 268px;
+}
+
+.table-content .table-content-top {
+  border-bottom: 1px solid #edf2f6;
+}
+
+.table-content .table-content-top,
+.table-content .table-content-bottom {
+  padding: 10px 15px;
 }
 
 @media screen and (min-width: 2048px) {

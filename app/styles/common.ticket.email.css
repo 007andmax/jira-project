@@ -31,6 +31,20 @@
   border: 1px solid transparent;
 }
 
+.ticket-detail h2,
+.ticket-detail .ticket-message {
+  outline: none;
+}
+
+.ticket-update-note .editor {
+  line-height: 20px;
+  padding: 5px;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid #9ca5b6;
+  color: #626b7f;
+}
+
 .ticket-detail .ticket-message {
   font-size: 13px;
   font-weight: normal;

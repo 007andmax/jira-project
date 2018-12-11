@@ -234,8 +234,11 @@
         </div>
         <div class="ticket-detail">
           <div ng-class="{'ticket-editing': editingTicket}">
-            <h2 contenteditable="{{ editingTicket }}" class="ellipsis">{{ ticketDetails.subject }}</h2>
-            <div contenteditable="{{ editingTicket }}" class="ticket-message" ng-bind-html="getTicketNote()"></div>
+            <h2 contenteditable="{{ editingTicket ? true : false}}"
+                class="ellipsis">{{ ticketDetails.subject }}</h2>
+            <div contenteditable="{{ editingTicket ? true : false }}"
+                 class="ticket-message"
+                 ng-bind-html="getTicketNote()"></div>
           </div>
 
           <!--<div ng-if="editingTicket">-->
@@ -438,13 +441,13 @@
               <div class="updater-name">{{ getUserName(user) }}
                 <span class="text-muted">added {{ updateType() }}</span>
                 <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete Update"
                    ng-click="deleteUpdate()"
                    custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
                   <i class="icon-sm icn-delete"></i>
                 </a>
                 <a ng-if="ticketUpdate.type === 'NOTE'" class="hit-area pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit update"
                    ng-click="toggleNoteUpdate(ticketUpdate)"
                    custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                   <i class="icon-sm edit-icon"></i>
@@ -464,8 +467,7 @@
                     <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note"
                          name="note" te-text-maxlength="5000" te-html-maxlength="50000">
 
-                      <div te-editor class="form-control editor" contenteditable="true"
-                           style="min-height: 92px;height: auto;border: none;"
+                      <div te-editor class="editor" contenteditable="true"
                            data-text="Click here to respond to the Ticket"></div>
                     </div>
 
@@ -517,46 +519,75 @@
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
 
+                <!--<div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">-->
+
+                  <!--<div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"-->
+                       <!--ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">-->
+                    <!--<span class="ellipsis pre-line" uib-tooltip="{{ product.item.description }}"-->
+                          <!--trimmed-tooltip-checker="product.item.description"></span>-->
+                    <!--<div style="color:#b2becd;font-size: 13px; line-height: 20px;">-->
+                      <!--<span style="word-break: break-all" ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>-->
+                      <!--<span style="word-break: break-all"-->
+                            <!--ng-show="product.item.manufacture && product.item.manufacture.length > 0"-->
+                      <!--&gt;P/N: {{ product.item.manufacture }}</span>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-3 ellipsis serial-width" ng-if="product.serialNumber"-->
+                       <!--uib-tooltip="{{ product.serialNumber }}"-->
+                       <!--trimmed-tooltip-checker="product.serialNumber">-->
+                  <!--</div>-->
+                  <!--<div class="col-5">-->
+                    <!--<div class="ellipsis" ng-show="ticketDetails.status !== 'COMPLETED'"-->
+                         <!--uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"-->
+                         <!--trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">-->
+                    <!--</div>-->
+                    <!--<div class="ellipsis" ng-show="ticketDetails.status === 'COMPLETED'"-->
+                         <!--uib-tooltip="{{ product.sum | currency :'$':2 }}"-->
+                         <!--trimmed-tooltip-checker="product.sum | currency:'$':2">-->
+                    <!--</div>-->
+                    <!--<div class="discount-ticket" ng-if="product.discountAmount>0">-->
+                      <!--Discount:-->
+                      <!--{{product.discountAmount}}&nbsp;%-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-4">-->
+                    <!--<span class="ellipsis"-->
+                          <!--uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"-->
+                          <!--trimmed-tooltip-checker="product.item.sale | currency:'$':2">-->
+                    <!--</span>-->
+                    <!--<span class="model">Qty {{ product.quantity }}</span>-->
+                  <!--</div>-->
+                  <!--<div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">-->
+                    <!--<a class="hit-area pull-right has-tooltip"-->
+                       <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"-->
+                       <!--ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"-->
+                       <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
+                      <!--<i class="icon-sm edit-icon"></i>-->
+                    <!--</a>-->
+                    <!--<a class="hit-area pull-right has-tooltip"-->
+                       <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"-->
+                       <!--ng-click="deleteExpence(ticketUpdate, [product.id], [])"-->
+                       <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
+                      <!--<i class="icon-sm icn-delete"></i>-->
+                    <!--</a>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
-                  <div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"
-                       ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
-                    <span class="ellipsis pre-line" uib-tooltip="{{ product.item.description }}"
-                          trimmed-tooltip-checker="product.item.description"></span>
-                    <div style="color:#b2becd;font-size: 13px; line-height: 20px;">
-                      <span style="word-break: break-all" ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>
-                      <span style="word-break: break-all"
-                            ng-show="product.item.manufacture && product.item.manufacture.length > 0"
-                      >P/N: {{ product.item.manufacture }}</span>
-                    </div>
-                  </div>
-                  <div class="col-3 ellipsis serial-width" ng-if="product.serialNumber"
-                       uib-tooltip="{{ product.serialNumber }}"
-                       trimmed-tooltip-checker="product.serialNumber">
-                  </div>
-
-                  <div class="col-5">
-                    <div class="ellipsis" ng-show="ticketDetails.status !== 'COMPLETED'"
-                         uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
-                         trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
-                    </div>
-                    <div class="ellipsis" ng-show="ticketDetails.status === 'COMPLETED'"
-                         uib-tooltip="{{ product.sum | currency :'$':2 }}"
-                         trimmed-tooltip-checker="product.sum | currency:'$':2">
-                    </div>
-                    <div class="discount-ticket" ng-if="product.discountAmount>0">
-                      Discount:
-                      {{product.discountAmount}}&nbsp;%
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-8 ellipsis pre-line">{{product.item.description}}</div>
+                    <div class="col-md-1">{{product.item.sale | currency:'$':2}}</div>
+                    <div class="col-md-1" style="color: #9ca5b6">Qty {{ product.quantity }}</div>
+                    <div class="col-md-2 text-right">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}
                     </div>
                   </div>
 
-
-                  <div class="col-4">
-                    <span class="ellipsis"
-                          uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
-                          trimmed-tooltip-checker="product.item.sale | currency:'$':2">
-                    </span>
-                    <span class="model">Qty {{ product.quantity }}</span>
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-10">{{product.serialNumber}}</div>
+                    <div class="col-md-2 text-right" style="color:#2ec866 ">{{product.discountAmount}}% Discount</div>
                   </div>
+
                   <div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
@@ -573,29 +604,34 @@
                   </div>
                 </div>
 
-
                 <div class="ticket-update-edit" ng-class="{'hide': product.id !== editExpenseId}"
                      ng-if="product.id === editExpenseId"
                      ng-include="'/html/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
               </div>
 
-
               <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
                    ng-if=" ticketUpdate.type === 'SERVICE'">
-
-
                 <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
-                  <div class="col-1">{{ service.date | date:'dd MMM yyyy'}}</div>
-                  <div class="col-2">{{ service.item.name }}</div>
-                  <div class="col-5">Duration
-                    <span class="model ">{{ service.quantity | durationFilter }}</span>
-                    <div ng-if="service.discountAmount>0">
-                      Discount: {{service.discountAmount}}&nbsp;%
-                    </div>
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-2">{{ service.date | date:'dd MMM yyyy'}}</div>
+                    <div class="col-md-8">{{ service.item.name }}</div>
+                    <div class="col-md-2 text-right">Duration <span style="color: #9ca5b6">{{ service.quantity | durationFilter }}</span></div>
                   </div>
-                  <div class="col-3 service-descr">
-                    {{ service.description ? service.description : '&nbsp;' }}
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-12">{{ service.description ? service.description : '&nbsp;' }}</div>
                   </div>
+
+                  <!--<div class="col-1">{{ service.date | date:'dd MMM yyyy'}}</div>-->
+                  <!--<div class="col-2">{{ service.item.name }}</div>-->
+                  <!--<div class="col-5">Duration-->
+                    <!--<span class="model ">{{ service.quantity | durationFilter }}</span>-->
+                    <!--<div ng-if="service.discountAmount>0">-->
+                      <!--Discount: {{service.discountAmount}}&nbsp;%-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-3 service-descr">-->
+                    <!--{{ service.description ? service.description : '&nbsp;' }}-->
+                  <!--</div>-->
 
                   <div class="table-content-action pull-right" ng-show="ticketDetails.status != 'COMPLETED'">
                     <a class="hit-area pull-right has-tooltip"
