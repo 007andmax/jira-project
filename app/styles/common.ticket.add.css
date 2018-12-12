@@ -6,14 +6,44 @@
   z-index: 99999;
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
-  width: calc(100% - 933px);
+  width: calc(100% - 395px);
   right: 77px;
+  transition: all .285s;
+}
+
+.opened-ticket-list .ticket-post-update-wrapper {
+  width: calc(100% - 933px);
+  min-height: 255px;
 }
 
 .ticket-post-update-wrapper > .btn {
   position: absolute;
   top: 30px;
   right: 0;
+}
+
+.ticket-add-product-content,
+.ticket-add-service-content {
+  width: 100%;
+  position: relative;
+}
+
+.ticket-add-product-content input,
+.ticket-add-service-content input {
+  font-size: 13px;
+}
+
+.ticket-add-product-content input::placeholder,
+.ticket-add-service-content input::placeholder {
+  font-size: 13px;
+  color: #9ca5b6;
+}
+
+.ticket-add-product-actions,
+.ticket-add-service-actions {
+  position: absolute;
+  right: 24px;
+  top: 30px;
 }
 
 .ticket-post-update-wrapper .petrovich {
@@ -166,7 +196,7 @@
 }
 
 .ticket-add .ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
-  margin-right: 0;
+  margin-right: 2px;
 }
 
 .ticket-add-content input::-webkit-outer-spin-button,
@@ -327,18 +357,14 @@
 
 /* Add Product tab */
 
-#Product .col-4, #Product .col-5 {
-  width: 124px;
-}
-
 #Product .col-4 .discount-input, #Service .col-4 .discount-input {
   position: relative;
 }
 
-#Product .icn-delete {
-  margin-top: 15px;
+#Product .icn-delete,
+#Service .icn-delete {
   cursor: pointer;
-  width: 14px;
+  width: 17px;
   height: 14px;
 }
 
@@ -364,26 +390,12 @@
 #Service .service-not-yet p,
 #Service .service-not-yet .btn {
   display: inline-block;
-  margin: 40px;
+  margin: 15.5px 40px;
   vertical-align: middle;
+  font-size: 13px;
 }
 
 /* Add Service tab */
-#Service .col-1 {
-  width: 240px;
-}
-
-#Service .col-2 {
-  width: 124px;
-}
-
-#Service .col-4 {
-  width: 150px;
-}
-
-#Service .col-5 {
-  width: 43px;
-}
 
 .shared-user-add {
   width: 90%;
@@ -393,8 +405,3 @@
   margin-left: 10px;
 }
 
-@media screen and (max-width: 1600px) {
-  #Service .col-1 {
-    width: 237px;
-  }
-}

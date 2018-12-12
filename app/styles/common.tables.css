@@ -55,14 +55,6 @@ _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .
     width: 63%;
   }
 
-  .opened-ticket #Service .col-1 {
-    width: 306px;
-  }
-
-  .opened-ticket-list #Service .col-1 {
-    width: 240px;
-  }
-
   .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
     width: 51%;
   }

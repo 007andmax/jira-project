@@ -1,5 +1,5 @@
-.top-bar{
-    transition: .2s ease-in all 0s;
+.top-bar {
+  transition: .2s ease-in all 0s;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -14,31 +14,34 @@
     height: 78px;
     margin-left: 316px;
     padding: 20px 30px;
-
+    
     background: #3e4b61;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
+  
   .left-panel-closed .top-bar {
     position: fixed;
     z-index: 1050;
     top: 0;
     right: 0;
     left: 0;
-
+    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-
+    
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
 }
-@media only screen and (max-width: 1280px){
-  .container-ticket-content.inbox .ticket-content{
+
+@media only screen and (max-width: 1280px) {
+  .container-ticket-content.inbox .ticket-content {
     margin-left: 315px;
     margin-top: 100px;
   }
 }
+
 @media only screen and (max-width: 1024px) {
   .left-panel-closed .top-bar {
     position: fixed;
@@ -46,28 +49,28 @@
     top: 0;
     right: 0;
     left: 0;
-
+    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-
+    
     background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
+  
   .top-bar {
     position: fixed;
     z-index: 1050;
     top: 0;
     right: 0;
     left: 0;
-
+    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-
-
+    
     background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
@@ -90,22 +93,25 @@
     min-width: 1000px;
   }
 }
+
 .content-container {
   margin-left: 316px;
   transition: .2s ease-in all 0s;
-
+  
 }
+
 .left-panel-closed .content-container {
   margin-left: 76px;
 }
+
 .content-wrapper {
   position: relative;
-
+  
   height: 100%;
 }
+
 .container-ticket-list {
-  transition: .2s ease-in all
-  0s;
+  transition: .2s ease-in all 0s;
 }
 
 .ticket-content {
@@ -120,7 +126,7 @@
 
 body.opened-ticket-list .content-wrapper .container-ticket-list {
   display: block;
-
+  
   width: 100%;
 }
 
@@ -129,114 +135,139 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   width: 540px;
   height: 100%;
 }
+
 .content-wrapper .container-ticket-content {
   display: none;
 }
+
 .opened-ticket .content-wrapper .container-ticket-content {
   right: 77px;
   position: fixed;
   display: block;
   float: right;
-
+  
   width: calc(100% - 392px);
   padding-bottom: 30px;
 }
+
 .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   right: 0;
   width: calc(100% - 316px);
 }
+
 .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   right: 0;
   width: calc(100% - 77px);
-
+  
 }
+
 .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   position: fixed;
   right: 77px;
   width: calc(100% - 933px);
   height: 100%;
 }
-.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content{
+
+.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   width: calc(100% - 153px);
 }
+
 .left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   width: calc(100% - 693px);
-
+  
 }
+
 .right-panel-closed.left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   width: calc(100% - 616px);
 }
+
 .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   right: 0;
-
+  
   width: calc(100% - 856px);
 }
+
 @media screen and (max-width: 1700px) {
   .opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 392px);
   }
+  
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 76px);
   }
+  
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
-
+    
     width: calc(100% - 316px);
   }
 }
+
 @media screen and (max-width: 1315px) {
   .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 77px;
-
+    
     /*width: calc(100% - 77px);*/
   }
+  
   .opened-ticket .content-wrapper .container-ticket-content {
     right: 77px;
-
+    
     /*width: calc(100% - 77px);*/
   }
+  
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
-
+    
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 1024px) {
   .opened-ticket .content-wrapper .container-ticket-content {
     right: 76px;
-
+    
     width: calc(100% - 151px);
   }
+  
   .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 76px;
-
+    
     width: calc(100% - 151px);
   }
+  
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
-
+    
     width: calc(100% - 77px);
   }
+  
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
-
+    
     width: calc(100% - 77px);
   }
+  
   .content-container {
     margin-left: 76px;
   }
 }
+
 @media only screen and (min-width: 1316px) and (max-width: 1440px) {
-  body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list{
+  body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 340px;
   }
-  body.opened-ticket-list.opened-ticket.left-panel-closed .content-wrapper .container-ticket-list{
+  
+  body.opened-ticket-list.opened-ticket.left-panel-closed .content-wrapper .container-ticket-list {
     width: 540px;
   }
-  .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content{
-    width: calc(100% - 733px);
+  
+  .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content,
+  .opened-ticket-list .ticket-post-update-wrapper {
+    width: calc(100% - 733px) !important;
   }
-  .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content{
+  
+  .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
     width: calc(100% - 656px);
   }

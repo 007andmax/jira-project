@@ -142,6 +142,72 @@
   border-radius: 25px;
 }
 
+.mob-serial-input input {
+  padding-left: 70px;
+}
+
+.mob-cost-input input {
+  padding-left: 44px;
+}
+
+.mob-qty-input input {
+  padding-left: 38px;
+}
+
+.mob-price-input input {
+  padding-left: 46px;
+}
+
+.mob-disc-input input {
+  padding-left: 82px;
+}
+
+.ticket-add-product-content .mob-disc-input input {
+  padding-left: 35px;
+}
+
+.mob-serial-input:before,
+.mob-cost-input:before,
+.mob-qty-input:before,
+.mob-price-input:before,
+.mob-disc-input:before {
+  position: absolute;
+  content: 'Serial No';
+  font-size: 13px;
+  color: #9ca5b6;
+  left: 15px;
+  top: 8px;
+  z-index: 9;
+}
+
+.ticket-add-product-content .mob-cost-input:before,
+.ticket-add-product-content .mob-qty-input:before,
+.ticket-add-product-content .mob-price-input:before,
+.ticket-add-product-content .mob-disc-input:before,
+.ticket-add-product-content .mob-cost-input:before {
+  left: 20px;
+}
+
+.mob-qty-input:before {
+  content: 'Qty';
+}
+
+.mob-price-input:before {
+  content: 'Price';
+}
+
+.mob-disc-input:before {
+  content: 'Discount %';
+}
+
+.mob-cost-input:before {
+  content: 'Cost';
+}
+
+.ticket-add-product-content .mob-disc-input:before {
+  content: 'Dis';
+}
+
 /*MOBILE VERSION*/
 .mobile-top-bar, #mobile-left,
 .company-phone,
@@ -1980,55 +2046,6 @@
     margin-bottom: 8px;
     padding: 0 4px;
     position: relative;
-  }
-  
-  .create-updates-content .mob-serial-input input {
-    padding-left: 70px;
-  }
-  
-  .create-updates-content .mob-cost-input input {
-    padding-left: 44px;
-  }
-  
-  .create-updates-content .mob-qty-input input {
-    padding-left: 38px;
-  }
-  
-  .create-updates-content .mob-price-input input {
-    padding-left: 46px;
-  }
-  
-  .create-updates-content .mob-disc-input input {
-    padding-left: 82px;
-  }
-  
-  .create-updates-content .mob-serial-input:before,
-  .create-updates-content .mob-cost-input:before,
-  .create-updates-content .mob-qty-input:before,
-  .create-updates-content .mob-price-input:before,
-  .create-updates-content .mob-disc-input:before {
-    position: absolute;
-    content: 'Serial No';
-    font-size: 13px;
-    color: #9ca5b6;
-    left: 15px;
-    top: 8px;
-  }
-  
-  .create-updates-content .mob-cost-input:before {
-    content: 'Cost';
-  }
-  
-  .create-updates-content .mob-qty-input:before {
-    content: 'Qty';
-  }
-  
-  .create-updates-content .mob-price-input:before {
-    content: 'Price';
-  }
-  
-  .create-updates-content .mob-disc-input:before {
-    content: 'Discount %';
   }
   
   .create-updates-content-service textarea {

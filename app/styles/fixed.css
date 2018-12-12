@@ -2151,3 +2151,12 @@ span.sort-span {
 .ticket-add .file-size {
   font-size: 12px;
 }
+
+.new-input {
+  width: 100%;
+  border-radius: 3px;
+  border: solid 1px #c4cbd5;
+  padding: 7px 12px;
+  outline: none;
+  position: relative;
+}

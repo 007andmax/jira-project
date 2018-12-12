@@ -149,7 +149,9 @@
   font-size: 10px;
 }
 
-.ticket-update-content .icn-delete {
+.ticket-update-content .icn-delete,
+.ticket-add-product-actions .icn-delete,
+.ticket-add-service-actions .icn-delete {
   background-image: url(../images/new-icons/company-remove.svg);
   width: 12px;
   height: 12px;
