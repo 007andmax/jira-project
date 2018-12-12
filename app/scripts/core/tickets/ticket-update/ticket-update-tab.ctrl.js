@@ -63,7 +63,6 @@
 
           });
 
-
           $scope.$watch('ticketUpdate', function(val) {
             if (!$scope.editExpense) {
               $scope.updateNote = $scope.ticketUpdate;
