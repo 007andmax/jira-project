@@ -125,7 +125,7 @@
 
           <div style="width: 100%;margin-bottom: 8px;" class="info-block"
                ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated)) || (areTicketsPresented && !serviceList.length)">
-            <span ng-show="areTicketsTerminated">"The Existing contract for this customer has Expired. <a ng-click="stateGo($event, 'service-agreements')" class="pointer" style="text-decoration: underline">Open Contracts</a></span>
+            <span ng-show="areTicketsTerminated">The Existing contract for this customer has Expired. <a ng-click="stateGo($event, 'service-agreements')" class="pointer" style="text-decoration: underline">Open Contracts</a></span>
             <span ng-show="!areTicketsPresented">This customer does not have a service contract, Only <a ng-click="stateGo($event, 'services', { tabName: 'default' })" class="pointer" style="text-decoration: underline">default services</a> will be shown.</span>
             <span ng-show="areTicketsPresented && !serviceList.length">The Existing contract for this customer does not have any services. <a ng-click="stateGo($event, 'service-agreements')" class="pointer" style="text-decoration: underline">Open Contracts</a></span>
           </div>
@@ -304,7 +304,7 @@
              <span ng-show="areTicketsPresented && !serviceList.length">The Existing contract for this customer does not have any services. Open Contracts.</span>
            </div>
 
-        <div ng-if="serviceList.length" ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
+        <div ng-if="serviceList.length && !areTicketsTerminated" ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
           <div ng-form="addServiceForm" class="clearfix">
             <div class="col-xs-12">
               <div uib-dropdown>
