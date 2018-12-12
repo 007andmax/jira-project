@@ -57,7 +57,7 @@
         </div>
         <div class="col-md-1 text-center">{{agreement.amount | number : 2}}</div>
         <div class="col-md-1 text-center col-width-2" >
-          <div uib-dropdown ng-hide="agreement.type == 'HOURLY' && agreement.status == 'CURRENT'">
+          <div uib-dropdown>
             <a  class="hit-area ha-22-38 has-tooltip" tooltip-placement="top" uib-tooltip="More" tooltip-append-to-body="true"
                 aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
               <i class="icn-sm icn-more-grey"></i>
