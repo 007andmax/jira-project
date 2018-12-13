@@ -139,11 +139,67 @@
               </div>
             </div>
 
-            <div class="ticket-settings-actions">
+            <div class="ticket-settings-actions" uib-dropdown>
               <div uib-tooltip="Settings"
-                   tooltip-placement="top">
+                   tooltip-placement="top" aria-expanded="false"
+                   ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
+                   uib-dropdown-toggle>
                 <button class="ticket-settings"></button>
               </div>
+
+              <ul class="dropdown-menu dropdown-menu-right" style="width: 185px; overflow: visible;" role="menu">
+                <li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
+                </li>
+                <li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"
+                    class="dropdown-submenu left-align">
+                  <a tabindex="-1" href="javascript:void(0)">
+                    {{ ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...
+                  </a>
+                  <div class="dropdown-submenu-wrapper">
+                    <div class="dropdown-assign-ticket dropdown-menu"
+                         stop-propagation="click"
+                         assign-user-button aub-ticket-id="ticketDetails.id"
+                         ticket-assigned-user-id="ticketDetails.assignedUser.id"
+                         aub-ticket-number="ticketDetails.number"
+                         users="usersCurrentCompany"
+                         aub-current-user="currentUser">
+                    </div>
+                  </div>
+                </li>
+
+                <li class="dropdown-submenu left-align linked-agent-dropdown"
+                    ng-if="!ticketDetails.company.isDefault && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">
+                  <a tabindex="-1" href="javascript:void(0)">
+                    {{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}
+                    Agent
+                  </a>
+                  <ul class="dropdown-submenu-wrapper dropdown-menu">
+                    <li ng-repeat="agent in agentList" ng-click="linkAgent(ticketDetails.id, agent.id)"
+                        ng-if="!ticketDetails.agent || agent.id !== ticketDetails.agent.deviceId">
+                      {{ agent.hostName || agent.ip }}
+                    </li>
+                  </ul>
+                </li>
+                <li ng-if="ticketDetails.agent && ticketDetails.agent.deviceId">
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="linkAgent(ticketDetails.id, '')">Unlink Agent</a>
+                </li>
+
+                <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">
+                  <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.isOwner"
+                     ng-click="moveIntoSpam()">Mark as Spam</a>
+                  <a tabindex="-1" href="javascript:void(0)" ng-if="!currentUser.isOwner"
+                     ng-click="moveIntoSpam()">Report as Spam</a>
+                </li>
+                <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">
+
+
             </div>
 
             <!--<div class="pull-left" uib-dropdown-->
