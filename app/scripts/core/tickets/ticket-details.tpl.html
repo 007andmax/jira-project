@@ -132,11 +132,24 @@
               </div>
             </div>
 
-            <div class="ticket-assign-actions">
+            <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick" smart-dropdown-menu-position>
               <div uib-tooltip="Assign"
-                   tooltip-placement="top">
+                   tooltip-placement="top" uib-dropdown-toggle  no-restricted="true">
                 <button class="ticket-assign"></button>
               </div>
+
+
+                <div class="dropdown-assign-ticket dropdown-menu"
+                     stop-propagation="click"
+                     dropdown-menu
+                     assign-user-button aub-ticket-id="ticketDetails.id"
+                     ticket-assigned-user-id="ticketDetails.assignedUser.id"
+                     aub-ticket-number="ticketDetails.number"
+                     users="usersCurrentCompany"
+                     aub-current-user="currentUser">
+                </div>
+                <div typeahead-input-icon-sm="ticketAssignTo"></div>
+
             </div>
 
             <div class="ticket-settings-actions" uib-dropdown>
@@ -151,7 +164,7 @@
                 <li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
                   <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
                 </li>
-                <li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"
+                <!-- <li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"
                     class="dropdown-submenu left-align">
                   <a tabindex="-1" href="javascript:void(0)">
                     {{ ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...
@@ -166,7 +179,7 @@
                          aub-current-user="currentUser">
                     </div>
                   </div>
-                </li>
+                </li> -->
 
                 <li class="dropdown-submenu left-align linked-agent-dropdown"
                     ng-if="!ticketDetails.company.isDefault && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">
