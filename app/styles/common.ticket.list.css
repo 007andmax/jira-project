@@ -211,16 +211,6 @@
   margin-top: 4px;
 }
 
-
-/*  */
-
-.dropdown-to-left .dropdown-assign-ticket {
-  transform: translateX(-50%);
-  width: 250px !important;
-}
-
-/*  */
-
 /*Ticket Labels*/
 
 .ticket .ticket-meta .ticket-labels {
