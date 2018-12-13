@@ -302,12 +302,28 @@
           </div>
         </div>
         <div class="ticket-detail">
-          <div ng-class="{'ticket-editing': editingTicket}">
+          <div ng-class="{'ticket-editing': editingTicket}" ng-if="!editingTicket">
             <h2 contenteditable="{{ editingTicket ? true : false}}"
-                class="ellipsis">{{ ticketDetails.subject }}</h2>
+                class="ellipsis"
+                 id="tickets-subject">{{ ticketDetails.subject }}</h2>
             <div contenteditable="{{ editingTicket ? true : false }}"
                  class="ticket-message"
-                 ng-bind-html="getTicketNote()"></div>
+
+                 ng-bind-html="getTicketNote()" id="tickets-note"></div>
+          </div>
+
+          <div ng-class="{'ticket-editing': editingTicket}" ng-if="editingTicket">
+            <input style="width:100%;"
+                   contenteditable="{{ editingTicket ? true : false }}"
+                   class="ellipsis"
+                   ng-model="editedTicket.subject" />
+            <textarea te-initial-value="{{ ticketUpdate.note }}"
+                      contenteditable="{{ editingTicket ? true : false }}"
+                      style="width:100%"
+                      class="ticket-message limited-global-area"
+                      auto-expand
+                      value="editedTicket.note"
+                      ng-model="editedTicket.note"></textarea>
           </div>
 
           <!--<div ng-if="editingTicket">-->

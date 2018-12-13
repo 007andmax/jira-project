@@ -1284,6 +1284,8 @@
           };
 
           $scope.saveEditedTicket = function (form) {
+            var note = document.querySelector('#tickets-note');
+            var subject = document.querySelector('#tickets-subject');
             if (form.$valid) {
               $scope.disabledSaveButton = true;
               $scope.tryToSaveTicket = false;
