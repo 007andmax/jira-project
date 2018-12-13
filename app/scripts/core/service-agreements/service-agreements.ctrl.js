@@ -38,6 +38,14 @@
         $scope.editService = {taxes: []};
 
 
+        $scope.terminateContract = function (id) {
+          console.log('i herereere')
+          AgreementsService.terminate(id || $scope.editContract.id, function (resp) {
+            if ($scope.closeModal) $scope.closeModal();
+          })
+        };
+
+
         AgreementsService.getAllServiceAgreements($scope, function (data) {
           $scope.agreementsList = data;
 
@@ -946,9 +954,10 @@
 
 
 
-      $scope.terminateContract = function () {
-        AgreementsService.terminate($scope.editContract.id, function (resp) {
-          $scope.closeModal()
+      $scope.terminateContract = function (id) {
+        // console.log('i herereere')
+        AgreementsService.terminate(id || $scope.editContract.id, function (resp) {
+          if ($scope.closeModal) $scope.closeModal();
         })
       };
 

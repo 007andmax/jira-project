@@ -5,12 +5,8 @@
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
       ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter', '$state',
         function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter, $state) {
-          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
-
-
-
-
-
+          $scope.serviceList = [];
+          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id);
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
@@ -26,6 +22,18 @@
             }
 
           };
+
+          $scope.$watch('serviceList.length', function(val) {
+            if (!val) return;
+
+            $scope.serviceList = $scope.serviceList.filter(function(el) {
+              if (el.canUseInTicket !== undefined) {
+                return el.canUseInTicket;
+              } else {
+                return true;
+              }
+            })
+          })
 
 
 
@@ -62,7 +70,6 @@
             }
 
           });
-
 
           $scope.$watch('ticketUpdate', function(val) {
             if (!$scope.editExpense) {
