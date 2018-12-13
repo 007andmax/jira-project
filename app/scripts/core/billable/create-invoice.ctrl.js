@@ -571,7 +571,7 @@
           }
         };
 
-        $scope.$watch('invoiceNumber', function(val) {
+        $scope.$watch('invoiceNum', function(val) {
           if ($scope.receivedInvoiceNumber && $scope.invoiceLocks[$scope.showInvoiceLockIndex] && $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId) {
             // console.log(val, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, 'updated update')
             var request = {
@@ -580,12 +580,24 @@
               "invoiceNoteIds": [] || null
             }
 
-            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+            $rootScope.invoiceNumError = '';
+
+            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, function(res) {
+              console.log(res, "RESSSS")
+
+              if (res.code == 400) {
+                $rootScope.invoiceNumError = res.message;
+              }
+            })
           }
         })
 
-        $scope.changeInvoiceNumber = function(value) {
-          $scope.invoiceNumber = value;
+        $scope.changeInvoiceNumber = $rootScope.debounce(changeInvoiceNumber, 500)
+
+        function changeInvoiceNumber(value) {
+
+          console.log(value, 'VALEEEEEEEE')
+          $scope.invoiceNum = value;
         }
 
         $scope.updateInvoice = function(data) {

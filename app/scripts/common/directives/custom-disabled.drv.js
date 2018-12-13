@@ -16,7 +16,7 @@
 
             element.attr('ng-disabled', boolValue);
             element.attr('disabled', boolValue);
-
+            console.log(boolValue, element, "LIIIIII")
             if (boolValue) {
               element.addClass("disabled")
             } else {
@@ -29,4 +29,3 @@
       }
     });
 })();
-

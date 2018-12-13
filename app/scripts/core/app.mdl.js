@@ -332,6 +332,33 @@
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService, $http) {
 
+        $rootScope.debounce = function(fn, time) {
+          var isCalled = false;
+          var interval;
+
+          return function() {
+            var args = arguments;
+            if (!isCalled) {
+              isCalled = true;
+
+              console.log('call debounced fn')
+              interval = setTimeout(function() {
+                isCalled = false;
+                fn.apply(this, args);
+              }, time)
+            } else {
+              clearInterval(interval);
+
+              interval = setTimeout(function() {
+                isCalled = false;
+                fn.apply(this, args);
+              }, time)
+            }
+
+
+          }
+        }
+
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
           var globalSearch = SharedStateService.getSharedState('globalSearch');

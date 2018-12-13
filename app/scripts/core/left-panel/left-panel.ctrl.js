@@ -129,24 +129,35 @@
           return $scope.salesPerson
         }, function(val) {
 
-
-
-          $timeout(function() {
-            if (!val && $scope.isSalesPersonClicked) {
-              $scope.toggleClickedStatus(false);
-              return;
-            }
-            if (val === ' ') return;
+          if (window.innerWidth <= 414) {
             $scope.companiesSharedState.filter.salesPerson = val;
 
             if (val && $scope.checkSalesValueMatched(val)) {
 
               sendNewFilterToStorage("companiesPageFilterBySalesHistory", $scope.salesFilterHistoryCompaniesPage, $scope.getUserByID(val))
             }
+          } else {
+            $timeout(function() {
+              if (!val && $scope.isSalesPersonClicked) {
+                $scope.toggleClickedStatus(false);
+                return;
+              }
+              if (val === ' ') return;
+              $scope.companiesSharedState.filter.salesPerson = val;
+
+              if (val && $scope.checkSalesValueMatched(val)) {
+
+                sendNewFilterToStorage("companiesPageFilterBySalesHistory", $scope.salesFilterHistoryCompaniesPage, $scope.getUserByID(val))
+              }
 
 
 
-          }, 100)
+            }, 100)
+          }
+
+
+
+
 
         })
 
@@ -292,6 +303,7 @@
 
         $scope.applyMobileFilters = function() {
           $scope.companiesSharedState.filter.industry = $scope.mobileIndustryFilter;
+          $scope.salesPerson = $scope.mobileSalesPerson;
           $scope.companyFilterTags = $scope.mobileFilterTags.slice();
 
           $scope.toggleMobileCompanyFilters(false);
@@ -299,6 +311,7 @@
 
         $scope.closeAndResetMobileFilters = function() {
           $scope.mobileIndustryFilter = $scope.companiesSharedState.filter.industry;
+          $scope.mobileSalesPerson = $scope.companiesSharedState.filter.salesPerson;
           $scope.mobileFilterTags = $scope.companyFilterTags.slice();
 
 
@@ -833,6 +846,15 @@
           })
 
           $scope.salesPerson = user.id;
+
+        };
+
+        $scope.mobileApplySalesFilterFromHistoryListCompanyPage = function (value) {
+          var user = $scope.activeTechUsers().find(function(el) {
+            return el.firstName + ' ' + el.lastName === value;
+          })
+
+          $scope.mobileSalesPerson = user.id;
 
         };
 
