@@ -307,10 +307,12 @@
             <input style="width:100%;"
                    contenteditable="{{ editingTicket ? true : false }}"
                    class="ellipsis"
+                   placeholder=""
                    ng-model="editedTicket.subject" />
             <textarea te-initial-value="{{ ticketUpdate.note }}"
                       contenteditable="{{ editingTicket ? true : false }}"
                       style="width:100%"
+                      placeholder=""
                       class="ticket-message limited-global-area"
                       auto-expand
                       value="editedTicket.note"
