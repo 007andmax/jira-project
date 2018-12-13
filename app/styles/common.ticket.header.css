@@ -17,7 +17,7 @@
   padding: 30px;
   padding-bottom: 24px;
   padding-left: 50px;
-  
+
   background-color: rgba(255, 255, 255, 1);
 }
 
@@ -84,16 +84,16 @@
   .ticket-header.ticket-fixed-header {
     width: calc(100% - 394px);
   }
-  
+
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 154px);
   }
-  
+
   .right-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 317px);
     right: 0;
   }
-  
+
   .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 76px);
     right: 0;
@@ -104,11 +104,11 @@
   .ticket-header.ticket-fixed-header {
     width: calc(100% - 397px);
   }
-  
+
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 157px);
   }
-  
+
   .btn-collapse {
     display: none !important;
   }
@@ -117,19 +117,19 @@
 @media only screen and (max-width: 1024px) {
   .ticket-header.ticket-fixed-header {
     left: 76px;
-    
+
     width: calc(100% - 153px);
   }
-  
+
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 153px);
   }
-  
+
   .right-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 77px);
     right: 0;
   }
-  
+
   .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 77px);
     right: 0;
@@ -451,11 +451,22 @@
 }
 
 .combined-shape {
-  background: url("../images/new-icons/combined-shape.png");
+  /* background: url("../images/new-icons/combined-shape.png"); */
   background-size: cover;
   width: 16px;
   height: 16px;
   cursor: pointer;
+}
+
+.ticket-attachment {
+  max-height: 45px;
+
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.ticket-attachment.expanded {
+  max-height: 1000px;
 }
 
 .ticket-company-info {
@@ -476,7 +487,7 @@
   .opened-ticket-list .ticket-header.ticket-fixed-header {
     width: calc(100% - 734px);
   }
-  
+
   .right-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
     width: calc(100% - 656px);
   }
@@ -486,7 +497,7 @@
   .vladik {
     width: calc(100% - 230px) !important;
   }
-  
+
   .ticket-header-actions .btn {
     margin: 0;
   }
@@ -496,11 +507,11 @@
   .vladik {
     width: calc(100% - 210px) !important;
   }
-  
+
   .ticket-header-username {
     white-space: normal;
   }
-  
+
   .dot-sep {
     margin: 3px 2px;
   }

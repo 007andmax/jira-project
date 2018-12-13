@@ -444,13 +444,13 @@
           <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
         </div>
       </div>
-      <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0">
+      <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0" qt-toggle-slider>
         <div class="attachment-meta">
           <div>
             <b>{{ ticketDetails.attachments.length }} </b>
             <span>Attachments</span>
           </div>
-          <div class="combined-shape"></div>
+          <div class="combined-shape expand-down" qt-icon-toggle-to-change></div>
           <div class="download-all pull-right" style="display: none;">
             <div class="btn btn-icn btn-default pull-right has-tooltip"
                  uib-tooltip="download all attachments" tooltip-append-to-body="true"
