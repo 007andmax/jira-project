@@ -356,9 +356,6 @@
 }
 
 @-moz-document url-prefix() {
-  .ticket-header.ticket-fixed-header {
-    padding-bottom: 30px;
-  }
   .ticket-header-username {
     line-height: 19px;
   }

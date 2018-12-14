@@ -23,43 +23,37 @@
 .ticket-detail h2 {
   font-size: 24px;
   font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.42;
-  letter-spacing: normal;
   color: #364656;
   border-radius: 4px;
   padding: 5px;
   border: 1px solid transparent;
+  font-family: "Graphik Medium", sans-serif;
 }
 
 .ticket-detail input {
   margin: 20px 0;
   font-size: 24px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
+  font-weight: 500;
   line-height: 1.42;
-  letter-spacing: normal;
   color: #364656;
   padding: 5px;
   background: transparent;
+  border-radius: 4px;
+  font-family: "Graphik Medium", sans-serif;
 }
-
-
 
 .ticket-detail .note-wrapper div.form-control {
   padding: 5px;
   font-size: 13px;
   background: transparent;
+
 }
 
 .ticket-detail .note-wrapper {
   border: 1px solid #b4b4b4;
   border-radius: 4px;
 }
-
-
 
 .ticket-detail h2,
 .ticket-detail .ticket-message {
@@ -78,11 +72,7 @@
 
 .ticket-detail .ticket-message {
   font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.54;
-  letter-spacing: normal;
   color: #626b7f;
   border-radius: 4px;
   padding: 5px;
@@ -90,13 +80,17 @@
 }
 
 .ticket-detail .ticket-editing .ticket-message:focus,
-.ticket-detail .ticket-editing h2:focus {
+.ticket-detail .ticket-editing input:focus {
   outline: none;
 }
 
 .ticket-detail .ticket-editing .ticket-message,
-.ticket-detail .ticket-editing h2 {
+.ticket-detail .ticket-editing input {
   border: 1px solid #9ca5b6;
+}
+
+.ticket-editing textarea:last-child {
+  display: none;
 }
 
 @media only screen and (max-width: 1400px) {

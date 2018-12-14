@@ -5449,7 +5449,6 @@ tbody.collapse.in {
 .dropdown-menu > .nano li a:focus {
   text-decoration: none;
   color: #4c5c6f;
-  background-color: #e7ecf2;
 }
 
 .dropdown-menu > .active > a,
@@ -5634,7 +5633,7 @@ tbody.collapse.in {
 .dropdown-menu > li.dropdown-submenu:hover > a,
 .tag-list > li:hover {
   color: #4c5c6f;
-  background-color: #e9f5fb;
+  /*background-color: #e9f5fb;*/
   cursor: pointer;
 }
 
