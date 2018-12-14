@@ -3,6 +3,8 @@
   padding-top: 82px;
 }
 
+
+
 .ticket-message ul {
   padding-left: 16px;
 }
@@ -41,10 +43,20 @@
   letter-spacing: normal;
   color: #364656;
   padding: 5px;
+  background: transparent;
 }
 
-.ticket-detail textarea {
-  overflow: hidden;
+
+
+.ticket-detail .note-wrapper div.form-control {
+  padding: 5px;
+  font-size: 13px;
+  background: transparent;
+}
+
+.ticket-detail .note-wrapper {
+  border: 1px solid #b4b4b4;
+  border-radius: 4px;
 }
 
 
@@ -52,6 +64,7 @@
 .ticket-detail h2,
 .ticket-detail .ticket-message {
   outline: none;
+
 }
 
 .ticket-update-note .editor {

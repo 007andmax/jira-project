@@ -302,144 +302,52 @@
           </div>
         </div>
         <div class="ticket-detail">
-          <div ng-class="{'ticket-editing': editingTicket}" ng-if="!editingTicket">
-            <h2 contenteditable="{{ editingTicket ? true : false}}"
-                class="ellipsis"
+          <div ng-if="!editingTicket">
+            <h2  class="ellipsis"
                  id="tickets-subject">{{ ticketDetails.subject }}</h2>
-            <div contenteditable="{{ editingTicket ? true : false }}"
-                 class="ticket-message"
+            <div class="ticket-message"
+                 ng-bind-html="getTicketNote()"
+                 id="tickets-note"></div>
 
-                 ng-bind-html="getTicketNote()" id="tickets-note"></div>
+                  <!-- -->
           </div>
 
-          <div ng-class="{'ticket-editing': editingTicket}" ng-if="editingTicket">
-            <input style="width:100%;"
-                   contenteditable="{{ editingTicket ? true : false }}"
-                   class="ellipsis"
-                   ng-model="editedTicket.subject" />
-            <textarea te-initial-value="{{ ticketUpdate.note }}"
-                      contenteditable="{{ editingTicket ? true : false }}"
-                      style="width:100%"
-                      class="ticket-message limited-global-area"
-                      auto-expand
-                      value="editedTicket.note"
-                      ng-model="editedTicket.note"></textarea>
+          <div ng-if="editingTicket">
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"
+                 style="margin-bottom: 10px;">
+
+
+
+              <div ng-messages="editTicketForm.subject.$error"
+                   ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">
+                <label class="control-label" ng-message="required">Subject can not be left empty.</label>
+                <label class="control-label" ng-message="maxlength">Subject is too large.</label>
+              </div>
+
+              <input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"
+                     name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">
+
+
+
+              <div ng-messages="editTicketForm.note.$error"
+                   ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">
+                <label class="control-label" ng-message="maxlength">Note is too large.</label>
+              </div>
+
+              <div text-editor te-initial-value="{{ editedTicket.note }}"
+                   ng-model="editedTicket.note" name="note" te-text-maxlength="5000" class="note-wrapper" te-html-maxlength="50000">
+
+                <div te-editor class="form-control editor" contenteditable="true"
+                     style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
+
+              </div>
+            </div>
           </div>
 
-          <!--<div ng-if="editingTicket">-->
-          <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"-->
-          <!--style="margin-bottom: 10px;">-->
 
-          <!--<div ng-messages="editTicketForm.subject.$error"-->
-          <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">-->
-          <!--<label class="control-label" ng-message="required">Subject can not be left empty.</label>-->
-          <!--<label class="control-label" ng-message="maxlength">Subject is too large.</label>-->
-          <!--</div>-->
-
-          <!--<input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"-->
-          <!--name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">-->
-          <!--</div>-->
-          <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">-->
-
-          <!--<label class="control-label" ng-class="{'hide': isShowingErrors(editTicketForm, 'note')}">-->
-          <!--Note-->
-          <!--</label>-->
-
-          <!--<div ng-messages="editTicketForm.note.$error"-->
-          <!--ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">-->
-          <!--<label class="control-label" ng-message="maxlength">Note is too large.</label>-->
-          <!--</div>-->
-
-          <!--<div text-editor te-initial-value="{{ editedTicket.note }}"-->
-          <!--ng-model="editedTicket.note" name="note" te-text-maxlength="5000" te-html-maxlength="50000">-->
-
-          <!--<div te-editor class="form-control editor" contenteditable="true"-->
-          <!--style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>-->
-
-          <!--<div class="wysiwyg-controls-wrapper clearfix">-->
-          <!--<div class="control-wrappers pull-left clearfix" data-role="editor-toolbar">-->
-
-          <!--<div class="font-styles pull-left">-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="bold"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">-->
-          <!--<i class="icon-sm wysiwyg-bold "></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="italic"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">-->
-          <!--<i class="icon-sm wysiwyg-italic"></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="underline"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">-->
-          <!--<i class="icon-sm wysiwyg-underline"></i>-->
-          <!--</a>-->
-          <!--</div>-->
-
-          <!--<div class="text-bullets pull-left">-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="insertorderedlist"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">-->
-          <!--<i class="icon-sm wysiwyg-ol"></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="insertunorderedlist"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">-->
-          <!--<i class="icon-sm wysiwyg-ul"></i>-->
-          <!--</a>-->
-          <!--</div>-->
-
-          <!--<div class="text-styles pull-left">-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="justifyleft"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">-->
-          <!--<i class="icn-sm icn-wysiwyg-align-left"></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="justifycenter"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">-->
-          <!--<i class="icn-sm icn-wysiwyg-align-center"></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="justifyright"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">-->
-          <!--<i class="icn-sm icn-wysiwyg-align-right"></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="outdent"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">-->
-          <!--<i class="icon-sm wysiwyg-unindent"></i>-->
-          <!--</a>-->
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="indent"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">-->
-          <!--<i class="icon-sm wysiwyg-indent"></i>-->
-          <!--</a>-->
-          <!--</div>-->
-
-          <!--<div class="quote-link pull-left">-->
-
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"-->
-          <!--data-edit="cblock"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">-->
-          <!--<i class="icon-sm wysiwyg-quote"></i>-->
-          <!--</a>-->
-
-          <!--</div>-->
-          <!--</div>-->
-
-          <!--<a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"-->
-          <!--data-edit="removeformat"-->
-          <!--tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">-->
-          <!--<i class="icon-sm wysiwyg-reset"></i>-->
-          <!--</a>-->
-
-          <!--</div>-->
-
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
 
           <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
         </div>

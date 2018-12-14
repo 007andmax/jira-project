@@ -451,7 +451,7 @@
 }
 
 .combined-shape {
-  /* background: url("../images/new-icons/combined-shape.png"); */
+  background: url("../images/new-icons/combined-shape.png");
   background-size: cover;
   width: 16px;
   height: 16px;
