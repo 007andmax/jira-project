@@ -25,7 +25,7 @@
 }
 
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-
+  
   .icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator {
     /*background-image: url('../images/sprites-retina-s9f68249a71.png');*/
     background-image: url('../images/sprites-s76c759f188.png');
@@ -35,7 +35,7 @@
     display: inline-block;
     margin: auto;
   }
-
+  
 }
 
 /* Hit Area Start */
@@ -159,6 +159,12 @@ a.ha-24 {
 .icn-md {
   width: 24px;
   height: 24px;
+}
+
+.icn-16 {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .icn-sm {
@@ -441,18 +447,22 @@ a.ha-24 {
   width: 14px;
 }
 
+.icn-text-attachment {
+  background: url("../images/new-icons/attachement-16.png");
+}
+
 .icn-ticket-list-attachment {
   background-position: -3310px 0;
   width: 14px;
 }
 
 .icon-ticket-flag {
-
+  
   background-image: url("../images/new-icons/flag-white.png");
 }
 
 .icon-user {
-
+  
   background-image: url("../images/new-icons/user-circle-white.png");
 }
 
@@ -956,7 +966,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-ol {
-  background-image: url("../images/new-icons/text-italic-na.png");
+  background-image: url("../images/new-icons/numberlist.png");
 }
 
 /*:hover > .wysiwyg-ol, :active > .wysiwyg-ol, :focus:hover > .wysiwyg-ol, :focus:active > .wysiwyg-ol, :hover:active > .wysiwyg-ol, .active > .wysiwyg-ol, .open .wysiwyg-ol, .open > .btn:hover .wysiwyg-ol {*/
@@ -964,7 +974,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-ol.active, .active > .wysiwyg-ol {
-  background-image: url("../images/new-icons/text-italic.png");
+  background-image: url("../images/new-icons/numberlist.png");
 }
 
 /*.icn-wysiwyg-bold{*/
@@ -979,8 +989,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*background-position: -130px -100px;*/
 /*}*/
 .wysiwyg-bold {
-  background-image: url("../images/new-icons/bold-na.png");
-
+  background-image: url("../images/new-icons/bold.png");
 }
 
 /*:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {*/
@@ -1003,7 +1012,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-ul {
-  background-image: url("../images/new-icons/list-bullets-na.png");
+  background-image: url("../images/new-icons/bullet-list.png");
 }
 
 /*:hover > .wysiwyg-ul, :active > .wysiwyg-ul, :focus:hover > .wysiwyg-ul, :focus:active > .wysiwyg-ul, :hover:active > .wysiwyg-ul, .active > .wysiwyg-ul, .open .wysiwyg-ul, .open > .btn:hover .wysiwyg-ul {*/
@@ -1011,7 +1020,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-ul.active, .active > .wysiwyg-ul {
-  background-image: url("../images/new-icons/list-bullets.png");
+  background-image: url("../images/new-icons/bullet-list.png");
 }
 
 /*.icn-wysiwyg-unindent{*/
@@ -1063,7 +1072,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-italic {
-  background-image: url("../images/new-icons/text-italic-na.png");
+  background-image: url("../images/new-icons/italic.png");
 }
 
 /*:hover > .wysiwyg-italic, :active > .wysiwyg-italic, :focus:hover > .wysiwyg-italic, :focus:active > .wysiwyg-italic, :hover:active > .wysiwyg-italic, .active > .wysiwyg-italic, .open .wysiwyg-italic, .open > .btn:hover .wysiwyg-italic {*/
@@ -1103,7 +1112,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-reset {
-  background-image: url("../images/new-icons/refresh-na.png");
+  background-image: url("../images/new-icons/reset.png");
 }
 
 /*:hover > .wysiwyg-reset, :active > .wysiwyg-reset, :focus:hover > .wysiwyg-reset, :focus:active > .wysiwyg-reset, :hover:active > .wysiwyg-reset, .active > .wysiwyg-reset, .open .wysiwyg-reset, .open > .btn:hover .wysiwyg-reset {*/
@@ -1111,13 +1120,11 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-reset.disabled, .disabled .wysiwyg-reset {
-  background-image: url("../images/new-icons/refresh-na.png");
+  background-image: url("../images/new-icons/reset.png");
 }
 
 .icn-wysiwyg-align-center {
-  background-position: -518px -100px;
-  width: 10px;
-  height: 10px;
+  background: url("../images/new-icons/center-align.png");
 }
 
 /*:hover > .icn-wysiwyg-align-center, :active > .icn-wysiwyg-align-center, :focus:hover > .icn-wysiwyg-align-center, :focus:active > .icn-wysiwyg-align-center, :hover:active > .icn-wysiwyg-align-center, .active > .icn-wysiwyg-align-center, .open .icn-wysiwyg-align-center, .open > .btn:hover .icn-wysiwyg-align-center {*/
@@ -1125,7 +1132,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .icn-wysiwyg-align-center.active, .active > .icn-wysiwyg-align-center {
-  background-position: -498px -100px;
+  background: url("../images/new-icons/center-align.png");
 }
 
 /*.wysiwyg-align-center{*/
@@ -1139,9 +1146,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .icn-wysiwyg-align-left {
-  background-position: -578px -100px;
-  width: 10px;
-  height: 10px;
+  background: url("../images/new-icons/left-align.png");
 }
 
 /*:hover > .icn-wysiwyg-align-left, :active > .icn-wysiwyg-align-left, :focus:hover > .icn-wysiwyg-align-left, :focus:active > .icn-wysiwyg-align-left, :hover:active > .icn-wysiwyg-align-left, .active > .icn-wysiwyg-align-left, .open .icn-wysiwyg-align-left, .open > .btn:hover .icn-wysiwyg-align-left {*/
@@ -1149,13 +1154,11 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .icn-wysiwyg-align-left.active, .active > .icn-wysiwyg-align-left {
-  background-position: -558px -100px;
+  background: url("../images/new-icons/left-align.png");
 }
 
 .icn-wysiwyg-align-right {
-  background-position: -638px -100px;
-  width: 10px;
-  height: 10px;
+  background: url("../images/new-icons/right-align.png");
 }
 
 /*:hover > .icn-wysiwyg-align-right, :active > .icn-wysiwyg-align-right, :focus:hover > .icn-wysiwyg-align-right, :focus:active > .icn-wysiwyg-align-right, :hover:active > .icn-wysiwyg-align-right, .active > .icn-wysiwyg-align-right, .open .icn-wysiwyg-align-right, .open > .btn:hover .icn-wysiwyg-align-right {*/
@@ -1163,7 +1166,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .icn-wysiwyg-align-right.active, .active > .icn-wysiwyg-align-right {
-  background-position: -618px -100px;
+  background: url("../images/new-icons/right-align.png");
 }
 
 /*.icn-wysiwyg-underline{*/
@@ -1179,7 +1182,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 
 .wysiwyg-underline {
-  background-image: url("../images/new-icons/underline-na.png");
+  background-image: url("../images/new-icons/underline.png");
 }
 
 /*:hover > .wysiwyg-underline, :active > .wysiwyg-underline, :focus:hover > .wysiwyg-underline, :focus:active > .wysiwyg-underline, :hover:active > .wysiwyg-underline, .active > .wysiwyg-underline, .open .wysiwyg-underline, .open > .btn:hover .wysiwyg-underline {*/
