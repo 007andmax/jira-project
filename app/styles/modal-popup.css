@@ -1273,6 +1273,11 @@ _::-webkit-:not(:root:root),
   padding: 0 12px;
 }
 
+.select-font input::placeholder {
+  opacity: 1;
+  color: #4f5f79;
+}
+
 .create-email-form .create-new-link:before {
   bottom: -1px;
   width: 100%;
