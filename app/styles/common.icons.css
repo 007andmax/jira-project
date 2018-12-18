@@ -25,7 +25,7 @@
 }
 
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-  
+
   .icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator {
     /*background-image: url('../images/sprites-retina-s9f68249a71.png');*/
     background-image: url('../images/sprites-s76c759f188.png');
@@ -35,7 +35,7 @@
     display: inline-block;
     margin: auto;
   }
-  
+
 }
 
 /* Hit Area Start */
@@ -369,6 +369,19 @@ a.ha-24 {
   top: 12px;
 }
 
+@media screen and (min-width: 414px) {
+  .new-date-picker .dropdown-menu {
+    transform: translateY(calc(-100% - 50px));
+  }
+
+  .new-quantity-picker #service-quantity-dropdown {
+    transform: translateY(calc(-100% - 50px));
+
+  }
+}
+
+
+
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
   width: 18px;
   height: 18px;
@@ -447,12 +460,12 @@ a.ha-24 {
 }
 
 .icon-ticket-flag {
-  
+
   background-image: url("../images/new-icons/flag-white.png");
 }
 
 .icon-user {
-  
+
   background-image: url("../images/new-icons/user-circle-white.png");
 }
 
@@ -980,7 +993,7 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 /*}*/
 .wysiwyg-bold {
   background-image: url("../images/new-icons/bold-na.png");
-  
+
 }
 
 /*:hover > .wysiwyg-bold, :active > .wysiwyg-bold, :focus:hover > .wysiwyg-bold, :focus:active > .wysiwyg-bold, :hover:active > .wysiwyg-bold, .active > .wysiwyg-bold, .open .wysiwyg-bold, .open > .btn:hover .wysiwyg-bold {*/

@@ -16,6 +16,101 @@
           $scope.areTickets = false;
 
 
+          var ticketWrapper = document.querySelector('.ticket-post-update-wrapper');
+
+          ticketWrapper.addEventListener('scroll', function() {
+            console.log('REEEEEEEEEE')
+          })
+
+          window.onscroll = function() {
+            console.log('EEEEEEEEEEEEEEEEEEEEEEEEEE')
+          }
+
+          $scope.checkForOpenDropdown = checkForOpenDropdown;
+
+          $scope.$watch(function() {
+            console.log('digest')
+            setTimeout(checkForOpenDropdown, 100)
+          });
+
+          function checkForOpenDropdown() {
+            var quantity = document.querySelector('.new-quantity-picker #service-quantity-dropdown');
+            var date = document.querySelector('.bootstrap-datetimepicker-widget');
+            var products = document.querySelectorAll('.custom-product-list');
+            var services = document.querySelectorAll('[ng-show="isOpen() && !moveInProgress"]');
+            // if (quantity) {
+            //   var quantityDisplay = window.getComputedStyle(quantity).getPropertyValue('display');
+            //
+            // }
+            //
+            // if (products) {
+            //   var productsDisplay = [].map.call(products, function(el) {
+            //     return window.getComputedStyle(el).getPropertyValue('display')
+            //   })
+            //
+            //   var isProductDisplayed = productsDisplay.some(function(el) {
+            //     console.log(el, 'el')
+            //     return el && el !== 'none';
+            //   })
+            //
+            //
+            // }
+            //
+            // if (services) {
+            //   var servicesDisplay = window.getComputedStyle(services).getPropertyValue('display');
+            // }
+
+            var arr = [quantity, date];
+
+            arr.forEach(function(el) {
+              console.log("HERERERER", el)
+              if (!el) return;
+              var pos = el.getBoundingClientRect();
+
+              var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+              var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              el.style.removeProperty('top');
+              el.style.removeProperty('left');
+              el.style.removeProperty('bottom');
+              el.style.position = 'fixed';
+              el.style.top = pos.top + scrollTop;
+              el.style.left = pos.left + scrollLeft;
+              el.style.zIndex = '10000'
+            })
+
+            // setTimeout(function() {
+            //   products.forEach(function(el) {
+            //     console.log("HERERERER", el)
+            //     if (!el) return;
+            //     var pos = el.getBoundingClientRect();
+            //
+            //     console.log(pos, "POSIITON")
+            //
+            //
+            //     var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            //     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            //
+            //     el.style.removeProperty('top');
+            //     el.style.removeProperty('left');
+            //     el.style.removeProperty('bottom');
+            //
+            //     el.style.position = 'fixed';
+            //     el.style.top = pos.top + scrollTop;
+            //     el.style.left = pos.left + scrollLeft;
+            //     el.style.zIndex = '10000'
+            //   });
+            // })
+
+
+
+            // console.log((quantityDisplay && quantityDisplay !== 'none') || date|| (isProductDisplayed) || (servicesDisplay && servicesDisplay !== 'none'))
+            //
+            // return (quantityDisplay && quantityDisplay !== 'none') || date|| (isProductDisplayed) || (servicesDisplay && servicesDisplay !== 'none');
+          }
+
+          // setInterval(checkForOpenDropdown, 1000)
+
+
 
           // ServicesService.getServicesData($scope, function(res) {
           //   console.log(res, "REST REST")

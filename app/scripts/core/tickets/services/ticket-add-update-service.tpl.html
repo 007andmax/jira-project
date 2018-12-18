@@ -96,7 +96,7 @@
 
   <div class="ticket-add-service-content">
     <div class="col-5" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
-      <div uib-dropdown>
+      <div uib-dropdown dropdown-append-to-body="true">
         <input type="text"
                name="serviceName"
                ng-disabled="!serviceList.length"
@@ -106,7 +106,9 @@
                placeholder="Service"
                class="new-input form-control-dropdown dropdown-toggle"
                uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
-               qt-typeahead-async-show-on-focus>
+               typeahead-append-to-body="true"
+               qt-typeahead-async-show-on-focus
+               smart-dropdown-menu-position>
 
         <div style="position: absolute;right: 10px;top: 9px;cursor: pointer;"
              typeahead-input-icon="serviceExpense.item"></div>
@@ -115,17 +117,17 @@
                ng-required="serviceExpense.item ? true : false">
       </div>
     </div>
-    <div class="col-2" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false"
+    <div class="col-2 new-quantity-picker" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false"
          ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
       <input id="service-quantity-picker" type="text" class="new-input"
              placeholder="Hr(s) : Min(s)" sqp-input
-             autocomplete="off" aria-expanded="true" />
+             autocomplete="off" aria-expanded="true" smart-dropdown-menu-position/>
       <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
-             ng-required="serviceExpense.item ? true : false" />
+             ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
     </div>
-    <div class="col-2" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+    <div class="col-2 new-date-picker" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
       <input type="text" class="new-input absolute-stick-datepicker has-dropdown" placeholder="Date"
-             qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
+             qt-data-time-picker datepicker-append-to-body='true' data-position="ticket" max-date="maxServiceDate" ng-model="serviceExpense.date"
              name="serviceData" ng-required="true">
     </div>
     <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
