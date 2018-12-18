@@ -121,7 +121,7 @@
          ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
       <input id="service-quantity-picker" type="text" class="new-input"
              placeholder="Hr(s) : Min(s)" sqp-input
-             autocomplete="off" aria-expanded="true" smart-dropdown-menu-position/>
+             autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="quantity"/>
       <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
              ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
     </div>
