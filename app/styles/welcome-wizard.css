@@ -2173,6 +2173,10 @@
   .user-item:hover, .user-item.hovered span p {
     color: #fff;
   }
+  
+  .no-ticket-updates {
+    margin: 20px 0 54px 0;
+  }
 }
 
 @media (max-width: 375px) {
