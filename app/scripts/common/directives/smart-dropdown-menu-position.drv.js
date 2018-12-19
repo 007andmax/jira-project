@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('smartDropdownMenuPosition', ['$document', function ($document) {
+  angular.module("quicktech.common.directives").directive('smartDropdownMenuPosition', ['$document', '$rootScope', function ($document, $rootScope) {
     return {
       restrict: 'A',
       scope: {
@@ -47,7 +47,13 @@
             var right = productInputPosition.right;
             var bottom = productInputPosition.bottom;
 
-            productDropdownMenu.css({ top: productInputPosition.top + 50 + 'px', left: productInputPosition.left + 'px', position: 'fixed', width: width + 'px' });
+            productDropdownMenu.css({
+              top: productInputPosition.top + 50 + 'px',
+              left: productInputPosition.left + 'px',
+              position: 'fixed',
+              width: width + 'px',
+              height: ($rootScope.isProductCategoryOpened ? 350 : 160) + 'px'
+            });
 
 
 
@@ -57,7 +63,6 @@
             }
 
           } else if (attrs.smartDropdownMenuPosition === 'quantity') {
-            console.log("quantityyyyyy")
             var productInputPosition = element[0].getBoundingClientRect().top;
             var productInput = $(element[0]);
             var productDropdownMenu = productInput.parent('div').find('#service-quantity-dropdown:last-child');

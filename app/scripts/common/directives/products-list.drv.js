@@ -58,6 +58,17 @@
           };
 
           scope.$watch('categoryExpanded', function () {
+            var keys = Object.keys(scope.categoryExpanded);
+            var isOpened = false;
+            
+            keys.forEach(function(key) {
+              if (scope.categoryExpanded[key] === true) {
+                $rootScope.isProductCategoryOpened = true;
+                isOpened = true;
+              }
+            })
+
+            if (!isOpened) $rootScope.isProductCategoryOpened = false;
             if (dropdown) {
               $timeout(function () {
                 dropdown.nanoScroller();
@@ -73,6 +84,13 @@
             }
 
           });
+
+          scope.setCategoryExpanded = function(index, id) {
+            if (false) {
+              console.log('here')
+              $scope.categoryExpanded[id] = true;
+            }
+          }
 
           scope.filterProduct = function (item) {
 

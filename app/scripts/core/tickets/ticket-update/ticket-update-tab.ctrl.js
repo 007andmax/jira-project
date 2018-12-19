@@ -33,6 +33,22 @@
             setTimeout(checkForOpenDropdown, 100)
           });
 
+          window.addEventListener('scroll', closeDropdowns)
+
+          $scope.$watch('currentOpenTab', function() {
+            setTimeout(function() {
+              var scrollable = document.querySelector('[scrollable]');
+              console.log(scrollable, 'scrollakbe')
+              scrollable.addEventListener('scroll', closeDropdowns)
+            }, 1000)
+
+          })
+
+          function closeDropdowns() {
+            var ticketAddContent = document.querySelector('.ticket-add-content');
+            ticketAddContent.click();
+          }
+
           function checkForOpenDropdown() {
             var quantity = document.querySelector('.new-quantity-picker #service-quantity-dropdown');
             var date = document.querySelector('.bootstrap-datetimepicker-widget');
@@ -63,7 +79,6 @@
             var arr = [quantity, date];
 
             arr.forEach(function(el) {
-              console.log("HERERERER", el)
               if (!el) return;
               var pos = el.getBoundingClientRect();
 

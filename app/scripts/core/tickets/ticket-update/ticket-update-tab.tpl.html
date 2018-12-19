@@ -212,7 +212,7 @@
 
           <div class="ticket-add-content clearfix">
 
-            <div style="max-height: 224px;overflow-y: scroll;overflow-x: hidden">
+            <div style="max-height: 224px;overflow-y: scroll;overflow-x: hidden" scrollable>
               <div ng-repeat="productExpense in ticketUpdate.products" ng-init="productExpense.itemOrder = $index">
 
                 <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl"
@@ -330,7 +330,7 @@
           </div>
 
 
-          <div class="ticket-add-content clearfix" style="max-height: 224px;overflow-y: scroll;overflow-x: hidden;"
+          <div class="ticket-add-content clearfix" scrollable style="max-height: 224px;overflow-y: scroll;overflow-x: hidden;"
                ng-show="!areTicketsTerminated && !(serviceList.length === 0 && areTickets)">
             <div>
               <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
