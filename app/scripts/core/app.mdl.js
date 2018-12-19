@@ -155,6 +155,16 @@
           templateUrl: '/html/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
         }))
+        .state('credits', waitForServices({
+          url: '/accounting/credits',
+          templateUrl: '/html/scripts/core/billable/credits/credits.tpl.html',
+          controller: 'quicktech.core.billable.creditsCtrl'
+        }))
+        .state('new-payments', waitForServices({
+          url: '/accounting/new-payments',
+          templateUrl: '/html/scripts/core/billable/new-payments/new-payments.tpl.html',
+          controller: 'quicktech.core.billable.newPaymentsCtrl'
+        }))
         .state('settings', waitForServices({
           url: '/settings',
           templateUrl: '/html/scripts/core/settings/settings.tpl.html',
