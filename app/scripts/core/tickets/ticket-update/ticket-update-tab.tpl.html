@@ -129,7 +129,7 @@
 
           <div class="ticket--footer">
             <div class="notify-user-dropdown">
-              <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+              <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(editTicketForm, 'ticketAssignTo')}"
                    uib-dropdown auto-close="outsideClick">
                 <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
                   <img src="images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
@@ -216,6 +216,7 @@
               <div ng-repeat="productExpense in ticketUpdate.products" ng-init="productExpense.itemOrder = $index">
 
                 <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl"
+                     ng-form="addProductForm"
                      ng-include="'/html/scripts/core/tickets/products/ticket-add-update-product.tpl.html'"></div>
               </div>
 
@@ -452,6 +453,7 @@
       <div class="create-updates-content-product row" ng-if="currentOpenTab === 'PRODUCT'"
            ng-class="{'show': currentOpenTab === 'PRODUCT'}"
            ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl" ng-form="addProductsForm">
+           sfsdfdsfdsfdsfsdsf
         <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl" ng-form="addProductForm">
           <div class="col-xs-12 mob-product-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
             <div products-list id="product-list-cont"
@@ -671,7 +673,7 @@
 
       <div class="create-updates-footer--notify">
         <div class="notify-user-dropdown">
-          <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+          <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(editTicketForm, 'ticketAssignTo')}"
                uib-dropdown auto-close="outsideClick">
             <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
               <img src="images/new-icons/add-user.png" class="pointer" style="margin: 14px 20px 0 0;" />
