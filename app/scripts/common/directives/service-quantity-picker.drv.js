@@ -33,6 +33,7 @@
             },
             savedValue = '',
             inited = false;
+          scope.isDropdownShow = false;
 
           element.addClass('timer-quantity');
 
@@ -83,9 +84,12 @@
             if (!isDropdownShow) {
               quantityDropdown.show();
               isDropdownShow = true;
+
+              scope.isDropdownShow = true;
             } else {
               quantityDropdown.hide();
               isDropdownShow = false;
+              scope.isDropdownShow = false;
             }
           }
 
@@ -132,6 +136,7 @@
           function onInput() {
             quantityDropdown.hide();
             isDropdownShow = false;
+            scope.isDropdownShow = false;
 
             var value = input.val(),
               lastIndex = value.length - 1;
@@ -265,8 +270,16 @@
 
 
           scope.closeDropdown = function () {
+            var serviceDropdown = document.querySelectorAll('#service-quantity-dropdown');
+
+            [].forEach.call(serviceDropdown, function(el) {
+              el.style.display = 'none';
+            })
+
             quantityDropdown.hide();
             isDropdownShow = false;
+            scope.isDropdownShow = false;
+
           };
 
           function chooseQuantity(event) {
@@ -302,6 +315,7 @@
 
             quantityDropdown.hide();
             isDropdownShow = false;
+            scope.isDropdownShow = false;
 
             scope.$apply();
           }
