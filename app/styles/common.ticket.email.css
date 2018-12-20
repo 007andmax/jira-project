@@ -90,12 +90,6 @@
   display: none;
 }
 
-@media only screen and (max-width: 1400px) {
-  .ticket-detail {
-    padding-top: 150px;
-  }
-}
-
 @-moz-document url-prefix() {
   .ticket-detail h2 {
     margin-top: 1px;

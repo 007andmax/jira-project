@@ -9,10 +9,10 @@
               <div ng-style="{'transform': ticketListOpened ? 'rotate(0)' : 'rotate(180deg)'}">
                 <i class="icn-sm icn-back-arrow" style="position: absolute;top: 7px;left: 3px;"></i></div>
             </div>
-            <div class="pull-left ticket-header-avatar">
+            <div class="ticket-header-avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
-            <div class="clearfix pull-left vladik">
+            <div class="clearfix vladik">
               <div class="ticket-header-username">
                 <div qt-popover-position="bottom"
                      custom-disabled="{{ user.company.isDefault }}"
@@ -105,7 +105,7 @@
               </div>
             </div>
           </div>
-          <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
+          <div class="ticket-header-actions" ng-show="listType !== 'preview'">
             <div class="ticket-edit-actions"
                  ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
               <div class="btn btn-icn btn-default pull-left"
@@ -138,8 +138,6 @@
                    tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
                 <button class="ticket-assign"></button>
               </div>
-
-
               <div style="right: 0;"
                    class="dropdown-assign-ticket dropdown-menu fixed-assign"
                    stop-propagation="click"
