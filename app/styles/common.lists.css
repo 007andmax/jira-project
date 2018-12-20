@@ -4709,7 +4709,8 @@ Devices tab
 .billable-items-header .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
-.receive .btn-success {
+.receive .btn-success,
+.create-note-modal .btn-success {
   margin-bottom: 65px;
   position: relative;
   background-color: #2ec866;
@@ -4733,7 +4734,10 @@ Devices tab
 .invoices .invoices-header .invoices-header-filters .btn-success:focus,
 .receive .btn-success:hover,
 .receive .btn-success:active,
-.receive .btn-success:focus {
+.receive .btn-success:focus,
+.create-note-modal .btn-success:hover,
+.create-note-modal .btn-success:active,
+.create-note-modal .btn-success:focus {
   background-color: #189947;
 }
 
@@ -5935,6 +5939,7 @@ Devices tab
 
 .device-name-edit .btn-default,
 .receive .btn-default,
+.create-note-modal .btn-default,
 .service .btn-default {
   width: 80px;
   background-color: #edf2f6;
@@ -5948,6 +5953,9 @@ Devices tab
 .service .btn-default:hover,
 .service .btn-default:active,
 .service .btn-default:focus,
+.create-note-modal .btn-default:hover,
+.create-note-modal .btn-default:active,
+.create-note-modal .btn-default:focus,
 .receive .btn-default:hover,
 .receive .btn-default:active,
 .receive .btn-default:focus {

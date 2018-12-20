@@ -1,1 +1,49 @@
-edit paym
+<div class="create-note-modal edit-payments-modal">
+  <div class="modal-header clearfix">
+    <a href="javascript:void(0)"
+       style="position: absolute;right: 20px;top: 20px;"
+       ng-click="close()"
+       data-dismiss="modal"
+       aria-label="Close">
+      <i class="icn-sm icn-remove-old"></i>
+    </a>
+    <h4 class="modal-title pull-left">Edit Payment</h4>
+    <div class="col-md-8">
+    </div>
+  </div>
+  <div class="note-modal-content clearfix">
+    <p>You can refund the payment, or create a credit note</p>
+    <div class="col-md-6">Invoice # <span>362512</span></div>
+    <div class="col-md-6 text-right"><strong style="padding: 10px;">$525</strong></div>
+    <div class="col-md-6">Amount Paid</div>
+    <div class="col-md-6 text-right">
+      <strong class="alyosha-strong">$200</strong>
+    </div>
+    <div class="form-group note"
+         ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'note')}">
+
+      <label class="control-label" ng-class="{ 'hide': isShowingErrors(paymentRecieveForm, 'note')}">
+        Note
+      </label>
+
+      <div ng-messages="paymentRecieveForm.note.$error"
+           ng-class="{ 'hide': !isShowingErrors(paymentRecieveForm, 'note')}">
+        <label class="control-label" ng-message="maxlength">NOTE IS TOO LARGE</label>
+      </div>
+
+      <textarea placeholder="Write Note here" class="form-control" name="note" ng-model="note"
+                ng-maxlength="250"></textarea>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="padding: 0;">
+        <div class="btn btn-success"
+             ng-click="receivePayment()">
+          Refund Amount
+        </div>
+        <div class="btn btn-default" ng-click="close()">
+          Cancel
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

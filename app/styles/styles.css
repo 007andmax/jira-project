@@ -1044,7 +1044,8 @@ hr {
 .billable-items .billable-items-header .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
-.receive .btn-success {
+.receive .btn-success,
+.create-note-modal .btn-success {
   height: 40px;
   max-width: 150px !important;
   width: 100% !important;
@@ -10261,7 +10262,8 @@ button.close {
   
 }
 
-.receive .btn-success {
+.receive .btn-success,
+.create-note-modal .btn-success {
   max-width: 175px !important;
   width: 100%;
   display: inline-block;
@@ -10283,6 +10285,7 @@ button.close {
   cursor: default;
 }
 
+.create-note-modal .btn-default,
 .receive .btn-default {
   max-width: 100px;
   width: 100%;
@@ -10732,7 +10735,8 @@ button.close {
   transform: translate3d(-50%, -50%, 0) !important;
 }
 
-.receive .invoices-header .readonly-normal {
+.receive .invoices-header .readonly-normal,
+.create-note-modal .readonly-normal {
   border: 1px solid #c4cbd5;
   height: 40px !important;
   background-color: #fff !important;
@@ -10749,10 +10753,11 @@ button.close {
   font-family: "Graphik Medium", sans-serif;
 }
 
-.receive .invoices-header .control-label {
+.receive .invoices-header .control-label,
+.create-note-modal .note-modal-content .control-label {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 @-moz-document url-prefix() {
@@ -10778,36 +10783,42 @@ button.close {
   padding: 0;
 }
 
-.modal-receive-payment .total-amount {
+.modal-receive-payment .total-amount,
+.create-note-modal .total-amount {
   display: flex;
   margin-top: 20px;
   color: #4f5f79;
   margin-bottom: 10px;
 }
 
-.modal-receive-payment .total-amount span {
+.modal-receive-payment .total-amount span,
+.create-note-modal .total-amount span {
   font-size: 11px;
   margin-right: 15px;
   font-family: "Graphik Medium", sans-serif;
 }
 
-.modal-receive-payment .total-amount strong {
+.modal-receive-payment .total-amount strong,
+.create-note-modal .total-amount strong {
   background-color: #edf2f6;
   padding: 15px 10px;
   border-radius: 3px;
   font-weight: 500;
 }
 
+.create-note-modal .note,
 .modal-receive-payment .note {
   margin-bottom: 25px;
 }
 
+.create-note-modal .note label,
 .modal-receive-payment .note label {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 10px;
 }
 
+.create-note-modal .note textarea,
 .modal-receive-payment .note textarea {
   background-color: #fff;
   border-radius: 3px;
@@ -10816,6 +10827,7 @@ button.close {
   min-height: 90px;
 }
 
+.create-note-modal .checkbox-caption,
 .modal-receive-payment .checkbox-caption {
   font-size: 13px;
   margin-left: 5px;
@@ -11794,6 +11806,94 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   position: absolute;
   right: 252px;
   top: 106px;
+}
+
+.create-note-modal {
+  padding: 40px 55px;
+  width: 100%;
+  color: #364656;
+  font-size: 13px;
+}
+
+.create-note-modal span {
+  font-size: 13px;
+}
+
+.create-note-modal strong {
+  color: #4f5f79;
+  font-size: 13px;
+}
+
+.create-note-modal .col-md-6 {
+  margin-bottom: 10px;
+}
+
+.alyosha-strong {
+  padding: 10px;
+  background: #edf2f6;
+  font-family: 'Graphik Medium', sans-serif;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.create-note-modal p {
+  font-size: 13px;
+  color: #626b7f;
+  padding: 10px 0 50px;
+}
+
+.create-note-modal input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #c4cbd5;
+  height: 40px !important;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.create-note-modal label input {
+  margin-top: 15px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.create-note-modal label {
+  font-size: 13px;
+  width: 100%;
+  font-family: "Graphik Medium", sans-serif;
+  color: #404b5f;
+}
+
+.create-note-modal .modal-header [class*="col-md-"] {
+  padding: 0;
+}
+
+.create-note-modal .modal-header .col-md-4 {
+  display: flex;
+}
+
+.create-note-modal .modal-header .col-md-8 {
+  margin-top: 8px;
+}
+
+.create-note-modal .modal-header .col-md-4 .absolute-stick-datepicker {
+  position: static;
+  opacity: 1;
+  width: 100%;
+  background: transparent;
+  border: 1px solid #c4cbd5;
+  height: 40px !important;
+  padding: 11px 35px 11px 11px;
+}
+
+.create-note-modal .modal-header .col-md-4 .report-calendar {
+  position: absolute;
+  display: block;
+  right: 14px;
+}
+
+.create-note-modal [class*="col-md-"] {
+  padding: 0;
 }
 
 @media (min-width: 2048px) {
