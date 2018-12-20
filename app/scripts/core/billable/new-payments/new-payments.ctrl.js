@@ -22,9 +22,8 @@
             templateUrl: template,
             animation: true,
             backdrop: true,
-            size: 'md',
             controller: 'quicktech.core.billable.newModalsCtlr',
-            windowClass: 'create-popup margin-top-modal-dialog',
+            windowClass: 'modal-receive-payment margin-top-modal-dialog',
             resolve: {
 
             }
