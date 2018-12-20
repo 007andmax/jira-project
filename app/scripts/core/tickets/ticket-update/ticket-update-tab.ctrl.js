@@ -3,16 +3,15 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
-      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter',
-        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter) {
+      ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter', '$rootScope',
+        function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter, $rootScope) {
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
-
-
-
           $scope.checkForOpenDropdown = checkForOpenDropdown;
+
+          var closeDropdowns = $rootScope.debounce(closeDropdowns, 200)
 
           $scope.$watch(function() {
             setTimeout(checkForOpenDropdown, 100)
@@ -30,9 +29,17 @@
 
           })
 
+          $scope.$on('$destroy', function() {
+            window.removeEventListener('scroll', closeDropdowns)
+          })
+
           function closeDropdowns() {
             var ticketAddContent = document.querySelector('.ticket-add-content');
-            ticketAddContent.click();
+
+            if (ticketAddContent) {
+              ticketAddContent.click();
+            }
+
           }
 
           function checkForOpenDropdown() {
@@ -44,15 +51,15 @@
             var arr = [quantity, date];
             arr.forEach(function(el) {
               if (!el) return;
-              var pos = el.getBoundingClientRect();
-              var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-              var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-              el.style.removeProperty('top');
-              el.style.removeProperty('left');
-              el.style.removeProperty('bottom');
-              el.style.position = 'fixed';
-              el.style.top = pos.top + scrollTop;
-              el.style.left = pos.left + scrollLeft;
+              // var pos = el.getBoundingClientRect();
+              // var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+              // var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              // el.style.removeProperty('top');
+              // el.style.removeProperty('left');
+              // el.style.removeProperty('bottom');
+              // el.style.position = 'fixed';
+              // el.style.top = pos.top + scrollTop;
+              // el.style.left = pos.left + scrollLeft;
               el.style.zIndex = '10000'
             })
 
@@ -65,9 +72,6 @@
             var data = data.filter(function(el) {
               return el.company.id === $scope.ticketDetails.company.id;
             })
-
-
-
 
             if (!data.length) {
               $scope.areTicketsPresented = false;
@@ -147,10 +151,6 @@
                 toggleDataSelector()
 
 
-
-
-                // console.log($scope.serviceToEdit, 'SERVICETOEIDT')
-
               }, 100)
 
             }, true);
@@ -195,17 +195,6 @@
 
               }
             })
-          }
-
-
-
-
-
-
-
-          function toggleDataSelector() {
-            // var input = document.querySelector('div[data-date-picker] input');
-            // input.click();
           }
 
 
