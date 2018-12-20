@@ -44,23 +44,25 @@
 
           function checkForOpenDropdown() {
             var quantity = document.querySelector('.new-quantity-picker #service-quantity-dropdown');
-            var date = document.querySelector('.bootstrap-datetimepicker-widget');
+            var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
+
+            console.log(date, 'date')
             var products = document.querySelectorAll('.custom-product-list');
             var services = document.querySelectorAll('[ng-show="isOpen() && !moveInProgress"]');
 
-            var arr = [quantity, date];
+            var arr = [date];
             arr.forEach(function(el) {
               if (!el) return;
-              // var pos = el.getBoundingClientRect();
-              // var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-              // var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-              // el.style.removeProperty('top');
-              // el.style.removeProperty('left');
-              // el.style.removeProperty('bottom');
-              // el.style.position = 'fixed';
-              // el.style.top = pos.top + scrollTop;
-              // el.style.left = pos.left + scrollLeft;
-              el.style.zIndex = '10000'
+              var pos = el.getBoundingClientRect();
+              var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+              var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              el.style.removeProperty('top');
+              el.style.removeProperty('left');
+              el.style.removeProperty('bottom');
+              el.style.position = 'fixed';
+              el.style.top = pos.top + scrollTop;
+              el.style.left = pos.left + scrollLeft;
+              el.style.zIndex = 100000;
             })
 
           }
