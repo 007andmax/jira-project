@@ -764,6 +764,14 @@
     padding-left: 342px;
   }
   
+  .opened-ticket-list .product-upd .table-content-top .col-md-8 {
+    width: 50%;
+  }
+  
+  .opened-ticket-list .product-upd .table-content-top .col-md-1 {
+    width: 16.66666667%;;
+  }
+  
   .ticket-update-service-edit {
     padding: 30px 40px 30px 50px;
   }
