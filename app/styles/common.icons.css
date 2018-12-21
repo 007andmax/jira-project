@@ -371,7 +371,16 @@ a.ha-24 {
 
 @media screen and (min-width: 414px) {
   .new-date-picker .dropdown-menu {
-    transform: translateY(calc(-100% - 50px));
+    transform: translateY(calc(-100% - 55px));
+
+  }
+
+  .service-datetimepicker {
+    position: relative;
+  }
+
+  .service-datetimepicker .dropdown-menu {
+    transform: translateX(calc(100% - 98px))
   }
 
   /* .new-quantity-picker #service-quantity-dropdown {

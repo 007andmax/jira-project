@@ -85,7 +85,7 @@
     <!--</ul>-->
     <div class="table-content service-table">
       <div class="table-content-top clearfix">
-        <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
+        <div class="col-md-2 service-datetimepicker" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
           <div uib-dropdown>
             <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
             <input type="text" qt-data-time-picker max-date="maxServiceDate"
@@ -93,6 +93,7 @@
                    placeholder="Date" ng-model="editService.date"
                    name="serviceData" ng-required="true"
                    uib-tooltip="Date"
+                   position-to-left="true"
                    tooltip-placement="top"
                    tooltip-append-to-body="true">
           </div>

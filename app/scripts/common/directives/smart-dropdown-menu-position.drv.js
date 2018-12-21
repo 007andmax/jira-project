@@ -22,7 +22,7 @@
 
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
-            var productInputPosition = element[0].getBoundingClientRect().top;
+            var productInputTopPosition = element[0].getBoundingClientRect().top;
             var productInput = $(element[0]);
             var productDropdownMenu = productInput.parent('div').parent('div').find('.nano');
             // if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
@@ -34,10 +34,7 @@
             //   productDropdownMenu.css({'margin-bottom': ''});
             // }
 
-            if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
-              productDropdownMenu.css({'transform': 'translateY(-100%)'});
 
-            }
 
             var productInputPosition = element[0].getBoundingClientRect();
             var width = element[0].offsetWidth;
@@ -47,20 +44,35 @@
             var right = productInputPosition.right;
             var bottom = productInputPosition.bottom;
 
+            var liAmount = productDropdownMenu[0].querySelectorAll('li');
+
+            var dropdownHeight = [].reduce.call(liAmount, function(acc, el) {
+              return acc + el.offsetHeight;
+            }, 0)
+
+
             productDropdownMenu.css({
               top: productInputPosition.top + 50 + 'px',
               left: productInputPosition.left + 'px',
               position: 'fixed',
               width: width + 'px',
-              height: ($rootScope.isProductCategoryOpened ? 350 : 160) + 'px'
+              height: ($rootScope.isProductCategoryOpened ? 350 : dropdownHeight) + 'px'
             });
 
 
 
-            if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
-              productDropdownMenu.css({'transform': 'translateY(-100%)'});
+            if((winHeight - productInputTopPosition) < 360 && !(window.innerWidth <= 414)) {
+              console.log('we are not hereeee')
+              productDropdownMenu.css({'transform': 'translateY(calc(-100% - 65px))'});
 
             }
+
+
+
+            // if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
+            //   productDropdownMenu.css({'transform': 'translateY(calc(-100% - 50px))'});
+            //
+            // }
 
           } else if (attrs.smartDropdownMenuPosition === 'quantity') {
             var productInputPosition = element[0].getBoundingClientRect().top;
@@ -69,7 +81,7 @@
 
 
             if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
-              productDropdownMenu.css({'transform': 'translateY(-100%)'});
+              productDropdownMenu.css({'transform': 'translateY(calc(-100% - 50px))'});
 
             }
 

@@ -11,11 +11,11 @@
           $scope.areTickets = false;
           $scope.checkForOpenDropdown = checkForOpenDropdown;
 
-          var closeDropdowns = $rootScope.debounce(closeDropdowns, 200)
+          var closeDropdowns = $rootScope.debounce(closeDropdowns, 100)
 
-          $scope.$watch(function() {
-            setTimeout(checkForOpenDropdown, 100)
-          });
+          // $scope.$watch(function() {
+          //   setTimeout(checkForOpenDropdown, 100)
+          // });
 
           window.addEventListener('scroll', closeDropdowns)
 
@@ -33,6 +33,12 @@
             window.removeEventListener('scroll', closeDropdowns)
           })
 
+          $scope.$watch(function() {
+            setTimeout(function() {
+              checkForOpenDropdown()
+            }, 0)
+          })
+
           function closeDropdowns() {
             var ticketAddContent = document.querySelector('.ticket-add-content');
 
@@ -43,12 +49,18 @@
           }
 
           function checkForOpenDropdown() {
-            var quantity = document.querySelector('.new-quantity-picker #service-quantity-dropdown');
             var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
+            var dateInput = document.querySelector('.new-date-picker input');
 
-            console.log(date, 'date')
-            var products = document.querySelectorAll('.custom-product-list');
-            var services = document.querySelectorAll('[ng-show="isOpen() && !moveInProgress"]');
+            if (!date) {
+              setTimeout(checkForOpenDropdown, 100);
+              return;
+            }
+
+            if (!dateInput) return;
+
+            dateInput = dateInput.getBoundingClientRect();
+
 
             var arr = [date];
             arr.forEach(function(el) {
@@ -56,12 +68,10 @@
               var pos = el.getBoundingClientRect();
               var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
               var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-              el.style.removeProperty('top');
-              el.style.removeProperty('left');
-              el.style.removeProperty('bottom');
               el.style.position = 'fixed';
-              el.style.top = pos.top + scrollTop;
-              el.style.left = pos.left + scrollLeft;
+              el.style.top = dateInput.top + scrollTop + 40 + 'px';
+              el.style.left = (dateInput.right - el.offsetWidth) + scrollLeft +  200 +  'px';
+              el.style.right = 'auto';
               el.style.zIndex = 100000;
             })
 
