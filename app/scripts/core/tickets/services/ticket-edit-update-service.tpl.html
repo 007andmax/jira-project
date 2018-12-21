@@ -85,11 +85,11 @@
     <!--</ul>-->
     <div class="table-content service-table">
       <div class="table-content-top clearfix">
-        <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
+        <div class="col-md-3" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
           <div uib-dropdown>
-            <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+            <i class="icn-sm report-caret-icon" style="position: absolute;top: 14px;right: 13px;z-index: 1;"></i>
             <input type="text" qt-data-time-picker max-date="maxServiceDate"
-                   class="form-control has-dropdown" uib-dropdown-toggle aria-expanded="false"
+                   class="form-control new-input has-dropdown" uib-dropdown-toggle aria-expanded="false"
                    placeholder="Date" ng-model="editService.date"
                    name="serviceData" ng-required="true"
                    uib-tooltip="Date"
@@ -97,15 +97,15 @@
                    tooltip-append-to-body="true">
           </div>
         </div>
-        <div class="col-md-8" ng-class="{'has-error': !editService.item.versionedId.id}">
+        <div class="col-md-7" ng-class="{'has-error': !editService.item.versionedId.id}">
           <div uib-dropdown>
-            <input type="text" value="Onsite" class="form-control has-dropdown" placeholder="Service"
+            <input type="text" value="Onsite" class="new-input form-control has-dropdown" placeholder="Service"
                    name="serviceName" placeholder="Service" uib-dropdown-toggle aria-expanded="false"
                    ng-model="editService.item.name" required
                    uib-tooltip="Service"
                    tooltip-placement="top"
                    tooltip-append-to-body="true">
-            <i class="icn-sm icn-caret-gray"></i>
+            <i style="top: 14px;" class="icn-sm report-caret-icon"></i>
 
             <ul class="dropdown-menu dropdown-menu-services">
 
@@ -121,7 +121,7 @@
         </div>
         <div class="col-md-2" service-quantity-picker="editService.quantity" sqp-is-show-format="false"
              ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
-          <input id="service-quantity-picker" type="text" class="form-control"
+          <input id="service-quantity-picker" type="text" class="pointer form-control new-input"
                  placeholder="Hr(s) : Min(s)" sqp-input
                  autocomplete="off" aria-expanded="true"
                  uib-tooltip="Duration"
@@ -133,7 +133,7 @@
       </div>
       <div class="table-content-bottom clearfix">
         <div class="col-md-12" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceDescription')}">
-          <input type="text" class="form-control service-description" placeholder="Description"
+          <input type="text" class="form-control new-input service-description" placeholder="Description"
                  ng-model="editService.description" max-length-word="100"
                  name="serviceDescription" ng-maxlength="2000"
                  uib-tooltip="Description"
