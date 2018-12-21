@@ -23,7 +23,6 @@
               ignoreReadonly: true,
               sideBySide: true,
               widgetPositioning: {
-                // ne rabotaet nihuya
                 horizontal: scope.positionToLeft ? 'left' : 'right',
                 vertical: 'auto'
               }
