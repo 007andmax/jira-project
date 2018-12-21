@@ -49,13 +49,11 @@
     top: 0;
     right: 0;
     left: 0;
-    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-    
-    background: white;
+    background: #3e4b61;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
   
@@ -65,13 +63,11 @@
     top: 0;
     right: 0;
     left: 0;
-    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-    
-    background: white;
+    background: #3e4b61;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
 }

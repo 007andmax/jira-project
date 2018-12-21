@@ -732,6 +732,13 @@
   border-bottom: 1px solid #edf2f6;
 }
 
+.ticket-update-service-edit .table-content .table-content-top,
+.ticket-update-service-edit .table-content .table-content-bottom,
+.ticket-update-product-edit .table-content .table-content-top,
+.ticket-update-product-edit .table-content .table-content-bottom {
+  padding: 0;
+}
+
 .table-content .table-content-top,
 .table-content .table-content-bottom {
   padding: 6.5px 15px;
@@ -777,7 +784,7 @@
   }
   
   .ticket-update-product-edit {
-    padding: 30px 40px 30px 50px;
+    padding: 0;
   }
   
   .ticket-update-edit .icon-edit {
