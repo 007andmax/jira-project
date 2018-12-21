@@ -453,7 +453,6 @@
       <div class="create-updates-content-product row" ng-if="currentOpenTab === 'PRODUCT'"
            ng-class="{'show': currentOpenTab === 'PRODUCT'}"
            ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl" ng-form="addProductsForm">
-           sfsdfdsfdsfdsfsdsf
         <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl" ng-form="addProductForm">
           <div class="col-xs-12 mob-product-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
             <div products-list id="product-list-cont"
@@ -567,7 +566,7 @@
         <div ng-if="!areTicketsPresented" ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
           <div ng-form="addServiceForm" class="clearfix">
             <div class="col-xs-12">
-              <div uib-dropdown dropdown-append-to-body="true">
+              <div uib-dropdown>
 
                 <input type="text"
                        readonly

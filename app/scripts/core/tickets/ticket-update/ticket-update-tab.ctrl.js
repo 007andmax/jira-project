@@ -52,10 +52,30 @@
             var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
             var dateInput = document.querySelector('.new-date-picker input');
 
+            var serviceInputs = document.querySelectorAll('.new-service-input');
+
+            for (var i = 0; i < serviceInputs.length; i++) {
+              var inp = serviceInputs[i];
+              var sId = inp.getAttribute('aria-owns');
+              var dropdown = document.getElementById(sId);
+              var pos = inp.getBoundingClientRect();
+
+
+              dropdown.style.position = 'fixed';
+              dropdown.style.top = inp.top + 'px';
+              dropdown.style.left = inp.left + 'px';
+              dropdown.style.width = inp.offsetWidth + 'px';
+
+              dropdown.classList.add('new-service-dropdown');
+
+            }
+
             if (!date) {
               setTimeout(checkForOpenDropdown, 100);
               return;
             }
+
+
 
             if (!dateInput) return;
 

@@ -383,10 +383,11 @@ a.ha-24 {
     transform: translateX(calc(100% - 98px))
   }
 
-  /* .new-quantity-picker #service-quantity-dropdown {
-    transform: translateY(calc(-100% - 50px));
+  .new-service-dropdown {
+    transform: translateY(calc(-100% - 55px))
+  }
 
-  } */
+
 }
 
 

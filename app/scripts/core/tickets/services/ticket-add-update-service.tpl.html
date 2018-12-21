@@ -96,7 +96,7 @@
 
   <div class="ticket-add-service-content">
     <div class="col-5" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
-      <div uib-dropdown dropdown-append-to-body="true">
+      <div uib-dropdown>
         <input type="text"
                name="serviceName"
                ng-disabled="!serviceList.length"
@@ -104,11 +104,10 @@
                ng-minlength="1"
                autocomplete="off"
                placeholder="Service"
-               class="new-input form-control-dropdown dropdown-toggle"
+               class="new-input form-control-dropdown dropdown-toggle new-service-input"
                uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
                typeahead-append-to-body="true"
-               qt-typeahead-async-show-on-focus
-               smart-dropdown-menu-position>
+               qt-typeahead-async-show-on-focus>
 
         <div style="position: absolute;right: 10px;top: 9px;cursor: pointer;"
              typeahead-input-icon="serviceExpense.item"></div>
