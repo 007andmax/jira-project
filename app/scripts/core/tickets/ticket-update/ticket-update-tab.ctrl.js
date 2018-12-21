@@ -59,11 +59,11 @@
               var sId = inp.getAttribute('aria-owns');
               var dropdown = document.getElementById(sId);
               var pos = inp.getBoundingClientRect();
-
+              var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
               dropdown.style.position = 'fixed';
-              dropdown.style.top = inp.top + 'px';
-              dropdown.style.left = inp.left + 'px';
+              dropdown.style.top = (pos.top) + 'px';
+              dropdown.style.left = pos.left + 'px';
               dropdown.style.width = inp.offsetWidth + 'px';
 
               dropdown.classList.add('new-service-dropdown');
@@ -89,8 +89,8 @@
               var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
               var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
               el.style.position = 'fixed';
-              el.style.top = dateInput.top + scrollTop + 40 + 'px';
-              el.style.left = (dateInput.right - el.offsetWidth) + scrollLeft +  200 +  'px';
+              el.style.top = dateInput.top  + 40 + 'px';
+              el.style.left = (dateInput.right - el.offsetWidth) - scrollLeft +  200 +  'px';
               el.style.right = 'auto';
               el.style.zIndex = 100000;
             })

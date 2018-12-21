@@ -384,7 +384,7 @@ a.ha-24 {
   }
 
   .new-service-dropdown {
-    transform: translateY(calc(-100% - 55px))
+    transform: translateY(calc(-100% - 15px))
   }
 
 
