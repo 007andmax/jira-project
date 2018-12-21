@@ -110,25 +110,28 @@
                id="product-list-cont"
                click-outside="closeDropdown()"
                outside-if-not="product-list-cont">
-            <input ng-hide="isPLOpen" type="text" class="pointer form-control has-dropdown" pl-product-input
+            <input style="padding-right: 25px;"
+                   ng-hide="isPLOpen" type="text" class="new-input pointer form-control has-dropdown" pl-product-input
                    placeholder="Product" autocomplete="off"
                    uib-tooltip="Product"
                    tooltip-placement="top"
                    tooltip-append-to-body="true">
-            <input ng-show="isPLOpen" type="text" class="pointer form-control has-dropdown" pl-search-product-input
+            <input style="padding-right: 25px;"
+                   ng-show="isPLOpen" type="text" class="new-input pointer form-control has-dropdown"
+                   pl-search-product-input
                    placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct"
                    smart-dropdown-menu-position="product-list"
                    uib-tooltip="Search or Add Product"
                    tooltip-placement="top"
                    tooltip-append-to-body="true">
-            <i class="icn-sm icn-caret-gray"></i>
+            <i style="top: 19px;right: 16px;" class="icn-sm report-caret-icon"></i>
             <input type="hidden" name="product" ng-model="editProduct.item.description" ng-required="true">
             <div class="nano dropdown-menu custom-product-list" pl-conteiner
                  ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
           </div>
         </div>
         <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productCost')}">
-          <input type="number" class="form-control" placeholder="Cost" name="productCost"
+          <input type="number" class="new-input form-control" placeholder="Cost" name="productCost"
                  ng-required="true" ng-model="editProduct.item.cost" qt-to-fixed="2"
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                  ng-max="editProduct.item.sale"
@@ -138,7 +141,7 @@
                  tooltip-append-to-body="true">
         </div>
         <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
-          <input type="text" class="form-control" placeholder="Qty"
+          <input type="text" class="new-input form-control" placeholder="Qty"
                  ng-model="editProduct.quantity" ng-maxlength="10"
                  name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"
                  hard-reset-pattern="numberPattern"
@@ -147,7 +150,7 @@
                  tooltip-append-to-body="true">
         </div>
         <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}">
-          <input type="number" class="form-control" placeholder="Price" name="productPrice"
+          <input type="number" class="new-input form-control" placeholder="Price" name="productPrice"
                  ng-required="true" ng-model="editProduct.item.sale" qt-to-fixed="2" ng-max="9999999999"
                  ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
                  hard-reset-pattern="pricePattern" hard-reset-required="true"
@@ -160,7 +163,7 @@
         <div class="col-md-3"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}">
           <input type="text"
-                 class="form-control"
+                 class="form-control new-input"
                  name="productSerialNumber"
                  placeholder="Serial number"
                  ng-model="editProduct.serialNumber"
@@ -174,7 +177,7 @@
         <div class="col-md-2"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">
           <input type="text"
-                 class="form-control"
+                 class="form-control new-input"
                  name="discountAmount"
                  ng-model="editProduct.discountAmount"
                  ng-max="100"

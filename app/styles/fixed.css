@@ -1243,6 +1243,11 @@ aside#left div.nav-title {
   cursor: pointer;
 }
 
+.ticket-update-service-edit .table-content,
+.ticket-update-product-edit .table-content {
+  background: #fff;
+}
+
 .custom-product-list .clear-product:hover {
   background-color: #fff2f2;
 }
@@ -2215,6 +2220,7 @@ span.sort-span {
   padding: 7px 12px;
   outline: none;
   position: relative;
+  background: #fff !important;
 }
 
 .ticket-settings-actions .dropdown-menu {
