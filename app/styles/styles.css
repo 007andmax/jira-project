@@ -10277,12 +10277,24 @@ button.close {
   display: none;
 }
 
-.receive .receive-payment-list .col-md-3 {
+.create-note-modal h5 {
+  margin: 20px 0 0;
+  font-size: 16px;
+  float: left;
+}
+
+.receive .receive-payment-list .col-md-3,
+.create-note-modal .receive-payment-list .col-md-3 {
   text-align: right;
 }
 
-.receive .receive-payment-list > li {
+.receive .receive-payment-list > li,
+.create-note-modal .receive-payment-list > li {
   cursor: default;
+}
+
+.create-note-modal .receive-payment-list {
+  overflow-y: hidden;
 }
 
 .create-note-modal .btn-default,
@@ -10743,11 +10755,18 @@ button.close {
   margin-bottom: 10px;
 }
 
-.receive .qt-list > li {
+.receive .qt-list > li,
+.create-note-modal .qt-list > li {
   padding: 20px 0;
 }
 
-.receive .invoice-list-heading {
+.create-note-modal .qt-list > li:hover::before,
+.create-note-modal .qt-list > li:hover::after {
+  display: none;
+}
+
+.receive .invoice-list-heading,
+.create-note-modal .invoice-list-heading {
   text-transform: uppercase;
   font-size: 11px;
   font-family: "Graphik Medium", sans-serif;
@@ -10758,6 +10777,10 @@ button.close {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 10px;
+}
+
+.create-note-modal .qt-list label {
+  width: auto;
 }
 
 @-moz-document url-prefix() {
@@ -10779,7 +10802,8 @@ button.close {
   margin: 0;
 }
 
-.modal-receive-payment .invoice-list-heading {
+.modal-receive-payment .invoice-list-heading,
+.create-note-modal .invoice-list-heading {
   padding: 0;
 }
 
