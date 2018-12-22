@@ -14,23 +14,30 @@
     height: 78px;
     margin-left: 316px;
     padding: 20px 30px;
-
+    
     background: #3e4b61;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
+  
   .left-panel-closed .top-bar {
     position: fixed;
     z-index: 1050;
     top: 0;
     right: 0;
     left: 0;
-
+    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-
+    
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .left-panel-icons-remote {
+    background: url(../images/left-panel-icons-x1.png) 211px 1px !important;
   }
 }
 
@@ -48,28 +55,28 @@
     top: 0;
     right: 0;
     left: 0;
-
+    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-
+    
     background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
+  
   .top-bar {
     position: fixed;
     z-index: 1050;
     top: 0;
     right: 0;
     left: 0;
-
+    
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-
-
+    
     background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
@@ -186,9 +193,11 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   .opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 392px);
   }
+  
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 76px);
   }
+  
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
     
@@ -202,11 +211,13 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     
     /*width: calc(100% - 77px);*/
   }
+  
   .opened-ticket .content-wrapper .container-ticket-content {
     right: 77px;
     
     /*width: calc(100% - 77px);*/
   }
+  
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
     
@@ -240,15 +251,15 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 340px;
   }
-
+  
   body.opened-ticket-list.opened-ticket.left-panel-closed .content-wrapper .container-ticket-list {
     width: 540px;
   }
-
+  
   .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 733px);
   }
-
+  
   .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
     width: calc(100% - 656px);
