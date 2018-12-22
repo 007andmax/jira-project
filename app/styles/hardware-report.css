@@ -1867,6 +1867,22 @@
 }
 
 @media screen and (max-width: 1366px) {
+  .company-report .top-product-list-ticket [class*=col-md-] {
+    font-size: 9px;
+  }
+
+  .company-report .content-product-list-ticket [class*=col-md-] {
+    font-size: 11px;
+  }
+
+  .run-report-content .content {
+    width: 28.6%;
+  }
+
+  .run-report-content {
+    margin-top: 50px;
+  }
+
   .service-agreements-lists .col-width-3 {
     width: 20%;
   }

@@ -3570,21 +3570,21 @@ Devices tab
 }
 
 @media only screen and (max-width: 1024px) {
-  .qt-devices > li > .col-1 {
-    width: calc(100% - 530px);
-  }
-  
-  .qt-devices > li > .col-2 {
-    width: 110px;
-  }
-  
-  .qt-devices > li > .col-3 {
-    width: 50px;
-  }
-  
-  .qt-devices > li > .col-4 {
-    width: 87px;
-  }
+  /*.qt-devices > li > .col-1 {*/
+    /*width: calc(100% - 530px);*/
+  /*}*/
+
+  /*.qt-devices > li > .col-2 {*/
+    /*width: 110px;*/
+  /*}*/
+
+  /*.qt-devices > li > .col-3 {*/
+    /*width: 50px;*/
+  /*}*/
+
+  /*.qt-devices > li > .col-4 {*/
+    /*width: 87px;*/
+  /*}*/
 }
 
 .qt-devices .device-name {
