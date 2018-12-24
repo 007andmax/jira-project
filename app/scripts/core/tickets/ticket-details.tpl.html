@@ -78,6 +78,7 @@
 
                   <span
                     class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+                    ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].color, 'font-weight': 'bold', 'border': 'none'}"
                     ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                     uib-dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
@@ -746,6 +747,7 @@
           <div uib-dropdown>
             <span
               class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+              ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].color, 'font-weight': 'bold', 'border': 'none'}"
               ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
               uib-dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}

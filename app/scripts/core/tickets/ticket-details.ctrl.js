@@ -7,10 +7,10 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
@@ -26,11 +26,27 @@
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
-
+          $scope.tagColors = TagsService.getColors();
 
           $timeout(function() {
             ticketMobileSettings.data = $scope;
           }, 3000);
+
+
+          $scope.getTicketStatus = function(ticket, arg) {
+            console.log(ticket, arg, "ARG")
+            var status;
+            if(ticket.assignedUserId === null) {
+              status = 'unassigned';
+            } else if(ticket.status === 'COMPLETED') {
+              status = 'completed';
+            } else if(ticket.status === 'IN_PROGRESS') {
+              status = 'inProgress';
+            } else if(ticket.status === 'ON_HOLD') {
+              status = 'onHold';
+            }
+            return status;
+          };
 
 
 
