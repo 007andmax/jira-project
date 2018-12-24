@@ -59,7 +59,7 @@
 .ticket-add .ticket-update-note .editor {
   border: none;
   padding: 24px 24px 0 24px;
-  color: #9ca5b6;
+  color: rgb(64, 75, 95);
   font-size: 13px;
 }
 
@@ -404,4 +404,3 @@
 .shared-user-add .checkbox {
   margin-left: 10px;
 }
-

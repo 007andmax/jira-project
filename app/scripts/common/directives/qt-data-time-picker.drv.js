@@ -11,11 +11,9 @@
           scope: {
             minDate: '=',
             maxDate: '=',
-            defaultDate: '=',
-            positionToLeft: '='
+            defaultDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
-
             var options = {
               keepOpen: true,
               format: 'DD MMM YYYY',
@@ -23,7 +21,7 @@
               ignoreReadonly: true,
               sideBySide: true,
               widgetPositioning: {
-                horizontal: scope.positionToLeft ? 'left' : 'right',
+                horizontal: 'right',
                 vertical: 'auto'
               }
             };
@@ -47,9 +45,6 @@
             }
 
             $timeout(function () {
-              // element.data('DateTimePicker').OPTIONS(options)
-              element.data('DateTimePicker') && element.data('DateTimePicker').OPTIONS(options)
-
               element.datetimepicker(options);
               ctrl.$setPristine();
             });
@@ -63,7 +58,6 @@
             element.bind('dp.change', function (e) {
               var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
               ctrl.$setViewValue(formattedDate);
-              element.data('DateTimePicker') && element.data('DateTimePicker').OPTIONS(options)
 
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
