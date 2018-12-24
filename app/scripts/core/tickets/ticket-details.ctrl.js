@@ -30,7 +30,10 @@
 
           $timeout(function() {
             ticketMobileSettings.data = $scope;
-          }, 3000)
+          }, 3000);
+
+
+
 
           // console.log($scope.usersCurrentCompany, "SCOPESCOPESCOPE");
 
@@ -304,6 +307,15 @@
 
             }
 
+            $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
+              var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
+              console.log(type, el, 'el')
+              if (!~acc.indexOf(type)) {
+                acc.push(type);
+              }
+
+              return acc;
+            }, []);
 
 
             $scope.setUserCompany = function(id) {
@@ -1267,6 +1279,8 @@
               pattern: !link.match($scope.linkPattern)
             };
           };
+
+
 
           $scope.setEditingTicket = function (value) {
             $scope.editingTicket = value;

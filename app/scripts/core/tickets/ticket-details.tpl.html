@@ -340,9 +340,13 @@
       </div>
       <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0" qt-toggle-slider>
         <div class="attachment-meta">
-          <div>
+          <div class="icons-wrapper">
             <b>{{ ticketDetails.attachments.length }} </b>
             <span>Attachments</span>
+
+            <div class="attachments-icons">
+              <div ng-repeat="type in reducedAttachmentsTypes" class="file-icon-name attach-type-{{ type }} pointer" qt-icon-toggle-to-change></div>
+            </div>
           </div>
           <div class="combined-shape expand-down" qt-icon-toggle-to-change></div>
           <div class="download-all pull-right" style="display: none;">

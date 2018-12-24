@@ -8,25 +8,29 @@
         restrict: 'A',
         link: function (scope, element, attrs) {
 
-          var target = element.find('[qt-ts-toggler]').length ? element.find('[qt-ts-toggler]') : element;
+          setTimeout(function() {
+            var target = element.find('[qt-ts-toggler]').length ? element.find('[qt-ts-toggler]') : element;
 
-          var icon = element.find('[qt-icon-toggle-to-change]');
+            var icon = element.find('[qt-icon-toggle-to-change]');
 
-          function changeIconClass(){
-            if(icon.hasClass('expand-down')){
-              icon.removeClass('expand-down');
-              icon.addClass('expand-up');
-            } else {
-              icon.removeClass('expand-up');
-              icon.addClass('expand-down');
+            function changeIconClass(){
+              if(icon.hasClass('expand-down')){
+                icon.removeClass('expand-down');
+                icon.addClass('expand-up');
+              } else {
+                icon.removeClass('expand-up');
+                icon.addClass('expand-down');
+              }
             }
-          }
 
-          icon.click(function () {
-            changeIconClass();
-            element.toggleClass("expanded");
-            element.find('[qt-ts-slider]').slideToggle('fast');
-          })
+            icon.click(function () {
+              changeIconClass();
+              element.toggleClass("expanded");
+              element.find('[qt-ts-slider]').slideToggle('fast');
+            })
+          }, 0)
+
+
         }
       }
     }]);
