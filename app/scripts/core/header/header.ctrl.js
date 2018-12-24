@@ -53,6 +53,7 @@
 
         $scope.toggleLeftPanel = function(state) {
           $rootScope.isLeftPanelOpened = state;
+          $rootScope.isLeftPanelHidden = !$rootScope.isLeftPanelHidden;
         }
 
         $scope.getAssignUserId = function (ticket) {
