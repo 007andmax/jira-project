@@ -356,7 +356,7 @@
         <ul class="attachments clearfix" style="position: relative;">
           <li ng-repeat="attachment in ticketDetails.attachments"
               ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-              class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
+              class="{{ attachmentImageClass[attachment.file.contentType] }}"
               url="/html/scripts/core/tickets/image-preview.tpl.html"
               data="attachment.file" func="downloadAttachment"
               first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
