@@ -28,7 +28,6 @@
         });
 
         $scope.getTicketStatus = function(ticket, arg) {
-          console.log(ticket, arg, "ARG")
           var status;
           if(ticket.assignedUserId === null) {
             status = 'unassigned';

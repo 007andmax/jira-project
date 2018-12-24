@@ -478,7 +478,7 @@
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                    ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
+                    ng-repeat="attachment in ticketUpdate.attachments"
                     url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
@@ -789,7 +789,7 @@
             <ul class="attachments clearfix" style="position: relative;">
               <li ng-repeat="attachment in ticketDetails.attachments"
                   ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                  class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
+                  class="{{ attachmentImageClass[attachment.file.contentType] }}"
                   url="/html/scripts/core/tickets/image-preview.tpl.html"
                   data="attachment.file" func="downloadAttachment"
                   first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
@@ -852,7 +852,7 @@
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                    ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
+                    ng-repeat="attachment in ticketUpdate.attachments"
                     url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">

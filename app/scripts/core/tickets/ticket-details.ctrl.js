@@ -34,7 +34,6 @@
 
 
           $scope.getTicketStatus = function(ticket, arg) {
-            console.log(ticket, arg, "ARG")
             var status;
             if(ticket.assignedUserId === null) {
               status = 'unassigned';
@@ -323,15 +322,19 @@
 
             }
 
-            $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
-              var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
-              console.log(type, el, 'el')
-              if (!~acc.indexOf(type)) {
-                acc.push(type);
-              }
+            $scope.$watch("ticketDetails.attachments.length", function() {
+              $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
+                var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
+                console.log(type, el, 'el')
+                if (!~acc.indexOf(type)) {
+                  acc.push(type);
+                }
 
-              return acc;
-            }, []);
+                return acc;
+              }, []);
+            })
+
+
 
 
             $scope.setUserCompany = function(id) {
