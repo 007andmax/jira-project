@@ -335,6 +335,19 @@
             })
 
 
+            $scope.$watch('attachmentsToDelete', function(val) {
+              if (val) {
+                $rootScope.attachmentsToDelete = null;
+
+                $scope.ticketDetails.attachments = $scope.ticketDetails.attachments.filter(function(el) {
+                  return !~val.findIndex(function(attachment) {
+                    return attachment.id === el.id;
+                  });
+                })
+              }
+            })
+
+
 
 
             $scope.setUserCompany = function(id) {
@@ -986,6 +999,8 @@
 
             $scope.$apply();
           })
+
+
 
           $scope.$watch('ticketSharedUsersList', function() {
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
