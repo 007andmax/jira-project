@@ -16,6 +16,61 @@
         };
         $scope.receivePaymentInvoices = [];
 
+        $scope.allInvoicesList = $scope.receivableInvoicesData.list;
+        $scope.companies = CompaniesService.getClientCompanies();
+
+        $scope.availableInvoiceCompanies = [];
+
+        $scope.setCompany = function(company) {
+          $scope.invoiceCompany = company;
+        }
+
+        $scope.setInvoice = function(invoice) {
+          $scope.selectedInvoice = invoice;
+        }
+
+        $scope.maxDate = new Date();
+
+
+
+
+
+        if ($scope.selectedInvoiceCount <= 1) {
+          $scope.isSinglePayment = true;
+
+          $scope.$watch('invoiceCompany', function(val) {
+            if (val) {
+              $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
+                return el.company.id === val.id;
+              })
+
+              $scope.selectedInvoice = null;
+            }
+          }, true);
+
+          $scope.$watch('selectedInvoice', function(val) {
+            if (val) {
+              $scope.invoiceDescription = "Invoice #" + val.number + ' Amount: ' + '$' + val.sum;
+            } else {
+              $scope.invoiceDescription = '';
+            }
+          }, true)
+
+
+
+          if ($scope.selectedInvoiceCount === 1) {
+            var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
+            var invoice = $scope.allInvoicesList.find(function(el) {
+              return el.number == invoiceNum;
+            })
+
+            $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
+
+            setTimeout($scope.setInvoice.bind(this, invoice), 100)
+            // $scope.setInvoice(invoice);
+          }
+        }
+
         $scope.paymentMethod = {
           CASH: 'Cash',
           CHEQUE: 'Cheque',

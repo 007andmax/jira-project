@@ -1,4 +1,4 @@
-<div class="create-note-modal">
+<div class="create-note-modal" ng-form="paymentRecieveForm">
   <div class="modal-header clearfix">
     <a href="javascript:void(0)"
        style="position: absolute;right: 20px;top: 20px;"
@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
-             qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
+             qt-data-time-picker max-date="maxDate" ng-model="serviceExpense.date"
              name="serviceData" ng-required="true" uib-tooltip="select date">
       <div>
         <i class="report-calendar"></i>
@@ -25,13 +25,13 @@
       <label class="control-label">Select Company</label>
       <div uib-dropdown style="position: relative;">
         <input class="form-control has-dropdown readonly-normal" type="text" READONLY
-               uib-dropdown-toggle aria-expanded="true" ng-model="">
+               uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
         <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
         <ul class="dropdown-menu">
-          <li ng-repeat=""
-              ng-click="">
-            <a tabindex="-1" href="javascript:void(0)"> {{ }} </a>
+          <li ng-repeat="company in companies"
+              ng-click="setCompany(company)">
+            <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
           </li>
         </ul>
       </div>
@@ -40,24 +40,24 @@
       <label class="control-label">Select Invoice</label>
       <div uib-dropdown style="position: relative;">
         <input class="form-control has-dropdown readonly-normal" type="text" READONLY
-               uib-dropdown-toggle aria-expanded="true" ng-model="">
+               uib-dropdown-toggle aria-expanded="true" ng-model="invoiceDescription">
         <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
         <ul class="dropdown-menu">
-          <li ng-repeat=""
-              ng-click="">
-            <a tabindex="-1" href="javascript:void(0)"> {{ }} </a>
+          <li ng-repeat="invoice in availableInvoiceCompanies"
+              ng-click="setInvoice(invoice)">
+            <a tabindex="-1" href="javascript:void(0)"> {{ "Invoice #" + invoice.number + ' Amount: ' + '$' + invoice.sum; }} </a>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-md-6">Total Payment Amount</div>
     <div class="col-md-6 text-right">
-      <strong class="alyosha-strong">$525</strong>
+      <strong class="alyosha-strong">{{ "$" + selectedInvoice.sum }}</strong>
     </div>
-    <div class="col-md-6">Outstanding amount</div>
+    <div class="col-md-6">Amount</div>
     <div class="col-md-6 text-right">
-      <strong>$0.00</strong>
+      <input class="form-control" type="number" ng-model="partialPaymentAmount"/>
     </div>
     <div class="col-md-6">Remaining customer credit</div>
     <div class="col-md-6 text-right">
@@ -67,13 +67,13 @@
       <label class="control-label">Payment Method</label>
       <div uib-dropdown style="position: relative;">
         <input class="form-control has-dropdown readonly-normal" type="text" READONLY
-               uib-dropdown-toggle aria-expanded="true" ng-model="">
+               uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
         <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
         <ul class="dropdown-menu">
-          <li ng-repeat=""
-              ng-click="">
-            <a tabindex="-1" href="javascript:void(0)"> {{  }} </a>
+          <li ng-repeat="(value, label) in paymentMethod"
+              ng-click="invoiceToReceive.method = value">
+            <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
           </li>
         </ul>
 
@@ -82,7 +82,7 @@
     <div class="form-group">
       <label class="control-label">Reference</label>
       <div>
-        <input class="form-control has-dropdown readonly-normal" type="text">
+        <input class="form-control has-dropdown readonly-normal" ng-model="reference" type="text">
       </div>
     </div>
     <div class="form-group note"
