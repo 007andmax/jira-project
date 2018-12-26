@@ -541,7 +541,6 @@
             }
 
           } else if (newChange.action == 'UPDATE_DELETED') {
-            console.log(newChange, 'NEWCHANGEEEEEEEE')
             Utils.deleteById(ticket.updates, newChange.data.id);
           }
         });
