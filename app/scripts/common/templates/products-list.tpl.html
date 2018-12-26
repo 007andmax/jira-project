@@ -7,7 +7,7 @@
       ng-show="(filteredProducts[category.id] = (category.products | filter:filterProduct)).length > 0"
       ng-init="categoryExpanded[category.id] = false; setCategoryExpanded($index, category.id)">
 
-    <div class="category-info" ng-click="categoryExpanded[category.id] = !categoryExpanded[category.id]">
+    <div class="category-info" ng-class="{ active: categoryExpanded[category.id] }" ng-click="categoryExpanded[category.id] = !categoryExpanded[category.id]">
       <span><b>{{ category.name }}</b></span>
       <span><b>{{ filteredProducts[category.id].length + (category.products.length > 1 ? ' items' : ' item') }}</b></span>
       <i class="icn-sm report-caret-icon" ng-class="{'rotated': categoryExpanded[category.id]}"></i>
