@@ -31,6 +31,8 @@
 
         $scope.maxDate = new Date();
 
+        console.log(Object.assign({}, $scope.invoiceToSent), "PAYMENT")
+
 
 
 
@@ -41,10 +43,11 @@
           $scope.$watch('invoiceCompany', function(val) {
             if (val) {
               $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
-                return el.company.id === val.id;
+                return el.company.id === val.id && !el.paidOn;
               })
 
               $scope.selectedInvoice = null;
+              $scope.partialPaymentAmount = null;
             }
           }, true);
 
@@ -54,7 +57,13 @@
             } else {
               $scope.invoiceDescription = '';
             }
-          }, true)
+          }, true);
+
+          $scope.$watch('partialPaymentAmount', function(val) {
+            if (val && $scope.selectedInvoice && val >= $scope.selectedInvoice.sum) {
+              $scope.partialPaymentAmount = $scope.selectedInvoice.sum;
+            }
+          })
 
 
 
@@ -69,6 +78,10 @@
             setTimeout($scope.setInvoice.bind(this, invoice), 100)
             // $scope.setInvoice(invoice);
           }
+        } else {
+
+
+
         }
 
         $scope.paymentMethod = {
@@ -105,10 +118,14 @@
           $scope.invoiceToReceive.invoices[$scope.receivePaymentInvoices[i].id] = true;
         }
 
-        var company = CompaniesService.getOneById($scope.receivePaymentInvoices[0].company.id);
-        if (company.defaultPaymentMethod) {
-          $scope.invoiceToReceive.method = company.defaultPaymentMethod;
+        if ($scope.receivePaymentInvoices[0] && $scope.receivePaymentInvoices[0].company) {
+          var company = CompaniesService.getOneById($scope.receivePaymentInvoices[0].company.id);
+          if (company.defaultPaymentMethod) {
+            $scope.invoiceToReceive.method = company.defaultPaymentMethod;
+          }
         }
+
+
 
         $scope.$watch('invoiceToReceive.invoices', function () {
 
@@ -145,11 +162,21 @@
           var invoiceIdPayment = [],
             invoices = $scope.invoiceToReceive.invoices;
 
-          for (var id in invoices) {
-            if (invoices[id]) {
-              invoiceIdPayment.push(id)
+          var singlePayment = $scope.selectedInvoiceCount <= 1;
+
+          if (singlePayment) {
+            invoiceIdPayment = [$scope.selectedInvoice.id];
+
+            console.log($scope.selectedInvoice, 'SELECTED')
+          } else {
+            for (var id in invoices) {
+              if (invoices[id]) {
+                invoiceIdPayment.push(id)
+              }
             }
           }
+
+
 
           $scope.disableReceiveButton = true;
 

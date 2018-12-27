@@ -51,18 +51,22 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-6">Total Payment Amount</div>
-    <div class="col-md-6 text-right">
-      <strong class="alyosha-strong">{{ "$" + selectedInvoice.sum }}</strong>
+    <div class="form-group clearfix">
+      <div class="col-md-6 clearfix">Total Payment Amount</div>
+      <div class="col-md-6 text-right clearfix">
+        <strong class="alyosha-strong">{{ "$" + selectedInvoice.sum }}</strong>
+      </div>
+      <div class="col-md-6 clearfix">Amount</div>
+      <div class="col-md-6 text-right clearfix without-input-arrows">
+        <input class="form-control" type="number" ng-model="partialPaymentAmount"/>
+      </div>
+      <div class="col-md-6 clearfix">Remaining customer credit</div>
+      <div class="col-md-6 text-right clearfix">
+        <strong>${{ selectedInvoice.sum - partialPaymentAmount }}</strong>
+      </div>
+
     </div>
-    <div class="col-md-6">Amount</div>
-    <div class="col-md-6 text-right">
-      <input class="form-control" type="number" ng-model="partialPaymentAmount"/>
-    </div>
-    <div class="col-md-6">Remaining customer credit</div>
-    <div class="col-md-6 text-right">
-      <strong>$175.00</strong>
-    </div>
+
     <div class="form-group">
       <label class="control-label">Payment Method</label>
       <div uib-dropdown style="position: relative;">
