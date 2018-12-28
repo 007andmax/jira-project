@@ -65,6 +65,44 @@
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
 
+
+        $scope.stopPropagation = function(evt) {
+          evt.originalEvent.stopPropagation();
+          console.log(evt, 'evt')
+        }
+
+        $scope.selectedCompanies = {
+          all: false
+        };
+
+        $scope.changeSelectedCompanies = function() {
+          var keys = Object.keys($scope.selectedCompanies);
+          var areAll = true;
+
+          if (keys.length < $scope.companiesCtrl.shownCompanies.length + 1) {
+            areAll = false;
+          } else {
+            keys.forEach(function(el) {
+              if (!$scope.selectedCompanies[el] && el !== 'all') {
+                areAll = false;
+                // break;
+              }
+            })
+          }
+
+
+          $scope.selectedCompanies.all = areAll;
+        }
+
+        $scope.selectAllCompanies = function(areAll) {
+          var users = $scope.companiesCtrl.shownCompanies;
+
+
+          users.forEach(function(el) {
+            $scope.selectedCompanies[el.id] = areAll
+          })
+        }
+
         $scope.$watch(function () {
           return $rootScope.filteredCompanies;
         }, function (val) {
