@@ -14,9 +14,20 @@
       </div>
     </div>
     <div ng-if="usersView === 'list'">
+      <button
+        modal-window-button="/html/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"
+        modal-window-class="modal-receive-payment"
+        mw-controller="quicktech.createEmailCtrl">
+        Send Email</button>
       <ul class="qt-list qt-users" style="margin-bottom: 1px;">
         <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
           <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
+
+            <label class="control checkbox pull-left" ng-show="users.length > 0">
+              <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
+                     ng-model="selectedUsers['all']" ng-click="selectAllUsers(selectedUsers['all'])">
+              <span class="control-indicator"></span>
+            </label>
         <span class="sort-span">
           Name
           <i class="icn-sm sort-icon icn-sort"
@@ -76,6 +87,7 @@
            ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) | limitTo: displayLimit track by user.id">
         <div class="card" ng-style="{'border-left-color': tagColors[usersColors[getUserType(user)]].backgroundColor}">
           <div class="card-header">
+
             <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')"
                  create-new-entity="user" item="user"></div>
             <i class="icon-sm icn-restore" ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')"
@@ -201,6 +213,10 @@
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3 mob-hidden">
           <div class="user-bio">
+            <label class="control checkbox ">
+              <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
+              <span class="control-indicator"></span>
+            </label>
             <div class="pull-left avatar" >
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
                    ng-if="(user && user.avatar)">

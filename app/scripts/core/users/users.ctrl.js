@@ -20,6 +20,39 @@
 
         $scope.usersCtrl = {};
 
+
+        $scope.selectedUsers = {
+          all: false
+        };
+
+        $scope.changeSelectedUsers = function() {
+          var keys = Object.keys($scope.selectedUsers);
+          var areAll = true;
+
+          if (keys.length < $scope.usersCtrl.shownUsers.length + 1) {
+            areAll = false;
+          } else {
+            keys.forEach(function(el) {
+              if (!$scope.selectedUsers[el] && el !== 'all') {
+                areAll = false;
+                // break;
+              }
+            })
+          }
+
+
+          $scope.selectedUsers.all = areAll;
+        }
+
+        $scope.selectAllUsers = function(areAll) {
+          var users = $scope.usersCtrl.shownUsers;
+
+
+          users.forEach(function(el) {
+            $scope.selectedUsers[el.id] = areAll
+          })
+        }
+
         $scope.currentUser = UsersService.getCurrentUser();
 
         // $scope.usersView = $scope.currentUser.usersGridPresentation ?
