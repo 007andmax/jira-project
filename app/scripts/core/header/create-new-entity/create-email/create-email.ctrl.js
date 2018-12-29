@@ -4,14 +4,124 @@
 
   angular.module('quicktech').controller('quicktech.createEmailCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-      'TaxesService', '$timeout',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout) {
+      'TaxesService', '$timeout', '$uibModalInstance', 'FilesService',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout, $uibModalInstance, FilesService) {
 
       console.log('create email template', $scope.selectedUsers)
 
       $scope.emails = [];
 
+      $scope.close = $uibModalInstance.dismiss;
 
+      $scope.removeEmail = function(index) {
+        $scope.emails.splice(index, 1);
+      }
+
+      var uploadingAttachmentsCount = 0;
+
+      $scope.attachments = []
+
+
+      function keypressHandle(evt) {
+        console.log(evt, 'evt')
+        if (evt.keyCode === 13) {
+          $scope.addEmail($scope.newEmail);
+          $scope.newEmail = null;
+
+          $scope.$digest();
+        }
+      }
+
+      $scope.tab = 'plain';
+
+      $scope.setTab = function(tab) {
+        $scope.tab = tab;
+      }
+
+
+
+      window.addEventListener('keyup', keypressHandle)
+
+      $scope.$on('destroy', function() {
+        window.removeEventListener('keyup', keypressHandle);
+      })
+
+      $scope.setFocus = function (event) {
+        $scope.focusInput = !$scope.focusInput;
+        $scope.dropdownOpened = true;
+        event.stopPropagation();
+      };
+
+      $scope.addEmail = function(email) {
+        if (email && !~$scope.emails.indexOf(email)) {
+          $scope.emails.push(email);
+        }
+
+      }
+
+      $scope.setDropdownOpened = function (open) {
+
+        // console.log('DSADADASDAS')
+        if (!open) {
+          $scope.dropdownOpened = false;
+        } else {
+          $scope.dropdownOpened = true;
+        }
+      };
+
+      $scope.addAttachmentFiles = function (file) {
+        // console.log(file, 'file to upload')
+        $scope.attachments.push(file);
+        $scope.disabledWhenLoadAttachment = true;
+
+        uploadingAttachmentsCount++;
+        if (file.size < 4194304) {
+          file.xhr = FilesService.create(file,
+            function (progress) {
+              file.progress = 100 * (progress.loaded / progress.total);
+              $scope.$apply();
+            },
+            function (finish) {
+
+              if (finish.code === 400 || finish.code === 500) {
+
+                var message = finish.code === 500 ? 'Maximum upload size of 4 MB' : finish.message;
+
+                $scope.fileInfo[file.name] = {
+                  error: true,
+                  message: message,
+                  code: finish.code
+                };
+
+                $scope.fileInfo.quantityErrorFiles++;
+              }
+
+              if (--uploadingAttachmentsCount === 0) {
+                $scope.disabledWhenLoadAttachment = false;
+              }
+
+              file.xhr = null;
+              file.id = finish.id;
+              $scope.$apply();
+            }, function (error) {
+            });
+        } else {
+          $scope.fileLoadOrError = true;
+
+          $scope.fileInfo[file.name] = {
+            error: true,
+            message: 'File must be less then 4 MB'
+          };
+
+          $scope.fileInfo.quantityErrorFiles++;
+        }
+
+        console.log($scope.attachments, 'ATTACH')
+
+        $scope.$apply();
+
+
+      };
 
       if ($scope.selectedUsers) {
         $scope.allUsersEmails = $scope.usersCtrl.shownUsers.map(function(el) {
@@ -49,10 +159,18 @@
         }, [])
 
 
-        console.log($scope.emails)
+        console.log($scope.allUsersEmails, 'SSS')
 
 
       }
+
+      $scope.filteredUsersEmails = $scope.allUsersEmails;
+
+      $scope.$watch('newEmail', function(val) {
+        $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
+          return el.includes(val);
+        })
+      })
     }]);
 
 }());

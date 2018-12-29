@@ -101,7 +101,8 @@
   max-width: none;
 }
 
-.tags-modal-wrapper .tags-wrap {
+.tags-modal-wrapper .tags-wrap,
+.email--content .tags-wrap {
   margin: 0;
   border: none;
   border-bottom: 1px solid #E5E7EB;
