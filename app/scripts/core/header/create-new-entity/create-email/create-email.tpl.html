@@ -6,7 +6,7 @@
   <div class="email--content row">
     <div class="col-md-12" add-on-focus>
       <div class="placeholder">Write Subject</div>
-      <input type="text" placeholder="">
+      <input type="text" placeholder="" ng-model="subject">
     </div>
     <div class="col-md-12" add-on-focus>
       <!-- <div class="placeholder">Add Receipt Email Address</div>
@@ -43,7 +43,7 @@
     </div>
     <div class="col-md-12">
 
-      <div ng-if="tab == 'plain'"  text-editor ng-model="plainText" class="email-text-block"
+      <div ng-if="tab == 'plain'" id="editors" text-editor te-initial-value="{{plainText}}" ng-model="plainText" class="email-text-block"
            name="note" te-text-maxlength="5000" te-html-maxlength="50000">
 
         <div te-editor class="form-control editor" contenteditable="true"
@@ -235,7 +235,7 @@
     </div>
   </div>
   <div class="email--footer">
-    <button class="btn btn-primary">Send Email</button>
+    <button class="btn btn-primary" ng-click="sendEmail()">Send Email</button>
     <button class="btn btn-default" ng-click="close()">Cancel</button>
   </div>
 </div>

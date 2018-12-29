@@ -69,6 +69,22 @@
         }
       };
 
+      $scope.sendEmail = function() {
+        var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value')
+        var data = {
+          recipients: $scope.emails,
+          attachments: $scope.attachments.map(function(el) { return el.id }),
+          content: plainText || $scope.plainHTML,
+          subject: $scope.subject,
+          customHTML: $scope.tab === 'html'
+        }
+
+
+        CompaniesService.sendEmail(data, function(res) {
+          console.log(res)
+        })
+      }
+
       $scope.addAttachmentFiles = function (file) {
         // console.log(file, 'file to upload')
         $scope.attachments.push(file);
@@ -116,8 +132,6 @@
           $scope.fileInfo.quantityErrorFiles++;
         }
 
-        console.log($scope.attachments, 'ATTACH')
-
         $scope.$apply();
 
 
@@ -138,10 +152,8 @@
           return acc;
         }, [])
 
-
-        console.log($scope.emails)
       } else if ($scope.selectedCompanies) {
-        console.log($scope.companiesCtrl.shownCompanies, "SHOWNNNNN")
+
         $scope.allUsersEmails = $scope.companiesCtrl.shownCompanies.map(function(el) {
 
           return el.companyInfo.contacts[0].primaryEmail;
