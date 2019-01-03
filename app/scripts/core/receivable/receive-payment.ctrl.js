@@ -203,6 +203,17 @@
         };
 
         $scope.receivePayment = function () {
+          var data = {
+            date: moment($scope.date).format('x'),
+            reference: $scope.reference,
+
+          }
+
+          if ($scope.partialPaymentAmount) {
+            data.partialPaymentAmount = $scope.partialPaymentAmount
+          }
+
+
           var invoiceIdPayment = [],
             invoices = $scope.invoiceToReceive.invoices;
 
@@ -224,6 +235,8 @@
 
           $scope.disableReceiveButton = true;
 
+
+
           ReceivableService.receivePayment(
             $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note,
             function () {
@@ -231,10 +244,7 @@
               $scope.disableReceiveButton = false;
 
               $scope.invoiceToSent.invoices = {};
-            }, {
-              date: moment($scope.date).format('x'),
-              reference: $scope.reference
-            }
+            }, data
           );
         };
 
