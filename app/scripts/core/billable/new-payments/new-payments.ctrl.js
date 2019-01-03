@@ -4,7 +4,7 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.newPaymentsCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope',
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope', 'PaymentsService',
       function ($scope,
                 BillableService,
                 CompaniesService,
@@ -13,7 +13,8 @@
                 TicketsService,
                 TaxesService,
                 $uibModal,
-                $rootScope) {
+                $rootScope,
+                PaymentsService) {
         $scope.openModal = function(modalType) {
           var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
           console.log("openModal")
@@ -31,6 +32,13 @@
           });
 
         }
+
+
+        PaymentsService.getPaymentsData($scope, function(res) {
+
+          console.log(res, 'RES')
+          $scope.payments = res;
+        })
 
 
 
