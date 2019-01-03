@@ -1,8 +1,59 @@
 <div ng-controller="quicktech.core.billable.newPaymentsCtrl">
 
   <div class="change-view-actions">
-    <div class="action-wrap clearfix">
+    <div class="action-wrap clearfix invoices" style="min-height: 0; padding: 0">
+      <div class="invoices-header">
+        <h3>Payments</h3>
+        <div class="invoices-header-filters" slyle="position: relative;">
+          <div>
+            <input class="pointer" type="text" placeholder="Filter by date" date-range-picker
+                   ng-model="invoiceDateFilter"
+                   options="invoiceDateFilterOptions">
+            <i class="new-calendar" ng-show="!invoiceDateFilter.startDate && !invoiceDateFilter.endDate"></i>
+            <i class="icn-sm icn-remove-old pointer"
+               ng-show="invoiceDateFilter.startDate && invoiceDateFilter.endDate"
+               uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearInvoiceDateFilter()"></i>
+          </div>
+          <div>
+            <input type="text"
+                   class="has-dropdown pointer"
+                   placeholder="Search by number"
+                   ng-trim="false"
+                   autocomplete="off"
+                   ng-model="invoiceFilterCompany"
+                   ng-change="filterInvoicesBy(invoiceFilterCompany)"
 
+                   uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                   qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
+
+            <div typeahead-input-icon="invoiceFilter"></div>
+          </div>
+          <div class="clearfix sort-by">
+
+            <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+              <div uib-dropdown-toggle>
+                <input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">
+                <div>
+                  <i class="icn-sm report-caret-icon pointer" ng-show="!sortByValue"></i>
+                  <i class="icn-sm icn-remove-old pointer"
+                     ng-show="sortByValue"
+                     uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
+                </div>
+              </div>
+              <ul class="dropdown-menu" role="menu" style="margin-top: -3px;">
+                <li><a ng-click="sortBy('Paid invoices')">Paid </a></li>
+                <li><a ng-click="sortBy('Unpaid invoices')">Unpaid</a></li>
+
+              </ul>
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+      </div>
 
     </div>
     <div>
