@@ -79,6 +79,50 @@
             // $scope.setInvoice(invoice);
           }
         } else {
+          $scope.isSinglePayment = false;
+          var invoicesToReceive = $scope.invoiceToReceive.invoices;
+
+          $scope.$watch('invoiceCompany', function(val) {
+            if (val) {
+              $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
+                return el.company.id === val.id && !el.paidOn;
+              })
+
+              $scope.invoiceToReceive.invoices = {};
+
+              $scope.receivePaymentInvoices = [];
+
+
+              $scope.selectedInvoice = null;
+              // $scope.partialPaymentAmount = null;
+
+              for (var i = 0; i < invoiceList.length; i++) {
+                var invoice = invoiceList[i];
+
+                if (invoice.company.id === $scope.invoiceCompany.id && !invoice.paidOn) {
+                  $scope.receivePaymentInvoices.push(invoice);
+
+                  if (invoicesToReceive[invoice.id]) {
+                    $scope.invoiceToReceive.invoices[invoice.id] = true;
+                  }
+                }
+
+
+
+              }
+
+
+              console.log($scope.invoiceToReceive.invoices, 'ddd')
+            }
+          }, true);
+
+
+          var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
+          var invoice = $scope.allInvoicesList.find(function(el) {
+            return el.number == invoiceNum;
+          })
+
+          $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
 
 
 
@@ -187,6 +231,9 @@
               $scope.disableReceiveButton = false;
 
               $scope.invoiceToSent.invoices = {};
+            }, {
+              date: moment($scope.date).format('x'),
+              reference: $scope.reference
             }
           );
         };
