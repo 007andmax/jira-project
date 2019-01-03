@@ -19,10 +19,13 @@
     </div>
     <div ng-if="companiesView === 'list'">
       <button
+        class="btn btn-success"
+        style="position: absolute;right: 42px;z-index: 9;"
         modal-window-button="/html/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"
-        modal-window-class="modal-receive-payment"
+        modal-window-class="create-popup modal-create-ticket"
         mw-controller="quicktech.createEmailCtrl">
-        Send Email</button>
+        Send Email
+      </button>
       <ul class="qt-list qt-users company-list-header" style="margin-bottom: 1px;">
 
         <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
@@ -160,7 +163,8 @@
     </div>
   </div>
 
-  <p class="desktop-hidden companies-mob-filters" ><span ng-if="showArchivedCompanies">Archived Companies</span><span ng-if="!showArchivedCompanies">All Companies</span></p>
+  <p class="desktop-hidden companies-mob-filters"><span ng-if="showArchivedCompanies">Archived Companies</span><span
+    ng-if="!showArchivedCompanies">All Companies</span></p>
 
   <ul class="qt-list qt-companies qt-users users-bg"
       style="margin-top: 65px; position: relative"
@@ -176,7 +180,8 @@
         company-name="company">
       <div class="col-xs-3" style="width: 34%;" ng-init="companyName = company" mobile-open-company>
         <label class="control checkbox" ng-click="stopPropagation($event)">
-          <input type="checkbox" ng-model="selectedCompanies[company.id]" ng-change="changeSelectedCompanies(selectedCompanies)">
+          <input type="checkbox" ng-model="selectedCompanies[company.id]"
+                 ng-change="changeSelectedCompanies(selectedCompanies)">
           <span class="control-indicator"></span>
         </label>
         <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;">
@@ -275,8 +280,9 @@
           <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
         </div>
       </div>
-      <button class="company-edit-icn company-edit-icn-sm desktop-hidden" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-           create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
+      <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
+              ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+              create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
 
       <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
@@ -361,10 +367,10 @@
               </div>
 
             </div>
+          </div>
         </div>
+        <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
       </div>
-      <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
-    </div>
   </ul>
 </div>
 <script>

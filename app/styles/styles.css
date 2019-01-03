@@ -1042,6 +1042,7 @@ hr {
 }
 
 .billable-items .billable-items-header .btn-success,
+.change-view-actions .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
 .receive .btn-success {

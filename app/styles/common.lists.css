@@ -4706,6 +4706,7 @@ Devices tab
 }
 
 .dashboard-network-scan .btn-success,
+.change-view-actions .btn-success,
 .billable-items-header .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
@@ -4722,6 +4723,9 @@ Devices tab
 .dashboard-network-scan .btn-success:hover,
 .dashboard-network-scan .btn-success:active,
 .dashboard-network-scan .btn-success:focus,
+.change-view-actions .btn-success:hover,
+.change-view-actions .btn-success:active,
+.change-view-actions .btn-success:focus,
 .billable-items-header .btn-success:hover,
 .billable-items-header .btn-success:active,
 .billable-items-header .btn-success:focus,

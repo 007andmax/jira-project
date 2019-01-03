@@ -26,7 +26,7 @@
                ng-style="true ? { 'width': '100%' } : ''"
                dropdown-arrow-navigation on-enter="addEmail" dropdown-data-item-name="newEmail">
             <div ng-if="!emails.length" class="placeholder">Add Receipt Email Address</div>
-            <input type="text"  on-enter="addEmail" class="{{ tagFilter ? 'form-control tags-input' : 'tags-input' }}" ng-model="newEmail" placeholder="" set-focus-on-var-change="focusInput">
+            <input type="text"  on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}" ng-model="newEmail" placeholder="" set-focus-on-var-change="focusInput">
             <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
               <li ng-repeat="email in filteredUsersEmails track by $index"
                   ng-click="addEmail(email)">

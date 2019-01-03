@@ -981,6 +981,35 @@ _::-webkit-:not(:root:root),
   margin: 0 -15px;
 }
 
+.email--content .tags-wrap {
+  margin: 0;
+  border: none;
+}
+
+.email--content .tags-wrap .tags {
+  padding: 0;
+  width: 100%;
+}
+
+.email--content .tags-wrap .tags .tag-label {
+  padding: 9px 15px 9px 5px;
+  border-radius: 3px !important;
+  border: 1px solid #edf2f6;
+}
+
+.email--content .tags-wrap .tags .tag-label span {
+  font-size: 12px;
+  color: #4f5f79;
+}
+
+.email--content .tags-wrap .tags .tag-label .remove-tag {
+  top: 10px;
+}
+
+.email--content .tags-wrap .tags input {
+  width: 100%;
+}
+
 .company--content .tags-modal-wrapper input {
   padding: 10px 0;
   height: 45px;
