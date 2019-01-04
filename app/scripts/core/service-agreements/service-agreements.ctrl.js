@@ -39,7 +39,6 @@
 
 
         $scope.terminateContract = function (id) {
-          console.log('i herereere')
           AgreementsService.terminate(id || $scope.editContract.id, function (resp) {
             if ($scope.closeModal) $scope.closeModal();
           })

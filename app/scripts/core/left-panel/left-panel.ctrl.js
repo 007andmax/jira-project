@@ -1099,7 +1099,6 @@
           if (event && event.button > 0) {
             var url = $state.href(state, stateParams, {absolute: true});
 
-            console.log(url, "URLURL")
             window.open(url, '_blank');
           } else {
 

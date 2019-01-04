@@ -26,10 +26,8 @@
           $scope.disabledCheckbox = true;
 
           var service = Object.assign({}, $scope.service, { canUseInTicket: !$scope.service.canUseInTicket });
-          console.log($scope)
           ServicesService.save(service, function(res) {
             $scope.disabledCheckbox = false;
-            console.log(res, "RES")
           })
         }
 

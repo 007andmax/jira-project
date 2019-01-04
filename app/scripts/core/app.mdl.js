@@ -341,7 +341,6 @@
             if (!isCalled) {
               isCalled = true;
 
-              console.log('call debounced fn')
               interval = setTimeout(function() {
                 isCalled = false;
                 fn.apply(this, args);
