@@ -22,7 +22,7 @@
 }
 
 .invoice-create .disabled {
-  background: #edf2f6 !important;
+  /* background: #edf2f6 !important; */
   pointer-events: none;
 }
 
