@@ -7,26 +7,25 @@
         <div class="invoices-header-filters" slyle="position: relative;">
           <div>
             <input class="pointer" type="text" placeholder="Filter by date" date-range-picker
-                   ng-model="invoiceDateFilter"
-                   options="invoiceDateFilterOptions">
-            <i class="new-calendar" ng-show="!invoiceDateFilter.startDate && !invoiceDateFilter.endDate"></i>
+                   ng-model="dateFilter"
+                   options="dateFilterOptions">
+            <i class="new-calendar" ng-show="!dateFilter.startDate && !dateFilter.endDate"></i>
             <i class="icn-sm icn-remove-old pointer"
-               ng-show="invoiceDateFilter.startDate && invoiceDateFilter.endDate"
-               uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearInvoiceDateFilter()"></i>
+               ng-show="dateFilter.startDate && dateFilter.endDate"
+               uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearDateFilter()"></i>
           </div>
           <div>
             <input type="text"
                    class="has-dropdown pointer"
-                   placeholder="Search by number"
+                   placeholder="Search by number or by company"
                    ng-trim="false"
                    autocomplete="off"
-                   ng-model="invoiceFilterCompany"
-                   ng-change="filterInvoicesBy(invoiceFilterCompany)"
+                   ng-model="filterCompany"
 
-                   uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                   uib-typeahead="company as company for company in companies | orderBy:'toString()'"
                    qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
-            <div typeahead-input-icon="invoiceFilter"></div>
+            <div typeahead-input-icon="filterCompany"></div>
           </div>
           <div class="clearfix sort-by">
 
@@ -142,7 +141,7 @@
       qt-scroll-to="top"
       offset="83" scroll-pagination>
     <li class="list-company-row"
-        ng-repeat="payment in payments"
+        ng-repeat="payment in filteredPayments"
         ng-controller="quicktech.core.billable.newPaymentCtrl">
 
       <div class="col-xs-1" style="width: 3%">
