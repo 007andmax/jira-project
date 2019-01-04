@@ -21,6 +21,8 @@
         $scope.regularNotes = [];
         $scope.globalNote = {};
 
+        $scope.maxDate = new Date();
+
 
 
         var placeholderNotes = [
@@ -413,6 +415,19 @@
 
             BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
           }
+        }
+
+        $scope.savePaymentDate = function(due) {
+          $scope.date = moment(due).format("YYYY-MM-DD");
+
+          var request = {
+            "invoiceNumber": $scope.invoiceNumber || null, // null is allowed
+            "dueDate": $scope.paymentDue, // null is allowed
+            "invoiceNoteIds": [] || null,
+            'date': $scope.date
+          }
+
+          BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId);
         }
 
         $scope.addNoteToInvoice = function(data) {

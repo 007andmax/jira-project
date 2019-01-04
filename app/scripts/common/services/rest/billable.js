@@ -189,7 +189,8 @@
           "invoiceNumber": data.invoiceNumber || null, // null is allowed
           "dueDate": data.dueDate || null, // null is allowed
           "regularInvoiceNote": data.regularInvoiceNote || null,
-          "taxId": data.taxId || null
+          "taxId": data.taxId || null,
+          "date": data.date || null
         }
 
         var request = $http({

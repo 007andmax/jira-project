@@ -14,6 +14,10 @@
           method: 'CHEQUE',
           isSendNotification: true
         };
+
+
+        $scope.maxDate = new Date();
+
         $scope.receivePaymentInvoices = [];
 
         $scope.paymentMethod = {
@@ -105,7 +109,7 @@
               $scope.disableReceiveButton = false;
 
               $scope.invoiceToSent.invoices = {};
-            }
+            }, moment($scope.date).format('x')
           );
         };
 

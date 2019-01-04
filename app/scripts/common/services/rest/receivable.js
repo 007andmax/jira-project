@@ -195,7 +195,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function receivePayment(paymentMethod, invoiceIds, isSendNotification, note, callback) {
+    function receivePayment(paymentMethod, invoiceIds, isSendNotification, note, callback, date) {
 
       if (!paymentMethod) {
         throw 'paymentMethod is required!'
@@ -216,7 +216,8 @@
           paymentMethod: paymentMethod.toUpperCase(),
           isSendNotification: isSendNotification,
           invoiceIds: invoiceIds,
-          note: note
+          note: note,
+          date: date
         }
       });
 
