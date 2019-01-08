@@ -21,11 +21,11 @@
                    ng-trim="false"
                    autocomplete="off"
                    ng-model="filterCompany"
-
+                   ng-click="onFilterClick()"
                    uib-typeahead="company as company for company in companies | orderBy:'toString()'"
                    qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
-            <div typeahead-input-icon="filterCompany"></div>
+            <div typeahead-input-icon="filterCompany" ng-click="resetFilter()"></div>
           </div>
           <div class="clearfix sort-by">
 
@@ -182,8 +182,7 @@
       </div>
 
       <div class="col-xs-1">
-        {{ payment.partialPaidAmount }}
-
+        {{ payment.partialPaidAmount || payment.totalSum }}
       </div>
       <div class="col-xs-1">
         status
