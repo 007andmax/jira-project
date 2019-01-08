@@ -88,12 +88,20 @@
         })
       }
 
+      function editPayment(data) {
+        $http.put('/payments/edit', data)
+          .then(function(res) {
+            console.log(res);
+          })
+      }
+
       return {
         getPaymentsData: getPaymentsData,
         getDepositSlipsData: getDepositSlipsData,
         postNewDepositSlip: postNewDepositSlip,
         rollback: rollback,
-        getDepositNumber: getDepositNumber
+        getDepositNumber: getDepositNumber,
+        editPayment: editPayment
       }
 
 

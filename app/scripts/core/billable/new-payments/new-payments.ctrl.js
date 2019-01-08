@@ -15,10 +15,13 @@
                 $uibModal,
                 $rootScope,
                 PaymentsService) {
-        $scope.openModal = function(modalType) {
+        $scope.openModal = function(modalType, payment) {
           var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
           console.log("openModal")
           console.log(template, 'template')
+
+          $scope.editedPayment = payment;
+
           var modalInstance = $uibModal.open({
             templateUrl: template,
             animation: true,
@@ -26,12 +29,13 @@
             controller: 'quicktech.core.billable.newModalsCtlr',
             windowClass: 'modal-receive-payment margin-top-modal-dialog',
             resolve: {
-
+              editedPayment: function() { return payment }
             }
 
           });
 
         }
+
 
         $scope.dateFilterOptions = {
           'autoApply': true,

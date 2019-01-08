@@ -197,7 +197,7 @@
             <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
           </div>
           <ul class="dropdown-menu" role="menu">
-            <li><a ng-click="sentInvoice()">Edit payment</a></li>
+            <li><a ng-click="openModal('edit-payments', payment)">Edit payment</a></li>
             <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
             <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Refund payment</a></li>
             <li><a ng-click="deleteInvoice(invoice)">Delete payment</a></li>

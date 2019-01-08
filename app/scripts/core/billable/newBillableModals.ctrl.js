@@ -3,11 +3,42 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.newModalsCtlr',
-    ['$scope', '$uibModalInstance',
-      function ($scope, $uibModalInstance) {
+    ['$scope', '$uibModalInstance', 'editedPayment', 'PaymentsService', '$rootScope',
+      function ($scope, $uibModalInstance, editedPayment, PaymentsService, $rootScope) {
         $scope.close = $uibModalInstance.dismiss;
 
 
+
+        $scope.invoiceNumbers = editedPayment.invoiceNumbers || [editedPayment.partialPaidInvoice];
+
+        $scope.invoiceNumbers = $scope.invoiceNumbers.reduce(function(acc, el) {
+
+          var sum = $rootScope.uploadedReceivable.list.find(function(inv) {
+            return inv.number == el;
+          }).sum;
+
+
+          acc.push({
+            number: el,
+            sum: sum
+          });
+
+          return acc;
+        }, []);
+
+        $scope.invoiceSum = $scope.invoiceNumbers.reduce(function(acc, el) {
+          return acc + el.sum;
+        }, 0);
+
+        $scope.paymentAmount = editedPayment.partialPaidAmount || $scope.invoiceSum;
+
+        $scope.editPayment = function() {
+          PaymentsService.editPayment({
+            note: $scope.note,
+            amount: $scope.paymentAmount || 0,
+            paymentId: editedPayment.id
+          })
+        }
 
       }]);
 }());

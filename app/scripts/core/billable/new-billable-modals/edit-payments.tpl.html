@@ -13,16 +13,28 @@
   </div>
   <div class="note-modal-content clearfix">
     <p>You can refund the payment, or create a credit note</p>
-    <div class="col-md-6">
-      Invoice # <span>362512</span>
+
+    <div class="form-group clearfix">
+      <div class="col-md-12" ng-repeat="invoice in invoiceNumbers">
+        <div class="col-md-6">
+          Invoice # <span>{{ invoice.number }}</span>
+        </div>
+        <div class="col-md-6 text-right">
+          <strong style="padding: 10px;">${{ invoice.sum }}</strong>
+        </div>
+      </div>
+
+      <div class="col-md-6">Amount Paid</div>
+      <div class="col-md-6 text-right">
+        <strong ng-if="invoiceNumbers.length > 1" class="alyosha-strong">${{ paymentAmount }}</strong>
+
+        <input type="number" ng-show="invoiceNumbers.length === 1"  ng-model="paymentAmount"></input>
+      </div>
+
     </div>
-    <div class="col-md-6 text-right">
-      <strong style="padding: 10px;">$525</strong>
-    </div>
-    <div class="col-md-6">Amount Paid</div>
-    <div class="col-md-6 text-right">
-      <strong class="alyosha-strong">$200</strong>
-    </div>
+
+
+
     <div class="form-group note"
          ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'note')}">
 
@@ -41,7 +53,7 @@
     <div class="row">
       <div class="col-md-12" style="padding: 0;">
         <div class="btn btn-success"
-             ng-click="receivePayment()">
+             ng-click="editPayment()">
           Refund Amount
         </div>
         <div class="btn btn-default" ng-click="close()">
