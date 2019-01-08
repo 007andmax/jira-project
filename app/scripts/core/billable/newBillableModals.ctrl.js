@@ -11,6 +11,8 @@
 
         $scope.invoiceNumbers = editedPayment.invoiceNumbers || [editedPayment.partialPaidInvoice];
 
+
+        $scope.note = editedPayment.note;
         $scope.invoiceNumbers = $scope.invoiceNumbers.reduce(function(acc, el) {
 
           var sum = $rootScope.uploadedReceivable.list.find(function(inv) {
@@ -35,7 +37,7 @@
         $scope.editPayment = function() {
           PaymentsService.editPayment({
             note: $scope.note,
-            amount: $scope.paymentAmount || 0,
+            amount: $scope.paymentAmount.toFixed(2) || 0,
             paymentId: editedPayment.id
           })
         }
