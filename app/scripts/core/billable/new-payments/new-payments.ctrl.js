@@ -86,6 +86,15 @@
           $scope.filterWasClicked = true;
         };
 
+        $scope.onFilterPress = function(evt) {
+          console.log(evt)
+
+          if (evt.keyCode == 8) {
+            console.log('im here!!!!!!!')
+            $scope.wasFilterReset = true;
+          }
+        }
+
 
 
 
@@ -105,7 +114,7 @@
             }
 
             if ($scope.filterCompany && $scope.filterCompany !== '' && $scope.filterCompany !== ' ') {
-              result = result && ((el.invoiceNumbers && el.invoiceNumbers.indexOf($scope.filterCompany) > -1) || (el.partialPaidInvoice && el.partialPaidInvoice.indexOf($scope.filterCompany) > -1) || el.clientCompanyName.indexOf($scope.filterCompany) > -1)
+              result = result && ((el.invoiceNumbers && el.invoiceNumbers.findIndex(function(el) { return el.includes($scope.filterCompany) }) > -1) || (el.partialPaidInvoice && el.partialPaidInvoice.indexOf($scope.filterCompany) > -1) || el.clientCompanyName.indexOf($scope.filterCompany) > -1)
             }
 
             return result;

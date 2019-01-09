@@ -22,6 +22,7 @@
                    autocomplete="off"
                    ng-model="filterCompany"
                    ng-click="onFilterClick()"
+                   ng-keydown="onFilterPress($event)"
                    uib-typeahead="company as company for company in companies | orderBy:'toString()'"
                    qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
