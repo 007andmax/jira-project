@@ -352,6 +352,33 @@
           }
         });
 
+        $scope.checkInvoicesCompany = function() {
+          var invoicesNums = Object.keys($scope.invoiceToSent.invoices).reduce(function(acc, el) {
+            if ($scope.invoiceToSent.invoices[el]) {
+              acc.push(el);
+            }
+
+            return acc;
+          }, [])
+
+          var invoicesCompanies = invoicesNums.reduce(function(acc, el) {
+            var companyId = $scope.receivableInvoicesData.list.find(function(invoice) {
+              return invoice.number === el;
+            }).company.id;
+
+            if (!~acc.indexOf(companyId)) {
+              acc.push(companyId);
+            }
+
+            return acc;
+          }, [])
+
+
+          return invoicesCompanies.length > 1;
+
+
+        }
+
 
         $scope.setHighlightInvoiceId = function (invoiceId) {
           $scope.highlightInvoiceId = invoiceId;
