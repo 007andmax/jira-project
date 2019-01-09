@@ -87,10 +87,8 @@
         };
 
         $scope.onFilterPress = function(evt) {
-          console.log(evt)
 
           if (evt.keyCode == 8) {
-            console.log('im here!!!!!!!')
             $scope.wasFilterReset = true;
           }
         }
