@@ -93,6 +93,12 @@
           }
         }
 
+        $scope.deletePayment = function(id) {
+          PaymentsService.deletePayment(id, function(res) {
+            console.log(res, 'ress')
+          })
+        }
+
 
 
 

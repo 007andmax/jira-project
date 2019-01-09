@@ -7,8 +7,16 @@
        aria-label="Close">
       <i class="icn-sm icn-remove-old"></i>
     </a>
-    <h4 class="modal-title pull-left">Edit Payment</h4>
     <div class="col-md-8">
+      <h4 class="modal-title pull-left">Edit payment</h4>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
+             qt-data-time-picker max-date="maxDate" ng-model="date"
+             name="serviceData" ng-required="true" uib-tooltip="select date">
+      <div>
+        <i class="report-calendar"></i>
+      </div>
     </div>
   </div>
   <div class="note-modal-content clearfix">
@@ -31,6 +39,14 @@
         <input type="number" ng-show="invoiceNumbers.length === 1"  ng-model="paymentAmount"></input>
       </div>
 
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label">Reference</label>
+      <div>
+        <input class="form-control has-dropdown readonly-normal" ng-model="reference" type="text">
+      </div>
     </div>
 
 

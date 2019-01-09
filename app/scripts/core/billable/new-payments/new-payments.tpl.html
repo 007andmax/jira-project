@@ -201,7 +201,7 @@
             <li ng-if="payment.partialPaidInvoice"><a ng-click="openModal('edit-payments', payment)">Edit payment</a></li>
             <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
             <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Refund payment</a></li>
-            <li><a ng-click="deleteInvoice(invoice)">Delete payment</a></li>
+            <li><a ng-click="deletePayment(payment.id)">Delete payment</a></li>
           </ul>
         </div>
       </div>

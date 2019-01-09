@@ -95,13 +95,22 @@
           })
       }
 
+      function deletePayment(id, callback) {
+        $http.put('/payments/delete?paymentId=' + id)
+          .then(function(res) {
+            if (callback) callback(res)
+            console.log(res)
+          })
+      }
+
       return {
         getPaymentsData: getPaymentsData,
         getDepositSlipsData: getDepositSlipsData,
         postNewDepositSlip: postNewDepositSlip,
         rollback: rollback,
         getDepositNumber: getDepositNumber,
-        editPayment: editPayment
+        editPayment: editPayment,
+        deletePayment: deletePayment
       }
 
 

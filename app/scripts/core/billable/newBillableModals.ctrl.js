@@ -13,6 +13,9 @@
 
 
         $scope.note = editedPayment.note;
+        $scope.reference = editedPayment.reference;
+
+        $scope.maxDate = new Date();
         $scope.invoiceNumbers = $scope.invoiceNumbers.reduce(function(acc, el) {
 
           var sum = $rootScope.uploadedReceivable.list.find(function(inv) {
@@ -38,7 +41,9 @@
           PaymentsService.editPayment({
             note: $scope.note,
             amount: $scope.paymentAmount.toFixed(2) || 0,
-            paymentId: editedPayment.id
+            paymentId: editedPayment.id,
+            date: null && moment($scope.date).format('X'),
+            reference: $scope.reference
           })
         }
 
