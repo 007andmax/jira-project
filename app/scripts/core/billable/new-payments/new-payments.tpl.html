@@ -185,8 +185,8 @@
       <div class="col-xs-1">
         {{ payment.partialPaidAmount || payment.totalSum }}
       </div>
-      <div class="col-xs-1">
-        status
+      <div class="col-xs-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }" style="text-align: center">
+        {{ payment.refundMethod ? 'Refund' : 'Paid' }}
       </div>
 
       <div class="col-xs-1" style="width: 3%;">

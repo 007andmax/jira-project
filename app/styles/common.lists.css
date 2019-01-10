@@ -5040,6 +5040,22 @@ Devices tab
 }
 
 /***/
+
+/*  */
+
+.payment-status.paid {
+  background: green
+}
+
+.payment-status.refund {
+  background: red;
+}
+
+
+
+/*  */
+
+
 .receive-payment-list {
   overflow-y: auto;
 
