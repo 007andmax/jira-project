@@ -12,7 +12,6 @@
         };
 
         $scope.$watch('paymentMethod', function(val) {
-          console.log('HUUUI', val)
         })
 
         $scope.paymentMethod = "REFUND_PAYMENT";
