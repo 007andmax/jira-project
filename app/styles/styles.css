@@ -1167,7 +1167,7 @@ hr {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 63%;
+  max-width: 68%;
   width: 100%;
 }
 
@@ -1184,11 +1184,15 @@ hr {
 }
 
 .invoices .invoices-header .invoices-header-filters > div {
-  /*max-width: 220px;*/
+  max-width: 220px;
   width: 100%;
   margin-right: 10px;
   position: relative;
   margin-left: 10px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div:last-child {
+  width: auto;
 }
 
 .invoices .invoices-header .invoices-header-filters > div i {
@@ -10278,9 +10282,13 @@ button.close {
 }
 
 .create-note-modal h5 {
-  margin: 20px 0 0;
-  font-size: 16px;
+  margin: 10px 0 0;
   float: left;
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca5b6;
+  text-transform: uppercase;
 }
 
 .receive .receive-payment-list .col-md-3,
@@ -10307,10 +10315,6 @@ button.close {
   font-size: 14px;
   font-family: "Graphik Medium", sans-serif;
   padding: 4px;
-}
-
-.modal-header {
-  border-bottom: 1px solid #edf2f6 !important;
 }
 
 .modal-header .close {
@@ -10739,7 +10743,7 @@ button.close {
 
 /****/
 .modal-receive-payment > .modal-dialog {
-  width: 530px;
+  width: 550px;
   height: 785px;
   top: 50%;
   left: 50%;
@@ -11833,10 +11837,37 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 }
 
 .create-note-modal {
-  padding: 40px 55px;
+  padding: 0;
   width: 100%;
   color: #364656;
   font-size: 13px;
+}
+
+.create-note-modal .modal-header {
+  background: #e7f5fe;
+  padding: 30px 40px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.create-note-modal .modal-header h4 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #364656;
+  padding: 0;
+}
+
+.create-note-modal .note-modal-content {
+  padding: 25px 40px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.create-note-modal .note-modal-content .report-calendar {
+  display: block;
+  right: 10px;
+  position: absolute;
+  top: 40px !important;
 }
 
 .create-note-modal span {
@@ -11863,7 +11894,7 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 .create-note-modal p {
   font-size: 13px;
   color: #626b7f;
-  padding: 10px 0 50px;
+  padding: 0 0 15px 0;
 }
 
 .create-note-modal input {
@@ -11910,10 +11941,11 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   padding: 11px 35px 11px 11px;
 }
 
-.create-note-modal .modal-header .col-md-4 .report-calendar {
+.create-note-modal .new-calendar {
   position: absolute;
   display: block;
   right: 14px;
+  top: 40px;
 }
 
 .create-note-modal [class*="col-md-"] {
@@ -12168,6 +12200,14 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   top: 77px;
   z-index: 1030;
   width: calc(100% - 316px);
+}
+
+.payments .change-view-actions {
+  padding: 10px 25px;
+}
+
+.payments .valera .dropdown-menu > li > a {
+  padding: 5px 20px;
 }
 
 .left-panel-closed .change-view-actions {

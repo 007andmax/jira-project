@@ -11,13 +11,15 @@
             <button class="btn btn-default" ng-click="goBackToList()">Back</button>
             <button ng-if="invoiceTimer > 0" class="btn btn-default" ng-click="togglePreview()">Preview</button>
 
-            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}">
+            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button"
+                 custom-disabled="{{!!invoiceNumError}}">
               <button ng-if="!invoicePreview && !invoiceCreated"
                       ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                       tooltip-append-to-body="true"
                       class="btn btn-success"
-                      tooltip-placement="bottom">
+                      tooltip-placement="bottom"
+                      style="padding-left: 22px;">
 
 
                 Save and Email
@@ -98,7 +100,7 @@
 
             <div class="invoice-info">
               <div>
-                <p style="color: red; font-weight: bold; margin: 10px 0; height: 20px;">{{ invoiceNumError || '  ' }}</p>
+                <p style="color: red; font-weight: bold; margin: 10px 0; height: 20px;">{{ invoiceNumError || ' ' }}</p>
                 <span class="bold">Invoice Number</span> <input type="text" placeholder="Invoice Number"
                                                                 ng-model="invoiceNumber"
                                                                 ng-change="changeInvoiceNumber(invoiceNumber)">
@@ -352,7 +354,8 @@
           <div class="invoice-create--header__btn">
             <button ng-if="!(invoiceTimer > 0)" class="btn btn-default" ng-click="goBackToList()">Back</button>
             <button ng-if="invoiceTimer > 0" class="btn btn-default" ng-click="togglePreview()">Edit</button>
-            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}">
+            <div ng-if="invoiceTimer > 0" uib-dropdown class="save-invoice-button"
+                 custom-disabled="{{!!invoiceNumError}}">
               <button ng-if="!invoicePreview && !invoiceCreated"
                       ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
@@ -619,7 +622,8 @@
           </label>
         </div>
         <div class="pull-left">{{ company.name }}</div>
-        <span class="label label-light pointer" ng-click="setExpandedCompanyId(billableCompany.companyId)" uib-tooltip="Expand">{{ billableCompany.tickets.length }}</span>
+        <span class="label label-light pointer" ng-click="setExpandedCompanyId(billableCompany.companyId)"
+              uib-tooltip="Expand">{{ billableCompany.tickets.length }}</span>
         <div class="text-right pull-right" style="width: 8%;font-size: 15px;">{{ billableCompany.totalSum | currency:
                                                                               '$': 2 }}
         </div>
@@ -687,14 +691,14 @@
                 </div> -->
 
                 <a class="label label-primary pull-left" stop-propagation="click"
-                   style="cursor: pointer; z-index: 10; background-image: none; margin-right: 10px;" qt-icon-toggle-to-change uib-tooltip="Expand">
+                   style="cursor: pointer; z-index: 10; background-image: none; margin-right: 10px;"
+                   qt-icon-toggle-to-change uib-tooltip="Expand">
 
 
                   <span ng-if="ticket.isOrder">Contract</span>
                   <span ng-if="!ticket.isOrder">Tkt# {{ ticket.ticketNumber }}</span>
                 </a>
                 <div class="pull-left">{{ ticket.subject }}</div>
-
 
 
                 <div class="text-right pull-right" style="width: 8%;">{{ ticket.sum | currency: '$': 2 }}</div>

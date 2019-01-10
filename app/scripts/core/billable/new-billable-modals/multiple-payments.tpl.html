@@ -1,59 +1,60 @@
 <div class="create-note-modal" ng-form="paymentRecieveForm" ng-init="setIsMultiple(true)">
   <div class="modal-header clearfix">
     <a href="javascript:void(0)"
-       style="position: absolute;right: 20px;top: 20px;"
+       style="position: absolute;right: 30px;top: 30px;"
        ng-click="close()"
        data-dismiss="modal"
        aria-label="Close">
       <i class="icn-sm icn-remove-old"></i>
     </a>
-    <div class="col-md-8">
-      <h4 class="modal-title pull-left">Receive Multiple Payments</h4>
-    </div>
-    <div class="col-md-4">
-      <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
-             qt-data-time-picker max-date="maxDate" ng-model="date"
-             name="serviceData" ng-required="true" uib-tooltip="select date">
-      <div>
-        <i class="report-calendar"></i>
-      </div>
-    </div>
+    <h4 class="modal-title">Receive Multiple Payments</h4>
   </div>
   <div class="note-modal-content clearfix">
     <p>Receive Payments for the following</p>
-    <div class="form-group">
-      <label class="control-label">Select Company</label>
-      <div uib-dropdown style="position: relative;">
-        <input class="form-control has-dropdown readonly-normal" type="text" READONLY
-               uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
-        <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+    <div class="form-group clearfix">
+      <div class="col-md-8" style="padding-right: 10px;">
+        <label class="control-label">Company Name</label>
+        <div uib-dropdown style="position: relative;">
+          <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                 uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
+          <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
-        <ul class="dropdown-menu">
-          <li ng-repeat="company in companies"
-              ng-click="setCompany(company)">
-            <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
-          </li>
-        </ul>
+          <ul class="dropdown-menu">
+            <li ng-repeat="company in companies"
+                ng-click="setCompany(company)">
+              <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
+            </li>
+          </ul>
 
+        </div>
+      </div>
+      <div class="col-md-4" style="padding-left: 10px;">
+        <label class="control-label">Payment Date</label>
+        <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
+               qt-data-time-picker max-date="maxDate" ng-model="date"
+               name="serviceData" ng-required="true" uib-tooltip="select date" style="opacity: 1;width: 93%;">
+        <div>
+          <i class="new-calendar"></i>
+        </div>
       </div>
     </div>
     <div class="form-group clearfix">
       <h5>Outstanding Invoices</h5>
-    <ul class="qt-list invoice-list-heading">
-      <li class="row">
-        <div class="col-md-5">
-          <label class="control checkbox pull-left">
-            <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
-            <span class="control-indicator"></span>
-          </label>
-          Invoice#
-        </div>
-        <div class="col-md-4">Invoice date</div>
-        <div class="col-md-3 text-right">Amount</div>
-      </li>
-    </ul>
-    <ul class="qt-list receive-payment-list"
-        style="padding: 0;margin-bottom: 10px; overflow: scroll">
+      <ul class="qt-list invoice-list-heading">
+        <li class="row">
+          <div class="col-md-5">
+            <label class="control checkbox pull-left">
+              <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
+              <span class="control-indicator"></span>
+            </label>
+            Invoice#
+          </div>
+          <div class="col-md-4">Invoice date</div>
+          <div class="col-md-3 text-right">Amount</div>
+        </li>
+      </ul>
+      <ul class="qt-list receive-payment-list"
+          style="padding: 0;margin-bottom: 10px; overflow: scroll">
         <li ng-repeat="invoice in receivePaymentInvoices"
             class="row">
           <div class="col-md-5">
@@ -66,7 +67,7 @@
           <div class="col-md-4">{{ invoice.date | date:'dd MMM yyyy' }}</div>
           <div class="col-md-3">{{ invoice.sum | currency: '$': 2 }}</div>
         </li>
-    </ul>
+      </ul>
       <div class="col-md-6">
         Subtotal
       </div>
@@ -80,26 +81,27 @@
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>
 
     </div>
-    <div class="form-group">
-      <label class="control-label">Payment Method</label>
-      <div uib-dropdown style="position: relative;">
-        <input class="form-control has-dropdown readonly-normal" type="text" READONLY
-               uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
-        <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+    <div class="form-group clearfix">
+      <div class="col-md-6" style="padding-right: 10px;">
+        <label class="control-label">Payment Mode</label>
+        <div uib-dropdown style="position: relative;">
+          <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                 uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
+          <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
-        <ul class="dropdown-menu">
-          <li ng-repeat="(value, label) in paymentMethod"
-              ng-click="invoiceToReceive.method = value">
-            <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
-          </li>
-        </ul>
-
+          <ul class="dropdown-menu">
+            <li ng-repeat="(value, label) in paymentMethod"
+                ng-click="invoiceToReceive.method = value">
+              <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label">Reference</label>
-      <div>
-        <input class="form-control has-dropdown readonly-normal" ng-model="reference" type="text">
+      <div class="col-md-6" style="padding-left: 10px;">
+        <label class="control-label">Reference#</label>
+        <div>
+          <input class="form-control has-dropdown readonly-normal" style="cursor: text;" ng-model="reference" type="text">
+        </div>
       </div>
     </div>
     <div class="form-group note"
@@ -126,7 +128,7 @@
     </div>
     <div class="row">
       <div class="col-md-12" style="padding: 0;">
-        <div class="btn btn-success"
+        <div class="btn btn-primary"
              ng-click="receivePayment()">
           Process Payment
         </div>

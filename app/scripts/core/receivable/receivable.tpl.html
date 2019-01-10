@@ -50,7 +50,7 @@
 
           </div>
 
-          <div uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}">
+          <div uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}" style="margin: 0;">
             <button ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                     tooltip-append-to-body="true"
                     ng-if="selectedInvoiceCount <= 1"
