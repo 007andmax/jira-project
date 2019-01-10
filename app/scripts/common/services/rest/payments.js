@@ -41,6 +41,10 @@
         });
 
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
+
+
+
+          console.log(newChange, "NEWHCANGE")
           if(newChange.action === 'PAYMENT_CREATED') {
             payments.push(newChange.data);
           } else if ( newChange.action === 'PAYMENTS_DELETED') {
@@ -48,6 +52,30 @@
               var paymentId = newChange.data[i];
               Utils.deleteById(payments, paymentId);
             }
+          } else if (newChange.action === 'PAYMENTS_REFUNDED') {
+            var refund = newChange.action;
+            var changed = newChange.data;
+
+            var index = payments.findIndex(function(el) {
+              return el.id == changed.id;
+            })
+
+            payments[index].refundMethod = changed.refundMethod;
+
+          } else if (newChange.action === 'PAYMENT_EDITED') {
+            var changed = newChange.data;
+
+            var index = payments.findIndex(function(el) {
+              return el.id == changed.id;
+            })
+
+            var keys = Object.keys(changed);
+
+            keys.forEach(function(key) {
+              payments[index][key] = changed[key];
+            })
+
+            console.log(payments[index], 'kurlik')
           }
         });
       }
@@ -88,10 +116,12 @@
         })
       }
 
-      function editPayment(data) {
+      function editPayment(data, callback) {
         $http.put('/payments/edit', data)
           .then(function(res) {
             console.log(res);
+
+            if (callback) callback(res);
           })
       }
 

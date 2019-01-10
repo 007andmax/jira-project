@@ -87,9 +87,21 @@
 
             <ul class="dropdown-menu disable-pointer">
               <li class="create-invoice-dropdown"
-                  ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired || selectedInvoiceCount <= 1 || checkInvoicesCompany()"
+
+                  custom-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                   tooltip-append-to-body="true"
-                  custom-disabled="{{ !selectedInvoiceCount || !selectableCompanyId}}"
+                  ng-if="!areDiffCompaniesChecked"
+                  modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                  mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                  modal-window-class="modal-receive-payment"
+                  tooltip-placement="bottom">
+                  Receive multiple payments
+
+              </li>
+
+              <li class="create-invoice-dropdown disabled" 
+                  tooltip-append-to-body="true"
+                  ng-if="areDiffCompaniesChecked"
                   modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
                   mw-controller="quicktech.core.receivable.receivePaymentCtrl"
                   modal-window-class="modal-receive-payment"

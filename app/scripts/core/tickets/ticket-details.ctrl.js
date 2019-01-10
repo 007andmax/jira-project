@@ -760,6 +760,8 @@
               return;
             }
 
+            console.log(Object.assign({}, $scope.ticketUpdate.services[0]), 'ssssss')
+
 
             // console.log(form, 'EXPENSE EDIT')
 

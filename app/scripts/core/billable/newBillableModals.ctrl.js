@@ -54,8 +54,10 @@
             note: $scope.note,
             amount: $scope.paymentAmount.toFixed(2) || 0,
             paymentId: editedPayment.id,
-            date: null && moment($scope.date).format('X'),
+            date: +moment($scope.date).format('x'),
             reference: $scope.reference
+          }, function(res) {
+            $scope.close()
           })
         }
 

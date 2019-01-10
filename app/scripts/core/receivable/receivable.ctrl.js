@@ -352,7 +352,17 @@
           }
         });
 
+
+        $scope.$watch(function() {
+          return $scope.invoiceToSent && $scope.invoiceToSent.invoices;
+        }, function(val) {
+          $scope.checkInvoicesCompany()
+        }, true)
+
         $scope.checkInvoicesCompany = function() {
+
+          if (!$scope.invoiceToSent) return;
+
           var invoicesNums = Object.keys($scope.invoiceToSent.invoices).reduce(function(acc, el) {
             if ($scope.invoiceToSent.invoices[el]) {
               acc.push(el);
@@ -371,7 +381,13 @@
             }
 
             return acc;
-          }, [])
+          }, []);
+
+
+
+          $scope.areDiffCompaniesChecked = invoicesCompanies.length > 1;
+
+          console.log($scope.areDiffCompaniesChecked, 'ss')
 
 
           return invoicesCompanies.length > 1;
