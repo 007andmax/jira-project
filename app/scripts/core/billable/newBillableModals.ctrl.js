@@ -7,6 +7,19 @@
       function ($scope, $uibModalInstance, editedPayment, PaymentsService, $rootScope) {
         $scope.close = $uibModalInstance.dismiss;
 
+        $scope.paymentMethods = {
+          REFUND_PAYMENT: 'Refund payment'
+        };
+
+        $scope.$watch('paymentMethod', function(val) {
+          console.log('HUUUI', val)
+        })
+
+        $scope.paymentMethod = "REFUND_PAYMENT";
+
+        $scope.setPaymentMethod = function(val) {
+          $scope.paymentMethod = val;
+        }
 
 
         $scope.invoiceNumbers = editedPayment.invoiceNumbers || [editedPayment.partialPaidInvoice];
@@ -44,6 +57,17 @@
             paymentId: editedPayment.id,
             date: null && moment($scope.date).format('X'),
             reference: $scope.reference
+          })
+        }
+
+        $scope.refundPayment = function() {
+          PaymentsService.refundPayment({
+            note: $scope.note,
+            paymentId: editedPayment.id,
+            refundMethod: $scope.paymentMethod,
+            sendEmailNotification: $scope.isSendNotification
+          }, function(res) {
+            $scope.close()
           })
         }
 

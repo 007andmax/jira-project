@@ -15,7 +15,7 @@
     <p>You can refund the payment, or create a credit note</p>
     <div class="col-md-6">Amount Paid</div>
     <div class="col-md-6 text-right">
-      <strong>$525</strong>
+      <strong>${{ paymentAmount }}</strong>
     </div>
     <div class="col-md-6">Paid by</div>
     <div class="col-md-6 text-right">
@@ -23,7 +23,7 @@
     </div>
     <div class="col-md-6">Refund Amount</div>
     <div class="col-md-6 text-right">
-      <strong class="alyosha-strong">$525</strong>
+      <strong class="alyosha-strong">${{ paymentAmount }}</strong>
     </div>
     <div class="form-group note"
          ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'note')}">
@@ -44,13 +44,13 @@
       <label class="control-label">Refund Method</label>
       <div uib-dropdown style="position: relative;">
         <input class="form-control has-dropdown readonly-normal" type="text" READONLY
-               uib-dropdown-toggle aria-expanded="true" ng-model="">
+               uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethods[paymentMethod]">
         <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
         <ul class="dropdown-menu">
-          <li ng-repeat=""
-              ng-click="">
-            <a tabindex="-1" href="javascript:void(0)"> {{  }} </a>
+          <li ng-repeat="(value, label) in paymentMethods"
+              ng-click="setPaymentMethod(value)">
+            <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
           </li>
         </ul>
 
@@ -58,7 +58,7 @@
     </div>
     <div>
       <label class="control checkbox pull-left" style="margin-top: 2px;width: auto;">
-        <input type="checkbox" ng-model="invoiceToReceive.isSendNotification">
+        <input type="checkbox" ng-model="isSendNotification">
         <span class="control-indicator"></span>
       </label>
       <div class="checkbox-caption">Email Refund receipt</div>
@@ -66,7 +66,7 @@
     <div class="row">
       <div class="col-md-12" style="padding: 0;">
         <div class="btn btn-success"
-             ng-click="receivePayment()">
+             ng-click="refundPayment()">
           Refund Payment
         </div>
         <div class="btn btn-default" ng-click="close()">

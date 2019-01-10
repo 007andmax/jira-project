@@ -103,6 +103,13 @@
           })
       }
 
+      function refundPayment(data, callback) {
+        $http.put('/payments/refund', data)
+          .then(function(res) {
+            if (callback) callback(res);
+          })
+      }
+
       return {
         getPaymentsData: getPaymentsData,
         getDepositSlipsData: getDepositSlipsData,
@@ -110,7 +117,8 @@
         rollback: rollback,
         getDepositNumber: getDepositNumber,
         editPayment: editPayment,
-        deletePayment: deletePayment
+        deletePayment: deletePayment,
+        refundPayment: refundPayment
       }
 
 

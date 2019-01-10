@@ -139,6 +139,10 @@
   align-items: center;
 }
 
+.disable-pointer .disabled {
+  pointer-events: none;
+}
+
 .invoice-create--header .dropdown-menu {
   width: 175px;
 }
