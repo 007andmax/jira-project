@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivePaymentCtrl',
-    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService',
-      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService) {
+    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout',
+      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout) {
 
         var invoiceList = $scope.receivableInvoicesData.list;
 
@@ -42,6 +42,7 @@
         }
 
         $scope.$watch('isMultiple', function(val) {
+          console.log('is multiple, is multipleeee')
           if (val === false) {
             $scope.isSinglePayment = true;
 
@@ -80,9 +81,10 @@
 
               $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
 
-              setTimeout($scope.setInvoice.bind(this, invoice), 100)
+              $timeout($scope.setInvoice.bind(this, invoice), 100)
               // $scope.setInvoice(invoice);
             }
+
           } else if (val === true) {
             $scope.isSinglePayment = false;
             var invoicesToReceive = $scope.invoiceToReceive.invoices;
@@ -136,14 +138,14 @@
         })
 
 
-        if ($scope.selectedInvoiceCount <= 1) {
-
-        } else {
-
-
-
-
-        }
+        // if ($scope.selectedInvoiceCount <= 1) {
+        //
+        // } else {
+        //
+        //
+        //
+        //
+        // }
 
         $scope.paymentMethod = {
           CASH: 'Cash',
@@ -236,7 +238,7 @@
 
           var singlePayment = $scope.selectedInvoiceCount <= 1;
 
-          if (singlePayment) {
+          if (singlePayment && !$scope.isMultiple) {
             invoiceIdPayment = [$scope.selectedInvoice.id];
 
             console.log($scope.selectedInvoice, 'SELECTED')

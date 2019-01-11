@@ -74,17 +74,21 @@
                 return el.number == invoiceNumber;
               });
 
+              if (invoiceIndex) {
+                invoices[invoiceIndex].paidSum += sum;
+
+                if (invoices[invoiceIndex].paidSum >= invoices[invoiceIndex].sum) {
+                  if (!invoices[invoiceIndex].paidOn) {
+                    invoices[invoiceIndex].paidOn = +moment(new Date()).format('x');
+                  }
+                } else {
+                  invoices[invoiceIndex].paidOn = null;
+                }
+              }
+
               console.log(invoices[invoiceIndex], 'pizdec')
 
-              invoices[invoiceIndex].paidSum += sum;
 
-              if (invoices[invoiceIndex].paidSum >= invoices[invoiceIndex].sum) {
-                if (!invoices[invoiceIndex].paidOn) {
-                  invoices[invoiceIndex].paidOn = +moment(new Date()).format('x');
-                }
-              } else {
-                invoices[invoiceIndex].paidOn = null;
-              }
 
             }
 
