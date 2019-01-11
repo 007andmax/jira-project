@@ -20,7 +20,7 @@
           <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
           <ul class="dropdown-menu">
-            <li ng-repeat="company in companies"
+            <li ng-repeat="company in companies | orderBy:'name'"
                 ng-click="setCompany(company)">
               <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
             </li>

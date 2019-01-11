@@ -20,7 +20,7 @@
           <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
           <ul class="dropdown-menu">
-            <li ng-repeat="company in companies"
+            <li ng-repeat="company in companies | orderBy:'name'"
                 ng-click="setCompany(company)">
               <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
             </li>
@@ -48,7 +48,7 @@
           <li ng-repeat="invoice in availableInvoiceCompanies"
               ng-click="setInvoice(invoice)">
             <a tabindex="-1" href="javascript:void(0)"> {{ "Invoice #" + invoice.number + ' Amount: ' + '$' +
-                                                        invoice.sum; }} </a>
+                                                        (invoice.sum).toFixed(2); }} </a>
           </li>
         </ul>
       </div>
@@ -56,17 +56,25 @@
     <div class="form-group clearfix">
       <div class="col-md-8 clearfix">Total Payment Amount</div>
       <div class="col-md-4 text-right clearfix">
-        <strong class="alyosha-strong">{{ "$" + selectedInvoice.sum }}</strong>
+        <strong class="alyosha-strong">{{ "$" + (selectedInvoice.sum).toFixed(2) }}</strong>
       </div>
       <div class="col-md-8 clearfix pr-10" style="height: 40px;display: flex;align-items: center;">Amount</div>
-      <div class="col-md-4 text-right clearfix without-input-arrows pl-10">
 
-        <input class="form-control" style="text-align: right;" type="number" ng-model="partialPaymentAmount" />
+      <div class="col-md-4 text-right clearfix without-input-arrows pl-10" ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'amount')}">
+
+        <div ng-messages="paymentRecieveForm.amount.$error"
+             ng-class="{'hide': !isShowingErrors(paymentRecieveForm, 'amount')}">
+          <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+          <div class="control-label" ng-message="required">Amount is required.</div>
+
+        </div>
+
+        <input class="form-control" ng-required="true "name="amount" style="text-align: right;" type="number" ng-model="partialPaymentAmount" />
 
       </div>
-      <div class="col-md-8 clearfix">Remaining customer credit</div>
+      <div class="col-md-8 clearfix">Remaining invoice amount</div>
       <div class="col-md-4 text-right clearfix">
-        <strong style="margin-right: 10px;">${{ selectedInvoice.sum - partialPaymentAmount }}</strong>
+        <strong style="margin-right: 10px;">${{ (selectedInvoice.sum - partialPaymentAmount).toFixed(2) }}</strong>
       </div>
 
     </div>
@@ -119,7 +127,7 @@
     <div class="row">
       <div class="col-md-12" style="padding: 0;">
         <div class="btn btn-primary"
-             ng-click="receivePayment()">
+             ng-click="receivePayment(paymentRecieveForm)">
           Procces Payment
         </div>
         <div class="btn btn-default" ng-click="close()">

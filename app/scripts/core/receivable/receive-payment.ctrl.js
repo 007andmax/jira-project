@@ -17,7 +17,7 @@
         $scope.receivePaymentInvoices = [];
 
         $scope.allInvoicesList = $scope.receivableInvoicesData.list;
-        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companies = CompaniesService.getClientCompanies()
 
         $scope.availableInvoiceCompanies = [];
 
@@ -41,6 +41,10 @@
           $scope.isMultiple = val;
         }
 
+        $scope.isShowingErrors = function (form, fieldName) {
+          return $scope.triedToSaveService && form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
+        };
+
         $scope.$watch('isMultiple', function(val) {
           console.log('is multiple, is multipleeee')
           if (val === false) {
@@ -59,7 +63,7 @@
 
             $scope.$watch('selectedInvoice', function(val) {
               if (val) {
-                $scope.invoiceDescription = "Invoice #" + val.number + ' Amount: ' + '$' + val.sum;
+                $scope.invoiceDescription = "Invoice #" + val.number + ' Amount: ' + '$' + (val.sum).toFixed(2);
               } else {
                 $scope.invoiceDescription = '';
               }
@@ -221,7 +225,16 @@
           }
         };
 
-        $scope.receivePayment = function () {
+        $scope.receivePayment = function (form) {
+
+          console.log(form, 'form')
+
+          if (!$scope.isMultiple && !$scope.partialPaymentAmount && $scope.partialPaymentAmount !== 0) {
+            $scope.triedToSaveService = true;
+            return;
+          }
+
+
           var data = {
             date: moment($scope.date).format('x'),
             reference: $scope.reference,
@@ -265,10 +278,6 @@
               $scope.invoiceToSent.invoices = {};
             }, data
           );
-        };
-
-        $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
         };
 
       }]);
