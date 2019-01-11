@@ -115,6 +115,8 @@
 
                     if (invoicesToReceive[invoice.id]) {
                       $scope.invoiceToReceive.invoices[invoice.id] = true;
+                    } else {
+                      $scope.invoiceToReceive.invoices[invoice.id] = false;
                     }
                   }
 
