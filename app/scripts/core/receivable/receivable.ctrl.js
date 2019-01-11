@@ -193,6 +193,8 @@
             return;
           }
           var invoicesData = $scope.receivableInvoicesData = resp;
+
+          $rootScope.receivableInvoicesData = resp;
           globalSearch.count = $scope.receivableInvoicesData.list.length;
 
           $scope.totalReceivables = 0;

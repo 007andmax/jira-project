@@ -6,14 +6,14 @@
 
   var services = angular.module('main.services');
 
-  services.factory('PaymentsService', ['$http', 'RealTimeService', 'Utils',
-    function ($http, RealTimeService, Utils) {
+  services.factory('PaymentsService', ['$http', 'RealTimeService', 'Utils', '$rootScope',
+    function ($http, RealTimeService, Utils, $rootScope) {
 
       var urlForGetPayments = '/payments';
       var urlForGetDepositSlips = '/payments/deposits';
       var urlForPostNewDepositSlip = ' /payments/deposits';
       var urlForGetDepositNumber = '/data/actualNumber?type=DEPOSIT';
-
+      var payments = [];
 
       function getData(url, callback) {
         var getFuture = $http({
@@ -23,6 +23,19 @@
 
         Utils.handleCallback(getFuture, callback)
       }
+
+      var isRequestSent = false;
+
+      $rootScope.$watch(function() {
+        return $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list.length
+      }, function(val) {
+        if (val && !isRequestSent) {
+          isRequestSent = true;
+          console.log($rootScope.receivableInvoicesData.list, "IMHERE")
+          getPaymentsData($rootScope);
+        }
+      })
+
 
       function postData(url, data, callback) {
         var postFuture = $http({
@@ -34,22 +47,80 @@
       }
 
       function getPaymentsData(scope, callback) {
-        var payments = [];
+
+        if (payments && payments.length) {
+          callback && callback(payments);
+          return;
+        }
+
         getData(urlForGetPayments, function(resp) {
           payments = resp;
           callback && callback(payments);
         });
 
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
+          var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
-
+          console.log('invoicesss')
 
           console.log(newChange, "NEWHCANGE")
           if(newChange.action === 'PAYMENT_CREATED') {
             payments.push(newChange.data);
+
+            if (invoices) {
+              var invoiceNumber = newChange.data.partialPaidInvoice;
+              var sum = newChange.data.partialPaidAmount;
+              var invoiceIndex = invoices.findIndex(function(el) {
+                return el.number == invoiceNumber;
+              });
+
+              console.log(invoices[invoiceIndex], 'pizdec')
+
+              invoices[invoiceIndex].paidSum += sum;
+
+              if (invoices[invoiceIndex].paidSum >= invoices[invoiceIndex].sum) {
+                if (!invoices[invoiceIndex].paidOn) {
+                  invoices[invoiceIndex].paidOn = +moment(new Date()).format('x');
+                }
+              } else {
+                invoices[invoiceIndex].paidOn = null;
+              }
+
+            }
+
+
+
           } else if ( newChange.action === 'PAYMENTS_DELETED') {
             for (var i = 0; i < newChange.data.length; i++) {
               var paymentId = newChange.data[i];
+
+              var payment = payments.find(function(el) {
+                return el.id == paymentId
+              });
+
+              var payment = Object.assign({}, payment);
+
+              console.log(payment, 'PAYMENT')
+
+              if (invoices) {
+                var invoice = invoices.find(function(el) {
+                  return el.number === payment.partialPaidInvoice;
+                })
+
+                invoice.paidSum -= payment.partialPaidAmount;
+
+                if (invoice.paidSum >= invoice.sum) {
+                  if (!invoice.paidOn) {
+                    invoice.paidOn = +moment(new Date()).format('x');
+                  }
+                } else {
+                  invoice.paidOn = null;
+                }
+
+                console.log(payment, invoice, 'GGGG')
+              }
+
+
               Utils.deleteById(payments, paymentId);
             }
           } else if (newChange.action === 'PAYMENTS_REFUNDED') {
