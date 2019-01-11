@@ -11885,6 +11885,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   margin-bottom: 10px;
 }
 
+.create-note-modal .btn {
+  font-weight: 500 !important;
+}
+
 .create-note-modal input[type=number]::-webkit-inner-spin-button,
 .create-note-modal input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
