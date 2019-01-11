@@ -12,7 +12,7 @@
   <div class="note-modal-content clearfix">
     <p>Receive payments for the following</p>
     <div class="form-group clearfix">
-      <div class="col-md-8" style="padding-right: 10px;">
+      <div class="col-md-8 pr-10">
         <label class="control-label">Company Name</label>
         <div uib-dropdown style="position: relative;">
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
@@ -27,7 +27,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-4" style="padding-left: 10px;">
+      <div class="col-md-4 pl-10">
         <label class="control-label">Payment Date</label>
         <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
                qt-data-time-picker max-date="maxDate" ng-model="serviceExpense.date"
@@ -54,24 +54,26 @@
       </div>
     </div>
     <div class="form-group clearfix">
-      <div class="col-md-6 clearfix">Total Payment Amount</div>
-      <div class="col-md-6 text-right clearfix">
+      <div class="col-md-8 clearfix">Total Payment Amount</div>
+      <div class="col-md-4 text-right clearfix">
         <strong class="alyosha-strong">{{ "$" + selectedInvoice.sum }}</strong>
       </div>
-      <div class="col-md-6 clearfix" style="height: 40px;display: flex;align-items: center;">Amount</div>
-      <div class="col-md-6 text-right clearfix without-input-arrows">
-        <input class="form-control" type="number" ng-model="partialPaymentAmount" />
+      <div class="col-md-8 clearfix pr-10" style="height: 40px;display: flex;align-items: center;">Amount</div>
+      <div class="col-md-4 text-right clearfix without-input-arrows pl-10">
+
+        <input class="form-control" style="text-align: right;" type="number" ng-model="partialPaymentAmount" />
+
       </div>
-      <div class="col-md-6 clearfix">Remaining customer credit</div>
-      <div class="col-md-6 text-right clearfix">
-        <strong>${{ selectedInvoice.sum - partialPaymentAmount }}</strong>
+      <div class="col-md-8 clearfix">Remaining customer credit</div>
+      <div class="col-md-4 text-right clearfix">
+        <strong style="margin-right: 10px;">${{ selectedInvoice.sum - partialPaymentAmount }}</strong>
       </div>
 
     </div>
 
     <div class="form-group clearfix">
-      <div class="col-md-6" style="padding-right: 10px;">
-        <label class="control-label">Payment Mode</label>
+      <div class="col-md-6 pr-10">
+        <label class="control-label">Payment Method</label>
         <div uib-dropdown style="position: relative;">
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
                  uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
@@ -85,7 +87,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-6" style="padding-left: 10px;">
+      <div class="col-md-6 pl-10">
         <label class="control-label">Reference#</label>
         <div>
           <input class="form-control has-dropdown readonly-normal" style="cursor: text;" ng-model="reference" type="text">

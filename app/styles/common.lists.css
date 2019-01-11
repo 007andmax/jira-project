@@ -5061,10 +5061,7 @@ Devices tab
 
 .receive-payment-list {
   overflow-y: auto;
-  
   max-height: 350px;
-  
-  border-top: 1px solid #e7ecf2;
 }
 
 .invoice-list-heading {
@@ -5107,8 +5104,10 @@ Devices tab
   }
 }
 
-.receive-payment-list > li + li {
-  border-top: 1px solid #e7ecf2;
+.invoice-list-heading > li,
+.receive-payment-list > li {
+  border-bottom: 1px solid #e7ecf2;
+  border-top: none !important;
 }
 
 .receive-payment-list .checkbox {

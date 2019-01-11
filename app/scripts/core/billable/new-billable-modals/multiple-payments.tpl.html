@@ -54,9 +54,9 @@
         </li>
       </ul>
       <ul class="qt-list receive-payment-list"
-          style="padding: 0;margin-bottom: 10px; overflow: scroll">
+          style="padding: 0;margin-bottom: 10px; overflow-y: scroll; overflow-x: hidden; max-height: 285px;">
         <li ng-repeat="invoice in receivePaymentInvoices"
-            class="row">
+            class="clearfix">
           <div class="col-md-5">
             <label class="control checkbox pull-left">
               <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
@@ -72,18 +72,18 @@
         Subtotal
       </div>
       <div class="col-md-6 text-right">
-        <strong class="ng-binding">{{ receivePaymentSum | currency: '$': 2 }}</strong>
+        <strong class="ng-binding" style="margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong>
       </div>
       <div class="col-md-6">Total Payment</div>
       <div class="col-md-6 text-right">
-        <strong class="ng-binding">{{ receivePaymentSum | currency: '$': 2 }}</strong>
+        <strong class="ng-binding" style="margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong>
       </div>
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>
 
     </div>
     <div class="form-group clearfix">
       <div class="col-md-6" style="padding-right: 10px;">
-        <label class="control-label">Payment Mode</label>
+        <label class="control-label">Payment Method</label>
         <div uib-dropdown style="position: relative;">
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
                  uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
@@ -100,7 +100,8 @@
       <div class="col-md-6" style="padding-left: 10px;">
         <label class="control-label">Reference#</label>
         <div>
-          <input class="form-control has-dropdown readonly-normal" style="cursor: text;" ng-model="reference" type="text">
+          <input class="form-control has-dropdown readonly-normal" style="cursor: text;" ng-model="reference"
+                 type="text">
         </div>
       </div>
     </div>

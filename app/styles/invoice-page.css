@@ -366,6 +366,14 @@
   padding-right: 30px !important;
 }
 
+.pl-10 {
+  padding-left: 10px !important;
+}
+
+.pr-10 {
+  padding-right: 10px !important;
+}
+
 .invoice-list--footer__top {
   padding: 40px 0;
   border-bottom: 1px solid #f5f8fa;
