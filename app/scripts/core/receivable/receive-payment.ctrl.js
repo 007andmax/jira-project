@@ -17,7 +17,15 @@
         $scope.receivePaymentInvoices = [];
 
         $scope.allInvoicesList = $scope.receivableInvoicesData.list;
-        $scope.companies = CompaniesService.getClientCompanies()
+        // $scope.companies = CompaniesService.getClientCompanies()
+
+
+        // $scope.companies = $scope.receivableInvoicesData.companies
+
+        $scope.companies = Object.keys($scope.receivableInvoicesData.companies).map(function(id) {
+          return CompaniesService.getOneById(id);
+        })
+        
 
         $scope.availableInvoiceCompanies = [];
 

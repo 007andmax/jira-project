@@ -15,10 +15,23 @@
         })
 
         $scope.paymentMethod = "REFUND_PAYMENT";
+        $scope.editPaymentMethod = (editedPayment && editedPayment.paymentMethod);
 
         $scope.setPaymentMethod = function(val) {
           $scope.paymentMethod = val;
         }
+
+        $scope.setEditPaymentMethod = function(val) {
+          $scope.editPaymentMethod = val;
+        }
+
+        $scope.editPaymentMethods = {
+          CASH: 'Cash',
+          CHEQUE: 'Cheque',
+          DEBIT_CARD: 'Debit Card',
+          CREDIT_CARD: 'Credit Card',
+          WIRE_TRANSFER: 'Wire Transfer'
+        };
 
 
         $scope.invoiceNumbers = editedPayment.invoiceNumbers || [editedPayment.partialPaidInvoice];
@@ -55,7 +68,8 @@
             amount: $scope.paymentAmount.toFixed(2) || 0,
             paymentId: editedPayment.id,
             date: +moment($scope.date).format('x'),
-            reference: $scope.reference
+            reference: $scope.reference,
+            paymentMethod: $scope.editPaymentMethod
           }, function(res) {
             $scope.close()
           })
@@ -68,6 +82,7 @@
             refundMethod: $scope.paymentMethod,
             sendEmailNotification: $scope.isSendNotification
           }, function(res) {
+            console.log(res, "RES")
             $scope.close()
           })
         }

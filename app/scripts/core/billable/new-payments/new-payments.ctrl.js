@@ -53,6 +53,16 @@
           $scope.dateFilter = {startDate: null, endDate: null};
         };
 
+        $scope.sortBy = function(criteria) {
+          $scope.sortByValue = criteria;
+        }
+
+        $scope.sortByValue = '';
+
+        $scope.$watch('sortByValue', function(val) {
+          filterPayments();
+        })
+
 
         $scope.$watch('dateFilter', function(val) {
           console.log(moment(val.startDate).format('ll'))
@@ -119,6 +129,14 @@
 
             if ($scope.filterCompany && $scope.filterCompany !== '' && $scope.filterCompany !== ' ') {
               result = result && ((el.invoiceNumbers && el.invoiceNumbers.findIndex(function(el) { return el.includes($scope.filterCompany) }) > -1) || (el.partialPaidInvoice && el.partialPaidInvoice.indexOf($scope.filterCompany) > -1) || el.clientCompanyName.indexOf($scope.filterCompany) > -1)
+            }
+
+            if ($scope.sortByValue) {
+              if ($scope.sortByValue === 'refund') {
+                result = result && el.refundMethod;
+              } else {
+                result = result && !el.refundMethod;
+              }
             }
 
             return result;

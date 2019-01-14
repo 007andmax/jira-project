@@ -48,10 +48,10 @@
 
       function getPaymentsData(scope, callback) {
 
-        if (payments && payments.length) {
-          callback && callback(payments);
-          return;
-        }
+        // if (payments && payments.length) {
+        //   callback && callback(payments);
+        //   return;
+        // }
 
         getData(urlForGetPayments, function(resp) {
           payments = resp;
@@ -211,6 +211,7 @@
       function refundPayment(data, callback) {
         $http.put('/payments/refund', data)
           .then(function(res) {
+            // console.log('heres')
             if (callback) callback(res);
           })
       }
