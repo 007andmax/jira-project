@@ -135,7 +135,26 @@
               return el.id == changed.id;
             })
 
+            var payment = payments[index];
+
             payments[index].refundMethod = changed.refundMethod;
+
+            if (invoices) {
+              var invoice = invoices.find(function(el) {
+                return el.number === payment.partialPaidInvoice;
+              })
+
+              invoice.paidSum -= payment.partialPaidAmount;
+
+              if (invoice.paidSum >= invoice.sum) {
+                if (!invoice.paidOn) {
+                  invoice.paidOn = +moment(new Date()).format('x');
+                }
+              } else {
+                invoice.paidOn = null;
+              }
+
+            }
 
           } else if (newChange.action === 'PAYMENT_EDITED') {
             var changed = newChange.data;
