@@ -76,7 +76,10 @@
       </div>
       <div class="col-md-6">Total Payment</div>
       <div class="col-md-6 text-right">
-        <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong>
+        <!-- <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong> -->
+
+        <input class="form-control disabled" ng-if="countCheckedInvoices() !== 1" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="receivePaymentSum" />
+        <input class="form-control" ng-show="countCheckedInvoices() === 1" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>
 

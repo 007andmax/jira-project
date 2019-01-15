@@ -50,7 +50,20 @@
 
           </div>
 
-          <div uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}" style="margin: 0;">
+
+          <button ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                  tooltip-append-to-body="true"
+                  class="save-invoice-button btn btn-success"
+                  modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                  mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                  modal-window-class="modal-receive-payment"
+                  tooltip-placement="bottom">
+
+
+                  Process payment
+          </button>
+
+          <!-- <div uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}" style="margin: 0;">
             <button ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                     tooltip-append-to-body="true"
                     ng-if="selectedInvoiceCount <= 1"
@@ -63,9 +76,9 @@
 
               Receive single payment
 
-              <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
+
               <i class="icn-sm pointer report-caret-icon-white"></i>
-              <!--</div>-->
+
               <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
             </button>
 
@@ -78,9 +91,9 @@
 
               Receive single payment
 
-              <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
+
               <i class="icn-sm pointer report-caret-icon-white"></i>
-              <!--</div>-->
+
               <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()" style="pointer-events: all"></div>
             </button>
 
@@ -99,7 +112,7 @@
 
               </li>
 
-              <li class="create-invoice-dropdown disabled" 
+              <li class="create-invoice-dropdown disabled"
                   tooltip-append-to-body="true"
                   ng-if="areDiffCompaniesChecked"
                   modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
@@ -116,7 +129,7 @@
                 Resend invoices
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <!-- <button class="btn btn-success"
                   custom-disabled="{{ !selectedInvoiceCount || !selectableCompanyId}}"

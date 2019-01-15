@@ -37,6 +37,13 @@
         }
 
 
+        $scope.parsePaymentMethod = function(method) {
+          return method.split('_').map(function(el) {
+            return el[0].toUpperCase() + el.slice(1).toLowerCase();
+          }).join(' ');
+        }
+
+
         $scope.dateFilterOptions = {
           'autoApply': true,
           "cancelClass": "btn-secondary",

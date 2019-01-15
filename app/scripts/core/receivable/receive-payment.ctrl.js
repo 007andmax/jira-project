@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivePaymentCtrl',
-    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout',
-      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout) {
+    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout', '$rootScope',
+      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout, $rootScope) {
 
-        var invoiceList = $scope.receivableInvoicesData.list;
+        var invoiceList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.receivableInvoicesData.list;
 
 
         $scope.invoiceToReceive = {
@@ -16,16 +16,16 @@
         };
         $scope.receivePaymentInvoices = [];
 
-        $scope.allInvoicesList = $scope.receivableInvoicesData.list;
-        // $scope.companies = CompaniesService.getClientCompanies()
+        $scope.allInvoicesList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.receivableInvoicesData.list;
 
-
-        // $scope.companies = $scope.receivableInvoicesData.companies
+        if (!$scope.invoiceToSent) {
+          $scope.invoiceToSent = { invoices: [] }
+        }
 
         $scope.companies = Object.keys($scope.receivableInvoicesData.companies).map(function(id) {
           return CompaniesService.getOneById(id);
         })
-        
+
 
         $scope.availableInvoiceCompanies = [];
 
@@ -53,103 +53,135 @@
           return $scope.triedToSaveService && form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
-        $scope.$watch('isMultiple', function(val) {
-          console.log('is multiple, is multipleeee')
-          if (val === false) {
-            $scope.isSinglePayment = true;
 
-            $scope.$watch('invoiceCompany', function(val) {
-              if (val) {
-                $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
-                  return el.company.id === val.id && !el.paidOn;
-                })
+        $scope.countCheckedInvoices = function() {
+          var invoices = $scope.invoiceToReceive.invoices;
+          var keys = Object.keys(invoices);
 
-                $scope.selectedInvoice = null;
-                $scope.partialPaymentAmount = null;
-              }
-            }, true);
+          return keys.reduce(function(acc, key) {
+            return acc + invoices[key]
+          }, 0)
+        }
 
-            $scope.$watch('selectedInvoice', function(val) {
-              if (val) {
-                $scope.invoiceDescription = "Invoice #" + val.number + ' Amount: ' + '$' + (val.sum).toFixed(2);
-              } else {
-                $scope.invoiceDescription = '';
-              }
-            }, true);
+        $scope.isSinglePayment = false;
+        var invoicesToReceive = $scope.invoiceToReceive.invoices;
 
-            $scope.$watch('partialPaymentAmount', function(val) {
-              if (val && $scope.selectedInvoice && val >= $scope.selectedInvoice.sum) {
-                $scope.partialPaymentAmount = $scope.selectedInvoice.sum;
-              }
+        $scope.$watch('invoiceCompany', function(val) {
+          if (val) {
+            $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
+              return el.company.id === val.id && !el.paidOn;
             })
 
+            $scope.invoiceToReceive.invoices = {};
+
+            $scope.receivePaymentInvoices = [];
 
 
-            if ($scope.selectedInvoiceCount === 1) {
-              var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
-              var invoice = $scope.allInvoicesList.find(function(el) {
-                return el.number == invoiceNum;
-              })
+            $scope.selectedInvoice = null;
+            // $scope.partialPaymentAmount = null;
 
-              $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
+            for (var i = 0; i < invoiceList.length; i++) {
+              var invoice = invoiceList[i];
 
-              $timeout($scope.setInvoice.bind(this, invoice), 100)
-              // $scope.setInvoice(invoice);
-            }
+              if (invoice.company.id === $scope.invoiceCompany.id && !invoice.paidOn) {
+                $scope.receivePaymentInvoices.push(invoice);
 
-          } else if (val === true) {
-            $scope.isSinglePayment = false;
-            var invoicesToReceive = $scope.invoiceToReceive.invoices;
-
-            $scope.$watch('invoiceCompany', function(val) {
-              if (val) {
-                $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
-                  return el.company.id === val.id && !el.paidOn;
-                })
-
-                $scope.invoiceToReceive.invoices = {};
-
-                $scope.receivePaymentInvoices = [];
-
-
-                $scope.selectedInvoice = null;
-                // $scope.partialPaymentAmount = null;
-
-                for (var i = 0; i < invoiceList.length; i++) {
-                  var invoice = invoiceList[i];
-
-                  if (invoice.company.id === $scope.invoiceCompany.id && !invoice.paidOn) {
-                    $scope.receivePaymentInvoices.push(invoice);
-
-                    if (invoicesToReceive[invoice.id]) {
-                      $scope.invoiceToReceive.invoices[invoice.id] = true;
-                    } else {
-                      $scope.invoiceToReceive.invoices[invoice.id] = false;
-                    }
-                  }
-
-
-
+                if (invoicesToReceive[invoice.id]) {
+                  $scope.invoiceToReceive.invoices[invoice.id] = true;
+                } else {
+                  $scope.invoiceToReceive.invoices[invoice.id] = false;
                 }
-
-
-                console.log($scope.invoiceToReceive.invoices, 'ddd')
               }
-            }, true);
 
 
-            var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
-
-            if (invoiceNum) {
-              var invoice = $scope.allInvoicesList.find(function(el) {
-                return el.number == invoiceNum;
-              })
-
-              $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
 
             }
+
+
+            console.log($scope.invoiceToReceive.invoices, 'ddd')
+          }
+        }, true);
+
+
+        var invoicesKeys = Object.keys($scope.invoiceToSent.invoices);
+        var invoiceNum;
+
+        for (var i = 0; i < invoicesKeys.length; i++) {
+          var key = invoicesKeys[i];
+
+          if ($scope.invoiceToSent.invoices[key]) {
+            invoiceNum = key;
+            break;
+          }
+
+        }
+
+
+        // var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
+
+        if (invoiceNum) {
+          var invoice = $scope.allInvoicesList.find(function(el) {
+            return el.number == invoiceNum;
+          })
+
+          $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
+
+        }
+
+        $scope.$watch('partialPaymentAmount', function(val) {
+          if (val  && val >= $scope.receivePaymentSum) {
+            $scope.partialPaymentAmount = $scope.receivePaymentSum;
           }
         })
+
+        // $scope.$watch('isMultiple', function(val) {
+        //   console.log('is multiple, is multipleeee')
+        //   if (val === false) {
+        //     $scope.isSinglePayment = true;
+        //
+        //     $scope.$watch('invoiceCompany', function(val) {
+        //       if (val) {
+        //         $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
+        //           return el.company.id === val.id && !el.paidOn;
+        //         })
+        //
+        //         $scope.selectedInvoice = null;
+        //         $scope.partialPaymentAmount = null;
+        //       }
+        //     }, true);
+        //
+        //     $scope.$watch('selectedInvoice', function(val) {
+        //       if (val) {
+        //         $scope.invoiceDescription = "Invoice #" + val.number + ' Amount: ' + '$' + (val.sum).toFixed(2);
+        //       } else {
+        //         $scope.invoiceDescription = '';
+        //       }
+        //     }, true);
+        //
+        //     $scope.$watch('partialPaymentAmount', function(val) {
+        //       if (val && $scope.selectedInvoice && val >= $scope.selectedInvoice.sum) {
+        //         $scope.partialPaymentAmount = $scope.selectedInvoice.sum;
+        //       }
+        //     })
+        //
+        //
+        //
+        //     if ($scope.selectedInvoiceCount === 1) {
+        //       var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
+        //       var invoice = $scope.allInvoicesList.find(function(el) {
+        //         return el.number == invoiceNum;
+        //       })
+        //
+        //       $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
+        //
+        //       $timeout($scope.setInvoice.bind(this, invoice), 100)
+        //       // $scope.setInvoice(invoice);
+        //     }
+        //
+        //   } else if (val === true) {
+        //
+        //   }
+        // })
 
 
         // if ($scope.selectedInvoiceCount <= 1) {
@@ -237,7 +269,7 @@
 
         $scope.receivePayment = function (form) {
 
-          console.log(form, 'form')
+
 
           if (!$scope.isMultiple && !$scope.partialPaymentAmount && $scope.partialPaymentAmount !== 0) {
             $scope.triedToSaveService = true;
@@ -251,7 +283,9 @@
 
           }
 
-          if ($scope.partialPaymentAmount) {
+
+
+          if ($scope.partialPaymentAmount && $scope.countCheckedInvoices() === 1) {
             data.partialPaymentAmount = $scope.partialPaymentAmount
           }
 
@@ -263,8 +297,6 @@
 
           if (singlePayment && !$scope.isMultiple) {
             invoiceIdPayment = [$scope.selectedInvoice.id];
-
-            console.log($scope.selectedInvoice, 'SELECTED')
           } else {
             for (var id in invoices) {
               if (invoices[id]) {

@@ -48,6 +48,17 @@
             </div>
 
           </div>
+
+          <button tooltip-append-to-body="true"
+                  class="save-invoice-button btn btn-success"
+                  modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                  mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                  modal-window-class="modal-receive-payment"
+                  tooltip-placement="bottom">
+
+
+                  Process payment
+          </button>
         </div>
       </div>
     </div>
@@ -156,7 +167,7 @@
         {{ payment.clientCompanyName }}
       </div>
       <div class="col-xs-1" style="word-break: break-all">
-        <span>{{ payment.paymentMethod }}</span>
+        <span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>
       </div>
 
       <!-- <div class="col-xs-3">
