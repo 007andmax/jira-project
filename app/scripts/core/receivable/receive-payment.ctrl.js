@@ -6,7 +6,7 @@
     ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout', '$rootScope',
       function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout, $rootScope) {
 
-        var invoiceList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.receivableInvoicesData.list;
+        var invoiceList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.uploadedReceivable.list;
 
 
         $scope.invoiceToReceive = {
@@ -16,13 +16,13 @@
         };
         $scope.receivePaymentInvoices = [];
 
-        $scope.allInvoicesList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.receivableInvoicesData.list;
+        $scope.allInvoicesList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.uploadedReceivable.list;
 
         if (!$scope.invoiceToSent) {
           $scope.invoiceToSent = { invoices: [] }
         }
 
-        $scope.companies = Object.keys($scope.receivableInvoicesData.companies).map(function(id) {
+        $scope.companies = Object.keys(($scope.receivableInvoicesData || $rootScope.uploadedReceivable).companies).map(function(id) {
           return CompaniesService.getOneById(id);
         })
 
@@ -205,6 +205,8 @@
           $uibModalInstance.dismiss('cancel');
         };
 
+        console.log($scope.invoiceToSent, 'sssss!!!!')
+
         if ($scope.mode === 'list') {
           for (var i = 0; i < invoiceList.length; i++) {
             if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
@@ -213,8 +215,8 @@
           }
         } else {
           for (var companyId in $scope.invoiceToSent) {
-            var invoices = $scope.invoiceToSent[companyId].invoices;
-
+            var invoices = $scope.invoiceToSent[companyId].invoices || {};
+            console.log(invoices, 'INVOICES', invoiceList, 'sfsdsfsfsfsfsfssdfsfs')
             for (var i = 0; i < invoiceList.length; i++) {
               if (invoices[invoiceList[i].number]) {
                 $scope.receivePaymentInvoices.push(invoiceList[i]);
