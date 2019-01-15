@@ -47,6 +47,11 @@
   justify-content: flex-start;
 }
 
+.invoices .invoices-header .invoices-header-filters .btn-success {
+  justify-content: center;
+  width: 146px !important;
+}
+
 .invoice-edit.invoice-create .invoice-create--header__btn .btn.btn-success i,
 .invoices .invoices-header .invoices-header-filters .btn-success i {
   position: absolute;
