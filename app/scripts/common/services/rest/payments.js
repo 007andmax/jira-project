@@ -74,7 +74,7 @@
                 return el.number == invoiceNumber;
               });
 
-              if (invoiceIndex) {
+              if (invoiceIndex && invoices[invoiceIndex]) {
                 invoices[invoiceIndex].paidSum += sum;
 
                 if (invoices[invoiceIndex].paidSum >= invoices[invoiceIndex].sum) {

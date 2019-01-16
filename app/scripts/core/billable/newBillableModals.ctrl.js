@@ -62,6 +62,10 @@
 
         $scope.paymentAmount = editedPayment.partialPaidAmount || $scope.invoiceSum;
 
+        $scope.$watch('paymentAmount', function(val) {
+          console.log(val, '!!')
+        })
+
         $scope.editPayment = function() {
           PaymentsService.editPayment({
             note: $scope.note,

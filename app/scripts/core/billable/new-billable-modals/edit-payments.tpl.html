@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="form-group clearfix" ng-repeat="invoice in invoiceNumbers">
+    <!-- <div class="form-group clearfix" ng-repeat="invoice in invoiceNumbers[0]">
       <div class="col-md-8">
         Invoice # <span>{{ invoice.number }}</span>
       </div>
@@ -36,9 +36,27 @@
         Amount Paid
       </div>
       <div class="col-md-4 text-right">
-        <strong ng-if="invoiceNumbers.length > 1" class="alyosha-strong">${{ paymentAmount }}</strong>
+        <strong ng-show="invoiceNumbers.length > 1" class="alyosha-strong">${{ paymentAmount }}</strong>
+        <input class="form-control" style="text-align: right;" type="number" qt-to-fixed="2" ng-model="paymentAmount" ></input>
+        <input class="form-control" style="text-align: right;" type="number" ng-show="invoiceNumbers.length === 1" qt-to-fixed="2" ng-model="paymentAmount" ></input>
+      </div>
+    </div> -->
 
-        <input class="form-control" style="text-align: right;" type="number" ng-show="invoiceNumbers.length === 1" ng-model="paymentAmount" ></input>
+    <div class="form-group clearfix">
+      <div class="col-md-8">
+        Invoice # <span>{{ invoiceNumbers[0].number }}</span>
+      </div>
+      <div class="col-md-4 text-right" style="margin-bottom: 8px;">
+        <strong style="padding: 10px;font-weight: 500;">${{ invoiceNumbers[0].sum }}</strong>
+      </div>
+      <div class="col-md-8"
+           style="height: 40px;display: flex;align-items: center;">
+        Amount Paid
+      </div>
+      <div class="col-md-4 text-right">
+        <!-- <strong ng-show="invoiceNumbers.length > 1" class="alyosha-strong">${{ paymentAmount }}</strong> -->
+        <input class="form-control" style="text-align: right;" type="number" qt-to-fixed="2" ng-model="paymentAmount" ></input>
+        <!-- <input class="form-control" style="text-align: right;" type="number" ng-show="invoiceNumbers.length === 1" qt-to-fixed="2" ng-model="paymentAmount" ></input> -->
       </div>
     </div>
     <div class="form-group clearfix">
