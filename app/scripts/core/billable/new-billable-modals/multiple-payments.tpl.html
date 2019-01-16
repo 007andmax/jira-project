@@ -75,11 +75,19 @@
         <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong>
       </div>
       <div class="col-md-8 pr-10">Total Payment</div>
-      <div class="col-md-4 text-right pl-10">
+      <div class="col-md-4 text-right pl-10" ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'amount') && countCheckedInvoices() === 1}">
         <!-- <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong> -->
 
-        <input class="form-control disabled text-right" ng-if="countCheckedInvoices() !== 1" hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="receivePaymentSum" />
-        <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
+        <!-- <div ng-messages="paymentRecieveForm.amount.$error"
+             ng-class="{'hide': !isShowingErrors(paymentRecieveForm, 'amount') || countCheckedInvoices() !== 1}">
+
+          <div class="control-label" ng-message="required">Amount is required.</div>
+          <div class="control-label" ng-message="invalid">Amount is .</div>
+
+        </div> -->
+
+        <input class="form-control disabled text-right" ng-if="countCheckedInvoices() !== 1"  qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="receivePaymentSum" />
+        <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>
 

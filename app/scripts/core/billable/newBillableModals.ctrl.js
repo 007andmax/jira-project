@@ -36,6 +36,7 @@
 
         $scope.invoiceNumbers = editedPayment.invoiceNumbers || [editedPayment.partialPaidInvoice];
 
+        var isNumberKey = $rootScope.isNumberKey
 
         $scope.note = editedPayment.note;
         $scope.reference = editedPayment.reference;

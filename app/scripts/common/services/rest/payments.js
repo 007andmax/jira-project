@@ -167,6 +167,28 @@
               return el.id == changed.id;
             })
 
+
+            var prevPayment = payments[index];
+            var difference = changed.partialPaidAmount - prevPayment.partialPaidAmount;
+            var invoiceNum = prevPayment.partialPaidInvoice;
+
+
+            if (invoices) {
+              var invoice = invoices.find(function(el) {
+                return el.number === invoiceNum;
+              })
+
+              invoice.paidSum += difference;
+
+              if (invoice.paidSum >= invoice.sum) {
+                if (!invoice.paidOn) {
+                  invoice.paidOn = +moment(new Date()).format('x');
+                }
+              } else {
+                invoice.paidOn = null;
+              }
+            }
+
             var keys = Object.keys(changed);
 
             keys.forEach(function(key) {

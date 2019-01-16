@@ -17,7 +17,7 @@
         $scope.receivePaymentInvoices = [];
 
         $scope.allInvoicesList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.uploadedReceivable.list;
-
+        $scope.partialPaymentAmount = 0;
         if (!$scope.invoiceToSent) {
           $scope.invoiceToSent = { invoices: [] }
         }
@@ -41,6 +41,7 @@
 
         console.log(Object.assign({}, $scope.invoiceToSent), "PAYMENT")
 
+        var isNumberKey = $rootScope.isNumberKey
 
         console.log($scope.isMultiple, 'SSSS')
 
@@ -128,7 +129,13 @@
 
         }
 
-        $scope.$watch('partialPaymentAmount', function(val) {
+        $scope.$watch('partialPaymentAmount', function(val, oldVal) {
+
+
+          if (val === undefined || (Number(val) != val && val !== null)) {
+            $scope.partialPaymentAmount = oldVal;
+          }
+
           if (val  && val >= $scope.receivePaymentSum) {
             $scope.partialPaymentAmount = $scope.receivePaymentSum;
           }
@@ -273,7 +280,7 @@
 
 
 
-          if (!$scope.isMultiple && !$scope.partialPaymentAmount && $scope.partialPaymentAmount !== 0) {
+          if ($scope.countCheckedInvoices() === 1 && !$scope.partialPaymentAmount && $scope.partialPaymentAmount !== 0) {
             $scope.triedToSaveService = true;
             return;
           }
