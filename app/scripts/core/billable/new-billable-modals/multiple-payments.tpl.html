@@ -78,8 +78,8 @@
       <div class="col-md-4 text-right pl-10">
         <!-- <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong> -->
 
-        <input class="form-control disabled text-right" ng-if="countCheckedInvoices() !== 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="receivePaymentSum" />
-        <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
+        <input class="form-control disabled text-right" ng-if="countCheckedInvoices() !== 1" hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="receivePaymentSum" />
+        <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>
 

@@ -55,7 +55,7 @@
       </div>
       <div class="col-md-4 text-right">
         <!-- <strong ng-show="invoiceNumbers.length > 1" class="alyosha-strong">${{ paymentAmount }}</strong> -->
-        <input class="form-control" style="text-align: right;" type="number" qt-to-fixed="2" ng-model="paymentAmount" ></input>
+        <input class="form-control" style="text-align: right;" type="number" hard-reset-pattern="decimalNumberPatter" qt-to-fixed="2" ng-model="paymentAmount" ></input>
         <!-- <input class="form-control" style="text-align: right;" type="number" ng-show="invoiceNumbers.length === 1" qt-to-fixed="2" ng-model="paymentAmount" ></input> -->
       </div>
     </div>

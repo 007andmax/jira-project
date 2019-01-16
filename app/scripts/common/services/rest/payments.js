@@ -111,15 +111,19 @@
                   return el.number === payment.partialPaidInvoice;
                 })
 
-                invoice.paidSum -= payment.partialPaidAmount;
+                if (invoice) {
+                  invoice.paidSum -= payment.partialPaidAmount;
 
-                if (invoice.paidSum >= invoice.sum) {
-                  if (!invoice.paidOn) {
-                    invoice.paidOn = +moment(new Date()).format('x');
+                  if (invoice.paidSum >= invoice.sum) {
+                    if (!invoice.paidOn) {
+                      invoice.paidOn = +moment(new Date()).format('x');
+                    }
+                  } else {
+                    invoice.paidOn = null;
                   }
-                } else {
-                  invoice.paidOn = null;
                 }
+
+
 
                 console.log(payment, invoice, 'GGGG')
               }
