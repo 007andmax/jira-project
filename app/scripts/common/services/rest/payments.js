@@ -167,7 +167,10 @@
               return el.id == changed.id;
             })
 
+            var invoices = $rootScope.allInvoices;
 
+
+            console.log('invoices', invoices, 'INVOICESSS')
             var prevPayment = payments[index];
             var difference = changed.partialPaidAmount - prevPayment.partialPaidAmount;
             var invoiceNum = prevPayment.partialPaidInvoice;

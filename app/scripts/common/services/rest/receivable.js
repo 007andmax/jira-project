@@ -73,6 +73,8 @@
           }
         }
 
+        $rootScope.allInvoices = data.list;
+
         if (callback) {
           callback(data);
         }
