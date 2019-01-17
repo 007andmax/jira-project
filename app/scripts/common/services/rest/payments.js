@@ -14,6 +14,7 @@
       var urlForPostNewDepositSlip = ' /payments/deposits';
       var urlForGetDepositNumber = '/data/actualNumber?type=DEPOSIT';
       var payments = [];
+      var wasSubscribed = false;
 
       function getData(url, callback) {
         var getFuture = $http({
@@ -53,10 +54,14 @@
         //   return;
         // }
 
+
+
         getData(urlForGetPayments, function(resp) {
           payments = resp;
           callback && callback(payments);
         });
+
+        if (wasSubscribed) return;
 
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
@@ -65,7 +70,9 @@
 
           console.log(newChange, "NEWHCANGE")
           if(newChange.action === 'PAYMENT_CREATED') {
-            payments.push(newChange.data);
+
+            console.log('payment created!!!!!')
+            payments.unshift(newChange.data);
 
             if (invoices) {
               var invoiceNumber = newChange.data.partialPaidInvoice;
@@ -86,7 +93,7 @@
                 }
               }
 
-              console.log(invoices[invoiceIndex], 'pizdec')
+
 
 
 
@@ -201,6 +208,8 @@
             console.log(payments[index], 'kurlik')
           }
         });
+
+        wasSubscribed = true;
       }
 
       function getDepositSlipsData(scope, callback) {
