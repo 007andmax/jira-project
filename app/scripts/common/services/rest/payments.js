@@ -109,16 +109,26 @@
                 return el.id == paymentId
               });
 
+              var invoices = $rootScope.allInvoices;
+
               var payment = Object.assign({}, payment);
 
-              console.log(payment, 'PAYMENT')
+              if (payment.refundMethod) {
 
-              if (invoices) {
+              }
+
+              console.log('we are here twice')
+
+
+
+              if (invoices && !payment.refundMethod) {
                 var invoice = invoices.find(function(el) {
                   return el.number === payment.partialPaidInvoice;
                 })
 
                 if (invoice) {
+                  console.log(Object.assign({}, invoice), 'INVOCE')
+                  console.log(invoice.paidSum, payment.partialPaidAmount, '!!!!!&&&&&&&')
                   invoice.paidSum -= payment.partialPaidAmount;
 
                   if (invoice.paidSum >= invoice.sum) {
