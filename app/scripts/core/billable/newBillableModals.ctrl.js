@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.newModalsCtlr',
-    ['$scope', '$uibModalInstance', 'editedPayment', 'PaymentsService', '$rootScope',
-      function ($scope, $uibModalInstance, editedPayment, PaymentsService, $rootScope) {
+    ['$scope', '$uibModalInstance', 'editedPayment', 'PaymentsService', '$rootScope', '$filter',
+      function ($scope, $uibModalInstance, editedPayment, PaymentsService, $rootScope, $filter) {
         $scope.close = $uibModalInstance.dismiss;
 
         $scope.paymentMethods = {
@@ -40,6 +40,8 @@
 
         $scope.note = editedPayment.note;
         $scope.reference = editedPayment.reference;
+        $scope.date = $filter('date')(new Date(editedPayment.createdAt), 'dd MMM yyyy');
+        $scope.initialDate = $scope.date;
 
         $scope.maxDate = new Date();
         $scope.invoiceNumbers = $scope.invoiceNumbers.reduce(function(acc, el) {
@@ -68,11 +70,12 @@
         })
 
         $scope.editPayment = function() {
+
           PaymentsService.editPayment({
             note: $scope.note,
             amount: $scope.paymentAmount.toFixed(2) || 0,
             paymentId: editedPayment.id,
-            date: +moment($scope.date).format('x'),
+            date: ($scope.date == $scope.initialDate) ? null : +moment($scope.date).format('x'),
             reference: $scope.reference,
             paymentMethod: $scope.editPaymentMethod
           }, function(res) {

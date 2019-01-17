@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivePaymentCtrl',
-    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout', '$rootScope',
-      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout, $rootScope) {
+    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout', '$rootScope', '$filter',
+      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout, $rootScope, $filter) {
 
         var invoiceList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.uploadedReceivable.list;
 
@@ -38,7 +38,7 @@
         }
 
         $scope.maxDate = new Date();
-        $scope.date = new Date();
+        $scope.date = $filter('date')(new Date(), 'dd MMM yyyy');
 
 
         console.log(Object.assign({}, $scope.invoiceToSent), "PAYMENT")
@@ -287,12 +287,18 @@
             return;
           }
 
+          var diff = moment($scope.date).diff(moment(new Date()), 'day');
+          if (diff === 0) {
+            $scope.date = new Date();
+          }
 
           var data = {
             date: moment($scope.date).format('x'),
             reference: $scope.reference,
 
           }
+
+
 
 
 
