@@ -38,6 +38,8 @@
         }
 
         $scope.maxDate = new Date();
+        $scope.date = new Date();
+
 
         console.log(Object.assign({}, $scope.invoiceToSent), "PAYMENT")
 
