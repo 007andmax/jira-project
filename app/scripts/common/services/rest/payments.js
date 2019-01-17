@@ -66,15 +66,13 @@
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
-          console.log('invoicesss')
 
-          console.log(newChange, "NEWHCANGE")
           if(newChange.action === 'PAYMENT_CREATED') {
-
-            console.log('payment created!!!!!')
+            invoices = $rootScope.allInvoices;
             payments.unshift(newChange.data);
 
             if (invoices) {
+
               var invoiceNumber = newChange.data.partialPaidInvoice;
               var sum = newChange.data.partialPaidAmount;
               var invoiceIndex = invoices.findIndex(function(el) {
@@ -82,6 +80,7 @@
               });
 
               if (invoiceIndex && invoices[invoiceIndex]) {
+
                 invoices[invoiceIndex].paidSum += sum;
 
                 if (invoices[invoiceIndex].paidSum >= invoices[invoiceIndex].sum) {

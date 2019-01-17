@@ -184,7 +184,7 @@
         // }
 
         $scope.$watch(function() {
-          return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
+          return $rootScope.allInvoices && $rootScope.allInvoices.length;
         }, function (resp) {
 
           if (resp) {
@@ -192,10 +192,11 @@
           } else {
             return;
           }
-          var invoicesData = $scope.receivableInvoicesData = resp;
+          var invoicesData = resp;
+          $rootScope.allInvoices = resp.list;
 
           $rootScope.receivableInvoicesData = resp;
-          globalSearch.count = $scope.receivableInvoicesData.list.length;
+          globalSearch.count = $rootScope.allInvoices.length;
 
           $scope.totalReceivables = 0;
           $scope.receivableCompanies = [];
