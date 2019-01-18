@@ -41,31 +41,31 @@
     <div class="form-group clearfix">
       <h5>Outstanding Invoices</h5>
       <ul class="qt-list invoice-list-heading">
-        <li class="row">
-          <div class="col-md-5">
+        <li class="row" style="padding-right: 7px;">
+          <div class="col-md-4">
             <label class="control checkbox pull-left">
               <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
               <span class="control-indicator"></span>
             </label>
             Invoice#
           </div>
-          <div class="col-md-4">Invoice date</div>
-          <div class="col-md-3 text-right">Amount</div>
+          <div class="col-md-4 text-center">Invoice date</div>
+          <div class="col-md-4 text-right">Amount / Balance</div>
         </li>
       </ul>
       <ul class="qt-list receive-payment-list"
           style="padding: 0;margin-bottom: 10px; overflow-y: scroll; overflow-x: hidden; max-height: 285px;">
         <li ng-repeat="invoice in receivePaymentInvoices"
             class="clearfix">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <label class="control checkbox pull-left">
               <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
               <span class="control-indicator"></span>
             </label>
             INV {{ invoice.number }}
           </div>
-          <div class="col-md-3">{{ invoice.date | date:'dd MMM yyyy' }}</div>
-          <div class="col-md-4">{{ invoice.sum | currency: '$': 2 }}/{{ (invoice.sum - invoice.paidSum) | currency: '$': 2 }}</div>
+          <div class="col-md-4 text-center">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+          <div class="col-md-4 text-right">{{ invoice.sum | currency: '$': 2 }} / {{ (invoice.sum - invoice.paidSum) | currency: '$': 2 }}</div>
         </li>
       </ul>
       <div class="col-md-6">
