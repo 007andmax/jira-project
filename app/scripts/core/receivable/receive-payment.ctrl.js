@@ -6,7 +6,7 @@
     ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService', '$timeout', '$rootScope', '$filter',
       function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService, $timeout, $rootScope, $filter) {
 
-        var invoiceList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.uploadedReceivable.list;
+        var invoiceList = $rootScope.allInvoices;
 
 
         $scope.invoiceToReceive = {
@@ -16,7 +16,7 @@
         };
         $scope.receivePaymentInvoices = [];
 
-        $scope.allInvoicesList = ($scope.receivableInvoicesData && $scope.receivableInvoicesData.list) || $rootScope.uploadedReceivable.list;
+        $scope.allInvoicesList = $rootScope.allInvoices;
         $scope.partialPaymentAmount = 0;
         if (!$scope.invoiceToSent) {
           $scope.invoiceToSent = { invoices: [] }
@@ -143,7 +143,7 @@
           }
 
           if (val && val >= ($scope.balance)) {
-            $scope.partialPaymentAmount = ($scope.balance);
+            $scope.partialPaymentAmount = ($scope.balance );
           }
         })
 
