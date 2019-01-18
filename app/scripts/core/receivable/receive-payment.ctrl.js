@@ -141,66 +141,12 @@
           if (val  && val >= $scope.receivePaymentSum) {
             $scope.partialPaymentAmount = $scope.receivePaymentSum;
           }
+
+          if (val && val >= ($scope.balance)) {
+            $scope.partialPaymentAmount = ($scope.balance);
+          }
         })
 
-        // $scope.$watch('isMultiple', function(val) {
-        //   console.log('is multiple, is multipleeee')
-        //   if (val === false) {
-        //     $scope.isSinglePayment = true;
-        //
-        //     $scope.$watch('invoiceCompany', function(val) {
-        //       if (val) {
-        //         $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
-        //           return el.company.id === val.id && !el.paidOn;
-        //         })
-        //
-        //         $scope.selectedInvoice = null;
-        //         $scope.partialPaymentAmount = null;
-        //       }
-        //     }, true);
-        //
-        //     $scope.$watch('selectedInvoice', function(val) {
-        //       if (val) {
-        //         $scope.invoiceDescription = "Invoice #" + val.number + ' Amount: ' + '$' + (val.sum).toFixed(2);
-        //       } else {
-        //         $scope.invoiceDescription = '';
-        //       }
-        //     }, true);
-        //
-        //     $scope.$watch('partialPaymentAmount', function(val) {
-        //       if (val && $scope.selectedInvoice && val >= $scope.selectedInvoice.sum) {
-        //         $scope.partialPaymentAmount = $scope.selectedInvoice.sum;
-        //       }
-        //     })
-        //
-        //
-        //
-        //     if ($scope.selectedInvoiceCount === 1) {
-        //       var invoiceNum = Object.keys($scope.invoiceToSent.invoices)[0];
-        //       var invoice = $scope.allInvoicesList.find(function(el) {
-        //         return el.number == invoiceNum;
-        //       })
-        //
-        //       $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
-        //
-        //       $timeout($scope.setInvoice.bind(this, invoice), 100)
-        //       // $scope.setInvoice(invoice);
-        //     }
-        //
-        //   } else if (val === true) {
-        //
-        //   }
-        // })
-
-
-        // if ($scope.selectedInvoiceCount <= 1) {
-        //
-        // } else {
-        //
-        //
-        //
-        //
-        // }
 
         $scope.paymentMethod = {
           CASH: 'Cash',
@@ -261,11 +207,14 @@
           $scope.countReceiveInvoice = counter;
           $scope.invoiceToReceive.chooseAll = ($scope.receivePaymentInvoices.length === counter);
           $scope.receivePaymentSum = 0;
+          $scope.balance = 0;
 
           for (var i = 0, len = $scope.receivePaymentInvoices.length; i < len; i++) {
             var invoice = $scope.receivePaymentInvoices[i];
             if (invoices[invoice.id]) {
               $scope.receivePaymentSum += invoice.sum;
+
+              $scope.balance += (invoice.sum - invoice.paidSum);
             }
           }
 
