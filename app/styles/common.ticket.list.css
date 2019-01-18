@@ -253,6 +253,21 @@
   margin-top: 3px;
 }
 
+.hidden-submenu {
+  display: none;
+}
+
+.dropdown-submenu:hover .hidden-submenu {
+  display: block;
+}
+
+.payment-info {
+  width: 400px;
+  padding: 10px;
+  background: white;
+  min-height: 50px;
+}
+
 @-moz-document url-prefix() {
   .ticket p {
     line-height: 19px;

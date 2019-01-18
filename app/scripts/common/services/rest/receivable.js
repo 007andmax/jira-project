@@ -73,7 +73,11 @@
           }
         }
 
-        $rootScope.allInvoices = data.list;
+        $rootScope.allInvoices = data.list.map(function(el) {
+          el.companyName = CompaniesService.getOneById(el.company.id).name;
+
+          return el;
+        });
 
         if (callback) {
           callback(data);

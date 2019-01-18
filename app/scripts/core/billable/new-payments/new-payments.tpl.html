@@ -202,7 +202,7 @@
                tooltip-popup-delay="2000">
             <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
           </div>
-          <ul class="dropdown-menu" role="menu" style="right: 0;">
+          <ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">
             <li ng-if="payment.partialPaidInvoice"><a ng-click="openModal('edit-payments', payment)">Edit payment</a>
             </li>
             <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>

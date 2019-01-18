@@ -309,7 +309,6 @@
 
         $scope.invoiceFilterChecker = function(invoice) {
           if( $scope.invoiceFilter && $scope.invoiceFilter !== '' && $scope.invoiceFilter !== ' ') {
-            console.log(invoice.number, invoice.companyName, invoice,'PIZDD')
             return (invoice.number.indexOf($scope.invoiceFilter) > -1 || invoice.companyName.indexOf($scope.invoiceFilter) > -1)
           } else {
             return true;

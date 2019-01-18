@@ -68,11 +68,23 @@
              tooltip-popup-delay="2000">
           <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
         </div>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu dropdown-menu-right" style="overflow-y: visible;" role="menu">
           <li><a ng-click="sentInvoice()">Resend</a></li>
           <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}"><span ng-if="!invoice.paidOn">Rollback</span> <span ng-if="invoice.paidOn">Refund Payment</span></a></li>
           <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
           <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
+
+          <li class="dropdown-submenu left-align">
+            <a tabindex="-1" class="hidden-submenu-opener" href="javascript:void(0)">
+              Payment history
+            </a>
+            <div class="dropdown-submenu-wrapper hidden-submenu">
+              <div class="payment-info">
+                
+
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
