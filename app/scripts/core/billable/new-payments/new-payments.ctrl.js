@@ -41,6 +41,28 @@
           }).join(' ');
         }
 
+        $scope.showInvoice = function(invoice, goBack) {
+
+          if (typeof invoice === 'string') {
+            invoice = $rootScope.allInvoices.find(function(el) {
+              return el.number === invoice;
+            })
+          }
+
+          console.log(invoice, 'INVOICE')
+          $scope.isInvoiceShown = goBack ? false : true;
+
+          if (goBack) {
+
+            setTimeout(function() {
+              window.scrollTo(0, 10);
+              window.scrollTo(0, 0);
+            }, 0)
+
+          }
+          $rootScope.invoiceToShow = invoice;
+        }
+
 
         $scope.dateFilterOptions = {
           'autoApply': true,
