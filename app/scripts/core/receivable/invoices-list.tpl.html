@@ -74,12 +74,12 @@
           <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
           <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
 
-          <li class="dropdown-submenu left-align">
+          <li class="dropdown-submenu left-align" style="z-index: 100000">
             <a tabindex="-1" class="hidden-submenu-opener" href="javascript:void(0)">
               Payment history
             </a>
             <div class="dropdown-submenu-wrapper hidden-submenu payment-info-submenu">
-              <div class="payment-info">
+              <div class="payment-info clearfix">
 
                 <div ng-repeat="payment in allPayments" class="col-md-12">
                   <div class="col-md-4">
@@ -92,30 +92,6 @@
                     ${{ (payment.partialPaidAmount || paymentSum).toFixed(2) }}
                   </div>
                 </div>
-
-                <!-- <div ng-if="invoice.partialPayments" ng-repeat="payment in invoice.partialPayments" class="col-md-12">
-                  <div class="col-md-4">
-                    {{ payment.createdAt }}
-                  </div>
-                  <div class="col-md-4">
-                    {{ parsePaymentMethod(payment.paymentMethod) }}
-                  </div>
-                  <div class="col-md-4">
-                    ${{ payment.partialPaidAmount.toFixed(2) }}
-                  </div>
-                </div>
-
-                <div ng-if="invoice.payment" class="col-md-12">
-                  <div class="col-md-4">
-                    {{ invoice.payment.createdAt }}
-                  </div>
-                  <div class="col-md-4">
-                    {{ parsePaymentMethod(invoice.payment.paymentMethod) }}
-                  </div>
-                  <div class="col-md-4">
-                    ${{ paymentSum.toFixed(2) }}
-                  </div>
-                </div> -->
 
                 <div class="col-md-12">
                   <div class="col-md-4">
