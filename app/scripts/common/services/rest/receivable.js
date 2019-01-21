@@ -73,6 +73,12 @@
           }
         }
 
+        $rootScope.allInvoices = data.list.map(function(el) {
+          el.companyName = CompaniesService.getOneById(el.company.id).name;
+
+          return el;
+        });
+
         if (callback) {
           callback(data);
         }
@@ -194,8 +200,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function receivePayment(paymentMethod, invoiceIds, isSendNotification, note, callback, date) {
-
+    function receivePayment(paymentMethod, invoiceIds, isSendNotification, note, callback, additionalData) {
       if (!paymentMethod) {
         throw 'paymentMethod is required!'
       }
@@ -208,16 +213,19 @@
         throw 'isSendNotification is required!';
       }
 
+      var data = {
+        paymentMethod: paymentMethod.toUpperCase(),
+        isSendNotification: isSendNotification,
+        invoiceIds: invoiceIds,
+        note: note
+      }
+
+      data = Object.assign(data, additionalData);
+
       var future = $http({
         url: '/receivable/receivePayment',
         method: 'POST',
-        data: {
-          paymentMethod: paymentMethod.toUpperCase(),
-          isSendNotification: isSendNotification,
-          invoiceIds: invoiceIds,
-          note: note,
-          date: date
-        }
+        data: data
       });
 
       Utils.handleCallback(future, callback);

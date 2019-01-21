@@ -761,15 +761,11 @@
             }
 
 
-            // console.log(form, 'EXPENSE EDIT')
+
 
             if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (el.item && typeof el.item.name === 'object') {
-
-                  // if (el.item && typeof el.item.name === 'object') {
-                  // console.log(el, "ELLLLLL")
-                  // console.log(el.item.name, "EL>item")
                   el.item = el.item.name;
                 }
 

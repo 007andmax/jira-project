@@ -23,6 +23,56 @@
           }
         }
 
+        $scope.allPayments = [];
+
+        if ($scope.invoice.payment) {
+          $scope.paymentSum = $scope.invoice.payment.totalSum;
+
+          $scope.allPayments.push($scope.invoice.payment);
+
+        }
+
+        if ($scope.invoice.payment && $scope.invoice.partialPayments) {
+          $scope.invoice.partialPayments.forEach(function(el) {
+            $scope.paymentSum -= el.partialPaidAmount;
+
+          })
+        }
+
+        if ($scope.invoice.partialPayments) {
+          $scope.invoice.partialPayments.forEach(function(el) {
+            $scope.allPayments.push(el);
+          })
+        }
+
+        if ($scope.invoice.partialPayments && !$scope.invoice.payment) {
+          $scope.allPaymentsSum = 0;
+          $scope.invoice.partialPayments.forEach(function(el) {
+            $scope.allPaymentsSum += el.partialPaidAmount;
+          })
+        }
+
+        $scope.parsePaymentMethod = function(method) {
+          return method.split('_').map(function(el) {
+            return el[0].toUpperCase() + el.slice(1).toLowerCase();
+          }).join(' ');
+        }
+
+        $scope.allPayments.sort(function(a, b) {
+          var a = new Date(a.createdAt);
+          var b = new Date(b.createdAt);
+
+          return b - a;
+        })
+
+
+
+        // var paymentInfo = document.querySelectorAll('.payment-info-submenu');
+        //
+        // paymentInfo.forEach(function(el) {
+        //   el.style.zIndex = 100000;
+        // })
+
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var dateOfinvoiceCreate = new Date($scope.invoice.date).getTime();

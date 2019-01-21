@@ -16,6 +16,7 @@
 
             element.attr('ng-disabled', boolValue);
             element.attr('disabled', boolValue);
+
             if (boolValue) {
               element.addClass("disabled")
             } else {

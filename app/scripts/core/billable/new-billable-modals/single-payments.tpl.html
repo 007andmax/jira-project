@@ -1,0 +1,139 @@
+<div class="create-note-modal" ng-form="paymentRecieveForm" ng-init="setIsMultiple(false)">
+  <div class="modal-header clearfix">
+    <a href="javascript:void(0)"
+       style="position: absolute;right: 30px;top: 30px;"
+       ng-click="close()"
+       data-dismiss="modal"
+       aria-label="Close">
+      <i class="icn-sm icn-remove-old"></i>
+    </a>
+    <h4 class="modal-title">Receive Single Payment</h4>
+  </div>
+  <div class="note-modal-content clearfix">
+    <p>Receive payments for the following</p>
+    <div class="form-group clearfix">
+      <div class="col-md-8 pr-10">
+        <label class="control-label">Company Name</label>
+        <div uib-dropdown style="position: relative;">
+          <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                 uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
+          <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+
+          <ul class="dropdown-menu">
+            <li ng-repeat="company in companies | orderBy:'name'"
+                ng-click="setCompany(company)">
+              <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4 pl-10">
+        <label class="control-label">Payment Date</label>
+        <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
+               qt-data-time-picker max-date="maxDate" ng-model="serviceExpense.date"
+               name="serviceData" ng-required="true" uib-tooltip="select date" style="opacity: 1;width: 93%;">
+        <div>
+          <i class="new-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Select Invoice</label>
+      <div uib-dropdown style="position: relative;">
+        <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+               uib-dropdown-toggle aria-expanded="true" ng-model="invoiceDescription">
+        <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+
+        <ul class="dropdown-menu">
+          <li ng-repeat="invoice in availableInvoiceCompanies"
+              ng-click="setInvoice(invoice)">
+            <a tabindex="-1" href="javascript:void(0)"> {{ "Invoice #" + invoice.number + ' Amount: ' + '$' +
+                                                        (invoice.sum).toFixed(2); }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <div class="col-md-8 clearfix">Total Payment Amount</div>
+      <div class="col-md-4 text-right clearfix">
+        <strong class="alyosha-strong">{{ "$" + (selectedInvoice.sum).toFixed(2) }}</strong>
+      </div>
+      <div class="col-md-8 clearfix pr-10" style="height: 40px;display: flex;align-items: center;">Amount</div>
+
+      <div class="col-md-4 text-right clearfix without-input-arrows pl-10" ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'amount')}">
+
+        <div ng-messages="paymentRecieveForm.amount.$error"
+             ng-class="{'hide': !isShowingErrors(paymentRecieveForm, 'amount')}">
+          <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+          <div class="control-label" ng-message="required">Amount is required.</div>
+
+        </div>
+
+        <input class="form-control" ng-required="true "name="amount" style="text-align: right;" type="number" ng-model="partialPaymentAmount" />
+
+      </div>
+      <div class="col-md-8 clearfix">Remaining invoice amount</div>
+      <div class="col-md-4 text-right clearfix">
+        <strong style="margin-right: 10px;font-weight: 500;">${{ (selectedInvoice.sum - partialPaymentAmount).toFixed(2) }}</strong>
+      </div>
+
+    </div>
+
+    <div class="form-group clearfix">
+      <div class="col-md-6 pr-10">
+        <label class="control-label">Payment Method</label>
+        <div uib-dropdown style="position: relative;">
+          <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                 uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
+          <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+
+          <ul class="dropdown-menu">
+            <li ng-repeat="(value, label) in paymentMethod"
+                ng-click="invoiceToReceive.method = value">
+              <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 pl-10">
+        <label class="control-label">Reference#</label>
+        <div>
+          <input class="form-control has-dropdown readonly-normal" style="cursor: text;" ng-model="reference" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="form-group note"
+         ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'note')}">
+
+      <label class="control-label" ng-class="{ 'hide': isShowingErrors(paymentRecieveForm, 'note')}">
+        Note
+      </label>
+
+      <div ng-messages="paymentRecieveForm.note.$error"
+           ng-class="{ 'hide': !isShowingErrors(paymentRecieveForm, 'note')}">
+        <label class="control-label" ng-message="maxlength">NOTE IS TOO LARGE</label>
+      </div>
+
+      <textarea placeholder="Write Note here" class="form-control" name="note" ng-model="note"
+                ng-maxlength="250"></textarea>
+    </div>
+    <div>
+      <label class="control checkbox pull-left" style="margin-top: 2px;width: auto;">
+        <input type="checkbox" ng-model="invoiceToReceive.isSendNotification">
+        <span class="control-indicator"></span>
+      </label>
+      <div class="checkbox-caption">Email Credit receipt</div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="padding: 0;">
+        <div class="btn btn-primary"
+             ng-click="receivePayment(paymentRecieveForm)">
+          Procces Payment
+        </div>
+        <div class="btn btn-default" ng-click="close()">
+          Cancel
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

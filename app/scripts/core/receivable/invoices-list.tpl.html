@@ -21,7 +21,7 @@
   <!--<div class="col-md-1" style="width: 3%;"></div>-->
   <!--</li>-->
   <li class="list-item"
-      ng-repeat="invoice in receivableInvoicesData.list  | orderBy: orderByForInvoices : orderInvoices.reverse  track by invoice.id"
+      ng-repeat="invoice in allInvoices  | orderBy: orderByForInvoices : orderInvoices.reverse  track by invoice.id"
       ng-controller="quicktech.core.receivable.invoiceCtrl"
       ng-show="filteringForInvoice(invoice)"
       on-finish-render="hideLoadingIndicator()">
@@ -49,8 +49,10 @@
       <bold>{{company.name}}</bold>
     </div>
     <div class="col-md-2">{{invoice.date | date:'dd MMM yyyy'}}</div>
-    <div class="col-md-2">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
-    <div class="col-md-1" style="width: 13.6%;">{{(invoice.totalSum || invoice.sum) | currency: '$': 2 }}</div>
+    <div class="col-md-1" style="width: 13.6%;">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
+    <div class="col-md-1">{{(invoice.totalSum || invoice.sum) | currency: '$': 2 }}</div>
+
+    <div class="col-md-1">{{((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency: '$': 2 }}</div>
     <div class="col-md-2">
       <p class="invoice-status status-danger" ng-if="invoice.isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}}
                                                                                            days</p>
@@ -66,11 +68,46 @@
              tooltip-popup-delay="2000">
           <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
         </div>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu dropdown-menu-right" style="overflow-y: visible" role="menu">
           <li><a ng-click="sentInvoice()">Resend</a></li>
           <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}"><span ng-if="!invoice.paidOn">Rollback</span> <span ng-if="invoice.paidOn">Refund Payment</span></a></li>
           <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
           <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
+
+          <li class="dropdown-submenu left-align" style="z-index: 100000">
+            <a tabindex="-1" class="hidden-submenu-opener" href="javascript:void(0)">
+              Payment history
+            </a>
+            <div class="dropdown-submenu-wrapper hidden-submenu payment-info-submenu">
+              <div class="payment-info clearfix">
+
+                <div ng-repeat="payment in allPayments" class="col-md-12">
+                  <div class="col-md-4">
+                    {{ payment.createdAt }}
+                  </div>
+                  <div class="col-md-4">
+                    {{ parsePaymentMethod(payment.paymentMethod) }}
+                  </div>
+                  <div class="col-md-4">
+                    ${{ (payment.partialPaidAmount || paymentSum).toFixed(2) }}
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="col-md-4">
+
+                  </div>
+                  <div class="col-md-4">
+                    Total payment:
+                  </div>
+                  <div class="col-md-4">
+                    ${{ (allPaymentsSum || invoice.payment.totalSum || invoice.sum).toFixed(2) }}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

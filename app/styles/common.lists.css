@@ -4472,6 +4472,7 @@ Devices tab
   padding-top: 5px;
 }
 
+.payment-status,
 .network-scan-status,
 .invoice-status {
   padding: 0 10px;
@@ -4527,6 +4528,7 @@ Devices tab
   opacity: 1;
 }
 
+.payment-status.paid,
 .status-success,
 .dashboard-network-scan-list .success-status,
 .invoices .success-status {
@@ -4543,6 +4545,7 @@ Devices tab
   display: inline-block;
 }
 
+.payment-status.refund,
 .status-danger,
 .dashboard-network-scan-list .error-status,
 .invoices .error-status {
@@ -4552,8 +4555,8 @@ Devices tab
 }
 
 .status-in-progress {
-  background-color: #D0EDFE;
-  color: #16A4FA;
+  background-color: #d0edfe;
+  color: #16a4fa;
   display: inline-block;
 }
 
@@ -4709,7 +4712,8 @@ Devices tab
 .billable-items-header .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
-.receive .btn-success {
+.receive .btn-success,
+.create-note-modal .btn-success {
   margin-bottom: 65px;
   position: relative;
   background-color: #2ec866;
@@ -4717,6 +4721,23 @@ Devices tab
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.create-note-modal .btn-primary {
+  background-color: #16a4fa;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Graphik-Medium', sans-serif;
+  width: 180px;
+  height: 40px;
+  padding: 4px;
+}
+
+.create-note-modal .btn-primary:hover,
+.create-note-modal .btn-primary:active,
+.create-note-modal .btn-primary:focus {
+  background-color: #138bd5;
 }
 
 .dashboard-network-scan .btn-success:hover,
@@ -4733,7 +4754,10 @@ Devices tab
 .invoices .invoices-header .invoices-header-filters .btn-success:focus,
 .receive .btn-success:hover,
 .receive .btn-success:active,
-.receive .btn-success:focus {
+.receive .btn-success:focus,
+.create-note-modal .btn-success:hover,
+.create-note-modal .btn-success:active,
+.create-note-modal .btn-success:focus {
   background-color: #189947;
 }
 
@@ -5035,13 +5059,9 @@ Devices tab
   }
 }
 
-/***/
 .receive-payment-list {
   overflow-y: auto;
-
   max-height: 350px;
-
-  border-top: 1px solid #e7ecf2;
 }
 
 .invoice-list-heading {
@@ -5084,12 +5104,13 @@ Devices tab
   }
 }
 
-.receive-payment-list > li + li {
-  border-top: 1px solid #e7ecf2;
+.invoice-list-heading > li,
+.receive-payment-list > li {
+  border-bottom: 1px solid #e7ecf2;
+  border-top: none !important;
 }
 
 .receive-payment-list .checkbox {
-  margin-top: 4px;
   margin-right: 10px;
 }
 
@@ -5935,6 +5956,7 @@ Devices tab
 
 .device-name-edit .btn-default,
 .receive .btn-default,
+.create-note-modal .btn-default,
 .service .btn-default {
   width: 80px;
   background-color: #edf2f6;
@@ -5948,6 +5970,9 @@ Devices tab
 .service .btn-default:hover,
 .service .btn-default:active,
 .service .btn-default:focus,
+.create-note-modal .btn-default:hover,
+.create-note-modal .btn-default:active,
+.create-note-modal .btn-default:focus,
 .receive .btn-default:hover,
 .receive .btn-default:active,
 .receive .btn-default:focus {
@@ -6139,8 +6164,8 @@ Devices tab
   background: url(../images/new-icons/devices-shutdown.png);
 }
 
-.company-devices .dropdown-menu li:last-child:before,
-.invoices .qt-invoices .dropdown-menu li:last-child:before {
+.company-devices .dropdown-menu li:nth-child(4):before,
+.invoices .qt-invoices .dropdown-menu li:nth-child(4):before {
   background: url(../images/new-icons/devices-remove.png);
 }
 

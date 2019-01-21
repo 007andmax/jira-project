@@ -50,7 +50,88 @@
 
           </div>
 
-          <button class="btn btn-success"
+
+          <button ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                  tooltip-append-to-body="true"
+                  class="save-invoice-button btn btn-success"
+                  modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                  mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                  modal-window-class="modal-receive-payment"
+                  tooltip-placement="bottom">
+
+
+                  Process payment
+          </button>
+
+          <!-- <div uib-dropdown class="save-invoice-button" custom-disabled="{{!!invoiceNumError}}" style="margin: 0;">
+            <button ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                    tooltip-append-to-body="true"
+                    ng-if="selectedInvoiceCount <= 1"
+                    class="btn btn-success"
+                    modal-window-button="/html/scripts/core/billable/new-billable-modals/single-payments.tpl.html"
+                    mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                    modal-window-class="modal-receive-payment"
+                    tooltip-placement="bottom">
+
+
+              Receive single payment
+
+
+              <i class="icn-sm pointer report-caret-icon-white"></i>
+
+              <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
+            </button>
+
+            <button ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                    tooltip-append-to-body="true"
+                    ng-if="selectedInvoiceCount > 1"
+                    class="btn btn-success disabled"
+                    tooltip-placement="bottom">
+
+
+              Receive single payment
+
+
+              <i class="icn-sm pointer report-caret-icon-white"></i>
+
+              <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()" style="pointer-events: all"></div>
+            </button>
+
+
+            <ul class="dropdown-menu disable-pointer">
+              <li class="create-invoice-dropdown"
+
+                  custom-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                  tooltip-append-to-body="true"
+                  ng-if="!areDiffCompaniesChecked"
+                  modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                  mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                  modal-window-class="modal-receive-payment"
+                  tooltip-placement="bottom">
+                  Receive multiple payments
+
+              </li>
+
+              <li class="create-invoice-dropdown disabled"
+                  tooltip-append-to-body="true"
+                  ng-if="areDiffCompaniesChecked"
+                  modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                  mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                  modal-window-class="modal-receive-payment"
+                  tooltip-placement="bottom">
+                  Receive multiple payments
+
+              </li>
+
+              <li class="create-invoice-dropdown"
+                    ng-click="resendSelectedInvoices()"
+                    ng-show="selectedInvoiceCount > 0 ">
+                Resend invoices
+              </li>
+            </ul>
+          </div> -->
+
+          <!-- <button class="btn btn-success"
                   custom-disabled="{{ !selectedInvoiceCount || !selectableCompanyId}}"
                   modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
                   modal-window-class="modal-receive-payment"
@@ -63,7 +144,7 @@
                   ng-click="resendSelectedInvoices()"
                   ng-show="selectedInvoiceCount > 0 ">
             Resend invoices
-          </button>
+          </button> -->
 
 
 
@@ -81,8 +162,9 @@
           </div>
           <div class="col-md-3 pointer w-22" ng-click="setOrderForInvoices('company')">Company</div>
           <div class="col-md-2 pointer" ng-click="setOrderForInvoices('date')">Invoice date</div>
-          <div class="col-md-2 pointer" ng-click="setOrderForInvoices('readedAt')">Read On</div>
-          <div class="col-md-1 pointer" style="width: 13.6%;" ng-click="setOrderForInvoices('sum')">Amount</div>
+          <div class="col-md-1 pointer" style="width: 13.6%;" ng-click="setOrderForInvoices('readedAt')">Read On</div>
+          <div class="col-md-1 pointer" ng-click="setOrderForInvoices('sum')">Amount</div>
+          <div class="col-md-1 pointer" ng-click="setOrderForInvoices('balance')">Balance</div>
           <div class="col-md-2 pointer" ng-click="setOrderForInvoices('dueDate')">Due Date</div>
           <div class="col-md-1" style="width: 3%;"></div>
         </li>

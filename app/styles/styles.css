@@ -1044,7 +1044,8 @@ hr {
 .billable-items .billable-items-header .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
-.receive .btn-success {
+.receive .btn-success,
+.create-note-modal .btn-success {
   height: 40px;
   max-width: 150px !important;
   width: 100% !important;
@@ -1166,7 +1167,7 @@ hr {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 63%;
+  max-width: 68%;
   width: 100%;
 }
 
@@ -1183,11 +1184,15 @@ hr {
 }
 
 .invoices .invoices-header .invoices-header-filters > div {
-  /*max-width: 220px;*/
+  max-width: 220px;
   width: 100%;
   margin-right: 10px;
   position: relative;
   margin-left: 10px;
+}
+
+.invoices .invoices-header .invoices-header-filters > div:last-child {
+  width: auto;
 }
 
 .invoices .invoices-header .invoices-header-filters > div i {
@@ -10261,7 +10266,8 @@ button.close {
   
 }
 
-.receive .btn-success {
+.receive .btn-success,
+.create-note-modal .btn-success {
   max-width: 175px !important;
   width: 100%;
   display: inline-block;
@@ -10275,14 +10281,31 @@ button.close {
   display: none;
 }
 
-.receive .receive-payment-list .col-md-3 {
+.create-note-modal h5 {
+  margin: 10px 0 0;
+  float: left;
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca5b6;
+  text-transform: uppercase;
+}
+
+.receive .receive-payment-list .col-md-3,
+.create-note-modal .receive-payment-list .col-md-3 {
   text-align: right;
 }
 
-.receive .receive-payment-list > li {
+.receive .receive-payment-list > li,
+.create-note-modal .receive-payment-list > li {
   cursor: default;
 }
 
+.create-note-modal .receive-payment-list {
+  overflow-y: hidden;
+}
+
+.create-note-modal .btn-default,
 .receive .btn-default {
   max-width: 100px;
   width: 100%;
@@ -10292,10 +10315,6 @@ button.close {
   font-size: 14px;
   font-family: "Graphik Medium", sans-serif;
   padding: 4px;
-}
-
-.modal-header {
-  border-bottom: 1px solid #edf2f6 !important;
 }
 
 .modal-header .close {
@@ -10724,7 +10743,7 @@ button.close {
 
 /****/
 .modal-receive-payment > .modal-dialog {
-  width: 530px;
+  width: 550px;
   height: 785px;
   top: 50%;
   left: 50%;
@@ -10732,27 +10751,40 @@ button.close {
   transform: translate3d(-50%, -50%, 0) !important;
 }
 
-.receive .invoices-header .readonly-normal {
+.receive .invoices-header .readonly-normal,
+.create-note-modal .readonly-normal {
   border: 1px solid #c4cbd5;
   height: 40px !important;
   background-color: #fff !important;
   margin-bottom: 10px;
 }
 
-.receive .qt-list > li {
+.receive .qt-list > li,
+.create-note-modal .qt-list > li {
   padding: 20px 0;
 }
 
-.receive .invoice-list-heading {
+.create-note-modal .qt-list > li:hover::before,
+.create-note-modal .qt-list > li:hover::after {
+  display: none;
+}
+
+.receive .invoice-list-heading,
+.create-note-modal .invoice-list-heading {
   text-transform: uppercase;
   font-size: 11px;
   font-family: "Graphik Medium", sans-serif;
 }
 
-.receive .invoices-header .control-label {
+.receive .invoices-header .control-label,
+.create-note-modal .note-modal-content .control-label {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.create-note-modal .qt-list label {
+  width: auto;
 }
 
 @-moz-document url-prefix() {
@@ -10774,40 +10806,47 @@ button.close {
   margin: 0;
 }
 
-.modal-receive-payment .invoice-list-heading {
+.modal-receive-payment .invoice-list-heading,
+.create-note-modal .invoice-list-heading {
   padding: 0;
 }
 
-.modal-receive-payment .total-amount {
+.modal-receive-payment .total-amount,
+.create-note-modal .total-amount {
   display: flex;
   margin-top: 20px;
   color: #4f5f79;
   margin-bottom: 10px;
 }
 
-.modal-receive-payment .total-amount span {
+.modal-receive-payment .total-amount span,
+.create-note-modal .total-amount span {
   font-size: 11px;
   margin-right: 15px;
   font-family: "Graphik Medium", sans-serif;
 }
 
-.modal-receive-payment .total-amount strong {
+.modal-receive-payment .total-amount strong,
+.create-note-modal .total-amount strong {
   background-color: #edf2f6;
   padding: 15px 10px;
   border-radius: 3px;
   font-weight: 500;
 }
 
+.create-note-modal .note,
 .modal-receive-payment .note {
   margin-bottom: 25px;
 }
 
+.create-note-modal .note label,
 .modal-receive-payment .note label {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 10px;
 }
 
+.create-note-modal .note textarea,
 .modal-receive-payment .note textarea {
   background-color: #fff;
   border-radius: 3px;
@@ -10816,6 +10855,7 @@ button.close {
   min-height: 90px;
 }
 
+.create-note-modal .checkbox-caption,
 .modal-receive-payment .checkbox-caption {
   font-size: 13px;
   margin-left: 5px;
@@ -11796,6 +11836,146 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   top: 106px;
 }
 
+.create-note-modal {
+  padding: 0;
+  width: 100%;
+  color: #364656;
+  font-size: 13px;
+}
+
+.create-note-modal .modal-header {
+  background: #e7f5fe;
+  padding: 30px 40px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.create-note-modal .modal-header h4 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #364656;
+  padding: 0;
+}
+
+.create-note-modal .note-modal-content {
+  padding: 25px 40px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.create-note-modal .note-modal-content .report-calendar {
+  display: block;
+  right: 10px;
+  position: absolute;
+  top: 40px !important;
+}
+
+.create-note-modal span {
+  font-size: 13px;
+}
+
+.create-note-modal strong {
+  color: #4f5f79;
+  font-size: 13px;
+}
+
+.create-note-modal .col-md-4,
+.create-note-modal .col-md-8,
+.create-note-modal .col-md-6 {
+  margin-bottom: 10px;
+}
+
+.create-note-modal .btn {
+  font-weight: 500 !important;
+}
+
+.create-note-modal input[type=number]::-webkit-inner-spin-button,
+.create-note-modal input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.create-note-modal .qt-list .col-md-4 {
+  margin: 0;
+}
+
+.create-note-modal .qt-list.invoice-list-heading > li {
+  padding: 8px 0;
+}
+
+.create-note-modal .qt-list.receive-payment-list > li {
+  padding: 16px 0;
+}
+
+.alyosha-strong {
+  padding: 10px;
+  background: #edf2f6;
+  font-family: 'Graphik Medium', sans-serif;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.create-note-modal p {
+  font-size: 13px;
+  color: #626b7f;
+  padding: 0 0 15px 0;
+}
+
+.create-note-modal input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #c4cbd5;
+  height: 40px !important;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.create-note-modal label input {
+  margin-top: 15px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.create-note-modal label {
+  font-size: 13px;
+  width: 100%;
+  font-family: "Graphik Medium", sans-serif;
+  color: #404b5f;
+}
+
+.create-note-modal .modal-header [class*="col-md-"] {
+  padding: 0;
+}
+
+.create-note-modal .modal-header .col-md-4 {
+  display: flex;
+}
+
+.create-note-modal .modal-header .col-md-8 {
+  margin-top: 8px;
+}
+
+.create-note-modal .modal-header .col-md-4 .absolute-stick-datepicker {
+  position: static;
+  opacity: 1;
+  width: 100%;
+  background: transparent;
+  border: 1px solid #c4cbd5;
+  height: 40px !important;
+  padding: 11px 35px 11px 11px;
+}
+
+.create-note-modal .new-calendar {
+  position: absolute;
+  display: block;
+  right: 14px;
+  top: 40px;
+}
+
+.create-note-modal [class*="col-md-"] {
+  padding: 0;
+}
+
 @media (min-width: 2048px) {
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 512px);
@@ -12044,6 +12224,14 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   top: 77px;
   z-index: 1030;
   width: calc(100% - 316px);
+}
+
+.payments .change-view-actions {
+  padding: 13px 27px;
+}
+
+.payments .valera .dropdown-menu > li > a {
+  padding: 5px 20px;
 }
 
 .left-panel-closed .change-view-actions {

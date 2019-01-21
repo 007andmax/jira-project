@@ -184,7 +184,7 @@
         // }
 
         $scope.$watch(function() {
-          return $rootScope.uploadedReceivable && $rootScope.uploadedReceivable.list.length;
+          return $rootScope.allInvoices && $rootScope.allInvoices.length;
         }, function (resp) {
 
           if (resp) {
@@ -192,8 +192,11 @@
           } else {
             return;
           }
-          var invoicesData = $scope.receivableInvoicesData = resp;
-          globalSearch.count = $scope.receivableInvoicesData.list.length;
+          var invoicesData = resp;
+          $rootScope.allInvoices = resp.list;
+
+          $rootScope.receivableInvoicesData = resp;
+          globalSearch.count = $rootScope.allInvoices.length;
 
           $scope.totalReceivables = 0;
           $scope.receivableCompanies = [];
@@ -351,6 +354,48 @@
             globalSearch.count = filteredInvoices.length;
           }
         });
+
+
+        $scope.$watch(function() {
+          return $scope.invoiceToSent && $scope.invoiceToSent.invoices;
+        }, function(val) {
+          $scope.checkInvoicesCompany()
+        }, true)
+
+        $scope.checkInvoicesCompany = function() {
+
+          if (!$scope.invoiceToSent) return;
+
+          var invoicesNums = Object.keys($scope.invoiceToSent.invoices).reduce(function(acc, el) {
+            if ($scope.invoiceToSent.invoices[el]) {
+              acc.push(el);
+            }
+
+            return acc;
+          }, [])
+
+          var invoicesCompanies = invoicesNums.reduce(function(acc, el) {
+            var companyId = $scope.receivableInvoicesData.list.find(function(invoice) {
+              return invoice.number === el;
+            }).company.id;
+
+            if (!~acc.indexOf(companyId)) {
+              acc.push(companyId);
+            }
+
+            return acc;
+          }, []);
+
+
+
+          $scope.areDiffCompaniesChecked = invoicesCompanies.length > 1;
+
+
+
+          return invoicesCompanies.length > 1;
+
+
+        }
 
 
         $scope.setHighlightInvoiceId = function (invoiceId) {
