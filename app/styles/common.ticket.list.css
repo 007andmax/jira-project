@@ -261,7 +261,13 @@
   display: block;
 }
 
+.payment-info .col-md-12 {
+  margin: 10px 0;
+}
+
+
 .payment-info {
+
   width: 400px;
   padding: 10px;
   background: white;

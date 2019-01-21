@@ -23,6 +23,34 @@
           }
         }
 
+        if ($scope.invoice.payment) {
+          $scope.paymentSum = $scope.invoice.payment.totalSum;
+
+        }
+
+
+
+
+        if ($scope.invoice.payment && $scope.invoice.partialPayments) {
+
+          $scope.invoice.partialPayments.forEach(function(el) {
+            console.log(el.partialPaidAmount, $scope.invoice.payment.totalSum, 'ASDSDDS')
+            $scope.paymentSum -= el.partialPaidAmount;
+          })
+        }
+
+        $scope.parsePaymentMethod = function(method) {
+          return method.split('_').map(function(el) {
+            return el[0].toUpperCase() + el.slice(1).toLowerCase();
+          }).join(' ');
+        }
+
+        // var paymentInfo = document.querySelectorAll('.payment-info-submenu');
+        //
+        // paymentInfo.forEach(function(el) {
+        //   el.style.zIndex = 100000;
+        // })
+
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
         var dateOfinvoiceCreate = new Date($scope.invoice.date).getTime();
