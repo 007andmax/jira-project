@@ -23,8 +23,12 @@
           }
         }
 
+        $scope.allPayments = [];
+
         if ($scope.invoice.payment) {
           $scope.paymentSum = $scope.invoice.payment.totalSum;
+
+          $scope.allPayments.push($scope.invoice.payment);
 
         }
 
@@ -36,6 +40,7 @@
           $scope.invoice.partialPayments.forEach(function(el) {
             console.log(el.partialPaidAmount, $scope.invoice.payment.totalSum, 'ASDSDDS')
             $scope.paymentSum -= el.partialPaidAmount;
+            $scope.allPayments.push(el);
           })
         }
 
@@ -44,6 +49,15 @@
             return el[0].toUpperCase() + el.slice(1).toLowerCase();
           }).join(' ');
         }
+
+        $scope.allPayments.sort(function(a, b) {
+          var a = new Date(a.createdAt);
+          var b = new Date(b.createdAt);
+
+          return b - a;
+        })
+
+
 
         // var paymentInfo = document.querySelectorAll('.payment-info-submenu');
         //

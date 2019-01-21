@@ -80,7 +80,20 @@
             </a>
             <div class="dropdown-submenu-wrapper hidden-submenu payment-info-submenu">
               <div class="payment-info">
-                <div ng-if="invoice.partialPayments" ng-repeat="payment in invoice.partialPayments" class="col-md-12">
+
+                <div ng-repeat="payment in allPayments" class="col-md-12">
+                  <div class="col-md-4">
+                    {{ payment.createdAt }}
+                  </div>
+                  <div class="col-md-4">
+                    {{ parsePaymentMethod(payment.paymentMethod) }}
+                  </div>
+                  <div class="col-md-4">
+                    ${{ (payment.partialPaidAmount || paymentSum).toFixed(2) }}
+                  </div>
+                </div>
+
+                <!-- <div ng-if="invoice.partialPayments" ng-repeat="payment in invoice.partialPayments" class="col-md-12">
                   <div class="col-md-4">
                     {{ payment.createdAt }}
                   </div>
@@ -101,6 +114,18 @@
                   </div>
                   <div class="col-md-4">
                     ${{ paymentSum.toFixed(2) }}
+                  </div>
+                </div> -->
+
+                <div class="col-md-12">
+                  <div class="col-md-4">
+
+                  </div>
+                  <div class="col-md-4">
+                    Total payment:
+                  </div>
+                  <div class="col-md-4">
+                    ${{ invoice.payment.totalSum.toFixed(2) }}
                   </div>
                 </div>
 
