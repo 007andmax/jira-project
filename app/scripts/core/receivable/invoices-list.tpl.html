@@ -101,7 +101,7 @@
                     Total payment:
                   </div>
                   <div class="col-md-4">
-                    ${{ invoice.payment.totalSum.toFixed(2) }}
+                    ${{ (allPaymentsSum || invoice.payment.totalSum || invoice.sum).toFixed(2) }}
                   </div>
                 </div>
 

@@ -32,15 +32,23 @@
 
         }
 
-
-
-
         if ($scope.invoice.payment && $scope.invoice.partialPayments) {
-
           $scope.invoice.partialPayments.forEach(function(el) {
-            console.log(el.partialPaidAmount, $scope.invoice.payment.totalSum, 'ASDSDDS')
             $scope.paymentSum -= el.partialPaidAmount;
+
+          })
+        }
+
+        if ($scope.invoice.partialPayments) {
+          $scope.invoice.partialPayments.forEach(function(el) {
             $scope.allPayments.push(el);
+          })
+        }
+
+        if ($scope.invoice.partialPayments && !$scope.invoice.payment) {
+          $scope.allPaymentsSum = 0;
+          $scope.invoice.partialPayments.forEach(function(el) {
+            $scope.allPaymentsSum += el.partialPaidAmount;
           })
         }
 
