@@ -163,7 +163,6 @@
             }
 
 
-            console.log(newChange.action, "NEWCHANGEEEE")
           });
 
           if (callback) {

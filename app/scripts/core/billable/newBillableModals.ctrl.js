@@ -66,7 +66,6 @@
         $scope.paymentAmount = editedPayment.partialPaidAmount || $scope.invoiceSum;
 
         $scope.$watch('paymentAmount', function(val) {
-          console.log(val, '!!')
         })
 
         $scope.editPayment = function() {
@@ -90,7 +89,6 @@
             refundMethod: $scope.paymentMethod,
             sendEmailNotification: $scope.isSendNotification
           }, function(res) {
-            console.log(res, "RES")
             $scope.close()
           })
         }

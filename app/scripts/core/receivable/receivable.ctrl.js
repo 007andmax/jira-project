@@ -390,7 +390,6 @@
 
           $scope.areDiffCompaniesChecked = invoicesCompanies.length > 1;
 
-          console.log($scope.areDiffCompaniesChecked, 'ss')
 
 
           return invoicesCompanies.length > 1;

@@ -147,7 +147,6 @@
       }
 
 
-      console.log(url, fileName, 'double download is here??')
 
       //If in Chrome or Safari - download via virtual link click
       if (isChrome || isFirefox) {

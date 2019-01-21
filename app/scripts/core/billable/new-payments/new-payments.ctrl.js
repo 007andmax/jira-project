@@ -17,8 +17,6 @@
                 PaymentsService) {
         $scope.openModal = function(modalType, payment) {
           var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
-          console.log("openModal")
-          console.log(template, 'template')
 
           $scope.editedPayment = payment;
 
@@ -72,7 +70,6 @@
 
 
         $scope.$watch('dateFilter', function(val) {
-          console.log(moment(val.startDate).format('ll'))
 
           filterPayments();
         }, true);
@@ -112,7 +109,6 @@
 
         $scope.deletePayment = function(id) {
           PaymentsService.deletePayment(id, function(res) {
-            console.log(res, 'ress')
           })
         }
 
@@ -153,7 +149,6 @@
 
         PaymentsService.getPaymentsData($scope, function(res) {
 
-          console.log(res, 'RES')
           $scope.payments = res;
           $scope.filteredPayments = res;
 

@@ -49,7 +49,6 @@
         })
 
         $scope.deleteTicket = function(ticket) {
-          console.log(ticket)
           TicketsService.deleteForever(ticket.id, function(res) {
 
           })

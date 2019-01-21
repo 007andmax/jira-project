@@ -32,7 +32,6 @@
       }, function(val) {
         if (val && !isRequestSent) {
           isRequestSent = true;
-          console.log($rootScope.receivableInvoicesData.list, "IMHERE")
           getPaymentsData($rootScope);
         }
       })
@@ -116,7 +115,6 @@
 
               }
 
-              console.log('we are here twice')
 
 
 
@@ -126,8 +124,6 @@
                 })
 
                 if (invoice) {
-                  console.log(Object.assign({}, invoice), 'INVOCE')
-                  console.log(invoice.paidSum, payment.partialPaidAmount, '!!!!!&&&&&&&')
                   invoice.paidSum -= payment.partialPaidAmount;
 
                   if (invoice.paidSum >= invoice.sum) {
@@ -141,7 +137,6 @@
 
 
 
-                console.log(payment, invoice, 'GGGG')
               }
 
 
@@ -186,7 +181,6 @@
             var invoices = $rootScope.allInvoices;
 
 
-            console.log('invoices', invoices, 'INVOICESSS')
             var prevPayment = payments[index];
             var difference = changed.partialPaidAmount - prevPayment.partialPaidAmount;
             var invoiceNum = prevPayment.partialPaidInvoice;
@@ -214,7 +208,6 @@
               payments[index][key] = changed[key];
             })
 
-            console.log(payments[index], 'kurlik')
           }
         });
 
@@ -260,7 +253,6 @@
       function editPayment(data, callback) {
         $http.put('/payments/edit', data)
           .then(function(res) {
-            console.log(res);
 
             if (callback) callback(res);
           })
@@ -270,14 +262,12 @@
         $http.put('/payments/delete?paymentId=' + id)
           .then(function(res) {
             if (callback) callback(res)
-            console.log(res)
           })
       }
 
       function refundPayment(data, callback) {
         $http.put('/payments/refund', data)
           .then(function(res) {
-            // console.log('heres')
             if (callback) callback(res);
           })
       }

@@ -41,11 +41,9 @@
         $scope.date = $filter('date')(new Date(), 'dd MMM yyyy');
 
 
-        console.log(Object.assign({}, $scope.invoiceToSent), "PAYMENT")
 
         var isNumberKey = $rootScope.isNumberKey
 
-        console.log($scope.isMultiple, 'SSSS')
 
 
         $scope.setIsMultiple = function(val) {
@@ -101,7 +99,6 @@
             }
 
 
-            console.log($scope.invoiceToReceive.invoices, 'ddd')
           }
         }, true);
 
@@ -160,7 +157,6 @@
           $uibModalInstance.dismiss('cancel');
         };
 
-        console.log($scope.invoiceToSent, 'sssss!!!!')
 
         if ($scope.mode === 'list') {
           for (var i = 0; i < invoiceList.length; i++) {
@@ -171,7 +167,6 @@
         } else {
           for (var companyId in $scope.invoiceToSent) {
             var invoices = $scope.invoiceToSent[companyId].invoices || {};
-            console.log(invoices, 'INVOICES', invoiceList, 'sfsdsfsfsfsfsfssdfsfs')
             for (var i = 0; i < invoiceList.length; i++) {
               if (invoices[invoiceList[i].number]) {
                 $scope.receivePaymentInvoices.push(invoiceList[i]);

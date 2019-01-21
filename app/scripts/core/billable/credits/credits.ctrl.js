@@ -17,8 +17,6 @@
 
         $scope.openModal = function(modalType) {
           var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
-          console.log("openModal")
-          console.log(template, 'template')
           var modalInstance = $uibModal.open({
             templateUrl: template,
             animation: true,
