@@ -92,9 +92,10 @@
         <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
 
-      <div ng-show="countCheckedInvoices() === 1"class="col-md-8 pr-10">Remaining balance</div>
-      <div ng-show="countCheckedInvoices() === 1" class="col-md-4 text-right pl-10">
+      <div class="col-md-8 pr-10">Remaining balance</div>
+      <div class="col-md-4 text-right pl-10">
         <strong ng-show="countCheckedInvoices() === 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ balance - partialPaymentAmount | currency: '$': 2 }}</strong>
+        <strong ng-show="countCheckedInvoices() !== 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">$0.00</strong>
       </div>
 
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>

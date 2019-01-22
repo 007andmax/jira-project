@@ -75,76 +75,76 @@
             <span class="control-indicator"></span>
           </label>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('name')">
+        <div class="col-xs-1" ng-click="setOrderByPayments('number')">
 
               <span class="sort-span">
                 Invoice number
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'number'}"></i>
               </span>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('phone')">
+        <div class="col-xs-1" ng-click="setOrderByPayments('date')">
               <span class="sort-span">
               Date
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'phone'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'date'}"></i>
               </span>
         </div>
-        <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
+        <div class="col-xs-2" ng-click="setOrderByPayments('name')">
               <span class="sort-span">
                 Company name
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'name'}"></i>
               </span>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('contact')">
+        <div class="col-xs-1" ng-click="setOrderByPayments('paymentMethod')">
               <span class="sort-span">
                 Method
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'paymentMethod'}"></i>
               </span>
         </div>
-        <div class="col-xs-2" ng-click="setOrderByCompanies('tickets')">
+        <div class="col-xs-2" ng-click="setOrderByPayments('reference')">
               <span class="sort-span">
                 Reference
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'reference'}"></i>
               </span>
         </div>
-        <div class="col-xs-2" ng-click="setOrderByCompanies('devices')">
+        <div class="col-xs-2" ng-click="setOrderByPayments('note')">
               <span class="sort-span">
                 Note
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'note'}"></i>
               </span>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
+        <div class="col-xs-1" ng-click="setOrderByPayments('amount')">
               <span class="sort-span">
                 Amount
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'amount'}"></i>
               </span>
         </div>
 
-        <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
+        <div class="col-xs-1" ng-click="setOrderByPayments('status')">
               <span class="sort-span">
                 Status
                 <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'status'}"></i>
               </span>
         </div>
 
-        <!-- <div class="col-xs-1" style="text-align: center" ng-click="setOrderByCompanies('users')">
+        <!-- <div class="col-xs-1" style="text-align: center" ng-click="setOrderByPayments('users')">
           <span class="sort-span">
             Actions
             <i class="icn-sm sort-icon icn-sort"
-               ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
+               ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'users'}"></i>
           </span>
         </div> -->
       </li>
 
       <li class="list-company-row"
-          ng-repeat="payment in filteredPayments"
+          ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse"
           ng-controller="quicktech.core.billable.newPaymentCtrl">
 
         <div class="col-xs-1" style="width: 3%">
@@ -156,8 +156,8 @@
         </div>
         <div class="col-xs-1">
 
-          <div ng-click="showInvoice(payment.partialPaidInvoice)">{{ payment.partialPaidInvoice }}</div>
-          <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)">{{ invoiceNumber }}</div>
+          <div ng-click="showInvoice(payment.partialPaidInvoice)" tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</div>
+          <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)" tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true">{{ invoiceNumber }}</div>
         </div>
         <div class="col-xs-1">
           {{ payment.createdAt }}
