@@ -54,7 +54,8 @@
         </li>
       </ul>
       <ul class="qt-list receive-payment-list"
-          style="padding: 0;margin-bottom: 10px; overflow-y: scroll; overflow-x: hidden; max-height: 285px;">
+          style="padding: 0;margin-bottom: 10px; overflow-x: hidden; max-height: 285px;"
+          ng-style="{ 'overflow-y': receivePaymentInvoices.length <= 5 ? 'hidden' : 'scroll' }">
         <li ng-repeat="invoice in receivePaymentInvoices"
             class="clearfix">
           <div class="col-md-4">
