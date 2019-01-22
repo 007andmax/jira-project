@@ -23,7 +23,6 @@
 
 
       function keypressHandle(evt) {
-        console.log(evt, 'evt')
         if (evt.keyCode === 13) {
           $scope.addEmail($scope.newEmail);
           $scope.newEmail = null;
@@ -61,7 +60,6 @@
 
       $scope.setDropdownOpened = function (open) {
 
-        // console.log('DSADADASDAS')
         if (!open) {
           $scope.dropdownOpened = false;
         } else {
@@ -69,19 +67,25 @@
         }
       };
 
+      $scope.$watch('plainHTML', function(val) {
+
+      })
+
       $scope.sendEmail = function() {
-        var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value')
+        var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value');
+        var content = plainText || $scope.plainHTML;
+        var isCustomHTML = ($scope.tab === 'html' ? true : false)
         var data = {
           recipients: $scope.emails,
           attachments: $scope.attachments.map(function(el) { return el.id }),
-          content: plainText || $scope.plainHTML,
+          content: content,
           subject: $scope.subject,
-          customHTML: $scope.tab === 'html'
+          customHTML: isCustomHTML
         }
 
 
-        CompaniesService.sendEmail(data, function(res) {
-          console.log(res)
+        CompaniesService.sendEmail(data, function() {
+          $scope.close()
         })
       }
 

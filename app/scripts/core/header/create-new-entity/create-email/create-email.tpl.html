@@ -29,7 +29,7 @@
             <input type="text" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}" ng-model="newEmail"
                    placeholder="" set-focus-on-var-change="focusInput">
             <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
-              <li ng-repeat="email in filteredUsersEmails track by $index"
+              <li ng-repeat="email in filteredUsersEmails | orderBy:'toString()' track by $index"
                   ng-click="addEmail(email)">
                 <a style="padding: 5px 20px" class="autocomplete-item"><span class="tag-name tag-span">{{email}}</span></a>
               </li>
@@ -44,7 +44,7 @@
     </div>
     <div class="col-md-12">
 
-      <div ng-if="tab == 'plain'" id="editors" text-editor te-initial-value="{{plainText}}" ng-model="plainText"
+      <div ng-show="tab == 'plain'" id="editors" text-editor te-initial-value="{{plainText}}" ng-model="plainText"
            class="email-text-block"
            name="note" te-text-maxlength="5000" te-html-maxlength="50000">
 
@@ -141,98 +141,14 @@
 
       </div>
 
+      <textarea ng-show="tab == 'html'" ng-model="plainHTML" style="width: 100%" class="email-text-block" placeholder="Put here your HTML">
 
-      <!-- <div class="email-text-block">
-        <textarea
-          placeholder="This is a Boxed Text block. Use a formatting to draw attention to this content."></textarea>
-        <div class="wysiwyg-controls-wrapper">
-          <div class="select-font" uib-dropdown>
-            <input type="text" uib-dropdown-toggle
-                   readonly placeholder="Font">
-            <i class="icn-sm report-caret-icon"></i>
 
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a>
-                  Times New Roman
-                </a>
-              </li>
-              <li>
-                <a>
-                  Arial
-                </a>
-              </li>
-              <li>
-                <a>
-                  Roboto
-                </a>
-              </li>
-            </ul>
-          </div>
+      </textarea>
 
-          <div class="control-wrappers" data-role="editor-toolbar">
-
-            <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="ticketAttachments">
-              <a href="javascript:void(0)" class="pull-left hit-area ha-16-18 has-tooltip"
-                 tooltip-append-to-body="true" uib-tooltip="Attach Files"
-                 tooltip-placement="top">
-                <i class="icn-16 icn-text-attachment"></i>
-              </a>
-              <input type="file" style="display:none" multiple="" />
-            </div>
-
-            <a class="has-tooltip pointer"
-               data-edit="bold"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
-              <i class="icn-16 wysiwyg-bold"></i>
-            </a>
-            <a class="has-tooltip pointer"
-               data-edit="italic"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
-              <i class="icn-16 wysiwyg-italic"></i>
-            </a>
-            <a class="has-tooltip pointer"
-               data-edit="underline"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
-              <i class="icn-16 wysiwyg-underline"></i>
-            </a>
-
-            <a class="has-tooltip pointer"
-               data-edit="insertorderedlist"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
-              <i class="icn-16 wysiwyg-ol"></i>
-            </a>
-            <a class="has-tooltip pointer"
-               data-edit="insertunorderedlist"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
-              <i class="icn-16 wysiwyg-ul"></i>
-            </a>
-
-            <a class="has-tooltip pointer"
-               data-edit="justifyleft"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
-              <i class="icn-16 icn-wysiwyg-align-left"></i>
-            </a>
-            <a class="has-tooltip pointer"
-               data-edit="justifycenter"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
-              <i class="icn-16 icn-wysiwyg-align-center"></i>
-            </a>
-            <a class="has-tooltip pointer"
-               data-edit="justifyright"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
-              <i class="icn-16 icn-wysiwyg-align-right"></i>
-            </a>
-
-            <a class="has-tooltip pointer"
-               data-edit="removeformat"
-               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formatting">
-              <i class="icn-16 wysiwyg-reset"></i>
-            </a>
-          </div>
-        </div>
-      </div> -->
     </div>
+
+
     <div class="col-md-12 text-right">
       <a class="pointer create-new-link">See Preview</a>
     </div>
