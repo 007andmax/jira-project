@@ -67,11 +67,17 @@
         if (keyboard) {
           setTimeout(function() {
             $scope.clickImitation();
-            
+
           })
         }
 
       };
+
+      $scope.setInputFocus = function(isFocused) {
+        $scope.isEmailInputFocused = isFocused;
+
+        console.log(isFocused, 'isFOCUSED')
+      }
 
       $scope.clickImitation = function() {
         var wrapper = document.getElementById('tags-wrapper');
