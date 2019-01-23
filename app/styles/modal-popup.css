@@ -1253,6 +1253,18 @@ _::-webkit-:not(:root:root),
   padding: 16px 20px;
 }
 
+.textarea.email-text-block {
+  width: 100%;
+  min-height: 272px;
+  outline: none;
+  margin-bottom: -8px;
+  padding: 24px 20px;
+}
+
+.textarea.email-text-block::placeholder {
+  color: #c0bfcd;
+}
+
 .email-text-block textarea {
   height: 170px;
   width: 100%;
