@@ -21,13 +21,14 @@
             <i class="icn-xs remove-tag" ng-click="removeEmail($index)"
                uib-tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
           </span>
-          <div class="{{ tagFilter ? 'tags-action x-mark-wrapper' : 'tags-action' }}"
+          <div id="tags-wrapper"
+               class="{{ tagFilter ? 'tags-action x-mark-wrapper' : 'tags-action' }}"
                uib-dropdown uib-dropdown-toggle on-toggle="setDropdownOpened(open)"
                ng-style="true ? { 'width': '100%' } : ''"
                dropdown-arrow-navigation on-enter="addEmail" dropdown-data-item-name="newEmail">
             <div ng-if="!emails.length" class="placeholder">Add Receipt Email Address</div>
-            <input type="text" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}" ng-model="newEmail"
-                   placeholder="" set-focus-on-var-change="focusInput">
+            <input type="text" id="email-input" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}" ng-model="newEmail"
+                   placeholder="" set-focus-on-var-change="focusInput" ng-keypress="setDropdownOpened(true, true)">
             <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
               <li ng-repeat="email in filteredUsersEmails | orderBy:'toString()' track by $index"
                   ng-click="addEmail(email)">

@@ -52,24 +52,37 @@
       };
 
       $scope.addEmail = function(email) {
+
+        $scope.newEmail = '';
         if (email && !~$scope.emails.indexOf(email)) {
           $scope.emails.push(email);
         }
 
       }
 
-      $scope.setDropdownOpened = function (open) {
+      $scope.setDropdownOpened = function (isOpen, keyboard) {
+        console.log(isOpen, 'SETOPEN')
+        $scope.dropdownOpened = isOpen;
 
-        if (!open) {
-          $scope.dropdownOpened = false;
-        } else {
-          $scope.dropdownOpened = true;
+        if (keyboard) {
+          setTimeout(function() {
+            $scope.clickImitation();
+            
+          })
         }
+
       };
 
-      $scope.$watch('plainHTML', function(val) {
+      $scope.clickImitation = function() {
+        var wrapper = document.getElementById('tags-wrapper');
+        var elem = document.getElementById('email-input');
 
-      })
+        if (!wrapper.classList.contains('open')) {
+          elem.click();
+          console.log(elem, 'CLICKED')
+        }
+
+      }
 
       $scope.sendEmail = function() {
         var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value');
@@ -90,7 +103,6 @@
       }
 
       $scope.addAttachmentFiles = function (file) {
-        // console.log(file, 'file to upload')
         $scope.attachments.push(file);
         $scope.disabledWhenLoadAttachment = true;
 
@@ -183,6 +195,7 @@
       $scope.filteredUsersEmails = $scope.allUsersEmails;
 
       $scope.$watch('newEmail', function(val) {
+        if (val === undefined) return;
         $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
           return el.includes(val);
         })
