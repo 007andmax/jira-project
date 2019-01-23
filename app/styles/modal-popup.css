@@ -789,7 +789,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: 0;
   transform: translate(50%, 50%);
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -810,12 +810,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-  
+
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-  
+
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -848,13 +848,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -882,13 +882,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -981,9 +981,30 @@ _::-webkit-:not(:root:root),
   margin: 0 -15px;
 }
 
+.email--content .tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.email--content .tags-action {
+  min-width: 100px;
+  flex: 1;
+  padding-bottom: 10px;
+}
+
 .email--content .tags-wrap {
   margin: 0;
   border: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.email--content .tags-wrap input {
+  border: none;
+}
+
+
+.email--content .tags-wrap.focused {
+  border-color: #16a4fa !important;
 }
 
 .email--content .tags-wrap .tags {

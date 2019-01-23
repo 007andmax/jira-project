@@ -12,7 +12,7 @@
       <!-- <div class="placeholder">Add Receipt Email Address</div>
       <input type="text" placeholder=""> -->
 
-      <div class="tags-wrap" ng-click="setFocus($event)">
+      <div class="tags-wrap border-input"  ng-class="{ 'focused': isEmailInputFocused }" ng-click="setFocus($event)">
         <!-- ng-style="tagFilter ? { 'max-width': '190px', 'width': '190px' } : ''" -->
         <div class="tags">
           <span class="tag-label tag-span"
@@ -22,13 +22,13 @@
                uib-tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
           </span>
           <div id="tags-wrapper"
-               class="{{ tagFilter ? 'tags-action x-mark-wrapper' : 'tags-action' }}"
+               class="{{ isEmailInputFocused ? 'tags-action focused' : 'tags-action' }}"
                uib-dropdown uib-dropdown-toggle on-toggle="setDropdownOpened(open)"
-               ng-style="true ? { 'width': '100%' } : ''"
+               ng-style="true ? { 'width': '100%', 'display': 'inline-block' } : ''"
                dropdown-arrow-navigation on-enter="addEmail" dropdown-data-item-name="newEmail">
             <div ng-if="!emails.length" class="placeholder">Add Receipt Email Address</div>
             <input type="text" id="email-input" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}" ng-model="newEmail"
-                   placeholder="" set-focus-on-var-change="focusInput" ng-keypress="setDropdownOpened(true, true)">
+                   placeholder="" set-focus-on-var-change="focusInput"  ng-focus="setInputFocus(true)" ng-blur="setInputFocus(false)" ng-keypress="setDropdownOpened(true, true)">
             <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
               <li ng-repeat="email in filteredUsersEmails | orderBy:'toString()' track by $index"
                   ng-click="addEmail(email)">
