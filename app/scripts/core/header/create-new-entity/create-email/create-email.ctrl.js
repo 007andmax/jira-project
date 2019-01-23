@@ -99,7 +99,7 @@
           attachments: $scope.attachments.map(function(el) { return el.id }),
           content: content,
           subject: $scope.subject,
-          customHTML: isCustomHTML
+          customHtml: isCustomHTML
         }
 
 
@@ -107,6 +107,19 @@
           $scope.close()
         })
       }
+
+      $scope.removeAttachment = function (index, isErrorFile) {
+        if (isErrorFile) {
+
+          $scope.fileInfo.quantityErrorFiles--;
+
+          // if ($scope.fileInfo.quantityErrorFiles === 0) {
+          //   $scope.updateTicketNote.$setValidity('errorFile', true);
+          // }
+        }
+
+        $scope.attachments.splice(index, 1);
+      };
 
       $scope.addAttachmentFiles = function (file) {
         $scope.attachments.push(file);
@@ -191,10 +204,6 @@
 
           return acc;
         }, [])
-
-
-        console.log($scope.allUsersEmails, 'SSS')
-
 
       }
 
