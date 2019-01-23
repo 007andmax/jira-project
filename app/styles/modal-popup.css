@@ -984,6 +984,7 @@ _::-webkit-:not(:root:root),
 .email--content .tags {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .email--content .tags-action {
