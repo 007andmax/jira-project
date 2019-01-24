@@ -92,7 +92,7 @@
 
       $scope.sendEmail = function() {
         var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value');
-        var content = plainText || $scope.plainHTML;
+        var content = plainText || $scope.plainHTML.replace(/(\r\n|\n|\r)/gm,"");
         var isCustomHTML = ($scope.tab === 'html' ? true : false)
         var data = {
           recipients: $scope.emails,

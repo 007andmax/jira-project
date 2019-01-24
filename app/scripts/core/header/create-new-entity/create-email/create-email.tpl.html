@@ -54,7 +54,7 @@
              data-text="Click here to respond to the Ticket"></div>
 
 
-        
+
 
         <div class="form-group" ng-show="tab == 'plain'">
           <ul class="upload-attachments">
@@ -95,32 +95,44 @@
         </div>
 
         <div class="wysiwyg-controls-wrapper">
-          <div class="select-font" uib-dropdown>
-            <input type="text" uib-dropdown-toggle
-                   readonly placeholder="Font">
-            <i class="icn-sm report-caret-icon"></i>
 
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a>
-                  Times New Roman
-                </a>
-              </li>
-              <li>
-                <a>
-                  Arial
-                </a>
-              </li>
-              <li>
-                <a>
-                  Roboto
-                </a>
-              </li>
-            </ul>
-          </div>
 
           <div class="control-wrappers" data-role="editor-toolbar">
+            <div class="select-font" uib-dropdown data-role="editor-toolbar">
+              <input type="text" uib-dropdown-toggle
+                     readonly placeholder="Font" data-toggle="dropdown" title="" data-original-title="Font">
+              <i class="icn-sm report-caret-icon"></i>
 
+              <ul class="dropdown-menu"  role="menu">
+                <li>
+                  <a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a>
+                </li>
+                <li>
+                  <a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a>
+                </li>
+                <li>
+                  <a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a>
+                </li>
+                <li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+              </ul>
+
+
+
+
+            </div>
+
+            <!-- <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font">А</a>
+                <ul class="dropdown-menu">
+
+                  <li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
+                  <li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li>
+                  <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li>
+                  <li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+                </ul>
+              </div>
+            </div> -->
             <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="attachments">
               <a href="javascript:void(0)" class="pull-left hit-area ha-16-18 has-tooltip"
                  tooltip-append-to-body="true" uib-tooltip="Attach Files"
@@ -129,6 +141,19 @@
               </a>
               <input type="file" style="display:none" multiple="" />
             </div>
+
+            <!-- <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+
+                  <li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
+                  <li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li>
+                  <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li>
+                  <li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+                </ul>
+              </div>
+            </div> -->
 
             <a class="has-tooltip pointer"
                data-edit="bold"
