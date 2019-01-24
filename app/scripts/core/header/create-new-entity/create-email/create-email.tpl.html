@@ -12,7 +12,7 @@
       <!-- <div class="placeholder">Add Receipt Email Address</div>
       <input type="text" placeholder=""> -->
 
-      <div class="tags-wrap border-input"  ng-class="{ 'focused': isEmailInputFocused }" ng-click="setFocus($event)">
+      <div class="tags-wrap border-input" ng-class="{ 'focused': isEmailInputFocused }" ng-click="setFocus($event)">
         <!-- ng-style="tagFilter ? { 'max-width': '190px', 'width': '190px' } : ''" -->
         <div class="tags">
           <span class="tag-label tag-span"
@@ -27,8 +27,10 @@
                ng-style="true ? { 'width': '100%', 'display': 'inline-block' } : ''"
                dropdown-arrow-navigation on-enter="addEmail" dropdown-data-item-name="newEmail">
             <div ng-if="!emails.length" class="placeholder">Add Receipt Email Address</div>
-            <input type="text" id="email-input" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}" ng-model="newEmail"
-                   placeholder="" set-focus-on-var-change="focusInput"  ng-focus="setInputFocus(true)" ng-blur="setInputFocus(false)" ng-keypress="setDropdownOpened(true, true)">
+            <input type="text" id="email-input" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}"
+                   ng-model="newEmail"
+                   placeholder="" set-focus-on-var-change="focusInput" ng-focus="setInputFocus(true)"
+                   ng-blur="setInputFocus(false)" ng-keypress="setDropdownOpened(true, true)">
             <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
               <li ng-repeat="email in filteredUsersEmails | orderBy:'toString()' track by $index"
                   ng-click="addEmail(email)">
@@ -50,10 +52,8 @@
            name="note" te-text-maxlength="5000" te-html-maxlength="50000">
 
         <div te-editor class="form-control editor" contenteditable="true"
-             style="min-height: 198px;max-height: 198px;overflow-y: scroll;overflow-x: hidden;border: none;"
+             style="min-height: 198px;max-height: 198px;overflow-y: scroll;overflow-x: hidden;border: none; border-bottom: 1px solid #eeeff2"
              data-text="Click here to respond to the Ticket"></div>
-
-
 
 
         <div class="form-group" ng-show="tab == 'plain'">
@@ -66,12 +66,13 @@
               <span class="file-size">{{ file.size | fileSizeFilter }}</span>
 
               <a href="javascript:void(0)" class="hit-area pull-right"
-                 uib-tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index, fileInfo[file.name].error)">
+                 uib-tooltip="Remove file" tooltip-placement="top"
+                 ng-click="removeAttachment($index, fileInfo[file.name].error)">
                 <i class="icn-sm icn-remove-old"></i>
               </a>
 
-               <span class="pull-right" ng-show="fileInfo[file.name].error"
-                     style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
+              <span class="pull-right" ng-show="fileInfo[file.name].error"
+                    style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
                 {{ fileInfo[file.name].message }}
               </span>
 
@@ -102,11 +103,13 @@
 
             <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
               <div class="btn-group">
-                <a class="btn dropdown-toggle input" data-toggle="dropdown" title="" data-original-title="Font">Font <i class="icn-sm report-caret-icon"></i></a>
-                <ul class="dropdown-menu">
+                <a class="btn dropdown-toggle input" data-toggle="dropdown" title="" data-original-title="Font">Font <i
+                  class="icn-sm report-caret-icon"></i></a>
+                <ul class="dropdown-menu" style="top: -133px;">
 
                   <li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
-                  <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li>
+                  <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a>
+                  </li>
                   <li><a data-edit="fontName Roboto" style="font-family: 'Roboto', sans-serif;">Roboto</a></li>
                 </ul>
               </div>
@@ -119,7 +122,6 @@
               </a>
               <input type="file" style="display:none" multiple="" />
             </div>
-
 
 
             <a class="has-tooltip pointer"
@@ -176,8 +178,8 @@
       </div>
 
 
-
-      <textarea ng-show="tab == 'html'" ng-model="plainHTML" class="email-text-block textarea" placeholder="Put here your HTML">
+      <textarea ng-show="tab == 'html'" ng-model="plainHTML" class="email-text-block textarea"
+                placeholder="Put here your HTML">
 
 
       </textarea>

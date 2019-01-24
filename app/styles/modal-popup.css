@@ -762,6 +762,10 @@ _::-webkit-:not(:root:root),
   padding: 30px 40px;
 }
 
+.email--content {
+  padding: 25px 40px;
+}
+
 .invoice--footer,
 .email--footer,
 .company--footer,
@@ -789,7 +793,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: 0;
   transform: translate(50%, 50%);
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -810,12 +814,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-
+  
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-
+  
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -848,13 +852,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -882,13 +886,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -1002,7 +1006,6 @@ _::-webkit-:not(:root:root),
 .email--content .tags-wrap input {
   border: none;
 }
-
 
 .email--content .tags-wrap.focused {
   border-color: #16a4fa !important;
@@ -1277,7 +1280,7 @@ _::-webkit-:not(:root:root),
 
 .textarea.email-text-block {
   width: 100%;
-  min-height: 272px;
+  min-height: 277px;
   outline: none;
   margin-bottom: -8px;
   padding: 24px 20px;
@@ -1777,7 +1780,7 @@ _::-webkit-:not(:root:root),
   letter-spacing: 0;
   font-family: "Graphik Medium", sans-serif;
   height: 32px !important;
-  background-color: #edf2f6!important;
+  background-color: #edf2f6 !important;
   border-radius: 4px;
   font-size: 13px !important;
   color: #4f5f79;
