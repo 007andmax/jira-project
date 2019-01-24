@@ -75,8 +75,6 @@
 
       $scope.setInputFocus = function(isFocused) {
         $scope.isEmailInputFocused = isFocused;
-
-        console.log(isFocused, 'isFOCUSED')
       }
 
       $scope.clickImitation = function() {
@@ -85,7 +83,6 @@
 
         if (!wrapper.classList.contains('open')) {
           elem.click();
-          console.log(elem, 'CLICKED')
         }
 
       }
@@ -112,10 +109,6 @@
         if (isErrorFile) {
 
           $scope.fileInfo.quantityErrorFiles--;
-
-          // if ($scope.fileInfo.quantityErrorFiles === 0) {
-          //   $scope.updateTicketNote.$setValidity('errorFile', true);
-          // }
         }
 
         $scope.attachments.splice(index, 1);
@@ -207,12 +200,14 @@
 
       }
 
-      $scope.filteredUsersEmails = $scope.allUsersEmails;
+      $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
+        return el;
+      });
 
       $scope.$watch('newEmail', function(val) {
         if (val === undefined) return;
         $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
-          return el.includes(val);
+          return el && el.includes(val);
         })
       })
     }]);
