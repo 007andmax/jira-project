@@ -14,7 +14,14 @@
     <div class="form-group clearfix">
       <div class="col-md-8" style="padding-right: 10px;">
         <label class="control-label">Company Name</label>
-        <div uib-dropdown style="position: relative;">
+
+        <qt-dropdown-typehead list-for-dropdown="companies"
+                              selected-item="invoiceCompany"
+                              display-property="'name'"
+                              filter-property="'name'" ng-show="!preSetupCompany">
+
+
+        <!-- <div uib-dropdown style="position: relative;">
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
                  uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
           <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
@@ -26,7 +33,7 @@
             </li>
           </ul>
 
-        </div>
+        </div> -->
       </div>
       <div class="col-md-4" style="padding-left: 10px;">
         <label class="control-label">Payment Date</label>
