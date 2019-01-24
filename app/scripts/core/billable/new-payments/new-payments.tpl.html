@@ -63,12 +63,8 @@
         </div>
       </div>
     </div>
-    <ul class="qt-list qt-companies qt-users users-bg"
-        style="margin-top: 50px; position: relative;padding-top: 15px;"
-        qt-scroll-to="top"
-        offset="83" scroll-pagination>
-      <li class="list-heading"
-          style="cursor: pointer !important;padding: 7px 15px;min-height: 40px;box-shadow: 0 10px 10px -2px rgba(0,0,0,0.05);height: 0;">
+    <ul class="qt-list qt-companies qt-users users-bg new-payments">
+      <li class="list-heading">
         <div class="col-xs-1" style="width: 3%">
           <label class="control checkbox pull-left" ng-click="stopPropagation($event)">
             <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
@@ -156,8 +152,8 @@
         </div>
         <div class="col-xs-1">
 
-          <div ng-click="showInvoice(payment.partialPaidInvoice)" tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</div>
-          <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)" tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true">{{ invoiceNumber }}</div>
+          <div ng-click="showInvoice(payment.partialPaidInvoice)"><span tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span></div>
+          <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span tooltip-placement="top" uib-tooltip="Invoice Preview" tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
         </div>
         <div class="col-xs-1">
           {{ payment.createdAt }}
