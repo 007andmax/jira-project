@@ -98,7 +98,7 @@
 
 
           <div class="control-wrappers" data-role="editor-toolbar">
-            <div class="select-font" uib-dropdown data-role="editor-toolbar">
+            <!-- <div class="select-font" uib-dropdown data-role="editor-toolbar">
               <input type="text" uib-dropdown-toggle
                      readonly placeholder="Font" data-toggle="dropdown" title="" data-original-title="Font">
               <i class="icn-sm report-caret-icon"></i>
@@ -119,20 +119,19 @@
 
 
 
-            </div>
+            </div> -->
 
-            <!-- <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
               <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font">А</a>
+                <a class="btn dropdown-toggle input" data-toggle="dropdown" title="" data-original-title="Font">Font <i class="icn-sm report-caret-icon"></i></a>
                 <ul class="dropdown-menu">
 
                   <li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
-                  <li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li>
                   <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li>
-                  <li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+                  <li><a data-edit="fontName Verdana" style="font-family: 'Roboto', sans-serif;">Roboto</a></li>
                 </ul>
               </div>
-            </div> -->
+            </div>
             <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="attachments">
               <a href="javascript:void(0)" class="pull-left hit-area ha-16-18 has-tooltip"
                  tooltip-append-to-body="true" uib-tooltip="Attach Files"

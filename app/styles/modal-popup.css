@@ -1773,6 +1773,20 @@ _::-webkit-:not(:root:root),
   font-family: "Graphik Medium", sans-serif;
 }
 
+.create-new .input.dropdown-toggle {
+  letter-spacing: 0;
+  font-family: "Graphik Medium", sans-serif;
+  height: 32px !important;
+  background-color: #edf2f6!important;
+  border-radius: 4px;
+  font-size: 13px !important;
+  color: #4f5f79;
+  border: none;
+  padding: 0 12px;
+  width: 78px !important;
+  margin-top: -5px;
+}
+
 .create-new input:active,
 .create-new input:focus {
   border-color: #16a4fa;
