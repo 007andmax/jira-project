@@ -61,7 +61,6 @@
       }
 
       $scope.setDropdownOpened = function (isOpen, keyboard) {
-        console.log(isOpen, 'SETOPEN')
         $scope.dropdownOpened = isOpen;
 
         if (keyboard) {
@@ -87,10 +86,19 @@
 
       }
 
+      $scope.addWrittenEmail = function() {
+        if ($scope.newEmail) {
+          $scope.emails.push($scope.newEmail);
+        }
+      }
+
       $scope.sendEmail = function() {
         var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value');
         var content = plainText || $scope.plainHTML.replace(/(\r\n|\n|\r)/gm,"");
-        var isCustomHTML = ($scope.tab === 'html' ? true : false)
+        var isCustomHTML = ($scope.tab === 'html' ? true : false);
+
+        $scope.addWrittenEmail();
+
         var data = {
           recipients: $scope.emails,
           attachments: $scope.attachments.map(function(el) { return el.id }),
@@ -104,6 +112,8 @@
           $scope.close()
         })
       }
+
+
 
       $scope.removeAttachment = function (index, isErrorFile) {
         if (isErrorFile) {
