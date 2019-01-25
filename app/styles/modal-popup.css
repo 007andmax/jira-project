@@ -1288,10 +1288,10 @@ _::-webkit-:not(:root:root),
 
 .textarea.email-text-block {
   width: 100%;
-  min-height: 277px;
+  min-height: 273px;
   outline: none;
   margin-bottom: -8px;
-  padding: 24px 20px;
+  padding: 22px 20px;
 }
 
 .textarea.email-text-block::placeholder {
