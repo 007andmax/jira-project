@@ -4,14 +4,17 @@
 
   angular.module('quicktech').controller('quicktech.createEmailCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-      'TaxesService', '$timeout', '$uibModalInstance', 'FilesService',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout, $uibModalInstance, FilesService) {
+      'TaxesService', '$timeout', 'FilesService', '$uibModalInstance', 'UsersService',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout, FilesService, $uibModalInstance, UsersService) {
 
       console.log('create email template', $scope.selectedUsers)
 
       $scope.emails = [];
 
+      console.log($scope, '$SCOPe')
       $scope.close = $uibModalInstance.dismiss;
+      $scope.users = UsersService.getAllUsers();
+      // $scope.close = $scope.closeWindow;
 
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
@@ -94,10 +97,24 @@
 
       $scope.sendEmail = function() {
         var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value');
+
+        $scope.addWrittenEmail();
+
+
+        if ($scope.isReportEmail) {
+          $scope.$parent.$ctrl.sendToMail({
+            emails: $scope.emails,
+            note: plainText
+          }, $scope.close);
+          console.log('im heree')
+          return;
+        }
+
+
         var content = plainText || $scope.plainHTML.replace(/(\r\n|\n|\r)/gm,"");
         var isCustomHTML = ($scope.tab === 'html' ? true : false);
 
-        $scope.addWrittenEmail();
+
 
         var data = {
           recipients: $scope.emails,
@@ -210,16 +227,41 @@
 
       }
 
-      $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
-        return el;
-      });
-
-      $scope.$watch('newEmail', function(val) {
-        if (val === undefined) return;
+      if ($scope.allUsersEmails) {
         $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
-          return el && el.includes(val);
+          return el;
+        });
+
+        $scope.$watch('newEmail', function(val) {
+          if (val === undefined) return;
+          $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
+            return el && el.includes(val);
+          })
         })
-      })
+      } else {
+        $scope.isReportEmail = true;
+        $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
+          .map(function(el) {
+            return el.primaryEmail;
+          })
+          .filter(function(el) {
+            return el;
+          })
+
+        $scope.$watch('newEmail', function(val) {
+          if (val === undefined) return;
+          $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
+            .map(function(el) {
+              return el.primaryEmail;
+            })
+            .filter(function(el) {
+              return el && el.includes(val);
+            })
+        })
+        console.log($scope.$parent.$ctrl, 'CTRL')
+      }
+
+
     }]);
 
 }());

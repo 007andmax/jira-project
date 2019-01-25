@@ -38,11 +38,20 @@
           if (!disableElement.length || (disableElement.hasClass('disabled') || typeof disableElement.attr('disabled') === 'string')) {
             return;
           }
-          
+
           Downloader.downloadByUrl($rootScope.reportUrl + '?isDownload=true', attrs.fileName);
         };
 
         scope.sendToMail = function (emails, callback) {
+          if (!Array.isArray(emails) && typeof emails === 'object') {
+            var note = emails.note;
+            var emails = emails.emails;
+          }
+
+          var isBrokenReport = attrs.fileName.includes('customer-report');
+          var emailEndpoint = isBrokenReport ? '/customerReport/email' : attrs.emailEndpoint
+
+
           if (emails && emails.length) {
             var dto = {
               content: selectedHtml,
@@ -50,7 +59,11 @@
               fileName: attrs.fileName,
               orientation: attrs.orientation || 'PORTRAIT'
             };
-            $http.post(attrs.emailEndpoint, dto).then(function () {
+
+            if (note) {
+              dto.note = note;
+            }
+            $http.post(emailEndpoint, dto).then(function () {
               UserNotificationService.show('Report was sent successfully.', true);
               callback && callback();
             });
