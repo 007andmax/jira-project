@@ -825,6 +825,16 @@
       }
     }
 
+    function sendEmail(data, callback) {
+      $http({
+        url: '/email/customEmail',
+        method: "POST",
+        data: data
+      }).then(function(res) {
+        if (callback) callback(res);
+      })
+    }
+
     function getCompanyContacts(scope, companyId, callback) {
 
       if (!scope || !scope.$id) {
@@ -1036,7 +1046,8 @@
       setTechLead: setTechLead,
       getReferenceDate: getReferenceDate,
       setReferenceDate: setReferenceDate,
-      resetReferenceDate: resetReferenceDate
+      resetReferenceDate: resetReferenceDate,
+      sendEmail: sendEmail
     }
 
   }]);

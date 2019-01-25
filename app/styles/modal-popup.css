@@ -753,6 +753,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header, .invoice--content, .invoice--footer,
+.email--header, .email--content, .email--footer,
 .service--header, .service--content, .service--footer,
 .user--header, .user--content, .user--footer,
 .ticket--header, .ticket--content, .ticket--footer,
@@ -761,7 +762,16 @@ _::-webkit-:not(:root:root),
   padding: 30px 40px;
 }
 
+.email--header {
+  padding: 28px 40px;
+}
+
+.email--content {
+  padding: 25px 40px;
+}
+
 .invoice--footer,
+.email--footer,
 .company--footer,
 .product--footer,
 .ticket--footer,
@@ -930,6 +940,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header,
+.email--header,
 .service--header,
 .user--header,
 .ticket--header,
@@ -943,6 +954,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header button,
+.email--header button,
 .service--header button,
 .user--header button,
 .ticket--header button,
@@ -955,6 +967,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header h2,
+.email--header h2,
 .service--header h2,
 .user--header h2,
 .ticket--header h2,
@@ -967,12 +980,63 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--content,
+.email--content,
 .service--content,
 .user--content,
 .ticket--content,
 .company--content,
 .product--content {
   margin: 0 -15px;
+}
+
+.email--content .tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.email--content .tags-action {
+  min-width: 100px;
+  flex: 1;
+  padding-bottom: 10px;
+}
+
+.email--content .tags-wrap {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.email--content .tags-wrap input {
+  border: none;
+}
+
+.email--content .tags-wrap.focused {
+  border-color: #16a4fa !important;
+}
+
+.email--content .tags-wrap .tags {
+  padding: 0;
+  width: 100%;
+}
+
+.email--content .tags-wrap .tags .tag-label {
+  padding: 9px 15px 9px 5px;
+  border-radius: 3px !important;
+  border: 1px solid #edf2f6;
+}
+
+.email--content .tags-wrap .tags .tag-label span {
+  font-size: 12px;
+  color: #4f5f79;
+}
+
+.email--content .tags-wrap .tags .tag-label .remove-tag {
+  top: 10px;
+}
+
+.email--content .tags-wrap .tags input {
+  width: 100%;
 }
 
 .company--content .tags-modal-wrapper input {
@@ -1016,6 +1080,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--content input,
+.email--content input,
 .service--content input,
 .user--content input,
 .ticket--content input,
@@ -1023,6 +1088,7 @@ _::-webkit-:not(:root:root),
 .add-tax-dropdown input,
 .product--content input,
 .product--content textarea,
+.email--content .form-control,
 .invoice--content .form-control,
 .service--content .form-control,
 .user--content .form-control,
@@ -1039,6 +1105,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--content [class*='col-md-'],
+.email--content [class*='col-md-'],
 .service--content [class*='col-md-'],
 .user--content [class*='col-md-'],
 .ticket--content [class*='col-md-'],
@@ -1048,6 +1115,11 @@ _::-webkit-:not(:root:root),
   margin-bottom: 20px;
 }
 
+.email--content [class*='col-md-'] {
+  margin-bottom: 17px;
+}
+
+.email--content input::placeholder,
 .invoice--content input::placeholder,
 .service--content input::placeholder,
 .user--content input::placeholder,
@@ -1063,6 +1135,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--content p,
+.email--content p,
 .service--content p,
 .user--content p,
 .ticket--content p,
@@ -1074,6 +1147,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--content label,
+.email--content label,
 .service--content label,
 .add-tax-dropdown label {
   color: #4f5f79;
@@ -1090,6 +1164,7 @@ _::-webkit-:not(:root:root),
   top: -1px;
 }
 
+.email-footer,
 .invoice-footer,
 .service-footer,
 .user-footer,
@@ -1189,6 +1264,145 @@ _::-webkit-:not(:root:root),
   background-color: #edf2f6 !important;
   border: 1px solid #c4cbd5;
   color: #4f5f79;
+}
+
+.tab-btns {
+  font-size: 0;
+}
+
+.tab-btns .btn {
+  background-color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4f5f79;
+  display: inline-block;
+  margin: 0;
+  border: 1px solid #edf2f6;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.tab-btns .btn:hover,
+.tab-btns .btn.active {
+  background-color: #e8f6ff;
+  color: #16a4fa;
+  border: 1px solid transparent;
+}
+
+.tab-btns .btn:first-child {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.tab-btns .btn:last-child {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.email-text-block {
+  border: 1px solid #edf2f6;
+  border-radius: 4px;
+  padding: 14px 20px;
+}
+
+.textarea.email-text-block {
+  width: 100%;
+  min-height: 273px;
+  outline: none;
+  margin-bottom: -8px;
+  padding: 22px 20px;
+}
+
+.textarea.email-text-block::placeholder {
+  color: #c0bfcd;
+}
+
+.email-text-block textarea {
+  height: 170px;
+  width: 100%;
+  border: none;
+  font-size: 13px;
+  color: #4f5f79;
+  outline: none;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2f6;
+}
+
+.select-font {
+  position: relative;
+  width: 78px;
+}
+
+.select-font i {
+  position: absolute;
+  right: 9px;
+  top: calc(50% - 3px);
+}
+
+.email-text-block .wysiwyg-controls-wrapper {
+  padding: 0;
+  display: flex;
+}
+
+.email-text-block .control-wrappers {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.email-text-block .control-wrappers > a {
+  margin: 0 0 0 20px;
+}
+
+.select-font input {
+  width: 100%;
+  height: 32px;
+  background-color: #edf2f6 !important;
+  border-radius: 4px;
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4f5f79;
+  border: none;
+  padding: 0 12px;
+}
+
+.select-font input::placeholder {
+  opacity: 1;
+  color: #4f5f79;
+}
+
+.create-email-form .create-new-link:before {
+  bottom: -1px;
+  width: 100%;
+}
+
+.create-new .select-font .dropdown-menu {
+  width: 230px !important;
+  bottom: 40px;
+}
+
+.create-email-form .email--content {
+  padding-bottom: 0;
+}
+
+.create-new.create-email-form .email--footer .btn {
+  width: 148px !important;
+}
+
+.create-new.create-email-form .email--footer .btn.btn-default {
+  width: 111px !important;
+}
+
+.email-text-block .wysiwyg-controls-wrapper {
+  border: none;
+  height: auto !important;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+
+.email-text-block textarea::placeholder {
+  color: #9ca5b6;
 }
 
 .invoice-create .btn-success,
@@ -1308,11 +1522,11 @@ _::-webkit-:not(:root:root),
   font-size: 13px;
 }
 
-.company--footer-big .create-new-link {
+.create-new-link {
   position: relative;
 }
 
-.company--footer-big .create-new-link:before {
+.create-new-link:before {
   position: absolute;
   content: '';
   width: 80%;
@@ -1324,7 +1538,7 @@ _::-webkit-:not(:root:root),
   transition: all .3s;
 }
 
-.company--footer-big .create-new-link:hover:before {
+.create-new-link:hover:before {
   opacity: 0;
 }
 
@@ -1587,6 +1801,20 @@ _::-webkit-:not(:root:root),
   font-size: 13px;
   letter-spacing: 0;
   font-family: "Graphik Medium", sans-serif;
+}
+
+.create-new .input.dropdown-toggle {
+  letter-spacing: 0;
+  font-family: "Graphik Medium", sans-serif;
+  height: 32px !important;
+  background-color: #edf2f6 !important;
+  border-radius: 4px;
+  font-size: 13px !important;
+  color: #4f5f79;
+  border: none;
+  padding: 0 12px;
+  width: 78px !important;
+  margin-top: -5px;
 }
 
 .create-new input:active,

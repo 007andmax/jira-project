@@ -1042,6 +1042,7 @@ hr {
 }
 
 .billable-items .billable-items-header .btn-success,
+.change-view-actions .btn-success,
 .invoices .invoices-header .invoices-header-filters .btn-success,
 .selected-users-edit .btn-success,
 .receive .btn-success,
@@ -11164,6 +11165,10 @@ button.close {
   float: left;
   width: 100%;
   padding: 25px 30px;
+}
+
+.btn-toolbar {
+  margin-right: 60px;
 }
 
 @-moz-document url-prefix() {

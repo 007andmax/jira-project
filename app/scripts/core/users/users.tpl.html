@@ -14,10 +14,34 @@
       </div>
     </div>
     <div ng-if="usersView === 'list'">
+      <!--<button-->
+        <!--class="btn btn-success"-->
+        <!--style="position: absolute;right: 42px;z-index: 9;"-->
+        <!--modal-window-button="/html/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"-->
+        <!--modal-window-class="create-popup modal-create-ticket"-->
+        <!--mw-controller="quicktech.createEmailCtrl">-->
+        <!--Send Email-->
+      <!--</button>-->
+
+      <div class="product-report-btn dropdown-email" style="position: absolute;right: 20px;z-index: 1;"
+           modal-window-button="/html/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"
+           modal-window-class="create-popup modal-create-ticket"
+           mw-controller="quicktech.createEmailCtrl"
+           uib-tooltip="send mail" tooltip-placement="top">
+        <div style="height: 100%;width: 100%;">
+          <img style="margin: 8px;" src="images/new-icons/message-icon.png" alt="send mail to">
+        </div>
+      </div>
       <ul class="qt-list qt-users" style="margin-bottom: 1px;">
         <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
           <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
-        <span class="sort-span">
+
+            <label class="control checkbox pull-left" ng-show="users.length > 0">
+              <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
+                     ng-model="selectedUsers['all']" ng-click="selectAllUsers(selectedUsers['all'])">
+              <span class="control-indicator"></span>
+            </label>
+            <span class="sort-span">
           Name
           <i class="icn-sm sort-icon icn-sort"
              ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'name'}"></i>
@@ -76,6 +100,7 @@
            ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) | limitTo: displayLimit track by user.id">
         <div class="card" ng-style="{'border-left-color': tagColors[usersColors[getUserType(user)]].backgroundColor}">
           <div class="card-header">
+
             <div class="edit-icn" ng-if="!user.deletedAt && PermissionsService.isAllowed('EDIT_USERS')"
                  create-new-entity="user" item="user"></div>
             <i class="icon-sm icn-restore" ng-if="user.deletedAt && PermissionsService.isAllowed('ARCHIVE_USERS')"
@@ -106,14 +131,18 @@
               <p>{{ user.phoneNumbers[1].number }}</p>
             </div>
             <div class="clearfix">
-              <img ng-if="user.primaryEmail" src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
-              <p ng-if="user.primaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
+              <img ng-if="user.primaryEmail" src="images/company/email-purple.png" alt="" email-to="user.primaryEmail"
+                   stop-propagation="click">
+              <p ng-if="user.primaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}"
+                 tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.primaryEmail">
               </p>
             </div>
-            <div class="clearfix" >
-              <img ng-if="user.secondaryEmail" src="images/company/email-purple.png" alt="" email-to="user.secondaryEmail" stop-propagation="click">
-              <p  ng-if="user.secondaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.secondaryEmail }}"
+            <div class="clearfix">
+              <img ng-if="user.secondaryEmail" src="images/company/email-purple.png" alt=""
+                   email-to="user.secondaryEmail" stop-propagation="click">
+              <p ng-if="user.secondaryEmail" style="width: 275px;" class="ellipsis"
+                 uib-tooltip="{{ user.secondaryEmail }}"
                  tooltip-placement="bottom"
                  trimmed-tooltip-checker="user.secondaryEmail">
               </p>
@@ -185,7 +214,8 @@
   <!--@Leo-->
   <p class="desktop-hidden user-mob-filters">
 
-    <span ng-if="!(usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || showArchivedUsers)">All Users</span>
+    <span
+      ng-if="!(usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || showArchivedUsers)">All Users</span>
     <span ng-if="usersSharedState.filter.isLead">Lead Users</span>
     <span ng-if="usersSharedState.filter.isClient">Customer Users</span>
     <span ng-if="showArchivedUsers">Archived Users</span>
@@ -201,7 +231,11 @@
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3 mob-hidden">
           <div class="user-bio">
-            <div class="pull-left avatar" >
+            <label class="control checkbox ">
+              <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
+              <span class="control-indicator"></span>
+            </label>
+            <div class="pull-left avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38"
                    ng-if="(user && user.avatar)">
               <div class="default-user-avatar" ng-if="!(user && user.avatar)"
@@ -259,7 +293,8 @@
             </ul>
 
           </div> -->
-          <div class="user-account-type" ng-show="user.primaryEmail || user.secondaryEmail" style="overflow: hidden; width: 100%; text-overflow: ellipsis">
+          <div class="user-account-type" ng-show="user.primaryEmail || user.secondaryEmail"
+               style="overflow: hidden; width: 100%; text-overflow: ellipsis">
             <span> {{user.primaryEmail || user.secondaryEmail}}</span>
           </div>
         </div>
@@ -413,7 +448,11 @@
                   {{ phoneNumber.number }}
                 </span>
             </div>
-            <div class="mob-user-ticket" ng-class="{ 'without-mob': !(user.phoneNumbers && user.phoneNumbers.length > 0) }"> {{ user.userStatistic.ticketsSubmitted || '0' }}</div>
+            <div class="mob-user-ticket"
+                 ng-class="{ 'without-mob': !(user.phoneNumbers && user.phoneNumbers.length > 0) }"> {{
+                                                                                                     user.userStatistic.ticketsSubmitted
+                                                                                                     || '0' }}
+            </div>
           </div>
           <div class="mob-user-designation" ng-if="user.designation"> {{ user.designation }}</div>
           <div class="mob-user-subscription" uib-dropdown>
@@ -483,7 +522,8 @@
     <button class="mob-filters-btn mobile-btn primary" ng-click="toggleMobileUsersFilters(true)">
       Filters
     </button>
-    <div class="mob-filters" ng-controller="quicktech.core.leftPanel.leftPanelCtrl" ng-class="{ opened: areMobileUsersFiltersOpened }">
+    <div class="mob-filters" ng-controller="quicktech.core.leftPanel.leftPanelCtrl"
+         ng-class="{ opened: areMobileUsersFiltersOpened }">
       <div class="mob-filters-header">
         <button class="x-mark mobile-btn" ng-click="closeAndResetMobileUsersFilters()"></button>
         <div>Filters</div>
