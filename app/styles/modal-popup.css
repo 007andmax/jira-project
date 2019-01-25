@@ -762,6 +762,10 @@ _::-webkit-:not(:root:root),
   padding: 30px 40px;
 }
 
+.email--header {
+  padding: 28px 40px;
+}
+
 .email--content {
   padding: 25px 40px;
 }
@@ -1111,6 +1115,10 @@ _::-webkit-:not(:root:root),
   margin-bottom: 20px;
 }
 
+.email--content [class*='col-md-'] {
+  margin-bottom: 17px;
+}
+
 .email--content input::placeholder,
 .invoice--content input::placeholder,
 .service--content input::placeholder,
@@ -1275,7 +1283,7 @@ _::-webkit-:not(:root:root),
 .email-text-block {
   border: 1px solid #edf2f6;
   border-radius: 4px;
-  padding: 16px 20px;
+  padding: 14px 20px;
 }
 
 .textarea.email-text-block {
@@ -1320,6 +1328,7 @@ _::-webkit-:not(:root:root),
 .email-text-block .control-wrappers {
   margin: 0;
   display: flex;
+  align-items: center;
 }
 
 .email-text-block .control-wrappers > a {
