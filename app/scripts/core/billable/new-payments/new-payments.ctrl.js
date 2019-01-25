@@ -41,6 +41,80 @@
           }).join(' ');
         }
 
+        $scope.showInvoice = function(invoice, goBack) {
+
+          if (typeof invoice === 'string') {
+            invoice = $rootScope.allInvoices.find(function(el) {
+              return el.number === invoice;
+            })
+          }
+
+          console.log(invoice, 'INVOICE')
+          $scope.isInvoiceShown = goBack ? false : true;
+
+          if (goBack) {
+
+            setTimeout(function() {
+              window.scrollTo(0, 10);
+              window.scrollTo(0, 0);
+            }, 0)
+
+          }
+          $rootScope.invoiceToShow = invoice;
+        }
+
+        $scope.orderPayments = {
+          field: 'date',
+          reverse: true
+        };
+
+
+        $scope.orderByForPayments = function (item) {
+          //$scope.stateComparator= false;
+          if ($scope.orderPayments.field === 'number') {
+            return parseInt(item.partialPaidInvoice || (item.invoiceNumbers && item.invoiceNumbers[0])) || 0;
+          } else if ($scope.orderPayments.field === 'name') {
+            return item.clientCompanyName
+          } else if ($scope.orderPayments.field === 'readedAt') {
+            if($scope.sortForReadedAtReverse) {
+              return item.readedAtInMillisecondsReverse;
+            } else {
+              return -item.readedAtInMilliseconds;
+            }
+          } else if ($scope.orderPayments.field === 'date') {
+            return new Date(item.createdAt);
+          } else if ($scope.orderPayments.field === 'dueDate') {
+            return  item.daysDueDateForSorting;
+          } else if ($scope.orderPayments.field === 'amount') {
+            return item.partialPaidAmount || item.totalSum
+          } else if ($scope.orderPayments.field === 'sum') {
+            return item.sum
+          } else if ($scope.orderPayments.field === 'status') {
+            return item.refundMethod ? 'Refund' : 'Paid';
+          } else {
+            return item[$scope.orderPayments.field]
+          }
+        };
+
+        $scope.setOrderByPayments = function (option) {
+          console.log('sfdsfdsfdsfd', option)
+          if (option === $scope.orderPayments.field) {
+            if(option !== 'readedAt') {
+              $scope.orderPayments.reverse = !$scope.orderPayments.reverse;
+            }  else {
+              $scope.sortForReadedAtReverse = !$scope.sortForReadedAtReverse
+            }
+          } else {
+            if(option === 'number') {
+              $scope.orderPayments.reverse = true;
+              $scope.orderPayments.field = option;
+            } else {
+              $scope.orderPayments.field = option;
+              $scope.orderPayments.reverse = (option === 'date');
+            }
+          }
+        };
+
 
         $scope.dateFilterOptions = {
           'autoApply': true,

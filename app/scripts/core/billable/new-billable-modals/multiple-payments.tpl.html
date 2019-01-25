@@ -14,7 +14,14 @@
     <div class="form-group clearfix">
       <div class="col-md-8" style="padding-right: 10px;">
         <label class="control-label">Company Name</label>
-        <div uib-dropdown style="position: relative;">
+
+        <qt-dropdown-typehead list-for-dropdown="companies"
+                              selected-item="invoiceCompany"
+                              display-property="'name'"
+                              filter-property="'name'" ng-show="!preSetupCompany">
+
+
+        <!-- <div uib-dropdown style="position: relative;">
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
                  uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
           <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
@@ -26,7 +33,7 @@
             </li>
           </ul>
 
-        </div>
+        </div> -->
       </div>
       <div class="col-md-4" style="padding-left: 10px;">
         <label class="control-label">Payment Date</label>
@@ -54,7 +61,8 @@
         </li>
       </ul>
       <ul class="qt-list receive-payment-list"
-          style="padding: 0;margin-bottom: 10px; overflow-y: scroll; overflow-x: hidden; max-height: 285px;">
+          style="padding: 0;margin-bottom: 10px; overflow-x: hidden; max-height: 285px;"
+          ng-style="{ 'overflow-y': receivePaymentInvoices.length <= 5 ? 'hidden' : 'scroll' }">
         <li ng-repeat="invoice in receivePaymentInvoices"
             class="clearfix">
           <div class="col-md-4">
@@ -92,9 +100,10 @@
         <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
 
-      <div ng-show="countCheckedInvoices() === 1"class="col-md-8 pr-10">Remaining balance</div>
-      <div ng-show="countCheckedInvoices() === 1" class="col-md-4 text-right pl-10">
+      <div class="col-md-8 pr-10">Remaining balance</div>
+      <div class="col-md-4 text-right pl-10">
         <strong ng-show="countCheckedInvoices() === 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ balance - partialPaymentAmount | currency: '$': 2 }}</strong>
+        <strong ng-show="countCheckedInvoices() !== 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">$0.00</strong>
       </div>
 
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>

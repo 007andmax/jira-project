@@ -573,6 +573,8 @@
             return $scope.totalSum.invoices[item.id];
           } else if ($scope.orderInvoices.field === 'sum') {
             return item.sum
+          } else if ($scope.orderInvoices.field === 'balance') {
+            return ((item.totalSum || item.sum) - item.paidSum);
           }
         };
 
