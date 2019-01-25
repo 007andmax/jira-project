@@ -1,6 +1,7 @@
 .customer-list {
   padding: 45px 30px;
 }
+
 /*test*/
 .customer-list ul,
 .customer-list li {
@@ -43,9 +44,11 @@
 .customer-list-content-header {
   font-weight: 700;
 }
-.customer-list-content-header [class*=col-]{
+
+.customer-list-content-header [class*=col-] {
   word-break: normal;
 }
+
 .customer-list-content li {
   padding: 14.5px 5px;
   border-bottom: 1px solid #eee;

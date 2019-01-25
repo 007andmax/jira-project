@@ -12,7 +12,7 @@
   <div class="note-modal-content clearfix">
     <p>Receive Payments for the following</p>
     <div class="form-group clearfix">
-      <div class="col-md-8" style="padding-right: 10px;">
+      <div class="col-md-8 fix-caret" style="padding-right: 10px;">
         <label class="control-label">Company Name</label>
 
         <qt-dropdown-typehead list-for-dropdown="companies"
@@ -117,7 +117,7 @@
                  uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
           <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
 
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style="top: 40px;">
             <li ng-repeat="(value, label) in paymentMethod"
                 ng-click="invoiceToReceive.method = value">
               <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>

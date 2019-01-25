@@ -30,6 +30,15 @@
   margin-left: 15px;
 }
 
+.form-group .fix-caret .report-caret-icon {
+  right: 0 !important;
+  top: 12px !important;
+}
+
+.form-group .fix-caret input {
+  cursor: pointer;
+}
+
 .company-window .company-schedule .timer-quantity .time_drop_down .min_drop_down {
   left: 82px;
   width: 100%;
@@ -58,7 +67,6 @@
   top: 7px;
   cursor: pointer;
 }
-
 
 .company-info-content .form-group .report-caret-icon {
   right: 7px;
@@ -112,7 +120,7 @@
 
 .star-icn.active {
   background-position: 0 0;
-
+  
 }
 
 .download-agent-modal {
@@ -137,14 +145,14 @@
 }
 
 .download-agent-modal .btn-primary.not-active {
-  background-color: #C4CBD5;
-  border-color: #C4CBD5;
+  background-color: #c4cbd5;
+  border-color: #c4cbd5;
   cursor: default;
   pointer-events: none;
 }
 
 .download-agent-modal .btn {
-  background-color: #16A4FA;
+  background-color: #16a4fa;
   width: 100%;
   text-align: left;
   height: 48px;
@@ -188,11 +196,11 @@
   border-radius: 4px;
   background-color: #2ec866;
   border: solid 1px #189947;
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   /* font-family: Graphik; */
   font-size: 14px;
   font-weight: 500;
@@ -200,7 +208,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #ffffff;
+  color: #fff;
 }
 
 .dropdown-wo-max-height .dropdown-menu {
@@ -210,9 +218,9 @@
 .download-agent-company img {
   width: 15px;
   height: 27px;
-
+  
   color: white;
-
+  
   margin-left: 12px;
 }
 
@@ -414,7 +422,7 @@
 .company-info-content .company-schedule:after {
   background-image: url(../images/new-icons/company-schedule.svg);
   top: 3px;
-
+  
 }
 
 .company-schedule-list {
@@ -605,17 +613,17 @@
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-
+  
   .company-edit-button {
     max-width: 75%;
   }
-
+  
   .company-download-icn,
   .company-edit-icn,
   .company-remove-icn {
     margin-left: 5px;
   }
-
+  
   .company-name-content {
     width: 73%;
   }
@@ -625,7 +633,7 @@
   .company-edit-button {
     max-width: 72%;
   }
-
+  
   .company-name-content {
     width: 70%;
   }
@@ -1019,7 +1027,7 @@
   bottom: 5px;
   left: 42px;
   font-size: 13px;
-
+  
   color: #94a4b8;
   content: 'hours';
 }
