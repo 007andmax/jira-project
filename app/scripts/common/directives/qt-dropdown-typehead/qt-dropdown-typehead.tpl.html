@@ -29,7 +29,9 @@
            ng-keyup="$ctrl.listFilterFunction()">
     <div>
           <span class="x-mark" ng-click="$ctrl.clearValueByIconClick()" ng-show="$ctrl.viewValueItem.length">
-            <i class="icn-sm icn-remove-old" tooltip="clear"
+            <i class="icn-sm icn-remove-old"
+               tooltip="clear"
+               style="top: 14px;right: 10px;"
                tooltip-placement="top"></i>
           </span>
           <span class="caret-mark ng-hide" ng-hide="$ctrl.viewValueItem.length" ng-click="$ctrl.changeDropdownState()">
