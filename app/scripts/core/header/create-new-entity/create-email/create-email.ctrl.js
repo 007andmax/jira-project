@@ -12,7 +12,7 @@
       $scope.emails = [];
       $scope.close = $uibModalInstance.dismiss;
       $scope.selectedCompany = $scope.$parent.reportSetting.company;
-      $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : UsersService.getAllUsers();
+      $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : getActiveUsers(UsersService.getAllUsers());
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
       };
@@ -23,7 +23,13 @@
 
       function getCompanyAndTechUsers (users) {
         return users.filter(function(user) {
-          return (user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id);
+          return ((user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id) && (!user.deletedAt));
+        });
+      }
+
+      function getActiveUsers(users) {
+        return users.filter(function(user) {
+          return !user.deletedAt;
         });
       }
 
@@ -260,7 +266,7 @@
               return el && el.includes(val);
             })
         })
-        console.log($scope.$parent.$ctrl, 'CTRL')
+        console.log($scope, 'CTRL')
       }
 
 
