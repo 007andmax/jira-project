@@ -169,7 +169,7 @@
 
     $scope.hideTotalTickets = function() {
       $rootScope.customerTicketShowTotalTicketAmount = $scope.customerTicketShowTotalTicketAmount;
-    }
+    };
 
     // to clear company input field when report type changed to Summary
     $scope.$watch('reportType', function () {
