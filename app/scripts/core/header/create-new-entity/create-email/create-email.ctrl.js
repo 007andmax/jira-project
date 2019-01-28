@@ -22,8 +22,9 @@
       $scope.attachments = [];
 
       function getCompanyAndTechUsers (users) {
-        return users.filter((user) => (user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id));
-      }
+        return users.filter(function(user) {
+          return (user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id)
+      });
 
       function keypressHandle(evt) {
         if (evt.keyCode === 13) {
