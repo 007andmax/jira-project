@@ -343,9 +343,9 @@
 }
 
 .new-payments.users-bg {
-  margin-top: 97px;
+  /*margin-top: 97px;*/
   position: relative;
-  padding-top: 15px;
+  padding-top: 112px;
 }
 
 .new-payments.users-bg .list-heading {
