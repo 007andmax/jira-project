@@ -25,8 +25,6 @@
         return users.filter((user) => (user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id));
       }
 
-      console.log($scope.users, UsersService.getAllUsers());
-
       function keypressHandle(evt) {
         if (evt.keyCode === 13) {
           $scope.addEmail($scope.newEmail);
