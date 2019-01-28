@@ -12,6 +12,7 @@
       $scope.emails = [];
       $scope.close = $uibModalInstance.dismiss;
       $scope.selectedCompany = $scope.$parent.reportSetting.company;
+      $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : UsersService.getAllUsers();
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
       };
@@ -20,9 +21,9 @@
 
       $scope.attachments = [];
 
-      const getCompanyAndTechUsers = (users) =>
-        users.filter((user) => (user.accountType ==='TECH' || user.company.id ===  $scope.selectedCompany.id));
-      $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : UsersService.getAllUsers();
+      function getCompanyAndTechUsers (users) {
+        return users.filter((user) => (user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id));
+      }
 
       $scope.users = getCompanyAndTechUsers($scope.users);
 
