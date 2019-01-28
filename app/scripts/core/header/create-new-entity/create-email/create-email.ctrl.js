@@ -266,7 +266,6 @@
               return el && el.includes(val);
             })
         })
-        console.log($scope, 'CTRL')
       }
 
 
