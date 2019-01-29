@@ -21,6 +21,7 @@
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
             $scope.tagColors = TagsService.getColors();
+
             $scope.allTags = [];
 
 
@@ -151,6 +152,7 @@
                 areNewTagsDownloading;
               $scope.$watch('newTag', searchTag);
               $scope.addTag = function (value) {
+                console.log($scope, '2222');
                 if (typeof value === 'string') {
                   if (!$scope.currentCompany.allowCreateTags && !$rootScope.currentUser.isOwner && !$scope.tagFilter) {
                     return;
@@ -167,6 +169,7 @@
                       $scope.dropdownOpened = false;
                     }
                   } else {
+
                     if ($scope.isCompany) {
                       var createdTag = $scope.result.find(function(tag) {
                         return tag.word === value;
@@ -181,15 +184,19 @@
                         var tagToCreate = {
                           word: value
                         };
-                        TagsService.saveForCompany(tagToCreate, function(res) {
-                          tagToCreate.id = res.data.id;
-                          $scope.ticketTags.push(tagToCreate);
-                        });
-                      }
-                      if ($scope.companyId) {
-                        updateCompanyTags();
+                        if ($scope.companyId) {
+                          updateCompanyTags(false, tagToCreate);
+                        } else {
+                          TagsService.saveForCompany(tagToCreate, function(res) {
+                            tagToCreate.id = res.data.id;
+                            $scope.ticketTags.push(tagToCreate);
+                          })
+                        }
+
                       }
                     } else {
+
+
                       $scope.ticketTags.push({
                         word: value,
                         colorCode: 0
@@ -222,8 +229,9 @@
               $scope.removeTag = function (index) {
                 $scope.ticketTags.splice(index, 1);
                 tagsChanged = true;
+                console.log($scope, '0909090909');
                 if ($scope.companyId) {
-                  updateCompanyTags();
+                  updateCompanyTags(true, $scope.ticketTags);
                 }
               };
 
@@ -259,6 +267,8 @@
                 event.stopPropagation();
               };
               $scope.setDropdownOpened = function (open) {
+
+                // console.log('DSADADASDAS')
                 if (!open) {
                   $scope.dropdownOpened = false;
                 }
@@ -271,7 +281,11 @@
               });
             }
 
-            function updateCompanyTags() {
+            function updateCompanyTags(remove, tagsToUpdate) {
+              console.log(remove)
+              if (!remove) {
+                $scope.ticketTags.push(tagsToUpdate);
+              }
               TagsService.setTagsInCompany($scope.ticketTags, $scope.companyId, function() {
                 $scope.$broadcast();
               })
