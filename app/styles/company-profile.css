@@ -349,6 +349,11 @@
   font-size: 13px;
 }
 
+.company-info-content .tags-wrap {
+  border: 1px solid #eae9e9;
+  margin: 10px 0 0;
+}
+
 .company-info-header .company-name {
   color: #364656;
   font-size: 20px;
