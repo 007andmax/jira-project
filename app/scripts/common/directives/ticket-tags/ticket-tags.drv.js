@@ -152,7 +152,6 @@
                 areNewTagsDownloading;
               $scope.$watch('newTag', searchTag);
               $scope.addTag = function (value) {
-                console.log($scope, '2222');
                 if (typeof value === 'string') {
                   if (!$scope.currentCompany.allowCreateTags && !$rootScope.currentUser.isOwner && !$scope.tagFilter) {
                     return;
@@ -179,6 +178,9 @@
                         if (!checkTagPresence(createdTag)) {
                           $scope.ticketTags.push(createdTag);
                         }
+                        if ($scope.companyId) {
+                          updateCompanyTags(false, createdTag);
+                        }
 
                       } else {
                         var tagToCreate = {
@@ -201,6 +203,8 @@
                         word: value,
                         colorCode: 0
                       });
+
+
                     }
 
 
@@ -211,7 +215,9 @@
                   if (!checkTagPresence(value)) {
                     $scope.ticketTags.push(value);
                   }
-
+                  if ($scope.companyId) {
+                    updateCompanyTags(false);
+                  }
                   $scope.dropdownOpened = false;
                 }
                 tagsChanged = true;
@@ -229,7 +235,6 @@
               $scope.removeTag = function (index) {
                 $scope.ticketTags.splice(index, 1);
                 tagsChanged = true;
-                console.log($scope, '0909090909');
                 if ($scope.companyId) {
                   updateCompanyTags(true, $scope.ticketTags);
                 }
@@ -282,9 +287,8 @@
             }
 
             function updateCompanyTags(remove, tagsToUpdate) {
-              console.log(remove)
               if (!remove) {
-                $scope.ticketTags.push(tagsToUpdate);
+                tagsToUpdate && $scope.ticketTags.push(tagsToUpdate);
               }
               TagsService.setTagsInCompany($scope.ticketTags, $scope.companyId, function() {
                 $scope.$broadcast();
