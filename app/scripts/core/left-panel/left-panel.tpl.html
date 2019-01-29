@@ -1544,10 +1544,24 @@
           Email Notifications
         </div>
 
-        <div class="center-category__category" ng-click="stateGo($event, 'settings.tags')"
+        <div class="center-category__category"
+             ng-click="stateGo($event, 'settings.tags.companies', {test: true})"
              ng-class="{active: $state.is('settings.tags')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
           <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">-->
           Manage Tags
+        </div>
+
+        <div ng-style="{'height': ($state.is('settings.tags.companies') || $state.is('settings.tags.tickets'))  ? '70px' : '0'}"
+             class="category-expanded angular-animate">
+          <div ng-if="$state.is('settings.tags.companies') || $state.is('settings.tags.tickets')" navigation-bar>
+            <div class="category-expanded-paragraph subsettings"
+                 ng-click="stateGo($event, 'settings.tags.companies')"
+                 ng-class="{active: $state.is('settings.tags.companies')}"> Companies</div>
+
+            <div class="category-expanded-paragraph subsettings"
+                 ng-click="stateGo($event, 'settings.tags.tickets')"
+                 ng-class="{active: $state.is('settings.tags.tickets')}"> Tickets</div>
+          </div>
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.activityHistory')"

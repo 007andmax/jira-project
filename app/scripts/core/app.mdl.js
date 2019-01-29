@@ -195,6 +195,22 @@
           templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl'
         }))
+        .state('settings.tags.companies', waitForServices({
+          url: '/companies',
+          templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
+          controller: 'quicktech.core.settings.tagsCtrl',
+          params: {
+            type: 'company'
+          }
+        }))
+        .state('settings.tags.tickets', waitForServices({
+          url: '/tickets',
+          templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
+          controller: 'quicktech.core.settings.tagsCtrl',
+          params: {
+            type: 'ticket'
+          }
+        }))
         .state('settings.credit-card', waitForServices({
           url: '/credit-card',
           templateUrl: '/html/scripts/core/settings/credit-card/credit-card.tpl.html',
