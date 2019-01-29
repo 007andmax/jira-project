@@ -14,7 +14,9 @@
             tagFilter: '<',
             onSaveFunc: '<',
             isCompany: "<",
-            newDesign: '<'
+            newDesign: '<',
+            companyTags: '<',
+            companyId: '<'
           },
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -46,7 +48,7 @@
                   $scope.result = resp.data;
                   $scope.allTags = resp.data;
                   $scope.lastResult = resp.data;
-                })
+                });
 
                 $scope.$watch(function() {
                   return $rootScope.tagForCompanyCreated;
@@ -57,11 +59,9 @@
                       $scope.result = resp.data;
                       $scope.allTags = resp.data;
                       $scope.lastResult = resp.data;
-                    })
+                    });
                   }
-
-
-                })
+                });
 
                 $scope.$watch(function() {
                   return $rootScope.createdCompanyTag;
@@ -69,13 +69,13 @@
                   if (val === 'string') {
                     $scope.allTags = $scope.allTags.filter(function(el) {
                       return el.id !== val;
-                    })
+                    });
 
                     $scope.result = $scope.result.filter(function(el) {
                       return el.id !== val;
-                    })
+                    });
                   }
-                })
+                });
 
                 // var tags = ['first', 'second', 'third', 'fourth'];
 
@@ -152,6 +152,7 @@
                 areNewTagsDownloading;
               $scope.$watch('newTag', searchTag);
               $scope.addTag = function (value) {
+                console.log($scope, '2222');
                 if (typeof value === 'string') {
                   if (!$scope.currentCompany.allowCreateTags && !$rootScope.currentUser.isOwner && !$scope.tagFilter) {
                     return;
@@ -161,7 +162,7 @@
                     var tag = $scope.allTags.find(function(el) {
                       return el.word.toLowerCase() === value.toLowerCase();
                     });
-                    if (tag) {;
+                    if (tag) {
                       if (!checkTagPresence(tag)) {
                         $scope.ticketTags.push(tag);
                       }
@@ -182,14 +183,16 @@
                       } else {
                         var tagToCreate = {
                           word: value
+                        };
+                        if ($scope.companyId) {
+                          updateCompanyTags(false, tagToCreate);
+                        } else {
+                          TagsService.saveForCompany(tagToCreate, function(res) {
+                            tagToCreate.id = res.data.id;
+                            $scope.ticketTags.push(tagToCreate);
+                          })
                         }
 
-                        TagsService.saveForCompany(tagToCreate, function(res) {
-                          tagToCreate.id = res.data.id;
-
-
-                          $scope.ticketTags.push(tagToCreate);
-                        })
                       }
                     } else {
 
@@ -226,6 +229,10 @@
               $scope.removeTag = function (index) {
                 $scope.ticketTags.splice(index, 1);
                 tagsChanged = true;
+                console.log($scope, '0909090909');
+                if ($scope.companyId) {
+                  updateCompanyTags(true, $scope.ticketTags);
+                }
               };
 
               // $scope.$watch(function() {
@@ -273,6 +280,17 @@
                 return tag.word.indexOf(query) !== -1;
               });
             }
+
+            function updateCompanyTags(remove, tagsToUpdate) {
+              console.log(remove)
+              if (!remove) {
+                $scope.ticketTags.push(tagsToUpdate);
+              }
+              TagsService.setTagsInCompany($scope.ticketTags, $scope.companyId, function() {
+                $scope.$broadcast();
+              })
+            }
+
             // function searchTag(query, forceLoad, offset) {
             //   // console.log(query, "QUEYR")
             //   if (forceLoad || (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === '')))) {

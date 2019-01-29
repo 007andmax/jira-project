@@ -41,19 +41,19 @@
             windowClass: 'modal-remote-agent',
             templateUrl: '/html/scripts/core/companies/download-agent.tpl.html',
             controller: 'quicktech.core.companies.downloadAgentModal'
-          }
+          };
 
           $rootScope.companyForDownload = $scope.company;
 
           $uibModal.open(modalParams);
-        }
+        };
 
         //$timeout(getCorrectWorkingTime(), 1000);
         $scope.$watch(function(){
           return $scope.companyInfo;
         }, function(data){
           if(data) {
-            getCorrectWorkingTime()
+            getCorrectWorkingTime();
           }
         });
 
@@ -64,7 +64,7 @@
             getCorrectWorkingTime();
             $rootScope.updateTimePickers = false;
           }
-        })
+        });
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
@@ -85,8 +85,8 @@
         $scope.activeTechUsers = function() {
           return UsersService.getTechUsers().filter(function(el) {
             return el.userEnabled && !el.deletedAt;
-          })
-        }
+          });
+        };
 
         $scope.descriptionMaxLength = 300;
 
@@ -451,6 +451,8 @@
             }
           });
         }
+
+        console.log($scope, '$scope');
 
 
       }]);
