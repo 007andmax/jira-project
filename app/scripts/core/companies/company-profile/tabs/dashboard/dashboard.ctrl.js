@@ -67,7 +67,10 @@
         });
 
         $scope.$on('updateCompanyTags', function () {
-          return ($scope.companyInfo = CompaniesService.getOneById($scope.companyInfo.id));
+          const currentTags = $scope.companyInfo.tags;
+          $scope.companyInfo = CompaniesService.getOneById($scope.companyInfo.id);
+          $scope.companyInfo.tags = $scope.companyInfo.tags ? $scope.companyInfo.tags : currentTags;
+          return $scope.companyInfo;
         });
 
         CompaniesService.getIndustries(function (resp) {
