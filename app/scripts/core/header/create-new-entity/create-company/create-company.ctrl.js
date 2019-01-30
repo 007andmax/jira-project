@@ -461,6 +461,7 @@
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
 
                 TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function(res) {
+                  CompaniesService.updateCompanyTags($scope.companyTags, companyId);
                 });
 
                 if (!($scope.savedState && $scope.savedState.items.length)) {

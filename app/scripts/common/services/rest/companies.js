@@ -62,6 +62,13 @@
         });
     }
 
+    function updateCompanyTags(newCompanyTags, companyId) {
+      const companyForChangeIndex = storage.companies.findIndex(function(item) {
+        return item.id === companyId;
+      });
+      return storage.companies[companyForChangeIndex].tags = newCompanyTags;
+    }
+
     $http.get('/company/clients').then(function (resp) {
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
@@ -1047,7 +1054,8 @@
       getReferenceDate: getReferenceDate,
       setReferenceDate: setReferenceDate,
       resetReferenceDate: resetReferenceDate,
-      sendEmail: sendEmail
+      sendEmail: sendEmail,
+      updateCompanyTags: updateCompanyTags
     }
 
   }]);

@@ -74,6 +74,7 @@
               });
 
               modalInstance.result.finally(function () {
+                $scope.$emit('updateCompanyTags');
                 $('body').removeClass('non-body-scroll');
               });
             }
