@@ -10,20 +10,28 @@
       console.log('create email template', $scope.selectedUsers)
 
       $scope.emails = [];
-
-      console.log($scope, '$SCOPe')
       $scope.close = $uibModalInstance.dismiss;
-      $scope.users = UsersService.getAllUsers();
-      // $scope.close = $scope.closeWindow;
-
+      $scope.selectedCompany = $scope.$parent.reportSetting.company;
+      $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : getActiveUsers(UsersService.getAllUsers());
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
-      }
+      };
 
       var uploadingAttachmentsCount = 0;
 
-      $scope.attachments = []
+      $scope.attachments = [];
 
+      function getCompanyAndTechUsers (users) {
+        return users.filter(function(user) {
+          return ((user.accountType ==='TECH' || user.company.id === $scope.selectedCompany.id) && (!user.deletedAt));
+        });
+      }
+
+      function getActiveUsers(users) {
+        return users.filter(function(user) {
+          return !user.deletedAt;
+        });
+      }
 
       function keypressHandle(evt) {
         if (evt.keyCode === 13) {
@@ -42,11 +50,11 @@
 
 
 
-      window.addEventListener('keyup', keypressHandle)
+      window.addEventListener('keyup', keypressHandle);
 
       $scope.$on('destroy', function() {
         window.removeEventListener('keyup', keypressHandle);
-      })
+      });
 
       $scope.setFocus = function (event) {
         $scope.focusInput = !$scope.focusInput;
@@ -122,13 +130,13 @@
           content: content,
           subject: $scope.subject,
           customHtml: isCustomHTML
-        }
+        };
 
 
         CompaniesService.sendEmail(data, function() {
-          $scope.close()
-        })
-      }
+          $scope.close();
+        });
+      };
 
 
 
@@ -258,7 +266,6 @@
               return el && el.includes(val);
             })
         })
-        console.log($scope.$parent.$ctrl, 'CTRL')
       }
 
 
