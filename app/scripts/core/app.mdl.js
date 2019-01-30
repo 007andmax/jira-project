@@ -324,6 +324,25 @@
           url: '/reports/accountsReceivable',
           templateUrl: '/html/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('hardware-reports', waitForServices({
+          url: '/reports/hardware-reports',
+          templateUrl: '/html/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('device-ip-summary', waitForServices({
+            url: '/reports/device-ip-summary',
+            templateUrl: '/html/scripts/core/reports/reports-templates/device-ip-summary.tpl.html',
+            controller: 'quicktech.core.reports.reportsCtrl'
+        })).state('hardware-summary', waitForServices({
+            url: '/reports/hardware-summary',
+            templateUrl: '/html/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
+            controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('software-summary', waitForServices({
+            url: '/reports/software-summary',
+            templateUrl: '/html/scripts/core/reports/reports-templates/software-summary.tpl.html',
+            controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
 
