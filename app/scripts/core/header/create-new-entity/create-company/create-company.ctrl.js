@@ -50,17 +50,7 @@
             suiteNumber: '',
             isPrimary: false,
           });
-        }
-
-
-        $scope.$watch('companyTags', function(val) {
-
-        }, true)
-
-
-        // console.log("CONTROLLER MOTHERFUKCER")
-
-
+        };
 
         $scope.timeFormat = ['AM', 'PM'];
 
@@ -467,7 +457,8 @@
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
 
                 TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function(res) {
-                })
+                  CompaniesService.updateCompanyTags($scope.companyTags, companyId);
+                });
 
                 if (!($scope.savedState && $scope.savedState.items.length)) {
                   if(isCreateContract && $scope.selectedContractType) {

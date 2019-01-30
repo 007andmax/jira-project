@@ -111,31 +111,30 @@
   min-height: 45px;
 }
 
-.tags-modal-wrapper .tags .tag-label, .tags-modal-wrapper .readonly-tags .tag-label {
+.tags-modal-wrapper .tags .tag-label,
+.tags-modal-wrapper .readonly-tags .tag-label,
+.company-info-content .tags-wrap .tags .tag-label {
   position: relative;
-  display: inline-block;
   min-width: 35px;
   padding: 6px 8px;
   margin: 2px;
   border-radius: 3px;
   background-color: #f8f9fa;
   border: solid 1px #edf2f6;
-  
   font-size: 12px;
-  
   line-height: 1.33;
   color: #4f5f79;
-  
   display: flex !important;
   align-items: center !important;
 }
 
-.tags-modal-wrapper .remove-tag {
+.tags-modal-wrapper .remove-tag,
+.company-info-content .tags-wrap .remove-tag {
   position: static;
   margin: 0;
   /* transform: translateY(0.5px) */
   /* width: 14px !important; */
-  height: 12px !important;
+  height: 13px !important;
   /* margin-left: 8px !important; */
 }
 
@@ -163,7 +162,8 @@
   color: #364656;
 }
 
-.tags .tag-label span {
+.tags .tag-label span,
+.company-info-content .tags-wrap .tags .tag-label span {
   display: inline-block;
   padding-right: 9px;
 }
@@ -173,15 +173,15 @@
   position: absolute;
   right: 7px;
   top: 6px;
-  background-position: -697px -1px;
+  background-position: -696px 0;
 }
 
 .remove-tag:hover {
-  background-position: -737px -1px;
+  background-position: -736px 0;
 }
 
 .remove-tag.icn-xs {
-  width: 8px;
+  width: 10px;
   height: 8px;
 }
 

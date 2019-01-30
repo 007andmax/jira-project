@@ -16,12 +16,6 @@
       <span>Allow user to create custom Tags</span>
     </div>
 
-    <div class="tumblers">
-      <a class="pointer" ng-click="setShown('ticket')">Tickets</a>
-      <a class="pointer" ng-click="setShown('company')">Companies</a>
-    </div>
-
-
     <div ng-if="shownTags === 'ticket'">
       <div class="form-group">
         <input type="search" class="form-control" placeholder="Search Tags..." ng-model="keyword">

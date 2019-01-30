@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.tagsCtrl',
-    ['$scope', 'TagsService', 'CompaniesService', '$rootScope', function ($scope, TagsService, CompaniesService, $rootScope) {
+    ['$scope', 'TagsService', 'CompaniesService', '$rootScope','$state', function ($scope, TagsService, CompaniesService, $rootScope, $state) {
 
       $scope.orderTags = {
         field: 'word',
@@ -21,9 +21,9 @@
 
       TagsService.getAllCompanies($scope, function(resp) {
         $scope.companyTags = resp.data || resp;
-      })
+      });
 
-
+      $rootScope.$on('$stateChangeStart', function(){setShown(true);});
 
 
 
@@ -35,12 +35,12 @@
 
           $scope.companyTags = $scope.companyTags.filter(function(el) {
             return el.id !== val;
-          })
+          });
         } else if (val) {
 
           var index = $scope.companyTags.findIndex(function(el) {
             return el.id === val.id;
-          })
+          });
 
 
           if (index !== -1) {
@@ -50,15 +50,13 @@
             $scope.companyTags.push(val);
           }
         }
-      })
+      });
 
       $scope.changeColor = function (open, tag) {
         if (!open) {
           TagsService.changeColor(tag.id, tag.colorCode);
         }
       };
-
-      $scope.shownTags = 'ticket';
 
       $scope.createOrEdit = function (tag) {
         if (tag) {
@@ -73,9 +71,15 @@
         }
       };
 
-      $scope.setShown = function(prop) {
-        $scope.shownTags = prop;
+      function setShown(reverse) {
+        if (reverse) {
+          return $scope.shownTags = (($state.params.type !== 'company') ? 'company' : 'ticket');
+        } else {
+          return $scope.shownTags = (($state.params.type === 'company') ? 'company' : 'ticket');
+        }
       }
+
+      setShown();
 
       $scope.saveOrUpdate = function (form) {
         if (form.$valid && !$scope.saveInProgress) {
