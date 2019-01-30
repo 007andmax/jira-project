@@ -454,9 +454,7 @@
               companyInfo: $scope.companyInfo
             }
           });
-        }
-
-        console.log($scope, '$scope');
+        };
 
 
       }]);

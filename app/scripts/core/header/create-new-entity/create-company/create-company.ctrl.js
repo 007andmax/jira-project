@@ -52,10 +52,6 @@
           });
         };
 
-
-        $scope.$watch('companyTags', function(val) {}, true);
-
-
         $scope.timeFormat = ['AM', 'PM'];
 
         var newServiceCounter = 0;
