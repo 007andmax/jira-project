@@ -1,3 +1,7 @@
+<div class="company-info-subtitle" ng-if="companyId">
+  <span>Tags: </span>
+</div>
+
 <div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="setFocus($event)" ng-style="tagFilter ? { 'max-width': '190px', 'width': '190px' } : ''">
   <div class="{{readonlyTags ? 'readonly-tags' : 'tags'}}">
     <span class="tags-title tag-span" ng-hide="readonlyTags || tagFilter || isCompany">Tags: </span>
@@ -13,7 +17,7 @@
          ng-style="tagFilter ? { 'width': '100%' } : ''"
          dropdown-arrow-navigation on-enter="addTag" dropdown-data-item-name="tag">
 
-      <div ng-if="newDesign && !ticketTags.length" class="placeholder">Tags</div>
+      <div ng-if="newDesign && !ticketTags.length && !companyId" class="placeholder">Tags</div>
       <input type="text" class="{{ tagFilter ? 'form-control tags-input' : 'tags-input' }}" ng-model="newTag" placeholder="" set-focus-on-var-change="focusInput">
       <ul ng-show="newDesign" class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
         <li ng-repeat="tag in result | orderBy:'word'"
