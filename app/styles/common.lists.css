@@ -397,9 +397,10 @@
   box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
   font-size: 13px !important;
   border: 1px solid transparent;
-  padding: 15px;
-  max-height: 72px;
+  padding: 13px 15px 0;
+  min-height: 72px;
 }
+
 
 .qt-companies > li {
   padding: 11px 15px;
