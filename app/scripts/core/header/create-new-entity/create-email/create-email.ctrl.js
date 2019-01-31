@@ -93,13 +93,13 @@
           elem.click();
         }
 
-      }
+      };
 
       $scope.addWrittenEmail = function() {
         if ($scope.newEmail) {
           $scope.emails.push($scope.newEmail);
         }
-      }
+      };
 
       $scope.sendEmail = function() {
         var plainText = document.getElementById('editors') && document.getElementById('editors').getAttribute('te-initial-value');
