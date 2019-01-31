@@ -7,11 +7,11 @@
       'TaxesService', '$timeout', 'FilesService', '$uibModalInstance', 'UsersService',
     function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout, FilesService, $uibModalInstance, UsersService) {
 
-      console.log('create email template', $scope.selectedUsers)
+      console.log('create email template', $scope.selectedUsers);
 
       $scope.emails = [];
       $scope.close = $uibModalInstance.dismiss;
-      $scope.selectedCompany = $scope.$parent.reportSetting.company;
+      $scope.selectedCompany = $scope.$parent.reportSetting? $scope.$parent.reportSetting.company : {};
       $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : getActiveUsers(UsersService.getAllUsers());
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
