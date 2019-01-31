@@ -19,6 +19,7 @@
       isShowTechSelectField: '@?',
       isReportAvailable: '=',
       isCustomerTicketOptions: '@?',
+      isHardwareSummaryOptions: '@?',
       isProductOptions: '@?',
       isProductReportForCompanyTab: '@?',
       companyId: '=?',
@@ -54,6 +55,7 @@
     $ctrl.isProductOptions = $scope.$eval($ctrl.isProductOptions);
     $ctrl.isProductReportForCompanyTab = $scope.$eval($ctrl.isProductReportForCompanyTab);
     $ctrl.isSerialNumberOptions = $scope.$eval($ctrl.isSerialNumberOptions);
+    $ctrl.isHardwareSummaryOptions = $scope.$eval($ctrl.isHardwareSummaryOptions);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -66,6 +68,15 @@
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
     $scope.customerTicketShowTotalTicketAmount = true;
+    // hardwareSummary items start
+    $scope.hardwareSummaryWithDevice = true;
+    $scope.hardwareSummaryWithOperationSystem = true;
+    $scope.hardwareSummaryWithCpu = true;
+    $scope.hardwareSummaryWithRam = true;
+    $scope.hardwareSummaryWithDisk = true;
+    $scope.hardwareSummaryWithWarrenty = true;
+    $scope.hardwareSummaryWithSerialNumber = true;
+    // hardwareSummary items end
     // $scope.customerTicketTypes = ['Simple report', 'Extended report'];
     $scope.customerTicketType = 'Extended report';
     $scope.reportTypes = ['Summary', 'Detailed'];
@@ -195,6 +206,34 @@
     $scope.$watch('customerTicketWithTimeSpent', function(val) {
       $rootScope.customerTicketWithTimeSpent = val;
     })
+
+    $scope.$watch('hardwareSummaryWithDevice', function(val) {
+      $rootScope.hardwareSummaryWithDevice = val;
+    });
+
+    $scope.$watch('hardwareSummaryWithOperationSystem', function(val) {
+      $rootScope.hardwareSummaryWithOperationSystem = val;
+    });
+
+    $scope.$watch('hardwareSummaryWithCpu', function(val) {
+      $rootScope.hardwareSummaryWithCpu = val;
+    });
+
+    $scope.$watch('hardwareSummaryWithRam', function(val) {
+      $rootScope.hardwareSummaryWithRam = val;
+    });
+
+    $scope.$watch('hardwareSummaryWithDisk', function(val) {
+      $rootScope.hardwareSummaryWithDisk = val;
+    });
+
+    $scope.$watch('hardwareSummaryWithWarrenty', function(val) {
+      $rootScope.hardwareSummaryWithWarrenty = val;
+    });
+
+    $scope.$watch('hardwareSummaryWithSerialNumber', function(val) {
+      $rootScope.hardwareSummaryWithSerialNumber = val;
+    });
 
     $scope.$watch('reportSetting.dateRange', function() {
       if ($scope.reportSetting.dateRange) {
@@ -434,6 +473,22 @@
                 $scope.errorNassageForSalesUser = false;
               }
             }
+          } else if (location === '/reports/hardware-summary'){
+            const dataToSend = {
+              type: 'SUMMARY'
+            };
+            if (reportSettings && reportSettings.company) {
+              dataToSend.type = 'DETAILED';
+              dataToSend.companyId = reportSettings.company.id;
+              if (reportSettings && reportSettings.device) {
+                dataToSend.deviceId = reportSettings.device.id;
+              }
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType)
+            }
+            else {
+             return $scope.errorNassageForCompany = false;
+            }
           } else if (location === '/reports/byCommissions') {
             // if (reportSettings.company) {
             //
@@ -597,6 +652,9 @@
             break;
           case('/reports/techReport-ProductSales'):
             ReportsService.exportCsvByTechProductSold(lastSentData);
+            break;
+          case('/reports/hardware-summary'):
+            ReportsService.exportCsvByTechSummary(lastSentData);
             break;
           default:
             console.log("wrong location")

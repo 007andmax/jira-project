@@ -331,6 +331,46 @@
           </label>
         </div>
       </div>
+      <div ng-show="$ctrl.isHardwareSummaryOptions" class="col-md-11">
+        <div class="include-ticket-report">
+          <p>Include the following columns in the report</p>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithDevice">
+            <span class="control-indicator"></span>
+            Device
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithOperationSystem">
+            <span class="control-indicator"></span>
+            Operating System
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithCpu">
+            <span class="control-indicator"></span>
+            CPU
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithRam">
+            <span class="control-indicator"></span>
+            Ram
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithDisk">
+            <span class="control-indicator"></span>
+            Disk
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithWarrenty">
+            <span class="control-indicator"></span>
+            Warrenty
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="hardwareSummaryWithSerialNumber"/>
+            <span class="control-indicator"></span>
+            Serial Number
+          </label>
+        </div>
+      </div>
       <div ng-show="$ctrl.commonCommissions" class="col-md-11">
         <div class="include-ticket-report">
 

@@ -276,6 +276,37 @@
         })
       }
 
+        function getReportHardwareSummary(data) {
+          $scope.hardwareSummaryWithDevice = $rootScope.hardwareSummaryWithDevice;
+          $scope.hardwareSummaryWithOperationSystem = $rootScope.hardwareSummaryWithOperationSystem;
+          $scope.hardwareSummaryWithCpu = $rootScope.hardwareSummaryWithCpu;
+          $scope.hardwareSummaryWithRam = $rootScope.hardwareSummaryWithRam;
+          $scope.hardwareSummaryWithDisk = $rootScope.hardwareSummaryWithDisk;
+          $scope.hardwareSummaryWithWarrenty = $rootScope.hardwareSummaryWithWarrenty;
+          $scope.hardwareSummaryWithSerialNumber = $rootScope.hardwareSummaryWithSerialNumber;
+          $scope.reportAccountsReceivable = {};
+          $scope.loadingInProgress = true;
+          $scope.isReportAvailable = false;
+          var dataToSend;
+          if(data.type === 'SUMMARY') {
+            dataToSend = {};
+          } else {
+            dataToSend = {
+              companyId: data.companyId
+            }
+          }
+
+          if (dataToSend.companyId) {
+            $scope.company = CompaniesService.getOneById(dataToSend.companyId)
+          }
+
+          ReportsService.getReportSummary(dataToSend, function (resp) {
+            $scope.reportHardwareSummary = resp;
+            $scope.isReportAvailable = !!resp[dataToSend.companyId];
+            $scope.loadingInProgress = false;
+          })
+        }
+
       function getReportCommissions(data) {
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
@@ -707,13 +738,17 @@
             case('/reports/byCommissionsDetailed'):
               getDetailedReportCommissions(data);
               // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'commissions-report'
+              $rootScope.reportName = 'commissions-report';
               break;
             case('/reports/byCommissions'):
               getReportCommissions(data);
               // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'commissions-report'
-              break
+              $rootScope.reportName = 'commissions-report';
+              break;
+            case('/reports/hardware-summary'):
+              getReportHardwareSummary(data);
+              $rootScope.reportName = 'hardware-summary';
+              break;
             default:
               console.log("wrong location")
           }
