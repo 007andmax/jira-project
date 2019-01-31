@@ -55,7 +55,7 @@
               <div class="col-md-2" ng-if="hardwareSummaryWithCpu">{{device.report.processors && device.report.processors[0].name}}</div>
               <div class="col-md-1" ng-if="hardwareSummaryWithRam">{{device.report.ram && getRamSize(device.report.ram.total)}}</div>
               <div class="col-md-1" ng-if="hardwareSummaryWithDisk">{{getDiskSize(device.report.logicalDisks)}}</div>
-              <div class="col-md-2" ng-if="hardwareSummaryWithWarrenty">{{device.report.variant && device.report.ram.variant.warrantyDate}}</div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithWarrenty">{{device.report.variant && device.report.variant.warrantyDate}}</div>
               <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumber">{{device.report.system && device.report.system.serial_number}}</div>
             </li>
           </ul>

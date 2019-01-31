@@ -588,8 +588,7 @@
       };
 
       $scope.getDiskSize = function (diskSize) {
-        let size = 0;
-        const oneGb = 1073741824;
+        var size = 0;
         if (diskSize && diskSize.length > 0) {
           diskSize.map(function(item) {
             item.size = item.size? item.size : 0;
