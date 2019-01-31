@@ -76,7 +76,7 @@
       }
 
       function getReportSummary(data, callback) {
-        const url = `${urlForReportSummary}${data.companyId}`;
+        const url = urlForReportSummary+data.companyId;
         return getSummaryReport(url, callback);
       }
 

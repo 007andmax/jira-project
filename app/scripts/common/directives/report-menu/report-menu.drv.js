@@ -68,6 +68,7 @@
     $scope.customerTicketWithTimeSpent = true;
     $scope.customerTicketWithResponseTime = true;
     $scope.customerTicketShowTotalTicketAmount = true;
+    // hardwareSummary items start
     $scope.hardwareSummaryWithDevice = true;
     $scope.hardwareSummaryWithOperationSystem = true;
     $scope.hardwareSummaryWithCpu = true;
@@ -75,6 +76,7 @@
     $scope.hardwareSummaryWithDisk = true;
     $scope.hardwareSummaryWithWarrenty = true;
     $scope.hardwareSummaryWithSerialNumber = true;
+    // hardwareSummary items end
     // $scope.customerTicketTypes = ['Simple report', 'Extended report'];
     $scope.customerTicketType = 'Extended report';
     $scope.reportTypes = ['Summary', 'Detailed'];
