@@ -585,7 +585,23 @@
 
           return num;
         }
-      }
+      };
+
+      $scope.getDiskSize = function (diskSize) {
+        let size = 0;
+        const oneGb = 1073741824;
+        if (diskSize && diskSize.length > 0) {
+          diskSize.map(function(item) {
+            item.size = item.size? item.size : 0;
+            return size += Number.parseInt(item.size);
+          })
+        }
+        return size/1073741824;
+      };
+
+      $scope.getRamSize = function (ramSize) {
+        return ramSize/1073741824;
+      };
 
       function calculateServicesTime(tickets) {
         var overallTime = {};
