@@ -308,12 +308,29 @@
             companyId: data.companyId
           };
         }
-
-        if (dataToSend.companyId) {
-          $scope.company = CompaniesService.getOneById(dataToSend.companyId);
-        }
+        if (dataToSend.companyId) { $scope.company = CompaniesService.getOneById(dataToSend.companyId); }
 
         ReportsService.getReportSummary(dataToSend, function (resp) {
+          if (location.hash === '#/reports/hardware-summary'){
+            $scope.hardwareSummaryWithDeviceItem = $scope.hardwareSummaryWithDevice;
+            $scope.hardwareSummaryWithOperationSystemItem = $scope.hardwareSummaryWithOperationSystem;
+            $scope.hardwareSummaryWithCpuItem = $scope.hardwareSummaryWithCpu;
+            $scope.hardwareSummaryWithRamItem = $scope.hardwareSummaryWithRam;
+            $scope.hardwareSummaryWithDiskItem = $scope.hardwareSummaryWithDisk;
+            $scope.hardwareSummaryWithWarrentyItem = $scope.hardwareSummaryWithWarrenty;
+            $scope.hardwareSummaryWithSerialNumberItem = $scope.hardwareSummaryWithSerialNumber;
+          } else if (location.hash === '#/reports/device-ip-summary') {
+            $scope.deviceIpSummaryWithDeviceItem = $scope.deviceIpSummaryWithDevice;
+            $scope.deviceIpSummaryWithNetworkNameItem = $scope.deviceIpSummaryWithNetworkName;
+            $scope.deviceIpSummaryWithLinkSpeedItem = $scope.deviceIpSummaryWithLinkSpeed;
+            $scope.deviceIpSummaryWithDhcpItem = $scope.deviceIpSummaryWithDhcp;
+            $scope.deviceIpSummaryWithIpAddressItem = $scope.deviceIpSummaryWithIpAddress;
+            $scope.deviceIpSummaryWithSubnetItem = $scope.deviceIpSummaryWithSubnet;
+            $scope.deviceIpSummaryWithGatewayItem = $scope.deviceIpSummaryWithGateway;
+            $scope.deviceIpSummaryWithDns1Item = $scope.deviceIpSummaryWithDns1;
+            $scope.deviceIpSummaryWithDns2Item = $scope.deviceIpSummaryWithDns2;
+            $scope.deviceIpSummaryWithWanIpItem = $scope.deviceIpSummaryWithWanIp;
+          }
           if ($rootScope.hardwareSummaryDevice) {
             $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function(item) {
               return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
