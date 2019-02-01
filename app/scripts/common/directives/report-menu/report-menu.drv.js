@@ -20,6 +20,7 @@
       isReportAvailable: '=',
       isCustomerTicketOptions: '@?',
       isHardwareSummaryOptions: '@?',
+      isDeviceIpSummaryOptions: '@?',
       isProductOptions: '@?',
       isProductReportForCompanyTab: '@?',
       companyId: '=?',
@@ -56,6 +57,7 @@
     $ctrl.isProductReportForCompanyTab = $scope.$eval($ctrl.isProductReportForCompanyTab);
     $ctrl.isSerialNumberOptions = $scope.$eval($ctrl.isSerialNumberOptions);
     $ctrl.isHardwareSummaryOptions = $scope.$eval($ctrl.isHardwareSummaryOptions);
+    $ctrl.isDeviceIpSummaryOptions = $scope.$eval($ctrl.isDeviceIpSummaryOptions);
 
     $ctrl.notifySelectionMap = {};
     $ctrl.tempUsers = [];
@@ -77,6 +79,20 @@
     $scope.hardwareSummaryWithWarrenty = true;
     $scope.hardwareSummaryWithSerialNumber = true;
     // hardwareSummary items end
+
+    // deviceIpSummary items start
+    $scope.deviceIpSummaryWithDevice = true;
+    $scope.deviceIpSummaryWithNetworkName = true;
+    $scope.deviceIpSummaryWithLinkSpeed = true;
+    $scope.deviceIpSummaryWithDhcp = true;
+    $scope.deviceIpSummaryWithIpAddress = true;
+    $scope.deviceIpSummaryWithSubnet = true;
+    $scope.deviceIpSummaryWithGateway = true;
+    $scope.deviceIpSummaryWithDns1 = true;
+    $scope.deviceIpSummaryWithDns2 = true;
+    $scope.deviceIpSummaryWithWanIp = true;
+    // deviceIpSummary items end
+
     // $scope.customerTicketTypes = ['Simple report', 'Extended report'];
     $scope.customerTicketType = 'Extended report';
     $scope.reportTypes = ['Summary', 'Detailed'];
@@ -193,20 +209,21 @@
 
     $scope.$watch('detailsByProducts', function(val) {
       $rootScope.detailsByProducts = val;
-    })
+    });
 
     $scope.$watch('customerTicketWithProducts', function(val) {
       $rootScope.customerTicketWithProducts = val;
-    })
+    });
 
     $scope.$watch('customerTicketWithServices', function(val) {
       $rootScope.customerTicketWithServices = val;
-    })
+    });
 
     $scope.$watch('customerTicketWithTimeSpent', function(val) {
       $rootScope.customerTicketWithTimeSpent = val;
-    })
+    });
 
+    //Hardware Summary reports items start
     $scope.$watch('hardwareSummaryWithDevice', function(val) {
       $rootScope.hardwareSummaryWithDevice = val;
     });
@@ -234,6 +251,53 @@
     $scope.$watch('hardwareSummaryWithSerialNumber', function(val) {
       $rootScope.hardwareSummaryWithSerialNumber = val;
     });
+    //Hardware Summary reports items end
+    //Device Ip Summary reports items start
+    $scope.$watch('deviceIpSummaryWithDevice', function(val) {
+      $rootScope.deviceIpSummaryWithDevice = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithNetworkName', function(val) {
+      $rootScope.deviceIpSummaryWithNetworkName = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithLinkSpeed', function(val) {
+      $rootScope.deviceIpSummaryWithLinkSpeed = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithDhcp', function(val) {
+      $rootScope.deviceIpSummaryWithDhcp = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithDisk', function(val) {
+      $rootScope.deviceIpSummaryWithDisk = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithIpAddress', function(val) {
+      $rootScope.deviceIpSummaryWithIpAddress = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithSubnet', function(val) {
+      $rootScope.deviceIpSummaryWithSubnet = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithGateway', function(val) {
+      $rootScope.deviceIpSummaryWithGateway = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithDns1', function(val) {
+      $rootScope.deviceIpSummaryWithDns1 = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithDns2', function(val) {
+      $rootScope.deviceIpSummaryWithDns2 = val;
+    });
+
+    $scope.$watch('deviceIpSummaryWithWanIp', function(val) {
+      $rootScope.deviceIpSummaryWithWanIp = val;
+    });
+
+    //Device Ip Summary reports items end
 
     $scope.$watch('reportSetting.device', function(val) {
       $rootScope.hardwareSummaryDevice = val;
@@ -477,7 +541,7 @@
                 $scope.errorNassageForSalesUser = false;
               }
             }
-          } else if (location === '/reports/hardware-summary'){
+          } else if (location === '/reports/hardware-summary' || location === '/reports/device-ip-summary'){
             const dataToSend = {
               type: 'SUMMARY'
             };

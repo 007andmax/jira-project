@@ -18,6 +18,7 @@
       $scope.techReportTicketCreated = {};
       $scope.techReportProductSales = {};
       $scope.reportAccountsReceivable = {};
+      $scope.reportHardwareSummary = [];
 
 
 
@@ -271,7 +272,8 @@
         })
       }
 
-        function getReportHardwareSummary(data) {
+      function getDataForSummaryReports() {
+        if (location === '/reports/hardware-summary'){
           $scope.hardwareSummaryWithDevice = $rootScope.hardwareSummaryWithDevice;
           $scope.hardwareSummaryWithOperationSystem = $rootScope.hardwareSummaryWithOperationSystem;
           $scope.hardwareSummaryWithCpu = $rootScope.hardwareSummaryWithCpu;
@@ -279,35 +281,51 @@
           $scope.hardwareSummaryWithDisk = $rootScope.hardwareSummaryWithDisk;
           $scope.hardwareSummaryWithWarrenty = $rootScope.hardwareSummaryWithWarrenty;
           $scope.hardwareSummaryWithSerialNumber = $rootScope.hardwareSummaryWithSerialNumber;
-          $scope.reportAccountsReceivable = {};
-          $scope.loadingInProgress = true;
-          $scope.isReportAvailable = false;
-          var dataToSend;
-          if(data.type === 'SUMMARY') {
-            dataToSend = {};
-          } else {
-            dataToSend = {
-              companyId: data.companyId
-            }
-          }
-
-          if (dataToSend.companyId) {
-            $scope.company = CompaniesService.getOneById(dataToSend.companyId);
-          }
-
-          ReportsService.getReportSummary(dataToSend, function (resp) {
-            if ($rootScope.hardwareSummaryDevice) {
-              $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function(item) {
-                return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
-              });
-            } else {
-              $scope.reportHardwareSummary = resp;
-            }
-
-            $scope.isReportAvailable = !!resp[dataToSend.companyId];
-            $scope.loadingInProgress = false;
-          })
+        } else if(location === '/reports/device-ip-summary') {
+          $scope.deviceIpSummaryWithDevice = $rootScope.deviceIpSummaryWithDevice;
+          $scope.deviceIpSummaryWithNetworkName = $rootScope.deviceIpSummaryWithNetworkName;
+          $scope.deviceIpSummaryWithLinkSpeed = $rootScope.deviceIpSummaryWithLinkSpeed;
+          $scope.deviceIpSummaryWithDhcp = $rootScope.deviceIpSummaryWithDhcp;
+          $scope.deviceIpSummaryWithIpAddress = $rootScope.deviceIpSummaryWithIpAddress;
+          $scope.deviceIpSummaryWithSubnet = $rootScope.deviceIpSummaryWithSubnet;
+          $scope.deviceIpSummaryWithGateway = $rootScope.deviceIpSummaryWithGateway;
+          $scope.deviceIpSummaryWithDns1 = $rootScope.deviceIpSummaryWithDns1;
+          $scope.deviceIpSummaryWithDns2 = $rootScope.deviceIpSummaryWithDns2;
+          $scope.deviceIpSummaryWithWanIp = $rootScope.deviceIpSummaryWithWanIp;
         }
+      }
+
+      function getReportHardwareSummary(data) {
+        getDataForSummaryReports();
+        $scope.reportAccountsReceivable = {};
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+        var dataToSend;
+        if(data.type === 'SUMMARY') {
+          dataToSend = {};
+        } else {
+          dataToSend = {
+            companyId: data.companyId
+          };
+        }
+
+        if (dataToSend.companyId) {
+          $scope.company = CompaniesService.getOneById(dataToSend.companyId);
+        }
+
+        ReportsService.getReportSummary(dataToSend, function (resp) {
+          if ($rootScope.hardwareSummaryDevice) {
+            $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function(item) {
+              return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
+            });
+          } else {
+            $scope.reportHardwareSummary = resp;
+          }
+
+          $scope.isReportAvailable = !!resp[dataToSend.companyId];
+          $scope.loadingInProgress = false;
+        });
+      }
 
       function getReportCommissions(data) {
         $scope.loadingInProgress = true;
@@ -765,6 +783,10 @@
             case('/reports/hardware-summary'):
               getReportHardwareSummary(data);
               $rootScope.reportName = 'hardware-summary';
+              break;
+            case('/reports/device-ip-summary'):
+              getReportHardwareSummary(data);
+              $rootScope.reportName = 'device-ip-summary';
               break;
             default:
               console.log("wrong location")

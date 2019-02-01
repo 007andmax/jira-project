@@ -371,6 +371,61 @@
           </label>
         </div>
       </div>
+      <div ng-show="$ctrl.isDeviceIpSummaryOptions" class="col-md-11">
+        <div class="include-ticket-report">
+          <p>Include the following columns in the report</p>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithDevice">
+            <span class="control-indicator"></span>
+            Device
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithNetworkName">
+            <span class="control-indicator"></span>
+            Network Name
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithLinkSpeed">
+            <span class="control-indicator"></span>
+            Link Speed
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithDhcp">
+            <span class="control-indicator"></span>
+            DHCP
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithIpAddress">
+            <span class="control-indicator"></span>
+            IP Address
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithSubnet"/>
+            <span class="control-indicator"></span>
+            Subnet
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithGateway"/>
+            <span class="control-indicator"></span>
+            Gateway
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithDns1"/>
+            <span class="control-indicator"></span>
+            DNS 1
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithDns2"/>
+            <span class="control-indicator"></span>
+            DNS 2
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="deviceIpSummaryWithWanIp"/>
+            <span class="control-indicator"></span>
+            WAN IP
+          </label>
+        </div>
+      </div>
       <div ng-show="$ctrl.commonCommissions" class="col-md-11">
         <div class="include-ticket-report">
 

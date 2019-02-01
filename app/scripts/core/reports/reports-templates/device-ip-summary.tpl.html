@@ -1,1 +1,79 @@
-<p>device ip summary</p>
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/reports/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     selector=".hardware-summary"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
+  <p class="report-title">Device IP Summary Report</p>
+  <i class="back-page" ui-sref="reports"></i>
+  <div>
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 is-report-available="!!isReportAvailable"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 is-radio-button-hidden="true"
+                 is-device-ip-summary-options="true"
+                 is-date-range-hidden="true">
+
+    </report-menu>
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list___ticket hardware-summary">
+    <div class="product-list-ticket " ng-show="!loadingInProgress"
+         style="width: 1080px;">
+      <div class="report-header">
+        <h1>Device IP Summary Report</h1>
+        <div class="company-info">
+          <h3>{{$scope.company | json}}</h3>
+        </div>
+      </div>
+      <div class="header-product-list-ticket" ng-if="reportHardwareSummary">
+        <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
+      </div>
+      <div ng-if="reportHardwareSummary">
+        <div ng-if="reportHardwareSummary[company.id]">
+          <ul class="con-col">
+            <li class="top-product-list-ticket clearfix">
+              <div class="col-md-1" ng-if="deviceIpSummaryWithDevice"><strong>Device</strong></div>
+              <div class="col-md-3" ng-if="deviceIpSummaryWithNetworkName"><strong>Network Name</strong></div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithLinkSpeed"><strong>Link Speed</strong></div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithDhcp"><strong>DHCP</strong></div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithIpAddress"><strong>IP Address</strong></div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithSubnet"><strong>Subnet</strong></div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithGateway"><strong>Gateway</strong></div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithDns1"><strong>DNS 1</strong></div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithDns2"><strong>DNS 2</strong></div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithWanIp"><strong>WAN IP</strong></div>
+            </li>
+            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id]"
+                on-finish-render="buildPdf()">
+              <div class="col-md-1" ng-if="deviceIpSummaryWithDevice">{{device.label}}</div>
+              <div class="col-md-3" ng-if="deviceIpSummaryWithNetworkName">{{device.hostName}}</div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithLinkSpeed">{{device.report.networkAdapters[0].speed}}</div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithDhcp">{{device.report.networkAdapters[0].dhcp_server}}</div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithIpAddress">{{device.report.networkAdapters[0].ip_address}}</div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithSubnet">{{device.report.networkAdapters[0].subnet}}</div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithGateway">{{device.report.networkAdapters[0].gateway}}</div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithDns1">{{device.report.networkAdapters[0].dns}}</div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithDns2">{{device.report.networkAdapters[0].dns}}</div>
+              <div class="col-md-2" ng-if="deviceIpSummaryWithWanIp">{{device.report.externalIp}}</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
+        <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      </div>
+      <div class="report-footer">
+        <p>Prepare by : <span>{{ username }}</span></p>
+        <p>{{ currentCompany.name }}</p>
+        <p>Quicktech <span>2018</span> ©. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</div>
