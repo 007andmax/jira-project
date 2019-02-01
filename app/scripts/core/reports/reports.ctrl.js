@@ -87,23 +87,21 @@
 
       $scope.$watch('currentCompany', function(val) {
         $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
-      })
+      });
 
 
 
       $scope.getServices = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
           return el.type === "SERVICE";
-        })
-
-
-      }
+        });
+      };
 
       $scope.getProducts = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
-          return el.type === "PRODUCT";
-        })
-      }
+          return el.type === "PRODUCT"
+        });
+      };
 
 
 
@@ -112,21 +110,18 @@
       $scope.durationFilter = function(quanity) {
         var minutes = (quanity * 60) % 60;
         var hours = Math.floor(quanity);
-
         hours = String(hours).length < 2 ? '0' + hours : hours;
         minutes = String(minutes).length < 2 ? '0' + minutes : minutes;
         return hours + ':' + minutes;
-      }
+      };
 
       $scope.calcTaxes = function(taxes, sum) {
         var rate = 0;
-
         taxes.forEach(function(tax) {
           rate += tax.rate;
-        })
-
+        });
         return (sum / 100) * rate;
-      }
+      };
 
 
 
@@ -137,7 +132,7 @@
       };
 
       function getTaxesLabels() {
-        if ($scope.reportByTaxes.type === "DETAILED") {
+        if ($scope.reportByTaxes.type === 'DETAILED') {
           var labels = [];
           if ($scope.reportByTaxes.reducedTaxes) {
             Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function (key) {
@@ -297,11 +292,18 @@
           }
 
           if (dataToSend.companyId) {
-            $scope.company = CompaniesService.getOneById(dataToSend.companyId)
+            $scope.company = CompaniesService.getOneById(dataToSend.companyId);
           }
 
           ReportsService.getReportSummary(dataToSend, function (resp) {
-            $scope.reportHardwareSummary = resp;
+            if ($rootScope.hardwareSummaryDevice) {
+              $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function(item) {
+                return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
+              });
+            } else {
+              $scope.reportHardwareSummary = resp;
+            }
+
             $scope.isReportAvailable = !!resp[dataToSend.companyId];
             $scope.loadingInProgress = false;
           })

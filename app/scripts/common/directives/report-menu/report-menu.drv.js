@@ -235,6 +235,10 @@
       $rootScope.hardwareSummaryWithSerialNumber = val;
     });
 
+    $scope.$watch('reportSetting.device', function(val) {
+      $rootScope.hardwareSummaryDevice = val;
+    });
+
     $scope.$watch('reportSetting.dateRange', function() {
       if ($scope.reportSetting.dateRange) {
         onDateRangeChangeReport([$scope.reportSetting.dateRange.startDate, $scope.reportSetting.dateRange.endDate]);
