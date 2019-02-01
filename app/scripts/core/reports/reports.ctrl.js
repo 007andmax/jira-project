@@ -927,7 +927,19 @@
 
       $scope.build = function(param) {
         $scope.buildPdf(param);
-      }
+      };
+
+      $scope.getDeviceReport = function (device, params){
+        var currentItem = '';
+        if (device.report) {
+          device.report.networkAdapters.map(function(item) {
+            if (item.adapter_index === 1) { currentItem = item[params];}
+          });
+          return currentItem;
+        } else {
+          return ''
+        }
+      };
 
 
 
