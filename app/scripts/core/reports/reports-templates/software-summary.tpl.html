@@ -1,1 +1,85 @@
-<p>software summary</p>
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/reports/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     selector=".hardware-summary"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
+  <p class="report-title">Software Summary Report</p>
+  <i class="back-page" ui-sref="reports"></i>
+  <div>
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 is-report-available="!!isReportAvailable"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 is-soft-list-hidden="true"
+                 is-radio-button-hidden="true"
+                 is-software-summary-options="true"
+                 is-date-range-hidden="true">
+
+    </report-menu>
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress || loadingInProgressSoft"></loading-indicator>
+  <div class="product-list___ticket hardware-summary">
+    <div class="product-list-ticket " ng-show="!loadingInProgress || !loadingInProgressSoft"
+         style="width: 1080px;">
+      <div class="report-header">
+        <h1>Hardware Summary Report</h1>
+        <div class="company-info">
+          <h3>{{'TEst' || 'All companies'}}</h3>
+        </div>
+      </div>
+      <div class="header-product-list-ticket" ng-if="reportSoftwareSummaryData">
+        <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
+      </div>
+      <div ng-if="reportSoftwareSummaryData">
+        <div>
+          <ul class="con-col">
+            <li class="top-product-list-ticket clearfix">
+              <div class="col-md-1" ng-if="softwareSummaryWithCompanyNameItem"><strong>Company name</strong></div>
+              <div class="col-md-3" ng-if="softwareSummaryWithTotalInstallsItem"><strong>Total installs</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem"><strong>Device</strong></div>
+              <div class="col-md-1" ng-if="softwareSummaryWithSoftwareTitleItem"><strong>Software Title</strong></div>
+              <div class="col-md-1" ng-if="softwareSummaryWithInstalationKeyItem"><strong>Instalation Key</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem"><strong>Publisher</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithVersionItem"><strong>Version</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem"><strong>Install Date</strong></div>
+            </li>
+            <li class="content-product-list-ticket clearfix" ng-repeat="item in reportSoftwareSummaryData"
+                on-finish-render="buildPdf()">
+              <!--<p>{{item.data| json}}</p>-->
+              <div ng-if="item.data.length > 0">
+
+                <div ng-repeat="softItem in item.data">
+                  <div ng-if="softItem.report.softList">
+                  <div class="col-md-1" ng-if="softwareSummaryWithCompanyNameItem">{{softItem.hostName}}</div>
+                  <div class="col-md-3" ng-if="softwareSummaryWithTotalInstallsItem">{{softItem.report.softList.softName}}</div>
+                  <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem">{{}}</div>
+                  <div class="col-md-1" ng-if="softwareSummaryWithSoftwareTitleItem">{{}}</div>
+                  <div class="col-md-1" ng-if="softwareSummaryWithInstalationKeyItem">{{}}</div>
+                  <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem">{{}}</div>
+                  <div class="col-md-2" ng-if="softwareSummaryWithVersionItem">{{}}</div>
+                  <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem">{{}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
+        <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      </div>
+      <div class="report-footer">
+        <p>Prepare by : <span>{{ username }}</span></p>
+        <p>{{ currentCompany.name }}</p>
+        <p>Quicktech <span>2018</span> ©. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</div>

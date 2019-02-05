@@ -10,6 +10,28 @@
       </button>
 
 
+      <div class="form-group content" ng-show="$ctrl.isSoftListHidden">
+
+        <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorMassageForSoftwareReport">
+          Please select
+          the soft
+        </div>
+        <div uib-dropdown>
+          <input type="text"
+                 name="reportCompany"
+                 ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
+                 ng-model="reportSetting.soft"
+                 autocomplete="off"
+                 tabindex="3"
+                 smart-dropdown-menu-position
+                 class="form-control form-control-dropdown dropdown-toggle"
+                 uib-typeahead="soft for soft in softSelect"
+                 placeholder="{{'Search software / publisher'}}"
+                 qt-typeahead-async-show-on-focus
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
+          <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+        </div>
+      </div>
 
       <div class="device-report dropdown-remote-report-tech form-group" ng-show="$ctrl.isShowTechSelectField">
         <input type="text"
@@ -24,7 +46,7 @@
                placeholder="Tech"
                uib-typeahead="user as $ctrl.getUserName(user) for user in usersCurrentCompany | filter: $viewValue:stateComparator | orderBy:'firstName'"
                qt-typeahead-async-show-on-focus
-               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}"> </input>
+               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}">
 
         <div typeahead-input-icon-sm="userCompany"></div>
 
@@ -51,7 +73,7 @@
                uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
                qt-typeahead-async-show-on-focus
                placeholder="Device"
-               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}"> </input>
+               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}"/>
         <div typeahead-input-icon-sm="reportAgent"></div>
         <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
@@ -77,7 +99,7 @@
                  qt-typeahead-async-show-on-focus
                  ng-change="reportType ? (previousReportType = reportType) : (reportType = reportType || previousReportType)"
                  readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
         </div>
 
       </div>
@@ -94,7 +116,7 @@
                  uib-typeahead="type for type in customerTicketTypes"
                  qt-typeahead-async-show-on-focus
                  readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
 
         </div>
       </div>
@@ -133,7 +155,7 @@
                  autocomplete="off"
                  class="form-control"
                  placeholder="Serial Number"
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
         </div>
 
       </div>
@@ -156,23 +178,8 @@
                  uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                  placeholder="{{ $ctrl.commonCommissions || $ctrl.detailedCommissions ? 'All companies' : 'Company Name' }}"
                  qt-typeahead-async-show-on-focus
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
           <div class="input-top-4" typeahead-input-icon="userCompany"></div>
-
-          <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies"-->
-          <!--selected-item="reportSetting.company"-->
-          <!--display-property="'name'"-->
-          <!--filter-property="'name'"-->
-          <!--qt-tabindex="'3'"-->
-          <!--qt-ng-disabled="'reportType.toUpperCase() === \'SUMMARY\''"-->
-          <!--qt-ng-required="'reportType.toUpperCase() === \'DETAILED\''"-->
-          <!--qt-name="'reportCompany'"-->
-          <!--qt-readonly-->
-          <!--qt-class="'form-control'"-->
-          <!--qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
-
-          <!--</qt-dropdown-typehead>-->
-
         </div>
       </div>
 
@@ -198,80 +205,11 @@
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
             <div class="input-top-4" typeahead-input-icon="userCompany"></div>
 
-            <!--<qt-dropdown-typehead list-for-dropdown="clientCompanies"-->
-            <!--selected-item="reportSetting.company"-->
-            <!--display-property="'name'"-->
-            <!--filter-property="'name'"-->
-            <!--qt-tabindex="'3'"-->
-            <!--qt-ng-disabled="'reportType.toUpperCase() === \'SUMMARY\''"-->
-            <!--qt-ng-required="'reportType.toUpperCase() === \'DETAILED\''"-->
-            <!--qt-name="'reportCompany'"-->
-            <!--qt-readonly-->
-            <!--qt-class="'form-control'"-->
-            <!--qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">-->
-
-            <!--</qt-dropdown-typehead>-->
-
           </div>
         </div>
 
 
       </div>
-
-      <!-- <div class="content form-group" ng-show="$ctrl.commonCommissions || $ctrl.detailedCommissions">
-        <div>
-          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForSalesUser">
-            Please select
-            the sales user
-          </div>
-          <div style="position: relative;">
-            <input type="text"
-                   class="form-control has-dropdown readonly-normal"
-                   name="reportDateRange"
-                   readonly
-                   date-format="dd/mm/yy"
-                   date-range-picker
-                   options="datePickerOptions"
-                   range max-date="{{ maxDateForDateRangeInputField }}"
-                   ng-model="reportSetting.dateRange"
-                   placeholder="Select Date"> </input>
-            <i class="report-calendar" ng-show="!startDate && !endDate"></i>
-            <i class="icn-sm icn-remove-old pointer"
-               ng-show="startDate && endDate"
-               uib-tooltip="clear date filter"
-               style="pointer-events: all;" tooltip-placement="top" ng-click="resetDate()"></i>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="device-report dropdown-remote-report-tech form-group" ng-show="$ctrl.commonCommissions || $ctrl.detailedCommissions">
-        <input type="text"
-               class="form-control has-dropdown-with-label pointer"
-               autocomplete="off"
-               ng-model="reportSetting.salesUser"
-               name="ticketAssignTo"
-               required
-               typeahead-editable="false"
-               smart-dropdown-menu-position
-               typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-               placeholder="Sales user"
-               uib-typeahead="user as $ctrl.getUserName(user) for user in techUsers | orderBy:'firstName'"
-               qt-typeahead-async-show-on-focus
-               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}"> </input>
-
-        <div typeahead-input-icon-sm="userCompany"></div>
-
-        <div class="ng-scope" typeahead-input-icon="userCompany">
-          <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
-            <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
-               tooltip-placement="top"></i>
-          </span>
-          <span class="x-mark ng-hide" ng-hide="showClearIcon">
-                <i class="icm-sm report-caret-icon"></i>
-          </span>
-        </div>
-
-      </div> -->
 
       <div class="form-group content" ng-show="$ctrl.isProductOptions">
 
@@ -426,6 +364,50 @@
           </label>
         </div>
       </div>
+      <div ng-show="$ctrl.isSoftwareSummaryOptions" class="col-md-11">
+        <div class="include-ticket-report">
+          <p>Include the following columns in the report</p>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithCompanyName">
+            <span class="control-indicator"></span>
+            Company name
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithTotalInstalls">
+            <span class="control-indicator"></span>
+            Total installs
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithDevice">
+            <span class="control-indicator"></span>
+            Device
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithSoftwareTitle">
+            <span class="control-indicator"></span>
+           Software Title
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithInstalationKey">
+            <span class="control-indicator"></span>
+            Installation Key
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithPublisher"/>
+            <span class="control-indicator"></span>
+            Publisher
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithVersion"/>
+            <span class="control-indicator"></span>
+            Version
+          </label>
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="softwareSummaryWithInstallDate"/>
+            <span class="control-indicator"></span>
+            Install Date
+          </label>
+        </div>
+      </div>
       <div ng-show="$ctrl.commonCommissions" class="col-md-11">
         <div class="include-ticket-report">
 
@@ -439,12 +421,6 @@
 
       <div ng-show="$ctrl.detailedCommissions" class="col-md-11">
         <div class="include-ticket-report">
-
-          <!-- <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithProducts"> </input>
-            <span class="control-indicator"></span>
-            Show products cost
-          </label> -->
 
           <label class="control checkbox">
             <input type="radio" name="details" ng-checked="!detailsByProducts" ng-model="detailsByProducts" ng-value="false"> </input>
@@ -479,9 +455,6 @@
           Week</p>
         <p ng-click="$ctrl.setTechReportDateType('MONTH')" ng-class="{'choosen': techReportDateType === 'MONTH'}">
           Month</p>
-        <!-- <p ng-click="$ctrl.setTechReportDateType('CUSTOM')" ng-class="{'choosen': techReportDateType === 'CUSTOM'}">
-          Custom</p> -->
-        <!-- <div ng-show="techReportDateType==='CUSTOM'"> -->
         <div style="position: relative; display: inline-block">
           <input style="display: inline-block;width: 250px;margin-top: 10px;"
                  ng-click="$ctrl.setTechReportDateType('CUSTOM')"
@@ -549,35 +522,6 @@
       <div style="height: 100%;width: 100%;">
         <img src="images/new-icons/message-icon.png" alt="send mail to">
       </div>
-      <!-- <div uib-dropdown-menu style="overflow: hidden">
-        <div class="clearfix add-gadget" stop-propagation="click"
-             ng-class="{'has-error': sendMailForm.$dirty && (!$ctrl.emailToNotify || !$ctrl.emailPattern.test($ctrl.emailToNotify))}">
-          <input class="form-control" type="text" ng-model="$ctrl.emailToNotify"> </input>
-          <div>
-            <i style="margin: 5px 0 0;" class="icn-sm icn-label-save"
-               ng-click="$ctrl.addEmailToNotify($ctrl.emailToNotify, sendMailForm)"></i>
-            <i style="margin-top: -18px;" class="icn-sm icn-remove-old" ng-click="$ctrl.emailToNotify = ''"></i>
-          </div>
-        </div>
-        <ul class="scrollable">
-          <li class="clearfix" ng-if="user.primaryEmail && !user.deletedAt" style="padding: 0"
-              ng-repeat="user in ($ctrl.tempUsers.concat(users)) | orderBy: ['custom', 'firstName'] track by $index">
-            <label class="control checkbox pull-left ng-scope" stop-propagation="click">
-              <input type="checkbox" ng-model="$ctrl.notifySelectionMap[user.primaryEmail]"
-                     placeholder="Add custom email"> </input>
-              <span class="control-indicator"></span>
-              {{ user.primaryEmail || '' }} ({{ $ctrl.getUserName(user) || 'custom email' }})
-            </label>
-          </li>
-        </ul>
-        <div class="fix-btn-report">
-          <button class="grey-btn-report"
-                  ng-click="$ctrl.sendToMail($ctrl.getEmailsArray($ctrl.notifySelectionMap), $ctrl.emailSent)"
-                  type="button" custom-disabled="{{ !$ctrl.isReportAvailable }}">
-            Send
-          </button>
-        </div>
-      </div> -->
     </div>
 
     <div ng-show="$ctrl.isProductReportForCompanyTab"
