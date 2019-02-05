@@ -3,10 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService',
-      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService) {
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService', '$http',
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService, $http) {
 
       $scope.parseDate = Date.parse.bind(Date);
+      var storageSoftwareSummary = {};
 
       $scope.PermissionsService = PermissionsService;
 
@@ -36,6 +37,31 @@
       $scope.chartData = [];
       $scope.chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
       $scope.Math = Math;
+      $scope.softSelect = [];
+
+      $http.get('/devices/extended?companyId='+ CompaniesService.getCurrentCompany().id).then(function (resp) {
+        if(resp) {
+          Object.keys(resp.data).map(function(key) {
+            const softlistArrayFromItem = resp.data[key];
+            if (softlistArrayFromItem) {
+              softlistArrayFromItem.map(function(item) {
+                if (item.report) {
+                  item.report.softList.map(function (item) {
+                    $scope.softSelect.push(item.softName);
+                    $scope.softSelect.push(item.softPublisher);
+                  });
+                }
+              });
+            }
+
+          });
+          console.log($scope.softSelect, '1');
+          $scope.softSelect = new Set($scope.softSelect);
+          console.log($scope.softSelect, '2');
+        }
+      });
+
+
 
       $scope.chartOptions = {
         chart: {
@@ -391,6 +417,8 @@
               return +b.time - +a.time;
             })
             .slice(0, 4);
+
+
 
 
 
