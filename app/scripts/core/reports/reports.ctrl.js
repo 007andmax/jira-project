@@ -387,11 +387,9 @@
 
       function getSoftwareSummaryData(dataToSend) {
         ReportsService.getReportSummary(dataToSend, function (resp) {
-          for(let key in resp){
-             $scope.reportSoftwareSummaryData.push({id: key, data: resp.key});
-          }
           Object.keys(resp).map(function(key) {
-            return $scope.reportHardwareSummary.push({id: key, data: resp.key});
+            console.log({id: key, data: resp[key]});
+            return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
           });
           endReportDataLoading(resp, dataToSend);
           console.log($scope.reportSoftwareSummaryData, '$scope.reportSoftwareSummaryData');
