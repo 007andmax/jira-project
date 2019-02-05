@@ -52,7 +52,6 @@
                 on-finish-render="buildPdf()">
               <!--<p>{{item.data| json}}</p>-->
               <div ng-if="item.data.length > 0">
-
                 <div ng-repeat="softItem in item.data">
                   <div ng-if="softItem.report.softList">
                   <div class="col-md-1" ng-if="softwareSummaryWithCompanyNameItem">{{softItem.hostName}}</div>
@@ -66,7 +65,6 @@
                   </div>
                 </div>
               </div>
-
             </li>
           </ul>
         </div>

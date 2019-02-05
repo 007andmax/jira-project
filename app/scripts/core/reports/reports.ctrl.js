@@ -288,7 +288,6 @@
       }
 
       function getTableTitleForSoftwareSummaryFromRootScope(){
-        console.log($rootScope.softwareSummaryWithCompanyName, '$rootScope.softwareSummaryWithCompanyName;');
         $scope.loadingInProgressSoft = $rootScope.loadingInProgressSoft;
         $scope.softwareSummaryWithCompanyNameItem = $rootScope.softwareSummaryWithCompanyName;
         $scope.softwareSummaryWithTotalInstallsItem = $rootScope.softwareSummaryWithTotalInstalls;
@@ -314,7 +313,6 @@
       }
 
       function getTableTitleForHardwareSummaryFromRootScope(){
-        console.log($rootScope.hardwareSummaryWithDevice, '$rootScope.hardwareSummaryWithDevice;');
         $scope.hardwareSummaryWithDevice = $rootScope.hardwareSummaryWithDevice;
         $scope.hardwareSummaryWithOperationSystem = $rootScope.hardwareSummaryWithOperationSystem;
         $scope.hardwareSummaryWithCpu = $rootScope.hardwareSummaryWithCpu;
@@ -390,8 +388,11 @@
       function getSoftwareSummaryData(dataToSend) {
         ReportsService.getReportSummary(dataToSend, function (resp) {
           for(let key in resp){
-             $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
+             $scope.reportSoftwareSummaryData.push({id: key, data: resp.key});
           }
+          Object.keys(resp).map(function(key) {
+            return $scope.reportHardwareSummary.push({id: key, data: resp.key});
+          });
           endReportDataLoading(resp, dataToSend);
           console.log($scope.reportSoftwareSummaryData, '$scope.reportSoftwareSummaryData');
           return $scope.reportSoftwareSummaryData;
@@ -571,7 +572,6 @@
       }
 
       function normalizeString(str) {
-
         if (!str) return str;
         str = str.split('_');
         str = str.map(function(el) {
