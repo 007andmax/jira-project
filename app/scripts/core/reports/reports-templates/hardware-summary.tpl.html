@@ -23,8 +23,8 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket hardware-summary">
-    <div class="product-list-ticket " ng-show="!loadingInProgress"
-         style="width: 1080px;">
+    <div class="product-list-ticket customer-report hardware-report" ng-show="!loadingInProgress"
+         style="width: 940px;">
       <div class="report-header">
         <h1>Hardware Summary Report</h1>
         <div class="company-info">
@@ -38,7 +38,7 @@
         <div ng-if="reportHardwareSummary[company.id]">
           <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
-              <div class="col-md-1" ng-if="hardwareSummaryWithDeviceItem"><strong>Device</strong></div>
+              <div class="col-md-1 w-14" ng-if="hardwareSummaryWithDeviceItem"><strong>Device</strong></div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem"><strong>Operating System</strong></div>
               <div class="col-md-2" ng-if="hardwareSummaryWithCpuItem"><strong>CPU</strong></div>
               <div class="col-md-1" ng-if="hardwareSummaryWithRamItem"><strong>RAM</strong></div>
@@ -48,7 +48,7 @@
             </li>
             <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id]"
                 on-finish-render="buildPdf()">
-              <div class="col-md-1" ng-if="hardwareSummaryWithDeviceItem">{{device.label}}</div>
+              <div class="col-md-1 w-14" ng-if="hardwareSummaryWithDeviceItem">{{device.label}}</div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem">
                 {{device.report.system && (device.report.system.type + ' ' + device.report.system.version)}}
               </div>

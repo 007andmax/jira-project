@@ -355,6 +355,22 @@
   position: relative;
 }
 
+.hardware-report .w-14 {
+  width: 14% !important;
+}
+
+.device-ip .w-4 {
+  width: 4% !important;
+}
+
+.device-ip .w-7 {
+  width: 7% !important;
+}
+
+.device-ip .w-14-5 {
+  width: 14.5% !important;
+}
+
 .product-list-ticket-pdf {
   width: 1180px;
 }

@@ -24,7 +24,7 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket hardware-summary">
-    <div class="product-list-ticket" ng-show="!loadingInProgress"
+    <div class="product-list-ticket device-ip" ng-show="!loadingInProgress"
          style="width: 1180px;">
       <div class="report-header">
         <h1>Device IP Summary Report</h1>
@@ -39,10 +39,10 @@
         <div ng-if="reportHardwareSummary[company.id]">
           <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
-              <div class="col-md-1" ng-if="deviceIpSummaryWithDeviceItem"><strong>Device</strong></div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithNetworkNameItem"><strong>Network Name</strong></div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithLinkSpeedItem"><strong>Link Speed</strong></div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithDhcpItem"><strong>DHCP</strong></div>
+              <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithDeviceItem"><strong>Device</strong></div>
+              <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithNetworkNameItem"><strong>Network Name</strong></div>
+              <div class="col-md-1 w-7" ng-if="deviceIpSummaryWithLinkSpeedItem"><strong>Link Speed</strong></div>
+              <div class="col-md-1 w-4" ng-if="deviceIpSummaryWithDhcpItem"><strong>DHCP</strong></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithIpAddressItem"><strong>IP Address</strong></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithSubnetItem"><strong>Subnet</strong></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithGatewayItem"><strong>Gateway</strong></div>
@@ -52,10 +52,10 @@
             </li>
             <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id]"
                 on-finish-render="buildPdf()">
-              <div class="col-md-1" ng-if="deviceIpSummaryWithDeviceItem">{{device.label}}</div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithNetworkNameItem">{{device.hostName}}</div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithLinkSpeedItem">{{getDeviceReport(device, 'speed')/1000000}}</div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithDhcpItem">{{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}</div>
+              <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithDeviceItem">{{device.label}}</div>
+              <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithNetworkNameItem">{{device.hostName}}</div>
+              <div class="col-md-1 w-7" ng-if="deviceIpSummaryWithLinkSpeedItem">{{getDeviceReport(device, 'speed')/1000000}}</div>
+              <div class="col-md-1 w-4" ng-if="deviceIpSummaryWithDhcpItem">{{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}</div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithIpAddressItem">{{getDeviceReport(device, 'ip_address')}}</div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithSubnetItem">{{getDeviceReport(device, 'subnet')}}</div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithGatewayItem">{{getDeviceReport(device, 'gateway')}}</div>
