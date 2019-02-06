@@ -378,7 +378,7 @@
             Total installs
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithDevice">
+            <input type="checkbox" ng-model="softwareSummaryWithDevice" ng-disabled="reportSetting.soft">
             <span class="control-indicator"></span>
             Device
           </label>
@@ -388,7 +388,7 @@
            Software Title
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithInstalationKey">
+            <input type="checkbox" ng-model="softwareSummaryWithInstalationKey" ng-disabled="reportSetting.soft">
             <span class="control-indicator"></span>
             Installation Key
           <label class="control checkbox">

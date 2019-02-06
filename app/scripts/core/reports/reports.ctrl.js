@@ -21,6 +21,8 @@
       $scope.reportAccountsReceivable = {};
       $scope.reportHardwareSummary = [];
       $scope.reportSoftwareSummaryData = [];
+      $scope.reportTransformedSoftwareSummaryData = [];
+      $scope.softwareSummaryType = 1;
 
       $scope.loadingInProgress = false;
       $scope.isReportAvailable = false;
@@ -104,8 +106,6 @@
           return el.type === "PRODUCT"
         });
       };
-
-
 
       $scope.buildPdf = buildPdf;
 
@@ -274,20 +274,17 @@
       }
 
       function getDataForSummaryReports() {
-        console.log('12351235');
         if (location.hash === '#/reports/hardware-summary'){
-          console.log('1');
           getTableTitleForHardwareSummaryFromRootScope();
         } else if(location.hash === '#/reports/device-ip-summary') {
-          console.log('2');
           getTableTitleForDeviceIpFromRootScope();
         } else if(location.hash === '#/reports/software-summary') {
-          console.log('3');
           getTableTitleForSoftwareSummaryFromRootScope();
         }
       }
 
       function getTableTitleForSoftwareSummaryFromRootScope(){
+        $scope.softwareSummarySoft = $rootScope.softwareSummarySoft;
         $scope.loadingInProgressSoft = $rootScope.loadingInProgressSoft;
         $scope.softwareSummaryWithCompanyNameItem = $rootScope.softwareSummaryWithCompanyName;
         $scope.softwareSummaryWithTotalInstallsItem = $rootScope.softwareSummaryWithTotalInstalls;
@@ -388,14 +385,56 @@
       function getSoftwareSummaryData(dataToSend) {
         ReportsService.getReportSummary(dataToSend, function (resp) {
           Object.keys(resp).map(function(key) {
-            console.log({id: key, data: resp[key]});
             return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
           });
+          filterReportSoftwareSummaryData();
           endReportDataLoading(resp, dataToSend);
-          console.log($scope.reportSoftwareSummaryData, '$scope.reportSoftwareSummaryData');
           return $scope.reportSoftwareSummaryData;
         });
+      }
 
+      function filterReportSoftwareSummaryData() {
+        $scope.softwareSummaryType = 1;
+        $scope.reportTransformedSoftwareSummaryData = [];
+        $scope.reportSoftwareSummaryData.map(function(item){
+          if (item.data && item.data.length > 0) {
+            item.data.map(function(device) {
+              if (device && device.report && device.report.softList){
+                device.report.softList.map(function(softListItem){
+                  if (softListItem.softName === $scope.softwareSummarySoft || softListItem.softName.includes($scope.softwareSummarySoft)) {
+                    console.log(1);
+                    if ($scope.reportTransformedSoftwareSummaryData.length > 0) {
+                      $scope.reportTransformedSoftwareSummaryData.map(function(item) {
+                        if (softListItem.softName === item.softwareTitle) {
+                          item.totalInstalls +=1;
+                        } else {
+                          $scope.reportTransformedSoftwareSummaryData.push({
+                            companyName: device.hostName,
+                            totalInstalls: 1,
+                            softwareTitle: softListItem.softName,
+                            publisher: softListItem.softPublisher,
+                            version: softListItem.softVersion,
+                            installDate: softListItem.softInstalledOn
+                          })
+                        }
+                      });
+                    } else {
+                      $scope.reportTransformedSoftwareSummaryData.push({
+                        companyName: device.hostName,
+                        totalInstalls: 0,
+                        softwareTitle: softListItem.softName,
+                        publisher: softListItem.softPublisher,
+                        version: softListItem.softVersion,
+                        installDate: softListItem.softInstalledOn
+                      })
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
+        console.log($scope.reportTransformedSoftwareSummaryData);
       }
 
       function endReportDataLoading(resp, dataToSend) {
@@ -476,33 +515,17 @@
         $scope.isReportAvailable = false;
 
         ReportsService.getReportByCommissions(data, function(res) {
-          // console.log(res, 'RES GET REPORT')
-
           $scope.isReportAvailable = res.lines && res.lines.length;
-
-          // console.log(res, res.lines && res.lines.length, "DASDASDASD")
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
-          $scope.showCategoriesData = true
-
+          $scope.showCategoriesData = true;
           var salesByCustomers = [];
           var totalSum = res.totalSum;
           var categories = res.categorySalesValue;
-
-
-
-          $scope.commissionsReport.lines = res.lines.map(function(el) {
-            // el.totalSum = el.totalSum.toFixed(2);
-            //
-            return el;
-          });
-
-
+          $scope.commissionsReport.lines = res.lines.map(function(el) {return el;});
           res.lines = res.lines.map(function(el) {
             el.itemGroup = el.productCategory || normalizeString(el.agreementType);
-
             el.productPrice = el.productPrice || el.totalSum / el.billableQuantity;
-
             return el;
           });
 
@@ -619,40 +642,28 @@
               calculateServicesTime($scope.ticketReport.tickets);
             }
 
-
-
-
             if ($rootScope.customerTicketShowTotalTicketAmount === false) {
               $scope.ticketReport.hideTotalTickets = true;
             }
-
             $scope.showHeader = $rootScope.customerTicketWithTimeSpent
-
-
-
             $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');
             $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
-            // $scope.buildPdf('tickets');
           }
         })
       }
 
       $scope.formatResponseTime = function(time) {
         if (!time && time !== 0) return;
-
         var hours = Math.floor(time / 60);
         var minutes = time % 60;
-
         return addZero(hours) + ':' + addZero(minutes) + ' hr';
-
 
         function addZero(num) {
           if (String(num).length < 2) {
             return '0' + num;
           }
-
           return num;
         }
       };

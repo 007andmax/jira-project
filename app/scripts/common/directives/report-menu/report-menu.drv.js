@@ -634,7 +634,6 @@
             if (reportSettings && reportSettings.soft) {
               dataToSend.companyId = $scope.softwareSummaryCompanyId;
               lastSentData = dataToSend;
-              console.log(dataToSend, 'dataToSend');
               $scope.$emit('requestReportData', dataToSend, location, techType);
             } else if (reportSettings && reportSettings.soft && reportSettings.company) {
               dataToSend.type = 'DETAILED';
@@ -759,12 +758,8 @@
       if (value) {
         $scope.previousReportType = value;
         $scope.reportType = value;
-        // console.log('$scope.reportType', $scope.reportType)
-        // console.log('$scope.previousReportType', $scope.previousReportType)
       } else {
         $scope.reportType = $scope.previousReportType;
-        // console.log('$scope.reportType', $scope.reportType)
-        // console.log('$scope.previousReportType', $scope.previousReportType)
       }
     });
 
