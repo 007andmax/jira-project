@@ -76,7 +76,7 @@
 
       $scope.chartNoDataAvailable.chart.tooltip = {
         contentGenerator: function() {
-          return '<table><tr><td>No data available</td></tr></table>'
+          return '<table><tr><td>No data available</td></tr></table>';
         },
       };
 
@@ -388,6 +388,7 @@
           Object.keys(resp).map(function(key) {
             return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
           });
+          console.log(dataToSend);
           filterReportSoftwareSummaryData();
           endReportDataLoading(resp, dataToSend);
           return $scope.reportSoftwareSummaryData;
@@ -415,13 +416,41 @@
                 return device.report.softList.map(function(softListItem){
                   if (softListItem.softPublisher === $scope.softwareSummarySoft.name) {
                     if (reportTransformedSoftwareSummaryDataInside.length > 0) {
-                      return reportTransformedSoftwareSummaryDataInside.map(function(item) {
-                        if (softListItem.softPublisher === item.publisher&& CompaniesService.getOneById(companyId).name === item.companyName) {
-                          return item.totalInstalls +=1;
+                      const index = reportTransformedSoftwareSummaryDataInside.filter(function(item) {
+                        return item.publisher === $scope.softwareSummarySoft.name;
+                      });
+                      if (index > 0) {
+                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName) {
+                          reportTransformedSoftwareSummaryDataInside[index].totalInstalls += 1;
                         } else {
                           return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
                         }
-                      });
+                      } else {
+                        return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                      }
+
+
+
+
+
+
+
+
+
+                      // return reportTransformedSoftwareSummaryDataInside.map(function(item) {
+                      //   if (softListItem.softPublisher === item.publisher && CompaniesService.getOneById(companyId).name === item.companyName) {
+                      //     const index = reportTransformedSoftwareSummaryDataInside.findIndex(function(item) {
+                      //       return softListItem.softName === item.softwareTitle;
+                      //     });
+                      //     if (index > -1) {
+                      //       return item.totalInstalls +=1;
+                      //     } else {
+                      //       return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                      //     }
+                      //   } else if (softListItem.softPublisher === item.publisher && CompaniesService.getOneById(companyId).name !== item.companyName){
+                      //     return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                      //   }
+                      // });
                     } else {
                       return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
                     }
@@ -888,6 +917,7 @@
               $rootScope.reportName = 'device-ip-summary';
               break;
             case('/reports/software-summary'):
+              console.log(2,data);
               getReportHardwareSummary(data, true);
               $rootScope.reportName = 'software-summary';
               break;
