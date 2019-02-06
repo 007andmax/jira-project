@@ -419,11 +419,13 @@
                 return device.report.softList.map(function(softListItem){
                   if (softListItem.softPublisher === $scope.softwareSummarySoft.name) {
                     if (reportTransformedSoftwareSummaryDataInside.length > 0) {
-                      const index = reportTransformedSoftwareSummaryDataInside.filter(function(item) {
-                        return item.publisher === $scope.softwareSummarySoft.name;
+                      const index = reportTransformedSoftwareSummaryDataInside.findIndex(function(item) {
+                        return item.publisher == $scope.softwareSummarySoft.name;
                       });
-                      if (index > 0) {
-                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName) {
+                      console.log(index, reportTransformedSoftwareSummaryDataInside);
+                      if (index > -1) {
+                        console.log(CompaniesService.getOneById(companyId));
+                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName && reportTransformedSoftwareSummaryDataInside[index].companyName === CompaniesService.getOneById(companyId).name) {
                           reportTransformedSoftwareSummaryDataInside[index].totalInstalls += 1;
                         } else {
                           return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
@@ -448,7 +450,7 @@
         }
       }
 
-      function findWithSoft() {
+      function findWithSoft(selectedCompany) {
         var reportTransformedSoftwareSummaryDataInside = [];
         $scope.reportSoftwareSummaryData.map(function(item){
           if (item.data && item.data.length > 0) {
