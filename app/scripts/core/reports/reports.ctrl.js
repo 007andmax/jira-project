@@ -401,7 +401,9 @@
             item.data.map(function(device) {
               if (device && device.report && device.report.softList){
                 device.report.softList.map(function(softListItem){
-                  if (softListItem.softName === $scope.softwareSummarySoft || softListItem.softName.includes($scope.softwareSummarySoft)) {
+                  if (softListItem.softName === $scope.softwareSummarySoft || softListItem.softName.includes($scope.softwareSummarySoft) ||
+                    softListItem.softPublisher === $scope.softwareSummarySoft
+                  ) {
                     console.log(1);
                     if ($scope.reportTransformedSoftwareSummaryData.length > 0) {
                       $scope.reportTransformedSoftwareSummaryData.map(function(item) {
@@ -421,7 +423,7 @@
                     } else {
                       $scope.reportTransformedSoftwareSummaryData.push({
                         companyName: device.hostName,
-                        totalInstalls: 0,
+                        totalInstalls: 1,
                         softwareTitle: softListItem.softName,
                         publisher: softListItem.softPublisher,
                         version: softListItem.softVersion,
