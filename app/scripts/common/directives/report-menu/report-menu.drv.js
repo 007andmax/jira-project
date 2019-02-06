@@ -637,9 +637,8 @@
             };
             if (reportSettings && reportSettings.soft) {
               dataToSend.companyId = $scope.softwareSummaryCompanyId;
-              dataToSend.selectedCompany = reportSettings.company.id;
+              dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
               lastSentData = dataToSend;
-              console.log(dataToSend, 'dataToSend');
               $scope.$emit('requestReportData', dataToSend, location, techType);
             } else if (reportSettings && reportSettings.soft && reportSettings.company) {
               dataToSend.type = 'DETAILED';
