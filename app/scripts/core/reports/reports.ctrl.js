@@ -4,7 +4,7 @@
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
     ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService', '$http',
-      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService, $http) {
+      function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService) {
 
       $scope.parseDate = Date.parse.bind(Date);
       $scope.loadingInProgressSoftList = $rootScope.loadingInProgress;
@@ -383,6 +383,7 @@
       }
 
       function getSoftwareSummaryData(dataToSend) {
+        $scope.reportSoftwareSummaryData = [];
         ReportsService.getReportSummary(dataToSend, function (resp) {
           Object.keys(resp).map(function(key) {
             return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
@@ -396,22 +397,22 @@
       function filterReportSoftwareSummaryData() {
         $scope.softwareSummaryType = 1;
         $scope.reportTransformedSoftwareSummaryData = [];
+        var reportTransformedSoftwareSummaryDataInside = [];
         $scope.reportSoftwareSummaryData.map(function(item){
           if (item.data && item.data.length > 0) {
-            item.data.map(function(device) {
+            const companyId = item.id;
+            return item.data.map(function(device) {
               if (device && device.report && device.report.softList){
-                device.report.softList.map(function(softListItem){
+                return device.report.softList.map(function(softListItem){
                   if (softListItem.softName === $scope.softwareSummarySoft || softListItem.softName.includes($scope.softwareSummarySoft) ||
-                    softListItem.softPublisher === $scope.softwareSummarySoft
-                  ) {
-                    console.log(1);
-                    if ($scope.reportTransformedSoftwareSummaryData.length > 0) {
-                      $scope.reportTransformedSoftwareSummaryData.map(function(item) {
-                        if (softListItem.softName === item.softwareTitle) {
-                          item.totalInstalls +=1;
+                    softListItem.softPublisher === $scope.softwareSummarySoft) {
+                    if (reportTransformedSoftwareSummaryDataInside.length > 0) {
+                      return reportTransformedSoftwareSummaryDataInside.map(function(item) {
+                        if (softListItem.softName === item.softwareTitle && CompaniesService.getOneById(companyId).name === item.companyName) {
+                          return item.totalInstalls +=1;
                         } else {
-                          $scope.reportTransformedSoftwareSummaryData.push({
-                            companyName: device.hostName,
+                          return reportTransformedSoftwareSummaryDataInside.push({
+                            companyName: CompaniesService.getOneById(companyId).name,
                             totalInstalls: 1,
                             softwareTitle: softListItem.softName,
                             publisher: softListItem.softPublisher,
@@ -421,8 +422,8 @@
                         }
                       });
                     } else {
-                      $scope.reportTransformedSoftwareSummaryData.push({
-                        companyName: device.hostName,
+                      return reportTransformedSoftwareSummaryDataInside.push({
+                        companyName: CompaniesService.getOneById(companyId).name,
                         totalInstalls: 1,
                         softwareTitle: softListItem.softName,
                         publisher: softListItem.softPublisher,
@@ -436,7 +437,7 @@
             });
           }
         });
-        console.log($scope.reportTransformedSoftwareSummaryData);
+        return $scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside;
       }
 
       function endReportDataLoading(resp, dataToSend) {
