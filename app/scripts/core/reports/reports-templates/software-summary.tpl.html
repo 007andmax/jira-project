@@ -23,8 +23,8 @@
     </report-menu>
   </div>
   <loading-indicator loading-trigger="loadingInProgress || loadingInProgressSoft"></loading-indicator>
-  <div class="product-list___ticket hardware-summary">
-    <div class="product-list-ticket " ng-show="!loadingInProgress || !loadingInProgressSoft"
+  <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress">
+    <div class="product-list-ticket"
          style="width: 1080px;">
       <div class="report-header">
         <h1>Hardware Summary Report</h1>
@@ -35,7 +35,7 @@
       <div class="header-product-list-ticket" ng-if="reportSoftwareSummaryData">
         <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
       </div>
-      <div ng-if="reportSoftwareSummaryData">
+      <div ng-if="reportSoftwareSummaryData && !loadingInProgress">
         <div>
           <ul class="con-col" ng-if="softwareSummaryType === 1">
             <li class="top-product-list-ticket clearfix">

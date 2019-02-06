@@ -145,16 +145,20 @@
               softlistArrayFromItem.map(function(item) {
                 if (item.report) {
                   item.report.softList.map(function (item) {
-                    item.softName && $scope.softSelect.push(item.softName);
-                    item.softPublisher && $scope.softSelect.push(item.softPublisher);
+                    item.softName && $scope.softSelect.push({name: item.softName, type: 'soft'});
+                    item.softPublisher && $scope.softSelect.push({name: item.softPublisher, type: 'publisher'});
                   });
                 }
               });
             }
-
           });
-          $scope.softSelect = Array.from(new Set($scope.softSelect));
-          $scope.softSelect = $scope.softSelect.sort();
+          var obj = {};
+          for ( var i=0, len=$scope.softSelect.length; i < len; i++ )
+            obj[$scope.softSelect[i]['name']] = $scope.softSelect[i];
+
+          $scope.softSelect = new Array();
+          for ( var key in obj )
+            $scope.softSelect.push(obj[key]);
           $scope.loadingInProgress = false;
         }
       });
