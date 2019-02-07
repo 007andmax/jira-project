@@ -389,6 +389,15 @@
 
     $scope.$watch('reportSetting.soft', function(val) {
       $rootScope.softwareSummarySoft = val;
+      if (val) {
+        $scope.softwareSummaryWithDevice = false;
+        $scope.softwareSummaryWithInstalationKey = false;
+        $scope.softwareSummaryType = 2;
+      } else {
+        $scope.softwareSummaryWithDevice = true;
+        $scope.softwareSummaryWithInstalationKey = true;
+        $scope.softwareSummaryType = 1;
+      }
     });
 
     $scope.$watch('reportSetting.dateRange', function() {

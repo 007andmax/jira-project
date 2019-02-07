@@ -27,9 +27,10 @@
     <div class="product-list-ticket device-ip" ng-show="!loadingInProgress"
          style="width: 1180px;">
       <div class="report-header">
-        <h1>Device IP Summary Report</h1>
+        <h1>Software Summary Report</h1>
         <div class="company-info">
-          <h3>{{$scope.company | json}}</h3>
+          <h3>{{company.name || 'All companies'}}</h3>
+          <p>{{date | date:'yyyy-MM-dd'}}</p>
         </div>
       </div>
       <div class="header-product-list-ticket" ng-if="reportHardwareSummary">
