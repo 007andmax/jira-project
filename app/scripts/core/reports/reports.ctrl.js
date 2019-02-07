@@ -403,7 +403,7 @@
         $scope.softwareSummaryType = 1;
         $scope.reportTransformedSoftwareSummaryData = [];
         const getSelectedCompany = CompaniesService.getOneById(dataToSend.selectedCompany);
-        let selectedCompany = dataToSend && dataToSend.selectedCompany && getSelectedCompany.name;
+        let selectedCompany = dataToSend && dataToSend.selectedCompany && getSelectedCompany && getSelectedCompany['name'];
         if (selectedCompany  && dataToSend.device) {
           $scope.type = 2;
           findWithCompany(dataToSend);
