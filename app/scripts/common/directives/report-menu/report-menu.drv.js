@@ -108,6 +108,7 @@
     $scope.softwareSummaryWithPublisher = true;
     $scope.softwareSummaryWithVersion = true;
     $scope.softwareSummaryWithInstallDate = true;
+    $scope.errorMassageForSoftwareReportCompany = true;
     //Software summary report end
 
 
@@ -635,25 +636,29 @@
             const dataToSend = {
               type: 'SUMMARY'
             };
-            if (reportSettings && reportSettings.soft) {
+            if ((reportSettings && reportSettings.soft && !reportSettings.device)) {
               dataToSend.companyId = $scope.softwareSummaryCompanyId;
               dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
               lastSentData = dataToSend;
               $scope.$emit('requestReportData', dataToSend, location, techType);
-            } else if (reportSettings && reportSettings.soft && reportSettings.company) {
+            } else if (reportSettings && reportSettings.company && reportSettings.device) {
               dataToSend.type = 'DETAILED';
               dataToSend.companyId = reportSettings.company.id;
+              dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
               if (reportSettings && reportSettings.device) {
                 dataToSend.deviceId = reportSettings.device.id;
               }
               lastSentData = dataToSend;
               $scope.$emit('requestReportData', dataToSend, location, techType);
             }
-            if (!reportSettings.soft) {
+            if (!reportSettings.soft && !reportSettings.company) {
               return $scope.errorMassageForSoftwareReport = false;
-            }
-            else {
-              return $scope.errorMassageForSoftwareReport = false;
+            } else if(reportSettings.company && (!reportSettings.soft && !reportSettings.device)) {
+              $scope.errorMassageForSoftwareReport = true;
+              return $scope.errorMassageForSoftwareReportCompany = false;
+            } else {
+              $scope.errorMassageForSoftwareReport = true;
+              $scope.errorMassageForSoftwareReport = true;
             }
           } else if (location === '/reports/byCommissions') {
             if (reportSettings.salesUser) {

@@ -39,9 +39,11 @@
         <div>
           <ul class="con-col" ng-if="softwareSummaryType === 1">
             <li class="top-product-list-ticket clearfix">
-              <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem"><strong>Company name</strong></div>
-              <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem"><strong>Total installs</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem && (type === 1)"><strong>Company name</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem && (type === 2)"><strong>Device</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem && (type === 1)"><strong>Total installs</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem"><strong>Software Title</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem && (type === 2)"><strong>Instalation Key</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem"><strong>Publisher</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithVersionItem"><strong>Version</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem"><strong>Install Date</strong></div>
@@ -49,9 +51,11 @@
             <div ng-if="reportTransformedSoftwareSummaryData && reportTransformedSoftwareSummaryData.length > 0">
               <li class="content-product-list-ticket clearfix" ng-repeat="softItem in reportTransformedSoftwareSummaryData"
                   on-finish-render="buildPdf()">
-                <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem">{{softItem.companyName}}</div>
-                <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem">{{softItem.totalInstalls}}</div>
-                <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem">{{softItem.softwareTitle}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem && (type === 1)">{{softItem.companyName}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem && (type === 2)">{{softItem.device}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem  && (type === 1)">{{softItem.totalInstalls}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem ">{{softItem.softwareTitle}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem && (type === 2)">{{softItem.installationKey}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem">{{softItem.publisher}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithVersionItem">{{softItem.version}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem">{{softItem.installDate}}</div>

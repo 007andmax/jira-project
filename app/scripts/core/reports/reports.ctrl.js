@@ -328,7 +328,8 @@
         if ((data.type !== 'SUMMARY') || (tech === true)) {
           dataToSend = {
             companyId: data.companyId,
-            selectedCompany: data.selectedCompany
+            selectedCompany: data.selectedCompany,
+            device: data.deviceId
           };
         } else {
           dataToSend = {};
@@ -389,24 +390,31 @@
           Object.keys(resp).map(function(key) {
             return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
           });
-          console.log(dataToSend);
-          filterReportSoftwareSummaryData(dataToSend.selectedCompany);
+          filterReportSoftwareSummaryData(dataToSend);
           endReportDataLoading(resp, dataToSend);
           return $scope.reportSoftwareSummaryData;
         });
       }
 
-      function filterReportSoftwareSummaryData(selectedCompany) {
+      function filterReportSoftwareSummaryData(dataToSend) {
         $scope.loadingInProgress = true;
         $scope.softwareSummaryType = 1;
         $scope.reportTransformedSoftwareSummaryData = [];
-        selectedCompany = selectedCompany && CompaniesService.getOneById(selectedCompany).name;
-        console.log(selectedCompany, 'selectedCompanys');
-        if ($scope.softwareSummarySoft.type === 'publisher') {
-          findWithPublisher(selectedCompany);
+        console.log(dataToSend, 'dataToSend');
+        let selectedCompany = dataToSend && dataToSend.selectedCompany && CompaniesService.getOneById(dataToSend.selectedCompany).name;
+        if (selectedCompany  && dataToSend.device) {
+          console.log('1234');
+          $scope.type = 2;
+          findWithCompany(dataToSend);
         } else {
-          findWithSoft(selectedCompany);
+          $scope.type = 1;
+          if ($scope.softwareSummarySoft.type === 'publisher') {
+            findWithPublisher(selectedCompany);
+          } else {
+            findWithSoft(selectedCompany);
+          }
         }
+
       }
 
       function findWithPublisher(selectedCompany) {
@@ -422,10 +430,8 @@
                       const index = reportTransformedSoftwareSummaryDataInside.findIndex(function(item) {
                         return item.publisher == $scope.softwareSummarySoft.name;
                       });
-                      console.log(index, reportTransformedSoftwareSummaryDataInside);
                       if (index > -1) {
-                        console.log(CompaniesService.getOneById(companyId));
-                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName && reportTransformedSoftwareSummaryDataInside[index].companyName === CompaniesService.getOneById(companyId).name) {
+                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName && item.version === softListItem.softVersion && reportTransformedSoftwareSummaryDataInside[index].companyName === CompaniesService.getOneById(companyId).name) {
                           reportTransformedSoftwareSummaryDataInside[index].totalInstalls += 1;
                         } else {
                           return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
@@ -450,6 +456,39 @@
         }
       }
 
+      function findWithCompany(data) {
+        var reportTransformedSoftwareSummaryDataInside = [];
+        $scope.reportSoftwareSummaryData = $scope.reportSoftwareSummaryData[0].data.filter(function(item){
+          return item.id === data.device;
+        });
+        if ($scope.reportSoftwareSummaryData[0] && $scope.reportSoftwareSummaryData[0].report && $scope.reportSoftwareSummaryData[0].report.softList) {
+          $scope.reportSoftwareSummaryData[0].report.softList.map(function(item) {
+            return reportTransformedSoftwareSummaryDataInside.push({
+              device: $scope.reportSoftwareSummaryData[0].hostName,
+              softwareTitle: item.softName,
+              installationKey: '',
+              publisher: item.softPublisher,
+              version: item.softVersion,
+              installDate: item.softInstalledOn
+            });
+          });
+        }
+        if ($scope.softwareSummarySoft) {
+          const type = $scope.softwareSummarySoft.type;
+          const name = $scope.softwareSummarySoft.name;
+          reportTransformedSoftwareSummaryDataInside = reportTransformedSoftwareSummaryDataInside.filter(function(item) {
+            if (type === 'publisher') {
+              return item.publisher === name
+            } else {
+              return item.softwareTitle === name
+            }
+          })
+        }
+        $scope.loadingInProgress = false;
+        console.log(reportTransformedSoftwareSummaryDataInside, 'type');
+        return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
+      }
+
       function findWithSoft(selectedCompany) {
         var reportTransformedSoftwareSummaryDataInside = [];
         $scope.reportSoftwareSummaryData.map(function(item){
@@ -461,7 +500,7 @@
                   if (softListItem.softName === $scope.softwareSummarySoft.name) {
                     if (reportTransformedSoftwareSummaryDataInside.length > 0) {
                       return reportTransformedSoftwareSummaryDataInside.map(function(item) {
-                        if (softListItem.softName === item.softwareTitle && CompaniesService.getOneById(companyId).name === item.companyName) {
+                        if (softListItem.softName === item.softwareTitle && item.version === softListItem.softVersion && CompaniesService.getOneById(companyId).name === item.companyName) {
                           return item.totalInstalls +=1;
                         } else {
                           return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
@@ -476,6 +515,7 @@
             });
           }
         });
+        $scope.loadingInProgress = false;
         if (selectedCompany) {
           return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
         } else {
