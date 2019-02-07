@@ -360,10 +360,8 @@
               $scope.deviceIpSummaryWithDns2Item = $scope.deviceIpSummaryWithDns2;
               $scope.deviceIpSummaryWithWanIpItem = $scope.deviceIpSummaryWithWanIp;
             } else if (location.hash === '#/reports/software-summary') {
-              console.log(111);
               setTableTitleForSoftwareSummary();
             }
-            console.log( $scope.reportHardwareSummary, ' $scope.reportHardwareSummary');
             if ($rootScope.hardwareSummaryDevice) {
               $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function (item) {
                 return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
@@ -383,7 +381,6 @@
         $scope.softwareSummaryWithPublisherItem = $scope.softwareSummaryWithPublisher;
         $scope.softwareSummaryWithVersionItem = $scope.softwareSummaryWithVersion;
         $scope.softwareSummaryWithInstallDateItem = $scope.softwareSummaryWithInstallDate;
-        console.log($scope.softwareSummaryWithInstallDateItem, $scope);
       }
 
       function getSoftwareSummaryData(dataToSend) {
