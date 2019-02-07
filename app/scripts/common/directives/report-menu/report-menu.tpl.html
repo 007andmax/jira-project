@@ -22,6 +22,7 @@
                    ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
                    ng-model="reportSetting.soft"
                    autocomplete="off"
+                   debounce="1000"
                    tabindex="3"
                    smart-dropdown-menu-position
                    class="form-control form-control-dropdown dropdown-toggle"
@@ -73,7 +74,7 @@
                  ng-model="reportSetting.device"
                  name="reportAgent"
                  smart-dropdown-menu-position
-                 ng-disabled="!reportSetting.company"
+                 ng-disabled="!reportSetting.company.name"
                  uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
                  qt-typeahead-async-show-on-focus
                  placeholder="Device"

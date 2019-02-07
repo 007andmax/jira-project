@@ -430,13 +430,13 @@
                         if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName && item.version === softListItem.softVersion && reportTransformedSoftwareSummaryDataInside[index].companyName === CompaniesService.getOneById(companyId).name) {
                           reportTransformedSoftwareSummaryDataInside[index].totalInstalls += 1;
                         } else {
-                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
                         }
                       } else {
-                        return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                        return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
                       }
                     } else {
-                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
                     }
                   }
                 });
@@ -499,11 +499,11 @@
                         if (softListItem.softName === item.softwareTitle && item.version === softListItem.softVersion && CompaniesService.getOneById(companyId).name === item.companyName) {
                           return item.totalInstalls +=1;
                         } else {
-                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
                         }
                       });
                     } else {
-                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId));
+                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
                     }
                   }
                 });
@@ -531,9 +531,11 @@
         })
       }
 
-      function createSortItem(softListItem, companyId){
+      function createSortItem(softListItem, companyId, selectedCompany, device){
+        console.log(selectedCompany, device);
         return({
           companyName: CompaniesService.getOneById(companyId).name,
+          device: device,
           totalInstalls: 1,
           softwareTitle: softListItem.softName,
           publisher: softListItem.softPublisher,
@@ -552,7 +554,7 @@
 
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
-          $scope.showCategoriesData = true
+          $scope.showCategoriesData = true;
 
           var salesByCustomers = [];
           var totalSum = res.totalSum;

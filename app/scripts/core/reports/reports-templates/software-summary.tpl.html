@@ -52,7 +52,7 @@
             </li>
             <div ng-if="reportTransformedSoftwareSummaryData && reportTransformedSoftwareSummaryData.length > 0">
               <li class="content-product-list-ticket clearfix" ng-repeat="softItem in reportTransformedSoftwareSummaryData"
-                  on-finish-render="buildPdf()">s
+                  on-finish-render="buildPdf()">
                 {{$scope.type}}
                 <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem">{{softItem.companyName}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem">{{softItem.device}}</div>
