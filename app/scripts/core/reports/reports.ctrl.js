@@ -401,9 +401,8 @@
         $scope.softwareSummaryType = 1;
         $scope.reportTransformedSoftwareSummaryData = [];
         console.log(dataToSend, 'dataToSend');
-        let selectedCompany = dataToSend && dataToSend.selectedCompany && CompaniesService.getOneById(dataToSend.selectedCompany).name;
+        let selectedCompany = dataToSend && dataToSend.selectedCompany && CompaniesService.getOneById(dataToSend.selectedCompany)['name'];
         if (selectedCompany  && dataToSend.device) {
-          console.log('1234');
           $scope.type = 2;
           findWithCompany(dataToSend);
         } else {
