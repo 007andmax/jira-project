@@ -367,7 +367,6 @@
                 return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
               });
             }
-            endReportDataLoading(resp, dataToSend);
             getSoftwareSummaryData(dataToSend);
           });
       }
@@ -391,7 +390,6 @@
           });
           filterReportSoftwareSummaryData(dataToSend);
           endReportDataLoading(resp, dataToSend);
-          return $scope.reportSoftwareSummaryData;
         });
       }
 
@@ -945,6 +943,7 @@
               $rootScope.reportName = 'device-ip-summary';
               break;
             case('/reports/software-summary'):
+              $scope.reportTransformedSoftwareSummaryData = [];
               getReportHardwareSummary(data, true);
               $rootScope.reportName = 'software-summary';
               break;

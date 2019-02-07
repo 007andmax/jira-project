@@ -24,7 +24,7 @@
     </report-menu>
   </div>
   <loading-indicator loading-trigger="loadingInProgress || loadingInProgressSoft"></loading-indicator>
-  <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress">
+  <div class="product-list___ticket hardware-summary" ng-show="reportTransformedSoftwareSummaryData.length > 0 && !loadingInProgress">
     <div class="product-list-ticket"
          style="width: 1180px;">
       <div class="report-header">
@@ -34,12 +34,12 @@
           <p>{{date | date:'yyyy-MM-dd'}}</p>
         </div>
       </div>
-      <div class="header-product-list-ticket" ng-if="reportSoftwareSummaryData">
+      <div class="header-product-list-ticket" ng-if="reportTransformedSoftwareSummaryData.length > 0">
         <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
       </div>
-      <div ng-if="reportSoftwareSummaryData && !loadingInProgress">
+      <div ng-if="reportTransformedSoftwareSummaryData.length > 0 && !loadingInProgress">
         <div>
-          <ul class="con-col" ng-if="softwareSummaryType === 1">
+          <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
               <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem && (type === 1)"><strong>Company name</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem && (type === 2)"><strong>Device</strong></div>
