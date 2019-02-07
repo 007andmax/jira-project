@@ -389,14 +389,19 @@
 
     $scope.$watch('reportSetting.soft', function(val) {
       $rootScope.softwareSummarySoft = val;
-      if (val) {
+      if (val && !$scope.reportSetting.company) {
         $scope.softwareSummaryWithDevice = false;
         $scope.softwareSummaryWithInstalationKey = false;
-        $scope.softwareSummaryType = 2;
+      } else if((val && $scope.reportSetting.company) || (!val && $scope.reportSetting.company)){
+        $scope.softwareSummaryWithDevice = true;
+        $scope.softwareSummaryWithInstalationKey = true;
+        $scope.softwareSummaryWithCompanyName = false;
+        $scope.softwareSummaryWithTotalInstalls = false;
       } else {
         $scope.softwareSummaryWithDevice = true;
         $scope.softwareSummaryWithInstalationKey = true;
-        $scope.softwareSummaryType = 1;
+        $scope.softwareSummaryWithCompanyName = true;
+        $scope.softwareSummaryWithTotalInstalls = true;
       }
     });
 
@@ -834,6 +839,20 @@
     });
 
     $scope.$watch("reportSetting.company", function (val) {
+      if (val && !$scope.reportSetting.soft) {
+        $scope.softwareSummaryWithCompanyName = false;
+        $scope.softwareSummaryWithTotalInstalls = false;
+      } else if(!val && $scope.reportSetting.soft){
+        $scope.softwareSummaryWithDevice = false;
+        $scope.softwareSummaryWithInstalationKey = false;
+        $scope.softwareSummaryWithCompanyName = true;
+        $scope.softwareSummaryWithTotalInstalls = true;
+      } else {
+        $scope.softwareSummaryWithDevice = true;
+        $scope.softwareSummaryWithInstalationKey = true;
+        $scope.softwareSummaryWithCompanyName = true;
+        $scope.softwareSummaryWithTotalInstalls = true;
+      }
       $scope.filteredAgentList = $scope.agentsList;
       if (val && typeof val === 'object') {
         $scope.ticketCompanyChoosen = true;
