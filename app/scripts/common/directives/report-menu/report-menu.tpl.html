@@ -3,72 +3,72 @@
   <div ng-form="reportSettingForm">
     <div class="run-report-content clearfix {{ $ctrl.className || '' }}">
 
-
       <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
               ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
-        Report
+                                                                                                                Report
       </button>
 
+      <div class="new-reports-reverse">
+        <div class="form-group content" ng-show="$ctrl.isSoftListHidden">
 
-      <div class="form-group content" ng-show="$ctrl.isSoftListHidden">
-
-        <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorMassageForSoftwareReport">
-          Please select
-          the soft
+          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;"
+               ng-hide="errorMassageForSoftwareReport">
+            Please select
+            the soft
+          </div>
+          <div uib-dropdown>
+            <input type="text"
+                   name="reportCompany"
+                   ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
+                   ng-model="reportSetting.soft"
+                   autocomplete="off"
+                   tabindex="3"
+                   smart-dropdown-menu-position
+                   class="form-control form-control-dropdown dropdown-toggle"
+                   uib-typeahead="soft as soft.name for soft in softSelect | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                   placeholder="{{'Search software / publisher'}}"
+                   qt-typeahead-async-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+            <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+          </div>
         </div>
-        <div uib-dropdown>
+
+        <div class="device-report dropdown-remote-report-tech form-group" ng-show="$ctrl.isShowTechSelectField">
           <input type="text"
-                 name="reportCompany"
-                 ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
-                 ng-model="reportSetting.soft"
+                 class="form-control has-dropdown-with-label pointer"
                  autocomplete="off"
-                 tabindex="3"
+                 ng-model="reportSetting.techUser"
+                 name="ticketAssignTo"
+                 typeahead-editable="false"
                  smart-dropdown-menu-position
-                 class="form-control form-control-dropdown dropdown-toggle"
-                 uib-typeahead="soft as soft.name for soft in softSelect | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                 placeholder="{{'Search software / publisher'}}"
+                 ng-disabled="!reportSetting.company && !availableTechusersWoCompany"
+                 typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                 placeholder="Tech"
+                 uib-typeahead="user as $ctrl.getUserName(user) for user in usersCurrentCompany | filter: $viewValue:stateComparator | orderBy:'firstName'"
                  qt-typeahead-async-show-on-focus
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
-          <div class="input-top-4" typeahead-input-icon="userCompany"></div>
-        </div>
-      </div>
+                 custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}">
 
-      <div class="device-report dropdown-remote-report-tech form-group" ng-show="$ctrl.isShowTechSelectField">
-        <input type="text"
-               class="form-control has-dropdown-with-label pointer"
-               autocomplete="off"
-               ng-model="reportSetting.techUser"
-               name="ticketAssignTo"
-               typeahead-editable="false"
-               smart-dropdown-menu-position
-               ng-disabled="!reportSetting.company && !availableTechusersWoCompany"
-               typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-               placeholder="Tech"
-               uib-typeahead="user as $ctrl.getUserName(user) for user in usersCurrentCompany | filter: $viewValue:stateComparator | orderBy:'firstName'"
-               qt-typeahead-async-show-on-focus
-               custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}">
+          <div typeahead-input-icon-sm="userCompany"></div>
 
-        <div typeahead-input-icon-sm="userCompany"></div>
-
-        <div class="ng-scope" typeahead-input-icon="userCompany">
+          <div class="ng-scope" typeahead-input-icon="userCompany">
           <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
             <i class="icn-sm icn-remove-old" ng-click="clearInput($event)" tooltip="clear"
                tooltip-placement="top"></i>
           </span>
-          <span class="x-mark ng-hide" ng-hide="showClearIcon">
+            <span class="x-mark ng-hide" ng-hide="showClearIcon">
                 <i class="icm-sm report-caret-icon"></i>
           </span>
+          </div>
+
         </div>
 
-      </div>
-
-      <div class="form-group content"  ng-hide="$ctrl.isDeviceHidden">
-        <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorMassageForSoftwareReportCompany">
-          Please select device or soft
-        </div>
-        <div class="device-report form-group">
+        <div class="form-group content" ng-hide="$ctrl.isDeviceHidden">
+          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;"
+               ng-hide="errorMassageForSoftwareReportCompany">
+            Please select device or soft
+          </div>
           <input type="text"
-                 class="form-control has-dropdown-with-label"
+                 class="form-control pointer has-dropdown-with-label"
                  autocomplete="off"
                  ng-model="reportSetting.device"
                  name="reportAgent"
@@ -77,7 +77,7 @@
                  uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
                  qt-typeahead-async-show-on-focus
                  placeholder="Device"
-                 custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}"/>
+                 custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}" />
           <div typeahead-input-icon-sm="reportAgent"></div>
           <div class="ng-scope" typeahead-input-icon="userCompany">
             <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
@@ -89,157 +89,159 @@
             </span>
           </div>
         </div>
-      </div>
 
-      <div class="form-group content" ng-hide="$ctrl.isRadioButtonHidden">
-        <div uib-dropdown>
-          <input type="text"
-                 name="reportType"
-                 ng-model="reportType"
-                 autocomplete="off"
-                 tabindex="3"
-                 smart-dropdown-menu-position
-                 class="form-control form-control-dropdown dropdown-toggle"
-                 uib-typeahead="type for type in reportTypes"
-                 qt-typeahead-async-show-on-focus
-                 ng-change="reportType ? (previousReportType = reportType) : (reportType = reportType || previousReportType)"
-                 readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
-        </div>
-
-      </div>
-
-      <div class="form-group content" ng-show="$ctrl.isCustomerTicketOptions && false">
-        <div uib-dropdown>
-          <input type="text"
-                 name="customerTicketType"
-                 ng-model="customerTicketType"
-                 autocomplete="off"
-                 tabindex="3"
-                 smart-dropdown-menu-position
-                 class="form-control form-control-dropdown dropdown-toggle"
-                 uib-typeahead="type for type in customerTicketTypes"
-                 qt-typeahead-async-show-on-focus
-                 readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
-
-        </div>
-      </div>
-
-      <div class="content form-group" ng-hide="$ctrl.isDateRangeHidden">
-        <div>
-          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForDate">
-            Please select
-            the dates
-          </div>
-          <div style="position: relative;">
+        <div class="form-group content" ng-hide="$ctrl.isRadioButtonHidden">
+          <div uib-dropdown>
             <input type="text"
-                   class="form-control has-dropdown readonly-normal"
-                   name="reportDateRange"
-                   readonly
-                   date-format="dd/mm/yy"
-                   date-range-picker
-                   options="datePickerOptions"
-                   range max-date="{{ maxDateForDateRangeInputField }}"
-                   ng-model="reportSetting.dateRange"
-                   placeholder="Select Date"> </input>
-            <i class="report-calendar" ng-show="!startDate && !endDate"></i>
-            <i class="icn-sm icn-remove-old pointer"
-               ng-show="startDate && endDate"
-               uib-tooltip="clear date filter"
-               style="pointer-events: all;" tooltip-placement="top" ng-click="resetDate()"></i>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group content" ng-show="$ctrl.isSerialNumberOptions">
-        <div uib-dropdown>
-          <input type="text"
-                 name="serialNumber"
-                 ng-model="serialNumber"
-                 autocomplete="off"
-                 class="form-control"
-                 placeholder="Serial Number"
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
-        </div>
-
-      </div>
-
-      <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
-
-        <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForCompany">
-          Please select
-          the company name
-        </div>
-        <div uib-dropdown>
-          <input type="text"
-                 name="reportCompany"
-                 ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
-                 ng-model="reportSetting.company"
-                 autocomplete="off"
-                 tabindex="3"
-                 smart-dropdown-menu-position
-                 class="form-control form-control-dropdown dropdown-toggle"
-                 uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                 placeholder="{{ $ctrl.commonCommissions || $ctrl.detailedCommissions ? 'All companies' : 'Company Name' }}"
-                 qt-typeahead-async-show-on-focus
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"/>
-          <div class="input-top-4" typeahead-input-icon="userCompany"></div>
-        </div>
-      </div>
-
-      <div class="form-group content" ng-show="$ctrl.commonCommissions || $ctrl.detailedCommissions">
-
-        <div>
-
-          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForSalesUser">
-            Select
-            the sales user
-          </div>
-          <div uib-dropdown style="position: relative">
-            <input type="text"
-                   name="reportCompany"
-                   ng-model="reportSetting.salesUser"
+                   name="reportType"
+                   ng-model="reportType"
                    autocomplete="off"
                    tabindex="3"
                    smart-dropdown-menu-position
                    class="form-control form-control-dropdown dropdown-toggle"
-                   uib-typeahead="user as $ctrl.getUserName(user) for user in techUsers | filter: $viewValue:stateComparator | orderBy:'firstName'"
-                   placeholder="Sales user"
+                   uib-typeahead="type for type in reportTypes"
                    qt-typeahead-async-show-on-focus
-                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
-            <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+                   ng-change="reportType ? (previousReportType = reportType) : (reportType = reportType || previousReportType)"
+                   readonly
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+          </div>
+
+        </div>
+
+        <div class="form-group content" ng-show="$ctrl.isCustomerTicketOptions && false">
+          <div uib-dropdown>
+            <input type="text"
+                   name="customerTicketType"
+                   ng-model="customerTicketType"
+                   autocomplete="off"
+                   tabindex="3"
+                   smart-dropdown-menu-position
+                   class="form-control form-control-dropdown dropdown-toggle"
+                   uib-typeahead="type for type in customerTicketTypes"
+                   qt-typeahead-async-show-on-focus
+                   readonly
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
 
           </div>
         </div>
 
-
-      </div>
-
-      <div class="form-group content" ng-show="$ctrl.isProductOptions">
-
-        <div style="float: left;width: 100%;">
-          <div products-list id="product-list-cont"
-               click-outside="closeDropdown()" outside-if-not="product-list-cont">
-
-            <div tooltip-placement="top">
-
-              <input style="cursor: pointer;" ng-hide="isPLOpen" type="text" class="form-control has-dropdown"
-                     pl-product-input
-                     placeholder="Product" autocomplete="off"> </input>
-
-              <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
-                     placeholder="Search Product" autocomplete="off" ng-model="searchProduct"> </input>
-
-              <!--<i class="icn-sm icn-caret-gray"></i>-->
+        <div class="content form-group" ng-hide="$ctrl.isDateRangeHidden">
+          <div>
+            <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForDate">
+              Please select
+              the dates
             </div>
-            <i class="icn-sm icn-remove-old" ng-click="clearInputField(); showDropdown()" ng-show="selectedProduct"></i>
+            <div style="position: relative;">
+              <input type="text"
+                     class="form-control has-dropdown readonly-normal"
+                     name="reportDateRange"
+                     readonly
+                     date-format="dd/mm/yy"
+                     date-range-picker
+                     options="datePickerOptions"
+                     range max-date="{{ maxDateForDateRangeInputField }}"
+                     ng-model="reportSetting.dateRange"
+                     placeholder="Select Date"> </input>
+              <i class="report-calendar" ng-show="!startDate && !endDate"></i>
+              <i class="icn-sm icn-remove-old pointer"
+                 ng-show="startDate && endDate"
+                 uib-tooltip="clear date filter"
+                 style="pointer-events: all;" tooltip-placement="top" ng-click="resetDate()"></i>
+            </div>
+          </div>
+        </div>
 
-            <input type="hidden" name="product" ng-model="productExpense.item.description"> </input>
+        <div class="form-group content" ng-show="$ctrl.isSerialNumberOptions">
+          <div uib-dropdown>
+            <input type="text"
+                   name="serialNumber"
+                   ng-model="serialNumber"
+                   autocomplete="off"
+                   class="form-control"
+                   placeholder="Serial Number"
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+          </div>
 
-            <div class="nano dropdown-menu custom-product-list" pl-conteiner
-                 ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+        </div>
 
+        <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
+
+          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForCompany">
+            Please select
+            the company name
+          </div>
+          <div uib-dropdown>
+            <input type="text"
+                   name="reportCompany"
+                   ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
+                   ng-model="reportSetting.company"
+                   autocomplete="off"
+                   tabindex="3"
+                   smart-dropdown-menu-position
+                   class="form-control form-control-dropdown dropdown-toggle"
+                   uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                   placeholder="{{ $ctrl.commonCommissions || $ctrl.detailedCommissions ? 'All companies' : 'Company Name' }}"
+                   qt-typeahead-async-show-on-focus
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+            <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+          </div>
+        </div>
+
+        <div class="form-group content" ng-show="$ctrl.commonCommissions || $ctrl.detailedCommissions">
+
+          <div>
+
+            <div class="text-error" style="position: absolute;bottom: -10px;right: 0;"
+                 ng-hide="errorNassageForSalesUser">
+              Select
+              the sales user
+            </div>
+            <div uib-dropdown style="position: relative">
+              <input type="text"
+                     name="reportCompany"
+                     ng-model="reportSetting.salesUser"
+                     autocomplete="off"
+                     tabindex="3"
+                     smart-dropdown-menu-position
+                     class="form-control form-control-dropdown dropdown-toggle"
+                     uib-typeahead="user as $ctrl.getUserName(user) for user in techUsers | filter: $viewValue:stateComparator | orderBy:'firstName'"
+                     placeholder="Sales user"
+                     qt-typeahead-async-show-on-focus
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+              <div class="input-top-4" typeahead-input-icon="userCompany"></div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="form-group content" ng-show="$ctrl.isProductOptions">
+
+          <div style="float: left;width: 100%;">
+            <div products-list id="product-list-cont"
+                 click-outside="closeDropdown()" outside-if-not="product-list-cont">
+
+              <div tooltip-placement="top">
+
+                <input style="cursor: pointer;" ng-hide="isPLOpen" type="text" class="form-control has-dropdown"
+                       pl-product-input
+                       placeholder="Product" autocomplete="off"> </input>
+
+                <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
+                       placeholder="Search Product" autocomplete="off" ng-model="searchProduct"> </input>
+
+                <!--<i class="icn-sm icn-caret-gray"></i>-->
+              </div>
+              <i class="icn-sm icn-remove-old" ng-click="clearInputField(); showDropdown()"
+                 ng-show="selectedProduct"></i>
+
+              <input type="hidden" name="product" ng-model="productExpense.item.description"> </input>
+
+              <div class="nano dropdown-menu custom-product-list" pl-conteiner
+                   ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -258,7 +260,8 @@
             Average response time
           </label>
           <label ng-show="false" class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount" ng-click="hideTotalTickets()"> </input>
+            <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount"
+                   ng-click="hideTotalTickets()"> </input>
             <span class="control-indicator"></span>
             Total ticket amount
           </label>
@@ -274,7 +277,7 @@
           </label>
         </div>
       </div>
-      <div ng-show="$ctrl.isHardwareSummaryOptions" class="col-md-11">
+      <div ng-show="$ctrl.isHardwareSummaryOptions" class="col-md-11 w-100">
         <div class="include-ticket-report">
           <p>Include the following columns in the report</p>
           <label class="control checkbox">
@@ -308,13 +311,13 @@
             Warrenty
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="hardwareSummaryWithSerialNumber"/>
+            <input type="checkbox" ng-model="hardwareSummaryWithSerialNumber" />
             <span class="control-indicator"></span>
             Serial Number
           </label>
         </div>
       </div>
-      <div ng-show="$ctrl.isDeviceIpSummaryOptions" class="col-md-11">
+      <div ng-show="$ctrl.isDeviceIpSummaryOptions" class="col-md-11 w-100">
         <div class="include-ticket-report">
           <p>Include the following columns in the report</p>
           <label class="control checkbox">
@@ -343,33 +346,33 @@
             IP Address
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="deviceIpSummaryWithSubnet"/>
+            <input type="checkbox" ng-model="deviceIpSummaryWithSubnet" />
             <span class="control-indicator"></span>
             Subnet
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="deviceIpSummaryWithGateway"/>
+            <input type="checkbox" ng-model="deviceIpSummaryWithGateway" />
             <span class="control-indicator"></span>
             Gateway
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="deviceIpSummaryWithDns1"/>
+            <input type="checkbox" ng-model="deviceIpSummaryWithDns1" />
             <span class="control-indicator"></span>
             DNS 1
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="deviceIpSummaryWithDns2"/>
+            <input type="checkbox" ng-model="deviceIpSummaryWithDns2" />
             <span class="control-indicator"></span>
             DNS 2
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="deviceIpSummaryWithWanIp"/>
+            <input type="checkbox" ng-model="deviceIpSummaryWithWanIp" />
             <span class="control-indicator"></span>
             WAN IP
           </label>
         </div>
       </div>
-      <div ng-show="$ctrl.isSoftwareSummaryOptions" class="col-md-11">
+      <div ng-show="$ctrl.isSoftwareSummaryOptions" class="col-md-11 w-100">
         <div class="include-ticket-report">
           <p>Include the following columns in the report</p>
           <label class="control checkbox">
@@ -390,24 +393,25 @@
           <label class="control checkbox">
             <input type="checkbox" ng-model="softwareSummaryWithSoftwareTitle">
             <span class="control-indicator"></span>
-           Software Title
+            Software Title
           </label>
           <label class="control checkbox">
             <input type="checkbox" ng-model="softwareSummaryWithInstalationKey" ng-disabled="reportSetting.soft && !reportSetting.company">
             <span class="control-indicator"></span>
             Installation Key
+          </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithPublisher"/>
+            <input type="checkbox" ng-model="softwareSummaryWithPublisher" />
             <span class="control-indicator"></span>
             Publisher
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithVersion"/>
+            <input type="checkbox" ng-model="softwareSummaryWithVersion" />
             <span class="control-indicator"></span>
             Version
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithInstallDate"/>
+            <input type="checkbox" ng-model="softwareSummaryWithInstallDate" />
             <span class="control-indicator"></span>
             Install Date
           </label>
@@ -423,27 +427,32 @@
           </label> -->
         </div>
       </div>
-
       <div ng-show="$ctrl.detailedCommissions" class="col-md-11">
         <div class="include-ticket-report">
 
           <label class="control checkbox">
-            <input type="radio" name="details" ng-checked="!detailsByProducts" ng-model="detailsByProducts" ng-value="false"> </input>
+            <input type="radio" name="details" ng-checked="!detailsByProducts" ng-model="detailsByProducts"
+                   ng-value="false"> </input>
             <span class="control-indicator"></span>
             Details by customer
           </label>
 
           <label class="control checkbox">
-            <input type="radio" name="details" ng-checked="detailsByProducts" ng-model="detailsByProducts" ng-value="true"> </input>
+            <input type="radio" name="details" ng-checked="detailsByProducts" ng-model="detailsByProducts"
+                   ng-value="true"> </input>
             <span class="control-indicator"></span>
             Details by product
           </label>
         </div>
       </div>
     </div>
-
   </div>
-
+  <div class="new-reports-btn">
+    <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
+            ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
+                                                                                                              Report
+    </button>
+  </div>
 </div>
 
 <!--MENU FOR TECH REPORTS-->

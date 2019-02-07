@@ -8,7 +8,7 @@
      id="{{ ticketReport.id }}">
   <p class="report-title">Software Summary Report</p>
   <i class="back-page" ui-sref="reports"></i>
-  <div>
+  <div class="new-reports">
     <report-menu class-name="run-report-content-device"
                  open-in-pdf="openInPdf"
                  is-report-available="!!isReportAvailable"
@@ -45,7 +45,7 @@
               <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem && (type === 2)"><strong>Device</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem && (type === 1)"><strong>Total installs</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem"><strong>Software Title</strong></div>
-              <div class="col-md-2" ng-if="softwareSummaryWithInstalationKeyItem && (type === 2)"><strong>Instalation Key</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithInstalationKeyItem && (type === 2)"><strong>Installation Key</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem"><strong>Publisher</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithVersionItem"><strong>Version</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem"><strong>Install Date</strong></div>
@@ -73,7 +73,7 @@
       <div class="report-footer">
         <p>Prepare by : <span>{{ username }}</span></p>
         <p>{{ currentCompany.name }}</p>
-        <p>Quicktech <span>2018</span> ©. All rights reserved</p>
+        <p>Quicktech <span>2019</span> ©. All rights reserved</p>
       </div>
     </div>
   </div>
