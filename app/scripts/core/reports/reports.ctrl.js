@@ -339,6 +339,7 @@
         }
         if (location.hash !== '#/reports/software-summary') {
           ReportsService.getReportSummary(dataToSend, function (resp) {
+            $scope.reportHardwareSummary = resp;
             if (location.hash === '#/reports/hardware-summary') {
               $scope.hardwareSummaryWithDeviceItem = $scope.hardwareSummaryWithDevice;
               $scope.hardwareSummaryWithOperationSystemItem = $scope.hardwareSummaryWithOperationSystem;
@@ -361,6 +362,7 @@
             } else if (location.hash === '#/reports/software-summary') {
               setTableTitleForSoftwareSummary();
             }
+            console.log( $scope.reportHardwareSummary, ' $scope.reportHardwareSummary');
             if ($rootScope.hardwareSummaryDevice) {
               $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function (item) {
                 return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
@@ -400,7 +402,6 @@
         $scope.loadingInProgress = true;
         $scope.softwareSummaryType = 1;
         $scope.reportTransformedSoftwareSummaryData = [];
-        console.log(dataToSend, 'dataToSend');
         let selectedCompany = dataToSend && dataToSend.selectedCompany && CompaniesService.getOneById(dataToSend.selectedCompany)['name'];
         if (selectedCompany  && dataToSend.device) {
           $scope.type = 2;
@@ -484,7 +485,6 @@
           })
         }
         $scope.loadingInProgress = false;
-        console.log(reportTransformedSoftwareSummaryDataInside, 'type');
         return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
       }
 
@@ -867,15 +867,10 @@
           data = [{
             time: 1,
             name: 'No data available'
-          }]
-
+          }];
           document.documentElement.classList.add('no-d3-tooltip');
-
-          // var tooltip = document.querySelector('.nvtooltip .value');
-          // tooltip.style.display = 'none';
         } else {
           document.documentElement.classList.remove('no-d3-tooltip');
-
         }
         $scope.chartData = data.map(function(el, i) {
           el.color = $scope.chartColors[i];
