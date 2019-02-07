@@ -31,6 +31,7 @@
       $scope.currentCompany = CompaniesService.getCurrentCompany();
       // $scope.company;
       $scope.companyLogo;
+      $scope.date = new Date();
 
       $scope.user = $rootScope.currentUser;
       $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;

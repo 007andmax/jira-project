@@ -3,6 +3,7 @@
      disable-selector=".open-pdf-btn"
      email-endpoint="/reports/email"
      selector=".hardware-summary"
+     orientation="{{'LANDSCAPE'}}"
      file-name="{{ reportName }}"
      id="{{ ticketReport.id }}">
   <p class="report-title">Hardware Summary Report</p>
@@ -23,12 +24,13 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket hardware-summary">
-    <div class="product-list-ticket customer-report hardware-report" ng-show="!loadingInProgress"
-         style="width: 940px;">
+    <div class="product-list-ticket" ng-show="!loadingInProgress"
+         style="width: 1180px;">
       <div class="report-header">
         <h1>Hardware Summary Report</h1>
         <div class="company-info">
-          <h3>{{'TEst' || 'All companies'}}</h3>
+          <h3>{{company.name || 'All companies'}}</h3>
+          <p>{{date | date:'yyyy-MM-dd'}}</p>
         </div>
       </div>
       <div class="header-product-list-ticket" ng-if="reportHardwareSummary">
