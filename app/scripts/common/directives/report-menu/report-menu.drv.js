@@ -379,7 +379,7 @@
     });
 
     $scope.$watch('softwareSummaryWithInstallDate', function(val) {
-      $rootScope.softwareSummaryWithVersion = val;
+      $rootScope.softwareSummaryWithInstallDate = val;
     });
     //Software Summary reports items end
 

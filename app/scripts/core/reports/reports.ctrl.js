@@ -287,14 +287,14 @@
       function getTableTitleForSoftwareSummaryFromRootScope(){
         $scope.softwareSummarySoft = $rootScope.softwareSummarySoft;
         $scope.loadingInProgressSoft = $rootScope.loadingInProgressSoft;
-        $scope.softwareSummaryWithCompanyNameItem = $rootScope.softwareSummaryWithCompanyName;
-        $scope.softwareSummaryWithTotalInstallsItem = $rootScope.softwareSummaryWithTotalInstalls;
-        $scope.softwareSummaryWithDeviceItem = $rootScope.softwareSummaryWithDevice;
-        $scope.softwareSummaryWithSoftwareTitleItem = $rootScope.softwareSummaryWithSoftwareTitle;
-        $scope.softwareSummaryWithInstalationKeyItem = $rootScope.softwareSummaryWithInstalationKey;
-        $scope.softwareSummaryWithPublisherItem = $rootScope.softwareSummaryWithPublisher;
-        $scope.softwareSummaryWithVersionItem = $rootScope.softwareSummaryWithVersion;
-        $scope.softwareSummaryWithInstallDateItem = $rootScope.softwareSummaryWithInstallDate;
+        $scope.softwareSummaryWithCompanyName = $rootScope.softwareSummaryWithCompanyName;
+        $scope.softwareSummaryWithTotalInstalls = $rootScope.softwareSummaryWithTotalInstalls;
+        $scope.softwareSummaryWithDevice = $rootScope.softwareSummaryWithDevice;
+        $scope.softwareSummaryWithSoftwareTitle = $rootScope.softwareSummaryWithSoftwareTitle;
+        $scope.softwareSummaryWithInstalationKey = $rootScope.softwareSummaryWithInstalationKey;
+        $scope.softwareSummaryWithPublisher = $rootScope.softwareSummaryWithPublisher;
+        $scope.softwareSummaryWithVersion = $rootScope.softwareSummaryWithVersion;
+        $scope.softwareSummaryWithInstallDate = $rootScope.softwareSummaryWithInstallDate;
       }
 
       function getTableTitleForDeviceIpFromRootScope(){
@@ -338,9 +338,8 @@
         if (dataToSend.companyId) {
           $scope.company = CompaniesService.getOneById(dataToSend.companyId);
         }
-        if (location.hash !== '#/reports/software-summary') {
           ReportsService.getReportSummary(dataToSend, function (resp) {
-            $scope.reportHardwareSummary = resp;
+            if (location.hash !== '#/reports/software-summary') { $scope.reportHardwareSummary = resp }
             if (location.hash === '#/reports/hardware-summary') {
               $scope.hardwareSummaryWithDeviceItem = $scope.hardwareSummaryWithDevice;
               $scope.hardwareSummaryWithOperationSystemItem = $scope.hardwareSummaryWithOperationSystem;
@@ -361,6 +360,7 @@
               $scope.deviceIpSummaryWithDns2Item = $scope.deviceIpSummaryWithDns2;
               $scope.deviceIpSummaryWithWanIpItem = $scope.deviceIpSummaryWithWanIp;
             } else if (location.hash === '#/reports/software-summary') {
+              console.log(111);
               setTableTitleForSoftwareSummary();
             }
             console.log( $scope.reportHardwareSummary, ' $scope.reportHardwareSummary');
@@ -370,10 +370,8 @@
               });
             }
             endReportDataLoading(resp, dataToSend);
+            getSoftwareSummaryData(dataToSend);
           });
-        } else {
-          getSoftwareSummaryData(dataToSend);
-        }
       }
 
       function setTableTitleForSoftwareSummary() {
@@ -385,6 +383,7 @@
         $scope.softwareSummaryWithPublisherItem = $scope.softwareSummaryWithPublisher;
         $scope.softwareSummaryWithVersionItem = $scope.softwareSummaryWithVersion;
         $scope.softwareSummaryWithInstallDateItem = $scope.softwareSummaryWithInstallDate;
+        console.log($scope.softwareSummaryWithInstallDateItem, $scope);
       }
 
       function getSoftwareSummaryData(dataToSend) {
