@@ -839,9 +839,11 @@
     });
 
     $scope.$watch("reportSetting.company", function (val) {
-      if (val && !$scope.reportSetting.soft) {
+      if ((val && !$scope.reportSetting.soft) || ($scope.reportSetting.soft && val)) {
         $scope.softwareSummaryWithCompanyName = false;
         $scope.softwareSummaryWithTotalInstalls = false;
+        $scope.softwareSummaryWithDevice = true;
+        $scope.softwareSummaryWithInstalationKey = true;
       } else if(!val && $scope.reportSetting.soft){
         $scope.softwareSummaryWithDevice = false;
         $scope.softwareSummaryWithInstalationKey = false;
