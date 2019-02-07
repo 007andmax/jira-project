@@ -446,6 +446,7 @@
         });
         $scope.loadingInProgress = false;
         if (selectedCompany) {
+          $scope.type = 2;
           return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
         } else {
           return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
@@ -512,6 +513,7 @@
         });
         $scope.loadingInProgress = false;
         if (selectedCompany) {
+          $scope.type = 2;
           return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
         } else {
           return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
