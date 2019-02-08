@@ -1096,7 +1096,7 @@
         var currentItem = '';
         if (device.report) {
           device.report.networkAdapters.map(function(item) {
-            if (item.adapter_index === 1) { currentItem = item[params];}
+            if (item.ip_enabled) { currentItem = item[params];}
           });
           return currentItem;
         } else {
