@@ -1102,7 +1102,6 @@
             if (item.ip_enabled) { currentItem = item[params];}
           });
           if (params === 'dns' || 'subnet') {
-            console.log('test');
             var regex = /;/gi;
             currentItem = currentItem.replace(regex, '</br>');
             return currentItem;
