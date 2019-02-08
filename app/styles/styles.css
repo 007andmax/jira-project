@@ -1245,7 +1245,6 @@ hr {
   display: flex;
   align-items: center;
   min-height: 72px;
-  margin-bottom: 8px;
 }
 
 .invoices-list .selected-users-edit {

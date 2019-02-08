@@ -118,7 +118,6 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .invoices .qt-list > li {
   border-radius: 4px;
-  margin-bottom: 8px;
 }
 
 .invoices .qt-list > li + li {
