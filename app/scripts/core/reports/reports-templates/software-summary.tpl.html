@@ -51,7 +51,7 @@
               <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem"><strong>Install Date</strong></div>
             </li>
             <div ng-if="reportTransformedSoftwareSummaryData && reportTransformedSoftwareSummaryData.length > 0">
-              <li class="content-product-list-ticket clearfix" ng-repeat="softItem in reportTransformedSoftwareSummaryData"
+              <li class="content-product-list-ticket clearfix" ng-repeat="softItem in reportTransformedSoftwareSummaryData | orderBy:['companyName','device']"
                   on-finish-render="buildPdf()">
                 {{$scope.type}}
                 <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem">{{softItem.companyName}}</div>
