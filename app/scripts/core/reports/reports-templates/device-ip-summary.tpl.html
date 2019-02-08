@@ -53,10 +53,10 @@
               <div class="col-md-1 w-7" ng-if="deviceIpSummaryWithLinkSpeedItem">{{getDeviceReport(device, 'speed')/1000000}}</div>
               <div class="col-md-1 w-4" ng-if="deviceIpSummaryWithDhcpItem">{{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}</div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithIpAddressItem">{{getDeviceReport(device, 'ip_address')}}</div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithSubnetItem">{{getDeviceReport(device, 'subnet')}}</div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithSubnetItem" ng-bind-html="getDeviceReport(device, 'dns')"></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithGatewayItem">{{getDeviceReport(device, 'gateway')}}</div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithDns1Item">{{getDeviceReport(device, 'dns')}}</div>
-              <div class="col-md-1" ng-if="deviceIpSummaryWithDns2Item">{{getDeviceReport(device, 'dns')}}</div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithDns1Item" ng-bind-html="getDeviceReport(device, 'dns')"></div>
+              <div class="col-md-1" ng-if="deviceIpSummaryWithDns2Item" ng-bind-html="getDeviceReport(device, 'dns')"></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithWanIpItem">{{device.report.externalIp}}</div>
             </li>
           </ul>

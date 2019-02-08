@@ -1101,7 +1101,14 @@
           device.report.networkAdapters.map(function(item) {
             if (item.ip_enabled) { currentItem = item[params];}
           });
-          return currentItem;
+          if (params === 'dns' || 'subnet') {
+            console.log('test');
+            var regex = /;/gi;
+            currentItem = currentItem.replace(regex, '</br>');
+            return currentItem;
+          } else {
+            return currentItem;
+          }
         } else {
           return ''
         }
