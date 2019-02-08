@@ -355,8 +355,12 @@
   position: relative;
 }
 
-.hardware-report .w-14 {
-  width: 14% !important;
+.hardware-report .w-22 {
+  width: 22% !important;
+}
+
+.hardware-report .w-6 {
+  width: 6% !important;
 }
 
 .device-ip .w-4 {
@@ -583,6 +587,23 @@
 .product-list-ticket [class*=col-md-] {
   padding: 19px 6px;
   line-height: 30px;
+}
+
+.hardware-summary .product-list-ticket [class*=col-md-] {
+  line-height: 15px;
+}
+
+.hardware-summary .top-product-list-ticket {
+  height: auto;
+}
+
+.hardware-summary .top-product-list-ticket [class*=col-md-],
+.hardware-summary .product-list-ticket [class*=col-md-] {
+  padding: 25px 6px;
+}
+
+.hardware-summary .product-list-ticket li.content-product-list-ticket {
+  min-height: auto;
 }
 
 .product-list-ticket [class*=col-md-].detailed-by-customer {
@@ -1094,7 +1115,7 @@
 }
 
 /*.run-report-content .content:first-child input {*/
-  /*background-color: #f1f5fa;*/
+/*background-color: #f1f5fa;*/
 /*}*/
 
 .run-report-content i {

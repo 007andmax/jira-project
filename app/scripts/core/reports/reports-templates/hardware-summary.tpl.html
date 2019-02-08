@@ -24,7 +24,7 @@
   </div>
   <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
   <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress">
-    <div class="product-list-ticket"
+    <div class="product-list-ticket hardware-report"
          style="width: 1180px;">
       <div class="report-header">
         <h1>Hardware Summary Report</h1>
@@ -40,23 +40,23 @@
         <div ng-if="reportHardwareSummary[company.id]">
           <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
-              <div class="col-md-1 w-14" ng-if="hardwareSummaryWithDeviceItem"><strong>Device</strong></div>
+              <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem"><strong>Device</strong></div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem"><strong>Operating System</strong></div>
               <div class="col-md-2" ng-if="hardwareSummaryWithCpuItem"><strong>CPU</strong></div>
-              <div class="col-md-1" ng-if="hardwareSummaryWithRamItem"><strong>RAM</strong></div>
-              <div class="col-md-1" ng-if="hardwareSummaryWithDiskItem"><strong>DISK</strong></div>
-              <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem"><strong>WARRENTY</strong></div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithRamItem"><strong>RAM</strong></div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithDiskItem"><strong>DISK</strong></div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem"><strong>WARRANTY</strong></div>
               <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumberItem"><strong>Serial Number</strong></div>
             </li>
             <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id] | orderBy: 'label'"
                 on-finish-render="buildPdf()">
-              <div class="col-md-1 w-14" ng-if="hardwareSummaryWithDeviceItem">{{device.label}}</div>
+              <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem">{{device.label}}</div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem">
                 {{device.report.system && (device.report.system.type + ' ' + device.report.system.version)}}
               </div>
               <div class="col-md-2" ng-if="hardwareSummaryWithCpuItem">{{device.report.processors && device.report.processors[0].name}}</div>
-              <div class="col-md-1" ng-if="hardwareSummaryWithRamItem">{{device.report.ram && getRamSize(device.report.ram.total)}}</div>
-              <div class="col-md-1" ng-if="hardwareSummaryWithDiskItem">{{getDiskSize(device.report.logicalDisks)}}</div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithRamItem">{{device.report.ram && getRamSize(device.report.ram.total)}}</div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithDiskItem">{{getDiskSize(device.report.logicalDisks)}}</div>
               <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem">{{device.report.variant && device.report.variant.warrantyDate}}</div>
               <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumberItem">{{device.report.system && device.report.system.serial_number}}</div>
             </li>
