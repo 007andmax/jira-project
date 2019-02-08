@@ -68,9 +68,10 @@
 
         $scope.$on('updateCompanyTags', function () {
           const currentTags = $scope.companyInfo.tags;
-          $scope.companyInfo = CompaniesService.getOneById($scope.companyInfo.id);
-          $scope.companyInfo.tags = $scope.companyInfo.tags ? $scope.companyInfo.tags : currentTags;
-          return $scope.companyInfo;
+          $rootScope.$watch('newCompanyEditTags', function (val) {
+            $scope.companyInfo.tags = val ? val : currentTags;
+            return $scope.companyInfo;
+          });
         });
 
         CompaniesService.getIndustries(function (resp) {
@@ -454,7 +455,7 @@
             controller: 'quicktech.core.companies.companyProfileMapModalCtrl',
             windowClass: 'create-popup margin-top-modal-dialog',
             resolve: {
-              companyInfo: $scope.companyInfo
+              companyInfo: $scope.companyInfo.companyInfo
             }
           });
         };
