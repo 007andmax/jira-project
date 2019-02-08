@@ -48,7 +48,7 @@
               <div class="col-md-1" ng-if="deviceIpSummaryWithDns2Item"><strong>DNS 2</strong></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithWanIpItem"><strong>WAN IP</strong></div>
             </li>
-            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id]"
+            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id] | orderBy: 'label'"
                 on-finish-render="buildPdf()">
               <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithDeviceItem">{{device.label}}</div>
               <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithNetworkNameItem">{{device.hostName}}</div>

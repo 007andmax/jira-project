@@ -48,7 +48,7 @@
               <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem"><strong>WARRENTY</strong></div>
               <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumberItem"><strong>Serial Number</strong></div>
             </li>
-            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id]"
+            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id] | orderBy: 'label'"
                 on-finish-render="buildPdf()">
               <div class="col-md-1 w-14" ng-if="hardwareSummaryWithDeviceItem">{{device.label}}</div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem">

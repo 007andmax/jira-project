@@ -778,11 +778,16 @@
             return size += Number.parseInt(item.size);
           })
         }
-        return size/1073741824;
+        if (Math.floor(size/1073741824) > 1024) {
+          console.log(size, 'size');
+          return Math.floor((size/1073741824)/1024) + 'TB'
+        } else {
+          return Math.floor(size/1073741824) + 'GB'
+        }
       };
 
       $scope.getRamSize = function (ramSize) {
-        return ramSize/1073741824;
+        return (ramSize > 0 && ramSize/1073741824 > 0)? Math.floor(ramSize/1073741824) + 'GB' : 0 + 'GB';
       };
 
       function calculateServicesTime(tickets) {
