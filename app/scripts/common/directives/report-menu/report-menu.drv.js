@@ -172,7 +172,6 @@
 
     $scope.$watch('loadingInProgressSoft', function(val) {
       $rootScope.loadingInProgressSoft = val;
-      console.log(val, 'VAL');
     });
 
     $scope.loadProductByCategory = function (categoryId) {
