@@ -6,7 +6,7 @@
      selector=".hardware-summary"
      file-name="{{ reportName }}"
      id="{{ ticketReport.id }}">
-  <p class="report-title">Software Summary Report</p>
+  <p class="report-title">Software Summary Report </p>
   <i class="back-page" ui-sref="reports"></i>
   <div class="new-reports">
     <report-menu class-name="run-report-content-device"
@@ -22,8 +22,8 @@
                  is-date-range-hidden="true">
     </report-menu>
   </div>
-  <loading-indicator loading-trigger="loadingInProgress || loadingInProgressSoft"></loading-indicator>
-  <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress">
+  <loading-indicator loading-trigger="loadingInProgress || !loadingInProgressSoft"></loading-indicator>
+  <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress && loadingInProgressSoft">
     <div class="product-list-ticket software-report"
          style="width: 1180px;">
       <div class="report-header">

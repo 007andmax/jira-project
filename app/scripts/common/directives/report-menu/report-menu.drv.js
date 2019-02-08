@@ -98,6 +98,7 @@
 
 
     //Software summary report start
+    $scope.loadingInProgressSoft = true;
     $scope.softwareSummaryCompanyId = CompaniesService.getCurrentCompany().id;
     $scope.errorMassageForSoftwareReport = true;
     $scope.softwareSummaryWithCompanyName = true;
@@ -137,7 +138,7 @@
     $scope.softSelect = [];
 
     function getSoftList() {
-      $scope.loadingInProgress = false;
+      $scope.loadingInProgressSoft = false;
       $http.get('/devices/extended?companyId='+ $scope.softwareSummaryCompanyId).then(function (resp) {
         if(resp) {
           Object.keys(resp.data).map(function(key) {
@@ -154,21 +155,24 @@
             }
           });
           var obj = {};
-          for ( var i=0, len=$scope.softSelect.length; i < len; i++ )
+          for ( var i=0, len=$scope.softSelect.length; i < len; i++ ) {
             obj[$scope.softSelect[i]['name']] = $scope.softSelect[i];
+          }
 
-          $scope.softSelect = new Array();
-          for ( var key in obj )
+          $scope.softSelect = [];
+          for ( var key in obj ) {
             $scope.softSelect.push(obj[key]);
-          $scope.loadingInProgress = false;
+          }
+          $scope.loadingInProgressSoft = true;
         }
       });
     }
 
     getSoftList();
 
-    $scope.$watch('loadingInProgress', function(val) {
+    $scope.$watch('loadingInProgressSoft', function(val) {
       $rootScope.loadingInProgressSoft = val;
+      console.log(val, 'VAL');
     });
 
     $scope.loadProductByCategory = function (categoryId) {

@@ -7,7 +7,9 @@
       function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService) {
 
       $scope.parseDate = Date.parse.bind(Date);
-      $scope.loadingInProgressSoftList = $rootScope.loadingInProgress;
+      $scope.$on('loadingInProgressSoft', function(val) {
+        $scope.loadingInProgressSoft = val;
+      });
 
       $scope.PermissionsService = PermissionsService;
 
@@ -23,6 +25,7 @@
       $scope.reportSoftwareSummaryData = [];
       $scope.reportTransformedSoftwareSummaryData = [];
       $scope.softwareSummaryType = 1;
+
 
       $scope.loadingInProgress = false;
       $scope.isReportAvailable = false;
@@ -94,6 +97,9 @@
         $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
       });
 
+      $scope.$on('currentCompany', function(val) {
+        $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
+      });
 
 
       $scope.getServices = function(ticket) {
@@ -286,7 +292,6 @@
 
       function getTableTitleForSoftwareSummaryFromRootScope(){
         $scope.softwareSummarySoft = $rootScope.softwareSummarySoft;
-        $scope.loadingInProgressSoft = $rootScope.loadingInProgressSoft;
         $scope.softwareSummaryWithCompanyName = $rootScope.softwareSummaryWithCompanyName;
         $scope.softwareSummaryWithTotalInstalls = $rootScope.softwareSummaryWithTotalInstalls;
         $scope.softwareSummaryWithDevice = $rootScope.softwareSummaryWithDevice;
