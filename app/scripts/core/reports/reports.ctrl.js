@@ -3,10 +3,13 @@
 (function () {
 
   angular.module('quicktech.core.reports').controller('quicktech.core.reports.reportsCtrl',
-    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService',
+    ['$scope', 'ReportsService', '$timeout', 'quicktech.common.services.PermissionsService', 'StatisticsService', '$state', '$rootScope', 'CompaniesService', 'UsersService', '$http',
       function ($scope, ReportsService, $timeout, PermissionsService, StatisticsService, $state, $rootScope, CompaniesService, UsersService) {
 
       $scope.parseDate = Date.parse.bind(Date);
+      $scope.$on('loadingInProgressSoft', function(val) {
+        $scope.loadingInProgressSoft = val;
+      });
 
       $scope.PermissionsService = PermissionsService;
 
@@ -18,7 +21,10 @@
       $scope.techReportTicketCreated = {};
       $scope.techReportProductSales = {};
       $scope.reportAccountsReceivable = {};
-
+      $scope.reportHardwareSummary = [];
+      $scope.reportSoftwareSummaryData = [];
+      $scope.reportTransformedSoftwareSummaryData = [];
+      $scope.softwareSummaryType = 1;
 
 
       $scope.loadingInProgress = false;
@@ -28,6 +34,7 @@
       $scope.currentCompany = CompaniesService.getCurrentCompany();
       // $scope.company;
       $scope.companyLogo;
+      $scope.date = new Date();
 
       $scope.user = $rootScope.currentUser;
       $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
@@ -35,6 +42,7 @@
       $scope.chartData = [];
       $scope.chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
       $scope.Math = Math;
+      $scope.softSelect = [];
 
       $scope.chartOptions = {
         chart: {
@@ -63,18 +71,18 @@
                     }
                 }
             }
-      }
+      };
 
 
       $scope.chartNoDataAvailable = {
         chart:  Object.assign({}, $scope.chartOptions.chart)
-      }
+      };
 
       $scope.chartNoDataAvailable.chart.tooltip = {
         contentGenerator: function() {
-          return '<table><tr><td>No data available</td></tr></table>'
+          return '<table><tr><td>No data available</td></tr></table>';
         },
-      }
+      };
 
       $scope.chartOptionsToggler = $scope.chartOptions;
 
@@ -87,46 +95,42 @@
 
       $scope.$watch('currentCompany', function(val) {
         $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
-      })
+      });
 
+      $scope.$on('currentCompany', function(val) {
+        $scope.companyLogo = $rootScope.getCompanyLogoUrl(val);
+      });
 
 
       $scope.getServices = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
           return el.type === "SERVICE";
-        })
-
-
-      }
+        });
+      };
 
       $scope.getProducts = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
-          return el.type === "PRODUCT";
-        })
-      }
-
-
+          return el.type === "PRODUCT"
+        });
+      };
 
       $scope.buildPdf = buildPdf;
 
       $scope.durationFilter = function(quanity) {
         var minutes = (quanity * 60) % 60;
         var hours = Math.floor(quanity);
-
         hours = String(hours).length < 2 ? '0' + hours : hours;
         minutes = String(minutes).length < 2 ? '0' + minutes : minutes;
         return hours + ':' + minutes;
-      }
+      };
 
       $scope.calcTaxes = function(taxes, sum) {
         var rate = 0;
-
         taxes.forEach(function(tax) {
           rate += tax.rate;
-        })
-
+        });
         return (sum / 100) * rate;
-      }
+      };
 
 
 
@@ -137,7 +141,7 @@
       };
 
       function getTaxesLabels() {
-        if ($scope.reportByTaxes.type === "DETAILED") {
+        if ($scope.reportByTaxes.type === 'DETAILED') {
           var labels = [];
           if ($scope.reportByTaxes.reducedTaxes) {
             Object.keys($scope.reportByTaxes.reducedTaxes).forEach(function (key) {
@@ -276,6 +280,274 @@
         })
       }
 
+      function getDataForSummaryReports() {
+        if (location.hash === '#/reports/hardware-summary'){
+          getTableTitleForHardwareSummaryFromRootScope();
+        } else if(location.hash === '#/reports/device-ip-summary') {
+          getTableTitleForDeviceIpFromRootScope();
+        } else if(location.hash === '#/reports/software-summary') {
+          getTableTitleForSoftwareSummaryFromRootScope();
+        }
+      }
+
+      function getTableTitleForSoftwareSummaryFromRootScope(){
+        $scope.softwareSummarySoft = $rootScope.softwareSummarySoft;
+        $scope.softwareSummaryWithCompanyName = $rootScope.softwareSummaryWithCompanyName;
+        $scope.softwareSummaryWithTotalInstalls = $rootScope.softwareSummaryWithTotalInstalls;
+        $scope.softwareSummaryWithDevice = $rootScope.softwareSummaryWithDevice;
+        $scope.softwareSummaryWithSoftwareTitle = $rootScope.softwareSummaryWithSoftwareTitle;
+        $scope.softwareSummaryWithInstalationKey = $rootScope.softwareSummaryWithInstalationKey;
+        $scope.softwareSummaryWithPublisher = $rootScope.softwareSummaryWithPublisher;
+        $scope.softwareSummaryWithVersion = $rootScope.softwareSummaryWithVersion;
+        $scope.softwareSummaryWithInstallDate = $rootScope.softwareSummaryWithInstallDate;
+      }
+
+      function getTableTitleForDeviceIpFromRootScope(){
+        $scope.deviceIpSummaryWithDevice = $rootScope.deviceIpSummaryWithDevice;
+        $scope.deviceIpSummaryWithNetworkName = $rootScope.deviceIpSummaryWithNetworkName;
+        $scope.deviceIpSummaryWithLinkSpeed = $rootScope.deviceIpSummaryWithLinkSpeed;
+        $scope.deviceIpSummaryWithDhcp = $rootScope.deviceIpSummaryWithDhcp;
+        $scope.deviceIpSummaryWithIpAddress = $rootScope.deviceIpSummaryWithIpAddress;
+        $scope.deviceIpSummaryWithSubnet = $rootScope.deviceIpSummaryWithSubnet;
+        $scope.deviceIpSummaryWithGateway = $rootScope.deviceIpSummaryWithGateway;
+        $scope.deviceIpSummaryWithDns1 = $rootScope.deviceIpSummaryWithDns1;
+        $scope.deviceIpSummaryWithDns2 = $rootScope.deviceIpSummaryWithDns2;
+        $scope.deviceIpSummaryWithWanIp = $rootScope.deviceIpSummaryWithWanIp;
+      }
+
+      function getTableTitleForHardwareSummaryFromRootScope(){
+        $scope.hardwareSummaryWithDevice = $rootScope.hardwareSummaryWithDevice;
+        $scope.hardwareSummaryWithOperationSystem = $rootScope.hardwareSummaryWithOperationSystem;
+        $scope.hardwareSummaryWithCpu = $rootScope.hardwareSummaryWithCpu;
+        $scope.hardwareSummaryWithRam = $rootScope.hardwareSummaryWithRam;
+        $scope.hardwareSummaryWithDisk = $rootScope.hardwareSummaryWithDisk;
+        $scope.hardwareSummaryWithWarrenty = $rootScope.hardwareSummaryWithWarrenty;
+        $scope.hardwareSummaryWithSerialNumber = $rootScope.hardwareSummaryWithSerialNumber;
+      }
+
+      function getReportHardwareSummary(data, tech) {
+        getDataForSummaryReports();
+        $scope.reportAccountsReceivable = {};
+        $scope.loadingInProgress = true;
+        $scope.isReportAvailable = false;
+        var dataToSend;
+        if ((data.type !== 'SUMMARY') || (tech === true)) {
+          dataToSend = {
+            companyId: data.companyId,
+            selectedCompany: data.selectedCompany,
+            device: data.deviceId
+          };
+        } else {
+          dataToSend = {};
+        }
+        if (dataToSend.companyId) {
+          $scope.company = CompaniesService.getOneById(dataToSend.companyId);
+        }
+          ReportsService.getReportSummary(dataToSend, function (resp) {
+            if (location.hash !== '#/reports/software-summary') { $scope.reportHardwareSummary = resp }
+            if (location.hash === '#/reports/hardware-summary') {
+              $scope.hardwareSummaryWithDeviceItem = $scope.hardwareSummaryWithDevice;
+              $scope.hardwareSummaryWithOperationSystemItem = $scope.hardwareSummaryWithOperationSystem;
+              $scope.hardwareSummaryWithCpuItem = $scope.hardwareSummaryWithCpu;
+              $scope.hardwareSummaryWithRamItem = $scope.hardwareSummaryWithRam;
+              $scope.hardwareSummaryWithDiskItem = $scope.hardwareSummaryWithDisk;
+              $scope.hardwareSummaryWithWarrentyItem = $scope.hardwareSummaryWithWarrenty;
+              $scope.hardwareSummaryWithSerialNumberItem = $scope.hardwareSummaryWithSerialNumber;
+            } else if (location.hash === '#/reports/device-ip-summary') {
+              $scope.deviceIpSummaryWithDeviceItem = $scope.deviceIpSummaryWithDevice;
+              $scope.deviceIpSummaryWithNetworkNameItem = $scope.deviceIpSummaryWithNetworkName;
+              $scope.deviceIpSummaryWithLinkSpeedItem = $scope.deviceIpSummaryWithLinkSpeed;
+              $scope.deviceIpSummaryWithDhcpItem = $scope.deviceIpSummaryWithDhcp;
+              $scope.deviceIpSummaryWithIpAddressItem = $scope.deviceIpSummaryWithIpAddress;
+              $scope.deviceIpSummaryWithSubnetItem = $scope.deviceIpSummaryWithSubnet;
+              $scope.deviceIpSummaryWithGatewayItem = $scope.deviceIpSummaryWithGateway;
+              $scope.deviceIpSummaryWithDns1Item = $scope.deviceIpSummaryWithDns1;
+              $scope.deviceIpSummaryWithDns2Item = $scope.deviceIpSummaryWithDns2;
+              $scope.deviceIpSummaryWithWanIpItem = $scope.deviceIpSummaryWithWanIp;
+            } else if (location.hash === '#/reports/software-summary') {
+              setTableTitleForSoftwareSummary();
+            }
+            if ($rootScope.hardwareSummaryDevice) {
+              $scope.reportHardwareSummary[$scope.company.id] = resp[$scope.company.id].filter(function (item) {
+                return item.agentId === $rootScope.hardwareSummaryDevice.agentId;
+              });
+            }
+            getSoftwareSummaryData(dataToSend);
+          });
+      }
+
+      function setTableTitleForSoftwareSummary() {
+        $scope.softwareSummaryWithCompanyNameItem = $scope.softwareSummaryWithCompanyName;
+        $scope.softwareSummaryWithTotalInstallsItem = $scope.softwareSummaryWithTotalInstalls;
+        $scope.softwareSummaryWithDeviceItem = $scope.softwareSummaryWithDevice;
+        $scope.softwareSummaryWithSoftwareTitleItem = $scope.softwareSummaryWithSoftwareTitle;
+        $scope.softwareSummaryWithInstalationKeyItem = $scope.softwareSummaryWithInstalationKey;
+        $scope.softwareSummaryWithPublisherItem = $scope.softwareSummaryWithPublisher;
+        $scope.softwareSummaryWithVersionItem = $scope.softwareSummaryWithVersion;
+        $scope.softwareSummaryWithInstallDateItem = $scope.softwareSummaryWithInstallDate;
+      }
+
+      function getSoftwareSummaryData(dataToSend) {
+        $scope.reportSoftwareSummaryData = [];
+        ReportsService.getReportSummary(dataToSend, function (resp) {
+          Object.keys(resp).map(function(key) {
+            return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
+          });
+          filterReportSoftwareSummaryData(dataToSend);
+          endReportDataLoading(resp, dataToSend);
+        });
+      }
+
+      function filterReportSoftwareSummaryData(dataToSend) {
+        $scope.loadingInProgress = true;
+        $scope.softwareSummaryType = 1;
+        $scope.reportTransformedSoftwareSummaryData = [];
+        const getSelectedCompany = CompaniesService.getOneById(dataToSend.selectedCompany);
+        var selectedCompany = dataToSend && dataToSend.selectedCompany && getSelectedCompany && getSelectedCompany['name'];
+        if (selectedCompany  && dataToSend.device) {
+          $scope.type = 2;
+          findWithCompany(dataToSend);
+        } else {
+          $scope.type = 1;
+          if ($scope.softwareSummarySoft.type === 'publisher') {
+            findWithPublisher(selectedCompany);
+          } else {
+            findWithSoft(selectedCompany);
+          }
+        }
+
+      }
+
+      function findWithPublisher(selectedCompany) {
+        var reportTransformedSoftwareSummaryDataInside = [];
+        $scope.reportSoftwareSummaryData.map(function(item){
+          if (item.data && item.data.length > 0) {
+            const companyId = item.id;
+            return item.data.map(function(device) {
+              if (device && device.report && device.report.softList){
+                return device.report.softList.map(function(softListItem){
+                  if (softListItem.softPublisher === $scope.softwareSummarySoft.name) {
+                    if (reportTransformedSoftwareSummaryDataInside.length > 0) {
+                      const index = reportTransformedSoftwareSummaryDataInside.findIndex(function(item) {
+                        return item.publisher == $scope.softwareSummarySoft.name;
+                      });
+                      if (index > -1) {
+                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName && item.version === softListItem.softVersion && reportTransformedSoftwareSummaryDataInside[index].companyName === CompaniesService.getOneById(companyId).name) {
+                          reportTransformedSoftwareSummaryDataInside[index].totalInstalls += 1;
+                        } else {
+                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
+                        }
+                      } else {
+                        return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
+                      }
+                    } else {
+                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
+        $scope.loadingInProgress = false;
+        if (selectedCompany) {
+          $scope.type = 2;
+          return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
+        } else {
+          return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
+        }
+      }
+
+      function findWithCompany(data) {
+        var reportTransformedSoftwareSummaryDataInside = [];
+        $scope.reportSoftwareSummaryData = $scope.reportSoftwareSummaryData[0].data.filter(function(item){
+          return item.id === data.device;
+        });
+        if ($scope.reportSoftwareSummaryData[0] && $scope.reportSoftwareSummaryData[0].report && $scope.reportSoftwareSummaryData[0].report.softList) {
+          $scope.reportSoftwareSummaryData[0].report.softList.map(function(item) {
+            return reportTransformedSoftwareSummaryDataInside.push({
+              device: $scope.reportSoftwareSummaryData[0].hostName,
+              softwareTitle: item.softName,
+              installationKey: '',
+              publisher: item.softPublisher,
+              version: item.softVersion,
+              installDate: item.softInstalledOn
+            });
+          });
+        }
+        if ($scope.softwareSummarySoft) {
+          const type = $scope.softwareSummarySoft.type;
+          const name = $scope.softwareSummarySoft.name;
+          reportTransformedSoftwareSummaryDataInside = reportTransformedSoftwareSummaryDataInside.filter(function(item) {
+            if (type === 'publisher') {
+              return item.publisher === name
+            } else {
+              return item.softwareTitle === name
+            }
+          })
+        }
+        $scope.loadingInProgress = false;
+        return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
+      }
+
+      function findWithSoft(selectedCompany) {
+        var reportTransformedSoftwareSummaryDataInside = [];
+        $scope.reportSoftwareSummaryData.map(function(item){
+          if (item.data && item.data.length > 0) {
+            const companyId = item.id;
+            return item.data.map(function(device) {
+              if (device && device.report && device.report.softList){
+                return device.report.softList.map(function(softListItem){
+                  if (softListItem.softName === $scope.softwareSummarySoft.name) {
+                    if (reportTransformedSoftwareSummaryDataInside.length > 0) {
+                      return reportTransformedSoftwareSummaryDataInside.map(function(item) {
+                        if (softListItem.softName === item.softwareTitle && item.version === softListItem.softVersion && CompaniesService.getOneById(companyId).name === item.companyName) {
+                          return item.totalInstalls +=1;
+                        } else {
+                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
+                        }
+                      });
+                    } else {
+                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
+        $scope.loadingInProgress = false;
+        if (selectedCompany) {
+          $scope.type = 2;
+          return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
+        } else {
+          return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
+        }
+      }
+
+      function endReportDataLoading(resp, dataToSend) {
+        $scope.isReportAvailable = !!resp[dataToSend.companyId];
+        $scope.loadingInProgress = false;
+      }
+
+      function filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany) {
+        return reportTransformedSoftwareSummaryDataInside.filter(function(item) {
+          return item.companyName === selectedCompany;
+        })
+      }
+
+      function createSortItem(softListItem, companyId, selectedCompany, device){
+        return({
+          companyName: CompaniesService.getOneById(companyId).name,
+          device: device,
+          totalInstalls: 1,
+          softwareTitle: softListItem.softName,
+          publisher: softListItem.softPublisher,
+          version: softListItem.softVersion,
+          installDate: softListItem.softInstalledOn
+        });
+      }
+
       function getReportCommissions(data) {
         $scope.loadingInProgress = true;
         $scope.isReportAvailable = false;
@@ -286,7 +558,7 @@
 
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
-          $scope.showCategoriesData = true
+          $scope.showCategoriesData = true;
 
           var salesByCustomers = [];
           var totalSum = res.totalSum;
@@ -317,24 +589,12 @@
                 name: key,
                 time: newCategories[key],
                 color: $scope.chartColors[i],
-              }
+              };
             })
             .sort(function(a, b) {
               return +b.time - +a.time;
             })
             .slice(0, 4);
-
-
-
-
-
-          // if (!$scope.byCategoriesChartData || !$scope.byCategoriesChartData.length) {
-          //   $scope.byCategoriesChartData = [{
-          //     name: 'No data available',
-          //     time: 0
-          //   }]
-          // }
-
           $scope.byCustomerChartData = $scope.commissionsReport.lines
             .sort(function(a, b) {
               return +b.totalSum - a.totalSum;
@@ -345,12 +605,9 @@
                 name: el.companyName,
                 time: el.totalSum,
                 color: $scope.chartColors[i],
-              }
-            })
-
-
-
-        })
+              };
+            });
+        });
 
 
 
@@ -364,44 +621,26 @@
         $scope.isReportAvailable = false;
 
         ReportsService.getReportByCommissions(data, function(res) {
-          // console.log(res, 'RES GET REPORT')
-
           $scope.isReportAvailable = res.lines && res.lines.length;
-
-          // console.log(res, res.lines && res.lines.length, "DASDASDASD")
           $scope.loadingInProgress = false;
           $scope.commissionsReport = res;
-          $scope.showCategoriesData = true
-
+          $scope.showCategoriesData = true;
           var salesByCustomers = [];
           var totalSum = res.totalSum;
           var categories = res.categorySalesValue;
-
-
-
-          $scope.commissionsReport.lines = res.lines.map(function(el) {
-            // el.totalSum = el.totalSum.toFixed(2);
-            //
-            return el;
-          });
-
-
+          $scope.commissionsReport.lines = res.lines.map(function(el) {return el;});
           res.lines = res.lines.map(function(el) {
             el.itemGroup = el.productCategory || normalizeString(el.agreementType);
-
             el.productPrice = el.productPrice || el.totalSum / el.billableQuantity;
-
             return el;
-          })
+          });
 
           $scope.commissionsReport.priceSum = res.lines.reduce(function(acc, el) {
             acc += el.productPrice || 0;
             return acc;
-          }, 0)
+          }, 0);
 
           $scope.detailsByProducts = $rootScope.detailsByProducts
-
-          // console.log("BY CUSTOMER???", $rootScope.detailsByProducts, $scope.commissionsReport && $scope.isReportAvailable)
 
           if (!$scope.detailsByProducts) {
 
@@ -429,7 +668,7 @@
               }
 
               return el;
-            })
+            });
 
 
             var reducedData = data.reduce(function(acc, el) {
@@ -440,24 +679,16 @@
               } else {
                 acc[company] = {
                   list: [el]
-                }
+                };
               }
-
               acc[company].commissionSum = (acc[company].commissionSum || 0) + el.commissionSum;
               acc[company].priceSum = (acc[company].priceSum || 0) + (el.productPrice || 0);
               acc[company].totalSum = (acc[company].totalSum || 0) + el.totalSum;
-
-
               return acc;
             }, {});
-
-
             $scope.reducedData = reducedData;
             $scope.reducedCompanies = Object.keys(reducedData);
-
           }
-
-
         })
 
 
@@ -468,12 +699,11 @@
       }
 
       function normalizeString(str) {
-
         if (!str) return str;
         str = str.split('_');
         str = str.map(function(el) {
           return el[0].toUpperCase() + el.slice(1).toLowerCase();
-        })
+        });
 
         return str.join(' ');
       }
@@ -513,48 +743,55 @@
                 ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
 
                 return ticket;
-              })
+              });
 
               calculateServicesTime($scope.ticketReport.tickets);
             }
 
-
-
-
             if ($rootScope.customerTicketShowTotalTicketAmount === false) {
               $scope.ticketReport.hideTotalTickets = true;
             }
-
             $scope.showHeader = $rootScope.customerTicketWithTimeSpent
-
-
-
             $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');
             $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
-            // $scope.buildPdf('tickets');
           }
         })
       }
 
       $scope.formatResponseTime = function(time) {
         if (!time && time !== 0) return;
-
         var hours = Math.floor(time / 60);
         var minutes = time % 60;
-
         return addZero(hours) + ':' + addZero(minutes) + ' hr';
-
 
         function addZero(num) {
           if (String(num).length < 2) {
             return '0' + num;
           }
-
           return num;
         }
-      }
+      };
+
+      $scope.getDiskSize = function (diskSize) {
+        var size = 0;
+        if (diskSize && diskSize.length > 0) {
+          diskSize.map(function(item) {
+            item.size = item.size? item.size : 0;
+            return size += Number.parseInt(item.size);
+          })
+        }
+        if (Math.floor(size/1073741824) > 1024) {
+          return Math.floor((size/1073741824)/1024) + 'TB'
+        } else {
+          return Math.floor(size/1073741824) + 'GB'
+        }
+      };
+
+      $scope.getRamSize = function (ramSize) {
+        return (ramSize > 0 && ramSize/1073741824 > 0)? Math.floor(ramSize/1073741824) + 'GB' : 0 + 'GB';
+      };
 
       function calculateServicesTime(tickets) {
         var overallTime = {};
@@ -638,15 +875,10 @@
           data = [{
             time: 1,
             name: 'No data available'
-          }]
-
+          }];
           document.documentElement.classList.add('no-d3-tooltip');
-
-          // var tooltip = document.querySelector('.nvtooltip .value');
-          // tooltip.style.display = 'none';
         } else {
           document.documentElement.classList.remove('no-d3-tooltip');
-
         }
         $scope.chartData = data.map(function(el, i) {
           el.color = $scope.chartColors[i];
@@ -707,13 +939,26 @@
             case('/reports/byCommissionsDetailed'):
               getDetailedReportCommissions(data);
               // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'commissions-report'
+              $rootScope.reportName = 'commissions-report';
               break;
             case('/reports/byCommissions'):
               getReportCommissions(data);
               // $scope.customerTicketShowTotalTicketAmount = data.showTotalTicketAmount;
-              $rootScope.reportName = 'commissions-report'
-              break
+              $rootScope.reportName = 'commissions-report';
+              break;
+            case('/reports/hardware-summary'):
+              getReportHardwareSummary(data);
+              $rootScope.reportName = 'hardware-summary';
+              break;
+            case('/reports/device-ip-summary'):
+              getReportHardwareSummary(data);
+              $rootScope.reportName = 'device-ip-summary';
+              break;
+            case('/reports/software-summary'):
+              $scope.reportTransformedSoftwareSummaryData = [];
+              getReportHardwareSummary(data, true);
+              $rootScope.reportName = 'software-summary';
+              break;
             default:
               console.log("wrong location")
           }
@@ -853,7 +1098,25 @@
 
       $scope.build = function(param) {
         $scope.buildPdf(param);
-      }
+      };
+
+      $scope.getDeviceReport = function (device, params){
+        var currentItem = '';
+        if (device.report) {
+          device.report.networkAdapters.map(function(item) {
+            if (item.ip_enabled) { currentItem = item[params];}
+          });
+          if (params === 'dns' || 'subnet') {
+            var regex = /;/gi;
+            currentItem = currentItem.replace(regex, '</br>');
+            return currentItem;
+          } else {
+            return currentItem;
+          }
+        } else {
+          return ''
+        }
+      };
 
 
 

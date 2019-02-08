@@ -9,15 +9,16 @@
   services.factory('ReportsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
     function ($http, $rootScope, RealTimeService, Utils) {
 
-      var urlForReportsByTaxes = "/reports/sales/byTaxes";
-      var urlForReportsByCustomers = "/reports/sales/byCustomers";
-      var urlForReportsByProducts = "/reports/sales/byProducts";
-      var urlForReportByTechSold = "/reports/sales/byTechSold";
-      var urlForReportRemoteAccess = "/reports/remoteAccess";
-      var urlForReportCreatedVsClosedTickets = "/reports/techTickets";
-      var urlForReportProductSoldVsQuotedProjects = "/reports/sales/byTechSold";
-      var urlForReportAccountReceivable = "/reports/sales/byReceivable";
-      var urlForReportByCommissions = "/reports/commission/byCustomers";
+      var urlForReportsByTaxes = '/reports/sales/byTaxes';
+      var urlForReportsByCustomers = '/reports/sales/byCustomers';
+      var urlForReportsByProducts = '/reports/sales/byProducts';
+      var urlForReportByTechSold = '/reports/sales/byTechSold';
+      var urlForReportRemoteAccess = '/reports/remoteAccess';
+      var urlForReportCreatedVsClosedTickets = '/reports/techTickets';
+      var urlForReportProductSoldVsQuotedProjects = '/reports/sales/byTechSold';
+      var urlForReportAccountReceivable = '/reports/sales/byReceivable';
+      var urlForReportByCommissions = '/reports/commission/byCustomers';
+      var urlForReportSummary = '/devices/extended?companyId=';
 
       function getReport(url, data, callback) {
         var future = $http({
@@ -27,6 +28,15 @@
         });
 
         Utils.handleCallback(future, callback)
+      }
+
+      function getSummaryReport(url, callback) {
+        var future = $http({
+          url: url,
+          method: 'Get'
+        });
+
+        Utils.handleCallback(future, callback);
       }
 
       function exportCsv(url, data, callback) {
@@ -63,6 +73,11 @@
 
       function getReportByCustomers(data, callback) {
         return getReport(urlForReportsByCustomers, data, callback);
+      }
+
+      function getReportSummary(data, callback) {
+        const url = urlForReportSummary+data.companyId;
+        return getSummaryReport(url, callback);
       }
 
       function getReportByProducts(data, callback) {
@@ -143,9 +158,10 @@
         getReportAccountsReceivable: getReportAccountsReceivable,
         exportCsvAccountsReceivable: exportCsvAccountsReceivable,
         exportCsvByTechTicketCreated: exportCsvByTechTicketCreated,
-        exportCsvByTechProductSold: exportCsvByTechProductSold
-      }
+        exportCsvByTechProductSold: exportCsvByTechProductSold,
+        getReportSummary: getReportSummary
+      };
 
-    }])
+    }]);
 
 })(window);

@@ -49,7 +49,7 @@
           }
 
           var isBrokenReport = attrs.fileName.includes('customer-report') || attrs.fileName.includes('commissions-report');
-          var emailEndpoint = isBrokenReport ? '/customerReport/email' : attrs.emailEndpoint
+          var emailEndpoint = isBrokenReport ? '/customerReport/email' : attrs.emailEndpoint;
 
 
           if (emails && emails.length) {

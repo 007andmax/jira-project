@@ -1289,6 +1289,10 @@ bold {
   border-bottom: 1px solid #eee;
 }
 
+.hardware-summary .content-product-list-ticket {
+  font-size: 11px;
+}
+
 .content-product-list-ticket {
   font-size: 13px;
 }
