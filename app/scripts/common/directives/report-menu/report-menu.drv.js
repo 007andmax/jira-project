@@ -856,7 +856,6 @@
         $scope.softwareSummaryWithTotalInstalls = true;
       }
       $scope.filteredAgentList = $scope.agentsList;
-      console.log(val, 'VAL');
       if (val && typeof val === 'object') {
         $scope.ticketCompanyChoosen = true;
         if (agentsByCompany) {

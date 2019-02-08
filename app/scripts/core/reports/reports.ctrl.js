@@ -532,7 +532,6 @@
       }
 
       function createSortItem(softListItem, companyId, selectedCompany, device){
-        console.log(selectedCompany, device);
         return({
           companyName: CompaniesService.getOneById(companyId).name,
           device: device,
@@ -779,7 +778,6 @@
           })
         }
         if (Math.floor(size/1073741824) > 1024) {
-          console.log(size, 'size');
           return Math.floor((size/1073741824)/1024) + 'TB'
         } else {
           return Math.floor(size/1073741824) + 'GB'
