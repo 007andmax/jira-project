@@ -75,7 +75,7 @@
                  name="reportAgent"
                  smart-dropdown-menu-position
                  ng-disabled="!reportSetting.company.name"
-                 uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
+                 uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:$viewValue:stateComparator | orderBy:'hostName'"
                  qt-typeahead-async-show-on-focus
                  placeholder="Device"
                  custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}" />
