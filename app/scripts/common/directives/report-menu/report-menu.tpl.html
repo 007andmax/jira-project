@@ -19,11 +19,11 @@
           <div uib-dropdown>
             <input type="text"
                    name="reportCompany"
-                   ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
                    ng-model="reportSetting.soft"
                    autocomplete="off"
                    debounce="1000"
                    tabindex="3"
+                   ng-disabled="!reportSetting.company.name"
                    smart-dropdown-menu-position
                    class="form-control form-control-dropdown dropdown-toggle"
                    uib-typeahead="soft as soft.name for soft in softSelect | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"

@@ -137,9 +137,10 @@
 
     $scope.softSelect = [];
 
-    function getSoftList() {
+    function getSoftListForCompany(companyId) {
       $scope.loadingInProgressSoft = false;
-      $http.get('/devices/extended?companyId='+ $scope.softwareSummaryCompanyId).then(function (resp) {
+      $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+        $rootScope.softwareSummarySelectedCompany = resp;
         if(resp) {
           Object.keys(resp.data).map(function(key) {
             const softlistArrayFromItem = resp.data[key];
@@ -168,7 +169,7 @@
       });
     }
 
-    getSoftList();
+
 
     $scope.$watch('loadingInProgressSoft', function(val) {
       $rootScope.loadingInProgressSoft = val;
@@ -187,7 +188,7 @@
 
     $scope.sendNewHTMLForPdf = function() {
       $rootScope.reportLineChanged = true;
-    }
+    };
 
     $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
     $scope.techUsers = UsersService.getTechUsers().filter(function(el) {
@@ -387,7 +388,7 @@
     //Software Summary reports items end
 
     $scope.$watch('reportSetting.device', function(val) {
-      $rootScope.hardwareSummaryDevice = val;
+      $rootScope.hardwareSummaryDevice = val.device;
     });
 
     $scope.$watch('reportSetting.soft', function(val) {
@@ -503,9 +504,7 @@
         }
       }
       lastSentData = techDataToSend;
-      $scope.$emit("requestReportData", techDataToSend, location, type);
-      // $scope.startDate = null;
-      // techDataToSend.endDate = null;
+      $scope.$emit('requestReportData', techDataToSend, location, type);
     }
 
     function formatDate(date) {
@@ -842,6 +841,8 @@
     });
 
     $scope.$watch("reportSetting.company", function (val) {
+      $scope.currentCompanySoftList = CompaniesService.getOneById(val.id);
+      val && val.id && getSoftListForCompany(val.id);
       if ((val && !$scope.reportSetting.soft) || ($scope.reportSetting.soft && val)) {
         $scope.softwareSummaryWithCompanyName = false;
         $scope.softwareSummaryWithTotalInstalls = false;
