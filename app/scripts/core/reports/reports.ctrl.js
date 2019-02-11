@@ -408,8 +408,25 @@
           $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany.data[data.companyId].filter(function(item){
             return item.id === data.device;
           });
+        } else {
+          $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany.data[data.companyId];
         }
-        if ($scope.reportSoftwareSummaryData[0] && $scope.reportSoftwareSummaryData[0].report && $scope.reportSoftwareSummaryData[0].report.softList) {
+        if ($scope.reportSoftwareSummaryData.length > 0) {
+          $scope.reportSoftwareSummaryData.map(function(item) {
+            if (item.report && item.report && item.report.softList ){
+              item.report.softList.map(function(soft) {
+                return reportTransformedSoftwareSummaryDataInside.push({
+                  device: item.hostName,
+                  softwareTitle: soft.softName,
+                  installationKey: '',
+                  publisher: soft.softPublisher,
+                  version: soft.softVersion,
+                  installDate: soft.softInstalledOn
+                });
+              });
+            }
+          });
+        } else if ($scope.reportSoftwareSummaryData[0] && $scope.reportSoftwareSummaryData[0].report && $scope.reportSoftwareSummaryData[0].report.softList) {
           $scope.reportSoftwareSummaryData[0].report.softList.map(function(item) {
             return reportTransformedSoftwareSummaryDataInside.push({
               device: $scope.reportSoftwareSummaryData[0].hostName,

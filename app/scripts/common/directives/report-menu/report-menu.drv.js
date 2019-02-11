@@ -100,7 +100,6 @@
     //Software summary report start
     $scope.loadingInProgressSoft = true;
     $scope.softwareSummaryCompanyId = CompaniesService.getCurrentCompany().id;
-    $scope.errorMassageForSoftwareReport = true;
     $scope.softwareSummaryWithCompanyName = true;
     $scope.softwareSummaryWithTotalInstalls = true;
     $scope.softwareSummaryWithDevice = true;
@@ -159,7 +158,6 @@
           for ( var i=0, len=$scope.softSelect.length; i < len; i++ ) {
             obj[$scope.softSelect[i]['name']] = $scope.softSelect[i];
           }
-
           $scope.softSelect = [];
           for ( var key in obj ) {
             $scope.softSelect.push(obj[key]);
@@ -652,12 +650,7 @@
             const dataToSend = {
               type: 'SUMMARY'
             };
-            if ((reportSettings && reportSettings.soft && !reportSettings.device)) {
-              dataToSend.companyId = $scope.softwareSummaryCompanyId;
-              dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
-              lastSentData = dataToSend;
-              $scope.$emit('requestReportData', dataToSend, location, techType);
-            } else if (reportSettings && reportSettings.company && reportSettings.device) {
+            if (reportSettings && reportSettings.company && (reportSettings.device || reportSettings.soft)) {
               dataToSend.type = 'DETAILED';
               dataToSend.companyId = reportSettings.company.id;
               dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
@@ -666,12 +659,13 @@
               }
               lastSentData = dataToSend;
               $scope.$emit('requestReportData', dataToSend, location, techType);
+            } else {
+              dataToSend.companyId = reportSettings.company.id;
+              dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
+              $scope.$emit('requestReportData', dataToSend, location, techType);
             }
-            if (!reportSettings.soft && !reportSettings.company) {
-              return $scope.errorMassageForSoftwareReport = false;
-            } else if(reportSettings.company && (!reportSettings.soft && !reportSettings.device)) {
-              $scope.errorMassageForSoftwareReport = true;
-              return $scope.errorMassageForSoftwareReportCompany = false;
+            if (!reportSettings.company) {
+              return $scope.errorNassageForCompany = false;
             } else {
               $scope.errorMassageForSoftwareReport = true;
               $scope.errorMassageForSoftwareReport = true;
