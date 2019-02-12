@@ -411,7 +411,7 @@
         } else {
           $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany.data[data.companyId];
         }
-        if ($scope.reportSoftwareSummaryData.length > 0 && (location.hash === '#/reports/software-summary')) {
+        if ($scope.reportSoftwareSummaryData && $scope.reportSoftwareSummaryData.length > 0 && (location.hash === '#/reports/software-summary')) {
           $scope.reportSoftwareSummaryData.map(function(item) {
             if (item.report && item.report && item.report.softList ){
               item.report.softList.map(function(soft) {
