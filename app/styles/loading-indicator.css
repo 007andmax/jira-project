@@ -6,6 +6,7 @@
     transform: rotate(360deg);
   }
 }
+
 .loading {
   border-radius: 50%;
   width: 50px;
@@ -13,9 +14,14 @@
   position: absolute;
   top: calc(50% - 25px);
   left: calc(50% - 25px);
-  border: 0.35rem solid rgba(0, 0 , 0, 0.2);
+  border: 0.35rem solid rgba(0, 0, 0, 0.2);
   border-top-color: black;
   animation: spin 1s infinite linear;
+}
+
+.loading-bg .loading {
+  background: #ebebe4;
+  z-index: 99;
 }
 
 /* Pie timer */
@@ -24,6 +30,7 @@
     transform: rotate(360deg);
   }
 }
+
 @keyframes mask {
   0% {
     background: #eee; /* Background colour */
@@ -42,11 +49,13 @@
     transform: rotate(-180deg);
   }
 }
+
 @-moz-keyframes time {
   100% {
     transform: rotate(360deg);
   }
 }
+
 @-moz-keyframes mask {
   0% {
     background: #eee; /* Background colour */
@@ -65,11 +74,13 @@
     transform: rotate(-180deg);
   }
 }
+
 @-o-keyframes time {
   100% {
     transform: rotate(360deg);
   }
 }
+
 @-o-keyframes mask {
   0% {
     background: #eee; /* Background colour */
@@ -88,11 +99,13 @@
     transform: rotate(-180deg);
   }
 }
+
 @-webkit-keyframes time {
   100% {
     -webkit-transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes mask {
   0% {
     background: #eee; /* Background colour */
