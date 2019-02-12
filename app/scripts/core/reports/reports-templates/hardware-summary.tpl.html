@@ -33,11 +33,11 @@
           <p>{{date | date:'yyyy-MM-dd'}}</p>
         </div>
       </div>
-      <div class="header-product-list-ticket" ng-if="reportHardwareSummary">
+      <div class="header-product-list-ticket" ng-if="reportTransformedSoftwareSummaryData">
         <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
       </div>
-      <div ng-if="reportHardwareSummary">
-        <div ng-if="reportHardwareSummary[company.id]">
+      <div ng-if="reportTransformedSoftwareSummaryData">
+        <div ng-if="reportTransformedSoftwareSummaryData">
           <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
               <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem"><strong>Device</strong></div>
@@ -48,9 +48,9 @@
               <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem"><strong>WARRANTY</strong></div>
               <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumberItem"><strong>Serial Number</strong></div>
             </li>
-            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id] | orderBy: 'label'"
+            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportTransformedSoftwareSummaryData | orderBy: 'label'"
                 on-finish-render="buildPdf()">
-              <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem">{{device.label}}</div>
+              <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem">{{device.label || device.hostName}}</div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem">
                 {{device.report.system && (device.report.system.type + ' ' + device.report.system.version)}}
               </div>
