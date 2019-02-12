@@ -405,7 +405,9 @@
 
       function findWithCompany(data) {
         var reportTransformedSoftwareSummaryDataInside = [];
+        console.log($scope.softwareSummarySelectedCompany, '$scope.softwareSummarySelectedCompany');
         if (data.device) {
+          console.log( $scope.softwareSummarySelectedCompany, data);
           $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany && $scope.softwareSummarySelectedCompany.data[data.companyId].filter(function(item){
             return item.id === data.device;
           });

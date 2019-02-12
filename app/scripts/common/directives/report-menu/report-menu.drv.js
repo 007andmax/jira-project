@@ -137,37 +137,36 @@
     $scope.softSelect = [];
 
     function getSoftListForCompany(companyId) {
-      if ($location.url() === '/reports/software-summary') {
-        $scope.loadingInProgressSoft = false;
-        $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
-          $rootScope.softwareSummarySelectedCompany = resp;
-          $scope.softSelect = [];
-          if(resp) {
-            Object.keys(resp.data).map(function(key) {
-              const softlistArrayFromItem = resp.data[key];
-              if (softlistArrayFromItem) {
-                softlistArrayFromItem.map(function(item) {
-                  if (item.report) {
-                    item.report.softList.map(function (item) {
-                      item.softName && $scope.softSelect.push({name: item.softName, type: 'soft'});
-                      item.softPublisher && $scope.softSelect.push({name: item.softPublisher, type: 'publisher'});
-                    });
-                  }
-                });
-              }
-            });
-            var obj = {};
-            for ( var i=0, len=$scope.softSelect.length; i < len; i++ ) {
-              obj[$scope.softSelect[i]['name']] = $scope.softSelect[i];
+      ($location.url() === '/reports/software-summary') && ($scope.loadingInProgressSoft = false);
+      $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+        $rootScope.softwareSummarySelectedCompany = resp;
+        console.log($rootScope.softwareSummarySelectedCompany);
+        $scope.softSelect = [];
+        if(resp) {
+          Object.keys(resp.data).map(function(key) {
+            const softlistArrayFromItem = resp.data[key];
+            if (softlistArrayFromItem) {
+              softlistArrayFromItem.map(function(item) {
+                if (item.report) {
+                  item.report.softList.map(function (item) {
+                    item.softName && $scope.softSelect.push({name: item.softName, type: 'soft'});
+                    item.softPublisher && $scope.softSelect.push({name: item.softPublisher, type: 'publisher'});
+                  });
+                }
+              });
             }
-            $scope.softSelect = [];
-            for ( var key in obj ) {
-              $scope.softSelect.push(obj[key]);
-            }
-            $scope.loadingInProgressSoft = true;
+          });
+          var obj = {};
+          for ( var i=0, len=$scope.softSelect.length; i < len; i++ ) {
+            obj[$scope.softSelect[i]['name']] = $scope.softSelect[i];
           }
-        });
-      }
+          $scope.softSelect = [];
+          for ( var key in obj ) {
+            $scope.softSelect.push(obj[key]);
+          }
+          ($location.url() === '/reports/software-summary') && ($scope.loadingInProgressSoft = true);
+        }
+      });
     }
 
 
