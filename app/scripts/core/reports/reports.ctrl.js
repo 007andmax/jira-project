@@ -342,7 +342,7 @@
           dataToSend = {};
         }
         if (dataToSend.companyId) {
-          $scope.company = $scope.softwareSummarySelectedCompany;
+          $scope.company = $scope.softwareSummarySelectedCompany || CompaniesService.getOneById(dataToSend.companyId);
         }
           ReportsService.getReportSummary(dataToSend, function (resp) {
             if (location.hash !== '#/reports/software-summary') { $scope.reportHardwareSummary = resp }

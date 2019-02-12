@@ -140,6 +140,7 @@
       $scope.loadingInProgressSoft = false;
       $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
         $rootScope.softwareSummarySelectedCompany = resp;
+        $scope.softSelect = [];
         if(resp) {
           Object.keys(resp.data).map(function(key) {
             const softlistArrayFromItem = resp.data[key];
