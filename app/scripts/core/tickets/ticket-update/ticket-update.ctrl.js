@@ -4,8 +4,8 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateCtrl',
       ['$scope', 'TicketsService', 'UsersService', 'quicktech.common.services.UserConfirmationsService',
-        'quicktech.common.services.UserNotificationService', '$sce',
-        function ($scope, TicketsService, UsersService, UserConfirmationsService, UserNotificationService, $sce) {
+        'quicktech.common.services.UserNotificationService', '$sce', '$rootScope',
+        function ($scope, TicketsService, UsersService, UserConfirmationsService, UserNotificationService, $sce, $rootScope) {
 
           $scope.user = UsersService.getOneById($scope.ticketUpdate.user.id);
 
@@ -48,6 +48,8 @@
                 UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
                   TicketsService.deleteTicketUpdate($scope.ticketDetails.id, $scope.ticketUpdate.id, function () {
                     UserNotificationService.show(userPopUpMessage, true);
+
+                    $rootScope.attachmentsToDelete = $scope.ticketUpdate.attachments;
                   });
                 });
                 return;

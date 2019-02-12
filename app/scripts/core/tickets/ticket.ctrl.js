@@ -27,7 +27,7 @@
           $scope.agentList = resp;
         });
 
-        $scope.getTicketStatus = function(ticket) {
+        $scope.getTicketStatus = function(ticket, arg) {
           var status;
           if(ticket.assignedUserId === null) {
             status = 'unassigned';

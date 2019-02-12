@@ -79,7 +79,6 @@
 
         $scope.salesPerson = '';
 
-
         $scope.$watch(function() {
           return $rootScope.companyCounters
         }, function(val) {

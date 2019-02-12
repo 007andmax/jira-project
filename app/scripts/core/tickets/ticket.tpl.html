@@ -85,7 +85,7 @@
 
         <span
           class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
-          ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
+          ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].color, 'font-weight': 'bold', 'border': 'none'}"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>
@@ -149,7 +149,7 @@
         <div uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
           <span
             class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
-            ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
+            ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].color, 'font-weight': 'bold', 'border': 'none'}"
             ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>

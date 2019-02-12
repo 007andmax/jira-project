@@ -62,6 +62,25 @@
   margin-right: auto;
 }
 
+.attachment-meta .attachments-icons {
+  display: flex;
+  margin-left: 10px;
+}
+
+.attachment-meta .icons-wrapper {
+  display: flex;
+}
+
+.attachment-meta .file-icon-name {
+  position: relative;
+
+  width: 20px;
+  height: 22px;
+  margin-right: 10px;
+  background-size: contain;
+
+}
+
 .attachments li.zip > .file-icon-name {
   width: 40px;
 }

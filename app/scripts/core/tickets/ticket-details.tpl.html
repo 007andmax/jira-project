@@ -78,6 +78,7 @@
 
                   <span
                     class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+                    ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].color, 'font-weight': 'bold', 'border': 'none'}"
                     ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                     uib-dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
@@ -329,7 +330,7 @@
                  te-html-maxlength="50000">
 
               <div te-editor class="form-control editor" contenteditable="true"
-                   style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
+                   style="min-height: 92px;height: auto;border: none; color: rgb(64, 75, 95);" data-text="Type your message..."></div>
 
             </div>
           </div>
@@ -340,9 +341,13 @@
       </div>
       <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0" qt-toggle-slider>
         <div class="attachment-meta">
-          <div>
+          <div class="icons-wrapper">
             <b>{{ ticketDetails.attachments.length }} </b>
             <span>Attachments</span>
+
+            <div class="attachments-icons">
+              <div ng-repeat="type in reducedAttachmentsTypes" class="file-icon-name attach-type-{{ type }} pointer" qt-icon-toggle-to-change></div>
+            </div>
           </div>
           <div class="combined-shape expand-down" qt-icon-toggle-to-change></div>
           <div class="download-all pull-right" style="display: none;">
@@ -356,7 +361,7 @@
         <ul class="attachments clearfix" style="position: relative;">
           <li ng-repeat="attachment in ticketDetails.attachments"
               ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-              class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
+              class="{{ attachmentImageClass[attachment.file.contentType] }}"
               url="/html/scripts/core/tickets/image-preview.tpl.html"
               data="attachment.file" func="downloadAttachment"
               first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
@@ -473,7 +478,7 @@
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                    ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
+                    ng-repeat="attachment in ticketUpdate.attachments"
                     url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
@@ -742,6 +747,7 @@
           <div uib-dropdown>
             <span
               class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+              ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].color, 'font-weight': 'bold', 'border': 'none'}"
               ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
               uib-dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
@@ -783,7 +789,7 @@
             <ul class="attachments clearfix" style="position: relative;">
               <li ng-repeat="attachment in ticketDetails.attachments"
                   ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                  class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
+                  class="{{ attachmentImageClass[attachment.file.contentType] }}"
                   url="/html/scripts/core/tickets/image-preview.tpl.html"
                   data="attachment.file" func="downloadAttachment"
                   first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
@@ -846,7 +852,7 @@
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                    ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
+                    ng-repeat="attachment in ticketUpdate.attachments"
                     url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">

@@ -7,10 +7,10 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
@@ -26,11 +26,29 @@
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
-
+          $scope.tagColors = TagsService.getColors();
 
           $timeout(function() {
             ticketMobileSettings.data = $scope;
-          }, 3000)
+          }, 3000);
+
+
+          $scope.getTicketStatus = function(ticket, arg) {
+            var status;
+            if(ticket.assignedUserId === null) {
+              status = 'unassigned';
+            } else if(ticket.status === 'COMPLETED') {
+              status = 'completed';
+            } else if(ticket.status === 'IN_PROGRESS') {
+              status = 'inProgress';
+            } else if(ticket.status === 'ON_HOLD') {
+              status = 'onHold';
+            }
+            return status;
+          };
+
+
+
 
           // console.log($scope.usersCurrentCompany, "SCOPESCOPESCOPE");
 
@@ -303,6 +321,32 @@
                 })
 
             }
+
+            $scope.$watch("ticketDetails.attachments.length", function() {
+              $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
+                var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
+                console.log(type, el, 'el')
+                if (!~acc.indexOf(type)) {
+                  acc.push(type);
+                }
+
+                return acc;
+              }, []);
+            })
+
+
+            $scope.$watch('attachmentsToDelete', function(val) {
+              if (val) {
+                $rootScope.attachmentsToDelete = null;
+
+                $scope.ticketDetails.attachments = $scope.ticketDetails.attachments.filter(function(el) {
+                  return !~val.findIndex(function(attachment) {
+                    return attachment.id === el.id;
+                  });
+                })
+              }
+            })
+
 
 
 
@@ -956,6 +1000,8 @@
             $scope.$apply();
           })
 
+
+
           $scope.$watch('ticketSharedUsersList', function() {
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
               return typeof el.user === 'object';
@@ -1267,6 +1313,8 @@
               pattern: !link.match($scope.linkPattern)
             };
           };
+
+
 
           $scope.setEditingTicket = function (value) {
             $scope.editingTicket = value;

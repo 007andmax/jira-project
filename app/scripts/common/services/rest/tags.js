@@ -13,6 +13,11 @@
     $http.get('/data/getColors').then(function (resp) {
       for (var i = 0; i < resp.data.length; i++) {
         var color = resp.data[i];
+        var colorParsed = color.backgroundColor.split(',');
+        colorParsed[3] = ' 0.21)';
+        colorParsed = colorParsed.join(',');
+        color.color = color.borderColor;
+        color.backgroundColor = colorParsed;
         tagsColors.push(color);
       }
     });
