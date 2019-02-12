@@ -836,24 +836,8 @@
     });
 
     $scope.$watch("reportSetting.company", function (val) {
-      $scope.currentCompanySoftList = CompaniesService.getOneById(val.id);
+      $rootScope.softwareSummarySelectedCompanyInfo = val;
       val && val.id && getSoftListForCompany(val.id);
-      if ((val && !$scope.reportSetting.soft) || ($scope.reportSetting.soft && val)) {
-        $scope.softwareSummaryWithCompanyName = false;
-        $scope.softwareSummaryWithTotalInstalls = false;
-        $scope.softwareSummaryWithDevice = true;
-        $scope.softwareSummaryWithInstalationKey = true;
-      } else if(!val && $scope.reportSetting.soft){
-        $scope.softwareSummaryWithDevice = false;
-        $scope.softwareSummaryWithInstalationKey = false;
-        $scope.softwareSummaryWithCompanyName = true;
-        $scope.softwareSummaryWithTotalInstalls = true;
-      } else {
-        $scope.softwareSummaryWithDevice = true;
-        $scope.softwareSummaryWithInstalationKey = true;
-        $scope.softwareSummaryWithCompanyName = true;
-        $scope.softwareSummaryWithTotalInstalls = true;
-      }
       $scope.filteredAgentList = $scope.agentsList;
       if (val && typeof val === 'object') {
         $scope.ticketCompanyChoosen = true;

@@ -293,6 +293,7 @@
       function getTableTitleForSoftwareSummaryFromRootScope(){
         $scope.softwareSummarySoft = $rootScope.softwareSummarySoft;
         $scope.softwareSummarySelectedCompany = $rootScope.softwareSummarySelectedCompany;
+        $scope.softwareSummarySelectedCompanyInfo = $rootScope.softwareSummarySelectedCompanyInfo;
         $scope.softwareSummaryWithCompanyName = $rootScope.softwareSummaryWithCompanyName;
         $scope.softwareSummaryWithTotalInstalls = $rootScope.softwareSummaryWithTotalInstalls;
         $scope.softwareSummaryWithDevice = $rootScope.softwareSummaryWithDevice;
@@ -342,7 +343,7 @@
           dataToSend = {};
         }
         if (dataToSend.companyId) {
-          $scope.company = $scope.softwareSummarySelectedCompany || CompaniesService.getOneById(dataToSend.companyId);
+          $scope.company = $scope.softwareSummarySelectedCompanyInfo;
         }
           ReportsService.getReportSummary(dataToSend, function (resp) {
             if (location.hash !== '#/reports/software-summary') { $scope.reportHardwareSummary = resp }

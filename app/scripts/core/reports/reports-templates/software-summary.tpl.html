@@ -40,9 +40,7 @@
         <div>
           <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
-              <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem"><strong>Company name</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem"><strong>Device</strong></div>
-              <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem"><strong>Total installs</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem"><strong>Software Title</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithInstalationKeyItem"><strong>Installation Key</strong></div>
               <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem"><strong>Publisher</strong></div>
@@ -53,9 +51,7 @@
               <li class="content-product-list-ticket clearfix" ng-repeat="softItem in reportTransformedSoftwareSummaryData | orderBy:['device', 'softwareTitle']"
                   on-finish-render="buildPdf()">
                 {{$scope.type}}
-                <div class="col-md-2" ng-if="softwareSummaryWithCompanyNameItem">{{softItem.companyName}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem">{{softItem.device}}</div>
-                <div class="col-md-2" ng-if="softwareSummaryWithTotalInstallsItem">{{softItem.totalInstalls}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem">{{softItem.softwareTitle}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithInstalationKeyItem">{{softItem.installationKey}}</div>
                 <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem">{{softItem.publisher}}</div>
