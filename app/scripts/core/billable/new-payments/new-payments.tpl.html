@@ -169,23 +169,16 @@
         <div class="col-xs-1" style="word-break: break-all">
           <span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>
         </div>
-
-        <!-- <div class="col-xs-3">
-          <div class="col-xs-6">
-            <span>{{ payment.reference }}</span>
-          </div>
-          <div class="col-xs-6">
-            {{ payment.note }}
-          </div>
-        </div> -->
-
         <div class="col-xs-2">
           <span>{{ payment.reference }}</span>
         </div>
         <div class="col-xs-2 w-26">
-          {{ payment.note }}
+          <p>
+            <!--class={p.innerHeight > 43 ? 'hidden-note' : ''}-->
+            <!--style={payment.invoiceNumbers.length >= 3 ? {-webkit-line-clamp: `{payment.invoiceNumbers.length}`} : ''}>-->
+            {{ payment.note }}
+          </p>
         </div>
-
         <div class="col-xs-1">
           ${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}
         </div>
@@ -193,7 +186,6 @@
              style="text-align: center;width: auto;">
           {{ payment.refundMethod ? 'Refund' : 'Paid' }}
         </div>
-
         <div class="col-xs-1" style="width: 3%;position: absolute;right: 10px;">
           <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">
             <div uib-dropdown-toggle uib-tooltip="more"
@@ -203,7 +195,8 @@
               <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
             </div>
             <ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">
-              <li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a ng-click="openModal('edit-payments', payment)">Edit payment</a>
+              <li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a
+                ng-click="openModal('edit-payments', payment)">Edit payment</a>
               </li>
               <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
               <li ng-if="!payment.refundMethod"><a ng-click="openModal('refund', payment)">Refund payment</a></li>
