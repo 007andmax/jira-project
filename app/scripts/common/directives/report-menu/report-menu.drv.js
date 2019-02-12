@@ -660,7 +660,7 @@
               }
               lastSentData = dataToSend;
               $scope.$emit('requestReportData', dataToSend, location, techType);
-            } else {
+            } else if(reportSettings.company) {
               dataToSend.companyId = reportSettings.company.id;
               dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
               $scope.$emit('requestReportData', dataToSend, location, techType);
