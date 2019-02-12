@@ -436,7 +436,7 @@
   </div>
   <div class="new-reports-btn">
     <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
-            ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
+            ng-disabled="(reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden) || !loadingInProgressSoft">Get
                                                                                                               Report
     </button>
   </div>
