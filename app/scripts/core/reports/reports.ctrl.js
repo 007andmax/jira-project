@@ -292,6 +292,8 @@
 
       function getTableTitleForSoftwareSummaryFromRootScope(){
         $scope.softwareSummarySoft = $rootScope.softwareSummarySoft;
+        $scope.softwareSummarySelectedCompany = $rootScope.softwareSummarySelectedCompany;
+        $scope.softwareSummarySelectedCompanyInfo = $rootScope.softwareSummarySelectedCompanyInfo;
         $scope.softwareSummaryWithCompanyName = $rootScope.softwareSummaryWithCompanyName;
         $scope.softwareSummaryWithTotalInstalls = $rootScope.softwareSummaryWithTotalInstalls;
         $scope.softwareSummaryWithDevice = $rootScope.softwareSummaryWithDevice;
@@ -341,7 +343,7 @@
           dataToSend = {};
         }
         if (dataToSend.companyId) {
-          $scope.company = CompaniesService.getOneById(dataToSend.companyId);
+          $scope.company = $scope.softwareSummarySelectedCompanyInfo;
         }
           ReportsService.getReportSummary(dataToSend, function (resp) {
             if (location.hash !== '#/reports/software-summary') { $scope.reportHardwareSummary = resp }
@@ -390,9 +392,6 @@
       function getSoftwareSummaryData(dataToSend) {
         $scope.reportSoftwareSummaryData = [];
         ReportsService.getReportSummary(dataToSend, function (resp) {
-          Object.keys(resp).map(function(key) {
-            return $scope.reportSoftwareSummaryData.push({id: key, data: resp[key]});
-          });
           filterReportSoftwareSummaryData(dataToSend);
           endReportDataLoading(resp, dataToSend);
         });
@@ -400,79 +399,33 @@
 
       function filterReportSoftwareSummaryData(dataToSend) {
         $scope.loadingInProgress = true;
-        $scope.softwareSummaryType = 1;
         $scope.reportTransformedSoftwareSummaryData = [];
-        const getSelectedCompany = CompaniesService.getOneById(dataToSend.selectedCompany);
-        var selectedCompany = dataToSend && dataToSend.selectedCompany && getSelectedCompany && getSelectedCompany['name'];
-        if (selectedCompany  && dataToSend.device) {
-          $scope.type = 2;
-          findWithCompany(dataToSend);
-        } else {
-          $scope.type = 1;
-          if ($scope.softwareSummarySoft.type === 'publisher') {
-            findWithPublisher(selectedCompany);
-          } else {
-            findWithSoft(selectedCompany);
-          }
-        }
-
-      }
-
-      function findWithPublisher(selectedCompany) {
-        var reportTransformedSoftwareSummaryDataInside = [];
-        $scope.reportSoftwareSummaryData.map(function(item){
-          if (item.data && item.data.length > 0) {
-            const companyId = item.id;
-            return item.data.map(function(device) {
-              if (device && device.report && device.report.softList){
-                return device.report.softList.map(function(softListItem){
-                  if (softListItem.softPublisher === $scope.softwareSummarySoft.name) {
-                    if (reportTransformedSoftwareSummaryDataInside.length > 0) {
-                      const index = reportTransformedSoftwareSummaryDataInside.findIndex(function(item) {
-                        return item.publisher == $scope.softwareSummarySoft.name;
-                      });
-                      if (index > -1) {
-                        if (reportTransformedSoftwareSummaryDataInside[index].softwareTitle === softListItem.softName && item.version === softListItem.softVersion && reportTransformedSoftwareSummaryDataInside[index].companyName === CompaniesService.getOneById(companyId).name) {
-                          reportTransformedSoftwareSummaryDataInside[index].totalInstalls += 1;
-                        } else {
-                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
-                        }
-                      } else {
-                        return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
-                      }
-                    } else {
-                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
-                    }
-                  }
-                });
-              }
-            });
-          }
-        });
-        $scope.loadingInProgress = false;
-        if (selectedCompany) {
-          $scope.type = 2;
-          return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
-        } else {
-          return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
-        }
+        findWithCompany(dataToSend);
       }
 
       function findWithCompany(data) {
         var reportTransformedSoftwareSummaryDataInside = [];
-        $scope.reportSoftwareSummaryData = $scope.reportSoftwareSummaryData[0].data.filter(function(item){
-          return item.id === data.device;
-        });
-        if ($scope.reportSoftwareSummaryData[0] && $scope.reportSoftwareSummaryData[0].report && $scope.reportSoftwareSummaryData[0].report.softList) {
-          $scope.reportSoftwareSummaryData[0].report.softList.map(function(item) {
-            return reportTransformedSoftwareSummaryDataInside.push({
-              device: $scope.reportSoftwareSummaryData[0].hostName,
-              softwareTitle: item.softName,
-              installationKey: '',
-              publisher: item.softPublisher,
-              version: item.softVersion,
-              installDate: item.softInstalledOn
-            });
+        if (data.device) {
+          $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany.data[data.companyId].filter(function(item){
+            return item.id === data.device;
+          });
+        } else {
+          $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany.data[data.companyId];
+        }
+        if ($scope.reportSoftwareSummaryData && $scope.reportSoftwareSummaryData.length > 0 && (location.hash === '#/reports/software-summary')) {
+          $scope.reportSoftwareSummaryData.map(function(item) {
+            if (item.report && item.report && item.report.softList ){
+              item.report.softList.map(function(soft) {
+                return reportTransformedSoftwareSummaryDataInside.push({
+                  device: item.hostName,
+                  softwareTitle: soft.softName,
+                  installationKey: '',
+                  publisher: soft.softPublisher,
+                  version: soft.softVersion,
+                  installDate: soft.softInstalledOn
+                });
+              });
+            }
           });
         }
         if ($scope.softwareSummarySoft) {
@@ -480,49 +433,17 @@
           const name = $scope.softwareSummarySoft.name;
           reportTransformedSoftwareSummaryDataInside = reportTransformedSoftwareSummaryDataInside.filter(function(item) {
             if (type === 'publisher') {
-              return item.publisher === name
+              return item.publisher === name;
             } else {
-              return item.softwareTitle === name
+              return item.softwareTitle === name;
             }
-          })
+          });
+        }
+        if (location.hash !== '#/reports/software-summary') {
+          reportTransformedSoftwareSummaryDataInside = $scope.reportSoftwareSummaryData;
         }
         $scope.loadingInProgress = false;
         return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
-      }
-
-      function findWithSoft(selectedCompany) {
-        var reportTransformedSoftwareSummaryDataInside = [];
-        $scope.reportSoftwareSummaryData.map(function(item){
-          if (item.data && item.data.length > 0) {
-            const companyId = item.id;
-            return item.data.map(function(device) {
-              if (device && device.report && device.report.softList){
-                return device.report.softList.map(function(softListItem){
-                  if (softListItem.softName === $scope.softwareSummarySoft.name) {
-                    if (reportTransformedSoftwareSummaryDataInside.length > 0) {
-                      return reportTransformedSoftwareSummaryDataInside.map(function(item) {
-                        if (softListItem.softName === item.softwareTitle && item.version === softListItem.softVersion && CompaniesService.getOneById(companyId).name === item.companyName) {
-                          return item.totalInstalls +=1;
-                        } else {
-                          return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
-                        }
-                      });
-                    } else {
-                      return reportTransformedSoftwareSummaryDataInside.push(createSortItem(softListItem, companyId, selectedCompany, device.hostName));
-                    }
-                  }
-                });
-              }
-            });
-          }
-        });
-        $scope.loadingInProgress = false;
-        if (selectedCompany) {
-          $scope.type = 2;
-          return ($scope.reportTransformedSoftwareSummaryData = filterReportByCompanyName(reportTransformedSoftwareSummaryDataInside, selectedCompany));
-        } else {
-          return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
-        }
       }
 
       function endReportDataLoading(resp, dataToSend) {

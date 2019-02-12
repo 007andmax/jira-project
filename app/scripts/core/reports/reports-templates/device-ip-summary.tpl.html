@@ -31,8 +31,8 @@
           <p>{{date | date:'yyyy-MM-dd'}}</p>
         </div>
       </div>
-      <div ng-if="reportHardwareSummary">
-        <div ng-if="reportHardwareSummary[company.id]">
+      <div ng-if="reportTransformedSoftwareSummaryData">
+        <div ng-if="reportTransformedSoftwareSummaryData">
           <ul class="con-col">
             <li class="top-product-list-ticket clearfix">
               <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithDeviceItem"><strong>Device</strong></div>
@@ -46,7 +46,7 @@
               <div class="col-md-1" ng-if="deviceIpSummaryWithDns2Item"><strong>DNS 2</strong></div>
               <div class="col-md-1" ng-if="deviceIpSummaryWithWanIpItem"><strong>WAN IP</strong></div>
             </li>
-            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportHardwareSummary[company.id] | orderBy: 'label'"
+            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportTransformedSoftwareSummaryData | orderBy: 'label'"
                 on-finish-render="buildPdf()">
               <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithDeviceItem">{{device.label}}</div>
               <div class="col-md-1 w-14-5" ng-if="deviceIpSummaryWithNetworkNameItem">{{device.hostName}}</div>

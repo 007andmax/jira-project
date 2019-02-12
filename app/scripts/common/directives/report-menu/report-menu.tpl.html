@@ -10,26 +10,21 @@
 
       <div class="new-reports-reverse">
         <div class="form-group content" ng-show="$ctrl.isSoftListHidden">
-
-          <div class="text-error" style="position: absolute;bottom: -10px;right: 0;"
-               ng-hide="errorMassageForSoftwareReport">
-            Please select
-            the soft
-          </div>
           <div uib-dropdown>
             <input type="text"
                    name="reportCompany"
-                   ng-disabled="reportType.toUpperCase() !== 'DETAILED'"
                    ng-model="reportSetting.soft"
                    autocomplete="off"
                    debounce="1000"
                    tabindex="3"
+                   ng-disabled="!reportSetting.company.name || !loadingInProgressSoft"
                    smart-dropdown-menu-position
                    class="form-control form-control-dropdown dropdown-toggle"
                    uib-typeahead="soft as soft.name for soft in softSelect | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                    placeholder="{{'Search software / publisher'}}"
                    qt-typeahead-async-show-on-focus
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+            <loading-indicator class="new-reports-reverse__loader" loading-trigger="!loadingInProgressSoft"></loading-indicator>
             <div class="input-top-4" typeahead-input-icon="userCompany"></div>
           </div>
         </div>
@@ -39,6 +34,7 @@
                  class="form-control has-dropdown-with-label pointer"
                  autocomplete="off"
                  ng-model="reportSetting.techUser"
+                 name="ticketAssignTo"
                  name="ticketAssignTo"
                  typeahead-editable="false"
                  smart-dropdown-menu-position
@@ -77,7 +73,7 @@
                  ng-disabled="!reportSetting.company.name"
                  uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:$viewValue:stateComparator | orderBy:'hostName'"
                  qt-typeahead-async-show-on-focus
-                 placeholder="Device"
+                 placeholder="All devices"
                  custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}" />
           <div typeahead-input-icon-sm="reportAgent"></div>
           <div class="ng-scope" typeahead-input-icon="userCompany">
@@ -376,16 +372,6 @@
       <div ng-show="$ctrl.isSoftwareSummaryOptions" class="col-md-11 w-100">
         <div class="include-ticket-report">
           <p>Include the following columns in the report</p>
-          <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithCompanyName" ng-disabled="reportSetting.company">
-            <span class="control-indicator"></span>
-            Company name
-          </label>
-          <label class="control checkbox">
-            <input type="checkbox" ng-model="softwareSummaryWithTotalInstalls" ng-disabled="reportSetting.company">
-            <span class="control-indicator"></span>
-            Total installs
-          </label>
           <label class="control checkbox">
             <input type="checkbox" ng-model="softwareSummaryWithDevice" ng-disabled="reportSetting.soft && !reportSetting.company">
             <span class="control-indicator"></span>

@@ -2006,3 +2006,11 @@
     padding: 30px 10px;
   }
 }
+
+.new-reports-reverse__loader .loading {
+  width: 20px;
+  height: 20px;
+  right: 10px;
+  left: auto;
+  top: 7px;
+}

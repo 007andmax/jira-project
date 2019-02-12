@@ -100,7 +100,6 @@
     //Software summary report start
     $scope.loadingInProgressSoft = true;
     $scope.softwareSummaryCompanyId = CompaniesService.getCurrentCompany().id;
-    $scope.errorMassageForSoftwareReport = true;
     $scope.softwareSummaryWithCompanyName = true;
     $scope.softwareSummaryWithTotalInstalls = true;
     $scope.softwareSummaryWithDevice = true;
@@ -137,9 +136,11 @@
 
     $scope.softSelect = [];
 
-    function getSoftList() {
+    function getSoftListForCompany(companyId) {
       $scope.loadingInProgressSoft = false;
-      $http.get('/devices/extended?companyId='+ $scope.softwareSummaryCompanyId).then(function (resp) {
+      $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
+        $rootScope.softwareSummarySelectedCompany = resp;
+        $scope.softSelect = [];
         if(resp) {
           Object.keys(resp.data).map(function(key) {
             const softlistArrayFromItem = resp.data[key];
@@ -158,7 +159,6 @@
           for ( var i=0, len=$scope.softSelect.length; i < len; i++ ) {
             obj[$scope.softSelect[i]['name']] = $scope.softSelect[i];
           }
-
           $scope.softSelect = [];
           for ( var key in obj ) {
             $scope.softSelect.push(obj[key]);
@@ -168,7 +168,7 @@
       });
     }
 
-    getSoftList();
+
 
     $scope.$watch('loadingInProgressSoft', function(val) {
       $rootScope.loadingInProgressSoft = val;
@@ -187,7 +187,7 @@
 
     $scope.sendNewHTMLForPdf = function() {
       $rootScope.reportLineChanged = true;
-    }
+    };
 
     $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
     $scope.techUsers = UsersService.getTechUsers().filter(function(el) {
@@ -387,7 +387,7 @@
     //Software Summary reports items end
 
     $scope.$watch('reportSetting.device', function(val) {
-      $rootScope.hardwareSummaryDevice = val;
+      $rootScope.hardwareSummaryDevice = val.device;
     });
 
     $scope.$watch('reportSetting.soft', function(val) {
@@ -503,9 +503,7 @@
         }
       }
       lastSentData = techDataToSend;
-      $scope.$emit("requestReportData", techDataToSend, location, type);
-      // $scope.startDate = null;
-      // techDataToSend.endDate = null;
+      $scope.$emit('requestReportData', techDataToSend, location, type);
     }
 
     function formatDate(date) {
@@ -653,12 +651,7 @@
             const dataToSend = {
               type: 'SUMMARY'
             };
-            if ((reportSettings && reportSettings.soft && !reportSettings.device)) {
-              dataToSend.companyId = $scope.softwareSummaryCompanyId;
-              dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
-              lastSentData = dataToSend;
-              $scope.$emit('requestReportData', dataToSend, location, techType);
-            } else if (reportSettings && reportSettings.company && reportSettings.device) {
+            if (reportSettings && reportSettings.company && (reportSettings.device || reportSettings.soft)) {
               dataToSend.type = 'DETAILED';
               dataToSend.companyId = reportSettings.company.id;
               dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
@@ -667,12 +660,13 @@
               }
               lastSentData = dataToSend;
               $scope.$emit('requestReportData', dataToSend, location, techType);
+            } else if(reportSettings.company) {
+              dataToSend.companyId = reportSettings.company.id;
+              dataToSend.selectedCompany = reportSettings.company && reportSettings.company.id;
+              $scope.$emit('requestReportData', dataToSend, location, techType);
             }
-            if (!reportSettings.soft && !reportSettings.company) {
-              return $scope.errorMassageForSoftwareReport = false;
-            } else if(reportSettings.company && (!reportSettings.soft && !reportSettings.device)) {
-              $scope.errorMassageForSoftwareReport = true;
-              return $scope.errorMassageForSoftwareReportCompany = false;
+            if (!reportSettings.company) {
+              return $scope.errorNassageForCompany = false;
             } else {
               $scope.errorMassageForSoftwareReport = true;
               $scope.errorMassageForSoftwareReport = true;
@@ -842,22 +836,8 @@
     });
 
     $scope.$watch("reportSetting.company", function (val) {
-      if ((val && !$scope.reportSetting.soft) || ($scope.reportSetting.soft && val)) {
-        $scope.softwareSummaryWithCompanyName = false;
-        $scope.softwareSummaryWithTotalInstalls = false;
-        $scope.softwareSummaryWithDevice = true;
-        $scope.softwareSummaryWithInstalationKey = true;
-      } else if(!val && $scope.reportSetting.soft){
-        $scope.softwareSummaryWithDevice = false;
-        $scope.softwareSummaryWithInstalationKey = false;
-        $scope.softwareSummaryWithCompanyName = true;
-        $scope.softwareSummaryWithTotalInstalls = true;
-      } else {
-        $scope.softwareSummaryWithDevice = true;
-        $scope.softwareSummaryWithInstalationKey = true;
-        $scope.softwareSummaryWithCompanyName = true;
-        $scope.softwareSummaryWithTotalInstalls = true;
-      }
+      $rootScope.softwareSummarySelectedCompanyInfo = val;
+      val && val.id && getSoftListForCompany(val.id);
       $scope.filteredAgentList = $scope.agentsList;
       if (val && typeof val === 'object') {
         $scope.ticketCompanyChoosen = true;
