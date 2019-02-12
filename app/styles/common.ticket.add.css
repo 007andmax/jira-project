@@ -4,16 +4,19 @@
   position: fixed;
   bottom: 0;
   z-index: 99999;
-  background: #fff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+  /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);*/
   width: calc(100% - 395px);
   right: 77px;
   transition: all .285s;
+  padding: 20px 96px;
+  background: #f2f5f8;
+  border-top: 1px solid #dee3e7;
 }
 
 .opened-ticket-list .ticket-post-update-wrapper {
-  width: calc(100% - 933px);
+  width: 746px;
   min-height: 255px;
+  right: 350px;
 }
 
 .ticket-post-update-wrapper > .btn {
@@ -52,13 +55,13 @@
 
 .ticket-post-update-wrapper .petrovich a {
   position: absolute;
-  bottom: 10px;
-  left: 73px;
+  bottom: 7px;
+  left: 50px;
 }
 
 .ticket-add .ticket-update-note .editor {
   border: none;
-  padding: 24px 24px 0 24px;
+  padding: 16px 16px 0 16px;
   color: #9ca5b6;
   font-size: 13px;
 }
@@ -90,16 +93,26 @@
 
 .create-updates-header {
   display: flex;
-  padding: 15px;
+  padding: 0 0 15px 0;
   align-items: center;
   border-bottom: 1px solid #edf2f6;
 }
 
 .mob-note, .mob-product, .mob-service {
-  width: 24px;
   height: 24px;
-  margin-right: 35px;
+  margin-right: 20px;
   position: relative;
+  padding-left: 24px;
+  font-size: 13px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.mob-note {
+  width: 60px;
+}
+
+.mob-product, .mob-service {
+  width: 90px;
 }
 
 .mob-note:after,
@@ -107,11 +120,12 @@
 .mob-service:after {
   position: absolute;
   content: '';
-  bottom: -20px;
+  bottom: -10px;
   left: 0;
   width: 100%;
   height: 2px;
   background-color: transparent;
+  pointer-events: none;
 }
 
 .mob-note:hover:after,
@@ -124,37 +138,40 @@
 }
 
 .mob-note {
-  background: url("../images/new-icons/mob-note.png");
+  background: url("../images/new-icons/mob-note.png") no-repeat;
 }
 
 .mob-product {
-  background: url("../images/new-icons/mob-product.png");
+  background: url("../images/new-icons/mob-product.png") no-repeat;
 }
 
 .mob-service {
-  background: url("../images/new-icons/mob-service.png");
+  background: url("../images/new-icons/mob-service.png") no-repeat;
 }
 
 .mob-note.active,
 .mob-note:hover {
-  background: url("../images/new-icons/mob-note-hover.png");
+  background: url("../images/new-icons/mob-note-hover.png") no-repeat;
+  color: #16a4fa;
 }
 
 .mob-product.active,
 .mob-product:hover {
-  background: url("../images/new-icons/mob-product-hover.png");
+  background: url("../images/new-icons/mob-product-hover.png") no-repeat;
+  color: #16a4fa;
 }
 
 .mob-service.active,
 .mob-service:hover {
-  background: url("../images/new-icons/mob-service-hover.png");
+  background: url("../images/new-icons/mob-service-hover.png") no-repeat;
+  color: #16a4fa;
 }
 
 .create-updates-header img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin-right: 35px;
+  margin-right: 15px;
 }
 
 .ticket-add-container {
@@ -186,7 +203,7 @@
 }
 
 .ticket-add .ticket--footer {
-  padding: 20px 20px 20px 64px;
+  padding: 20px 0 0 40px;
   display: flex;
   justify-content: space-between;
 }

@@ -228,6 +228,26 @@
     min-width: 320px !important;
   }
   
+  .notify-user-dropdown {
+    max-width: 100%;
+  }
+  
+  .mob-note, .mob-product, .mob-service {
+    width: auto;
+  }
+  
+  .info-block {
+    margin-bottom: 10px;
+  }
+  
+  .opened-ticket-list .content-wrapper .ticket-list {
+    padding: 0;
+  }
+  
+  .no-ticket-updates img {
+    width: 100%;
+  }
+  
   div.tooltip {
     display: none;
   }
@@ -990,11 +1010,6 @@
     top: 15px;
   }
   
-  .tickets {
-    background-color: #f7fcff;
-    padding: 0;
-  }
-  
   .ticket, .ticket:first-child {
     padding: 0;
     background-color: transparent;
@@ -1186,6 +1201,7 @@
   
   .mob-ticket-content {
     padding: 20px 16px 20px 16px;
+    width: 100vw;
   }
   
   .mob-ticket-header-info {

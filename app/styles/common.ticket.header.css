@@ -11,7 +11,7 @@
   position: fixed;
   z-index: 1;
   top: 78px;
-  right: 77px;
+  /*right: 77px;*/
   transition: .2s ease-in all 0s;
   width: calc(100% - 394px);
   padding: 30px;
@@ -50,7 +50,9 @@
 }
 
 .opened-ticket-list .ticket-header.ticket-fixed-header {
-  width: calc(100% - 934px);
+  width: 744px;
+  top: 102px;
+  border-radius: 4px;
 }
 
 .left-panel-closed .ticket-header.ticket-fixed-header {

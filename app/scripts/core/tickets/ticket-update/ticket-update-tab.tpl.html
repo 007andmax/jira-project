@@ -5,11 +5,11 @@
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
       <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note"
-              ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
+              ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}">Chat</button>
       <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product"
-              ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
+              ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}">Product</button>
       <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service"
-              ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
+              ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}">Service</button>
     </div>
     <!--<ul class="nav nav-ticket-add"-->
     <!--ng-if="TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)">-->
@@ -316,7 +316,7 @@
 
         <div class="ticket-add clearfix" ng-form="addServicesForm">
 
-          <div style="padding: 20px 20px 0;"
+          <div style="padding: 0 20px 0;"
                ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated) && !(serviceList.length === 0 && areTickets))">
             <div style="width: 100%;font-size: 13px;" class="info-block">
               <span ng-show="areTicketsTerminated">Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services.</span>

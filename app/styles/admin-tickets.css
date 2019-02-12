@@ -134,7 +134,7 @@ body.opened-ticket-list .content-wrapper .container-ticket-list {
 
 body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   position: relative;
-  width: 540px;
+  width: 500px;
   height: 100%;
 }
 
@@ -143,7 +143,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 }
 
 .opened-ticket .content-wrapper .container-ticket-content {
-  right: 77px;
+  /*right: 77px;*/
   position: fixed;
   display: block;
   float: right;
@@ -165,9 +165,12 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 
 .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   position: fixed;
+  /*width: 744px;*/
+  /*right: 351px;*/
   right: 77px;
-  width: calc(100% - 933px);
+  width: calc(100% - 895px);
   height: 100%;
+  background-color: #f7fcff;
 }
 
 .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {

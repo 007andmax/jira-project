@@ -3,17 +3,24 @@
   padding: 20px 30px;
 }
 
-.content-wrapper {
-  /* background-color: #F3F7F9; */
+.content-wrapper .ticket-list {
+  border-radius: 4px;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+  background: #f7fcff;
 }
 
-.content-wrapper .ticket-list {
-  padding: 0;
+.opened-ticket-list .content-wrapper .ticket-list {
+  padding: 24px 116px;
+}
+
+.opened-ticket-list.opened-ticket .content-wrapper .ticket-list {
+  padding: 24px 24px 24px 116px;
 }
 
 .tickets {
   margin: 0;
   padding: 0 0 240px;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
 .class-disabled {
@@ -22,12 +29,13 @@
 
 .ticket {
   list-style: none;
-  background-color: #f7fcff;
+  background-color: #fff;
   padding: 15px 30px 0 0;
   position: relative;
   cursor: pointer;
   border-right: 1px solid #edf2f6;
   font-size: 13px;
+  border-bottom: 1px solid #edf2f6;
 }
 
 .ticket p {
@@ -74,10 +82,7 @@
 /*Ticket States - Start*/
 
 .ticket.active {
-  box-shadow: 0 3px 18px 2px rgba(0, 0, 0, .05);
-  background-color: #fff;
-  border-right: none;
-  z-index: 10;
+  border-right: 2px solid #16a4fa;
 }
 
 .ticket.active .ticket-meta {
@@ -147,7 +152,6 @@
 .ticket .ticket-meta {
   padding: 0 0 15px 0;
   margin-left: 62px;
-  border-bottom: 1px solid #edf2f6;
 }
 
 .ticket .ticket-meta .ticket-list-header {
@@ -285,4 +289,53 @@
 
 .high-priority-border .ticket-labels:before {
   background: url("../images/new-icons/high-priority-mobile.png") no-repeat;
+}
+
+@media screen and (max-width: 1600px) {
+  .opened-ticket-list.opened-ticket .content-wrapper .ticket-list {
+    padding: 24px;
+  }
+  
+  body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
+    width: 408px;
+  }
+  
+  .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
+    width: calc(100% - 801px);
+  }
+  
+  .opened-ticket-list .ticket-post-update-wrapper {
+    right: 130px;
+  }
+  
+  .container-ticket-content .nano-content {
+    width: 540px !important;
+  }
+  
+  .opened-ticket-list .ticket-header.ticket-fixed-header {
+    width: calc(100% - 826px) !important;
+  }
+  
+  .ticket-header-actions {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .opened-ticket-list .ticket-post-update-wrapper {
+    width: 540px;
+  }
+  
+  .opened-ticket-list .ticket-post-update-wrapper {
+    right: 102px;
+  }
+  
+  .ticket-post-update-wrapper {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .container-ticket-content .nano-content {
+    width: 100% !important;
+  }
 }

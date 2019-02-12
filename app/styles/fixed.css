@@ -549,6 +549,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .notify-user-dropdown {
   display: flex;
+  max-width: 48%;
 }
 
 .dropdown-user-parent > .dropdown-menu > li a .user-name > p {
