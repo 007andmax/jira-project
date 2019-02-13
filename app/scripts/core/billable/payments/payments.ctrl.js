@@ -43,17 +43,6 @@
           }
         });
 
-        // if ($scope.mode === 'payments-list') {
-        //   PaymentsService.getPaymentsData($scope, function (resp) {
-        //     $scope.payments = resp;
-        //   });
-        // } else  {
-        //   PaymentsService.getDepositSlipsData($scope, function (resp) {
-        //     $scope.depositSlips = resp;
-        //     console.log("sdfsdfsdfsdfsd");
-        //     console.log(resp);
-        //   });
-        // }
         PaymentsService.getPaymentsData($scope, function (resp) {
           $scope.payments = resp;
         });

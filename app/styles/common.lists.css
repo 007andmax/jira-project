@@ -375,6 +375,11 @@
   min-height: auto;
 }
 
+.payments .loading-indicator {
+  padding-top: 700px;
+  display: block;
+}
+
 /*.new-payments.users-bg > li div > div {*/
 /*line-height: 22px;*/
 /*}*/

@@ -47,8 +47,6 @@
               return el.number === invoice;
             });
           }
-
-          console.log(invoice, 'INVOICE')
           $scope.isInvoiceShown = goBack ? false : true;
 
           if (goBack) {

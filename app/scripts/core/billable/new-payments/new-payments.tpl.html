@@ -1,5 +1,5 @@
 <div class="payments" ng-controller="quicktech.core.billable.newPaymentsCtrl" ng-cloak>
-  <div ng-if="!isInvoiceShown">
+  <div>
     <div class="change-view-actions">
       <div class="action-wrap clearfix invoices" style="min-height: 0; padding: 0">
         <div class="invoices-header">
@@ -63,7 +63,10 @@
         </div>
       </div>
     </div>
-    <ul class="qt-list qt-companies qt-users users-bg new-payments">
+
+    <loading-indicator ng-class="!filteredPayments ? 'loading-indicator' : ''" loading-trigger="!filteredPayments"></loading-indicator>
+
+    <ul class="qt-list qt-companies qt-users users-bg new-payments" ng-if="filteredPayments">
       <li class="list-heading">
         <div class="col-xs-1" style="width: 3%">
           <label class="control checkbox pull-left" ng-click="stopPropagation($event)">
@@ -129,17 +132,10 @@
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'status'}"></i>
               </span>
         </div>
-
-        <!-- <div class="col-xs-1" style="text-align: center" ng-click="setOrderByPayments('users')">
-          <span class="sort-span">
-            Actions
-            <i class="icn-sm sort-icon icn-sort"
-               ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'users'}"></i>
-          </span>
-        </div> -->
       </li>
 
       <li class="list-company-row"
+          ng-if="filteredPayments && filteredPayments.length > 0"
           ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse"
           ng-controller="quicktech.core.billable.newPaymentCtrl">
 

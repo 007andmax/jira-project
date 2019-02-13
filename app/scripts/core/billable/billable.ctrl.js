@@ -176,11 +176,7 @@
 
         $scope.showInvoice = function() {
           $scope.isInvoiceShown = true;
-
-          // addListeners();
-        }
-
-        // console.log('billable ctrl')
+        };
 
         $scope.$on('$destroy', function() {
           // console.log('billable ctrl has been destroyed')
@@ -189,13 +185,11 @@
         $scope.$watch(function() {
           return $rootScope.hideInvoiceWhenBack
         }, function(val) {
-
-          // console.log("something happen", val)
           if (val) {
             $rootScope.hideInvoiceWhenBack = false;
             $scope.isInvoiceShown = false;
           }
-        })
+        });
 
         $scope.$watch(function() {
           return $rootScope.isInvoiceCreated;
@@ -205,13 +199,12 @@
 
             $scope.isInvoiceShown = false;
           }
-        })
+        });
 
         $scope.togglePreview = function() {
           $scope.isPreviewShown = !$scope.isPreviewShown;
 
-          // console.log($scope.ticketNote, 'note')
-        }
+        };
 
         $scope.setExpandedCompanyId = function (companyId) {
           if (companyId === $scope.expandedCompanyId) {
