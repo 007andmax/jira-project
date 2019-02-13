@@ -368,11 +368,15 @@
 }
 
 .new-payments.qt-companies > li {
-  padding: 23px 15px;
+  padding: 13px 15px;
+}
+
+.new-payments .list-company-row div {
+  line-height: 22px;
 }
 
 .new-payments.users-bg > li {
-  min-height: auto;
+  min-height: 52px;
 }
 
 .payments .loading-indicator {
@@ -4561,19 +4565,31 @@ Devices tab
 }
 
 .full-text-wrapper:hover .full-text {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
-.full-text-wrapper .full-text {
-  display: none;
+.full-text {
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
-  top: 100%;
-  z-index: 99999999;
-  width: 400px;
-  border: 1px solid black;
-  background: #fff;
+  width: 100%;
   padding: 20px;
   border-radius: 4px;
+  box-shadow: 0 4px 28px 0 rgba(0, 0, 0, 0.1);
+  color: #4f5f79;
+  font-size: 13px;
+  font-family: "Graphik Regular", sans-serif;
+  cursor: text;
+  background: #fff;
+  z-index: 2;
+  margin-top: 10px;
+}
+
+.full-text .full-text-title {
+  color: #364656;
+  font-family: "Graphik Medium", sans-serif;
+  margin-bottom: 10px !important;
 }
 
 .network-scan-status:before,
