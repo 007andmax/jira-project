@@ -4555,6 +4555,22 @@ Devices tab
   height: 22px;
 }
 
+.full-text-wrapper:hover .full-text {
+  display: block;
+}
+
+.full-text-wrapper .full-text {
+  display: none;
+  position: absolute;
+  top: 100%;
+  z-index: 99999999;
+  width: 400px;
+  border: 1px solid black;
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+}
+
 .network-scan-status:before,
 .invoice-status:before {
   background: none;

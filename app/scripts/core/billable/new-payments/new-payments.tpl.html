@@ -172,11 +172,13 @@
         <div class="col-xs-2">
           <span>{{ payment.reference }}</span>
         </div>
-        <div class="col-xs-2 w-26">
+        <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
           <p set-height-note line-length="payment.invoiceNumbers.length">
-            <!--style={payment.invoiceNumbers.length >= 3 ? {-webkit-line-clamp: `{payment.invoiceNumbers.length}`} : ''}>-->
             {{ payment.note }}
           </p>
+          <div class="full-text">
+            {{payment.note}}
+          </div>
         </div>
         <div class="col-xs-1">
           ${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}

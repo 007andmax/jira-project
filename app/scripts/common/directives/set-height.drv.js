@@ -11,7 +11,7 @@
           quantity: "=serviceQuantityPicker",
           lineLength: '=lineLength',
         },
-        link: (function (scope, element) {
+        link: (function (scope, element, attrs) {
           $timeout(function() {
             if (element[0].offsetHeight > 43) {
               element.addClass('hidden-note');
