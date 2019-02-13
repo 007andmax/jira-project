@@ -173,8 +173,7 @@
           <span>{{ payment.reference }}</span>
         </div>
         <div class="col-xs-2 w-26">
-          <p>
-            <!--class={p.innerHeight > 43 ? 'hidden-note' : ''}-->
+          <p set-height-note line-length="payment.invoiceNumbers.length">
             <!--style={payment.invoiceNumbers.length >= 3 ? {-webkit-line-clamp: `{payment.invoiceNumbers.length}`} : ''}>-->
             {{ payment.note }}
           </p>
