@@ -12,7 +12,7 @@
           lineLength: '=lineLength',
         },
         link: (function (scope, element, attrs) {
-          $timeout(function() {
+          scope.$watch(attrs, function(value) {
             if (element[0].offsetHeight > 43) {
               element.addClass('hidden-note');
             }
