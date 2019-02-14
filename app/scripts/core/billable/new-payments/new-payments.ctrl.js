@@ -204,11 +204,9 @@
           $scope.filteredPayments.map(function(item) {
             $scope.showTooltipArray.push(false);
           });
-          console.log($scope.showTooltipArray, '$scope.showTooltipArray');
         }
 
         $scope.showTooltip = function(index) {
-          console.log(index, 'INDEX');
           return $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
         };
 
@@ -220,8 +218,6 @@
           $scope.filteredPayments.map(function(item) {
             return $scope.showTooltipArray.push(false);
           });
-
-          console.log($scope.showTooltipArray, '$scope.showTooltipArray');
 
           $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
             if (acc.indexOf(el.clientCompanyName) === -1) {
