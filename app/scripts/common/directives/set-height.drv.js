@@ -9,6 +9,7 @@
         restrict: 'A',
         scope: {
           lineLength: '=lineLength',
+          text: '=text'
         },
         link: (function (scope, element, attrs) {
           scope.$watch(attrs, function() {
@@ -20,7 +21,7 @@
             }
           });
 
-          scope.$watch(element, function() {
+          scope.$watch('text', function(val) {
             if (element[0].offsetHeight > 48) {
               element.addClass('hidden-note');
             }
