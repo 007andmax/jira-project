@@ -4565,14 +4565,14 @@ Devices tab
   height: 22px;
 }
 
-.full-text-wrapper:hover .full-text {
-  opacity: 1;
-  visibility: visible;
-}
+/*.full-text-wrapper:hover .full-text {*/
+  /*opacity: 1;*/
+  /*visibility: visible;*/
+/*}*/
 
 .full-text {
-  opacity: 0;
-  visibility: hidden;
+  opacity:1 ;
+  visibility: visible;
   position: absolute;
   width: 100%;
   padding: 20px;

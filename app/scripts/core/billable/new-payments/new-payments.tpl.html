@@ -169,10 +169,10 @@
           <span>{{ payment.reference }}</span>
         </div>
         <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
-          <p set-height-note line-length="payment.invoiceNumbers.length">
+          <p set-height-note line-length="payment.invoiceNumbers.length" ng-click="showTooltip($index)">
             {{ payment.note }}
           </p>
-          <div class="full-text">
+          <div class="full-text" ng-if="showTooltipArray[$index]">
             <p class="full-text-title">Note</p>
             {{payment.note}}
           </div>
@@ -286,12 +286,8 @@
               <span ng-if="!readedAt">This invoice is unread. </span>
               <span ng-if="paidOn">Invoice was paid on {{ paidOn | date:'dd MMM yyyy' }} </span>
             </p>
-            <!-- <div class="expires-in" ng-show="showTimer && !invoiceCreated" style="display: inline-block;">
-              <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
-              {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
-            </div> -->
           </div>
-          <!-- <p class="info-block">This is a preview of your invoice. Switch back to Edit if you need to make changes.</p> -->
+
           <div class="invoice-list">
             <div class="invoice-list--header">
               <div class="invoice-list--header__top clearfix">

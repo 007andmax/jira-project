@@ -15,10 +15,12 @@
                 $uibModal,
                 $rootScope,
                 PaymentsService) {
+        $scope.showTooltipArray = [];
         $scope.openModal = function(modalType, payment) {
           var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
 
           $scope.editedPayment = payment;
+
 
           var modalInstance = $uibModal.open({
             templateUrl: template,
@@ -58,7 +60,7 @@
 
           }
           $rootScope.invoiceToShow = invoice;
-        }
+        };
 
         $scope.orderPayments = {
           field: 'date',
@@ -123,7 +125,6 @@
 
         $scope.dateFilter = {startDate: null, endDate: null};
 
-
         $scope.clearDateFilter = function() {
           // console.log('clear')
           $scope.dateFilter = {startDate: null, endDate: null};
@@ -131,7 +132,7 @@
 
         $scope.sortBy = function(criteria) {
           $scope.sortByValue = criteria;
-        }
+        };
 
         $scope.sortByValue = '';
 
@@ -151,21 +152,10 @@
         }
 
         $scope.$watch('filterCompany', function(value, oldVal) {
-
-          // setTimeout(function() {
-          //   if ($scope.filterWasClicked) {
-          //     $scope.filterWasClicked = false;
-          //
-          //     $scope.filterCompany = oldVal;
-          //   } else {
-          //     filterPayments();
-          //   }
-          // }, 100)
           if((value && value !== '' && value !== ' ') || $scope.wasFilterReset) {
             filterPayments();
           }
-
-        })
+        });
 
         $scope.onFilterClick = function() {
           $scope.filterWasClicked = true;
@@ -176,17 +166,12 @@
           if (evt.keyCode == 8) {
             $scope.wasFilterReset = true;
           }
-        }
+        };
 
         $scope.deletePayment = function(id) {
           PaymentsService.deletePayment(id, function(res) {
           })
-        }
-
-
-
-
-
+        };
 
         function filterPayments() {
 
@@ -214,14 +199,29 @@
             }
 
             return result;
-          })
+          });
+
+          $scope.filteredPayments.map(function(item) {
+            $scope.showTooltipArray.push(false);
+          });
+          console.log($scope.showTooltipArray, '$scope.showTooltipArray');
         }
+
+        $scope.showTooltip = function(index) {
+          console.log(index, 'INDEX');
+          return $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
+        };
 
 
         PaymentsService.getPaymentsData($scope, function(res) {
 
           $scope.payments = res;
           $scope.filteredPayments = res;
+          $scope.filteredPayments.map(function(item) {
+            return $scope.showTooltipArray.push(false);
+          });
+
+          console.log($scope.showTooltipArray, '$scope.showTooltipArray');
 
           $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
             if (acc.indexOf(el.clientCompanyName) === -1) {
@@ -229,24 +229,9 @@
             }
 
             return acc;
-          }, [])
-
+          }, []);
 
         });
-
-
-
-        // $scope.$watch('filteredPayments', function(val) {
-        //   if (val) {
-        //
-        //   }
-        //
-        // })
-
-
-
-
-
       }]);
 
 }());
