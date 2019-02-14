@@ -15,6 +15,8 @@
           isSendNotification: true
         };
 
+        $scope.noteError = false;
+
 
         $scope.maxDate = new Date();
 
@@ -28,14 +30,14 @@
 
         $scope.companies = Object.keys(($scope.receivableInvoicesData || $rootScope.uploadedReceivable).companies).map(function(id) {
           return CompaniesService.getOneById(id);
-        })
+        });
 
 
         $scope.availableInvoiceCompanies = [];
 
         $scope.setCompany = function(company) {
           $scope.invoiceCompany = company;
-        }
+        };
 
         $scope.setInvoice = function(invoice) {
           $scope.selectedInvoice = invoice;
@@ -52,6 +54,14 @@
 
         $scope.setIsMultiple = function(val) {
           $scope.isMultiple = val;
+        };
+
+        function checkNoteError() {
+          if ($scope.note && $scope.note.length > 255) {
+            return true;
+          } else {
+            return false;
+          }
         }
 
         $scope.isShowingErrors = function (form, fieldName) {
@@ -66,7 +76,7 @@
           return keys.reduce(function(acc, key) {
             return acc + invoices[key]
           }, 0)
-        }
+        };
 
         $scope.isSinglePayment = false;
         var invoicesToReceive = $scope.invoiceToReceive.invoices;
@@ -227,6 +237,12 @@
         };
 
         $scope.receivePayment = function (form) {
+          if (checkNoteError()) {
+            $scope.noteError = true;
+            return false;
+          } else {
+            $scope.noteError = false;
+          }
           if ($scope.countCheckedInvoices() === 1 && !$scope.partialPaymentAmount && $scope.partialPaymentAmount !== 0) {
             $scope.triedToSaveService = true;
             return;
@@ -252,7 +268,7 @@
           } else {
             for (var id in invoices) {
               if (invoices[id]) {
-                invoiceIdPayment.push(id)
+                invoiceIdPayment.push(id);
               }
             }
           }

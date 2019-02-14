@@ -68,7 +68,22 @@
         $scope.$watch('paymentAmount', function(val) {
         })
 
+        function checkNoteError() {
+          if ($scope.note && $scope.note.length > 255) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
         $scope.editPayment = function() {
+          if (checkNoteError()) {
+            $scope.noteError = true;
+            return false;
+          } else {
+            $scope.noteError = false;
+          }
+
 
           PaymentsService.editPayment({
             note: $scope.note,

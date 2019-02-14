@@ -90,13 +90,11 @@
         Note
       </label>
 
-      <div ng-messages="paymentRecieveForm.note.$error"
-           ng-class="{ 'hide': !isShowingErrors(paymentRecieveForm, 'note')}">
-        <label class="control-label" ng-message="maxlength">NOTE IS TOO LARGE</label>
+      <div ng-if="noteError" class="has-error">
+        <label class="control-label">NOTE IS TOO LARGE</label>
       </div>
 
-      <textarea placeholder="Write Note here" class="form-control" name="note" ng-model="note"
-                ng-maxlength="250"></textarea>
+      <textarea placeholder="Write Note here" class="form-control" name="note" ng-model="note"></textarea>
     </div>
     <div class="row">
       <div class="col-md-12" style="padding: 0;">
