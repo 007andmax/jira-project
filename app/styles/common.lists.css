@@ -363,6 +363,14 @@
   -webkit-box-orient: vertical;
 }
 
+.new-payments .w-26 p.hidden-note + .full-text {
+  display: block!important;
+}
+
+.new-payments .w-26 p + .full-text {
+  display: none!important;
+}
+
 .new-payments .list-company-row {
   align-items: flex-start;
 }

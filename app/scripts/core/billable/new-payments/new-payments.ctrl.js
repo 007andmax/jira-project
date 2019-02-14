@@ -206,8 +206,17 @@
           });
         }
 
-        $scope.showTooltip = function(index) {
-          return $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
+        $scope.showTooltip = function(event, index, type) {
+          event.stopPropagation();
+          return type ? $scope.showTooltipArray[index] = true : $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
+        };
+
+        $scope.hideAllTooltiip = function(event) {
+          event.preventDefault();
+          $scope.showTooltipArray = [];
+          $scope.filteredPayments.map(function(item) {
+            return $scope.showTooltipArray.push(false);
+          });
         };
 
 

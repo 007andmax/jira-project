@@ -4,16 +4,15 @@
   var app = angular.module('quicktech.common.directives');
 
   app.directive('setHeightNote',['$timeout',
-    function ($timeout) {
+    function () {
       return {
         restrict: 'A',
         scope: {
-          quantity: "=serviceQuantityPicker",
           lineLength: '=lineLength',
         },
         link: (function (scope, element, attrs) {
-          scope.$watch(attrs, function(value) {
-            if (element[0].offsetHeight > 43) {
+          scope.$watch(attrs, function() {
+            if (element[0].offsetHeight > 48) {
               element.addClass('hidden-note');
             }
             if (scope.lineLength && scope.lineLength >= 3) {
