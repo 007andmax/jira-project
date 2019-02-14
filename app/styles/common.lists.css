@@ -382,6 +382,7 @@
 .payments .loading-indicator {
   padding-top: 700px;
   display: block;
+  background: #f3f7f9;
 }
 
 /*.new-payments.users-bg > li div > div {*/
