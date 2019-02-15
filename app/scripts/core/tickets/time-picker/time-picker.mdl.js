@@ -21,13 +21,8 @@
  * @since 1.0 (4/21/16)
  */
 (function () {
-  var templates = {
-    picker: './picker.html'
-  };
   var module = angular.module('proton.multi-list-picker', []);
-  module.run(['$templateCache', function ($templateCache) {
-    $templateCache.put(templates.picker, "<div class=\'proton-multi-list-picker {{attachment}}\'>\n    <span ng-transclude class=\'proton-multi-list-picker-contents\'></span>\n    <div class=\'before\'></div>\n    <div class=\'container\'>\n        <ul class=\'lists\'>\n            <li class=\'toolbar\'>\n                <a class=\'toolbar-button\' ng-click=\'done({$model: model})\'>Done</a>\n            </li>\n            <li class=\'before-lists\' ng-init=\'first = false\'></li>\n            <li ng-repeat=\'list in items track by $index\'\n                class=\'list-container {{$index == 0 || first ? \"first\" : \"\"}} {{$index == items.length - 1 ? \"last\" : \"\"}}\'\n                data-index=\'{{$index}}\' proton-multi-list-motion data-motion-start=\'motionStart($event)\'\n                data-motion-change=\'motionChange($event)\' data-motion-end=\'motionEnd($event)\'>\n            <span class=\'divider {{!list.value ? \"blank\" : \"\"}}\' ng-if=\'list.$divider\' ng-init=\'first = !list.value\'>\n                <span ng-if=\'!bindHtml\' ng-bind=\'list.value\'></span>\n                <span ng-if=\'bindHtml\' ng-bind-html=\'list.value\'></span>\n            </span>\n                <ul class=\'list\' ng-if=\'!list.$divider\' data-selected=\'{{list.selected}}\'>\n                    <li class=\'item {{item.index == list.selected ? \"selected\" : \"\"}} {{(!list.cycle && list.selected &lt; 3) ? \"offset-down-\" + (3 - list.selected) : \"\"}} {{(list.cycle ? item.cycleIndex : item.index) &lt; list.selected && (list.cycle ? item.cycleIndex : item.index) &gt;= list.selected - 3 ? \"distance-\" + (list.selected - (list.cycle ? item.cycleIndex : item.index)) : \"\"}} {{(list.cycle ? item.cycleIndex : item.index) &gt; list.selected && (list.cycle ? item.cycleIndex : item.index) &lt;= list.selected + 3 ? \"distance-\" + ((list.cycle ? item.cycleIndex : item.index) - list.selected) : \"\"}}\'\n                        ng-repeat=\'item in list.view track by $index\' data-index=\'{{item.index}}\'\n                        ng-click=\'select(list, item.index)\' style=\'width: {{list.width}}px;\'>\n                        <span ng-if=\'item.$placeholder\'></span>\n                        <span ng-if=\'!item.$placeholder && !bindHtml\' ng-bind=\'item.label\'></span>\n                        <span ng-if=\'!item.$placeholder && bindHtml\' ng-bind-html=\'item.label\'></span>\n                    </li>\n                </ul>\n            </li>\n            <li class=\'after-lists\'></li>\n        </ul>\n    </div>\n    <div class=\'after\'></div>\n</div>");
-  }]);
+
   module.directive('protonMultiListPicker', ["$parse", function ($parse) {
     var controller = function ProtonMultiListPickerController($scope) {
       $scope.items = [];
@@ -60,7 +55,7 @@
     return {
       restrict: "E",
       replace: true,
-      templateUrl: templates.picker,
+      templateUrl: '/html/scripts/core/tickets/time-picker/time-picker.html',
       require: "?ngModel",
       scope: {
         done: "&?"
