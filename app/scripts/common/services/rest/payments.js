@@ -27,14 +27,14 @@
 
       var isRequestSent = false;
 
-      $rootScope.$watch(function() {
-        return $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list.length
-      }, function(val) {
-        if (val && !isRequestSent) {
-          isRequestSent = true;
-          getPaymentsData($rootScope);
-        }
-      })
+      // $rootScope.$watch(function() {
+      //   return $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list.length
+      // }, function(val) {
+      //   if (val && !isRequestSent) {
+      //     isRequestSent = true;
+      //     getPaymentsData($rootScope);
+      //   }
+      // })
 
 
       function postData(url, data, callback) {
@@ -60,7 +60,7 @@
           callback && callback(payments);
         });
 
-        if (wasSubscribed) return;
+        // if (wasSubscribed) return;
 
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
@@ -68,6 +68,8 @@
 
           if(newChange.action === 'PAYMENT_CREATED') {
             invoices = $rootScope.allInvoices;
+            if (payments.findIndex(function(el) { return el.id === newChange.data.id }) !== -1) return;
+
             payments.unshift(newChange.data);
 
             if (invoices) {

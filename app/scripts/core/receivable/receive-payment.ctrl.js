@@ -15,6 +15,8 @@
           isSendNotification: true
         };
 
+        $scope.noteError = false;
+
 
         $scope.maxDate = new Date();
 
@@ -28,14 +30,14 @@
 
         $scope.companies = Object.keys(($scope.receivableInvoicesData || $rootScope.uploadedReceivable).companies).map(function(id) {
           return CompaniesService.getOneById(id);
-        })
+        });
 
 
         $scope.availableInvoiceCompanies = [];
 
         $scope.setCompany = function(company) {
           $scope.invoiceCompany = company;
-        }
+        };
 
         $scope.setInvoice = function(invoice) {
           $scope.selectedInvoice = invoice;
@@ -52,6 +54,14 @@
 
         $scope.setIsMultiple = function(val) {
           $scope.isMultiple = val;
+        };
+
+        function checkNoteError() {
+          if ($scope.note && $scope.note.length > 255) {
+            return true;
+          } else {
+            return false;
+          }
         }
 
         $scope.isShowingErrors = function (form, fieldName) {
@@ -66,7 +76,7 @@
           return keys.reduce(function(acc, key) {
             return acc + invoices[key]
           }, 0)
-        }
+        };
 
         $scope.isSinglePayment = false;
         var invoicesToReceive = $scope.invoiceToReceive.invoices;
@@ -227,34 +237,27 @@
         };
 
         $scope.receivePayment = function (form) {
-
-
-
+          if (checkNoteError()) {
+            $scope.noteError = true;
+            return false;
+          } else {
+            $scope.noteError = false;
+          }
           if ($scope.countCheckedInvoices() === 1 && !$scope.partialPaymentAmount && $scope.partialPaymentAmount !== 0) {
             $scope.triedToSaveService = true;
             return;
           }
-
           var diff = moment($scope.date).diff(moment(new Date()), 'day');
           if (diff === 0) {
             $scope.date = new Date();
           }
-
           var data = {
             date: moment($scope.date).format('x'),
             reference: $scope.reference,
-
-          }
-
-
-
-
-
+          };
           if ($scope.partialPaymentAmount && $scope.countCheckedInvoices() === 1) {
             data.partialPaymentAmount = $scope.partialPaymentAmount
           }
-
-
           var invoiceIdPayment = [],
             invoices = $scope.invoiceToReceive.invoices;
 
@@ -265,23 +268,17 @@
           } else {
             for (var id in invoices) {
               if (invoices[id]) {
-                invoiceIdPayment.push(id)
+                invoiceIdPayment.push(id);
               }
             }
           }
-
-
-
           $scope.disableReceiveButton = true;
-
-
 
           ReceivableService.receivePayment(
             $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note,
             function () {
               $uibModalInstance.dismiss('cancel');
               $scope.disableReceiveButton = false;
-
               $scope.invoiceToSent.invoices = {};
             }, data
           );

@@ -15,10 +15,12 @@
                 $uibModal,
                 $rootScope,
                 PaymentsService) {
+        $scope.showTooltipArray = [];
         $scope.openModal = function(modalType, payment) {
           var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
 
           $scope.editedPayment = payment;
+
 
           var modalInstance = $uibModal.open({
             templateUrl: template,
@@ -31,25 +33,22 @@
             }
 
           });
-
-        }
+        };
 
 
         $scope.parsePaymentMethod = function(method) {
           return method.split('_').map(function(el) {
             return el[0].toUpperCase() + el.slice(1).toLowerCase();
           }).join(' ');
-        }
+        };
 
         $scope.showInvoice = function(invoice, goBack) {
 
           if (typeof invoice === 'string') {
             invoice = $rootScope.allInvoices.find(function(el) {
               return el.number === invoice;
-            })
+            });
           }
-
-          console.log(invoice, 'INVOICE')
           $scope.isInvoiceShown = goBack ? false : true;
 
           if (goBack) {
@@ -61,7 +60,7 @@
 
           }
           $rootScope.invoiceToShow = invoice;
-        }
+        };
 
         $scope.orderPayments = {
           field: 'date',
@@ -126,7 +125,6 @@
 
         $scope.dateFilter = {startDate: null, endDate: null};
 
-
         $scope.clearDateFilter = function() {
           // console.log('clear')
           $scope.dateFilter = {startDate: null, endDate: null};
@@ -134,7 +132,7 @@
 
         $scope.sortBy = function(criteria) {
           $scope.sortByValue = criteria;
-        }
+        };
 
         $scope.sortByValue = '';
 
@@ -154,21 +152,10 @@
         }
 
         $scope.$watch('filterCompany', function(value, oldVal) {
-
-          // setTimeout(function() {
-          //   if ($scope.filterWasClicked) {
-          //     $scope.filterWasClicked = false;
-          //
-          //     $scope.filterCompany = oldVal;
-          //   } else {
-          //     filterPayments();
-          //   }
-          // }, 100)
           if((value && value !== '' && value !== ' ') || $scope.wasFilterReset) {
             filterPayments();
           }
-
-        })
+        });
 
         $scope.onFilterClick = function() {
           $scope.filterWasClicked = true;
@@ -179,17 +166,12 @@
           if (evt.keyCode == 8) {
             $scope.wasFilterReset = true;
           }
-        }
+        };
 
         $scope.deletePayment = function(id) {
           PaymentsService.deletePayment(id, function(res) {
           })
-        }
-
-
-
-
-
+        };
 
         function filterPayments() {
 
@@ -217,14 +199,34 @@
             }
 
             return result;
-          })
+          });
+
+          $scope.filteredPayments.map(function(item) {
+            $scope.showTooltipArray.push(false);
+          });
         }
+
+        $scope.showTooltip = function(event, index, type) {
+          event.stopPropagation();
+          return type ? $scope.showTooltipArray[index] = true : $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
+        };
+
+        $scope.hideAllTooltiip = function(event) {
+          event.preventDefault();
+          $scope.showTooltipArray = [];
+          $scope.filteredPayments.map(function(item) {
+            return $scope.showTooltipArray.push(false);
+          });
+        };
 
 
         PaymentsService.getPaymentsData($scope, function(res) {
 
           $scope.payments = res;
           $scope.filteredPayments = res;
+          $scope.filteredPayments.map(function(item) {
+            return $scope.showTooltipArray.push(false);
+          });
 
           $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
             if (acc.indexOf(el.clientCompanyName) === -1) {
@@ -232,24 +234,9 @@
             }
 
             return acc;
-          }, [])
-
+          }, []);
 
         });
-
-
-
-        // $scope.$watch('filteredPayments', function(val) {
-        //   if (val) {
-        //
-        //   }
-        //
-        // })
-
-
-
-
-
       }]);
 
 }());
