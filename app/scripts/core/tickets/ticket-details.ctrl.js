@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('quicktech.core.tickets', ['proton.multi-list-picker', 'ngSanitize']).controller('quicktech.core.tickets.ticketDetailsCtrl',
+    angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
@@ -1525,9 +1525,4 @@
 
         }]);
   }()
-).run(function () {
-  self && self.webView && self.webView.scrollView && (self.webView.scrollView.bounces = NO);
-  angular.element(document.body).on("touchmove", function (event) {
-    event.preventDefault();
-  })
-});
+);
