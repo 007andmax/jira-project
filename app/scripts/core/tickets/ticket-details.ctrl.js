@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
+    angular.module('quicktech.core.tickets', ['proton.multi-list-picker', 'ngSanitize']).controller('quicktech.core.tickets.ticketDetailsCtrl',
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
@@ -17,6 +17,46 @@
           rightPanelSharedState.companyId = '';
 
           var ticketMobileSettings = ticketMobileSettings;
+
+          $scope.pivotYear = 2000;
+          $scope.model = {
+            hour: 11,
+            minute: 59
+          };
+          $scope.attachment = "inline";
+          $scope.bindHtml = "true";
+          var years = [];
+          $scope.getYears = function () {
+            return years;
+          };
+          $scope.$watch('pivotYear', function (year) {
+            year -= 50;
+            years = [];
+            for (var i = 0; i < 100; i ++) {
+              years.push(year + i);
+            }
+          });
+          $scope.getDays = function (year, month) {
+            var result = [];
+            for (var i = 1; i < 30; i ++) {
+              result.push(i);
+            }
+            return result;
+          };
+          $scope.getMinutes = function () {
+            var result = {};
+            for (var i = 0; i < 60; i ++) {
+              result[i] = i < 10 ? ("0" + i) : i;
+            }
+            return result;
+          };
+          $scope.$watch('model.hour', function (newValue, oldValue) {
+            var now = parseInt(newValue);
+            var then = parseInt(oldValue);
+            if (now > 9 && then < 9 || now < 3 && then > 9) {
+              $scope.model.time = $scope.model.time == "AM" ? "PM" : "AM";
+            }
+          });
 
           $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
           $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -1485,4 +1525,9 @@
 
         }]);
   }()
-);
+).run(function () {
+  self && self.webView && self.webView.scrollView && (self.webView.scrollView.bounces = NO);
+  angular.element(document.body).on("touchmove", function (event) {
+    event.preventDefault();
+  })
+});

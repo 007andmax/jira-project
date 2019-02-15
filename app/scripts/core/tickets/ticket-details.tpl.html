@@ -301,14 +301,74 @@
 
           <p>test1</p>
           <div style="margin-top:50px;">
-            <proton:multi-list-picker>
-              <proton:multi-list-picker-list>
-                <proton:multi-list-picker-list-item>iPhone 5</proton:multi-list-picker-list-item>
-                <proton:multi-list-picker-list-item>iPhone 6</proton:multi-list-picker-list-item>
-                <proton:multi-list-picker-list-item>iPhone 6 Plus</proton:multi-list-picker-list-item>
-                <proton:multi-list-picker-list-item>iPhone 6s</proton:multi-list-picker-list-item>
-                <proton:multi-list-picker-list-item>iPhone 6s Plus</proton:multi-list-picker-list-item>
-                <proton:multi-list-picker-list-item>iPhone 5se</proton:multi-list-picker-list-item>
+            <label>The pivot year: <input type="text" ng-model="pivotYear"/> -- Year listing will be &#x00b1; 50 years around this
+              year</label><br/>
+            <label>Selected year: <input type="text" ng-model="model.year"/></label><br/>
+            <label>The model bound to the picker:</label>
+            <pre ng-bind="model | json"></pre>
+            <label>
+              Attachment:
+              <select ng-model="attachment">
+                <option>inline</option>
+                <option>modal</option>
+                <option>top</option>
+                <option>bottom</option>
+              </select>
+            </label><br/>
+            <label>
+              <input type="checkbox" ng-model="bindHtml" /> Bind captions as HTML:
+            </label>
+            <br/>
+            <label>
+              Selected time:
+              <input type="text" value="{{model.month + 1}}/{{model.day}}/{{model.year}}, {{model.hour}}:{{model.minute}} {{model.time}}"
+                     ng-click="showing = !showing"/>
+            </label>
+            <br/>
+            <proton:multi-list-picker ng-model="model" attachment="{{attachment}}" bind-html="{{bindHtml}}" done="showing = false"
+                                      ng-show="showing">
+              <proton:multi-list-picker-list alias="year" static="false" source="getYears()">
+              </proton:multi-list-picker-list>
+              <proton:multi-list-picker-list alias="month" cycle="true" strict-matching="true">
+                <proton:multi-list-picker-list-item value="0"><span class="red">January</span>
+                </proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="1">February</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="2">March</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="3">April</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="4">May</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="5">June</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="6">July</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="7">August</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="8">September</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="9">October</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="10">November</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item value="11">December</proton:multi-list-picker-list-item>
+              </proton:multi-list-picker-list>
+              <proton:multi-list-picker-list alias="day" cycle="true" source="getDays(model.year, model.month)"
+                                             strict-matching="true">
+              </proton:multi-list-picker-list>
+              <proton:multi-list-picker-divider>
+              </proton:multi-list-picker-divider>
+              <proton:multi-list-picker-list alias="hour" cycle="true">
+                <proton:multi-list-picker-list-item>00</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>01</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>02</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>03</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>04</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>05</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>06</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>07</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>08</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>09</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>10</proton:multi-list-picker-list-item>
+                <proton:multi-list-picker-list-item>11</proton:multi-list-picker-list-item>
+              </proton:multi-list-picker-list>
+              <proton:multi-list-picker-divider>:</proton:multi-list-picker-divider>
+              <proton:multi-list-picker-list alias="minute" source="getMinutes()" cycle="true">
+              </proton:multi-list-picker-list>
+              <proton:multi-list-picker-list alias="time">
+                <proton-multi-list-picker-list-item>AM</proton-multi-list-picker-list-item>
+                <proton-multi-list-picker-list-item>PM</proton-multi-list-picker-list-item>
               </proton:multi-list-picker-list>
             </proton:multi-list-picker>
             <div style="margin-top:50px;font-size:56px; text-align: center">{{hour}}:{{minute}}</div>
