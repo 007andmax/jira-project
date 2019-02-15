@@ -16,7 +16,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   grunt.loadNpmTasks('grunt-include-source');
-
+  grunt.loadNpmTasks('grunt-angular-templates');
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -401,6 +401,17 @@ module.exports = function (grunt) {
             },
             post: {}
           }
+        }
+      }
+    },
+
+    ngtemplates:  {
+      app:        {
+        cwd:      'assets/templates',
+        src:      '**/partials/*.html',
+        dest: 'assets/templates/partials.js',
+        options: {
+          module: 'cms.admin'
         }
       }
     },
