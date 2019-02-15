@@ -28,6 +28,7 @@
 
           $scope.tagColors = TagsService.getColors();
           var today = new Date();
+          $scope.date = today;
           $scope.hour = today.getHours();
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
 

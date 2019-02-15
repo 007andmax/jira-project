@@ -1,136 +1,56 @@
-'use strict';
-
 angular.module('quicktech.common.directives')
-  .directive('timePicker', function() {
+  .directive('iosdatepicker', function() {
     // Runs during compile
     return {
       // priority: 1,
       // terminal: true,
       scope: {
-        hour: "=",
-        minute: "="
+        date: "=",
+        minYear: "=",
+        maxYear: "="
       }, // {} = isolate, true = child, false/undefined = no change
       // controller: function($scope, $element, $attrs, $transclude) {},
       // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
       restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
       //template: '',
-      template: '<div class="timerPicker">\n' +
+      template: '<div class="datePicker">\n' +
         '    <style type="text/css">\n' +
-        '    .timerPicker {\n' +
-        '        width: 100%;\n' +
-        '        height: 202px;\n' +
-        '    }\n' +
-        '    \n' +
-        '    .preCheckFrame {\n' +
-        '        width: 100%;\n' +
-        '        height: 60px;\n' +
-        '        border-bottom: 1px solid #d5d5d5;\n' +
-        '    }\n' +
-        '    \n' +
-        '    .activeCheckFrame {\n' +
-        '        width: 100%;\n' +
-        '        height: 42px;\n' +
-        '    }\n' +
-        '    \n' +
-        '    .postCheckFrame {\n' +
-        '        width: 100%;\n' +
-        '        height: 60px;\n' +
-        '        border-top: 1px solid #d5d5d5;\n' +
-        '    }\n' +
-        '    \n' +
-        '    #slots {\n' +
-        '        position: relative;\n' +
-        '        top: -42px;\n' +
-        '        width: 40%;\n' +
-        '        height: 202px;\n' +
-        '        margin-left: auto;\n' +
-        '        margin-right: auto;\n' +
-        '        overflow: hidden;\n' +
-        '    }\n' +
-        '    \n' +
-        '    #hourSlotWrapper {\n' +
-        '        perspective: 800px;\n' +
-        '        perspective-origin: 200px;\n' +
-        '        -webkit-perspective: 800px;\n' +
-        '        -webkit-perspective-origin: 200px;\n' +
-        '        position: absolute;\n' +
-        '        left: 90px;\n' +
-        '        top: 80px;\n' +
-        '    }\n' +
-        '    \n' +
-        '    #minuteSlotWrapper {\n' +
-        '        perspective: 800px;\n' +
-        '        perspective-origin: 200px;\n' +
-        '        -webkit-perspective: 800px;\n' +
-        '        -webkit-perspective-origin: 200px;\n' +
-        '        position: absolute;\n' +
-        '        right: 70px;\n' +
-        '        top: 80px;\n' +
-        '    }\n' +
-        '    \n' +
-        '    #timeLabel {\n' +
-        '        font-size: 26px;\n' +
-        '        height: 42px;\n' +
-        '        line-height: 42px;\n' +
-        '        position: relative;\n' +
-        '        left: -40px;\n' +
-        '        top:15px;\n' +
-        '        color: black;\n' +
-        '    }\n' +
-        '    \n' +
-        '    #hourSlot {\n' +
-        '        position: absolute;\n' +
-        '        height: 42px;\n' +
-        '        width: 200px;\n' +
-        '        -webkit-transform: rotateX(0deg);\n' +
-        '        -webkit-transform-style: preserve-3d;\n' +
-        '        transform-style: preserve-3d;\n' +
-        '        transform: rotateX(0deg);\n' +
-        '    }\n' +
-        '    \n' +
-        '    #minuteSlot {\n' +
-        '        position: absolute;\n' +
-        '        height: 42px;\n' +
-        '        width: 200px;\n' +
-        '        -webkit-transform-style: preserve-3d;\n' +
-        '        -webkit-transform: rotateX(0deg);\n' +
-        '        transform-style: preserve-3d;\n' +
-        '        transform: rotateX(0deg);\n' +
-        '    }\n' +
-        '    \n' +
-        '    .cell {\n' +
-        '        list-style-type:none;\n' +
-        '        height: 42px;\n' +
-        '        color: #acacac;\n' +
-        '        font-size: 24px;\n' +
-        '        line-height: 36px;\n' +
-        '        position: absolute;\n' +
-        '        -webkit-transform-origin: 50% 50%;\n' +
-        '        transform-origin: 50% 50%;\n' +
-        '        backface-visibility: hidden;\n' +
-        '        -webkit-backface-visibility: hidden;\n' +
-        '    }\n' +
-        '    \n' +
-        '    #activeArea {\n' +
-        '        width: 100%;\n' +
-        '        position: relative;\n' +
-        '        top: 95px;\n' +
-        '        border-style: solid;\n' +
-        '        border-color: #d5d5d5;\n' +
-        '        border-width: 1px;\n' +
-        '        height: 42px;\n' +
-        '    }\n' +
+        '        .date-picker {\n' +
+        '            width: 300px;\n' +
+        '            height: 100px;\n' +
+        '            margin: 0 auto;\n' +
+        '            padding: 0 20px;\n' +
+        '            border: 1px solid #ccc;\n' +
+        '            border-radius: 5px;\n' +
+        '        }\n' +
+        '        .date-picker-display {\n' +
+        '            width: 100%;\n' +
+        '            height: 30px;\n' +
+        '            text-align: center;\n' +
+        '        }\n' +
+        '        .month {\n' +
+        '            height: 100%;\n' +
+        '            width: 50%;\n' +
+        '            float: left;\n' +
+        '        }\n' +
+        '        .day {\n' +
+        '            height: 100%;\n' +
+        '            width: 20%;\n' +
+        '            float: left;\n' +
+        '        }\n' +
+        '        .year {\n' +
+        '            height: 100%;\n' +
+        '            width: 30%;\n' +
+        '            float: left;\n' +
+        '        }\n' +
         '    </style>\n' +
-        '    <div id="activeArea"></div>\n' +
-        '    <div id="slots">\n' +
-        '        <div id="hourSlotWrapper">\n' +
-        '            <ul id="hourSlot">\n' +
-        '            </ul>\n' +
-        '            <div id="timeLabel">HH:</div>\n' +
+        '    <div class="date-picker-display"></div>\n' +
+        '    <div class="date-picker">\n' +
+        '        <div class="month">\n' +
         '        </div>\n' +
-        '        <div id="minuteSlotWrapper">\n' +
-        '            <ul id="minuteSlot"></ul>\n' +
-        '            <div id="timeLabel">MM:</div>\n' +
+        '        <div class="day">\n' +
+        '        </div>\n' +
+        '        <div class="year">\n' +
         '        </div>\n' +
         '    </div>\n' +
         '</div>',
@@ -138,199 +58,370 @@ angular.module('quicktech.common.directives')
       // transclude: true,
       // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
       link: function($scope, iElm, iAttrs, controller) {
-        var qHourSlot = iElm.find("#hourSlot");
-        var qMinuteSlot = iElm.find("#minuteSlot");
-        var theRadius = 15 / Math.tan(7.5 / 180 * Math.PI);
-        console.log('1234123412341');
-        fillHourSlot();
-        fillMinuteSlot();
 
-        defineSlotScroll(qHourSlot);
-        defineSlotScroll(qMinuteSlot);
+        (function($) {
 
-        $scope.$watch($scope.hour, changeHour);
-        $scope.$watch($scope.minute, changeMinute);
+          $.fn.WSlot = function( options ) {
 
-        function changeHour() {
-          var degree = -$scope.hour * 15;
-          qHourSlot.css("transform", "rotateX(" + degree + "deg)");
-          qHourSlot.css("-webkit-transform", "rotateX(" + degree + "deg)");
-        }
-
-        function changeMinute() {
-          var degree = -$scope.minute / 5 * 15;
-          qMinuteSlot.css("transform", "rotateX(" + degree + "deg)");
-          qMinuteSlot.css("-webkit-transform", "rotateX(" + degree + "deg)");
-
-        }
-
-
-        function fillHourSlot() {
-
-          for (var i = 0; i < 24; i++) {
-            var li = document.createElement("li");
-            li.innerHTML = numToString(i);
-            li.className = "cell";
-            li.style.transform = "rotateX(" + (i * 15) + "deg) translateZ(" + theRadius + "px)";
-            li.style.webkitTransform = "rotateX(" + (i * 15) + "deg) translateZ(" + theRadius + "px)";
-            qHourSlot.append(li);
-          }
-        }
-
-        function fillMinuteSlot() {
-
-          for (var i = 0; i < 24; i++) {
-            var li = document.createElement("li");
-            li.innerHTML = numToString((i % 12) * 5);
-            li.className = "cell";
-            li.style.transform = "rotateX(" + (i * 15) + "deg) translateZ(" + theRadius + "px)";
-            li.style.webkitTransform = "rotateX(" + (i * 15) + "deg) translateZ(" + theRadius + "px)";
-            qMinuteSlot.append(li);
-          }
-        }
-
-        function numToString(intValue) {
-          if (intValue < 10) {
-            return "0" + intValue;
-          }
-          return "" + intValue;
-        }
-
-        function defineSlotScroll(qDom) {
-          var touchY;
-          var startY;
-          var startTimeStamp;
-          var fiction = 2;
-          var swipeVelocityThreshold = 0.2;
-
-          qDom.on('touchstart', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            touchY = e.originalEvent.changedTouches[0].clientY;
-            startY = touchY;
-            startTimeStamp = e.timeStamp;
-
-            //If there is transition undone, just stop it.
-            qDom.css("transition", "");
-            qDom.css("-webkit-transition", "");
-            qDom.off("transitionend");
-            var degree = getCurrentDegree();
-            qDom.css("transform", "rotateX(" + degree + "deg)");
-            qDom.css("-webkit-transform", "rotateX(" + degree + "deg)");
-
-          });
-
-          qDom.on('touchmove', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var moveDeltaY = e.originalEvent.changedTouches[0].clientY - touchY;
-            touchY = e.originalEvent.changedTouches[0].clientY;
-
-            var degree = getCurrentDegree() - moveDeltaY / fiction;
-
-            qDom.css("transform", "rotateX(" + degree + "deg)");
-            qDom.css("-webkit-transform", "rotateX(" + degree + "deg)");
-
-          });
-
-          qDom.on('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            //if the duration of swipe is too short, just ignore it.
-            if ((e.timeStamp - startTimeStamp) < 100) {
+            if(options=='rollTo'){
+              var args = (Array.prototype.slice.call( arguments, 1 ));
+              this.trigger(wslot_rollto,args);
               return;
             }
 
-            var endY = e.originalEvent.changedTouches[0].clientY;
-
-            var velocity = (endY - startY) / (e.timeStamp - startTimeStamp);
-
-            if (Math.abs(velocity) > swipeVelocityThreshold) {
-              swipeEffect(velocity);
-            } else {
-              tune();
+            if(options=='get'){
+              // this.trigger('WSlot.get');
+              return this.children('div.'+class_item_selected).index();
             }
 
+            if(options=='getText'){
+              // this.trigger('WSlot.get');
+              return this.children('div.'+class_item_selected).text();
+            }
+
+            var opts = $.extend({},$.fn.WSlot.defaults,options);
+
+            this.off(wslot_rollto).on(wslot_rollto,function(event,to){
+              self = $(this);
+              if(to) {
+                rollTo(self,to);
+              }
+            });
+
+            var style = {};
+            style['position'] = 'relative';
+            style[xform] = 'rotateY('+opts.rotation+'deg)';
+            style[xform+'-style'] = 'preserve-3d';
+            this.css(style).addClass('wslot-container');
+
+            var item = '';
+            if(opts.items.length) {
+
+              var center_index = 0;
+              if(opts.center == 'first') {
+                center_index = 0;
+              } else if(opts.center == 'last') {
+                center_index = opts.items.length - 1;
+              } else if(opts.center == 'center') {
+                center_index = parseInt(opts.items.length / 2);
+              } else if($.isNumeric(opts.center) && (opts.center >= 0) && (opts.center < opts.items.length)) {
+                center_index = opts.center;
+              } else if(opts.center >= opts.items.length) {
+                center_index = opts.items.length-1;
+              } else {
+                center_index = 0;
+              }
+
+              var distance = parseInt(this.height() / 2);
+              if($.isNumeric(opts.distance)) {
+                distance = opts.distance;
+              }
+
+              var style = 'position: absolute;left: 0;width: 100%;height: '+opts.item_height+'px;top: 50%;margin-top: -'+Math.round(opts.item_height/2)+'px;';
+
+              for (var i = 0; i < opts.items.length; i++) {
+                var displayed = "";
+                if (Math.abs(i - center_index) > opts.displayed_length) {
+                  displayed = "display:none;";
+                }
+                var angle = opts.angle * ( center_index - i );
+                var opacity = 0;
+                // var scale = 0.95;
+                var max_angle = opts.angle * opts.displayed_length;
+                if(Math.abs(angle) <= max_angle) {
+                  opacity = 1 - (Math.abs(angle)/(max_angle*2));
+                  // scale = 1 - (Math.abs(angle)/(max_angle*20));
+                }
+                var transform = 'transform:rotateX('+angle+'deg) translate3d(0,0,'+distance+'px);-webkit-transform:rotateX('+angle+'deg) translate3d(0,0,'+distance+'px);';
+                item += '<div class="wslot-item '+((i==center_index)?class_item_selected:'')+'" style="'+transform+displayed+style+'opacity:'+opacity+';">'+opts.items[i]+'</div>';
+              }
+
+              return this.html(item).data('cur-angle',(center_index*opts.angle))
+                .off(start).on(start, function(e) {
+                  //console.log('start '+getEventPos(e).y);
+                  var ini = $(this);
+                  ini.addClass('w-roll-touched').data('initialtouch', getEventPos(e).y);
+                  return false;
+                }).off(move).on(move, function(e) {
+                  var ini = $(this);
+                  if (ini.is('.w-roll-touched')) {
+                    var deltaY = ini.data('initialtouch') - getEventPos(e).y;
+                    // console.log('move '+deltaY);
+                    var mainAngle = parseInt(ini.data('cur-angle')) + parseInt(deltaY/2);
+
+                    var maxAngle = (opts.items.length - 1) * opts.angle;
+                    if (mainAngle < 0) {
+                      var excess = 0 - mainAngle;
+                      mainAngle = -(25*excess/(excess+25));
+                    } else if (mainAngle > maxAngle) {
+                      var excess = mainAngle - maxAngle;
+                      mainAngle = maxAngle + (25*excess/(excess+25));
+                    }
+
+                    ini.children('div').each(function () {
+                      var curr = $(this);
+                      var options = {};
+                      var currAngle = mainAngle-(curr.index()*opts.angle);
+                      options['display'] = '';
+                      if(Math.abs(currAngle) > opts.displayed_length*opts.angle) {
+                        options['display'] = 'none';
+                      }
+                      var opacity = 0;
+                      // var scale = 0.95;
+                      var max_angle = opts.angle * opts.displayed_length;
+                      if(Math.abs(currAngle) <= max_angle) {
+                        opacity = 1 - (Math.abs(currAngle)/(max_angle*2));
+                        // scale = 1 - (Math.abs(currAngle)/(max_angle*20));
+                      }
+                      options[xform] = 'rotateX('+currAngle+'deg) translateZ('+distance+'px)';
+                      options['opacity'] = opacity;
+                      curr.css(options);
+                    });
+                  }
+                  return false;
+                }).off(end).on(end, function(e) {
+                  var ini = $(this);
+                  //console.log('end');
+                  if (ini.is('.w-roll-touched')) {
+                    var deltaY = ini.data('initialtouch') - getEventPos(e).y;
+
+                    var mainAngle = parseInt(ini.data('cur-angle')) + parseInt(deltaY/2);
+
+                    var maxAngle = (opts.items.length - 1) * opts.angle;
+
+                    var index = Math.round(mainAngle / opts.angle);
+
+                    if (mainAngle < 0) {
+                      var excess = 0 - mainAngle;
+                      mainAngle = -(25*excess/(excess+25));
+                      index = 0;
+                    } else if (mainAngle > maxAngle) {
+                      var excess = mainAngle - maxAngle;
+                      mainAngle = maxAngle + (25*excess/(excess+25));
+                      index = (opts.items.length - 1);
+                    }
+
+                    ini.data('cur-angle',mainAngle);
+
+                    rollTo(ini,index);
+                  }
+                  ini.removeClass('w-roll-touched')
+                  return false;
+                });
+            } else {
+              return this;
+            }
+
+            function rollTo(objek,index){
+              if (index < 0) {
+                index = 0;
+              } else if (index >= opts.items.length) {
+                index = opts.items.length - 1;
+              }
+              var fromAngle = parseInt(objek.data('cur-angle'));
+              var toAngle = index * opts.angle;
+              var deltaAngle = toAngle - fromAngle;
+              animationStep(10,1,function(step,curStep,objek){
+                var mainAngle = easeOutQuad(curStep,fromAngle,deltaAngle,step);
+                objek.children('div').each(function () {
+                  var curr = $(this);
+                  var options = {};
+                  var currAngle = mainAngle-(curr.index()*opts.angle);
+                  options['display'] = '';
+                  if(Math.abs(currAngle) > opts.displayed_length*opts.angle) {
+                    options['display'] = 'none';
+                  }
+                  var opacity = 0;
+                  // var scale = 0.95;
+                  var max_angle = opts.angle * opts.displayed_length;
+                  if(Math.abs(currAngle) <= max_angle) {
+                    opacity = 1 - (Math.abs(currAngle)/(max_angle*2));
+                    // scale = 1 - (Math.abs(currAngle)/(max_angle*20));
+                  }
+                  options[xform] = 'rotateX('+currAngle+'deg) translateZ('+distance+'px)';
+                  options['opacity'] = opacity;
+                  curr.css(options);
+                });
+              },function(objek){
+                objek.children('div').each(function () {
+                  var curr = $(this).removeClass(class_item_selected);
+                  var options = {};
+                  var currAngle = toAngle-(curr.index()*opts.angle);
+                  options['display'] = '';
+                  if(Math.abs(currAngle) > opts.displayed_length*opts.angle) {
+                    options['display'] = 'none';
+                  }
+                  var opacity = 0;
+                  // var scale = 0.95;
+                  var max_angle = opts.angle * opts.displayed_length;
+                  if(Math.abs(currAngle) <= max_angle) {
+                    opacity = 1 - (Math.abs(currAngle)/(max_angle*2));
+                    // scale = 1 - (Math.abs(currAngle)/(max_angle*20));
+                  }
+                  options[xform] = 'rotateX('+currAngle+'deg) translateZ('+distance+'px)';
+                  options['opacity'] = opacity;
+                  curr.css(options);
+                  if(currAngle == 0) {
+                    curr.addClass(class_item_selected);
+                  }
+                });
+                objek.data('cur-angle',toAngle);
+                objek.trigger('WSlot.change',[index]);
+              },objek);
+            };
+
+          };
+
+          $.fn.WSlot.defaults = {
+            items : [],
+            center : 'first',
+            distance : 'auto',
+            displayed_length : 2,
+            angle : 30,
+            rotation : 0,
+            item_height : 20,
+          };
+
+          var xform = 'transform';
+          ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
+            var e = prefix + 'Transform';
+            if (typeof document.body.style[e] !== 'undefined') {
+              xform = e;
+            }
           });
 
-          function swipeEffect(velocity) {
-            var deceleration = 1;
-            var duration = Math.abs(velocity) / deceleration;
-            var degree = getCurrentDegree();
+          var start = 'touchstart mousedown';
+          var move = 'touchmove mousemove';
+          var end = 'touchend mouseup mouseleave';
+          var wslot_rollto = 'WSlot.rollTo';
+          var class_item_selected = 'wslot-item-selected';
 
-            degree = degree - (velocity * duration / deceleration) * 50;
-
-            var scaleNum = qDom.children().length;
-
-            degree = Math.round(degree / (360 / scaleNum)) * (360 / scaleNum);
-
-            qDom.css("transition", "transform " + duration + "s cubic-bezier(0, 0, 0.2, 1)");
-            qDom.css("-webkit-transition", "transform " + duration + "s cubic-bezier(0, 0, 0.2, 1)");
-
-            qDom.css("transform", "rotateX(" + degree + "deg)");
-            qDom.css("-webkit-transform", "rotateX(" + degree + "deg)");
-            endTransition();
-          }
-
-
-          function tune() {
-            var degree = getCurrentDegree();
-            var scaleNum = qDom.children().length;
-
-            degree = Math.round(degree / (360 / scaleNum)) * (360 / scaleNum);
-
-            qDom.css("transition", "transform .5s ease-out");
-            qDom.css("-webkit-transition", "transform .5s ease-out");
-
-            qDom.css("transform", "rotateX(" + degree + "deg)");
-            qDom.css("-webkit-transform", "rotateX(" + degree + "deg)");
-            endTransition();
-
-          }
-
-          function endTransition() {
-            qDom.on('transitionend', function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-
-              qDom.css("transition", "");
-              qDom.css("-webkit-transition", "");
-
-              qDom.off("transitionend");
-
-              $scope.$apply(function() {
-                setViewValueToScope();
+          function animationStep(step, curStep, stepFunc, doneFunc, objek){
+            if(curStep <= step)
+            {
+              if(typeof stepFunc == 'function')
+              {
+                stepFunc(step,curStep,objek);
+              }
+              curStep = curStep+1;
+              window.requestAnimationFrame(function() {
+                animationStep(step,curStep,stepFunc,doneFunc,objek);
               });
-
-            });
-          }
-
-          function setViewValueToScope() {
-            var degree = getCurrentDegree();
-            if (qDom == qHourSlot) {
-              var tempHour = (degree / 15) % 24;
-              $scope.hour = (24 - tempHour) < 24 ? 24 - tempHour : -tempHour;
-            } else if (qDom == qMinuteSlot) {
-              var tempMinute = ((degree / 15) % 12) * 5;
-              $scope.minute = (60 - tempMinute) < 60 ? 60 - tempMinute : -tempMinute;
             }
-          }
+            else
+            {
+              if(typeof doneFunc == 'function')
+              {
+                doneFunc(objek);
+              }
+            }
+          };
 
-          function getCurrentDegree() {
-            var matrix = qDom.css("transform");
-            var transform = new WebKitCSSMatrix(matrix);
-            var cosw = transform.m22;
-            var sinw = transform.m23;
-            var angle = Math.round(Math.atan2(sinw, cosw) * (180 / Math.PI));
-            return angle;
+          function getEventPos(e) {
+            //jquery event
+            if (e.originalEvent) {
+              // touch event
+              if (e.originalEvent.changedTouches && (e.originalEvent.changedTouches.length >= 1)) {
+                return {
+                  x: e.originalEvent.changedTouches[0].pageX,
+                  y: e.originalEvent.changedTouches[0].pageY
+                };
+              }
+              // mouse event
+              return {
+                x: e.originalEvent.clientX,
+                y: e.originalEvent.clientY
+              };
+            } else {
+              // touch event
+              if (e.changedTouches && (e.changedTouches.length >= 1)) {
+                return {
+                  x: e.changedTouches[0].pageX,
+                  y: e.changedTouches[0].pageY
+                };
+              }
+              // mouse event
+              return {
+                x: e.clientX,
+                y: e.clientY
+              };
+            }
+          };
 
-          }
+          function easeOutQuad(t, b, c, d) {
+            return -c * (t /= d) * (t - 2) + b;
+          };
 
+
+        })(jQuery);
+
+
+        var today = $scope.date;
+
+        $('.month').WSlot({
+          items:['January','February','March','April','May','June','July','August','September','October','November','December'],
+          center:today.getMonth(),
+          angle:25,
+          distance:'auto',
+          displayed_length:3,
+          rotation:-5
+        }).on('WSlot.change',function(e,index){
+          // console.log(index);
+          initDate(index,parseInt($('.year').WSlot('getText')),$('.day').WSlot('get'));
+          updateText();
+        });
+
+        initDate(today.getMonth(),today.getFullYear(),today.getDate()-1);
+
+        var years = [];
+        console.log($scope);
+        for (var i = parseInt($scope.minYear); i <= parseInt($scope.maxYear); i++) {
+          years.push(i);
+        };
+        $('.year').WSlot({
+          items:years,
+          center:'last',
+          angle:25,
+          distance:'auto',
+          displayed_length:3,
+          rotation:5
+        }).on('WSlot.change',function(e,index){
+          // console.log(index);
+          initDate(parseInt($('.month').WSlot('get')),parseInt($('.year').WSlot('getText')),$('.day').WSlot('get'));
+          updateText();
+        });
+
+        function updateText() {
+          var dd = ('0'+($('.day').WSlot('get')+1)).slice(-2);
+          var mm = ('0'+($('.month').WSlot('get')+1)).slice(-2);
+          var yyyy = $('.year').WSlot('getText');
+          var todaystring = yyyy+'-'+mm+'-'+dd;
+          $scope.date = new Date(todaystring);
+          $scope.$apply();
         }
 
+        function initDate(month,year,selected) {
+          var totalDay = daysInMonth(month,year);
+          var days = [];
+          for (var i = 1; i <= totalDay; i++) {
+            days.push(i);
+          };
+          $('.day').empty().WSlot({
+            items:days,
+            center:selected,
+            angle:25,
+            distance:'auto',
+            displayed_length:3,
+            rotation:0
+          }).off('WSlot.change').on('WSlot.change',function(e,index){
+            // console.log(index);
+            updateText();
+          });
+        }
+
+        function daysInMonth(month,year) {
+          return new Date(year, month+1, 0).getDate();
+        }
       }
     };
   });
