@@ -22,7 +22,7 @@
  */
 (function () {
   var templates = {
-    picker: "$/proton/multi-list-picker/picker.html"
+    picker: './picker.html'
   };
   var module = angular.module('proton.multi-list-picker', []);
   module.run(['$templateCache', function ($templateCache) {
