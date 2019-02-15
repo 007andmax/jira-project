@@ -27,6 +27,9 @@
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
           $scope.tagColors = TagsService.getColors();
+          var today = new Date();
+          $scope.hour = today.getHours();
+          $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
 
           $timeout(function() {
             ticketMobileSettings.data = $scope;
