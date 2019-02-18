@@ -549,7 +549,7 @@
         var move = $attrs.motionChange && $parse($attrs.motionChange);
         var end = $attrs.motionEnd && $parse($attrs.motionEnd);
         var start = $attrs.motionStart && $parse($attrs.motionStart);
-        $element.on("mousedown touchstart", function (event) {
+        $element.on("mousedown mouseenter touchstart", function (event) {
           protonMultiListMomentum.start(event, function (event) {
             console.log('mousedown touchstart');
             $scope.$apply(function () {
@@ -560,7 +560,6 @@
           });
         });
         $element.on("mousemove touchmove", function (event) {
-          console.log('mousemove touchmove');
           protonMultiListMomentum.move(event, function (event) {
             $scope.$apply(function () {
               move && move($scope, {
@@ -570,7 +569,6 @@
           });
         });
         $element.on("mouseup touchend touchcancel", function (event) {
-          console.log('mouseup touchend touchcancel');
           protonMultiListMomentum.end(event, function (event) {
             $scope.$apply(function () {
               end && end($scope, {
@@ -579,10 +577,13 @@
             });
           });
         });
-        $element.on("mousewheel", function (event) {
-          console.log('mousewheel');
+        $element.on("onwheel", function (event) {
+          console.log(this, 'THIs');
+          this.dispatchEvent(new Event('mousemove touchmove'));
           protonMultiListMomentum.move(event, function (event) {
+
             $scope.$apply(function () {
+
               move && move($scope, {
                 $event: event
               });
