@@ -67,3 +67,8 @@
   cursor: pointer;
   margin-left: 20px;
 }
+
+.proton-multi-list-picker .container .lists {
+  height: 100px;
+  overflow: scroll;
+}

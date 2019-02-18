@@ -308,6 +308,7 @@
           };
 
           $scope.motionChange = function (event) {
+            event.event.preventDefault();
             if (!$list) {
               return;
             }
@@ -403,11 +404,12 @@
   }]);
   module.service('protonMultiListMomentum', ["$timeout", function ($timeout) {
     var details = function (event) {
+      console.log(event, 'EVENT');
       var description = {
         event: event,
         type: event.touches ? "Touch" : "Mouse",
-        x: event.touches ? event.touches[0].screenX : event.screenX,
-        y: event.touches ? event.touches[0].screenY : event.screenY,
+        x: event.touches ? event.touches[0].screenX : (event.deltaX?  (event.screenX-event.deltaX*15) : event.offsetX),
+        y: event.touches ? event.touches[0].screenY : (event.deltaY?  (event.screenY-event.deltaY*15) : event.offsetY),
         target: event.touches ? event.touches[0].target : event.target,
         timestamp: Date.now(),
         xDisplacement: 0,
@@ -424,6 +426,7 @@
         origin: coordinates ? (coordinates.origin ? coordinates.origin : coordinates) : null,
         remembered: coordinates ? (coordinates.remembered ? coordinates.remembered : null) : null
       };
+      console.log(description, 'DEscription');
       description.checkpoint = function () {
         description.remembered = description;
       };
@@ -551,7 +554,6 @@
         var start = $attrs.motionStart && $parse($attrs.motionStart);
         $element.on("mousedown mouseenter touchstart", function (event) {
           protonMultiListMomentum.start(event, function (event) {
-            console.log('mousedown touchstart');
             $scope.$apply(function () {
               start && start($scope, {
                 $event: event
@@ -559,15 +561,15 @@
             });
           });
         });
-        $element.on("mousemove touchmove", function (event) {
-          protonMultiListMomentum.move(event, function (event) {
-            $scope.$apply(function () {
-              move && move($scope, {
-                $event: event
-              });
-            });
-          });
-        });
+        // $element.on("mousemove touchmove", function (event) {
+        //   protonMultiListMomentum.move(event, function (event) {
+        //     $scope.$apply(function () {
+        //       move && move($scope, {
+        //         $event: event
+        //       });
+        //     });
+        //   });
+        // });
         $element.on("mouseup touchend touchcancel", function (event) {
           protonMultiListMomentum.end(event, function (event) {
             $scope.$apply(function () {
@@ -577,19 +579,23 @@
             });
           });
         });
-        $element.on("onwheel", function (event) {
-          console.log(this, 'THIs');
-          this.dispatchEvent(new Event('mousemove touchmove'));
+
+        function preventDefault(e) {
+          e = e || window.event;
+          if (e.preventDefault)
+            e.preventDefault();
+          e.returnValue = false;
+        }
+
+        $element.on("mousewheel", function (event) {
           protonMultiListMomentum.move(event, function (event) {
-
             $scope.$apply(function () {
-
               move && move($scope, {
                 $event: event
               });
             });
           });
-        });
+        })
       }
     };
   }]);

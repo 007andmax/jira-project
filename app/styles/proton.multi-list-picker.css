@@ -58,6 +58,8 @@
   margin: 0 auto;
   padding: 0;
   border: none;
+  height: 200px;
+  overflow: scroll;
 }
 .proton-multi-list-picker .container .lists .list-container {
   display: inline-block;
