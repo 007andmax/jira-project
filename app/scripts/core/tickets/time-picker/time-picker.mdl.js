@@ -433,8 +433,8 @@
         origin: coordinates ? (coordinates.origin ? coordinates.origin : coordinates) : null,
         remembered: coordinates ? (coordinates.remembered ? coordinates.remembered : null) : null
       };
-      $scope.screenStartX -= event.deltaX*10;
-      $scope.screenStartY -= event.deltaY*10;
+      $scope.screenStartX -= event.deltaX*20;
+      $scope.screenStartY -= event.deltaY*20;
       console.log(description, 'DEscription');
       description.checkpoint = function () {
         description.remembered = description;
