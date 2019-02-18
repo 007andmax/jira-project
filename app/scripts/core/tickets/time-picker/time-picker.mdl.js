@@ -402,14 +402,21 @@
       }
     };
   }]);
-  module.service('protonMultiListMomentum', ["$timeout", function ($timeout) {
+  module.service('protonMultiListMomentum', ["$timeout", function ($scope, $timeout) {
+    $scope.screenStartX = 0;
+    $scope.screenStartY = 0;
     var details = function (event) {
-      console.log(event, 'EVENT');
+      console.log(event.screenX, event.screenY, '11');
+      if (!$scope.screenStartX || !$scope.screenStartY ) {
+        $scope.screenStartX = event.pageX;
+        $scope.screenStartY = event.pageY;
+      }
+      console.log($scope.screenStartX, $scope.screenStartY,  'EVENT');
       var description = {
         event: event,
         type: event.touches ? "Touch" : "Mouse",
-        x: event.touches ? event.touches[0].screenX : (event.deltaX?  (event.screenX-event.deltaX*15) : event.offsetX),
-        y: event.touches ? event.touches[0].screenY : (event.deltaY?  (event.screenY-event.deltaY*15) : event.offsetY),
+        x: event.touches ? event.touches[0].screenX : (event.deltaX?  ($scope.screenStartX-event.deltaX*5) : event.offsetX),
+        y: event.touches ? event.touches[0].screenY : (event.deltaY?  ($scope.screenStartY-event.deltaY*5) : event.offsetY),
         target: event.touches ? event.touches[0].target : event.target,
         timestamp: Date.now(),
         xDisplacement: 0,
@@ -426,6 +433,8 @@
         origin: coordinates ? (coordinates.origin ? coordinates.origin : coordinates) : null,
         remembered: coordinates ? (coordinates.remembered ? coordinates.remembered : null) : null
       };
+      $scope.screenStartX -= event.deltaX*10;
+      $scope.screenStartY -= event.deltaY*10;
       console.log(description, 'DEscription');
       description.checkpoint = function () {
         description.remembered = description;
