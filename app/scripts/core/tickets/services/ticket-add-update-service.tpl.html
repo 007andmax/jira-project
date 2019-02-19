@@ -116,26 +116,26 @@
                ng-required="serviceExpense.item ? true : false">
       </div>
     </div>
-    <div class="col-2 new-quantity-picker" ng-if="type===2" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false"
+    <div class="col-2 new-quantity-picker" ng-if="type===2" service-quantity-picker="serviceExpense.quantity"
+         sqp-is-show-format="false"
          ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
       <input id="service-quantity-picker" type="text" class="pointer new-input"
              placeholder="Hr(s) : Min(s)" sqp-input
-             autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="quantity"/>
+             autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="quantity" />
       <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
-             ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
+             ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
     </div>
-    <p>111{{showTimePicker}}222</p>
+    <!--<p>111{{showTimePicker}}222</p>-->
     <div class="col-2 new-quantity-picker">
-      <input  type="text" class="pointer new-input"
-              placeholder="Start date | End date"
-              value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} |
-                      {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
-              ng-click="showTimePickerBlock()"
-             autocomplete="off"/>
+      <input type="text" class="pointer new-input"
+             placeholder="Start date | End date"
+             value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
+             ng-click="showTimePickerBlock()"
+             autocomplete="off" />
       <div class="timepicker-wrap" ng-if="showTimePicker">
         <div class="timepicker">
           <div class="timepicker-choosen-time">
-            <div class="col-6 timepicker-choosen-time__start-time" >
+            <div class="col-6 timepicker-choosen-time__start-time">
               <p class="col-12">Start time</p>
               <p class="col-12">{{startDate.hour}}:{{startDate.minute}} {{startDate.time}}</p>
             </div>
@@ -145,7 +145,8 @@
             </div>
           </div>
           <div class="timepicker-start-time timepicker-time">
-            <proton:multi-list-picker ng-model="startDate" attachment="{{attachment}}" bind-html="{{bindHtml}}" done="showTimePicker = false">
+            <proton:multi-list-picker ng-model="startDate" attachment="{{attachment}}" bind-html="{{bindHtml}}"
+                                      done="showTimePicker = false">
               <proton:multi-list-picker-divider>
               </proton:multi-list-picker-divider>
               <proton:multi-list-picker-list alias="hour" cycle="true">
@@ -172,7 +173,8 @@
             </proton:multi-list-picker>
           </div>
           <div class="timepicker-end-time timepicker-time">
-            <proton:multi-list-picker ng-model="endDate" attachment="{{attachment}}" bind-html="{{bindHtml}}" done="showTimePicker = false">
+            <proton:multi-list-picker ng-model="endDate" attachment="{{attachment}}" bind-html="{{bindHtml}}"
+                                      done="showTimePicker = false">
               <proton:multi-list-picker-divider>
               </proton:multi-list-picker-divider>
               <proton:multi-list-picker-list alias="hour" cycle="true">
@@ -206,9 +208,10 @@
       </div>
 
       <!--<input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"-->
-             <!--ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>-->
+      <!--ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>-->
     </div>
-    <div class="col-2 new-date-picker"style="position: relative" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+    <div class="col-2 new-date-picker" style="position: relative"
+         ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
       <input type="text" class="new-input absolute-stick-datepicker has-dropdown" placeholder="Date"
              qt-data-time-picker data-position="ticket" max-date="maxServiceDate" ng-model="serviceExpense.date"
              name="serviceData" ng-required="true">
