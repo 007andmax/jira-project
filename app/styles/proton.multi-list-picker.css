@@ -2,10 +2,9 @@
 .proton-multi-list-picker .toolbar {
   display: none;
 }
+
 .proton-multi-list-picker {
   display: block;
-  font-size: 1em;
-  font-family: "Helvetica Neue", Helvetica, "Open Sans", sans-serif;
   font-weight: 200;
   text-outline: none;
   -webkit-touch-callout: none;
@@ -21,7 +20,10 @@
   user-select: none;
   /* Non-prefixed version, currently not supported by any browser */
   box-sizing: border-box;
+  font-size: 12px;
+  font-family: "Graphik Medium", sans-serif;
 }
+
 .proton-multi-list-picker .sandbox-item {
   position: relative;
   top: -1.8em;
@@ -32,40 +34,61 @@
   text-align: center;
   visibility: hidden;
 }
+
 .proton-multi-list-picker .proton-multi-list-picker-contents {
   display: none;
 }
+
 .proton-multi-list-picker .container .lists {
   display: inline-block;
   margin: 0 auto;
-  padding: 0;
   border: none;
+  position: relative;
 }
+
+.proton-multi-list-picker .container .lists:before,
+.proton-multi-list-picker .container .lists:after {
+  position: absolute;
+  content: '';
+  width: 99%;
+  height: 90px;
+  left: 0;
+  pointer-events: none;
+}
+
+.proton-multi-list-picker .container .lists:before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 2;
+}
+
+.proton-multi-list-picker .container .lists:after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  bottom: 0;
+  z-index: 0;
+}
+
 .proton-multi-list-picker .container .lists .list-container {
   display: inline-block;
   vertical-align: top;
   margin: 0;
   padding: 0;
+  width: 28px;
 }
+
 .proton-multi-list-picker .container .lists .list-container.transitioning.one-up .item {
   -webkit-animation: moveUp 1s;
   -o-animation: moveUp 1s;
   animation: moveUp 1s;
 }
+
 .proton-multi-list-picker .container .lists .list-container.transitioning.one-down .item {
   -webkit-animation: moveDown 1s;
   -o-animation: moveDown 1s;
   animation: moveDown 1s;
 }
-.proton-multi-list-picker .container .lists .list-container.first {
-  border-left: 1px solid #e9e9e9;
-}
-.proton-multi-list-picker .container .lists .list-container.last {
-  border-right: 1px solid #e9e9e9;
-}
+
 .proton-multi-list-picker .container .lists .list-container .list {
-  border-top: 1px solid #e9e9e9;
-  border-bottom: 1px solid #e9e9e9;
   height: 18.4em;
   overflow: hidden;
   display: block;
@@ -73,26 +96,32 @@
   margin: 0;
   min-width: 1.5em;
 }
-.proton-multi-list-picker .container .lists .list-container .list .item {
-  /* Opera */
-  /* Opera */
-  /* Opera */
-}
+
 .proton-multi-list-picker .container .lists .list-container .list .item {
   position: relative;
-  top: -1.8em;
-  display: block;
-  margin: 0 5px;
+  top: -1.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1px 5px;
   height: 1.8em;
-  padding: 0.8em 0.5em;
+  padding: 0;
   text-align: center;
+  cursor: pointer;
+  transition: all .3s;
+  border-radius: 3px;
 }
+
+.proton-multi-list-picker .container .lists .list-container .list .item:hover {
+  background: #16a4fa;
+  color: #fff;
+}
+
 .proton-multi-list-picker .container .lists .list-container .list .item.selected {
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-  font-weight: 700;
-  background: transparent;
+  background: #16a4fa;
+  color: #fff;
 }
+
 .proton-multi-list-picker .container .lists .list-container .list .item.distance-1 {
   /*opacity: 0.6;*/
   /*transform: scale(1, 0.7);*/
@@ -104,6 +133,7 @@
   /*-o-transform: scale(1, 0.7);*/
   /*!* IE 9+ *!*/
 }
+
 .proton-multi-list-picker .container .lists .list-container .list .item.distance-2 {
   /*opacity: 0.3;*/
   /*transform: scale(0.95, 0.4);*/
@@ -115,6 +145,7 @@
   /*-o-transform: scale(0.95, 0.4);*/
   /*!* IE 9+ *!*/
 }
+
 .proton-multi-list-picker .container .lists .list-container .list .item.distance-3 {
   /*opacity: 0.1;*/
   /*transform: scale(1, 0.1);*/
@@ -126,59 +157,57 @@
   /*-o-transform: scale(1, 0.1);*/
   /*!* IE 9+ *!*/
 }
+
 .proton-multi-list-picker .container .lists .list-container .list .item.offset-down-3 {
-  top: 7.3em;
+  top: 9.2em;
 }
+
 .proton-multi-list-picker .container .lists .list-container .list .item.offset-down-2 {
-  top: 5.4em;
+  top: 6.8em;
 }
+
 .proton-multi-list-picker .container .lists .list-container .list .item.offset-down-1 {
   top: -0.4em;
 }
+
 .proton-multi-list-picker .container .lists .list-container .divider {
-  display: block;
+  display: none;
   padding: 0 1em 0 0.3em;
   margin: 0;
   font-weight: 600;
-  border-top: 1px solid #e9e9e9;
-  border-bottom: 1px solid #e9e9e9;
   height: 7.4em;
   overflow: hidden;
   text-align: center;
 }
-.proton-multi-list-picker .container .lists .list-container .divider.blank {
-  border-top: none;
-  border-bottom: none;
-  border-left: 1px solid #e9e9e9;
-  border-right: 1px solid #e9e9e9;
-}
+
 .proton-multi-list-picker .container .lists .list-container .divider span {
   top: 2.8em;
   position: relative;
 }
+
 .proton-multi-list-picker .container .before-lists {
   display: block;
-  height: 1.4em;
-  border-top: 1px solid #d6d6d6;
-  border-bottom: 1px solid #d6d6d6;
-  background-color: #eaeaea;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #16a4fa;
   position: relative;
   top: 8.6em;
   margin-bottom: -1.4em;
-  opacity: 0.4;
+  width: 110px;
+  left: -13px;
+  /*opacity: 0.4;*/
 }
+
 .proton-multi-list-picker .container .after-lists {
   display: none;
 }
-.proton-multi-list-picker.inline {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+
 .proton-multi-list-picker.modal .container, .proton-multi-list-picker.top .container, .proton-multi-list-picker.bottom .container {
   position: absolute;
   left: 50%;
   top: 50%;
 }
+
 .proton-multi-list-picker.modal .container .lists, .proton-multi-list-picker.top .container .lists, .proton-multi-list-picker.bottom .container .lists {
   position: relative;
   left: -50%;
@@ -187,6 +216,7 @@
   height: 9.1em;
   background: #fff;
 }
+
 .proton-multi-list-picker.modal .container .lists .toolbar, .proton-multi-list-picker.top .container .lists .toolbar, .proton-multi-list-picker.bottom .container .lists .toolbar {
   display: block;
   height: 1em;
@@ -194,6 +224,7 @@
   text-align: right;
   background: #ededed;
 }
+
 .proton-multi-list-picker.modal .container .lists .toolbar .toolbar-button, .proton-multi-list-picker.top .container .lists .toolbar .toolbar-button, .proton-multi-list-picker.bottom .container .lists .toolbar .toolbar-button {
   color: #6495ed;
   font-weight: 400;
@@ -201,6 +232,7 @@
   line-height: 1em;
   cursor: pointer;
 }
+
 .proton-multi-list-picker.modal .before, .proton-multi-list-picker.top .before, .proton-multi-list-picker.bottom .before {
   position: absolute;
   background: #000;
@@ -210,30 +242,38 @@
   bottom: 0;
   opacity: 0.4;
 }
+
 .proton-multi-list-picker.top .container {
   top: -2px;
 }
+
 .proton-multi-list-picker.top .container .lists {
   top: 0;
 }
+
 .proton-multi-list-picker.top .container .lists .list {
   position: relative;
 }
+
 .proton-multi-list-picker.top .toolbar {
   display: block;
   position: relative;
   margin-bottom: -1.7em;
   top: 7.6em;
 }
+
 .proton-multi-list-picker.bottom .container {
   top: 100%;
 }
+
 .proton-multi-list-picker.bottom .container .lists {
   top: -9em;
 }
+
 .proton-multi-list-picker.bottom .container .lists .list {
   position: relative;
 }
+
 .proton-multi-list-picker.modal .toolbar {
   top: -1.4em;
 }
@@ -244,14 +284,16 @@
 
 .timepicker {
   position: absolute;
-  top: -390px;
-  background: #d08d8d;
-  width: 400px;
-  height: 380px;
+  top: -385px;
+  background: #fff;
+  width: 290px;
+  height: 335px;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05);
 }
 
 .timepicker-time {
-  width: 200px;
+  width: 145px;
 }
 
 .timepicker-start-time {
@@ -292,4 +334,93 @@
 .timepicker-action-button__cancel {
   width: 50%;
   float: right;
+}
+
+.timepicker-choosen-time__start-time,
+.timepicker-choosen-time__end-time {
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  border-bottom: 1px solid #edf2f6;
+}
+
+.timepicker-choosen-time__start-time {
+  border-right: 1px solid #edf2f6;
+}
+
+.timepicker-choosen-time__start-time p,
+.timepicker-choosen-time__end-time p {
+  font-size: 12px;
+  text-align: center;
+  width: 100%;
+  padding: 0 !important;
+}
+
+.timepicker-choosen-time__start-time p:first-child,
+.timepicker-choosen-time__end-time p:first-child {
+  font-family: "Graphik Regular", sans-serif;
+  color: #4f5f79;
+}
+
+.timepicker-choosen-time__start-time p:last-child,
+.timepicker-choosen-time__end-time p:last-child {
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.timepicker .container {
+  width: 145px;
+  padding: 0 !important;
+}
+
+.timepicker ul.lists {
+  padding: 0 30px;
+  width: 145px;
+}
+
+.timepicker .list-container.first {
+  display: none !important;
+}
+
+.timepicker-start-time .proton-multi-list-picker {
+  border-right: 1px solid #edf2f6;
+}
+
+.timepicker-time {
+  border-bottom: 1px solid #edf2f6;
+}
+
+.list-container.last {
+  font-size: 10px;
+}
+
+.proton-multi-list-picker .container .lists .list-container[data-index="2"] {
+  display: none;
+}
+
+.proton-multi-list-picker .container .lists .list-container[data-index="4"] .list .item {
+  margin: 5px;
+}
+
+.timepicker-action-button {
+  box-shadow: 0 -8px 8px 0 rgba(0, 0, 0, 0.04);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timepicker-action-button p {
+  color: #16a4fa;
+  font-size: 13px;
+}
+
+.timepicker-action-button p:first-child {
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.timepicker-action-button p:last-child {
+  font-family: "Graphik Regular", sans-serif;
 }

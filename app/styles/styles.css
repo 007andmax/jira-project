@@ -11827,7 +11827,7 @@ button.close {
 .ticket-add-service {
   display: flex;
   flex-flow: row wrap;
-  padding: 24px 64px 0 24px;
+  padding: 10px 40px 0 0;
   position: relative;
 }
 
