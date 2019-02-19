@@ -1,22 +1,4 @@
-/*
- * Copyright (c) 2016 Milad Naseri
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
- * to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or
- * substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+
 .proton-multi-list-picker .toolbar {
   display: none;
 }
@@ -58,8 +40,6 @@
   margin: 0 auto;
   padding: 0;
   border: none;
-  height: 200px;
-  overflow: scroll;
 }
 .proton-multi-list-picker .container .lists .list-container {
   display: inline-block;
@@ -255,4 +235,33 @@
 }
 .proton-multi-list-picker.modal .toolbar {
   top: -1.4em;
+}
+
+.timepicker-wrap {
+  position: relative;
+}
+
+.timepicker {
+  position: absolute;
+  top: -170px;
+  background: #d08d8d;
+  width: 400px;
+  height: 160px;
+}
+
+.timepicker-time {
+  width: 200px;
+}
+
+.timepicker-start-time {
+  float: left;
+}
+
+.timepicker-end-time {
+  float: right;
+}
+
+.timepicker-choosen-time {
+  display: block;
+  height: 40px;
 }

@@ -10,6 +10,53 @@
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
           $scope.checkForOpenDropdown = checkForOpenDropdown;
+          $scope.showTimePicker = false;
+
+          $scope.pivotYear = 2000;
+          $scope.currentDate = new Date();
+          $scope.startDate = {
+            hour: $scope.currentDate.getHours(),
+            minute: $scope.currentDate.getMinutes()
+          };
+          $scope.endDate = {
+            hour: $scope.currentDate.getHours(),
+            minute: $scope.currentDate.getMinutes()
+          };
+          $scope.attachment = "inline";
+          $scope.bindHtml = "true";
+          var years = [];
+          $scope.getYears = function () {
+            return years;
+          };
+          $scope.getDays = function (year, month) {
+            var result = [];
+            for (var i = 1; i < 30; i ++) {
+              result.push(i);
+            }
+            return result;
+          };
+          $scope.getMinutes = function () {
+            var result = {};
+            for (var i = 0; i < 60; i ++) {
+              result[i] = i < 10 ? ("0" + i) : i;
+            }
+            return result;
+          };
+          $scope.$watch('starDate.hour', function (newValue, oldValue) {
+            var now = parseInt(newValue);
+            var then = parseInt(oldValue);
+            if (now > 9 && then < 9 || now < 3 && then > 9) {
+              $scope.startDate.time = $scope.startDate.time == "AM" ? "PM" : "AM";
+            }
+          });
+
+          $scope.$watch('endDate.hour', function (newValue, oldValue) {
+            var now = parseInt(newValue);
+            var then = parseInt(oldValue);
+            if (now > 9 && then < 9 || now < 3 && then > 9) {
+              $scope.endDate.time = $scope.endDate.time == "AM" ? "PM" : "AM";
+            }
+          });
 
           var closeDropdowns = $rootScope.debounce(closeDropdowns, 100)
 
