@@ -36,7 +36,6 @@
           $scope.$watch('endDate.hour', function (newValue, oldValue) {
             var now = parseInt(newValue);
             var then = parseInt(oldValue);
-            console.log(2,now, then, $scope.startDate);
             if (now > 9 && then < 9 || now < 3 && then > 9) {
               $scope.endDate.time = $scope.endDate.time === "AM" ? "PM" : "AM";
             }
@@ -45,13 +44,17 @@
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.startDate;
             $scope.saveEndDate = $scope.endDate;
-            $scope.showTimePicker = false;
+            $scope.showTimePicker = !$scope.showTimePicker;
           };
 
           $scope.cancelTime = function () {
             refreshTime();
-            $scope.showTimePicker = false;
+            $scope.showTimePicker = !$scope.showTimePicker;
           };
+
+          $scope.showTimePickerBlock = function () {
+            $scope.showTimePicker = !$scope.showTimePicker;
+          }
 
 
           function refreshTime() {
