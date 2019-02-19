@@ -201,13 +201,13 @@
 
       </div>
     </div>
-
+    <p>111{{showTimePicker}}222</p>
     <div class="col-2 new-quantity-picker">
       <input  type="text" class="pointer new-input"
               placeholder="Start date | End date"
               value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} |
                       {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
-              ng-click="showTimePicker = !showTimePicker"
+              ng-click="showTimePickerBlock()"
              autocomplete="off"/>
       <!--<input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"-->
              <!--ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>-->

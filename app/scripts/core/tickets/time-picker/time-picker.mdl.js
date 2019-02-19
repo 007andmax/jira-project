@@ -223,7 +223,6 @@
             list.view.push(item);
           }
           if (list.cycle) {
-            console.log(list, 'LISt');
             if (list.view.length < 12 && list.array.length > 0) {
               var pivot = list.selected - from;
               var cursor;
