@@ -276,3 +276,19 @@
   width: 50%;
   float: right;
 }
+
+.timepicker-action-button {
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+.timepicker-action-button__save {
+  width: 50%;
+  float: left;
+}
+
+.timepicker-action-button__cancel {
+  width: 50%;
+  float: right;
+}
