@@ -15,91 +15,6 @@
               ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}">Service</button>
     </div>
 
-    <div class="timepicker-wrap">
-      <div>
-        <label>
-          Selected time:
-          <input type="text" value="{{startDate.hour}}:{{startDate.minute}} {{startDate.time}} | {{endDate.hour}}:{{endDate.minute}} {{endDate.time}}"
-                 ng-click="showTimePicker = !showTimePicker"/>
-        </label>
-      </div>
-
-      <div class="timepicker" ng-if="showTimePicker">
-        <div class="timepicker-choosen-time">
-          <div class="col-6 timepicker-choosen-time__start-time" >
-            <p class="col-12">Start time</p>
-            <p class="col-12">{{startDate.hour}}:{{startDate.minute}} {{startDate.time}}</p>
-          </div>
-          <div class="col-6 timepicker-choosen-time__end-time">
-            <p class="col-12">End time</p>
-            <p class="col-12">{{endDate.hour}}:{{endDate.minute}} {{endDate.time}}</p>
-          </div>
-        </div>
-        <div class="timepicker-start-time timepicker-time">
-          <proton:multi-list-picker ng-model="startDate" attachment="{{attachment}}" bind-html="{{bindHtml}}" done="showTimePicker = false">
-            <proton:multi-list-picker-divider>
-            </proton:multi-list-picker-divider>
-            <proton:multi-list-picker-list alias="hour" cycle="true">
-              <proton:multi-list-picker-list-item>00</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>01</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>02</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>03</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>04</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>05</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>06</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>07</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>08</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>09</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>10</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>11</proton:multi-list-picker-list-item>
-            </proton:multi-list-picker-list>
-            <proton:multi-list-picker-divider>:</proton:multi-list-picker-divider>
-            <proton:multi-list-picker-list alias="minute" source="getMinutes()" cycle="true">
-            </proton:multi-list-picker-list>
-            <proton:multi-list-picker-list alias="time">
-              <proton-multi-list-picker-list-item>AM</proton-multi-list-picker-list-item>
-              <proton-multi-list-picker-list-item>PM</proton-multi-list-picker-list-item>
-            </proton:multi-list-picker-list>
-          </proton:multi-list-picker>
-        </div>
-        <div class="timepicker-end-time timepicker-time">
-          <proton:multi-list-picker ng-model="endDate" attachment="{{attachment}}" bind-html="{{bindHtml}}" done="showTimePicker = false">
-            <proton:multi-list-picker-divider>
-            </proton:multi-list-picker-divider>
-            <proton:multi-list-picker-list alias="hour" cycle="true">
-              <proton:multi-list-picker-list-item>00</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>01</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>02</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>03</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>04</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>05</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>06</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>07</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>08</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>09</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>10</proton:multi-list-picker-list-item>
-              <proton:multi-list-picker-list-item>11</proton:multi-list-picker-list-item>
-            </proton:multi-list-picker-list>
-            <proton:multi-list-picker-divider>:</proton:multi-list-picker-divider>
-            <proton:multi-list-picker-list alias="minute" source="getMinutes()" cycle="true">
-            </proton:multi-list-picker-list>
-            <proton:multi-list-picker-list alias="time">
-              <proton-multi-list-picker-list-item>AM</proton-multi-list-picker-list-item>
-              <proton-multi-list-picker-list-item>PM</proton-multi-list-picker-list-item>
-            </proton:multi-list-picker-list>
-          </proton:multi-list-picker>
-        </div>
-
-        <div class="timepicker-action-button">
-          <p class="timepicker-action-button__save" ng-click="saveTime()">Save</p>
-          <p class="timepicker-action-button__cancel" ng-click="cancelTime()">Cancel</p>
-        </div>
-
-
-
-      </div>
-    </div>
-
     <!--<ul class="nav nav-ticket-add"-->
     <!--ng-if="TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)">-->
 
@@ -301,7 +216,8 @@
 
           <div class="ticket-add-content clearfix">
 
-            <div style="max-height: 224px;overflow-y: scroll;overflow-x: hidden" scrollable>
+            <!--<div style="max-height: 224px;overflow-y: scroll;overflow-x: hidden" scrollable>-->
+            <div>
               <div ng-repeat="productExpense in ticketUpdate.products" ng-init="productExpense.itemOrder = $index">
 
                 <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl"
@@ -420,8 +336,7 @@
           </div>
 
 
-          <div class="ticket-add-content clearfix" scrollable style="max-height: 224px;overflow-y: scroll;overflow-x: hidden;"
-               ng-show="!areTicketsTerminated && !(serviceList.length === 0 && areTickets)">
+          <div class="ticket-add-content clearfix" scrollable ng-show="!areTicketsTerminated && !(serviceList.length === 0 && areTickets)">
             <div>
               <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
                 <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl"
@@ -677,15 +592,19 @@
                 >
               </div>
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
-                 sqp-is-show-format="false"
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer"
+                 ng-click="showTimePicker = !showTimePicker"
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
-              <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
-                     id="service-quantity-picker" type="text" readonly
-                     placeholder="Hr(s) : Min(s)" sqp-input
-                     autocomplete="off" aria-expanded="true" />
-              <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
-                     ng-required="serviceToEdit[0].item ? true : false" />
+              <input id="service-quantity-picker" type="text"
+                     placeholder="Hr(s) : Min(s)"
+                     value="{{startDate.hour}}:{{startDate.minute}} {{startDate.time}} |
+                      {{endDate.hour}}:{{endDate.minute}} {{endDate.time}}"
+                     autocomplete="off" />
+              <!--<input type="hidden"-->
+                     <!--value="{{startDate.hour}}:{{startDate.minute}} {{startDate.time}} |-->
+                      <!--{{endDate.hour}}:{{endDate.minute}} {{endDate.time}}"-->
+                     <!--name="serviceTime"-->
+                     <!--ng-required="serviceToEdit[0].item ? true : false" />-->
             </div>
             <div ng-if="!hideInputs" class="col-xs-6" data-date-picker
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
@@ -694,7 +613,7 @@
                      name="serviceData" ng-required="true" uib-tooltip="select date">
               <i class="new-calendar"></i>
             </div>
-            <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
+            <div class="col-xs-12" ng-class="{'has-error': isShowiАngErrors(addServiceForm, 'serviceDescription')}">
               <input uib-tooltip="Description" tooltip-placement="top"
                      type="text" placeholder="Description"
                      ng-model="serviceToEdit[0].description" ng-maxlength="2000"

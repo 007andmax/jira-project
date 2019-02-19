@@ -213,8 +213,8 @@
             return;
           }
           list.view = [];
-          var from = Math.max(list.selected - 3, 0);
-          var to = Math.min(list.array.length - 1, list.selected + 3);
+          var from = Math.max(list.selected - 4, 0);
+          var to = Math.min(list.array.length - 1, list.selected + 4);
           var i;
           var item;
           for (i = from; i <= to; i++) {
@@ -223,12 +223,13 @@
             list.view.push(item);
           }
           if (list.cycle) {
-            if (list.view.length < 7 && list.array.length > 0) {
+            console.log(list, 'LISt');
+            if (list.view.length < 12 && list.array.length > 0) {
               var pivot = list.selected - from;
               var cursor;
               //we need to add stuff to the beginning of the list, until the selected index is in the middle
               cursor = list.array.length - 1;
-              while (pivot < 3) {
+              while (pivot < 5) {
                 var copy = angular.copy(list.array[cursor]);
                 if (!copy) {
                   console.log(cursor);
