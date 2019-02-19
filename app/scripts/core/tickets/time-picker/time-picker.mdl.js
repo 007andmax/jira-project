@@ -406,12 +406,10 @@
     $scope.screenStartX = 0;
     $scope.screenStartY = 0;
     var details = function (event) {
-      console.log(event.screenX, event.screenY, '11');
       if (!$scope.screenStartX || !$scope.screenStartY ) {
         $scope.screenStartX = event.pageX;
         $scope.screenStartY = event.pageY;
       }
-      console.log($scope.screenStartX, $scope.screenStartY,  'EVENT');
       var description = {
         event: event,
         type: event.touches ? "Touch" : "Mouse",
@@ -435,7 +433,6 @@
       };
       $scope.screenStartX -= event.deltaX*20;
       $scope.screenStartY -= event.deltaY*20;
-      console.log(description, 'DEscription');
       description.checkpoint = function () {
         description.remembered = description;
       };

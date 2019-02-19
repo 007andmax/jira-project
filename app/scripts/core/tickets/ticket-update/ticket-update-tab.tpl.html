@@ -26,8 +26,14 @@
 
       <div class="timepicker" ng-if="showTimePicker">
         <div class="timepicker-choosen-time">
-          <p>{{startDate.hour}}:{{startDate.minute}} {{startDate.time}}</p>
-          <p>{{endDate.hour}}:{{endDate.minute}} {{endDate.time}}</p>
+          <div class="col-6 timepicker-choosen-time__start-time" >
+            <p class="col-12">Start time</p>
+            <p class="col-12">{{startDate.hour}}:{{startDate.minute}} {{startDate.time}}</p>
+          </div>
+          <div class="col-6 timepicker-choosen-time__end-time">
+            <p class="col-12">End time</p>
+            <p class="col-12">{{endDate.hour}}:{{endDate.minute}} {{endDate.time}}</p>
+          </div>
         </div>
         <div class="timepicker-start-time timepicker-time">
           <proton:multi-list-picker ng-model="startDate" attachment="{{attachment}}" bind-html="{{bindHtml}}" done="showTimePicker = false">
@@ -82,6 +88,11 @@
               <proton-multi-list-picker-list-item>PM</proton-multi-list-picker-list-item>
             </proton:multi-list-picker-list>
           </proton:multi-list-picker>
+        </div>
+
+        <div class="timepicker-action-button">
+          <p class="col-12" ng-click="saveTime()">Save</p>
+          <p class="col-12" ng-click="cancelTime()">Cancel</p>
         </div>
 
 

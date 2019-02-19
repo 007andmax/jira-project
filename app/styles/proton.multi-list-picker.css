@@ -243,10 +243,10 @@
 
 .timepicker {
   position: absolute;
-  top: -170px;
+  top: -205px;
   background: #d08d8d;
   width: 400px;
-  height: 160px;
+  height: 200px;
 }
 
 .timepicker-time {
@@ -264,4 +264,15 @@
 .timepicker-choosen-time {
   display: block;
   height: 40px;
+  text-align: center;
+}
+
+.timepicker-choosen-time__start-time {
+  width: 50%;
+  float: left;
+}
+
+.timepicker-choosen-time__end-time {
+  width: 50%;
+  float: right;
 }
