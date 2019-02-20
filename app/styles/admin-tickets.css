@@ -168,7 +168,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   /*width: 744px;*/
   /*right: 351px;*/
   right: 77px;
-  width: calc(100% - 895px);
+  width: calc(100% - 893px);
   height: 100%;
   background-color: #f7fcff;
 }

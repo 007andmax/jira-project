@@ -60,7 +60,7 @@
 }
 
 .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
-  width: calc(100% - 1168px);
+  width: 744px;
 }
 
 .right-panel-closed .ticket-header.ticket-fixed-header {
@@ -88,17 +88,16 @@
 }
 
 .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-  width: calc(100% - 1165px);
+  width: 746px;
 }
 
 @media only screen and (min-width: 2048px) {
-  .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
-    width: calc(100% - 1297px);
-  }
-  
-  .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    width: calc(100% - 1294px);
-  }
+  /*.left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {*/
+  /*width: calc(100% - 1304px);*/
+  /*}*/
+  /*.opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {*/
+  /*width: calc(100% - 1302px);*/
+  /*}*/
 }
 
 @media only screen and (max-width: 1700px) {
@@ -527,7 +526,7 @@
 
 @media only screen and (min-width: 1316px) and (max-width: 1440px) {
   .opened-ticket-list .ticket-header.ticket-fixed-header {
-    width: calc(100% - 734px);
+    width: 540px;
   }
   
   .right-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
@@ -544,16 +543,8 @@
     width: calc(100% - 562px);
   }
   
-  .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
-    width: calc(100% - 848px);
-  }
-  
   .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    right: calc(100vw - 1237px);
-  }
-  
-  .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    width: calc(100% - 846px);
+    right: calc(100vw - 1231px);
   }
 }
 
@@ -571,10 +562,10 @@
   }
   
   .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    right: calc(100vw - 1165px);
+    right: calc(100vw - 1157px);
   }
   
   .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    width: calc(100% - 818px);
+    width: 540px;
   }
 }

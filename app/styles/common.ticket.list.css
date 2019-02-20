@@ -332,7 +332,7 @@
   }
   
   .opened-ticket-list .ticket-post-update-wrapper {
-    right: calc(100vw - 1477px);
+    right: calc(100vw - 1470px);
   }
   
   .ticket-header-actions {
@@ -352,15 +352,15 @@
   
   .opened-ticket-list .ticket-post-update-wrapper {
     width: 540px;
-    right: calc(100vw - 1273px);
+    right: calc(100vw - 1265px);
   }
   
   .opened-ticket-list .container-ticket-content .nano-content {
     width: 540px !important;
   }
   
-  .opened-ticket-list .ticket-header.ticket-fixed-header {
-    width: calc(100% - 818px) !important;
+  .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
+    width: 540px;
   }
   
   .ticket-detail h2 {
