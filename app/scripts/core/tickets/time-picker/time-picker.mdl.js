@@ -243,7 +243,7 @@
               }
               //if after padding from the left, the view is still short of 7 items, we need to pad from the right
               cursor = 0;
-              while (list.view.length < 7) {
+              while (list.view.length < 12) {
                 item = angular.copy(list.array[cursor]);
                 item.index = cursor;
                 list.view.push(item);
