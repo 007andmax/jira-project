@@ -318,12 +318,6 @@
   top: 0;
 }
 
-@media screen and (min-width: 2048px) {
-  .opened-ticket-list .ticket-post-update-wrapper {
-    right: 478px;
-  }
-}
-
 @media screen and (max-width: 1600px) {
   .opened-ticket-list.opened-ticket .content-wrapper .ticket-list {
     padding: 24px;
@@ -338,7 +332,7 @@
   }
   
   .opened-ticket-list .ticket-post-update-wrapper {
-    right: 130px;
+    right: calc(100vw - 1477px);
   }
   
   .ticket-header-actions {
@@ -346,9 +340,9 @@
     right: 10px;
   }
   
-  .opened-ticket-list .ticket-post-update-wrapper {
-    right: 123px;
-  }
+  /*.opened-ticket-list .ticket-post-update-wrapper {*/
+    /*right: 123px;*/
+  /*}*/
 }
 
 @media screen and (max-width: 1366px) {
@@ -358,10 +352,7 @@
   
   .opened-ticket-list .ticket-post-update-wrapper {
     width: 540px;
-  }
-  
-  .opened-ticket-list .ticket-post-update-wrapper {
-    right: 94px;
+    right: calc(100vw - 1273px);
   }
   
   .opened-ticket-list .container-ticket-content .nano-content {
