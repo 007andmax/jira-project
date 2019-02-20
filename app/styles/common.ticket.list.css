@@ -303,19 +303,24 @@
 }
 
 .opened-ticket-list .container-ticket-content .nano-content {
-  width: 100%;
+  width: 744px;
   height: 100%;
   background: rgb(255, 255, 255);
-  /*top: 24px;*/
+  top: 24px;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.05) 0 3px 3px 0;
   margin-right: -8px;
   position: absolute;
 }
 
+#product-list-cont .nano-content {
+  width: 100%;
+  top: 0;
+}
+
 @media screen and (min-width: 2048px) {
   .opened-ticket-list .ticket-post-update-wrapper {
-    right: 480px;
+    right: 478px;
   }
 }
 
