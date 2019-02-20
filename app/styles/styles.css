@@ -1438,6 +1438,10 @@ bold {
   background: #189947;
 }
 
+.products-content__list [class*='col-md-'] {
+  word-break: break-all;
+}
+
 .products-content__list--header div {
   text-transform: uppercase;
   font-size: 11px;
@@ -12265,6 +12269,14 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
     font-size: 12px;
   }
   
+  .products-content__list--header div {
+    font-size: 9px;
+  }
+  
+  .products-content__list--item [class*='col-md-'] {
+    font-size: 11px;
+  }
+  
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 106px !important;
   }
@@ -12290,6 +12302,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
 @media only screen and (max-width: 1280px) {
   .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 500px);
+  }
+  
+  .products-content__list--header div {
+    font-size: 8px;
   }
   
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
@@ -12354,6 +12370,10 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   .ticket-labels .progress-big-size,
   .ticket-labels .priority-big-size {
     display: none;
+  }
+  
+  .products-content__header--search input {
+    width: 240px;
   }
   
   .ticket-labels .progress-small-size,
