@@ -45,7 +45,7 @@
 .ticket-add-product-actions,
 .ticket-add-service-actions {
   position: absolute;
-  right: 12px;
+  right: -30px;
   top: 16px;
 }
 

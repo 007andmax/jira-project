@@ -347,6 +347,11 @@
   border-bottom: 1px solid #edf2f6;
 }
 
+.timepicker-choosen-time__start-time p,
+.timepicker-choosen-time__end-time p {
+  line-height: 12px;
+}
+
 .timepicker-choosen-time__start-time {
   border-right: 1px solid #edf2f6;
 }
