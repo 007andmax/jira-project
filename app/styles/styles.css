@@ -1438,8 +1438,12 @@ bold {
   background: #189947;
 }
 
-.products-content__list [class*='col-md-'] {
+.products-content__list .products-content__list--item [class*='col-md-'] {
   word-break: break-all;
+}
+
+.products-content__list .products-content__list--header [class*='col-md-'] {
+  white-space: nowrap;
 }
 
 .products-content__list--header div {
