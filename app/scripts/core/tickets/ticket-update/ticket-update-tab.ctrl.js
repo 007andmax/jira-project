@@ -14,10 +14,6 @@
 
           var closeDropdowns = $rootScope.debounce(closeDropdowns, 100)
 
-          // $scope.$watch(function() {
-          //   setTimeout(checkForOpenDropdown, 100)
-          // });
-
           window.addEventListener('scroll', closeDropdowns)
 
           $scope.$watch('currentOpenTab', function() {
@@ -132,7 +128,6 @@
           if (window.innerWidth <= 414) {
             $scope.$watch('editExpense', function(val) {
 
-
               $timeout(function() {
 
                 $scope.newEditExpense = angular.copy($scope.editExpense);
@@ -191,16 +186,12 @@
             $scope.$watch(function() {
               return $scope.ticketUpdate && $scope.ticketUpdate.services
             }, function(val) {
-              // console.log(val, 'TICEKTUPDATE SERVICE!!!!!!!!!!')
               if (val) {
                 if ($scope.newEditExpense && $scope.newEditExpense.service) {
                   $scope.openedTab('SERVICE');
                   $scope.serviceToEdit = [$scope.newEditExpense.service];
                 } else {
-
                   $scope.serviceToEdit = $scope.ticketUpdate.services;
-                  // console.log($scope.serviceToEdit, 'TICKKKKKKKKK')
-
                 }
 
                 if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {

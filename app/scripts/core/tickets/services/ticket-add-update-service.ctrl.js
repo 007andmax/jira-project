@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateServiceCtrl',
-      ['$scope', 'ServicesService',
-        function ($scope, ServicesService) {
+      ['$scope', 'ServicesService', '$rootScope',
+        function ($scope, ServicesService, $rootScope) {
 
           //TimePicker start
           $scope.showTimePicker = false;
@@ -15,6 +15,10 @@
           $scope.attachment = 'inline';
           $scope.bindHtml = 'true';
 
+          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation;
+          $rootScope.$watch('currentUser', function (val) {
+            console.log(val, 'CurrentUser');
+          });
 
           $scope.getMinutes = function () {
             var result = {};
