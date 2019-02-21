@@ -16,11 +16,11 @@
 .opened-ticket-list .ticket-post-update-wrapper {
   width: 746px;
   min-height: 255px;
-  right: calc(100vw - 1563px);
+  right: calc(100vw - 1569px);
 }
 
 .opened-ticket-list.left-panel-closed .ticket-post-update-wrapper {
-  right: calc(100vw - 1321px);
+  right: calc(100vw - 1329px);
 }
 
 .ticket-post-update-wrapper > .btn {
