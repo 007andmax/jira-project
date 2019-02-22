@@ -602,9 +602,19 @@
                    ng-if=" ticketUpdate.type === 'SERVICE'">
                 <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
                   <div class="table-content-top clearfix">
+                    <div class="col-md-2">Date</div>
+                    <div class="col-md-4">Service name</div>
+                    <div class="col-md-2">Time in</div>
+                    <div class="col-md-2">Time out</div>
+                    <div class="col-md-2 text-right"><span style="color: #9ca5b6">{{ service.quantity | durationFilter }}</span>
+                    </div>
+                  </div>
+                  <div class="table-content-top clearfix">
                     <div class="col-md-2">{{ service.date | date:'dd MMM yyyy'}}</div>
-                    <div class="col-md-8">{{ service.item.name }}</div>
-                    <div class="col-md-2 text-right">Duration <span style="color: #9ca5b6">{{ service.quantity | durationFilter }}</span>
+                    <div class="col-md-4">{{ service.item.name }}</div>
+                    <div class="col-md-2">{{getFormatedTime(service.durationStart)}}</div>
+                    <div class="col-md-2">{{getFormatedTime(service.durationEnd)}}</div>
+                    <div class="col-md-2 text-right"><span style="color: #9ca5b6">{{ service.quantity | durationFilter }}</span>
                     </div>
                   </div>
                   <div class="table-content-bottom clearfix">

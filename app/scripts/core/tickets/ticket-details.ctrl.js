@@ -453,6 +453,7 @@
 
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;
+            console.log($scope.ticketUpdate, '$scope.ticketUpdate');
           };
 
           $scope.setMobileForm = function(form) {
@@ -695,6 +696,17 @@
           $scope.setModel = function(model) {
             $scope.productExpenseModel = model;
           }
+
+          $scope.getFormatedTime = function(time) {
+            var date = new Date(time);
+            var currentTime = {
+              hour: date.getHours() >= 13 ? date.getHours() - 13 : date.getHours(),
+              minute: date.getMinutes(),
+              time: date.getHours() >= 12 ? 'pm' : 'am'
+            };
+            console.log(date, currentTime, '123251235');
+            return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
+          };
 
 
 
