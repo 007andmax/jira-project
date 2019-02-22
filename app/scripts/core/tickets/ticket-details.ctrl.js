@@ -854,9 +854,24 @@
                   var date = new Date(ticketUpdateToSend.services[i].date);
                   console.log($rootScope.currentUser.serviceExpenseDurationPresentation, '00000');
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
+                    var startDate = new Date();
+                    var endDate = new Date();
+                    startDate.setHours($rootScope.saveStartDate.hour);
+                    startDate.setMinutes($rootScope.saveStartDate.minute);
+                    endDate.setHours($rootScope.saveEndDate.hour);
+                    endDate.setMinutes($rootScope.saveEndDate.minute);
+                    if (
+                      ($rootScope.saveStartDate.time === 'PM' && $rootScope.saveEndDate.time === 'AM') ||
+                      ($rootScope.saveStartDate.time === 'AM' && $rootScope.saveEndDate.time === 'AM' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour) ||
+                      ($rootScope.saveStartDate.time === 'PM' && $rootScope.saveEndDate.time === 'PM' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour)
+                    ) {
+                      endDate.setDate(endDate.getDate() + 1);
+                    }
                     console.log($rootScope.saveStartDate, $rootScope.saveEndDate, '1251235');
                     getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
+                    ticketUpdateToSend.services[i].durationStart = startDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = endDate.getTime();
                   } else {
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
                   }
