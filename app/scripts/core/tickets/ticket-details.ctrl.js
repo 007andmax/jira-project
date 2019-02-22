@@ -790,7 +790,6 @@
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             if (isExpenseEdit) {
-              console.log('1');
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
 
@@ -807,7 +806,6 @@
 
 
             if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
-              console.log('2');
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (el.item && typeof el.item.name === 'object') {
                   el.item = el.item.name;
@@ -822,7 +820,6 @@
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
             if (isEmptyProductValid || form.$valid) {
-              console.log('3');
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
@@ -852,7 +849,6 @@
 
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
-                  console.log($rootScope.currentUser.serviceExpenseDurationPresentation, '00000');
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
                     var startDate = new Date();
                     var endDate = new Date();
@@ -976,9 +972,7 @@
             } else {
               quantity = (endDate.getTime() - startDate.getTime()) / 1000;
             }
-            var hours = Math.floor(quantity / 3600);
-            var minutes = ((Math.floor((quantity - hours*3600) / 60))/60) * 100;
-            return hours + minutes;
+            return quantity/3600;
           }
 
           $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
@@ -1012,9 +1006,6 @@
           // ticket notify
 
           $scope.$on('userToAssignToTicket', function(evt, val) {
-
-            // console.log("LEEEEEEEEEEEEEEEe", val)
-            // console.log(evt, val, "SADNESS")
             var data = val.data;
             var id = data.id;
 
