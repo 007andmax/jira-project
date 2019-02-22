@@ -14,6 +14,7 @@
           $scope.currentDate = new Date();
           $scope.attachment = 'inline';
           $scope.bindHtml = 'true';
+          $scope.saveDateIsSet = false;
 
           $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation;
           $rootScope.$watch('currentUser', function (val) {
@@ -48,7 +49,11 @@
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.startDate;
             $scope.saveEndDate = $scope.endDate;
+            console.log($scope.saveStartDate, 'saveStartDate');
+            $rootScope.saveStartDate =  $scope.saveStartDate;
+            $rootScope.saveEndDate =  $scope.saveEndDate;
             $scope.showTimePicker = !$scope.showTimePicker;
+            $scope.saveDateIsSet = true;
           };
 
           $scope.cancelTime = function () {
@@ -57,28 +62,38 @@
           };
 
           $scope.showTimePickerBlock = function () {
+            refreshTime();
             $scope.showTimePicker = !$scope.showTimePicker;
-          }
+          };
 
 
           function refreshTime() {
-            $scope.currentDate = new Date();
-            $scope.startDate = {
-              hour: $scope.currentDate.getHours(),
-              minute: $scope.currentDate.getMinutes()
-            };
-            $scope.endDate = {
-              hour: $scope.currentDate.getHours(),
-              minute: $scope.currentDate.getMinutes()
-            };
-            $scope.saveStartDate = {
-              hour: $scope.currentDate.getHours(),
-              minute: $scope.currentDate.getMinutes()
-            };
-            $scope.saveEndDate = {
-              hour: $scope.currentDate.getHours(),
-              minute: $scope.currentDate.getMinutes()
-            };
+            if (!$scope.saveDateIsSet) {
+              $scope.currentDate = new Date();
+              $scope.startDate = {
+                hour: $scope.currentDate.getHours(),
+                minute: $scope.currentDate.getMinutes(),
+                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+              };
+              $scope.endDate = {
+                hour: $scope.currentDate.getHours(),
+                minute: $scope.currentDate.getMinutes(),
+                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+              };
+              $scope.saveStartDate = {
+                hour: $scope.currentDate.getHours(),
+                minute: $scope.currentDate.getMinutes(),
+                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+              };
+              $scope.saveEndDate = {
+                hour: $scope.currentDate.getHours(),
+                minute: $scope.currentDate.getMinutes(),
+                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+              };
+              $rootScope.saveStartDate =  $scope.saveStartDate;
+              $rootScope.saveEndDate =  $scope.saveEndDate;
+
+            }
           }
 
           //TimePicker end

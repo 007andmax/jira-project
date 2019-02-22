@@ -258,16 +258,12 @@
             }
 
             $scope.updateNoteRequest = function(updateId, note, callback) {
-              // updateNote(ticketId, updateId, note, callback)
-
               TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
                 console.log('note updated', resp);
-
                 $scope.isNoteUpdating = false;
-
                 if (callback) callback()
               })
-            }
+            };
 
 // <<<<<<< HEAD
             // $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
@@ -793,8 +789,8 @@
           };
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
-            // console.log('WTF')
             if (isExpenseEdit) {
+              console.log('1');
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
 
@@ -805,13 +801,13 @@
 
                 $scope.saveUpdateService($scope.editForms.editServiceForm, isExpenseEdit.service, callback);
               }
-
               return;
             }
 
 
 
             if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
+              console.log('2');
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (el.item && typeof el.item.name === 'object') {
                   el.item = el.item.name;
@@ -826,6 +822,7 @@
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
             if (isEmptyProductValid || form.$valid) {
+              console.log('3');
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
@@ -855,8 +852,15 @@
 
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
+                  console.log($rootScope.currentUser.serviceExpenseDurationPresentation, '00000');
+                  if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
+                    console.log($rootScope.saveStartDate, $rootScope.saveEndDate, '1251235');
+                    getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
+                    ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
+                  } else {
+                    ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
+                  }
 
-                  ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 }
 
@@ -938,6 +942,29 @@
               });
             }
           };
+
+          function getQuantity(start, end) {
+            var quantity = 0;
+            var startDate = new Date();
+            var endDate = new Date();
+            startDate.setHours(start.hour);
+            startDate.setMinutes(start.minute);
+            endDate.setHours(end.hour);
+            endDate.setMinutes(end.minute);
+            if (
+              (start.time === 'PM' && end.time === 'AM') ||
+              (start.time === 'AM' && end.time === 'AM' && start.hour > end.hour) ||
+              (start.time === 'PM' && end.time === 'PM' && start.hour > end.hour)
+            ) {
+              endDate.setDate(endDate.getDate() + 1);
+              quantity = (endDate.getTime() - startDate.getTime()) / 1000;
+            } else {
+              quantity = (endDate.getTime() - startDate.getTime()) / 1000;
+            }
+            var hours = Math.floor(quantity / 3600);
+            var minutes = ((Math.floor((quantity - hours*3600) / 60))/60) * 100;
+            return hours + minutes;
+          }
 
           $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
 
