@@ -93,7 +93,7 @@
 
           $scope.setEditForm = function(form, name) {
             $scope.editForms[name] = form;
-          }
+          };
 
 
           var params = $state.params.remoteParams;
@@ -453,7 +453,6 @@
 
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;
-            console.log($scope.ticketUpdate, '$scope.ticketUpdate');
           };
 
           $scope.setMobileForm = function(form) {
@@ -704,7 +703,6 @@
               minute: date.getMinutes(),
               time: date.getHours() >= 12 ? 'pm' : 'am'
             };
-            console.log(date, currentTime, '123251235');
             return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
           };
 

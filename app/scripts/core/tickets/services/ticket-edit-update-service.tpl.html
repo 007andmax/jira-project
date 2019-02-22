@@ -98,7 +98,7 @@
                    tooltip-append-to-body="true">
           </div>
         </div>
-        <div class="col-md-7" ng-class="{'has-error': !editService.item.versionedId.id}">
+        <div class="col-md-5" ng-class="{'has-error': !editService.item.versionedId.id}">
           <div uib-dropdown>
             <input type="text" value="Onsite" class="new-input form-control has-dropdown" placeholder="Service"
                    name="serviceName" placeholder="Service" uib-dropdown-toggle aria-expanded="false"
@@ -120,7 +120,9 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-2" service-quantity-picker="editService.quantity" sqp-is-show-format="false"
+        <div class="col-md-2"
+             ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER'"
+             service-quantity-picker="editService.quantity" sqp-is-show-format="false"
              ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
           <input id="service-quantity-picker" type="text" class="pointer form-control new-input"
                  placeholder="Hr(s) : Min(s)" sqp-input
@@ -130,6 +132,90 @@
                  tooltip-append-to-body="true"/>
 
           <input type="hidden" name="serviceTime" ng-model="editService.quantity" ng-required="true" />
+        </div>
+        <div class="col-md-4 new-quantity-picker" ng-if="serviceExpenseDurationPresentation==='TIME_PICKER'">
+          <input type="text" class="pointer new-input"
+                 placeholder="Start date | End date"
+                 value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
+                 ng-click="showTimePickerBlock()"
+                 autocomplete="off" />
+          <div class="timepicker-wrap" ng-if="showTimePicker">
+            <div class="timepicker">
+              <div class="timepicker-choosen-time">
+                <div class="col-6 timepicker-choosen-time__start-time">
+                  <p class="col-12">Start time</p>
+                  <p class="col-12">{{editService.durationStart.hour}}:{{editService.durationStart.minute}} {{editService.durationStart.time}}</p>
+                </div>
+                <div class="col-6 timepicker-choosen-time__end-time">
+                  <p class="col-12">End time</p>
+                  <p class="col-12">{{editService.durationEnd.hour}}:{{editService.durationEnd.hour.minute}} {{editService.durationEnd.hour.time}}</p>
+                </div>
+              </div>
+              <div class="timepicker-start-time timepicker-time">
+                <proton:multi-list-picker ng-model="editService.durationStart" attachment="{{attachment}}" bind-html="{{bindHtml}}"
+                                          done="showTimePicker = false">
+                  <proton:multi-list-picker-divider>
+                  </proton:multi-list-picker-divider>
+                  <proton:multi-list-picker-list alias="hour" cycle="true">
+                    <proton:multi-list-picker-list-item>01</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>02</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>03</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>04</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>05</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>06</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>07</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>08</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>09</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>10</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>11</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>12</proton:multi-list-picker-list-item>
+                  </proton:multi-list-picker-list>
+                  <proton:multi-list-picker-divider>:</proton:multi-list-picker-divider>
+                  <proton:multi-list-picker-list alias="minute" source="getMinutes()" cycle="true">
+                  </proton:multi-list-picker-list>
+                  <proton:multi-list-picker-list alias="time">
+                    <proton-multi-list-picker-list-item>AM</proton-multi-list-picker-list-item>
+                    <proton-multi-list-picker-list-item>PM</proton-multi-list-picker-list-item>
+                  </proton:multi-list-picker-list>
+                </proton:multi-list-picker>
+              </div>
+              <div class="timepicker-end-time timepicker-time">
+                <proton:multi-list-picker ng-model="editService.durationEnd" attachment="{{attachment}}" bind-html="{{bindHtml}}"
+                                          done="showTimePicker = false">
+                  <proton:multi-list-picker-divider>
+                  </proton:multi-list-picker-divider>
+                  <proton:multi-list-picker-list alias="hour" cycle="true">
+                    <proton:multi-list-picker-list-item>01</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>02</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>03</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>04</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>05</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>06</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>07</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>08</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>09</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>10</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>11</proton:multi-list-picker-list-item>
+                    <proton:multi-list-picker-list-item>12</proton:multi-list-picker-list-item>
+                  </proton:multi-list-picker-list>
+                  <proton:multi-list-picker-divider>:</proton:multi-list-picker-divider>
+                  <proton:multi-list-picker-list alias="minute" source="getMinutes()" cycle="true">
+                  </proton:multi-list-picker-list>
+                  <proton:multi-list-picker-list alias="time">
+                    <proton-multi-list-picker-list-item>AM</proton-multi-list-picker-list-item>
+                    <proton-multi-list-picker-list-item>PM</proton-multi-list-picker-list-item>
+                  </proton:multi-list-picker-list>
+                </proton:multi-list-picker>
+              </div>
+              <div class="timepicker-action-button">
+                <p class="timepicker-action-button__save pointer" ng-click="saveTime()">Save</p>
+                <p class="timepicker-action-button__cancel pointer" ng-click="cancelTime()">Cancel</p>
+              </div>
+            </div>
+          </div>
+
+          <!--<input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"-->
+          <!--ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>-->
         </div>
       </div>
       <div class="table-content-bottom clearfix">

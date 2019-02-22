@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketEditUpdateServiceCtrl',
-      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter',
-        function ($scope, TicketsService, ServicesService, UserNotificationService, $filter) {
+      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter', '$rootScope',
+        function ($scope, TicketsService, ServicesService, UserNotificationService, $filter, $rootScope) {
 
           $scope.maxServiceDate = new Date();
 
@@ -13,9 +13,101 @@
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
 
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
+          var editDateStart = new Date($scope.service.durationStart);
+          var editDateEnd = new Date($scope.service.durationEnd);
+          $scope.editService.durationStart = {
+            hour: editDateStart.getHours() >= 13 ? editDateStart.getHours() - 13 : editDateStart.getHours(),
+            minute: editDateStart.getMinutes(),
+            time: editDateStart.getHours() >= 12 ? 'pm' : 'am'
+          };
+          $scope.editService.durationEnd = {
+            hour: editDateEnd.getHours() >= 13 ? editDateEnd.getHours() - 13 : editDateEnd.getHours(),
+            minute: editDateEnd.getMinutes(),
+            time: editDateEnd.getHours() >= 12 ? 'pm' : 'am'
+          };
+          //TimePicker start
+          $scope.showTimePicker = false;
+          $scope.startDate = null;
+          $scope.endDate = null;
+          refreshTime();
+          $scope.currentDate = new Date();
+          $scope.attachment = 'inline';
+          $scope.bindHtml = 'true';
+          $scope.saveDateIsSet = false;
+
+          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation;
+          $rootScope.$watch('currentUser', function (val) {
+            console.log(val, 'CurrentUser');
+          });
+
+          $scope.getMinutes = function () {
+            var result = {};
+            for (var i = 0; i < 60; i ++) {
+              result[i] = i < 10 ? ('0' + i) : i;
+            }
+            return result;
+          };
+
+          $scope.$watch('startDate.hour', function (newValue, oldValue) {
+            var now = parseInt(newValue);
+            var then = parseInt(oldValue);
+            if (now > 9 && then < 9 || now < 3 && then > 9) {
+              $scope.startDate.time = $scope.startDate.time === "AM" ? "PM" : "AM";
+            }
+          });
+
+          $scope.$watch('endDate.hour', function (newValue, oldValue) {
+            var now = parseInt(newValue);
+            var then = parseInt(oldValue);
+            if (now > 9 && then < 9 || now < 3 && then > 9) {
+              $scope.endDate.time = $scope.endDate.time === "AM" ? "PM" : "AM";
+            }
+          });
+
+          $scope.saveTime = function () {
+            $scope.saveStartDate = $scope.editService.durationStart;
+            $scope.saveEndDate = $scope.editService.durationEnd;
+            console.log($scope.saveStartDate, 'saveStartDate');
+            $rootScope.saveStartDate =  $scope.saveStartDate;
+            $rootScope.saveEndDate =  $scope.saveEndDate;
+            $scope.showTimePicker = !$scope.showTimePicker;
+            $scope.saveDateIsSet = true;
+          };
+
+          $scope.cancelTime = function () {
+            refreshTime();
+            $scope.showTimePicker = !$scope.showTimePicker;
+          };
+
+          $scope.showTimePickerBlock = function () {
+            refreshTime();
+            $scope.showTimePicker = !$scope.showTimePicker;
+          };
+
+
+          function refreshTime() {
+            if (!$scope.saveDateIsSet) {
+              $scope.currentDate = new Date();
+              $scope.saveStartDate = {
+                hour: $scope.editService.durationStart.hour >= 13 ? $scope.editService.durationStart.hour - 12 : $scope.editService.durationStart.hour,
+                minute: $scope.editService.durationStart.minute,
+                time:  $scope.editService.durationStart.time >= 12 ? 'pm' : 'am'
+              };
+              $scope.saveEndDate = {
+                hour: $scope.editService.durationEnd.hour >= 13 ? $scope.editService.durationEnd.hour - 12 : $scope.editService.durationEnd.hour,
+                minute: $scope.editService.durationEnd.minute,
+                time:  $scope.editService.durationEnd.time >= 12 ? 'pm' : 'am'
+              };
+              $rootScope.saveStartDate =  $scope.saveStartDate;
+              $rootScope.saveEndDate =  $scope.saveEndDate;
+
+            }
+          }
+
+          //TimePicker end
 
           $scope.saveUpdateService = function (form) {
-
+            console.log(form.$valid, 'form.$valid');
             if (form.$valid) {
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
@@ -34,6 +126,22 @@
 
               var serviceDate = new Date($scope.editService.date);
 
+              var startDate = new Date();
+              var endDate = new Date();
+              startDate.setHours($scope.saveStartDate.hour);
+              startDate.setMinutes($rootScope.saveStartDate.minute);
+              endDate.setHours($rootScope.saveEndDate.hour);
+              endDate.setMinutes($rootScope.saveEndDate.minute);
+              if (
+                ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'AM') ||
+                ($scope.saveStartDate.time === 'AM' && $scope.saveEndDate.time === 'AM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour) ||
+                ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'PM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour)
+              ) {
+                endDate.setDate(endDate.getDate() + 1);
+              }
+
+              console.log('123512351235');
+
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -45,13 +153,15 @@
                   quantity: $scope.editService.quantity / 60,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: $scope.editService.discountAmount,
-                  discountType: "PERCENT"
-
+                  discountType: 'PERCENT',
+                  durationStart: startDate.getTime(),
+                  durationEnd: endDate.getTime()
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
               })
+              $scope.;
             } else {
               $scope.triedToSaveService = true;
             }

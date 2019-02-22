@@ -70,22 +70,22 @@
             if (!$scope.saveDateIsSet) {
               $scope.currentDate = new Date();
               $scope.startDate = {
-                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 13 : $scope.currentDate.getHours(),
+                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
                 time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
               };
               $scope.endDate = {
-                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 13 : $scope.currentDate.getHours(),
+                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
                 time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
               };
               $scope.saveStartDate = {
-                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 13 : $scope.currentDate.getHours(),
+                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
                 time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
               };
               $scope.saveEndDate = {
-                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 13 : $scope.currentDate.getHours(),
+                hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
                 time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
               };
