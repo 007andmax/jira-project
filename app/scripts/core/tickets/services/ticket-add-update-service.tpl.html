@@ -23,7 +23,6 @@
       </div>
     </div>
     <div  ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER'">
-      {{serviceExpense.quantity}}
       <div class="col-4 new-quantity-picker"
            service-quantity-picker="serviceExpense.quantity"
            type="hours"
@@ -45,7 +44,6 @@
                autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="hour" />
         <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
                ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
-
       </div>
     </div>
 

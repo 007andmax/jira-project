@@ -160,8 +160,13 @@
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
+              });
+              $scope.$emit('time', {
+                id: $scope.editService.id,
+                durationStart: startDate.getTime(),
+                durationEnd: endDate.getTime(),
+                quantity: $scope.editService.quantity / 60,
               })
-              $scope.;
             } else {
               $scope.triedToSaveService = true;
             }

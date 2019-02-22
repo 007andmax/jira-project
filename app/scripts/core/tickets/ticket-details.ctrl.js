@@ -54,7 +54,6 @@
 
 
 
-
           // console.log($scope.usersCurrentCompany, "SCOPESCOPESCOPE");
 
 
@@ -873,7 +872,6 @@
                     ) {
                       endDate.setDate(endDate.getDate() + 1);
                     }
-                    console.log($rootScope.saveStartDate, $rootScope.saveEndDate, '1251235');
                     getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = startDate.getTime();
@@ -1511,6 +1509,24 @@
             }
 
           }
+
+          $scope.$on('time', function(event, data) {
+            console.log('test,time', data);
+            console.log($scope, 'ticketUpdate.services');
+            $scope.ticketDetails.updates.map(function(item) {
+              if (item.services[0].id === data.id) {
+                console.log('123512351235123');
+                 item.services[0].durationEnd = data.durationEnd;
+                item.services[0].durationStart =  data.durationStart;
+                item.services[0].quantity = data.quantity;
+                console.log(item.services[0]);
+              }
+              return item;
+            })
+
+            console.log($scope.ticketDetails);
+
+          });
 
           var condition = 'ticketUpdate.note' +
             '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +
