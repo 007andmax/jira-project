@@ -127,7 +127,7 @@
                service-quantity-picker="editService.quantity"
                type="hours"
                sqp-is-show-format="false"
-               ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
+               ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
             <input id="service-quantity-picker-hour" type="text" class="pointer new-input"
                    placeholder="Hr(s)" sqp-input
                    ng-disabled="serviceExpenseDurationPresentation==='TIME_PICKER'"
@@ -139,7 +139,7 @@
                service-quantity-picker="editService.quantity"
                sqp-is-show-format="false"
                type="minutes"
-               ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
+               ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
             <input id="service-quantity-picker-minutes" type="text" class="pointer new-input"
                    placeholder="Mn" sqp-input
                    ng-disabled="serviceExpenseDurationPresentation==='TIME_PICKER'"
