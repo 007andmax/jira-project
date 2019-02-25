@@ -17,7 +17,9 @@
           $scope.referenceDate = null;
         };
 
-        $scope.timePickerModel = $rootScope.currentUser.serviceExpenseDurationPresentation;
+        $scope.timePickerModel = $rootScope.currentUser.serviceExpenseDurationPresentation ?
+          $rootScope.currentUser.serviceExpenseDurationPresentation
+          : 'DURATION_PICKER';
 
         $scope.setTimePickerValue = function (type) {
           $scope.timePickerModel = type;

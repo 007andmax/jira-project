@@ -179,8 +179,6 @@
                 }
               }
 
-
-
             }
 
             $scope.deleteExpence = function (ticketUpdate, productExpense, serviceExpence) {
@@ -858,13 +856,14 @@
 
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
+                  var startDate = new Date();
+                  var endDate = new Date();
+                  startDate.setHours($rootScope.saveStartDate.hour);
+                  startDate.setMinutes($rootScope.saveStartDate.minute);
+                  console.log($rootScope.saveEndDate, '$rootScope.saveEndDate');
+                  endDate.setHours($rootScope.saveEndDate.hour);
+                  endDate.setMinutes($rootScope.saveEndDate.minute);
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
-                    var startDate = new Date();
-                    var endDate = new Date();
-                    startDate.setHours($rootScope.saveStartDate.hour);
-                    startDate.setMinutes($rootScope.saveStartDate.minute);
-                    endDate.setHours($rootScope.saveEndDate.hour);
-                    endDate.setMinutes($rootScope.saveEndDate.minute);
                     if (
                       ($rootScope.saveStartDate.time === 'PM' && $rootScope.saveEndDate.time === 'AM') ||
                       ($rootScope.saveStartDate.time === 'AM' && $rootScope.saveEndDate.time === 'AM' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour) ||
@@ -878,6 +877,8 @@
                     ticketUpdateToSend.services[i].durationEnd = endDate.getTime();
                   } else {
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
+                    ticketUpdateToSend.services[i].durationStart = startDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = endDate.getTime();
                   }
 
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());

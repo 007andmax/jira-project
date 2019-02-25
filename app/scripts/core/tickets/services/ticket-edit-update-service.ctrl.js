@@ -16,8 +16,9 @@
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
 
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
+          console.log($scope.service, '$scope.service');
           var editDateStart = new Date($scope.service.durationStart);
-          var editDateEnd = new Date($scope.service.durationEnd);
+          var editDateEnd = new Date($scope.service.durationEnd );
           $scope.editService.durationStart = {
             hour: editDateStart.getHours() >= 13 ? editDateStart.getHours() - 13 : editDateStart.getHours(),
             minute: editDateStart.getMinutes(),
@@ -38,7 +39,9 @@
           $scope.bindHtml = 'true';
           $scope.saveDateIsSet = false;
 
-          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation;
+          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation ?
+            $rootScope.currentUser.serviceExpenseDurationPresentation
+            : 'DURATION_PICKER';
           $rootScope.$watch('currentUser', function (val) {
             console.log(val, 'CurrentUser');
           });
@@ -143,7 +146,6 @@
                 endDate.setDate(endDate.getDate() + 1);
               }
 
-              console.log('123512351235');
 
               TicketsService.updateExpenseInTicketUpdate({
 
@@ -158,7 +160,7 @@
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
                   durationStart: startDate.getTime(),
-                  durationEnd: endDate.getTime()
+                  durationEnd: $scope.serviceExpenseDurationPresentation === 'TIME_PICKER' ? endDate.getTime() : startDate.getTime() + ($scope.editService.quantity * 3600)
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
