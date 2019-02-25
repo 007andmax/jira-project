@@ -14,14 +14,14 @@
 }
 
 .opened-ticket-list .ticket-post-update-wrapper {
-  width: 746px;
+  width: calc(100% - 917px);
   min-height: 255px;
-  right: calc(100vw - 1569px);
+  right: 100px;
 }
 
-.opened-ticket-list.left-panel-closed .ticket-post-update-wrapper {
-  right: calc(100vw - 1329px);
-}
+/*.opened-ticket-list.left-panel-closed .ticket-post-update-wrapper {*/
+  /*right: calc(100vw - 1820px);*/
+/*}*/
 
 .ticket-post-update-wrapper > .btn {
   position: absolute;

@@ -50,7 +50,7 @@
 }
 
 .opened-ticket-list .ticket-header.ticket-fixed-header {
-  width: 744px;
+  width: calc(100% - 917px);
   top: 102px;
   border-radius: 4px;
 }
@@ -60,7 +60,7 @@
 }
 
 .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
-  width: 744px;
+  width: calc(100% - 677px);
 }
 
 .right-panel-closed .ticket-header.ticket-fixed-header {
@@ -88,7 +88,7 @@
 }
 
 .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-  width: 746px;
+  width: calc(100% - 676px);
 }
 
 @media only screen and (min-width: 2048px) {
@@ -539,12 +539,22 @@
     margin: 0;
   }
   
+  .opened-ticket-list .ticket-header.ticket-fixed-header,
+  .opened-ticket-list .ticket-post-update-wrapper {
+    width: calc(100% - 825px);
+  }
+  
   .left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 562px);
   }
   
   .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    right: calc(100vw - 1238px);
+    right: calc(100vw - 1500px);
+  }
+  
+  .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header,
+  .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
+    width: calc(100% - 586px);
   }
 }
 
@@ -562,10 +572,11 @@
   }
   
   .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    right: calc(100vw - 1164px);
+    right: calc(100vw - 1266px);
   }
   
   .opened-ticket.left-panel-closed.opened-ticket-list .ticket-post-update-wrapper {
-    width: 540px;
+    width: calc(100% - 717px);
+    
   }
 }
