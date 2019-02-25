@@ -9,3 +9,4 @@ index.html
 .idea
 terminal.glue
 dist.*
+.DS_Store

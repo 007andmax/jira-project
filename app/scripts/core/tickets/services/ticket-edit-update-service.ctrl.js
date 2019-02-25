@@ -9,7 +9,10 @@
           $scope.maxServiceDate = new Date();
 
           $scope.editService = $scope.service.staticCopy();
-          $scope.editService.quantity = ($scope.service.quantity * 60).toFixed(0);
+          $scope.c = {
+            hour: ($scope.service.quantity).toFixed(0),
+            minute: $scope.service.quantity%($scope.service.quantity).toFixed(0)
+          };
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
 
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');

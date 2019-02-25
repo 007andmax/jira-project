@@ -151,7 +151,7 @@
                   <p class="col-12">{{editService.durationEnd.hour}}:{{editService.durationEnd.hour.minute}} {{editService.durationEnd.hour.time}}</p>
                 </div>
               </div>
-              <div class="timepicker-start-time timepicker-time" ng-class="{ 'no-clickable': serviceExpenseDurationPresentation==='DURATION_PICKER'} ">
+              <div class="timepicker-start-time timepicker-time">
                 <proton:multi-list-picker ng-model="editService.durationStart" attachment="{{attachment}}" bind-html="{{bindHtml}}"
                                           done="showTimePicker = false">
                   <proton:multi-list-picker-divider>
@@ -179,7 +179,8 @@
                   </proton:multi-list-picker-list>
                 </proton:multi-list-picker>
               </div>
-              <div class="timepicker-end-time timepicker-time">
+              <div class="timepicker-end-time timepicker-time"
+                   ng-class="{ 'no-clickable': serviceExpenseDurationPresentation==='DURATION_PICKER'} ">
                 <proton:multi-list-picker ng-model="editService.durationEnd" attachment="{{attachment}}" bind-html="{{bindHtml}}"
                                           done="showTimePicker = false">
                   <proton:multi-list-picker-divider>
