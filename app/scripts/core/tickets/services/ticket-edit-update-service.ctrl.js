@@ -112,6 +112,7 @@
           $scope.saveUpdateService = function (form) {
             console.log(form.$valid, 'form.$valid');
             if (form.$valid) {
+              console.log('111111');
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
@@ -119,8 +120,11 @@
               var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
               var isDescountAmountChange = $scope.service.discountAmount != $scope.editService.discountAmount;
               var isDiscountTypeChange = $scope.service.discountType != $scope.editService.discountType;
+              var isStartTimeChange = $scope.service.durationStart != $scope.editService.durationStart;
+              var isEndTimeChange = $scope.service.isEndTimeChange != $scope.editService.isEndTimeChange;
 
-              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange || isDescountAmountChange || isDiscountTypeChange)) {
+              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange || isDescountAmountChange || isDiscountTypeChange || isStartTimeChange || isEndTimeChange)) {
+                console.log('22222');
                 $scope.setEditExpenseId();
                 return;
               }
@@ -143,7 +147,7 @@
                 endDate.setDate(endDate.getDate() + 1);
               }
 
-
+              console.log(startDate.getTime(), endDate.getTime() , 'endDate.getTime();');
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -152,22 +156,23 @@
                   id: $scope.editService.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: $scope.editService.description,
-                  quantity: $scope.editService.quantity / 60,
+                  quantity: (endDate.getTime() - startDate.getTime())/ 3600000,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
                   durationStart: startDate.getTime(),
-                  durationEnd: $scope.serviceExpenseDurationPresentation === 'TIME_PICKER' ? endDate.getTime() : startDate.getTime() + ($scope.editService.quantity * 3600)
+                  durationEnd: endDate.getTime()
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
               });
+              console.log(endDate, 'test');
               $scope.$emit('time', {
                 id: $scope.editService.id,
                 durationStart: startDate.getTime(),
                 durationEnd: endDate.getTime(),
-                quantity: $scope.editService.quantity / 60,
+                quantity: (endDate.getTime() - startDate.getTime())/ 3600000
               })
             } else {
               $scope.triedToSaveService = true;

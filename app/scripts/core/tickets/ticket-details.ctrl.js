@@ -697,7 +697,7 @@
             var date = new Date(time);
             var currentTime = {
               hour: date.getHours() >= 13 ? date.getHours() - 13 : date.getHours(),
-              minute: date.getMinutes(),
+              minute: date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes(),
               time: date.getHours() >= 12 ? 'pm' : 'am'
             };
             return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
@@ -1515,6 +1515,7 @@
             console.log('test,time', data);
             console.log($scope, 'ticketUpdate.services');
             $scope.ticketDetails.updates.map(function(item) {
+              console.log(item, 'ITEM');
               if (item.services[0].id === data.id) {
                 console.log('123512351235123');
                  item.services[0].durationEnd = data.durationEnd;
