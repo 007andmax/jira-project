@@ -24,6 +24,7 @@
         $scope.setTimePickerValue = function (type) {
           $scope.timePickerModel = type;
           console.log('test');
+          $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           UsersService.changeTimePickerType(type);
         };
 

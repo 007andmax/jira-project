@@ -19,6 +19,7 @@
           $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation ?
             $rootScope.currentUser.serviceExpenseDurationPresentation
             :'DURATION_PICKER';
+
           $rootScope.$watch('currentUser', function (val) {
             console.log(val, 'CurrentUser');
           });
