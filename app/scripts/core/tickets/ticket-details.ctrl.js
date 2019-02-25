@@ -878,7 +878,7 @@
                   } else {
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
                     ticketUpdateToSend.services[i].durationStart = startDate.getTime();
-                    ticketUpdateToSend.services[i].durationEnd = endDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = $rootScope.currentUser.serviceExpenseDurationPresentation === 'DURATION_PICKER' ? (startDate.getTime() + $scope.ticketUpdate.services[i].quantity *60000): endDate.getTime() ;
                   }
 
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
