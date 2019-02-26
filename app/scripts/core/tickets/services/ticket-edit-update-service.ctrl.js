@@ -76,24 +76,15 @@
             console.log(newValue, 'newValue');
             console.log($scope.editService.durationEnd, '$scope.editService.durationEnd');
             if (!$scope.disableQuantityWatcher) {
-              // var newMinutes = $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute > 10 ?
-              //   $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute
-              //   : '0' + (+(+$scope.editService.durationEnd.minute - +$rootScope.quantityEditTime.minute));
-              // var newHours = $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour > 10 ?
-              //   $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour
-              //   : '0' + (+(+$scope.editService.durationEnd.hour - +$rootScope.quantityEditTime.hour));
-              // $scope.editService.durationStart = {
-              //   hour: +$scope.editService.durationEnd.hour - +$rootScope.quantityEditTime.hour,
-              //   minute: +$scope.editService.durationEnd.minute - +$rootScope.quantityEditTime.minute
-              // };
+              console.log('1235');
 
-              if ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour < 0) {
+              if ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour <= 0) {
                 $scope.editService.durationStart.time = $scope.editService.durationEnd.time === 'AM' ? 'PM' : 'AM' ;
               } else {
                 $scope.editService.durationStart.time = $scope.editService.durationEnd.time;
               }
 
-              if ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute < 0) {
+              if ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute <= 0) {
                 $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) > 0 ?
                   ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1)
                   : ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) + 12;
