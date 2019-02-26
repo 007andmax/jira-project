@@ -11,7 +11,8 @@
           type: '@',
           form: '=sqpForm',
           sqpDay: '<sqpDay',
-          sqpPeriod: '@sqpPeriod'
+          sqpPeriod: '@sqpPeriod',
+          time: '<'
         },
         link: function (scope, element, attrs) {
           if (scope.sqpDay) {
@@ -39,6 +40,10 @@
           scope.isDropdownShow = false;
 
           element.addClass('timer-quantity');
+          if (scope.time) {
+            hourElement.val(Math.floor(scope.time));
+            minutesElement.val((scope.time - Math.floor(scope.time)) * 60);
+          }
 
           // scope.$watch('quantity', function (val) {
           //   console.log(scope.quantity);
@@ -103,7 +108,6 @@
           }
 
           function onBlur() {
-            console.log(2);
             if (scope.type === 'minutes'){
                 var hours = Math.floor($rootScope.quantity/60),
                 minutes = minutesElement.val();

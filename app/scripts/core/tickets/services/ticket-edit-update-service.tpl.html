@@ -119,12 +119,13 @@
             </div>
           </div>
 
-          <!--<input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"-->
-          <!--ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>-->
+          <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
+          ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
         </div>
         <div ng-if="serviceExpenseDurationPresentation ==='DURATION_PICKER'">
           <div class="col-md-2 new-quantity-picker"
                service-quantity-picker="editService.quantity"
+               time="editService.quantity"
                type="hours"
                sqp-is-show-format="false"
                ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
@@ -138,6 +139,7 @@
           <div class="col-md-2 new-quantity-picker"
                service-quantity-picker="editService.quantity"
                sqp-is-show-format="false"
+               time="editService.quantity"
                type="minutes"
                ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
             <input id="service-quantity-picker-minutes" type="text" class="pointer new-input"
