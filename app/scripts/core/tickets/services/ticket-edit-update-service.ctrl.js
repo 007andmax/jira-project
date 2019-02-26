@@ -20,15 +20,19 @@
           var editDateStart = new Date($scope.service.durationStart);
           var editDateEnd = new Date($scope.service.durationEnd );
           $scope.editService.durationStart = {
-            hour: editDateStart.getHours() >= 13 ? editDateStart.getHours() - 13 : editDateStart.getHours(),
-            minute: editDateStart.getMinutes(),
-            time: editDateStart.getHours() >= 12 ? 'pm' : 'am'
+            hour: editDateStart.getHours() >= 12 ? editDateStart.getHours() - 12 : editDateStart.getHours(),
+            minute: editDateStart.getMinutes() > 9 ? editDateStart.getMinutes() : '0' + editDateStart.getMinutes(),
+            time: editDateStart.getHours() >= 12 ? 'PM' : 'AM'
           };
+
+          $scope.saveStartDate =  $scope.editService.durationStart;
           $scope.editService.durationEnd = {
-            hour: editDateEnd.getHours() >= 13 ? editDateEnd.getHours() - 13 : editDateEnd.getHours(),
-            minute: editDateEnd.getMinutes(),
-            time: editDateEnd.getHours() >= 12 ? 'pm' : 'am'
+            hour: editDateEnd.getHours() >= 12 ? editDateEnd.getHours() - 12 : editDateEnd.getHours(),
+            minute: editDateEnd.getMinutes() > 9 ? editDateEnd.getMinutes() : '0' + editDateEnd.getMinutes(),
+            time: editDateEnd.getHours() >= 12 ? 'PM' : 'AM'
           };
+          $scope.saveEndDate =  $scope.editService.durationEnd;
+          console.log($scope.saveStartDate, $scope.saveEndDate, '------');
           //TimePicker start
           $scope.showTimePicker = false;
           $scope.startDate = null;
@@ -115,12 +119,12 @@
               $scope.saveStartDate = {
                 hour: $scope.editService.durationStart.hour >= 13 ? $scope.editService.durationStart.hour - 12 : $scope.editService.durationStart.hour,
                 minute: $scope.editService.durationStart.minute,
-                time:  $scope.editService.durationStart.time >= 12 ? 'pm' : 'am'
+                time:  $scope.editService.durationStart.time
               };
               $scope.saveEndDate = {
                 hour: $scope.editService.durationEnd.hour >= 13 ? $scope.editService.durationEnd.hour - 12 : $scope.editService.durationEnd.hour,
                 minute: $scope.editService.durationEnd.minute,
-                time:  $scope.editService.durationEnd.time >= 12 ? 'pm' : 'am'
+                time:  $scope.editService.durationEnd.time
               };
               $rootScope.saveStartDate =  $scope.saveStartDate;
               $rootScope.saveEndDate =  $scope.saveEndDate;
