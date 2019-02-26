@@ -41,6 +41,11 @@
 
           element.addClass('timer-quantity');
           if (scope.time) {
+            $rootScope.quantityEditTime = {
+              hour: Math.floor(scope.time),
+              minute: (scope.time - Math.floor(scope.time)) * 60
+            };
+            console.log($rootScope.quantityEditTime);
             hourElement.val(Math.floor(scope.time));
             minutesElement.val((scope.time - Math.floor(scope.time)) * 60);
           }
@@ -74,7 +79,6 @@
           checkInput();
 
           function checkInput() {
-            console.log(3);
             if (input.val() === undefined) {
               input = element.find('[' + scope.sqpInput + ']');
               $timeout(checkInput, 100)
@@ -88,8 +92,6 @@
           }
 
           function onClick() {
-            console.log(1);
-            console.log(scope.quantity, 'scope.quantity');
             if (scope.sqpDay) {
               $rootScope.hideTimePickers = [scope.sqpDay, scope.sqpPeriod];
             }
@@ -103,7 +105,6 @@
               isDropdownShow = false;
               scope.isDropdownShow = false;
             }
-            console.log(scope.quantity, 'scope.quantity');
             $rootScope.quantity = scope.quantity;
           }
 
@@ -119,12 +120,6 @@
                 hours = splited.shift(),
                 minutes = splited.pop();
             }
-
-            console.log('hours=', hours);
-            console.log('minutes=', minutes);
-            console.log('minutes=', minutesElement);
-            console.log('minutes=', hourElement);
-
 
             if (!hours) {
               scope.quantity = 0;
@@ -219,8 +214,6 @@
           }
 
           function initPicker() {
-            console.log(5);
-            console.log(scope.quantity, 'scope.quantity');
             var url = '';
             if (scope.type === 'minutes') {
               url = '/html/scripts/common/templates/service-quantity-picker-minutes.tpl.html';
@@ -239,7 +232,6 @@
               hourDropdown.bind('mousedown', chooseQuantity);
               minuteDropdown.bind('mousedown', chooseQuantity);
               formatDropdown.bind('mousedown', chooseQuantity);
-              console.log(scope.quantity, 'scope.quantity');
               if (scope.quantity) {
                 setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
               }
@@ -306,7 +298,6 @@
           };
 
           function chooseQuantity(event) {
-            console.log(6);
             console.log(scope.quantity);
             var startHours = Math.floor(scope.quantity/60) ? Math.floor(scope.quantity)/60 : 0,
               startMinutes = (scope.quantity%60 > 0) ? (scope.quantity%60 > 0) : 0;
@@ -350,7 +341,18 @@
             quantityDropdown.hide();
             isDropdownShow = false;
             scope.isDropdownShow = false;
+            console.log(scope.time)
+            if (scope.type === 'minutes') {
+              console.log('minutes');
+              console.log(minutesElement.val(), '-------');
+              $rootScope.quantityEditTime.minute = minutesElement.val();
+            } else if (scope.type === 'hours') {
+              console.log('hour');
+              console.log(hourElement.val(), '-------');
+              $rootScope.quantityEditTime.hour = hourElement.val();
+            }
             scope.$apply();
+
           }
 
           function processingColumn(element, target) {

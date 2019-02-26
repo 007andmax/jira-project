@@ -67,6 +67,27 @@
             }
           });
 
+          $scope.$watch('editService.quantity', function (newValue, oldValue) {
+            var newMinutes = $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute > 10 ?
+              $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute
+              : '0' + ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute);
+            var newHours = $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour > 10 ?
+              $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour
+              : '0' + ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour);
+            $scope.editService.durationStart = {
+              hour: $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour,
+              minute: $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute
+            };
+            $scope.saveStartDate = {
+              hour: newHours,
+              minute: newMinutes
+            };
+
+            $rootScope.saveStartDate =  $scope.saveStartDate;
+
+            console.log($scope.editService.durationStart, '$scope.editService.durationStart');
+          });
+
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.editService.durationStart;
             $scope.saveEndDate = $scope.editService.durationEnd;
@@ -110,7 +131,8 @@
           //TimePicker end
 
           $scope.saveUpdateService = function (form) {
-            console.log(form.$valid, 'form.$valid');
+            console.log($scope.editService, '$scope.editService.quantity');
+
             if (form.$valid) {
               console.log('111111');
               var editVersionedId = $scope.editService.item.versionedId;
@@ -135,7 +157,7 @@
 
               var startDate = new Date();
               var endDate = new Date();
-              startDate.setHours($scope.saveStartDate.hour);
+              startDate.setHours($rootScope.saveStartDate.hour);
               startDate.setMinutes($rootScope.saveStartDate.minute);
               endDate.setHours($rootScope.saveEndDate.hour);
               endDate.setMinutes($rootScope.saveEndDate.minute);
