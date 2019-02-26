@@ -85,7 +85,6 @@
                 $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) > 0 ?
                   ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1)
                   : ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) + 12;
-                ;
                 $scope.editService.durationStart.minute = 60 + ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute);
               } else {
                 $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour) > 0 ?
@@ -205,10 +204,21 @@
 
               var startDate = new Date();
               var endDate = new Date();
-              startDate.setHours($rootScope.saveStartDate.hour);
+              if ($scope.saveStartDate.time === 'PM')  {
+                startDate.setHours($rootScope.saveStartDate.hour +12)
+              } else {
+                startDate.setHours($rootScope.saveStartDate.hour)
+              }
+              // startDate.setHours($rootScope.saveStartDate.hour);
               startDate.setMinutes($rootScope.saveStartDate.minute);
               endDate.setHours($rootScope.saveEndDate.hour);
+              if ($rootScope.saveEndDate.time === 'PM')  {
+                endDate.setHours($rootScope.saveStartDate.hour +12)
+              } else {
+                endDate.setHours($rootScope.saveStartDate.hour)
+              }
               endDate.setMinutes($rootScope.saveEndDate.minute);
+              console.log($scope.saveStartDate.time , 'scope.saveStartDate.time');
               if (
                 ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'AM') ||
                 ($scope.saveStartDate.time === 'AM' && $scope.saveEndDate.time === 'AM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour) ||
