@@ -695,8 +695,6 @@
 
           $scope.getFormatedTime = function(time) {
             var date = new Date(time);
-            console.log(date.getHours(), 'TIMEMEMMEMEME');
-            console.log(time, 'TIMEMEMMEMEME');
             var currentTime = {
               hour: date.getHours() < 10 ? '0' + date.getHours(): (date.getUTCHours() > 12 ? date.getHours()-12 : date.getHours() ),
               minute: date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes(),

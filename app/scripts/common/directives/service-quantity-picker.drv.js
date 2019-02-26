@@ -80,6 +80,15 @@
           //   }
           // });
 
+          scope.$watch('quantity', function(val) {
+            console.log(val, "VAL");
+            $rootScope.quantity = scope.quantity;
+            scope.quantity = val;
+            initPicker();
+            hourElement.val(Math.floor(val));
+            minutesElement.val(Math.floor((val - Math.floor(val))*60));
+          })
+
           scope.$watch(function() {
             return $rootScope.hideTimePickers;
           }, function(val) {
