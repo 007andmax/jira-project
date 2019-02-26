@@ -696,7 +696,7 @@
           $scope.getFormatedTime = function(time) {
             var date = new Date(time);
             var currentTime = {
-              hour: date.getHours() >= 13 ? date.getHours() - 13 : date.getHours(),
+              hour: date.getHours() < 10 ? '0' + date.getHours(): date.getHours(),
               minute: date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes(),
               time: date.getHours() >= 12 ? 'pm' : 'am'
             };
@@ -715,7 +715,6 @@
           };
 
           $scope.saveUpdateProduct = function (form, item, callback) {
-            // console.log(item, "IIIIII")
             if (form.$valid) {
               var product = item.item;
               var editVersionedId = product.versionedId;
@@ -858,16 +857,27 @@
                   var date = new Date(ticketUpdateToSend.services[i].date);
                   var startDate = new Date();
                   var endDate = new Date();
-                  startDate.setHours($rootScope.saveStartDate.hour);
+                  console.log($rootScope.saveStartDate, '$rootScope.saveStartDate');
+                  if ($rootScope.saveStartDate.time === 'pm') {
+                    console.log($rootScope.saveStartDate.hour +12);
+                    console.log('$rootScope.saveStartDate.hour +12');
+                    startDate.setHours($rootScope.saveStartDate.hour +12);
+                  } else {
+                    startDate.setHours($rootScope.saveStartDate.hour);
+                  }
                   startDate.setMinutes($rootScope.saveStartDate.minute);
-                  console.log($rootScope.saveEndDate, '$rootScope.saveEndDate');
-                  endDate.setHours($rootScope.saveEndDate.hour);
+                  if ($rootScope.saveStartDate.time === 'am') {
+                    endDate.setUTCHours($rootScope.saveEndDate.hour + 12);
+                  } else {
+                    endDate.setHours($rootScope.saveEndDate.hour);
+                  }
+                  console.log(startDate, endDate);
                   endDate.setMinutes($rootScope.saveEndDate.minute);
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
                     if (
-                      ($rootScope.saveStartDate.time === 'PM' && $rootScope.saveEndDate.time === 'AM') ||
-                      ($rootScope.saveStartDate.time === 'AM' && $rootScope.saveEndDate.time === 'AM' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour) ||
-                      ($rootScope.saveStartDate.time === 'PM' && $rootScope.saveEndDate.time === 'PM' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour)
+                      ($rootScope.saveStartDate.time === 'pm' && $rootScope.saveEndDate.time === 'am') ||
+                      ($rootScope.saveStartDate.time === 'am' && $rootScope.saveEndDate.time === 'am' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour) ||
+                      ($rootScope.saveStartDate.time === 'pm' && $rootScope.saveEndDate.time === 'pm' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour)
                     ) {
                       endDate.setDate(endDate.getDate() + 1);
                     }

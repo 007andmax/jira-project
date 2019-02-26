@@ -341,16 +341,19 @@
             quantityDropdown.hide();
             isDropdownShow = false;
             scope.isDropdownShow = false;
-            console.log(scope.time)
-            if (scope.type === 'minutes') {
-              console.log('minutes');
-              console.log(minutesElement.val(), '-------');
-              $rootScope.quantityEditTime.minute = minutesElement.val();
-            } else if (scope.type === 'hours') {
-              console.log('hour');
-              console.log(hourElement.val(), '-------');
-              $rootScope.quantityEditTime.hour = hourElement.val();
+            console.log(scope.time);
+            if ($rootScope.quantityEditTime) {
+              if (scope.type === 'minutes') {
+                console.log('minutes');
+                console.log(minutesElement.val(), '-------');
+                $rootScope.quantityEditTime.minute = minutesElement.val();
+              } else if (scope.type === 'hours') {
+                console.log('hour');
+                console.log(hourElement.val(), '-------');
+                $rootScope.quantityEditTime.hour = hourElement.val();
+              }
             }
+
             scope.$apply();
 
           }
