@@ -42,6 +42,7 @@
           $scope.attachment = 'inline';
           $scope.bindHtml = 'true';
           $scope.saveDateIsSet = false;
+          $scope.disableQuantityWatcher = false;
 
           $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation ?
             $rootScope.currentUser.serviceExpenseDurationPresentation
@@ -72,24 +73,50 @@
           });
 
           $scope.$watch('editService.quantity', function (newValue, oldValue) {
-            var newMinutes = $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute > 10 ?
-              $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute
-              : '0' + ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute);
-            var newHours = $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour > 10 ?
-              $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour
-              : '0' + ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour);
-            $scope.editService.durationStart = {
-              hour: $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour,
-              minute: $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute
-            };
-            $scope.saveStartDate = {
-              hour: newHours,
-              minute: newMinutes
-            };
+            console.log(newValue, 'newValue');
+            console.log($scope.editService.durationEnd, '$scope.editService.durationEnd');
+            if (!$scope.disableQuantityWatcher) {
+              // var newMinutes = $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute > 10 ?
+              //   $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute
+              //   : '0' + (+(+$scope.editService.durationEnd.minute - +$rootScope.quantityEditTime.minute));
+              // var newHours = $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour > 10 ?
+              //   $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour
+              //   : '0' + (+(+$scope.editService.durationEnd.hour - +$rootScope.quantityEditTime.hour));
+              // $scope.editService.durationStart = {
+              //   hour: +$scope.editService.durationEnd.hour - +$rootScope.quantityEditTime.hour,
+              //   minute: +$scope.editService.durationEnd.minute - +$rootScope.quantityEditTime.minute
+              // };
 
-            $rootScope.saveStartDate =  $scope.saveStartDate;
+              if ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour < 0) {
+                $scope.editService.durationStart.time = $scope.editService.durationEnd.time === 'AM' ? 'PM' : 'AM' ;
+              } else {
+                $scope.editService.durationStart.time = $scope.editService.durationEnd.time;
+              }
 
-            console.log($scope.editService.durationStart, '$scope.editService.durationStart');
+              if ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute < 0) {
+                $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) > 0 ?
+                  ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1)
+                  : ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) + 12;
+                ;
+                $scope.editService.durationStart.minute = 60 + ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute);
+              } else {
+                $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour) > 0 ?
+                  ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour)
+                  : ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour) + 12;
+                $scope.editService.durationStart.minute = $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute;
+              }
+
+              $scope.saveStartDate = {
+                hour: $scope.editService.durationStart.hour,
+                minute: $scope.editService.durationStart.minute,
+                time: $scope.editService.durationStart.time
+              };
+
+              $rootScope.saveStartDate = $scope.saveStartDate;
+
+              console.log($scope.editService.durationStart, '$scope.editService.durationStart');
+            }
+            $scope.disableQuantityWatcher = false;
           });
 
           $scope.saveTime = function () {
@@ -100,6 +127,36 @@
             $rootScope.saveEndDate =  $scope.saveEndDate;
             $scope.showTimePicker = !$scope.showTimePicker;
             $scope.saveDateIsSet = true;
+
+            console.log($scope.editService.durationStart, $scope.editService.durationEnd);
+
+            var newTimeStart = new Date();
+            var newHours = $scope.editService.durationStart.time === 'PM' ?
+              +$scope.editService.durationStart.hour + 12 : $scope.editService.durationStart.hour;
+            var newMinutes = $scope.editService.durationStart.minute;
+            newTimeStart.setHours(newHours);
+            newTimeStart.setMinutes(newMinutes);
+
+            var newTimeEnd = new Date();
+            var newHoursEnd = $scope.editService.durationEnd.time === 'PM' ?
+              +$scope.editService.durationEnd.hour + 12 : $scope.editService.durationEnd.hour;
+            var newMinutesEnd = $scope.editService.durationEnd.minute;
+            newTimeEnd.setHours(newHoursEnd);
+            newTimeEnd.setMinutes(newMinutesEnd);
+            console.log(newTimeEnd, newTimeStart);
+
+            if (newHoursEnd > newHours) {
+              $scope.disableQuantityWatcher = true;
+              $scope.editService.quantity = (newTimeEnd.getTime() - newTimeStart.getTime())/3600000
+            } else {
+              $scope.disableQuantityWatcher = true;
+              $scope.editService.quantity = (24*3600000 - (newTimeStart.getTime() - newTimeEnd.getTime()))/3600000
+            }
+            console.log($scope.editService.quantity);
+
+            $rootScope.quantityEditTime.hour = Math.floor($scope.editService.quantity);
+            $rootScope.quantityEditTime.minute = ($scope.editService.quantity - Math.floor($scope.editService.quantity)) *60;
+
           };
 
           $scope.cancelTime = function () {
@@ -135,8 +192,7 @@
           //TimePicker end
 
           $scope.saveUpdateService = function (form) {
-            console.log($scope.editService, '$scope.editService.quantity');
-
+            $scope.disableQuantityWatcher = true;
             if (form.$valid) {
               console.log('111111');
               var editVersionedId = $scope.editService.item.versionedId;

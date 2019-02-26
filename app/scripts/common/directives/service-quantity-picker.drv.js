@@ -21,6 +21,8 @@
             scope.sqpInput = 'sqp-input';
           }
 
+          scope.isWatchDisable = false;
+
           var quantityDropdown,
             isFormatShow = attrs.sqpIsShowFormat === 'true',
             isDropdownShow = false,
@@ -40,15 +42,27 @@
           scope.isDropdownShow = false;
 
           element.addClass('timer-quantity');
+          console.log(scope.time, 'SCOPE>TI<ME');
           if (scope.time) {
             $rootScope.quantityEditTime = {
               hour: Math.floor(scope.time),
-              minute: (scope.time - Math.floor(scope.time)) * 60
+              minute: Math.floor((scope.time - Math.floor(scope.time))*60)
             };
-            console.log($rootScope.quantityEditTime);
+            console.log($rootScope.quantityEditTime, '123512351235');
             hourElement.val(Math.floor(scope.time));
-            minutesElement.val((scope.time - Math.floor(scope.time)) * 60);
+            minutesElement.val(Math.floor((scope.time - Math.floor(scope.time))*60));
           }
+
+
+          // scope.$watch('time', function(val) {
+          //   if (scope.isWatchDisable) {
+          //     console.log(val, 'VAL');
+          //     hourElement.val(Math.floor(val));
+          //     minutesElement.val((val - Math.floor(val))*60);
+          //   }
+          //   scope.isWatchDisable = true;
+          //
+          // });
 
           // scope.$watch('quantity', function (val) {
           //   console.log(scope.quantity);
@@ -92,6 +106,7 @@
           }
 
           function onClick() {
+            scope.isWatchDisable = false;
             if (scope.sqpDay) {
               $rootScope.hideTimePickers = [scope.sqpDay, scope.sqpPeriod];
             }
@@ -106,6 +121,7 @@
               scope.isDropdownShow = false;
             }
             $rootScope.quantity = scope.quantity;
+            scope.isWatchDisable = true;
           }
 
           function onBlur() {
@@ -214,6 +230,7 @@
           }
 
           function initPicker() {
+            scope.isWatchDisable = false;
             var url = '';
             if (scope.type === 'minutes') {
               url = '/html/scripts/common/templates/service-quantity-picker-minutes.tpl.html';
@@ -278,6 +295,7 @@
                 }
               });
             });
+            scope.isWatchDisable = true;
           }
 
           function getMousePositionInsidePicker(event) {
@@ -299,7 +317,7 @@
 
           function chooseQuantity(event) {
             console.log(scope.quantity);
-            var startHours = Math.floor(scope.quantity/60) ? Math.floor(scope.quantity)/60 : 0,
+            var startHours = Math.floor(scope.quantity/60) ? Math.floor(scope.quantity/60) : 0,
               startMinutes = (scope.quantity%60 > 0) ? (scope.quantity%60 > 0) : 0;
 
             console.log( startHours, 'startHours');
@@ -318,17 +336,17 @@
               console.log(startHours, startMinutes);
               if ((parseFloat(hour) + parseFloat(minute)) < 1) {
                 input.val('');
-                scope.quantity = 0;
+                scope.quantity = scope.quantity ? scope.quantity : 0;
               } else {
                 if (scope.type === 'hours') {
                   hourElement.val(hour);
-                  scope.quantity = +(hour * 60 + +startMinutes) || undefined;
+                  scope.quantity = +(hour +startMinutes/60) || undefined;
                 } else if (scope.type === 'minutes') {
                   minutesElement.val(minute);
-                  scope.quantity = +(startHours *60) +(+minute) || undefined;
+                  scope.quantity = +(startHours) +(+minute/60) || undefined;
                 } else {
                   input.val(hour + ' : ' + minute);
-                  scope.quantity = +((+hour * 60) + +minute) || undefined;
+                  scope.quantity = +((+hour) + +minute/60) || undefined;
                 }
               }
 
@@ -352,6 +370,7 @@
                 console.log(hourElement.val(), '-------');
                 $rootScope.quantityEditTime.hour = hourElement.val();
               }
+              console.log($rootScope.quantityEditTime, '$rootScope.quantityEditTime');
             }
 
             scope.$apply();
