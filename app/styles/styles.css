@@ -12050,17 +12050,17 @@ button.close {
   display: none;
 }
 
-@media screen and (max-width: 1366px) {
-  .ticket-labels .progress-big-size,
-  .ticket-labels .priority-big-size {
-    display: none;
-  }
+/*@media screen and (max-width: 1366px) {*/
+  /*.ticket-labels .progress-big-size,*/
+  /*.ticket-labels .priority-big-size {*/
+    /*display: none;*/
+  /*}*/
   
-  .ticket-labels .progress-small-size,
-  .ticket-labels .priority-small-size {
-    display: block;
-  }
-}
+  /*.ticket-labels .progress-small-size,*/
+  /*.ticket-labels .priority-small-size {*/
+    /*display: block;*/
+  /*}*/
+/*}*/
 
 .bold {
   font-weight: 700;
@@ -12600,17 +12600,17 @@ button.close {
   /*}*/
 }
 
-@media screen and (max-width: 1366px) {
-  .ticket-labels .progress-big-size,
-  .ticket-labels .priority-big-size {
-    display: none;
-  }
+/*@media screen and (max-width: 1366px) {*/
+  /*.ticket-labels .progress-big-size,*/
+  /*.ticket-labels .priority-big-size {*/
+    /*display: none;*/
+  /*}*/
   
-  .ticket-labels .progress-small-size,
-  .ticket-labels .priority-small-size {
-    display: block;
-  }
-}
+  /*.ticket-labels .progress-small-size,*/
+  /*.ticket-labels .priority-small-size {*/
+    /*display: block;*/
+  /*}*/
+/*}*/
 
 .customer-list {
   padding: 45px 30px;

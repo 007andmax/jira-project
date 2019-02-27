@@ -345,6 +345,10 @@
     padding: 20px;
   }
   
+  .ticket-detail input {
+    margin-top: 45px;
+  }
+  
   .opened-ticket-list .ticket-post-update-wrapper {
     /*width: 540px;*/
     right: calc(100vw - 1266px);

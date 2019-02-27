@@ -753,7 +753,7 @@
 }
 
 .table-content .table-content-top .dropdown-menu {
-  top: 100%;
+  top: 100% !important;
 }
 
 .table-content .table-content-top .new-input {
