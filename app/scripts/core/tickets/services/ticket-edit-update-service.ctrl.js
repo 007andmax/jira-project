@@ -79,11 +79,11 @@
 
           $scope.$on('changeQuantity', function (event, newValue) {
             console.log(1, '1111');
+            console.log(newValue);
             $rootScope.quantityEditTime = {};
             $scope.quantity = newValue;
             $rootScope.quantityEditTime.hour = Math.floor(newValue);
             $rootScope.quantityEditTime.minute = (newValue - Math.floor(newValue))*60;
-            if (!$scope.disableQuantityWatcher) {
               if ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour <= 0) {
                 $scope.editService.durationStart.time = $scope.editService.durationEnd.time === 'AM' ? 'PM' : 'AM' ;
               } else {
@@ -110,7 +110,7 @@
 
               $rootScope.saveStartDate = $scope.saveStartDate;
               $scope.editService.quantity = $scope.quantity.toFixed(2);
-            }
+
             $scope.disableQuantityWatcher = false;
           });
 

@@ -46,8 +46,8 @@
           scope.$on('changeEditService', function(event, data) {
             console.log(data, 'DATA');
             scope.quantity = data >= 24 ? data - 24 : data;
-            console.log(Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60)), 'Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60))s');
-            minutesElement.val(Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60)));
+            console.log(Math.round(+((scope.quantity - Math.floor(scope.quantity))*60)), 'Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60))s');
+            minutesElement.val(Math.round(+((scope.quantity - Math.floor(scope.quantity))*60)));
             hourElement.val(Math.floor(scope.quantity));
           });
 
