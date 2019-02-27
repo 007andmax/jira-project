@@ -317,7 +317,7 @@
                   hourElement.val(hour);
                   console.log(hour, 'hour');
                   console.log(scope.quantity, 'hour before');
-                  scope.quantity = +hour + scope.quantity - Math.floor(scope.quantity)  || undefined;
+                  scope.quantity = +hour + +scope.quantity - Math.floor(scope.quantity)  || undefined;
                   console.log(scope.quantity, 'hour after');
                 } else if (scope.type === 'minutes') {
                   minutesElement.val(minute);

@@ -375,5 +375,5 @@
 }
 
 .no-clickable {
-  pointer-events:none;
+  pointer-events:none!important;
 }
