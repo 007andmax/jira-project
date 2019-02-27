@@ -72,9 +72,13 @@
             }
           });
 
-          $scope.$watch('editService.quantity', function (newValue, oldValue) {
+          $scope.$on('changeQuantity', function (event, newValue) {
+            console.log(1, '1111');
+            $rootScope.quantityEditTime = {};
+            $scope.quantity = newValue/60;
+            $rootScope.quantityEditTime.hour = Math.floor(newValue);
+            $rootScope.quantityEditTime.minute = (newValue - Math.floor(newValue))*60;
             if (!$scope.disableQuantityWatcher) {
-
               if ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour <= 0) {
                 $scope.editService.durationStart.time = $scope.editService.durationEnd.time === 'AM' ? 'PM' : 'AM' ;
               } else {
@@ -100,8 +104,7 @@
               };
 
               $rootScope.saveStartDate = $scope.saveStartDate;
-
-              console.log($scope.editService.durationStart, '$scope.editService.durationStart');
+              $scope.editService.quantity = $scope.quantity;
             }
             $scope.disableQuantityWatcher = false;
           });
@@ -138,7 +141,8 @@
               $scope.disableQuantityWatcher = true;
               $scope.editService.quantity = (24*3600000 - (newTimeStart.getTime() - newTimeEnd.getTime()))/3600000
             }
-            console.log($scope.editService.quantity);
+
+            $scope.$emit('changeEditService', $scope.editService.quantity);
 
             $rootScope.quantityEditTime.hour = Math.floor($scope.editService.quantity);
             $rootScope.quantityEditTime.minute = ($scope.editService.quantity - Math.floor($scope.editService.quantity)) *60;
@@ -213,9 +217,9 @@
               startDate.setMinutes($rootScope.saveStartDate.minute);
               endDate.setHours($rootScope.saveEndDate.hour);
               if ($rootScope.saveEndDate.time === 'PM')  {
-                endDate.setHours($rootScope.saveStartDate.hour +12)
+                endDate.setHours($rootScope.saveEndDate.hour +12)
               } else {
-                endDate.setHours($rootScope.saveStartDate.hour)
+                endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
               console.log($scope.saveStartDate.time , 'scope.saveStartDate.time');

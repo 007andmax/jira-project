@@ -43,51 +43,10 @@
 
           element.addClass('timer-quantity');
           console.log(scope.time, 'SCOPE>TI<ME');
-          if (scope.time) {
-            $rootScope.quantityEditTime = {
-              hour: Math.floor(scope.time),
-              minute: Math.floor((scope.time - Math.floor(scope.time))*60)
-            };
-            console.log($rootScope.quantityEditTime, '123512351235');
-            hourElement.val(Math.floor(scope.time));
-            minutesElement.val(Math.floor((scope.time - Math.floor(scope.time))*60));
-          }
 
-
-          // scope.$watch('time', function(val) {
-          //   if (scope.isWatchDisable) {
-          //     console.log(val, 'VAL');
-          //     hourElement.val(Math.floor(val));
-          //     minutesElement.val((val - Math.floor(val))*60);
-          //   }
-          //   scope.isWatchDisable = true;
-          //
-          // });
-
-          // scope.$watch('quantity', function (val) {
-          //   console.log(scope.quantity);
-          //   console.log(10);
-          //   console.log(val);
-          //
-          //   if (!inited || true) {
-          //
-          //
-          //     initPicker();
-          //     inited = true;
-          //   }
-          //   if (!val && input.val()) {
-          //     input.val('')
-          //   }
-          // });
-
-          scope.$watch('quantity', function(val) {
-            // console.log(val, "VAL");
-            // $rootScope.quantity = scope.quantity;
-            // scope.quantity = val;
-            // initPicker();
-            // hourElement.val(Math.floor(val));
-            // minutesElement.val(Math.floor((val - Math.floor(val))*60));
-          })
+          scope.$on('changeEditService', function(event, data) {
+            console.log(data, 'DATA');
+          });
 
           scope.$watch(function() {
             return $rootScope.hideTimePickers;
@@ -139,7 +98,7 @@
                 minutes = minutesElement.val();
             } else if(scope.type === 'hours') {
               var hours = hourElement.val(),
-                minutes = $rootScope.quantity % 60;
+                minutes = (scope.quantity - Math.floor(scope.quantity))*60;
             } else{
               var splited = input.val().split(' '),
                 hours = splited.shift(),
@@ -326,11 +285,9 @@
 
           function chooseQuantity(event) {
             console.log(scope.quantity);
-            var startHours = Math.floor(scope.quantity/60) ? Math.floor(scope.quantity/60) : 0,
-              startMinutes = (scope.quantity%60 > 0) ? (scope.quantity%60 > 0) : 0;
+            var startHours = Math.floor(scope.quantity) ? Math.floor(scope.quantity) : 0,
+              startMinutes = (scope.quantity%Math.floor(scope.quantity)> 0) ? ( scope.quantity - Math.floor(scope.quantity))*60 : 0;
 
-            console.log( startHours, 'startHours');
-            console.log( startMinutes, 'startMinutes');
             var hour = dropdownElement.hoverHour,
               minute = dropdownElement.hoverMinute;
             if (isFormatShow) {
@@ -348,15 +305,19 @@
                 scope.quantity = scope.quantity ? scope.quantity : 0;
               } else {
                 if (scope.type === 'hours') {
+                  console.log(startMinutes);
                   hourElement.val(hour);
-                  scope.quantity = +(hour +startMinutes/60) || undefined;
+                  scope.quantity = +(Math.floor(hour) +startMinutes/60) || undefined;
                 } else if (scope.type === 'minutes') {
+                  console.log(2);
                   minutesElement.val(minute);
-                  scope.quantity = +(startHours) +(+minute/60) || undefined;
+                  scope.quantity = +(Math.floor(startHours)) +(+minute/60) || undefined;
                 } else {
+                  console.log(3);
                   input.val(hour + ' : ' + minute);
                   scope.quantity = +((+hour) + +minute/60) || undefined;
                 }
+                console.log(scope.quantity, 'scope.quantity ');
               }
 
             }
@@ -368,21 +329,13 @@
             quantityDropdown.hide();
             isDropdownShow = false;
             scope.isDropdownShow = false;
-            console.log(scope.time);
-            if ($rootScope.quantityEditTime) {
-              if (scope.type === 'minutes') {
-                console.log('minutes');
-                console.log(minutesElement.val(), '-------');
-                $rootScope.quantityEditTime.minute = minutesElement.val();
-              } else if (scope.type === 'hours') {
-                console.log('hour');
-                console.log(hourElement.val(), '-------');
-                $rootScope.quantityEditTime.hour = hourElement.val();
-              }
-              console.log($rootScope.quantityEditTime, '$rootScope.quantityEditTime');
-            }
 
-            scope.$apply();
+            console.log(scope.quantity, 'scope.quantity!!!@#%!@#%!@#%!#@%!@#');
+            console.log(scope.quantity, 'scope.quantity!!!@#%!@#%!@#%!#@%!@#');
+            console.log(scope.quantity, 'scope.quantity!!!@#%!@#%!@#%!#@%!@#');
+            // scope.$apply();
+
+            scope.$emit('changeQuantity', scope.quantity);
 
           }
 
@@ -420,16 +373,29 @@
             var hour = value / 60 ^ 0;
             if (hour) {
               var minute = value % 60;
-              if (hour < 10) { hour = '0' + hour; }
-              if (minute < 10) { minute = '0' + minute; }
+              if (hour < 10) {
+                hour = '0' + hour;
+              }
+              if (minute < 10) {
+                minute = '0' + minute;
+              }
               setValue(hour, minute);
             } else {
               setValue('00', value < 10 ? '0' + value : value);
             }
+          }
 
             function setValue(hours, minute) {
-              console.log(8);
-              if (isFormatShow) {
+
+              if (scope.quantity) {
+                console.log(scope.quantity, 'scope.quantity')
+                if (scope.type === 'minutes') {
+                  minutesElement.val((scope.quantity - Math.floor(scope.quantity))*60);
+                } else if (scope.type === 'hours') {
+                  hourElement.val(Math.floor(scope.quantity));
+                }
+              } else if (isFormatShow) {
+                console.log(2);
                 input.val(hours + ' : ' + minute + ' ' + format);
                 dropdownElement.hoverHourElement = hourDropdown.find('li:nth-child(' + (+hours + 1) + ') a');
                 dropdownElement.hoverHourElement.css('background-color', '#f1f5fa');
@@ -470,7 +436,6 @@
                   minuteDropdown.css('top', maxTop + 'px');
                 }
 
-              }
             }
 
           }
