@@ -50,7 +50,7 @@
     <div class="col-2 new-quantity-picker" ng-if="serviceExpenseDurationPresentation==='TIME_PICKER'">
       <input type="text" class="pointer new-input"
              placeholder="Start date | End date"
-             value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
+             value="{{saveStartDate.hour}}:{{Math.floor(saveStartDate.minute)}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{Math.floor(saveEndDate.minute)}} {{saveEndDate.time}}"
              ng-click="showTimePickerBlock()"
              autocomplete="off" />
       <div class="timepicker-wrap" ng-if="showTimePicker">
