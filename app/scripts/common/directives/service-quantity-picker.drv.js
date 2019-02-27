@@ -46,7 +46,7 @@
 
           scope.$on('changeEditService', function(event, data) {
             console.log(data, 'DATA');
-            scope.quantity = data;
+            scope.quantity = (data).toFixed(2);
             minutesElement.val(Math.round((scope.quantity - Math.floor(scope.quantity))*60));
             hourElement.val(Math.floor(scope.quantity));
           });

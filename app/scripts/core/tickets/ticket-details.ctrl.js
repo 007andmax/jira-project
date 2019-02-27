@@ -794,7 +794,7 @@
             }
           };
 
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
+          $scope.saveTicketUpdate = function (form, type, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             console.log(1);
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
@@ -1529,24 +1529,24 @@
 
           }
 
-          $scope.$on('time', function(event, data) {
-            console.log('test,time', data);
-            console.log($scope, 'ticketUpdate.services');
-            $scope.ticketDetails.updates.map(function(item) {
-              console.log(item, 'ITEM');
-              if (item.services[0].id === data.id) {
-                console.log('123512351235123');
-                 item.services[0].durationEnd = data.durationEnd;
-                item.services[0].durationStart =  data.durationStart;
-                item.services[0].quantity = data.quantity;
-                console.log(item.services[0]);
-              }
-              return item;
-            })
-
-            console.log($scope.ticketDetails);
-
-          });
+          // $scope.$on('time', function(event, data) {
+          //   console.log('test,time', data);
+          //   console.log($scope, 'ticketUpdate.services');
+          //   $scope.ticketDetails.updates.map(function(item) {
+          //     console.log(item, 'ITEM');
+          //     if (item.services[0].id === data.id) {
+          //       console.log('123512351235123');
+          //        item.services[0].durationEnd = data.durationEnd;
+          //       item.services[0].durationStart =  data.durationStart;
+          //       item.services[0].quantity = data.quantity;
+          //       console.log(item.services[0]);
+          //     }
+          //     return item;
+          //   })
+          //
+          //   console.log($scope.ticketDetails);
+          //
+          // });
 
           var condition = 'ticketUpdate.note' +
             '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +

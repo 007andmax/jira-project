@@ -32,7 +32,8 @@
             time: editDateEnd.getHours() >= 12 ? 'PM' : 'AM'
           };
           $scope.saveEndDate =  $scope.editService.durationEnd;
-          console.log($scope.saveStartDate, $scope.saveEndDate, '------');
+          console.log($scope.editService.durationStart, '------');
+          console.log($scope.saveEndDate, '------');
           //TimePicker start
           $scope.showTimePicker = false;
           $scope.startDate = null;
@@ -104,7 +105,7 @@
               };
 
               $rootScope.saveStartDate = $scope.saveStartDate;
-              $scope.editService.quantity = $scope.quantity;
+              $scope.editService.quantity = $scope.quantity.toFixed(2);
             }
             $scope.disableQuantityWatcher = false;
           });
@@ -112,6 +113,7 @@
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.editService.durationStart;
             $scope.saveEndDate = $scope.editService.durationEnd;
+            console.log($scope.editService.durationStart, '$scope.editService.durationStart;');
             $rootScope.saveStartDate =  $scope.saveStartDate;
             $rootScope.saveEndDate =  $scope.saveEndDate;
             $scope.showTimePicker = !$scope.showTimePicker;
@@ -144,6 +146,7 @@
 
             $scope.$broadcast('changeEditService', $scope.editService.quantity);
 
+            $rootScope.quantityEditTime = $rootScope.quantityEditTime ? $rootScope.quantityEditTime : {};
             $rootScope.quantityEditTime.hour = Math.floor($scope.editService.quantity);
             $rootScope.quantityEditTime.minute = ($scope.editService.quantity - Math.floor($scope.editService.quantity)) *60;
 
@@ -165,19 +168,19 @@
             if (!$scope.saveDateIsSet) {
               $scope.currentDate = new Date();
               $scope.saveStartDate = {
-                hour: $scope.editService.durationStart.hour >= 13 ? $scope.editService.durationStart.hour - 12 : $scope.editService.durationStart.hour,
+                hour: $scope.editService.durationStart.hour >= 12 ? $scope.editService.durationStart.hour - 12 : $scope.editService.durationStart.hour,
                 minute: $scope.editService.durationStart.minute,
                 time:  $scope.editService.durationStart.time
               };
               $scope.saveEndDate = {
-                hour: $scope.editService.durationEnd.hour >= 13 ? $scope.editService.durationEnd.hour - 12 : $scope.editService.durationEnd.hour,
+                hour: $scope.editService.durationEnd.hour >= 12 ? $scope.editService.durationEnd.hour - 12 : $scope.editService.durationEnd.hour,
                 minute: $scope.editService.durationEnd.minute,
                 time:  $scope.editService.durationEnd.time
               };
               $rootScope.saveStartDate =  $scope.saveStartDate;
               $rootScope.saveEndDate =  $scope.saveEndDate;
-
             }
+            console.log($scope.saveStartDate , '$scope.saveStartDate');
           }
 
           //TimePicker end
@@ -208,31 +211,37 @@
 
               var startDate = new Date();
               var endDate = new Date();
+              console.log(startDate, 'startDate');
+              // alert(startDate);
+              // alert($rootScope.saveEndDate.hour);
               if ($scope.saveStartDate.time === 'PM')  {
-                startDate.setHours($rootScope.saveStartDate.hour +12)
+                startDate.setHours(+($rootScope.saveStartDate.hour) +12)
               } else {
                 startDate.setHours($rootScope.saveStartDate.hour)
               }
+              // alert(startDate);
               // startDate.setHours($rootScope.saveStartDate.hour);
               startDate.setMinutes($rootScope.saveStartDate.minute);
               endDate.setHours($rootScope.saveEndDate.hour);
+
               if ($rootScope.saveEndDate.time === 'PM')  {
-                endDate.setHours($rootScope.saveEndDate.hour +12)
+                endDate.setUTCHours($rootScope.saveEndDate.hour +12)
               } else {
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
-              console.log($scope.saveStartDate.time , 'scope.saveStartDate.time');
-              if (
-                ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'AM') ||
-                ($scope.saveStartDate.time === 'AM' && $scope.saveEndDate.time === 'AM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour) ||
-                ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'PM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour)
-              ) {
-                endDate.setDate(endDate.getDate() + 1);
-              }
+              // alert(startDate);
+              // if (
+              //   ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'AM') ||
+              //   ($scope.saveStartDate.time === 'AM' && $scope.saveEndDate.time === 'AM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour) ||
+              //   ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'PM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour)
+              // ) {
+              //   endDate.setDate(endDate.getDate() + 1);
+              // }
 
               console.log($scope.quantity, '$scope.quantity');
-              $scope.editService.quantity = $scope.quantity;
+              console.log(startDate, '$scope.quantity');
+              // $scope.editService.quantity = $scope.quantity;
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -241,7 +250,7 @@
                   id: $scope.editService.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: $scope.editService.description,
-                  quantity: (endDate.getTime() - startDate.getTime())/3600000 ,
+                  quantity: (+endDate.getTime() - +startDate.getTime() > 0) ? (+endDate.getTime() - +startDate.getTime())/3600000 : 24 - (+startDate.getTime() - +endDate.getTime())/3600000 ,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
