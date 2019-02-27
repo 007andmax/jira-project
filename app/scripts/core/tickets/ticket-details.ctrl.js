@@ -696,7 +696,7 @@
           $scope.getFormatedTime = function(time) {
             var date = new Date(time);
             var currentTime = {
-              hour: date.getHours() < 10 ? '0' + date.getHours(): (date.getUTCHours() > 12 ? date.getHours()-12 : date.getHours() ),
+              hour: date.getHours() < 10 ? '0' + date.getHours(): (date.getHours() > 12 ? date.getHours()-12 : date.getHours() ),
               minute: date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes(),
               time: date.getHours() >= 12 && date.getHours() <= 24 ? 'PM' : 'AM'
             };
@@ -795,6 +795,7 @@
           };
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
+            console.log(1);
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
@@ -810,7 +811,7 @@
             }
 
 
-
+            console.log(2);
             if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (el.item && typeof el.item.name === 'object') {
@@ -823,8 +824,12 @@
 
 
 
+            console.log(3);
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
+            console.log(4);
+            console.log(form);
+            console.log(isEmptyProductValid || form.$valid, 'isEmptyProductValid || form.$valid');
             if (isEmptyProductValid || form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -894,8 +899,9 @@
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 }
 
+                console.log(4);
               } else if ($scope.haveAttachments() || $scope.haveNote()) {
-
+                console.log(5);
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
                 ticketUpdateToSend.attachments = [];
 
@@ -904,6 +910,8 @@
                 }
 
               }
+
+              console.log(6);
 
               for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
 
