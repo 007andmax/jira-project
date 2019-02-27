@@ -42,12 +42,12 @@
           scope.isDropdownShow = false;
 
           element.addClass('timer-quantity');
-          console.log(scope.time, 'SCOPE>TI<ME');
 
           scope.$on('changeEditService', function(event, data) {
             console.log(data, 'DATA');
-            scope.quantity = (data).toFixed(2);
-            minutesElement.val(Math.round((scope.quantity - Math.floor(scope.quantity))*60));
+            scope.quantity = data;
+            console.log(Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60)), 'Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60))s');
+            minutesElement.val(Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60)));
             hourElement.val(Math.floor(scope.quantity));
           });
 
@@ -102,7 +102,7 @@
                 minutes = minutesElement.val();
             } else if(scope.type === 'hours') {
               var hours = hourElement.val(),
-                minutes = (scope.quantity - Math.floor(scope.quantity))*60;
+                minutes = +((scope.quantity - Math.floor(scope.quantity))*60).toFixed(2);
                 console.log(minutes, 'minutes');
             } else{
               var splited = input.val().split(' '),
@@ -314,15 +314,15 @@
               } else {
                 scope.quantity = scope.quantity ? scope.quantity : 0;
                 if (scope.type === 'hours') {
-                  hourElement.val(hour);
+                  hourElement.val(Math.floor(hour));
                   console.log(hour, 'hour');
                   console.log(scope.quantity, 'hour before');
                   scope.quantity = +hour + +scope.quantity - Math.floor(scope.quantity)  || undefined;
                   console.log(scope.quantity, 'hour after');
                 } else if (scope.type === 'minutes') {
-                  minutesElement.val(minute);
+                  minutesElement.val((+(minute)).toFixed(2));
                   console.log(scope.quantity, 'minute before');
-                  scope.quantity = Math.floor(scope.quantity) + ((+minute)/60) || undefined;
+                  scope.quantity = (Math.floor(scope.quantity) + ((+minute)/60)) || undefined;
                   console.log(scope.quantity, 'minute after');
                 } else {
                   input.val(hour + ' : ' + minute);
@@ -397,7 +397,7 @@
               if (scope.quantity) {
                 console.log(scope.quantity, 'scope.quantity')
                 if (scope.type === 'minutes') {
-                  minutesElement.val((scope.quantity - Math.floor(scope.quantity))*60);
+                  minutesElement.val(Math.floor((scope.quantity - Math.floor(scope.quantity))*60));
                 } else if (scope.type === 'hours') {
                   hourElement.val(Math.floor(scope.quantity));
                 }
