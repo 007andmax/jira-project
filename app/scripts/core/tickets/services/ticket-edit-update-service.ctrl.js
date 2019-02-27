@@ -75,7 +75,7 @@
           $scope.$on('changeQuantity', function (event, newValue) {
             console.log(1, '1111');
             $rootScope.quantityEditTime = {};
-            $scope.quantity = newValue/60;
+            $scope.quantity = newValue;
             $rootScope.quantityEditTime.hour = Math.floor(newValue);
             $rootScope.quantityEditTime.minute = (newValue - Math.floor(newValue))*60;
             if (!$scope.disableQuantityWatcher) {
@@ -142,7 +142,7 @@
               $scope.editService.quantity = (24*3600000 - (newTimeStart.getTime() - newTimeEnd.getTime()))/3600000
             }
 
-            $scope.$emit('changeEditService', $scope.editService.quantity);
+            $scope.$broadcast('changeEditService', $scope.editService.quantity);
 
             $rootScope.quantityEditTime.hour = Math.floor($scope.editService.quantity);
             $rootScope.quantityEditTime.minute = ($scope.editService.quantity - Math.floor($scope.editService.quantity)) *60;
@@ -231,7 +231,8 @@
                 endDate.setDate(endDate.getDate() + 1);
               }
 
-              console.log(startDate.getTime(), endDate.getTime() , 'endDate.getTime();');
+              console.log($scope.quantity, '$scope.quantity');
+              $scope.editService.quantity = $scope.quantity;
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -240,7 +241,7 @@
                   id: $scope.editService.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: $scope.editService.description,
-                  quantity: (endDate.getTime() - startDate.getTime())/ 3600000,
+                  quantity: (endDate.getTime() - startDate.getTime())/3600000 ,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
