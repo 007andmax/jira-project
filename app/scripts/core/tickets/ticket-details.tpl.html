@@ -329,7 +329,8 @@
                  te-html-maxlength="50000">
 
               <div te-editor class="form-control editor" contenteditable="true"
-                   style="min-height: 92px;height: auto;border: none; color: rgb(64, 75, 95);" data-text="Type your message..."></div>
+                   style="min-height: 92px;height: auto;border: none; color: rgb(64, 75, 95);"
+                   data-text="Type your message..."></div>
 
             </div>
           </div>
@@ -345,7 +346,8 @@
             <span>Attachments</span>
 
             <div class="attachments-icons">
-              <div ng-repeat="type in reducedAttachmentsTypes" class="file-icon-name attach-type-{{ type }} pointer" qt-icon-toggle-to-change></div>
+              <div ng-repeat="type in reducedAttachmentsTypes" class="file-icon-name attach-type-{{ type }} pointer"
+                   qt-icon-toggle-to-change></div>
             </div>
           </div>
           <div class="combined-shape expand-down" qt-icon-toggle-to-change></div>
@@ -558,16 +560,31 @@
 
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
                   <div class="table-content-top clearfix">
-                    <div class="col-md-8 ellipsis pre-line">{{product.item.description}}</div>
-                    <div class="col-md-1">{{product.item.sale | currency:'$':2}}</div>
-                    <div class="col-md-1" style="color: #9ca5b6">Qty {{ product.quantity }}</div>
-                    <div class="col-md-2 text-right">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}
+                    <div class="col-md-9 ellipsis">
+                      <p>Product</p>
+                      <p class="pre-line">{{product.item.description}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Price</p>
+                      <p>{{product.item.sale | currency:'$':2}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Quantity</p>
+                      <p style="color: #9ca5b6">Qty {{ product.quantity }}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Total</p>
+                      <p>{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</p>
                     </div>
                   </div>
-
                   <div class="table-content-bottom clearfix">
-                    <div class="col-md-10">{{product.serialNumber}}</div>
-                    <div class="col-md-2 text-right" style="color:#2ec866 ">{{product.discountAmount}}% Discount</div>
+                    <div class="col-md-10">
+                      <p>Serial Number</p>
+                      <p>{{product.serialNumber}}</p>
+                    </div>
+                    <div class="col-md-2 text-right text-righttable-content-top clearfix" style="color:#2ec866 ">
+                      {{product.discountAmount}}% Discount
+                    </div>
                   </div>
 
                   <div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">
@@ -595,23 +612,32 @@
                    ng-if=" ticketUpdate.type === 'SERVICE'">
                 <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
                   <div class="table-content-top clearfix">
-                    <div class="col-md-2">Date</div>
-                    <div class="col-md-4">Service name</div>
-                    <div class="col-md-2">Time in</div>
-                    <div class="col-md-2">Time out</div>
-                    <div class="col-md-2 text-right"><span style="color: #9ca5b6">Duration</span>
+                    <div class="col-md-2">
+                      <p>Date</p>
+                      <p>{{ service.date | date:'dd MMM yyyy'}}</p>
                     </div>
-                  </div>
-                  <div class="table-content-top clearfix">
-                    <div class="col-md-2">{{ service.date | date:'dd MMM yyyy'}}</div>
-                    <div class="col-md-4">{{ service.item.name }}</div>
-                    <div class="col-md-2">{{getFormatedTime(service.durationStart)}}</div>
-                    <div class="col-md-2">{{getFormatedTime(service.durationEnd)}}</div>
-                    <div class="col-md-2 text-right"><span style="color: #9ca5b6">{{ service.quantity | durationFilter }}</span>
+                    <div class="col-md-6">
+                      <p>Service name</p>
+                      <p>{{ service.item.name }}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Time in</p>
+                      <p>{{getFormatedTime(service.durationStart)}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Time out</p>
+                      <p>{{getFormatedTime(service.durationEnd)}}</p>
+                    </div>
+                    <div class="col-md-1" style="width: 8%;">
+                      <p>Duration</p>
+                      <p>{{ service.quantity | durationFilter }}</p>
                     </div>
                   </div>
                   <div class="table-content-bottom clearfix">
-                    <div class="col-md-12">{{ service.description ? service.description : '&nbsp;' }}</div>
+                    <div class="col-md-12">
+                      <p>Description</p>
+                      <p>{{ service.description ? service.description : '&nbsp;' }}</p>
+                    </div>
                   </div>
 
                   <!--<div class="col-1">{{ service.date | date:'dd MMM yyyy'}}</div>-->

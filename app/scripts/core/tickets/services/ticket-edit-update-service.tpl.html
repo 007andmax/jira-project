@@ -2,7 +2,8 @@
   <form name="updateTicketService">
     <div class="table-content service-table">
       <div class="table-content-top clearfix">
-        <div class="col-md-3 service-datetimepicker" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
+        <div class="col-md-3 service-datetimepicker"
+             ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
           <div uib-dropdown>
             <i class="icn-sm report-caret-icon" style="position: absolute;top: 14px;right: 13px;z-index: 1;"></i>
             <input type="text" qt-data-time-picker max-date="maxServiceDate"
@@ -15,7 +16,7 @@
                    tooltip-append-to-body="true">
           </div>
         </div>
-        <div class="col-md-3" ng-class="{'has-error': !editService.item.versionedId.id}">
+        <div class="col-md-5 service-title" ng-class="{'has-error': !editService.item.versionedId.id}">
           <div uib-dropdown>
             <input type="text" value="Onsite" class="new-input form-control has-dropdown" placeholder="Service"
                    name="serviceName" placeholder="Service" uib-dropdown-toggle aria-expanded="false"
@@ -38,7 +39,7 @@
           </div>
         </div>
         <div class="col-md-2 new-quantity-picker">
-          <input type="text" class="pointer new-input"
+          <input type="text" class="pointer new-input form-control"
                  placeholder="Start date | End date"
                  value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
                  ng-click="showTimePickerBlock()"
@@ -48,15 +49,18 @@
               <div class="timepicker-choosen-time">
                 <div class="col-6 timepicker-choosen-time__start-time">
                   <p class="col-12">Start time</p>
-                  <p class="col-12">{{editService.durationStart.hour}}:{{editService.durationStart.minute}} {{editService.durationStart.time}}</p>
+                  <p class="col-12">{{editService.durationStart.hour}}:{{editService.durationStart.minute}}
+                                    {{editService.durationStart.time}}</p>
                 </div>
                 <div class="col-6 timepicker-choosen-time__end-time">
                   <p class="col-12">End time</p>
-                  <p class="col-12">{{editService.durationEnd.hour}}:{{editService.durationEnd.minute}} {{editService.durationEnd.time}}</p>
+                  <p class="col-12">{{editService.durationEnd.hour}}:{{editService.durationEnd.minute}}
+                                    {{editService.durationEnd.time}}</p>
                 </div>
               </div>
               <div class="timepicker-start-time timepicker-time">
-                <proton:multi-list-picker ng-model="editService.durationStart" attachment="{{attachment}}" bind-html="{{bindHtml}}"
+                <proton:multi-list-picker ng-model="editService.durationStart" attachment="{{attachment}}"
+                                          bind-html="{{bindHtml}}"
                                           done="showTimePicker = false">
                   <proton:multi-list-picker-divider>
                   </proton:multi-list-picker-divider>
@@ -85,7 +89,8 @@
               </div>
               <div class="timepicker-end-time timepicker-time"
                    ng-class="{ 'no-clickable': serviceExpenseDurationPresentation==='DURATION_PICKER'} ">
-                <proton:multi-list-picker ng-model="editService.durationEnd" attachment="{{attachment}}" bind-html="{{bindHtml}}"
+                <proton:multi-list-picker ng-model="editService.durationEnd" attachment="{{attachment}}"
+                                          bind-html="{{bindHtml}}"
                                           done="showTimePicker = false">
                   <proton:multi-list-picker-divider>
                   </proton:multi-list-picker-divider>
@@ -120,29 +125,29 @@
           </div>
 
           <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
-          ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
+                 ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
         </div>
         <div ng-if="serviceExpenseDurationPresentation ==='DURATION_PICKER'">
-          <div class="col-md-2 new-quantity-picker"
+          <div class="col-md-1 new-quantity-picker"
                service-quantity-picker="editService.quantity"
                time="editService.quantity"
                type="hours"
                sqp-is-show-format="false"
                ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
-            <input id="service-quantity-picker-hour" type="text" class="pointer new-input"
+            <input id="service-quantity-picker-hour" type="text" class="form-control pointer new-input"
                    placeholder="Hr(s)" sqp-input
                    ng-disabled="serviceExpenseDurationPresentation==='TIME_PICKER'"
-                   autocomplete="off" aria-expanded="true"  smart-dropdown-menu-position="hour" />
+                   autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="hour" />
             <input type="hidden" ng-model="editService.quantity" name="serviceTime"
                    ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
           </div>
-          <div class="col-md-2 new-quantity-picker"
+          <div class="col-md-1 new-quantity-picker"
                service-quantity-picker="editService.quantity"
                sqp-is-show-format="false"
                time="editService.quantity"
                type="minutes"
                ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
-            <input id="service-quantity-picker-minutes" type="text" class="pointer new-input"
+            <input id="service-quantity-picker-minutes" type="text" class="form-control pointer new-input"
                    placeholder="Mn" sqp-input
                    ng-disabled="serviceExpenseDurationPresentation==='TIME_PICKER'"
                    autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="hour" />

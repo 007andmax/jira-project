@@ -441,8 +441,17 @@
   background-color: #e7ecf2;
 }
 
+.table-wrapper .service-table .service-datetimepicker .bootstrap-datetimepicker-widget {
+  left: 0 !important;
+  top: calc(100% + 1px);
+}
+
 .table-wrapper .service-table .col-1 {
   width: 114px;
+}
+
+.table-wrapper .service-table .col-md-1 {
+  width: 11.8%;
 }
 
 .table-wrapper .table-content .col-2 {
@@ -451,7 +460,6 @@
 }
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
-  /*new*/
   width: 64%;
   float: left;
 }
@@ -698,6 +706,14 @@
   }
 }
 
+.product-upd .table-content-top .col-md-1 {
+  width: 12%;
+}
+
+.product-upd .table-content-top .col-md-9 {
+  width: 64%;
+}
+
 @media screen and (max-width: 1440px) {
   .table-wrapper.product-upd .table-content .col-1 {
     width: 15%;
@@ -732,6 +748,22 @@
   border-bottom: 1px solid #edf2f6;
 }
 
+.table-content .table-content-top .timepicker {
+  top: 6px;
+}
+
+.table-content .table-content-top .dropdown-menu {
+  top: 100%;
+}
+
+.table-content .table-content-top .new-input {
+  padding: 5px 12px;
+}
+
+.table-content-top.without-duration .service-title {
+  width: 58.33333333%;
+}
+
 .ticket-update-service-edit .table-content .table-content-top,
 .ticket-update-service-edit .table-content .table-content-bottom,
 .ticket-update-product-edit .table-content .table-content-top,
@@ -742,6 +774,18 @@
 .table-content .table-content-top,
 .table-content .table-content-bottom {
   padding: 6.5px 15px;
+}
+
+.table-wrapper .service-table .col-md-1.timer-quantity {
+  width: 8.33333333%;
+}
+
+.table-wrapper .service-table .col-md-5.service-title {
+  width: 40%;
+}
+
+.table-wrapper .service-table .col-md-2.new-quantity-picker {
+  width: 18%;
 }
 
 @media screen and (min-width: 2048px) {
@@ -766,23 +810,57 @@
   }
 }
 
+.table-content .table-content-top .new-input,
+.table-content .table-content-bottom .new-input {
+  padding: 5px;
+}
+
 @media screen and (max-width: 1600px) {
+  .table-content input {
+    font-size: 12px;
+  }
+  
+  .table-content .table-content-top .timepicker {
+    right: 0;
+  }
+  
   .table-content.service-table .col-3 {
     padding-left: 342px;
   }
   
-  .opened-ticket-list .product-upd .table-content-top .col-md-8 {
+  .table-wrapper .service-table .col-md-1 {
+    width: 15.8%;
+  }
+  
+  .table-wrapper .service-table .col-md-6 {
+    width: 41.66666667%;
+  }
+  
+  .table-wrapper .service-table .table-content-top.without-duration .service-title {
     width: 50%;
   }
   
-  .opened-ticket-list .product-upd .table-content-top .col-md-1 {
-    width: 16.66666667%;;
+  .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker,
+  .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
+    width: 25%;
   }
   
-  .ticket-update-service-edit {
-    padding: 30px 40px 30px 50px;
+  .table-wrapper .service-table .col-md-1.timer-quantity {
+    width: 9%;
   }
   
+  .table-wrapper .service-table .col-md-3.service-datetimepicker,
+  .table-wrapper .service-table .col-md-2.new-quantity-picker {
+    width: 23%;
+  }
+  
+  .table-wrapper .service-table .col-md-5.service-title {
+    width: 36%;
+  }
+  
+  /*.ticket-update-service-edit {*/
+  /*padding: 30px 40px 30px 50px;*/
+  /*}*/
   .ticket-update-product-edit {
     padding: 0;
   }
@@ -821,8 +899,37 @@
 }
 
 @media screen and (max-width: 1366px) {
+  .opened-ticket-list .product-upd .table-content-top .col-md-1 {
+    width: 33.33333%;
+  }
+  
+  .opened-ticket-list .product-upd .table-content-top .col-md-9,
+  .opened-ticket.opened-ticket-list .ticket-update-product-edit .table-content-top .col-md-6 {
+    width: 100%;
+  }
+  
+  .table-content .table-content-top .timepicker {
+    right: auto;
+  }
+  
+  .table-content .table-content-top.without-duration .timepicker {
+    right: 0;
+  }
+  
   .table-content.service-table .col-3 {
     padding-left: 295px;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-title {
+    width: 40%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker {
+    width: 27%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
+    width: 33%;
   }
   
   .table-wrapper .table-content .form-group input {
@@ -847,6 +954,26 @@
   
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 75%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-3.service-datetimepicker,
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker,
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-1.timer-quantity {
+    width: 33.33333%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {
+    width: 66.66666%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-1,
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-2 {
+    width: 33.33333333%;
+    text-align: left !important;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-6 {
+    width: 66.66666667%;
   }
 }
 

@@ -895,7 +895,7 @@ aside#left div.nav-title {
 /*service quantity picker*/
 
 .clearfix-service-quantity {
-  z-index: 10;
+  z-index: 999;
 }
 
 .clearfix-service-quantity:before,
