@@ -73,6 +73,10 @@
             }
           });
 
+          $scope.getDecimalMinutes = function(value){
+            return Math.round(value)
+          }
+
           $scope.$on('changeQuantity', function (event, newValue) {
             console.log(1, '1111');
             $rootScope.quantityEditTime = {};

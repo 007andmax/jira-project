@@ -41,7 +41,7 @@
         <div class="col-md-2 new-quantity-picker">
           <input type="text" class="pointer new-input form-control"
                  placeholder="Start date | End date"
-                 value="{{saveStartDate.hour}}:{{(saveStartDate.minute).toFixed(0)}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{(saveEndDate.minute).toFixed(0)}} {{saveEndDate.time}}"
+                 value="{{saveStartDate.hour}}:{{getDecimalMinutes(saveStartDate.minute)}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{getDecimalMinutes(saveEndDate.minute)}} {{saveEndDate.time}}"
                  ng-click="showTimePickerBlock()"
                  autocomplete="off" />
           <div class="timepicker-wrap" ng-if="showTimePicker">
