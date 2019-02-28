@@ -149,14 +149,14 @@
             console.log(newHoursEnd);
 
             if (newHours == 12 &&  $scope.serviceExpenseDurationPresentation !== 'TIME_PICKER') {
-              alert(1);
+              // alert(1);
               $scope.editService.quantity = 12 - +(newTimeStart.getTime() - newTimeEnd.getTime())/3600000
             }else if (newHoursEnd > newHours) {
-              alert(2);
+              // alert(2);
               $scope.disableQuantityWatcher = true;
               $scope.editService.quantity = (newTimeEnd.getTime() - newTimeStart.getTime())/3600000
             } else {
-              alert(3);
+              // alert(3);
               $scope.disableQuantityWatcher = true;
               $scope.editService.quantity = (24*3600000 - (newTimeStart.getTime() - newTimeEnd.getTime()))/3600000
             }
