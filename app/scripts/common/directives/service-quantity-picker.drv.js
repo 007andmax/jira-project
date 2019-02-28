@@ -152,6 +152,7 @@
             }
 
             console.log(scope.quantity);
+            $rootScope.quantityToCreateDurationService = scope.quantity;
             scope.$apply();
 
           }
