@@ -244,7 +244,7 @@
               endDate.setHours($rootScope.saveEndDate.hour);
 
               if ($rootScope.saveEndDate.time === 'PM')  {
-                endDate.setUTCHours($rootScope.saveEndDate.hour +12)
+                endDate.setHours($rootScope.saveEndDate.hour +12)
               } else {
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
