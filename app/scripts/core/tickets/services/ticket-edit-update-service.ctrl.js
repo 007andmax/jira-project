@@ -145,10 +145,14 @@
             $scope.saveEndDate = $scope.editService.durationEnd;
             $scope.showTimePicker = !$scope.showTimePicker;
             $scope.saveDateIsSet = true;
-
             var newTimeStart = new Date();
-            var newHours = $scope.editService.durationStart.time === 'PM' && $scope.editService.durationStart.hour !== 12?
-              +$scope.editService.durationStart.hour + 12 : $scope.editService.durationStart.hour;
+            var newHours = $scope.editService.durationStart.hour;
+
+            if ($scope.editService.durationStart.time === 'PM' && $scope.editService.durationStart.hour != 12) {
+              newHours = +$scope.editService.durationStart.hour + 12
+            } else {
+              newHours = +$scope.editService.durationStart.hour;
+            }
             if ($scope.editService.durationStart.time === 'AM' &&  $scope.editService.durationStart.hour == 12) {
               newHours = 0;
             }
@@ -183,9 +187,6 @@
               $scope.editService.quantity = (endMs-startMs)/3600000;
               $rootScope.quantityForSave = (endMs-startMs)/3600000;
             }
-            console.log($rootScope.quantityForSave, '1');
-            console.log($rootScope.saveForEndDate, '2');
-            console.log($rootScope.saveForStartDate, '3');
             $scope.$broadcast('changeEditService', $rootScope.quantityForSave);
 
             $rootScope.quantityEditTime = $rootScope.quantityEditTime ? $rootScope.quantityEditTime : {};
