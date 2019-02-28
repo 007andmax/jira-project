@@ -160,7 +160,7 @@
             $rootScope.saveStartDate.minute = newMinutes;
 
             var newTimeEnd = new Date();
-            var newHoursEnd = $scope.editService.durationEnd.time === 'PM' ?
+            var newHoursEnd = $scope.editService.durationEnd.time === 'PM' & $scope.editService.durationEnd.hour !== 12?
               +$scope.editService.durationEnd.hour + 12 : $scope.editService.durationEnd.hour;
             if ($scope.editService.durationEnd.time === 'AM' &&  $scope.editService.durationEnd.hour == 12) {
               newHoursEnd = 0;
@@ -171,10 +171,15 @@
             $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
             $rootScope.saveForEndDate = new Date(newTimeEnd.getTime());
 
+
             var startMs = $rootScope.saveForStartDate.getTime();
             var endMs = $rootScope.saveForEndDate.getTime();
 
-            if ($rootScope.saveForStartDate.getTime() > $rootScope.saveForEndDate.getTime()) {
+            alert($rootScope.saveForStartDate);
+            alert($rootScope.saveForEndDate);
+            alert((startMs-endMs));
+            if (startMs-endMs > 0) {
+              alert(1);
               endMs = endMs + 24*3600000;
               $scope.editService.quantity = (endMs-startMs)/3600000;
               $rootScope.quantityForSave = (endMs-startMs)/3600000;
