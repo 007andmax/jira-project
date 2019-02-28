@@ -16,22 +16,40 @@
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
 
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
-          console.log($scope.service, '$scope.service');
           var editDateStart = new Date($scope.service.durationStart);
           var editDateEnd = new Date($scope.service.durationEnd );
+          console.log(editDateStart, 'editDateStart');
+          console.log(editDateEnd, 'editDateStart');
+
+
           $scope.editService.durationStart = {
-            hour: editDateStart.getHours() >= 13 ? editDateStart.getHours() - 12 : editDateStart.getHours(),
+            hour: getHourForAmPm(editDateStart),
             minute: editDateStart.getMinutes() > 9 ? editDateStart.getMinutes() : '0' + editDateStart.getMinutes(),
-            time: editDateStart.getHours() >= 13 ? 'PM' : 'AM'
+            time: editDateStart.getHours() >= 12 ? 'PM' : 'AM'
+          };
+
+          $scope.editService.durationEnd = {
+            hour: getHourForAmPm(editDateEnd),
+            minute: editDateEnd.getMinutes() > 9 ? editDateEnd.getMinutes() : '0' + editDateEnd.getMinutes(),
+            time: editDateEnd.getHours() >= 12 ? 'PM' : 'AM'
           };
 
           $scope.saveStartDate =  $scope.editService.durationStart;
-          $scope.editService.durationEnd = {
-            hour: editDateEnd.getHours() >= 13 ? editDateEnd.getHours() - 12 : editDateEnd.getHours(),
-            minute: editDateEnd.getMinutes() > 9 ? editDateEnd.getMinutes() : '0' + editDateEnd.getMinutes(),
-            time: editDateEnd.getHours() >= 13 ? 'PM' : 'AM'
-          };
           $scope.saveEndDate =  $scope.editService.durationEnd;
+
+
+          function getHourForAmPm(editDateStart) {
+            if (editDateStart.getHours() >= 13) {
+              return editDateStart.getHours() - 12
+            } else if (editDateStart.getHours() == 0){
+              return 12
+            } else {
+              return editDateStart.getHours();
+            }
+          }
+
+
+
           console.log($scope.editService.durationStart, '------');
           console.log($scope.saveEndDate, '------');
           //TimePicker start
@@ -74,12 +92,12 @@
           });
 
           $scope.getDecimalMinutes = function(value){
-            return Math.round(value) > 10 ? Math.round(value) : '0' + Math.round(value)
+            return Math.round(value) > 9 ? Math.floor(value) :  Math.floor(value);
           }
 
           $scope.$on('changeQuantity', function (event, newValue) {
-            console.log(1, '1111');
-            console.log(newValue);
+            $rootScope.saveForStartDate = new Date($rootScope.saveForEndDate.getTime() - newValue*3600000);
+
             $rootScope.quantityEditTime = {};
             $scope.quantity = newValue;
             $rootScope.quantityEditTime.hour = Math.floor(newValue);
@@ -115,7 +133,9 @@
               };
 
               $rootScope.saveStartDate = $scope.saveStartDate;
+              $rootScope.saveStartDate = $scope.saveStartDate;
               $scope.editService.quantity = $scope.quantity.toFixed(2);
+              $rootScope.quantityForSave = $scope.quantity.toFixed(2);
 
             $scope.disableQuantityWatcher = false;
           });
@@ -123,50 +143,55 @@
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.editService.durationStart;
             $scope.saveEndDate = $scope.editService.durationEnd;
-            console.log($scope.editService.durationStart, '$scope.editService.durationStart;');
-            $rootScope.saveStartDate =  $scope.saveStartDate;
-            $rootScope.saveEndDate =  $scope.saveEndDate;
             $scope.showTimePicker = !$scope.showTimePicker;
             $scope.saveDateIsSet = true;
 
-            console.log($scope.editService.durationStart, $scope.editService.durationEnd);
-
             var newTimeStart = new Date();
-            var newHours = $scope.editService.durationStart.time === 'PM' ?
+            var newHours = $scope.editService.durationStart.time === 'PM' & $scope.editService.durationStart.hour !== 12?
               +$scope.editService.durationStart.hour + 12 : $scope.editService.durationStart.hour;
+            if ($scope.editService.durationStart.time === 'AM' &&  $scope.editService.durationStart.hour == 12) {
+              newHours = 0;
+            }
             var newMinutes = $scope.editService.durationStart.minute;
             newHours = newHours > 24 ? newHours - 24 : newHours;
             newTimeStart.setHours(newHours);
             newTimeStart.setMinutes(newMinutes);
+            $rootScope.saveStartDate.hours = newHours;
+            $rootScope.saveStartDate.minute = newMinutes;
 
             var newTimeEnd = new Date();
             var newHoursEnd = $scope.editService.durationEnd.time === 'PM' ?
               +$scope.editService.durationEnd.hour + 12 : $scope.editService.durationEnd.hour;
+            if ($scope.editService.durationEnd.time === 'AM' &&  $scope.editService.durationEnd.hour == 12) {
+              newHoursEnd = 0;
+            }
             var newMinutesEnd = $scope.editService.durationEnd.minute;
             newTimeEnd.setHours(newHoursEnd);
             newTimeEnd.setMinutes(newMinutesEnd);
-            console.log(newTimeEnd, newTimeStart);
-            console.log(newHoursEnd);
+            $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
+            $rootScope.saveForEndDate = new Date(newTimeEnd.getTime());
 
-            if (newHours == 12 &&  $scope.serviceExpenseDurationPresentation !== 'TIME_PICKER') {
-              // alert(1);
-              $scope.editService.quantity = 12 - +(newTimeStart.getTime() - newTimeEnd.getTime())/3600000
-            }else if (newHoursEnd > newHours) {
-              // alert(2);
-              $scope.disableQuantityWatcher = true;
-              $scope.editService.quantity = (newTimeEnd.getTime() - newTimeStart.getTime())/3600000
-            } else {
-              // alert(3);
-              $scope.disableQuantityWatcher = true;
-              $scope.editService.quantity = (24*3600000 - (newTimeStart.getTime() - newTimeEnd.getTime()))/3600000
+            var startMs = $rootScope.saveForStartDate.getTime();
+            var endMs = $rootScope.saveForEndDate.getTime();
+
+            if ($rootScope.saveForStartDate.getTime() > $rootScope.saveForEndDate.getTime()) {
+              endMs = endMs + 24*3600000;
+              $scope.editService.quantity = (endMs-startMs)/3600000;
+              $rootScope.quantityForSave = (endMs-startMs)/3600000;
+            }else {
+              $scope.editService.quantity = (endMs-startMs)/3600000;
+              $rootScope.quantityForSave = (endMs-startMs)/3600000;
             }
-
-            $scope.$broadcast('changeEditService', $scope.editService.quantity);
+            console.log($rootScope.quantityForSave, '1');
+            console.log($rootScope.saveForEndDate, '2');
+            console.log($rootScope.saveForStartDate, '3');
+            $scope.$broadcast('changeEditService', $rootScope.quantityForSave);
 
             $rootScope.quantityEditTime = $rootScope.quantityEditTime ? $rootScope.quantityEditTime : {};
             $rootScope.quantityEditTime.hour = Math.floor($scope.editService.quantity);
             $rootScope.quantityEditTime.minute = $scope.editService.quantity - Math.floor($scope.editService.quantity) *60;
 
+            $scope.editService.quantity = $rootScope.quantityForSave;
             return $scope.editService.quantity;
           };
 
@@ -233,7 +258,10 @@
               console.log(endDate, 'startDate');
               // alert(startDate);
               // alert($rootScope.saveEndDate.hour);
-              if ($scope.saveStartDate.time === 'PM')  {
+              // if ($scope.saveStartDate.time === 'AM' && $scope.saveStartDate.hour == 12) {
+              //   $scope.saveStartDate.hour = 0;
+              // };
+              if ($scope.saveStartDate.time === 'PM' && $scope.saveStartDate.hour < 12)  {
                 startDate.setHours(+($rootScope.saveStartDate.hour) +12)
               } else {
                 startDate.setHours($rootScope.saveStartDate.hour)
@@ -270,24 +298,17 @@
                   id: $scope.editService.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: $scope.editService.description,
-                  quantity: getQuantity(startDate, endDate),
+                  quantity: $rootScope.quantityForSave,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
-                  durationStart: startDate.getTime(),
-                  durationEnd: endDate.getTime()
+                  durationStart: $rootScope.saveForStartDate.getTime(),
+                  durationEnd: $rootScope.saveForEndDate.getTime()
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
               });
-              console.log(endDate, 'test');
-              $scope.$emit('time', {
-                id: $scope.editService.id,
-                durationStart: startDate.getTime(),
-                durationEnd: endDate.getTime(),
-                quantity: (endDate.getTime() - startDate.getTime())/ 3600000
-              })
             } else {
               $scope.triedToSaveService = true;
             }
@@ -298,9 +319,15 @@
             console.log(startDate, endDate);
             console.log(startDate.getTime(), endDate.getTime());
             if (startDate.getHours() == 12 && $scope.serviceExpenseDurationPresentation !== 'TIME_PICKER') {
-              return (12 - +(+startDate.getTime() - +endDate.getTime())/3600000);
+              return ((+endDate.getTime() - +startDate.getTime()) / 3600000);
+            } else if (startDate.getUTCHours() > endDate.getUTCHours()) {
+              endDate.setDate(endDate.getDate() + 1);
+              return (Math.abs((endDate.getTime() - startDate.getTime())) / 3600000)
+            } else if (startDate.getUTCHours() === 12 &&  endDate.getUTCHours() === 24 ) {
+              endDate.setDate(endDate.getDate() + 1);
+              return (Math.abs((endDate.getTime() - startDate.getTime())) / 3600000)
             } else if (startDate.getHours() > 12 && endDate.getHours() < 12 ) {
-              endDate.setDate(endDate.getDate()+1);
+              // endDate.setDate(endDate.getDate()+1);
               return (Math.abs((endDate.getTime() - startDate.getTime()))/3600000)
             } else if (startDate.getHours() > endDate.getHours()){
               endDate.setDate(endDate.getDate()+1);

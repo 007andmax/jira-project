@@ -17,6 +17,8 @@
           rightPanelSharedState.companyId = '';
 
           var ticketMobileSettings = ticketMobileSettings;
+          $rootScope.saveForStartDate = new Date();
+          $rootScope.saveForEndDate = new Date();
 
 
           $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -696,12 +698,24 @@
           $scope.getFormatedTime = function(time) {
             var date = new Date(time);
             var currentTime = {
-              hour: date.getHours() < 10 ? '0' + date.getHours(): (date.getHours() > 13 ? date.getHours()-12 : date.getHours() ),
-              minute: date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes(),
-              time: date.getHours() >= 13 && date.getHours() <= 24 ? 'PM' : 'AM'
+              hour:  getHourFormated(date),
+              minute: date.getMinutes() <= 9 ? '0'+date.getMinutes() : date.getMinutes(),
+              time: date.getHours() >= 12 && date.getHours() <= 24 ? 'PM' : 'AM'
             };
             return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
           };
+
+          function getHourFormated(date) {
+            if (date.getHours() < 10 && date.getHours() >= 1) {
+              return '0' + date.getHours()
+            } else if(date.getHours() < 1) {
+              return 12
+            } else if (date.getHours() >= 13){
+              return date.getHours()-12
+            } else {
+              return date.getHours();
+            }
+          }
 
 
 

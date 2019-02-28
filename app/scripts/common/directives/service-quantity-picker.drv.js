@@ -44,9 +44,7 @@
           element.addClass('timer-quantity');
 
           scope.$on('changeEditService', function(event, data) {
-            console.log(data, 'DATA');
-            scope.quantity = data >= 24 ? data - 24 : data;
-            console.log(Math.round(+((scope.quantity - Math.floor(scope.quantity))*60)), 'Math.floor(+((scope.quantity - Math.floor(scope.quantity))*60))s');
+            scope.quantity = data;
             minutesElement.val(Math.round(+((scope.quantity - Math.floor(scope.quantity))*60)));
             hourElement.val(Math.floor(scope.quantity));
           });
@@ -163,6 +161,16 @@
             isDropdownShow = false;
             scope.isDropdownShow = false;
 
+            if (scope.type === 'hours') {
+              var hourVal = hourElement.val();
+              scope.quantity = +minVal + +scope.quantity - Math.floor(scope.quantity)  || undefined;
+              console.log(scope.quantity, 'hour after');
+            } else if (scope.type === 'minutes') {
+              var minVal = minutesElement.val();
+              scope.quantity = (Math.floor(scope.quantity) + ((+minVal)/60)) || undefined;
+              console.log(scope.quantity, 'minute after');
+            }
+
             var value = input.val(),
               lastIndex = value.length - 1;
 
@@ -179,6 +187,8 @@
               } else {
                 savedValue = splited.join('');
               }
+
+              console.log(value);
 
               input.val(savedValue);
               return;
