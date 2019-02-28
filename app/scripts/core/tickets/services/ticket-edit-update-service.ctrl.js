@@ -91,17 +91,17 @@
               }
 
               if ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute <= 0) {
-                alert(1);
+                // alert(1);
                 $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) > 0 ?
                   ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1)
                   : ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour -1) + 12;
                 $scope.editService.durationStart.minute = 60 + ($scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute);
               } else if($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour < 24 &&  $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour > 12 ) {
-                alert(2);
+                // alert(2);
                 $scope.editService.durationStart.hour = (24 + $scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour);
                 $scope.editService.durationStart.minute = $scope.editService.durationEnd.minute - $rootScope.quantityEditTime.minute;
               } else {
-                alert(3);
+                // alert(3);
                 $scope.editService.durationStart.hour = ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour) > 0 ?
                   ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour)
                   : ($scope.editService.durationEnd.hour - $rootScope.quantityEditTime.hour) + 12;
