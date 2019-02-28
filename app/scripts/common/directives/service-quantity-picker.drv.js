@@ -143,13 +143,13 @@
               dropdownElement.hoverMinute = '00';
             }
 
-            if (scope.type === 'minutes'){
+            // if (scope.type === 'minutes'){
 
-            } else if(scope.type === 'hours') {
-
-            } else {
-              // scope.quantity = hours * 60 + minutes;
-            }
+            // } else if(scope.type === 'hours') {
+            //
+            // } else {
+            //   // scope.quantity = hours * 60 + minutes;
+            // }
 
             console.log(scope.quantity);
             $rootScope.quantityToCreateDurationService = scope.quantity;
@@ -309,10 +309,10 @@
 
             } else {
               console.log(startHours, startMinutes);
-              if ((parseFloat(hour) + parseFloat(minute)) < 1) {
-                input.val('');
-                scope.quantity = scope.quantity ? scope.quantity : 0;
-              } else {
+              // if ((parseFloat(hour) + parseFloat(minute)) < 1) {
+              //   // input.val('');
+              //   // scope.quantity = scope.quantity ? scope.quantity : 0;
+              // } else {
                 scope.quantity = scope.quantity ? scope.quantity : 0;
                 if (scope.type === 'hours') {
                   hourElement.val(Math.floor(hour));
@@ -332,7 +332,7 @@
                 console.log(scope.quantity, 'scope.quantity ');
               }
 
-            }
+            // }
             scope.$emit('changeQuantity', scope.quantity);
 
             if (scope.form) {
