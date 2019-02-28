@@ -32,30 +32,64 @@
             return result;
           };
 
-          $scope.$watch('startDate.hour', function (newValue, oldValue) {
-            var now = parseInt(newValue);
-            var then = parseInt(oldValue);
-            if (now > 9 && then < 9 || now < 3 && then > 9) {
-              $scope.startDate.time = $scope.startDate.time === "AM" ? "PM" : "AM";
-            }
-          });
-
-          $scope.$watch('endDate.hour', function (newValue, oldValue) {
-            var now = parseInt(newValue);
-            var then = parseInt(oldValue);
-            if (now > 9 && then < 9 || now < 3 && then > 9) {
-              $scope.endDate.time = $scope.endDate.time === "AM" ? "PM" : "AM";
-            }
-          });
+          // $scope.$watch('startDate.hour', function (newValue, oldValue) {
+          //   var now = parseInt(newValue);
+          //   var then = parseInt(oldValue);
+          //   if (now > 9 && then < 9 || now < 3 && then > 9) {
+          //     $scope.startDate.time = $scope.startDate.time === "AM" ? "PM" : "AM";
+          //   }
+          // });
+          //
+          // $scope.$watch('endDate.hour', function (newValue, oldValue) {
+          //   var now = parseInt(newValue);
+          //   var then = parseInt(oldValue);
+          //   if (now > 9 && then < 9 || now < 3 && then > 9) {
+          //     $scope.endDate.time = $scope.endDate.time === "AM" ? "PM" : "AM";
+          //   }
+          // });
 
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.startDate;
             $scope.saveEndDate = $scope.endDate;
             console.log($scope.saveStartDate, 'saveStartDate');
-            $rootScope.saveStartDate =  $scope.saveStartDate;
-            $rootScope.saveEndDate =  $scope.saveEndDate;
+            console.log($scope.saveEndDate, 'saveEndDate');
+            // $rootScope.saveStartDate =  $scope.saveStartDate;
+            // $rootScope.saveEndDate =  $scope.saveEndDate;
             $scope.showTimePicker = !$scope.showTimePicker;
             $scope.saveDateIsSet = true;
+
+            var newTimeStart = new Date();
+            var newHours = $scope.saveStartDate;
+
+            if ($scope.saveStartDate.time.toLowerCase() === 'pm' && $scope.saveStartDate.hour != 12) {
+              newHours = +$scope.saveStartDate.hour + 12
+            } else {
+              newHours = +$scope.saveStartDate.hour;
+            }
+            if ($scope.saveStartDate.time.toLowerCase() === 'am' &&  $scope.saveStartDate.hour == 12) {
+              newHours = 0;
+            }
+            var newMinutes = $rootScope.saveEndDate.minute;
+            newHours = newHours > 24 ? newHours - 24 : newHours;
+            newTimeStart.setHours(newHours);
+            newTimeStart.setMinutes(newMinutes);
+
+
+
+            var newTimeEnd = new Date();
+            var newHoursEnd = $rootScope.saveEndDate.time.toLowerCase() === 'pm' && $rootScope.saveEndDate.hour !== 12?
+              +$rootScope.saveEndDate.hour + 12 : $rootScope.saveEndDate.hour;
+            if ($rootScope.saveEndDate.time.toLowerCase() === 'am' &&  $rootScope.saveEndDate.hour == 12) {
+              newHoursEnd = 0;
+            }
+            var newMinutesEnd = $rootScope.saveEndDate.minute;
+            newTimeEnd.setHours(newHoursEnd);
+            newTimeEnd.setMinutes(newMinutesEnd);
+            console.log(newTimeStart);
+            console.log(newTimeEnd);
+            $rootScope.saveStartDate = new Date(newTimeStart.getTime());
+            $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
+
           };
 
           $scope.cancelTime = function () {
@@ -75,17 +109,17 @@
               $scope.startDate = {
                 hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
-                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+                time:  $scope.currentDate.getHours() > 12 ? 'PM' : 'AM'
               };
               $scope.endDate = {
                 hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
-                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+                time:  $scope.currentDate.getHours() >= 12 ? 'PM' : 'AM'
               };
               $scope.saveStartDate = {
                 hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
                 minute: $scope.currentDate.getMinutes(),
-                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'am'
+                time:  $scope.currentDate.getHours() >= 12 ? 'pm' : 'pm'
               };
               $scope.saveEndDate = {
                 hour: $scope.currentDate.getHours() >= 13 ? $scope.currentDate.getHours() - 12 : $scope.currentDate.getHours(),
@@ -94,7 +128,6 @@
               };
               $rootScope.saveStartDate =  $scope.saveStartDate;
               $rootScope.saveEndDate =  $scope.saveEndDate;
-
             }
           }
 

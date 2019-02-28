@@ -843,40 +843,38 @@
                   var date = new Date(ticketUpdateToSend.services[i].date);
                   var startDate = new Date();
                   var endDate = new Date();
-                  if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
-                    console.log($rootScope.saveStartDate, '$rootScope.saveStartDate');
-                    if ($rootScope.saveStartDate.time === 'pm') {
-                      console.log($rootScope.saveStartDate.hour +12);
-                      console.log('$rootScope.saveStartDate.hour +12');
-                      startDate.setHours($rootScope.saveStartDate.hour +12);
-                    } else {
-                      startDate.setHours($rootScope.saveStartDate.hour);
-                    }
-                    startDate.setMinutes($rootScope.saveStartDate.minute);
-                    if ($rootScope.saveStartDate.time === 'am') {
-                      endDate.setUTCHours($rootScope.saveEndDate.hour + 12);
-                    } else {
-                      endDate.setHours($rootScope.saveEndDate.hour);
-                    }
-                    console.log(startDate, endDate);
-                    endDate.setMinutes($rootScope.saveEndDate.minute);
-                  } else {
-                    endDate = new Date(startDate.getTime()+ $scope.ticketUpdate.services[i].quantity*3600000);
+                  console.log($rootScope.saveStartDate, '$rootScope.saveStartDate');
+                  console.log($rootScope.saveEndDate, '$rootScope.saveStartDate');
 
-                  }
+                  // if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
+                  //   if ($rootScope.saveStartDate.time.toLowerCase() === 'pm' && $rootScope.saveStartDate.hour !== 12) {
+                  //     startDate.setHours($rootScope.saveStartDate.hour+ 12);
+                  //   } else if ($rootScope.saveStartDate.time.toLowerCase() === 'am' && $rootScope.saveStartDate.hour == 12) {
+                  //     endDate.setHours($rootScope.saveStartDate.hour-12);
+                  //   } else {
+                  //     startDate.setHours($rootScope.saveStartDate.hour);
+                  //   }
+                  //   startDate.setMinutes($rootScope.saveStartDate.minute);
+                  //   if ($rootScope.saveEndDate.time.toLowerCase() === 'pm' && $rootScope.saveEndDate.hour !== 12) {
+                  //     endDate.setHours($rootScope.saveEndDate.hour + 12);
+                  //   } else if ($rootScope.saveEndDate.time.toLowerCase() === 'am' && $rootScope.saveEndDate.hour == 12) {
+                  //     endDate.setHours($rootScope.saveEndDate.hour-12);
+                  //   } else {
+                  //     endDate.setHours($rootScope.saveEndDate.hour);
+                  //   }
+                  //   console.log(startDate, endDate);
+                  //   endDate.setMinutes($rootScope.saveEndDate.minute);
+                  // } else {
+                  //   endDate = new Date(startDate.getTime()+ $scope.ticketUpdate.services[i].quantity*3600000);
+                  //
+                  // }
 
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
-                    if (
-                      ($rootScope.saveStartDate.time === 'pm' && $rootScope.saveEndDate.time === 'am') ||
-                      ($rootScope.saveStartDate.time === 'am' && $rootScope.saveEndDate.time === 'am' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour) ||
-                      ($rootScope.saveStartDate.time === 'pm' && $rootScope.saveEndDate.time === 'pm' && $rootScope.saveStartDate.hour > $rootScope.saveEndDate.hour)
-                    ) {
-                      endDate.setDate(endDate.getDate() + 1);
-                    }
-                    getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
+                    $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
+                    $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
-                    ticketUpdateToSend.services[i].durationStart = startDate.getTime();
-                    ticketUpdateToSend.services[i].durationEnd = endDate.getTime();
+                    ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   } else {
                     console.log(startDate, endDate, '--');
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
@@ -970,24 +968,19 @@
           };
 
           function getQuantity(start, end) {
-            var quantity = 0;
-            var startDate = new Date();
-            var endDate = new Date();
-            startDate.setHours(start.hour);
-            startDate.setMinutes(start.minute);
-            endDate.setHours(end.hour);
-            endDate.setMinutes(end.minute);
-            if (
-              (start.time === 'PM' && end.time === 'AM') ||
-              (start.time === 'AM' && end.time === 'AM' && start.hour > end.hour) ||
-              (start.time === 'PM' && end.time === 'PM' && start.hour > end.hour)
-            ) {
-              endDate.setDate(endDate.getDate() + 1);
-              quantity = (endDate.getTime() - startDate.getTime()) / 1000;
-            } else {
-              quantity = (endDate.getTime() - startDate.getTime()) / 1000;
+            console.log(start, end);
+            start = new Date(start);
+
+            end = new Date(end);
+            var startMs = start.getTime();
+            var endMs = end.getTime();
+
+            if (startMs-endMs > 0) {
+              endMs = endMs + 24*3600000;
+              return (endMs-startMs)/3600000 > 0 ? (endMs-startMs)/3600000 : 0;
+            }else {
+              return (endMs-startMs)/3600000 > 0 ? (endMs-startMs)/3600000 : 0;
             }
-            return quantity/3600;
           }
 
           $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
