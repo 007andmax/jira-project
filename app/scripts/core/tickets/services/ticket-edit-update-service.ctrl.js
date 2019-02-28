@@ -165,7 +165,7 @@
 
             $rootScope.quantityEditTime = $rootScope.quantityEditTime ? $rootScope.quantityEditTime : {};
             $rootScope.quantityEditTime.hour = Math.floor($scope.editService.quantity);
-            $rootScope.quantityEditTime.minute = ($scope.editService.quantity - Math.floor($scope.editService.quantity)) *60;
+            $rootScope.quantityEditTime.minute = $scope.editService.quantity - Math.floor($scope.editService.quantity) *60;
 
             return $scope.editService.quantity;
           };
@@ -198,6 +198,7 @@
               $rootScope.saveEndDate =  $scope.saveEndDate;
             }
             console.log($scope.saveStartDate , '$scope.saveStartDate');
+            console.log($scope.editService.quantity , '$scope.saveStartDate');
           }
 
           //TimePicker end
@@ -294,12 +295,18 @@
 
 
           function getQuantity(startDate, endDate) {
+            console.log(startDate, endDate);
+            console.log(startDate.getTime(), endDate.getTime());
             if (startDate.getHours() == 12 && $scope.serviceExpenseDurationPresentation !== 'TIME_PICKER') {
               return (12 - +(+startDate.getTime() - +endDate.getTime())/3600000);
-            } else if (+endDate.getTime() - +startDate.getTime() > 0) {
-              return ((+endDate.getTime() - +startDate.getTime())/3600000);
+            } else if (startDate.getHours() > 12 && endDate.getHours() < 12 ) {
+              endDate.setDate(endDate.getDate()+1);
+              return (Math.abs((endDate.getTime() - startDate.getTime()))/3600000)
+            } else if (startDate.getHours() > endDate.getHours()){
+              endDate.setDate(endDate.getDate()+1);
+              return Math.abs(+endDate.getTime() - +startDate.getTime())/3600000
             } else {
-              return (24 - (+startDate.getTime() - +endDate.getTime())/3600000);
+              return Math.abs(+endDate.getTime() - +startDate.getTime())/3600000
             }
           }
 

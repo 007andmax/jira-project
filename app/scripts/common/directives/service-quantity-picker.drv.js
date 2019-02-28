@@ -207,6 +207,7 @@
 
           function initPicker() {
             console.log(5);
+            console.log(scope.quantity);
             scope.isWatchDisable = false;
             var url = '';
             if (scope.type === 'minutes') {
@@ -396,7 +397,7 @@
             function setValue(hours, minute) {
               console.log(88);
               if (scope.quantity) {
-                console.log(scope.quantity, 'scope.quantity')
+                console.log(scope.quantity, 'scope.quantity');
                 if (scope.type === 'minutes') {
                   minutesElement.val(Math.floor((scope.quantity - Math.floor(scope.quantity))*60));
                 } else if (scope.type === 'hours') {
