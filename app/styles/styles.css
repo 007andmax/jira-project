@@ -12051,15 +12051,15 @@ button.close {
 }
 
 /*@media screen and (max-width: 1366px) {*/
-  /*.ticket-labels .progress-big-size,*/
-  /*.ticket-labels .priority-big-size {*/
-    /*display: none;*/
-  /*}*/
-  
-  /*.ticket-labels .progress-small-size,*/
-  /*.ticket-labels .priority-small-size {*/
-    /*display: block;*/
-  /*}*/
+/*.ticket-labels .progress-big-size,*/
+/*.ticket-labels .priority-big-size {*/
+/*display: none;*/
+/*}*/
+
+/*.ticket-labels .progress-small-size,*/
+/*.ticket-labels .priority-small-size {*/
+/*display: block;*/
+/*}*/
 /*}*/
 
 .bold {
@@ -12449,6 +12449,14 @@ button.close {
 }
 
 @media only screen and (max-width: 1600px) {
+  .hidden-desktop {
+    display: none;
+  }
+  
+  .hidden-from {
+    width: 31% !important;
+  }
+  
   .opened-ticket.opened-ticket-list .container-ticket-content .table-wrapper .table-content .col-3.service-descr {
     width: 36%;
   }
@@ -12601,15 +12609,15 @@ button.close {
 }
 
 /*@media screen and (max-width: 1366px) {*/
-  /*.ticket-labels .progress-big-size,*/
-  /*.ticket-labels .priority-big-size {*/
-    /*display: none;*/
-  /*}*/
-  
-  /*.ticket-labels .progress-small-size,*/
-  /*.ticket-labels .priority-small-size {*/
-    /*display: block;*/
-  /*}*/
+/*.ticket-labels .progress-big-size,*/
+/*.ticket-labels .priority-big-size {*/
+/*display: none;*/
+/*}*/
+
+/*.ticket-labels .progress-small-size,*/
+/*.ticket-labels .priority-small-size {*/
+/*display: block;*/
+/*}*/
 /*}*/
 
 .customer-list {

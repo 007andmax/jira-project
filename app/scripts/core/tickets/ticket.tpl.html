@@ -110,14 +110,14 @@
 
       <div class="text-muted ellipsis"
            ng-if="(ticket.assignedUser && ticket.assignedUser.id) || ticket.assignedUserId"
-           style="width: 40%;vertical-align: top;">
+           style="width: 36%;vertical-align: top;">
         {{ getUserName(getUserById(getAssignedUserIDFromTicket(ticket))) }}
       </div>
 
-      <span class="text-muted ellipsis"
-            style="float: right; margin-right: 0;width: 27%; text-align: right;vertical-align: top; ">
+      <span class="text-muted ellipsis hidden-from"
+            style="float: right; margin-right: 0;width: 40%; text-align: right;vertical-align: top; ">
         {{ userReadable(ticket.ticketSource) }}
-        <span ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
+        <span class="hidden-desktop" ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
           &nbsp;({{ ticket.sourceName }})
         </span>
       </span>

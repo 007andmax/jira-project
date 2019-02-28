@@ -760,8 +760,8 @@
   padding: 5px 12px;
 }
 
-.table-content-top.without-duration .service-title {
-  width: 58.33333333%;
+.table-wrapper .service-table .table-content-top.without-duration .service-title {
+  width: 57%;
 }
 
 .ticket-update-service-edit .table-content .table-content-top,
