@@ -843,8 +843,8 @@
 
             console.log(4);
             console.log(form);
-            console.log(isEmptyProductValid || form.$valid, 'isEmptyProductValid || form.$valid');
-            if (isEmptyProductValid || form.$valid) {
+            console.log(isEmptyProductValid , 'isEmptyProductValid || form.$valid');
+            if (!isEmptyProductValid ) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
