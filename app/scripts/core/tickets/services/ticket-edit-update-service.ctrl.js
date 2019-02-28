@@ -176,7 +176,6 @@
             var endMs = $rootScope.saveForEndDate.getTime();
 
             if (startMs-endMs > 0) {
-              alert(1);
               endMs = endMs + 24*3600000;
               $scope.editService.quantity = (endMs-startMs)/3600000;
               $rootScope.quantityForSave = (endMs-startMs)/3600000;
