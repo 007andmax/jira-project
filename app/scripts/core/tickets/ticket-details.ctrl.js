@@ -463,41 +463,8 @@
           })
 
           $scope.updateAndCloseTicket = function (form) {
-// <<<<<<< HEAD
-            // var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
-            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
-            //
-            //   if (!saveFailed) {
-            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-            //       if (value === false) {
-            //         closeTicket();
-            //         unwatch();
-            //       }
-            //     });
-            //   }
-            // } else {
-            //   closeTicket()
-            // }
-
             if (!form) form = $scope.mobileUpdateForm;
             var saveFailed = $scope.saveTicketUpdate({$valid: true}, true, closeTicket, null, null, true);
-// =======
-
-
-            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
-            //
-            //   if (!saveFailed) {
-            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-            //       if (value === false) {
-            //         closeTicket();
-            //         unwatch();
-            //       }
-            //     });
-            //   }
-            // } else {
-            //   closeTicket()
-            // }
-// >>>>>>> mobile-version
           };
 
           $scope.$watch('ticketDetails.agent', function (value) {
@@ -808,7 +775,7 @@
             }
           };
 
-          $scope.saveTicketUpdate = function (form, type, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             console.log(1);
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
@@ -844,7 +811,7 @@
             console.log(4);
             console.log(form);
             console.log(isEmptyProductValid , 'isEmptyProductValid || form.$valid');
-            if (!isEmptyProductValid ) {
+            if (true ) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 

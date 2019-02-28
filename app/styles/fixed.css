@@ -924,7 +924,21 @@ aside#left div.nav-title {
   position: absolute;
   display: none;
   left: 10px;
-  top: 48px;
+  top: 48px!important;
+}
+
+.ticket-add-service-content .timer-quantity .time_drop_down {
+  position: absolute;
+  display: none;
+  left: 10px;
+  top: -380px!important;
+}
+
+.ticket-add-service-content .timer-quantity .minutes_drop_down {
+  position: absolute;
+  display: none;
+  left: 10px;
+  top: -175px!important;
 }
 
 .company-schedule .timer-quantity .time_drop_down {
