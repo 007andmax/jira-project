@@ -118,6 +118,14 @@
 
           });
 
+          $scope.$on('changeQuantity', function (event, newValue) {
+            $rootScope.saveStartDate = new Date();
+            $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + newValue*3600000)
+            $scope.quantity = newValue;
+            $rootScope.quantityForSave = newValue;
+            console.log()
+          });
+
 
           $scope.$watch('ticketUpdate', function(val) {
             if (!$scope.editExpense) {
