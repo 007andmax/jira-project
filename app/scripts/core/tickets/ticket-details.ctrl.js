@@ -685,8 +685,6 @@
           }
 
           $scope.getHtml = function(value){
-            console.log(value);
-            console.log($sce.trustAsHtml(value));
             return $sce.trustAsHtml(value);
           };
 
