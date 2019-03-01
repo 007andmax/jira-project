@@ -7,10 +7,10 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService', '$location', '$anchorScroll',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService, $location, $anchorScroll) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
@@ -780,7 +780,6 @@
           };
 
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
-            console.log(1);
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
@@ -796,7 +795,6 @@
             }
 
 
-            console.log(2);
             if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
               $scope.ticketUpdate.services = $scope.ticketUpdate.services.map(function(el) {
                 if (el.item && typeof el.item.name === 'object') {
@@ -809,12 +807,8 @@
 
 
 
-            console.log(3);
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
-            console.log(4);
-            console.log(form);
-            console.log(isEmptyProductValid , 'isEmptyProductValid || form.$valid');
             if (true ) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -847,8 +841,6 @@
                   var date = new Date(ticketUpdateToSend.services[i].date);
                   var startDate = new Date();
                   var endDate = new Date();
-                  console.log($rootScope.saveStartDate, '$rootScope.saveStartDate');
-                  console.log($rootScope.saveEndDate, '$rootScope.saveStartDate');
 
                   // if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
                   //   if ($rootScope.saveStartDate.time.toLowerCase() === 'pm' && $rootScope.saveStartDate.hour !== 12) {
@@ -874,14 +866,12 @@
                   // }
 
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
-                    console.log(1);
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   }else {
-                    console.log(startDate, endDate, '--');
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
@@ -890,9 +880,7 @@
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 }
 
-                console.log(4);
               } else if ($scope.haveAttachments() || $scope.haveNote()) {
-                console.log(5);
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
                 ticketUpdateToSend.attachments = [];
 
@@ -901,8 +889,6 @@
                 }
 
               }
-
-              console.log(6);
 
               for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
 
@@ -930,6 +916,8 @@
                       $scope.ticketUpdate.note = '';
                       UserNotificationService.show('New ticket update containing a note has been posted', true);
                       setCreateUpdateFormToDefault();
+                      $location.hash('ticket-alert-msg');
+                      $anchorScroll();
                       return;
 
                     case 'SERVICE':
@@ -939,6 +927,9 @@
                         UserNotificationService.show('New ticket update containing a service has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
+                      console.log('1235123512351235123512351351');
+                      $location.hash('ticket-alert-msg');
+                      $anchorScroll();
                       return;
 
                     case 'PRODUCT':
@@ -948,6 +939,8 @@
                         UserNotificationService.show('New ticket update containing a product has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
+                      $location.hash('ticket-alert-msg');
+                      $anchorScroll();
                       return;
                   }
                 }
@@ -970,10 +963,11 @@
                 $scope.ticketUpdate.selectedDiscount = null;
               });
             }
+            console.log('12351235');
+
           };
 
           function getQuantity(start, end) {
-            console.log(start, end);
             start = new Date(start);
 
             end = new Date(end);

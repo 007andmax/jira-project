@@ -255,13 +255,6 @@
 
               var startDate = new Date();
               var endDate = new Date();
-              console.log(startDate, 'startDate');
-              console.log(endDate, 'startDate');
-              // alert(startDate);
-              // alert($rootScope.saveEndDate.hour);
-              // if ($scope.saveStartDate.time === 'AM' && $scope.saveStartDate.hour == 12) {
-              //   $scope.saveStartDate.hour = 0;
-              // };
               if ($scope.saveStartDate.time === 'PM' && $scope.saveStartDate.hour < 12)  {
                 startDate.setHours(+($rootScope.saveStartDate.hour) +12)
               } else {
@@ -278,21 +271,6 @@
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
-              // alert(startDate);
-              // if (
-              //   ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'AM') ||
-              //   ($scope.saveStartDate.time === 'AM' && $scope.saveEndDate.time === 'AM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour) ||
-              //   ($scope.saveStartDate.time === 'PM' && $scope.saveEndDate.time === 'PM' && $scope.saveStartDate.hour > $scope.saveEndDate.hour)
-              // ) {
-              //   endDate.setDate(endDate.getDate() + 1);
-              // }
-
-              console.log($scope.quantity, '$scope.quantity');
-              console.log(startDate, '$scope.quantity');
-              console.log(endDate, '$scope.quantity');
-              console.log($rootScope.saveForStartDate, '$rootScope.saveForStartDate');
-              console.log($rootScope.saveForEndDate, '$rootScope.saveForEndDate');
-              // $scope.editService.quantity = $scope.quantity;
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -319,8 +297,6 @@
 
 
           function getQuantity(startDate, endDate) {
-            console.log(startDate, endDate);
-            console.log(startDate.getTime(), endDate.getTime());
             if (startDate.getHours() == 12 && $scope.serviceExpenseDurationPresentation !== 'TIME_PICKER') {
               return ((+endDate.getTime() - +startDate.getTime()) / 3600000);
             } else if (startDate.getUTCHours() > endDate.getUTCHours()) {

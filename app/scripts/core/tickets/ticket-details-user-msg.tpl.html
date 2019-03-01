@@ -16,6 +16,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'RE-ASSIGNED_TO_ME')">
     <div class="alert alert-info">
       <strong>{{ getUserName(ticketDetails.assignPerformer) }}</strong>
