@@ -1535,6 +1535,8 @@
   
   .ticket-update-service .col {
     line-height: 20px;
+    background-color: transparent;
+    border: none;
   }
   
   .ticket-update-product .ticket-update-product-item,
