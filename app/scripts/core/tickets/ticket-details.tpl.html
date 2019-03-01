@@ -635,7 +635,7 @@
                   <div class="table-content-bottom clearfix">
                     <div class="col-md-12">
                       <p>Description</p>
-                      <p>{{ service.description ? service.description : '&nbsp;' }}</p>
+                      <p ng-bind-html="getHtml(service.description)">s</p>
                     </div>
                   </div>
 
