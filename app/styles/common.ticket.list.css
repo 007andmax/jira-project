@@ -10,7 +10,7 @@
 }
 
 .opened-ticket-list .content-wrapper .ticket-list {
-  padding: 24px;
+  padding: 24px 24px 80px;
 }
 
 .opened-ticket-list.opened-ticket .content-wrapper .ticket-list {
@@ -19,7 +19,7 @@
 
 .tickets {
   margin: 0;
-  padding: 0 0 240px;
+  padding: 0;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);
 }
 

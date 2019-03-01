@@ -244,9 +244,9 @@
     margin-bottom: 10px;
   }
   
-  .opened-ticket-list .content-wrapper .ticket-list {
-    padding: 0;
-  }
+  /*.opened-ticket-list .content-wrapper .ticket-list {*/
+    /*padding: 0;*/
+  /*}*/
   
   .no-ticket-updates img {
     width: 100%;
