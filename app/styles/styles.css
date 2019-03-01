@@ -815,7 +815,7 @@ hr {
 .ticket-update-note,
 .ticket-update-service-description {
   position: relative;
-  min-height: 91px;
+  min-height: 88px;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 264px;
