@@ -598,28 +598,23 @@
                 >
               </div>
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6 mob-timer"
-                 ng-click="showTimePicker = !showTimePicker"
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
+                 sqp-is-show-format="false"
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
-              <input id="service-quantity-picker" type="text"
-                     placeholder="Hr(s) : Min(s)"
-                     value="{{startDate.hour}}:{{startDate.minute}} {{startDate.time}} |
-                      {{endDate.hour}}:{{endDate.minute}} {{endDate.time}}"
-                     autocomplete="off" />
-              <!--<input type="hidden"-->
-              <!--value="{{startDate.hour}}:{{startDate.minute}} {{startDate.time}} |-->
-              <!--{{endDate.hour}}:{{endDate.minute}} {{endDate.time}}"-->
-              <!--name="serviceTime"-->
-              <!--ng-required="serviceToEdit[0].item ? true : false" />-->
+              <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
+                     id="service-quantity-picker" type="text" readonly
+                     placeholder="Hr(s) : Min(s)" sqp-input
+                     autocomplete="off" aria-expanded="true" />
+              <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
+                     ng-required="serviceToEdit[0].item ? true : false" />
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6" data-date-picker
-                 ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+            <div ng-if="!hideInputs" class="col-xs-6" data-date-picker ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
               <input type="text" class="has-dropdown" placeholder="Date" readonly
                      qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
               <i class="new-calendar"></i>
             </div>
-            <div class="col-xs-12" ng-class="{'has-error': isShowiАngErrors(addServiceForm, 'serviceDescription')}">
+            <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
               <input uib-tooltip="Description" tooltip-placement="top"
                      type="text" placeholder="Description"
                      ng-model="serviceToEdit[0].description" ng-maxlength="2000"

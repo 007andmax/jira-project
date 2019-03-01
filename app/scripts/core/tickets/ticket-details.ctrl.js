@@ -869,17 +869,18 @@
                   //
                   // }
 
-                  if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
+                  if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
+                    console.log(1);
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
-                  } else {
+                  }else {
                     console.log(startDate, endDate, '--');
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
-                    ticketUpdateToSend.services[i].durationStart = startDate.getTime();
-                    ticketUpdateToSend.services[i].durationEnd = endDate.getTime() ;
+                    ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
                   }
 
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());

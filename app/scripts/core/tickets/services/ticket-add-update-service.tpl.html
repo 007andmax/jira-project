@@ -22,7 +22,18 @@
                ng-required="serviceExpense.item ? true : false">
       </div>
     </div>
-    <div  ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER'">
+    <div ng-if="isMobileUpdateShown">
+      <div class="col-2" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false"
+           ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
+        <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
+               id="service-quantity-picker" type="text" class="form-control"
+               placeholder="Hr(s) : Min(s)" sqp-input
+               autocomplete="off" aria-expanded="true"/>
+        <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
+               ng-required="serviceExpense.item ? true : false"/>
+      </div>
+    </div>
+    <div  ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER' && !isMobileUpdateShown ">
       <div class="col-4 new-quantity-picker"
            service-quantity-picker="serviceExpense.quantity"
            type="hours"
@@ -47,7 +58,7 @@
       </div>
     </div>
 
-    <div class="col-2 new-quantity-picker" ng-if="serviceExpenseDurationPresentation==='TIME_PICKER'">
+    <div class="col-2 new-quantity-picker" ng-if="!isMobileUpdateShown && serviceExpenseDurationPresentation==='TIME_PICKER'">
       <input type="text" class="pointer new-input"
              placeholder="Start date | End date"
              value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
