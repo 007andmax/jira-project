@@ -924,21 +924,21 @@ aside#left div.nav-title {
   position: absolute;
   display: none;
   left: 10px;
-  top: 48px!important;
+  top: 48px !important;
 }
 
 .ticket-add-service-content .timer-quantity .time_drop_down {
   position: absolute;
   display: none;
   left: 10px;
-  top: -380px!important;
+  top: -380px !important;
 }
 
 .ticket-add-service-content .timer-quantity .minutes_drop_down {
   position: absolute;
   display: none;
   left: 10px;
-  top: -175px!important;
+  top: -175px !important;
 }
 
 .company-schedule .timer-quantity .time_drop_down {
@@ -1414,6 +1414,10 @@ aside#left div.nav-title {
 [te-editor]:empty:not(:focus):before {
   content: attr(data-text);
   color: #c0bfcd;
+}
+
+.ticket-update-service-description [te-editor]:empty:not(:focus):before {
+  color: #9ca5b6;
 }
 
 .icn-cover-not-hover {

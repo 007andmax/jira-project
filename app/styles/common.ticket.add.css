@@ -20,7 +20,7 @@
 }
 
 /*.opened-ticket-list.left-panel-closed .ticket-post-update-wrapper {*/
-  /*right: calc(100vw - 1820px);*/
+/*right: calc(100vw - 1820px);*/
 /*}*/
 
 .ticket-post-update-wrapper > .btn {
@@ -63,7 +63,8 @@
   left: 50px;
 }
 
-.ticket-add .ticket-update-note .editor {
+.ticket-add .ticket-update-note .editor,
+.ticket-update-service-description .editor {
   border: none;
   padding: 16px 16px 0 16px;
   color: #9ca5b6;

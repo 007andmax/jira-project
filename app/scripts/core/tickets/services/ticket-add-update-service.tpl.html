@@ -22,7 +22,7 @@
                ng-required="serviceExpense.item ? true : false">
       </div>
     </div>
-    <div  ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER'">
+    <div ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER'">
       <div class="col-4 new-quantity-picker"
            service-quantity-picker="serviceExpense.quantity"
            type="hours"
@@ -30,7 +30,7 @@
            ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
         <input id="service-quantity-picker-hour" type="text" class="pointer new-input"
                placeholder="Hr(s)" sqp-input
-               autocomplete="off" aria-expanded="true"  smart-dropdown-menu-position="hour" />
+               autocomplete="off" aria-expanded="true" smart-dropdown-menu-position="hour" />
         <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
                ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
       </div>
@@ -129,7 +129,7 @@
       </div>
 
       <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
-      ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
+             ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
     </div>
     <div class="col-2 new-date-picker" style="position: relative"
          ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
@@ -138,9 +138,15 @@
              name="serviceData" ng-required="true">
     </div>
     <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
-      <input type="text" class="new-input" placeholder="Description"
-             ng-model="serviceExpense.description" ng-maxlength="2000"
-             name="serviceDescription" max-length-word="100" />
+      <!--<textarea type="text" class="new-input" placeholder="Description"-->
+      <!--ng-model="serviceExpense.description" ng-maxlength="2000"-->
+      <!--name="serviceDescription" max-length-word="100"></textarea>-->
+      <div class="ticket-update-service-description">
+        <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note"
+             name="note" te-text-maxlength="5000" te-html-maxlength="50000">
+          <div te-editor class="editor" contenteditable="true" data-text="Description"></div>
+        </div>
+      </div>
     </div>
   </div>
 

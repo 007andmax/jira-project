@@ -430,19 +430,18 @@
                    custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
                   <i class="icon-sm icn-delete"></i>
                 </a>
-                <a ng-if="ticketUpdate.type === 'NOTE'" class="hit-area pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit update"
-                   ng-click="toggleNoteUpdate(ticketUpdate)"
-                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
-                  <i class="icon-sm edit-icon"></i>
-                </a>
               </div>
 
               <p class="ticket-update-message"
                  ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating !== ticketUpdate.id"
                  ng-bind-html="getUpdateNote()"
                  contenteditable="{{ ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id}}"></p>
-
+              <a ng-if="ticketUpdate.type === 'NOTE'" style="position: absolute;top: 40px;right: -3px;" class="hit-area pull-right has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit update"
+                 ng-click="toggleNoteUpdate(ticketUpdate)"
+                 custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                <i class="icon-sm edit-icon"></i>
+              </a>
               <div ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id" class="clearfix"
                    style="position: relative; float: left; width: 100%">
                 <div class="static-wysiwyg">

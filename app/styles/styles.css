@@ -812,9 +812,10 @@ hr {
   right: 0;
 }
 
-.ticket-update-note {
+.ticket-update-note,
+.ticket-update-service-description {
   position: relative;
-  min-height: 104px;
+  min-height: 91px;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 264px;
@@ -822,6 +823,12 @@ hr {
   border: 1px solid #c4cbd5;
   border-radius: 4px;
   margin-top: 10px;
+}
+
+.ticket-update-service-description {
+  min-height: 40px;
+  margin: 0;
+  max-height: 120px;
 }
 
 .wysiwyg-controls-wrapper {
