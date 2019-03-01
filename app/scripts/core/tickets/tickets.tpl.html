@@ -7,7 +7,7 @@
     <div class="desktop-hidden tickets-mob-filters" style="text-transform: capitalize">
       {{ ticketsGroup }} tickets
     </div>
-    <div class="ticket-list">
+    <div class="ticket-list" ng-style="{'display': !tickets.length && !loadingOrRendering ? 'none' : 'block'}">
       <ul class="tickets" tu-tickets-container>
         <li class="ticket {{ ticket.priorityLevel.toLowerCase() }}-priority-border"
             ng-repeat="ticket in tickets track by ticket.id"
