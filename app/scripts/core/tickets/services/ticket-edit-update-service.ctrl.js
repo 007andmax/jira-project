@@ -14,8 +14,8 @@
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
           var editDateStart = new Date($scope.service.durationStart);
           var editDateEnd = new Date($scope.service.durationEnd );
-          console.log(editDateStart, 'editDateStart');
-          console.log(editDateEnd, 'editDateStart');
+          console.log($scope.service.durationStart, 'editDateStart');
+          console.log($scope.service.durationEnd, 'editDateStart');
           $rootScope.saveForStartDate = new Date($scope.editService.durationStart);
           $rootScope.saveForEndDate =  new Date($scope.editService.durationEnd);
           $rootScope.quantityForSave = $scope.editService.quantity;
@@ -23,13 +23,13 @@
 
           $scope.editService.durationStart = {
             hour: getHourForAmPm(editDateStart),
-            minute: editDateStart.getMinutes() > 9 ? editDateStart.getMinutes() : '0' + editDateStart.getMinutes(),
+            minute: editDateStart.getMinutes() > 9 ? editDateStart.getMinutes() :  editDateStart.getMinutes(),
             time: editDateStart.getHours() >= 12 ? 'PM' : 'AM'
           };
 
           $scope.editService.durationEnd = {
             hour: getHourForAmPm(editDateEnd),
-            minute: editDateEnd.getMinutes() > 9 ? editDateEnd.getMinutes() : '0' + editDateEnd.getMinutes(),
+            minute: editDateEnd.getMinutes() > 9 ? editDateEnd.getMinutes() :  editDateEnd.getMinutes(),
             time: editDateEnd.getHours() >= 12 ? 'PM' : 'AM'
           };
 
