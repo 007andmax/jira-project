@@ -64,12 +64,10 @@
   padding: 5px;
   outline: none;
   border-radius: 3px;
-  border: 1px solid #9ca5b6;
   color: #626b7f;
 }
 
 .ticket-update-service-description .editor {
-  border: none;
   padding: 9px 12px;
 }
 

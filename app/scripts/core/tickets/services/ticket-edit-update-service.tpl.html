@@ -45,7 +45,10 @@
                  placeholder="Start date | End date"
                  value="{{saveStartDate.hour}}:{{getDecimalMinutes(saveStartDate.minute)}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{getDecimalMinutes(saveEndDate.minute)}} {{saveEndDate.time}}"
                  ng-click="showTimePickerBlock()"
-                 autocomplete="off" />
+                 autocomplete="off"
+                 uib-tooltip="start-end time"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true" />
           <div class="timepicker-wrap" ng-if="showTimePicker">
             <div class="timepicker">
               <div class="timepicker-choosen-time">
@@ -160,12 +163,15 @@
       </div>
       <div class="table-content-bottom clearfix">
         <div class="col-md-12" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceDescription')}">
-          <input type="text" class="form-control new-input service-description" placeholder="Description"
-                 ng-model="editService.description" max-length-word="100"
-                 name="serviceDescription" ng-maxlength="2000"
+          <div class="ticket-update-service-description">
+            <div text-editor te-initial-value="{{ editService.description }}" ng-model="editService.description"
+                 name="serviceDescription" te-text-maxlength="5000" te-html-maxlength="50000"
                  uib-tooltip="Description"
                  tooltip-placement="top"
                  tooltip-append-to-body="true">
+              <div te-editor class="editor" contenteditable="true" data-text="Description"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

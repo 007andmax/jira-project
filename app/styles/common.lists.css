@@ -1899,9 +1899,9 @@ Devices tab
   padding-top: 25px;
 }
 
-#product-list-cont .dropdown-menu {
-  top: 36px;
-}
+/*#product-list-cont .dropdown-menu {*/
+  /*top: 36px;*/
+/*}*/
 
 /*#product-list-cont .custom-product-list.nano {*/
 /*width: 100%;*/

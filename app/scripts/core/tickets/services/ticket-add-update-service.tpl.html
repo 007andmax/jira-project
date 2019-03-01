@@ -149,12 +149,9 @@
              name="serviceData" ng-required="true">
     </div>
     <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
-      <!--<textarea type="text" class="new-input" placeholder="Description"-->
-      <!--ng-model="serviceExpense.description" ng-maxlength="2000"-->
-      <!--name="serviceDescription" max-length-word="100"></textarea>-->
       <div class="ticket-update-service-description">
-        <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="serviceExpense.description"
-             name="note" te-text-maxlength="5000" te-html-maxlength="50000">
+        <div text-editor te-initial-value="{{ serviceExpense.description }}" ng-model="serviceExpense.description"
+             name="serviceDescription" te-text-maxlength="5000" te-html-maxlength="50000">
           <div te-editor class="editor" contenteditable="true" data-text="Description"></div>
         </div>
       </div>

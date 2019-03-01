@@ -1206,6 +1206,7 @@ aside#left div.nav-title {
 
 .ticket-add-product .custom-product-list {
   width: 99%;
+  position: relative;
 }
 
 .custom-product-list .product-list-container > li {
