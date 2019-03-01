@@ -9,10 +9,6 @@
           $scope.maxServiceDate = new Date();
 
           $scope.editService = $scope.service.staticCopy();
-          $scope.c = {
-            hour: ($scope.service.quantity).toFixed(0),
-            minute: $scope.service.quantity%($scope.service.quantity).toFixed(0)
-          };
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
 
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
@@ -20,6 +16,9 @@
           var editDateEnd = new Date($scope.service.durationEnd );
           console.log(editDateStart, 'editDateStart');
           console.log(editDateEnd, 'editDateStart');
+          $rootScope.saveForStartDate = new Date($scope.editService.durationStart);
+          $rootScope.saveForEndDate =  new Date($scope.editService.durationEnd);
+          $rootScope.quantityForSave = $scope.editService.quantity;
 
 
           $scope.editService.durationStart = {
@@ -291,6 +290,8 @@
               console.log($scope.quantity, '$scope.quantity');
               console.log(startDate, '$scope.quantity');
               console.log(endDate, '$scope.quantity');
+              console.log($rootScope.saveForStartDate, '$rootScope.saveForStartDate');
+              console.log($rootScope.saveForEndDate, '$rootScope.saveForEndDate');
               // $scope.editService.quantity = $scope.quantity;
               TicketsService.updateExpenseInTicketUpdate({
 

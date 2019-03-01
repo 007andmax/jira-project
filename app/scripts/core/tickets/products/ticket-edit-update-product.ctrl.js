@@ -16,9 +16,6 @@
           };
 
 
-
-
-
           $scope.loadProductByCategory = function (categoryId) {
             $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
           };
