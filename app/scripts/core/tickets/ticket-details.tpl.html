@@ -970,8 +970,7 @@
 
                   <div class="update-border"></div>
 
-                  <div class="ticket-update-service-description col">
-                    {{ service.description ? service.description : '&nbsp;' }}
+                  <div class="ticket-update-service-description col" ng-bind-html="getHtml(service.description)">
                   </div>
 
                   <a class="hit-area has-tooltip edit-update"
