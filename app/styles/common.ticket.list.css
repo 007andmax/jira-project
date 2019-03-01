@@ -11,6 +11,7 @@
 
 .opened-ticket-list .content-wrapper .ticket-list {
   padding: 24px 24px 80px;
+  min-height: calc(100vh - 78px);
 }
 
 .opened-ticket-list.opened-ticket .content-wrapper .ticket-list {
