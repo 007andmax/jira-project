@@ -761,7 +761,7 @@ hr {
 
 .upload-attachments li {
   padding: 5px 7px 5px 10px;
-  margin: 10px;
+  margin: 0;
   border: 1px solid #e7ecf2;
   background-color: #f1f5fa;
   position: relative;
