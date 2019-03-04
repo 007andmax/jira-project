@@ -34,6 +34,7 @@
           $scope.date = today;
           $scope.hour = today.getHours();
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
+          $scope.isLoaded = false;
 
           $timeout(function() {
             ticketMobileSettings.data = $scope;
@@ -146,8 +147,12 @@
             rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
 
             $timeout(function () {
+              $scope.isLoaded = true;
               UserNotificationService.hide();
             }, 1500);
+
+
+
 
             var unreadUpdatesId = [];
 
@@ -448,6 +453,7 @@
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
             }, 0)
+            console.log('-----');
           });
 
           $scope.setTicketUpdate = function (value) {
@@ -1081,7 +1087,6 @@
           }
 
           $scope.addAttachmentFiles = function (file) {
-            // console.log(file, 'file to upload')
             $scope.ticketUpdate.attachments.push(file);
             $scope.disabledWhenLoadAttachment = true;
 

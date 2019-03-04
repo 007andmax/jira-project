@@ -1,6 +1,7 @@
-<div class="container-ticket-content nano" show-ticket-details>
-  <div class="nano-content">
-    <div class="ticket-content">
+<div class="container-ticket-content nano" show-ticket-details >
+  <div class="nano-content" >
+    <loading-indicator loading-trigger="!isLoaded"></loading-indicator>
+    <div class="ticket-content" ng-show="isLoaded">
       <div ng-form="editTicketForm">
         <div class="ticket-header clearfix ticket-fixed-header">
           <div id="ticket-header-content">
