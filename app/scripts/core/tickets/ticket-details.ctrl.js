@@ -922,9 +922,10 @@
                       $scope.ticketUpdate.note = '';
                       UserNotificationService.show('New ticket update containing a note has been posted', true);
                       setCreateUpdateFormToDefault();
+                      console.log($(".ticket-alert-msg").offset().top, '111');
                       $('.container-ticket-content .nano-content').animate({
-                        scrollTop: $("#ticket-alert-msg").offset().top
-                      }, 1000);
+                        scrollTop: 300
+                      }, 1000, 'swing');
                       return;
 
                     case 'SERVICE':
@@ -934,10 +935,10 @@
                         UserNotificationService.show('New ticket update containing a service has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
-                      console.log('1235123512351235123512351351');
+                      console.log($(".ticket-alert-msg").offset().top, '111');
                       $('.container-ticket-content .nano-content').animate({
-                        scrollTop: $("#ticket-alert-msg").offset().top
-                      }, 1000);
+                        scrollTop: 300
+                      }, 1000, 'swing');
                       return;
 
                     case 'PRODUCT':
@@ -947,9 +948,10 @@
                         UserNotificationService.show('New ticket update containing a product has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
+                      console.log($(".ticket-alert-msg").offset().top, '111');
                       $('.container-ticket-content .nano-content').animate({
-                        scrollTop: $("#ticket-alert-msg").offset().top
-                      }, 1000);
+                        scrollTop: 300
+                      }, 1000, 'swing');
                       return;
                   }
                 }
