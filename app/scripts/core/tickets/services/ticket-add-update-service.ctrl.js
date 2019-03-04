@@ -20,6 +20,11 @@
             $rootScope.currentUser.serviceExpenseDurationPresentation
             :'DURATION_PICKER';
 
+          $scope.$on('hideTimepicker', function(event, data) {
+            if (data) { $scope.showTimePicker = false };
+          });
+
+
           $rootScope.$watch('currentUser', function (val) {
             console.log(val, 'CurrentUser');
           });
@@ -154,8 +159,6 @@
               var newMinutesEnd = $scope.saveEndDate.minute;
               newTimeEnd.setHours(newHoursEnd);
               newTimeEnd.setMinutes(newMinutesEnd);
-              console.log(newTimeStart);
-              console.log(newTimeEnd);
               $rootScope.saveStartDate = new Date(newTimeStart.getTime());
               $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
             }

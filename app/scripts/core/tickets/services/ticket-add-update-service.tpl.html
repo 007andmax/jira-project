@@ -60,14 +60,15 @@
 
     <div class="col-2 new-quantity-picker" ng-if="serviceExpenseDurationPresentation==='TIME_PICKER'">
       <input type="text" class="pointer new-input"
+             id="time-picker-input"
              placeholder="Start date | End date"
              value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
              ng-click="showTimePickerBlock()"
              autocomplete="off" />
-      <div class="timepicker-wrap" ng-if="showTimePicker">
-        <div class="timepicker">
-          <div class="timepicker-choosen-time">
-            <div class="col-6 timepicker-choosen-time__start-time">
+      <div class="timepicker-wrap timepicker-elem" ng-if="showTimePicker" id="time-picker-wrap">
+        <div class="timepicker timepicker-elem" click-outside type="time" show="showTimePicker">
+          <div class="timepicker-choosen-time timepicker-elem">
+            <div class="col-6 timepicker-choosen-time__start-time timepicker-elem">
               <p class="col-12">Start time</p>
               <p class="col-12">{{startDate.hour}}:{{startDate.minute}} {{startDate.time}}</p>
             </div>
