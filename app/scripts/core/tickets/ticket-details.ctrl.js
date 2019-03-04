@@ -916,8 +916,9 @@
                       $scope.ticketUpdate.note = '';
                       UserNotificationService.show('New ticket update containing a note has been posted', true);
                       setCreateUpdateFormToDefault();
-                      $location.hash('ticket-alert-msg');
-                      $anchorScroll();
+                      $('.container-ticket-content .nano-content').animate({
+                        scrollTop: $("#ticket-alert-msg").offset().top
+                      }, 1000);
                       return;
 
                     case 'SERVICE':
@@ -928,8 +929,9 @@
                       }
                       setCreateUpdateFormToDefault();
                       console.log('1235123512351235123512351351');
-                      $location.hash('ticket-alert-msg');
-                      $anchorScroll();
+                      $('.container-ticket-content .nano-content').animate({
+                        scrollTop: $("#ticket-alert-msg").offset().top
+                      }, 1000);
                       return;
 
                     case 'PRODUCT':
@@ -939,8 +941,9 @@
                         UserNotificationService.show('New ticket update containing a product has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
-                      $location.hash('ticket-alert-msg');
-                      $anchorScroll();
+                      $('.container-ticket-content .nano-content').animate({
+                        scrollTop: $("#ticket-alert-msg").offset().top
+                      }, 1000);
                       return;
                   }
                 }
@@ -963,7 +966,6 @@
                 $scope.ticketUpdate.selectedDiscount = null;
               });
             }
-            console.log('12351235');
 
           };
 
