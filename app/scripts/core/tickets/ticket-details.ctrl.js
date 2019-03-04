@@ -922,7 +922,6 @@
                       $scope.ticketUpdate.note = '';
                       UserNotificationService.show('New ticket update containing a note has been posted', true);
                       setCreateUpdateFormToDefault();
-                      console.log($(".ticket-alert-msg").offset().top, '111');
                       $('.container-ticket-content .nano-content').animate({
                         scrollTop: 300
                       }, 1000, 'swing');
@@ -935,7 +934,6 @@
                         UserNotificationService.show('New ticket update containing a service has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
-                      console.log($(".ticket-alert-msg").offset().top, '111');
                       $('.container-ticket-content .nano-content').animate({
                         scrollTop: 300
                       }, 1000, 'swing');
@@ -948,7 +946,6 @@
                         UserNotificationService.show('New ticket update containing a product has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
-                      console.log($(".ticket-alert-msg").offset().top, '111');
                       $('.container-ticket-content .nano-content').animate({
                         scrollTop: 300
                       }, 1000, 'swing');

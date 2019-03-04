@@ -332,7 +332,7 @@
                   scope.quantity = +hour + +scope.quantity - Math.floor(scope.quantity)  || undefined;
                   console.log(scope.quantity, 'hour after');
                 } else if (scope.type === 'minutes') {
-                  minutesElement.val((+(minute)).toFixed(2));
+                  minutesElement.val((+(minute)));
                   console.log(scope.quantity, 'minute before');
                   scope.quantity = (Math.floor(scope.quantity) + ((+minute)/60)) || undefined;
                   console.log(scope.quantity, 'minute after');
