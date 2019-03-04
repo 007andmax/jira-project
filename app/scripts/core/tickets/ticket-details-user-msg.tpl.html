@@ -1,5 +1,6 @@
 <div>
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'MY_TICKET')">
     <div class="alert alert-info">
       <strong>You </strong>Claimed this ticket on {{ ticketDetails.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}
@@ -7,6 +8,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'ASSIGNED_TO_ME')">
     <div class="alert alert-info">
       <strong>{{ getUserName(ticketDetails.assignPerformer) }}</strong>
@@ -26,6 +28,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'USER_RE-ASSIGNED_USER')">
     <div class="alert alert-info">
       <strong>{{ getUserName(ticketDetails.assignPerformer) }}</strong>
@@ -36,6 +39,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'USER_ASSIGNED_USER')">
     <div class="alert alert-info">
       <strong>{{ getUserName(ticketDetails.assignPerformer) }}</strong>
@@ -46,6 +50,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'I_ASSIGNED_TO_USER')">
     <div class="alert alert-info">
       <strong>You</strong> assigned this ticket to
@@ -55,6 +60,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'I_RE-ASSIGNED_TO_USER')">
     <div class="alert alert-info">
       <strong>You</strong> re-assigned this ticket to
@@ -64,6 +70,7 @@
   </div>
 
   <div class="ticket-alert-msg"
+       id="ticket-alert-msg"
        ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'USER_CLAIMED')">
     <div class="alert alert-info">
       <strong>{{ getUserName(ticketDetails.assignedUser) }}</strong>
