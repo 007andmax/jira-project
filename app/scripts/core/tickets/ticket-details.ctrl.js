@@ -814,7 +814,7 @@
 
                 ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
 
-                if ( $scope.currentOpenTab === 'SERVICE' && !ticketUpdateToSend.services[0].item) {
+                if ( $scope.currentOpenTab === 'SERVICE' && !ticketUpdateToSend.services[0].item && !close) {
                   $scope.showServicesError = true;
                   $scope.isSavingUpdate = false;
                   return
