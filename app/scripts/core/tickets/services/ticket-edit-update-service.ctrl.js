@@ -14,8 +14,6 @@
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
           var editDateStart = new Date($scope.service.durationStart);
           var editDateEnd = new Date($scope.service.durationEnd );
-          console.log($scope.service.durationStart, 'editDateStart');
-          console.log($scope.service.durationEnd, 'editDateStart');
           $rootScope.saveForStartDate = new Date($scope.editService.durationStart);
           $rootScope.saveForEndDate =  new Date($scope.editService.durationEnd);
           $rootScope.quantityForSave = $scope.editService.quantity;
@@ -48,9 +46,6 @@
           }
 
 
-
-          console.log($scope.editService.durationStart, '------');
-          console.log($scope.saveEndDate, '------');
           //TimePicker start
           $scope.showTimePicker = false;
           $scope.startDate = null;
@@ -223,8 +218,6 @@
               $rootScope.saveStartDate =  $scope.saveStartDate;
               $rootScope.saveEndDate =  $scope.saveEndDate;
             }
-            console.log($scope.saveStartDate , '$scope.saveStartDate');
-            console.log($scope.editService.quantity , '$scope.saveStartDate');
           }
 
           //TimePicker end
@@ -232,7 +225,6 @@
           $scope.saveUpdateService = function (form) {
             $scope.disableQuantityWatcher = true;
             if (form.$valid) {
-              console.log('111111');
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
@@ -244,7 +236,6 @@
               var isEndTimeChange = $scope.service.isEndTimeChange != $scope.editService.isEndTimeChange;
 
               if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange || isDescountAmountChange || isDiscountTypeChange || isStartTimeChange || isEndTimeChange)) {
-                console.log('22222');
                 $scope.setEditExpenseId();
                 return;
               }

@@ -25,10 +25,6 @@
           });
 
 
-          $rootScope.$watch('currentUser', function (val) {
-            console.log(val, 'CurrentUser');
-          });
-
           $scope.getMinutes = function () {
             var result = {};
             for (var i = 0; i < 60; i ++) {
@@ -56,8 +52,6 @@
           $scope.saveTime = function () {
             $scope.saveStartDate = $scope.startDate;
             $scope.saveEndDate = $scope.endDate;
-            console.log($scope.saveStartDate, 'saveStartDate');
-            console.log($scope.saveEndDate, 'saveEndDate');
             $rootScope.saveStartDate =  $scope.saveStartDate;
             $rootScope.saveEndDate =  $scope.saveEndDate;
             $scope.showTimePicker = !$scope.showTimePicker;
@@ -90,8 +84,6 @@
             var newMinutesEnd = $rootScope.saveEndDate.minute;
             newTimeEnd.setHours(newHoursEnd);
             newTimeEnd.setMinutes(newMinutesEnd);
-            console.log(newTimeStart);
-            console.log(newTimeEnd);
             $rootScope.saveStartDate = new Date(newTimeStart.getTime());
             $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
 

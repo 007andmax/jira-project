@@ -58,9 +58,6 @@
 
 
 
-          // console.log($scope.usersCurrentCompany, "SCOPESCOPESCOPE");
-
-
           $rootScope.toggleUpdateWindow = function(state) {
             $rootScope.isMobileUpdateShown = state;
 
@@ -159,16 +156,6 @@
 
             $scope.isEmail = $scope.ticketDetails.ticketSource === 'FROM_EMAIL';
 
-            // console.log(CompaniesService.getAllCompanies())
-
-            // $scope.companyScope = [
-            //   "52dfe577-a8ac-4eb7-8a9f-0fed029c6ce1",
-            //   "c7cccdb1-e8bd-41d3-9b83-c8d188266ed8",
-            //   "36d5bfd5-b856-42be-aa20-b3babd17a8f5",
-            //   "fdadb2df-ed3d-4e28-b41e-741617b7ffa6",
-            //   "844061ac-7570-433c-9dcb-3663ebf0725e"
-            // ]
-
             if ($scope.isEmail) {
               setUserCompanies();
             }
@@ -264,50 +251,13 @@
 
             $scope.updateNoteRequest = function(updateId, note, callback) {
               TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
-                console.log('note updated', resp);
                 $scope.isNoteUpdating = false;
                 if (callback) callback()
               })
             };
 
-// <<<<<<< HEAD
-            // $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
-            //   // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
-            //
-            //   // deleteTicketExpense(ticketId, updateId, products, services, callback)
-            //   TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
-            //
-            //     // console.log('I SHOULD DELETEEEEEE')
-            //     productExpense.forEach(function(id) {
-            //       ticketUpdate.products = ticketUpdate.products.filter(function(product) {
-            //         return product.id !== id;
-            //       })
-            //     });
-            //
-            //     serviceExpence.forEach(function(id) {
-            //       ticketUpdate.services = ticketUpdate.services.filter(function(service) {
-            //         return service.id !== id;
-            //       })
-            //     })
-            //   })
-            // }
-// =======
-//
-// >>>>>>> mobile-version
 
             function setUserCompanies() {
-              // $scope.userCompanies = $scope.ticketDetails.userCompanies
-              //   .filter(function(id) {
-              //     return id !== $scope.company.id;
-              //   })
-              //   .map(function(id) {
-              //     var cmpData = CompanyService.getOnyById(id);
-              //
-              //     return {
-              //       id: id,
-              //       name: cmpData
-              //     }
-              //   })
 
               if (!$scope.ticketDetails.userCompanies) {
                 var ticket = TicketsService.getTicketFromStorage($scope.ticketDetails.id);
@@ -331,7 +281,6 @@
             $scope.$watch("ticketDetails.attachments.length", function() {
               $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
                 var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
-                console.log(type, el, 'el')
                 if (!~acc.indexOf(type)) {
                   acc.push(type);
                 }
@@ -460,8 +409,6 @@
 
           function initUsers() {
             $scope.allUsers = UsersService.getAllUsers();
-            console.log( $scope.allUsers, ' $scope.allUsers');
-            console.log( $scope.ticketDetails.company.id, ' $scope.currentCompany');
             $scope.allUsers = $scope.allUsers.filter(function(item){
               return (item.accountType === 'TECH' && !item.deletedAt)
             });
@@ -469,17 +416,7 @@
             $scope.allUsers.map(function(item) {
                $scope.usersToWatch.push(item);
             });
-            console.log( $scope.ticketSharedList, '12351235');
 
-            var resArr = [];
-            // $scope.allUsers.forEach(function(item){
-            //   var i = resArr.findIndex(x => x.name == item.name);
-            //   if(i <= -1){
-            //     resArr.push({id: item.id, name: item.name});
-            //   }
-            // });
-            console.log( $scope.allUsers, ' $scope.allUsers after filter');
-            console.log( $scope.usersToWatch, ' $scope.allUsers after filter');
           }
 
 
@@ -490,7 +427,6 @@
           };
 
           $scope.setMobileForm = function(form) {
-            // console.log('SETMOBILE FORM', form)
             $scope.mobileUpdateForm = form;
           }
 
@@ -781,9 +717,6 @@
                 editVersionedId = item.item.versionedId;
               }
 
-
-              // console.log(item, "ITEM")
-
               $scope.disabledSave = true;
 
               var serviceDate = new Date(item.date);
@@ -933,8 +866,6 @@
                 });
               }
 
-              console.log($scope.currentOpenTab);
-              console.log(ticketUpdateToSend);
 
               TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
 
@@ -1050,14 +981,11 @@
           $scope.$on('userToAssignToTicket', function(evt, val) {
             var data = val.data;
             var id = data.id;
-            console.log($scope.ticketSharedUsersList, '$scope.ticketSharedUsersList');
 
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
               var userId = el.user ? el.user.id : el.id
               return userId === id;
             })
-
-            // console.log(index, 'indez')
 
 
             if (index !== -1) {
@@ -1068,11 +996,8 @@
                 notify: true
               });
             }
-
-            // console.log($scope.ticketSharedUsersList);
-
             $scope.$apply();
-          })
+          });
 
 
 
@@ -1084,7 +1009,6 @@
           }, true)
 
           $scope.$watch('ticketSharedUsersList.length', function(val) {
-            console.log('test');
             if (val > 8) {
               $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
             }
@@ -1259,7 +1183,6 @@
 
             var processedShares = [];
             $scope.ticketSharedUsersList = getDefaultSharedList();
-            console.log($scope.ticketSharedUsersList, '$scope.ticketSharedUsersList');
 
             for (var i = 0; i < shares.length; i++) {
 
@@ -1529,12 +1452,9 @@
             }
             $scope.allUsers.map(function(item) {
               if (!user.deletedAt) {
-                console.log(item, 'ITEM');
                 addUserToResult(item, 'addUserFromAll');
               }
             });
-
-            console.log(result);
 
 
             $rootScope.usersToNotify = result.slice().map(function(el) { return el.user; });
@@ -1557,25 +1477,6 @@
             }
 
           }
-
-          // $scope.$on('time', function(event, data) {
-          //   console.log('test,time', data);
-          //   console.log($scope, 'ticketUpdate.services');
-          //   $scope.ticketDetails.updates.map(function(item) {
-          //     console.log(item, 'ITEM');
-          //     if (item.services[0].id === data.id) {
-          //       console.log('123512351235123');
-          //        item.services[0].durationEnd = data.durationEnd;
-          //       item.services[0].durationStart =  data.durationStart;
-          //       item.services[0].quantity = data.quantity;
-          //       console.log(item.services[0]);
-          //     }
-          //     return item;
-          //   })
-          //
-          //   console.log($scope.ticketDetails);
-          //
-          // });
 
           var condition = 'ticketUpdate.note' +
             '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +

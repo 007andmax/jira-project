@@ -11,7 +11,6 @@
 
 
           var users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
-          console.log($rootScope.usersToNotify, '$rootScope.usersToNotify');
           var getUserAvatarUrl = $rootScope.getUserAvatarUrl;
 
           var inputElement = element.find('input');
@@ -30,7 +29,6 @@
             return $rootScope.ticketSharedList;
           }, function(val) {
 
-            // console.log(val, 'CHANGEINEGSGSDG')
             $scope.usersToAssign = val;
             var ids = $scope.usersToAssign.map(function(el) {
               return el.user.id;
@@ -39,17 +37,12 @@
             var idArray = [];
 
 
-
-            // console.log(idArray, 'IDAARRAYADSAD')
-
             var links = element.find('a').map(function(el, i) {
-              // console.log(this, 'THIS')
 
               var index = ids.indexOf(this.id);
 
               if (~index) {
 
-                // console.log('this element should br active', this)
                 this.parentNode.classList.add('active');
               } else {
                 this.parentNode.classList.remove('active');
@@ -57,11 +50,6 @@
 
             })
 
-            // console.log(links, 'links')
-            //
-            // console.log(links, 'links')
-            // console.log('newnenwnewnw', val)
-            // $scope.autoComplete && $scope.autoComplete();
           })
 
           var refreshAssignTicket = function () {
@@ -135,8 +123,6 @@
                 items++;
 
                 noAvatar = $compile(angular.element(noAvatar))($scope)[0].outerHTML;
-                // $scope.$apply();
-                // console.log(noAvatar, 'NOAVAtAR')
 
                 var avatar = suggestion.data.avatar ? isAvatar : noAvatar;
                 var image = new Image();
@@ -145,7 +131,6 @@
 
                   return el.id === suggestion.data.id
                 });
-                // console.log(index)
                 image.src = avatarUrl;
                 return '<a href="javascript:void(0)" id="' + suggestion.data.id + '" class="dropdown-link"> \
                           ' + avatar + ' \
@@ -171,7 +156,6 @@
                 lastSelected: 'active'
               },
               onSelect: function (selection) {
-                console.log(selection, 'selections')
 
                 if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
                   inputElement.off('tokenfield:removedtoken');
@@ -179,22 +163,6 @@
                 }
 
                 var user = selection.data;
-
-                // $scope.usersToAssign.push(user);
-                //
-                // var id = user.id;
-
-                // var index = $scope.usersToAssign.findIndex(function(el) {
-                //   return el.id === id;
-                // })
-                //
-                // console.log(index, 'indez')
-                //
-                // if (index !== -1) {
-                //   $scope.usersToAssign.splice(index, 1);
-                // } else {
-                //   $scope.usersToAssign.push(data);
-                // }
 
                 inputElement.on('tokenfield:removedtoken', function (e) {
                   inputElement.off('tokenfield:removedtoken');
@@ -211,16 +179,6 @@
 
 
                 inputElement.val('');
-                // // .tokenfield({
-                // //   limit: 1,
-                // //   autocomplete: null
-                // // })
-                // .tokenfield('createToken', selection.data.primaryEmail);
-
-                // $rootScope.userToAssignToTicket = selection.data;
-
-                // inputElement.data('bs.tokenfield').$input.remove();
-                // console.log('assign, here, look', selection.data)
                 inputElement.val('').autocomplete('onValueChange', true);
 
                 actionElement.removeClass('disabled').removeAttr('disabled');
