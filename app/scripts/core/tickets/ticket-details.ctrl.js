@@ -7,10 +7,10 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService', '$location', '$anchorScroll',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService, $location, $anchorScroll) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
@@ -454,7 +454,36 @@
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
             }, 0);
+
+            initUsers();
           });
+
+          function initUsers() {
+            $scope.allUsers = UsersService.getAllUsers();
+            console.log( $scope.allUsers, ' $scope.allUsers');
+            console.log( $scope.ticketDetails.company.id, ' $scope.currentCompany');
+            $scope.allUsers = $scope.allUsers.filter(function(item){
+              return (item.accountType === 'TECH' && !item.deletedAt)
+            });
+
+            $scope.allUsers.map(function(item) {
+               $scope.usersToWatch.push(item);
+            });
+            console.log( $scope.ticketSharedList, '12351235');
+
+            var resArr = [];
+            // $scope.allUsers.forEach(function(item){
+            //   var i = resArr.findIndex(x => x.name == item.name);
+            //   if(i <= -1){
+            //     resArr.push({id: item.id, name: item.name});
+            //   }
+            // });
+            console.log( $scope.allUsers, ' $scope.allUsers after filter');
+            console.log( $scope.usersToWatch, ' $scope.allUsers after filter');
+          }
+
+
+
 
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;
@@ -860,7 +889,6 @@
                   $scope.showServicesError = false;
                 }
 
-                console.log('12351235');
 
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
@@ -1022,6 +1050,7 @@
           $scope.$on('userToAssignToTicket', function(evt, val) {
             var data = val.data;
             var id = data.id;
+            console.log($scope.ticketSharedUsersList, '$scope.ticketSharedUsersList');
 
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
               var userId = el.user ? el.user.id : el.id
@@ -1029,6 +1058,7 @@
             })
 
             // console.log(index, 'indez')
+
 
             if (index !== -1) {
               $scope.ticketSharedUsersList.splice(index, 1);
@@ -1054,6 +1084,7 @@
           }, true)
 
           $scope.$watch('ticketSharedUsersList.length', function(val) {
+            console.log('test');
             if (val > 8) {
               $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
             }
@@ -1071,7 +1102,7 @@
             return arr.filter(function(el) {
               return el.user.accountType === type;
             })
-          }
+          };
 
           function setTicketUpdateToDefault() {
             if (window.innerWidth <= 414) return;
@@ -1228,6 +1259,7 @@
 
             var processedShares = [];
             $scope.ticketSharedUsersList = getDefaultSharedList();
+            console.log($scope.ticketSharedUsersList, '$scope.ticketSharedUsersList');
 
             for (var i = 0; i < shares.length; i++) {
 
@@ -1491,16 +1523,27 @@
             for (var i = 0; i < usersFromTicketCompany.length; i++) {
               var user = usersFromTicketCompany[i];
 
-              if (user.subscription && user.subscription.ticketManager) {
+              if (!user.deletedAt && user.subscription && user.subscription.ticketManager) {
                 addUserToResult(user);
               }
             }
+            $scope.allUsers.map(function(item) {
+              if (!user.deletedAt) {
+                console.log(item, 'ITEM');
+                addUserToResult(item, 'addUserFromAll');
+              }
+            });
+
+            console.log(result);
+
 
             $rootScope.usersToNotify = result.slice().map(function(el) { return el.user; });
 
+
+
             return result;
 
-            function addUserToResult(user) {
+            function addUserToResult(user, type) {
 
               var duplicate = result.find(function (item) {
                 return item.user && item.user.id === user.id;

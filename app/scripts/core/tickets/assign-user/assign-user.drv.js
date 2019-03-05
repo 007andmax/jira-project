@@ -11,6 +11,7 @@
 
 
           var users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
+          console.log($rootScope.usersToNotify, '$rootScope.usersToNotify');
           var getUserAvatarUrl = $rootScope.getUserAvatarUrl;
 
           var inputElement = element.find('input');
@@ -127,7 +128,7 @@
                 var noAvatar = [
                   '<div class="default-user-avatar ' + className +  '">',
                     '<span>' + suggestion.data.firstName[0].toUpperCase() + '</span>',
-                    '<span>' + suggestion.data.lastName[0].toUpperCase() + '</span>',
+                    '<span>' + (suggestion.data.lastName.length > 1 ?  suggestion.data.lastName[0].toUpperCase() : '') + '</span>',
                   '</div>'
                 ].join('');
 
@@ -170,7 +171,7 @@
                 lastSelected: 'active'
               },
               onSelect: function (selection) {
-                // console.log(selection, 'selections')
+                console.log(selection, 'selections')
 
                 if (typeof(inputElement.data('bs.tokenfield')) != 'undefined') {
                   inputElement.off('tokenfield:removedtoken');
