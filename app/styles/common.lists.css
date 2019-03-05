@@ -2914,6 +2914,10 @@ Devices tab
   border-bottom: 1px solid #fde9e9;
 }
 
+.has-error.has-error-service {
+  border: 1px solid #e53935;
+}
+
 .qt-product-edit .error-msg {
   font-size: 11px;
   line-height: 12px;

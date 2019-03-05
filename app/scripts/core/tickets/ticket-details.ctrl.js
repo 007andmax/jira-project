@@ -19,6 +19,7 @@
           var ticketMobileSettings = ticketMobileSettings;
           $rootScope.saveForStartDate = new Date();
           $rootScope.saveForEndDate = new Date();
+          $scope.showServicesError = false;
 
 
           $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -452,8 +453,7 @@
 
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
-            }, 0)
-            console.log('-----');
+            }, 0);
           });
 
           $scope.setTicketUpdate = function (value) {
@@ -785,6 +785,14 @@
             }
           };
 
+          $scope.getErrorStatus = function() {
+            return $scope.showServicesError;
+          };
+
+          $scope.$on('serviceExpenseItem', function (event, data) {
+            $scope.showServicesError = false;
+          });
+
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
@@ -815,6 +823,7 @@
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
+
             if (true ) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -843,33 +852,20 @@
 
                 ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
 
+                if ( $scope.currentOpenTab === 'SERVICE' && !ticketUpdateToSend.services[0].item) {
+                  $scope.showServicesError = true;
+                  $scope.isSavingUpdate = false;
+                  return
+                } else {
+                  $scope.showServicesError = false;
+                }
+
+                console.log('12351235');
+
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
                   var startDate = new Date();
                   var endDate = new Date();
-
-                  // if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER') {
-                  //   if ($rootScope.saveStartDate.time.toLowerCase() === 'pm' && $rootScope.saveStartDate.hour !== 12) {
-                  //     startDate.setHours($rootScope.saveStartDate.hour+ 12);
-                  //   } else if ($rootScope.saveStartDate.time.toLowerCase() === 'am' && $rootScope.saveStartDate.hour == 12) {
-                  //     endDate.setHours($rootScope.saveStartDate.hour-12);
-                  //   } else {
-                  //     startDate.setHours($rootScope.saveStartDate.hour);
-                  //   }
-                  //   startDate.setMinutes($rootScope.saveStartDate.minute);
-                  //   if ($rootScope.saveEndDate.time.toLowerCase() === 'pm' && $rootScope.saveEndDate.hour !== 12) {
-                  //     endDate.setHours($rootScope.saveEndDate.hour + 12);
-                  //   } else if ($rootScope.saveEndDate.time.toLowerCase() === 'am' && $rootScope.saveEndDate.hour == 12) {
-                  //     endDate.setHours($rootScope.saveEndDate.hour-12);
-                  //   } else {
-                  //     endDate.setHours($rootScope.saveEndDate.hour);
-                  //   }
-                  //   console.log(startDate, endDate);
-                  //   endDate.setMinutes($rootScope.saveEndDate.minute);
-                  // } else {
-                  //   endDate = new Date(startDate.getTime()+ $scope.ticketUpdate.services[i].quantity*3600000);
-                  //
-                  // }
 
                   if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
@@ -909,6 +905,9 @@
                 });
               }
 
+              console.log($scope.currentOpenTab);
+              console.log(ticketUpdateToSend);
+
               TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
 
                 $scope.isSavingUpdate = false;
@@ -929,6 +928,7 @@
 
                     case 'SERVICE':
                       if (ticketUpdateToSend.services.length > 1) {
+                        $scope.showServicesError = false;
                         UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
                       } else {
                         UserNotificationService.show('New ticket update containing a service has been posted', true);

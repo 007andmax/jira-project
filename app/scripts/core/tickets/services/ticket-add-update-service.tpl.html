@@ -1,10 +1,10 @@
 <form name="addServiceForm" class="ticket-add-service">
-
   <div class="ticket-add-service-content">
-    <div class="col-5" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
+    <div class="col-5">
       <div uib-dropdown>
         <input type="text"
                name="serviceName"
+               ng-class="{'has-error has-error-service': getErrorStatus()}"
                ng-disabled="!serviceList.length"
                ng-model="serviceExpense.item"
                ng-minlength="1"

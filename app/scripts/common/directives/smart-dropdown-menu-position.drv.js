@@ -62,9 +62,7 @@
 
 
             if((winHeight - productInputTopPosition) < 360 && !(window.innerWidth <= 414)) {
-              console.log('we are not hereeee')
               productDropdownMenu.css({'transform': 'translateY(calc(-100% - 65px))'});
-
             }
 
 

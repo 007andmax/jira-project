@@ -188,7 +188,6 @@
             if(!$scope.serviceExpense || !$scope.serviceExpense.item || !$scope.serviceExpense.item.name){
               return;
             }
-
             for (var i = 0; i < $scope.serviceList.length; i++) {
 
               if(!$scope.serviceList[i].name){
@@ -197,14 +196,9 @@
 
               if ($scope.serviceExpense.item.name.toLowerCase() === $scope.serviceList[i].name.toLowerCase()) {
                 $scope.serviceExpense.item = angular.copy($scope.serviceList[i]);
+                $scope.$emit('serviceExpenseItem', true);
                 return;
               }
-              // else {
-              //   if ($scope.serviceExpense.item && $scope.serviceExpense.item.versionedId) {
-              //     $scope.serviceExpense.item.versionedId.id = undefined;
-              //   }
-              // }
-
             }
           });
 
