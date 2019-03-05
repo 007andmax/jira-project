@@ -43,7 +43,6 @@
   text-align: right;
 }
 
-
 .settings-main-wrapper .default-tax-wrapper {
   float: left;
   width: 100%;
@@ -51,38 +50,56 @@
   padding-bottom: 80px;
 }
 
-.settings-main-wrapper .default-tax-wrapper .list-heading{
+.settings-main-wrapper .default-tax-wrapper .list-heading {
   padding: 0;
   padding-bottom: 10px;
   font-size: 0;
 }
-.settings-main-wrapper .default-tax-wrapper .list-heading div{
+
+.settings-main-wrapper .default-tax-wrapper .list-heading div {
   font-size: 14px;
 }
+
 .settings-main-wrapper .ticket-and-invoice-wrapper {
   float: left;
   width: 100%;
   padding-bottom: 110px;
 }
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .dropdown-account-type li {
+  padding: 6px 5px;
+  cursor: pointer;
+}
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .dropdown-account-type {
+  top: calc(100% - 1px);
+}
+
 .settings-main-wrapper .ticket-and-invoice-wrapper h3 {
   margin: 15px 0 10px;
 }
-.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper{
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper {
   padding-top: 0;
   padding-bottom: 25px;
 }
-.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .ar-department{
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .ar-department {
   padding-top: 25px;
 }
-.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .form-group.full-width label.control{
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .form-group.full-width label.control {
   margin: 0;
 }
-.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .create-user-form{
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .create-user-form {
   margin-top: 0;
 }
-.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .form-row .row{
+
+.settings-main-wrapper .ticket-and-invoice-wrapper .template-form-wrapper .form-row .row {
   margin-bottom: 13px;
 }
+
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
   padding-top: 0;
 }
@@ -100,35 +117,44 @@
   width: 100%;
   padding-bottom: 330px;
 }
-.tags-management .form-group{
+
+.tags-management .form-group {
   margin-top: 15px;
   margin-bottom: 0;
 }
-.tags-management .qt-list{
+
+.tags-management .qt-list {
   padding: 0px;
 }
-.tags-management .qt-list>li + li{
+
+.tags-management .qt-list > li + li {
   height: 60px;
   line-height: 45px;
 }
-.tags-management .qt-list>li{
+
+.tags-management .qt-list > li {
   padding: 10px 0;
 }
-.tags-management .qt-list>li:hover:before, .tags-management .qt-list>li:hover:after{
+
+.tags-management .qt-list > li:hover:before, .tags-management .qt-list > li:hover:after {
   display: none;
 }
-.tags-management .qt-list .list-heading{
+
+.tags-management .qt-list .list-heading {
   padding: 10px 0;
   cursor: pointer !important;
 }
-.tags-management .qt-list .col-1, .tags-management .qt-list .col-2, .tags-management .qt-list .col-3{
+
+.tags-management .qt-list .col-1, .tags-management .qt-list .col-2, .tags-management .qt-list .col-3 {
   text-align: left;
   width: 30%;
 }
-.tags-management .qt-list>li + li .col-3{
+
+.tags-management .qt-list > li + li .col-3 {
   padding-left: 20px;
 }
-.tags-management .qt-list .col-1{
+
+.tags-management .qt-list .col-1 {
   text-align: left;
   margin-top: 0;
   white-space: nowrap;
@@ -136,7 +162,8 @@
   text-overflow: ellipsis;
   padding-right: 16px;
 }
-.tags-management .qt-list .col-1 .icn-edit{
+
+.tags-management .qt-list .col-1 .icn-edit {
   visibility: hidden;
   margin-top: 14px;
   cursor: pointer;
@@ -144,13 +171,16 @@
   top: 1px;
   right: 0;
 }
-.tags-management .qt-list .col-1:hover .icn-edit{
+
+.tags-management .qt-list .col-1:hover .icn-edit {
   visibility: visible;
 }
+
 .tags-management .qt-list .col-2 {
   cursor: pointer;
 }
-.tags-management .qt-list .col-2 .colored-circle{
+
+.tags-management .qt-list .col-2 .colored-circle {
   display: inline-block;
   vertical-align: middle;
   width: 12px;
@@ -160,40 +190,49 @@
   overflow: hidden;
   margin-right: 5px;
 }
-.tags-management .qt-list .col-2 .icn-picker{
+
+.tags-management .qt-list .col-2 .icn-picker {
   background-image: url("../images/new-icons/eyedropper-na.png");
 }
+
 .tags-management .qt-list .col-4 {
   cursor: pointer;
   float: right;
   padding-right: 5px;
 }
-.tags-management .qt-list .col-4:last-child{
+
+.tags-management .qt-list .col-4:last-child {
   padding-right: 5px;
 }
-.tags-management .qt-list .col-4 .icn-replace{
+
+.tags-management .qt-list .col-4 .icn-replace {
   background-position: -424px -98px;
   width: 14px;
   height: 14px;
   margin-top: 14px;
 }
-.tags-management .qt-list .col-4 .icn-replace:hover{
+
+.tags-management .qt-list .col-4 .icn-replace:hover {
   background-position: -474px -98px;
 }
-.tags-management .tag-add{
+
+.tags-management .tag-add {
   display: inline-block;
-  color: #1586E4;
+  color: #1586e4;
 }
-.tags-management .qt-list .col-4 .move-services .custom-scroll label{
+
+.tags-management .qt-list .col-4 .move-services .custom-scroll label {
   font-size: 15px;
   height: 20px;
   line-height: 20px;
 }
+
 .smtp-wrap {
   float: left;
   width: 100%;
   padding-bottom: 40px;
 }
+
 .smtp-wrap .show-password .icn-hide-password {
   display: inline-block;
   position: absolute;
@@ -201,6 +240,7 @@
   right: 15px;
   cursor: pointer;
 }
+
 .smtp-wrap .show-password .icn-show-password,
 .smtp-wrap .restore-test-email .icn-restore {
   display: inline-block;
@@ -210,51 +250,65 @@
   left: unset !important;
   cursor: pointer;
 }
+
 .smtp-wrap .domain {
   width: 49%;
   max-width: none;
 }
+
 .smtp-wrap .port {
   width: 23%;
 }
+
 .smtp-wrap .port > input {
   padding: 8px;
 }
+
 .smtp-wrap .encryption-type {
   width: 24%;
 }
+
 .smtp-wrap select {
   padding: 8px;
 }
-.smtp-wrap select option{
+
+.smtp-wrap select option {
 
 }
+
 .smtp-wrap .smtp-domains > span > a {
   cursor: pointer;
   color: blue;
   vertical-align: middle;
 }
+
 .smtp-wrap .smtp-domains > span > a:hover {
   color: blueviolet;
 }
+
 .smtp-wrap .smtp-domains > span {
   cursor: pointer;
 }
+
 .smtp-wrap .smtp-domains > span:not(:first-child) {
   margin-left: 28px;
 }
+
 .smtp-wrap .error-msg {
   vertical-align: middle;
   color: red;
 }
+
 .test-smtp-connection .loading-indicator-wrap {
   margin-right: 20px;
 }
+
 .hint-tooltip .tooltip-inner,
 .hint-tooltip.tooltip-inner {
   white-space: pre-wrap;
   height: auto;
 }
+
 .hint-icon {
   display: inline-block;
   height: 25px;
@@ -267,10 +321,12 @@
   padding-top: 2px;
   cursor: help;
 }
+
 .test-email-wrap .input-btn-cr {
   align-self: flex-end;
   margin-left: 15px;
 }
+
 .test-email-wrap .form-row {
   display: inline-block;
   width: 200px;

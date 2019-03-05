@@ -7,16 +7,20 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
           rightPanelSharedState.companyId = '';
 
           var ticketMobileSettings = ticketMobileSettings;
+          $rootScope.saveForStartDate = new Date();
+          $rootScope.saveForEndDate = new Date();
+          $scope.showServicesError = false;
+
 
           $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
           $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -26,13 +30,32 @@
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
-
+          $scope.tagColors = TagsService.getColors();
+          var today = new Date();
+          $scope.date = today;
+          $scope.hour = today.getHours();
+          $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
+          $scope.isLoaded = false;
 
           $timeout(function() {
             ticketMobileSettings.data = $scope;
-          }, 3000)
+          }, 3000);
 
-          // console.log($scope.usersCurrentCompany, "SCOPESCOPESCOPE");
+
+          $scope.getTicketStatus = function(ticket, arg) {
+            var status;
+            if(ticket.assignedUserId === null) {
+              status = 'unassigned';
+            } else if(ticket.status === 'COMPLETED') {
+              status = 'completed';
+            } else if(ticket.status === 'IN_PROGRESS') {
+              status = 'inProgress';
+            } else if(ticket.status === 'ON_HOLD') {
+              status = 'onHold';
+            }
+            return status;
+          };
+
 
 
           $rootScope.toggleUpdateWindow = function(state) {
@@ -70,7 +93,7 @@
 
           $scope.setEditForm = function(form, name) {
             $scope.editForms[name] = form;
-          }
+          };
 
 
           var params = $state.params.remoteParams;
@@ -122,22 +145,16 @@
             rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
 
             $timeout(function () {
+              $scope.isLoaded = true;
               UserNotificationService.hide();
             }, 1500);
+
+
+
 
             var unreadUpdatesId = [];
 
             $scope.isEmail = $scope.ticketDetails.ticketSource === 'FROM_EMAIL';
-
-            // console.log(CompaniesService.getAllCompanies())
-
-            // $scope.companyScope = [
-            //   "52dfe577-a8ac-4eb7-8a9f-0fed029c6ce1",
-            //   "c7cccdb1-e8bd-41d3-9b83-c8d188266ed8",
-            //   "36d5bfd5-b856-42be-aa20-b3babd17a8f5",
-            //   "fdadb2df-ed3d-4e28-b41e-741617b7ffa6",
-            //   "844061ac-7570-433c-9dcb-3663ebf0725e"
-            // ]
 
             if ($scope.isEmail) {
               setUserCompanies();
@@ -156,8 +173,6 @@
                   $scope.isNoteUpdating = ticketUpdate.id;
                 }
               }
-
-
 
             }
 
@@ -235,55 +250,14 @@
             }
 
             $scope.updateNoteRequest = function(updateId, note, callback) {
-              // updateNote(ticketId, updateId, note, callback)
-
               TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
-                console.log('note updated', resp);
-
                 $scope.isNoteUpdating = false;
-
                 if (callback) callback()
               })
-            }
+            };
 
-// <<<<<<< HEAD
-            // $scope.deleteExpence = function(ticketUpdate, productExpense, serviceExpence) {
-            //   // console.log($scope.ticketDetails.id, ticketUpdate, serviceExpence, productExpense)
-            //
-            //   // deleteTicketExpense(ticketId, updateId, products, services, callback)
-            //   TicketsService.deleteTicketExpense($scope.ticketDetails.id, ticketUpdate.id, productExpense, serviceExpence, function(resp) {
-            //
-            //     // console.log('I SHOULD DELETEEEEEE')
-            //     productExpense.forEach(function(id) {
-            //       ticketUpdate.products = ticketUpdate.products.filter(function(product) {
-            //         return product.id !== id;
-            //       })
-            //     });
-            //
-            //     serviceExpence.forEach(function(id) {
-            //       ticketUpdate.services = ticketUpdate.services.filter(function(service) {
-            //         return service.id !== id;
-            //       })
-            //     })
-            //   })
-            // }
-// =======
-//
-// >>>>>>> mobile-version
 
             function setUserCompanies() {
-              // $scope.userCompanies = $scope.ticketDetails.userCompanies
-              //   .filter(function(id) {
-              //     return id !== $scope.company.id;
-              //   })
-              //   .map(function(id) {
-              //     var cmpData = CompanyService.getOnyById(id);
-              //
-              //     return {
-              //       id: id,
-              //       name: cmpData
-              //     }
-              //   })
 
               if (!$scope.ticketDetails.userCompanies) {
                 var ticket = TicketsService.getTicketFromStorage($scope.ticketDetails.id);
@@ -303,6 +277,31 @@
                 })
 
             }
+
+            $scope.$watch("ticketDetails.attachments.length", function() {
+              $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
+                var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
+                if (!~acc.indexOf(type)) {
+                  acc.push(type);
+                }
+
+                return acc;
+              }, []);
+            })
+
+
+            $scope.$watch('attachmentsToDelete', function(val) {
+              if (val) {
+                $rootScope.attachmentsToDelete = null;
+
+                $scope.ticketDetails.attachments = $scope.ticketDetails.attachments.filter(function(el) {
+                  return !~val.findIndex(function(attachment) {
+                    return attachment.id === el.id;
+                  });
+                })
+              }
+            })
+
 
 
 
@@ -403,15 +402,31 @@
 
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
-            }, 0)
+            }, 0);
+
+            initUsers();
           });
+
+          function initUsers() {
+            $scope.allUsers = UsersService.getAllUsers();
+            $scope.allUsers = $scope.allUsers.filter(function(item){
+              return (item.accountType === 'TECH' && !item.deletedAt)
+            });
+
+            $scope.allUsers.map(function(item) {
+               $scope.usersToWatch.push(item);
+            });
+
+          }
+
+
+
 
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;
           };
 
           $scope.setMobileForm = function(form) {
-            // console.log('SETMOBILE FORM', form)
             $scope.mobileUpdateForm = form;
           }
 
@@ -419,41 +434,8 @@
           })
 
           $scope.updateAndCloseTicket = function (form) {
-// <<<<<<< HEAD
-            // var saveFailed = $scope.saveTicketUpdate(form, true, closeTicket, null, null, true);
-            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
-            //
-            //   if (!saveFailed) {
-            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-            //       if (value === false) {
-            //         closeTicket();
-            //         unwatch();
-            //       }
-            //     });
-            //   }
-            // } else {
-            //   closeTicket()
-            // }
-
             if (!form) form = $scope.mobileUpdateForm;
             var saveFailed = $scope.saveTicketUpdate({$valid: true}, true, closeTicket, null, null, true);
-// =======
-
-
-            // if (hasUnsavedUpdate($scope.ticketUpdate)) {
-            //
-            //   if (!saveFailed) {
-            //     var unwatch = $scope.$watch('isSavingUpdate', function (value) {
-            //       if (value === false) {
-            //         closeTicket();
-            //         unwatch();
-            //       }
-            //     });
-            //   }
-            // } else {
-            //   closeTicket()
-            // }
-// >>>>>>> mobile-version
           };
 
           $scope.$watch('ticketDetails.agent', function (value) {
@@ -651,6 +633,32 @@
             $scope.productExpenseModel = model;
           }
 
+          $scope.getFormatedTime = function(time) {
+            var date = new Date(time);
+            var currentTime = {
+              hour:  getHourFormated(date),
+              minute: date.getMinutes() <= 9 ? '0'+date.getMinutes() : date.getMinutes(),
+              time: date.getHours() >= 12 && date.getHours() <= 24 ? 'PM' : 'AM'
+            };
+            return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
+          };
+
+          function getHourFormated(date) {
+            if (date.getHours() < 10 && date.getHours() >= 1) {
+              return '0' + date.getHours()
+            } else if(date.getHours() < 1) {
+              return 12
+            } else if (date.getHours() >= 13){
+              return date.getHours()-12
+            } else {
+              return date.getHours();
+            }
+          }
+
+          $scope.getHtml = function(value){
+            return $sce.trustAsHtml(value);
+          };
+
 
 
 
@@ -663,7 +671,6 @@
           };
 
           $scope.saveUpdateProduct = function (form, item, callback) {
-            // console.log(item, "IIIIII")
             if (form.$valid) {
               var product = item.item;
               var editVersionedId = product.versionedId;
@@ -710,9 +717,6 @@
                 editVersionedId = item.item.versionedId;
               }
 
-
-              // console.log(item, "ITEM")
-
               $scope.disabledSave = true;
 
               var serviceDate = new Date(item.date);
@@ -743,8 +747,15 @@
             }
           };
 
+          $scope.getErrorStatus = function() {
+            return $scope.showServicesError;
+          };
+
+          $scope.$on('serviceExpenseItem', function (event, data) {
+            $scope.showServicesError = false;
+          });
+
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
-            // console.log('WTF')
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
@@ -756,11 +767,8 @@
 
                 $scope.saveUpdateService($scope.editForms.editServiceForm, isExpenseEdit.service, callback);
               }
-
               return;
             }
-
-
 
 
             if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
@@ -768,10 +776,7 @@
                 if (el.item && typeof el.item.name === 'object') {
                   el.item = el.item.name;
                 }
-
                 return el;
-
-
               })
             }
 
@@ -780,7 +785,8 @@
 
             var isEmptyProductValid = (Object.keys($scope.productExpenseModel || {}).length === 3 || Object.keys($scope.productExpenseModel || {}).length === 4 && $scope.productExpenseModel.quantity === '') && Object.keys($scope.productExpenseModel.item || {}).length === 0 && $scope.currentOpenTab === 'PRODUCT' && close;
 
-            if (isEmptyProductValid || form.$valid) {
+
+            if (true ) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
 
@@ -808,15 +814,36 @@
 
                 ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
 
+                if ( $scope.currentOpenTab === 'SERVICE' && !ticketUpdateToSend.services[0].item) {
+                  $scope.showServicesError = true;
+                  $scope.isSavingUpdate = false;
+                  return
+                } else {
+                  $scope.showServicesError = false;
+                }
+
+
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
+                  var startDate = new Date();
+                  var endDate = new Date();
 
-                  ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
+                  if ($rootScope.currentUser.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
+                    $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
+                    $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
+                    ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
+                    ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
+                  }else {
+                    ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
+                    ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
+                    ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
+                  }
+
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 }
 
               } else if ($scope.haveAttachments() || $scope.haveNote()) {
-
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
                 ticketUpdateToSend.attachments = [];
 
@@ -839,6 +866,7 @@
                 });
               }
 
+
               TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
 
                 $scope.isSavingUpdate = false;
@@ -852,15 +880,22 @@
                       $scope.ticketUpdate.note = '';
                       UserNotificationService.show('New ticket update containing a note has been posted', true);
                       setCreateUpdateFormToDefault();
+                      $('.container-ticket-content .nano-content').animate({
+                        scrollTop: 300
+                      }, 1000, 'swing');
                       return;
 
                     case 'SERVICE':
                       if (ticketUpdateToSend.services.length > 1) {
+                        $scope.showServicesError = false;
                         UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
                       } else {
                         UserNotificationService.show('New ticket update containing a service has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
+                      $('.container-ticket-content .nano-content').animate({
+                        scrollTop: 300
+                      }, 1000, 'swing');
                       return;
 
                     case 'PRODUCT':
@@ -870,6 +905,9 @@
                         UserNotificationService.show('New ticket update containing a product has been posted', true);
                       }
                       setCreateUpdateFormToDefault();
+                      $('.container-ticket-content .nano-content').animate({
+                        scrollTop: 300
+                      }, 1000, 'swing');
                       return;
                   }
                 }
@@ -892,7 +930,23 @@
                 $scope.ticketUpdate.selectedDiscount = null;
               });
             }
+
           };
+
+          function getQuantity(start, end) {
+            start = new Date(start);
+
+            end = new Date(end);
+            var startMs = start.getTime();
+            var endMs = end.getTime();
+
+            if (startMs-endMs > 0) {
+              endMs = endMs + 24*3600000;
+              return (endMs-startMs)/3600000 > 0 ? (endMs-startMs)/3600000 : 0;
+            }else {
+              return (endMs-startMs)/3600000 > 0 ? (endMs-startMs)/3600000 : 0;
+            }
+          }
 
           $scope.setEditExpenseId = function (id, item, ticketUpdateId) {
 
@@ -925,9 +979,6 @@
           // ticket notify
 
           $scope.$on('userToAssignToTicket', function(evt, val) {
-
-            // console.log("LEEEEEEEEEEEEEEEe", val)
-            // console.log(evt, val, "SADNESS")
             var data = val.data;
             var id = data.id;
 
@@ -936,7 +987,6 @@
               return userId === id;
             })
 
-            // console.log(index, 'indez')
 
             if (index !== -1) {
               $scope.ticketSharedUsersList.splice(index, 1);
@@ -946,11 +996,10 @@
                 notify: true
               });
             }
-
-            // console.log($scope.ticketSharedUsersList);
-
             $scope.$apply();
-          })
+          });
+
+
 
           $scope.$watch('ticketSharedUsersList', function() {
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
@@ -977,7 +1026,7 @@
             return arr.filter(function(el) {
               return el.user.accountType === type;
             })
-          }
+          };
 
           function setTicketUpdateToDefault() {
             if (window.innerWidth <= 414) return;
@@ -992,7 +1041,6 @@
           }
 
           $scope.addAttachmentFiles = function (file) {
-            // console.log(file, 'file to upload')
             $scope.ticketUpdate.attachments.push(file);
             $scope.disabledWhenLoadAttachment = true;
 
@@ -1264,6 +1312,8 @@
             };
           };
 
+
+
           $scope.setEditingTicket = function (value) {
             $scope.editingTicket = value;
 
@@ -1280,6 +1330,8 @@
           };
 
           $scope.saveEditedTicket = function (form) {
+            var note = document.querySelector('#tickets-note');
+            var subject = document.querySelector('#tickets-subject');
             if (form.$valid) {
               $scope.disabledSaveButton = true;
               $scope.tryToSaveTicket = false;
@@ -1394,16 +1446,24 @@
             for (var i = 0; i < usersFromTicketCompany.length; i++) {
               var user = usersFromTicketCompany[i];
 
-              if (user.subscription && user.subscription.ticketManager) {
+              if (!user.deletedAt && user.subscription && user.subscription.ticketManager) {
                 addUserToResult(user);
               }
             }
+            $scope.allUsers.map(function(item) {
+              if (!user.deletedAt) {
+                addUserToResult(item, 'addUserFromAll');
+              }
+            });
+
 
             $rootScope.usersToNotify = result.slice().map(function(el) { return el.user; });
 
+
+
             return result;
 
-            function addUserToResult(user) {
+            function addUserToResult(user, type) {
 
               var duplicate = result.find(function (item) {
                 return item.user && item.user.id === user.id;

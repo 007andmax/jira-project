@@ -780,6 +780,14 @@ _::-webkit-:not(:root:root),
   display: flex;
 }
 
+.ticket--footer .btn.btn-new.disabled, .ticket--footer .btn-new.disabled {
+  background: #fff;
+}
+
+.ticket--footer .tech-users {
+  border-left: 1px solid #ccc;
+}
+
 .ticket--footer .dropdown-user-parent div[uib-dropdown-toggle] {
   display: flex;
   align-items: center;
@@ -808,6 +816,9 @@ _::-webkit-:not(:root:root),
 
 .ticket--footer .shared-avatars {
   display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding-bottom: 5px;
 }
 
 .ticket--footer .shared-avatars .check-area.checked {

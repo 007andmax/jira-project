@@ -71,20 +71,20 @@
 
 
 
-        $scope.$watch(function() {
-          return window.innerWidth;
-        }, function(val) {
-          if (val <= 414) {
-            $scope.usersView = 'list';
-          } else {
-            $scope.usersView = $scope.currentUser.usersGridPresentation ?
-                                 $scope.currentUser.usersGridPresentation === 'LIST' ?
-                                   'list' :
-                                   'grid'
-                                 :
-                                 'grid';
-          }
-        })
+        // $scope.$watch(function() {
+        //   return window.innerWidth;
+        // }, function(val) {
+        //   if (val <= 414) {
+        //     $scope.usersView = 'list';
+        //   } else {
+        //     $scope.usersView = $scope.currentUser.usersGridPresentation ?
+        //                          $scope.currentUser.usersGridPresentation === 'LIST' ?
+        //                            'list' :
+        //                            'grid'
+        //                          :
+        //                          'grid';
+        //   }
+        // })
 
         $scope.userRoles = {
           USER: 'Standard user',

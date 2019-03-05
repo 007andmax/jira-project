@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('smartDropdownMenuPosition', ['$document', function ($document) {
+  angular.module("quicktech.common.directives").directive('smartDropdownMenuPosition', ['$document', '$rootScope', function ($document, $rootScope) {
     return {
       restrict: 'A',
       scope: {
@@ -22,18 +22,83 @@
 
 
           if(attrs.smartDropdownMenuPosition === 'product-list') {
-            var productInputPosition = element[0].getBoundingClientRect().top;
+            var productInputTopPosition = element[0].getBoundingClientRect().top;
             var productInput = $(element[0]);
             var productDropdownMenu = productInput.parent('div').parent('div').find('.nano');
-            if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
-              productDropdownMenu.css({'top': 'auto'});
-              productDropdownMenu.css({'bottom': '100%'});
-              productDropdownMenu.css({'margin-bottom': '10px'});
-            } else {
-              productDropdownMenu.css({'bottom': ''});
-              productDropdownMenu.css({'margin-bottom': ''});
+            // if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
+            //   productDropdownMenu.css({'top': 'auto'});
+            //   productDropdownMenu.css({'bottom': '100%'});
+            //   productDropdownMenu.css({'margin-bottom': '10px'});
+            // } else {
+            //   productDropdownMenu.css({'bottom': ''});
+            //   productDropdownMenu.css({'margin-bottom': ''});
+            // }
+
+
+
+            var productInputPosition = element[0].getBoundingClientRect();
+            var width = element[0].offsetWidth;
+
+            var top = productInputPosition.top;
+            var left = productInputPosition.left;
+            var right = productInputPosition.right;
+            var bottom = productInputPosition.bottom;
+
+            var liAmount = productDropdownMenu[0].querySelectorAll('li');
+
+            var dropdownHeight = [].reduce.call(liAmount, function(acc, el) {
+              return acc + el.offsetHeight;
+            }, 0)
+
+
+            productDropdownMenu.css({
+              top: productInputPosition.top + 50 + 'px',
+              left: productInputPosition.left + 'px',
+              position: 'fixed',
+              width: width + 'px',
+              height: ($rootScope.isProductCategoryOpened ? 350 : dropdownHeight) + 'px'
+            });
+
+
+
+            if((winHeight - productInputTopPosition) < 360 && !(window.innerWidth <= 414)) {
+              productDropdownMenu.css({'transform': 'translateY(calc(-100% - 65px))'});
             }
 
+
+
+            // if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
+            //   productDropdownMenu.css({'transform': 'translateY(calc(-100% - 50px))'});
+            //
+            // }
+
+          } else if (attrs.smartDropdownMenuPosition === 'quantity') {
+            var productInputPosition = element[0].getBoundingClientRect().top;
+            var productInput = $(element[0]);
+            var productDropdownMenu = productInput.parent('div').find('#service-quantity-dropdown:last-child');
+
+
+            if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
+              productDropdownMenu.css({'transform': 'translateY(calc(-100% - 50px))'});
+
+            }
+
+            var productInputPosition = element[0].getBoundingClientRect();
+            var width = element[0].offsetWidth;
+
+            var top = productInputPosition.top;
+            var left = productInputPosition.left;
+            var right = productInputPosition.right;
+            var bottom = productInputPosition.bottom;
+
+            productDropdownMenu.css({ top: productInputPosition.top + 50 + 'px', left: productInputPosition.left + 'px', position: 'fixed', width: width + 'px' });
+
+
+
+            if((winHeight - productInputPosition) < 360 && !(window.innerWidth <= 414)) {
+              productDropdownMenu.css({'transform': 'translateY(-100%)'});
+
+            }
           } else if(attrs.smartDropdownMenuPosition === 'service-list'){
 
             var listContainer = element.next().next();

@@ -16,9 +16,6 @@
           };
 
 
-
-
-
           $scope.loadProductByCategory = function (categoryId) {
             $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
           };
@@ -74,6 +71,7 @@
           };
 
           $scope.isShowingErrors = function (form, fieldName) {
+            if (!form) return;
             return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
           };
 

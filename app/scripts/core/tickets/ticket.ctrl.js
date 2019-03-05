@@ -21,13 +21,12 @@
           }
         })
 
-        // console.log($scope.ticket, 'SCOPETICKET')
 
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           $scope.agentList = resp;
         });
 
-        $scope.getTicketStatus = function(ticket) {
+        $scope.getTicketStatus = function(ticket, arg) {
           var status;
           if(ticket.assignedUserId === null) {
             status = 'unassigned';

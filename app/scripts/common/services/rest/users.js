@@ -721,6 +721,14 @@
         });
       }
 
+      function changeTimePickerType(type) {
+        $http.put('/settings/userProfile/serviceExpenseDurationPresentation', { presentation: type  }).then(function (resp) {
+          if (status === 200) {
+            $rootScope.currentUser.serviceExpenseDurationPresentation = type;
+          }
+        });
+      }
+
 
       return {
         _addInitListener: addInitListener,
@@ -761,7 +769,8 @@
         requestToChangePassword: requestToChangePassword,
         updateWelcomeWizard: updateWelcomeWizard,
         changePassword: changePassword,
-        resendWelcomeEmail: resendWelcomeEmail
+        resendWelcomeEmail: resendWelcomeEmail,
+        changeTimePickerType: changeTimePickerType
       }
 
     }]);

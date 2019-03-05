@@ -373,3 +373,7 @@
     opacity: 1;
   }
 }
+
+.no-clickable {
+  pointer-events:none!important;
+}

@@ -24,6 +24,7 @@
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
       "quicktech.core.serviceAgreements",
+      'proton.multi-list-picker',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -385,10 +386,11 @@
             var args = arguments;
             if (!isCalled) {
               isCalled = true;
-
+              fn.apply(this, args);
+              console.log('call debounced fn')
               interval = setTimeout(function() {
                 isCalled = false;
-                fn.apply(this, args);
+
               }, time)
             } else {
               clearInterval(interval);

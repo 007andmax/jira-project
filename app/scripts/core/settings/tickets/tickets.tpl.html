@@ -113,6 +113,31 @@
 
       </div>
 
+      <h3>Timepicker type</h3>
+
+      <div class="template-form-wrapper">
+
+        <div class="form-row clearfix">
+          <div class="form-group" uib-dropdown keyboard-nav="true">
+
+            <button class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="21"
+                    uib-dropdown-toggle ng-disabled="$eval(disabled)">
+              <span ng-if="timePickerModel === 'TIME_PICKER'">Start-End time picker</span>
+              <span ng-if="timePickerModel === 'DURATION_PICKER'">Duration picker</span>
+            </button>
+            <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+              <li ng-click="setTimePickerValue('TIME_PICKER')">Start-End time picker</li>
+              <li ng-click="setTimePickerValue('DURATION_PICKER')">Duration picker</li>
+            </ul>
+            <i class="icn-sm report-caret-icon"></i>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
 
       <h3>Tax Number</h3>
       <div class="template-form-wrapper">

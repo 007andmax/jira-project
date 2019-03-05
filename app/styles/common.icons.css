@@ -375,6 +375,29 @@ a.ha-24 {
   top: 12px;
 }
 
+@media screen and (min-width: 414px) {
+  .new-date-picker .dropdown-menu {
+    transform: translateY(calc(-100% - 55px));
+
+  }
+
+  .service-datetimepicker {
+    position: relative;
+  }
+
+  .service-datetimepicker .dropdown-menu {
+    transform: translateX(calc(100% - 98px))
+  }
+
+  .new-service-dropdown {
+    transform: translateY(calc(-100% - 15px))
+  }
+
+
+}
+
+
+
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
   width: 18px;
   height: 18px;
@@ -1742,4 +1765,20 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   display: inline-block;
   vertical-align: middle;
   background-image: url(../images/new-icons/linux.png);
+}
+
+.link-icon {
+  width: 16px;
+  height: 16px;
+  background: url("../images/new-icons/link@3x.png");
+  display: inline-block;
+  background-size: cover;
+}
+
+.unlink-icon {
+  width: 16px;
+  height: 16px;
+  background: url("../images/new-icons/unlink@3x.png");
+  display: inline-block;
+  background-size: cover;
 }

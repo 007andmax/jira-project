@@ -1322,9 +1322,9 @@ input.default-invoice-terms {
 }
 
 @media screen and (max-width: 1024px) {
-  .settings-wrapper__trow--td .svg-icn-full {
-    width: 60px;
-  }
+  /*.settings-wrapper__trow--td .svg-icn-full {*/
+    /*width: 60px;*/
+  /*}*/
 }
 
 /*********************

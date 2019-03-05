@@ -6,6 +6,10 @@
     ['$document', '$parse', '$rootScope', function ($document, $parse, $rootScope) {
       return {
         restrict: 'A',
+        scope: {
+          type: '@',
+          show: '='
+        },
         link: function ($scope, elem, attr) {
 
           var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
@@ -16,6 +20,13 @@
           }
 
           var eventHandler = function (e) {
+            var isClickedElementChildOfPopup = elem
+              .find(e.target)
+              .length > 0;
+
+            if ($scope.type === 'time' && e.target.id !== 'time-picker-input' && !isClickedElementChildOfPopup) {
+              $scope.$emit('hideTimepicker', true);
+            };
 
             if (angular.element(elem).hasClass("ng-hide")) {
               return;

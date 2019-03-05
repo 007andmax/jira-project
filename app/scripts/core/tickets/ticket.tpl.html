@@ -22,32 +22,10 @@
       </p>
 
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
-      <div class="ticket-status pull-right" style="margin-top: 15px; min-width: 30px;">
-        <a href="javascript:void(0)" class="ticket-list-attachment pull-left"
-           ng-show="ticket.attachmentsCount">
-          <i class="icon-sm attachment"></i>
-        </a>
-        <span class="label label-info" ng-show="ticket.unread">NEW</span>
-        <span class="ticket-unread-updates animation-hide" ng-show="ticket.hasNewUpdates"
-              style="margin-left: 10px; transform: translateY(20%)">
-          <i class="icon-sm wysiwyg-reset"></i>
-        </span>
-      </div>
-      <!--<ul class="ticket-tags pull-right"-->
-      <!--ng-if="TicketsPermissionsService.isTagsVisible(listType, currentUser.role)">-->
-      <!--<li ng-repeat="tag in ticket.tags">-->
-      <!--<span class="tag-color color{{ tag.color }} persistent-tooltip"-->
-      <!--tooltip="{{ tag.name }}" tooltip-placement="top">-->
-      <!--</span>-->
-      <!--</li>-->
-      <!--</ul>-->
-
     </div>
 
-    <div class="ticket-title ellipsis clearfix">
-      <p style="font-size: 14.1px;" class="pull-left ellipsis"><strong>{{ ticket.number + ' - ' + ticket.subject
-                                                                       }}</strong>
-      </p>
+    <div class="ticket-title ellipsis clearfix" style="width: 90%;">
+      <p style="font-size: 14.1px;" class="pull-left ellipsis"> {{ ticket.number + ' - ' + ticket.subject }} </p>
       <span class="text-muted ellipsis">{{ ticket.previewNote || '&nbsp;' }}</span>
     </div>
 
@@ -107,7 +85,7 @@
 
         <span
           class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
-          ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
+          ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].color, 'font-weight': 'bold', 'border': 'none'}"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>
@@ -132,19 +110,21 @@
 
       <div class="text-muted ellipsis"
            ng-if="(ticket.assignedUser && ticket.assignedUser.id) || ticket.assignedUserId"
-           style="width: 40%;vertical-align: top;">
+           style="width: 36%;vertical-align: top;">
         {{ getUserName(getUserById(getAssignedUserIDFromTicket(ticket))) }}
       </div>
 
-      <span class="text-muted ellipsis"
-            style="float: right; margin-right: 0;width: 38%; text-align: right;vertical-align: top; ">
+      <span class="text-muted ellipsis hidden-from"
+            style="float: right; margin-right: 0;width: 40%; text-align: right;vertical-align: top; ">
         {{ userReadable(ticket.ticketSource) }}
-        <span ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
+        <span class="hidden-desktop" ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
           &nbsp;({{ ticket.sourceName }})
         </span>
       </span>
 
     </div>
+
+    <i ng-show="ticket.attachmentsCount" class="icn-sm icn-ticket-attachment"></i>
 
   </div>
 
@@ -169,7 +149,7 @@
         <div uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
           <span
             class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket-tag"
-            ng-style="{'border-color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor} "
+            ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticket)]].color, 'font-weight': 'bold', 'border': 'none'}"
             ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>

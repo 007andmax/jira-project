@@ -14,7 +14,6 @@
             defaultDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
-
             var options = {
               keepOpen: true,
               format: 'DD MMM YYYY',
@@ -50,10 +49,6 @@
               ctrl.$setPristine();
             });
 
-            //element.on('shown.bs.dropdown', function(){
-            //  var dropdown = element.find('.dropdown-menu');
-            //  dropdown.css({'left': '95px'})
-            //});
 
             element.bind('dp.show', function (e) {
               element.parent().find('.datepicker').removeClass('datepicker');
@@ -63,6 +58,7 @@
             element.bind('dp.change', function (e) {
               var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
               ctrl.$setViewValue(formattedDate);
+
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 

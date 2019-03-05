@@ -112,6 +112,7 @@
           };
 
           $scope.isShowingErrors = function (form, fieldName) {
+            if (!form) return;
             return form[fieldName] && !form[fieldName].$valid;
           };
 
