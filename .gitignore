@@ -7,5 +7,6 @@ bower_components
 .sublime-workspace
 index.html
 .idea
+.DS_Store
 terminal.glue
 dist.*
