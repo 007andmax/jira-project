@@ -12196,6 +12196,7 @@ button.close {
 
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .col-4 {
     padding: 0 5px;
+  }
 
   .ticket-add-product, .ticket-add-service {
     padding: 10px 20px 0 0;
