@@ -9,7 +9,7 @@
           3 product found successfully
         </div>
         <div class="products-content__header--search">
-          <input type="text" placeholder="Search Products…">
+          <input type="text" placeholder="Search Products…" ng-model="productSearchName">
           <button class="plus-btn" create-new-entity="product">+</button>
         </div>
       </div>
@@ -38,7 +38,7 @@
           <div class="col-md-1">GL</div>
         </div>
         <div class="products-content__list--item clearfix"
-             ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
+             ng-repeat="product in productsData.list | filterProductByName: productSearchName| filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
              ng-controller="quicktech.core.products.productCtrl"
              show-model-element="{{ 'show-' + product.versionedId.id}}"
              on-finish-render="loadingFinished()"

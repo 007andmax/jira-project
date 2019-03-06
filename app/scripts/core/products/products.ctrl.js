@@ -17,6 +17,7 @@
           field: 'description',
           reverse: false
         };
+        $scope.productSearchName = '';
         $scope.loadingInProgress = true;
 
         ProductsService.getAllProducts($scope, function (resp) {
