@@ -102,7 +102,7 @@
           controller: 'quicktech.core.companies.companyProfileCtrl'
         }))
         .state('products', waitForServices({
-          url: '/inventory/products',
+          url: '/inventory/products/{category}',
           // url: '/inventory/products?tabName',
           // params: {
           //   tabName: 'category'

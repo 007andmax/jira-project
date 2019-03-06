@@ -17,6 +17,7 @@
           field: 'description',
           reverse: false
         };
+        $scope.category = $stateParams.category;
 
         $scope.successProductAdding = false;
 
@@ -30,7 +31,14 @@
         $scope.loadingInProgress = true;
 
         ProductsService.getAllProducts($scope, function (resp) {
-          $scope.productsData = resp;
+          if ($scope.category && $scope.category!== 'all') {
+            resp.list = resp.list.filter(function(item){
+              return item.category.name === $scope.category;
+            });
+            $scope.productsData = resp;
+          } else {
+            $scope.productsData = resp;
+          }
 
           if (resp && resp.list && !resp.list.length) {
             $scope.loadingInProgress = false;

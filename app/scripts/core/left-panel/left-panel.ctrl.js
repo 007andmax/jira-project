@@ -6,10 +6,11 @@
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
-      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
+      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
                 TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService) {
+                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService, ProductsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -43,6 +44,34 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        //categories start
+        $scope.countOfCategories = 10;
+        $scope.inventoryCategoryList = ProductsService.getCategories($scope);
+
+        $rootScope.$on('$stateChangeStart', function(){
+            console.log('12351235');
+          });
+
+        $scope.changeShowAllCategories = function() {
+          if ($scope.countOfCategories === 10) {
+            $scope.countOfCategories = $scope.inventoryCategoryList.length;
+          } else {
+            $scope.countOfCategories = 10;
+          }
+        };
+
+        $scope.getAllProductsCount = function() {
+          var count = 0;
+          $scope.inventoryCategoryList.map(function(item){
+            count += item.productsAmount;
+          });
+          return count;
+        };
+
+        $scope.deleteCategory = function(categoryId) {
+          ProductsService.deleteCategory(categoryId);
+        }
+        //categories end
 
         $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
 

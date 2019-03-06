@@ -1425,15 +1425,25 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div style="padding-left: 25px;color: #fff;font-size: 11px;margin-bottom: 12px;">Category List</div>
-        <div class="center-category__category">
-          Printers
-          <span>2</span>
+        <div class="center-category__category"
+             ng-class="{active: $state.includes(category)}"
+             ng-click="stateGo($event, 'products', {category: ''})">
+          All products
+          <span>{{getAllProductsCount()}}</span>
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes('products')}"
-             ng-click="stateGo($event, 'products', { tabName: 'category' })">
-          Products
+             ng-repeat="category in inventoryCategoryList | limitTo: countOfCategories"
+             ng-class="{active: $state.includes(category)}"
+             ng-click="stateGo($event, 'products', { category: category.name })">
+          {{category.name}}
+          <span ng-if="category.productsAmount >0 || category.name === 'Uncategorized'">{{category.productsAmount}}</span>
+          <i ng-if="category.productsAmount === 0 && category.name !== 'Uncategorized'"
+            class="icon-sm icn-delete pointer has-tooltip"
+             ng-click="deleteCategory(category.id)"
+             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"></i>
         </div>
+        <p style="color: white; cursor: pointer" ng-click="changeShowAllCategories()">show more</p>
+
       </div>
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'password-manager' && !isLeftPanelHidden">
