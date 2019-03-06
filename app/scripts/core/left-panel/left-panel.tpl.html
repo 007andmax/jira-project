@@ -1372,6 +1372,12 @@
           Dashboard
         </div>
         <div class="center-category__category"
+             ng-class="{active: $state.includes('services')}"
+             ng-click="stateGo($event, 'services', { tabName: 'default' })">
+          Default Services
+        </div>
+
+        <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting.billable')">
           Billable Items
@@ -1427,11 +1433,6 @@
              ng-class="{active: $state.includes('products')}"
              ng-click="stateGo($event, 'products', { tabName: 'category' })">
           Products
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('services')}"
-             ng-click="stateGo($event, 'services', { tabName: 'default' })">
-          Default Services
         </div>
       </div>
     </div>

@@ -17,6 +17,15 @@
           field: 'description',
           reverse: false
         };
+
+        $scope.successProductAdding = false;
+
+        $scope.$on('newProductHasBeenCreated', function (event, data) {
+          $scope.successProductAdding = true;
+          $timeout(function() {
+            $scope.successProductAdding = false;
+          }, 3000)
+        });
         $scope.productSearchName = '';
         $scope.loadingInProgress = true;
 

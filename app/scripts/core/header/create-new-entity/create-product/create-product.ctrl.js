@@ -160,6 +160,7 @@
 
           $scope.disabledSaveChangeButton = true;
 
+          console.log($scope.editProduct, '$scope.editProduct');
           var changedProduct = {
             versionedId: $scope.editProduct.versionedId,
             cost: $scope.editProduct.cost,
@@ -169,7 +170,8 @@
             description: $scope.editProduct.description,
             companyId: $scope.editProduct.company ? $scope.editProduct.company.id : undefined,
             taxIds: [],
-            categoryId: $scope.editProduct.category.id
+            categoryId: $scope.editProduct.category.id,
+            glNumber: $scope.editProduct.glNumber
           };
           for(var i=0; i<$scope.editProduct.taxes.length; i++) {
             changedProduct.taxIds.push($scope.editProduct.taxes[i].id)

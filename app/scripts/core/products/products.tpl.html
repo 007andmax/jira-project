@@ -5,8 +5,8 @@
 
       <div class="products-content__header">
         <h3>Products</h3>
-        <div class="products-content__header--search-result">
-          3 product found successfully
+        <div class="products-content__header--search-result" ng-if="successProductAdding">
+          Product has been added
         </div>
         <div class="products-content__header--search">
           <input type="text" placeholder="Search Products…" ng-model="productSearchName">
@@ -38,7 +38,7 @@
           <div class="col-md-1">GL</div>
         </div>
         <div class="products-content__list--item clearfix"
-             ng-repeat="product in productsData.list | filterProductByName: productSearchName| filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
+             ng-repeat="product in productsData.list | filterProductByName: productSearchName | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
              ng-controller="quicktech.core.products.productCtrl"
              show-model-element="{{ 'show-' + product.versionedId.id}}"
              on-finish-render="loadingFinished()"
@@ -64,7 +64,7 @@
 
           <div class="col-md-1">{{ product.ilc}}</div>
 
-          <div class="col-md-1"></div>
+          <div class="col-md-1">{{product.glNumber}}</div>
 
           <div class="col-md-1 btn-actions">
             <i class="icon-sm edit-icon pointer has-tooltip"

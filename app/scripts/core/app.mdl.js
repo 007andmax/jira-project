@@ -111,11 +111,6 @@
           templateUrl: '/html/scripts/core/products/products.tpl.html',
           controller: 'quicktech.core.products.productsCtrl'
         }))
-        .state('services', waitForServices({
-          url: '/inventory/services/:tabName',
-          templateUrl: '/html/scripts/core/services/services.tpl.html',
-          controller: 'quicktech.core.services.servicesCtrl'
-        }))
         .state('password-manager', waitForServices({
           url: '/password-manager',
           templateUrl: '/html/scripts/core/password-manager/password-manager.tpl.html',
@@ -135,6 +130,11 @@
           url: '/billable',
           templateUrl: '/html/scripts/core/billable/billable.tpl.html',
           controller: 'quicktech.core.billable.billableCtrl'
+        }))
+        .state('services', waitForServices({
+          url: '/accounting/services',
+          templateUrl: '/html/scripts/core/services/services.tpl.html',
+          controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('receivable', waitForServices({
           url: '/accounting/receivable/:mode',
