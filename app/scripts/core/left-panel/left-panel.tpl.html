@@ -1431,20 +1431,31 @@
           All products
           <span>{{getAllProductsCount()}}</span>
         </div>
+
         <div class="center-category__category"
              ng-repeat="category in inventoryCategoryList | limitTo: countOfCategories"
              ng-class="{active: $state.includes(category)}"
              ng-click="stateGo($event, 'products', { category: category.name })">
-          {{category.name}}
-          <span ng-if="category.productsAmount >0 || category.name === 'Uncategorized'">{{category.productsAmount}}</span>
-          <i ng-if="category.productsAmount === 0 && category.name !== 'Uncategorized'"
-            class="icon-sm icn-delete pointer has-tooltip"
-             ng-click="deleteCategory(category.id)"
-             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"></i>
+          <div ng-if="category.productsAmount >0 || category.name === 'Uncategorized'">
+            {{category.name}}
+            <span>{{category.productsAmount}}</span>
+          </div>
+
+          <div ng-if="category.productsAmount === 0 && category.name !== 'Uncategorized'">
+            <p ng-click="stateGo($event, 'products', { category: category.name })"> {{category.name}}</p>
+            <i class="icon-sm icn-delete pointer has-tooltip"
+               ng-click="deleteCategory(category.id)"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"></i>
+          </div>
+
         </div>
-        <p style="color: white; cursor: pointer" ng-click="changeShowAllCategories()">show more</p>
+
+        <p style="color: white; cursor: pointer"
+           ng-if="inventoryCategoryList.length > 10"
+           ng-click="changeShowAllCategories()">show more</p>
 
       </div>
+
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'password-manager' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
