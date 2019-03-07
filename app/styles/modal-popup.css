@@ -961,7 +961,7 @@ _::-webkit-:not(:root:root),
   font-size: 15px;
   font-weight: 600;
   color: #4f5f79;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .add-category-lp-dropdown > div label span {
@@ -978,13 +978,14 @@ _::-webkit-:not(:root:root),
   border: solid 1px #c4cbd5;
   outline: none;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 0 14px;
 }
 
 .add-category-lp-dropdown > div label input::placeholder {
   color: #9ca5b6;
   opacity: 1;
+  font-size: 13px;
 }
 
 .invoice--header,
@@ -1464,7 +1465,7 @@ _::-webkit-:not(:root:root),
 
 .add-category-lp-dropdown-btns {
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .add-category-lp-dropdown-btns button {
