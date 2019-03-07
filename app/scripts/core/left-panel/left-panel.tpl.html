@@ -1462,7 +1462,7 @@
         </div>
 
         <div class="center-category__category"
-             ng-repeat="category in inventoryCategoryList | limitTo: countOfCategories"
+             ng-repeat="category in inventoryCategoryList | orderBy: 'name' | limitTo: countOfCategories"
              ng-class="{active: $state.includes(category)}">
 
           <div ng-if="category.productsAmount >0 || category.name === 'Uncategorized'"
