@@ -13043,3 +13043,25 @@ _:-moz-tree-row(hover), .ticket-add-content .ticket-add-product .qt-table li .co
   color: #000;
   border-bottom: 2px solid #0094d0
 }
+
+.inventory-lp-header {
+  margin-bottom: 12px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+}
+
+.inventory-lp-header > div:first-child {
+  color: #fff;
+}
+
+.new-link {
+  font-family: "Graphik Regular", sans-serif;
+  font-size: 12px;
+  color: #16a4fa;
+  text-decoration: none;
+  cursor: pointer;
+}
