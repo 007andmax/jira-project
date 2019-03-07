@@ -70,7 +70,14 @@
 
         $scope.deleteCategory = function(categoryId) {
           ProductsService.deleteCategory(categoryId);
-        }
+        };
+
+        $scope.addCategory = function (category) {
+          ProductsService.saveCategory({ name: category });
+          $scope.newCategory = ''
+        };
+
+        $scope.newCategory = '';
         //categories end
 
         $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];

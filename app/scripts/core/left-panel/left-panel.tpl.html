@@ -1427,13 +1427,10 @@
         <div class="inventory-lp-header">
           <div>Category List</div>
           <div class="add-category-lp"
-               uib-dropdown dropdown-append-to-body="true"
-               stop-propagation="click">
+               uib-dropdown dropdown-append-to-body="true">
             <div uib-dropdown-toggle class="new-link"
-                 smart-dropdown-menu-position
                  no-restricted="true"
                  dropdown-toogle
-                 aria-haspopup="true"
                  aria-expanded="false"
                  data-toggle="dropdown">+Add
             </div>
@@ -1441,13 +1438,15 @@
                  uib-dropdown-menu style="z-index: 100000000;">
               <div>
                 <p>Add Category</p>
-                <label>
+                <label stop-propagation="click">
                   <span>Category Name</span>
-                  <input type="text" placeholder="Category Name">
+                  <input type="text" placeholder="Category Name" ng-model="newCategory">
                 </label>
                 <div class="add-category-lp-dropdown-btns">
-                  <button class="btn btn-success">Save</button>
-                  <button class="btn btn-default">Cancel</button>
+                  <button class="btn btn-success"
+                          ng-disabled="newCategory.length < 1"
+                          dropdown-toogle ng-click="addCategory(newCategory)">Save</button>
+                  <button class="btn btn-default" dropdown-toogle>Cancel</button>
                 </div>
               </div>
             </div>
@@ -1463,12 +1462,12 @@
         </div>
 
         <div class="center-category__category"
-             ng-repeat="category in inventoryCategoryList | limitTo: countOfCategories"
-             ng-class="{active: $state.includes(category)}"
-             ng-click="stateGo($event, 'products', { category: category.name })">
+             ng-repeat="category in inventoryCategoryList | orderBy: 'name' | limitTo: countOfCategories"
+             ng-class="{active: $state.includes(category)}">
 
           <div ng-if="category.productsAmount >0 || category.name === 'Uncategorized'"
-               class="center-category__category--item">
+               class="center-category__category--item"
+               ng-click="stateGo($event, 'products', { category: category.name })">
             <div>{{category.name}}</div>
             <div>{{category.productsAmount}}</div>
           </div>
