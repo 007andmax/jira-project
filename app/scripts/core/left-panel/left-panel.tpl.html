@@ -1427,8 +1427,7 @@
         <div class="inventory-lp-header">
           <div>Category List</div>
           <div class="add-category-lp"
-               uib-dropdown dropdown-append-to-body="true"
-               stop-propagation="click">
+               uib-dropdown dropdown-append-to-body="true">
             <div uib-dropdown-toggle class="new-link"
                  smart-dropdown-menu-position
                  no-restricted="true"
@@ -1438,16 +1437,16 @@
                  data-toggle="dropdown">+Add
             </div>
             <div class="add-category-lp-dropdown"
-                 uib-dropdown-menu style="z-index: 100000000;">
+                 uib-dropdown-menu style="z-index: 100000000;" stop-propagation="click">
               <div>
                 <p>Add Category</p>
                 <label>
                   <span>Category Name</span>
-                  <input type="text" placeholder="Category Name">
+                  <input type="text" placeholder="Category Name" ng-model="newCategory">
                 </label>
                 <div class="add-category-lp-dropdown-btns">
-                  <button class="btn btn-success">Save</button>
-                  <button class="btn btn-default">Cancel</button>
+                  <button class="btn btn-success" dropdown-toogle ng-click="addCategory(newCategory)">Save</button>
+                  <button class="btn btn-default" dropdown-toogle>Cancel</button>
                 </div>
               </div>
             </div>
