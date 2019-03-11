@@ -1454,7 +1454,7 @@
           </div>
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes(category)}"
+             ng-class="{active: !currentCategoryState}"
              ng-click="stateGo($event, 'products', {category: ''})">
           <div class="center-category__category--item">
             <div class="center-category__category--item__category-label">ALL PRODUCTS</div>
