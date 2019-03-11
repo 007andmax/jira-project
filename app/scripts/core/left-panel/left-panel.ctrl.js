@@ -7,10 +7,11 @@
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
       'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
-      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
+      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
                 TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService, ProductsService) {
+                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
+                ProductsService, UserConfirmationsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -69,7 +70,13 @@
         };
 
         $scope.deleteCategory = function(categoryId) {
-          ProductsService.deleteCategory(categoryId);
+          var confirmMesage = 'Do you want to delete category?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            ProductsService.deleteCategory(categoryId);
+          });
+
         };
 
         $scope.addCategory = function (category) {
