@@ -7,11 +7,12 @@
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
       'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
-      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService', 'quicktech.common.services.UserConfirmationsService',
+      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
+      'quicktech.common.services.UserConfirmationsService', '$stateParams',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
                 TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
                 CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
-                ProductsService, UserConfirmationsService) {
+                ProductsService, UserConfirmationsService, $stateParams) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -34,6 +35,12 @@
         $scope.techUsers = UsersService.getTechUsers;
         $scope.qSHistoryExpanded = false;
         $scope.maxDate = Date.now();
+        $scope.currentCategoryState = $stateParams.category;
+        $scope.$watchCollection(function(){
+          return $state.params;
+        }, function(){
+          return $scope.currentCategoryState = $stateParams.category;
+        });
         $scope.templates = [
           'OFFICE_365_ACCOUNT',
           'MICROSOFT_ACCOUNT',
