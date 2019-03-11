@@ -198,9 +198,8 @@
       }
 
       $scope.companiesList = CompaniesService.getClientCompaniesWoClientsAndLeads();
-
-      $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;
-      $scope.serviceNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,255}$/;
+      $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
+      $scope.serviceNamePattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
       $scope.quantityPattern = /^\+?[0-9]{0,10}$/;
 
       $scope.selectedContractType = 'CREATE_NEW';
