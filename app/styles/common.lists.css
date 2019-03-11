@@ -491,15 +491,18 @@
   top: 30px;
 }
 
-.user-list-more .dropdown-menu li {
+.user-list-more .dropdown-menu li,
+.products-content__list .products-content__list--item .btn-actions .dropdown-menu li {
   position: relative;
 }
 
-.user-list-more .dropdown-menu li a {
+.user-list-more .dropdown-menu li a,
+.products-content__list .products-content__list--item .btn-actions .dropdown-menu li a {
   padding: 5px 20px 5px 40px;
 }
 
-.user-list-more .dropdown-menu li:before {
+.user-list-more .dropdown-menu li:before,
+.products-content__list .products-content__list--item .btn-actions .dropdown-menu li:before {
   position: absolute;
   content: '';
   width: 16px;
@@ -508,8 +511,13 @@
   top: 10px;
 }
 
-.user-list-more .dropdown-menu li:first-child:before {
+.user-list-more .dropdown-menu li:first-child:before,
+.products-content__list .products-content__list--item .btn-actions .dropdown-menu li:first-child:before {
   background-image: url(../images/new-icons/company-edit.svg);
+}
+
+.products-content__list .products-content__list--item .btn-actions .dropdown-menu li:last-child:before {
+  background-image: url(../images/new-icons/company-remove.svg);
 }
 
 .user-list-more .dropdown-menu li:nth-child(2):before {

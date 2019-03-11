@@ -191,7 +191,7 @@
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
   <div class="product--content row" ng-form="editProductForm">
-    <div class="col-md-6" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}" add-on-focus>
+    <div class="col-md-4" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}" add-on-focus>
       <div class="placeholder">Item number</div>
       <input type="text" class="form-validation" name="editProductMfg"
              ng-required='false' ng-model="editProduct.manufacture" ng-maxlength="50"
@@ -200,14 +200,18 @@
              model-id="editProduct.versionedId.id">
 
     </div>
-
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+    <div class="col-md-4" add-on-focus ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
       <div class="placeholder">ILC number</div>
       <input type="text" class="form-validation" name="editProductILC"
              ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
              is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       <i class="barcode-icon"></i>
     </div>
+    <div class="col-md-4" add-on-focus>
+      <div class="placeholder">GL</div>
+      <input type="text" class="form-validation" ng-model="editProduct.glNumber">
+    </div>
+
     <div class="col-md-12" add-on-focus is-textarea="true" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
       <div class="placeholder">Description</div>
       <textarea auto-expand limit="140" value="editProduct.description" type="text" style="" type="text" class="form-validation modal-textarea"

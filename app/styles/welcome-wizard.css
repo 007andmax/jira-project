@@ -1657,13 +1657,14 @@
     width: 14px;
     height: 14px;
   }
-
-  .icn-delete {
+  
+  .icn-delete,
+  .new-icn-delete-white {
     background-image: url(../images/new-icons/company-remove.svg);
     width: 12px;
     height: 12px;
   }
-
+  
   .desc-w {
     width: 100%;
   }

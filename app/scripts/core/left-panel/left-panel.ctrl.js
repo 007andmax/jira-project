@@ -6,10 +6,13 @@
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
       'CompaniesService', 'TutorialsService', '$uibModal',
-      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService', '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService',
+      'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
+      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
+      'quicktech.common.services.UserConfirmationsService', '$stateParams',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
                 TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService) {
+                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
+                ProductsService, UserConfirmationsService, $stateParams) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -32,6 +35,13 @@
         $scope.techUsers = UsersService.getTechUsers;
         $scope.qSHistoryExpanded = false;
         $scope.maxDate = Date.now();
+        $scope.disableCreateCategory = false;
+        $scope.currentCategoryState = $stateParams.category;
+        $scope.$watchCollection(function(){
+          return $state.params;
+        }, function(){
+          return $scope.currentCategoryState = $stateParams.category;
+        });
         $scope.templates = [
           'OFFICE_365_ACCOUNT',
           'MICROSOFT_ACCOUNT',
@@ -43,6 +53,65 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        //categories start
+        $scope.countOfCategories = 10;
+        $scope.inventoryCategoryList = ProductsService.getCategories($scope);
+
+        $rootScope.$on('$stateChangeStart', function(){
+            console.log('12351235');
+          });
+
+        $scope.checkDublicateCategory = function() {
+          console.log($scope.newCategory ,'newCategory');
+          var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
+            console.log(item.name, $scope.newCategory, '11');
+            return item.name.toLowerCase() === $scope.newCategory.toLowerCase();
+          });
+          console.log(duplicateCategory, 'duplicateCategory');
+          if (duplicateCategory && duplicateCategory[0]) {
+            return $scope.disableCreateCategory = true;
+          } else {
+            return $scope.disableCreateCategory = false;
+          }
+        };
+
+        $scope.clearCategory = function() {
+          $scope.newCategory = '';
+        };
+
+        $scope.changeShowAllCategories = function() {
+          if ($scope.countOfCategories === 10) {
+            $scope.countOfCategories = $scope.inventoryCategoryList.length;
+          } else {
+            $scope.countOfCategories = 10;
+          }
+        };
+
+        $scope.getAllProductsCount = function() {
+          var count = 0;
+          $scope.inventoryCategoryList.map(function(item){
+            count += item.productsAmount;
+          });
+          return count;
+        };
+
+        $scope.deleteCategory = function(categoryId) {
+          var confirmMesage = 'Do you want to delete category?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            ProductsService.deleteCategory(categoryId);
+          });
+
+        };
+
+        $scope.addCategory = function (category) {
+          ProductsService.saveCategory({ name: category });
+          $scope.newCategory = ''
+        };
+
+        $scope.newCategory = '';
+        //categories end
 
         $scope.listOfMobileTitles = ["areUsersOpened", 'areCompaniesOpened', "areTicketsOpened"];
 

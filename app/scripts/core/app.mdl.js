@@ -103,18 +103,14 @@
           controller: 'quicktech.core.companies.companyProfileCtrl'
         }))
         .state('products', waitForServices({
-          url: '/inventory/products?tabName',
-          params: {
-            tabName: 'category'
-          },
+          url: '/inventory/products/{category}',
+          // url: '/inventory/products?tabName',
+          // params: {
+          //   tabName: 'category'
+          // },
           reloadOnSearch: false,
           templateUrl: '/html/scripts/core/products/products.tpl.html',
           controller: 'quicktech.core.products.productsCtrl'
-        }))
-        .state('services', waitForServices({
-          url: '/inventory/services/:tabName',
-          templateUrl: '/html/scripts/core/services/services.tpl.html',
-          controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('password-manager', waitForServices({
           url: '/password-manager',
@@ -135,6 +131,11 @@
           url: '/billable',
           templateUrl: '/html/scripts/core/billable/billable.tpl.html',
           controller: 'quicktech.core.billable.billableCtrl'
+        }))
+        .state('services', waitForServices({
+          url: '/accounting/services',
+          templateUrl: '/html/scripts/core/services/services.tpl.html',
+          controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('receivable', waitForServices({
           url: '/accounting/receivable/:mode',

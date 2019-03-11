@@ -1,46 +1,138 @@
 <div>
-  <div class="products-content">
+  <div ng-hide="loadingInProgress" style="width: 100%; display: inline-block;">
 
-    <div class="tabs-container" style="margin-left: 15px">
-      <div class="fixed-block-top" style="" fixed-block-top>
-        <ul class="nav nav-qt" role="tablist" style="margin-left: 20px">
+    <div class="products-content" ng-controller="quicktech.core.products.productsListCtrl">
 
-          <li role="presentation" ng-class="{'active': currentOpenTab === 'category'}">
-            <a ui-sref="products({ tabName: 'category' })">Product by Category</a>
-          </li>
+      <div class="products-content__header">
+        <h3>Products</h3>
+        <div class="products-content__header--search-result" ng-if="successProductAdding">
+          Product has been added
+        </div>
+        <div class="products-content__header--search">
+          <input type="text" placeholder="Search Products…" ng-model="productSearchName">
+          <button class="plus-btn" create-new-entity="product">+</button>
+        </div>
+      </div>
+      <div class="products-content__list">
+        <div class="products-content__list--header clearfix">
+          <div class="col-md-3 pointer"
+               ng-click="setOrderForProducts('description')">Product Name
+          </div>
+          <div class="col-md-2 pointer"
+               ng-click="setOrderForProducts('vendor')">Vendor
+          </div>
+          <div class="col-md-1 pointer"
+               ng-click="setOrderForProducts('cost')"
+               ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">Cost
+          </div>
+          <div class="col-md-1 pointer"
+               ng-click="setOrderForProducts('sale')">Sale Price
+          </div>
+          <div class="col-md-1 pointer"
+               ng-click="setOrderForProducts('manufacture')">#Mfg
+          </div>
+          <div class="col-md-1">Tax</div>
+          <div class="col-md-1 pointer"
+               ng-click="setOrderForProducts('ilc')">ILC
+          </div>
+          <div class="col-md-1">GL</div>
+        </div>
+        <div class="products-content__list--item clearfix"
+             ng-repeat="product in productsData.list | filterProductByName: productSearchName | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
+             ng-controller="quicktech.core.products.productCtrl"
+             show-model-element="{{ 'show-' + product.versionedId.id}}"
+             on-finish-render="loadingFinished()"
+             ng-init="setHighlightCreatedProductId(product.versionedId.id)">
 
-          <li role="presentation" ng-class="{'active': currentOpenTab === 'list'}">
-            <a ui-sref="products({ tabName: 'list' })">Products List</a>
-          </li>
+          <div class="col-md-3 pre-line"
+               ng-class="{'product-description': category.default}"
+               uib-tooltip="{{ product.description }}"
+               trimmed-tooltip-checker="product.description"></div>
 
-        </ul>
+          <div class="col-md-2"> {{ getCompanyById(product.companyId).name}}</div>
+
+          <div class="col-md-1"
+               ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+            {{ product.cost | currency: '$': 2 }}
+          </div>
+
+          <div class="col-md-1"> {{ product.sale | currency: '$': 2 }}</div>
+
+          <div class="col-md-1">{{ product.manufacture}}</div>
+
+          <div class="col-md-1">{{ getSelectedTaxNames(product.taxIds) }}</div>
+
+          <div class="col-md-1">{{ product.ilc}}</div>
+
+          <div class="col-md-1">{{product.glNumber}}</div>
+
+          <div class="col-md-1 btn-actions"
+               uib-dropdown
+               smart-dropdown-menu-position="dropdown-menu">
+            <a class="hit-area ha-20-20 has-tooltip pointer" uib-tooltip="More" uib-dropdown-toggle
+               tooltip-append-to-body="true" tooltip-popup-delay="2000">
+              <i class="icn-sm icn-more-light-grey"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true"
+                 uib-tooltip="more"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+
+              <li create-new-entity="product"
+                  item="product"
+                  category-for-modal="product.category">
+                <a>Edit</a>
+              </li>
+              <li ng-click="deleteProduct()">
+                <a>Remove</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
       </div>
 
+      <!--<div class="tabs-container" style="margin-left: 15px">-->
+      <!--<div class="fixed-block-top" style="" fixed-block-top>-->
+      <!--<ul class="nav nav-qt" role="tablist" style="margin-left: 20px">-->
+
+      <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'category'}">-->
+      <!--<a ui-sref="products({ tabName: 'category' })">Product by Category</a>-->
+      <!--</li>-->
+
+      <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'list'}">-->
+      <!--<a ui-sref="products({ tabName: 'list' })">Products List</a>-->
+      <!--</li>-->
+
+      <!--</ul>-->
+      <!--</div>-->
+
+      <!--</div>-->
+
+
+      <!--<div ng-if="currentOpenTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>-->
+      <!--<div ng-if="currentOpenTab === 'category'"-->
+      <!--ng-include="'/html/scripts/core/products/group-by-category.tpl.html'"></div> -->
     </div>
+    <!--<div ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>-->
 
-    <div ng-hide="loadingInProgress" style="width: 100%; display: inline-block; margin-top: 58px;">
-
-      <div ng-if="currentOpenTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>
-      <div ng-if="currentOpenTab === 'category'"
-           ng-include="'/html/scripts/core/products/group-by-category.tpl.html'"></div>
-
-    </div>
-
-    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
   </div>
+  <loading-indicator loading-trigger="loadingInProgress"
+                     style="width: 100%;position: absolute;top: calc(50vh - 25px);"></loading-indicator>
+
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
-    m.parentNode.insertBefore(a, m)
+    m.parentNode.insertBefore(a, m);
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');

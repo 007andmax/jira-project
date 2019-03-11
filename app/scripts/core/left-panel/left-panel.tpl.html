@@ -223,7 +223,7 @@
            ng-click="clearTicketsFilters(); toggleLeftPanel('tickets', true)"
       >
 
-      <!-- ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })" -->
+        <!-- ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })" -->
 
         <div class="left-panel-icn left-panel-icons-tickets"
              uib-tooltip="tickets"
@@ -295,7 +295,8 @@
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'quick-support' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <span class="left-panel-full__head--header">Quick Support</span>
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)" ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
       </div>
@@ -332,7 +333,8 @@
     <div class="left-panel-full-wrapper nano"
          ng-show="(openedCategory === 'tickets' || openedCategory === 'inbox') && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Tickets</span>
@@ -394,8 +396,8 @@
           Dashboard
         </div>
         <div class="center-category__category"
-            ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
-            ng-click="stateGo($event, 'tickets', {listType: 'user'})">
+             ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
+             ng-click="stateGo($event, 'tickets', {listType: 'user'})">
           My Tickets <span>{{ticketsCounter.USER}}</span>
         </div>
         <div class="center-category__category"
@@ -568,7 +570,8 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByStatuses">
             <div class="center-category__category sked">
-              <div style="width: 100%;" ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
+              <div style="width: 100%;"
+                   ng-class="{active: $state.includes('tickets', {listType: 'unassigned'}) && isOnHoldTag}"
                    ng-click="stateGo($event, 'tickets', {listType: 'unassigned'}, true)">
                 Unassigned
               </div>
@@ -675,7 +678,8 @@
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'companies' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Companies</span>
@@ -784,7 +788,8 @@
 
         <div class="center-category__category sked without-height">
 
-          <ticket-tags is-company="true" tag-filter="true" on-save-func="" ticket-tags="companyFilterTags"></ticket-tags>
+          <ticket-tags is-company="true" tag-filter="true" on-save-func=""
+                       ticket-tags="companyFilterTags"></ticket-tags>
 
         </div>
         <div class="left-panel-hide-filter">
@@ -857,7 +862,8 @@
 
     <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'companyProfile' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Companies</span>
@@ -1123,7 +1129,7 @@
               </div>
             </div>
             <!--<div class="center-category__category sked">-->
-              <!--By User - Possible search or lis-->
+            <!--By User - Possible search or lis-->
             <!--</div>-->
           </div>
         </div>
@@ -1146,17 +1152,17 @@
         </div>
 
         <!--<div class="left-panel-hide-filter">-->
-          <!--<div class="left-panel-title left-panel-title-hover"-->
-               <!--ng-click="activateCompanyProfileTab('CompanyProfileInvoicesPage')"-->
-               <!--ng-class="{'left-panel-active': CompanyProfileInvoicesPage}">-->
-            <!--Invoices-->
-            <!--<i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileInvoicesPage}"></i>-->
-          <!--</div>-->
-          <!--<div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileInvoicesPage">-->
-            <!--<div class="center-category__category sked">-->
-              <!--List of invoices-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--<div class="left-panel-title left-panel-title-hover"-->
+        <!--ng-click="activateCompanyProfileTab('CompanyProfileInvoicesPage')"-->
+        <!--ng-class="{'left-panel-active': CompanyProfileInvoicesPage}">-->
+        <!--Invoices-->
+        <!--<i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileInvoicesPage}"></i>-->
+        <!--</div>-->
+        <!--<div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileInvoicesPage">-->
+        <!--<div class="center-category__category sked">-->
+        <!--List of invoices-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
 
         <div class="left-panel-title" ui-sref="companyProfile({ tabName: 'contracts' })"
@@ -1170,7 +1176,8 @@
 
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'users' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Users</span>
@@ -1253,7 +1260,7 @@
                    ng-model="filterDesignation"
                    name="designation"
                    typeahead-editable="true"
-                   placeholder='Select title'
+                   placeholder="Select title"
                    typeahead-on-select="filterUsers('title', filterDesignation)"
                    ng-change="isTitleFilterTyped = true"
                    tabindex="4"
@@ -1262,7 +1269,8 @@
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                    hard-reset-pattern="newCategoryNamePattern">
 
-            <div class="product-actions category-caret centered" ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
+            <div class="product-actions category-caret centered"
+                 ng-style="(sharedFilter.designation) ? { 'display': 'block' } : ''">
 
 
               <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
@@ -1282,11 +1290,7 @@
           </div>
 
 
-
         </div>
-
-
-
 
 
         <div class="left-panel-hide-filter">
@@ -1355,7 +1359,8 @@
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'billing' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Billing</span>
@@ -1366,6 +1371,12 @@
              ng-click="stateGo($event, 'accounting.dashboard')">
           Dashboard
         </div>
+        <div class="center-category__category"
+             ng-class="{active: $state.includes('services')}"
+             ng-click="stateGo($event, 'services', { tabName: 'default' })">
+          Default Services
+        </div>
+
         <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting.billable')">
@@ -1404,29 +1415,91 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'inventory' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano inventory" ng-show="openedCategory === 'inventory' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Inventory</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('products')}"
-             ng-click="stateGo($event, 'products', { tabName: 'category' })">
-          Products
+        <div class="inventory-lp-header">
+          <div>Category List</div>
+          <div class="add-category-lp"
+               uib-dropdown dropdown-append-to-body="true">
+            <div uib-dropdown-toggle class="new-link"
+                 no-restricted="true"
+                 dropdown-toogle
+                 aria-expanded="false"
+                 data-toggle="dropdown">+Add
+            </div>
+            <div class="add-category-lp-dropdown"
+                 uib-dropdown-menu style="z-index: 100000000;">
+              <div>
+                <p>Add Category</p>
+                <label stop-propagation="click">
+                  <span ng-if="!disableCreateCategory">Category Name</span>
+                  <span style="color: red"  ng-if="disableCreateCategory">Category name already exists</span>
+                  <input type="text" placeholder="Category Name" ng-model="newCategory" ng-change="checkDublicateCategory()">
+                </label>
+                <div class="add-category-lp-dropdown-btns">
+                  <button class="btn btn-success"
+                          ng-disabled="newCategory.length < 1 || disableCreateCategory"
+                          dropdown-toogle ng-click="addCategory(newCategory)">Save</button>
+                  <button class="btn btn-default" ng-click="clearCategory()" dropdown-toogle>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="center-category__category"
-             ng-class="{active: $state.includes('services')}"
-             ng-click="stateGo($event, 'services', { tabName: 'default' })">
-          Default Services
+             ng-class="{active: !currentCategoryState}"
+             ng-click="stateGo($event, 'products', {category: ''})">
+          <div class="center-category__category--item">
+            <div class="center-category__category--item__category-label">ALL PRODUCTS</div>
+            <div>{{getAllProductsCount()}}</div>
+          </div>
         </div>
+
+        <div class="center-category__category"
+             ng-repeat="category in inventoryCategoryList | orderBy: 'name' | limitTo: countOfCategories"
+             ng-class="{active: category.name === currentCategoryState}">
+
+          <div ng-if="category.productsAmount >0 || category.name === 'Uncategorized'"
+               class="center-category__category--item"
+               ng-click="stateGo($event, 'products', { category: category.name })">
+            <div>{{category.name}}</div>
+            <div>{{category.productsAmount}}</div>
+          </div>
+
+          <div ng-if="category.productsAmount === 0 && category.name !== 'Uncategorized'"
+               class="center-category__category--item">
+            <div ng-click="stateGo($event, 'products', { category: category.name })">
+              {{category.name}}
+            </div>
+            <div>
+              <i class="icon-sm new-icn-delete-white pointer has-tooltip"
+               ng-click="deleteCategory(category.id)"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="new-link"
+             style="padding: 0 24px;"
+             ng-if="inventoryCategoryList.length > 10"
+             ng-click="changeShowAllCategories()">Show All
+        </div>
+
       </div>
+
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'password-manager' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"  ng-show="showLeftArrowToggleLeftPanel()">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
+             ng-show="showLeftArrowToggleLeftPanel()">
           <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span class="left-panel-full__head--header">Password<br>Manager</span>
@@ -1527,7 +1600,7 @@
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change
-              Password
+                                                                                                        Password
             </div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info
             </div>
@@ -1546,21 +1619,25 @@
 
         <div class="center-category__category"
              ng-click="stateGo($event, 'settings.tags.companies', {test: true})"
-             ng-class="{active: $state.is('settings.tags')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
+             ng-class="{active: $state.is('settings.tags')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
           <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">-->
           Manage Tags
         </div>
 
-        <div ng-style="{'height': ($state.is('settings.tags.companies') || $state.is('settings.tags.tickets'))  ? '70px' : '0'}"
-             class="category-expanded angular-animate">
+        <div
+          ng-style="{'height': ($state.is('settings.tags.companies') || $state.is('settings.tags.tickets'))  ? '70px' : '0'}"
+          class="category-expanded angular-animate">
           <div ng-if="$state.is('settings.tags.companies') || $state.is('settings.tags.tickets')" navigation-bar>
             <div class="category-expanded-paragraph subsettings"
                  ng-click="stateGo($event, 'settings.tags.companies')"
-                 ng-class="{active: $state.is('settings.tags.companies')}"> Companies</div>
+                 ng-class="{active: $state.is('settings.tags.companies')}"> Companies
+            </div>
 
             <div class="category-expanded-paragraph subsettings"
                  ng-click="stateGo($event, 'settings.tags.tickets')"
-                 ng-class="{active: $state.is('settings.tags.tickets')}"> Tickets</div>
+                 ng-class="{active: $state.is('settings.tags.tickets')}"> Tickets
+            </div>
           </div>
         </div>
 
@@ -1571,35 +1648,40 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
-             ng-class="{active: $state.is('settings.companyProfile')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
+             ng-class="{active: $state.is('settings.companyProfile')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
           <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">-->
           Company Profile
         </div>
 
         <div ng-style="{'height': $state.is('settings.companyProfile') ? '105px' : '0'}"
-             class="category-expanded angular-animate" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
+             class="category-expanded angular-animate"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
           <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
             </div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#responseTimeSettings">Response Time
-              Settings
+                                                                                                     Settings
             </div>
           </div>
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
-             ng-class="{active: $state.is('settings.techUsers')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
+             ng-class="{active: $state.is('settings.techUsers')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
           Tech Users
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
-             ng-class="{active: $state.is('settings.email')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">
+             ng-class="{active: $state.is('settings.email')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">
           Email Settings
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.taxes')"
-             ng-class="{active: $state.is('settings.taxes')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAXES_SETTINGS')">
+             ng-class="{active: $state.is('settings.taxes')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAXES_SETTINGS')">
           Taxes
         </div>
 
@@ -1610,9 +1692,9 @@
         </div>
 
 
-
         <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
-             ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
+             ng-class="{active: $state.is('settings.permissionsManagement')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
 
           Permission Management
         </div>
@@ -1623,7 +1705,8 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
-             ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
+             ng-class="{active: $state.is('settings.emailTemplates')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
           Email Templates
         </div>
 
@@ -1637,16 +1720,16 @@
   </div>
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
-    m.parentNode.insertBefore(a, m)
+    m.parentNode.insertBefore(a, m);
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-93441341-1', 'auto');

@@ -1387,7 +1387,167 @@ bold {
 }
 
 .products-content {
+  padding: 21px 24px;
+  background: #f3f7f9;
   position: relative;
+  min-height: calc(100vh - 86px);
+}
+
+.products-content__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.products-content__header h3 {
+  font-family: "Graphik Regular", sans-serif;
+  font-size: 20px;
+  margin: 0;
+}
+
+.products-content__header--search {
+  display: flex;
+  position: relative;
+}
+
+.products-content__header--search:before {
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: url(../images/new-icons/search.png);
+  left: 10px;
+  top: calc(50% - 10px);
+}
+
+.products-content__header--search input {
+  width: 300px;
+  margin-right: 16px;
+  border: none;
+  padding: 8px 8px 8px 40px;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 13px;
+  outline: none;
+}
+
+.products-content__header--search input::placeholder {
+  color: #9ca5b6;
+  opacity: 1;
+}
+
+.plus-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2ec866;
+  border: 1px solid #189947;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  font-size: 24px;
+  outline: none;
+  transition: all .3s;
+}
+
+.plus-btn:hover {
+  background: #189947;
+}
+
+.products-content__list .products-content__list--item [class*='col-md-'] {
+  word-break: break-all;
+}
+
+.products-content__list .products-content__list--header [class*='col-md-'] {
+  white-space: nowrap;
+}
+
+.products-content__list--header div {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-family: "Graphik Medium", sans-serif;
+  color: #364656;
+}
+
+.products-content__list--header {
+  padding: 15px 0;
+}
+
+.products-content__list--item {
+  border-radius: 4px;
+  margin-bottom: 2px;
+  background: #fff;
+  padding: 24px 0;
+  position: relative;
+}
+
+.products-content__list--item [class*='col-md-'] {
+  font-size: 13px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.products-content__header--search-result {
+  position: absolute;
+  width: 224px;
+  right: calc(50% - 112px);
+  top: 0;
+  font-size: 12px;
+  background: #e0faec;
+  border: 2px solid #b9f0d1;
+  border-radius: 4px;
+  color: #189947;
+  padding: 6px 10px 6px 40px;
+}
+
+.products-content__header--search-result:before {
+  position: absolute;
+  content: '';
+  background: url("../images/new-icons/success-tick.svg");
+  width: 22px;
+  height: 22px;
+  left: 8px;
+  top: 6px;
+}
+
+.btn-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.products-content__list--item .col-md-3 {
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.new-icn-delete-white {
+  background-image: url(../images/new-icons/company-remove-white.svg);
+}
+
+.inventory .center-category__category {
+  position: relative;
+}
+
+.inventory .center-category__category--item > div:last-child {
+  background: #4f5f79;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 0 5px;
+  min-width: 22px;
+  margin-left: 5px;
+}
+
+.inventory .center-category__category--item > div:last-child i {
+  margin: 5px 0;
+}
+
+.inventory .center-category__category--item > div:first-child {
+  word-break: break-word;
 }
 
 .devices-content,
@@ -5440,7 +5600,7 @@ tbody.collapse.in {
 
 .hit-area ~ .dropdown-menu {
   left: auto;
-  margin: 25px 0 0;
+  /*margin: 25px 0 0;*/
   /*right: -30px;*/
   top: 15px;
 }
@@ -12185,6 +12345,14 @@ button.close {
     font-size: 12px;
   }
 
+  .products-content__list--header div {
+    font-size: 9px;
+  }
+
+  .products-content__list--item [class*='col-md-'] {
+    font-size: 11px;
+  }
+
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table li .price-width {
     width: 106px !important;
   }
@@ -12219,6 +12387,10 @@ button.close {
 @media only screen and (max-width: 1280px) {
   .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 500px);
+  }
+
+  .products-content__list--header div {
+    font-size: 8px;
   }
 
   .opened-ticket-list .ticket-add-content .ticket-add-product .qt-table .discount-barcode .col-3,
@@ -12960,4 +13132,26 @@ button.close {
 .chart-header .chart-header-controls p.choosen, .chart-header .chart-header-controls p:hover {
   color: #000;
   border-bottom: 2px solid #0094d0
+}
+
+.inventory-lp-header {
+  margin-bottom: 12px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+}
+
+.inventory-lp-header > div:first-child {
+  color: #fff;
+}
+
+.new-link {
+  font-family: "Graphik Regular", sans-serif;
+  font-size: 12px;
+  color: #16a4fa;
+  text-decoration: none;
+  cursor: pointer;
 }
