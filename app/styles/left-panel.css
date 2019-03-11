@@ -111,6 +111,10 @@
   padding-right: 25px;
 }
 
+.center-category__category--item__category-label {
+  font-size: 15px;
+}
+
 .center-category__category.without-height {
   height: auto;
 }
