@@ -35,6 +35,7 @@
         $scope.techUsers = UsersService.getTechUsers;
         $scope.qSHistoryExpanded = false;
         $scope.maxDate = Date.now();
+        $scope.disableCreateCategory = false;
         $scope.currentCategoryState = $stateParams.category;
         $scope.$watchCollection(function(){
           return $state.params;
@@ -59,6 +60,24 @@
         $rootScope.$on('$stateChangeStart', function(){
             console.log('12351235');
           });
+
+        $scope.checkDublicateCategory = function() {
+          console.log($scope.newCategory ,'newCategory');
+          var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
+            console.log(item.name, $scope.newCategory, '11');
+            return item.name.toLowerCase() === $scope.newCategory.toLowerCase();
+          });
+          console.log(duplicateCategory, 'duplicateCategory');
+          if (duplicateCategory && duplicateCategory[0]) {
+            return $scope.disableCreateCategory = true;
+          } else {
+            return $scope.disableCreateCategory = false;
+          }
+        };
+
+        $scope.clearCategory = function() {
+          $scope.newCategory = '';
+        };
 
         $scope.changeShowAllCategories = function() {
           if ($scope.countOfCategories === 10) {

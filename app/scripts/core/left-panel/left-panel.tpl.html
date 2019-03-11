@@ -1439,14 +1439,15 @@
               <div>
                 <p>Add Category</p>
                 <label stop-propagation="click">
-                  <span>Category Name</span>
-                  <input type="text" placeholder="Category Name" ng-model="newCategory">
+                  <span ng-if="!disableCreateCategory">Category Name</span>
+                  <span style="color: red"  ng-if="disableCreateCategory">Category name already exists</span>
+                  <input type="text" placeholder="Category Name" ng-model="newCategory" ng-change="checkDublicateCategory()">
                 </label>
                 <div class="add-category-lp-dropdown-btns">
                   <button class="btn btn-success"
-                          ng-disabled="newCategory.length < 1"
+                          ng-disabled="newCategory.length < 1 || disableCreateCategory"
                           dropdown-toogle ng-click="addCategory(newCategory)">Save</button>
-                  <button class="btn btn-default" dropdown-toogle>Cancel</button>
+                  <button class="btn btn-default" ng-click="clearCategory()" dropdown-toogle>Cancel</button>
                 </div>
               </div>
             </div>
