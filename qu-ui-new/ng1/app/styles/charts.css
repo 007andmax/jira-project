@@ -1,0 +1,159 @@
+/* Axis */
+.d3 .axis.axis-bottom .tick:first-child,
+.d3 .axis.axis-bottom .tick:last-of-type{
+  display: none;
+}
+
+.d3 .axis line {
+  fill: none;
+  stroke-width: 1px;
+  opacity: 0.5;
+}
+
+.d3 .axis-left path.domain{
+  stroke: transparent;
+}
+
+.d3 .axis text {
+  fill: #222222;
+}
+.d3 .axis-left text{
+  fill: #c5c5c5;
+}
+
+.d3 .axis-grid line {
+  fill: none;
+  stroke-width: 1px;
+  stroke: #222222;
+  opacity: 0.5;
+}
+.d3 .axis-grid text {
+  display: none;
+}
+
+/* Area Chart */
+.d3 .area {
+  fill: #098aae;
+  stroke-width: 0px;
+  stroke: #222222;
+}
+
+/* Line Chart */
+.d3 .line {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke: #222222;
+}
+
+/* Bar Chart */
+.d3 .bar {
+  fill: #0094d0;
+  stroke-width: 0px;
+  stroke: #222222;
+}
+.d3 .bar.bar-2, .bar-label-2 {
+  fill: #0094d0;
+}
+.d3 .bar.bar-1, .bar-label-1 {
+  fill: #0094d0;
+}
+.d3 .bar.bar-0, .bar-label-0 {
+  fill: #0094d0;
+}
+
+/* Pie Chart */
+.d3 .pie.pie-0 path {
+  fill: #98abc5;
+}
+.d3 .pie.pie-1 path {
+  fill: #8a89a6;
+}
+.d3 .pie.pie-2 path {
+  fill: #7b6888;
+}
+.d3 .pie.pie-3 path {
+  fill: #6b486b;
+}
+.d3 .pie.pie-4 path {
+  fill: #a05d56;
+}
+.d3 .pie.pie-5 path {
+  fill: #d0743c;
+}
+.d3 .pie.pie-6 path {
+  fill: #ff8c00;
+}
+.d3 .pie-label {
+  font-size: 20px;
+}
+
+/* Simple Arcs */
+.d3 path.arc {
+  fill: #98abc5;
+}
+
+.simple-arc1 .d3 .arc {
+  fill: #98abc5;
+}
+
+.simple-arc2 .d3 .arc {
+  fill: #d0743c;
+}
+
+.area.savings {
+  fill: #d0743c;
+}
+
+.area.optimal {
+  fill: #98abc5;
+}
+
+.chart-header{
+  padding: 15px;
+}
+
+.chart-header .chart-header-name{
+  display: inline-block;
+}
+
+.chart-header p,
+.customer-filter p{
+  font-size: 16px;
+}
+
+.chart-header-name .header-title{
+  font-size: 22px;
+}
+
+.chart-header .chart-header-controls{
+  display: inline-block;
+  float: right;
+}
+
+.chart-header .chart-header-controls input.form-control {
+  margin-top: 0 !important;
+}
+
+.chart-header .chart-header-controls p,
+.customer-filter p{
+  float: left;
+  cursor: pointer;
+  margin: 0px 10px 20px 10px;
+  color: #c5c5c5;
+}
+
+.chart-header .chart-header-controls p:hover,
+.customer-filter p:hover{
+  color: #000;
+  border-bottom: 2px solid #0094d0;
+}
+
+.chart-header .chart-header-controls p.choosen,
+.customer-filter p.choosen{
+  color: #000;
+  border-bottom: 2px solid #0094d0;
+}
+
+.dashboard-main .selected-chart{
+  border-color: deepskyblue !important;
+}

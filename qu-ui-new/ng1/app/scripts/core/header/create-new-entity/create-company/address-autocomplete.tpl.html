@@ -1,0 +1,79 @@
+<div class="clearfix" ng-form="addressForm">
+  <div class="form-group"
+       ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}"
+       add-on-focus>
+
+    <label ng-if="!onlyAddress"
+           class="control-label"
+           ng-class="{'hide': ((addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid)}">
+      Address
+    </label>
+
+    <div ng-messages="addressForm.address.$error"
+         ng-class="{'hide': !((addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid)}">
+
+      <label class="control-label" ng-message="required">
+        Please enter the company's address
+      </label>
+
+      <label class="control-label" ng-message="correct">
+        Please select address from autocomplete results
+      </label>
+
+    </div>
+
+
+    <input tabindex="{{ qtTabIndex ? qtTabIndex : 0 }}"
+           placeholder="'{{ activePlaceholder ? '' : 'Enter a location' }}" class="form-validation pointer" type="text"
+           ng-model="model.address"
+           name="address" map-input make-dirty-on-blur>
+    <div ng-if="activePlaceholder" class="placeholder">{{ activePlaceholder }}</div>
+
+  </div>
+
+  <div class="form-row clearfix" ng-if="!onlyAddress">
+    <div class="form-group"
+         ng-class="{'has-error': isShowingErrors(addressForm, 'suiteNumber')}">
+
+      <label class="control-label" ng-class="{'hide': isShowingErrors(addressForm, 'suiteNumber')}">
+        Suite Number
+      </label>
+
+      <div ng-messages="addressForm.suiteNumber.$error"
+           ng-class="{'hide': !isShowingErrors(addressForm, 'suiteNumber')}">
+        <div class="control-label" ng-message="maxlength">too large</div>
+      </div>
+
+      <input class="form-control" type="text" name="suiteNumber" autocomplete="off"
+             ng-model="model.suiteNumber" ng-maxlength="15">
+    </div>
+
+    <div class="form-group pull-right" ng-class="{'has-error': isShowingErrors(addressForm, 'zip')}">
+
+      <label class="control-label" ng-class="{'hide': isShowingErrors(addressForm, 'zip')}">Zip</label>
+
+      <div ng-messages="addressForm.zip.$error"
+           ng-class="{'hide': !isShowingErrors(addressForm, 'zip')}">
+        <div class="control-label" ng-message="maxlength">too large</div>
+      </div>
+      <input class="form-control" type="text" name="zip" ng-model="model.postalCode" ng-maxlength="15">
+    </div>
+  </div>
+</div>
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

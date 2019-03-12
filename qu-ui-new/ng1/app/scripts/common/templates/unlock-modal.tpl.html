@@ -1,0 +1,47 @@
+<div class="text-center unlock-screen-wrapper" ng-form="unlockForm">
+  <img src="images/new-icons/unlock-modal-user.svg" alt="">
+  <h3>Please Unlock Screen</h3>
+  <div class="form-group text-left" ng-class="{'has-error': isShowingErrors(unlockForm, 'code')}">
+
+    <label class="control-label" ng-hide="isShowingErrors(unlockForm, 'code')">
+      Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }}
+    </label>
+
+    <div ng-messages="unlockForm.code.$error" ng-hide="!isShowingErrors(unlockForm, 'code')">
+      <label class="control-label" ng-message="required">
+        Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }} is required.
+      </label>
+      <label class="control-label" ng-message="wrongCode">
+        It is wrong password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }}.
+      </label>
+    </div>
+
+    <input placeholder="Enter password" type="{{ codeShowed ? 'text' : 'password' }}" name="code"
+           ng-change="onCodeChange(unlockForm.code)"
+           ng-model="unlockModel.code" class="form-control" required>
+    <a href="javascript:void(0)" class="hit-area ha-20-20" ng-click="codeShowed = !codeShowed"
+       style="position: absolute;right: 15px;top: 40px;">
+      <i class="icn-sm {{ codeShowed ? 'unlock-hide-icn' : 'unlock-show-icn' }}"></i>
+    </a>
+
+  </div>
+  <div class="buttons-container">
+    <button class="btn btn-primary" ng-click="unlock(unlockModel.code, unlockForm.code)"
+            ng-disabled="unlockModel.unlocking">
+      Unlock
+    </button>
+    <button class="btn btn-success" ng-if="currentUser.enableTwoFactorAuth"
+            ng-click="sendCode()" ng-disabled="unlockModel.unlocking">
+      Send code
+    </button>
+  </div>
+
+  <i class="unlock-modal-icn"></i>
+  <p class="text-muted">Users that have 2 factor authentications please click send code then you can enter this into the
+    password box</p>
+  <div class="log-out-btn">
+    <a logout-btn>Logout</a>
+  </div>
+
+</div>
+

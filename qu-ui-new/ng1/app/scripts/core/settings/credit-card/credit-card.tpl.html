@@ -1,0 +1,95 @@
+<div class="accept-credit-card-payments">
+  <div class="credit-card-header">
+    <h2>Get your invoices paid online</h2>
+    <p>Accept customer credit cards on your Wave invoices</p>
+  </div>
+  <div class="credit-card-turn-on" ng-show="companyPaymentInfo.paymentsEnabled === false">
+    <div class="turn-on-content">
+      <div class="left-image">13412321321</div>
+      <div class="credit-card-info">
+        <div class="credit-card-content">
+          <p>Invoices and reports automatically updated</p>
+          <p>No setup fees, no monthly fees, no hidden fees</p>
+          <p>Get set up in seconds</p>
+          <p>Simple pricing: 2.9% + 30¢</p>
+        </div>
+        <div class="credit-card-footer">
+          <p>Start accepting
+            <img src="images/new-icons/Visa-Debit.png" alt="">
+            <img src="images/new-icons/Visa.png" alt="">
+            <img src="images/new-icons/MasterCard-Inverted.png" alt="">
+            <img src="images/new-icons/American Express.png" alt="">
+            and more now!
+          </p>
+        </div>
+      </div>
+      <div class="triangle-bottom"></div>
+    </div>
+    <div class="btn btn-success" ng-click="turnOnCreditCard()">Turn on credit card payments</div>
+  </div>
+  <div class="credit-card-turn-off" ng-show="companyPaymentInfo.paymentsEnabled === true">
+    <div class="payments-info">
+      <div class="create-user-header">
+        <h3 class="pull-left">Payments info</h3>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Paypal</label>
+          <input class="form-control"
+                 placeholder="PayPal Client Id"
+                 type="text"
+                 ng-model="companyPaymentInfo.paypalClientId"
+                 ng-maxlength="500">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input class="form-control"
+                 type="text"
+                 placeholder="PayPal Secret Id"
+                 ng-model="companyPaymentInfo.paypalSecretId"
+                 ng-maxlength="500">
+        </div>
+      </div>
+      <div class="btn btn-success" ng-click="changeCompanyPaymentInfo()">Save</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Stripe</label>
+          <input class="form-control"
+                 type="text"
+                 placeholder="Stripe Public Key"
+                 ng-model="companyPaymentInfo.stripePublicKey"
+                 ng-maxlength="500">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input class="form-control"
+                 type="text"
+                 placeholder="Stripe Secret Key"
+                 ng-model="companyPaymentInfo.stripeSecretKey"
+                 ng-maxlength="500">
+        </div>
+      </div>
+      <div class="btn btn-success" ng-click="changeCompanyPaymentInfo()">Save</div>
+    </div>
+    <div class="credit-card-info">
+      <div class="credit-card-content">
+        <p>Invoices and reports automatically updated</p>
+        <p>No setup fees, no monthly fees, no hidden fees</p>
+        <p>Get set up in seconds</p>
+        <p>Simple pricing: 2.9% + 30¢</p>
+      </div>
+      <div class="credit-card-footer">
+        <p>Start accepting
+          <img src="images/new-icons/Visa-Debit.png" alt="">
+          <img src="images/new-icons/Visa.png" alt="">
+          <img src="images/new-icons/MasterCard-Inverted.png" alt="">
+          <img src="images/new-icons/American Express.png" alt="">
+          and more now!
+        </p>
+      </div>
+    </div>
+    <div class="btn btn-primary" ng-click="turnOffCreditCard()">Turn off credit card payments</div>
+  </div>
+</div>
