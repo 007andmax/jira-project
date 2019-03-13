@@ -1,11 +1,10 @@
-'use strict';
+export const MODULE_NAME = 'quicktech';
 
-(function () {
-
-  var app = angular.module("quicktech",
+export const Ng1AppModule = angular.module('quicktech',
     [
-      'main.services',
+
       'quicktech.core.dashboards',
+      'main.services',
       'quicktech.core.tickets',
       'quicktech.core.users',
       'quicktech.common.services',
@@ -38,7 +37,7 @@
       'daterangepicker'
     ]);
 
-  app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$locationProvider',
+  Ng1AppModule.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$locationProvider',
     function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider, $locationProvider) {
 
       //uncomment this line for increasing angularjs performance (when debugging will not need)
@@ -373,7 +372,7 @@
 
     }]);
 
-  app.run(
+  Ng1AppModule.run(
     ['$rootScope', '$templateRequest', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
@@ -817,8 +816,5 @@
     }
 
 
-
     return '/tickets/user';
   }
-
-}());

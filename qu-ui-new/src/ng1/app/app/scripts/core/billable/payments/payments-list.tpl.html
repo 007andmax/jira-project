@@ -1,0 +1,40 @@
+<div class="deposit-create">
+  <div class="product-list-ticket clearfix">
+    <ul>
+      <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix fixed-block-top"
+          fixed-block-top offset-top="160" style="background-color: white">
+        <div class="col-md-1" ng-click="changeOrder('createdAt')"><strong>Date</strong></div>
+        <div class="col-md-3" ng-click="changeOrder('clientCompanyName')"><strong>Company</strong></div>
+        <div class="col-md-1" ng-click="changeOrder('invoiceNumbers')"><strong>Invoice</strong></div>
+        <div class="col-md-3"><strong>Note</strong></div>
+        <div class="col-md-1" ng-click="changeOrder('paymentMethod')"><strong>Type</strong></div>
+        <!--<div class="col-md-2"><strong>Status</strong><i class="icn-sm icn-caret-gray"></i></div>-->
+        <div class="col-md-2" style="text-align: right; width: 18%;" ng-click="changeOrder('totalSum')"><strong>Total</strong></div>
+      </li>
+      <div style="margin-top: 50px">
+      <li class="content-product-list-ticket clearfix"
+          ng-repeat="payment in payments | orderBy: orderType">
+        <div class="col-md-1">
+          <label class="control checkbox pull-left ng-scope" ng-hide="mode === 'deposit-slips'">
+            <input type="checkbox" ng-model="idDictionary[payment.id]">
+            <span class="control-indicator"></span>
+          </label>
+          {{ parseDate(payment.createdAt) | date: 'dd.MM.yy' }}
+        </div>
+        <div class="col-md-3">{{payment.clientCompanyName}}</div>
+        <div class="col-md-1 ellipsis"><div ng-repeat="invoice in payment.invoiceNumbers">{{invoice}} </div></div>
+        <div class="col-md-3">{{payment.note}}</div>
+        <div class="col-md-1"><span class="payment-type">{{parseType(payment.paymentMethod)}}</span></div>
+        <!--<div class="col-md-2"> -status-</div>-->
+        <div class="col-md-2" style="text-align: right; width: 18%;">{{payment.totalSum | currency: '$': 2 }}</div>
+        <div class="payment-rollback" ng-hide="mode === 'deposit-slips'">
+          <span uib-tooltip="rollback" tooltip-placement="top"
+                ng-click="rollbackPayment(payment)" custom-disabled="{{ rollbackInProgress }}">
+            <i class="icon-sm icn-restore icon-render"></i>
+          </span>
+        </div>
+      </li>
+      </div>
+    </ul>
+  </div>
+</div>

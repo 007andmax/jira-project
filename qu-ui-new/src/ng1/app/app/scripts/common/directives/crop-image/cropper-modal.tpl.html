@@ -1,0 +1,20 @@
+<div class="clearfix crop-wrapper">
+  <div class="close-btn btn btn-icn" ng-click="close()" tabindex="-1">
+    <i class="icn-sm icn-remove-old"></i>
+  </div>
+  <div class="img-crop">
+    <img ng-src="{{ source.origin.base64 }}" ng-hide="!cropperReady"
+         ng-cropper
+         ng-cropper-proxy="cropperProxy"
+         ng-cropper-show="'show.cropper'"
+         ng-cropper-hide="'hide.cropper'"
+         ng-cropper-options="options">
+  </div>
+  <div class="logo-crop clearfix" ng-show="preview">
+    <img class="preview" ng-src="{{ preview }}" width="800"/>
+  </div>
+  <div class="cropper-btns-container" >
+    <button class="btn btn-lg btn-primary" ng-click="close()">Cancel</button>
+    <button class="btn btn-lg btn-success" ng-click="crop()" custom-disabled="{{ !preview }}">Crop</button>
+  </div>
+</div>

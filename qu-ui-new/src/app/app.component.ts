@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+// import { PHONE_SERVICE } from "ng2/app/phone.service";
+
+import { UpgradeModule } from '@angular/upgrade/static';
+import { MODULE_NAME } from '../ng1/app/scripts/core/app.mdl';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'qu-ui-new';
+  title = 'app';
+
+  phones: any[] = [];
+
+
+  constructor(private upgrade: UpgradeModule) {
+  }
+
 }

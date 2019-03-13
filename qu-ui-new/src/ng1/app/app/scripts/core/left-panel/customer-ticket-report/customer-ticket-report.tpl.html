@@ -1,0 +1,200 @@
+<div class="hardware-wrap"
+     prevent-hash-change="close()"
+     convert-to-pdf="/customerReport/pdf"
+     id="{{ data.id }}"
+     selector=".customer-ticket__report"
+     disable-selector=".open-pdf-btn"
+     file-name="{{ getPdfName(data) }}"
+     ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
+  <div class="hardware">
+
+    <div class="hardware__control-panel" style="width: 150px;">
+      <div class="hardware__control-panel--btn open-pdf-btn" ng-click="openInPdf()">
+        <img src="images/new-icons/printer.png" alt="">
+        <p>Print</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="close()">
+        <img src="images/new-icons/cancel-circle.png" alt="">
+        <p>Close</p>
+      </div>
+    </div>
+    <!--<div class="topbar">-->
+      <!--<div class="invoice-actions">-->
+
+        <!--<div class="btn btn-primary pull-left" ng-if="!invoicePreview"-->
+             <!--ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"-->
+             <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
+             <!--tooltip-placement="bottom" tooltip-append-to-body="true"-->
+             <!--uib-tooltip="{{ receivablePreview ? 'Print Invoice' : 'Create and Print Invoice' }}">-->
+          <!--<i class="icon-sm icn-print"></i>-->
+        <!--</div>-->
+
+        <!--<div style="margin-left: 10px;" class="btn  btn-primary pull-left" ng-if="!invoicePreview"-->
+             <!--ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"-->
+             <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
+             <!--tooltip-placement="bottom" tooltip-append-to-body="true"-->
+             <!--uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">-->
+          <!--<i class="icon-sm icn-download-white"></i>-->
+        <!--</div>-->
+
+        <!--<div style="margin-left: 10px;" class="btn  btn-primary pull-left" ng-if="!invoicePreview && !receivablePreview"-->
+             <!--ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"-->
+             <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
+             <!--tooltip-placement="bottom" tooltip-append-to-body="true" uib-tooltip="Create and Send Invoice">-->
+          <!--<i class="icn icn-send"></i>-->
+        <!--</div>-->
+
+        <!--<a href="javascript:void(0)" class="close-icon hit-area pull-left" ng-click="close()">-->
+          <!--<i class="icn icn-close"></i>-->
+        <!--</a>-->
+
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="product-list-ticket">
+      <div class="customer-ticket" ng-if="data">
+        <div class="customer-ticket__report">
+          <div class="customer-ticket__report--summary">
+            <h3>Resolved tickets</h3>
+            <div class="header-product-list-ticket">
+              <h3>
+                {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
+                }}
+              </h3>
+              <p style="font-size: 14px;min-width: 170px">
+                {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
+              </p>
+            </div>
+            <table>
+              <tbody>
+              <tr>
+                <td rowspan="2" colspan="1" class="summary-chart">
+                  <div chart-data-restriction margin="80" divider="20" ng-if="reportChartData && reportChartData.length"
+                       handle-data="reportChartData" style="height: 100%">
+
+                    <div d3chart data="chartData" margin="{ top: 10, right: 40, bottom: 30, left: 40}"
+                         on-finish-rendering="buildPdf" style="height: 100%">
+                      <d3axis name="date" scale="ordinal" orientation="bottom" filter="parseDate"
+                              ticks="{{ chartTicks.length }}" tick-values="chartTicks"
+                              first-tick-dy="-10000" first-tick-dx="-10000"
+                              last-tick-dy="-10000" last-tick-dx="-10000"></d3axis>
+                      <d3axis name="tickets" orientation="left" filter="groupBars" ></d3axis>
+
+                      <d3bars x="date" y="ticketResolved" yscale="tickets" color="#4caf50"
+                              width="20" chart-tooltip="chart"></d3bars>
+                      <!--<d3bars x="date" y="ticketUnresolved" yscale="tickets" color="#0094d0"-->
+                      <!--width="15" offset="-2" chart-tooltip="chart"></d3bars>-->
+                    </div>
+
+                  </div>
+                </td>
+                <td colspan="1" class="time-info" ng-if="data.withTimeSpent">
+                  <p>Time spent</p>
+                  <h4>{{ timeToHoursAndMinutes(data.timeSpent) || '0 hours' }}</h4>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="time-info" ng-if="data.withResponseTime">
+                  <p>Average Response time</p>
+                  <h4>{{ timeToHoursAndMinutes(data.averageResponseTime / 60) || '0 hours' }}</h4>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="customer-ticket__report--details clearfix">
+            <h3>Tickets details</h3>
+            <div class="clearfix report-info-point" ng-repeat="ticket in data.tickets"
+                 on-finish-render="buildPdf('tickets')">
+              <div>
+                  <div class="col-md-3">
+                    <p class="text-uppercase fz-13"><strong>Date/Time</strong></p>
+                    <p>{{ dateParse(ticket.ticketCreatedAt) | date: 'MMM d, y / h:mm:ss a' }}</p>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="text-uppercase fz-13"><strong>Ticket Number</strong></p>
+                    <p>{{ ticket.ticketNumber }}</p>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="text-uppercase fz-13"><strong>Status</strong></p>
+                    <p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).split('_').join(' ').toLowerCase() :
+                      'Unclaimed' }}</p>
+                  </div>
+                  <div class="col-md-3">
+                    <p class="text-uppercase fz-13"><strong>User</strong></p>
+                    <p>{{ getUserName(getUserById(ticket.clientUserId)) }}</p>
+                  </div>
+                  <div class="col-md-2" ng-if="ticket.deviceName">
+                    <p class="text-uppercase fz-13"><strong>Device</strong></p>
+                    <p>{{ ticket.deviceName }}</p>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="text-uppercase fz-13"><strong>Response Time</strong></p>
+                    <p>
+                      {{ ticket.responseTime ? timeToHoursAndMinutes(ticket.responseTime / 60, true) : 'immediately'}}
+                    </p>
+                  </div>
+              </div>
+              <div ng-if="ticket.description">
+                <p class="text-uppercase fz-13" style="padding: 0 5px;"><strong>Description</strong></p>
+                <p class="details-futures-info">
+                  <span class="col-md-12" ng-bind-html="getTrustedHtml(ticket.description)"></span>
+                </p>
+              </div>
+
+              <div ng-if="data.extendedReport">
+                <div ng-repeat="update in ticket.updates">
+                  <div ng-if="update.note">
+                    <p class="text-uppercase fz-13"><strong>Notes:</strong></p>
+                    <p class="details-futures-info" ng-bind-html="getTrustedHtml(update.note)"></p>
+                  </div>
+
+                  <div class="extended-report" ng-repeat="expense in update.expenses"
+                       ng-if="update.expenses && update.expenses.length">
+                    <p class="text-uppercase fz-13 col-md-4" style="padding-bottom: 0;"><strong>{{ update.type[0] + update.type.slice(1).toLowerCase() }}</strong></p>
+                    <p class="col-md-3" style="padding-bottom: 0;" ng-if="expense.ilc"><strong>ILC:</strong> {{ expense.ilc }}</p>
+                    <p class="col-md-3" style="padding-bottom: 0;" ng-if="expense.manufacture"><strong>P/N:</strong>{{ expense.manufacture }}</p>
+                    <div class="details-futures-info" ng-if="update.type === 'PRODUCT'">
+                      <div class="col-md-4"><strong>Name:</strong> {{ expense.name }}</div>
+                      <div class="col-md-2"><strong>Quantity:</strong> {{ expense.quantity }}</div>
+                      <div class="col-md-3"><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</div>
+                    </div>
+
+                    <div class="details-futures-info" ng-if="update.type === 'SERVICE'">
+                      <div class="col-md-4"><strong>Name:</strong> {{ expense.name }}</div>
+                      <div class="col-md-2"><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</div>
+                      <div class="col-md-3"><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p style="float: left; margin: 5px 0;" ng-if="ticket.discount">
+                <strong>Discount: </strong> {{ getAmount(ticket.discount) }}
+              </p>
+              <p style="float: right; margin: 5px 0;" ng-if="ticket.techUserId">
+                <strong class="text-uppercase fz-13">Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+

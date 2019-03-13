@@ -1,0 +1,141 @@
+<div class="tickets-dashboard four-stats-dashboard">
+  <div class="container-fluid">
+    <section class="dashboard-main">
+      <div class="row">
+        <div class="col-lg-9 col-xs-9">
+          <div class="stats">
+            <div class="stats__main front">
+              <div class="chart-header">
+                <div class="chart-header-name">
+                  <p class="header-title">
+                    {{ getChartTitle() }}
+                  </p>
+                </div>
+
+                <div class="chart-header-controls">
+                  <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+                  <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+                  <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+                </div>
+
+              </div>
+              <div chart-data-restriction fetch-func="getBillingDashboard" margin="120" divider="50" param0="frequency"
+                   handle-data="handleDashboardData" style="height: 85%">
+
+                <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 80}"
+                     style="height: 100%" ng-if="!reloading">
+                  <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                          filter="parseDate"
+                          ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+                  <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
+                  <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"
+                          tooltip-preffix="$"></d3bars>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-3">
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('totalSales')"
+                 ng-class="{'selected-chart': selectedChart === 'totalSales'}">
+              <div class="stats__main">
+                <p class="board-head">
+                  Total sales
+                </p>
+                <div class="stats__main--count font-green">
+                  <p>${{ dashboard.totalSales || 0 | priceDelimiters }}</p>
+                </div>
+
+                <div style="display: flex; justify-content: center; align-items: center;">
+                  <span style="margin: 0 5px;font-size: 12px;">{{ referenceDate }}</span>
+
+                  <button style="margin: 0;padding: 0;border: none;background-color: transparent;outline: none"
+                          class="icn-update-service icn-sm" ng-click="openSettings()"></button>
+                </div>
+              </div>
+              <div class="stats__icon bg-green">
+                <img src="images/new-icons/USD-circle-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('totalBillable')"
+                 ng-class="{'selected-chart': selectedChart === 'totalBillable'}">
+              <div class="stats__main">
+                <p class="board-head">
+                  Unbilled tickets
+                </p>
+                <div class="stats__main--count font-red">
+                  <p>${{ dashboard.totalBillable || 0 | priceDelimiters }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-red">
+                <img src="images/new-icons/currency-exchange-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('totalReceivable')"
+                 ng-class="{'selected-chart': selectedChart === 'totalReceivable'}">
+              <div class="stats__main">
+                <p class="board-head">
+                  Received payments
+                </p>
+                <div class="stats__main--count font-yellow">
+                  <p>${{ dashboard.totalReceivable || 0 | priceDelimiters }}</p>
+                </div>
+
+              </div>
+              <div class="stats__icon bg-yellow" style="background-color:#498902">
+                <img src="images/new-icons/warning-circle-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('totalReceivableUnpaid')"
+                 ng-class="{'selected-chart': selectedChart === 'totalReceivableUnpaid'}">
+              <div class="stats__main">
+                <p class="board-head">
+                  Receivables
+                </p>
+                <div class="stats__main--count font-yellow">
+                  <p>${{ dashboard.totalReceivableUnpaid || 0 | priceDelimiters }}</p>
+                </div>
+                <p class="overdue-receivables">Overdue &nbsp; <span class="font-yellow">${{ dashboard.totalOverDue || 0 | priceDelimiters }}</span>
+                </p>
+              </div>
+              <div class="stats__icon bg-red" style="background-color:#ffb937">
+                <img src="images/new-icons/warning-circle-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
