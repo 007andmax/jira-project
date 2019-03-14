@@ -2,7 +2,6 @@ export const MODULE_NAME = 'quicktech';
 
 export const Ng1AppModule = angular.module('quicktech',
     [
-
       'quicktech.core.dashboards',
       'main.services',
       'quicktech.core.tickets',

@@ -1,50 +1,66 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, InjectionToken, DoBootstrap} from '@angular/core';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { NgModule, InjectionToken } from '@angular/core';
+import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 
-import { downgradeComponent, setAngularJSGlobal, UpgradeComponent, UpgradeModule } from '@angular/upgrade/static';
+import { UpgradeModule, downgradeComponent } from '@angular/upgrade/static';
 import { AppComponent } from './app.component';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { MODULE_NAME } from '../ng1/app/scripts/core/app.mdl.js';
-import { appRoutes } from './app.routes';
-// import { Ng2DemoComponent } from "ng2/app/ng2-demo.component";
-// import { phoneServiceProvider } from "ng2/app/phone.service";
+import { Ng2DemoComponent } from './ng2-demo.components';
 
 declare var angular: any;
 
-// angular.module('quicktech')
-//   .directive(
-//     'ng2Demo',
-//     downgradeComponent({component: Ng2DemoComponent})
-//   );
+export class CustomHandlingStrategy implements UrlHandlingStrategy {
+  shouldProcessUrl(url) {
+    return url.toString().startsWith("/ng2-route") || url.toString() == "/"
+  }
+  extract(url) { return url; }
+  merge(url, whole) { return url; }
+}
+
+angular.module('quicktech')
+  .directive(
+    'ng2Demo',
+    downgradeComponent({component: Ng2DemoComponent})
+  );
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Ng2DemoComponent
   ],
   imports: [
     BrowserModule,
     UpgradeModule,
-    RouterModule.forRoot(appRoutes, {
-      preloadingStrategy: PreloadAllModules,
-      onSameUrlNavigation: 'reload'
-    }),
+    RouterModule.forRoot([
+        {
+          path: '',
+          pathMatch: 'full',
+          redirectTo: 'ng2-route'
+        },
+        {
+          path: 'ng2-route',
+          component: Ng2DemoComponent
+        }
+      ],
+      {
+        useHash: true,
+        enableTracing: true
+      }
+    )
   ],
   entryComponents: [
-    // Ng2DemoComponent // Don't forget this!!!
+    Ng2DemoComponent // Don't forget this!!!
+  ],
+  providers: [
+    { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy }
   ],
   bootstrap: [AppComponent]
 })
 
-
-
 export class AppModule {
-  constructor(private upgrade: UpgradeModule) {}
-
-  ngDoBootstrap() {
-    setAngularJSGlobal(angular);
-    this.upgrade.bootstrap(document.getElementById('ng-app'), [MODULE_NAME], { strictDi: true });
-  }
-
+  /*
+    constructor(private upgrade: UpgradeModule) { }
+    ngDoBootstrap() {
+      this.upgrade.bootstrap(document.body, ['phonecatApp'], { strictDi: true });
+    }
+  */
 }
-
