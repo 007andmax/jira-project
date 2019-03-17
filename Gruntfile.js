@@ -43,8 +43,8 @@ module.exports = function (grunt) {
       },
       myTarget: {
         files: {
-          'app/index.html': 'app/index.tpl.html',
-          'app/index-admin.html': 'app/index-admin.tpl.html'
+          'app/index.html': 'ng1/index.tpl.html',
+          'app/index-admin.html': 'ng1/index-admin.tpl.html'
         }
       }
     },
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.ng1 %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        files: ['<%= yeoman.ng1 %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
@@ -75,8 +75,8 @@ module.exports = function (grunt) {
       },
       includeSource: {
         files: [
-          '<%= yeoman.app %>/{,*/}index.tpl.html',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.ng1 %>/{,*/}index.tpl.html',
+          '<%= yeoman.ng1 %>/scripts/{,*/}*.js'
         ],
         tasks: ['includeSource']
       },
@@ -85,9 +85,9 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.ng1 %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.ng1 %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -107,14 +107,14 @@ module.exports = function (grunt) {
       //       host: 'localhost',
       //       port: 9000,
       //       rewrite: {
-      //         '^/html': '/app'
+      //         '^/html': '/ng1'
       //       }
       //     },
       //     {
       //       context: [
       //         '/',
       //         '!/html',
-      //         '!/app',
+      //         '!/ng1',
       //         '!/dist',
       //         '!/bower_components'
       //       ],
@@ -135,14 +135,14 @@ module.exports = function (grunt) {
       //       host: 'localhost',
       //       port: 9000,
       //       rewrite: {
-      //         '^/html': '/app'
+      //         '^/html': '/ng1'
       //       }
       //     },
       //     {
       //       context: [
       //         '/',
       //         '!/html',
-      //         '!/app',
+      //         '!/ng1',
       //         '!/dist',
       //         '!/bower_components'
       //       ],
@@ -163,14 +163,14 @@ module.exports = function (grunt) {
             host: 'localhost',
             port: 9000,
             rewrite: {
-              '^/html': '/app'
+              '^/html': '/ng1'
             }
           },
           {
             context: [
               '/',
               '!/html',
-              '!/app',
+              '!/ng1',
               '!/dist',
               '!/bower_components'
             ],
@@ -199,7 +199,7 @@ module.exports = function (grunt) {
       //       context: [
       //         '/',
       //         '!/html',
-      //         '!/app',
+      //         '!/ng1',
       //         '!/dist',
       //         '!/bower_components'
       //       ],
@@ -270,7 +270,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.ng1 %>/scripts/{,*/}*.js'
         ]
       },
       test: {
@@ -337,10 +337,10 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the app
+    // Automatically inject Bower components into the ng1
     wiredep: {
       app: {
-        src: ['<%= yeoman.app %>/index.html'],
+        src: ['<%= yeoman.ng1 %>/index.html'],
         ignorePath: /\.\.\//,
         fileTypes: {
           html: {
@@ -390,7 +390,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= yeoman.ng1 %>/index.html',
       options: {
         dest: '<%= yeoman.dist %>',
         flow: {
@@ -579,7 +579,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.ng1 %>/images',
           src: '**/*.{png,jpg,jpeg,gif}',
           dest: '<%= yeoman.dist %>/images'
         }]
@@ -590,7 +590,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.ng1 %>/images',
           src: '**/*.svg',
           dest: '<%= yeoman.dist %>/images'
         }]
@@ -641,7 +641,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
+          cwd: '<%= yeoman.ng1 %>',
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
@@ -669,20 +669,20 @@ module.exports = function (grunt) {
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
+        cwd: '<%= yeoman.ng1 %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       },
       sass_temp: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
+        cwd: '<%= yeoman.ng1 %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.{scss,sass}'
       },
       temp_sass: {
         expand: true,
         cwd: '.tmp/styles/',
-        dest: '<%= yeoman.app %>/styles/',
+        dest: '<%= yeoman.ng1 %>/styles/',
         src: '{,*/}*.{scss,sass}',
         rename: function (dest, src) {
           return dest + src.replace(/\.(scss|sass)/, '.css');

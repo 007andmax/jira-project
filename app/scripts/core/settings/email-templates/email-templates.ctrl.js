@@ -204,7 +204,7 @@
           'COMPANY_AGENT_APP_CREATED': {
             title: "A new agent application is created",
             recipient: "Company Administrators",
-            description: "This message will be sent when a new agent app is created. It may contain logon information, including both full username (with domain name if exists) and password."
+            description: "This message will be sent when a new agent ng1 is created. It may contain logon information, including both full username (with domain name if exists) and password."
           },
           'COMPANY_AGENT_APP_LOGIN': {
             title: "Agent application's login information is modified",

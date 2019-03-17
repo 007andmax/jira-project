@@ -780,7 +780,7 @@
           PERCENT: "%"
         };
 
-        $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
+        // $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
 
       }]);
 
