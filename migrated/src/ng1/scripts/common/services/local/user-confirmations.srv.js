@@ -12,7 +12,7 @@
           keyboard: false,
           size: 'custom-size-confirmation-pop-up',
           windowClass: 'modal-spam',
-          templateUrl: '/commonHtml/assets/templates/user-confirmations.tpl.html'
+          templateUrl: '/common/assets/templates/user-confirmations.tpl.html'
         };
 
         this.preventMessage = 'Do you want to leave this page? All entered information will be lost.';

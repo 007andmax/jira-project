@@ -11,11 +11,11 @@
     var taxes = [],
       $serviceScope = $rootScope.$new();
 
-    $http.get('/taxes').then(function (resp) {
+    $http.get('https://dev.quicktech.com/taxes').then(function (resp) {
       taxes = Utils.customizeArray(resp.data, taxes);
     });
 
-    RealTimeService.subscribe('/taxes', $serviceScope, function (newChange) {
+    RealTimeService.subscribe('https://dev.quicktech.com/taxes', $serviceScope, function (newChange) {
       var action = newChange.action;
       var taxById = Utils.findById(taxes, newChange.data.id);
 
@@ -37,12 +37,12 @@
     }
 
     function create(tax, callback) {
-      var future = $http.post('/taxes', tax);
+      var future = $http.post('https://dev.quicktech.com/taxes', tax);
       Utils.handleCallback(future, callback);
     }
 
     function update(tax, callback) {
-      var future = $http.put('/taxes', tax);
+      var future = $http.put('https://dev.quicktech.com/taxes', tax);
       Utils.handleCallback(future, callback);
     }
 
@@ -55,12 +55,12 @@
     }
 
     function remove(taxId, callback) {
-      var future = $http.delete('/taxes/' + taxId);
+      var future = $http.delete('https://dev.quicktech.com/taxes/' + taxId);
       Utils.handleCallback(future, callback);
     }
 
     function linkWithEntity(entityId, entityType, taxIds, callback) {
-      var future = $http.post('/taxes/linkToExpense', {
+      var future = $http.post('https://dev.quicktech.com/taxes/linkToExpense', {
         expenseId: entityId,
         expenseType: entityType.toUpperCase(),
         taxIds: taxIds
@@ -69,7 +69,7 @@
     }
 
     function isUniqueName(name, id, callback) {
-      var future = $http.get('/taxes/isUniqueName', { params: { name: name, taxId: id } });
+      var future = $http.get('https://dev.quicktech.com/taxes/isUniqueName', { params: { name: name, taxId: id } });
       Utils.handleCallback(future, callback);
     }
 

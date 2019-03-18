@@ -249,7 +249,7 @@
         }))
         .state('settings.taxes', waitForServices({
           url: '/taxes',
-          templateUrl: '/html/scripts/core/settings/taxes/taxes.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/taxes/taxes.tpl.html',
           controller: 'quicktech.core.settings.taxesCtrl'
         }))
         .state('settings.tickets', waitForServices({
@@ -780,13 +780,13 @@
           PERCENT: "%"
         };
 
-        $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
+        // $templateRequest('/src/ng1/scripts/common/assets/templates/user-confirmations.tpl.html');
 
       }]);
 
   function getUserDefaultPage() {
 
-    // console.log('is it default??')
+    console.log('is it default??');
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',

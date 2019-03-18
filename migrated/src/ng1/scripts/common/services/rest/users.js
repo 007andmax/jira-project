@@ -67,7 +67,7 @@
 
         initializingStarted = true;
 
-        $http.get('/users').then(function (resp) {
+        $http.get('https://dev.quicktech.com//users').then(function (resp) {
             Utils.customizeArray(resp.data, storage.users);
             for (var i = 0; i < storage.users.length; i++) {
               var user = storage.users[i];
@@ -95,7 +95,7 @@
             throw 'Cannot initialize CompaniesService!';
           });
 
-        RealTimeService.subscribe('/user', serviceScope, function (newChange) {
+        RealTimeService.subscribe('https://dev.quicktech.com//user', serviceScope, function (newChange) {
 
           if (!initialized) {
             return;
@@ -165,7 +165,7 @@
           }
         });
 
-        RealTimeService.subscribe('/userSubmittedTicket', serviceScope, function (newChange) {
+        RealTimeService.subscribe('https://dev.quicktech.com//userSubmittedTicket', serviceScope, function (newChange) {
 
           if (newChange.action === 'USER_SUBMITTED_TICKET') {
             var user = getOneById(newChange.data);
@@ -193,7 +193,7 @@
           }
         });
 
-        RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
+        RealTimeService.subscribe('https://dev.quicktech.com//lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
           if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
             $rootScope.showLockModal();
           }
@@ -299,7 +299,7 @@
       }
 
       function resendWelcomeEmail(email, callback) {
-        $http.post('/resend/verifyUserEmail', {
+        $http.post('https://dev.quicktech.com//resend/verifyUserEmail', {
           "email": email
         }).then(function(resp) {
           if (callback) {
@@ -322,7 +322,7 @@
 
 
         var future = $http({
-          url: '/settings/userProfile/gridPresentation',
+          url: 'https://dev.quicktech.com//settings/userProfile/gridPresentation',
           method: 'PUT',
           data: {
             "usersGridPresentation": translate[data.users] || null,
@@ -336,7 +336,7 @@
 
       function getTechUsersEmailNotification(listOfTechUsers, callback) {
         var future = $http({
-          url: '/settings/userProfile/getUsersEmailNotifications',
+          url: 'https://dev.quicktech.com//settings/userProfile/getUsersEmailNotifications',
           method: 'POST',
           data: listOfTechUsers
         });
@@ -346,7 +346,7 @@
       function saveUsersEmailNotification(userId, data, callback) {
         var future = $http({
           method: 'PUT',
-          url: '/settings/userProfile/saveUsersEmailNotifications?userId='+userId,
+          url: 'https://dev.quicktech.com//settings/userProfile/saveUsersEmailNotifications?userId='+userId,
           data: data
         });
         Utils.handleCallback(future, callback)

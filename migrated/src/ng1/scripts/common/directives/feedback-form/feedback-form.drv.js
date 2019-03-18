@@ -7,7 +7,7 @@
       function ($document, $state, $http, $timeout, FilesService, SharedStateService) {
         return {
           restrict: 'A',
-          templateUrl: '/html/scripts/common/directives/feedback-form/feedback-form.tpl.html',
+          templateUrl: '/ng1/scripts/common/directives/feedback-form/feedback-form.tpl.html',
           link: function (scope, element) {
             element.addClass('feed-back-btn');
 

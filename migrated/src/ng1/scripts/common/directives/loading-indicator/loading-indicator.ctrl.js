@@ -5,7 +5,7 @@
   angular.module("quicktech.common.directives").directive("loadingIndicator", function () {
     return {
       restrict: 'EA',
-      templateUrl: '/html/scripts/common/directives/loading-indicator/loading-indicator.tpl.html',
+      templateUrl: '/ng1/scripts/common/directives/loading-indicator/loading-indicator.tpl.html',
       scope: {
         loadingTrigger: '='
       },
