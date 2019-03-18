@@ -71,6 +71,7 @@
       return {
 
         'request': function (config) {
+          console.log(11);
 
           if (config.url) {
 
@@ -99,7 +100,7 @@
   }]);
 
   services.run(['$http', '$rootScope', 'RealTimeService', function ($http, $rootScope, RealTimeService) {
-    $http.get('/users/current').success(function (resp) {
+    $http.get('https://dev.quicktech.com/users/current').success(function (resp) {
       $rootScope.currentUser = resp;
       $rootScope.currentUserLoaded = true;
       if ($rootScope.servicesLoaded) {

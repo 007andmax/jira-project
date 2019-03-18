@@ -161,7 +161,7 @@ module.exports = function (grunt) {
           {
             context: '/html',
             host: 'localhost',
-            port: 9000,
+            port: 4200,
             rewrite: {
               '^/html': '/ng1'
             }
@@ -760,7 +760,7 @@ module.exports = function (grunt) {
       'includeSource',
       // 'includeSourceAdminPanel',
       'wiredep',
-      'configureProxies:localDevServer',
+      'configureProxies:xr',
       'copy:sass_temp',
       'sass:dist',
       'copy:temp_sass',

@@ -780,13 +780,13 @@
           PERCENT: "%"
         };
 
-        // $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
+        // $templateRequest('/common/assets/templates/user-confirmations.tpl.html');
 
       }]);
 
   function getUserDefaultPage() {
 
-    // console.log('is it default??')
+    console.log('is it default??')
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',

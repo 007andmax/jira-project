@@ -201,6 +201,7 @@
       }
 
       function getCookie(name) {
+        console.log('testss12351235');
         var matches = document.cookie.match(new RegExp(
           "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
         ));

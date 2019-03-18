@@ -612,7 +612,7 @@
       function getAllCounts(callback) {
         allCountsCallback = callback;
 
-        $http.post('/v2/tickets/counts', queries).then(function (resp) {
+        $http.post('https://dev.quicktech.com/v2/tickets/counts', queries).then(function (resp) {
           storage.ticketsQuantityMap = resp.data;
 
           if (callback) {
@@ -667,7 +667,7 @@
         });
 
 
-        $http.post('/v2/tickets/counts', queryForCompanyCounters).then(function (resp) {
+        $http.post('https://dev.quicktech.com/v2/tickets/counts', queryForCompanyCounters).then(function (resp) {
           storage.ticketsQuantityMapByCompany = resp.data;
 
           if (callback) {
@@ -691,7 +691,7 @@
       }
 
       function getCompanyTicketCount(query) {
-        $http.post('/v2/tickets/counts', {COUNT: query}).then(function(resp) {
+        $http.post('https://dev.quicktech.com/v2/tickets/counts', {COUNT: query}).then(function(resp) {
           if(resp) {
             globalSearch.count = resp.data.COUNT;
           }
@@ -764,10 +764,10 @@
         var url, data = { value: value };
 
         if (Object.prototype.toString.call(id) === '[object Array]') {
-          url = '/v2/tickets/' + action;
+          url = 'https://dev.quicktech.com/v2/tickets/' + action;
           data.ids = id;
         } else {
-          url = '/v2/tickets/' + id + '/' + action;
+          url = 'https://dev.quicktech.com/v2/tickets/' + id + '/' + action;
         }
 
         // if (value === 'COMPLETED') {
@@ -791,12 +791,12 @@
           ids = [ticketId];
         }
 
-        var future = $http.post('/v2/tickets/delete/', { ids: ids });
+        var future = $http.post('https://dev.quicktech.com/v2/tickets/delete/', { ids: ids });
         Utils.handleCallback(future, callback)
       }
 
       function claimUser(ticketId) {
-        $http.get('/tickets/claimUser?ticketId=' + ticketId);
+        $http.get('https://dev.quicktech.com/tickets/claimUser?ticketId=' + ticketId);
       }
 
       function createTicket(ticket, callback) {
@@ -805,18 +805,18 @@
           ticket.priorityLevel = ticket.priorityLevel.toUpperCase();
         }
 
-        var future = $http.post('/v2/tickets', ticket);
+        var future = $http.post('https://dev.quicktech.com/v2/tickets', ticket);
         Utils.handleCallback(future, callback);
       }
 
       function getActualNumber(scope, callback) {
-        $http.get('/data/actualNumber?type=TICKET').success(function (resp) {
+        $http.get('https://dev.quicktech.com/data/actualNumber?type=TICKET').success(function (resp) {
           if (callback) {
             callback(resp.number);
           }
         });
 
-        RealTimeService.subscribe('/number/TICKET', scope, function (change) {
+        RealTimeService.subscribe('https://dev.quicktech.com/number/TICKET', scope, function (change) {
           if (change.action === 'NUMBER_CHANGED') {
             if (callback) {
               callback(Utils.getFormattedNumber(change.data));
@@ -848,12 +848,12 @@
           }
         }
 
-        var future = $http.post('/v2/tickets/updates?close=' + !!close, ticketUpdate);
+        var future = $http.post('https://dev.quicktech.com/v2/tickets/updates?close=' + !!close, ticketUpdate);
         Utils.handleCallback(future, callback);
       }
 
       function deleteTicketUpdate(ticketId, updateId, callback) {
-        var future = $http.delete('/v2/tickets/' + ticketId + '/updates/' + updateId);
+        var future = $http.delete('https://dev.quicktech.com/v2/tickets/' + ticketId + '/updates/' + updateId);
         Utils.handleCallback(future, callback);
       }
 
@@ -867,7 +867,7 @@
           }
         }
 
-        $http.post('/v2/tickets/' + ticket.id + '/updates/fetch', loadedIds).then(function (resp) {
+        $http.post('https://dev.quicktech.com/v2/tickets/' + ticket.id + '/updates/fetch', loadedIds).then(function (resp) {
           ticket.updates = ticket.updates || [];
           Utils.customizeArray(resp.data, ticket.updates);
           Utils.defineReadOnlyProperty(ticket, 'unloadedUpdates', 0);
@@ -888,13 +888,13 @@
           throw 'ticketId and updateIds is required parameters';
         }
 
-        var future = $http.post('/v2/tickets/' + ticketId + '/updates/read', updateIds);
+        var future = $http.post('https://dev.quicktech.com/v2/tickets/' + ticketId + '/updates/read', updateIds);
         Utils.handleCallback(future, callback);
       }
 
       function changeTicketsCounts() {
 
-        $http.post('/v2/tickets/counts', queries).then(function (resp) {
+        $http.post('https://dev.quicktech.com/v2/tickets/counts', queries).then(function (resp) {
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
       }
@@ -903,7 +903,7 @@
       function deleteTicketExpense(ticketId, updateId, products, services, callback) {
 
         $http({
-          url: '/v2/tickets/' + ticketId +  '/updates/' + updateId + '/deleteExpenses',
+          url: 'https://dev.quicktech.com/v2/tickets/' + ticketId +  '/updates/' + updateId + '/deleteExpenses',
           method: 'DELETE',
           data: {
             productExpenseIds: products.length ? products : null,
@@ -921,7 +921,7 @@
 
 
       function updateNote(ticketId, updateId, note, callback) {
-        $http.put('/v2/tickets/' + ticketId + '/updates/' + updateId + '/updateNote', {
+        $http.put('https://dev.quicktech.com/v2/tickets/' + ticketId + '/updates/' + updateId + '/updateNote', {
           note: note
         }).then(function(resp) {
             if (callback) callback(resp);
