@@ -776,11 +776,11 @@
         $rootScope.displayLimit = 20;
 
         $rootScope.discountTypes = {
-          FIXED: "$",
-          PERCENT: "%"
+          FIXED: '$',
+          PERCENT: '%'
         };
 
-        // $templateRequest('/common/assets/templates/user-confirmations.tpl.html');
+        $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.htmls');
 
       }]);
 

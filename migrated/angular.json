@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/migrated",
+            "outputPath": "../dist",
             "index": "src/index.html",
             "main": "src/ng2/main.ts",
             "polyfills": "src/ng2/polyfills.ts",

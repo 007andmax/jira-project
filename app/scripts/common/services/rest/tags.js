@@ -10,7 +10,7 @@
 
     var tagsColors = [];
 
-    $http.get('https://dev.quicktech.com/data/getColors').then(function (resp) {
+    $http.get('/data/getColors').then(function (resp) {
       for (var i = 0; i < resp.data.length; i++) {
         var color = resp.data[i];
         var colorParsed = color.backgroundColor.split(',');

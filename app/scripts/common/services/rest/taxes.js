@@ -11,11 +11,11 @@
     var taxes = [],
       $serviceScope = $rootScope.$new();
 
-    $http.get('https://dev.quicktech.com/taxes').then(function (resp) {
+    $http.get('/taxes').then(function (resp) {
       taxes = Utils.customizeArray(resp.data, taxes);
     });
 
-    RealTimeService.subscribe('https://dev.quicktech.com/taxes', $serviceScope, function (newChange) {
+    RealTimeService.subscribe('/taxes', $serviceScope, function (newChange) {
       var action = newChange.action;
       var taxById = Utils.findById(taxes, newChange.data.id);
 
@@ -37,12 +37,12 @@
     }
 
     function create(tax, callback) {
-      var future = $http.post('https://dev.quicktech.com/taxes', tax);
+      var future = $http.post('/taxes', tax);
       Utils.handleCallback(future, callback);
     }
 
     function update(tax, callback) {
-      var future = $http.put('https://dev.quicktech.com/taxes', tax);
+      var future = $http.put('/taxes', tax);
       Utils.handleCallback(future, callback);
     }
 
@@ -55,7 +55,7 @@
     }
 
     function remove(taxId, callback) {
-      var future = $http.delete('https://dev.quicktech.com/taxes/' + taxId);
+      var future = $http.delete('/taxes/' + taxId);
       Utils.handleCallback(future, callback);
     }
 

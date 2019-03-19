@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 
     includeSource: {
       options: {
-        basePath: 'app',
+        basePath: 'migrated/src',
         //baseUrl: 'public/',
         templates: {
           html: {
