@@ -1,8 +1,7 @@
 node_modules
 dist
 .tmp
-.sass-cache
-bower_components
+.sass-caches
 .sublime-project
 .sublime-workspace
 .idea
