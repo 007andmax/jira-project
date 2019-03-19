@@ -1,0 +1,158 @@
+<div ng-if="currentOpenTab"
+     ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
+
+  <div class="well ticket-well" ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
+
+    <i class="icn-lg icn-msg-claim"></i>
+
+    <div class="well-message">
+      <p>Got nothing to work on today? Hit up the <strong>“Claim Ticket”</strong> button to get the troubleshooting
+        process started!</p>
+    </div>
+
+    <div class="well-actions">
+      <button class="btn btn-primary btn-lg" ng-click="claimTicket()">Claim Ticket</button>
+    </div>
+
+  </div>
+
+  <div class="well ticket-well"
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')" ng-hide="ticketDetails.hasInvoice">
+
+    <i class="icn-lg icn-msg-open"></i>
+
+    <div class="well-message">
+      <p>The Ticket is now closed.
+        <span ng-if="PermissionsService.isAllowed('REOPEN_CLOSED_TICKETS')">
+          You can re-open it within {{ daysLeftToOpen }} days by simply clicking <strong>"Re-open Ticket"</strong> button.
+        </span>
+      </p>
+    </div>
+
+    <div class="well-actions" ng-click="markAsOpen()" ng-if="PermissionsService.isAllowed('REOPEN_CLOSED_TICKETS')">
+      <div class="btn btn-primary btn-lg">Re-open Ticket</div>
+    </div>
+
+  </div>
+
+  <div class="well ticket-well"
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'old')">
+
+    <i class="icn-lg icn-msg-open"></i>
+
+    <div class="well-message">
+      <p>The Ticket is older than <strong>30 days.</strong> You cannot re-open it now.</p>
+      <span class="text-muted"><strong>TIP:</strong>
+        You can create a new Ticket any time, and use this ticket's number as reference to continue with troubleshooting. </span>
+    </div>
+
+  </div>
+
+  <div class="well ticket-well"
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billed')">
+    <i class="icn-lg icn-msg-open"></i>
+
+    <div class="well-message">
+      <p>The Ticket is now closed, and already <strong>billed to the client.</strong> You cannot re-open it.</p>
+      <span class="text-muted"><strong>TIP:</strong>
+        You can create a new Ticket any time, and use this billed ticket's number as reference to continue with troubleshooting. </span>
+    </div>
+  </div>
+
+  <div class="well ticket-well"
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable')">
+
+    <i class="icn-lg icn-msg-open" style="posa"></i>
+
+    <div class="well-message">
+      <p>The Ticket is now closed.
+        <span ng-if="PermissionsService.isAllowed('REOPEN_CLOSED_TICKETS')">
+          You can re-open it by simply clicking <strong>"Mark as Open"</strong> button.
+        </span>
+      </p>
+    </div>
+
+    <div class="well-actions">
+      <div class="btn btn-primary btn-lg" ng-click="markAsOpen()"  ng-if="PermissionsService.isAllowed('REOPEN_CLOSED_TICKETS')">Mark as Open</div>
+    </div>
+
+  </div>
+
+  <div class="well ticket-well"
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_trash') && ticketDetails.deletePerformer.id !== currentUser.id">
+    <i class="icn-lg icn-msg-delete"></i>
+
+    <div class="well-message">
+      <p>
+        <strong class="text-info">
+          {{ getCorrectUserName(ticketDetails.deletePerformer.id) }}
+        </strong> has moved this ticket to trash.
+        <span ng-if="PermissionsService.isAllowed('DELETE_TICKETS')">
+          You can either delete the ticket forever or restore the ticket status anytime, using the respective option.
+        </span>
+      </p>
+      <span class="text-muted"><strong>TIP:</strong>
+        Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
+    </div>
+    <div class="well-actions">
+      <div class="btn btn-primary btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+           ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-success btn-lg" ng-click="moveToTrash(false)">Restore</div>
+    </div>
+  </div>
+
+  <div class="well ticket-well"
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_trash') && ticketDetails.deletePerformer.id === currentUser.id">
+    <i class="icn-lg icn-msg-delete"></i>
+
+    <div class="well-message">
+      <p><strong>You</strong> can <span ng-if="PermissionsService.isAllowed('DELETE_TICKETS')">
+        either delete the ticket forever or</span> restore the ticket status anytime, using the
+        respective option.</p>
+      <span class="text-muted"><strong>TIP:</strong>
+        Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
+    </div>
+    <div class="well-actions">
+      <div class="btn btn-primary btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+           ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-success btn-lg" ng-click="moveToTrash(false)">Restore</div>
+    </div>
+  </div>
+
+  <div class="well ticket-well" ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_spam')">
+    <i class="icn-lg icn-msg-spam"></i>
+
+    <div class="well-message">
+      <p>
+        <strong class="text-info">
+          {{ getCorrectUserName(ticketDetails.spamMarker ? ticketDetails.spamMarker.id : ticketDetails.spamReporter.id) }}
+        </strong>
+        {{ getSpamMessages(ticketDetails.spamMarker ? ticketDetails.spamMarker.id : ticketDetails.spamReporter.id,
+        ticketDetails.spamMarker ? 'MARK' : 'REPORT') }}</p>
+      <span class="text-muted"><strong>TIP:</strong>
+        Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
+    </div>
+    <div class="well-actions">
+      <div class="btn btn-primary btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+           ng-click="deleteForever()">
+        Delete Forever
+      </div>
+      <div class="btn btn-primary btn-lg" ng-click="moveIntoSpam()" ng-if="currentUser.isOwner && !ticketDetails.spamMarker">
+        Mark as Spam
+      </div>
+      <div class="btn btn-success btn-lg" ng-click="restoreFromSpam()">Restore</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

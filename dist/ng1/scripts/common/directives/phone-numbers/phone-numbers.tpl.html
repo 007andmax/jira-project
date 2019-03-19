@@ -1,0 +1,164 @@
+<div ng-form="phoneNumbersForm" class="phone-number-form" ng-if="!isRestricted">
+  <div class="row clearfix" ng-repeat="phoneNumber in phoneNumbers">
+
+    <div ng-if="$index !== phoneNumbers.length - 1">
+      <div class="form-group custom-phone-number col-xs-6" ng-class="{'has-error': phoneNumber.error}">
+
+        <label ng-show="!noAddMore" class="control-label" ng-if="!phoneNumber.error">
+          {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
+        </label>
+
+        <div ng-if="phoneNumber.error">
+          <label class="control-label">{{ phoneNumber.error }}</label>
+        </div>
+
+        <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
+               execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
+               ng-change="phoneNumber.error = false">
+      </div>
+
+      <div ng-show="!noAddMore" class="form-group custom-phone-type col-xs-6 no-label">
+        <div class="pull-left" uib-dropdown keyboard-nav="true">
+
+          <button ng-show="!noAddMore" class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="21"
+                  uib-dropdown-toggle ng-disabled="$eval(disabled)">
+            {{ phoneNumberTypes[phoneNumber.typeNumber] }}
+          </button>
+
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+            <li ng-repeat="(type, label) in phoneNumberTypes"
+                ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+          <i class="icn-sm report-caret-icon"></i>
+
+        </div>
+
+        <button
+          ng-class="{'company-remove-icn company-remove-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
+          ng-click="removePhoneNumber($index)"
+          tooltip-placement="top" uib-tooltip="Remove" tabindex="22" ng-disabled="$eval(disabled)">
+          <i style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <div ng-if="$index === phoneNumbers.length - 1">
+      <div class="form-group custom-phone-number col-xs-6" ng-class="{'has-error': phoneNumber.error}">
+
+        <label ng-show="!noAddMore" class="control-label" ng-if="!phoneNumber.error">
+          {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
+        </label>
+
+        <div ng-if="phoneNumber.error">
+          <label class="control-label">
+            {{ phoneNumber.error }}
+          </label>
+        </div>
+
+        <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
+               hard-reset-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()" ng-disabled="$eval(disabled)"
+                country="{{ countryCode }}" tabindex="{{ 20 + $index * 3 }}"
+               ng-change="phoneNumber.error = false" placeholder="{{customPlaceholder}}">
+      </div>
+
+      <div ng-show="!noAddMore" class="form-group col-xs-6 custom-phone-type no-label">
+        <div class="pull-left " uib-dropdown keyboard-nav="true">
+
+          <button ng-show="!noAddMore" class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="{{ 21 + $index * 3 }}"
+                  uib-dropdown-toggle ng-disabled="$eval(disabled)">
+            {{ phoneNumberTypes[phoneNumber.typeNumber] }}
+          </button>
+
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%;z-index: 9999;">
+            <li ng-repeat="(type, label) in phoneNumberTypes"
+                ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+          <i class="icn-sm report-caret-icon"></i>
+
+        </div>
+
+        <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
+
+          <button cns-if
+                  ng-show="!noAddMore"
+                  ng-class="{'company-add-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
+                  ng-disabled="$eval(disabled)"
+                  tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()"
+                  tabindex="{{ 22 + $index * 3 }}">
+            <i ng-if="!dashboard"style="margin-top: 12px;" class="icn-sm icn-plus"></i>
+          </button>
+
+
+          <button cns-else
+                  ng-class="{'company-remove-icn company-remove-icn-sm': dashboard, 'btn phone-btn btn-icn btn-primary has-tooltip pull-right': !dashboard}"
+                  tabindex="{{ 23 + $index * 3 }}"
+                  ng-show="!noAddMore"
+                  tooltip-placement="top" title="" uib-tooltip="Remove"
+                  ng-click="removePhoneNumber($index)" ng-disabled="$eval(disabled)">
+            <i ng-if="!dashboard" style="margin-top: 12px;" class="icn-sm icn-remove-token-light"></i>
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<div ng-form="phoneNumbersForm" name="forms.phoneNumbersForm" ng-if="isRestricted">
+      <div class="custom-phone-number" ng-class="{'has-error': phoneNumbers[0].error}" add-on-focus>
+        <div ng-if="phoneNumbers[0].error">
+          <label class="control-label">{{ phoneNumbers[0].error }}</label>
+        </div>
+        <!-- <input type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{customPlaceholder}}"
+               execute-when-outfocused="onLostFocus()" tabindex="20" ng-disabled="$eval(disabled)"
+               ng-change="phoneNumbers[0].error = false"> -->
+
+        <input ng-if="!notRequired" type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{activePlaceholder ? '' : customPlaceholder}}"
+               execute-when-outfocused="onLostFocus()"
+               tabindex="{{qtTabIndex ? qtTabIndex : 20}}"
+               ng-disabled="$eval(disabled)"
+               required
+               ng-change="getPhoneNumberError(phoneNumbers[0].number, phoneNumbersForm, 0)">
+        <div ng-if="activePlaceholder" class="placeholder">{{ customPlaceholder }}</div>
+
+
+
+        <input ng-if="notRequired" type="text" class="form-validation" name="phoneNumber0" ng-model="phoneNumbers[0].number"
+               hard-reset-pattern="phoneNumberPattern"  country="{{ countryCode }}" placeholder="{{activePlaceholder ? '' : customPlaceholder}}"
+               execute-when-outfocused="onLostFocus()"
+               tabindex="{{qtTabIndex ? qtTabIndex : 20}}"
+               ng-disabled="$eval(disabled)"
+               ng-change="getPhoneNumberError(phoneNumbers[0].number, phoneNumbersForm, 0)">
+
+      </div>
+
+      <div ng-if="showTypeSelector" class="no-label" uib-dropdown keyboard-nav="true">
+
+          <button class="has-dropdown" style="min-width: 74px;" tabindex="21"
+                  uib-dropdown-toggle ng-disabled="$eval(disabled)">
+            {{ phoneNumberTypes[phoneNumbers[0].typeNumber] }}
+          </button>
+
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+            <li ng-repeat="(type, label) in phoneNumberTypes"
+                ng-click="phoneNumbers[0].typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+          <i class="icn-sm report-caret-icon"></i>
+
+      </div>
+</div>

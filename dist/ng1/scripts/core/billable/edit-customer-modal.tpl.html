@@ -1,0 +1,168 @@
+<div class="create-new invoice-create-modal" ng-form="companyForm" ng-controller="quicktech.createCompanyCtrl">
+  <div class="invoice--header">
+    <div>
+      <h2>Edit Customer</h2>
+    </div>
+    <button class="close-modal" ng-click="closeWindow()"></button>
+  </div>
+  <div class="invoice--content row">
+    <div class="col-md-6" add-on-focus>
+      <!-- <input type="text" placeholder="Company"> -->
+
+      <div ng-messages="companyForm.companyName.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
+        <label class="control-label" ng-message="required">Company name is required.</label>
+        <label class="control-label" ng-message="maxlength">Company name is too large.</label>
+        <label class="control-label" ng-message="minlength">Company name is too short.</label>
+        <label class="control-label" ng-message="unique">This company name already occupied.</label>
+      </div>
+      <div class="placeholder">Company Name</div>
+      <input type="text"
+             ng-model="editCompany.name"
+             aria-expanded="true"
+             ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+             is-uniq-validation validation-func="validateCompanyName">
+    </div>
+
+    <!-- <div class="col-md-6"><input type="text" placeholder="Address Line 1"></div> -->
+    <div class="col-md-6 location"
+         ng-class="{'has-error': (companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid}" add-on-focus>
+
+      <!-- <div ng-messages="companyForm.address.$error"
+           ng-class="{'hide': !((companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid)}">
+
+        <label class="control-label" ng-message="required">
+          Please enter the company's address          </label>
+
+        <label class="control-label" ng-message="correct">
+          Please select address from autocomplete results
+        </label>
+
+      </div>
+
+      <input class="form-validation pointer" type="text" ng-model="editCompany.addresses[0].address"
+             name="address" map-input required make-dirty-on-blur placeholder="Location"> -->
+      <div
+        class="form-group"
+
+        qt-tab-index="5"
+        active-placeholder="'Enter a location'"
+        only-address="true"
+        use-alternative-map="true"
+        address-autocomplete
+        template-page="header/create-new-entity/create-company"
+        ng-model="editCompany.addresses[0]"
+        show-validation-messages="triedToSave"></div>
+
+
+    </div>
+
+
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'firstName')}">
+      <!-- <input type="text" placeholder="First Name"> -->
+
+      <div ng-messages="companyForm.firstName.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'firstName')}">
+        <label class="control-label" ng-message="required">First name is required.</label>
+        <label class="control-label" ng-message="maxlength">First name is too large.</label>
+        <label class="control-label" ng-message="minlength">First name is too short.</label>
+      </div>
+      <div class="placeholder">First Name</div>
+      <input type="text" ng-minlength="2" ng-maxlength="15"
+             name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
+    </div>
+
+
+    <!-- <div class="col-md-6"><input type="text" placeholder="Address Line 2"></div> -->
+
+    <!-- <div class="col-md-6"> -->
+
+
+    <div class="col-md-3" add-on-focus
+         ng-class="{'has-error': isShowingErrors(companyForm, 'suiteNumber')}">
+      <!-- <input type="text" placeholder="Suite No"> -->
+      <div ng-messages="companyForm.suiteNumber.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'suiteNumber')}">
+        <div class="control-label" ng-message="maxlength">too large</div>
+      </div>
+      <div class="placeholder">Suite No</div>
+      <input class="form-validation" type="text" name="suiteNumber" autocomplete="off"
+             ng-model="editCompany.addresses[0].suiteNumber" ng-maxlength="15">
+    </div>
+    <div class="col-md-3" add-on-focus
+         ng-class="{'has-error': isShowingErrors(companyForm, 'zip')}">
+      <div ng-messages="addressForm.zip.$error"
+           ng-class="{'hide': !isShowingErrors(companyForm, 'zip')}">
+        <div class="control-label" ng-message="maxlength">too large</div>
+      </div>
+      <div class="placeholder">Postal/ZIP Code</div>
+      <input class="form-validation" type="text" name="zip" ng-model="editCompany.addresses[0].postalCode"
+             ng-maxlength="15">
+    </div>
+    <!-- </div> -->
+
+
+    <!-- <div class="col-md-6"><input type="text" placeholder="City"></div> -->
+
+
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'lastName')}">
+      <!-- <input type="text" placeholder="Last Name"> -->
+
+      <div ng-messages="companyForm.lastName.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'lastName')}">
+        <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+        <label class="control-label" ng-message="required">Last name is required.</label>
+      </div>
+      <div class="placeholder">Last Name</div>
+      <input type="text" aria-expanded="true" ng-maxlength="15"
+             name="lastName" ng-model="contact.lastName" make-dirty-on-blur required="true">
+    </div>
+
+    <div class="col-md-6 phone-number"
+         is-try-to-save="triedToSave"
+         no-add-more="true"
+         phone-numbers-edit
+         is-restricted="true"
+         is-required="true"
+         active-placeholder="'Phone'"
+         country-code="{{editCompany.addresses[0].countryCode}}"
+         ng-model="contact.phoneNumbers"
+         custom-placeholder="'Phone'">
+
+      <!-- <input type="text" placeholder="Phone"> -->
+
+
+    </div>
+
+    <!-- <div class="col-md-6"><input type="text" placeholder="Postal/ZIP Code"></div> -->
+
+
+    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
+      <!-- <input type="text" placeholder="Email"> -->
+
+      <div ng-messages="companyForm.primaryEmail.$error"
+           ng-class="{'hide': !isShowingContactErrors(contact, companyForm, 'primaryEmail')}">
+        <!--<div class="control-label" ng-message="required">Email field cannot be left empty.</div>-->
+        <div class="control-label" ng-message="required">Email address is required.</div>
+        <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+        <div class="control-label" ng-message="unique">This email already occupied.</div>
+        <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+      </div>
+      <div class="placeholder">Email</div>
+      <input type="text" name="primaryEmail" aria-expanded="true"
+             make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
+             ng-maxlength="128"
+             required
+             contact-id="contact.id" is-empty-valid="true" is-uniq-validation validation-func="validateContactEmail"
+             model-id="contact.id">
+    </div>
+    <!-- <div class="col-md-6"><input type="text" placeholder="Country"></div>
+    <div class="col-md-6 col-md-offset-6"><input type="text" placeholder="Province/State"></div> -->
+  </div>
+  <div class="invoice--footer">
+    <button-with-loading-indicator class="btn btn-primary" ng-click="save(companyForm, false, true)"
+                                   loading="savingInProcess" label="Save">
+    </button-with-loading-indicator>
+    <button class="btn btn-default" ng-click="closeWindow()">Cancel</button>
+  </div>
+</div>
