@@ -612,7 +612,7 @@
       function getAllCounts(callback) {
         allCountsCallback = callback;
 
-        $http.post('https://dev.quicktech.com/v2/tickets/counts', queries).then(function (resp) {
+        $http.post('/v2/tickets/counts', queries).then(function (resp) {
           storage.ticketsQuantityMap = resp.data;
 
           if (callback) {
@@ -667,7 +667,7 @@
         });
 
 
-        $http.post('https://dev.quicktech.com/v2/tickets/counts', queryForCompanyCounters).then(function (resp) {
+        $http.post('/v2/tickets/counts', queryForCompanyCounters).then(function (resp) {
           storage.ticketsQuantityMapByCompany = resp.data;
 
           if (callback) {
@@ -691,7 +691,7 @@
       }
 
       function getCompanyTicketCount(query) {
-        $http.post('https://dev.quicktech.com/v2/tickets/counts', {COUNT: query}).then(function(resp) {
+        $http.post('/v2/tickets/counts', {COUNT: query}).then(function(resp) {
           if(resp) {
             globalSearch.count = resp.data.COUNT;
           }
@@ -894,7 +894,7 @@
 
       function changeTicketsCounts() {
 
-        $http.post('https://dev.quicktech.com/v2/tickets/counts', queries).then(function (resp) {
+        $http.post('/v2/tickets/counts', queries).then(function (resp) {
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
       }

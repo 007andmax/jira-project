@@ -113,9 +113,8 @@
           controller: 'quicktech.core.products.productsCtrl'
         }))
         .state('password-manager', waitForServices({
-          url: '/password-manager',
-          templateUrl: '/html/scripts/core/password-manager/password-manager.tpl.html',
-          controller: 'quicktech.core.passwordManager.passwordManagerCtrl'
+          url: '/ng2/password-manager',
+          template: '<app-password-manager></app-password-manager>',
         }))
         .state('accounting', waitForServices({
           url: '/accounting',

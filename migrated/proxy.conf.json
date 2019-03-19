@@ -1,0 +1,11 @@
+{
+  "/": {
+    "target": "https://dev.quicktech.com",
+    "secure": false,
+    "pathRewrite": {
+      "^/": "",
+      "port": 8000
+    },
+    "changeOrigin": true
+  }
+}

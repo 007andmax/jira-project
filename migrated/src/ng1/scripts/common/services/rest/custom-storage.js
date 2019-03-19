@@ -7,7 +7,7 @@
 
     function getUserCustomStorageValue(customKey, callback) {
       var future = $http({
-        url: 'https://dev.quicktech.com/customStorage/user?customKey=' + customKey,
+        url: '/customStorage/user?customKey=' + customKey,
         method: 'GET'
       });
       Utils.handleCallback(future, callback)
@@ -16,7 +16,7 @@
     function saveUserCustomStorageItem( data, callback) {
       var jsonData = JSON.stringify(data);
       var future = $http({
-        url: 'https://dev.quicktech.com/customStorage/user',
+        url: '/customStorage/user',
         method: 'POST',
         data: jsonData
       });

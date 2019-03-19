@@ -117,7 +117,7 @@
           categories: []
         };
 
-        $http.get("https://dev.quicktech.com/products/categories").then(function (categoriesResp) {
+        $http.get("/products/categories").then(function (categoriesResp) {
 
           var categories = categoriesResp.data;
 
@@ -226,7 +226,7 @@
           throw 'First argument must be Angularjs scope!'
         }
 
-        return Utils.getListByUrl("https://dev.quicktech.com/products/categories", callback, function (list) {
+        return Utils.getListByUrl("/products/categories", callback, function (list) {
 
           RealTimeService.subscribe('https://dev.quicktech.com/productCategory', scope, function (newChange) {
 
@@ -251,7 +251,7 @@
 
         if (!category) throw 'category is required!';
 
-        var url = 'https://dev.quicktech.com/products/categories',
+        var url = '/products/categories',
           method = 'POST';
 
         if (category.id) {

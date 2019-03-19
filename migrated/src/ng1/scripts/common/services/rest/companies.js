@@ -28,7 +28,7 @@
     Utils.customizeObj(storage);
 
     function reinitCompanies(callback) {
-      $http.get('https://dev.quicktech.com//company/clients').then(function (resp) {
+      $http.get('/company/clients').then(function (resp) {
           for (var i = 0; i < resp.data.length; i++) {
             var custCompany = Utils.customizeObj(resp.data[i]);
             if (custCompany.deletedAt) {
@@ -69,7 +69,7 @@
       return storage.companies[companyForChangeIndex].tags = newCompanyTags;
     }
 
-    $http.get('https://dev.quicktech.com//company/clients').then(function (resp) {
+    $http.get('/company/clients').then(function (resp) {
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
           if (custCompany.deletedAt) {
@@ -98,7 +98,7 @@
         throw 'Cannot initialize CompaniesService!';
       });
 
-    $http.get('https://dev.quicktech.com/ps/settings').then(function(resp) {
+    $http.get('/ps/settings').then(function(resp) {
       Utils.customizeObj(resp.data, companyPaymentInfo);
       checkInit();
     },
@@ -107,7 +107,7 @@
         throw 'Cannot initialize CompanyPaymentInfo!';
       });
 
-    $http.get('https://dev.quicktech.com/company/current').then(function (resp) {
+    $http.get('/company/current').then(function (resp) {
         Utils.customizeObj(resp.data, storage.currentCompany);
         checkInit();
       },
@@ -117,7 +117,7 @@
       });
 
     function reloadCurrentCompany(callback) {
-      $http.get('https://dev.quicktech.com/company/current').then(function (resp) {
+      $http.get('/company/current').then(function (resp) {
           if (callback) {
             callback(resp.data);
           } else {
@@ -217,7 +217,7 @@
       }
     });
 
-    RealTimeService.subscribe('https://dev.quicktech.com/companySettings', serviceScope, function(newChange) {
+    RealTimeService.subscribe('/companySettings', serviceScope, function(newChange) {
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
         $rootScope.SMTPChanged = newChange.data;
@@ -263,21 +263,21 @@
 
 
     function resetReferenceDate(callback) {
-      $http.post('https://dev.quicktech.com/settings/companyProfile/accountingStartDate/reset')
+      $http.post('/settings/companyProfile/accountingStartDate/reset')
         .then(function(res) {
           if (callback) callback(res)
         })
     }
 
     function getReferenceDate(callback) {
-      $http.get('https://dev.quicktech.com/settings/companyProfile/accountingStartDate')
+      $http.get('/settings/companyProfile/accountingStartDate')
         .then(function(res) {
           if (callback) callback(res);
         })
     }
 
     function setReferenceDate(date, callback) {
-      $http.post('https://dev.quicktech.com/settings/companyProfile/accountingStartDate', date)
+      $http.post('/settings/companyProfile/accountingStartDate', date)
         .then(function(res) {
           if (callback) callback(res)
         })
@@ -285,7 +285,7 @@
 
     function setTechLead(companyId, techLeadId, callback) {
       if (!companyId || !techLeadId) return;
-      $http.put('https://dev.quicktech.com/company/' + companyId +  '/setTechLead/' + techLeadId).
+      $http.put('/company/' + companyId +  '/setTechLead/' + techLeadId).
         then(function(res) {
           if (callback) {
             callback()
@@ -368,7 +368,7 @@
     }
 
     function dearchive(companyId, callback) {
-      var future = $http.get('https://dev.quicktech.com/company/dearchive/' + companyId);
+      var future = $http.get('/company/dearchive/' + companyId);
       Utils.handleCallback(future, callback);
     }
 
@@ -380,7 +380,7 @@
 
       var info = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com//company/clients/info').then(function (resp) {
+      $http.get('/company/clients/info').then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -417,7 +417,7 @@
     }
 
     function setCategoryRate(id, data, callback) {
-      $http.put('https://dev.quicktech.com/settings/companyProfile/categoryRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
+      $http.put('/settings/companyProfile/categoryRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
         commissionRate: data.rate
       }).then(function(res) {
         if (callback) callback(res);
@@ -425,7 +425,7 @@
     }
 
     function setServiceRate(id, data, callback) {
-      $http.put('https://dev.quicktech.com/settings/companyProfile/serviceRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
+      $http.put('/settings/companyProfile/serviceRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
         commissionRate: data.rate
       }).then(function(res) {
         if (callback) callback(res);
@@ -433,14 +433,14 @@
     }
 
     function setAgreementsRate(rates, setForOldExpenses, callback) {
-      $http.post('https://dev.quicktech.com/settings/companyProfile/agreementRates' + "?setForOldExpenses=" + setForOldExpenses, rates)
+      $http.post('/settings/companyProfile/agreementRates' + "?setForOldExpenses=" + setForOldExpenses, rates)
         .then(function(res) {
           if (callback) callback(res);
         })
     }
 
     function getAgreementsRates(callback) {
-      $http.get('https://dev.quicktech.com/settings/companyProfile/agreementRates')
+      $http.get('/settings/companyProfile/agreementRates')
         .then(function(res) {
           if (callback) callback(res);
         })
@@ -458,7 +458,7 @@
 
       var info = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com/company/' + companyId + '/info').then(function (resp) {
+      $http.get('/company/' + companyId + '/info').then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -471,7 +471,7 @@
         }
       });
 
-      RealTimeService.subscribe('https://dev.quicktech.com/clientCompaniesInfo', scope, function (newChange) {
+      RealTimeService.subscribe('/clientCompaniesInfo', scope, function (newChange) {
 
         if (newChange.action == 'CLIENT_COMPANY_INFO') {
 
@@ -500,7 +500,7 @@
 
       var companyDto = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com/company/' + companyId + '/data').then(function (resp) {
+      $http.get('/company/' + companyId + '/data').then(function (resp) {
         Utils.customizeObj(resp.data, companyDto);
 
         if (callback) {
@@ -524,7 +524,7 @@
         }
       });
 
-      RealTimeService.subscribe('https://dev.quicktech.com/user', serviceScope, function (newChange) {
+      RealTimeService.subscribe('/user', serviceScope, function (newChange) {
         if (newChange.action === 'USER_SAVED') {
           if (newChange.data.id === companyDto.contacts[0].id) {
             Utils.customizeObj(newChange.data, companyDto.contacts[0]);
@@ -539,7 +539,7 @@
 
       var companyDto = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com/company/' + companyId + '/profile').then(function (resp) {
+      $http.get('/company/' + companyId + '/profile').then(function (resp) {
         Utils.customizeObj(resp.data, companyDto);
 
         if (callback) {
@@ -552,7 +552,7 @@
         }
       });
 
-      RealTimeService.subscribe('https://dev.quicktech.com/companyDto/' + companyId, scope, function (newChange) {
+      RealTimeService.subscribe('/companyDto/' + companyId, scope, function (newChange) {
 
         if (newChange.action == 'COMPANY_DTO_CHANGED') {
 
@@ -570,7 +570,7 @@
         }
       });
 
-      RealTimeService.subscribe('https://dev.quicktech.com/user', serviceScope, function (newChange) {
+      RealTimeService.subscribe('/user', serviceScope, function (newChange) {
         if (newChange.action === 'USER_SAVED') {
           if (newChange.data.id === companyDto.contacts[0].id) {
             Utils.customizeObj(newChange.data, companyDto.contacts[0]);
@@ -599,7 +599,7 @@
       }
 
       var future = $http({
-        url: 'https://dev.quicktech.com/company',
+        url: '/company',
         method: method,
         data: company
       });
@@ -628,7 +628,7 @@
 
     function deleteExample(callback) {
        var future = $http({
-         url: 'https://dev.quicktech.com/company/removeExampleCompany',
+         url: '/company/removeExampleCompany',
          method: 'POST',
        });
 
@@ -640,7 +640,7 @@
       if (!companyDto) throw 'companyDto is required!';
 
       var future = $http({
-        url: 'https://dev.quicktech.com/settings/companyProfile/',
+        url: '/settings/companyProfile/',
         method: 'PUT',
         data: companyDto
       });
@@ -657,7 +657,7 @@
         data = { addresses: data }
       }
 
-      var url = 'https://dev.quicktech.com/settings/companyProfile/' + toUpdate,
+      var url = '/settings/companyProfile/' + toUpdate,
         method = 'PUT',
         saveData = angular.copy(data);
 
@@ -681,7 +681,7 @@
 
       var info = {};
 
-      $http.get('https://dev.quicktech.com/settings/companyProfile/').then(function (resp) {
+      $http.get('/settings/companyProfile/').then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -704,7 +704,7 @@
 
       var info = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com/company/isCompanyNameUnique?name=' + name + '&id=' + id).then(function (resp) {
+      $http.get('/company/isCompanyNameUnique?name=' + name + '&id=' + id).then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -727,7 +727,7 @@
 
       var info = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com/company/isCompanyDomainUnique?domain=' + domain + '&id=' + id).then(function (resp) {
+      $http.get('/company/isCompanyDomainUnique?domain=' + domain + '&id=' + id).then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -750,7 +750,7 @@
 
       var info = Utils.customizeObj({});
 
-      $http.get('https://dev.quicktech.com/isCompanyInboxUnique?inbox=' + inbox).then(function (resp) {
+      $http.get('/isCompanyInboxUnique?inbox=' + inbox).then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -771,7 +771,7 @@
       if (!companyId) throw 'companyId is required!';
 
       var future = $http({
-        url: 'https://dev.quicktech.com/company/' + companyId + '/logo',
+        url: '/company/' + companyId + '/logo',
         method: 'POST',
         data: croppedImage
       });
@@ -785,7 +785,7 @@
       if (!croppedImage) throw 'croppedImage is required!';
       if (!companyId) throw 'companyId is required!';
 
-      var url = 'https://dev.quicktech.com/company/' + companyId + '/cover',
+      var url = '/company/' + companyId + '/cover',
         method = 'POST';
 
       var future = $http({
@@ -802,7 +802,7 @@
       if (!companyId) throw 'companyId is required!';
 
       var future = $http({
-        url: 'https://dev.quicktech.com/company/' + companyId + '/false',
+        url: '/company/' + companyId + '/false',
         method: 'DELETE'
       });
 
@@ -814,7 +814,7 @@
       if (!companyId) throw 'companyId is required!';
 
       var future = $http({
-        url: 'https://dev.quicktech.com/company/' + companyId + '/true',
+        url: '/company/' + companyId + '/true',
         method: 'DELETE'
       });
 
@@ -851,9 +851,9 @@
         throw 'Second argument must be companyId!';
       }
 
-      return Utils.getListByUrl('https://dev.quicktech.com/company/' + companyId + '/contacts', callback, function (list) {
+      return Utils.getListByUrl('/company/' + companyId + '/contacts', callback, function (list) {
 
-        RealTimeService.subscribe('https://dev.quicktech.com/companyContact', scope, function (newChange) {
+        RealTimeService.subscribe('/companyContact', scope, function (newChange) {
 
           if (newChange.action == 'COMPANY_CONTACT') {
             list.splice(0, list.length);
@@ -861,7 +861,7 @@
           }
         });
 
-        RealTimeService.subscribe('https://dev.quicktech.com/subscription/' + companyId, scope, function (newChange) {
+        RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
 
           if (!newChange.data.contact) {
             return;
@@ -887,7 +887,7 @@
         throw 'First parameter required!'
       }
 
-      $http.put('https://dev.quicktech.com/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
+      $http.put('/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
     }
 
     function saveCompanyPaymentInfo(data, callback) {
@@ -895,7 +895,7 @@
         throw 'First parameter required!'
       }
       var future = $http({
-        url: 'https://dev.quicktech.com/ps/settings',
+        url: '/ps/settings',
         method: 'PUT',
         data: data
       });
@@ -904,41 +904,41 @@
     }
 
     function getCompanySMTPSettings(callback) {
-      var future = $http.get('https://dev.quicktech.com/settings/companyProfile/SMTPSettings');
+      var future = $http.get('/settings/companyProfile/SMTPSettings');
       Utils.handleCallback(future, callback);
     }
 
     function checkSMTPLoginUnique(email, callback) {
-      var future = $http.get('https://dev.quicktech.com/settings/companyProfile/SMTPSettings/checkEmailUnique?email=' + email);
+      var future = $http.get('/settings/companyProfile/SMTPSettings/checkEmailUnique?email=' + email);
       Utils.handleCallback(future, callback);
     }
 
     function changeRoleName(name, id, callback) {
-      var future = $http.put('https://dev.quicktech.com/settings/companyProfile/updateTechRoleName/' + id, { newTechRoleName: name });
+      var future = $http.put('/settings/companyProfile/updateTechRoleName/' + id, { newTechRoleName: name });
       Utils.handleCallback(future, callback);
     }
 
     function addNewRole(role, callback) {
-      var future = $http.post('https://dev.quicktech.com/settings/companyProfile/createTechRole', role);
+      var future = $http.post('/settings/companyProfile/createTechRole', role);
       Utils.handleCallback(future, callback);
     }
 
     function deleteRole(roleId, callback) {
-      var future = $http.delete('https://dev.quicktech.com/settings/companyProfile/deleteTechRole/' + roleId);
+      var future = $http.delete('/settings/companyProfile/deleteTechRole/' + roleId);
       Utils.handleCallback(future, callback);
     }
 
     function getPermissions(callback) {
-      var future = $http.get('https://dev.quicktech.com/settings/companyProfile/permissions');
+      var future = $http.get('/settings/companyProfile/permissions');
       Utils.handleCallback(future, callback);
     }
 
     function savePermissions(permissions, callback) {
-      $http.post('https://dev.quicktech.com/settings/companyProfile/permissions', permissions);
+      $http.post('/settings/companyProfile/permissions', permissions);
     }
 
     function getTechRoles(callback) {
-      var future = $http.get('https://dev.quicktech.com/settings/companyProfile/getRoleNames');
+      var future = $http.get('/settings/companyProfile/getRoleNames');
 
       RealTimeService.subscribe('/techRoles', $rootScope.$new(), function (newChange) {
 
@@ -964,16 +964,16 @@
     }
 
     function getIndustries(callback) {
-      var future = $http.get('https://dev.quicktech.com/company/getIndustries');
+      var future = $http.get('/company/getIndustries');
       Utils.handleCallback(future, callback);
     }
 
     function changeCompanyStatusToActive() {
-      return $http.get('https://dev.quicktech.com/company/changeStatusFromSignUpToActive');
+      return $http.get('/company/changeStatusFromSignUpToActive');
     }
 
     function isVendorHasProducts(vendorId, callback) {
-      var future = $http.get('https://dev.quicktech.com/company/' + vendorId + '/isProductExist');
+      var future = $http.get('/company/' + vendorId + '/isProductExist');
       Utils.handleCallback(future, callback);
     }
 
@@ -985,7 +985,7 @@
     function changePrimaryContact(id, callback) {
       var future = $http({
         method: 'GET',
-        url: 'https://dev.quicktech.com/company/resetPrimaryContact?userId='+id
+        url: '/company/resetPrimaryContact?userId='+id
       });
       Utils.handleCallback(future, callback);
     }

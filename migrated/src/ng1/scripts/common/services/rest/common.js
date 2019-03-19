@@ -11,6 +11,7 @@
     $provide.factory('myHttpInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
 
       function processResponse(response) {
+        
         var unlockExpiredHeader = response.headers('SESSION_UNLOCK_EXPIRED');
         var userDisabledHeader = response.headers('USER_DISABLED');
         var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
@@ -100,7 +101,7 @@
 
   services.run(['$http', '$rootScope', 'RealTimeService', function ($http, $rootScope, RealTimeService) {
     console.log('testsrtest');
-    $http.get('https://dev.quicktech.com/users/current').success(function (resp) {
+    $http.get('/users/current').success(function (resp) {
       $rootScope.currentUser = resp;
       $rootScope.currentUserLoaded = true;
       if ($rootScope.servicesLoaded) {
