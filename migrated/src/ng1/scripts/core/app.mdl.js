@@ -56,7 +56,7 @@
       $stateProvider
         .state('tickets', waitForServices({
           url: '/tickets/:listType',
-          templateUrl: '/html/scripts/core/tickets/tickets.tpl.html',
+          templateUrl: '/ng1/scripts/core/tickets/tickets.tpl.html',
           controller: 'quicktech.core.tickets.ticketsCtrl'
         }))
         .state('tickets.details', waitForServices({
@@ -65,32 +65,32 @@
             ticketId: '',
             remoteParams: null
           },
-          templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
+          templateUrl: '/ng1/scripts/core/tickets/ticket-details.tpl.html',
           controller: 'quicktech.core.tickets.ticketDetailsCtrl'
         }))
         .state('drafts', waitForServices({
           url: '/drafts',
-          templateUrl: '/html/scripts/core/tickets/drafts/drafts.tpl.html',
+          templateUrl: '/ng1/scripts/core/tickets/drafts/drafts.tpl.html',
           controller: 'quicktech.core.tickets.draftsCtrl'
         }))
         .state('drafts.details', waitForServices({
           url: '/:draftId',
-          templateUrl: '/html/scripts/core/tickets/drafts/draft-details.tpl.html',
+          templateUrl: '/ng1/scripts/core/tickets/drafts/draft-details.tpl.html',
           controller: 'quicktech.core.tickets.draftDetailsCtrl'
         }))
         .state('tickets-dashboard', waitForServices({
           url: '/tickets-dashboard',
-          templateUrl: '/html/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
+          templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
         }))
         .state('users', waitForServices({
           url: '/clients/users',
-          templateUrl: '/html/scripts/core/users/users.tpl.html',
+          templateUrl: '/ng1/scripts/core/users/users.tpl.html',
           controller: 'quicktech.core.users.usersCtrl'
         }))
         .state('companies', waitForServices({
           url: '/clients/companies',
-          templateUrl: '/html/scripts/core/companies/companies.tpl.html',
+          templateUrl: '/ng1/scripts/core/companies/companies.tpl.html',
           controller: 'quicktech.core.companies.companiesCtrl'
         }))
         .state('companyProfile', waitForServices({
@@ -99,7 +99,7 @@
             tabName: 'dashboard'
           },
           reloadOnSearch: false,
-          templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
+          templateUrl: '/ng1/scripts/core/companies/company-profile/company-profile.tpl.html',
           controller: 'quicktech.core.companies.companyProfileCtrl'
         }))
         .state('products', waitForServices({
@@ -109,12 +109,11 @@
           //   tabName: 'category'
           // },
           reloadOnSearch: false,
-          templateUrl: '/html/scripts/core/products/products.tpl.html',
+          templateUrl: '/ng1/scripts/core/products/products.tpl.html',
           controller: 'quicktech.core.products.productsCtrl'
         }))
         .state('password-manager', waitForServices({
-          url: '/ng2/password-manager',
-          template: '<app-password-manager></app-password-manager>',
+          url: '/ng2/password-manager'
         }))
         .state('accounting', waitForServices({
           url: '/accounting',
@@ -123,52 +122,52 @@
         }))
         .state('accounting.dashboard', waitForServices({
           url: '/dashboard',
-          templateUrl: '/html/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
+          templateUrl: '/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.billingDashboardCtrl'
         }))
         .state('accounting.billable', waitForServices({
           url: '/billable',
-          templateUrl: '/html/scripts/core/billable/billable.tpl.html',
+          templateUrl: '/ng1/scripts/core/billable/billable.tpl.html',
           controller: 'quicktech.core.billable.billableCtrl'
         }))
         .state('services', waitForServices({
           url: '/accounting/services',
-          templateUrl: '/html/scripts/core/services/services.tpl.html',
+          templateUrl: '/ng1/scripts/core/services/services.tpl.html',
           controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('receivable', waitForServices({
           url: '/accounting/receivable/:mode',
-          templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
+          templateUrl: '/ng1/scripts/core/receivable/receivable.tpl.html',
           controller: 'quicktech.core.receivable.receivableCtrl'
         }))
         .state('payments', waitForServices({
           url: '/accounting/payments/:mode',
-          templateUrl: '/html/scripts/core/billable/payments/payments.tpl.html',
+          templateUrl: '/ng1/scripts/core/billable/payments/payments.tpl.html',
           controller: 'quicktech.core.payments.paymentsCtrl'
         }))
         .state('receipt-archive', waitForServices({
           url: '/accounting/receipt-archive/:mode',
-          templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
+          templateUrl: '/ng1/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
         }))
         .state('service-agreements', waitForServices({
           url: '/accounting/service-agreements',
-          templateUrl: '/html/scripts/core/service-agreements/service-agreements.tpl.html',
+          templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
         }))
         .state('credits', waitForServices({
           url: '/accounting/credits',
-          templateUrl: '/html/scripts/core/billable/credits/credits.tpl.html',
+          templateUrl: '/ng1/scripts/core/billable/credits/credits.tpl.html',
           controller: 'quicktech.core.billable.creditsCtrl'
         }))
         .state('new-payments', waitForServices({
           url: '/accounting/new-payments',
-          templateUrl: '/html/scripts/core/billable/new-payments/new-payments.tpl.html',
+          templateUrl: '/ng1/scripts/core/billable/new-payments/new-payments.tpl.html',
           controller: 'quicktech.core.billable.newPaymentsCtrl'
         }))
         .state('settings', waitForServices({
           url: '/settings',
-          templateUrl: '/html/scripts/core/settings/settings.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/settings.tpl.html',
           controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService', 'UsersService',
             function ($scope, $state, PermissionsService, UsersService) {
               $scope.PermissionsService = PermissionsService;
@@ -183,22 +182,22 @@
         }))
         .state('settings.myProfile', waitForServices({
           url: '/myProfile',
-          templateUrl: '/html/scripts/core/settings/my-profile/my-profile.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/my-profile/my-profile.tpl.html',
           controller: 'quicktech.core.settings.myProfileCtrl'
         }))
         .state('settings.emailNotifications', waitForServices({
           url: '/emailNotifications',
-          templateUrl: '/html/scripts/core/settings/email-notifications/email-notifications.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/email-notifications/email-notifications.tpl.html',
           controller: 'quicktech.core.settings.emailNotificationsCtrl'
         }))
         .state('settings.tags', waitForServices({
           url: '/tags',
-          templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl'
         }))
         .state('settings.tags.companies', waitForServices({
           url: '/companies',
-          templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl',
           params: {
             type: 'company'
@@ -206,7 +205,7 @@
         }))
         .state('settings.tags.tickets', waitForServices({
           url: '/tickets',
-          templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl',
           params: {
             type: 'ticket'
@@ -214,12 +213,12 @@
         }))
         .state('settings.credit-card', waitForServices({
           url: '/credit-card',
-          templateUrl: '/html/scripts/core/settings/credit-card/credit-card.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/credit-card/credit-card.tpl.html',
           controller: 'quicktech.core.settings.creditCardCtrl'
         }))
         .state('settings.activityHistory', waitForServices({
           url: '/activityHistory',
-          templateUrl: '/html/scripts/core/settings/activity-history/activity-history.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/activity-history/activity-history.tpl.html',
           controller: 'quicktech.core.settings.activityHistoryCtrl'
         }))
         .state('settings.companyProfile', waitForServices({
@@ -228,22 +227,22 @@
             isAddressFocused: false,
             fromWelcomeWizard: false
           },
-          templateUrl: '/html/scripts/core/settings/company-profile/company-profile.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/company-profile/company-profile.tpl.html',
           controller: 'quicktech.core.settings.companyProfileCtrl'
         }))
         .state('settings.techUsers', waitForServices({
           url: '/techUsers',
-          templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/tech-users/tech-users.tpl.html',
           controller: 'quicktech.core.settings.techUsersCtrl'
         }))
         .state('settings.commissions', waitForServices({
           url: '/commissions',
-          templateUrl: '/html/scripts/core/settings/commissions/commissions.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/commissions/commissions.tpl.html',
           controller: 'quicktech.core.settings.commissionsCtrl'
         }))
         .state('settings.email', waitForServices({
           url: '/email',
-          templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/email/email.tpl.html',
           controller: 'quicktech.core.settings.emailCtrl'
         }))
         .state('settings.taxes', waitForServices({
@@ -253,96 +252,96 @@
         }))
         .state('settings.tickets', waitForServices({
           url: '/tickets',
-          templateUrl: '/html/scripts/core/settings/tickets/tickets.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/tickets/tickets.tpl.html',
           controller: 'quicktech.core.settings.ticketsCtrl'
         }))
         .state('settings.permissionsManagement', waitForServices({
           url: '/permissionsManagement',
-          templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/permissions-management/permissions-management.tpl.html',
           controller: 'quicktech.core.settings.permissionsManagementCtrl'
         }))
         .state('settings.emailTemplates', waitForServices({
           url: '/emailTemplates',
-          templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
+          templateUrl: '/ng1/scripts/core/settings/email-templates/email-templates.tpl.html',
           controller: 'quicktech.core.settings.emailTemplatesCtrl'
         }))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',
-          templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
+          templateUrl: '/ng1/scripts/core/quick-support/quick-support.tpl.html',
           controller: 'quicktech.core.quickSupport.quickSupportCtrl'
         }))
         .state('reports', waitForServices({
           url: '/reports',
-          templateUrl: '/html/scripts/core/reports/reports.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('remoteAccess', waitForServices({
           url: '/reports/remoteAccess',
-          templateUrl: '/html/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('byCustomers', waitForServices({
           url: '/reports/byCustomers',
-          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('byProducts', waitForServices({
           url: '/reports/byProducts',
-          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('byTaxes', waitForServices({
           url: '/reports/byTaxes',
-          templateUrl: '/html/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('techReport-TicketCreated', waitForServices({
           url: '/reports/techReport-TicketCreated',
-          templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('commissionsReport-detailed', waitForServices({
           url: '/reports/byCommissionsDetailed',
-          templateUrl: '/html/scripts/core/reports/reports-templates/commissions-report-detailed.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/commissions-report-detailed.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('commissionsReport-common', waitForServices({
           url: '/reports/byCommissions',
-          templateUrl: '/html/scripts/core/reports/reports-templates/commissions-report-common.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/commissions-report-common.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('techReport-ProductSales', waitForServices({
           url: '/reports/techReport-ProductSales',
-          templateUrl: '/html/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('ticket-report', waitForServices({
           url: '/reports/ticket-report',
-          templateUrl: '/html/scripts/core/reports/reports-templates/tickets-report.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/tickets-report.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('accountsReceivable', waitForServices({
           url: '/reports/accountsReceivable',
-          templateUrl: '/html/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('hardware-reports', waitForServices({
           url: '/reports/hardware-reports',
-          templateUrl: '/html/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('device-ip-summary', waitForServices({
             url: '/reports/device-ip-summary',
-            templateUrl: '/html/scripts/core/reports/reports-templates/device-ip-summary.tpl.html',
+            templateUrl: '/ng1/scripts/core/reports/reports-templates/device-ip-summary.tpl.html',
             controller: 'quicktech.core.reports.reportsCtrl'
         })).state('hardware-summary', waitForServices({
             url: '/reports/hardware-summary',
-            templateUrl: '/html/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
+            templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
             controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('software-summary', waitForServices({
             url: '/reports/software-summary',
-            templateUrl: '/html/scripts/core/reports/reports-templates/software-summary.tpl.html',
+            templateUrl: '/ng1/scripts/core/reports/reports-templates/software-summary.tpl.html',
             controller: 'quicktech.core.reports.reportsCtrl'
         }));
 
@@ -547,7 +546,7 @@
 
           if (sessionId === $rootScope.currentRemoteSessionId) {
             $uibModal.open({
-              templateUrl: '/html/scripts/common/templates/remote-connection-complete.tpl.html',
+              templateUrl: '/ng1/scripts/common/templates/remote-connection-complete.tpl.html',
               controller: ['$scope', '$uibModalInstance', 'TicketsService', function ($scope, $uibModalInstance, TicketsService) {
                 $scope.selectTicket = false;
                 $scope.selectedTicket = {};
@@ -623,7 +622,7 @@
 
                 //create ticket
                 var modalInstance = $uibModal.open({
-                  templateUrl: '/html/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
+                  templateUrl: '/ng1/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
                   controller: 'createNewEntityCtrl',
                   windowClass: 'create-popup',
                   backdrop: 'static',
@@ -688,7 +687,7 @@
             keyboard: false,
             size: 'unlock-window',
             windowClass: 'lock-screen-modal',
-            templateUrl: '/html/scripts/common/templates/unlock-modal.tpl.html'
+            templateUrl: '/ng1/scripts/common/templates/unlock-modal.tpl.html'
           };
 
           modalParams.controller = (['$scope', '$uibModalInstance',
