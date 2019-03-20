@@ -1,0 +1,189 @@
+/*Tickets Edit List*/
+
+.qt-table { /* Apply on UL*/
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.qt-table > li {
+  display: table;
+  width: 100%;
+}
+
+.qt-table > li + li {
+  margin-top: 10px;
+}
+
+.qt-table > li > div {
+  display: table-cell;
+  padding: 0 5px;
+  vertical-align: top;
+  position: relative;
+}
+
+.qt-table > li.service-add-width > div {
+  display: inline-block;
+}
+
+.opened-ticket .qt-table > li.service-add-width > .col-3 {
+  width: 64%;
+}
+
+.opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+  width: 43.7%;
+}
+
+_:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+  width: 64%;
+}
+
+_:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+  width: 41.7%;
+}
+
+_:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+  width: 64%;
+}
+
+_:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+  width: 41.7%;
+}
+
+@media screen and (min-width: 2048px) {
+  .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 63%;
+  }
+  
+  .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 51%;
+  }
+  
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 58%;
+  }
+  
+  _:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 48.7%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 58%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 48.7%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .opened-ticket-list .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    left: 205px !important;
+    right: 0 !important;
+  }
+  
+  .opened-ticket .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    right: 0 !important;
+  }
+  
+  .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 55.3%;
+  }
+  
+  _::-webkit-:not(:root:root), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 54.3%;
+  }
+  
+  .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 37%;
+    margin-bottom: 10px;
+  }
+  
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 53%;
+  }
+  
+  _:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 45.7%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 53%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 46.7%;
+  }
+  
+  .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(4) {
+    padding-left: 0;
+  }
+  
+  .opened-ticket-list .qt-table > li.service-add-width > [class*="col-"]:nth-child(5) {
+    width: 84px !important;
+  }
+  
+}
+
+@media screen and (max-width: 1366px) {
+  .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 43%;
+  }
+  
+  .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 33%;
+  }
+  
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 41%;
+  }
+  
+  _:-ms-lang(x), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 42.7%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 41%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket-list .qt-table > li.service-add-width > .col-3 {
+    width: 42.7%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .service-add-width .bootstrap-datetimepicker-widget.dropdown-menu {
+    right: 0 !important;
+  }
+  
+  .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 37%;
+  }
+  
+  _:-ms-lang(x), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 34%;
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 34%;
+  }
+  
+  _::-webkit-:not(:root:root), .opened-ticket .qt-table > li.service-add-width > .col-3 {
+    width: 36%;
+  }
+  
+}
+
+.qt-table > li > div:first-child {
+  padding-left: 0;
+}
+
+.qt-table > li > div:last-child {
+  padding-right: 0;
+}
+
+.qt-table > li > div > input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,43 @@
+<div class="new-list-heading clearfix fixed-block-top" fixed-block-top offset-top="135" >
+  <div class="col-md-5" ng-click="setOrderForProducts('description')">
+        <span class="sort-span">description<i class="icn-sm sort-icon icn-sort"
+                                              ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'description'}"></i></span>
+
+  </div>
+  <div class="col-md-1" ng-click="setOrderForProducts('cost')"
+       ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <span class="sort-span">cost<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
+
+  </div>
+  <div class="col-md-1" ng-click="setOrderForProducts('sale')">
+        <span class="sort-span">sale price<i class="icn-sm sort-icon icn-sort"
+                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i></span>
+
+  </div>
+  <div class="col-md-1" ng-click="setOrderForProducts('category')" ng-if="showCategory">
+        <span class="sort-span">category<i class="icn-sm sort-icon icn-sort"
+                                           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'category'}"></i></span>
+
+  </div>
+  <div class="col-md-1" ng-click="setOrderForProducts('vendor')">
+        <span class="sort-span">vendor/supplier<i class="icn-sm sort-icon icn-sort"
+                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
+
+  </div>
+  <div class="col-md-1" ng-click="setOrderForProducts('ilc')" style="padding-left: 10px;">
+        <span class="sort-span">ilc<i class="icn-sm sort-icon icn-sort"
+                                      ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
+
+  </div>
+  <div class="col-md-1" ng-click="setOrderForProducts('manufacture')">
+        <span class="sort-span">mfg#<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
+
+  </div>
+
+  <div class="col-md-1">
+    <span class="sort-span">taxes</span>
+  </div>
+  <div class="col-md-1 product-list-btn pull-right">&nbsp;</div>
+</div>

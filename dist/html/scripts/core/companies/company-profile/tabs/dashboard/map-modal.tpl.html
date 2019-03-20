@@ -1,0 +1,10 @@
+<div class="service-agreement-modal">
+  <div class="close-btn btn pull-right" ng-click="closeModal()" tabindex="1">
+    <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
+  </div>
+  <div>
+    Address - {{companyInfo.addresses[0].address}}
+  </div>
+    <div class="company-map-wrapper" company-address-autocomplete
+         ng-model="companyInfo.addresses[0]"></div>
+</div>

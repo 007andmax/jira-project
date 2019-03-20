@@ -1,0 +1,75 @@
+.time-zone-dropdown {
+  max-height: 260px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.form-control-time-zone~.erase {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+}
+.time-zone-dropdown .icn-caret-gray {
+  margin-top: 4px;
+}
+.time-zone-dropdown .icn-caret-gray.rotate {
+  transform: rotate(180deg);
+}
+.time-zone-dropdown .ellipsis-overflow .icn-caret-gray {
+  position: absolute;
+  left: 466px;
+  top: 0;
+}
+.time-zone-dropdown .ellipsis-overflow .icn-caret-gray.rotate {
+  transform: rotate(180deg);
+}
+.time-zone-dropdown .ellipsis-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 20px;
+  width: 470px;
+  text-overflow: ellipsis;
+}
+.time-zone-dropdown .groupName {
+  padding: 2px 7px;
+  color: #999;
+  font-weight: bold;
+}
+.time-zone-dropdown .cities-names {
+  position: relative;
+  padding-left: 15px;
+}
+.time-zone-dropdown .time-zone {
+  padding-left: 15px;
+  line-height: 2.5;
+}
+.time-zone-dropdown .search-wrap {
+  margin: 0;
+  padding: 3px 4px;
+  position: relative;
+  white-space: nowrap;
+  z-index: 1000;
+}
+.time-zone-dropdown .search-wrap .icn-search {
+  position: absolute;
+  right: 17px;
+  top: 17px;
+}
+.time-zone-dropdown .form-control {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  margin: 1px 0;
+  padding: 4px 20px 4px 4px;
+  width: 100%;
+}
+.clickable {
+  cursor: pointer;
+}
+/*.clickable:hover {*/
+  /*background-color:#e9f5fb;*/
+/*}*/
+.clickable.time-zone-focused {
+  background-color: #e9f5fb;
+}

@@ -1,0 +1,37 @@
+<ul class="category-list-container qt-table nano-content" scroll-to-product>
+  <li class="create-product"  ng-show="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
+    <a class="create-product-cont" create-new-entity="product" ng-click="chooseProductItem()">Create Product</a>
+  </li>
+
+  <li class="category-conteiner" ng-repeat="category in autocompleteData | orderBy: 'name' track by category.id"
+      ng-show="(filteredProducts[category.id] = (category.products | filter:filterProduct)).length > 0"
+      ng-init="categoryExpanded[category.id] = false; setCategoryExpanded($index, category.id)">
+
+    <div class="category-info" ng-class="{ active: categoryExpanded[category.id] }" ng-click="categoryExpanded[category.id] = !categoryExpanded[category.id]">
+      <span><b>{{ category.name }}</b></span>
+      <span><b>{{ filteredProducts[category.id].length + (category.products.length > 1 ? ' items' : ' item') }}</b></span>
+      <i class="icn-sm report-caret-icon" ng-class="{'rotated': categoryExpanded[category.id]}"></i>
+    </div>
+
+    <ul class="qt-table product-list-container" ng-if="categoryExpanded[category.id]">
+
+      <li ng-click="chooseProductItem(product)"
+          ng-repeat="product in filteredProducts[category.id] | orderBy: 'description' track by product.versionedId.id">
+
+        <div class="clearfix">
+          <div class="title col-md-10">{{ product.description }}</div>
+          <div class="text-right total-count col-md-2">{{ product.sale | currency: '$': 2 }}</div>
+
+          <div class="col-md-12">
+            <span ng-show="product.ilc">ILC: {{ product.ilc }}</span>
+            <span ng-show="product.manufacture" style="margin-left: 15px;">P/N: {{ product.manufacture }}</span>
+          </div>
+        </div>
+
+      </li>
+
+    </ul>
+
+  </li>
+
+</ul>

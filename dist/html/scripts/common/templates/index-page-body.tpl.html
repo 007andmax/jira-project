@@ -1,0 +1,34 @@
+<div class="alert alert-yellow hide" user-notification style="z-index: 1039;" ></div>
+
+<div class="top-bar" style="z-index: 1038;"
+     ng-include="'/ng1/scripts/core/header/header.tpl.html'"></div>
+
+<!-- @Leo add class: ticket-detail-header -->
+<!-- @Leo add class: ticket-create-update -->
+<div ng-controller="quicktech.core.header.headerCtrl"
+     class="mobile-top-bar"
+     ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
+     style="z-index: 1038;"
+     ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"></div>
+
+<aside id="left" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"
+       ng-include="'/ng1/scripts/core/left-panel/left-panel.tpl.html'"></aside>
+
+<aside ng-controller="quicktech.core.leftPanel.leftPanelCtrl" id="mobile-left" ng-class="{opened: isLeftPanelOpened}"
+       qt-sidebar style="z-index: 1039;"
+       ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
+
+<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
+       ng-include="'/ng1/scripts/core/right-panel/right-panel.tpl.html'"></aside>
+
+<div class="main-container">
+  <div class="row">
+    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
+      <div class="content-wrapper">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div feedback-form ></div>
+<div welcome-wizard></div>

@@ -1,0 +1,213 @@
+<div class="settings-main-wrapper">
+  <div  class="default-tax-wrapper clearfix">
+
+    <div ng-form="taxesForm">
+      <h3>Taxes</h3>
+
+      <ul class="qt-list default-tax-list">
+        <li class="new-tax" ng-form="newTaxForm">
+
+          <div class="helping-additional-class">
+
+            <div class="col-1" style="width: 293px;" ng-class="{'has-error': isShowingErrors(newTaxForm, 'name')}">
+
+              <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxForm, 'name')}">
+                Name
+              </label>
+
+              <div ng-messages="newTaxForm.name.$error"
+                   ng-class="{'hide': !isShowingErrors(newTaxForm, 'name')}">
+
+                <label class="control-label" ng-message="required">
+                  Name is required.
+                </label>
+
+                <label class="control-label" ng-message="unique">
+                  Name is already taken.
+                </label>
+
+                <label class="control-label" ng-message="minlength">
+                  Name is too short.
+                </label>
+
+                <label class="control-label" ng-message="maxlength">
+                  Name is too long.
+                </label>
+              </div>
+
+              <input type="text" class="form-control" name="name" ng-model="newTax.name" required
+                     is-uniq-validation validation-func="isUniqueName" ng-minlength="2" ng-maxlength="30">
+            </div>
+
+            <div class="col-1" style="width: 100px;" ng-class="{'has-error': isShowingErrors(newTaxForm, 'rate')}">
+
+              <p style="margin-bottom: 0">
+                <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxForm, 'rate')}">
+                  Rate (%)
+                </label>
+              </p>
+
+              <div ng-messages="newTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(newTaxForm, 'rate')}">
+                <label style="white-space: nowrap;" class="control-label" ng-message="required">
+                  Required.
+                </label>
+                <label style="white-space: nowrap;" class="control-label" ng-message="number">
+                  Only numbers.
+                </label>
+                <label style="white-space: nowrap;" class="control-label" ng-message="min">
+                  To small.
+                </label>
+                <label style="white-space: nowrap;" class="control-label" ng-message="max">
+                  To large.
+                </label>
+              </div>
+
+              <input type="number" class="form-control" ng-model="newTax.rate" name="rate"
+                     required min="0.01" max="99">
+            </div>
+
+            <div class="default-tax">
+              <div>Default</div>
+              <label class="control checkbox pull-left" style="margin: 10px 0 0 13px;">
+                <input type="checkbox" ng-model="newTax.isDefault">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+            <div class="btn btn-lg btn-success pull-right"
+                 style="transform: translateY(65%)"
+                 ng-click="saveNewTax(newTaxForm)"
+                 custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">
+              Add
+            </div>
+          </div>
+        </li>
+
+        <li class="list-heading" style="border-top: none;" ng-show="taxes.length > 0">
+          <div style="padding-left: 5px; width: 40%;display: inline-block;">Name</div>
+          <div style="width: 39%;display: inline-block;">Rate (%)</div>
+          <div style="width: 20%;display: inline-block;">Default</div>
+        </li>
+
+        <li class="tax-list" ng-repeat="tax in taxes | orderBy: 'name' track by tax.id" ng-class="{'new-tax': isEditing}"
+            ng-controller="quicktech.core.settings.taxCtrl"
+            ng-form="editTaxForm">
+
+          <div class="helping-additional-class" ng-if="!isEditing">
+
+            <div style="width: 40%;" class="col-xs-6">{{ tax.name }}</div>
+
+            <div class="col-xs-5">{{ tax.rate }}%</div>
+
+            <div>
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-checked="tax.isDefault"
+                       custom-disabled="{{ disabledCheckbox }}"
+                       ng-click="onChangeDefault()">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+
+            <div class="col-xs-1">
+              <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                 ng-click="deleteTax()"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+                <i class="icon-sm icn-delete"></i>
+              </a>
+
+              <a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"
+                 ng-click="editTax(editTaxForm)"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
+                <i class="icon-sm edit-icon"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="helping-additional-class" ng-if="isEditing">
+
+            <div class="col-1"
+                 ng-class="{'has-error': isShowingErrors(editTaxForm, 'name')}">
+
+              <div ng-messages="editTaxForm.name.$error" style="position: absolute;top: -25px;left: 5px;"
+                   ng-class="{'hide': !isShowingErrors(editTaxForm, 'name')}">
+
+                <label class="control-label" ng-message="required">
+                  Name is required.
+                </label>
+
+                <label class="control-label" ng-message="unique">
+                  Name is already taken.
+                </label>
+
+                <label class="control-label" ng-message="minlength">
+                  Name is too short.
+                </label>
+
+                <label class="control-label" ng-message="maxlength">
+                  Name is too long.
+                </label>
+              </div>
+
+              <input type="text" class="form-control" ng-model="currentTax.name" name="name" required placeholder="Name"
+                     is-uniq-validation validation-func="isUniqueName" model-id="currentTax.id"
+                     ng-minlength="2" ng-maxlength="30">
+            </div>
+
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(editTaxForm, 'rate')}">
+              <div style="position: absolute; top: -25px;" ng-messages="editTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(editTaxForm, 'rate')}">
+                <label style="white-space: nowrap;" class="control-label" ng-message="required">
+                  Rate is required.
+                </label>
+                <label style="white-space: nowrap;" class="control-label" ng-message="number">
+                  Only numbers allowed.
+                </label>
+                <label style="white-space: nowrap;" class="control-label" ng-message="min">
+                  Rate mustn't be less then 0.01.
+                </label>
+                <label style="white-space: nowrap;" class="control-label" ng-message="max">
+                  Rate mustn't be greater then 99.
+                </label>
+              </div>
+
+              <input type="number" class="form-control" ng-model="currentTax.rate" name="rate"
+                     required min="0.01" max="99">
+            </div>
+
+            <div>
+              <label style="margin: 10px 0 0 13px;" class="control checkbox pull-left">
+                <input type="checkbox" ng-model="currentTax.isDefault">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+
+            <div class="clearfix" style="padding-top: 55px; padding-right: 5px;">
+              <div class="btn btn-lg btn-success pull-right"
+                   ng-click="saveTax()" custom-disabled="{{ editTaxForm.$invalid || editTaxForm.$pristine }}">
+                Save
+              </div>
+
+              <div class="btn btn-lg btn-primary pull-right" style="margin-right: 10px;"
+                   ng-click="cancelTax(editTaxForm)">
+                Cancel
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

@@ -23,6 +23,8 @@
 
         var $win = $(window);
 
+        $scope.newAngular = $location.url().startsWith('/ng2') ? true :  false;
+
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;

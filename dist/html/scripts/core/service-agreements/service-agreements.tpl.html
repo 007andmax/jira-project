@@ -1,0 +1,84 @@
+<div class="deposit-create service-agreements clearfix">
+  <div class="fixed-block-top" fixed-block-top style="background-color: white">
+    <div class="btn btn-primary" ng-click="openAgreementsModal('CREATE_NEW', true, null)">New Contract</div >
+  </div>
+  <div class="service-agreements-lists">
+    <ul>
+      <li class="clearfix fixed-block-top" fixed-block-top offset-top="130"
+          style="background-color: white; margin-top: 50px">
+        <div class="col-md-2"><strong ng-click="changeFilterType('company.name')">Company</strong>
+          <i ng-show="filterType === 'company.name'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-company.name'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-3 col-width-3"><strong ng-click="changeFilterType('description')">Contract
+          Discription</strong>
+          <i ng-show="filterType === 'description'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-description'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1 col-width-4"><strong ng-click="changeFilterType('type')">Contract Type</strong>
+          <i ng-show="filterType === 'type'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-type'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1" style="padding-left: 10px;"><strong ng-click="changeFilterType('status')">Status</strong>
+          <i ng-show="filterType === 'status'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-status'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('startDate')">Start Date</strong>
+          <i ng-show="filterType === 'startDate'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-startDate'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1"><strong ng-click="changeFilterType('endDate')">End Date</strong>
+          <i ng-show="filterType === 'endDate'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-endDate'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1 col-width-1"><strong ng-click="changeFilterType('reviewDate')">Review Date</strong>
+          <i ng-show="filterType === 'reviewDate'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-reviewDate'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1 text-center"><strong ng-click="changeFilterType('amount')">Amount</strong>
+          <i ng-show="filterType === 'amount'" class="icn-sm icn-caret-gray"></i>
+          <i ng-show="filterType === '-amount'" class="icn-sm icn-rotate-caret-gray"></i>
+        </div>
+        <div class="col-md-1 text-center col-width-2" style="cursor: default;" ng-show="canDeleteAgreements">
+          <strong>Action</strong>
+        </div>
+      </li>
+      <div style="margin-top: 110px;">
+      <li ng-repeat="agreement in agreementsList | orderBy: filterType"
+          class="content-product-list-ticket pointer clearfix">
+        <div class="col-md-2" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.company.name}}</div>
+        <div class="col-md-3 col-width-3" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.description}}</div>
+        <div class="col-md-1 col-width-4" ng-click="openAgreementsModal(agreement.type, false, agreement.id)" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}{{billTypeDictionary[agreement.billType]}}</div>
+        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)" style="padding-left: 10px;" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{contractStatusDictionary[agreement.status]}}</div>
+        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.startDate)}}</div>
+        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.endDate)}}</div>
+        <div class="col-md-1 col-width-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
+          <div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
+        </div>
+        <div class="col-md-1 text-center">{{agreement.amount | number : 2}}</div>
+        <div class="col-md-1 text-center col-width-2" >
+          <div uib-dropdown>
+            <a  class="hit-area ha-22-38 has-tooltip" tooltip-placement="top" uib-tooltip="More" tooltip-append-to-body="true"
+                aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
+              <i class="icn-sm icn-more-grey"></i>
+            </a>
+            <ul class="dropdown-menu agreement-list-dropdown" role="menu" style="overflow: visible; font-size: 14.1px;">
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="deleteAgreement(agreement)" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">Delete agreement</a>
+              </li>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="forceCreate(agreement)" ng-hide="agreement.status == 'TERMINATED' || agreement.status == 'EXPIRED' || agreement.type == 'HOURLY'" >Force create</a>
+              </li>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="terminateContract(agreement.id)" ng-show="agreement.status !== 'TERMINATED'">Terminate</a>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </li>
+      </div>
+    </ul>
+  </div>
+</div>

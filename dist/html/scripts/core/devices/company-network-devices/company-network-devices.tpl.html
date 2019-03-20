@@ -1,0 +1,265 @@
+<div class="tab-pane active">
+
+  <div class="network-scan-results"
+       ng-show="(!scanDevices.networkScan.devices || scanDevices.networkScan.devices.length < 1) && !isScanDevicesLoad">
+    <div>
+      <i class="icn-lg icn-network-scan-lg"></i>
+
+      <p class="text-center result-heading">No devices to show</p>
+      <p class="text-center result-details" style="color: #e53935" ng-show="masterAgentOffline">
+        Network scan and remote install is available only when master agent is online.
+      </p>
+    </div>
+  </div>
+
+  <div class="master-agent-offline-message"
+       ng-show="masterAgentOffline">
+       <!--ng-show="masterAgentOffline && scanDevices.networkScan.devices && scanDevices.networkScan.devices.length">-->
+    <p class="text-center">
+      Network scan and remote install is available only when master agent is online.
+    </p>
+  </div>
+
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
+    <div class="loader"></div>
+  </div>
+
+  <ul class="qt-list qt-network-scan"
+      ng-if="scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0">
+
+    <li class="list-heading">
+
+      <div class="col-1" ng-click="sortNetworkScan('hostName')">
+            <span class="sort-span">DEVICE
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-hostName', 'active': orderScanBy.indexOf('hostName') > -1}"></i>
+            </span>
+      </div>
+
+      <div class="col-desc"><span>DESCRIPTION</span></div>
+
+      <div class="col-3" ng-click="sortNetworkScan('ipAddress')">
+            <span class="sort-span">LAN IP
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i>
+            </span>
+      </div>
+
+      <div class="col-4" ng-click="sortNetworkScan('manufacturer')">
+            <span class="sort-span">MANUFACTURER
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i>
+            </span>
+      </div>
+
+      <div class="col-5" ng-click="sortNetworkScan('macAddress')">
+            <span class="sort-span">MAC ADDRESS
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
+            </span>
+      </div>
+
+      <div class="col-2" ng-click="sortNetworkScan('agentStatus')" style="text-align: center;">
+            <span class="sort-span">Agent Status
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
+            </span>
+      </div>
+
+      <div class="col-7" ng-click="sortNetworkScan('updatedAt')" style="text-align: center;">
+            <span class="sort-span">LAST SEEN DATE
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-updatedAt', 'active': orderScanBy.indexOf('updatedAt') > -1}"></i>
+            </span>
+      </div>
+
+      <div class="col-6">&nbsp;</div>
+
+    </li>
+
+    <li ng-repeat="device in scanDevices.networkScan.devices | orderBy: orderScanBy"
+        ng-controller="quicktech.core.devices.companyNetworkDeviceCtrl">
+
+      <div class="col-1">
+        <div class="device-name">
+
+          <i class="device-status" ng-class="{'on' : deviceStatus.online, 'off': !deviceStatus.online}"></i>
+
+          <div class="checkbox-caption">
+
+            <span>{{ (device.hostName | unknownFilter) || device.ipAddress }}</span>
+
+            <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
+               uib-popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
+              <i class="icon-sm icn-description"></i>
+            </a>
+
+            <div class="dropdown" uib-dropdown is-open="isOpenEditDescrDrpdwn"
+                 ng-show="(device.description | unknownFilter)">
+
+              <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true"
+                 uib-tooltip="Edit Description" uib-dropdown-toggle>
+                <i class="icon-sm edit-icon"></i>
+              </a>
+
+              <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
+                    <textarea class="form-control autosize" rows="1" ng-model="deviceEditDescription"
+                              hard-reset-pattern="patternMax40"
+                              placeholder="Edit device description"></textarea>
+
+                <div class="qt-form-actions">
+                  <div class="btn btn-lg btn-primary pull-left" ng-click="saveEditDescription()"
+                       custom-disabled="{{ disableEditSaveDescr }}">
+                    Save
+                  </div>
+
+                  <div class="btn btn-lg btn-primary   pull-left" ng-click="saveEditDescription('close')">Cancel</div>
+
+                  <div class="word-count pull-right">{{ 40 - deviceEditDescription.length }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown" uib-dropdown is-open="isOpenDescrDrpdwn"
+                 ng-hide="(device.description | unknownFilter)">
+
+              <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true"
+                 uib-tooltip="Add Description" uib-dropdown-toggle>
+                <i class="icn-sm icn-add-description"></i>
+              </a>
+
+              <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
+                    <textarea class="form-control autosize" rows="1" ng-model="deviceDescription"
+                              hard-reset-pattern="patternMax40"
+                              placeholder="Add device description"></textarea>
+
+                <div class="qt-form-actions">
+                  <div class="btn btn-lg btn-primary pull-left" ng-click="saveDescription()"
+                       custom-disabled="{{ disableSaveDescr }}">
+                    Save
+                  </div>
+
+                  <div class="btn btn-lg btn-primary   pull-left" ng-click="saveDescription('close')">Cancel</div>
+
+                  <div class="word-count pull-right">{{ 40 - deviceDescription.length }}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-desc">
+        <!--<div class="device-desc"><span>No description available</span></div>-->
+      </div>
+
+      <div class="col-3">
+        <div class="device-lan-ip">{{ device.ipAddress }}</div>
+      </div>
+
+      <div class="col-4">
+        <div class="device-manufacturer">{{ (device.manufacturer | unknownFilter) || 'not defined' }}</div>
+      </div>
+
+      <div class="col-5">
+        <div class="device-mac-address">{{ device.macAddress }}</div>
+      </div>
+
+      <div class="col-2" style="text-align: center">
+        <div class="device-mac-address">{{ device.agentStatus }}</div>
+      </div>
+
+      <div class="col-7 last-seen-date" style="text-align: center">{{ device.updatedAt | date: 'dd MMM yyyy' }}</div>
+
+      <div class="col-6" style="height: 9px;">
+        <div class="list-actions pull-right" ng-show="device.hostName !== 'unknown'">
+
+          <div class="device-management"
+               ng-class="{'hide': !(deviceStatus.status === 'success' && !changingStatus) || !allowAgentInstall}">
+
+            <label>
+              <input type="checkbox" ng-model="deviceStatus.statusValue" ng-click="changeAgentStatus()">
+              <span class="toggle-bg"></span>
+              <span class="toggle-indicator"></span>
+            </label>
+          </div>
+
+          <div class="device-management installing-agent"
+               ng-class="{'hide': !changingStatus}" style="margin-right: 12px;">
+            <div class="loader"></div>
+          </div>
+
+          <div class="device-management installation-error"
+               ng-class="{'hide': !(deviceStatus.status === 'error' && !changingStatus) && allowAgentInstall}">
+
+            <label>
+              <input type="checkbox" ng-model="deviceStatus.statusValue"
+                     custom-disabled="{{ !allowAgentInstall }}"
+                     ng-click="changeAgentStatus()">
+              <span class="toggle-bg"
+                    uib-tooltip="{{ allowAgentInstall ? device.message : 'Maximum installed agent amount reached'}}"
+                    tooltip-placement="top"></span>
+              <span class="toggle-indicator"></span>
+            </label>
+
+            <!--<a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"-->
+            <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="locked">-->
+            <!--<i class="icn-sm icn-error-locked"></i>-->
+            <!--</a>-->
+
+          </div>
+
+          <div class="device-management installation-error" ng-show="false">
+
+            <label>
+              <input type="checkbox">
+              <span class="toggle-bg"></span>
+              <span class="toggle-indicator"></span>
+            </label>
+
+            <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Firewall">
+              <i class="icn-sm icn-error-firewall"></i>
+            </a>
+
+          </div>
+
+          <div class="device-management installation-error" ng-show="false">
+            <label>
+              <input type="checkbox">
+              <span class="toggle-bg"></span>
+              <span class="toggle-indicator"></span>
+            </label>
+
+            <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="power/internet or unknown problem">
+              <i class="icn-sm icn-error-power"></i>
+            </a>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </li>
+
+  </ul>
+
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
+    <div class="loader"></div>
+  </div>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

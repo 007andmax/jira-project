@@ -1,0 +1,1001 @@
+.ticket-update {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.ticket-update-header {
+  padding: 0 30px 20px 30px;
+  border-bottom: 1px solid #e9edf1;
+}
+
+.ticket-update-header h4 {
+  float: left;
+  font-weight: 400;
+  font-size: 17px;
+  margin: 8px 0px;
+}
+
+.ticket-update-header h4 .light-cl {
+  color: #94a4b8;
+}
+
+.ticket-update-header h4 span.ticket-update-title {
+  margin-top: 1px;
+}
+
+.ticket-update-header h4 .label {
+  margin-top: 1px;
+  margin-left: 10px;
+  font-weight: normal;
+  color: #94a4b8;
+  background-color: #e7ecf2;
+  -webkit-transition: border-radius 0.3s ease-out;
+  -moz-transition: border-radius 0.3s ease-out;
+  -o-transition: border-radius 0.3s ease-out;
+  -ms-ransition: border-radius 0.3s ease-out;
+  transition: border-radius 0.3s ease-out;
+}
+
+.ticket-update-header h4 .label:hover {
+  border-radius: 3px;
+}
+
+.static-wysiwyg .wysiwyg-controls-wrapper {
+  left: 0 !important;
+  /* bottom: 0 !important; */
+  top: auto !important;
+  /* transform: translateY(-50%); */
+  /* width: 100% !important; */
+}
+
+.ticket-updates .btn-load-more {
+  margin: 20px auto 0 auto;
+  display: block;
+  width: 200px;
+}
+
+.ticket-update-header .shared-users-list {
+  margin: 10px 20px 0 30px;
+  padding: 0px;
+  list-style: none;
+}
+
+.ticket-update-header .shared-users-list > li {
+  margin-right: 10px;
+  margin-top: 10px;
+  float: left;
+  position: relative;
+}
+
+.ticket-update-header .shared-users-list > li .avatar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(21, 30, 41, .6);
+  border-radius: 50%;
+  display: none;
+}
+
+.ticket-update-header .shared-users-list > li .avatar:hover:after {
+  display: block;
+}
+
+.ticket-updates-wrapper {
+  position: relative;
+  margin-bottom: 530px;
+  font-size: 13px;
+}
+
+.ticket-updates-wrapper p {
+  font-size: 13px;
+}
+
+.ticket-update {
+  padding-top: 30px;
+}
+
+.ticket-update-avatar {
+  width: 48px;
+  padding-right: 10px;
+}
+
+.ticket-update-avatar .icon-update {
+  margin-top: 21px;
+  margin-left: 13px;
+}
+
+.ticket-update-content .updater-name {
+  float: left;
+  width: 100%;
+  margin-top: -1px;
+  font-weight: bold;
+  color: #1f2a37;
+}
+
+.ticket-update-content .updater-name span {
+  font-weight: normal;
+}
+
+.updater-name a.hit-area {
+  margin-top: 2px;
+  margin-right: -2px;
+}
+
+.ticket-update-content .ticket-update-message {
+  float: left;
+  width: 96%;
+  margin-top: 4px;
+  color: #748498;
+  line-height: 20px;
+  margin-bottom: 5px;
+}
+
+.ticket-update-content .ticket-update-meta {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ticket-update-content .ticket-update-meta .ticket-meta-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.ticket-meta-wrapper .default-user-avatar, .default-company-logo {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+
+.ticket-update-content .icn-delete,
+.ticket-add-product-actions .icn-delete,
+.ticket-add-service-actions .icn-delete {
+  background-image: url(../images/new-icons/company-remove.svg);
+  width: 12px;
+  height: 12px;
+}
+
+.ticket-update-content .edit-icon {
+  background-image: url(../images/new-icons/company-edit.svg);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.ticket-update-content .ticket-update-message {
+  margin: 0;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ticket-update-content .ticket-update-message.editing {
+  border: 1px solid #9ca5b6;
+}
+
+.ticket-update-content .updater-name a {
+  margin-left: 10px;
+}
+
+.ticket-update-content .ticket-update-meta .avatar {
+  position: relative;
+  margin-left: 10px;
+}
+
+.ticket-update-content .ticket-update-meta .avatar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(21, 30, 41, .6);
+  display: none;
+}
+
+.ticket-update-content .ticket-update-meta .avatar:hover:after {
+  display: block;
+}
+
+.ticket-update-content .ticket-update-meta span.update-timestamp {
+  margin-top: 7px;
+  margin-right: 10px;
+  font-size: 11px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: #94a4b8;
+}
+
+.ticket-update-content .dot-sep {
+  margin: 2px 10px;
+}
+
+.ticket-update-meta .avatar-tooltip .tooltip-inner, .shared-users-list li:not(:last-child) .tooltip-inner {
+  padding: 18px 20px;
+  text-align: left;
+  line-height: 12px;
+  white-space: nowrap;
+}
+
+.ticket-update-meta .tooltip-name, .shared-users-list .tooltip-name {
+  color: #fff;
+  line-height: 12px;
+}
+
+.ticket-update-meta .tooltip-designation, .shared-users-list .tooltip-designation {
+  color: #94a4b8;
+  font-weight: normal;
+  text-transform: none;
+}
+
+.shared-with {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip-users {
+  min-width: 146px;
+}
+
+.tooltip-users .tooltip-inner {
+  height: 132px;
+  margin: 0;
+  padding: 18px 20px;
+  text-align: left;
+  list-style: none;
+}
+
+.tooltip-users .tooltip-inner > li + li {
+  margin-top: 12px;
+}
+
+.tooltip-users .tooltip-inner > li.more-users span {
+  margin-left: 0;
+}
+
+.tooltip-users .tooltip-inner > li > span {
+  display: block;
+}
+
+.tooltip-users .tooltip-inner > li > span.username {
+  color: #fff;
+}
+
+.tooltip-users .tooltip-inner > li > span.usertitle {
+  font-weight: normal;
+  color: #94a4b8;
+  text-transform: none;
+}
+
+.ticket-update-content {
+  width: calc(100% - 48px);
+  padding: 10px 0 30px;
+  border-bottom: 1px solid #e7ecf2;
+  position: relative;
+}
+
+.ticket-update:last-child .ticket-update-content {
+  border-bottom: none;
+}
+
+.ticket-update-content .ticket-update-meta .btn-more-users {
+  position: relative;
+  margin: 0 0 0 10px;
+  padding: 7px 12px;
+  border-radius: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-transition: border-radius 0.3s ease-out;
+  -moz-transition: border-radius 0.3s ease-out;
+  -o-transition: border-radius 0.3s ease-out;
+  -ms-ransition: border-radius 0.3s ease-out;
+  transition: border-radius 0.3s ease-out;
+}
+
+@-moz-document url-prefix() {
+  .ticket-update-content .ticket-update-meta .btn-more-users {
+    padding: 7px 12px 8px;
+    margin-top: 1px;
+  }
+}
+
+.ticket-update-content .ticket-update-meta .btn-more-users:hover {
+  border-radius: 3px;
+}
+
+.added-users-wrapper {
+  flex: 1;
+}
+
+.users-added-to-update {
+  margin-top: -10px;
+  max-width: 100%;
+  margin-left: -180px;
+}
+
+.users-added-to-update .avatar {
+  margin-top: 10px;
+}
+
+.users-added-to-update .avatar:first-child {
+  margin-left: 190px;
+}
+
+.users-added-to-update .btn {
+  min-width: 26px;
+  height: 26px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.table-wrapper {
+  float: left;
+  width: 100%;
+  margin-top: 9px;
+  margin-bottom: 10px;
+}
+
+.table-wrapper + .table-wrapper {
+  margin-top: 0;
+}
+
+.qt-list .table-wrapper {
+  margin-top: 0px;
+  margin-bottom: 21px;
+}
+
+.inventory-details .table-wrapper {
+  margin-top: 25px;
+  margin-bottom: 0;
+  padding-bottom: 30px;
+  cursor: auto;
+}
+
+.table-wrapper .table-content {
+  width: calc(100% - 30px);
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none;
+  color: #4f5f79;
+  background-color: #f6f8fa;
+}
+
+.table-wrapper .table-content + .table-content {
+  margin-top: 10px;
+}
+
+.table-wrapper:last-child .table-content {
+  margin-bottom: 10px;
+}
+
+.qt-list .table-wrapper .table-content {
+  cursor: auto;
+  width: calc(100% - 26px);
+}
+
+.qt-invoices .sub-wrapper .table-wrapper .table-content {
+  width: calc(100% - 88px);
+  margin-left: 24px;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.qt-invoices .sub-wrapper .table-wrapper .table-content:first-child {
+  margin-top: 0;
+}
+
+.qt-invoices .sub-wrapper .table-wrapper .table-content:last-child {
+  margin-bottom: 5px;
+}
+
+.qt-list .table-wrapper .table-content > i {
+  position: absolute;
+  left: -25px;
+  top: 20px;
+}
+
+.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-edit {
+  position: absolute;
+  right: -33px;
+  top: 16px;
+}
+
+.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-delete {
+  position: absolute;
+  right: -65px;
+  top: 16px;
+}
+
+/*.table-wrapper .table-content .model{*/
+/*padding-left: 7px;*/
+/*}*/
+.table-wrapper .table-content [class^="col-"] {
+  padding: 5px;
+  height: auto;
+  border-right: 0;
+  /*overflow: hidden;*/
+}
+
+.table-wrapper .table-content .form-group {
+  margin-bottom: 0;
+}
+
+.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
+  width: 20.333333%;
+  height: auto;
+}
+
+.qt-recurring-invoices .table-wrapper .table-content .col-3 {
+  width: 13%;
+}
+
+.table-wrapper .table-content .col-1 {
+  width: 163px;
+  float: left;
+  border: 0;
+}
+
+.table-wrapper .table-content .description:hover {
+  background-color: #e7ecf2;
+}
+
+.table-wrapper .service-table .service-datetimepicker .bootstrap-datetimepicker-widget {
+  left: 0 !important;
+  top: calc(100% + 1px);
+}
+
+.table-wrapper .service-table .col-1 {
+  width: 114px;
+}
+
+.table-wrapper .service-table .col-md-1 {
+  width: 11.8%;
+}
+
+.table-wrapper .table-content .col-2 {
+  width: calc(100% - 400px);
+  float: left;
+}
+
+.table-wrapper .table-content .col-2.col-2-has-serial-number {
+  width: 64%;
+  float: left;
+}
+
+.table-wrapper .table-content .col-2.col-2-has-serial-number.has-ilc-pn {
+  line-height: 40px;
+}
+
+.qt-recurring-invoices .table-wrapper .table-content .col-2 {
+  width: calc(100% - 563px);
+  float: left;
+}
+
+.qt-recurring-invoices .table-wrapper.invoice-srvs-list .table-content .col-2 {
+  width: calc(100% - 400px);
+  float: left;
+}
+
+.qt-recurring-invoices .table-wrapper .table-content .col-2.col-2-has-serial-number {
+  /*new*/
+  width: calc(60% - 326px);
+  float: left;
+}
+
+.table-wrapper .table-content .serial-width {
+  /*new*/
+  width: 25%;
+  float: left;
+}
+
+.table-wrapper .service-table .col-2 {
+  width: 155px;
+}
+
+.table-wrapper .table-content .col-4 {
+  /*.table-wrapper .table-content .col-3 {*/
+  width: 15%;
+  float: right;
+}
+
+/*.table-wrapper .service-table .col-3 {*/
+/*width: calc(100% - 575px);*/
+/*}*/
+/*.table-wrapper .table-content .col-3{*/
+/*width: calc(100% - 758px);*/
+/*}*/
+
+.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
+  width: 33.333333%;
+}
+
+.inventory-details .table-wrapper:last-child .table-content {
+  margin-bottom: 0;
+}
+
+.inventory-details .table-wrapper .table-content:last-child {
+  margin-bottom: 10px;
+}
+
+.table-wrapper .table-content .col-5 {
+  /*.table-wrapper .table-content .col-4 {*/
+  width: 21%;
+  float: right;
+  white-space: nowrap;
+}
+
+.table-wrapper .service-table .col-4 {
+  width: 243px;
+  height: auto;
+}
+
+.inventory-details .table-wrapper .service-table .col-5 {
+  width: 243px;
+  float: right;
+}
+
+/*.discount-ticket{*/
+/*position: absolute;*/
+/*bottom: 13px;*/
+/*right: 13px;*/
+/*}*/
+
+.table-wrapper .table-content-action {
+  width: 32px;
+  position: absolute;
+  right: -50px;
+  top: -16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-wrapper .table-content-action a.hit-area {
+  margin-top: 19px;
+  margin-right: -2px;
+  cursor: pointer;
+}
+
+.ticket-update-content .attachments {
+  float: left;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 0px;
+  margin-top: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ticket-update-avatar .indicator-new-update {
+  height: 6px;
+  width: 6px;
+  background: #1586e4;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -18px;
+  margin-top: 16px;
+}
+
+/**Edit product on tickets page in ticket updates**/
+.ticket-update-edit {
+  clear: both;
+  float: left;
+  width: 100%;
+  height: 166px;
+  margin: 10px 0 0;
+}
+
+.table-wrapper + .table-wrapper .table-content + .ticket-update-edit {
+  margin: 0;
+}
+
+.ticket-update-edit .icon-edit {
+  position: absolute;
+  top: 43px;
+  left: 63px;
+}
+
+.ticket-update-edit .icon-edit.icn-update-product {
+  top: 50px;
+}
+
+.ticket-update-product-edit .table-content,
+.ticket-update-service-edit .table-content {
+  width: 100%;
+}
+
+.ticket-update-service-edit {
+  /*position: absolute;*/
+  /*left: -20px;*/
+  /*right: -20px;*/
+  /*height: 166px;*/
+  /*padding: 30px 84px 30px 100px;*/
+  /*box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;*/
+  /*background-color: #fff;*/
+}
+
+.ticket-update-product-edit .edit-col1 {
+}
+
+.ticket-update-product-edit .edit-col3 {
+  width: 200px;
+}
+
+.ticket-update-product-edit .edit-col4 {
+  /*new  increment 3 4 */
+  width: 95px;
+}
+
+.ticket-update-product-edit .edit-col5 {
+  width: 90px;
+}
+
+.ticket-update-product-edit .edit-col6, .ticket-update-service-edit .edit-col6 {
+  width: 12.5%;
+}
+
+.ticket-update-product-edit .edit-col7, .ticket-update-service-edit .edit-col7 {
+  width: 7%;
+}
+
+.opened-ticket-list .ticket-update-product-edit .edit-col6, .opened-ticket-list .ticket-update-service-edit .edit-col6 {
+  width: 20%;
+}
+
+.opened-ticket-list .ticket-update-product-edit .edit-col7, .opened-ticket-list .ticket-update-service-edit .edit-col7 {
+  width: 9%;
+}
+
+.ticket-update-service-edit .edit-col1 {
+  width: 145px;
+}
+
+.ticket-update-service-edit .edit-col2 {
+  width: 124px;
+}
+
+.ticket-update-service-edit .edit-col4 {
+  width: 145px;
+}
+
+.ticket-update-edit-actions {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.ticket-update-edit-actions .validation-msg {
+  color: #e53935;
+  padding-top: 9px;
+}
+
+.ticket-update-edit-actions .btn {
+  min-width: 80px;
+}
+
+@-moz-document url-prefix() {
+  .ticket-update-header h4 span.ticket-update-title {
+    margin-top: 0;
+  }
+  .ticket-update-edit-actions .validation-msg {
+    line-height: 19px;
+  }
+  .ticket-update-content .updater-name {
+    margin-top: -2px;
+  }
+  .ticket-update-content .ticket-update-meta > .avatar {
+    margin-top: 1px;
+  }
+  .table-wrapper {
+    margin-top: 10px;
+  }
+  .ticket-update-edit {
+    margin-bottom: 9px;
+  }
+  .ticket-update-content .attachments {
+    margin-top: 11px;
+  }
+  .updater-name a.hit-area {
+    margin-top: 3px;
+  }
+  .ticket-update-content .attachments > li {
+    margin-bottom: 9px;
+  }
+  .ticket-update-product-edit, .ticket-update-service-edit {
+    box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 15px 0px;
+  }
+}
+
+.product-upd .table-content-top .col-md-1 {
+  width: 12%;
+}
+
+.product-upd .table-content-top .col-md-9 {
+  width: 64%;
+}
+
+@media screen and (max-width: 1440px) {
+  .table-wrapper.product-upd .table-content .col-1 {
+    width: 15%;
+  }
+  
+  .table-wrapper.product-upd .table-content .col-3 {
+    width: 18%;
+  }
+}
+
+.notify-select {
+  padding: 5px 10px 0 10px;
+}
+
+.notify-select > span {
+  padding: 0 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #1586e4;
+}
+
+.notify-select > span:first-child {
+  padding-left: 0;
+}
+
+.table-content.service-table .col-3 {
+  width: 75%;
+  padding-left: 268px;
+}
+
+.table-content .table-content-top {
+  border-bottom: 1px solid #edf2f6;
+}
+
+.table-content .table-content-top .timepicker {
+  top: 6px;
+}
+
+.table-content .table-content-top.without-duration .timepicker {
+  right: 0;
+}
+
+.table-content .table-content-top .dropdown-menu {
+  /*top: 100% !important;*/
+}
+
+.table-content .table-content-top .new-input {
+  padding: 5px 12px;
+}
+
+.table-wrapper .service-table .table-content-top.without-duration .service-title {
+  width: 57%;
+}
+
+.ticket-update-service-edit .table-content .table-content-top,
+.ticket-update-service-edit .table-content .table-content-bottom,
+.ticket-update-product-edit .table-content .table-content-top,
+.ticket-update-product-edit .table-content .table-content-bottom {
+  padding: 0;
+}
+
+.table-content .table-content-top,
+.table-content .table-content-bottom {
+  padding: 6.5px 15px;
+}
+
+.table-wrapper .service-table .col-md-1.timer-quantity {
+  width: 8.33333333%;
+}
+
+.table-wrapper .service-table .col-md-5.service-title {
+  width: 40%;
+}
+
+.table-wrapper .service-table .col-md-2.new-quantity-picker {
+  width: 18%;
+}
+
+@media screen and (min-width: 2048px) {
+  .table-content.service-table .col-3 {
+    width: 75%;
+  }
+  
+  .opened-ticket .table-wrapper .service-table .col-3 {
+    width: calc(100% - 605px);
+  }
+  
+  .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: calc(100% - 485px);
+  }
+  
+  _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: calc(100% - 488px);
+  }
+  
+  .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
+    width: 33.333333%;
+  }
+}
+
+.table-content .table-content-top .new-input,
+.table-content .table-content-bottom .new-input {
+  padding: 5px;
+}
+
+@media screen and (max-width: 1600px) {
+  .table-content input {
+    font-size: 12px;
+  }
+  
+  .table-content .table-content-top .timepicker {
+    right: 0;
+  }
+  
+  .table-content.service-table .col-3 {
+    padding-left: 342px;
+  }
+  
+  .table-wrapper .service-table .col-md-1 {
+    width: 15.8%;
+  }
+  
+  .table-wrapper .service-table .col-md-6 {
+    width: 41.66666667%;
+  }
+  
+  .table-wrapper .service-table .table-content-top.without-duration .service-title {
+    width: 50%;
+  }
+  
+  .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker,
+  .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
+    width: 25%;
+  }
+  
+  .table-wrapper .service-table .col-md-1.timer-quantity {
+    width: 9%;
+  }
+  
+  .table-wrapper .service-table .col-md-3.service-datetimepicker,
+  .table-wrapper .service-table .col-md-2.new-quantity-picker {
+    width: 23%;
+  }
+  
+  .table-wrapper .service-table .col-md-5.service-title {
+    width: 36%;
+  }
+  
+  /*.ticket-update-service-edit {*/
+  /*padding: 30px 40px 30px 50px;*/
+  /*}*/
+  .ticket-update-product-edit {
+    padding: 0;
+  }
+  
+  .ticket-update-edit .icon-edit {
+    left: 30px;
+  }
+  
+  .table-wrapper .service-table .col-3 {
+    width: calc(100% - 563px);
+  }
+  
+  .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: 36%;
+  }
+  
+  _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: 35%;
+  }
+  
+  .opened-ticket-list .table-wrapper .service-table .col-5 div {
+    white-space: nowrap;
+  }
+  
+  .inventory-details .table-wrapper .service-table .col-3 {
+    width: calc(100% - 290px);
+  }
+  
+  .table-wrapper .table-content .discount-ticket {
+    white-space: normal;
+  }
+  
+  .table-wrapper .service-table .col-2 {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .opened-ticket-list .product-upd .table-content-top .col-md-1 {
+    width: 33.33333%;
+  }
+  
+  .opened-ticket-list .product-upd .table-content-top .col-md-9,
+  .opened-ticket.opened-ticket-list .ticket-update-product-edit .table-content-top .col-md-6 {
+    width: 100%;
+  }
+  
+  .table-content .table-content-top .timepicker {
+    right: auto;
+  }
+  
+  .table-content .table-content-top.without-duration .timepicker {
+    right: 0;
+  }
+  
+  .table-content.service-table .col-3 {
+    padding-left: 295px;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-title {
+    width: 40%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker {
+    width: 27%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
+    width: 33%;
+  }
+  
+  .table-wrapper .table-content .form-group input {
+    font-size: 12px;
+  }
+  
+  .tax-recurring input {
+    font-size: 12px;
+  }
+  
+  .table-wrapper .table-content .discount-ticket {
+    white-space: nowrap;
+  }
+  
+  .table-wrapper .service-table .col-3 {
+    width: calc(100% - 464px);
+  }
+  
+  .inventory-details .table-wrapper .service-table .col-3 {
+    width: calc(100% - 230px);
+  }
+  
+  .opened-ticket-list .table-wrapper .service-table .col-3 {
+    width: 75%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-3.service-datetimepicker,
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker,
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-1.timer-quantity {
+    width: 33.33333%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {
+    width: 66.66666%;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-1,
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-2 {
+    width: 33.33333333%;
+    text-align: left !important;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-6 {
+    width: 66.66666667%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .inventory-details .table-wrapper .service-table .col-3 {
+    width: calc(100% - 210px);
+  }
+  
+  .table-content.service-table .col-3 {
+    padding-left: 278px;
+  }
+  
+  .table-wrapper .table-content .col-5 {
+    width: 14%;
+  }
+  
+  .table-wrapper .table-content .col-2.col-2-has-serial-number {
+    width: 71%;
+  }
+}

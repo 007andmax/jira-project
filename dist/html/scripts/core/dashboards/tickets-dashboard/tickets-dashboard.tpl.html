@@ -1,0 +1,100 @@
+<div class="tickets-dashboard">
+  <div class="container-fluid">
+    <section class="dashboard-main">
+      <div class="row">
+        <div class="col-lg-9 col-xs-9">
+          <div class="stats">
+            <div class="stats__main front">
+              <div class="chart-header">
+                <div class="chart-header-name">
+                  <p class="header-title">
+                    Created tickets
+                  </p>
+                </div>
+
+                <div class="chart-header-controls">
+                  <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+                  <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+                  <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+                </div>
+
+              </div>
+              <div chart-data-restriction fetch-func="getTicketsDashboard" margin="120" divider="50" param0="frequency"
+                   handle-data="handleDashboardData" style="height: 85%">
+
+                <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 80}"
+                     style="height: 100%" ng-if="!reloading">
+                  <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
+                          ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+                  <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
+                  <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart" to-fixed="0"></d3bars>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-3">
+          <div class="stats third-part" style="cursor: default;">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  Total tickets
+                </p>
+                <div class="stats__main--count font-blue-steel">
+                  <p>{{ dashboard.totalTickets || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-blue-steel">
+                <img src="images/new-icons/newspaper-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="stats third-part" style="cursor: default;">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  Open tickets
+                </p>
+                <div class="stats__main--count font-green">
+                  <p>{{ dashboard.openTickets || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-green">
+                <img src="images/new-icons/newspaper-white.png" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="stats third-part" style="cursor: default;">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  Tickets on hold
+                </p>
+                <div class="stats__main--count font-red">
+                  <p>{{ dashboard.onHoldTickets || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-red">
+                <img src="images/new-icons/warning-circle-white.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

@@ -1,0 +1,32 @@
+<div class="deposit-split">
+  <div class="product-list-ticket product-list-ticket-deposit clearfix">
+    <ul>
+      <li class="top-product-list-ticket top-product-list-ticket-deposit clearfix fixed-block-top"
+          fixed-block-top offset-top="160" style="background-color: white">
+        <div class="col-md-1"><strong>Date</strong></div>
+        <div class="col-md-1"><strong>Number</strong></div>
+        <div class="col-md-3"><strong>Note</strong></div>
+        <div class="col-md-2"><strong>Type</strong></div>
+        <div class="col-md-2" style="text-align: right"><strong>Total Amount</strong></div>
+      </li>
+      <div  style="margin-top: 50px">
+      <li class="content-product-list-ticket clearfix" style="position: relative;" ng-repeat="slip in depositSlips"
+          ng-init="payments = slip.payments" event-toggle-slider="{{ 'toggleDepositSlip-' + slip.id }}">
+        <div class="click-content-deposit-slips">
+          <div ng-click="toggleDeposit(slip.id)" class="clickable-layer"></div>
+          <div class="col-md-1">{{ parseDate(slip.createdAt) | date: 'dd.MM.yy' }}</div>
+          <div class="col-md-1">{{ slip.number }}</div>
+          <div class="col-md-3">{{slip.note}}</div>
+          <div class="col-md-2"><span class="payment-type">{{parseType(slip.type)}}</span></div>
+          <div class="col-md-2" style="text-align: right">{{slip.totalSum | currency: '$': 2 }}</div>
+          <a class="deposit-printer" href="/payments/deposits/print?depositId={{slip.id}}" target="_blank"
+             uib-tooltip="print" tooltip-placement="top"></a>
+        </div>
+        <div class="sub-wrapper" ets-slider>
+          <div ng-include="'/html/scripts/core/billable/payments/payments-list-for-slip.tpl.html'"></div>
+        </div>
+      </li>
+      </div>
+    </ul>
+  </div>
+</div>

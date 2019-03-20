@@ -1,0 +1,127 @@
+<div class="inv-modal " ng-if="locksInitialized" invoice-modal-window>
+
+  <!--<div class="topbar">-->
+
+  <!--<div class="dropdown pull-left company-dropdown" ng-if="!invoicePreview && !receivablePreview">-->
+
+  <!--<h4 class="inv-company-name" data-toggle="dropdown">-->
+  <!--<span>{{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.companyInfo.name }}</span>-->
+  <!--<span>Invoice No. {{ invoiceNumber }} </span>-->
+  <!--<i class="icn icn-caret-gray"></i>-->
+  <!--</h4>-->
+
+  <!--<div class="dropdown-menu custom-scroll">-->
+  <!--<div class="nano"-->
+  <!--ng-style="{'height': invoiceLocks.length > 5 ? '170px' : ((+invoiceLocks.length * 30) + 20) + 'px'}">-->
+  <!--<ul class="nano-content">-->
+
+  <!--<li role="presentation" ng-repeat="invoiceLock in invoiceLocks">-->
+  <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)" class="active"-->
+  <!--ng-click="setShowInvoiceLockIndex($index)">-->
+  <!--<span class="title active">{{ invoiceLock.invoiceDataDto.company.companyInfo.name }}</span>-->
+  <!--<span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:'$' :2 }}</span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--</ul>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--</div>-->
+
+  <!--<div class="zoom-slider pull-left" style="margin-top: 0;">-->
+
+  <!--<a href="javascript:void(0)" class="pull-left icn icn-zoom-minus-invoice"></a>-->
+
+  <!--<div class="range-wrapper pull-left">-->
+  <!--<input type="range" min="1" max="3" step="0.1" ng-model="zoomRange" ng-change="changeZoom()">-->
+  <!--</div>-->
+
+  <!--<a href="javascript:void(0)" class="pull-right icn icn-zoom-plus-invoice"></a>-->
+
+  <!--</div>-->
+
+
+  <!--</div>-->
+
+
+  <!--<div class="nav-arrows" ng-show="invoiceLocks.length > 1">-->
+  <!--<div class="icn next-arrow"-->
+  <!--custom-disabled="{{ showInvoiceLockIndex >= (invoiceLocks.length - 1)}}"-->
+  <!--ng-click="(showInvoiceLockIndex >= (invoiceLocks.length - 1)) || setShowInvoiceLockIndex(showInvoiceLockIndex + 1)"></div>-->
+  <!--<div class="icn previous-arrow"-->
+  <!--custom-disabled="{{ showInvoiceLockIndex <= 0 }}"-->
+  <!--ng-click="(showInvoiceLockIndex <= 0) || setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>-->
+  <!--</div>-->
+  <div class="sticky-invoice-header" ng-style="{'opacity': showTimer || receivablePreview  ? 1 : 0}" style="height: 50px" ng-show="showHeader">
+    <div class="expires-in" ng-show="showTimer && !invoiceCreated">
+      <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
+      {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
+    </div>
+
+    <div class="expires-in" ng-show="shoeInvoiceCreatedMessage">
+      <div style="margin-top: 10px;">{{notificationMessage}}</div>
+    </div>
+
+    <div class="invoice-actions invoice-btns"  style="position: fixed;" ng-style="invoiceCreated && {'background-color': 'white'}">
+      <button ng-if="!invoicePreview && !invoiceCreated"
+              ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
+              ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+              tooltip-append-to-body="true"
+              tooltip-placement="bottom"
+              uib-tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
+        <i class="invoice-download"></i>
+      </button>
+
+      <button ng-if="(!receivablePreview || receivablePreview ) && !invoiceCreated"
+              ng-click="receivablePreview ? sentInvoiceToMail() : createInvoice(invoiceLocks[showInvoiceLockIndex])"
+              ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+              tooltip-placement="bottom"
+              tooltip-append-to-body="true" uib-tooltip="{{ receivablePreview ? 'Sent Invoice' : 'Create and Send Invoice'}}">
+        <i class="invoice-send"></i>
+      </button>
+
+      <button ng-if="!invoicePreview && !invoiceCreated"
+              ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
+              ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+              tooltip-placement="bottom"
+              tooltip-append-to-body="true"
+              uib-tooltip="{{ receivablePreview ? 'Print Invoice' : 'Create and Print Invoice' }}">
+        <i class="devices-printer"></i>
+      </button>
+
+      <a href="javascript:void(0)" class="close-icon" tooltip-placement="bottom" uib-tooltip="Close" ng-click="close()">
+        <i class="icn-sm icn-remove-old"></i>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="paging">
+    <div class="tooltip body-tooltip top in" style="display: block;">
+      <div class="tooltip-inner"></div>
+    </div>
+  </div>
+
+  <div class="qt-inv-container"
+       ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto || currentInvoice" invoice-content></div>
+
+</div>
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
