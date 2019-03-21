@@ -1484,6 +1484,7 @@
             '|| (ticketUpdate.services && ticketUpdate.services.length > 1)';
 
           UserConfirmationsService.preventLocationChange($scope, condition);
+          console.log(1001000100010001001);
 
         }]);
   }()

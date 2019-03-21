@@ -41,9 +41,6 @@
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$locationProvider',
     function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider, $locationProvider) {
 
-      //uncomment this line for increasing angularjs performance (when debugging will not need)
-      //$compileProvider.debugInfoEnabled(false);
-
       $animateProvider.classNameFilter(/angular-animate/);
 
       localStorageServiceProvider
@@ -59,15 +56,15 @@
           templateUrl: '/ng1/scripts/core/tickets/tickets.tpl.html',
           controller: 'quicktech.core.tickets.ticketsCtrl'
         }))
-        .state('tickets.details', waitForServices({
-          url: '/:ticketId',
-          params: {
-            ticketId: '',
-            remoteParams: null
-          },
-          templateUrl: '/ng1/scripts/core/tickets/ticket-details.tpl.html',
-          controller: 'quicktech.core.tickets.ticketDetailsCtrl'
-        }))
+        // .state('tickets.details', waitForServices({
+        //   url: '/:ticketId',
+        //   params: {
+        //     ticketId: '',
+        //     remoteParams: null
+        //   },
+        //   templateUrl: '/ng1/scripts/core/tickets/ticket-details.tpl.html',
+        //   controller: 'quicktech.core.tickets.ticketDetailsCtrl'
+        // }))
         .state('drafts', waitForServices({
           url: '/drafts',
           templateUrl: '/ng1/scripts/core/tickets/drafts/drafts.tpl.html',
@@ -774,11 +771,11 @@
         $rootScope.displayLimit = 20;
 
         $rootScope.discountTypes = {
-          FIXED: "$",
-          PERCENT: "%"
+          FIXED: '$',
+          PERCENT: '%'
         };
 
-        // $templateRequest('/src/ng1/scripts/common/assets/templates/user-confirmations.tpl.html');
+        $templateRequest('commonHtml/assets/templates/user-confirmations.tpl.html');
 
       }]);
 
