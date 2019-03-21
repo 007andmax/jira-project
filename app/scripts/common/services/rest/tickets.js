@@ -263,9 +263,8 @@
 
       function fetchTickets(listType, userId, companyId, callback) {
 
-          var query = queries[listType.toUpperCase()]
+          var query = queries[listType.toUpperCase()];
 
-          // console.log(ticketsSharedState.filter, 'FILTER')
           if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
             var groupedQuery = {
               excludeTrashSpam: true,
@@ -282,16 +281,6 @@
                 values: [ticketsSharedState.filter.companyId]
               };
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(coompanyIdQuery);
-              // groupedQuery.groupFieldFilters[0].fieldFilterDtos.push({
-              //   // path: 'company.id',
-              //   // operator: 'EQ',
-              //   // values: [companyId]
-              //   "path": "tags.id",
-              //   "operator": "IN",
-              //   "values": [
-              //     "9cb72af9-4629-4fdd-a4e8-b4d3d6012509"
-              //   ]
-              // })
             }
 
             if (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length > 0) {
@@ -299,32 +288,7 @@
                 "path": "tags.id",
                 "operator": "IN",
                 "values": ticketsSharedState.filter.tags.map(function(el) { return el.id })
-              }
-
-              // var queriesList = ticketsSharedState.filter.tags.map(function(el) {
-              //   return {
-              //     "path": "tags.id",
-              //     "operator": "IN",
-              //     "values": [el.id]
-              //   }
-              // });
-              //
-              //
-              // console.log(queries, "QUERIS")
-              //
-              // queriesList.forEach(function(query) {
-              //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(query);
-              // })
-
-              // if (!queriesList || !queriesList.length) {
-              //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push({
-              //     "path": "tags.id",
-              //     "operator": "IN",
-              //     "values": []
-              //   })
-              // }
-
-
+              };
 
               groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(tagsQuery)
             }
@@ -611,7 +575,7 @@
 
       function getAllCounts(callback) {
         allCountsCallback = callback;
-        console.log('12351235');
+        console.log(queries, '12351235');
 
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
           storage.ticketsQuantityMap = resp.data;

@@ -275,7 +275,7 @@
           } else {
             $rootScope.filteredCompanies = false;
           }
-        }, true)
+        }, true);
 
         TicketsService.getAllCounts(function (resp) {
           $scope.ticketsCounter = resp;

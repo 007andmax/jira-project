@@ -281,6 +281,8 @@
 
         TicketsService.getAllCounts(function (resp) {
           console.log('123512350000');
+          console.log(resp);
+
           $scope.ticketsCounter = resp;
         });
 
@@ -292,7 +294,7 @@
               $scope.ticketsCounter = resp;
             });
           }
-        })
+        });
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
