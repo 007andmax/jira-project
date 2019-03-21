@@ -1404,7 +1404,7 @@
 
         $scope.openCreateCustomerReportModal = function () {
           $uibModal.open({
-            templateUrl: '/html/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
+            templateUrl: '/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
             controller: 'quicktech.core.leftPanel.createReportCtrl',
             windowClass: 'modal-customer-report',
             animation: true

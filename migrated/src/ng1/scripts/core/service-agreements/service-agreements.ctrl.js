@@ -136,16 +136,16 @@
               var template;
               switch (contractType) {
                 case('CREATE_NEW'):
-                  template = '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+                  template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
                   break;
                 case('HOURLY'):
-                  template = '/html/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+                  template = '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
                   break;
                 case('BLOCK_TIME'):
-                  template = '/html/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
+                  template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                   break;
                 case('SERVICE_CONTRACT'):
-                  template = '/html/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                  template = '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
                   break;
                 default:
                   console.log('no contract type selected');

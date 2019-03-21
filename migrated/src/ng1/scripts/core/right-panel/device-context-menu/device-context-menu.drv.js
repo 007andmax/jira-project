@@ -31,7 +31,7 @@
             };
 
 
-            $templateRequest('/html/scripts/core/right-panel/device-context-menu/device-context-menu.tpl.html').then(function (html) {
+            $templateRequest('/ng1/scripts/core/right-panel/device-context-menu/device-context-menu.tpl.html').then(function (html) {
               var template = angular.element(html);
 
               element.popover({

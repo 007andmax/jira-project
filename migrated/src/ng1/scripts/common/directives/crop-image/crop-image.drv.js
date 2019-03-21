@@ -111,7 +111,7 @@
                 animation: true,
                 backdrop: 'static',
                 windowClass: 'modal-customize-avatar ' + (isTechLogo ? 'tech-logo' : ''),
-                templateUrl: '/html/scripts/common/directives/crop-image/cropper-modal.tpl.html',
+                templateUrl: '/ng1/scripts/common/directives/crop-image/cropper-modal.tpl.html',
                 controller: ['$scope', '$timeout', '$uibModalInstance', 'Cropper', 'source', 'isTechLogo', 'saveImage', cropperCtrl],
                 resolve: {
                   source: image && function () {

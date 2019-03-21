@@ -123,8 +123,8 @@
 
         $scope.openEditModal = function (type, company) {
           var templates = {
-            contacts: '/html/scripts/core/billable/edit-contact-details-modal.tpl.html',
-            customer: '/html/scripts/core/billable/edit-customer-modal.tpl.html'
+            contacts: '/ng1/scripts/core/billable/edit-contact-details-modal.tpl.html',
+            customer: '/ng1/scripts/core/billable/edit-customer-modal.tpl.html'
           }
 
           if (type === 'customer') {

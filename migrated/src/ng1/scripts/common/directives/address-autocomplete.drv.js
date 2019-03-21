@@ -21,7 +21,7 @@
 
           },
           templateUrl: function (elem, attr) {
-            return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';
+            return '/ng1/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';
           },
           link: function ($scope, element, attrs, ngModelCtrl) {
 

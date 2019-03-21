@@ -7,7 +7,7 @@
       return {
         restrict: 'A',
         require: 'ngModel',
-        templateUrl: '/html/scripts/common/directives/phone-numbers/phone-numbers.tpl.html',
+        templateUrl: '/ng1/scripts/common/directives/phone-numbers/phone-numbers.tpl.html',
         scope: {
           phoneNumbers: '=ngModel',
           isFirstRequired: '=isFirstRequired',

@@ -5,7 +5,7 @@
   angular.module("quicktech.common.directives").directive("timeZoneAutocomplete", ['$timeout', function ($timeout) {
     return {
       restrict: 'E',
-      templateUrl: '/html/scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.tpl.html',
+      templateUrl: '/ng1/scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.tpl.html',
       scope: {
         timeZones: '=',
         address: '=',

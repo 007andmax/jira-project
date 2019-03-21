@@ -9,7 +9,7 @@
           keyboard: false,
           size: 'custom-size-confirmation-pop',
           windowClass: 'modal-remote',
-          templateUrl: '/html/scripts/common/services/local/remote-access-timer.tpl.html',
+          templateUrl: '/ng1/scripts/common/services/local/remote-access-timer.tpl.html',
           controller: ['$scope', '$uibModalInstance', '$rootScope', timerController]
         }, counter, message;
         function connectRemoteAccess(sessionId, conectionType, isOneTime) {

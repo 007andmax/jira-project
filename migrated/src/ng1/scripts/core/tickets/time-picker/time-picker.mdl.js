@@ -34,7 +34,7 @@
     return {
       restrict: "E",
       replace: true,
-      templateUrl: '/html/scripts/core/tickets/time-picker/time-picker.html',
+      templateUrl: '/ng1/scripts/core/tickets/time-picker/time-picker.html',
       require: "?ngModel",
       scope: {
         done: "&?"

@@ -12,7 +12,7 @@
             backdrop: 'static',
             keyboard: false,
             windowClass: 'welcome-wizard',
-            templateUrl: '/html/scripts/common/directives/welcome-wizard/welcome-wizard.tpl.html',
+            templateUrl: '/ng1/scripts/common/directives/welcome-wizard/welcome-wizard.tpl.html',
             controller: ['$scope', '$state', '$uibModalInstance', 'UsersService', '$rootScope', modalController]
           };
 

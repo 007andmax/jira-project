@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").component("reportMenu", {
-    templateUrl: '/html/scripts/common/directives/report-menu/report-menu.tpl.html',
+    templateUrl: '/ng1/scripts/common/directives/report-menu/report-menu.tpl.html',
     bindings: {
       className: '@',
       isDeviceHidden: '@?',

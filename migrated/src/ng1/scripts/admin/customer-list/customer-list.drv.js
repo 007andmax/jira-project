@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('admin.directives', []).component("customerList", {
-    templateUrl: '/html/scripts/admin/customer-list/customer-list.html',
+    templateUrl: '/ng1/scripts/admin/customer-list/customer-list.html',
     bindings: {},
     controller: customerListCtrl
   });

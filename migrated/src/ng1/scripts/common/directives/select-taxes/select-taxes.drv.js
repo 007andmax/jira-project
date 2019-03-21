@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").component('selectTaxes', {
-    templateUrl: '/html/scripts/common/directives/select-taxes/select-taxes.tpl.html',
+    templateUrl: '/ng1/scripts/common/directives/select-taxes/select-taxes.tpl.html',
     bindings: {
       taxes: '=',
       entity: '=',
@@ -48,7 +48,7 @@
 
     $scope.addNewTax = function() {
       var modalInstance = $uibModal.open({
-        templateUrl: '/html/scripts/common/directives/select-taxes/add-new-tax.tpl.html',
+        templateUrl: '/ng1/scripts/common/directives/select-taxes/add-new-tax.tpl.html',
         animation: true,
         backdrop: false,
         size: 'md',

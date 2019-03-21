@@ -6,7 +6,7 @@
     return {
       restrict: 'A',
       require: 'ngModel',
-      templateUrl: '/html/scripts/common/directives/zoom-slider/zoom-slider.tpl.html',
+      templateUrl: '/ng1/scripts/common/directives/zoom-slider/zoom-slider.tpl.html',
       scope: {
         scale: '=ngModel'
       },

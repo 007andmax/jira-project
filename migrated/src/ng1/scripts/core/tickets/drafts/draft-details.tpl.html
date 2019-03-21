@@ -41,7 +41,7 @@
           <li ng-repeat="attachment in draftDetails.attachments"
               ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
               class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
-              url="/html/scripts/core/tickets/image-preview.tpl.html"
+              url="/ng1/scripts/core/tickets/image-preview.tpl.html"
               data="attachment.file" func="downloadAttachment"
               first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
             <div class="file-icon-name">

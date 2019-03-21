@@ -375,12 +375,12 @@
               <li
                 ng-repeat="productExpense in serviceContract.productExpenses track by (product.item ? product.item.versionedId.id + $index : $index)">
                 <div ng-controller="quicktech.core.serviceAgreements.productExpenseListCtrl"
-                     ng-include="'/html/scripts/core/service-agreements/modal/service-contract-modal/product-expense-list.tpl.html'">
+                     ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-modal/product-expense-list.tpl.html'">
                 </div>
               </li>
               <li>
                 <div ng-controller="quicktech.core.serviceAgreements.newProductExpenseCtrl"
-                     ng-include="'/html/scripts/core/service-agreements/modal/service-contract-modal/new-product-expense.tpl.html'">
+                     ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-modal/new-product-expense.tpl.html'">
                 </div>
               </li>
             </ul>
@@ -878,5 +878,5 @@
 </div>
 
 <div class="service-agreement-modal" ng-show="!editMode">
-  <div ng-include="'/html/scripts/core/service-agreements/modal/service-contract-preview-modal.tpl.html'"></div>
+  <div ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-preview-modal.tpl.html'"></div>
 </div>

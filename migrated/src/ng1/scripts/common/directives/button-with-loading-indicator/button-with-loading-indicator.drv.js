@@ -9,7 +9,7 @@
   function buttonWithLoadingIndicator($timeout) {
     return {
       restrict: 'E',
-      templateUrl: '/html/scripts/common/directives/button-with-loading-indicator/button-with-loading-indicator.tpl.html',
+      templateUrl: '/ng1/scripts/common/directives/button-with-loading-indicator/button-with-loading-indicator.tpl.html',
       replace: true,
       scope: {
         loading: '=',

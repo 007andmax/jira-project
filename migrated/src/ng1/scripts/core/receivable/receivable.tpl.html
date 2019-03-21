@@ -56,7 +56,7 @@
             ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
             tooltip-append-to-body="true"
             class="save-invoice-button btn btn-success"
-            modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+            modal-window-button="/ng1/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
             mw-controller="quicktech.core.receivable.receivePaymentCtrl"
             modal-window-class="modal-receive-payment"
             tooltip-placement="bottom">
@@ -173,7 +173,7 @@
     </div>
 
     <div ng-hide="loadingInProgress"
-         ng-include="'/html/scripts/core/receivable/invoices-'+ mode +'.tpl.html'"
+         ng-include="'/ng1/scripts/core/receivable/invoices-'+ mode +'.tpl.html'"
          ng-style="{'margin-top': isInvoiceShown ? '0' : mode === 'list' ? '87px' : '50px'}"></div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 

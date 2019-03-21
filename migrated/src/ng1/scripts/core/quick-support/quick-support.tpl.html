@@ -9,7 +9,7 @@
     <li class="quick-support-session ng-hide"
         ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true track by remoteSession.id"
         ng-show="(showAllSession || remoteSession.performer.id === currentUser.id) && remoteSession.id !== lastDeletedId">
-      <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
+      <div ng-include="'/ng1/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
     </li>
   </ul>
 </div>

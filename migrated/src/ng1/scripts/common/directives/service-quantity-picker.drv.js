@@ -203,11 +203,11 @@
             scope.isWatchDisable = false;
             var url = '';
             if (scope.type === 'minutes') {
-              url = '/html/scripts/common/templates/service-quantity-picker-minutes.tpl.html';
+              url = '/ng1/scripts/common/templates/service-quantity-picker-minutes.tpl.html';
             } else if (scope.type === 'hours') {
-              url = '/html/scripts/common/templates/service-quantity-picker-hour.tpl.html';
+              url = '/ng1/scripts/common/templates/service-quantity-picker-hour.tpl.html';
             } else {
-              url = '/html/scripts/common/templates/service-quantity-picker.tpl.html';
+              url = '/ng1/scripts/common/templates/service-quantity-picker.tpl.html';
             }
             $templateRequest(url).then(function (html) {
               quantityDropdown = angular.element(html);

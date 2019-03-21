@@ -91,7 +91,7 @@
 
               // console.log(scope.currentInvoice, 'currentINVOICE')
 
-              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
+              $http.get('/ng1/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
                 .then(function (response) {
 
                   invoiceTemplate = angular.copy(response);

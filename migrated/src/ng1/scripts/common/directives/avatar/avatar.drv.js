@@ -4,7 +4,7 @@
   angular.module("quicktech.common.directives").directive('editAvatar', ['$rootScope', function ($rootScope) {
     return {
       restrict: 'A',
-      templateUrl: '/html/scripts/common/directives/avatar/avatar.tpl.html',
+      templateUrl: '/ng1/scripts/common/directives/avatar/avatar.tpl.html',
       scope: {
         model: '=',
         modelName: '@',

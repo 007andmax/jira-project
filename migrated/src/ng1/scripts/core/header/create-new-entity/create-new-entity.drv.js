@@ -39,7 +39,7 @@
 
             if (!angular.element(document).find('.create-popup.modal-create-ticket').length) {
               var modalInstance = $uibModal.open({
-                templateUrl: '/html/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
+                templateUrl: '/ng1/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
                 controller: 'createNewEntityCtrl',
                 windowClass: 'create-popup modal-create-ticket',
                 backdrop: true,

@@ -56,27 +56,7 @@
                 </span>
             </div>
 
-            <div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
-            <!--<div class="ticket-add-content-actions pull-left">-->
-
-            <!--<div class="ticket-add-content-actions-attachment pull-left"-->
-            <!--ticket-attachment-files attachment-func="addAttachmentFiles"-->
-            <!--ng-model="ticketUpdate.ticketAttachments">-->
-
-            <!--<a href="javascript:void(0)" class="hit-area ha-16-26 has-tooltip"-->
-            <!--uib-tooltip="Attach files" tooltip-placement="top">-->
-            <!--<i class="icon-sm attachment"></i>-->
-            <!--</a>-->
-
-            <!--<input type="file" style="display:none" multiple="" />-->
-            <!--</div>-->
-
-            <!--<div class="line-sep pull-left"></div>-->
-
-            <!--<span class="pull-right" ng-show="errorAttachSize"-->
-            <!--style="color: rgb(229, 57, 53);">{{ errorAttachSize }}</span>-->
-
-            <!--</div>-->
+            <div ng-include="'/ng1/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
           </div>
 
           <div ng-if="currentOpenTab === 'NOTE'" ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
@@ -88,12 +68,6 @@
                   <span class="file-name ellipsis" style="max-width: 64%;font-weight: 900;">{{ file.name }}</span>
                   <span class="file-size">{{ file.size | fileSizeFilter }}</span>
                 </div>
-
-                <!--<span-->
-                <!--ng-show="fileInfo[file.name].error"-->
-                <!--style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">-->
-                <!--{{ fileInfo[file.name].message }}-->
-                <!--</span>-->
 
                 <a href="" class="hit-area" data-toggle="tooltip" data-placement="top" title="Re-Upload"
                    ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
@@ -137,7 +111,7 @@
                    ng-class="{'has-error': isShowingErrors(editTicketForm, 'ticketAssignTo')}"
                    uib-dropdown auto-close="outsideClick">
                 <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-                  <img src="images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
+                  <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
                        uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
                 </div>
                 <div uib-dropdown-menu
@@ -166,7 +140,7 @@
                       <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
                     </div>
                     <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                      <img src="images/input-icons/checkbox-checked.png" />
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
                     </div>
                   </div>
                 </div>
@@ -184,7 +158,7 @@
                     </div>
 
                     <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                      <img src="images/input-icons/checkbox-checked.png" />
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
                     </div>
                   </div>
                 </div>
@@ -223,7 +197,7 @@
 
                 <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl"
                      ng-form="addProductForm"
-                     ng-include="'/html/scripts/core/tickets/products/ticket-add-update-product.tpl.html'"></div>
+                     ng-include="'/ng1/scripts/core/tickets/products/ticket-add-update-product.tpl.html'"></div>
               </div>
 
               <!--<div class="ticket-add-content-actions pull-left">-->
@@ -242,7 +216,7 @@
                      ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
                      uib-dropdown auto-close="outsideClick">
                   <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-                    <img src="images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
+                    <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
                          uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
                   </div>
                   <div uib-dropdown-menu
@@ -271,7 +245,7 @@
                         <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
                       </div>
                       <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                        <img src="images/input-icons/checkbox-checked.png" />
+                        <img src="ng1/images/input-icons/checkbox-checked.png" />
                       </div>
                     </div>
                   </div>
@@ -289,7 +263,7 @@
                       </div>
 
                       <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                        <img src="images/input-icons/checkbox-checked.png" />
+                        <img src="ng1/images/input-icons/checkbox-checked.png" />
                       </div>
                     </div>
                   </div>
@@ -345,7 +319,7 @@
             <div>
               <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
                 <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl"
-                     ng-include="'/html/scripts/core/tickets/services/ticket-add-update-service.tpl.html'"></div>
+                     ng-include="'/ng1/scripts/core/tickets/services/ticket-add-update-service.tpl.html'"></div>
               </div>
             </div>
           </div>
@@ -356,7 +330,7 @@
                    ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
                    uib-dropdown auto-close="outsideClick">
                 <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-                  <img src="images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
+                  <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
                        uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
                 </div>
                 <div uib-dropdown-menu
@@ -385,7 +359,7 @@
                       <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
                     </div>
                     <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                      <img src="images/input-icons/checkbox-checked.png" />
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
                     </div>
                   </div>
                 </div>
@@ -403,7 +377,7 @@
                     </div>
 
                     <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                      <img src="images/input-icons/checkbox-checked.png" />
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
                     </div>
                   </div>
                 </div>
@@ -483,7 +457,7 @@
               <input type="hidden" name="product" ng-model="productExpense.item.description" ng-required="true">
 
               <div class="nano dropdown-menu custom-product-list" pl-conteiner
-                   ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+                   ng-include="'/ng1/scripts/common/templates/products-list.tpl.html'"></div>
 
             </div>
           </div>
@@ -684,7 +658,7 @@
           <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(editTicketForm, 'ticketAssignTo')}"
                uib-dropdown auto-close="outsideClick">
             <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-              <img src="images/new-icons/add-user.png" class="pointer" style="margin: 14px 20px 0 0;" />
+              <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 14px 20px 0 0;" />
             </div>
             <div uib-dropdown-menu
                  class="dropdown-assign-ticket dropdown-menu without-max-height"
@@ -712,7 +686,7 @@
                   <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
                 </div>
                 <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                  <img src="images/input-icons/checkbox-checked.png" />
+                  <img src="ng1/images/input-icons/checkbox-checked.png" />
                 </div>
               </div>
             </div>
@@ -730,7 +704,7 @@
                 </div>
 
                 <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                  <img src="images/input-icons/checkbox-checked.png" />
+                  <img src="ng1/images/input-icons/checkbox-checked.png" />
                 </div>
               </div>
             </div>

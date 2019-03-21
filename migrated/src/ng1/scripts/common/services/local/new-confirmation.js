@@ -12,7 +12,7 @@
           keyboard: false,
           size: 'custom-size-confirmation-pop-up',
           windowClass: 'modal-spam',
-          templateUrl: '/html/scripts/core/settings/commissions/commission-confirmation.html'
+          templateUrl: '/ng1/scripts/core/settings/commissions/commission-confirmation.html'
         };
 
         this.show = function (message, button, approveFn, rejectFn, closeFn) {

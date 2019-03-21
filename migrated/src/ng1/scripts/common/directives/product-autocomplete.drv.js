@@ -7,7 +7,7 @@
 	  restrict: 'A',
 	  link: function ($scope, element, attrs) {
 	  	$scope.$on('$includeContentLoaded', function (event, tempalteUrl) {
-	  	  if( tempalteUrl == '/html/scripts/common/templates/choose-product-dropdown.tpl.html' ) {
+	  	  if( tempalteUrl == '/ng1/scripts/common/templates/choose-product-dropdown.tpl.html' ) {
 
 					var productAutocomplete = new $.productAutocomplete();
 					productAutocomplete.categories = [];

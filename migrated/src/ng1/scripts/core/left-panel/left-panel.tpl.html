@@ -297,7 +297,7 @@
         <div ng-show="qSHistoryExpanded" class="category-expanded angular-animate">
           <div class="category-expanded-paragraph sked"
                ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
-               qt-custom-popover-template="/html/scripts/core/left-panel/quick-support-history-info.tpl.html"
+               qt-custom-popover-template="/ng1/scripts/core/left-panel/quick-support-history-info.tpl.html"
                qt-popover-position="right" qt-popover-append-to-body z-index="9999">
             <div qt-popover-trigger="click">
               <span>{{ qs.userName }}</span>

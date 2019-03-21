@@ -29,7 +29,7 @@
 
 
             var modalInstance = $uibModal.open({
-              templateUrl: '/html/scripts/core/password-manager/modal/password-modal.tpl.html',
+              templateUrl: '/ng1/scripts/core/password-manager/modal/password-modal.tpl.html',
               controller: 'quicktech.core.passwordManager.passwordModalCtrl',
               windowClass: 'modal-password-manager',
               backdrop: 'static',
