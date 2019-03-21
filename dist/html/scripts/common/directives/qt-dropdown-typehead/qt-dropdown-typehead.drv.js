@@ -2,7 +2,7 @@
 
 (function(){
   angular.module("quicktech.common.directives").component('qtDropdownTypehead',{
-    templateUrl: '/html/scripts/common/directives/qt-dropdown-typehead/qt-dropdown-typehead.tpl.html',
+    templateUrl: '/ng1/scripts/common/directives/qt-dropdown-typehead/qt-dropdown-typehead.tpl.html',
     bindings: {
       listForDropdown: '<',
       selectedItem: '=',

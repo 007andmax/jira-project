@@ -277,9 +277,10 @@
           } else {
             $rootScope.filteredCompanies = false;
           }
-        }, true)
+        }, true);
 
         TicketsService.getAllCounts(function (resp) {
+          console.log('123512350000');
           $scope.ticketsCounter = resp;
         });
 

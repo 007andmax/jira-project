@@ -6,7 +6,7 @@
       function ($document, TagsService, CompaniesService, $rootScope) {
         return {
           restrict: 'E',
-          templateUrl: '/html/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
+          templateUrl: '/ng1/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
           scope: {
             ticketId: '@',
             readonlyTags: '@?',
@@ -21,11 +21,7 @@
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
             $scope.tagColors = TagsService.getColors();
-
             $scope.allTags = [];
-
-
-
             if (!$scope.readonlyTags) {
               var input = $element.find('input');
               input.on('keydown', function (e) {
@@ -37,11 +33,6 @@
                 }
                 $scope.$apply();
               });
-
-
-
-
-
 
               if ($scope.isCompany) {
                 TagsService.getAllCompanies($scope, function(resp) {
@@ -77,13 +68,6 @@
                   }
                 });
 
-                // var tags = ['first', 'second', 'third', 'fourth'];
-
-                // for (var i = 0; i < tags.length; i++) {
-                //   TagsService.saveForCompany({ word: tags[i] }, function(res) {
-                //     console.log(res);
-                //   })
-                // }
               } else {
                 TagsService.getAll($scope, function (resp) {
                   $scope.result = resp;
@@ -104,35 +88,16 @@
                 })
               }
 
-
-
-
-
-
-
-
-
               var menu = $element.find('.dropdown-menu');
-
-              // menu.on('scroll', scrollHandler)
 
 
               function scrollHandler(e) {
-                // if (!$scope.loadingOrRendering) {
                   var scrollTop = $(e.target).scrollTop(),
                     isNeedToLoadMoreTickets = scrollTop + menu[0].clientHeight >= menu[0].scrollHeight - 100;
 
                   if (isNeedToLoadMoreTickets) {
                     $rootScope.shouldDownloadNewTags = true;
                   }
-
-                  // console.log(scrollTop, isNeedToLoadMoreTickets, menu[0], menu[0].scrollHeight, 'truee')
-
-                  // if (isNeedToLoadMoreTickets && (!scope.tickets || scope.tickets.length < scope.globalSearch.count)) {
-                  //   $scope.loadingOrRendering = true;
-                  //   TicketsService.loadMore(lastListType);
-                  // }
-                // }
               }
 
               if (!$scope.isCompany) {
@@ -292,37 +257,9 @@
               }
               TagsService.setTagsInCompany($scope.ticketTags, $scope.companyId, function() {
                 $scope.$broadcast();
-              })
+              });
             }
-
-            // function searchTag(query, forceLoad, offset) {
-            //   // console.log(query, "QUEYR")
-            //   if (forceLoad || (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === '')))) {
-            //     areNewTagsDownloading = true;
-            //
-            //     if (offset) {
-            //       query += '&offset=' + offset;
-            //     }
-            //
-            //     TagsService.search(query, function (resp) {
-            //
-            //       if (offset) {
-            //         resp.forEach(function(el) {
-            //           $scope.result.push(el);
-            //         });
-            //       } else {
-            //         $scope.result = resp;
-            //       }
-            //
-            //       $scope.lastResult = resp;
-            //       lastQuery = query;
-            //       areNewTagsDownloading = false;
-            //
-            //       console.log($scope.result, 'result')
-            //     });
-            //   }
-            // }
           }
-        }
+        };
       }]);
 })();

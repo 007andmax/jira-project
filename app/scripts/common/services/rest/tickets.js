@@ -611,6 +611,7 @@
 
       function getAllCounts(callback) {
         allCountsCallback = callback;
+        console.log('12351235');
 
         $http.post('/v2/tickets/counts', queries).then(function (resp) {
           storage.ticketsQuantityMap = resp.data;
@@ -1339,10 +1340,10 @@
         getCompanyTicketCount: getCompanyTicketCount,
         deleteTicketExpense: deleteTicketExpense,
         updateNote: updateNote,
-      }
+      }А
 
     }
 
   ]);
-
+А
 })(window, jQuery);

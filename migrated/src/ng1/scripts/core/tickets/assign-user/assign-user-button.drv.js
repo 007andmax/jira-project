@@ -6,7 +6,7 @@
     function ($rootScope) {
       return {
         restrict: 'A',
-        templateUrl: '/html/scripts/core/tickets/assign-user/assign-user.tpl.html',
+        templateUrl: '/ng1/scripts/core/tickets/assign-user/assign-user.tpl.html',
         controller: 'quicktech.core.tickets.assignUserCtrl',
         scope: {
           ticketId: "=aubTicketId",

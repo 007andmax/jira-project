@@ -6,7 +6,7 @@
       function ($document, TagsService, CompaniesService, $rootScope) {
         return {
           restrict: 'E',
-          templateUrl: '/html/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
+          templateUrl: '/ng1/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
           scope: {
             ticketId: '@',
             readonlyTags: '@?',

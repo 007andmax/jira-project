@@ -11,14 +11,14 @@
             ng-controller="quicktech.core.tickets.ticketCtrl" on-finish-render="onFinishRendering()"
             ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
             ng-click="openTicket(ticket.id)">
-          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+          <div ng-include="'/ng1/scripts/core/tickets/ticket.tpl.html'"></div>
         </li>
       </ul>
     </div>
   </div>
 
   <!--<div ui-view></div>-->
-  <div ng-if="openTicketDetailsPage" ng-include="'/html/scripts/core/tickets/ticket-details.tpl.html'" ng-controller="quicktech.core.tickets.ticketDetailsCtrl"></div>
+  <div ng-if="openTicketDetailsPage" ng-include="'/ng1/scripts/core/tickets/ticket-details.tpl.html'" ng-controller="quicktech.core.tickets.ticketDetailsCtrl"></div>
 
 </div>
 <script>

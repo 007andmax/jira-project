@@ -14,7 +14,7 @@
             ng-controller="quicktech.core.tickets.ticketCtrl" on-finish-render="onFinishRendering()"
             ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
             ui-sref="tickets.details({ ticketId: ticket.id, remoteParams: null })">
-          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+          <div ng-include="'/n/scripts/core/tickets/ticket.tpl.html'"></div>
         </li>
         <button class="mob-filters-btn mobile-btn primary"
                 ng-click="toggleMobileTicketsFilters(true)">

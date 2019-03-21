@@ -6,6 +6,8 @@ import { UpgradeModule, downgradeComponent } from '@angular/upgrade/static';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
+import { LeftPanelComponent } from './components/left-panel/left-panel.component';
+import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
 
 
 declare var angular: any;
@@ -30,7 +32,9 @@ angular.module('quicktech')
 @NgModule({
   declarations: [
     AppComponent,
-    PasswordManagerComponent
+    PasswordManagerComponent,
+    LeftPanelComponent,
+    LeftPanelPasswordManagerComponent
   ],
   imports: [
     BrowserModule,
