@@ -587,7 +587,7 @@
       <ul class="nav nav-qt" role="tablist">
         <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
           <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
-               qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+               qt-custom-popover-template="/ng1/scripts/common/templates/company-has-no-address-popover.tpl.html"
                style="display: inline-block;">
             <div qt-popover-trigger="mouseenter"
                  style="display: inline-block; background-color: white; width: 150px;">
@@ -715,8 +715,8 @@
                 </div>
               </div>
               <div class="billable-items-list-item-sub-content col-md-12 clearfix" qt-ts-slider style="display: none;">
-                <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
-                <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
+                <div ng-include="'/ng1/scripts/core/billable/product-expenses.tpl.html'"></div>
+                <div ng-include="'/ng1/scripts/core/billable/service-expenses.tpl.html'"></div>
               </div>
               <div class="col-md-12 hr" style="margin-top: 6px;"></div>
             </div>

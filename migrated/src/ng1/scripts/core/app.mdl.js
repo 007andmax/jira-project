@@ -56,15 +56,15 @@
           templateUrl: '/ng1/scripts/core/tickets/tickets.tpl.html',
           controller: 'quicktech.core.tickets.ticketsCtrl'
         }))
-        // .state('tickets.details', waitForServices({
-        //   url: '/:ticketId',
-        //   params: {
-        //     ticketId: '',
-        //     remoteParams: null
-        //   },
-        //   templateUrl: '/ng1/scripts/core/tickets/ticket-details.tpl.html',
-        //   controller: 'quicktech.core.tickets.ticketDetailsCtrl'
-        // }))
+        .state('tickets.details', waitForServices({
+          url: '/:ticketId',
+          params: {
+            ticketId: '',
+            remoteParams: null
+          },
+          templateUrl: '/ng1/scripts/core/tickets/ticket-details.tpl.html',
+          controller: 'quicktech.core.tickets.ticketDetailsCtrl'
+        }))
         .state('drafts', waitForServices({
           url: '/drafts',
           templateUrl: '/ng1/scripts/core/tickets/drafts/drafts.tpl.html',
@@ -383,7 +383,7 @@
             if (!isCalled) {
               isCalled = true;
               fn.apply(this, args);
-              console.log('call debounced fn')
+              console.log('call debounced fn');
               interval = setTimeout(function() {
                 isCalled = false;
 

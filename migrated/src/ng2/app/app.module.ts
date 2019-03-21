@@ -14,8 +14,6 @@ declare var angular: any;
 
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url) {
-    console.log(url, 'URL');
-    console.log((url.toString().startsWith("/ng2") || url.toString() == "/"), 'URL');
     return url.toString().startsWith("/ng2") || url.toString() == "/"
   }
   extract(url) { return url; }
@@ -40,17 +38,17 @@ angular.module('quicktech')
     BrowserModule,
     AppRoutingModule,
     UpgradeModule,
-    // RouterModule.forRoot([
-    //     {
-    //       path: 'ng2/password-manager',
-    //       component: PasswordManagerComponent
-    //
-    //     }
-    //   ],
-    //   {
-    //     useHash: true,
-    //     enableTracing: true
-    //   })
+    RouterModule.forRoot([
+        {
+          path: 'ng2/password-manager',
+          component: PasswordManagerComponent
+
+        }
+      ],
+      {
+        useHash: true,
+        enableTracing: true
+      })
   ],
   providers: [
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy }

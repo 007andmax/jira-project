@@ -496,6 +496,7 @@
       }
 
       function getOne(ticket, targetScope, callback) {
+        var startTime = performance.now();
 
         if (!ticket || !ticket.id) {
           throw 'Invalid first argument! It must be object with "id" field!';
@@ -504,9 +505,11 @@
         storage.openedTicket = ticket;
 
         $http.get('/v2/tickets/' + ticket.id).then(function (resp) {
+          console.log(resp, 'RESP');
 
           resp.data.number = numberPrefix + resp.data.number;
           Utils.customizeObj(resp.data, ticket);
+          console.log(callback, 'CALLBACK');
 
           if (callback) {
             callback(ticket);
@@ -518,50 +521,52 @@
           }
         });
 
-        RealTimeService.subscribe('/ticketUpdates/' + ticket.id, targetScope, function (newChange) {
+        // RealTimeService.subscribe('/ticketUpdates/' + ticket.id, targetScope, function (newChange) {
+        //
+        //   if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
+        //     // console.log(newChange, 'NEWWWWCHANGeEE')
+        //     var update = Utils.findById(ticket.updates, newChange.data.id),
+        //       attachments = newChange.data.attachments;
+        //
+        //     if (update) {
+        //       Utils.customizeObj(newChange.data, update);
+        //     } else {
+        //       update = Utils.customizeObj(newChange.data);
+        //       ticket.updates.unshift(update);
+        //     }
+        //
+        //     if (attachments && attachments.length) {
+        //
+        //       for (var i = 0; i < attachments.length; i++) {
+        //         var attachment = attachments[i];
+        //         ticket.attachments.push(attachment);
+        //       }
+        //     }
+        //
+        //   } else if (newChange.action == 'UPDATE_DELETED') {
+        //     Utils.deleteById(ticket.updates, newChange.data.id);
+        //   }
+        // });
 
-          if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
-            // console.log(newChange, 'NEWWWWCHANGeEE')
-            var update = Utils.findById(ticket.updates, newChange.data.id),
-              attachments = newChange.data.attachments;
-
-            if (update) {
-              Utils.customizeObj(newChange.data, update);
-            } else {
-              update = Utils.customizeObj(newChange.data);
-              ticket.updates.unshift(update);
-            }
-
-            if (attachments && attachments.length) {
-
-              for (var i = 0; i < attachments.length; i++) {
-                var attachment = attachments[i];
-                ticket.attachments.push(attachment);
-              }
-            }
-
-          } else if (newChange.action == 'UPDATE_DELETED') {
-            Utils.deleteById(ticket.updates, newChange.data.id);
-          }
-        });
-
-        RealTimeService.subscribe('/tagsSpecifying/' + ticket.id, targetScope, function (newChange) {
-
-          if (newChange.action === 'TAG_TICKET_SPECIFYING_SAVED') {
-            ticket.tags.splice(0, ticket.tags.length);
-            for (var i = 0; i < newChange.data.length; i++) {
-              ticket.tags.push(newChange.data[i]);
-            }
-
-            if (callback) {
-              callback(ticket);
-            }
-          }
-        });
+        // RealTimeService.subscribe('/tagsSpecifying/' + ticket.id, targetScope, function (newChange) {
+        //
+        //   if (newChange.action === 'TAG_TICKET_SPECIFYING_SAVED') {
+        //     ticket.tags.splice(0, ticket.tags.length);
+        //     for (var i = 0; i < newChange.data.length; i++) {
+        //       ticket.tags.push(newChange.data[i]);
+        //     }
+        //
+        //     if (callback) {
+        //       callback(ticket);
+        //     }
+        //   }
+        // });
 
         targetScope.$on('$destroy', function () {
           storage.openedTicket = undefined;
         });
+        var duration = performance.now() - startTime;
+        console.log(`someMethodIThinkMightBeSlow took ${duration}ms`);
       }
 
       function getLeftPanelCounts(scope, callback) {
