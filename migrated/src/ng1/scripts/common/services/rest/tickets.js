@@ -512,12 +512,12 @@
           console.log(callback, 'CALLBACK');
 
           if (callback) {
-            callback(ticket);
+            // callback(ticket);
           }
 
         }, function () {
           if (callback) {
-            callback(ticket);
+            // callback(ticket);
           }
         });
 
@@ -547,7 +547,7 @@
         //     Utils.deleteById(ticket.updates, newChange.data.id);
         //   }
         // });
-
+        //
         // RealTimeService.subscribe('/tagsSpecifying/' + ticket.id, targetScope, function (newChange) {
         //
         //   if (newChange.action === 'TAG_TICKET_SPECIFYING_SAVED') {
@@ -561,10 +561,10 @@
         //     }
         //   }
         // });
-
-        targetScope.$on('$destroy', function () {
-          storage.openedTicket = undefined;
-        });
+        //
+        // targetScope.$on('$destroy', function () {
+        //   storage.openedTicket = undefined;
+        // });
         var duration = performance.now() - startTime;
         console.log(`someMethodIThinkMightBeSlow took ${duration}ms`);
       }

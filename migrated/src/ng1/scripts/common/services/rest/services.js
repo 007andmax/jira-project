@@ -31,15 +31,15 @@
         //   throw 'companyId is required argument!'
         // }
         //
-        // return Utils.getListByUrl('/services/' + companyId, callback, function (list) {
-        //
-        //   RealTimeService.subscribe('/service', scope, function (newChange) {
-        //
-        //     if (newChange.action === 'SERVICE_DELETED') {
-        //       Utils.deleteById(list, newChange.data.versionedId.id);
-        //     }
-        //   });
-        // });
+        return Utils.getListByUrl('/services/' + companyId, callback, function (list) {
+
+          // RealTimeService.subscribe('/service', scope, function (newChange) {
+          //
+          //   if (newChange.action === 'SERVICE_DELETED') {
+          //     Utils.deleteById(list, newChange.data.versionedId.id);
+          //   }
+          // });
+        });
       }
 
       function getServicesData(scope, callback) {

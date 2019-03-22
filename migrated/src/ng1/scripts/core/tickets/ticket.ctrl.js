@@ -19,7 +19,7 @@
           if (val && val.id === $scope.ticket.id) {
             $scope.company = CompaniesService.getOneById(val.companyId);
           }
-        })
+        });
 
 
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
