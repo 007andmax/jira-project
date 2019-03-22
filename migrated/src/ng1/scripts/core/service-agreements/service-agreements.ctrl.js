@@ -46,6 +46,7 @@
 
 
         AgreementsService.getAllServiceAgreements($scope, function (data) {
+          console.log(1, '111');
           $scope.agreementsList = data;
 
           for (var i = 0; i < $scope.agreementsList.length; i++) {

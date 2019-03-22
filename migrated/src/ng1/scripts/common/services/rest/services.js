@@ -23,100 +23,100 @@
 
       function getAllByCompany(scope, companyId, callback) {
 
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
+        // if (!scope || !scope.$id) {
+        //   throw 'First argument must be Angularjs scope!'
+        // }
 
-        if (!companyId || Object.prototype.toString.call(companyId) === "[object Function]") {
-          throw 'companyId is required argument!'
-        }
-
-        return Utils.getListByUrl('/services/' + companyId, callback, function (list) {
-
-          RealTimeService.subscribe('/service', scope, function (newChange) {
-
-            if (newChange.action === 'SERVICE_DELETED') {
-              Utils.deleteById(list, newChange.data.versionedId.id);
-            }
-          });
-        });
+        // if (!companyId || Object.prototype.toString.call(companyId) === "[object Function]") {
+        //   throw 'companyId is required argument!'
+        // }
+        //
+        // return Utils.getListByUrl('/services/' + companyId, callback, function (list) {
+        //
+        //   RealTimeService.subscribe('/service', scope, function (newChange) {
+        //
+        //     if (newChange.action === 'SERVICE_DELETED') {
+        //       Utils.deleteById(list, newChange.data.versionedId.id);
+        //     }
+        //   });
+        // });
       }
 
       function getServicesData(scope, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        var data = Utils.customizeObj({});
-
-        $http.get('/services/getDefaultServices').then(function (resp) {
-
-          for (var i = 0; i < resp.data.length; i++) {
-            addServiceData(data, resp.data[i])
-          }
-
-          if (callback) {
-            callback(resp.data);
-          }
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-
-        function serviceSaved(service) {
-          var oldService = findService(data, service.versionedId.id);
-
-          if (oldService) {
-            Utils.customizeObj(service, oldService);
-          } else {
-            addServiceData(data, service)
-          }
-        }
-
-        function serviceDeleted(serviceId, data) {
-
-          var index = Utils.indexOfId(data.default, serviceId);
-
-          if (index > -1) {
-            data.default.splice(index, 1);
-          }
-        }
-
-        RealTimeService.subscribe('/service', scope, function (newChange) {
-
-          if (newChange.action == 'SERVICE_SAVED') {
-            if (newChange.data.isDefault)
-              serviceSaved(newChange.data);
-          } else if (newChange.action == 'SERVICE_DELETED') {
-            serviceDeleted(newChange.data.versionedId.id, data);
-          }
-
-        });
-
-        return data;
+      //
+      //   if (!scope || !scope.$id) {
+      //     throw 'First argument must be Angularjs scope!'
+      //   }
+      //
+      //   var data = Utils.customizeObj({});
+      //
+      //   $http.get('/services/getDefaultServices').then(function (resp) {
+      //
+      //     for (var i = 0; i < resp.data.length; i++) {
+      //       addServiceData(data, resp.data[i])
+      //     }
+      //
+      //     if (callback) {
+      //       callback(resp.data);
+      //     }
+      //
+      //   }, function (resp) {
+      //     if (callback) {
+      //       callback(resp.data);
+      //     }
+      //   });
+      //
+      //   function serviceSaved(service) {
+      //     var oldService = findService(data, service.versionedId.id);
+      //
+      //     if (oldService) {
+      //       Utils.customizeObj(service, oldService);
+      //     } else {
+      //       addServiceData(data, service)
+      //     }
+      //   }
+      //
+      //   function serviceDeleted(serviceId, data) {
+      //
+      //     var index = Utils.indexOfId(data.default, serviceId);
+      //
+      //     if (index > -1) {
+      //       data.default.splice(index, 1);
+      //     }
+      //   }
+      //
+      //   RealTimeService.subscribe('/service', scope, function (newChange) {
+      //
+      //     if (newChange.action == 'SERVICE_SAVED') {
+      //       if (newChange.data.isDefault)
+      //         serviceSaved(newChange.data);
+      //     } else if (newChange.action == 'SERVICE_DELETED') {
+      //       serviceDeleted(newChange.data.versionedId.id, data);
+      //     }
+      //
+      //   });
+      //
+      //   return data;
       }
 
       function getSpecialServices(callback) {
-        $http.get('/serviceAgreements/services').then(function(res) {
-          if (callback) callback(res);
-        })
+      //   $http.get('/serviceAgreements/services').then(function(res) {
+      //     if (callback) callback(res);
+      //   })
       }
 
       function addCompanyToServiceData(data, companyId) {
-
-        if (!data) {
-          throw 'data argument is required'
-        }
-        if (!companyId) {
-          throw 'companyId argument is required'
-        }
-
-        if (!data[companyId]) {
-          Utils.defineReadOnlyProperty(data, companyId, []);
-        }
+      //
+      //   if (!data) {
+      //     throw 'data argument is required'
+      //   }
+      //   if (!companyId) {
+      //     throw 'companyId argument is required'
+      //   }
+      //
+      //   if (!data[companyId]) {
+      //     Utils.defineReadOnlyProperty(data, companyId, []);
+      //   }
       }
 
       function deleteCompanyFromServiceData(data, companyId) {
