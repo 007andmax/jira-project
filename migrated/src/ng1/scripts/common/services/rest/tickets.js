@@ -505,11 +505,8 @@
         storage.openedTicket = ticket;
 
         $http.get('/v2/tickets/' + ticket.id).then(function (resp) {
-          console.log(resp, 'RESP');
-
           resp.data.number = numberPrefix + resp.data.number;
           Utils.customizeObj(resp.data, ticket);
-          console.log(callback, 'CALLBACK');
 
           if (callback) {
             callback(ticket);
@@ -566,7 +563,6 @@
           storage.openedTicket = undefined;
         });
         var duration = performance.now() - startTime;
-        console.log(`someMethodIThinkMightBeSlow took ${duration}ms`);
       }
 
       function getLeftPanelCounts(scope, callback) {
@@ -832,7 +828,6 @@
 
       function createTicketUpdate(ticketUpdate, close, callback, type) {
 
-        console.log(ticketUpdate, 'ticketUpdate');
         if (!ticketUpdate) {
           throw 'ticketUpdate is required arguments!';
         }

@@ -15,29 +15,6 @@
       </button>
     </div>
 
-    <!--<ul class="nav nav-ticket-add"-->
-    <!--ng-if="TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)">-->
-
-    <!--<li ng-class="{'active': currentOpenTab === 'NOTE'}">-->
-    <!--<a href="javascript:void(0)" ng-click="openedTab('NOTE')">-->
-    <!--<i class="icon-lg icon-add-note"></i>Note-->
-    <!--</a>-->
-    <!--</li>-->
-
-    <!--<li ng-class="{'active': currentOpenTab === 'PRODUCT'}">-->
-    <!--<a href="javascript:void(0)" ng-click="openedTab('PRODUCT')">-->
-    <!--<i class="icon-lg icon-add-product"></i>Product-->
-    <!--</a>-->
-    <!--</li>-->
-
-    <!--<li ng-class="{'active': currentOpenTab === 'SERVICE'}">-->
-    <!--<a href="javascript:void(0)" ng-click="openedTab('SERVICE')">-->
-    <!--<i class="icon-lg icon-add-service"></i>Service-->
-    <!--</a>-->
-    <!--</li>-->
-
-    <!--</ul>-->
-
     <div class="tab-content"
          ng-style="{'margin-top': TicketsPermissionsService.isActionVisible('add_expense', ticketDetails) ? '0' : '68px' }">
 
@@ -718,20 +695,3 @@
     </div>
   </div>
 </div>
-<script>
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments);
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m);
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-  ga('create', 'UA-93441341-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
