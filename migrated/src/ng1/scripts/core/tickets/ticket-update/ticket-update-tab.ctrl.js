@@ -5,11 +5,11 @@
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
       ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter', '$rootScope',
         function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter, $rootScope) {
-          // $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
-          // $scope.areTicketsPresented = false;
-          // $scope.areTicketsTerminated = false;
-          // $scope.areTickets = false;
-          // $scope.checkForOpenDropdown = checkForOpenDropdown;
+          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
+          $scope.areTicketsPresented = false;
+          $scope.areTicketsTerminated = false;
+          $scope.areTickets = false;
+          $scope.checkForOpenDropdown = checkForOpenDropdown;
           //
           //
           // var closeDropdowns = function(){}
@@ -45,56 +45,44 @@
           //
           // }
           //
-          // function checkForOpenDropdown() {
-          //   var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
-          //   var dateInput = document.querySelector('.new-date-picker input');
-          //
-          //   var serviceInputs = document.querySelectorAll('.new-service-input');
-          //
-          //   for (var i = 0; i < serviceInputs.length; i++) {
-          //     var inp = serviceInputs[i];
-          //     var sId = inp.getAttribute('aria-owns');
-          //     var dropdown = document.getElementById(sId);
-          //     var pos = inp.getBoundingClientRect();
-          //     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          //
-          //     dropdown.style.position = 'fixed';
-          //     dropdown.style.top = (pos.top) + 'px';
-          //     dropdown.style.left = pos.left + 'px';
-          //     dropdown.style.width = inp.offsetWidth + 'px';
-          //
-          //     dropdown.classList.add('new-service-dropdown');
-          //
-          //   }
-          //
-          //   if (!date) {
-          //     setTimeout(checkForOpenDropdown, 100);
-          //     return;
-          //   }
-          //
-          //
-          //
-          //   if (!dateInput) return;
-          //
-          //   dateInput = dateInput.getBoundingClientRect();
-          //
-          //
-          //   var arr = [date];
-          //   arr.forEach(function(el) {
-          //     if (!el) return;
-          //     var pos = el.getBoundingClientRect();
-          //     var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-          //     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          //     el.style.position = 'fixed';
-          //     el.style.top = dateInput.top  + 40 + 'px';
-          //     el.style.left = (dateInput.right - el.offsetWidth) - scrollLeft +  200 +  'px';
-          //     el.style.right = 'auto';
-          //     el.style.zIndex = 100000;
-          //   })
-          //
-          // }
-          //
-          //
+          function checkForOpenDropdown() {
+            var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
+            var dateInput = document.querySelector('.new-date-picker input');
+            var serviceInputs = document.querySelectorAll('.new-service-input');
+            for (var i = 0; i < serviceInputs.length; i++) {
+              var inp = serviceInputs[i];
+              var sId = inp.getAttribute('aria-owns');
+              var dropdown = document.getElementById(sId);
+              var pos = inp.getBoundingClientRect();
+              var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              dropdown.style.position = 'fixed';
+              dropdown.style.top = (pos.top) + 'px';
+              dropdown.style.left = pos.left + 'px';
+              dropdown.style.width = inp.offsetWidth + 'px';
+              dropdown.classList.add('new-service-dropdown');
+            }
+            if (!date) {
+              setTimeout(checkForOpenDropdown, 100);
+              return;
+            }
+            if (!dateInput) return;
+            dateInput = dateInput.getBoundingClientRect();
+            var arr = [date];
+            arr.forEach(function(el) {
+              if (!el) return;
+              var pos = el.getBoundingClientRect();
+              var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+              var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              el.style.position = 'fixed';
+              el.style.top = dateInput.top  + 40 + 'px';
+              el.style.left = (dateInput.right - el.offsetWidth) - scrollLeft +  200 +  'px';
+              el.style.right = 'auto';
+              el.style.zIndex = 100000;
+            })
+
+          }
+
+
           AgreementsService.getAllServiceAgreements($scope, function (data) {
             $scope.areTickets = data.length;
 
@@ -216,7 +204,7 @@
                 }
                 // toggleDataSelector();
               }
-            });я
+            });
           }
 
 
