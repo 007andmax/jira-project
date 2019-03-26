@@ -59,10 +59,6 @@
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
 
-        $rootScope.$on('$stateChangeStart', function(){
-            console.log('12351235');
-          });
-
         $scope.checkDublicateCategory = function() {
           console.log($scope.newCategory ,'newCategory');
           var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){

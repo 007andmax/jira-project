@@ -264,6 +264,7 @@
         }
 
         function changeSelectedTickets(id, status) {
+          console.log(1);
 
           ticketsHeaderState.checkedTicketsIds = [];
           ticketsHeaderState.selectedTickets = [];
@@ -300,6 +301,8 @@
             globalSearch.goBack.func = uncheckAllTickets;
             globalSearch.goBack.tooltip = 'reset selected items';
           }
+
+          console.log(2);
         }
 
         $scope.checkAgreementTypeToShowDiscount = function(serviceExpense) {

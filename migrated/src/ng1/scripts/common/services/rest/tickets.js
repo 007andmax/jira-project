@@ -512,12 +512,12 @@
           console.log(callback, 'CALLBACK');
 
           if (callback) {
-            // callback(ticket);
+            callback(ticket);
           }
 
         }, function () {
           if (callback) {
-            // callback(ticket);
+            callback(ticket);
           }
         });
 
@@ -587,13 +587,13 @@
           }
         });
 
-        RealTimeService.subscribe('/leftPanelCounts', scope, function (newChange) {
-
-          if (newChange.action == 'LEFT_PANEL_COUNTS') {
-
-            Utils.customizeObj(newChange.data, storage.leftPanelCounters);
-          }
-        });
+        // RealTimeService.subscribe('/leftPanelCounts', scope, function (newChange) {
+        //
+        //   if (newChange.action == 'LEFT_PANEL_COUNTS') {
+        //
+        //     Utils.customizeObj(newChange.data, storage.leftPanelCounters);
+        //   }
+        // });
 
         return storage.leftPanelCounters;
       }
@@ -684,13 +684,13 @@
           }
         });
 
-        RealTimeService.subscribe('/leftPanelCountsCompany/'+companyId, scope, function (newChange) {
-          if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
-
-            Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
-            //callback && callback(storage.ticketsQuantityMapByCompany)
-          }
-        });
+        // RealTimeService.subscribe('/leftPanelCountsCompany/'+companyId, scope, function (newChange) {
+        //   if (newChange.action === "LEFT_PANEL_COUNTS_COMPANY") {
+        //
+        //     Utils.customizeObj(newChange.data, storage.ticketsQuantityMapByCompany);
+        //     //callback && callback(storage.ticketsQuantityMapByCompany)
+        //   }
+        // });
 
         return storage.ticketsQuantityMapByCompany;
       }
@@ -821,13 +821,13 @@
           }
         });
 
-        RealTimeService.subscribe('/number/TICKET', scope, function (change) {
-          if (change.action === 'NUMBER_CHANGED') {
-            if (callback) {
-              callback(Utils.getFormattedNumber(change.data));
-            }
-          }
-        });
+        // RealTimeService.subscribe('/number/TICKET', scope, function (change) {
+        //   if (change.action === 'NUMBER_CHANGED') {
+        //     if (callback) {
+        //       callback(Utils.getFormattedNumber(change.data));
+        //     }
+        //   }
+        // });
       }
 
       function createTicketUpdate(ticketUpdate, close, callback, type) {
@@ -935,155 +935,155 @@
 
       // function increase
 
-      RealTimeService.subscribe('/tickets', scope, function (newChange) {
-
-        changeTicketsCounts(); //realtime ticket counts change
-        // $timeout(changeTicketsCounts, 300)
-        // $timeout(changeTicketsCounts, 600)
-        // $timeout(changeTicketsCounts, 1000)
-        // $timeout(changeTicketsCounts, 1400)
-        // $timeout(changeTicketsCounts, 1800)
-
-        // ALL: {},
-        // UNASSIGNED: {},
-        // IN_PROGRESS: {},
-        // ON_HOLD: {},
-        // COMPLETED: {}
-
-        if (newChange.data && newChange.data.number) {
-          newChange.data.number = numberPrefix + newChange.data.number;
-        }
-
-        var ticketIndex = Utils.indexOfId(storage.tickets, newChange.data.id),
-          ticketById = storage.tickets[ticketIndex];
-
-        if (newChange.action === 'CREATED_TICKET') {
-
-          // console.log(storage, "CREATED")
-
-          // storage.ticketsQuantityMap.ALL = 1000000000;
-
-          // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
-
-
-          if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
-
-            if (ticketById) {
-              Utils.customizeObj(newChange.data, ticketById);
-            } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
-              storage.ticketsQuantity++;
-            }
-          } else if (ticketById) {
-            Utils.deleteById(storage.tickets, ticketById.id);
-            storage.ticketsQuantity--;
-          }
-          storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
-
-
-
-        } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
-          var isUpdate = newChange.action === 'EDITED_TICKET';
-          var global = globalSearch.count;
-
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            Utils.customizeObj(newChange.data, storage.openedTicket);
-          }
-
-          if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
-
-            if (ticketById) {
-              Utils.customizeObj(newChange.data, ticketById);
-            } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
-              storage.ticketsQuantity++;
-              global++;
-            }
-
-          } else if (ticketById) {
-            storage.tickets.splice(ticketIndex, 1);
-            storage.ticketsQuantity--;
-            global--;
-          }
-
-          storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(isUpdate ? global : storage.ticketsQuantity);
-
-        } else if (newChange.action === 'READ') {
-          if (ticketById) {
-            Utils.defineReadOnlyProperty(ticketById, 'unread', false);
-          }
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            Utils.defineReadOnlyProperty(storage.openedTicket, 'unread', false);
-          }
-
-        } else if (newChange.action === 'TICKET_UPDATES_READ') {
-          if (ticketById) {
-            Utils.defineReadOnlyProperty(ticketById, 'hasNewUpdates', false);
-          }
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            Utils.defineReadOnlyProperty(storage.openedTicket, 'hasNewUpdates', false);
-          }
-
-        } else if (newChange.action === 'TICKET_DELETED') {
-
-
-
-          $rootScope.deletedTicket = newChange.data.id;
-          if (ticketIndex != null) {
-            storage.tickets.splice(ticketIndex, 1);
-
-            if (newChange.data.trash || newChange.data.spam) {
-              storage.ticketsQuantity--;
-              storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
-            }
-          }
-
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data);
-            storage.openedTicket = undefined;
-          }
-
-        } else if (newChange.action === 'TICKET_BILLABLE') {
-          if (ticketById) {
-            Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.isBillable);
-          }
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            Utils.defineReadOnlyProperty(storage.openedTicket, 'isBillable', newChange.data.isBillable);
-          }
-
-        } else if (newChange.action === 'TICKET_INVOICED') {
-          if (ticketById) {
-            Utils.defineReadOnlyProperty(ticketById, 'hasInvoice', newChange.data.hasInvoice);
-          }
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            Utils.defineReadOnlyProperty(storage.openedTicket, 'hasInvoice', newChange.data.hasInvoice);
-          }
-
-        } else if (newChange.action === 'LINKED_AGENT_CHANGED') {
-          for (var i = 0; i < newChange.data.ticketIds.length; i++) {
-            var ticketId = newChange.data.ticketIds[i],
-              ticket = Utils.findById(storage.tickets, ticketId);
-            if (newChange.data.deviceId && ticket) {
-              Utils.defineReadOnlyProperty(ticket, 'agent', { deviceId: newChange.data.deviceId });
-            } else if (ticket) {
-              Utils.defineReadOnlyProperty(ticket, 'agent', null);
-            }
-
-            if (storage.openedTicket && ticketId === storage.openedTicket.id) {
-              if (newChange.data.deviceId) {
-                Utils.defineReadOnlyProperty(storage.openedTicket, 'agent', { deviceId: newChange.data.deviceId });
-              } else {
-                Utils.defineReadOnlyProperty(storage.openedTicket, 'agent', null);
-              }
-            }
-          }
-        } else if (newChange.action === 'DISCOUNT_CHANGED') {
-          for (var i = 0; i < newChange.data.length; i++) {
-            var data = newChange.data[i];
-            if (storage.openedTicket && data.ticketId === storage.openedTicket.id) {
-              Utils.defineReadOnlyProperty(storage.openedTicket, 'discount', data.discount);
-            }
-          }
-        }
-      });
+      // RealTimeService.subscribe('/tickets', scope, function (newChange) {
+      //
+      //   changeTicketsCounts(); //realtime ticket counts change
+      //   // $timeout(changeTicketsCounts, 300)
+      //   // $timeout(changeTicketsCounts, 600)
+      //   // $timeout(changeTicketsCounts, 1000)
+      //   // $timeout(changeTicketsCounts, 1400)
+      //   // $timeout(changeTicketsCounts, 1800)
+      //
+      //   // ALL: {},
+      //   // UNASSIGNED: {},
+      //   // IN_PROGRESS: {},
+      //   // ON_HOLD: {},
+      //   // COMPLETED: {}
+      //
+      //   if (newChange.data && newChange.data.number) {
+      //     newChange.data.number = numberPrefix + newChange.data.number;
+      //   }
+      //
+      //   var ticketIndex = Utils.indexOfId(storage.tickets, newChange.data.id),
+      //     ticketById = storage.tickets[ticketIndex];
+      //
+      //   if (newChange.action === 'CREATED_TICKET') {
+      //
+      //     // console.log(storage, "CREATED")
+      //
+      //     // storage.ticketsQuantityMap.ALL = 1000000000;
+      //
+      //     // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
+      //
+      //
+      //     if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
+      //
+      //       if (ticketById) {
+      //         Utils.customizeObj(newChange.data, ticketById);
+      //       } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
+      //         storage.ticketsQuantity++;
+      //       }
+      //     } else if (ticketById) {
+      //       Utils.deleteById(storage.tickets, ticketById.id);
+      //       storage.ticketsQuantity--;
+      //     }
+      //     storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
+      //
+      //
+      //
+      //   } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
+      //     var isUpdate = newChange.action === 'EDITED_TICKET';
+      //     var global = globalSearch.count;
+      //
+      //     if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+      //       Utils.customizeObj(newChange.data, storage.openedTicket);
+      //     }
+      //
+      //     if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
+      //
+      //       if (ticketById) {
+      //         Utils.customizeObj(newChange.data, ticketById);
+      //       } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
+      //         storage.ticketsQuantity++;
+      //         global++;
+      //       }
+      //
+      //     } else if (ticketById) {
+      //       storage.tickets.splice(ticketIndex, 1);
+      //       storage.ticketsQuantity--;
+      //       global--;
+      //     }
+      //
+      //     storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(isUpdate ? global : storage.ticketsQuantity);
+      //
+      //   } else if (newChange.action === 'READ') {
+      //     if (ticketById) {
+      //       Utils.defineReadOnlyProperty(ticketById, 'unread', false);
+      //     }
+      //     if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+      //       Utils.defineReadOnlyProperty(storage.openedTicket, 'unread', false);
+      //     }
+      //
+      //   } else if (newChange.action === 'TICKET_UPDATES_READ') {
+      //     if (ticketById) {
+      //       Utils.defineReadOnlyProperty(ticketById, 'hasNewUpdates', false);
+      //     }
+      //     if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+      //       Utils.defineReadOnlyProperty(storage.openedTicket, 'hasNewUpdates', false);
+      //     }
+      //
+      //   } else if (newChange.action === 'TICKET_DELETED') {
+      //
+      //
+      //
+      //     $rootScope.deletedTicket = newChange.data.id;
+      //     if (ticketIndex != null) {
+      //       storage.tickets.splice(ticketIndex, 1);
+      //
+      //       if (newChange.data.trash || newChange.data.spam) {
+      //         storage.ticketsQuantity--;
+      //         storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
+      //       }
+      //     }
+      //
+      //     if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+      //       $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data);
+      //       storage.openedTicket = undefined;
+      //     }
+      //
+      //   } else if (newChange.action === 'TICKET_BILLABLE') {
+      //     if (ticketById) {
+      //       Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.isBillable);
+      //     }
+      //     if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+      //       Utils.defineReadOnlyProperty(storage.openedTicket, 'isBillable', newChange.data.isBillable);
+      //     }
+      //
+      //   } else if (newChange.action === 'TICKET_INVOICED') {
+      //     if (ticketById) {
+      //       Utils.defineReadOnlyProperty(ticketById, 'hasInvoice', newChange.data.hasInvoice);
+      //     }
+      //     if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+      //       Utils.defineReadOnlyProperty(storage.openedTicket, 'hasInvoice', newChange.data.hasInvoice);
+      //     }
+      //
+      //   } else if (newChange.action === 'LINKED_AGENT_CHANGED') {
+      //     for (var i = 0; i < newChange.data.ticketIds.length; i++) {
+      //       var ticketId = newChange.data.ticketIds[i],
+      //         ticket = Utils.findById(storage.tickets, ticketId);
+      //       if (newChange.data.deviceId && ticket) {
+      //         Utils.defineReadOnlyProperty(ticket, 'agent', { deviceId: newChange.data.deviceId });
+      //       } else if (ticket) {
+      //         Utils.defineReadOnlyProperty(ticket, 'agent', null);
+      //       }
+      //
+      //       if (storage.openedTicket && ticketId === storage.openedTicket.id) {
+      //         if (newChange.data.deviceId) {
+      //           Utils.defineReadOnlyProperty(storage.openedTicket, 'agent', { deviceId: newChange.data.deviceId });
+      //         } else {
+      //           Utils.defineReadOnlyProperty(storage.openedTicket, 'agent', null);
+      //         }
+      //       }
+      //     }
+      //   } else if (newChange.action === 'DISCOUNT_CHANGED') {
+      //     for (var i = 0; i < newChange.data.length; i++) {
+      //       var data = newChange.data[i];
+      //       if (storage.openedTicket && data.ticketId === storage.openedTicket.id) {
+      //         Utils.defineReadOnlyProperty(storage.openedTicket, 'discount', data.discount);
+      //       }
+      //     }
+      //   }
+      // });
 
       //is need to insert ticket now or it will be received later by lazy loading
       function insertToFitOrdering(newTicket, list) {
@@ -1296,12 +1296,12 @@
 
         return Utils.getListByUrl('/v2/tickets/currentlyWorkingWith', callback, function (list) {
 
-          RealTimeService.subscribe('/tickets', targetScope, function (newChange) {
-            if (newChange.action == 'CURRENTLY_WORKING_WITH') {
-              list.splice(0, list.length);
-              Utils.customizeArray(newChange.data, list);
-            }
-          });
+          // RealTimeService.subscribe('/tickets', targetScope, function (newChange) {
+          //   if (newChange.action == 'CURRENTLY_WORKING_WITH') {
+          //     list.splice(0, list.length);
+          //     Utils.customizeArray(newChange.data, list);
+          //   }
+          // });
         });
       }
 

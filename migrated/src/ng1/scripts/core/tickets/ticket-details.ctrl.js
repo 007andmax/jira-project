@@ -100,7 +100,9 @@
             $scope.ticketDetails = { id: ticketsSharedState.openTicketId };
           }
 
-          TicketsService.getOne($scope.ticketDetails, $scope, function (details) {});
+          TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
+            console.log('12351235');
+          });
           UserNotificationService.hide();
           var condition = 'ticketUpdate.note' +
             '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +

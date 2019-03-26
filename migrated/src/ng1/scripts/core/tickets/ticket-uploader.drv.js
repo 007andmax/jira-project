@@ -12,6 +12,8 @@
           restrict: 'A',
           link: function (scope, element) {
 
+            console.log(1);
+
             var $win = $(window),
               lastListType,
               ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
@@ -135,6 +137,7 @@
                 element.addClass('has-scrollbar nano');
               }
             }
+            console.log(2);
 
           }
         };
