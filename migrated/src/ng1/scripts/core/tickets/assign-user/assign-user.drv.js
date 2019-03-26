@@ -30,13 +30,12 @@
           }, function(val) {
 
             $scope.usersToAssign = val;
-            var ids = $scope.usersToAssign.map(function(el) {
-              return el.user.id;
-            })
-
+            if ($scope.usersToAssign) {
+              var ids = $scope.usersToAssign.map(function(el) {
+                return el.user.id;
+              });
+            }
             var idArray = [];
-
-
             var links = element.find('a').map(function(el, i) {
 
               var index = ids.indexOf(this.id);

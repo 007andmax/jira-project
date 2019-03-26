@@ -94,9 +94,9 @@
   min-height: 100vh;
 }
 
-/*.main-container:nth-child(even) {*/
-  /*display: none;*/
-/*}*/
+.main-container:nth-child(0) {
+  display: none;
+}
 
 @-moz-document url-prefix() {
   .main-container > .row {

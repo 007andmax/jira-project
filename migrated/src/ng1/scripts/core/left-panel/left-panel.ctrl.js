@@ -876,8 +876,8 @@
           $scope.passwordSharedStateFilterCompanyId = undefined;
           $scope.passwordSharedStateFilterDeviceId = undefined;
           $scope.passwordSharedStateFilterTemplate = undefined;
-          $scope.clearDateRange();
-        }
+          // $scope.clearDateRange();
+        };
 
         $scope.getDeviceNameById = function (id) {
           for (var i = 0; i < $scope.devices.length; i++) {

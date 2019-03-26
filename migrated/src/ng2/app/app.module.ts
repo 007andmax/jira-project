@@ -38,17 +38,17 @@ angular.module('quicktech')
     BrowserModule,
     AppRoutingModule,
     UpgradeModule,
-    // RouterModule.forRoot([
-    //     {
-    //       path: 'ng2/password-manager',
-    //       component: PasswordManagerComponent
-    //
-    //     }
-    //   ],
-    //   {
-    //     useHash: true,
-    //     enableTracing: true
-    //   })
+    RouterModule.forRoot([
+        {
+          path: 'ng2/password-manager',
+          component: PasswordManagerComponent
+
+        }
+      ],
+      {
+        useHash: true,
+        enableTracing: true
+      })
   ],
   providers: [
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy }

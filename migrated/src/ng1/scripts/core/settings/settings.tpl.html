@@ -1,21 +1,21 @@
 <div class="settings-wrapper" ng-if="settingMode === '/settings'">
   <div class="col-xs-12 settings-wrapper__trow">
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.myProfile">
-      <img class="svg-icn-full" src="images/settings-icon/user-profile.png">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/user-profile.png">
       <p>User Profile</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.emailNotifications">
-      <img class="svg-icn-full" src="images/settings-icon/email-notifications.png">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/email-notifications.png">
       <p>Email Notifications</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.activityHistory">
-      <img class="svg-icn-full" src="images/settings-icon/activity-history.png">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/activity-history.png">
       <p>Activity History</p>
     </div>
   </div>
   <div class="col-xs-12 settings-wrapper__trow">
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.companyProfile" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
-      <img class="svg-icn-full" src="images/settings-icon/company-profile.png">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/company-profile.png">
       <p>Company Profile</p>
       <span class="confirm-arrow"
             custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.companySettings }}"></span>
