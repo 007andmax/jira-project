@@ -8,9 +8,9 @@
         var counter = 0;
 
 
-        CompaniesService.getReferenceDate(function(val) {
-          $scope.referenceDate = $filter('date')(new Date(val.data.accountingStartDate), 'dd MMM yyyy');
-        });
+        // CompaniesService.getReferenceDate(function(val) {
+        //   $scope.referenceDate = $filter('date')(new Date(val.data.accountingStartDate), 'dd MMM yyyy');
+        // });
 
         $scope.resetReferenceDate = function() {
           CompaniesService.resetReferenceDate();
