@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiPasswordManagerService } from "./api-password-manager.service";
 
 @Component({
   selector: 'app-password-manager',
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private apiPasswordManagerService: ApiPasswordManagerService
+  ) { }
 
   ngOnInit() {
     console.log('testes');
-  }
+    console.log('123512351');
+
+    this.apiPasswordManagerService.getRecords().subscribe((res) => {
+      console.log(res);
+    })
+  };
 
 }
