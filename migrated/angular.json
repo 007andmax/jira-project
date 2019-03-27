@@ -105,7 +105,7 @@
               "src/ng1/bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
               "src/ng1/bower_components/typeahead.js/dist/typeahead.bundle.js",
               "src/ng1/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js",
-              "src/ng1/bower_components/sockjs-client/dist/sockjs.js",
+//              "src/ng1/bower_components/sockjs-client/dist/sockjs.js",
               "src/ng1/bower_components/stomp-websocket/lib/stomp.js",
               "src/ng1/bower_components/angular-local-storage/dist/angular-local-storage.js",
               "src/ng1/bower_components/d3/d3.js",

@@ -274,7 +274,7 @@
              ng-click="downloadAgent($event, company)">
           <div class="download-agent-company download-agent-company-small pointer">
             <span>Download Agent</span>
-            <img src="./nng1/images/new-icons/download.svg">
+            <img src="./ng1/images/new-icons/download.svg">
           </div>
         </div>
       </div>
@@ -296,7 +296,7 @@
               ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
               create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
 
-      <img src="images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
+      <img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
            ng-click="dearchiveCompany(company)" />
     </li>
     <button class="mob-filters-btn mobile-btn primary"
