@@ -4,33 +4,20 @@
      ng-include="'/ng1/scripts/core/header/header.tpl.html'"></div>
 
 <div ng-controller="quicktech.core.header.headerCtrl"
-     class="mobile-top-bar"
-     ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
-     style="z-index: 1038;"
-     ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"></div>
+class="mobile-top-bar"
+ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
+style="z-index: 1038;"
+ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"></div>
 
 <aside id="left" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"
        ng-include="'/ng1/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
 <aside ng-controller="quicktech.core.leftPanel.leftPanelCtrl"
-       id="mobile-left" ng-class="{opened: isLeftPanelOpened}"
-       qt-sidebar style="z-index: 1039;"
-       ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
+id="mobile-left" ng-class="{opened: isLeftPanelOpened}"
+qt-sidebar style="z-index: 1039;"
+ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
 
 <aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
        ng-include="'/ng1/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
-<div class="main-container" ng-if="applicationLoaded">
-  <div class="row">
-    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
-      <div class="content-wrapper">
-        <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
-</div>
-<div feedback-form ></div>
-<div welcome-wizard></div>
-
-
+<app-main></app-main>

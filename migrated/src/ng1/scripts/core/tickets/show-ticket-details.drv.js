@@ -8,6 +8,7 @@
         return {
           restrict: 'A',
           link: function (scope, element) {
+            var t0 = performance.now();
 
             var body = $('body');
             var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
@@ -102,7 +103,10 @@
               });
             }
 
+            var t1 = performance.now();
+            console.log("Call to doSomething took " + (t1 - t0) + " 2222.");
           }
+
         };
       }]);
 

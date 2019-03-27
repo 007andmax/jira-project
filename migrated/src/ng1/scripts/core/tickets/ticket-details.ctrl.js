@@ -11,6 +11,7 @@
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
                   TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
+          var t0 = performance.now();
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
               ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
@@ -1377,16 +1378,16 @@
               return shared.user.id;
             });
 
-            // TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
-            //   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
-            //   $scope.disablePreventingLocationChange = true;
-            //   if(!$state.includes('companyProfile')) {
-            //     $state.go('tickets');
-            //   }
-            //   //$state.go('tickets');
-            //   $scope.uncheckTicket($scope.ticketDetails.id);
-            //   $scope.ticketClosing = false;
-            // }, recipientsIds);
+            TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+              $scope.disablePreventingLocationChange = true;
+              if(!$state.includes('companyProfile')) {
+                $state.go('tickets');
+              }
+              //$state.go('tickets');
+              $scope.uncheckTicket($scope.ticketDetails.id);
+              $scope.ticketClosing = false;
+            }, recipientsIds);
 
             UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
             $scope.disablePreventingLocationChange = true;
@@ -1484,7 +1485,8 @@
             '|| (ticketUpdate.services && ticketUpdate.services.length > 1)';
 
           UserConfirmationsService.preventLocationChange($scope, condition);
-
+          var t1 = performance.now();
+          console.log("Call to doSomething took " + (t1 - t0) + " 1111.")
         }]);
   }()
 );

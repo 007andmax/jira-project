@@ -274,28 +274,7 @@
               "path": "tags.id",
               "operator": "IN",
               "values": ticketsSharedState.filter.tags.map(function(el) { return el.id })
-            }
-            // var queriesList = ticketsSharedState.filter.tags.map(function(el) {
-            //   return {
-            //     "path": "tags.id",
-            //     "operator": "IN",
-            //     "values": [el.id]
-            //   }
-            // });
-            //
-            //
-            // console.log(queries, "QUERIS")
-            //
-            // queriesList.forEach(function(query) {
-            //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(query);
-            // })
-            // if (!queriesList || !queriesList.length) {
-            //   groupedQuery.groupFieldFilters[0].fieldFilterDtos.push({
-            //     "path": "tags.id",
-            //     "operator": "IN",
-            //     "values": []
-            //   })
-            // }
+            };
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(tagsQuery)
           }
           if(ticketsSharedState.filter.clientUserId) {

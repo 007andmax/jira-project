@@ -6,7 +6,7 @@
     ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
       function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService, UserNotificationService) {
         var disableInvoiceButtons = false;
-
+        var t0 = performance.now();
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
         $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
 
@@ -61,17 +61,8 @@
         $scope.allPayments.sort(function(a, b) {
           var a = new Date(a.createdAt);
           var b = new Date(b.createdAt);
-
           return b - a;
-        })
-
-
-
-        // var paymentInfo = document.querySelectorAll('.payment-info-submenu');
-        //
-        // paymentInfo.forEach(function(el) {
-        //   el.style.zIndex = 100000;
-        // })
+        });
 
         var today = Date.now();
         var dueDate = new Date($scope.invoice.dueDate).getTime();
@@ -80,8 +71,6 @@
         var outstanding;
         $scope.invoice.isOverDue = false;
         $scope.invoice.isOutstanding = false;
-        $scope.invoice.daysDueDateForSorting;
-        $scope.invoice.dueDatePositionForSorting;
 
         $scope.invoice.isReadedAt = !!$scope.invoice.readedAt;
         $scope.invoice.readedAtInMilliseconds = $scope.invoice.readedAt ? new Date($scope.invoice.readedAt).getTime() : 999999999999999999999;
@@ -162,7 +151,8 @@
             });
           }
         };
-
+        var t1 = performance.now();
+        console.log("Call to doSomething took " + (t1 - t0) + " 1111.")
       }]);
 
 }());

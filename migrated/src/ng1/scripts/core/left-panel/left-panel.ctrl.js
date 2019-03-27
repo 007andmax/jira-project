@@ -273,17 +273,17 @@
           }
         }, true);
 
-        // TicketsService.getAllCounts(function (resp) {
-        //   $scope.ticketsCounter = resp;
-        // });
+        TicketsService.getAllCounts(function (resp) {
+          $scope.ticketsCounter = resp;
+        });
 
         $scope.$watch(function() {
           return $rootScope.exampleCompanyDeleted;
         }, function(val) {
           if (val) {
-            // TicketsService.getAllCounts(function (resp) {
-            //   $scope.ticketsCounter = resp;
-            // });
+            TicketsService.getAllCounts(function (resp) {
+              $scope.ticketsCounter = resp;
+            });
           }
         });
 
