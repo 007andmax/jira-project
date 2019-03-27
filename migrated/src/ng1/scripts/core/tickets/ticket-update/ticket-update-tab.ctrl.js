@@ -16,15 +16,25 @@
           //
           // window.addEventListener('scroll', closeDropdowns)
           //
-          // $scope.$watch('currentOpenTab', function() {
-          //   setTimeout(function() {
-          //     var scrollable = document.querySelector('[scrollable]');
-          //
-          //     if (!scrollable) return;
-          //     scrollable.addEventListener('scroll', closeDropdowns)
-          //   }, 1000);
-          //
-          // });
+          function closeDropdowns() {
+            var ticketAddContent = document.querySelector('.ticket-add-content');
+
+            if (ticketAddContent) {
+              ticketAddContent.click();
+            }
+
+          }
+
+
+          $scope.$watch('currentOpenTab', function() {
+            setTimeout(function() {
+              var scrollable = document.querySelector('[scrollable]');
+
+              if (!scrollable) return;
+              scrollable.addEventListener('scroll', closeDropdowns)
+            }, 1000);
+
+          });
           //
           // $scope.$on('$destroy', function() {
           //   window.removeEventListener('scroll', closeDropdowns)
@@ -36,15 +46,7 @@
           //   }, 0)
           // });
           //
-          // function closeDropdowns() {
-          //   var ticketAddContent = document.querySelector('.ticket-add-content');
-          //
-          //   if (ticketAddContent) {
-          //     ticketAddContent.click();
-          //   }
-          //
-          // }
-          //
+
           function checkForOpenDropdown() {
             var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
             var dateInput = document.querySelector('.new-date-picker input');

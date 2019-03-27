@@ -25,9 +25,6 @@
     <div class="content-container" ng-class="{'large': isRightPanelHidden}">
       <div class="content-wrapper">
         <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
-        <app-left-panel
-        *ngIf="isAppTypeIsNg2()"
-        ></app-left-panel>
         <router-outlet></router-outlet>
       </div>
     </div>

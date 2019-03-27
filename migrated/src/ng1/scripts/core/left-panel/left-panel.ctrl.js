@@ -60,12 +60,10 @@
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
 
         $scope.checkDublicateCategory = function() {
-          console.log($scope.newCategory ,'newCategory');
           var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
             console.log(item.name, $scope.newCategory, '11');
             return item.name.toLowerCase() === $scope.newCategory.toLowerCase();
           });
-          console.log(duplicateCategory, 'duplicateCategory');
           if (duplicateCategory && duplicateCategory[0]) {
             return $scope.disableCreateCategory = true;
           } else {
@@ -276,9 +274,6 @@
         }, true);
 
         TicketsService.getAllCounts(function (resp) {
-          console.log('123512350000');
-          console.log(resp);
-
           $scope.ticketsCounter = resp;
         });
 

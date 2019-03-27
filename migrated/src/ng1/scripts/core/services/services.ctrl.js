@@ -65,7 +65,7 @@
         function fillHasDefaultServicesChecked() {
           $scope.hasDefaultServicesChecked = false;
 
-          var defaultServices = $scope.servicesData['default'];
+          var defaultServices = $scope.servicesData ? $scope.servicesData['default'] : '';
 
           for (var serviceId in $scope.checkedServices) {
             if ($scope.checkedServices[serviceId] && Utils.findById(defaultServices, serviceId)) {

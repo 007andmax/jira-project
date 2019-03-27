@@ -20,9 +20,8 @@ export class AppComponent implements OnInit {
     this.upgrade.bootstrap(document.body, ['quicktech']);
     this.router.events
       .subscribe((event:NavigationStart) => {
-        console.log(this.router.url, 'this.router.url');
         this.appType = this.router.url.startsWith('/ng2') ? 'ng2' : 'ng1';
-        console.log(this.appType);
+        console.log('tests');
       });
   }
 

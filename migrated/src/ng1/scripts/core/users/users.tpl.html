@@ -4,12 +4,12 @@
 
       <div class="view-change">
         <!-- <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
-          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/tile-gray.svg">
-          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="ng1/images/input-icons/tile-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="ng1/images/input-icons/tile-deep-gray.svg">
         </div>
         <div class="list-btn view-change-btn" ng-class="{'active': usersView === 'list'}" ng-click="changeView('list')">
-          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="images/input-icons/list-gray.svg">
-          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/list-deep-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="ng1/images/input-icons/list-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="ng1/images/input-icons/list-deep-gray.svg">
         </div> -->
       </div>
     </div>
@@ -114,7 +114,7 @@
           </div>
           <div class="card__info">
             <div class="clearfix">
-              <img src="images/company/company-profile-blue.png" alt="" stop-propagation="click"
+              <img src="ng1/images/company/company-profile-blue.png" alt="" stop-propagation="click"
                    ui-sref="companyProfile({ companyId: user.company.id })">
               <p uib-tooltip="{{ getUserCompanyName(user) }}" tooltip-placement="bottom"
                  trimmed-tooltip-checker="getUserCompanyName(user)">
@@ -122,16 +122,16 @@
             </div>
             <div class="clearfix"
                  ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0] && user.phoneNumbers[0].number">
-              <img src="images/company/smartphone-green.png" alt="">
+              <img src="ng1/images/company/smartphone-green.png" alt="">
               <p>{{ user.phoneNumbers[0].number }}</p>
             </div>
             <div class="clearfix"
                  ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[1] && user.phoneNumbers[1].number">
-              <img src="images/company/smartphone-green.png" alt="">
+              <img src="ng1/images/company/smartphone-green.png" alt="">
               <p>{{ user.phoneNumbers[1].number }}</p>
             </div>
             <div class="clearfix">
-              <img ng-if="user.primaryEmail" src="images/company/email-purple.png" alt="" email-to="user.primaryEmail"
+              <img ng-if="user.primaryEmail" src="ng1/images/company/email-purple.png" alt="" email-to="user.primaryEmail"
                    stop-propagation="click">
               <p ng-if="user.primaryEmail" style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}"
                  tooltip-placement="bottom"
@@ -139,7 +139,7 @@
               </p>
             </div>
             <div class="clearfix">
-              <img ng-if="user.secondaryEmail" src="images/company/email-purple.png" alt=""
+              <img ng-if="user.secondaryEmail" src="ng1/images/company/email-purple.png" alt=""
                    email-to="user.secondaryEmail" stop-propagation="click">
               <p ng-if="user.secondaryEmail" style="width: 275px;" class="ellipsis"
                  uib-tooltip="{{ user.secondaryEmail }}"
@@ -157,7 +157,7 @@
               <span class="plus-card"></span>New Ticket
             </button>
             <img class="pull-right" ng-click="popupOpened = true"
-                 src="images/company/more.png" alt="">
+                 src="ng1/images/company/more.png" alt="">
           </div>
           <form name="fakeForm" class="set-privileges" ng-class="{'open': popupOpened}" ng-click="fakeForm.$setDirty()">
             <p><strong>Set privileges</strong></p>
@@ -561,12 +561,6 @@
               </a>
 
             </div>
-
-            <!-- <span class="caret-mark ng-hide" style="position:relative" ng-hide="filterDesignation">
-              <i class="icn-sm report-caret-icon"></i>
-            </span> -->
-
-
           </div>
 
 
@@ -606,14 +600,6 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
             <div class="x-mark-wrapper select-to-click">
-              <!--<input type="text" class="form-control has-dropdown pointer"-->
-              <!--placeholder="Select Industry"-->
-              <!--autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"-->
-              <!--uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"-->
-              <!--qt-typeahead-show-on-focus-->
-              <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
-
-              <!--<div typeahead-input-icon="usersSharedState.filter.industry"></div>-->
 
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="mobileFilterUsersIndustry"
