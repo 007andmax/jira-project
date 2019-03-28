@@ -178,6 +178,7 @@
               "src/ng1/scripts/common/directives/file-size-filter.js",
               "src/ng1/scripts/common/directives/fixed-block-top.js",
               "src/ng1/scripts/common/directives/fixed-tab-topbar.drv.js",
+              "src/ng1/scripts/common/directives/fast-repeat.drv.js",
               "src/ng1/scripts/common/directives/focus-on.drv.js",
               "src/ng1/scripts/common/directives/hard-phone-number-pattern.js",
               "src/ng1/scripts/common/directives/hard-reset-pattern.drv.js",

@@ -25,11 +25,11 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   merge(url, whole) { return url }
 }
 
-// angular.module('quicktech')
-//   .directive(
-//     'ng2Demo',
-//     downgradeComponent({component: PasswordManagerComponent})
-//   );
+angular.module('quicktech')
+  .directive(
+    'ng2Demo',
+    downgradeComponent({component: PasswordManagerComponent})
+  );
 
 
 @NgModule({
@@ -44,17 +44,17 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
     BrowserModule,
     AppRoutingModule,
     UpgradeModule,
-    // RouterModule.forRoot([
-    //     {
-    //       path: 'ng2/password-manager',
-    //       component: PasswordManagerComponent
-    //
-    //     }
-    //   ],
-    //   {
-    //     useHash: true,
-    //     enableTracing: true
-    //   })
+    RouterModule.forRoot([
+        {
+          path: 'ng2/password-manager',
+          component: PasswordManagerComponent
+
+        }
+      ],
+      {
+        useHash: true,
+        enableTracing: true
+      })
   ],
   providers: [
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },

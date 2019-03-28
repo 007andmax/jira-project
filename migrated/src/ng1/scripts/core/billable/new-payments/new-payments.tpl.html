@@ -1,433 +1,432 @@
 <div class="payments" ng-controller="quicktech.core.billable.newPaymentsCtrl" ng-cloak>
-  <!--<div>-->
-    <!--<div class="change-view-actions">-->
-      <!--<div class="action-wrap clearfix invoices" style="min-height: 0; padding: 0">-->
-        <!--<div class="invoices-header">-->
-          <!--<h3 style="margin: 0;">Payments</h3>-->
-          <!--<div class="invoices-header-filters" slyle="position: relative;">-->
-            <!--<div>-->
-              <!--<input class="pointer" type="text" placeholder="Filter by date" date-range-picker-->
-                     <!--ng-model="dateFilter"-->
-                     <!--options="dateFilterOptions">-->
-              <!--<i class="new-calendar" ng-show="!dateFilter.startDate && !dateFilter.endDate"></i>-->
-              <!--<i class="icn-sm icn-remove-old pointer"-->
-                 <!--ng-show="dateFilter.startDate && dateFilter.endDate"-->
-                 <!--uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearDateFilter()"></i>-->
-            <!--</div>-->
-            <!--<div>-->
-              <!--<input type="text"-->
-                     <!--class="has-dropdown pointer"-->
-                     <!--placeholder="Search by number or by company"-->
-                     <!--ng-trim="false"-->
-                     <!--autocomplete="off"-->
-                     <!--ng-model="filterCompany"-->
-                     <!--ng-click="onFilterClick()"-->
-                     <!--ng-keydown="onFilterPress($event)"-->
-                     <!--uib-typeahead="company as company for company in companies | orderBy:'toString()'"-->
-                     <!--qt-typeahead-async-show-on-focus smart-dropdown-menu-position>-->
+  <div>
+    <div class="change-view-actions">
+      <div class="action-wrap clearfix invoices" style="min-height: 0; padding: 0">
+        <div class="invoices-header">
+          <h3 style="margin: 0;">Payments</h3>
+          <div class="invoices-header-filters" slyle="position: relative;">
+            <div>
+              <input class="pointer" type="text" placeholder="Filter by date" date-range-picker
+                     ng-model="dateFilter"
+                     options="dateFilterOptions">
+              <i class="new-calendar" ng-show="!dateFilter.startDate && !dateFilter.endDate"></i>
+              <i class="icn-sm icn-remove-old pointer"
+                 ng-show="dateFilter.startDate && dateFilter.endDate"
+                 uib-tooltip="clear date filter" tooltip-placement="top" ng-click="clearDateFilter()"></i>
+            </div>
+            <div>
+              <input type="text"
+                     class="has-dropdown pointer"
+                     placeholder="Search by number or by company"
+                     ng-trim="false"
+                     autocomplete="off"
+                     ng-model="filterCompany"
+                     ng-click="onFilterClick()"
+                     ng-keydown="onFilterPress($event)"
+                     uib-typeahead="company as company for company in companies | orderBy:'toString()'"
+                     qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
-              <!--<div typeahead-input-icon="filterCompany" ng-click="resetFilter()"></div>-->
-            <!--</div>-->
-            <!--<div class="clearfix sort-by">-->
+              <div typeahead-input-icon="filterCompany" ng-click="resetFilter()"></div>
+            </div>
+            <div class="clearfix sort-by">
 
-              <!--<div uib-dropdown smart-dropdown-menu-position="dropdown-menu">-->
-                <!--<div uib-dropdown-toggle>-->
-                  <!--<input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">-->
-                  <!--<div>-->
-                    <!--<i class="icn-sm report-caret-icon pointer" ng-show="!sortByValue"></i>-->
-                    <!--<i class="icn-sm icn-remove-old pointer"-->
-                       <!--ng-show="sortByValue"-->
-                       <!--uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>-->
+              <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
+                <div uib-dropdown-toggle>
+                  <input class="pointer" type="text" placeholder="Sort By" readonly ng-model="sortByValue">
+                  <div>
+                    <i class="icn-sm report-caret-icon pointer" ng-show="!sortByValue"></i>
+                    <i class="icn-sm icn-remove-old pointer"
+                       ng-show="sortByValue"
+                       uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
+                  </div>
+                </div>
+                <ul class="dropdown-menu" role="menu" style="margin-top: -3px;">
+                  <li><a ng-click="sortBy('paid')">Paid </a></li>
+                  <li><a ng-click="sortBy('refund')">Refund</a></li>
+
+                </ul>
+              </div>
+
+            </div>
+
+            <button tooltip-append-to-body="true"
+                    class="save-invoice-button btn btn-success"
+                    modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
+                    mw-controller="quicktech.core.receivable.receivePaymentCtrl"
+                    modal-window-class="modal-receive-payment"
+                    tooltip-placement="bottom">
+
+
+              Process payment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <loading-indicator ng-class="!filteredPayments ? 'loading-indicator' : ''" loading-trigger="!filteredPayments"></loading-indicator>
+
+    <ul class="qt-list qt-companies qt-users users-bg new-payments" ng-if="filteredPayments" ng-click="hideAllTooltiip($event)">
+      <li class="list-heading">
+        <div class="col-xs-1" style="width: 3%">
+          <label class="control checkbox pull-left" ng-click="stopPropagation($event)">
+            <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <div class="col-xs-1" ng-click="setOrderByPayments('date')">
+              <span class="sort-span">
+              Date
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'date'}"></i>
+              </span>
+        </div>
+        <div class="col-xs-1 w-5" ng-click="setOrderByPayments('number')">
+
+              <span class="sort-span">
+                Invoice#
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'number'}"></i>
+              </span>
+        </div>
+        <div class="col-xs-2" ng-click="setOrderByPayments('name')">
+              <span class="sort-span">
+                Company name
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'name'}"></i>
+              </span>
+        </div>
+        <div class="col-xs-1" ng-click="setOrderByPayments('paymentMethod')">
+              <span class="sort-span">
+                Method
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'paymentMethod'}"></i>
+              </span>
+        </div>
+        <div class="col-xs-2">
+              <span class="sort-span">
+                Reference
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'reference'}"></i>
+              </span>
+        </div>
+        <div class="col-xs-2 w-26">
+              <span class="sort-span">
+                Note
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'note'}"></i>
+              </span>
+        </div>
+        <div class="col-xs-1" ng-click="setOrderByPayments('amount')">
+              <span class="sort-span">
+                Amount
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'amount'}"></i>
+              </span>
+        </div>
+
+        <div class="col-xs-1 w-5" style="padding: 0;" ng-click="setOrderByPayments('status')">
+              <span class="sort-span">
+                Status
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'status'}"></i>
+              </span>
+        </div>
+      </li>
+
+      <li class="list-company-row"
+          ng-if="filteredPayments && filteredPayments.length > 0"
+          ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse">
+
+        <div class="col-xs-1" style="width: 3%">
+          <label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"
+                 class="control checkbox pull-left" ng-click="stopPropagation($event)">
+            <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <div class="col-xs-1">
+          {{ payment.createdAt }}
+        </div>
+        <div class="col-xs-1 w-5">
+
+          <div ng-click="showInvoice(payment.partialPaidInvoice)"><span tooltip-placement="top"
+                                                                        uib-tooltip="Invoice Preview"
+                                                                        tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
+          </div>
+          <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span
+            tooltip-placement="top" uib-tooltip="Invoice Preview"
+            tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
+        </div>
+        <div class="col-xs-2">
+          {{ payment.clientCompanyName }}
+        </div>
+        <div class="col-xs-1" style="word-break: break-all">
+          <span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>
+        </div>
+        <div class="col-xs-2">
+          <span>{{ payment.reference }}</span>
+        </div>
+        <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
+          <p set-height-note text="payment.note" line-length="payment.invoiceNumbers.length" ng-click="showTooltip($event, $index)">
+            {{ payment.note }}
+          </p>
+          <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
+            <p class="full-text-title">Note</p>
+            {{payment.note}}
+          </div>
+        </div>
+        <div class="col-xs-1">
+          ${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}
+        </div>
+        <div class="col-xs-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }"
+             style="text-align: center;width: auto;">
+          {{ payment.refundMethod ? 'Refund' : 'Paid' }}
+        </div>
+        <div class="col-xs-1" style="width: 3%;position: absolute;right: 10px;">
+          <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">
+            <div uib-dropdown-toggle uib-tooltip="more"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true"
+                 tooltip-popup-delay="2000">
+              <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">
+              <li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a
+                ng-click="openModal('edit-payments', payment)">Edit payment</a>
+              </li>
+              <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
+              <li ng-if="!payment.refundMethod"><a ng-click="openModal('refund', payment)">Refund payment</a></li>
+              <li><a ng-click="deletePayment(payment.id)">Delete payment</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="dropdown-wo-max-height"
+             to-left="true"
+             style="position: absolute;right: 15px;">
+          <div style="display: inline-block;"
+               opened-from-list="true"
+               uib-dropdown-toggle
+               ng-click="downloadAgent($event, company)">
+            <div class="download-agent-company download-agent-company-small pointer">
+              <span>Download Agent</span>
+              <img src="./ng1/images/new-icons/download.svg">
+            </div>
+          </div>
+        </div>
+        <div class="mob-company-footer">
+          <div>
+            <p>TICKETS</p>
+            <p> {{ company.companyStatistic.ticketsSubmitted || '0' }}</p>
+          </div>
+          <div>
+            <p>DEVICES</p>
+            <p> {{ devicesCount[cooriginmpany.id].all || '0' }} </p>
+          </div>
+          <div>
+            <p>USERS</p>
+            <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
+          </div>
+        </div>
+        <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
+                ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+                create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
+
+        <img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
+             ng-click="dearchiveCompany(company)" />
+      </li>
+    </ul>
+  </div>
+
+
+  <div ng-if="isInvoiceShown" >
+
+    <div invoice-modal-window>
+      <div ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto || currentInvoice" invoice-content>
+
+
+        <div class="invoice-preview invoice-create">
+          <div class="invoice-create--header">
+            <h3>Invoice</h3>
+            <div class="invoice-create--header__btn">
+              <button class="btn btn-default" ng-click="showInvoice(null, true)">Back</button>
+              <!-- <button class="btn btn-success" ng-click="download()">Download</button> -->
+
+              <div uib-dropdown class="save-invoice-button">
+                <button ng-if="!invoicePreview && !invoiceCreated"
+                        ng-click="sentInvoiceToMail()"
+                        ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
+                        tooltip-append-to-body="true"
+                        class="btn btn-success"
+                        tooltip-placement="bottom">
+
+
+                  Resend invoice
+
+                  <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
+                  <i class="icn-sm pointer report-caret-icon-white"></i>
                   <!--</div>-->
-                <!--</div>-->
-                <!--<ul class="dropdown-menu" role="menu" style="margin-top: -3px;">-->
-                  <!--<li><a ng-click="sortBy('paid')">Paid </a></li>-->
-                  <!--<li><a ng-click="sortBy('refund')">Refund</a></li>-->
+                  <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="create-invoice-dropdown" ng-click="print()">Print invoice</li>
 
-                <!--</ul>-->
-              <!--</div>-->
+                  <li class="create-invoice-dropdown" ng-click="download()">Download invoice</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-            <!--</div>-->
+          <div class="info-block">
+            <p style="display: inline-block">
+              <span ng-if="readedAt">This invoice was read on {{ readedAt | date:'dd MMM yyyy' }}. </span>
+              <span ng-if="!readedAt">This invoice is unread. </span>
+              <span ng-if="paidOn">Invoice was paid on {{ paidOn | date:'dd MMM yyyy' }} </span>
+            </p>
+          </div>
 
-            <!--<button tooltip-append-to-body="true"-->
-                    <!--class="save-invoice-button btn btn-success"-->
-                    <!--modal-window-button="/html/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"-->
-                    <!--mw-controller="quicktech.core.receivable.receivePaymentCtrl"-->
-                    <!--modal-window-class="modal-receive-payment"-->
-                    <!--tooltip-placement="bottom">-->
-
-
-              <!--Process payment-->
-            <!--</button>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--<loading-indicator ng-class="!filteredPayments ? 'loading-indicator' : ''" loading-trigger="!filteredPayments"></loading-indicator>-->
-
-    <!--<ul class="qt-list qt-companies qt-users users-bg new-payments" ng-if="filteredPayments" ng-click="hideAllTooltiip($event)">-->
-      <!--<li class="list-heading">-->
-        <!--<div class="col-xs-1" style="width: 3%">-->
-          <!--<label class="control checkbox pull-left" ng-click="stopPropagation($event)">-->
-            <!--<input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">-->
-            <!--<span class="control-indicator"></span>-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="col-xs-1" ng-click="setOrderByPayments('date')">-->
-              <!--<span class="sort-span">-->
-              <!--Date-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'date'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-1 w-5" ng-click="setOrderByPayments('number')">-->
-
-              <!--<span class="sort-span">-->
-                <!--Invoice#-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'number'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2" ng-click="setOrderByPayments('name')">-->
-              <!--<span class="sort-span">-->
-                <!--Company name-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'name'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-1" ng-click="setOrderByPayments('paymentMethod')">-->
-              <!--<span class="sort-span">-->
-                <!--Method-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'paymentMethod'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2">-->
-              <!--<span class="sort-span">-->
-                <!--Reference-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'reference'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2 w-26">-->
-              <!--<span class="sort-span">-->
-                <!--Note-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'note'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-1" ng-click="setOrderByPayments('amount')">-->
-              <!--<span class="sort-span">-->
-                <!--Amount-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'amount'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-1 w-5" style="padding: 0;" ng-click="setOrderByPayments('status')">-->
-              <!--<span class="sort-span">-->
-                <!--Status-->
-                <!--<i class="icn-sm sort-icon icn-sort"-->
-                   <!--ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'status'}"></i>-->
-              <!--</span>-->
-        <!--</div>-->
-      <!--</li>-->
-
-      <!--<li class="list-company-row"-->
-          <!--ng-if="filteredPayments && filteredPayments.length > 0"-->
-          <!--ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse"-->
-          <!--ng-controller="quicktech.core.billable.newPaymentCtrl">-->
-
-        <!--<div class="col-xs-1" style="width: 3%">-->
-          <!--<label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"-->
-                 <!--class="control checkbox pull-left" ng-click="stopPropagation($event)">-->
-            <!--<input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">-->
-            <!--<span class="control-indicator"></span>-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="col-xs-1">-->
-          <!--{{ payment.createdAt }}-->
-        <!--</div>-->
-        <!--<div class="col-xs-1 w-5">-->
-
-          <!--<div ng-click="showInvoice(payment.partialPaidInvoice)"><span tooltip-placement="top"-->
-                                                                        <!--uib-tooltip="Invoice Preview"-->
-                                                                        <!--tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>-->
-          <!--</div>-->
-          <!--<div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span-->
-            <!--tooltip-placement="top" uib-tooltip="Invoice Preview"-->
-            <!--tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2">-->
-          <!--{{ payment.clientCompanyName }}-->
-        <!--</div>-->
-        <!--<div class="col-xs-1" style="word-break: break-all">-->
-          <!--<span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2">-->
-          <!--<span>{{ payment.reference }}</span>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2 w-26 positive-relative full-text-wrapper">-->
-          <!--<p set-height-note text="payment.note" line-length="payment.invoiceNumbers.length" ng-click="showTooltip($event, $index)">-->
-            <!--{{ payment.note }}-->
-          <!--</p>-->
-          <!--<div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">-->
-            <!--<p class="full-text-title">Note</p>-->
-            <!--{{payment.note}}-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-1">-->
-          <!--${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}-->
-        <!--</div>-->
-        <!--<div class="col-xs-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }"-->
-             <!--style="text-align: center;width: auto;">-->
-          <!--{{ payment.refundMethod ? 'Refund' : 'Paid' }}-->
-        <!--</div>-->
-        <!--<div class="col-xs-1" style="width: 3%;position: absolute;right: 10px;">-->
-          <!--<div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">-->
-            <!--<div uib-dropdown-toggle uib-tooltip="more"-->
-                 <!--tooltip-placement="top"-->
-                 <!--tooltip-append-to-body="true"-->
-                 <!--tooltip-popup-delay="2000">-->
-              <!--<i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>-->
-            <!--</div>-->
-            <!--<ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">-->
-              <!--<li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a-->
-                <!--ng-click="openModal('edit-payments', payment)">Edit payment</a>-->
-              <!--</li>-->
-              <!--<li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>-->
-              <!--<li ng-if="!payment.refundMethod"><a ng-click="openModal('refund', payment)">Refund payment</a></li>-->
-              <!--<li><a ng-click="deletePayment(payment.id)">Delete payment</a></li>-->
-            <!--</ul>-->
-          <!--</div>-->
-        <!--</div>-->
+          <div class="invoice-list">
+            <div class="invoice-list--header">
+              <div class="invoice-list--header__top clearfix">
+                <div class="col-md-5 pl-30">
+                  <img ng-src="/companyLogo/{{currentInvoice.company.parent.id}}?update={{ stopCache }}" alt="logo">
+                </div>
+                <div class="col-md-7 text-right pr-30">
+                  <h4 class="bold">Invoice <span>#{{ currentInvoice.number }}</span></h4>
+                  <p class="bold">{{currentInvoice.techCompanyName}}</p>
+                  <p>{{currentInvoice.senderAddress}}</p>
+                  <p>{{currentInvoice.phoneNumbers[0].number}}</p>
+                </div>
+              </div>
+              <div class="invoice-list--header__bottom clearfix">
+                <div class="col-md-7 pl-30">
+                  <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
+                  <p class="bold">{{currentInvoice.companyName}}</p>
+                  <p>{{ currentInvoice.invoiceContact.firstName + ' ' + currentInvoice.invoiceContact.lastName}}</p>
+                  <!-- <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p> -->
+                  <p>{{ currentInvoice.billingAddress }}</p>
+                  <p>{{ currentInvoice.invoiceContact.primaryEmail }}</p>
+                  <p style="margin-bottom: 20px;">{{ currentInvoice.invoiceContact.phoneNumbers[0].number }}</p>
+                </div>
+                <div class="col-md-5 pr-30">
 
 
-        <!--<div class="dropdown-wo-max-height"-->
-             <!--to-left="true"-->
-             <!--style="position: absolute;right: 15px;">-->
-          <!--<div style="display: inline-block;"-->
-               <!--opened-from-list="true"-->
-               <!--uib-dropdown-toggle-->
-               <!--ng-click="downloadAgent($event, company)">-->
-            <!--<div class="download-agent-company download-agent-company-small pointer">-->
-              <!--<span>Download Agent</span>-->
-              <!--<img src="./ng1/images/new-icons/download.svg">-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="mob-company-footer">-->
-          <!--<div>-->
-            <!--<p>TICKETS</p>-->
-            <!--<p> {{ company.companyStatistic.ticketsSubmitted || '0' }}</p>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<p>DEVICES</p>-->
-            <!--<p> {{ devicesCount[cooriginmpany.id].all || '0' }} </p>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<p>USERS</p>-->
-            <!--<p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<button class="company-edit-icn company-edit-icn-sm desktop-hidden"-->
-                <!--ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"-->
-                <!--create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>-->
+                  <p ng-if="currentInvoice.taxId" class="bold"><span>{{currentInvoice.taxId}}</span>{{
+                                                                                                    currentInvoice.taxIdDescription
+                                                                                                    || 'Tax Number' }}
+                  </p>
+                  <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice
+                                                                                                                 Date:
+                  </p>
+                  <p class="bold"><span>{{ currentInvoice.dueDate | date: 'dd MMM yyyy'}}</span>Payment Due</p>
+                  <p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount
+                                                                                                                                  Due:
+                  </p>
+                </div>
+              </div>
+            </div>
 
-        <!--<img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"-->
-             <!--ng-click="dearchiveCompany(company)" />-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</div>-->
-
-
-  <!--<div ng-if="isInvoiceShown" ng-controller="quicktech.core.receivable.invoicePreviewCtrl">-->
-
-    <!--<div invoice-modal-window>-->
-      <!--<div ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto || currentInvoice" invoice-content>-->
-
-
-        <!--<div class="invoice-preview invoice-create">-->
-          <!--<div class="invoice-create&#45;&#45;header">-->
-            <!--<h3>Invoice</h3>-->
-            <!--<div class="invoice-create&#45;&#45;header__btn">-->
-              <!--<button class="btn btn-default" ng-click="showInvoice(null, true)">Back</button>-->
-              <!--&lt;!&ndash; <button class="btn btn-success" ng-click="download()">Download</button> &ndash;&gt;-->
-
-              <!--<div uib-dropdown class="save-invoice-button">-->
-                <!--<button ng-if="!invoicePreview && !invoiceCreated"-->
-                        <!--ng-click="sentInvoiceToMail()"-->
-                        <!--ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"-->
-                        <!--tooltip-append-to-body="true"-->
-                        <!--class="btn btn-success"-->
-                        <!--tooltip-placement="bottom">-->
-
-
-                  <!--Resend invoice-->
-
-                  <!--&lt;!&ndash;<div class="caret-wrapper pointer" style="color: white; padding: 10px" >&ndash;&gt;-->
-                  <!--<i class="icn-sm pointer report-caret-icon-white"></i>-->
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                  <!--<div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>-->
-                <!--</button>-->
-                <!--<ul class="dropdown-menu">-->
-                  <!--<li class="create-invoice-dropdown" ng-click="print()">Print invoice</li>-->
-
-                  <!--<li class="create-invoice-dropdown" ng-click="download()">Download invoice</li>-->
-                <!--</ul>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="info-block">-->
-            <!--<p style="display: inline-block">-->
-              <!--<span ng-if="readedAt">This invoice was read on {{ readedAt | date:'dd MMM yyyy' }}. </span>-->
-              <!--<span ng-if="!readedAt">This invoice is unread. </span>-->
-              <!--<span ng-if="paidOn">Invoice was paid on {{ paidOn | date:'dd MMM yyyy' }} </span>-->
-            <!--</p>-->
-          <!--</div>-->
-
-          <!--<div class="invoice-list">-->
-            <!--<div class="invoice-list&#45;&#45;header">-->
-              <!--<div class="invoice-list&#45;&#45;header__top clearfix">-->
-                <!--<div class="col-md-5 pl-30">-->
-                  <!--<img ng-src="/companyLogo/{{currentInvoice.company.parent.id}}?update={{ stopCache }}" alt="logo">-->
-                <!--</div>-->
-                <!--<div class="col-md-7 text-right pr-30">-->
-                  <!--<h4 class="bold">Invoice <span>#{{ currentInvoice.number }}</span></h4>-->
-                  <!--<p class="bold">{{currentInvoice.techCompanyName}}</p>-->
-                  <!--<p>{{currentInvoice.senderAddress}}</p>-->
-                  <!--<p>{{currentInvoice.phoneNumbers[0].number}}</p>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="invoice-list&#45;&#45;header__bottom clearfix">-->
-                <!--<div class="col-md-7 pl-30">-->
-                  <!--<p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>-->
-                  <!--<p class="bold">{{currentInvoice.companyName}}</p>-->
-                  <!--<p>{{ currentInvoice.invoiceContact.firstName + ' ' + currentInvoice.invoiceContact.lastName}}</p>-->
-                  <!--&lt;!&ndash; <p>{{ invoiceBillTo.companyInfo.contacts[0].firstName + ' ' +  invoiceBillTo.companyInfo.contacts[0].lastName}}</p> &ndash;&gt;-->
-                  <!--<p>{{ currentInvoice.billingAddress }}</p>-->
-                  <!--<p>{{ currentInvoice.invoiceContact.primaryEmail }}</p>-->
-                  <!--<p style="margin-bottom: 20px;">{{ currentInvoice.invoiceContact.phoneNumbers[0].number }}</p>-->
-                <!--</div>-->
-                <!--<div class="col-md-5 pr-30">-->
-
-
-                  <!--<p ng-if="currentInvoice.taxId" class="bold"><span>{{currentInvoice.taxId}}</span>{{-->
-                                                                                                    <!--currentInvoice.taxIdDescription-->
-                                                                                                    <!--|| 'Tax Number' }}-->
-                  <!--</p>-->
-                  <!--<p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice-->
-                                                                                                                 <!--Date:-->
-                  <!--</p>-->
-                  <!--<p class="bold"><span>{{ currentInvoice.dueDate | date: 'dd MMM yyyy'}}</span>Payment Due</p>-->
-                  <!--<p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount-->
-                                                                                                                                  <!--Due:-->
-                  <!--</p>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="invoice-list&#45;&#45;item" ng-repeat="ticket in currentInvoice.tickets">-->
-              <!--<div class="invoice-list&#45;&#45;item__header">-->
-                <!--<div class="pavlik clearfix">-->
-                  <!--<div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>-->
-                  <!--<div class="col-md-8 bold" style="opacity: .7;">Subject</div>-->
-                  <!--<div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">-->
-                    <!--{{ ticket.closedAt | date: 'dd MMM yyyy' }}-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix">-->
-                  <!--<div class="col-md-2 pl-30">#{{ ticket.number }}</div>-->
-                  <!--<div class="col-md-10 pr-30">{{ ticket.subject }}</div>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="invoice-list&#45;&#45;item__content">-->
-                <!--<div class="pavlik p-2 clearfix">-->
-                  <!--<div class="col-md-5 bold pl-30" style="width: 52%;">Item</div>-->
-                  <!--<div class="col-md-2 bold" style="width: 13%;">Unit Price</div>-->
-                  <!--<div class="col-md-2 bold" style="width: 13%;">Quantity</div>-->
-                  <!--<div class="col-md-1 bold">Tax</div>-->
-                  <!--<div class="col-md-2 bold text-right pr-30" style="width: 13%;">Total</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">-->
-                  <!--<div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>-->
-                  <!--<div class="col-md-3 pre-line" style="width: 35.4%;">{{ productExpense.item.description }}</div>-->
-                  <!--<div class="col-md-2" style="width: 13%;">{{ productExpense.item.sale | currency: '$':2 }}</div>-->
-                  <!--<div class="col-md-2" style="width: 13%;">{{ productExpense.billableQuantity }}</div>-->
-                  <!--<div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>-->
-                  <!--<div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.totalSum | currency:-->
-                                                                             <!--'$':2 }}-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">-->
-                  <!--<div class="col-md-5 pl-30" style="width: 51.9%;">-->
-                    <!--<div class="col-md-5 no-padding"-->
-                         <!--style="padding-left: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{-->
-                                                                                                                      <!--serviceExpense.item.name-->
-                                                                                                                      <!--}}-->
-                    <!--</div>-->
-                    <!--<div class="col-md-7 no-padding"-->
-                         <!--style="padding-right: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">-->
-                      <!--{{ serviceExpense.description }}-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-2" style="width: 13%;">{{ serviceExpense.item.rate | currency: '$':2 }}</div>-->
-                  <!--<div class="col-md-2" style="width: 13%;"-->
-                       <!--ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">-->
-                    <!--{{ serviceExpense.billableQuantity }}-->
-                  <!--</div>-->
-                  <!--<div class="col-md-2" style="width: 13%;"-->
-                       <!--ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">-->
-                    <!--{{ serviceExpense.billableQuantity | durationFilter }} hr(s)-->
-                  <!--</div>-->
-                  <!--<div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>-->
-                  <!--<div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.totalSum | currency:-->
-                                                                             <!--'$':2 }}-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="invoice-list&#45;&#45;footer">-->
-              <!--<div class="invoice-list&#45;&#45;footer__top">-->
-                <!--<div class="clearfix" style="margin-bottom: 5px;">-->
-                  <!--<div class="col-md-8 bold pl-30">Customer Note Type</div>-->
-                  <!--<div class="col-md-2 bold fz-11">Sub Total</div>-->
-                  <!--<div class="col-md-2 text-right pr-30">{{ (currentInvoice.totalSum - currentInvoice.taxSum ) |-->
-                                                         <!--currency: '$':2 }}-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix">-->
-                  <!--<div class="col-md-8 pl-30 notes">{{ currentInvoice.regularNote.line1 +-->
-                                                    <!--(currentInvoice.regularNote.line2 || '') }}-->
-                  <!--</div>-->
-                  <!--<div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>-->
-                  <!--<div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) |-->
-                                                                                    <!--currency: '$':2 }}-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix">-->
-                  <!--<div class="col-md-8 pl-30"></div>-->
-                  <!--<div class="col-md-2 bold fz-11">Total</div>-->
-                  <!--<div class="col-md-2 bold fz-16 text-right pr-30">{{ (currentInvoice.totalSum) | currency: '$':2 }}-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="invoice-list&#45;&#45;footer__bottom clearfix">-->
-                <!--<div class="col-md-12 bold pl-30">Terms & Conditions</div>-->
-                <!--<div class="col-md-12 pl-30 notes">{{currentInvoice.globalNote.line1 + (currentInvoice.globalNote.line2-->
-                                                   <!--|| '')}}-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+            <div class="invoice-list--item" ng-repeat="ticket in currentInvoice.tickets">
+              <div class="invoice-list--item__header">
+                <div class="pavlik clearfix">
+                  <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
+                  <div class="col-md-8 bold" style="opacity: .7;">Subject</div>
+                  <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">
+                    {{ ticket.closedAt | date: 'dd MMM yyyy' }}
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="col-md-2 pl-30">#{{ ticket.number }}</div>
+                  <div class="col-md-10 pr-30">{{ ticket.subject }}</div>
+                </div>
+              </div>
+              <div class="invoice-list--item__content">
+                <div class="pavlik p-2 clearfix">
+                  <div class="col-md-5 bold pl-30" style="width: 52%;">Item</div>
+                  <div class="col-md-2 bold" style="width: 13%;">Unit Price</div>
+                  <div class="col-md-2 bold" style="width: 13%;">Quantity</div>
+                  <div class="col-md-1 bold">Tax</div>
+                  <div class="col-md-2 bold text-right pr-30" style="width: 13%;">Total</div>
+                </div>
+                <div class="clearfix p-14" ng-repeat="productExpense in ticket.productExpenses">
+                  <div class="col-md-2 pl-30">{{ productExpense.item.manufacture }}</div>
+                  <div class="col-md-3 pre-line" style="width: 35.4%;">{{ productExpense.item.description }}</div>
+                  <div class="col-md-2" style="width: 13%;">{{ productExpense.item.sale | currency: '$':2 }}</div>
+                  <div class="col-md-2" style="width: 13%;">{{ productExpense.billableQuantity }}</div>
+                  <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
+                  <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.totalSum | currency:
+                                                                             '$':2 }}
+                  </div>
+                </div>
+                <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
+                  <div class="col-md-5 pl-30" style="width: 51.9%;">
+                    <div class="col-md-5 no-padding"
+                         style="padding-left: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{
+                                                                                                                      serviceExpense.item.name
+                                                                                                                      }}
+                    </div>
+                    <div class="col-md-7 no-padding"
+                         style="padding-right: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">
+                      {{ serviceExpense.description }}
+                    </div>
+                  </div>
+                  <div class="col-md-2" style="width: 13%;">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
+                  <div class="col-md-2" style="width: 13%;"
+                       ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">
+                    {{ serviceExpense.billableQuantity }}
+                  </div>
+                  <div class="col-md-2" style="width: 13%;"
+                       ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">
+                    {{ serviceExpense.billableQuantity | durationFilter }} hr(s)
+                  </div>
+                  <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
+                  <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.totalSum | currency:
+                                                                             '$':2 }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="invoice-list--footer">
+              <div class="invoice-list--footer__top">
+                <div class="clearfix" style="margin-bottom: 5px;">
+                  <div class="col-md-8 bold pl-30">Customer Note Type</div>
+                  <div class="col-md-2 bold fz-11">Sub Total</div>
+                  <div class="col-md-2 text-right pr-30">{{ (currentInvoice.totalSum - currentInvoice.taxSum ) |
+                                                         currency: '$':2 }}
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="col-md-8 pl-30 notes">{{ currentInvoice.regularNote.line1 +
+                                                    (currentInvoice.regularNote.line2 || '') }}
+                  </div>
+                  <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
+                  <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) |
+                                                                                    currency: '$':2 }}
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="col-md-8 pl-30"></div>
+                  <div class="col-md-2 bold fz-11">Total</div>
+                  <div class="col-md-2 bold fz-16 text-right pr-30">{{ (currentInvoice.totalSum) | currency: '$':2 }}
+                  </div>
+                </div>
+              </div>
+              <div class="invoice-list--footer__bottom clearfix">
+                <div class="col-md-12 bold pl-30">Terms & Conditions</div>
+                <div class="col-md-12 pl-30 notes">{{currentInvoice.globalNote.line1 + (currentInvoice.globalNote.line2
+                                                   || '')}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
-  <!--</div>-->
+  </div>
 
 
 </div>

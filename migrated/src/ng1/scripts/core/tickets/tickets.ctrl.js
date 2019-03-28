@@ -100,29 +100,29 @@
 
         };
 
-        // $scope.$watch('companyModelObj.companyModel', function (value) {
-        //   if (value !== undefined && value !== "" && value !== " ") {
-        //
-        //     ticketsSharedState.filter.completed = false;
-        //     ticketsSharedState.filter.inProgress = false;
-        //     ticketsSharedState.filter.onHold = false;
-        //     ticketsSharedState.filter.onHoldTag = false;
-        //     ticketsSharedState.filter.clientUserId = '';
-        //     $scope.clientsUsersByCompany = $scope.clientUsers().filter(function (user) {
-        //       return user.company.id === value;
-        //     });
-        //     if ($state.includes('tickets')) {
-        //       $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-        //     }
-        //
-        //   } else if (value === undefined) {
-        //     $scope.isTicketCompanyIdFieldEmpty = true;
-        //     if ($state.includes('tickets')) {
-        //       clearFilter(ticketsSharedState.filter);
-        //       $scope.stateGo(null, 'tickets', {listType: 'all'});
-        //     }
-        //   }
-        // });
+        $scope.$watch('companyModelObj.companyModel', function (value) {
+          if (value !== undefined && value !== "" && value !== " ") {
+
+            ticketsSharedState.filter.completed = false;
+            ticketsSharedState.filter.inProgress = false;
+            ticketsSharedState.filter.onHold = false;
+            ticketsSharedState.filter.onHoldTag = false;
+            ticketsSharedState.filter.clientUserId = '';
+            $scope.clientsUsersByCompany = $scope.clientUsers().filter(function (user) {
+              return user.company.id === value;
+            });
+            if ($state.includes('tickets')) {
+              $scope.stateGo(null, 'tickets', {listType: 'by_company'});
+            }
+
+          } else if (value === undefined) {
+            $scope.isTicketCompanyIdFieldEmpty = true;
+            if ($state.includes('tickets')) {
+              clearFilter(ticketsSharedState.filter);
+              $scope.stateGo(null, 'tickets', {listType: 'all'});
+            }
+          }
+        });
 
         $scope.getFullName = function (client) {
           var isAllSpaces = client.lastName === "    ";

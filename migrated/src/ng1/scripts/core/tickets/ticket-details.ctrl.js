@@ -187,12 +187,6 @@
 
               // deleteTicketExpense(ticketId, updateId, products, services, callback)
 
-
-
-
-
-
-
               switch (type) {
 
 
