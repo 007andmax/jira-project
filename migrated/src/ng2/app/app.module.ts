@@ -3,6 +3,7 @@ import { NgModule, InjectionToken } from '@angular/core';
 import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { UpgradeModule, downgradeComponent } from '@angular/upgrade/static';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -17,7 +18,6 @@ declare var angular: any;
 
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url) {
-    console.log(url, 'URL', url.toString().startsWith("/ng2"));
     return url.toString().startsWith("/ng2") || url.toString() == "/"
   }
 
@@ -27,7 +27,7 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
 
 angular.module('quicktech')
   .directive(
-    'ng2Demo',
+    'passwordManager',
     downgradeComponent({component: PasswordManagerComponent})
   );
 
@@ -44,16 +44,17 @@ angular.module('quicktech')
     BrowserModule,
     AppRoutingModule,
     UpgradeModule,
+    HttpClientModule,
     RouterModule.forRoot([
         {
           path: 'ng2/password-manager',
-          component: PasswordManagerComponent
-
+          component: PasswordManagerComponent,
+          pathMatch: 'full'
         }
       ],
       {
         useHash: true,
-        enableTracing: true
+        enableTracing: false
       })
   ],
   providers: [

@@ -100,7 +100,6 @@
   }]);
 
   services.run(['$http', '$rootScope', 'RealTimeService', function ($http, $rootScope, RealTimeService) {
-    console.log('testsrtest');
     $http.get('/users/current').success(function (resp) {
       $rootScope.currentUser = resp;
       $rootScope.currentUserLoaded = true;

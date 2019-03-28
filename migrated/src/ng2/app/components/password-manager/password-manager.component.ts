@@ -8,17 +8,24 @@ import { ApiPasswordManagerService } from "./api-password-manager.service";
 })
 export class PasswordManagerComponent implements OnInit {
 
+  public recordsData :any;
+
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService
-  ) { }
+  ) {
+    console.log('123251235123512351235');
+  }
 
   ngOnInit() {
     console.log('testes');
     console.log('123512351');
-
-    this.apiPasswordManagerService.getRecords().subscribe((res) => {
-      console.log(res);
-    })
+    this.recordsData = this.getRecords();
   };
+
+
+  getRecords() {
+    console.log('test');
+    return this.apiPasswordManagerService.getRecords()
+  }
 
 }
