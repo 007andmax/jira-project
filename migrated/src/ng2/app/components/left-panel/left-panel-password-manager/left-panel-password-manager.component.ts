@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftPanelPasswordManagerComponent implements OnInit {
 
+  public items = [true, 'Two', 3];
+
   constructor() { }
 
   ngOnInit() {

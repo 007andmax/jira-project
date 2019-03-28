@@ -12,20 +12,14 @@ export class PasswordManagerComponent implements OnInit {
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService
-  ) {
-    console.log('123251235123512351235');
-  }
+  ) {}
 
   ngOnInit() {
-    console.log('testes');
-    console.log('123512351');
-    this.recordsData = this.getRecords();
+    this.getRecords()
   };
 
-
   getRecords() {
-    console.log('test');
-    return this.apiPasswordManagerService.getRecords()
+    this.recordsData =  this.apiPasswordManagerService.getRecords().pipe((res) => res);
   }
 
 }
