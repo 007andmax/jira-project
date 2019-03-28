@@ -1019,7 +1019,8 @@ _::-webkit-:not(:root:root),
 .user--header button,
 .ticket--header button,
 .company--header button,
-.product--header button {
+.product--header button,
+.password-content__modal button{
   border: none;
   outline: none;
   background-color: transparent;
@@ -1654,7 +1655,8 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .close-modal,
-.download-agent-modal .close-modal {
+.download-agent-modal .close-modal,
+.password-content__modal .close-modal {
   width: 24px;
   height: 24px;
   margin: 0;

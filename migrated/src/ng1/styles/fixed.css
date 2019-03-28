@@ -556,6 +556,10 @@ body.non-body-scroll::-webkit-scrollbar {
   max-width: 48%;
 }
 
+.create-ticket-form .notify-user-dropdown {
+  max-width: 100%;
+}
+
 .dropdown-user-parent > .dropdown-menu > li a .user-name > p {
   line-height: 16px;
 }
@@ -942,7 +946,15 @@ aside#left div.nav-title {
   position: absolute;
   display: none;
   left: 10px;
-  top: -175px !important;
+  top: -170px !important;
+}
+
+.ticket-add-service-content .timer-quantity .minutes_drop_down.FIVE_MINUTES {
+  top: -505px !important;
+}
+
+.ticket-add-service-content .timer-quantity .minutes_drop_down.TEN_MINUTES {
+  top: -255px !important;
 }
 
 .company-schedule .timer-quantity .time_drop_down {
@@ -1223,6 +1235,10 @@ aside#left div.nav-title {
 
 .custom-product-list .product-list-container > li:not(:last-child) {
   border-bottom: 1px solid #edf2f6;
+}
+
+.custom-product-list .product-list-container > li {
+  padding-left: 36px;
 }
 
 #product-list-cont .icn-caret-gray {

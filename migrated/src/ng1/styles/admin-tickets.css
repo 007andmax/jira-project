@@ -94,10 +94,6 @@
   min-height: 100vh;
 }
 
-.main-container:nth-child(0) {
-  display: none;
-}
-
 @-moz-document url-prefix() {
   .main-container > .row {
     min-width: 1000px;

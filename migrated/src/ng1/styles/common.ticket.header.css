@@ -345,6 +345,7 @@
 
 .ticket-detail .remove-tag.icn-xs {
   top: 10px;
+  height: 10px;
 }
 
 .ticket-detail .tags {
