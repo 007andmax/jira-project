@@ -5,17 +5,37 @@
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateTabCtrl',
       ['$scope', 'ServicesService', '$uibModal', 'AgreementsService', '$timeout', '$filter', '$rootScope',
         function ($scope, ServicesService, $uibModal, AgreementsService, $timeout, $filter, $rootScope) {
-          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id)
+          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketDetails.company.id);
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
           $scope.checkForOpenDropdown = checkForOpenDropdown;
-          //
-          //
-          // var closeDropdowns = function(){}
-          //
-          // window.addEventListener('scroll', closeDropdowns)
-          //
+
+
+          var closeDropdowns = $rootScope.debounce(closeDropdowns, 100);
+
+          window.addEventListener('scroll', closeDropdowns)
+
+          $scope.$watch('currentOpenTab', function() {
+            setTimeout(function() {
+              var scrollable = document.querySelector('[scrollable]');
+
+              if (!scrollable) return;
+              scrollable.addEventListener('scroll', closeDropdowns)
+            }, 1000)
+
+          })
+
+          $scope.$on('$destroy', function() {
+            window.removeEventListener('scroll', closeDropdowns)
+          })
+
+          $scope.$watch(function() {
+            setTimeout(function() {
+              checkForOpenDropdown()
+            }, 0)
+          })
+
           function closeDropdowns() {
             var ticketAddContent = document.querySelector('.ticket-add-content');
 
@@ -25,50 +45,40 @@
 
           }
 
-
-          $scope.$watch('currentOpenTab', function() {
-            setTimeout(function() {
-              var scrollable = document.querySelector('[scrollable]');
-
-              if (!scrollable) return;
-              scrollable.addEventListener('scroll', closeDropdowns)
-            }, 1000);
-
-          });
-          //
-          // $scope.$on('$destroy', function() {
-          //   window.removeEventListener('scroll', closeDropdowns)
-          // });
-          //
-          // $scope.$watch(function() {
-          //   setTimeout(function() {
-          //     checkForOpenDropdown();
-          //   }, 0)
-          // });
-          //
-
           function checkForOpenDropdown() {
             var date = document.querySelector('.new-date-picker .bootstrap-datetimepicker-widget');
             var dateInput = document.querySelector('.new-date-picker input');
+
             var serviceInputs = document.querySelectorAll('.new-service-input');
+
             for (var i = 0; i < serviceInputs.length; i++) {
               var inp = serviceInputs[i];
               var sId = inp.getAttribute('aria-owns');
               var dropdown = document.getElementById(sId);
               var pos = inp.getBoundingClientRect();
               var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
               dropdown.style.position = 'fixed';
               dropdown.style.top = (pos.top) + 'px';
               dropdown.style.left = pos.left + 'px';
               dropdown.style.width = inp.offsetWidth + 'px';
+
               dropdown.classList.add('new-service-dropdown');
+
             }
+
             if (!date) {
               setTimeout(checkForOpenDropdown, 100);
               return;
             }
+
+
+
             if (!dateInput) return;
+
             dateInput = dateInput.getBoundingClientRect();
+
+
             var arr = [date];
             arr.forEach(function(el) {
               if (!el) return;
@@ -113,6 +123,7 @@
             $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + newValue*3600000)
             $scope.quantity = newValue;
             $rootScope.quantityForSave = newValue;
+            console.log()
           });
 
 
@@ -120,8 +131,7 @@
             if (!$scope.editExpense) {
               $scope.updateNote = $scope.ticketUpdate;
             }
-          });
-
+          })
 
           if (window.innerWidth <= 414) {
             $scope.$watch('editExpense', function(val) {
@@ -174,10 +184,10 @@
 
                 }
 
-                toggleDataSelector();
+                toggleDataSelector()
 
 
-              }, 100);
+              }, 100)
 
             }, true);
 
@@ -197,22 +207,32 @@
 
                   } else {
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
+
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
                   }
+
+
+
                 }
+
                 if ($scope.serviceToEdit[0].date) {
                   $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
                 }
-                // toggleDataSelector();
+
+                toggleDataSelector()
+
+
+
               }
-            });
+            })
           }
 
 
           function openModal(company) {
             $uibModal.open({
-              templateUrl: '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html',
+              templateUrl: '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html',
               animation: true,
               backdrop: false,
               size: 'md',
@@ -230,7 +250,7 @@
           $scope.openContractAgreementsModal = function(company) {
             openModal();
 
-          }
+          };
         }]);
   }()
 );
