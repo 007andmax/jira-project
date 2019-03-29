@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken } from '@angular/core';
+import { NgModule, InjectionToken, NgZone } from '@angular/core';
 import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { UpgradeModule, downgradeComponent } from '@angular/upgrade/static';
+import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SelectModule } from 'ng2-select';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -13,6 +16,8 @@ import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-
 import { MainComponent } from './components/main/main.component';
 
 import { ApiPasswordManagerService } from "./components/password-manager/api-password-manager.service";
+import { ObjectByObjectPipe } from './pipe/object-by-object.pipe';
+
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
 
@@ -31,7 +36,11 @@ angular.module('quicktech')
   .directive(
     'passwordManager',
     downgradeComponent({component: PasswordManagerComponent})
-  );
+
+  ).directive(
+  'leftPanelComponent',
+  downgradeComponent({component: LeftPanelComponent}))
+  .factory('ngZone', downgradeInjectable(NgZone));
 
 
 @NgModule({
@@ -40,14 +49,19 @@ angular.module('quicktech')
     PasswordManagerComponent,
     LeftPanelComponent,
     LeftPanelPasswordManagerComponent,
-    MainComponent
+    MainComponent,
+    ObjectByObjectPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     UpgradeModule,
     HttpClientModule,
-    NgSelectModule,
+    FormsModule,
+    SelectModule,
+    NgbModule,
+    NgxSelectModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
         {
           path: 'ng2/password-manager',
