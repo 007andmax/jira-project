@@ -63,6 +63,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     return result['name'];
   };
 
+  formatterDevices = (result: string) => {
+    return result['hostName'];
+  };
+
   search = (text$: Observable<string>) => {
     return text$.pipe(
       debounceTime(100),
@@ -80,6 +84,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       debounceTime(100),
       distinctUntilChanged(),
       map(term => {
+        console.log(this.devicesList, 'this.devicesList');
         return term.length < 1 ? []
           : this.devicesList.filter(item => {
             return item['name'].toLowerCase().indexOf(term.toLowerCase()) > -1
