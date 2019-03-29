@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
+import { USER } from "../../../const/users";
 import { ApiPasswordManagerService } from '../../password-manager/api-password-manager.service';
 import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
+import { UsersService } from "../../../services/users/users.service";
 
 @Component({
   selector: 'app-left-panel-password-manager',
@@ -18,13 +20,15 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public devicesList: any;
   public model: any;
   public device: any;
+  public users: any;
   public selectedCompany: any;
   public selectedDevice: any;
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
-    private devicesService: DevicesService
+    private devicesService: DevicesService,
+    private userService: UsersService
   ) { }
 
   ngOnInit() {
@@ -48,10 +52,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     return filteredArray;
   }
 
+  getAllUsers() {
+    this.userService.getAllusers().subscribe((res) => {
+      console.log(res, 'RES');
+      this.users = res.filter((item) => item.accountType === USER.TYPE.CLIENT);
+    })
+  }
+
   public selectCompany(item){
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.getCompanyDevices(item.item.companyId);
+    this.getAllUsers();
   }
 
   public selectDevice(item){
