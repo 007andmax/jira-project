@@ -19,6 +19,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public model: any;
   public device: any;
   public selectedCompany: any;
+  public selectedDevice: any;
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
@@ -47,15 +48,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     return filteredArray;
   }
 
-  public selectedItem(item){
+  public selectCompany(item){
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.getCompanyDevices(item.item.companyId);
   }
 
+  public selectDevice(item){
+    this.selectedDevice = item.item;
+  }
+
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
-      return this.devicesList = res;
+      return this.devicesList = res[this.selectedCompany.companyId];
     })
   }
 
@@ -87,7 +92,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
         console.log(this.devicesList, 'this.devicesList');
         return term.length < 1 ? []
           : this.devicesList.filter(item => {
-            return item['name'].toLowerCase().indexOf(term.toLowerCase()) > -1
+            return item['hostName'].toLowerCase().indexOf(term.toLowerCase()) > -1
           }).slice(0, 10)
       }));
   }
