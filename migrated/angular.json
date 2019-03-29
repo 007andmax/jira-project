@@ -476,15 +476,15 @@
                   "with": "src/ng2/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": false,
+              "extractCss": true,
               "namedChunks": false,
               "aot": true,
-              "extractLicenses": false,
+              "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -502,13 +502,13 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false
+              "buildOptimizer": true,
             }
           }
         },
