@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiPasswordManagerService } from '../../password-manager/api-password-manager.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
+import { ApiPasswordManagerService } from '../../password-manager/api-password-manager.service';
 import { CompaniesService } from "../../../services/company/companies.service";
+import { DevicesService } from "../../../services/devices/devices.service";
 
 @Component({
   selector: 'app-left-panel-password-manager',
@@ -13,12 +15,15 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public recordsData: any;
   public companiesList: any;
+  public devicesList: any;
   public model: any;
+  public device: any;
   public selectedCompany: any;
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private devicesService: DevicesService
   ) { }
 
   ngOnInit() {
@@ -28,7 +33,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public getCompaniesList() {
      return this.companiesService.getCompaniesList().subscribe((company) => {
        this.companiesList = this.getCompaniesNames(company);
-       console.log(this.companiesList, 'companiesList');
      });
   }
 
@@ -46,7 +50,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public selectedItem(item){
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
-    console.log('testt');
+    this.getCompanyDevices(item.item.companyId);
+  }
+
+  public getCompanyDevices(companyId) {
+    this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
+      return this.devicesList = res;
+    })
   }
 
   formatter = (result: string) => {
@@ -60,6 +70,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       map(term => {
         return term.length < 1 ? []
           : this.companiesList.filter(item => {
+            return item['name'].toLowerCase().indexOf(term.toLowerCase()) > -1
+          }).slice(0, 10)
+      }));
+  }
+
+  searchDevices = (text$: Observable<string>) => {
+    return text$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(),
+      map(term => {
+        return term.length < 1 ? []
+          : this.devicesList.filter(item => {
             return item['name'].toLowerCase().indexOf(term.toLowerCase()) > -1
           }).slice(0, 10)
       }));
