@@ -13,9 +13,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   ngOnInit() {
   }
 
-  private _opened: boolean = false;
+  public _opened: boolean = false;
 
-  private _toggleSidebar() {
+  public _toggleSidebar() {
     this._opened = !this._opened;
   }
 
