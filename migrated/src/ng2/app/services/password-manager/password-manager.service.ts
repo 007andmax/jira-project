@@ -7,6 +7,7 @@ export class PasswordManagerService {
 
   public filteredType: EventEmitter<any> = new EventEmitter();
   public selectedDeviceOrUser: EventEmitter<any> = new EventEmitter();
+  public selectedDate: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -17,8 +18,12 @@ export class PasswordManagerService {
   }
 
   setSelectedDeviceOrUser(item) {
-    console.log(item, 'item');
     this.selectedDeviceOrUser.emit(item)
+  }
+
+  setDate(item) {
+    console.log(item, 'item');
+    this.selectedDate.emit(item)
   }
 
 }

@@ -10,6 +10,7 @@ export class PasswordManagerTableComponent implements OnInit {
 
   @Input() filter: any;
   @Input() selectedUserOrDevice: any;
+  @Input() selectedDate: any;
   public recordsData: any;
 
   constructor(

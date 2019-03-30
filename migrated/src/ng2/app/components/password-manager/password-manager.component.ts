@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 import { ApiPasswordManagerService } from "./api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
@@ -15,6 +16,7 @@ export class PasswordManagerComponent implements OnInit {
   public companiesList: any;
   public filter: any;
   public selectedUserOrDevice: any;
+  public selectedDate: any;
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
@@ -26,6 +28,7 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectCompany();
     this.getSelectPasswordRecordType();
     this.getSelectedDeviceOrUser();
+    this.getSelectedDate();
   };
 
   public getSelectCompany() {
@@ -34,7 +37,7 @@ export class PasswordManagerComponent implements OnInit {
         type: 'companyId',
         value: company
       };
-      this.refreshDeviceOrUser();
+      this.refreshFilter();
       return this.filter;
     });
   }
@@ -45,19 +48,34 @@ export class PasswordManagerComponent implements OnInit {
         type: 'template',
         value: type
       };
-      this.refreshDeviceOrUser();
+      this.refreshFilter();
       return this.filter;
     })
   }
 
   public getSelectedDeviceOrUser(){
-    this.passwordManagerService.selectedDeviceOrUser.subscribe((type) => {
-      return this.selectedUserOrDevice = type;
+    this.passwordManagerService.selectedDeviceOrUser.subscribe((type) =>
+      this.selectedUserOrDevice = type
+    )
+  }
+
+  public getSelectedDate() {
+    this.passwordManagerService.selectedDate.subscribe((date) => {
+      if (date) {
+        this.selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`
+      } else {
+        this.selectedDate = null;
+      }
     })
   }
 
-  refreshDeviceOrUser() {
+  formatDayAndMonth(item) {
+    return item < 10 ? `0${item}` : item;
+  }
+
+  private refreshFilter() {
     this.selectedUserOrDevice = {};
+    this.selectedDate = null;
   }
 
 

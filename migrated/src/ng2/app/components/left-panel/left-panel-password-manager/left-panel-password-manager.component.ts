@@ -23,6 +23,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public device: any;
   public selectedCompany: any;
   public selectedDeviceOrUser: any;
+  public selectedDate: any;
 
   constructor(
     private companiesService: CompaniesService,
@@ -56,8 +57,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
-      return this.devicesAndUsersList = [...this.devicesAndUsersList, ...res[this.selectedCompany.companyId]];
+      if (res[this.selectedCompany.companyId]) {
+        return this.devicesAndUsersList = [...this.devicesAndUsersList, ...res[this.selectedCompany.companyId]];
+      }
     })
+  }
+
+  public selectDate(item) {
+    this.passwordManagerService.setDate(item);
   }
 
   formatter = (result: string) => {
@@ -116,7 +123,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   private getAllUsers() {
-    this.userService.getAllusers().subscribe((res) => {
+    this.userService.getAllusers().subscribe((res: any) => {
       this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
     })
   }

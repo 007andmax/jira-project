@@ -21,6 +21,7 @@ import { PasswordRecordsTypesComponent } from './components/left-panel/left-pane
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 import { UserPipe } from './pipe/user.pipe';
+import { DateFormatPipe } from './pipe/date-format.pipe';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -58,7 +59,8 @@ angular.module('quicktech')
     PasswordRecordsTypesComponent,
     PasswordManagerTableComponent,
     PasswoordManagerHeaderComponent,
-    UserPipe
+    UserPipe,
+    DateFormatPipe
   ],
   imports: [
     BrowserModule,

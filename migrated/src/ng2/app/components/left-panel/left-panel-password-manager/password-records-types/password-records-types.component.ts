@@ -41,7 +41,7 @@ export class PasswordRecordsTypesComponent implements OnInit {
   }
 
   public getPasswordRecords() {
-    this.apiPasswordManagerService.getRecords().subscribe((res) => res.map((item) => {
+    this.apiPasswordManagerService.getRecords().subscribe((res: any) => res.map((item) => {
       this.getItemCountsInCategories(item);
     }));
   }
