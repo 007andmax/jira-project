@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { USER } from "../../../const/users";
-import { ApiPasswordManagerService } from '../../password-manager/api-password-manager.service';
 import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
+import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { UsersService } from "../../../services/users/users.service";
+
 
 @Component({
   selector: 'app-left-panel-password-manager',
@@ -17,18 +18,17 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public recordsData: any;
   public companiesList: any;
-  public devicesList: any;
-  public model: any;
+  public devicesAndUsersList = [];
+  public company: any;
   public device: any;
-  public users: any;
   public selectedCompany: any;
-  public selectedDevice: any;
+  public selectedDeviceOrUser: any;
 
   constructor(
-    private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
-    private userService: UsersService
+    private userService: UsersService,
+    private passwordManagerService: PasswordManagerService
   ) { }
 
   ngOnInit() {
@@ -39,6 +39,69 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
      return this.companiesService.getCompaniesList().subscribe((company) => {
        this.companiesList = this.getCompaniesNames(company);
      });
+  }
+
+  public selectCompany(item){
+    this.selectedCompany = item.item;
+    this.companiesService.setFilteredCompnay(item.item);
+    this.passwordManagerService.setSelectedDeviceOrUser({});
+    this.getCompanyDevices(item.item.companyId);
+    this.getAllUsers();
+  }
+
+  public selectDeviceOrUser(item){
+    this.selectedDeviceOrUser = item.item;
+    this.passwordManagerService.setSelectedDeviceOrUser(item.item);
+  }
+
+  public getCompanyDevices(companyId) {
+    this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
+      return this.devicesAndUsersList = [...this.devicesAndUsersList, ...res[this.selectedCompany.companyId]];
+    })
+  }
+
+  formatter = (result: string) => {
+    return result['name'];
+  };
+
+  formatterDevices = (result: string) => {
+    if (result.hasOwnProperty('hostName')) {
+      return result['hostName']
+    } else {
+      return (result['firstName'] + result['lastName'])
+    }
+  };
+
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(),
+      map(term => {
+        return term.length < 1 ? []
+          : this.companiesList.filter(item => {
+            return item['name'].toLowerCase().indexOf(term.toLowerCase()) > -1
+          }).slice(0, 10)
+      }));
+  };
+
+  searchDevices = (text$: Observable<string>) => {
+    return text$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(),
+      map(term => {
+        return term.length < 1 ? []
+          : this.devicesAndUsersList.filter(item => {
+            return item && this.findUserOrDevice(item, term)
+          }).slice(0, 10)
+      }));
+  };
+
+  private findUserOrDevice(item, term) {
+    if (item.hasOwnProperty('hostName')) {
+      return item['hostName'].toLowerCase().indexOf(term.toLowerCase()) > -1
+    } else {
+      return item['firstName'].toLowerCase().indexOf(term.toLowerCase()) > -1 || item['lastName'].toLowerCase().indexOf(term.toLowerCase()) > -1
+    }
   }
 
   private getCompaniesNames(list) {
@@ -52,61 +115,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     return filteredArray;
   }
 
-  getAllUsers() {
+  private getAllUsers() {
     this.userService.getAllusers().subscribe((res) => {
-      console.log(res, 'RES');
-      this.users = res.filter((item) => item.accountType === USER.TYPE.CLIENT);
+      this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
     })
-  }
-
-  public selectCompany(item){
-    this.selectedCompany = item.item;
-    this.companiesService.setFilteredCompnay(item.item);
-    this.getCompanyDevices(item.item.companyId);
-    this.getAllUsers();
-  }
-
-  public selectDevice(item){
-    this.selectedDevice = item.item;
-  }
-
-  public getCompanyDevices(companyId) {
-    this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
-      return this.devicesList = res[this.selectedCompany.companyId];
-    })
-  }
-
-  formatter = (result: string) => {
-    return result['name'];
-  };
-
-  formatterDevices = (result: string) => {
-    return result['hostName'];
-  };
-
-  search = (text$: Observable<string>) => {
-    return text$.pipe(
-      debounceTime(100),
-      distinctUntilChanged(),
-      map(term => {
-        return term.length < 1 ? []
-          : this.companiesList.filter(item => {
-            return item['name'].toLowerCase().indexOf(term.toLowerCase()) > -1
-          }).slice(0, 10)
-      }));
-  }
-
-  searchDevices = (text$: Observable<string>) => {
-    return text$.pipe(
-      debounceTime(100),
-      distinctUntilChanged(),
-      map(term => {
-        console.log(this.devicesList, 'this.devicesList');
-        return term.length < 1 ? []
-          : this.devicesList.filter(item => {
-            return item['hostName'].toLowerCase().indexOf(term.toLowerCase()) > -1
-          }).slice(0, 10)
-      }));
   }
 
 }

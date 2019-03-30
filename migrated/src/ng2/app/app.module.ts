@@ -17,6 +17,10 @@ import { MainComponent } from './components/main/main.component';
 
 import { ApiPasswordManagerService } from "./components/password-manager/api-password-manager.service";
 import { ObjectByObjectPipe } from './pipe/object-by-object.pipe';
+import { PasswordRecordsTypesComponent } from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
+import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
+import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
+import { UserPipe } from './pipe/user.pipe';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -50,7 +54,11 @@ angular.module('quicktech')
     LeftPanelComponent,
     LeftPanelPasswordManagerComponent,
     MainComponent,
-    ObjectByObjectPipe
+    ObjectByObjectPipe,
+    PasswordRecordsTypesComponent,
+    PasswordManagerTableComponent,
+    PasswoordManagerHeaderComponent,
+    UserPipe
   ],
   imports: [
     BrowserModule,

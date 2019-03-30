@@ -1,7 +1,8 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ApiPasswordManagerService } from "./api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
+import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 
 @Component({
   selector: 'app-password-manager',
@@ -11,31 +12,54 @@ import { CompaniesService } from "../../services/company/companies.service";
 
 export class PasswordManagerComponent implements OnInit {
 
-  public recordsData: any;
   public companiesList: any;
-  public filteredCompany: any;
+  public filter: any;
+  public selectedUserOrDevice: any;
 
   constructor(
-    private ngZone: NgZone,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private passwordManagerService: PasswordManagerService
   ) {}
 
   ngOnInit() {
-    this.getRecords();
-    this.companiesService.filteredCompanyUpdate.subscribe((company) => {
-      console.log('12351235');
-      return this.filteredCompany = company;
-    })
-
+    this.getSelectCompany();
+    this.getSelectPasswordRecordType();
+    this.getSelectedDeviceOrUser();
   };
 
-  filterCompany() {
-    return this.filteredCompany;
+  public getSelectCompany() {
+    this.companiesService.filteredCompanyUpdate.subscribe((company) => {
+      this.filter = {
+        type: 'companyId',
+        value: company
+      };
+      this.refreshDeviceOrUser();
+      return this.filter;
+    });
   }
 
-  getRecords() {
-     this.apiPasswordManagerService.getRecords().subscribe((res) => this.recordsData = res);
+  public getSelectPasswordRecordType(){
+    this.passwordManagerService.filteredType.subscribe((type) => {
+      this.filter = {
+        type: 'template',
+        value: type
+      };
+      this.refreshDeviceOrUser();
+      return this.filter;
+    })
   }
+
+  public getSelectedDeviceOrUser(){
+    this.passwordManagerService.selectedDeviceOrUser.subscribe((type) => {
+      return this.selectedUserOrDevice = type;
+    })
+  }
+
+  refreshDeviceOrUser() {
+    this.selectedUserOrDevice = {};
+  }
+
+
 
 }
