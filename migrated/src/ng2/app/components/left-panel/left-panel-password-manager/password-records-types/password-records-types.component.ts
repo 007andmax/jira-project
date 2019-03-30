@@ -37,7 +37,7 @@ export class PasswordRecordsTypesComponent implements OnInit {
 
   public getItemCountsInCategories(companyItem) {
     this.passwordRecordTypes.map((item) => {
-      if (item.TITLE.toLocaleLowerCase() === companyItem.template.toLowerCase()) item['count']++
+      if (item.UPPERCASE.toLocaleLowerCase() === companyItem.template.toLowerCase()) item['count']++
     })
   }
 
