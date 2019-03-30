@@ -42,18 +42,19 @@ export class PasswordManagerComponent implements OnInit {
     });
   }
 
-  public getSelectPasswordRecordType(){
+  public getSelectPasswordRecordType() {
     this.passwordManagerService.filteredType.subscribe((type) => {
       this.filter = {
         type: 'template',
         value: type
       };
+      console.log('testes', type);
       this.refreshFilter();
       return this.filter;
     })
   }
 
-  public getSelectedDeviceOrUser(){
+  public getSelectedDeviceOrUser() {
     this.passwordManagerService.selectedDeviceOrUser.subscribe((type) =>
       this.selectedUserOrDevice = type
     )

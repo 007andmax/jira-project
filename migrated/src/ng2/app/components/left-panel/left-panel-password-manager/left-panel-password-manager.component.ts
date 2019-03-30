@@ -24,6 +24,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public selectedCompany: any;
   public selectedDeviceOrUser: any;
   public selectedDate: any;
+  public clearCompanyItem = {
+    companyId: '',
+    name: ''
+  };
 
   constructor(
     private companiesService: CompaniesService,
@@ -46,8 +50,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
-    this.getCompanyDevices(item.item.companyId);
-    this.getAllUsers();
+    if (item.item.companyId) {
+      this.getCompanyDevices(item.item.companyId);
+      this.getAllUsers();
+    }
   }
 
   public selectDeviceOrUser(item){
@@ -120,6 +126,22 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       })
     });
     return filteredArray;
+  }
+
+  clearCompany(item) {
+    console.log(item, item.length);
+    if (item.length < 2) {
+      console.log(1);
+      this.selectCompany({item: this.clearCompanyItem});
+      this.selectDeviceOrUser({item: null});
+      this.device = null;
+    }
+  }
+
+  clearDevice(item) {
+    if (item.length === 0) {
+      this.device = null;
+    }
   }
 
   private getAllUsers() {

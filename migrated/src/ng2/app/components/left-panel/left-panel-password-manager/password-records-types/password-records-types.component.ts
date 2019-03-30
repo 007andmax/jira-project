@@ -25,6 +25,7 @@ export class PasswordRecordsTypesComponent implements OnInit {
   }
 
   filterByPasswordTypes(type) {
+    console.log(type);
     this.passwordManagerService.setFilteredType(type);
   }
 

@@ -8,20 +8,22 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { SidebarModule } from 'ng-sidebar';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
 import { MainComponent } from './components/main/main.component';
-
-import { ApiPasswordManagerService } from "./components/password-manager/api-password-manager.service";
-import { ObjectByObjectPipe } from './pipe/object-by-object.pipe';
 import { PasswordRecordsTypesComponent } from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
+
+import { ApiPasswordManagerService } from "./components/password-manager/api-password-manager.service";
+
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
+import { ObjectByObjectPipe } from './pipe/object-by-object.pipe';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -72,6 +74,7 @@ angular.module('quicktech')
     NgbModule,
     NgxSelectModule,
     ReactiveFormsModule,
+    SidebarModule.forRoot(),
     RouterModule.forRoot([
         {
           path: 'ng2/password-manager',
