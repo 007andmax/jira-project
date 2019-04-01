@@ -188,8 +188,15 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   clearDevice() {
     this.passwordRecords = this.passwordRecordsStart;
     this.refreshDeviceOrUser();
-    this.filterPasswordRecords(this.selectedCompany);
+    this.filterPasswordRecords( this.selectedCompany);
     this.filterPasswordRecordsByDate(this.selectedDateForFilter);
+  }
+
+  clearDate() {
+    this.passwordRecords = this.passwordRecordsStart;
+    this.refreshDeviceOrUser();
+    this.filterPasswordRecords(this.selectedCompany);
+    this.filterPasswordRecordsByDeviceOrUser({item :this.selectedDeviceOrUser});
   }
 
 
