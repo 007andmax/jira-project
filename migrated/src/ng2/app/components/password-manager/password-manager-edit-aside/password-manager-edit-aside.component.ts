@@ -24,6 +24,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   clickClients$ = new Subject<string>();
   public clientsList: any;
   public type: any;
+  public currentType;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -36,6 +37,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.initForm();
     this.getCLientsList();
     this.type = 0;
+    this.currentType = PASSWORD_RECORD_TYPES[0];
   }
 
   public _opened: boolean = false;
@@ -89,8 +91,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   searchClients = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
-    const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
-    const inputFocus$ = this.focus$;
+    const clicksWithClosedPopup$ = this.clickClients$.pipe(filter(() => !this.instance.isPopupOpen()));
+    const inputFocus$ = this.focusClients$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
