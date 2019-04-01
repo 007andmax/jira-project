@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CompanyPipe implements PipeTransform {
 
   transform(data: any[], company ) {
-    if (company && data) {
+    if (company && company.companyId && data) {
       return data.filter((item) => {
         return item.companyId.toLowerCase() === company.companyId.toLowerCase();
       });

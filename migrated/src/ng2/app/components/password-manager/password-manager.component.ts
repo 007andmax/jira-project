@@ -62,7 +62,7 @@ export class PasswordManagerComponent implements OnInit {
   }
 
   public showDataTable() {
-    return ((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory));
+    return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory));
   }
 
   formatDayAndMonth(item) {

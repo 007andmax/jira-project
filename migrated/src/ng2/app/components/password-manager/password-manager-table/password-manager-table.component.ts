@@ -30,7 +30,7 @@ export class PasswordManagerTableComponent implements OnInit, OnChanges {
 
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-      return this.selectedCategory = category
+      return this.selectedCategory = category;
     });
   }
 
