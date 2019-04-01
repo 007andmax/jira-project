@@ -30,5 +30,13 @@ export const PASSWORD_RECORD_TYPES = [
   {
     TITLE: 'Local User Account',
     UPPERCASE: 'LOCAL_USER_ACCOUNT'
+  },
+  {
+    TITLE: 'Wifi Network',
+    UPPERCASE: 'WIFI_NETWORK'
+  },
+  {
+    TITLE: 'Clear',
+    UPPERCASE: 'CLEAR'
   }
   ];

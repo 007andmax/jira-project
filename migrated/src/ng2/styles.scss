@@ -8,5 +8,13 @@
   background: #fff;
   height: 100vh;
   width: 650px;
-  top: 78px!important;
+}
+
+.ng-sidebar--right {
+  top: 78px !important;
+}
+
+.password-content__modal {
+  top: 0 !important;
+  position: absolute !important;
 }

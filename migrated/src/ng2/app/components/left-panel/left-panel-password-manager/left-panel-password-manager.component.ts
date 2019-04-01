@@ -7,6 +7,7 @@ import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { UsersService } from "../../../services/users/users.service";
+import {ApiPasswordManagerService} from "../../password-manager/api-password-manager.service";
 
 
 @Component({
@@ -24,6 +25,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public selectedCompany: any;
   public selectedDeviceOrUser: any;
   public selectedDate: any;
+  public selectedDateForFilter: any;
+  public passwordRecords: any;
+  public passwordRecordsStart: any;
   public clearCompanyItem = {
     companyId: '',
     name: ''
@@ -33,11 +37,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
     private userService: UsersService,
-    private passwordManagerService: PasswordManagerService
+    private passwordManagerService: PasswordManagerService,
+    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   ngOnInit() {
     this.getCompaniesList();
+    this.getPasswordRecords();
   }
 
   public getCompaniesList() {
@@ -50,16 +56,48 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
+    this.filterPasswordRecords(item.item);
     if (item.item.companyId) {
       this.getCompanyDevices(item.item.companyId);
       this.getAllUsers();
     }
   }
 
-  public selectDeviceOrUser(item){
+  public filterPasswordRecords(company) {
+    return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
+  };
+
+  public filterPasswordRecordsByDeviceOrUser(deviceOrUser) {
+    return this.passwordRecords = this.passwordRecords.filter((item) => {
+      const links = item.links.filter((item) => {
+        if (item && deviceOrUser) {
+          return (item.userId === deviceOrUser.id || item.deviceId === deviceOrUser.id)
+        }
+      });
+      return links.length > 0;
+    });
+  }
+
+  public filterPasswordRecordsByDate(date) {
+    const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
+    this.selectedDateForFilter = date;
+    this.filterPasswordRecords(this.selectedCompany);
+    return this.passwordRecords = this.passwordRecords.filter((item) => {
+      return item.expiredDate === selectedDate;
+    })
+  }
+
+  formatDayAndMonth(item) {
+    return item < 10 ? `0${item}` : item;
+  }
+
+  public selectDeviceOrUser(item) {
     this.selectedDeviceOrUser = item.item;
     this.passwordManagerService.setSelectedDeviceOrUser(item.item);
+    this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
+
+
 
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
@@ -71,6 +109,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public selectDate(item) {
     this.passwordManagerService.setDate(item);
+    this.filterPasswordRecordsByDate(item);
+  }
+
+  public getPasswordRecords() {
+    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+      this.passwordRecordsStart = res;
+      return this.passwordRecords = res;
+    });
+  }
+
+  public showCategory() {
+    return this.passwordRecords && this.passwordRecords.length > 0;
   }
 
   formatter = (result: string) => {
@@ -128,20 +178,34 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     return filteredArray;
   }
 
-  clearCompany(item) {
-    console.log(item, item.length);
-    if (item.length < 2) {
-      console.log(1);
-      this.selectCompany({item: this.clearCompanyItem});
-      this.selectDeviceOrUser({item: null});
-      this.device = null;
-    }
+  clearCompany() {
+    this.refreshCompany();
+    this.refreshDeviceOrUser();
+    this.refreshDate();
+    this.passwordRecords = this.passwordRecordsStart;
   }
 
-  clearDevice(item) {
-    if (item.length === 0) {
-      this.device = null;
-    }
+  clearDevice() {
+    this.passwordRecords = this.passwordRecordsStart;
+    this.refreshDeviceOrUser();
+    this.filterPasswordRecords(this.selectedCompany);
+    this.filterPasswordRecordsByDate(this.selectedDateForFilter);
+  }
+
+
+  private refreshDeviceOrUser() {
+    this.device = null;
+    this.selectDeviceOrUser({item: null});
+  }
+
+  private refreshDate() {
+    this.selectedDate = null;
+  }
+
+  private refreshCompany() {
+    this.selectCompany({item: this.clearCompanyItem});
+    this.company = null;
+    this.device = null;
   }
 
   private getAllUsers() {

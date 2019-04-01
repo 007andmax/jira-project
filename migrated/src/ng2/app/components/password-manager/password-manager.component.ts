@@ -14,9 +14,10 @@ import { PasswordManagerService } from "../../services/password-manager/password
 export class PasswordManagerComponent implements OnInit {
 
   public companiesList: any;
-  public filter: any;
+  public selectedCompany: any;
   public selectedUserOrDevice: any;
   public selectedDate: any;
+  public selectedCategory: any;
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
@@ -26,32 +27,22 @@ export class PasswordManagerComponent implements OnInit {
 
   ngOnInit() {
     this.getSelectCompany();
-    this.getSelectPasswordRecordType();
+    this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
   };
 
   public getSelectCompany() {
     this.companiesService.filteredCompanyUpdate.subscribe((company) => {
-      this.filter = {
-        type: 'companyId',
-        value: company
-      };
       this.refreshFilter();
-      return this.filter;
+      return this.selectedCompany = company;
     });
   }
 
-  public getSelectPasswordRecordType() {
-    this.passwordManagerService.filteredType.subscribe((type) => {
-      this.filter = {
-        type: 'template',
-        value: type
-      };
-      console.log('testes', type);
-      this.refreshFilter();
-      return this.filter;
-    })
+  public getSelectedCategory() {
+    this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
+      return this.selectedCategory = category
+    });
   }
 
   public getSelectedDeviceOrUser() {
@@ -68,6 +59,10 @@ export class PasswordManagerComponent implements OnInit {
         this.selectedDate = null;
       }
     })
+  }
+
+  public showDataTable() {
+    return ((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory));
   }
 
   formatDayAndMonth(item) {

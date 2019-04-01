@@ -23,8 +23,10 @@ import { ApiPasswordManagerService } from "./components/password-manager/api-pas
 
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
-import { ObjectByObjectPipe } from './pipe/object-by-object.pipe';
+import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
+import { DeviceUserPipe } from './pipe/device-user.pipe';
+import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -58,13 +60,15 @@ angular.module('quicktech')
     LeftPanelComponent,
     LeftPanelPasswordManagerComponent,
     MainComponent,
-    ObjectByObjectPipe,
+    CompanyPipe,
     PasswordRecordsTypesComponent,
     PasswordManagerTableComponent,
     PasswoordManagerHeaderComponent,
     UserPipe,
     DateFormatPipe,
-    PasswordManagerEditAsideComponent
+    PasswordManagerEditAsideComponent,
+    DeviceUserPipe,
+    PasswordCategoryPipe
   ],
   imports: [
     BrowserModule,

@@ -1,36 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { PASSWORD_RECORD_TYPES } from "../../../../const/password-record-types";
 import { PasswordManagerService } from "../../../../services/password-manager/password-manager.service";
-import {ApiPasswordManagerService} from "../../../password-manager/api-password-manager.service";
 
 @Component({
   selector: 'app-password-records-types',
   templateUrl: './password-records-types.component.html',
   styleUrls: ['./password-records-types.component.scss']
 })
-export class PasswordRecordsTypesComponent implements OnInit {
+export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
-  public passwordRecordsData: any;
+  @Input() passwordRecords: any;
   public passwordRecordTypes = PASSWORD_RECORD_TYPES;
+  public selectedCategory = {
+    TITLE: '',
+    UPPERCASE: ''
+  };
 
   constructor(
-    private passwordManagerService: PasswordManagerService,
-    private apiPasswordManagerService: ApiPasswordManagerService
+    private passwordManagerService: PasswordManagerService
   ) { }
 
   ngOnInit() {
+    this.startComponent();
+  }
+
+  ngOnChanges() {
+    this.startComponent();
+  }
+
+  public startComponent() {
     this.initializePasswordRecordTypes();
-    this.getPasswordRecords();
+    this.setCountRecordsData();
   }
 
   filterByPasswordTypes(type) {
-    console.log(type);
-    this.passwordManagerService.setFilteredType(type);
+    this.selectedCategory = type;
+    this.passwordManagerService.setSelectedCategory(type);
   }
 
   private initializePasswordRecordTypes() {
-    this.passwordRecordTypes.map((item) => {
+    this.passwordRecords && this.passwordRecordTypes.map((item) => {
       item['count'] = 0;
     })
   }
@@ -41,10 +51,8 @@ export class PasswordRecordsTypesComponent implements OnInit {
     })
   }
 
-  public getPasswordRecords() {
-    this.apiPasswordManagerService.getRecords().subscribe((res: any) => res.map((item) => {
-      this.getItemCountsInCategories(item);
-    }));
+  public setCountRecordsData() {
+    return this.passwordRecords && this.passwordRecords.map((item) =>  this.getItemCountsInCategories(item));
   }
 
 }

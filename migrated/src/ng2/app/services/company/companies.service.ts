@@ -23,14 +23,8 @@ export class CompaniesService {
   }
 
   setFilteredCompnay(company) {
-    console.log(company);
     this.filteredCompany = company;
     this.filteredCompanyUpdate.emit(company);
   }
-
-  getFilterdCompany() {
-    return this.filteredCompany;
-  }
-
 
 }

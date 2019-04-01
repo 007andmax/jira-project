@@ -8,6 +8,8 @@ export class PasswordManagerService {
   public filteredType: EventEmitter<any> = new EventEmitter();
   public selectedDeviceOrUser: EventEmitter<any> = new EventEmitter();
   public selectedDate: EventEmitter<any> = new EventEmitter();
+  public emitSelectedCategory: EventEmitter<any> = new EventEmitter();
+  public showAddForm: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -21,9 +23,22 @@ export class PasswordManagerService {
     this.selectedDeviceOrUser.emit(item)
   }
 
+  setSelectedCategory(item) {
+    this.getSelectedCategory(item)
+  }
+
+  getSelectedCategory(item) {
+    console.log(item, '1111');
+    this.emitSelectedCategory.emit(item)
+  }
+
   setDate(item) {
-    console.log(item, 'item');
     this.selectedDate.emit(item)
+  }
+
+  addRecord() {
+    this.showAddForm.emit(true);
+
   }
 
 }

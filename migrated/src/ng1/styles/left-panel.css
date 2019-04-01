@@ -130,7 +130,7 @@
   justify-content: center;
 }
 
-.center-category__category--item:hover {
+.center-category__category--item:hover, .center-category__category--item.active  {
   color: #16a4fa;
 }
 
