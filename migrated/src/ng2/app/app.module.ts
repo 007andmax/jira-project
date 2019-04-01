@@ -9,6 +9,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -80,6 +81,7 @@ angular.module('quicktech')
     NgbModule,
     NgxSelectModule,
     ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
     SidebarModule.forRoot(),
     RouterModule.forRoot([
         {

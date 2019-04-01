@@ -7,6 +7,9 @@ import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PASSWORD_RECORD_TYPES, PASSWORD_RECORD_TYPES_ENUM } from "../../../const/password-record-types";
 import { CompaniesService } from "../../../services/company/companies.service";
+import { DevicesService } from "../../../services/devices/devices.service";
+import { USER } from "../../../const/users";
+import { UsersService } from "../../../services/users/users.service";
 
 
 @Component({
@@ -25,11 +28,18 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public clientsList: any;
   public type: any;
   public currentType;
+  public showSelect = false;
+  public tabs = ['User', 'Device', 'Not monitored'];
+  public currentTab = this.tabs[0];
+  public devicesList = [];
+  public usersList = [];
 
   constructor(
     private passwordManagerService: PasswordManagerService,
     private fb: FormBuilder,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private devicesService: DevicesService,
+    private userService: UsersService
   ) { }
 
   ngOnInit() {
@@ -75,8 +85,19 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     });
   }
 
-  save() {
+  public save() {
     console.log(this.createPasswordRecord);
+  }
+
+  public getCompanyDevices(companyId) {
+    this.getAllUsers(companyId.item.id);
+    this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
+      console.log(res);
+      if (res[companyId.item.id]) {
+        console.log(res[companyId.item.id], 'res[companyId.item.id]');
+        return this.devicesList = [...res[companyId.item.id]];
+      }
+    })
   }
 
   search = (text$: Observable<string>) => {
@@ -108,9 +129,24 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return result['name'];
   };
 
-  getCLientsList() {
+  public getCLientsList() {
     this.companiesService.getCompaniesList().subscribe((res) => {
       this.clientsList = res
+    })
+  }
+
+  public showSelectWrapper() {
+    this.showSelect = !this.showSelect;
+  }
+
+  public setCurrentTab(item) {
+    this.currentTab = item;
+  }
+
+  private getAllUsers(companyId) {
+    this.userService.getAllusers().subscribe((res: any) => {
+      res = res.filter((item) =>  item.company.id == companyId);
+      this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))]
     })
   }
 

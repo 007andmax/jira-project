@@ -7,7 +7,8 @@ import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { UsersService } from "../../../services/users/users.service";
-import {ApiPasswordManagerService} from "../../password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from "../../password-manager/api-password-manager.service";
+import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 
 
 @Component({
@@ -38,7 +39,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private devicesService: DevicesService,
     private userService: UsersService,
     private passwordManagerService: PasswordManagerService,
-    private apiPasswordManagerService: ApiPasswordManagerService
+    private apiPasswordManagerService: ApiPasswordManagerService,
+    private gadgetsService: GadgetsService
   ) { }
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     if (item.item.companyId) {
       this.getCompanyDevices(item.item.companyId);
       this.getAllUsers(item.item.companyId);
+      this.getGadgets(item.item.companyId);
     }
   }
 
@@ -219,6 +222,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       res = res.filter((item) =>  item.company.id == companyId);
       this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
     })
+  }
+
+  private getGadgets(companyId) {
+    this.gadgetsService.getCompanyDevices().subscribe((res: any) =>
+      this.devicesAndUsersList = [...(res.filter((item) => item.clientCompanyId === companyId)), ...this.devicesAndUsersList])
   }
 
 }
