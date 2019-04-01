@@ -59,7 +59,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecords(item.item);
     if (item.item.companyId) {
       this.getCompanyDevices(item.item.companyId);
-      this.getAllUsers();
+      this.getAllUsers(item.item.companyId);
     }
   }
 
@@ -215,8 +215,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.device = null;
   }
 
-  private getAllUsers() {
+  private getAllUsers(companyId) {
     this.userService.getAllusers().subscribe((res: any) => {
+      res = res.filter((item) =>  item.company.id == companyId);
       this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
     })
   }
