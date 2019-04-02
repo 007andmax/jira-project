@@ -18,4 +18,11 @@ export class GadgetsService {
     return this.http.get(this.apiUrl + `gadgets`);
   }
 
+  addNewGadget(clientCompanyId, name) {
+    return this.http.post(this.apiUrl + `gadgets`, {
+      clientCompanyId: clientCompanyId,
+      name: name
+    })
+  }
+
 }

@@ -10,6 +10,7 @@ import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
 import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
+import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 
 
 @Component({
@@ -33,13 +34,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public currentTab = this.tabs[0];
   public devicesList = [];
   public usersList = [];
+  public showGadgetsForm: any;
+  public newGadgets: any;
+  public gadgets: any;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
     private fb: FormBuilder,
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
-    private userService: UsersService
+    private userService: UsersService,
+    private gadgetsService: GadgetsService
   ) { }
 
   ngOnInit() {
@@ -91,10 +96,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public getCompanyDevices(companyId) {
     this.getAllUsers(companyId.item.id);
+    this.getGadgets();
     this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
-      console.log(res);
       if (res[companyId.item.id]) {
-        console.log(res[companyId.item.id], 'res[companyId.item.id]');
         return this.devicesList = [...res[companyId.item.id]];
       }
     })
@@ -148,6 +152,23 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       res = res.filter((item) =>  item.company.id == companyId);
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))]
     })
+  }
+
+  public addGadgetsform() {
+    const clientCompanyId = this.createPasswordRecord.value.type.id;
+    const name = this.newGadgets;
+    this.gadgetsService.addNewGadget(clientCompanyId, name).subscribe((res) => {
+      this.gadgets.push(res);
+    })
+  }
+
+  public showGadgetsAddForm() {
+    this.showGadgetsForm = !this.showGadgetsForm;
+  }
+
+  public getGadgets() {
+    this.gadgetsService.getCompanyDevices().subscribe((res: any) =>
+      this.gadgets = [...res]);
   }
 
 }
