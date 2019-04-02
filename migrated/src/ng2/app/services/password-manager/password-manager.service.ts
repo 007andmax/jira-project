@@ -47,7 +47,112 @@ export class PasswordManagerService {
   }
 
   saveRecord(recordInfo) {
-    return this.http.post(this.apiUrl + 'passwordRecords', recordInfo);
+    const date = recordInfo.expiredDate;
+    recordInfo.expiredDate =  recordInfo.expiredDate ?
+      `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}` : '';
+    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
+
+  formatDayAndMonth(item) {
+    return item < 10 ? `0${item}` : item;
+  }
+
+  public getData(recordInfo) {
+    console.log(recordInfo.type.UPPERCASE, 'recordInfo.type.title');
+
+    if (recordInfo.type.UPPERCASE === 'OFFICE_365_ACCOUNT') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        description: recordInfo.description,
+        expiredDate: recordInfo.expiryDate,
+        key: recordInfo.description,
+        links: [],
+        note: recordInfo.note,
+        password: recordInfo.password,
+        template: recordInfo.type.UPPERCASE,
+        url: recordInfo.url,
+        username: recordInfo.userName
+      })
+    } else if (recordInfo.type.UPPERCASE === 'MICROSOFT_ACCOUNT') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        description: recordInfo.description,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        links: [],
+        url: recordInfo.url,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        note: recordInfo.note
+
+      })
+    } else if (recordInfo.type.UPPERCASE === 'EMAIL_ACCOUNT') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        description: recordInfo.description,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        links: [],
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        note: recordInfo.note
+      })
+    } else if (recordInfo.type.UPPERCASE === 'HOSTING') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        description: recordInfo.description,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        note: recordInfo.note,
+        url: recordInfo.url,
+      })
+    } else if (recordInfo.type.UPPERCASE === 'GENERIC') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        description: recordInfo.description,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        note: recordInfo.note,
+        code: recordInfo.code,
+        links: []
+      })
+    } else if (recordInfo.type.UPPERCASE === 'AGENT') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName
+      })
+    } else if (recordInfo.type.UPPERCASE === 'WIFI_NETWORK') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        expiredDate: recordInfo.expiryDate,
+        links: [],
+        password: recordInfo.password,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        description: recordInfo.description,
+        note: recordInfo.note
+      })
+    } else if (recordInfo.type.UPPERCASE === 'LOCAL_USER_ACCOUNT') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        links: [],
+        note: recordInfo.note,
+        ssid: recordInfo.ssid
+      })
+    }
+  }
+
+
 
 }

@@ -166,7 +166,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     if (item.hasOwnProperty('hostName')) {
       return item['hostName'].toLowerCase().indexOf(term.toLowerCase()) > -1
     } else {
-      return item['firstName'].toLowerCase().indexOf(term.toLowerCase()) > -1 || item['lastName'].toLowerCase().indexOf(term.toLowerCase()) > -1
+      return (item && item['firstName'] && item['firstName'].toLowerCase().indexOf(term.toLowerCase()) > -1)
+        || (item && item['lastName'] && item['lastName'].toLowerCase().indexOf(term.toLowerCase()) > -1)
     }
   }
 

@@ -26,6 +26,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   click$ = new Subject<string>();
   focusClients$ = new Subject<string>();
   clickClients$ = new Subject<string>();
+  public submitted = false;
   public clientsList: any;
   public type: any;
   public currentType;
@@ -60,6 +61,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public _toggleSidebar() {
     this.createPasswordRecord.reset();
+    this.submitted = false;
     this._opened = !this._opened;
   }
 
@@ -80,8 +82,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public changeType(event) {
-    this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
+    if (event) {
+      this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
+    }
   }
+
+  get form() { return this.createPasswordRecord.controls; }
 
   public initForm(){
     this.createPasswordRecord = this.fb.group({
@@ -104,13 +110,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
-    const controls = this.createPasswordRecord.controls;
 
-    if (this.createPasswordRecord.invalid) {
-      Object.keys(controls)
-        .forEach(controlName => controls[controlName].markAsTouched());
-      // return;
-    }
+    this.submitted = true;
+    const controls = this.createPasswordRecord.controls;
+    // if (this.createPasswordRecord.invalid) {
+    //   return;
+    // }
+    console.log(this.createPasswordRecord.value, 'this.createPasswordRecord.value');
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
       console.log(res);
     });
