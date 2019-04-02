@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -22,6 +22,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public createPasswordRecord: FormGroup;
   @ViewChild('instance') instance: NgbTypeahead;
+  @Output() addRecord = new EventEmitter<string>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   focusClients$ = new Subject<string>();
@@ -38,6 +39,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public showGadgetsForm: any;
   public newGadgets: any;
   public gadgets: any;
+  public userDevice = [];
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -116,10 +118,27 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     // if (this.createPasswordRecord.invalid) {
     //   return;
     // }
+    this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     console.log(this.createPasswordRecord.value, 'this.createPasswordRecord.value');
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
       console.log(res);
+      this.addRecord.emit();
+
     });
+  }
+
+  public toggleItem($event, newItem) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    const isItem = this.userDevice && this.userDevice.filter((item) => item.id === newItem.id);
+    if (isItem.length === 0) {
+      this.userDevice.push(newItem);
+    } else {
+      this.userDevice = this.userDevice.filter((item) => item.id !== newItem.id);
+    }
+
+    console.log(this.userDevice, 'this.userDevice');
+
   }
 
   public getCompanyDevices(companyId) {
@@ -171,7 +190,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.showSelect = !this.showSelect;
   }
 
-  public setCurrentTab(item) {
+  public setCurrentTab($event, item) {
+    $event.preventDefault();
+    $event.stopPropagation();
     this.currentTab = item;
   }
 

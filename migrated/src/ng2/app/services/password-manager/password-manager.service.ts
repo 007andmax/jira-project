@@ -65,8 +65,8 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: recordInfo.expiryDate,
-        key: recordInfo.description,
-        links: [],
+        key: recordInfo.key,
+        links: recordInfo.userOrDevice,
         note: recordInfo.note,
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
@@ -79,7 +79,7 @@ export class PasswordManagerService {
         description: recordInfo.description,
         expiredDate: recordInfo.expiryDate,
         password: recordInfo.password,
-        links: [],
+        links: recordInfo.userOrDevice,
         url: recordInfo.url,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -92,7 +92,7 @@ export class PasswordManagerService {
         description: recordInfo.description,
         expiredDate: recordInfo.expiryDate,
         password: recordInfo.password,
-        links: [],
+        links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         note: recordInfo.note
@@ -118,7 +118,7 @@ export class PasswordManagerService {
         username: recordInfo.userName,
         note: recordInfo.note,
         code: recordInfo.code,
-        links: []
+        links: recordInfo.userOrDevice,
       })
     } else if (recordInfo.type.UPPERCASE === 'AGENT') {
       return ({
@@ -132,7 +132,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: recordInfo.expiryDate,
-        links: [],
+        links: recordInfo.userOrDevice,
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -146,7 +146,7 @@ export class PasswordManagerService {
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
-        links: [],
+        links: recordInfo.userOrDevice,
         note: recordInfo.note,
         ssid: recordInfo.ssid
       })

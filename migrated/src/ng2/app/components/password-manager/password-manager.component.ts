@@ -69,6 +69,10 @@ export class PasswordManagerComponent implements OnInit {
     return item < 10 ? `0${item}` : item;
   }
 
+  addRecord() {
+    console.log(this, 'THIS');
+  }
+
   private refreshFilter() {
     this.selectedUserOrDevice = {};
     this.selectedDate = null;
