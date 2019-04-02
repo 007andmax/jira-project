@@ -1,3 +1,4 @@
+@import './assets/styles/dropdowns.scss';
 
 .main-container:nth-child(2) {
   display: none;
@@ -17,11 +18,4 @@
 .password-content__modal {
   top: 0 !important;
   position: absolute !important;
-}
-
-ngb-typeahead-window {
-  .dropdown-menu {
-    width: 100%;
-    max-height: 140px;
-  }
 }

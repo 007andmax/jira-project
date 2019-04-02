@@ -1802,17 +1802,17 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 .edit-new {
-  /*background: url('../images/new-icons/edit-new.png');*/
+  background: url("../images/new-icons/edit-new.png");
   background-size: cover;
 }
 
 .print-new {
-  /*background: url('../images/new-icons/print-new.png');*/
+  background: url("../images/new-icons/print-new.png");
   background-size: cover;
 }
 
 .export-new {
-  /*background: url('../images/new-icons/export-new.png');*/
+  background: url("../images/new-icons/export-new.png");
   background-size: cover;
 }
 

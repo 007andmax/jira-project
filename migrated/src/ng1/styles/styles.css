@@ -4233,12 +4233,6 @@ _:-ms-fullscreen,
   padding-right: 2px;
 }
 
-.form-control:focus {
-  border-color: #2c9fdd;
-  outline: 0;
-  /*background-color: #fff;*/
-}
-
 .form-control::-moz-placeholder {
   color: #b2becd;
   opacity: 1;
