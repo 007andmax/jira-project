@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -50,6 +50,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   ngOnInit() {
     this.showAddForm();
     this.initForm();
+    this.createPasswordRecord.reset();
     this.getCLientsList();
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
@@ -58,6 +59,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public _opened: boolean = false;
 
   public _toggleSidebar() {
+    this.createPasswordRecord.reset();
     this._opened = !this._opened;
   }
 
@@ -67,31 +69,51 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  isFieldValid(field: string) {
+    return !this.createPasswordRecord.get(field).valid && this.createPasswordRecord.get(field).touched;
+  }
+
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(field)
+    };
+  }
+
   public changeType(event) {
     this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
   }
 
   public initForm(){
     this.createPasswordRecord = this.fb.group({
-      description: [''],
-      client: [''],
-      type: [''],
+      description: ['', Validators.max(5000)],
+      client: ['', [Validators.required]],
+      type: ['', [Validators.required]],
       ssid: [''],
-      userName: [''],
-      password: [''],
-      key: [''],
+      userName: ['', [Validators.required, Validators.max(100)]],
+      password: ['', [Validators.required, Validators.max(100)]],
+      key: ['', [Validators.max(100)]],
       link: [''],
-      url: [''],
+      url: ['', [Validators.max(255)]],
       code: [''],
       userOrDevice: [''],
       ipAdres: [''],
       port: [''],
-      expiryDate: ['']
+      expiryDate: [''],
+      note: ['', [Validators.max(1000)]],
     });
   }
 
   public save() {
-    console.log(this.createPasswordRecord);
+    const controls = this.createPasswordRecord.controls;
+
+    if (this.createPasswordRecord.invalid) {
+      Object.keys(controls)
+        .forEach(controlName => controls[controlName].markAsTouched());
+      // return;
+    }
+    this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   public getCompanyDevices(companyId) {

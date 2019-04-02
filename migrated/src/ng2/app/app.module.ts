@@ -9,7 +9,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
-// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -79,9 +79,9 @@ angular.module('quicktech')
     FormsModule,
     SelectModule,
     NgbModule,
+    ShowHidePasswordModule,
     NgxSelectModule,
-    ReactiveFormsModule,
-    // NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
     RouterModule.forRoot([
         {

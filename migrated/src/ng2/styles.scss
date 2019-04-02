@@ -19,3 +19,14 @@
   top: 0 !important;
   position: absolute !important;
 }
+
+ngb-typeahead-window {
+  .dropdown-menu {
+    width: 100%;
+    max-height: 140px;
+  }
+}
+
+input.ng-touched.has-error{
+  border-color: red;
+}
