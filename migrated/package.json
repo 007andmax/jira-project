@@ -30,6 +30,7 @@
     "moment": "^2.24.0",
     "ng-sidebar": "^8.0.0",
     "ng2-select": "^2.0.0",
+    "ng4-click-outside": "^1.0.1",
     "ngx-select-ex": "^3.5.2-ng4",
     "ngx-show-hide-password": "^2.0.3",
     "rxjs": "~6.3.3",

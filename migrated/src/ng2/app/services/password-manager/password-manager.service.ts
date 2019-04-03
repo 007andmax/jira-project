@@ -140,7 +140,8 @@ export class PasswordManagerService {
         expiredDate: recordInfo.expiryDate,
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
-        username: recordInfo.userName
+        username: recordInfo.userName,
+        description: recordInfo.description
       })
     } else if (recordInfo.type.UPPERCASE === 'WIFI_NETWORK') {
       return ({
@@ -151,7 +152,10 @@ export class PasswordManagerService {
         template: recordInfo.type.UPPERCASE,
         ssid: recordInfo.ssid,
         description: recordInfo.description,
-        note: recordInfo.note
+        note: recordInfo.note,
+        http: recordInfo.http,
+        ssh: recordInfo.ssh,
+        telnet: recordInfo.telnet
       })
     } else if (recordInfo.type.UPPERCASE === 'LOCAL_USER_ACCOUNT') {
       return ({
@@ -162,7 +166,8 @@ export class PasswordManagerService {
         username: recordInfo.userName,
         links: recordInfo.userOrDevice,
         note: recordInfo.note,
-        ssid: recordInfo.ssid
+        ssid: recordInfo.ssid,
+        description: recordInfo.description,
       })
     }
   }
