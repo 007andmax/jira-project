@@ -1,0 +1,1 @@
+var ROUTES_INDEX = {"name":"<root>","kind":"module","className":"AppModule","children":[{"name":"routes","filename":"src/ng2/app/app-routing.module.ts","module":"AppRoutingModule","children":[],"kind":"module"}]}

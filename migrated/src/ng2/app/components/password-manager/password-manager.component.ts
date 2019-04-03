@@ -76,7 +76,7 @@ export class PasswordManagerComponent implements OnInit {
     return item < 10 ? `0${item}` : item;
   }
 
-  addRecord() {
+  addRecord(event) {
     this.child.getSelectedCategory();
   }
 
