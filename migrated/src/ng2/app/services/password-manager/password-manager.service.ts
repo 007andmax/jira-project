@@ -49,6 +49,7 @@ export class PasswordManagerService {
     const date = recordInfo.expiredDate;
     recordInfo.expiredDate =  recordInfo.expiredDate ?
       `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}` : '';
+    console.log(recordInfo, 'RECORDINFO');
     return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
 
@@ -106,6 +107,20 @@ export class PasswordManagerService {
         username: recordInfo.userName,
         note: recordInfo.note,
         url: recordInfo.url,
+      })
+    } else if (recordInfo.type.UPPERCASE === 'DEVICE') {
+      return ({
+        companyId: recordInfo.client && recordInfo.client.id,
+        description: recordInfo.description,
+        expiredDate: recordInfo.expiryDate,
+        password: recordInfo.password,
+        links: recordInfo.userOrDevice,
+        template: recordInfo.type.UPPERCASE,
+        username: recordInfo.userName,
+        note: recordInfo.note,
+        ip: recordInfo.ipAdres,
+        http: true
+
       })
     } else if (recordInfo.type.UPPERCASE === 'GENERIC') {
       return ({

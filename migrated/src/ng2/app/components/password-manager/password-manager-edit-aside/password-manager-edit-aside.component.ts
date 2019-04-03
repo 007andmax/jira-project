@@ -65,6 +65,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.createPasswordRecord.reset();
     this.submitted = false;
     this.opened = !this.opened;
+    this.showSelect = false;
   }
 
   public showAddForm() {
@@ -76,6 +77,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public changeType(event) {
     if (event) {
       this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
+      console.log(this.type, 'this.type');
+      if (this.type === 8) {
+        console.log(1);
+        this.createPasswordRecord.get('ssid').setValidators([Validators.required]);
+        this.createPasswordRecord.get('userName').clearValidators();
+      } else {
+        console.log(2);
+        this.createPasswordRecord.get('ssid').clearValidators();
+        this.createPasswordRecord.get('userName').setValidators([Validators.required]);
+      }
     }
   }
 
@@ -105,31 +116,39 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
     this.submitted = true;
     const controls = this.createPasswordRecord.controls;
+    const isUserRequired = this.checkLinks();
     console.log(this.createPasswordRecord, 'this.createPasswordRecord');
-    if (this.createPasswordRecord.invalid) {
+    if (this.createPasswordRecord.invalid || isUserRequired) {
       return this.submitted;
     }
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
 
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
-      console.log(res);
       this.addRecord.emit();
       this.createPasswordRecord.reset();
+      this.submitted = false;
       this.opened = false;
+      this.showSelect = false;
     });
+  }
+
+  checkLinks() {
+    if (this.type === 4 || this.type === 7) {
+      return this.userDevice.length === 0;
+    } else {
+      return false;
+    }
   }
 
   public toggleItem($event, newItem, type) {
     $event.preventDefault();
     $event.stopPropagation();
     const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
-    console.log('test');
     if (!isItem || isItem.length === 0) {
       this.pushItemToUserDevice(newItem, type);
     } else {
       this.userDevice = this.filterUserDevice(newItem, type)
     }
-    console.log(this.userDevice, 'this.userDevice');
   }
 
   pushItemToUserDevice( newItem, type) {
