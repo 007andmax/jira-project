@@ -4,7 +4,7 @@ import { PasswordManagerService } from "../../../services/password-manager/passw
 import { Subject } from "rxjs";
 
 /**
- * Password manager component
+ * Password manager data table component
  */
 @Component({
   selector: 'app-password-manager-table',

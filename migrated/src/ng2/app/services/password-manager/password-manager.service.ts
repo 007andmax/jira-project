@@ -34,7 +34,6 @@ export class PasswordManagerService {
   }
 
   getSelectedCategory(item) {
-    console.log(item, '1111');
     this.emitSelectedCategory.emit(item)
   }
 

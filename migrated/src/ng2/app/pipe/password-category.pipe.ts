@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PasswordCategoryPipe implements PipeTransform {
 
   transform(data: any, category: any): any {
-    console.log('ccategory=', category);
-    console.log('data=', data);
     if (category && data && category['UPPERCASE'] !== 'CLEAR') {
       return data.filter((item) => {
         return item.template.toLowerCase() === category['UPPERCASE'].toLowerCase();

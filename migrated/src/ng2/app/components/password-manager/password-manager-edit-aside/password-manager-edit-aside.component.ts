@@ -115,9 +115,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
     this.submitted = true;
     const controls = this.createPasswordRecord.controls;
-    // if (this.createPasswordRecord.invalid) {
-    //   return;
-    // }
+    if (this.createPasswordRecord.invalid) {
+      return;
+    }
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     console.log(this.createPasswordRecord.value, 'this.createPasswordRecord.value');
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
@@ -136,9 +136,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     } else {
       this.userDevice = this.userDevice.filter((item) => item.id !== newItem.id);
     }
-
-    console.log(this.userDevice, 'this.userDevice');
-
   }
 
   public getCompanyDevices(companyId) {
