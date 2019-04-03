@@ -59,28 +59,18 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.currentType = PASSWORD_RECORD_TYPES[0];
   }
 
-  public _opened: boolean = false;
+  public opened: boolean = false;
 
   public _toggleSidebar() {
     this.createPasswordRecord.reset();
     this.submitted = false;
-    this._opened = !this._opened;
+    this.opened = !this.opened;
   }
 
   public showAddForm() {
     this.passwordManagerService.showAddForm.subscribe((res) => {
-      this._opened = true;
+      this.opened = true;
     })
-  }
-
-  isFieldValid(field: string) {
-    return !this.createPasswordRecord.get(field).valid && this.createPasswordRecord.get(field).touched;
-  }
-
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field)
-    };
   }
 
   public changeType(event) {
@@ -93,21 +83,21 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public initForm(){
     this.createPasswordRecord = this.fb.group({
-      description: ['', Validators.max(5000)],
+      description: ['', Validators.maxLength(5000)],
       client: ['', [Validators.required]],
       type: ['', [Validators.required]],
       ssid: [''],
-      userName: ['', [Validators.required, Validators.max(100)]],
-      password: ['', [Validators.required, Validators.max(100)]],
-      key: ['', [Validators.max(100)]],
+      userName: ['', [Validators.required, Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.maxLength(100)]],
+      key: ['', [Validators.maxLength(100)]],
       link: [''],
-      url: ['', [Validators.max(255)]],
+      url: ['', [Validators.maxLength(255)]],
       code: [''],
       userOrDevice: [''],
       ipAdres: [''],
       port: [''],
       expiryDate: [''],
-      note: ['', [Validators.max(1000)]],
+      note: ['', [Validators.maxLength(1000)]],
     });
   }
 
@@ -115,15 +105,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
     this.submitted = true;
     const controls = this.createPasswordRecord.controls;
+    console.log(this.createPasswordRecord, 'this.createPasswordRecord');
     if (this.createPasswordRecord.invalid) {
-      return;
+      return this.submitted;
     }
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
-    console.log(this.createPasswordRecord.value, 'this.createPasswordRecord.value');
+
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
       console.log(res);
       this.addRecord.emit();
-
+      this.opened = false;
     });
   }
 

@@ -27,6 +27,6 @@ ngb-typeahead-window {
   }
 }
 
-input.ng-touched.has-error{
-  border-color: red;
+.has-error{
+  border-color: red!important;
 }
