@@ -101,7 +101,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       userOrDevice: [''],
       ipAdres: [''],
       port: [''],
-      expiryDate: [''],
+      expiryDate: [null, []],
       note: ['', [Validators.maxLength(1000)]],
       http: [false],
       ssh: [false],
@@ -110,8 +110,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
+    console.log('teste');
+    console.log(this.createPasswordRecord, 'this.createPasswordRecord');
     this.submitted = true;
-    const controls = this.createPasswordRecord.controls;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) {
