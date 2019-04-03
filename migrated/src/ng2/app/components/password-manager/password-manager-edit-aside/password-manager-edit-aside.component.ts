@@ -30,6 +30,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public submitted = false;
   public clientsList: any;
   public type: any;
+  public model: any;
   public currentType;
   public showSelect = false;
   public tabs = ['User', 'Device', 'Not monitored'];
@@ -109,7 +110,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
-
     this.submitted = true;
     const controls = this.createPasswordRecord.controls;
     const isUserRequired = this.checkLinks();

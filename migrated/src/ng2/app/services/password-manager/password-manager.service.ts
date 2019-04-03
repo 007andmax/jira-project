@@ -47,14 +47,16 @@ export class PasswordManagerService {
 
   saveRecord(recordInfo) {
     const date = recordInfo.expiredDate;
-    recordInfo.expiredDate =  recordInfo.expiredDate ?
-      `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}` : '';
     console.log(recordInfo, 'RECORDINFO');
     return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
 
   formatDayAndMonth(item) {
     return item < 10 ? `0${item}` : item;
+  }
+
+  public getFormatedDate(date) {
+    return date && `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
   }
 
   public getData(recordInfo) {
@@ -64,7 +66,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         key: recordInfo.key,
         links: recordInfo.userOrDevice,
         note: recordInfo.note,
@@ -77,7 +79,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         links: recordInfo.userOrDevice,
         url: recordInfo.url,
@@ -90,7 +92,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
@@ -101,7 +103,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -112,7 +114,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
@@ -126,7 +128,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -137,7 +139,7 @@ export class PasswordManagerService {
     } else if (recordInfo.type.UPPERCASE === 'AGENT') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -146,7 +148,7 @@ export class PasswordManagerService {
     } else if (recordInfo.type.UPPERCASE === 'WIFI_NETWORK') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         links: recordInfo.userOrDevice,
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
@@ -160,7 +162,7 @@ export class PasswordManagerService {
     } else if (recordInfo.type.UPPERCASE === 'LOCAL_USER_ACCOUNT') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
-        expiredDate: recordInfo.expiryDate,
+        expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
