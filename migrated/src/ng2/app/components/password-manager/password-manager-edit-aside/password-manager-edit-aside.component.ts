@@ -109,7 +109,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) {
-      this.createPasswordRecord.controls['userName'].setValue('block');
+      this.createPasswordRecord.controls['userName'].setValue('');
     }
 
     console.log(this.createPasswordRecord, 'this.createPasswordRecord');
