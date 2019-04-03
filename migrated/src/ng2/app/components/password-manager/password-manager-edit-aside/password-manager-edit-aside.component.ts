@@ -44,6 +44,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public usersCheckbox = [];
   public deviceCheckbox = [];
   public gadgetCheckbox = [];
+  public selectedUserAndDevices = [];
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -51,7 +52,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
     private userService: UsersService,
-    private gadgetsService: GadgetsService
+    private gadgetsService: GadgetsService,
   ) { }
 
   ngOnInit() {
@@ -147,12 +148,27 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public toggleItem($event, newItem, type, index) {
     $event.preventDefault();
     $event.stopPropagation();
+
+    this.changeSelectedUserAndDevices(newItem);
     this.changeChecked(type, index);
     const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
     if (!isItem || isItem.length === 0) {
       this.pushItemToUserDevice(newItem, type);
     } else {
       this.userDevice = this.filterUserDevice(newItem, type)
+    }
+  }
+
+  changeSelectedUserAndDevices(newItem) {
+    const items =  this.selectedUserAndDevices.filter((item) => {
+      return (item.id !== newItem.id || item.agentId !== newItem.agentId)
+    });
+    console.log(items.length, 'items.length');
+    console.log(this.selectedUserAndDevices.length, 'this.selectedUserAndDevices.length');
+    if (items.length <  this.selectedUserAndDevices.length) {
+      return this.selectedUserAndDevices = items;
+    } else {
+      return this.selectedUserAndDevices.push(newItem);
     }
   }
 
@@ -280,9 +296,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public changeChecked(type, i) {
-    console.log(this.deviceCheckbox, 'this.deviceCheckbox');
-    console.log(this.usersCheckbox, 'this.usersCheckbox');
-    console.log(type, 'type');
     if (type === 'user') {
       this.usersCheckbox[i] = !this.usersCheckbox[i];
     } else if (type === 'device') {
@@ -290,7 +303,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     } else {
       this.gadgetCheckbox[i] = !this.gadgetCheckbox[i];
     }
-
   }
 
 }
