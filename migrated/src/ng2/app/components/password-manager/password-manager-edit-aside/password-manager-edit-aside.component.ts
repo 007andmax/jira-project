@@ -77,16 +77,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public changeType(event) {
     if (event) {
       this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
-      console.log(this.type, 'this.type');
-      if (this.type === 8) {
-        console.log(1);
-        this.createPasswordRecord.get('ssid').setValidators([Validators.required]);
-        this.createPasswordRecord.get('userName').clearValidators();
-      } else {
-        console.log(2);
-        this.createPasswordRecord.get('ssid').clearValidators();
-        this.createPasswordRecord.get('userName').setValidators([Validators.required]);
-      }
     }
   }
 
@@ -117,8 +107,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = true;
     const controls = this.createPasswordRecord.controls;
     const isUserRequired = this.checkLinks();
+    const isSsidRequired = this.checkSsid();
+    if (this.type === 8) {
+      this.createPasswordRecord.controls['userName'].setValue('block');
+    }
+
     console.log(this.createPasswordRecord, 'this.createPasswordRecord');
-    if (this.createPasswordRecord.invalid || isUserRequired) {
+    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) {
       return this.submitted;
     }
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
@@ -138,6 +133,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  checkSsid() {
+    console.log(this.type, 'this.type');
+    console.log(this.createPasswordRecord.value.ssid, 'this.createPasswordRecord.value.ssid');
+      return (this.type === 8 && (this.createPasswordRecord.value.ssid === 0 || !this.createPasswordRecord.value.ssid))
   }
 
   public toggleItem($event, newItem, type) {

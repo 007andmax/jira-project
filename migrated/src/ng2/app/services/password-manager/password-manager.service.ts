@@ -149,7 +149,7 @@ export class PasswordManagerService {
         links: recordInfo.userOrDevice,
         password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
-        username: recordInfo.userName,
+        ssid: recordInfo.ssid,
         description: recordInfo.description,
         note: recordInfo.note
       })
