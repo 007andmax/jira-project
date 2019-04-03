@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PasswordManagerTableComponent } from "./password-manager-table/password-manager-table.component";
 
 import { ApiPasswordManagerService } from "./api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 
+/**
+ * Password manager component
+ */
 @Component({
   selector: 'app-password-manager',
   templateUrl: './password-manager.component.html',
@@ -18,6 +21,7 @@ export class PasswordManagerComponent implements OnInit {
   public selectedUserOrDevice: any;
   public selectedDate: any;
   public selectedCategory: any;
+  @ViewChild(PasswordManagerTableComponent ) child: PasswordManagerTableComponent ;
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
@@ -32,6 +36,9 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDate();
   };
 
+  /**
+   * Get company list
+   */
   public getSelectCompany() {
     this.companiesService.filteredCompanyUpdate.subscribe((company) => {
       this.refreshFilter();
@@ -70,7 +77,7 @@ export class PasswordManagerComponent implements OnInit {
   }
 
   addRecord() {
-    console.log(this, 'THIS');
+    this.child.getSelectedCategory();
   }
 
   private refreshFilter() {
