@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PasswordManagerTableComponent } from "./password-manager-table/password-manager-table.component";
+import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "./api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
+
 
 /**
  * Password manager component
@@ -21,15 +23,25 @@ export class PasswordManagerComponent implements OnInit {
   public selectedUserOrDevice: any;
   public selectedDate: any;
   public selectedCategory: any;
+  public newRecord: Subject<boolean> = new Subject();
   @ViewChild(PasswordManagerTableComponent ) child: PasswordManagerTableComponent ;
 
-  constructor(
+  /**
+   * Creates an instance of the PasswordManagerComponent with the injected services
+   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
+   * @param {CompaniesService} companiesService Service to work with api
+   * @param {PasswordManagerService} passwordManagerService Service to work with filters
+   */
+  public constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService
   ) {}
 
-  ngOnInit() {
+  /**
+   * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  public ngOnInit() {
     this.getSelectCompany();
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
@@ -37,7 +49,7 @@ export class PasswordManagerComponent implements OnInit {
   };
 
   /**
-   * Get company list
+   * Get selected company from filter
    */
   public getSelectCompany() {
     this.companiesService.filteredCompanyUpdate.subscribe((company) => {
@@ -46,18 +58,27 @@ export class PasswordManagerComponent implements OnInit {
     });
   }
 
+  /**
+   * Get selected category from filter
+   */
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
       return this.selectedCategory = category
     });
   }
 
+  /**
+   * Get selected user or device from filter
+   */
   public getSelectedDeviceOrUser() {
     this.passwordManagerService.selectedDeviceOrUser.subscribe((type) =>
       this.selectedUserOrDevice = type
     )
   }
 
+  /**
+   * Get selected date from filter
+   */
   public getSelectedDate() {
     this.passwordManagerService.selectedDate.subscribe((date) => {
       if (date) {
@@ -68,23 +89,33 @@ export class PasswordManagerComponent implements OnInit {
     })
   }
 
+  /**
+   * Change data table show status
+   */
   public showDataTable() {
     return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory));
   }
 
-  formatDayAndMonth(item) {
+  /**
+   * Add zero to date lower then 10
+   */
+  private formatDayAndMonth(item) {
     return item < 10 ? `0${item}` : item;
   }
 
-  addRecord(event) {
-    this.child.getSelectedCategory();
+  /**
+   * Add new record
+   */
+  public addRecord(event) {
+    this.newRecord.next(true);
   }
 
+  /**
+   * reset all filters
+   */
   private refreshFilter() {
     this.selectedUserOrDevice = {};
     this.selectedDate = null;
   }
-
-
 
 }
