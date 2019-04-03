@@ -114,18 +114,45 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
       console.log(res);
       this.addRecord.emit();
+      this.createPasswordRecord.reset();
       this.opened = false;
     });
   }
 
-  public toggleItem($event, newItem) {
+  public toggleItem($event, newItem, type) {
     $event.preventDefault();
     $event.stopPropagation();
-    const isItem = this.userDevice && this.userDevice.filter((item) => item.id === newItem.id);
-    if (isItem.length === 0) {
-      this.userDevice.push(newItem);
+    const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
+    console.log('test');
+    if (!isItem || isItem.length === 0) {
+      this.pushItemToUserDevice(newItem, type);
     } else {
-      this.userDevice = this.userDevice.filter((item) => item.id !== newItem.id);
+      this.userDevice = this.filterUserDevice(newItem, type)
+    }
+    console.log(this.userDevice, 'this.userDevice');
+  }
+
+  pushItemToUserDevice( newItem, type) {
+    if (type === 'device') {
+      this.userDevice.push({deviceId: newItem.id})
+    } else if (type === 'user'){
+      this.userDevice.push({userId: newItem.id})
+    }
+  }
+
+  filterUserDevice(newItem, type) {
+    if (type === 'device') {
+      return this.userDevice.filter((item) => item.deviceId !== newItem.id);
+    } else if (type === 'user'){
+      return this.userDevice.filter((item) => item.userId !== newItem.id);
+    }
+  }
+
+  findItemInUserDevice(newItem, type) {
+    if (type === 'device') {
+      return this.userDevice.filter((item) => item.deviceId === newItem.id);
+    } else if (type === 'user'){
+      return this.userDevice.filter((item) => item.userId === newItem.id);
     }
   }
 
