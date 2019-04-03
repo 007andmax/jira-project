@@ -163,8 +163,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const items =  this.selectedUserAndDevices.filter((item) => {
       return (item.id !== newItem.id || item.agentId !== newItem.agentId)
     });
-    console.log(items.length, 'items.length');
-    console.log(this.selectedUserAndDevices.length, 'this.selectedUserAndDevices.length');
     if (items.length <  this.selectedUserAndDevices.length) {
       return this.selectedUserAndDevices = items;
     } else {
@@ -274,7 +272,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public addGadgetsform() {
-    const clientCompanyId = this.createPasswordRecord.value.type.id;
+    const clientCompanyId = this.createPasswordRecord.value.client.id;
     const name = this.newGadgets;
     this.gadgetsService.addNewGadget(clientCompanyId, name).subscribe((res) => {
       this.gadgets.push(res);
