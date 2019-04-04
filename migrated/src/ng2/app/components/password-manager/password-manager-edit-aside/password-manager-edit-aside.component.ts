@@ -45,6 +45,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public deviceCheckbox = [];
   public gadgetCheckbox = [];
   public selectedUserAndDevices = [];
+  public mode = false;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -219,7 +220,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const inputFocus$ = this.focus$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => PASSWORD_RECORD_TYPES.slice(0,9))
+      map(term => PASSWORD_RECORD_TYPES.sort().slice(0,9))
     );
   };
 
@@ -230,7 +231,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
-        : this.clientsList && this.clientsList.filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+        : this.clientsList && this.clientsList
+        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
 
@@ -243,8 +245,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   };
 
   public getCLientsList() {
-    this.companiesService.getCompaniesList().subscribe((res) => {
+    this.companiesService.getCompaniesList().subscribe((res: any) => {
       this.clientsList = res
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .filter((item) => !item.deletedAt)
     })
   }
 
