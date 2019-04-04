@@ -22,6 +22,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public createPasswordRecord: FormGroup;
   @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('clientType') clientType: NgbTypeahead;
   @Output() addRecord = new EventEmitter<string>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
@@ -99,21 +100,23 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       url: ['', [Validators.maxLength(255)]],
       code: [''],
       userOrDevice: [''],
-      ipAdres: [''],
+      ipAdres: ['', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [''],
       expiryDate: [null, []],
       note: ['', [Validators.maxLength(1000)]],
       http: [false],
       ssh: [false],
-      telnet: [false],
+      telnet: [false]
     });
   }
 
   public save() {
+    console.log(this.createPasswordRecord, '1234');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
+    if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
@@ -140,6 +143,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public toggleItem($event, newItem, type, index) {
     $event.preventDefault();
     $event.stopPropagation();
+    this.showGadgetsForm = false;
     this.changeSelectedUserAndDevices(newItem);
     this.changeChecked(type, index);
     const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
@@ -222,9 +226,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.usersList = [];
     this.usersCheckbox = [];
     this.selectedUserAndDevices = [];
+    // this.clientType.nativeElement.focus();
+    console.log(this.clientType, 'this.clientType');
   }
 
   searchClients = (text$: Observable<string>) => {
+    console.log('12351235');
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.clickClients$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focusClients$;

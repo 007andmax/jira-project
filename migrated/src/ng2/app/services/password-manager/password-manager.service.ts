@@ -120,8 +120,10 @@ export class PasswordManagerService {
         username: recordInfo.userName,
         note: recordInfo.note,
         ip: recordInfo.ipAdres,
-        http: true
-
+        http: !!recordInfo.http,
+        ssh: !!recordInfo.ssh,
+        telnet: !!recordInfo.telnet,
+        port: recordInfo.port
       })
     } else if (recordInfo.type.UPPERCASE === 'GENERIC') {
       return ({
@@ -153,10 +155,7 @@ export class PasswordManagerService {
         template: recordInfo.type.UPPERCASE,
         ssid: recordInfo.ssid,
         description: recordInfo.description,
-        note: recordInfo.note,
-        http: recordInfo.http,
-        ssh: recordInfo.ssh,
-        telnet: recordInfo.telnet
+        note: recordInfo.note
       })
     } else if (recordInfo.type.UPPERCASE === 'LOCAL_USER_ACCOUNT') {
       return ({
@@ -167,7 +166,6 @@ export class PasswordManagerService {
         username: recordInfo.userName,
         links: recordInfo.userOrDevice,
         note: recordInfo.note,
-        ssid: recordInfo.ssid,
         description: recordInfo.description,
       })
     }
