@@ -21,7 +21,7 @@ import { PasswordRecordsTypesComponent } from './components/left-panel/left-pane
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
-import { ApiPasswordManagerService } from "./components/password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
 
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PasswordManagerTableComponent } from "./password-manager-table/password-manager-table.component";
 import { Subject } from "rxjs";
 
-import { ApiPasswordManagerService } from "./api-password-manager.service";
+import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 

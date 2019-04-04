@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { ApiPasswordManagerService } from "../api-password-manager.service";
+import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { Subject } from "rxjs";
 
@@ -41,6 +41,12 @@ export class PasswordManagerTableComponent implements OnInit {
 
   getRecords() {
     this.apiPasswordManagerService.getRecords().subscribe((res) => this.recordsData = res);
+  }
+
+  deleteRecord(recordId) {
+    this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) =>
+      this.recordsData = this.recordsData.filter((item) => item.id !==recordId)
+    );
   }
 
   editRecord() {

@@ -7,7 +7,7 @@ import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { UsersService } from "../../../services/users/users.service";
-import { ApiPasswordManagerService } from "../../password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 
 
