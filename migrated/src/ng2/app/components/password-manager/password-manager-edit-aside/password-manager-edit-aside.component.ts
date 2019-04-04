@@ -91,7 +91,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.createPasswordRecord = this.fb.group({
       description: ['', Validators.maxLength(5000)],
       client: ['', [Validators.required]],
-      type: [PASSWORD_RECORD_TYPES[0].TITLE, [Validators.required]],
+      type: [PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [''],
       userName: ['', [Validators.required, Validators.maxLength(100)]],
       password: ['', [Validators.required, Validators.maxLength(100)]],
@@ -226,8 +226,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.usersList = [];
     this.usersCheckbox = [];
     this.selectedUserAndDevices = [];
-    // this.clientType.nativeElement.focus();
-    console.log(this.clientType, 'this.clientType');
   }
 
   searchClients = (text$: Observable<string>) => {
