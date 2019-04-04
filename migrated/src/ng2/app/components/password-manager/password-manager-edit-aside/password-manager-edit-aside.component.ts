@@ -261,6 +261,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this.currentTab = item;
+    this.showGadgetsForm = false;
   }
 
   private getAllUsers(companyId) {
@@ -277,12 +278,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const name = this.newGadgets;
     this.gadgetsService.addNewGadget(clientCompanyId, name).subscribe((res) => {
       this.gadgets.push(res);
+      this.showGadgetsForm = false;
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) { this.gadgetCheckbox[i] = false; }
     })
   }
 
-  public showGadgetsAddForm() {
+  public showGadgetsAddForm($event) {
+    this.stopEvent($event);
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
@@ -292,6 +295,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) { this.gadgetCheckbox[i] = false; }
     });
+  }
+
+  private stopEvent($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+  }
+
+  public deleteGadget($event, id) {
+    this.stopEvent($event);
+    this.gadgetsService.deleteGadget(id)
+      .subscribe((res: any) => this.gadgets = this.gadgets.filter((item) => item.id !== id))
   }
 
   public changeChecked(type, i) {

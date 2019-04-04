@@ -47,7 +47,6 @@ export class PasswordManagerService {
 
   saveRecord(recordInfo) {
     const date = recordInfo.expiredDate;
-    console.log(recordInfo, 'RECORDINFO');
     return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
 

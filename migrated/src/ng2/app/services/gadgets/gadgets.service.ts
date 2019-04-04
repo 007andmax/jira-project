@@ -25,4 +25,8 @@ export class GadgetsService {
     })
   }
 
+  deleteGadget(id) {
+    return this.http.delete(this.apiUrl + `gadgets/${id}`)
+  }
+
 }
