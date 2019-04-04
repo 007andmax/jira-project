@@ -71,3 +71,54 @@
     }
   }
 }
+
+.date-picker {
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 20px 0 rgba(10, 45, 89, .1);
+    .ngb-dp-header,
+    .ngb-dp-weekdays {
+      background: #16a4fa;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      .small {
+        font-size: 14px;
+        font-style: normal;
+      }
+    }
+    .ngb-dp-weekdays {
+      pointer-events: none;
+    }
+    .custom-select {
+      background: #16a4fa;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+    .btn.btn-link {
+      color: #fff;
+      min-width: 20px;
+      span {
+        margin-bottom: 2px;
+      }
+    }
+    .ngb-dp-day {
+      border: none;
+      outline: none;
+      div {
+        transition: all .3s;
+        border-radius: 3px;
+        &:hover {
+          background: #e7ecf2;
+        }
+      }
+      .bg-primary {
+        background: #16a4fa;
+        &:hover {
+          background: #16a4fa;
+        }
+      }
+    }
+  }
+}

@@ -13235,6 +13235,7 @@ button.close {
   color: #16a4fa;
   text-decoration: none;
   cursor: pointer;
+  font-style: normal;
 }
 
 .left-panel-filter {

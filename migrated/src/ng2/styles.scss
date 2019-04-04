@@ -1,4 +1,5 @@
 @import './assets/styles/dropdowns.scss';
+@import './assets/styles/icons.scss';
 
 .main-container:nth-child(2) {
   display: none;
@@ -27,11 +28,26 @@ ngb-typeahead-window {
   }
 }
 
-.has-error{
-  border-color: red!important;
+.has-error {
+  border-color: red !important;
 }
 
 .avoid-clicks {
   pointer-events: none;
-  background: #939da3;
+  background: #ebebe4;
 }
+
+.device-user.has-placeholder {
+  position: relative;
+  &:before {
+    position: absolute;
+    content: 'Select Device / User';
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #a2a5bf;
+    width: auto;
+  }
+}
+
