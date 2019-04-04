@@ -141,16 +141,19 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public toggleItem($event, newItem, type, index) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.showGadgetsForm = false;
-    this.changeSelectedUserAndDevices(newItem);
-    this.changeChecked(type, index);
-    const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
-    if (!isItem || isItem.length === 0) {
-      this.pushItemToUserDevice(newItem, type);
-    } else {
-      this.userDevice = this.filterUserDevice(newItem, type)
+    console.log(type, index, '12341235');
+    if (type) {
+      console.log('1234');
+      this.stopEvent($event);
+      this.changeSelectedUserAndDevices(newItem);
+      this.changeChecked(type, index);
+      const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
+      if (!isItem || isItem.length === 0) {
+        this.pushItemToUserDevice(newItem, type);
+      } else {
+        this.userDevice = this.filterUserDevice(newItem, type)
+      }
+      this.showGadgetsForm = false;
     }
   }
 
@@ -260,11 +263,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public showSelectWrapper($event) {
     this.stopEvent($event);
     this.showSelect = !this.showSelect;
-    this.showGadgetsForm = false;
   }
 
   public hideSelectWrapper() {
     this.showSelect = false;
+    this.showGadgetsForm = false;
   }
 
   public setCurrentTab($event, item) {
@@ -295,6 +298,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showGadgetsAddForm($event) {
+    console.log('test');
     this.stopEvent($event);
     this.showGadgetsForm = !this.showGadgetsForm;
   }
