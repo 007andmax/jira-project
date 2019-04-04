@@ -45,7 +45,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public deviceCheckbox = [];
   public gadgetCheckbox = [];
   public selectedUserAndDevices = [];
-  public mode = false;
+  public selectedClient: any;
+  public isEditmode = false;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -75,15 +76,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showAddForm() {
-    this.passwordManagerService.showAddForm.subscribe((res) => {
-      this.opened = true;
-    })
+    this.passwordManagerService.showAddForm.subscribe((res) => this.opened = true);
   }
 
   public changeType(event) {
-    if (event) {
-      this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
-    }
+    if (event) this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
   }
 
   get form() { return this.createPasswordRecord.controls; }
@@ -112,34 +109,26 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
-    console.log('teste');
-    console.log(this.createPasswordRecord, 'this.createPasswordRecord');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
-    if (this.type === 8) {
-      this.createPasswordRecord.controls['userName'].setValue('block');
-    }
-    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) {
-      return this.submitted;
-    }
+    if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
+    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
+    this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
+      .subscribe((res) => this.afterSaveRecord());
+  }
 
-    this.passwordManagerService.saveRecord(this.createPasswordRecord.value).subscribe((res) => {
-      this.addRecord.emit();
-      this.createPasswordRecord.reset();
-      this.submitted = false;
-      this.opened = false;
-      this.showSelect = false;
-    });
+  public afterSaveRecord() {
+    this.addRecord.emit();
+    this.createPasswordRecord.reset();
+    this.submitted = false;
+    this.opened = false;
+    this.showSelect = false;
   }
 
   checkLinks() {
-    if (this.type === 4 || this.type === 7) {
-      return this.userDevice.length === 0;
-    } else {
-      return false;
-    }
+    return (this.type === 4 || this.type === 7) ? this.userDevice.length === 0 : false;
   }
 
   checkSsid() {
@@ -149,7 +138,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public toggleItem($event, newItem, type, index) {
     $event.preventDefault();
     $event.stopPropagation();
-
     this.changeSelectedUserAndDevices(newItem);
     this.changeChecked(type, index);
     const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
@@ -171,7 +159,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  pushItemToUserDevice( newItem, type) {
+  private pushItemToUserDevice( newItem, type) {
     if (type === 'device') {
       this.userDevice.push({deviceId: newItem.id})
     } else if (type === 'user'){
@@ -181,7 +169,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  filterUserDevice(newItem, type) {
+  private filterUserDevice(newItem, type) {
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId !== newItem.id);
     } else if (type === 'user'){
@@ -191,8 +179,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  findItemInUserDevice(newItem, type) {
-    console.log(newItem, 'newItem');
+   private findItemInUserDevice(newItem, type) {
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId === newItem.id);
     } else if (type === 'user'){
@@ -203,6 +190,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public getCompanyDevices(companyId) {
+    this.selectedClient = companyId.item;
     this.getAllUsers(companyId.item.id);
     this.getGadgets();
     this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
@@ -223,6 +211,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       map(term => PASSWORD_RECORD_TYPES.sort().slice(0,9))
     );
   };
+
+  public clearClient() {
+    this.selectedClient = null;
+    this.devicesList = [];
+    this.deviceCheckbox = [];
+    this.usersList = [];
+    this.usersCheckbox = [];
+    this.selectedUserAndDevices = [];
+  }
 
   searchClients = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
