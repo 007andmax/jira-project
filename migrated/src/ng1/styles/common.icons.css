@@ -1832,11 +1832,11 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 .remove-red {
-  /*background: url('../images/new-icons/company-remove-red.svg');*/
+  background: url('../images/new-icons/remove-red.png');
   background-size: cover;
 }
 
 .rollback-new {
-  /*background: url('../images/new-icons/rollback-new.png');*/
+  background: url('../images/new-icons/rollback-new.png');
   background-size: cover;
 }

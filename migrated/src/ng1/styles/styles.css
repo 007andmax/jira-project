@@ -13458,8 +13458,8 @@ button.close {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 50px;
-  margin: 20px 0 50px;
+  /*padding: 0 50px;*/
+  margin: 20px 0 0;
 }
 
 .password-modal-footer-actions {
