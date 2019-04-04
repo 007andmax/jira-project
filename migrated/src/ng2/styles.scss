@@ -30,3 +30,8 @@ ngb-typeahead-window {
 .has-error{
   border-color: red!important;
 }
+
+.avoid-clicks {
+  pointer-events: none;
+  background: #939da3;
+}

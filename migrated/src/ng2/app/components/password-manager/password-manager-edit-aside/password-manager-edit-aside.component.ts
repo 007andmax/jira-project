@@ -73,6 +73,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.userDevice = [];
     this.initForm();
     this.opened = !this.opened;
+    this.clearClient();
   }
 
   public showAddForm() {
@@ -125,6 +126,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = false;
     this.opened = false;
     this.showSelect = false;
+    this.clearClient();
   }
 
   checkLinks() {
@@ -196,6 +198,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
       if (res[companyId.item.id]) {
         this.deviceCheckbox = new Array([...res[companyId.item.id]].length);
+        this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
         return this.devicesList = [...res[companyId.item.id]];
       }
@@ -249,8 +252,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
-  public showSelectWrapper() {
+  public showSelectWrapper($event) {
+    this.stopEvent($event);
     this.showSelect = !this.showSelect;
+    this.showGadgetsForm = false;
   }
 
   public hideSelectWrapper() {
