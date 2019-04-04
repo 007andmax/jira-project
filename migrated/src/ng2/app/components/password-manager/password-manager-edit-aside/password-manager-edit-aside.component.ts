@@ -127,10 +127,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public afterSaveRecord() {
     this.addRecord.emit();
     this.initForm();
-    this.submitted = false;
-    this.opened = false;
     this.showSelect = false;
     this.clearClient();
+    this.submitted = false;
+    this.opened = false;
+
   }
 
   checkLinks() {
@@ -142,11 +143,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public toggleItem($event, newItem, type, index) {
-    console.log(type, index, '12341235');
+    console.log( newItem, type, index, ' newItem, type, index');
     if (type) {
-      console.log('1234');
-      this.stopEvent($event);
-      this.changeSelectedUserAndDevices(newItem);
+      this.changeSelectedUserAndDevices(newItem, index, type);
       this.changeChecked(type, index);
       const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
       if (!isItem || isItem.length === 0) {
@@ -158,14 +157,19 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  changeSelectedUserAndDevices(newItem) {
+  changeSelectedUserAndDevices(newItem, index?, type?) {
     const items =  this.selectedUserAndDevices.filter((item) => {
-      return (item.id !== newItem.id || item.agentId !== newItem.agentId)
+      return (item.item.id !== newItem.id || item.item.agentId !== newItem.agentId)
     });
+    console.log(items, 'ITEMS');
     if (items.length <  this.selectedUserAndDevices.length) {
       return this.selectedUserAndDevices = items;
     } else {
-      return this.selectedUserAndDevices.push(newItem);
+      return this.selectedUserAndDevices.push({
+        item: newItem,
+        index: index,
+        type: type
+      });
     }
   }
 
@@ -201,6 +205,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public getCompanyDevices(companyId) {
     this.selectedClient = companyId.item;
+    this.clearClient();
     this.getAllUsers(companyId.item.id);
     this.getGadgets();
     this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
@@ -228,12 +233,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.devicesList = [];
     this.deviceCheckbox = [];
     this.usersList = [];
+    this.userDevice = [];
     this.usersCheckbox = [];
     this.selectedUserAndDevices = [];
+    this.gadgetCheckbox = [];
+    this.gadgets = [];
   }
 
   searchClients = (text$: Observable<string>) => {
-    console.log('12351235');
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.clickClients$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focusClients$;
@@ -299,7 +306,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showGadgetsAddForm($event) {
-    console.log('test');
     this.stopEvent($event);
     this.showGadgetsForm = !this.showGadgetsForm;
   }
