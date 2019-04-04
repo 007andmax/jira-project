@@ -75,6 +75,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.initForm();
     this.opened = !this.opened;
     this.clearClient();
+    this.type = 0;
   }
 
   public showAddForm() {
@@ -125,7 +126,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public afterSaveRecord() {
     this.addRecord.emit();
-    this.createPasswordRecord.reset();
+    this.initForm();
     this.submitted = false;
     this.opened = false;
     this.showSelect = false;
