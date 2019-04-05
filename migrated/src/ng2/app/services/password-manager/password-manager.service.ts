@@ -41,8 +41,8 @@ export class PasswordManagerService {
     this.selectedDate.emit(item)
   }
 
-  addRecord() {
-    this.showAddForm.emit(true);
+  addRecord(item?) {
+    this.showAddForm.emit(item);
   }
 
   saveRecord(recordInfo) {

@@ -11,6 +11,7 @@ import { DevicesService } from "../../../services/devices/devices.service";
 import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
+import moment = require("moment");
 
 
 @Component({
@@ -24,6 +25,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   @ViewChild('instance') instance: NgbTypeahead;
   @ViewChild('clientType') clientType: NgbTypeahead;
   @Output() addRecord = new EventEmitter<string>();
+  @Output() deleteRecord = new EventEmitter<boolean>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   focusClients$ = new Subject<string>();
@@ -48,6 +50,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedUserAndDevices = [];
   public selectedClient: any;
   public isEditmode = false;
+  public editItem = null;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -60,7 +63,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   ngOnInit() {
     this.showAddForm();
-    this.initForm();
     this.getCLientsList();
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
@@ -69,6 +71,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public opened: boolean = false;
 
   public _toggleSidebar() {
+    console.log(1);
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
@@ -79,7 +82,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showAddForm() {
-    this.passwordManagerService.showAddForm.subscribe((res) => this.opened = true);
+    this.passwordManagerService.showAddForm.subscribe((res) => {
+      this.editItem = res;
+      if (this.editItem) this.isEditmode = true;
+      console.log(this.editItem, 'ITEM');
+      this.opened = true;
+      return this.initForm();
+    });
   }
 
   public changeType(event) {
@@ -89,22 +98,23 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   get form() { return this.createPasswordRecord.controls; }
 
   public initForm(){
+    console.log(this.editItem, 'this.editItem');
     this.createPasswordRecord = this.fb.group({
-      description: ['', Validators.maxLength(5000)],
+      description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
       client: ['', [Validators.required]],
       type: [PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [''],
-      userName: ['', [Validators.required, Validators.maxLength(100)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-      key: ['', [Validators.maxLength(100)]],
-      link: [''],
-      url: ['', [Validators.maxLength(255)]],
-      code: [''],
+      userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
+      password: [this.editItem ? this.editItem.password : '', [Validators.required, Validators.maxLength(100)]],
+      key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
+      link: [this.editItem ? this.editItem.link : ''],
+      url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
+      code: [this.editItem ? this.editItem.code : ''],
       userOrDevice: [''],
       ipAdres: ['', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [''],
       expiryDate: [null, []],
-      note: ['', [Validators.maxLength(1000)]],
+      note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
       http: [false],
       ssh: [false],
       telnet: [false]
@@ -161,7 +171,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const items =  this.selectedUserAndDevices.filter((item) => {
       return (item.item.id !== newItem.id || item.item.agentId !== newItem.agentId)
     });
-    console.log(items, 'ITEMS');
     if (items.length <  this.selectedUserAndDevices.length) {
       return this.selectedUserAndDevices = items;
     } else {
@@ -337,6 +346,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     } else {
       this.gadgetCheckbox[i] = !this.gadgetCheckbox[i];
     }
+  }
+
+  public getHistoryDate(date) {
+    return moment(date).format('DD MMMM, YYYY')
   }
 
 }

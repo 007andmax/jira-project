@@ -49,8 +49,8 @@ export class PasswordManagerTableComponent implements OnInit {
     );
   }
 
-  editRecord() {
-    this.passwordManagerService.addRecord();
+  editRecord(item) {
+    this.passwordManagerService.addRecord(item);
   }
 
 }
