@@ -103,26 +103,25 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
       client: [this.editItem? this.getEditCompany(this.editItem.companyId) : '', [Validators.required]],
       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
-      ssid: [''],
+      ssid: [this.editItem ? this.editItem.ssid : ''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
       password: [this.editItem ? this.editItem.password : '', [Validators.required, Validators.maxLength(100)]],
       key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
-      link: [this.editItem ? this.editItem.link : ''],
+      link: [this.editItem ? this.getEditUsers(this.editItem.links) : ''],
       url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
       code: [this.editItem ? this.editItem.code : ''],
-      userOrDevice: [''],
-      ipAdres: ['', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
-      port: [''],
-      expiryDate: [null, []],
+      userOrDevice: [this.editItem ? this.editItem.links :''],
+      ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
+      port: [this.editItem ? this.editItem.port : ''],
+      expiryDate: [this.editItem ? this.editItem.expiredDate : '', []],
       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
-      http: [false],
-      ssh: [false],
-      telnet: [false]
+      http: [this.editItem ? this.editItem.http : false],
+      ssh: [this.editItem ? this.editItem.ssh : false],
+      telnet: [this.editItem ? this.editItem.telnet : false]
     });
   }
 
   public save() {
-    console.log(this.createPasswordRecord, '1234');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
@@ -152,7 +151,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       return (this.type === 8 && (this.createPasswordRecord.value.ssid === 0 || !this.createPasswordRecord.value.ssid))
   }
 
-  public toggleItem($event, newItem, type, index) {
+  public toggleItem(newItem, type, index) {
     console.log( newItem, type, index, ' newItem, type, index');
     if (type) {
       this.changeSelectedUserAndDevices(newItem, index, type);
@@ -289,8 +288,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public setCurrentTab($event, item) {
-    $event.preventDefault();
-    $event.stopPropagation();
+    this.stopEvent($event);
     this.currentTab = item;
     this.showGadgetsForm = false;
   }
@@ -301,6 +299,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
+      this.editItem.links.map((item) => {
+        const index = this.usersList.findIndex((userListItem) => {
+          return userListItem.id === item.userId
+        });
+        this.usersCheckbox[index] = true;
+        console.log(this.usersCheckbox, 'usersCheckbox');
+        this.toggleItem(this.usersList[index], index, 'user');
+        console.log(index,'INDEX');
+      });
+
     })
   }
 
@@ -363,7 +371,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const company = this.clientsList.filter((item) => item.id === id);
     this.getCompanyDevices({item: company[0]});
     this.selectedClient = company[0];
-    console.log(company, 'COMPANY');
   }
+
+  public getEditUsers(users) {
+    let index = 0;
+    console.log(users, 'USERS');
+  }
+
 
 }
