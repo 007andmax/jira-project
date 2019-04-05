@@ -11,7 +11,7 @@ import { DevicesService } from "../../../services/devices/devices.service";
 import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
-import moment = require("moment");
+import * as moment from 'moment';
 
 
 @Component({
