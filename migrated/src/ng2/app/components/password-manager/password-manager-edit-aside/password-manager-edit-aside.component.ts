@@ -101,7 +101,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     console.log(this.editItem, 'this.editItem');
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
-      client: ['', [Validators.required]],
+      client: [this.editItem? this.getEditCompany(this.editItem.companyId) : '', [Validators.required]],
       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
@@ -214,6 +214,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public getCompanyDevices(companyId) {
     this.selectedClient = companyId.item;
+    console.log(this.selectedClient, 'THIS.SELECTEDCLIENT');
     this.clearClient();
     this.getAllUsers(companyId.item.id);
     this.getGadgets();
@@ -354,9 +355,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public getEditTemplate(template) {
     const index  = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
-    console.log(index, 'INDEX');
     this.currentType = PASSWORD_RECORD_TYPES[index];
     return PASSWORD_RECORD_TYPES[index];
+  }
+
+  public getEditCompany(id) {
+    const company = this.clientsList.filter((item) => item.id === id);
+    this.getCompanyDevices({item: company[0]});
+    this.selectedClient = company[0];
+    console.log(company, 'COMPANY');
   }
 
 }
