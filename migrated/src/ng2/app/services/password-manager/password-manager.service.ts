@@ -50,6 +50,11 @@ export class PasswordManagerService {
     return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
 
+  editRecord(recordInfo, recordId) {
+    const date = recordInfo.expiredDate;
+    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({id:recordId},this.getData(recordInfo)));
+  }
+
   formatDayAndMonth(item) {
     return item < 10 ? `0${item}` : item;
   }
@@ -159,6 +164,7 @@ export class PasswordManagerService {
       })
     } else if (recordInfo.type.UPPERCASE === 'LOCAL_USER_ACCOUNT') {
       return ({
+
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         password: recordInfo.password,

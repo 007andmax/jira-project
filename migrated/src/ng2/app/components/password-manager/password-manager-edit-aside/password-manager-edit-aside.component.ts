@@ -12,6 +12,7 @@ import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import * as moment from 'moment';
+import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 
 @Component({
@@ -51,6 +52,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public isEditmode = false;
   public editItem = null;
+  public expiryDate;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -71,7 +73,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public opened: boolean = false;
 
   public _toggleSidebar() {
-    console.log(1);
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
@@ -85,7 +86,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.passwordManagerService.showAddForm.subscribe((res) => {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
-      console.log(this.editItem, 'ITEM');
       this.opened = true;
       return this.initForm();
     });
@@ -99,6 +99,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public initForm(){
     console.log(this.editItem, 'this.editItem');
+    this.expiryDate = this.editItem ? this.getStartDate(this.editItem.expiredDate) : null;
+    console.log(this.expiryDate, 'this.expiryDate');
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
       client: [this.editItem? this.getEditCompany(this.editItem.companyId) : '', [Validators.required]],
@@ -107,13 +109,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
       password: [this.editItem ? this.editItem.password : '', [Validators.required, Validators.maxLength(100)]],
       key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
-      link: [this.editItem ? this.getEditUsers(this.editItem.links) : ''],
+      link: [''],
       url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
       code: [this.editItem ? this.editItem.code : ''],
       userOrDevice: [this.editItem ? this.editItem.links :''],
       ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [this.editItem ? this.editItem.port : ''],
-      expiryDate: [''],
+      expiryDate: [this.editItem ? this.editItem.expiredDate : null, []],
       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
       http: [this.editItem ? this.editItem.http : false],
       ssh: [this.editItem ? this.editItem.ssh : false],
@@ -130,8 +132,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
-    this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
-      .subscribe((res) => this.afterSaveRecord());
+    if (this.isEditmode) {
+      this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
+        .subscribe((res) => this.afterSaveRecord());
+    } else {
+      this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
+        .subscribe((res) => this.afterSaveRecord());
+    }
+
   }
 
   public afterSaveRecord() {
@@ -169,7 +177,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   changeSelectedUserAndDevices(newItem, index?, type?) {
     const items =  this.selectedUserAndDevices.filter((item) => {
-      console.log(item, 'ITEM');
       return (item.item.id !== newItem.id)
     });
     if (items.length <  this.selectedUserAndDevices.length) {
@@ -194,6 +201,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   private filterUserDevice(newItem, type) {
+    console.log(type, 'TYPE');
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId !== newItem.id);
     } else if (type === 'user'){
@@ -227,12 +235,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         if (this.isEditmode) {
           this.editItem.links.map((item) => {
             const index = this.devicesList.findIndex((deviceListItem) => {
-              console.log(this.devicesList, 'devicesList');
-              console.log(item, 'item');
-              return deviceListItem.id === item.id
+              return deviceListItem.id === item.deviceId
             });
-            this.deviceCheckbox[index] = true;
-            this.toggleItem({item: this.devicesList[index]}, index, 'device');
+            if (index > -1) {
+              this.deviceCheckbox[index] = true;
+              this.toggleItem(this.devicesList[index], 'device', index);
+            }
           });
         }
       }
@@ -316,8 +324,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           const index = this.usersList.findIndex((userListItem) => {
             return userListItem.id === item.userId
           });
-          this.usersCheckbox[index] = true;
-          this.toggleItem({item: this.usersList[index]}, index, 'user');
+          if (index > -1) {
+            this.usersCheckbox[index] = true;
+            this.toggleItem( this.usersList[index], 'user', index);
+          }
         });
       }
     })
@@ -344,6 +354,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.gadgets = [...res];
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) { this.gadgetCheckbox[i] = false; }
+      if (this.isEditmode) {
+        this.editItem.links.map((item) => {
+          const index = this.gadgets.findIndex((gadgetListItem) => {
+            return gadgetListItem.id === item.deviceId
+          });
+          if (index > -1) {
+            this.gadgetCheckbox[index] = true;
+            this.toggleItem(this.gadgets[index], 'gadget', index);
+          }
+        });
+      }
     });
   }
 
@@ -384,9 +405,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.selectedClient = company[0];
   }
 
-  public getEditUsers(users) {
-    let index = 0;
-    console.log(users, 'USERS');
+  public getStartDate(date) {
+    const dateTime = moment(date);
+    return ({
+      month: parseInt(dateTime.format('M')),
+      year: parseInt(dateTime.format('YYYY')),
+      day: parseInt(dateTime.format('D'))
+    });
   }
 
 
