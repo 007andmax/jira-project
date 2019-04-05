@@ -102,7 +102,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
       client: ['', [Validators.required]],
-      type: [PASSWORD_RECORD_TYPES[0], [Validators.required]],
+      type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
       password: [this.editItem ? this.editItem.password : '', [Validators.required, Validators.maxLength(100)]],
@@ -350,6 +350,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public getHistoryDate(date) {
     return moment(date).format('DD MMMM, YYYY')
+  }
+
+  public getEditTemplate(template) {
+    const index  = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
+    console.log(index, 'INDEX');
+    this.currentType = PASSWORD_RECORD_TYPES[index];
+    return PASSWORD_RECORD_TYPES[index];
   }
 
 }
