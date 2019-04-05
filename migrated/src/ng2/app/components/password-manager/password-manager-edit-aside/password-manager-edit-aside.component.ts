@@ -113,7 +113,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       userOrDevice: [this.editItem ? this.editItem.links :''],
       ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [this.editItem ? this.editItem.port : ''],
-      expiryDate: [this.editItem ? this.editItem.expiredDate : '', []],
+      expiryDate: [''],
       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
       http: [this.editItem ? this.editItem.http : false],
       ssh: [this.editItem ? this.editItem.ssh : false],
@@ -122,6 +122,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
+    console.log(this.createPasswordRecord, 'res');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
@@ -213,7 +214,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public getCompanyDevices(companyId) {
     this.selectedClient = companyId.item;
-    console.log(this.selectedClient, 'THIS.SELECTEDCLIENT');
     this.clearClient();
     this.getAllUsers(companyId.item.id);
     this.getGadgets();
@@ -222,7 +222,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         this.deviceCheckbox = new Array([...res[companyId.item.id]].length);
         this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
-        return this.devicesList = [...res[companyId.item.id]];
+        this.devicesList = [...res[companyId.item.id]];
+        if (this.isEditmode) {
+          this.editItem.links.map((item) => {
+            const index = this.devicesList.findIndex((deviceListItem) => {
+              return deviceListItem.id === item.agentId
+            });
+            this.deviceCheckbox[index] = true;
+            this.toggleItem(this.devicesList[index], index, 'device');
+          });
+        }
       }
     })
   }
@@ -299,16 +308,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
-      this.editItem.links.map((item) => {
-        const index = this.usersList.findIndex((userListItem) => {
-          return userListItem.id === item.userId
+      if (this.isEditmode) {
+        this.editItem.links.map((item) => {
+          const index = this.usersList.findIndex((userListItem) => {
+            return userListItem.id === item.userId
+          });
+          this.usersCheckbox[index] = true;
+          this.toggleItem(this.usersList[index], index, 'user');
         });
-        this.usersCheckbox[index] = true;
-        console.log(this.usersCheckbox, 'usersCheckbox');
-        this.toggleItem(this.usersList[index], index, 'user');
-        console.log(index,'INDEX');
-      });
-
+      }
     })
   }
 
