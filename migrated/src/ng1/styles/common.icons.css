@@ -1792,12 +1792,12 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
 }
 
 .date-calendar {
-  /*background: url('../images/new-icons/calender-light-new.png');*/
+  /*background: url('../images/new-icons/calendar-light.png');*/
   background-size: cover;
 }
 
 .search-new {
-  /*background: url('../images/new-icons/search-light-new.png');*/
+  /*background: url('../images/new-icons/search-light.png');*/
   background-size: cover;
 }
 

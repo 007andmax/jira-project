@@ -126,3 +126,11 @@
     }
   }
 }
+
+.left-panel-full-wrapper {
+  .date-picker {
+    .dropdown-menu {
+      left: -15px !important;
+    }
+  }
+}
