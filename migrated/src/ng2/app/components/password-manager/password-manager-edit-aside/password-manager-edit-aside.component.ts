@@ -169,7 +169,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   changeSelectedUserAndDevices(newItem, index?, type?) {
     const items =  this.selectedUserAndDevices.filter((item) => {
-      return (item.item.id !== newItem.id || item.item.agentId !== newItem.agentId)
+      console.log(item, 'ITEM');
+      return (item.item.id !== newItem.id)
     });
     if (items.length <  this.selectedUserAndDevices.length) {
       return this.selectedUserAndDevices = items;
@@ -226,10 +227,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         if (this.isEditmode) {
           this.editItem.links.map((item) => {
             const index = this.devicesList.findIndex((deviceListItem) => {
-              return deviceListItem.id === item.agentId
+              console.log(this.devicesList, 'devicesList');
+              console.log(item, 'item');
+              return deviceListItem.id === item.id
             });
             this.deviceCheckbox[index] = true;
-            this.toggleItem(this.devicesList[index], index, 'device');
+            this.toggleItem({item: this.devicesList[index]}, index, 'device');
           });
         }
       }
@@ -314,7 +317,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
             return userListItem.id === item.userId
           });
           this.usersCheckbox[index] = true;
-          this.toggleItem(this.usersList[index], index, 'user');
+          this.toggleItem({item: this.usersList[index]}, index, 'user');
         });
       }
     })
