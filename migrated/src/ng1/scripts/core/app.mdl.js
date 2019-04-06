@@ -13,7 +13,6 @@
       'quicktech.core.companies',
       'quicktech.core.products',
       'quicktech.core.services',
-      'quicktech.core.passwordManager',
       'quicktech.core.billable',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
