@@ -46,6 +46,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   ngOnInit() {
     this.getCompaniesList();
     this.getPasswordRecords();
+    this.addNewRecord();
   }
 
   public getCompaniesList() {
@@ -228,6 +229,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   private getGadgets(companyId) {
     this.gadgetsService.getCompanyDevices().subscribe((res: any) =>
       this.devicesAndUsersList = [...(res.filter((item) => item.clientCompanyId === companyId)), ...this.devicesAndUsersList])
+  }
+
+  public addNewRecord() {
+    this.passwordManagerService.showAddForm.subscribe(() => {
+      this.getPasswordRecords();
+    })
   }
 
 }

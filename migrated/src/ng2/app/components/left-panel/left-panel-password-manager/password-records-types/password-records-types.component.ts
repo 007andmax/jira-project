@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 
 import { PASSWORD_RECORD_TYPES } from "../../../../const/password-record-types";
 import { PasswordManagerService } from "../../../../services/password-manager/password-manager.service";
@@ -25,7 +25,8 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
     this.startComponent();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    const name: SimpleChange = changes.passwordRecords;
     this.startComponent();
   }
 

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PasswordManagerTableComponent } from "./password-manager-table/password-manager-table.component";
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
+import { LeftPanelPasswordManagerComponent } from "../left-panel/left-panel-password-manager/left-panel-password-manager.component";
 
 
 /**
@@ -24,7 +24,6 @@ export class PasswordManagerComponent implements OnInit {
   public selectedDate: any;
   public selectedCategory: any;
   public newRecord: Subject<boolean> = new Subject();
-  @ViewChild(PasswordManagerTableComponent ) child: PasswordManagerTableComponent ;
 
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
