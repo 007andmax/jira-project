@@ -47,6 +47,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getCompaniesList();
     this.getPasswordRecords();
     this.addNewRecord();
+    this.deleteRecord();
   }
 
   public getCompaniesList() {
@@ -235,6 +236,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.passwordManagerService.showAddForm.subscribe(() => {
       this.getPasswordRecords();
     })
+  }
+
+  public deleteRecord() {
+    this.passwordManagerService.deleteItem.subscribe((item) => {
+      this.getPasswordRecords()
+    });
   }
 
 }

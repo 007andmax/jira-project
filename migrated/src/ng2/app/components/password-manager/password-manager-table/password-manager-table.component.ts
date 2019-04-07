@@ -31,6 +31,7 @@ export class PasswordManagerTableComponent implements OnInit {
     this.addNewRecords.subscribe(v => {
       this.getRecords();
     });
+    this.watchDeleteRecord();
   }
 
   public getSelectedCategory() {
@@ -44,13 +45,22 @@ export class PasswordManagerTableComponent implements OnInit {
   }
 
   deleteRecord(recordId) {
-    this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) =>
-      this.recordsData = this.recordsData.filter((item) => item.id !==recordId)
-    );
+    this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
+      this.passwordManagerService.deleteRecord(recordId);
+      return this.recordsData = this.recordsData.filter((item) => item.id !==recordId);
+    });
+  }
+
+  public watchDeleteRecord() {
+    this.passwordManagerService.deleteItem.subscribe((item) => {
+      console.log('testes', item);
+      return this.recordsData = this.recordsData.filter((item) => item.id !==item);
+    });
   }
 
   editRecord(item) {
     this.passwordManagerService.addRecord(item);
   }
+
 
 }
