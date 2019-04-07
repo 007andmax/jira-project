@@ -175,7 +175,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public toggleItem(newItem, type, index) {
-    console.log(newItem, type, index);
     if (type) {
       this.changeSelectedUserAndDevices(newItem, index, type);
       this.changeChecked(type, index);
@@ -367,21 +366,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) {
 
         this.gadgetCheckbox[i] = false;
-        console.log(this.gadgetCheckbox, 'this.gadgetCheckboxthis.gadgetCheckboxthis.gadgetCheckbox');
       }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
           const index = this.gadgets.findIndex((gadgetListItem) => {
             return gadgetListItem.id === item.gadgetId
           });
-          console.log(index, 'INDEX');
           if (index > -1) {
-            console.log(this.gadgetCheckbox, 'this.gadgetCheckbox');
             this.toggleItem(this.gadgets[index], 'gadget', index);
           }
         });
       }
-      console.log(this.gadgetCheckbox, 'this.gadgetCheckbox');
     });
   }
 
@@ -433,11 +428,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   deleteRecord(recordId){
-    this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-      this.passwordManagerService.deleteRecord(recordId);
-      this.hideAddForm();
-    });
-
+    this.passwordManagerService.deleteRecordFromEditForm(recordId);
+    this.hideAddForm();
   }
 
 

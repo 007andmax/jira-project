@@ -46,15 +46,16 @@ export class PasswordManagerTableComponent implements OnInit {
 
   deleteRecord(recordId) {
     this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
+      console.log(1);
       this.passwordManagerService.deleteRecord(recordId);
       return this.recordsData = this.recordsData.filter((item) => item.id !==recordId);
     });
   }
 
   public watchDeleteRecord() {
-    this.passwordManagerService.deleteItem.subscribe((item) => {
-      console.log('testes', item);
-      return this.recordsData = this.recordsData.filter((item) => item.id !==item);
+    this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
+      console.log(1);
+      return this.deleteRecord(item);
     });
   }
 
