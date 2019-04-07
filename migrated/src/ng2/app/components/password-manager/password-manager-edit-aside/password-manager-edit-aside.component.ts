@@ -114,6 +114,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   get form() { return this.createPasswordRecord.controls; }
 
   public initForm(){
+    console.log(this.editItem, 'this.editItem');
     this.expiryDate = this.editItem ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -326,7 +327,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   private getAllUsers(companyId) {
     this.userService.getAllusers().subscribe((res: any) => {
-      res = res.filter((item) =>  item.company.id == companyId);
+      res = res.filter((item) =>  item.company.id == companyId && item.deletedAt);
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
