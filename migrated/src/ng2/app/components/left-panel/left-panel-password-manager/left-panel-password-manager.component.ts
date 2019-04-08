@@ -203,6 +203,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   clearDate($event) {
     $event.preventDefault();
     $event.stopPropagation();
+    this.passwordManagerService.setDate('');
     this.passwordRecords = this.passwordRecordsStart;
     this.selectedDate = null;
     this.selectedCompany && this.selectCompany({item: this.selectedCompany});
