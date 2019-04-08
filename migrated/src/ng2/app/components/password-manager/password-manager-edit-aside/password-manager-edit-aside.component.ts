@@ -115,7 +115,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public initForm(){
     console.log(this.editItem, 'this.editItem');
-    this.expiryDate = this.editItem ? this.getStartDate(this.editItem.expiredDate) : null;
+    this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
       client: [this.editItem? this.getEditCompany(this.editItem.companyId) : '', [Validators.required]],
