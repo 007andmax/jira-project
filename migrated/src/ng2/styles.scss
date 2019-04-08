@@ -51,10 +51,20 @@ ngb-typeahead-window {
   }
 }
 
-.error-field{
+.error-field {
   position: absolute;
   right: 0;
   top: 6px;
   font-size: 13px;
   color: red;
+}
+
+.left-panel-full-wrapper .loading {
+  top: 42px;
+  right: 10px;
+  left: auto;
+  width: 20px;
+  height: 20px;
+  border: 0.1rem solid #4f5f79;
+  border-top-color: #9CA5B6;
 }
