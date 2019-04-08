@@ -421,9 +421,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public getEditCompany(id) {
-    const company = this.clientsList && this.clientsList.filter((item) => item.id === id);
-    this.getCompanyDevices({item: company[0]});
-    this.selectedClient = company[0];
+    if (this.clientsList) {
+      const company = this.clientsList.filter((item) => item.id === id);
+      this.getCompanyDevices({item: company[0]});
+      this.selectedClient = company[0];
+    }
   }
 
   public getStartDate(date) {

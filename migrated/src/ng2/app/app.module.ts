@@ -52,7 +52,6 @@ angular.module('quicktech')
   ).directive(
   'leftPanelComponent',
   downgradeComponent({component: LeftPanelComponent}))
-  .factory('ngZone', downgradeInjectable(NgZone));
 
 
 @NgModule({
