@@ -499,16 +499,7 @@
                   "replace": "src/ng2/environments/environment.ts",
                   "with": "src/ng2/environments/environment.dev.ts"
                 }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
+              ]
             }
           }
         },
