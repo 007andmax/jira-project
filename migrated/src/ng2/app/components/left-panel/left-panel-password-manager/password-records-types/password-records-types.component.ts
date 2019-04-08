@@ -29,7 +29,7 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
     const name: SimpleChange = changes.passwordRecords;
     console.log('test');
     console.log(changes.passwordRecords, 'test');
-    this.passwordRecords = changes.passwordRecords.currentValue;
+    // this.passwordRecords = changes.passwordRecords.currentValue;
     this.startComponent();
   }
 

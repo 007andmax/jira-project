@@ -197,8 +197,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecords( this.selectedCompany);
   }
 
-  clearDate() {
+  clearDate($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
     this.passwordRecords = this.passwordRecordsStart;
+    this.selectedDate = null;
     this.refreshDeviceOrUser();
     this.filterPasswordRecords(this.selectedCompany);
     this.filterPasswordRecordsByDeviceOrUser({item :this.selectedDeviceOrUser});
@@ -234,12 +237,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public addNewRecord() {
     this.passwordManagerService.showAddForm.subscribe(() => {
+      console.log('addNewRecord');
       this.getPasswordRecords();
     })
   }
 
   public deleteRecord() {
     this.passwordManagerService.deleteItem.subscribe((item) => {
+      console.log('deleteRecord');
       this.getPasswordRecords()
     });
   }
