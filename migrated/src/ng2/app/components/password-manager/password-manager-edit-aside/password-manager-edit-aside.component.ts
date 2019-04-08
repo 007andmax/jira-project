@@ -146,7 +146,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
-    if (this.isEditmode) {
+    if (this.isEditmode && this.editItem) {
       this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
         .subscribe((res) => this.afterSaveRecord());
     } else {
@@ -310,8 +310,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showSelectWrapper($event) {
-    this.stopEvent($event);
+    console.log('123412');
     this.showSelect = !this.showSelect;
+    console.log(this.showSelect, 'this.showSelect');
+    this.stopEvent($event);
+  }
+
+  get ShowSelectStatus() {
+    return this.showSelect;
   }
 
   public hideSelectWrapper() {
@@ -415,7 +421,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public getEditCompany(id) {
-    const company = this.clientsList.filter((item) => item.id === id);
+    const company = this.clientsList && this.clientsList.filter((item) => item.id === id);
     this.getCompanyDevices({item: company[0]});
     this.selectedClient = company[0];
   }
