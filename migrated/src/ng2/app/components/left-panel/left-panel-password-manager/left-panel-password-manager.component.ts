@@ -203,9 +203,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     $event.stopPropagation();
     this.passwordRecords = this.passwordRecordsStart;
     this.selectedDate = null;
-    this.refreshDeviceOrUser();
-    this.filterPasswordRecords(this.selectedCompany);
-    this.filterPasswordRecordsByDeviceOrUser({item :this.selectedDeviceOrUser});
   }
 
 
