@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PASSWORD_RECORD_TYPES, PASSWORD_RECORD_TYPES_ENUM } from "../../../const/password-record-types";
@@ -11,10 +12,6 @@ import { DevicesService } from "../../../services/devices/devices.service";
 import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
-import * as moment from 'moment';
-
-import {ApiPasswordManagerService} from "../../../services/password-manager/api-password-manager.service";
-
 
 @Component({
   selector: 'app-password-manager-edit-aside',
@@ -29,8 +26,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   @Output() addRecord = new EventEmitter<string>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
-  focusClients$ = new Subject<string>();
-  clickClients$ = new Subject<string>();
   public submitted = false;
   public clientsList: any;
   public clientsListStart: any;
@@ -55,6 +50,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public showClientType = false;
+  public showType = false;
+  public currentTypeChoosen: any;
+  public typesList = PASSWORD_RECORD_TYPES;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -62,8 +60,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
     private userService: UsersService,
-    private gadgetsService: GadgetsService,
-    private apiPasswordManagerService: ApiPasswordManagerService
+    private gadgetsService: GadgetsService
   ) { }
 
   ngOnInit() {
@@ -83,6 +80,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.initForm();
     this.clearClient();
     this.type = 0;
+    this.currentTypeChoosen = PASSWORD_RECORD_TYPES[this.type];
     this.opened = !this.opened;
   }
 
@@ -110,7 +108,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public changeType(event) {
-    if (event) this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
+    if (event) {
+      this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
+      this.currentTypeChoosen = event;
+    }
   }
 
   get form() { return this.createPasswordRecord.controls; }
@@ -147,6 +148,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
     this.createPasswordRecord.controls['client'].setValue(this.selectedClient);
+    this.createPasswordRecord.controls['type'].setValue(this.currentTypeChoosen);
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
@@ -242,14 +244,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public filterClients($event) {
-    console.log($event,'12324');
-    console.log(this.clientsList,'12324');
     if ($event && $event.length > 0) {
       this.clientsList = this.clientsList.filter((item) => item.name.includes($event))
     } else {
       this.clientsList = this.clientsListStart;
     }
-
   }
 
   public getCompanyDevices(companyId) {
@@ -451,11 +450,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   showDrop() {
     this.clientsList = this.clientsListStart;
-    console.log(this.showClientType);
-    console.log('test');
     return this.showClientType = !this.showClientType;
-
   }
 
+  showTypeDrop() {
+    return this.showType = !this.showType;
+  }
+
+  public onClickedOutsideType($event) {
+
+  }
 
 }
