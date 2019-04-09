@@ -120,7 +120,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
-      client: [this.editItem? this.getEditCompany(this.editItem.companyId) : '', [Validators.required]],
+      client: [this.editItem? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [this.editItem ? this.editItem.ssid : ''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
@@ -146,6 +146,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
+    this.createPasswordRecord.controls['client'].setValue(this.selectedClient);
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
@@ -243,7 +244,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public filterClients($event) {
     console.log($event,'12324');
     console.log(this.clientsList,'12324');
-    if ($event.length > 0) {
+    if ($event && $event.length > 0) {
       this.clientsList = this.clientsList.filter((item) => item.name.includes($event))
     } else {
       this.clientsList = this.clientsListStart;
