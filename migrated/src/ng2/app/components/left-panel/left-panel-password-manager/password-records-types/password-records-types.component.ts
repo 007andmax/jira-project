@@ -12,6 +12,7 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
   @Input() passwordRecords: any;
   public passwordRecordTypes = PASSWORD_RECORD_TYPES;
+  public selectedIndex = null;
   public selectedCategory = {
     TITLE: '',
     UPPERCASE: ''
@@ -38,7 +39,8 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
     this.setCountRecordsData();
   }
 
-  filterByPasswordTypes(type) {
+  filterByPasswordTypes(type,index) {
+    this.selectedIndex = index;
     this.selectedCategory = type;
     this.passwordManagerService.setSelectedCategory(type);
   }
