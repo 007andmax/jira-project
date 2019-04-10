@@ -13232,10 +13232,13 @@ button.close {
 .new-link {
   font-family: "Graphik Regular", sans-serif;
   font-size: 12px;
-  color: #16a4fa;
+  color: #16a4fa !important;
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
+  background: transparent!important;
+  margin: 0!important;
+  padding: 0!important;
 }
 
 .left-panel-filter {
