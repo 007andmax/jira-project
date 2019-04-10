@@ -1,6 +1,7 @@
 .dark-dropdown,
 .light-dropdown,
 .grey-dropdown {
+  position: relative;
   .dropdown-menu {
     background: #fff;
     width: 100%;
@@ -33,9 +34,16 @@
   }
   .icn-remove-old,
   .report-caret-icon {
-    top: 53px !important;
     position: absolute;
-    right: 30px;
+    cursor: pointer;
+  }
+  .report-caret-icon {
+    top: 17px !important;
+    right: 15px;
+  }
+  .icn-remove-old {
+    top: 15px !important;
+    right: 12px;
   }
   &.right {
     .dropdown-menu {

@@ -13236,9 +13236,9 @@ button.close {
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
-  background: transparent!important;
-  margin: 0!important;
-  padding: 0!important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .left-panel-filter {
@@ -13375,18 +13375,17 @@ button.close {
   
 }
 
-.password-content__modal--content > [class*="col-md-"] label,
-.password-content__modal--content > [class*="col-md-"] label input {
+.password-content__modal--content > [class*="col-md-"] input {
   width: 100%;
 }
 
-.password-content__modal--content > [class*="col-md-"] label p {
+.password-content__modal--content > [class*="col-md-"] p {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
-.password-content__modal--content > [class*="col-md-"] label input {
+.password-content__modal--content > [class*="col-md-"] input {
   outline: none;
   height: 40px;
   padding: 12px;
@@ -13395,7 +13394,7 @@ button.close {
   border-radius: 4px;
 }
 
-.password-content__modal--content > [class*="col-md-"] label input::placeholder {
+.password-content__modal--content > [class*="col-md-"] input::placeholder {
   opacity: 1;
   color: #9ca5b6;
 }
