@@ -1,0 +1,26 @@
+@media (max-width: 414px) {
+  .mob-filters-header.desktop-hidden {
+    background: #27303f;
+    height: 56px;
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px !important;
+    color: #fff;
+    width: 100vw;
+    font-size: 16px;
+  }
+  .left-panel-full-wrapper .date-picker .dropdown-menu {
+    width: 100%;
+    left: 0 !important;
+  }
+  .ngb-dp-month,
+  ngb-datepicker-month-view {
+    width: 100%;
+  }
+  .ngb-dp-day,
+  .ngb-dp-week-number,
+  .ngb-dp-weekday {
+    width: 4rem !important;
+  }
+}

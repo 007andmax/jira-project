@@ -6,4 +6,8 @@
   left: 75px;
   top: 0;
   z-index: 999999999999;
+  @media (max-width: 414px) {
+    width: 100vw;
+    left: 0;
+  }
 }
