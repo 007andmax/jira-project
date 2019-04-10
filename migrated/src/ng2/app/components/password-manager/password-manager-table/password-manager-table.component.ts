@@ -63,5 +63,10 @@ export class PasswordManagerTableComponent implements OnInit {
     this.passwordManagerService.addRecord(item);
   }
 
+  public getRecordTypeClass(type) {
+    console.log(type);
+    return type.toLowerCase();
+  }
+
 
 }
