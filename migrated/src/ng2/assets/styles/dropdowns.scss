@@ -33,7 +33,9 @@
   }
   .icn-remove-old,
   .report-caret-icon {
-    top: 43px !important;
+    top: 53px !important;
+    position: absolute;
+    right: 30px;
   }
   &.right {
     .dropdown-menu {

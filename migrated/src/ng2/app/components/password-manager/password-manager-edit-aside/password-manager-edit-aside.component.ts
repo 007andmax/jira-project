@@ -47,14 +47,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public gadgetCheckbox = [];
   public selectedUserAndDevices = [];
   public selectedClient: any;
-  public selectedClientStart: any;
   public isEditmode = false;
   public editItem = null;
   public expiryDate;
-  public showClientType = false;
-  public showType = false;
   public currentTypeChoosen: any;
-  public typesList = PASSWORD_RECORD_TYPES;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -112,8 +108,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public changeType(event) {
     if (event) {
       this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
-      this.currentTypeChoosen = event;
-      this.showType = false;
     }
   }
 
@@ -150,8 +144,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
-    this.createPasswordRecord.controls['client'].setValue(this.selectedClient);
-    this.createPasswordRecord.controls['type'].setValue(this.currentTypeChoosen);
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
@@ -246,7 +238,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     console.log('12351235');
     this.selectedClient = companyId.item;
     this.clearClient();
-    // this.showClientType = false;
     companyId.item && this.getAllUsers(companyId.item.id);
     this.getGadgets();
     this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
@@ -290,10 +281,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.userDevice = [];
     this.gadgetCheckbox = [];
     this.selectedUserAndDevices = [];
+    this.type = 0;
   }
 
   searchClients = (text$: Observable<string>) => {
-    console.log('1235123');
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.clickClients$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focusClients$;
@@ -322,14 +313,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showSelectWrapper($event) {
-    console.log('123412');
     this.showSelect = !this.showSelect;
-    console.log(this.showSelect, 'this.showSelect');
     this.stopEvent($event);
-  }
-
-  get ShowSelectStatus() {
-    return this.showSelect;
   }
 
   public hideSelectWrapper() {
