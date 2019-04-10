@@ -13255,17 +13255,17 @@ button.close {
 }
 
 .password .inventory-lp-header,
-.left-panel-filter label p {
+.left-panel-filter p {
   color: #fff;
   padding: 0;
   font-size: 12px;
 }
 
-.left-panel-filter label p {
+.left-panel-filter p {
   margin-bottom: 8px;
 }
 
-.left-panel-filter label input {
+.left-panel-filter input {
   height: 40px;
   width: 100%;
   border-radius: 3px;
@@ -13277,21 +13277,26 @@ button.close {
   padding: 12px;
 }
 
-.left-panel-filter label {
-  width: 100%;
-  position: relative;
-}
-
-.left-panel-filter label input::placeholder {
+.left-panel-filter input::placeholder {
   opacity: 1;
   color: #9ca5b6;
 }
 
-.left-panel-filter label i,
-.password-content__modal--content label i {
+.left-panel-filter i,
+.password-content__modal--content i {
   position: absolute;
   right: 12px;
-  bottom: 12px;
+  bottom: 11px;
+}
+
+.password-content__modal--content .if i {
+  position: absolute;
+  right: 25px;
+  bottom: 8px;
+}
+
+.password-content__modal--content .if input {
+  padding-right: 65px;
 }
 
 .left-panel-filter label .search-new {
