@@ -26,9 +26,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   @Output() addRecord = new EventEmitter<string>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
+  focusClients$ = new Subject<string>();
+  clickClients$ = new Subject<string>();
   public submitted = false;
   public clientsList: any;
-  public clientsListStart: any;
   public type: any;
   public model: any;
   public currentType;
@@ -46,6 +47,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public gadgetCheckbox = [];
   public selectedUserAndDevices = [];
   public selectedClient: any;
+  public selectedClientStart: any;
   public isEditmode = false;
   public editItem = null;
   public expiryDate;
@@ -111,6 +113,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (event) {
       this.type = PASSWORD_RECORD_TYPES_ENUM[event.UPPERCASE];
       this.currentTypeChoosen = event;
+      this.showType = false;
     }
   }
 
@@ -239,24 +242,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  public onClickedOutside() {
-    this.showClientType = false;
-  }
-
-  public filterClients($event) {
-    if ($event && $event.length > 0) {
-      this.clientsList = this.clientsList.filter((item) => item.name.includes($event))
-    } else {
-      this.clientsList = this.clientsListStart;
-    }
-  }
-
   public getCompanyDevices(companyId) {
-    console.log(companyId);
-    this.clearClient();
+    console.log('12351235');
     this.selectedClient = companyId.item;
+    this.clearClient();
     // this.showClientType = false;
-
     companyId.item && this.getAllUsers(companyId.item.id);
     this.getGadgets();
     this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
@@ -276,7 +266,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           });
         }
       }
-    })
+    });
     return this.selectedClient;
   }
 
@@ -302,17 +292,33 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.selectedUserAndDevices = [];
   }
 
+  searchClients = (text$: Observable<string>) => {
+    console.log('1235123');
+    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+    const clicksWithClosedPopup$ = this.clickClients$.pipe(filter(() => !this.instance.isPopupOpen()));
+    const inputFocus$ = this.focusClients$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term => (term === '' ? this.clientsList
+        : this.clientsList && this.clientsList
+        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+    );
+  };
+
   formatter = (result: string) => {
     return result['TITLE'];
   };
 
+  formatterClients = (result: string) => {
+    return result['name'];
+  };
+
   public getCLientsList() {
-    this.companiesService.getCompaniesList().subscribe((res: any) => this.clientsList = this.clientsListStart = res
+    this.companiesService.getCompaniesList().subscribe((res: any) => {
+      this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
-    );
-
-    console.log(this.clientsList, '123512351023851-2323-059');
+    })
   }
 
   public showSelectWrapper($event) {
@@ -446,19 +452,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   deleteRecord(recordId){
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
     this.hideAddForm();
-  }
-
-  showDrop() {
-    this.clientsList = this.clientsListStart;
-    return this.showClientType = !this.showClientType;
-  }
-
-  showTypeDrop() {
-    return this.showType = !this.showType;
-  }
-
-  public onClickedOutsideType($event) {
-
   }
 
 }
