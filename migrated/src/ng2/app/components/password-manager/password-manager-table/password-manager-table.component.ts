@@ -46,7 +46,6 @@ export class PasswordManagerTableComponent implements OnInit {
 
   deleteRecord(recordId) {
     this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-      console.log(1);
       this.passwordManagerService.deleteRecord(recordId);
       return this.recordsData = this.recordsData.filter((item) => item.id !==recordId);
     });
@@ -54,7 +53,6 @@ export class PasswordManagerTableComponent implements OnInit {
 
   public watchDeleteRecord() {
     this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
-      console.log(1);
       return this.deleteRecord(item);
     });
   }
@@ -64,7 +62,6 @@ export class PasswordManagerTableComponent implements OnInit {
   }
 
   public getRecordTypeClass(type) {
-    console.log(type);
     return type.toLowerCase();
   }
 

@@ -57,7 +57,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectCompany(item){
-    console.log(1);
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -240,14 +239,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public addNewRecord() {
     this.passwordManagerService.showAddForm.subscribe(() => {
-      console.log('addNewRecord');
       this.getPasswordRecords();
     })
   }
 
   public deleteRecord() {
     this.passwordManagerService.deleteItem.subscribe((item) => {
-      console.log('deleteRecord');
       this.getPasswordRecords()
     });
   }

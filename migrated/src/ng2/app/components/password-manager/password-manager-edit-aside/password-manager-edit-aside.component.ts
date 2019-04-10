@@ -114,7 +114,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   get form() { return this.createPasswordRecord.controls; }
 
   public initForm(){
-    console.log(this.editItem, 'this.editItem');
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -163,6 +162,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.showSelect = false;
     this.clearClient();
     this.submitted = false;
+    this.type = 0;
     this.opened = false;
 
   }
@@ -235,7 +235,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public getCompanyDevices(companyId) {
-    console.log('12351235');
     this.selectedClient = companyId.item;
     this.clearClient();
     companyId.item && this.getAllUsers(companyId.item.id);
@@ -281,7 +280,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.userDevice = [];
     this.gadgetCheckbox = [];
     this.selectedUserAndDevices = [];
-    this.type = 0;
   }
 
   searchClients = (text$: Observable<string>) => {
@@ -333,7 +331,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
-      console.log(this.usersList);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
@@ -397,7 +394,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public changeChecked(type, i) {
-    console.log(type, i);
     if (type === 'user') {
       this.usersCheckbox[i] = !this.usersCheckbox[i];
     } else if (type === 'device') {
