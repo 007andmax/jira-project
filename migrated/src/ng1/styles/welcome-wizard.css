@@ -2466,11 +2466,6 @@
     top: calc(50% - 12px);
   }
   
-  .password-content__list--item .col-md-3:before {
-    left: -35px;
-    top: 4px;
-  }
-  
   .password-content__list--item {
     padding: 16px 0;
   }

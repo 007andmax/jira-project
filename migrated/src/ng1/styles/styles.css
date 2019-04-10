@@ -1492,7 +1492,7 @@ bold {
   position: relative;
 }
 
-.password-content__list--item .col-md-3:before {
+.password-content__list--item .password-icon:before {
   position: absolute;
   content: '';
   width: 40px;
@@ -13579,7 +13579,7 @@ button.close {
 }
 
 @media (max-width: 1366px) {
-  .password-content__list--item .col-md-3:before {
+  .password-content__list--item .password-icon:before {
     left: -32px;
   }
   
@@ -13589,7 +13589,7 @@ button.close {
 }
 
 @media (max-width: 1280px) {
-  .password-content__list--item .col-md-3:before {
+  .password-content__list--item .password-icon:before {
     left: -28px;
   }
 }
