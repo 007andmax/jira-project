@@ -132,7 +132,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       port: [this.editItem ? this.editItem.port : ''],
       expiryDate: [this.editItem ? this.editItem.expiredDate : null, []],
       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
-      http: [this.editItem ? this.editItem.http : false],
+      https: [this.editItem ? this.editItem.https : false],
       ssh: [this.editItem ? this.editItem.ssh : false],
       telnet: [this.editItem ? this.editItem.telnet : false]
     });
@@ -397,6 +397,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public changeChecked(type, i) {
+    console.log(type, i);
     if (type === 'user') {
       this.usersCheckbox[i] = !this.usersCheckbox[i];
     } else if (type === 'device') {

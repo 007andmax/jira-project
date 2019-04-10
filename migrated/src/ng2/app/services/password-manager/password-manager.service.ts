@@ -138,7 +138,7 @@ export class PasswordManagerService {
         username: recordInfo.userName,
         note: recordInfo.note,
         ip: recordInfo.ipAdres,
-        http: !!recordInfo.http,
+        https: !!recordInfo.https,
         ssh: !!recordInfo.ssh,
         telnet: !!recordInfo.telnet,
         port: recordInfo.port
