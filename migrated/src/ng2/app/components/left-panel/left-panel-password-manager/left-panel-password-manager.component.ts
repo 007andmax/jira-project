@@ -251,4 +251,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     });
   }
 
+  public closeMobileFilters() {
+    this.passwordManagerService.closeFilters();
+  }
+
 }

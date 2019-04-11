@@ -24,6 +24,7 @@ export class PasswordManagerComponent implements OnInit {
   public selectedDate: any;
   public selectedCategory: any;
   public newRecord: Subject<boolean> = new Subject();
+  public isMobileFilterShowing = false;
 
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
@@ -45,7 +46,7 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
-    console.log('item');
+    this.checkCloseFilters();
   };
 
   /**
@@ -116,6 +117,20 @@ export class PasswordManagerComponent implements OnInit {
   private refreshFilter() {
     this.selectedUserOrDevice = {};
     this.selectedDate = null;
+  }
+
+  /**
+   * Toggle mobile filters
+   */
+  public showMobileFilters() {
+    this.isMobileFilterShowing = !this.isMobileFilterShowing;
+  }
+
+  /**
+   * Close mobile filters
+   */
+  public checkCloseFilters() {
+    this.passwordManagerService.closeFilter.subscribe(() => this.isMobileFilterShowing = false )
   }
 
 }
