@@ -114,7 +114,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   get form() { return this.createPasswordRecord.controls; }
 
   public initForm(){
-    console.log(this.editItem, 'this.editItem');
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -132,7 +131,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       port: [this.editItem ? this.editItem.port : ''],
       expiryDate: [this.editItem ? this.editItem.expiredDate : null, []],
       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
-      http: [this.editItem ? this.editItem.http : false],
+      https: [this.editItem ? this.editItem.https : false],
       ssh: [this.editItem ? this.editItem.ssh : false],
       telnet: [this.editItem ? this.editItem.telnet : false]
     });
@@ -163,6 +162,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.showSelect = false;
     this.clearClient();
     this.submitted = false;
+    this.type = 0;
     this.opened = false;
 
   }
@@ -235,7 +235,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public getCompanyDevices(companyId) {
-    console.log('12351235');
     this.selectedClient = companyId.item;
     this.clearClient();
     companyId.item && this.getAllUsers(companyId.item.id);
@@ -281,7 +280,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.userDevice = [];
     this.gadgetCheckbox = [];
     this.selectedUserAndDevices = [];
-    this.type = 0;
   }
 
   searchClients = (text$: Observable<string>) => {
@@ -333,7 +331,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
-      console.log(this.usersList);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
