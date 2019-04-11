@@ -1,6 +1,5 @@
 @import './assets/styles/dropdowns.scss';
 @import './assets/styles/icons.scss';
-@import './assets/styles/mobile.scss';
 
 .main-container:nth-child(2) {
   display: none;
@@ -69,3 +68,5 @@ ngb-typeahead-window {
   border: 0.1rem solid #4f5f79;
   border-top-color: #9CA5B6;
 }
+
+@import './assets/styles/mobile.scss';

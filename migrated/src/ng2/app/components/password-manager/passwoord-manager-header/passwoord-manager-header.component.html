@@ -1,7 +1,8 @@
 <div class="password-content__header">
   <h3>Password Manager</h3>
   <div class="password-content__header--search">
-    <div class="password-selected" style="display: none">
+    <!--add class "show" to <div class="password-selected">-->
+    <div class="password-selected">
       <div class="password-selected-qty new-link">
         <span>2</span> Selected
       </div>
@@ -11,6 +12,7 @@
         <i class="icn-16 export-new"></i>
       </div>
     </div>
-    <button (click)="addRecord()" class="plus-btn">+</button>
+    <button (click)="addRecord()" style="font-size: 13px;" class="new-link desktop-hidden">Create Password</button>
+    <button (click)="addRecord()" class="plus-btn mob-hidden">+</button>
   </div>
 </div>

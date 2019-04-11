@@ -1501,6 +1501,12 @@ bold {
   top: -8px;
 }
 
+@media (min-width: 415px) {
+  .password-content__list--item .password-icon.col-md-1:before {
+    display: none;
+  }
+}
+
 .password-content__list--item .col-md-3.password-email:before {
   /*background: url('../images/new-icons/email-password.png');*/
 }
@@ -1540,11 +1546,15 @@ bold {
 }
 
 .password-selected {
-  display: flex;
+  display: none;
   padding: 8px 15px;
   background: #fff;
   border-radius: 6px;
   margin-right: 10px;
+}
+
+.password-selected.show {
+  display: flex !important;
 }
 
 .password-content__header--search {
@@ -13239,6 +13249,8 @@ button.close {
   background: transparent !important;
   margin: 0 !important;
   padding: 0 !important;
+  border: none;
+  outline: none;
 }
 
 .left-panel-filter {

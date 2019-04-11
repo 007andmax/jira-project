@@ -23,4 +23,41 @@
   .ngb-dp-weekday {
     width: 4rem !important;
   }
+  .password-content__list--header {
+    display: none;
+  }
+  .password-content__list--item .password-icon:before {
+    left: 42px !important;
+  }
+  .ng-sidebar--right {
+    top: 0 !important;
+  }
+  .ng-sidebar {
+    width: 100vw;
+  }
+  .mob-filters-btn.apply-filters {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+    &:after {
+      display: none;
+    }
+  }
+  .show .mob-filters-btn.apply-filters {
+    opacity: 1;
+    visibility: visible;
+  }
+  .password-content__modal--content .col-md-3.mob-w-100 {
+    width: 100% !important;
+    .input-group {
+      width: 100%;
+      .dropdown-menu {
+        width: 100%;
+      }
+    }
+  }
+  .password-content__modal .password-modal-actions button {
+    background-color: #fff !important;
+  }
 }
+
