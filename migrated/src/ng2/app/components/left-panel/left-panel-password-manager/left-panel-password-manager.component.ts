@@ -95,8 +95,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
     this.selectedDateItem = date;
     this.selectedDateForFilter = date;
-    this.passwordRecords = this.passwordRecordsStart;
-    this.selectedCompany && this.filterPasswordRecords(this.selectedCompany);
+    (this.selectedCompany && this.selectedCompany.companyId) && this.filterPasswordRecords(this.selectedCompany);
     return this.passwordRecords = this.passwordRecords.filter((item) => {
       return item.expiredDate === selectedDate;
     })
@@ -136,9 +135,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
-      this.selectedCompany && this.selectCompany({item: this.selectedCompany});
+      console.log(res, 'RES');
+      console.log(this.selectedDateItem, 'RES');
+      (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
-      this.selectedDateItem && this.selectedDate(this.selectedDateItem);
+      this.selectedDateItem && this.selectDate(this.selectedDateItem);
+      console.log(this.passwordRecords, 'this.passwordRecords');
     });
   }
 
@@ -211,15 +213,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     console.log(17);
     this.refreshCompany();
     this.refreshDeviceOrUser();
-    this.refreshDate();
-    this.passwordRecords = this.passwordRecordsStart;
+    this.getPasswordRecords();
   }
 
   clearDevice() {
     console.log(18);
     this.passwordRecords = this.passwordRecordsStart;
     this.refreshDeviceOrUser();
-    this.filterPasswordRecords( this.selectedCompany);
+    this.filterPasswordRecords(this.selectedCompany);
   }
 
   clearDate($event) {
@@ -227,10 +228,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this.passwordManagerService.setDate('');
-    this.passwordRecords = this.passwordRecordsStart;
     this.selectedDate = null;
-    this.selectedCompany && this.selectCompany({item: this.selectedCompany});
-    this.selectedDeviceOrUser && this.filterPasswordRecordsByDeviceOrUser({item :this.selectedDeviceOrUser});
+    this.selectedDateItem = null;
+    this.getPasswordRecords();
   }
 
 

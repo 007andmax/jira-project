@@ -93,7 +93,7 @@ export class PasswordManagerComponent implements OnInit {
    * Change data table show status
    */
   public showDataTable() {
-    return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory));
+    return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory) || (this.selectedDate));
   }
 
   /**
