@@ -24,7 +24,7 @@
       <div class="recepients" >
         <span class="pull-right email-preview-btn" ng-click="emailPreview(template)" ng-if="templateInfo.showPreview"
               disable-if="{{ !gettingEmailTemplatePreview }}"
-              append-html-to-body url="/html/scripts/core/settings/email-templates/email-preview.tpl.html"
+              append-html-to-body url="/ng1/scripts/core/settings/email-templates/email-preview.tpl.html"
               data="emailPreviewHtml" first-node-class="email-preview-tpl">show preview</span>
         <span><strong>Recipient</strong> {{ templateInfo.recipient }}</span>
       </div>

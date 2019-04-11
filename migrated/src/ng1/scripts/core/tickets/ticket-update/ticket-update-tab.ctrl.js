@@ -232,7 +232,7 @@
 
           function openModal(company) {
             $uibModal.open({
-              templateUrl: '/html/scripts/core/service-agreements/modal/create-new-modal.tpl.html',
+              templateUrl: '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html',
               animation: true,
               backdrop: false,
               size: 'md',

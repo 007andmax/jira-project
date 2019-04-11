@@ -11,7 +11,7 @@
 
             element.click(function () {
               $uibModal.open({
-                templateUrl: '/html/scripts/core/settings/deactivate-account/deactivate-account.tpl.html',
+                templateUrl: '/ng1/scripts/core/settings/deactivate-account/deactivate-account.tpl.html',
                 controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
                   $scope.modalData = { note: '' };
                   $scope.dismiss = $uibModalInstance.dismiss;

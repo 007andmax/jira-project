@@ -81,7 +81,7 @@
 
         $scope.openDepositModal = function () {
           $uibModal.open({
-            templateUrl: '/html/scripts/core/billable/payments/payments-modal.tpl.html',
+            templateUrl: '/ng1/scripts/core/billable/payments/payments-modal.tpl.html',
             animation: true,
             backdrop: false,
             size: 'sm',

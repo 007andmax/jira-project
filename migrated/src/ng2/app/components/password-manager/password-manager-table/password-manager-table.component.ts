@@ -18,6 +18,7 @@ export class PasswordManagerTableComponent implements OnInit {
   @Input() selectedDate: any;
   @Input() selectedCategory: any;
   @Input() addNewRecords: Subject<boolean>;
+  @Input() showDataTable: Subject<boolean>;
   public recordsData: any;
 
   constructor(
@@ -36,7 +37,8 @@ export class PasswordManagerTableComponent implements OnInit {
 
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-      return this.selectedCategory = category;
+      console.log(category, '12351235');
+       this.selectedCategory = category;
     });
   }
 

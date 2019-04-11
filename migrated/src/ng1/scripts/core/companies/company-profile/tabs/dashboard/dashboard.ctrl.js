@@ -39,7 +39,7 @@
             keyboard: false,
             size: 'custom-size-confirmation-pop',
             windowClass: 'modal-remote-agent',
-            templateUrl: '/html/scripts/core/companies/download-agent.tpl.html',
+            templateUrl: '/ng1/scripts/core/companies/download-agent.tpl.html',
             controller: 'quicktech.core.companies.downloadAgentModal'
           };
 
@@ -448,7 +448,7 @@
 
         $scope.openMapModal = function () {
           $uibModal.open({
-            templateUrl: '/html/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
+            templateUrl: '/ng1/scripts/core/companies/company-profile/tabs/dashboard/map-modal.tpl.html',
             animation: true,
             backdrop: true,
             size: 'md',
