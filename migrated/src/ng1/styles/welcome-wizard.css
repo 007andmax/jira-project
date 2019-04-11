@@ -2460,6 +2460,10 @@
     font-size: 13px;
   }
   
+  .password-content__list--item .col-md-3 {
+    min-height: 24px;
+  }
+  
   .password-content__list--item .col-md-1 {
     position: absolute;
     top: calc(50% - 12px);
@@ -2497,7 +2501,7 @@
   
   .password-content__modal--header {
     background-color: #27303f;
-    padding: 12px 12px 12px 56px;
+    padding: 16px 12px 16px 56px;
   }
   
   .password-content__modal h3 {
