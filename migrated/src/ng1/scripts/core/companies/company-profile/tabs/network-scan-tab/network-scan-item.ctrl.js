@@ -177,7 +177,7 @@
 
         function openChangeMasterAgentCredentialsModal(deviceId) {
           var modalInstance = $uibModal.open({
-            templateUrl: '/html/scripts/core/companies/company-profile/tabs/network-scan-tab/change-credentials-modal.tpl.html',
+            templateUrl: '/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/change-credentials-modal.tpl.html',
             controller: [
               '$scope', '$uibModalInstance', 'companyId', 'discoveredByAgentId', 'deviceIds', 'DevicesService',
               function ($scope, $uibModalInstance, companyId, discoveredByAgentId, deviceIds, DevicesService) {

@@ -45,7 +45,7 @@
 
             <div class="qt-list qt-product-list left-list">
 
-              <div ng-include="'/html/scripts/core/products/products-table-header.tpl.html'"></div>
+              <div ng-include="'/ng1/scripts/core/products/products-table-header.tpl.html'"></div>
 
               <div
                 ng-repeat="product in category.productsList | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
@@ -53,7 +53,7 @@
                 show-model-element="{{ 'show-' + product.versionedId.id}}"
                 ng-init="setHighlightCreatedProductId(product.versionedId.id)">
 
-                <div ng-include="'/html/scripts/core/products/products-table-row.tpl.html'"></div>
+                <div ng-include="'/ng1/scripts/core/products/products-table-row.tpl.html'"></div>
               </div>
             </div>
           </div>

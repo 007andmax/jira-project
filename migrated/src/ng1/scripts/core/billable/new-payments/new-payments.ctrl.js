@@ -17,7 +17,7 @@
                 PaymentsService) {
         $scope.showTooltipArray = [];
         $scope.openModal = function(modalType, payment) {
-          var template = '/html/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
+          var template = '/ng1/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
 
           $scope.editedPayment = payment;
 

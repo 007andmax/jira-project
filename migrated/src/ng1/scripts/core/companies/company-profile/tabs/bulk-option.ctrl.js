@@ -109,7 +109,7 @@
           // }
           $scope.turnOffAction = action;
           $uibModal.open({
-            templateUrl: '/html/scripts/core/companies/company-profile/tabs/confirmModal.html',
+            templateUrl: '/ng1/scripts/core/companies/company-profile/tabs/confirmModal.html',
             animation: true,
             backdrop: true,
             size: 'sm',

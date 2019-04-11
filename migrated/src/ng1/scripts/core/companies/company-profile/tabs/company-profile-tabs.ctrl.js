@@ -298,9 +298,9 @@
 
         $scope.getTabTemplateUrl = function (tab) {
           if (tab === 'dashboard') {
-            return '/html/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
+            return '/ng1/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
           } else {
-            return '/html/scripts/core/companies/company-profile/tabs/' + tab + '-tab/' + tab + '-tab.tpl.html';
+            return '/ng1/scripts/core/companies/company-profile/tabs/' + tab + '-tab/' + tab + '-tab.tpl.html';
           }
         };
 

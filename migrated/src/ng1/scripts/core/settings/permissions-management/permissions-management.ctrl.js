@@ -220,7 +220,7 @@
             $scope.roleToDelete = id;
 
              var modalInstance = $uibModal.open({
-               templateUrl: '/html/scripts/core/settings/permissions-management/delete-role.tpl.html',
+               templateUrl: '/ng1/scripts/core/settings/permissions-management/delete-role.tpl.html',
                animation: true,
                backdrop: false,
                size: 'xs',

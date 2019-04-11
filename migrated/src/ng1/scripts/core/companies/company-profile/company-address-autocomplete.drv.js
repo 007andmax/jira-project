@@ -12,7 +12,7 @@
           showValidationMessages: '=showValidationMessages',
           isMapShown: "="
         },
-        templateUrl: '/html/scripts/core/companies/company-profile/address-autocomplete.tpl.html',
+        templateUrl: '/ng1/scripts/core/companies/company-profile/address-autocomplete.tpl.html',
         link: function ($scope, element, attrs, ngModelCtrl) {
 
           var mapDiv = element.find('[map]');
