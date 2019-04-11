@@ -129,7 +129,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       userOrDevice: [this.editItem ? this.editItem.links :''],
       ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [this.editItem ? this.editItem.port : ''],
-      expiryDate: [this.editItem ? this.editItem.expiredDate : null, []],
+      expiryDate: [this.editItem ? this.expiryDate : null, []],
       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
       https: [this.editItem ? this.editItem.https : false],
       ssh: [this.editItem ? this.editItem.ssh : false],
@@ -138,11 +138,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
+    console.log(this.editItem, 'this.editItem');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
+    console.log(this.createPasswordRecord, 'this.createPasswordRecord.invalid');
+    console.log(isUserRequired, 'isUserRequired');
+    console.log(isSsidRequired, 'isSsidRequired');
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {

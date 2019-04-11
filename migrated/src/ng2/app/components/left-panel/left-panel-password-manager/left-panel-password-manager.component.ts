@@ -45,7 +45,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(1);
     this.getCompaniesList();
     this.getPasswordRecords();
     this.addNewRecord();
@@ -53,14 +52,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getCompaniesList() {
-      console.log(2);
      return this.companiesService.getCompaniesList().subscribe((company) => {
        this.companiesList = this.getCompaniesNames(company);
      });
   }
 
   public selectCompany(item){
-    console.log(3);
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -73,13 +70,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public filterPasswordRecords(company) {
-    console.log(4);
     if (company)
     return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
   };
 
   public filterPasswordRecordsByDeviceOrUser(deviceOrUser) {
-    console.log(5);
     return this.passwordRecords = this.passwordRecords.filter((item) => {
       const links = item.links.filter((item) => {
         if (item && deviceOrUser) {
@@ -91,7 +86,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public filterPasswordRecordsByDate(date) {
-    console.log(6);
     const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
     this.selectedDateItem = date;
     this.selectedDateForFilter = date;
@@ -102,12 +96,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   formatDayAndMonth(item) {
-    console.log(7);
     return item < 10 ? `0${item}` : item;
   }
 
   public selectDeviceOrUser(item) {
-    console.log(8);
     this.selectedDeviceOrUser = item.item;
     this.passwordManagerService.setSelectedDeviceOrUser(item.item);
     this.filterPasswordRecordsByDeviceOrUser(item.item);
@@ -116,7 +108,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
 
   public getCompanyDevices(companyId) {
-    console.log(9);
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
       if (res[this.selectedCompany.companyId]) {
         return this.devicesAndUsersList = [...this.devicesAndUsersList, ...res[this.selectedCompany.companyId]];
@@ -125,27 +116,21 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectDate(item) {
-    console.log(10);
     this.passwordManagerService.setDate(item);
     this.filterPasswordRecordsByDate(item);
   }
 
   public getPasswordRecords() {
-    console.log(11);
     this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
-      console.log(res, 'RES');
-      console.log(this.selectedDateItem, 'RES');
       (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
-      console.log(this.passwordRecords, 'this.passwordRecords');
     });
   }
 
   public showCategory() {
-    console.log(12);
     return this.passwordRecords && this.passwordRecords.length > 0;
   }
 
@@ -162,7 +147,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   };
 
   search = (text$: Observable<string>) => {
-    console.log(13);
     return text$.pipe(
       debounceTime(100),
       distinctUntilChanged(),
@@ -175,7 +159,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   };
 
   searchDevices = (text$: Observable<string>) => {
-    console.log(14);
     return text$.pipe(
       debounceTime(100),
       distinctUntilChanged(),
@@ -188,7 +171,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   };
 
   private findUserOrDevice(item, term) {
-    console.log(15);
     if (item.hasOwnProperty('hostName')) {
       return item['hostName'].toLowerCase().indexOf(term.toLowerCase()) > -1
     } else {
@@ -198,7 +180,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   private getCompaniesNames(list) {
-    console.log(16);
     const filteredArray = [];
     list.map((item) => {
       filteredArray.push({
@@ -210,21 +191,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   clearCompany() {
-    console.log(17);
     this.refreshCompany();
     this.refreshDeviceOrUser();
     this.getPasswordRecords();
   }
 
   clearDevice() {
-    console.log(18);
     this.passwordRecords = this.passwordRecordsStart;
     this.refreshDeviceOrUser();
     this.filterPasswordRecords(this.selectedCompany);
   }
 
   clearDate($event) {
-    console.log(19);
     $event.preventDefault();
     $event.stopPropagation();
     this.passwordManagerService.setDate('');
@@ -235,25 +213,21 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
 
   private refreshDeviceOrUser() {
-    console.log(20);
     this.device = null;
     this.selectDeviceOrUser({item: null});
   }
 
   private refreshDate() {
-    console.log(21);
     this.selectedDate = null;
   }
 
   private refreshCompany() {
-    console.log(22);
     this.selectCompany({item: this.clearCompanyItem});
     this.company = null;
     this.device = null;
   }
 
   private getAllUsers(companyId) {
-    console.log(23);
     this.userService.getAllusers().subscribe((res: any) => {
       res = res.filter((item) =>  item.company.id == companyId);
       this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
@@ -261,20 +235,17 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   private getGadgets(companyId) {
-    console.log(24);
     this.gadgetsService.getCompanyDevices().subscribe((res: any) =>
       this.devicesAndUsersList = [...(res.filter((item) => item.clientCompanyId === companyId)), ...this.devicesAndUsersList])
   }
 
   public addNewRecord() {
-    console.log(25);
     this.passwordManagerService.showAddForm.subscribe(() => {
       this.getPasswordRecords();
     })
   }
 
   public deleteRecord() {
-    console.log(26);
     this.passwordManagerService.deleteItem.subscribe((item) => {
       this.getPasswordRecords()
     });
