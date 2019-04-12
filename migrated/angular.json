@@ -115,6 +115,7 @@
               "src/ng1/bower_components/angular-vs-repeat/src/angular-vs-repeat.js",
               "src/ng1/bower_components/bootstrap-daterangepicker/daterangepicker.js",
               "src/ng1/bower_components/angular-daterangepicker/js/angular-daterangepicker.js",
+              "src/ng1/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
               "src/ng1/scripts/admin/app-admin.mdl.js",
               "src/ng1/scripts/common/directives/directives.mdl.js",
               "src/ng1/scripts/common/services/local/local-services.mdl.js",

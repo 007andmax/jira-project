@@ -1,4 +1,5 @@
-<div class="payments" ng-controller="quicktech.core.billable.newPaymentsCtrl" ng-cloak>
+<div class="payments"
+     ng-controller="quicktech.core.billable.newPaymentsCtrl" ng-cloak>
   <div>
     <div class="change-view-actions">
       <div class="action-wrap clearfix invoices" style="min-height: 0; padding: 0">
@@ -66,7 +67,10 @@
 
     <loading-indicator ng-class="!filteredPayments ? 'loading-indicator' : ''" loading-trigger="!filteredPayments"></loading-indicator>
 
-    <ul class="qt-list qt-companies qt-users users-bg new-payments" ng-if="filteredPayments" ng-click="hideAllTooltiip($event)">
+    <ul class="qt-list qt-companies qt-users users-bg new-payments"
+        infinite-scroll="myPagingFunction()" infinite-scroll-distance="3"
+        ng-if="filteredPayments"
+        ng-click="hideAllTooltiip($event)">
       <li class="list-heading">
         <div class="col-xs-1" style="width: 3%">
           <label class="control checkbox pull-left" ng-click="stopPropagation($event)">
@@ -134,109 +138,110 @@
         </div>
       </li>
 
-      <li class="list-company-row"
-          ng-if="filteredPayments && filteredPayments.length > 0"
-          ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse">
+        <li class="list-company-row"
+            ng-if="filteredPayments && filteredPayments.length > 0"
+            ng-repeat="payment in filteredPayments | limitTo: limitValue | orderBy: orderByForPayments : orderPayments.reverse">
 
-        <div class="col-xs-1" style="width: 3%">
-          <label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"
-                 class="control checkbox pull-left" ng-click="stopPropagation($event)">
-            <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
-            <span class="control-indicator"></span>
-          </label>
-        </div>
-        <div class="col-xs-1">
-          {{ payment.createdAt }}
-        </div>
-        <div class="col-xs-1 w-5">
+          <div class="col-xs-1" style="width: 3%">
+            <label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"
+                   class="control checkbox pull-left" ng-click="stopPropagation($event)">
+              <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
+              <span class="control-indicator"></span>
+            </label>
+          </div>
+          <div class="col-xs-1">
+            {{ payment.createdAt }}
+          </div>
+          <div class="col-xs-1 w-5">
 
-          <div ng-click="showInvoice(payment.partialPaidInvoice)"><span tooltip-placement="top"
-                                                                        uib-tooltip="Invoice Preview"
-                                                                        tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
-          </div>
-          <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span
-            tooltip-placement="top" uib-tooltip="Invoice Preview"
-            tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
-        </div>
-        <div class="col-xs-2">
-          {{ payment.clientCompanyName }}
-        </div>
-        <div class="col-xs-1" style="word-break: break-all">
-          <span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>
-        </div>
-        <div class="col-xs-2">
-          <span>{{ payment.reference }}</span>
-        </div>
-        <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
-          <p set-height-note text="payment.note" line-length="payment.invoiceNumbers.length" ng-click="showTooltip($event, $index)">
-            {{ payment.note }}
-          </p>
-          <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
-            <p class="full-text-title">Note</p>
-            {{payment.note}}
-          </div>
-        </div>
-        <div class="col-xs-1">
-          ${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}
-        </div>
-        <div class="col-xs-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }"
-             style="text-align: center;width: auto;">
-          {{ payment.refundMethod ? 'Refund' : 'Paid' }}
-        </div>
-        <div class="col-xs-1" style="width: 3%;position: absolute;right: 10px;">
-          <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">
-            <div uib-dropdown-toggle uib-tooltip="more"
-                 tooltip-placement="top"
-                 tooltip-append-to-body="true"
-                 tooltip-popup-delay="2000">
-              <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
+            <div ng-click="showInvoice(payment.partialPaidInvoice)"><span tooltip-placement="top"
+                                                                          uib-tooltip="Invoice Preview"
+                                                                          tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
             </div>
-            <ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">
-              <li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a
-                ng-click="openModal('edit-payments', payment)">Edit payment</a>
-              </li>
-              <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
-              <li ng-if="!payment.refundMethod"><a ng-click="openModal('refund', payment)">Refund payment</a></li>
-              <li><a ng-click="deletePayment(payment.id)">Delete payment</a></li>
-            </ul>
+            <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span
+              tooltip-placement="top" uib-tooltip="Invoice Preview"
+              tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
           </div>
-        </div>
-
-
-        <div class="dropdown-wo-max-height"
-             to-left="true"
-             style="position: absolute;right: 15px;">
-          <div style="display: inline-block;"
-               opened-from-list="true"
-               uib-dropdown-toggle
-               ng-click="downloadAgent($event, company)">
-            <div class="download-agent-company download-agent-company-small pointer">
-              <span>Download Agent</span>
-              <img src="./ng1/images/new-icons/download.svg">
+          <div class="col-xs-2">
+            {{ payment.clientCompanyName }}
+          </div>
+          <div class="col-xs-1" style="word-break: break-all">
+            <span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>
+          </div>
+          <div class="col-xs-2">
+            <span>{{ payment.reference }}</span>
+          </div>
+          <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
+            <p set-height-note text="payment.note" line-length="payment.invoiceNumbers.length" ng-click="showTooltip($event, $index)">
+              {{ payment.note }}
+            </p>
+            <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
+              <p class="full-text-title">Note</p>
+              {{payment.note}}
             </div>
           </div>
-        </div>
-        <div class="mob-company-footer">
-          <div>
-            <p>TICKETS</p>
-            <p> {{ company.companyStatistic.ticketsSubmitted || '0' }}</p>
+          <div class="col-xs-1">
+            ${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}
           </div>
-          <div>
-            <p>DEVICES</p>
-            <p> {{ devicesCount[cooriginmpany.id].all || '0' }} </p>
+          <div class="col-xs-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }"
+               style="text-align: center;width: auto;">
+            {{ payment.refundMethod ? 'Refund' : 'Paid' }}
           </div>
-          <div>
-            <p>USERS</p>
-            <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
+          <div class="col-xs-1" style="width: 3%;position: absolute;right: 10px;">
+            <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">
+              <div uib-dropdown-toggle uib-tooltip="more"
+                   tooltip-placement="top"
+                   tooltip-append-to-body="true"
+                   tooltip-popup-delay="2000">
+                <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
+              </div>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">
+                <li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a
+                  ng-click="openModal('edit-payments', payment)">Edit payment</a>
+                </li>
+                <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
+                <li ng-if="!payment.refundMethod"><a ng-click="openModal('refund', payment)">Refund payment</a></li>
+                <li><a ng-click="deletePayment(payment.id)">Delete payment</a></li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
-                ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
-                create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
 
-        <img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
-             ng-click="dearchiveCompany(company)" />
-      </li>
+
+          <div class="dropdown-wo-max-height"
+               to-left="true"
+               style="position: absolute;right: 15px;">
+            <div style="display: inline-block;"
+                 opened-from-list="true"
+                 uib-dropdown-toggle
+                 ng-click="downloadAgent($event, company)">
+              <div class="download-agent-company download-agent-company-small pointer">
+                <span>Download Agent</span>
+                <img src="./ng1/images/new-icons/download.svg">
+              </div>
+            </div>
+          </div>
+          <div class="mob-company-footer">
+            <div>
+              <p>TICKETS</p>
+              <p> {{ company.companyStatistic.ticketsSubmitted || '0' }}</p>
+            </div>
+            <div>
+              <p>DEVICES</p>
+              <p> {{ devicesCount[cooriginmpany.id].all || '0' }} </p>
+            </div>
+            <div>
+              <p>USERS</p>
+              <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
+            </div>
+          </div>
+          <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
+                  ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+                  create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
+
+          <img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
+               ng-click="dearchiveCompany(company)" />
+        </li>
+
     </ul>
   </div>
 

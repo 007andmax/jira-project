@@ -45,7 +45,6 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
-    console.log('item');
   };
 
   /**

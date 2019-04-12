@@ -16,11 +16,15 @@
                 $rootScope,
                 PaymentsService) {
         $scope.showTooltipArray = [];
+        $scope.limitValue = 20;
+        $scope.myPagingFunction = function () {
+          console.log('test');
+          return $scope.limitValue += 1;
+        };
         $scope.openModal = function(modalType, payment) {
           var template = '/ng1/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
 
           $scope.editedPayment = payment;
-
 
           var modalInstance = $uibModal.open({
             templateUrl: template,

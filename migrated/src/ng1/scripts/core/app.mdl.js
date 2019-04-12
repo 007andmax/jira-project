@@ -34,7 +34,8 @@
       'ngCropper',
       'nvd3',
       'vs-repeat',
-      'daterangepicker'
+      'daterangepicker',
+      'infinite-scroll'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$provide',
