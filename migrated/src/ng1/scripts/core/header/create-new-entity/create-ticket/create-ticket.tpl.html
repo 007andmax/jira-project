@@ -122,7 +122,7 @@
       <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
              smart-dropdown-menu-position
              ng-model="ticketCreatedUser"
-             typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+             typeahead-template-url="/ng1/partials/user-autocomplete.tpl.html"
              uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
              qt-typeahead-async-show-on-focus ng-trim="false"
              custom-style="{'overflow-y': 'auto', 'width': '100%', 'max-height': '190px'}">
@@ -153,7 +153,7 @@
              execute-when-outfocused="assignToOutfocus()"
              ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
              typeahead-on-select="userAssigned(ticketAssignTo)"
-             typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+             typeahead-editable="false" typeahead-template-url="/ng1/partials/user-autocomplete.tpl.html"
              uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
              qt-typeahead-async-show-on-focus ng-required="false"
              custom-style="{'max-height': '152px', 'overflow-y': 'auto', 'width': '100%'}">

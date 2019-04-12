@@ -23,7 +23,7 @@
 
       <span>Client</span>
       <input type="text" class="form-control has-dropdown" ng-model="dto.user" name="reportUserId"
-             typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+             typeahead-template-url="/ng1/partials/user-autocomplete.tpl.html"
              uib-typeahead="user as getUserName(user) for user in clientUsers | filter:filterUsers($viewValue) | orderBy:'firstName'"
              qt-typeahead-show-on-focus typeahead-on-select="onUserSelect(dto.user)"
              custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '254px'}">
