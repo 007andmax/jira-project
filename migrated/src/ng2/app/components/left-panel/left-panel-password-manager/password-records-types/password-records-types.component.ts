@@ -32,14 +32,6 @@ export class PasswordRecordsTypesComponent implements OnInit {
     this.startComponent();
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   const name: SimpleChange = changes.passwordRecords;
-  //   console.log('test');
-  //   console.log(changes.passwordRecords, 'test');
-  //   // this.passwordRecords = changes.passwordRecords.currentValue;
-  //   this.startComponent();
-  // }
-
   public startComponent() {
     this.initializePasswordRecordTypes();
     this.setCountRecordsData();

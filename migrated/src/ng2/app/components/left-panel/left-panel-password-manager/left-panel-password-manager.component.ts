@@ -30,6 +30,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public selectedDateItem: any;
   public passwordRecords: any;
   public passwordRecordsStart: any;
+  public innerWidth: any;
   public clearCompanyItem = {
     companyId: '',
     name: ''
@@ -49,6 +50,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth, 'this.innerWidth');
   }
 
   public getCompaniesList() {
@@ -67,6 +70,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       this.getAllUsers(item.item.companyId);
       this.getGadgets(item.item.companyId);
     }
+  }
+
+  public selectCompanyMob(item){
+    console.log(1);
+    this.selectedCompany = item.item;
   }
 
   public filterPasswordRecords(company) {
@@ -105,7 +113,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
 
-
+  public selectDeviceOrUserMob(item){
+    console.log(2);
+    this.selectedDeviceOrUser = item.item;
+  }
 
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
@@ -120,10 +131,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDate(item);
   }
 
+  public selectDateMob(date) {
+    console.log(3);
+    this.selectedDateItem = date;
+  }
+
   public getPasswordRecords() {
+    // if (this.innerWidth <= 414) {
+    //   this.passwordManagerService.
+    // }
     this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
+      console.log('1235123---');
       (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
