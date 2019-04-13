@@ -30,6 +30,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   clickClients$ = new Subject<string>();
   public submitted = false;
   public clientsList: any;
+  public showHistoryPopup: false;
   public type: any;
   public model: any;
   public currentType;
@@ -51,7 +52,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public currentTypeChoosen: any;
-  public showHistoryPopup: false;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -443,6 +443,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   showHistory($event) {
     this.stopEvent($event);
+    // @ts-ignore
     this.showHistoryPopup = !this.showHistoryPopup;
   }
 
