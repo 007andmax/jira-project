@@ -84,7 +84,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public filterPasswordRecords(company) {
-    if (company)
+    if (company && company.companyId)
     return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
   };
 
