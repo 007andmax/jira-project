@@ -51,6 +51,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public currentTypeChoosen: any;
+  public showHistoryPopup: false;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -438,6 +439,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   deleteRecord(recordId){
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
     this.hideAddForm();
+  }
+
+  showHistory($event) {
+    this.stopEvent($event);
+    this.showHistoryPopup = !this.showHistoryPopup;
   }
 
 }
