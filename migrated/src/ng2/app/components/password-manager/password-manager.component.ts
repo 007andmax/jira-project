@@ -95,8 +95,9 @@ export class PasswordManagerComponent implements OnInit {
    * Change data table show status
    */
   public showDataTable() {
-    console.log(this.selectedCompany, 'this.selectedCompany');
-    return !!((this.selectedCompany && this.selectedCompany.companyId.length > 0) || (this.selectedCategory) || (this.selectedDate));
+    console.log(this.selectedCategory, 'this.selectedCompany');
+
+    return !!((this.selectedCompany && this.selectedCompany.companyId.length > 0) || (this.selectedCategory && this.selectedCategory.UPPERCASE !== 'CLEAR') || (this.selectedDate));
   }
 
   /**

@@ -31,6 +31,10 @@ export class PasswordRecordsTypesComponent implements OnInit {
 
   ngOnInit() {
     this.startComponent();
+    this.passwordManagerService.mobileCategory.subscribe(() => {
+      console.log('1235--------');
+      this.filterByPasswordTypes(this.selectedCategory, this.selectedIndex);
+    })
   }
 
   public startComponent() {
@@ -43,6 +47,14 @@ export class PasswordRecordsTypesComponent implements OnInit {
     this.selectedCategory = type;
     this.passwordManagerService.setSelectedCategory(type);
   }
+
+  filterByPasswordTypesMob(type,index) {
+    this.selectedIndex = index;
+    this.selectedCategory = type;
+    console.log(type, index, '§2');
+  }
+
+
 
   private initializePasswordRecordTypes() {
     this._passwordRecords && this.passwordRecordTypes.map((item) => {

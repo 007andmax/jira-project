@@ -143,9 +143,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getPasswordRecords() {
-    // if (this.innerWidth <= 414) {
-    //   this.passwordManagerService.
-    // }
+    if (this.innerWidth <= 414) {
+      this.passwordManagerService.setMobileCategory();
+    }
     this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
@@ -156,6 +156,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
       console.log(this.passwordRecords, 'passwordRecords');
+      if (this.innerWidth <= 414) {
+        this.closeMobileFilters();
+      }
     });
   }
 
