@@ -223,12 +223,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   clearCompany() {
+    this.devicesAndUsersList = [];
     this.refreshCompany();
     this.refreshDeviceOrUser();
     this.getPasswordRecords();
   }
 
   clearCompanyMob() {
+    this.devicesAndUsersList = [];
     this.company = null;
     this.selectedCompany = this.clearCompanyItem;
     this.clearDeviceMob();
