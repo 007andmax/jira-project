@@ -61,6 +61,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectCompany(item){
+    console.log('test');
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -73,8 +74,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectCompanyMob(item){
-    console.log(1);
     this.selectedCompany = item.item;
+    this.passwordManagerService.setSelectedDeviceOrUser({});
+    if (item.item.companyId) {
+      this.getCompanyDevices(item.item.companyId);
+      this.getAllUsers(item.item.companyId);
+      this.getGadgets(item.item.companyId);
+    }
   }
 
   public filterPasswordRecords(company) {
@@ -143,10 +149,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
-      console.log('1235123---');
-      (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
+      console.log(this.selectedCompany, '1235123---');
+      console.log(this.selectedDeviceOrUser, '1235123---');
+      console.log(this.selectedDateItem, '1235123---');
+      this.selectedCompany && this.selectCompany({item: this.selectedCompany});
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
+      console.log(this.passwordRecords, 'passwordRecords');
     });
   }
 
@@ -216,6 +225,22 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
   }
 
+  clearCompanyMob() {
+    this.company = null;
+    this.selectedCompany = this.clearCompanyItem;
+    this.clearDeviceMob();
+  }
+
+  clearDeviceMob() {
+    this.device = null;
+    this.selectedDeviceOrUser = null;
+  }
+
+  clearDateMob() {
+    this.selectedDate = null;
+    this.selectedDateItem = null;
+  }
+
   clearDevice() {
     this.passwordRecords = this.passwordRecordsStart;
     this.refreshDeviceOrUser();
@@ -242,6 +267,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   private refreshCompany() {
+    console.log('1235100000000');
     this.selectCompany({item: this.clearCompanyItem});
     this.company = null;
     this.device = null;

@@ -55,6 +55,7 @@ export class PasswordManagerComponent implements OnInit {
   public getSelectCompany() {
     this.companiesService.filteredCompanyUpdate.subscribe((company) => {
       this.refreshFilter();
+      console.log(company, 'company');
       return this.selectedCompany = company;
     });
   }
@@ -94,7 +95,8 @@ export class PasswordManagerComponent implements OnInit {
    * Change data table show status
    */
   public showDataTable() {
-    return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory) || (this.selectedDate));
+    console.log(this.selectedCompany, 'this.selectedCompany');
+    return !!((this.selectedCompany && this.selectedCompany.companyId.length > 0) || (this.selectedCategory) || (this.selectedDate));
   }
 
   /**
