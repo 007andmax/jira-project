@@ -12,7 +12,7 @@
       </div>
     </div>
     <button
-      *ngIf="!getPermissions('CREATE_PASSWORD')"
+      *ngIf="getPermissions('CREATE_PASSWORD')"
       (click)="addRecord()"
       class="plus-btn">+</button>
   </div>
