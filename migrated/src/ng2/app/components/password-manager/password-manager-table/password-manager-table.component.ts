@@ -50,10 +50,12 @@ export class PasswordManagerTableComponent implements OnInit {
   }
 
   deleteRecord(recordId) {
-    this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-      this.passwordManagerService.deleteRecord(recordId);
-      return this.recordsData = this.recordsData.filter((item) => item.id !==recordId);
-    });
+    if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
+      this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
+        this.passwordManagerService.deleteRecord(recordId);
+        return this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
+      });
+    }
   }
 
   public watchDeleteRecord() {
