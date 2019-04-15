@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 export class UsersService {
 
   private apiUrl = environment.apiUrl;
+  public currentUser: any;
 
   constructor(
     private http: HttpClient
@@ -15,6 +16,10 @@ export class UsersService {
 
   getAllusers(){
     return this.http.get(this.apiUrl + 'users');
+  }
+
+  getCurrentUser(){
+    return this.http.get(this.apiUrl + 'users/current').subscribe((res) => this.currentUser = res);
   }
 
 }

@@ -1,7 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from "rxjs";
+
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
-import { Subject } from "rxjs";
+import { PermissionsService } from "../../../services/permissions/permissions.service";
 
 /**
  * Password manager data table component
@@ -23,7 +25,8 @@ export class PasswordManagerTableComponent implements OnInit {
 
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private passwordManagerService: PasswordManagerService
+    private passwordManagerService: PasswordManagerService,
+    private permissionsService: PermissionsService
   ) { }
 
   ngOnInit() {
@@ -60,11 +63,20 @@ export class PasswordManagerTableComponent implements OnInit {
   }
 
   editRecord(item) {
-    this.passwordManagerService.addRecord(item);
+    if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
+      this.passwordManagerService.addRecord(item);
+    }
   }
 
   public getRecordTypeClass(type) {
     return type.toLowerCase();
+  }
+
+  /**
+   * getPermission
+   */
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 
 

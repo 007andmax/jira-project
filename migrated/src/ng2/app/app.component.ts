@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { UpgradeModule } from "@angular/upgrade/static";
-import {setUpLocationSync} from '@angular/router/upgrade';
+import { setUpLocationSync } from '@angular/router/upgrade';
+
+import { UsersService } from "./services/users/users.service";
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,14 @@ import {setUpLocationSync} from '@angular/router/upgrade';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private upgrade: UpgradeModule){}
+  constructor(private upgrade: UpgradeModule,
+              private userService: UsersService
+              ){}
 
   ngOnInit() {
     this.upgrade.bootstrap(document.body, ['quicktech']);
     setUpLocationSync(this.upgrade);
-
+    this.userService.getCurrentUser();
   }
+
 }
