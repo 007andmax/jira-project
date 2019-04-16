@@ -230,8 +230,13 @@
 
         $scope.clearDateFilter = function() {
           console.log('clear');
+          $scope.dateFilter =  {startDate: null, endDate: null};
+          $scope.stopReqeust = false;
+          $scope.filteredPayments = [];
+          $scope.payments = [];
+          $scope.sortByItem = null;
+          $scope.offset = 0;
           $scope.data = $scope.returnData();
-          $scope.resetAllFilters();
           $scope.myPagingFunction();
         };
 
