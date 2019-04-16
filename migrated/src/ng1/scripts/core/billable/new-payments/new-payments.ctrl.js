@@ -33,9 +33,20 @@
         $scope.getStopScrollStatus = function() {
           return $scope.stopScroll;
         };
+
+        $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
+
+        function getCompaniesNames(list) {
+          const filteredArray = [];
+          list.map((item) => {
+            filteredArray.push(item.name);
+          });
+          return filteredArray;
+        }
+        console.log($scope.companiesitem, '$scope.companiesitem');
+
         $scope.myPagingFunction = function (data) {
           $scope.stopScroll = true;
-          console.log($scope.stopScroll, '123512351235123512351235123');
           if (!$scope.stopReqeust) {
             $scope.offset = $scope.offset + $scope.limitValue;
             if (data) {
@@ -47,17 +58,9 @@
               if (res.length > 0 && Array.isArray(res)) {
                 $scope.payments = [...$scope.payments, ...res];
                 $scope.filteredPayments = [...$scope.filteredPayments, ...res];
-                console.log($scope.filteredPayments, 'RES');
                 $scope.filteredPayments.map(function(item) {
                   return $scope.showTooltipArray.push(false);
                 });
-
-                $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
-                  if (acc.indexOf(el.clientCompanyName) === -1) {
-                    acc.push(el.clientCompanyName);
-                  }
-                  return acc;
-                }, []);
               } else {
                 $scope.stopReqeust = true;
               }
@@ -158,7 +161,7 @@
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
-            // case 'number':
+            // case 'number': TODO: when back will be done
             //   console.log('number');
             //   $scope.resetAllFiltersForSort();
             //   $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
@@ -280,17 +283,15 @@
           $scope.filteredPayments = [];
           $scope.payments = [];
           $scope.companyFilterName = null;
-          $scope.data = $scope.returnData();
           $scope.offset = 0;
+          $scope.data = $scope.returnData();
           $scope.myPagingFunction($scope.data)
         };
 
         $scope.$watch('filterCompany', function(value, oldVal) {
-          console.log(value, 'value');
-          console.log(value.length, 'value');
           $scope.companyFilterName = value;
 
-          if(value.length > 1) {
+          if(value && value.length > 1) {
             $scope.resetAllFiltersForSort();
             $scope.stopReqeust = false;
             $scope.offset = 0;
@@ -342,14 +343,6 @@
           $scope.filteredPayments.map(function(item) {
             return $scope.showTooltipArray.push(false);
           });
-
-          $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
-            if (acc.indexOf(el.clientCompanyName) === -1) {
-              acc.push(el.clientCompanyName);
-            }
-
-            return acc;
-          }, []);
 
         });
       }]);
