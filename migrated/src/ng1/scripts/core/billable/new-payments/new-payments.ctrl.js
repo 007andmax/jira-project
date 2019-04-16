@@ -280,6 +280,7 @@
 
 
         $scope.resetFilter = function() {
+          $scope.stopReqeust = false;
           $scope.filteredPayments = [];
           $scope.payments = [];
           $scope.companyFilterName = null;
