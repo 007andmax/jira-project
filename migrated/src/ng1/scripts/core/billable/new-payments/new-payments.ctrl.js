@@ -48,6 +48,16 @@
                 $scope.payments = [...$scope.payments, ...res];
                 $scope.filteredPayments = [...$scope.filteredPayments, ...res];
                 console.log($scope.filteredPayments, 'RES');
+                $scope.filteredPayments.map(function(item) {
+                  return $scope.showTooltipArray.push(false);
+                });
+
+                $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
+                  if (acc.indexOf(el.clientCompanyName) === -1) {
+                    acc.push(el.clientCompanyName);
+                  }
+                  return acc;
+                }, []);
               } else {
                 $scope.stopReqeust = true;
               }
@@ -329,17 +339,17 @@
 
           $scope.payments = res;
           $scope.filteredPayments = res;
-          // $scope.filteredPayments.map(function(item) {
-          //   return $scope.showTooltipArray.push(false);
-          // });
+          $scope.filteredPayments.map(function(item) {
+            return $scope.showTooltipArray.push(false);
+          });
 
-          // $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
-          //   if (acc.indexOf(el.clientCompanyName) === -1) {
-          //     acc.push(el.clientCompanyName);
-          //   }
-          //
-          //   return acc;
-          // }, []);
+          $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
+            if (acc.indexOf(el.clientCompanyName) === -1) {
+              acc.push(el.clientCompanyName);
+            }
+
+            return acc;
+          }, []);
 
         });
       }]);
