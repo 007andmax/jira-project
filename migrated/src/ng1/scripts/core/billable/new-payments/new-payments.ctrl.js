@@ -48,22 +48,14 @@
                 $scope.payments = [...$scope.payments, ...res];
                 $scope.filteredPayments = [...$scope.filteredPayments, ...res];
                 console.log($scope.filteredPayments, 'RES');
-                $scope.filteredPayments.map(function(item) {
-                  return $scope.showTooltipArray.push(false);
-                });
-
-                $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
-                  if (acc.indexOf(el.clientCompanyName) === -1) {
-                    acc.push(el.clientCompanyName);
-                  }
-                  return acc;
-                }, []);
               } else {
                 $scope.stopReqeust = true;
               }
+              return new Promise(() => {
+                $scope.stopScroll = false;
+              });
             });
           }
-          $scope.stopScroll = false;
           console.log($scope.stopScroll, '123512351235123512351235123');
         };
 
@@ -253,6 +245,10 @@
 
         }, true);
 
+        $scope.$watch('stopScroll', function(val) {
+          console.log(val, '1235');
+        }, true);
+
         $scope.resetAllFilters = function(dateFilterClear) {
           $scope.dateFilter = !dateFilterClear ? {startDate: null, endDate: null} : $scope.dateFilter;
           $scope.stopReqeust = false;
@@ -271,15 +267,29 @@
 
 
         $scope.resetFilter = function() {
-          $scope.wasFilterReset = true;
+          $scope.filteredPayments = [];
+          $scope.payments = [];
+          $scope.companyFilterName = null;
+          $scope.data = $scope.returnData();
+          $scope.offset = 0;
+          $scope.myPagingFunction($scope.data)
         };
 
         $scope.$watch('filterCompany', function(value, oldVal) {
           console.log(value, 'value');
+          console.log(value.length, 'value');
           $scope.companyFilterName = value;
-          $scope.resetAllFiltersForSort();
-          $scope.data = $scope.returnData();
-          if(value) { $scope.myPagingFunction($scope.data)}
+
+          if(value.length > 1) {
+            $scope.resetAllFiltersForSort();
+            $scope.stopReqeust = false;
+            $scope.offset = 0;
+            $scope.data = $scope.returnData();
+            console.log('51235123');
+            $scope.filteredPayments = [];
+            $scope.payments = [];
+            $scope.myPagingFunction($scope.data)
+          }
         });
 
 
@@ -301,39 +311,6 @@
           })
         };
 
-        function filterPayments() {
-
-          $scope.wasFilterReset = false;
-
-          if (!$scope.payments) return;
-          $scope.filteredPayments = $scope.payments.filter(function(el) {
-            var date = moment(el.createdAt);
-            var result = true;
-
-            if ($scope.dateFilter.startDate && $scope.dateFilter.endDate) {
-              result = result && date >= $scope.dateFilter.startDate && date <= $scope.dateFilter.endDate;
-            }
-
-            if ($scope.filterCompany && $scope.filterCompany !== '' && $scope.filterCompany !== ' ') {
-              result = result && ((el.invoiceNumbers && el.invoiceNumbers.findIndex(function(el) { return el.includes($scope.filterCompany) }) > -1) || (el.partialPaidInvoice && el.partialPaidInvoice.indexOf($scope.filterCompany) > -1) || el.clientCompanyName.indexOf($scope.filterCompany) > -1)
-            }
-
-            if ($scope.sortByValue) {
-              if ($scope.sortByValue === 'refund') {
-                result = result && el.refundMethod;
-              } else {
-                result = result && !el.refundMethod;
-              }
-            }
-
-            return result;
-          });
-
-          $scope.filteredPayments.map(function(item) {
-            $scope.showTooltipArray.push(false);
-          });
-        }
-
         $scope.showTooltip = function(event, index, type) {
           event.stopPropagation();
           return type ? $scope.showTooltipArray[index] = true : $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
@@ -342,9 +319,9 @@
         $scope.hideAllTooltiip = function(event) {
           event.preventDefault();
           $scope.showTooltipArray = [];
-          $scope.filteredPayments.map(function(item) {
-            return $scope.showTooltipArray.push(false);
-          });
+          // $scope.filteredPayments.map(function(item) {
+          //   return $scope.showTooltipArray.push(false);
+          // });
         };
 
 

@@ -71,6 +71,7 @@
     <ul class="qt-list qt-companies qt-users users-bg new-payments"
         infinite-scroll="myPagingFunction()"
         infinite-scroll-distance="0"
+        infinite-scroll-container=".qt-companies"
         infinite-scroll-disabled= "stopScroll"
         ng-if="filteredPayments"
         ng-click="hideAllTooltiip($event)">
@@ -143,7 +144,7 @@
 
         <li class="list-company-row"
             ng-if="filteredPayments && filteredPayments.length > 0"
-            ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse">
+            ng-repeat="payment in filteredPayments">
 
           <div class="col-xs-1" style="width: 3%">
             <label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"
