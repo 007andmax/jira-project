@@ -37,6 +37,7 @@
       'daterangepicker'
     ]);
 
+
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$provide',
     function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider, $provide) {
 

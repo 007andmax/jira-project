@@ -22,6 +22,7 @@ import { PasswordManagerTableComponent } from './components/password-manager/pas
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
 import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
+import { UsersService } from "./services/users/users.service";
 
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
@@ -29,6 +30,10 @@ import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
+import {WebsocketService} from "./services/websocket.service";
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+import { myRxStompConfig } from './services/my-rx-stomp.config';
+
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -97,7 +102,20 @@ angular.module('quicktech')
         enableTracing: false
       })
   ],
+  entryComponents: [
+    LeftPanelComponent
+  ],
   providers: [
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    },
+    WebsocketService,
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     // {
     //   provide: HTTP_INTERCEPTORS,
