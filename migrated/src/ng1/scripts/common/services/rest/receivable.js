@@ -59,7 +59,7 @@
         companies: {}
       };
 
-      $http.get('/receivable').then(function (resp) {
+      $http.post('/receivable', {}).then(function (resp) {
 
         Utils.customizeArray(resp.data, data.list);
 

@@ -12,6 +12,7 @@ import { DevicesService } from "../../../services/devices/devices.service";
 import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
+import { PermissionsService } from "../../../services/permissions/permissions.service";
 
 @Component({
   selector: 'app-password-manager-edit-aside',
@@ -58,7 +59,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
     private userService: UsersService,
-    private gadgetsService: GadgetsService
+    private gadgetsService: GadgetsService,
+    private permissionsService: PermissionsService
   ) { }
 
   ngOnInit() {
@@ -438,6 +440,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   deleteRecord(recordId){
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
     this.hideAddForm();
+  }
+
+  /**
+   * getPermission
+   */
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 
 }

@@ -11,6 +11,9 @@
         <i class="icn-16 export-new"></i>
       </div>
     </div>
-    <button (click)="addRecord()" class="plus-btn">+</button>
+    <button
+      *ngIf="getPermissions('CREATE_PASSWORD')"
+      (click)="addRecord()"
+      class="plus-btn">+</button>
   </div>
 </div>

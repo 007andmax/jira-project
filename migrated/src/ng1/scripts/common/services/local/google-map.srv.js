@@ -4,7 +4,6 @@
 
   angular.module('quicktech.common.services').factory('quicktech.common.services.GoogleMapService', ['$timeout',
     function ($timeout) {
-
       var mapDiv = $('<div map-conteiner style="height:100%;"></div>');
       var alternativeMapDiv = $('<div map-conteiner style="height:100%;" alternative></div>');
 

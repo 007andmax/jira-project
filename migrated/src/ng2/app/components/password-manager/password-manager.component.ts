@@ -4,7 +4,8 @@ import { Subject } from "rxjs";
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
-import { LeftPanelPasswordManagerComponent } from "../left-panel/left-panel-password-manager/left-panel-password-manager.component";
+import { UsersService } from "../../services/users/users.service";
+import { PermissionsService } from "../../services/permissions/permissions.service";
 
 
 /**
@@ -24,6 +25,7 @@ export class PasswordManagerComponent implements OnInit {
   public selectedDate: any;
   public selectedCategory: any;
   public newRecord: Subject<boolean> = new Subject();
+  public currentUser: any;
 
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
@@ -34,7 +36,9 @@ export class PasswordManagerComponent implements OnInit {
   public constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
-    private passwordManagerService: PasswordManagerService
+    private passwordManagerService: PasswordManagerService,
+    private userService: UsersService,
+    private permissionsService: PermissionsService,
   ) {}
 
   /**
@@ -45,6 +49,8 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
+    this.getCurrentUser();
+    console.log('item');
   };
 
   /**
@@ -115,6 +121,20 @@ export class PasswordManagerComponent implements OnInit {
   private refreshFilter() {
     this.selectedUserOrDevice = {};
     this.selectedDate = null;
+  }
+
+  /**
+   * getCurrentUser
+   */
+  private getCurrentUser() {
+    this.currentUser = this.userService.currentUser;
+  }
+
+  /**
+   * getPermission
+   */
+  public getPermissions(action) {
+   return this.permissionsService.isAllowed(action)
   }
 
 }
