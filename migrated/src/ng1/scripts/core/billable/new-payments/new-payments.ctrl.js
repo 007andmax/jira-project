@@ -150,48 +150,49 @@
           console.log('sfdsfdsfdsfd', option);
           switch(option) {
             case 'date':
+              $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'PAYMENT_DATE_ASC' ? 'PAYMENT_DATE_ASC' : 'PAYMENT_DATE_DESC';
-              $scope.resetAllFilters();
+
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
-            case 'number':
-              console.log('number');
-              $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
-              $scope.resetAllFilters();
-              $scope.data = $scope.returnData();
-              $scope.myPagingFunction($scope.data);
-              break;
+            // case 'number':
+            //   console.log('number');
+            //   $scope.resetAllFiltersForSort();
+            //   $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
+            //   $scope.data = $scope.returnData();
+            //   $scope.myPagingFunction($scope.data);
+            //   break;
             case 'name':
               console.log('name');
+              $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'COMPANY_NAME_ASC'? 'COMPANY_NAME_ASC' : 'COMPANY_NAME_DESC';
-              $scope.resetAllFilters();
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
             case 'paymentMethod':
               console.log('paymentMethod');
+              $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'PAYMENT_METHOD_ASC' ? 'PAYMENT_METHOD_ASC' : 'PAYMENT_METHOD_DESC';
-              $scope.resetAllFilters();
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
             case 'amount':
               console.log('amount');
+              $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'AMOUNT_ASC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
-              $scope.resetAllFilters();
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
             case 'status':
               console.log('status');
+              $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'STATUS_ASC' ? 'STATUS_ASC' : 'STATUS_DESC';
-              $scope.resetAllFilters();
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
             default:
-              $scope.resetAllFilters();
+              $scope.resetAllFiltersForSort();
               $scope.data = $scope.returnData();
               $scope.myPagingFunction($scope.data);
               break;
@@ -209,7 +210,7 @@
             status: $scope.sortByValue ? $scope.sortByValue.toUpperCase() : null,
             sortBy: $scope.sortByItem ? $scope.sortByItem : null
           })
-        }
+        };
 
 
         $scope.dateFilterOptions = {
@@ -232,7 +233,7 @@
         $scope.sortBy = function(criteria) {
           $scope.sortByValue = criteria;
           console.log('value');
-          $scope.resetAllFilters();
+          $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
           $scope.myPagingFunction($scope.data);
         };
@@ -245,18 +246,27 @@
 
 
         $scope.$watch('dateFilter', function(val) {
-          $scope.resetAllFilters();
+          console.log(val, '1235');
+          $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
           $scope.myPagingFunction($scope.data);
 
         }, true);
 
-        $scope.resetAllFilters = function() {
-          $scope.dateFilter = {startDate: null, endDate: null};
+        $scope.resetAllFilters = function(dateFilterClear) {
+          $scope.dateFilter = !dateFilterClear ? {startDate: null, endDate: null} : $scope.dateFilter;
           $scope.stopReqeust = false;
           $scope.filteredPayments = [];
           $scope.payments = [];
-          $scope.offset = $scope.limitValue;
+          $scope.sortByItem = null;
+          $scope.offset = 0;
+        };
+
+        $scope.resetAllFiltersForSort = function() {
+          $scope.stopReqeust = false;
+          $scope.filteredPayments = [];
+          $scope.payments = [];
+          $scope.offset = 0;
         };
 
 
@@ -267,7 +277,7 @@
         $scope.$watch('filterCompany', function(value, oldVal) {
           console.log(value, 'value');
           $scope.companyFilterName = value;
-          $scope.resetAllFilters();
+          $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
           if(value) { $scope.myPagingFunction($scope.data)}
         });
@@ -342,17 +352,17 @@
 
           $scope.payments = res;
           $scope.filteredPayments = res;
-          $scope.filteredPayments.map(function(item) {
-            return $scope.showTooltipArray.push(false);
-          });
+          // $scope.filteredPayments.map(function(item) {
+          //   return $scope.showTooltipArray.push(false);
+          // });
 
-          $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
-            if (acc.indexOf(el.clientCompanyName) === -1) {
-              acc.push(el.clientCompanyName);
-            }
-
-            return acc;
-          }, []);
+          // $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
+          //   if (acc.indexOf(el.clientCompanyName) === -1) {
+          //     acc.push(el.clientCompanyName);
+          //   }
+          //
+          //   return acc;
+          // }, []);
 
         });
       }]);
