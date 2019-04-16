@@ -16,11 +16,57 @@
                 $rootScope,
                 PaymentsService) {
         $scope.showTooltipArray = [];
+        $scope.payments = [];
+        $scope.filteredPayments = [];
         $scope.limitValue = 20;
-        $scope.myPagingFunction = function () {
-          console.log('test');
-          return $scope.limitValue += 1;
+        $scope.offset = 0;
+        $scope.companyName = '';
+        $scope.invoiceNumber = '';
+        $scope.startDate = '';
+        $scope.endDate = '';
+        $scope.status = '';
+        $scope.sortBy = '';
+        $scope.stopReqeust = false;
+        $scope.stopScroll = false;
+
+        $scope.getStopScrollStatus = function() {
+          return $scope.stopScroll;
         };
+        $scope.myPagingFunction = function (data) {
+          $scope.stopScroll = true;
+          console.log($scope.stopScroll, '123512351235123512351235123');
+          if (!$scope.stopReqeust) {
+            $scope.offset = $scope.offset + $scope.limitValue;
+            if (data) {
+              $scope.data = data;
+            } else {
+              $scope.data = $scope.returnData();
+            }
+            PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
+              if (res.length > 0 && Array.isArray(res)) {
+                $scope.payments = [...$scope.payments, ...res];
+                $scope.filteredPayments = [...$scope.filteredPayments, ...res];
+                console.log($scope.filteredPayments, 'RES');
+                $scope.filteredPayments.map(function(item) {
+                  return $scope.showTooltipArray.push(false);
+                });
+
+                $scope.companies = $scope.filteredPayments.reduce(function(acc, el) {
+                  if (acc.indexOf(el.clientCompanyName) === -1) {
+                    acc.push(el.clientCompanyName);
+                  }
+                  return acc;
+                }, []);
+              } else {
+                $scope.stopReqeust = true;
+              }
+            });
+          }
+          $scope.stopScroll = false;
+          console.log($scope.stopScroll, '123512351235123512351235123');
+        };
+
+
         $scope.openModal = function(modalType, payment) {
           var template = '/ng1/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
 
@@ -130,44 +176,75 @@
         $scope.dateFilter = {startDate: null, endDate: null};
 
         $scope.clearDateFilter = function() {
-          // console.log('clear')
-          $scope.dateFilter = {startDate: null, endDate: null};
+          console.log('clear');
+          $scope.data = $scope.returnData();
+          $scope.resetAllFilters();
+          $scope.myPagingFunction();
         };
 
         $scope.sortBy = function(criteria) {
           $scope.sortByValue = criteria;
+          console.log('value');
+          $scope.resetAllFilters();
+          $scope.data = $scope.returnData();
+          $scope.myPagingFunction($scope.data);
         };
 
         $scope.sortByValue = '';
 
-        $scope.$watch('sortByValue', function(val) {
-          filterPayments();
-        })
+        // $scope.$watch('sortByValue', function(val) {
+        //   filterPayments();
+        // })
 
 
         $scope.$watch('dateFilter', function(val) {
+          $scope.resetAllFilters();
+          $scope.data = $scope.returnData();
+          $scope.myPagingFunction($scope.data);
 
-          filterPayments();
         }, true);
+
+        $scope.resetAllFilters = function() {
+          $scope.dateFilter = {startDate: null, endDate: null};
+          $scope.stopReqeust = false;
+          $scope.filteredPayments = [];
+          $scope.payments = [];
+          $scope.offset = $scope.limitValue;
+        };
 
 
         $scope.resetFilter = function() {
           $scope.wasFilterReset = true;
-        }
+        };
 
         $scope.$watch('filterCompany', function(value, oldVal) {
-          if((value && value !== '' && value !== ' ') || $scope.wasFilterReset) {
-            filterPayments();
-          }
+          console.log(value, 'value');
+          $scope.companyFilterName = value;
+          $scope.resetAllFilters();
+          $scope.data = $scope.returnData();
+          if(value) { $scope.myPagingFunction($scope.data)}
         });
 
+        $scope.returnData = function() {
+          return ({
+            limit: $scope.limitValue,
+            offset: $scope.offset,
+            startDate: $scope.dateFilter.startDate ? new Date($scope.dateFilter.startDate).getTime() : null,
+            endDate: $scope.dateFilter.endDate ? new Date($scope.dateFilter.endDate).getTime() : null,
+            companyName : $scope.companyFilterName ? $scope.companyFilterName : null,
+            status: $scope.sortByValue ? $scope.sortByValue.toUpperCase() : null
+          })
+        }
+
         $scope.onFilterClick = function() {
+          console.log('3215235§');
           $scope.filterWasClicked = true;
         };
 
         $scope.onFilterPress = function(evt) {
-
+          console.log('111111');
           if (evt.keyCode == 8) {
+            console.log('2222222');
             $scope.wasFilterReset = true;
           }
         };
@@ -224,7 +301,7 @@
         };
 
 
-        PaymentsService.getPaymentsData($scope, function(res) {
+        PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
 
           $scope.payments = res;
           $scope.filteredPayments = res;

@@ -67,8 +67,11 @@
 
     <loading-indicator ng-class="!filteredPayments ? 'loading-indicator' : ''" loading-trigger="!filteredPayments"></loading-indicator>
 
+
     <ul class="qt-list qt-companies qt-users users-bg new-payments"
-        infinite-scroll="myPagingFunction()" infinite-scroll-distance="3"
+        infinite-scroll="myPagingFunction()"
+        infinite-scroll-distance="0"
+        infinite-scroll-disabled= "stopScroll"
         ng-if="filteredPayments"
         ng-click="hideAllTooltiip($event)">
       <li class="list-heading">
@@ -140,7 +143,7 @@
 
         <li class="list-company-row"
             ng-if="filteredPayments && filteredPayments.length > 0"
-            ng-repeat="payment in filteredPayments | limitTo: limitValue | orderBy: orderByForPayments : orderPayments.reverse">
+            ng-repeat="payment in filteredPayments | orderBy: orderByForPayments : orderPayments.reverse">
 
           <div class="col-xs-1" style="width: 3%">
             <label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"
@@ -151,6 +154,7 @@
           </div>
           <div class="col-xs-1">
             {{ payment.createdAt }}
+            aa{{getStopScrollStatus()}}ss
           </div>
           <div class="col-xs-1 w-5">
 
@@ -241,8 +245,9 @@
           <img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
                ng-click="dearchiveCompany(company)" />
         </li>
-
+      <div style='clear: both;'></div>
     </ul>
+    <h1>111{{stopScroll}}222</h1>
   </div>
 
 

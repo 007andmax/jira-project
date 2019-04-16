@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
-import "rxjs-compat/add/operator/map";
 
 
 @Injectable({
@@ -26,17 +25,5 @@ export class UsersService {
       this.currentUser = res;
     });
   }
-
-  // getNewCurrentUserPermissions(){
-  //   var observable = this.http.post(this.apiUrl + 'user/watch/permissions', {})
-  //     .map(response => {
-  //       console.log(response, 'RESPONSE');
-  //       response.json()
-  //     }) // in case you care about returned json
-  //     .publishReplay();
-  //
-  //   observable.connect();
-  //   return observable;
-  // }
 
 }

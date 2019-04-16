@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     console.log('etstse');
     // this.userService.getNewCurrentUserPermissions();
     console.log(this.rxStompService, 'this.rxStompService');
-    this.topicSubscription = this.rxStompService.watch('/users/watch/permissions').subscribe((message: any) => {
+    this.topicSubscription = this.rxStompService.subsribe('/user/watch/permissions').subscribe((message: any) => {
       this.receivedMessages.push(message.body);
       console.log(message);
     });

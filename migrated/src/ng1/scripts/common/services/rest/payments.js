@@ -16,10 +16,12 @@
       var payments = [];
       var wasSubscribed = false;
 
-      function getData(url, callback) {
+      function getData(url, callback, data) {
+        console.log(data);
         var getFuture = $http({
           url: url,
-          method: 'GET'
+          method: 'post',
+          data: data ? data : null
         });
 
         Utils.handleCallback(getFuture, callback)
@@ -38,15 +40,16 @@
 
 
       function postData(url, data, callback) {
+        console.log(data, 'ddata');
         var postFuture = $http({
           url: url,
           method: 'POST',
-          data: data
+          body: data
         });
         Utils.handleCallback(postFuture, callback)
       }
 
-      function getPaymentsData(scope, callback) {
+      function getPaymentsData(data, scope, callback) {
 
         // if (payments && payments.length) {
         //   callback && callback(payments);
@@ -54,11 +57,13 @@
         // }
 
 
+        if (data) {
+          getData(urlForGetPayments, function(resp) {
+            payments = resp;
+            callback && callback(payments);
+          }, data);
+        }
 
-        getData(urlForGetPayments, function(resp) {
-          payments = resp;
-          callback && callback(payments);
-        });
 
         // if (wasSubscribed) return;
 
