@@ -146,22 +146,7 @@
         };
 
         $scope.setOrderByPayments = function (option) {
-          console.log('sfdsfdsfdsfd', option)
-          if (option === $scope.orderPayments.field) {
-            if(option !== 'readedAt') {
-              $scope.orderPayments.reverse = !$scope.orderPayments.reverse;
-            }  else {
-              $scope.sortForReadedAtReverse = !$scope.sortForReadedAtReverse
-            }
-          } else {
-            if(option === 'number') {
-              $scope.orderPayments.reverse = true;
-              $scope.orderPayments.field = option;
-            } else {
-              $scope.orderPayments.field = option;
-              $scope.orderPayments.reverse = (option === 'date');
-            }
-          }
+          console.log('sfdsfdsfdsfd', option);
         };
 
 

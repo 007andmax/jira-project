@@ -30,9 +30,7 @@ import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
-import {WebsocketService} from "./services/websocket.service";
 import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
-import { myRxStompConfig } from './services/my-rx-stomp.config';
 
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
@@ -106,16 +104,6 @@ angular.module('quicktech')
     LeftPanelComponent
   ],
   providers: [
-    {
-      provide: InjectableRxStompConfig,
-      useValue: myRxStompConfig
-    },
-    {
-      provide: RxStompService,
-      useFactory: rxStompServiceFactory,
-      deps: [InjectableRxStompConfig]
-    },
-    WebsocketService,
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     // {
     //   provide: HTTP_INTERCEPTORS,
