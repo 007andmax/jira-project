@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import "rxjs-compat/add/operator/map";
-import { WebsocketService } from '../websocket.service';
-import { Observable, Subject } from "rxjs/Rx";
 
 
 @Injectable({
@@ -13,11 +11,9 @@ export class UsersService {
 
   private apiUrl = environment.apiUrl;
   public currentUser: any;
-  public messages: Subject<any>;
 
   constructor(
-    private http: HttpClient,
-    private wsService: WebsocketService,
+    private http: HttpClient
   ) {
 
   }
