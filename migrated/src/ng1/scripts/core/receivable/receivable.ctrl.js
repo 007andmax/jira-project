@@ -36,7 +36,9 @@
 
         $scope.getInvoices($scope.data);
 
-        $scope.filterInvoicesBy = function(val) {};
+        $scope.filterInvoicesBy = function(val) {
+          console.log(val, 'VAL');
+        };
 
         $scope.showInvoice = function(invoice, goBack) {
           $scope.isInvoiceShown = goBack ? false : true;
@@ -58,8 +60,15 @@
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
-          if(value && value !== '' && value !== ' ') {
-            $scope.invoiceFilter = value;
+          console.log(value, 'invoiceFilterCompany');
+          if(value && value.length > 1) {
+            $scope.resetAllFiltersForSort();
+            $scope.data = $scope.returnData();
+            $scope.getInvoices($scope.data);
+          } else if(value === undefined) {
+            $scope.resetAllFiltersForSort();
+            $scope.data = $scope.returnData();
+            $scope.getInvoices($scope.data);
           }
         });
 
@@ -376,7 +385,7 @@
             invoiceNumber: $scope.invoiceNumber ? $scope.invoiceNumber : null,
             startDate: $scope.invoiceDateFilter.startDate ? new Date($scope.invoiceDateFilter.startDate).getTime() : null,
             endDate: $scope.invoiceDateFilter.endDate ? new Date($scope.invoiceDateFilter.endDate).getTime() : null,
-            companyName : $scope.companyFilterName ? $scope.companyFilterName : null,
+            companyName : $scope.invoiceFilterCompany ? $scope.invoiceFilterCompany : null,
             status: $scope.sortByValue ? $scope.sortByValue.toUpperCase() : null,
             sortBy: $scope.sortByItem ? $scope.sortByItem : null
           });
