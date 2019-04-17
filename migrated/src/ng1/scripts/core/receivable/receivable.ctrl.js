@@ -29,10 +29,6 @@
           });
           return filteredArray;
         }
-
-        console.log($scope.companies, '$scope.companies');
-
-
         $scope.getInvoices = function (data) {
           if (!data) {
             data = $scope.returnData();
@@ -43,7 +39,7 @@
           }, data);
           $scope.isInvoiceShown = false;
           $scope.offset += $scope.limitValue;
-        }
+        };
 
         $scope.getInvoices($scope.data);
 
@@ -94,7 +90,9 @@
         };
 
         $scope.onKeyPressInvoice = function($event) {
+          console.log();
           if ($event.keyCode === 13) {
+            $('#superTest').blur()
             $scope.onBlurInvoice($scope.invoiceNumber);
           }
         };
