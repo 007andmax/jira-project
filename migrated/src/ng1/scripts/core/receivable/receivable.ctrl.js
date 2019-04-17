@@ -72,6 +72,22 @@
           }
         });
 
+        $scope.onBlurInvoice = function(invoiceNumber) {
+          $scope.resetAllFiltersForSort();
+          $scope.stopReqeust = false;
+          $scope.offset = 0;
+          $scope.invoiceNumber = invoiceNumber;
+          $scope.data = $scope.returnData();
+          $scope.invocesList = [];
+          $scope.getInvoices($scope.data);
+        };
+
+        $scope.onKeyPressInvoice = function($event) {
+          if ($event.keyCode === 13) {
+            $scope.onBlurInvoice($scope.invoiceNumber);
+          }
+        };
+
         $scope.invoiceFilterCompany = '';
 
         $scope.PermissionsService = PermissionsService;

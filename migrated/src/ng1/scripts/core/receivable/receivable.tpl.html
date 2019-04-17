@@ -29,6 +29,16 @@
 
             <div typeahead-input-icon="invoiceFilter"></div>
           </div>
+
+          <div>
+            <input class="pointer"
+                   type="text"
+                   ng-blur="onBlurInvoice(invoiceNumberFilter)"
+                   ng-keypress="onKeyPressInvoice($event)"
+                   placeholder="number"
+                   ng-model="invoiceNumberFilter">
+          </div>
+
           <div class="clearfix sort-by">
 
             <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
