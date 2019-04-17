@@ -38,14 +38,14 @@
                   <i class="icn-sm report-caret-icon pointer" ng-show="!sortByValue"></i>
                   <i class="icn-sm icn-remove-old pointer"
                      ng-show="sortByValue"
-                     uib-tooltip="clear" tooltip-placement="top" ng-click="sortBy('')"></i>
+                     uib-tooltip="clear" tooltip-placement="top" ng-click="sortBySetItem('')"></i>
                 </div>
               </div>
               <ul class="dropdown-menu" role="menu" style="margin-top: -3px;">
-                <li><a ng-click="sortBy('Paid invoices')">Paid invoices</a></li>
-                <li><a ng-click="sortBy('Unpaid invoices')">Unpaid invoices</a></li>
-                <li><a ng-click="sortBy('Overdue invoices')">Overdue invoices</a></li>
-                <li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>
+                <li><a ng-click="sortBySetItem('Paid')">Paid invoices</a></li>
+                <li><a ng-click="sortBySetItem('Unpaid')">Unpaid invoices</a></li>
+                <li><a ng-click="sortBySetItem('Overdue')">Overdue invoices</a></li>
+                <!--<li><a ng-click="sortBy('Group by companies')">Group by companies</a></li>-->
               </ul>
             </div>
 
