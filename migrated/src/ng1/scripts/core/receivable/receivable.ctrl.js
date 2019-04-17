@@ -412,7 +412,6 @@
           $scope.filteredPayments = [];
           $scope.invocesList = [];
           $scope.offset = 0;
-          $scope.sortByItem = null;
         };
 
         $scope.returnData = function() {
