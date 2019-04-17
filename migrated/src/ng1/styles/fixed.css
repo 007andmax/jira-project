@@ -2119,6 +2119,10 @@ span.sort-span {
   border: none;
   cursor: pointer;
   transition: all .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .btn.btn-new.btn-primary,
@@ -2150,6 +2154,13 @@ span.sort-span {
 .btn-new.disabled {
   background: #edf2f6;
   color: #4f5f79;
+  border: 1px solid #c4cbd5;
+}
+
+.btn.btn-new.disabled:hover,
+.btn-new.disabled:hover {
+  color: #fff;
+  background: #c4cbd5;
 }
 
 .dropdown-assign-ticket.fixed-assign {

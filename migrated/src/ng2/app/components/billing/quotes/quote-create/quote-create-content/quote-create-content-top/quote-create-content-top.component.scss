@@ -1,0 +1,69 @@
+.quote-create__content--top {
+  padding: 30px;
+  margin-bottom: 32px;
+  [class*="col-md-"] {
+    .quote-create-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      p {
+        font-family: Graphik-Medium, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-right: 16px;
+        text-align: right;
+        width: 25%;
+      }
+      input {
+        width: 75%;
+      }
+      i {
+        position: absolute;
+        right: 12px;
+      }
+      .report-caret-icon {
+        top: calc(50% - 3px);
+      }
+      .new-calendar {
+        top: calc(50% - 8px);
+      }
+    }
+    .request-payments {
+      display: flex;
+      div {
+        &:first-child {
+          width: 25%;
+          margin-right: 16px;
+        }
+        &:last-child {
+          width: 75%;
+          p {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .new-link {
+      margin-left: 50px !important;
+    }
+    &:first-child {
+      .quote-create-field {
+        p {
+          width: 7% !important;
+        }
+        input {
+          width: 93%;
+        }
+      }
+    }
+  }
+  .col-md-12 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    p {
+      font-size: 13px;
+    }
+  }
+}

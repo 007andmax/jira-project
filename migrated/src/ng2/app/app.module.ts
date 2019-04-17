@@ -32,6 +32,12 @@ import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
 import {QuotesComponent} from './components/billing/quotes/quotes.component';
+import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
+import { QuoteCreateContentComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content.component';
+import { QuoteCreateHeaderComponent } from './components/billing/quotes/quote-create/quote-create-header/quote-create-header.component';
+import { QuoteCreateContentTopComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/quote-create-content-top.component';
+import { QuoteCreateContentBottomComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/quote-create-content-bottom.component';
+import { QuoteCreateContentNotesComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-notes/quote-create-content-notes.component';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -57,6 +63,9 @@ angular.module('quicktech')
   .directive(
     'quotesComponent',
     downgradeComponent({component: QuotesComponent}))
+  .directive(
+    'quoteCreateComponent',
+    downgradeComponent({component: QuoteCreateComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 
@@ -76,7 +85,13 @@ angular.module('quicktech')
     PasswordManagerEditAsideComponent,
     DeviceUserPipe,
     PasswordCategoryPipe,
-    QuotesComponent
+    QuotesComponent,
+    QuoteCreateComponent,
+    QuoteCreateContentComponent,
+    QuoteCreateHeaderComponent,
+    QuoteCreateContentTopComponent,
+    QuoteCreateContentBottomComponent,
+    QuoteCreateContentNotesComponent
   ],
   imports: [
     BrowserModule,
@@ -100,6 +115,11 @@ angular.module('quicktech')
         {
           path: 'ng2/quotes',
           component: QuotesComponent,
+          pathMatch: 'full'
+        },
+        {
+          path: 'ng2/quotes/quote-create',
+          component: QuoteCreateComponent,
           pathMatch: 'full'
         }
       ],
