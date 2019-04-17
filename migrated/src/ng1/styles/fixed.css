@@ -2137,12 +2137,13 @@ span.sort-span {
 .btn-new.btn-success {
   color: #fff;
   background: #2ec866;
+  border: 1px solid #189947;
 }
 
 .btn.btn-new.btn-success:hover,
 .btn-new.btn-success:hover {
   color: #fff;
-  background: #22944b;
+  background: #189947;
 }
 
 .btn.btn-new.disabled,

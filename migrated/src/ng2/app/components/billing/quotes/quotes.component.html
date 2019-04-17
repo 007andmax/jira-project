@@ -1,3 +1,78 @@
-<p>
-  quotes works!
-</p>
+<div class="quotes">
+  <div class="quotes__header">
+    <div class="quotes__header--top">
+      <h1>Quotes</h1>
+      <div class="quotes-actions">
+        <div class="input-field">
+          <input type="text"
+                 placeholder="Filter by date"
+                 class="pointer">
+        </div>
+        <div class="input-field w-280">
+          <input type="text"
+                 placeholder="Search by company"
+                 class="pointer">
+        </div>
+        <div class="input-field w-160">
+          <input type="text"
+                 placeholder="Search by number"
+                 class="pointer">
+        </div>
+        <div class="input-field w-160">
+          <input type="text"
+                 placeholder="Sort by"
+                 class="pointer">
+        </div>
+        <button class="btn-new btn-success"
+                type="button">
+          Send Quotation
+        </button>
+      </div>
+    </div>
+    <div class="quotes__header--bottom row">
+      <div class="col-md-1 w-1-5">
+        <label class="control checkbox">
+          <input type="checkbox">
+          <span class="control-indicator"
+                style="margin-top: 3px;">
+          </span>
+        </label>
+      </div>
+      <div class="col-md-1">Quote No.</div>
+      <div class="col-md-3">Customer</div>
+      <div class="col-md-2">Date</div>
+      <div class="col-md-1">Valid Until</div>
+      <div class="col-md-1">Amount</div>
+      <div class="col-md-1">Deposit</div>
+      <div class="col-md-1">Status</div>
+    </div>
+  </div>
+  <div class="quotes__content">
+    <div class="quotes__content--item row">
+      <div class="col-md-1 w-1-5">
+        <label class="control checkbox">
+          <input type="checkbox">
+          <span class="control-indicator"
+                style="margin-top: 3px;">
+          </span>
+        </label>
+      </div>
+      <div class="col-md-1">#0001</div>
+      <div class="col-md-3 g-m">Alicia Stranger</div>
+      <div class="col-md-2">06 Nov 2018</div>
+      <div class="col-md-1">10 Dec 2018</div>
+      <div class="col-md-1">$86434</div>
+      <div class="col-md-1">$869.09</div>
+      <div class="col-md-1">
+        <!-- status-in-progress - Read-->
+        <!-- success-status - Approved-->
+        <!-- changing-status - Unread-->
+        <!-- error-status - Expired-->
+        <div class="quote-status status-in-progress">Read</div>
+        <a class="hit-area ha-20-20 pointer">
+          <i class="icn-sm icn-more-light-grey"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4576,7 +4576,8 @@ Devices tab
 
 .payment-status,
 .network-scan-status,
-.invoice-status {
+.invoice-status,
+.quote-status{
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;

@@ -66,5 +66,11 @@ ngb-typeahead-window {
   width: 20px;
   height: 20px;
   border: 0.1rem solid #4f5f79;
-  border-top-color: #9CA5B6;
+  border-top-color: #9ca5b6;
+}
+
+.left-panel-closed {
+  .quotes__header {
+    width: calc(100vw - 85px) !important;
+  }
 }
