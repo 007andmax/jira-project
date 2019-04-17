@@ -46,10 +46,7 @@
         }
 
         $scope.getPaymentsList = function (data) {
-          console.log($scope.stopScroll, '$scope.stopScroll');
           $scope.stopScroll = true;
-          console.log($scope.stopScroll, '$scope.stopScroll');
-          console.log($scope.stopReqeust, '$scope.stopScroll');
           if (!$scope.stopReqeust) {
             $scope.stopReqeust = true;
             if (data) {

@@ -1,6 +1,8 @@
 <ul ng-if="!isInvoiceShown"
     infinite-scroll="getInvoices()"
     infinite-scroll-distance="0"
+    infinite-scroll-distance="5"
+    infinite-scroll-disabled= "stopScroll"
     class="qt-list company-devices qt-users invoices-list">
   <li class="list-item"
       style="border-top: 1px solid #eee;"
