@@ -366,13 +366,13 @@
               break;
             case 'sum':
               $scope.resetAllFiltersForSort();
-              $scope.sortByItem = $scope.sortByItem !== 'BALANCE_ASC' ? 'BALANCE_ASC' : 'BALANCE_DESC';
+              $scope.sortByItem = $scope.sortByItem !== 'AMOUNT_ASC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
               $scope.data = $scope.returnData();
               $scope.getInvoices($scope.data);
               break;
             case 'balance':
               $scope.resetAllFiltersForSort();
-              $scope.sortByItem = $scope.sortByItem !== 'AMOUNT_ASC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
+              $scope.sortByItem = $scope.sortByItem !== 'BALANCE_ASC' ? 'BALANCE_ASC' : 'BALANCE_DESC';
               $scope.data = $scope.returnData();
               $scope.getInvoices($scope.data);
               break;
