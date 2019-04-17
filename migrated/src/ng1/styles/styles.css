@@ -1465,6 +1465,10 @@ bold {
   word-break: break-all;
 }
 
+.password-content__list .password-content__list--item [class*='col-md-'] {
+  padding: 24px 15px;
+}
+
 .products-content__list .products-content__list--header [class*='col-md-'],
 .password-content__list .password-content__list--header [class*='col-md-'] {
   white-space: nowrap;
@@ -1492,13 +1496,19 @@ bold {
   position: relative;
 }
 
+.password-content__list--item {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+}
+
 .password-content__list--item .password-icon:before {
   position: absolute;
   content: '';
   width: 40px;
   height: 40px;
   left: -40px;
-  top: -8px;
+  top: 16px;
 }
 
 .password-content__list--item .col-md-3.password-email:before {
@@ -1531,6 +1541,8 @@ bold {
 
 .password-content__list--item .btn-actions {
   width: 4%;
+  display: flex;
+  align-items: flex-start;
 }
 
 .password-selected .new-link {
