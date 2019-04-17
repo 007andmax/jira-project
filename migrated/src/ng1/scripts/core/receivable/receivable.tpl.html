@@ -23,8 +23,7 @@
                    autocomplete="off"
                    ng-model="invoiceFilterCompany"
                    ng-change="filterInvoicesBy(invoiceFilterCompany)"
-
-                   uib-typeahead="company.name as company.name for company in receivableCompanies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
+                   uib-typeahead="company as company for company in companies | orderBy:'toString()'"
                    qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
             <div typeahead-input-icon="invoiceFilter"></div>

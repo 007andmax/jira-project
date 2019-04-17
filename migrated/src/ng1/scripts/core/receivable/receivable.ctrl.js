@@ -20,6 +20,17 @@
         $scope.companyFilterName = null;
         $scope.sortByValue = null;
         $scope.sortByItem = null;
+        $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
+
+        function getCompaniesNames(list) {
+          const filteredArray = [];
+          list.map((item) => {
+            filteredArray.push(item.name);
+          });
+          return filteredArray;
+        }
+
+        console.log($scope.companies, '$scope.companies');
 
 
         $scope.getInvoices = function (data) {
