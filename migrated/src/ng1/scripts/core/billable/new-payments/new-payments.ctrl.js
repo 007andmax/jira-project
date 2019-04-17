@@ -200,7 +200,6 @@
           $scope.sortByItem = null;
           $scope.offset = 0;
           $scope.data = $scope.returnData();
-          console.log('clearDateFilter');
           $scope.myPagingFunction();
         };
 
@@ -208,21 +207,18 @@
           $scope.sortByValue = criteria;
           $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
-          console.log('sortBy');
           $scope.myPagingFunction($scope.data);
         };
 
         $scope.sortByValue = '';
 
         $scope.$watch('invoiceNumberFilter', function(val) {
-          console.log(val,'test');
         });
 
 
         $scope.$watch('dateFilter', function(val) {
           $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
-          console.log('dateFilter');
           $scope.myPagingFunction($scope.data);
 
         }, true);
@@ -254,7 +250,6 @@
           $scope.companyFilterName = null;
           $scope.offset = 0;
           $scope.data = $scope.returnData();
-          console.log('resetFilter');
           $scope.myPagingFunction($scope.data)
         };
 
@@ -268,20 +263,12 @@
             $scope.data = $scope.returnData();
             $scope.filteredPayments = [];
             $scope.payments = [];
-            console.log('filterCompany');
             $scope.myPagingFunction($scope.data)
           }
         });
 
 
         $scope.onFilterPress = function(evt) {
-          console.log('111111');
-          console.log(evt.keyCode,'111111');
-
-          if (evt.keyCode == 13) {
-            console.log('2222222');
-
-          }
         };
 
         $scope.onBlurInvoice = function(invoiceNumber) {
@@ -292,7 +279,6 @@
           $scope.data = $scope.returnData();
           $scope.filteredPayments = [];
           $scope.payments = [];
-          console.log('onBlurInvoice');
           $scope.myPagingFunction($scope.data);
         };
 

@@ -56,7 +56,7 @@
           return method.split('_').map(function(el) {
             return el[0].toUpperCase() + el.slice(1).toLowerCase();
           }).join(' ');
-        }
+        };
 
         $scope.allPayments.sort(function(a, b) {
           var a = new Date(a.createdAt);
@@ -93,13 +93,7 @@
 
         };
 
-        $scope.getPaidOnDate = function() {
-          // var paidOn =  new Date($scope.invoice.paidOn).getTime();
-          // var paid = (today - paidOn)/86400000;
-          // $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(paid))) + 3000000000 ;
-          // $scope.invoice.dueDatePositionForSorting = 2;
-          // return Math.floor(Math.abs(paid));
-        };
+        $scope.getPaidOnDate = function() {};
 
 
         $scope.sentInvoice = function () {

@@ -1111,7 +1111,6 @@
         }, function(val) {
           if (val) {
             $rootScope.shouldUpdateReceivable = false;
-
             uploadReceivable();
           }
         })

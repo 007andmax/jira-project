@@ -1,7 +1,10 @@
-<ul ng-if="!isInvoiceShown" class="qt-list company-devices qt-users invoices-list">
+<ul ng-if="!isInvoiceShown"
+    infinite-scroll="getInvoices()"
+    infinite-scroll-distance="0"
+    class="qt-list company-devices qt-users invoices-list">
   <li class="list-item"
       style="border-top: 1px solid #eee;"
-      ng-repeat="invoice in allInvoices | limitTo: allInvoices.length | orderBy: orderByForInvoices : orderInvoices.reverse  track by invoice.id"
+      ng-repeat="invoice in invocesList track by $index"
       ng-controller="quicktech.core.receivable.invoiceCtrl"
       ng-show="true"
       on-finish-render="hideLoadingIndicator()">

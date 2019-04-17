@@ -48,6 +48,21 @@
       return result;
     }
 
+    function getInvoiceDataTable(scope, callback, data) {
+      if (!scope || !scope.$id) {
+        throw 'First argument must be Angularjs scope!'
+      }
+      $http.post('/receivable', data).then(function (resp) {
+        if (callback) {
+          if (resp.data.list) {
+            callback(resp.data.list);
+          } else {
+            callback(resp.data);
+          }
+        }
+      })
+    }
+
     function getReceivableInvoicesData(scope, callback) {
 
       if (!scope || !scope.$id) {
@@ -129,52 +144,12 @@
             }
 
 
-            // for (var i = 0; i < invoiceIds.length; i++) {
-            //
-            //   var invoiceId = invoiceIds[i].id,
-            //     invoiceCompanyId = undefined;
-            //
-            //   for (var j = 0; j < data.list.length; j++) {
-            //
-            //     var inv = data.list[j];
-            //
-            //     if (invoiceId === inv.id) {
-            //       data.list.splice(j, 1);
-            //       invoiceCompanyId = inv.company.id;
-            //       break;
-            //     }
-            //   }
-            //
-            //   // if (invoiceCompanyId && data.companies[invoiceCompanyId]) {
-            //   //
-            //   //   var invoices = data.companies[invoiceCompanyId],
-            //   //     index = Utils.indexOfId(invoices, invoiceId);
-            //   //
-            //   //   if (invoices.length <= 1) {
-            //   //     delete data.companies[invoiceCompanyId];
-            //   //   } else if (index > -1) {
-            //   //     invoices.splice(index, 1);
-            //   //   }
-            //   // }
-            // }
+
           } else if (newChange.action === 'INVOICE_ROLLBACK') {
             var invoice = Utils.findById(data.list, newChange.data.id);
-            Utils.customizeObj(newChange.data, invoice)
-
-            // console.log(invoice, 'invoice')
+            Utils.customizeObj(newChange.data, invoice);
             invoice.status = newChange.data.status;
           }
-          /*else if (newChange.action == 'COMPANY_ARCHIVED') {
-
-           delete data.companies[newChange.data.id];
-
-           for (var i = 0; i < data.list.length; i++) {
-           if (data.list[i].company.id === newChange.data.id) {
-           data.list.splice(i, 1);
-           i--;
-           }
-           }
-           }*/
 
           if (callback) {
             callback(data);
@@ -284,6 +259,7 @@
       getReceivableGraphData: getReceivableGraphData,
       getReceivableInvoicesData: getReceivableInvoicesData,
       getInvoiceDataForPreview: getInvoiceDataForPreview,
+      getInvoiceDataTable: getInvoiceDataTable,
       receivePayment: receivePayment,
       resendInvoice: resendInvoice,
       resendInvoices: resendInvoices,
