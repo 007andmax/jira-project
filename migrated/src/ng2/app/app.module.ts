@@ -31,7 +31,7 @@ import { PasswordManagerEditAsideComponent } from './components/password-manager
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
-
+import {QuotesComponent} from './components/billing/quotes/quotes.component';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -50,11 +50,13 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
 angular.module('quicktech')
   .directive(
     'passwordManager',
-    downgradeComponent({component: PasswordManagerComponent})
-
-  ).directive(
+    downgradeComponent({component: PasswordManagerComponent})  )
+  .directive(
   'leftPanelComponent',
   downgradeComponent({component: LeftPanelComponent}))
+  .directive(
+    'quotesComponent',
+    downgradeComponent({component: QuotesComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 
@@ -73,7 +75,8 @@ angular.module('quicktech')
     DateFormatPipe,
     PasswordManagerEditAsideComponent,
     DeviceUserPipe,
-    PasswordCategoryPipe
+    PasswordCategoryPipe,
+    QuotesComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +95,11 @@ angular.module('quicktech')
         {
           path: 'ng2/password-manager',
           component: PasswordManagerComponent,
+          pathMatch: 'full'
+        },
+        {
+          path: 'ng2/quotes',
+          component: QuotesComponent,
           pathMatch: 'full'
         }
       ],
