@@ -5197,8 +5197,7 @@ select[multiple].input-lg {
   }
 }
 
-html[lang='\
-en'] input {
+html[lang='\en'] input {
   line-height: 0;
 }
 
