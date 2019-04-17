@@ -670,7 +670,7 @@
     border-radius: 0;
     display: block;
     max-width: 414px;
-    z-index: 2;
+    /*z-index: 2;*/
   }
   
   .mob-filters-btn:after {
@@ -1726,6 +1726,7 @@
     bottom: 0;
     left: 0;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+    z-index: 3;
   }
   
   .mob-ticket-buttons button {
@@ -2533,7 +2534,7 @@
   }
   
   .password-content__modal--content {
-    padding: 0 5px 70px;
+    padding: 0 5px 100px;
     margin-top: 56px;
   }
   
