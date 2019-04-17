@@ -23,7 +23,7 @@
                      autocomplete="off"
                      ng-model="filterCompany"
                      ng-click="onFilterClick()"
-                     ng-keydown="onFilterPress($event)"
+                     ng-keydown="onKeyPressInvoice($event)"
                      uib-typeahead="company as company for company in companies | orderBy:'toString()'"
                      qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
@@ -36,6 +36,8 @@
                      ng-blur="onBlurInvoice(invoiceNumberFilter)"
                      ng-keypress="onKeyPressInvoice($event)"
                      placeholder="number"
+                     ng-model-options="{ debounce: 10 }"
+                     id="inputNumber"
                      ng-model="invoiceNumberFilter">
             </div>
 

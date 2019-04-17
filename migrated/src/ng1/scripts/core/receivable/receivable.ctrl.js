@@ -35,7 +35,6 @@
           }
           ReceivableService.getInvoiceDataTable($scope, function(resp) {
             $scope.invocesList = [...$scope.invocesList, ...resp];
-            console.log($scope.uploadedReceivable, 'REs');
           }, data);
           $scope.isInvoiceShown = false;
           $scope.offset += $scope.limitValue;
@@ -90,10 +89,8 @@
         };
 
         $scope.onKeyPressInvoice = function($event) {
-          console.log();
           if ($event.keyCode === 13) {
-            $('#superTest').blur()
-            $scope.onBlurInvoice($scope.invoiceNumber);
+            $('#inputNumber').blur();
           }
         };
 

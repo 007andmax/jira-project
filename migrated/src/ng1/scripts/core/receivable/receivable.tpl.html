@@ -32,7 +32,8 @@
           <div>
             <input class="pointer"
                    type="text"
-                   id="superTest"
+                   id="inputNumber"
+                   ng-model-options="{ debounce: 10 }"
                    ng-blur="onBlurInvoice(invoiceNumberFilter)"
                    ng-keypress="onKeyPressInvoice($event)"
                    placeholder="number"

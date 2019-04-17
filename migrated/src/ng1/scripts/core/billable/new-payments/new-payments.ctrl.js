@@ -29,6 +29,7 @@
         $scope.stopReqeust = false;
         $scope.stopScroll = false;
         $scope.sortByItem = null;
+        $scope.invoiceNumberFilter = null;
 
         $scope.getStopScrollStatus = function() {
           return $scope.stopScroll;
@@ -276,9 +277,9 @@
 
         $scope.onBlurInvoice = function(invoiceNumber) {
           $scope.resetAllFiltersForSort();
+          $scope.invoiceNumber = $scope.invoiceNumberFilter;
           $scope.stopReqeust = false;
           $scope.offset = 0;
-          $scope.invoiceNumber = invoiceNumber;
           $scope.data = $scope.returnData();
           $scope.filteredPayments = [];
           $scope.payments = [];
@@ -287,7 +288,7 @@
 
         $scope.onKeyPressInvoice = function($event) {
           if ($event.keyCode === 13) {
-            $scope.onBlurInvoice($scope.invoiceNumber);
+            $('#inputNumber').blur();
           }
         };
 
