@@ -46,7 +46,7 @@
               $scope.stopScroll = false;
               setTimeout(() => {
                 $scope.stopReqeust = false;
-              }, 1000);
+              }, 500);
 
             });
           }
