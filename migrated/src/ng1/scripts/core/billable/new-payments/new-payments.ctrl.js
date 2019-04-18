@@ -48,13 +48,13 @@
         $scope.getPaymentsList = function (data) {
           $scope.stopScroll = true;
           if (!$scope.stopReqeust) {
-            $scope.stopReqeust = true;
             if (data) {
               $scope.data = data;
             } else {
               $scope.data = $scope.returnData();
             }
             console.log('12523');
+            $scope.stopReqeust = true;
             PaymentsService.getPaymentsDataTable($scope, function (res) {
               if (res.length > 0 && Array.isArray(res)) {
                 $scope.payments = [...$scope.payments, ...res];
@@ -71,7 +71,7 @@
               setTimeout(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
-              }, 300);
+              }, 700);
             });
           }
         };
