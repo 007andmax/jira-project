@@ -16,6 +16,7 @@
           limit: $scope.limitValue,
           offset: $scope.offset,
         };
+        $scope.stopScroll = false;
         $scope.invoiceNumber = null;
         $scope.companyFilterName = null;
         $scope.sortByValue = null;
