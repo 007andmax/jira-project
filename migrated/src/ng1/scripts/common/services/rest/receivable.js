@@ -52,7 +52,7 @@
       if (!scope || !scope.$id) {
         throw 'First argument must be Angularjs scope!'
       }
-      $http.post('/receivable', data).then(function (resp) {
+      return $http.post('/receivable', data).then(function (resp) {
         if (callback) {
           if (resp.data.list) {
             callback(resp.data.list);
