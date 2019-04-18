@@ -34,9 +34,6 @@
 
         $scope.getInvoices = function (data) {
           $scope.stopScroll = true;
-          console.log('start');
-          console.log($scope.stopScroll, 'start');
-          console.log($scope.stopReqeust, 'start');
           if (!data) {
             data = $scope.returnData();
           }
@@ -51,9 +48,7 @@
               setTimeout(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
-                console.log($scope.stopScroll, 'end');
-                console.log($scope.stopReqeust, 'end');
-              }, 900);
+              }, 300);
 
             });
           } else {
