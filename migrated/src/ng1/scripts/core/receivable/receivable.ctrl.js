@@ -39,7 +39,7 @@
           }
           if (!$scope.stopReqeust) {
             $scope.stopReqeust = true;
-            ReceivableService.getInvoiceDataTable($scope, function(resp) {
+            ReceivableService.getPaymentsDataTable($scope, function(resp) {
               $scope.invocesList = [...$scope.invocesList, ...resp];
             }, data).then(() => {
               $scope.isInvoiceShown = false;

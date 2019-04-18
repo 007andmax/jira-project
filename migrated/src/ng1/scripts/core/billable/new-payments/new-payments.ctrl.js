@@ -54,21 +54,24 @@
             } else {
               $scope.data = $scope.returnData();
             }
-            PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
+            console.log('12523');
+            PaymentsService.getPaymentsDataTable($scope, function (res) {
               if (res.length > 0 && Array.isArray(res)) {
                 $scope.payments = [...$scope.payments, ...res];
                 $scope.filteredPayments = [...$scope.filteredPayments, ...res];
-                $scope.filteredPayments.map(function(item) {
+                $scope.filteredPayments.map(function (item) {
                   return $scope.showTooltipArray.push(false);
                 });
               } else {
                 $scope.stopReqeust = true;
               }
-              return new Promise(() => {
-                $scope.offset = $scope.offset + $scope.limitValue;
-                $scope.stopScroll = false;
+            }, $scope.data).then(() => {
+              $scope.offset += $scope.limitValue;
+              $scope.offset = $scope.offset + $scope.limitValue;
+              setTimeout(() => {
                 $scope.stopReqeust = false;
-              });
+                $scope.stopScroll = false;
+              }, 300);
             });
           }
         };

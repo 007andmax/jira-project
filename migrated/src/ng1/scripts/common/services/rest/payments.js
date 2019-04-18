@@ -38,9 +38,24 @@
       //   }
       // })
 
+      function getPaymentsDataTable(scope, callback, data) {
+        if (!scope || !scope.$id) {
+          throw 'First argument must be Angularjs scope!'
+        }
+        return $http.post('/payments', data).then(function (resp) {
+          if (callback) {
+            if (resp.data.list) {
+              callback(resp.data.list);
+            } else {
+              callback(resp.data);
+            }
+          }
+        });
+      }
+
 
       function postData(url, data, callback) {
-        console.log(data, 'ddata');
+        console.log(data, 'data');
         var postFuture = $http({
           url: url,
           method: 'POST',
@@ -287,7 +302,8 @@
         getDepositNumber: getDepositNumber,
         editPayment: editPayment,
         deletePayment: deletePayment,
-        refundPayment: refundPayment
+        refundPayment: refundPayment,
+        getPaymentsDataTable: getPaymentsDataTable
       }
 
 
