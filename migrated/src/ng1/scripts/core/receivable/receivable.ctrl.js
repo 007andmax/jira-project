@@ -35,15 +35,21 @@
           if (!data) {
             data = $scope.returnData();
           }
-          ReceivableService.getInvoiceDataTable($scope, function(resp) {
-            $scope.invocesList = [...$scope.invocesList, ...resp];
-          }, data).then(() => {
-            $scope.isInvoiceShown = false;
-            $scope.offset += $scope.limitValue;
-            $scope.offset = $scope.offset + $scope.limitValue;
-            $scope.stopScroll = false;
-            $scope.stopReqeust = false;
-          });
+          if (!$scope.stopReqeust) {
+            ReceivableService.getInvoiceDataTable($scope, function(resp) {
+              $scope.stopReqeust = true;
+              $scope.invocesList = [...$scope.invocesList, ...resp];
+              setTimeout(() => {
+                console.log(125234);
+              }, 500);
+            }, data).then(() => {
+              $scope.isInvoiceShown = false;
+              $scope.offset += $scope.limitValue;
+              $scope.offset = $scope.offset + $scope.limitValue;
+              $scope.stopScroll = false;
+              $scope.stopReqeust = false;
+            });
+          }
         };
 
         $scope.getInvoices($scope.data);

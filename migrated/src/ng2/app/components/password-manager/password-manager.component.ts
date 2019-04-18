@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -14,7 +14,8 @@ import { PermissionsService } from "../../services/permissions/permissions.servi
 @Component({
   selector: 'app-password-manager',
   templateUrl: './password-manager.component.html',
-  styleUrls: ['./password-manager.component.scss']
+  styleUrls: ['./password-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PasswordManagerComponent implements OnInit {
@@ -34,12 +35,17 @@ export class PasswordManagerComponent implements OnInit {
    * @param {PasswordManagerService} passwordManagerService Service to work with filters
    */
   public constructor(
+    private cdr: ChangeDetectorRef,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
     private permissionsService: PermissionsService,
-  ) {}
+  ) {
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    }, 100);
+  }
 
   /**
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
