@@ -17,6 +17,7 @@
           offset: $scope.offset,
         };
         $scope.stopScroll = false;
+        $scope.stopReqeust = false;
         $scope.invoiceNumber = null;
         $scope.companyFilterName = null;
         $scope.sortByValue = null;
@@ -32,27 +33,31 @@
         }
 
         $scope.getInvoices = function (data) {
+          $scope.stopScroll = true;
           console.log('start');
           console.log($scope.stopScroll, 'start');
           console.log($scope.stopReqeust, 'start');
-          $scope.stopScroll = true;
           if (!data) {
             data = $scope.returnData();
           }
           if (!$scope.stopReqeust) {
+            $scope.stopReqeust = true;
             ReceivableService.getInvoiceDataTable($scope, function(resp) {
-              $scope.stopReqeust = true;
               $scope.invocesList = [...$scope.invocesList, ...resp];
             }, data).then(() => {
               $scope.isInvoiceShown = false;
               $scope.offset += $scope.limitValue;
               $scope.offset = $scope.offset + $scope.limitValue;
-              $scope.stopScroll = false;
               setTimeout(() => {
                 $scope.stopReqeust = false;
+                $scope.stopScroll = false;
+                console.log($scope.stopScroll, 'end');
+                console.log($scope.stopReqeust, 'end');
               }, 500);
 
             });
+          } else {
+            console.log('123512351235');
           }
         };
 
