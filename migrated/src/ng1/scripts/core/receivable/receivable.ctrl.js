@@ -32,6 +32,9 @@
         }
 
         $scope.getInvoices = function (data) {
+          console.log('start');
+          console.log($scope.stopScroll, 'start');
+          console.log($scope.stopReqeust, 'start');
           $scope.stopScroll = true;
           if (!data) {
             data = $scope.returnData();
