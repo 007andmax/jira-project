@@ -23,15 +23,19 @@
 
 
         $scope.getInvoices = function (data) {
+          $scope.stopScroll = true;
           if (!data) {
             data = $scope.returnData();
           }
           ReceivableService.getInvoiceDataTable($scope, function(resp) {
             $scope.invocesList = [...$scope.invocesList, ...resp];
-            console.log($scope.uploadedReceivable, 'REs');
-          }, data);
-          $scope.isInvoiceShown = false;
-          $scope.offset += $scope.limitValue;
+          }, data).then(() => {
+            $scope.isInvoiceShown = false;
+            $scope.offset += $scope.limitValue;
+            $scope.offset = $scope.offset + $scope.limitValue;
+            $scope.stopScroll = false;
+            $scope.stopReqeust = false;
+          });
         }
 
         $scope.getInvoices($scope.data);
