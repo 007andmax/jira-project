@@ -53,7 +53,7 @@
                 $scope.stopScroll = false;
                 console.log($scope.stopScroll, 'end');
                 console.log($scope.stopReqeust, 'end');
-              }, 500);
+              }, 900);
 
             });
           } else {
