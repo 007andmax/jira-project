@@ -32,16 +32,12 @@ export class UsersService {
       this.stompClient = Stomp.over(ws);
       setTimeout(() => {
         console.log('getCurrentUser');
-        if (this.stompClient.connected) {
           this.stompClient.subscribe("/user/watch/permissions/", (message) => {
             console.log('123512351235');
-            if(message.body) {
+            if (message.body) {
               console.log('test')
             }
           });
-        } else {
-          console.log('12351235');
-        }
 
       }, 3000);
 
