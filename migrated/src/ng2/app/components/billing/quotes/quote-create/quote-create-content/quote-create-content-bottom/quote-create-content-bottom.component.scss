@@ -5,7 +5,7 @@
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     [class*='col-md-'] {
-      color: #fff;
+      color: #edf2f6;
       font-size: 11px;
       font-family: "Graphik Semibold", sans-serif;
     }
@@ -22,31 +22,33 @@
         font-size: 13px;
       }
     }
-    .text-right {
-      padding: 8px 15px;
-    }
   }
   .quote-content-body {
     padding: 24px 15px;
     font-size: 13px;
     [class*="col-md-"] {
       &.text-right, &.text-left {
-        padding: 8px 15px;
+        padding: 5px 15px;
       }
     }
     > .row {
-      margin-bottom: 45px;
+      margin-bottom: 20px;
+      position: relative;
+      .icn-delete {
+        position: absolute;
+        right: -44px;
+        top: 9px;
+        cursor: pointer;
+      }
     }
     .quote-content-body--bottom {
-      [class*="col-md-"] {
-        margin-bottom: 10px;
-      }
+      padding-top: 20px;
       .col-md-11 {
         font-size: 11px;
         font-family: Graphik-Medium, sans-serif;
         font-weight: bold;
       }
-      .col-md-1.mt-5 {
+      .col-md-1.mt-10 {
         font-size: 16px;
         font-family: "Graphik Semibold", sans-serif;
       }
