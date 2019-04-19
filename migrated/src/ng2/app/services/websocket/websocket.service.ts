@@ -19,7 +19,7 @@ export class WebsocketService {
     this.stompClient = Stomp.over(ws);
     let that = this;
     console.log(this.stompClient, '123------');
-    this.stompClient.connect({}, function(frame) {
+    this.stompClient.connect({}, function(that) {
       that.stompClient.debug("connected to Stomp");
       that.subsribeToPermissions();
     });
@@ -32,6 +32,9 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         console.log('123512351235');
         console.log(this.stompClient, 'this.stompClient2');
+        var newChange = JSON.parse(message.body);
+        // commit console.log before prod update
+        console.log(newChange);
         if (message.body) {
           console.log('test')
         }
