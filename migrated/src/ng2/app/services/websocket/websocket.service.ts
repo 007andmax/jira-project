@@ -20,7 +20,7 @@ export class WebsocketService {
     let that = this;
     console.log(this.stompClient, '123------');
     this.stompClient.connect({}, function(that) {
-      that.subsribeToPermissions();
+      this.subsribeToPermissions();
     });
   }
 
