@@ -43,7 +43,7 @@ export class UsersService {
           });
         console.log(this.stompClient, 'this.stompClient3');
 
-      }, 2000);
+      }, 5000);
 
     });
   }
