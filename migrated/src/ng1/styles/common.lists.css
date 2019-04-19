@@ -5202,7 +5202,8 @@ Devices tab
   border-top: 1px solid #e7ecf2;
 }
 
-.invoice-list-heading {
+.invoice-list-heading,
+.quote-list-list-heading {
   padding: 0 30px;
 }
 
@@ -5211,11 +5212,13 @@ Devices tab
   padding-top: 10px;
 }
 
-.qt-list.invoice-list-heading li.list-heading {
+.qt-list.invoice-list-heading li.list-heading,
+.quote-list-heading li.list-heading {
   padding: 15px 0;
 }
 
-.qt-list.invoice-list-heading li.list-heading > .col-3 {
+.qt-list.invoice-list-heading li.list-heading > .col-3,
+.quote-list-heading li.list-heading > .col-3 {
   text-align: right;
 }
 

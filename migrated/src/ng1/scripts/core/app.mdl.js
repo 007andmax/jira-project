@@ -145,6 +145,10 @@
                                                                 url: '/ng2/quotes/quote-create',
                                                                 template: '<quote-create-component></quote-create-component>'
                                                               }))
+                   .state('quote-preview-component', waitForServices({
+                                                                      url: '/ng2/quotes/quote-preview',
+                                                                      template: '<quote-preview-component></quote-create-component>'
+                                                                    }))
                    .state('accounting', waitForServices({
                                                           url: '/accounting',
                                                           template: '<div ui-view></div>',

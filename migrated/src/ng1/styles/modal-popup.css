@@ -1252,6 +1252,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoices .invoices-header .invoice-create--header__btn .btn-success,
+.quote-create--header__btn .btn-success,
 .invoices .invoices-header .invoices-header-filters .save-invoice-button .btn-success {
   padding-left: 25px;
   width: 184px !important;
@@ -1268,12 +1269,14 @@ _::-webkit-:not(:root:root),
   padding-left: 12px;
 }
 
-.invoice-create--header__btn .btn {
+.invoice-create--header__btn .btn,
+.quote-create--header__btn .btn {
   font-size: 13px !important;
 }
 
 .save-invoice-button .dropdown-menu li,
-.invoice-create--header__btn li {
+.invoice-create--header__btn li,
+.quote-create--header__btn li {
   font-size: 13px;
   transition: all .3s;
   height: 40px;
@@ -1283,7 +1286,8 @@ _::-webkit-:not(:root:root),
 }
 
 .save-invoice-button .dropdown-menu li:hover,
-.invoice-create--header__btn li:hover {
+.invoice-create--header__btn li:hover,
+.quote-create--header__btn li:hover {
   background-color: #16a4fa;
   color: #fff;
   font-weight: normal;

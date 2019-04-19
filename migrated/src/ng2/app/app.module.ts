@@ -1,43 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken, NgZone } from '@angular/core';
-import { RouterModule, UrlHandlingStrategy } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
-import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { SelectModule } from 'ng2-select';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSelectModule } from 'ngx-select-ex';
-import { SidebarModule } from 'ng-sidebar';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { ClickOutsideModule } from 'ng4-click-outside';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule, InjectionToken, NgZone} from '@angular/core';
+import {RouterModule, UrlHandlingStrategy} from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
+import {UpgradeModule, downgradeComponent, downgradeInjectable} from '@angular/upgrade/static';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SelectModule} from 'ng2-select';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxSelectModule} from 'ngx-select-ex';
+import {SidebarModule} from 'ng-sidebar';
+import {ShowHidePasswordModule} from 'ngx-show-hide-password';
+import {ClickOutsideModule} from 'ng4-click-outside';
 
-import { AppComponent } from './app.component';
-import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
-import { LeftPanelComponent } from './components/left-panel/left-panel.component';
-import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
-import { MainComponent } from './components/main/main.component';
-import { PasswordRecordsTypesComponent } from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
-import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
-import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
+import {AppComponent} from './app.component';
+import {PasswordManagerComponent} from './components/password-manager/password-manager.component';
+import {LeftPanelComponent} from './components/left-panel/left-panel.component';
+import {LeftPanelPasswordManagerComponent} from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
+import {MainComponent} from './components/main/main.component';
+import {PasswordRecordsTypesComponent} from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
+import {PasswordManagerTableComponent} from './components/password-manager/password-manager-table/password-manager-table.component';
+import {PasswoordManagerHeaderComponent} from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
-import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
-import { UsersService } from "./services/users/users.service";
+import {ApiPasswordManagerService} from "./services/password-manager/api-password-manager.service";
+import {UsersService} from "./services/users/users.service";
 
-import { UserPipe } from './pipe/user.pipe';
-import { DateFormatPipe } from './pipe/date-format.pipe';
-import { CompanyPipe } from './pipe/company.pipe';
-import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
-import { DeviceUserPipe } from './pipe/device-user.pipe';
-import { PasswordCategoryPipe } from './pipe/password-category.pipe';
-import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+import {UserPipe} from './pipe/user.pipe';
+import {DateFormatPipe} from './pipe/date-format.pipe';
+import {CompanyPipe} from './pipe/company.pipe';
+import {PasswordManagerEditAsideComponent} from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
+import {DeviceUserPipe} from './pipe/device-user.pipe';
+import {PasswordCategoryPipe} from './pipe/password-category.pipe';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {QuotesComponent} from './components/billing/quotes/quotes.component';
-import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
-import { QuoteCreateContentComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content.component';
-import { QuoteCreateHeaderComponent } from './components/billing/quotes/quote-create/quote-create-header/quote-create-header.component';
-import { QuoteCreateContentTopComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/quote-create-content-top.component';
-import { QuoteCreateContentBottomComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/quote-create-content-bottom.component';
-import { QuoteCreateContentNotesComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-notes/quote-create-content-notes.component';
+import {QuoteCreateComponent} from './components/billing/quotes/quote-create/quote-create.component';
+import {QuoteCreateContentComponent} from './components/billing/quotes/quote-create/quote-create-content/quote-create-content.component';
+import {QuoteCreateHeaderComponent} from './components/billing/quotes/quote-create/quote-create-header/quote-create-header.component';
+import {QuoteCreateContentTopComponent} from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/quote-create-content-top.component';
+import {QuoteCreateContentBottomComponent} from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/quote-create-content-bottom.component';
+import {QuoteCreateContentNotesComponent} from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-notes/quote-create-content-notes.component';
+import {QuotePreviewComponent} from './components/billing/quotes/quote-preview/quote-preview.component';
 
 // import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
 
@@ -50,22 +51,26 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   }
 
   extract(url) { return url }
+
   merge(url, whole) { return url }
 }
 
 angular.module('quicktech')
   .directive(
     'passwordManager',
-    downgradeComponent({component: PasswordManagerComponent})  )
+    downgradeComponent({component: PasswordManagerComponent}))
   .directive(
-  'leftPanelComponent',
-  downgradeComponent({component: LeftPanelComponent}))
+    'leftPanelComponent',
+    downgradeComponent({component: LeftPanelComponent}))
   .directive(
     'quotesComponent',
     downgradeComponent({component: QuotesComponent}))
   .directive(
     'quoteCreateComponent',
     downgradeComponent({component: QuoteCreateComponent}))
+  .directive(
+    'quotePreviewComponent',
+    downgradeComponent({component: QuotePreviewComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 
@@ -91,7 +96,8 @@ angular.module('quicktech')
     QuoteCreateHeaderComponent,
     QuoteCreateContentTopComponent,
     QuoteCreateContentBottomComponent,
-    QuoteCreateContentNotesComponent
+    QuoteCreateContentNotesComponent,
+    QuotePreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +127,11 @@ angular.module('quicktech')
           path: 'ng2/quotes/quote-create',
           component: QuoteCreateComponent,
           pathMatch: 'full'
+        },
+        {
+          path: 'ng2/quotes/quote-preview',
+          component: QuotePreviewComponent,
+          pathMatch: 'full'
         }
       ],
       {
@@ -132,7 +143,7 @@ angular.module('quicktech')
     LeftPanelComponent
   ],
   providers: [
-    { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
+    {provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy},
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ApiInterceptor,
@@ -142,4 +153,5 @@ angular.module('quicktech')
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
