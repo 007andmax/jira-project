@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { UsersService } from "../users/users.service";
 
 
 @Injectable({
@@ -11,7 +12,9 @@ export class WebsocketService {
   private serverUrl = '/realtime';
   private stompClient;
 
-  constructor() {
+  constructor(
+    private usersService: UsersService
+  ) {
   }
 
   initializeWebSocketConnection(){
@@ -33,6 +36,7 @@ export class WebsocketService {
         console.log(this.stompClient, 'this.stompClient2');
         var newChange = JSON.parse(message.body);
         // commit console.log before prod update
+        this.usersService.changeUserPermissions(newChange.data.permission);
         console.log(newChange);
         if (message.body) {
           console.log('test')
@@ -41,7 +45,7 @@ export class WebsocketService {
       });
       console.log(this.stompClient, 'this.stompClient3');
 
-    }, 5000);
+    }, 3000);
   }
 
 }
