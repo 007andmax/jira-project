@@ -43,7 +43,7 @@ export class UsersService {
           console.log('12351235');
         }
 
-      }, 100000);
+      }, 3000);
 
     });
   }
