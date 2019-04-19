@@ -19,8 +19,8 @@ export class WebsocketService {
     this.stompClient = Stomp.over(ws);
     let that = this;
     console.log(this.stompClient, '123------');
-    this.stompClient.connect({}, function(that) {
-      this.subsribeToPermissions();
+    this.stompClient.connect({}, function() {
+      that.subsribeToPermissions();
     });
   }
 
