@@ -30,16 +30,20 @@ export class UsersService {
       this.currentUser = res;
       let ws = new SockJS(this.serverUrl);
       this.stompClient = Stomp.over(ws);
-      console.log('getCurrentUser');
-      console.log(this.stompClient, 'this.stompClient1');
-      this.stompClient.subscribe("/user/watch/permissions/", (message) => {
-        console.log('123512351235');
-        if (message.body) {
-          console.log('test')
-        }
-        console.log(this.stompClient, 'this.stompClient2');
-      });
-      console.log(this.stompClient, 'this.stompClient3');
+      setTimeout(() => {
+        console.log('getCurrentUser');
+        console.log(this.stompClient, 'this.stompClient1');
+          this.stompClient.subscribe("/user/watch/permissions/", (message) => {
+            console.log('123512351235');
+            console.log(this.stompClient, 'this.stompClient2');
+            if (message.body) {
+              console.log('test')
+            }
+
+          });
+        console.log(this.stompClient, 'this.stompClient3');
+
+      }, 2000);
 
     });
   }
