@@ -36,7 +36,7 @@ export class WebsocketService {
         console.log(this.stompClient, 'this.stompClient2');
         var newChange = JSON.parse(message.body);
         // commit console.log before prod update
-        this.usersService.changeUserPermissions(newChange.data.permission);
+        this.usersService.changeUserPermissions(newChange.data.permissions);
         console.log(newChange);
         if (message.body) {
           console.log('test')
