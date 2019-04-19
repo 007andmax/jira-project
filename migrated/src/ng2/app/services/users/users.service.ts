@@ -28,23 +28,6 @@ export class UsersService {
   getCurrentUser(){
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
       this.currentUser = res;
-      let ws = new SockJS(this.serverUrl);
-      this.stompClient = Stomp.over(ws);
-      setTimeout(() => {
-        console.log('getCurrentUser');
-        console.log(this.stompClient, 'this.stompClient1');
-          this.stompClient.subscribe("/user/watch/permissions/", (message) => {
-            console.log('123512351235');
-            console.log(this.stompClient, 'this.stompClient2');
-            var newChange = JSON.parse(message.body);
-            // commit console.log before prod update
-            console.log(newChange);
-
-          });
-        console.log(this.stompClient, 'this.stompClient3');
-
-      }, 5000);
-
     });
   }
 
