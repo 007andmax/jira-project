@@ -14,8 +14,7 @@ import { PermissionsService } from "../../services/permissions/permissions.servi
 @Component({
   selector: 'app-password-manager',
   templateUrl: './password-manager.component.html',
-  styleUrls: ['./password-manager.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./password-manager.component.scss']
 })
 
 export class PasswordManagerComponent implements OnInit {
@@ -33,18 +32,16 @@ export class PasswordManagerComponent implements OnInit {
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
    * @param {CompaniesService} companiesService Service to work with api
    * @param {PasswordManagerService} passwordManagerService Service to work with filters
+   * @param {userService} userService Service to work with user
+   * @param {permissionsService} permissionsService to work with permissions service
    */
   public constructor(
-    private cdr: ChangeDetectorRef,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
     private permissionsService: PermissionsService,
   ) {
-    setTimeout(() => {
-      this.cdr.detectChanges();
-    }, 100);
   }
 
   /**
@@ -56,7 +53,6 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
     this.getCurrentUser();
-    console.log('item');
   };
 
   /**
