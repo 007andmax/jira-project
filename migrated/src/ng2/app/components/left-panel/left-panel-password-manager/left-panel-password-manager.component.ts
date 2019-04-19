@@ -1,5 +1,5 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { USER } from "../../../const/users";
@@ -44,8 +44,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private userService: UsersService,
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private gadgetsService: GadgetsService,
-    private ngZone: NgZone
+    private gadgetsService: GadgetsService
   ) { }
 
   ngOnInit() {
@@ -53,10 +52,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
-    this.ngZone.run(() => {
-      console.log('testes');
-      this.getCompaniesList();
-    });
+    this.getCompaniesList();
   }
 
   public getCompaniesList() {
