@@ -12,9 +12,6 @@ export class UsersService {
 
   private apiUrl = environment.apiUrl;
   public currentUser: any;
-  private serverUrl = '/realtime';
-  private title = 'WebSockets chat';
-  private stompClient;
 
   constructor(
     private http: HttpClient
