@@ -9,18 +9,18 @@ import * as SockJS from 'sockjs-client';
 export class WebsocketService {
 
   private serverUrl = '/realtime';
-  private title = 'WebSockets chat';
   private stompClient;
 
   constructor() {
   }
 
   initializeWebSocketConnection(){
-    let ws = new SockJS(this.serverUrl);
+    let ws =  new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
     console.log(this.stompClient, '123------');
     this.stompClient.connect({}, function(frame) {
+      this.stompClient.debug("connected to Stomp");
       that.subsribeToPermissions();
     });
   }
@@ -29,7 +29,7 @@ export class WebsocketService {
     setTimeout(() => {
       console.log('getCurrentUser');
       console.log(this.stompClient, 'this.stompClient1');
-      this.stompClient.subscribe("/user/watch/permissions/", (message) => {
+      this.stompClient.subscribe("/user/watch/permissions", (message) => {
         console.log('123512351235');
         console.log(this.stompClient, 'this.stompClient2');
         if (message.body) {

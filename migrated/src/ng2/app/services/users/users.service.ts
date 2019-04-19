@@ -36,9 +36,9 @@ export class UsersService {
           this.stompClient.subscribe("/user/watch/permissions/", (message) => {
             console.log('123512351235');
             console.log(this.stompClient, 'this.stompClient2');
-            if (message.body) {
-              console.log('test')
-            }
+            var newChange = JSON.parse(message.body);
+            // commit console.log before prod update
+            console.log(newChange);
 
           });
         console.log(this.stompClient, 'this.stompClient3');

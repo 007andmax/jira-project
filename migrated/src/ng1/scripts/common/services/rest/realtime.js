@@ -127,9 +127,9 @@
 
     return {
       subscribe: function (url, scope, callback) {
-        subscribeConfig(
-          addSubscription(url, scope, callback)
-        );
+        // subscribeConfig(
+        //   addSubscription(url, scope, callback)
+        // );
       }
     }
 
