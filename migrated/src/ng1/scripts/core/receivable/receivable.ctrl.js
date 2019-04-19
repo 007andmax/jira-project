@@ -44,7 +44,6 @@
             }, data).then(() => {
               $scope.isInvoiceShown = false;
               $scope.offset += $scope.limitValue;
-              $scope.offset = $scope.offset + $scope.limitValue;
               setTimeout(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;

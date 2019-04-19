@@ -67,7 +67,6 @@
               }
             }, $scope.data).then(() => {
               $scope.offset += $scope.limitValue;
-              $scope.offset = $scope.offset + $scope.limitValue;
               setTimeout(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
