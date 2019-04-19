@@ -18,7 +18,7 @@
             <div>
               <input type="text"
                      class="has-dropdown pointer"
-                     placeholder="Search by number or by company"
+                     placeholder="Search by company"
                      ng-trim="false"
                      autocomplete="off"
                      ng-model="filterCompany"
@@ -35,7 +35,7 @@
                      type="text"
                      ng-blur="onBlurInvoice(invoiceNumberFilter)"
                      ng-keypress="onKeyPressInvoice($event)"
-                     placeholder="number"
+                     placeholder="Search by number"
                      ng-model-options="{ debounce: 10 }"
                      id="inputNumber"
                      ng-model="invoiceNumberFilter">

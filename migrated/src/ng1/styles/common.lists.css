@@ -377,6 +377,7 @@
 
 .new-payments.qt-companies > li {
   padding: 13px 15px;
+  border-top: none !important;
 }
 
 .new-payments .list-company-row div {

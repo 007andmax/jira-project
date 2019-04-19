@@ -1,8 +1,7 @@
 <div>
 
   <div class="invoices clearfix" ng-style="{'padding': isInvoiceShown ? '0px' : '25px'}">
-    <div ng-show="!isInvoiceShown" class="fixed-block-top" fixed-block-top
-         style=" background-color: #f3f7f9; right: 25px; ">
+    <div ng-show="!isInvoiceShown" class="invoice-header-fixed">
       <div class="invoices-header">
         <h3 style="margin: 20px 10px;">Invoices</h3>
         <div class="invoices-header-filters" slyle="position: relative;">
@@ -18,7 +17,7 @@
           <div>
             <input type="text"
                    class="has-dropdown pointer"
-                   placeholder="Search by company or number"
+                   placeholder="Search by company"
                    ng-trim="false"
                    autocomplete="off"
                    ng-model="invoiceFilterCompany"
@@ -28,7 +27,6 @@
 
             <div typeahead-input-icon="invoiceFilter"></div>
           </div>
-
           <div>
             <input class="pointer"
                    type="text"
@@ -36,10 +34,9 @@
                    ng-model-options="{ debounce: 10 }"
                    ng-blur="onBlurInvoice(invoiceNumberFilter)"
                    ng-keypress="onKeyPressInvoice($event)"
-                   placeholder="number"
+                   placeholder="Search by number"
                    ng-model="invoiceNumberFilter">
           </div>
-
           <div class="clearfix sort-by">
 
             <div uib-dropdown smart-dropdown-menu-position="dropdown-menu">
@@ -61,8 +58,6 @@
             </div>
 
           </div>
-
-
           <button
             ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
             tooltip-append-to-body="true"
@@ -71,8 +66,6 @@
             mw-controller="quicktech.core.receivable.receivePaymentCtrl"
             modal-window-class="modal-receive-payment"
             tooltip-placement="bottom">
-
-
             Process payment
           </button>
         </div>
