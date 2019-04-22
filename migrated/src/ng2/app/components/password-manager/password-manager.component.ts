@@ -133,11 +133,4 @@ export class PasswordManagerComponent implements OnInit {
     this.currentUser = this.userService.currentUser;
   }
 
-  /**
-   * getPermission
-   */
-  public getPermissions(action) {
-   return this.permissionsService.isAllowed(action)
-  }
-
 }

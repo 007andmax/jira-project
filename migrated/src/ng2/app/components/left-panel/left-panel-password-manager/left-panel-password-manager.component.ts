@@ -56,7 +56,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getCompaniesList() {
-     return this.subscription = this.companiesService.getCompaniesList().subscribe((company) => {
+     return this.subscription = this.companiesService.clientsCompany.subscribe((company) => {
        this.companiesList = this.getCompaniesNames(company);
      });
   }

@@ -309,7 +309,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   };
 
   public getCLientsList() {
-    this.companiesService.getCompaniesList().subscribe((res: any) => {
+    this.companiesService.clientsCompany.subscribe((res: any) => {
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
