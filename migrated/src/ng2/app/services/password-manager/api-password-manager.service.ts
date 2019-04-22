@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,17 @@ import { environment } from '../../../environments/environment';
 export class ApiPasswordManagerService {
 
   public apiUrl = environment.apiUrl;
+  public dataChange = new Subject<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getRecords();
+  }
 
   getRecords() {
-    return this.http.get(this.apiUrl + 'passwordRecords');
+    return this.http.get(this.apiUrl + 'passwordRecords').subscribe((response)=> {
+      console.log(response);
+      this.dataChange.next(response);
+    })
   }
 
   deleteRecord(recordId) {

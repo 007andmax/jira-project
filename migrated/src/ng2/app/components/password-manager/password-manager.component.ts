@@ -48,6 +48,7 @@ export class PasswordManagerComponent implements OnInit {
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
+    console.log('testt');
     this.getSelectCompany();
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();

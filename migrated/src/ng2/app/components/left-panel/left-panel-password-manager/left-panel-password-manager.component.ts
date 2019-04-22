@@ -125,7 +125,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getPasswordRecords() {
-    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+    this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
       (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
@@ -256,12 +256,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public get loadStatus () {
-    console.log()
     return this.company && this.companiesList;
   }
 
   public get companiesListStatus () {
-    console.log(this.companiesList, '12351');
     return this.companiesList;
   }
 

@@ -40,13 +40,14 @@ export class PasswordManagerTableComponent implements OnInit {
 
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-      console.log(category, '12351235');
        this.selectedCategory = category;
     });
   }
 
   getRecords() {
-    this.apiPasswordManagerService.getRecords().subscribe((res) => this.recordsData = res);
+    this.apiPasswordManagerService.dataChange.subscribe((res) => {
+      this.recordsData = res;
+    });
   }
 
   deleteRecord(recordId) {
@@ -56,6 +57,10 @@ export class PasswordManagerTableComponent implements OnInit {
         return this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
       });
     }
+  }
+
+  doNext(value) {
+    this.dataChange.next(value);
   }
 
   public watchDeleteRecord() {
