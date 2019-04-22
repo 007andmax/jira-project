@@ -59,10 +59,6 @@ export class PasswordManagerTableComponent implements OnInit {
     }
   }
 
-  doNext(value) {
-    this.dataChange.next(value);
-  }
-
   public watchDeleteRecord() {
     this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
       return this.deleteRecord(item);
