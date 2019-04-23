@@ -24,7 +24,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public createPasswordRecord: FormGroup;
   @ViewChild('instance') instance: NgbTypeahead;
   @ViewChild('clientType') clientType: NgbTypeahead;
-  @Output() addRecord = new EventEmitter<string>();
+  @Output() addRecord = new EventEmitter<any>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   focusClients$ = new Subject<string>();
@@ -60,8 +60,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private devicesService: DevicesService,
     private userService: UsersService,
     private gadgetsService: GadgetsService,
-    private permissionsService: PermissionsService,
-    private cdRef:ChangeDetectorRef
+    private permissionsService: PermissionsService
   ) { }
 
   ngOnInit() {
@@ -114,8 +113,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  get form() { return this.createPasswordRecord.controls; }
-
   public initForm(){
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
@@ -138,21 +135,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       ssh: [this.editItem ? this.editItem.ssh : false],
       telnet: [this.editItem ? this.editItem.telnet : false]
     });
-    if (!this.cdRef['destroyed']) {
-      this.cdRef.detectChanges();
-    }
   }
 
   public save() {
-    console.log(this.editItem, 'this.editItem');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
-    console.log(this.createPasswordRecord, 'this.createPasswordRecord.invalid');
-    console.log(isUserRequired, 'isUserRequired');
-    console.log(isSsidRequired, 'isSsidRequired');
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
@@ -166,7 +156,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public afterSaveRecord() {
-    this.addRecord.emit();
+    this.addRecord.emit(true);
     this.passwordManagerService.addRecord();
     this.initForm();
     this.showSelect = false;
@@ -182,7 +172,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   checkSsid() {
-      return (this.type === 8 && (this.createPasswordRecord.value.ssid === 0 || !this.createPasswordRecord.value.ssid))
+    return (this.type === 8 && (this.createPasswordRecord.value.ssid === 0 || !this.createPasswordRecord.value.ssid))
   }
 
   public toggleItem(newItem, type, index) {

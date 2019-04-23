@@ -22,12 +22,6 @@ export class PasswordManagerService {
     private http: HttpClient
   ) { }
 
-  setFilteredType(type) {
-    this.filteredType.emit({
-      template: type.TITLE
-    });
-  }
-
   setSelectedDeviceOrUser(item) {
     this.selectedDeviceOrUser.emit(item)
   }

@@ -33,7 +33,7 @@ export class PasswordManagerTableComponent implements OnInit {
     this.getRecords();
     this.getSelectedCategory();
     this.addNewRecords.subscribe(v => {
-      this.getRecords();
+      // this.getRecords();
     });
     this.watchDeleteRecord();
   }
