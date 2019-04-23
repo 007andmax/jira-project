@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {Observable, Subject, merge, Subscription} from 'rxjs';
+import { Observable, Subject, merge } from 'rxjs';
+import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
