@@ -60,37 +60,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.deleteRecord();
     this.companiesList = [];
     this.getCompaniesList();
-    // console.log('test');
-    // let element: HTMLElement = document.getElementsByClassName('password-content') as HTMLElement;
-    // let element1: HTMLElement = document.getElementsByClassName('test') as HTMLElement;
-    // this.zone.run(async () => {
-    //   console.log(element, 'Elements');
-    //   console.log(element1, 'Elements');
-    //   element[0].click();
-    //   element1[0].click();
-    //   console.log(this.checkCompaniesList, 'checkCompaniesList');
-    // })
-    this.router.events.subscribe(val => {
-      if (this.location.path() != "") {
-        this.route = this.location.path();
-      } else {
-        this.route = "Home";
-      }
-    });
   }
 
   public getCompaniesList() {
      return this.subscription = this.companiesService.clientsCompany.subscribe((company) => {
        this.companiesList = this.getCompaniesNames(company);
-       if (!this.cdRef['destroyed']) {
-         this.cdRef.detectChanges();
-       }
+       // if (!this.cdRef['destroyed']) {
+       //   this.cdRef.detectChanges();
+       // }
      });
   }
 
   public get checkCompaniesList() {
-    const a = !this.companiesList;
-    return a;
+    return !this.companiesList;
   }
 
   public selectCompany(item){
@@ -157,6 +139,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getPasswordRecords() {
+    this.apiPasswordManagerService.getRecords();
     this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;

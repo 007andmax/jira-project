@@ -8,7 +8,7 @@ import { PasswordManagerService } from "../../../../services/password-manager/pa
   templateUrl: './password-records-types.component.html',
   styleUrls: ['./password-records-types.component.scss']
 })
-export class PasswordRecordsTypesComponent implements OnInit {
+export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
 
   @Input() set passwordRecords(value: string) {
@@ -32,13 +32,13 @@ export class PasswordRecordsTypesComponent implements OnInit {
     this.startComponent();
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   const name: SimpleChange = changes.passwordRecords;
-  //   console.log('test');
-  //   console.log(changes.passwordRecords, 'test');
-  //   // this.passwordRecords = changes.passwordRecords.currentValue;
-  //   this.startComponent();
-  // }
+  ngOnChanges(changes: SimpleChanges) {
+    const name: SimpleChange = changes.passwordRecords;
+    console.log('test');
+    console.log(changes.passwordRecords, 'test');
+    // this.passwordRecords = changes.passwordRecords.currentValue;
+    this.startComponent();
+  }
 
   public startComponent() {
     this.initializePasswordRecordTypes();

@@ -117,6 +117,7 @@ export class PasswordManagerComponent implements OnInit {
    * Add new record
    */
   public addRecord(event) {
+    this.apiPasswordManagerService.getRecords();
     this.newRecord.next(true);
   }
 
