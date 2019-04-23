@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -60,7 +60,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private devicesService: DevicesService,
     private userService: UsersService,
     private gadgetsService: GadgetsService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -137,6 +138,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       ssh: [this.editItem ? this.editItem.ssh : false],
       telnet: [this.editItem ? this.editItem.telnet : false]
     });
+    if (!this.cdRef['destroyed']) {
+      this.cdRef.detectChanges();
+    }
   }
 
   public save() {
@@ -423,8 +427,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
+      console.log(company, 'COMPANY');
       this.getCompanyDevices({item: company[0]});
-      this.selectedClient = company[0];
+      return this.selectedClient = company[0];
     }
   }
 

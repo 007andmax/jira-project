@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Location } from "@angular/common";
@@ -47,9 +47,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
-    private zone: NgZone,
-    private location: Location,
-    private router: Router,
     private cdRef:ChangeDetectorRef
   ) { }
 
@@ -58,7 +55,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
-    this.companiesList = [];
     this.getCompaniesList();
   }
 
