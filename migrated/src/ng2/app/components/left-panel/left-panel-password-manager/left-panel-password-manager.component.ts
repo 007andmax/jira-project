@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Location } from "@angular/common";
 
 import { USER } from "../../../const/users";
 import { CompaniesService } from "../../../services/company/companies.service";
@@ -9,7 +10,8 @@ import { PasswordManagerService } from "../../../services/password-manager/passw
 import { UsersService } from "../../../services/users/users.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
-import {ISubscription} from "rxjs-compat/Subscription";
+import { ISubscription } from "rxjs-compat/Subscription";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -19,7 +21,6 @@ import {ISubscription} from "rxjs-compat/Subscription";
 })
 export class LeftPanelPasswordManagerComponent implements OnInit {
 
-  public recordsData: any;
   public companiesList: any;
   public devicesAndUsersList = [];
   public company: any;
@@ -36,6 +37,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     companyId: '',
     name: ''
   };
+  public route: string;
   private subscription: ISubscription;
 
   constructor(
@@ -44,7 +46,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private userService: UsersService,
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private gadgetsService: GadgetsService
+    private gadgetsService: GadgetsService,
+    private zone: NgZone,
+    private location: Location,
+    private router: Router,
+    private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -52,13 +58,39 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
+    this.companiesList = [];
     this.getCompaniesList();
+    // console.log('test');
+    // let element: HTMLElement = document.getElementsByClassName('password-content') as HTMLElement;
+    // let element1: HTMLElement = document.getElementsByClassName('test') as HTMLElement;
+    // this.zone.run(async () => {
+    //   console.log(element, 'Elements');
+    //   console.log(element1, 'Elements');
+    //   element[0].click();
+    //   element1[0].click();
+    //   console.log(this.checkCompaniesList, 'checkCompaniesList');
+    // })
+    this.router.events.subscribe(val => {
+      if (this.location.path() != "") {
+        this.route = this.location.path();
+      } else {
+        this.route = "Home";
+      }
+    });
   }
 
   public getCompaniesList() {
      return this.subscription = this.companiesService.clientsCompany.subscribe((company) => {
        this.companiesList = this.getCompaniesNames(company);
+       if (!this.cdRef['destroyed']) {
+         this.cdRef.detectChanges();
+       }
      });
+  }
+
+  public get checkCompaniesList() {
+    const a = !this.companiesList;
+    return a;
   }
 
   public selectCompany(item){

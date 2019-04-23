@@ -18,9 +18,7 @@ export class CompaniesService {
 
   constructor(
     private http: HttpClient
-  ) {
-    this.getCompaniesList();
-  }
+  ) {}
 
   getCompaniesList() {
     return this.http.get(this.apiUrl + 'company/clients').subscribe((response)=> {
