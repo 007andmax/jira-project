@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
+import { ISubscription } from "rxjs/Subscription";
 
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -21,6 +22,8 @@ export class PasswordManagerTableComponent implements OnInit {
   @Input() selectedCategory: any;
   @Input() addNewRecords: Subject<boolean>;
   @Input() showDataTable: Subject<boolean>;
+  private subGetRecords: ISubscription;
+  private subAddNewRecords: ISubscription;
   public recordsData: any;
 
   constructor(
@@ -32,8 +35,8 @@ export class PasswordManagerTableComponent implements OnInit {
   ngOnInit() {
     this.getRecords();
     this.getSelectedCategory();
-    this.addNewRecords.subscribe(v => {
-      // this.getRecords();
+    this.subAddNewRecords = this.addNewRecords.subscribe(v => {
+      this.getRecords();
     });
     this.watchDeleteRecord();
   }
@@ -80,6 +83,12 @@ export class PasswordManagerTableComponent implements OnInit {
    */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+
+  ngOnDestroy() {
+    this.subGetRecords.unsubscribe();
+    this.subAddNewRecords.unsubscribe();
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 

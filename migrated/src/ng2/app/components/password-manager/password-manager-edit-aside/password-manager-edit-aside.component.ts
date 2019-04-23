@@ -14,6 +14,7 @@ import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
+import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 
 @Component({
   selector: 'app-password-manager-edit-aside',
@@ -62,7 +63,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private devicesService: DevicesService,
     private userService: UsersService,
     private gadgetsService: GadgetsService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   ngOnInit() {
@@ -353,8 +355,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.gadgetsService.addNewGadget(clientCompanyId, name).subscribe((res) => {
       this.gadgets.push(res);
       this.showGadgetsForm = false;
-      // this.gadgetCheckbox = new Array(this.gadgets.length);
-      // for (var i = 0; i < this.gadgetCheckbox.length; ++i) { this.gadgetCheckbox[i] = false; }
     })
   }
 
@@ -447,8 +447,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('test');
     this.test.unsubscribe();
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }

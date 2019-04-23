@@ -117,7 +117,6 @@ export class PasswordManagerComponent implements OnInit {
    * Add new record
    */
   public addRecord(event) {
-    console.log(event, 'true');
     this.newRecord.next(true);
   }
 
@@ -134,6 +133,11 @@ export class PasswordManagerComponent implements OnInit {
    */
   private getCurrentUser() {
     this.currentUser = this.userService.currentUser;
+  }
+
+  ngOnDestroy() {
+    console.log('tetst');
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }

@@ -33,6 +33,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public passwordRecords: any;
   public passwordRecordsStart: any;
   public interval: any;
+  private subGetRecords: ISubscription;
+  private subGetRecordsNew: ISubscription;
   public clearCompanyItem = {
     companyId: '',
     name: ''
@@ -134,7 +136,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public getPasswordRecords() {
     this.apiPasswordManagerService.getRecords();
-    this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
+    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
       (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
@@ -273,7 +275,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
+    this.subGetRecords.unsubscribe();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
 
 import { PASSWORD_RECORD_TYPES } from "../../../../const/password-record-types";
 import { PasswordManagerService } from "../../../../services/password-manager/password-manager.service";
+import {ApiPasswordManagerService} from "../../../../services/password-manager/api-password-manager.service";
 
 @Component({
   selector: 'app-password-records-types',
@@ -25,7 +26,8 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
   };
 
   constructor(
-    private passwordManagerService: PasswordManagerService
+    private passwordManagerService: PasswordManagerService,
+    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   ngOnInit() {
@@ -63,6 +65,10 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
   public setCountRecordsData() {
     return this._passwordRecords && this._passwordRecords.map((item) =>  this.getItemCountsInCategories(item));
+  }
+
+  ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }
