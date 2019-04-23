@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subject, merge } from 'rxjs';
+import {Observable, Subject, merge, Subscription} from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -52,6 +52,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public currentTypeChoosen: any;
+  public test: ISubscription;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -85,7 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showAddForm() {
-    this.passwordManagerService.showAddForm.subscribe((res) => {
+    this.test = this.passwordManagerService.showAddForm.subscribe((res) => {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -442,6 +443,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+
+  ngOnDestroy() {
+    console.log('test');
+    this.test.unsubscribe();
   }
 
 }
