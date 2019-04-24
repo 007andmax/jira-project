@@ -66,7 +66,6 @@ export class PasswordManagerComponent implements OnInit {
   public getSelectCompany() {
     this.companiesService.filteredCompanyUpdate.subscribe((company) => {
       this.refreshFilter();
-      console.log(company, 'company');
       return this.selectedCompany = company;
     });
   }
@@ -106,8 +105,6 @@ export class PasswordManagerComponent implements OnInit {
    * Change data table show status
    */
   public showDataTable() {
-    console.log(this.selectedCategory, 'this.selectedCompany');
-
     return !!((this.selectedCompany && this.selectedCompany.companyId.length > 0) || (this.selectedCategory && this.selectedCategory.UPPERCASE !== 'CLEAR') || (this.selectedDate));
   }
 
@@ -140,11 +137,6 @@ export class PasswordManagerComponent implements OnInit {
     this.currentUser = this.userService.currentUser;
   }
 
-  ngOnDestroy() {
-    console.log('tetst');
-    this.apiPasswordManagerService.deleteSubscription();
-  }
-
   /**
    * Toggle mobile filters
    */
@@ -158,5 +150,10 @@ export class PasswordManagerComponent implements OnInit {
   public checkCloseFilters() {
     this.passwordManagerService.closeFilter.subscribe(() => this.isMobileFilterShowing = false )
   }
+
+  ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
+  }
+
 
 }

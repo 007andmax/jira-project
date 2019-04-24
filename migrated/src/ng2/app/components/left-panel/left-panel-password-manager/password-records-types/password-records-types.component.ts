@@ -9,7 +9,7 @@ import {ApiPasswordManagerService} from "../../../../services/password-manager/a
   templateUrl: './password-records-types.component.html',
   styleUrls: ['./password-records-types.component.scss']
 })
-export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
+export class PasswordRecordsTypesComponent implements OnInit {
 
 
   @Input() set passwordRecords(value: string) {
@@ -34,18 +34,9 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.startComponent();
     this.passwordManagerService.mobileCategory.subscribe(() => {
-      console.log('1235--------');
       this.filterByPasswordTypes(this.selectedCategory, this.selectedIndex);
     })
   }
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   const name: SimpleChange = changes.passwordRecords;
-  //   console.log('test');
-  //   console.log(changes.passwordRecords, 'test');
-  //   // this.passwordRecords = changes.passwordRecords.currentValue;
-  //   this.startComponent();
-  // }
 
   public startComponent() {
     this.initializePasswordRecordTypes();
