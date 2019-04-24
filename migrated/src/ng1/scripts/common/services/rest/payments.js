@@ -36,11 +36,11 @@
         return $http.post('/payments', data).then(function (resp) {
           if (callback) {
             if (resp.data.list) {
-              payments = resp;
+              payments = resp.data.list;
               callback(resp.data.list);
             } else {
               callback(resp.data);
-              payments = resp;
+              payments = resp.data;
             }
           }
         });
