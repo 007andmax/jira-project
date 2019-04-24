@@ -29,15 +29,6 @@
 
       var isRequestSent = false;
 
-      // $rootScope.$watch(function() {
-      //   return $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list.length
-      // }, function(val) {
-      //   if (val && !isRequestSent) {
-      //     isRequestSent = true;
-      //     getPaymentsData($rootScope);
-      //   }
-      // })
-
       function getPaymentsDataTable(scope, callback, data) {
         if (!scope || !scope.$id) {
           throw 'First argument must be Angularjs scope!'
@@ -85,6 +76,8 @@
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
+          console.log(newChange, 'newChange');
+          console.log(newChange, 'newChange');
 
           if(newChange.action === 'PAYMENT_CREATED') {
             invoices = $rootScope.allInvoices;
@@ -201,7 +194,8 @@
             })
 
             var invoices = $rootScope.allInvoices;
-
+            console.log(changed, 'changed');
+            console.log(newChange, 'newChange');
 
             var prevPayment = payments[index];
             var difference = changed.partialPaidAmount - prevPayment.partialPaidAmount;
