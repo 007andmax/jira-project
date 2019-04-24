@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -6,7 +9,6 @@ import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { UsersService } from "../../services/users/users.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
-
 
 /**
  * Password manager component
@@ -32,13 +34,15 @@ export class PasswordManagerComponent implements OnInit {
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
    * @param {CompaniesService} companiesService Service to work with api
    * @param {PasswordManagerService} passwordManagerService Service to work with filters
+   * @param {userService} userService Service to work with user
+   * @param {permissionsService} permissionsService to work with permissions service
    */
   public constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
-    private permissionsService: PermissionsService,
+    private permissionsService: PermissionsService
   ) {}
 
   /**
@@ -50,7 +54,8 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
     this.getCurrentUser();
-    console.log('item');
+    this.apiPasswordManagerService.getRecords();
+    this.companiesService.getCompaniesList();
   };
 
   /**
@@ -130,11 +135,9 @@ export class PasswordManagerComponent implements OnInit {
     this.currentUser = this.userService.currentUser;
   }
 
-  /**
-   * getPermission
-   */
-  public getPermissions(action) {
-   return this.permissionsService.isAllowed(action)
+  ngOnDestroy() {
+    console.log('tetst');
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }

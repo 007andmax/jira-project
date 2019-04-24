@@ -18,12 +18,12 @@
             <div>
               <input type="text"
                      class="has-dropdown pointer"
-                     placeholder="Search by number or by company"
+                     placeholder="Search by company"
                      ng-trim="false"
                      autocomplete="off"
                      ng-model="filterCompany"
                      ng-click="onFilterClick()"
-                     ng-keydown="onFilterPress($event)"
+                     ng-keydown="onKeyPressInvoice($event)"
                      uib-typeahead="company as company for company in companies | orderBy:'toString()'"
                      qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
@@ -35,7 +35,9 @@
                      type="text"
                      ng-blur="onBlurInvoice(invoiceNumberFilter)"
                      ng-keypress="onKeyPressInvoice($event)"
-                     placeholder="number"
+                     placeholder="Search by number"
+                     ng-model-options="{ debounce: 10 }"
+                     id="inputNumber"
                      ng-model="invoiceNumberFilter">
             </div>
 
@@ -79,9 +81,8 @@
 
 
     <ul class="qt-list qt-companies qt-users users-bg new-payments"
-        infinite-scroll="myPagingFunction()"
-        infinite-scroll-distance="0"
-        infinite-scroll-container=".qt-companies"
+        infinite-scroll="getPaymentsList()"
+        infinite-scroll-distance="3"
         infinite-scroll-disabled= "stopScroll"
         ng-if="filteredPayments"
         ng-click="hideAllTooltiip($event)">
@@ -165,7 +166,6 @@
           </div>
           <div class="col-xs-1">
             {{ payment.createdAt }}
-            aa{{getStopScrollStatus()}}ss
           </div>
           <div class="col-xs-1 w-5">
 

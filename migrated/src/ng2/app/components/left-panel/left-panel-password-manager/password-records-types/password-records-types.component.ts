@@ -2,13 +2,14 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
 
 import { PASSWORD_RECORD_TYPES } from "../../../../const/password-record-types";
 import { PasswordManagerService } from "../../../../services/password-manager/password-manager.service";
+import {ApiPasswordManagerService} from "../../../../services/password-manager/api-password-manager.service";
 
 @Component({
   selector: 'app-password-records-types',
   templateUrl: './password-records-types.component.html',
   styleUrls: ['./password-records-types.component.scss']
 })
-export class PasswordRecordsTypesComponent implements OnInit {
+export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
 
   @Input() set passwordRecords(value: string) {
@@ -25,20 +26,19 @@ export class PasswordRecordsTypesComponent implements OnInit {
   };
 
   constructor(
-    private passwordManagerService: PasswordManagerService
+    private passwordManagerService: PasswordManagerService,
+    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   ngOnInit() {
     this.startComponent();
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   const name: SimpleChange = changes.passwordRecords;
-  //   console.log('test');
-  //   console.log(changes.passwordRecords, 'test');
-  //   // this.passwordRecords = changes.passwordRecords.currentValue;
-  //   this.startComponent();
-  // }
+  ngOnChanges(changes: SimpleChanges) {
+    const name: SimpleChange = changes.passwordRecords;
+    // this.passwordRecords = changes.passwordRecords.currentValue;
+    this.startComponent();
+  }
 
   public startComponent() {
     this.initializePasswordRecordTypes();
@@ -65,6 +65,10 @@ export class PasswordRecordsTypesComponent implements OnInit {
 
   public setCountRecordsData() {
     return this._passwordRecords && this._passwordRecords.map((item) =>  this.getItemCountsInCategories(item));
+  }
+
+  ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }

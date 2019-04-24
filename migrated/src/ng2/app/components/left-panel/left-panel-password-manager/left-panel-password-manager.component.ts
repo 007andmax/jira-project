@@ -1,6 +1,7 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Location } from "@angular/common";
 
 import { USER } from "../../../const/users";
 import { CompaniesService } from "../../../services/company/companies.service";
@@ -9,7 +10,8 @@ import { PasswordManagerService } from "../../../services/password-manager/passw
 import { UsersService } from "../../../services/users/users.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
-import {ISubscription} from "rxjs-compat/Subscription";
+import { ISubscription } from "rxjs-compat/Subscription";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -19,7 +21,6 @@ import {ISubscription} from "rxjs-compat/Subscription";
 })
 export class LeftPanelPasswordManagerComponent implements OnInit {
 
-  public recordsData: any;
   public companiesList: any;
   public devicesAndUsersList = [];
   public company: any;
@@ -32,10 +33,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public passwordRecords: any;
   public passwordRecordsStart: any;
   public interval: any;
+  private subGetRecords: ISubscription;
+  private subGetRecordsNew: ISubscription;
   public clearCompanyItem = {
     companyId: '',
     name: ''
   };
+  public route: string;
   private subscription: ISubscription;
 
   constructor(
@@ -45,7 +49,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
-    private ngZone: NgZone
+    private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -53,16 +57,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
-    this.ngZone.run(() => {
-      console.log('testes');
-      this.getCompaniesList();
-    });
+    this.getCompaniesList();
   }
 
   public getCompaniesList() {
-     return this.subscription = this.companiesService.getCompaniesList().subscribe((company) => {
-       this.companiesList = this.getCompaniesNames(company);
-     });
+     return this.subscription = this.companiesService.clientsCompany
+       .subscribe((company) => {
+         this.companiesList = this.getCompaniesNames(company);
+         if (!this.cdRef['destroyed']) {
+           this.cdRef.detectChanges();
+         }
+       }
+     );
   }
 
   public selectCompany(item){
@@ -129,7 +135,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getPasswordRecords() {
-    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+    // this.apiPasswordManagerService.getRecords();
+    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
       (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
@@ -260,17 +267,17 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public get loadStatus () {
-    console.log()
     return this.company && this.companiesList;
   }
 
   public get companiesListStatus () {
-    console.log(this.companiesList, '12351');
     return this.companiesList;
   }
 
   ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
+    this.subGetRecords.unsubscribe();
   }
 
 }

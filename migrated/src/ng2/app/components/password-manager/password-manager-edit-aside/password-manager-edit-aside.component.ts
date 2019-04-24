@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, merge } from 'rxjs';
+import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -13,6 +14,7 @@ import { USER } from "../../../const/users";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
+import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 
 @Component({
   selector: 'app-password-manager-edit-aside',
@@ -24,7 +26,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public createPasswordRecord: FormGroup;
   @ViewChild('instance') instance: NgbTypeahead;
   @ViewChild('clientType') clientType: NgbTypeahead;
-  @Output() addRecord = new EventEmitter<string>();
+  @Output() addRecord = new EventEmitter<any>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   focusClients$ = new Subject<string>();
@@ -52,6 +54,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public currentTypeChoosen: any;
+  public test: ISubscription;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -60,7 +63,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private devicesService: DevicesService,
     private userService: UsersService,
     private gadgetsService: GadgetsService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   ngOnInit() {
@@ -85,7 +89,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showAddForm() {
-    this.passwordManagerService.showAddForm.subscribe((res) => {
+    this.test = this.passwordManagerService.showAddForm.subscribe((res) => {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -113,8 +117,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
-  get form() { return this.createPasswordRecord.controls; }
-
   public initForm(){
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
@@ -140,15 +142,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
-    console.log(this.editItem, 'this.editItem');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
-    console.log(this.createPasswordRecord, 'this.createPasswordRecord.invalid');
-    console.log(isUserRequired, 'isUserRequired');
-    console.log(isSsidRequired, 'isSsidRequired');
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
@@ -162,7 +160,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public afterSaveRecord() {
-    this.addRecord.emit();
+    this.addRecord.emit(true);
     this.passwordManagerService.addRecord();
     this.initForm();
     this.showSelect = false;
@@ -178,7 +176,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   checkSsid() {
-      return (this.type === 8 && (this.createPasswordRecord.value.ssid === 0 || !this.createPasswordRecord.value.ssid))
+    return (this.type === 8 && (this.createPasswordRecord.value.ssid === 0 || !this.createPasswordRecord.value.ssid))
   }
 
   public toggleItem(newItem, type, index) {
@@ -309,7 +307,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   };
 
   public getCLientsList() {
-    this.companiesService.getCompaniesList().subscribe((res: any) => {
+    this.companiesService.clientsCompany.subscribe((res: any) => {
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
@@ -357,8 +355,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.gadgetsService.addNewGadget(clientCompanyId, name).subscribe((res) => {
       this.gadgets.push(res);
       this.showGadgetsForm = false;
-      // this.gadgetCheckbox = new Array(this.gadgets.length);
-      // for (var i = 0; i < this.gadgetCheckbox.length; ++i) { this.gadgetCheckbox[i] = false; }
     })
   }
 
@@ -423,8 +419,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
+      console.log(company, 'COMPANY');
       this.getCompanyDevices({item: company[0]});
-      this.selectedClient = company[0];
+      return this.selectedClient = company[0];
     }
   }
 
@@ -447,6 +444,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+
+  ngOnDestroy() {
+    this.test.unsubscribe();
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }

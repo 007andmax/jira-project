@@ -28,7 +28,6 @@
     function init() {
 
       stompClient = Stomp.over(new SockJS(stompEndpoint));
-      console.log(stompClient, 'STOMPCLIENT');
 
       stompClient.connect({}, function (frame) {
         isInitialized = true;

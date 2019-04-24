@@ -16,31 +16,50 @@
           limit: $scope.limitValue,
           offset: $scope.offset,
         };
+        $scope.stopScroll = false;
+        $scope.stopReqeust = false;
         $scope.invoiceNumber = null;
         $scope.companyFilterName = null;
         $scope.sortByValue = null;
         $scope.sortByItem = null;
+        $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
 
+        function getCompaniesNames(list) {
+          const filteredArray = [];
+          list.map((item) => {
+            filteredArray.push(item.name);
+          });
+          return filteredArray;
+        }
 
         $scope.getInvoices = function (data) {
           $scope.stopScroll = true;
           if (!data) {
             data = $scope.returnData();
           }
-          ReceivableService.getInvoiceDataTable($scope, function(resp) {
-            $scope.invocesList = [...$scope.invocesList, ...resp];
-          }, data).then(() => {
-            $scope.isInvoiceShown = false;
-            $scope.offset += $scope.limitValue;
-            $scope.offset = $scope.offset + $scope.limitValue;
-            $scope.stopScroll = false;
-            $scope.stopReqeust = false;
-          });
-        }
+          if (!$scope.stopReqeust) {
+            $scope.stopReqeust = true;
+            ReceivableService.getInvoiceDataTable($scope, function(resp) {
+              $scope.invocesList = [...$scope.invocesList, ...resp];
+            }, data).then(() => {
+              $scope.isInvoiceShown = false;
+              $scope.offset += $scope.limitValue;
+              setTimeout(() => {
+                $scope.stopReqeust = false;
+                $scope.stopScroll = false;
+              }, 300);
+
+            });
+          } else {
+            console.log('123512351235');
+          }
+        };
 
         $scope.getInvoices($scope.data);
 
-        $scope.filterInvoicesBy = function(val) {};
+        $scope.filterInvoicesBy = function(val) {
+          console.log(val, 'VAL');
+        };
 
         $scope.showInvoice = function(invoice, goBack) {
           $scope.isInvoiceShown = goBack ? false : true;
@@ -62,10 +81,33 @@
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
-          if(value && value !== '' && value !== ' ') {
-            $scope.invoiceFilter = value;
+          console.log(value, 'invoiceFilterCompany');
+          if(value && value.length > 1) {
+            $scope.resetAllFiltersForSort();
+            $scope.data = $scope.returnData();
+            $scope.getInvoices($scope.data);
+          } else if(value === undefined) {
+            $scope.resetAllFiltersForSort();
+            $scope.data = $scope.returnData();
+            $scope.getInvoices($scope.data);
           }
         });
+
+        $scope.onBlurInvoice = function(invoiceNumber) {
+          $scope.resetAllFiltersForSort();
+          $scope.stopReqeust = false;
+          $scope.offset = 0;
+          $scope.invoiceNumber = invoiceNumber;
+          $scope.data = $scope.returnData();
+          $scope.invocesList = [];
+          $scope.getInvoices($scope.data);
+        };
+
+        $scope.onKeyPressInvoice = function($event) {
+          if ($event.keyCode === 13) {
+            $('#inputNumber').blur();
+          }
+        };
 
         $scope.invoiceFilterCompany = '';
 
@@ -345,13 +387,13 @@
               break;
             case 'sum':
               $scope.resetAllFiltersForSort();
-              $scope.sortByItem = $scope.sortByItem !== 'BALANCE_ASC' ? 'BALANCE_ASC' : 'BALANCE_DESC';
+              $scope.sortByItem = $scope.sortByItem !== 'AMOUNT_ASC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
               $scope.data = $scope.returnData();
               $scope.getInvoices($scope.data);
               break;
             case 'balance':
               $scope.resetAllFiltersForSort();
-              $scope.sortByItem = $scope.sortByItem !== 'AMOUNT_ASC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
+              $scope.sortByItem = $scope.sortByItem !== 'BALANCE_ASC' ? 'BALANCE_ASC' : 'BALANCE_DESC';
               $scope.data = $scope.returnData();
               $scope.getInvoices($scope.data);
               break;
@@ -380,7 +422,7 @@
             invoiceNumber: $scope.invoiceNumber ? $scope.invoiceNumber : null,
             startDate: $scope.invoiceDateFilter.startDate ? new Date($scope.invoiceDateFilter.startDate).getTime() : null,
             endDate: $scope.invoiceDateFilter.endDate ? new Date($scope.invoiceDateFilter.endDate).getTime() : null,
-            companyName : $scope.companyFilterName ? $scope.companyFilterName : null,
+            companyName : $scope.invoiceFilterCompany ? $scope.invoiceFilterCompany : null,
             status: $scope.sortByValue ? $scope.sortByValue.toUpperCase() : null,
             sortBy: $scope.sortByItem ? $scope.sortByItem : null
           });

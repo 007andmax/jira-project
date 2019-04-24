@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, InjectionToken, NgZone } from '@angular/core';
 import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+// @ts-ignore
 import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +12,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -92,6 +94,11 @@ angular.module('quicktech')
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
     RouterModule.forRoot([
+        {
+          path: '',
+          component: AppComponent,
+          pathMatch: 'full'
+        },
         {
           path: 'ng2/password-manager',
           component: PasswordManagerComponent,

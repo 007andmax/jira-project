@@ -93,7 +93,13 @@
 
         };
 
-        $scope.getPaidOnDate = function() {};
+        $scope.getPaidOnDate = function() {
+          var paidOn =  new Date($scope.invoice.paidOn).getTime();
+          var paid = (today - paidOn)/86400000;
+          $scope.invoice.daysDueDateForSorting = (Math.abs(Math.floor(paid))) + 3000000000 ;
+          $scope.invoice.dueDatePositionForSorting = 2;
+          return Math.floor(Math.abs(paid));
+        };
 
 
         $scope.sentInvoice = function () {
@@ -145,8 +151,6 @@
             });
           }
         };
-        var t1 = performance.now();
-        console.log("Call to doSomething took " + (t1 - t0) + " 1111.")
       }]);
 
 }());
