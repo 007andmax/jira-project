@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {concatAll, debounceTime, distinctUntilChanged, map, pairwise, take} from 'rxjs/operators';
 
 
 import { USER } from "../../../const/users";
@@ -36,6 +36,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   private subGetRecords: ISubscription;
   private subGetRecordsNew: ISubscription;
   private subNewRecordAdd: ISubscription;
+  private subscriptions = new Subscription();
   public innerWidth: any;
   public clearCompanyItem = {
     companyId: '',
@@ -299,8 +300,20 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public addNewRecord() {
-    this.subNewRecordAdd =this.passwordManagerService.newRecordsisAdd.subscribe(() => {
-      this.getPasswordRecords();
+    this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
+      if (this.innerWidth <= 414) {
+        this.passwordManagerService.setMobileCategory();
+      }
+      this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
+        this.passwordRecordsStart = res;
+        this.passwordRecords = res;
+        this.selectedCompany && this.selectCompany({item: this.selectedCompany});
+        this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+        this.selectedDateItem && this.selectDate(this.selectedDateItem);
+        if (this.innerWidth <= 414) {
+          this.closeMobileFilters();
+        }
+      }));
     })
   }
 
@@ -323,6 +336,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.subscription.unsubscribe();
     this.subGetRecords.unsubscribe();
     this.subGetRecords.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   public closeMobileFilters() {

@@ -21,6 +21,10 @@ export class ApiPasswordManagerService {
     })
   }
 
+  getRecordsNew() {
+    return this.http.get(this.apiUrl + 'passwordRecords');
+  }
+
   deleteRecord(recordId) {
     return this.http.delete(this.apiUrl + `passwordRecords/${recordId}`);
   }
