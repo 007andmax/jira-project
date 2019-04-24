@@ -670,7 +670,7 @@
     border-radius: 0;
     display: block;
     max-width: 414px;
-    z-index: 2;
+    /*z-index: 2;*/
   }
   
   .mob-filters-btn:after {
@@ -1048,7 +1048,7 @@
     height: 32px;
     border-radius: 4px;
     background-color: #3c4451;
-    padding: 5px 10px 5px 40px;
+    padding: 0 10px 0 40px;
     border: none;
     color: #9ca5b6;
   }
@@ -1726,6 +1726,7 @@
     bottom: 0;
     left: 0;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+    z-index: 3;
   }
   
   .mob-ticket-buttons button {
@@ -2430,18 +2431,17 @@
     width: 100vw;
     left: 0;
     top: 56px;
-    padding: 15px 20px;
+    padding: 8px 20px;
     background: #fff;
+    z-index: 2;
   }
   
   .password-content {
-    margin-top: 54px;
+    margin-top: 40px;
     min-height: calc(100vh - 110px);
   }
   
   .password-selected {
-    display: flex;
-    padding: 15px 20px;
     background: #fff;
     border-radius: 6px;
     margin-right: 10px;
@@ -2455,10 +2455,14 @@
   }
   
   .password-content__list--item .col-md-3,
-  .password-content__list--item .col-md-4 {
+  .password-content__list--item .col-md-2 {
     width: calc(100% - 77px);
     margin-left: 77px;
     font-size: 13px;
+  }
+  
+  .password-content__list--item .col-md-3 {
+    min-height: 24px;
   }
   
   .password-content__list--item .col-md-1 {
@@ -2483,8 +2487,8 @@
   }
   
   .password-content__modal.open {
-    right: auto;
-    left: 0;
+    right: 0;
+    left: auto;
   }
   
   .password-content__modal--footer {
@@ -2498,7 +2502,7 @@
   
   .password-content__modal--header {
     background-color: #27303f;
-    padding: 12px 12px 12px 56px;
+    padding: 16px 12px 16px 56px;
   }
   
   .password-content__modal h3 {
@@ -2530,7 +2534,7 @@
   }
   
   .password-content__modal--content {
-    padding: 0 5px;
+    padding: 0 5px 100px;
     margin-top: 56px;
   }
   
@@ -2549,10 +2553,6 @@
     font-family: "Graphik Medium", sans-serif;
     font-size: 14px;
     font-weight: 500;
-  }
-  
-  .password-modal-footer-actions {
-    margin-bottom: 70px;
   }
   
   .password-modal-footer-actions > div:first-child {

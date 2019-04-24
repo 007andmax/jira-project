@@ -111,10 +111,19 @@
       </div>
     </div>
   </div>
+  
+  <div class="mobile-password"
+       ui-sref="password-manager">
+    <div class="mobile-sub-header">
+      Password Manager
+    </div>
+  </div>
 
   <div class="mobile-users" ng-class="{ opened: areUsersOpened, 'active': openedCategory === 'users' }">
 
-    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'users' }" ui-sref="users" ng-click="toggleMobileMenu('areUsersOpened'); clearUsersFilters(); toggleLeftPanel('users', true);">Users</div>
+    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'users' }"
+         ui-sref="users"
+         ng-click="toggleMobileMenu('areUsersOpened'); clearUsersFilters(); toggleLeftPanel('users', true);">Users</div>
     <div class="mobile-sub-content">
       <div class="center-category__category" ng-click="filterUsers(); toggleMobileLeftPanel(false)"
            ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())}">

@@ -35,6 +35,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public interval: any;
   private subGetRecords: ISubscription;
   private subGetRecordsNew: ISubscription;
+  public innerWidth: any;
   public clearCompanyItem = {
     companyId: '',
     name: ''
@@ -57,6 +58,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth, 'this.innerWidth');
     this.getCompaniesList();
   }
 
@@ -72,6 +75,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectCompany(item){
+    console.log('test');
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -83,8 +87,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
   }
 
+  public selectCompanyMob(item){
+    this.selectedCompany = item.item;
+    this.passwordManagerService.setSelectedDeviceOrUser({});
+    if (item.item.companyId) {
+      this.getCompanyDevices(item.item.companyId);
+      this.getAllUsers(item.item.companyId);
+      this.getGadgets(item.item.companyId);
+    }
+  }
+
   public filterPasswordRecords(company) {
-    if (company)
+    if (company && company.companyId)
     return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
   };
 
@@ -119,7 +133,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
 
-
+  public selectDeviceOrUserMob(item){
+    console.log(2);
+    this.selectedDeviceOrUser = item.item;
+  }
 
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
@@ -134,14 +151,25 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDate(item);
   }
 
+  public selectDateMob(date) {
+    console.log(3);
+    this.selectedDateItem = date;
+  }
+
   public getPasswordRecords() {
+    if (this.innerWidth <= 414) {
+      this.passwordManagerService.setMobileCategory();
+    }
     // this.apiPasswordManagerService.getRecords();
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
-      (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
+      this.selectedCompany && this.selectCompany({item: this.selectedCompany});
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
+      if (this.innerWidth <= 414) {
+        this.closeMobileFilters();
+      }
     });
   }
 
@@ -206,9 +234,27 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   clearCompany() {
+    this.devicesAndUsersList = [];
     this.refreshCompany();
     this.refreshDeviceOrUser();
     this.getPasswordRecords();
+  }
+
+  clearCompanyMob() {
+    this.devicesAndUsersList = [];
+    this.company = null;
+    this.selectedCompany = this.clearCompanyItem;
+    this.clearDeviceMob();
+  }
+
+  clearDeviceMob() {
+    this.device = null;
+    this.selectedDeviceOrUser = null;
+  }
+
+  clearDateMob() {
+    this.selectedDate = null;
+    this.selectedDateItem = null;
   }
 
   clearDevice() {
@@ -237,6 +283,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   private refreshCompany() {
+    console.log('1235100000000');
     this.selectCompany({item: this.clearCompanyItem});
     this.company = null;
     this.device = null;
@@ -278,6 +325,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
     this.subGetRecords.unsubscribe();
+  }
+
+  public closeMobileFilters() {
+    this.passwordManagerService.closeFilters();
   }
 
 }

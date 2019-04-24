@@ -13,6 +13,7 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
 
   @Input() set passwordRecords(value: string) {
+    console.log(value, 'VALUE');
     this._passwordRecords = value;
     this.startComponent();
   }
@@ -32,13 +33,19 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.startComponent();
+    this.passwordManagerService.mobileCategory.subscribe(() => {
+      console.log('1235--------');
+      this.filterByPasswordTypes(this.selectedCategory, this.selectedIndex);
+    })
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    const name: SimpleChange = changes.passwordRecords;
-    // this.passwordRecords = changes.passwordRecords.currentValue;
-    this.startComponent();
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   const name: SimpleChange = changes.passwordRecords;
+  //   console.log('test');
+  //   console.log(changes.passwordRecords, 'test');
+  //   // this.passwordRecords = changes.passwordRecords.currentValue;
+  //   this.startComponent();
+  // }
 
   public startComponent() {
     this.initializePasswordRecordTypes();
@@ -50,6 +57,14 @@ export class PasswordRecordsTypesComponent implements OnInit, OnChanges {
     this.selectedCategory = type;
     this.passwordManagerService.setSelectedCategory(type);
   }
+
+  filterByPasswordTypesMob(type,index) {
+    this.selectedIndex = index;
+    this.selectedCategory = type;
+    console.log(type, index, '§2');
+  }
+
+
 
   private initializePasswordRecordTypes() {
     this._passwordRecords && this.passwordRecordTypes.map((item) => {

@@ -27,6 +27,7 @@ export class PasswordManagerComponent implements OnInit {
   public selectedDate: any;
   public selectedCategory: any;
   public newRecord: Subject<boolean> = new Subject();
+  public isMobileFilterShowing = false;
   public currentUser: any;
 
   /**
@@ -56,6 +57,7 @@ export class PasswordManagerComponent implements OnInit {
     this.getCurrentUser();
     this.apiPasswordManagerService.getRecords();
     this.companiesService.getCompaniesList();
+    this.checkCloseFilters();
   };
 
   /**
@@ -64,6 +66,7 @@ export class PasswordManagerComponent implements OnInit {
   public getSelectCompany() {
     this.companiesService.filteredCompanyUpdate.subscribe((company) => {
       this.refreshFilter();
+      console.log(company, 'company');
       return this.selectedCompany = company;
     });
   }
@@ -103,7 +106,9 @@ export class PasswordManagerComponent implements OnInit {
    * Change data table show status
    */
   public showDataTable() {
-    return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory) || (this.selectedDate));
+    console.log(this.selectedCategory, 'this.selectedCompany');
+
+    return !!((this.selectedCompany && this.selectedCompany.companyId.length > 0) || (this.selectedCategory && this.selectedCategory.UPPERCASE !== 'CLEAR') || (this.selectedDate));
   }
 
   /**
@@ -138,6 +143,20 @@ export class PasswordManagerComponent implements OnInit {
   ngOnDestroy() {
     console.log('tetst');
     this.apiPasswordManagerService.deleteSubscription();
+  }
+
+  /**
+   * Toggle mobile filters
+   */
+  public showMobileFilters() {
+    this.isMobileFilterShowing = !this.isMobileFilterShowing;
+  }
+
+  /**
+   * Close mobile filters
+   */
+  public checkCloseFilters() {
+    this.passwordManagerService.closeFilter.subscribe(() => this.isMobileFilterShowing = false )
   }
 
 }

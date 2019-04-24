@@ -33,6 +33,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   clickClients$ = new Subject<string>();
   public submitted = false;
   public clientsList: any;
+  public showHistoryPopup: false;
   public type: any;
   public model: any;
   public currentType;
@@ -449,6 +450,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   ngOnDestroy() {
     this.test.unsubscribe();
     this.apiPasswordManagerService.deleteSubscription();
+  }
+
+  showHistory($event) {
+    this.stopEvent($event);
+    // @ts-ignore
+    this.showHistoryPopup = !this.showHistoryPopup;
   }
 
 }
