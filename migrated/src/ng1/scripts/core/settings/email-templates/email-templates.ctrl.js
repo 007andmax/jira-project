@@ -342,7 +342,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
+          return form && form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
         $scope.emailPreview = function (templateKey) {

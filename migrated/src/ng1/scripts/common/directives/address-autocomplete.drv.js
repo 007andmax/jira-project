@@ -53,7 +53,7 @@
             marker = googleData.marker;
 
             $scope.isShowingErrors = function (form, fieldName) {
-              return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+              return form && form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
             };
 
             autocomplete.setTypes(['address']);

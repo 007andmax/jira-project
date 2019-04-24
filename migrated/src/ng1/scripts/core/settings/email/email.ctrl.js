@@ -115,7 +115,7 @@
         });
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
+          return form && form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
         };
 
         $scope.checkSMTPLoginUnique = function (model, modelId, afterValidationCallback) {

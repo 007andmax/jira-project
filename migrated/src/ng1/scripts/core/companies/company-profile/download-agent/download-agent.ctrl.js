@@ -48,7 +48,7 @@
         });
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSaveTemplate || $scope.triedToDownload || form[fieldName].$dirty) && form[fieldName].$invalid;
+          return form && form[fieldName] && ($scope.triedToSaveTemplate || $scope.triedToDownload || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.filterUserFullName = function (value) {

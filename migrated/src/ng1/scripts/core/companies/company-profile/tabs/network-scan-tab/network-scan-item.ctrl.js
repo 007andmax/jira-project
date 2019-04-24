@@ -191,7 +191,7 @@
                 $scope.close = $uibModalInstance.dismiss;
 
                 $scope.isShowingErrors = function (form, fieldName) {
-                  return form[fieldName] && ($scope.triedToUpdate || form[fieldName].$dirty) && form[fieldName].$invalid;
+                  return form && form[fieldName] && ($scope.triedToUpdate || form[fieldName].$dirty) && form[fieldName].$invalid;
                 };
 
                 $scope.testAndUpdateCredentials = function (form) {

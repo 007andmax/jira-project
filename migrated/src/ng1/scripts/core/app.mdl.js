@@ -753,7 +753,7 @@
               };
 
               $scope.isShowingErrors = function(form, fieldName) {
-                return form[fieldName] && ($scope.triedToUnlock || form[fieldName].$dirty) && form[fieldName].$invalid;
+                return form && form[fieldName] && ($scope.triedToUnlock || form[fieldName].$dirty) && form[fieldName].$invalid;
               };
 
             }]);
