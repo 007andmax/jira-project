@@ -158,7 +158,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     if (this.innerWidth <= 414) {
       this.passwordManagerService.setMobileCategory();
     }
-    this.apiPasswordManagerService.getRecords();
+    this.apiPasswordManagerService.getRecordsNew();
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
@@ -299,7 +299,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public addNewRecord() {
-    this.subNewRecordAdd =this.passwordManagerService.newRecordsisAdd.subscribe(() => {
+    this.subNewRecordAdd = this.passwordManagerService.showAddForm.subscribe((res) => {
+      console.log(res, 'res');
       this.getPasswordRecords();
     })
   }

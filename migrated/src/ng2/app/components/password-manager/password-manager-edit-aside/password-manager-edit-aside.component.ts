@@ -459,7 +459,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('1235123512');
     this.apiPasswordManagerService.deleteSubscription();
     this.subShowAddForm.unsubscribe();
     this.subHideAddForm.unsubscribe();
