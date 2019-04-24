@@ -190,14 +190,15 @@
 
           } else if (newChange.action === 'PAYMENT_EDITED') {
             var changed = newChange.data;
+            console.log(payments, 'payments');
+
 
             var index = payments.findIndex(function(el) {
               return el.id == changed.id;
             })
+            console.log(index, 'index');
 
             var invoices = $rootScope.allInvoices;
-            console.log(changed, 'changed');
-            console.log(newChange, 'newChange');
 
             var prevPayment = payments[index];
             var difference = changed.partialPaidAmount - prevPayment.partialPaidAmount;
