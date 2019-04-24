@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {debounceTime, distinctUntilChanged, first, map} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 
 import { USER } from "../../../const/users";
@@ -158,7 +158,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     if (this.innerWidth <= 414) {
       this.passwordManagerService.setMobileCategory();
     }
-    console.log('test');
+    this.apiPasswordManagerService.getRecords();
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
@@ -299,8 +299,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public addNewRecord() {
-    this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
-      console.log('addNewRecord');
+    this.subNewRecordAdd =this.passwordManagerService.newRecordsisAdd.subscribe(() => {
       this.getPasswordRecords();
     })
   }
@@ -323,7 +322,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
     this.subGetRecords.unsubscribe();
-    this.subNewRecordAdd.unsubscribe();
+    this.subGetRecords.unsubscribe();
   }
 
   public closeMobileFilters() {

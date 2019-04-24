@@ -13,7 +13,6 @@ export class PasswordRecordsTypesComponent implements OnInit {
 
 
   @Input() set passwordRecords(value: string) {
-    console.log(value, 'value');
     this._passwordRecords = value;
     this.startComponent();
   }
