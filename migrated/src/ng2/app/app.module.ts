@@ -12,7 +12,6 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
-import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -24,7 +23,6 @@ import { PasswordManagerTableComponent } from './components/password-manager/pas
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
 import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
-import { UsersService } from "./services/users/users.service";
 
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
@@ -32,10 +30,7 @@ import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
-import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
-import {QuotesComponent} from './components/billing/quotes/quotes.component';
-
-// import { ApiInterceptor } from "./services/api.interceptor/api.interceptor";
+import { QuotesComponent } from './components/billing/quotes/quotes.component';
 
 
 declare var angular: any;
