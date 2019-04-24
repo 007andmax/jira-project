@@ -322,7 +322,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
     this.subGetRecords.unsubscribe();
-    this.subNewRecordAdd.unsubscribe();
+    this.subGetRecords.unsubscribe();
   }
 
   public closeMobileFilters() {

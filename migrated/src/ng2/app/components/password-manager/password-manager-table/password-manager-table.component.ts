@@ -48,7 +48,7 @@ export class PasswordManagerTableComponent implements OnInit {
   }
 
   getRecords() {
-    this.apiPasswordManagerService.dataChange.subscribe((res) => {
+    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
       this.recordsData = res;
     });
   }

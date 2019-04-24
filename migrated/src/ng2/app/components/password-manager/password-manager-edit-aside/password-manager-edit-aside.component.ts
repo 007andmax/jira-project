@@ -1,6 +1,6 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subject, merge } from 'rxjs';
+import { Observable, Subject, merge, Subscription } from 'rxjs';
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -55,10 +55,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public currentTypeChoosen: any;
-  public subShowAddForm: ISubscription;
-  public subHideAddForm: ISubscription;
+  public subShowAddForm: Subscription;
+  public subHideAddForm: Subscription;
   public subGetGadgets: ISubscription;
   public subGetAllUsers: ISubscription;
+  public subSaveEditRecord: ISubscription;
+  public subSaveRecord: ISubscription;
+  public subGetDevices: ISubscription;
+  public subGetCompaniesList: ISubscription;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -82,6 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public opened: boolean = false;
 
   public _toggleSidebar() {
+    console.log('_toggleSidebar');
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
@@ -94,6 +99,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public showAddForm() {
     this.subShowAddForm = this.passwordManagerService.showAddForm.subscribe((res) => {
+      console.log('showAddForm');
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -103,6 +109,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public hideAddForm() {
     this.subHideAddForm = this.passwordManagerService.hideAddForm.subscribe((res) => {
+      console.log('hideAddForm');
       this.submitted = false;
       this.showSelect = false;
       this.userDevice = [];
@@ -112,6 +119,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.editItem = null;
       this.selectedUserAndDevices = [];
       this.opened = false;
+      this.subShowAddForm.unsubscribe();
     });
   }
 
@@ -122,6 +130,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public initForm(){
+    console.log('test');
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -154,10 +163,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
-      this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
+      this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
         .subscribe((res) => this.afterSaveRecord());
     } else {
-      this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
+      this.subSaveRecord = this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
         .subscribe((res) => this.afterSaveRecord());
     }
 
@@ -247,7 +256,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.clearClient();
     companyId.item && this.getAllUsers(companyId.item.id);
     this.getGadgets();
-    this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
+    this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
       if (res[companyId.item.id]) {
         this.deviceCheckbox = new Array([...res[companyId.item.id]].length);
         this.showGadgetsForm = false;
@@ -311,7 +320,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   };
 
   public getCLientsList() {
-    this.companiesService.clientsCompany.subscribe((res: any) => {
+    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
@@ -450,11 +459,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    console.log('1235123512');
     this.apiPasswordManagerService.deleteSubscription();
     this.subShowAddForm.unsubscribe();
     this.subHideAddForm.unsubscribe();
     this.subGetGadgets.unsubscribe();
     this.subGetAllUsers.unsubscribe();
+    this.subSaveEditRecord.unsubscribe();
+    this.subSaveRecord.unsubscribe();
+    this.subGetDevices.unsubscribe();
+    this.subGetCompaniesList.unsubscribe();
   }
 
   showHistory($event) {
