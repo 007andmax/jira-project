@@ -42,7 +42,6 @@ export class PasswordManagerService {
   }
 
   addRecord(item?) {
-    console.log('1231235');
     this.showAddForm.emit(item);
     this.newRecordsisAdd.emit();
   }
