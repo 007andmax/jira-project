@@ -299,11 +299,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public addNewRecord() {
-    this.passwordManagerService.showAddForm.pipe(
-      map(()=> {
-        this.getPasswordRecords();
-      })
-    )
+    this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
+      console.log('addNewRecord');
+      this.getPasswordRecords();
+    })
   }
 
   public deleteRecord() {
