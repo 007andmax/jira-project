@@ -1002,11 +1002,19 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
+.invoice-header-fixed {
+  background-color: #f3f7f9;
+  right: 25px;
+  position: fixed;
+  width: calc(100% - 366px);
+  top: 78px;
+  z-index: 2;
+}
 .invoices .invoices-header .invoices-header-filters {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 68%;
+  max-width: 70%;
   width: 100%;
 }
 .custom-disabled {
@@ -1019,8 +1027,7 @@ hr {
   margin-top: -3px !important;
 }
 .invoices .invoices-header .invoices-header-filters > div {
-  max-width: 220px;
-  width: 100%;
+  width: 220px;
   margin-right: 10px;
   position: relative;
   margin-left: 10px;
@@ -1039,11 +1046,18 @@ hr {
 .invoices .invoices-header .invoices-header-filters > div .icn-remove-old {
   top: 15px;
 }
+invoices .invoices-header .invoices-header-filters > div input {
+  font-size: 13px;
+}
 .invoices .invoices-header .invoices-header-filters > div:nth-child(2) {
-  max-width: 300px;
+  max-width: 280px;
   width: 100%;
 }
-.invoices .invoices-header .invoices-header-filters > div:nth-child(3) {
+.invoices .invoices-header .invoices-header-filters > div:nth-child(3),
+.invoices .invoices-header .invoices-header-filters > div:nth-child(4) {
+  width: 160px;
+}
+.invoices .invoices-header .invoices-header-filters > div:nth-child(4) {
   margin-right: 20px;
 }
 .invoices .invoices-header .invoices-header-filters > div > input,
@@ -1068,6 +1082,7 @@ hr {
   display: flex;
   align-items: center;
   min-height: 72px;
+  margin-bottom: 1px;
 }
 .invoices-list .selected-users-edit {
   right: 35px;
@@ -10748,8 +10763,8 @@ button.close {
   font-weight: 500;
 }
 .action-wrap {
-  width: 99%;
-  margin: auto;
+  width: 100%;
+  margin: 0;
   /*border-bottom: 1px solid rgba(79, 95, 121, 0.25);*/
 }
 .action-wrap .archived-change,

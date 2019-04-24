@@ -319,7 +319,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   public deleteRecord() {
     this.passwordManagerService.deleteItem.subscribe((item) => {
-      this.getPasswordRecords()
+      if (this.innerWidth <= 414) {
+        this.passwordManagerService.setMobileCategory();
+      }
+      this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
+        this.passwordRecordsStart = res;
+        this.passwordRecords = res;
+        this.selectedCompany && this.selectCompany({item: this.selectedCompany});
+        this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+        this.selectedDateItem && this.selectDate(this.selectedDateItem);
+        if (this.innerWidth <= 414) {
+          this.closeMobileFilters();
+        }
+      }));
     });
   }
 
