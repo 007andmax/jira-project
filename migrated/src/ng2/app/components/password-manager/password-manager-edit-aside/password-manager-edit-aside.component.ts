@@ -55,7 +55,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public editItem = null;
   public expiryDate;
   public currentTypeChoosen: any;
-  public test: ISubscription;
+  public subShowAddForm: ISubscription;
+  public subHideAddForm: ISubscription;
+  public subGetGadgets: ISubscription;
+  public subGetAllUsers: ISubscription;
 
   constructor(
     private passwordManagerService: PasswordManagerService,
@@ -90,7 +93,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public showAddForm() {
-    this.test = this.passwordManagerService.showAddForm.subscribe((res) => {
+    this.subShowAddForm = this.passwordManagerService.showAddForm.subscribe((res) => {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -99,7 +102,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public hideAddForm() {
-    this.passwordManagerService.hideAddForm.subscribe((res) => {
+    this.subHideAddForm = this.passwordManagerService.hideAddForm.subscribe((res) => {
       this.submitted = false;
       this.showSelect = false;
       this.userDevice = [];
@@ -332,7 +335,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   private getAllUsers(companyId) {
-    this.userService.getAllusers().subscribe((res: any) => {
+    this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
       res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
@@ -365,7 +368,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public getGadgets() {
-    this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
+    this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = [...res];
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) {
@@ -447,8 +450,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.test.unsubscribe();
     this.apiPasswordManagerService.deleteSubscription();
+    this.subShowAddForm.unsubscribe();
+    this.subHideAddForm.unsubscribe();
+    this.subGetGadgets.unsubscribe();
+    this.subGetAllUsers.unsubscribe();
   }
 
   showHistory($event) {
