@@ -420,7 +420,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
-      console.log(company, 'COMPANY');
       this.getCompanyDevices({item: company[0]});
       return this.selectedClient = company[0];
     }

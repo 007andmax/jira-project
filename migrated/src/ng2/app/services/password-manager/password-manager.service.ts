@@ -19,6 +19,7 @@ export class PasswordManagerService {
   public deleteItemEditForm: EventEmitter<any> = new EventEmitter();
   public closeFilter: EventEmitter<any> = new EventEmitter();
   public mobileCategory: EventEmitter<any> = new EventEmitter();
+  public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private http: HttpClient
@@ -42,6 +43,7 @@ export class PasswordManagerService {
 
   addRecord(item?) {
     this.showAddForm.emit(item);
+    this.newRecordsisAdd.emit();
   }
 
   deleteRecord(recordId) {

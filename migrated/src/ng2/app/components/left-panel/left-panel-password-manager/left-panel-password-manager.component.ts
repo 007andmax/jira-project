@@ -1,7 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Location } from "@angular/common";
+
 
 import { USER } from "../../../const/users";
 import { CompaniesService } from "../../../services/company/companies.service";
@@ -11,7 +11,7 @@ import { UsersService } from "../../../services/users/users.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
-import { Router } from "@angular/router";
+
 
 
 @Component({
@@ -35,6 +35,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public interval: any;
   private subGetRecords: ISubscription;
   private subGetRecordsNew: ISubscription;
+  private subNewRecordAdd: ISubscription;
   public innerWidth: any;
   public clearCompanyItem = {
     companyId: '',
@@ -59,7 +60,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.addNewRecord();
     this.deleteRecord();
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth, 'this.innerWidth');
     this.getCompaniesList();
   }
 
@@ -75,7 +75,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectCompany(item){
-    console.log('test');
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -152,7 +151,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public selectDateMob(date) {
-    console.log(3);
     this.selectedDateItem = date;
   }
 
@@ -283,7 +281,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   private refreshCompany() {
-    console.log('1235100000000');
     this.selectCompany({item: this.clearCompanyItem});
     this.company = null;
     this.device = null;
@@ -302,7 +299,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public addNewRecord() {
-    this.passwordManagerService.showAddForm.subscribe(() => {
+    this.subNewRecordAdd =this.passwordManagerService.newRecordsisAdd.subscribe(() => {
       this.getPasswordRecords();
     })
   }
@@ -325,6 +322,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
     this.subGetRecords.unsubscribe();
+    this.subNewRecordAdd.unsubscribe();
   }
 
   public closeMobileFilters() {
