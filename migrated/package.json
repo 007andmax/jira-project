@@ -5,7 +5,7 @@
     "ng": "ng",
     "dev": "ng serve --live-reload false",
     "dev-front": "ng serve ",
-    "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration=dev --deploy-url=/html/",
+    "build": "node --max_old_space_size=3192 node_modules/@angular/cli/bin/ng build --configuration=dev --deploy-url=/html/",
     "build-prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration=production --deploy-url=/html/",
     "test": "ng test",
     "lint": "ng lint",
