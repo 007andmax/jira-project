@@ -135,7 +135,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getPasswordRecords() {
-    this.apiPasswordManagerService.getRecords();
+    // this.apiPasswordManagerService.getRecords();
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
