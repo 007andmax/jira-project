@@ -78,6 +78,7 @@
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
+
           console.log(newChange, 'newChange');
           console.log(newChange, 'newChange');
 
