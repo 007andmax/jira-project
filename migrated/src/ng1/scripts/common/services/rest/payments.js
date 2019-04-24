@@ -80,7 +80,7 @@
 
 
           console.log(newChange, 'newChange');
-          console.log(newChange, 'newChange');
+          console.log(invoices, 'invoices');
 
           if(newChange.action === 'PAYMENT_CREATED') {
             invoices = $rootScope.allInvoices;
