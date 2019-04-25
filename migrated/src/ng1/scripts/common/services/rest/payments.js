@@ -171,6 +171,7 @@
             var payment = payments[index];
 
             payments[index].refundMethod = changed.refundMethod;
+            payments[index].note = changed.note;
 
             if (invoices) {
               var invoice = invoices.find(function(el) {
