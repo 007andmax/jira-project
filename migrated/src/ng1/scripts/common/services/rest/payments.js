@@ -209,17 +209,19 @@
             if (invoices) {
               var invoice = invoices.find(function(el) {
                 return el.number === invoiceNum;
-              })
+              });
+              if (invoice) {
+                invoice.paidSum += difference;
 
-              invoice.paidSum += difference;
-
-              if (invoice.paidSum >= invoice.sum) {
-                if (!invoice.paidOn) {
-                  invoice.paidOn = +moment(new Date()).format('x');
+                if (invoice.paidSum >= invoice.sum) {
+                  if (!invoice.paidOn) {
+                    invoice.paidOn = +moment(new Date()).format('x');
+                  }
+                } else {
+                  invoice.paidOn = null;
                 }
-              } else {
-                invoice.paidOn = null;
               }
+
             }
 
             var keys = Object.keys(changed);
