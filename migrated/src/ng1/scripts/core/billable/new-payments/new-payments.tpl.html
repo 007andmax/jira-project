@@ -196,6 +196,7 @@
             <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
               <p class="full-text-title">Note</p>
               <span ng-bind="payment.note"></span>
+              {{ payment | json}}
             </div>
           </div>
           <div class="col-xs-1">
