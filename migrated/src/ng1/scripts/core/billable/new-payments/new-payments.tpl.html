@@ -189,11 +189,9 @@
           <div class="col-xs-2">
             <span>{{ payment.reference }}</span>
           </div>
-          <p>asdgasdg</p>
           <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
             <p  ng-click="showTooltip($event, $index)">
               {{ payment.note }}
-              {{ payment | json }}
               <span ng-bind="payment.note"></span>
             </p>
             <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
