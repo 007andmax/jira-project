@@ -32,7 +32,7 @@
               <div class="avatar" ng-if="!user.requestToChangePassword && user.isEmailVerified">
                 <img ng-if="user.avatar" ng-src="{{ getUserAvatarUrl(user) }}"
                      alt="..." class="img-circle">
-                <img ng-if="!user.avatar" src="images/settings-icon/tech-user.png" alt="..." class="img-circle">
+                <img ng-if="!user.avatar" src="ng1/images/settings-icon/tech-user.png" alt="..." class="img-circle">
               </div>
 
               <div class="avatar" ng-if="user.requestToChangePassword || !user.isEmailVerified" style="position: relative">
@@ -45,7 +45,7 @@
                 <h4>{{ getUserName(user) }}</h4>
                 <span ng-style="{'background-color': techColors[user.techRole]}" class="label">{{ user.techRole }}</span><br/>
 
-                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
+                <div class="user-email"><img style="width: 13px;" src="ng1/images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
               </div>
               <div class="tech-request" ng-click="changePasswordRequired(user)" ng-if="user.isEmailVerified">
                 <p>Send a request to change password</p>
@@ -106,14 +106,14 @@
               <div class="avatar">
                 <img ng-if="user.avatar" ng-src="{{ getContactAvatarUrl(user) }}"
                      alt="..." class="img-circle">
-                <img ng-if="!user.avatar" src="images/settings-icon/deleted-tech-user.png" alt="..." >
+                <img ng-if="!user.avatar" src="ng1/images/settings-icon/deleted-tech-user.png" alt="..." >
               </div>
 
               <div class="name-designation">
                 <h4>{{ getUserName(user) }}</h4>
                 <span ng-style="{'background-color': techColors[user.techRole]}" class="label">{{ user.techRole }}</span><br/>
 
-                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
+                <div class="user-email"><img style="width: 13px;" src="ng1/images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
               </div>
 
             </div>
