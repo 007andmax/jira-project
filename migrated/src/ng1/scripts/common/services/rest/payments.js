@@ -17,7 +17,6 @@
       var wasSubscribed = false;
 
       function getData(url, callback, data) {
-        console.log(data);
         var getFuture = $http({
           url: url,
           method: 'post',
@@ -48,7 +47,6 @@
 
 
       function postData(url, data, callback) {
-        console.log(data, 'data');
         var postFuture = $http({
           url: url,
           method: 'POST',
@@ -78,9 +76,6 @@
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
-
-          console.log(newChange, 'newChange');
-          console.log(invoices, 'invoices');
 
           if(newChange.action === 'PAYMENT_CREATED') {
             invoices = $rootScope.allInvoices;
@@ -192,13 +187,9 @@
 
           } else if (newChange.action === 'PAYMENT_EDITED') {
             var changed = newChange.data;
-            console.log(payments, 'payments');
-
-
             var index = payments.findIndex(function(el) {
               return el.id == changed.id;
             })
-            console.log(index, 'index');
 
             var invoices = $rootScope.allInvoices;
 
