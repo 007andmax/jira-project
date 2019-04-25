@@ -190,7 +190,7 @@
             <span>{{ payment.reference }}</span>
           </div>
           <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
-            <p set-height-note text="payment.note" line-length="payment.invoiceNumbers.length" ng-click="showTooltip($event, $index)">
+            <p  ng-click="showTooltip($event, $index)">
               {{ payment.note }}
             </p>
             <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
