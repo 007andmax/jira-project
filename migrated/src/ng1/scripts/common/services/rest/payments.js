@@ -272,9 +272,10 @@
           })
       }
 
-      function deletePayment(id, callback) {
+      function deletePayment(id) {
         $http.put('/payments/delete?paymentId=' + id)
-          .then(function(res) {
+          .then(function() {
+            console.log(res, 'RES');
             if (callback) callback(res)
           })
       }
@@ -282,7 +283,7 @@
       function refundPayment(data, callback) {
         $http.put('/payments/refund', data)
           .then(function(res) {
-            if (callback) callback(res);
+            // if (callback) callback(res);
           })
       }
 

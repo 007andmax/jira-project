@@ -10,7 +10,7 @@
     $provide.factory('myHttpInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
 
       function processResponse(response) {
-        
+
         var unlockExpiredHeader = response.headers('SESSION_UNLOCK_EXPIRED');
         var userDisabledHeader = response.headers('USER_DISABLED');
         var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
@@ -123,6 +123,7 @@
   services.factory('$exceptionHandler', ['$log', function($log) {
     return function myExceptionHandler(exception, cause) {
       //todo: send errors to the backend (need endpoint)
+      console.log('teste');
       $log.warn(exception, cause);
     };
   }]);

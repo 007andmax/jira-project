@@ -293,7 +293,11 @@
 
         $scope.deletePayment = function(id) {
           PaymentsService.deletePayment(id, function(res) {
+            console.log($scope.filteredPayments.length, '111');
+            console.log($scope.filteredPayments.length, '222');
           });
+          $scope.filteredPayments = $scope.filteredPayments
+            .filter((item) => item.id !== id)
         };
 
         $scope.showTooltip = function(event, index, type) {

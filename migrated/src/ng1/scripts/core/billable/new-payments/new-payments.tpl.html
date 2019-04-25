@@ -155,7 +155,7 @@
 
         <li class="list-company-row"
             ng-if="filteredPayments && filteredPayments.length > 0"
-            ng-repeat="payment in filteredPayments">
+            ng-repeat="payment in filteredPayments track by $index">
 
           <div class="col-xs-1" style="width: 3%">
             <label style="position: absolute;left: 10px;height: 72px;padding: 0;margin: 0!important;top: 3px;"
