@@ -195,7 +195,7 @@
             </p>
             <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
               <p class="full-text-title">Note</p>
-              {{payment.note}}
+              {{payment.note && payment.note}}
             </div>
           </div>
           <div class="col-xs-1">
