@@ -21,7 +21,8 @@
       <div class="center-category__category"
            ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
            ng-click="stateGo($event, 'tickets', {listType: 'user'}); toggleMobileLeftPanel(false)">
-        My Tickets (<span>{{ticketsCounter.USER}}</span>)
+        My Tickets (<span ng-bind="ticketsCounter.USER"></span>)
+        {{ticketsCounter | json}}
       </div>
       <div class="center-category__category"
            ng-class="{active: $state.includes('tickets', {listType: 'all'}) || $state.includes('tickets', {listType: 'by_company'})}"

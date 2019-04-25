@@ -274,7 +274,9 @@
         }, true);
 
         TicketsService.getAllCounts(function (resp) {
-          $scope.ticketsCounter = resp;
+          console.log(resp, 'RESP');
+          resp && ($scope.ticketsCounter = resp);
+          console.log($scope.ticketsCounter, '$scope.ticketsCounter');
         });
 
         $scope.$watch(function() {

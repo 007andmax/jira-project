@@ -501,16 +501,18 @@
       }
       function getAllCounts(callback) {
         allCountsCallback = callback;
-        $http.post('/v2/tickets/counts', queries).then(function (resp) {
-          storage.ticketsQuantityMap = resp.data;
-          if (callback) {
-            callback(storage.ticketsQuantityMap);
-          }
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
+        if (queries) {
+          $http.post('/v2/tickets/counts', queries).then(function (resp) {
+            storage.ticketsQuantityMap = resp.data;
+            if (callback) {
+              callback(storage.ticketsQuantityMap);
+            }
+          }, function (resp) {
+            if (callback) {
+              callback(resp.data);
+            }
+          });
+        }
       }
       function getAllCountsByCompanyId(scope, companyId, callback) {
         var typeOfQueries = ['ALL', 'UNASSIGNED', 'IN_PROGRESS', 'ON_HOLD', 'COMPLETED'];
