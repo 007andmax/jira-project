@@ -100,6 +100,8 @@
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
+          console.log('test');
+
 
           if (newChange.action == 'INVOICE_SAVED') {
 
