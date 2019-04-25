@@ -169,11 +169,14 @@
           </div>
           <div class="col-xs-1 w-5">
 
-            <div ng-click="showInvoice(payment.partialPaidInvoice)"><span tooltip-placement="top"
-                                                                          uib-tooltip="Invoice Preview"
-                                                                          tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
+            <div ng-if="payment.partialPaidInvoice"
+              ng-click="showInvoice(payment.partialPaidInvoice)">
+              <span tooltip-placement="top"
+                    uib-tooltip="Invoice Preview"
+                    tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
             </div>
-            <div ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span
+            <div *ng-if="payment.invoiceNumbers && payment.invoiceNumbers.length > 0"
+              ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span
               tooltip-placement="top" uib-tooltip="Invoice Preview"
               tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
           </div>
