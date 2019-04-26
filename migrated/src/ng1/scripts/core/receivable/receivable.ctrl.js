@@ -40,7 +40,7 @@
           if (newInvoice.action === 'INVOICE_DELETED') {
             console.log('12341235235');
             console.log($scope.invocesList.length, '12341235235');
-            $scope.invocesList.slice(index, 1);
+            $scope.invocesList = $scope.invocesList.slice(index, 1);
             console.log($scope.invocesList.length, '12341235235');
           } else {
             $scope.invocesList[index] = newInvoice.data;
