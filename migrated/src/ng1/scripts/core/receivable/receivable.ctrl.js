@@ -32,8 +32,8 @@
           return filteredArray;
         }
 
-        $rootScope.$on('receivableInvoice', function(invoice){
-          console.log(invoice, '123t123');
+        $rootScope.$on('receivableInvoice', function(event, newInnvoice){
+          console.log(newInnvoice, '123t123');
         });
 
 
