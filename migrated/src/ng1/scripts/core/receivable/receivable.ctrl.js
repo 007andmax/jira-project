@@ -41,6 +41,7 @@
             const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
             console.log(index, '12351235');
             console.log($scope.invocesList[index], '12351235');
+            $scope.invocesList[index].padiSum += newInvoice.data.partialPaidAmount
           } else {
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
