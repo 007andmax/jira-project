@@ -97,6 +97,9 @@
         if (callback) {
           callback(data);
         }
+        RealTimeService.subscribe('/payments', scope, function (newChange) {
+          $rootScope.$emit('receivableInvoice', newChange);
+        });
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
