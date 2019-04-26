@@ -32,6 +32,11 @@
           return filteredArray;
         }
 
+        $rootScope.$on('receivableInvoice', function(invoice){
+          console.log(invoice, '123t123');
+        });
+
+
         $scope.getInvoices = function (data) {
           $scope.stopScroll = true;
           if (!data) {
