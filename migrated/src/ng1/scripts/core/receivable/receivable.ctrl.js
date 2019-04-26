@@ -32,8 +32,11 @@
           return filteredArray;
         }
 
-        $rootScope.$on('receivableInvoice', function(event, newInnvoice){
-          console.log(newInnvoice, '123t123');
+        $rootScope.$on('receivableInvoice', function(event, newInvoice){
+          console.log(newInvoice, '123t123');
+          const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
+          console.log(index, 'INDEX');
+          $scope.invocesList[index] = newInvoice.data;
         });
 
 
