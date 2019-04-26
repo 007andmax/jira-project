@@ -148,7 +148,10 @@ export class PasswordManagerComponent implements OnInit {
    * Close mobile filters
    */
   public checkCloseFilters() {
-    this.passwordManagerService.closeFilter.subscribe(() => this.isMobileFilterShowing = false )
+    this.passwordManagerService.closeFilter.subscribe(() => {
+      console.log('0000000');
+      this.isMobileFilterShowing = false
+    } )
   }
 
   ngOnDestroy() {
