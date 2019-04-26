@@ -100,7 +100,7 @@
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
-          $rootScope.$emit('receivableInvoice', [1,2,3]);
+          $rootScope.$emit('receivableInvoice', newChange);
 
 
           if (newChange.action == 'INVOICE_SAVED') {
