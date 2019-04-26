@@ -37,7 +37,8 @@
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
           } else if(newInvoice.action === 'PAYMENT_CREATED') {
             console.log(newInvoice.data, '124123');
-            const index = $scope.invocesList.findIndex((item) => item.partialPaidInvoice === newInvoice.data.partialPaidInvoice);
+            console.log($scope.invocesList, '$scope.invocesList');
+            const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
             console.log(index, '12351235');
             console.log($scope.invocesList[index], '12351235');
           } else {
