@@ -55,6 +55,8 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        $scope.test = [];
+
         //categories start
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
@@ -253,15 +255,22 @@
 
         $scope.toggleMobileLeftPanel = function(state) {
           $rootScope.isLeftPanelOpened = state;
-        }
+          console.log($scope.ticketsCounter, 'ticketsCounter');
+        };
 
         $scope.toggleMobileMenu = function(menu) {
+          console.log($scope.ticketsCounter, 'ticketsCounter');
+          TicketsService.getAllCounts(function (resp) {
+            resp && ($scope.ticketsCounter = resp);
+            return $scope.test;
+          });
+          console.log($scope.ticketsCounter, 'ticketsCounter');
           $scope.listOfMobileTitles.forEach(function(title) {
             $scope[title] = false;
-          })
+          });
 
           $scope[menu] = true;
-        }
+        };
 
         $scope.$watch('companyFilterTags', function(val) {
           if (val.length) {
@@ -274,15 +283,25 @@
         }, true);
 
         TicketsService.getAllCounts(function (resp) {
-          console.log(resp, 'RESP');
           resp && ($scope.ticketsCounter = resp);
+          return $scope.test;
+        });
+
+        $scope.$watch('ticketsCounter', function(newValue, oldValue) {
+          console.log(newValue, oldValue);
+          $scope.ticketsCounter = newValue;
+          console.log('12351235123');
           console.log($scope.ticketsCounter, '$scope.ticketsCounter');
+          $scope.apply();
+          return $scope.ticketsCounter;
+
         });
 
         $scope.$watch(function() {
           return $rootScope.exampleCompanyDeleted;
         }, function(val) {
           if (val) {
+            console.log(val, '1235123');
             TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
             });

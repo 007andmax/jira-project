@@ -33,13 +33,8 @@
         }
 
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
-          console.log(newInvoice, '123t123');
-          console.log(newInvoice.action, 'INDEX');
           if (newInvoice.action === 'INVOICE_DELETED') {
-            console.log('12341235235');
-            console.log($scope.invocesList.length, '12341235235');
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
-            console.log($scope.invocesList.length, '12341235235');
           } else {
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;

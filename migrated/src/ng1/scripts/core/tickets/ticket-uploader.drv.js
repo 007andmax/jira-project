@@ -12,8 +12,6 @@
           restrict: 'A',
           link: function (scope, element) {
 
-            console.log(1);
-
             var $win = $(window),
               lastListType,
               ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
@@ -40,16 +38,8 @@
               if(tabName) {
                 getTicketsList(ticketsHeaderState.searchFilter)
               }
-            })
+            });
 
-
-            // scope.$watch(function() {
-            //   return ticketsHeaderState.filter.clientUserId;
-            // }, getTicketsList , true);
-            // var filterObj = {
-            //   userId: ticketsHeaderState.searchFilter.userId,
-            //   companyId: ticketsHeaderState.searchFilter.companyId
-            // }
 
             scope.onFinishRendering = function () {
               scope.loadingOrRendering = false;
@@ -57,7 +47,6 @@
 
             scope.$watch('runTicketListUploader', function(runTicketListUploader) {
               if(runTicketListUploader) {
-                console.log(runTicketListUploader);
                 getTicketsList(ticketsHeaderState.searchFilter);
                 $rootScope.runTicketListUploader = false;
               }
@@ -137,7 +126,6 @@
                 element.addClass('has-scrollbar nano');
               }
             }
-            console.log(2);
 
           }
         };
