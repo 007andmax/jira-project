@@ -37,7 +37,10 @@
           const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
           console.log(index, 'INDEX');
           if (newInvoice.action === 'INVOICE_DELETED') {
+            console.log('12341235235');
+            console.log($scope.invocesLis.length, '12341235235');
             $scope.invocesList.slice(index, 1);
+            console.log($scope.invocesLis.length, '12341235235');
           } else {
             $scope.invocesList[index] = newInvoice.data;
           }
