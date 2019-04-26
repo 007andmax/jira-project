@@ -89,7 +89,7 @@
     };
 
     self.selectItem = function(item) {
-      if(self.filterProperty) {
+      if(self.filterProperty && item) {
         self.viewValueItem = item[self.filterProperty];
       } else {
         self.viewValueItem = item;

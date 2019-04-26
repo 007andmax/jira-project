@@ -220,27 +220,11 @@
 
             }, 100)
           }
+        });
 
-
-
-
-
-        })
-
-
-
-        //for one time popover
-        // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.tagColors = TagsService.getColors();
-
-        // $rootScope.ticketsTagsColors = {
-        //   unassigned: 0,
-        //   completed: 1,
-        //   inProgress: 2,
-        //   onHold: 9
-        // };
 
         $rootScope.ticketsTagsColors = {
           unassigned: 1,
@@ -255,16 +239,13 @@
 
         $scope.toggleMobileLeftPanel = function(state) {
           $rootScope.isLeftPanelOpened = state;
-          console.log($scope.ticketsCounter, 'ticketsCounter');
         };
 
         $scope.toggleMobileMenu = function(menu) {
-          console.log($scope.ticketsCounter, 'ticketsCounter');
           TicketsService.getAllCounts(function (resp) {
             resp && ($scope.ticketsCounter = resp);
             return $scope.test;
           });
-          console.log($scope.ticketsCounter, 'ticketsCounter');
           $scope.listOfMobileTitles.forEach(function(title) {
             $scope[title] = false;
           });
@@ -288,11 +269,7 @@
         });
 
         $scope.$watch('ticketsCounter', function(newValue, oldValue) {
-          console.log(newValue, oldValue);
           $scope.ticketsCounter = newValue;
-          console.log('12351235123');
-          console.log($scope.ticketsCounter, '$scope.ticketsCounter');
-          $scope.apply();
           return $scope.ticketsCounter;
 
         });
