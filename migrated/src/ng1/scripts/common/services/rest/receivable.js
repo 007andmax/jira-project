@@ -127,6 +127,7 @@
             if (invoice) {
               Utils.defineReadOnlyProperty(invoice, 'status', newChange.data.status);
               Utils.defineReadOnlyProperty(invoice, 'readedAt', newChange.data.readedAt);
+              var index =
             } else {
               console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");
             }
