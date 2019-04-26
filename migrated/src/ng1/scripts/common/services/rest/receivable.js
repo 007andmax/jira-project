@@ -100,8 +100,7 @@
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
-          console.log('test');
-          $rootScope.$emit('receivableInvoice', {});
+          $rootScope.$emit('receivableInvoice', [1,2,3]);
 
 
           if (newChange.action == 'INVOICE_SAVED') {
@@ -128,7 +127,6 @@
             if (invoice) {
               Utils.defineReadOnlyProperty(invoice, 'status', newChange.data.status);
               Utils.defineReadOnlyProperty(invoice, 'readedAt', newChange.data.readedAt);
-              var index =
             } else {
               console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");
             }
