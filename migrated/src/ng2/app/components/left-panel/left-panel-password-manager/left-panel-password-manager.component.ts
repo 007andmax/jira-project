@@ -156,6 +156,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public getPasswordRecords() {
+    console.log('12351235');
     if (this.innerWidth <= 414) {
       this.passwordManagerService.setMobileCategory();
     }
@@ -352,6 +353,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public closeMobileFilters() {
+    console.log('12351235');
     this.passwordManagerService.closeFilters();
   }
 
