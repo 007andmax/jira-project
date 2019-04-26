@@ -35,6 +35,11 @@
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
           if (newInvoice.action === 'INVOICE_DELETED') {
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
+          } else if(newInvoice.action === 'PAYMENT_CREATE') {
+            console.log(newInvoice.data, '124123');
+            const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
+            console.log(index, '12351235');
+            console.log($scope.invocesList[index], '12351235');
           } else {
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
