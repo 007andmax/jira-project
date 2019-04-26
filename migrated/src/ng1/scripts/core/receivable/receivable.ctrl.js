@@ -34,7 +34,6 @@
 
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
           console.log(newInvoice, '123t123');
-          console.log(index, 'INDEX');
           console.log(newInvoice.action, 'INDEX');
           if (newInvoice.action === 'INVOICE_DELETED') {
             console.log('12341235235');
