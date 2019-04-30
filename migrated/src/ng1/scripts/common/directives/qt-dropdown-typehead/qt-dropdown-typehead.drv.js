@@ -4,7 +4,7 @@
   angular.module("quicktech.common.directives").component('qtDropdownTypehead',{
     templateUrl: '/ng1/scripts/common/directives/qt-dropdown-typehead/qt-dropdown-typehead.tpl.html',
     bindings: {
-      listForDropdown: '<',
+      listForDropdown: '<?',
       selectedItem: '=',
       filterProperty: '<?',
       displayProperty: '<?',
@@ -81,23 +81,32 @@
       } else {
         self.isOpen = !self.isOpen;
       }
-      if(self.checkIfViewValueMatched(self.viewValueItem) || self.viewValueItem === '') {
-        self.lastCorrectSelecteditem = self.viewValueItem;
+      if (self.filterProperty) {
+        if(self.checkIfViewValueMatched(self.viewValueItem.name) || self.viewValueItem === '') {
+          self.lastCorrectSelecteditem = self.viewValueItem;
+        } else {
+          self.viewValueItem = self.lastCorrectSelecteditem;
+        }
       } else {
-        self.viewValueItem = self.lastCorrectSelecteditem;
+        if(self.checkIfViewValueMatched(self.viewValueItem) || self.viewValueItem === '') {
+          self.lastCorrectSelecteditem = self.viewValueItem;
+        } else {
+          self.viewValueItem = self.lastCorrectSelecteditem;
+        }
       }
+
+
       reInitList();
     };
 
     self.selectItem = function(item) {
-      console.log(item, 'ITEM');
-      console.log(self.filterProperty, 'self.filterProperty');
       if (item) {
         if (self.filterProperty) {
           self.viewValueItem = item[self.filterProperty];
         } else {
           self.viewValueItem = item;
         }
+        console.log(self.viewValueItem, 'self.viewValueItem');
         changeSelectedItem(item);
         self.lastCorrectSelecteditem = item;
         self.changeDropdownState();
@@ -142,14 +151,9 @@
     };
 
     self.checkIfViewValueMatched = function(inputValue) {
-      console.log(inputValue, 'inputValue');
-      // console.log(self.listForDropdown, 'listForDropdown');
-      var newInputValue = (inputValue && inputValue.name) ? inputValue.name : inputValue;
       if(inputValue) {
-        var newInputValue = (inputValue && inputValue.name) ? inputValue.name : inputValue;
-        console.log(newInputValue, 'newInputValue');
         return self.listForDropdown.some(function(item) {
-          return self.getFilterProperty(item).toString().toLowerCase() === newInputValue.toLowerCase()
+          return self.getFilterProperty(item).toString().toLowerCase() === inputValue.toLowerCase()
         })
       } else {
         return true;
