@@ -98,8 +98,8 @@
           callback(data);
         }
         RealTimeService.subscribe('/payments', scope, function (newChange) {
-          console.log('12351235123');
-          $rootScope.$emit('receivableInvoicePayment', newChange);
+          // console.log('12351235123');
+          // $rootScope.$emit('receivableInvoicePayment', newChange);
         });
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
