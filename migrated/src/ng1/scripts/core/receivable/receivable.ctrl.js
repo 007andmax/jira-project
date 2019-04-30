@@ -37,9 +37,7 @@
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
           } else if(newInvoice.action === 'PAYMENT_CREATED') {
             const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
-            console.log($scope.invocesList[index], '111111');
             $scope.invocesList[index].paidSum += +newInvoice.data.partialPaidAmount;
-            console.log($scope.invocesList[index], '2222222');
           } else {
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
@@ -56,6 +54,7 @@
             $scope.stopReqeust = true;
             ReceivableService.getInvoiceDataTable($scope, function(resp) {
               $scope.invocesList = [...$scope.invocesList, ...resp];
+              $rootScope.allInvoices = $scope.invocesList;
             }, data).then(() => {
               $scope.isInvoiceShown = false;
               $scope.offset += $scope.limitValue;
@@ -66,14 +65,12 @@
 
             });
           } else {
-            console.log('123512351235');
           }
         };
 
         $scope.getInvoices($scope.data);
 
         $scope.filterInvoicesBy = function(val) {
-          console.log(val, 'VAL');
         };
 
         $scope.showInvoice = function(invoice, goBack) {
@@ -96,7 +93,6 @@
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
-          console.log(value, 'invoiceFilterCompany');
           if(value && value.length > 1) {
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
@@ -169,7 +165,7 @@
             return;
           }
           var invoicesData = resp;
-          $rootScope.allInvoices = resp.list;
+          $rootScope.allInvoices = $scope.invocesList;
 
           $rootScope.receivableInvoicesData = resp;
           globalSearch.count = $rootScope.allInvoices.length;
@@ -324,13 +320,15 @@
             }
 
             return acc;
-          }, [])
+          }, []);
+
+          console.log(invoicesNums, 'invoicesNums');
 
           var invoicesCompanies = invoicesNums.reduce(function(acc, el) {
             var companyId = $scope.receivableInvoicesData.list.find(function(invoice) {
               return invoice.number === el;
-            }).company.id;
-
+            });
+            companyId =  companyId && companyId.company.id;
             if (!~acc.indexOf(companyId)) {
               acc.push(companyId);
             }
@@ -373,7 +371,6 @@
         $scope.selectedPaidInvoice = false;
 
         $scope.setOrderForInvoices = function (option) {
-          console.log(option, 'OOPTION');
           switch(option) {
             case 'date':
               $scope.resetAllFiltersForSort();
@@ -382,7 +379,6 @@
               $scope.getInvoices($scope.data);
               break;
             case 'number':
-              console.log('number');
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
               $scope.data = $scope.returnData();

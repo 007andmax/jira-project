@@ -25,6 +25,7 @@
         });
 
         $scope.$watch('invoiceToSent[company.id]', function (invoices) {
+          console.log(invoices, 'invoices');
 
           if (!invoices) {
             return;

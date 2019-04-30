@@ -23,6 +23,7 @@
         $scope.receivePaymentInvoices = [];
 
         $scope.allInvoicesList = $rootScope.allInvoices;
+
         $scope.partialPaymentAmount = 0;
         if (!$scope.invoiceToSent) {
           $scope.invoiceToSent = { invoices: [] }
@@ -82,6 +83,7 @@
         var invoicesToReceive = $scope.invoiceToReceive.invoices;
 
         $scope.$watch('invoiceCompany', function(val) {
+
           if (val) {
             $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
               return el.company.id === val.id && !el.paidOn;
@@ -136,8 +138,7 @@
         if (invoiceNum) {
           var invoice = $scope.allInvoicesList.find(function(el) {
             return el.number == invoiceNum;
-          })
-
+          });
           $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
 
         }
@@ -152,11 +153,12 @@
           if (val  && val >= $scope.receivePaymentSum) {
             $scope.partialPaymentAmount = $scope.receivePaymentSum;
           }
-
-          if (val && val >= ($scope.balance)) {
-            $scope.partialPaymentAmount = ($scope.balance );
+          if ((val && val >= ($scope.balance)) || (val === undefined) || (val === 0)) {
+            $scope.partialPaymentAmount = $scope.balance;
+          } else {
+            $scope.partialPaymentAmount = val;
           }
-        })
+        });
 
 
         $scope.paymentMethod = {
@@ -203,6 +205,7 @@
 
 
         $scope.$watch('invoiceToReceive.invoices', function () {
+          console.log($scope.invoiceToReceive, '$scope.invoiceToReceivev');
 
           var counter = 0,
             invoices = $scope.invoiceToReceive.invoices;
