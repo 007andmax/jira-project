@@ -313,15 +313,15 @@
         };
 
 
-        PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
-
-          $scope.payments = res;
-          $scope.filteredPayments = res;
-          $scope.filteredPayments.map(function(item) {
-            return $scope.showTooltipArray.push(false);
-          });
-
-        });
+        // PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
+        //
+        //   $scope.payments = res;
+        //   $scope.filteredPayments = res;
+        //   $scope.filteredPayments.map(function(item) {
+        //     return $scope.showTooltipArray.push(false);
+        //   });
+        //
+        // });
       }]);
 
 }());
