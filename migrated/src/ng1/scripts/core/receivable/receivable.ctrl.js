@@ -47,6 +47,20 @@
           }
         });
 
+        $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
+          if(newInvoice.action === 'PAYMENT_CREATED') {
+            console.log(newInvoice, 'newInvoice');
+            const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
+            console.log($scope.invocesList[index], '$scope.invocesList[index]11111');
+            $scope.invocesList[index].paidSum += newInvoice.data.partialPaidAmount;
+            console.log($scope.invocesList[index], '$scope.invocesList[index]2222');
+          } else {
+            const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
+            $scope.invocesList[index] = newInvoice.data;
+          }
+        });
+
+
         function removeDuplicates(myArr, prop) {
           return myArr.filter((obj, pos, arr) => {
             return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
