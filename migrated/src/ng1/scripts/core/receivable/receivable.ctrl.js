@@ -48,7 +48,6 @@
         });
 
         $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
-          console.log(333333);
           if(newInvoice.action === 'PAYMENT_CREATED') {
             console.log(newInvoice, 'newInvoice');
             const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
@@ -70,6 +69,7 @@
 
 
         $scope.getInvoices = function (data) {
+          console.log( $scope.offset, ' $scope.offset1');
           $scope.stopScroll = true;
           if (!data) {
             data = $scope.returnData();
@@ -81,12 +81,14 @@
               $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
               $rootScope.allInvoices = $scope.invocesList;
             }, data).then(() => {
-              $scope.isInvoiceShown = false;
-              $scope.offset += $scope.limitValue;
+
               setTimeout(() => {
+                $scope.isInvoiceShown = false;
+                console.log($scope.offset, '$scope.offset2');
+                $scope.offset += $scope.limitValue;
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
-              }, 700);
+              }, 800);
 
             });
           } else {

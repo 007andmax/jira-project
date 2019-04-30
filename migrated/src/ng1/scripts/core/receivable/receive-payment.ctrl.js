@@ -101,6 +101,7 @@
               var invoice = invoiceList[i];
 
               if (invoice.company.id === $scope.invoiceCompany.id && !invoice.paidOn) {
+                console.log(invoice, 'invoice');
                 $scope.receivePaymentInvoices.push(invoice);
 
                 if (invoicesToReceive[invoice.id]) {

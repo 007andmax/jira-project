@@ -101,6 +101,7 @@
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
           if (newChange.action == 'INVOICE_SAVED') {
+            console.log(newChange, 'newChange');
             $rootScope.$emit('receivableInvoice', newChange);
 
             var invoice = Utils.findById(data.list, newChange.data.id);
