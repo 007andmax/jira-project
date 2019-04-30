@@ -55,8 +55,10 @@
             $scope.invocesList[index].paidSum += newInvoice.data.partialPaidAmount;
             console.log($scope.invocesList[index], '$scope.invocesList[index]2222');
           } else {
+            console.log(newInvoice, 'newInvoice');
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
+            $scope.invocesList[index].sum = newInvoice.data.totalSum
           }
         });
 
