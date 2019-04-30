@@ -92,6 +92,8 @@
               });
 
               if (invoiceIndex && invoices[invoiceIndex]) {
+                console.log(invoices[invoiceIndex], 'invoices[invoiceIndex]');
+                console.log(sum, 'sum');
 
                 invoices[invoiceIndex].paidSum += sum;
 
@@ -103,15 +105,7 @@
                   invoices[invoiceIndex].paidOn = null;
                 }
               }
-
-
-
-
-
             }
-
-
-
           } else if ( newChange.action === 'PAYMENTS_DELETED') {
             for (var i = 0; i < newChange.data.length; i++) {
               var paymentId = newChange.data[i];

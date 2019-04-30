@@ -57,13 +57,10 @@
             data = $scope.returnData();
           }
           if (!$scope.stopReqeust) {
-            console.log('11111');
             $scope.stopReqeust = true;
-            console.log('22222');
             ReceivableService.getInvoiceDataTable($scope, function (resp) {
               $scope.invocesList = [...$scope.invocesList, ...resp];
               $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
-              console.log($scope.invocesList, '$scope.invocesList');
               $rootScope.allInvoices = $scope.invocesList;
             }, data).then(() => {
               $scope.isInvoiceShown = false;
@@ -331,8 +328,6 @@
 
             return acc;
           }, []);
-
-          console.log(invoicesNums, 'invoicesNums');
 
           var invoicesCompanies = invoicesNums.reduce(function(acc, el) {
             var companyId = $scope.receivableInvoicesData.list.find(function(invoice) {

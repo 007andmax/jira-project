@@ -14,12 +14,21 @@
     <div class="form-group clearfix">
       <div class="col-md-8 fix-caret" style="padding-right: 10px;">
         <label class="control-label">Company Name</label>
-
         <qt-dropdown-typehead list-for-dropdown="companies"
                               selected-item="invoiceCompany"
                               display-property="'name'"
                               filter-property="'name'" ng-show="!preSetupCompany">
-
+          <!-- <div uib-dropdown style="position: relative;">
+            <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                   uib-dropdown-toggle aria-expanded="true" ng-model="invoiceCompany.name">
+            <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+            <ul class="dropdown-menu">
+              <li ng-repeat="company in companies | orderBy:'name'"
+                  ng-click="setCompany(company)">
+                <a tabindex="-1" href="javascript:void(0)"> {{ company.name }} </a>
+              </li>
+            </ul>
+          </div> -->
       </div>
       <div class="col-md-4" style="padding-left: 10px;">
         <label class="control-label">Payment Date</label>
@@ -67,33 +76,25 @@
       </div>
       <div class="col-md-6 text-right">
         <strong ng-show="countCheckedInvoices() === 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ (balance) | currency: '$': 2 }}</strong>
-
         <strong ng-show="countCheckedInvoices() !== 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ balance | currency: '$': 2 }}</strong>
       </div>
       <div class="col-md-8 pr-10">Total Payment</div>
       <div class="col-md-4 text-right pl-10" ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'amount') && countCheckedInvoices() === 1}">
         <!-- <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong> -->
-
         <!-- <div ng-messages="paymentRecieveForm.amount.$error"
              ng-class="{'hide': !isShowingErrors(paymentRecieveForm, 'amount') || countCheckedInvoices() !== 1}">
-
           <div class="control-label" ng-message="required">Amount is required.</div>
           <div class="control-label" ng-message="invalid">Amount is .</div>
-
         </div> -->
-
         <input class="form-control disabled text-right" ng-if="countCheckedInvoices() !== 1"  qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="balance" />
         <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
-
       <div class="col-md-8 pr-10">Remaining balance</div>
       <div class="col-md-4 text-right pl-10">
         <strong ng-show="countCheckedInvoices() === 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ balance - partialPaymentAmount | currency: '$': 2 }}</strong>
         <strong ng-show="countCheckedInvoices() !== 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">$0.00</strong>
       </div>
-
       <h5 style="margin-bottom: 10px;">Receive Payment</h5>
-
     </div>
     <div class="form-group clearfix">
       <div class="col-md-6" style="padding-right: 10px;">
@@ -102,7 +103,6 @@
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
                  uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
           <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
-
           <ul class="dropdown-menu" style="top: 40px;">
             <li ng-repeat="(value, label) in paymentMethod"
                 ng-click="invoiceToReceive.method = value">
@@ -121,15 +121,12 @@
     </div>
     <div class="form-group note"
          ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'note')}">
-
       <label class="control-label" ng-class="{ 'hide': isShowingErrors(paymentRecieveForm, 'note')}">
         Note
       </label>
-
       <div ng-if="noteError" class="has-error">
         <label class="control-label">Note is to large</label>
       </div>
-
       <textarea placeholder="Write Note here" class="form-control" name="note" ng-model="note"></textarea>
     </div>
     <div>
