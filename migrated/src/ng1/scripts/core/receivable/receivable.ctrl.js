@@ -44,6 +44,12 @@
           }
         });
 
+        function removeDuplicates(myArr, prop) {
+          return myArr.filter((obj, pos, arr) => {
+            return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+          });
+        }
+
 
         $scope.getInvoices = function (data) {
           $scope.stopScroll = true;
@@ -51,9 +57,13 @@
             data = $scope.returnData();
           }
           if (!$scope.stopReqeust) {
+            console.log('11111');
             $scope.stopReqeust = true;
-            ReceivableService.getInvoiceDataTable($scope, function(resp) {
+            console.log('22222');
+            ReceivableService.getInvoiceDataTable($scope, function (resp) {
               $scope.invocesList = [...$scope.invocesList, ...resp];
+              $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
+              console.log($scope.invocesList, '$scope.invocesList');
               $rootScope.allInvoices = $scope.invocesList;
             }, data).then(() => {
               $scope.isInvoiceShown = false;
@@ -61,7 +71,7 @@
               setTimeout(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
-              }, 300);
+              }, 700);
 
             });
           } else {
