@@ -48,6 +48,7 @@
         });
 
         $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
+          console.log(333333);
           if(newInvoice.action === 'PAYMENT_CREATED') {
             console.log(newInvoice, 'newInvoice');
             const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);

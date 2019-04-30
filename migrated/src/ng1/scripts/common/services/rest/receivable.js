@@ -137,7 +137,9 @@
             }
 
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
+            console.log('1111111');
             $rootScope.$emit('receivableInvoicePayment', newChange);
+            console.log('22222222');
 
 
           } else if (newChange.action === 'INVOICE_ROLLBACK') {
