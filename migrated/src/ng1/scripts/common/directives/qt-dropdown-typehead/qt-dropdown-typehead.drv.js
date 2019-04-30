@@ -72,7 +72,6 @@
 
     function reInitList() {
       self.list = self.listForDropdown;
-      console.log(self.list);
     }
 
     self.changeDropdownState = function(isOutsideClick) {
@@ -106,7 +105,6 @@
         } else {
           self.viewValueItem = item;
         }
-        console.log(self.viewValueItem, 'self.viewValueItem');
         changeSelectedItem(item);
         self.lastCorrectSelecteditem = item;
         self.changeDropdownState();
@@ -169,7 +167,6 @@
     };
 
     if (self.selectedItem) {
-      console.log(self.selectedItem, 'self.selectedItem');
       self.selectItem(self.selectedItem);
 
       self.changeDropdownState(false);

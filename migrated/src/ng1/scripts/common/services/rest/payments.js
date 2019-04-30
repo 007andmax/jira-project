@@ -78,6 +78,7 @@
 
 
           if(newChange.action === 'PAYMENT_CREATED') {
+            console.log(newChange, 'newChange');
             invoices = $rootScope.allInvoices;
             if (payments.findIndex(function(el) { return el.id === newChange.data.id }) !== -1) return;
 
