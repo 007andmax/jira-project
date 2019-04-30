@@ -97,10 +97,10 @@
         if (callback) {
           callback(data);
         }
-        RealTimeService.subscribe('/payments', scope, function (newChange) {
-          // console.log('12351235123');
-          // $rootScope.$emit('receivableInvoicePayment', newChange);
-        });
+        // RealTimeService.subscribe('/payments', scope, function (newChange) {
+        //   // console.log('12351235123');
+        //   //
+        // });
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
@@ -144,7 +144,7 @@
             }
 
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
-
+            $rootScope.$emit('receivableInvoicePayment', newChange);
 
 
           } else if (newChange.action === 'INVOICE_ROLLBACK') {

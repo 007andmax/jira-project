@@ -205,7 +205,6 @@
 
 
         $scope.$watch('invoiceToReceive.invoices', function () {
-          console.log($scope.invoiceToReceive, '$scope.invoiceToReceivev');
 
           var counter = 0,
             invoices = $scope.invoiceToReceive.invoices;

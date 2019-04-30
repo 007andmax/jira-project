@@ -74,6 +74,7 @@
         // if (wasSubscribed) return;
 
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
+          $rootScope.$emit('receivableInvoicePayment', newChange);
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
           console.log(newChange, 'newChange')
