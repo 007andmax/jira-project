@@ -74,13 +74,11 @@
         // if (wasSubscribed) return;
 
         RealTimeService.subscribe('/payments', scope,  function(newChange) {
-          $rootScope.$emit('receivableInvoicePayment', newChange);
           var invoices = $rootScope.receivableInvoicesData && $rootScope.receivableInvoicesData.list;
 
-          console.log(newChange, 'newChange')
 
 
-          if(newChange.action === 'PAYMENT_CREATED') {;
+          if(newChange.action === 'PAYMENT_CREATED') {
             invoices = $rootScope.allInvoices;
             if (payments.findIndex(function(el) { return el.id === newChange.data.id }) !== -1) return;
 

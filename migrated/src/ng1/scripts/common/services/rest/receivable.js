@@ -97,14 +97,8 @@
         if (callback) {
           callback(data);
         }
-        // RealTimeService.subscribe('/payments', scope, function (newChange) {
-        //   // console.log('12351235123');
-        //   //
-        // });
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
-
-
 
           if (newChange.action == 'INVOICE_SAVED') {
             $rootScope.$emit('receivableInvoice', newChange);
@@ -124,7 +118,6 @@
             }
 
           } else if (newChange.action === 'INVOICE_STATUS') {
-            $rootScope.$emit('receivableInvoice', newChange);
 
             var invoice = Utils.findById(data.list, newChange.data.id);
 
