@@ -53,7 +53,6 @@
             } else {
               $scope.data = $scope.returnData();
             }
-            console.log('12523');
             $scope.stopReqeust = true;
             PaymentsService.getPaymentsDataTable($scope, function (res) {
               if (res.length > 0 && Array.isArray(res)) {
