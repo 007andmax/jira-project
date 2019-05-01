@@ -4,7 +4,7 @@
 
   var app = angular.module("quicktech.common.directives");
 
-  app.directive('scrollPane', function ($timeout) {
+  app.directive('scrollPane', function () {
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {

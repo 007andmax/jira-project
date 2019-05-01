@@ -28,7 +28,6 @@
         $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
 
 
-
         $scope.ticketMobileSettings = ticketMobileSettings;
 
 
