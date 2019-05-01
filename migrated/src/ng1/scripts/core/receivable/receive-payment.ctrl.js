@@ -29,9 +29,15 @@
           $scope.invoiceToSent = { invoices: [] }
         }
 
-        $scope.companies = Object.keys(($scope.receivableInvoicesData || $rootScope.uploadedReceivable).companies).map(function(id) {
-          return CompaniesService.getOneById(id);
-        });
+        $scope.companies = CompaniesService.getClientCompanies();
+
+        function getCompaniesNames(list) {
+          const filteredArray = [];
+          list.map((item) => {
+            filteredArray.push(item.name);
+          });
+          return filteredArray;
+        }
 
 
         $scope.availableInvoiceCompanies = [];
