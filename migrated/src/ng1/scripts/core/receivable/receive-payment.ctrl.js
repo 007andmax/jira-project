@@ -31,15 +31,6 @@
 
         $scope.companies = CompaniesService.getClientCompanies();
 
-        function getCompaniesNames(list) {
-          const filteredArray = [];
-          list.map((item) => {
-            filteredArray.push(item.name);
-          });
-          return filteredArray;
-        }
-
-
         $scope.availableInvoiceCompanies = [];
 
         $scope.setCompany = function(company) {

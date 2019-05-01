@@ -86,7 +86,6 @@
 
             }, data).then(() => {
                 console.log($scope.offset, '$scope.offset2')
-                $scope.isInvoiceShown = false;
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
                 console.log(1);
