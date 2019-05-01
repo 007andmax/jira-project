@@ -31,6 +31,8 @@
 
         $scope.companies = CompaniesService.getClientCompanies();
 
+        console.log($scope.companies, '$scope.companies');
+
         $scope.availableInvoiceCompanies = [];
 
         $scope.setCompany = function(company) {
