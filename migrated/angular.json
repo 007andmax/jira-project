@@ -480,7 +480,7 @@
               "optimization": true,
               "outputHashing": "all",
               "extractLicenses": true,
-              "vendorChunk": false
+              "vendorChunk": false,
               "budgets": [
                 {
                   "type": "initial",
