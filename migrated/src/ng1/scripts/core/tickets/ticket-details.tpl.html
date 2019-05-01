@@ -11,13 +11,13 @@
                 <i class="icn-sm icn-back-arrow" style="position: absolute;top: 7px;left: 3px;"></i></div>
             </div>
             <div class="ticket-header-avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
             </div>
             <div class="clearfix vladik">
               <div class="ticket-header-username">
                 <div qt-popover-position="bottom"
                      custom-disabled="{{ user.company.isDefault }}"
-                     qt-custom-popover-template="/ng1/scripts/core/tickets/popup-templates/user-info-popup.tpl.html">
+                     qt-custom-popover-template="/html/scripts/core/tickets/popup-templates/user-info-popup.tpl.html">
                   <span qt-popover-trigger="mouseenter">{{ getUserName(user) }}</span>
                 </div>
                 <div uib-dropdown>
@@ -192,6 +192,82 @@
             </div>
             <!--<div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">-->
           </div>
+          <!--<div class="pull-left" uib-dropdown-->
+          <!--ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">-->
+          <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+          <!--ng-if="(ticketAgent.type !== 'workstation') && ticketAgent.online"-->
+          <!--ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">-->
+          <!--<i class="icon-sm icn-remote-access"></i>-->
+          <!--</div>-->
+          <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+          <!--ng-if="(ticketAgent.type === 'workstation') && ticketAgent.online"-->
+          <!--tooltip-placement="top" uib-tooltip="Remote Access"-->
+          <!--aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>-->
+          <!--<i class="icon-sm icn-remote-access"></i>-->
+          <!--</div>-->
+          <!--<ul class="dropdown-menu dropdown-menu-right" style="width: 230px;" role="menu">-->
+          <!--<li ng-click="remoteAccess('CSS')">-->
+          <!--<a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>-->
+          <!--</li>-->
+          <!--<li ng-click="remoteAccess('RDP')">-->
+          <!--<a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>-->
+          <!--</li>-->
+          <!--</ul>-->
+          <!--</div>-->
+          <!--<div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">-->
+          <!--<div class="btn btn-icn btn-default pull-left has-tooltip"-->
+          <!--aria-haspopup="true" aria-expanded="false"-->
+          <!--ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"-->
+          <!--uib-dropdown-toggle uib-tooltip="Settings" tooltip-placement="top">-->
+          <!--<i class="icon-sm settings-icon"></i>-->
+          <!--</div>-->
+          <!--<ul class="dropdown-menu dropdown-menu-right" style="width: 185px; overflow: visible;" role="menu">-->
+          <!--<li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">-->
+          <!--<a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>-->
+          <!--</li>-->
+          <!--<li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"-->
+          <!--class="dropdown-submenu left-align">-->
+          <!--<a tabindex="-1" href="javascript:void(0)">-->
+          <!--{{ ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...-->
+          <!--</a>-->
+          <!--<div class="dropdown-submenu-wrapper">-->
+          <!--<div class="dropdown-assign-ticket dropdown-menu"-->
+          <!--stop-propagation="click"-->
+          <!--assign-user-button aub-ticket-id="ticketDetails.id"-->
+          <!--ticket-assigned-user-id="ticketDetails.assignedUser.id"-->
+          <!--aub-ticket-number="ticketDetails.number"-->
+          <!--users="usersCurrentCompany"-->
+          <!--aub-current-user="currentUser">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</li>-->
+          <!--<li class="dropdown-submenu left-align linked-agent-dropdown"-->
+          <!--ng-if="!ticketDetails.company.isDefault && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">-->
+          <!--<a tabindex="-1" href="javascript:void(0)">-->
+          <!--{{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}-->
+          <!--Agent-->
+          <!--</a>-->
+          <!--<ul class="dropdown-submenu-wrapper dropdown-menu">-->
+          <!--<li ng-repeat="agent in agentList" ng-click="linkAgent(ticketDetails.id, agent.id)"-->
+          <!--ng-if="!ticketDetails.agent || agent.id !== ticketDetails.agent.deviceId">-->
+          <!--{{ agent.hostName || agent.ip }}-->
+          <!--</li>-->
+          <!--</ul>-->
+          <!--</li>-->
+          <!--<li ng-if="ticketDetails.agent && ticketDetails.agent.deviceId">-->
+          <!--<a tabindex="-1" href="javascript:void(0)" ng-click="linkAgent(ticketDetails.id, '')">Unlink Agent</a>-->
+          <!--</li>-->
+          <!--<li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">-->
+          <!--<a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.isOwner"-->
+          <!--ng-click="moveIntoSpam()">Mark as Spam</a>-->
+          <!--<a tabindex="-1" href="javascript:void(0)" ng-if="!currentUser.isOwner"-->
+          <!--ng-click="moveIntoSpam()">Report as Spam</a>-->
+          <!--</li>-->
+          <!--<li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">-->
+          <!--<a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>-->
+          <!--</li>-->
+          <!--</ul>-->
+          <!--</div>-->
         </div>
       </div>
       <div class="ticket-detail">
@@ -253,7 +329,7 @@
           <li ng-repeat="attachment in ticketDetails.attachments"
               ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
               class="{{ attachmentImageClass[attachment.file.contentType] }}"
-              url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+              url="/html/scripts/core/tickets/image-preview.tpl.html"
               data="attachment.file" func="downloadAttachment"
               first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
             <div class="file-icon-name attach-type-{{ type }}"></div>
@@ -271,10 +347,10 @@
           </li>
         </ul>
       </div>
-      <div ng-include="'/ng1/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
+      <div ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
       <div class="mobile-visible" ng-if="TicketsPermissionsService.isActionVisible('update', ticketDetails)"
-           ng-include="'/ng1/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
-      <div ng-include="'/ng1/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
+           ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
+      <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
       <div class="ticket-updates clearfix">
         <div class="ticket-update-header clearfix"
              ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates">
@@ -287,8 +363,8 @@
             <li ng-repeat="share in shares">
               <div class="pull-left avatar persistent-tooltip"
                    tooltip-placement="top" tooltip-append-to-body="true"
-                   uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/shared-user-popup.tpl.html'">
-                <img ng-src="{{ share.avatarUrl }}" alt="..." class="img-circle avatar-38">
+                   uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/shared-user-popup.tpl.html'">
+                <img ng-src="{{ share.avatarUrl }}" alt="..." class="img-circle avatar-40">
               </div>
             </li>
             <li>
@@ -308,7 +384,7 @@
               <div class="indicator-new-update animation-hide angular-animate" ng-show="ticketUpdate.unread"
                    std-update="{{ ticketUpdate.id }}"></div>
               <div class="pull-left avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="avatar-38 img-circle">
+                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="avatar-40 img-circle">
               </div>
             </div>
             <div class="ticket-update-content pull-left">
@@ -360,7 +436,7 @@
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                     ng-repeat="attachment in ticketUpdate.attachments"
-                    url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                    url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
                   <div class="file-icon-name attach-type-{{ type }}"></div>
@@ -478,7 +554,7 @@
                 </div>
                 <div class="ticket-update-edit" ng-class="{'hide': product.id !== editExpenseId}"
                      ng-if="product.id === editExpenseId"
-                     ng-include="'/ng1/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
+                     ng-include="'/html/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
               </div>
               <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
                    ng-if=" ticketUpdate.type === 'SERVICE'">
@@ -539,7 +615,7 @@
                 </div>
                 <div class="ticket-update-edit" ng-class="{'hide': service.id !== editExpenseId}"
                      ng-if="service.id === editExpenseId"
-                     ng-include="'/ng1/scripts/core/tickets/services/ticket-edit-update-service.tpl.html'"></div>
+                     ng-include="'/html/scripts/core/tickets/services/ticket-edit-update-service.tpl.html'"></div>
               </div>
               <div class="ticket-update-meta clearfix" ng-init="showAllSharedUsers = false">
                 <div class="ticket-meta-wrapper">
@@ -551,7 +627,7 @@
                     <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
                          ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
                          tooltip-class="avatar-tooltip" tooltip-placement="top"
-                         uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                         uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                       <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
                            ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                       <div class="default-user-avatar" ng-if="!(share.user.avatar)"
@@ -569,7 +645,7 @@
                       <div class="pull-left avatar userinfo-tooltip"
                            ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"
                            tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
-                           uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                           uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                         <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
                              ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                         <div class="default-user-avatar" ng-if="!(share.user.avatar)"
@@ -598,14 +674,14 @@
         <div class="no-ticket-updates" ng-if="!ticketDetails.updates.length">
           <p>No ticket Update posted yet!
             Ticket Update will be appear here</p>
-          <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
+          <img src="images/new-icons/no-ticketupdate.png" alt="">
         </div>
       </div>
     </div>
     <div class="mob-ticket-content desktop-hidden">
       <div class="mob-ticket-header">
         <div class="mob-ticket-header-info">
-          <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
+          <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
           <div class="mob-valera">
             <div class="mob-valera-name">
               {{ getUserName(user) }}
@@ -688,7 +764,7 @@
               <li ng-repeat="attachment in ticketDetails.attachments"
                   ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                   class="{{ attachmentImageClass[attachment.file.contentType] }}"
-                  url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                  url="/html/scripts/core/tickets/image-preview.tpl.html"
                   data="attachment.file" func="downloadAttachment"
                   first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
                 <div class="file-icon-name attach-type-{{ type }}"></div>
@@ -707,7 +783,7 @@
           </div>
         </div>
         <div class="mob-ticket-detail-alert"
-             ng-include="'/ng1/scripts/core/tickets/ticket-details-user-msg.tpl.html'">
+             ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'">
         </div>
         <div class="mob-ticket-detail-updates">
           <b>{{ticketDetails.updates.length}}</b><span> Ticket Updates</span>
@@ -749,7 +825,7 @@
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                     ng-repeat="attachment in ticketUpdate.attachments"
-                    url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                    url="/html/scripts/core/tickets/image-preview.tpl.html"
                     disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
                   <div class="file-icon-name attach-type-{{ type }}"></div>
@@ -845,7 +921,7 @@
                     <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
                          ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
                          tooltip-class="avatar-tooltip" tooltip-placement="top"
-                         uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                         uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                       <img alt="..." class="avatar-26 img-circle"
                            ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                     </div>
@@ -858,7 +934,7 @@
                       <div class="pull-left avatar userinfo-tooltip"
                            ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"
                            tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
-                           uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                           uib-tooltip-template="'/html/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                         <img alt="..." class="avatar-26 img-circle"
                              ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                       </div>
@@ -882,7 +958,7 @@
       <div class="no-ticket-updates" ng-if="!ticketDetails.updates.length">
         <p>No ticket Update posted yet!
           Ticket Update will be appear here</p>
-        <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
+        <img src="images/new-icons/no-ticketupdate.png" alt="">
       </div>
       <div class="mob-ticket-buttons">
         <button class="mob-add-ticket-btn mobile-btn primary"
