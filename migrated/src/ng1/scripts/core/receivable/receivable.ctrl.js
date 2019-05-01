@@ -10,7 +10,7 @@
         var availableMods = ['group-by-company', 'list'];
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.limitValue = 20;
-        $scope.offset = 0;
+        $scope.offset = -20;
         $scope.invocesList = [];
         $scope.data = {
           limit: $scope.limitValue,
@@ -71,25 +71,26 @@
 
 
         $scope.getInvoices = function (data) {
-          console.log( $scope.offset, ' $scope.offset1');
           $scope.stopScroll = true;
           if (!data) {
             data = $scope.returnData();
           }
           if (!$scope.stopReqeust) {
+            $scope.offset = $scope.offset + $scope.limitValue;
             $scope.stopReqeust = true;
             ReceivableService.getInvoiceDataTable($scope, function (resp) {
-              console.log('request');
               $scope.invocesList = [...$scope.invocesList, ...resp];
               $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
               $rootScope.allInvoices = $scope.invocesList;
+              console.log(data, 'DATA');
+
             }, data).then(() => {
                 console.log($scope.offset, '$scope.offset2')
                 $scope.isInvoiceShown = false;
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
                 console.log(1);
-                $scope.offset = $scope.offset + $scope.limitValue;
+                console.log('request');
                 console.log($scope.offset, '$scope.offset3')
             });
           }
