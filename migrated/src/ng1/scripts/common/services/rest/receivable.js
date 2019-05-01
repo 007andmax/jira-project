@@ -54,11 +54,7 @@
       }
       return $http.post('/receivable', data).then(function (resp) {
         if (callback) {
-          if (resp.data.list) {
-            callback(resp.data.list);
-          } else {
-            callback(resp.data);
-          }
+          callback(resp.data);
         }
       });
     }
