@@ -1705,7 +1705,7 @@
 
   .create-ticket-form .ticket--header > div {
     display: flex;
-    height: 100%;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
   }
@@ -1730,7 +1730,11 @@
   }
 
   .create-ticket-form .ticket--content .dropdown-menu {
-    width: 300px !important;
+    width: 93% !important;
+  }
+
+  .create-ticket-form .ticket--content .dropdown-menu.dropdown-assign-ticket {
+     width: 290px !important;
   }
 
   .shared-avatars {
@@ -2306,6 +2310,11 @@
   .no-ticket-updates {
     margin: 20px 0 54px 0;
   }
+
+  .modal-create-ticket .upload-attachments {
+    opacity: 0;
+  }
+
 }
 @media (max-width: 375px) {
   .ticket-update-product-item.has-discount .desc-w {

@@ -143,6 +143,9 @@
     }
 
     function downloadByUrl(url, fileName) {
+
+      const indexOfDot = fileName && fileName.lastIndexOf('.');
+      const fileFormat = fileName && fileName.substring(indexOfDot);
       //iOS devices do not support downloading. We have to inform user about this.
       if (/(iP)/g.test(navigator.userAgent)) {
         alert('Your device does not support files downloading. Please try again in desktop browser.');
@@ -162,6 +165,11 @@
         } else {
 
           return redownload(url);
+          if (fileFormat === '.pdf' || fileFormat === '.html') {
+            return redownload((url + fileFormat), true);
+          } else {
+            return redownload((url + fileFormat));
+          }
         }
 
         // var link = document.createElement('a');
