@@ -706,7 +706,10 @@ hr {
 .ticket-update-service-description {
   min-height: 40px;
   margin: 0;
-  max-height: 120px;
+  max-height: 136px;
+}
+.col-1 .ticket-update-service-description {
+  display: flex;
 }
 .wysiwyg-controls-wrapper {
   height: 58px;

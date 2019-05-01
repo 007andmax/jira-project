@@ -151,11 +151,11 @@
     </div>
     <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
       <div class="ticket-update-service-description">
-        <textarea auto-expand limit="140"
+        <textarea auto-expand limit="250"
                   value="serviceExpense.description"
                   type="text" style="" type="text" class="form-validation modal-textarea"
                   ng-model="serviceExpense.description" ng-required="true" rows="1"
-                  ng-maxlength="500" name="editProductDescription" tabindex="1">
+                  ng-maxlength="250" name="editProductDescription" tabindex="1">
         </textarea>
       </div>
   </div>
