@@ -16,8 +16,15 @@
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.draftsSharedState = SharedStateService.getSharedState('draftsHeader');
         $scope.companyProfileSharedState = SharedStateService.getSharedState('companyProfile');
-        $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader'),
+        $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
+        $scope.showCounter = location.hash.includes('receivable/list');
 
+
+        $rootScope.$on('$locationChangeStart', function(event, next, current) {
+          $scope.showCounter = location.hash.includes('receivable');
+          console.log($scope.showCounter, '$scope.showCounter');
+          console.log( location.hash, '$scope.showCounter');
+        });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
 
 
@@ -28,6 +35,7 @@
         // $scope.$watch('ticketMobileSettings', function(val) {
         //   console.log(val, "DATATATATATATATATATATATATAT")
         // }, true)
+
 
 
         $scope.addQuickSession = function () {
