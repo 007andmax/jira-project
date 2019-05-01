@@ -36,11 +36,8 @@
           if (newInvoice.action === 'INVOICE_DELETED') {
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
           } else if(newInvoice.action === 'PAYMENT_CREATED') {
-            console.log(newInvoice, 'newInvoice');
             const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
-            console.log($scope.invocesList[index], '$scope.invocesList[index]11111');
             $scope.invocesList[index].paidSum += newInvoice.data.partialPaidAmount;
-            console.log($scope.invocesList[index], '$scope.invocesList[index]2222');
           } else {
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
@@ -49,13 +46,9 @@
 
         $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
           if(newInvoice.action === 'PAYMENT_CREATED') {
-            console.log(newInvoice, 'newInvoice');
             const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
-            console.log($scope.invocesList[index], '$scope.invocesList[index]11111');
             $scope.invocesList[index].paidSum += newInvoice.data.partialPaidAmount;
-            console.log($scope.invocesList[index], '$scope.invocesList[index]2222');
           } else {
-            console.log(newInvoice, 'newInvoice');
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
             $scope.invocesList[index].sum = newInvoice.data.totalSum
@@ -82,15 +75,10 @@
               $scope.invocesList = [...$scope.invocesList, ...resp];
               $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
               $rootScope.allInvoices = $scope.invocesList;
-              console.log(data, 'DATA');
 
             }, data).then(() => {
-                console.log($scope.offset, '$scope.offset2')
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
-                console.log(1);
-                console.log('request');
-                console.log($scope.offset, '$scope.offset3')
             });
           }
         };
@@ -452,7 +440,6 @@
         };
 
         $scope.returnData = function() {
-          console.log($scope.offset, '$scope.offset3');
           return ({
             limit: $scope.limitValue,
             offset: $scope.offset,

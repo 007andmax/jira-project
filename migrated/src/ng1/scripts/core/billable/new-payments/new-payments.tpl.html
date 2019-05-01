@@ -169,8 +169,8 @@
           </div>
           <div class="col-xs-1 w-5">
 
-            <div ng-if="payment.partialPaidInvoice"
-              ng-click="showInvoice(payment.partialPaidInvoice)">
+            <div ng-if="payment.partialPaidInvoice">
+              <!--ng-click="showInvoice(payment.partialPaidInvoice)"-->
               <span tooltip-placement="top"
                     uib-tooltip="Invoice Preview"
                     tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
