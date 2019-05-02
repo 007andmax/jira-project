@@ -115,11 +115,8 @@
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
             $scope.getInvoices($scope.data);
-            // $scope.companies = $scope.companiesStart.filter((item) => {
-            //   return item.toLowerCase().includes(value.toLowerCase())
-            // });
-            console.log($scope.companies, '$scope.companies');
-          } else if(value === undefined || value <= 1) {
+
+          } else if(value === undefined) {
             console.log(2);
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
