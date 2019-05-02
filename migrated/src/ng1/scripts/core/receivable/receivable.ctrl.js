@@ -23,6 +23,7 @@
         $scope.sortByValue = null;
         $scope.sortByItem = null;
         $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
+        $scope.companiesStart = getCompaniesNames(CompaniesService.getClientCompanies());
 
         function getCompaniesNames(list) {
           const filteredArray = [];
@@ -112,7 +113,9 @@
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
             $scope.getInvoices($scope.data);
+            $scope.companies = $scope.companies.filter((item) => item.includes(value));
           } else if(value === undefined) {
+            $scope.companies = $scope.companiesStart;
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
             $scope.getInvoices($scope.data);

@@ -22,8 +22,6 @@
 
         $rootScope.$on('$locationChangeStart', function(event, next, current) {
           $scope.showCounter = location.hash.includes('receivable');
-          console.log($scope.showCounter, '$scope.showCounter');
-          console.log( location.hash, '$scope.showCounter');
         });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
 
