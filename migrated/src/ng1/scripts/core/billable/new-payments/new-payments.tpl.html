@@ -87,20 +87,20 @@
         ng-if="filteredPayments"
         ng-click="hideAllTooltiip($event)">
       <li class="list-heading">
-        <div class="col-xs-1" style="width: 3%">
+        <div class="col-xs-1 col-md-1" style="width: 3%">
           <label class="control checkbox pull-left" ng-click="stopPropagation($event)">
             <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
             <span class="control-indicator"></span>
           </label>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByPayments('date')">
+        <div class="col-xs-1 col-md-1" ng-click="setOrderByPayments('date')">
               <span class="sort-span">
               Date
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'date'}"></i>
               </span>
         </div>
-        <div class="col-xs-1 w-5">
+        <div class="col-xs-1 col-md-1 w-5">
 
               <span class="sort-span">
                 Invoice#
@@ -108,35 +108,35 @@
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'number'}"></i>
               </span>
         </div>
-        <div class="col-xs-2" ng-click="setOrderByPayments('name')">
+        <div class="col-xs-2 col-md-2" ng-click="setOrderByPayments('name')">
               <span class="sort-span">
                 Company name
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'name'}"></i>
               </span>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByPayments('paymentMethod')">
+        <div class="col-xs-1 col-md-1" ng-click="setOrderByPayments('paymentMethod')">
               <span class="sort-span">
                 Method
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'paymentMethod'}"></i>
               </span>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 col-md-2">
               <span class="sort-span">
                 Reference
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'reference'}"></i>
               </span>
         </div>
-        <div class="col-xs-2 w-26">
+        <div class="col-xs-2 col-md-2 w-26">
               <span class="sort-span">
                 Note
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderPayments.reverse, 'active': orderPayments.field === 'note'}"></i>
               </span>
         </div>
-        <div class="col-xs-1" ng-click="setOrderByPayments('amount')">
+        <div class="col-xs-1 col-md-1" ng-click="setOrderByPayments('amount')">
               <span class="sort-span">
                 Amount
                 <i class="icn-sm sort-icon icn-sort"
@@ -144,7 +144,7 @@
               </span>
         </div>
 
-        <div class="col-xs-1 w-5" style="padding: 0;" ng-click="setOrderByPayments('status')">
+        <div class="col-xs-1 col-md-1 w-5" style="padding: 0;" ng-click="setOrderByPayments('status')">
               <span class="sort-span">
                 Status
                 <i class="icn-sm sort-icon icn-sort"
@@ -164,10 +164,10 @@
               <span class="control-indicator"></span>
             </label>
           </div>
-          <div class="col-xs-1">
+          <div class="col-xs-1 col-md-1">
             {{ payment.createdAt }}
           </div>
-          <div class="col-xs-1 w-5">
+          <div class="col-xs-1 col-md-1 w-5">
 
             <div ng-if="payment.partialPaidInvoice">
               <!--ng-click="showInvoice(payment.partialPaidInvoice)"-->
@@ -180,16 +180,16 @@
               tooltip-placement="top" uib-tooltip="Invoice Preview"
               tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
           </div>
-          <div class="col-xs-2">
+          <div class="col-xs-2 col-md-2">
             {{ payment.clientCompanyName }}
           </div>
-          <div class="col-xs-1" style="word-break: break-all">
+          <div class="col-xs-1 col-md-1" style="word-break: break-all">
             <span>{{ parsePaymentMethod(payment.paymentMethod) }}</span>
           </div>
-          <div class="col-xs-2">
+          <div class="col-xs-2 col-md-2">
             <span>{{ payment.reference }}</span>
           </div>
-          <div class="col-xs-2 w-26 positive-relative full-text-wrapper">
+          <div class="col-xs-2 col-md-2 w-26 positive-relative full-text-wrapper">
             <p  ng-click="showTooltip($event, $index)">
               {{ payment.note }}
             </p>
@@ -198,14 +198,14 @@
 
             </div>
           </div>
-          <div class="col-xs-1">
+          <div class="col-xs-1 col-md-1">
             ${{ (payment.partialPaidAmount || payment.totalSum ).toFixed(2)}}
           </div>
-          <div class="col-xs-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }"
+          <div class="col-xs-1 col-md-1 payment-status" ng-class="{ paid: !payment.refundMethod, refund: payment.refundMethod }"
                style="text-align: center;width: auto;">
             {{ payment.refundMethod ? 'Refund' : 'Paid' }}
           </div>
-          <div class="col-xs-1" style="width: 3%;position: absolute;right: 10px;">
+          <div class="col-xs-1 col-md-1" style="width: 3%;position: absolute;right: 10px;">
             <div uib-dropdown smart-dropdown-menu-position="dropdown-menu" class="valera">
               <div uib-dropdown-toggle uib-tooltip="more"
                    tooltip-placement="top"
