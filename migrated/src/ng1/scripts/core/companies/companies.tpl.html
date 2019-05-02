@@ -190,7 +190,7 @@
         desktop="openCompany(company)"
         mobile="mobileOpenCompany()"
         company-name="company">
-      <div class="col-xs-3" style="width: 34%;" ng-init="companyName = company" mobile-open-company>
+      <div class="col-md-3 col-xs-3" style="width: 34%;" ng-init="companyName = company" mobile-open-company>
         <label class="control checkbox" ng-click="stopPropagation($event)">
           <input type="checkbox" ng-model="selectedCompanies[company.id]"
                  ng-change="changeSelectedCompanies(selectedCompanies)">

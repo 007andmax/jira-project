@@ -532,6 +532,10 @@
     margin-left: 0;
   }
 
+  .list-company-row .default-company-logo {
+    margin: 0 10px 0 5px;
+  }
+
   .feed-back-btn {
     display: none;
   }
