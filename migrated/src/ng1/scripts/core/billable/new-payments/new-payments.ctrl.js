@@ -35,15 +35,7 @@
           return $scope.stopScroll;
         };
 
-        $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
-
-        function getCompaniesNames(list) {
-          const filteredArray = [];
-          list.map((item) => {
-            filteredArray.push(item.name);
-          });
-          return filteredArray;
-        }
+        $scope.companies = CompaniesService.getClientCompanies();
 
         $scope.getPaymentsList = function (data) {
           $scope.stopScroll = true;

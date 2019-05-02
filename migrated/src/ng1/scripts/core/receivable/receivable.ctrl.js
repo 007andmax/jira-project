@@ -22,16 +22,10 @@
         $scope.companyFilterName = null;
         $scope.sortByValue = null;
         $scope.sortByItem = null;
-        $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
-        $scope.companiesStart = getCompaniesNames(CompaniesService.getClientCompanies());
+        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companiesStart = CompaniesService.getClientCompanies();
 
-        function getCompaniesNames(list) {
-          const filteredArray = [];
-          list.map((item) => {
-            filteredArray.push(item.name);
-          });
-          return filteredArray;
-        }
+        console.log($scope.companies, '$scope.companies');
 
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
           if (newInvoice.action === 'INVOICE_DELETED') {
@@ -87,6 +81,7 @@
         $scope.getInvoices($scope.data);
 
         $scope.filterInvoicesBy = function(val) {
+
         };
 
         $scope.showInvoice = function(invoice, goBack) {

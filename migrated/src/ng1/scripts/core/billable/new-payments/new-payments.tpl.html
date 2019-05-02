@@ -24,7 +24,7 @@
                      ng-model="filterCompany"
                      ng-click="onFilterClick()"
                      ng-keydown="onKeyPressInvoice($event)"
-                     uib-typeahead="company as company for company in companies | orderBy:'toString()' | lowercase | filter: filterCompany"
+                     uib-typeahead="company.name as company.name for company in companies | filter:{'name': $viewValue, 'isDefault': false}:stateComparator | orderBy:'name'"
                      qt-typeahead-async-show-on-focus smart-dropdown-menu-position>
 
               <div typeahead-input-icon="filterCompany" ng-click="resetFilter()"></div>
