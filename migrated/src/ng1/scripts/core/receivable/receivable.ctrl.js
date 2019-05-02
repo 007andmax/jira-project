@@ -109,16 +109,23 @@
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
+          console.log(value);
           if(value && value.length > 1) {
+            console.log(1);
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
             $scope.getInvoices($scope.data);
-            $scope.companies = $scope.companies.filter((item) => item.includes(value));
-          } else if(value === undefined) {
+            $scope.companies = $scope.companies.filter((item) => {
+              console.log(item, value);
+              console.log(item.toLowerCase().includes(value.toLowerCase()), 'item.toLowerCase().includes(value.toLowerCase())');
+              return item.toLowerCase().includes(value.toLowerCase())
+            });
+          } else if(value === undefined || value <= 1) {
+            console.log(2);
+            $scope.resetAllFiltersForSort();
+            $scope.data = $scope.returnData();
+            $scope.getInvoices($scope.data);
             $scope.companies = $scope.companiesStart;
-            $scope.resetAllFiltersForSort();
-            $scope.data = $scope.returnData();
-            $scope.getInvoices($scope.data);
           }
         });
 
