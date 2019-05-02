@@ -96,9 +96,7 @@
         }
 
         $scope.$watch('invoiceCompany', function(val) {
-          if (!$scope.invoiceCompany) {
-            getAllInvoices(val);
-          }
+          getAllInvoices(val);
           if (val) {
             $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
               return el.company.id === val.id && !el.paidOn;
