@@ -147,7 +147,7 @@
 
               <a href="javascript:void(0)" class="pull-left avatar">
                 <img ng-src="{{ getUserAvatarUrl(companyContact) }}" alt="..."
-                     class="img-circle avatar-38">
+                     class="img-circle avatar-40">
                 <i class="bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
               </a>
 
@@ -167,7 +167,7 @@
         <ul class="primary-contacts" style="margin-bottom: 10px;">
           <li class="list-users">
             <a href="javascript:void(0)" class="pull-left avatar">
-              <img ng-src="{{ getUserAvatarUrl(createTicketUser) }}" alt="..." class="img-circle avatar-38">
+              <img ng-src="{{ getUserAvatarUrl(createTicketUser) }}" alt="..." class="img-circle avatar-40">
               <i class="bottom" ng-class="{'on': createTicketUser.online, 'off': !createTicketUser.online}"></i>
             </a>
 
@@ -257,7 +257,7 @@
             ng-repeat="user in companyGroupedData.users | filter: usersFilter | orderBy: getUserName" ng-hide="user.isDefault">
 
           <a href="javascript:void(0)" class="pull-left avatar">
-            <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+            <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-40">
             <i class="bottom" ng-class="{'on': user.online, 'off': !user.online}"></i>
           </a>
 

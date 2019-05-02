@@ -492,19 +492,19 @@
     margin-top: 7px !important;
   }
 
-  .list-company-row .col-xs-3 > div span:nth-child(2),
-  .list-company-row .col-xs-1,
-  .list-company-row .col-xs-2 {
+  .list-company-row .col-md-3 > div span:nth-child(2),
+  .list-company-row .col-md-1,
+  .list-company-row .col-me-2 {
     display: none !important;
   }
 
-  .list-company-row .col-xs-3 .company-phone {
+  .list-company-row .col-md-3 .company-phone {
     display: block !important;
     position: relative;
     padding-left: 20px;
   }
 
-  .list-company-row .col-xs-3 .company-phone:before {
+  .list-company-row .col-md-3 .company-phone:before {
     position: absolute;
     content: '';
     background-image: url(../images/new-icons/new-mobile.png);

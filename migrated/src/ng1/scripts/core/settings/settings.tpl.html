@@ -1,5 +1,5 @@
 <div class="settings-wrapper" ng-if="settingMode === '/settings'">
-  <div class="col-xs-12 settings-wrapper__trow">
+  <div class="col-md-12 settings-wrapper__trow">
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.myProfile">
       <img class="svg-icn-full" src="ng1/images/settings-icon/user-profile.png">
       <p>User Profile</p>
@@ -13,7 +13,7 @@
       <p>Activity History</p>
     </div>
   </div>
-  <div class="col-xs-12 settings-wrapper__trow">
+  <div class="col-md-12 settings-wrapper__trow">
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.companyProfile" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
       <img class="svg-icn-full" src="ng1/images/settings-icon/company-profile.png">
       <p>Company Profile</p>
@@ -58,7 +58,7 @@
     </div>
 
   </div>
-  <div class="col-xs-12 settings-wrapper__trow">
+  <div class="col-md-12 settings-wrapper__trow">
 
     <div class="col-xs-1 settings-wrapper__trow--td"
          ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
@@ -74,7 +74,7 @@
       <p>Tags</p>
     </div>
     </div>
-  <div class="col-xs-12 settings-wrapper__trow">
+  <div class="col-md-12 settings-wrapper__trow">
     <h3>Integrations</h3>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.credit-card" >
       <img class="svg-icn-full" src="ng1/images/settings-icon/credit-card.png">
