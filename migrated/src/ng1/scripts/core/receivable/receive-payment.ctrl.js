@@ -81,8 +81,24 @@
         $scope.isSinglePayment = false;
         var invoicesToReceive = $scope.invoiceToReceive.invoices;
 
-        $scope.$watch('invoiceCompany', function(val) {
+        function getAllInvoices(val) {
+          const data = {
+            limit: 10000,
+            offset: 0,
+            companyName : val.name,
+            status: 'UNPAID'
+          };
+          ReceivableService.getInvoiceDataTable($scope, function (resp) {
+            $scope.receivePaymentInvoices = resp;
+            console.log(resp, 'RESP');
+          }, data).then(() => {
+          });
+        }
 
+        $scope.$watch('invoiceCompany', function(val) {
+          if (!$scope.invoiceCompany) {
+            getAllInvoices(val);
+          }
           if (val) {
             $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
               return el.company.id === val.id && !el.paidOn;
@@ -108,12 +124,7 @@
                   $scope.invoiceToReceive.invoices[invoice.id] = false;
                 }
               }
-
-
-
             }
-
-
           }
         }, true);
 
