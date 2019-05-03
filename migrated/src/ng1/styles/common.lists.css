@@ -427,6 +427,10 @@
   min-height: calc(100vh - 78px);
 }
 
+.users-bg.new-payments {
+  padding-bottom: 35px;
+}
+
 .users-bg h3 {
   margin: 0;
 }
