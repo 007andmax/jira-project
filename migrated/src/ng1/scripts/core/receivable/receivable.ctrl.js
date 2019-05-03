@@ -23,9 +23,6 @@
         $scope.sortByValue = null;
         $scope.sortByItem = null;
         $scope.companies = CompaniesService.getClientCompanies();
-        $scope.companiesStart = CompaniesService.getClientCompanies();
-
-        console.log($scope.companies, '$scope.companies');
 
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
           if (newInvoice.action === 'INVOICE_DELETED') {

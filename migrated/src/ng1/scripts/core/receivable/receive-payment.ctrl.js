@@ -31,7 +31,6 @@
 
         $scope.companies = CompaniesService.getClientCompanies();
 
-        console.log($scope.companies, '$scope.companies');
 
         $scope.availableInvoiceCompanies = [];
 
@@ -85,14 +84,14 @@
           const data = {
             limit: 10000,
             offset: 0,
-            companyName : val.name,
+            companyName : val && val.name,
             status: 'UNPAID'
           };
-          ReceivableService.getInvoiceDataTable($scope, function (resp) {
-            $scope.receivePaymentInvoices = resp;
-            console.log(resp, 'RESP');
-          }, data).then(() => {
-          });
+          if (val) {
+            ReceivableService.getInvoiceDataTable($scope, function (resp) {
+              $scope.receivePaymentInvoices = resp;
+            }, data).then(() => {});
+          }
         }
 
         $scope.$watch('invoiceCompany', function(val) {
@@ -210,10 +209,9 @@
           }
         }
 
-
+        //--------------------------------------------------------------------------------------------------------------
 
         $scope.$watch('invoiceToReceive.invoices', function () {
-
           var counter = 0,
             invoices = $scope.invoiceToReceive.invoices;
 
@@ -222,7 +220,6 @@
               counter++;
             }
           }
-
           $scope.countReceiveInvoice = counter;
           $scope.invoiceToReceive.chooseAll = ($scope.receivePaymentInvoices.length === counter);
           $scope.receivePaymentSum = 0;
@@ -232,12 +229,12 @@
             var invoice = $scope.receivePaymentInvoices[i];
             if (invoices[invoice.id]) {
               $scope.receivePaymentSum += invoice.sum;
-
               $scope.balance += (invoice.sum - invoice.paidSum);
             }
           }
-
         }, true);
+
+        //--------------------------------------------------------------------------------------------------------------
 
         $scope.changeChooseAll = function () {
           var invoices = $scope.invoiceToReceive.invoices;
