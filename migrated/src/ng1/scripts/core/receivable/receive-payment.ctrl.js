@@ -230,6 +230,7 @@
             if (invoices[invoice.id]) {
               $scope.receivePaymentSum += invoice.sum;
               $scope.balance += (invoice.sum - invoice.paidSum);
+              $scope.partialPaymentAmount = $scope.balance;
             }
           }
         }, true);
