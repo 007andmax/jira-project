@@ -761,7 +761,7 @@
         }
 
         $scope.isShowingErrorsBlock = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.showBlockFieldsError) && !form[fieldName].$valid;
+          return form && form[fieldName] && (form[fieldName].$dirty || $scope.showBlockFieldsError) && !form[fieldName].$valid;
         };
 
         function checkForExistingNameDuplicates(name) {

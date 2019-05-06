@@ -1,6 +1,7 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
+import {concatAll, debounceTime, distinctUntilChanged, map, pairwise, take} from 'rxjs/operators';
+
 
 import { USER } from "../../../const/users";
 import { CompaniesService } from "../../../services/company/companies.service";
@@ -9,7 +10,8 @@ import { PasswordManagerService } from "../../../services/password-manager/passw
 import { UsersService } from "../../../services/users/users.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
-import {ISubscription} from "rxjs-compat/Subscription";
+import { ISubscription } from "rxjs-compat/Subscription";
+
 
 
 @Component({
@@ -19,7 +21,6 @@ import {ISubscription} from "rxjs-compat/Subscription";
 })
 export class LeftPanelPasswordManagerComponent implements OnInit {
 
-  public recordsData: any;
   public companiesList: any;
   public devicesAndUsersList = [];
   public company: any;
@@ -32,10 +33,16 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public passwordRecords: any;
   public passwordRecordsStart: any;
   public interval: any;
+  private subGetRecords: ISubscription;
+  private subGetRecordsNew: ISubscription;
+  private subNewRecordAdd: ISubscription;
+  private subscriptions = new Subscription();
+  public innerWidth: any;
   public clearCompanyItem = {
     companyId: '',
     name: ''
   };
+  public route: string;
   private subscription: ISubscription;
 
   constructor(
@@ -45,7 +52,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
-    private ngZone: NgZone
+    private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -53,16 +60,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
-    this.ngZone.run(() => {
-      console.log('testes');
-      this.getCompaniesList();
-    });
+    this.innerWidth = window.innerWidth;
+    this.getCompaniesList();
   }
 
   public getCompaniesList() {
-     return this.subscription = this.companiesService.getCompaniesList().subscribe((company) => {
-       this.companiesList = this.getCompaniesNames(company);
-     });
+     return this.subscription = this.companiesService.clientsCompany
+       .subscribe((company) => {
+         this.companiesList = this.getCompaniesNames(company);
+         if (!this.cdRef['destroyed']) {
+           this.cdRef.detectChanges();
+         }
+       }
+     );
   }
 
   public selectCompany(item){
@@ -77,8 +87,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
   }
 
+  public selectCompanyMob(item){
+    this.selectedCompany = item.item;
+    this.passwordManagerService.setSelectedDeviceOrUser({});
+    if (item.item.companyId) {
+      this.getCompanyDevices(item.item.companyId);
+      this.getAllUsers(item.item.companyId);
+      this.getGadgets(item.item.companyId);
+    }
+  }
+
   public filterPasswordRecords(company) {
-    if (company)
+    if (company && company.companyId)
     return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
   };
 
@@ -113,7 +133,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
 
-
+  public selectDeviceOrUserMob(item){
+    console.log(2);
+    this.selectedDeviceOrUser = item.item;
+  }
 
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
@@ -128,13 +151,25 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDate(item);
   }
 
+  public selectDateMob(date) {
+    this.selectedDateItem = date;
+  }
+
   public getPasswordRecords() {
-    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+    console.log('12351235');
+    if (this.innerWidth <= 414) {
+      this.passwordManagerService.setMobileCategory();
+    }
+    this.apiPasswordManagerService.getRecords();
+    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
-      (this.selectedCompany && this.selectedCompany.companyId) && this.selectCompany({item: this.selectedCompany});
+      this.selectedCompany && this.selectCompany({item: this.selectedCompany});
       this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
+      if (this.innerWidth <= 414) {
+        this.closeMobileFilters();
+      }
     });
   }
 
@@ -199,9 +234,27 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   clearCompany() {
+    this.devicesAndUsersList = [];
     this.refreshCompany();
     this.refreshDeviceOrUser();
     this.getPasswordRecords();
+  }
+
+  clearCompanyMob() {
+    this.devicesAndUsersList = [];
+    this.company = null;
+    this.selectedCompany = this.clearCompanyItem;
+    this.clearDeviceMob();
+  }
+
+  clearDeviceMob() {
+    this.device = null;
+    this.selectedDeviceOrUser = null;
+  }
+
+  clearDateMob() {
+    this.selectedDate = null;
+    this.selectedDateItem = null;
   }
 
   clearDevice() {
@@ -248,29 +301,60 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public addNewRecord() {
-    this.passwordManagerService.showAddForm.subscribe(() => {
-      this.getPasswordRecords();
+    this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
+      if (this.innerWidth <= 414) {
+        this.passwordManagerService.setMobileCategory();
+      }
+      this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
+        this.passwordRecordsStart = res;
+        this.passwordRecords = res;
+        this.selectedCompany && this.selectCompany({item: this.selectedCompany});
+        this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+        this.selectedDateItem && this.selectDate(this.selectedDateItem);
+        if (this.innerWidth <= 414) {
+          this.closeMobileFilters();
+        }
+      }));
     })
   }
 
   public deleteRecord() {
     this.passwordManagerService.deleteItem.subscribe((item) => {
-      this.getPasswordRecords()
+      if (this.innerWidth <= 414) {
+        this.passwordManagerService.setMobileCategory();
+      }
+      this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
+        this.passwordRecordsStart = res;
+        this.passwordRecords = res;
+        this.selectedCompany && this.selectCompany({item: this.selectedCompany});
+        this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+        this.selectedDateItem && this.selectDate(this.selectedDateItem);
+        if (this.innerWidth <= 414) {
+          this.closeMobileFilters();
+        }
+      }));
     });
   }
 
   public get loadStatus () {
-    console.log()
     return this.company && this.companiesList;
   }
 
   public get companiesListStatus () {
-    console.log(this.companiesList, '12351');
     return this.companiesList;
   }
 
   ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
     this.subscription.unsubscribe();
+    this.subGetRecords.unsubscribe();
+    this.subGetRecords.unsubscribe();
+    this.subscriptions.unsubscribe();
+  }
+
+  public closeMobileFilters() {
+    console.log('12351235');
+    this.passwordManagerService.closeFilters();
   }
 
 }

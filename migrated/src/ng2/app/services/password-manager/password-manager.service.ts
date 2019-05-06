@@ -17,16 +17,13 @@ export class PasswordManagerService {
   public hideAddForm: EventEmitter<any> = new EventEmitter();
   public deleteItem: EventEmitter<any> = new EventEmitter();
   public deleteItemEditForm: EventEmitter<any> = new EventEmitter();
+  public closeFilter: EventEmitter<any> = new EventEmitter();
+  public mobileCategory: EventEmitter<any> = new EventEmitter();
+  public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private http: HttpClient
   ) { }
-
-  setFilteredType(type) {
-    this.filteredType.emit({
-      template: type.TITLE
-    });
-  }
 
   setSelectedDeviceOrUser(item) {
     this.selectedDeviceOrUser.emit(item)
@@ -45,7 +42,9 @@ export class PasswordManagerService {
   }
 
   addRecord(item?) {
+    console.log('1231235');
     this.showAddForm.emit(item);
+    this.newRecordsisAdd.emit();
   }
 
   deleteRecord(recordId) {
@@ -137,7 +136,7 @@ export class PasswordManagerService {
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         note: recordInfo.note,
-        ip: recordInfo.ipAdres,
+        ip: recordInfo.ipAdres ? recordInfo.ipAdres : null,
         https: !!recordInfo.https,
         ssh: !!recordInfo.ssh,
         telnet: !!recordInfo.telnet,
@@ -190,6 +189,12 @@ export class PasswordManagerService {
     }
   }
 
+  public closeFilters() {
+    this.closeFilter.emit();
+  }
 
+  public setMobileCategory() {
+    this.mobileCategory.emit();
+  }
 
 }

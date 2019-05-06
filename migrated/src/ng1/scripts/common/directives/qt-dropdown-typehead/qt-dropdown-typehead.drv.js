@@ -4,7 +4,7 @@
   angular.module("quicktech.common.directives").component('qtDropdownTypehead',{
     templateUrl: '/ng1/scripts/common/directives/qt-dropdown-typehead/qt-dropdown-typehead.tpl.html',
     bindings: {
-      listForDropdown: '<',
+      listForDropdown: '<?',
       selectedItem: '=',
       filterProperty: '<?',
       displayProperty: '<?',
@@ -80,24 +80,37 @@
       } else {
         self.isOpen = !self.isOpen;
       }
-      if(self.checkIfViewValueMatched(self.viewValueItem) || self.viewValueItem === '') {
-        self.lastCorrectSelecteditem = self.viewValueItem;
+      if (self.filterProperty) {
+        if(self.checkIfViewValueMatched(self.viewValueItem.name) || self.viewValueItem === '') {
+          self.lastCorrectSelecteditem = self.viewValueItem;
+        } else {
+          self.viewValueItem = self.lastCorrectSelecteditem;
+        }
       } else {
-        self.viewValueItem = self.lastCorrectSelecteditem;
+        if(self.checkIfViewValueMatched(self.viewValueItem) || self.viewValueItem === '') {
+          self.lastCorrectSelecteditem = self.viewValueItem;
+        } else {
+          self.viewValueItem = self.lastCorrectSelecteditem;
+        }
       }
+
+
       reInitList();
     };
 
     self.selectItem = function(item) {
-      if(self.filterProperty) {
-        self.viewValueItem = item[self.filterProperty];
-      } else {
-        self.viewValueItem = item;
+      if (item) {
+        if (self.filterProperty) {
+          self.viewValueItem = item[self.filterProperty];
+        } else {
+          self.viewValueItem = item;
+        }
+        changeSelectedItem(item);
+        self.lastCorrectSelecteditem = item;
+        self.changeDropdownState();
       }
-      changeSelectedItem(item);
-      self.lastCorrectSelecteditem = item;
-      self.changeDropdownState();
-    };
+    }
+
 
     $scope.$watch(function() {
       return $rootScope.selectedIndustryItem;

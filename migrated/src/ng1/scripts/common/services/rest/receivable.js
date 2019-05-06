@@ -52,15 +52,11 @@
       if (!scope || !scope.$id) {
         throw 'First argument must be Angularjs scope!'
       }
-      $http.post('/receivable', data).then(function (resp) {
+      return $http.post('/receivable', data).then(function (resp) {
         if (callback) {
-          if (resp.data.list) {
-            callback(resp.data.list);
-          } else {
-            callback(resp.data);
-          }
+          callback(resp.data);
         }
-      })
+      });
     }
 
     function getReceivableInvoicesData(scope, callback) {
@@ -100,8 +96,9 @@
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
-
           if (newChange.action == 'INVOICE_SAVED') {
+            console.log(newChange, 'newChange');
+            $rootScope.$emit('receivableInvoice', newChange);
 
             var invoice = Utils.findById(data.list, newChange.data.id);
 
@@ -129,6 +126,7 @@
             }
 
           } else if (newChange.action === 'INVOICE_DELETED') {
+            $rootScope.$emit('receivableInvoice', newChange);
 
             Utils.deleteById(data.list, newChange.data.id);
             if (data.companies[newChange.data.company.id]) {
@@ -136,16 +134,13 @@
             }
 
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
-
-            var invoiceIds = newChange.data;
-            for(var i=0; i<invoiceIds.length; i++) {
-              var invoice = Utils.findById(data.list, invoiceIds[i].id);
-              Utils.customizeObj(invoiceIds[i], invoice);
-            }
-
+            console.log(newChange, '1111111');
+            $rootScope.$emit('receivableInvoicePayment', newChange);
+            console.log('22222222');
 
 
           } else if (newChange.action === 'INVOICE_ROLLBACK') {
+            $rootScope.$emit('receivableInvoice', newChange);
             var invoice = Utils.findById(data.list, newChange.data.id);
             Utils.customizeObj(newChange.data, invoice);
             invoice.status = newChange.data.status;

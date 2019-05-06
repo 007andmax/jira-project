@@ -53,6 +53,10 @@
   top: 16px;
 }
 
+.ticket-add-service-actions {
+  top: 6px;
+}
+
 .ticket-post-update-wrapper .petrovich {
   position: relative;
 }

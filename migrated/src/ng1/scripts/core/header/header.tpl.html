@@ -22,7 +22,7 @@
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
           </span>
         <span class="text-muted"
-              ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen() ">
+              ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen() && !showCounter ">
           &nbsp;{{ globalSearch.count }}
         </span>
         <span class="text-muted"

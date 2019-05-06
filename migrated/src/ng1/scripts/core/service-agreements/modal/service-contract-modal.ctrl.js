@@ -1109,23 +1109,23 @@
         }
 
         $scope.isShowingErrorsServiceContract = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldError) && !form[fieldName].$valid;
+          return form && form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldError) && !form[fieldName].$valid;
         };
 
         $scope.isShowingErrorsNewSCSField = function (form, fieldName) {
-          return form[fieldName] &&  $scope.showRequiredFieldErrorSCS && !form[fieldName].$valid;
+          return form && form[fieldName] &&  $scope.showRequiredFieldErrorSCS && !form[fieldName].$valid;
         };
 
         $scope.isShowingErrorsNewServiceField = function (form, fieldName) {
-          return form[fieldName] &&  $scope.showRequiredFieldErrorService && !form[fieldName].$valid;
+          return form && form[fieldName] &&  $scope.showRequiredFieldErrorService && !form[fieldName].$valid;
         };
 
         $scope.isShowingErrorsNewServicExpenseeField = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorServiceExpense) && !form[fieldName].$valid;
+          return form && form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorServiceExpense) && !form[fieldName].$valid;
         };
 
         $scope.isShowingErrorsNewSCSTTField = function (form, fieldName) {
-          return form[fieldName] &&  $scope.showRequiredFieldErrorServiceExpense && !form[fieldName].$valid;
+          return form && form[fieldName] &&  $scope.showRequiredFieldErrorServiceExpense && !form[fieldName].$valid;
         };
 
 

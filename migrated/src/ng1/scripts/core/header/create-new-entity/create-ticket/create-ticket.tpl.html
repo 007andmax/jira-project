@@ -38,7 +38,7 @@
              ng-required="true" make-dirty-on-blur
              ng-model="ticket.subject">
     </div>
-    <div class="col-md-12" style="position: relative">
+    <div class="col-md-12">
       <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
         <div class="drop-area-subwrapper">
           <p class="drop-area">
@@ -96,7 +96,7 @@
       <div class="placeholder">Write issue here…</div>
       <input ng-model="ticket.note" type="text">
     </div>
-    <div class="col-md-6" add-on-focus add-create-new-button="company">
+    <div class="col-md-6 col-xs-12" add-on-focus add-create-new-button="company">
       <!-- <input placeholder="Select Company" type="text"> -->
       <div class="placeholder">Select Company</div>
       <input type="text" class="form-validation has-dropdown"
@@ -116,7 +116,7 @@
       <div typeahead-input-icon="userCompany"></div>
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" add-on-focus add-create-new-button="user"
+    <div class="col-md-6 col-xs-12 dropdown-user-parent" add-on-focus add-create-new-button="user"
          ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCreatedUser')}">
       <div class="placeholder">Select User</div>
       <input type="text" class="form-validation has-dropdown-with-label" autocomplete="off"
@@ -143,7 +143,7 @@
 
 
     </div>
-    <div class="col-md-6 dropdown-user-parent" add-on-focus
+    <div class="col-md-6 col-xs-12 dropdown-user-parent" add-on-focus
          ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
          uib-dropdown>
       <div class="placeholder">Assign to</div>
@@ -168,7 +168,7 @@
         </span>
       </div>
     </div>
-    <div class="col-md-6" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
+    <div class="col-md-6 col-xs-12" add-on-focus ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAgent')}"
          ng-hide="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length">
       <!-- <input placeholder="Select Device" type="text"> -->
       <div class="placeholder">Select Device</div>

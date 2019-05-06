@@ -212,7 +212,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSavePassword || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form && form[fieldName] && ($scope.triedToSavePassword || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         $scope.getFormError = function (form) {

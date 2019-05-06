@@ -28,7 +28,6 @@
     function init() {
 
       stompClient = Stomp.over(new SockJS(stompEndpoint));
-      console.log(stompClient, 'STOMPCLIENT');
 
       stompClient.connect({}, function (frame) {
         isInitialized = true;
@@ -75,7 +74,6 @@
           function (message) {
             var newChange = JSON.parse(message.body);
             // commit console.log before prod update
-            console.log(newChange);
             config.callback(newChange);
             config.scope.$apply();
           });

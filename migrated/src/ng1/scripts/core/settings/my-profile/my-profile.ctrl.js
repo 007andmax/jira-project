@@ -24,7 +24,7 @@
         }, true);
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && form[fieldName].$invalid;
+          return form && form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.saveAboutMe = function (form) {

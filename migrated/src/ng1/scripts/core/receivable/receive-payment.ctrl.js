@@ -23,14 +23,13 @@
         $scope.receivePaymentInvoices = [];
 
         $scope.allInvoicesList = $rootScope.allInvoices;
+
         $scope.partialPaymentAmount = 0;
         if (!$scope.invoiceToSent) {
           $scope.invoiceToSent = { invoices: [] }
         }
 
-        $scope.companies = Object.keys(($scope.receivableInvoicesData || $rootScope.uploadedReceivable).companies).map(function(id) {
-          return CompaniesService.getOneById(id);
-        });
+        $scope.companies = CompaniesService.getClientCompanies();
 
 
         $scope.availableInvoiceCompanies = [];
@@ -81,7 +80,22 @@
         $scope.isSinglePayment = false;
         var invoicesToReceive = $scope.invoiceToReceive.invoices;
 
+        function getAllInvoices(val) {
+          const data = {
+            limit: 10000,
+            offset: 0,
+            companyName : val && val.name,
+            status: 'UNPAID'
+          };
+          if (val) {
+            ReceivableService.getInvoiceDataTable($scope, function (resp) {
+              $scope.receivePaymentInvoices = resp;
+            }, data).then(() => {});
+          }
+        }
+
         $scope.$watch('invoiceCompany', function(val) {
+          getAllInvoices(val);
           if (val) {
             $scope.availableInvoiceCompanies = $scope.allInvoicesList.filter(function(el) {
               return el.company.id === val.id && !el.paidOn;
@@ -107,12 +121,7 @@
                   $scope.invoiceToReceive.invoices[invoice.id] = false;
                 }
               }
-
-
-
             }
-
-
           }
         }, true);
 
@@ -136,8 +145,7 @@
         if (invoiceNum) {
           var invoice = $scope.allInvoicesList.find(function(el) {
             return el.number == invoiceNum;
-          })
-
+          });
           $scope.setCompany(CompaniesService.getOneById(invoice.company.id));
 
         }
@@ -152,11 +160,12 @@
           if (val  && val >= $scope.receivePaymentSum) {
             $scope.partialPaymentAmount = $scope.receivePaymentSum;
           }
-
-          if (val && val >= ($scope.balance)) {
-            $scope.partialPaymentAmount = ($scope.balance );
+          if ((val && val >= ($scope.balance)) || (val === undefined) || (val === 0)) {
+            $scope.partialPaymentAmount = $scope.balance;
+          } else {
+            $scope.partialPaymentAmount = val;
           }
-        })
+        });
 
 
         $scope.paymentMethod = {
@@ -200,10 +209,9 @@
           }
         }
 
-
+        //--------------------------------------------------------------------------------------------------------------
 
         $scope.$watch('invoiceToReceive.invoices', function () {
-
           var counter = 0,
             invoices = $scope.invoiceToReceive.invoices;
 
@@ -212,7 +220,6 @@
               counter++;
             }
           }
-
           $scope.countReceiveInvoice = counter;
           $scope.invoiceToReceive.chooseAll = ($scope.receivePaymentInvoices.length === counter);
           $scope.receivePaymentSum = 0;
@@ -222,12 +229,13 @@
             var invoice = $scope.receivePaymentInvoices[i];
             if (invoices[invoice.id]) {
               $scope.receivePaymentSum += invoice.sum;
-
               $scope.balance += (invoice.sum - invoice.paidSum);
+              $scope.partialPaymentAmount = $scope.balance;
             }
           }
-
         }, true);
+
+        //--------------------------------------------------------------------------------------------------------------
 
         $scope.changeChooseAll = function () {
           var invoices = $scope.invoiceToReceive.invoices;

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
 
 import { PASSWORD_RECORD_TYPES } from "../../../../const/password-record-types";
 import { PasswordManagerService } from "../../../../services/password-manager/password-manager.service";
+import {ApiPasswordManagerService} from "../../../../services/password-manager/api-password-manager.service";
 
 @Component({
   selector: 'app-password-records-types',
@@ -25,20 +26,16 @@ export class PasswordRecordsTypesComponent implements OnInit {
   };
 
   constructor(
-    private passwordManagerService: PasswordManagerService
+    private passwordManagerService: PasswordManagerService,
+    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   ngOnInit() {
     this.startComponent();
+    this.passwordManagerService.mobileCategory.subscribe(() => {
+      this.filterByPasswordTypes(this.selectedCategory, this.selectedIndex);
+    })
   }
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   const name: SimpleChange = changes.passwordRecords;
-  //   console.log('test');
-  //   console.log(changes.passwordRecords, 'test');
-  //   // this.passwordRecords = changes.passwordRecords.currentValue;
-  //   this.startComponent();
-  // }
 
   public startComponent() {
     this.initializePasswordRecordTypes();
@@ -50,6 +47,14 @@ export class PasswordRecordsTypesComponent implements OnInit {
     this.selectedCategory = type;
     this.passwordManagerService.setSelectedCategory(type);
   }
+
+  filterByPasswordTypesMob(type,index) {
+    this.selectedIndex = index;
+    this.selectedCategory = type;
+    console.log(type, index, '§2');
+  }
+
+
 
   private initializePasswordRecordTypes() {
     this._passwordRecords && this.passwordRecordTypes.map((item) => {
@@ -65,6 +70,10 @@ export class PasswordRecordsTypesComponent implements OnInit {
 
   public setCountRecordsData() {
     return this._passwordRecords && this._passwordRecords.map((item) =>  this.getItemCountsInCategories(item));
+  }
+
+  ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
   }
 
 }

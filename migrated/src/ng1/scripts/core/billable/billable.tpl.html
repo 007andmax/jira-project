@@ -256,7 +256,7 @@
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
                 <div class="col-md-2 pl-30">{{ serviceExpense.item.name }}</div>
-                <div class="col-md-6">{{ serviceExpense.description }}</div>
+                <div class="col-md-6 pre-line">{{ serviceExpense.description }}</div>
                 <div class="col-md-1">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
                 <div class="col-md-1"
                      ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">

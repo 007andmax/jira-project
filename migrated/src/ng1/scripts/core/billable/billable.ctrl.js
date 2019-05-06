@@ -4,7 +4,7 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope',
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope', 'RealTimeService',
       function ($scope,
                 BillableService,
                 CompaniesService,
@@ -13,7 +13,8 @@
                 TicketsService,
                 TaxesService,
                 $uibModal,
-                $rootScope) {
+                $rootScope,
+                RealTimeService) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -440,11 +441,6 @@
           });
           TaxesService.linkWithEntity(entity.id, entityType, taxIds);
         };
-
-
-
-
-
 
       }]);
 

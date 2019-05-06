@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 
 @Injectable({
@@ -16,14 +18,21 @@ export class UsersService {
   ) {
 
   }
-  getAllusers(){
+  getAllusers() {
     return this.http.get(this.apiUrl + 'users');
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
       this.currentUser = res;
     });
+  }
+
+  changeUserPermissions(permissions) {
+    console.log(this.currentUser, '12351');
+    console.log(permissions, '12351');
+    return this.currentUser.permissions = permissions;
+
   }
 
 }

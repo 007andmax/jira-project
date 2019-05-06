@@ -50,7 +50,7 @@
           });
 
           $scope.isShowingErrorsNewProductExpenseeField = function (form, fieldName) {
-            return form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorproductExpense) && !form[fieldName].$valid;
+            return form && form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFieldErrorproductExpense) && !form[fieldName].$valid;
           };
 
 

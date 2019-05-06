@@ -14,6 +14,7 @@
 
 .ng-sidebar--right {
   top: 78px !important;
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
 }
 
 .password-content__modal {
@@ -141,3 +142,5 @@ ngb-typeahead-window {
     }
   }
 }
+
+@import './assets/styles/mobile.scss';

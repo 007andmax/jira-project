@@ -43,9 +43,9 @@
           }
         });
 
-        PaymentsService.getPaymentsData($scope, function (resp) {
-          $scope.payments = resp;
-        });
+        // PaymentsService.getPaymentsData($scope, function (resp) {
+        //   $scope.payments = resp;
+        // });
         console.log('asdgaklsdgklasdjg');
         PaymentsService.getDepositSlipsData($scope, function (resp) {
           $scope.depositSlips = resp;

@@ -29,45 +29,39 @@
         $scope.stopReqeust = false;
         $scope.stopScroll = false;
         $scope.sortByItem = null;
+        $scope.invoiceNumberFilter = null;
 
         $scope.getStopScrollStatus = function() {
           return $scope.stopScroll;
         };
 
-        $scope.companies = getCompaniesNames(CompaniesService.getClientCompanies());
+        $scope.companies = CompaniesService.getClientCompanies();
 
-        function getCompaniesNames(list) {
-          const filteredArray = [];
-          list.map((item) => {
-            filteredArray.push(item.name);
-          });
-          return filteredArray;
-        }
-
-        $scope.myPagingFunction = function (data) {
+        $scope.getPaymentsList = function (data) {
           $scope.stopScroll = true;
           if (!$scope.stopReqeust) {
-            $scope.stopReqeust = true;
             if (data) {
               $scope.data = data;
             } else {
               $scope.data = $scope.returnData();
             }
-            PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
+            $scope.stopReqeust = true;
+            PaymentsService.getPaymentsDataTable($scope, function (res) {
               if (res.length > 0 && Array.isArray(res)) {
                 $scope.payments = [...$scope.payments, ...res];
                 $scope.filteredPayments = [...$scope.filteredPayments, ...res];
-                $scope.filteredPayments.map(function(item) {
+                $scope.filteredPayments.map(function (item) {
                   return $scope.showTooltipArray.push(false);
                 });
-                $scope.stopReqeust = false;
               } else {
                 $scope.stopReqeust = true;
               }
-              return new Promise(() => {
-                $scope.offset = $scope.offset + $scope.limitValue;
+            }, $scope.data).then(() => {
+              $scope.offset += $scope.limitValue;
+              setTimeout(() => {
+                $scope.stopReqeust = false;
                 $scope.stopScroll = false;
-              });
+              }, 700);
             });
           }
         };
@@ -129,38 +123,38 @@
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'PAYMENT_DATE_ASC' ? 'PAYMENT_DATE_ASC' : 'PAYMENT_DATE_DESC';
               $scope.data = $scope.returnData();
-              $scope.myPagingFunction($scope.data);
+              $scope.getPaymentsList($scope.data);
               break;
             // case 'number': TODO: when back will be done
             //   console.log('number');
             //   $scope.resetAllFiltersForSort();
             //   $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
             //   $scope.data = $scope.returnData();
-            //   $scope.myPagingFunction($scope.data);
+            //   $scope.getPaymentsList($scope.data);
             //   break;
             case 'name':
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'COMPANY_NAME_ASC'? 'COMPANY_NAME_ASC' : 'COMPANY_NAME_DESC';
               $scope.data = $scope.returnData();
-              $scope.myPagingFunction($scope.data);
+              $scope.getPaymentsList($scope.data);
               break;
             case 'paymentMethod':
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'PAYMENT_METHOD_ASC' ? 'PAYMENT_METHOD_ASC' : 'PAYMENT_METHOD_DESC';
               $scope.data = $scope.returnData();
-              $scope.myPagingFunction($scope.data);
+              $scope.getPaymentsList($scope.data);
               break;
             case 'amount':
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'AMOUNT_ASC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
               $scope.data = $scope.returnData();
-              $scope.myPagingFunction($scope.data);
+              $scope.getPaymentsList($scope.data);
               break;
             case 'status':
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'STATUS_ASC' ? 'STATUS_ASC' : 'STATUS_DESC';
               $scope.data = $scope.returnData();
-              $scope.myPagingFunction($scope.data);
+              $scope.getPaymentsList($scope.data);
               break;
             default:
               break;
@@ -200,14 +194,14 @@
           $scope.sortByItem = null;
           $scope.offset = 0;
           $scope.data = $scope.returnData();
-          $scope.myPagingFunction();
+          $scope.getPaymentsList();
         };
 
         $scope.sortBy = function(criteria) {
           $scope.sortByValue = criteria;
           $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
-          $scope.myPagingFunction($scope.data);
+          $scope.getPaymentsList($scope.data);
         };
 
         $scope.sortByValue = '';
@@ -219,7 +213,7 @@
         $scope.$watch('dateFilter', function(val) {
           $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
-          $scope.myPagingFunction($scope.data);
+          $scope.getPaymentsList($scope.data);
 
         }, true);
 
@@ -250,7 +244,7 @@
           $scope.companyFilterName = null;
           $scope.offset = 0;
           $scope.data = $scope.returnData();
-          $scope.myPagingFunction($scope.data)
+          $scope.getPaymentsList($scope.data)
         };
 
         $scope.$watch('filterCompany', function(value, oldVal) {
@@ -263,7 +257,7 @@
             $scope.data = $scope.returnData();
             $scope.filteredPayments = [];
             $scope.payments = [];
-            $scope.myPagingFunction($scope.data)
+            $scope.getPaymentsList($scope.data)
           }
         });
 
@@ -273,24 +267,28 @@
 
         $scope.onBlurInvoice = function(invoiceNumber) {
           $scope.resetAllFiltersForSort();
+          $scope.invoiceNumber = $scope.invoiceNumberFilter;
           $scope.stopReqeust = false;
           $scope.offset = 0;
-          $scope.invoiceNumber = invoiceNumber;
           $scope.data = $scope.returnData();
           $scope.filteredPayments = [];
           $scope.payments = [];
-          $scope.myPagingFunction($scope.data);
+          $scope.getPaymentsList($scope.data);
         };
 
         $scope.onKeyPressInvoice = function($event) {
           if ($event.keyCode === 13) {
-            $scope.onBlurInvoice($scope.invoiceNumber);
+            $('#inputNumber').blur();
           }
         };
 
         $scope.deletePayment = function(id) {
           PaymentsService.deletePayment(id, function(res) {
+            console.log($scope.filteredPayments.length, '111');
+            console.log($scope.filteredPayments.length, '222');
           });
+          $scope.filteredPayments = $scope.filteredPayments
+            .filter((item) => item.id !== id)
         };
 
         $scope.showTooltip = function(event, index, type) {
@@ -307,15 +305,15 @@
         };
 
 
-        PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
-
-          $scope.payments = res;
-          $scope.filteredPayments = res;
-          $scope.filteredPayments.map(function(item) {
-            return $scope.showTooltipArray.push(false);
-          });
-
-        });
+        // PaymentsService.getPaymentsData($scope.data, $scope, function(res) {
+        //
+        //   $scope.payments = res;
+        //   $scope.filteredPayments = res;
+        //   $scope.filteredPayments.map(function(item) {
+        //     return $scope.showTooltipArray.push(false);
+        //   });
+        //
+        // });
       }]);
 
 }());

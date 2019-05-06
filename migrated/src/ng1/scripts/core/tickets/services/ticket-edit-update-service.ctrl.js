@@ -308,7 +308,7 @@
           }
 
           $scope.isShowingErrors = function (form, fieldName) {
-            return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
+            return form && form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
           };
 
           $scope.setNewService = function (service) {

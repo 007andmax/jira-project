@@ -869,7 +869,7 @@
             $scope.ticketUpdate.attachments.splice(index, 1);
           };
           $scope.isShowingErrors = function (form, fieldName) {
-            return form[fieldName] && !form[fieldName].$valid;
+            return form && form[fieldName] && !form[fieldName].$valid;
           };
           $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault);
           $scope.$watch('ticketUpdate.attachments.length', function (val) {

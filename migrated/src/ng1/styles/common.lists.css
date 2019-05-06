@@ -274,7 +274,7 @@
   line-height: 20px;
 }
 
-.list-company-row .col-xs-3 .control.checkbox {
+.list-company-row .col-md-3 .control.checkbox {
   position: absolute;
   top: calc(50% - 7px);
   margin: 0 !important;
@@ -427,6 +427,10 @@
   min-height: calc(100vh - 78px);
 }
 
+.users-bg.new-payments {
+  padding-bottom: 35px;
+}
+
 .users-bg h3 {
   margin: 0;
 }
@@ -471,7 +475,7 @@
   left: -120px;
 }
 
-.qt-companies .list-company-row .col-xs-3 {
+.qt-companies .list-company-row .col-md-3 {
   display: flex;
   align-self: center;
 }

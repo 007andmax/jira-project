@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompaniesService } from "../../../../../services/company/companies.service";
 
 @Component({
   selector: 'app-quote-create-content',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuoteCreateContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private companiesService: CompaniesService
+  ) { }
 
   ngOnInit() {
+    this.companiesService.getCompaniesList();
   }
 
 }

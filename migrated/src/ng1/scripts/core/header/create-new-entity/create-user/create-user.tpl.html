@@ -6,7 +6,7 @@
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
 <div class="user--content row">
-    <div edit-avatar class="col-xs-12" model="editUser" model-name="user"></div>
+    <div edit-avatar class="col-xs-12 col-md-12" model="editUser" model-name="user"></div>
     <div class="col-md-6 col-xs-6" add-on-focus ng-class="{'has-error': isShowingErrors(userForm, 'firstName')}">
       <div ng-messages="userForm.firstName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'firstName')}">
         <div class="control-label" ng-message="required">First name is required.</div>

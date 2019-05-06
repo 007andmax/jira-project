@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -6,7 +9,6 @@ import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { UsersService } from "../../services/users/users.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
-
 
 /**
  * Password manager component
@@ -25,6 +27,7 @@ export class PasswordManagerComponent implements OnInit {
   public selectedDate: any;
   public selectedCategory: any;
   public newRecord: Subject<boolean> = new Subject();
+  public isMobileFilterShowing = false;
   public currentUser: any;
 
   /**
@@ -32,13 +35,15 @@ export class PasswordManagerComponent implements OnInit {
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
    * @param {CompaniesService} companiesService Service to work with api
    * @param {PasswordManagerService} passwordManagerService Service to work with filters
+   * @param {userService} userService Service to work with user
+   * @param {permissionsService} permissionsService to work with permissions service
    */
   public constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
-    private permissionsService: PermissionsService,
+    private permissionsService: PermissionsService
   ) {}
 
   /**
@@ -50,7 +55,9 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
     this.getCurrentUser();
-    console.log('item');
+    this.apiPasswordManagerService.getRecords();
+    this.companiesService.getCompaniesList();
+    this.checkCloseFilters();
   };
 
   /**
@@ -98,7 +105,7 @@ export class PasswordManagerComponent implements OnInit {
    * Change data table show status
    */
   public showDataTable() {
-    return !!((this.selectedCompany && this.selectedCompany.companyId) || (this.selectedCategory) || (this.selectedDate));
+    return !!((this.selectedCompany && this.selectedCompany.companyId.length > 0) || (this.selectedCategory && this.selectedCategory.UPPERCASE !== 'CLEAR') || (this.selectedDate));
   }
 
   /**
@@ -131,10 +138,25 @@ export class PasswordManagerComponent implements OnInit {
   }
 
   /**
-   * getPermission
+   * Toggle mobile filters
    */
-  public getPermissions(action) {
-   return this.permissionsService.isAllowed(action)
+  public showMobileFilters() {
+    this.isMobileFilterShowing = !this.isMobileFilterShowing;
   }
+
+  /**
+   * Close mobile filters
+   */
+  public checkCloseFilters() {
+    this.passwordManagerService.closeFilter.subscribe(() => {
+      console.log('0000000');
+      this.isMobileFilterShowing = false
+    } )
+  }
+
+  ngOnDestroy() {
+    this.apiPasswordManagerService.deleteSubscription();
+  }
+
 
 }

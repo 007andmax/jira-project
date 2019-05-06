@@ -7,8 +7,9 @@
     <button class="close-modal" ng-click="closeWindow()"></button>
   </div>
   <div class="invoice--content row">
-    <!-- <div class="col-md-6">
 
+    <div class="col-md-6" add-on-focus
+         ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
       <div ng-messages="companyForm.companyName.$error"
            ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
         <label class="control-label" ng-message="required">Company name is required.</label>
@@ -16,44 +17,23 @@
         <label class="control-label" ng-message="minlength">Company name is too short.</label>
         <label class="control-label" ng-message="unique">This company name already occupied.</label>
       </div>
-      <input placeholder="Write Company Name" type="text" ng-model="editCompany.name"
-             aria-expanded="true"
-             ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur>
-
-
-
-    </div> -->
-
-    <div class="col-md-6" add-on-focus
-         ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
-
-      <!-- <label class="control-label" ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
-        Company Name
-      </label> -->
-
-      <div ng-messages="companyForm.companyName.$error"
-           ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
-        <label class="control-label" ng-message="required" for="">Company name is required.</label>
-        <label class="control-label" ng-message="maxlength" for="">Company name is too large.</label>
-        <label class="control-label" ng-message="minlength" for="">Company name is too short.</label>
-        <label class="control-label" ng-message="unique" for="">This company name already occupied.</label>
-      </div>
       <div class="placeholder">Company Name</div>
-      <input type="text" style="border-radius: 0;height: 45px;" class="form-control" ng-model="editCompany.name"
+      <input type="text"
+             style="border-radius: 0;height: 45px;"
+             placeholder=""
+             class="form-control"
+             ng-model="editCompany.name"
              aria-expanded="true"
              ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
-             is-uniq-validation validation-func="validateCompanyName" model-id="editCompany.name"
-      >
-      <!-- execute-when-outfocused="saveBasicInfo(basicInfoForm)" -->
+             is-uniq-validation validation-func="validateCompanyName" model-id="editCompany.name">
     </div>
 
-    <div class="col-md-6 location" add-on-focus
+    <div class="col-md-6 location"
+         add-on-focus
          ng-class="{'has-error': (companyForm.address.$dirty || showValidationMessages) && !companyForm.address.$valid}">
-
       <div
         class="form-group"
         add-on-focus
-
         active-placeholder="'Enter a location'"
         only-address="true"
         use-alternative-map="true"
@@ -61,30 +41,7 @@
         template-page="header/create-new-entity/create-company"
         ng-model="companyForSettingPage.addresses[0]"
         show-validation-messages="triedToSave"></div>
-
-
     </div>
-    <!-- <div class="col-md-6"><input type="text" placeholder="Country"></div>
-    <div class="col-md-6"><input type="text" placeholder="Address Line 1"></div>
-    <div class="col-md-6"><input type="text" placeholder="Province/State"></div>
-    <div class="col-md-6"><input type="text" placeholder="Address Line 2"></div> -->
-    <!-- <div class="col-md-6"><input type="text" placeholder="Phone Number"></div> -->
-
-    <!-- <div  class="col-md-6"
-          is-try-to-save="triedToSave"
-          no-add-more="true"
-          phone-numbers-edit
-          is-restricted="true"
-          is-required="true"
-          country-code="{{companyForSettingPage.addresses[0].countryCode}}"
-          ng-model="contact.phoneNumbers"
-          custom-placeholder="'Phone'">
-
-
-
-
-
-    </div> -->
 
     <div class="col-md-6 phone-number"
          add-on-focus
@@ -97,32 +54,10 @@
          country-code="{{companyForSettingPage.addresses[0].countryCode}}"
          custom-placeholder="'Phone number'">
 
-      <!-- <input placeholder="Phone Number" type="text"> -->
     </div>
-    <!-- <div class="col-md-6"><input type="text" placeholder="City"></div> -->
-
-    <!-- <div class="col-md-6"><input type="text" placeholder="Website"></div> -->
-    <!-- <div class="col-md-6" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
-      <div ng-messages="companyForm.companyDomain.$error"
-           ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
-        <label class="control-label" ng-message="required">Domain is required.</label>
-        <label class="control-label" ng-message="unique">This domain already occupied.</label>
-        <label class="control-label" ng-message="pattern">Please enter a valid domain.</label>
-      </div>
-      <input placeholder="Company Domain Name" type="text" ng-model="editCompany.domain"
-             placeholder="yourcompany.com"
-             name="companyDomain"
-              ng-pattern="domainPattern">
-
-
-    </div> -->
-
-    <!-- <div class="col-md-6"><input type="text" placeholder="Postal/ZIP Code"></div> -->
-
 
     <div class="col-md-3" add-on-focus
          ng-class="{'has-error': isShowingErrors(companyForm, 'suiteNumber')}">
-      <!-- <input type="text" placeholder="Suite No"> -->
       <div ng-messages="companyForm.suiteNumber.$error"
            ng-class="{'hide': !isShowingErrors(companyForm, 'suiteNumber')}">
         <div class="control-label" ng-message="maxlength">too large</div>

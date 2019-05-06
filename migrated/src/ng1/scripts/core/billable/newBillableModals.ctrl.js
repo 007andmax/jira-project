@@ -46,10 +46,12 @@
         $scope.maxDate = new Date();
         $scope.invoiceNumbers = $scope.invoiceNumbers.reduce(function(acc, el) {
 
-          var sum = $rootScope.uploadedReceivable.list.find(function(inv) {
-            return inv.number == el;
-          }).sum;
+          var elem = $rootScope.uploadedReceivable.list.find(function(inv) {
+            return inv.number === el;
+          });
+          console.log($rootScope.uploadedReceivable.list, '$rootScope.uploadedReceivable.list');
 
+          var sum = elem && elem.sum;
 
           acc.push({
             number: el,

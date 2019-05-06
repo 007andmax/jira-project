@@ -186,7 +186,7 @@
         };
 
         $scope.isShowingErrors = function (form, field) {
-          return form[field] && form[field].$dirty && !$scope.address.fromGoogle;
+          return form && form[field] && form[field].$dirty && !$scope.address.fromGoogle;
         };
 
         $scope.expand = function (item, event, isClose) {

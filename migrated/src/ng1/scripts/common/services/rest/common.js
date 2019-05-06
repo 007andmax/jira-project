@@ -10,7 +10,7 @@
     $provide.factory('myHttpInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
 
       function processResponse(response) {
-        
+
         var unlockExpiredHeader = response.headers('SESSION_UNLOCK_EXPIRED');
         var userDisabledHeader = response.headers('USER_DISABLED');
         var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
@@ -123,6 +123,7 @@
   services.factory('$exceptionHandler', ['$log', function($log) {
     return function myExceptionHandler(exception, cause) {
       //todo: send errors to the backend (need endpoint)
+      console.log('teste');
       $log.warn(exception, cause);
     };
   }]);
@@ -142,6 +143,9 @@
     }
 
     function downloadByUrl(url, fileName) {
+
+      const indexOfDot = fileName && fileName.lastIndexOf('.');
+      const fileFormat = fileName && fileName.substring(indexOfDot);
       //iOS devices do not support downloading. We have to inform user about this.
       if (/(iP)/g.test(navigator.userAgent)) {
         alert('Your device does not support files downloading. Please try again in desktop browser.');
@@ -161,6 +165,11 @@
         } else {
 
           return redownload(url);
+          if (fileFormat === '.pdf' || fileFormat === '.html') {
+            return redownload((url + fileFormat), true);
+          } else {
+            return redownload((url + fileFormat));
+          }
         }
 
         // var link = document.createElement('a');

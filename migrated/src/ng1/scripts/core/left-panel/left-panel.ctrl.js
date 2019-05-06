@@ -55,6 +55,8 @@
           'LOCAL_USER_ACCOUNT'
         ];
 
+        $scope.test = [];
+
         //categories start
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
@@ -218,27 +220,11 @@
 
             }, 100)
           }
+        });
 
-
-
-
-
-        })
-
-
-
-        //for one time popover
-        // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.tagColors = TagsService.getColors();
-
-        // $rootScope.ticketsTagsColors = {
-        //   unassigned: 0,
-        //   completed: 1,
-        //   inProgress: 2,
-        //   onHold: 9
-        // };
 
         $rootScope.ticketsTagsColors = {
           unassigned: 1,
@@ -253,15 +239,19 @@
 
         $scope.toggleMobileLeftPanel = function(state) {
           $rootScope.isLeftPanelOpened = state;
-        }
+        };
 
         $scope.toggleMobileMenu = function(menu) {
+          TicketsService.getAllCounts(function (resp) {
+            resp && ($scope.ticketsCounter = resp);
+            return $scope.test;
+          });
           $scope.listOfMobileTitles.forEach(function(title) {
             $scope[title] = false;
-          })
+          });
 
           $scope[menu] = true;
-        }
+        };
 
         $scope.$watch('companyFilterTags', function(val) {
           if (val.length) {
@@ -274,13 +264,21 @@
         }, true);
 
         TicketsService.getAllCounts(function (resp) {
-          $scope.ticketsCounter = resp;
+          resp && ($scope.ticketsCounter = resp);
+          return $scope.test;
+        });
+
+        $scope.$watch('ticketsCounter', function(newValue, oldValue) {
+          $scope.ticketsCounter = newValue;
+          return $scope.ticketsCounter;
+
         });
 
         $scope.$watch(function() {
           return $rootScope.exampleCompanyDeleted;
         }, function(val) {
           if (val) {
+            console.log(val, '1235123');
             TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
             });
