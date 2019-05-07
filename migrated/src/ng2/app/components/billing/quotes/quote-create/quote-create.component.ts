@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { QuoteCreateContentComponent } from "./quote-create-content/quote-create-content.component";
 
 @Component({
   selector: 'app-quote-create',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuoteCreateComponent implements OnInit {
 
+  @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public saveAndContinue() {
+    this.quoteCreateContentComponent.saveAndContinue();
+
   }
 
 }

@@ -1,5 +1,10 @@
-<div class="quote-create__content">
-  <app-quote-create-content-top></app-quote-create-content-top>
+<form
+  [formGroup] = "quoteForm"
+  class="quote-create__content">
+  <app-quote-create-content-top
+    [quoteForm]="quoteForm"
+    (selectedItem)="setClient($event)"
+  ></app-quote-create-content-top>
   <app-quote-create-content-bottom></app-quote-create-content-bottom>
   <app-quote-create-content-notes></app-quote-create-content-notes>
-</div>
+</form>

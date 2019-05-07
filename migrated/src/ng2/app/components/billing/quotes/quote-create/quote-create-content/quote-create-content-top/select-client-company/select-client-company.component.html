@@ -8,7 +8,7 @@
   [inputFormatter]="formatter"
   [resultFormatter]="formatter"
   [ngbTypeahead]="search"
-  (selectItem)="getCompanyDevices($event)"
+  (selectItem)="selectItem($event)"
   (focus)="focus$.next($event.target.value)"
   (click)="click$.next('')"
   #instance="ngbTypeahead"

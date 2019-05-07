@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-quote-create-header',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuoteCreateHeaderComponent implements OnInit {
 
+  @Output() saveAndContinue = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public saveQuotes() {
+    this.saveAndContinue.next();
   }
 
 }

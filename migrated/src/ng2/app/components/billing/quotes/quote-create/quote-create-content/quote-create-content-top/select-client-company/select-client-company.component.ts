@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {merge, Observable, Subject} from "rxjs";
-import {CompaniesService} from "../../../../../../../services/company/companies.service";
-import {ISubscription} from "rxjs/Subscription";
-import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
-import {NgbTypeahead} from "@ng-bootstrap/ng-bootstrap";
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { merge, Observable, Subject } from "rxjs";
+import { CompaniesService } from "../../../../../../../services/company/companies.service";
+import { ISubscription } from "rxjs/Subscription";
+import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
+import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-select-client-company',
@@ -13,6 +13,7 @@ import {NgbTypeahead} from "@ng-bootstrap/ng-bootstrap";
 export class SelectClientCompanyComponent implements OnInit {
 
   @ViewChild('instance') instance: NgbTypeahead;
+  @Output() selectedItem = new EventEmitter<any>();
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
   focus$ = new Subject<string>();
@@ -23,14 +24,11 @@ export class SelectClientCompanyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('test');
     this.getCLientsList();
   }
 
   private getCLientsList() {
-    console.log('1');
     this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
-      console.log(res, 'this.clientsLis');
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
@@ -50,8 +48,10 @@ export class SelectClientCompanyComponent implements OnInit {
     );
   };
 
-  public getCompanyDevices(companyId) {
+  public selectItem(companyId) {
     console.log(companyId, 'companyId');
+    this.selectedItem.emit(companyId);
+
   }
 
   formatter = (result: string) => {

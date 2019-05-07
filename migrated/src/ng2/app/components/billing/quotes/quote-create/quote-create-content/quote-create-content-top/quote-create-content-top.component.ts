@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-quote-create-content-top',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuoteCreateContentTopComponent implements OnInit {
 
+  @Output() selectedItem = new EventEmitter<any>();
+  @Input() quoteForm: FormGroup;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public selectClient(selectClient) {
+    console.log(selectClient,'selectClient');
+    this.selectedItem.next(selectClient);
   }
 
 }
