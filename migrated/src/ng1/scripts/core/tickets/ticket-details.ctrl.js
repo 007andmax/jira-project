@@ -60,9 +60,6 @@
             window.location.href = window.location.href.split('/').slice(0, -1).join('/');
           }
           $rootScope.isTicketOpened = true;
-          $scope.$on('$destroy', function() {
-            $rootScope.isTicketOpened = false;
-          })
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id).filter(function(user) {
             return !user.deletedAt;
           });
@@ -88,8 +85,6 @@
             $scope.ticketDetails = { id: ticketsSharedState.openTicketId };
           }
           //$scope.ticketDetails = { id: $stateParams.ticketId };
-          $scope.$watch('ticketDetails', function(val) {
-          })
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
             $scope.ticketDetails = details;
             if (isFromRemote) {
@@ -182,7 +177,7 @@
             $scope.cancelNoteUpdate = function(ticketUpdate) {
               $scope.isNoteUpdating = false;
               ticketUpdate.note = $scope.prevNote;
-            }
+            };
             $scope.updateNoteRequest = function(updateId, note, callback) {
               TicketsService.updateNote($scope.ticketDetails.id, updateId, note, function(resp) {
                 $scope.isNoteUpdating = false;
@@ -203,9 +198,9 @@
                 }
               }).filter(function(el) {
                 return el.name;
-              })
+              });
             }
-            $scope.$watch("ticketDetails.attachments.length", function() {
+            let ticketDetailsWatcher = $scope.$watch("ticketDetails.attachments.length", function() {
               $scope.reducedAttachmentsTypes = $scope.ticketDetails.attachments.reduce(function(acc, el) {
                 var type = el.file.name.match($scope.attachmentTypePattern)[0] || $scope.attachmentType[el.file.contentType]
                 if (!~acc.indexOf(type)) {
@@ -213,8 +208,8 @@
                 }
                 return acc;
               }, []);
-            })
-            $scope.$watch('attachmentsToDelete', function(val) {
+            });
+            let attachmentsToDeleteWatch = $scope.$watch('attachmentsToDelete', function(val) {
               if (val) {
                 $rootScope.attachmentsToDelete = null;
                 $scope.ticketDetails.attachments = $scope.ticketDetails.attachments.filter(function(el) {
@@ -242,18 +237,6 @@
                   oldCompanyId: oldCompanyId
                 }
               })
-              // $scope.saveEditedTicket = function (form) {
-              //   if (form.$valid) {
-              //     $scope.disabledSaveButton = true;
-              //     $scope.tryToSaveTicket = false;
-              //     $scope.editedTicket.note = $scope.editedTicket.note || '';
-              //     TicketsService.save($scope.editedTicket, function () {
-              //       $scope.editingTicket = false;
-              //     })
-              //   } else {
-              //     $scope.tryToSaveTicket = true;
-              //   }
-              // };
             }
             $scope.currentOpenTab = $scope.currentOpenTab || 'NOTE';
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
@@ -321,13 +304,11 @@
           $scope.setMobileForm = function(form) {
             $scope.mobileUpdateForm = form;
           }
-          $scope.$watch('ticketUpdate.products[1]', function(val) {
-          })
           $scope.updateAndCloseTicket = function (form) {
             if (!form) form = $scope.mobileUpdateForm;
             var saveFailed = $scope.saveTicketUpdate({$valid: true}, true, closeTicket, null, null, true);
           };
-          $scope.$watch('ticketDetails.agent', function (value) {
+          let ticketDetailsAgent = $scope.$watch('ticketDetails.agent', function (value) {
             if (value && $scope.agentList) {
               $scope.ticketAgent = $scope.agentList.find(function (agent) {
                 return agent.id === value.deviceId;
@@ -763,12 +744,12 @@
             }
             $scope.$apply();
           });
-          $scope.$watch('ticketSharedUsersList', function() {
+          let ticketSharedUsersListWatch = $scope.$watch('ticketSharedUsersList', function() {
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
               return typeof el.user === 'object';
             });
-          }, true)
-          $scope.$watch('ticketSharedUsersList.length', function(val) {
+          }, true);
+          let  ticketSharedUsersListLengthWatch = $scope.$watch('ticketSharedUsersList.length', function(val) {
             if (val > 8) {
               $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
             }
@@ -872,7 +853,7 @@
             return form && form[fieldName] && !form[fieldName].$valid;
           };
           $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault);
-          $scope.$watch('ticketUpdate.attachments.length', function (val) {
+          let ticketUpdateAttachmentsLength = $scope.$watch('ticketUpdate.attachments.length', function (val) {
             if (!val) return;
             var totalAttachSize = 0;
             for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
@@ -898,7 +879,7 @@
               });
             });
           };
-          $scope.$watch('ticketDetails.shares', function (shares) {
+          let ticketDetailsShares = $scope.$watch('ticketDetails.shares', function (shares) {
             $scope.shares = [];
             if (!shares) {
               return;
@@ -961,10 +942,6 @@
             if (data.id === $scope.ticketDetails.id) {
               $state.go('tickets', { listType: $stateParams.listType });
             }
-          });
-          $scope.$on('$destroy', function () {
-            rightPanelSharedState.companyId = undefined;
-            rightPanelSharedState.createUserId = undefined;
           });
           $scope.toggleAllShared = function (isNotifyAll) {
             var sharesWithoutSubscription = [];
@@ -1051,14 +1028,11 @@
             }
             return discount.name + ' ' + $scope.getDiscountAmount(discount);
           };
-          $scope.$watch('currentUser.permissions', function (permissions) {
+          let currentUserPermissions = $scope.$watch('currentUser.permissions', function (permissions) {
             if (permissions && !$scope.PermissionsService.isAllowed('EDIT_TICKETS')) {
               $scope.editingTicket = false;
             }
           });
-          $scope.$on('$destroy', function() {
-            $rootScope.usersToNotify = null;
-          })
           function closeTicket() {
             $scope.ticketClosing = true;
             var recipientsIds = $scope.ticketSharedUsersList.filter(function (shared) {
@@ -1145,6 +1119,20 @@
               result.push({ user: user, notify: false });
             }
           }
+          $scope.$on('$destroy', function () {
+            rightPanelSharedState.companyId = undefined;
+            rightPanelSharedState.createUserId = undefined;
+            $rootScope.usersToNotify = null;
+            $rootScope.isTicketOpened = false;
+            ticketDetailsWatcher();
+            currentUserPermissions();
+            ticketDetailsShares();
+            ticketSharedUsersListWatch();
+            ticketSharedUsersListLengthWatch();
+            ticketUpdateAttachmentsLength();
+            ticketDetailsAgent();
+            attachmentsToDeleteWatch();
+          });
           var condition = 'ticketUpdate.note' +
             '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +
             '|| (ticketUpdate.products && ticketUpdate.products.length > 1)' +

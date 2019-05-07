@@ -100,30 +100,6 @@
 
         };
 
-        // $scope.$watch('companyModelObj.companyModel', function (value) {
-        //   if (value !== undefined && value !== "" && value !== " ") {
-        //
-        //     ticketsSharedState.filter.completed = false;
-        //     ticketsSharedState.filter.inProgress = false;
-        //     ticketsSharedState.filter.onHold = false;
-        //     ticketsSharedState.filter.onHoldTag = false;
-        //     ticketsSharedState.filter.clientUserId = '';
-        //     $scope.clientsUsersByCompany = $scope.clientUsers().filter(function (user) {
-        //       return user.company.id === value;
-        //     });
-        //     if ($state.includes('tickets')) {
-        //       $scope.stateGo(null, 'tickets', {listType: 'by_company'});
-        //     }
-        //
-        //   } else if (value === undefined) {
-        //     $scope.isTicketCompanyIdFieldEmpty = true;
-        //     if ($state.includes('tickets')) {
-        //       clearFilter(ticketsSharedState.filter);
-        //       $scope.stateGo(null, 'tickets', {listType: 'all'});
-        //     }
-        //   }
-        // });
-
         $scope.getFullName = function (client) {
           var isAllSpaces = client.lastName === "    ";
           if (client.lastName && !isAllSpaces) {
@@ -152,7 +128,7 @@
         $scope.clientUserModel = $scope.ticketsSharedState.filter.clientUserId;
         $scope.areMobileTicketsFiltersOpened = false;
 
-        $scope.$watch(function () {
+        let stateWatch = $scope.$watch(function () {
           return $stateParams;
         }, function (stateParams) {
 
@@ -166,7 +142,7 @@
           }
         }, true);
 
-        $scope.$watch(function() {
+        let changeTicketCompany = $scope.$watch(function() {
           return $rootScope.changeTicketCompany;
         }, function(val) {
           if (val) {
@@ -202,7 +178,7 @@
           }
         };
 
-        $scope.$watch('tickets', changeSelectedTickets);
+        let changeSelectedTicketsWatch = $scope.$watch('tickets', changeSelectedTickets);
 
         $scope.changeSelectedTickets = changeSelectedTickets;
         $scope.uncheckTicket = uncheckTicket;
@@ -330,6 +306,9 @@
           ticketsHeaderState.checkedTicketsIds = [];
           ticketsHeaderState.selectedTickets = [];
           ticketsHeaderState.agentList = [];
+          stateWatch();
+          changeTicketCompany();
+          changeSelectedTicketsWatch();
         });
 
       }]);
