@@ -1124,12 +1124,14 @@
             rightPanelSharedState.createUserId = undefined;
             $rootScope.usersToNotify = null;
             $rootScope.isTicketOpened = false;
+            ticketDetailsWatcher();
             currentUserPermissions();
             ticketDetailsShares();
             ticketSharedUsersListWatch();
             ticketSharedUsersListLengthWatch();
             ticketUpdateAttachmentsLength();
             ticketDetailsAgent();
+            attachmentsToDeleteWatch();
           });
           var condition = 'ticketUpdate.note' +
             '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +
