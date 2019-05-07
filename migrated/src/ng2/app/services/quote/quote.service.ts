@@ -1,0 +1,49 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class QuoteService {
+
+  private apiUrl = environment.apiUrl;
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+   public createQuote(value) {
+    console.log(value);
+    return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
+       "companyId": value.client.item.id,
+       "number":"100000000",
+       "quoteItems":{
+       "type":"MIXED",
+         "shares":[],
+         "ticket":null,
+         "products":[]
+     },
+       "requestPayment":false,
+       "draft":false,
+       "purchaseOrder":"Some string",
+       "partialDeposit":"Partial deposit String",
+       "validUntil":1555966800000,
+       "date":1555966800000,
+       "recipients":["user@gmail.com"],
+       "message":"My message string with styles",
+       "globalNote": {}, // single object of GLOBAL note from GET /invoice/invoiceNote/getAll
+       "regularNote": {} // single object of REGULAR note from GET /invoice/invoiceNote/getAll
+    })
+  }
+
+  getQuoteNumber() {
+    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`);
+  }
+
+  getQuoteNote() {
+    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`);
+  }
+
+
+}
