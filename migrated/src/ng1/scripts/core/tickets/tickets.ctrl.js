@@ -66,18 +66,6 @@
           'image/bmp': 'not-viewable'
         };
 
-        // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByCompanyHistory', function (resp) {
-        //   $scope.companiesFilterHistoryTicketsPage = resp;
-        // });
-        //
-        // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByClientUsersHistory', function (resp) {
-        //   $scope.clientUsersFilterHistoryTicketsPage = resp;
-        // });
-        //
-        // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByTechUsersHistory', function (resp) {
-        //   $scope.techUsersFilterHistoryTicketsPage = resp;
-        // });
-
 
         $scope.stateMobileGo = function() {
           $scope.lastSavedStatus = arguments;
