@@ -1,19 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
+/**
+ * Password quotes header component
+ */
 @Component({
   selector: 'app-quote-create-header',
   templateUrl: './quote-create-header.component.html',
   styleUrls: ['./quote-create-header.component.scss']
 })
-export class QuoteCreateHeaderComponent implements OnInit {
+export class QuoteCreateHeaderComponent {
 
   @Output() saveAndContinue = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  /**
+   * Emit save quotes to QuoteCreate component
+   */
   public saveQuotes() {
     this.saveAndContinue.next();
   }

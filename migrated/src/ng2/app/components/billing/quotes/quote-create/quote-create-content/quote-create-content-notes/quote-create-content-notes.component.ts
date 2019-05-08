@@ -6,6 +6,9 @@ import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { QuoteService } from "../../../../../../services/quote/quote.service";
 import { NoteService } from "../../../../../../services/note/note.service";
 
+/**
+ *  Quotes create content notes component
+ */
 @Component({
   selector: 'app-quote-create-content-notes',
   templateUrl: './quote-create-content-notes.component.html',
@@ -23,15 +26,26 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {NoteService} noteService Service to work with api
+   * @param {QuoteService} quoteService Service to work with api
+   */
   constructor(
     private quoteService: QuoteService,
     private noteService: NoteService
   ) { }
 
+  /**
+   * Initializes quote create content content. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getNotes()
   }
 
+  /**
+   * Get tech company notes, and filter by type
+   */
   getNotes() {
     this.quoteService.getQuoteNote().subscribe((res) => {
       this.noteRegularList = [...res].filter((item) => item['noteType'] === 'REGULAR');
@@ -40,6 +54,9 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     })
   }
 
+  /**
+   * show and find text in dropdown
+   */
   search = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
@@ -49,20 +66,33 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       map(term =>  this.noteRegularList));
   };
 
+  /**
+   * select note and emit regular note to parent
+   * @param note selected note
+   */
   public selectItem(note) {
     this.selectedNote = note.item;
     this.selectedRegularNoteItem.next(this.selectedNote);
   }
 
+  /**
+   * format select output
+   */
   formatter = (result: string) => {
     return result['title'];
   };
 
+  /**
+   * create new note
+   */
   public createNewNote() {
     const data = this.getNoteData();
     this.noteService.createNote(data).subscribe();
   }
 
+  /**
+   * create note data for createNewNote
+   */
   public getNoteData() {
     return ({
       line1: this.selectedNote['line1'],
