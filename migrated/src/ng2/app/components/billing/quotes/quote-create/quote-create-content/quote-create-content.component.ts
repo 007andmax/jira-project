@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { DateService } from "../../../../../services/date/date.service";
 import { CompaniesService } from "../../../../../services/company/companies.service";
 import { QuoteService } from "../../../../../services/quote/quote.service";
-import {map} from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-quote-create-content',
@@ -39,25 +39,32 @@ export class QuoteCreateContentComponent implements OnInit {
   public initForm() {
     console.log(this.dateService.getStartDate(new Date()), 'this.dateService.getStartDate(new Date())');
     this.quoteForm = this.fb.group({
-      client: '',
+      client: ['', Validators.required],
       startDate: this.dateService.getStartDate(new Date()),
       endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
       partialDeposit: '',
       quoteNumber: '',
-      po: ''
+      po: '',
+      regularNote: '',
+      globalNote: ''
     })
   }
 
   saveAndContinue() {
-    this.quoteService.getQuoteNote().subscribe((res) => {
-      console.log(res);
-    })
     this.quoteService.createQuote(this.quoteForm.value).subscribe();
     console.log(this.quoteForm.value);
   }
 
   public setClient(value) {
     this.quoteForm.controls['client'].setValue(value);
+  }
+
+  public setRegularNote(value) {
+    this.quoteForm.controls['regularNote'].setValue(value);
+  }
+
+  public setGlobalNote(value) {
+    this.quoteForm.controls['globalNote'].setValue(value);
   }
 
 }

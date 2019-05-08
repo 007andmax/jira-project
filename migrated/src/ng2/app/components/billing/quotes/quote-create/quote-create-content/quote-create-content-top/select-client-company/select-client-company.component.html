@@ -4,7 +4,6 @@
   type="text"
   [(ngModel)]="selectedClient"
   class="pointer"
-  [ngClass]="{'has-error': submitted && form['client'].hasError('required')}"
   [inputFormatter]="formatter"
   [resultFormatter]="formatter"
   [ngbTypeahead]="search"

@@ -17,7 +17,6 @@ export class QuoteCreateContentTopComponent implements OnInit {
   }
 
   public selectClient(selectClient) {
-    console.log(selectClient,'selectClient');
     this.selectedItem.next(selectClient);
   }
 

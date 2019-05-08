@@ -14,7 +14,6 @@ export class QuoteService {
   ) { }
 
    public createQuote(value) {
-    console.log(value);
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
        "companyId": value.client.item.id,
        "number":"100000000",
@@ -28,12 +27,12 @@ export class QuoteService {
        "draft":false,
        "purchaseOrder":"Some string",
        "partialDeposit":"Partial deposit String",
-       "validUntil":1555966800000,
-       "date":1555966800000,
+       "validUntil": this.getMsDate(value.endDate),
+       "date": this.getMsDate(value.startDate),
        "recipients":["user@gmail.com"],
        "message":"My message string with styles",
-       "globalNote": {}, // single object of GLOBAL note from GET /invoice/invoiceNote/getAll
-       "regularNote": {} // single object of REGULAR note from GET /invoice/invoiceNote/getAll
+       "globalNote": value.globalNote,
+       "regularNote": value.regularNote
     })
   }
 
@@ -43,6 +42,12 @@ export class QuoteService {
 
   getQuoteNote() {
     return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`);
+  }
+
+  getMsDate(value) {
+    const date = new Date(`${value.year}/${value.month}/${value.day}` );
+    console.log(date.getTime(), '12351235');
+    return date.getTime()
   }
 
 

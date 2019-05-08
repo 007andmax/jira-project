@@ -1,31 +1,35 @@
 <div class="quote-create__content--notes">
   <div class="notes-top">
-    <p>Customer Note Type</p>
-    <input
-      id="typeahead-focus1"
-      placeholder="Select Company"
-      type="text"
-      [(ngModel)]="selectedClient"
-      class="pointer"
-      [ngClass]="{'has-error': submitted && form['client'].hasError('required')}"
-      [inputFormatter]="formatter"
-      [resultFormatter]="formatter"
-      [ngbTypeahead]="search"
-      (selectItem)="selectItem($event)"
-      (focus)="focus$.next($event.target.value)"
-      (click)="click$.next('')"
-      #instance="ngbTypeahead"
-    />
-    <i *ngIf="selectedClient"
-       class="icn-sm icn-remove-old"
-       (click)="clearClient($event)"></i>
-    <i *ngIf="!selectedClient"
-       class="icn-sm report-caret-icon"></i>
+    <div>
+      <p>Customer Note Type</p>
+      <input
+        id="typeahead-focus1"
+        placeholder="Select Note"
+        type="text"
+        [(ngModel)]="selectedNoteNew"
+        class="pointer"
+        [inputFormatter]="formatter"
+        [resultFormatter]="formatter"
+        [ngbTypeahead]="search"
+        (selectItem)="selectItem($event)"
+        (focus)="focus$.next($event.target.value)"
+        (click)="click$.next('')"
+        #instance="ngbTypeahead"
+      />
+      <i *ngIf="selectedClient"
+         class="icn-sm icn-remove-old"
+         (click)="clearClient($event)"></i>
+      <i *ngIf="!selectedClient"
+         class="icn-sm report-caret-icon"></i>
 
-    <textarea placeholder="Enter notes that are visible to your customer"></textarea>
+      <div class="new-link"
+           *ngIf="(selectedNoteNew && selectedNoteNew.length > 0)"
+           (click)="createNewNote()">Create new client</div>
+    </div>
+    <textarea placeholder="Enter notes that are visible to your customer" [(ngModel)]="selectedNote && selectedNote.line1"></textarea>
   </div>
   <div class="notes-bottom">
     <p>Terms & Conditions</p>
-    <textarea placeholder="Mention your company's Terms and Conditions"></textarea>
+    <textarea [(ngModel)]="noteGlobal && noteGlobal.line1" placeholder="Mention your company's Terms and Conditions"></textarea>
   </div>
 </div>

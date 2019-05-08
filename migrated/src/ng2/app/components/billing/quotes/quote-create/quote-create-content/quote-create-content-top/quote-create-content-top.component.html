@@ -1,7 +1,7 @@
 <div class="quote-create__content--top row">
   <div class="col-md-4">
     <div class="quote-create-field">
-      <app-select-client-company (selectedItem)="selectClient($event)"></app-select-client-company>
+      <app-select-client-company [formGroup]="quoteForm" (selectedItem)="selectClient($event)"></app-select-client-company>
     </div>
   </div>
   <div class="col-md-4">

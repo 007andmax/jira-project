@@ -6,5 +6,8 @@
     (selectedItem)="setClient($event)"
   ></app-quote-create-content-top>
   <app-quote-create-content-bottom></app-quote-create-content-bottom>
-  <app-quote-create-content-notes></app-quote-create-content-notes>
+  <app-quote-create-content-notes
+    (selectedRegularNoteItem)="setRegularNote($event)"
+    (selectedGlobalNoteItem)="setGlobalNote($event)"
+  ></app-quote-create-content-notes>
 </form>

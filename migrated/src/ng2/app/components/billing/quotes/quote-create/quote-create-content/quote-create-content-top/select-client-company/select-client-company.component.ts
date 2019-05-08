@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { merge, Observable, Subject } from "rxjs";
 import { CompaniesService } from "../../../../../../../services/company/companies.service";
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-select-client-company',
@@ -14,6 +15,7 @@ export class SelectClientCompanyComponent implements OnInit {
 
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
+  @Input() formGroup: FormGroup;
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
   focus$ = new Subject<string>();
