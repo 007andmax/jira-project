@@ -16,4 +16,9 @@ export class NoteService {
   public createNote(data) {
     return this.http.post(`${this.apiUrl}invoice/createInvoiceNote?createRegular=${data.noteType === "REGULAR"}` ,data);
   }
+
+  public updateNote(data, id) {
+    return this.http.post(`${this.apiUrl}/invoice/updateInvoiceNote/${id}` ,data);
+  }
+
 }

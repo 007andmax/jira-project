@@ -23,10 +23,10 @@
          class="icn-sm report-caret-icon"></i>
 
       <div class="new-link"
-           *ngIf="(selectedNoteNew && selectedNoteNew.length > 0)"
-           (click)="createNewNote()">Create new client</div>
+           *ngIf="(selectedNoteNew && selectedNoteNew.length > 0) || isShowCreateNew"
+           (click)="createNewNote()">Save note</div>
     </div>
-    <textarea placeholder="Enter notes that are visible to your customer" [(ngModel)]="selectedNote && selectedNote.line1"></textarea>
+    <textarea placeholder="Enter notes that are visible to your customer" (ngModelChange)="showCreateNew()" [(ngModel)]="selectedNote && selectedNote.line1"></textarea>
   </div>
   <div class="notes-bottom">
     <p>Terms & Conditions</p>

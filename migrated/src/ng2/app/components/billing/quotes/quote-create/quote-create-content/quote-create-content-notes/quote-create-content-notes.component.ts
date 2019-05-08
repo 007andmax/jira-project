@@ -20,6 +20,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public noteGlobal: any;
   public selectedNote: any;
   public selectedNoteNew: string;
+  public isEditMode = false;
+  public isShowCreateNew = false;
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedRegularNoteItem = new EventEmitter<any>();
   @Output() selectedGlobalNoteItem = new EventEmitter<any>();
@@ -47,9 +49,9 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    * Get tech company notes, and filter by type
    */
   getNotes() {
-    this.quoteService.getQuoteNote().subscribe((res) => {
-      this.noteRegularList = [...res].filter((item) => item['noteType'] === 'REGULAR');
-      this.noteGlobal = [...res].find((item) => item['noteType'] === 'GLOBAL');
+    this.quoteService.getQuoteNote().subscribe((res:any) => {
+      this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
+      this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
       this.selectedGlobalNoteItem.next(this.noteGlobal);
     })
   }
@@ -71,6 +73,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    * @param note selected note
    */
   public selectItem(note) {
+    this.isEditMode = true;
     this.selectedNote = note.item;
     this.selectedRegularNoteItem.next(this.selectedNote);
   }
@@ -87,7 +90,11 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   public createNewNote() {
     const data = this.getNoteData();
-    this.noteService.createNote(data).subscribe();
+    if (this.isEditMode) {
+      this.noteService.updateNote(data, this.selectedNote.id).subscribe()
+    } else {
+      this.noteService.createNote(data).subscribe();
+    }
   }
 
   /**
@@ -100,6 +107,11 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       noteType: 'REGULAR',
       title: this.selectedNoteNew
     })
+  }
+
+
+  public showCreateNew() {
+    this.isShowCreateNew = true;
   }
 
 
