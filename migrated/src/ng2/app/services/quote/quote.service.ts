@@ -16,7 +16,7 @@ export class QuoteService {
    public createQuote(value) {
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
        "companyId": value.client.item.id,
-       "number":"100000000",
+       "number":"1000000000000",
        "quoteItems":{
        "type":"MIXED",
          "shares":[],
@@ -48,6 +48,10 @@ export class QuoteService {
     const date = new Date(`${value.year}/${value.month}/${value.day}` );
     console.log(date.getTime(), '12351235');
     return date.getTime()
+  }
+
+  getServiceList(clientCompanyId) {
+    return this.http.get(this.apiUrl + `services/${clientCompanyId}`);
   }
 
 

@@ -1,0 +1,39 @@
+<div class="row" *ngFor="let productItem of productItemsArray;  let i = index">
+  <div class="col-md-2">
+    <input type="text"
+           (click)="toggleShowCategory()"
+           placeholder=""
+           readonly
+           [(ngModel)]="productItem && productItem.manufacture">
+    <app-product-list
+      *ngIf="showProductsCategory && !i"
+      (selectedProductItem)="setProductItem($event)"></app-product-list>
+  </div>
+  <div class="col-md-2">
+    <input type="text"
+           readonly
+           [(ngModel)]="productItem && productItem.description"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           [(ngModel)]="productItem && productItem.cost"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           [(ngModel)]="productItem && productItem.sale"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           [(ngModel)]="productItem && productItem.cost"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           placeholder="">
+  </div>
+  <div class="col-md-1 text-right">$0.00</div>
+  <i class="icn-delete"></i>
+</div>

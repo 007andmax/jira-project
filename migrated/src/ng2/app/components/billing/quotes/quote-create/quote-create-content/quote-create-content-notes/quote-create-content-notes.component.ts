@@ -20,6 +20,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public noteGlobal: any;
   public selectedNote: any;
   public selectedNoteNew: string;
+  public selectedNoteText: string;
+  public selectedGlobalNoteText: string;
   public isEditMode = false;
   public isShowCreateNew = false;
   @ViewChild('instance') instance: NgbTypeahead;
@@ -93,7 +95,12 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     if (this.isEditMode) {
       this.noteService.updateNote(data, this.selectedNote.id).subscribe()
     } else {
-      this.noteService.createNote(data).subscribe();
+      this.noteService.createNote({
+        line1: this.selectedNoteNew,
+        line2: '',
+        noteType: 'REGULAR',
+        title: this.selectedNoteNew
+      }).subscribe();
     }
   }
 
@@ -109,12 +116,12 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     })
   }
 
+  setGlobalNote(value) {
+    this.selectedGlobalNoteItem.next(this.noteGlobal);
+  }
 
   public showCreateNew() {
     this.isShowCreateNew = true;
   }
-
-
-
 
 }

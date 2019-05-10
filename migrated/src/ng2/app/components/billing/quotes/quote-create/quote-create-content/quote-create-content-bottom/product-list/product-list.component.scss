@@ -1,0 +1,30 @@
+:host {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  top: -400px;
+  max-height: 350px;
+  overflow: scroll;
+  background: darkgrey;
+
+}
+
+.card-header  {
+  width: 100%;
+  background: #000;
+}
+
+.btn {
+  width: 100%;
+  background: #000;
+}
+
+.category-product {
+  width: 100%;
+  border-bottom: 1px solid red;
+  padding: 5px 10px;
+  cursor: pointer;
+  span {
+    width: 100%;
+  }
+}

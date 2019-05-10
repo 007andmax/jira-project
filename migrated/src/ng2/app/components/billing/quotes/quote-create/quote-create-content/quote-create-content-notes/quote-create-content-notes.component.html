@@ -26,10 +26,10 @@
            *ngIf="(selectedNoteNew && selectedNoteNew.length > 0) || isShowCreateNew"
            (click)="createNewNote()">Save note</div>
     </div>
-    <textarea placeholder="Enter notes that are visible to your customer" (ngModelChange)="showCreateNew()" [(ngModel)]="selectedNote && selectedNote.line1"></textarea>
+    <textarea placeholder="Enter notes that are visible to your customer" (ngModelChange)="showCreateNew()" [(ngModel)]="(selectedNote && selectedNote.line1) || selectedNoteText "></textarea>
   </div>
   <div class="notes-bottom">
     <p>Terms & Conditions</p>
-    <textarea [(ngModel)]="noteGlobal && noteGlobal.line1" placeholder="Mention your company's Terms and Conditions"></textarea>
+    <textarea [(ngModel)]="noteGlobal && noteGlobal.line1" (ngModelChange)="setGlobalNote($event)" placeholder="Mention your company's Terms and Conditions"></textarea>
   </div>
 </div>

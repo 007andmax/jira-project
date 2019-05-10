@@ -18,6 +18,7 @@ export class QuoteCreateContentComponent implements OnInit {
 
   public quoteForm: FormGroup;
   public fifteenDays = 1296000000;
+  private selectedClient: any;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -80,6 +81,8 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public setClient(value) {
     this.quoteForm.controls['client'].setValue(value);
+    this.selectedClient = value.item;
+
   }
 
   /**
