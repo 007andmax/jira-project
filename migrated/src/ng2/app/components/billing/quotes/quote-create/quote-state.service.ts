@@ -26,7 +26,7 @@ export class QuoteStateService {
     this.itemsArray = itemsArray;
   }
 
-  public getItemArray(itemsArray) {
+  public getItemArray() {
     return this.itemsArray;
   }
 
