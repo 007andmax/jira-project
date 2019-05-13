@@ -1,3 +1,8 @@
-<p>
-  services-list works!
-</p>
+<div class="item-list">
+  <p class="services"
+     *ngFor="let item of itemList"
+     (click)="selectServicesItem(item)"
+  >
+    {{item.name}}
+  </p>
+</div>

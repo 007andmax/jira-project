@@ -1,8 +1,8 @@
 :host {
   position: absolute;
   width: 100%;
-  left: 0px;
-  top: -400px;
+  left: 0;
+  top: -150px;
   max-height: 350px;
   overflow: scroll;
   background: darkgrey;
@@ -27,4 +27,8 @@
   span {
     width: 100%;
   }
+}
+
+.row {
+  margin-bottom: 10px;
 }

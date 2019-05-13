@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from "@angular/forms";
+import { QuoteStateService } from "../../quote-state.service";
 
 /**
  *  Quotes create content top component
@@ -14,7 +15,9 @@ export class QuoteCreateContentTopComponent {
   @Output() selectedItem = new EventEmitter<any>();
   @Input() quoteForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private quoteStateService: QuoteStateService
+  ) { }
 
   /**
    * Emit selected client to parent
@@ -22,6 +25,7 @@ export class QuoteCreateContentTopComponent {
    */
   public selectClient(selectClient) {
     this.selectedItem.next(selectClient);
+    this.quoteStateService.setClient(selectClient);
   }
 
 }

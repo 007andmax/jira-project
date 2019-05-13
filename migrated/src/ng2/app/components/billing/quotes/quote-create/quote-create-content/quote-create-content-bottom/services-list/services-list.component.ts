@@ -1,25 +1,26 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-
-import { QuoteService } from "../../../../../../../services/quote/quote.service";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-services-list',
   templateUrl: './services-list.component.html',
-  styleUrls: ['./services-list.component.scss']
+  styleUrls: ['./services-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServicesListComponent implements OnInit {
 
-  @Input() client: any;
-
-  public serviceListSubscription: Subscription;
+  @Input() itemList: any;
+  @Output() serviceList: any;
+  @Output() selectedServicesItem = new EventEmitter<any>();
   public client: any;
 
-  constructor(
-    private quoteService: QuoteService
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public selectServicesItem(item) {
+    this.selectedServicesItem.next(item)
   }
+
+
 
 }

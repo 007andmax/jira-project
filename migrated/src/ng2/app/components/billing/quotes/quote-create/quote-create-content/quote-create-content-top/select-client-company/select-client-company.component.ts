@@ -51,7 +51,6 @@ export class SelectClientCompanyComponent implements OnInit {
   };
 
   public selectItem(companyId) {
-    console.log(companyId, 'companyId');
     this.selectedItem.emit(companyId);
 
   }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
+import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,28 @@ import { environment } from "../../../environments/environment";
 export class QuoteService {
 
   private apiUrl = environment.apiUrl;
+  private itemsListArray = [];
+  private productsArray = [];
+  private servicesArray = [];
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private quoteStateService: QuoteStateService
   ) { }
 
    public createQuote(value) {
+    this.itemsListArray = this.quoteStateService.getItemArray();
+    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
        "companyId": value.client.item.id,
-       "number":"1000000000000",
+       "number":"1000",
        "quoteItems":{
        "type":"MIXED",
          "shares":[],
          "ticket":null,
-         "products":[]
+         "products": this.productsArray,
+         "services": this.servicesArray
      },
        "requestPayment":false,
        "draft":false,
@@ -51,7 +60,30 @@ export class QuoteService {
   }
 
   getServiceList(clientCompanyId) {
+    console.log('123512351235');
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`);
+  }
+
+  getProductItems(itemsAray, type) {
+    if (type === 'service') {
+      itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
+      return itemsAray.map((item, index) => ({
+        item: item,
+        "itemOrder": index,
+        "quantity": item.quantity,
+        "discountType":"PERCENT"
+      }))
+    } else {
+      itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
+      return itemsAray.map((item, index) => ({
+        item: item,
+        "itemOrder": index,
+        "quantity": item.quantity,
+        "discountType":"PERCENT"
+      }))
+    }
+
+
   }
 
 

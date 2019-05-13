@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProductService } from "../../../../../../../services/product/product.service";
 
 @Component({
@@ -8,22 +8,17 @@ import { ProductService } from "../../../../../../../services/product/product.se
 })
 export class ProductListComponent implements OnInit {
 
-  public categories$: any;
   @Output() selectedProductItem = new EventEmitter<any>();
+  @Input() itemList: any;
 
   constructor(
     private productService: ProductService
   ) { }
 
-  ngOnInit() {
-    this.getCategoriesAndProducts();
-  }
-
-  getCategoriesAndProducts() {
-    this.categories$ = this.productService.getCategories()
-  }
+  ngOnInit() {}
 
   setProduct(productItem) {
+    console.log(productItem, 'productItem');
     this.selectedProductItem.next(productItem);
   }
 

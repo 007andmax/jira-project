@@ -1,39 +1,37 @@
-<div class="row" *ngFor="let productItem of productItemsArray;  let i = index">
-  <div class="col-md-2">
+<div class="row" *ngFor="let item of itemsListArray;  let i = index">
+  <div class="col-md-1">
     <input type="text"
-           (click)="toggleShowCategory()"
            placeholder=""
            readonly
-           [(ngModel)]="productItem && productItem.manufacture">
-    <app-product-list
-      *ngIf="showProductsCategory && !i"
-      (selectedProductItem)="setProductItem($event)"></app-product-list>
+           [(ngModel)]="item.name || item.description ">
   </div>
   <div class="col-md-2">
     <input type="text"
            readonly
-           [(ngModel)]="productItem && productItem.description"
+           [(ngModel)]="item && item.description"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
-           [(ngModel)]="productItem && productItem.cost"
+           [(ngModel)]="item && item.cost"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
-           [(ngModel)]="productItem && productItem.sale"
+           [(ngModel)]="item && item.sale"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
-           [(ngModel)]="productItem && productItem.cost"
+           [(ngModel)]="item && item.cost"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
            placeholder="">
   </div>
-  <div class="col-md-1 text-right">$0.00</div>
-  <i class="icn-delete"></i>
+  <div class="col-md-1 text-right">{{getPrice((item.cost || item.rate), item.quantity)}}</div>
+  <div class="col-md-1">
+    <i class="icn-delete"></i>
+  </div>
 </div>

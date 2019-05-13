@@ -1,5 +1,5 @@
-<ngb-accordion type="dark" #acc="ngbAccordion">
-  <ngb-panel title="{{item.name}}" *ngFor="let item of categories$ | async">
+<ngb-accordion type="dark" #acc="ngbAccordion" class="item-list">
+  <ngb-panel title="{{item.name}}" *ngFor="let item of itemList">
     <ng-template ngbPanelContent>
      <div class="category-product" *ngFor="let productItem of item.products" (click)="setProduct(productItem)">
        <span>{{productItem.description}}</span>

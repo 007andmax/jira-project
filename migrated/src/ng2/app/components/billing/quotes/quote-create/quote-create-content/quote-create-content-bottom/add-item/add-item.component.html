@@ -1,0 +1,47 @@
+<div class="row" *ngIf="type && (itemList$ | async)">
+  <div class="col-md-1"
+       (clickOutside)="toggleShowDropDown()"
+       *ngIf="type === 'service'">
+    <input type="text"
+           (click)="toggleShowDropDown()"
+           placeholder="">
+    <app-services-list
+      [itemList]="(itemList$ | async)"
+      (selectedServicesItem)="setItem($event)"></app-services-list>
+  </div>
+  <div class="col-md-1"
+       (clickOutside)="toggleShowDropDown()"
+       *ngIf="type === 'product'">
+      <input type="text"
+             (click)="toggleShowDropDown()"
+             placeholder="">
+      <app-product-list
+        [itemList]="(itemList$ | async)"
+        (selectedProductItem)="setItem($event)"></app-product-list>
+  </div>
+    <div class="col-md-2">
+    <input type="text"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           readonly
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           readonly
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           placeholder="">
+  </div>
+  <div class="col-md-1 text-right">
+    <i class="icn-delete"></i>
+  </div>
+</div>

@@ -43,7 +43,7 @@ import { SelectClientCompanyComponent } from './components/billing/quotes/quote-
 import { ProductListComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-list/product-list.component';
 import { ServicesListComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/services-list/services-list.component';
 import { ProductTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-table/product-table.component';
-import { ServicesTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/services-table/services-table.component';
+import { AddItemComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/add-item/add-item.component';
 
 
 declare var angular: any;
@@ -105,7 +105,7 @@ angular.module('quicktech')
     ProductListComponent,
     ServicesListComponent,
     ProductTableComponent,
-    ServicesTableComponent
+    AddItemComponent
   ],
   imports: [
     BrowserModule,

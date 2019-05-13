@@ -1,6 +1,6 @@
 <div class="quote-create__content--bottom">
   <div class="quote-content-header row">
-    <div class="col-md-2">Item</div>
+    <div class="col-md-1">Item</div>
     <div class="col-md-2">Description</div>
     <div class="col-md-1">Unit Cost</div>
     <div class="col-md-1">Markup </div>
@@ -17,9 +17,11 @@
   </div>
   <div class="quote-content-body row">
     <app-product-table
-      *ngIf="productItemsArray && productItemsArray.length > 0"
-      [productItemsArray]="productItemsArray">
+      [itemsArray]="itemsArray"
+    >
     </app-product-table>
+    <app-add-item [setType]="type"
+    (selectedServiceItem)="addItemToItemsArray($event)"></app-add-item>
     <div class="quote-content-body--bottom">
       <div class="col-md-11 text-right">Sub Total</div>
       <div class="col-md-1 text-right">$0.00</div>
