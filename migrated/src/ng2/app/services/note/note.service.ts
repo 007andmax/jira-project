@@ -18,7 +18,7 @@ export class NoteService {
   }
 
   public updateNote(data, id) {
-    return this.http.post(`${this.apiUrl}/invoice/updateInvoiceNote/${id}` ,data);
+    return this.http.post(`${this.apiUrl}invoice/updateInvoiceNote/${id}` ,data);
   }
 
 }

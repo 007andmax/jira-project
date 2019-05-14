@@ -112,7 +112,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       line1: this.selectedNote['line1'],
       line2: '',
       noteType: 'REGULAR',
-      title: this.selectedNoteNew
+      title: this.selectedNoteNew.title
     })
   }
 

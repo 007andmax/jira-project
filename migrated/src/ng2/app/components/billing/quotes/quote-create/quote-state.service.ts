@@ -53,7 +53,7 @@ export class QuoteStateService {
     this.quoteNumber = value;
   }
 
-  public getQuotenumber(value) {
+  public getQuoteNumber() {
     return this.quoteNumber;
   }
 
