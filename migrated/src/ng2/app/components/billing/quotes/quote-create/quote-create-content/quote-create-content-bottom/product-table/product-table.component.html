@@ -29,9 +29,10 @@
   <div class="col-md-1">
     <input type="text"
            [(ngModel)]="item && item.quantity"
+           (ngModelChange)="changedQuantity($event, i)"
            placeholder="">
   </div>
-  <div class="col-md-1 text-right">{{getPrice((item.sale || item.rate), item.quantity, item.taxes[0])}}</div>
+  <div class="col-md-1 text-right">{{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes[0])}}</div>
   <div class="col-md-1 text-right">{{getPrice((item.sale || item.rate), item.quantity, item.taxes[0])}}</div>
   <div class="col-md-1">
     <i class="icn-delete" (click)="deleteItem(i)"></i>

@@ -24,6 +24,11 @@ export class QuoteStateService {
     return tax ? (((tax.rate)/100)*cost + cost)  * count : cost  * count;
   }
 
+  public getTaxPrice(cost, count, tax) {
+    console.log(tax);
+    return tax ? ((tax.rate)/100)*cost* count : 0;
+  }
+
   public setItemArray(itemsArray) {
     this.itemsArray = itemsArray;
   }

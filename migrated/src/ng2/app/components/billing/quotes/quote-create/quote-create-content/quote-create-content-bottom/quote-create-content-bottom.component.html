@@ -18,6 +18,7 @@
   <div class="quote-content-body row">
     <app-product-table
       [itemsArray]="itemsArray"
+      (changedProductItemsArray)="refreshItemsArray($event)"
     >
     </app-product-table>
     <app-add-item [setType]="type"

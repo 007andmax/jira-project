@@ -27,14 +27,21 @@ export class ProductTableComponent implements OnInit {
   }
 
   public getPrice(cost, count, tax) {
-    return this.quoteStateService.getPrice(cost, count, tax);
+    return Math.floor(this.quoteStateService.getPrice(cost, count, tax));
+  }
+
+  public getTaxPrice(cost, count, tax) {
+    return Math.floor(this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
   public deleteItem(index) {
-    console.log(index);
     this.itemsListArray.splice(index, 1);
-
     this.quoteStateService.setItemArray(this.itemsListArray);
+  }
+
+  public changedQuantity(value, index) {
+    this.itemsListArray[index].quantity = value;
+    this.changedProductItemsArray.next(this.itemsListArray);
   }
 
 }
