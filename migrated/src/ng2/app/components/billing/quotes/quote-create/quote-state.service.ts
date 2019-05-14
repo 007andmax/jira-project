@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,8 @@ export class QuoteStateService {
 
   public client: any;
   public itemsArray: any;
+  public type = false;
+  public validateForm: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -18,8 +20,8 @@ export class QuoteStateService {
     return this.client;
   }
 
-  public getPrice(cost, count) {
-    return cost * count
+  public getPrice(cost, count, tax) {
+    return tax ? ((100-tax.rate)/100) * cost  * count : cost  * count;
   }
 
   public setItemArray(itemsArray) {
@@ -28,6 +30,18 @@ export class QuoteStateService {
 
   public getItemArray() {
     return this.itemsArray;
+  }
+
+  public setType(value) {
+    this.type = value;
+  }
+
+  public getType() {
+    return this.type;
+  }
+
+  public emitValidation() {
+    this.validateForm.emit(this.type)
   }
 
 }

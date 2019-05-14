@@ -18,7 +18,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {}
 
   setProduct(productItem) {
-    console.log(productItem, 'productItem');
     this.selectedProductItem.next(productItem);
   }
 

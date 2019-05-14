@@ -16,15 +16,17 @@ export class QuoteService {
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService
-  ) { }
+  ) {}
 
    public createQuote(value) {
     this.itemsListArray = this.quoteStateService.getItemArray();
+    console.log(this.itemsListArray, 'itemsListArray');
+    console.log(value, 'value');
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
        "companyId": value.client.item.id,
-       "number":"1000",
+       "number": value.number,
        "quoteItems":{
        "type":"MIXED",
          "shares":[],
@@ -46,7 +48,7 @@ export class QuoteService {
   }
 
   getQuoteNumber() {
-    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`);
+    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`)
   }
 
   getQuoteNote() {
@@ -55,12 +57,10 @@ export class QuoteService {
 
   getMsDate(value) {
     const date = new Date(`${value.year}/${value.month}/${value.day}` );
-    console.log(date.getTime(), '12351235');
     return date.getTime()
   }
 
   getServiceList(clientCompanyId) {
-    console.log('123512351235');
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`);
   }
 

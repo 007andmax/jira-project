@@ -9,12 +9,10 @@ import { QuoteStateService } from "../../../quote-state.service";
 export class ProductTableComponent implements OnInit {
 
   @Input() set itemsArray(value) {
-    console.log(value);
     this.itemsListArray = value;
     this.quoteStateService.setItemArray(this.itemsListArray);
   };
   @Output() changedProductItemsArray = new EventEmitter<any>();
-  // @Input() itemsListArray: any;
   public showProductsCategory = false;
   public itemsListArray = [];
 
@@ -33,8 +31,8 @@ export class ProductTableComponent implements OnInit {
     this.toggleShowCategory();
   }
 
-  public getPrice(cost, count) {
-    return this.quoteStateService.getPrice(cost, count);
+  public getPrice(cost, count, tax) {
+    return this.quoteStateService.getPrice(cost, count, tax);
   }
 
 }

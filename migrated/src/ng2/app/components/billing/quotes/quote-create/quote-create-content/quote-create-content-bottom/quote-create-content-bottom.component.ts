@@ -25,7 +25,6 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   public addProduct() {
     this.type = 'product';
-
   }
 
   public addService() {
@@ -33,7 +32,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   }
 
   public addItemToItemsArray(item) {
-    this.itemsArray.unshift(item);
+    this.itemsArray.push(item);
     this.cdr.detectChanges();
   }
 

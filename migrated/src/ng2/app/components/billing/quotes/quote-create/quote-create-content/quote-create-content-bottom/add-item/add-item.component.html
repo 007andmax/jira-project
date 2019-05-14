@@ -1,47 +1,55 @@
-<div class="row" *ngIf="type && (itemList$ | async)">
+<div class="row" *ngIf="type && (itemListServices || itemListProducts)">
   <div class="col-md-1"
-       (clickOutside)="toggleShowDropDown()"
-       *ngIf="type === 'service'">
-    <input type="text"
-           (click)="toggleShowDropDown()"
-           placeholder="">
-    <app-services-list
-      [itemList]="(itemList$ | async)"
-      (selectedServicesItem)="setItem($event)"></app-services-list>
-  </div>
-  <div class="col-md-1"
-       (clickOutside)="toggleShowDropDown()"
-       *ngIf="type === 'product'">
+       (clickOutside)="hideDropDown($event)">
+    <div *ngIf="type === 'service'">
       <input type="text"
              (click)="toggleShowDropDown()"
+             [ngClass]="{'no-valid': isFormValid}"
+             placeholder="">
+      <app-services-list
+        *ngIf="isDropDownShow"
+        [itemList]="itemListServices"
+        (selectedServicesItem)="setItem($event)"></app-services-list>
+    </div>
+    <div *ngIf="type === 'product'">
+      <input type="text"
+             (click)="toggleShowDropDown()"
+             [ngClass]="{'no-valid': isFormValid}"
              placeholder="">
       <app-product-list
-        [itemList]="(itemList$ | async)"
+        *ngIf="isDropDownShow"
+        [itemList]="itemListProducts"
         (selectedProductItem)="setItem($event)"></app-product-list>
+    </div>
   </div>
     <div class="col-md-2">
     <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
            readonly
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
            readonly
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
            placeholder="">
   </div>
   <div class="col-md-1 text-right">
-    <i class="icn-delete"></i>
+    <i class="icn-delete" (click)="hideAddForm()"></i>
   </div>
 </div>

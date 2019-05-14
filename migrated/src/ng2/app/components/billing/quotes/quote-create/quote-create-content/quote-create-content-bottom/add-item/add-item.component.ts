@@ -1,24 +1,28 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { QuoteStateService } from "../../../quote-state.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
-import {ProductService} from "../../../../../../../services/product/product.service";
+import { ProductService } from "../../../../../../../services/product/product.service";
 
 
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.scss'],
+  styleUrls: ['./add-item.component.scss']
 })
 export class AddItemComponent implements OnInit {
 
   @Input() set setType(value) {
     this.type = value;
+    value && this.quoteStateService.setType(false);
     this.getServicesList();
+    this.hideDropDown();
   };
   public isDropDownShow = false;
   public type: string;
-  public itemList$: any;
+  public itemListProducts: any;
+  public itemListServices: any;
+  public isFormValid = false;
   @Output() selectedServiceItem = new EventEmitter<any>();
 
   constructor(
@@ -28,19 +32,25 @@ export class AddItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.subToFormValidation();
   }
 
   public toggleShowDropDown() {
     this.isDropDownShow = !this.isDropDownShow;
   }
 
+  public hideDropDown() {
+    this.isDropDownShow = false;
+  }
+
   public getServicesList() {
-    if (this.type === 'product') {
-      this.itemList$ = this.productService.getCategories();
-    } else if (this.type === 'service') {
-      const value = this.quoteStateService.getClient();
-      value && (this.itemList$ = this.quoteService.getServiceList(value.item.id))
-    }
+    this.productService.getCategories().subscribe((res) => {
+     return this.itemListProducts = res
+    });
+    const value = this.quoteStateService.getClient();
+    value && this.quoteService.getServiceList(value.item.id).subscribe((res) => {
+      return this.itemListServices = res
+    })
   }
 
   public setItem(item) {
@@ -51,10 +61,20 @@ export class AddItemComponent implements OnInit {
     }
     this.selectedServiceItem.emit(item);
     this.isDropDownShow = false;
+    this.type = undefined;
+    this.quoteStateService.setType(true);
   }
 
-  public getPrice(cost, count) {
-    return this.quoteStateService.getPrice(cost, count);
+  public hideAddForm() {
+    this.isDropDownShow = false;
+    this.type = undefined;
+  }
+
+  public subToFormValidation() {
+    this.quoteStateService.validateForm.subscribe((res) => {
+      console.log(res);
+      this.isFormValid = !res;
+    })
   }
 
 }

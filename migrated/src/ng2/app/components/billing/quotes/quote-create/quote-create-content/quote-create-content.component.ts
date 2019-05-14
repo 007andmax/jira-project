@@ -5,6 +5,7 @@ import { DateService } from "../../../../../services/date/date.service";
 import { CompaniesService } from "../../../../../services/company/companies.service";
 import { QuoteService } from "../../../../../services/quote/quote.service";
 import { map } from "rxjs/operators";
+import { QuoteStateService } from "../quote-state.service";
 
 /**
  *  Quotes content component
@@ -19,6 +20,7 @@ export class QuoteCreateContentComponent implements OnInit {
   public quoteForm: FormGroup;
   public fifteenDays = 1296000000;
   private selectedClient: any;
+  private quoteNumber: number;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -26,12 +28,14 @@ export class QuoteCreateContentComponent implements OnInit {
    * @param {FormBuilder} fb Service to work with forms
    * @param {DateService} dateService Service to work with date
    * @param {QuoteService} quoteService to work with api
+   * @param {QuoteStateService} quoteStateService to work quote state
    */
   constructor(
     private companiesService: CompaniesService,
     private fb: FormBuilder,
     private dateService: DateService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private quoteStateService: QuoteStateService
   ) { }
 
   /**
@@ -47,22 +51,23 @@ export class QuoteCreateContentComponent implements OnInit {
    * Get free quotes number
    */
   private getQuoteNumber() {
-    this.quoteService.getQuoteNumber().pipe(map((res) => {
-      console.log(res, 'ITEM');
-    })).subscribe();
+    this.quoteService.getQuoteNumber().subscribe((res) => {
+      this.quoteNumber = res['number'];
+      this.quoteForm.controls['quoteNumber'].setValue(res['number']);
+    });
   }
 
   /**
    * Initialized create quotes form
    */
   public initForm() {
-    console.log(this.dateService.getStartDate(new Date()), 'this.dateService.getStartDate(new Date())');
+    console.log(this.quoteNumber, 'quoteNumber');
     this.quoteForm = this.fb.group({
       client: ['', Validators.required],
       startDate: this.dateService.getStartDate(new Date()),
       endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
       partialDeposit: '',
-      quoteNumber: '',
+      quoteNumber: this.quoteNumber,
       po: '',
       regularNote: '',
       globalNote: ''
@@ -73,7 +78,11 @@ export class QuoteCreateContentComponent implements OnInit {
    * Create quote
    */
   saveAndContinue() {
-    this.quoteService.createQuote(this.quoteForm.value).subscribe();
+    const isFormReady = this.quoteStateService.getType();
+    console.log(isFormReady, 'isFormReady');
+    isFormReady ?
+      this.quoteService.createQuote(this.quoteForm.value).subscribe()
+      : this.quoteStateService.emitValidation();
   }
 
   /**

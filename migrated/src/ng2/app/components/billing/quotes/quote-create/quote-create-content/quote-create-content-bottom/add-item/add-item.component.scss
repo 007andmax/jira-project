@@ -10,4 +10,13 @@
 
 :host {
   position: relative;
+
+  .row {
+    margin-top: 20px;
+  }
+
+  .no-valid {
+    border: 1px solid red;
+  }
+
 }
