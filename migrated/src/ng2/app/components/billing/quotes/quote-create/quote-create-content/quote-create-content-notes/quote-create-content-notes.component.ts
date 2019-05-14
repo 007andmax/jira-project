@@ -97,7 +97,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
         line1: this.selectedNoteText,
         line2: '',
         noteType: 'REGULAR',
-        title: this.selectedNoteNew
+        title: this.getTitle(this.selectedNoteNew)
       }, this.selectedNote.id).subscribe()
     } else {
       this.noteService.createNote({
@@ -107,6 +107,10 @@ export class QuoteCreateContentNotesComponent implements OnInit {
         title: this.selectedNoteNew
       }).subscribe();
     }
+  }
+
+  private getTitle(value) {
+    return value.title ? value.title : value;
   }
 
   /**
