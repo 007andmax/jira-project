@@ -93,7 +93,12 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public createNewNote() {
     const data = this.getNoteData();
     if (this.isEditMode) {
-      this.noteService.updateNote(data, this.selectedNote.id).subscribe()
+      this.noteService.updateNote({
+        line1: this.selectedNoteText,
+        line2: '',
+        noteType: 'REGULAR',
+        title: this.selectedNoteNew
+      }, this.selectedNote.id).subscribe()
     } else {
       this.noteService.createNote({
         line1: this.selectedNoteNew,
@@ -109,10 +114,10 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   public getNoteData() {
     return ({
-      line1: this.selectedNote['line1'],
+      line1: this.selectedNoteText || (this.selectedNote && this.selectedNote['line1']),
       line2: '',
       noteType: 'REGULAR',
-      title: this.selectedNoteNew.title
+      title: this.selectedNoteNew
     })
   }
 
@@ -120,7 +125,9 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.selectedGlobalNoteItem.next(this.noteGlobal);
   }
 
-  public showCreateNew() {
+  public showCreateNew(value) {
+    this.selectedNote['line1'] = value;
+    this.selectedNoteText = value;
     this.isShowCreateNew = true;
   }
 
