@@ -50,7 +50,7 @@ export class AddItemComponent implements OnInit {
      return this.itemListProducts = res
     });
     const value = this.quoteStateService.getClient();
-    value && this.quoteService.getServiceList(value.item.id).subscribe((res) => {
+    value && this.quoteService.getServiceList(value.id).subscribe((res) => {
       return this.itemListServices = res
     })
   }
@@ -59,7 +59,7 @@ export class AddItemComponent implements OnInit {
     if (this.type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
-      item = {...item, ...{quantity: 1}};
+      item = {...item, ...{quantity: 1, markup: ''}};
     }
     this.selectedServiceItem.emit(item);
     this.isDropDownShow = false;

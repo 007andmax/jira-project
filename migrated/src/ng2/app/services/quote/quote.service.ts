@@ -20,8 +20,6 @@ export class QuoteService {
 
    public createQuote(value) {
     this.itemsListArray = this.quoteStateService.getItemArray();
-    console.log(this.itemsListArray, 'itemsListArray');
-    console.log(value, 'value');
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
