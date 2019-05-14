@@ -24,7 +24,7 @@ export class QuoteService {
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
        "companyId": value.client.item.id,
-       "number": value.number,
+       "number": this.quoteStateService.getQuotenumber(),
        "quoteItems":{
        "type":"MIXED",
          "shares":[],

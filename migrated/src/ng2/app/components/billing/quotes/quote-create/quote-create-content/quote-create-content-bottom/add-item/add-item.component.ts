@@ -71,11 +71,12 @@ export class AddItemComponent implements OnInit {
   public hideAddForm() {
     this.isDropDownShow = false;
     this.type = undefined;
+    this.isFormValid = false;
+    this.quoteStateService.setType(true);
   }
 
   public subToFormValidation() {
     this.quoteStateService.validateForm.subscribe((res) => {
-      console.log(res);
       this.isFormValid = !res;
     })
   }

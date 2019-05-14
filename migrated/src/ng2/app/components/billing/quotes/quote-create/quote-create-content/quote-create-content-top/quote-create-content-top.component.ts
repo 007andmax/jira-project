@@ -42,4 +42,13 @@ export class QuoteCreateContentTopComponent {
     });
   }
 
+  /**
+   * Follow quote number change
+   */
+  private setNumber(value) {
+    this.quoteStateService.setNumber(value)
+  }
+
+
+
 }

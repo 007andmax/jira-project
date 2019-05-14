@@ -51,8 +51,8 @@
     <div class="quote-create-field">
       <p>Quote #</p>
       <input type="text"
-             readonly
              [(ngModel)]="quoteNumber"
+             (ngModelChange)="setNumber($event)"
              placeholder="">
     </div>
     <div class="quote-create-field">

@@ -53,7 +53,7 @@ export class QuoteCreateContentComponent implements OnInit {
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
       this.quoteNumber = res['number'];
-      this.quoteForm.controls['quoteNumber'].setValue(res['number']);
+      this.quoteStateService.setNumber(this.quoteNumber);
     });
   }
 

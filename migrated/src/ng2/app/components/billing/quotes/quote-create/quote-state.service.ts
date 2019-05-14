@@ -9,6 +9,7 @@ export class QuoteStateService {
   public itemsArray: any;
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
+  public quoteNumber: number;
 
   constructor() { }
 
@@ -46,6 +47,14 @@ export class QuoteStateService {
 
   public emitValidation() {
     this.validateForm.emit(this.type)
+  }
+
+  public setNumber(value) {
+    this.quoteNumber = value;
+  }
+
+  public getQuotenumber(value) {
+    return this.quoteNumber;
   }
 
 }
