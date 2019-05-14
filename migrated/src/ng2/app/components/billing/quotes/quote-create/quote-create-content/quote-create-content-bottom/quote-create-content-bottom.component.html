@@ -21,11 +21,14 @@
     >
     </app-product-table>
     <app-add-item [setType]="type"
-    (selectedServiceItem)="addItemToItemsArray($event)"></app-add-item>
+                  (changeType)="changeType($event)"
+                  (selectedServiceItem)="addItemToItemsArray($event)"></app-add-item>
     <div class="quote-content-body--bottom">
-      <div class="col-md-11 text-right">Sub Total</div>
+      <div class="col-md-11 text-right">Sub Total Services</div>
       <div class="col-md-1 text-right">$0.00</div>
-      <div class="col-md-11 text-right">Paid to date</div>
+      <div class="col-md-11 text-right">Sub Total Products</div>
+      <div class="col-md-1 text-right">$0.00</div>
+      <div class="col-md-11 text-right">Taxes</div>
       <div class="col-md-1 text-right">$0.00</div>
       <div class="col-md-11 mt-10 text-right">Total</div>
       <div class="col-md-1 mt-10 text-right">$0.00</div>

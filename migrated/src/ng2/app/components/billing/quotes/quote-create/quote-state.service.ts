@@ -21,7 +21,7 @@ export class QuoteStateService {
   }
 
   public getPrice(cost, count, tax) {
-    return tax ? ((100-tax.rate)/100) * cost  * count : cost  * count;
+    return tax ? (((tax.rate)/100)*cost + cost)  * count : cost  * count;
   }
 
   public setItemArray(itemsArray) {

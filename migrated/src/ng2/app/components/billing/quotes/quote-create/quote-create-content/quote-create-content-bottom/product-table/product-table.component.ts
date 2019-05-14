@@ -20,19 +20,21 @@ export class ProductTableComponent implements OnInit {
     private quoteStateService: QuoteStateService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   toggleShowCategory() {
     this.showProductsCategory = !this.showProductsCategory;
   }
 
-  public setProductItem(productItem) {
-    this.toggleShowCategory();
-  }
-
   public getPrice(cost, count, tax) {
     return this.quoteStateService.getPrice(cost, count, tax);
+  }
+
+  public deleteItem(index) {
+    console.log(index);
+    this.itemsListArray.splice(index, 1);
+
+    this.quoteStateService.setItemArray(this.itemsListArray);
   }
 
 }

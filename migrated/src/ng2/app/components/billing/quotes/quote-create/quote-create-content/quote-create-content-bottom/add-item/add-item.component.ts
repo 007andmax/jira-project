@@ -13,6 +13,7 @@ import { ProductService } from "../../../../../../../services/product/product.se
 export class AddItemComponent implements OnInit {
 
   @Input() set setType(value) {
+    console.log('1234');
     this.type = value;
     value && this.quoteStateService.setType(false);
     this.getServicesList();
@@ -24,6 +25,7 @@ export class AddItemComponent implements OnInit {
   public itemListServices: any;
   public isFormValid = false;
   @Output() selectedServiceItem = new EventEmitter<any>();
+  @Output() changeType = new EventEmitter<any>();
 
   constructor(
     private quoteStateService: QuoteStateService,
@@ -62,6 +64,7 @@ export class AddItemComponent implements OnInit {
     this.selectedServiceItem.emit(item);
     this.isDropDownShow = false;
     this.type = undefined;
+    this.changeType.next(this.type);
     this.quoteStateService.setType(true);
   }
 

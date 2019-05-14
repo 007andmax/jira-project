@@ -36,4 +36,8 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  public changeType(type) {
+    this.type = type;
+  }
+
 }

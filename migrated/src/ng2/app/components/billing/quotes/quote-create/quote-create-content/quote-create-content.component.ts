@@ -61,7 +61,6 @@ export class QuoteCreateContentComponent implements OnInit {
    * Initialized create quotes form
    */
   public initForm() {
-    console.log(this.quoteNumber, 'quoteNumber');
     this.quoteForm = this.fb.group({
       client: ['', Validators.required],
       startDate: this.dateService.getStartDate(new Date()),
