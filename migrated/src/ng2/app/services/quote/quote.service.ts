@@ -41,7 +41,7 @@ export class QuoteService {
        "recipients":["user@gmail.com"],
        "message":"My message string with styles",
        "globalNote": value.globalNote,
-       "regularNote": value.regularNote
+       "regularNote": value.regularNote || null
     })
   }
 
@@ -68,7 +68,7 @@ export class QuoteService {
       return itemsAray.map((item, index) => ({
         item: item,
         "itemOrder": index,
-        "quantity": item.quantity,
+        "quantity": 1,
         "discountType":"PERCENT"
       }))
     } else {

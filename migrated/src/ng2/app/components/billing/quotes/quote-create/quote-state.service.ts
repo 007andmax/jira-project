@@ -25,7 +25,6 @@ export class QuoteStateService {
   }
 
   public getTaxPrice(cost, count, tax) {
-    console.log(tax);
     return tax ? ((tax.rate)/100)*cost* count : 0;
   }
 

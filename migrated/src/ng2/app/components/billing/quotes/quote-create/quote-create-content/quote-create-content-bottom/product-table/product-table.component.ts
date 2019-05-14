@@ -42,6 +42,7 @@ export class ProductTableComponent implements OnInit {
   public changedQuantity(value, index) {
     this.itemsListArray[index].quantity = value;
     this.changedProductItemsArray.next(this.itemsListArray);
+    this.quoteStateService.setItemArray(this.itemsListArray);
   }
 
 }
