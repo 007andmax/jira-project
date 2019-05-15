@@ -44,8 +44,7 @@ export class QuotesComponent implements OnInit {
   }
 
   public sortBy(value) {
-    this.quotesList = null;
-    this.page = 0;
+    this.refreshQuoteAndPage();
     this.getQuotes({
       page: this.page,
       type: value
@@ -54,11 +53,17 @@ export class QuotesComponent implements OnInit {
 
   public filterByDate(value) {
     console.log(value, 'VALUe');
+    this.refreshQuoteAndPage();
     this.getQuotes({
       page: this.page,
       date: value.start,
       endDate: value.end
     })
+  }
+
+  private refreshQuoteAndPage() {
+    this.quotesList = null;
+    this.page = 0;
   }
 
 }
