@@ -1,14 +1,19 @@
 <div class="quote-create__content--top row">
   <div class="col-md-4">
     <div class="quote-create-field">
-      <app-select-client-company [formGroup]="quoteForm" (selectedItem)="selectClient($event)"></app-select-client-company>
+      <app-select-client-company style="width: 75%;"
+                                 class="light-dropdown"
+                                 [formGroup]="quoteForm"
+                                 (selectedItem)="selectClient($event)">
+      </app-select-client-company>
     </div>
   </div>
   <div class="col-md-4">
     <div class="quote-create-field">
       <p>Quote Date</p>
-      <div class="input-group" [formGroup]="quoteForm">
-        <input class="form-control" placeholder="yyyy-mm-dd"
+      <div class="input-group date-picker" [formGroup]="quoteForm">
+        <input class="pointer"
+               placeholder="yyyy-mm-dd"
                formControlName="startDate"
                name="dp"
                ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()">
@@ -19,8 +24,8 @@
     </div>
     <div class="quote-create-field">
       <p>Valid Until</p>
-      <div class="input-group" [formGroup]="quoteForm">
-        <input class="form-control"
+      <div class="input-group date-picker" [formGroup]="quoteForm">
+        <input class="pointer"
                placeholder="yyyy-mm-dd"
                formControlName="endDate"
                name="dp"
@@ -29,7 +34,6 @@
           <i class="new-calendar"></i>
         </div>
       </div>
-
     </div>
     <div class="quote-create-field">
       <p>Partial/ Deposit</p>

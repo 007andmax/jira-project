@@ -124,6 +124,7 @@ ngb-typeahead-window {
     padding: 0 12px;
     height: 40px;
     width: 100%;
+    background: #fff;
     &:focus {
       outline: none;
     }
@@ -131,6 +132,9 @@ ngb-typeahead-window {
       opacity: 1;
       color: #9ca5b6;
     }
+  }
+  .report-caret-icon {
+    top: 16px !important;
   }
   textarea {
     font-size: 13px;

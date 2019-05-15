@@ -19,6 +19,12 @@
     width: 200px;
     margin-bottom: 15px;
   }
+  .light-dropdown {
+    width: 200px;
+    .report-caret-icon {
+      top: 55px !important;
+    }
+  }
   textarea {
     border: none;
     min-height: 106px;
