@@ -17,6 +17,12 @@ export class DateService {
     });
   }
 
+  getDateFromBootstrap(date) {
+    const stringDate = `${date.month}/${date.day}/${date.year}`;
+    console.log(moment(stringDate).valueOf(), 'moment(date);');
+    return moment(stringDate).valueOf();
+  }
+
   public getMsTime(date) {
     return
   }

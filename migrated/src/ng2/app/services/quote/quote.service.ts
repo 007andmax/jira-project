@@ -91,13 +91,14 @@ export class QuoteService {
   }
 
   getQuotes(data) {
+    console.log(data);
     data.type && this.getSortType(data.type);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName":null,
       "quoteNumber": null,
       "status": null,
-      "date":'',
-      "endDate":'',
+      "date": data.date || '',
+      "endDate": data.endDate || '',
       "sortBy": this.sortType || 'DATE_DESC',
       "offset": this.offset * data.page,
       "limit": this.offset

@@ -4,9 +4,7 @@
       <h1>Quotes</h1>
       <div class="quotes-actions">
         <div class="input-field">
-          <input type="text"
-                 placeholder="Filter by date"
-                 class="pointer">
+          <app-multi-datepicker (selectedDate)="filterByDate($event)"></app-multi-datepicker>
         </div>
         <div class="input-field w-280">
           <input type="text"

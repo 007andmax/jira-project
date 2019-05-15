@@ -12,8 +12,7 @@ import {map, tap} from "rxjs/operators";
 })
 export class QuotesComponent implements OnInit {
 
-  public quotes$: any;
-  public quotesList = [];
+  public quotesList: any;
   public page = 0;
   public infiniteScrollDisabled = false;
 
@@ -45,11 +44,20 @@ export class QuotesComponent implements OnInit {
   }
 
   public sortBy(value) {
-    this.quotesList = [];
+    this.quotesList = null;
     this.page = 0;
     this.getQuotes({
       page: this.page,
       type: value
+    })
+  }
+
+  public filterByDate(value) {
+    console.log(value, 'VALUe');
+    this.getQuotes({
+      page: this.page,
+      date: value.start,
+      endDate: value.end
     })
   }
 
