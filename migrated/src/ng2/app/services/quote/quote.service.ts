@@ -12,6 +12,14 @@ export class QuoteService {
   private itemsListArray = [];
   private productsArray = [];
   private servicesArray = [];
+  private offset = 30;
+  private quoteNumber = 'QUOTE_NUMBER_DESC';
+  private customerName = 'CUSTOMER_NAME_DESC';
+  private date = 'DATE_DESC';
+  private validUntil = 'VALID_UNTIL_DESC';
+  private amount = 'AMOUNT_DESC';
+  private deposit = 'DEPOSIT_DESC';
+  private sortType = null;
 
   constructor(
     private http: HttpClient,
@@ -80,8 +88,50 @@ export class QuoteService {
         "discountType":"PERCENT"
       }))
     }
+  }
 
+  getQuotes(data) {
+    data.type && this.getSortType(data.type);
+    return this.http.post(this.apiUrl + 'saleQuotes/search', {
+      "companyName":null,
+      "quoteNumber": null,
+      "status": null,
+      "date":'',
+      "endDate":'',
+      "sortBy": this.sortType || 'DATE_DESC',
+      "offset": this.offset * data.page,
+      "limit": this.offset
+    })
+  }
 
+  getSortType(type) {
+    console.log(type, 'TYPe');
+    switch (type) {
+      case 'number':
+        this.sortType = this.quoteNumber === 'QUOTE_NUMBER_ASC' ? 'QUOTE_NUMBER_DESC' : 'QUOTE_NUMBER_ASC';
+        this.quoteNumber = this.sortType;
+        break;
+      case 'customerName':
+        this.sortType = this.customerName === 'CUSTOMER_NAME_DESC' ? 'CUSTOMER_NAME_ASC' : 'CUSTOMER_NAME_DESC';
+        this.customerName = this.sortType;
+        break;
+      case 'date':
+        this.sortType = this.date === 'DATE_DESC' ? 'DATE_ASC' : 'DATE_DESC';
+        this.date = this.sortType;
+        break;
+      case 'validUntil':
+        this.sortType = this.validUntil === 'VALID_UNTIL_DESC' ? 'VALID_UNTIL_ASC' : 'VALID_UNTIL_DESC';
+        this.validUntil = this.sortType;
+        break;
+      case 'amount':
+        this.sortType = this.amount === 'AMOUNT_DESC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
+        this.amount = this.sortType;
+        break;
+      case 'deposit':
+        this.sortType = this.deposit === 'DEPOSIT_DESC' ? 'DEPOSIT_ASC' : 'DEPOSIT_DESC';
+        this.deposit = this.sortType;
+        break;
+    }
   }
 
 

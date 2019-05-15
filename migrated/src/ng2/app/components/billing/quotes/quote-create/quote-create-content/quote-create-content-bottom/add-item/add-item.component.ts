@@ -72,7 +72,8 @@ export class AddItemComponent implements OnInit {
     this.isDropDownShow = false;
     this.type = undefined;
     this.isFormValid = false;
-    this.quoteStateService.setType(true);
+    this.quoteStateService.setType(false);
+    this.changeType.next(undefined);
   }
 
   public subToFormValidation() {

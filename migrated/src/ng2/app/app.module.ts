@@ -12,7 +12,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -115,6 +115,7 @@ angular.module('quicktech')
     FormsModule,
     SelectModule,
     NgbModule,
+    InfiniteScrollModule,
     ClickOutsideModule,
     ShowHidePasswordModule,
     NgxSelectModule,

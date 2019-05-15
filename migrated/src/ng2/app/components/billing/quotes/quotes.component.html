@@ -38,17 +38,24 @@
           </span>
         </label>
       </div>
-      <div class="col-md-1">Quote No.</div>
-      <div class="col-md-3">Customer</div>
-      <div class="col-md-2">Date</div>
-      <div class="col-md-1">Valid Until</div>
-      <div class="col-md-1">Amount</div>
-      <div class="col-md-1">Deposit</div>
-      <div class="col-md-1">Status</div>
+      <div class="col-md-1 pointer" (click)="sortBy('number')">Quote No.</div>
+      <div class="col-md-3 pointer" (click)="sortBy('customerName')">Customer</div>
+      <div class="col-md-2 pointer" (click)="sortBy('date')">Date</div>
+      <div class="col-md-1 pointer" (click)="sortBy('validUntil')">Valid Until</div>
+      <div class="col-md-1 pointer" (click)="sortBy('amount')">Amount</div>
+      <div class="col-md-1 pointer" (click)="sortBy('deposit')">Deposit</div>
+      <div class="col-md-1 pointer">Status</div>
     </div>
   </div>
-  <div class="quotes__content">
-    <div class="quotes__content--item row">
+  <div class="quotes__content"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="50"
+       [infiniteScrollDisabled]="infiniteScrollDisabled"
+       (scrolled)="onScroll()">
+    <div class="quotes__content--item row"
+         *ngFor="let item of quotesList"
+    >
       <div class="col-md-1 w-1-5">
         <label class="control checkbox">
           <input type="checkbox">
@@ -57,13 +64,14 @@
           </span>
         </label>
       </div>
-      <div class="col-md-1">#0001</div>
+      <div class="col-md-1">#{{item.number}}</div>
       <div class="col-md-3 g-m">Alicia Stranger</div>
-      <div class="col-md-2">06 Nov 2018</div>
-      <div class="col-md-1">10 Dec 2018</div>
-      <div class="col-md-1">$86434</div>
-      <div class="col-md-1">$869.09</div>
+      <div class="col-md-2">{{getDate(item.date)}}</div>
+      <div class="col-md-1">{{getDate(item.validUntil)}}</div>
+      <div class="col-md-1">{{item.totalAmount | currency}}</div>
+      <div class="col-md-1">{{item.partialDeposit}}</div>
       <div class="col-md-1">
+        {{item.status}}
         <!-- status-in-progress - Read-->
         <!-- success-status - Approved-->
         <!-- changing-status - Unread-->
