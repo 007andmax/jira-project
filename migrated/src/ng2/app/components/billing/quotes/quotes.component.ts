@@ -26,7 +26,7 @@ export class QuotesComponent implements OnInit {
 
   getQuotes(data?) {
     const reqData = data ? data : {page: this.page};
-    this.quoteServices.getQuotes(reqData).subscribe((res) => {
+    this.quoteServices.getQuotes(reqData).subscribe((res: any) => {
       this.quotesList = [...this.quotesList, ...res];
       this.page += 1;
       this.infiniteScrollDisabled = false;
