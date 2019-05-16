@@ -39,7 +39,6 @@ export class QuotesComponent implements OnInit {
       this.dataToSend.page += 1;
       this.infiniteScrollDisabled = false;
     })
-
   }
 
   getDate(value) {
