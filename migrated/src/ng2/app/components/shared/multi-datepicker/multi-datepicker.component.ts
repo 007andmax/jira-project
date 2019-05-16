@@ -15,9 +15,10 @@ export class MultiDatepickerComponent implements OnInit {
   toDate: NgbDate;
   public navigation = 'select';
   public showDatePicker = false;
+  public selectedDateModel = '';
   @Output() selectedDate = new EventEmitter<any>();
 
-  constructor(
+  constructor (
     private calendar: NgbCalendar,
     private dateService: DateService
               ) {
@@ -29,7 +30,6 @@ export class MultiDatepickerComponent implements OnInit {
   }
 
   onDateSelection(date: NgbDate) {
-    console.log(date);
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
@@ -43,6 +43,7 @@ export class MultiDatepickerComponent implements OnInit {
         start: this.dateService.getDateFromBootstrap(this.fromDate),
         end: this.dateService.getDateFromBootstrap(this.toDate),
       });
+      this.setSelectedDateModel(this.fromDate, this.toDate);
       this.hideDatePicker();
     }
   }
@@ -65,6 +66,12 @@ export class MultiDatepickerComponent implements OnInit {
 
   public hideDatePicker() {
     this.showDatePicker = false;
+  }
+
+  public setSelectedDateModel(start, end) {
+    const startDate = new Date(this.dateService.getDateFromBootstrap(start));
+    const endDate = new Date(this.dateService.getDateFromBootstrap(end));
+    this.selectedDateModel = `${this.dateService.getFormatToFilterDate(startDate)} - ${this.dateService.getFormatToFilterDate(endDate)}`;
   }
 
 }

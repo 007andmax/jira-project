@@ -19,12 +19,15 @@ export class DateService {
 
   getDateFromBootstrap(date) {
     const stringDate = `${date.month}/${date.day}/${date.year}`;
-    console.log(moment(stringDate).valueOf(), 'moment(date);');
     return moment(stringDate).valueOf();
   }
 
   public getFormatDate(date) {
-    return moment(date).format('mm/dd/yyyy');
+    return moment(date).format('MM/DD/YYYY');
+  }
+
+  public getFormatToFilterDate(date) {
+    return moment(date).format('MM dd YYYY');
   }
 
 }
