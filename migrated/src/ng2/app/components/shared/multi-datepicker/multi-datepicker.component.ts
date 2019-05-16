@@ -26,8 +26,7 @@ export class MultiDatepickerComponent implements OnInit {
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -72,6 +71,15 @@ export class MultiDatepickerComponent implements OnInit {
     const startDate = new Date(this.dateService.getDateFromBootstrap(start));
     const endDate = new Date(this.dateService.getDateFromBootstrap(end));
     this.selectedDateModel = `${this.dateService.getFormatToFilterDate(startDate)} - ${this.dateService.getFormatToFilterDate(endDate)}`;
+  }
+
+  clearDate() {
+    this.selectedDate.next({
+      start: '',
+      end: ''
+    });
+    this.setSelectedDateModel('', '');
+    this.hideDatePicker();
   }
 
 }

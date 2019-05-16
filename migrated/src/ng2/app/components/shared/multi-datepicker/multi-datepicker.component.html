@@ -5,7 +5,7 @@
            (click)="toggleDatePicker()"
            [(ngModel)]="selectedDateModel"
            class="pointer">
-    <span (click)="onDateSelection(null)">x</span>
+    <span (click)="clearDate()">x</span>
     <div *ngIf="showDatePicker">
       <ngb-datepicker  #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
       </ngb-datepicker>
