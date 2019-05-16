@@ -23,8 +23,8 @@ export class DateService {
     return moment(stringDate).valueOf();
   }
 
-  public getMsTime(date) {
-    return
+  public getFormatDate(date) {
+    return moment(date).format('mm/dd/yyyy');
   }
 
 }

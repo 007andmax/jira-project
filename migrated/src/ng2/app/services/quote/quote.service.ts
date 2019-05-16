@@ -93,9 +93,9 @@ export class QuoteService {
   getQuotes(data) {
     data.type && this.getSortType(data.type);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
-      "companyName": data.company,
-      "quoteNumber": data.number || '',
-      "status":  data.status || '',
+      "companyName": data.company || null,
+      "quoteNumber": data.number || null,
+      "status":  data.status || null,
       "date": data.startDate || '',
       "endDate": data.endDate || '',
       "sortBy": this.sortType || 'DATE_DESC',

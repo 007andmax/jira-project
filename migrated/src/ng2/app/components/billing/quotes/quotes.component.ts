@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuoteService } from '../../../services/quote/quote.service';
 import { CompaniesService } from '../../../services/company/companies.service';
 import { QUOTE_STATUS } from '../../../const/quote-status';
+import { DateService } from "../../../services/date/date.service";
 
 /**
  * Password quotes component
@@ -31,7 +32,8 @@ export class QuotesComponent implements OnInit {
 
   constructor(
     private quoteServices: QuoteService,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private dateService: DateService
   ) { }
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class QuotesComponent implements OnInit {
   }
 
   getDate(value) {
-    return new Date(value);
+    return this.dateService.getFormatDate(new Date(value));
   }
 
   onScroll() {
