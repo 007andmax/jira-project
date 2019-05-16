@@ -834,7 +834,7 @@
 
     function sendEmail(data, callback) {
       $http({
-        url: '/customEmail',
+        url: '/email/customEmail',
         method: "POST",
         data: data
       }).then(function(res) {
