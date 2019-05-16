@@ -10783,7 +10783,7 @@ button.close {
   background-color: #f3f7f9;
   position: fixed;
   top: 77px;
-  z-index: 1030;
+  z-index: 2;
   width: calc(100% - 316px);
 }
 .payments .change-view-actions {
@@ -11422,7 +11422,6 @@ button.close {
 }
 .password-content__modal.open {
   right: 0;
-  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
 }
 .password-content__modal h3 {
   margin: 0;

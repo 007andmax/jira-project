@@ -834,7 +834,7 @@
 
     function sendEmail(data, callback) {
       $http({
-        url: 'https://dev.quicktech.com/email/customEmail',
+        url: '/email/customEmail',
         method: "POST",
         data: data
       }).then(function(res) {
