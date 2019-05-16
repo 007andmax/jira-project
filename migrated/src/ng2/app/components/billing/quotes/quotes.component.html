@@ -7,9 +7,10 @@
           <app-multi-datepicker (selectedDate)="filterByDate($event)"></app-multi-datepicker>
         </div>
         <div class="input-field w-280">
-          <input type="text"
-                 placeholder="Search by company"
-                 class="pointer">
+          <app-select-client-company style="width: 75%;"
+                                     class="light-dropdown"
+                                     (selectedItem)="selectClient($event)">
+          </app-select-client-company>
         </div>
         <div class="input-field w-160">
           <input type="text"

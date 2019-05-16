@@ -16,6 +16,7 @@ export class SelectClientCompanyComponent implements OnInit {
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
   @Input() formGroup: FormGroup;
+  public selectedClient;
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
   focus$ = new Subject<string>();
@@ -58,5 +59,10 @@ export class SelectClientCompanyComponent implements OnInit {
   formatter = (result: string) => {
     return result['name'];
   };
+
+  public clearClient() {
+    this.selectedItem.emit('null');
+    this.selectedClient = null;
+  }
 
 }

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {QuoteService} from "../../../services/quote/quote.service";
-import {map, tap} from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { QuoteService } from "../../../services/quote/quote.service";
+import { CompaniesService } from "../../../services/company/companies.service";
 
 /**
  * Password quotes component
@@ -12,23 +12,31 @@ import {map, tap} from "rxjs/operators";
 })
 export class QuotesComponent implements OnInit {
 
-  public quotesList: any;
+  public quotesList = [];
   public page = 0;
+  public dataToSend = {
+    startDate: null,
+    endDate: null,
+    company: null,
+    page: 0,
+    type: null
+  };
   public infiniteScrollDisabled = false;
 
   constructor(
-    private quoteServices: QuoteService
+    private quoteServices: QuoteService,
+    private companiesService: CompaniesService
   ) { }
 
   ngOnInit() {
     this.getQuotes();
+    this.companiesService.getCompaniesList();
   }
 
-  getQuotes(data?) {
-    const reqData = data ? data : {page: this.page};
-    this.quoteServices.getQuotes(reqData).subscribe((res: any) => {
+  getQuotes() {
+    this.quoteServices.getQuotes(this.dataToSend).subscribe((res: any) => {
       this.quotesList = [...this.quotesList, ...res];
-      this.page += 1;
+      this.dataToSend.page += 1;
       this.infiniteScrollDisabled = false;
     })
 
@@ -45,25 +53,30 @@ export class QuotesComponent implements OnInit {
 
   public sortBy(value) {
     this.refreshQuoteAndPage();
-    this.getQuotes({
-      page: this.page,
-      type: value
-    })
+    this.dataToSend.type = value;
+    this.getQuotes()
   }
 
   public filterByDate(value) {
-    console.log(value, 'VALUe');
     this.refreshQuoteAndPage();
-    this.getQuotes({
-      page: this.page,
-      date: value.start,
-      endDate: value.end
-    })
+    this.setDate(value);
+    this.getQuotes()
+  }
+
+  private setDate(value) {
+    this.dataToSend.startDate = value.start;
+    this.dataToSend.endDate = value.end;
   }
 
   private refreshQuoteAndPage() {
-    this.quotesList = null;
-    this.page = 0;
+    this.quotesList = [];
+    this.dataToSend.page = 0;
+  }
+
+  public selectClient(value) {
+    this.refreshQuoteAndPage();
+    this.dataToSend.company = (value && value.item) ? value.item.id : null;
+    this.getQuotes();
   }
 
 }
