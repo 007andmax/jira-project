@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { QuoteService } from "../../../services/quote/quote.service";
-import { CompaniesService } from "../../../services/company/companies.service";
+import { QuoteService } from '../../../services/quote/quote.service';
+import { CompaniesService } from '../../../services/company/companies.service';
+import { QUOTE_STATUS } from '../../../const/quote-status';
 
 /**
  * Password quotes component
@@ -14,12 +15,17 @@ export class QuotesComponent implements OnInit {
 
   public quotesList = [];
   public page = 0;
+  public searchNumber: number;
+  public quoteStatuses = QUOTE_STATUS;
+  public selectedStatus = '';
   public dataToSend = {
     startDate: null,
     endDate: null,
     company: null,
     page: 0,
-    type: null
+    type: null,
+    number: undefined,
+    status: undefined
   };
   public infiniteScrollDisabled = false;
 
@@ -75,6 +81,28 @@ export class QuotesComponent implements OnInit {
   public selectClient(value) {
     this.refreshQuoteAndPage();
     this.dataToSend.company = (value && value.item) ? value.item.id : null;
+    this.getQuotes();
+  }
+
+  public setNumberEnter(event?) {
+    if (event.key === "Enter") {
+      this.dataToSend.number = this.searchNumber;
+      this.refreshQuoteAndPage();
+      this.getQuotes();
+    }
+
+  }
+
+  public setNumberOnBlur(event?) {
+    this.dataToSend.number = this.searchNumber;
+    this.refreshQuoteAndPage();
+    this.getQuotes();
+  }
+
+  public setStatus(item) {
+    this.selectedStatus = item.name;
+    this.dataToSend.status = item.type;
+    this.refreshQuoteAndPage();
     this.getQuotes();
   }
 

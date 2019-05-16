@@ -94,8 +94,8 @@ export class QuoteService {
     data.type && this.getSortType(data.type);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company,
-      "quoteNumber": null,
-      "status": null,
+      "quoteNumber": data.number || '',
+      "status":  data.status || '',
       "date": data.startDate || '',
       "endDate": data.endDate || '',
       "sortBy": this.sortType || 'DATE_DESC',
@@ -105,7 +105,6 @@ export class QuoteService {
   }
 
   getSortType(type) {
-    console.log(type, 'TYPe');
     switch (type) {
       case 'number':
         this.sortType = this.quoteNumber === 'QUOTE_NUMBER_ASC' ? 'QUOTE_NUMBER_DESC' : 'QUOTE_NUMBER_ASC';

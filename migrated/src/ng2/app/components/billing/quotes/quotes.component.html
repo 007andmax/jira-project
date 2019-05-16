@@ -15,12 +15,20 @@
         <div class="input-field w-160">
           <input type="text"
                  placeholder="Search by number"
+                 [(ngModel)]="searchNumber"
+                 (blur)="setNumberOnBlur()"
+                 (keydown)="setNumberEnter($event)"
                  class="pointer">
         </div>
-        <div class="input-field w-160">
+        <div class="input-field w-160"
+             ngbDropdown>
           <input type="text"
-                 placeholder="Sort by"
-                 class="pointer">
+                 [(ngModel)]="selectedStatus"
+                 class="btn btn-outline-primary pointer" id="dropdownBasic1" ngbDropdownToggle
+                 placeholder="Sort by">
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem *ngFor="let item of quoteStatuses" (click)="setStatus(item)">{{item.name}}</button>
+          </div>
         </div>
         <button class="btn-new btn-success"
                 type="button">
