@@ -1,8 +1,8 @@
-<div class="item-list">
-  <p class="services"
-     *ngFor="let item of itemList"
-     (click)="selectServicesItem(item)"
+<div class="dropdown-menu show">
+  <button class="dropdown-item"
+          *ngFor="let item of itemList"
+          (click)="selectServicesItem(item)"
   >
     {{item.name}}
-  </p>
+  </button>
 </div>
