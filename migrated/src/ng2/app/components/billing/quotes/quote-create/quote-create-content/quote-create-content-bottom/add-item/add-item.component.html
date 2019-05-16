@@ -1,30 +1,30 @@
 <div class="row" *ngIf="type && (itemListServices || itemListProducts)">
   <div class="col-md-1"
        (clickOutside)="hideDropDown($event)">
-    <div *ngIf="type === 'service'" class="light-dropdown">
-      <input
-        class="pointer"
-        type="text"
-        (click)="toggleShowDropDown()"
-        [ngClass]="{'no-valid': isFormValid}"
-        placeholder="">
+    <div *ngIf="type === 'service'"
+         class="light-dropdown">
+      <input class="pointer"
+             type="text"
+             (click)="toggleShowDropDown()"
+             [ngClass]="{'no-valid': isFormValid}"
+             placeholder="Service">
+      <i class="icn-sm report-caret-icon"></i>
       <app-services-list
         *ngIf="isDropDownShow"
         [itemList]="itemListServices"
         (selectedServicesItem)="setItem($event)"></app-services-list>
     </div>
-    <div class="product-dropdown-new-ng"
-      *ngIf="type === 'product'">
-      <input
-        class="pointer"
-        type="text"
-        (click)="toggleShowDropDown()"
-        [ngClass]="{'no-valid': isFormValid}"
-        placeholder="">
-      <app-product-list
-        *ngIf="isDropDownShow"
-        [itemList]="itemListProducts"
-        (selectedProductItem)="setItem($event)"></app-product-list>
+    <div *ngIf="type === 'product'"
+         class="product-dropdown-new-ng light-dropdown">
+      <input class="pointer"
+             type="text"
+             (click)="toggleShowDropDown()"
+             [ngClass]="{'no-valid': isFormValid}"
+             placeholder="Product">
+      <i class="icn-sm report-caret-icon"></i>
+      <app-product-list *ngIf="isDropDownShow"
+                        [itemList]="itemListProducts"
+                        (selectedProductItem)="setItem($event)"></app-product-list>
     </div>
   </div>
   <div class="col-md-2">
