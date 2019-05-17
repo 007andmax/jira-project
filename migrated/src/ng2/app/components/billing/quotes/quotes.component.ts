@@ -108,4 +108,21 @@ export class QuotesComponent implements OnInit {
     this.getQuotes();
   }
 
+  public getClass(className) {
+    console.log(className, 'className');
+    if (className === 'READ') {
+      return 'status-in-progress'
+    } else if (className === 'DRAFT') {
+      return 'changing-status'
+    } else if (className === 'EXPIRED' || className === 'REFUSED') {
+      return 'error-status'
+    } else if (className === 'UNREAD') {
+      return 'unread'
+    } else if (className === 'NOT_APPROVED') {
+      return 'not_approved'
+    } else {
+      return 'success-status'
+    }
+  }
+
 }
