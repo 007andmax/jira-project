@@ -1,15 +1,18 @@
-<div class="form-group" (clickOutside)="hideDatePicker()">
-  <div class="input-group">
-    <input type="text"
-           placeholder="Filter by date"
-           (click)="toggleDatePicker()"
-           [(ngModel)]="selectedDateModel"
-           class="pointer">
-    <span (click)="clearDate()">x</span>
-    <div *ngIf="showDatePicker">
-      <ngb-datepicker  #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
-      </ngb-datepicker>
-      <ng-template #t let-date let-focused="focused">
+<div class="date-picker" (clickOutside)="hideDatePicker()">
+  <input type="text"
+         placeholder="Filter by date"
+         (click)="toggleDatePicker()"
+         [(ngModel)]="selectedDateModel"
+         class="pointer">
+  <i *ngIf="selectedDateModel"
+     class="icn-sm icn-remove-old"
+     (click)="clearDate()"></i>
+  <i *ngIf="!selectedDateModel"
+     class="icn-16 icn-calendar-light pointer"></i>
+  <div  class="dropdown-menu show" *ngIf="showDatePicker">
+    <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+    </ngb-datepicker>
+    <ng-template #t let-date let-focused="focused">
         <span class="custom-day"
               [class.focused]="focused"
               [class.range]="isRange(date)"
@@ -18,7 +21,6 @@
               (mouseleave)="hoveredDate = null">
           {{ date.day }}
         </span>
-      </ng-template>
-    </div>
+    </ng-template>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<app-left-panel [ngClass]="{'show': isMobileFilterShowing }" ></app-left-panel>
+<app-left-panel [ngClass]="{'show': isMobileFilterShowing }"></app-left-panel>
 <div class="quotes">
   <div class="quotes__header">
     <div class="quotes__header--top">
@@ -21,12 +21,17 @@
                  (keydown)="setNumberEnter($event)"
                  class="pointer">
         </div>
-        <div class="input-field w-160"
+        <div class="input-field w-160 light-dropdown"
              ngbDropdown>
           <input type="text"
                  [(ngModel)]="selectedStatus"
-                 class="btn btn-outline-primary pointer" id="dropdownBasic1" ngbDropdownToggle
+                 class="pointer" id="dropdownBasic1" ngbDropdownToggle
                  placeholder="Sort by">
+          <i *ngIf="selectedStatus"
+             class="icn-sm icn-remove-old"
+             (click)="clearStatus()"></i>
+          <i *ngIf="!selectedStatus"
+             class="icn-sm report-caret-icon"></i>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button ngbDropdownItem *ngFor="let item of quoteStatuses" (click)="setStatus(item)">{{item.name}}</button>
           </div>

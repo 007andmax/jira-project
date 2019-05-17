@@ -85,6 +85,16 @@
 
 .date-picker {
   position: relative;
+  i {
+    position: absolute;
+    right: 12px;
+    bottom: 11px;
+    top: 11px;
+    cursor: pointer;
+  }
+  .icn-calendar-light {
+    pointer-events: none;
+  }
   .dropdown-menu {
     border: none;
     box-shadow: 0 4px 20px 0 rgba(10, 45, 89, .1);
@@ -122,19 +132,43 @@
     .ngb-dp-day {
       border: none;
       outline: none;
-      div {
+      div, span {
         transition: all .3s;
         border-radius: 3px;
         &:hover {
           background: #e7ecf2;
+          color: #404b5f;
         }
       }
       .bg-primary {
         background: #16a4fa;
+        color: #fff;
         &:hover {
           background: #16a4fa;
+          color: #fff;
         }
       }
+      .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+      }
+      .custom-day.range {
+        background-color: #16a4fa;
+        color: #fff;
+      }
+      .custom-day.faded {
+        background-color: #e7ecf2;
+        color: #404b5f;
+      }
+    }
+    .ngb-dp-month-name {
+      font-size: .875rem;
+      background: #16a4fa;
+      color: #fff;
+      font-weight: bold;
     }
   }
 }

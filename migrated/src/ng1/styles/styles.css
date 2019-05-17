@@ -1274,6 +1274,23 @@ invoices .invoices-header .invoices-header-filters > div input {
   background: #fff;
 }
 
+.quotes .input-field input {
+  font-size: 13px;
+}
+
+.quotes .input-field.w-280 .report-caret-icon {
+  top: 4px !important;
+}
+
+.quotes .input-field.w-280 .icn-remove-old {
+  top: 2px !important;
+}
+
+.quotes .input-field input::placeholder {
+  color: #9ca5b6;
+  opacity: 1;
+}
+
 .invoices input:focus,
 .quotes .input-field input:focus {
   outline: 0;
