@@ -45,6 +45,7 @@ import { ServicesListComponent } from './components/billing/quotes/quote-create/
 import { ProductTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-table/product-table.component';
 import { AddItemComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/add-item/add-item.component';
 import { MultiDatepickerComponent } from './components/shared/multi-datepicker/multi-datepicker.component';
+import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 
 
 declare var angular: any;
@@ -107,7 +108,8 @@ angular.module('quicktech')
     ServicesListComponent,
     ProductTableComponent,
     AddItemComponent,
-    MultiDatepickerComponent
+    MultiDatepickerComponent,
+    LeftPanelBillingComponent
   ],
   imports: [
     BrowserModule,

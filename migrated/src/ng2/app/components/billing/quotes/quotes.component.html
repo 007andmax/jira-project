@@ -18,14 +18,15 @@
                  placeholder="Search by number"
                  [(ngModel)]="searchNumber"
                  (blur)="setNumberOnBlur()"
-                 (keydown)="setNumberEnter($event)"
-                 class="pointer">
+                 (keydown)="setNumberEnter($event)">
         </div>
         <div class="input-field w-160 light-dropdown"
              ngbDropdown>
           <input type="text"
                  [(ngModel)]="selectedStatus"
-                 class="pointer" id="dropdownBasic1" ngbDropdownToggle
+                 class="pointer"
+                 id="dropdownBasic1"
+                 ngbDropdownToggle
                  placeholder="Sort by">
           <i *ngIf="selectedStatus"
              class="icn-sm icn-remove-old"
