@@ -62,8 +62,7 @@
        [infiniteScrollDisabled]="infiniteScrollDisabled"
        (scrolled)="onScroll()">
     <div class="quotes__content--item row"
-         *ngFor="let item of quotesList"
-    >
+         *ngFor="let item of quotesList">
       <div class="col-md-1 w-1-5">
         <label class="control checkbox">
           <input type="checkbox">
@@ -78,7 +77,7 @@
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>
       <div class="col-md-1">{{item.totalAmount | currency}}</div>
       <div class="col-md-1">{{item.partialDeposit}}</div>
-      <div class="col-md-1">
+      <div class="col-md-1 df">
         <div class="quote-status" [ngClass]="getClass(item.status)"> {{item.status}}</div>
         <a class="hit-area ha-20-20 pointer">
           <i class="icn-sm icn-more-light-grey"></i>

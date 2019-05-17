@@ -49,7 +49,12 @@
       [class*='col-md-'] {
         font-family: "Graphik Regular", sans-serif;
         font-size: 13px;
-        a.hit-area{
+        .quote-status {
+          &:before {
+            display: none;
+          }
+        }
+        a.hit-area {
           position: absolute;
           right: 15px;
           top: 2px;

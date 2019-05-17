@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { QuoteService } from '../../../services/quote/quote.service';
-import { CompaniesService } from '../../../services/company/companies.service';
-import { QUOTE_STATUS } from '../../../const/quote-status';
-import { DateService } from "../../../services/date/date.service";
+import {ChangeDetectorRef,Component, OnInit} from '@angular/core';
+import {QuoteService} from '../../../services/quote/quote.service';
+import {CompaniesService} from '../../../services/company/companies.service';
+import {QUOTE_STATUS} from '../../../const/quote-status';
+import {DateService} from "../../../services/date/date.service";
 
 /**
  * Password quotes component
@@ -113,20 +113,11 @@ export class QuotesComponent implements OnInit {
   }
 
   public getClass(className) {
-    console.log(className, 'className');
-    if (className === 'READ') {
-      return 'status-in-progress'
-    } else if (className === 'DRAFT') {
-      return 'changing-status'
-    } else if (className === 'EXPIRED' || className === 'REFUSED') {
-      return 'error-status'
-    } else if (className === 'UNREAD') {
-      return 'unread'
-    } else if (className === 'NOT_APPROVED') {
-      return 'not_approved'
-    } else {
-      return 'success-status'
-    }
+    return className === 'EXPIRED' || className === 'REFUSED' ? 'error-status' :
+      className === 'READ' ? 'status-in-progress' :
+        className === 'DRAFT' ? 'changing-status' :
+          className === 'UNREAD' ? 'status-warning' :
+            'success-status'
   }
 
 }
