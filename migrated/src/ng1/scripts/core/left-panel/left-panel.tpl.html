@@ -1269,6 +1269,11 @@
              ng-click="stateGo($event, 'receivable', {mode: 'list'})">
           Invoices
         </div>
+        <div class="center-category__category"
+             ng-class="{active: $state.includes('quotes-component')}"
+             ng-click="stateGo($event, 'quotes-component')">
+          Quotes
+        </div>
         <!-- <div class="center-category__category"
              ng-class="{active: $state.includes('payments')}"
              ng-click="stateGo($event, 'payments', {mode: 'payments-list'})">
