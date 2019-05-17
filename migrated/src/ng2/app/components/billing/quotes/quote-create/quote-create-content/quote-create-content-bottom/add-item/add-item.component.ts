@@ -13,7 +13,6 @@ import { ProductService } from "../../../../../../../services/product/product.se
 export class AddItemComponent implements OnInit {
 
   @Input() set setType(value) {
-    console.log('1234');
     this.type = value;
     value && this.quoteStateService.setType(false);
     this.getServicesList();

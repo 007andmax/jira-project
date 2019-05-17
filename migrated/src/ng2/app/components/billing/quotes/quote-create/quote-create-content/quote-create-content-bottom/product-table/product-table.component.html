@@ -2,8 +2,11 @@
   <div class="col-md-1">
     <input type="text"
            placeholder=""
-           readonly
+           (click)="toggleShowDropDown()"
            [(ngModel)]="item.name || item.description ">
+    <app-product-list *ngIf="isDropDownShow"
+                      [itemList]="itemListProducts"
+                      (selectedProductItem)="setItem($event)"></app-product-list>
   </div>
   <div class="col-md-2">
     <input type="text"
@@ -22,7 +25,7 @@
            placeholder="">
   </div>
   <div class="col-md-1">
-    <input type="text"
+    <input type="text"_w
            [(ngModel)]="item && item.sale"
            placeholder="">
   </div>

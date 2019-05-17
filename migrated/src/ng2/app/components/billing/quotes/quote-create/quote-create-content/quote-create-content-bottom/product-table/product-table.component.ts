@@ -15,6 +15,7 @@ export class ProductTableComponent implements OnInit {
   @Output() changedProductItemsArray = new EventEmitter<any>();
   public showProductsCategory = false;
   public itemsListArray = [];
+  public isDropDownShow = false;
 
   constructor(
     private quoteStateService: QuoteStateService
@@ -43,6 +44,10 @@ export class ProductTableComponent implements OnInit {
     this.itemsListArray[index].quantity = value;
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);
+  }
+
+  public toggleShowDropDown() {
+    this.isDropDownShow = !this.isDropDownShow;
   }
 
 }
