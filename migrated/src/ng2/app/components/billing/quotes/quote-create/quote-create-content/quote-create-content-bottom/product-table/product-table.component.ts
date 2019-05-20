@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuoteStateService } from "../../../quote-state.service";
+import { ProductService } from "../../../../../../../services/product/product.service";
+import { QuoteService } from "../../../../../../../services/quote/quote.service";
 
 @Component({
   selector: 'app-product-table',
@@ -11,20 +13,33 @@ export class ProductTableComponent implements OnInit {
   @Input() set itemsArray(value) {
     this.itemsListArray = value;
     this.quoteStateService.setItemArray(this.itemsListArray);
+    this.setDropDownArray();
   };
   @Output() changedProductItemsArray = new EventEmitter<any>();
-  public showProductsCategory = false;
   public itemsListArray = [];
-  public isDropDownShow = false;
+  public productList = [];
+  public servicesList = [];
+  public isDropDownShow = [];
 
   constructor(
-    private quoteStateService: QuoteStateService
+    private quoteStateService: QuoteStateService,
+    private productService: ProductService,
+    private quoteService: QuoteService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getItemListProducts();
+    this.setDropDownArray();
+  }
 
-  toggleShowCategory() {
-    this.showProductsCategory = !this.showProductsCategory;
+  hideDropDown(i) {
+    this.isDropDownShow[i] = false ;
+  }
+
+  setDropDownArray() {
+    this.isDropDownShow = new Array(this.itemsListArray.length);
+    this.isDropDownShow.map((item) => item = false );
+    console.log(this.isDropDownShow, '135123');
   }
 
   public getPrice(cost, count, tax) {
@@ -46,8 +61,34 @@ export class ProductTableComponent implements OnInit {
     this.quoteStateService.setItemArray(this.itemsListArray);
   }
 
-  public toggleShowDropDown() {
-    this.isDropDownShow = !this.isDropDownShow;
+  public toggleShowDropDown(i) {
+    this.isDropDownShow[i] = !this.isDropDownShow[i];
+  }
+
+  public getItemListProducts() {
+    this.productService.getCategories().subscribe((res: any) => {
+      return this.productList = res
+    });
+    const value = this.quoteStateService.getClient();
+    value && this.quoteService.getServiceList(value.id).subscribe((res: any) => {
+      return this.servicesList = res
+    });
+    console.log(this.productList,'productList');
+  }
+
+  public setItem(item, index, type) {
+    if (type === 'service') {
+      item = {...item, ...{description: '', quantity: 1}};
+    } else {
+      item = {...item, ...{quantity: 1, markup: ''}};
+    }
+    this.itemsListArray[index] = item;
+    this.changedProductItemsArray.next(this.itemsListArray);
+    this.hideDropDown(index);
+  }
+
+  public getMarkup(item) {
+    return item.hasOwnProperty('markup');
   }
 
 }

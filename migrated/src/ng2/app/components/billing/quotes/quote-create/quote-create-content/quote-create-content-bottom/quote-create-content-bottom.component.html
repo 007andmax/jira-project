@@ -16,7 +16,7 @@
       <div class="new-link" (click)="addProduct()">Add Product</div>
     </div>
   </div>
-  <div class="quote-content-body row">
+  <div class="quote-content-body row" *ngIf="client">
     <app-product-table
       [itemsArray]="itemsArray"
       (changedProductItemsArray)="refreshItemsArray($event)"

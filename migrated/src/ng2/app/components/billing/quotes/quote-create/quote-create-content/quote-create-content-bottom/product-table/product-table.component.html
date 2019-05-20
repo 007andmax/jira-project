@@ -1,16 +1,23 @@
 <div class="row" *ngFor="let item of itemsListArray;  let i = index">
-  <div class="col-md-1">
+  <div class="col-md-1"
+       [ngClass]="{'col-md-2': getMarkup(item)}">
     <input type="text"
            placeholder=""
-           (click)="toggleShowDropDown()"
+           (click)="toggleShowDropDown(i)"
            [(ngModel)]="item.name || item.description ">
-    <app-product-list *ngIf="isDropDownShow"
-                      [itemList]="itemListProducts"
-                      (selectedProductItem)="setItem($event)"></app-product-list>
+    <app-product-list
+      *ngIf="isDropDownShow[i] && getMarkup(item)"
+      [itemList]="productList"
+      (selectedProductItem)="setItem($event, i, 'product')"></app-product-list>
+    <app-services-list
+      *ngIf="isDropDownShow[i] && !getMarkup(item)"
+      [itemList]="servicesList"
+      (selectedServicesItem)="setItem($event, i, 'service')"></app-services-list>
+
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2"
+       [ngClass]="{'d-none': getMarkup(item)}">
     <input type="text"
-           readonly
            [(ngModel)]="item && item.description"
            placeholder="">
   </div>
@@ -22,10 +29,12 @@
   <div class="col-md-1">
     <input type="text"
            [(ngModel)]="item.markup"
+           [readonly]="!getMarkup(item)"
            placeholder="">
   </div>
   <div class="col-md-1">
-    <input type="text"_w
+    <input type="text"
+           [readonly]="!getMarkup(item)"
            [(ngModel)]="item && item.sale"
            placeholder="">
   </div>
@@ -41,3 +50,6 @@
     <i class="icn-delete" (click)="deleteItem(i)"></i>
   </div>
 </div>
+
+//service немає markup sale price
+//product немає descricpition

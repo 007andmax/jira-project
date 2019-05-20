@@ -82,12 +82,9 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   public resolveTaxes() {
     this.itemsArray.map((item) => {
-      console.log(item);
       const taxes = item && item.taxes[0];
       const product = item;
-      console.log(taxes, 'TAXES');
       if (taxes) {
-        console.log(1);
         this.totalTaxes += (((taxes.rate)/100) * (product.rate || product.sale)) * product.quantity
       }
     });
@@ -102,7 +99,6 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   }
 
   public refreshItemsArray(value) {
-    console.log(value);
     this.itemsArray = value;
     this.calculateArrays();
   }
