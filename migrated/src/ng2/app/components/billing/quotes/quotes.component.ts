@@ -1,8 +1,9 @@
-import {ChangeDetectorRef,Component, OnInit} from '@angular/core';
-import {QuoteService} from '../../../services/quote/quote.service';
-import {CompaniesService} from '../../../services/company/companies.service';
-import {QUOTE_STATUS} from '../../../const/quote-status';
-import {DateService} from "../../../services/date/date.service";
+import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
+import { QuoteService } from '../../../services/quote/quote.service';
+import { CompaniesService } from '../../../services/company/companies.service';
+import { QUOTE_STATUS } from '../../../const/quote-status';
+import { DateService } from "../../../services/date/date.service";
+import { Router } from "@angular/router";
 
 /**
  * Password quotes component
@@ -34,7 +35,8 @@ export class QuotesComponent implements OnInit {
     private quoteServices: QuoteService,
     private companiesService: CompaniesService,
     private dateService: DateService,
-    private cdRef:ChangeDetectorRef
+    private cdRef:ChangeDetectorRef,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -118,6 +120,10 @@ export class QuotesComponent implements OnInit {
         className === 'DRAFT' ? 'changing-status' :
           className === 'UNREAD' ? 'status-warning' :
             'success-status'
+  }
+
+  goToCreate(){
+    this.router.navigate(['/ng2/quotes/quote-create']);
   }
 
 }
