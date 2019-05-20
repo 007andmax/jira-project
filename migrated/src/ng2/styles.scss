@@ -147,8 +147,21 @@ ngb-typeahead-window {
   }
 }
 
+.quote-content-body {
+  .row {
+    position: relative;
+    margin-bottom: 20px;
+    .icn-delete {
+      position: absolute;
+      right: -44px;
+      top: 9px;
+      cursor: pointer;
+    }
+  }
+}
+
 @import './assets/styles/mobile.scss';
 
 .ngb-dp-day.hidden {
-  display: block!important;
+  display: block !important;
 }

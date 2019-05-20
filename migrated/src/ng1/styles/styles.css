@@ -490,6 +490,13 @@ img {
   display: flex;
 }
 
+.aic {
+  align-items: center;
+}
+.df-fe{
+  display: flex;
+  justify-content: flex-end;
+}
 .img-responsive,
 .thumbnail > img,
 .thumbnail a > img {
@@ -4351,7 +4358,8 @@ textarea.form-control {
   cursor: pointer;
 }
 
-.form-control[disabled] {
+.form-control[disabled],
+input[disabled] {
   background-color: rgb(235, 235, 228);
 }
 

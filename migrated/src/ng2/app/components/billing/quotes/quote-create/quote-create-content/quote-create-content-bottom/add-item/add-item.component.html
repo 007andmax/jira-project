@@ -1,8 +1,10 @@
 <div class="row" *ngIf="type && (itemListServices || itemListProducts)">
+  <!-- IF SERVICE -->
   <div class="col-md-1"
+       style="width: 23%;"
+       *ngIf="type === 'service'"
        (clickOutside)="hideDropDown($event)">
-    <div *ngIf="type === 'service'"
-         class="light-dropdown">
+    <div class="light-dropdown">
       <input class="pointer"
              type="text"
              (click)="toggleShowDropDown()"
@@ -14,8 +16,19 @@
         [itemList]="itemListServices"
         (selectedServicesItem)="setItem($event)"></app-services-list>
     </div>
-    <div *ngIf="type === 'product'"
-         class="product-dropdown-new-ng light-dropdown">
+  </div>
+  <div class="col-md-2"
+       *ngIf="type === 'service'">
+    <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
+           placeholder="">
+  </div>
+
+  <!-- IF PRODUCT -->
+  <div class="col-md-3"
+       style="width: 48%;"
+       *ngIf="type === 'product'">
+    <div class="product-dropdown-new-ng light-dropdown">
       <input class="pointer"
              type="text"
              (click)="toggleShowDropDown()"
@@ -27,11 +40,7 @@
                         (selectedProductItem)="setItem($event)"></app-product-list>
     </div>
   </div>
-  <div class="col-md-2">
-    <input type="text"
-           [ngClass]="{'no-valid': isFormValid}"
-           placeholder="">
-  </div>
+
   <div class="col-md-1">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
@@ -40,13 +49,13 @@
   <div class="col-md-1">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
-           readonly
+           [disabled]="type === 'service'"
            placeholder="">
   </div>
   <div class="col-md-1">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
-           readonly
+           [disabled]="type === 'service'"
            placeholder="">
   </div>
   <div class="col-md-1">
@@ -54,7 +63,5 @@
            [ngClass]="{'no-valid': isFormValid}"
            placeholder="">
   </div>
-  <div class="col-md-1 text-right">
-    <i class="icn-delete" (click)="hideAddForm()"></i>
-  </div>
+  <i class="icn-delete" (click)="hideAddForm()"></i>
 </div>
