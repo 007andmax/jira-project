@@ -23,7 +23,9 @@ export class MultiDatepickerComponent implements OnInit {
     private dateService: DateService
               ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('ttestt');
+  }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
