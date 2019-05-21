@@ -10,12 +10,14 @@ export class LeftPanelComponent implements OnInit {
 
   public appType: string;
 
+
   constructor(
     private router: Router
   ) {
   }
 
   ngOnInit() {
+
     this.router.events
       .subscribe((event) => {
         console.log(this.router.url, 'this.router.url');
