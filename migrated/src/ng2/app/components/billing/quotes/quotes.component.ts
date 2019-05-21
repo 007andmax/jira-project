@@ -1,9 +1,11 @@
 import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { QuoteService } from '../../../services/quote/quote.service';
 import { CompaniesService } from '../../../services/company/companies.service';
 import { QUOTE_STATUS } from '../../../const/quote-status';
 import { DateService } from "../../../services/date/date.service";
 import { Router } from "@angular/router";
+import {QuoteStateService} from "./quote-create/quote-state.service";
 
 /**
  * Password quotes component
@@ -11,7 +13,8 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-quotes',
   templateUrl: './quotes.component.html',
-  styleUrls: ['./quotes.component.scss']
+  styleUrls: ['./quotes.component.scss'],
+  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
 })
 export class QuotesComponent implements OnInit {
 
@@ -36,7 +39,7 @@ export class QuotesComponent implements OnInit {
     private companiesService: CompaniesService,
     private dateService: DateService,
     private cdRef:ChangeDetectorRef,
-    private router: Router
+    private quoteStateService: QuoteStateService
   ) { }
 
   ngOnInit() {
@@ -123,7 +126,8 @@ export class QuotesComponent implements OnInit {
   }
 
   goToCreate(){
-    this.router.navigate(['/ng2/quotes/quote-create']);
+    console.log('test');
+    this.quoteStateService.goTo();
   }
 
 }

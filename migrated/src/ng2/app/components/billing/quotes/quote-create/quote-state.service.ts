@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,13 @@ export class QuoteStateService {
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
   public quoteNumber: number;
+  public state;
 
-  constructor() { }
+  constructor(
+    @Inject('$state') $state: any
+  ) {
+    this.state = $state;
+  }
 
   public setClient(client) {
     this.client = client;
@@ -55,6 +60,10 @@ export class QuoteStateService {
 
   public getQuoteNumber() {
     return this.quoteNumber;
+  }
+
+  public goTo() {
+    this.state.go('quote-create-component');
   }
 
 }
