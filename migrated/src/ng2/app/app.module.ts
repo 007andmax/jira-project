@@ -161,12 +161,13 @@ angular.module('quicktech')
     LeftPanelComponent
   ],
   providers: [
-    {provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy},
+
     {
       provide: '$state',
       useFactory: ($injector: any) => $injector.get('$state'),
       deps: ['$injector']
     },
+    {provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy},
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ApiInterceptor,
