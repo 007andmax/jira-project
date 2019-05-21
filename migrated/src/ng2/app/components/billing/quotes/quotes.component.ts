@@ -127,7 +127,7 @@ export class QuotesComponent implements OnInit {
 
   goToCreate(){
     console.log('test');
-    this.quoteStateService.goTo();
+    this.quoteStateService.goToCreate();
   }
 
 }

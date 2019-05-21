@@ -62,8 +62,12 @@ export class QuoteStateService {
     return this.quoteNumber;
   }
 
-  public goTo() {
+  public goToCreate() {
     this.state.go('quote-create-component');
+  }
+
+  public goToQuote() {
+    this.state.go('quotes-component');
   }
 
 }
