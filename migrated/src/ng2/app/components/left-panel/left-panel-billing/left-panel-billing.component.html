@@ -6,25 +6,25 @@
     <span class="left-panel-full__head--header">Billing</span>
   </div>
   <div class="center-category collapsed-nav nano-content">
-    <div class="center-category__category">
+    <div class="center-category__category" (click)="goToState('accounting.dashboard')">
       Dashboard
     </div>
-    <div class="center-category__category">
+    <div class="center-category__category" (click)="goToState('services')">
       Default Services
     </div>
-    <div class="center-category__category active">
+    <div class="center-category__category active" (click)="goToState('accounting.billable')">
       Billable Items
     </div>
-    <div class="center-category__category">
+    <div class="center-category__category" (click)="goToState('receivable')">
       Invoices
     </div>
-    <div class="center-category__category">
+    <div class="center-category__category" (click)="goToState('quotes-component')">
       Quotes
     </div>
-    <div class="center-category__category">
+    <div class="center-category__category" (click)="goToState('new-payments')">
       Payments
     </div>
-    <div class="center-category__category">
+    <div class="center-category__category" (click)="goToState('service-agreements')">
       Contracts
     </div>
   </div>

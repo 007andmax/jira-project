@@ -70,4 +70,8 @@ export class QuoteStateService {
     this.state.go('quotes-component');
   }
 
+  public goToState(state) {
+    this.state.go(state);
+  }
+
 }

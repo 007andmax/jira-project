@@ -22,7 +22,7 @@
             console.log('12351235');
             console.log($state.is('quotes-component'), '12351235');
             var windowWidth = window.outerWidth;
-            if (!$state.is('settings') && !$state.is('quotes-component') && $state.current.url.indexOf('reports') === -1) {
+            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1) {
               $rootScope.isLeftPanelHidden = windowWidth <= 1024;
 
               if ($rootScope.isLeftPanelHidden) {
@@ -41,8 +41,6 @@
                 }
               }
 
-            } else {
-              $rootScope.isLeftPanelHidden = false;
             }
           }
 

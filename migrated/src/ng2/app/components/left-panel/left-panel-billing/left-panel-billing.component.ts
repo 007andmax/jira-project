@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuoteStateService } from "../../billing/quotes/quote-create/quote-state.service";
 
 @Component({
   selector: 'app-left-panel-billing',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftPanelBillingComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private quoteStateService: QuoteStateService
+  ) { }
 
   ngOnInit() {
+  }
+
+  public goToState(state) {
+    this.quoteStateService.goToState(state);
   }
 
 }

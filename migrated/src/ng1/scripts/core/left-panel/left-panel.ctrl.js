@@ -1055,6 +1055,7 @@
             }
 
             $scope.openedCategory = getOpenedCategory(value);
+            console.log($scope.openedCategory, 'openedCategory');
 
             if ($scope.openedCategory) {
               document.title = $scope.userReadable($scope.openedCategory);
@@ -1560,6 +1561,8 @@
             return 'password-manager';
           } else if (url.indexOf('reports') > -1) {
             return 'reports';
+          } else if (url.indexOf('quotes') > -1) {
+            return 'billing';
           } else {
             return undefined;
           }

@@ -17,7 +17,21 @@ id="mobile-left" ng-class="{opened: isLeftPanelOpened}"
 qt-sidebar style="z-index: 991;"
 ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
 
-<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden" right-panel
+<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
        ng-include="'/ng1/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
-<app-main></app-main>
+
+<div class="main-container">
+  <div class="row">
+    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
+      <div class="content-wrapper">
+        <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
+        <app-main></app-main>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div feedback-form ></div>-->
+<div welcome-wizard></div>
+
+
