@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -41,7 +41,6 @@ export class PasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
     private permissionsService: PermissionsService,
-    private cdRef:ChangeDetectorRef
   ) {
     this.companiesService.getCompaniesList();
   }
@@ -56,11 +55,7 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDate();
     this.getCurrentUser();
     this.apiPasswordManagerService.getRecords();
-
     this.checkCloseFilters();
-    if (!this.cdRef['destroyed']) {
-      this.cdRef.detectChanges();
-    }
   };
 
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -20,7 +20,6 @@ export class LeftPanelComponent implements OnInit {
 
     this.router.events
       .subscribe((event) => {
-        console.log(this.router.url, 'this.router.url');
         const appType = this.router.url.startsWith('/ng2/quotes') ? '/ng2/quotes' : 'ng1';
         this.setAppType(appType);
       });
@@ -31,8 +30,6 @@ export class LeftPanelComponent implements OnInit {
   }
 
   isAppTypeIsNg2() {
-    console.log(this.appType == '/ng2/quotes', '1');
-    console.log(this.appType, '2');
     return this.appType == '/ng2/quotes';
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -47,7 +47,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private userService: UsersService,
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private gadgetsService: GadgetsService
+    private gadgetsService: GadgetsService,
+    private cdRef:ChangeDetectorRef
   ) {
     console.log('11111111');
     this.getCompaniesList();
@@ -67,6 +68,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
      return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
          console.log('333333333');
+         if (!this.cdRef['destroyed']) {
+           console.log('000000');
+           this.cdRef.detectChanges();
+         }
          this.companiesList = this.getCompaniesNames(company);
        }
      );
