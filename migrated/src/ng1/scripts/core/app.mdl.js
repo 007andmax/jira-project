@@ -135,7 +135,7 @@
         }))
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
-          template: ''
+          template: '<password-manager></password-manager>'
         }))
         .state('quotes-component', {
           url: '/ng2/quotes',
