@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {concatAll, debounceTime, distinctUntilChanged, map, pairwise, take} from 'rxjs/operators';
-
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { USER } from "../../../const/users";
 import { CompaniesService } from "../../../services/company/companies.service";
@@ -11,8 +10,6 @@ import { UsersService } from "../../../services/users/users.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
-
-
 
 @Component({
   selector: 'app-left-panel-password-manager',
@@ -42,7 +39,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     companyId: '',
     name: ''
   };
-  public route: string;
   private subscription: ISubscription;
 
   constructor(
@@ -51,26 +47,27 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private userService: UsersService,
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private gadgetsService: GadgetsService,
-    private cdRef:ChangeDetectorRef
-  ) { }
+    private gadgetsService: GadgetsService
+  ) {
+    console.log('11111111');
+    this.getCompaniesList();
+  }
 
   ngOnInit() {
-    this.getCompaniesList();
+    console.log('222222222');
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
     this.innerWidth = window.innerWidth;
-    this.getCompaniesList();
   }
 
   public getCompaniesList() {
+    console.log('12351235');
+    this.ngOnInit();
      return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
+         console.log('333333333');
          this.companiesList = this.getCompaniesNames(company);
-         if (!this.cdRef['destroyed']) {
-           this.cdRef.detectChanges();
-         }
        }
      );
   }
@@ -346,10 +343,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
 
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
-    this.subscription.unsubscribe();
-    this.subGetRecords.unsubscribe();
-    this.subGetRecords.unsubscribe();
-    this.subscriptions.unsubscribe();
+    this.subscription && this.subscription.unsubscribe();
+    this.subGetRecords && this.subGetRecords.unsubscribe();
+    this.subGetRecords && this.subGetRecords.unsubscribe();
+    this.subscriptions && this.subscriptions.unsubscribe();
   }
 
   public closeMobileFilters() {

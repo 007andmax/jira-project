@@ -460,14 +460,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
-    this.subShowAddForm.unsubscribe();
-    this.subHideAddForm.unsubscribe();
-    this.subGetGadgets.unsubscribe();
-    this.subGetAllUsers.unsubscribe();
-    this.subSaveEditRecord.unsubscribe();
-    this.subSaveRecord.unsubscribe();
-    this.subGetDevices.unsubscribe();
-    this.subGetCompaniesList.unsubscribe();
+    this.subShowAddForm && this.subShowAddForm.unsubscribe();
+    this.subHideAddForm && this.subHideAddForm.unsubscribe();
+    this.subGetGadgets && this.subGetGadgets.unsubscribe();
+    this.subGetAllUsers && this.subGetAllUsers.unsubscribe();
+    this.subSaveEditRecord && this.subSaveEditRecord.unsubscribe();
+    this.subSaveRecord && this.subSaveRecord.unsubscribe();
+    this.subGetDevices && this.subGetDevices.unsubscribe();
+    this.subGetCompaniesList && this.subGetCompaniesList.unsubscribe();
   }
 
   showHistory($event) {

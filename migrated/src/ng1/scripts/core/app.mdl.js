@@ -135,19 +135,19 @@
         }))
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
-          template: '<password-manager></password-manager>'
+          template: ''
         }))
         .state('quotes-component', {
           url: '/ng2/quotes',
-          template: '<quotes-component></quotes-component>'
+          template: ''
         })
         .state('quote-create-component', {
           url: '/ng2/quotes/quote-create',
-          template: '<quote-create-component></quote-create-component>'
+          template: ''
         })
         .state('quote-preview-component', {
           url: '/ng2/quotes/quote-preview',
-          template: '<quote-preview-component></quote-create-component>'
+          template: ''
         })
         .state('accounting', waitForServices({
           url: '/accounting',

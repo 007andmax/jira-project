@@ -13,9 +13,7 @@ export class QuoteCreateComponent {
 
   @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
 
-  constructor() {
-    console.log('123512351235');
-  }
+  constructor() {}
 
   /**
    * Create quote and save

@@ -1,7 +1,8 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import {EventEmitter, Injectable, NgZone} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import {Subject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,9 @@ export class CompaniesService {
 
   getCompaniesList() {
     return this.http.get(this.apiUrl + 'company/clients').subscribe((response)=> {
+      console.log(response, 'RES');
       this.clientsCompany.next(response);
+      console.log(1, 'RES');
     })
   }
 
