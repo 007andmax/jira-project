@@ -97,7 +97,6 @@
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
           if (newChange.action == 'INVOICE_SAVED') {
-            console.log(newChange, 'newChange');
             $rootScope.$emit('receivableInvoice', newChange);
 
             var invoice = Utils.findById(data.list, newChange.data.id);
@@ -134,9 +133,7 @@
             }
 
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
-            console.log(newChange, '1111111');
             $rootScope.$emit('receivableInvoicePayment', newChange);
-            console.log('22222222');
 
 
           } else if (newChange.action === 'INVOICE_ROLLBACK') {

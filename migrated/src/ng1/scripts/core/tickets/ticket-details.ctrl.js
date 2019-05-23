@@ -626,12 +626,10 @@
                   if ($rootScope.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
-                    console.log(1);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   }else {
-                    console.log(2);
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;

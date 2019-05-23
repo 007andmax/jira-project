@@ -122,7 +122,6 @@
       function deletePayment(id) {
         $http.put('/payments/delete?paymentId=' + id)
           .then(function() {
-            console.log(res, 'RES');
             if (callback) callback(res)
           })
       }
