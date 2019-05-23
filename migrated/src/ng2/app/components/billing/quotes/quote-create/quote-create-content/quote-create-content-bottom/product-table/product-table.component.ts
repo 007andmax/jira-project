@@ -12,6 +12,7 @@ export class ProductTableComponent implements OnInit {
 
   @Input() set itemsArray(value) {
     this.itemsListArray = value;
+    console.log(value);
     this.quoteStateService.setItemArray(this.itemsListArray);
     this.setDropDownArray();
   };
@@ -20,6 +21,7 @@ export class ProductTableComponent implements OnInit {
   public productList = [];
   public servicesList = [];
   public isDropDownShow = [];
+  public markups = [];
 
   constructor(
     private quoteStateService: QuoteStateService,
@@ -39,7 +41,10 @@ export class ProductTableComponent implements OnInit {
   setDropDownArray() {
     this.isDropDownShow = new Array(this.itemsListArray.length);
     this.isDropDownShow.map((item) => item = false );
-    console.log(this.isDropDownShow, '135123');
+    this.markups = new Array(this.itemsListArray.length);
+    console.log(this.itemsListArray.length,'murkups');
+    this.markups.map((item) => item = 0 );
+    console.log(this.markups,'murkups');
   }
 
   public getPrice(cost, count, tax) {
@@ -73,7 +78,6 @@ export class ProductTableComponent implements OnInit {
     value && this.quoteService.getServiceList(value.id).subscribe((res: any) => {
       return this.servicesList = res
     });
-    console.log(this.productList,'productList');
   }
 
   public setItem(item, index, type) {
@@ -89,6 +93,22 @@ export class ProductTableComponent implements OnInit {
 
   public getMarkup(item) {
     return item.hasOwnProperty('markup');
+  }
+
+
+  public changeMarkup(value, index) {
+    const item = this.itemsListArray[index];
+    this.itemsListArray[index].sale =  Math.round((value * item.cost / 100 + item.cost))
+  }
+
+  public changeSales(value, index) {
+    const item = this.itemsListArray[index];
+    this.itemsListArray[index].markup =  Math.round((value - item.cost)/item.cost * 100);
+  }
+
+  public changeCost(value, index) {
+    const item = this.itemsListArray[index];
+    this.itemsListArray[index].markup =  Math.round((item.sale - value)/value * 100);
   }
 
 }

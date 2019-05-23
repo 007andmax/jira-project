@@ -23,9 +23,7 @@ export class CompaniesService {
 
   getCompaniesList() {
     return this.http.get(this.apiUrl + 'company/clients').subscribe((response)=> {
-      console.log(response, 'RES');
       this.clientsCompany.next(response);
-      console.log(1, 'RES');
     })
   }
 

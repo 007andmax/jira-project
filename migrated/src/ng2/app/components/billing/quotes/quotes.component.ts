@@ -126,7 +126,7 @@ export class QuotesComponent implements OnInit {
             'success-status'
   }
 
-  goToCreate(){
+  goToCreate() {
     this.quoteStateService.goToCreate();
   }
 

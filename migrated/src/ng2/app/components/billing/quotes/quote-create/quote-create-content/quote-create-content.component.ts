@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DateService } from "../../../../../services/date/date.service";
 import { CompaniesService } from "../../../../../services/company/companies.service";
 import { QuoteService } from "../../../../../services/quote/quote.service";
-import { map } from "rxjs/operators";
 import { QuoteStateService } from "../quote-state.service";
 
 /**
@@ -78,7 +77,6 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   saveAndContinue() {
     const isFormReady = this.quoteStateService.getType();
-    console.log(isFormReady, 'isFormReady');
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
         this.quoteStateService.goToQuote();

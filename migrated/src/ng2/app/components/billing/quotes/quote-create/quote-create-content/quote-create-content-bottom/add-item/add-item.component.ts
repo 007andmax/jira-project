@@ -58,7 +58,7 @@ export class AddItemComponent implements OnInit {
     if (this.type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
-      item = {...item, ...{quantity: 1, markup: ''}};
+      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
     }
     this.selectedServiceItem.emit(item);
     this.isDropDownShow = false;
@@ -79,6 +79,11 @@ export class AddItemComponent implements OnInit {
     this.quoteStateService.validateForm.subscribe((res) => {
       this.isFormValid = !res;
     })
+  }
+
+  public setMarkups(item) {
+    if (item.sale > 0 && item.cost > 0 )
+      return Math.round((item.sale - item.cost)/item.cost* 100);
   }
 
 }
