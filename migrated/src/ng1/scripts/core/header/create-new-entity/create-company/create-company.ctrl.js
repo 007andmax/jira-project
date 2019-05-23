@@ -481,7 +481,7 @@
 
             for (var error in form.$error) {
               var subForm = form.$error[error][0];
-              $scope.setCurrentStep(subForm.$name.replace('Form', ''));
+              subForm && $scope.setCurrentStep(subForm.$name.replace('Form', ''));
             }
           }
 
