@@ -12,7 +12,6 @@ export class ProductTableComponent implements OnInit {
 
   @Input() set itemsArray(value) {
     this.itemsListArray = value;
-    console.log(value);
     this.quoteStateService.setItemArray(this.itemsListArray);
     this.setDropDownArray();
   };
@@ -42,13 +41,11 @@ export class ProductTableComponent implements OnInit {
     this.isDropDownShow = new Array(this.itemsListArray.length);
     this.isDropDownShow.map((item) => item = false );
     this.markups = new Array(this.itemsListArray.length);
-    console.log(this.itemsListArray.length,'murkups');
     this.markups.map((item) => item = 0 );
-    console.log(this.markups,'murkups');
   }
 
   public getPrice(cost, count, tax) {
-    return Math.floor(this.quoteStateService.getPrice(cost, count, tax));
+    return this.quoteStateService.getPrice(cost, count, tax);
   }
 
   public getTaxPrice(cost, count, tax) {
@@ -62,8 +59,7 @@ export class ProductTableComponent implements OnInit {
 
   public changedQuantity(value, index) {
     this.itemsListArray[index].quantity = value;
-    this.changedProductItemsArray.next(this.itemsListArray);
-    this.quoteStateService.setItemArray(this.itemsListArray);
+    this.updateItemsArray();
   }
 
   public toggleShowDropDown(i) {
@@ -97,22 +93,37 @@ export class ProductTableComponent implements OnInit {
 
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].sale =  Math.round((value * item.cost / 100 + item.cost))
+    this.itemsListArray[index].sale =  Math.round((value * item.cost / 100 + item.cost));
+    this.itemsListArray[index].markup = value;
+    this.updateItemsArray();
   }
 
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].markup =  Math.round((value - item.cost)/item.cost * 100);
+    this.itemsListArray[index].sales = value;
+    this.updateItemsArray();
   }
 
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].markup =  Math.round((item.sale - value)/value * 100);
+    if (this.getMarkup(this.itemsListArray[index])) {
+      this.itemsListArray[index].markup =  Math.round((item.sale - value)/value * 100);
+      this.itemsListArray[index].cost = value;
+    } else {
+      this.itemsListArray[index].rate = value;
+    }
+    this.updateItemsArray();
   }
 
   public setMarkups(item) {
     if (item.sale > 0 && item.cost > 0 )
       return Math.round((item.sale - item.cost)/item.cost* 100);
+  }
+
+  updateItemsArray() {
+    this.changedProductItemsArray.next(this.itemsListArray);
+    this.quoteStateService.setItemArray(this.itemsListArray);
   }
 
 }

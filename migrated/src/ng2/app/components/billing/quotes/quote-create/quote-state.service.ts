@@ -27,7 +27,15 @@ export class QuoteStateService {
   }
 
   public getPrice(cost, count, tax) {
-    return tax ? (((tax.rate)/100)*cost + cost)  * count : cost  * count;
+    let price = 0;
+    if (tax && tax.rate) {
+      console.log(1);
+      price = ((count * cost) * (tax.rate)/100 + (cost * count));
+    } else {
+      price = cost  * count
+    }
+    console.log(price);
+    return price;
   }
 
   public getTaxPrice(cost, count, tax) {
