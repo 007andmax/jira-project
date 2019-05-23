@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {QuoteStateService} from "../../quote-state.service";
 import {QuoteService} from "../../../../../../services/quote/quote.service";
 
