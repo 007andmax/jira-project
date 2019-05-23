@@ -140,11 +140,12 @@
     }
 
     RealTimeService.subscribe('https://dev.quicktech.com/company', serviceScope, function (newChange) {
+      console.log(newChange, 'NEWCHANNGE');
       if (!initialized) {
         return;
       }
+      console.log('1111111NEWCHANNGE');
 
-      console.log(newChange, 'NEWCHANNGE');
 
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
