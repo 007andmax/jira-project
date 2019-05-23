@@ -84,7 +84,7 @@ export class ProductTableComponent implements OnInit {
     if (type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
-      item = {...item, ...{quantity: 1, markup: ''}};
+      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
     }
     this.itemsListArray[index] = item;
     this.changedProductItemsArray.next(this.itemsListArray);
@@ -94,7 +94,6 @@ export class ProductTableComponent implements OnInit {
   public getMarkup(item) {
     return item.hasOwnProperty('markup');
   }
-
 
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
@@ -109,6 +108,11 @@ export class ProductTableComponent implements OnInit {
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].markup =  Math.round((item.sale - value)/value * 100);
+  }
+
+  public setMarkups(item) {
+    if (item.sale > 0 && item.cost > 0 )
+      return Math.round((item.sale - item.cost)/item.cost* 100);
   }
 
 }
