@@ -139,14 +139,17 @@
       }
     }
 
-    RealTimeService.subscribe('https://dev.quicktech.com/company', serviceScope, function (newChange) {
+    RealTimeService.subscribe('/company', serviceScope, function (newChange) {
+      console.log(newChange, 'NEWCHANNGE');
       if (!initialized) {
         return;
       }
+      console.log('1111111NEWCHANNGE');
+
 
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
-
+        console.log('aaaaa');
         var company = getOneById(companyId);
 
         if (companyId === getCurrentCompany().id) {
@@ -173,6 +176,7 @@
           }
 
           if (callbackForSavedCompanies[companyId]) {
+            console.log('bbbbbb');
             callbackForSavedCompanies[companyId](companyId);
           }
         }

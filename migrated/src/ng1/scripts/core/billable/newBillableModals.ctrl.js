@@ -49,7 +49,6 @@
           var elem = $rootScope.uploadedReceivable.list.find(function(inv) {
             return inv.number === el;
           });
-          console.log($rootScope.uploadedReceivable.list, '$rootScope.uploadedReceivable.list');
 
           var sum = elem && elem.sum;
 

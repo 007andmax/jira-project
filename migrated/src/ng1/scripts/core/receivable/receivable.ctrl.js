@@ -101,15 +101,12 @@
         $scope.sortForReadedAtReverse = false;
 
         $scope.$watch('invoiceFilterCompany', function(value){
-          console.log(value);
           if(value && value.length > 1) {
-            console.log(1);
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
             $scope.getInvoices($scope.data);
 
           } else if(value === undefined) {
-            console.log(2);
             $scope.resetAllFiltersForSort();
             $scope.data = $scope.returnData();
             $scope.getInvoices($scope.data);

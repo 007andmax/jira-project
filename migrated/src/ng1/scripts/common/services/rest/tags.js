@@ -101,7 +101,7 @@
           }
 
           RealTimeService.subscribe('/companyTagManagement', scope, function (newChange) {
-            // console.log(newChange.data, "NEW CHANGE TO COMPANY TAGS FROM /companytamanagement")
+
 
 
             $rootScope.createdCompanyTag = newChange.data;
