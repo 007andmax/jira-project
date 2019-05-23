@@ -45,16 +45,16 @@ export class ProductTableComponent implements OnInit {
   }
 
   public getPrice(cost, count, tax) {
-    return this.quoteStateService.getPrice(cost, count, tax);
+    return this.roundToTwo(this.quoteStateService.getPrice(cost, count, tax));
   }
 
   public getTaxPrice(cost, count, tax) {
-    return Math.floor(this.quoteStateService.getTaxPrice(cost, count, tax));
+    return this.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
   public deleteItem(index) {
     this.itemsListArray.splice(index, 1);
-    this.quoteStateService.setItemArray(this.itemsListArray);
+    this.updateItemsArray();
   }
 
   public changedQuantity(value, index) {
@@ -93,14 +93,14 @@ export class ProductTableComponent implements OnInit {
 
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].sale =  Math.round((value * item.cost / 100 + item.cost));
+    this.itemsListArray[index].sale =  this.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
     this.updateItemsArray();
   }
 
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].markup =  Math.round((value - item.cost)/item.cost * 100);
+    this.itemsListArray[index].markup =  this.roundToTwo((value - item.cost)/item.cost * 100);
     this.itemsListArray[index].sales = value;
     this.updateItemsArray();
   }
@@ -108,7 +108,7 @@ export class ProductTableComponent implements OnInit {
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
-      this.itemsListArray[index].markup =  Math.round((item.sale - value)/value * 100);
+      this.itemsListArray[index].markup =  this.roundToTwo((item.sale - value)/value * 100);
       this.itemsListArray[index].cost = value;
     } else {
       this.itemsListArray[index].rate = value;
@@ -118,12 +118,16 @@ export class ProductTableComponent implements OnInit {
 
   public setMarkups(item) {
     if (item.sale > 0 && item.cost > 0 )
-      return Math.round((item.sale - item.cost)/item.cost* 100);
+      return this.roundToTwo((item.sale - item.cost)/item.cost* 100);
   }
 
-  updateItemsArray() {
+  public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);
+  }
+
+  public roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
   }
 
 }
