@@ -144,9 +144,11 @@
         return;
       }
 
+      console.log(newChange, 'NEWCHANNGE');
+
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
-
+        console.log('aaaaa');
         var company = getOneById(companyId);
 
         if (companyId === getCurrentCompany().id) {
@@ -173,6 +175,7 @@
           }
 
           if (callbackForSavedCompanies[companyId]) {
+            console.log('bbbbbb');
             callbackForSavedCompanies[companyId](companyId);
           }
         }
