@@ -139,7 +139,7 @@
       }
     }
 
-    RealTimeService.subscribe('https://dev.quicktech.com/company', serviceScope, function (newChange) {
+    RealTimeService.subscribe('/company', serviceScope, function (newChange) {
       console.log(newChange, 'NEWCHANNGE');
       if (!initialized) {
         return;
