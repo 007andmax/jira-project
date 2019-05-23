@@ -91,7 +91,8 @@ export class QuotesComponent implements OnInit {
 
   public selectClient(value) {
     this.refreshQuoteAndPage();
-    this.dataToSend.company = (value && value.item) ? value.item.id : null;
+    console.log(value,'value');
+    this.dataToSend.company = (value && value.item) ? value.item.name : null;
     this.getQuotes();
   }
 
