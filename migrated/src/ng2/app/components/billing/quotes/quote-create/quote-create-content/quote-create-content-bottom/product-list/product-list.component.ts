@@ -15,7 +15,9 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.itemList.sort((a,b) => (a.description > b.description) ? 1 : ((b.description > a.description) ? -1 : 0));
+  }
 
   setProduct(productItem) {
     this.selectedProductItem.next(productItem);
