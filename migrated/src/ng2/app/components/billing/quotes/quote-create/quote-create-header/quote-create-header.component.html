@@ -3,9 +3,17 @@
   <div class="quote-create__header--actions">
     <button class="btn-new disabled" (click)="returnToQuotes()">Back</button>
     <button class="btn-new disabled">Preview</button>
-    <button class="btn-new btn-success" (click)="saveQuotes()">
-      Save and Continue
-      <i class="report-caret-icon-white"></i>
-    </button>
+    <div class="btn-group mr-3">
+      <button type="button" class="btn btn-primary" (click)="saveQuotes()">Save and Continue</button>
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem (click)="convertToInvoice()">Convert to Invoice</button>
+          <button ngbDropdownItem (click)="convertToTicket()">Convert to Ticket</button>
+          <button ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

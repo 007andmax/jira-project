@@ -20,7 +20,27 @@ export class QuoteCreateComponent {
    */
   public saveAndContinue() {
     this.quoteCreateContentComponent.saveAndContinue();
+  }
 
+  /**
+   * Create quote and approve
+   */
+  public approve() {
+    this.quoteCreateContentComponent.approveQuote();
+  }
+
+  /**
+   * Create quote and convert to invoice
+   */
+  public toInvoice() {
+    this.quoteCreateContentComponent.convertToInvoice();
+  }
+
+  /**
+   * Create quote and convert to ticket
+   */
+  public toTicket() {
+    this.quoteCreateContentComponent.convertToTicket();
   }
 
 }

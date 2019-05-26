@@ -104,6 +104,27 @@ export class QuoteService {
     })
   }
 
+  convertToInvoice(client_company_id, quote_id) {
+    const company = this.quoteStateService.getClient();
+    return this.http.post(this.apiUrl +
+      `saleQuotes/convertToInvoice?companyId=${client_company_id}
+      &billTo=${company.companyInfo.addresses[0].id}
+      &shipTo=${company.companyInfo.addresses[0].id}`,
+      [quote_id])
+  }
+
+  convertToTicket(client_company_id, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/convertToInvoice?companyId=${client_company_id}`,
+      [quote_id])
+  }
+
+  approveQuote(client_company_id, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/approveQuote?companyId=${client_company_id}`, [quote_id]
+    )
+  }
+
   getSortType(type) {
     switch (type) {
       case 'number':

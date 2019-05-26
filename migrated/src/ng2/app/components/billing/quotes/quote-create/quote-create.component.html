@@ -1,5 +1,10 @@
 <!--<app-left-panel-billing [ngClass]="{'show': isMobileFilterShowing }"></app-left-panel-billing>-->
 <div class="quote-create">
-  <app-quote-create-header (saveAndContinue)="saveAndContinue()"></app-quote-create-header>
+  <app-quote-create-header
+    (saveAndContinue)="saveAndContinue()"
+    (approve)="approve()"
+    (toInvoice)="toInvoice()"
+    (toTicket)="toTicket()"
+  ></app-quote-create-header>
   <app-quote-create-content #quoteCreateContentComponent></app-quote-create-content>
 </div>

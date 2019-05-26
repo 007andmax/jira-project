@@ -29,6 +29,7 @@ export class QuoteCreateContentTopComponent {
    * @params selected Client
    */
   public selectClient(selectClient) {
+    console.log(selectClient, 'selectClient');
     this.selectedItem.next(selectClient);
     this.quoteStateService.setClient(selectClient);
   }

@@ -12,6 +12,9 @@ import { QuoteStateService } from "../quote-state.service";
 export class QuoteCreateHeaderComponent {
 
   @Output() saveAndContinue = new EventEmitter<string>();
+  @Output() approve = new EventEmitter<string>();
+  @Output() toInvoice = new EventEmitter<string>();
+  @Output() toTicket = new EventEmitter<string>();
 
   constructor(
     private quoteStateService: QuoteStateService
@@ -22,6 +25,27 @@ export class QuoteCreateHeaderComponent {
    */
   public saveQuotes() {
     this.saveAndContinue.next();
+  }
+
+  /**
+   * Emit approve quotes to QuoteCreate component
+   */
+  public approveQuote() {
+    this.approve.next();
+  }
+
+  /**
+   * Emit convert to invoice to QuoteCreate component
+   */
+  public convertToInvoice() {
+    this.toInvoice.next();
+  }
+
+  /**
+   * Emit convert to ticket to QuoteCreate component
+   */
+  public convertToTicket() {
+    this.toTicket.next();
   }
 
   public returnToQuotes() {

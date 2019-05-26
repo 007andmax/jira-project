@@ -29,12 +29,10 @@ export class QuoteStateService {
   public getPrice(cost, count, tax) {
     let price = 0;
     if (tax && tax.rate) {
-      console.log(1);
       price = ((count * cost) * (tax.rate)/100 + (cost * count));
     } else {
       price = cost  * count
     }
-    console.log(price);
     return price;
   }
 

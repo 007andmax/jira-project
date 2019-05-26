@@ -79,9 +79,52 @@ export class QuoteCreateContentComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-        this.quoteStateService.goToQuote();
+        console.log(res, 'RES');
         })
       : this.quoteStateService.emitValidation();
+  }
+
+  /**
+   * Create quote and convert to invoice
+   */
+  convertToInvoice() {
+    const isFormReady = this.quoteStateService.getType();
+    isFormReady ?
+      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+        console.log(res, 'RES');
+        this.quoteService.convertToInvoice(res['company'].id, res['id']).subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        });
+      })
+      : this.quoteStateService.emitValidation();
+  }
+
+  /**
+   * Create quote and convert to ticket
+   */
+  convertToTicket() {
+    const isFormReady = this.quoteStateService.getType();
+    isFormReady ?
+      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+        console.log(res, 'RES');
+        this.quoteService.convertToTicket(res['company'].id, res['id']).subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        });
+      })
+      : this.quoteStateService.emitValidation();
+  }
+
+  approveQuote() {
+    const isFormReady = this.quoteStateService.getType();
+    isFormReady ?
+      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+        console.log(res, 'RES');
+        this.quoteService.approveQuote(res['company'].id, res['id']).subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        });
+      })
+      : this.quoteStateService.emitValidation();
+
   }
 
   /**
