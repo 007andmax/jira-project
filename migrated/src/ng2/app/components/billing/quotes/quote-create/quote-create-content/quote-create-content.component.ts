@@ -106,7 +106,6 @@ export class QuoteCreateContentComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-        console.log(res, 'RES');
         this.quoteService.convertToTicket(res['company'].id, res['id']).subscribe((res) => {
           this.quoteStateService.goToQuote();
         });
@@ -118,7 +117,6 @@ export class QuoteCreateContentComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-        console.log(res, 'RES');
         this.quoteService.approveQuote(res['company'].id, res['id']).subscribe((res) => {
           this.quoteStateService.goToQuote();
         });

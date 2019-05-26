@@ -24,7 +24,7 @@
                   (selectedServiceItem)="addItemToItemsArray($event)"></app-add-item>
     <div class="quote-content-body--bottom row">
       <div class="col-md-11 text-right">Sub Total Services</div>
-      <div class="col-md-1 text-right">{{subTotalServices | currency}}</div>
+      <div class="col-md-1 text-right">${{subTotalServices | currency}}</div>
       <div class="col-md-11 text-right">Sub Total Products</div>
       <div class="col-md-1 text-right">{{subTotalProducts | currency}}</div>
       <div class="col-md-11 text-right">Taxes</div>

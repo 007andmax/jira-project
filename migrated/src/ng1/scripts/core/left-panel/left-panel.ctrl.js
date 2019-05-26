@@ -1055,7 +1055,6 @@
             }
 
             $scope.openedCategory = getOpenedCategory(value);
-            console.log($scope.openedCategory, 'openedCategory');
 
             if ($scope.openedCategory) {
               document.title = $scope.userReadable($scope.openedCategory);
