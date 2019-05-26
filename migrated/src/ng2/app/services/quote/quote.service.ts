@@ -115,7 +115,7 @@ export class QuoteService {
 
   convertToTicket(client_company_id, quote_id) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/convertToInvoice?companyId=${client_company_id}`,
+      `saleQuotes/convertToTicket?companyId=${client_company_id}`,
       [quote_id])
   }
 
