@@ -71,13 +71,16 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public resolveTotal() {
     this.productsArray.map((item) => {
       const product = item.item;
-      this.subTotalProducts += product.sale * product.quantity
+      this.subTotalProducts += product.sale * product.quantity;
+      this.quoteStateServices.setSubTotalProducts(this.subTotalProducts);
     });
     this.servicesArray.map((item) => {
       const service = item.item;
-      this.subTotalServices += service.rate * service.quantity
+      this.subTotalServices += service.rate * service.quantity;
+      this.quoteStateServices.setSubTotalServices(this.subTotalServices);
     });
     this.total = this.getTotal();
+    this.quoteStateServices.setTotal(this.total);
   }
 
   public resolveTaxes() {
@@ -85,12 +88,16 @@ export class QuoteCreateContentBottomComponent implements OnInit {
       const taxes = item && item.taxes[0];
       const product = item;
       if (taxes) {
-        this.totalTaxes += (((taxes.rate)/100) * (product.rate || product.sale)) * product.quantity
+        this.totalTaxes += (((taxes.rate)/100) * (product.rate || product.sale)) * product.quantity;
+        this.quoteStateServices.setTotalTaxes(this.totalTaxes);
       }
     });
   }
 
   public getTotal() {
+    console.log(this.totalTaxes);
+    console.log(this.subTotalServices);
+    console.log(this.subTotalProducts);
     return this.totalTaxes + this.subTotalServices + this.subTotalProducts
   }
 

@@ -63,4 +63,11 @@ export class QuoteCreateHeaderComponent {
     this.quoteStateService.goToQuote();
   }
 
+  /**
+   * go to quotes state
+   */
+  public goToState(state) {
+    this.quoteStateService.goToState(state);
+  }
+
 }

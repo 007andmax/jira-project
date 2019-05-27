@@ -11,6 +11,10 @@ export class QuoteStateService {
   public validateForm: EventEmitter<any> = new EventEmitter();
   public quoteNumber: number;
   public state;
+  public subTotalProducts = 0;
+  public subTotalServices = 0;
+  public totalTaxes = 0;
+  public total = 0;
 
   constructor(
     @Inject('$state') $state: any
@@ -78,6 +82,34 @@ export class QuoteStateService {
 
   public goToState(state) {
     this.state.go(state);
+  }
+
+  getQuote() {
+    return ({
+      quoteNumber: this.quoteNumber,
+      itemsArray: this.itemsArray,
+      client: this.client,
+      subTotalProducts: this.subTotalProducts,
+      subTotalServices: this.subTotalServices,
+      totalTaxes: this.totalTaxes,
+      total: this.total
+    })
+  }
+
+  public setSubTotalProducts(value) {
+    this.subTotalProducts = value;
+  }
+
+  public setTotalTaxes(value) {
+    this.totalTaxes = value;
+  }
+
+  public setTotal(value) {
+    this.total = value;
+  }
+
+  public setSubTotalServices(value) {
+    this.subTotalServices = value;
   }
 
 }

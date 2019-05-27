@@ -2,7 +2,7 @@
   <h1>Create Quote</h1>
   <div class="quote-create__header--actions">
     <button class="btn-new disabled" (click)="returnToQuotes()">Back</button>
-    <button class="btn-new disabled">Preview</button>
+    <button class="btn-new" (click)="goToState('quote-preview-component')">Preview</button>
     <div class="btn-group mr-3">
       <button type="button" class="btn btn-primary" (click)="saveQuotes()">Save and Continue</button>
       <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">

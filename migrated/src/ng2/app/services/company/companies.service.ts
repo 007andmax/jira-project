@@ -32,4 +32,8 @@ export class CompaniesService {
     this.filteredCompanyUpdate.emit(company);
   }
 
+  getTechCompany() {
+    return this.http.get(this.apiUrl + '/company/current');
+  }
+
 }
