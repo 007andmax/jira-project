@@ -48,6 +48,9 @@ export class QuoteCreateHeaderComponent {
     this.toTicket.next();
   }
 
+  /**
+   * go to quotes list
+   */
   public returnToQuotes() {
     this.quoteStateService.goToQuote();
   }

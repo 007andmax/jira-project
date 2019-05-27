@@ -3,6 +3,9 @@ import { QuoteStateService } from "../../../quote-state.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
 
+/**
+ * Product table component
+ */
 @Component({
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
@@ -33,6 +36,9 @@ export class ProductTableComponent implements OnInit {
     this.setDropDownArray();
   }
 
+  /**
+   * Hide dropdown for services and products
+   */
   hideDropDown(i) {
     this.isDropDownShow[i] = false ;
   }

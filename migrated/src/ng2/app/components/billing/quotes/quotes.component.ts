@@ -1,11 +1,11 @@
 import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+
 import { QuoteService } from '../../../services/quote/quote.service';
 import { CompaniesService } from '../../../services/company/companies.service';
 import { QUOTE_STATUS } from '../../../const/quote-status';
 import { DateService } from "../../../services/date/date.service";
-import { Router } from "@angular/router";
-import {QuoteStateService} from "./quote-create/quote-state.service";
+import { QuoteStateService } from "./quote-create/quote-state.service";
 
 /**
  * Password quotes component
@@ -34,6 +34,14 @@ export class QuotesComponent implements OnInit {
   };
   public infiniteScrollDisabled = false;
 
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {QuoteService} quoteServices to work with api
+   * @param {CompaniesService} companiesService Service to work with companies api
+   * @param {DateService} dateService Service to work with date
+   * @param {ChangeDetectorRef} cdRef Service to work with date
+   * @param {QuoteStateService} quoteStateService to work quote state
+   */
   constructor(
     private quoteServices: QuoteService,
     private companiesService: CompaniesService,
@@ -50,7 +58,10 @@ export class QuotesComponent implements OnInit {
     }
   }
 
-  getQuotes() {
+  /**
+   *
+   */
+  public getQuotes() {
     this.quoteServices.getQuotes(this.dataToSend).subscribe((res: any) => {
       this.quotesList = [...this.quotesList, ...res];
       this.dataToSend.page += 1;
@@ -58,44 +69,67 @@ export class QuotesComponent implements OnInit {
     })
   }
 
-  getDate(value) {
+  /**
+   *
+   */
+  public getDate(value) {
     return this.dateService.getFormatDate(new Date(value));
   }
 
-  onScroll() {
+  /**
+   *
+   */
+  public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getQuotes();
   }
 
+  /**
+   *
+   */
   public sortBy(value) {
     this.refreshQuoteAndPage();
     this.dataToSend.type = value;
     this.getQuotes()
   }
 
+  /**
+   *
+   */
   public filterByDate(value) {
     this.refreshQuoteAndPage();
     this.setDate(value);
     this.getQuotes()
   }
 
+  /**
+   *
+   */
   private setDate(value) {
     this.dataToSend.startDate = value.start;
     this.dataToSend.endDate = value.end;
   }
 
+  /**
+   *
+   */
   private refreshQuoteAndPage() {
     this.quotesList = [];
     this.dataToSend.page = 0;
   }
 
+  /**
+   *
+   */
   public selectClient(value) {
     this.refreshQuoteAndPage();
-    console.log(value,'value');
     this.dataToSend.company = (value && value.item) ? value.item.name : null;
     this.getQuotes();
   }
 
+  /**
+   *
+   */
   public setNumberEnter(event?) {
     if (event.key === "Enter") {
       this.dataToSend.number = this.searchNumber;
@@ -105,12 +139,18 @@ export class QuotesComponent implements OnInit {
 
   }
 
+  /**
+   *
+   */
   public setNumberOnBlur(event?) {
     this.dataToSend.number = this.searchNumber;
     this.refreshQuoteAndPage();
     this.getQuotes();
   }
 
+  /**
+   *
+   */
   public setStatus(item) {
     this.selectedStatus = item.name;
     this.dataToSend.status = item.type;
@@ -118,6 +158,9 @@ export class QuotesComponent implements OnInit {
     this.getQuotes();
   }
 
+  /**
+   * add status class for quotes
+   */
   public getClass(className) {
     return className === 'EXPIRED' || className === 'REFUSED' ? 'error-status' :
       className === 'READ' ? 'status-in-progress' :
@@ -126,6 +169,9 @@ export class QuotesComponent implements OnInit {
             'success-status'
   }
 
+  /**
+   * Go to create state
+   */
   goToCreate() {
     this.quoteStateService.goToCreate();
   }

@@ -81,7 +81,7 @@
       <div class="col-md-3 g-m">{{item.company.name}}</div>
       <div class="col-md-2">{{getDate(item.date)}}</div>
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>
-      <div class="col-md-1">{{item.totalAmount | currency | number : '1.2-2'}}</div>
+      <div class="col-md-1">{{item.totalAmount | currency}}</div>
       <div class="col-md-1">{{item.partialDeposit}}</div>
       <div class="col-md-1 df">
         <div class="quote-status" [ngClass]="getClass(item.status)"> {{item.status}}</div>
