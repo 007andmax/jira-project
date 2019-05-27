@@ -125,6 +125,10 @@ export class QuoteService {
     )
   }
 
+  downloadPdf(quote_id) {
+    return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`)
+  }
+
   getSortType(type) {
     switch (type) {
       case 'number':

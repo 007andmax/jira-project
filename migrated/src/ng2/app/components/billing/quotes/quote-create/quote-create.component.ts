@@ -43,4 +43,11 @@ export class QuoteCreateComponent {
     this.quoteCreateContentComponent.convertToTicket();
   }
 
+  /**
+   * Create quote and download pdf
+   */
+  public download() {
+    this.quoteCreateContentComponent.downloadPdf();
+  }
+
 }

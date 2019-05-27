@@ -107,7 +107,7 @@ export class ProductTableComponent implements OnInit {
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].markup =  this.roundToTwo((value - item.cost)/item.cost * 100);
-    this.itemsListArray[index].sales = value;
+    this.itemsListArray[index].sales = this.roundToTwo(value);
     this.updateItemsArray();
   }
 
@@ -115,9 +115,9 @@ export class ProductTableComponent implements OnInit {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup =  this.roundToTwo((item.sale - value)/value * 100);
-      this.itemsListArray[index].cost = value;
+      this.itemsListArray[index].cost = this.roundToTwo(value);
     } else {
-      this.itemsListArray[index].rate = value;
+      this.itemsListArray[index].rate = this.roundToTwo(value);
     }
     this.updateItemsArray();
   }
@@ -133,7 +133,7 @@ export class ProductTableComponent implements OnInit {
   }
 
   public roundToTwo(num) {
-    return +(Math.round(Number(num + 'e+2'))  + "e-2");
+    return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
   }
 
 }

@@ -122,6 +122,17 @@ export class QuoteCreateContentComponent implements OnInit {
         });
       })
       : this.quoteStateService.emitValidation();
+  }
+
+  public downloadPdf() {
+    const isFormReady = this.quoteStateService.getType();
+    isFormReady ?
+      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        });
+      })
+      : this.quoteStateService.emitValidation();
 
   }
 

@@ -15,6 +15,7 @@ export class QuoteCreateHeaderComponent {
   @Output() approve = new EventEmitter<string>();
   @Output() toInvoice = new EventEmitter<string>();
   @Output() toTicket = new EventEmitter<string>();
+  @Output() download = new EventEmitter<string>();
 
   constructor(
     private quoteStateService: QuoteStateService
@@ -46,6 +47,13 @@ export class QuoteCreateHeaderComponent {
    */
   public convertToTicket() {
     this.toTicket.next();
+  }
+
+  /**
+   * Emit download pdf to QuoteCreate component
+   */
+  public downloadPdf() {
+    this.download.next();
   }
 
   /**
