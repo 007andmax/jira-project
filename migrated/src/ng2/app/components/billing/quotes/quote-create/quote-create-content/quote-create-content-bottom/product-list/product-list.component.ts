@@ -14,14 +14,15 @@ export class ProductListComponent implements OnInit {
   @Output() selectedProductItem = new EventEmitter<any>();
   @Input() itemList: any;
 
-  constructor(
-    private productService: ProductService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     this.itemList.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    console.log(this.itemList, '1235123');
+
+    // this.itemList.map((item) => item.products.sort((a,b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
+    //   1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0))
+    // );
   }
 
   setProduct(productItem) {
