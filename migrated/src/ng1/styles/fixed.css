@@ -2133,7 +2133,9 @@ span.sort-span {
 }
 
 .btn.btn-new.btn-primary:hover,
-.btn-new.btn-primary:hover {
+.btn-new.btn-primary:hover,
+.btn.btn-new.btn-primary:active,
+.btn-new.btn-primary:active{
   color: #fff;
   background: #117ebf;
 }
@@ -2146,7 +2148,9 @@ span.sort-span {
 }
 
 .btn.btn-new.btn-success:hover,
-.btn-new.btn-success:hover {
+.btn-new.btn-success:hover,
+.btn.btn-new.btn-success:active,
+.btn-new.btn-success:active{
   color: #fff;
   background: #189947;
 }
@@ -2158,6 +2162,17 @@ span.sort-span {
   background: #edf2f6;
   color: #4f5f79;
   border: 1px solid #c4cbd5;
+}
+
+.btn.btn-new.disabled:hover,
+.btn-new.disabled:hover,
+.btn.btn-new.default:hover,
+.btn-new.default:hover,
+.btn.btn-new.disabled:active,
+.btn-new.disabled:active,
+.btn.btn-new.default:active,
+.btn-new.default:active{
+  background: #c4cbd5;
 }
 
 .btn.btn-new.default:hover,

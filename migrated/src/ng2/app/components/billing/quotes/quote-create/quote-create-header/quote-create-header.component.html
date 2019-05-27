@@ -2,16 +2,18 @@
   <h1>Create Quote</h1>
   <div class="quote-create__header--actions">
     <button class="btn-new disabled" (click)="returnToQuotes()">Back</button>
-    <button class="btn-new" (click)="goToState('quote-preview-component')">Preview</button>
-    <div class="btn-group mr-3">
-      <button type="button" class="btn btn-primary" (click)="saveQuotes()">Save and Continue</button>
-      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-        <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
+    <button class="btn-new disabled" (click)="goToState('quote-preview-component')">Preview</button>
+    <div class="btn-new btn-success df">
+      <button type="button" (click)="saveQuotes()">Save and Continue</button>
+      <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="dropdown-toggle-split" ngbDropdownToggle>
+          <i class="icn-sm pointer report-caret-icon-white"></i>
+        </button>
         <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem (click)="convertToInvoice()">Convert to Invoice</button>
-          <button ngbDropdownItem (click)="convertToTicket()">Convert to Ticket</button>
-          <button ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
-          <button ngbDropdownItem (click)="downloadPdf()">Download Pdf</button>
+          <button class="dropdown-item" ngbDropdownItem (click)="convertToInvoice()">Convert to Invoice</button>
+          <button class="dropdown-item" ngbDropdownItem (click)="convertToTicket()">Convert to Ticket</button>
+          <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
+          <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Download Pdf</button>
         </div>
       </div>
     </div>
