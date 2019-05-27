@@ -21,13 +21,13 @@
     <div class="quote-list--header">
       <div class="quote-list--header__top clearfix">
         <div class="col-md-5 pl-30">
-          <img src="https://i.ytimg.com/vi/wIAg8vvUzrQ/hqdefault.jpg" alt="logo"> // кратінка тех компанії
+          <img src="https://i.ytimg.com/vi/wIAg8vvUzrQ/hqdefault.jpg" alt="logo">
         </div>
-        <div class="col-md-7 text-right pr-30">
-          <h4 class="bold">Estimate #<span>{{quote && quote.quoteNumber}}</span></h4>
-          <p class="bold">Agent test</p>
-          <p>3673 th Street, Edmonton Alberta</p> // адрес техническої компанії
-          <p>780-903-8719</p> // номер телефона техническої компанії
+        <div class="col-md-7 text-right pr-30" *ngIf="company">
+          <h4 class="bold">Quote #<span>{{quote && quote.quoteNumber}}</span></h4>
+          <p class="bold">{{company.name}}</p>
+          <p>{{company.addresses[0].addresss}}</p>
+          <p *ngFor="let item of company.addresses[0].phoneNumbers">{{item.number}}</p>
         </div>
       </div>
       <div class="quote-list--header__bottom clearfix">
@@ -39,10 +39,6 @@
           <p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>
         </div>
         <div class="col-md-5 pr-30">
-          <p class="bold">
-            <span>568906</span>
-            Estimate Number
-          </p>
           <p class="bold">
             <span class="detail-sub">06 Nov 2018</span> // quote date
             Estimate Date

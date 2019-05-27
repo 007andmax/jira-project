@@ -21,7 +21,7 @@ export class QuotePreviewComponent implements OnInit {
 
   ngOnInit() {
     this.getQuoteInfo();
-    this.getCurrentUser();
+    this.getCurrentCompany();
     this.getItemsArray();
   }
 
@@ -29,8 +29,9 @@ export class QuotePreviewComponent implements OnInit {
     this.quote = this.quoteStateService.getQuote();
   }
 
-  public getCurrentUser() {
+  public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
+      console.log(res, 'ITEMS');
       return this.company = res;
     });
   }
