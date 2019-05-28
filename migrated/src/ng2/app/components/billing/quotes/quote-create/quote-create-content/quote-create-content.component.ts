@@ -79,7 +79,7 @@ export class QuoteCreateContentComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-        console.log(res, 'RES');
+        this.quoteStateService.goToQuote();
         })
       : this.quoteStateService.emitValidation();
   }
