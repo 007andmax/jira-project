@@ -93,7 +93,7 @@
         </div>
         <div class="clearfix">
           <div class="col-md-8 pl-30 notes">
-            Company’s Credit note policy is 15days will be consider from Invoice date generated.
+            {{quoteForCreate.selectedNote | json}}
           </div>
           <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
           <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{quote.totalTaxes | currency}}</div>
@@ -106,7 +106,7 @@
       </div>
       <div class="quote-list--footer__bottom clearfix">
         <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-        <div class="col-md-12 pl-30 notes">{{quoteForCreate.globalNote.line1}}</div>
+        <div class="col-md-12 pl-30 notes">{{getGlobalNote()}}</div>
       </div>
     </div>
   </div>

@@ -82,6 +82,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.isEditMode = true;
     this.selectedNote = note.item;
     this.selectedRegularNoteItem.next(this.selectedNote);
+    this.quoteStateService.setSelectedNote(note.item.line1);
   }
 
   /**
@@ -132,12 +133,14 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   setGlobalNote(value) {
     this.selectedGlobalNoteItem.next(value);
     this.quoteStateService.setGlobalNote(value);
+    console.log(value);
   }
 
   public showCreateNew(value) {
     this.selectedNote['line1'] = value;
     this.selectedNoteText = value;
     this.isShowCreateNew = true;
+    this.quoteStateService.setSelectedNote(value);
   }
 
 }

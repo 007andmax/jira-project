@@ -25,7 +25,8 @@ export class QuoteStateService {
     subTotalServices: '',
     totalTaxes: '',
     total: '',
-    globalNote: ''
+    globalNote: '',
+    selectedNote: ''
   };
 
 
@@ -140,5 +141,10 @@ export class QuoteStateService {
   public setGlobalNote(value) {
     this.quoteForCreate.globalNote = value;
   }
+
+  public setSelectedNote(value) {
+    console.log(value);
+      this.quoteForCreate.selectedNote = value;
+    }
 
 }

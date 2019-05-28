@@ -70,7 +70,14 @@ export class QuotePreviewComponent implements OnInit {
     } else {
       return ''
     }
+  }
 
+  public getGlobalNote() {
+    if (this.quoteForCreate.globalNote.hasOwnProperty('line1')) {
+      return this.quoteForCreate.globalNote.line1
+    } else {
+      return this.quoteForCreate.globalNote
+    }
   }
 
 }
