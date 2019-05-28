@@ -67,7 +67,7 @@ export class QuotePreviewComponent implements OnInit {
   public getFormatDate(date) {
     if (date) {
       date = `${date.year}/${date.month}/${date.day}`;
-      return this.dateService.getFormatToFilterDate(date);
+      return this.dateService.getInvoiceDate(date);
     } else {
       return ''
     }

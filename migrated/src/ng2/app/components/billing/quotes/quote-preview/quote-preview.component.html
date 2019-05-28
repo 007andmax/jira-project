@@ -67,7 +67,7 @@
       <div class="quote-list--item__content" *ngIf="itemsArray && itemsArray.length > 0">
         <div class="row" *ngFor="let item of itemsArray">
           <div class="col-md-2">{{item.name || item.description}}</div>
-          <div class="col-md-2">HP-3876 Multifunctional Printer with Wifi</div>
+          <div class="col-md-2">{{item.description}}</div>
           <div class="col-md-1">{{(item.sale || item.rate) | currency}}</div>
           <div class="col-md-1">{{item.quantity}}</div>
           <div class="col-md-1">

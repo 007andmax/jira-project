@@ -30,4 +30,8 @@ export class DateService {
     return moment(date).format('MM dd YYYY');
   }
 
+  public getInvoiceDate(date) {
+    return moment(date).format('DD MMM YYYY');
+  }
+
 }
