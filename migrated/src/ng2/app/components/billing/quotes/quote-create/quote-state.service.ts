@@ -15,6 +15,19 @@ export class QuoteStateService {
   public subTotalServices = 0;
   public totalTaxes = 0;
   public total = 0;
+  public quoteForCreate = {
+    startDate: '',
+    endDate: '',
+    quoteNumber: '',
+    itemsArray: '',
+    client: '',
+    subTotalProducts: '',
+    subTotalServices: '',
+    totalTaxes: '',
+    total: '',
+    globalNote: ''
+  };
+
 
   constructor(
     @Inject('$state') $state: any
@@ -110,6 +123,22 @@ export class QuoteStateService {
 
   public setSubTotalServices(value) {
     this.subTotalServices = value;
+  }
+
+  public setStartDate(value) {
+    this.quoteForCreate.startDate = value;
+  }
+
+  public setEndDate(value) {
+    this.quoteForCreate.endDate = value;
+  }
+
+  getQuoteCreate() {
+    return this.quoteForCreate;
+  }
+
+  public setGlobalNote(value) {
+    this.quoteForCreate.globalNote = value;
   }
 
 }

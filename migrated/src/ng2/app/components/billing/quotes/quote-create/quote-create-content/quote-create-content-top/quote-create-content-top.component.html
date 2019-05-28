@@ -16,6 +16,7 @@
                placeholder="yyyy-mm-dd"
                formControlName="startDate"
                name="dp"
+               (ngModelChange)="startDateChanges($event)"
                ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()">
         <div class="input-group-append">
           <i class="new-calendar"></i>
@@ -29,6 +30,7 @@
                placeholder="yyyy-mm-dd"
                formControlName="endDate"
                name="dp"
+               (ngModelChange)="endDateChanges($event)"
                ngbDatepicker #endDate="ngbDatepicker" (click)="endDate.toggle()">
         <div class="input-group-append">
           <i class="new-calendar"></i>

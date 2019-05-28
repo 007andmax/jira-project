@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteStateService } from "../quote-create/quote-state.service";
-import {UsersService} from "../../../../services/users/users.service";
-import {CompaniesService} from "../../../../services/company/companies.service";
+import { UsersService } from "../../../../services/users/users.service";
+import { CompaniesService } from "../../../../services/company/companies.service";
+import { DateService } from "../../../../services/date/date.service";
 
 @Component({
   selector: 'app-quote-preview',
@@ -11,12 +12,14 @@ import {CompaniesService} from "../../../../services/company/companies.service";
 export class QuotePreviewComponent implements OnInit {
 
   public quote: any;
+  public quoteForCreate: any;
   public company: any;
   public itemsArray = [];
 
   constructor(
     private quoteStateService: QuoteStateService,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private dateService: DateService
   ) { }
 
   ngOnInit() {
@@ -27,11 +30,11 @@ export class QuotePreviewComponent implements OnInit {
 
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
+    this.quoteForCreate = this.quoteStateService.getQuoteCreate();
   }
 
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
-      console.log(res, 'ITEMS');
       return this.company = res;
     });
   }
@@ -46,7 +49,6 @@ export class QuotePreviewComponent implements OnInit {
 
   public getItemsArray() {
     this.itemsArray = this.quoteStateService.getItemArray();
-    console.log(this.itemsArray, 'ITEMS');
   }
 
   public getPrice(cost, count, tax) {
@@ -59,6 +61,16 @@ export class QuotePreviewComponent implements OnInit {
 
   public roundToTwo(num) {
     return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
+  }
+
+  public getFormatDate(date) {
+    if (date) {
+      date = `${date.year}/${date.month}/${date.day}`;
+      return this.dateService.getFormatToFilterDate(date);
+    } else {
+      return ''
+    }
+
   }
 
 }

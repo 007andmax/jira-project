@@ -5,6 +5,7 @@ import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 
 import { QuoteService } from "../../../../../../services/quote/quote.service";
 import { NoteService } from "../../../../../../services/note/note.service";
+import {QuoteStateService} from "../../quote-state.service";
 
 /**
  *  Quotes create content notes component
@@ -34,10 +35,12 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    * Creates an instance of the QuoteCreateContentComponent with the injected services
    * @param {NoteService} noteService Service to work with api
    * @param {QuoteService} quoteService Service to work with api
+   * @param {QuoteStateService} quoteStateService Service to work quote state
    */
   constructor(
     private quoteService: QuoteService,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private quoteStateService: QuoteStateService
   ) { }
 
   /**
@@ -54,7 +57,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
-      this.selectedGlobalNoteItem.next(this.noteGlobal);
+      this.setGlobalNote(this.noteGlobal);
+
     })
   }
 
@@ -126,7 +130,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   }
 
   setGlobalNote(value) {
-    this.selectedGlobalNoteItem.next(this.noteGlobal);
+    this.selectedGlobalNoteItem.next(value);
+    this.quoteStateService.setGlobalNote(value);
   }
 
   public showCreateNew(value) {
