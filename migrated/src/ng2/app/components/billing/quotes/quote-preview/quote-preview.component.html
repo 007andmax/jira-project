@@ -21,12 +21,13 @@
     <div class="quote-list--header">
       <div class="quote-list--header__top clearfix">
         <div class="col-md-5 pl-30">
-          <img src="https://i.ytimg.com/vi/wIAg8vvUzrQ/hqdefault.jpg" alt="logo">
+          <img src="/companyLogo/{{company.logo.id}}?update={{stopCache}}" alt="logo" *ngIf="company && company.logo">
+          <img src="/company/default/logo.jpg" alt="logo" *ngIf="!(company && company.logo)">
         </div>
         <div class="col-md-7 text-right pr-30" *ngIf="company">
           <h4 class="bold">Quote #<span>{{quote && quote.quoteNumber}}</span></h4>
           <p class="bold">{{company.name}}</p>
-          <p>{{company.addresses[0].addresss}}</p>
+          <p>{{company.addresses[0].address}}</p>
           <p *ngFor="let item of company.addresses[0].phoneNumbers">{{item.number}}</p>
         </div>
       </div>
@@ -49,6 +50,7 @@
           </p>
           <p class="bold">
             <span style="font-weight: 700!important;">{{quote.total | currency}}</span>
+            Grand Total
           </p>
         </div>
       </div>
@@ -59,7 +61,6 @@
         <div class="col-md-2">Description</div>
         <div class="col-md-2">Unit Cost</div>
         <div class="col-md-1">Quantity</div>
-        <div class="col-md-1">Sale price</div>
         <div class="col-md-1">Tax</div>
         <div class="col-md-2 text-right">Line Total</div>
       </div>
@@ -67,9 +68,8 @@
         <div class="row" *ngFor="let item of itemsArray">
           <div class="col-md-2">{{item.name || item.description}}</div>
           <div class="col-md-2">HP-3876 Multifunctional Printer with Wifi</div>
-          <div class="col-md-1">{{(item.rate || item.cost) | currency: '$'}}</div>
-          <div class="col-md-1">{{item.quantity}}</div>
           <div class="col-md-1">{{(item.sale || item.rate) | currency}}</div>
+          <div class="col-md-1">{{item.quantity}}</div>
           <div class="col-md-1">
             {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes[0]) | currency}}
           </div>
@@ -101,7 +101,7 @@
         <div class="clearfix">
           <div class="col-md-8 pl-30"></div>
           <div class="col-md-2 bold fz-11">Total</div>
-          <div class="col-md-2 bold fz-16 text-right pr-30">{{quote.total | currency}}</div>
+          <div class="col-md-2 bold fz-16 text-right pr-30">{{(quote.total + quote.totalTaxes) | currency}}</div>
         </div>
       </div>
       <div class="quote-list--footer__bottom clearfix">

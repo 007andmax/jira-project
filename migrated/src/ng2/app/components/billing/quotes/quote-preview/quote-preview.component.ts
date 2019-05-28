@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteStateService } from "../quote-create/quote-state.service";
-import { UsersService } from "../../../../services/users/users.service";
 import { CompaniesService } from "../../../../services/company/companies.service";
 import { DateService } from "../../../../services/date/date.service";
 
@@ -15,6 +14,7 @@ export class QuotePreviewComponent implements OnInit {
   public quoteForCreate: any;
   public company: any;
   public itemsArray = [];
+  public stopCache = Math.floor(Math.random() * 100000);
 
   constructor(
     private quoteStateService: QuoteStateService,
@@ -35,6 +35,7 @@ export class QuotePreviewComponent implements OnInit {
 
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
+      console.log(res);
       return this.company = res;
     });
   }

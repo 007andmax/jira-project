@@ -88,16 +88,16 @@ export class QuoteCreateContentBottomComponent implements OnInit {
       const taxes = item && item.taxes[0];
       const product = item;
       if (taxes) {
-        this.totalTaxes += (((taxes.rate)/100) * (product.rate || product.sale)) * product.quantity;
+        console.log(taxes, 'taxes');
+        console.log(product, 'product');
+        this.totalTaxes += (((taxes.rate)/100) * (product.sale || product.rate)) * product.quantity;
+        console.log(this.totalTaxes, 'this.totalTaxes');
         this.quoteStateServices.setTotalTaxes(this.totalTaxes);
       }
     });
   }
 
   public getTotal() {
-    console.log(this.totalTaxes);
-    console.log(this.subTotalServices);
-    console.log(this.subTotalProducts);
     return this.totalTaxes + this.subTotalServices + this.subTotalProducts
   }
 
