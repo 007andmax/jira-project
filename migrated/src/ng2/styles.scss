@@ -147,6 +147,12 @@ ngb-typeahead-window {
   }
 }
 
+.quotes-actions {
+  .loading.xs {
+    top: -3px;
+  }
+}
+
 .quote-content-body {
   .row {
     position: relative;

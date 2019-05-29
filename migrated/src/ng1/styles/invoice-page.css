@@ -373,7 +373,7 @@
 }
 
 .quote-list--item__header {
-  padding: 8px 0 8px 15px;
+  padding: 8px 15px;
 }
 
 .p-2 [class*="col-md-"] {

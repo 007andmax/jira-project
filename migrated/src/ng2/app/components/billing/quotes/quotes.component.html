@@ -62,6 +62,7 @@
     </div>
   </div>
   <div class="quotes__content"
+       *ngIf="quotesList.length"
        infiniteScroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="50"
@@ -91,4 +92,5 @@
       </div>
     </div>
   </div>
+  <div class="loading" *ngIf="!quotesList.length"></div>
 </div>
