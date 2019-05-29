@@ -21,7 +21,7 @@
     <div class="quote-list--header">
       <div class="quote-list--header__top clearfix">
         <div class="col-md-5 pl-30">
-          <img src="/companyLogo/{{company.logo.id}}?update={{stopCache}}" alt="logo" *ngIf="company && company.logo">
+          <img src="/companyLogo/{{company.id}}?update={{stopCache}}" alt="logo" *ngIf="company && company.logo">
           <img src="/company/default/logo.jpg" alt="logo" *ngIf="!(company && company.logo)">
         </div>
         <div class="col-md-7 text-right pr-30" *ngIf="company">
