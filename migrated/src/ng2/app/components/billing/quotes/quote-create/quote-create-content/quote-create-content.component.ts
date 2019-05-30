@@ -70,6 +70,7 @@ export class QuoteCreateContentComponent implements OnInit {
         startDate: this.dateService.getStartDate(new Date()),
         endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
         partialDeposit: '',
+        purchaseOrder: '',
         quoteNumber: this.quoteNumber,
         po: '',
         regularNote: '',
@@ -91,7 +92,8 @@ export class QuoteCreateContentComponent implements OnInit {
       quoteNumber: quote.quoteNumber,
       po: '',
       regularNote: '',
-      globalNote: ''
+      globalNote: '',
+      purchaseOrder: ''
     });
     console.log(this.quoteForm, 'quoteForm');
   }
@@ -101,6 +103,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   saveAndContinue() {
     const isFormReady = this.quoteStateService.getType();
+    console.log(this.quoteForm.value, 'this.quoteForm.value');
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
         this.quoteStateService.goToQuote();

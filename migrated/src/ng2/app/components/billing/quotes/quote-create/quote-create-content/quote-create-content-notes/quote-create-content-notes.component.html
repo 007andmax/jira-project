@@ -30,6 +30,6 @@
   </div>
   <div class="notes-bottom">
     <p>Terms & Conditions</p>
-    <textarea [(ngModel)]="noteGlobal && noteGlobal.line1" (ngModelChange)="setGlobalNote($event)" placeholder="Mention your company's Terms and Conditions"></textarea>
+    <textarea [(ngModel)]="(noteGlobal && noteGlobal.line1) || (noteGlobal)" (ngModelChange)="setGlobalNote($event)" placeholder="Mention your company's Terms and Conditions"></textarea>
   </div>
 </div>

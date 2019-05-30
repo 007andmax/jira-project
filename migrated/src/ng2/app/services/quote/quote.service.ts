@@ -30,6 +30,7 @@ export class QuoteService {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+    console.log(value, 'value');
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
        "companyId": value.client.item.id,
        "number": this.quoteStateService.getQuoteNumber(),
@@ -40,10 +41,10 @@ export class QuoteService {
          "products": this.productsArray,
          "services": this.servicesArray
      },
-       "requestPayment":false,
+       "requestPayment": this.quoteStateService.getRequestPayment(),
        "draft":false,
-       "purchaseOrder":"Some string",
-       "partialDeposit":"Partial deposit String",
+       "purchaseOrder": this.quoteStateService.getPurchaseOrder(),
+       "partialDeposit": this.quoteStateService.getPartialDeposit(),
        "validUntil": this.getMsDate(value.endDate),
        "date": this.getMsDate(value.startDate),
        "recipients":["user@gmail.com"],

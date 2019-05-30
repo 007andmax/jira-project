@@ -27,7 +27,10 @@ export class QuoteStateService {
     totalTaxes: '',
     total: '',
     globalNote: '',
-    selectedNote: ''
+    selectedNote: '',
+    partialDeposit: '',
+    purchaseOrder: '',
+    requestPayment: ''
   };
 
 
@@ -155,17 +158,41 @@ export class QuoteStateService {
   }
 
   public setSelectedNote(value) {
-    console.log(value);
     this.quoteForCreate.selectedNote = value;
   }
 
   public setSelectedNoteFull(value) {
-      console.log(value);
       this.selectedNoteFull = value;
     }
 
   public getSelectedNote() {
     return this.selectedNoteFull;
+  }
+
+  public setPartialDeposit(value) {
+    this.quoteForCreate.partialDeposit = value;
+  }
+
+  public getPartialDeposit() {
+    console.log(this.quoteForCreate);
+    return this.quoteForCreate.partialDeposit
+  }
+
+  public setPurchaseOrder(value) {
+    this.quoteForCreate.purchaseOrder = value;
+  }
+
+  public getPurchaseOrder() {
+    return this.quoteForCreate.purchaseOrder
+  }
+
+  public setRequestPayment(value) {
+    console.log(value, 'test');
+    this.quoteForCreate.requestPayment = value;
+  }
+
+  public getRequestPayment() {
+    return this.quoteForCreate.requestPayment
   }
 
 }

@@ -16,6 +16,9 @@ export class QuoteCreateContentTopComponent implements OnInit {
   @Output() selectedItem = new EventEmitter<any>();
   @Input() quoteForm: FormGroup;
   public quoteNumber: number;
+  public partialDeposit: any;
+  public purchaseOrder: any;
+  public requestPayment: any;
   public editItem: any;
   public editMode: any;
 
@@ -80,7 +83,35 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.editMode = this.quoteStateService.getState().params.editMode;
     if (this.editMode) {
       this.editItem = this.quoteStateService.getClient();
+      this.partialDeposit = this.quoteStateService.getPartialDeposit();
+      this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
+      this.requestPayment = this.quoteStateService.getRequestPayment();
+      console.log(this.requestPayment);
     }
   }
+
+  /**
+   * set partial deposit to state
+   */
+  public setPartialDeposit(value) {
+    this.quoteStateService.setPartialDeposit(value);
+  }
+
+  /**
+   * set purchase order to state
+   */
+  public setPurchaseOrder(value) {
+    this.quoteStateService.setPurchaseOrder(value);
+  }
+
+  /**
+   * set request payment to state
+   */
+  public setRequestPayment(value) {
+    this.quoteStateService.setRequestPayment(value);
+    console.log(value, 'value');
+  }
+
+
 
 }
