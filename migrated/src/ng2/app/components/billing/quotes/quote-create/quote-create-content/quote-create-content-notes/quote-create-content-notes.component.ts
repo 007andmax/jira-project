@@ -59,7 +59,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
       if (this.editMode) {
-        this.noteGlobal.line1 = this.quoteStateService.getGlobalNote();
+        this.noteGlobal = this.quoteStateService.getGlobalNote();
       }
       this.setGlobalNote(this.noteGlobal);
     })

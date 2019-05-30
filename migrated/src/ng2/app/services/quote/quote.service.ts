@@ -41,16 +41,16 @@ export class QuoteService {
          "products": this.productsArray,
          "services": this.servicesArray
      },
-       "requestPayment": this.quoteStateService.getRequestPayment(),
+       "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
        "draft":false,
-       "purchaseOrder": this.quoteStateService.getPurchaseOrder(),
-       "partialDeposit": this.quoteStateService.getPartialDeposit(),
+       "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
+       "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
        "validUntil": this.getMsDate(value.endDate),
        "date": this.getMsDate(value.startDate),
        "recipients":["user@gmail.com"],
        "message":"My message string with styles",
-       "globalNote": value.globalNote,
-       "regularNote": value.regularNote || null
+       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
+       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote()
     })
   }
 
