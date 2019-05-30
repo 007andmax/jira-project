@@ -15,7 +15,6 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.type = undefined;
     this.itemsArray = [];
   }
-
   public serviceList: any;
   public client: any;
   public type: string;
@@ -27,6 +26,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public totalTaxes = 0;
   public total = 0;
   public editMode: any;
+  public quote: any;
 
 
   constructor(
@@ -37,6 +37,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   ngOnInit() {
     this.initEditItemsArray();
+    this.getState();
   }
 
   public addProduct() {
@@ -112,6 +113,22 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   public initEditItemsArray() {
     this.itemsArray = this.quoteStateServices.getItemArray();
+  }
+
+  /**
+  * get mode state
+  */
+  public getState() {
+    this.editMode = this.quoteStateServices.getState().params.editMode;
+    console.log(this.editMode, 'this.editMode');
+    if (this.editMode) {
+      this.quote = this.quoteStateServices.getQuoteCreate();
+      console.log(this.quote, 'quote');
+      this.subTotalServices = this.quote.subTotalServices;
+      this.subTotalProducts = this.quote.subTotalProducts;
+      this.totalTaxes = this.quote.totalTaxes;
+      this.total = this.quote.total;
+    }
   }
 
 }

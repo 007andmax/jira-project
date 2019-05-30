@@ -123,18 +123,22 @@ export class QuoteStateService {
 
   public setSubTotalProducts(value) {
     this.subTotalProducts = value;
+    this.quoteForCreate.subTotalProducts = value;
   }
 
   public setTotalTaxes(value) {
     this.totalTaxes = value;
+    this.quoteForCreate.totalTaxes = value;
   }
 
   public setTotal(value) {
     this.total = value;
+    this.quoteForCreate.total = value;
   }
 
   public setSubTotalServices(value) {
     this.subTotalServices = value;
+    this.quoteForCreate.subTotalServices = value;
   }
 
   public setStartDate(value) {
@@ -174,7 +178,6 @@ export class QuoteStateService {
   }
 
   public getPartialDeposit() {
-    console.log(this.quoteForCreate);
     return this.quoteForCreate.partialDeposit
   }
 
@@ -187,7 +190,6 @@ export class QuoteStateService {
   }
 
   public setRequestPayment(value) {
-    console.log(value, 'test');
     this.quoteForCreate.requestPayment = value;
   }
 

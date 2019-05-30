@@ -106,11 +106,11 @@ export class QuoteCreateContentComponent implements OnInit {
   saveAndContinue() {
     const isFormReady = this.quoteStateService.getType();
     console.log(this.quoteForm.value, 'this.quoteForm.value');
-    isFormReady ?
-      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-        this.quoteStateService.goToQuote();
-        })
-      : this.quoteStateService.emitValidation();
+    // isFormReady ?
+    //   this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+    //     this.quoteStateService.goToQuote();
+    //     })
+    //   : this.quoteStateService.emitValidation();
   }
 
   /**
