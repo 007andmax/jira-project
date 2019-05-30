@@ -34,4 +34,8 @@ export class DateService {
     return moment(date).format('DD MMM YYYY');
   }
 
+  public getMs(date) {
+    return moment(date).valueOf();
+  }
+
 }

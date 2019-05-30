@@ -35,7 +35,6 @@ export class QuotePreviewComponent implements OnInit {
 
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
-      console.log(res);
       return this.company = res;
     });
   }
@@ -79,6 +78,10 @@ export class QuotePreviewComponent implements OnInit {
     } else {
       return this.quoteForCreate.globalNote
     }
+  }
+
+  goToCreate() {
+    this.quoteStateService.goToState('quote-create-component', { editMode: true});
   }
 
 }

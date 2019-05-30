@@ -16,6 +16,7 @@ export class SelectClientCompanyComponent implements OnInit {
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
   @Input() formGroup: FormGroup;
+  @Input() editItem: any;
   public selectedClient;
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
@@ -28,6 +29,11 @@ export class SelectClientCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.getCLientsList();
+    if (this.editItem) {
+      this.selectedClient = this.editItem;
+      this.selectedItem.emit(this.editItem);
+      console.log(this.editItem.id, 'editItem');
+    }
   }
 
   private getCLientsList() {

@@ -26,6 +26,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public subTotalProducts = 0;
   public totalTaxes = 0;
   public total = 0;
+  public editMode: any;
 
 
   constructor(
@@ -34,7 +35,9 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initEditItemsArray();
+  }
 
   public addProduct() {
     this.type = 'product';
@@ -88,10 +91,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
       const taxes = item && item.taxes[0];
       const product = item;
       if (taxes) {
-        console.log(taxes, 'taxes');
-        console.log(product, 'product');
         this.totalTaxes += (((taxes.rate)/100) * (product.sale || product.rate)) * product.quantity;
-        console.log(this.totalTaxes, 'this.totalTaxes');
         this.quoteStateServices.setTotalTaxes(this.totalTaxes);
       }
     });
@@ -108,6 +108,10 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public refreshItemsArray(value) {
     this.itemsArray = value;
     this.calculateArrays();
+  }
+
+  public initEditItemsArray() {
+    this.itemsArray = this.quoteStateServices.getItemArray();
   }
 
 }

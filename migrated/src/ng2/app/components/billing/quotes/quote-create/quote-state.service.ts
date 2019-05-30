@@ -15,6 +15,7 @@ export class QuoteStateService {
   public subTotalServices = 0;
   public totalTaxes = 0;
   public total = 0;
+  public selectedNoteFull: any;
   public quoteForCreate = {
     startDate: '',
     endDate: '',
@@ -38,6 +39,7 @@ export class QuoteStateService {
 
   public setClient(client) {
     this.client = client;
+    this.quoteForCreate.client = client;
   }
 
   public getClient() {
@@ -60,6 +62,7 @@ export class QuoteStateService {
 
   public setItemArray(itemsArray) {
     this.itemsArray = itemsArray;
+    this.quoteForCreate.itemsArray = itemsArray;
   }
 
   public getItemArray() {
@@ -80,6 +83,7 @@ export class QuoteStateService {
 
   public setNumber(value) {
     this.quoteNumber = value;
+    this.quoteForCreate.quoteNumber = value;
   }
 
   public getQuoteNumber() {
@@ -94,8 +98,12 @@ export class QuoteStateService {
     this.state.go('quotes-component');
   }
 
-  public goToState(state) {
-    this.state.go(state);
+  public getState() {
+    return this.state;
+  }
+
+  public goToState(state, params?) {
+    this.state.go(state, params);
   }
 
   getQuote() {
@@ -142,9 +150,22 @@ export class QuoteStateService {
     this.quoteForCreate.globalNote = value;
   }
 
+  public getGlobalNote() {
+    return this.quoteForCreate.globalNote;
+  }
+
   public setSelectedNote(value) {
     console.log(value);
-      this.quoteForCreate.selectedNote = value;
+    this.quoteForCreate.selectedNote = value;
+  }
+
+  public setSelectedNoteFull(value) {
+      console.log(value);
+      this.selectedNoteFull = value;
     }
+
+  public getSelectedNote() {
+    return this.selectedNoteFull;
+  }
 
 }

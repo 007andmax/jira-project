@@ -16,6 +16,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
   @Output() selectedItem = new EventEmitter<any>();
   @Input() quoteForm: FormGroup;
   public quoteNumber: number;
+  public editItem: any;
+  public editMode: any;
 
   constructor(
     private quoteStateService: QuoteStateService,
@@ -27,6 +29,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   ngOnInit() {
     this.startDateChanges(this.quoteForm.value.startDate);
     this.endDateChanges(this.quoteForm.value.endDate);
+    this.getState();
   }
 
   /**
@@ -43,7 +46,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
    */
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
-      this.quoteNumber = res['number'];
+      this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
     });
   }
 
@@ -59,7 +62,6 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * @params selected date
    */
   public startDateChanges(value) {
-    console.log(value);
     this.quoteStateService.setStartDate(value)
   }
 
@@ -68,10 +70,17 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * @params selected date
    */
   public endDateChanges(value) {
-    console.log(value);
     this.quoteStateService.setEndDate(value)
   }
 
-
+  /**
+   * get mode state
+   */
+  public getState() {
+    this.editMode = this.quoteStateService.getState().params.editMode;
+    if (this.editMode) {
+      this.editItem = this.quoteStateService.getClient();
+    }
+  }
 
 }

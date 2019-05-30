@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuoteCreateContentComponent } from "./quote-create-content/quote-create-content.component";
+import {QuoteStateService} from "./quote-state.service";
 
 /**
  * Password quotes create component
@@ -12,8 +13,13 @@ import { QuoteCreateContentComponent } from "./quote-create-content/quote-create
 export class QuoteCreateComponent {
 
   @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
+  public editMode = false;
 
-  constructor() {}
+  constructor(
+    private quoteStateService: QuoteStateService
+  ) {
+    this.getState();
+  }
 
   /**
    * Create quote and save
@@ -48,6 +54,11 @@ export class QuoteCreateComponent {
    */
   public download() {
     this.quoteCreateContentComponent.downloadPdf();
+  }
+
+  public getState() {
+    this.editMode = this.quoteStateService.getState().params.editMode;
+    console.log(this.editMode, 'editMode');
   }
 
 }

@@ -22,8 +22,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public selectedNote: any;
   public selectedNoteNew: string;
   public selectedNoteText: string;
-  public selectedGlobalNoteText: string;
   public isEditMode = false;
+  public editMode = false;
   public isShowCreateNew = false;
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedRegularNoteItem = new EventEmitter<any>();
@@ -47,7 +47,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    * Initializes quote create content content. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.getNotes()
+    this.getNotes();
+    this.getState();
   }
 
   /**
@@ -57,8 +58,11 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
+      if (this.editMode) {
+        this.noteGlobal.line1 = this.quoteStateService.getGlobalNote();
+        this.setGlobalNote(this.quoteStateService.getGlobalNote());
+      }
       this.setGlobalNote(this.noteGlobal);
-
     })
   }
 
@@ -83,6 +87,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.selectedNote = note.item;
     this.selectedRegularNoteItem.next(this.selectedNote);
     this.quoteStateService.setSelectedNote(note.item.line1);
+    this.quoteStateService.setSelectedNoteFull(note.item);
   }
 
   /**
@@ -97,6 +102,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   public createNewNote() {
     const data = this.getNoteData();
+    console.log(this.isEditMode, 'this.isEditMode');
     if (this.isEditMode) {
       this.noteService.updateNote({
         line1: this.selectedNoteText,
@@ -130,17 +136,35 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     })
   }
 
-  setGlobalNote(value) {
+  /**
+   * set global note
+   */
+  public setGlobalNote(value) {
     this.selectedGlobalNoteItem.next(value);
     this.quoteStateService.setGlobalNote(value);
-    console.log(value);
   }
 
+  /**
+   * Show create new notes fields
+   */
   public showCreateNew(value) {
     this.selectedNote['line1'] = value;
     this.selectedNoteText = value;
     this.isShowCreateNew = true;
     this.quoteStateService.setSelectedNote(value);
+  }
+
+  /**
+   * get mode state
+   */
+  public getState() {
+    this.editMode = this.quoteStateService.getState().params.editMode;
+    if (this.editMode) {
+      this.isEditMode = true;
+      this.selectedNoteNew = this.quoteStateService.getSelectedNote();
+      this.selectedNote = this.quoteStateService.getSelectedNote();
+
+    }
   }
 
 }

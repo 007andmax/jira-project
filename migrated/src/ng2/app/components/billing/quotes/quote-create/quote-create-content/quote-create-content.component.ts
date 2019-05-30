@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { DateService } from "../../../../../services/date/date.service";
@@ -20,6 +20,7 @@ export class QuoteCreateContentComponent implements OnInit {
   public fifteenDays = 1296000000;
   private selectedClient: any;
   private quoteNumber: number;
+  @Input() editMode: any;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -43,7 +44,7 @@ export class QuoteCreateContentComponent implements OnInit {
   ngOnInit() {
     this.companiesService.getCompaniesList();
     this.getQuoteNumber();
-    this.initForm();
+    this.initForm(this.editMode);
   }
 
   /**
@@ -59,17 +60,40 @@ export class QuoteCreateContentComponent implements OnInit {
   /**
    * Initialized create quotes form
    */
-  public initForm() {
+  public initForm(editMode?) {
+    if (editMode) {
+      this.initEditMode();
+      this.selectedClient
+    } else {
+      this.quoteForm = this.fb.group({
+        client: ['', Validators.required],
+        startDate: this.dateService.getStartDate(new Date()),
+        endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
+        partialDeposit: '',
+        quoteNumber: this.quoteNumber,
+        po: '',
+        regularNote: '',
+        globalNote: ''
+      })
+    }
+  }
+
+  /**
+   * Initialized create quotes form for edit mode
+   */
+  public initEditMode() {
+    const quote = this.quoteStateService.getQuoteCreate();
     this.quoteForm = this.fb.group({
-      client: ['', Validators.required],
-      startDate: this.dateService.getStartDate(new Date()),
-      endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
+      client: [this.quoteStateService.getClient(), Validators.required],
+      startDate: this.dateService.getStartDate(new Date(this.dateService.getMs(quote.startDate))),
+      endDate: this.dateService.getStartDate(new Date(this.dateService.getMs(quote.endDate))),
       partialDeposit: '',
-      quoteNumber: this.quoteNumber,
+      quoteNumber: quote.quoteNumber,
       po: '',
       regularNote: '',
       globalNote: ''
-    })
+    });
+    console.log(this.quoteForm, 'quoteForm');
   }
 
   /**

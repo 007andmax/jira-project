@@ -143,6 +143,9 @@
         })
         .state('quote-create-component', {
           url: '/ng2/quotes/quote-create',
+          params: {
+            editMode: null
+          },
           template: ''
         })
         .state('quote-preview-component', {
