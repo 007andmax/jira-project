@@ -54,6 +54,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   }
 
   public divideArray() {
+    this.itemsArray = this.quoteStateServices.getItemArray();
     this.productsArray = this.quoteServices.getProductItems(this.itemsArray, 'product');
     this.servicesArray = this.quoteServices.getProductItems(this.itemsArray, 'service');
   }
@@ -73,29 +74,39 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   }
 
   public resolveTotal() {
+    this.divideArray();
     this.productsArray.map((item) => {
       const product = item.item;
       this.subTotalProducts += product.sale * product.quantity;
-      this.quoteStateServices.setSubTotalProducts(this.subTotalProducts);
     });
     this.servicesArray.map((item) => {
       const service = item.item;
       this.subTotalServices += service.rate * service.quantity;
-      this.quoteStateServices.setSubTotalServices(this.subTotalServices);
+
     });
+    this.quoteStateServices.setSubTotalProducts(this.subTotalProducts);
+    this.quoteStateServices.setSubTotalServices(this.subTotalServices);
+    this.resolveTaxes();
     this.total = this.getTotal();
     this.quoteStateServices.setTotal(this.total);
   }
 
   public resolveTaxes() {
-    this.itemsArray.map((item) => {
-      const taxes = item && item.taxes[0];
-      const product = item;
-      if (taxes) {
-        this.totalTaxes += (((taxes.rate)/100) * (product.sale || product.rate)) * product.quantity;
+    this.totalTaxes = 0;
+    if (this.itemsArray.length > 0) {
+      this.itemsArray.map((item) => {
+        const taxes = item && item.taxes[0];
+        const product = item;
+        if (taxes) {
+          this.totalTaxes += (((taxes.rate)/100) * (product.sale || product.rate)) * product.quantity;
+        }
         this.quoteStateServices.setTotalTaxes(this.totalTaxes);
-      }
-    });
+      });
+    } else {
+      this.totalTaxes = 0;
+      this.quoteStateServices.setTotalTaxes(this.totalTaxes);
+    }
+
   }
 
   public getTotal() {
