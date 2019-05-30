@@ -84,10 +84,12 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public initEditMode() {
     const quote = this.quoteStateService.getQuoteCreate();
+    console.log(quote.startDate, 'quote.startDate');
+    console.log(quote.endDate, 'quote.endDate');
     this.quoteForm = this.fb.group({
       client: [this.quoteStateService.getClient(), Validators.required],
-      startDate: this.dateService.getStartDate(new Date(this.dateService.getMs(quote.startDate))),
-      endDate: this.dateService.getStartDate(new Date(this.dateService.getMs(quote.endDate))),
+      startDate: this.dateService.getStartDate(new Date(this.dateService.getDateFromBootstrap(quote.startDate))),
+      endDate: this.dateService.getStartDate(new Date(this.dateService.getDateFromBootstrap(quote.endDate))),
       partialDeposit: '',
       quoteNumber: quote.quoteNumber,
       po: '',
