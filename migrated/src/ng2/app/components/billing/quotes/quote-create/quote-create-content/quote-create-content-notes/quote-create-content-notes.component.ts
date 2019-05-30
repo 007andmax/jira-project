@@ -60,7 +60,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
       if (this.editMode) {
         this.noteGlobal.line1 = this.quoteStateService.getGlobalNote();
-        this.setGlobalNote(this.quoteStateService.getGlobalNote());
       }
       this.setGlobalNote(this.noteGlobal);
     })
@@ -163,7 +162,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       this.isEditMode = true;
       this.selectedNoteNew = this.quoteStateService.getSelectedNote();
       this.selectedNote = this.quoteStateService.getSelectedNote();
-
     }
   }
 

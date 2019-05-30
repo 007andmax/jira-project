@@ -120,10 +120,8 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   */
   public getState() {
     this.editMode = this.quoteStateServices.getState().params.editMode;
-    console.log(this.editMode, 'this.editMode');
     if (this.editMode) {
       this.quote = this.quoteStateServices.getQuoteCreate();
-      console.log(this.quote, 'quote');
       this.subTotalServices = this.quote.subTotalServices;
       this.subTotalProducts = this.quote.subTotalProducts;
       this.totalTaxes = this.quote.totalTaxes;

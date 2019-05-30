@@ -32,7 +32,7 @@ export class QuoteService {
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     console.log(value, 'value');
     return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
-       "companyId": value.client.item.id,
+       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
        "number": this.quoteStateService.getQuoteNumber(),
        "quoteItems":{
        "type":"MIXED",

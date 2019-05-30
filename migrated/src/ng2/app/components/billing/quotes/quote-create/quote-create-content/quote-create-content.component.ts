@@ -86,6 +86,7 @@ export class QuoteCreateContentComponent implements OnInit {
     const quote = this.quoteStateService.getQuoteCreate();
     console.log(quote.startDate, 'quote.startDate');
     console.log(quote.endDate, 'quote.endDate');
+    console.log(this.quoteStateService.getClient(), 'quote.endDate');
     this.quoteForm = this.fb.group({
       client: [this.quoteStateService.getClient(), Validators.required],
       startDate: this.dateService.getStartDate(new Date(this.dateService.getDateFromBootstrap(quote.startDate))),
@@ -106,11 +107,11 @@ export class QuoteCreateContentComponent implements OnInit {
   saveAndContinue() {
     const isFormReady = this.quoteStateService.getType();
     console.log(this.quoteForm.value, 'this.quoteForm.value');
-    // isFormReady ?
-    //   this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-    //     this.quoteStateService.goToQuote();
-    //     })
-    //   : this.quoteStateService.emitValidation();
+    isFormReady ?
+      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+        this.quoteStateService.goToQuote();
+        })
+      : this.quoteStateService.emitValidation();
   }
 
   /**
