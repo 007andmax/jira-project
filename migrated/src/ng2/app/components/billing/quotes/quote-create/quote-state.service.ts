@@ -1,4 +1,5 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
+import { DateService } from "../../../../services/date/date.service";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,8 @@ export class QuoteStateService {
 
 
   constructor(
-    @Inject('$state') $state: any
+    @Inject('$state') $state: any,
+    private dateService: DateService
   ) {
     this.state = $state;
   }
@@ -195,6 +197,23 @@ export class QuoteStateService {
 
   public getRequestPayment() {
     return this.quoteForCreate.requestPayment
+  }
+
+  public setEditQuote(quote) {
+    this.quoteForCreate = quote;
+    this.setClient(quote.company);
+    const itemsArray = [...quote.ticket.updates[0].products, ...quote.ticket.updates[0].services];
+
+    this.setItemArray(itemsArray);
+    this.setNumber(quote.number);
+    this.setEndDate(this.dateService.getStartDate(quote.date));
+    this.setStartDate(this.dateService.getStartDate(quote.endDate));
+    this.setGlobalNote(quote.globalNote);
+    this.setSelectedNote(quote.regularNote);
+    this.setPartialDeposit(quote.partialDeposit);
+    this.setPurchaseOrder(quote.purchaseOrder);
+    this.setRequestPayment(quote.requestPayment);
+    this.goToState('quote-create-component', { editMode: true});
   }
 
 }

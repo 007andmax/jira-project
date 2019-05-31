@@ -78,7 +78,7 @@
           </span>
         </label>
       </div>
-      <div class="col-md-1">#{{item.number}}</div>
+      <div class="col-md-1 pointer" (click)="goToQuoteEdit(item)">#{{item.number}}</div>
       <div class="col-md-3 g-m">{{item.company.name}}</div>
       <div class="col-md-2">{{getDate(item.date)}}</div>
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>
@@ -87,10 +87,33 @@
       <div class="col-md-1 df">
         <div class="quote-status" [ngClass]="getClass(item.status)"> {{item.status}}</div>
         <a class="hit-area ha-20-20 pointer">
-          <i class="icn-sm icn-more-light-grey"></i>
+          <div ngbDropdown class="d-inline-block">
+            <i class="icn-sm icn-more-light-grey" id="status" ngbDropdownToggle></i>
+            <div ngbDropdownMenu aria-labelledby="status">
+              <button ngbDropdownItem>Resend quote</button>
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['APPROVED'])">Convert to Invoice</div>
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['APPROVED'])">Convert to Ticket</div>
+              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['DRAFT', 'READ', 'APPROVED', 'EXPIRED', 'UNREAD', 'NOT_APPROVED'])">Approve a quote</div>-->
+              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Mark as Read</div>-->
+              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT'])">Refuse a quote</div>-->
+              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Archive a quote</div>-->
+              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Edit a quote</div>-->
+            </div>
+          </div>
         </a>
       </div>
     </div>
   </div>
   <div class="loading" *ngIf="!quotesList.length"></div>
 </div>
+
+'INVOICED','TICKETED','REFUSED', 'ARCHIVED'
+DRAFT
+READ
+APPROVED
+REFUSED
+EXPIRED,
+UNREAD,
+INVOICED,
+TICKETED,
+NOT_APPROVED

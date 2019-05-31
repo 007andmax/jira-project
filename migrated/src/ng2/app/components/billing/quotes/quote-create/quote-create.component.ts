@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuoteCreateContentComponent } from "./quote-create-content/quote-create-content.component";
-import {QuoteStateService} from "./quote-state.service";
+import { QuoteStateService } from "./quote-state.service";
 
 /**
  * Password quotes create component
