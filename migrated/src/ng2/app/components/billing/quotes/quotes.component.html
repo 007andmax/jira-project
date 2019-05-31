@@ -93,11 +93,11 @@
               <button ngbDropdownItem>Resend quote</button>
               <div ngbDropdownItem *ngIf="checkStatus(item, ['APPROVED'])">Convert to Invoice</div>
               <div ngbDropdownItem *ngIf="checkStatus(item, ['APPROVED'])">Convert to Ticket</div>
-              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['DRAFT', 'READ', 'APPROVED', 'EXPIRED', 'UNREAD', 'NOT_APPROVED'])">Approve a quote</div>-->
-              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Mark as Read</div>-->
-              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT'])">Refuse a quote</div>-->
-              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Archive a quote</div>-->
-              <!--<div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Edit a quote</div>-->
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['DRAFT', 'READ', 'APPROVED', 'EXPIRED', 'UNREAD', 'NOT_APPROVED'])">Approve a quote</div>
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Mark as Read</div>
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT'])">Refuse a quote</div>
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Archive a quote</div>
+              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Edit a quote</div>
             </div>
           </div>
         </a>

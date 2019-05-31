@@ -182,7 +182,6 @@ export class QuotesComponent implements OnInit {
 
   public checkStatus(quote, statusForShowingArray) {
     const elem = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
-    console.log(elem.length > 0);
     return elem.length > 0;
   }
 
