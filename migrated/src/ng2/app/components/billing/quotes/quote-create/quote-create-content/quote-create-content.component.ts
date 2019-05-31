@@ -148,11 +148,8 @@ export class QuoteCreateContentComponent implements OnInit {
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
-    link.download=`${this.apiUrl}saleQuotes/${id}/pdf`;
+    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.click();
-    setTimeout(function(){
-      // For Firefox it is necessary to delay revoking the ObjectURL
-      window.URL.revokeObjectURL(data), 100})
   }
 
   /**
