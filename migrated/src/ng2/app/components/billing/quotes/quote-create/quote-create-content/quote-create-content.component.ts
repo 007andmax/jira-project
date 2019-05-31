@@ -150,6 +150,7 @@ export class QuoteCreateContentComponent implements OnInit {
     link.href = data;
     link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.click();
+    this.quoteStateService.goToQuote();
   }
 
   /**
