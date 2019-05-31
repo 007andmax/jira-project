@@ -105,24 +105,35 @@ export class QuoteService {
     })
   }
 
-  convertToInvoice(client_company_id, quote_id) {
-    const company = this.quoteStateService.getClient();
+  convertToInvoice(company, quote_id) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/convertToInvoice?companyId=${client_company_id}
+      `saleQuotes/convertToInvoice?companyId=${company.id}
       &billTo=${company.companyInfo.addresses[0].id}
       &shipTo=${company.companyInfo.addresses[0].id}`,
       [quote_id])
   }
 
-  convertToTicket(client_company_id, quote_id) {
+  convertToTicket(company, quote_id) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/convertToTicket?companyId=${client_company_id}`,
+      `saleQuotes/convertToTicket?companyId=${company.id}`,
       [quote_id])
   }
 
-  approveQuote(client_company_id, quote_id) {
+  approveQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/approveQuote?companyId=${client_company_id}`, [quote_id]
+      `saleQuotes/approveQuote?companyId=${company.id}`, [quote_id]
+    )
+  }
+
+  refuseQuote(company, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/refuseQuote?companyId=${company.id}`, [quote_id]
+    )
+  }
+
+  archiveQuote(company, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
     )
   }
 

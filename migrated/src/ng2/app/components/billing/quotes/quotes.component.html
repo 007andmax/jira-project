@@ -88,20 +88,41 @@
         <div class="quote-status" [ngClass]="getClass(item.status)"> {{item.status}}</div>
         <a class="hit-area ha-20-20 pointer">
           <div ngbDropdown class="d-inline-block">
-            <i class="icn-sm icn-more-light-grey" id="status" ngbDropdownToggle></i>
+            <i class="icn-sm icn-more-light-grey" id="status" ngbDropdownToggle style="padding: 10px"></i>
             <div ngbDropdownMenu aria-labelledby="status">
               <button ngbDropdownItem>Resend quote</button>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['APPROVED'])">Convert to Invoice</div>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['APPROVED'])">Convert to Ticket</div>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['DRAFT', 'READ', 'APPROVED', 'EXPIRED', 'UNREAD', 'NOT_APPROVED'])">Approve a quote</div>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Mark as Read</div>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT'])">Refuse a quote</div>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Archive a quote</div>
-              <div ngbDropdownItem *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])">Edit a quote</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['APPROVED'])"
+                   (click)="convertToInvoice(item)"
+              >Convert to Invoice</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['APPROVED'])"
+                   (click)="convertToTicket(item)"
+              >Convert to Ticket</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['DRAFT', 'READ', 'APPROVED', 'EXPIRED', 'UNREAD', 'NOT_APPROVED'])"
+                   (click)="approveQuote(item)"
+              >Approve a quote</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['UNREAD'])"
+                   (click)="markAsRead(item)"
+              >Mark as Read</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT'])"
+                   (click)="refuseQuote(item)"
+              >Refuse a quote</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])"
+                   (click)="archiveQuote(item)"
+              >Archive a quote</div>
+              <div ngbDropdownItem
+                   *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])"
+                   (click)="editQuote(item)"
+              >Edit a quote</div>
             </div>
           </div>
         </a>
-      </div>
+      </div>s
     </div>
   </div>
   <div class="loading" *ngIf="!quotesList.length"></div>

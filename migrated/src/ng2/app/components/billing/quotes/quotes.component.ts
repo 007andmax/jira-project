@@ -181,8 +181,51 @@ export class QuotesComponent implements OnInit {
   }
 
   public checkStatus(quote, statusForShowingArray) {
-    const elem = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
-    return elem.length > 0;
+    const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
+    return elems.length > 0;
+  }
+
+  /**
+   * convert Quote to invoice
+   */
+  convertToInvoice(item) {
+    console.log(item, 'ITEM');
+    this.quoteServices.convertToInvoice(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
+  /**
+   * convert Quote to ticket
+   */
+  convertToTicket(item) {
+    this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
+  /**
+   * refuse quote
+   */
+  refuseQuote(item) {
+    this.quoteServices.refuseQuote(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
+  /**
+   * refuse quote
+   */
+  archiveQuote(item) {
+    this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
+  public changeQuotesListItem(quote) {
+    this.quotesList.map((item) => {
+      // item.id === quote.id ? quote
+    })
   }
 
 }
