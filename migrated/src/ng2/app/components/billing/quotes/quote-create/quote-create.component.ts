@@ -36,20 +36,6 @@ export class QuoteCreateComponent {
   }
 
   /**
-   * Create quote and convert to invoice
-   */
-  public toInvoice() {
-    this.quoteCreateContentComponent.convertToInvoice();
-  }
-
-  /**
-   * Create quote and convert to ticket
-   */
-  public toTicket() {
-    this.quoteCreateContentComponent.convertToTicket();
-  }
-
-  /**
    * Create quote and download pdf
    */
   public download() {
