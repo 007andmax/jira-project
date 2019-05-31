@@ -78,7 +78,7 @@
           </span>
         </label>
       </div>
-      <div class="col-md-1 pointer" (click)="goToQuoteEdit(item)">#{{item.number}}</div>
+      <div class="col-md-1 pointer">#{{item.number}}</div>
       <div class="col-md-3 g-m">{{item.company.name}}</div>
       <div class="col-md-2">{{getDate(item.date)}}</div>
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>
@@ -117,24 +117,13 @@
               >Archive a quote</div>
               <div ngbDropdownItem
                    *ngIf="checkStatus(item, ['READ','UNREAD','DRAFT', 'APPROVED'])"
-                   (click)="editQuote(item)"
+                   (click)="goToQuoteEdit(item)"
               >Edit a quote</div>
             </div>
           </div>
         </a>
-      </div>s
+      </div>
     </div>
   </div>
   <div class="loading" *ngIf="!quotesList.length"></div>
 </div>
-
-'INVOICED','TICKETED','REFUSED', 'ARCHIVED'
-DRAFT
-READ
-APPROVED
-REFUSED
-EXPIRED,
-UNREAD,
-INVOICED,
-TICKETED,
-NOT_APPROVED

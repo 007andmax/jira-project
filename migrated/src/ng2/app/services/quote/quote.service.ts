@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
 
@@ -138,7 +138,9 @@ export class QuoteService {
   }
 
   downloadPdf(quote_id) {
-    return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`)
+    return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
+        'Content-Type': 'application/pdf',
+      }), responseType: 'blob'})
   }
 
   getSortType(type) {

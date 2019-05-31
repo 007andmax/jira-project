@@ -5,6 +5,7 @@ import { DateService } from "../../../../../services/date/date.service";
 import { CompaniesService } from "../../../../../services/company/companies.service";
 import { QuoteService } from "../../../../../services/quote/quote.service";
 import { QuoteStateService } from "../quote-state.service";
+import {environment} from "../../../../../../environments/environment";
 
 /**
  *  Quotes content component
@@ -20,6 +21,7 @@ export class QuoteCreateContentComponent implements OnInit {
   public fifteenDays = 1296000000;
   private selectedClient: any;
   private quoteNumber: number;
+  private apiUrl = environment.apiUrl;
   @Input() editMode: any;
 
   /**
@@ -129,12 +131,28 @@ export class QuoteCreateContentComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
       this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
-          this.quoteStateService.goToQuote();
-        });
+        const id = res['id'];
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
       })
       : this.quoteStateService.emitValidation();
 
+  }
+
+
+  /**
+   * Method is use to download file.
+   * @param data - Array Buffer data
+   * @param type - type of the document.
+   */
+  downLoadFile(res: any, id) {
+    const data = window.URL.createObjectURL(res);
+    var link = document.createElement('a');
+    link.href = data;
+    link.download=`${this.apiUrl}saleQuotes/${id}/pdf`;
+    link.click();
+    setTimeout(function(){
+      // For Firefox it is necessary to delay revoking the ObjectURL
+      window.URL.revokeObjectURL(data), 100})
   }
 
   /**
