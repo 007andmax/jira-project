@@ -1,0 +1,80 @@
+<div class="tab-pane active">
+  <div class="device-settings-tab clearfix" style="width: 100%; display: inline-block; margin-top: 80px; padding-left: 50px; padding-right: 50px;"
+       ng-controller="quicktech.core.devices.settingsTabCtrl">
+    <h3 class="devices-settings-title">Agent Deployment Settings</h3>
+    <ul class="deployment-settings clearfix" ng-form="agentDeploymentSettingsFrom"
+        ng-class="{'modify-not-allowed': !PermissionsService.isAllowed('MODIFY_SETTINGS')}">
+      <li>
+        <label>
+          Maximum agents install for this client
+          <input type="number" name="maxAgents"
+                 ng-model="settings.maxAgents" ng-readonly="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                 ng-class="{'input-error': settings.maxAgents < 0}"
+                 execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
+          <span ng-if="agents && settings.maxAgents < agents.length && settings.maxAgents !== 0" style="color: #e53935">
+            The maximum number of agents may be bigger than the number of already installed!
+          </span>
+          <span ng-if="agentDeploymentSettingsFrom.maxAgents.$error.number" style="color: #e53935">
+            Invalid value!
+          </span>
+        </label>
+      </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="settings.autoScanNetwork" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                 ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)">
+          Automatically Scan Network
+          <span class="control-indicator"></span>
+        </label>
+      </li>
+      <li>
+        <label>
+          Rescan network for new devices every
+          <select ng-model="settings.rescanTime" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                  ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
+                  ng-options="item.label for item in rescanIntervals"></select>
+        </label>
+      </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="settings.autoRemoveDevice" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                 ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)">
+          <span class="control-indicator"></span>
+          Automatically remove device if offline for more then
+          <input type="number" min="0" ng-model="settings.removeOfflineTime"
+                 ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                 execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
+          days
+
+        </label>
+      </li>
+      <li class="hide">
+        <label class="control checkbox">
+          <input type="checkbox">
+          Automatically create a local administrator account on the computer
+          <input type="text" placeholder="Username">
+          <input type="password" placeholder="Password">
+          <span class="control-indicator"></span>
+        </label>
+      </li>
+      <li>
+        <label style="display: block">
+          Choose master agent
+          <select class="select-master-id" ng-model="settings.masterAgentId" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                  ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
+                  ng-options="agent.agentId as {{ 'agent.hostName' || 'agent.ip' }} for agent in agents | filter: { agentId: '' }"></select>
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

@@ -1,0 +1,200 @@
+<div class="create-new create-email-form" ng-keypress="keypressHandle($event)">
+  <div class="email--header">
+    <h2>Write Draft for Companies</h2>
+    <button class="close-modal" ng-click="close()"></button>
+  </div>
+  <div class="email--content row">
+    <div class="col-md-12" add-on-focus ng-show="!isReportEmail">
+      <div class="placeholder">Write Subject</div>
+      <input type="text" placeholder="" ng-model="subject">
+    </div>
+    <div class="col-md-12" add-on-focus>
+      <!-- <div class="placeholder">Add Receipt Email Address</div>
+      <input type="text" placeholder=""> -->
+
+      <div class="tags-wrap border-input" ng-class="{ 'focused': isEmailInputFocused }" ng-click="setFocus($event)">
+        <!-- ng-style="tagFilter ? { 'max-width': '190px', 'width': '190px' } : ''" -->
+        <div class="tags">
+          <span class="tag-label tag-span"
+                ng-repeat="email in emails track by $index">
+            <span class="tag-span">{{ email }}</span>
+            <i class="icn-xs remove-tag" ng-click="removeEmail($index)"
+               uib-tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
+          </span>
+          <div id="tags-wrapper"
+               class="{{ isEmailInputFocused ? 'tags-action focused' : 'tags-action' }}"
+               uib-dropdown uib-dropdown-toggle on-toggle="setDropdownOpened(open)"
+               ng-style="true ? { 'width': '100%', 'display': 'inline-block' } : ''"
+               dropdown-arrow-navigation on-enter="addEmail" dropdown-data-item-name="newEmail">
+            <div ng-if="!emails.length" class="placeholder">Add Receipt Email Address</div>
+            <input type="text" id="email-input" on-enter="addEmail" class="{{ tagFilter ? 'form-control' : '' }}"
+                   ng-model="newEmail"
+                   placeholder="" set-focus-on-var-change="focusInput" ng-focus="setInputFocus(true)"
+                   ng-blur="setInputFocus(false)" ng-keypress="setDropdownOpened(true, true)">
+            <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
+              <li ng-repeat="email in filteredUsersEmails | orderBy:'toString()' track by $index"
+                  ng-click="addEmail(email)">
+                <a style="padding: 5px 20px" class="autocomplete-item"><span class="tag-name tag-span">{{email}}</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 tab-btns">
+      <button class="btn" ng-click="setTab('plain')" ng-class="{active: tab == 'plain'}">Plain Text</button>
+      <button class="btn" ng-click="setTab('html')" ng-class="{active: tab == 'html'}" ng-show="!isReportEmail">Paste
+                                                                                                                Html
+      </button>
+    </div>
+    <div class="col-md-12">
+
+      <div ng-show="tab == 'plain'" id="editors" text-editor te-initial-value="{{plainText}}" ng-model="plainText"
+           class="email-text-block"
+           name="note" te-text-maxlength="5000" te-html-maxlength="50000">
+
+        <div te-editor class="form-control editor" contenteditable="true"
+             style="min-height: 198px;max-height: 198px;overflow-y: scroll;overflow-x: hidden;border: none;border-bottom: 1px solid #edf2f6"
+             data-text="Click here to respond to the Ticket"></div>
+
+
+        <div class="form-group" ng-show="tab == 'plain'">
+          <ul class="upload-attachments">
+
+            <li ng-repeat="file in attachments"
+                ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
+
+              <span class="file-name">{{ file.name }}</span>
+              <span class="file-size">{{ file.size | fileSizeFilter }}</span>
+
+              <a href="javascript:void(0)" class="hit-area pull-right"
+                 uib-tooltip="Remove file" tooltip-placement="top"
+                 ng-click="removeAttachment($index, fileInfo[file.name].error)">
+                <i class="icn-sm icn-remove-old"></i>
+              </a>
+
+              <span class="pull-right" ng-show="fileInfo[file.name].error"
+                    style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
+                {{ fileInfo[file.name].message }}
+              </span>
+
+              <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+                 ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
+                 uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+                <i class="icn-sm icn-reupload"></i>
+              </a>
+
+              <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
+                <div class="progress-bar" role="progressbar"
+                     aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+                     ng-style="styleProgressBar(file.progress)">
+                  <span class="sr-only">{{ file.progress }}% Complete</span>
+                </div>
+              </div>
+
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="wysiwyg-controls-wrapper">
+
+
+          <div class="control-wrappers" data-role="editor-toolbar">
+
+
+            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle input" data-toggle="dropdown" title="" data-original-title="Font">Font <i
+                  class="icn-sm report-caret-icon"></i></a>
+                <ul class="dropdown-menu" style="top: -133px;">
+
+                  <li><a data-edit="fontName Arial">Arial</a></li>
+                  <li><a data-edit="fontName Times New Roman">Times New Roman</a></li>
+                  <li><a data-edit="fontName Roboto">Roboto</a></li>
+                </ul>
+              </div>
+            </div>
+            <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="attachments"
+                 ng-show="!isReportEmail">
+              <a href="javascript:void(0)" class="pull-left hit-area ha-16-18 has-tooltip"
+                 tooltip-append-to-body="true" uib-tooltip="Attach Files"
+                 tooltip-placement="top">
+                <i class="icn-16 icn-text-attachment"></i>
+              </a>
+              <input type="file" style="display:none" multiple="" />
+            </div>
+
+
+            <a class="has-tooltip pointer"
+               data-edit="bold"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
+              <i class="icn-16 wysiwyg-bold"></i>
+            </a>
+            <a class="has-tooltip pointer"
+               data-edit="italic"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
+              <i class="icn-16 wysiwyg-italic"></i>
+            </a>
+            <a class="has-tooltip pointer"
+               data-edit="underline"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
+              <i class="icn-16 wysiwyg-underline"></i>
+            </a>
+
+            <a class="has-tooltip pointer"
+               data-edit="insertorderedlist"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
+              <i class="icn-16 wysiwyg-ol"></i>
+            </a>
+            <a class="has-tooltip pointer"
+               data-edit="insertunorderedlist"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
+              <i class="icn-16 wysiwyg-ul"></i>
+            </a>
+
+            <a class="has-tooltip pointer"
+               data-edit="justifyleft"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
+              <i class="icn-16 icn-wysiwyg-align-left"></i>
+            </a>
+            <a class="has-tooltip pointer"
+               data-edit="justifycenter"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
+              <i class="icn-16 icn-wysiwyg-align-center"></i>
+            </a>
+            <a class="has-tooltip pointer"
+               data-edit="justifyright"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
+              <i class="icn-16 icn-wysiwyg-align-right"></i>
+            </a>
+
+            <a class="has-tooltip pointer"
+               data-edit="removeformat"
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formatting">
+              <i class="icn-16 wysiwyg-reset"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+
+      <textarea ng-show="tab == 'html'" ng-model="plainHTML" class="email-text-block textarea"
+                placeholder="Put here your HTML">
+
+
+      </textarea>
+
+    </div>
+
+
+    <!-- <div class="col-md-12 text-right">
+      <a class="pointer create-new-link">See Preview</a>
+    </div> -->
+  </div>
+  <div class="email--footer">
+    <button class="btn btn-primary" ng-click="sendEmail()">Send Email</button>
+    <button class="btn btn-default" ng-click="close()">Cancel</button>
+  </div>
+</div>

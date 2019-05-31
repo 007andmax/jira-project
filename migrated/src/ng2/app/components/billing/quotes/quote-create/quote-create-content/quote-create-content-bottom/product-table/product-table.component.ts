@@ -106,9 +106,13 @@ export class ProductTableComponent implements OnInit {
 
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].markup =  this.roundToTwo((value - item.cost)/item.cost * 100);
-    this.itemsListArray[index].sales = this.roundToTwo(value);
-    this.updateItemsArray();
+    if (this.getMarkup(this.itemsListArray[index])) {
+      this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
+      this.itemsListArray[index].sales = value;
+      this.updateItemsArray();
+    } else {
+      this.itemsListArray[index].rate = value;
+    }
   }
 
   public changeCost(value, index) {

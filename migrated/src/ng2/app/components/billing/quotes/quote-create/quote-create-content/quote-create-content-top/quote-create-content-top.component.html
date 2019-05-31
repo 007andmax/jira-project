@@ -8,6 +8,11 @@
                                  (selectedItem)="selectClient($event)">
       </app-select-client-company>
     </div>
+    <div *ngIf="currentClient">
+      <p>{{getCLientUserName(currentClient.companyInfo)}}</p>
+      <p>{{getCLientAddress(currentClient.companyInfo)}}</p>
+      <p>{{currentClient.companyInfo.contacts[0].primaryEmail}}</p>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="quote-create-field">

@@ -1,0 +1,926 @@
+<div class="container-ticket-content nano" show-ticket-details >
+  <div class="nano-content" >
+    <loading-indicator loading-trigger="!isLoaded"></loading-indicator>
+    <div class="ticket-content" ng-show="isLoaded">
+      <div ng-form="editTicketForm">
+        <div class="ticket-header clearfix ticket-fixed-header">
+          <div id="ticket-header-content">
+            <div class="expand-ticket-btn" ng-click="toggleTicketsList()"
+                 ng-class="{'active': !ticketListOpened}">
+              <div ng-style="{'transform': ticketListOpened ? 'rotate(0)' : 'rotate(180deg)'}">
+                <i class="icn-sm icn-back-arrow" style="position: absolute;top: 7px;left: 3px;"></i></div>
+            </div>
+            <div class="ticket-header-avatar">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
+            </div>
+            <div class="clearfix vladik">
+              <div class="ticket-header-username">
+                <div qt-popover-position="bottom"
+                     custom-disabled="{{ user.company.isDefault }}"
+                     qt-custom-popover-template="/ng1/scripts/core/tickets/popup-templates/user-info-popup.tpl.html">
+                  <span qt-popover-trigger="mouseenter">{{ getUserName(user) }}</span>
+                </div>
+                <div uib-dropdown>
+                  <span
+                    class="label label-primary priority-big-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }}"
+                    uib-dropdown-toggle></span>
+                  <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
+                      ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)">
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">
+                        <span class="priority-dot low"></span>
+                        Low
+                      </a>
+                    </li>
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">
+                        <span class="priority-dot medium"></span>
+                        Medium
+                      </a>
+                    </li>
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">
+                        <span class="priority-dot high"></span>
+                        High
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div ng-if="!company.isDefault">
+                  <span class="company-name" ng-show="!isEmail">{{ company.name }}</span>
+                  <div style="display: inline-block" uib-dropdown class="companies-dropdown" ng-show="isEmail">
+                    <div uib-dropdown-toggle>
+                      <span>{{ company.name }}</span>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+                      <li ng-repeat="item in userCompanies" ng-click="setUserCompany(item.id)">
+                        <span>{{ item.name }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket-header-status pull-left">
+                <div style="font-size: 12px;font-weight: 700;color: #9ca5b6;">{{ticketDetails.number}}</div>
+                <i class="dot-sep"></i>
+                <div style="color:#4f5f79;"> {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}</div>
+                <div class="pull-left" uib-dropdown>
+                <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
+                      class="label-icn-sm progress-small-size label-primary persistent-tooltip"
+                      tooltip-append-to-body="true"
+                      uib-tooltip="{{ userReadable(ticketDetails.status) || 'Unclaimed' }}" tooltip-placement="top"
+                      uib-dropdown-toggle>
+                  <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}">
+                    <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}"></i>
+                  </label>
+                </span>
+                  <span
+                    class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+                    ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].color, 'font-weight': 'bold', 'border': 'none'}"
+                    ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
+                    uib-dropdown-toggle>
+                  {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
+                </span>
+                  <ul class="dropdown-menu dropdown-priority"
+                      ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails) && ticketDetails.status">
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)"
+                         ng-click="changeTicketStatus('IN_PROGRESS')">
+                        In Progress
+                      </a>
+                    </li>
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)"
+                         ng-click="changeTicketStatus('ON_HOLD')">
+                        On Hold
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {{ userReadable(ticketDetails.ticketSource) }}
+                <span ng-if="ticketDetails.sourceName && ticketDetails.ticketSource.toLowerCase() === 'from_agent'">
+                  &nbsp;({{ ticketDetails.sourceName }})
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-header-actions" ng-show="listType !== 'preview'">
+            <div class="ticket-edit-actions"
+                 ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
+              <div class="btn btn-icn btn-default pull-left"
+                   ng-if="editingTicket"
+                   ng-disabled="disabledSaveButton"
+                   uib-tooltip="Save"
+                   tooltip-placement="top"
+                   ng-click="saveEditedTicket(editTicketForm)">
+                <i class="icn-sm icn-label-save"></i>
+              </div>
+              <div class="btn btn-icn btn-default pull-left"
+                   ng-if="editingTicket"
+                   uib-tooltip="Cancel"
+                   tooltip-placement="top"
+                   ng-click="setEditingTicket(!editingTicket)">
+                <i class="icn-sm icn-label-cancel"></i>
+              </div>
+              <div uib-tooltip="Edit"
+                   tooltip-placement="top">
+                <button class="company-edit-icn"
+                        ng-click="setEditingTicket(!editingTicket)"
+                        ng-hide="editingTicket">
+                </button>
+              </div>
+            </div>
+            <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
+                 smart-dropdown-menu-position>
+              <div uib-tooltip="Assign"
+                   tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
+                <button class="ticket-assign"></button>
+              </div>
+              <div style="right: 0;"
+                   class="dropdown-assign-ticket dropdown-menu fixed-assign"
+                   stop-propagation="click"
+                   dropdown-menu
+                   assign-user-button aub-ticket-id="ticketDetails.id"
+                   ticket-assigned-user-id="ticketDetails.assignedUser.id"
+                   aub-ticket-number="ticketDetails.number"
+                   users="usersCurrentCompany"
+                   aub-current-user="currentUser">
+              </div>
+              <div typeahead-input-icon-sm="ticketAssignTo"></div>
+            </div>
+            <div class="ticket-settings-actions" uib-dropdown>
+              <div uib-tooltip="Settings"
+                   tooltip-placement="top" aria-expanded="false"
+                   ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
+                   uib-dropdown-toggle>
+                <button class="ticket-settings"></button>
+              </div>
+              <ul class="dropdown-menu dropdown-menu-right" style="width: 179px; overflow: visible;" role="menu">
+                <li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
+                </li>
+                <li class="dropdown-submenu left-align linked-agent-dropdown"
+                    ng-if="!ticketDetails.company.isDefault && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">
+                  <a tabindex="-1" href="javascript:void(0)" class="link-user">
+                    {{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}
+                    Agent
+                  </a>
+                  <ul class="dropdown-submenu-wrapper dropdown-menu">
+                    <li ng-repeat="agent in agentList" ng-click="linkAgent(ticketDetails.id, agent.id)"
+                        ng-if="!ticketDetails.agent || agent.id !== ticketDetails.agent.deviceId">
+                      {{ agent.hostName || agent.ip }}
+                    </li>
+                  </ul>
+                </li>
+                <li ng-if="ticketDetails.agent && ticketDetails.agent.deviceId">
+                  <a tabindex="-1" class="unlink-user" href="javascript:void(0)"
+                     ng-click="linkAgent(ticketDetails.id, '')">
+                    Unlink Agent
+                  </a>
+                </li>
+                <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">
+                  <a tabindex="-1" class="trash-user" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to
+                    Trash</a>
+                </li>
+                <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">
+                  <a tabindex="-1" class="spam-user" href="javascript:void(0)" ng-if="currentUser.isOwner"
+                     ng-click="moveIntoSpam()">Mark as Spam</a>
+                  <a tabindex="-1" class="spam-user" href="javascript:void(0)" ng-if="!currentUser.isOwner"
+                     ng-click="moveIntoSpam()">Report as Spam</a>
+                </li>
+              </ul>
+            </div>
+            <!--<div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">-->
+          </div>
+        </div>
+      </div>
+      <div class="ticket-detail">
+        <div ng-if="!editingTicket">
+          <h2 class="ellipsis"
+              id="tickets-subject">{{ ticketDetails.subject }}</h2>
+          <div class="ticket-message"
+               ng-bind-html="getTicketNote()"
+               id="tickets-note"></div>
+          <!-- -->
+        </div>
+        <div ng-class="{'ticket-editing': editingTicket}" ng-if="editingTicket">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'subject')}"
+               style="margin-bottom: 10px;">
+            <div ng-messages="editTicketForm.subject.$error"
+                 ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">
+              <label class="control-label" ng-message="required">Subject can not be left empty.</label>
+              <label class="control-label" ng-message="maxlength">Subject is too large.</label>
+            </div>
+            <input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"
+                   name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">
+          </div>
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(editTicketForm, 'note')}">
+            <div ng-messages="editTicketForm.note.$error"
+                 ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">
+              <label class="control-label" ng-message="maxlength">Note is too large.</label>
+            </div>
+            <div text-editor te-initial-value="{{ editedTicket.note }}"
+                 ng-model="editedTicket.note" name="note" te-text-maxlength="5000" class="note-wrapper"
+                 te-html-maxlength="50000">
+              <div te-editor class="form-control editor" contenteditable="true"
+                   style="min-height: 92px;height: auto;border: none; color: rgb(64, 75, 95);"
+                   data-text="Type your message..."></div>
+            </div>
+          </div>
+        </div>
+        <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
+      </div>
+      <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0" qt-toggle-slider>
+        <div class="attachment-meta">
+          <div class="icons-wrapper">
+            <b>{{ ticketDetails.attachments.length }} </b>
+            <span>Attachments</span>
+            <div class="attachments-icons">
+              <div ng-repeat="type in reducedAttachmentsTypes" class="file-icon-name attach-type-{{ type }} pointer"
+                   qt-icon-toggle-to-change></div>
+            </div>
+          </div>
+          <div class="combined-shape expand-down" qt-icon-toggle-to-change></div>
+          <div class="download-all pull-right" style="display: none;">
+            <div class="btn btn-icn btn-default pull-right has-tooltip"
+                 uib-tooltip="download all attachments" tooltip-append-to-body="true"
+                 tooltip-placement="top" ng-click="downloadAllAttachments()">
+              <i class="icon-sm attachments"></i>
+            </div>
+          </div>
+        </div>
+        <ul class="attachments clearfix" style="position: relative;">
+          <li ng-repeat="attachment in ticketDetails.attachments"
+              ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+              class="{{ attachmentImageClass[attachment.file.contentType] }}"
+              url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+              data="attachment.file" func="downloadAttachment"
+              first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
+            <div class="file-icon-name attach-type-{{ type }}"></div>
+            <div class="file-name" ng-bind="attachment.file.name"></div>
+            <div class="onhover">
+              <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                    ng-bind="attachment.file.name"></span>
+              <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+              <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
+                 uib-tooltip="Download" tooltip-placement="top"
+                 ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
+                <span class="icon-sm attachments"></span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div ng-include="'/ng1/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
+      <div class="mobile-visible" ng-if="TicketsPermissionsService.isActionVisible('update', ticketDetails)"
+           ng-include="'/ng1/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
+      <div ng-include="'/ng1/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
+      <div class="ticket-updates clearfix">
+        <div class="ticket-update-header clearfix"
+             ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates">
+          <div style="font-size: 13px;">
+            <b class="ng-binding">{{ticketDetails.updates.length + ticketDetails.unloadedUpdates}}</b>
+            <span style="color: #9ca5b6;">Ticket Updates</span>
+          </div>
+          <div class="clearfix"></div>
+          <ul class="shared-users-list clearfix" ng-show="isFullSharedUserShow === true">
+            <li ng-repeat="share in shares">
+              <div class="pull-left avatar persistent-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true"
+                   uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/shared-user-popup.tpl.html'">
+                <img ng-src="{{ share.avatarUrl }}" alt="..." class="img-circle avatar-40">
+              </div>
+            </li>
+            <li>
+              <div class="btn btn-icn pull-left btn-primary has-tooltip"
+                   uib-tooltip="Hide All" data-placement="top" ng-click="toggleFullSharedUsers()">
+                <i class="icn-sm icn-remove-token-light"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="ticket-updates-wrapper clearfix"
+             ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates">
+          <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
+               ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
+               ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}" ng-init="updateIndex = $index;">
+            <div class="ticket-update-avatar pull-left">
+              <div class="indicator-new-update animation-hide angular-animate" ng-show="ticketUpdate.unread"
+                   std-update="{{ ticketUpdate.id }}"></div>
+              <div class="pull-left avatar m-r">
+                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="avatar-40 img-circle">
+              </div>
+            </div>
+            <div class="ticket-update-content pull-left">
+              <div class="updater-name">{{ getUserName(user) }}
+                <span class="text-muted">added {{ updateType() }}</span>
+                <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete Update"
+                   ng-click="deleteUpdate()"
+                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
+                  <i class="icon-sm icn-delete"></i>
+                </a>
+              </div>
+              <p class="ticket-update-message"
+                 ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating !== ticketUpdate.id"
+                 ng-bind-html="getUpdateNote()"
+                 contenteditable="{{ ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id}}"></p>
+              <a ng-if="ticketUpdate.type === 'NOTE'" style="position: absolute;top: 40px;right: -3px;"
+                 class="hit-area pull-right has-tooltip"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit update"
+                 ng-click="toggleNoteUpdate(ticketUpdate)"
+                 custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                <i class="icon-sm edit-icon"></i>
+              </a>
+              <div ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id" class="clearfix"
+                   style="position: relative; float: left; width: 100%">
+                <div class="static-wysiwyg">
+                  <div class="ticket-update-note">
+                    <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note"
+                         name="note" te-text-maxlength="5000" te-html-maxlength="50000">
+                      <div te-editor class="editor" contenteditable="true"
+                           data-text="Click here to respond to the Ticket"></div>
+                    </div>
+                  </div>
+                  <div class="ticket-update-edit-actions clearfix">
+                    <div class="validation-msg pull-left">{{ validationMessage() }}</div>
+                    <div class="btn btn-primary" ng-click="cancelNoteUpdate(ticketUpdate)">
+                      Cancel
+                    </div>
+                    <div class="btn btn-success"
+                         custom-disabled="{{ disabledSave || updateTicketService.$invalid}}"
+                         ng-click="updateNoteRequest(ticketUpdate.id, ticketUpdate.note)">
+                      Save
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul class="attachments clearfix" style="position: relative;"
+                  ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
+                <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
+                    ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+                    ng-repeat="attachment in ticketUpdate.attachments"
+                    url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                    disable-if="{{ !attachmentType['image/' + type] }}"
+                    data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
+                  <div class="file-icon-name attach-type-{{ type }}"></div>
+                  <div class="file-name" ng-bind="attachment.file.name"></div>
+                  <div class="onhover">
+                    <span class="file-name"
+                          style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                          ng-bind="attachment.file.name"></span>
+                    <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+                    <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
+                       data-placement="top" uib-tooltip="Download"
+                       ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
+                      <span class="icon-sm attachments"></span>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <div class="table-wrapper product-upd clearfix"
+                   ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
+                   ng-if="ticketUpdate.type === 'PRODUCT'">
+                <!--<div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">-->
+                <!--<div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"-->
+                <!--ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">-->
+                <!--<span class="ellipsis pre-line" uib-tooltip="{{ product.item.description }}"-->
+                <!--trimmed-tooltip-checker="product.item.description"></span>-->
+                <!--<div style="color:#b2becd;font-size: 13px; line-height: 20px;">-->
+                <!--<span style="word-break: break-all" ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>-->
+                <!--<span style="word-break: break-all"-->
+                <!--ng-show="product.item.manufacture && product.item.manufacture.length > 0"-->
+                <!--&gt;P/N: {{ product.item.manufacture }}</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-3 ellipsis serial-width" ng-if="product.serialNumber"-->
+                <!--uib-tooltip="{{ product.serialNumber }}"-->
+                <!--trimmed-tooltip-checker="product.serialNumber">-->
+                <!--</div>-->
+                <!--<div class="col-5">-->
+                <!--<div class="ellipsis" ng-show="ticketDetails.status !== 'COMPLETED'"-->
+                <!--uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"-->
+                <!--trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">-->
+                <!--</div>-->
+                <!--<div class="ellipsis" ng-show="ticketDetails.status === 'COMPLETED'"-->
+                <!--uib-tooltip="{{ product.sum | currency :'$':2 }}"-->
+                <!--trimmed-tooltip-checker="product.sum | currency:'$':2">-->
+                <!--</div>-->
+                <!--<div class="discount-ticket" ng-if="product.discountAmount>0">-->
+                <!--Discount:-->
+                <!--{{product.discountAmount}}&nbsp;%-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-4">-->
+                <!--<span class="ellipsis"-->
+                <!--uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"-->
+                <!--trimmed-tooltip-checker="product.item.sale | currency:'$':2">-->
+                <!--</span>-->
+                <!--<span class="model">Qty {{ product.quantity }}</span>-->
+                <!--</div>-->
+                <!--<div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">-->
+                <!--<a class="hit-area pull-right has-tooltip"-->
+                <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"-->
+                <!--ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"-->
+                <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
+                <!--<i class="icon-sm edit-icon"></i>-->
+                <!--</a>-->
+                <!--<a class="hit-area pull-right has-tooltip"-->
+                <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"-->
+                <!--ng-click="deleteExpence(ticketUpdate, [product.id], [])"-->
+                <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
+                <!--<i class="icon-sm icn-delete"></i>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-9 ellipsis">
+                      <p>Product</p>
+                      <p class="pre-line">{{product.item.description}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Price</p>
+                      <p>{{product.item.sale | currency:'$':2}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Quantity</p>
+                      <p style="color: #9ca5b6">Qty {{ product.quantity }}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Total</p>
+                      <p>{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</p>
+                    </div>
+                  </div>
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-10">
+                      <p>Serial Number</p>
+                      <p>{{product.serialNumber}}</p>
+                    </div>
+                    <div class="col-md-2 text-right text-righttable-content-top clearfix" style="color:#2ec866 ">
+                      {{product.discountAmount}} <span ng-if="product.discountAmount">% Discount</span>
+                    </div>
+                  </div>
+                  <div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">
+                    <a class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
+                       ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm edit-icon"></i>
+                    </a>
+                    <a class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"
+                       ng-click="deleteExpence(ticketUpdate, [product.id], [])"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm icn-delete"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="ticket-update-edit" ng-class="{'hide': product.id !== editExpenseId}"
+                     ng-if="product.id === editExpenseId"
+                     ng-include="'/ng1/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
+              </div>
+              <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
+                   ng-if=" ticketUpdate.type === 'SERVICE'">
+                <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-2">
+                      <p>Date</p>
+                      <p>{{ service.date | date:'dd MMM yyyy'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p>Service name</p>
+                      <p>{{ service.item.name }}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Time in</p>
+                      <p>{{getFormatedTime(service.durationStart)}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Time out</p>
+                      <p>{{getFormatedTime(service.durationEnd)}}</p>
+                    </div>
+                    <div class="col-md-1" style="width: 8%;">
+                      <p>Duration</p>
+                      <p>{{ service.quantity | durationFilter }}</p>
+                    </div>
+                  </div>
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-12">
+                      <p>Description</p>
+                      <p class="pre-line" ng-bind-html="service.description"></p>
+                    </div>
+                  </div>
+                  <!--<div class="col-1">{{ service.date | date:'dd MMM yyyy'}}</div>-->
+                  <!--<div class="col-2">{{ service.item.name }}</div>-->
+                  <!--<div class="col-5">Duration-->
+                  <!--<span class="model ">{{ service.quantity | durationFilter }}</span>-->
+                  <!--<div ng-if="service.discountAmount>0">-->
+                  <!--Discount: {{service.discountAmount}}&nbsp;%-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-3 service-descr">-->
+                  <!--{{ service.description ? service.description : '&nbsp;' }}-->
+                  <!--</div>-->
+                  <div class="table-content-action pull-right" ng-show="ticketDetails.status != 'COMPLETED'">
+                    <a class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
+                       ng-click="setEditExpenseId(service.id, service, ticketUpdate.id)"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm edit-icon"></i>
+                    </a>
+                    <a class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete service"
+                       ng-click="deleteExpence(ticketUpdate, [], [service.id])"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm icn-delete"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="ticket-update-edit" ng-class="{'hide': service.id !== editExpenseId}"
+                     ng-if="service.id === editExpenseId"
+                     ng-include="'/ng1/scripts/core/tickets/services/ticket-edit-update-service.tpl.html'"></div>
+              </div>
+              <div class="ticket-update-meta clearfix" ng-init="showAllSharedUsers = false">
+                <div class="ticket-meta-wrapper">
+                  <span class="update-timestamp pull-left">{{ ticketUpdate.createdAt | ticketCreateDate }}
+                    <span class="dot-sep"></span>
+                    {{ getLengthSharedUsers(ticketUpdate.shares) }} people added to this update
+                  </span>
+                  <div class="added-users-wrapper pull-left">
+                    <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
+                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                         tooltip-class="avatar-tooltip" tooltip-placement="top"
+                         uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                      <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
+                           ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                      <div class="default-user-avatar" ng-if="!(share.user.avatar)"
+                           ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                        <span>{{share.user.firstName[0].toUpperCase()}}</span>
+                        <span>{{share.user.lastName[0].toUpperCase()}}</span>
+                      </div>
+                    </div>
+                    <span class="pull-left label label-light btn-more-users" ng-click="showAllSharedUsers = true"
+                          ng-class="{'hide': (getLengthSharedUsers(ticketUpdate.shares) < 6) || showAllSharedUsers}">
+                      {{ getLengthSharedUsers(ticketUpdate.shares) - 5 }} More
+                    </span>
+                    <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}"
+                         style="margin-left: 0px;">
+                      <div class="pull-left avatar userinfo-tooltip"
+                           ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"
+                           tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
+                           uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                        <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
+                             ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                        <div class="default-user-avatar" ng-if="!(share.user.avatar)"
+                             ng-class-odd="'avatar-background-color-odd'"
+                             ng-class-even="'avatar-background-color-even'">
+                          <span>{{share.user.firstName[0].toUpperCase()}}</span>
+                          <span>{{share.user.lastName[0].toUpperCase()}}</span>
+                        </div>
+                      </div>
+                      <div class="btn btn-icn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
+                           uib-tooltip="Show Fewer" data-placement="top">
+                        <i class="icn-sm icn-remove-token-light"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn btn-lg btn-primary btn-load-more"
+               tooltip-append-to-body="true" ng-click="loadMoreUpdates();"
+               custom-disabled="{{ allUpdatesLoaded || ticketDetails.unloadedUpdates === 0 }}">
+            Load More Updates
+          </div>
+        </div>
+        <div class="no-ticket-updates" ng-if="!ticketDetails.updates.length">
+          <p>No ticket Update posted yet!
+            Ticket Update will be appear here</p>
+          <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="mob-ticket-content desktop-hidden">
+      <div class="mob-ticket-header">
+        <div class="mob-ticket-header-info">
+          <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
+          <div class="mob-valera">
+            <div class="mob-valera-name">
+              {{ getUserName(user) }}
+              <div uib-dropdown>
+              <span
+                class="label label-primary priority-big-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }}"
+                uib-dropdown-toggle></span>
+                <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
+                    ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)">
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">
+                      <span class="priority-dot low"></span>
+                      Low
+                    </a>
+                  </li>
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">
+                      <span class="priority-dot medium"></span>
+                      Medium
+                    </a>
+                  </li>
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">
+                      <span class="priority-dot high"></span>
+                      High
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="mob-valera-ticket">
+              <div class="mob-valera-ticket-num">{{ ticketDetails.number }}</div>
+              <div class="mob-valera-ticket-date">{{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="mob-ticket-header-progress clearfix">
+          <div uib-dropdown>
+            <span
+              class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+              ng-style="{'background': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].backgroundColor, 'color': tagColors[ticketsTagsColors[getTicketStatus(ticketDetails)]].color, 'font-weight': 'bold', 'border': 'none'}"
+              ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
+              uib-dropdown-toggle>
+                  {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
+                </span>
+            <ul class="dropdown-menu dropdown-priority"
+                ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails) && ticketDetails.status">
+              <li>
+                <a tabindex="-1" href="javascript:void(0)"
+                   ng-click="changeTicketStatus('IN_PROGRESS')">
+                  In Progress
+                </a>
+              </li>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)"
+                   ng-click="changeTicketStatus('ON_HOLD')">
+                  On Hold
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mob-ticket-detail">
+        <div class="mob-ticket-detail-subject"> {{ ticketDetails.subject }}</div>
+        <div class="mob-ticket-detail-message"
+             ng-bind-html="getTicketNote()"></div>
+        <div class="mob-ticket-detail-tags">
+          <ticket-tags
+            readonly-tags="false"
+            ticket-tags="ticketDetails.tags"
+            ticket-id="{{ticketDetails.id}}">
+          </ticket-tags>
+        </div>
+        <div class="mob-ticket-detail-attachments">
+          <div class="mob-ticket-detail-attachments-counter">
+            {{ ticketDetails.attachments.length }} <span>Attachments</span>
+          </div>
+          <div class="mob-ticket-detail-attachments-content">
+            <ul class="attachments clearfix" style="position: relative;">
+              <li ng-repeat="attachment in ticketDetails.attachments"
+                  ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+                  class="{{ attachmentImageClass[attachment.file.contentType] }}"
+                  url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                  data="attachment.file" func="downloadAttachment"
+                  first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
+                <div class="file-icon-name attach-type-{{ type }}"></div>
+                <div class="file-name" ng-bind="attachment.file.name"></div>
+                <div class="onhover">
+                  <span class="file-name" ng-bind="attachment.file.name"></span>
+                  <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+                  <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
+                     uib-tooltip="Download" tooltip-placement="bottom"
+                     ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
+                    <span class="icon-sm attachments"></span>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mob-ticket-detail-alert"
+             ng-include="'/ng1/scripts/core/tickets/ticket-details-user-msg.tpl.html'">
+        </div>
+        <div class="mob-ticket-detail-updates">
+          <b>{{ticketDetails.updates.length}}</b><span> Ticket Updates</span>
+        </div>
+      </div>
+      <div class="mob-ticket-updates">
+        <div class="ticket-updates-wrapper clearfix"
+             ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates">
+          <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
+               ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
+               ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}" ng-init="updateIndex = $index;">
+            <div class="ticket-update-header">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
+              <div class="updater-name">{{ getUserName(user) }}
+                <span class="text-muted">added {{ updateType() }}</span>
+              </div>
+              <div class="ticket-update-actions">
+                <a ng-if="ticketUpdate.type === 'NOTE'" class="hit-area has-tooltip edit-update"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
+                   ng-click="toggleNoteUpdate(ticketUpdate)"
+                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                  <i class="icon-sm edit-icon"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area has-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"
+                   ng-click="deleteUpdate()"
+                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
+                  <i class="icon-sm icn-delete"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ticket-update-content">
+              <div class="ticket-update-message"
+                   ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating !== ticketUpdate.id"
+                   ng-bind-html="getUpdateNote()">
+              </div>
+              <ul class="attachments clearfix" style="position: relative;"
+                  ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
+                <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
+                    ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+                    ng-repeat="attachment in ticketUpdate.attachments"
+                    url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                    disable-if="{{ !attachmentType['image/' + type] }}"
+                    data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
+                  <div class="file-icon-name attach-type-{{ type }}"></div>
+                  <div class="file-name" ng-bind="attachment.file.name"></div>
+                  <div class="onhover">
+                    <span class="file-name" ng-bind="attachment.file.name"></span>
+                    <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+                    <a href="javascript:void(0)"
+                       class="tp-hide file-download has-tooltip"
+                       data-placement="top" uib-tooltip="Download"
+                       ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
+                      <span class="icon-sm attachments"></span>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <div class="ticket-update-product"
+                   ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
+                   ng-if="ticketUpdate.type === 'PRODUCT'">
+                <!--@Leo for 'ticket-update-product-item' add class 'has-discount' if product has discount-->
+                <div class="ticket-update-product-item" ng-class="{'hide': product.id === editExpenseId}">
+                  <div class="col desc-w" uib-tooltip="{{ product.item.description }}"
+                       trimmed-tooltip-checker="product.item.description">
+                  </div>
+                  <div class="discount-ticket col text-right discount-w" ng-if="product.discountAmount>0">
+                    {{product.discountAmount}}&nbsp;% Discount
+                  </div>
+                  <div class="update-border"></div>
+                  <div class="ellipsis w-33 col"
+                       uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
+                       trimmed-tooltip-checker="product.item.sale | currency:'$':2">
+                  </div>
+                  <div class="model w-33 col text-center">Qty {{ product.quantity }}</div>
+                  <div class="ellipsis w-33 col text-right" ng-show="ticketDetails.status !== 'COMPLETED'"
+                       uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
+                       trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
+                  </div>
+                  <div class="ellipsis w-33 col text-right" ng-show="ticketDetails.status === 'COMPLETED'"
+                       uib-tooltip="{{ product.sum | currency :'$':2 }}"
+                       trimmed-tooltip-checker="product.sum | currency:'$':2">
+                  </div>
+                  <!--@Leo-->
+                  <a class="hit-area has-tooltip edit-update"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
+                     ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"
+                     custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                    <i class="icon-sm edit-icon"></i>
+                  </a>
+                  <a class="hit-area has-tooltip delete-update"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"
+                     ng-click="deleteExpence(ticketUpdate, [product.id], [])"
+                     custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                    <i class="icon-sm icn-delete"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="ticket-update-service"
+                   ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
+                   ng-if=" ticketUpdate.type === 'SERVICE'">
+                <div class="ticket-update-service-item">
+                  <div class="ticket-update-service-date col w-26">
+                    {{ service.date | date:'dd MMM yyyy'}}
+                  </div>
+                  <div class="ticket-update-service-name ellipsis col w-48">
+                    {{ service.item.name }}
+                  </div>
+                  <div class="ticket-update-service-duration col w-26 text-right">
+                    Duration
+                    <span class="model ">{{ service.quantity | durationFilter }}</span>
+                  </div>
+                  <div class="update-border"></div>
+                  <div class="ticket-update-service-description col" ng-bind-html="getHtml(service.description)">
+                  </div>
+                  <a class="hit-area has-tooltip edit-update"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
+                     ng-click="setEditExpenseId(service.id, service, ticketUpdate.id)"
+                     custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                    <i class="icon-sm edit-icon"></i>
+                  </a>
+                  <a class="hit-area has-tooltip delete-update"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete service"
+                     ng-click="deleteExpence(ticketUpdate, [], [service.id])"
+                     custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                    <i class="icon-sm icn-delete"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="ticket-update-meta clearfix" ng-init="showAllSharedUsers = false">
+                <div class="ticket-meta-wrapper">
+                  <span class="update-timestamp pull-left">{{ ticketUpdate.createdAt | ticketCreateDate }}
+                  </span>
+                  <div class="added-users-wrapper pull-left">
+                    <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
+                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                         tooltip-class="avatar-tooltip" tooltip-placement="top"
+                         uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                      <img alt="..." class="avatar-26 img-circle"
+                           ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                    </div>
+                    <span class="pull-left label label-light btn-more-users" ng-click="showAllSharedUsers = true"
+                          ng-class="{'hide': (getLengthSharedUsers(ticketUpdate.shares) < 6) || showAllSharedUsers}">
+                      {{ getLengthSharedUsers(ticketUpdate.shares) - 5 }} More
+                    </span>
+                    <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}"
+                         style="margin-left: 0px;">
+                      <div class="pull-left avatar userinfo-tooltip"
+                           ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"
+                           tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
+                           uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                        <img alt="..." class="avatar-26 img-circle"
+                             ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                      </div>
+                      <div class="btn btn-icn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
+                           uib-tooltip="Show Fewer" data-placement="top">
+                        <i class="icn-sm icn-remove-token-light"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn btn-lg btn-primary btn-load-more"
+               tooltip-append-to-body="true" ng-click="loadMoreUpdates();"
+               custom-disabled="{{ allUpdatesLoaded || ticketDetails.unloadedUpdates === 0 }}">
+            Load More Updates
+          </div>
+        </div>
+      </div>
+      <div class="no-ticket-updates" ng-if="!ticketDetails.updates.length">
+        <p>No ticket Update posted yet!
+          Ticket Update will be appear here</p>
+        <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
+      </div>
+      <div class="mob-ticket-buttons">
+        <button class="mob-add-ticket-btn mobile-btn primary"
+                ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)"
+                ng-class="{ 'class-disabled': TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') }"
+                ng-click="toggleUpdateWindow(true)"
+                ng-disabled="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')">+ Add New
+        </button>
+        <button class="mob-close-ticket-btn mobile-btn"
+                ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)"
+                ng-click="updateAndCloseTicket()">Close Ticket
+        </button>
+        <button class="mob-add-ticket-btn mobile-btn primary full"
+                ng-if="ticketDetails.status === 'COMPLETED' && (TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')) && !TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billed')"
+                ng-click="markAsOpen()">
+          Re-open Ticket
+        </button>
+        <button class="mob-add-ticket-btn mobile-btn primary full" ng-click="claimTicket()"
+                ng-if="!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id">
+          Claim
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+</script>

@@ -1,0 +1,58 @@
+<div>
+  <div class="col-sm-7">
+    <div uib-dropdown>
+      <!--<input type="text"-->
+      <!--name="productName"-->
+      <!--ng-model="productExpense.name"-->
+      <!--ng-minlength="1"-->
+      <!--autocomplete="off"-->
+      <!--tabindex="5"-->
+      <!--placeholder="New Product"-->
+      <!--class="form-control form-control-dropdown dropdown-toggle"-->
+      <!--uib-typeahead="product as product.name for product in defaultProducts |  orderBy:'name'"-->
+      <!--qt-typeahead-show-on-focus-->
+      <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+      <!--value="product" hard-reset-pattern="serviceNamePattern">-->
+
+      <!--<div class="input-top-4" typeahead-input-icon="productName"></div>-->
+
+      <div products-list="productExpense" id="product-list-cont-prev" ng-if="reInitPrpductsExpenseNameField"
+           click-outside="closeDropdown()" outside-if-not="product-list-cont">
+        <div>
+          <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+                 placeholder="Product" autocomplete="off" ng-model="productExpense.name.description">
+          <input ng-show="isPLOpen" type="text" class="form-control has-dropdown"
+                 pl-search-product-input
+                 placeholder="Search or Add Product" autocomplete="off" smart-dropdown-menu-position="product-list">
+          <i class="icn-sm icn-caret-gray"></i>
+        </div>
+        <input type="hidden" name="product" ng-required="true" >
+        <div class="nano dropdown-menu custom-product-list" pl-conteiner
+             ng-include="'/ng1/scripts/common/templates/products-list.tpl.html'"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <input type="text" class="form-control" placeholder="Qty"
+           ng-model="productExpense.quantity" ng-maxlength="4" required
+           name="productQty"
+           ng-change="calculateTotalAmount()"
+           hard-reset-pattern="quantityPattern">
+  </div>
+
+  <div class="col-sm-2">
+    <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
+           ng-required="true" ng-model="productExpense.name.sale"
+           hard-reset-pattern="decimalNumberPatternLow" ng-change="calculateTotalAmount()">
+  </div>
+
+  <div class="col-sm-1">
+    <div class="add-remove-service">
+      <div ng-click="deleteProductExpense(productExpense)">
+        <i class="icon-sm icn-delete"></i>
+      </div>
+    </div>
+  </div>
+</div>

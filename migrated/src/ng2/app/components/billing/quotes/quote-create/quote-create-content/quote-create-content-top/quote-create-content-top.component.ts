@@ -21,6 +21,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public requestPayment: any;
   public editItem: any;
   public editMode: any;
+  public currentClient = null;
 
   constructor(
     private quoteStateService: QuoteStateService,
@@ -42,6 +43,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public selectClient(selectClient) {
     this.selectedItem.next(selectClient);
     this.quoteStateService.setClient(selectClient);
+    this.currentClient = selectClient.item;
+    console.log(this.currentClient);
   }
 
   /**
@@ -83,6 +86,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.editMode = this.quoteStateService.getState().params.editMode;
     if (this.editMode) {
       this.editItem = this.quoteStateService.getClient();
+      this.currentClient = this.quoteStateService.getClient();
       this.partialDeposit = this.quoteStateService.getPartialDeposit();
       this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
       this.requestPayment = this.quoteStateService.getRequestPayment();
@@ -111,6 +115,18 @@ export class QuoteCreateContentTopComponent implements OnInit {
     console.log(value, 'value');
   }
 
+  /**
+   * return client company name
+   */
+  public getCLientUserName(companyInfo) {
+    return `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}`
+  }
 
+  /**
+   * return client company address
+   */
+  public getCLientAddress(companyInfo) {
+    return `${companyInfo.addresses[0].address}`
+  }
 
 }

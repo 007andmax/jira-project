@@ -1,0 +1,140 @@
+<div class="create-note-modal" ng-form="paymentRecieveForm" ng-init="setIsMultiple(true)">
+  <div class="modal-header clearfix">
+    <a href="javascript:void(0)"
+       style="position: absolute;right: 30px;top: 30px;"
+       ng-click="close()"
+       data-dismiss="modal"
+       aria-label="Close">
+      <i class="icn-sm icn-remove-old"></i>
+    </a>
+    <h4 class="modal-title">Receive Multiple Payments</h4>
+  </div>
+  <div class="note-modal-content clearfix">
+    <p>Receive Payments for the following</p>
+    <div class="form-group clearfix">
+      <div class="col-md-8 fix-caret" style="padding-right: 10px;">
+        <label class="control-label">Company Name</label>
+        <qt-dropdown-typehead list-for-dropdown="companies"
+                              selected-item="invoiceCompany"
+                              display-property="'name'"
+                              filter-property="'name'" ng-show="!preSetupCompany">
+      </div>
+      <div class="col-md-4" style="padding-left: 10px;">
+        <label class="control-label">Payment Date</label>
+        <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
+               qt-data-time-picker max-date="maxDate" ng-model="date"
+               name="serviceData" ng-required="true" uib-tooltip="select date" style="opacity: 1;width: 93%;">
+        <div>
+          <i class="new-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="form-group clearfix">
+      <h5>Outstanding Invoices</h5>
+      <ul class="qt-list invoice-list-heading">
+        <li class="row" style="padding-right: 7px;">
+          <div class="col-md-4">
+            <label class="control checkbox pull-left">
+              <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
+              <span class="control-indicator"></span>
+            </label>
+            Invoice#
+          </div>
+          <div class="col-md-4 text-center">Invoice date</div>
+          <div class="col-md-4 text-right">Amount / Balance</div>
+        </li>
+      </ul>
+      <ul class="qt-list receive-payment-list"
+          style="padding: 0;margin-bottom: 10px; overflow-x: hidden; max-height: 285px;"
+          ng-style="{ 'overflow-y': receivePaymentInvoices.length <= 5 ? 'hidden' : 'scroll' }">
+        <li ng-repeat="invoice in receivePaymentInvoices"
+            class="clearfix">
+          <div class="col-md-4">
+            <label class="control checkbox pull-left">
+              <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
+              <span class="control-indicator"></span>
+            </label>
+            INV {{ invoice.number }}
+          </div>
+          <div class="col-md-4 text-center">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+          <div class="col-md-4 text-right">{{ invoice.sum | currency: '$': 2 }} / {{ (invoice.sum - invoice.paidSum) | currency: '$': 2 }}</div>
+        </li>
+      </ul>
+      <div class="col-md-6">
+        Subtotal
+      </div>
+      <div class="col-md-6 text-right">
+        <strong ng-show="countCheckedInvoices() === 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ (balance) | currency: '$': 2 }}</strong>
+        <strong ng-show="countCheckedInvoices() !== 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ balance | currency: '$': 2 }}</strong>
+      </div>
+      <div class="col-md-8 pr-10">Total Payment</div>
+      <div class="col-md-4 text-right pl-10" ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'amount') && countCheckedInvoices() === 1}">
+        <!-- <strong class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ receivePaymentSum | currency: '$': 2 }}</strong> -->
+        <!-- <div ng-messages="paymentRecieveForm.amount.$error"
+             ng-class="{'hide': !isShowingErrors(paymentRecieveForm, 'amount') || countCheckedInvoices() !== 1}">
+          <div class="control-label" ng-message="required">Amount is required.</div>
+          <div class="control-label" ng-message="invalid">Amount is .</div>
+        </div> -->
+        <input class="form-control disabled text-right" ng-show="countCheckedInvoices() !== 1" required qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="balance" />
+        <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
+      </div>
+      <div class="col-md-8 pr-10">Remaining balance</div>
+      <div class="col-md-4 text-right pl-10">
+        <strong ng-show="countCheckedInvoices() === 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">{{ balance - partialPaymentAmount | currency: '$': 2 }}</strong>
+        <strong ng-show="countCheckedInvoices() !== 1" class="ng-binding" style="font-weight: 500;margin-right: 13px;">$0.00</strong>
+      </div>
+      <h5 style="margin-bottom: 10px;">Receive Payment</h5>
+    </div>
+    <div class="form-group clearfix">
+      <div class="col-md-6" style="padding-right: 10px;">
+        <label class="control-label">Payment Method</label>
+        <div uib-dropdown style="position: relative;">
+          <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                 uib-dropdown-toggle aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
+          <i class="icn-sm report-caret-icon pointer" style="top: 16px;right: 16px;"></i>
+          <ul class="dropdown-menu" style="top: 40px;">
+            <li ng-repeat="(value, label) in paymentMethod"
+                ng-click="invoiceToReceive.method = value">
+              <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6" style="padding-left: 10px;">
+        <label class="control-label">Reference#</label>
+        <div>
+          <input class="form-control has-dropdown readonly-normal" style="cursor: text;" ng-model="reference"
+                 type="text">
+        </div>
+      </div>
+    </div>
+    <div class="form-group note"
+         ng-class="{'has-error': isShowingErrors(paymentRecieveForm, 'note')}">
+      <label class="control-label" ng-class="{ 'hide': isShowingErrors(paymentRecieveForm, 'note')}">
+        Note
+      </label>
+      <div ng-if="noteError" class="has-error">
+        <label class="control-label">Note is to large</label>
+      </div>
+      <textarea placeholder="Write Note here" class="form-control" name="note" ng-model="note"></textarea>
+    </div>
+    <div>
+      <label class="control checkbox pull-left" style="margin-top: 2px;width: auto;">
+        <input type="checkbox" ng-model="invoiceToReceive.isSendNotification">
+        <span class="control-indicator"></span>
+      </label>
+      <div class="checkbox-caption">Email Payment receipt</div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="padding: 0;">
+        <div class="btn btn-primary"
+             ng-click="receivePayment()">
+          Process Payment
+        </div>
+        <div class="btn btn-default" ng-click="close()">
+          Cancel
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
