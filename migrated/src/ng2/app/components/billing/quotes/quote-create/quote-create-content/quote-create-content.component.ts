@@ -141,8 +141,8 @@ export class QuoteCreateContentComponent implements OnInit {
 
   /**
    * Method is use to download file.
-   * @param data - Array Buffer data
-   * @param type - type of the document.
+   * @param res - Array Buffer data
+   * @param id - type of the document.
    */
   downLoadFile(res: any, id) {
     const data = window.URL.createObjectURL(res);
