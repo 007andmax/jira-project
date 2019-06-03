@@ -214,10 +214,19 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   * refuse quote
+   * archive quote
    */
   archiveQuote(item) {
     this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
+  /**
+   * archive quote
+   */
+  approveQuote(item) {
+    this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
       console.log(res, 'RES');
     });
   }
