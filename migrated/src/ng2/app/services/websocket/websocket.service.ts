@@ -25,7 +25,7 @@ export class WebsocketService {
     let that = this;
     this.stompClient.connect({}, function() {
       that.subsribeToPermissions();
-      this.subsribeToQuote();
+      that.subsribeToQuote();
     });
   }
 
