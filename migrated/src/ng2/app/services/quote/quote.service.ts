@@ -107,7 +107,7 @@ export class QuoteService {
 
   convertToInvoice(company, quote_id) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/convertToInvoice?companyId=${company.id}
+      `saleQuotes/convertToInvoice?companyId=${company.companyInfo.id}
       &billTo=${company.companyInfo.addresses[0].id}
       &shipTo=${company.companyInfo.addresses[0].id}`,
       [quote_id])

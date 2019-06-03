@@ -190,7 +190,7 @@ export class QuotesComponent implements OnInit {
    */
   convertToInvoice(item) {
     console.log(item, 'ITEM');
-    this.quoteServices.convertToInvoice(item.company, item.id).subscribe((res) => {
+    this.quoteServices.convertToInvoice({companyInfo: item.company}, item.id).subscribe((res) => {
       console.log(res, 'RES');
     });
   }
