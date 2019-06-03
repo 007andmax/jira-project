@@ -202,9 +202,10 @@ export class QuoteStateService {
   public setEditQuote(quote) {
     this.quoteForCreate = quote;
     this.setClient(quote.company);
-    const itemsArray = [...quote.ticket.updates[0].products, ...quote.ticket.updates[0].services];
+    const itemsArray = [...quote.products, ...quote.services];
 
     this.setItemArray(itemsArray);
+    console.log(quote, 'QUOTE');
     this.setNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.date));
     this.setStartDate(this.dateService.getStartDate(quote.endDate));

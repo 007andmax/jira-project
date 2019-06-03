@@ -133,10 +133,12 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.editMode = this.quoteStateServices.getState().params.editMode;
     if (this.editMode) {
       this.quote = this.quoteStateServices.getQuoteCreate();
-      this.subTotalServices = this.quote.subTotalServices;
-      this.subTotalProducts = this.quote.subTotalProducts;
-      this.totalTaxes = this.quote.totalTaxes;
-      this.total = this.quote.total;
+      this.resolveTaxes();
+      this.resolveTotal();
+      this.quote.subTotalServices && (this.subTotalServices = this.quote.subTotalServices);
+      this.quote.subTotalProducts && (this.subTotalProducts = this.quote.subTotalProducts);
+      this.quote.totalTaxes && (this.totalTaxes = this.quote.totalTaxes);
+      this.quote.total && (this.total = this.quote.total);
     }
   }
 
