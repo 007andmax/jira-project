@@ -95,10 +95,12 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.totalTaxes = 0;
     if (this.itemsArray.length > 0) {
       this.itemsArray.map((item) => {
-        const taxes = item && item.taxes[0];
+        const taxes = item.taxes;
         const product = item;
-        if (taxes) {
-          this.totalTaxes += (((taxes.rate)/100) * (product.sale || product.rate)) * product.quantity;
+        if (taxes && taxes.length > 0) {
+          taxes.map((item) => {
+            this.totalTaxes += (((item.rate)/100) * (product.sale || product.rate)) * product.quantity;
+          })
         }
         this.quoteStateServices.setTotalTaxes(this.totalTaxes);
       });
