@@ -44,14 +44,16 @@ export class WebsocketService {
 
   subsribeToQuote() {
     setTimeout(() => {
-      this.stompClient.subscribe(`/saleQuotes/${this.companiesService.getTechCompany()['id']}`, (message) => {
-        var newChange = JSON.parse(message.body);
-        // commit console.log before prod update
-        console.log(newChange, 'newChange');
-        if (message.body) {
-          console.log('test')
-        }
-      });
+      this.companiesService.getTechCompany().subscribe((res) => {
+        this.stompClient.subscribe(`/saleQuotes/${res['id']}`, (message) => {
+          var newChange = JSON.parse(message.body);
+          // commit console.log before prod update
+          console.log(newChange, 'newChange');
+          if (message.body) {
+            console.log('test')
+          }
+        });
+      })
     }, 3000);
   }
 
